@@ -30,6 +30,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
@@ -213,7 +214,7 @@ public class SpecialCharSequenceMgr {
                         PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
 
                 boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
-                        telecomManager.getUserSelectedOutgoingPhoneAccount());
+                        telecomManager.getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL));
 
                 if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
                     Uri uri = telecomManager.getAdnUriForPhoneAccount(null);
@@ -278,7 +279,7 @@ public class SpecialCharSequenceMgr {
             List<PhoneAccountHandle> subscriptionAccountHandles =
                     PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
             boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
-                    telecomManager.getUserSelectedOutgoingPhoneAccount());
+                    telecomManager.getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL));
 
             if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
                 // Don't bring up the dialog for single-SIM or if the default outgoing account is
