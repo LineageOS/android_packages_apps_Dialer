@@ -375,8 +375,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
         final boolean showUpgradeToVideo = !isVideo
-                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL)
-                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE);
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX);
 
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
