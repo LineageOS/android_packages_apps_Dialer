@@ -17,22 +17,20 @@
 package com.android.incallui;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
-import android.telecom.Phone;
+import android.telecom.InCallService;
 import android.telecom.PhoneAccountHandle;
 
 import com.google.common.base.Preconditions;
 
 import java.util.List;
 
-final class TelecomAdapter implements InCallPhoneListener {
+final class TelecomAdapter implements InCallServiceListener {
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
     private static TelecomAdapter sInstance;
-    private Context mContext;
-    private Phone mPhone;
+    private InCallService mInCallService;
 
     static TelecomAdapter getInstance() {
         Preconditions.checkState(Looper.getMainLooper().getThread() == Thread.currentThread());
@@ -45,102 +43,94 @@ final class TelecomAdapter implements InCallPhoneListener {
     private TelecomAdapter() {
     }
 
-    void setContext(Context context) {
-        mContext = context;
+    @Override
+    public void setInCallService(InCallService inCallService) {
+        mInCallService = inCallService;
     }
 
     @Override
-    public void setPhone(Phone phone) {
-        mPhone = phone;
-    }
-
-    @Override
-    public void clearPhone() {
-        mPhone = null;
+    public void clearInCallService() {
+        mInCallService = null;
     }
 
     private android.telecom.Call getTelecommCallById(String callId) {
-        final Call call = CallList.getInstance().getCallById(callId);
+        Call call = CallList.getInstance().getCallById(callId);
         return call == null ? null : call.getTelecommCall();
     }
 
     void answerCall(String callId, int videoState) {
-        if (mPhone != null) {
-            final android.telecom.Call call = getTelecommCallById(callId);
-            if (call != null) {
-                call.answer(videoState);
-            } else {
-                Log.e(this, "error answerCall, call not in call list: " + callId);
-            }
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.answer(videoState);
         } else {
-            Log.e(this, "error answerCall, mPhone is null");
+            Log.e(this, "error answerCall, call not in call list: " + callId);
         }
     }
 
     void rejectCall(String callId, boolean rejectWithMessage, String message) {
-        if (mPhone != null) {
-            final android.telecom.Call call = getTelecommCallById(callId);
-            if (call != null) {
-                call.reject(rejectWithMessage, message);
-            } else {
-                Log.e(this, "error rejectCall, call not in call list: " + callId);
-            }
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.reject(rejectWithMessage, message);
         } else {
-            Log.e(this, "error rejectCall, mPhone is null");
+            Log.e(this, "error rejectCall, call not in call list: " + callId);
         }
     }
 
     void disconnectCall(String callId) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).disconnect();
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.disconnect();
         } else {
-            Log.e(this, "error disconnectCall, mPhone is null");
+            Log.e(this, "error disconnectCall, call not in call list " + callId);
         }
     }
 
     void holdCall(String callId) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).hold();
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.hold();
         } else {
-            Log.e(this, "error holdCall, mPhone is null");
+            Log.e(this, "error holdCall, call not in call list " + callId);
         }
     }
 
     void unholdCall(String callId) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).unhold();
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.unhold();
         } else {
-            Log.e(this, "error unholdCall, mPhone is null");
+            Log.e(this, "error unholdCall, call not in call list " + callId);
         }
     }
 
     void mute(boolean shouldMute) {
-        if (mPhone != null) {
-            mPhone.setMuted(shouldMute);
+        if (mInCallService != null) {
+            mInCallService.setMuted(shouldMute);
         } else {
-            Log.e(this, "error mute, mPhone is null");
+            Log.e(this, "error mute, mInCallService is null");
         }
     }
 
     void setAudioRoute(int route) {
-        if (mPhone != null) {
-            mPhone.setAudioRoute(route);
+        if (mInCallService != null) {
+            mInCallService.setAudioRoute(route);
         } else {
-            Log.e(this, "error setAudioRoute, mPhone is null");
+            Log.e(this, "error setAudioRoute, mInCallService is null");
         }
     }
 
     void separateCall(String callId) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).splitFromConference();
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.splitFromConference();
         } else {
-            Log.e(this, "error separateCall, mPhone is null.");
+            Log.e(this, "error separateCall, call not in call list " + callId);
         }
     }
 
     void merge(String callId) {
-        if (mPhone != null) {
-            android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
             List<android.telecom.Call> conferenceable = call.getConferenceableCalls();
             if (!conferenceable.isEmpty()) {
                 call.conference(conferenceable.get(0));
@@ -151,24 +141,24 @@ final class TelecomAdapter implements InCallPhoneListener {
                 }
             }
         } else {
-            Log.e(this, "error merge, mPhone is null.");
+            Log.e(this, "error merge, call not in call list " + callId);
         }
     }
 
     void swap(String callId) {
-        if (mPhone != null) {
-            android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
             if (call.getDetails().can(
                     android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE)) {
                 call.swapConference();
             }
         } else {
-            Log.e(this, "Error swap, mPhone is null.");
+            Log.e(this, "error swap, call not in call list " + callId);
         }
     }
 
     void addCall() {
-        if (mContext != null) {
+        if (mInCallService != null) {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -178,7 +168,7 @@ final class TelecomAdapter implements InCallPhoneListener {
             intent.putExtra(ADD_CALL_MODE_KEY, true);
             try {
                 Log.d(this, "Sending the add Call intent");
-                mContext.startActivity(intent);
+                mInCallService.startActivity(intent);
             } catch (ActivityNotFoundException e) {
                 // This is rather rare but possible.
                 // Note: this method is used even when the phone is encrypted. At that moment
@@ -189,43 +179,48 @@ final class TelecomAdapter implements InCallPhoneListener {
     }
 
     void playDtmfTone(String callId, char digit) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).playDtmfTone(digit);
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.playDtmfTone(digit);
         } else {
-            Log.e(this, "error playDtmfTone, mPhone is null");
+            Log.e(this, "error playDtmfTone, call not in call list " + callId);
         }
     }
 
     void stopDtmfTone(String callId) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).stopDtmfTone();
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.stopDtmfTone();
         } else {
-            Log.e(this, "error stopDtmfTone, mPhone is null");
+            Log.e(this, "error stopDtmfTone, call not in call list " + callId);
         }
     }
 
     void postDialContinue(String callId, boolean proceed) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).postDialContinue(proceed);
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.postDialContinue(proceed);
         } else {
-            Log.e(this, "error postDialContinue, mPhone is null");
+            Log.e(this, "error postDialContinue, call not in call list " + callId);
         }
     }
 
     void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle, boolean setDefault) {
-        if (mPhone != null) {
-            getTelecommCallById(callId).phoneAccountSelected(accountHandle, setDefault);
-        }  else {
-            Log.e(this, "error phoneAccountSelected, mAdapter is null");
-        }
-
         if (accountHandle == null) {
             Log.e(this, "error phoneAccountSelected, accountHandle is null");
+            // TODO: Do we really want to send null accountHandle?
+        }
+
+        android.telecom.Call call = getTelecommCallById(callId);
+        if (call != null) {
+            call.phoneAccountSelected(accountHandle, setDefault);
+        } else {
+            Log.e(this, "error phoneAccountSelected, call not in call list " + callId);
         }
     }
 
     boolean canAddCall() {
         // Default to true if we are not connected to telecom.
-        return mPhone == null ? true : mPhone.canAddCall();
+        return mInCallService == null ? true : mInCallService.canAddCall();
     }
 }

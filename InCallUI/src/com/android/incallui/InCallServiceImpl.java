@@ -19,8 +19,9 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.telecom.AudioState;
+import android.telecom.Call;
 import android.telecom.InCallService;
-import android.telecom.Phone;
 
 /**
  * Used to receive updates about calls from the Telecomm component.  This service is bound to
@@ -31,25 +32,30 @@ import android.telecom.Phone;
 public class InCallServiceImpl extends InCallService {
 
     @Override
-    public void onPhoneCreated(Phone phone) {
-        Log.v(this, "onPhoneCreated");
-        CallList.getInstance().setPhone(phone);
-        AudioModeProvider.getInstance().setPhone(phone);
-        TelecomAdapter.getInstance().setPhone(phone);
-        InCallPresenter.getInstance().setPhone(phone);
-        TelecomAdapter.getInstance().setContext(InCallServiceImpl.this);
+    public void onAudioStateChanged(AudioState audioState) {
+        AudioModeProvider.getInstance().onAudioStateChanged(audioState);
     }
 
     @Override
-    public void onPhoneDestroyed(Phone phone) {
-        Log.v(this, "onPhoneDestroyed");
-        // Tear down the InCall system
-        CallList.getInstance().clearPhone();
-        AudioModeProvider.getInstance().clearPhone();
-        TelecomAdapter.getInstance().clearPhone();
-        TelecomAdapter.getInstance().setContext(null);
-        CallList.getInstance().clearOnDisconnect();
-        InCallPresenter.getInstance().tearDown();
+    public void onBringToForeground(boolean showDialpad) {
+        InCallPresenter.getInstance().onBringToForeground(showDialpad);
+    }
+
+    @Override
+    public void onCallAdded(Call call) {
+        CallList.getInstance().onCallAdded(call);
+        InCallPresenter.getInstance().onCallAdded(call);
+    }
+
+    @Override
+    public void onCallRemoved(Call call) {
+        CallList.getInstance().onCallRemoved(call);
+        InCallPresenter.getInstance().onCallRemoved(call);
+    }
+
+    @Override
+    public void onCanAddCallChanged(boolean canAddCall) {
+        InCallPresenter.getInstance().onCanAddCallChanged(canAddCall);
     }
 
     @Override
@@ -66,12 +72,27 @@ public class InCallServiceImpl extends InCallService {
                 );
         InCallPresenter.getInstance().onServiceBind();
         InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
+        TelecomAdapter.getInstance().setInCallService(this);
+
         return super.onBind(intent);
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
+        super.onUnbind(intent);
+
         InCallPresenter.getInstance().onServiceUnbind();
-        return super.onUnbind(intent);
+        tearDown();
+
+        return false;
     }
+
+    private void tearDown() {
+        Log.v(this, "tearDown");
+        // Tear down the InCall system
+        TelecomAdapter.getInstance().clearInCallService();
+        CallList.getInstance().clearOnDisconnect();
+        InCallPresenter.getInstance().tearDown();
+    }
+
 }
