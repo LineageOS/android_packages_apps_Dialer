@@ -77,7 +77,6 @@ public class CallList {
     }
 
     public void onCallAdded(android.telecom.Call telecommCall) {
-        Trace.beginSection("onCallAdded");
         Call call = new Call(telecommCall);
         Log.d(this, "onCallAdded: callState=" + call.getState());
         if (call.getState() == Call.State.INCOMING ||
@@ -86,7 +85,6 @@ public class CallList {
         } else {
             onUpdate(call);
         }
-        Trace.endSection();
     }
 
     public void onCallRemoved(android.telecom.Call telecommCall) {

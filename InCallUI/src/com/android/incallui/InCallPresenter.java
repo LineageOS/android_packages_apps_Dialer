@@ -38,6 +38,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.android.contacts.common.interactions.TouchPointManager;
+import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.incalluibind.ObjectFactory;
 import com.google.common.base.Preconditions;
@@ -58,8 +59,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * that want to listen in on the in-call state changes.
  * TODO: This class has become more of a state machine at this point.  Consider renaming.
  */
-public class InCallPresenter implements CallList.Listener,
-        CircularRevealFragment.OnCircularRevealCompleteListener {
+public class InCallPresenter implements CallList.Listener {
     private static final String EXTRA_FIRST_TIME_SHOWN =
             "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
 
@@ -98,8 +98,8 @@ public class InCallPresenter implements CallList.Listener,
     private boolean mAccountSelectionCancelled = false;
     private InCallCameraManager mInCallCameraManager = null;
 
-    private final android.telecom.Call.Listener mCallListener =
-            new android.telecom.Call.Listener() {
+    private final android.telecom.Call.Callback mCallback =
+            new android.telecom.Call.Callback() {
         @Override
         public void onPostDialWait(android.telecom.Call call, String remainingPostDialSequence) {
             onPostDialCharWait(
@@ -380,10 +380,7 @@ public class InCallPresenter implements CallList.Listener,
      * method invocation from InCallService.
      */
     public void onCallAdded(android.telecom.Call call) {
-        // Since a call has been added we are no longer waiting for Telecom to send us a
-        // call.
-        setBoundAndWaitingForOutgoingCall(false, null);
-        call.addListener(mCallListener);
+        call.registerCallback(mCallback);
     }
 
     /**
@@ -391,7 +388,7 @@ public class InCallPresenter implements CallList.Listener,
      * method invocation from InCallService.
      */
     public void onCallRemoved(android.telecom.Call call) {
-        call.removeListener(mCallListener);
+        call.unregisterCallback(mCallback);
     }
 
     public void onCanAddCallChanged(boolean canAddCall) {

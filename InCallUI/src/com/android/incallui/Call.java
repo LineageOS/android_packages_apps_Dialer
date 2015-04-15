@@ -168,11 +168,11 @@ public final class Call {
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
 
-    private android.telecom.Call.Listener mTelecommCallListener =
-            new android.telecom.Call.Listener() {
+    private android.telecom.Call.Callback mTelecomCallCallback =
+            new android.telecom.Call.Callback() {
                 @Override
                 public void onStateChanged(android.telecom.Call call, int newState) {
-                    Log.d(this, "TelecommCallListener onStateChanged call=" + call + " newState="
+                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call + " newState="
                             + newState);
                     update();
                 }
@@ -180,7 +180,7 @@ public final class Call {
                 @Override
                 public void onParentChanged(android.telecom.Call call,
                         android.telecom.Call newParent) {
-                    Log.d(this, "TelecommCallListener onParentChanged call=" + call + " newParent="
+                    Log.d(this, "TelecommCallCallback onParentChanged call=" + call + " newParent="
                             + newParent);
                     update();
                 }
@@ -194,7 +194,7 @@ public final class Call {
                 @Override
                 public void onDetailsChanged(android.telecom.Call call,
                         android.telecom.Call.Details details) {
-                    Log.d(this, "TelecommCallListener onStateChanged call=" + call + " details="
+                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call + " details="
                             + details);
                     update();
                 }
@@ -202,7 +202,7 @@ public final class Call {
                 @Override
                 public void onCannedTextResponsesLoaded(android.telecom.Call call,
                         List<String> cannedTextResponses) {
-                    Log.d(this, "TelecommCallListener onStateChanged call=" + call
+                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call
                             + " cannedTextResponses=" + cannedTextResponses);
                     update();
                 }
@@ -210,7 +210,7 @@ public final class Call {
                 @Override
                 public void onPostDialWait(android.telecom.Call call,
                         String remainingPostDialSequence) {
-                    Log.d(this, "TelecommCallListener onStateChanged call=" + call
+                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call
                             + " remainingPostDialSequence=" + remainingPostDialSequence);
                     update();
                 }
@@ -218,15 +218,15 @@ public final class Call {
                 @Override
                 public void onVideoCallChanged(android.telecom.Call call,
                         VideoCall videoCall) {
-                    Log.d(this, "TelecommCallListener onStateChanged call=" + call + " videoCall="
+                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call + " videoCall="
                             + videoCall);
                     update();
                 }
 
                 @Override
                 public void onCallDestroyed(android.telecom.Call call) {
-                    Log.d(this, "TelecommCallListener onStateChanged call=" + call);
-                    call.removeListener(mTelecommCallListener);
+                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call);
+                    call.unregisterCallback(mTelecomCallCallback);
                 }
 
                 @Override
@@ -248,13 +248,13 @@ public final class Call {
      */
     private int mModifyToVideoState = VideoProfile.VideoState.AUDIO_ONLY;
 
-    private InCallVideoCallListener mVideoCallListener;
+    private InCallVideoCallCallback mVideoCallCallback;
 
     public Call(android.telecom.Call telecommCall) {
         mTelecommCall = telecommCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
         updateFromTelecommCall();
-        mTelecommCall.addListener(mTelecommCallListener);
+        mTelecommCall.registerCallback(mTelecomCallCallback);
     }
 
     public android.telecom.Call getTelecommCall() {
@@ -285,10 +285,10 @@ public final class Call {
         setDisconnectCause(mTelecommCall.getDetails().getDisconnectCause());
 
         if (mTelecommCall.getVideoCall() != null) {
-            if (mVideoCallListener == null) {
-                mVideoCallListener = new InCallVideoCallListener(this);
+            if (mVideoCallCallback == null) {
+                mVideoCallCallback = new InCallVideoCallCallback(this);
             }
-            mTelecommCall.getVideoCall().setVideoCallListener(mVideoCallListener);
+            mTelecommCall.getVideoCall().registerCallback(mVideoCallCallback);
         }
 
         mChildCallIds.clear();

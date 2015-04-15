@@ -23,9 +23,9 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
 /**
- * Implements the InCallUI Video Call Listener.
+ * Implements the InCallUI VideoCall Callback.
  */
-public class InCallVideoCallListener extends VideoCall.Listener {
+public class InCallVideoCallCallback extends VideoCall.Callback {
 
     /**
      * The call associated with this {@link InCallVideoClient}.
@@ -37,7 +37,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      *
      * @param call The call.
      */
-    public InCallVideoCallListener(Call call) {
+    public InCallVideoCallCallback(Call call) {
         mCall = call;
     }
 
@@ -57,9 +57,9 @@ public class InCallVideoCallListener extends VideoCall.Listener {
 
         // Check for upgrades to video and downgrades to audio.
         if (wasVideoCall && !isVideoCall) {
-            InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
+            InCallVideoCallCallbackNotifier.getInstance().downgradeToAudio(mCall);
         } else if (previousVideoState != newVideoState) {
-            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoRequest(mCall,
+            InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoRequest(mCall,
                 newVideoState);
         }
     }
@@ -80,17 +80,17 @@ public class InCallVideoCallListener extends VideoCall.Listener {
         Log.d(this, "onSessionModifyResponseReceived status=" + status + " requestedProfile="
                 + requestedProfile + " responseProfile=" + responseProfile);
         if (status != VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
-            InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(status, mCall);
+            InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoFail(status, mCall);
         } else if (requestedProfile != null && responseProfile != null) {
             boolean modifySucceeded = requestedProfile.getVideoState() ==
                     responseProfile.getVideoState();
             boolean isVideoCall = VideoProfile.VideoState.isVideo(responseProfile.getVideoState());
             if (modifySucceeded && isVideoCall) {
-                InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
+                InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoSuccess(mCall);
             } else if (!modifySucceeded && isVideoCall) {
-                InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(status, mCall);
+                InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoFail(status, mCall);
             } else if (modifySucceeded && !isVideoCall) {
-                InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
+                InCallVideoCallCallbackNotifier.getInstance().downgradeToAudio(mCall);
             }
         } else {
             Log.d(this, "onSessionModifyResponseReceived request and response Profiles are null");
@@ -104,7 +104,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onCallSessionEvent(int event) {
-        InCallVideoCallListenerNotifier.getInstance().callSessionEvent(event);
+        InCallVideoCallCallbackNotifier.getInstance().callSessionEvent(event);
     }
 
     /**
@@ -115,7 +115,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onPeerDimensionsChanged(int width, int height) {
-        InCallVideoCallListenerNotifier.getInstance().peerDimensionsChanged(mCall, width, height);
+        InCallVideoCallCallbackNotifier.getInstance().peerDimensionsChanged(mCall, width, height);
     }
 
     /**
@@ -125,7 +125,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onVideoQualityChanged(int videoQuality) {
-        InCallVideoCallListenerNotifier.getInstance().videoQualityChanged(mCall, videoQuality);
+        InCallVideoCallCallbackNotifier.getInstance().videoQualityChanged(mCall, videoQuality);
     }
 
     /**
@@ -137,7 +137,7 @@ public class InCallVideoCallListener extends VideoCall.Listener {
     @Override
     public void onCallDataUsageChanged(long dataUsage) {
         Log.d(this, "onCallDataUsageChanged: dataUsage = " + dataUsage);
-        InCallVideoCallListenerNotifier.getInstance().callDataUsageChanged(dataUsage);
+        InCallVideoCallCallbackNotifier.getInstance().callDataUsageChanged(dataUsage);
     }
 
     /**
@@ -148,7 +148,9 @@ public class InCallVideoCallListener extends VideoCall.Listener {
      */
     @Override
     public void onCameraCapabilitiesChanged(CameraCapabilities cameraCapabilities) {
-        InCallVideoCallListenerNotifier.getInstance().cameraDimensionsChanged(
-                mCall, cameraCapabilities.getWidth(), cameraCapabilities.getHeight());
+        if (cameraCapabilities != null) {
+            InCallVideoCallCallbackNotifier.getInstance().cameraDimensionsChanged(
+                    mCall, cameraCapabilities.getWidth(), cameraCapabilities.getHeight());
+        }
     }
 }
