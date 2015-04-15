@@ -35,7 +35,7 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.InCallVideoCallListenerNotifier.SessionModificationListener;
-import com.android.internal.util.Preconditions;
+import com.google.common.base.Preconditions;
 
 /**
  * This class is responsible for generating video pause/resume requests when the InCall UI is sent
