@@ -447,17 +447,6 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
-    <!-- STOPSHIP These strings are for debugging only -->
-    <!-- Call substate label -->
-    <string name="call_substate_label" translatable="false">Call substate - \u000a</string>
-    <!-- Call substate label for call resumed -->
-    <string name="call_substate_call_resumed" translatable="false">Resumed \u000a</string>
-    <!-- Call substate label for call connected suspended (audio) -->
-    <string name="call_substate_connected_suspended_audio" translatable="false">Connected Suspended (Audio) \u000a</string>
-    <!-- Call substate label for call connected suspended (video) -->
-    <string name="call_substate_connected_suspended_video" translatable="false">Connected Suspended (Video) \u000a</string>
-    <!-- Call substate label for avp retry -->
-    <string name="call_substate_avp_retry" translatable="false">Avp Retry \u000a</string>
     <!-- Video quality changed message -->
     <string name="video_quality_changed" translatable="false">Video quality changed to \u0020</string>
     <!-- Video quality High -->
