@@ -377,7 +377,7 @@ public class InCallPresenter implements CallList.Listener,
         // Since a call has been added we are no longer waiting for Telecom to send us a
         // call.
         setBoundAndWaitingForOutgoingCall(false, null);
-        call.addListener(mCallListener);
+        call.registerCallback(mCallCallback);
     }
 
     /**
@@ -385,7 +385,7 @@ public class InCallPresenter implements CallList.Listener,
      * method invocation from InCallService.
      */
     public void onCallRemoved(android.telecom.Call call) {
-        call.removeListener(mCallListener);
+        call.unregisterCallback(mCallCallback);
     }
 
     public void onCanAddCallChanged(boolean canAddCall) {
