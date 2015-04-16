@@ -33,7 +33,7 @@ import com.android.incallui.Call.State;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.incallui.InCallVideoCallListenerNotifier.SessionModificationListener;
+import com.android.incallui.InCallVideoCallCallbackNotifier.SessionModificationListener;
 import com.google.common.base.Preconditions;
 
 /**
@@ -118,7 +118,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         mInCallPresenter = Preconditions.checkNotNull(inCallPresenter);
         mInCallPresenter.addListener(this);
         mInCallPresenter.addIncomingCallListener(this);
-        InCallVideoCallListenerNotifier.getInstance().addSessionModificationListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
     }
 
     /**
@@ -127,7 +127,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
      */
     public void tearDown() {
         log("tearDown...");
-        InCallVideoCallListenerNotifier.getInstance().removeSessionModificationListener(this);
+        InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
         mInCallPresenter.removeListener(this);
         mInCallPresenter.removeIncomingCallListener(this);
         clear();

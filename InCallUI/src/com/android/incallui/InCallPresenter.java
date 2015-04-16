@@ -110,8 +110,33 @@ public class InCallPresenter implements CallList.Listener,
      */
     private PhoneAccountHandle mPendingPhoneAccountHandle;
 
-    private final android.telecom.Call.Listener mCallListener =
-            new android.telecom.Call.Listener() {
+    private final Phone.Listener mPhoneListener = new Phone.Listener() {
+        @Override
+        public void onBringToForeground(Phone phone, boolean showDialpad) {
+            Log.i(this, "Bringing UI to foreground.");
+            bringToForeground(showDialpad);
+        }
+        @Override
+        public void onCallAdded(Phone phone, android.telecom.Call call) {
+            // Since a call has been added we are no longer waiting for Telecom to send us a
+            // call.
+            setBoundAndWaitingForOutgoingCall(false, null);
+            call.registerCallback(mCallCallback);
+        }
+        @Override
+        public void onCallRemoved(Phone phone, android.telecom.Call call) {
+            call.unregisterCallback(mCallCallback);
+        }
+        @Override
+        public void onCanAddCallChanged(Phone phone, boolean canAddCall) {
+            for (CanAddCallListener listener : mCanAddCallListeners) {
+                listener.onCanAddCallChanged(canAddCall);
+            }
+        }
+    };
+
+    private final android.telecom.Call.Callback mCallCallback =
+            new android.telecom.Call.Callback() {
         @Override
         public void onPostDialWait(android.telecom.Call call, String remainingPostDialSequence) {
             onPostDialCharWait(mCallList.getCallByTelecommCall(call).getId(),
