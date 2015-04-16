@@ -1522,7 +1522,7 @@ public class DialpadFragment extends Fragment
      *
      * @return true if voicemail is enabled and accessible. Note that this can be false
      * "temporarily" after the app boot.
-     * @see TelecomManager#hasVoiceMailNumber(PhoneAccountHandle)
+     * @see TelecomManager#getVoiceMailNumber(PhoneAccountHandle)
      */
     private boolean isVoicemailAvailable() {
         try {
@@ -1532,9 +1532,10 @@ public class DialpadFragment extends Fragment
             if (defaultUserSelectedAccount == null) {
                 // In a single-SIM phone, there is no default outgoing phone account selected by
                 // the user, so just call TelephonyManager#getVoicemailNumber directly.
-                return getTelephonyManager().getVoiceMailNumber() != null;
+                return !TextUtils.isEmpty(getTelephonyManager().getVoiceMailNumber());
             } else {
-                return getTelecomManager().hasVoiceMailNumber(defaultUserSelectedAccount);
+                return !TextUtils.isEmpty(
+                        getTelecomManager().getVoiceMailNumber(defaultUserSelectedAccount));
             }
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.
