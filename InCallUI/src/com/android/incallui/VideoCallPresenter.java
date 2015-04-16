@@ -35,13 +35,9 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.InCallVideoCallListenerNotifier.SurfaceChangeListener;
 import com.android.incallui.InCallVideoCallListenerNotifier.VideoEventListener;
-import com.android.internal.telephony.PhoneConstants;
-import com.android.internal.telephony.TelephonyProperties;
 import com.google.common.base.Preconditions;
 
 import java.util.Objects;
-
-import android.os.SystemProperties;
 
 /**
  * Logic related to the {@link VideoCallFragment} and for managing changes to the video calling
@@ -673,9 +669,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private static boolean isSpeakerEnabledForVideoCalls() {
-        return (SystemProperties.getInt(TelephonyProperties.PROPERTY_VIDEOCALL_AUDIO_OUTPUT,
-                PhoneConstants.AUDIO_OUTPUT_DEFAULT) ==
-                PhoneConstants.AUDIO_OUTPUT_ENABLE_SPEAKER);
+        // TODO: Make this a carrier configurable setting. For now this is always true. b/20090407
+        return true;
     }
 
     private void enableCamera(VideoCall videoCall, boolean isCameraRequired) {
