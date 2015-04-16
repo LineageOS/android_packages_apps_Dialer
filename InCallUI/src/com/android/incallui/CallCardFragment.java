@@ -158,8 +158,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Trace.beginSection(TAG + " onCreate");
         mTranslationOffset =
                 getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
-
-        return inflater.inflate(R.layout.call_card_fragment, container, false);
+        final View view = inflater.inflate(R.layout.call_card_fragment, container, false);
+        Trace.endSection();
+        return view;
     }
 
     @Override
