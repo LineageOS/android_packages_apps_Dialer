@@ -466,10 +466,6 @@ public class Call {
         return mTelecommCall.getDetails().getVideoState();
     }
 
-    public int getCallSubstate() {
-        return mTelecommCall.getDetails().getCallSubstate();
-    }
-
     public boolean isVideoCall(Context context) {
         return CallUtil.isVideoEnabled(context) &&
                 VideoProfile.VideoState.isVideo(getVideoState());
@@ -553,7 +549,7 @@ public class Call {
         }
 
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
-                "videoState:%d, callSubState:%d, mSessionModificationState:%d, VideoSettings:%s]",
+                "videoState:%d, mSessionModificationState:%d, VideoSettings:%s]",
                 mId,
                 State.toString(getState()),
                 android.telecom.Call.Details
@@ -562,7 +558,6 @@ public class Call {
                 getParentId(),
                 this.mTelecommCall.getConferenceableCalls(),
                 mTelecommCall.getDetails().getVideoState(),
-                mTelecommCall.getDetails().getCallSubstate(),
                 mSessionModificationState,
                 getVideoSettings());
     }

@@ -158,11 +158,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     private static boolean mIsVideoMode = false;
 
-    /**
-     * Stores the current call substate.
-     */
-    private int mCurrentCallSubstate;
-
     /** Handler which resets request state to NO_REQUEST after an interval. */
     private Handler mSessionModificationResetHandler;
     private static final long SESSION_MODIFICATION_RESET_DELAY_MS = 3000;
@@ -449,19 +444,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         showVideoUi(call.getVideoState(), call.getState());
     }
 
-    private void checkForCallSubstateChange(Call call) {
-        if (mCurrentCallSubstate != call.getCallSubstate()) {
-            VideoCallUi ui = getUi();
-            if (ui == null) {
-                Log.e(this, "Error VideoCallUi is null. Return.");
-                return;
-            }
-            mCurrentCallSubstate = call.getCallSubstate();
-            // Display a call substate changed message on UI.
-            ui.showCallSubstateChanged(mCurrentCallSubstate);
-        }
-    }
-
     private void cleanupSurfaces() {
         final VideoCallUi ui = getUi();
         if (ui == null) {
@@ -498,13 +480,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private void updateCallCache(Call call) {
         if (call == null) {
             mCurrentVideoState = VideoProfile.VideoState.AUDIO_ONLY;
-            mCurrentCallSubstate = Connection.SUBSTATE_NONE;
             mCurrentCallState = Call.State.INVALID;
             mVideoCall = null;
             mPrimaryCall = null;
         } else {
             mCurrentVideoState = call.getVideoState();
-            mCurrentCallSubstate = call.getCallSubstate();
             mVideoCall = call.getVideoCall();
             mCurrentCallState = call.getState();
             mPrimaryCall = call;
@@ -529,7 +509,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         updateVideoCall(call);
-        checkForCallSubstateChange(call);
 
         updateCallCache(call);
     }
@@ -1141,6 +1120,5 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         Point getScreenSize();
         Point getPreviewSize();
         void cleanupSurfaces();
-        void showCallSubstateChanged(int callSubstate);
     }
 }
