@@ -374,10 +374,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showAddCall = TelecomAdapter.getInstance().canAddCall();
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
-        final boolean showUpgradeToVideo = !isVideo
-                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL)
-                && call.can(
-                        android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL);
+
+        // TODO: This button is currently being used for both upgrade and downgrade scenarios.
+        // It should be split into BUTTON_DOWNGRADE_TO_VOICE AND BUTTON_UPGRADE_TO_VIDEO
+        final boolean showUpgradeToVideo = isVideo ||
+                (call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX));
 
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
@@ -387,9 +389,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.setHold(isCallOnHold);
         ui.showButton(BUTTON_MUTE, showMute);
         ui.showButton(BUTTON_ADD_CALL, showAddCall);
-        // TODO: This button is currently being used for both upgrade and downgrade scenarios.
-        // It should be split into BUTTON_DOWNGRADE_TO_VOICE AND BUTTON_UPGRADE_TO_VIDEO
-        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, true);
+        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
         ui.showButton(BUTTON_DOWNGRADE_TO_VOICE, false);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo);
