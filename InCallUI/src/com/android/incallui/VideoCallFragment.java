@@ -599,58 +599,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     }
 
     /**
-     * Displays a message on the UI that the call substate has changed.
-     *
-     */
-    @Override
-    public void showCallSubstateChanged(int callSubstate) {
-        Log.d(this, "showCallSubstateChanged - call substate changed to "  + callSubstate);
-
-        final Context context = getActivity();
-        if (context == null) {
-            Log.e(this, "showCallSubstateChanged - Activity is null. Return");
-            return;
-        }
-
-        final Resources resources = context.getResources();
-
-        String callSubstateChangedText = "";
-
-        if (isEnabled(Connection.SUBSTATE_AUDIO_CONNECTED_SUSPENDED, callSubstate)) {
-            callSubstateChangedText +=
-                resources.getString(R.string.call_substate_connected_suspended_audio);
-        }
-
-        if (isEnabled(Connection.SUBSTATE_VIDEO_CONNECTED_SUSPENDED, callSubstate)) {
-            callSubstateChangedText +=
-                resources.getString(R.string.call_substate_connected_suspended_video);
-        }
-
-        if (isEnabled(Connection.SUBSTATE_AVP_RETRY, callSubstate)) {
-            callSubstateChangedText +=
-                resources.getString(R.string.call_substate_avp_retry);
-        }
-
-        if (isNotEnabled(Connection.SUBSTATE_ALL, callSubstate)) {
-            callSubstateChangedText = resources.getString(R.string.call_substate_call_resumed);
-        }
-
-        if (!callSubstateChangedText.isEmpty()) {
-            String callSubstateLabelText = resources.getString(R.string.call_substate_label);
-            Toast.makeText(context, callSubstateLabelText + callSubstateChangedText,
-                Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    boolean isEnabled(int mask, int callSubstate) {
-        return (mask & callSubstate) == mask;
-    }
-
-    boolean isNotEnabled(int mask, int callSubstate) {
-        return (mask & callSubstate) == 0;
-    }
-
-    /**
      * Cleans up the video telephony surfaces.  Used when the presenter indicates a change to an
      * audio-only state.  Since the surfaces are static, it is important to ensure they are cleaned
      * up promptly.
