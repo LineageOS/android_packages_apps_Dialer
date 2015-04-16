@@ -28,7 +28,6 @@
 
 package com.android.incallui;
 
-import android.os.SystemProperties;
 import android.telecom.VideoProfile;
 import com.android.incallui.Call.State;
 import com.android.incallui.InCallPresenter.InCallState;
