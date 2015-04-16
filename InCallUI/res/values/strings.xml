@@ -255,23 +255,14 @@
          to dial using the physical keyboard -->
     <string name="dialerKeyboardHintText">Use keyboard to dial</string>
 
-    <!-- Text for the overflow "Hold call" menu item. -->
-    <string name="overflowHoldMenuItemText">Hold call</string>
-    <!-- Text for the overflow "Resume call" menu item. -->
-    <string name="overflowResumeMenuItemText">Resume call</string>
-    <!-- Text for the overflow "Add call" menu item. -->
-    <string name="overflowAddMenuItemText">Add call</string>
-    <!-- Text for the onscreen "Merge calls" menu item. -->
-    <string name="overflowMergeMenuItemText">Merge calls</string>
-    <!-- Text for the onscreen "Swap calls" menu item. -->
-    <string name="overflowSwapMenuItemText">Swap calls</string>
-    <!-- Text for the overflow "Manage Conference Video Call" menu item. -->
-    <string name="overflowManageConferenceMenuItemText">Manage Conference</string>
-
-    <!-- Text for the onscreen "Hold" button -->
-    <string name="onscreenHoldText">Hold</string>
+    <!-- Text for the onscreen "Hold" button when it is not selected. Pressing it will put
+         the call on hold. -->
+    <string name="onscreenHoldText_unselected">Hold Call</string>
+    <!-- Text for the onscreen "Hold" button when it is selected. Pressing it will resume
+         the call from a previously held state. -->
+    <string name="onscreenHoldText_selected">Resume Call</string>
     <!-- Text for the onscreen "End call" button -->
-    <string name="onscreenEndCallText">End</string>
+    <string name="onscreenEndCallText">End Call</string>
     <!-- Text for the onscreen "Show Dialpad" button -->
     <string name="onscreenShowDialpadText">Dialpad</string>
     <!-- Text for the onscreen "Mute" button -->
@@ -456,7 +447,7 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
-    <!-- STOPSHIP These strings are for debugging only --> 
+    <!-- STOPSHIP These strings are for debugging only -->
     <!-- Call substate label -->
     <string name="call_substate_label" translatable="false">Call substate - \u000a</string>
     <!-- Call substate label for call resumed -->

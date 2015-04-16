@@ -40,6 +40,13 @@
         android:paddingBottom="@dimen/secondary_call_info_vertical_padding"
         android:background="?android:attr/selectableItemBackground">
 
+        <ImageView android:id="@+id/secondaryCallVideoCallIcon"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_toolbar_video"
+                   android:tint="@color/incall_banner_secondary_text_color"
+                   android:paddingEnd="16dp"/>
+
         <ImageView android:id="@+id/secondaryCallConferenceCallIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

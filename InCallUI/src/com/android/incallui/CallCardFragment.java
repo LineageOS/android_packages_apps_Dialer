@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Trace;
 import android.telecom.DisconnectCause;
@@ -96,6 +97,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
     private View mSecondaryCallConferenceCallIcon;
+    private View mSecondaryCallVideoCallIcon;
     private View mProgressSpinner;
 
     private View mManageConferenceCallButton;
@@ -134,7 +136,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
         mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(
-                R.dimen.floating_action_bar_vertical_offset);
+                R.dimen.floating_action_button_vertical_offset);
         mFabNormalDiameter = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_floating_action_button_diameter);
         mFabSmallDiameter = getResources().getDimensionPixelOffset(
@@ -156,9 +158,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Trace.beginSection(TAG + " onCreate");
         mTranslationOffset =
                 getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
-        final View view = inflater.inflate(R.layout.call_card_fragment, container, false);
-        Trace.endSection();
-        return view;
+
+        return inflater.inflate(R.layout.call_card_fragment, container, false);
     }
 
     @Override
@@ -285,17 +286,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 float videoViewTranslation = 0f;
 
                 // Translate the call card to its pre-animation state.
-                if (mIsLandscape) {
-                    float translationX = mPrimaryCallCardContainer.getWidth();
-                    translationX *= isLayoutRtl ? 1 : -1;
-
-                    mPrimaryCallCardContainer.setTranslationX(visible ? translationX : 0);
-
-                    if (visible) {
-                        videoViewTranslation = videoView.getWidth() / 2 - spaceBesideCallCard / 2;
-                        videoViewTranslation *= isLayoutRtl ? -1 : 1;
-                    }
-                } else {
+                if (!mIsLandscape){
                     mPrimaryCallCardContainer.setTranslationY(visible ?
                             -mPrimaryCallCardContainer.getHeight() : 0);
 
@@ -458,7 +449,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            String providerLabel, boolean isConference) {
+            String providerLabel, boolean isConference, boolean isVideoCall) {
 
         if (show != mSecondaryCallInfo.isShown()) {
             updateFabPositionForSecondaryCallInfo();
@@ -469,6 +460,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             showAndInitializeSecondaryCallInfo(hasProvider);
 
             mSecondaryCallConferenceCallIcon.setVisibility(isConference ? View.VISIBLE : View.GONE);
+            mSecondaryCallVideoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
 
             mSecondaryCallName.setText(nameIsNumber
                     ? PhoneNumberUtils.getPhoneTtsSpannable(name)
@@ -760,6 +752,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
             mSecondaryCallConferenceCallIcon =
                     getView().findViewById(R.id.secondaryCallConferenceCallIcon);
+            mSecondaryCallVideoCallIcon =
+                    getView().findViewById(R.id.secondaryCallVideoCallIcon);
         }
 
         if (mSecondaryCallProviderLabel == null && hasProvider) {
@@ -849,7 +843,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             return;
         }
 
-        mPrimaryCallCardContainer.setBackgroundColor(themeColors.mPrimaryColor);
+        if (getResources().getBoolean(R.bool.is_layout_landscape)) {
+            final GradientDrawable drawable =
+                    (GradientDrawable) mPrimaryCallCardContainer.getBackground();
+            drawable.setColor(themeColors.mPrimaryColor);
+        } else {
+            mPrimaryCallCardContainer.setBackgroundColor(themeColors.mPrimaryColor);
+        }
         mCallButtonsContainer.setBackgroundColor(themeColors.mPrimaryColor);
 
         mCurrentThemeColors = themeColors;
@@ -963,8 +963,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mAnimatorSet.cancel();
         }
 
-        mIsLandscape = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
+        mIsLandscape = getResources().getBoolean(R.bool.is_layout_landscape);
 
         final ViewGroup parent = ((ViewGroup) mPrimaryCallCardContainer.getParent());
         final ViewTreeObserver observer = parent.getViewTreeObserver();

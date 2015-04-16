@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -179,7 +180,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
 
     /**
      * When configuration changes Android kills the current activity and starts a new one.
-     * The flag is used to check if full clean up is necessary (activity is stopped and new 
+     * The flag is used to check if full clean up is necessary (activity is stopped and new
      * activity won't be started), or if a new activity will be started right after the current one
      * is destroyed, and therefore no need in release all resources.
      */
@@ -1446,7 +1447,13 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener,
             return;
         }
 
-        mInCallActivity.getWindow().setStatusBarColor(mThemeColors.mSecondaryColor);
+        final Resources resources = mInCallActivity.getResources();
+        if (resources.getBoolean(R.bool.is_layout_landscape)) {
+            mInCallActivity.getWindow().setStatusBarColor(
+                    resources.getColor(R.color.statusbar_background_color));
+        } else {
+            mInCallActivity.getWindow().setStatusBarColor(mThemeColors.mSecondaryColor);
+        }
     }
 
     /**

@@ -87,8 +87,10 @@ public class InCallVideoCallListener extends VideoCall.Listener {
             boolean isVideoCall = VideoProfile.VideoState.isVideo(responseProfile.getVideoState());
             if (modifySucceeded && isVideoCall) {
                 InCallVideoCallListenerNotifier.getInstance().upgradeToVideoSuccess(mCall);
-            } else if (!modifySucceeded) {
+            } else if (!modifySucceeded && isVideoCall) {
                 InCallVideoCallListenerNotifier.getInstance().upgradeToVideoFail(status, mCall);
+            } else if (modifySucceeded && !isVideoCall) {
+                InCallVideoCallListenerNotifier.getInstance().downgradeToAudio(mCall);
             }
         } else {
             Log.d(this, "onSessionModifyResponseReceived request and response Profiles are null");
