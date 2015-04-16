@@ -16,15 +16,15 @@
 
 package com.android.incallui;
 
-import com.android.contacts.common.testing.NeededForTesting;
-import com.google.common.collect.Maps;
-import com.google.common.base.Preconditions;
-
 import android.os.Handler;
 import android.os.Message;
 import android.os.Trace;
 import android.telecom.DisconnectCause;
-import android.telecom.Phone;
+import android.telecom.PhoneAccount;
+
+import com.android.contacts.common.testing.NeededForTesting;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * as they are received from the telephony stack. Primary listener of changes to this class is
  * InCallPresenter.
  */
-public class CallList implements InCallPhoneListener {
+public class CallList {
 
     private static final int DISCONNECTED_CALL_SHORT_TIMEOUT_MS = 200;
     private static final int DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS = 2000;
@@ -61,40 +61,12 @@ public class CallList implements InCallPhoneListener {
     private final HashMap<String, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
 
-    private Phone mPhone;
-
     /**
      * Static singleton accessor method.
      */
     public static CallList getInstance() {
         return sInstance;
     }
-
-    private Phone.Listener mPhoneListener = new Phone.Listener() {
-        @Override
-        public void onCallAdded(Phone phone, android.telecom.Call telecommCall) {
-            Trace.beginSection("onCallAdded");
-            Call call = new Call(telecommCall);
-            Log.d(this, "onCallAdded: callState=" + call.getState());
-            if (call.getState() == Call.State.INCOMING ||
-                    call.getState() == Call.State.CALL_WAITING) {
-                onIncoming(call, call.getCannedSmsResponses());
-            } else {
-                onUpdate(call);
-            }
-            Trace.endSection();
-        }
-        @Override
-        public void onCallRemoved(Phone phone, android.telecom.Call telecommCall) {
-            if (mCallByTelecommCall.containsKey(telecommCall)) {
-                Call call = mCallByTelecommCall.get(telecommCall);
-                if (updateCallInMap(call)) {
-                    Log.w(this, "Removing call not previously disconnected " + call.getId());
-                }
-                updateCallTextMap(call, null);
-            }
-        }
-    };
 
     /**
      * USED ONLY FOR TESTING
@@ -104,16 +76,27 @@ public class CallList implements InCallPhoneListener {
     CallList() {
     }
 
-    @Override
-    public void setPhone(Phone phone) {
-        mPhone = phone;
-        mPhone.addListener(mPhoneListener);
+    public void onCallAdded(android.telecom.Call telecommCall) {
+        Trace.beginSection("onCallAdded");
+        Call call = new Call(telecommCall);
+        Log.d(this, "onCallAdded: callState=" + call.getState());
+        if (call.getState() == Call.State.INCOMING ||
+                call.getState() == Call.State.CALL_WAITING) {
+            onIncoming(call, call.getCannedSmsResponses());
+        } else {
+            onUpdate(call);
+        }
+        Trace.endSection();
     }
 
-    @Override
-    public void clearPhone() {
-        mPhone.removeListener(mPhoneListener);
-        mPhone = null;
+    public void onCallRemoved(android.telecom.Call telecommCall) {
+        if (mCallByTelecommCall.containsKey(telecommCall)) {
+            Call call = mCallByTelecommCall.get(telecommCall);
+            if (updateCallInMap(call)) {
+                Log.w(this, "Removing call not previously disconnected " + call.getId());
+            }
+            updateCallTextMap(call, null);
+        }
     }
 
     /**
