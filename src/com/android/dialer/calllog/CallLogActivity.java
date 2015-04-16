@@ -66,6 +66,8 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
 
     private boolean mHasActiveVoicemailProvider;
 
+    private boolean mIsResumed;
+
     private final Runnable mWaitForVoicemailTimeoutRunnable = new Runnable() {
         @Override
         public void run() {
@@ -188,11 +190,18 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
 
     @Override
     protected void onResume() {
+        mIsResumed = true;
         super.onResume();
         CallLogQueryHandler callLogQueryHandler =
                 new CallLogQueryHandler(this.getContentResolver(), this);
         callLogQueryHandler.fetchVoicemailStatus();
         sendScreenViewForChildFragment(mViewPager.getCurrentItem());
+    }
+
+    @Override
+    protected void onPause() {
+        mIsResumed = false;
+        super.onPause();
     }
 
     @Override
@@ -264,7 +273,7 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
 
     @Override
     public void onPageSelected(int position) {
-        if (isResumed()) {
+        if (mIsResumed) {
             sendScreenViewForChildFragment(position);
         }
         mViewPagerTabs.onPageSelected(position);
