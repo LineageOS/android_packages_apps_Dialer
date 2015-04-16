@@ -153,8 +153,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final View callLogItem = (View) v.getParent().getParent();
-            handleRowExpanded(callLogItem, false /* forceExpand */);
+            handleRowExpanded(v, false /* forceExpand */);
         }
     };
 
@@ -266,15 +265,15 @@ public class CallLogAdapter extends GroupingListAdapter
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
-        // Get the views to bind to and cache them.
-        CallLogListItemViews views = CallLogListItemViews.fromView(mContext, view);
-        view.setTag(views);
+        CallLogListItemViewHolder viewHolder = CallLogListItemViewHolder.create(
+                view,
+                mContext,
+                mActionListener,
+                mPhoneNumberUtilsWrapper,
+                mCallLogViewsHelper);
+        viewHolder.primaryActionView.setTag(viewHolder);
 
-        // Set text height to false on the TextViews so they don't have extra padding.
-        views.phoneCallDetailsViews.nameView.setElegantTextHeight(false);
-        views.phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
-
-        return (CallLogListItemViews) view.getTag();
+        return viewHolder;
     }
 
     /**
@@ -292,7 +291,7 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         int count = getGroupSize(position);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
+        CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
         views.rootView.setAccessibilityDelegate(mAccessibilityDelegate);
 
         // Default case: an item in the call log.
@@ -378,12 +377,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
         // and set its visibility state accordingly.
-        views.expandOrCollapseActions(
-                isExpanded(rowId),
-                mOnReportButtonClickListener,
-                mActionListener,
-                mPhoneNumberUtilsWrapper,
-                mCallLogViewsHelper);
+        views.showActions(isExpanded(rowId), mOnReportButtonClickListener);
 
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
@@ -408,6 +402,8 @@ public class CallLogAdapter extends GroupingListAdapter
         views.setPhoto(photoId, photoUri, lookupUri, nameForDefaultImage, isVoicemailNumber,
                 mContactInfoHelper.isBusiness(info.sourceType));
         views.quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
+
+        views.updateCallButton();
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {
@@ -603,28 +599,13 @@ public class CallLogAdapter extends GroupingListAdapter
      *        of its previous state
      */
     private void handleRowExpanded(View view, boolean forceExpand) {
-        final CallLogListItemViews views = (CallLogListItemViews) view.getTag();
+        final CallLogListItemViewHolder views = (CallLogListItemViewHolder) view.getTag();
 
         if (forceExpand && isExpanded(views.rowId)) {
             return;
         }
 
-        // Hide or show the actions view.
         boolean expanded = toggleExpansion(views.rowId);
-        expandItem(views, expanded);
-    }
-
-    /**
-     * @param views The view holder for the item to expand or collapse.
-     * @param expand {@code true} to expand the item, {@code false} otherwise.
-     */
-    public void expandItem(CallLogListItemViews views, boolean expand) {
-        // Trigger loading of the viewstub and visual expand or collapse.
-        views.expandOrCollapseActions(
-                expand,
-                mOnReportButtonClickListener,
-                mActionListener,
-                mPhoneNumberUtilsWrapper,
-                mCallLogViewsHelper);
+        views.showActions(expanded, mOnReportButtonClickListener);
     }
 }

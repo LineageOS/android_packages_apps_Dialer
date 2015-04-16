@@ -62,7 +62,7 @@ import com.android.dialer.R;
      * @param details the details of a phone call needed to fill in the data
      */
     public void setPhoneCallDetails(
-            Context context, CallLogListItemViews views, PhoneCallDetails details) {
+            Context context, CallLogListItemViewHolder views, PhoneCallDetails details) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
 
         // Set the accessibility text for the contact badge
@@ -81,7 +81,7 @@ import com.android.dialer.R;
      *
      * @param views The views associated with the current call log entry.
      */
-    public void setActionContentDescriptions(CallLogListItemViews views) {
+    public void setActionContentDescriptions(CallLogListItemViewHolder views) {
         if (views.nameOrNumber == null) {
             Log.e(TAG, "setActionContentDescriptions; name or number is null.");
         }
@@ -89,10 +89,6 @@ import com.android.dialer.R;
         // Calling expandTemplate with a null parameter will cause a NullPointerException.
         // Although we don't expect a null name or number, it is best to protect against it.
         CharSequence nameOrNumber = views.nameOrNumber == null ? "" : views.nameOrNumber;
-
-        views.callBackButtonView.setContentDescription(
-                TextUtils.expandTemplate(
-                        mResources.getString(R.string.description_call_back_action), nameOrNumber));
 
         views.videoCallButtonView.setContentDescription(
                 TextUtils.expandTemplate(

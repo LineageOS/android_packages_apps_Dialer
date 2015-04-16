@@ -539,30 +539,10 @@
          [CHAR LIMIT=21] -->
     <string name="favorites_menu_all_contacts">ALL CONTACTS</string>
 
-    <!-- Button text for the "call back" button displayed underneath an entry in the call log. This
-         is used to describe the action of calling a phone number that the user previously received
-         an incoming call from. Tapping causes a call to be placed to the number represented by the
-         call log entry.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_call_back">CALL BACK</string>
-
-    <!-- BUTTON text for the "call" button displayed underneath an entry in the call log. This
-         is used to describe the action of calling a phone number. Tapping causes a call to be
-         placed to the number represented by the call log entry.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_call">CALL</string>
-
-    <!-- BUTTON text for the "redial" button displayed underneath an entry in the call log. This
-         is used to describe the action of calling a phone number that the user previously made an
-         outgoing call to. Tapping causes a call to be placed to the number represented by the call
-         log entry.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_redial">REDIAL</string>
-
-    <!-- Button text for the "video call" button displayed underneath an entry in the call log.
+    <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_video_call">VIDEO CALL</string>
+         [CHAR LIMIT=50] -->
+    <string name="call_log_action_video_call">Video call</string>
 
     <!-- Button text for the "LISTEN" button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can listen to the
@@ -570,11 +550,10 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_action_voicemail">LISTEN</string>
 
-    <!-- Button text for the "DETAILS" button displayed underneath an entry in the call log.
+    <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
-         the call log entry.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_details">DETAILS</string>
+         the call log entry. [CHAR LIMIT=50] -->
+    <string name="call_log_action_details">View details</string>
 
     <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
@@ -598,11 +577,15 @@
          [CHAR LIMIT=NONE] -->
     <string name="description_phone_account">on <xliff:g id="phoneAccount" example="SIM 1">^1</xliff:g></string>
 
-    <!-- String describing the "call back" action for an entry in the call log.  The call back
+    <!-- String describing the phone icon on a call log list item. When tapped, it will place a
+         call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
+    <string name="description_call_log_call_action">Call</string>
+
+    <!-- String describing the "call" action for an entry in the call log.  The call back
          action triggers a return call to the named user.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-    <string name="description_call_back_action">Call back <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g></string>
+    <string name="description_call_action">Call <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g></string>
 
     <!-- String describing the "video call" action for an entry in the call log.  The video call
          action triggers a return video call to the named person/number.
@@ -630,7 +613,7 @@
     <!-- Button text for the "report" button displayed underneath an entry in the call log.
          Tapping causes the call log entry to be reported to Google as a bad id.
          [CHAR LIMIT=30] -->
-    <string name="call_log_action_report">REPORT</string>
+    <string name="call_log_action_report">Report</string>
 
     <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->

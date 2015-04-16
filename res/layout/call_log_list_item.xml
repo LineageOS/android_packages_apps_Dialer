@@ -44,15 +44,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:baselineAligned="false"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
         card_view:cardCornerRadius="4dp"
         card_view:cardBackgroundColor="@color/background_dialer_call_log_list_item">
 
         <!-- Primary area containing the contact badge and caller information -->
         <LinearLayout
             android:id="@+id/primary_action_view"
-            android:background="@drawable/call_log_background"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/call_log_start_margin"
@@ -142,25 +140,27 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/call_indicator_icon"
+                android:id="@+id/call_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/call_log_icon_margin"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_card_phone"
                 android:tint="@color/recent_call_log_item_phone_icon_tint"
                 android:alpha="0.3"
-                android:importantForAccessibility="no"
+                android:contentDescription="@string/description_call_log_call_action"
                 android:visibility="gone" />
 
-            <!-- Viewstub with additional expandable actions for a call log entry -->
-            <ViewStub android:id="@+id/call_log_entry_actions_stub"
-                      android:inflatedId="@+id/call_log_entry_actions"
-                      android:layout="@layout/call_log_list_item_actions"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"/>
-
         </LinearLayout>
+
+        <!-- Viewstub with additional expandable actions for a call log entry -->
+        <ViewStub android:id="@+id/call_log_entry_actions_stub"
+            android:inflatedId="@+id/call_log_entry_actions"
+            android:layout="@layout/call_log_list_item_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
 
     </android.support.v7.widget.CardView>
 

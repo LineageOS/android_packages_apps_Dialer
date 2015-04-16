@@ -158,6 +158,19 @@
         <item name="android:overScrollMode">always</item>
     </style>
 
+    <style name="CallLogActionsStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/call_log_action_height</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:paddingStart">@dimen/call_log_action_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/call_log_action_horizontal_padding</item>
+        <item name="android:textColor">?attr/call_log_secondary_text_color</item>
+        <item name="android:textSize">@dimen/call_log_list_item_actions_text_size</item>
+        <item name="android:fontFamily">"sans-serif-medium"</item>
+        <item name="android:focusable">true</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
     <style name="DismissButtonStyle">
         <item name="android:paddingLeft">@dimen/dismiss_button_padding_start</item>
         <item name="android:paddingRight">@dimen/dismiss_button_padding_end</item>

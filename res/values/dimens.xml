@@ -99,14 +99,14 @@
     <dimen name="search_list_padding_top">16dp</dimen>
     <dimen name="search_box_elevation">3dp</dimen>
 
-    <!-- Padding to the left and right of call log action buttons. -->
-    <dimen name="call_log_action_horizontal_padding">8dp</dimen>
+    <dimen name="call_log_action_height">48dp</dimen>
+    <dimen name="call_log_action_horizontal_padding">24dp</dimen>
     <!-- Left-padding for the call log action buttons - ensures the buttons align with the text
          to the right of the contact badge.  Adjust when any of the following change:
          call_log_action_horizontal_padding
          call_log_list_contact_photo_size  -->
     <dimen name="call_log_actions_left_padding">64dp</dimen>
-    <dimen name="call_log_primary_text_size">16sp</dimen>
+    <dimen name="call_log_primary_text_size">14sp</dimen>
     <dimen name="call_log_secondary_text_size">14sp</dimen>
     <dimen name="call_log_list_item_actions_text_size">12sp</dimen>
     <!-- Height of the call log actions section for each call log entry -->

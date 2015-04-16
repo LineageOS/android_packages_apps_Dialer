@@ -18,6 +18,7 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.database.MatrixCursor;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
@@ -45,6 +46,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     private MatrixCursor mCursor;
     private View mView;
+    private ViewHolder mViewHolder;
 
     @Override
     protected void setUp() throws Exception {
@@ -72,7 +74,8 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mCursor.moveToFirst();
         // The views into which to store the data.
         mView = new LinearLayout(getContext());
-        mView.setTag(CallLogListItemViews.createForTest(getContext()));
+        mViewHolder = CallLogListItemViewHolder.createForTest(getContext());
+        mView.setTag(mViewHolder);
     }
 
     @Override
@@ -88,7 +91,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
@@ -107,7 +110,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
@@ -126,8 +129,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(
-                CallLogListItemViews.fromView(getContext(), mView), 0);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
@@ -143,7 +145,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // Cache and call log are up-to-date: no need to request update.
         assertEquals(0, mAdapter.getContactInfoCache().requests.size());
@@ -159,7 +161,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(CallLogListItemViews.fromView(getContext(), mView), 0);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());

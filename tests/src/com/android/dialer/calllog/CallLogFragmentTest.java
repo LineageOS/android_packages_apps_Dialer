@@ -30,7 +30,6 @@ import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.test.ActivityInstrumentationTestCase2;
@@ -94,10 +93,10 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     private Random mRnd;
 
     // An item in the call list. All the methods performing checks use it.
-    private CallLogListItemViews mItem;
+    private CallLogListItemViewHolder mItem;
 
     // The list of view holderss representing the data in the DB, in reverse order from the DB.
-    private ViewHolder[] mList;
+    private CallLogListItemViewHolder[] mList;
 
     public CallLogFragmentTest() {
         super(FragmentTestActivity.class);
@@ -136,13 +135,13 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     /**
      * Checks that the call icon is not visible for private and
      * unknown numbers.
-     * Use 2 passes, one where new views are created and one where
-     * half of the total views are updated and the other half created.
+     * Use 2 passes, one where new viewHolder are created and one where
+     * half of the total viewHolder are updated and the other half created.
      */
     @MediumTest
     public void testCallViewIsNotVisibleForPrivateAndUnknownNumbers() {
         final int SIZE = 100;
-        mList = new ViewHolder[SIZE];
+        mList = new CallLogListItemViewHolder[SIZE];
 
         // Insert the first batch of entries.
         mCursor.moveToFirst();
@@ -153,7 +152,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         checkCallStatus();
 
         // Append the rest of the entries. We keep the first set of
-        // views around so they get updated and not built from
+        // viewHolder around so they get updated and not built from
         // scratch, this exposes some bugs that are not there when the
         // call log is launched for the 1st time but show up when the
         // call log gets updated afterwards.
@@ -165,28 +164,31 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     }
 
     @MediumTest
-    public void testCallAndGroupViews_GroupView() {
+    public void testCallAndGroupviewHolder_GroupView() {
         mCursor.moveToFirst();
         insertPrivate(NOW, 0);
         insertPrivate(NOW, 0);
         insertPrivate(NOW, 0);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         mAdapter.onBindViewHolder(viewHolder, /* position */ 0);
     }
 
     @MediumTest
-    public void testCallAndGroupViews_StandAloneView() {
+    public void testCallAndGroupviewHolder_StandAloneView() {
         mCursor.moveToFirst();
         insertPrivate(NOW, 0);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
     }
 
     @MediumTest
-    public void testCallAndGroupViews_ChildView() {
+    public void testCallAndGroupviewHolder_ChildView() {
         mCursor.moveToFirst();
         insertPrivate(NOW, 0);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         mAdapter.onBindViewHolder(viewHolder, /* position */ 0);
     }
 
@@ -194,11 +196,11 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     public void testBindView_NumberOnlyNoCache() {
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, TEST_NUMBER);
+        assertNameIs(viewHolder, TEST_NUMBER);
     }
 
     @MediumTest
@@ -208,11 +210,11 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
                 Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         values[CallLogQuery.CACHED_FORMATTED_NUMBER] = TEST_FORMATTED_NUMBER;
         insertValues(values);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, TEST_FORMATTED_NUMBER);
+        assertNameIs(viewHolder, TEST_FORMATTED_NUMBER);
     }
 
     @MediumTest
@@ -222,12 +224,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         // {@value com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, "John Doe");
-        assertLabel(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
+        assertNameIs(viewHolder, "John Doe");
+        assertLabel(viewHolder, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
     }
 
     @MediumTest
@@ -235,12 +237,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insertWithCachedValues("sip:johndoe@gmail.com", NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, "John Doe");
-        assertLabel(views, "sip:johndoe@gmail.com", "sip:johndoe@gmail.com");
+        assertNameIs(viewHolder, "John Doe");
+        assertLabel(viewHolder, "sip:johndoe@gmail.com", "sip:johndoe@gmail.com");
     }
 
     @MediumTest
@@ -250,12 +252,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         // {@value com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, "John Doe");
-        assertLabel(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
+        assertNameIs(viewHolder, "John Doe");
+        assertLabel(viewHolder, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
     }
 
     @MediumTest
@@ -265,12 +267,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         // {@link com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_WORK, TEST_DEFAULT_CUSTOM_LABEL);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, "John Doe");
-        assertLabel(views, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_WORK));
+        assertNameIs(viewHolder, "John Doe");
+        assertLabel(viewHolder, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_WORK));
     }
 
     @MediumTest
@@ -279,12 +281,12 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         String numberLabel = "My label";
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_CUSTOM, numberLabel);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertNameIs(views, "John Doe");
-        assertLabel(views, TEST_FORMATTED_NUMBER, numberLabel);
+        assertNameIs(viewHolder, "John Doe");
+        assertLabel(viewHolder, TEST_FORMATTED_NUMBER, numberLabel);
     }
 
     @MediumTest
@@ -292,22 +294,22 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, "");
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertTrue(views.quickContactView.isEnabled());
+        assertTrue(viewHolder.quickContactView.isEnabled());
     }
 
     @MediumTest
     public void testBindView_WithoutQuickContactBadge() {
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        assertFalse(views.quickContactView.isEnabled());
+        assertFalse(viewHolder.quickContactView.isEnabled());
     }
 
     @MediumTest
@@ -315,16 +317,16 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
         mAdapter.changeCursor(mCursor);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
-
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
+        viewHolder.updateCallButton();
 
         // The primaryActionView tag is set in the
         // {@link com.android.dialer.calllog.CallLogAdapter#bindView} method.  If it is possible
         // to place a call to the phone number, a call intent will have been created for the
         // primaryActionView.
-        IntentProvider intentProvider = (IntentProvider) views.callBackButtonView.getTag();
+        IntentProvider intentProvider = (IntentProvider) viewHolder.callActionView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts a call.
         assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
@@ -336,11 +338,11 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     public void testBindView_PlayButton() {
         mCursor.moveToFirst();
         insertVoicemail(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0);
-        ViewHolder viewHolder = mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
+        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        CallLogListItemViews views = (CallLogListItemViews) viewHolder;
-        IntentProvider intentProvider = (IntentProvider) views.voicemailButtonView.getTag();
+        IntentProvider intentProvider = (IntentProvider) viewHolder.voicemailButtonView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts the call detail activity.
         assertEquals(new ComponentName(mActivity, CallDetailActivity.class),
@@ -363,10 +365,10 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     }
 
     //
-    // HELPERS to check conditions on the DB/views
+    // HELPERS to check conditions on the DB/viewHolder
     //
     /**
-     * Go over the views in the list and check to ensure that
+     * Go over the viewHolder in the list and check to ensure that
      * callable numbers have an associated call intent, where numbers
      * which are not callable have a null intent.
      */
@@ -375,17 +377,17 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             if (null == mList[i]) {
                 break;
             }
-            mItem = (CallLogListItemViews) mList[i];
+            mItem = (CallLogListItemViewHolder) mList[i];
             int presentation = getPhoneNumberPresentationForListEntry(i);
             if (presentation == Calls.PRESENTATION_RESTRICTED ||
                     presentation == Calls.PRESENTATION_UNKNOWN) {
                 //If number is not callable, the primary action view should have a null tag.
-                assertNull(mItem.callBackButtonView.getTag());
+                assertNull(mItem.callActionView.getTag());
             } else {
                 //If the number is callable, the primary action view should have a non-null tag.
-                assertNotNull(mItem.callBackButtonView.getTag());
+                assertNotNull(mItem.callActionView.getTag());
 
-                IntentProvider intentProvider = (IntentProvider)mItem.callBackButtonView.getTag();
+                IntentProvider intentProvider = (IntentProvider)mItem.callActionView.getTag();
                 Intent callIntent = intentProvider.getIntent(mActivity);
 
                 //The intent should be to make the call
@@ -412,7 +414,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     }
 
     //
-    // HELPERS to build/update the call entries (views) from the DB.
+    // HELPERS to build/update the call entries (viewHolder) from the DB.
     //
 
     /**
@@ -425,7 +427,8 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mCursor.moveToLast();
         while (!mCursor.isBeforeFirst()) {
             if (null == mList[i]) {
-                mList[i] = mAdapter.onCreateViewHolder(mParentView, /* itemType */ 0);
+                mList[i] = (CallLogListItemViewHolder)
+                        mAdapter.onCreateViewHolder(mParentView, /* itemType */ 0);
             }
             // Bind to the proper position, despite iterating in reverse.
             bindViewForTest(mList[i], mCursor.getCount() - i - 1);
@@ -452,12 +455,13 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      * @param view The current call log row.
      * @param position The position of hte item.
      */
-    private void bindViewForTest(ViewHolder viewHolder, int position) {
+    private void bindViewForTest(CallLogListItemViewHolder viewHolder, int position) {
         mAdapter.onBindViewHolder(viewHolder, position);
-        mAdapter.expandItem((CallLogListItemViews) viewHolder, /* expand */ true);
+        viewHolder.inflateActionViewStub(null);
+        viewHolder.updateCallButton();
     }
 
-    private void bindViewForTest(ViewHolder viewHolder) {
+    private void bindViewForTest(CallLogListItemViewHolder viewHolder) {
         bindViewForTest(viewHolder, /* position */ 0);
     }
 
@@ -645,17 +649,17 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     }
 
     /** Asserts that the name text view is shown and contains the given text. */
-    private void assertNameIs(CallLogListItemViews views, String name) {
-        assertEquals(View.VISIBLE, views.phoneCallDetailsViews.nameView.getVisibility());
-        assertEquals(name, views.phoneCallDetailsViews.nameView.getText().toString());
+    private void assertNameIs(CallLogListItemViewHolder viewHolder, String name) {
+        assertEquals(View.VISIBLE, viewHolder.phoneCallDetailsViews.nameView.getVisibility());
+        assertEquals(name, viewHolder.phoneCallDetailsViews.nameView.getText().toString());
     }
 
     /** Asserts that the label text view contains the given text. */
-    private void assertLabel(CallLogListItemViews views, CharSequence number,
+    private void assertLabel(CallLogListItemViewHolder viewHolder, CharSequence number,
             CharSequence label) {
         if (label != null) {
-            assertTrue(views.phoneCallDetailsViews.callLocationAndDate.getText().toString()
-                    .contains(label));
+            assertTrue(viewHolder.phoneCallDetailsViews.callLocationAndDate.getText()
+                    .toString().contains(label));
         }
     }
 }

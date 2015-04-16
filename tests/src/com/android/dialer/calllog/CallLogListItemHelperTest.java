@@ -50,7 +50,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     private CallLogListItemHelper mHelper;
 
     /** The views used in the tests. */
-    private CallLogListItemViews mViews;
+    private CallLogListItemViewHolder mViewHolder;
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
     private PhoneNumberDisplayHelper mPhoneNumberDisplayHelper;
 
@@ -68,20 +68,20 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(context, mResources, phoneUtils);
         mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberDisplayHelper,
                 mResources);
-        mViews = CallLogListItemViews.createForTest(context);
+        mViewHolder = CallLogListItemViewHolder.createForTest(getContext());
     }
 
     @Override
     protected void tearDown() throws Exception {
         mHelper = null;
-        mViews = null;
+        mViewHolder = null;
         super.tearDown();
     }
 
     public void testSetPhoneCallDetails() {
         setPhoneCallDetailsWithNumber("12125551234", Calls.PRESENTATION_ALLOWED,
                 "1-212-555-1234");
-        assertEquals(View.VISIBLE, mViews.callBackButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.callActionView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_Unknown() {
@@ -102,23 +102,23 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_VoicemailNumber() {
         setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
                 Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
-        assertEquals(View.VISIBLE, mViews.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_ReadVoicemail() {
         setPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_UnreadVoicemail() {
         setUnreadPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_VoicemailFromUnknown() {
         setPhoneCallDetailsWithNumberAndType("", Calls.PRESENTATION_UNKNOWN,
                 "", Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViews.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
     }
 
     /**
@@ -335,7 +335,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Asserts that the primary action view does not have a call intent. */
     private void assertNoCallIntent() {
-        Object intentProvider = (IntentProvider)mViews.primaryActionView.getTag();
+        Object intentProvider = (IntentProvider)mViewHolder.primaryActionView.getTag();
         // The intent provider should be null as there is no ability to make a call.
         assertNull(intentProvider);
     }
@@ -350,7 +350,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** Sets the details of a phone call using the specified phone number. */
     private void setPhoneCallDetailsWithNumberAndType(String number,
             int presentation, String formattedNumber, int callType) {
-        mHelper.setPhoneCallDetails(getContext(), mViews,
+        mHelper.setPhoneCallDetails(getContext(), mViewHolder,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
                         new int[]{ callType }, TEST_DATE, TEST_DURATION)
@@ -359,7 +359,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Sets the details of a phone call using the specified call type. */
     private void setPhoneCallDetailsWithTypes(int... types) {
-        mHelper.setPhoneCallDetails(getContext() ,mViews,
+        mHelper.setPhoneCallDetails(getContext() ,mViewHolder,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         types, TEST_DATE, TEST_DURATION)
@@ -368,7 +368,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Sets the details of an unread phone call using the specified call type. */
     private void setUnreadPhoneCallDetailsWithTypes(int... types) {
-        mHelper.setPhoneCallDetails(getContext(), mViews,
+        mHelper.setPhoneCallDetails(getContext(), mViewHolder,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
                         types, TEST_DATE, TEST_DURATION)
