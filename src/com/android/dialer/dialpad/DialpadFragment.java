@@ -1344,7 +1344,7 @@ public class DialpadFragment extends AnalyticsFragment
                         // must be dial conference add extra
                         intent.putExtra(TelephonyProperties.EXTRA_DIAL_CONFERENCE_URI, true);
                     }
-                    intent.putExtra(ADD_PARTICIPANT_KEY, mAddParticipant);
+                    intent.putExtra(ADD_PARTICIPANT_KEY, (mAddParticipant && isPhoneInUse()));
                     DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                     hideAndClearDialpad(false);
                 }
