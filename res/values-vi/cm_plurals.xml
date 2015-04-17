@@ -17,15 +17,15 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
-    <item quantity="one">Ordu %d</item>
-    <item quantity="other">%d ordu</item>
+    <item quantity="other">%d giờ</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="one">Minutu 1</item>
-    <item quantity="other">%d minutu</item>
+    <item quantity="other">%d phút</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="other">%d giây</item>
   </plurals>
   <plurals name="call">
-    <item quantity="one">Dei 1</item>
-    <item quantity="other">%d dei</item>
+    <item quantity="other">%d cuộc gọi</item>
   </plurals>
 </resources>
