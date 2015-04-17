@@ -112,13 +112,13 @@ public class CallButtonFragment
     private MaterialPalette mCurrentThemeColors;
 
     @Override
-    CallButtonPresenter createPresenter() {
+    public CallButtonPresenter createPresenter() {
         // TODO: find a cleaner way to include audio mode provider than having a singleton instance.
         return new CallButtonPresenter();
     }
 
     @Override
-    CallButtonPresenter.CallButtonUi getUi() {
+    public CallButtonPresenter.CallButtonUi getUi() {
         return this;
     }
 

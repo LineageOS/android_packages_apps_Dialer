@@ -120,12 +120,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private MaterialPalette mCurrentThemeColors;
 
     @Override
-    CallCardPresenter.CallCardUi getUi() {
+    public CallCardPresenter.CallCardUi getUi() {
         return this;
     }
 
     @Override
-    CallCardPresenter createPresenter() {
+    public CallCardPresenter createPresenter() {
         return new CallCardPresenter();
     }
 

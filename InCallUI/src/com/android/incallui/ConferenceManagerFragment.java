@@ -47,12 +47,12 @@ public class ConferenceManagerFragment
     private boolean mIsRecreating;
 
     @Override
-    ConferenceManagerPresenter createPresenter() {
+    public ConferenceManagerPresenter createPresenter() {
         return new ConferenceManagerPresenter();
     }
 
     @Override
-    ConferenceManagerPresenter.ConferenceManagerUi getUi() {
+    public ConferenceManagerPresenter.ConferenceManagerUi getUi() {
         return this;
     }
 
