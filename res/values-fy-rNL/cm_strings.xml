@@ -16,16 +16,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">Ordu %d</item>
-    <item quantity="other">%d ordu</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">Minutu 1</item>
-    <item quantity="other">%d minutu</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">Dei 1</item>
-    <item quantity="other">%d dei</item>
-  </plurals>
+  <string name="call_log_stats_title">Statistiken</string>
+  <string name="speed_dial_delete">Fuortsmite</string>
 </resources>
