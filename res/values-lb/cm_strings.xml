@@ -79,6 +79,7 @@
   <string name="no">Nee</string>
   <string name="incall_vibration_category_title">Vibratioune während engem Uruff</string>
   <string name="incall_vibrate_outgoing_title">Bei Äntwert vibréieren</string>
+  <string name="vibrate_call_waiting">Vibréiere wann en Uruff waart</string>
   <string name="incall_vibrate_hangup_title">Vibréiere beim Anhänken</string>
   <string name="incall_vibrate_45_title">All Minutt vibréieren</string>
   <string name="incall_vibrate_45_summary">Bei erausgoenden Uriff jeeweils 15 Sekonne virun all voller Minutt kuerz vibréieren</string>
