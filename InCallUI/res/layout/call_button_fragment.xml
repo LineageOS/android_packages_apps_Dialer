@@ -67,8 +67,7 @@
         <ToggleButton android:id="@+id/audioButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_audio"
-            android:contentDescription="@string/audio_mode_speaker"
-            android:visibility="gone" />
+            android:contentDescription="@string/audio_mode_speaker" />
 
         <!-- "Change to audio call" for video calls. -->
         <ImageButton android:id="@+id/changeToVoiceButton"
@@ -83,8 +82,7 @@
         <ToggleButton android:id="@+id/muteButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_mute"
-            android:contentDescription="@string/onscreenMuteText"
-            android:visibility="gone" />
+            android:contentDescription="@string/onscreenMuteText" />
 
         <!-- CENTER SLOT ======================================================================= -->
 
@@ -92,8 +90,7 @@
         <ToggleButton android:id="@+id/dialpadButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_dialpad"
-            android:contentDescription="@string/onscreenShowDialpadText"
-            android:visibility="gone" />
+            android:contentDescription="@string/onscreenShowDialpadText" />
 
         <!-- MIDDLE RIGHT SLOT ================================================================= -->
 
@@ -104,8 +101,7 @@
         <ToggleButton android:id="@+id/holdButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_hold"
-            android:contentDescription="@string/onscreenHoldText_unselected"
-            android:visibility="gone" />
+            android:contentDescription="@string/onscreenHoldText_unselected" />
 
         <!-- "Swap" (or "Manage calls" in some CDMA states) -->
         <ImageButton android:id="@+id/swapButton"
