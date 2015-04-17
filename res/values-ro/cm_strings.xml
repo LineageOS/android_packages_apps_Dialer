@@ -27,6 +27,7 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chineză (CN)</string>
   <string name="preference_category_t9_dialpad_search">Căutare Dialpad T9</string>
   <string name="t9_search_input_locale">Căutare T9</string>
+  <string name="t9_search_input_locale_default">Implicit</string>
   <string name="type_blacklist">Apel de pe lista neagră</string>
   <string name="call_log_stats_title">Statistici</string>
   <string name="callStatsDetailTitle">Detalii statistică apel</string>
@@ -74,6 +75,7 @@
   <string name="vibrate_call_waiting">Vibrare la apel în așteptare</string>
   <string name="incall_vibrate_hangup_title">Vibrare la terminare apel</string>
   <string name="incall_vibrate_45_title">Vibrare la fiecare minut</string>
+  <string name="incall_vibrate_45_summary">Vibrează la secunda 45 a fiecărui minut în timpul convorbirilor efectuate</string>
   <string name="detailed_incall_info_title">Informaţii detaliate ale apelantului</string>
   <string name="video_call">Apel video</string>
   <string name="call_duration_active">Durata activă:</string>

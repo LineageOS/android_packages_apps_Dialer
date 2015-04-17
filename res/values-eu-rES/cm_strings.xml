@@ -22,10 +22,8 @@
   <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
   <string name="call_stats_nav_all">Denak</string>
   <string name="call_stats_nav_incoming">Sartzen diren deiak</string>
-  <string name="call_stats_nav_outgoing">Irtetzen diren deiak</string>
   <string name="call_stats_nav_missed">Dei galduak</string>
   <string name="call_stats_incoming">Sartzen direnak: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_outgoing">Irtetzen direnak: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Galduak</string>
   <string name="call_stats_missed_percent">Galduak: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
