@@ -58,11 +58,16 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         AudioModeProvider.getInstance().addListener(this);
 
         // register for call state changes last
-        InCallPresenter.getInstance().addListener(this);
-        InCallPresenter.getInstance().addIncomingCallListener(this);
-        InCallPresenter.getInstance().addDetailsListener(this);
-        InCallPresenter.getInstance().addCanAddCallListener(this);
-        InCallPresenter.getInstance().getInCallCameraManager().addCameraSelectionListener(this);
+        final InCallPresenter inCallPresenter = InCallPresenter.getInstance();
+        inCallPresenter.addListener(this);
+        inCallPresenter.addIncomingCallListener(this);
+        inCallPresenter.addDetailsListener(this);
+        inCallPresenter.addCanAddCallListener(this);
+        inCallPresenter.getInCallCameraManager().addCameraSelectionListener(this);
+
+        // Update the buttons state immediately for the current call
+        onStateChange(InCallState.NO_CALLS, inCallPresenter.getInCallState(),
+                CallList.getInstance());
     }
 
     @Override
@@ -100,7 +105,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             if (ui != null) {
                 ui.displayDialpad(false /* show */, true /* animate */);
             }
-            mCall = null;
+            mCall = callList.getIncomingCall();
         } else {
             mCall = null;
         }
@@ -336,17 +341,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 state.isConnectingOrConnected() &&!state.isIncoming() && call != null;
         ui.setEnabled(isEnabled);
 
-        if (!isEnabled) {
+        if (call == null) {
             return;
         }
 
         updateButtonsState(call);
-
-        ui.enableButton(BUTTON_MUTE, call.can(android.telecom.Call.Details.CAPABILITY_MUTE));
-    }
-
-    private static int toInteger(boolean b) {
-        return b ? 1 : 0;
     }
 
     /**
