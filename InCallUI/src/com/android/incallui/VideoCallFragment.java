@@ -511,7 +511,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * @return The user interface for the presenter, which is this fragment.
      */
     @Override
-    VideoCallPresenter.VideoCallUi getUi() {
+    public VideoCallPresenter.VideoCallUi getUi() {
         return this;
     }
 

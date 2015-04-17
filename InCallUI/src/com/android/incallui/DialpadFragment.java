@@ -409,12 +409,12 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
     // TODO(klp) Adds hardware keyboard listener
 
     @Override
-    DialpadPresenter createPresenter() {
+    public DialpadPresenter createPresenter() {
         return new DialpadPresenter();
     }
 
     @Override
-    DialpadPresenter.DialpadUi getUi() {
+    public DialpadPresenter.DialpadUi getUi() {
         return this;
     }
 

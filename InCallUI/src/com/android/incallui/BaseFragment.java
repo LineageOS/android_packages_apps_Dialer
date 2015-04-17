@@ -29,9 +29,9 @@ public abstract class BaseFragment<T extends Presenter<U>, U extends Ui> extends
 
     private T mPresenter;
 
-    abstract T createPresenter();
+    public abstract T createPresenter();
 
-    abstract U getUi();
+    public abstract U getUi();
 
     protected BaseFragment() {
         mPresenter = createPresenter();

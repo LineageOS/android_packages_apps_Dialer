@@ -83,7 +83,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    AnswerPresenter.AnswerUi getUi() {
+    public AnswerPresenter.AnswerUi getUi() {
         return this;
     }
 
