@@ -16,25 +16,26 @@
 
 package com.android.incallui;
 
-import android.telecom.Phone;
+import android.telecom.InCallService;
 
 /**
  * Interface implemented by In-Call components that maintain a reference to the Telecomm API
- * {@code Phone} object. Clarifies the expectations associated with the relevant method calls.
+ * {@code InCallService} object. Clarifies the expectations associated with the relevant method
+ * calls.
  */
-public interface InCallPhoneListener {
+public interface InCallServiceListener {
 
     /**
-     * Called once at {@code InCallService} startup time with a valid {@code Phone}. At
+     * Called once at {@code InCallService} startup time with a valid instance. At
      * that time, there will be no existing {@code Call}s.
      *
-     * @param phone The {@code Phone} object.
+     * @param inCallService The {@code InCallService} object.
      */
-    void setPhone(Phone phone);
+    void setInCallService(InCallService inCallService);
 
     /**
      * Called once at {@code InCallService} shutdown time. At that time, any {@code Call}s
      * will have transitioned through the disconnected state and will no longer exist.
      */
-    void clearPhone();
+    void clearInCallService();
 }
