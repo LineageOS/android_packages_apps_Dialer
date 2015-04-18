@@ -35,7 +35,13 @@ import com.google.common.base.Preconditions;
 public class CallUtils {
 
     public static boolean isVideoCall(Call call) {
-        return call != null && VideoProfile.VideoState.isVideo(call.getVideoState());
+        return call != null && isVideoCall(call.getVideoState());
+    }
+
+    public static boolean isVideoCall(int videoState) {
+        return VideoProfile.VideoState.isBidirectional(videoState)
+                && VideoProfile.VideoState.isTransmissionEnabled(videoState)
+                && VideoProfile.VideoState.isReceptionEnabled(videoState);
     }
 
     public static boolean isIncomingVideoCall(Call call) {
