@@ -63,7 +63,7 @@ import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
-import com.android.dialer.util.PrivilegedCallUtil;
+import com.android.dialer.util.CallIntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailPlaybackFragment;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
@@ -317,7 +317,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                         getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
                     DialerUtils.startActivityWithErrorToast(this,
-                            PrivilegedCallUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_TEL,
+                            CallIntentUtil.getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_TEL,
                                     mNumber, null)), R.string.call_not_available);
                     return true;
                 }

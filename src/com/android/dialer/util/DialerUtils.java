@@ -71,9 +71,8 @@ public class DialerUtils {
      */
     public static void startActivityWithErrorToast(Context context, Intent intent, int msgId) {
         try {
-            if ((Intent.ACTION_CALL.equals(intent.getAction())
-                    || Intent.ACTION_CALL_PRIVILEGED.equals(intent.getAction()))
-                            && context instanceof Activity) {
+            if ((CallIntentUtil.CALL_ACTION.equals(intent.getAction())
+                            && context instanceof Activity)) {
                 // All dialer-initiated calls should pass the touch point to the InCallUI
                 Point touchPoint = TouchPointManager.getInstance().getPoint();
                 if (touchPoint.x != 0 || touchPoint.y != 0) {
@@ -81,8 +80,9 @@ public class DialerUtils {
                     extras.putParcelable(TouchPointManager.TOUCH_POINT, touchPoint);
                     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
                 }
-
-                ((Activity) context).startActivityForResult(intent, 0);
+                final TelecomManager tm =
+                        (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+                tm.placeCall(intent.getData(), intent.getExtras());
             } else {
                 context.startActivity(intent);
             }

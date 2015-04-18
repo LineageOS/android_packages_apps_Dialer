@@ -82,7 +82,7 @@ import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.settings.DialerSettingsActivity;
-import com.android.dialer.util.PrivilegedCallUtil;
+import com.android.dialer.util.CallIntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
@@ -1158,8 +1158,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
         Intent intent = isVideoCall ?
-                PrivilegedCallUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
-                PrivilegedCallUtil.getCallIntent(phoneNumber, getCallOrigin());
+                CallIntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
+                CallIntentUtil.getCallIntent(phoneNumber, getCallOrigin());
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }

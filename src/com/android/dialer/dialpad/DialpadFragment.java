@@ -78,7 +78,7 @@ import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.util.PrivilegedCallUtil;
+import com.android.dialer.util.CallIntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
@@ -1001,7 +1001,7 @@ public class DialpadFragment extends Fragment
     }
 
     public void callVoicemail() {
-        DialerUtils.startActivityWithErrorToast(getActivity(), PrivilegedCallUtil
+        DialerUtils.startActivityWithErrorToast(getActivity(), CallIntentUtil
                 .getVoicemailIntent());
         hideAndClearDialpad(false);
     }
@@ -1098,7 +1098,7 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                final Intent intent = PrivilegedCallUtil.getCallIntent(number,
+                final Intent intent = CallIntentUtil.getCallIntent(number,
                         (getActivity() instanceof DialtactsActivity ?
                                 ((DialtactsActivity) getActivity()).getCallOrigin() : null));
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
@@ -1616,7 +1616,7 @@ public class DialpadFragment extends Fragment
     }
 
     private Intent newFlashIntent() {
-        final Intent intent = PrivilegedCallUtil.getCallIntent(EMPTY_NUMBER);
+        final Intent intent = CallIntentUtil.getCallIntent(EMPTY_NUMBER);
         intent.putExtra(EXTRA_SEND_EMPTY_FLASH, true);
         return intent;
     }

@@ -27,12 +27,11 @@ import com.android.contacts.common.CallUtil;
 import com.android.phone.common.PhoneConstants;
 
 /**
- * Utilities related to calls that can only be used by system apps. These
- * use {@link Intent#ACTION_CALL_PRIVILEGED}.
+ * Utilities for creation of {@link Intent#ACTION_CALL} intents.
  */
-public class PrivilegedCallUtil {
+public class CallIntentUtil {
 
-    public static final String CALL_ACTION = Intent.ACTION_CALL_PRIVILEGED;
+    public static final String CALL_ACTION = Intent.ACTION_CALL;
 
     /**
      * Return an Intent for making a phone call. Scheme (e.g. tel, sip) will be determined

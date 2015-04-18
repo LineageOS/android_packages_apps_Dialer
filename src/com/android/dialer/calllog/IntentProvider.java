@@ -30,7 +30,7 @@ import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.CallDetailActivity;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
-import com.android.dialer.util.PrivilegedCallUtil;
+import com.android.dialer.util.CallIntentUtil;
 
 import java.util.ArrayList;
 
@@ -54,7 +54,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return PrivilegedCallUtil.getCallIntent(number, accountHandle);
+                return CallIntentUtil.getCallIntent(number, accountHandle);
             }
         };
     }
@@ -68,7 +68,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return PrivilegedCallUtil.getVideoCallIntent(number, accountHandle);
+                return CallIntentUtil.getVideoCallIntent(number, accountHandle);
             }
         };
     }
@@ -77,7 +77,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return PrivilegedCallUtil.getVoicemailIntent();
+                return CallIntentUtil.getVoicemailIntent();
             }
         };
     }
