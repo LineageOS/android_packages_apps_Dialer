@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"వీడియో కాల్"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"వీడియో కోసం అభ్యర్థిస్తోంది"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"వీడియో కాల్‌ను కనెక్ట్ చేయలేరు"</string>
-    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
-    <skip />
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"వీడియో కాల్ (పాజ్ చేయబడింది)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"మీ కాల్‌బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"మీ అత్యవసర కాల్‌బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"డయల్ చేస్తోంది"</string>
@@ -99,15 +98,12 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"కాల్ చేయలేరు. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> అత్యవసర నంబర్ కాదు."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"కాల్ చేయలేరు. అత్యవసర నంబర్‌ను డయల్ చేయండి."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"డయల్ చేయడానికి కీబోర్డ్‌ను ఉపయోగించండి"</string>
-    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"కాల్‌ను హోల్డ్‌లో ఉంచు"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"కాల్‌ను పునఃప్రారంభించు"</string>
-    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"కాల్‌ను జోడించు"</string>
-    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"కాల్‌లను విలీనం చేయి"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"కాల్‌లను మార్చు"</string>
-    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
+    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
     <skip />
-    <string name="onscreenHoldText" msgid="2285258239691145872">"హోల్డ్ చేయి"</string>
-    <string name="onscreenEndCallText" msgid="4403855834875398585">"ముగించు"</string>
+    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
+    <skip />
+    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
+    <skip />
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"డయల్‌ప్యాడ్"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"మ్యూట్ చేయి"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"కాల్‌ను జోడించు"</string>
@@ -121,18 +117,12 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"కెమెరాను మార్చు"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"వీడియోను పాజ్ చేయి"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"మరిన్ని ఎంపికలు"</string>
-    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
-    <skip />
-    <!-- no translation found for player_started (6046262510243983589) -->
-    <skip />
-    <!-- no translation found for player_stopped (8856926759436364963) -->
-    <skip />
-    <!-- no translation found for camera_not_ready (4955261496193316240) -->
-    <skip />
-    <!-- no translation found for camera_ready (1903335385405807324) -->
-    <skip />
-    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
-    <skip />
+    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"దయచేసి వీడియో కాల్‌లకు అప్‌గ్రేడ్ చేయడానికి TTY మోడ్ నిలిపివేయండి."</string>
+    <string name="player_started" msgid="6046262510243983589">"ప్లేయర్ ప్రారంభమైంది"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"ప్లేయర్ ఆపివేయబడింది"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"కెమెరా సిద్ధంగా లేదు"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"కెమెరా సిద్ధంగా ఉంది"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"తెలియని కాల్ సెషన్ ఉదంతం"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"సేవ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"సెటప్"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;సెట్ చేయలేదు&gt;"</string>
@@ -152,14 +142,10 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ఆడియో కాల్ రూపంలో సమాధానమివ్వండి"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"వీడియో అభ్యర్థనను అంగీకరించండి"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"వీడియో అభ్యర్థనను తిరస్కరించండి"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
-    <skip />
-    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"వీడియో ప్రసరణ అభ్యర్థనను ఆమోదిస్తుంది"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"వీడియో ప్రసరణ అభ్యర్థనను నిరాకరిస్తుంది"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"వీడియో స్వీకరణ అభ్యర్థనను ఆమోదిస్తుంది"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"వీడియో స్వీకరణ అభ్యర్థనను నిరాకరిస్తుంది"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> కోసం పైకి స్లైడ్ చేయండి."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> కోసం ఎడమవైపుకు స్లైడ్ చేయండి."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> కోసం కుడివైపుకు స్లైడ్ చేయండి."</string>

@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"ویڈیو کال"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ویڈیو کی درخواست کی جا رہی ہے"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"ویڈیو کال منسلک نہیں کر سکتا"</string>
-    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
-    <skip />
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"ویڈیو کال (موقوف)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"‏آپ کا کال بیک نمبر‎\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>‎"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"‏آپ کا ہنگامی کال بیک نمبر‎\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>‎"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ڈائل ہو رہا ہے"</string>
@@ -99,15 +98,12 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"کال نہیں کی جا سکتی۔ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> ایک ہنگامی نمبر نہیں ہے۔"</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"کال نہیں کی جا سکتی۔ ایک ہنگامی نمبر ڈائل کریں۔"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ڈائل کرنے کیلئے کی بورڈ استعمال کریں"</string>
-    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"کال کو ہولڈ کریں"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"کال کو دوبارہ شروع کریں"</string>
-    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"کال شامل کریں"</string>
-    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"کالز کو ضم کریں"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"کالز تبدیل کریں"</string>
-    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
+    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
     <skip />
-    <string name="onscreenHoldText" msgid="2285258239691145872">"ہولڈ کریں"</string>
-    <string name="onscreenEndCallText" msgid="4403855834875398585">"ختم کریں"</string>
+    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
+    <skip />
+    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
+    <skip />
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ڈائل پیڈ"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"خاموش کریں"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"کال شامل کریں"</string>
@@ -121,18 +117,12 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"کیمرہ سوئچ کریں"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ویڈیو موقوف کریں"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"مزید اختیارات"</string>
-    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
-    <skip />
-    <!-- no translation found for player_started (6046262510243983589) -->
-    <skip />
-    <!-- no translation found for player_stopped (8856926759436364963) -->
-    <skip />
-    <!-- no translation found for camera_not_ready (4955261496193316240) -->
-    <skip />
-    <!-- no translation found for camera_ready (1903335385405807324) -->
-    <skip />
-    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
-    <skip />
+    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"‏براہ کرم ویڈیو کالز میں اپ گریڈ کرنے کیلئے TTY وض‏ع غیر فعال کریں۔"</string>
+    <string name="player_started" msgid="6046262510243983589">"پلیئر شروع ہوگیا"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"پلیئر بند ہوگیا"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"کیمرہ تیار نہیں ہے"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"کیمرہ تیار ہے"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"نامعلوم کال سیشن ایونٹ"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"سروس"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"سیٹ اپ"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;متعین نہیں ہے&gt;"</string>
@@ -152,14 +142,10 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"آڈیو کال کے بطور جواب دیں"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"ویڈیو کی درخواست قبول کریں"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"ویڈیو کی درخواست مسترد کریں"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
-    <skip />
-    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"ویڈیو منتقل کرنے کی درخواست قبول کریں"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"ویڈیو منتقل کرنے کی درخواست مسترد کریں"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"ویڈیو موصول کرنے کی درخواست قبول کریں"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"ویڈیو موصول کرنے کی درخواست مسترد کریں"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> کیلئے اوپر سلائیڈ کریں۔"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> کیلئے بائیں سلائیڈ کریں۔"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> کیلئے دائیں سلائیڈ کریں۔"</string>

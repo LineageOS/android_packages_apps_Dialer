@@ -98,14 +98,12 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"Can\'t call. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> is not an emergency number."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Can\'t call. Dial an emergency number."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Use keyboard to dial"</string>
-    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Hold call"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Resume call"</string>
-    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Add call"</string>
-    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Merge calls"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Swap calls"</string>
-    <string name="overflowManageConferenceMenuItemText" msgid="1751081566617967119">"Manage Conference"</string>
-    <string name="onscreenHoldText" msgid="2285258239691145872">"Hold"</string>
-    <string name="onscreenEndCallText" msgid="4403855834875398585">"End"</string>
+    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
+    <skip />
+    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
+    <skip />
+    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
+    <skip />
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Dial pad"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Mute"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Add call"</string>

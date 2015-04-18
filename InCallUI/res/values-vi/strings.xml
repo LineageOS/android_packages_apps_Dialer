@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Cuộc gọi điện video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Đang yêu cầu video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Không kết nối được cuộc gọi điện video"</string>
-    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
-    <skip />
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Cuộc gọi điện video (tạm dừng)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Số gọi lại của bạn\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Số gọi lại khẩn cấp của bạn\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Đang gọi"</string>
@@ -99,15 +98,12 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"Không thực hiện được cuộc gọi. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> không phải là số khẩn cấp."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Không thực hiện được cuộc gọi. Hãy quay số khẩn cấp."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Sử dụng bàn phím để quay số"</string>
-    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"Giữ cuộc gọi"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"Tiếp tục cuộc gọi"</string>
-    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"Thêm cuộc gọi"</string>
-    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"Hợp nhất cuộc gọi"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"Hoán đổi cuộc gọi"</string>
-    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
+    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
     <skip />
-    <string name="onscreenHoldText" msgid="2285258239691145872">"Giữ"</string>
-    <string name="onscreenEndCallText" msgid="4403855834875398585">"Kết thúc"</string>
+    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
+    <skip />
+    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
+    <skip />
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Bàn phím số"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Tắt tiếng"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Thêm cuộc gọi"</string>
@@ -121,18 +117,12 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Chuyển đổi máy ảnh"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Tạm dừng video"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"Thêm tùy chọn"</string>
-    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
-    <skip />
-    <!-- no translation found for player_started (6046262510243983589) -->
-    <skip />
-    <!-- no translation found for player_stopped (8856926759436364963) -->
-    <skip />
-    <!-- no translation found for camera_not_ready (4955261496193316240) -->
-    <skip />
-    <!-- no translation found for camera_ready (1903335385405807324) -->
-    <skip />
-    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
-    <skip />
+    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"Vui lòng tắt Chế độ TTY để nâng cấp lên cuộc gọi điện video."</string>
+    <string name="player_started" msgid="6046262510243983589">"Đã khởi động trình phát"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"Đã dừng trình phát"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"Máy ảnh chưa sẵn sàng"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"Máy ảnh đã sẵn sàng"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"Sự kiện phiên cuộc gọi không xác định"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Dịch vụ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Thiết lập"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Chưa được đặt&gt;"</string>
@@ -152,14 +142,10 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Trả lời là cuộc gọi âm thanh"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Chấp nhận yêu cầu cuộc gọi video"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Từ chối yêu cầu cuộc gọi video"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
-    <skip />
-    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Chấp nhận yêu cầu truyền video"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"Từ chối yêu cầu truyền video"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"Chấp nhận yêu cầu nhận video"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"Từ chối yêu cầu nhận video"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"Trượt lên để <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"Trượt sang trái để <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Trượt sang phải để <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>

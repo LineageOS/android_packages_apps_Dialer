@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"แฮงเอาท์วิดีโอ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"กำลังขอวิดีโอ"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"ไม่สามารถเชื่อมต่อแฮงเอาท์วิดีโอได้"</string>
-    <!-- no translation found for card_title_video_call_paused (3753261320787432731) -->
-    <skip />
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"แฮงเอาท์วิดีโอ (หยุดชั่วคราว)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"หมายเลขโทรกลับของคุณ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"หมายเลขโทรกลับฉุกเฉินของคุณ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"กำลังโทรออก"</string>
@@ -99,15 +98,12 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"ไม่สามารถโทรได้ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> ไม่ใช่หมายเลขฉุกเฉิน"</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"ไม่สามารถโทรออก โทรหมายเลขฉุกเฉิน"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ใช้แป้นพิมพ์กดหมายเลขโทรศัพท์"</string>
-    <string name="overflowHoldMenuItemText" msgid="7382457697092158039">"พักสาย"</string>
-    <string name="overflowResumeMenuItemText" msgid="8826360006222366843">"โทรต่อ"</string>
-    <string name="overflowAddMenuItemText" msgid="5605615101930811453">"เพิ่มการโทร"</string>
-    <string name="overflowMergeMenuItemText" msgid="6305762210377655389">"รวมสาย"</string>
-    <string name="overflowSwapMenuItemText" msgid="6603717809137071603">"สลับสาย"</string>
-    <!-- no translation found for overflowManageConferenceMenuItemText (1751081566617967119) -->
+    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
     <skip />
-    <string name="onscreenHoldText" msgid="2285258239691145872">"พักสาย"</string>
-    <string name="onscreenEndCallText" msgid="4403855834875398585">"สิ้นสุด"</string>
+    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
+    <skip />
+    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
+    <skip />
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"แป้นหมายเลข"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"ปิดเสียง"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"เพิ่มการโทร"</string>
@@ -121,18 +117,12 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"สลับกล้องถ่ายรูป"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"หยุดวิดีโอชั่วคราว"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"ตัวเลือกอื่น"</string>
-    <!-- no translation found for video_call_not_allowed_if_tty_enabled (122020626761012211) -->
-    <skip />
-    <!-- no translation found for player_started (6046262510243983589) -->
-    <skip />
-    <!-- no translation found for player_stopped (8856926759436364963) -->
-    <skip />
-    <!-- no translation found for camera_not_ready (4955261496193316240) -->
-    <skip />
-    <!-- no translation found for camera_ready (1903335385405807324) -->
-    <skip />
-    <!-- no translation found for unknown_call_session_event (2431061946920253582) -->
-    <skip />
+    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"โปรดปิดใช้โหมด TTY เพื่ออัปเกรดเป็นแฮงเอาท์วิดีโอ"</string>
+    <string name="player_started" msgid="6046262510243983589">"โปรแกรมเล่นเริ่มทำงานแล้ว"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"โปรแกรมเล่นหยุดแล้ว"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"กล้องไม่พร้อมทำงาน"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"กล้องพร้อมทำงาน"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"เหตุการณ์เซสชันการโทรที่ไม่รู้จัก"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"บริการ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"การตั้งค่า"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ไม่ได้ตั้งค่า&gt;"</string>
@@ -152,14 +142,10 @@
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"รับสายเป็นการโทรด้วยเสียง"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"ยอมรับคำขอวิดีโอ"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"ปฏิเสธคำขอวิดีโอ"</string>
-    <!-- no translation found for description_target_accept_upgrade_to_video_transmit_request (5311037889642077468) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_transmit_request (3636108065510415975) -->
-    <skip />
-    <!-- no translation found for description_target_accept_upgrade_to_video_receive_request (8668058323593087912) -->
-    <skip />
-    <!-- no translation found for description_target_decline_upgrade_to_video_receive_request (2355776509656298367) -->
-    <skip />
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"ยอมรับคำขอให้ส่งวิดีโอ"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"ปฏิเสธคำขอให้ส่งวิดีโอ"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"ยอมรับคำขอให้รับวิดีโอ"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"ปฏิเสธคำขอให้รับวิดีโอ"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"เลื่อนขึ้นเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="description_direction_left" msgid="7129873384376533287">"เลื่อนไปทางซ้ายเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
     <string name="description_direction_right" msgid="2122584234531957308">"เลื่อนไปทางขวาเพื่อ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>"</string>
