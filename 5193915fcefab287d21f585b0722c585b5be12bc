@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa7ab95a_d60964df",
+        "filename": "res/values/cm_colors.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 9199
+      },
+      "writtenOn": "2015-04-18T05:28:30Z",
+      "side": 1,
+      "message": "WS",
+      "revId": "5193915fcefab287d21f585b0722c585b5be12bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa7ab95a_f60e68e4",
+        "filename": "res/values/cm_colors.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 9199
+      },
+      "writtenOn": "2015-04-18T05:28:30Z",
+      "side": 1,
+      "message": "WS",
+      "revId": "5193915fcefab287d21f585b0722c585b5be12bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa7ab95a_1614acf3",
+        "filename": "res/values/cm_colors.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 9199
+      },
+      "writtenOn": "2015-04-18T05:28:30Z",
+      "side": 1,
+      "message": "WS",
+      "revId": "5193915fcefab287d21f585b0722c585b5be12bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
