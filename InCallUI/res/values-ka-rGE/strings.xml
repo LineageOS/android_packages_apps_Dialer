@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"არ ირეკება. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> არ არის საგანგებო ნომერი."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"დარეკვა ვერ ხორციელდება. აკრიფეთ საგანგებო ნომერი."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"კლავიატურის გამოყენება დასარეკად"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"ზარის დაკავება"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"ზარის განახლება"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"ზარის დასრულება"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ციფერბლატი"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"დადუმება"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"ზარის დამატება"</string>
