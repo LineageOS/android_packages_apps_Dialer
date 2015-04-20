@@ -620,9 +620,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
             }
             String callTimeElapsed = DateUtils.formatElapsedTime(duration / 1000);
-            String durationDescription = InCallDateUtils.formatDetailedDuration(duration);
             mElapsedTime.setText(callTimeElapsed);
+            /*
+             * TODO: Temporarily disabled (b/20427882)
+            String durationDescription = InCallDateUtils.formatDetailedDuration(duration);
             mElapsedTime.setContentDescription(durationDescription);
+            */
         } else {
             // hide() animation has no effect if it is already hidden.
             AnimUtils.fadeOut(mElapsedTime, AnimUtils.DEFAULT_DURATION);
