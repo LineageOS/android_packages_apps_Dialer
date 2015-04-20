@@ -105,19 +105,10 @@ public class DialerSettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * Whether a user handle associated with the current user is that of the primary owner. That is,
-     * whether there is a user handle which has an id which matches the owner's handle.
      * @return Whether the current user is the primary user.
      */
     private boolean isPrimaryUser() {
-        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        List<UserHandle> userHandles = userManager.getUserProfiles();
-        for (int i = 0; i < userHandles.size(); i++){
-            if (userHandles.get(i).myUserId() == OWNER_HANDLE_ID) {
-                return true;
-            }
-        }
-
-        return false;
+        final UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        return userManager.isSystemUser();
     }
 }
