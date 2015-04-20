@@ -460,12 +460,6 @@ public class CallButtonFragment
         }
 
         Context context = getContext();
-        if (isTtyModeEnabled()) {
-            Toast.makeText(context, context.getResources().getString(
-                    R.string.video_call_not_allowed_if_tty_enabled),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         final ArrayList<CharSequence> items = new ArrayList<CharSequence>();
         final ArrayList<Integer> itemToCallType = new ArrayList<Integer>();
@@ -893,12 +887,5 @@ public class CallButtonFragment
     @Override
     public Context getContext() {
         return getActivity();
-    }
-
-    private boolean isTtyModeEnabled() {
-        return (android.provider.Settings.Secure.getInt(
-                getContext().getContentResolver(),
-                android.provider.Settings.Secure.PREFERRED_TTY_MODE,
-                TelecomManager.TTY_MODE_OFF) != TelecomManager.TTY_MODE_OFF);
     }
 }
