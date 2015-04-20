@@ -41,6 +41,8 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +73,8 @@ import java.util.LinkedList;
  * Adapter class to fill in data for the Call Log.
  */
 public class CallLogAdapter extends GroupingListAdapter
-        implements CallLogAdapterHelper.Callback, CallLogGroupBuilder.GroupCreator {
+        implements CallLogAdapterHelper.Callback, CallLogGroupBuilder.GroupCreator,
+        OnScrollListener {
 
     private static final String TAG = CallLogAdapter.class.getSimpleName();
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
@@ -470,7 +473,10 @@ public class CallLogAdapter extends GroupingListAdapter
                     Calls.DURATION_TYPE_ACTIVE, subId, operator);
         }
 
-        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
+        if (!mAdapterHelper.isBusy()) {
+            // Only update views when ListView's scroll state is not SCROLL_STATE_FLING.
+            mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
+        }
 
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
 
@@ -536,10 +542,8 @@ public class CallLogAdapter extends GroupingListAdapter
      * @return The day group for the call.
      */
     private int getDayGroupForCall(long callId) {
-        if (mDayGroups.containsKey(callId)) {
-            return mDayGroups.get(callId);
-        }
-        return CallLogGroupBuilder.DAY_GROUP_NONE;
+        Integer result = mDayGroups.get(callId);
+        return result == null ? CallLogGroupBuilder.DAY_GROUP_NONE : result.intValue();
     }
     /**
      * Determines if a call log row with the given Id is expanded.
@@ -1154,5 +1158,28 @@ public class CallLogAdapter extends GroupingListAdapter
 
         DialerUtils.startActivityWithErrorToast(mContext, intent,
                 R.string.add_contact_not_available);
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        switch (scrollState) {
+            case OnScrollListener.SCROLL_STATE_IDLE:
+                mAdapterHelper.setBusy(false);
+                dataSetChanged();
+                break;
+            case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+                mAdapterHelper.setBusy(false);
+                break;
+            case OnScrollListener.SCROLL_STATE_FLING:
+                // Do not update views when scroll state is SCROLL_STATE_FLING
+                mAdapterHelper.setBusy(true);
+                break;
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                         int totalItemCount) {
+        // no-op
     }
 }

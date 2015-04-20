@@ -137,6 +137,9 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
                 // Check if thread is finished, and if so return immediately.
                 if (mDone) return;
 
+                // only update contact info when scroll state is not fling.
+                if (mBusy) continue;
+
                 // Obtain next request, if any is available.
                 // Keep synchronized section small.
                 ContactInfoRequest req = null;
@@ -201,6 +204,8 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
     /** Can be set to true by tests to disable processing of requests. */
     private volatile boolean mRequestProcessingDisabled = false;
 
+    private boolean mBusy;
+
     /**
      * List of requests to update contact details.
      * <p>
@@ -227,6 +232,14 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
             }
         }
     };
+
+    public void setBusy(boolean isBusy) {
+        mBusy = isBusy;
+    }
+
+    public boolean isBusy(){
+        return mBusy;
+    }
 
     /**
      * Enqueues a request to look up the contact details for the given phone number.

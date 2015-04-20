@@ -312,6 +312,7 @@ public class CallLogFragment extends AnalyticsListFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getListView().setEmptyView(view.findViewById(R.id.empty_list_view));
+        getListView().setOnScrollListener(mAdapter);
         getListView().setItemsCanFocus(true);
         maybeAddFooterView();
 
