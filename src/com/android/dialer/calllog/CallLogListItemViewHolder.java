@@ -347,9 +347,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
-                    if (observer.isAlive()) {
-                        observer.removeOnPreDrawListener(this);
+                    ViewTreeObserver vto = observer;
+                    if (!vto.isAlive()) {
+                        vto = actionsView.getViewTreeObserver();
                     }
+                    vto.removeOnPreDrawListener(this);
 
                     // TODO: Animate, instead of immediately resizing.
                     int currentHeight = primaryActionView.getHeight();
