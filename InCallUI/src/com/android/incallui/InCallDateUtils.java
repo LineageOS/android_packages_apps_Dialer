@@ -33,22 +33,19 @@ public class InCallDateUtils {
         final Resources res = Resources.getSystem();
         StringBuilder duration = new StringBuilder();
         if (hours > 0) {
-            duration.append(res.getQuantityString(
-                    com.android.internal.R.plurals.duration_hours, hours, hours));
+            duration.append(res.getQuantityString(R.plurals.duration_hours, hours, hours));
         }
         if (minutes > 0) {
             if (hours > 0) {
                 duration.append(' ');
             }
-            duration.append(res.getQuantityString(
-                    com.android.internal.R.plurals.duration_minutes, minutes, minutes));
+            duration.append(res.getQuantityString(R.plurals.duration_minutes, minutes, minutes));
         }
         if (seconds > 0) {
             if (hours > 0 || minutes > 0) {
                 duration.append(' ');
             }
-            duration.append(res.getQuantityString(
-                    com.android.internal.R.plurals.duration_seconds, seconds, seconds));
+            duration.append(res.getQuantityString(R.plurals.duration_seconds, seconds, seconds));
         }
         return duration.toString();
     }
