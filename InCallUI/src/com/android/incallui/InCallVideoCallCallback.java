@@ -52,8 +52,8 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         int previousVideoState = CallUtils.getUnPausedVideoState(mCall.getVideoState());
         int newVideoState = CallUtils.getUnPausedVideoState(videoProfile.getVideoState());
 
-        boolean wasVideoCall = VideoProfile.VideoState.isVideo(previousVideoState);
-        boolean isVideoCall = VideoProfile.VideoState.isVideo(newVideoState);
+        boolean wasVideoCall = CallUtils.isVideoCall(previousVideoState);
+        boolean isVideoCall = CallUtils.isVideoCall(newVideoState);
 
         // Check for upgrades to video and downgrades to audio.
         if (wasVideoCall && !isVideoCall) {
@@ -84,7 +84,7 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         } else if (requestedProfile != null && responseProfile != null) {
             boolean modifySucceeded = requestedProfile.getVideoState() ==
                     responseProfile.getVideoState();
-            boolean isVideoCall = VideoProfile.VideoState.isVideo(responseProfile.getVideoState());
+            boolean isVideoCall = CallUtils.isVideoCall(responseProfile.getVideoState());
             if (modifySucceeded && isVideoCall) {
                 InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoSuccess(mCall);
             } else if (!modifySucceeded && isVideoCall) {

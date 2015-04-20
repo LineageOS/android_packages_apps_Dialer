@@ -468,7 +468,7 @@ public class Call {
 
     public boolean isVideoCall(Context context) {
         return CallUtil.isVideoEnabled(context) &&
-                VideoProfile.VideoState.isVideo(getVideoState());
+                CallUtils.isVideoCall(getVideoState());
     }
 
     /**
