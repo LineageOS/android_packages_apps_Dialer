@@ -152,22 +152,25 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Klepnutím na obrázek zobrazíte všechna čísla. Klepnutím a podržením upravíte uspořádání."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstranit"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VŠECHNY KONTAKTY"</string>
-    <string name="call_log_action_call_back" msgid="4944463006859852473">"VOLAT ZPĚT"</string>
-    <string name="call_log_action_call" msgid="8187991828921352552">"VOLAT"</string>
-    <string name="call_log_action_redial" msgid="8159106862639797417">"ZNOVU VYTOČIT"</string>
-    <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOHOVOR"</string>
+    <!-- no translation found for call_log_action_video_call (7724301709041128296) -->
+    <skip />
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"POSLOUCHAT"</string>
-    <string name="call_log_action_details" msgid="6252596497021563115">"PODROBNOSTI"</string>
+    <!-- no translation found for call_log_action_details (7957138590190911171) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Nepřijatý hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Přijatý hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Odchozí hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"v účtu <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"Zpětné volání <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_call_log_call_action (3682561657090693134) -->
+    <skip />
+    <!-- no translation found for description_call_action (4000549004089776147) -->
+    <skip />
     <string name="description_video_call_action" msgid="4303952636480252389">"Odchozí videohovor s: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Poslech hlasové schránky od <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Podrobnosti volání <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Smazáno z historie volání"</string>
-    <string name="call_log_action_report" msgid="561229827189128879">"NAHLÁSIT"</string>
+    <!-- no translation found for call_log_action_report (4327809827087468864) -->
+    <skip />
     <string name="call_log_header_today" msgid="3225248682434212981">"Dnes"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Včera"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Starší"</string>

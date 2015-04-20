@@ -150,22 +150,25 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Katso kaikki numerot koskettamalla kuvaa tai järjestele tietoja koskettamalla kuvaa pitkään"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Poista"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KAIKKI YHTEYSTIEDOT"</string>
-    <string name="call_log_action_call_back" msgid="4944463006859852473">"SOITA TAKAISIN"</string>
-    <string name="call_log_action_call" msgid="8187991828921352552">"SOITA"</string>
-    <string name="call_log_action_redial" msgid="8159106862639797417">"SOITA UUDELLEEN"</string>
-    <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOPUHELU"</string>
+    <!-- no translation found for call_log_action_video_call (7724301709041128296) -->
+    <skip />
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"KUUNTELE"</string>
-    <string name="call_log_action_details" msgid="6252596497021563115">"TIEDOT"</string>
+    <!-- no translation found for call_log_action_details (7957138590190911171) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Vastaamaton puhelu soittajalta <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Vastattu puhelu soittajalta <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Soita vastaanottajalle <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"Soita takaisin: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_call_log_call_action (3682561657090693134) -->
+    <skip />
+    <!-- no translation found for description_call_action (4000549004089776147) -->
+    <skip />
     <string name="description_video_call_action" msgid="4303952636480252389">"Videopuhelu: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Kuuntele vastaajaviesti: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Yhteystiedon <xliff:g id="NAMEORNUMBER">^1</xliff:g> puhelutiedot"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Poistettu soittohistoriasta"</string>
-    <string name="call_log_action_report" msgid="561229827189128879">"TEE ILMOITUS"</string>
+    <!-- no translation found for call_log_action_report (4327809827087468864) -->
+    <skip />
     <string name="call_log_header_today" msgid="3225248682434212981">"Tänään"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Eilen"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Vanhempi"</string>
