@@ -407,7 +407,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
      * @return {@code true} if the call is a video call, {@code false} otherwise.
      */
     private static boolean isVideoCall(CallContext callContext) {
-        return callContext != null && VideoProfile.VideoState.isVideo(callContext.getVideoState());
+        return callContext != null && CallUtils.isVideoCall(callContext.getVideoState());
     }
 
     /**
