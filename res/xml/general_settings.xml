@@ -98,6 +98,25 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="dialer_general_smart_category_key"
+        android:title="@string/smart_category_title"
+        android:persistent="false">
+
+        <SwitchPreference
+            android:key="button_smart_dialer"
+            android:title="@string/smart_dialer_title"
+            android:summary="@string/smart_dialer_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreference
+            android:key="button_smart_mute"
+            android:title="@string/smart_mute_title"
+            android:summary="@string/smart_mute_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="dialer_general_other_settings_category_key"
         android:title="@string/other_settings_title"
         android:persistent="false" >
@@ -106,12 +125,6 @@
             android:key="detailed_incall_info"
             android:title="@string/detailed_incall_info_title"
             android:summary="@string/detailed_incall_info_summary" />
-
-        <SwitchPreference
-            android:key="button_smart_dialer"
-            android:title="@string/smart_dialer_title"
-            android:summary="@string/smart_dialer_summary"
-            android:defaultValue="false" />
 
         <PreferenceScreen
             android:key="button_respond_via_sms_key"
