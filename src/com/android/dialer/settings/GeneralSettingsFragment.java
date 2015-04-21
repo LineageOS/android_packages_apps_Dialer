@@ -55,6 +55,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private static final String BUTTON_SPEED_DIAL_KEY  = "speed_dial_settings";
     private static final String BUTTON_T9_SEARCH_INPUT_LOCALE = "button_t9_search_input";
     public static final String BUTTON_SMART_DIALER_KEY = "button_smart_dialer";
+    public static final String BUTTON_SMART_MUTE_KEY = "button_smart_mute";
 
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
