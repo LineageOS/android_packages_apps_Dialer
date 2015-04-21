@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa7ab95a_9010b650",
+        "filename": "src/com/android/services/callrecorder/CallRecorderService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-04-21T18:09:38Z",
+      "side": 1,
+      "message": "I wonder whether this string shouldn\u0027t be translatable.",
+      "revId": "8fd4c44a31ea6c2a218368ee033689da11e1f1c2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
