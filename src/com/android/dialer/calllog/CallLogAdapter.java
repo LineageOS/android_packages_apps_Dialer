@@ -22,22 +22,17 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.PhoneLookup;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -54,7 +49,6 @@ import java.util.HashMap;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
-    private static final String TAG = CallLogAdapter.class.getSimpleName();
 
     /** Interface used to inform a parent UI element that a list item has been expanded. */
     public interface CallItemExpandedListener {
@@ -125,8 +119,6 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
-
-    private CallItemExpandedListener mCallItemExpandedListener;
 
     /** Listener for the primary or secondary actions in the list.
      *  Primary opens the call details.
@@ -262,6 +254,16 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return createCallLogEntryViewHolder(parent);
+    }
+
+    /**
+     * Creates a new call log entry {@link ViewHolder}.
+     *
+     * @param parent the parent view.
+     * @return The {@link ViewHolder}.
+     */
+    private ViewHolder createCallLogEntryViewHolder(ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
 
