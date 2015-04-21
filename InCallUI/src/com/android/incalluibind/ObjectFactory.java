@@ -33,10 +33,6 @@ public class ObjectFactory {
         return null;
     }
 
-    public static EmergencyCallListener getEmergencyCallListener() {
-        return null;
-    }
-
     /** @return An {@link Intent} to be broadcast when the InCallUI is visible. */
     public static Intent getUiReadyBroadcastIntent(Context context) {
         return null;
