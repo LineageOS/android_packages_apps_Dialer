@@ -20,8 +20,18 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.incallui.CallCardPresenter.EmergencyCallListener;
+import com.android.incallui.service.PhoneNumberService;
 
 public class ObjectFactory {
+
+    public static PhoneNumberService newPhoneNumberService(Context context) {
+        // no phone number service.
+        return null;
+    }
+
+    public static EmergencyCallListener newEmergencyCallListener() {
+        return null;
+    }
 
     public static EmergencyCallListener getEmergencyCallListener() {
         return null;
