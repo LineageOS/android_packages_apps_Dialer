@@ -46,6 +46,7 @@ public final class LookupSettings {
     public static final String RLP_CYNGN_CHINESE = "CyngnChinese";
     public static final String RLP_DASTELEFONBUCH = "DasTelefonbuch";
     public static final String RLP_GEBELD = "Gebeld";
+    public static final String RLP_HEROLD = "Herold";
     public static final String RLP_DEFAULT = RLP_OPENCNAM;
 
     private LookupSettings() {
