@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"発信できません。<xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g>は緊急通報番号ではありません。"</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"発信できません。緊急通報番号におかけください。"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"キーボードで番号を入力してください"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"通話を保留"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"通話を再開"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"通話を終了"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ダイヤルキー"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"ミュート"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"通話を追加"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"カメラを切り替え"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"動画を一時停止"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"その他のオプション"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"ビデオハングアウトをアップグレードするにはTTYモードを無効にしてください。"</string>
     <string name="player_started" msgid="6046262510243983589">"プレーヤーを開始しました"</string>
     <string name="player_stopped" msgid="8856926759436364963">"プレーヤーを停止しました"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"カメラが準備できていません"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"着信音とバイブレーション"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"グループ通話オプション"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"緊急通報番号"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

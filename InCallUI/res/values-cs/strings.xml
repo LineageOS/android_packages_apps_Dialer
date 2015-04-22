@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"Hovor nelze uskutečnit. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> není číslo tísňového volání."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Hovor nelze uskutečnit. Vytočte číslo tísňového volání."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Číslo vytočíte pomocí klávesnice."</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Podržet hovor"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Obnovit hovor"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"Ukončit hovor"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Číselník"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Ztlumit"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Přidat hovor"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Přepnout fotoaparát"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pozastavit video"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"Další možnosti"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"Chcete-li upgradovat na videohovory, vypněte režim TTY."</string>
     <string name="player_started" msgid="6046262510243983589">"Přehrávač spuštěn"</string>
     <string name="player_stopped" msgid="8856926759436364963">"Přehrávač zastaven"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"Fotoaparát není připraven"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Vyzvánění a vibrace"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Spravovat konferenční hovor"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Číslo tísňové linky"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

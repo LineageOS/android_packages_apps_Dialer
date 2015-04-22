@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"Позив није успео. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> није број за хитне случајеве."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Позив није успео. Позовите број за хитне случајеве."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Користите тастатуру за позивање"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Стави позив на чекање"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Настави позив"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"Заврши позив"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Нумеричка тастатура"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Искључи звук"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Додај позив"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Промени камеру"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Паузирај видео"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"Још опција"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"Онемогућите TTY режим да бисте надоградили на видео позиве."</string>
     <string name="player_started" msgid="6046262510243983589">"Плејер је покренут"</string>
     <string name="player_stopped" msgid="8856926759436364963">"Плејер је заустављен"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"Камера није спремна"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Мелодија звона и вибрација"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управљање конференцијским позивом"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Број за хитне случајеве"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

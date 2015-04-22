@@ -114,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Switch camera"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pause video"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"More options"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"Please disable TTY Mode to upgrade to video calls."</string>
     <string name="player_started" msgid="6046262510243983589">"Player Started"</string>
     <string name="player_stopped" msgid="8856926759436364963">"Player Stopped"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"Camera not ready"</string>
@@ -157,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringtone &amp; Vibrate"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Manage conference call"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Emergency number"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"មិនអាចហៅបានទេ។ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> មិនមានជាលេខអាសន្នទេ។"</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"មិនអាចហៅបានទេ។ ចុចហៅលេខអាសន្ន។"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ប្រើ​​ក្ដារចុច​ដើម្បី​ចុច​លេខ"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"រង់ចាំការហៅ"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"បន្តការហៅ"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"បញ្ចប់ការហៅ"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"បន្ទះ​លេខ"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"ស្ងាត់"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"បន្ថែម​ការ​ហៅ"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ប្ដូរ​ម៉ាស៊ីន​ថត"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ផ្អាក​វីដេអូ"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"ជម្រើស​ច្រើន​ទៀត"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"សូមបិទដំណើរការរបៀប TTY ដើម្បីអាប់គ្រេតការហៅជាវីដេអូ។"</string>
     <string name="player_started" msgid="6046262510243983589">"អ្នកលេងបានចាប់ផ្តើម"</string>
     <string name="player_stopped" msgid="8856926759436364963">"អ្នកលេងបានឈប់"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"កាមេរ៉ាមិនទាន់ត្រៀមទេ"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"សំឡេង​រោទ៍ &amp; ញ័រ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"គ្រប់គ្រង​ការ​ហៅ​​ជា​សន្និសីទ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"លេខ​ពេល​អាសន្ន"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

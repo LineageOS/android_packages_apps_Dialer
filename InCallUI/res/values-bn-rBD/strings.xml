@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"কল করা যাবে না৷ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> কোনো জরুরী নম্বর নয়৷"</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"কল করা যাবে না৷ কোনো জরুরী নম্বর ডায়াল করুন৷"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ডায়াল করতে কীবোর্ড ব্যবহার করুন"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"কল হোল্ডে রাখুন"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"কল পুনরায় শুরু করুন"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"কল শেষ করুন"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"ডায়ালপ্যাড"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"নিঃশব্দ করুন"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"কল যোগ করুন"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ক্যামেরা স্যুইচ করুন"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ভিডিও বিরাম দিন"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"আরো বিকল্প"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"অনুগ্রহ করে ভিডিও কলগুলি আপগ্রেড করা সক্ষম করুন৷"</string>
     <string name="player_started" msgid="6046262510243983589">"প্লেয়ার শুরু হয়েছে"</string>
     <string name="player_stopped" msgid="8856926759436364963">"প্লেয়ার বন্ধ হয়ে গেছে"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"ক্যামেরা প্রস্তুত নেই"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"রিংটোন ও কম্পন"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"কনফারেন্স কল পরিচালনা করুন"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"জরুরি নম্বর"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

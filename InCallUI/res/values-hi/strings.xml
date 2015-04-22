@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"कॉल नहीं किया जा सकता. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> एक आपातकालीन नंबर नहीं है."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"कॉल नहीं किया जा सकता. आपातकालीन नबर डायल करें."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"डायल करने के लिए कीबोर्ड का उपयोग करें"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"कॉल होल्ड करें"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"कॉल फिर से शुरू करें"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"कॉल समाप्त करें"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"डायलपैड"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"म्यूट करें"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"कॉल जोड़ें"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"कैमरा स्विच करें"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"वीडियो रोकें"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"अधिक विकल्प"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"कृपया वीडियो कॉल में अपग्रेेड करने के लिए TTY मोड अक्षम करें."</string>
     <string name="player_started" msgid="6046262510243983589">"प्‍लेयर प्रारंभ हो गया"</string>
     <string name="player_stopped" msgid="8856926759436364963">"प्‍लेयर रुक गया"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"कैमरा तैयार नहीं है"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन और कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"कॉन्फ़्रेंस कॉल प्रबंधित करें"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आपातकालीन नंबर"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

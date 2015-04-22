@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"Det gick inte att ringa. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> är inget nödnummer."</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Det gick inte att ringa. Slå ett nödnummer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Använd tangentbordet om du vill ringa"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Parkera samtal"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Återuppta samtal"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"Avsluta samtal"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Knappsats"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Ljud av"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Lägg till samtal"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Byt kamera"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pausa video"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"Fler alternativ"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"Inaktivera texttelefonläget om du vill uppgradera till videosamtal."</string>
     <string name="player_started" msgid="6046262510243983589">"Spelaren har startats"</string>
     <string name="player_stopped" msgid="8856926759436364963">"Spelaren har stoppats"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"Kameran är inte klar"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringsignal och vibrera"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Hantera konferenssamtal"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nödsamtalsnummer"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>

@@ -98,12 +98,9 @@
     <string name="dial_emergency_error" msgid="1509085166367420355">"မခေါ်ဆိုနိုင်ပါ။ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> က အရေးပေါ်နံပါတ် မဟုတ်ပါ။"</string>
     <string name="dial_emergency_empty_error" msgid="9130194953830414638">"မခေါ်ဆိုနိုင်ပါ။ အရေးပေါ်နံပါတ်အား ခေါ်ဆိုပါ။"</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"ကီးဘုတ်သုံး၍ခလုတ်နှိပ်ပါ"</string>
-    <!-- no translation found for onscreenHoldText_unselected (7092499303393171276) -->
-    <skip />
-    <!-- no translation found for onscreenHoldText_selected (7127901498507384249) -->
-    <skip />
-    <!-- no translation found for onscreenEndCallText (9039601192595655846) -->
-    <skip />
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"ခေါ်ဆိုမှု ဆိုင်းငံ့ရန်"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"ဆက်လက် ခေါ်ဆိုရန်"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"ခေါ်ဆိုမှု ပြီးစီးရန်"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"နံပါတ်ကွက်"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"အသံတိတ်"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"ဖုန်းခေါ်မှု ထပ်ထည့်ပါ"</string>
@@ -117,7 +114,6 @@
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"ကင်မရာကို ဖွင့်ရန်"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"ဗီဒီယို ဆိုင်းငံ့ရန်"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"နောက်ထပ် ရွေးစရာများ"</string>
-    <string name="video_call_not_allowed_if_tty_enabled" msgid="122020626761012211">"ဗီဒီယိုခေါ်ဆိုမှုများသို့ အဆင့်မြှင့်ရန် ကျေးဇူးပြု၍ TTY မုဒ်ကို ပိတ်ထားပါ။"</string>
     <string name="player_started" msgid="6046262510243983589">"Player စတင်ခဲ့သည်"</string>
     <string name="player_stopped" msgid="8856926759436364963">"Player ရပ်တန့်ခဲ့သည်"</string>
     <string name="camera_not_ready" msgid="4955261496193316240">"ကင်မရာအဆင်သင့် မဖြစ်သေးပါ"</string>
@@ -160,4 +156,7 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ဖုန်းမြည်သံ &amp; တုန်ခါသံ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ကွန်းဖရင့် ခေါ်ဆိုမှုကို ထိန်းချုပ်သည်"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"အရေးပေါ်နံပါတ်"</string>
+    <!-- no translation found for duration_seconds (59971978269163609) -->
+    <!-- no translation found for duration_minutes (1103289948818175408) -->
+    <!-- no translation found for duration_hours (7560637459014865969) -->
 </resources>
