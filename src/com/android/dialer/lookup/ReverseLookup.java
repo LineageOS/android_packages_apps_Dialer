@@ -20,6 +20,10 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.cyngn.CyngnChineseReverseLookup;
 import com.android.dialer.lookup.dastelefonbuch.TelefonbuchReverseLookup;
 import com.android.dialer.lookup.gebeld.GebeldReverseLookup;
+<<<<<<< HEAD
+import com.android.dialer.lookup.herold.HeroldReverseLookup;
+=======
+>>>>>>> 2bc745c5aeda3923cf26abc182a0a223154f508f
 import com.android.dialer.lookup.opencnam.OpenCnamReverseLookup;
 import com.android.dialer.lookup.whitepages.WhitePagesReverseLookup;
 import com.android.dialer.lookup.yellowpages.YellowPagesReverseLookup;
@@ -59,6 +63,11 @@ public abstract class ReverseLookup {
                 INSTANCE = new TelefonbuchReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_GEBELD)) {
                 INSTANCE = new GebeldReverseLookup(context);
+<<<<<<< HEAD
+            } else if (provider.equals(LookupSettings.RLP_HEROLD)) {
+                INSTANCE = new HeroldReverseLookup(context);
+=======
+>>>>>>> 2bc745c5aeda3923cf26abc182a0a223154f508f
             }
         }
 
@@ -89,6 +98,12 @@ public abstract class ReverseLookup {
         } else if (provider.equals(LookupSettings.RLP_GEBELD)
                 && INSTANCE instanceof GebeldReverseLookup) {
             return true;
+<<<<<<< HEAD
+        } else if (provider.equals(LookupSettings.RLP_HEROLD)
+                && INSTANCE instanceof HeroldReverseLookup) {
+            return true;
+=======
+>>>>>>> 2bc745c5aeda3923cf26abc182a0a223154f508f
         } else {
             return false;
         }
