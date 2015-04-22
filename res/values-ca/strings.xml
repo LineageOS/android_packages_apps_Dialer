@@ -150,25 +150,20 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca la imatge per veure tots els números i toca-la i mantén-la premuda per reordenar-los."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Suprimeix"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOTS ELS CONTACTES"</string>
-    <!-- no translation found for call_log_action_video_call (7724301709041128296) -->
-    <skip />
+    <string name="call_log_action_video_call" msgid="7724301709041128296">"Videotrucada"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ESCOLTA"</string>
-    <!-- no translation found for call_log_action_details (7957138590190911171) -->
-    <skip />
+    <string name="call_log_action_details" msgid="7957138590190911171">"Mostra els detalls"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Trucada perduda de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Trucada resposta de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Trucada a <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"a <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <!-- no translation found for description_call_log_call_action (3682561657090693134) -->
-    <skip />
-    <!-- no translation found for description_call_action (4000549004089776147) -->
-    <skip />
+    <string name="description_call_log_call_action" msgid="3682561657090693134">"Truca"</string>
+    <string name="description_call_action" msgid="4000549004089776147">"Truca a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"Videotrucada a: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Escolta el missatge a la bústia de veu de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalls de la trucada de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"S\'ha suprimit de l\'historial de trucades."</string>
-    <!-- no translation found for call_log_action_report (4327809827087468864) -->
-    <skip />
+    <string name="call_log_action_report" msgid="4327809827087468864">"Informa"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Avui"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ahir"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Més antiga"</string>
