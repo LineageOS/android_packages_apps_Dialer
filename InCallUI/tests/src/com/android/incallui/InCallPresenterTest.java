@@ -124,11 +124,11 @@ public class InCallPresenterTest extends InstrumentationTestCase {
     }
 
     /**
-     * Verifies that if there is a call in the PRE_DIAL_WAIT state, InCallActivity is displayed
+     * Verifies that if there is a call in the SELECT_PHONE_ACCOUNT state, InCallActivity is displayed
      * to display the account picker.
      */
     public void testOnCallListChange_noAccountProvidedForCallShowsUiForAccountPicker() {
-        mCallList.setHasCall(Call.State.PRE_DIAL_WAIT, true);
+        mCallList.setHasCall(Call.State.SELECT_PHONE_ACCOUNT, true);
         mInCallPresenter.onCallListChange(mCallList.getCallList());
 
         verify(mContext).startActivity(InCallPresenter.getInstance().getInCallIntent(false, false));

@@ -55,7 +55,7 @@ public class Call {
         public static final int DISCONNECTING = 9;  /* A call is being ended. */
         public static final int DISCONNECTED = 10;  /* State after a call disconnects */
         public static final int CONFERENCED = 11;   /* Call part of a conference call */
-        public static final int PRE_DIAL_WAIT = 12; /* Waiting for user before outgoing call */
+        public static final int SELECT_PHONE_ACCOUNT = 12; /* Waiting for account selection */
         public static final int CONNECTING = 13;    /* Waiting for Telecomm broadcast to finish */
 
 
@@ -105,8 +105,8 @@ public class Call {
                     return "DISCONNECTED";
                 case CONFERENCED:
                     return "CONFERENCED";
-                case PRE_DIAL_WAIT:
-                    return "PRE_DIAL_WAIT";
+                case SELECT_PHONE_ACCOUNT:
+                    return "SELECT_PHONE_ACCOUNT";
                 case CONNECTING:
                     return "CONNECTING";
                 default:
@@ -321,8 +321,8 @@ public class Call {
                 return Call.State.NEW;
             case android.telecom.Call.STATE_CONNECTING:
                 return Call.State.CONNECTING;
-            case android.telecom.Call.STATE_PRE_DIAL_WAIT:
-                return Call.State.PRE_DIAL_WAIT;
+            case android.telecom.Call.STATE_SELECT_PHONE_ACCOUNT:
+                return Call.State.SELECT_PHONE_ACCOUNT;
             case android.telecom.Call.STATE_DIALING:
                 return Call.State.DIALING;
             case android.telecom.Call.STATE_RINGING:

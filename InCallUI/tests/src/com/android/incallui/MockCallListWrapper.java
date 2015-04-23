@@ -66,7 +66,7 @@ public class MockCallListWrapper {
     }
 
     private static Call getMockCall(int state) {
-        return getMockCall(state, state != Call.State.PRE_DIAL_WAIT);
+        return getMockCall(state, state != Call.State.SELECT_PHONE_ACCOUNT);
     }
 
     private static Call getMockCall(int state, boolean hasAccountHandle) {

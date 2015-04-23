@@ -62,7 +62,7 @@ public class CallUtils {
         }
         final int state = call.getState();
         return Call.State.isDialing(state) || state == Call.State.CONNECTING
-                || state == Call.State.PRE_DIAL_WAIT;
+                || state == Call.State.SELECT_PHONE_ACCOUNT;
     }
 
     public static boolean isAudioCall(Call call) {
