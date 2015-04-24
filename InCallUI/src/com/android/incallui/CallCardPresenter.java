@@ -256,7 +256,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     null,
                     null,
                     null,
-                    false /* isWifi */);
+                    false /* isWifi */,
+                    false /* isConference */);
             getUi().showHdAudioIndicator(false);
         }
 
@@ -303,7 +304,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getConnectionLabel(),
                     getCallStateIcon(),
                     getGatewayNumber(),
-                    primaryCallCan(Details.CAPABILITY_WIFI));
+                    primaryCallCan(Details.CAPABILITY_WIFI),
+                    mPrimary.isConferenceCall());
 
             boolean showHdAudioIndicator =
                     isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_HIGH_DEF_AUDIO);
@@ -780,7 +782,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 String providerLabel, boolean isConference, boolean isVideoCall);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
-                Drawable connectionIcon, String gatewayNumber, boolean isWifi);
+                Drawable connectionIcon, String gatewayNumber, boolean isWifi,
+                boolean isConference);
         void setPrimaryCallElapsedTime(boolean show, long duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image);
