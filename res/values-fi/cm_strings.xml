@@ -27,7 +27,7 @@
   <string name="enable_reverse_lookup_title">Käänteinen haku</string>
   <string name="enable_reverse_lookup_summary">Etsi tuntemattomasta numerosta soittavan henkilön tietoja tulevissa puheluissa</string>
   <string name="forward_lookup_provider_title">Paikkahauntarjoaja</string>
-  <string name="people_lookup_provider_title">Ihmisen haun tarjoaja</string>
+  <string name="people_lookup_provider_title">Henkilön haun tarjoaja</string>
   <string name="reverse_lookup_provider_title">Käänteisen haun tarjoaja</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <string name="preference_category_t9_dialpad_search">Numeronäppäimistön T9-haku</string>
