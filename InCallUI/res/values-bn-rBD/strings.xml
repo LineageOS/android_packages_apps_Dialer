@@ -156,7 +156,16 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"রিংটোন ও কম্পন"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"কনফারেন্স কল পরিচালনা করুন"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"জরুরি নম্বর"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> সেকেন্ড</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> সেকেন্ড</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> মিনিট</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> মিনিট</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ঘন্টা</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ঘন্টা</item>
+    </plurals>
 </resources>

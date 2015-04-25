@@ -156,7 +156,16 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"សំឡេង​រោទ៍ &amp; ញ័រ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"គ្រប់គ្រង​ការ​ហៅ​​ជា​សន្និសីទ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"លេខ​ពេល​អាសន្ន"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> វិនាទី</item>
+      <item quantity="one">1 វិនាទី</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> នាទី</item>
+      <item quantity="one">1 នាទី</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ម៉ោង</item>
+      <item quantity="one">1 ម៉ោង</item>
+    </plurals>
 </resources>

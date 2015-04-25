@@ -156,7 +156,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Dzwonek i wibracje"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Zarządzaj połączeniem konferencyjnym"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Numer alarmowy"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> sekundy</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> sekund</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sekundy</item>
+      <item quantity="one">1 sekunda</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> minuty</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> minut</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minuty</item>
+      <item quantity="one">1 minuta</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> godziny</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> godzin</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> godziny</item>
+      <item quantity="one">1 godzina</item>
+    </plurals>
 </resources>

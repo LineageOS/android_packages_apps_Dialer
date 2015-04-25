@@ -156,7 +156,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Zvonjenje in vibriranje"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Upravljanje konferenčnih klicev"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Številka za klic v sili"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> sekunda</item>
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> sekundi</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> sekunde</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sekund</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> minuta</item>
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> minuti</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> minute</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minut</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ura</item>
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> uri</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> ure</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ur</item>
+    </plurals>
 </resources>

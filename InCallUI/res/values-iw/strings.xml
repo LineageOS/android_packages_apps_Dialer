@@ -156,7 +156,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"רינגטון ורטט"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"נהל שיחת ועידה"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"מספר חירום"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> שניות</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> שניות</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> שניות</item>
+      <item quantity="one">שנייה אחת</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> דקות</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> דקות</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> דקות</item>
+      <item quantity="one">דקה אחת</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> שעות</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> שעות</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> שעות</item>
+      <item quantity="one">שעה אחת</item>
+    </plurals>
 </resources>

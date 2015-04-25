@@ -100,7 +100,7 @@
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Gunakan keyboard untuk memanggil"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Tahan Panggilan"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Lanjutkan Panggilan"</string>
-    <string name="onscreenEndCallText" msgid="9039601192595655846">"Akhiri Telepon"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"Akhiri Panggilan"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Dialpad"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Bisukan"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Tambahkan panggilan"</string>
@@ -156,7 +156,16 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Nada dering &amp; Getar"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Kelola penggilan telewicara"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nomor darurat"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> detik</item>
+      <item quantity="one">1 detik</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> menit</item>
+      <item quantity="one">1 menit</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> jam</item>
+      <item quantity="one">1 jam</item>
+    </plurals>
 </resources>

@@ -156,7 +156,28 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"نغمة الرنين والاهتزاز"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"إدارة مكالمة جماعية"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"رقم الطوارئ"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="zero">أقل من ثانية (<xliff:g id="COUNT">%d</xliff:g>)</item>
+      <item quantity="two">ثانيتان (<xliff:g id="COUNT">%d</xliff:g>)</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> ثوانٍ</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> ثانية</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> من الثواني</item>
+      <item quantity="one">ثانية واحدة</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="zero">أقل من دقيقة (<xliff:g id="COUNT">%d</xliff:g>)</item>
+      <item quantity="two">دقيقتان (<xliff:g id="COUNT">%d</xliff:g>)</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> دقائق</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> دقيقة</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> من الدقائق</item>
+      <item quantity="one">دقيقة واحدة</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="zero">أقل من ساعة (<xliff:g id="COUNT">%d</xliff:g>)</item>
+      <item quantity="two">ساعتان (<xliff:g id="COUNT">%d</xliff:g>)</item>
+      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> ساعات</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> ساعة</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> من الساعات</item>
+      <item quantity="one">ساعة واحدة</item>
+    </plurals>
 </resources>

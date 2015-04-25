@@ -156,7 +156,16 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Zil Sesi ve Titreşim"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Konferans görüşmesini yönet"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Acil durum numarası"</string>
-    <!-- no translation found for duration_seconds (59971978269163609) -->
-    <!-- no translation found for duration_minutes (1103289948818175408) -->
-    <!-- no translation found for duration_hours (7560637459014865969) -->
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> saniye</item>
+      <item quantity="one">1 saniye</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> dakika</item>
+      <item quantity="one">1 dakika</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> saat</item>
+      <item quantity="one">1 saat</item>
+    </plurals>
 </resources>
