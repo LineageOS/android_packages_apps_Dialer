@@ -22,6 +22,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.DirectoryPartition;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
@@ -30,6 +31,7 @@ import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
  * List adapter to display regular search results.
  */
 public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
+    private boolean mIsQuerySipAddress;
 
     public RegularSearchListAdapter(Context context) {
         super(context);
@@ -67,10 +69,21 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
     }
 
     @Override
+    public String getFormattedQueryString() {
+        if (mIsQuerySipAddress) {
+            // Return unnormalized SIP address
+            return getQueryString();
+        }
+        return super.getFormattedQueryString();
+    }
+
+    @Override
     public void setQueryString(String queryString) {
         final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
+        mIsQuerySipAddress = PhoneNumberHelper.isUriNumber(queryString);
         boolean changed = false;
-        changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL,
+                showNumberShortcuts || mIsQuerySipAddress);
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
