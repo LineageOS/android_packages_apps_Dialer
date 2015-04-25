@@ -158,7 +158,7 @@
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിലേക്കുള്ള കോൾ."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> എന്നതിൽ"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"വിളിക്കുക"</string>
-    <string name="description_call_action" msgid="4000549004089776147">"വിളിക്കുക, <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> വിളിക്കുക"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാൾക്കുള്ള വീഡിയോ കോൾ."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളിൽ നിന്നുള്ള വോയ്‌സ്മെയിൽ കേൾക്കുക"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളുടെ കോൾ വിശദാംശങ്ങൾ"</string>
