@@ -126,8 +126,14 @@
     <string name="stop_call_playback">Stop</string>
     <string name="call_playback_error_message">Failed to play recording</string>
 
-    <!-- Smart Call -->
+    <!-- Smart Settings -->
+    <string name="smart_settings_title">Smart Settings</string>
     <string name="smart_dialer_title">Smart call</string>
     <string name="smart_dialer_summary">Automatically call the contact by moving your device to your ear</string>
+    <string name="smart_speaker_title">Smart speaker</string>
+    <string name="smart_speaker_summary">Automatically turn on speaker by moving your device away from your ear</string>
+    <string name="smart_speaker_incall_only_title">Only while in call</string>
+    <string name="smart_speaker_incall_only_summary_on">On outgoing calls, listener will only become active after the receiving party answers</string>
+    <string name="smart_speaker_incall_only_summary_off">Listener will be active during all offhook call states (default)</string>
 
 </resources>
