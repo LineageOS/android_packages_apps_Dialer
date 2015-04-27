@@ -16,7 +16,8 @@
   ~ limitations under the License
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cm="http://www.cyanogenmod.org">
 
     <PreferenceCategory
         android:key="dialer_contact_display_options_category_key"
@@ -98,9 +99,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="dialer_general_smart_settings_category_key"
-        android:title="@string/smart_settings_title"
-        android:persistent="false" >
+        android:key="dialer_general_smart_category_key"
+        android:title="@string/smart_category_title"
+        android:persistent="false">
+<<<<<<< HEAD
+=======
 
         <SwitchPreference
             android:key="button_smart_dialer"
@@ -109,18 +112,57 @@
             android:defaultValue="false" />
 
         <SwitchPreference
-            android:key="smart_speaker"
-            android:title="@string/smart_speaker_title"
-            android:summary="@string/smart_speaker_summary"
+            android:key="button_smart_mute"
+            android:title="@string/smart_mute_title"
+            android:summary="@string/smart_mute_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="dialer_general_other_settings_category_key"
+        android:title="@string/other_settings_title"
+        android:persistent="false" >
+>>>>>>> dd97d5b... [2/2] Dialer: SmartMute
+
+        <SwitchPreference
+            android:key="button_smart_dialer"
+            android:title="@string/smart_dialer_title"
+            android:summary="@string/smart_dialer_summary"
             android:defaultValue="false" />
 
         <SwitchPreference
-            android:key="smart_speaker_incall_only"
+            android:key="button_smart_mute"
+            android:title="@string/smart_mute_title"
+            android:summary="@string/smart_mute_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="dialer_general_smart_category_key"
+        android:title="@string/smart_category_title"
+        android:persistent="false">
+
+        <SwitchPreference
+            android:key="button_smart_dialer"
+            android:title="@string/smart_dialer_title"
+            android:summary="@string/smart_dialer_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="smart_speaker"
+            android:summary="@string/smart_speaker_summary"
+            android:title="@string/smart_speaker_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
             android:dependency="smart_speaker"
-            android:title="@string/smart_speaker_incall_only_title"
+            android:key="smart_speaker_incall_only"
             android:summaryOn="@string/smart_speaker_incall_only_summary_on"
             android:summaryOff="@string/smart_speaker_incall_only_summary_off"
-            android:defaultValue="false" />
+            android:title="@string/smart_speaker_incall_only_title" />
 
     </PreferenceCategory>
 
