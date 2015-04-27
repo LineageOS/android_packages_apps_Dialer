@@ -126,8 +126,8 @@
     <string name="stop_call_playback">Stop</string>
     <string name="call_playback_error_message">Failed to play recording</string>
 
-    <!-- Smart Settings -->
-    <string name="smart_settings_title">Smart Settings</string>
+    <!-- Smart options -->
+    <string name="smart_options_title">Smart options</string>
     <string name="smart_dialer_title">Smart call</string>
     <string name="smart_dialer_summary">Automatically call the contact by moving your device to your ear</string>
     <string name="smart_speaker_title">Smart speaker</string>
