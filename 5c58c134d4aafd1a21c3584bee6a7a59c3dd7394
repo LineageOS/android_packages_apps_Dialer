@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da7fb54a_19b6968a",
+        "filename": "res/xml/general_settings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 848
+      },
+      "writtenOn": "2015-04-28T07:23:28Z",
+      "side": 1,
+      "message": "Why are you re-ordering the default values?",
+      "revId": "5c58c134d4aafd1a21c3584bee6a7a59c3dd7394",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
