@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da7fb54a_afef18af",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2015-04-29T04:35:43Z",
+      "side": 1,
+      "message": "Not needed, this has to be edited in the change where it\u0027s created since it hasn\u0027t been merged (yet)",
+      "revId": "64b94f540e10b5a9b8218403cf34158031ae47b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da7fb54a_8ff25499",
+        "filename": "res/xml/general_settings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2015-04-29T04:35:43Z",
+      "side": 1,
+      "message": "Not needed",
+      "revId": "64b94f540e10b5a9b8218403cf34158031ae47b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
