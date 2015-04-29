@@ -429,10 +429,6 @@
          [CHAR LIMIT=30] -->
     <string name="vibrate_on_ring_title">Vibrate when ringing</string>
 
-    <!--  Setting option name to enable or disable dialpad autocomplete functionality
-         [CHAR LIMIT=30] -->
-    <string name="dial_pad_autocomplete">Dialpad autocomplete</string>
-
     <!-- Title for the category "ringtone", which is shown above ringtone and vibration
          related settings.
          [CHAR LIMIT=30] -->
