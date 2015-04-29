@@ -16,14 +16,10 @@
 
 package com.android.incallui;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.telecom.VideoProfile;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -34,7 +30,6 @@ import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.common.base.Objects;
 
@@ -63,12 +58,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * Used to indicate that the UI rotation is unknown.
      */
     public static final int ORIENTATION_UNKNOWN = -1;
-
-    /**
-     * Invalid resource id.
-     */
-    public static final int INVALID_RESOURCE_ID = -1;
-
 
     // Static storage used to retain the video surfaces across Activity restart.
     // TextureViews are not parcelable, so it is not possible to store them in the saved state.
