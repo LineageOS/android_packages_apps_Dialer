@@ -141,6 +141,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         final InCallActivity activity = InCallPresenter.getInstance().getActivity();
         if (activity != null) {
             activity.showAnswerFragment(show);
+            if (getUi() != null) {
+                getUi().onShowAnswerUi(show);
+            }
             return true;
         } else {
             return false;
