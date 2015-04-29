@@ -308,7 +308,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      * Returns the main string to use in the notification.
      */
     private String getContentTitle(ContactCacheEntry contactInfo, Call call) {
-        if (call.isConferenceCall() && !call.can(Details.CAPABILITY_GENERIC_CONFERENCE)) {
+        if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
         if (TextUtils.isEmpty(contactInfo.name)) {
@@ -335,7 +335,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      */
     private Bitmap getLargeIconToDisplay(ContactCacheEntry contactInfo, Call call) {
         Bitmap largeIcon = null;
-        if (call.isConferenceCall() && !call.can(Details.CAPABILITY_GENERIC_CONFERENCE)) {
+        if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
             largeIcon = BitmapFactory.decodeResource(mContext.getResources(),
                     R.drawable.img_conference);
         }
@@ -379,12 +379,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
      */
     private int getContentString(Call call) {
         int resId = R.string.notification_ongoing_call;
-        if (call.can(Details.CAPABILITY_WIFI)) {
+        if (call.hasProperty(Details.PROPERTY_WIFI)) {
             resId = R.string.notification_ongoing_call_wifi;
         }
 
         if (call.getState() == Call.State.INCOMING || call.getState() == Call.State.CALL_WAITING) {
-            if (call.can(Details.CAPABILITY_WIFI)) {
+            if (call.hasProperty(Details.PROPERTY_WIFI)) {
                 resId = R.string.notification_incoming_call_wifi;
             } else {
                 resId = R.string.notification_incoming_call;
