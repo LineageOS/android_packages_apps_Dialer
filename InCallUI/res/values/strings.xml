@@ -114,8 +114,8 @@
     <string name="card_title_video_call_requesting">Requesting video</string>
     <!-- In-call screen: status label when there is a problem connecting a video call. -->
     <string name="card_title_video_call_error">Can\'t connect video call</string>
-    <!-- In-call screen: status label when in a paused video call. -->
-    <string name="card_title_video_call_paused">Video call (Paused)</string>
+    <!-- In-call screen: status label when the remote party rejects a video call request. -->
+    <string name="card_title_video_call_rejected">Video request rejected</string>
 
     <!-- In-call screen: string shown to the user when their outgoing number is different than the
          number reported by TelephonyManager#getLine1Number() -->

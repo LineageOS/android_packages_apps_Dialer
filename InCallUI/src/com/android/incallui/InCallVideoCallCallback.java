@@ -80,6 +80,19 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         Log.d(this, "onSessionModifyResponseReceived status=" + status + " requestedProfile="
                 + requestedProfile + " responseProfile=" + responseProfile);
         if (status != VideoProvider.SESSION_MODIFY_REQUEST_SUCCESS) {
+            // Report the reason the upgrade failed as the new session modification state.
+            if (status == VideoProvider.SESSION_MODIFY_REQUEST_TIMED_OUT) {
+                mCall.setSessionModificationState(
+                        Call.SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT);
+            } else {
+                if (status == VideoProvider.SESSION_MODIFY_REQUEST_REJECTED_BY_REMOTE) {
+                    mCall.setSessionModificationState(
+                            Call.SessionModificationState.REQUEST_REJECTED);
+                } else {
+                    mCall.setSessionModificationState(
+                            Call.SessionModificationState.REQUEST_FAILED);
+                }
+            }
             InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoFail(status, mCall);
         } else if (requestedProfile != null && responseProfile != null) {
             boolean modifySucceeded = requestedProfile.getVideoState() ==
@@ -95,6 +108,8 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         } else {
             Log.d(this, "onSessionModifyResponseReceived request and response Profiles are null");
         }
+        // Finally clear the outstanding request.
+        mCall.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
     }
 
     /**

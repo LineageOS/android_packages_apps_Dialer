@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 
 import java.util.List;
@@ -101,6 +100,18 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
+    @Override
+    public void onSessionModificationStateChange(int sessionModificationState) {
+        boolean isUpgradePending = sessionModificationState ==
+                Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+
+        if (!isUpgradePending) {
+            // Stop listening for updates.
+            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            getUi().showAnswerUi(false);
+        }
+    }
+
     private boolean isVideoUpgradePending(Call call) {
         return call.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
@@ -162,26 +173,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             return;
         }
         ui.showAnswerUi(true);
-        ui.showTargets(getUiTarget(currentVideoState, modifyToVideoState));
+        ui.showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_ACCEPT_REJECT_REQUEST,
+                modifyToVideoState);
 
-    }
-
-    private int getUiTarget(int currentVideoState, int modifyToVideoState) {
-        if (showVideoUpgradeOptions(currentVideoState, modifyToVideoState)) {
-            return AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST;
-        } else if (isEnabled(modifyToVideoState, VideoProfile.VideoState.BIDIRECTIONAL)) {
-            return AnswerFragment.TARGET_SET_FOR_BIDIRECTIONAL_VIDEO_ACCEPT_REJECT_REQUEST;
-        }  else if (isEnabled(modifyToVideoState, VideoProfile.VideoState.TX_ENABLED)) {
-            return AnswerFragment.TARGET_SET_FOR_VIDEO_TRANSMIT_ACCEPT_REJECT_REQUEST;
-        }  else if (isEnabled(modifyToVideoState, VideoProfile.VideoState.RX_ENABLED)) {
-            return AnswerFragment.TARGET_SET_FOR_VIDEO_RECEIVE_ACCEPT_REJECT_REQUEST;
-        }
-        return AnswerFragment.TARGET_SET_FOR_VIDEO_UPGRADE_REQUEST;
-    }
-
-    private boolean showVideoUpgradeOptions(int currentVideoState, int modifyToVideoState) {
-        return currentVideoState == VideoProfile.VideoState.AUDIO_ONLY &&
-            isEnabled(modifyToVideoState, VideoProfile.VideoState.BIDIRECTIONAL);
     }
 
     private boolean isEnabled(int videoState, int mask) {
@@ -215,15 +209,16 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     public void onAnswer(int videoState, Context context) {
-        Log.d(this, "onAnswer mCallId=" + mCallId + " videoState=" + videoState);
         if (mCallId == null) {
             return;
         }
 
         if (mCall.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            Log.d(this, "onAnswer (upgradeCall) mCallId=" + mCallId + " videoState=" + videoState);
             InCallPresenter.getInstance().acceptUpgradeRequest(videoState, context);
         } else {
+            Log.d(this, "onAnswer (answerCall) mCallId=" + mCallId + " videoState=" + videoState);
             TelecomAdapter.getInstance().answerCall(mCall.getId(), videoState);
         }
     }
@@ -288,6 +283,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     interface AnswerUi extends Ui {
         public void showAnswerUi(boolean show);
         public void showTargets(int targetSet);
+        public void showTargets(int targetSet, int videoState);
         public void showMessageDialog();
         public void configureMessageDialog(List<String> textResponses);
         public Context getContext();
