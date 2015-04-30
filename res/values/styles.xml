@@ -103,7 +103,7 @@
     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
-
+        <item name="android:fastScrollTrackDrawable">@null</item>
     </style>
     <!-- A theme for inflation of spinners in the dialtacts action bar -->
     <style name="DialtactsSpinnerTheme" parent="DialtactsTheme">
@@ -154,6 +154,7 @@
         <item name="android:height">@dimen/action_bar_height_large</item>
         <!-- Override ActionBar title offset to keep search box aligned left -->
         <item name="android:contentInsetStart">0px</item>
+        <item name="android:contentInsetEnd">0px</item>
     </style>
 
     <!-- Text in the action bar at the top of the screen -->

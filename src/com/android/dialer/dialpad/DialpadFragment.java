@@ -94,6 +94,7 @@ import com.android.phone.common.dialpad.DialpadView;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
+import java.util.Locale;
 
 import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 
@@ -395,6 +396,13 @@ public class DialpadFragment extends AnalyticsFragment
             mDelete.setOnLongClickListener(this);
         }
 
+        // Populate the overflow menu in onCreate instead of onResume to avoid PopupMenu's memory leak.
+        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
+        mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
+        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
+        mOverflowMenuButton.setOnClickListener(this);
+        mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+
         mSpacer = fragmentView.findViewById(R.id.spacer);
         mSpacer.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -611,6 +619,28 @@ public class DialpadFragment extends AnalyticsFragment
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // if the mToneGenerator creation fails, just continue without it.  It is
+        // a local audio signal, and is not as important as the dtmf tone itself.
+        final long start = System.currentTimeMillis();
+        synchronized (mToneGeneratorLock) {
+            if (mToneGenerator == null) {
+                try {
+                    mToneGenerator = new ToneGenerator(DIAL_TONE_STREAM_TYPE, TONE_RELATIVE_VOLUME);
+                } catch (RuntimeException e) {
+                    Log.w(TAG, "Exception caught while creating local tone generator: " + e);
+                    mToneGenerator = null;
+                }
+            }
+        }
+        final long total = System.currentTimeMillis() - start;
+        if (total > 50) {
+            Log.i(TAG, "Time for ToneGenerator creation: " + total);
+        }
+    };
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -637,20 +667,6 @@ public class DialpadFragment extends AnalyticsFragment
         mHaptic.checkSystemSetting();
 
         stopWatch.lap("hptc");
-
-        // if the mToneGenerator creation fails, just continue without it.  It is
-        // a local audio signal, and is not as important as the dtmf tone itself.
-        synchronized (mToneGeneratorLock) {
-            if (mToneGenerator == null) {
-                try {
-                    mToneGenerator = new ToneGenerator(DIAL_TONE_STREAM_TYPE, TONE_RELATIVE_VOLUME);
-                } catch (RuntimeException e) {
-                    Log.w(TAG, "Exception caught while creating local tone generator: " + e);
-                    mToneGenerator = null;
-                }
-            }
-        }
-        stopWatch.lap("tg");
 
         mPressedDialpadKeys.clear();
 
@@ -700,15 +716,6 @@ public class DialpadFragment extends AnalyticsFragment
 
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
-        // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
-        // is disabled while Dialer is paused, the "Send a text message" option can be correctly
-        // removed when resumed.
-        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
-        mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
-        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
-        mOverflowMenuButton.setOnClickListener(this);
-        mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
-
         if (getTelephonyManager().isMultiSimEnabled() &&
                 MoreContactUtils.shouldShowOperator(mContext)) {
             if (SubscriptionManager.isVoicePromptEnabled()) {
@@ -735,12 +742,6 @@ public class DialpadFragment extends AnalyticsFragment
         stopTone();
         mPressedDialpadKeys.clear();
 
-        synchronized (mToneGeneratorLock) {
-            if (mToneGenerator != null) {
-                mToneGenerator.release();
-                mToneGenerator = null;
-            }
-        }
         // TODO: I wonder if we should not check if the AsyncTask that
         // lookup the last dialed number has completed.
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
@@ -751,6 +752,13 @@ public class DialpadFragment extends AnalyticsFragment
     @Override
     public void onStop() {
         super.onStop();
+
+        synchronized (mToneGeneratorLock) {
+            if (mToneGenerator != null) {
+                mToneGenerator.release();
+                mToneGenerator = null;
+            }
+        }
 
         if (mClearDigitsOnStop) {
             mClearDigitsOnStop = false;
@@ -913,6 +921,7 @@ public class DialpadFragment extends AnalyticsFragment
      * @param invoker the View that invoked the options menu, to act as an anchor location.
      */
     private PopupMenu buildOptionsMenu(View invoker) {
+        invoker.setLayoutDirection(TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()));
         final PopupMenu popupMenu = new PopupMenu(getActivity(), invoker) {
             @Override
             public void show() {
@@ -1335,7 +1344,7 @@ public class DialpadFragment extends AnalyticsFragment
                         // must be dial conference add extra
                         intent.putExtra(TelephonyProperties.EXTRA_DIAL_CONFERENCE_URI, true);
                     }
-                    intent.putExtra(ADD_PARTICIPANT_KEY, mAddParticipant);
+                    intent.putExtra(ADD_PARTICIPANT_KEY, (mAddParticipant && isPhoneInUse()));
                     DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                     hideAndClearDialpad(false);
                 }
@@ -2047,12 +2056,14 @@ public class DialpadFragment extends AnalyticsFragment
         PhoneStateListener phoneStateListener = new PhoneStateListener(subId[0]) {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
-                if ((state == TelephonyManager.CALL_STATE_IDLE)
+                if ((getActivity() != null) &&
+                        (getTelephonyManager().getCallState() == TelephonyManager.CALL_STATE_IDLE)
                         && isDialpadChooserVisible()) {
                     showDialpadChooser(false);
                 }
-                if (state == TelephonyManager.CALL_STATE_IDLE
-                        && getActivity() != null) {
+                if ((getActivity() != null)
+                        && (getTelephonyManager().getCallState()
+                                == TelephonyManager.CALL_STATE_IDLE)) {
                     ((HostInterface) getActivity()).setConferenceDialButtonVisibility(true);
                 }
             }

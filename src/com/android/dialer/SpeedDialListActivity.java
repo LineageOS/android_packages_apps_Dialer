@@ -62,6 +62,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.view.Gravity;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
@@ -306,7 +307,7 @@ public class SpeedDialListActivity extends ListActivity implements
             if (record == null) {
                 showAddSpeedDialDialog(number);
             } else {
-                PopupMenu pm = new PopupMenu(this, view);
+                PopupMenu pm = new PopupMenu(this, view, Gravity.START);
                 pm.getMenu().add(number, MENU_REPLACE, 0, R.string.speed_dial_replace);
                 pm.getMenu().add(number, MENU_DELETE, 0, R.string.speed_dial_delete);
                 pm.setOnMenuItemClickListener(this);

@@ -21,6 +21,7 @@ import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.VelocityTrackerCompat;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -1176,7 +1177,12 @@ public class ViewDragHelper {
 
             case MotionEvent.ACTION_MOVE: {
                 if (mDragState == STATE_DRAGGING) {
-                    final int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
+                    int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
+                    if (index < 0) {
+                        Log.e(TAG, "Pointer index for id " + mActivePointerId + " not found."
+                                + " Skipping MotionEvent");
+                        return;
+                    }
                     final float x = MotionEventCompat.getX(ev, index);
                     final float y = MotionEventCompat.getY(ev, index);
                     final int idx = (int) (x - mLastMotionX[mActivePointerId]);
@@ -1548,6 +1554,12 @@ public class ViewDragHelper {
      *         deltas that it consumed.
      */
     public void processNestedScroll(View target, int dx, int dy, int[] consumed) {
+        if (mCapturedView == null) {
+            // This is safe because consumed array is null when called from
+            // onNestedScroll, and pre-initialized to {0, 0} when called from
+            // onNestedPreScroll.
+            return;
+        }
         final int targetX = mCapturedView.getLeft() + dx;
         final int targetY = mCapturedView.getTop() + dy;
         dragTo(targetX, targetY, dx, dy);

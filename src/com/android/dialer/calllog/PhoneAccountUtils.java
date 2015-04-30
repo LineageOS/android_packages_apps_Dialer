@@ -63,6 +63,14 @@ public class PhoneAccountUtils {
     }
 
     /**
+     * Extract account color from PhoneAccount object.
+     */
+    public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
+        PhoneAccount account = getAccountOrNull(context, accountHandle);
+        return account == null ? PhoneAccount.NO_HIGHLIGHT_COLOR : account.getHighlightColor();
+    }
+
+    /**
      * Retrieve the account metadata, but if the account does not exist or the device has only a
      * single registered and enabled account, return null.
      */

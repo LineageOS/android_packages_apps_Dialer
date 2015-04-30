@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -50,6 +51,7 @@ public class PhoneCallDetailsHelper {
     /** The maximum number of icons will be shown to represent the call types in a group. */
     private static final int MAX_CALL_TYPE_ICONS = 3;
 
+    private final Context mContext;
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
@@ -69,8 +71,9 @@ public class PhoneCallDetailsHelper {
      *
      * @param resources used to look up strings
      */
-    public PhoneCallDetailsHelper(Resources resources, CallTypeHelper callTypeHelper,
+    public PhoneCallDetailsHelper(Context context, Resources resources,
             PhoneNumberUtilsWrapper phoneUtils) {
+        mContext = context;
         mResources = resources;
         mPhoneNumberUtilsWrapper = phoneUtils;
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(mPhoneNumberUtilsWrapper, resources);
@@ -128,6 +131,24 @@ public class PhoneCallDetailsHelper {
         } else {
             views.callAccountIcon.setVisibility(View.GONE);
         }
+
+        /*
+        // Set the account label if it exists.
+        String accountLabel = details.accountLabel;
+        if (accountLabel != null) {
+            views.callAccountLabel.setVisibility(View.VISIBLE);
+            views.callAccountLabel.setText(accountLabel);
+            int color = PhoneAccountUtils.getAccountColor(mContext, details.accountHandle);
+            if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
+                int defaultColor = R.color.dialtacts_secondary_text_color;
+                views.callAccountLabel.setTextColor(mContext.getResources().getColor(defaultColor));
+            } else {
+                views.callAccountLabel.setTextColor(color);
+            }
+        } else {
+            views.callAccountLabel.setVisibility(View.GONE);
+        }
+        */
 
         CharSequence nameText;
         CharSequence displayNumber =

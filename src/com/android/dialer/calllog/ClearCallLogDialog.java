@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -57,6 +58,7 @@ public class ClearCallLogDialog extends DialogFragment {
                 final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
                         getString(R.string.clearCallLogProgress_title),
                         "", true, false);
+                progressDialog.setOwnerActivity(getActivity());
                 final AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
@@ -69,7 +71,15 @@ public class ClearCallLogDialog extends DialogFragment {
                     }
                     @Override
                     protected void onPostExecute(Void result) {
-                        progressDialog.dismiss();
+                        final Activity activity = progressDialog.getOwnerActivity();
+
+                        if (activity == null || activity.isDestroyed() || activity.isFinishing()) {
+                            return;
+                        }
+
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
                     }
                 };
                 // TODO: Once we have the API, we should configure this ProgressDialog

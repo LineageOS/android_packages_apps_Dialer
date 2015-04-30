@@ -230,7 +230,6 @@ public class OverlappingPaneLayout extends ViewGroup {
         setWillNotDraw(false);
 
         ViewCompat.setAccessibilityDelegate(this, new AccessibilityDelegate());
-        ViewCompat.setImportantForAccessibility(this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         mDragHelper = ViewDragHelper.create(this, 0.5f, new DragHelperCallback());
         mDragHelper.setMinVelocity(MIN_FLING_VELOCITY * density);
@@ -716,6 +715,22 @@ public class OverlappingPaneLayout extends ViewGroup {
         }
 
         return wantTouchEvents;
+    }
+
+    /**
+     * Refreshes the {@link OverlappingPaneLayout} be attempting to re-open or re-close the pane.
+     * This ensures that the overlapping pane is repositioned based on any changes to the view
+     * which is being overlapped.
+     * <p>
+     * The {@link #openPane()} and {@link #closePane()} methods do not perform any animation if the
+     * pane has already been positioned appropriately.
+     */
+    public void refresh() {
+        if (isOpen()) {
+            openPane();
+        } else {
+            closePane();
+        }
     }
 
     private boolean closePane(View pane, int initialVelocity) {
