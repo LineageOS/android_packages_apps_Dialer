@@ -304,11 +304,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getConnectionLabel(),
                     getCallStateIcon(),
                     getGatewayNumber(),
-                    primaryCallCan(Details.CAPABILITY_WIFI),
+                    mPrimary.hasProperty(Details.PROPERTY_WIFI),
                     mPrimary.isConferenceCall());
 
             boolean showHdAudioIndicator =
-                    isPrimaryCallActive() && primaryCallCan(Details.CAPABILITY_HIGH_DEF_AUDIO);
+                    isPrimaryCallActive() && mPrimary.hasProperty(Details.PROPERTY_HIGH_DEF_AUDIO);
             getUi().showHdAudioIndicator(showHdAudioIndicator);
 
             setCallbackNumber();
@@ -353,7 +353,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         //    number.
         boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
                 getNumberFromHandle(mPrimary.getHandle()));
-        boolean showCallbackNumber = mPrimary.can(Details.CAPABILITY_SHOW_CALLBACK_NUMBER);
+        boolean showCallbackNumber = mPrimary.hasProperty(Details.PROPERTY_EMERGENCY_CALLBACK_MODE);
 
         if (isEmergencyCall || showCallbackNumber) {
             callbackNumber = getSubscriptionNumber();
@@ -735,12 +735,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return mPrimary != null && mPrimary.getState() == Call.State.ACTIVE;
     }
 
-    private boolean primaryCallCan(int capability) {
-        return mPrimary.getTelecommCall().getDetails().can(capability);
-    }
-
     private String getConferenceString(Call call) {
-        boolean isGenericConference = call.can(Details.CAPABILITY_GENERIC_CONFERENCE);
+        boolean isGenericConference = call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE);
         Log.v(this, "getConferenceString: " + isGenericConference);
 
         final int resId = isGenericConference
@@ -749,7 +745,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private Drawable getConferencePhoto(Call call) {
-        boolean isGenericConference = call.can(Details.CAPABILITY_GENERIC_CONFERENCE);
+        boolean isGenericConference = call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE);
         Log.v(this, "getConferencePhoto: " + isGenericConference);
 
         final int resId = isGenericConference
