@@ -410,8 +410,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // Add the favorites fragment but only if savedInstanceState is null. Otherwise the
         // fragment manager is responsible for recreating it.
         if (savedInstanceState == null) {
+            mListsFragment = new ListsFragment();
             getFragmentManager().beginTransaction()
-                    .add(R.id.dialtacts_frame, new ListsFragment(), TAG_FAVORITES_FRAGMENT)
+                    .add(R.id.dialtacts_frame, mListsFragment, TAG_FAVORITES_FRAGMENT)
                     .commit();
         } else {
             mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
