@@ -25,7 +25,6 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
-import android.telecom.CallProperties;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
 import android.telecom.InCallService.VideoCall;
@@ -425,8 +424,8 @@ public class Call {
         return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
     }
 
-    private boolean hasProperty(int property) {
-        return property == (property & mTelecommCall.getDetails().getCallProperties());
+    public boolean hasProperty(int property) {
+        return mTelecommCall.getDetails().hasProperty(property);
     }
 
     /** Gets the time when the call first became active. */
@@ -435,7 +434,8 @@ public class Call {
     }
 
     public boolean isConferenceCall() {
-        return hasProperty(CallProperties.CONFERENCE);
+        return mTelecommCall.getDetails().hasProperty(
+                android.telecom.Call.Details.PROPERTY_CONFERENCE);
     }
 
     public GatewayInfo getGatewayInfo() {
