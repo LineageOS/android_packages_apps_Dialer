@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"ಡೀಫಾಲ್ಟ್‌ ಧ್ವನಿ (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ಫೋನ್ ರಿಂಗ್‌ಟೋನ್"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ರಿಂಗ್ ಆಗುವಾಗ ಕಂಪಿಸು"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ಸ್ವಯಂಪರಿಪೂರ್ಣತೆ ಡಯಲ್ ಪ್ಯಾಡ್"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ರಿಂಗ್‌ಟೋನ್‌‌ &amp; ವೈಬ್ರೇಟ್‌"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ಕಾನ್ಫರೆನ್ಸ್ ಕರೆಯನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ತುರ್ತು ಸಂಖ್ಯೆ"</string>
