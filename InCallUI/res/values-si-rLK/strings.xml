@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"සුපුරුදු ශබ්දය (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"දුරකථන රිංටෝනය"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"රිංග් වන විට කම්පනයවේ"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ඩයල් පැඩය ස්වයං සම්පුර්ණ කරන්න"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"හදිසි ඇමතුම් අංකය"</string>

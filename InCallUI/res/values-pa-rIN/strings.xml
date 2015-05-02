@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"ਡਿਫੌਲਟ ਅਵਾਜ਼ (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ਫੋਨ ਰਿੰਗਟੋਨ"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ਰਿੰਗ ਕਰਨ ਵੇਲੇ ਵਾਈਬ੍ਰੇਟ"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ਡਾਇਲਪੈਡ ਆਟੋਕੰਪਲੀਟ"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ਰਿੰਗਟੋਨ &amp; ਵਾਈਬ੍ਰੇਟ"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ਕਾਨਫਰੰਸ ਕਾਲ ਵਿਵਸਥਿਤ ਕਰੋ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ਐਮਰਜੈਂਸੀ ਨੰਬਰ"</string>
