@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 
+import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.InCallPresenter.InCallState;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
@@ -249,7 +250,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
     public void onText() {
         if (getUi() != null) {
-            InCallPresenter.getInstance().getTelecomManager().silenceRinger();
+            TelecomUtil.silenceRinger(getUi().getContext());
             getUi().showMessageDialog();
         }
     }
