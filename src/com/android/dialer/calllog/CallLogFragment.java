@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.KeyguardManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -179,17 +180,16 @@ public class CallLogFragment extends Fragment
             mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
         }
 
-        String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mCallLogQueryHandler = new CallLogQueryHandler(getActivity().getContentResolver(),
-                this, mLogLimit);
+        final Activity activity = getActivity();
+        final ContentResolver resolver = activity.getContentResolver();
+        String currentCountryIso = GeoUtil.getCurrentCountryIso(activity);
+        mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
         mKeyguardManager =
-                (KeyguardManager) getActivity().getSystemService(Context.KEYGUARD_SERVICE);
-        getActivity().getContentResolver().registerContentObserver(
-                CallLog.CONTENT_URI, true, mCallLogObserver);
-        getActivity().getContentResolver().registerContentObserver(
-                ContactsContract.Contacts.CONTENT_URI, true, mContactsObserver);
-        getActivity().getContentResolver().registerContentObserver(
-                Status.CONTENT_URI, true, mVoicemailStatusObserver);
+                (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
+        resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
+        resolver.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true,
+                mContactsObserver);
+        resolver.registerContentObserver(Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
         fetchCalls();
     }

@@ -17,9 +17,12 @@
 package com.android.dialer.calllog;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+
+import com.android.dialer.util.TelecomUtil;
 
 /**
  * Provides operations for managing notifications.
@@ -82,6 +85,26 @@ public class CallLogNotificationsService extends IntentService {
             DefaultVoicemailNotifier.getInstance(this).updateNotification(voicemailUri);
         } else {
             Log.d(TAG, "onHandleIntent: could not handle: " + intent);
+        }
+    }
+
+    /**
+     * Updates notifications for any new voicemails.
+     *
+     * @param context a valid context.
+     * @param voicemailUri The uri pointing to the voicemail to update the notification for. If
+     *         {@code null}, then notifications for all new voicemails will be updated.
+     */
+    public static void updateVoicemailNotifications(Context context, Uri voicemailUri) {
+        if (TelecomUtil.hasReadWriteVoicemailPermissions(context)) {
+            Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
+            serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
+            // If voicemailUri is null, then notifications for all voicemails will be updated.
+            if (voicemailUri != null) {
+                serviceIntent.putExtra(
+                        CallLogNotificationsService.EXTRA_NEW_VOICEMAIL_URI, voicemailUri);
+            }
+            context.startService(serviceIntent);
         }
     }
 }
