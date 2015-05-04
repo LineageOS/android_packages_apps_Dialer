@@ -39,9 +39,8 @@ public class CallUtils {
     }
 
     public static boolean isVideoCall(int videoState) {
-        return VideoProfile.VideoState.isBidirectional(videoState)
-                && VideoProfile.VideoState.isTransmissionEnabled(videoState)
-                && VideoProfile.VideoState.isReceptionEnabled(videoState);
+        return VideoProfile.VideoState.isTransmissionEnabled(videoState)
+                || VideoProfile.VideoState.isReceptionEnabled(videoState);
     }
 
     public static boolean isIncomingVideoCall(Call call) {
