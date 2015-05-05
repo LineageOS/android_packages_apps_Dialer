@@ -122,6 +122,13 @@
         <!-- This slot is either "Add" or "Merge", depending on the state of the call.  One or the
              other of these must always be set to GONE. -->
 
+        <!-- "Turn off camera" for video calls. -->
+        <ToggleButton android:id="@+id/pauseVideoButton"
+            style="@style/InCallCompoundButton"
+            android:background="@drawable/btn_compound_video_off"
+            android:contentDescription="@string/onscreenPauseVideoText"
+            android:visibility="gone" />
+
         <!-- "Add Call" -->
         <ImageButton android:id="@+id/addButton"
             style="@style/InCallButton"
@@ -136,13 +143,6 @@
             style="@style/InCallButton"
             android:background="@drawable/btn_merge"
             android:contentDescription="@string/onscreenMergeCallsText"
-            android:visibility="gone" />
-
-        <!-- "Turn off camera" for video calls. -->
-        <ToggleButton android:id="@+id/pauseVideoButton"
-            style="@style/InCallCompoundButton"
-            android:background="@drawable/btn_compound_video_off"
-            android:contentDescription="@string/onscreenPauseVideoText"
             android:visibility="gone" />
 
         <!-- "Overflow" -->
