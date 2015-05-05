@@ -659,10 +659,12 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             params.height = height;
             preview.setLayoutParams(params);
 
-            ViewGroup.LayoutParams containerParams = mPreviewVideoContainer.getLayoutParams();
-            containerParams.width = width;
-            containerParams.height = height;
-            mPreviewVideoContainer.setLayoutParams(containerParams);
+            if (mPreviewVideoContainer != null) {
+                ViewGroup.LayoutParams containerParams = mPreviewVideoContainer.getLayoutParams();
+                containerParams.width = width;
+                containerParams.height = height;
+                mPreviewVideoContainer.setLayoutParams(containerParams);
+            }
 
             // The width and height are interchanged outside of this method based on the current
             // orientation, so we can transform using "width", which will be either the width or

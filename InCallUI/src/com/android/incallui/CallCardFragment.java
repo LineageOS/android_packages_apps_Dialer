@@ -31,6 +31,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Trace;
+import android.os.Handler;
+import android.os.Looper;
 import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
@@ -62,6 +64,38 @@ import java.util.List;
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi>
         implements CallCardPresenter.CallCardUi {
     private static final String TAG = "CallCardFragment";
+
+    /**
+     * Internal class which represents the call state label which is to be applied.
+     */
+    private class CallStateLabel {
+        private CharSequence mCallStateLabel;
+        private boolean mIsAutoDismissing;
+
+        public CallStateLabel(CharSequence callStateLabel, boolean isAutoDismissing) {
+            mCallStateLabel = callStateLabel;
+            mIsAutoDismissing = isAutoDismissing;
+        }
+
+        public CharSequence getCallStateLabel() {
+            return mCallStateLabel;
+        }
+
+        /**
+         * Determines if the call state label should auto-dismiss.
+         *
+         * @return {@code true} if the call state label should auto-dismiss.
+         */
+        public boolean isAutoDismissing() {
+            return mIsAutoDismissing;
+        }
+    };
+
+    /**
+     * The duration of time (in milliseconds) a call state label should remain visible before
+     * resetting to its previous value.
+     */
+    private static final long CALL_STATE_LABEL_RESET_DELAY_MS = 3000;
 
     private AnimatorSet mAnimatorSet;
     private int mShrinkAnimationDuration;
@@ -119,6 +153,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private MaterialPalette mCurrentThemeColors;
 
+    /**
+     * Call state label to set when an auto-dismissing call state label is dismissed.
+     */
+    private CharSequence mPostResetCallStateLabel;
+    private boolean mCallStateLabelResetPending = false;
+    private Handler mHandler;
+
     @Override
     public CallCardPresenter.CallCardUi getUi() {
         return this;
@@ -133,6 +174,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mHandler = new Handler(Looper.getMainLooper());
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
         mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(
@@ -492,15 +534,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             boolean isWifi,
             boolean isConference) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
-        CharSequence callStateLabel = getCallStateLabelFromState(state, videoState,
+        CallStateLabel callStateLabel = getCallStateLabelFromState(state, videoState,
                 sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi,
                 isConference);
 
-        Log.v(this, "setCallState " + callStateLabel);
+        Log.v(this, "setCallState " + callStateLabel.getCallStateLabel());
+        Log.v(this, "AutoDismiss " + callStateLabel.isAutoDismissing());
         Log.v(this, "DisconnectCause " + disconnectCause.toString());
         Log.v(this, "gateway " + connectionLabel + gatewayNumber);
 
-        if (TextUtils.equals(callStateLabel, mCallStateLabel.getText())) {
+        if (TextUtils.equals(callStateLabel.getCallStateLabel(), mCallStateLabel.getText())) {
             // Nothing to do if the labels are the same
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
@@ -510,24 +553,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         // Update the call state label and icon.
-        if (!TextUtils.isEmpty(callStateLabel)) {
-            mCallStateLabel.setText(callStateLabel);
-            mCallStateLabel.setAlpha(1);
-            mCallStateLabel.setVisibility(View.VISIBLE);
-
+        setCallStateLabel(callStateLabel);
+        if (!TextUtils.isEmpty(callStateLabel.getCallStateLabel())) {
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
             } else {
                 mCallStateLabel.startAnimation(mPulseAnimation);
             }
-        } else {
-            Animation callStateLabelAnimation = mCallStateLabel.getAnimation();
-            if (callStateLabelAnimation != null) {
-                callStateLabelAnimation.cancel();
-            }
-            mCallStateLabel.setText(null);
-            mCallStateLabel.setAlpha(0);
-            mCallStateLabel.setVisibility(View.GONE);
         }
 
         if (callStateIcon != null) {
@@ -538,7 +570,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateIcon.setImageDrawable(callStateIcon);
 
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED
-                    || TextUtils.isEmpty(callStateLabel)) {
+                    || TextUtils.isEmpty(callStateLabel.getCallStateLabel())) {
                 mCallStateIcon.clearAnimation();
             } else {
                 mCallStateIcon.startAnimation(mPulseAnimation);
@@ -569,11 +601,55 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         if (state == Call.State.INCOMING) {
             if (callStateLabel != null) {
-                getView().announceForAccessibility(callStateLabel);
+                getView().announceForAccessibility(callStateLabel.getCallStateLabel());
             }
             if (mPrimaryName.getText() != null) {
                 getView().announceForAccessibility(mPrimaryName.getText());
             }
+        }
+    }
+
+    private void setCallStateLabel(CallStateLabel callStateLabel) {
+        Log.v(this, "setCallStateLabel : label = " + callStateLabel.getCallStateLabel());
+
+        if (callStateLabel.isAutoDismissing()) {
+            mCallStateLabelResetPending = true;
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Log.v(this, "restoringCallStateLabel : label = " +
+                            mPostResetCallStateLabel);
+                    changeCallStateLabel(mPostResetCallStateLabel);
+                    mCallStateLabelResetPending = false;
+                }
+            }, CALL_STATE_LABEL_RESET_DELAY_MS);
+
+            changeCallStateLabel(callStateLabel.getCallStateLabel());
+        } else {
+            // Keep track of the current call state label; used when resetting auto dismissing
+            // call state labels.
+            mPostResetCallStateLabel = callStateLabel.getCallStateLabel();
+
+            if (!mCallStateLabelResetPending) {
+                changeCallStateLabel(callStateLabel.getCallStateLabel());
+            }
+        }
+    }
+
+    private void changeCallStateLabel(CharSequence callStateLabel) {
+        Log.v(this, "changeCallStateLabel : label = " + callStateLabel);
+        if (!TextUtils.isEmpty(callStateLabel)) {
+            mCallStateLabel.setText(callStateLabel);
+            mCallStateLabel.setAlpha(1);
+            mCallStateLabel.setVisibility(View.VISIBLE);
+        } else {
+            Animation callStateLabelAnimation = mCallStateLabel.getAnimation();
+            if (callStateLabelAnimation != null) {
+                callStateLabelAnimation.cancel();
+            }
+            mCallStateLabel.setText(null);
+            mCallStateLabel.setAlpha(0);
+            mCallStateLabel.setVisibility(View.GONE);
         }
     }
 
@@ -670,7 +746,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      *
      * TODO: Move this to the CallCardPresenter.
      */
-    private CharSequence getCallStateLabelFromState(int state, int videoState,
+    private CallStateLabel getCallStateLabelFromState(int state, int videoState,
             int sessionModificationState, DisconnectCause disconnectCause, String label,
             boolean isGatewayCall, boolean isWifi, boolean isConference) {
         final Context context = getView().getContext();
@@ -678,6 +754,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         boolean hasSuggestedLabel = label != null;
         boolean isAccount = hasSuggestedLabel && !isGatewayCall;
+        boolean isAutoDismissing = false;
 
         switch  (state) {
             case Call.State.IDLE:
@@ -689,15 +766,20 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 if ((isAccount || isWifi || isConference) && hasSuggestedLabel) {
                     callStateLabel = label;
                 } else if (sessionModificationState
+                        == Call.SessionModificationState.REQUEST_REJECTED) {
+                    callStateLabel = context.getString(R.string.card_title_video_call_rejected);
+                    isAutoDismissing = true;
+                } else if (sessionModificationState
                         == Call.SessionModificationState.REQUEST_FAILED) {
                     callStateLabel = context.getString(R.string.card_title_video_call_error);
+                    isAutoDismissing = true;
                 } else if (sessionModificationState
                         == Call.SessionModificationState.WAITING_FOR_RESPONSE) {
                     callStateLabel = context.getString(R.string.card_title_video_call_requesting);
-                } else if (CallUtils.isVideoCall(videoState) &&
-                        VideoProfile.VideoState.isPaused(videoState)) {
-                    callStateLabel = context.getString(R.string.card_title_video_call_paused);
-                } else if (VideoProfile.VideoState.isBidirectional(videoState)) {
+                } else if (sessionModificationState
+                        == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+                    callStateLabel = context.getString(R.string.card_title_video_call_requesting);
+                } else if (CallUtils.isVideoCall(videoState)) {
                     callStateLabel = context.getString(R.string.card_title_video_call);
                 }
                 break;
@@ -721,7 +803,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     callStateLabel = label;
                 } else if (isAccount) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
-                } else if (VideoProfile.VideoState.isBidirectional(videoState)) {
+                } else if (VideoProfile.VideoState.isTransmissionEnabled(videoState) ||
+                        VideoProfile.VideoState.isReceptionEnabled(videoState)) {
                     callStateLabel = context.getString(R.string.notification_incoming_video_call);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_incoming_call);
@@ -748,7 +831,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             default:
                 Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
         }
-        return callStateLabel;
+        return new CallStateLabel(callStateLabel, isAutoDismissing);
     }
 
     private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {

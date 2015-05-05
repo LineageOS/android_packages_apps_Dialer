@@ -18,9 +18,7 @@ package com.android.incallui;
 
 import static com.android.incallui.CallButtonFragment.Buttons.*;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -30,8 +28,6 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.telecom.AudioState;
-import android.telecom.TelecomManager;
-import android.telecom.VideoProfile;
 import android.util.SparseIntArray;
 import android.view.ContextThemeWrapper;
 import android.view.HapticFeedbackConstants;
@@ -43,12 +39,10 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
-import java.util.ArrayList;
 
 /**
  * Fragment for call control buttons
@@ -58,7 +52,7 @@ public class CallButtonFragment
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener {
     private static final int INVALID_INDEX = -1;
-    private static final int BUTTON_MAX_VISIBLE = 5;
+    private int mButtonMaxVisible;
     // The button is currently visible in the UI
     private static final int BUTTON_VISIBLE = 1;
     // The button is hidden in the UI
@@ -127,6 +121,8 @@ public class CallButtonFragment
         for (int i = 0; i < BUTTON_COUNT; i++) {
             mButtonVisibilityMap.put(i, BUTTON_HIDDEN);
         }
+
+        mButtonMaxVisible = getResources().getInteger(R.integer.call_card_max_buttons);
     }
 
     @Override
@@ -458,7 +454,7 @@ public class CallButtonFragment
             final View button = getButtonById(i);
             if (visibility == BUTTON_VISIBLE) {
                 visibleCount++;
-                if (visibleCount <= BUTTON_MAX_VISIBLE) {
+                if (visibleCount <= mButtonMaxVisible) {
                     button.setVisibility(View.VISIBLE);
                     prevVisibleButton = button;
                     prevVisibleId = i;

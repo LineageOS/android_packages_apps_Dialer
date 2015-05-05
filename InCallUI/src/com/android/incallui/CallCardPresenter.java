@@ -48,6 +48,7 @@ import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 
 import com.google.common.base.Preconditions;
 
@@ -58,7 +59,7 @@ import com.google.common.base.Preconditions;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, IncomingCallListener, InCallDetailsListener,
-        InCallEventListener {
+        InCallEventListener, CallList.CallUpdateListener {
 
     public interface EmergencyCallListener {
         public void onCallUpdated(BaseFragment fragment, boolean isEmergency);
@@ -75,8 +76,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mPrimaryContactInfo;
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
-
     private Context mContext;
+    private boolean mSpinnerShowing = false;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -121,6 +122,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Call may be null if disconnect happened already.
         if (call != null) {
             mPrimary = call;
+            CallList.getInstance().addCallUpdateListener(call.getId(), this);
 
             // start processing lookups right away.
             if (!call.isConferenceCall()) {
@@ -158,6 +160,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
         InCallPresenter.getInstance().removeInCallEventListener(this);
+        if (mPrimary != null) {
+            CallList.getInstance().removeCallUpdateListener(mPrimary.getId(), this);
+        }
 
         mPrimary = null;
         mPrimaryContactInfo = null;
@@ -204,6 +209,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         final boolean secondaryChanged = !Call.areSame(mSecondary, secondary);
 
         mSecondary = secondary;
+        Call previousPrimary = mPrimary;
         mPrimary = primary;
 
         // Refresh primary call information if either:
@@ -212,6 +218,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary != null && (primaryChanged ||
                 ui.isManageConferenceVisible() != shouldShowManageConference())) {
             // primary call has changed
+            if (previousPrimary != null) {
+                CallList.getInstance().removeCallUpdateListener(previousPrimary.getId(), this);
+            }
+            CallList.getInstance().addCallUpdateListener(mPrimary.getId(), this);
+
             mPrimaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(mContext, mPrimary,
                     mPrimary.getState() == Call.State.INCOMING);
             updatePrimaryDisplayInfo();
@@ -262,7 +273,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         maybeShowManageConferenceCallButton();
-        maybeShowProgressSpinner();
 
         // Hide the end call button instantly if we're receiving an incoming call.
         getUi().setEndCallButtonEnabled(shouldShowEndCallButton(mPrimary, callState),
@@ -277,6 +287,32 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Details.can(details.getCallCapabilities(), Details.CAPABILITY_MANAGE_CONFERENCE)) {
             maybeShowManageConferenceCallButton();
         }
+    }
+
+    @Override
+    public void onCallChanged(Call call) {
+        // No-op; specific call updates handled elsewhere.
+    }
+
+    /**
+     * Handles a change to the session modification state for a call.  Triggers showing the progress
+     * spinner, as well as updating the call state label.
+     *
+     * @param sessionModificationState The new session modification state.
+     */
+    @Override
+    public void onSessionModificationStateChange(int sessionModificationState) {
+        Log.d(this, "onSessionModificationStateChange : sessionModificationState = " +
+                sessionModificationState);
+
+        if (mPrimary == null) {
+            return;
+        }
+        maybeShowProgressSpinner(mPrimary.getState(), sessionModificationState);
+        getUi().setEndCallButtonEnabled(sessionModificationState !=
+                        Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST,
+                true /* shouldAnimate */);
+        updatePrimaryCallState();
     }
 
     private String getSubscriptionNumber() {
@@ -322,11 +358,21 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         getUi().showManageConferenceCallButton(shouldShowManageConference());
     }
 
-    private void maybeShowProgressSpinner() {
-        final boolean show = mPrimary != null && mPrimary.getSessionModificationState()
-                == Call.SessionModificationState.WAITING_FOR_RESPONSE
-                && mPrimary.getState() == Call.State.ACTIVE;
-        getUi().setProgressSpinnerVisible(show);
+    /**
+     * Determines if a pending session modification exists for the current call.  If so, the
+     * progress spinner is shown, and the call state is updated.
+     *
+     * @param callState The call state.
+     * @param sessionModificationState The session modification state.
+     */
+    private void maybeShowProgressSpinner(int callState, int sessionModificationState) {
+        final boolean show = sessionModificationState ==
+                Call.SessionModificationState.WAITING_FOR_RESPONSE
+                && callState == Call.State.ACTIVE;
+        if (show != mSpinnerShowing) {
+            getUi().setProgressSpinnerVisible(show);
+            mSpinnerShowing = show;
+        }
     }
 
     /**
@@ -657,7 +703,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private boolean hasOutgoingGatewayCall() {
-        // We only display the gateway information while STATE_DIALING so return false for any othe
+        // We only display the gateway information while STATE_DIALING so return false for any other
         // call state.
         // TODO: mPrimary can be null because this is called from updatePrimaryDisplayInfo which
         // is also called after a contact search completes (call is not present yet).  Split the

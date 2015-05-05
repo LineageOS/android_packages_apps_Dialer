@@ -22,7 +22,6 @@ import android.database.Cursor;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.provider.ContactsContract;
 import android.telecom.AudioState;
 import android.telecom.CameraCapabilities;
@@ -31,6 +30,7 @@ import android.telecom.Connection.VideoProvider;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.view.Surface;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.android.contacts.common.CallUtil;
@@ -163,10 +163,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     private static boolean mIsVideoMode = false;
 
-    /** Handler which resets request state to NO_REQUEST after an interval. */
-    private Handler mSessionModificationResetHandler;
-    private static final long SESSION_MODIFICATION_RESET_DELAY_MS = 3000;
-
     /**
      * Contact photo manager to retrieve cached contact photo information.
      */
@@ -186,7 +182,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         mContext = context;
         mMinimumVideoDimension = mContext.getResources().getDimension(
                 R.dimen.video_preview_small_dimension);
-        mSessionModificationResetHandler = new Handler();
     }
 
     /**
@@ -933,8 +928,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (call == null) {
             return;
         }
-
-        call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
     }
 
     @Override
@@ -946,25 +939,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         if (call == null) {
             return;
-        }
-
-        if (status == VideoProvider.SESSION_MODIFY_REQUEST_TIMED_OUT) {
-            call.setSessionModificationState(
-                    Call.SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT);
-        } else {
-            call.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
-
-            final Call modifyCall = call;
-            // Start handler to change state from REQUEST_FAILED to NO_REQUEST after an interval.
-            mSessionModificationResetHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (modifyCall != null) {
-                        modifyCall
-                            .setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
-                    }
-                }
-            }, SESSION_MODIFICATION_RESET_DELAY_MS);
         }
     }
 
@@ -1162,7 +1136,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                         }
                     }
                 }
+                return null;
+            }
 
+            @Override
+            protected void onPostExecute(Void result) {
                 // If user profile information was found, issue an async request to load the user's
                 // profile photo.
                 if (mProfileInfo != null) {
@@ -1174,17 +1152,14 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                             new ContactPhotoManager.DefaultImageRequest(mProfileInfo.name,
                                     mProfileInfo.lookupKey, false /* isCircularPhoto */);
 
-                    mContactPhotoManager
-                            .loadDirectoryPhoto(ui.getPreviewPhotoView(),
+                    ImageView photoView = ui.getPreviewPhotoView();
+                    if (photoView == null) {
+                        return;
+                    }
+                    mContactPhotoManager.loadDirectoryPhoto(photoView,
                                     mProfileInfo.displayPhotoUri,
                                     false /* darkTheme */, false /* isCircular */, imageRequest);
                 }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                // No-op
             }
         };
 
