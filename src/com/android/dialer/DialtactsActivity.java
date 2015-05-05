@@ -198,11 +198,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mIsLandscape;
 
     /**
-     * The position of the currently selected tab in the attached {@link ListsFragment}.
-     */
-    private int mCurrentTabPosition = 0;
-
-    /**
      * True if the dialpad is only temporarily showing due to being in call
      */
     private boolean mInCallDialpadUp;
@@ -580,7 +575,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.floating_action_button:
-                if (!mIsDialpadShown) {
+                if (mListsFragment.getTabPosition() == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+                    sendAddNewContactIntent();
+                } else if (!mIsDialpadShown) {
                     mInCallDialpadUp = false;
                     showDialpadFragment(true);
                 }
@@ -614,14 +611,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 startActivity(intent);
                 break;
             case R.id.menu_add_contact:
-                try {
-                    startActivity(new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
-                } catch (ActivityNotFoundException e) {
-                    Toast toast = Toast.makeText(this,
-                            R.string.add_contact_not_available,
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+                sendAddNewContactIntent();
                 break;
             case R.id.menu_import_export:
                 // We hard-code the "contactsAreAvailable" argument because doing it properly would
@@ -1096,6 +1086,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return intent;
     }
 
+    private void sendAddNewContactIntent() {
+        try {
+            startActivity(new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
+        } catch (ActivityNotFoundException e) {
+            Toast toast = Toast.makeText(this,
+                    R.string.add_contact_not_available,
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
     private boolean canIntentBeHandled(Intent intent) {
         final PackageManager packageManager = getPackageManager();
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
@@ -1188,20 +1189,24 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (position != ListsFragment.TAB_INDEX_SPEED_DIAL) {
             mFloatingActionButtonController.onPageScrolled(1);
         }
+
+        if (position == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+            mFloatingActionButtonController.changeIcon(
+                    getResources().getDrawable(R.drawable.ic_person_add_24dp),
+                    getResources().getString(R.string.search_shortcut_create_new_contact));
+        } else {
+            mFloatingActionButtonController.changeIcon(
+                    getResources().getDrawable(R.drawable.fab_ic_dial),
+                    getResources().getString(R.string.action_menu_dialpad_button));
+        }
     }
 
     @Override
     public void onPageSelected(int position) {
-        position = mListsFragment.getRtlPosition(position);
-        mCurrentTabPosition = position;
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-    }
-
-    private TelephonyManager getTelephonyManager() {
-        return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     private TelecomManager getTelecomManager() {
@@ -1243,7 +1248,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * @param animate Whether or not to animate the transition.
      */
     private void updateFloatingActionButtonControllerAlignment(boolean animate) {
-        int align = (!mIsLandscape && mCurrentTabPosition == ListsFragment.TAB_INDEX_SPEED_DIAL) ?
+        int align = (!mIsLandscape &&
+                mListsFragment.getTabPosition() == ListsFragment.TAB_INDEX_SPEED_DIAL) ?
                 FloatingActionButtonController.ALIGN_MIDDLE :
                         FloatingActionButtonController.ALIGN_END;
         mFloatingActionButtonController.align(align, 0 /* offsetX */, 0 /* offsetY */, animate);

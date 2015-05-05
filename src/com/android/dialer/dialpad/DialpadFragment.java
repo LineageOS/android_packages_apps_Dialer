@@ -399,7 +399,7 @@ public class DialpadFragment extends Fragment
 
         final View floatingActionButtonContainer =
                 fragmentView.findViewById(R.id.dialpad_floating_action_button_container);
-        final View floatingActionButton =
+        final ImageButton floatingActionButton =
                 (ImageButton) fragmentView.findViewById(R.id.dialpad_floating_action_button);
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
