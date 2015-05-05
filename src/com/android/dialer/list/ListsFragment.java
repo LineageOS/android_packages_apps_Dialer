@@ -79,6 +79,11 @@ public class ListsFragment extends Fragment implements ViewPager.OnPageChangeLis
     private int[] mTabIcons;
 
     /**
+     * The position of the currently selected tab.
+     */
+    private int mTabPosition = TAB_INDEX_SPEED_DIAL;
+
+    /**
      * Call shortcuts older than this date (persisted in shared preferences) will not show up in
      * at the top of the screen
      */
@@ -225,6 +230,8 @@ public class ListsFragment extends Fragment implements ViewPager.OnPageChangeLis
 
     @Override
     public void onPageSelected(int position) {
+        mTabPosition = getRtlPosition(position);
+
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageSelected(position);
@@ -238,6 +245,10 @@ public class ListsFragment extends Fragment implements ViewPager.OnPageChangeLis
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageScrollStateChanged(state);
         }
+    }
+
+    public int getTabPosition() {
+        return mTabPosition;
     }
 
     public void showRemoveView(boolean show) {
