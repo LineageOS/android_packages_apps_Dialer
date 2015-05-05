@@ -18,8 +18,12 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Point;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.telecom.AudioState;
 import android.telecom.CameraCapabilities;
 import android.telecom.Connection;
@@ -27,15 +31,16 @@ import android.telecom.Connection.VideoProvider;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.view.Surface;
+import android.widget.ImageView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactPhotoManager;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.SurfaceChangeListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
-import com.google.common.base.Preconditions;
 
 import java.util.Objects;
 
@@ -163,12 +168,22 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private static final long SESSION_MODIFICATION_RESET_DELAY_MS = 3000;
 
     /**
+     * Contact photo manager to retrieve cached contact photo information.
+     */
+    private ContactPhotoManager mContactPhotoManager = null;
+
+    /**
+     * The URI for the user's profile photo, or {@code null} if not specified.
+     */
+    private ContactInfoCache.ContactCacheEntry mProfileInfo = null;
+
+    /**
      * Initializes the presenter.
      *
      * @param context The current context.
      */
     public void init(Context context) {
-        mContext = Preconditions.checkNotNull(context);
+        mContext = context;
         mMinimumVideoDimension = mContext.getResources().getDimension(
                 R.dimen.video_preview_small_dimension);
         mSessionModificationResetHandler = new Handler();
@@ -401,8 +416,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         final boolean hasVideoStateChanged = mCurrentVideoState != call.getVideoState();
 
         Log.d(this, "checkForVideoStateChange: isVideoCall= " + isVideoCall
-                + " hasVideoStateChanged=" +
-                hasVideoStateChanged + " isVideoMode=" + isVideoMode());
+                + " hasVideoStateChanged=" + hasVideoStateChanged + " isVideoMode="
+                + isVideoMode() + " previousVideoState: " +
+                VideoProfile.VideoState.videoStateToString(mCurrentVideoState) + " newVideoState: "
+                + VideoProfile.VideoState.videoStateToString(call.getVideoState()));
 
         if (!hasVideoStateChanged) {
             return;
@@ -624,7 +641,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             sPrevVideoAudioMode != AudioModeProvider.AUDIO_MODE_INVALID;
 
         Log.d(this, "Is previous audio mode valid = " + isPrevAudioModeValid + " enableSpeaker is "
-            + enableSpeaker);
+                + enableSpeaker);
 
         // Set audio mode to previous mode if enableSpeaker is false.
         if (isPrevAudioModeValid && !enableSpeaker) {
@@ -712,6 +729,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             ui.showVideoViews(true, false);
         } else if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
             ui.showVideoViews(false, !isPaused && isCallActive);
+            loadProfilePhotoAsync();
         } else {
             ui.hideVideoUi();
         }
@@ -770,18 +788,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     @Override
     public void onVideoQualityChanged(Call call, int videoQuality) {
-        if (!call.equals(mPrimaryCall)) {
-            return;
-        }
-
-        VideoCallUi ui = getUi();
-        if (ui == null) {
-            Log.e(this, "Error VideoCallUi is null. Return.");
-            return;
-        }
-
-        // Display a video quality changed message on UI.
-        ui.showVideoQualityChanged(videoQuality);
+        // No-op
     }
 
     /**
@@ -851,13 +858,28 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     @Override
     public void onCallSessionEvent(int event) {
-        Log.d(this, "onCallSessionEvent event =" + event);
-        VideoCallUi ui = getUi();
-        if (ui == null) {
-            Log.e(this, "onCallSessionEvent: VideoCallUi is null");
-            return;
+        StringBuilder sb = new StringBuilder();
+        sb.append("onCallSessionEvent = ");
+
+        switch (event) {
+            case Connection.VideoProvider.SESSION_EVENT_RX_PAUSE:
+                sb.append("rx_pause");
+                break;
+            case Connection.VideoProvider.SESSION_EVENT_RX_RESUME:
+                sb.append("rx_resume");
+                break;
+            case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
+                sb.append("camera_failure");
+                break;
+            case Connection.VideoProvider.SESSION_EVENT_CAMERA_READY:
+                sb.append("camera_ready");
+                break;
+            default:
+                sb.append("unknown event = ");
+                sb.append(event);
+                break;
         }
-        ui.displayCallSessionEvent(event);
+        Log.d(this, sb.toString());
     }
 
     /**
@@ -868,12 +890,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     @Override
     public void onCallDataUsageChange(long dataUsage) {
         Log.d(this, "onCallDataUsageChange dataUsage=" + dataUsage);
-        VideoCallUi ui = getUi();
-        if (ui == null) {
-            Log.e(this, "onCallDataUsageChange: VideoCallUi is null");
-            return;
-        }
-        ui.setCallDataUsage(mContext, dataUsage);
     }
 
     /**
@@ -1101,12 +1117,86 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
+     * Starts an asynchronous load of the user's profile photo.
+     */
+    public void loadProfilePhotoAsync() {
+        final VideoCallUi ui = getUi();
+        if (ui == null) {
+            return;
+        }
+
+        final AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            /**
+             * Performs asynchronous load of the user profile information.
+             *
+             * @param params The parameters of the task.
+             *
+             * @return {@code null}.
+             */
+            @Override
+            protected Void doInBackground(Void... params) {
+                if (mProfileInfo == null) {
+                    // Try and read the photo URI from the local profile.
+                    mProfileInfo = new ContactInfoCache.ContactCacheEntry();
+                    final Cursor cursor = mContext.getContentResolver().query(
+                            ContactsContract.Profile.CONTENT_URI, new String[]{
+                                    ContactsContract.CommonDataKinds.Phone._ID,
+                                    ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
+                                    ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY,
+                                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                            }, null, null, null);
+                    if (cursor != null) {
+                        try {
+                            if (cursor.moveToFirst()) {
+                                mProfileInfo.lookupKey = cursor.getString(cursor.getColumnIndex(
+                                        ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY));
+                                String photoUri = cursor.getString(cursor.getColumnIndex(
+                                        ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
+                                mProfileInfo.displayPhotoUri = photoUri == null ? null
+                                        : Uri.parse(photoUri);
+                                mProfileInfo.name = cursor.getString(cursor.getColumnIndex(
+                                        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                            }
+                        } finally {
+                            cursor.close();
+                        }
+                    }
+                }
+
+                // If user profile information was found, issue an async request to load the user's
+                // profile photo.
+                if (mProfileInfo != null) {
+                    if (mContactPhotoManager == null) {
+                        mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
+                    }
+                    ContactPhotoManager.DefaultImageRequest imageRequest = (mProfileInfo != null)
+                            ? null :
+                            new ContactPhotoManager.DefaultImageRequest(mProfileInfo.name,
+                                    mProfileInfo.lookupKey, false /* isCircularPhoto */);
+
+                    mContactPhotoManager
+                            .loadDirectoryPhoto(ui.getPreviewPhotoView(),
+                                    mProfileInfo.displayPhotoUri,
+                                    false /* darkTheme */, false /* isCircular */, imageRequest);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                // No-op
+            }
+        };
+
+        task.execute();
+    }
+
+    /**
      * Defines the VideoCallUI interactions.
      */
     public interface VideoCallUi extends Ui {
         void showVideoViews(boolean showPreview, boolean showIncoming);
         void hideVideoUi();
-        void showVideoQualityChanged(int videoQuality);
         boolean isDisplayVideoSurfaceCreated();
         boolean isPreviewVideoSurfaceCreated();
         Surface getDisplayVideoSurface();
@@ -1115,10 +1205,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         void setPreviewSize(int width, int height);
         void setPreviewSurfaceSize(int width, int height);
         void setDisplayVideoSize(int width, int height);
-        void setCallDataUsage(Context context, long dataUsage);
-        void displayCallSessionEvent(int event);
         Point getScreenSize();
         Point getPreviewSize();
         void cleanupSurfaces();
+        ImageView getPreviewPhotoView();
     }
 }
