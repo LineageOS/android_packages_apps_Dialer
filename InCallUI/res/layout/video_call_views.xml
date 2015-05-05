@@ -26,10 +26,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <!-- The width and height are replaced at runtime based on the selected camera. -->
-    <TextureView
-        android:id="@+id/previewVideo"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/video_preview_margin"
+    <FrameLayout
+        android:id="@+id/previewVideoContainer"
         android:layout_width="70dp"
-        android:layout_height="120dp" />
+        android:layout_height="120dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/video_preview_margin" >
+
+        <!-- The video preview surface, where the user's outgoing video is shown. -->
+        <TextureView
+            android:id="@+id/previewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- The user's profile photo, shown when the user's camera is shut off. -->
+        <ImageView
+            android:id="@+id/previewProfilePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="false"
+            android:contentDescription="@string/profile_photo_description"
+            android:background="@android:color/black"
+            android:visibility="gone" />
+
+        <!-- The "camera off" icon, shown when the user's camera is shut off. -->
+        <ImageView
+            android:id="@+id/previewCameraOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/camera_off_description"
+            android:src="@drawable/ic_toolbar_video_off"
+            android:visibility="gone" />
+    </FrameLayout>
 </FrameLayout>

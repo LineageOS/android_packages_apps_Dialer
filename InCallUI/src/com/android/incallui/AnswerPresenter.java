@@ -266,17 +266,13 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     private void configureAnswerTargetsForSms(Call call, List<String> textMsgs) {
-        if (getUi() == null) {
-            return;
-        }
-
-        final Context context = getUi().getContext();
-
-        mHasTextMessages = textMsgs != null;
         boolean withSms =
                 call.can(android.telecom.Call.Details.CAPABILITY_RESPOND_VIA_TEXT)
                 && mHasTextMessages;
-        if (call.isVideoCall(context)) {
+
+        // Only present the user with the option to answer as a video call if the incoming call is
+        // a bi-directional video call.
+        if (VideoProfile.VideoState.isBidirectional((call.getVideoState()))) {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);

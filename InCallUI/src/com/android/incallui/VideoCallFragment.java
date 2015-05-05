@@ -16,15 +16,10 @@
 
 package com.android.incallui;
 
-import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
-import android.telecom.Connection;
-import android.telecom.VideoProfile;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -33,7 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
-import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.google.common.base.Objects;
 
@@ -65,12 +61,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     public static final int ORIENTATION_UNKNOWN = -1;
 
-    /**
-     * Invalid resource id.
-     */
-    public static final int INVALID_RESOURCE_ID = -1;
-
-
     // Static storage used to retain the video surfaces across Activity restart.
     // TextureViews are not parcelable, so it is not possible to store them in the saved state.
     private static boolean sVideoSurfacesInUse = false;
@@ -89,6 +79,21 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * Inflated view containing the video call surfaces represented by the {@link ViewStub}.
      */
     private View mVideoViews;
+
+    /**
+     * The {@link FrameLayout} containing the preview surface.
+     */
+    private View mPreviewVideoContainer;
+
+    /**
+     * Icon shown to indicate that the outgoing camera has been turned off.
+     */
+    private View mCameraOff;
+
+    /**
+     * {@link ImageView} containing the user's profile photo.
+     */
+    private ImageView mPreviewPhoto;
 
     /**
      * {@code True} when the layout of the activity has been completed.
@@ -534,19 +539,21 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     }
 
     /**
-     * Show or hide preview and incoming video views
+     * Hides and shows the incoming video view and changes the outgoing video view's state based on
+     * whether outgoing view is enabled or not.
      */
-    public void showVideoViews(boolean showPreview, boolean showIncoming) {
+    public void showVideoViews(boolean previewPaused, boolean showIncoming) {
         inflateVideoUi(true);
 
         View incomingVideoView = mVideoViews.findViewById(R.id.incomingVideo);
-        View previewVideoView = mVideoViews.findViewById(R.id.previewVideo);
-
         if (incomingVideoView != null) {
             incomingVideoView.setVisibility(showIncoming ? View.VISIBLE : View.INVISIBLE);
         }
-        if (previewVideoView != null) {
-            previewVideoView.setVisibility(showPreview ? View.VISIBLE : View.INVISIBLE);
+        if (mCameraOff != null) {
+            mCameraOff.setVisibility(!previewPaused ? View.VISIBLE : View.INVISIBLE);
+        }
+        if (mPreviewPhoto != null) {
+            mPreviewPhoto.setVisibility(!previewPaused ? View.VISIBLE : View.INVISIBLE);
         }
     }
 
@@ -555,43 +562,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     public void hideVideoUi() {
         inflateVideoUi(false);
-    }
-
-    /**
-     * Displays a message on the UI that the video call quality has changed.
-     *
-     */
-    @Override
-    public void showVideoQualityChanged(int videoQuality) {
-        Log.d(this, "showVideoQualityChanged. Video quality changed to " + videoQuality);
-
-        final Context context = getActivity();
-        if (context == null) {
-            Log.e(this, "showVideoQualityChanged - Activity is null. Return");
-            return;
-        }
-
-        final Resources resources = context.getResources();
-
-        int videoQualityResourceId = R.string.video_quality_unknown;
-        switch (videoQuality) {
-            case VideoProfile.QUALITY_HIGH:
-                videoQualityResourceId = R.string.video_quality_high;
-                break;
-            case VideoProfile.QUALITY_MEDIUM:
-                videoQualityResourceId = R.string.video_quality_medium;
-                break;
-            case VideoProfile.QUALITY_LOW:
-                videoQualityResourceId = R.string.video_quality_low;
-                break;
-            default:
-                break;
-        }
-
-        String videoQualityChangedText = resources.getString(R.string.video_quality_changed) +
-            resources.getString(videoQualityResourceId);
-
-        Toast.makeText(context, videoQualityChangedText, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -611,6 +581,11 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
             sPreviewSurface = null;
         }
         sVideoSurfacesInUse = false;
+    }
+
+    @Override
+    public ImageView getPreviewPhotoView() {
+        return mPreviewPhoto;
     }
 
     private void onPresenterChanged(VideoCallPresenter presenter) {
@@ -678,10 +653,16 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
                 return;
             }
 
+            // Set the dimensions of both the video surface and the FrameLayout containing it.
             ViewGroup.LayoutParams params = preview.getLayoutParams();
             params.width = width;
             params.height = height;
             preview.setLayoutParams(params);
+
+            ViewGroup.LayoutParams containerParams = mPreviewVideoContainer.getLayoutParams();
+            containerParams.width = width;
+            containerParams.height = height;
+            mPreviewVideoContainer.setLayoutParams(containerParams);
 
             // The width and height are interchanged outside of this method based on the current
             // orientation, so we can transform using "width", which will be either the width or
@@ -739,47 +720,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     }
 
     /**
-     * Sets the call's data usage value
-     *
-     * @param context the current context
-     * @param dataUsage the data usage value
-     */
-    @Override
-    public void setCallDataUsage(Context context, long dataUsage) {
-        Log.d(this, "setDataUsage: dataUsage = " + dataUsage);
-        Toast.makeText(context, "dataUsage=" + dataUsage, Toast.LENGTH_LONG).show();
-    }
-
-    private int fromCallSessionEvent(int event) {
-        switch (event) {
-            case Connection.VideoProvider.SESSION_EVENT_RX_PAUSE:
-                return R.string.player_stopped;
-            case Connection.VideoProvider.SESSION_EVENT_RX_RESUME:
-                return R.string.player_started;
-            case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
-                return R.string.camera_not_ready;
-            case Connection.VideoProvider.SESSION_EVENT_CAMERA_READY:
-                return R.string.camera_ready;
-            default:
-                return R.string.unknown_call_session_event;
-        }
-    }
-
-    /**
-     * Sets the call's data usage value
-     *
-     * @param context the current context
-     * @param event the call session event
-     */
-    @Override
-    public void displayCallSessionEvent(int event) {
-        Log.d(this, "displayCallSessionEvent: event = " + event);
-        Context context = getActivity();
-        String msg = context.getResources().getString(fromCallSessionEvent(event));
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
      * Determines the size of the device screen.
      *
      * @return {@link Point} specifying the width and height of the screen.
@@ -818,6 +758,10 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         }
 
         if (mVideoViews != null) {
+            mPreviewVideoContainer = mVideoViews.findViewById(R.id.previewVideoContainer);
+            mCameraOff = mVideoViews.findViewById(R.id.previewCameraOff);
+            mPreviewPhoto = (ImageView) mVideoViews.findViewById(R.id.previewProfilePhoto);
+
             TextureView displaySurface = (TextureView) mVideoViews.findViewById(R.id.incomingVideo);
 
             Log.d(this, "inflateVideoCallViews: sVideoSurfacesInUse=" + sVideoSurfacesInUse);
