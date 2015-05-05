@@ -116,14 +116,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/primary_call_info_container" />
 
-    <fragment android:name="com.android.incallui.VideoCallFragment"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="start|center_vertical"
-        android:id="@+id/videoCallFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
     <!-- Placeholder for various fragments that are added dynamically underneath the caller info. -->
     <FrameLayout
         android:id="@+id/answer_and_dialpad_container"
