@@ -79,6 +79,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
         InCallPresenter.getInstance().getInCallCameraManager().removeCameraSelectionListener(this);
+        InCallPresenter.getInstance().removeCanAddCallListener(this);
     }
 
     @Override
@@ -258,20 +259,16 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().displayDialpad(checked /* show */, true /* animate */);
     }
 
-    public void displayModifyCallOptions() {
-        getUi().displayModifyCallOptions();
-    }
-
-    public int getCurrentVideoState() {
-        return mCall.getVideoState();
-    }
-
-    public void changeToVideoClicked(VideoProfile videoProfile) {
+    public void changeToVideoClicked() {
         VideoCall videoCall = mCall.getVideoCall();
         if (videoCall == null) {
             return;
         }
+        int currVideoState = mCall.getVideoState();
+        int currUnpausedVideoState = CallUtils.getUnPausedVideoState(currVideoState);
+        currUnpausedVideoState |= VideoProfile.VideoState.BIDIRECTIONAL;
 
+        VideoProfile videoProfile = new VideoProfile(currUnpausedVideoState);
         videoCall.sendSessionModifyRequest(videoProfile);
         mCall.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
     }
@@ -316,14 +313,14 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (pause) {
             videoCall.setCamera(null);
             VideoProfile videoProfile = new VideoProfile(
-                    mCall.getVideoState() | VideoProfile.VideoState.PAUSED);
+                    mCall.getVideoState() & ~VideoProfile.VideoState.TX_ENABLED);
             videoCall.sendSessionModifyRequest(videoProfile);
         } else {
             InCallCameraManager cameraManager = InCallPresenter.getInstance().
                     getInCallCameraManager();
             videoCall.setCamera(cameraManager.getActiveCameraId());
             VideoProfile videoProfile = new VideoProfile(
-                    mCall.getVideoState() & ~VideoProfile.VideoState.PAUSED);
+                    mCall.getVideoState() | VideoProfile.VideoState.TX_ENABLED);
             videoCall.sendSessionModifyRequest(videoProfile);
         }
         getUi().setVideoPaused(pause);
@@ -354,7 +351,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      * @param call The active call.
      */
     private void updateButtonsState(Call call) {
-        Log.v(this, "Showing buttons for voice call.");
+        Log.v(this, "updateButtonsState");
         final CallButtonUi ui = getUi();
 
         final boolean isVideo = CallUtils.isVideoCall(call);
@@ -373,9 +370,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showAddCall = TelecomAdapter.getInstance().canAddCall();
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
-        // TODO: This button is currently being used for both upgrade and downgrade scenarios.
-        // It should be split into BUTTON_DOWNGRADE_TO_VOICE AND BUTTON_UPGRADE_TO_VIDEO
-        final boolean showUpgradeToVideo = isVideo ||
+        final boolean showUpgradeToVideo = !isVideo &&
                 (call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
                 && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX));
 
@@ -388,7 +383,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_MUTE, showMute);
         ui.showButton(BUTTON_ADD_CALL, showAddCall);
         ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
-        ui.showButton(BUTTON_DOWNGRADE_TO_VOICE, false);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo);
         ui.showButton(BUTTON_DIALPAD, !isVideo);
@@ -436,7 +430,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setAudio(int mode);
         void setSupportedAudio(int mask);
         void displayDialpad(boolean on, boolean animate);
-        void displayModifyCallOptions();
         boolean isDialpadVisible();
 
         /**

@@ -68,24 +68,22 @@ public class CallButtonFragment
 
     public interface Buttons {
         public static final int BUTTON_AUDIO = 0;
-        public static final int BUTTON_DOWNGRADE_TO_VOICE = 1;
-        public static final int BUTTON_MUTE = 2;
-        public static final int BUTTON_DIALPAD = 3;
-        public static final int BUTTON_HOLD = 4;
-        public static final int BUTTON_SWAP = 5;
-        public static final int BUTTON_UPGRADE_TO_VIDEO = 6;
-        public static final int BUTTON_SWITCH_CAMERA = 7;
-        public static final int BUTTON_ADD_CALL = 8;
-        public static final int BUTTON_MERGE = 9;
-        public static final int BUTTON_PAUSE_VIDEO = 10;
-        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 11;
-        public static final int BUTTON_COUNT = 12;
+        public static final int BUTTON_MUTE = 1;
+        public static final int BUTTON_DIALPAD = 2;
+        public static final int BUTTON_HOLD = 3;
+        public static final int BUTTON_SWAP = 4;
+        public static final int BUTTON_UPGRADE_TO_VIDEO = 5;
+        public static final int BUTTON_SWITCH_CAMERA = 6;
+        public static final int BUTTON_ADD_CALL = 7;
+        public static final int BUTTON_MERGE = 8;
+        public static final int BUTTON_PAUSE_VIDEO = 9;
+        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 10;
+        public static final int BUTTON_COUNT = 11;
     }
 
     private SparseIntArray mButtonVisibilityMap = new SparseIntArray(BUTTON_COUNT);
 
     private CompoundButton mAudioButton;
-    private ImageButton mChangeToVoiceButton;
     private CompoundButton mMuteButton;
     private CompoundButton mShowDialpadButton;
     private CompoundButton mHoldButton;
@@ -138,8 +136,6 @@ public class CallButtonFragment
 
         mAudioButton = (CompoundButton) parent.findViewById(R.id.audioButton);
         mAudioButton.setOnClickListener(this);
-        mChangeToVoiceButton = (ImageButton) parent.findViewById(R.id.changeToVoiceButton);
-        mChangeToVoiceButton. setOnClickListener(this);
         mMuteButton = (CompoundButton) parent.findViewById(R.id.muteButton);
         mMuteButton.setOnClickListener(this);
         mShowDialpadButton = (CompoundButton) parent.findViewById(R.id.dialpadButton);
@@ -196,10 +192,6 @@ public class CallButtonFragment
             case R.id.addButton:
                 getPresenter().addCallClicked();
                 break;
-            case R.id.changeToVoiceButton:
-                // STOPSHIP One way video options
-                getPresenter().displayModifyCallOptions();
-                break;
             case R.id.muteButton: {
                 getPresenter().muteClicked(!mMuteButton.isSelected());
                 break;
@@ -219,8 +211,7 @@ public class CallButtonFragment
                 getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
                 break;
             case R.id.changeToVideoButton:
-                // STOPSHIP One way video options
-                getPresenter().displayModifyCallOptions();
+                getPresenter().changeToVideoClicked();
                 break;
             case R.id.switchCameraButton:
                 getPresenter().switchCameraClicked(
@@ -271,7 +262,6 @@ public class CallButtonFragment
         }
 
         ImageButton[] normalButtons = {
-            mChangeToVoiceButton,
             mSwapButton,
             mChangeToVideoButton,
             mAddCallButton,
@@ -358,7 +348,6 @@ public class CallButtonFragment
         mIsEnabled = isEnabled;
 
         mAudioButton.setEnabled(isEnabled);
-        mChangeToVoiceButton.setEnabled(isEnabled);
         mMuteButton.setEnabled(isEnabled);
         mShowDialpadButton.setEnabled(isEnabled);
         mHoldButton.setEnabled(isEnabled);
@@ -389,8 +378,6 @@ public class CallButtonFragment
         switch (id) {
             case BUTTON_AUDIO:
                 return mAudioButton;
-            case BUTTON_DOWNGRADE_TO_VOICE:
-                return mChangeToVoiceButton;
             case BUTTON_MUTE:
                 return mMuteButton;
             case BUTTON_DIALPAD:
@@ -442,74 +429,6 @@ public class CallButtonFragment
         if (mMuteButton.isSelected() != value) {
             mMuteButton.setSelected(value);
         }
-    }
-
-    /**The function is called when Modify Call button gets pressed. The function creates and
-     * displays modify call options.
-     */
-    @Override
-    public void displayModifyCallOptions() {
-        CallButtonPresenter.CallButtonUi ui = getUi();
-        if (ui == null) {
-            Log.e(this, "Cannot display ModifyCallOptions as ui is null");
-            return;
-        }
-
-        Context context = getContext();
-
-        final ArrayList<CharSequence> items = new ArrayList<CharSequence>();
-        final ArrayList<Integer> itemToCallType = new ArrayList<Integer>();
-        final Resources res = ui.getContext().getResources();
-        // Prepare the string array and mapping.
-        items.add(res.getText(R.string.modify_call_option_voice));
-        itemToCallType.add(VideoProfile.VideoState.AUDIO_ONLY);
-
-        items.add(res.getText(R.string.modify_call_option_vt_rx));
-        itemToCallType.add(VideoProfile.VideoState.RX_ENABLED);
-
-        items.add(res.getText(R.string.modify_call_option_vt_tx));
-        itemToCallType.add(VideoProfile.VideoState.TX_ENABLED);
-
-        items.add(res.getText(R.string.modify_call_option_vt));
-        itemToCallType.add(VideoProfile.VideoState.BIDIRECTIONAL);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getUi().getContext());
-        builder.setTitle(R.string.modify_call_option_title);
-        final AlertDialog alert;
-
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                Toast.makeText(getUi().getContext(), items.get(item), Toast.LENGTH_SHORT).show();
-                final int selCallType = itemToCallType.get(item);
-                Log.v(this, "Videocall: ModifyCall: upgrade/downgrade to "
-                        + fromCallType(selCallType));
-                VideoProfile videoProfile = new VideoProfile(selCallType);
-                getPresenter().changeToVideoClicked(videoProfile);
-                dialog.dismiss();
-            }
-        };
-        int currVideoState = getPresenter().getCurrentVideoState();
-        int currUnpausedVideoState = CallUtils.getUnPausedVideoState(currVideoState);
-        int index = itemToCallType.indexOf(currUnpausedVideoState);
-        if (index == INVALID_INDEX) {
-            return;
-        }
-        builder.setSingleChoiceItems(items.toArray(new CharSequence[0]), index, listener);
-        alert = builder.create();
-        alert.show();
-    }
-
-    public static String fromCallType(int callType) {
-        switch (callType) {
-            case VideoProfile.VideoState.BIDIRECTIONAL:
-                return "VT";
-            case VideoProfile.VideoState.TX_ENABLED:
-                return "VT_TX";
-            case VideoProfile.VideoState.RX_ENABLED:
-                return "VT_RX";
-        }
-        return "";
     }
 
     private void addToOverflowMenu(int id, View button, PopupMenu menu) {
