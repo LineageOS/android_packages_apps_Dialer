@@ -78,6 +78,8 @@ public class CallLogAdapter extends GroupingListAdapter
         public void onReportButtonClick(String number);
     }
 
+    private static final int VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM = 10;
+
     /** Constant used to indicate no row is expanded. */
     private static final long NONE_EXPANDED = -1;
 
@@ -88,6 +90,8 @@ public class CallLogAdapter extends GroupingListAdapter
     private ViewTreeObserver mViewTreeObserver = null;
 
     protected ContactInfoCache mContactInfoCache;
+
+    private boolean mShowCallHistoryListItem = false;
 
     /**
      * Tracks the currently expanded call log row.
@@ -254,6 +258,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM) {
+            return ShowCallHistoryViewHolder.create(mContext, parent);
+        }
         return createCallLogEntryViewHolder(parent);
     }
 
@@ -287,6 +294,10 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param count the number of entries in the current item, greater than 1 if it is a group
      */
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        if (getItemViewType(position) == VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM) {
+            return;
+        }
+
         Cursor c = (Cursor) getItem(position);
         if (c == null) {
             return;
@@ -412,6 +423,23 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver = views.rootView.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return super.getItemCount() + (mShowCallHistoryListItem ? 1 : 0);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == getItemCount() - 1 && mShowCallHistoryListItem) {
+            return VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM;
+        }
+        return super.getItemViewType(position);
+    }
+
+    public void setShowCallHistoryListItem(boolean show) {
+        mShowCallHistoryListItem = show;
     }
 
     /**

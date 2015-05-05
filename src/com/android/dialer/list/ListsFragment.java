@@ -60,7 +60,6 @@ public class ListsFragment extends Fragment implements ViewPager.OnPageChangeLis
             "key_last_dismissed_call_shortcut_date";
 
     public interface HostInterface {
-        public void showCallHistory();
         public ActionBarController getActionBarController();
     }
 

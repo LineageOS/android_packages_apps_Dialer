@@ -77,6 +77,11 @@ public class CallLogFragment extends Fragment
     private static final String KEY_LOG_LIMIT = "log_limit";
     private static final String KEY_DATE_LIMIT = "date_limit";
 
+    // No limit specified for the number of logs to show; use the CallLogQueryHandler's default.
+    private static final int NO_LOG_LIMIT = -1;
+    // No date-based filtering.
+    private static final int NO_DATE_LIMIT = 0;
+
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
@@ -123,18 +128,18 @@ public class CallLogFragment extends Fragment
 
     // Log limit - if no limit is specified, then the default in {@link CallLogQueryHandler}
     // will be used.
-    private int mLogLimit = -1;
+    private int mLogLimit = NO_LOG_LIMIT;
 
     // Date limit (in millis since epoch) - when non-zero, only calls which occurred on or after
     // the date filter are included.  If zero, no date-based filtering occurs.
-    private long mDateLimit = 0;
+    private long mDateLimit = NO_DATE_LIMIT;
 
     public CallLogFragment() {
-        this(CallLogQueryHandler.CALL_TYPE_ALL, -1);
+        this(CallLogQueryHandler.CALL_TYPE_ALL, NO_LOG_LIMIT);
     }
 
     public CallLogFragment(int filterType) {
-        this(filterType, -1);
+        this(filterType, NO_LOG_LIMIT);
     }
 
     public CallLogFragment(int filterType, int logLimit) {
@@ -150,7 +155,7 @@ public class CallLogFragment extends Fragment
      * @param dateLimit limits results to calls occurring on or after the specified date.
      */
     public CallLogFragment(int filterType, long dateLimit) {
-        this(filterType, -1, dateLimit);
+        this(filterType, NO_LOG_LIMIT, dateLimit);
     }
 
     /**
@@ -278,6 +283,9 @@ public class CallLogFragment extends Fragment
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
                 new ContactInfoHelper(getActivity(), currentCountryIso), this);
+        if (mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT) {
+            mAdapter.setShowCallHistoryListItem(true);
+        }
         mRecyclerView.setAdapter(mAdapter);
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();

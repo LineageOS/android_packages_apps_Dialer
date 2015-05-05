@@ -198,7 +198,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">4dp</item>
         <item name="android:baselineAligned">false</item>
-        <item name="cardCornerRadius">4dp</item>
+        <item name="cardCornerRadius">2dp</item>
         <item name="cardBackgroundColor">@color/background_dialer_call_log_list_item</item>
     </style>
 </resources>
