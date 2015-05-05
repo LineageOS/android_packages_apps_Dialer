@@ -68,7 +68,9 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
 
     @Override
     public void setQueryString(String queryString) {
-        final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
+        // Don't show actions if the query string contains a letter.
+        final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString())
+                && hasDigitsInQueryString();
         boolean changed = false;
         changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
@@ -78,5 +80,19 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
             notifyDataSetChanged();
         }
         super.setQueryString(queryString);
+    }
+
+    /**
+     * Whether there is at least one digit in the query string.
+     */
+    private boolean hasDigitsInQueryString() {
+        String queryString = getQueryString();
+        int length = queryString.length();
+        for (int i = 0; i < length; i++) {
+            if (Character.isDigit(queryString.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
