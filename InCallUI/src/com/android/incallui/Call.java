@@ -509,9 +509,6 @@ public class Call {
         mSessionModificationState = state;
         Log.d(this, "setSessionModificationState " + state + " mSessionModificationState="
                 + mSessionModificationState);
-        if (state != Call.SessionModificationState.WAITING_FOR_RESPONSE) {
-            setModifyToVideoState(VideoProfile.VideoState.AUDIO_ONLY);
-        }
         if (hasChanged) {
             update();
         }
@@ -549,7 +546,7 @@ public class Call {
         }
 
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
-                "videoState:%d, mSessionModificationState:%d, VideoSettings:%s]",
+                "videoState:%s, mSessionModificationState:%d, VideoSettings:%s]",
                 mId,
                 State.toString(getState()),
                 android.telecom.Call.Details
@@ -557,7 +554,8 @@ public class Call {
                 mChildCallIds,
                 getParentId(),
                 this.mTelecommCall.getConferenceableCalls(),
-                mTelecommCall.getDetails().getVideoState(),
+                VideoProfile.VideoState.videoStateToString(
+                        mTelecommCall.getDetails().getVideoState()),
                 mSessionModificationState,
                 getVideoSettings());
     }

@@ -294,13 +294,6 @@
     <!-- Text for the onscreen overflow button, to see additional actions which can be done. -->
     <string name="onscreenOverflowText">More options</string>
 
-    <!-- STOPSHIP -  For test only - In-call screen: Modify Call Options for IMS call -->
-    <string name="modify_call_option_title" translatable="false">Which type of call?</string>
-    <string name="modify_call_option_vt" translatable="false">Video bidirectional</string>
-    <string name="modify_call_option_vt_tx" translatable="false">Video transmit</string>
-    <string name="modify_call_option_vt_rx" translatable="false">Video receive</string>
-    <string name="modify_call_option_voice" translatable="false">Voice Only</string>
-
     <!-- Message indicating that Video Started flowing for IMS-VT calls -->
     <string name="player_started">Player Started</string>
     <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
@@ -440,17 +433,6 @@
     <!-- This can be used in any application wanting to disable the text "Emergency number" -->
     <string name="emergency_call_dialog_number_for_display">Emergency number</string>
 
-    <!-- Video quality changed message -->
-    <string name="video_quality_changed" translatable="false">Video quality changed to \u0020</string>
-    <!-- Video quality High -->
-    <string name="video_quality_high" translatable="false">High</string>
-    <!-- Video quality Medium -->
-    <string name="video_quality_medium" translatable="false">Medium</string>
-    <!-- Video quality Low -->
-    <string name="video_quality_low" translatable="false">Low</string>
-    <!-- Video quality Unknown -->
-    <string name="video_quality_unknown" translatable="false">Unknown</string>
-
     <!-- Phrase describing a time duration using seconds [CHAR LIMIT=16] -->
     <plurals name="duration_seconds">
         <item quantity="one">1 second</item>
@@ -466,4 +448,12 @@
         <item quantity="one">1 hour</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> hours</item>
     </plurals>
+
+    <!-- Description of the profile photo shown when the device's camera is disabled udring a video
+        call. [CHAR LIMIT=NONE] -->
+    <string name="profile_photo_description">Profile photo</string>
+
+    <!-- Description of the "camera off" icon displayed when the device's camera is disabled during
+         a video call. [CHAR LIMIT=NONE] -->
+    <string name="camera_off_description">Camera off</string>
 </resources>
