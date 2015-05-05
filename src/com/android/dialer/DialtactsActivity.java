@@ -609,7 +609,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_history:
-                showCallHistory();
+                // Use explicit CallLogActivity intent instead of ACTION_VIEW +
+                // CONTENT_TYPE, so that we always open our call log from our dialer
+                final Intent intent = new Intent(this, CallLogActivity.class);
+                startActivity(intent);
                 break;
             case R.id.menu_add_contact:
                 try {
@@ -1099,14 +1102,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo != null && resolveInfo.size() > 0;
-    }
-
-    @Override
-    public void showCallHistory() {
-        // Use explicit CallLogActivity intent instead of ACTION_VIEW +
-        // CONTENT_TYPE, so that we always open our call log from our dialer
-        final Intent intent = new Intent(this, CallLogActivity.class);
-        startActivity(intent);
     }
 
     /**
