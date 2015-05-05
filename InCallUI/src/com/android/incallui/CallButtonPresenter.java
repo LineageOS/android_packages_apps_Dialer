@@ -322,6 +322,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             VideoProfile videoProfile = new VideoProfile(
                     mCall.getVideoState() | VideoProfile.VideoState.TX_ENABLED);
             videoCall.sendSessionModifyRequest(videoProfile);
+            mCall.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
         }
         getUi().setVideoPaused(pause);
     }

@@ -112,61 +112,24 @@
         <item>@string/description_direction_down</item>
     </array>
 
-
-    <!-- For upgrade to video from VOLTE to VT (Tx/Rx/Bidirectional) in an active video call.
+    <!-- For accept/reject upgrade to video in active video call
          - Accept upgrade to video request (drag right)
-         - Decline upgrade to video request (drag left)
-         - Answer as audio call (drag down) -->
-    <array name="incoming_call_widget_video_upgrade_request_targets">
+         - Decline upgrade to video request (drag left)-->
+    <array name="incoming_call_widget_video_request_targets">
         <item>@drawable/ic_lockscreen_answer_video</item>
-        <item>@null</item>
-        <item>@drawable/ic_lockscreen_decline</item>
-        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/ic_lockscreen_decline_video</item>
     </array>
-    <array name="incoming_call_widget_video_upgrade_request_target_descriptions">
+
+    <array name="incoming_call_widget_video_request_target_descriptions">
         <item>@string/description_target_accept_upgrade_to_video_request</item>
         <item>@null</item>
         <item>@string/description_target_decline_upgrade_to_video_request</item>
         <item>@null</item>"
     </array>
-    <array name="incoming_call_widget_video_upgrade_request_target_direction_descriptions">
+    <array name="incoming_call_widget_video_request_target_direction_descriptions">
         <item>@string/description_direction_right</item>
         <item>@null</item>
         <item>@string/description_direction_left</item>
         <item>@null</item>
     </array>
-
-    <!-- For accept/reject upgrade to video in active video call
-         - Accept upgrade to video request (drag right)
-         - Decline upgrade to video request (drag left)-->
-    <array name="incoming_call_widget_bidirectional_video_accept_reject_request_targets">
-        <item>@drawable/ic_lockscreen_answer_video</item>
-        <item>@drawable/ic_lockscreen_decline</item>
-    </array>
-
-    <!-- For accept/reject upgrade to video transmit in active video call
-         - Accept upgrade to video request (drag right)
-         - Decline upgrade to video request (drag left)
-         TODO: This should be automatically rejected in the lower layers -->
-    <array name="incoming_call_widget_video_transmit_accept_reject_request_targets">
-        <item>@drawable/ic_lockscreen_answer_video</item>
-        <item>@drawable/ic_lockscreen_decline</item>
-    </array>
-    <array name="incoming_call_widget_video_transmit_request_target_descriptions">
-        <item>@string/description_target_accept_upgrade_to_video_request</item>
-        <item>@string/description_target_decline_upgrade_to_video_request</item>
-    </array>
-
-    <!-- For accept/reject upgrade to video receive in active video call
-         - Accept upgrade to video request (drag right)
-         - Decline upgrade to video request (drag left)-->
-    <array name="incoming_call_widget_video_receive_accept_reject_request_targets">
-        <item>@drawable/ic_lockscreen_answer_video</item>
-        <item>@drawable/ic_lockscreen_decline</item>
-    </array>
-    <array name="incoming_call_widget_video_receive_request_target_descriptions">
-        <item>@string/description_target_accept_upgrade_to_video_request</item>
-        <item>@string/description_target_decline_upgrade_to_video_request</item>
-    </array>
-
 </resources>

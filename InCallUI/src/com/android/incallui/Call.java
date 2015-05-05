@@ -124,6 +124,7 @@ public class Call {
         public static final int REQUEST_FAILED = 2;
         public static final int RECEIVED_UPGRADE_TO_VIDEO_REQUEST = 3;
         public static final int UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT = 4;
+        public static final int REQUEST_REJECTED = 5;
     }
 
     public static class VideoSettings {
@@ -510,7 +511,7 @@ public class Call {
         Log.d(this, "setSessionModificationState " + state + " mSessionModificationState="
                 + mSessionModificationState);
         if (hasChanged) {
-            update();
+            CallList.getInstance().onSessionModificationStateChange(this, state);
         }
     }
 

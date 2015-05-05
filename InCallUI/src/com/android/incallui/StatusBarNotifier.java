@@ -45,7 +45,9 @@ import com.android.incallui.InCallPresenter.InCallState;
 /**
  * This class adds Notifications to the status bar for the in-call experience.
  */
-public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
+public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
+        CallList.CallUpdateListener {
+
     // notification types
     private static final int IN_CALL_NOTIFICATION = 1;
 
@@ -58,6 +60,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private int mSavedContent = 0;
     private Bitmap mSavedLargeIcon;
     private String mSavedContentTitle;
+    private String mCallId = null;
+    private InCallState mInCallState;
 
     public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache) {
         Preconditions.checkNotNull(context);
@@ -74,7 +78,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     @Override
     public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
         Log.d(this, "onStateChange");
-
+        mInCallState = newState;
         updateNotification(newState, callList);
     }
 
@@ -145,6 +149,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
     private void showNotification(final Call call) {
         final boolean isIncoming = (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING);
+
+        if (mCallId != null) {
+            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+        }
+        mCallId = call.getId();
+        CallList.getInstance().addCallUpdateListener(call.getId(), this);
 
         // we make a call to the contact info cache to query for supplemental data to what the
         // call provides.  This includes the contact name and photo.
@@ -574,4 +584,25 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener {
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
+    @Override
+    public void onCallChanged(Call call) {
+        // no-op
+    }
+
+    /**
+     * Responds to changes in the session modification state for the call by dismissing the
+     * status bar notification as required.
+     *
+     * @param sessionModificationState The new session modification state.
+     */
+    @Override
+    public void onSessionModificationStateChange(int sessionModificationState) {
+        if (sessionModificationState == Call.SessionModificationState.NO_REQUEST) {
+            if (mCallId != null) {
+                CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            }
+
+            updateNotification(mInCallState, CallList.getInstance());
+        }
+    }
 }
