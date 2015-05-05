@@ -22,15 +22,17 @@
     <dimen name="remove_text_size">16dp</dimen>
 
     <!-- Call Log -->
-    <dimen name="call_log_call_action_size">32dip</dimen>
+    <dimen name="call_log_call_action_size">32dp</dimen>
     <dimen name="call_log_call_action_width">54dp</dimen>
-    <dimen name="call_log_icon_margin">4dip</dimen>
-    <dimen name="call_log_inner_margin">13dip</dimen>
+    <dimen name="call_log_icon_margin">4dp</dimen>
+    <dimen name="call_log_inner_margin">13dp</dimen>
     <dimen name="call_log_outer_margin">8dp</dimen>
     <dimen name="call_log_start_margin">16dp</dimen>
-    <dimen name="call_log_indent_margin">24dip</dimen>
+    <dimen name="call_log_indent_margin">24dp</dimen>
     <dimen name="call_log_name_margin_bottom">2dp</dimen>
+    <dimen name="call_log_vertical_padding">12dp</dimen>
     <dimen name="call_log_list_item_height">56dip</dimen>
+    <dimen name="show_call_history_list_item_height">72dp</dimen>
 
     <!-- Size of contact photos in the call log and call details. -->
     <dimen name="contact_photo_size">40dp</dimen>
