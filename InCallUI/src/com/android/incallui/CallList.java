@@ -142,6 +142,21 @@ public class CallList {
         Trace.endSection();
     }
 
+    /**
+     * Called when a single call has changed session modification state.
+     *
+     * @param call The call.
+     * @param sessionModificationState The new session modification state.
+     */
+    public void onSessionModificationStateChange(Call call, int sessionModificationState) {
+        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
+        if (listeners != null) {
+            for (CallUpdateListener listener : listeners) {
+                listener.onSessionModificationStateChange(sessionModificationState);
+            }
+        }
+    }
+
     public void notifyCallUpdateListeners(Call call) {
         final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
@@ -556,10 +571,19 @@ public class CallList {
          * that will get called upon disconnection.
          */
         public void onDisconnect(Call call);
+
+
     }
 
     public interface CallUpdateListener {
         // TODO: refactor and limit arg to be call state.  Caller info is not needed.
         public void onCallChanged(Call call);
+
+        /**
+         * Notifies of a change to the session modification state for a call.
+         *
+         * @param sessionModificationState The new session modification state.
+         */
+        public void onSessionModificationStateChange(int sessionModificationState);
     }
 }
