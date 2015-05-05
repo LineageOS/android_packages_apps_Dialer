@@ -266,6 +266,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     }
 
     private void configureAnswerTargetsForSms(Call call, List<String> textMsgs) {
+        mHasTextMessages = textMsgs != null;
         boolean withSms =
                 call.can(android.telecom.Call.Details.CAPABILITY_RESPOND_VIA_TEXT)
                 && mHasTextMessages;
