@@ -465,6 +465,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             updateVideoCall(primary);
         }
         updateCallCache(primary);
+        maybeAutoEnterFullscreen();
     }
 
     private void checkForVideoStateChange(Call call) {
@@ -1070,6 +1071,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     public void maybeAutoEnterFullscreen() {
         if (!mIsAutoFullscreenEnabled) {
+            return;
+        }
+
+        if (mPrimaryCall == null || (mPrimaryCall != null
+                && mPrimaryCall.getState() != Call.State.ACTIVE) || mIsFullScreen) {
             return;
         }
 
