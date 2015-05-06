@@ -316,7 +316,7 @@ public class SpecialCharSequenceMgr {
             AlertDialog alert = new AlertDialog.Builder(context)
                     .setTitle(labelResId)
                     .setItems(deviceIds.toArray(new String[deviceIds.size()]), null)
-                    .setPositiveButton(R.string.ok, null)
+                    .setPositiveButton(android.R.string.ok, null)
                     .setCancelable(false)
                     .show();
             return true;
