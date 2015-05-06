@@ -17,4 +17,11 @@
     <!-- Determines the maximum number of buttons visible on the call card.  Any buttons over this
          count are put into the overflow menu. -->
     <integer name="call_card_max_buttons">5</integer>
+
+    <!-- Determines video calls will automatically enter fullscreen mode after the start of the
+         call. -->
+    <bool name="video_call_auto_fullscreen">true</bool>
+    <!-- The number of milliseconds after which a video call will automatically enter fullscreen
+         mode (requires video_call_auto_fullscreen to be true). -->
+    <integer name="video_call_auto_fullscreen_timeout">5000</integer>
 </resources>
