@@ -22,6 +22,8 @@ import android.database.Cursor;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract;
 import android.telecom.AudioState;
 import android.telecom.CameraCapabilities;
@@ -73,6 +75,22 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     public static final String TAG = "VideoCallPresenter";
 
     public static final boolean DEBUG = false;
+
+    /**
+     * Runnable which is posted to schedule automatically entering fullscreen mode.
+     */
+    private Runnable mAutoFullscreenRunnable =  new Runnable() {
+        @Override
+        public void run() {
+            if (mAutoFullScreenPending) {
+                Log.v(this, "Automatically entering fullscreen mode.");
+                setFullScreen(true);
+                mAutoFullScreenPending = false;
+            } else {
+                Log.v(this, "Skipping scheduled fullscreen mode.");
+            }
+        }
+    };
 
     /**
      * Determines the device orientation (portrait/lanscape).
@@ -174,6 +192,29 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private ContactInfoCache.ContactCacheEntry mProfileInfo = null;
 
     /**
+     * UI thread handler used for delayed task execution.
+     */
+    private Handler mHandler;
+
+    /**
+     * Determines whether video calls should automatically enter full screen mode after
+     * {@link #mAutoFullscreenTimeoutMillis} milliseconds.
+     */
+    private boolean mIsAutoFullscreenEnabled = false;
+
+    /**
+     * Determines the number of milliseconds after which a video call will automatically enter
+     * fullscreen mode.  Requires {@link #mIsAutoFullscreenEnabled} to be {@code true}.
+     */
+    private int mAutoFullscreenTimeoutMillis = 0;
+
+    /**
+     * Determines if the countdown is currently running to automatically enter full screen video
+     * mode.
+     */
+    private boolean mAutoFullScreenPending = false;
+
+    /**
      * Initializes the presenter.
      *
      * @param context The current context.
@@ -182,6 +223,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         mContext = context;
         mMinimumVideoDimension = mContext.getResources().getDimension(
                 R.dimen.video_preview_small_dimension);
+        mHandler = new Handler(Looper.getMainLooper());
+        mIsAutoFullscreenEnabled = mContext.getResources()
+                .getBoolean(R.bool.video_call_auto_fullscreen);
+        mAutoFullscreenTimeoutMillis = mContext.getResources().getInteger(
+                R.integer.video_call_auto_fullscreen_timeout);
     }
 
     /**
@@ -325,6 +371,21 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     private void toggleFullScreen() {
         mIsFullScreen = !mIsFullScreen;
+
+        // Ensure we cancel any scheduled auto activation of fullscreen mode as the user's setting
+        // should override any automatic operation.
+        cancelAutoFullScreen();
+        InCallPresenter.getInstance().setFullScreenVideoState(mIsFullScreen);
+    }
+
+    /**
+     * Sets the current full screen mode.
+     *
+     * @param isFullScreen {@code true} if full screen mode should be active, {@code false}
+     *      otherwise.
+     */
+    public void setFullScreen(boolean isFullScreen) {
+        mIsFullScreen = isFullScreen;
         InCallPresenter.getInstance().setFullScreenVideoState(mIsFullScreen);
     }
 
@@ -622,6 +683,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         updateAudioMode(true);
 
         mIsVideoMode = true;
+
+        maybeAutoEnterFullscreen();
     }
 
     //TODO: Move this into Telecom. InCallUI should not be this close to audio functionality.
@@ -981,7 +1044,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param width peer width
      * @param height peer height
      */
-
     private void setDisplayVideoSize(int width, int height) {
         Log.d(this, "setDisplayVideoSize:Received peer width=" + width + " peer height=" + height);
         VideoCallUi ui = getUi();
@@ -1001,6 +1063,35 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             size.x = (int) (size.y * width / height);
         }
         ui.setDisplayVideoSize(size.x, size.y);
+    }
+
+    /**
+     * Schedules auto-entering of fullscreen mode.
+     */
+    public void maybeAutoEnterFullscreen() {
+        if (!mIsAutoFullscreenEnabled) {
+            return;
+        }
+
+        if (mAutoFullScreenPending) {
+            Log.v(this, "maybeAutoEnterFullscreen : already pending.");
+            return;
+        }
+        Log.v(this, "maybeAutoEnterFullscreen : scheduled");
+        mAutoFullScreenPending = true;
+        mHandler.postDelayed(mAutoFullscreenRunnable, mAutoFullscreenTimeoutMillis);
+    }
+
+    /**
+     * Cancels pending auto fullscreen mode.
+     */
+    public void cancelAutoFullScreen() {
+        if (!mAutoFullScreenPending) {
+            Log.v(this, "cancelAutoFullScreen : none pending.");
+            return;
+        }
+        Log.v(this, "cancelAutoFullScreen : cancelling pending");
+        mAutoFullScreenPending = false;
     }
 
     private static boolean isAudioRouteEnabled(int audioRoute, int audioRouteMask) {
