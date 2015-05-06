@@ -24,19 +24,21 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.KeyEvent;
@@ -122,10 +124,13 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         }
     };
 
+    /** Listener for orientation changes. */
+    private OrientationEventListener mOrientationEventListener;
+
     /**
-     * Used to determine if a change in orientation has occurred.
+     * Used to determine if a change in rotation has occurred.
      */
-    private static int sCurrentOrientation = Configuration.ORIENTATION_UNDEFINED;
+    private static int sPreviousRotation = -1;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -193,6 +198,28 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                 dialogFragment.setListener(mSelectAcctListener);
             }
         }
+
+        mOrientationEventListener = new OrientationEventListener(this,
+                SensorManager.SENSOR_DELAY_NORMAL) {
+            @Override
+            public void onOrientationChanged(int orientation) {
+                // Orientation is the current device orientation in degrees.  Ultimately we want
+                // the rotation (in fixed 90 degree intervals).
+                Display display = getWindowManager().getDefaultDisplay();
+                int newRotation = display.getRotation();
+                if (newRotation != sPreviousRotation) {
+                    doOrientationChanged(newRotation);
+                }
+            }
+        };
+
+        if (mOrientationEventListener.canDetectOrientation()) {
+            Log.v(this, "Orientation detection enabled.");
+            mOrientationEventListener.enable();
+        } else {
+            Log.v(this, "Orientation detection disabled.");
+            mOrientationEventListener.disable();
+        }
         Log.d(this, "onCreate(): exit");
     }
 
@@ -215,9 +242,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         // setting activity should be last thing in setup process
         InCallPresenter.getInstance().setActivity(this);
 
-        // It is possible that the activity restarted because orientation changed.
-        // Notify listeners if orientation changed.
-        doOrientationChanged(getResources().getConfiguration().orientation);
         InCallPresenter.getInstance().onActivityStarted();
     }
 
@@ -474,20 +498,19 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     }
 
     /**
-     * Handles changes in device orientation.
+     * Handles changes in device rotation.
      *
-     * @param orientation The new device orientation.
+     * @param rotation The new device rotation.
      */
-    private void doOrientationChanged(int orientation) {
-        Log.d(this, "doOrientationChanged prevOrientation=" + sCurrentOrientation +
-                " newOrientation=" + orientation);
-        // Check to see if the orientation changed to prevent triggering orientation change events
+    private void doOrientationChanged(int rotation) {
+        Log.d(this, "doOrientationChanged prevOrientation=" + sPreviousRotation +
+                " newOrientation=" + rotation);
+        // Check to see if the rotation changed to prevent triggering rotation change events
         // for other configuration changes.
-        if (orientation != sCurrentOrientation) {
-            sCurrentOrientation = orientation;
-            InCallPresenter.getInstance().onDeviceRotationChange(
-                    getWindowManager().getDefaultDisplay().getRotation());
-            InCallPresenter.getInstance().onDeviceOrientationChange(sCurrentOrientation);
+        if (rotation != sPreviousRotation) {
+            sPreviousRotation = rotation;
+            InCallPresenter.getInstance().onDeviceRotationChange(rotation);
+            InCallPresenter.getInstance().onDeviceOrientationChange(sPreviousRotation);
         }
     }
 
