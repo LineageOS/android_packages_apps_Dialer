@@ -23,44 +23,70 @@
     android:visibility="visible"
     android:importantForAccessibility="1">
 
-    <!-- Temporary border spacer. -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="1"
-        android:background="#eeeeee" />
-
-    <TextView
+    <LinearLayout
         android:id="@+id/video_call_action"
-        style="@style/CallLogActionsStyle"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="@string/call_log_action_video_call"
+        style="@style/CallLogActionStyle"
         android:nextFocusLeft="@+id/primary_action_view"
-        android:nextFocusRight="@+id/voicemail_action" />
+        android:nextFocusRight="@+id/voicemail_action">
 
-    <TextView
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_videocam_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_video_call" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/voicemail_action"
-        style="@style/CallLogActionsStyle"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="@string/call_log_action_voicemail"
+        style="@style/CallLogActionStyle"
         android:nextFocusLeft="@+id/video_call_action"
-        android:nextFocusRight="@+id/details_action" />
+        android:nextFocusRight="@+id/details_action">
 
-    <TextView
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_voicemail_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_voicemail"
+            android:nextFocusLeft="@+id/video_call_action"
+            android:nextFocusRight="@+id/details_action" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/details_action"
-        style="@style/CallLogActionsStyle"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="@string/call_log_action_details"
+        style="@style/CallLogActionStyle"
         android:nextFocusLeft="@+id/voicemail_action"
-        android:nextFocusRight="@+id/report_action" />
+        android:nextFocusRight="@+id/report_action">
 
-    <TextView
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_more_horiz_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_details" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/report_action"
-        style="@style/CallLogActionsStyle"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="@string/call_log_action_report"
+        style="@style/CallLogActionStyle"
         android:nextFocusLeft="@+id/details_action"
-        android:nextFocusRight="@+id/primary_action_view"
-        android:visibility="gone" />
+        android:nextFocusRight="@+id/primary_action_view">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_report_problem_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_report" />
+
+    </LinearLayout>
 
 </LinearLayout>

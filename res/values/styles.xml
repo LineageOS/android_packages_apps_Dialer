@@ -158,10 +158,18 @@
         <item name="android:overScrollMode">always</item>
     </style>
 
-    <style name="CallLogActionsStyle">
+    <style name="CallLogActionStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/call_log_action_height</item>
-        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:background">@drawable/call_log_action_border</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="CallLogActionTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingStart">@dimen/call_log_action_horizontal_padding</item>
         <item name="android:paddingEnd">@dimen/call_log_action_horizontal_padding</item>
         <item name="android:textColor">?attr/call_log_secondary_text_color</item>
@@ -169,6 +177,14 @@
         <item name="android:fontFamily">"sans-serif-medium"</item>
         <item name="android:focusable">true</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="CallLogActionIconStyle">
+        <item name="android:layout_width">@dimen/call_log_action_icon_dimen</item>
+        <item name="android:layout_height">@dimen/call_log_action_icon_dimen</item>
+        <item name="android:layout_marginStart">@dimen/call_log_action_icon_margin_start</item>
+        <item name="android:tint">?attr/call_log_secondary_text_color</item>
+        <item name="android:importantForAccessibility">no</item>
     </style>
 
     <style name="DismissButtonStyle">

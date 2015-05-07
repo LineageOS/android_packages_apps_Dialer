@@ -18,7 +18,7 @@
     <!--  Primary text color in the Dialer -->
     <color name="dialtacts_primary_text_color">#333333</color>
     <!-- Secondary text color in the Dialer -->
-    <color name="dialtacts_secondary_text_color">#737373</color>
+    <color name="dialtacts_secondary_text_color">#636363</color>
     <color name="dialer_red_highlight_color">#ff1744</color>
     <color name="dialer_green_highlight_color">#00c853</color>
 
@@ -100,4 +100,5 @@
 
     <color name="floating_action_button_touch_tint">#80ffffff</color>
 
+    <color name="call_log_action_divider">#eeeeee</color>
 </resources>
