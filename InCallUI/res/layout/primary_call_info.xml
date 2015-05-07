@@ -42,13 +42,12 @@
 
         <!-- Subscription provider or WiFi calling icon displayed to the left of the label -->
         <ImageView android:id="@+id/callStateIcon"
-            android:layout_width="16dp"
+            android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="6dp"
             android:layout_marginEnd="10dp"
             android:tint="@color/incall_accent_color"
             android:alpha="0.0"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             android:visibility="gone" />
 
         <ImageView android:id="@+id/videoCallIcon"
@@ -97,12 +96,12 @@
         android:clipToPadding="false">
 
         <ImageView android:id="@+id/hdAudioIcon"
-            android:src="@drawable/ic_hd_18dp"
-            android:layout_width="16dp"
+            android:src="@drawable/ic_hd_24dp"
+            android:layout_width="24dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:tint="@color/incall_call_banner_subtext_color"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             android:visibility="gone" />
 
         <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
