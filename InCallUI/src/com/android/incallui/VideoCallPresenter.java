@@ -371,7 +371,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     private void toggleFullScreen() {
         mIsFullScreen = !mIsFullScreen;
-
+        Log.v(this, "toggleFullScreen = " + mIsFullScreen);
         // Ensure we cancel any scheduled auto activation of fullscreen mode as the user's setting
         // should override any automatic operation.
         cancelAutoFullScreen();
@@ -385,6 +385,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      *      otherwise.
      */
     public void setFullScreen(boolean isFullScreen) {
+        Log.v(this, "setFullScreen = " + isFullScreen);
+        if (mIsFullScreen == isFullScreen) {
+            Log.v(this, "setFullScreen ignored as already in that state.");
+            return;
+        }
         mIsFullScreen = isFullScreen;
         InCallPresenter.getInstance().setFullScreenVideoState(mIsFullScreen);
     }
@@ -438,21 +443,29 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         // Determine the primary active call).
         Call primary = null;
+
+        // Determine the call which is the focus of the user's attention.  In the case of an
+        // incoming call waiting call, the primary call is still the active video call, however
+        // the determination of whether we should be in fullscreen mode is based on the type of the
+        // incoming call, not the active video call.
+        Call currentCall = null;
+
         if (newState == InCallPresenter.InCallState.INCOMING) {
             // We don't want to replace active video call (primary call)
             // with a waiting call, since user may choose to ignore/decline the waiting call and
             // this should have no impact on current active video call, that is, we should not
             // change the camera or UI unless the waiting VT call becomes active.
             primary = callList.getActiveCall();
+            currentCall = callList.getIncomingCall();
             if (!CallUtils.isActiveVideoCall(primary)) {
                 primary = callList.getIncomingCall();
             }
         } else if (newState == InCallPresenter.InCallState.OUTGOING) {
-            primary = callList.getOutgoingCall();
+            currentCall = primary = callList.getOutgoingCall();
         } else if (newState == InCallPresenter.InCallState.PENDING_OUTGOING) {
-            primary = callList.getPendingOutgoingCall();
+            currentCall = primary = callList.getPendingOutgoingCall();
         } else if (newState == InCallPresenter.InCallState.INCALL) {
-            primary = callList.getActiveCall();
+            currentCall = primary = callList.getActiveCall();
         }
 
         final boolean primaryChanged = !Objects.equals(mPrimaryCall, primary);
@@ -461,11 +474,17 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         Log.d(this, "onStateChange mPrimaryCall = " + mPrimaryCall);
         if (primaryChanged) {
             onPrimaryCallChanged(primary);
-        } else if(mPrimaryCall!=null) {
+        } else if (mPrimaryCall != null) {
             updateVideoCall(primary);
         }
         updateCallCache(primary);
-        maybeAutoEnterFullscreen();
+
+        // If the call context changed, potentially exit fullscreen or schedule auto enter of
+        // fullscreen mode.
+        // If the current call context is no longer a video call, exit fullscreen mode.
+        maybeExitFullscreen(currentCall);
+        // Schedule auto-enter of fullscreen mode if the current call context is a video call
+        maybeAutoEnterFullscreen(currentCall);
     }
 
     private void checkForVideoStateChange(Call call) {
@@ -685,7 +704,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         mIsVideoMode = true;
 
-        maybeAutoEnterFullscreen();
+        maybeAutoEnterFullscreen(call);
     }
 
     //TODO: Move this into Telecom. InCallUI should not be this close to audio functionality.
@@ -758,9 +777,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         enableCamera(mVideoCall, false);
 
         Log.d(this, "exitVideoMode mIsFullScreen: " + mIsFullScreen);
-        if (mIsFullScreen) {
-            toggleFullScreen();
-        }
+        setFullScreen(false);
 
         mIsVideoMode = false;
     }
@@ -1067,15 +1084,40 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Schedules auto-entering of fullscreen mode.
+     * Exits fullscreen mode if the current call context has changed to a non-video call.
+     *
+     * @param call The call.
      */
-    public void maybeAutoEnterFullscreen() {
+    protected void maybeExitFullscreen(Call call) {
+        if (call == null) {
+            return;
+        }
+
+        if (!CallUtils.isVideoCall(call) || call.getState() == Call.State.INCOMING) {
+            setFullScreen(false);
+        }
+    }
+
+    /**
+     * Schedules auto-entering of fullscreen mode.
+     * Will not enter full screen mode if any of the following conditions are met:
+     * 1. No call
+     * 2. Call is not active
+     * 3. Call is not video call
+     * 4. Already in fullscreen mode
+     *
+     * @param call The current call.
+     */
+    protected void maybeAutoEnterFullscreen(Call call) {
         if (!mIsAutoFullscreenEnabled) {
             return;
         }
 
-        if (mPrimaryCall == null || (mPrimaryCall != null
-                && mPrimaryCall.getState() != Call.State.ACTIVE) || mIsFullScreen) {
+        if (call == null || (
+                call != null && (call.getState() != Call.State.ACTIVE ||
+                        !CallUtils.isVideoCall(call)) || mIsFullScreen)) {
+            // Ensure any previously scheduled attempt to enter fullscreen is cancelled.
+            cancelAutoFullScreen();
             return;
         }
 
