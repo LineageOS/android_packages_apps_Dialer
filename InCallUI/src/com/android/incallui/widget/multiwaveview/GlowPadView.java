@@ -637,11 +637,15 @@ public class GlowPadView extends View {
     }
 
     /**
-     * Sets teh handle drawable to the drawable specified by the resource ID.
+     * Sets the handle drawable to the drawable specified by the resource ID.
      * @param resourceId
      */
     public void setHandleDrawable(int resourceId) {
-        mHandleDrawable = new TargetDrawable(getResources(), resourceId, 2);
+        if (mHandleDrawable != null) {
+            mHandleDrawable.setDrawable(getResources(), resourceId);
+        } else {
+            mHandleDrawable = new TargetDrawable(getResources(), resourceId, 1);
+        }
         mHandleDrawable.setState(TargetDrawable.STATE_INACTIVE);
     }
 
