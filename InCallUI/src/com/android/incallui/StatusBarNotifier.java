@@ -197,12 +197,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId = getIconToDisplay(call);
-        final Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
+        Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
         final int contentResId = getContentString(call);
         final String contentTitle = getContentTitle(contactInfo, call);
 
         if (!checkForChangeAndSaveData(iconResId, contentResId, largeIcon, contentTitle, state)) {
             return;
+        }
+
+        if (largeIcon != null) {
+            largeIcon = getRoundedIcon(largeIcon);
         }
 
         /*
@@ -352,15 +356,18 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
             largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
         }
-
-        if (largeIcon != null) {
-            final int height = (int) mContext.getResources().getDimension(
-                    android.R.dimen.notification_large_icon_height);
-            final int width = (int) mContext.getResources().getDimension(
-                    android.R.dimen.notification_large_icon_width);
-            largeIcon = BitmapUtil.getRoundedBitmap(largeIcon, width, height);
-        }
         return largeIcon;
+    }
+
+    private Bitmap getRoundedIcon(Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+        final int height = (int) mContext.getResources().getDimension(
+                android.R.dimen.notification_large_icon_height);
+        final int width = (int) mContext.getResources().getDimension(
+                android.R.dimen.notification_large_icon_width);
+        return BitmapUtil.getRoundedBitmap(bitmap, width, height);
     }
 
     /**
