@@ -311,6 +311,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         // Retrieve here since at fragment creation time the incoming video view is not inflated.
         final View videoView = getView().findViewById(R.id.incomingVideo);
+        if (videoView == null) {
+            return;
+        }
 
         // Determine how much space there is below or to the side of the call card.
         final float spaceBesideCallCard = getSpaceBesideCallCard();
