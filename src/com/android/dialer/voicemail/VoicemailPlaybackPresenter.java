@@ -19,6 +19,7 @@ package com.android.dialer.voicemail;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -59,7 +60,7 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @NotThreadSafe
 @VisibleForTesting
-public class VoicemailPlaybackPresenter {
+public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
     /** The stream used to playback voicemail. */
     private static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
 
@@ -172,6 +173,7 @@ public class VoicemailPlaybackPresenter {
     private AsyncTask<Void, ?, ?> mPrepareTask;
     private int mPosition;
     private boolean mPlaying;
+    private AudioManager mAudioManager;
 
     public VoicemailPlaybackPresenter(PlaybackView view, MediaPlayerProxy player,
             Uri voicemailUri, ScheduledExecutorService executorService,
@@ -482,6 +484,15 @@ public class VoicemailPlaybackPresenter {
                 mPlayer.seekTo(startPosition);
                 mView.setClipPosition(startPosition, duration);
                 try {
+                    // Grab audio focus here
+                    int result = getAudioManager().requestAudioFocus(
+                            VoicemailPlaybackPresenter.this,
+                            PLAYBACK_STREAM,
+                            AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+                    if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                        throw new RejectedExecutionException("Could not capture audio focus.");
+                    }
                     // Can throw RejectedExecutionException
                     mPlayer.start();
                     setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), true);
@@ -504,6 +515,29 @@ public class VoicemailPlaybackPresenter {
         }
     }
 
+    private AudioManager getAudioManager() {
+        if (mAudioManager == null) {
+            mAudioManager = (AudioManager)
+                    mView.getDataSourceContext().getSystemService(Context.AUDIO_SERVICE);
+        }
+        return mAudioManager;
+    }
+
+    @Override
+    public void onAudioFocusChange(int focusChange) {
+        boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                focusChange == AudioManager.AUDIOFOCUS_LOSS;
+        // Note: the below logic is the same as in {@code StartStopButtonListener}.
+        if (mPlayer.isPlaying() && lostFocus) {
+            setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), false);
+            stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
+        } else if (!mPlayer.isPlaying() && focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+            setPositionAndPlayingStatus(mPosition, true);
+            postSuccessfullyFetchedContent();
+        }
+    }
+
+
     private void resetPrepareStartPlaying(final int clipPositionInMillis) {
         if (mPrepareTask != null) {
             mPrepareTask.cancel(false);
@@ -525,6 +559,7 @@ public class VoicemailPlaybackPresenter {
     }
 
     private void stopPlaybackAtPosition(int clipPosition, int duration) {
+        getAudioManager().abandonAudioFocus(this);
         mPositionUpdater.stopUpdating();
         mView.playbackStopped();
         if (mWakeLock.isHeld()) {
