@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
@@ -36,6 +37,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.PhoneCallDetailsViews;
 import com.android.dialer.R;
@@ -62,15 +64,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     public final CardView callLogEntryView;
     /** The actionable view which places a call to the number corresponding to the call log row. */
     public final View callActionView;
+
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
-    /** The "video call" action button - assigned only when the action section is expanded. */
+    /** The button views below are assigned only when the action section is expanded. */
     public View videoCallButtonView;
-    /** The "voicemail" action button - assigned only when the action section is expanded. */
     public View voicemailButtonView;
-    /** The "details" action button - assigned only when the action section is expanded. */
+    public View createNewContactButtonView;
+    public View addToExistingContactButtonView;
     public View detailsButtonView;
-    /** The "report" action button. */
     public View reportButtonView;
 
     /**
@@ -123,15 +125,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     public CharSequence nameOrNumber;
 
     /**
-     * Whether or not the item has been reported by user as incorrect.
-     */
-    public boolean reported;
-
-    /**
      * Whether or not the contact info can be marked as invalid from the source where
      * it was obtained.
      */
     public boolean canBeReportedAsInvalid;
+
+    /**
+     * The contact info for the contact displayed in this list item.
+     */
+    public ContactInfo info;
 
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
@@ -176,6 +178,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         phoneCallDetailsViews.nameView.setElegantTextHeight(false);
         phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
 
+        quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
+
         if (callActionView != null) {
             callActionView.setOnClickListener(mActionListener);
         }
@@ -218,14 +222,28 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
 
         if (videoCallButtonView == null) {
             videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
+            videoCallButtonView.setOnClickListener(mActionListener);
         }
 
         if (voicemailButtonView == null) {
             voicemailButtonView = actionsView.findViewById(R.id.voicemail_action);
+            voicemailButtonView.setOnClickListener(mActionListener);
+        }
+
+        if (createNewContactButtonView == null) {
+            createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
+            createNewContactButtonView.setOnClickListener(mActionListener);
+        }
+
+        if (addToExistingContactButtonView == null) {
+            addToExistingContactButtonView =
+                    actionsView.findViewById(R.id.add_to_existing_contact_action);
+            addToExistingContactButtonView.setOnClickListener(mActionListener);
         }
 
         if (detailsButtonView == null) {
             detailsButtonView = actionsView.findViewById(R.id.details_action);
+            detailsButtonView.setOnClickListener(mActionListener);
         }
 
         if (reportButtonView == null) {
@@ -287,7 +305,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
             videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
             videoCallButtonView.setVisibility(View.VISIBLE);
-            videoCallButtonView.setOnClickListener(mActionListener);
         } else {
             videoCallButtonView.setTag(null);
             videoCallButtonView.setVisibility(View.GONE);
@@ -295,7 +312,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
 
         // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
         if (callType == Calls.VOICEMAIL_TYPE) {
-            voicemailButtonView.setOnClickListener(mActionListener);
             voicemailButtonView.setTag(
                     IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
             voicemailButtonView.setVisibility(View.VISIBLE);
@@ -305,15 +321,27 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             voicemailButtonView.setTag(null);
             voicemailButtonView.setVisibility(View.GONE);
 
-            detailsButtonView.setOnClickListener(mActionListener);
             detailsButtonView.setTag(
                     IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
+        }
 
-            if (canBeReportedAsInvalid && !reported) {
-                reportButtonView.setVisibility(View.VISIBLE);
-            } else {
-                reportButtonView.setVisibility(View.GONE);
-            }
+        if (canBeReportedAsInvalid && !info.isBadData) {
+            reportButtonView.setVisibility(View.VISIBLE);
+        } else {
+            reportButtonView.setVisibility(View.GONE);
+        }
+
+        if (UriUtils.isEncodedContactUri(info.lookupUri)) {
+            createNewContactButtonView.setTag(IntentProvider.getAddContactIntentProvider(
+                    info.lookupUri, info.name, info.number, info.type, true /* isNewContact */));
+            createNewContactButtonView.setVisibility(View.VISIBLE);
+
+            addToExistingContactButtonView.setTag(IntentProvider.getAddContactIntentProvider(
+                    info.lookupUri, info.name, info.number, info.type, false /* isNewContact */));
+            addToExistingContactButtonView.setVisibility(View.VISIBLE);
+        } else {
+            createNewContactButtonView.setVisibility(View.GONE);
+            addToExistingContactButtonView.setVisibility(View.GONE);
         }
 
         mCallLogListItemHelper.setActionContentDescriptions(this);

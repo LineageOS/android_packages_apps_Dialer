@@ -135,26 +135,33 @@ public abstract class IntentProvider {
 
     /**
      * Retrieves an add contact intent for the given contact and phone call details.
-     *
-     * @param info The contact info.
-     * @param details The phone call details.
      */
     public static IntentProvider getAddContactIntentProvider(
-            final ContactInfo info, final PhoneCallDetails details) {
+            final Uri lookupUri,
+            final CharSequence name,
+            final CharSequence number,
+            final int numberType,
+            final boolean isNewContact) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
                 Contact contactToSave = null;
 
-                if (info.lookupUri != null) {
-                    contactToSave = ContactLoader.parseEncodedContactEntity(info.lookupUri);
+                if (lookupUri != null) {
+                    contactToSave = ContactLoader.parseEncodedContactEntity(lookupUri);
                 }
 
                 if (contactToSave != null) {
                     // Populate the intent with contact information stored in the lookup URI.
                     // Note: This code mirrors code in Contacts/QuickContactsActivity.
-                    final Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-                    intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+                    final Intent intent;
+                    if (isNewContact) {
+                        intent = new Intent(
+                                Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+                    } else {
+                        intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+                        intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+                    }
 
                     ArrayList<ContentValues> values = contactToSave.getContentValues();
                     // Only pre-fill the name field if the provided display name is an nickname
@@ -189,9 +196,16 @@ public abstract class IntentProvider {
                     return intent;
                 } else {
                     // If no lookup uri is provided, rely on the available phone number and name.
-                    return DialtactsActivity.getAddToContactIntent(details.name,
-                            details.number,
-                            details.numberType);
+                    if (isNewContact) {
+                        return DialtactsActivity.getAddToContactIntent(name, number, numberType);
+                    } else {
+                        Intent intent = new Intent(
+                                Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+                        intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
+                        intent.putExtra(ContactsContract.Intents.Insert.PHONE, number);
+                        intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, numberType);
+                        return intent;
+                    }
                 }
             }
         };

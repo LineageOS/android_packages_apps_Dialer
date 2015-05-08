@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -381,7 +380,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         final PhoneCallDetails details;
 
-        views.reported = info.isBadData;
+        views.info = info;
 
         // The entry can only be reported as invalid if it has a valid ID and the source of the
         // entry supports marking entries as invalid.
@@ -414,7 +413,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         views.setPhoto(photoId, photoUri, lookupUri, nameForDefaultImage, isVoicemailNumber,
                 mContactInfoHelper.isBusiness(info.sourceType));
-        views.quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
         views.updateCallButton();
 
