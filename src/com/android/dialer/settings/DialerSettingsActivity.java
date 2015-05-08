@@ -77,16 +77,16 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
                 target.add(phoneAccountSettingsHeader);
             }
-        }
 
-        if (telephonyManager.isTtyModeSupported()
-                || telephonyManager.isHearingAidCompatibilitySupported()) {
-            Header accessibilitySettingsHeader = new Header();
-            Intent accessibilitySettingsIntent =
-                    new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
-            accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
-            accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
-            target.add(accessibilitySettingsHeader);
+            if (telephonyManager.isTtyModeSupported()
+                    || telephonyManager.isHearingAidCompatibilitySupported()) {
+                Header accessibilitySettingsHeader = new Header();
+                Intent accessibilitySettingsIntent =
+                        new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
+                accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
+                accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
+                target.add(accessibilitySettingsHeader);
+            }
         }
     }
 
