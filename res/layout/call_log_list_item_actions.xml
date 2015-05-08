@@ -51,9 +51,39 @@
 
         <TextView
             style="@style/CallLogActionTextStyle"
-            android:text="@string/call_log_action_voicemail"
-            android:nextFocusLeft="@+id/video_call_action"
-            android:nextFocusRight="@+id/details_action" />
+            android:text="@string/call_log_action_voicemail" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/create_new_contact_action"
+        style="@style/CallLogActionStyle"
+        android:nextFocusLeft="@+id/voicemail_action"
+        android:nextFocusRight="@+id/add_to_existing_contact_action">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_person_add_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/search_shortcut_create_new_contact" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_to_existing_contact_action"
+        style="@style/CallLogActionStyle"
+        android:nextFocusLeft="@+id/create_new_contact_action"
+        android:nextFocusRight="@+id/details_action">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_person_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/search_shortcut_add_to_existing_contact" />
 
     </LinearLayout>
 
