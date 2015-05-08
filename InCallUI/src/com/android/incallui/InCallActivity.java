@@ -357,7 +357,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         // in-call UI:
 
         if ((mConferenceManagerFragment == null || !mConferenceManagerFragment.isVisible())
-                && !mCallCardFragment.isVisible()) {
+                && (mCallCardFragment == null || !mCallCardFragment.isVisible())) {
             return;
         }
 
