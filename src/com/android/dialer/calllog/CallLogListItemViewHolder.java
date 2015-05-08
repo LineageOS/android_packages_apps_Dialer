@@ -65,13 +65,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
     /** The "video call" action button - assigned only when the action section is expanded. */
-    public TextView videoCallButtonView;
+    public View videoCallButtonView;
     /** The "voicemail" action button - assigned only when the action section is expanded. */
-    public TextView voicemailButtonView;
+    public View voicemailButtonView;
     /** The "details" action button - assigned only when the action section is expanded. */
-    public TextView detailsButtonView;
+    public View detailsButtonView;
     /** The "report" action button. */
-    public TextView reportButtonView;
+    public View reportButtonView;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -217,19 +217,19 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         }
 
         if (videoCallButtonView == null) {
-            videoCallButtonView = (TextView) actionsView.findViewById(R.id.video_call_action);
+            videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
         }
 
         if (voicemailButtonView == null) {
-            voicemailButtonView = (TextView) actionsView.findViewById(R.id.voicemail_action);
+            voicemailButtonView = actionsView.findViewById(R.id.voicemail_action);
         }
 
         if (detailsButtonView == null) {
-            detailsButtonView = (TextView) actionsView.findViewById(R.id.details_action);
+            detailsButtonView = actionsView.findViewById(R.id.details_action);
         }
 
         if (reportButtonView == null) {
-            reportButtonView = (TextView) actionsView.findViewById(R.id.report_action);
+            reportButtonView = actionsView.findViewById(R.id.report_action);
             reportButtonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -340,29 +340,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             if (actionsView != null) {
                 actionsView.setVisibility(View.GONE);
             }
-        }
-
-        if (actionsView != null) {
-            final ViewTreeObserver observer = callLogEntryView.getViewTreeObserver();
-            observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    ViewTreeObserver vto = observer;
-                    if (!vto.isAlive()) {
-                        vto = actionsView.getViewTreeObserver();
-                    }
-                    vto.removeOnPreDrawListener(this);
-
-                    // TODO: Animate, instead of immediately resizing.
-                    int currentHeight = primaryActionView.getHeight();
-                    int actionsHeight = actionsView.getVisibility() == View.VISIBLE
-                            ? actionsView.getHeight() : 0;
-                    callLogEntryView.getLayoutParams().height = currentHeight + actionsHeight;
-                    callLogEntryView.requestLayout();
-
-                    return false;
-                }
-            });
         }
     }
 

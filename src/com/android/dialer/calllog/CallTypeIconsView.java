@@ -208,7 +208,7 @@ public class CallTypeIconsView extends View {
             // We want the video call icon to be the same height as the call arrows, while keeping
             // the same width aspect ratio.
             Bitmap videoIcon = BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_videocam_wht_24dp);
+                    R.drawable.ic_videocam_24dp);
             int scaledHeight = missed.getIntrinsicHeight();
             int scaledWidth = (int) ((float) videoIcon.getWidth() *
                     ((float) missed.getIntrinsicHeight() /
