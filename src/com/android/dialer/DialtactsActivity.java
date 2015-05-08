@@ -165,6 +165,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private Animation mSlideOut;
 
+    AnimationListenerAdapter mSlideInListener = new AnimationListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if (!isInSearchUi()) {
+                enterSearchUi(true /* isSmartDial */, mSearchQuery, false);
+            }
+        }
+    };
+
     /**
      * Listener for after slide out animation completes on dialer fragment.
      */
@@ -298,7 +307,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 final boolean sameSearchMode = (mIsDialpadShown && mInDialpadSearch) ||
                         (!mIsDialpadShown && mInRegularSearch);
                 if (!sameSearchMode) {
-                    enterSearchUi(mIsDialpadShown, mSearchQuery);
+                    enterSearchUi(mIsDialpadShown, mSearchQuery, true /* animate */);
                 }
             }
 
@@ -323,7 +332,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         public void onClick(View v) {
             if (!isInSearchUi()) {
                 mActionBarController.onSearchBoxTapped();
-                enterSearchUi(false /* smartDialSearch */, mSearchView.getText().toString());
+                enterSearchUi(false /* smartDialSearch */, mSearchView.getText().toString(),
+                        true /* animate */);
             }
         }
     };
@@ -436,6 +446,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSlideIn.setInterpolator(AnimUtils.EASE_IN);
         mSlideOut.setInterpolator(AnimUtils.EASE_OUT);
 
+        mSlideIn.setAnimationListener(mSlideInListener);
         mSlideOut.setAnimationListener(mSlideOutListener);
 
         mParentLayout = (FrameLayout) findViewById(R.id.dialtacts_mainlayout);
@@ -692,9 +703,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mActionBarController.onDialpadUp();
 
-        if (!isInSearchUi()) {
-            enterSearchUi(true /* isSmartDial */, mSearchQuery);
-        }
+        mListsFragment.getView().animate().alpha(0).withLayer();
     }
 
     /**
@@ -908,7 +917,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * Shows the search fragment
      */
-    private void enterSearchUi(boolean smartDialSearch, String query) {
+    private void enterSearchUi(boolean smartDialSearch, String query, boolean animate) {
         if (mStateSaved || getFragmentManager().isDestroyed()) {
             // Weird race condition where fragment is doing work after the activity is destroyed
             // due to talkback being on (b/10209937). Just return since we can't do any
@@ -937,7 +946,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mInRegularSearch = !smartDialSearch;
 
         SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
-        transaction.setCustomAnimations(android.R.animator.fade_in, 0);
+        if (animate) {
+            transaction.setCustomAnimations(android.R.animator.fade_in, 0);
+        } else {
+            transaction.setTransition(FragmentTransaction.TRANSIT_NONE);
+        }
         if (fragment == null) {
             if (smartDialSearch) {
                 fragment = new SmartDialSearchFragment();
@@ -951,10 +964,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // DialtactsActivity will provide the options menu
         fragment.setHasOptionsMenu(false);
         fragment.setShowEmptyListForNullQuery(true);
-        fragment.setQueryString(query, false /* delaySelection */);
+        if (!smartDialSearch) {
+            fragment.setQueryString(query, false /* delaySelection */);
+        }
         transaction.commit();
 
-        mListsFragment.getView().animate().alpha(0).withLayer();
+        if (animate) {
+            mListsFragment.getView().animate().alpha(0).withLayer();
+        }
         mListsFragment.setUserVisibleHint(false);
     }
 
