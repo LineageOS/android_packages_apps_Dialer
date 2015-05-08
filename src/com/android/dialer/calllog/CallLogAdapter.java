@@ -631,7 +631,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private void handleRowExpanded(View view, boolean forceExpand) {
         final CallLogListItemViewHolder views = (CallLogListItemViewHolder) view.getTag();
 
-        if (forceExpand && isExpanded(views.rowId)) {
+        if (views == null || (forceExpand && isExpanded(views.rowId))) {
             return;
         }
 
