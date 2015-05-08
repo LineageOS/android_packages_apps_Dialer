@@ -55,6 +55,7 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
+import com.android.dialer.calllog.CallLogNotificationsService;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
@@ -280,6 +281,9 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 values.put(Voicemails.IS_READ, true);
                 getContentResolver().update(voicemailUri, values,
                         Voicemails.IS_READ + " = 0", null);
+                Intent intent = new Intent(getBaseContext(), CallLogNotificationsService.class);
+                intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);
+                getBaseContext().startService(intent);
                 return null;
             }
         });
