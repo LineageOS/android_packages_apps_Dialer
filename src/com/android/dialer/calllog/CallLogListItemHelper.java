@@ -99,9 +99,23 @@ import com.android.dialer.R;
                 TextUtils.expandTemplate(
                         mResources.getString(R.string.description_voicemail_action), nameOrNumber));
 
+        views.createNewContactButtonView.setContentDescription(
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_create_new_contact_action),
+                        nameOrNumber));
+
+        views.addToExistingContactButtonView.setContentDescription(
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_add_to_existing_contact_action),
+                        nameOrNumber));
+
         views.detailsButtonView.setContentDescription(
                 TextUtils.expandTemplate(
                         mResources.getString(R.string.description_details_action), nameOrNumber));
+
+        views.reportButtonView.setContentDescription(
+                TextUtils.expandTemplate(
+                        mResources.getString(R.string.description_report_action), nameOrNumber));
     }
 
     /**
