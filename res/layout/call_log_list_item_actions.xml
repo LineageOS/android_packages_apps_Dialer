@@ -25,9 +25,7 @@
 
     <LinearLayout
         android:id="@+id/video_call_action"
-        style="@style/CallLogActionStyle"
-        android:nextFocusLeft="@+id/primary_action_view"
-        android:nextFocusRight="@+id/voicemail_action">
+        style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
@@ -41,9 +39,7 @@
 
     <LinearLayout
         android:id="@+id/voicemail_action"
-        style="@style/CallLogActionStyle"
-        android:nextFocusLeft="@+id/video_call_action"
-        android:nextFocusRight="@+id/details_action">
+        style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
@@ -57,9 +53,7 @@
 
     <LinearLayout
         android:id="@+id/create_new_contact_action"
-        style="@style/CallLogActionStyle"
-        android:nextFocusLeft="@+id/voicemail_action"
-        android:nextFocusRight="@+id/add_to_existing_contact_action">
+        style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
@@ -73,9 +67,7 @@
 
     <LinearLayout
         android:id="@+id/add_to_existing_contact_action"
-        style="@style/CallLogActionStyle"
-        android:nextFocusLeft="@+id/create_new_contact_action"
-        android:nextFocusRight="@+id/details_action">
+        style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
@@ -89,9 +81,7 @@
 
     <LinearLayout
         android:id="@+id/details_action"
-        style="@style/CallLogActionStyle"
-        android:nextFocusLeft="@+id/voicemail_action"
-        android:nextFocusRight="@+id/report_action">
+        style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
@@ -105,9 +95,7 @@
 
     <LinearLayout
         android:id="@+id/report_action"
-        style="@style/CallLogActionStyle"
-        android:nextFocusLeft="@+id/details_action"
-        android:nextFocusRight="@+id/primary_action_view">
+        style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
