@@ -42,6 +42,9 @@
   <string name="call_stats_sort_by_duration">Iraupenaren arabera sailkatu</string>
   <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
   <string name="menu_add_to_blacklist">Zerrenda beltzera gehitu</string>
+  <string name="menu_delete_from_blacklist">Ezabatu zerrenda beltzetik</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> zerrenda beltzetik ezabatu da</string>
   <string name="nearby_places">Kokapen hurbilak</string>
   <string name="people">Jendea</string>
+  <string name="speed_dial_delete">Ezabatu</string>
 </resources>
