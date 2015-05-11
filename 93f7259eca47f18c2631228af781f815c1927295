@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a89bdaa_e193fd4d",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-05-11T19:09:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure I like this category title; at least I have problems imagining a meaningful translation of it to e.g. German.\n\nHow about \u0027Sensor options\u0027?",
+      "revId": "93f7259eca47f18c2631228af781f815c1927295",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
