@@ -19,6 +19,7 @@ package com.android.dialer.calllog;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.database.sqlite.SQLiteDiskIOException;
@@ -34,6 +35,7 @@ import android.provider.VoicemailContract.Voicemails;
 import android.util.Log;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
+import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
 import com.google.common.collect.Lists;
@@ -67,6 +69,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     private final WeakReference<Listener> mListener;
 
+    private final Context mContext;
+
     /**
      * Simple handler that wraps background calls to catch
      * {@link SQLiteException}, such as when the disk is full.
@@ -99,12 +103,15 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         return new CatchingWorkerHandler(looper);
     }
 
-    public CallLogQueryHandler(ContentResolver contentResolver, Listener listener) {
-        this(contentResolver, listener, -1);
+    public CallLogQueryHandler(Context context, ContentResolver contentResolver,
+            Listener listener) {
+        this(context, contentResolver, listener, -1);
     }
 
-    public CallLogQueryHandler(ContentResolver contentResolver, Listener listener, int limit) {
+    public CallLogQueryHandler(Context context, ContentResolver contentResolver, Listener listener,
+            int limit) {
         super(contentResolver);
+        mContext = context.getApplicationContext();
         mListener = new WeakReference<Listener>(listener);
         mLogLimit = limit;
     }
@@ -125,8 +132,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     }
 
     public void fetchVoicemailStatus() {
-        startQuery(QUERY_VOICEMAIL_STATUS_TOKEN, null, Status.CONTENT_URI,
-                VoicemailStatusHelperImpl.PROJECTION, null, null, null);
+        if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
+            startQuery(QUERY_VOICEMAIL_STATUS_TOKEN, null, Status.CONTENT_URI,
+                    VoicemailStatusHelperImpl.PROJECTION, null, null, null);
+        }
     }
 
     /** Fetches the list of calls in the call log. */
@@ -163,7 +172,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
         final String selection = where.length() > 0 ? where.toString() : null;
-        Uri uri = Calls.CONTENT_URI_WITH_VOICEMAIL.buildUpon()
+        Uri uri = TelecomUtil.getCallLogUri(mContext).buildUpon()
                 .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
         startQuery(token, null, uri,
@@ -186,7 +195,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         ContentValues values = new ContentValues(1);
         values.put(Calls.NEW, "0");
 
-        startUpdate(UPDATE_MARK_AS_OLD_TOKEN, null, Calls.CONTENT_URI_WITH_VOICEMAIL,
+        startUpdate(UPDATE_MARK_AS_OLD_TOKEN, null, TelecomUtil.getCallLogUri(mContext),
                 values, where.toString(), null);
     }
 
