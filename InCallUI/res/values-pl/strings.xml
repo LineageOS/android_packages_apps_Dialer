@@ -49,7 +49,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Rozmowa wideo"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Wysyłanie żądania wideo"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Nie można nawiązać połączenia wideo"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Rozmowa wideo (wstrzymana)"</string>
+    <!-- no translation found for card_title_video_call_rejected (462358296694719787) -->
+    <skip />
     <string name="card_title_callback_number" msgid="7307938207564217293">"Twój numer oddzwaniania\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Twój numer oddzwaniania dla połączeń alarmowych\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Trwa wybieranie numeru"</string>
@@ -173,4 +174,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> godziny</item>
       <item quantity="one">1 godzina</item>
     </plurals>
+    <!-- no translation found for profile_photo_description (5609894336203315400) -->
+    <skip />
+    <!-- no translation found for camera_off_description (5689494614359429889) -->
+    <skip />
 </resources>

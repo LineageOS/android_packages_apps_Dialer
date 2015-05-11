@@ -49,7 +49,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"વિડિઓ કૉલ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"વિડિઓની વિનંતી કરી રહ્યાં છે"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"વિડિઓ કૉલ કનેક્ટ કરી શકાતો નથી"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"વિડિઓ કૉલ (થોભાવ્યો)"</string>
+    <!-- no translation found for card_title_video_call_rejected (462358296694719787) -->
+    <skip />
     <string name="card_title_callback_number" msgid="7307938207564217293">"તમારો કૉલબેક નંબર\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"તમારો કટોકટીનો કૉલબેક નંબર\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ડાયલ કરી રહ્યાં છે"</string>
@@ -167,4 +168,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> કલાક</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> કલાક</item>
     </plurals>
+    <!-- no translation found for profile_photo_description (5609894336203315400) -->
+    <skip />
+    <!-- no translation found for camera_off_description (5689494614359429889) -->
+    <skip />
 </resources>

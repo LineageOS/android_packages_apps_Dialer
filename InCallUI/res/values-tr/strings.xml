@@ -49,7 +49,8 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Video görüşmesi"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Video isteniyor"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Video görüşmesi bağlantısı yapılamıyor"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Video görüşmesi (Duraklatıldı)"</string>
+    <!-- no translation found for card_title_video_call_rejected (462358296694719787) -->
+    <skip />
     <string name="card_title_callback_number" msgid="7307938207564217293">"Geri arama numaranız\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Acil durum geri arama numaranız\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Çevriliyor"</string>
@@ -167,4 +168,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> saat</item>
       <item quantity="one">1 saat</item>
     </plurals>
+    <!-- no translation found for profile_photo_description (5609894336203315400) -->
+    <skip />
+    <!-- no translation found for camera_off_description (5689494614359429889) -->
+    <skip />
 </resources>
