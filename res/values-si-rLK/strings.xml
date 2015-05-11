@@ -143,7 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"පවතින සම්බන්ධතාව වෙත එක් කරන්න"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS යවන්න"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"වීඩියෝ ඇමතුමක් ලබාගන්න"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"සම්පූර්ණ ඇමතුම් ඉතිහාසය බලන්න"</string>
+    <string name="show_call_history" msgid="1141502332266697170">"සම්පූර්ණ ඇමතුම් ඉතිහාසය බලන්න"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"නව මඟ හැරුණු ඇමතුම් <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"වේග ඩයලනය යනු ප්‍රියතමයන් සහ ඔබ නිතර අමතන අංක සඳහා එක්-ස්පර්ශ ඩයල් කිරීමකි"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"සබඳතා නැත"</string>
@@ -159,9 +159,16 @@
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> හි"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ඇමතුම"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> අමතන්න"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> වෙත වීඩියෝ ඇමතුම."</string>
+    <!-- no translation found for description_video_call_action (7386922428155062213) -->
+    <skip />
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> වෙතින් හඬ තැපෑලට සවන් දෙන්න"</string>
+    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
+    <skip />
+    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
+    <skip />
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> සඳහා ඇමතුම් විස්තර"</string>
+    <!-- no translation found for description_report_action (5011961125980353172) -->
+    <skip />
     <string name="toast_entry_removed" msgid="8010830299576311534">"ඇමතුම් ඉතිහාසයෙන් මකන ලදී"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"වාර්තා කරන්න"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"අද"</string>

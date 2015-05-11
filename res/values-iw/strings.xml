@@ -145,7 +145,8 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"הוסף לאיש קשר קיים"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"‏שלח SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"בצע שיחת וידאו"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"הצג את היסטוריית השיחות המלאה"</string>
+    <!-- no translation found for show_call_history (1141502332266697170) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> שיחות חדשות שלא נענו"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"חיוג מהיר מאפשר לך להתקשר בנגיעה אחת אל מועדפים ומספרים שאליהם אתה מתקשר בתדירות גבוהה"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"אין אנשי קשר"</string>
@@ -161,9 +162,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"ב-<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"התקשר"</string>
     <string name="description_call_action" msgid="4000549004089776147">"התקשר אל <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"שיחת וידאו אל <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_video_call_action" msgid="7386922428155062213">"שיחת וידאו עם <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"האזן לדואר קולי מאת <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"צור איש קשר בשביל <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"הוסף את <xliff:g id="NAMEORNUMBER">^1</xliff:g> לאיש קשר קיים"</string>
     <string name="description_details_action" msgid="2433827152749491785">"פרטי שיחה עבור <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_report_action" msgid="5011961125980353172">"דווח על <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"נמחקה מהיסטוריית השיחות"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"דווח"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"היום"</string>

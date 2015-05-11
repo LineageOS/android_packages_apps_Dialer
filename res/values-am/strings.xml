@@ -143,7 +143,8 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"ወደ ነባር እውቂያ አክል"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ኤስኤምኤስ ላክ"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"የቪዲዮ ጥሪ አድርግ"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"ሙሉ የጥሪ ታሪኮችን ይመልከቱ"</string>
+    <!-- no translation found for show_call_history (1141502332266697170) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> አዲስ ያልተመለሱ ጥሪዎች"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"ፈጣን ደውል ለተወዳጆች እና አብዛኛው ጊዜ ለሚደውሏቸውን ቁጥሮች የሆነ የአንዴ ነካ መደወል ነው"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ምንም እውቂያዎች የሉም"</string>
@@ -159,9 +160,16 @@
     <string name="description_phone_account" msgid="1767072759541443861">"በ<xliff:g id="PHONEACCOUNT">^1</xliff:g> ላይ"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ደውል"</string>
     <string name="description_call_action" msgid="4000549004089776147">"ወደ <xliff:g id="NAMEORNUMBER">^1</xliff:g> ይደውሉ"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"የቪዲዮ ጥሪ ወደ <xliff:g id="NAMEORNUMBER">^1</xliff:g>።"</string>
+    <!-- no translation found for description_video_call_action (7386922428155062213) -->
+    <skip />
     <string name="description_voicemail_action" msgid="8054891873788903063">"የ<xliff:g id="NAMEORNUMBER">^1</xliff:g>ን የድምጽ መልዕክት ያዳምጡ"</string>
+    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
+    <skip />
+    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
+    <skip />
     <string name="description_details_action" msgid="2433827152749491785">"የ<xliff:g id="NAMEORNUMBER">^1</xliff:g> የጥሪ ዝርዝሮች"</string>
+    <!-- no translation found for description_report_action (5011961125980353172) -->
+    <skip />
     <string name="toast_entry_removed" msgid="8010830299576311534">"ከጥሪ ታሪክ ተሰርዟል"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"ሪፖርት"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ዛሬ"</string>

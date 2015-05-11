@@ -143,7 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"加到現有的聯絡人"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"傳送短訊"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視像通話"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"查看完整通話記錄"</string>
+    <string name="show_call_history" msgid="1141502332266697170">"查看完整通話記錄"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 個新的未接來電"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速撥號，只需點一下螢幕就能撥出常用電話號碼並致電最愛的親友"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"沒有聯絡人"</string>
@@ -159,9 +159,16 @@
     <string name="description_phone_account" msgid="1767072759541443861">"使用 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"撥號"</string>
     <string name="description_call_action" msgid="4000549004089776147">"致電 <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"視像通話，通話對象：<xliff:g id="NAMEORNUMBER">^1</xliff:g>。"</string>
+    <!-- no translation found for description_video_call_action (7386922428155062213) -->
+    <skip />
     <string name="description_voicemail_action" msgid="8054891873788903063">"收聽來自「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」的留言信箱"</string>
+    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
+    <skip />
+    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
+    <skip />
     <string name="description_details_action" msgid="2433827152749491785">"與「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」通話的詳細資料"</string>
+    <!-- no translation found for description_report_action (5011961125980353172) -->
+    <skip />
     <string name="toast_entry_removed" msgid="8010830299576311534">"已從通話記錄中刪除"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"報告"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今天"</string>
