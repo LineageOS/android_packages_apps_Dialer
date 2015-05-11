@@ -65,11 +65,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         public void onCallUpdated(BaseFragment fragment, boolean isEmergency);
     }
 
-    private static final EmergencyCallListener mEmergencyCallListener =
-            ObjectFactory.newEmergencyCallListener();
-
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL_MS = 1000;
+
+    private final EmergencyCallListener mEmergencyCallListener = ObjectFactory.newEmergencyCallListener();
 
     private Call mPrimary;
     private Call mSecondary;
