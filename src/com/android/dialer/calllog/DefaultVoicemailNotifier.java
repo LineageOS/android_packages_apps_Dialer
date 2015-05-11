@@ -143,7 +143,7 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
                 }
             }
             // Check if this is the new call we need to notify about.
-            if (newCallUri != null &&
+            if (newCallUri != null && newCall.voicemailUri != null &&
                     ContentUris.parseId(newCallUri) == ContentUris.parseId(newCall.voicemailUri)) {
                 callToNotify = newCall;
             }
