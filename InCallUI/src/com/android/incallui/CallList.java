@@ -469,6 +469,7 @@ public class CallList {
             case DisconnectCause.REMOTE:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
+            case DisconnectCause.ERROR:
             case DisconnectCause.REJECTED:
             case DisconnectCause.MISSED:
             case DisconnectCause.CANCELED:
