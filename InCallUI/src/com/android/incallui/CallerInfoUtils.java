@@ -6,7 +6,6 @@ import android.content.Loader.OnLoadCompleteListener;
 import android.net.Uri;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -80,6 +79,9 @@ public class CallerInfoUtils {
                 isVoiceMailNumber(context, call)) {
             info.markAsVoiceMail(context);
         }
+
+        ContactInfoCache.getInstance(context).maybeInsertCnapInformationIntoCache(context, call,
+                info);
 
         return info;
     }
