@@ -46,6 +46,7 @@ import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.util.TelecomUtil;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -272,7 +273,7 @@ public class SpecialCharSequenceMgr {
         sPreviousAdnQueryHandler = handler;
     }
 
-    static boolean handlePinEntry(Context context, final String input) {
+    static boolean handlePinEntry(final Context context, final String input) {
         if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
             final TelecomManager telecomManager =
                     (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
@@ -284,13 +285,14 @@ public class SpecialCharSequenceMgr {
             if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
                 // Don't bring up the dialog for single-SIM or if the default outgoing account is
                 // a subscription account.
-                return telecomManager.handleMmi(input);
+                return TelecomUtil.handleMmi(context, input, null);
             } else if (subscriptionAccountHandles.size() > 1){
                 SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
                     @Override
                     public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
                             boolean setDefault) {
-                        telecomManager.handleMmi(input, selectedAccountHandle);
+                        TelecomUtil.handleMmi(context.getApplicationContext(),
+                                input, selectedAccountHandle);
                         //TODO: show error dialog if result isn't valid
                     }
                     @Override

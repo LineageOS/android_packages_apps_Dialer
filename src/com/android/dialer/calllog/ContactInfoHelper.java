@@ -34,6 +34,7 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
 
 import org.json.JSONException;
@@ -368,13 +369,13 @@ public class ContactInfoHelper {
         try {
             if (countryIso == null) {
                 mContext.getContentResolver().update(
-                        Calls.CONTENT_URI_WITH_VOICEMAIL,
+                        TelecomUtil.getCallLogUri(mContext),
                         values,
                         Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " IS NULL",
                         new String[]{ number });
             } else {
                 mContext.getContentResolver().update(
-                        Calls.CONTENT_URI_WITH_VOICEMAIL,
+                        TelecomUtil.getCallLogUri(mContext),
                         values,
                         Calls.NUMBER + " = ? AND " + Calls.COUNTRY_ISO + " = ?",
                         new String[]{ number, countryIso });

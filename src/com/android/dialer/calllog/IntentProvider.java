@@ -31,6 +31,7 @@ import com.android.dialer.CallDetailActivity;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.CallIntentUtil;
+import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;
 
@@ -125,8 +126,8 @@ public abstract class IntentProvider {
                     intent.putExtra(CallDetailActivity.EXTRA_CALL_LOG_IDS, extraIds);
                 } else {
                     // If there is a single item, use the direct URI for it.
-                    intent.setData(ContentUris.withAppendedId(
-                            Calls.CONTENT_URI_WITH_VOICEMAIL, id));
+                    intent.setData(ContentUris.withAppendedId(TelecomUtil.getCallLogUri(context),
+                            id));
                 }
                 return intent;
             }
