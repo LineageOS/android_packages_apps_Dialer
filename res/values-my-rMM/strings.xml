@@ -143,7 +143,8 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"လက်ရှိ အဆက်အသွယ်တွင်း ထည့်ရန်"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"စာတို ပို့ရန်"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ဗီဒီယို ခေါ်ဆိုမှု ပြုလုပ်ရန်"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"ခေါ်ဆိုမှု မှတ်တမ်း အပြည့်ကို ကြည့်ရန်"</string>
+    <!-- no translation found for show_call_history (1141502332266697170) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"လွတ်သွားသောဖုန်း <xliff:g id="NUMBER">%s</xliff:g> ခါ"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"အမြန် နံပါတ်လှည့်မှုမှာ စိတ်ကြိုက်များ နှင့် သင်မကြာခဏ ခေါ်သည့် နံပါတ်များကို တစ်ချက်နှိပ် နံပါတ်လှည့်မှု ဖြစ်သည်"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"အဆက်အသွယ်များ မရှိ"</string>
@@ -159,9 +160,16 @@
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> ၌"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ခေါ်ဆိုမှု"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> အားခေါ်ရန်"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ထံသို့ ဗီဒီယို ခေါ်ဆိုမှု"</string>
+    <!-- no translation found for description_video_call_action (7386922428155062213) -->
+    <skip />
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ထံမှ အသံစာကို နားထောင်ရန်"</string>
+    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
+    <skip />
+    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
+    <skip />
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>၏ ခေါ်ဆိုမှု အသေးစိတ်များ"</string>
+    <!-- no translation found for description_report_action (5011961125980353172) -->
+    <skip />
     <string name="toast_entry_removed" msgid="8010830299576311534">"ခေါ်ဆိုမှု မှတ်တမ်းထဲမှ ဖျက်ပစ်ခဲ့"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"သတင်းပို့ပါ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ယနေ့"</string>

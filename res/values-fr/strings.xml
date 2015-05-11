@@ -143,7 +143,8 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Ajouter à un contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Envoyer un SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Passer un appel vidéo"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"Afficher tout l\'historique des appels"</string>
+    <!-- no translation found for show_call_history (1141502332266697170) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"Nouveaux appels manqués : <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"La numérotation abrégée vous permet d\'appeler vos contacts favoris et les numéros que vous appelez fréquemment d\'une simple pression du doigt."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Aucun contact"</string>
@@ -159,9 +160,16 @@
     <string name="description_phone_account" msgid="1767072759541443861">"sur <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Appeler"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Appeler <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"Appel vidéo émis (destinataire : <xliff:g id="NAMEORNUMBER">^1</xliff:g>)"</string>
+    <!-- no translation found for description_video_call_action (7386922428155062213) -->
+    <skip />
     <string name="description_voicemail_action" msgid="8054891873788903063">"Écouter le message vocal laissé par le numéro ou le contact \"<xliff:g id="NAMEORNUMBER">^1</xliff:g>\""</string>
+    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
+    <skip />
+    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
+    <skip />
     <string name="description_details_action" msgid="2433827152749491785">"Informations sur l\'appel pour <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_report_action (5011961125980353172) -->
+    <skip />
     <string name="toast_entry_removed" msgid="8010830299576311534">"L\'appel a bien été supprimé de l\'historique."</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"Signaler"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Aujourd\'hui"</string>
