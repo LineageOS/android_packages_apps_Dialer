@@ -34,15 +34,9 @@ public class CallLogReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (VoicemailContract.ACTION_NEW_VOICEMAIL.equals(intent.getAction())) {
-            Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-            serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
-            serviceIntent.putExtra(
-                    CallLogNotificationsService.EXTRA_NEW_VOICEMAIL_URI, intent.getData());
-            context.startService(serviceIntent);
+            CallLogNotificationsService.updateVoicemailNotifications(context, intent.getData());
         } else if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-            serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
-            context.startService(serviceIntent);
+            CallLogNotificationsService.updateVoicemailNotifications(context, null);
         } else {
             Log.w(TAG, "onReceive: could not handle: " + intent);
         }

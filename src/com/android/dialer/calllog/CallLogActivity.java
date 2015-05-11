@@ -193,7 +193,7 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
         mIsResumed = true;
         super.onResume();
         CallLogQueryHandler callLogQueryHandler =
-                new CallLogQueryHandler(this.getContentResolver(), this);
+                new CallLogQueryHandler(this, this.getContentResolver(), this);
         callLogQueryHandler.fetchVoicemailStatus();
         sendScreenViewForChildFragment(mViewPager.getCurrentItem());
     }
