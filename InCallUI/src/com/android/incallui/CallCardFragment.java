@@ -23,7 +23,6 @@ import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -54,7 +53,6 @@ import android.widget.TextView;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
-import com.android.incallui.service.PhoneNumberService;
 import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;
@@ -223,6 +221,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = view.findViewById(R.id.secondary_call_info);
         mSecondaryCallProviderInfo = view.findViewById(R.id.secondary_call_provider_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
+        mPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().onContactPhotoClick();
+            }
+        });
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
