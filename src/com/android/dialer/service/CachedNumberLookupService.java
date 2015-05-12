@@ -1,6 +1,5 @@
 package com.android.dialer.service;
 
-import android.content.ContentValues;
 import android.content.Context;
 
 import com.android.dialer.calllog.ContactInfo;
@@ -8,8 +7,15 @@ import com.android.dialer.calllog.ContactInfo;
 public interface CachedNumberLookupService {
 
     public interface CachedContactInfo {
+        public static final int SOURCE_TYPE_DIRECTORY = 1;
+        public static final int SOURCE_TYPE_EXTENDED = 2;
+        public static final int SOURCE_TYPE_PLACES = 3;
+        public static final int SOURCE_TYPE_PROFILE = 4;
+        public static final int SOURCE_TYPE_CNAP = 5;
+
         public ContactInfo getContactInfo();
 
+        public void setSource(int sourceType, String name, long directoryId);
         public void setDirectorySource(String name, long directoryId);
         public void setExtendedSource(String name, long directoryId);
         public void setLookupKey(String lookupKey);
