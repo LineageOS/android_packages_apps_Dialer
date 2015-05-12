@@ -28,14 +28,11 @@ import android.provider.ContactsContract;
 import android.telecom.AudioState;
 import android.telecom.CameraCapabilities;
 import android.telecom.Connection;
-import android.telecom.Connection.VideoProvider;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.view.Surface;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
@@ -71,7 +68,8 @@ import java.util.Objects;
 public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi> implements
         IncomingCallListener, InCallOrientationListener, InCallStateListener,
         InCallDetailsListener, SurfaceChangeListener, VideoEventListener,
-        InCallVideoCallCallbackNotifier.SessionModificationListener {
+        InCallVideoCallCallbackNotifier.SessionModificationListener,
+        InCallPresenter.InCallEventListener {
     public static final String TAG = "VideoCallPresenter";
 
     public static final boolean DEBUG = false;
@@ -84,7 +82,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         public void run() {
             if (mAutoFullScreenPending) {
                 Log.v(this, "Automatically entering fullscreen mode.");
-                setFullScreen(true);
+                InCallPresenter.getInstance().setFullScreen(true);
                 mAutoFullScreenPending = false;
             } else {
                 Log.v(this, "Skipping scheduled fullscreen mode.");
@@ -168,11 +166,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Tracks the state of the preview surface negotiation with the telephony layer.
      */
     private int mPreviewSurfaceState = PreviewSurfaceState.NONE;
-
-    /**
-     * Determines whether the video surface is in full-screen mode.
-     */
-    private boolean mIsFullScreen = false;
 
     /**
      * Saves the audio mode which was selected prior to going into a video call.
@@ -369,31 +362,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
     }
 
-    private void toggleFullScreen() {
-        mIsFullScreen = !mIsFullScreen;
-        Log.v(this, "toggleFullScreen = " + mIsFullScreen);
-        // Ensure we cancel any scheduled auto activation of fullscreen mode as the user's setting
-        // should override any automatic operation.
-        cancelAutoFullScreen();
-        InCallPresenter.getInstance().setFullScreenVideoState(mIsFullScreen);
-    }
-
-    /**
-     * Sets the current full screen mode.
-     *
-     * @param isFullScreen {@code true} if full screen mode should be active, {@code false}
-     *      otherwise.
-     */
-    public void setFullScreen(boolean isFullScreen) {
-        Log.v(this, "setFullScreen = " + isFullScreen);
-        if (mIsFullScreen == isFullScreen) {
-            Log.v(this, "setFullScreen ignored as already in that state.");
-            return;
-        }
-        mIsFullScreen = isFullScreen;
-        InCallPresenter.getInstance().setFullScreenVideoState(mIsFullScreen);
-    }
-
     /**
      * Handles clicks on the video surfaces by toggling full screen state.
      * Informs the {@link InCallPresenter} of the change so that it can inform the
@@ -402,7 +370,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param surfaceId The video surface receiving the click.
      */
     public void onSurfaceClick(int surfaceId) {
-        toggleFullScreen();
+        boolean isFullscreen = InCallPresenter.getInstance().toggleFullscreenMode();
+        Log.v(this, "toggleFullScreen = " + isFullscreen);
     }
 
     /**
@@ -485,6 +454,16 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         maybeExitFullscreen(currentCall);
         // Schedule auto-enter of fullscreen mode if the current call context is a video call
         maybeAutoEnterFullscreen(currentCall);
+    }
+
+    /**
+     * Handles a change to the fullscreen mode of the app.
+     *
+     * @param isFullscreenMode {@code true} if the app is now fullscreen, {@code false} otherwise.
+     */
+    @Override
+    public void onFullscreenModeChanged(boolean isFullscreenMode) {
+        cancelAutoFullScreen();
     }
 
     private void checkForVideoStateChange(Call call) {
@@ -775,9 +754,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         showVideoUi(VideoProfile.VideoState.AUDIO_ONLY, Call.State.ACTIVE);
         enableCamera(mVideoCall, false);
-
-        Log.d(this, "exitVideoMode mIsFullScreen: " + mIsFullScreen);
-        setFullScreen(false);
+        InCallPresenter.getInstance().setFullScreen(false);
 
         mIsVideoMode = false;
     }
@@ -1094,7 +1071,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         if (!CallUtils.isVideoCall(call) || call.getState() == Call.State.INCOMING) {
-            setFullScreen(false);
+            InCallPresenter.getInstance().setFullScreen(false);
         }
     }
 
@@ -1115,7 +1092,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         if (call == null || (
                 call != null && (call.getState() != Call.State.ACTIVE ||
-                        !CallUtils.isVideoCall(call)) || mIsFullScreen)) {
+                        !CallUtils.isVideoCall(call)) ||
+                        InCallPresenter.getInstance().isFullscreen())) {
             // Ensure any previously scheduled attempt to enter fullscreen is cancelled.
             cancelAutoFullScreen();
             return;
