@@ -473,13 +473,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         Log.d(this, "onViewCreated: VideoSurfacesInUse=" + sVideoSurfacesInUse);
 
         mVideoViewsStub = (ViewStub) view.findViewById(R.id.videoCallViewsStub);
-
-        // If the surfaces are already in use, we have just changed orientation or otherwise
-        // re-created the fragment.  In this case we need to inflate the video call views and
-        // restore the surfaces.
-        if (sVideoSurfacesInUse) {
-            inflateVideoCallViews();
-        }
     }
 
     @Override
