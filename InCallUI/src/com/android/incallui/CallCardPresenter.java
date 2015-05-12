@@ -416,7 +416,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         String simNumber = mgr.getLine1Number(mPrimary.getAccountHandle());
         if (!showCallbackNumber && PhoneNumberUtils.compare(callbackNumber, simNumber)) {
             Log.d(this, "Numbers are the same (and callback number is not being forced to show);" +
-                            " not showing the callback number");
+                    " not showing the callback number");
             callbackNumber = null;
         }
 
@@ -443,6 +443,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (broadcastIntent != null) {
             Log.d(this, "Sending call state button broadcast: ", broadcastIntent);
             mContext.sendBroadcast(broadcastIntent, Manifest.permission.READ_PHONE_STATE);
+        }
+    }
+
+    /**
+     * Handles click on the contact photo by toggling fullscreen mode if the current call is a video
+     * call.
+     */
+    public void onContactPhotoClick() {
+        if (mPrimary != null && mPrimary.isVideoCall(mContext)) {
+            InCallPresenter.getInstance().toggleFullscreenMode();
         }
     }
 
@@ -763,17 +773,17 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     /**
-     * Handles a change to the full screen video state.
+     * Handles a change to the fullscreen mode of the in-call UI.
      *
-     * @param isFullScreenVideo {@code True} if the application is entering full screen video mode.
+     * @param isFullscreenMode {@code True} if the in-call UI is entering full screen mode.
      */
     @Override
-    public void onFullScreenVideoStateChanged(boolean isFullScreenVideo) {
+    public void onFullscreenModeChanged(boolean isFullscreenMode) {
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
         }
-        ui.setCallCardVisible(!isFullScreenVideo);
+        ui.setCallCardVisible(!isFullscreenMode);
     }
 
     private boolean isPrimaryCallActive() {

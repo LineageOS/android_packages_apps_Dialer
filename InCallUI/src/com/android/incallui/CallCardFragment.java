@@ -218,6 +218,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = view.findViewById(R.id.secondary_call_info);
         mSecondaryCallProviderInfo = view.findViewById(R.id.secondary_call_provider_info);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
+        mPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPresenter().onContactPhotoClick();
+            }
+        });
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);

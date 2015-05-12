@@ -104,11 +104,17 @@ public class InCallPresenter implements CallList.Listener,
      * Whether or not we are currently bound and waiting for Telecom to send us a new call.
      */
     private boolean mBoundAndWaitingForOutgoingCall;
+
     /**
      * If there is no actual call currently in the call list, this will be used as a fallback
      * to determine the theme color for InCallUI.
      */
     private PhoneAccountHandle mPendingPhoneAccountHandle;
+
+    /**
+     * Determines if the InCall UI is in fullscreen mode or not.
+     */
+    private boolean mIsFullScreen = false;
 
     private final android.telecom.Call.Callback mCallCallback =
             new android.telecom.Call.Callback() {
@@ -824,7 +830,7 @@ public class InCallPresenter implements CallList.Listener,
 
     private void notifyVideoPauseController(boolean showing) {
         Log.d(this, "notifyVideoPauseController: mIsChangingConfigurations=" +
-                    mIsChangingConfigurations);
+                mIsChangingConfigurations);
         if (!mIsChangingConfigurations) {
             VideoPauseController.getInstance().onUiShowing(showing);
         }
@@ -938,13 +944,50 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     /**
+     * Toggles whether the application is in fullscreen mode or not.
+     *
+     * @return {@code true} if in-call is now in fullscreen mode.
+     */
+    public boolean toggleFullscreenMode() {
+        mIsFullScreen = !mIsFullScreen;
+        Log.v(this, "toggleFullscreenMode = " + mIsFullScreen);
+        notifyFullscreenModeChange(mIsFullScreen);
+        return mIsFullScreen;
+    }
+
+    /**
+     * Changes the fullscreen mode of the in-call UI.
+     *
+     * @param isFullScreen {@code true} if in-call should be in fullscreen mode, {@code false}
+     *                                 otherwise.
+     */
+    public void setFullScreen(boolean isFullScreen) {
+        Log.v(this, "setFullScreen = " + isFullScreen);
+        if (mIsFullScreen == isFullScreen) {
+            Log.v(this, "setFullScreen ignored as already in that state.");
+            return;
+        }
+        mIsFullScreen = isFullScreen;
+        notifyFullscreenModeChange(mIsFullScreen);
+    }
+
+    /**
+     * @return {@code true} if the in-call ui is currently in fullscreen mode, {@code false}
+     * otherwise.
+     */
+    public boolean isFullscreen() {
+        return mIsFullScreen;
+    }
+
+
+    /**
      * Called by the {@link VideoCallPresenter} to inform of a change in full screen video status.
      *
-     * @param isFullScreenVideo {@code True} if entering full screen video mode.
+     * @param isFullscreenMode {@code True} if entering full screen mode.
      */
-    public void setFullScreenVideoState(boolean isFullScreenVideo) {
+    public void notifyFullscreenModeChange(boolean isFullscreenMode) {
         for (InCallEventListener listener : mInCallEventListeners) {
-            listener.onFullScreenVideoStateChanged(isFullScreenVideo);
+            listener.onFullscreenModeChanged(isFullscreenMode);
         }
     }
 
@@ -1568,7 +1611,7 @@ public class InCallPresenter implements CallList.Listener,
      * In-Call UI.  Used as a means of communicating between fragments that make up the UI.
      */
     public interface InCallEventListener {
-        public void onFullScreenVideoStateChanged(boolean isFullScreenVideo);
+        public void onFullscreenModeChanged(boolean isFullscreenMode);
     }
 
     public interface InCallUiListener {
