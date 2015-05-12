@@ -804,7 +804,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (primary == null) {
             return false;
         }
-        if (!Call.State.isConnectingOrConnected(callState) || callState == Call.State.INCOMING) {
+        if ((!Call.State.isConnectingOrConnected(callState)
+                && callState != Call.State.DISCONNECTING) || callState == Call.State.INCOMING) {
             return false;
         }
         if (mPrimary.getSessionModificationState()
