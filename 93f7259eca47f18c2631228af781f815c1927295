@@ -70,6 +70,24 @@
       "revId": "93f7259eca47f18c2631228af781f815c1927295",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a89bdaa_c1c6f915",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2015-05-12T00:00:52Z",
+      "side": 1,
+      "message": "My original idea was to keep Smart\u003cfeature\u003e name untranslatable to \"brand\" them like LiveDisplay or Privacy Guard. I dunno how Smart options would resoult on other languages but on Italian it wouldn\u0027t look so odd, since we use smart as \"italian word\" too. We can change this but I don\u0027t think sensor settings would be nice for users :P",
+      "parentUuid": "9a89bdaa_814eb1bf",
+      "revId": "93f7259eca47f18c2631228af781f815c1927295",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
