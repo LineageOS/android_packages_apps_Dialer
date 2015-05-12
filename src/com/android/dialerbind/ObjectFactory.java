@@ -48,9 +48,14 @@ public class ObjectFactory {
             Context context,
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
+            boolean isShowingRecentsTab,
             OnReportButtonClickListener onReportButtonClickListener) {
         return new CallLogAdapter(
-                context, callFetcher, contactInfoHelper, onReportButtonClickListener);
+                context,
+                callFetcher,
+                contactInfoHelper,
+                isShowingRecentsTab,
+                onReportButtonClickListener);
     }
 
     public static DialogFragment getReportDialogFragment(String number) {
