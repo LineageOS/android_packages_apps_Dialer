@@ -21,16 +21,26 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Looper;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ObjectFactory;
 import com.android.services.telephony.common.MoreStrings;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.base.Objects;
@@ -52,6 +62,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
     private final Context mContext;
     private final PhoneNumberService mPhoneNumberService;
+    private final CachedNumberLookupService mCachedNumberLookupService;
     private final HashMap<String, ContactCacheEntry> mInfoMap = Maps.newHashMap();
     private final HashMap<String, Set<ContactInfoCacheCallback>> mCallBacks = Maps.newHashMap();
 
@@ -70,6 +81,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     private ContactInfoCache(Context context) {
         mContext = context;
         mPhoneNumberService = ObjectFactory.newPhoneNumberService(context);
+        mCachedNumberLookupService =
+                com.android.dialerbind.ObjectFactory.newCachedNumberLookupService();
     }
 
     public ContactCacheEntry getInfo(String callId) {
@@ -85,6 +98,43 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         ContactInfoCache.populateCacheEntry(context, info, entry, call.getNumberPresentation(),
                 isIncoming);
         return entry;
+    }
+
+    public void maybeInsertCnapInformationIntoCache(Context context, final Call call,
+            final CallerInfo info) {
+        if (mCachedNumberLookupService == null || TextUtils.isEmpty(info.cnapName)
+                || mInfoMap.get(call.getId()) != null) {
+            return;
+        }
+        final Context applicationContext = context.getApplicationContext();
+        Log.i(TAG, "Found contact with CNAP name - inserting into cache");
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                ContactInfo contactInfo = new ContactInfo();
+                CachedContactInfo cacheInfo = mCachedNumberLookupService.buildCachedContactInfo(
+                        contactInfo);
+                cacheInfo.setSource(CachedContactInfo.SOURCE_TYPE_CNAP, "CNAP", 0);
+                contactInfo.name = info.cnapName;
+                contactInfo.number = call.getNumber();
+                contactInfo.type = ContactsContract.CommonDataKinds.Phone.TYPE_MAIN;
+                try {
+                    final JSONObject contactRows = new JSONObject().put(Phone.CONTENT_ITEM_TYPE,
+                            new JSONObject()
+                                    .put(Phone.NUMBER, contactInfo.number)
+                                    .put(Phone.TYPE, Phone.TYPE_MAIN));
+                    final String jsonString = new JSONObject()
+                            .put(Contacts.DISPLAY_NAME, contactInfo.name)
+                            .put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.STRUCTURED_NAME)
+                            .put(Contacts.CONTENT_ITEM_TYPE, contactRows).toString();
+                    cacheInfo.setLookupKey(jsonString);
+                } catch (JSONException e) {
+                    Log.w(TAG, "Creation of lookup key failed when caching CNAP information");
+                }
+                mCachedNumberLookupService.addContact(applicationContext, cacheInfo);
+                return null;
+            }
+        }.execute();
     }
 
     private class FindInfoCallback implements CallerInfoAsyncQuery.OnQueryCompleteListener {
