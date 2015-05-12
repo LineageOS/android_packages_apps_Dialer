@@ -16,11 +16,11 @@
 
 package com.android.incallui;
 
-import android.telecom.CameraCapabilities;
 import android.telecom.Connection;
 import android.telecom.Connection.VideoProvider;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
+import android.telecom.VideoProfile.CameraCapabilities;
 
 /**
  * Implements the InCallUI VideoCall Callback.
