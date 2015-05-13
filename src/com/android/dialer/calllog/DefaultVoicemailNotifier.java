@@ -41,10 +41,9 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 /**
- * Implementation of {@link VoicemailNotifier} that shows a notification in the
- * status bar.
+ * VoicemailNotifier that shows a notification in the status bar.
  */
-public class DefaultVoicemailNotifier implements VoicemailNotifier {
+public class DefaultVoicemailNotifier {
     public static final String TAG = "DefaultVoicemailNotifier";
 
     /** The tag used to identify notifications from this class. */
@@ -85,8 +84,14 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
         mPhoneNumberHelper = phoneNumberHelper;
     }
 
-    /** Updates the notification and notifies of the call with the given URI. */
-    @Override
+    /**
+     * Updates the notification and notifies of the call with the given URI.
+     *
+     * Clears the notification if there are no new voicemails, and notifies if the given URI
+     * corresponds to a new voicemail.
+     *
+     * It is not safe to call this method from the main thread.
+     */
     public void updateNotification(Uri newCallUri) {
         // Lookup the list of new voicemails to include in the notification.
         // TODO: Move this into a service, to avoid holding the receiver up.
@@ -170,26 +175,10 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
 
         // Determine the intent to fire when the notification is clicked on.
         final Intent contentIntent;
-        if (newCalls.length == 1) {
-            // Open the voicemail directly.
-            contentIntent = new Intent(mContext, CallDetailActivity.class);
-            contentIntent.setData(newCalls[0].callsUri);
-            contentIntent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI,
-                    newCalls[0].voicemailUri);
-            Intent playIntent = new Intent(mContext, CallDetailActivity.class);
-            playIntent.setData(newCalls[0].callsUri);
-            playIntent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI,
-                    newCalls[0].voicemailUri);
-            playIntent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, true);
-            playIntent.putExtra(CallDetailActivity.EXTRA_FROM_NOTIFICATION, true);
-            notificationBuilder.addAction(R.drawable.ic_play_holo_dark,
-                    resources.getString(R.string.notification_action_voicemail_play),
-                    PendingIntent.getActivity(mContext, 0, playIntent, 0));
-        } else {
-            // Open the call log.
-            contentIntent = new Intent(Intent.ACTION_VIEW, Calls.CONTENT_URI);
-            contentIntent.putExtra(Calls.EXTRA_CALL_TYPE_FILTER, Calls.VOICEMAIL_TYPE);
-        }
+        // Open the call log.
+        // TODO: Send to recents tab in Dialer instead.
+        contentIntent = new Intent(Intent.ACTION_VIEW, Calls.CONTENT_URI);
+        contentIntent.putExtra(Calls.EXTRA_CALL_TYPE_FILTER, Calls.VOICEMAIL_TYPE);
         notificationBuilder.setContentIntent(
                 PendingIntent.getActivity(mContext, 0, contentIntent, 0));
 
@@ -209,7 +198,6 @@ public class DefaultVoicemailNotifier implements VoicemailNotifier {
         return PendingIntent.getService(mContext, 0, intent, 0);
     }
 
-    @Override
     public void clearNotification() {
         mNotificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
     }
