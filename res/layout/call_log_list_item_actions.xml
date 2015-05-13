@@ -80,6 +80,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/send_message_action"
+        style="@style/CallLogActionStyle">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_textsms_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_send_message" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/details_action"
         style="@style/CallLogActionStyle">
 

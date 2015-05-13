@@ -18,6 +18,7 @@ package com.android.dialer.util;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -27,11 +28,12 @@ import com.android.contacts.common.CallUtil;
 import com.android.phone.common.PhoneConstants;
 
 /**
- * Utilities for creation of {@link Intent#ACTION_CALL} intents.
+ * Utilities for creation of intents in Dialer, such as {@link Intent#ACTION_CALL}.
  */
-public class CallIntentUtil {
+public class IntentUtil {
 
     public static final String CALL_ACTION = Intent.ACTION_CALL;
+    private static final String SMS_URI_PREFIX = "sms:";
 
     /**
      * Return an Intent for making a phone call. Scheme (e.g. tel, sip) will be determined
@@ -140,5 +142,60 @@ public class CallIntentUtil {
         }
 
         return intent;
+    }
+
+    public static Intent getSendSmsIntent(CharSequence phoneNumber) {
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(SMS_URI_PREFIX + phoneNumber));
+    }
+
+    public static Intent getNewContactIntent() {
+        return new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+    }
+
+    public static Intent getNewContactIntent(CharSequence phoneNumber) {
+        return getNewContactIntent(
+                null /* name */,
+                phoneNumber /* phoneNumber */,
+                -1 /* phoneNumberType */);
+    }
+
+    public static Intent getNewContactIntent(
+            CharSequence name, CharSequence phoneNumber, int phoneNumberType) {
+        Intent intent = getNewContactIntent();
+        populateContactIntent(intent, name, phoneNumber, phoneNumberType);
+        return intent;
+    }
+
+    public static Intent getAddToExistingContactIntent() {
+        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
+        intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+        return intent;
+    }
+
+    public static Intent getAddToExistingContactIntent(CharSequence phoneNumber) {
+        return getAddToExistingContactIntent(
+                null /* name */,
+                phoneNumber /* phoneNumber */,
+                -1 /* phoneNumberType */);
+    }
+
+    public static Intent getAddToExistingContactIntent(
+            CharSequence name, CharSequence phoneNumber, int phoneNumberType) {
+        Intent intent = getAddToExistingContactIntent();
+        populateContactIntent(intent, name, phoneNumber, phoneNumberType);
+        return intent;
+    }
+
+    private static void populateContactIntent(
+            Intent intent, CharSequence name, CharSequence phoneNumber, int phoneNumberType) {
+        if (phoneNumber != null) {
+            intent.putExtra(ContactsContract.Intents.Insert.PHONE, phoneNumber);
+        }
+        if (name != null) {
+            intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
+        }
+        if (phoneNumberType != -1) {
+            intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, phoneNumberType);
+        }
     }
 }
