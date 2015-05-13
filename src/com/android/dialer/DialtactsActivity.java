@@ -29,7 +29,6 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
-import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
@@ -82,7 +81,7 @@ import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.settings.DialerSettingsActivity;
-import com.android.dialer.util.CallIntentUtil;
+import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
@@ -587,7 +586,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         switch (view.getId()) {
             case R.id.floating_action_button:
                 if (mListsFragment.getTabPosition() == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
-                    sendAddNewContactIntent();
+                    DialerUtils.startActivityWithErrorToast(
+                            this,
+                            IntentUtil.getNewContactIntent(),
+                            R.string.add_contact_not_available);
                 } else if (!mIsDialpadShown) {
                     mInCallDialpadUp = false;
                     showDialpadFragment(true);
@@ -622,7 +624,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 startActivity(intent);
                 break;
             case R.id.menu_add_contact:
-                sendAddNewContactIntent();
+                DialerUtils.startActivityWithErrorToast(
+                        this,
+                        IntentUtil.getNewContactIntent(),
+                        R.string.add_contact_not_available);
                 break;
             case R.id.menu_import_export:
                 // We hard-code the "contactsAreAvailable" argument because doing it properly would
@@ -1082,38 +1087,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return getTelecomManager().isInCall();
     }
 
-    public static Intent getAddNumberToContactIntent(CharSequence text) {
-        return getAddToContactIntent(null /* name */, text /* phoneNumber */,
-                -1 /* phoneNumberType */);
-    }
-
-    public static Intent getAddToContactIntent(CharSequence name, CharSequence phoneNumber,
-            int phoneNumberType) {
-        Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-        intent.putExtra(Intents.Insert.PHONE, phoneNumber);
-        // Only include the name and phone type extras if they are specified (the method
-        // getAddNumberToContactIntent does not use them).
-        if (name != null) {
-            intent.putExtra(Intents.Insert.NAME, name);
-        }
-        if (phoneNumberType != -1) {
-            intent.putExtra(Intents.Insert.PHONE_TYPE, phoneNumberType);
-        }
-        intent.setType(Contacts.CONTENT_ITEM_TYPE);
-        return intent;
-    }
-
-    private void sendAddNewContactIntent() {
-        try {
-            startActivity(new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI));
-        } catch (ActivityNotFoundException e) {
-            Toast toast = Toast.makeText(this,
-                    R.string.add_contact_not_available,
-                    Toast.LENGTH_SHORT);
-            toast.show();
-        }
-    }
-
     private boolean canIntentBeHandled(Intent intent) {
         final PackageManager packageManager = getPackageManager();
         final List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
@@ -1171,8 +1144,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
         Intent intent = isVideoCall ?
-                CallIntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
-                CallIntentUtil.getCallIntent(phoneNumber, getCallOrigin());
+                IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
+                IntentUtil.getCallIntent(phoneNumber, getCallOrigin());
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }
