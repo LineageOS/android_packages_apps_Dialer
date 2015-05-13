@@ -879,7 +879,7 @@ public class InCallPresenter implements CallList.Listener,
         // (1) Attempt to answer a call
         if (incomingCall != null) {
             TelecomAdapter.getInstance().answerCall(
-                    incomingCall.getId(), VideoProfile.VideoState.AUDIO_ONLY);
+                    incomingCall.getId(), VideoProfile.STATE_AUDIO_ONLY);
             return true;
         }
 

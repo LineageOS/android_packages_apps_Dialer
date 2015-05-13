@@ -245,7 +245,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallVideoCallCallbackNotifier.getInstance().addSurfaceChangeListener(this);
         InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this);
         InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
-        mCurrentVideoState = VideoProfile.VideoState.AUDIO_ONLY;
+        mCurrentVideoState = VideoProfile.STATE_AUDIO_ONLY;
         mCurrentCallState = Call.State.INVALID;
     }
 
@@ -551,7 +551,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     private void updateCallCache(Call call) {
         if (call == null) {
-            mCurrentVideoState = VideoProfile.VideoState.AUDIO_ONLY;
+            mCurrentVideoState = VideoProfile.STATE_AUDIO_ONLY;
             mCurrentCallState = Call.State.INVALID;
             mVideoCall = null;
             mPrimaryCall = null;
@@ -752,7 +752,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private void exitVideoMode() {
         Log.d(this, "exitVideoMode");
 
-        showVideoUi(VideoProfile.VideoState.AUDIO_ONLY, Call.State.ACTIVE);
+        showVideoUi(VideoProfile.STATE_AUDIO_ONLY, Call.State.ACTIVE);
         enableCamera(mVideoCall, false);
         InCallPresenter.getInstance().setFullScreen(false);
 
