@@ -722,7 +722,7 @@ public class DialpadFragment extends Fragment
     }
 
     private void keyPressed(int keyCode) {
-        if (getView().getTranslationY() != 0) {
+        if (getView() == null || getView().getTranslationY() != 0) {
             return;
         }
         switch (keyCode) {
