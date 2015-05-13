@@ -41,7 +41,6 @@ import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
-import com.android.dialer.ProximitySensorAware;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.ex.variablespeed.MediaPlayerProxy;
@@ -68,7 +67,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  */
 @NotThreadSafe
 public class VoicemailPlaybackFragment extends Fragment {
-    private static final String TAG = "VoicemailPlayback";
+    private static final String TAG = VoicemailPlaybackFragment.class.getSimpleName();
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
     private static final String[] HAS_CONTENT_PROJECTION = new String[] {
         VoicemailContract.Voicemails.HAS_CONTENT,
@@ -79,6 +78,8 @@ public class VoicemailPlaybackFragment extends Fragment {
     private static MediaPlayerProxy mMediaPlayerInstance;
     private static ScheduledExecutorService mScheduledExecutorService;
     private View mPlaybackLayout;
+
+    private PowerManager.WakeLock mProximityWakeLock;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,15 +96,24 @@ public class VoicemailPlaybackFragment extends Fragment {
         Uri voicemailUri = arguments.getParcelable(EXTRA_VOICEMAIL_URI);
         Preconditions.checkNotNull(voicemailUri, "fragment must contain EXTRA_VOICEMAIL_URI");
         boolean startPlayback = arguments.getBoolean(EXTRA_VOICEMAIL_START_PLAYBACK, false);
+
         PowerManager powerManager =
                 (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock =
-                powerManager.newWakeLock(
-                        PowerManager.SCREEN_DIM_WAKE_LOCK, getClass().getSimpleName());
-        mPresenter = new VoicemailPlaybackPresenter(createPlaybackViewImpl(),
-                getMediaPlayerInstance(), voicemailUri,
-                getScheduledExecutorServiceInstance(), startPlayback,
-                AsyncTaskExecutors.createAsyncTaskExecutor(), wakeLock);
+        if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
+            mProximityWakeLock = powerManager.newWakeLock(
+                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
+        } else {
+            mProximityWakeLock = null;
+        }
+
+        mPresenter = new VoicemailPlaybackPresenter(
+                createPlaybackViewImpl(),
+                getMediaPlayerInstance(),
+                voicemailUri,
+                getScheduledExecutorServiceInstance(),
+                startPlayback,
+                AsyncTaskExecutors.createAsyncTaskExecutor(),
+                mProximityWakeLock);
         mPresenter.onCreate(savedInstanceState);
     }
 
@@ -134,6 +144,7 @@ public class VoicemailPlaybackFragment extends Fragment {
 
     @Override
     public void onPause() {
+        releaseProximitySensor(false /* waitForFarState */);
         mPresenter.onPause();
         super.onPause();
     }
@@ -172,6 +183,31 @@ public class VoicemailPlaybackFragment extends Fragment {
         if (mMediaPlayerInstance != null) {
             mMediaPlayerInstance.release();
             mMediaPlayerInstance = null;
+        }
+    }
+
+    private void acquireProximitySensor() {
+        if (mProximityWakeLock == null) {
+            return;
+        }
+        if (!mProximityWakeLock.isHeld()) {
+            Log.i(TAG, "Acquiring proximity wake lock");
+            mProximityWakeLock.acquire();
+        } else {
+            Log.i(TAG, "Proximity wake lock already acquired");
+        }
+    }
+
+    private void releaseProximitySensor(boolean waitForFarState) {
+        if (mProximityWakeLock == null) {
+            return;
+        }
+        if (mProximityWakeLock.isHeld()) {
+            Log.i(TAG, "Releasing proximity wake lock");
+            int flags = waitForFarState ? PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY : 0;
+            mProximityWakeLock.release(flags);
+        } else {
+            Log.i(TAG, "Proximity wake lock already released");
         }
     }
 
@@ -214,7 +250,7 @@ public class VoicemailPlaybackFragment extends Fragment {
     }
 
     /**  Methods required by the PlaybackView for the VoicemailPlaybackPresenter. */
-    private static final class PlaybackViewImpl implements VoicemailPlaybackPresenter.PlaybackView {
+    private final class PlaybackViewImpl implements VoicemailPlaybackPresenter.PlaybackView {
         private final ActivityReference mActivityReference;
         private final Context mApplicationContext;
         private final SeekBar mPlaybackSeek;
@@ -311,8 +347,8 @@ public class VoicemailPlaybackFragment extends Fragment {
         public void enableProximitySensor() {
             // Only change the state if the activity is still around.
             Activity activity = mActivityReference.get();
-            if (activity != null && activity instanceof ProximitySensorAware) {
-                ((ProximitySensorAware) activity).enableProximitySensor();
+            if (activity != null) {
+                acquireProximitySensor();
             }
         }
 
@@ -320,8 +356,8 @@ public class VoicemailPlaybackFragment extends Fragment {
         public void disableProximitySensor() {
             // Only change the state if the activity is still around.
             Activity activity = mActivityReference.get();
-            if (activity != null && activity instanceof ProximitySensorAware) {
-                ((ProximitySensorAware) activity).disableProximitySensor(true);
+            if (activity != null) {
+                releaseProximitySensor(true /* waitForFarState */);
             }
         }
 

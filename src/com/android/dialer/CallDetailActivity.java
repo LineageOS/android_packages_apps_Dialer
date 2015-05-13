@@ -80,7 +80,7 @@ import java.util.List;
  * This activity can be either started with the URI of a single call log entry, or with the
  * {@link #EXTRA_CALL_LOG_IDS} extra to specify a group of call log entries.
  */
-public class CallDetailActivity extends Activity implements ProximitySensorAware {
+public class CallDetailActivity extends Activity {
     private static final String TAG = "CallDetail";
 
     private static final char LEFT_TO_RIGHT_EMBEDDING = '\u202A';
@@ -142,8 +142,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     /** Whether we should show "remove from call log" in the options menu. */
     private boolean mHasRemoveFromCallLogOption;
 
-    private PowerManager.WakeLock mProximityWakeLock;
-
     static final String[] CALL_LOG_PROJECTION = new String[] {
         CallLog.Calls.DATE,
         CallLog.Calls.DURATION,
@@ -197,13 +195,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
         mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
-        final PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
-            mProximityWakeLock = powerManager.newWakeLock(
-                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
-        } else {
-            mProximityWakeLock = null;
-        }
 
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -706,40 +697,6 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                     }
                 }
         );
-    }
-
-    @Override
-    protected void onPause() {
-        // Immediately stop the proximity sensor.
-        disableProximitySensor(false);
-        super.onPause();
-    }
-
-    @Override
-    public void enableProximitySensor() {
-        if (mProximityWakeLock == null) {
-            return;
-        }
-        if (!mProximityWakeLock.isHeld()) {
-            Log.i(TAG, "Acquiring proximity wake lock");
-            mProximityWakeLock.acquire();
-        } else {
-            Log.i(TAG, "Proximity wake lock already acquired");
-        }
-    }
-
-    @Override
-    public void disableProximitySensor(boolean waitForFarState) {
-        if (mProximityWakeLock == null) {
-            return;
-        }
-        if (mProximityWakeLock.isHeld()) {
-            Log.i(TAG, "Releasing proximity wake lock");
-            int flags = (waitForFarState ? PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY : 0);
-            mProximityWakeLock.release(flags);
-        } else {
-            Log.i(TAG, "Proximity wake lock already released");
-        }
     }
 
     private void closeSystemDialogs() {
