@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"अवस्थित सम्पर्कमा थप्नुहोस्"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS पठाउनुहोस्"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"भिडियो कल बनाउनुहोस्"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"पूर्ण कल इतिहास हेर्नुहोस्"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> नयाँ छुटेका कलहरु"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"द्रूत डायल मनपर्नेका लागि एक-टच डाइलिङ र तपाईंले प्राय: कल गर्ने नम्बर हुन्।"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"कुनै सम्पर्कहरू छैन।"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> मा"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"कल गर्नुहोस्"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> कल गर्नुहोस्"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> भिडियो कल गर्नुहोस्।"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> बाट भ्वाइसमेल सुन्नुहोस्"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> का लागि नयाँ सम्पर्क बनाउँनुहोस्"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"विद्यमान सम्पर्कमा <xliff:g id="NAMEORNUMBER">^1</xliff:g> थप्नुहोस्"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> का लागि कल विवरणहरू"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> रिपोर्ट गर्नुहोस्"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"कल इतिहासबाट मेटाइयो"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"रिपोर्ट गर्नुहोस्"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"आज"</string>

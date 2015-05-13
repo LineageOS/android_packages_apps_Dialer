@@ -159,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>-ზე"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"დარეკვა"</string>
     <string name="description_call_action" msgid="4000549004089776147">"დარეკვა <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"ვიდეო ზარი <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ის ხმოვანი ფოსტის მოსმენა"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"შექმენი კონტაქტი <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ისთვის"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"დაუმატე <xliff:g id="NAMEORNUMBER">^1</xliff:g> არსებულ კონტაქტს"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ზარის დეტალები"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"ანგარიში <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ზარის ისტორიიდან წაშლილი"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"შეტყობინება"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"დღეს"</string>

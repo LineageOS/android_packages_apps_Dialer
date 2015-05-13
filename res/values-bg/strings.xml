@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Добавяне към съществуващ контакт"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Изпращане на SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Провеждане на видеообаждане"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"Преглед на цялата история на обажданията"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> нови пропуснати обаждания"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"Чрез бързото набиране се свързвате с едно докосване с любими контакти и с номера, на които се обаждате често"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Няма контакти"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"на <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Обаждане"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Обаждане на <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"Видеообаждане до <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Прослушване на гласовата поща от <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Създаване на контакт за <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Добавяне на <xliff:g id="NAMEORNUMBER">^1</xliff:g> към съществуващ контакт"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Подробности за обаждането за <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"Подаване на сигнал за <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Изтрито от историята на обажданията"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"Подаване на сигнал"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Днес"</string>
