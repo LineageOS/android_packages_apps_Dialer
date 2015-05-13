@@ -49,7 +49,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
     private AnswerListener mAnswerListener;
     private boolean mPingEnabled = true;
     private boolean mTargetTriggered = false;
-    private int mVideoState = VideoProfile.VideoState.BIDIRECTIONAL;
+    private int mVideoState = VideoProfile.STATE_BIDIRECTIONAL;
 
     public GlowPadWrapper(Context context) {
         super(context);
@@ -113,7 +113,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
-                mAnswerListener.onAnswer(VideoProfile.VideoState.AUDIO_ONLY, getContext());
+                mAnswerListener.onAnswer(VideoProfile.STATE_AUDIO_ONLY, getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline:

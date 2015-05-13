@@ -85,11 +85,11 @@ public class CallUtils {
     }
 
     public static int getUnPausedVideoState(int videoState) {
-        return videoState & (~VideoProfile.VideoState.PAUSED);
+        return videoState & (~VideoProfile.STATE_PAUSED);
     }
 
     public static int getPausedVideoState(int videoState) {
-        return videoState | VideoProfile.VideoState.PAUSED;
+        return videoState | VideoProfile.STATE_PAUSED;
     }
 
 }
