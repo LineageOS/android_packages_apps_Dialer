@@ -76,10 +76,10 @@
         <item>@drawable/ic_lockscreen_answer_video</item>
     </array>
     <array name="incoming_call_widget_video_without_sms_target_descriptions">
-        <item>@string/description_target_answer_video_call</item>
+        <item>@string/description_target_answer_audio_call</item>
         <item>@null</item>
         <item>@string/description_target_decline</item>
-        <item>@string/description_target_answer_audio_call</item>
+        <item>@string/description_target_answer_video_call</item>
     </array>
     <array name="incoming_call_widget_video_without_sms_direction_descriptions">
         <item>@string/description_direction_right</item>
@@ -89,21 +89,21 @@
     </array>
 
     <!-- For video calls, if respond via SMS is enabled:
-         - Answer as video call (drag right)
+         - Answer as audio call (drag right)
          - Respond via SMS (drag up)
          - Decline (drag left)
-         - Answer as audio call (drag down) -->
+         - Answer as video call (drag down) -->
     <array name="incoming_call_widget_video_with_sms_targets">
-        <item>@drawable/ic_lockscreen_answer_video</item>
+        <item>@drawable/ic_lockscreen_answer</item>
         <item>@drawable/ic_lockscreen_text</item>
         <item>@drawable/ic_lockscreen_decline</item>
-        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/ic_lockscreen_answer_video</item>
     </array>
     <array name="incoming_call_widget_video_with_sms_target_descriptions">
-        <item>@string/description_target_answer_video_call</item>
+        <item>@string/description_target_answer_audio_call</item>
         <item>@string/description_target_send_sms</item>
         <item>@string/description_target_decline</item>
-        <item>@string/description_target_answer_audio_call</item>
+        <item>@string/description_target_answer_video_call</item>
     </array>
     <array name="incoming_call_widget_video_with_sms_direction_descriptions">
         <item>@string/description_direction_right</item>
