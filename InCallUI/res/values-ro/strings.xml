@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Apel video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Se solicită video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Nu se poate conecta apelul video"</string>
-    <!-- no translation found for card_title_video_call_rejected (462358296694719787) -->
-    <skip />
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Solicitarea pentru apel video a fost respinsă"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Numărul de apelare inversă\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Numărul de apelare inversă de urgență\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Apelează"</string>
@@ -171,8 +170,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de ore</item>
       <item quantity="one">O oră</item>
     </plurals>
-    <!-- no translation found for profile_photo_description (5609894336203315400) -->
-    <skip />
-    <!-- no translation found for camera_off_description (5689494614359429889) -->
-    <skip />
+    <string name="profile_photo_description" msgid="5609894336203315400">"Fotografie de profil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Camera este oprită"</string>
 </resources>

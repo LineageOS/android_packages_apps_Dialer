@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Видеовстреча"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Запрос видео"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Не удалось совершить видеовызов"</string>
-    <!-- no translation found for card_title_video_call_rejected (462358296694719787) -->
-    <skip />
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Видеовызов отклонен"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Номер обратного вызова:\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Номер обратного вызова для экстренных служб:\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Набор номера"</string>
@@ -174,8 +173,6 @@
       <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> часов</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> часа</item>
     </plurals>
-    <!-- no translation found for profile_photo_description (5609894336203315400) -->
-    <skip />
-    <!-- no translation found for camera_off_description (5689494614359429889) -->
-    <skip />
+    <string name="profile_photo_description" msgid="5609894336203315400">"Фото профиля"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Камера отключена"</string>
 </resources>

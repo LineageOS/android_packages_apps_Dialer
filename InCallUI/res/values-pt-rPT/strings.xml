@@ -49,8 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"A solicitar vídeo"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível ligar a videochamada"</string>
-    <!-- no translation found for card_title_video_call_rejected (462358296694719787) -->
-    <skip />
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Pedido de vídeo rejeitado"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"O seu número de retorno de chamada\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"O seu número de retorno de chamadas de emergência\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"A marcar"</string>
@@ -168,8 +167,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> horas</item>
       <item quantity="one">1 hora</item>
     </plurals>
-    <!-- no translation found for profile_photo_description (5609894336203315400) -->
-    <skip />
-    <!-- no translation found for camera_off_description (5689494614359429889) -->
-    <skip />
+    <string name="profile_photo_description" msgid="5609894336203315400">"Foto do perfil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Câmara desligada"</string>
 </resources>
