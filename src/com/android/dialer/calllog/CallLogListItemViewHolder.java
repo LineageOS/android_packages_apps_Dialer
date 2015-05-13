@@ -72,6 +72,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     public View voicemailButtonView;
     public View createNewContactButtonView;
     public View addToExistingContactButtonView;
+    public View sendMessageView;
     public View detailsButtonView;
     public View reportButtonView;
 
@@ -218,35 +219,26 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         ViewStub stub = (ViewStub) rootView.findViewById(R.id.call_log_entry_actions_stub);
         if (stub != null) {
             actionsView = (ViewGroup) stub.inflate();
-        }
 
-        if (videoCallButtonView == null) {
             videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
             videoCallButtonView.setOnClickListener(mActionListener);
-        }
 
-        if (voicemailButtonView == null) {
             voicemailButtonView = actionsView.findViewById(R.id.voicemail_action);
             voicemailButtonView.setOnClickListener(mActionListener);
-        }
 
-        if (createNewContactButtonView == null) {
             createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
             createNewContactButtonView.setOnClickListener(mActionListener);
-        }
 
-        if (addToExistingContactButtonView == null) {
             addToExistingContactButtonView =
                     actionsView.findViewById(R.id.add_to_existing_contact_action);
             addToExistingContactButtonView.setOnClickListener(mActionListener);
-        }
 
-        if (detailsButtonView == null) {
+            sendMessageView = actionsView.findViewById(R.id.send_message_action);
+            sendMessageView.setOnClickListener(mActionListener);
+
             detailsButtonView = actionsView.findViewById(R.id.details_action);
             detailsButtonView.setOnClickListener(mActionListener);
-        }
 
-        if (reportButtonView == null) {
             reportButtonView = actionsView.findViewById(R.id.report_action);
             reportButtonView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -343,6 +335,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             createNewContactButtonView.setVisibility(View.GONE);
             addToExistingContactButtonView.setVisibility(View.GONE);
         }
+
+        sendMessageView.setTag(IntentProvider.getSendSmsIntentProvider(number));
 
         mCallLogListItemHelper.setActionContentDescriptions(this);
     }

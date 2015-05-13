@@ -550,6 +550,11 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_action_voicemail">LISTEN</string>
 
+    <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
+         messaging app to send a SMS to the number represented by the call log entry.
+         [CHAR LIMIT=50] -->
+    <string name="call_log_action_send_message">Send Message</string>
+
     <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
          the call log entry. [CHAR LIMIT=50] -->
