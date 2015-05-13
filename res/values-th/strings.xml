@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"เพิ่มไปยังรายชื่อติดต่อที่มีอยู่"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ส่ง SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ใช้แฮงเอาท์วิดีโอ"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"ดูประวัติการโทรแบบเต็ม"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"สายที่ไม่ได้รับใหม่ <xliff:g id="NUMBER">%s</xliff:g> สาย"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"การโทรด่วนเป็นการโทรแบบแตะครั้งเดียวสำหรับรายการโปรดและหมายเลขที่คุณโทรบ่อย"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ไม่มีรายชื่อติดต่อ"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"บน <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"โทร"</string>
     <string name="description_call_action" msgid="4000549004089776147">"โทรไปที่ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"เรียกแฮงเอาท์วิดีโอไปยัง <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"ฟังข้อความเสียงจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"สร้างรายชื่อติดต่อสำหรับ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"เพิ่ม <xliff:g id="NAMEORNUMBER">^1</xliff:g> ไปยังรายชื่อติดต่อที่มีอยู่"</string>
     <string name="description_details_action" msgid="2433827152749491785">"รายละเอียดการโทรสำหรับ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"รายงาน <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ลบออกจากประวัติการโทรแล้ว"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"รายงาน"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"วันนี้"</string>

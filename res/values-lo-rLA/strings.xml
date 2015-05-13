@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"ເພີ່ມ​ລາຍ​ຊື່​ທີ່​ມີ​ຢູ່"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ສົ່ງ SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"​ໂທ​ອອກ​ດ້ວຍ​ວິ​ດີ​ໂອ"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"ເບິ່ງ​ປະ​ຫວັດ​ການ​ໂທ​ແບບເຕັມ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ສາຍທີ່ບໍ່ໄດ້ຮັບໃໝ່"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"ການ​ໂທ​ດ່ວນ​ແມ່ນ​ການ​ກົດ​ໂທ​ດ້ວຍ​ການ​ສຳ​ຜັດ​ເທື່ອ​ດຽວ ສຳ​ລັບ​ລາຍ​ການ​ທີ່​ມັກ ແລະ​ເບີ​ທີ່​ທ່ານ​ໂທ​ຢູ່​ເລື້ອຍ​ໆ"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ບໍ່ມີລາຍຊື່ຕິດຕໍ່"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"ຢູ່​ເທິງ <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ໂທ"</string>
     <string name="description_call_action" msgid="4000549004089776147">"ໂທ​ຫາ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"ການ​ໂທວິ​ດີ​ໂອ <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"​ຟັງ​ຂໍ້​ຄວາມ​ສຽງ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"ສ້າງ​ລາຍ​ຊື່​ສຳ​ລັບ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"ເພີ່ມ <xliff:g id="NAMEORNUMBER">^1</xliff:g> ໃສ່​ລາຍ​ຊື່​ທີ່​ມີ​ຢູ່"</string>
     <string name="description_details_action" msgid="2433827152749491785">"ລາຍລະອຽດ​ການ​ໂທ​ສຳລັບ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"ລາ​ຍ​ງານ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ລຶບ​ຈາກ​ປະ​ຫວັດ​ການ​ໂທ​ແລ້ວ"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"ລາຍງານ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ມື້ນີ້"</string>

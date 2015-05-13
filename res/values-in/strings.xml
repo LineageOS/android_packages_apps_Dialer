@@ -159,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"di <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telepon"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Telepon <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"Lakukan panggilan video ke <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Dengarkan kotak pesan dari <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Buat kontak untuk <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Tambahkan <xliff:g id="NAMEORNUMBER">^1</xliff:g> ke akun yang ada"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detail panggilan telepon untuk <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"Laporkan <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Dihapus dari riwayat panggilan"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"Laporkan"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hari ini"</string>

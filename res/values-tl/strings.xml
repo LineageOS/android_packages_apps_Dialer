@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Idagdag sa umiiral nang contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Magpadala ng SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Gumawa ng video call"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"Tingnan ang buong history ng tawag"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> (na) bagong hindi nasagot na tawag"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"Ang speed dial ay one‑touch na pagda-dial para sa mga paborito at mga numerong madalas mong tinatawag"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Walang mga contact"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"sa <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Tumawag"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Tawagan ang/si <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"I-video call si/ang <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Makinig sa voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Gumawa ng contact para kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Idagdag si/ang <xliff:g id="NAMEORNUMBER">^1</xliff:g> sa umiiral nang contact"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Mga detalye ng tawag para sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"Iulat si/ang <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Na-delete mula sa history ng tawag"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"Mag-ulat"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Ngayon"</string>

@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Adicionar ao contacto existente"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Enviar SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fazer videochamada"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"Ver histórico de chamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> chamadas não atendidas novas"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"A marcação rápida é uma marcação de um toque dos favoritos e dos números mais frequentes"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Sem contactos"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"em <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telefonar"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Telefonar a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"Fazer videochamada com <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Ouvir o correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Criar contacto para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Adicionar <xliff:g id="NAMEORNUMBER">^1</xliff:g> ao contacto existente"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalhes de chamadas de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"Denunciar <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Eliminado do histórico de chamadas"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"Denunciar"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hoje"</string>

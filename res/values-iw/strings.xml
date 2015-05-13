@@ -145,8 +145,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"הוסף לאיש קשר קיים"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"‏שלח SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"בצע שיחת וידאו"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"הצג את היסטוריית השיחות המלאה"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> שיחות חדשות שלא נענו"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"חיוג מהיר מאפשר לך להתקשר בנגיעה אחת אל מועדפים ומספרים שאליהם אתה מתקשר בתדירות גבוהה"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"אין אנשי קשר"</string>

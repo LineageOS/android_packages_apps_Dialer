@@ -143,8 +143,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"添加到现有联系人"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"发送短信"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"发起视频通话"</string>
-    <!-- no translation found for show_call_history (1141502332266697170) -->
-    <skip />
+    <string name="show_call_history" msgid="1141502332266697170">"查看全部通话记录"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速拨号功能，只需轻轻一点即可拨打收藏联系人的电话号码以及经常拨打的电话号码。"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"没有联系人"</string>
@@ -160,16 +159,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"通过 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"拨打电话"</string>
     <string name="description_call_action" msgid="4000549004089776147">"呼叫<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_video_call_action (7386922428155062213) -->
-    <skip />
+    <string name="description_video_call_action" msgid="7386922428155062213">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>进行视频通话。"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"听取来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>的语音邮件"</string>
-    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
-    <skip />
-    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
-    <skip />
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"为<xliff:g id="NAMEORNUMBER">^1</xliff:g>创建联系人信息"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"将<xliff:g id="NAMEORNUMBER">^1</xliff:g>添加到现有联系人"</string>
     <string name="description_details_action" msgid="2433827152749491785">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>的通话详情"</string>
-    <!-- no translation found for description_report_action (5011961125980353172) -->
-    <skip />
+    <string name="description_report_action" msgid="5011961125980353172">"报告<xliff:g id="NAMEORNUMBER">^1</xliff:g>的问题"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"已从通话记录中删除"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"报告"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今天"</string>
