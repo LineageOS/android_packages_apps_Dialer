@@ -321,6 +321,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             voicemailButtonView.setTag(null);
             voicemailButtonView.setVisibility(View.GONE);
 
+            detailsButtonView.setVisibility(View.VISIBLE);
             detailsButtonView.setTag(
                     IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
         }

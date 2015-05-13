@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -49,24 +50,6 @@ import java.util.HashMap;
 public class CallLogAdapter extends GroupingListAdapter
         implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
 
-    /** Interface used to inform a parent UI element that a list item has been expanded. */
-    public interface CallItemExpandedListener {
-        /**
-         * @param view The {@link View} that represents the item that was clicked
-         *         on.
-         */
-        public void onItemExpanded(View view);
-
-        /**
-         * Retrieves the call log view for the specified call Id.  If the view is not currently
-         * visible, returns null.
-         *
-         * @param callId The call Id.
-         * @return The call log view.
-         */
-        public View getViewForCallId(long callId);
-    }
-
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
         public void fetchCalls();
@@ -78,9 +61,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     private static final int VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM = 10;
-
-    /** Constant used to indicate no row is expanded. */
-    private static final long NONE_EXPANDED = -1;
+    private static final int NO_EXPANDED_LIST_ITEM = -1;
 
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
@@ -92,10 +73,11 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private boolean mIsShowingRecentsTab;
 
-    /**
-     * Tracks the currently expanded call log row.
-     */
-    private long mCurrentlyExpanded = NONE_EXPANDED;
+    // Tracks the position of the currently expanded list item.
+    private int mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+    // Tracks the rowId of the currently expanded list item, so the position can be updated if there
+    // are any changes to the call log entries, such as additions or removals.
+    private long mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
 
     /**
      *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
@@ -142,13 +124,52 @@ public class CallLogAdapter extends GroupingListAdapter
     };
 
     /**
-     * The onClickListener used to expand or collapse the action buttons section for a call log
-     * entry.
+     * The OnClickListener used to expand or collapse the action buttons of a call log entry.
      */
     private final View.OnClickListener mExpandCollapseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            handleRowExpanded(v, false /* forceExpand */);
+            CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) v.getTag();
+
+            if (viewHolder == null) {
+                return;
+            }
+
+            if (viewHolder.getAdapterPosition() == mCurrentlyExpandedPosition) {
+                // Hide actions, if the clicked item is the expanded item.
+                viewHolder.showActions(false, mOnReportButtonClickListener);
+                mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+                mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
+            } else {
+                expandViewHolderActions(viewHolder);
+            }
+
+        }
+    };
+
+    private void expandViewHolderActions(CallLogListItemViewHolder viewHolder) {
+        // If another item is expanded, notify it that it has changed. Its actions will be
+        // hidden when it is re-binded because we change mCurrentlyExpandedPosition below.
+        if (mCurrentlyExpandedPosition != RecyclerView.NO_POSITION) {
+            notifyItemChanged(mCurrentlyExpandedPosition);
+        }
+        // Show the actions for the clicked list item.
+        viewHolder.showActions(true, mOnReportButtonClickListener);
+        mCurrentlyExpandedPosition = viewHolder.getAdapterPosition();
+        mCurrentlyExpandedRowId = viewHolder.rowId;
+    }
+
+    /**
+     * Expand the actions on a list item when focused in Talkback mode, to aid discoverability.
+     */
+    private AccessibilityDelegate mAccessibilityDelegate = new AccessibilityDelegate() {
+        @Override
+        public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
+                AccessibilityEvent event) {
+            if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+                expandViewHolderActions((CallLogListItemViewHolder) host.getTag());
+            }
+            return super.onRequestSendAccessibilityEvent(host, child, event);
         }
     };
 
@@ -159,17 +180,6 @@ public class CallLogAdapter extends GroupingListAdapter
                     notifyDataSetChanged();
                 }
             };
-
-    private AccessibilityDelegate mAccessibilityDelegate = new AccessibilityDelegate() {
-        @Override
-        public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
-                AccessibilityEvent event) {
-            if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                handleRowExpanded(host, true /* forceExpand */);
-            }
-            return super.onRequestSendAccessibilityEvent(host, child, event);
-        }
-    };
 
     @Override
     public boolean onPreDraw() {
@@ -280,7 +290,12 @@ public class CallLogAdapter extends GroupingListAdapter
                 mActionListener,
                 mPhoneNumberUtilsWrapper,
                 mCallLogViewsHelper);
+
+        viewHolder.callLogEntryView.setTag(viewHolder);
+        viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
+
         viewHolder.primaryActionView.setTag(viewHolder);
+        viewHolder.primaryActionView.setOnClickListener(mExpandCollapseListener);
 
         return viewHolder;
     }
@@ -305,7 +320,6 @@ public class CallLogAdapter extends GroupingListAdapter
         int count = getGroupSize(position);
 
         CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
-        views.rootView.setAccessibilityDelegate(mAccessibilityDelegate);
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
@@ -348,9 +362,6 @@ public class CallLogAdapter extends GroupingListAdapter
         final boolean isVoicemailNumber =
                 mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
 
-        // Expand/collapse an actions section for the call log entry when the primary view is tapped.
-        views.primaryActionView.setOnClickListener(mExpandCollapseListener);
-
         // Note: Binding of the action buttons is done as required in configureActionViews when the
         // user expands the actions ViewStub.
 
@@ -388,9 +399,13 @@ public class CallLogAdapter extends GroupingListAdapter
         views.canBeReportedAsInvalid = mContactInfoHelper.canReportAsInvalid(info.sourceType,
                 info.objectId);
 
-        // Restore expansion state of the row on rebind.  Inflate the actions ViewStub if required,
+        // Update the expanded position if the rowIds match, in case ViewHolders were added/removed.
+        if (mCurrentlyExpandedRowId == rowId) {
+            mCurrentlyExpandedPosition = position;
+        }
+        // Restore expansion state of the row on rebind. Inflate the actions ViewStub if required,
         // and set its visibility state accordingly.
-        views.showActions(isExpanded(rowId), mOnReportButtonClickListener);
+        views.showActions(mCurrentlyExpandedPosition == position, mOnReportButtonClickListener);
 
         if (TextUtils.isEmpty(name)) {
             details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
@@ -472,35 +487,6 @@ public class CallLogAdapter extends GroupingListAdapter
             return mDayGroups.get(callId);
         }
         return CallLogGroupBuilder.DAY_GROUP_NONE;
-    }
-
-    /**
-     * Determines if a call log row with the given Id is expanded.
-     * @param rowId The row Id of the call.
-     * @return True if the row should be expanded.
-     */
-    private boolean isExpanded(long rowId) {
-        return mCurrentlyExpanded == rowId;
-    }
-
-    /**
-     * Toggles the expansion state tracked for the call log row identified by rowId and returns
-     * the new expansion state.  Assumes that only a single call log row will be expanded at any
-     * one point and tracks the current and previous expanded item.
-     *
-     * @param rowId The row Id associated with the call log row to expand/collapse.
-     * @return True where the row is now expanded, false otherwise.
-     */
-    private boolean toggleExpansion(long rowId) {
-        if (rowId == mCurrentlyExpanded) {
-            // Collapsing currently expanded row.
-            mCurrentlyExpanded = NONE_EXPANDED;
-            return false;
-        } else {
-            // Expanding a row (collapsing current expanded one).
-            mCurrentlyExpanded = rowId;
-            return true;
-        }
     }
 
     /**
@@ -618,23 +604,5 @@ public class CallLogAdapter extends GroupingListAdapter
        } else {
            return mContext.getResources().getString(R.string.call_log_header_other);
        }
-    }
-
-    /**
-     * Manages the state changes for the UI interaction where a call log row is expanded.
-     *
-     * @param view The view that was tapped
-     * @param forceExpand Whether or not to force the call log row into an expanded state regardless
-     *        of its previous state
-     */
-    private void handleRowExpanded(View view, boolean forceExpand) {
-        final CallLogListItemViewHolder views = (CallLogListItemViewHolder) view.getTag();
-
-        if (views == null || (forceExpand && isExpanded(views.rowId))) {
-            return;
-        }
-
-        boolean expanded = toggleExpansion(views.rowId);
-        views.showActions(expanded, mOnReportButtonClickListener);
     }
 }
