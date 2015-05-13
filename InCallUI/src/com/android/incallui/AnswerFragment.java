@@ -123,7 +123,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      * @param targetSet Integer identifying the set of targets to use.
      */
     public void showTargets(int targetSet) {
-        showTargets(targetSet, VideoProfile.VideoState.BIDIRECTIONAL);
+        showTargets(targetSet, VideoProfile.STATE_BIDIRECTIONAL);
     }
 
     /**

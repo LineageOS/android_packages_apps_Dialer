@@ -250,7 +250,7 @@ public class Call {
     /**
      * mModifyToVideoState is used to store requested upgrade / downgrade video state
      */
-    private int mModifyToVideoState = VideoProfile.VideoState.AUDIO_ONLY;
+    private int mModifyToVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
     private InCallVideoCallCallback mVideoCallCallback;
 
