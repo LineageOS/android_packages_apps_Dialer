@@ -40,14 +40,13 @@ import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
 import com.android.phone.common.animation.AnimUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
     private static final String TAG  = SearchFragment.class.getSimpleName();
-    private static final String SMS_URI_PREFIX = "sms:";
 
     private OnListFragmentScrolledListener mActivityScrollListener;
 
@@ -216,7 +215,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 super.onItemClick(position, id);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
-                number = adapter.getQueryString(); 
+                number = adapter.getQueryString();
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
                     listener.onCallNumberDirectly(number);
@@ -225,26 +224,23 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
                 number = TextUtils.isEmpty(mAddToContactNumber) ?
                         adapter.getFormattedQueryString() : mAddToContactNumber;
-                intent = new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
-                intent.putExtra(ContactsContract.Intents.Insert.PHONE, number);
-                intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,
-                        ContactsContract.CommonDataKinds.Phone.TYPE_MAIN);
+                intent = IntentUtil.getNewContactIntent(number);
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_ADD_TO_EXISTING_CONTACT:
                 number = TextUtils.isEmpty(mAddToContactNumber) ?
                         adapter.getFormattedQueryString() : mAddToContactNumber;
-                intent = DialtactsActivity.getAddNumberToContactIntent(number);
+                intent = IntentUtil.getAddToExistingContactIntent(number);
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent,
                         R.string.add_contact_not_available);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_SEND_SMS_MESSAGE:
-                intent = new Intent(
-                        Intent.ACTION_VIEW, Uri.parse(SMS_URI_PREFIX + getQueryString()));
+                number = adapter.getFormattedQueryString();
+                intent = IntentUtil.getSendSmsIntent(number);
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
-                number = adapter.getQueryString(); 
+                number = adapter.getQueryString();
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
                     listener.onCallNumberDirectly(number, true /* isVideoCall */);

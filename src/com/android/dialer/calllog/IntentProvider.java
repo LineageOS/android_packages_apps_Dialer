@@ -30,7 +30,7 @@ import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.CallDetailActivity;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
-import com.android.dialer.util.CallIntentUtil;
+import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallIntentUtil.getCallIntent(number, accountHandle);
+                return IntentUtil.getCallIntent(number, accountHandle);
             }
         };
     }
@@ -69,7 +69,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallIntentUtil.getVideoCallIntent(number, accountHandle);
+                return IntentUtil.getVideoCallIntent(number, accountHandle);
             }
         };
     }
@@ -78,7 +78,7 @@ public abstract class IntentProvider {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return CallIntentUtil.getVoicemailIntent();
+                return IntentUtil.getVoicemailIntent();
             }
         };
     }
@@ -97,6 +97,15 @@ public abstract class IntentProvider {
                 }
                 intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, true);
                 return intent;
+            }
+        };
+    }
+
+    public static IntentProvider getSendSmsIntentProvider(final String number) {
+        return new IntentProvider() {
+            @Override
+            public Intent getIntent(Context context) {
+                return IntentUtil.getSendSmsIntent(number);
             }
         };
     }
@@ -157,11 +166,9 @@ public abstract class IntentProvider {
                     // Note: This code mirrors code in Contacts/QuickContactsActivity.
                     final Intent intent;
                     if (isNewContact) {
-                        intent = new Intent(
-                                Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+                        intent = IntentUtil.getNewContactIntent();
                     } else {
-                        intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
-                        intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+                        intent = IntentUtil.getAddToExistingContactIntent();
                     }
 
                     ArrayList<ContentValues> values = contactToSave.getContentValues();
@@ -198,14 +205,9 @@ public abstract class IntentProvider {
                 } else {
                     // If no lookup uri is provided, rely on the available phone number and name.
                     if (isNewContact) {
-                        return DialtactsActivity.getAddToContactIntent(name, number, numberType);
+                        return IntentUtil.getNewContactIntent(name, number, numberType);
                     } else {
-                        Intent intent = new Intent(
-                                Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
-                        intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
-                        intent.putExtra(ContactsContract.Intents.Insert.PHONE, number);
-                        intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, numberType);
-                        return intent;
+                        return IntentUtil.getAddToExistingContactIntent(name, number, numberType);
                     }
                 }
             }

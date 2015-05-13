@@ -71,7 +71,7 @@ public class DialerUtils {
      */
     public static void startActivityWithErrorToast(Context context, Intent intent, int msgId) {
         try {
-            if ((CallIntentUtil.CALL_ACTION.equals(intent.getAction())
+            if ((IntentUtil.CALL_ACTION.equals(intent.getAction())
                             && context instanceof Activity)) {
                 // All dialer-initiated calls should pass the touch point to the InCallUI
                 Point touchPoint = TouchPointManager.getInstance().getPoint();
