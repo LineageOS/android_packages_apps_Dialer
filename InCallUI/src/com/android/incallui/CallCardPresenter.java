@@ -698,8 +698,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Drawable getCallStateIcon() {
         // Return connection icon if one exists.
         StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
-        if (statusHints != null && statusHints.getIconResId() != 0) {
-            Drawable icon = statusHints.getIcon(mContext);
+        if (statusHints != null && statusHints.getIcon() != null) {
+            Drawable icon = statusHints.getIcon().loadDrawable(mContext);
             if (icon != null) {
                 return icon;
             }
