@@ -90,7 +90,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     protected ContactInfoCache mContactInfoCache;
 
-    private boolean mShowCallHistoryListItem = false;
+    private boolean mIsShowingRecentsTab;
 
     /**
      * Tracks the currently expanded call log row.
@@ -184,13 +184,14 @@ public class CallLogAdapter extends GroupingListAdapter
             Context context,
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
+            boolean isShowingRecentsTab,
             OnReportButtonClickListener onReportButtonClickListener) {
         super(context);
 
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
-
+        mIsShowingRecentsTab = isShowingRecentsTab;
         mOnReportButtonClickListener = onReportButtonClickListener;
 
         mContactInfoCache = new ContactInfoCache(
@@ -425,19 +426,19 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public int getItemCount() {
-        return super.getItemCount() + (mShowCallHistoryListItem ? 1 : 0);
+        return super.getItemCount() + (isShowingRecentsTab() ? 1 : 0);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == getItemCount() - 1 && mShowCallHistoryListItem) {
+        if (position == getItemCount() - 1 && isShowingRecentsTab()) {
             return VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM;
         }
         return super.getItemViewType(position);
     }
 
-    public void setShowCallHistoryListItem(boolean show) {
-        mShowCallHistoryListItem = show;
+    protected boolean isShowingRecentsTab() {
+        return mIsShowingRecentsTab;
     }
 
     /**

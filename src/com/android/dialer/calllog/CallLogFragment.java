@@ -281,11 +281,13 @@ public class CallLogFragment extends Fragment
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        mAdapter = ObjectFactory.newCallLogAdapter(getActivity(), this,
-                new ContactInfoHelper(getActivity(), currentCountryIso), this);
-        if (mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT) {
-            mAdapter.setShowCallHistoryListItem(true);
-        }
+        boolean isShowingRecentsTab = mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT;
+        mAdapter = ObjectFactory.newCallLogAdapter(
+                getActivity(),
+                this,
+                new ContactInfoHelper(getActivity(), currentCountryIso),
+                isShowingRecentsTab,
+                this);
         mRecyclerView.setAdapter(mAdapter);
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
