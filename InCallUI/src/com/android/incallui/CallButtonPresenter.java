@@ -20,7 +20,7 @@ import static com.android.incallui.CallButtonFragment.Buttons.*;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.telecom.AudioState;
+import android.telecom.CallAudioState;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
@@ -176,7 +176,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // an update for onAudioMode().  This will make UI response immediate
         // if it turns out to be slow
 
-        Log.d(this, "Sending new Audio Mode: " + AudioState.audioRouteToString(mode));
+        Log.d(this, "Sending new Audio Mode: " + CallAudioState.audioRouteToString(mode));
         TelecomAdapter.getInstance().setAudioRoute(mode);
     }
 
@@ -185,7 +185,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     public void toggleSpeakerphone() {
         // this function should not be called if bluetooth is available
-        if (0 != (AudioState.ROUTE_BLUETOOTH & getSupportedAudio())) {
+        if (0 != (CallAudioState.ROUTE_BLUETOOTH & getSupportedAudio())) {
 
             // It's clear the UI is wrong, so update the supported mode once again.
             Log.e(this, "toggling speakerphone not allowed when bluetooth supported.");
@@ -193,11 +193,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        int newMode = AudioState.ROUTE_SPEAKER;
+        int newMode = CallAudioState.ROUTE_SPEAKER;
 
         // if speakerphone is already on, change to wired/earpiece
-        if (getAudioMode() == AudioState.ROUTE_SPEAKER) {
-            newMode = AudioState.ROUTE_WIRED_OR_EARPIECE;
+        if (getAudioMode() == CallAudioState.ROUTE_SPEAKER) {
+            newMode = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
         }
 
         setAudioMode(newMode);
