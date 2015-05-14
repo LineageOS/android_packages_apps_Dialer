@@ -15,42 +15,23 @@
 -->
 
 <!-- Layout parameters are set programmatically. -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:divider="?android:attr/dividerHorizontal"
-    android:showDividers="end"
     android:background="@color/background_dialer_call_log">
 
-    <FrameLayout
-        android:id="@+id/voicemail_status"
+    <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:background="@color/background_dialer_call_log"
+        android:paddingStart="@dimen/call_log_horizontal_margin"
+        android:paddingEnd="@dimen/call_log_horizontal_margin" />
 
-        <include layout="@layout/call_log_voicemail_status" />
-
-    </FrameLayout>
-
-    <FrameLayout
+    <include
+        android:id="@+id/empty_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        layout="@layout/empty_list_view"
+        android:visibility="gone" />
 
-        <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background_dialer_call_log"
-            android:paddingStart="@dimen/call_log_horizontal_margin"
-            android:paddingEnd="@dimen/call_log_horizontal_margin" />
-
-        <include
-            android:id="@+id/empty_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            layout="@layout/empty_list_view"
-            android:visibility="gone" />
-
-    </FrameLayout>
-
-</LinearLayout>
+</FrameLayout>
