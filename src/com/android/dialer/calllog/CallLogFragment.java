@@ -93,10 +93,7 @@ public class CallLogFragment extends Fragment
     private boolean mVoicemailSourcesAvailable = false;
 
     private VoicemailStatusHelper mVoicemailStatusHelper;
-    private View mStatusMessageView;
     private View mEmptyListView;
-    private TextView mStatusMessageText;
-    private TextView mStatusMessageAction;
     private KeyguardManager mKeyguardManager;
 
     private boolean mEmptyLoaderRunning;
@@ -249,16 +246,6 @@ public class CallLogFragment extends Fragment
         if (activity == null || activity.isFinishing()) {
             return;
         }
-        updateVoicemailStatusMessage(statusCursor);
-
-        // If there are any changes to the presence of active voicemail services, invalidate the
-        // options menu so that it will be updated.
-        boolean hasActiveVoicemailSources =
-                mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) != 0;
-        if (mVoicemailSourcesAvailable != hasActiveVoicemailSources) {
-            mVoicemailSourcesAvailable = hasActiveVoicemailSources;
-            activity.invalidateOptionsMenu();
-        }
 
         mVoicemailStatusFetched = true;
         destroyEmptyLoaderIfAllDataFetched();
@@ -291,9 +278,6 @@ public class CallLogFragment extends Fragment
         mRecyclerView.setAdapter(mAdapter);
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
-        mStatusMessageView = view.findViewById(R.id.voicemail_status);
-        mStatusMessageText = (TextView) view.findViewById(R.id.voicemail_status_message);
-        mStatusMessageAction = (TextView) view.findViewById(R.id.voicemail_status_action);
         return view;
     }
 
@@ -333,35 +317,6 @@ public class CallLogFragment extends Fragment
     public void onResume() {
         super.onResume();
         refreshData();
-    }
-
-    private void updateVoicemailStatusMessage(Cursor statusCursor) {
-        List<StatusMessage> messages = mVoicemailStatusHelper.getStatusMessages(statusCursor);
-        if (messages.size() == 0) {
-            mStatusMessageView.setVisibility(View.GONE);
-        } else {
-            mStatusMessageView.setVisibility(View.VISIBLE);
-            // TODO: Change the code to show all messages. For now just pick the first message.
-            final StatusMessage message = messages.get(0);
-            if (message.showInCallLog()) {
-                mStatusMessageText.setText(message.callLogMessageId);
-            }
-            if (message.actionMessageId != -1) {
-                mStatusMessageAction.setText(message.actionMessageId);
-            }
-            if (message.actionUri != null) {
-                mStatusMessageAction.setVisibility(View.VISIBLE);
-                mStatusMessageAction.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getActivity().startActivity(
-                                new Intent(Intent.ACTION_VIEW, message.actionUri));
-                    }
-                });
-            } else {
-                mStatusMessageAction.setVisibility(View.GONE);
-            }
-        }
     }
 
     @Override
