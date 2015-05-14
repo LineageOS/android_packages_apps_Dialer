@@ -26,10 +26,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.ContactsContract;
 import android.telecom.AudioState;
-import android.telecom.CameraCapabilities;
 import android.telecom.Connection;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
+import android.telecom.VideoProfile.CameraCapabilities;
 import android.view.Surface;
 import android.widget.ImageView;
 
