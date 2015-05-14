@@ -19,15 +19,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/background_dialer_call_log_list_item"
->
-    <!-- Mute, playback, trash buttons. -->
+    android:background="@color/background_dialer_call_log_list_item">
+
+    <RelativeLayout
+        android:id="@+id/seek_container"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/call_detail_button_spacing">
+
+        <!-- SeekBar left-right margin decreased from redlines 72dp by 8dp to account for
+             half thumb width (thumb is 16dp).
+             Vertically, SeekBar and rate buttons should be below centre, position achieved by
+             making them centred but giving a difference between top and bottom padding,
+             difference is currently 10dp. -->
+        <SeekBar
+            android:id="@+id/playback_seek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/seekbar_drawable"
+            android:thumb="@drawable/ic_voicemail_seek_handle"
+            android:thumbOffset="8dp"
+            android:progress="0"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="20dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginStart="64dp"
+            android:max="0"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/description_playback_seek" />
+
+        <TextView
+            android:id="@+id/playback_position_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+    </RelativeLayout>
+
+    <!-- Playback, speakerphone buttons. -->
     <LinearLayout
         android:id="@+id/buttons_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-    >
+        android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/playback_start_stop"
             android:layout_width="match_parent"
@@ -36,93 +76,17 @@
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_hold_pause"
-            android:contentDescription="@string/voicemail_play_start_pause"
-        />
+            android:contentDescription="@string/voicemail_play_start_pause" />
+
         <ImageButton
             android:id="@+id/playback_speakerphone"
             android:layout_width="match_parent"
-            android:layout_height="58dip"
+            android:layout_height="58dp"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_speakerphone_on"
-            android:contentDescription="@string/description_playback_speakerphone"
-        />
+            android:contentDescription="@string/description_playback_speakerphone" />
+
     </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/seek_container"
-        android:layout_width="match_parent"
-        android:layout_height="80dip"
-        android:layout_marginTop="@dimen/call_detail_button_spacing"
-    >
-        <!-- SeekBar left-right margin decreased from redlines 72dip by 8dip to account for
-             half thumb width (thumb is 16dip).
-             Vertically, SeekBar and rate buttons should be below centre, position achieved by
-             making them centred but giving a difference between top and bottom padding,
-             difference is currently 10dip. -->
-        <SeekBar
-            android:id="@+id/playback_seek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:progressDrawable="@drawable/seekbar_drawable"
-            android:thumb="@drawable/ic_voicemail_seek_handle"
-            android:thumbOffset="8dip"
-            android:progress="0"
-            android:paddingStart="8dip"
-            android:paddingEnd="8dip"
-            android:paddingTop="30dip"
-            android:paddingBottom="20dip"
-            android:layout_marginEnd="64dip"
-            android:layout_marginStart="64dip"
-            android:max="0"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/description_playback_seek"
-        />
-        <TextView
-            android:id="@+id/playback_position_text"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="14sp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dip"
-        />
-        <TextView
-            android:id="@+id/playback_speed_text"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="14sp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dip"
-            android:alpha="0"
-        />
-        <ImageButton
-            android:id="@+id/rate_decrease_button"
-            android:src="@drawable/ic_minus"
-            android:layout_width="64dip"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:paddingBottom="19dip"
-            android:paddingTop="29dip"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/voicemail_play_slower"
-        />
-        <ImageButton
-            android:id="@+id/rate_increase_button"
-            android:src="@drawable/ic_plus"
-            android:layout_width="64dip"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:paddingBottom="19dip"
-            android:paddingTop="29dip"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/voicemail_play_faster"
-        />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentBottom="true"/>
-    </RelativeLayout>
+
 </LinearLayout>

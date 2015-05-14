@@ -155,7 +155,6 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
         mTestUtils.clickButton(mActivityUnderTest, R.id.playback_start_stop);
-        mTestUtils.clickButton(mActivityUnderTest, R.id.rate_increase_button);
     }
 
     /** Test for bug where missing Extras on intent used to start Activity causes NPE. */
@@ -186,30 +185,6 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         mActivityUnderTest.onCreateOptionsMenu(menu);
         mActivityUnderTest.onPrepareOptionsMenu(menu);
         assertTrue(menu.findItem(R.id.menu_remove_from_call_log).isVisible());
-    }
-
-    /**
-     * Test to show that we are correctly displaying playback rate on the ui.
-     * <p>
-     * See bug http://b/5044075.
-     */
-    @Suppress
-    public void testVoicemailPlaybackRateDisplayedOnUi() throws Throwable {
-        setActivityIntentForTestVoicemailEntry();
-        startActivityUnderTest();
-        // Find the TextView containing the duration.  It should be initially displaying "00:00".
-        List<TextView> views = mTestUtils.getTextViewsWithString(mActivityUnderTest, "00:00");
-        assertEquals(1, views.size());
-        TextView timeDisplay = views.get(0);
-        // Hit the plus button.  At this point we should be displaying "fast speed".
-        mTestUtils.clickButton(mActivityUnderTest, R.id.rate_increase_button);
-        assertEquals("fast speed", mTestUtils.getText(timeDisplay));
-        // Hit the minus button.  We should be back to "normal" speed.
-        mTestUtils.clickButton(mActivityUnderTest, R.id.rate_decrease_button);
-        assertEquals("normal speed", mTestUtils.getText(timeDisplay));
-        // Wait for one and a half seconds.  The timer will be back.
-        Thread.sleep(1500);
-        assertEquals("00:00", mTestUtils.getText(timeDisplay));
     }
 
     @Suppress
