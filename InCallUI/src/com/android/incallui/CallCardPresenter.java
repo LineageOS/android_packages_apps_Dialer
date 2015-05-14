@@ -257,7 +257,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         } else {
             getUi().setCallState(
                     callState,
-                    VideoProfile.VideoState.AUDIO_ONLY,
+                    VideoProfile.STATE_AUDIO_ONLY,
                     Call.SessionModificationState.NO_REQUEST,
                     new DisconnectCause(DisconnectCause.UNKNOWN),
                     null,
