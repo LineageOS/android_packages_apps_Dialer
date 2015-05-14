@@ -121,7 +121,7 @@
     <string name="unknown_call_session_event" msgid="2431061946920253582">"نامعلوم کال سیشن ایونٹ"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"سروس"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"سیٹ اپ"</string>
-    <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;متعین نہیں ہے&gt;"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;سیٹ نہیں ہے&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"دیگر کال کی ترتیبات"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> کی معرفت کال ہو رہی ہے"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> کے ذریعے موصول ہونے والی"</string>
