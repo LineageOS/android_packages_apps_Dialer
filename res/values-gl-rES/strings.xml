@@ -152,6 +152,8 @@
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS OS CONTACTOS"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videochamada"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"ESCOITAR"</string>
+    <!-- no translation found for call_log_action_send_message (2826466379787846163) -->
+    <skip />
     <string name="call_log_action_details" msgid="7957138590190911171">"Ver detalles"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Chamada perdida desde <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Chamada respondida desde <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -159,12 +161,12 @@
     <string name="description_phone_account" msgid="1767072759541443861">"en <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Chamar"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Chamar a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"Videochamada: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_video_call_action" msgid="7386922428155062213">"Videochamada a <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Escoitar o correo de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Crear contacto para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Engadir <xliff:g id="NAMEORNUMBER">^1</xliff:g> ao contacto existente"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalles da chamada para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"Informar: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_report_action" msgid="5011961125980353172">"Informar sobre <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Eliminouse do historial de chamadas"</string>
     <string name="call_log_action_report" msgid="4327809827087468864">"Informar"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hoxe"</string>
