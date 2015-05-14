@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.telecom.AudioState;
 import android.telecom.Call;
+import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
 /**
@@ -32,7 +33,7 @@ import android.telecom.InCallService;
 public class InCallServiceImpl extends InCallService {
 
     @Override
-    public void onAudioStateChanged(AudioState audioState) {
+    public void onCallAudioStateChanged(CallAudioState audioState) {
         AudioModeProvider.getInstance().onAudioStateChanged(audioState);
     }
 

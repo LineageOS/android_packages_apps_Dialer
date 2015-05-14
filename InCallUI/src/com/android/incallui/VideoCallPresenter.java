@@ -25,7 +25,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.ContactsContract;
-import android.telecom.AudioState;
+import android.telecom.CallAudioState;
 import android.telecom.Connection;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
@@ -712,12 +712,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         // Set audio mode to speaker if enableSpeaker is true and bluetooth or headset are not
         // connected and it's a video call.
         if (!isAudioRouteEnabled(currentAudioMode,
-            AudioState.ROUTE_BLUETOOTH | AudioState.ROUTE_WIRED_HEADSET) &&
+            CallAudioState.ROUTE_BLUETOOTH | CallAudioState.ROUTE_WIRED_HEADSET) &&
             !isPrevAudioModeValid && enableSpeaker && CallUtils.isVideoCall(mPrimaryCall)) {
             sPrevVideoAudioMode = currentAudioMode;
 
             Log.d(this, "Routing audio to speaker");
-            telecomAdapter.setAudioRoute(AudioState.ROUTE_SPEAKER);
+            telecomAdapter.setAudioRoute(CallAudioState.ROUTE_SPEAKER);
         }
     }
 
