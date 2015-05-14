@@ -19,7 +19,6 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.telecom.AudioState;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
