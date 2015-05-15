@@ -438,10 +438,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
+    /**
+     * Sets the primary image for the contact photo.
+     *
+     * @param image The drawable to set.
+     * @param isVisible Whether the contact photo should be visible after being set.
+     */
     @Override
-    public void setPrimaryImage(Drawable image) {
+    public void setPrimaryImage(Drawable image, boolean isVisible) {
         if (image != null) {
-            setDrawableToImageView(mPhoto, image);
+            setDrawableToImageView(mPhoto, image, isVisible);
         }
     }
 
@@ -469,9 +475,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     }
 
+    /**
+     * Sets the primary caller information.
+     *
+     * @param number The caller phone number.
+     * @param name The caller name.
+     * @param nameIsNumber {@code true} if the name should be shown in place of the phone number.
+     * @param label The label.
+     * @param photo The contact photo drawable.
+     * @param isSipCall {@code true} if this is a SIP call.
+     * @param isContactPhotoShown {@code true} if the contact photo should be shown (it will be
+     *      updated even if it is not shown).
+     */
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isSipCall) {
+            Drawable photo, boolean isSipCall, boolean isContactPhotoShown) {
         Log.d(this, "Setting primary call");
 
         // set the name field.
@@ -492,7 +510,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         showInternetCallLabel(isSipCall);
 
-        setDrawableToImageView(mPhoto, photo);
+        setDrawableToImageView(mPhoto, photo, isContactPhotoShown);
     }
 
     @Override
@@ -632,6 +650,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.v(this, "AutoDismiss " + callStateLabel.isAutoDismissing());
         Log.v(this, "DisconnectCause " + disconnectCause.toString());
         Log.v(this, "gateway " + connectionLabel + gatewayNumber);
+
+        // Check for video state change and update the visibility of the contact photo.  The contact
+        // photo is hidden when the incoming video surface is shown.
+        // The contact photo visibility can also change in setPrimary().
+        boolean showContactPhoto = !VideoCallPresenter.showIncomingVideo(videoState, state);
+        mPhoto.setVisibility(showContactPhoto ? View.VISIBLE : View.GONE);
 
         if (TextUtils.equals(callStateLabel.getCallStateLabel(), mCallStateLabel.getText())) {
             // Nothing to do if the labels are the same
@@ -796,7 +820,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    private void setDrawableToImageView(ImageView view, Drawable photo) {
+    private void setDrawableToImageView(ImageView view, Drawable photo, boolean isVisible) {
         if (photo == null) {
             photo = ContactInfoCache.getInstance(
                     view.getContext()).getDefaultContactPhotoDrawable();
@@ -810,13 +834,15 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final Drawable current = view.getDrawable();
         if (current == null) {
             view.setImageDrawable(photo);
-            AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
+            if (isVisible) {
+                AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
+            }
         } else {
             // Cross fading is buggy and not noticable due to the multiple calls to this method
             // that switch drawables in the middle of the cross-fade animations. Just set the
             // photo directly instead.
             view.setImageDrawable(photo);
-            view.setVisibility(View.VISIBLE);
+            view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
     }
 
