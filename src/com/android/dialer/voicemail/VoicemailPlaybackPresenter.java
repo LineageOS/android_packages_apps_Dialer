@@ -80,9 +80,6 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         boolean isSpeakerPhoneOn();
         void setSpeakerPhoneOn(boolean on);
         void finish();
-        void setRateDisplay(float rate, int stringResourceId);
-        void setRateIncreaseButtonListener(View.OnClickListener listener);
-        void setRateDecreaseButtonListener(View.OnClickListener listener);
         void setIsFetchingContent();
         void disableUiElements();
         void enableUiElements();
@@ -120,28 +117,6 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      */
     private static final String CLIP_POSITION_KEY = VoicemailPlaybackPresenter.class.getName()
             + ".CLIP_POSITION_KEY";
-
-    /** The preset variable-speed rates.  Each is greater than the previous by 25%. */
-    private static final float[] PRESET_RATES = new float[] {
-        0.64f, 0.8f, 1.0f, 1.25f, 1.5625f
-    };
-    /** The string resource ids corresponding to the names given to the above preset rates. */
-    private static final int[] PRESET_NAMES = new int[] {
-        R.string.voicemail_speed_slowest,
-        R.string.voicemail_speed_slower,
-        R.string.voicemail_speed_normal,
-        R.string.voicemail_speed_faster,
-        R.string.voicemail_speed_fastest,
-    };
-
-    /**
-     * Pointer into the {@link VoicemailPlaybackPresenter#PRESET_RATES} array.
-     * <p>
-     * This doesn't need to be synchronized, it's used only by the {@link RateChangeListener}
-     * which in turn is only executed on the ui thread.  This can't be encapsulated inside the
-     * rate change listener since multiple rate change listeners must share the same value.
-     */
-    private int mRateIndex = 2;
 
     /**
      * The most recently calculated duration.
@@ -349,8 +324,6 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         mPlayer.setOnErrorListener(new MediaPlayerErrorListener());
         mPlayer.setOnCompletionListener(new MediaPlayerCompletionListener());
         mView.setSpeakerPhoneOn(mView.isSpeakerPhoneOn());
-        mView.setRateDecreaseButtonListener(createRateDecreaseListener());
-        mView.setRateIncreaseButtonListener(createRateIncreaseListener());
         if (mPlaying) {
            resetPrepareStartPlaying(mPosition);
         } else {
@@ -419,37 +392,6 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
                     handleCompletion(mp);
                 }
             });
-        }
-    }
-
-    public View.OnClickListener createRateDecreaseListener() {
-        return new RateChangeListener(false);
-    }
-
-    public View.OnClickListener createRateIncreaseListener() {
-        return new RateChangeListener(true);
-    }
-
-    /**
-     * Listens to clicks on the rate increase and decrease buttons.
-     * <p>
-     * This class is not thread-safe, but all interactions with it will happen on the ui thread.
-     */
-    private class RateChangeListener implements View.OnClickListener {
-        private final boolean mIncrease;
-
-        public RateChangeListener(boolean increase) {
-            mIncrease = increase;
-        }
-
-        @Override
-        public void onClick(View v) {
-            // Adjust the current rate, then clamp it to the allowed values.
-            mRateIndex = constrain(mRateIndex + (mIncrease ? 1 : -1), 0, PRESET_RATES.length - 1);
-            // Whether or not we have actually changed the index, call changeRate().
-            // This will ensure that we show the "fastest" or "slowest" text on the ui to indicate
-            // to the user that it doesn't get any faster or slower.
-            changeRate(PRESET_RATES[mRateIndex], PRESET_NAMES[mRateIndex]);
         }
     }
 
@@ -605,11 +547,6 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             mView.setClipPosition(seekBar.getProgress(), seekBar.getMax());
         }
-    }
-
-    private void changeRate(float rate, int stringResourceId) {
-        ((SingleThreadedMediaPlayerProxy) mPlayer).setVariableSpeed(rate);
-        mView.setRateDisplay(rate, stringResourceId);
     }
 
     private class SpeakerphoneListener implements View.OnClickListener {
