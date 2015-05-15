@@ -721,7 +721,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * @see #commitDialpadFragmentHide
      */
     public void hideDialpadFragment(boolean animate, boolean clearDialpad) {
-        if (mDialpadFragment == null) {
+        if (mDialpadFragment == null || mDialpadFragment.getView() == null) {
             return;
         }
         if (clearDialpad) {
