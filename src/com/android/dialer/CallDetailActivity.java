@@ -290,26 +290,6 @@ public class CallDetailActivity extends Activity {
         return uris;
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_CALL: {
-                // Make sure phone isn't already busy before starting direct call
-                TelephonyManager tm = (TelephonyManager)
-                        getSystemService(Context.TELEPHONY_SERVICE);
-                if (tm.getCallState() == TelephonyManager.CALL_STATE_IDLE) {
-                    DialerUtils.startActivityWithErrorToast(this,
-                            IntentUtil.getCallIntent(
-                                    Uri.fromParts(PhoneAccount.SCHEME_TEL, mNumber, null)),
-                                    R.string.call_not_available);
-                    return true;
-                }
-            }
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
     /**
      * Update user interface with details of given call.
      *
@@ -550,33 +530,6 @@ public class CallDetailActivity extends Activity {
                 false /* darkTheme */, true /* isCircular */, request);
     }
 
-    static final class ViewEntry {
-        public final String text;
-        public final Intent primaryIntent;
-        /** The description for accessibility of the primary action. */
-        public final String primaryDescription;
-
-        public CharSequence label = null;
-        /** Icon for the secondary action. */
-        public int secondaryIcon = 0;
-        /** Intent for the secondary action. If not null, an icon must be defined. */
-        public Intent secondaryIntent = null;
-        /** The description for accessibility of the secondary action. */
-        public String secondaryDescription = null;
-
-        public ViewEntry(String text, Intent intent, String description) {
-            this.text = text;
-            primaryIntent = intent;
-            primaryDescription = description;
-        }
-
-        public void setSecondaryAction(int icon, Intent intent, String description) {
-            secondaryIcon = icon;
-            secondaryIntent = intent;
-            secondaryDescription = description;
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.call_details_options, menu);
@@ -642,14 +595,5 @@ public class CallDetailActivity extends Activity {
 
     private void closeSystemDialogs() {
         sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-    }
-
-    /** Returns the given text, forced to be left-to-right. */
-    private static CharSequence forceLeftToRight(CharSequence text) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(LEFT_TO_RIGHT_EMBEDDING);
-        sb.append(text);
-        sb.append(POP_DIRECTIONAL_FORMATTING);
-        return sb.toString();
     }
 }
