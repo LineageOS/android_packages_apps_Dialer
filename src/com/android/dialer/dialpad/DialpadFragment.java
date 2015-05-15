@@ -1107,7 +1107,9 @@ public class DialpadFragment extends Fragment
     }
 
     public void clearDialpad() {
-        mDigits.getText().clear();
+        if (mDigits != null) {
+            mDigits.getText().clear();
+        }
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
