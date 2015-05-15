@@ -18,14 +18,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-        <FrameLayout
-            android:id="@+id/voicemail_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            >
-            <include layout="@layout/call_log_voicemail_status"/>
-        </FrameLayout>
         <TextView
             android:id="@+id/voicemail_transcription"
             android:layout_width="match_parent"
@@ -34,14 +26,15 @@
             android:paddingEnd="@dimen/call_detail_horizontal_margin"
             android:paddingTop="@dimen/transcription_top_margin"
             android:paddingBottom="@dimen/transcription_bottom_margin" />
+
         <LinearLayout
             android:id="@+id/voicemail_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="@dimen/call_detail_button_spacing"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
             <!-- The voicemail fragment will be put here. -->
         </LinearLayout>
+
 </LinearLayout>

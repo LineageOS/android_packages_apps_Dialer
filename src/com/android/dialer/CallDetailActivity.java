@@ -121,14 +121,7 @@ public class CallDetailActivity extends Activity {
     /* package */ Resources mResources;
     /** Helper to load contact photos. */
     private ContactPhotoManager mContactPhotoManager;
-    /** Helper to make async queries to content resolver. */
-    private CallDetailActivityQueryHandler mAsyncQueryHandler;
-    /** Helper to get voicemail status messages. */
-    private VoicemailStatusHelper mVoicemailStatusHelper;
     // Views related to voicemail status message.
-    private View mStatusMessageView;
-    private TextView mStatusMessageText;
-    private TextView mStatusMessageAction;
     private TextView mVoicemailTranscription;
     private LinearLayout mVoicemailHeader;
 
@@ -182,8 +175,6 @@ public class CallDetailActivity extends Activity {
 
         mCallTypeHelper = new CallTypeHelper(getResources());
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(this, mResources);
-        mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
-        mAsyncQueryHandler = new CallDetailActivityQueryHandler(this);
 
         mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
 
@@ -225,11 +216,6 @@ public class CallDetailActivity extends Activity {
             mVoicemailHeader =
                     (LinearLayout) inflater.inflate(R.layout.call_details_voicemail_header, null);
             View voicemailContainer = mVoicemailHeader.findViewById(R.id.voicemail_container);
-            mStatusMessageView = mVoicemailHeader.findViewById(R.id.voicemail_status);
-            mStatusMessageText =
-                    (TextView) mVoicemailHeader.findViewById(R.id.voicemail_status_message);
-            mStatusMessageAction =
-                    (TextView) mVoicemailHeader.findViewById(R.id.voicemail_status_action);
             mVoicemailTranscription = (
                     TextView) mVoicemailHeader.findViewById(R.id.voicemail_transcription);
             ListView historyList = (ListView) findViewById(R.id.history);
@@ -256,7 +242,6 @@ public class CallDetailActivity extends Activity {
             }
 
             voicemailContainer.setVisibility(View.VISIBLE);
-            mAsyncQueryHandler.startVoicemailStatusQuery(mVoicemailUri);
             markVoicemailAsRead(mVoicemailUri);
         }
     }
@@ -590,50 +575,6 @@ public class CallDetailActivity extends Activity {
             secondaryIntent = intent;
             secondaryDescription = description;
         }
-    }
-
-    protected void updateVoicemailStatusMessage(Cursor statusCursor) {
-        if (statusCursor == null) {
-            mStatusMessageView.setVisibility(View.GONE);
-            return;
-        }
-        final StatusMessage message = getStatusMessage(statusCursor);
-        if (message == null || !message.showInCallDetails()) {
-            mStatusMessageView.setVisibility(View.GONE);
-            return;
-        }
-
-        mStatusMessageView.setVisibility(View.VISIBLE);
-        mStatusMessageText.setText(message.callDetailsMessageId);
-        if (message.actionMessageId != -1) {
-            mStatusMessageAction.setText(message.actionMessageId);
-        }
-        if (message.actionUri != null) {
-            mStatusMessageAction.setClickable(true);
-            mStatusMessageAction.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DialerUtils.startActivityWithErrorToast(CallDetailActivity.this,
-                            new Intent(Intent.ACTION_VIEW, message.actionUri));
-                }
-            });
-        } else {
-            mStatusMessageAction.setClickable(false);
-        }
-    }
-
-    private StatusMessage getStatusMessage(Cursor statusCursor) {
-        List<StatusMessage> messages = mVoicemailStatusHelper.getStatusMessages(statusCursor);
-        if (messages.size() == 0) {
-            return null;
-        }
-        // There can only be a single status message per source package, so num of messages can
-        // at most be 1.
-        if (messages.size() > 1) {
-            Log.w(TAG, String.format("Expected 1, found (%d) num of status messages." +
-                    " Will use the first one.", messages.size()));
-        }
-        return messages.get(0);
     }
 
     @Override
