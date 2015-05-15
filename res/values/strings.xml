@@ -152,17 +152,6 @@
     server directly to listen to the voicemails. [CHAR LIMIT=20] -->
     <string name="voicemail_status_action_call_server">Call voicemail</string>
 
-    <!-- The slowest voicemail playback speed. [CHAR LIMIT=30] -->
-    <string name="voicemail_speed_slowest">Slowest speed</string>
-    <!-- Slower than normal voicemail playback speed. [CHAR LIMIT=30] -->
-    <string name="voicemail_speed_slower">Slow speed</string>
-    <!--  Normal voicemail playback speed. [CHAR LIMIT=30] -->
-    <string name="voicemail_speed_normal">Normal speed</string>
-    <!--  Faster than normal pvoicemail playback speed. [CHAR LIMIT=30] -->
-    <string name="voicemail_speed_faster">Fast speed</string>
-    <!--  Fastest voicemail playback speed. [CHAR LIMIT=30] -->
-    <string name="voicemail_speed_fastest">Fastest speed</string>
-
     <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
     <string name="call_log_item_count_and_date">(<xliff:g id="count">%1$d</xliff:g>)
         <xliff:g id="date">%2$s</xliff:g>
