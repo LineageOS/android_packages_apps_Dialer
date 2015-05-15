@@ -19,19 +19,11 @@
   <string name="applicationLabel">Marcador</string>
   <string name="launcherActivityLabel">Teléfonu</string>
   <string name="dialerIconLabel">Teléfonu</string>
-  <string name="recentCallsIconLabel">Llamaes</string>
-  <string name="menu_sendTextMessage">Unviar un mensaxe de testu</string>
   <string name="recentCalls_callNumber">Llamar a <xliff:g id="NAME">%s</xliff:g></string>
   <string name="recentCalls_editNumberBeforeCall">Editar númberu enantes de llamar</string>
   <string name="recentCalls_addToContact">Amestar a contautos</string>
-  <string name="recentCalls_removeFromRecentList">Desaniciar del rexistru de llamaes</string>
-  <string name="recentCalls_deleteAll">Desaniciar rexistru de llamaes</string>
   <string name="recentCalls_trashVoicemail">Desaniciar mensaxe de voz</string>
   <string name="recentCalls_shareVoicemail">Compartir mensaxe de voz</string>
-  <string name="recentCalls_empty">El rexistru de llamaes ta baleru.</string>
-  <string name="clearCallLogConfirmation_title">¿Desaniciar rexistru?</string>
-  <string name="clearCallLogConfirmation">Van desaniciase tolos rexistros de llamaes.</string>
-  <string name="clearCallLogProgress_title">Desaniciando rexistru de llamaes\u2026</string>
   <plurals name="notification_voicemail_title">
     <item quantity="one">Mensaxe de voz</item>
     <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> mensaxes de voz</item>
@@ -41,18 +33,11 @@
 <xliff:g id="older_caller">%2$s</xliff:g>
     </string>
   <string name="notification_new_voicemail_ticker">Mensaxe de voz nuevu de <xliff:g id="caller">%1$s</xliff:g></string>
-  <string name="voicemail_playback_error">Nun pudo reproducise\'l mensaxe.</string>
   <string name="voicemail_buffering">Almacenando en búfer\u2026</string>
-  <string name="voicemail_fetching_content">Recuperando mensaxe de voz\u2026</string>
-  <string name="voicemail_fetching_timout">Nun pudo recuperase\'l mensaxe.</string>
   <string name="call_log_voicemail_header">Namái llamaes con mensaxes de voz</string>
   <string name="call_log_incoming_header">Namái llamaes entrantes</string>
   <string name="call_log_outgoing_header">Namái llamaes salientes</string>
   <string name="call_log_missed_header">Namái llamaes perdíes</string>
-  <string name="voicemail_status_voicemail_not_available">Nun pue coneutase col sirvidor del buzón de voz.</string>
-  <string name="voicemail_status_messages_waiting">Nun pue coneutase al buzón de voz. Nuevos mensaxes n\'espera</string>
-  <string name="voicemail_status_configure_voicemail">Configurar el buzón de voz</string>
-  <string name="voicemail_status_audio_not_available">Audio non disponible</string>
   <string name="voicemail_status_action_configure">Configurar</string>
   <string name="voicemail_status_action_call_server">Llamar a buzón de voz</string>
   <string name="voicemail_speed_slowest">Más lenta</string>
@@ -64,18 +49,6 @@
   <string name="sms_disambig_title">Elixe un númberu</string>
   <string name="call_disambig_title">Elixe un númberu</string>
   <string name="make_primary">Recordar esta opción</string>
-  <string name="description_image_button_one">uno</string>
-  <string name="description_image_button_two">dos</string>
-  <string name="description_image_button_three">trés</string>
-  <string name="description_image_button_four">cuatro</string>
-  <string name="description_image_button_five">cinco</string>
-  <string name="description_image_button_six">seis</string>
-  <string name="description_image_button_seven">siete</string>
-  <string name="description_image_button_eight">ocho</string>
-  <string name="description_image_button_nine">nueve</string>
-  <string name="description_image_button_star">estrella</string>
-  <string name="description_image_button_zero">cero</string>
-  <string name="description_image_button_pound">llibra</string>
   <string name="description_search_button">guetar</string>
   <string name="description_dial_button">marcar</string>
   <string name="description_digits_edittext">númberu que va a marcase</string>
@@ -96,12 +69,10 @@
   <string name="add_contact">Amestar a contautos</string>
   <string name="add_2sec_pause">Amestar posa de 2 segundos</string>
   <string name="add_wait">Amestar espera</string>
-  <string name="menu_select_account">Esbillar cuenta</string>
   <string name="dialer_settings_label">Axustes</string>
   <string name="menu_newContact">Contautu nuevu</string>
   <string name="menu_allContacts">Tolos contautos</string>
   <string name="callDetailTitle">Detalles de la llamada</string>
-  <string name="toast_call_detail_error">Nun pudieron lleese los detalles de la llamada solicitada.</string>
   <string name="dialer_useDtmfDialpad">Usar tecláu táctil</string>
   <string name="dialer_returnToInCallScreen">Volver a la llamada en cursu</string>
   <string name="dialer_addAnotherCall">Amestar llamada</string>
@@ -120,18 +91,12 @@
   <string name="description_new_voicemail">Mensaxe de voz nuevu.</string>
   <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> llamaes.</string>
   <string name="description_video_call">Videollamada.</string>
-  <string name="description_send_text_message">Unviar mensaxe de testu a <xliff:g id="NAME">%1$s</xliff:g></string>
   <string name="description_call_log_unheard_voicemail">Mensaxe de voz ensin oyer</string>
   <string name="description_start_voice_search">Aniciar gueta por voz</string>
   <string name="menu_callNumber">Llamar a <xliff:g id="NUMBER">%s</xliff:g></string>
   <string name="unknown">Desconocíos</string>
   <string name="voicemail">Buzón de voz</string>
   <string name="private_num">Númberu priváu</string>
-  <string name="payphone">Teléfonu públicu</string>
-  <string name="dialerKeyboardHintText">Usar tecláu pa marcar</string>
-  <string name="dialerDialpadHintText">Amestar llamada</string>
-  <string name="callDetailsDurationFormat"><xliff:g id="MINUTES">%s</xliff:g> min. y <xliff:g id="SECONDS">%s</xliff:g> seg.</string>
-  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Llamada non unviada</string>
   <string name="dialog_voicemail_not_ready_message">Pa configurar el buzón de voz, toca la tecla de menú y, darréu, toca Axustes.</string>
   <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
   <string name="contact_list_loading">Cargando\u2026</string>
@@ -139,21 +104,14 @@
   <string name="meid">MEID</string>
   <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM…</string>
   <string name="simContacts_title">Contautos de tarxeta SIM</string>
-  <string name="add_contact_not_available">Vuelvi a habilitar l\'app Contautos pa usar esta función</string>
-  <string name="voice_search_not_available">Nun ta disponible la gueta por voz.</string>
   <string name="call_not_available">Nun pue facese una llamada porque l\'app Teléfonu ta deshabilitada.</string>
-  <string name="activity_not_available">Nenguna actividá instalada pue procesar la aición seleicionada.</string>
-  <string name="dialer_hint_find_contact">Escribi un nome o teléfonu</string>
   <string name="call_log_activity_title_font_family">sans-serif-light</string>
   <string name="view_full_call_history_font_family">sans-serif</string>
-  <string name="recentMissed_empty">Nun tienes llamaes recientes perdíes.</string>
-  <string name="recentVoicemails_empty">Nun tienes mensaxes de voz recientes</string>
   <string name="show_favorites_only">Amosar namái favoritos</string>
   <string name="call_log_activity_title">Historial</string>
   <string name="call_log_all_title">Too</string>
   <string name="call_log_missed_title">Perdíes</string>
   <string name="call_log_voicemail_title">Buzón de voz</string>
-  <string name="tab_speed_dial">Marcáu rápidu</string>
   <string name="tab_recents">Recientes</string>
   <string name="tab_all_contacts">Contautos</string>
   <string name="favorite_hidden">Desaniciáu de favoritos</string>
@@ -163,9 +121,6 @@
   <string name="search_shortcut_make_video_call">Facer videollamada</string>
   <string name="recents_footer_text">Ver tol historial de llamaes</string>
   <string name="num_missed_calls"><xliff:g id="NUMBER">%s</xliff:g> llamaes perdíes nueves</string>
-  <string name="speed_dial_empty">La marcación rápida permite llamar a\nlos númberos y contautos favoritos\n que llames con frecuencia con namái marcar una tecla.</string>
-  <string name="all_contacts_empty">Nun tienes contautos.</string>
-  <string name="contact_tooltip">Toca la imaxe pa ver tolos númberos o cantenla primida pa camudar l\'orde</string>
   <string name="description_dismiss">Inorar</string>
   <string name="remove_contact">Desaniciar</string>
   <string name="favorites_menu_all_contacts">TOLOS CONTAUTOS</string>
@@ -173,28 +128,16 @@
   <string name="call_log_action_video_call">VIDEOLLAMADA</string>
   <string name="call_log_action_voicemail">ESCUCHAR</string>
   <string name="call_log_action_details">DETALLES</string>
-  <string name="description_incoming_missed_call">Llamada perdida de <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
-  <string name="description_incoming_answered_call">Llamada respondida de <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
-  <string name="description_outgoing_call">Llamada a <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">%2$s</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">%3$s</xliff:g>.</string>
-  <string name="description_call_back_action">Devolver llamada a <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
-  <string name="description_video_call_action">Videollamada a <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>.</string>
-  <string name="description_voicemail_action">Escuchar buzón de voz de <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
-  <string name="description_details_action">Detalles de llamada de <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
-  <string name="toast_entry_removed">Entrada del rexistru de llamada desaniciada.</string>
-  <string name="toast_caller_id_reported">Información sobre contautu notificada.</string>
   <string name="call_log_action_report">INFORME</string>
   <string name="call_log_header_today">Güei</string>
   <string name="call_log_header_yesterday">Ayeri</string>
   <string name="call_log_header_other">anterior</string>
-  <string name="call_detail_list_header">Llista llamaes</string>
   <string name="voicemail_speaker_on">Activar altavoz.</string>
   <string name="voicemail_speaker_off">Desactivar altavoz.</string>
   <string name="voicemail_play_faster">Reproducir más rápido.</string>
   <string name="voicemail_play_slower">Reproducir más sele.</string>
   <string name="voicemail_play_start_pause">Aniciar o posar reproducción.</string>
   <string name="list_delimeter">", "</string>
-  <string name="general_settings_label">Axustes xenerales</string>
-  <string name="general_settings_description">Amosar Contautos, soníos y rempuestes rápides</string>
   <string name="contact_display_options_category_title">Opciones visualización contautos</string>
   <string name="sounds_and_vibrate_category_title">Soníos y vibración</string>
   <string name="ringtone_title">Tonu del teléfonu</string>
@@ -202,6 +145,4 @@
   <string name="dtmf_tone_enable_title">Tonos del tecláu</string>
   <string name="other_settings_title">Otru</string>
   <string name="respond_via_sms_setting_title">Rempuestes rápides</string>
-  <string name="call_settings_label">Axustes de llamaes</string>
-  <string name="call_settings_description">Buzón de voz, llamada n\'espera y otros</string>
 </resources>

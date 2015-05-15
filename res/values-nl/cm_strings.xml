@@ -96,4 +96,6 @@
   <string name="start_call_playback">Opname afspelen</string>
   <string name="stop_call_playback">Stoppen</string>
   <string name="call_playback_error_message">Opname afspelen mislukt</string>
+  <string name="smart_dialer_title">Slim bellen</string>
+  <string name="smart_dialer_summary">Automatisch het contact bellen door uw telefoon naar uw oor te brengen</string>
 </resources>

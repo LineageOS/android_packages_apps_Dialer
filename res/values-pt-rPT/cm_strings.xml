@@ -96,4 +96,6 @@
   <string name="start_call_playback">Reproduzir a gravação</string>
   <string name="stop_call_playback">Parar</string>
   <string name="call_playback_error_message">Falha ao reproduzir a gravação</string>
+  <string name="smart_dialer_title">Chamada inteligente</string>
+  <string name="smart_dialer_summary">Chamar automaticamente o contacto ao mover o telefone para o seu ouvido</string>
 </resources>

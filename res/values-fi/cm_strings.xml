@@ -96,4 +96,6 @@
   <string name="start_call_playback">Toista nauhoitus</string>
   <string name="stop_call_playback">Lopeta</string>
   <string name="call_playback_error_message">Nauhoituksen toisto epäonnistui</string>
+  <string name="smart_dialer_title">Älykäs puhelu</string>
+  <string name="smart_dialer_summary">Soita automaattisesti siirtämällä laite korvalle</string>
 </resources>

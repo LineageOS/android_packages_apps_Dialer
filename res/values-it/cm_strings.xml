@@ -96,4 +96,6 @@
   <string name="start_call_playback">Riproduci registrazione</string>
   <string name="stop_call_playback">Ferma</string>
   <string name="call_playback_error_message">Impossibile riprodurre la registrazione</string>
+  <string name="smart_dialer_title">Smart Call</string>
+  <string name="smart_dialer_summary">Chiama il contatto posizionando il dispositivo vicino all\'orecchio</string>
 </resources>

@@ -96,4 +96,6 @@
   <string name="start_call_playback">Putar rekaman</string>
   <string name="stop_call_playback">Hentikan</string>
   <string name="call_playback_error_message">Gagal untuk memutar rekaman</string>
+  <string name="smart_dialer_title">Panggilan pintar</string>
+  <string name="smart_dialer_summary">Otomatis memanggil kontak dengan memindahkan perangkat Anda ke telinga Anda</string>
 </resources>

@@ -84,7 +84,7 @@
   <string name="incall_vibrate_45_title">Vibruoti kiekvieną minutę</string>
   <string name="incall_vibrate_45_summary">Vibruoti ties 45 sekundę, kiekvieną išeinančio skambučio minutę</string>
   <string name="detailed_incall_info_title">Detali skambintojo informacija</string>
-  <string name="detailed_incall_info_summary">Rodyti papildomą informaciją apie skambinantįjį įeinančio skambučio ekrane</string>
+  <string name="detailed_incall_info_summary">Rodyti papildomą informaciją apie skambintoją įeinančio skambučio ekrane</string>
   <string name="video_call">Vaizdo skambutis</string>
   <string name="call_duration_active">Aktyvi trukmė:</string>
   <string name="call_duration_call_out">Skambučio trukmė:</string>
@@ -96,4 +96,6 @@
   <string name="start_call_playback">Paleisti įrašą</string>
   <string name="stop_call_playback">Sustabdyti</string>
   <string name="call_playback_error_message">Nepavyko paleisti įrašo</string>
+  <string name="smart_dialer_title">Sumanusis skambutis</string>
+  <string name="smart_dialer_summary">Automatiškai skambinti kontaktui pridedant įrenginį prie ausies</string>
 </resources>

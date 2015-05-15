@@ -96,4 +96,6 @@
   <string name="start_call_playback">Воспроизвести запись</string>
   <string name="stop_call_playback">Остановить</string>
   <string name="call_playback_error_message">Не удалось воспроизвести запись разговора</string>
+  <string name="smart_dialer_title">Интеллектуальный вызов</string>
+  <string name="smart_dialer_summary">Автоматически начинать звонок при поднесении телефона к уху</string>
 </resources>

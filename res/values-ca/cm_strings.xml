@@ -96,4 +96,6 @@
   <string name="start_call_playback">Reprodueix gravació</string>
   <string name="stop_call_playback">Para</string>
   <string name="call_playback_error_message">No s\'ha pogut reproduir la gravació</string>
+  <string name="smart_dialer_title">Trucada intel·ligent</string>
+  <string name="smart_dialer_summary">Truca automàticament el contacte movent el dispositiu a la teva orella</string>
 </resources>

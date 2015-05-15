@@ -18,8 +18,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">شوێنە نزیەکاکان</string>
   <string name="people">ناوەکان</string>
+  <string name="lookup_settings_label">گه‌ڕان به‌دوای ژماره‌ی ته‌له‌فۆن</string>
+  <string name="lookup_settings_description">سەیرێکی ژمارە نەناسراوەکان بکە</string>
+  <string name="enable_forward_lookup_title">گه‌ڕان به‌دوای به‌دواکه‌وتن</string>
+  <string name="enable_forward_lookup_summary">نیشاندانی شوێنی نزیک له‌کاتی گه‌ڕان به‌ دوای لێدان</string>
+  <string name="enable_people_lookup_title">گه‌ڕان به‌ دوای خه‌ڵک</string>
+  <string name="enable_people_lookup_summary">نیشاندانی ئه‌نجامی هێڵ بۆ خه‌ڵک له‌کاتی لێدان</string>
+  <string name="enable_reverse_lookup_title">گه‌ڕانی پێچه‌وانه‌</string>
+  <string name="enable_reverse_lookup_summary">زانیاری گه‌ڕان له‌باره‌ی خه‌ڵک یان شوێن بۆ ژماره‌ی نه‌زانراو له‌کاتی هاتنی په‌یوه‌ندی</string>
+  <string name="forward_lookup_provider_title">پێده‌ری گه‌ڕانی به‌دواکه‌وتن</string>
+  <string name="people_lookup_provider_title">پێده‌ری گه‌ڕانی خه‌ڵک</string>
+  <string name="reverse_lookup_provider_title">پێده‌ری گه‌ڕانی پێچه‌وانه‌</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <string name="preference_category_t9_dialpad_search">گه‌ڕانی ته‌خته‌لێدانی T9</string>
+  <string name="t9_search_input_locale">نوسینی گه‌ڕان بۆ T9</string>
+  <string name="t9_search_input_locale_default">بنه‌ڕه‌ت</string>
+  <string name="type_blacklist">پەیوەندیە کە لە لیستی ڕەشن</string>
   <string name="call_log_stats_title">سەرژمێرەیەکان</string>
   <string name="callStatsDetailTitle">زانیاری پەیوەندی</string>
+  <string name="call_stats">سەرژمێریەکانی پەیوەندی</string>
+  <string name="call_stats_refresh">تازەکردنەوە</string>
+  <string name="activity_title_call_stats">سەرژمێریەکانی پەیوەندی</string>
   <string name="call_stats_nav_all">هەمووی</string>
   <string name="call_stats_nav_incoming">هاتوو</string>
   <string name="call_stats_nav_outgoing">ڕۆیشتوو</string>
@@ -28,6 +47,8 @@
   <string name="call_stats_outgoing">ڕۆیشتوو: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">وەڵام نەدرواە</string>
   <string name="call_stats_missed_percent">وەڵام نەدراوە: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">لیستی ڕەش</string>
+  <string name="call_stats_blacklist_percent">لیستیڕەش: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">سەرجەم: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">سەرجەم: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">بەرواری دەستپێکردن</string>
@@ -46,13 +67,24 @@
   <string name="call_stats_sort_by_duration">ڕیزکردن بەپێی ماوەی پەیوەندی</string>
   <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
   <string name="menu_add_to_blacklist">زیادکردن بۆ لیستی ڕەش</string>
+  <string name="toast_added_to_blacklist">%s زیادکرا بۆ لیستی ڕەش.</string>
   <string name="speed_dial_settings">ڕێکبەندەکانی ژمارەگری خێرا</string>
   <string name="speed_dial_not_set">(دانەندراوە)</string>
   <string name="speed_dial_replace">جێگۆڕکردن</string>
   <string name="speed_dial_delete">سڕینەوە؟</string>
   <string name="speed_dial_unassigned_dialog_title">کلیل تەرخان نەکراوە</string>
+  <string name="speed_dial_unassigned_dialog_message">هیچ ژمارەیەک دیاری نەکراوە تەلەفۆنی خێرا \'<xliff:g id="number">%s</xliff:g>\'. Do you want to ئەتەوێت ئێستا دیاری بکەیت?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">بۆ بەکارهێنانی ژمارەگری خێرا، یەکەم دۆخی فڕۆکە بکوژێنەوە.</string>
   <string name="yes">بەڵێ</string>
   <string name="no">نەخێر</string>
+  <string name="incall_vibration_category_title">له‌کاتی په‌یوه‌ندی له‌رینه‌وه‌</string>
+  <string name="incall_vibrate_outgoing_title">له‌رینه‌وه‌ له‌کاتی وه‌ڵام</string>
+  <string name="vibrate_call_waiting">له‌رینه‌وه‌ له‌کاتی چاوه‌ڕێ په‌یوه‌ندی</string>
+  <string name="incall_vibrate_hangup_title">له‌رینه‌وه‌ له‌کاتی وازهێنان</string>
+  <string name="incall_vibrate_45_title">له‌رینه‌وه‌ هه‌موو سه‌ری خوله‌کێک</string>
+  <string name="incall_vibrate_45_summary">له‌رینه‌وه‌ هه‌موو 45 چرکه‌یه‌ک له‌ خوله‌کێکدا</string>
+  <string name="detailed_incall_info_title">زانیاری لەسەر تەلەفۆنەکە</string>
+  <string name="detailed_incall_info_summary">پیشاندانی زانیاری زیاتر لەسەر تەلەفۆنی هاتوو لەسەر شاشەکە</string>
   <string name="video_call">په‌یوه‌ندی وێنه‌یی</string>
   <string name="call_duration_active">ماوەی چالاکی:</string>
   <string name="call_duration_call_out">ماوەی پەیوەندیکردن:</string>
@@ -60,4 +92,8 @@
   <string name="call_log_all_calls_header">هەموو پەیوەندییەکان</string>
   <string name="calllog_search_hint">گەڕان بۆ مێژوی پەیوەندی</string>
   <string name="msim_ime_dialog_title">ناسێنەری ئامێر</string>
+  <string name="call_log_blacklist_header">تەنها ژمارەی لیستی ڕەش</string>
+  <string name="start_call_playback">لێدانی تۆمارکردنه‌که‌</string>
+  <string name="stop_call_playback">وه‌ستاندن</string>
+  <string name="call_playback_error_message">نه‌توانرا تۆمارکراوه‌که‌ لێبدرێت</string>
 </resources>

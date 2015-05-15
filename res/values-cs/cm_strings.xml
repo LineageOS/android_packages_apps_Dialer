@@ -96,4 +96,6 @@
   <string name="start_call_playback">Přehrát záznam</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Selhalo přehrávání záznamu</string>
+  <string name="smart_dialer_title">Inteligentní vytáčení</string>
+  <string name="smart_dialer_summary">Provedení automatického vytáčení při přiložení zařízení k uchu</string>
 </resources>

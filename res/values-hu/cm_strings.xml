@@ -96,4 +96,6 @@
   <string name="start_call_playback">Felvétel lejátszása</string>
   <string name="stop_call_playback">Leállítás</string>
   <string name="call_playback_error_message">Nem sikerült lejátszani a felvételt</string>
+  <string name="smart_dialer_title">Intelligens hívás</string>
+  <string name="smart_dialer_summary">A névjegy automatikus hívása, ha a telefont a füléhez emeli</string>
 </resources>
