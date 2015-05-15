@@ -256,9 +256,7 @@ public class VoicemailPlaybackFragment extends Fragment {
         private final SeekBar mPlaybackSeek;
         private final ImageButton mStartStopButton;
         private final ImageButton mPlaybackSpeakerphone;
-        private final ImageButton mRateDecreaseButton;
-        private final ImageButton mRateIncreaseButton;
-        private final TextViewWithMessagesController mTextController;
+        private final TextView mPlaybackPosition;
 
         public PlaybackViewImpl(ActivityReference activityReference, Context applicationContext,
                 View playbackLayout) {
@@ -272,13 +270,8 @@ public class VoicemailPlaybackFragment extends Fragment {
                     R.id.playback_start_stop);
             mPlaybackSpeakerphone = (ImageButton) playbackLayout.findViewById(
                     R.id.playback_speakerphone);
-            mRateDecreaseButton = (ImageButton) playbackLayout.findViewById(
-                    R.id.rate_decrease_button);
-            mRateIncreaseButton = (ImageButton) playbackLayout.findViewById(
-                    R.id.rate_increase_button);
-            mTextController = new TextViewWithMessagesController(
-                    (TextView) playbackLayout.findViewById(R.id.playback_position_text),
-                    (TextView) playbackLayout.findViewById(R.id.playback_speed_text));
+            mPlaybackPosition =
+                    (TextView) playbackLayout.findViewById(R.id.playback_position_text);
         }
 
         @Override
@@ -303,16 +296,6 @@ public class VoicemailPlaybackFragment extends Fragment {
         }
 
         @Override
-        public void setRateDecreaseButtonListener(View.OnClickListener listener) {
-            mRateDecreaseButton.setOnClickListener(listener);
-        }
-
-        @Override
-        public void setRateIncreaseButtonListener(View.OnClickListener listener) {
-            mRateIncreaseButton.setOnClickListener(listener);
-        }
-
-        @Override
         public void setStartStopListener(View.OnClickListener listener) {
             mStartStopButton.setOnClickListener(listener);
         }
@@ -320,12 +303,6 @@ public class VoicemailPlaybackFragment extends Fragment {
         @Override
         public void setSpeakerphoneListener(View.OnClickListener listener) {
             mPlaybackSpeakerphone.setOnClickListener(listener);
-        }
-
-        @Override
-        public void setRateDisplay(float rate, int stringResourceId) {
-            mTextController.setTemporaryText(
-                    mApplicationContext.getString(stringResourceId), 1, TimeUnit.SECONDS);
         }
 
         @Override
@@ -379,8 +356,7 @@ public class VoicemailPlaybackFragment extends Fragment {
                 mPlaybackSeek.setMax(seekBarMax);
             }
             mPlaybackSeek.setProgress(seekBarPosition);
-            mTextController.setPermanentText(
-                    formatAsMinutesAndSeconds(seekBarMax - seekBarPosition));
+            mPlaybackPosition.setText(formatAsMinutesAndSeconds(seekBarMax - seekBarPosition));
         }
 
         private String getString(int resId) {
@@ -390,19 +366,19 @@ public class VoicemailPlaybackFragment extends Fragment {
         @Override
         public void setIsBuffering() {
             disableUiElements();
-            mTextController.setPermanentText(getString(R.string.voicemail_buffering));
+            mPlaybackPosition.setText(getString(R.string.voicemail_buffering));
         }
 
         @Override
         public void setIsFetchingContent() {
             disableUiElements();
-            mTextController.setPermanentText(getString(R.string.voicemail_fetching_content));
+            mPlaybackPosition.setText(getString(R.string.voicemail_fetching_content));
         }
 
         @Override
         public void setFetchContentTimeout() {
             disableUiElements();
-            mTextController.setPermanentText(getString(R.string.voicemail_fetching_timout));
+            mPlaybackPosition.setText(getString(R.string.voicemail_fetching_timout));
         }
 
         @Override
@@ -412,8 +388,6 @@ public class VoicemailPlaybackFragment extends Fragment {
 
         @Override
         public void disableUiElements() {
-            mRateIncreaseButton.setEnabled(false);
-            mRateDecreaseButton.setEnabled(false);
             mStartStopButton.setEnabled(false);
             mPlaybackSpeakerphone.setEnabled(false);
             mPlaybackSeek.setProgress(0);
@@ -423,14 +397,12 @@ public class VoicemailPlaybackFragment extends Fragment {
         @Override
         public void playbackError(Exception e) {
             disableUiElements();
-            mTextController.setPermanentText(getString(R.string.voicemail_playback_error));
+            mPlaybackPosition.setText(getString(R.string.voicemail_playback_error));
             Log.e(TAG, "Could not play voicemail", e);
         }
 
         @Override
         public void enableUiElements() {
-            mRateIncreaseButton.setEnabled(true);
-            mRateDecreaseButton.setEnabled(true);
             mStartStopButton.setEnabled(true);
             mPlaybackSpeakerphone.setEnabled(true);
             mPlaybackSeek.setEnabled(true);
@@ -488,66 +460,6 @@ public class VoicemailPlaybackFragment extends Fragment {
             Activity activity = mActivityReference.get();
             if (activity != null) {
                 activity.setVolumeControlStream(streamType);
-            }
-        }
-    }
-
-    /**
-     * Controls a TextView with dynamically changing text.
-     * <p>
-     * There are two methods here of interest,
-     * {@link TextViewWithMessagesController#setPermanentText(String)} and
-     * {@link TextViewWithMessagesController#setTemporaryText(String, long, TimeUnit)}.  The
-     * former is used to set the text on the text view immediately, and is used in our case for
-     * the countdown of duration remaining during voicemail playback.  The second is used to
-     * temporarily replace this countdown with a message, in our case faster voicemail speed or
-     * slower voicemail speed, before returning to the countdown display.
-     * <p>
-     * All the methods on this class must be called from the ui thread.
-     */
-    private static final class TextViewWithMessagesController {
-        private static final float VISIBLE = 1;
-        private static final float INVISIBLE = 0;
-        private static final long SHORT_ANIMATION_MS = 200;
-        private static final long LONG_ANIMATION_MS = 400;
-        private final Object mLock = new Object();
-        private final TextView mPermanentTextView;
-        private final TextView mTemporaryTextView;
-        @GuardedBy("mLock") private Runnable mRunnable;
-
-        public TextViewWithMessagesController(TextView permanentTextView,
-                TextView temporaryTextView) {
-            mPermanentTextView = permanentTextView;
-            mTemporaryTextView = temporaryTextView;
-        }
-
-        public void setPermanentText(String text) {
-            mPermanentTextView.setText(text);
-        }
-
-        public void setTemporaryText(String text, long duration, TimeUnit units) {
-            synchronized (mLock) {
-                mTemporaryTextView.setText(text);
-                mTemporaryTextView.animate().alpha(VISIBLE).setDuration(SHORT_ANIMATION_MS);
-                mPermanentTextView.animate().alpha(INVISIBLE).setDuration(SHORT_ANIMATION_MS);
-                mRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized (mLock) {
-                            // We check for (mRunnable == this) becuase if not true, then another
-                            // setTemporaryText call has taken place in the meantime, and this
-                            // one is now defunct and needs to take no action.
-                            if (mRunnable == this) {
-                                mRunnable = null;
-                                mTemporaryTextView.animate()
-                                        .alpha(INVISIBLE).setDuration(LONG_ANIMATION_MS);
-                                mPermanentTextView.animate()
-                                        .alpha(VISIBLE).setDuration(LONG_ANIMATION_MS);
-                            }
-                        }
-                    }
-                };
-                mTemporaryTextView.postDelayed(mRunnable, units.toMillis(duration));
             }
         }
     }
