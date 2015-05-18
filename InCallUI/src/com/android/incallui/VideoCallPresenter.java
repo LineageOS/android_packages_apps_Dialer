@@ -91,13 +91,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     };
 
     /**
-     * Determines the device orientation (portrait/lanscape).
-     */
-    public int getDeviceOrientation() {
-        return mDeviceOrientation;
-    }
-
-    /**
      * Defines the state of the preview surface negotiation with the telephony layer.
      */
     private class PreviewSurfaceState {
@@ -947,8 +940,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     /**
      * Handles changes to the device orientation.
-     * See: {@link Configuration.ORIENTATION_LANDSCAPE}, {@link Configuration.ORIENTATION_PORTRAIT}
-     * @param orientation The device orientation.
+     *
+     * @param orientation The device orientation (one of: {@link Surface#ROTATION_0},
+     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     *      {@link Surface#ROTATION_270}).
      */
     @Override
     public void onDeviceOrientationChanged(int orientation) {
@@ -1009,9 +1004,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     /**
      * Sets the preview surface size based on the current device orientation.
-     * See: {@link Configuration.ORIENTATION_LANDSCAPE}, {@link Configuration.ORIENTATION_PORTRAIT}
      *
-     * @param orientation The device orientation.
+     * @param orientation The device orientation (one of: {@link Surface#ROTATION_0},
+     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     *      {@link Surface#ROTATION_270}).
      * @param aspectRatio The aspect ratio of the camera (width / height).
      */
     private void setPreviewSize(int orientation, float aspectRatio) {
@@ -1023,10 +1019,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         int height;
         int width;
 
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_270) {
+            // Landscape or reverse landscape orientation.
             width = (int) (mMinimumVideoDimension * aspectRatio);
             height = (int) mMinimumVideoDimension;
         } else {
+            // Portrait or reverse portrait orientation.
             width = (int) mMinimumVideoDimension;
             height = (int) (mMinimumVideoDimension * aspectRatio);
         }
