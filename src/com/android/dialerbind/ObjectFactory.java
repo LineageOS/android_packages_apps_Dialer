@@ -22,7 +22,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 
 import com.android.dialer.calllog.CallLogAdapter;
-import com.android.dialer.calllog.CallLogAdapter.CallItemExpandedListener;
 import com.android.dialer.calllog.CallLogAdapter.OnReportButtonClickListener;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
