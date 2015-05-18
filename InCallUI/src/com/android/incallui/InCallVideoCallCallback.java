@@ -28,7 +28,7 @@ import android.telecom.VideoProfile.CameraCapabilities;
 public class InCallVideoCallCallback extends VideoCall.Callback {
 
     /**
-     * The call associated with this {@link InCallVideoClient}.
+     * The call associated with this {@link InCallVideoCallCallback}.
      */
     private Call mCall;
 
