@@ -39,6 +39,7 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.KeyEvent;
@@ -203,10 +204,29 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
                 SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
             public void onOrientationChanged(int orientation) {
+                // Device is flat, don't change orientation.
+                if (orientation == OrientationEventListener.ORIENTATION_UNKNOWN) {
+                    return;
+                }
+
+                int newRotation = Surface.ROTATION_0;
+                // We only shift if we're within 22.5 (23) degrees of the target
+                // orientation. This avoids flopping back and forth when holding
+                // the device at 45 degrees or so.
+                if (orientation >= 337 || orientation <= 23) {
+                    newRotation = Surface.ROTATION_0;
+                } else if (orientation >= 67 && orientation <= 113) {
+                    // Why not 90? Because screen and sensor orientation are
+                    // reversed.
+                    newRotation = Surface.ROTATION_270;
+                } else if (orientation >= 157 && orientation <= 203) {
+                    newRotation = Surface.ROTATION_180;
+                } else if (orientation >= 247 && orientation <= 293) {
+                    newRotation = Surface.ROTATION_90;
+                }
+
                 // Orientation is the current device orientation in degrees.  Ultimately we want
                 // the rotation (in fixed 90 degree intervals).
-                Display display = getWindowManager().getDefaultDisplay();
-                int newRotation = display.getRotation();
                 if (newRotation != sPreviousRotation) {
                     doOrientationChanged(newRotation);
                 }
@@ -500,7 +520,9 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     /**
      * Handles changes in device rotation.
      *
-     * @param rotation The new device rotation.
+     * @param rotation The new device rotation (one of: {@link Surface#ROTATION_0},
+     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     *      {@link Surface#ROTATION_270}).
      */
     private void doOrientationChanged(int rotation) {
         Log.d(this, "doOrientationChanged prevOrientation=" + sPreviousRotation +
