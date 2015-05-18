@@ -1339,7 +1339,9 @@ public class InCallPresenter implements CallList.Listener,
     /**
      * Handles changes to the device rotation.
      *
-     * @param rotation The device rotation.
+     * @param rotation The device rotation (one of: {@link Surface#ROTATION_0},
+     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     *      {@link Surface#ROTATION_270}).
      */
     public void onDeviceRotationChange(int rotation) {
         Log.d(this, "onDeviceRotationChange: rotation=" + rotation);
@@ -1353,7 +1355,9 @@ public class InCallPresenter implements CallList.Listener,
 
     /**
      * Converts rotation constants to rotation in degrees.
-     * @param rotation Rotation constants.
+     * @param rotation Rotation constants (one of: {@link Surface#ROTATION_0},
+     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     *      {@link Surface#ROTATION_270}).
      */
     public static int toRotationAngle(int rotation) {
         int rotationAngle;
@@ -1379,7 +1383,9 @@ public class InCallPresenter implements CallList.Listener,
     /**
      * Notifies listeners of changes in orientation (e.g. portrait/landscape).
      *
-     * @param orientation The orientation of the device.
+     * @param orientation The orientation of the device (one of: {@link Surface#ROTATION_0},
+     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     *      {@link Surface#ROTATION_270}).
      */
     public void onDeviceOrientationChange(int orientation) {
         for (InCallOrientationListener listener : mOrientationListeners) {
