@@ -121,8 +121,7 @@ public class CallDetailActivity extends Activity {
     /* package */ Resources mResources;
     /** Helper to load contact photos. */
     private ContactPhotoManager mContactPhotoManager;
-    // Views related to voicemail status message.
-    private TextView mVoicemailTranscription;
+
     private LinearLayout mVoicemailHeader;
 
     private Uri mVoicemailUri;
@@ -216,8 +215,6 @@ public class CallDetailActivity extends Activity {
             mVoicemailHeader =
                     (LinearLayout) inflater.inflate(R.layout.call_details_voicemail_header, null);
             View voicemailContainer = mVoicemailHeader.findViewById(R.id.voicemail_container);
-            mVoicemailTranscription = (
-                    TextView) mVoicemailHeader.findViewById(R.id.voicemail_transcription);
             ListView historyList = (ListView) findViewById(R.id.history);
             historyList.addHeaderView(mVoicemailHeader);
             // Has voicemail: add the voicemail fragment.  Add suitable arguments to set the uri
@@ -406,11 +403,6 @@ public class CallDetailActivity extends Activity {
                             firstDetails.formattedNumber).toString();
                 } else {
                     nameForDefaultImage = firstDetails.name.toString();
-                }
-
-                if (hasVoicemail() && !TextUtils.isEmpty(firstDetails.transcription)) {
-                    mVoicemailTranscription.setText(firstDetails.transcription);
-                    mVoicemailTranscription.setVisibility(View.VISIBLE);
                 }
 
                 loadContactPhotos(
