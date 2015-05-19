@@ -227,7 +227,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                     return;
                 }
 
-                int newRotation = Surface.ROTATION_0;
+                int newRotation;
                 // We only shift if we're within 22.5 (23) degrees of the target
                 // orientation. This avoids flopping back and forth when holding
                 // the device at 45 degrees or so.
@@ -241,6 +241,9 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                     newRotation = Surface.ROTATION_180;
                 } else if (orientation >= 247 && orientation <= 293) {
                     newRotation = Surface.ROTATION_90;
+                } else {
+                    // Device is between orientations, so leave orientation the same.
+                    return;
                 }
 
                 // Orientation is the current device orientation in degrees.  Ultimately we want
