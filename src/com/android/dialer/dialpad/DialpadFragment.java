@@ -70,6 +70,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -441,6 +442,9 @@ public class DialpadFragment extends Fragment
                     setFormattedDigits(converted, null);
                     return true;
                 } else {
+                    if (!PermissionsUtil.hasContactsPermissions(getActivity())) {
+                        return false;
+                    }
                     String type = intent.getType();
                     if (People.CONTENT_ITEM_TYPE.equals(type)
                             || Phones.CONTENT_ITEM_TYPE.equals(type)) {
