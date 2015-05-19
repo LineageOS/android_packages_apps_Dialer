@@ -16,9 +16,7 @@
 
 package com.android.incallui;
 
-import android.net.Uri;
-
-import com.google.common.base.Preconditions;
+import static com.android.incallui.NotificationBroadcastReceiver.*;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -28,6 +26,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.telecom.Call.Details;
@@ -39,8 +38,9 @@ import android.text.TextUtils;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
-import com.android.incallui.InCallApp.NotificationBroadcastReceiver;
 import com.android.incallui.InCallPresenter.InCallState;
+
+import com.google.common.base.Preconditions;
 
 /**
  * This class adds Notifications to the status bar for the in-call experience.
@@ -442,7 +442,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"answer\" action in the incoming call Notification");
 
         PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+                mContext, ACTION_ANSWER_VOICE_INCOMING_CALL);
         builder.addAction(R.drawable.ic_call_white_24dp,
                 mContext.getText(R.string.notification_action_answer),
                 answerVoicePendingIntent);
@@ -452,7 +452,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
 
         PendingIntent declinePendingIntent =
-                createNotificationPendingIntent(mContext, InCallApp.ACTION_DECLINE_INCOMING_CALL);
+                createNotificationPendingIntent(mContext, ACTION_DECLINE_INCOMING_CALL);
         builder.addAction(R.drawable.ic_close_dk,
                 mContext.getText(R.string.notification_action_dismiss),
                 declinePendingIntent);
@@ -462,7 +462,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"hang-up\" action in the ongoing active call Notification");
 
         PendingIntent hangupPendingIntent =
-                createNotificationPendingIntent(mContext, InCallApp.ACTION_HANG_UP_ONGOING_CALL);
+                createNotificationPendingIntent(mContext, ACTION_HANG_UP_ONGOING_CALL);
         builder.addAction(R.drawable.ic_call_end_white_24dp,
                 mContext.getText(R.string.notification_action_end_call),
                 hangupPendingIntent);
@@ -472,7 +472,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"video\" action in the incoming call Notification");
 
         PendingIntent answerVideoPendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_ANSWER_VIDEO_INCOMING_CALL);
+                mContext, ACTION_ANSWER_VIDEO_INCOMING_CALL);
         builder.addAction(R.drawable.ic_videocam,
                 mContext.getText(R.string.notification_action_answer_video),
                 answerVideoPendingIntent);
@@ -482,7 +482,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"voice\" action in the incoming call Notification");
 
         PendingIntent answerVoicePendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_ANSWER_VOICE_INCOMING_CALL);
+                mContext, ACTION_ANSWER_VOICE_INCOMING_CALL);
         builder.addAction(R.drawable.ic_call_white_24dp,
                 mContext.getText(R.string.notification_action_answer_voice),
                 answerVoicePendingIntent);
@@ -492,7 +492,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"accept\" action in the incoming call Notification");
 
         PendingIntent acceptVideoPendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST);
+                mContext, ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST);
         builder.addAction(0, mContext.getText(R.string.notification_action_accept),
                 acceptVideoPendingIntent);
     }
@@ -501,7 +501,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Will show \"dismiss\" action in the incoming call Notification");
 
         PendingIntent declineVideoPendingIntent = createNotificationPendingIntent(
-                mContext, InCallApp.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST);
+                mContext, ACTION_DECLINE_VIDEO_UPGRADE_REQUEST);
         builder.addAction(0, mContext.getText(R.string.notification_action_dismiss),
                 declineVideoPendingIntent);
     }
