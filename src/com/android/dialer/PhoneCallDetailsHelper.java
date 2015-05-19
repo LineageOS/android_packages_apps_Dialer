@@ -32,7 +32,6 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.calllog.PhoneNumberDisplayHelper;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.DialerUtils;
 
@@ -52,7 +51,6 @@ public class PhoneCallDetailsHelper {
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
     // Helper classes.
-    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
 
     /**
@@ -72,7 +70,6 @@ public class PhoneCallDetailsHelper {
         mContext = context;
         mResources = resources;
         mPhoneNumberUtilsWrapper = phoneUtils;
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(context, resources, phoneUtils);
     }
 
     /** Fills the call details views with content. */
@@ -125,9 +122,7 @@ public class PhoneCallDetailsHelper {
         }
 
         final CharSequence nameText;
-        final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.accountHandle, details.number,
-                    details.numberPresentation, details.formattedNumber);
+        final CharSequence displayNumber = details.displayNumber;
         if (TextUtils.isEmpty(details.name)) {
             nameText = displayNumber;
             // We have a real phone number as "nameView" so make it always LTR
@@ -195,8 +190,7 @@ public class PhoneCallDetailsHelper {
         }
 
         if (!TextUtils.isEmpty(details.name) && TextUtils.isEmpty(numberFormattedLabel)) {
-            numberFormattedLabel = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
-                    details.number, details.numberPresentation, details.formattedNumber);
+            numberFormattedLabel = details.displayNumber;
         }
         return numberFormattedLabel;
     }
@@ -218,12 +212,8 @@ public class PhoneCallDetailsHelper {
     @NeededForTesting
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
-        final CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.accountHandle, details.number,
-                    details.numberPresentation,
-                    mResources.getString(R.string.recentCalls_addToContact));
         if (TextUtils.isEmpty(details.name)) {
-            nameText = displayNumber;
+            nameText = mResources.getString(R.string.recentCalls_addToContact);
         } else {
             nameText = details.name;
         }

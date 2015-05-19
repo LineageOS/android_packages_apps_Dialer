@@ -411,8 +411,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     @NeededForTesting
     public static CallLogListItemViewHolder createForTest(Context context) {
         Resources resources = context.getResources();
-        PhoneNumberDisplayHelper phoneNumberHelper =
-                new PhoneNumberDisplayHelper(context, resources);
         PhoneNumberUtilsWrapper phoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(context);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
                 context, resources, phoneNumberUtilsWrapper);
@@ -421,8 +419,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 context,
                 null /* actionListener */,
                 phoneNumberUtilsWrapper,
-                new CallLogListItemHelper(
-                        phoneCallDetailsHelper, phoneNumberHelper, resources),
+                new CallLogListItemHelper(phoneCallDetailsHelper, resources),
                 new View(context),
                 new QuickContactBadge(context),
                 new View(context),

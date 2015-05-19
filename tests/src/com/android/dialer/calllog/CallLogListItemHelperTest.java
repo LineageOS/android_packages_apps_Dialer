@@ -51,24 +51,21 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** The views used in the tests. */
     private CallLogListItemViewHolder mViewHolder;
-    private PhoneNumberDisplayHelper mPhoneNumberHelper;
-    private PhoneNumberDisplayHelper mPhoneNumberDisplayHelper;
 
+    private Context mContext;
     private Resources mResources;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Context context = getContext();
-        mResources = context.getResources();
+        mContext = getContext();
+        mResources = mContext.getResources();
         final TestPhoneNumberUtilsWrapper phoneUtils =
-                new TestPhoneNumberUtilsWrapper(context, TEST_VOICEMAIL_NUMBER);
+                new TestPhoneNumberUtilsWrapper(mContext, TEST_VOICEMAIL_NUMBER);
         PhoneCallDetailsHelper phoneCallDetailsHelper =
-                new PhoneCallDetailsHelper(context, mResources, phoneUtils);
-        mPhoneNumberDisplayHelper = new PhoneNumberDisplayHelper(context, mResources, phoneUtils);
-        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberDisplayHelper,
-                mResources);
-        mViewHolder = CallLogListItemViewHolder.createForTest(getContext());
+                new PhoneCallDetailsHelper(mContext, mResources, phoneUtils);
+        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mResources);
+        mViewHolder = CallLogListItemViewHolder.createForTest(mContext);
     }
 
     @Override
@@ -126,9 +123,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test case where an answered unknown call is received.
      */
     public void testGetCallDescriptionID_UnknownAnswered() {
-        PhoneCallDetails details = new PhoneCallDetails("", Calls.PRESENTATION_UNKNOWN, "",
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                "",
+                Calls.PRESENTATION_UNKNOWN,
+                "",
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_incoming_answered_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -138,9 +143,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test case where an missed unknown call is received.
      */
     public void testGetCallDescriptionID_UnknownMissed() {
-        PhoneCallDetails details = new PhoneCallDetails("", Calls.PRESENTATION_UNKNOWN, "",
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.MISSED_TYPE}, TEST_DATE, TEST_DURATION);
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                "",
+                Calls.PRESENTATION_UNKNOWN,
+                "",
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.MISSED_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_incoming_missed_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -150,9 +163,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test case where an missed unknown call is received and a voicemail was left.
      */
     public void testGetCallDescriptionID_UnknownVoicemail() {
-        PhoneCallDetails details = new PhoneCallDetails("", Calls.PRESENTATION_UNKNOWN, "",
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                "",
+                Calls.PRESENTATION_UNKNOWN,
+                "",
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_incoming_missed_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -162,10 +183,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test case where an answered call from a known caller is received.
      */
     public void testGetCallDescriptionID_KnownAnswered() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_incoming_answered_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -175,10 +203,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test case where a missed call from a known caller is received.
      */
     public void testGetCallDescriptionID_KnownMissed() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.MISSED_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.MISSED_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_incoming_missed_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -188,10 +223,16 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test case where a missed call from a known caller is received and a voicemail was left.
      */
     public void testGetCallDescriptionID_KnownVoicemail() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
+                new int[]{Calls.VOICEMAIL_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_incoming_missed_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -202,10 +243,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * only a single call for this caller.
      */
     public void testGetCallDescriptionID_OutgoingSingle() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.OUTGOING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_outgoing_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -216,10 +264,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * many calls for this caller.
      */
     public void testGetCallDescriptionID_OutgoingMultiple() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         assertEquals(R.string.description_outgoing_call,
                 mHelper.getCallDescriptionStringID(details));
     }
@@ -229,10 +284,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * For outgoing calls, we should NOT have "New Voicemail" in the description.
      */
     public void testGetCallDescription_NoVoicemailOutgoing() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
@@ -243,10 +305,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * For regular incoming calls, we should NOT have "New Voicemail" in the description.
      */
     public void testGetCallDescription_NoVoicemailIncoming() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
@@ -257,10 +326,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * For regular missed calls, we should NOT have "New Voicemail" in the description.
      */
     public void testGetCallDescription_NoVoicemailMissed() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.MISSED_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.MISSED_TYPE, Calls.OUTGOING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
@@ -271,10 +347,17 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * For voicemail calls, we should have "New Voicemail" in the description.
      */
     public void testGetCallDescription_Voicemail() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.VOICEMAIL_TYPE, Calls.OUTGOING_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE, Calls.OUTGOING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
@@ -285,10 +368,16 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test that the "X calls" message is not present if there is only a single call.
      */
     public void testGetCallDescription_NumCallsSingle() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
-                TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.VOICEMAIL_TYPE}, TEST_DATE, TEST_DURATION);
+                TEST_COUNTRY_ISO,
+                TEST_GEOCODE,
+                new int[]{Calls.VOICEMAIL_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         CharSequence description = mHelper.getCallDescription(getContext(), details);
 
         // Rather than hard coding the "X calls" string message, we'll generate it with an empty
@@ -304,10 +393,15 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test that the "X calls" message is present if there are many calls.
      */
     public void testGetCallDescription_NumCallsMultiple() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
                 TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.VOICEMAIL_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION);
+                new int[]{Calls.VOICEMAIL_TYPE, Calls.INCOMING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                false /* isVoicemail */);
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_num_calls, 2)));
@@ -318,10 +412,20 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      * Test that the "Video call." message is present if the call had video capability.
      */
     public void testGetCallDescription_Video() {
-        PhoneCallDetails details = new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
-                TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE}, TEST_DATE, TEST_DURATION,
-                null, Calls.FEATURES_VIDEO, null, null);
+        PhoneCallDetails details = new PhoneCallDetails(
+                mContext,
+                TEST_NUMBER,
+                Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER,
+                TEST_COUNTRY_ISO, TEST_GEOCODE,
+                new int[]{Calls.INCOMING_TYPE, Calls.INCOMING_TYPE},
+                TEST_DATE,
+                TEST_DURATION,
+                null,
+                Calls.FEATURES_VIDEO,
+                null,
+                null,
+                false /* isVoicemail */);
 
         CharSequence description = mHelper.getCallDescription(getContext(), details);
         final boolean isVideoEnabled = CallUtil.isVideoEnabled(getContext());
@@ -350,28 +454,49 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** Sets the details of a phone call using the specified phone number. */
     private void setPhoneCallDetailsWithNumberAndType(String number,
             int presentation, String formattedNumber, int callType) {
-        mHelper.setPhoneCallDetails(getContext(), mViewHolder,
-                new PhoneCallDetails(number, presentation, formattedNumber,
-                        TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ callType }, TEST_DATE, TEST_DURATION)
-        );
+        mHelper.setPhoneCallDetails(mContext, mViewHolder,
+                new PhoneCallDetails(
+                        mContext,
+                        number,
+                        presentation,
+                        formattedNumber,
+                        TEST_COUNTRY_ISO,
+                        TEST_GEOCODE,
+                        new int[]{ callType },
+                        TEST_DATE,
+                        TEST_DURATION,
+                        false /* isVoicemail */));
     }
 
     /** Sets the details of a phone call using the specified call type. */
     private void setPhoneCallDetailsWithTypes(int... types) {
         mHelper.setPhoneCallDetails(getContext() ,mViewHolder,
-                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
-                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        types, TEST_DATE, TEST_DURATION)
-        );
+                new PhoneCallDetails(
+                        mContext,
+                        TEST_NUMBER,
+                        Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER,
+                        TEST_COUNTRY_ISO,
+                        TEST_GEOCODE,
+                        types,
+                        TEST_DATE,
+                        TEST_DURATION,
+                        false /* isVoicemail */));
     }
 
     /** Sets the details of an unread phone call using the specified call type. */
     private void setUnreadPhoneCallDetailsWithTypes(int... types) {
         mHelper.setPhoneCallDetails(getContext(), mViewHolder,
-                new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
-                        TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        types, TEST_DATE, TEST_DURATION)
-        );
+                new PhoneCallDetails(
+                        mContext,
+                        TEST_NUMBER,
+                        Calls.PRESENTATION_ALLOWED,
+                        TEST_FORMATTED_NUMBER,
+                        TEST_COUNTRY_ISO,
+                        TEST_GEOCODE,
+                        types,
+                        TEST_DATE,
+                        TEST_DURATION,
+                        false /* isVoicemail */));
     }
 }
