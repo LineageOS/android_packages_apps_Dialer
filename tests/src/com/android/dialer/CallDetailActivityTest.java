@@ -16,7 +16,7 @@
 
 package com.android.dialer;
 
-import static com.android.dialer.CallDetailActivity.Tasks.UPDATE_PHONE_CALL_DETAILS;
+import static com.android.dialer.calllog.CallLogAsyncTaskUtil.Tasks.GET_CALL_DETAILS;
 import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.CHECK_FOR_CONTENT;
 import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.PREPARE_MEDIA_PLAYER;
 
@@ -303,7 +303,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         // We have to run all tasks, not just one.
         // This is because it seems that we can have onResume, onPause, onResume during the course
         // of a single unit test.
-        mFakeAsyncTaskExecutor.runAllTasks(UPDATE_PHONE_CALL_DETAILS);
+        mFakeAsyncTaskExecutor.runAllTasks(GET_CALL_DETAILS);
     }
 
     private AssetManager getAssets() {
