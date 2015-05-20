@@ -19,17 +19,12 @@ package com.android.dialer;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.provider.CallLog;
-import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
@@ -55,15 +50,14 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
-import com.android.dialer.calllog.CallLogNotificationsService;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
-import com.android.dialer.util.AsyncTaskExecutor;
-import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TelecomUtil;
@@ -83,18 +77,7 @@ import java.util.List;
 public class CallDetailActivity extends Activity {
     private static final String TAG = "CallDetail";
 
-    private static final char LEFT_TO_RIGHT_EMBEDDING = '\u202A';
-    private static final char POP_DIRECTIONAL_FORMATTING = '\u202C';
-
-    /** The enumeration of {@link AsyncTask} objects used in this class. */
-    public enum Tasks {
-        MARK_VOICEMAIL_READ,
-        DELETE_VOICEMAIL_AND_FINISH,
-        REMOVE_FROM_CALL_LOG_AND_FINISH,
-        UPDATE_PHONE_CALL_DETAILS,
-    }
-
-    /** A long array extra containing ids of call log entries to display. */
+     /** A long array extra containing ids of call log entries to display. */
     public static final String EXTRA_CALL_LOG_IDS = "EXTRA_CALL_LOG_IDS";
     /** If we are started with a voicemail, we'll find the uri to play with this extra. */
     public static final String EXTRA_VOICEMAIL_URI = "EXTRA_VOICEMAIL_URI";
@@ -105,12 +88,128 @@ public class CallDetailActivity extends Activity {
 
     public static final String VOICEMAIL_FRAGMENT_TAG = "voicemail_fragment";
 
+    private CallLogAsyncTaskListener mCallLogAsyncTaskListener = new CallLogAsyncTaskListener() {
+        @Override
+        public void onDeleteCall() {
+            finish();
+        }
+
+        @Override
+        public void onDeleteVoicemail() {
+            finish();
+        }
+
+        @Override
+        public void onGetCallDetails(PhoneCallDetails[] details) {
+            Context context = CallDetailActivity.this;
+
+            if (details == null) {
+                // Somewhere went wrong: we're going to bail out and show error to users.
+                Toast.makeText(context, R.string.toast_call_detail_error,
+                        Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+
+            // We know that all calls are from the same number and the same contact, so pick the
+            // first.
+            PhoneCallDetails firstDetails = details[0];
+            mNumber = TextUtils.isEmpty(firstDetails.number) ?
+                    null : firstDetails.number.toString();
+            final int numberPresentation = firstDetails.numberPresentation;
+            final Uri contactUri = firstDetails.contactUri;
+            final Uri photoUri = firstDetails.photoUri;
+            final PhoneAccountHandle accountHandle = firstDetails.accountHandle;
+
+            // Cache the details about the phone number.
+            final boolean canPlaceCallsTo =
+                PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
+            final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(context);
+            final boolean isVoicemailNumber =
+                    phoneUtils.isVoicemailNumber(accountHandle, mNumber);
+            final boolean isSipNumber = PhoneNumberUtilsWrapper.isSipNumber(mNumber);
+
+            final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
+
+            final CharSequence displayNumber = firstDetails.displayNumber;
+            final String displayNumberStr = mBidiFormatter.unicodeWrap(
+                    displayNumber.toString(), TextDirectionHeuristics.LTR);
+
+            if (!TextUtils.isEmpty(firstDetails.name)) {
+                mCallerName.setText(firstDetails.name);
+                mCallerNumber.setText(callLocationOrType + " " + displayNumberStr);
+            } else {
+                mCallerName.setText(displayNumberStr);
+                if (!TextUtils.isEmpty(callLocationOrType)) {
+                    mCallerNumber.setText(callLocationOrType);
+                    mCallerNumber.setVisibility(View.VISIBLE);
+                } else {
+                    mCallerNumber.setVisibility(View.GONE);
+                }
+            }
+
+            String accountLabel = PhoneAccountUtils.getAccountLabel(context, accountHandle);
+            if (!TextUtils.isEmpty(accountLabel)) {
+                mAccountLabel.setText(accountLabel);
+                mAccountLabel.setVisibility(View.VISIBLE);
+            } else {
+                mAccountLabel.setVisibility(View.GONE);
+            }
+
+            mHasEditNumberBeforeCallOption =
+                    canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
+            mHasTrashOption = hasVoicemail();
+            mHasRemoveFromCallLogOption = !hasVoicemail();
+            invalidateOptionsMenu();
+
+            ListView historyList = (ListView) findViewById(R.id.history);
+            historyList.setAdapter(
+                    new CallDetailHistoryAdapter(context, mInflater, mCallTypeHelper, details));
+
+            String lookupKey = contactUri == null ? null
+                    : ContactInfoHelper.getLookupKeyFromUri(contactUri);
+
+            final boolean isBusiness = mContactInfoHelper.isBusiness(firstDetails.sourceType);
+
+            final int contactType =
+                    isVoicemailNumber ? ContactPhotoManager.TYPE_VOICEMAIL :
+                    isBusiness ? ContactPhotoManager.TYPE_BUSINESS :
+                    ContactPhotoManager.TYPE_DEFAULT;
+
+            String nameForDefaultImage;
+            if (TextUtils.isEmpty(firstDetails.name)) {
+                nameForDefaultImage = firstDetails.displayNumber;
+            } else {
+                nameForDefaultImage = firstDetails.name.toString();
+            }
+
+            loadContactPhotos(
+                    contactUri, photoUri, nameForDefaultImage, lookupKey, contactType);
+            findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
+        }
+
+        /**
+         * Determines the location geocode text for a call, or the phone number type
+         * (if available).
+         *
+         * @param details The call details.
+         * @return The phone number type or location.
+         */
+        private CharSequence getNumberTypeOrLocation(PhoneCallDetails details) {
+            if (!TextUtils.isEmpty(details.name)) {
+                return Phone.getTypeLabel(mResources, details.numberType,
+                        details.numberLabel);
+            } else {
+                return details.geocode;
+            }
+        }
+    };
+
     private CallTypeHelper mCallTypeHelper;
     private QuickContactBadge mQuickContactBadge;
     private TextView mCallerName;
     private TextView mCallerNumber;
     private TextView mAccountLabel;
-    private AsyncTaskExecutor mAsyncTaskExecutor;
     private ContactInfoHelper mContactInfoHelper;
 
     private String mNumber = null;
@@ -133,41 +232,12 @@ public class CallDetailActivity extends Activity {
     /** Whether we should show "remove from call log" in the options menu. */
     private boolean mHasRemoveFromCallLogOption;
 
-    static final String[] CALL_LOG_PROJECTION = new String[] {
-        CallLog.Calls.DATE,
-        CallLog.Calls.DURATION,
-        CallLog.Calls.NUMBER,
-        CallLog.Calls.TYPE,
-        CallLog.Calls.COUNTRY_ISO,
-        CallLog.Calls.GEOCODED_LOCATION,
-        CallLog.Calls.NUMBER_PRESENTATION,
-        CallLog.Calls.PHONE_ACCOUNT_COMPONENT_NAME,
-        CallLog.Calls.PHONE_ACCOUNT_ID,
-        CallLog.Calls.FEATURES,
-        CallLog.Calls.DATA_USAGE,
-        CallLog.Calls.TRANSCRIPTION
-    };
-
-    static final int DATE_COLUMN_INDEX = 0;
-    static final int DURATION_COLUMN_INDEX = 1;
-    static final int NUMBER_COLUMN_INDEX = 2;
-    static final int CALL_TYPE_COLUMN_INDEX = 3;
-    static final int COUNTRY_ISO_COLUMN_INDEX = 4;
-    static final int GEOCODED_LOCATION_COLUMN_INDEX = 5;
-    static final int NUMBER_PRESENTATION_COLUMN_INDEX = 6;
-    static final int ACCOUNT_COMPONENT_NAME = 7;
-    static final int ACCOUNT_ID = 8;
-    static final int FEATURES = 9;
-    static final int DATA_USAGE = 10;
-    static final int TRANSCRIPTION_COLUMN_INDEX = 11;
-
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         setContentView(R.layout.call_detail);
 
-        mAsyncTaskExecutor = AsyncTaskExecutors.createThreadPoolExecutor();
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         mResources = getResources();
 
@@ -196,7 +266,8 @@ public class CallDetailActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        updateData(getCallLogEntryUris());
+
+        CallLogAsyncTaskUtil.getCallDetails(this, getCallLogEntryUris(), mCallLogAsyncTaskListener);
     }
 
     /**
@@ -237,28 +308,12 @@ public class CallDetailActivity extends Activity {
             }
 
             voicemailContainer.setVisibility(View.VISIBLE);
-            markVoicemailAsRead(mVoicemailUri);
+            CallLogAsyncTaskUtil.markVoicemailAsRead(this, mVoicemailUri);
         }
     }
 
     private boolean hasVoicemail() {
         return mVoicemailUri != null;
-    }
-
-    private void markVoicemailAsRead(final Uri voicemailUri) {
-        mAsyncTaskExecutor.submit(Tasks.MARK_VOICEMAIL_READ, new AsyncTask<Void, Void, Void>() {
-            @Override
-            public Void doInBackground(Void... params) {
-                ContentValues values = new ContentValues();
-                values.put(Voicemails.IS_READ, true);
-                getContentResolver().update(voicemailUri, values,
-                        Voicemails.IS_READ + " = 0", null);
-                Intent intent = new Intent(getBaseContext(), CallLogNotificationsService.class);
-                intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);
-                getBaseContext().startService(intent);
-                return null;
-            }
-        });
     }
 
     /**
@@ -283,207 +338,6 @@ public class CallDetailActivity extends Activity {
                     TelecomUtil.getCallLogUri(CallDetailActivity.this), ids[index]);
         }
         return uris;
-    }
-
-    /**
-     * Update user interface with details of given call.
-     *
-     * @param callUris URIs into {@link android.provider.CallLog.Calls} of the calls to be displayed
-     */
-    private void updateData(final Uri... callUris) {
-        class UpdateContactDetailsTask extends AsyncTask<Void, Void, PhoneCallDetails[]> {
-            @Override
-            public PhoneCallDetails[] doInBackground(Void... params) {
-                // TODO: All phone calls correspond to the same person, so we can make a single
-                // lookup.
-                final int numCalls = callUris.length;
-                PhoneCallDetails[] details = new PhoneCallDetails[numCalls];
-                try {
-                    for (int index = 0; index < numCalls; ++index) {
-                        details[index] = getPhoneCallDetailsForUri(callUris[index]);
-                    }
-                    return details;
-                } catch (IllegalArgumentException e) {
-                    // Something went wrong reading in our primary data.
-                    Log.w(TAG, "invalid URI starting call details", e);
-                    return null;
-                }
-            }
-
-            @Override
-            public void onPostExecute(PhoneCallDetails[] details) {
-                Context context = CallDetailActivity.this;
-
-                if (details == null) {
-                    // Somewhere went wrong: we're going to bail out and show error to users.
-                    Toast.makeText(context, R.string.toast_call_detail_error,
-                            Toast.LENGTH_SHORT).show();
-                    finish();
-                    return;
-                }
-
-                // We know that all calls are from the same number and the same contact, so pick the
-                // first.
-                PhoneCallDetails firstDetails = details[0];
-                mNumber = TextUtils.isEmpty(firstDetails.number) ?
-                        null : firstDetails.number.toString();
-                final int numberPresentation = firstDetails.numberPresentation;
-                final Uri contactUri = firstDetails.contactUri;
-                final Uri photoUri = firstDetails.photoUri;
-                final PhoneAccountHandle accountHandle = firstDetails.accountHandle;
-
-                // Cache the details about the phone number.
-                final boolean canPlaceCallsTo =
-                    PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
-                final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(context);
-                final boolean isVoicemailNumber =
-                        phoneUtils.isVoicemailNumber(accountHandle, mNumber);
-                final boolean isSipNumber = PhoneNumberUtilsWrapper.isSipNumber(mNumber);
-
-                final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
-
-                final CharSequence displayNumber = firstDetails.displayNumber;
-                final String displayNumberStr = mBidiFormatter.unicodeWrap(
-                        displayNumber.toString(), TextDirectionHeuristics.LTR);
-
-                if (!TextUtils.isEmpty(firstDetails.name)) {
-                    mCallerName.setText(firstDetails.name);
-                    mCallerNumber.setText(callLocationOrType + " " + displayNumberStr);
-                } else {
-                    mCallerName.setText(displayNumberStr);
-                    if (!TextUtils.isEmpty(callLocationOrType)) {
-                        mCallerNumber.setText(callLocationOrType);
-                        mCallerNumber.setVisibility(View.VISIBLE);
-                    } else {
-                        mCallerNumber.setVisibility(View.GONE);
-                    }
-                }
-
-                String accountLabel = PhoneAccountUtils.getAccountLabel(context, accountHandle);
-                if (!TextUtils.isEmpty(accountLabel)) {
-                    mAccountLabel.setText(accountLabel);
-                    mAccountLabel.setVisibility(View.VISIBLE);
-                } else {
-                    mAccountLabel.setVisibility(View.GONE);
-                }
-
-                mHasEditNumberBeforeCallOption =
-                        canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
-                mHasTrashOption = hasVoicemail();
-                mHasRemoveFromCallLogOption = !hasVoicemail();
-                invalidateOptionsMenu();
-
-                ListView historyList = (ListView) findViewById(R.id.history);
-                historyList.setAdapter(
-                        new CallDetailHistoryAdapter(context, mInflater, mCallTypeHelper, details));
-
-                String lookupKey = contactUri == null ? null
-                        : ContactInfoHelper.getLookupKeyFromUri(contactUri);
-
-                final boolean isBusiness = mContactInfoHelper.isBusiness(firstDetails.sourceType);
-
-                final int contactType =
-                        isVoicemailNumber? ContactPhotoManager.TYPE_VOICEMAIL :
-                        isBusiness ? ContactPhotoManager.TYPE_BUSINESS :
-                        ContactPhotoManager.TYPE_DEFAULT;
-
-                String nameForDefaultImage;
-                if (TextUtils.isEmpty(firstDetails.name)) {
-                    nameForDefaultImage = firstDetails.displayNumber.toString();
-                } else {
-                    nameForDefaultImage = firstDetails.name.toString();
-                }
-
-                loadContactPhotos(
-                        contactUri, photoUri, nameForDefaultImage, lookupKey, contactType);
-                findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
-            }
-
-            /**
-             * Determines the location geocode text for a call, or the phone number type
-             * (if available).
-             *
-             * @param details The call details.
-             * @return The phone number type or location.
-             */
-            private CharSequence getNumberTypeOrLocation(PhoneCallDetails details) {
-                if (!TextUtils.isEmpty(details.name)) {
-                    return Phone.getTypeLabel(mResources, details.numberType,
-                            details.numberLabel);
-                } else {
-                    return details.geocode;
-                }
-            }
-        }
-        mAsyncTaskExecutor.submit(Tasks.UPDATE_PHONE_CALL_DETAILS, new UpdateContactDetailsTask());
-    }
-
-    /** Return the phone call details for a given call log URI. */
-    private PhoneCallDetails getPhoneCallDetailsForUri(Uri callUri) {
-        ContentResolver resolver = getContentResolver();
-        Cursor callCursor = resolver.query(callUri, CALL_LOG_PROJECTION, null, null, null);
-        try {
-            if (callCursor == null || !callCursor.moveToFirst()) {
-                throw new IllegalArgumentException("Cannot find content: " + callUri);
-            }
-
-            // Read call log specifics.
-            final String number = callCursor.getString(NUMBER_COLUMN_INDEX);
-            final int numberPresentation = callCursor.getInt(
-                    NUMBER_PRESENTATION_COLUMN_INDEX);
-            final long date = callCursor.getLong(DATE_COLUMN_INDEX);
-            final long duration = callCursor.getLong(DURATION_COLUMN_INDEX);
-            final int callType = callCursor.getInt(CALL_TYPE_COLUMN_INDEX);
-            String countryIso = callCursor.getString(COUNTRY_ISO_COLUMN_INDEX);
-            final String geocode = callCursor.getString(GEOCODED_LOCATION_COLUMN_INDEX);
-            final String transcription = callCursor.getString(TRANSCRIPTION_COLUMN_INDEX);
-
-            final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
-                    callCursor.getString(ACCOUNT_COMPONENT_NAME),
-                    callCursor.getString(ACCOUNT_ID));
-
-            if (TextUtils.isEmpty(countryIso)) {
-                countryIso = mDefaultCountryIso;
-            }
-
-            // Formatted phone number.
-            final CharSequence formattedNumber;
-
-            // If this is not a regular number, there is no point in looking it up in the contacts.
-            ContactInfo info = ContactInfo.EMPTY;
-            final boolean isVoicemail = new PhoneNumberUtilsWrapper(this)
-                    .isVoicemailNumber(accountHandle, number);
-            if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                    && !isVoicemail) {
-                mContactInfoHelper.lookupNumber(number, countryIso);
-            }
-            if (info == null) {
-                formattedNumber = PhoneNumberDisplayUtil.getDisplayNumber(
-                        this,
-                        accountHandle,
-                        number,
-                        numberPresentation,
-                        null /* formattedNumber */,
-                        isVoicemail);
-            } else {
-                formattedNumber = info.formattedNumber;
-            }
-            final int features = callCursor.getInt(FEATURES);
-            Long dataUsage = null;
-            if (!callCursor.isNull(DATA_USAGE)) {
-                dataUsage = callCursor.getLong(DATA_USAGE);
-            }
-            return new PhoneCallDetails(this, number, numberPresentation,
-                    formattedNumber, countryIso, geocode,
-                    new int[]{ callType }, date, duration,
-                    info.name, info.type, info.label, info.lookupUri, info.photoUri,
-                    info.sourceType, accountHandle, features, dataUsage, transcription,
-                    isVoicemail);
-        } finally {
-            if (callCursor != null) {
-                callCursor.close();
-            }
-        }
     }
 
     /** Load the contact photos and places them in the corresponding views. */
@@ -525,22 +379,8 @@ public class CallDetailActivity extends Activity {
             }
             callIds.append(ContentUris.parseId(callUri));
         }
-        mAsyncTaskExecutor.submit(Tasks.REMOVE_FROM_CALL_LOG_AND_FINISH,
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    public Void doInBackground(Void... params) {
-                        getContentResolver().delete(
-                                TelecomUtil.getCallLogUri(CallDetailActivity.this),
-                                Calls._ID + " IN (" + callIds + ")", null);
-                        return null;
-                    }
 
-                    @Override
-                    public void onPostExecute(Void result) {
-                        finish();
-                    }
-                }
-        );
+        CallLogAsyncTaskUtil.deleteCalls(this, callIds.toString(), mCallLogAsyncTaskListener);
     }
 
     public void onMenuEditNumberBeforeCall(MenuItem menuItem) {
@@ -548,20 +388,7 @@ public class CallDetailActivity extends Activity {
     }
 
     public void onMenuTrashVoicemail(MenuItem menuItem) {
-        mAsyncTaskExecutor.submit(Tasks.DELETE_VOICEMAIL_AND_FINISH,
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    public Void doInBackground(Void... params) {
-                        getContentResolver().delete(mVoicemailUri, null, null);
-                        return null;
-                    }
-
-                    @Override
-                    public void onPostExecute(Void result) {
-                        finish();
-                    }
-                }
-        );
+        CallLogAsyncTaskUtil.deleteVoicemail(this, mVoicemailUri, mCallLogAsyncTaskListener);
     }
 
     private void closeSystemDialogs() {
