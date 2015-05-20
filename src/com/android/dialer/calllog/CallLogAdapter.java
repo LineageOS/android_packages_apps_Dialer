@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.os.Trace;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -98,8 +99,6 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogViewsHelper;
 
-    /** Helper to parse and process phone numbers. */
-    private PhoneNumberDisplayHelper mPhoneNumberHelper;
     /** Helper to access Telephony phone number utils class */
     protected final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     /** Helper to group call log entries. */
@@ -210,12 +209,10 @@ public class CallLogAdapter extends GroupingListAdapter
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mContext, resources);
         mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(mContext);
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
-        mCallLogViewsHelper =
-                new CallLogListItemHelper(phoneCallDetailsHelper, mPhoneNumberHelper, resources);
+        mCallLogViewsHelper = new CallLogListItemHelper(phoneCallDetailsHelper, resources);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
     }
 
@@ -312,9 +309,10 @@ public class CallLogAdapter extends GroupingListAdapter
         if (getItemViewType(position) == VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM) {
             return;
         }
-
+        Trace.beginSection("onBindViewHolder: " + position);
         Cursor c = (Cursor) getItem(position);
         if (c == null) {
+            Trace.endSection();
             return;
         }
         int count = getGroupSize(position);
@@ -408,21 +406,21 @@ public class CallLogAdapter extends GroupingListAdapter
         views.showActions(mCurrentlyExpandedPosition == position, mOnReportButtonClickListener);
 
         if (TextUtils.isEmpty(name)) {
-            details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
-                    geocode, callTypes, date, duration, accountHandle, features, dataUsage,
-                    transcription);
+            details = new PhoneCallDetails(mContext, number, numberPresentation, formattedNumber,
+                    countryIso, geocode, callTypes, date, duration, accountHandle, features,
+                    dataUsage, transcription, isVoicemailNumber);
         } else {
-            details = new PhoneCallDetails(number, numberPresentation, formattedNumber, countryIso,
-                    geocode, callTypes, date, duration, name, ntype, label, lookupUri, photoUri,
-                    sourceType, accountHandle, features, dataUsage, transcription);
+            details = new PhoneCallDetails(mContext, number, numberPresentation, formattedNumber,
+                    countryIso, geocode, callTypes, date, duration, name, ntype, label, lookupUri,
+                    photoUri, sourceType, accountHandle, features, dataUsage, transcription,
+                    isVoicemailNumber);
         }
 
         mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(name)) {
-            nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
-                    details.number, details.numberPresentation, details.formattedNumber).toString();
+            nameForDefaultImage = details.displayNumber;
         } else {
             nameForDefaultImage = name;
         }
@@ -437,6 +435,7 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver = views.rootView.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
+        Trace.endSection();
     }
 
     @Override

@@ -28,40 +28,31 @@ import com.android.dialer.R;
 /**
  * Helper for formatting and managing the display of phone numbers.
  */
-public class PhoneNumberDisplayHelper {
-    private final Context mContext;
-    private final Resources mResources;
-    private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+public class PhoneNumberDisplayUtil {
 
-    public PhoneNumberDisplayHelper(Context context, Resources resources) {
-        mContext = context;
-        mResources = resources;
-        mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(context);
-    }
-
-    public PhoneNumberDisplayHelper(Context context, Resources resources,
-            PhoneNumberUtilsWrapper phoneNumberUtils) {
-        mContext = context;
-        mResources = resources;
-        mPhoneNumberUtilsWrapper = phoneNumberUtils;
-    }
-
-    /* package */ CharSequence getDisplayName(PhoneAccountHandle accountHandle, CharSequence number,
-            int presentation) {
+    /**
+     * Returns the string to display for the given phone number if there is no matching contact.
+     */
+    /* package */ static CharSequence getDisplayName(
+            Context context,
+            PhoneAccountHandle accountHandle,
+            CharSequence number,
+            int presentation,
+            boolean isVoicemail) {
         if (presentation == Calls.PRESENTATION_UNKNOWN) {
-            return mResources.getString(R.string.unknown);
+            return context.getResources().getString(R.string.unknown);
         }
         if (presentation == Calls.PRESENTATION_RESTRICTED) {
-            return mResources.getString(R.string.private_num);
+            return context.getResources().getString(R.string.private_num);
         }
         if (presentation == Calls.PRESENTATION_PAYPHONE) {
-            return mResources.getString(R.string.payphone);
+            return context.getResources().getString(R.string.payphone);
         }
-        if (mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number)) {
-            return mResources.getString(R.string.voicemail);
+        if (isVoicemail) {
+            return context.getResources().getString(R.string.voicemail);
         }
         if (PhoneNumberUtilsWrapper.isLegacyUnknownNumbers(number)) {
-            return mResources.getString(R.string.unknown);
+            return context.getResources().getString(R.string.unknown);
         }
         return "";
     }
@@ -73,21 +64,25 @@ public class PhoneNumberDisplayHelper {
      * @param number the number to display
      * @param formattedNumber the formatted number if available, may be null
      */
-    public CharSequence getDisplayNumber(PhoneAccountHandle accountHandle, CharSequence number,
-            int presentation, CharSequence formattedNumber) {
-        final CharSequence displayName = getDisplayName(accountHandle, number, presentation);
+    public static CharSequence getDisplayNumber(
+            Context context,
+            PhoneAccountHandle accountHandle,
+            CharSequence number,
+            int presentation,
+            CharSequence formattedNumber,
+            boolean isVoicemail) {
+        if (!TextUtils.isEmpty(formattedNumber)) {
+            return formattedNumber;
+        }
+
+        final CharSequence displayName =
+                getDisplayName(context, accountHandle, number, presentation, isVoicemail);
         if (!TextUtils.isEmpty(displayName)) {
             return displayName;
-        }
-
-        if (TextUtils.isEmpty(number)) {
-            return "";
-        }
-
-        if (TextUtils.isEmpty(formattedNumber)) {
+        } else if (!TextUtils.isEmpty(number)) {
             return number;
         } else {
-            return formattedNumber;
+            return "";
         }
     }
 }

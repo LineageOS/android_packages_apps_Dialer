@@ -58,7 +58,6 @@ public class DefaultVoicemailNotifier {
     private final NotificationManager mNotificationManager;
     private final NewCallsQuery mNewCallsQuery;
     private final NameLookupQuery mNameLookupQuery;
-    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
 
     /** Returns the singleton instance of the {@link DefaultVoicemailNotifier}. */
     public static synchronized DefaultVoicemailNotifier getInstance(Context context) {
@@ -68,20 +67,18 @@ public class DefaultVoicemailNotifier {
             ContentResolver contentResolver = context.getContentResolver();
             sInstance = new DefaultVoicemailNotifier(context, notificationManager,
                     createNewCallsQuery(contentResolver),
-                    createNameLookupQuery(contentResolver),
-                    createPhoneNumberHelper(context));
+                    createNameLookupQuery(contentResolver));
         }
         return sInstance;
     }
 
     private DefaultVoicemailNotifier(Context context,
             NotificationManager notificationManager, NewCallsQuery newCallsQuery,
-            NameLookupQuery nameLookupQuery, PhoneNumberDisplayHelper phoneNumberHelper) {
+            NameLookupQuery nameLookupQuery) {
         mContext = context;
         mNotificationManager = notificationManager;
         mNewCallsQuery = newCallsQuery;
         mNameLookupQuery = nameLookupQuery;
-        mPhoneNumberHelper = phoneNumberHelper;
     }
 
     /**
@@ -128,8 +125,12 @@ public class DefaultVoicemailNotifier {
                 PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                         newCall.accountComponentName,
                         newCall.accountId);
-                name = mPhoneNumberHelper.getDisplayName(accountHandle, newCall.number,
-                        newCall.numberPresentation).toString();
+                name = PhoneNumberDisplayUtil.getDisplayName(
+                        mContext,
+                        accountHandle,
+                        newCall.number,
+                        newCall.numberPresentation,
+                        /* isVoicemail */ false).toString();
                 // If we cannot lookup the contact, use the number instead.
                 if (TextUtils.isEmpty(name)) {
                     // Look it up in the database.
@@ -337,15 +338,5 @@ public class DefaultVoicemailNotifier {
                 }
             }
         }
-    }
-
-    /**
-     * Create a new PhoneNumberHelper.
-     * <p>
-     * This will cause some Disk I/O, at least the first time it is created, so it should not be
-     * called from the main thread.
-     */
-    public static PhoneNumberDisplayHelper createPhoneNumberHelper(Context context) {
-        return new PhoneNumberDisplayHelper(context, context.getResources());
     }
 }
