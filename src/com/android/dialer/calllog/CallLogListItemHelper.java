@@ -23,7 +23,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -36,8 +35,6 @@ import com.android.dialer.R;
 
     /** Helper for populating the details of a phone call. */
     private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
-    /** Helper for handling phone numbers. */
-    private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     /** Resources to look up strings. */
     private final Resources mResources;
 
@@ -47,10 +44,9 @@ import com.android.dialer.R;
      * @param phoneCallDetailsHelper used to set the details of a phone call
      * @param phoneNumberHelper used to process phone number
      */
-    public CallLogListItemHelper(PhoneCallDetailsHelper phoneCallDetailsHelper,
-            PhoneNumberDisplayHelper phoneNumberHelper, Resources resources) {
+    public CallLogListItemHelper(
+            PhoneCallDetailsHelper phoneCallDetailsHelper, Resources resources) {
         mPhoneCallDetailsHelper = phoneCallDetailsHelper;
-        mPhoneNumberHelper = phoneNumberHelper;
         mResources = resources;
     }
 
@@ -73,7 +69,7 @@ import com.android.dialer.R;
 
         // Cache name or number of caller.  Used when setting the content descriptions of buttons
         // when the actions ViewStub is inflated.
-        views.nameOrNumber = this.getNameOrNumber(details);
+        views.nameOrNumber = getNameOrNumber(details);
     }
 
     /**
@@ -190,8 +186,7 @@ import com.android.dialer.R;
         }
 
         // If call had video capabilities, add the "Video Call" string.
-        if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO &&
-                CallUtil.isVideoEnabled(context)) {
+        if ((details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
             callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
@@ -264,8 +259,7 @@ import com.android.dialer.R;
         if (!TextUtils.isEmpty(details.name)) {
             recipient = details.name;
         } else {
-            recipient = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
-                    details.number, details.numberPresentation, details.formattedNumber);
+            recipient = details.displayNumber;
         }
         return recipient;
     }

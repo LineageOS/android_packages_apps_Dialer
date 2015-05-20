@@ -60,7 +60,7 @@ import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.calllog.PhoneNumberDisplayHelper;
+import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
@@ -106,7 +106,6 @@ public class CallDetailActivity extends Activity {
     public static final String VOICEMAIL_FRAGMENT_TAG = "voicemail_fragment";
 
     private CallTypeHelper mCallTypeHelper;
-    private PhoneNumberDisplayHelper mPhoneNumberHelper;
     private QuickContactBadge mQuickContactBadge;
     private TextView mCallerName;
     private TextView mCallerNumber;
@@ -173,7 +172,6 @@ public class CallDetailActivity extends Activity {
         mResources = getResources();
 
         mCallTypeHelper = new CallTypeHelper(getResources());
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(this, mResources);
 
         mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
 
@@ -344,12 +342,7 @@ public class CallDetailActivity extends Activity {
 
                 final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
 
-                final CharSequence displayNumber =
-                        mPhoneNumberHelper.getDisplayNumber(
-                                firstDetails.accountHandle,
-                                firstDetails.number,
-                                firstDetails.numberPresentation,
-                                firstDetails.formattedNumber);
+                final CharSequence displayNumber = firstDetails.displayNumber;
                 final String displayNumberStr = mBidiFormatter.unicodeWrap(
                         displayNumber.toString(), TextDirectionHeuristics.LTR);
 
@@ -396,11 +389,7 @@ public class CallDetailActivity extends Activity {
 
                 String nameForDefaultImage;
                 if (TextUtils.isEmpty(firstDetails.name)) {
-                    nameForDefaultImage = mPhoneNumberHelper.getDisplayNumber(
-                            firstDetails.accountHandle,
-                            firstDetails.number,
-                            firstDetails.numberPresentation,
-                            firstDetails.formattedNumber).toString();
+                    nameForDefaultImage = firstDetails.displayNumber.toString();
                 } else {
                     nameForDefaultImage = firstDetails.name.toString();
                 }
@@ -459,47 +448,37 @@ public class CallDetailActivity extends Activity {
 
             // Formatted phone number.
             final CharSequence formattedNumber;
-            // Read contact specifics.
-            final CharSequence nameText;
-            final int numberType;
-            final CharSequence numberLabel;
-            final Uri photoUri;
-            final Uri lookupUri;
-            int sourceType;
+
             // If this is not a regular number, there is no point in looking it up in the contacts.
-            ContactInfo info =
-                    PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                    && !new PhoneNumberUtilsWrapper(this).isVoicemailNumber(accountHandle, number)
-                            ? mContactInfoHelper.lookupNumber(number, countryIso)
-                            : null;
+            ContactInfo info = ContactInfo.EMPTY;
+            final boolean isVoicemail = new PhoneNumberUtilsWrapper(this)
+                    .isVoicemailNumber(accountHandle, number);
+            if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
+                    && !isVoicemail) {
+                mContactInfoHelper.lookupNumber(number, countryIso);
+            }
             if (info == null) {
-                formattedNumber = mPhoneNumberHelper.getDisplayNumber(accountHandle, number,
-                        numberPresentation, null);
-                nameText = "";
-                numberType = 0;
-                numberLabel = "";
-                photoUri = null;
-                lookupUri = null;
-                sourceType = 0;
+                formattedNumber = PhoneNumberDisplayUtil.getDisplayNumber(
+                        this,
+                        accountHandle,
+                        number,
+                        numberPresentation,
+                        null /* formattedNumber */,
+                        isVoicemail);
             } else {
                 formattedNumber = info.formattedNumber;
-                nameText = info.name;
-                numberType = info.type;
-                numberLabel = info.label;
-                photoUri = info.photoUri;
-                lookupUri = info.lookupUri;
-                sourceType = info.sourceType;
             }
             final int features = callCursor.getInt(FEATURES);
             Long dataUsage = null;
             if (!callCursor.isNull(DATA_USAGE)) {
                 dataUsage = callCursor.getLong(DATA_USAGE);
             }
-            return new PhoneCallDetails(number, numberPresentation,
+            return new PhoneCallDetails(this, number, numberPresentation,
                     formattedNumber, countryIso, geocode,
                     new int[]{ callType }, date, duration,
-                    nameText, numberType, numberLabel, lookupUri, photoUri, sourceType,
-                    accountHandle, features, dataUsage, transcription);
+                    info.name, info.type, info.label, info.lookupUri, info.photoUri,
+                    info.sourceType, accountHandle, features, dataUsage, transcription,
+                    isVoicemail);
         } finally {
             if (callCursor != null) {
                 callCursor.close();
