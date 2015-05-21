@@ -53,11 +53,6 @@
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"無法使用音效"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"設定"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"致電語音信箱號碼"</string>
-    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"最慢速"</string>
-    <string name="voicemail_speed_slower" msgid="1508601287347216244">"慢速"</string>
-    <string name="voicemail_speed_normal" msgid="9033988544627228892">"正常速度"</string>
-    <string name="voicemail_speed_faster" msgid="2019965121475935488">"快速"</string>
-    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"最快速"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"（ <xliff:g id="COUNT">%1$d</xliff:g> ） <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"選擇號碼"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"選擇號碼"</string>
@@ -152,6 +147,7 @@
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有聯絡人"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"視像通話"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"收聽"</string>
+    <string name="call_log_action_send_message" msgid="2826466379787846163">"傳送訊息"</string>
     <string name="call_log_action_details" msgid="7957138590190911171">"查看詳情"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"未接聽來電：<xliff:g id="NAMEORNUMBER">^1</xliff:g> (<xliff:g id="TIMEOFCALL">^3</xliff:g>，<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="PHONEACCOUNT">^4</xliff:g>)。"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"已接聽來電：<xliff:g id="NAMEORNUMBER">^1</xliff:g> (<xliff:g id="TIMEOFCALL">^3</xliff:g>，<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="PHONEACCOUNT">^4</xliff:g>)。"</string>

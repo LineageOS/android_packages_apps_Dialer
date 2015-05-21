@@ -53,11 +53,6 @@
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ශ්‍රව්‍ය ලබාගත නොහැකිය"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"ස්ථාපනය කරන්න"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"හඬ තැපැල් අමතන්න"</string>
-    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"ඉතාමත් මන්දගාමී වේගය"</string>
-    <string name="voicemail_speed_slower" msgid="1508601287347216244">"මන්දගාමී වේගය"</string>
-    <string name="voicemail_speed_normal" msgid="9033988544627228892">"සාමාන්‍ය වේගය"</string>
-    <string name="voicemail_speed_faster" msgid="2019965121475935488">"ඉතා වේගවත්"</string>
-    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"ඉතාමත් වේගවත්"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"අංකය තෝරන්න"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"අංකය තෝරන්න"</string>
@@ -152,6 +147,7 @@
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"සියලු සම්බන්ධතා"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"වීඩියෝ ඇමතුම"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"අහනවා"</string>
+    <string name="call_log_action_send_message" msgid="2826466379787846163">"පණිවිඩය යවන්න"</string>
     <string name="call_log_action_details" msgid="7957138590190911171">"විස්තර බලන්න"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> වෙතින් ඇමතුමක් මගහැරුණා."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> වෙතින් ඇමතුමකට පිළිතුරු දුන්නා."</string>

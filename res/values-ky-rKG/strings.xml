@@ -57,11 +57,6 @@
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Аудио жеткиликтүү эмес"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Тууралоо"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Үнкатка чалуу"</string>
-    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Эң жай"</string>
-    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Жайлатуу"</string>
-    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Кадимкидей"</string>
-    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Ылдамдатуу"</string>
-    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Эң ылдам"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Номур тандоо"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Номур тандаңыз"</string>
@@ -170,7 +165,7 @@
     <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Учурдагы байланышка кошуу"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS жөнөтүү"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Видео түрүндө чалуу"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Чалуулардын толук тарыхын көрүү"</string>
+    <string name="show_call_history" msgid="1141502332266697170">"Чалуулардын толук таржымалын көрүү"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> жаңы өткөзүлгөн чалуу"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"Тез терүү мүмкүнчүлүгү менен, сүйүктүү байланыштарды жана тез-тез чалынган номурларды бир тийип тере аласыз"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Байланыштар жок"</string>
@@ -179,6 +174,7 @@
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"БАРДЫК БАЙЛАНЫШТАР"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Видео чалуу"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"УГУУ"</string>
+    <string name="call_log_action_send_message" msgid="2826466379787846163">"Билдирүү жөнөтүү"</string>
     <string name="call_log_action_details" msgid="7957138590190911171">"Чоо-жайын карап көрүү"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенден жооп берилбей калган чалуу."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> дегенден жооп берилген чалуу."</string>
@@ -188,8 +184,8 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> чалуу"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> видео чалуу."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> үн катын угуу"</string>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Бул номер үчүн контакт түзүү <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> учурдагы контактка кошуу"</string>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> номери үчүн байланыш түзүү"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> учурдагы байланышка кошуу"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> чалуу чоо-жайы"</string>
     <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> кабарлоо"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Чалуулар таржымалынан жок кылынды"</string>
