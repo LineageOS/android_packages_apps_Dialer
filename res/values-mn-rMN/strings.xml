@@ -53,11 +53,6 @@
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Дуу байхгүй байна"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Тохируулах"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Дуут шуудан руу залгах"</string>
-    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Хамгийн удаанаар"</string>
-    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Удаанаар"</string>
-    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Энгийн хурдаар"</string>
-    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Хурданаар"</string>
-    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Хамгийн хурданаар"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Дугаар сонгоно уу"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Дугаар сонгоно уу"</string>
@@ -152,8 +147,7 @@
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"БҮХ ХАРИЛЦАГЧИД"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Видео дуудлага"</string>
     <string name="call_log_action_voicemail" msgid="4978620572562925654">"СОНСОХ"</string>
-    <!-- no translation found for call_log_action_send_message (2826466379787846163) -->
-    <skip />
+    <string name="call_log_action_send_message" msgid="2826466379787846163">"Зурвас Илгээх"</string>
     <string name="call_log_action_details" msgid="7957138590190911171">"Дэлгэрэнгүй үзэх"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Дараах дуудлагыг хүлээн аваагүй <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Дараах дуудлагыг хүлээн авсан <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -163,8 +157,8 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> руу дуудлага хийх"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ын видео дуудлага."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-н дуут шууданг сонсох"</string>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-д харилцагч үүсгэх"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ыг одоо байгаа харилцагчиддаа нэмнэ үү"</string>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-д харилцагч шинээр үүсгэх"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ыг одоогийн харилцагч руугаа нэмнэ"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> дуудлагын дэлгэрэнгүй мэдээлэл"</string>
     <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-ыг мэдэгдэх"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Дуудлагын түүхээс устгагдсан"</string>
