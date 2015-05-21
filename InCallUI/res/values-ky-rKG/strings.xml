@@ -71,7 +71,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Видео чалуу"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Видео"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Видео чалууга туташуу мүмкүн болбой жатат"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Видео талап четке кагылды"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Видео сурам четке кагылды"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Төмөнкү номерге кайра чалуу\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Төмөнкү номерге шашылыш кайра чалуу\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Терилүүдө"</string>
@@ -218,6 +218,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> саат</item>
       <item quantity="one">1 саат</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"Профилдин сүрөтү"</string>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Профиль сүрөтү"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Камера өчүк"</string>
 </resources>
