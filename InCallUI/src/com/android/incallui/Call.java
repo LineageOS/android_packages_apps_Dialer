@@ -364,6 +364,8 @@ public class Call {
     private int mSessionModificationState;
     private final List<String> mChildCallIds = new ArrayList<>();
     private final VideoSettings mVideoSettings = new VideoSettings();
+    private int mVideoState;
+
     /**
      * mModifyToVideoState is used to store requested upgrade / downgrade video state
      */
@@ -435,6 +437,7 @@ public class Call {
         if (mState != State.BLOCKED) {
             setState(translatedState);
             setDisconnectCause(mTelecomCall.getDetails().getDisconnectCause());
+            maybeCancelVideoUpgrade(mTelecomCall.getDetails().getVideoState());
         }
 
         if (mTelecomCall.getVideoCall() != null) {
@@ -523,6 +526,23 @@ public class Call {
         }
     }
 
+    /**
+     * Determines if a received upgrade to video request should be cancelled.  This can happen if
+     * another InCall UI responds to the upgrade to video request.
+     *
+     * @param newVideoState The new video state.
+     */
+    private void maybeCancelVideoUpgrade(int newVideoState) {
+        boolean isVideoStateChanged = mVideoState != newVideoState;
+
+        if (mSessionModificationState == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST
+                && isVideoStateChanged) {
+
+            Log.v(this, "maybeCancelVideoUpgrade : cancelling upgrade notification");
+            setSessionModificationState(SessionModificationState.NO_REQUEST);
+        }
+        mVideoState = newVideoState;
+    }
     private static int translateState(int state) {
         switch (state) {
             case android.telecom.Call.STATE_NEW:
@@ -753,12 +773,6 @@ public class Call {
      * when an upgrade request has been completed or failed.
      */
     public void setSessionModificationState(int state) {
-        if (state == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-            Log.e(this,
-                    "setSessionModificationState not valid for RECEIVED_UPGRADE_TO_VIDEO_REQUEST");
-            return;
-        }
-
         boolean hasChanged = mSessionModificationState != state;
         mSessionModificationState = state;
         Log.d(this, "setSessionModificationState " + state + " mSessionModificationState="
