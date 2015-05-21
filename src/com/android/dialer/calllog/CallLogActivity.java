@@ -245,9 +245,10 @@ public class CallLogActivity extends Activity implements CallLogQueryHandler.Lis
 
         mHandler.removeCallbacks(mWaitForVoicemailTimeoutRunnable);
         // Update mHasActiveVoicemailProvider, which controls the number of tabs displayed.
-        int activeSources = mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
-        if (activeSources > 0 != mHasActiveVoicemailProvider) {
-            mHasActiveVoicemailProvider = activeSources > 0;
+        boolean hasActiveVoicemailProvider =
+                mVoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor) > 0;
+        if (hasActiveVoicemailProvider != mHasActiveVoicemailProvider) {
+            mHasActiveVoicemailProvider = hasActiveVoicemailProvider;
             mViewPagerAdapter.notifyDataSetChanged();
             mViewPagerTabs.setViewPager(mViewPager);
             if (mSwitchToVoicemailTab) {

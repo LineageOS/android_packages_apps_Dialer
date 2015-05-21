@@ -471,11 +471,18 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_voicemail_title">Voicemail</string>
 
+    <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
+         [CHAR LIMIT=40] -->
     <string name="tab_speed_dial">Speed dial</string>
 
+    <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
     <string name="tab_recents">Recents</string>
 
+    <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
     <string name="tab_all_contacts">Contacts</string>
+
+    <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
+    <string name="tab_voicemail">Voicemail</string>
 
     <!--  Text displayed when user swipes out a favorite contact -->
     <string name="favorite_hidden">Removed from favorites</string>
