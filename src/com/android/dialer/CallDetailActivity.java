@@ -62,9 +62,6 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackFragment;
-import com.android.dialer.voicemail.VoicemailStatusHelper;
-import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
-import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
 import java.util.List;
 
