@@ -226,7 +226,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                 dialogFragment.setListener(mSelectAcctListener);
             }
         }
-
         mInCallOrientationEventListener = new InCallOrientationEventListener(this);
 
         Log.d(this, "onCreate(): exit");
