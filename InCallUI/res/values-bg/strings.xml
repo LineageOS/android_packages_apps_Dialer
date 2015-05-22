@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Видеообаждане"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Заявява се видеовръзка"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Видеообаждането не може да се осъществи"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Заявката за видео е отхвърлена"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Видеообаждане (на пауза)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Номер за обратно обаждане\n– <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Номер за спешно обратно обаждане\n– <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Набира се"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> часа</item>
       <item quantity="one">1 час</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"Снимка на потребителския профил"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"Камерата е изключена"</string>
 </resources>

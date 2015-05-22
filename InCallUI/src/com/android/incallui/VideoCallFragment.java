@@ -31,6 +31,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.android.phone.common.animation.AnimUtils;
 import com.google.common.base.Objects;
 
 /**
@@ -104,6 +105,8 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * {@code True} if in landscape mode.
      */
     private boolean mIsLandscape;
+
+    private int mAnimationDuration;
 
     /**
      * Inner-class representing a {@link TextureView} and its associated {@link SurfaceTexture} and
@@ -419,6 +422,8 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
     }
 
     /**
@@ -473,13 +478,6 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         Log.d(this, "onViewCreated: VideoSurfacesInUse=" + sVideoSurfacesInUse);
 
         mVideoViewsStub = (ViewStub) view.findViewById(R.id.videoCallViewsStub);
-
-        // If the surfaces are already in use, we have just changed orientation or otherwise
-        // re-created the fragment.  In this case we need to inflate the video call views and
-        // restore the surfaces.
-        if (sVideoSurfacesInUse) {
-            inflateVideoCallViews();
-        }
     }
 
     @Override
@@ -586,6 +584,30 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     @Override
     public ImageView getPreviewPhotoView() {
         return mPreviewPhoto;
+    }
+
+    /**
+     * Adjusts the location of the video preview view by the specified offset.
+     *
+     * @param shiftUp {@code true} if the preview should shift up, {@code false} if it should shift
+     *      down.
+     * @param offset The offset.
+     */
+    @Override
+    public void adjustPreviewLocation(boolean shiftUp, int offset) {
+        if (sPreviewSurface == null || mPreviewVideoContainer == null) {
+            return;
+        }
+
+        // Set the position of the secondary call info card to its starting location.
+        mPreviewVideoContainer.setTranslationY(shiftUp ? 0 : -offset);
+
+        // Animate the secondary card info slide up/down as it appears and disappears.
+        mPreviewVideoContainer.animate()
+                .setInterpolator(AnimUtils.EASE_OUT_EASE_IN)
+                .setDuration(mAnimationDuration)
+                .translationY(shiftUp ? -offset : 0)
+                .start();
     }
 
     private void onPresenterChanged(VideoCallPresenter presenter) {

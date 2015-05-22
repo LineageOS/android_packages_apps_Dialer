@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"แฮงเอาท์วิดีโอ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"กำลังขอวิดีโอ"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"ไม่สามารถเชื่อมต่อแฮงเอาท์วิดีโอได้"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"คำขอวิดีโอถูกปฏิเสธ"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"แฮงเอาท์วิดีโอ (หยุดชั่วคราว)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"หมายเลขโทรกลับของคุณ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"หมายเลขโทรกลับฉุกเฉินของคุณ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"กำลังโทรออก"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ชั่วโมง</item>
       <item quantity="one">1 ชั่วโมง</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"รูปโปรไฟล์"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"ปิดกล้อง"</string>
 </resources>

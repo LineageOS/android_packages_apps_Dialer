@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videopoziv"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Zahtijevanje videopiziva"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Videopoziv nije uspostavljen"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Zahtjev za videopoziv odbijen"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videopoziv (pauziran)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Vaš broj za povratni poziv\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Vaš broj za povratni poziv za hitne službe\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Biranje broja"</string>
@@ -170,6 +170,4 @@
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> sata</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sati</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"Fotografija na profilu"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"Fotoaparat je isključen"</string>
 </resources>

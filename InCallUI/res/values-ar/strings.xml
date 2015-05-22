@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"مكالمة فيديو"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"جارٍ طلب الفيديو"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"يتعذر إجراء مكالمة فيديو"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"تم رفض طلب مكالمة الفيديو"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"مكالمة فيديو (تم إيقافها مؤقتًا)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"رقم معاودة الاتصال\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"رقم معاودة اتصال الطوارئ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"جارٍ الطلب"</string>
@@ -179,6 +179,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> من الساعات</item>
       <item quantity="one">ساعة واحدة</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"صورة الملف الشخصي"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"تم إيقاف الكاميرا"</string>
 </resources>

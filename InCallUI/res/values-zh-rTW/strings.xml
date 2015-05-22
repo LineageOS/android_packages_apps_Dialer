@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"視訊通話"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"提出視訊要求"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"無法建立視訊通話連線"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"視訊通話請求遭拒"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"視訊通話 (已暫停)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"您的回撥號碼如下\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"您的緊急回撥號碼如下\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"撥號中"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 小時</item>
       <item quantity="one">1 小時</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"個人資料相片"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"關閉相機"</string>
 </resources>

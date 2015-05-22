@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videokõne"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Video taotlemine"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Videokõnet ei õnnestu ühendada"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videotaotlus lükati tagasi"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videokõne (peatatud)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Teie tagasihelistamise number\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Teie hädaabikõne tagasihelistamise number\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Valimine"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> tundi</item>
       <item quantity="one">1 tund</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"Profiilifoto"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"Kaamera lülitatakse välja"</string>
 </resources>

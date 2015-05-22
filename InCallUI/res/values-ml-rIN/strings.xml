@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"വീഡിയോ കോള്‍"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"വീഡിയോ അഭ്യർത്ഥിക്കുന്നു"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"വീഡിയോ കോളുമായി കണക്‌റ്റുചെയ്യാനാവില്ല"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"വീഡിയോ അഭ്യർത്ഥന നിരസിച്ചു"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"വീഡിയോ കോൾ (താൽക്കാലികമായി നിർത്തി)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"നിങ്ങൾ തിരിച്ചുവിളിക്കേണ്ട നമ്പർ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"അടിയന്തിരമായി നിങ്ങൾ തിരിച്ചുവിളിക്കേണ്ട നമ്പർ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ഡയൽ ചെയ്യുന്നു"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> മണിക്കൂർ</item>
       <item quantity="one">1 മണിക്കൂർ</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"പ്രൊഫൈല്‍ ഫോട്ടോ"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"ക്യാമറ ഓഫാക്കുക"</string>
 </resources>

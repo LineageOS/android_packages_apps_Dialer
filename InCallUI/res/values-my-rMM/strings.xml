@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ဗွီဒီယိုကို တောင်းဆိုနေ"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"ဗွီဒီယို ခေါ်ဆိုမှု မပြုနိုင်။"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"ဗီဒီယို တောင်းဆိုချက် ပယ်ချ၏"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"ဗီဒီယိုခေါ်ဆိုမှု (ရပ်ထားသည်)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"သင့်အား ပြန်ခေါ်ရန် နံပါတ်\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"သင့် အရေးပေါ် ပြန်ခေါ်ရန် နံပါတ်\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ဖုန်းခေါ်နေစဉ်"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> နာရီများ</item>
       <item quantity="one">၁ နာရီ</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"ပရိုဖိုင် ဓာတ်ပုံ"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"ကင်မရာ ပိတ်ရန်"</string>
 </resources>

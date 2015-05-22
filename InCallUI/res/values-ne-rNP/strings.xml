@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"भिडियो कल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"भिडियो अनुरोध"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"भिडियो कल जडान गर्न सक्दैन"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"भिडियो अनुरोध अस्वीकार गरियो"</string>
+    <string name="card_title_video_call_paused" msgid="3753261320787432731">"भिडियो कल (पज गरिएको)"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"तपाईंको कलब्याक नम्बर \n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"तपाईंको आपतकालिन कलब्याक नम्बर \n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"डायल गर्ने"</string>
@@ -167,6 +167,4 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> घन्टा</item>
       <item quantity="one">१ घन्टा</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"प्रोफाइल तस्बिर"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"क्यामेरा बन्द"</string>
 </resources>
