@@ -160,6 +160,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private boolean mCallStateLabelResetPending = false;
     private Handler mHandler;
 
+    /**
+     * Determines if secondary call info is populated in the secondary call info UI.
+     */
+    private boolean mHasSecondaryCallInfo = false;
+
     @Override
     public CallCardPresenter.CallCardUi getUi() {
         return this;
@@ -501,15 +506,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-            String providerLabel, boolean isConference, boolean isVideoCall) {
-
-        if (show != mSecondaryCallInfo.isShown()) {
-            updateFabPositionForSecondaryCallInfo();
-        }
+            String providerLabel, boolean isConference, boolean isVideoCall, boolean isFullscreen) {
 
         if (show) {
+            mHasSecondaryCallInfo = true;
             boolean hasProvider = !TextUtils.isEmpty(providerLabel);
-            showAndInitializeSecondaryCallInfo(hasProvider);
+            initializeSecondaryCallInfo(hasProvider);
+
+            // Do not show the secondary caller info in fullscreen mode, but ensure it is populated
+            // in case fullscreen mode is exited in the future.
+            setSecondaryInfoVisible(!isFullscreen);
 
             mSecondaryCallConferenceCallIcon.setVisibility(isConference ? View.VISIBLE : View.GONE);
             mSecondaryCallVideoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
@@ -527,8 +533,92 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
             mSecondaryCallName.setTextDirection(nameDirection);
         } else {
-            mSecondaryCallInfo.setVisibility(View.GONE);
+            mHasSecondaryCallInfo = false;
+            setSecondaryInfoVisible(false);
         }
+    }
+
+    /**
+     * Sets the visibility of the secondary caller info box.  Note, if the {@code visible} parameter
+     * is passed in {@code true}, and there is no secondary caller info populated (as determined by
+     * {@code mHasSecondaryCallInfo}, the secondary caller info box will not be shown.
+     *
+     * @param visible {@code true} if the secondary caller info should be shown, {@code false}
+     *      otherwise.
+     */
+    @Override
+    public void setSecondaryInfoVisible(final boolean visible) {
+        boolean wasVisible = mSecondaryCallInfo.isShown();
+        final boolean isVisible = visible && mHasSecondaryCallInfo;
+        Log.v(this, "setSecondaryInfoVisible: wasVisible = " + wasVisible + " isVisible = "
+                + isVisible);
+
+        // If visibility didn't change, nothing to do.
+        if (wasVisible == isVisible) {
+            return;
+        }
+
+        // If we are showing the secondary info, we need to show it before animating so that its
+        // height will be determined on layout.
+        if (isVisible) {
+            mSecondaryCallInfo.setVisibility(View.VISIBLE);
+        }
+
+        // We need to translate the secondary caller info, but we need to know its position after
+        // the layout has occurred so use a {@code ViewTreeObserver}.
+        final ViewTreeObserver observer = getView().getViewTreeObserver();
+        observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                // We don't want to continue getting called.
+                if (observer.isAlive()) {
+                    observer.removeOnPreDrawListener(this);
+                }
+
+                updateFabPositionForSecondaryCallInfo();
+
+                // Get the height of the secondary call info now, and then re-hide the view prior
+                // to doing the actual animation.
+                int secondaryHeight = mSecondaryCallInfo.getHeight();
+                if (isVisible) {
+                    mSecondaryCallInfo.setVisibility(View.GONE);
+                }
+                Log.v(this, "setSecondaryInfoVisible: secondaryHeight = " + secondaryHeight);
+
+                // Set the position of the secondary call info card to its starting location.
+                mSecondaryCallInfo.setTranslationY(visible ? secondaryHeight : 0);
+
+                // Animate the secondary card info slide up/down as it appears and disappears.
+                ViewPropertyAnimator secondaryInfoAnimator = mSecondaryCallInfo.animate()
+                        .setInterpolator(AnimUtils.EASE_OUT_EASE_IN)
+                        .setDuration(mVideoAnimationDuration)
+                        .translationY(isVisible ? 0 : secondaryHeight)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                if (!isVisible) {
+                                    mSecondaryCallInfo.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+                                if (isVisible) {
+                                    mSecondaryCallInfo.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+                secondaryInfoAnimator.start();
+
+                // Notify listeners of a change in the visibility of the secondary info. This is
+                // important when in a video call so that the video call presenter can shift the
+                // video preview up or down to accommodate the secondary caller info.
+                InCallPresenter.getInstance().notifySecondaryCallerInfoVisibilityChanged(visible,
+                        secondaryHeight);
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -843,9 +933,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return new CallStateLabel(callStateLabel, isAutoDismissing);
     }
 
-    private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {
-        mSecondaryCallInfo.setVisibility(View.VISIBLE);
-
+    private void initializeSecondaryCallInfo(boolean hasProvider) {
         // mSecondaryCallName is initialized here (vs. onViewCreated) because it is inaccessible
         // until mSecondaryCallInfo is inflated in the call above.
         if (mSecondaryCallName == null) {
