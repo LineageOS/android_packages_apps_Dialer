@@ -35,6 +35,7 @@ import android.provider.VoicemailContract.Voicemails;
 import android.util.Log;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
@@ -93,6 +94,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 Log.w(TAG, "Exception on background worker thread", e);
             } catch (IllegalArgumentException e) {
                 Log.w(TAG, "ContactsProvider not present on device", e);
+            } catch (SecurityException e) {
+                // Shouldn't happen if we are protecting the entry points correctly,
+                // but just in case.
+                Log.w(TAG, "No permission to access ContactsProvider.", e);
             }
         }
     }
@@ -124,7 +129,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      */
     public void fetchCalls(int callType, long newerThan) {
         cancelFetch();
-        fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
+        if (PermissionsUtil.hasPhonePermissions(mContext)) {
+            fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
+        } else {
+            updateAdapterData(null);
+        }
     }
 
     public void fetchCalls(int callType) {
@@ -187,6 +196,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /** Updates all new calls to mark them as old. */
     public void markNewCallsAsOld() {
+        if (!PermissionsUtil.hasPhonePermissions(mContext)) {
+            return;
+        }
         // Mark all "new" calls as not new anymore.
         StringBuilder where = new StringBuilder();
         where.append(Calls.NEW);
@@ -201,6 +213,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /** Updates all missed calls to mark them as read. */
     public void markMissedCallsAsRead() {
+        if (!PermissionsUtil.hasPhonePermissions(mContext)) {
+            return;
+        }
         // Mark all "new" calls as not new anymore.
         StringBuilder where = new StringBuilder();
         where.append(Calls.IS_READ).append(" = 0");
