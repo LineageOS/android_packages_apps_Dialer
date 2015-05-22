@@ -28,7 +28,7 @@
         <bitmap
             android:gravity="center"
             android:src="@drawable/ic_toolbar_video_off"
-            android:tint="@color/glowpad_call_widget_normal_tint"
+            android:tint="@color/glowpad_end_call_widget_normal_tint"
             android:autoMirrored="true" />
     </item>
 </layer-list>
