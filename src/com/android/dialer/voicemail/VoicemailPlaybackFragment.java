@@ -42,14 +42,9 @@ import android.widget.TextView;
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.R;
-import com.android.dialer.util.AsyncTaskExecutors;
-import com.android.ex.variablespeed.MediaPlayerProxy;
-import com.android.ex.variablespeed.VariableSpeed;
 
 import com.google.common.base.Preconditions;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.concurrent.GuardedBy;
@@ -74,9 +69,6 @@ public class VoicemailPlaybackFragment extends Fragment {
     };
 
     private VoicemailPlaybackPresenter mPresenter;
-    private static int mMediaPlayerRefCount = 0;
-    private static MediaPlayerProxy mMediaPlayerInstance;
-    private static ScheduledExecutorService mScheduledExecutorService;
     private View mPlaybackLayout;
 
     private PowerManager.WakeLock mProximityWakeLock;
@@ -108,11 +100,8 @@ public class VoicemailPlaybackFragment extends Fragment {
 
         mPresenter = new VoicemailPlaybackPresenter(
                 createPlaybackViewImpl(),
-                getMediaPlayerInstance(),
                 voicemailUri,
-                getScheduledExecutorServiceInstance(),
                 startPlayback,
-                AsyncTaskExecutors.createAsyncTaskExecutor(),
                 mProximityWakeLock);
         mPresenter.onCreate(savedInstanceState);
     }
@@ -136,17 +125,15 @@ public class VoicemailPlaybackFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        shutdownMediaPlayer();
-        mPresenter.onDestroy();
-        super.onDestroy();
+    public void onPause() {
+        mPresenter.onPause();
+        super.onPause();
     }
 
     @Override
-    public void onPause() {
-        releaseProximitySensor(false /* waitForFarState */);
-        mPresenter.onPause();
-        super.onPause();
+    public void onDestroy() {
+        mPresenter.onDestroy();
+        super.onDestroy();
     }
 
     private PlaybackViewImpl createPlaybackViewImpl() {
@@ -154,64 +141,7 @@ public class VoicemailPlaybackFragment extends Fragment {
                 mPlaybackLayout);
     }
 
-    private static synchronized MediaPlayerProxy getMediaPlayerInstance() {
-        ++mMediaPlayerRefCount;
-        if (mMediaPlayerInstance == null) {
-            mMediaPlayerInstance = VariableSpeed.createVariableSpeed(
-                    getScheduledExecutorServiceInstance());
-        }
-        return mMediaPlayerInstance;
-    }
-
-    private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
-        if (mScheduledExecutorService == null) {
-            mScheduledExecutorService = Executors.newScheduledThreadPool(
-                    NUMBER_OF_THREADS_IN_POOL);
-        }
-        return mScheduledExecutorService;
-    }
-
-    private static synchronized void shutdownMediaPlayer() {
-        --mMediaPlayerRefCount;
-        if (mMediaPlayerRefCount > 0) {
-            return;
-        }
-        if (mScheduledExecutorService != null) {
-            mScheduledExecutorService.shutdown();
-            mScheduledExecutorService = null;
-        }
-        if (mMediaPlayerInstance != null) {
-            mMediaPlayerInstance.release();
-            mMediaPlayerInstance = null;
-        }
-    }
-
-    private void acquireProximitySensor() {
-        if (mProximityWakeLock == null) {
-            return;
-        }
-        if (!mProximityWakeLock.isHeld()) {
-            Log.i(TAG, "Acquiring proximity wake lock");
-            mProximityWakeLock.acquire();
-        } else {
-            Log.i(TAG, "Proximity wake lock already acquired");
-        }
-    }
-
-    private void releaseProximitySensor(boolean waitForFarState) {
-        if (mProximityWakeLock == null) {
-            return;
-        }
-        if (mProximityWakeLock.isHeld()) {
-            Log.i(TAG, "Releasing proximity wake lock");
-            int flags = waitForFarState ? PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY : 0;
-            mProximityWakeLock.release(flags);
-        } else {
-            Log.i(TAG, "Proximity wake lock already released");
-        }
-    }
-
-    /**
+     /**
      * Formats a number of milliseconds as something that looks like {@code 00:05}.
      * <p>
      * We always use four digits, two for minutes two for seconds.  In the very unlikely event
@@ -318,24 +248,6 @@ public class VoicemailPlaybackFragment extends Fragment {
         @Override
         public void playbackStopped() {
             mStartStopButton.setImageResource(R.drawable.ic_play);
-        }
-
-        @Override
-        public void enableProximitySensor() {
-            // Only change the state if the activity is still around.
-            Activity activity = mActivityReference.get();
-            if (activity != null) {
-                acquireProximitySensor();
-            }
-        }
-
-        @Override
-        public void disableProximitySensor() {
-            // Only change the state if the activity is still around.
-            Activity activity = mActivityReference.get();
-            if (activity != null) {
-                releaseProximitySensor(true /* waitForFarState */);
-            }
         }
 
         @Override

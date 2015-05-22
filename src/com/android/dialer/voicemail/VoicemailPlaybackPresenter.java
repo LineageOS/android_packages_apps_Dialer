@@ -26,17 +26,22 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutor;
+import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.ex.variablespeed.MediaPlayerProxy;
 import com.android.ex.variablespeed.SingleThreadedMediaPlayerProxy;
+import com.android.ex.variablespeed.VariableSpeed;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -61,6 +66,7 @@ import javax.annotation.concurrent.ThreadSafe;
 @NotThreadSafe
 @VisibleForTesting
 public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
+    private static final String TAG = VoicemailPlaybackPresenter.class.getSimpleName();
     /** The stream used to playback voicemail. */
     private static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
 
@@ -88,8 +94,6 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         void setFetchContentTimeout();
         void registerContentObserver(Uri uri, ContentObserver observer);
         void unregisterContentObserver(ContentObserver observer);
-        void enableProximitySensor();
-        void disableProximitySensor();
         void setVolumeControlStream(int streamType);
     }
 
@@ -101,6 +105,7 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         RESET_PREPARE_START_MEDIA_PLAYER,
     }
 
+    private static final int NUMBER_OF_THREADS_IN_POOL = 2;
     /** Update rate for the slider, 30fps. */
     private static final int SLIDER_UPDATE_PERIOD_MILLIS = 1000 / 30;
     /** Time our ui will wait for content to be fetched before reporting not available. */
@@ -127,16 +132,19 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      */
     private final AtomicInteger mDuration = new AtomicInteger(0);
 
-    private final PlaybackView mView;
-    private final MediaPlayerProxy mPlayer;
-    private final PositionUpdater mPositionUpdater;
+    private MediaPlayerProxy mPlayer;
+    private static int mMediaPlayerRefCount = 0;
+    private static MediaPlayerProxy mMediaPlayerInstance;
 
+    private final PlaybackView mView;
+    private final PositionUpdater mPositionUpdater;
     /** Voicemail uri to play. */
     private final Uri mVoicemailUri;
     /** Start playing in onCreate iff this is true. */
     private final boolean mStartPlayingImmediately;
     /** Used to run async tasks that need to interact with the ui. */
     private final AsyncTaskExecutor mAsyncTaskExecutor;
+    private static ScheduledExecutorService mScheduledExecutorService;
 
     /**
      * Used to handle the result of a successful or time-out fetch result.
@@ -144,23 +152,33 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      * This variable is thread-contained, accessed only on the ui thread.
      */
     private FetchResultHandler mFetchResultHandler;
-    private PowerManager.WakeLock mWakeLock;
+    private PowerManager.WakeLock mProximityWakeLock;
     private AsyncTask<Void, ?, ?> mPrepareTask;
     private int mPosition;
     private boolean mPlaying;
     private AudioManager mAudioManager;
 
-    public VoicemailPlaybackPresenter(PlaybackView view, MediaPlayerProxy player,
-            Uri voicemailUri, ScheduledExecutorService executorService,
-            boolean startPlayingImmediately, AsyncTaskExecutor asyncTaskExecutor,
+    public VoicemailPlaybackPresenter(
+            PlaybackView view,
+            Uri voicemailUri,
+            boolean startPlayingImmediately,
             PowerManager.WakeLock wakeLock) {
         mView = view;
-        mPlayer = player;
         mVoicemailUri = voicemailUri;
         mStartPlayingImmediately = startPlayingImmediately;
-        mAsyncTaskExecutor = asyncTaskExecutor;
-        mPositionUpdater = new PositionUpdater(executorService, SLIDER_UPDATE_PERIOD_MILLIS);
-        mWakeLock = wakeLock;
+        mPositionUpdater = new PositionUpdater(
+                getScheduledExecutorServiceInstance(), SLIDER_UPDATE_PERIOD_MILLIS);
+        mProximityWakeLock = wakeLock;
+
+        mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
+        mPlayer = VariableSpeed.createVariableSpeed(getScheduledExecutorServiceInstance());
+
+        ++mMediaPlayerRefCount;
+        if (mMediaPlayerInstance == null) {
+            mMediaPlayerInstance = VariableSpeed.createVariableSpeed(
+                    getScheduledExecutorServiceInstance());
+        }
+        mPlayer = mMediaPlayerInstance;
     }
 
     public void onCreate(Bundle bundle) {
@@ -355,18 +373,62 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
     }
 
     public void onDestroy() {
+        --mMediaPlayerRefCount;
+        if (mMediaPlayerRefCount == 0) {
+            if (mScheduledExecutorService != null) {
+                mScheduledExecutorService.shutdown();
+                mScheduledExecutorService = null;
+            }
+            if (mPlayer != null) {
+                mPlayer.release();
+                mPlayer = null;
+            }
+        }
+
         if (mPrepareTask != null) {
             mPrepareTask.cancel(false);
             mPrepareTask = null;
         }
-        mPlayer.release();
         if (mFetchResultHandler != null) {
             mFetchResultHandler.destroy();
             mFetchResultHandler = null;
         }
         mPositionUpdater.stopUpdating();
-        if (mWakeLock.isHeld()) {
-            mWakeLock.release();
+        if (mProximityWakeLock.isHeld()) {
+            mProximityWakeLock.release();
+        }
+    }
+
+    private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
+        if (mScheduledExecutorService == null) {
+            mScheduledExecutorService = Executors.newScheduledThreadPool(
+                    NUMBER_OF_THREADS_IN_POOL);
+        }
+        return mScheduledExecutorService;
+    }
+
+    private void enableProximitySensor() {
+        if (mProximityWakeLock == null) {
+            return;
+        }
+        if (!mProximityWakeLock.isHeld()) {
+            Log.i(TAG, "Acquiring proximity wake lock");
+            mProximityWakeLock.acquire();
+        } else {
+            Log.i(TAG, "Proximity wake lock already acquired");
+        }
+    }
+
+    private void disableProximitySensor(boolean waitForFarState) {
+        if (mProximityWakeLock == null) {
+            return;
+        }
+        if (mProximityWakeLock.isHeld()) {
+            Log.i(TAG, "Releasing proximity wake lock");
+            int flags = waitForFarState ? PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY : 0;
+            mProximityWakeLock.release(flags);
+        } else {
+            Log.i(TAG, "Proximity wake lock already released");
         }
     }
 
@@ -439,12 +501,12 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
                     mPlayer.start();
                     setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), true);
                     mView.playbackStarted();
-                    if (!mWakeLock.isHeld()) {
-                        mWakeLock.acquire();
+                    if (!mProximityWakeLock.isHeld()) {
+                        mProximityWakeLock.acquire();
                     }
                     // Only enable if we are not currently using the speaker phone.
                     if (!mView.isSpeakerPhoneOn()) {
-                        mView.enableProximitySensor();
+                        enableProximitySensor();
                     }
                     // Can throw RejectedExecutionException
                     mPositionUpdater.startUpdating(startPosition, duration);
@@ -504,11 +566,11 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         getAudioManager().abandonAudioFocus(this);
         mPositionUpdater.stopUpdating();
         mView.playbackStopped();
-        if (mWakeLock.isHeld()) {
-            mWakeLock.release();
+        if (mProximityWakeLock.isHeld()) {
+            mProximityWakeLock.release();
         }
         // Always disable on stop.
-        mView.disableProximitySensor();
+        disableProximitySensor(true /* waitForFarState */);
         mView.setClipPosition(clipPosition, duration);
         if (mPlayer.isPlaying()) {
             mPlayer.pause();
@@ -557,10 +619,10 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
             if (mPlayer.isPlaying() && previousState) {
                 // If we are currently playing and we are disabling the speaker phone, enable the
                 // sensor.
-                mView.enableProximitySensor();
+                enableProximitySensor();
             } else {
                 // If we are not currently playing, disable the sensor.
-                mView.disableProximitySensor();
+                disableProximitySensor(true /* waitForFarState */);
             }
         }
     }
@@ -641,9 +703,8 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
             mPrepareTask.cancel(false);
             mPrepareTask = null;
         }
-        if (mWakeLock.isHeld()) {
-            mWakeLock.release();
-        }
+
+        disableProximitySensor(false /* waitForFarState */);
     }
 
     private static int constrain(int amount, int low, int high) {
