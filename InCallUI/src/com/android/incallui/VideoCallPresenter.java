@@ -784,21 +784,50 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             Log.e(this, "showVideoUi, VideoCallUi is null returning");
             return;
         }
-        boolean isPaused = VideoProfile.VideoState.isPaused(videoState);
-        boolean isCallActive = callState == Call.State.ACTIVE;
-        if (VideoProfile.VideoState.isBidirectional(videoState)) {
-            ui.showVideoViews(true, !isPaused && isCallActive);
-        } else if (VideoProfile.VideoState.isTransmissionEnabled(videoState)) {
-            ui.showVideoViews(true, false);
-        } else if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
-            ui.showVideoViews(false, !isPaused && isCallActive);
-            loadProfilePhotoAsync();
+        boolean showIncomingVideo = showIncomingVideo(videoState, callState);
+        boolean showOutgoingVideo = showOutgoingVideo(videoState);
+        Log.v(this, "showVideoUi : showIncoming = " + showIncomingVideo + " showOutgoing = "
+                + showOutgoingVideo);
+        if (showIncomingVideo || showOutgoingVideo) {
+            ui.showVideoViews(showOutgoingVideo, showIncomingVideo);
+
+            if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
+                loadProfilePhotoAsync();
+            }
         } else {
             ui.hideVideoUi();
         }
 
         InCallPresenter.getInstance().enableScreenTimeout(
                 VideoProfile.VideoState.isAudioOnly(videoState));
+    }
+
+    /**
+     * Determines if the incoming video surface should be shown based on the current videoState and
+     * callState.  The video surface is shown when incoming video is not paused, the call is active,
+     * and video reception is enabled.
+     *
+     * @param videoState The current video state.
+     * @param callState The current call state.
+     * @return {@code true} if the incoming video surface should be shown, {@code false} otherwise.
+     */
+    public static boolean showIncomingVideo(int videoState, int callState) {
+        boolean isPaused = VideoProfile.VideoState.isPaused(videoState);
+        boolean isCallActive = callState == Call.State.ACTIVE;
+
+        return !isPaused && isCallActive && VideoProfile.VideoState.isReceptionEnabled(videoState);
+    }
+
+    /**
+     * Determines if the outgoing video surface should be shown based on the current videoState.
+     * The video surface is shown if video transmission is enabled.
+     *
+     * @param videoState The current video state.
+     * @return {@code true} if the the outgoing video surface should be shown, {@code false}
+     *      otherwise.
+     */
+    public static boolean showOutgoingVideo(int videoState) {
+        return VideoProfile.VideoState.isTransmissionEnabled(videoState);
     }
 
     /**
