@@ -585,7 +585,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.floating_action_button:
-                if (mListsFragment.getTabPosition() == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+                if (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
                     DialerUtils.startActivityWithErrorToast(
                             this,
                             IntentUtil.getNewContactIntent(),
@@ -1162,25 +1162,25 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        position = mListsFragment.getRtlPosition(position);
-        // Only scroll the button when the first tab is selected. The button should scroll from
-        // the middle to right position only on the transition from the first tab to the second
-        // tab.
-        // If the app is in RTL mode, we need to check against the second tab, rather than the
-        // first. This is because if we are scrolling between the first and second tabs, the
-        // viewpager will report that the starting tab position is 1 rather than 0, due to the
-        // reversal of the order of the tabs.
-        final boolean isLayoutRtl = DialerUtils.isRtl();
-        final boolean shouldScrollButton = position == (isLayoutRtl
-                ? ListsFragment.TAB_INDEX_RECENTS : ListsFragment.TAB_INDEX_SPEED_DIAL);
-        if (shouldScrollButton && !mIsLandscape) {
-            mFloatingActionButtonController.onPageScrolled(
-                    isLayoutRtl ? 1 - positionOffset : positionOffset);
-        } else if (position != ListsFragment.TAB_INDEX_SPEED_DIAL) {
+        int tabIndex = mListsFragment.getCurrentTabIndex();
+
+        // Scroll the button from center to end when moving from the Speed Dial to Recents tab.
+        // In RTL, scroll when the current tab is Recents instead of Speed Dial, because the order
+        // of the tabs is reversed and the ViewPager returns the left tab position during scroll.
+        boolean isRtl = DialerUtils.isRtl();
+        if (!isRtl && tabIndex == ListsFragment.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
+            mFloatingActionButtonController.onPageScrolled(positionOffset);
+        } else if (isRtl && tabIndex == ListsFragment.TAB_INDEX_RECENTS && !mIsLandscape) {
+            mFloatingActionButtonController.onPageScrolled(1 - positionOffset);
+        } else if (tabIndex != ListsFragment.TAB_INDEX_SPEED_DIAL) {
             mFloatingActionButtonController.onPageScrolled(1);
         }
+    }
 
-        if (position == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+    @Override
+    public void onPageSelected(int position) {
+        int tabIndex = mListsFragment.getCurrentTabIndex();
+        if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.ic_person_add_24dp),
                     getResources().getString(R.string.search_shortcut_create_new_contact));
@@ -1189,10 +1189,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     getResources().getDrawable(R.drawable.fab_ic_dial),
                     getResources().getString(R.string.action_menu_dialpad_button));
         }
-    }
-
-    @Override
-    public void onPageSelected(int position) {
     }
 
     @Override
@@ -1239,7 +1235,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private void updateFloatingActionButtonControllerAlignment(boolean animate) {
         int align = (!mIsLandscape &&
-                mListsFragment.getTabPosition() == ListsFragment.TAB_INDEX_SPEED_DIAL) ?
+                mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_SPEED_DIAL) ?
                 FloatingActionButtonController.ALIGN_MIDDLE :
                         FloatingActionButtonController.ALIGN_END;
         mFloatingActionButtonController.align(align, 0 /* offsetX */, 0 /* offsetY */, animate);

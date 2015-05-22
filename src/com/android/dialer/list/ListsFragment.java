@@ -62,9 +62,6 @@ public class ListsFragment extends Fragment
     // Oldest recents entry to display is 2 weeks old.
     private static final long OLDEST_RECENTS_DATE = 1000L * 60 * 60 * 24 * 14;
 
-    private static final String KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE =
-            "key_last_dismissed_call_shortcut_date";
-
     public interface HostInterface {
         public ActionBarController getActionBarController();
     }
@@ -92,18 +89,7 @@ public class ListsFragment extends Fragment
     /**
      * The position of the currently selected tab.
      */
-    private int mTabPosition = TAB_INDEX_SPEED_DIAL;
-
-    /**
-     * Call shortcuts older than this date (persisted in shared preferences) will not show up in
-     * at the top of the screen
-     */
-    private long mLastCallShortcutDate = 0;
-
-    /**
-     * The date of the current call shortcut that is showing on screen.
-     */
-    private long mCurrentCallShortcutDate = 0;
+    private int mTabIndex = TAB_INDEX_SPEED_DIAL;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -182,12 +168,9 @@ public class ListsFragment extends Fragment
     public void onResume() {
         Trace.beginSection(TAG + " onResume");
         super.onResume();
-        final SharedPreferences prefs = getActivity().getSharedPreferences(
-                DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        mLastCallShortcutDate = prefs.getLong(KEY_LAST_DISMISSED_CALL_SHORTCUT_DATE, 0);
         mActionBar = getActivity().getActionBar();
         if (getUserVisibleHint()) {
-            sendScreenViewForPosition(mViewPager.getCurrentItem());
+            sendScreenViewForCurrentPosition();
         }
 
         // Fetch voicemail status to determine if we should show the voicemail tab.
@@ -208,7 +191,7 @@ public class ListsFragment extends Fragment
         mViewPager = (ViewPager) parentView.findViewById(R.id.lists_pager);
         mViewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setOffscreenPageLimit(TAB_COUNT_DEFAULT - 1);
+        mViewPager.setOffscreenPageLimit(TAB_COUNT_WITH_VOICEMAIL - 1);
         mViewPager.setOnPageChangeListener(this);
         mViewPager.setCurrentItem(getRtlPosition(TAB_INDEX_SPEED_DIAL));
 
@@ -245,6 +228,8 @@ public class ListsFragment extends Fragment
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        mTabIndex = getRtlPosition(position);
+
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageScrolled(position, positionOffset,
@@ -254,13 +239,13 @@ public class ListsFragment extends Fragment
 
     @Override
     public void onPageSelected(int position) {
-        mTabPosition = getRtlPosition(position);
+        mTabIndex = getRtlPosition(position);
 
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
             mOnPageChangeListeners.get(i).onPageSelected(position);
         }
-        sendScreenViewForPosition(position);
+        sendScreenViewForCurrentPosition();
     }
 
     @Override
@@ -293,8 +278,8 @@ public class ListsFragment extends Fragment
         return false;
     }
 
-    public int getTabPosition() {
-        return mTabPosition;
+    public int getCurrentTabIndex() {
+        return mTabIndex;
     }
 
     public void showRemoveView(boolean show) {
@@ -316,7 +301,7 @@ public class ListsFragment extends Fragment
         return mRemoveView;
     }
 
-    public int getRtlPosition(int position) {
+    private int getRtlPosition(int position) {
         if (DialerUtils.isRtl()) {
             return mViewPagerAdapter.getCount() - 1 - position;
         }
@@ -324,15 +309,12 @@ public class ListsFragment extends Fragment
     }
 
     public void sendScreenViewForCurrentPosition() {
-        sendScreenViewForPosition(mViewPager.getCurrentItem());
-    }
-
-    private void sendScreenViewForPosition(int position) {
         if (!isResumed()) {
             return;
         }
+
         String fragmentName;
-        switch (getRtlPosition(position)) {
+        switch (getCurrentTabIndex()) {
             case TAB_INDEX_SPEED_DIAL:
                 fragmentName = SpeedDialFragment.class.getSimpleName();
                 break;
