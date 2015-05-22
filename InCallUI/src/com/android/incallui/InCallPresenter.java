@@ -992,21 +992,6 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     /**
-     * Called by the {@link CallCardPresenter} to inform of a change in visibility of the secondary
-     * caller info bar.
-     *
-     * @param isVisible {@code true} if the secondary caller info is visible, {@code false}
-     *      otherwise.
-     * @param height the height of the secondary caller info bar.
-     */
-    public void notifySecondaryCallerInfoVisibilityChanged(boolean isVisible, int height) {
-        for (InCallEventListener listener : mInCallEventListeners) {
-            listener.onSecondaryCallerInfoVisibilityChanged(isVisible, height);
-        }
-    }
-
-
-    /**
      * For some disconnected causes, we show a dialog.  This calls into the activity to show
      * the dialog if appropriate for the call.
      */
@@ -1633,7 +1618,6 @@ public class InCallPresenter implements CallList.Listener,
      */
     public interface InCallEventListener {
         public void onFullscreenModeChanged(boolean isFullscreenMode);
-        public void onSecondaryCallerInfoVisibilityChanged(boolean isVisible, int height);
     }
 
     public interface InCallUiListener {
