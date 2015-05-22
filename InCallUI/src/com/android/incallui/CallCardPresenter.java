@@ -74,7 +74,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private CallTimer mCallTimer;
     private Context mContext;
     private boolean mSpinnerShowing = false;
-    private boolean mIsFullscreen = false;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -604,7 +603,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mSecondary == null) {
             // Clear the secondary display info.
             ui.setSecondary(false, null, false, null, null, false /* isConference */,
-                    false /* isVideoCall */, mIsFullscreen);
+                    false /* isVideoCall */);
             return;
         }
 
@@ -616,8 +615,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     null /* label */,
                     getCallProviderLabel(mSecondary),
                     true /* isConference */,
-                    mSecondary.isVideoCall(mContext),
-                    mIsFullscreen);
+                    mSecondary.isVideoCall(mContext));
         } else if (mSecondaryContactInfo != null) {
             Log.d(TAG, "updateSecondaryDisplayInfo() " + mSecondaryContactInfo);
             String name = getNameForCall(mSecondaryContactInfo);
@@ -629,12 +627,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mSecondaryContactInfo.label,
                     getCallProviderLabel(mSecondary),
                     false /* isConference */,
-                    mSecondary.isVideoCall(mContext),
-                    mIsFullscreen);
+                    mSecondary.isVideoCall(mContext));
         } else {
             // Clear the secondary display info.
             ui.setSecondary(false, null, false, null, null, false /* isConference */,
-                    false /* isVideoCall */, mIsFullscreen);
+                    false /* isVideoCall */);
         }
     }
 
@@ -779,18 +776,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     @Override
     public void onFullscreenModeChanged(boolean isFullscreenMode) {
-        mIsFullscreen = isFullscreenMode;
         final CallCardUi ui = getUi();
         if (ui == null) {
             return;
         }
         ui.setCallCardVisible(!isFullscreenMode);
-        ui.setSecondaryInfoVisible(!isFullscreenMode);
-    }
-
-    @Override
-    public void onSecondaryCallerInfoVisibilityChanged(boolean isVisible, int height) {
-        // No-op - the Call Card is the origin of this event.
     }
 
     private boolean isPrimaryCallActive() {
@@ -838,9 +828,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isSipCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
-                String providerLabel, boolean isConference, boolean isVideoCall,
-                boolean isFullscreen);
-        void setSecondaryInfoVisible(boolean visible);
+                String providerLabel, boolean isConference, boolean isVideoCall);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
                 Drawable connectionIcon, String gatewayNumber, boolean isWifi,

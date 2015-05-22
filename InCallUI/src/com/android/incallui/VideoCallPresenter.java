@@ -233,7 +233,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().addOrientationListener(this);
         // To get updates of video call details changes
         InCallPresenter.getInstance().addDetailsListener(this);
-        InCallPresenter.getInstance().addInCallEventListener(this);
 
         // Register for surface and video events from {@link InCallVideoCallListener}s.
         InCallVideoCallCallbackNotifier.getInstance().addSurfaceChangeListener(this);
@@ -257,7 +256,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallPresenter.getInstance().removeDetailsListener(this);
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeOrientationListener(this);
-        InCallPresenter.getInstance().removeInCallEventListener(this);
 
         InCallVideoCallCallbackNotifier.getInstance().removeSurfaceChangeListener(this);
         InCallVideoCallCallbackNotifier.getInstance().removeVideoEventListener(this);
@@ -459,21 +457,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     @Override
     public void onFullscreenModeChanged(boolean isFullscreenMode) {
         cancelAutoFullScreen();
-    }
-
-    /**
-     * Handles changes to the visibility of the secondary caller info bar.
-     *
-     * @param isVisible {@code true} if the secondary caller info is showing, {@code false}
-     *      otherwise.
-     * @param height the height of the secondary caller info bar.
-     */
-    @Override
-    public void onSecondaryCallerInfoVisibilityChanged(boolean isVisible, int height) {
-        Log.d(this,
-                "onSecondaryCallerInfoVisibilityChanged : isVisible = " + isVisible + " height = "
-                        + height);
-        getUi().adjustPreviewLocation(isVisible /* shiftUp */, height);
     }
 
     private void checkForVideoStateChange(Call call) {
@@ -1316,6 +1299,5 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         Point getPreviewSize();
         void cleanupSurfaces();
         ImageView getPreviewPhotoView();
-        void adjustPreviewLocation(boolean shiftUp, int offset);
     }
 }
