@@ -96,4 +96,6 @@
   <string name="start_call_playback">播放录音</string>
   <string name="stop_call_playback">停止</string>
   <string name="call_playback_error_message">播放录音失败</string>
+  <string name="smart_dialer_title">智能呼叫</string>
+  <string name="smart_dialer_summary">移动设备到您的耳边时，自动呼叫该联系人</string>
 </resources>

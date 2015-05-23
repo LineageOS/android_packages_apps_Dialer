@@ -24,7 +24,7 @@
   <string name="recentCalls_callNumber"><xliff:g id="name">%s</xliff:g> uruffen</string>
   <string name="recentCalls_editNumberBeforeCall">Nr. virum Uruff änneren</string>
   <string name="recentCalls_addToContact">Bei d\'Kontakter dobäisetzen</string>
-  <string name="recentCalls_removeFromRecentList">Aus dem Uruffhistorique läschen</string>
+  <string name="recentCalls_removeFromRecentList">Aus dem Uruffhistorique geläscht</string>
   <string name="recentCalls_deleteAll">Uruffhistorique eidel maachen</string>
   <string name="recentCalls_trashVoicemail">Mailboxopnam läschen</string>
   <string name="recentCalls_shareVoicemail">Mailbox deelen</string>
@@ -154,6 +154,7 @@
   <string name="call_log_header_today">Haut</string>
   <string name="call_log_header_yesterday">Gëschter</string>
   <string name="call_log_header_other">Méi al</string>
+  <string name="call_detail_list_header">Urufflëscht</string>
   <string name="voicemail_speaker_on">Lautsprecher uschalten.</string>
   <string name="voicemail_speaker_off">Lautsprecher ausschalten.</string>
   <string name="voicemail_play_faster">Méi séier ofspillen.</string>

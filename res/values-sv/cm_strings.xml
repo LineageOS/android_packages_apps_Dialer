@@ -18,6 +18,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Platser i närheten</string>
   <string name="people">Personer</string>
+  <string name="lookup_settings_label">Telefonnummersökning</string>
+  <string name="enable_reverse_lookup_title">Omvänd sökning</string>
   <string name="t9_search_input_locale_default">Standard</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer för samtalsstatus</string>

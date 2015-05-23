@@ -96,4 +96,6 @@
   <string name="start_call_playback">Speel opname</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kon nie opname speel nie</string>
+  <string name="smart_dialer_title">Slim oproep</string>
+  <string name="smart_dialer_summary">Outomaties skakel kontak deur die beweging van jou toestel na jou oor</string>
 </resources>

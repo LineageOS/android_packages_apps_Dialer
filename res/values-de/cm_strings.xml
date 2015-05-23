@@ -96,4 +96,5 @@
   <string name="start_call_playback">Aufzeichnung abspielen</string>
   <string name="stop_call_playback">Anhalten</string>
   <string name="call_playback_error_message">Wiedergabe der Aufzeichnung fehlgeschlagen</string>
+  <string name="smart_dialer_summary">Kontakt automatisch anrufen, indem Sie das Gerät an Ihr Ohr führen</string>
 </resources>

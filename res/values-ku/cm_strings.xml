@@ -30,8 +30,8 @@
   <string name="people_lookup_provider_title">پێده‌ری گه‌ڕانی خه‌ڵک</string>
   <string name="reverse_lookup_provider_title">پێده‌ری گه‌ڕانی پێچه‌وانه‌</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
-  <string name="preference_category_t9_dialpad_search">گه‌ڕانی ته‌خته‌لێدانی T9</string>
-  <string name="t9_search_input_locale">نوسینی گه‌ڕان بۆ T9</string>
+  <string name="preference_category_t9_dialpad_search">گه‌ڕانی ته‌خته‌لێدانی T٩</string>
+  <string name="t9_search_input_locale">نوسینی گه‌ڕان بۆ T٩</string>
   <string name="t9_search_input_locale_default">بنه‌ڕه‌ت</string>
   <string name="type_blacklist">پەیوەندیە کە لە لیستی ڕەشن</string>
   <string name="call_log_stats_title">سەرژمێرەیەکان</string>
@@ -71,7 +71,7 @@
   <string name="speed_dial_settings">ڕێکبەندەکانی ژمارەگری خێرا</string>
   <string name="speed_dial_not_set">(دانەندراوە)</string>
   <string name="speed_dial_replace">جێگۆڕکردن</string>
-  <string name="speed_dial_delete">سڕینەوە؟</string>
+  <string name="speed_dial_delete">سڕینەوە</string>
   <string name="speed_dial_unassigned_dialog_title">کلیل تەرخان نەکراوە</string>
   <string name="speed_dial_unassigned_dialog_message">هیچ ژمارەیەک دیاری نەکراوە تەلەفۆنی خێرا \'<xliff:g id="number">%s</xliff:g>\'. Do you want to ئەتەوێت ئێستا دیاری بکەیت?</string>
   <string name="dialog_speed_dial_airplane_mode_message">بۆ بەکارهێنانی ژمارەگری خێرا، یەکەم دۆخی فڕۆکە بکوژێنەوە.</string>
@@ -82,9 +82,9 @@
   <string name="vibrate_call_waiting">له‌رینه‌وه‌ له‌کاتی چاوه‌ڕێ په‌یوه‌ندی</string>
   <string name="incall_vibrate_hangup_title">له‌رینه‌وه‌ له‌کاتی وازهێنان</string>
   <string name="incall_vibrate_45_title">له‌رینه‌وه‌ هه‌موو سه‌ری خوله‌کێک</string>
-  <string name="incall_vibrate_45_summary">له‌رینه‌وه‌ هه‌موو 45 چرکه‌یه‌ک له‌ خوله‌کێکدا</string>
+  <string name="incall_vibrate_45_summary">له‌رینه‌وه‌ هه‌موو ٤٥ چرکه‌یه‌ک له‌ خوله‌کێکدا</string>
   <string name="detailed_incall_info_title">زانیاری لەسەر تەلەفۆنەکە</string>
-  <string name="detailed_incall_info_summary">پیشاندانی زانیاری زیاتر لەسەر تەلەفۆنی هاتوو لەسەر شاشەکە</string>
+  <string name="detailed_incall_info_summary">پیشاندانی زانیاری زیاتر لەسەر تەلەفۆنی هاتوو لەسەر ڕونماکە</string>
   <string name="video_call">په‌یوه‌ندی وێنه‌یی</string>
   <string name="call_duration_active">ماوەی چالاکی:</string>
   <string name="call_duration_call_out">ماوەی پەیوەندیکردن:</string>
@@ -96,4 +96,6 @@
   <string name="start_call_playback">لێدانی تۆمارکردنه‌که‌</string>
   <string name="stop_call_playback">وه‌ستاندن</string>
   <string name="call_playback_error_message">نه‌توانرا تۆمارکراوه‌که‌ لێبدرێت</string>
+  <string name="smart_dialer_title">پەیوەندی زیرەک</string>
+  <string name="smart_dialer_summary">خۆکارانە تەلەفۆن بکە بە ناوەکان بە جوڵاندنی ئامێرەکە بۆ لای گوێت</string>
 </resources>
