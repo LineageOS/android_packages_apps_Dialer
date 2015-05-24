@@ -96,4 +96,6 @@
   <string name="start_call_playback">لێدانی تۆمارکردنه‌که‌</string>
   <string name="stop_call_playback">وه‌ستاندن</string>
   <string name="call_playback_error_message">نه‌توانرا تۆمارکراوه‌که‌ لێبدرێت</string>
+  <string name="smart_dialer_title">پەیوەندی زیرەک</string>
+  <string name="smart_dialer_summary">خۆکارانە تەلەفۆن بکە بە ناوەکان بە جوڵاندنی ئامێرەکە بۆ لای گوێت</string>
 </resources>

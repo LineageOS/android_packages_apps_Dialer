@@ -84,7 +84,7 @@
   <string name="incall_vibrate_45_title">Jede Minute vibrieren</string>
   <string name="incall_vibrate_45_summary">Während ausgehender Anrufe 15 Sekunden vor dem Ende jeder vollen Minute vibrieren</string>
   <string name="detailed_incall_info_title">Detaillierte Anruferinformationen</string>
-  <string name="detailed_incall_info_summary">Zusätzliche Informationen über den Anrufer bei eingehenden Anrufen anzeigen</string>
+  <string name="detailed_incall_info_summary">Bei eingehenden Anrufen zusätzliche Informationen über den Anrufer anzeigen</string>
   <string name="video_call">Video-Anruf</string>
   <string name="call_duration_active">Aktive Dauer:</string>
   <string name="call_duration_call_out">Gesprächsdauer:</string>
@@ -96,4 +96,5 @@
   <string name="start_call_playback">Aufzeichnung abspielen</string>
   <string name="stop_call_playback">Anhalten</string>
   <string name="call_playback_error_message">Wiedergabe der Aufzeichnung fehlgeschlagen</string>
+  <string name="smart_dialer_summary">Kontakt automatisch anrufen, indem Sie das Gerät an Ihr Ohr führen</string>
 </resources>

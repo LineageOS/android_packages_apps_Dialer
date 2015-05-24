@@ -96,4 +96,6 @@
   <string name="start_call_playback">Kaydı oynat</string>
   <string name="stop_call_playback">Durdur</string>
   <string name="call_playback_error_message">Kayıt oynatılamadı</string>
+  <string name="smart_dialer_title">Akıllı arama</string>
+  <string name="smart_dialer_summary">Cihazı kulağınıza götürünce kişiyi otomatik arar</string>
 </resources>
