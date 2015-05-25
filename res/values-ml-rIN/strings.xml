@@ -131,6 +131,7 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"സ്‌പീഡ് ഡയൽ"</string>
     <string name="tab_recents" msgid="929949073851377206">"പുതിയവ"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"കോണ്‍ടാക്റ്റുകള്‍"</string>
+    <string name="tab_voicemail" msgid="155024725947496746">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"പ്രിയപ്പെട്ടവയിൽ നിന്നും നീക്കംചെയ്‌തു"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"പഴയപടിയാക്കുക"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> എന്നതിൽ വിളിക്കുക"</string>

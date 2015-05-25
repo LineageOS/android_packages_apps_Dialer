@@ -132,6 +132,7 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_recents" msgid="929949073851377206">"ಇತ್ತೀಚಿನವುಗಳು"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"ಸಂಪರ್ಕಗಳು"</string>
+    <string name="tab_voicemail" msgid="155024725947496746">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ರದ್ದುಮಾಡು"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
