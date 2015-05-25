@@ -14,6 +14,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Allow recording for country: United Kingdom-->
+<!--Legal precedent source: http://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm -->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
