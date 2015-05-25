@@ -131,6 +131,7 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"Speed dial"</string>
     <string name="tab_recents" msgid="929949073851377206">"Recents"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contacts"</string>
+    <string name="tab_voicemail" msgid="155024725947496746">"Voicemail"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Removed from favourites"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Undo"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Call <xliff:g id="NUMBER">%s</xliff:g>"</string>
