@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videotrucada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"S\'està sol·licitant el vídeo"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"No es pot connectar la videotrucada"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videotrucada (en pausa)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"S\'ha rebutjat la sol·licitud de vídeo"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Número de devolució de trucada\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Número de devolució de trucada d\'emergència\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Marcatge"</string>
@@ -167,4 +167,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> hores</item>
       <item quantity="one">1 hora</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Foto de perfil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Càmera desactivada"</string>
 </resources>

@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"వీడియో కాల్"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"వీడియో కోసం అభ్యర్థిస్తోంది"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"వీడియో కాల్‌ను కనెక్ట్ చేయలేరు"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"వీడియో కాల్ (పాజ్ చేయబడింది)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"వీడియో అభ్యర్థన నిరాకరించబడింది"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"మీ కాల్‌బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"మీ అత్యవసర కాల్‌బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"డయల్ చేస్తోంది"</string>
@@ -167,4 +167,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> గంటలు</item>
       <item quantity="one">1 గంట</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"ప్రొఫైల్ ఫోటో"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"కెమెరా ఆఫ్‌లో ఉంది"</string>
 </resources>

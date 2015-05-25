@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"화상 통화"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"동영상 요청 중"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"화상 통화를 연결할 수 없습니다."</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"화상 통화(일시중지됨)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"동영상 요청 거부됨"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"콜백 번호\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"긴급 콜백 번호\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"전화 거는 중"</string>
@@ -167,4 +167,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>시간</item>
       <item quantity="one">1시간</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"프로필 사진"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"카메라 꺼짐"</string>
 </resources>

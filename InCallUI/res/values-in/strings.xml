@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Video call"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Meminta video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Tidak dapat menyambungkan video call"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Video call (Dijeda)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Permintaan video ditolak"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Nomor panggilan balik Anda\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Nomor panggilan balik darurat Anda\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Memanggil"</string>
@@ -167,4 +167,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> jam</item>
       <item quantity="one">1 jam</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Foto profil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Kamera tidak aktif"</string>
 </resources>

@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videoopkald"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Anmoder om video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Kan ikke forbinde videoopkald"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videoopkald (på pause)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoanmodningen blev afvist"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Dit tilbagekaldsnummer\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Dit tilbagekaldsnummer til nødopkald\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Ringer op"</string>
@@ -167,4 +167,6 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> timer</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> timer</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Profilfoto"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Sluk kamera"</string>
 </resources>
