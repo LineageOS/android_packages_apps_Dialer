@@ -37,6 +37,7 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
@@ -286,5 +287,15 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 paddingTop,
                 listView.getPaddingEnd(),
                 listView.getPaddingBottom());
+    }
+
+    @Override
+    protected void startLoading() {
+        if (PermissionsUtil.hasContactsPermissions(getActivity())) {
+            super.startLoading();
+        } else if (TextUtils.isEmpty(getQueryString())) {
+            // Clear out any existing call shortcuts.
+            getAdapter().setQueryString(null);
+        }
     }
 }
