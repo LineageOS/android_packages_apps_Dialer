@@ -257,6 +257,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
             menu.findItem(R.id.menu_import_export).setVisible(hasContactsPermission);
             menu.findItem(R.id.menu_add_contact).setVisible(hasContactsPermission);
+
+            menu.findItem(R.id.menu_history).setVisible(
+                    PermissionsUtil.hasPhonePermissions(DialtactsActivity.this));
             super.show();
         }
     }

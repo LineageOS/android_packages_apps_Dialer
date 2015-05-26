@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.util.TelecomUtil;
 
 /**
@@ -75,6 +76,10 @@ public class CallLogNotificationsService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent == null) {
             Log.d(TAG, "onHandleIntent: could not handle null intent");
+            return;
+        }
+
+        if (!PermissionsUtil.hasPhonePermissions(this)) {
             return;
         }
 
