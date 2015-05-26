@@ -459,9 +459,16 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     private void centerDisplayView(View displayVideo) {
         if (!mIsLandscape) {
+            ViewGroup.LayoutParams p = displayVideo.getLayoutParams();
+            int height = p.height;
+
             float spaceBesideCallCard = InCallPresenter.getInstance().getSpaceBesideCallCard();
-            float videoViewTranslation = displayVideo.getHeight() / 2
-                    - spaceBesideCallCard / 2;
+            // If space beside call card is zeo, layout hasn't happened yet so there is no point
+            // in attempting to center the view.
+            if (Math.abs(spaceBesideCallCard - 0.0f) < 0.0001) {
+                return;
+            }
+            float videoViewTranslation = height / 2  - spaceBesideCallCard / 2;
             displayVideo.setTranslationY(videoViewTranslation);
         }
     }
@@ -756,7 +763,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     @Override
     public void setDisplayVideoSize(int width, int height) {
-        Log.d(this, "setDisplayVideoSize: width=" + width + " height=" + height);
+        Log.v(this, "setDisplayVideoSize: width=" + width + " height=" + height);
         if (sDisplaySurface != null) {
             TextureView displayVideo = sDisplaySurface.getTextureView();
             if (displayVideo == null) {
