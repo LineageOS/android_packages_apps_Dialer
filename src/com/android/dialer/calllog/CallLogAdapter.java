@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
@@ -184,8 +185,9 @@ public class CallLogAdapter extends GroupingListAdapter
     public boolean onPreDraw() {
         // We only wanted to listen for the first draw (and this is it).
         unregisterPreDrawListener();
-
-        mContactInfoCache.start();
+        if (PermissionsUtil.hasContactsPermissions(mContext)) {
+            mContactInfoCache.start();
+        }
         return true;
     }
 
@@ -205,6 +207,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
         mContactInfoCache = new ContactInfoCache(
                 mContactInfoHelper, mOnContactInfoChangedListener);
+        if (!PermissionsUtil.hasContactsPermissions(context)) {
+            mContactInfoCache.disableRequestProcessing();
+        }
 
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
@@ -534,7 +539,7 @@ public class CallLogAdapter extends GroupingListAdapter
     @VisibleForTesting
     void disableRequestProcessingForTest() {
         // TODO: Remove this and test the cache directly.
-        mContactInfoCache.disableRequestProcessingForTest();
+        mContactInfoCache.disableRequestProcessing();
     }
 
     @VisibleForTesting

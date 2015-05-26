@@ -36,6 +36,7 @@ import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
@@ -485,7 +486,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      * Starts the database upgrade process in the background.
      */
     public void startSmartDialUpdateThread() {
-        new SmartDialUpdateAsyncTask().execute();
+        if (PermissionsUtil.hasContactsPermissions(mContext)) {
+            new SmartDialUpdateAsyncTask().execute();
+        }
     }
 
     private class SmartDialUpdateAsyncTask extends AsyncTask {
