@@ -188,7 +188,6 @@ public class CallLogFragment extends Fragment
                 mContactsObserver);
         resolver.registerContentObserver(Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
-        fetchCalls();
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -203,7 +202,7 @@ public class CallLogFragment extends Fragment
         // This will update the state of the "Clear call log" menu item.
         getActivity().invalidateOptionsMenu();
 
-        boolean showListView = cursor.getCount() > 0;
+        boolean showListView = cursor != null && cursor.getCount() > 0;
         mRecyclerView.setVisibility(showListView ? View.VISIBLE : View.GONE);
         mEmptyListView.setVisibility(!showListView ? View.VISIBLE : View.GONE);
 
@@ -266,6 +265,7 @@ public class CallLogFragment extends Fragment
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mEmptyListView = view.findViewById(R.id.empty_list_view);
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         boolean isShowingRecentsTab = mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT;
@@ -278,14 +278,13 @@ public class CallLogFragment extends Fragment
         mRecyclerView.setAdapter(mAdapter);
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
+        fetchCalls();
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mEmptyListView = view.findViewById(R.id.empty_list_view);
-
         updateEmptyMessage(mCallTypeFilter);
     }
 

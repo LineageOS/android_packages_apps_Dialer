@@ -1600,6 +1600,9 @@ public class DialpadFragment extends Fragment
      */
     private void queryLastOutgoingCall() {
         mLastNumberDialed = EMPTY_NUMBER;
+        if (!PermissionsUtil.hasPhonePermissions(getActivity())) {
+            return;
+        }
         CallLogAsync.GetLastOutgoingCallArgs lastCallArgs =
                 new CallLogAsync.GetLastOutgoingCallArgs(
                     getActivity(),
