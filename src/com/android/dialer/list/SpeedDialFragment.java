@@ -23,7 +23,6 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -43,12 +42,12 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 
@@ -194,7 +193,9 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         Trace.beginSection(TAG + " onResume");
         super.onResume();
 
-        getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+        if (PermissionsUtil.hasContactsPermissions(getActivity())) {
+            getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+        }
         Trace.endSection();
     }
 
@@ -286,7 +287,11 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         // Use initLoader() instead of restartLoader() to refraining unnecessary reload.
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
-        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+        if (PermissionsUtil.hasContactsPermissions(activity)) {
+            getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+        } else {
+            setEmptyViewVisibility(true);
+        }
     }
 
     /**

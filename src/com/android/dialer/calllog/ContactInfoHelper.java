@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.util.Constants;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.service.CachedNumberLookupService;
@@ -161,6 +162,9 @@ public class ContactInfoHelper {
     private ContactInfo lookupContactFromUri(Uri uri) {
         if (uri == null) {
             return null;
+        }
+        if (!PermissionsUtil.hasContactsPermissions(mContext)) {
+            return ContactInfo.EMPTY;
         }
         final ContactInfo info;
         Cursor phonesCursor =

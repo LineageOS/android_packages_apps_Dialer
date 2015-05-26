@@ -19,14 +19,12 @@ package com.android.dialer;
 import android.app.Application;
 import android.os.Trace;
 
-import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.extensions.ExtensionsFactory;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 
 public class DialerApplication extends Application {
 
     private static final String TAG = "DialerApplication";
-    private ContactPhotoManager mContactPhotoManager;
 
     @Override
     public void onCreate() {
