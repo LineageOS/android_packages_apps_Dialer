@@ -51,7 +51,7 @@ public class ContactInfoCache {
         private volatile boolean mDone = false;
 
         public QueryThread() {
-            super("CallLogAdapter.QueryThread");
+            super("ContactInfoCache.QueryThread");
         }
 
         public void stopProcessing() {
@@ -316,20 +316,12 @@ public class ContactInfoCache {
                 && TextUtils.equals(callLogInfo.label, info.label);
     }
 
-    /**
-     * Can be set to true by tests to disable processing of requests.
-     */
-    @VisibleForTesting
     private volatile boolean mRequestProcessingDisabled = false;
 
     /**
      * Sets whether processing of requests for contact details should be enabled.
-     *
-     * This method should be called in tests to disable such processing of requests when not
-     * needed.
      */
-    @VisibleForTesting
-    public void disableRequestProcessingForTest() {
+    public void disableRequestProcessing() {
         mRequestProcessingDisabled = true;
     }
 

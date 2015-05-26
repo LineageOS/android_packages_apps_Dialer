@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 import com.android.dialerbind.DatabaseHelperManager;
@@ -75,6 +76,10 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     public Cursor loadInBackground() {
         if (DEBUG) {
             Log.v(TAG, "Load in background " + mQuery);
+        }
+
+        if (!PermissionsUtil.hasContactsPermissions(mContext)) {
+            return new MatrixCursor(PhoneQuery.PROJECTION_PRIMARY);
         }
 
         /** Loads results from the database helper. */

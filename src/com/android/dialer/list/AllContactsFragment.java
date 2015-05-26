@@ -29,6 +29,7 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
 import com.android.contacts.common.list.DefaultContactListAdapter;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
@@ -60,7 +61,18 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     }
 
     @Override
+    protected void startLoading() {
+        if (PermissionsUtil.hasContactsPermissions(getActivity())) {
+            super.startLoading();
+        }
+    }
+
+    @Override
     protected ContactEntryListAdapter createListAdapter() {
+        if (!PermissionsUtil.hasContactsPermissions(getActivity())) {
+            return new EmptyContactsListAdapter(getActivity());
+        }
+
         final DefaultContactListAdapter adapter = new DefaultContactListAdapter(getActivity()) {
             @Override
             protected void bindView(View itemView, int partition, Cursor cursor, int position) {

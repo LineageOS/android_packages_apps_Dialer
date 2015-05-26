@@ -27,6 +27,8 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
 
+import com.android.contacts.common.util.PermissionsUtil;
+
 /**
  * This broadcast receiver is used to listen to outgoing calls and undemote formerly demoted
  * contacts if a phone call is made to a phone number belonging to that contact.
@@ -39,12 +41,15 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        if (!PermissionsUtil.hasContactsPermissions(context)) {
+            return;
+        }
         if (intent != null && Intent.ACTION_NEW_OUTGOING_CALL.equals(intent.getAction())) {
             final String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
             if (TextUtils.isEmpty(number)) {
                 return;
             }
-            final Thread thread = new Thread() {
+            new Thread() {
                 @Override
                 public void run() {
                     final long id = getContactIdFromPhoneNumber(context, number);
@@ -52,8 +57,7 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
                         undemoteContactWithId(context, id);
                     }
                 }
-            };
-            thread.start();
+            }.start();
         }
     }
 

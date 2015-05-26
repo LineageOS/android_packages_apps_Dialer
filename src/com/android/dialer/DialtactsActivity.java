@@ -29,12 +29,10 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
-import android.provider.ContactsContract.Intents;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -63,6 +61,7 @@ import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.calllog.CallLogActivity;
@@ -248,11 +247,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         @Override
         public void show() {
+            final boolean hasContactsPermission =
+                    PermissionsUtil.hasContactsPermissions(DialtactsActivity.this);
             final Menu menu = getMenu();
             final MenuItem clearFrequents = menu.findItem(R.id.menu_clear_frequents);
             clearFrequents.setVisible(mListsFragment != null &&
                     mListsFragment.getSpeedDialFragment() != null &&
-                    mListsFragment.getSpeedDialFragment().hasFrequents());
+                    mListsFragment.getSpeedDialFragment().hasFrequents() && hasContactsPermission);
+
+            menu.findItem(R.id.menu_import_export).setVisible(hasContactsPermission);
+            menu.findItem(R.id.menu_add_contact).setVisible(hasContactsPermission);
             super.show();
         }
     }
@@ -359,6 +363,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedInstanceState);
+
         mFirstLaunch = true;
 
         final Resources resources = getResources();
@@ -818,7 +823,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected OptionsPopupMenu buildOptionsMenu(View invoker) {
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
-        final Menu menu = popupMenu.getMenu();
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }
@@ -829,7 +833,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mSearchView.setText(mPendingSearchViewQuery);
             mPendingSearchViewQuery = null;
         }
-        mActionBarController.restoreActionBarOffset();
+        if (mActionBarController != null) {
+            mActionBarController.restoreActionBarOffset();
+        }
         return false;
     }
 
