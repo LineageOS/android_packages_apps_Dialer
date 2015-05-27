@@ -708,11 +708,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             }
             String callTimeElapsed = DateUtils.formatElapsedTime(duration / 1000);
             mElapsedTime.setText(callTimeElapsed);
-            /*
-             * TODO: Temporarily disabled (b/20427882)
-            String durationDescription = InCallDateUtils.formatDetailedDuration(duration);
-            mElapsedTime.setContentDescription(durationDescription);
-            */
+
+            String durationDescription =
+                    InCallDateUtils.formatDuration(getView().getContext(), duration);
+            mElapsedTime.setContentDescription(
+                    !TextUtils.isEmpty(durationDescription) ? durationDescription : null);
         } else {
             // hide() animation has no effect if it is already hidden.
             AnimUtils.fadeOut(mElapsedTime, AnimUtils.DEFAULT_DURATION);
