@@ -31,7 +31,7 @@ public class Log {
     // Generic tag for all In Call logging
     public static final String TAG = "InCall";
 
-    public static final boolean FORCE_DEBUG = true; /* STOPSHIP if true */
+    public static final boolean FORCE_DEBUG = false; /* STOPSHIP if true */
     public static final boolean DEBUG = FORCE_DEBUG ||
             android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
     public static final boolean VERBOSE = FORCE_DEBUG ||
