@@ -39,7 +39,6 @@ import com.android.dialer.util.FakeAsyncTaskExecutor;
 import com.android.contacts.common.test.IntegrationTestUtils;
 import com.android.dialer.util.LocaleTestUtils;
 import com.android.internal.view.menu.ContextMenuBuilder;
-import com.google.common.io.Closeables;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -262,15 +261,9 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         mVoicemailUri = getContentResolver().insert(
                 VoicemailContract.Voicemails.buildSourceUri(packageName), values);
         AssetManager assets = getAssets();
-        OutputStream outputStream = null;
-        InputStream inputStream = null;
-        try {
-            inputStream = assets.open(TEST_ASSET_NAME);
-            outputStream = getContentResolver().openOutputStream(mVoicemailUri);
+        try (InputStream inputStream = assets.open(TEST_ASSET_NAME);
+             OutputStream outputStream = getContentResolver().openOutputStream(mVoicemailUri)) {
             copyBetweenStreams(inputStream, outputStream);
-        } finally {
-            Closeables.closeQuietly(outputStream);
-            Closeables.closeQuietly(inputStream);
         }
         Uri callLogUri = ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL,
                 ContentUris.parseId(mVoicemailUri));
