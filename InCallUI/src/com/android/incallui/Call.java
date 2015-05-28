@@ -385,6 +385,10 @@ public class Call {
                 : getTelecommCall().getDetails().getCallerDisplayName();
     }
 
+    public Bundle getIntentExtras() {
+        return mTelecommCall == null ? null : mTelecommCall.getDetails().getIntentExtras();
+    }
+
     public Bundle getExtras() {
         return mTelecommCall == null ? null : mTelecommCall.getDetails().getExtras();
     }

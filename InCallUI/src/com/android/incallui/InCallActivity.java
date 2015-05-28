@@ -577,7 +577,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
                 Bundle extras = null;
                 if (call != null) {
-                    extras = call.getTelecommCall().getDetails().getExtras();
+                    extras = call.getTelecommCall().getDetails().getIntentExtras();
                 }
                 if (extras == null) {
                     // Initialize the extras bundle to avoid NPE
@@ -613,7 +613,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             if (pendingAccountSelectionCall != null) {
                 showCallCardFragment(false);
                 Bundle extras = pendingAccountSelectionCall
-                        .getTelecommCall().getDetails().getExtras();
+                        .getTelecommCall().getDetails().getIntentExtras();
 
                 final List<PhoneAccountHandle> phoneAccountHandles;
                 if (extras != null) {
