@@ -164,10 +164,15 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     private AccessibilityDelegate mAccessibilityDelegate = new AccessibilityDelegate() {
         @Override
-        public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child,
-                AccessibilityEvent event) {
+        public boolean onRequestSendAccessibilityEvent(
+                ViewGroup host, View child, AccessibilityEvent event) {
             if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                expandViewHolderActions((CallLogListItemViewHolder) host.getTag());
+                // Only expand if actions are not already expanded, because triggering the expand
+                // function on clicks causes the action views to lose the focus indicator.
+                CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) host.getTag();
+                if (mCurrentlyExpandedPosition != viewHolder.getAdapterPosition()) {
+                    expandViewHolderActions((CallLogListItemViewHolder) host.getTag());
+                }
             }
             return super.onRequestSendAccessibilityEvent(host, child, event);
         }
