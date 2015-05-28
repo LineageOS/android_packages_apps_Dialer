@@ -1127,7 +1127,7 @@ public class InCallPresenter implements CallList.Listener,
      */
     public static boolean isCallWithNoValidAccounts(Call call) {
         if (call != null && !isEmergencyCall(call)) {
-            Bundle extras = call.getExtras();
+            Bundle extras = call.getIntentExtras();
 
             if (extras == null) {
                 extras = EMPTY_EXTRAS;
@@ -1161,7 +1161,7 @@ public class InCallPresenter implements CallList.Listener,
     private void setDisconnectCauseForMissingAccounts(Call call) {
         android.telecom.Call telecomCall = call.getTelecommCall();
 
-        Bundle extras = telecomCall.getDetails().getExtras();
+        Bundle extras = telecomCall.getDetails().getIntentExtras();
         // Initialize the extras bundle to avoid NPE
         if (extras == null) {
             extras = new Bundle();
