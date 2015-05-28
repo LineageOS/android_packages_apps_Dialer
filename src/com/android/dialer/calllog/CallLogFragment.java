@@ -92,7 +92,6 @@ public class CallLogFragment extends Fragment
     /** Whether there is at least one voicemail source installed. */
     private boolean mVoicemailSourcesAvailable = false;
 
-    private VoicemailStatusHelper mVoicemailStatusHelper;
     private View mEmptyListView;
     private KeyguardManager mKeyguardManager;
 
@@ -277,7 +276,6 @@ public class CallLogFragment extends Fragment
                 this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
         fetchCalls();
         return view;
     }
