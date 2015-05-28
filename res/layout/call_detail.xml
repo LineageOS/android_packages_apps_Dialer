@@ -87,6 +87,12 @@
             </LinearLayout>
         </LinearLayout>
 
+        <com.android.dialer.voicemail.VoicemailPlaybackLayout
+            android:id="@+id/voicemail_playback_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
         <!--
           The list view is under everything.
           It contains a first header element which is hidden under the controls UI.

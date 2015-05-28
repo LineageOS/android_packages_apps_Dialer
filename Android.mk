@@ -32,7 +32,6 @@ LOCAL_AAPT_FLAGS := \
 LOCAL_JAVA_LIBRARIES := telephony-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
-    android-ex-variablespeed \
     android-support-v13 \
     android-support-v4 \
     android-support-v7-cardview \
@@ -41,8 +40,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     com.android.vcard \
     guava \
     libphonenumber
-
-LOCAL_REQUIRED_MODULES := libvariablespeed
 
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
