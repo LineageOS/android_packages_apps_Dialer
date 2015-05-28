@@ -61,7 +61,8 @@ import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TelecomUtil;
-import com.android.dialer.voicemail.VoicemailPlaybackFragment;
+import com.android.dialer.voicemail.VoicemailPlaybackLayout;
+import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import java.util.List;
 
@@ -217,7 +218,7 @@ public class CallDetailActivity extends Activity {
     /** Helper to load contact photos. */
     private ContactPhotoManager mContactPhotoManager;
 
-    private LinearLayout mVoicemailHeader;
+    private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
 
     private Uri mVoicemailUri;
     private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
@@ -255,6 +256,7 @@ public class CallDetailActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         optionallyHandleVoicemail();
+
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
@@ -267,6 +269,38 @@ public class CallDetailActivity extends Activity {
         CallLogAsyncTaskUtil.getCallDetails(this, getCallLogEntryUris(), mCallLogAsyncTaskListener);
     }
 
+    @Override
+    public void onPause() {
+        if (mVoicemailPlaybackPresenter != null) {
+            mVoicemailPlaybackPresenter.onPause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mVoicemailPlaybackPresenter != null) {
+            mVoicemailPlaybackPresenter.onDestroy();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mVoicemailPlaybackPresenter != null) {
+            mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (mVoicemailPlaybackPresenter != null) {
+            mVoicemailPlaybackPresenter.onRestoreInstanceState(savedInstanceState);
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     /**
      * Handle voicemail playback or hide voicemail ui.
      * <p>
@@ -274,37 +308,15 @@ public class CallDetailActivity extends Activity {
      * playback.  If it doesn't, then don't inflate the voicemail ui.
      */
     private void optionallyHandleVoicemail() {
-
         if (hasVoicemail()) {
-            LayoutInflater inflater =
-                    (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mVoicemailHeader =
-                    (LinearLayout) inflater.inflate(R.layout.call_details_voicemail_header, null);
-            View voicemailContainer = mVoicemailHeader.findViewById(R.id.voicemail_container);
-            ListView historyList = (ListView) findViewById(R.id.history);
-            historyList.addHeaderView(mVoicemailHeader);
-            // Has voicemail: add the voicemail fragment.  Add suitable arguments to set the uri
-            // to play and optionally start the playback.
-            // Do a query to fetch the voicemail status messages.
-            VoicemailPlaybackFragment playbackFragment;
+            VoicemailPlaybackLayout voicemailPlaybackLayout =
+                (VoicemailPlaybackLayout) findViewById(R.id.voicemail_playback_layout);
 
-            playbackFragment = (VoicemailPlaybackFragment) getFragmentManager().findFragmentByTag(
-                    VOICEMAIL_FRAGMENT_TAG);
+            mVoicemailPlaybackPresenter = new VoicemailPlaybackPresenter(this);
+            mVoicemailPlaybackPresenter.setPlaybackView(
+                    voicemailPlaybackLayout, mVoicemailUri, false /* startPlayingImmediately */);
 
-            if (playbackFragment == null) {
-                playbackFragment = new VoicemailPlaybackFragment();
-                Bundle fragmentArguments = new Bundle();
-                fragmentArguments.putParcelable(EXTRA_VOICEMAIL_URI, mVoicemailUri);
-                if (getIntent().getBooleanExtra(EXTRA_VOICEMAIL_START_PLAYBACK, false)) {
-                    fragmentArguments.putBoolean(EXTRA_VOICEMAIL_START_PLAYBACK, true);
-                }
-                playbackFragment.setArguments(fragmentArguments);
-                getFragmentManager().beginTransaction()
-                        .add(R.id.voicemail_container, playbackFragment, VOICEMAIL_FRAGMENT_TAG)
-                                .commitAllowingStateLoss();
-            }
-
-            voicemailContainer.setVisibility(View.VISIBLE);
+            voicemailPlaybackLayout.setVisibility(View.VISIBLE);
             CallLogAsyncTaskUtil.markVoicemailAsRead(this, mVoicemailUri);
         }
     }

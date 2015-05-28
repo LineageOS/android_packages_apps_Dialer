@@ -18,7 +18,6 @@ package com.android.dialer;
 
 import static com.android.dialer.calllog.CallLogAsyncTaskUtil.Tasks.GET_CALL_DETAILS;
 import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.CHECK_FOR_CONTENT;
-import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.PREPARE_MEDIA_PLAYER;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -117,10 +116,8 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
-        // There should be exactly one background task ready to prepare the media player.
-        // Preparing the media player will have thrown an IOException since the file doesn't exist.
+        // The media player will have thrown an IOException since the file doesn't exist.
         // This should have put a failed to play message on screen, buffering is gone.
-        mFakeAsyncTaskExecutor.runTask(PREPARE_MEDIA_PLAYER);
         assertHasOneTextViewContaining("Couldn't play voicemail");
         assertZeroTextViewsContaining("Buffering");
     }
@@ -191,7 +188,6 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         setActivityIntentForRealFileVoicemailEntry();
         startActivityUnderTest();
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
-        mFakeAsyncTaskExecutor.runTask(PREPARE_MEDIA_PLAYER);
         mTestUtils.clickButton(mActivityUnderTest, R.id.playback_speakerphone);
         mTestUtils.clickButton(mActivityUnderTest, R.id.playback_start_stop);
         Thread.sleep(2000);

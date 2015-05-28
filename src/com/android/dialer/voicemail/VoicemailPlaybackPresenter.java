@@ -16,8 +16,12 @@
 
 package com.android.dialer.voicemail;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.ContentObserver;
+import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
@@ -26,6 +30,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.provider.VoicemailContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
@@ -33,10 +38,8 @@ import android.widget.SeekBar;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
-import com.android.ex.variablespeed.MediaPlayerProxy;
-import com.android.ex.variablespeed.SingleThreadedMediaPlayerProxy;
-import com.android.ex.variablespeed.VariableSpeed;
 
+import com.android.common.io.MoreCloseables;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
@@ -45,83 +48,66 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Contains the controlling logic for a voicemail playback ui.
+ * Contains the controlling logic for a voicemail playback UI.
  * <p>
- * Specifically right now this class is used to control the
- * {@link com.android.dialer.voicemail.VoicemailPlaybackFragment}.
+ * This controls a single {@link com.android.dialer.voicemail.VoicemailPlaybackLayout}. A single
+ * instance can be reused for different such layouts, using {@link #setVoicemailPlaybackView}.
  * <p>
- * This class is not thread safe. The thread policy for this class is
- * thread-confinement, all calls into this class from outside must be done from
- * the main ui thread.
+ * This class is not thread safe. The thread policy for this class is thread-confinement, all calls
+ * into this class from outside must be done from the main UI thread.
  */
 @NotThreadSafe
 @VisibleForTesting
-public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
+public class VoicemailPlaybackPresenter
+        implements OnAudioFocusChangeListener, MediaPlayer.OnPreparedListener,
+                MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
+
     private static final String TAG = VoicemailPlaybackPresenter.class.getSimpleName();
-    /** The stream used to playback voicemail. */
-    private static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
 
     /** Contract describing the behaviour we need from the ui we are controlling. */
     public interface PlaybackView {
-        Context getDataSourceContext();
-        void runOnUiThread(Runnable runnable);
-        void setStartStopListener(View.OnClickListener listener);
-        void setPositionSeekListener(SeekBar.OnSeekBarChangeListener listener);
-        void setSpeakerphoneListener(View.OnClickListener listener);
-        void setIsBuffering();
-        void setClipPosition(int clipPositionInMillis, int clipLengthInMillis);
         int getDesiredClipPosition();
-        void playbackStarted();
-        void playbackStopped();
-        void playbackError(Exception e);
-        boolean isSpeakerPhoneOn();
-        void setSpeakerPhoneOn(boolean on);
-        void finish();
-        void setIsFetchingContent();
         void disableUiElements();
         void enableUiElements();
-        void sendFetchVoicemailRequest(Uri voicemailUri);
-        boolean queryHasContent(Uri voicemailUri);
+        void onPlaybackError(Exception e);
+        void onPlaybackStarted(MediaPlayer mediaPlayer, int duration,
+                ScheduledExecutorService executorService);
+        void onPlaybackStopped();
+        void setClipPosition(int clipPositionInMillis, int clipLengthInMillis);
         void setFetchContentTimeout();
-        void registerContentObserver(Uri uri, ContentObserver observer);
-        void unregisterContentObserver(ContentObserver observer);
-        void setVolumeControlStream(int streamType);
+        void setIsBuffering();
+        void setIsFetchingContent();
+        void setPresenter(VoicemailPlaybackPresenter presenter);
     }
 
     /** The enumeration of {@link AsyncTask} objects we use in this class. */
     public enum Tasks {
         CHECK_FOR_CONTENT,
         CHECK_CONTENT_AFTER_CHANGE,
-        PREPARE_MEDIA_PLAYER,
-        RESET_PREPARE_START_MEDIA_PLAYER,
     }
 
+    private static final String[] HAS_CONTENT_PROJECTION = new String[] {
+        VoicemailContract.Voicemails.HAS_CONTENT,
+    };
+
+    private static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
-    /** Update rate for the slider, 30fps. */
-    private static final int SLIDER_UPDATE_PERIOD_MILLIS = 1000 / 30;
-    /** Time our ui will wait for content to be fetched before reporting not available. */
+    // Time to wait for content to be fetched before timing out.
     private static final long FETCH_CONTENT_TIMEOUT_MS = 20000;
-    /**
-     * If present in the saved instance bundle, we should not resume playback on
-     * create.
-     */
-    private static final String IS_PLAYING_STATE_KEY = VoicemailPlaybackPresenter.class.getName()
-            + ".IS_PLAYING_STATE_KEY";
-    /**
-     * If present in the saved instance bundle, indicates where to set the
-     * playback slider.
-     */
-    private static final String CLIP_POSITION_KEY = VoicemailPlaybackPresenter.class.getName()
-            + ".CLIP_POSITION_KEY";
+
+    // If present in the saved instance bundle, we should not resume playback on create.
+    private static final String IS_PLAYING_STATE_KEY =
+            VoicemailPlaybackPresenter.class.getName() + ".IS_PLAYING_STATE_KEY";
+    // If present in the saved instance bundle, indicates where to set the playback slider.
+    private static final String CLIP_POSITION_KEY =
+            VoicemailPlaybackPresenter.class.getName() + ".CLIP_POSITION_KEY";
 
     /**
      * The most recently calculated duration.
@@ -132,20 +118,18 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      */
     private final AtomicInteger mDuration = new AtomicInteger(0);
 
-    private MediaPlayerProxy mPlayer;
-    private static int mMediaPlayerRefCount = 0;
-    private static MediaPlayerProxy mMediaPlayerInstance;
+    private Context mContext;
+    private MediaPlayer mMediaPlayer;
+    private PlaybackView mView;
 
-    private final PlaybackView mView;
-    private final PositionUpdater mPositionUpdater;
-    /** Voicemail uri to play. */
-    private final Uri mVoicemailUri;
-    /** Start playing in onCreate iff this is true. */
-    private final boolean mStartPlayingImmediately;
-    /** Used to run async tasks that need to interact with the ui. */
+    private Uri mVoicemailUri;
+    private int mPosition;
+    private boolean mIsPlaying;
+    private boolean mShouldResumePlaybackAfterSeeking;
+
+    // Used to run async tasks that need to interact with the UI.
     private final AsyncTaskExecutor mAsyncTaskExecutor;
     private static ScheduledExecutorService mScheduledExecutorService;
-
     /**
      * Used to handle the result of a successful or time-out fetch result.
      * <p>
@@ -153,37 +137,78 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      */
     private FetchResultHandler mFetchResultHandler;
     private PowerManager.WakeLock mProximityWakeLock;
-    private AsyncTask<Void, ?, ?> mPrepareTask;
-    private int mPosition;
-    private boolean mPlaying;
     private AudioManager mAudioManager;
 
-    public VoicemailPlaybackPresenter(
-            PlaybackView view,
-            Uri voicemailUri,
-            boolean startPlayingImmediately,
-            PowerManager.WakeLock wakeLock) {
-        mView = view;
-        mVoicemailUri = voicemailUri;
-        mStartPlayingImmediately = startPlayingImmediately;
-        mPositionUpdater = new PositionUpdater(
-                getScheduledExecutorServiceInstance(), SLIDER_UPDATE_PERIOD_MILLIS);
-        mProximityWakeLock = wakeLock;
-
+    public VoicemailPlaybackPresenter(Activity activity) {
+        mContext = activity;
         mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
-        mPlayer = VariableSpeed.createVariableSpeed(getScheduledExecutorServiceInstance());
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
-        ++mMediaPlayerRefCount;
-        if (mMediaPlayerInstance == null) {
-            mMediaPlayerInstance = VariableSpeed.createVariableSpeed(
-                    getScheduledExecutorServiceInstance());
+        PowerManager powerManager =
+                (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
+            mProximityWakeLock = powerManager.newWakeLock(
+                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
         }
-        mPlayer = mMediaPlayerInstance;
+
+        if (mMediaPlayer == null) {
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setOnPreparedListener(this);
+            mMediaPlayer.setOnErrorListener(this);
+            mMediaPlayer.setOnCompletionListener(this);
+        }
+
+        activity.setVolumeControlStream(PLAYBACK_STREAM);
     }
 
-    public void onCreate(Bundle bundle) {
-        mView.setVolumeControlStream(PLAYBACK_STREAM);
-        checkThatWeHaveContent();
+    /**
+     * Specify the view which this presenter controls and the voicemail for playback.
+     */
+    public void setPlaybackView(
+            PlaybackView view, Uri voicemailUri, boolean startPlayingImmediately) {
+        mView = view;
+        mVoicemailUri = voicemailUri;
+        setPosition(0, startPlayingImmediately);
+
+        mView.setPresenter(this);
+
+        checkForContent();
+    }
+
+    public void onPause() {
+        if (mMediaPlayer.isPlaying()) {
+            pausePlayback(mMediaPlayer.getCurrentPosition(), mIsPlaying);
+        }
+
+        disableProximitySensor(false /* waitForFarState */);
+    }
+
+    public void onDestroy() {
+        if (mScheduledExecutorService != null) {
+            mScheduledExecutorService.shutdown();
+            mScheduledExecutorService = null;
+        }
+
+        if (mFetchResultHandler != null) {
+            mFetchResultHandler.destroy();
+            mFetchResultHandler = null;
+        }
+
+        disableProximitySensor(false /* waitForFarState */);
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(CLIP_POSITION_KEY, mView.getDesiredClipPosition());
+        outState.putBoolean(IS_PLAYING_STATE_KEY, mIsPlaying);
+    }
+
+    public void onRestoreInstanceState(Bundle inState) {
+        if (inState != null) {
+            int position = inState.getInt(CLIP_POSITION_KEY, 0);
+            boolean isPlaying = inState.getBoolean(IS_PLAYING_STATE_KEY, false);
+            // Playback will be automatically resumed, if appropriate, in onPrepared().
+            setPosition(position, isPlaying);
+        }
     }
 
     /**
@@ -192,28 +217,42 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      * This method will be called once, after the fragment has been created, before we know if the
      * voicemail we've been asked to play has any content available.
      * <p>
-     * This method will notify the user through the ui that we are fetching the content, then check
-     * to see if the content field in the db is set. If set, we proceed to
-     * {@link #postSuccessfullyFetchedContent()} method. If not set, we will make a request to fetch
-     * the content asynchronously via {@link #makeRequestForContent()}.
+     * Notify the user that we are fetching the content, then check to see if the content field in
+     * the DB is set. If set, we proceed to {@link #prepareToPlayContent()} method. If not set, make
+     * a request to fetch the content asynchronously via {@link #requestContent()}.
      */
-    private void checkThatWeHaveContent() {
+    private void checkForContent() {
         mView.setIsFetchingContent();
         mAsyncTaskExecutor.submit(Tasks.CHECK_FOR_CONTENT, new AsyncTask<Void, Void, Boolean>() {
             @Override
             public Boolean doInBackground(Void... params) {
-                return mView.queryHasContent(mVoicemailUri);
+                return queryHasContent(mVoicemailUri);
             }
 
             @Override
             public void onPostExecute(Boolean hasContent) {
                 if (hasContent) {
-                    postSuccessfullyFetchedContent();
+                    prepareToPlayContent();
                 } else {
-                    makeRequestForContent();
+                    requestContent();
                 }
             }
         });
+    }
+
+    private boolean queryHasContent(Uri voicemailUri) {
+        ContentResolver contentResolver = mContext.getContentResolver();
+        Cursor cursor = contentResolver.query(
+                voicemailUri, HAS_CONTENT_PROJECTION, null, null, null);
+        try {
+            if (cursor != null && cursor.moveToNext()) {
+                return cursor.getInt(cursor.getColumnIndexOrThrow(
+                        VoicemailContract.Voicemails.HAS_CONTENT)) == 1;
+            }
+        } finally {
+            MoreCloseables.closeQuietly(cursor);
+        }
+        return false;
     }
 
     /**
@@ -225,17 +264,22 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      * will trigger a broadcast to request that the content be downloaded. It will add a listener to
      * the content resolver so that it will be notified when the has_content field changes. It will
      * also set a timer. If the has_content field changes to true within the allowed time, we will
-     * proceed to {@link #postSuccessfullyFetchedContent()}. If the has_content field does not
+     * proceed to {@link #prepareToPlayContent()}. If the has_content field does not
      * become true within the allowed time, we will update the ui to reflect the fact that content
      * was not available.
      */
-    private void makeRequestForContent() {
-        Handler handler = new Handler();
+    private void requestContent() {
         Preconditions.checkState(mFetchResultHandler == null, "mFetchResultHandler should be null");
+
+        Handler handler = new Handler();
         mFetchResultHandler = new FetchResultHandler(handler);
-        mView.registerContentObserver(mVoicemailUri, mFetchResultHandler);
+        mContext.getContentResolver().registerContentObserver(
+                mVoicemailUri, false, mFetchResultHandler);
         handler.postDelayed(mFetchResultHandler.getTimeoutRunnable(), FETCH_CONTENT_TIMEOUT_MS);
-        mView.sendFetchVoicemailRequest(mVoicemailUri);
+
+        // Send voicemail fetch request.
+        Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, mVoicemailUri);
+        mContext.sendBroadcast(intent);
     }
 
     @ThreadSafe
@@ -255,14 +299,14 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         @Override
         public void run() {
             if (mResultStillPending.getAndSet(false)) {
-                mView.unregisterContentObserver(FetchResultHandler.this);
+                mContext.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
                 mView.setFetchContentTimeout();
             }
         }
 
         public void destroy() {
             if (mResultStillPending.getAndSet(false)) {
-                mView.unregisterContentObserver(FetchResultHandler.this);
+                mContext.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
                 mHandler.removeCallbacks(this);
             }
         }
@@ -273,15 +317,16 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
                     new AsyncTask<Void, Void, Boolean>() {
                 @Override
                 public Boolean doInBackground(Void... params) {
-                    return mView.queryHasContent(mVoicemailUri);
+                    return queryHasContent(mVoicemailUri);
                 }
 
                 @Override
                 public void onPostExecute(Boolean hasContent) {
                     if (hasContent) {
                         if (mResultStillPending.getAndSet(false)) {
-                            mView.unregisterContentObserver(FetchResultHandler.this);
-                            postSuccessfullyFetchedContent();
+                            mContext.getContentResolver().unregisterContentObserver(
+                                    FetchResultHandler.this);
+                            prepareToPlayContent();
                         }
                     }
                 }
@@ -293,124 +338,160 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
      * Prepares the voicemail content for playback.
      * <p>
      * This method will be called once we know that our voicemail has content (according to the
-     * content provider). This method will try to prepare the data source through the media player.
-     * If preparing the media player works, we will call through to
-     * {@link #postSuccessfulPrepareActions()}. If preparing the media player fails (perhaps the
-     * file the content provider points to is actually missing, perhaps it is of an unknown file
-     * format that we can't play, who knows) then we will show an error on the ui.
+     * content provider). this method asynchronously tries to prepare the data source through the
+     * media player. If preparation is successful, the media player will {@link #onPrepared()},
+     * and it will call {@link #onError()} otherwise.
      */
-    private void postSuccessfullyFetchedContent() {
+    private void prepareToPlayContent() {
         mView.setIsBuffering();
-        mAsyncTaskExecutor.submit(Tasks.PREPARE_MEDIA_PLAYER,
-                new AsyncTask<Void, Void, Exception>() {
-                    @Override
-                    public Exception doInBackground(Void... params) {
-                        try {
-                            mPlayer.reset();
-                            mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
-                            mPlayer.setAudioStreamType(PLAYBACK_STREAM);
-                            mPlayer.prepare();
-                            mDuration.set(mPlayer.getDuration());
-                            return null;
-                        } catch (Exception e) {
-                            return e;
-                        }
-                    }
 
-                    @Override
-                    public void onPostExecute(Exception exception) {
-                        if (exception == null) {
-                            postSuccessfulPrepareActions();
-                        } else {
-                            mView.playbackError(exception);
-                        }
-                    }
-                });
+        try {
+            mMediaPlayer.reset();
+            mMediaPlayer.setDataSource(mContext, mVoicemailUri);
+            mMediaPlayer.setAudioStreamType(PLAYBACK_STREAM);
+            mMediaPlayer.prepareAsync();
+        } catch (Exception e) {
+            handleError(e);
+        }
     }
 
     /**
-     * Enables the ui, and optionally starts playback immediately.
-     * <p>
-     * This will be called once we have successfully prepared the media player, and will optionally
-     * playback immediately.
+     * Once the media player is prepared, enables the UI and adopts the appropriate playback state.
      */
-    private void postSuccessfulPrepareActions() {
+    @Override
+    public void onPrepared(MediaPlayer mp) {
         mView.enableUiElements();
-        mView.setPositionSeekListener(new PlaybackPositionListener());
-        mView.setStartStopListener(new StartStopButtonListener());
-        mView.setSpeakerphoneListener(new SpeakerphoneListener());
-        mPlayer.setOnErrorListener(new MediaPlayerErrorListener());
-        mPlayer.setOnCompletionListener(new MediaPlayerCompletionListener());
-        mView.setSpeakerPhoneOn(mView.isSpeakerPhoneOn());
-        if (mPlaying) {
-           resetPrepareStartPlaying(mPosition);
+
+        if (mIsPlaying) {
+            resumePlayback();
         } else {
-           stopPlaybackAtPosition(mPosition, mDuration.get());
-           if ((mPosition == 0) && (mStartPlayingImmediately)) {
-               resetPrepareStartPlaying(0);
-           }
+            pausePlayback();
         }
     }
 
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(CLIP_POSITION_KEY, mView.getDesiredClipPosition());
-        outState.putBoolean(IS_PLAYING_STATE_KEY, mPlaying);
+    /**
+     * Invoked if preparing the media player fails, for example, if file is missing or the voicemail
+     * is an unknown file format that can't be played.
+     */
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        handleError(new IllegalStateException("MediaPlayer error listener invoked"));
+        return true;
     }
 
-    public void onRestoreInstanceState(Bundle inState) {
-        int position = 0;
-        boolean isPlaying = false;
-        if (inState != null) {
-            position = inState.getInt(CLIP_POSITION_KEY, 0);
-            isPlaying = inState.getBoolean(IS_PLAYING_STATE_KEY, false);
+    private void handleError(Exception e) {
+        mMediaPlayer.release();
+        mView.onPlaybackError(e);
+        setPosition(0, false);
+    }
+
+    /**
+     * After done playing the voicemail clip, reset the clip position to the start.
+     */
+    @Override
+    public void onCompletion(MediaPlayer mediaPlayer) {
+        pausePlayback(0, false);
+    }
+
+    @Override
+    public void onAudioFocusChange(int focusChange) {
+        boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                focusChange == AudioManager.AUDIOFOCUS_LOSS;
+        if (mMediaPlayer.isPlaying() && lostFocus) {
+            pausePlayback();
+        } else if (!mMediaPlayer.isPlaying() && focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+            resumePlayback();
         }
-        setPositionAndPlayingStatus(position, isPlaying) ;
     }
 
-    private void setPositionAndPlayingStatus(int position, boolean isPlaying) {
-       mPosition = position;
-       mPlaying = isPlaying;
+    /**
+     * Sets the position and playing state for when playback is resumed.
+     */
+    private void setPosition(int position, boolean isPlaying) {
+        mPosition = position;
+        mIsPlaying = isPlaying;
     }
 
-    public void onDestroy() {
-        --mMediaPlayerRefCount;
-        if (mMediaPlayerRefCount == 0) {
-            if (mScheduledExecutorService != null) {
-                mScheduledExecutorService.shutdown();
-                mScheduledExecutorService = null;
+    /**
+     * Resumes voicemail playback at the clip position stored by the presenter.
+     */
+    public void resumePlayback() {
+        final int duration = mMediaPlayer.getDuration();
+        mDuration.set(duration);
+
+        // Clamp the start position between 0 and the duration.
+        int startPosition = Math.max(0, Math.min(mPosition, duration));
+        mMediaPlayer.seekTo(startPosition);
+        setPosition(startPosition, true);
+
+        try {
+            // Grab audio focus here
+            int result = mAudioManager.requestAudioFocus(
+                    VoicemailPlaybackPresenter.this,
+                    PLAYBACK_STREAM,
+                    AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+            if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                throw new RejectedExecutionException("Could not capture audio focus.");
             }
-            if (mPlayer != null) {
-                mPlayer.release();
-                mPlayer = null;
-            }
-        }
 
-        if (mPrepareTask != null) {
-            mPrepareTask.cancel(false);
-            mPrepareTask = null;
-        }
-        if (mFetchResultHandler != null) {
-            mFetchResultHandler.destroy();
-            mFetchResultHandler = null;
-        }
-        mPositionUpdater.stopUpdating();
-        if (mProximityWakeLock.isHeld()) {
-            mProximityWakeLock.release();
+            // Can throw RejectedExecutionException
+            mMediaPlayer.start();
+
+            mView.onPlaybackStarted(mMediaPlayer, duration, getScheduledExecutorServiceInstance());
+            enableProximitySensor();
+        } catch (RejectedExecutionException e) {
+            handleError(e);
         }
     }
 
-    private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
-        if (mScheduledExecutorService == null) {
-            mScheduledExecutorService = Executors.newScheduledThreadPool(
-                    NUMBER_OF_THREADS_IN_POOL);
+    public void pausePlayback() {
+        pausePlayback(mMediaPlayer.getCurrentPosition(), false);
+    }
+
+    /**
+     * {@link isPlaying} may be set to {@code true} so voicemail playback can be resumed after a
+     * rotation.
+     */
+    private void pausePlayback(int position, boolean isPlaying) {
+        setPosition(position, isPlaying);
+
+        if (mMediaPlayer.isPlaying()) {
+            mMediaPlayer.pause();
         }
-        return mScheduledExecutorService;
+
+        mAudioManager.abandonAudioFocus(this);
+        mView.onPlaybackStopped();
+
+        // Always disable the proximity sensor on stop.
+        disableProximitySensor(true /* waitForFarState */);
+
+        int duration = mDuration.get();
+        mView.setClipPosition(position, duration);
+    }
+
+    /**
+     * Pauses playback when the user starts seeking the position, and notes whether the voicemail is
+     * playing to know whether to resume playback once the user selects a new position.
+     */
+    public void pausePlaybackForSeeking() {
+        mShouldResumePlaybackAfterSeeking = mMediaPlayer.isPlaying();
+        pausePlayback();
+    }
+
+    public void resumePlaybackAfterSeeking(int desiredPosition) {
+        setPosition(desiredPosition, mShouldResumePlaybackAfterSeeking);
+        if (mShouldResumePlaybackAfterSeeking) {
+            resumePlayback();
+        }
+        mShouldResumePlaybackAfterSeeking = false;
     }
 
     private void enableProximitySensor() {
-        if (mProximityWakeLock == null) {
+        if (mProximityWakeLock == null || isSpeakerphoneOn() || !mMediaPlayer.isPlaying()) {
             return;
         }
+
         if (!mProximityWakeLock.isHeld()) {
             Log.i(TAG, "Acquiring proximity wake lock");
             mProximityWakeLock.acquire();
@@ -432,282 +513,24 @@ public class VoicemailPlaybackPresenter implements OnAudioFocusChangeListener {
         }
     }
 
-    private class MediaPlayerErrorListener implements MediaPlayer.OnErrorListener {
-        @Override
-        public boolean onError(MediaPlayer mp, int what, int extra) {
-            mView.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    handleError(new IllegalStateException("MediaPlayer error listener invoked"));
-                }
-            });
-            return true;
+    public void setSpeakerphoneOn(boolean on) {
+        mAudioManager.setSpeakerphoneOn(on);
+        if (on) {
+            disableProximitySensor(false /* waitForFarState */);
+        } else {
+            enableProximitySensor();
         }
     }
 
-    private class MediaPlayerCompletionListener implements MediaPlayer.OnCompletionListener {
-        @Override
-        public void onCompletion(final MediaPlayer mp) {
-            mView.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    handleCompletion(mp);
-                }
-            });
-        }
+    public boolean isSpeakerphoneOn() {
+        return mAudioManager.isSpeakerphoneOn();
     }
 
-    private class AsyncPrepareTask extends AsyncTask<Void, Void, Exception> {
-        private int mClipPositionInMillis;
-
-        AsyncPrepareTask(int clipPositionInMillis) {
-            mClipPositionInMillis = clipPositionInMillis;
+    private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
+        if (mScheduledExecutorService == null) {
+            mScheduledExecutorService = Executors.newScheduledThreadPool(NUMBER_OF_THREADS_IN_POOL);
         }
-
-        @Override
-        public Exception doInBackground(Void... params) {
-            try {
-                mPlayer.reset();
-                mPlayer.setDataSource(mView.getDataSourceContext(), mVoicemailUri);
-                mPlayer.setAudioStreamType(PLAYBACK_STREAM);
-                mPlayer.prepare();
-                return null;
-            } catch (Exception e) {
-                return e;
-            }
-        }
-
-        @Override
-        public void onPostExecute(Exception exception) {
-            mPrepareTask = null;
-            if (exception == null) {
-                final int duration = mPlayer.getDuration();
-                mDuration.set(duration);
-                int startPosition =
-                    constrain(mClipPositionInMillis, 0, duration);
-                mPlayer.seekTo(startPosition);
-                mView.setClipPosition(startPosition, duration);
-                try {
-                    // Grab audio focus here
-                    int result = getAudioManager().requestAudioFocus(
-                            VoicemailPlaybackPresenter.this,
-                            PLAYBACK_STREAM,
-                            AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-
-                    if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                        throw new RejectedExecutionException("Could not capture audio focus.");
-                    }
-                    // Can throw RejectedExecutionException
-                    mPlayer.start();
-                    setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), true);
-                    mView.playbackStarted();
-                    if (!mProximityWakeLock.isHeld()) {
-                        mProximityWakeLock.acquire();
-                    }
-                    // Only enable if we are not currently using the speaker phone.
-                    if (!mView.isSpeakerPhoneOn()) {
-                        enableProximitySensor();
-                    }
-                    // Can throw RejectedExecutionException
-                    mPositionUpdater.startUpdating(startPosition, duration);
-                } catch (RejectedExecutionException e) {
-                    handleError(e);
-                }
-            } else {
-                handleError(exception);
-            }
-        }
+        return mScheduledExecutorService;
     }
 
-    private AudioManager getAudioManager() {
-        if (mAudioManager == null) {
-            mAudioManager = (AudioManager)
-                    mView.getDataSourceContext().getSystemService(Context.AUDIO_SERVICE);
-        }
-        return mAudioManager;
-    }
-
-    @Override
-    public void onAudioFocusChange(int focusChange) {
-        boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
-                focusChange == AudioManager.AUDIOFOCUS_LOSS;
-        // Note: the below logic is the same as in {@code StartStopButtonListener}.
-        if (mPlayer.isPlaying() && lostFocus) {
-            setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), false);
-            stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
-        } else if (!mPlayer.isPlaying() && focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-            setPositionAndPlayingStatus(mPosition, true);
-            postSuccessfullyFetchedContent();
-        }
-    }
-
-
-    private void resetPrepareStartPlaying(final int clipPositionInMillis) {
-        if (mPrepareTask != null) {
-            mPrepareTask.cancel(false);
-            mPrepareTask = null;
-        }
-        mPrepareTask = mAsyncTaskExecutor.submit(Tasks.RESET_PREPARE_START_MEDIA_PLAYER,
-                new AsyncPrepareTask(clipPositionInMillis));
-    }
-
-    private void handleError(Exception e) {
-        mView.playbackError(e);
-        mPositionUpdater.stopUpdating();
-        mPlayer.release();
-        setPositionAndPlayingStatus(0, false);
-    }
-
-    public void handleCompletion(MediaPlayer mediaPlayer) {
-        stopPlaybackAtPosition(0, mDuration.get());
-    }
-
-    private void stopPlaybackAtPosition(int clipPosition, int duration) {
-        getAudioManager().abandonAudioFocus(this);
-        mPositionUpdater.stopUpdating();
-        mView.playbackStopped();
-        if (mProximityWakeLock.isHeld()) {
-            mProximityWakeLock.release();
-        }
-        // Always disable on stop.
-        disableProximitySensor(true /* waitForFarState */);
-        mView.setClipPosition(clipPosition, duration);
-        if (mPlayer.isPlaying()) {
-            mPlayer.pause();
-        }
-    }
-
-    private class PlaybackPositionListener implements SeekBar.OnSeekBarChangeListener {
-        private boolean mShouldResumePlaybackAfterSeeking;
-
-        @Override
-        public void onStartTrackingTouch(SeekBar arg0) {
-            if (mPlayer.isPlaying()) {
-                mShouldResumePlaybackAfterSeeking = true;
-                stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
-            } else {
-                mShouldResumePlaybackAfterSeeking = false;
-            }
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar arg0) {
-            if (mPlayer.isPlaying()) {
-                setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), false);
-                stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
-            } else {
-                setPositionAndPlayingStatus(mView.getDesiredClipPosition(),
-                        mShouldResumePlaybackAfterSeeking);
-            }
-
-            if (mShouldResumePlaybackAfterSeeking) {
-                postSuccessfullyFetchedContent();
-            }
-        }
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            mView.setClipPosition(seekBar.getProgress(), seekBar.getMax());
-        }
-    }
-
-    private class SpeakerphoneListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            boolean previousState = mView.isSpeakerPhoneOn();
-            mView.setSpeakerPhoneOn(!previousState);
-            if (mPlayer.isPlaying() && previousState) {
-                // If we are currently playing and we are disabling the speaker phone, enable the
-                // sensor.
-                enableProximitySensor();
-            } else {
-                // If we are not currently playing, disable the sensor.
-                disableProximitySensor(true /* waitForFarState */);
-            }
-        }
-    }
-
-    private class StartStopButtonListener implements View.OnClickListener {
-        @Override
-        public void onClick(View arg0) {
-            if (mPlayer.isPlaying()) {
-                setPositionAndPlayingStatus(mPlayer.getCurrentPosition(), false);
-                stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
-            } else {
-                setPositionAndPlayingStatus(mPosition, true);
-                postSuccessfullyFetchedContent();
-            }
-        }
-    }
-
-    /**
-     * Controls the animation of the playback slider.
-     */
-    @ThreadSafe
-    private final class PositionUpdater implements Runnable {
-        private final ScheduledExecutorService mExecutorService;
-        private final int mPeriodMillis;
-        private final Object mLock = new Object();
-        @GuardedBy("mLock") private ScheduledFuture<?> mScheduledFuture;
-        private final Runnable mSetClipPostitionRunnable = new Runnable() {
-            @Override
-            public void run() {
-                int currentPosition = 0;
-                synchronized (mLock) {
-                    if (mScheduledFuture == null) {
-                        // This task has been canceled. Just stop now.
-                        return;
-                    }
-                    currentPosition = mPlayer.getCurrentPosition();
-                }
-                mView.setClipPosition(currentPosition, mDuration.get());
-            }
-        };
-
-        public PositionUpdater(ScheduledExecutorService executorService, int periodMillis) {
-            mExecutorService = executorService;
-            mPeriodMillis = periodMillis;
-        }
-
-        @Override
-        public void run() {
-            mView.runOnUiThread(mSetClipPostitionRunnable);
-        }
-
-        public void startUpdating(int beginPosition, int endPosition) {
-            synchronized (mLock) {
-                if (mScheduledFuture != null) {
-                    mScheduledFuture.cancel(false);
-                    mScheduledFuture = null;
-                }
-                mScheduledFuture = mExecutorService.scheduleAtFixedRate(this, 0, mPeriodMillis,
-                        TimeUnit.MILLISECONDS);
-            }
-        }
-
-        public void stopUpdating() {
-            synchronized (mLock) {
-                if (mScheduledFuture != null) {
-                    mScheduledFuture.cancel(false);
-                    mScheduledFuture = null;
-                }
-            }
-        }
-    }
-
-    public void onPause() {
-        if (mPlayer.isPlaying()) {
-            stopPlaybackAtPosition(mPlayer.getCurrentPosition(), mDuration.get());
-        }
-        if (mPrepareTask != null) {
-            mPrepareTask.cancel(false);
-            mPrepareTask = null;
-        }
-
-        disableProximitySensor(false /* waitForFarState */);
-    }
-
-    private static int constrain(int amount, int low, int high) {
-        return amount < low ? low : (amount > high ? high : amount);
-    }
 }
