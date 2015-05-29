@@ -156,15 +156,17 @@ public class CallStatsFragment extends ListFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.call_stats_options, menu);
+        if (getUserVisibleHint()) {
+            inflater.inflate(R.menu.call_stats_options, menu);
 
-        final MenuItem resetItem = menu.findItem(R.id.reset_date_filter);
-        final MenuItem sortDurationItem = menu.findItem(R.id.sort_by_duration);
-        final MenuItem sortCountItem = menu.findItem(R.id.sort_by_count);
+            final MenuItem resetItem = menu.findItem(R.id.reset_date_filter);
+            final MenuItem sortDurationItem = menu.findItem(R.id.sort_by_duration);
+            final MenuItem sortCountItem = menu.findItem(R.id.sort_by_count);
 
-        resetItem.setVisible(mFilterFrom != -1);
-        sortDurationItem.setVisible(!mSortByDuration);
-        sortCountItem.setVisible(mSortByDuration);
+            resetItem.setVisible(mFilterFrom != -1);
+            sortDurationItem.setVisible(!mSortByDuration);
+            sortCountItem.setVisible(mSortByDuration);
+        }
 
         super.onCreateOptionsMenu(menu, inflater);
     }
