@@ -110,6 +110,11 @@
         <item name="android:textAppearanceListItemSmall">@android:style/TextAppearance.Holo.Medium.Inverse</item>
     </style>
 
+    <!-- A theme for inflation of a search view dialtacts action bar -->
+    <style name="DialtactsSearchTheme" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+        <item name="android:colorControlActivated">@color/actionbar_icon_color</item>
+    </style>
+
     <style name="DialtactsActionBarSpinner"
         parent="@*android:style/Widget.Holo.Light.Spinner.DropDown.ActionBar">
 

@@ -60,10 +60,11 @@ import com.android.dialer.R;
      * @param context The application context.
      * @param views the views to populate
      * @param details the details of a phone call needed to fill in the data
+     * @param filter A filter string to highlight (or null if there's no filter active)
      */
     public void setPhoneCallDetails(
-            Context context, CallLogListItemViews views, PhoneCallDetails details) {
-        mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
+            Context context, CallLogListItemViews views, PhoneCallDetails details, String filter) {
+        mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details, filter);
 
         // Set the accessibility text for the contact badge
         views.quickContactView.setContentDescription(getContactBadgeDescription(details));
