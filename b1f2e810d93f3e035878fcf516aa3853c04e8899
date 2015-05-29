@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a8ec9b2_8d318def",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2015-05-29T15:51:20Z",
+      "side": 1,
+      "message": "I\u0027m not really a fan of the \"Smart options\" title, perhaps we want to have a more descriptive set of titles for these functions?",
+      "revId": "b1f2e810d93f3e035878fcf516aa3853c04e8899",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
