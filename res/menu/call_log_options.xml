@@ -17,7 +17,8 @@
     <item
         android:id="@+id/search_calllog"
         android:title="@string/calllog_search_hint"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_ab_search"
+        android:showAsAction="always"
         android:orderInCategory="1"/>
     <item
         android:id="@+id/delete_all"
