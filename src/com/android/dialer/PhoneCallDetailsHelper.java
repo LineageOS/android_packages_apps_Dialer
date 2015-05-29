@@ -26,14 +26,13 @@ import android.telephony.SubscriptionManager;
 import android.graphics.Typeface;
 import android.telecom.PhoneAccount;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.format.TextHighlighter;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
@@ -60,6 +59,7 @@ public class PhoneCallDetailsHelper {
     // Helper classes.
     private final PhoneNumberDisplayHelper mPhoneNumberHelper;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    private final TextHighlighter mHighlighter;
 
     /**
      * List of items to be concatenated together for accessibility descriptions
@@ -79,6 +79,8 @@ public class PhoneCallDetailsHelper {
         mResources = resources;
         mPhoneNumberUtilsWrapper = phoneUtils;
         mPhoneNumberHelper = new PhoneNumberDisplayHelper(context, resources, phoneUtils);
+        mHighlighter = new TextHighlighter(Typeface.BOLD,
+                mResources.getColor(R.color.text_highlight_color));
     }
 
     /** Fills the call details views with content. */
@@ -136,38 +138,25 @@ public class PhoneCallDetailsHelper {
             views.callAccountLabel.setVisibility(View.GONE);
         }
 
-        CharSequence nameText;
-        CharSequence displayNumber =
-            mPhoneNumberHelper.getDisplayNumber(details.accountHandle, details.number,
-                    details.numberPresentation, details.formattedNumber);
-        String phoneNum = (String) details.number;
-        if (!TextUtils.isEmpty(filter) && phoneNum.contains(filter)) {
-            int start, end;
-            start = phoneNum.indexOf(filter);
-            end = start + filter.length();
-            SpannableString result = new SpannableString(phoneNum);
-            result.setSpan(new StyleSpan(Typeface.BOLD), start, end,
-                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            displayNumber = result;
-        }
+        final CharSequence nameText;
         if (TextUtils.isEmpty(details.name)) {
-            nameText = displayNumber;
+            nameText = mPhoneNumberHelper.getDisplayNumber(details.accountHandle,
+                    details.number, details.numberPresentation, details.formattedNumber);
             // We have a real phone number as "nameView" so make it always LTR
             views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
             nameText = details.name;
-            if (!TextUtils.isEmpty(filter) && nameText.toString().contains(filter)) {
-                int start,end;
-                start = nameText.toString().indexOf(filter);
-                end = start + filter.length();
-                SpannableString style = new SpannableString(nameText);
-                style.setSpan(new StyleSpan(Typeface.BOLD), start, end,
-                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                nameText = style;
-            }
         }
 
-        views.nameView.setText(nameText);
+        int filterIndex = filter != null && nameText != null
+                ? nameText.toString().toLowerCase().indexOf(filter.toLowerCase()) : -1;
+        if (filterIndex >= 0) {
+            SpannableString s = new SpannableString(nameText);
+            mHighlighter.applyMaskingHighlight(s, filterIndex, filterIndex + filter.length());
+            views.nameView.setText(s);
+        } else {
+            views.nameView.setText(nameText);
+        }
 
         if (isVoicemail && !TextUtils.isEmpty(details.transcription)) {
             views.voicemailTranscriptionView.setText(details.transcription);

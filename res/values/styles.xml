@@ -99,17 +99,17 @@
         <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
+    <style name="DialtactsThemeWithoutActionBar" parent="DialtactsThemeWithoutActionBarOverlay">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:toolbarStyle">@style/ToolbarStyle</item>
+    </style>
+
     <!-- Hide the actionbar title during the activity preview -->
     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
         <item name="android:fastScrollTrackDrawable">@null</item>
-    </style>
-
-    <style name="DialtactsActionBarSpinner"
-        parent="@*android:style/Widget.Holo.Light.Spinner.DropDown.ActionBar">
-
-        <item name="android:background">@drawable/spinner_ab_holo_dark</item>
     </style>
 
     <style name="CallDetailActivityTheme1" parent="android:Theme.Holo.Light">
@@ -165,6 +165,10 @@
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
         <item name="android:fontFamily">"sans-serif-medium"</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@android:style/Widget.Toolbar">
+        <item name="android:titleTextAppearance">@style/DialtactsActionBarTitleText</item>
     </style>
 
     <style name="ListViewStyle" parent="@android:style/Widget.Material.Light.ListView">
