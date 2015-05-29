@@ -353,7 +353,8 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(getContext(), mViews,
                 new PhoneCallDetails(number, presentation, formattedNumber,
                         TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        new int[]{ callType }, TEST_DATE, TEST_DURATION)
+                        new int[]{ callType }, TEST_DATE, TEST_DURATION),
+                null
         );
     }
 
@@ -362,7 +363,8 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(getContext() ,mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        types, TEST_DATE, TEST_DURATION)
+                        types, TEST_DATE, TEST_DURATION),
+                null
         );
     }
 
@@ -371,7 +373,8 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         mHelper.setPhoneCallDetails(getContext(), mViews,
                 new PhoneCallDetails(TEST_NUMBER, Calls.PRESENTATION_ALLOWED,
                         TEST_FORMATTED_NUMBER, TEST_COUNTRY_ISO, TEST_GEOCODE,
-                        types, TEST_DATE, TEST_DURATION)
+                        types, TEST_DATE, TEST_DURATION),
+                null
         );
     }
 }

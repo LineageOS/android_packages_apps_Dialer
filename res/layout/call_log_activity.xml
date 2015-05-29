@@ -19,15 +19,30 @@
     android:layout_height="match_parent"
     android:id="@+id/calllog_frame"
     android:orientation="vertical">
-    <com.android.contacts.common.list.ViewPagerTabs
-        android:id="@+id/viewpager_header"
+
+    <LinearLayout
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_height"
-        android:textAllCaps="true"
-        android:orientation="horizontal"
-        android:layout_gravity="top"
+        android:layout_height="wrap_content"
         android:elevation="@dimen/tab_elevation"
-        style="@style/DialtactsActionBarTabTextStyle" />
+        android:orientation="vertical">
+
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/actionbar_background_color" />
+        <com.android.contacts.common.list.ViewPagerTabs
+            android:id="@+id/viewpager_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_height"
+            android:textAllCaps="true"
+            android:orientation="horizontal"
+            android:layout_gravity="top"
+            style="@style/DialtactsActionBarTabTextStyle" />
+
+    </LinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/call_log_pager"
         android:layout_width="match_parent"
