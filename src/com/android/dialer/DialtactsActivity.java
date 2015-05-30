@@ -756,6 +756,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (!isInSearchUi()) {
             enterSearchUi(true /* isSmartDial */, mSearchQuery);
         }
+
+        mDialpadFragment.enableSmartCall(true);
     }
 
     private void onFloatingActionButtonHidden() {
@@ -815,6 +817,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 exitSearchUi();
             }
         }
+
+        mDialpadFragment.enableSmartCall(false);
     }
 
     /**
