@@ -24,6 +24,10 @@
     <item quantity="one">Minutu 1</item>
     <item quantity="other">%d minutu</item>
   </plurals>
+  <plurals name="second">
+    <item quantity="one">Seg %d</item>
+    <item quantity="other">%d seg</item>
+  </plurals>
   <plurals name="call">
     <item quantity="one">Dei 1</item>
     <item quantity="other">%d dei</item>

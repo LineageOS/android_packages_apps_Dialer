@@ -17,4 +17,58 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="call_log_stats_title">Statistika</string>
+  <string name="callStatsDetailTitle">Detailne kõne statistika</string>
+  <string name="call_stats_nav_all">Kõik</string>
+  <string name="call_stats_nav_incoming">Sissetulev</string>
+  <string name="call_stats_nav_outgoing">Väljaminev</string>
+  <string name="call_stats_nav_missed">Vastamata</string>
+  <string name="call_stats_incoming">Sissetulevaid: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Väljuvaid: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">Vastamata</string>
+  <string name="call_stats_missed_percent">Vastamata: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Kokku: <xliff:g id="call_count">%s </xliff:g>, <xliff:g id="duration"> %s </xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Kokku: <xliff:g id="call_count">%s </xliff:g></string>
+  <string name="call_stats_filter_from">Alguskuupäev</string>
+  <string name="call_stats_filter_to">Lõppkuupäev</string>
+  <string name="call_stats_filter_picker_title">Filtri valik</string>
+  <string name="date_quick_selection">Kiirvalik</string>
+  <string name="date_qs_currentmonth">Käesolev kuu</string>
+  <string name="date_qs_currentquarter">Käesolev kvartal</string>
+  <string name="date_qs_currentyear">Käesolev aasta</string>
+  <string name="date_qs_lastweek">Eelmine nädal</string>
+  <string name="date_qs_lastmonth">Eelmine kuu</string>
+  <string name="date_qs_lastquarter">Eelmine kvartal</string>
+  <string name="date_qs_lastyear">Eelmine aasta</string>
+  <string name="call_stats_date_filter">Muuda ajavahemiku</string>
+  <string name="call_stats_reset_filter">Lähtesta ajavahemik</string>
+  <string name="call_stats_sort_by_duration">Kõne kestvuse järgi sortimine</string>
+  <string name="call_stats_sort_by_count">Kõnede arvu järgi sortimine</string>
+  <string name="menu_add_to_blacklist">Lisa musta nimekirja</string>
+  <string name="toast_added_to_blacklist"><xliff:g id="number">%s </xliff:g> lisatud musta nimekirja</string>
+  <string name="menu_delete_from_blacklist">Kustuta mustast nimekirjast</string>
+  <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s </xliff:g> kustutatud mustast nimekirjast</string>
+  <string name="nearby_places">Lähedased kohad</string>
+  <string name="people">Inimesed</string>
+  <string name="start_call_playback">Esita salvestus</string>
+  <string name="stop_call_playback">Peata</string>
+  <string name="call_playback_error_message">Salvestuse esitamine nurjus</string>
+  <string name="calllog_search_hint">Otsi kõnelogist</string>
+  <string name="video_call">Videokõne</string>
+  <string name="video_call_settings">Videokõne seaded</string>
+  <string name="description_videocall">Videokõne kontaktile <xliff:g id="name">%1$s </xliff:g></string>
+  <string name="speed_dial_settings">Kiirvalimise seaded</string>
+  <string name="speed_dial_not_set">(määramata)</string>
+  <string name="speed_dial_replace">Asenda</string>
+  <string name="speed_dial_delete">Kustuta</string>
+  <string name="speed_dial_unassigned_dialog_title">Number määramata</string>
+  <string name="speed_dial_unassigned_dialog_message">Ühtegi kiirvalimise kontakti pole määratud numbrile  \'<xliff:g id="number">%s</xliff:g>\'. Soovid sa lisada kontakti nüüd?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Kiirvalimise kasutamiseks lülitage lennurežiim välja."</string>
+  <string name="msim_ime_dialog_title">Seadme identifikaator</string>
+  <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d </xliff:g></string>
+  <string name="call_log_show_all_slots">Kõik SIM-kaardid</string>
+  <string name="yes">Jah</string>
+  <string name="no">Ei</string>
+  <string name="call_duration_active">Aktiivne kestus:</string>
+  <string name="call_duration_call_out">Kõne kestus:</string>
+  <string name="call_log_all_calls_header">Kõik kõned</string>
 </resources>
