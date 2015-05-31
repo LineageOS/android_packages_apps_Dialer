@@ -37,7 +37,6 @@
   <string name="date_qs_lastyear">Keçən il</string>
   <string name="call_stats_sort_by_duration">Zəng müddətinə görə sırala</string>
   <string name="call_stats_sort_by_count">Zəng sayına görə sırala</string>
-  <string name="menu_add_to_blacklist">Qara siyahıya əlavə et</string>
   <string name="speed_dial_not_set">(tənzimlənməyib)</string>
   <string name="speed_dial_replace">Dəyişdir</string>
   <string name="speed_dial_delete">Sil</string>

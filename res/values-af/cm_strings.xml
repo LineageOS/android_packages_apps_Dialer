@@ -33,7 +33,6 @@
   <string name="preference_category_t9_dialpad_search">Nommerbord T9 soek</string>
   <string name="t9_search_input_locale">T9 soektog</string>
   <string name="t9_search_input_locale_default">Standaard</string>
-  <string name="type_blacklist">Swartgelysde oproep</string>
   <string name="call_log_stats_title">Statistieke</string>
   <string name="callStatsDetailTitle">Oproep stat besonderhede</string>
   <string name="call_stats">Oproep statistieke</string>
@@ -47,8 +46,6 @@
   <string name="call_stats_outgoing">Uitgaande: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Gemis</string>
   <string name="call_stats_missed_percent">Gemis: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">Verban lys</string>
-  <string name="call_stats_blacklist_percent">Swartlys: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Totaal: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Begin datum</string>
@@ -66,8 +63,6 @@
   <string name="call_stats_reset_filter">Herstel tyd reeks</string>
   <string name="call_stats_sort_by_duration">Sorteer volgens oproep tydsduur</string>
   <string name="call_stats_sort_by_count">Sorteer volgens oproepe</string>
-  <string name="menu_add_to_blacklist">Voeg tot verban lys</string>
-  <string name="toast_added_to_blacklist">%s bygevoeg tot swartlys.</string>
   <string name="speed_dial_settings">Snel keuse instellings</string>
   <string name="speed_dial_not_set">(nie gestel)</string>
   <string name="speed_dial_replace">Vervang</string>
@@ -92,7 +87,6 @@
   <string name="call_log_all_calls_header">Alle oproepe</string>
   <string name="calllog_search_hint">Soek deur geskakelde lys</string>
   <string name="msim_ime_dialog_title">Toestel identifiseerder</string>
-  <string name="call_log_blacklist_header">Swartlys oproepe alleenlik</string>
   <string name="start_call_playback">Speel opname</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kon nie opname speel nie</string>

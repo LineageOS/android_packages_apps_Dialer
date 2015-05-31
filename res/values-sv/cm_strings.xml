@@ -20,10 +20,11 @@
   <string name="people">Personer</string>
   <string name="lookup_settings_label">Telefonnummersökning</string>
   <string name="lookup_settings_description">Sökning av okända telefonnummer</string>
+  <string name="enable_forward_lookup_title">Platssökning</string>
   <string name="enable_reverse_lookup_title">Omvänd sökning</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
+  <string name="t9_search_input_locale">T9-sökinmatning</string>
   <string name="t9_search_input_locale_default">Standard</string>
-  <string name="type_blacklist">Svartlistade samtal</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer för samtalsstatus</string>
   <string name="call_stats">Samtalsstatistik</string>
@@ -37,8 +38,6 @@
   <string name="call_stats_outgoing">Utgående: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Missade</string>
   <string name="call_stats_missed_percent">Missade: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">Svartlista</string>
-  <string name="call_stats_blacklist_percent">Svartlista: <xliff:g id="percent">%d </xliff:g>%%</string>
   <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdatum</string>
@@ -56,7 +55,6 @@
   <string name="call_stats_reset_filter">Återställ tidsintervall</string>
   <string name="call_stats_sort_by_duration">Sortera efter samtalstid</string>
   <string name="call_stats_sort_by_count">Sortera efter antal samtal</string>
-  <string name="menu_add_to_blacklist">Lägg till svartlista</string>
   <string name="speed_dial_settings">Inställningar för kortnummer</string>
   <string name="speed_dial_not_set">(ej angivet)</string>
   <string name="speed_dial_replace">Ersätt</string>
@@ -64,8 +62,11 @@
   <string name="speed_dial_unassigned_dialog_title">Inget kortnummer angivet</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
+  <string name="incall_vibrate_outgoing_title">Vibrera vid svar</string>
+  <string name="vibrate_call_waiting">Vibrera vid samtal väntar</string>
   <string name="incall_vibrate_hangup_title">Vibrera vid avslutat samtal</string>
   <string name="incall_vibrate_45_title">Vibrera varje minut</string>
+  <string name="detailed_incall_info_title">Detaljerad samtalsinformation</string>
   <string name="video_call">Videosamtal</string>
   <string name="call_duration_active">Varaktighet:</string>
   <string name="call_duration_call_out">Samtalslängd:</string>

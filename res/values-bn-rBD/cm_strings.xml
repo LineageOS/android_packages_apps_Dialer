@@ -45,7 +45,6 @@
   <string name="call_stats_reset_filter">সময় সীমা পুনর্বিন্যাস করুন</string>
   <string name="call_stats_sort_by_duration">কল স্থিতিকাল অনুসারে সজ্জিত</string>
   <string name="call_stats_sort_by_count">কল সংখ্যা অনুসারে সজ্জিত</string>
-  <string name="menu_add_to_blacklist">কালো তালিকায় যুক্ত করুন</string>
   <string name="speed_dial_settings">দ্রুত ডায়ালের রুপান্তর নির্ধারণ</string>
   <string name="speed_dial_not_set">(নির্ধারণ করা হয়নি)</string>
   <string name="speed_dial_replace">প্রতিস্থাপন</string>

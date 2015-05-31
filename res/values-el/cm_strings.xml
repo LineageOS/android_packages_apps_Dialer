@@ -33,7 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
   <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
   <string name="t9_search_input_locale_default">Προεπιλογή</string>
-  <string name="type_blacklist">Στη μαύρη λίστα</string>
+  <string name="type_blacklist">Αποκλεισμένη κλήση</string>
   <string name="call_log_stats_title">Στατιστικά</string>
   <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
   <string name="call_stats">Στατιστικά κλήσεων</string>
@@ -47,8 +47,8 @@
   <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Αναπάντητες</string>
   <string name="call_stats_missed_percent">Αναπάντητες: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">Μαύρη λίστα</string>
-  <string name="call_stats_blacklist_percent">Μαύρη λίστα: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Αποκλεισμένες</string>
+  <string name="call_stats_blacklist_percent">Αποκλεισμένες: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
@@ -66,8 +66,8 @@
   <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
   <string name="call_stats_sort_by_duration">Ταξινόμηση ανά διάρκεια κλήσεων</string>
   <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
-  <string name="menu_add_to_blacklist">Προσθήκη στη μαύρη λίστα</string>
-  <string name="toast_added_to_blacklist">%s προστέθηκε στη μαύρη λίστα.</string>
+  <string name="menu_add_to_blacklist">Προσθήκη στη λίστα αποκλεισμένων καλούντων</string>
+  <string name="toast_added_to_blacklist">%s προστέθηκε στη λίστα αποκλεισμένων καλούντων.</string>
   <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
   <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
   <string name="speed_dial_replace">Αντικατάσταση</string>
@@ -92,7 +92,7 @@
   <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
   <string name="calllog_search_hint">Αναζήτηση αρχείου κλήσεων</string>
   <string name="msim_ime_dialog_title">Αναγνωριστικό συσκευής</string>
-  <string name="call_log_blacklist_header">Μόνο κλήσεις μαύρης λίστας</string>
+  <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
   <string name="start_call_playback">Αναπαραγωγή καταγραφής</string>
   <string name="stop_call_playback">Διακοπή</string>
   <string name="call_playback_error_message">Αποτυχία αναπαραγωγής της καταγραφής κλήσης</string>

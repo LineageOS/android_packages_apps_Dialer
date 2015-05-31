@@ -33,7 +33,6 @@
   <string name="preference_category_t9_dialpad_search">نومۇر تاختا T9 ئىزدەش</string>
   <string name="t9_search_input_locale">T9 ئىزدەش كىرگۈزۈش</string>
   <string name="t9_search_input_locale_default">كۆڭۈلدىكى</string>
-  <string name="type_blacklist">قارا تىزىمدىكى چاقىرىش</string>
   <string name="call_log_stats_title">سىتاتىستىكا</string>
   <string name="callStatsDetailTitle">چاقىرىش تەپسىلاتى</string>
   <string name="call_stats">چاقىرىش سىتاتىستىكىسى</string>
@@ -47,8 +46,6 @@
   <string name="call_stats_outgoing">چاقىرىش: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">سۆزلەشمىگەنلىرى</string>
   <string name="call_stats_missed_percent">سۆزلەشمىگەن: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">قارا تىزىم</string>
-  <string name="call_stats_blacklist_percent">قارا تىزىم: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">جەمئى: <xliff:g id="call_count">%s</xliff:g>، <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">جەمئى: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">باشلاش چېسلاسى</string>
@@ -66,8 +63,6 @@
   <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
   <string name="call_stats_sort_by_duration">داۋاملىشىش ۋاقتى بويىچە</string>
   <string name="call_stats_sort_by_count">سۆزلىشىش قېتىمى بويىچە</string>
-  <string name="menu_add_to_blacklist">قارا تىزىمغا قوش</string>
-  <string name="toast_added_to_blacklist">%s قارا تىزىمغا قوشۇلدى.</string>
   <string name="speed_dial_settings">تېز نومۇر بۇراش تەڭشەكلىرى</string>
   <string name="speed_dial_not_set">(تەڭشەلمىگەن)</string>
   <string name="speed_dial_replace">ئالماشتۇر</string>
@@ -91,7 +86,6 @@
   <string name="call_log_all_calls_header">ھەممە چاقىرىشلار</string>
   <string name="calllog_search_hint">چاقىرىش خاتىرىسىنى ئىزدە</string>
   <string name="msim_ime_dialog_title">ئۈسكۈنە بەلگىسى</string>
-  <string name="call_log_blacklist_header">قارا تىزىم چاقىرىلىشلا</string>
   <string name="start_call_playback">ئۈن خاتىرىسىنى چال</string>
   <string name="stop_call_playback">توختا</string>
   <string name="call_playback_error_message">ئۈن خاتىرىسىنى چالالمىدى</string>

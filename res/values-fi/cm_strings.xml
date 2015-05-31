@@ -33,7 +33,6 @@
   <string name="preference_category_t9_dialpad_search">Numeronäppäimistön T9-haku</string>
   <string name="t9_search_input_locale">T9-haun syöttötapa</string>
   <string name="t9_search_input_locale_default">Oletus</string>
-  <string name="type_blacklist">Estetty puhelu</string>
   <string name="call_log_stats_title">Tilastot</string>
   <string name="callStatsDetailTitle">Puheluiden lisätiedot</string>
   <string name="call_stats">Puhelutiedot</string>
@@ -47,8 +46,6 @@
   <string name="call_stats_outgoing">Soitetut: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Vastaamattomat</string>
   <string name="call_stats_missed_percent">Vastaamattomat: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">Musta lista</string>
-  <string name="call_stats_blacklist_percent">Estetty: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Yhteensä: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Yhteensä: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Aloituspäivä</string>
@@ -66,8 +63,6 @@
   <string name="call_stats_reset_filter">Nollaa aikaväli</string>
   <string name="call_stats_sort_by_duration">Järjestä puhelun keston mukaan</string>
   <string name="call_stats_sort_by_count">Järjestä puheluiden määrän mukaan</string>
-  <string name="menu_add_to_blacklist">Lisää mustalle listalle</string>
-  <string name="toast_added_to_blacklist">%s lisätty mustalle listalle.</string>
   <string name="speed_dial_settings">Pikavalinta-asetukset</string>
   <string name="speed_dial_not_set">(ei määritetty)</string>
   <string name="speed_dial_replace">Korvaa</string>
@@ -92,7 +87,6 @@
   <string name="call_log_all_calls_header">Kaikki puhelut</string>
   <string name="calllog_search_hint">Etsi puhelulokista</string>
   <string name="msim_ime_dialog_title">Laitteen tunnus</string>
-  <string name="call_log_blacklist_header">Vain estetyt puhelut</string>
   <string name="start_call_playback">Toista nauhoitus</string>
   <string name="stop_call_playback">Lopeta</string>
   <string name="call_playback_error_message">Nauhoituksen toisto epäonnistui</string>

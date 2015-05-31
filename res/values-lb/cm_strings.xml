@@ -33,7 +33,6 @@
   <string name="preference_category_t9_dialpad_search">T9-Sich</string>
   <string name="t9_search_input_locale">T9-Sichagab</string>
   <string name="t9_search_input_locale_default">Standard</string>
-  <string name="type_blacklist">Uruff op der schwaarzer Lëscht</string>
   <string name="call_log_stats_title">Statistiken</string>
   <string name="callStatsDetailTitle">Detailer vun den Uruffstatistiken</string>
   <string name="call_stats">Uruffstatistiken</string>
@@ -47,8 +46,6 @@
   <string name="call_stats_outgoing">Erausgoend: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Verpasst</string>
   <string name="call_stats_missed_percent">Verpasst: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">Schwaarz Lëscht</string>
-  <string name="call_stats_blacklist_percent">Schwaarz Lëscht: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdatum</string>
@@ -66,8 +63,6 @@
   <string name="call_stats_reset_filter">Zäitfënster zrécksetzen</string>
   <string name="call_stats_sort_by_duration">No Gespréichsdauer zortéieren</string>
   <string name="call_stats_sort_by_count">No Unzuel vun Uriff zortéieren</string>
-  <string name="menu_add_to_blacklist">Op d\'schwaarz Lëscht setzen</string>
-  <string name="toast_added_to_blacklist">%s gouf op d\'schwaarz Lëscht dobäigesat.</string>
   <string name="speed_dial_settings">Astellunge fir d\'séiert Wielen</string>
   <string name="speed_dial_not_set">(net gesat)</string>
   <string name="speed_dial_replace">Ersetzen</string>
@@ -92,7 +87,6 @@
   <string name="call_log_all_calls_header">All Uriff</string>
   <string name="calllog_search_hint">Uruffprotokoll duerchsichen</string>
   <string name="msim_ime_dialog_title">Apparat-Identifikatioun</string>
-  <string name="call_log_blacklist_header">Mat der schwaarzer Lëscht just Uriff blockéieren</string>
   <string name="start_call_playback">Opnam ofspillen</string>
   <string name="stop_call_playback">Stopp</string>
   <string name="call_playback_error_message">Konnt d\'Opnam net ofspillen</string>

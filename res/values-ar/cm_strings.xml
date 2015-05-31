@@ -45,5 +45,4 @@
   <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
   <string name="call_stats_sort_by_duration">فرز حسب مدة المكالمة</string>
   <string name="call_stats_sort_by_count">فرز حسب عدد المكالمات</string>
-  <string name="menu_add_to_blacklist">إضافة إلى القائمة السوداء</string>
 </resources>

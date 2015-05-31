@@ -33,7 +33,6 @@
   <string name="preference_category_t9_dialpad_search">חיפוש בעזרת לוח מקשי אותיות T9</string>
   <string name="t9_search_input_locale">שפת הקלט של חיפוש T9</string>
   <string name="t9_search_input_locale_default">ברירת מחדל</string>
-  <string name="type_blacklist">שיחה שהוכנסה לרשימה השחורה</string>
   <string name="call_log_stats_title">סטטיסטיקה</string>
   <string name="callStatsDetailTitle">פרטים של סטטיסטיקת שיחות</string>
   <string name="call_stats">סטטיסטיקת שיחות</string>
@@ -47,8 +46,6 @@
   <string name="call_stats_outgoing">יוצאות: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">פוספסו</string>
   <string name="call_stats_missed_percent">פוספסו: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">רשימה שחורה</string>
-  <string name="call_stats_blacklist_percent">רשימה שחורה: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">סך הכל: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">סך הכל: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">תאריך התחלה</string>
@@ -66,8 +63,6 @@
   <string name="call_stats_reset_filter">אפס טווח זמן</string>
   <string name="call_stats_sort_by_duration">מיין לפי משך שיחה</string>
   <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
-  <string name="menu_add_to_blacklist">הוסף לרשימה שחורה</string>
-  <string name="toast_added_to_blacklist">%s נוסף לרשימה השחורה.</string>
   <string name="speed_dial_settings">הגדרות חיוג מהיר</string>
   <string name="speed_dial_not_set">(לא מוגדר)</string>
   <string name="speed_dial_replace">החלף</string>
@@ -92,7 +87,6 @@
   <string name="call_log_all_calls_header">כל השיחות</string>
   <string name="calllog_search_hint">חיפוש ביומן שיחות</string>
   <string name="msim_ime_dialog_title">מזהה התקן</string>
-  <string name="call_log_blacklist_header">שיחות מהרשימה השחורה בלבד</string>
   <string name="start_call_playback">נגן הקלטה</string>
   <string name="stop_call_playback">עצור</string>
   <string name="call_playback_error_message">נכשל בניגון הקלטה</string>

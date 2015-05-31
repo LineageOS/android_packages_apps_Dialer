@@ -45,7 +45,6 @@
   <string name="call_stats_reset_filter">කාල පරාසය ප්‍රත්‍යාරම්භ කරන්න</string>
   <string name="call_stats_sort_by_duration">ඇමතුම් කාලමාත්‍රාව අනුව සුබෙදන්න</string>
   <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
-  <string name="menu_add_to_blacklist">අපලේඛණයට එක් කරන්න</string>
   <string name="speed_dial_settings">ඉක්මන් ඩයල් කිරීමේ සැකසීම්</string>
   <string name="speed_dial_not_set">(සකසා නැත)</string>
   <string name="speed_dial_replace">ප්‍රතිස්ථාපනය</string>

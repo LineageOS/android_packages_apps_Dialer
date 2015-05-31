@@ -33,7 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Bilatu T9 markadorean</string>
   <string name="t9_search_input_locale">T9 bilatzeko sarrera</string>
   <string name="t9_search_input_locale_default">Lehenetsia</string>
-  <string name="type_blacklist">Zerrenda beltzeko deia</string>
+  <string name="type_blacklist">Blokeatutako deia</string>
   <string name="call_log_stats_title">Estatistikak</string>
   <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
   <string name="call_stats">Dei estatistikak</string>
@@ -47,8 +47,8 @@
   <string name="call_stats_outgoing">Egindakoak: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Galduak</string>
   <string name="call_stats_missed_percent">Galduak: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_blacklist">Zerrenda beltza</string>
-  <string name="call_stats_blacklist_percent">Zerrenda beltza: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blokeatuta</string>
+  <string name="call_stats_blacklist_percent">Blokeatuta: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Guztira: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Hasiera data</string>
@@ -66,8 +66,8 @@
   <string name="call_stats_reset_filter">Leheneratu denbora heina</string>
   <string name="call_stats_sort_by_duration">Iraupenaren arabera sailkatu</string>
   <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
-  <string name="menu_add_to_blacklist">Gehitu zerrenda beltzera</string>
-  <string name="toast_added_to_blacklist">%s zerrenda beltzera gehitu da.</string>
+  <string name="menu_add_to_blacklist">Gehitu blokeatutako deitzaileen zerrendara</string>
+  <string name="toast_added_to_blacklist">%s blokeatutako deitzaileen zerrendara gehitu da.</string>
   <string name="speed_dial_settings">Markaketa azkarraren ezarpenak</string>
   <string name="speed_dial_not_set">(ezarri gabe)</string>
   <string name="speed_dial_replace">Ordeztu</string>
@@ -92,7 +92,7 @@
   <string name="call_log_all_calls_header">Dei guztiak</string>
   <string name="calllog_search_hint">Bilatu deien erregistroan</string>
   <string name="msim_ime_dialog_title">Gailu identifikatzailea</string>
-  <string name="call_log_blacklist_header">Blokeatu deiak soilik</string>
+  <string name="call_log_blacklist_header">Blokeatutako deiak soilik</string>
   <string name="start_call_playback">Erreproduzitu grabazioa</string>
   <string name="stop_call_playback">Gelditu</string>
   <string name="call_playback_error_message">Ezin izan da grabazioa erreproduzitu</string>

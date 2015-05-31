@@ -45,5 +45,4 @@
   <string name="call_stats_reset_filter">重設時間範圍</string>
   <string name="call_stats_sort_by_duration">以通話時間排序</string>
   <string name="call_stats_sort_by_count">以通話次數排序</string>
-  <string name="menu_add_to_blacklist">新增至黑名單</string>
 </resources>
