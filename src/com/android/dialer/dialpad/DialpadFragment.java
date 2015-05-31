@@ -294,6 +294,18 @@ public class DialpadFragment extends Fragment
         return prefs.getBoolean(GeneralSettingsFragment.BUTTON_SMART_DIALER_KEY, false);
     }
 
+    public void enableSmartCall(boolean enable){
+        if (mPickupDetector == null || !isSmartCallEnabled() || isPhoneInUse()) {
+            return;
+        }
+
+        if (enable) {
+            mPickupDetector.enable();
+        } else {
+            mPickupDetector.disable();
+        }
+    }
+
     private TelecomManager getTelecomManager() {
         return (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
     }
@@ -696,10 +708,6 @@ public class DialpadFragment extends Fragment
         stopWatch.lap("bes");
 
         stopWatch.stopAndLog(TAG, 50);
-
-        if (!isPhoneInUse() && isSmartCallEnabled()) {
-            mPickupDetector.enable();
-        }
 
         mSmsPackageComponentName = DialerUtils.getSmsComponent(activity);
 
