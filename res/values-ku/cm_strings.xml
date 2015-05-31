@@ -55,11 +55,11 @@
   <string name="calllog_search_hint">گەڕان بۆ مێژوی پەیوەندی</string>
   <string name="video_call">په‌یوه‌ندی وێنه‌یی</string>
   <string name="video_call_settings">ڕێکخستنەکانی پەیوەندیی ڤیدیۆیی</string>
-  <string name="description_videocall">پەیوەندی وێنەیی <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_videocall">پەیوەندی وێنەیی <xliff:g id="name">%١$s</xliff:g></string>
   <string name="speed_dial_settings">ڕێکبەندەکانی ژمارەگری خێرا</string>
   <string name="speed_dial_not_set">(دانەندراوە)</string>
   <string name="speed_dial_replace">جێگۆڕکردن</string>
-  <string name="speed_dial_delete">سڕینەوە؟</string>
+  <string name="speed_dial_delete">سڕینەوە</string>
   <string name="speed_dial_unassigned_dialog_title">کلیل تەرخان نەکراوە</string>
   <string name="speed_dial_unassigned_dialog_message">هیچ زمارەگرێکی خێرا تەرخان نەکراوە بۆ کلیلی ژمارە \'<xliff:g id="number">%s</xliff:g>\'. دەتەوێت پەیوەندییەکی بۆ دیاری بکەیت؟</string>
   <string name="dialog_speed_dial_airplane_mode_message">"بۆ بەکارهێنانی ژمارەگری خێرا، یەکەم دۆخی فڕۆکە بکوژێنەوە."</string>
