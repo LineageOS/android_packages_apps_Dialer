@@ -144,7 +144,7 @@
   <string name="simContacts_title">Kontakter vun der SIM-Kaart</string>
   <string name="add_contact_not_available">Reaktivéier d\'\"Leit\"-App fir dës Funktioun ze benotzen.</string>
   <string name="voice_search_not_available">Stëmmsich ass net disponibel.</string>
-  <string name="call_not_available">Kann keen Telefonsuruff maachen, well d\'Telefons-App deaktivéiert gouf.</string>
+  <string name="call_not_available">Kann keen Telefonsuruff maachen, well d\'Telefons-App desaktivéiert gouf.</string>
   <string name="activity_not_available">Keng installéiert Aktivitéit fir déi ausgewielten Aktioun disponibel.</string>
   <string name="dialer_hint_find_contact">Numm oder Telefonsnummer aginn</string>
   <string name="recentMissed_empty">Du hues keng rezent verpasst Uriff.</string>
