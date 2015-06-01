@@ -110,7 +110,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ActionBarController.ActivityUi {
     private static final String TAG = "DialtactsActivity";
 
-    public static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    public static final boolean DEBUG = false;
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
