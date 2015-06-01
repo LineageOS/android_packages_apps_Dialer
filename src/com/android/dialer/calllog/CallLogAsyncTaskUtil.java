@@ -34,6 +34,8 @@ import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.TelecomUtil;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class CallLogAsyncTaskUtil {
     private static String TAG = CallLogAsyncTaskUtil.class.getSimpleName();
 
@@ -296,5 +298,10 @@ public class CallLogAsyncTaskUtil {
                         }
                     }
                 });
+    }
+
+    @VisibleForTesting
+    public static void resetForTest() {
+        sAsyncTaskExecutor = null;
     }
 }
