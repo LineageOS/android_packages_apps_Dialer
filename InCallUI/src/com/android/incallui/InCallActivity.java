@@ -233,13 +233,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
             }
         };
 
-        if (mOrientationEventListener.canDetectOrientation()) {
-            Log.v(this, "Orientation detection enabled.");
-            mOrientationEventListener.enable();
-        } else {
-            Log.v(this, "Orientation detection disabled.");
-            mOrientationEventListener.disable();
-        }
         Log.d(this, "onCreate(): exit");
     }
 
@@ -258,6 +251,14 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     protected void onStart() {
         Log.d(this, "onStart()...");
         super.onStart();
+
+        if (mOrientationEventListener.canDetectOrientation()) {
+            Log.v(this, "Orientation detection enabled.");
+            mOrientationEventListener.enable();
+        } else {
+            Log.v(this, "Orientation detection disabled.");
+            mOrientationEventListener.disable();
+        }
 
         // setting activity should be last thing in setup process
         InCallPresenter.getInstance().setActivity(this);
@@ -314,9 +315,9 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     @Override
     protected void onStop() {
         Log.d(this, "onStop()...");
-
         InCallPresenter.getInstance().updateIsChangingConfigurations();
         InCallPresenter.getInstance().onActivityStopped();
+        mOrientationEventListener.disable();
         super.onStop();
     }
 
