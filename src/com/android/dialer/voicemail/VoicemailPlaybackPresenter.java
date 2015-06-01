@@ -43,6 +43,7 @@ import com.android.common.io.MoreCloseables;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.RejectedExecutionException;
@@ -124,6 +125,7 @@ public class VoicemailPlaybackPresenter
 
     private Uri mVoicemailUri;
     private int mPosition;
+    private boolean mIsPrepared;
     private boolean mIsPlaying;
     private boolean mShouldResumePlaybackAfterSeeking;
 
@@ -172,6 +174,7 @@ public class VoicemailPlaybackPresenter
 
         mView.setPresenter(this);
 
+        mIsPrepared = false;
         checkForContent();
     }
 
@@ -184,6 +187,11 @@ public class VoicemailPlaybackPresenter
     }
 
     public void onDestroy() {
+        if (mIsPrepared) {
+            mMediaPlayer.release();
+            mIsPrepared = false;
+        }
+
         if (mScheduledExecutorService != null) {
             mScheduledExecutorService.shutdown();
             mScheduledExecutorService = null;
@@ -350,7 +358,7 @@ public class VoicemailPlaybackPresenter
             mMediaPlayer.setDataSource(mContext, mVoicemailUri);
             mMediaPlayer.setAudioStreamType(PLAYBACK_STREAM);
             mMediaPlayer.prepareAsync();
-        } catch (Exception e) {
+        } catch (IOException e) {
             handleError(e);
         }
     }
@@ -360,6 +368,8 @@ public class VoicemailPlaybackPresenter
      */
     @Override
     public void onPrepared(MediaPlayer mp) {
+        mIsPrepared = true;
+
         mView.enableUiElements();
 
         if (mIsPlaying) {
@@ -380,7 +390,11 @@ public class VoicemailPlaybackPresenter
     }
 
     private void handleError(Exception e) {
-        mMediaPlayer.release();
+        if (mIsPrepared) {
+            mMediaPlayer.release();
+            mIsPrepared = false;
+        }
+
         mView.onPlaybackError(e);
         setPosition(0, false);
     }
