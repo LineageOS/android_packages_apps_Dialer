@@ -47,7 +47,7 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Келген қоңыраулар ғана"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Шығыс қоңыраулары ғана"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Қабылданбаған қоңыраулар ғана"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Дауыс-хабар жаңартулары қол жетімді емес"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Дауыстық пошта жаңартулары қол жетімді емес"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Жаңа дауыстық хабар күтуде. Дәл қазір жүктеу мүмкін емес."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Дауыс-хабарды реттеу"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Аудио қол жетімді емес"</string>
@@ -90,7 +90,7 @@
     <string name="type_incoming_video" msgid="82323391702796181">"Кіріс бейне қоңырау"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Шығыс бейне қоңырау"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Өткізіп алынған бейне қоңырау"</string>
-    <string name="type_voicemail" msgid="5153139450668549908">"Дауыс-хабар"</string>
+    <string name="type_voicemail" msgid="5153139450668549908">"Дауыстық пошта"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Келген қоңыраулар"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Дауыс-хабарды ойнату"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> контактісін көру"</string>
@@ -104,7 +104,7 @@
     <string name="description_start_voice_search" msgid="520539488194946012">"Дауыс іздеуді бастау"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> нөміріне қоңырау шалу"</string>
     <string name="unknown" msgid="740067747858270469">"Белгісіз"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Дауыс-хабар"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Дауыстық пошта"</string>
     <string name="private_num" msgid="6374339738119166953">"Жеке нөмір"</string>
     <string name="payphone" msgid="7726415831153618726">"Автомат-телефон"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
