@@ -33,6 +33,7 @@ import android.test.suitebuilder.annotation.Suppress;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.FakeAsyncTaskExecutor;
 import com.android.contacts.common.test.IntegrationTestUtils;
@@ -89,27 +90,29 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         cleanUpUri();
         mTestUtils = null;
         AsyncTaskExecutors.setFactoryForTest(null);
+        CallLogAsyncTaskUtil.resetForTest();
         super.tearDown();
     }
 
     public void testInitialActivityStartsWithFetchingVoicemail() throws Throwable {
-        setActivityIntentForTestVoicemailEntry();
+        setActivityIntentForRealFileVoicemailEntry();
         startActivityUnderTest();
-        // When the activity first starts, we will show "Fetching voicemail" on the screen.
+        // When the activity first starts, we will show "Loading voicemail" on the screen.
         // The duration should not be visible.
-        assertHasOneTextViewContaining("Fetching voicemail");
+        assertHasOneTextViewContaining("Loading voicemail");
         assertZeroTextViewsContaining("00:00");
     }
 
-    public void testWhenCheckForContentCompletes_UiShowsBuffering() throws Throwable {
-        setActivityIntentForTestVoicemailEntry();
+    public void testWhenCheckForContentCompletes() throws Throwable {
+        setActivityIntentForRealFileVoicemailEntry();
         startActivityUnderTest();
         // There is a background check that is testing to see if we have the content available.
-        // Once that task completes, we shouldn't be showing the fetching message, we should
-        // be showing "Buffering".
+        // Once that task completes, we shouldn't be showing the fetching message.
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
-        assertHasOneTextViewContaining("Buffering");
-        assertZeroTextViewsContaining("Fetching voicemail");
+
+        // The voicemail async call may or may not return before we check the asserts.
+        assertHasOneTextViewContaining("Buffering", "00:00");
+        assertZeroTextViewsContaining("Loading voicemail");
     }
 
     public void testInvalidVoicemailShowsErrorMessage() throws Throwable {
@@ -125,7 +128,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     public void testOnResumeDoesNotCreateManyFragments() throws Throwable {
         // There was a bug where every time the activity was resumed, a new fragment was created.
         // Before the fix, this was failing reproducibly with at least 3 "Buffering" views.
-        setActivityIntentForTestVoicemailEntry();
+        setActivityIntentForRealFileVoicemailEntry();
         startActivityUnderTest();
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
         getInstrumentation().runOnMainSync(new Runnable() {
@@ -137,7 +140,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
                 getInstrumentation().callActivityOnResume(mActivityUnderTest);
             }
         });
-        assertHasOneTextViewContaining("Buffering");
+        assertHasOneTextViewContaining("Buffering", "00:00");
     }
 
     /**
@@ -214,6 +217,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         values.put(VoicemailContract.Voicemails.HAS_CONTENT, 1);
         values.put(VoicemailContract.Voicemails._DATA, VOICEMAIL_FILE_LOCATION);
         mVoicemailUri = contentResolver.insert(VoicemailContract.Voicemails.CONTENT_URI, values);
+
         Uri callLogUri = ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL,
                 ContentUris.parseId(mVoicemailUri));
         Intent intent = new Intent(Intent.ACTION_VIEW, callLogUri);
@@ -246,9 +250,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     public void copyBetweenStreams(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int bytesRead;
-        int total = 0;
-        while ((bytesRead = in.read(buffer)) != -1) {
-            total += bytesRead;
+        while ((bytesRead = in.read(buffer)) > 0) {
             out.write(buffer, 0, bytesRead);
         }
     }
@@ -278,6 +280,14 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         return views.get(0);
     }
 
+    private void assertHasOneTextViewContaining(String text1, String text2) throws Throwable {
+        assertNotNull(mActivityUnderTest);
+        List<TextView> view1s = mTestUtils.getTextViewsWithString(mActivityUnderTest, text1);
+        List<TextView> view2s = mTestUtils.getTextViewsWithString(mActivityUnderTest, text2);
+        assertEquals("There should have been one TextView with text '" + text1 + "' or text '"
+                + text2  + "' but found " + view1s + view2s, 1, view1s.size() + view2s.size());
+    }
+
     private void assertZeroTextViewsContaining(String text) throws Throwable {
         assertNotNull(mActivityUnderTest);
         List<TextView> views = mTestUtils.getTextViewsWithString(mActivityUnderTest, text);
@@ -293,6 +303,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         // This is because it seems that we can have onResume, onPause, onResume during the course
         // of a single unit test.
         mFakeAsyncTaskExecutor.runAllTasks(GET_CALL_DETAILS);
+        CallLogAsyncTaskUtil.resetForTest();
     }
 
     private AssetManager getAssets() {
