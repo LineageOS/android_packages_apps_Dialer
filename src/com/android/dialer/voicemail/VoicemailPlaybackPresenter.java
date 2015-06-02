@@ -170,24 +170,28 @@ public class VoicemailPlaybackPresenter
             PlaybackView view, Uri voicemailUri, boolean startPlayingImmediately) {
         mView = view;
         mVoicemailUri = voicemailUri;
-        setPosition(0, startPlayingImmediately);
 
         mView.setPresenter(this);
 
-        mIsPrepared = false;
+        if (!mMediaPlayer.isPlaying()) {
+            setPosition(0, startPlayingImmediately);
+            mIsPrepared = false;
+        }
         checkForContent();
     }
 
-    public void onPause() {
-        if (mMediaPlayer.isPlaying()) {
+    public void onPause(boolean isFinishing) {
+        // Do not pause for orientation changes.
+        if (mMediaPlayer.isPlaying() && isFinishing) {
             pausePlayback(mMediaPlayer.getCurrentPosition(), mIsPlaying);
         }
 
         disableProximitySensor(false /* waitForFarState */);
     }
 
-    public void onDestroy() {
-        if (mIsPrepared) {
+    public void onDestroy(boolean isFinishing) {
+        // Do not release for orientation changes.
+        if (mIsPrepared && isFinishing) {
             mMediaPlayer.release();
             mIsPrepared = false;
         }
