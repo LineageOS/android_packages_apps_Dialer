@@ -272,7 +272,7 @@ public class CallDetailActivity extends Activity {
     @Override
     public void onPause() {
         if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onPause();
+            mVoicemailPlaybackPresenter.onPause(isFinishing());
         }
         super.onPause();
     }
@@ -280,7 +280,7 @@ public class CallDetailActivity extends Activity {
     @Override
     public void onDestroy() {
         if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onDestroy();
+            mVoicemailPlaybackPresenter.onDestroy(isFinishing());
         }
         super.onDestroy();
     }
