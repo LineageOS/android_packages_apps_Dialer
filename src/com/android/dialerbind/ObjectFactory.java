@@ -25,6 +25,7 @@ import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.CallLogAdapter.OnReportButtonClickListener;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 /**
  * Default static binding for various objects.
@@ -47,12 +48,14 @@ public class ObjectFactory {
             Context context,
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
+            VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             boolean isShowingRecentsTab,
             OnReportButtonClickListener onReportButtonClickListener) {
         return new CallLogAdapter(
                 context,
                 callFetcher,
                 contactInfoHelper,
+                voicemailPlaybackPresenter,
                 isShowingRecentsTab,
                 onReportButtonClickListener);
     }

@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.os.Bundle;
 import android.os.Trace;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
@@ -41,6 +42,7 @@ import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -67,6 +69,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
+    private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
     private final OnReportButtonClickListener mOnReportButtonClickListener;
     private ViewTreeObserver mViewTreeObserver = null;
@@ -74,6 +77,9 @@ public class CallLogAdapter extends GroupingListAdapter
     protected ContactInfoCache mContactInfoCache;
 
     private boolean mIsShowingRecentsTab;
+
+    private static final String KEY_EXPANDED_POSITION = "expanded_position";
+    private static final String KEY_EXPANDED_ROW_ID = "expanded_row_id";
 
     // Tracks the position of the currently expanded list item.
     private int mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
@@ -200,6 +206,7 @@ public class CallLogAdapter extends GroupingListAdapter
             Context context,
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
+            VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             boolean isShowingRecentsTab,
             OnReportButtonClickListener onReportButtonClickListener) {
         super(context);
@@ -207,6 +214,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mContext = context;
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
+        mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
         mIsShowingRecentsTab = isShowingRecentsTab;
         mOnReportButtonClickListener = onReportButtonClickListener;
 
@@ -224,6 +232,20 @@ public class CallLogAdapter extends GroupingListAdapter
                 new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
         mCallLogViewsHelper = new CallLogListItemHelper(phoneCallDetailsHelper, resources);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(KEY_EXPANDED_POSITION, mCurrentlyExpandedPosition);
+        outState.putLong(KEY_EXPANDED_ROW_ID, mCurrentlyExpandedRowId);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mCurrentlyExpandedPosition =
+                    savedInstanceState.getInt(KEY_EXPANDED_POSITION, RecyclerView.NO_POSITION);
+            mCurrentlyExpandedRowId =
+                    savedInstanceState.getLong(KEY_EXPANDED_ROW_ID, NO_EXPANDED_LIST_ITEM);
+        }
     }
 
     /**
@@ -296,7 +318,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 mContext,
                 mActionListener,
                 mPhoneNumberUtilsWrapper,
-                mCallLogViewsHelper);
+                mCallLogViewsHelper,
+                mVoicemailPlaybackPresenter);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
