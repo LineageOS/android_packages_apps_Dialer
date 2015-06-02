@@ -28,7 +28,6 @@ import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -81,57 +79,6 @@ public class CallStatsFragment extends ListFragment implements
             mRefreshDataRequired = true;
         }
     };
-
-    private OnItemSelectedListener mSubSelectedListener = new OnItemSelectedListener() {
-
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Log.i(TAG, "Sub selected, position: " + position);
-            int sub = position - 1;
-            mCallSubFilter = sub;
-            mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo, mCallSubFilter);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // Do nothing.
-        }
-
-    };
-
-    public static class CallStatsNavAdapter extends ArrayAdapter<String> {
-        private LayoutInflater mMainInflater;
-        private LayoutInflater mDropdownInflater;
-
-        public CallStatsNavAdapter(Context context, int textResourceId, String[] objects) {
-            super(context, textResourceId, objects);
-            mMainInflater = LayoutInflater.from(
-                    new ContextThemeWrapper(context, R.style.DialtactsSpinnerTheme));
-            mDropdownInflater = LayoutInflater.from(context);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent, mDropdownInflater);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent, mMainInflater);
-        }
-
-        public View getCustomView(int position, View convertView,
-                ViewGroup parent, LayoutInflater inflater) {
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.call_stats_nav_item, parent, false);
-            }
-
-            TextView label = (TextView) convertView.findViewById(R.id.call_stats_nav_text);
-            label.setText(getItem(position));
-
-            return convertView;
-        }
-    }
 
     @Override
     public void onCreate(Bundle state) {
@@ -183,7 +130,7 @@ public class CallStatsFragment extends ListFragment implements
                 mFilterSubSpinnerView.setVisibility(View.GONE);
             } else {
                 mFilterSubSpinnerView.setAdapter(filterSubAdapter);
-                mFilterSubSpinnerView.setOnItemSelectedListener(mSubSelectedListener);
+                mFilterSubSpinnerView.setOnItemSelectedListener(this);
                 SpinnerContent.setSpinnerContentValue(mFilterSubSpinnerView, mCallSubFilter);
             }
         }
@@ -254,10 +201,16 @@ public class CallStatsFragment extends ListFragment implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        mCallTypeFilter = ((SpinnerContent)parent.getItemAtPosition(pos)).value;
-        mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
-        if (mDataLoaded) {
-            updateHeader();
+        if (parent == mFilterSubSpinnerView) {
+            Log.i(TAG, "Sub selected, position: " + pos);
+            mCallSubFilter = pos - 1;
+            mCallStatsQueryHandler.fetchCalls(mFilterFrom, mFilterTo, mCallSubFilter);
+        } else {
+            mCallTypeFilter = ((SpinnerContent)parent.getItemAtPosition(pos)).value;
+            mAdapter.updateDisplayedData(mCallTypeFilter, mSortByDuration);
+            if (mDataLoaded) {
+                updateHeader();
+            }
         }
     }
 

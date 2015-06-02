@@ -105,10 +105,6 @@
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
         <item name="android:fastScrollTrackDrawable">@null</item>
     </style>
-    <!-- A theme for inflation of spinners in the dialtacts action bar -->
-    <style name="DialtactsSpinnerTheme" parent="DialtactsTheme">
-        <item name="android:textAppearanceListItemSmall">@android:style/TextAppearance.Holo.Medium.Inverse</item>
-    </style>
 
     <style name="DialtactsActionBarSpinner"
         parent="@*android:style/Widget.Holo.Light.Spinner.DropDown.ActionBar">
