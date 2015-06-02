@@ -418,7 +418,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
             numberTypeTextView.setVisibility(View.GONE);
         } else {
             numberTextView.setVisibility(View.VISIBLE);
-            numberTextView.setText(PhoneNumberUtils.getPhoneTtsSpannable(callerNumber));
+            numberTextView.setText(PhoneNumberUtils.createTtsSpannable(callerNumber));
             numberTypeTextView.setVisibility(View.VISIBLE);
             numberTypeTextView.setText(callerNumberType);
         }
