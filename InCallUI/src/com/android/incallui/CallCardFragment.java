@@ -21,11 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -431,7 +427,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPrimaryName.setText(null);
         } else {
             mPrimaryName.setText(nameIsNumber
-                    ? PhoneNumberUtils.getPhoneTtsSpannable(name)
+                    ? PhoneNumberUtils.createTtsSpannable(name)
                     : name);
 
             // Set direction of the name field
@@ -457,7 +453,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPhoneNumber.setText(null);
             mPhoneNumber.setVisibility(View.GONE);
         } else {
-            mPhoneNumber.setText(PhoneNumberUtils.getPhoneTtsSpannable(number));
+            mPhoneNumber.setText(PhoneNumberUtils.createTtsSpannable(number));
             mPhoneNumber.setVisibility(View.VISIBLE);
             mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
         }
@@ -515,7 +511,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallVideoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
 
             mSecondaryCallName.setText(nameIsNumber
-                    ? PhoneNumberUtils.getPhoneTtsSpannable(name)
+                    ? PhoneNumberUtils.createTtsSpannable(name)
                     : name);
             if (hasProvider) {
                 mSecondaryCallProviderLabel.setText(providerLabel);

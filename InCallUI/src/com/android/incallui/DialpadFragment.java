@@ -483,7 +483,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
      * @param text Text to set Dialpad EditText to.
      */
     public void setDtmfText(String text) {
-        mDtmfDialerField.setText(PhoneNumberUtils.getPhoneTtsSpannable(text));
+        mDtmfDialerField.setText(PhoneNumberUtils.createTtsSpannable(text));
     }
 
     @Override
