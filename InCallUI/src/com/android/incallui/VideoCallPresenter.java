@@ -772,7 +772,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (showIncomingVideo || showOutgoingVideo) {
             ui.showVideoViews(showOutgoingVideo, showIncomingVideo);
 
-            if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
+            if (VideoProfile.isReceptionEnabled(videoState)) {
                 loadProfilePhotoAsync();
             }
         } else {
@@ -793,10 +793,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @return {@code true} if the incoming video surface should be shown, {@code false} otherwise.
      */
     public static boolean showIncomingVideo(int videoState, int callState) {
-        boolean isPaused = VideoProfile.VideoState.isPaused(videoState);
+        boolean isPaused = VideoProfile.isPaused(videoState);
         boolean isCallActive = callState == Call.State.ACTIVE;
 
-        return !isPaused && isCallActive && VideoProfile.VideoState.isReceptionEnabled(videoState);
+        return !isPaused && isCallActive && VideoProfile.isReceptionEnabled(videoState);
     }
 
     /**
@@ -808,7 +808,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      *      otherwise.
      */
     public static boolean showOutgoingVideo(int videoState) {
-        return VideoProfile.VideoState.isTransmissionEnabled(videoState);
+        return VideoProfile.isTransmissionEnabled(videoState);
     }
 
     /**
