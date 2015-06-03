@@ -81,8 +81,8 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Të gjitha kontaktet"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detajet e telefonatës"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Detajet nuk mundësohen"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Përdor bllokun e tasteve me tone të prekjes"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Kthehu te telefonata në vazhdim"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Përdor bllokun e tasteve"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Kthehu te telefonata"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Shto një telefonatë"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Telefonatë hyrëse"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Telefonatë dalëse"</string>
@@ -141,7 +141,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Bëj një telefonatë me video"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Shiko historikun e plotë të telefonatave"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> telefonata të reja të humbura"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Telefonata e shpejtë është formim numri me një prekje për të preferuarat dhe për numrat që telefonon më shpesh."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"\"Telefonata e shpejtë\" nënkupton telefonatë me një prekje drejt kontakteve të preferuara ose numrave që telefonon më shpesh."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Nuk ka asnjë kontakt"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Prek imazhin për të parë të gjithë numrat ose mbaje të shtypur për ta pozicionuar përsëri"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Hiq"</string>
@@ -177,9 +177,9 @@
     <string name="display_options_title" msgid="7812852361055667468">"Opsionet e paraqitjes"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Tingujt dhe dridhjet"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Qasshmëria"</string>
-    <string name="ringtone_title" msgid="760362035635084653">"Toni i ziles i telefonit"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Dridhje edhe për telefonatat"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonet e bllokut të formimit të numrit"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Zilja e telefonit"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Edhe dridhje për telefonatat"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tingujt e bllokut të tasteve"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Gjatësia e tonit të bllokut të formimit të numrave"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Normal"</item>

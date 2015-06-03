@@ -102,7 +102,7 @@
     <string name="description_send_text_message" msgid="3118485319691414221">"Αποστολή SMS στο χρήστη <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Μηνύματα αυτόματου τηλεφωνητή που δεν έχετε ακούσει"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Έναρξη φωνητικής αναζήτησης"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Κλήση του αριθμού <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Κλήση <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Άγνωστος"</string>
     <string name="voicemail" msgid="3851469869202611441">"Αυτόματος τηλεφωνητής"</string>
     <string name="private_num" msgid="6374339738119166953">"Απόκρυψη"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Αναίρεση"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Κλήση του αριθμού <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Δημιουργία νέας επαφής"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Προσθήκη σε υπάρχουσα επαφή"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Προσθήκη σε υπάρ. επαφή"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Αποστολή SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Πραγματοποίηση βιντεοκλήσης"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Προβολή πλήρους ιστορικού κλήσεων"</string>

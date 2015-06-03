@@ -141,7 +141,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Make video call"</string>
     <string name="show_call_history" msgid="1141502332266697170">"View full call history"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> new missed calls"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Speed dial is one‑touch dialing for favourites and numbers that you call often"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Speed dial is one‑touch dialling for favourites and numbers that you call often"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"No contacts"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Touch image to see all numbers or touch &amp; hold to reorder"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remove"</string>

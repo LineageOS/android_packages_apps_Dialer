@@ -30,7 +30,7 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Compartir mensaje de voz"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"No hay llamadas"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"¿Borrar historial de llamadas?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se eliminarán todas las llamadas del historial"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se eliminarán todas las llamadas del historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Borrando historial de llamadas…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> mensajes de voz </item>
@@ -82,7 +82,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Detalles de la llamada"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Detalles no disponibles"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Usar teclado táctil"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Volver a la llamada en curso"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Volver a la llamada"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Añadir llamada"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Llamada entrante"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Llamada saliente"</string>
@@ -125,7 +125,7 @@
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"No hay mensajes de voz recientes"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar solo favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historial"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Todo"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mensaje de voz"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Marcación rápida"</string>

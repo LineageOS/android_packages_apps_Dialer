@@ -126,8 +126,8 @@
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"ಯಾವುದೇ ಇತ್ತೀಚಿನ ಧ್ವನಿಮೇಲ್‌ಗಳಿಲ್ಲ"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ಇತಿಹಾಸ"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲ"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"ತಪ್ಪಿವೆ"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"ಮಿಸ್ಡ್‌‌ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_recents" msgid="929949073851377206">"ಇತ್ತೀಚಿನವುಗಳು"</string>
@@ -142,7 +142,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="show_call_history" msgid="1141502332266697170">"ಕರೆಯ ಪೂರ್ಣ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನವುಗಳು ಮತ್ತು ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದು-ಸ್ಪರ್ಶದ ಡಯಲಿಂಗ್‌ ಆಗಿದೆ"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂದರೆ, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನ ಸಂಪರ್ಕಗಳು ಹಾಗೂ ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದೇ ಒಂದು ಸ್ಪರ್ಶದಲ್ಲಿ ಡಯಲ್‌ ಮಾಡುವುದು."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>

@@ -141,7 +141,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Soita videopuhelu"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Näytä koko soittohistoria"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uutta vastaamatonta puhelua"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella suosikeillesi ja muihin usein käyttämiisi numeroihin"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella suosikeillesi ja muihin usein käyttämiisi numeroihin."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ei yhteystietoja"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Katso kaikki numerot koskettamalla kuvaa tai järjestele tietoja koskettamalla kuvaa pitkään"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Poista"</string>

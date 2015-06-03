@@ -83,8 +83,8 @@
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Dettagli non disponibili"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Usa tastierino per selezione a toni"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna alla chiamata in corso"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Aggiungi"</string>
-    <string name="type_incoming" msgid="6502076603836088532">"Chiamata ricevuta"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Aggiungi chiamata"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Chiamata in arrivo"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Chiamata effettuata"</string>
     <string name="type_missed" msgid="2720502601640509542">"Chiamata persa"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Videochiamata in arrivo"</string>
