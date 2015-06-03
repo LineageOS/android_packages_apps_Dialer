@@ -1596,7 +1596,9 @@ public class InCallPresenter implements CallList.Listener,
         if (!allowOrientationChange) {
             mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         } else {
-            mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            // Using SCREEN_ORIENTATION_FULL_SENSOR allows for reverse-portrait orientation, where
+            // SCREEN_ORIENTATION_SENSOR does not.
+            mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
         }
     }
 
