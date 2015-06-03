@@ -119,6 +119,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
 
     private CallDetailHeader mCallDetailHeader;
     private CallTypeHelper mCallTypeHelper;
+    private PhoneNumberUtilsWrapper mUtilsWrapper;
     private PhoneNumberDisplayHelper mPhoneNumberHelper;
     private AsyncTaskExecutor mAsyncTaskExecutor;
     private ContactInfoHelper mContactInfoHelper;
@@ -249,7 +250,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
         mResources = getResources();
 
         mCallTypeHelper = new CallTypeHelper(getResources());
-        mPhoneNumberHelper = new PhoneNumberDisplayHelper(this, mResources);
+        mUtilsWrapper = new PhoneNumberUtilsWrapper(this);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(this, mResources, mUtilsWrapper);
         mCallDetailHeader = new CallDetailHeader(this, mPhoneNumberHelper);
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
         mAsyncQueryHandler = new CallDetailActivityQueryHandler(this);
@@ -390,11 +392,13 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             public PhoneCallDetails[] doInBackground(Void... params) {
                 // TODO: All phone calls correspond to the same person, so we can make a single
                 // lookup.
+                final PhoneNumberUtilsWrapper phoneUtils =
+                        new PhoneNumberUtilsWrapper(CallDetailActivity.this);
                 final int numCalls = callUris.length;
                 PhoneCallDetails[] details = new PhoneCallDetails[numCalls];
                 try {
                     for (int index = 0; index < numCalls; ++index) {
-                        details[index] = getPhoneCallDetailsForUri(callUris[index]);
+                        details[index] = getPhoneCallDetailsForUri(callUris[index], phoneUtils);
                     }
                     return details;
                 } catch (IllegalArgumentException e) {
@@ -432,9 +436,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
                 // Cache the details about the phone number.
                 final boolean canPlaceCallsTo =
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
-                final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(context);
                 final boolean isVoicemailNumber =
-                        phoneUtils.isVoicemailNumber(accountHandle, mNumber);
+                        mUtilsWrapper.isVoicemailNumber(accountHandle, mNumber);
                 final boolean isSipNumber = PhoneNumberUtilsWrapper.isSipNumber(mNumber);
 
                 final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
@@ -499,7 +502,8 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
     }
 
     /** Return the phone call details for a given call log URI. */
-    private PhoneCallDetails getPhoneCallDetailsForUri(Uri callUri) {
+    private PhoneCallDetails getPhoneCallDetailsForUri(Uri callUri,
+            PhoneNumberUtilsWrapper phoneUtils) {
         ContentResolver resolver = getContentResolver();
         Cursor callCursor = resolver.query(callUri, CALL_LOG_PROJECTION, null, null, null);
         try {
@@ -539,7 +543,7 @@ public class CallDetailActivity extends Activity implements ProximitySensorAware
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfo info =
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                    && !new PhoneNumberUtilsWrapper(this).isVoicemailNumber(accountHandle, number)
+                    && !phoneUtils.isVoicemailNumber(accountHandle, number)
                             ? mContactInfoHelper.lookupNumber(number, countryIso)
                             : null;
             if (info == null) {

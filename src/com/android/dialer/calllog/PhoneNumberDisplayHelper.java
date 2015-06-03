@@ -34,12 +34,6 @@ public class PhoneNumberDisplayHelper {
     private final Resources mResources;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
 
-    public PhoneNumberDisplayHelper(Context context, Resources resources) {
-        mContext = context;
-        mResources = resources;
-        mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(context);
-    }
-
     public PhoneNumberDisplayHelper(Context context, Resources resources,
             PhoneNumberUtilsWrapper phoneNumberUtils) {
         mContext = context;
