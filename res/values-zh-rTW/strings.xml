@@ -141,7 +141,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視訊通話"</string>
     <string name="show_call_history" msgid="1141502332266697170">"查看完整通話紀錄"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 通新的未接來電"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"快速撥號功能可讓您輕觸一下即撥打電話給最愛聯絡人和經常通話的號碼"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"快速撥號功能可讓您輕觸一下即撥打電話給最愛聯絡人和經常撥打的號碼"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"沒有聯絡人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"輕觸圖片即可查看所有號碼，輕觸並按住則可重新排序"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>

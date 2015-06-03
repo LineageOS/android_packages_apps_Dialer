@@ -81,12 +81,12 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Alle kontaktpersoner"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Opkaldsinfo"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Detaljerne er ikke tilgængelige"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Brug touch-tone-tastatur"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Brug numerisk tastatur"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Vend tilbage til igangværende opkald"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Tilføj opk."</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Tilføj opkald"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Indgående opkald"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Udgående opkald"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Ubesvarede opkald"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Ubesvaret opkald"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Indgående videoopkald"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Udgående videoopkald"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Ubesvaret videoopkald"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Fortryd"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring til <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Opret ny kontaktperson"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Føj til eksisterende kontaktperson"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Føj til eksisterende kontakt"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Send sms"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Foretag videoopkald"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Se komplet opkaldshistorik"</string>

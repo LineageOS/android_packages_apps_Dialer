@@ -82,7 +82,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"కాల్ వివరాలు"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"వివరాలు అందుబాటులో లేవు"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"టచ్ టోన్ కీప్యాడ్‌ను ఉపయోగించండి"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"కాల్‌కు తిరిగి వెళ్లడం ప్రోగ్రెస్‌లో ఉంది"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"ప్రోగ్రెస్‌లో ఉన్న కాల్‌కు వెళ్లు"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"కాల్‌ను జోడించు"</string>
     <string name="type_incoming" msgid="6502076603836088532">"ఇన్‌కమింగ్ కాల్"</string>
     <string name="type_outgoing" msgid="343108709599392641">"అవుట్‌గోయింగ్ కాల్"</string>

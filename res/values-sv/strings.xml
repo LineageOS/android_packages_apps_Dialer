@@ -81,7 +81,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Alla kontakter"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Samtalsinfo"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Det finns ingen information"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Använda tonvalstelefon"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Använd tonvalstelefon"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Återvänd till pågående samtal"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Lägg t. samt."</string>
     <string name="type_incoming" msgid="6502076603836088532">"Inkommande samtal"</string>

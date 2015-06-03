@@ -65,7 +65,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Ijro vaziyatini qidirish"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Ijro tezligini kamaytirish"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Ijro tezligini oshirish"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Qo‘ng‘iroq tarixi"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Qo‘ng‘iroqlar tarixi"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Qo‘shimcha sozlamalar"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"terish paneli"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Nusxalash"</string>

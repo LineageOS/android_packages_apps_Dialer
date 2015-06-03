@@ -30,7 +30,7 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Udostępnij pocztę głosową"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Brak połączeń"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Wyczyścić historię połączeń?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Spowoduje to usunięcie wszystkich połączeń z historii"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Spowoduje to usunięcie wszystkich połączeń z historii."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Czyszczę historię połączeń…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> wiadomości głosowe </item>
@@ -84,7 +84,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Szczegóły połączenia"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Szczegóły nie są dostępne"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Użyj klawiatury tonowej"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Powrót do aktywnego połączenia"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Wróć do aktywnego połączenia"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Dodaj połączenie"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Połączenie"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Połączenie wychodzące"</string>
