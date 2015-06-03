@@ -559,8 +559,7 @@ public class Call {
                 mChildCallIds,
                 getParentId(),
                 this.mTelecommCall.getConferenceableCalls(),
-                VideoProfile.VideoState.videoStateToString(
-                        mTelecommCall.getDetails().getVideoState()),
+                VideoProfile.videoStateToString(mTelecommCall.getDetails().getVideoState()),
                 mSessionModificationState,
                 getVideoSettings());
     }

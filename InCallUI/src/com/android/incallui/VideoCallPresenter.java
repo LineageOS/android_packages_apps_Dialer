@@ -17,7 +17,6 @@
 package com.android.incallui;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Point;
 import android.net.Uri;
@@ -466,8 +465,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         Log.d(this, "checkForVideoStateChange: isVideoCall= " + isVideoCall
                 + " hasVideoStateChanged=" + hasVideoStateChanged + " isVideoMode="
                 + isVideoMode() + " previousVideoState: " +
-                VideoProfile.VideoState.videoStateToString(mCurrentVideoState) + " newVideoState: "
-                + VideoProfile.VideoState.videoStateToString(call.getVideoState()));
+                VideoProfile.videoStateToString(mCurrentVideoState) + " newVideoState: "
+                + VideoProfile.videoStateToString(call.getVideoState()));
 
         if (!hasVideoStateChanged) {
             return;
@@ -631,8 +630,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private static boolean isCameraRequired(int videoState) {
-        return VideoProfile.VideoState.isBidirectional(videoState) ||
-                VideoProfile.VideoState.isTransmissionEnabled(videoState);
+        return VideoProfile.isBidirectional(videoState) ||
+                VideoProfile.isTransmissionEnabled(videoState);
     }
 
     private boolean isCameraRequired() {
@@ -753,10 +752,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Based on the current {@link VideoProfile.VideoState} and {@code CallState}, show or hide the
-     * incoming and outgoing video surfaces.  The outgoing video surface is shown any time video
-     * is transmitting.  The incoming video surface is shown whenever the video is un-paused and
-     * active.
+     * Based on the current video state and call state, show or hide the incoming and
+     * outgoing video surfaces.  The outgoing video surface is shown any time video is transmitting.
+     * The incoming video surface is shown whenever the video is un-paused and active.
      *
      * @param videoState The video state.
      * @param callState The call state.
@@ -767,13 +765,13 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             Log.e(this, "showVideoUi, VideoCallUi is null returning");
             return;
         }
-        boolean isPaused = VideoProfile.VideoState.isPaused(videoState);
+        boolean isPaused = VideoProfile.isPaused(videoState);
         boolean isCallActive = callState == Call.State.ACTIVE;
-        if (VideoProfile.VideoState.isBidirectional(videoState)) {
+        if (VideoProfile.isBidirectional(videoState)) {
             ui.showVideoViews(true, !isPaused && isCallActive);
-        } else if (VideoProfile.VideoState.isTransmissionEnabled(videoState)) {
+        } else if (VideoProfile.isTransmissionEnabled(videoState)) {
             ui.showVideoViews(true, false);
-        } else if (VideoProfile.VideoState.isReceptionEnabled(videoState)) {
+        } else if (VideoProfile.isReceptionEnabled(videoState)) {
             ui.showVideoViews(false, !isPaused && isCallActive);
             loadProfilePhotoAsync();
         } else {
@@ -781,7 +779,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         InCallPresenter.getInstance().enableScreenTimeout(
-                VideoProfile.VideoState.isAudioOnly(videoState));
+                VideoProfile.isAudioOnly(videoState));
     }
 
     /**
@@ -1190,8 +1188,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private static int toCameraDirection(int videoState) {
-        return VideoProfile.VideoState.isTransmissionEnabled(videoState) &&
-                !VideoProfile.VideoState.isBidirectional(videoState)
+        return VideoProfile.isTransmissionEnabled(videoState) &&
+                !VideoProfile.isBidirectional(videoState)
                 ? Call.VideoSettings.CAMERA_DIRECTION_BACK_FACING
                 : Call.VideoSettings.CAMERA_DIRECTION_FRONT_FACING;
     }
