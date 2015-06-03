@@ -96,10 +96,11 @@ public class CallStatsDetailActivity extends Activity {
 
         mResources = getResources();
 
-        PhoneNumberDisplayHelper phoneNumberHelper = new PhoneNumberDisplayHelper(this, mResources);
+        PhoneNumberUtilsWrapper utilsWrapper = new PhoneNumberUtilsWrapper(this);
+        PhoneNumberDisplayHelper phoneNumberHelper =
+                new PhoneNumberDisplayHelper(this, mResources, utilsWrapper);
         mCallDetailHeader = new CallDetailHeader(this, phoneNumberHelper);
-        mCallStatsDetailHelper = new CallStatsDetailHelper(this, mResources,
-                new PhoneNumberUtilsWrapper(this));
+        mCallStatsDetailHelper = new CallStatsDetailHelper(this, mResources, utilsWrapper);
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
 
         mTotalSummary = (TextView) findViewById(R.id.total_summary);

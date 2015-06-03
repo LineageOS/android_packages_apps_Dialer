@@ -118,18 +118,17 @@ class CallStatsAdapter extends ArrayAdapter<CallStatsDetails>
         mInfoLookup = new ConcurrentHashMap<ContactInfo, CallStatsDetails>();
 
         Resources resources = mContext.getResources();
-        mPhoneNumberHelper =
-                new PhoneNumberDisplayHelper(mContext, resources);
+        PhoneNumberUtilsWrapper utilsWrapper = new PhoneNumberUtilsWrapper(mContext);
+        mPhoneNumberHelper = new PhoneNumberDisplayHelper(mContext, resources, utilsWrapper);
 
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(mContext);
         final ContactInfoHelper contactInfoHelper =
                 new ContactInfoHelper(mContext, currentCountryIso);
 
         mAdapterHelper = new CallLogAdapterHelper(mContext, this,
-                contactInfoHelper, mPhoneNumberHelper);
+                contactInfoHelper, mPhoneNumberHelper, utilsWrapper);
         mContactPhotoManager = ContactPhotoManager.getInstance(mContext);
-        mCallStatsDetailHelper = new CallStatsDetailHelper(mContext, resources,
-                new PhoneNumberUtilsWrapper(mContext));
+        mCallStatsDetailHelper = new CallStatsDetailHelper(mContext, resources, utilsWrapper);
     }
 
     public void updateData(Map<ContactInfo, CallStatsDetails> calls, long from, long to) {
