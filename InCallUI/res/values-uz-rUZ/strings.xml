@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Ovoz"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Roziman"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Yopish"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Qo‘ng‘iroq"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Telefon"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"SMS"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Qo‘ng‘iroq qilish uchun, avval \"Parvoz rejimi\" o‘chirilishi kerak."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Tarmoqda ro‘yxatdan o‘tmagan."</string>
@@ -120,7 +120,7 @@
     <string name="camera_ready" msgid="1903335385405807324">"Kamera tayyor"</string>
     <string name="unknown_call_session_event" msgid="2431061946920253582">"Noma’lum qo‘ng‘iroq sessiyasi hodisasi"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Xizmat"</string>
-    <string name="voicemail_settings" msgid="72448049107749316">"Moslash"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Sozlash"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Ko‘rsatilmagan&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Boshqa qo‘ng‘iroq sozlamalari"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> orqali qo‘ng‘rioq qilinmoqda"</string>

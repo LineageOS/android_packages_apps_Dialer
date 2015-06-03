@@ -36,7 +36,7 @@
     <string name="wild_prompt_str" msgid="5543521676355533577">"Zëvendëso karakterin variabël me"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Telefonatë konference <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Numri i postës zanore"</string>
-    <string name="card_title_dialing" msgid="5769417478498348054">"Formimi i numrit"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Po telefonon"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Po riformon numrin"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Telefonatë konference"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Telefonatë hyrëse"</string>
@@ -52,7 +52,7 @@
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Kërkesa me video u refuzua"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Numri i kthimit të telefonatës\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Numri i kthimit të telefonatës së urgjencës\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="2107666444937350731">"Po formon numrin"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Po telefonon"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Telefonatë e humbur"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Telefonata të humbura"</string>
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> telefonata të humbura"</string>
@@ -75,8 +75,8 @@
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Zanore"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Prano"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"Hiq dorë"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ri-telefono"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Refuzo"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Telefono"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mesazh"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Për të kryer telefonatën, së pari çaktivizo modalitetin \"në aeroplan\"."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"I paregjistruar në rrjet."</string>
@@ -150,7 +150,7 @@
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Dridhja"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Tingulli"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Tingulli me parazgjedhje (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
-    <string name="ringtone_title" msgid="6374978286202084684">"Melodia e telefonit"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Zilja e telefonit"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Lësho edhe dridhje kur bie zilja"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Me zile dhe me dridhje"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Menaxho telefonatën-konferencë"</string>
