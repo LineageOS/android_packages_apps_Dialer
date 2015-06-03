@@ -39,8 +39,8 @@ public class CallUtils {
     }
 
     public static boolean isVideoCall(int videoState) {
-        return VideoProfile.VideoState.isTransmissionEnabled(videoState)
-                || VideoProfile.VideoState.isReceptionEnabled(videoState);
+        return VideoProfile.isTransmissionEnabled(videoState)
+                || VideoProfile.isReceptionEnabled(videoState);
     }
 
     public static boolean isIncomingVideoCall(Call call) {
@@ -65,7 +65,7 @@ public class CallUtils {
     }
 
     public static boolean isAudioCall(Call call) {
-        return call != null && VideoProfile.VideoState.isAudioOnly(call.getVideoState());
+        return call != null && VideoProfile.isAudioOnly(call.getVideoState());
     }
 
     // TODO (ims-vt) Check if special handling is needed for CONF calls.
@@ -75,7 +75,7 @@ public class CallUtils {
 
     public static VideoProfile makeVideoPauseProfile(Call call) {
         Preconditions.checkNotNull(call);
-        Preconditions.checkState(!VideoProfile.VideoState.isAudioOnly(call.getVideoState()));
+        Preconditions.checkState(!VideoProfile.isAudioOnly(call.getVideoState()));
         return new VideoProfile(getPausedVideoState(call.getVideoState()));
     }
 
