@@ -23,6 +23,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
+import com.android.dialer.util.AgingCache;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,14 +76,15 @@ public class PhoneAccountUtils {
      * Extract account color from PhoneAccount object.
      */
     public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
-        TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+        final PhoneAccount account = getAccountOrNull(context, accountHandle);
 
         // For single-sim devices the PhoneAccount will be NO_HIGHLIGHT_COLOR by default, so it is
         // safe to always use the account highlight color.
         return account == null ? PhoneAccount.NO_HIGHLIGHT_COLOR : account.getHighlightColor();
     }
+
+    private static final AgingCache<PhoneAccountHandle, PhoneAccount> sAccountCache =
+            new AgingCache<>(5000);
 
     /**
      * Retrieve the account metadata, but if the account does not exist or the device has only a
@@ -89,12 +92,19 @@ public class PhoneAccountUtils {
      */
     private static PhoneAccount getAccountOrNull(Context context,
             PhoneAccountHandle accountHandle) {
+        PhoneAccount account = sAccountCache.get(accountHandle);
+        if (account != null) {
+            return account;
+        }
+
         TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
         if (!telecomManager.hasMultipleCallCapableAccounts()) {
-            return null;
+            account = null;
+        } else {
+            account = telecomManager.getPhoneAccount(accountHandle);
         }
+        sAccountCache.put(accountHandle, account);
         return account;
     }
 }

@@ -24,6 +24,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.dialer.util.AgingCache;
 
 import com.google.common.collect.Sets;
 
@@ -35,6 +36,8 @@ import java.util.Set;
 public class PhoneNumberUtilsWrapper {
     private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
     private final Context mContext;
+
+    private AgingCache<PhoneAccountHandle, String> mVmNumberCache = new AgingCache<>(5000);
 
     public PhoneNumberUtilsWrapper(Context context) {
         mContext = context;
@@ -50,19 +53,22 @@ public class PhoneNumberUtilsWrapper {
      * Returns true if the given number is the number of the configured voicemail. To be able to
      * mock-out this, it is not a static method.
      */
-    public boolean isVoicemailNumber(PhoneAccountHandle accountHandle,
-            CharSequence number) {
-        final TelecomManager telecomManager =
-                (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
-        return number!= null && telecomManager.isVoiceMailNumber(accountHandle, number.toString());
-    }
+    public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
+        if (number == null) {
+            return false;
+        }
 
-    /**
-     * Returns true if the given number is the number of the configured voicemail of the subId.
-     *  To be able to mock-out this, it is not a static method.
-     */
-    public boolean isVoicemailNumber(int subId, CharSequence number) {
-        return number!= null && PhoneNumberUtils.isVoiceMailNumber(subId, number.toString());
+        String vmNumber = mVmNumberCache.get(accountHandle);
+        if (vmNumber == null) {
+            final TelecomManager telecomManager =
+                    (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
+            vmNumber = telecomManager.getVoiceMailNumber(accountHandle);
+            mVmNumberCache.put(accountHandle, vmNumber != null ? vmNumber : "");
+        }
+
+        final String actualVmNumber = PhoneNumberUtils.extractNetworkPortionAlt(vmNumber);
+        return !TextUtils.isEmpty(actualVmNumber)
+                && PhoneNumberUtils.compare(number.toString(), actualVmNumber);
     }
 
     /**
