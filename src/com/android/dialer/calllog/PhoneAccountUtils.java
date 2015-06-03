@@ -18,10 +18,13 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.SystemClock;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
+import android.util.ArrayMap;
+import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,14 +77,16 @@ public class PhoneAccountUtils {
      * Extract account color from PhoneAccount object.
      */
     public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
-        TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+        final PhoneAccount account = getAccountOrNull(context, accountHandle);
 
         // For single-sim devices the PhoneAccount will be NO_HIGHLIGHT_COLOR by default, so it is
         // safe to always use the account highlight color.
         return account == null ? PhoneAccount.NO_HIGHLIGHT_COLOR : account.getHighlightColor();
     }
+
+    private static final long CACHE_ENTRY_TIMEOUT = 5000;
+    private static final ArrayMap<PhoneAccountHandle, Pair<PhoneAccount, Long>> sAccountCache =
+            new ArrayMap<>();
 
     /**
      * Retrieve the account metadata, but if the account does not exist or the device has only a
@@ -89,12 +94,23 @@ public class PhoneAccountUtils {
      */
     private static PhoneAccount getAccountOrNull(Context context,
             PhoneAccountHandle accountHandle) {
+        Pair<PhoneAccount, Long> entry = sAccountCache.get(accountHandle);
+        if (entry != null) {
+            long age = SystemClock.elapsedRealtime() - entry.second;
+            if (age < CACHE_ENTRY_TIMEOUT) {
+                return entry.first;
+            }
+        }
+
         TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+        final PhoneAccount account;
         if (!telecomManager.hasMultipleCallCapableAccounts()) {
-            return null;
+            account = null;
+        } else {
+            account = telecomManager.getPhoneAccount(accountHandle);
         }
+        sAccountCache.put(accountHandle, Pair.create(account, SystemClock.elapsedRealtime()));
         return account;
     }
 }

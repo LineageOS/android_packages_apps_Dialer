@@ -1718,19 +1718,21 @@ public class DialpadFragment extends Fragment
      *
      * @return true if voicemail is enabled and accessible. Note that this can be false
      * "temporarily" after the app boot.
-     * @see TelecomManager#hasVoiceMailNumber(PhoneAccountHandle)
+     * @see TelecomManager#getVoiceMailNumber(PhoneAccountHandle)
      */
     private boolean isVoicemailAvailable() {
         try {
             PhoneAccountHandle defaultUserSelectedAccount =
                     getTelecomManager().getUserSelectedOutgoingPhoneAccount();
+            final String vmNumber;
             if (defaultUserSelectedAccount == null) {
                 // In a single-SIM phone, there is no default outgoing phone account selected by
                 // the user, so just call TelephonyManager#getVoicemailNumber directly.
-                return getTelephonyManager().getVoiceMailNumber() != null;
+                vmNumber = getTelephonyManager().getVoiceMailNumber();
             } else {
-                return getTelecomManager().hasVoiceMailNumber(defaultUserSelectedAccount);
+                vmNumber = getTelecomManager().getVoiceMailNumber(defaultUserSelectedAccount);
             }
+            return !TextUtils.isEmpty(vmNumber);
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.
             Log.w(TAG, "SecurityException is thrown. Maybe privilege isn't sufficient.");

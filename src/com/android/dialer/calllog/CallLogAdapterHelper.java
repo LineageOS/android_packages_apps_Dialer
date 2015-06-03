@@ -186,6 +186,7 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
     private Callback mCb;
     private final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
+    private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     private final PhoneNumberDisplayHelper mPhoneNumberHelper;
 
     /**
@@ -410,7 +411,7 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
                 mContactInfoCache.getCachedValue(numberCountryIso);
         ContactInfo info = cachedInfo == null ? null : cachedInfo.getValue();
         if (!PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                || new PhoneNumberUtilsWrapper(mContext).isVoicemailNumber(accountHandle, number)) {
+                || mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number)) {
             // If this is a number that cannot be dialed, there is no point in looking up a contact
             // for it.
             info = ContactInfo.EMPTY;
@@ -446,11 +447,13 @@ public class CallLogAdapterHelper implements ViewTreeObserver.OnPreDrawListener 
 
     public CallLogAdapterHelper(Context context, Callback cb,
             ContactInfoHelper contactInfoHelper,
-            PhoneNumberDisplayHelper phoneNumberHelper) {
+            PhoneNumberDisplayHelper phoneNumberHelper,
+            PhoneNumberUtilsWrapper utilsWrapper) {
         mContext = context;
         mCb = cb;
         mContactInfoHelper = contactInfoHelper;
         mPhoneNumberHelper = phoneNumberHelper;
+        mPhoneNumberUtilsWrapper = utilsWrapper;
 
         mContactInfoCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
         mRequests = new LinkedList<ContactInfoRequest>();
