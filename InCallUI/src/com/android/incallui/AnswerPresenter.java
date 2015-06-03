@@ -20,7 +20,7 @@ import android.content.Context;
 
 import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.InCallPresenter.InCallState;
-import android.telecom.TelecomManager;
+
 import android.telecom.VideoProfile;
 
 import java.util.List;
@@ -274,7 +274,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // Only present the user with the option to answer as a video call if the incoming call is
         // a bi-directional video call.
-        if (VideoProfile.VideoState.isBidirectional((call.getVideoState()))) {
+        if (VideoProfile.isBidirectional((call.getVideoState()))) {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
