@@ -71,14 +71,14 @@ public class PhoneNumberDisplayUtil {
             int presentation,
             CharSequence formattedNumber,
             boolean isVoicemail) {
-        if (!TextUtils.isEmpty(formattedNumber)) {
-            return formattedNumber;
-        }
-
         final CharSequence displayName =
                 getDisplayName(context, accountHandle, number, presentation, isVoicemail);
         if (!TextUtils.isEmpty(displayName)) {
             return displayName;
+        }
+
+        if (!TextUtils.isEmpty(formattedNumber)) {
+            return formattedNumber;
         } else if (!TextUtils.isEmpty(number)) {
             return number;
         } else {

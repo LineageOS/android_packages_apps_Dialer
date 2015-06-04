@@ -212,10 +212,12 @@ public class PhoneCallDetailsHelper {
     @NeededForTesting
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
-        if (TextUtils.isEmpty(details.name)) {
-            nameText = mResources.getString(R.string.recentCalls_addToContact);
-        } else {
+        if (!TextUtils.isEmpty(details.name)) {
             nameText = details.name;
+        } else if (!TextUtils.isEmpty(details.displayNumber)) {
+            nameText = details.displayNumber;
+        } else {
+            nameText = mResources.getString(R.string.unknown);
         }
 
         nameView.setText(nameText);
