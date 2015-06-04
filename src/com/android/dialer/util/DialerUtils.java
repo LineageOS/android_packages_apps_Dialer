@@ -28,6 +28,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.telecom.TelecomManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -41,6 +43,8 @@ import com.android.dialer.R;
 import com.android.incallui.CallCardFragment;
 import com.android.incallui.Log;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -158,8 +162,25 @@ public class DialerUtils {
      * @return Joined char sequences.
      */
     public static CharSequence join(Resources resources, Iterable<CharSequence> list) {
+        StringBuilder sb = new StringBuilder();
+        final BidiFormatter formatter = BidiFormatter.getInstance();
         final CharSequence separator = resources.getString(R.string.list_delimeter);
-        return TextUtils.join(separator, list);
+
+        Iterator<CharSequence> itr = list.iterator();
+        boolean firstTime = true;
+        while (itr.hasNext()) {
+            if (firstTime) {
+                firstTime = false;
+            } else {
+                sb.append(separator);
+            }
+            // Unicode wrap the elements of the list to respect RTL for individual strings.
+            sb.append(formatter.unicodeWrap(
+                    itr.next().toString(), TextDirectionHeuristics.FIRSTSTRONG_LTR));
+        }
+
+        // Unicode wrap the joined value, to respect locale's RTL ordering for the whole list.
+        return formatter.unicodeWrap(sb.toString());
     }
 
     /**
