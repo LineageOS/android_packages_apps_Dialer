@@ -20,6 +20,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.VoicemailContract.Status;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.List;
 
 /**
@@ -32,6 +34,7 @@ import java.util.List;
  * this class to check if any message needs to be shown.
  */
 public interface VoicemailStatusHelper {
+    @VisibleForTesting
     public class StatusMessage {
         /** Package of the source on behalf of which this message has to be shown.*/
         public final String sourcePackage;
@@ -49,6 +52,7 @@ public interface VoicemailStatusHelper {
         public final int actionMessageId;
         /** URI for the corrective action, where applicable. Null if no action URI is available. */
         public final Uri actionUri;
+
         public StatusMessage(String sourcePackage, int callLogMessageId, int callDetailsMessageId,
                 int actionMessageId, Uri actionUri) {
             this.sourcePackage = sourcePackage;
@@ -75,6 +79,7 @@ public interface VoicemailStatusHelper {
      * @param cursor The cursor pointing to the query on {@link Status#CONTENT_URI}. The projection
      *      to be used is defined by the implementation class of this interface.
      */
+    @VisibleForTesting
     public List<StatusMessage> getStatusMessages(Cursor cursor);
 
     /**
