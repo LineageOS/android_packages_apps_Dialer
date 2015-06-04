@@ -414,9 +414,10 @@ public class SmartDialNameMatcher {
         mMatchPositions.clear();
         if (mMultiMatchObject != null && mMultiMatchMethod != null) {
             return matchesMultiLanguage(displayName, mQuery, mMatchPositions);
-        } else {
+        } else if (this != null) {
             return mMap.matchesCombination(this, displayName, mQuery, mMatchPositions);
         }
+        return false;
     }
 
     public ArrayList<SmartDialMatchPosition> getMatchPositions() {
