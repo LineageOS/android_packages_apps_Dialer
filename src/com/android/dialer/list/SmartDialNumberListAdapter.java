@@ -48,7 +48,6 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
 
     public SmartDialNumberListAdapter(Context context) {
         super(context);
-        mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap(), context);
 
         if (DEBUG) {
             Log.v(TAG, "Constructing List Adapter");
@@ -62,6 +61,8 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         if (DEBUG) {
             Log.v(TAG, "Configure Loader with query" + getQueryString());
         }
+
+        mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap(), getContext());
 
         if (getQueryString() == null) {
             loader.configureQuery("");
