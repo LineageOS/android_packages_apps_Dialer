@@ -99,23 +99,23 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_VoicemailNumber() {
         setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
                 Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
-        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_ReadVoicemail() {
         setPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_UnreadVoicemail() {
         setUnreadPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_VoicemailFromUnknown() {
         setPhoneCallDetailsWithNumberAndType("", Calls.PRESENTATION_UNKNOWN,
                 "", Calls.VOICEMAIL_TYPE);
-        assertEquals(View.VISIBLE, mViewHolder.voicemailButtonView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
     /**
@@ -470,7 +470,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Sets the details of a phone call using the specified call type. */
     private void setPhoneCallDetailsWithTypes(int... types) {
-        mHelper.setPhoneCallDetails(getContext() ,mViewHolder,
+        mHelper.setPhoneCallDetails(getContext(), mViewHolder,
                 new PhoneCallDetails(
                         mContext,
                         TEST_NUMBER,

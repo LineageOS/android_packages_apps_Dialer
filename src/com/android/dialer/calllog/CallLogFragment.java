@@ -51,6 +51,7 @@ import com.android.dialer.R;
 import com.android.dialer.list.ListsFragment.HostInterface;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.EmptyLoader;
+import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
@@ -87,6 +88,7 @@ public class CallLogFragment extends Fragment
     private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
+    private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private boolean mScrollToTop;
 
     /** Whether there is at least one voicemail source installed. */
@@ -187,6 +189,8 @@ public class CallLogFragment extends Fragment
                 mContactsObserver);
         resolver.registerContentObserver(Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
+
+        mVoicemailPlaybackPresenter = new VoicemailPlaybackPresenter(activity, state);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -272,6 +276,7 @@ public class CallLogFragment extends Fragment
                 getActivity(),
                 this,
                 new ContactInfoHelper(getActivity(), currentCountryIso),
+                mVoicemailPlaybackPresenter,
                 isShowingRecentsTab,
                 this);
         mRecyclerView.setAdapter(mAdapter);
@@ -283,7 +288,9 @@ public class CallLogFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         updateEmptyMessage(mCallTypeFilter);
+        mAdapter.onRestoreInstanceState(savedInstanceState);
     }
 
     /**
@@ -318,8 +325,9 @@ public class CallLogFragment extends Fragment
 
     @Override
     public void onPause() {
-        super.onPause();
+        mVoicemailPlaybackPresenter.onPause(getActivity().isFinishing());
         mAdapter.pauseCache();
+        super.onPause();
     }
 
     @Override
@@ -331,12 +339,14 @@ public class CallLogFragment extends Fragment
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mAdapter.pauseCache();
         mAdapter.changeCursor(null);
+        mVoicemailPlaybackPresenter.onDestroy(getActivity().isFinishing());
+
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
         getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
+        super.onDestroy();
     }
 
     @Override
@@ -345,6 +355,9 @@ public class CallLogFragment extends Fragment
         outState.putInt(KEY_FILTER_TYPE, mCallTypeFilter);
         outState.putInt(KEY_LOG_LIMIT, mLogLimit);
         outState.putLong(KEY_DATE_LIMIT, mDateLimit);
+
+        mAdapter.onSaveInstanceState(outState);
+        mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
     }
 
     @Override

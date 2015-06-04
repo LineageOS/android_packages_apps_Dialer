@@ -61,8 +61,6 @@ import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TelecomUtil;
-import com.android.dialer.voicemail.VoicemailPlaybackLayout;
-import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import java.util.List;
 
@@ -218,8 +216,6 @@ public class CallDetailActivity extends Activity {
     /** Helper to load contact photos. */
     private ContactPhotoManager mContactPhotoManager;
 
-    private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
-
     private Uri mVoicemailUri;
     private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
 
@@ -255,8 +251,6 @@ public class CallDetailActivity extends Activity {
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        optionallyHandleVoicemail();
-
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
@@ -267,58 +261,6 @@ public class CallDetailActivity extends Activity {
         super.onResume();
 
         CallLogAsyncTaskUtil.getCallDetails(this, getCallLogEntryUris(), mCallLogAsyncTaskListener);
-    }
-
-    @Override
-    public void onPause() {
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onPause(isFinishing());
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onDestroy(isFinishing());
-        }
-        super.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
-        }
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onRestoreInstanceState(savedInstanceState);
-        }
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    /**
-     * Handle voicemail playback or hide voicemail ui.
-     * <p>
-     * If the Intent used to start this Activity contains the suitable extras, then start voicemail
-     * playback.  If it doesn't, then don't inflate the voicemail ui.
-     */
-    private void optionallyHandleVoicemail() {
-        if (hasVoicemail()) {
-            VoicemailPlaybackLayout voicemailPlaybackLayout =
-                (VoicemailPlaybackLayout) findViewById(R.id.voicemail_playback_layout);
-
-            mVoicemailPlaybackPresenter = new VoicemailPlaybackPresenter(this);
-            mVoicemailPlaybackPresenter.setPlaybackView(
-                    voicemailPlaybackLayout, mVoicemailUri, false /* startPlayingImmediately */);
-
-            voicemailPlaybackLayout.setVisibility(View.VISIBLE);
-            CallLogAsyncTaskUtil.markVoicemailAsRead(this, mVoicemailUri);
-        }
     }
 
     private boolean hasVoicemail() {

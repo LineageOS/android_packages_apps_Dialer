@@ -91,10 +91,6 @@ import com.android.dialer.R;
                         mResources.getString(R.string.description_video_call_action),
                         nameOrNumber));
 
-        views.voicemailButtonView.setContentDescription(
-                TextUtils.expandTemplate(
-                        mResources.getString(R.string.description_voicemail_action), nameOrNumber));
-
         views.createNewContactButtonView.setContentDescription(
                 TextUtils.expandTemplate(
                         mResources.getString(R.string.description_create_new_contact_action),
