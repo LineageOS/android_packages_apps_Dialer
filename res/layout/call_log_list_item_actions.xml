@@ -23,6 +23,11 @@
     android:visibility="visible"
     android:importantForAccessibility="1">
 
+    <com.android.dialer.voicemail.VoicemailPlaybackLayout
+        android:id="@+id/voicemail_playback_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:id="@+id/video_call_action"
         style="@style/CallLogActionStyle">
@@ -34,20 +39,6 @@
         <TextView
             style="@style/CallLogActionTextStyle"
             android:text="@string/call_log_action_video_call" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/voicemail_action"
-        style="@style/CallLogActionStyle">
-
-        <ImageView
-            style="@style/CallLogActionIconStyle"
-            android:src="@drawable/ic_voicemail_24dp" />
-
-        <TextView
-            style="@style/CallLogActionTextStyle"
-            android:text="@string/call_log_action_voicemail" />
 
     </LinearLayout>
 

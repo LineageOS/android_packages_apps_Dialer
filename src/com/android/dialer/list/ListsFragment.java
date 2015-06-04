@@ -62,6 +62,9 @@ public class ListsFragment extends Fragment
     // Oldest recents entry to display is 2 weeks old.
     private static final long OLDEST_RECENTS_DATE = 1000L * 60 * 60 * 24 * 14;
 
+    private static final String KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER =
+            "has_active_voicemail_provider";
+
     public interface HostInterface {
         public ActionBarController getActionBarController();
     }
@@ -161,6 +164,11 @@ public class ListsFragment extends Fragment
         Trace.endSection();
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
+
+        if (savedInstanceState != null) {
+            mHasActiveVoicemailProvider = savedInstanceState.getBoolean(
+                    KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
+        }
         Trace.endSection();
     }
 
@@ -224,6 +232,12 @@ public class ListsFragment extends Fragment
         if (!mOnPageChangeListeners.contains(onPageChangeListener)) {
             mOnPageChangeListeners.add(onPageChangeListener);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, mHasActiveVoicemailProvider);
     }
 
     @Override

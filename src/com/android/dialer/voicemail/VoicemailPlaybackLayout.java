@@ -76,10 +76,9 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         public PositionUpdater(
                 MediaPlayer mediaPlayer,
-                int duration,
                 ScheduledExecutorService executorService) {
             mMediaPlayer = mediaPlayer;
-            mDuration = duration;
+            mDuration = mediaPlayer.getDuration();
             mExecutorService = executorService;
         }
 
@@ -167,6 +166,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
             if (mPresenter == null) {
                 return;
             }
+
             if (mIsPlaying) {
                 mPresenter.pausePlayback();
             } else {
@@ -197,7 +197,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mContext = context;
         LayoutInflater inflater =
                 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.playback_layout, this);
+        inflater.inflate(R.layout.voicemail_playback_layout, this);
     }
 
     @Override
@@ -222,7 +222,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
     @Override
     public void onPlaybackStarted(
             MediaPlayer mediaPlayer,
-            int duration,
             ScheduledExecutorService executorService) {
         mIsPlaying = true;
 
@@ -232,7 +231,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
             onSpeakerphoneOn(mPresenter.isSpeakerphoneOn());
         }
 
-        mPositionUpdater = new PositionUpdater(mediaPlayer, duration, executorService);
+        mPositionUpdater = new PositionUpdater(mediaPlayer, executorService);
         mPositionUpdater.startUpdating();
     }
 
@@ -286,6 +285,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         if (mPlaybackSeek.getMax() != seekBarMax) {
             mPlaybackSeek.setMax(seekBarMax);
         }
+
         mPlaybackSeek.setProgress(seekBarPosition);
         mPlaybackPosition.setText(formatAsMinutesAndSeconds(seekBarMax - seekBarPosition));
     }
