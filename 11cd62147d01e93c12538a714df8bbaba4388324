@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a8ec9b2_8ffc1a40",
+        "filename": "src/com/android/dialer/PhoneCallDetailsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2015-06-04T13:36:58Z",
+      "side": 1,
+      "message": "Seems like the search is matching based on substring but this only highlights prefixes.  Would be nice to keep them consistent",
+      "revId": "11cd62147d01e93c12538a714df8bbaba4388324",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
