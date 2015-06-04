@@ -16,6 +16,24 @@
       "revId": "f14dc44ea076149d82c3e76f0211e4a294fdfc53",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a8ec9b2_4ccf7db0",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 7254
+      },
+      "writtenOn": "2015-06-04T19:20:14Z",
+      "side": 1,
+      "message": "that\u0027s what the java docs on the internet kept telling me and ended up giving me a headache :P Thanks for the clarification",
+      "parentUuid": "7a8ec9b2_0cd57542",
+      "revId": "f14dc44ea076149d82c3e76f0211e4a294fdfc53",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
