@@ -132,11 +132,11 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 3, 13, 0, 0).getTimeInMillis());
-        assertDateEquals("0 mins ago");
+        assertDateEquals("0 min. ago");
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 3, 12, 0, 0).getTimeInMillis());
-        assertDateEquals("1 hour ago");
+        assertDateEquals("1 hr. ago");
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 2, 13, 0, 0).getTimeInMillis());
@@ -223,7 +223,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testSetCallDetailsHeader_NumberOnly() {
         setCallDetailsHeaderWithNumber(TEST_NUMBER, Calls.PRESENTATION_ALLOWED);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
-        assertEquals("Add to contacts", mNameView.getText().toString());
+        assertEquals("1-412-255-5555", mNameView.getText().toString());
     }
 
     public void testSetCallDetailsHeader_UnknownNumber() {
@@ -245,7 +245,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     public void testSetCallDetailsHeader_VoicemailNumber() {
-        setCallDetailsHeaderWithNumber(TEST_VOICEMAIL_NUMBER, Calls.PRESENTATION_ALLOWED);
+        setCallDetailsHeaderWithVoicemailNumber(TEST_VOICEMAIL_NUMBER, Calls.PRESENTATION_ALLOWED);
         assertEquals(View.VISIBLE, mNameView.getVisibility());
         assertEquals("Voicemail", mNameView.getText().toString());
     }
@@ -411,6 +411,23 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                         null, 0, null,  null,
                         false /* isVoicemail */));
     }
+
+    private void setCallDetailsHeaderWithVoicemailNumber(String number, int presentation) {
+        mHelper.setCallDetailsHeader(mNameView,
+                new PhoneCallDetails(
+                        mContext,
+                        number,
+                        presentation,
+                        TEST_FORMATTED_NUMBER,
+                        TEST_COUNTRY_ISO,
+                        TEST_GEOCODE,
+                        new int[]{ Calls.INCOMING_TYPE },
+                        TEST_DATE,
+                        TEST_DURATION,
+                        null, 0, null,  null,
+                        true /* isVoicemail */));
+    }
+
 
     private void setCallDetailsHeader(String name) {
         mHelper.setCallDetailsHeader(mNameView,
