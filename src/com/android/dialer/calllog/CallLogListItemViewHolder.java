@@ -41,6 +41,9 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.PhoneCallDetailsViews;
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
+import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
+import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -68,8 +71,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
     /** The button views below are assigned only when the action section is expanded. */
+    public VoicemailPlaybackLayout voicemailPlaybackView;
     public View videoCallButtonView;
-    public View voicemailButtonView;
     public View createNewContactButtonView;
     public View addToExistingContactButtonView;
     public View sendMessageView;
@@ -142,6 +145,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     private final View.OnClickListener mActionListener;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     private final CallLogListItemHelper mCallLogListItemHelper;
+    private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
 
     private final int mPhotoSize;
 
@@ -150,6 +154,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             View.OnClickListener actionListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
             CallLogListItemHelper callLogListItemHelper,
+            VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             View rootView,
             QuickContactBadge quickContactView,
             View primaryActionView,
@@ -163,6 +168,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         mActionListener = actionListener;
         mPhoneNumberUtilsWrapper = phoneNumberUtilsWrapper;
         mCallLogListItemHelper = callLogListItemHelper;
+        mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
 
         this.rootView = rootView;
         this.quickContactView = quickContactView;
@@ -191,13 +197,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             Context context,
             View.OnClickListener actionListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
-            CallLogListItemHelper callLogListItemHelper) {
+            CallLogListItemHelper callLogListItemHelper,
+            VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
 
         return new CallLogListItemViewHolder(
                 context,
                 actionListener,
                 phoneNumberUtilsWrapper,
                 callLogListItemHelper,
+                voicemailPlaybackPresenter,
                 view,
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
@@ -220,11 +228,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         if (stub != null) {
             actionsView = (ViewGroup) stub.inflate();
 
+            voicemailPlaybackView = (VoicemailPlaybackLayout) actionsView
+                    .findViewById(R.id.voicemail_playback_layout);
+
             videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
             videoCallButtonView.setOnClickListener(mActionListener);
-
-            voicemailButtonView = actionsView.findViewById(R.id.voicemail_action);
-            voicemailButtonView.setOnClickListener(mActionListener);
 
             createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
             createNewContactButtonView.setOnClickListener(mActionListener);
@@ -302,21 +310,22 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             videoCallButtonView.setVisibility(View.GONE);
         }
 
-        // For voicemail calls, show the "VOICEMAIL" action button; hide otherwise.
-        if (callType == Calls.VOICEMAIL_TYPE) {
-            voicemailButtonView.setTag(
-                    IntentProvider.getPlayVoicemailIntentProvider(rowId, voicemailUri));
-            voicemailButtonView.setVisibility(View.VISIBLE);
+        // For voicemail calls, show the voicemail playback layout; hide otherwise.
+        if (callType == Calls.VOICEMAIL_TYPE && mVoicemailPlaybackPresenter != null) {
+            voicemailPlaybackView.setVisibility(View.VISIBLE);
 
-            detailsButtonView.setVisibility(View.GONE);
+            Uri uri = Uri.parse(voicemailUri);
+            mVoicemailPlaybackPresenter.setPlaybackView(
+                    voicemailPlaybackView, uri, false /* startPlayingImmediately */);
+
+            CallLogAsyncTaskUtil.markVoicemailAsRead(mContext, uri);
         } else {
-            voicemailButtonView.setTag(null);
-            voicemailButtonView.setVisibility(View.GONE);
-
-            detailsButtonView.setVisibility(View.VISIBLE);
-            detailsButtonView.setTag(
-                    IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
+            voicemailPlaybackView.setVisibility(View.GONE);
         }
+
+        detailsButtonView.setVisibility(View.VISIBLE);
+        detailsButtonView.setTag(
+                IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
 
         if (canBeReportedAsInvalid && !info.isBadData) {
             reportButtonView.setVisibility(View.VISIBLE);
@@ -324,7 +333,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             reportButtonView.setVisibility(View.GONE);
         }
 
-        if (UriUtils.isEncodedContactUri(info.lookupUri)) {
+        if (info != null && UriUtils.isEncodedContactUri(info.lookupUri)) {
             createNewContactButtonView.setTag(IntentProvider.getAddContactIntentProvider(
                     info.lookupUri, info.name, info.number, info.type, true /* isNewContact */));
             createNewContactButtonView.setVisibility(View.VISIBLE);
@@ -420,6 +429,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 null /* actionListener */,
                 phoneNumberUtilsWrapper,
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources),
+                null /* voicemailPlaybackPresenter */,
                 new View(context),
                 new QuickContactBadge(context),
                 new View(context),
@@ -427,10 +437,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 new CardView(context),
                 new TextView(context),
                 new View(context));
-        viewHolder.voicemailButtonView = new TextView(context);
         viewHolder.detailsButtonView = new TextView(context);
         viewHolder.reportButtonView = new TextView(context);
         viewHolder.actionsView = new View(context);
+        viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
 
         return viewHolder;
     }

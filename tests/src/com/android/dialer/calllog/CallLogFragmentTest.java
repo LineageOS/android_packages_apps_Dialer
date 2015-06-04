@@ -335,28 +335,15 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     }
 
     @MediumTest
-    public void testBindView_PlayButton() {
+    public void testBindView_VoicemailUri() {
         mCursor.moveToFirst();
         insertVoicemail(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0);
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
                 mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
 
-        IntentProvider intentProvider = (IntentProvider) viewHolder.voicemailButtonView.getTag();
-        Intent intent = intentProvider.getIntent(mActivity);
-        // Starts the call detail activity.
-        assertEquals(new ComponentName(mActivity, CallDetailActivity.class),
-                intent.getComponent());
-        // With the given entry.
-        assertEquals(ContentUris.withAppendedId(Calls.CONTENT_URI_WITH_VOICEMAIL, 1),
-                intent.getData());
-        // With the URI of the voicemail.
-        assertEquals(
-                ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, 1),
-                intent.getParcelableExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI));
-        // And starts playback.
-        assertTrue(
-                intent.getBooleanExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, false));
+        assertEquals(Uri.parse(viewHolder.voicemailUri),
+                ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, 1));
     }
 
     /** Returns the label associated with a given phone type. */
@@ -453,11 +440,17 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      * unit tests can access the buttons contained within.
      *
      * @param view The current call log row.
-     * @param position The position of hte item.
+     * @param position The position of the item.
      */
-    private void bindViewForTest(CallLogListItemViewHolder viewHolder, int position) {
+    private void bindViewForTest(final CallLogListItemViewHolder viewHolder, int position) {
         mAdapter.onBindViewHolder(viewHolder, position);
-        viewHolder.inflateActionViewStub(null);
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                viewHolder.inflateActionViewStub(null);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
         viewHolder.updateCallButton();
     }
 
