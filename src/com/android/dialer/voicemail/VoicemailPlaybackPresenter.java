@@ -556,6 +556,10 @@ public class VoicemailPlaybackPresenter
         return mAudioManager.isSpeakerphoneOn();
     }
 
+    public Uri getVoicemailUri() {
+        return mVoicemailUri;
+    }
+
     private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
         if (mScheduledExecutorService == null) {
             mScheduledExecutorService = Executors.newScheduledThreadPool(NUMBER_OF_THREADS_IN_POOL);

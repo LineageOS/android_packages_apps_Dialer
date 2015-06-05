@@ -27,11 +27,6 @@
         android:layout_height="80dp"
         android:layout_marginTop="@dimen/call_detail_button_spacing">
 
-        <!-- SeekBar left-right margin decreased from redlines 72dp by 8dp to account for
-             half thumb width (thumb is 16dp).
-             Vertically, SeekBar and rate buttons should be below centre, position achieved by
-             making them centred but giving a difference between top and bottom padding,
-             difference is currently 10dp. -->
         <SeekBar
             android:id="@+id/playback_seek"
             android:layout_width="match_parent"
@@ -61,15 +56,12 @@
 
     </RelativeLayout>
 
-    <!-- Playback, speakerphone buttons. -->
-    <LinearLayout
-        android:id="@+id/buttons_linear_layout"
+    <LinearLayout android:id="@+id/buttons_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/playback_start_stop"
+        <ImageButton android:id="@+id/playback_start_stop"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:layout_marginEnd="@dimen/call_detail_button_spacing"
@@ -78,14 +70,22 @@
             android:src="@drawable/ic_hold_pause"
             android:contentDescription="@string/voicemail_play_start_pause" />
 
-        <ImageButton
-            android:id="@+id/playback_speakerphone"
+        <ImageButton android:id="@+id/playback_speakerphone"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_speakerphone_on"
             android:contentDescription="@string/description_playback_speakerphone" />
+
+        <ImageButton android:id="@+id/delete_voicemail"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_delete_24dp"
+            android:tint="@color/voicemail_playback_icon_tint"
+            android:contentDescription="@string/recentCalls_trashVoicemail" />
 
     </LinearLayout>
 
