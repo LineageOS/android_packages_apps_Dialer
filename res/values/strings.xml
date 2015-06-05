@@ -495,17 +495,17 @@
     </string>
 
     <!-- Shortcut item used to add a number directly to a new contact from search.
-         [CHAR LIMIT=40] -->
+         [CHAR LIMIT=25] -->
     <string name="search_shortcut_create_new_contact">Create new contact</string>
 
     <!-- Shortcut item used to add a number to an existing contact directly from search.
-         [CHAR LIMIT=40] -->
-    <string name="search_shortcut_add_to_existing_contact">Add to existing contact</string>
+         [CHAR LIMIT=25] -->
+    <string name="search_shortcut_add_to_contact">Add to contact</string>
 
-    <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=40] -->
+    <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
     <string name="search_shortcut_send_sms_message">Send SMS</string>
 
-    <!-- Shortcut item used to make a video call directly from search. -->
+    <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
     <string name="search_shortcut_make_video_call">Make video call</string>
 
     <!-- Title for the call log list item that brings users to the full call history when clicked -->
