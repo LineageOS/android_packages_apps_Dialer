@@ -3,6 +3,8 @@ package com.android.dialer.list;
 import android.content.Context;
 import android.content.res.Resources;
 import android.telephony.PhoneNumberUtils;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,6 +37,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public final static int SHORTCUT_COUNT = 5;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
+
+    private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
 
     public DialerPhoneNumberListAdapter(Context context) {
         super(context);
@@ -141,7 +145,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         final String number = getFormattedQueryString();
         switch (shortcutType) {
             case SHORTCUT_DIRECT_CALL:
-                text = resources.getString(R.string.search_shortcut_call_number, number);
+                text = resources.getString(
+                        R.string.search_shortcut_call_number,
+                        mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
                 drawableId = R.drawable.ic_search_phone;
                 break;
             case SHORTCUT_CREATE_NEW_CONTACT:
