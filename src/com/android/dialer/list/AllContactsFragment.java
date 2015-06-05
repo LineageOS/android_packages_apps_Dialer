@@ -16,6 +16,7 @@
 
 package com.android.dialer.list;
 
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -39,6 +40,8 @@ import com.android.dialer.util.DialerUtils;
  */
 public class AllContactsFragment extends ContactEntryListFragment<ContactEntryListAdapter> {
 
+    private View mEmptyListView;
+
     public AllContactsFragment() {
         setQuickContactEnabled(false);
         setAdjustSelectionBoundsEnabled(true);
@@ -52,10 +55,11 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     public void onViewCreated(View view, android.os.Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View emptyListView = view.findViewById(R.id.empty_list_view);
-        DialerUtils.configureEmptyListView(emptyListView, R.drawable.empty_contacts,
+        View mEmptyListView = view.findViewById(R.id.empty_list_view);
+        DialerUtils.configureEmptyListView(mEmptyListView, R.drawable.empty_contacts,
                 R.string.all_contacts_empty, getResources());
-        getListView().setEmptyView(emptyListView);
+        getListView().setEmptyView(mEmptyListView);
+        mEmptyListView.setVisibility(View.GONE);
 
         ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
     }
@@ -64,6 +68,15 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     protected void startLoading() {
         if (PermissionsUtil.hasContactsPermissions(getActivity())) {
             super.startLoading();
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        super.onLoadFinished(loader, data);
+
+        if (data.getCount() == 0) {
+            mEmptyListView.setVisibility(View.VISIBLE);
         }
     }
 

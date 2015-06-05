@@ -51,7 +51,7 @@
     <string name="recentCalls_editNumberBeforeCall">Edit number before call</string>
 
     <!-- Menu item used to add a number from the call log to contacts -->
-    <string name="recentCalls_addToContact">Add to contacts</string>
+    <string name="recentCalls_addToContact">Add to a contact</string>
 
     <!-- Menu item used to remove a single call from the call log -->
     <string name="recentCalls_removeFromRecentList">Delete from call history</string>
@@ -500,7 +500,7 @@
 
     <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
-    <string name="search_shortcut_add_to_contact">Add to contact</string>
+    <string name="search_shortcut_add_to_contact">Add to a contact</string>
 
     <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
     <string name="search_shortcut_send_sms_message">Send SMS</string>
