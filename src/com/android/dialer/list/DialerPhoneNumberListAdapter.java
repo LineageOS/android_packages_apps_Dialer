@@ -149,7 +149,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 drawableId = R.drawable.ic_search_add_contact;
                 break;
             case SHORTCUT_ADD_TO_EXISTING_CONTACT:
-                text = resources.getString(R.string.search_shortcut_add_to_existing_contact);
+                text = resources.getString(R.string.search_shortcut_add_to_contact);
                 drawableId = R.drawable.ic_person_24dp;
                 break;
             case SHORTCUT_SEND_SMS_MESSAGE:
