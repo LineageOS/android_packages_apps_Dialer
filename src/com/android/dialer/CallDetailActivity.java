@@ -97,11 +97,9 @@ public class CallDetailActivity extends Activity {
 
         @Override
         public void onGetCallDetails(PhoneCallDetails[] details) {
-            Context context = CallDetailActivity.this;
-
             if (details == null) {
                 // Somewhere went wrong: we're going to bail out and show error to users.
-                Toast.makeText(context, R.string.toast_call_detail_error,
+                Toast.makeText(mContext, R.string.toast_call_detail_error,
                         Toast.LENGTH_SHORT).show();
                 finish();
                 return;
@@ -119,9 +117,9 @@ public class CallDetailActivity extends Activity {
 
             // Cache the details about the phone number.
             final boolean canPlaceCallsTo =
-                PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
-            final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(context);
-            final boolean isVoicemailNumber =
+                    PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
+            final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(mContext);
+            mIsVoicemailNumber =
                     phoneUtils.isVoicemailNumber(accountHandle, mNumber);
             final boolean isSipNumber = PhoneNumberUtilsWrapper.isSipNumber(mNumber);
 
@@ -144,7 +142,9 @@ public class CallDetailActivity extends Activity {
                 }
             }
 
-            String accountLabel = PhoneAccountUtils.getAccountLabel(context, accountHandle);
+            mCallButton.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
+
+            String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, accountHandle);
             if (!TextUtils.isEmpty(accountLabel)) {
                 mAccountLabel.setText(accountLabel);
                 mAccountLabel.setVisibility(View.VISIBLE);
@@ -153,14 +153,14 @@ public class CallDetailActivity extends Activity {
             }
 
             mHasEditNumberBeforeCallOption =
-                    canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
+                    canPlaceCallsTo && !isSipNumber && !mIsVoicemailNumber;
             mHasTrashOption = hasVoicemail();
             mHasRemoveFromCallLogOption = !hasVoicemail();
             invalidateOptionsMenu();
 
             ListView historyList = (ListView) findViewById(R.id.history);
             historyList.setAdapter(
-                    new CallDetailHistoryAdapter(context, mInflater, mCallTypeHelper, details));
+                    new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
 
             String lookupKey = contactUri == null ? null
                     : ContactInfoHelper.getLookupKeyFromUri(contactUri);
@@ -168,7 +168,7 @@ public class CallDetailActivity extends Activity {
             final boolean isBusiness = mContactInfoHelper.isBusiness(firstDetails.sourceType);
 
             final int contactType =
-                    isVoicemailNumber ? ContactPhotoManager.TYPE_VOICEMAIL :
+                    mIsVoicemailNumber ? ContactPhotoManager.TYPE_VOICEMAIL :
                     isBusiness ? ContactPhotoManager.TYPE_BUSINESS :
                     ContactPhotoManager.TYPE_DEFAULT;
 
@@ -201,14 +201,17 @@ public class CallDetailActivity extends Activity {
         }
     };
 
+    private Context mContext;
     private CallTypeHelper mCallTypeHelper;
     private QuickContactBadge mQuickContactBadge;
     private TextView mCallerName;
     private TextView mCallerNumber;
     private TextView mAccountLabel;
+    private View mCallButton;
     private ContactInfoHelper mContactInfoHelper;
 
-    private String mNumber = null;
+    private String mNumber;
+    private boolean mIsVoicemailNumber;
     private String mDefaultCountryIso;
 
     /* package */ LayoutInflater mInflater;
@@ -230,6 +233,8 @@ public class CallDetailActivity extends Activity {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        mContext = this;
+
         setContentView(R.layout.call_detail);
 
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -247,6 +252,14 @@ public class CallDetailActivity extends Activity {
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
         mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
+
+        mCallButton = (View) findViewById(R.id.call_back_button);
+        mCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(IntentUtil.getCallIntent(mNumber));
+            }
+        });
 
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
         getActionBar().setDisplayHomeAsUpEnabled(true);
