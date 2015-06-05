@@ -204,7 +204,7 @@ public class VoicemailPlaybackPresenter
 
     public void onPause(boolean isFinishing) {
         // Do not pause for orientation changes.
-        if (mMediaPlayer.isPlaying() && isFinishing) {
+        if (mIsPrepared && mMediaPlayer.isPlaying() && isFinishing) {
             pausePlayback();
         }
 
