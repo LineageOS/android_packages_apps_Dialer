@@ -132,4 +132,6 @@
     <dimen name="preference_padding_bottom">16dp</dimen>
     <dimen name="preference_side_margin">16dp</dimen>
     <dimen name="preference_summary_line_spacing_extra">4dp</dimen>
+
+    <dimen name="call_button_dimen">36dp</dimen>
 </resources>

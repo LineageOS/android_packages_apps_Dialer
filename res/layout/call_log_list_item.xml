@@ -138,14 +138,14 @@
 
                 <ImageView
                     android:id="@+id/call_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/call_button_dimen"
+                    android:layout_height="@dimen/call_button_dimen"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/call_log_icon_margin"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_card_phone"
+                    android:src="@drawable/ic_call_24dp"
+                    android:scaleType="center"
                     android:tint="@color/recent_call_log_item_phone_icon_tint"
-                    android:alpha="0.3"
                     android:contentDescription="@string/description_call_log_call_action"
                     android:visibility="gone" />
 
