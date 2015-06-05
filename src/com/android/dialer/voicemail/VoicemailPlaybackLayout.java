@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 
 import com.google.common.base.Preconditions;
 
@@ -124,7 +125,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     /**
      * Handle state changes when the user manipulates the seek bar.
      */
-    private final OnSeekBarChangeListener seekBarChangeListener = new OnSeekBarChangeListener() {
+    private final OnSeekBarChangeListener mSeekBarChangeListener = new OnSeekBarChangeListener() {
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
             if (mPresenter != null) {
@@ -148,7 +149,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     /**
      * Click listener to toggle speakerphone.
      */
-    private final View.OnClickListener speakerphoneListener = new View.OnClickListener() {
+    private final View.OnClickListener mSpeakerphoneListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (mPresenter != null) {
@@ -160,7 +161,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     /**
      * Click listener to play or pause voicemail playback.
      */
-    private final View.OnClickListener startStopButtonListener = new View.OnClickListener() {
+    private final View.OnClickListener mStartStopButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (mPresenter == null) {
@@ -175,6 +176,16 @@ public class VoicemailPlaybackLayout extends LinearLayout
         }
     };
 
+    private final View.OnClickListener mDeleteButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view ) {
+            if (mPresenter == null) {
+                return;
+            }
+            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mPresenter.getVoicemailUri(), null);
+        }
+    };
+
     private Context mContext;
     private VoicemailPlaybackPresenter mPresenter;
 
@@ -183,6 +194,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     private SeekBar mPlaybackSeek;
     private ImageButton mStartStopButton;
     private ImageButton mPlaybackSpeakerphone;
+    private ImageButton mDeleteButton;
     private TextView mPlaybackPosition;
 
     private PositionUpdater mPositionUpdater;
@@ -212,11 +224,13 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mPlaybackSeek = (SeekBar) findViewById(R.id.playback_seek);
         mStartStopButton = (ImageButton) findViewById(R.id.playback_start_stop);
         mPlaybackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
+        mDeleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
         mPlaybackPosition = (TextView) findViewById(R.id.playback_position_text);
 
-        mPlaybackSeek.setOnSeekBarChangeListener(seekBarChangeListener);
-        mStartStopButton.setOnClickListener(startStopButtonListener);
-        mPlaybackSpeakerphone.setOnClickListener(speakerphoneListener);
+        mPlaybackSeek.setOnSeekBarChangeListener(mSeekBarChangeListener);
+        mStartStopButton.setOnClickListener(mStartStopButtonListener);
+        mPlaybackSpeakerphone.setOnClickListener(mSpeakerphoneListener);
+        mDeleteButton.setOnClickListener(mDeleteButtonListener);
     }
 
     @Override

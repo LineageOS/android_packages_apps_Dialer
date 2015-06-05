@@ -14,23 +14,21 @@
      limitations under the License.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/menu_trash"
-        android:icon="@drawable/ic_calllog_delete"
+
+    <item android:id="@+id/menu_trash"
+        android:icon="@drawable/ic_delete_24dp"
         android:showAsAction="ifRoom"
         android:title="@string/recentCalls_trashVoicemail"
-        android:onClick="onMenuTrashVoicemail"
-    />
-    <item
-        android:id="@+id/menu_remove_from_call_log"
-        android:icon="@drawable/ic_calllog_delete"
+        android:onClick="onMenuTrashVoicemail" />
+
+    <item android:id="@+id/menu_remove_from_call_log"
+        android:icon="@drawable/ic_delete_24dp"
         android:showAsAction="ifRoom"
         android:title="@string/recentCalls_removeFromRecentList"
-        android:onClick="onMenuRemoveFromCallLog"
-    />
-    <item
-        android:id="@+id/menu_edit_number_before_call"
+        android:onClick="onMenuRemoveFromCallLog" />
+
+    <item android:id="@+id/menu_edit_number_before_call"
         android:title="@string/recentCalls_editNumberBeforeCall"
-        android:onClick="onMenuEditNumberBeforeCall"
-    />
+        android:onClick="onMenuEditNumberBeforeCall" />
+
 </menu>
