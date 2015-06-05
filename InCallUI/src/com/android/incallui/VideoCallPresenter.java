@@ -489,19 +489,21 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 + " hasCallStateChanged=" +
                 hasCallStateChanged + " isVideoMode=" + isVideoMode());
 
-        if (!hasCallStateChanged) { return; }
+        if (!hasCallStateChanged) {
+            return;
+        }
 
-        final InCallCameraManager cameraManager = InCallPresenter.getInstance().
-                getInCallCameraManager();
+        if (isVideoCall) {
+            final InCallCameraManager cameraManager = InCallPresenter.getInstance().
+                    getInCallCameraManager();
 
-        String prevCameraId = cameraManager.getActiveCameraId();
+            String prevCameraId = cameraManager.getActiveCameraId();
+            updateCameraSelection(call);
+            String newCameraId = cameraManager.getActiveCameraId();
 
-        updateCameraSelection(call);
-
-        String newCameraId = cameraManager.getActiveCameraId();
-
-        if (!Objects.equals(prevCameraId, newCameraId) && CallUtils.isActiveVideoCall(call)) {
-            enableCamera(call.getVideoCall(), true);
+            if (!Objects.equals(prevCameraId, newCameraId) && CallUtils.isActiveVideoCall(call)) {
+                enableCamera(call.getVideoCall(), true);
+            }
         }
 
         // Make sure we hide or show the video UI if needed.
