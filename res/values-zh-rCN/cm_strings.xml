@@ -63,6 +63,8 @@
   <string name="call_stats_reset_filter">重置时间范围</string>
   <string name="call_stats_sort_by_duration">以通话时间排序</string>
   <string name="call_stats_sort_by_count">以通话次数排序</string>
+  <string name="menu_add_to_blacklist">添加到呼叫黑名单</string>
+  <string name="toast_added_to_blacklist">%s 已添加到黑名单列表。</string>
   <string name="speed_dial_settings">快速拨号设置</string>
   <string name="speed_dial_not_set">（未设置）</string>
   <string name="speed_dial_replace">替换</string>
