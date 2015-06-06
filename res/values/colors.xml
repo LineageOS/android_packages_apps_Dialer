@@ -39,6 +39,8 @@
     <!-- Tint of the recent card phone icon -->
     <color name="recent_call_log_item_phone_icon_tint">#000000</color>
 
+    <color name="voicemail_playback_icon_tint">#8e8e8e</color>
+
     <!--
          Colour of voicemail progress bar to the right of position indicator.
          Same as the background color of the dialer
