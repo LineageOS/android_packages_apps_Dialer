@@ -77,8 +77,6 @@ public class CallDetailActivity extends Activity {
     public static final String EXTRA_CALL_LOG_IDS = "EXTRA_CALL_LOG_IDS";
     /** If we are started with a voicemail, we'll find the uri to play with this extra. */
     public static final String EXTRA_VOICEMAIL_URI = "EXTRA_VOICEMAIL_URI";
-    /** If we should immediately start playback of the voicemail, this extra will be set to true. */
-    public static final String EXTRA_VOICEMAIL_START_PLAYBACK = "EXTRA_VOICEMAIL_START_PLAYBACK";
     /** If the activity was triggered from a notification. */
     public static final String EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION";
 
