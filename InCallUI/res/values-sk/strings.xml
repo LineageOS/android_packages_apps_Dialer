@@ -36,7 +36,7 @@
     <string name="wild_prompt_str" msgid="5543521676355533577">"Nahradiť zástupný znak znakom"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Konferenčný hovor <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Číslo hlasovej schránky"</string>
-    <string name="card_title_dialing" msgid="5769417478498348054">"Vytáčanie"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Vytáča sa"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Znova sa vytáča"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Konferenčný hovor"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Prichádzajúci hovor"</string>
@@ -52,7 +52,7 @@
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Žiadosť o video bola odmietnutá"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Vaše číslo na spätné volanie\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Vaše číslo na spätné tiesňové volanie\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="2107666444937350731">"Vytáčanie"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Vytáča sa"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Zmeškaný hovor"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Zmeškané hovory"</string>
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"Zmeškané hovory: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>."</string>
@@ -70,14 +70,14 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Číslo hlasovej schránky je neznáme"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Žiadny signál"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Vybratá sieť (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nie je k dispozícii"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"Odpoveď"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Prijať"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Položiť"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Hlas"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Prijať"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"Zatvoriť"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zavolať späť"</string>
-    <string name="notification_missedCall_message" msgid="3049928912736917988">"Správa"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Odmietnuť"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zavolať"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Napísať"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Ak chcete telefonovať, vypnite najprv režim v lietadle."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Prihlásenie do siete nebolo úspešné."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mobilná sieť nie je k dispozícii."</string>
@@ -131,7 +131,7 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Napísať vlastnú..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Zrušiť"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Odoslať"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Odpovedať"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Prijať"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Odoslať SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Odmietnuť"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Prijať ako videohovor"</string>

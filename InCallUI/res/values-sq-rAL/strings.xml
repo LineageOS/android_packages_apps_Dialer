@@ -78,7 +78,7 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Refuzo"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Telefono"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mesazh"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Për të kryer telefonatën, së pari çaktivizo modalitetin \"në aeroplan\"."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Për të kryer telefonatë, së pari çaktivizo modalitetin e aeroplanit."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"I paregjistruar në rrjet."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Rrjeti celular nuk mundësohet."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Për të kryer një telefonatë, fut një numër të vlefshëm."</string>

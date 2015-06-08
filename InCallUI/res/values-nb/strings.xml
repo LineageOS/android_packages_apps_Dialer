@@ -64,8 +64,8 @@
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Innkommende anrop via Wi-Fi"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Innkommende videoanrop"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Innkommende videoforespørsel"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"Nye beskjeder på telefonsvarer"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nye beskjeder på telefonsvarer (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Nye talemeldinger"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nye talemeldinger (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Ring <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Mangler nummer til telefonsvarer"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ingen tjeneste"</string>

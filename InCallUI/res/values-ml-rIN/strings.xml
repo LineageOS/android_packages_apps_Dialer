@@ -70,7 +70,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"വോയ്‌സ്‌മെയിൽ നമ്പർ അജ്ഞാതമാണ്"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"സേവനമില്ല"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"തിരഞ്ഞെടുത്ത നെറ്റ്‌വർക്ക് (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ലഭ്യമല്ല"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"മറുപടി നൽകുക"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"മറുപടി"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ഹാംഗ് അപ്പ് ചെയ്യുക"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"വീഡിയോ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"വോയ്‌സ്"</string>
@@ -131,7 +131,7 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"നിങ്ങളുടെ സ്വന്തം സന്ദേശമെഴുതുക..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"റദ്ദാക്കുക"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"അയയ്‌ക്കുക"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"മറുപടി നൽകുക"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"മറുപടി"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS അയയ്ക്കുക"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"നിരസിക്കുക"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"വീഡിയോ കോളായി മറുപടി നൽകുക"</string>

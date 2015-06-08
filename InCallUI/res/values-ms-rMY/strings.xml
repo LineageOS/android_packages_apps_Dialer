@@ -64,8 +64,8 @@
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Panggilan Wi-Fi masuk"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Panggilan video masuk"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Permintaan video masuk"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"Mel suara baru"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Mel suara baru (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Mel suara baharu"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Mel suara baharu (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Dail <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nombor mel suara tidak dikenali"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Tiada perkhidmatan"</string>
