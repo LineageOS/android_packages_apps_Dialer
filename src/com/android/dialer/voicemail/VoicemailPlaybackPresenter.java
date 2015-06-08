@@ -141,6 +141,7 @@ public class VoicemailPlaybackPresenter
      * This variable is thread-contained, accessed only on the ui thread.
      */
     private FetchResultHandler mFetchResultHandler;
+    private Handler mHandler = new Handler();
     private PowerManager.WakeLock mProximityWakeLock;
     private AudioManager mAudioManager;
 
@@ -298,13 +299,12 @@ public class VoicemailPlaybackPresenter
      * was not available.
      */
     private void requestContent() {
-        Preconditions.checkState(mFetchResultHandler == null, "mFetchResultHandler should be null");
+        if (mFetchResultHandler != null) {
+            mFetchResultHandler.destroy();
+        }
 
-        Handler handler = new Handler();
-        mFetchResultHandler = new FetchResultHandler(handler);
-        mContext.getContentResolver().registerContentObserver(
-                mVoicemailUri, false, mFetchResultHandler);
-        handler.postDelayed(mFetchResultHandler.getTimeoutRunnable(), FETCH_CONTENT_TIMEOUT_MS);
+        mFetchResultHandler = new FetchResultHandler(new Handler());
+        mFetchResultHandler.registerContentObserver(mVoicemailUri);
 
         // Send voicemail fetch request.
         Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, mVoicemailUri);
@@ -313,30 +313,37 @@ public class VoicemailPlaybackPresenter
 
     @ThreadSafe
     private class FetchResultHandler extends ContentObserver implements Runnable {
-        private AtomicBoolean mResultStillPending = new AtomicBoolean(true);
-        private final Handler mHandler;
+        private AtomicBoolean mIsWaitingForResult = new AtomicBoolean(true);
+        private final Handler mFetchResultHandler;
 
         public FetchResultHandler(Handler handler) {
             super(handler);
-            mHandler = handler;
+            mFetchResultHandler = handler;
         }
 
-        public Runnable getTimeoutRunnable() {
-            return this;
+        public void registerContentObserver(Uri voicemailUri) {
+            if (mIsWaitingForResult.get()) {
+                mContext.getContentResolver().registerContentObserver(
+                        voicemailUri, false, this);
+                mFetchResultHandler.postDelayed(this, FETCH_CONTENT_TIMEOUT_MS);
+            }
         }
 
+        /**
+         * Stop waiting for content and notify UI if {@link FETCH_CONTENT_TIMEOUT_MS} has elapsed.
+         */
         @Override
         public void run() {
-            if (mResultStillPending.getAndSet(false)) {
-                mContext.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
+            if (mIsWaitingForResult.getAndSet(false)) {
+                mContext.getContentResolver().unregisterContentObserver(this);
                 mView.setFetchContentTimeout();
             }
         }
 
         public void destroy() {
-            if (mResultStillPending.getAndSet(false)) {
-                mContext.getContentResolver().unregisterContentObserver(FetchResultHandler.this);
-                mHandler.removeCallbacks(this);
+            if (mIsWaitingForResult.getAndSet(false)) {
+                mContext.getContentResolver().unregisterContentObserver(this);
+                mFetchResultHandler.removeCallbacks(this);
             }
         }
 
@@ -352,7 +359,7 @@ public class VoicemailPlaybackPresenter
                 @Override
                 public void onPostExecute(Boolean hasContent) {
                     if (hasContent) {
-                        if (mResultStillPending.getAndSet(false)) {
+                        if (mIsWaitingForResult.getAndSet(false)) {
                             mContext.getContentResolver().unregisterContentObserver(
                                     FetchResultHandler.this);
                             prepareToPlayContent();
