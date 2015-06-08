@@ -28,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 
 import com.android.dialer.R;
@@ -208,8 +209,9 @@ public class SoundSettingsFragment extends PreferenceFragment
     }
 
     private boolean shouldHideCarrierSettings() {
-        int hideCarrierNetworkSetting = Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.HIDE_CARRIER_NETWORK_SETTINGS, SHOW_CARRIER_SETTINGS);
-        return hideCarrierNetworkSetting == HIDE_CARRIER_SETTINGS;
+        CarrierConfigManager configManager = (CarrierConfigManager) getActivity().getSystemService(
+                Context.CARRIER_CONFIG_SERVICE);
+        return configManager.getConfig().getBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL);
     }
 }
