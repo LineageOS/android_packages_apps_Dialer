@@ -103,7 +103,7 @@
     <string name="onscreenEndCallText" msgid="9039601192595655846">"Завершить вызов"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Кнопки"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Откл. звук"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"+ вызов"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Добавить вызов"</string>
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Соединить"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Перевод звонка"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Управление вызовами"</string>

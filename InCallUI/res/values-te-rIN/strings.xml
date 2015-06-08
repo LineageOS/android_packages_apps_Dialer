@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"వాయిస్"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ఆమోదిస్తున్నాను"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"తీసివేయి"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"తిరిగి కాల్ చేయి"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"కాల్ చేయి"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"సందేశం"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"కాల్ చేయడానికి, మొదట ఎయిర్‌ప్లైన్ మోడ్‌ను ఆపివేయండి."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"నెట్‌వర్క్‌లో నమోదు కాలేదు."</string>

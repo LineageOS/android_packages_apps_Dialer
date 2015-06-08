@@ -70,7 +70,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"A hangposta száma ismeretlen"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Nincs szolgáltatás"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"A kiválasztott hálózat (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nem érhető el"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"Válasz"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Fogadás"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Hívás befejezése"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Videó"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Hang"</string>
@@ -95,8 +95,8 @@
     <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Segélyhívás"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Rádió bekapcsolása..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Nincs szolgáltatás. Újrapróbálkozás folyamatban…"</string>
-    <string name="dial_emergency_error" msgid="1509085166367420355">"A hívás sikertelen. A(z) <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> szám nem vészhívószám."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"A hívás sikertelen. Tárcsázzon vészhívószámot."</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"A hívás sikertelen. A(z) <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> szám nem segélyhívószám."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"A hívás sikertelen. Tárcsázzon segélyhívószámot."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"A tárcsázáshoz használja a billentyűzetet"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Hívás tartása"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Hívás folytatása"</string>

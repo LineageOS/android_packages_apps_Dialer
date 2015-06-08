@@ -70,12 +70,12 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"ไม่ทราบหมายเลขข้อความเสียง"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"ไม่มีบริการ"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"เครือข่ายที่เลือกไว้ (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ไม่พร้อมใช้งาน"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"ตอบ"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"รับสาย"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"วางสาย"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"วิดีโอ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"เสียง"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ยอมรับ"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"ปิด"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"ไม่รับ"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"โทรกลับ"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"ข้อความ"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"หากต้องการโทรออก ให้ปิดโหมดใช้งานบนเครื่องบินก่อน"</string>

@@ -36,7 +36,7 @@
     <string name="wild_prompt_str" msgid="5543521676355533577">"Замените џокер знак са"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Конференцијски позив <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Број говорне поште"</string>
-    <string name="card_title_dialing" msgid="5769417478498348054">"Позивање"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Позива се"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Поновно бирање"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Конференцијски позив"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Долазни позив"</string>

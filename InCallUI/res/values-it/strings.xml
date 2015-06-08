@@ -60,7 +60,7 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Chiamata in corso"</string>
     <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Chiamata Wi-Fi in corso"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"In attesa"</string>
-    <string name="notification_incoming_call" msgid="2820429205043529642">"Chiamata ricevuta"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Chiamata in arrivo"</string>
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Chiamata Wi-Fi in arrivo"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Videochiamata in arrivo"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Richiesta video in arrivo"</string>
@@ -103,7 +103,7 @@
     <string name="onscreenEndCallText" msgid="9039601192595655846">"Termina chiamata"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tastierino"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"No audio"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"Aggiungi"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Aggiungi chiamata"</string>
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Unisci"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Scambia"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gestisci chiamate"</string>
