@@ -23,7 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historia połączeń"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Zadzwoń do: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Edytuj numer przed nawiązaniem połączenia"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Dodaj do kontaktów"</string>
+    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
+    <skip />
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Usuń z historii połączeń"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Wyczyść historię połączeń"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Usuń pocztę głosową"</string>
@@ -138,7 +139,8 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Cofnij"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zadzwoń: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Utwórz nowy kontakt"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Dodaj do istniejącego kontaktu"</string>
+    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
+    <skip />
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Wyślij SMS-a"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Rozmowa wideo"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Wyświetl pełną historię połączeń"</string>

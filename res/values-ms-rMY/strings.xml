@@ -23,14 +23,15 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Sejarah panggilan"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Panggil <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Edit nombor sebelum panggilan"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Tambah ke kenalan"</string>
+    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
+    <skip />
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Padamkan dari sejarah panggilan"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Kosongkan sejarah panggilan"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Padamkan mel suara"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Kongsi mel suara"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Tiada panggilan"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kosongkan sejarah panggilan?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Langkah ini akan memadamkan semua panggilan dari sejarah anda"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tindakan ini akan memadamkan semua panggilan daripada sejarah anda"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Mengosongkan sejarah panggilan..."</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mel suara </item>
@@ -38,7 +39,7 @@
     </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Main"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mel suara baru daripada <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mel suara baharu daripada <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Tidak dapat memainkan mel suara"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Menimbal…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Memuatkan mel suara..."</string>
@@ -136,7 +137,8 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Buat asal"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Panggil <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Buat kenalan baharu"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Tambah kepada kenalan sedia ada"</string>
+    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
+    <skip />
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Hantar SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Buat panggilan video"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Lihat sejarah panggilan penuh"</string>

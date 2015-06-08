@@ -23,7 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"通話記錄"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"打電話給<xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"在撥打前編輯號碼"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"新增至通訊錄"</string>
+    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
+    <skip />
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"從通話記錄中刪除"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"清除通話記錄"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"刪除留言"</string>
@@ -136,7 +137,8 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"復原"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"撥打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"建立新聯絡人"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"加到現有的聯絡人"</string>
+    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
+    <skip />
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"傳送短訊"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視像通話"</string>
     <string name="show_call_history" msgid="1141502332266697170">"查看完整通話記錄"</string>
