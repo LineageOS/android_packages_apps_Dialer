@@ -23,10 +23,9 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"История на обажданията"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Обаждане на <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Редактиране на номер преди обаждане"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Добавяне към контакти"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Изтриване от историята на обажданията"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Изчистване на историята на обажд."</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Изчистване на историята на обажданията"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Изтриване на гласова поща"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Споделяне на гласова поща"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Няма обаждания"</string>
@@ -137,8 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмяна"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Обаждане на <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Създаване на нов контакт"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Добавяне към съществуващ контакт"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Изпращане на SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Провеждане на видеообаждане"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Преглед на цялата история на обажданията"</string>
@@ -181,7 +179,7 @@
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Достъпност"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Мелодия на телефона"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Вибриране и при обаждания"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Звук при набиране"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Клавиат. за набиране: Мелодии"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Продължителност на звука при набиране"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Нормално"</item>

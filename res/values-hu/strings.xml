@@ -23,8 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Híváslista"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> hívása"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Szám szerkesztése hívás előtt"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Hozzáadás a névjegyekhez"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Törlés a híváslistáról"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"A híváslista törlése"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Hangposta törlése"</string>
@@ -137,13 +136,12 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Visszavonás"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Hívás: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Új névjegy létrehozása"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Hozzáadás a meglévő névjegyhez"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS küldése"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videohívás kezdeményezése"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Teljes híváslista megtekintése"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> új nem fogadott hívás"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"A gyorshívás révén egyetlen érintéssel lehet hívni a kedvenc és gyakran hívott számokat"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"A gyorshívás egyérintéses tárcsázást jelent a kedvenc és gyakran hívott számokhoz"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Nincsenek névjegyek"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Érintse meg a képet az összes szám megjelenítéséhez, vagy tartsa nyomva az átrendezéshez"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eltávolítás"</string>

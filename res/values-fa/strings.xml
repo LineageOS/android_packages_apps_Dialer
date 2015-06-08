@@ -23,8 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"سابقه تماس"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"تماس با <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ویرایش شماره قبل از تماس"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"افزودن به مخاطبین"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"حذف از سابقه تماس"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"پاک کردن سابقه تماس"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"حذف پست صوتی"</string>
@@ -134,11 +133,10 @@
     <string name="tab_all_contacts" msgid="1410922767166533690">"مخاطبین"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"پست صوتی"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"از موارد دلخواه حذف شد"</string>
-    <string name="favorite_hidden_undo" msgid="2508998611039406474">"واگرد"</string>
+    <string name="favorite_hidden_undo" msgid="2508998611039406474">"لغو"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"تماس با <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ایجاد مخاطب جدید"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"افزودن به مخاطب موجود"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ارسال پیامک"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"برقراری تماس ویدیویی"</string>
     <string name="show_call_history" msgid="1141502332266697170">"مشاهده سابقه تماس به صورت کامل"</string>

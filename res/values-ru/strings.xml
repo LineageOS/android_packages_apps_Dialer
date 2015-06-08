@@ -23,15 +23,14 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Журнал звонков."</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Вызов: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Изменить номер и вызвать"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Добавить в контакты"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Удалить из журнала звонков"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистить журнал звонков"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистить историю звонков"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Удалить голосовое сообщение"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Поделиться"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Звонков нет"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить журнал звонков?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Журнал звонков будет удален."</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Вызовов нет."</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить историю звонков?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"История звонков будет удалена."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Очистка журнала звонков…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> голосовое сообщение </item>
@@ -68,7 +67,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Выбрать позицию для воспроизведения"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Уменьшить скорость воспроизведения"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Увеличить скорость воспроизведения"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Журнал звонков"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"История вызовов"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Ещё"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"Панель набора номера"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Копировать"</string>
@@ -84,9 +83,9 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Все контакты"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Вызов"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Данные недоступны"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Панель тонального набора"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Вернуться к текущему вызову"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Добавить вызов"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Использовать тональный набор"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Вернуться к ожидающему вызову"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"+ вызов"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Входящий вызов"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Исходящий вызов"</string>
     <string name="type_missed" msgid="2720502601640509542">"Пропущенный вызов"</string>
@@ -124,10 +123,10 @@
     <string name="call_not_available" msgid="8941576511946492225">"Нельзя совершать телефонные звонки, поскольку приложение \"Телефон\" отключено."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"На устройстве нет подходящего приложения"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Введите имя или номер телефона"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Звонков нет"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Вызовов нет."</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Сообщений нет."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Только часто используемые"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Журнал"</string>
+    <string name="call_log_activity_title" msgid="4612824396355272023">"История"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Все"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропущенные"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Г. почта"</string>
@@ -139,8 +138,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Отмена"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Позвонить: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Создать контакт"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Добавить к контакту"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Отправить SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Начать видеовстречу"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Посмотреть весь журнал звонков"</string>
