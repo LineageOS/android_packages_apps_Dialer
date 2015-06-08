@@ -55,7 +55,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     public void onViewCreated(View view, android.os.Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View mEmptyListView = view.findViewById(R.id.empty_list_view);
+        mEmptyListView = view.findViewById(R.id.empty_list_view);
         DialerUtils.configureEmptyListView(mEmptyListView, R.drawable.empty_contacts,
                 R.string.all_contacts_empty, getResources());
         getListView().setEmptyView(mEmptyListView);
