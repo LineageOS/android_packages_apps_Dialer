@@ -23,8 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"کال کی سرگزشت"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> کو کال کریں"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"کال کرنے سے پہلے نمبر میں ترمیم کریں"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"رابطوں میں شامل کریں"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"کال کی سرگزشت سے حذف کریں"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"کال کی سرگزشت صاف کریں"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"صوتی میل حذف کریں"</string>
@@ -137,8 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"کالعدم کریں"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> کو کال کریں"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"نیا رابطہ بنائیں"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"موجودہ رابطے میں شامل کریں"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"‏SMS بھیجیں"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ویڈیو کال کریں"</string>
     <string name="show_call_history" msgid="1141502332266697170">"کال کی مکمل سرگزشت دیکھیں"</string>

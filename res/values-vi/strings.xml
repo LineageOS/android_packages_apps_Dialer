@@ -23,8 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Nhật ký cuộc gọi"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Gọi <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Chỉnh sửa số trước khi gọi"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Thêm vào danh bạ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Xóa khỏi nhật ký cuộc gọi"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Xóa nhật ký cuộc gọi"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Xóa thư thoại"</string>
@@ -82,7 +81,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Tất cả liên hệ"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Chi tiết cuộc gọi"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Không có chi tiết"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Sử dụng bàn phím số cảm ứng có âm"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Sử dụng bộ tạo xung từ bàn phím"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Quay lại cuộc gọi đang thực hiện"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Thêm cuộc gọi"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Cuộc gọi đến"</string>
@@ -125,23 +124,22 @@
     <string name="recentMissed_empty" msgid="4901789420356796156">"Không có cuộc gọi nào"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Không có thư thoại nào gần đây"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Chỉ hiển thị liên hệ ưa thích"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Nhật ký"</string>
+    <string name="call_log_activity_title" msgid="4612824396355272023">"Lịch sử"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tất cả"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Bị nhỡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Thư thoại"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Quay số nhanh"</string>
     <string name="tab_recents" msgid="929949073851377206">"Gần đây"</string>
-    <string name="tab_all_contacts" msgid="1410922767166533690">"Danh bạ"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"Địa chỉ liên hệ"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Thư thoại"</string>
-    <string name="favorite_hidden" msgid="5011234945140912047">"Đã xóa khỏi liên hệ yêu thích"</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"Đã xóa khỏi mục yêu thích"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Hoàn tác"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Gọi <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Tạo liên hệ mới"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Thêm vào liên hệ hiện có"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Gửi SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Gọi điện video"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Xem toàn bộ nhật ký cuộc gọi"</string>
+    <string name="show_call_history" msgid="1141502332266697170">"Xem toàn bộ lịch sử cuộc gọi"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> cuộc gọi nhỡ mới"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"Quay số nhanh là quay số bằng một lần chạm đối với các liên hệ yêu thích và các số bạn thường xuyên gọi"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Không có liên hệ nào"</string>

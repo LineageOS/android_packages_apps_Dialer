@@ -23,8 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Zvanu vēsture"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Zvanīt: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Rediģēt numuru pirms zvanīšanas"</string>
-    <!-- no translation found for recentCalls_addToContact (4570467333422734645) -->
-    <skip />
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Pievienot kontaktpersonām"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Dzēst no zvanu vēstures"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Dzēst zvanu vēsturi"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Dzēst balss pasta ziņojumu"</string>
@@ -138,8 +137,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Atsaukt"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zvaniet: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Izveidot jaunu kontaktpersonu"</string>
-    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
-    <skip />
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Pievienot kontaktpersonai"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Sūtīt īsziņu"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Veikt videozvanu"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Visas zvanu vēstures skatīšana"</string>
