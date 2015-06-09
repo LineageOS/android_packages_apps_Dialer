@@ -129,7 +129,14 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         mAdapter.pauseCache();
         mParentView = new FrameLayout(mActivity);
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
-        mAdapter.setCursorForTesting(mCursor);
+
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.changeCursor(mCursor);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
     }
 
     /**
@@ -316,7 +323,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     public void testBindView_CallButton() {
         mCursor.moveToFirst();
         insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
-        mAdapter.changeCursor(mCursor);
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
                 mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
