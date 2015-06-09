@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"سجل المكالمات"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"الاتصال بـ <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"تعديل الرقم قبل الاتصال"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"إضافة إلى جهة اتصال"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"إضافة إلى جهات الاتصال"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"حذف من سجل المكالمات"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"محو سجل المكالمات"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"حذف بريد صوتي"</string>
@@ -140,7 +140,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"تراجع"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"الاتصال بالرقم <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"إنشاء جهة اتصال جديدة"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"إضافة إلى جهة اتصال"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"إضافة إلى جهة الاتصال الحالية"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"‏إرسال رسالة قصيرة SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"إجراء مكالمة فيديو"</string>
     <string name="show_call_history" msgid="1141502332266697170">"عرض سجل المكالمات بالكامل"</string>

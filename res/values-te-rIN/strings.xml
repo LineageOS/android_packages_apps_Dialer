@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"కాల్ చరిత్ర"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g>కు కాల్ చేయి"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"కాల్ చేయడానికి ముందు నంబర్‌ను సవరించు"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"పరిచయానికి జోడించు"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"పరిచయాలకు జోడించు"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"కాల్ చరిత్ర నుండి తొలగించు"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"కాల్ చరిత్రను క్లియర్ చేయి"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"వాయిస్ మెయిల్‌ను తొలగించు"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"చర్య రద్దు చేయి"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g>కు కాల్ చేయండి"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"కొత్త పరిచయాన్ని సృష్టించు"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"పరిచయానికి జోడించు"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"ఇప్పటికే ఉన్న పరిచయానికి జోడించు"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS పంపు"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"వీడియో కాల్ చేయండి"</string>
     <string name="show_call_history" msgid="1141502332266697170">"పూర్తి కాల్ చరిత్రను వీక్షించండి"</string>
