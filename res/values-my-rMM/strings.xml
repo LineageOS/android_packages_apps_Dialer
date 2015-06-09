@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ခေါ်ဆိုမှု မှတ်တမ်း"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ဖုန်းမခေါ်ခင် နံပါတ်အားပြင်ရန်"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"လိပ်စာများထဲသို့ ထည့်ပါ"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"အဆက်အသွယ်သို့ ပေါင်းထည့်ရန်"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ခေါ်ဆိုမှု မှတ်တမ်း ထဲမှာ ဖျက်ရန်"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ခေါ်ဆိုမှု မှတ်တမ်း ရှင်းရန်"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"အသံပို့စာ အားဖျက်ရန်"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"နောက်ပြန်လုပ်ပါ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"အဆက်အသွယ် အသစ် ဖန်တီးရန်"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"လက်ရှိ အဆက်အသွယ်တွင်း ထည့်ရန်"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"အဆက်အသွယ်သို့ ပေါင်းထည့်ရန်"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"စာတို ပို့ရန်"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ဗီဒီယို ခေါ်ဆိုမှု ပြုလုပ်ရန်"</string>
     <string name="show_call_history" msgid="1141502332266697170">"ခေါ်ဆိုမှု မှတ်တမ်း အပြည့်ကို ကြည့်ရန်"</string>

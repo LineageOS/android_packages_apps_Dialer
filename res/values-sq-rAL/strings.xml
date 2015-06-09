@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historiku i telefonatave"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Telefono <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Redakto numrin para telefonatës"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Shto te kontaktet"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Shto te një kontakt"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Fshi nga historiku i telefonatave"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Pastro historikun e telefonatave"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Fshije postën zanore"</string>
@@ -67,7 +67,7 @@
     <string name="description_rate_increase" msgid="6324606574127052385">"Rrite shpejtësinë e luajtjes"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historiku i telefonatave"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Opsione të tjera"</string>
-    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"blloku i formimit të numrit"</string>
+    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"blloku i tasteve"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Kopjo"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Shfaq vetëm dalëset"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Shfaq vetëm hyrëset"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Zhbëj"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Telefono <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Krijo një kontakt të ri"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Shto te kontakti ekzistues"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Shto te një kontakt"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Dërgo SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Bëj një telefonatë me video"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Shiko historikun e plotë të telefonatave"</string>

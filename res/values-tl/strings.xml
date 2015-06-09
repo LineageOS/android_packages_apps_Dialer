@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"History ng tawag"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Tawagan si <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"I-edit ang numero bago tumawag"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Idagdag sa mga contact"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Idagdag sa isang contact"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"I-delete mula sa history ng tawag"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"I-clear ang history ng tawag"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Tanggalin ang voicemail"</string>
@@ -82,7 +82,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Mga detalye ng tawag"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Hindi available ang mga detalye"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Gumamit ng touch tone na keypad"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Kasalukuyang nagaganap ang pabalik na tawag"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Bumalik sa kasalukuyang tawag"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Magdagdag ng tawag"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Papasok na tawag"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Papalabas na tawag"</string>
@@ -136,12 +136,12 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"I-undo"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Tumawag sa <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Gumawa ng bagong contact"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Idagdag sa umiiral nang contact"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Idagdag sa isang contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Magpadala ng SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Gumawa ng video call"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Tingnan ang buong history ng tawag"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> (na) bagong hindi nasagot na tawag"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Ang speed dial ay one‑touch na pagda-dial para sa mga paborito at mga numerong madalas mong tinatawag"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Ang speed dial ay one‑touch na pagda-dial para sa mga paborito at numerong madalas mong tawagan"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Walang mga contact"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Pindutin ang larawan upang makita ang lahat ng numero o pindutin nang matagal upang ayusing muli"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Alisin"</string>
