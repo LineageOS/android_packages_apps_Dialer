@@ -191,6 +191,7 @@ public class CallLogFragment extends Fragment
         setHasOptionsMenu(true);
 
         mVoicemailPlaybackPresenter = new VoicemailPlaybackPresenter(activity, state);
+        activity.setVolumeControlStream(VoicemailPlaybackPresenter.PLAYBACK_STREAM);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
