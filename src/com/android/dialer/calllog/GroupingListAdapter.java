@@ -253,7 +253,6 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
      * corresponding cursor position.
      */
     public void obtainPositionMetadata(PositionMetadata metadata, int position) {
-
         // If the description object already contains requested information, just return
         if (metadata.listPosition == position) {
             return;
@@ -431,19 +430,6 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
             return mCursor.getLong(mRowIdColumnIndex);
         } else {
             return -1;
-        }
-    }
-
-    /**
-     * Used for setting the cursor without triggering a UI thread update.
-     */
-    @NeededForTesting
-    public void setCursorForTesting(Cursor cursor) {
-        if (cursor != null) {
-            mCursor = cursor;
-            cursor.registerContentObserver(mChangeObserver);
-            cursor.registerDataSetObserver(mDataSetObserver);
-            mRowIdColumnIndex = cursor.getColumnIndexOrThrow("_id");
         }
     }
 }
