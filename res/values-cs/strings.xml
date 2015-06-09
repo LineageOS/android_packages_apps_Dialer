@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historie volání"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Volat kontakt <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Před voláním upravit číslo"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Přidat do kontaktů"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Přidat ke kontaktu"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Smazat z historie volání"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Vymazat historii volání"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Smazat hlasovou zprávu"</string>
@@ -138,7 +138,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Vrátit zpět"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zavolat na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Vytvořit nový kontakt"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Přidat k existujícímu kontaktu"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Přidat ke kontaktu"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Odeslat SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Uskutečnit videohovor"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Zobrazit celou historii volání"</string>
@@ -178,7 +178,7 @@
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"Možnosti zobrazení"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Zvuky a vibrace"</string>
-    <string name="accessibility_settings_title" msgid="6068141142874046249">"Usnadnění"</string>
+    <string name="accessibility_settings_title" msgid="6068141142874046249">"Přístupnost"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Vyzváněcí tón telefonu"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrovat také u volání"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tóny číselníku"</string>

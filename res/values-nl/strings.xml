@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Oproepgeschiedenis"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> bellen"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Nummer bewerken voor bellen"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Toevoegen aan contacten"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Toevoegen aan een contact"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Verwijderen uit oproepgeschiedenis"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Oproepgeschiedenis wissen"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Voicemail verwijderen"</string>
@@ -102,7 +102,7 @@
     <string name="description_send_text_message" msgid="3118485319691414221">"Sms verzenden naar <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Niet-beluisterde voicemail"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Gesproken zoekopdracht"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Bel <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> bellen"</string>
     <string name="unknown" msgid="740067747858270469">"Onbekend"</string>
     <string name="voicemail" msgid="3851469869202611441">"Voicemail"</string>
     <string name="private_num" msgid="6374339738119166953">"Privénummer"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Ongedaan maken"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Bel <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Nieuw contact maken"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Toevoegen aan bestaand contact"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Toevoegen aan een contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Sms verzenden"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videogesprek starten"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Volledige oproepgeschiedenis bekijken"</string>

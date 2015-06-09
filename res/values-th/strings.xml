@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ประวัติการโทร"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"โทรหา <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"แก้ไขหมายเลขก่อนโทร"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"เพิ่มในสมุดโทรศัพท์"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"เพิ่มในรายชื่อติดต่อ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ลบออกจากประวัติการโทร"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ล้างประวัติการโทร"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ลบข้อความเสียง"</string>
@@ -82,7 +82,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"รายละเอียดการโทร"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ไม่สามารถดึงรายละเอียด"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ใช้ปุ่มกดสัญญาณเสียง"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"กลับสู่การโทรที่กำลังดำเนินอยู่"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"กลับไปคุยสายต่อ"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"เพิ่มการโทร"</string>
     <string name="type_incoming" msgid="6502076603836088532">"สายเรียกเข้า"</string>
     <string name="type_outgoing" msgid="343108709599392641">"สายโทรออก"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"เลิกทำ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"โทร <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"สร้างรายชื่อติดต่อใหม่"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"เพิ่มไปยังรายชื่อติดต่อที่มีอยู่"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"เพิ่มในรายชื่อติดต่อ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ส่ง SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ใช้แฮงเอาท์วิดีโอ"</string>
     <string name="show_call_history" msgid="1141502332266697170">"ดูประวัติการโทรแบบเต็ม"</string>

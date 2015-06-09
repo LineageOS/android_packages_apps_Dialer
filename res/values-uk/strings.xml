@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Історія дзвінків"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Набрати <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Редаг. номер перед викл."</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Додати в контакти"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Додати в контактні дані"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Видалити з історії дзвінків"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистити історію дзвінків"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Видалити голосову пошту"</string>
@@ -83,12 +83,12 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Усі контакти"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Деталі виклику"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Деталі недоступні"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Викор. кнопкову клавіат."</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Поверн. до поточн. виклику"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Дод. виклик"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Використовувати тональний набір"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Повернутися до поточного виклику"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Додати виклик"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Вхідний виклик"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Вихідний виклик"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Пропущ. виклик"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Пропущений виклик"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Вхідний відеодзвінок"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Вихідний відеодзвінок"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Пропущений відеодзвінок"</string>
@@ -138,7 +138,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Відмінити"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Набрати <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Створити новий контакт"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Додати до наявного контакта"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Додати в контактні дані"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Надіслати SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Здійснити відеодзвінок"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Переглянути всю історію дзвінків"</string>
