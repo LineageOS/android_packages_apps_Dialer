@@ -83,24 +83,6 @@ public abstract class IntentProvider {
         };
     }
 
-    public static IntentProvider getPlayVoicemailIntentProvider(final long rowId,
-            final String voicemailUri) {
-        return new IntentProvider() {
-            @Override
-            public Intent getIntent(Context context) {
-                Intent intent = new Intent(context, CallDetailActivity.class);
-                intent.setData(ContentUris.withAppendedId(
-                        Calls.CONTENT_URI_WITH_VOICEMAIL, rowId));
-                if (voicemailUri != null) {
-                    intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI,
-                            Uri.parse(voicemailUri));
-                }
-                intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, true);
-                return intent;
-            }
-        };
-    }
-
     public static IntentProvider getSendSmsIntentProvider(final String number) {
         return new IntentProvider() {
             @Override
@@ -129,7 +111,6 @@ public abstract class IntentProvider {
                     intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_URI,
                             Uri.parse(voicemailUri));
                 }
-                intent.putExtra(CallDetailActivity.EXTRA_VOICEMAIL_START_PLAYBACK, false);
 
                 if (extraIds != null && extraIds.length > 0) {
                     intent.putExtra(CallDetailActivity.EXTRA_CALL_LOG_IDS, extraIds);
