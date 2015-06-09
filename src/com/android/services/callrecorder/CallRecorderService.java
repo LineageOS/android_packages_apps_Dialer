@@ -23,7 +23,6 @@ import android.media.MediaRecorder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemProperties;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.services.callrecorder.common.CallRecording;
@@ -180,9 +179,6 @@ public class CallRecorderService extends Service {
 
     private String generateFilename(String number) {
         String timestamp = DATE_FORMAT.format(new Date());
-        if (TextUtils.isEmpty(number)) {
-            number = "unknown";
-        }
         return number + "_" + timestamp + ".amr";
     }
 
