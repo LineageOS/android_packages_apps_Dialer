@@ -98,7 +98,7 @@ public class VoicemailPlaybackPresenter
         VoicemailContract.Voicemails.HAS_CONTENT,
     };
 
-    private static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
+    public static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
     // Time to wait for content to be fetched before timing out.
     private static final long FETCH_CONTENT_TIMEOUT_MS = 20000;
@@ -145,8 +145,8 @@ public class VoicemailPlaybackPresenter
     private PowerManager.WakeLock mProximityWakeLock;
     private AudioManager mAudioManager;
 
-    public VoicemailPlaybackPresenter(Activity activity, Bundle savedInstanceState) {
-        mContext = activity;
+    public VoicemailPlaybackPresenter(Context context, Bundle savedInstanceState) {
+        mContext = context;
         mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
@@ -174,8 +174,6 @@ public class VoicemailPlaybackPresenter
         mMediaPlayer.setOnPreparedListener(this);
         mMediaPlayer.setOnErrorListener(this);
         mMediaPlayer.setOnCompletionListener(this);
-
-        activity.setVolumeControlStream(PLAYBACK_STREAM);
     }
 
     /**
@@ -574,4 +572,8 @@ public class VoicemailPlaybackPresenter
         return mScheduledExecutorService;
     }
 
+    @VisibleForTesting
+    public boolean isPlaying() {
+        return mIsPlaying;
+    }
 }
