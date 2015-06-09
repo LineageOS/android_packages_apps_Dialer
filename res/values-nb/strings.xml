@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Anropslogg"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ring <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Rediger nummer før anrop"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Legg til for en kontakt"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Legg til kontakter"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Slett fra anropsloggen"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Slett anropsloggen"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Slett talepost"</string>
@@ -48,7 +48,7 @@
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Bare utgående anrop"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Bare ubesvarte anrop"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Talepostoppdateringer er ikke tilgjengelige"</string>
-    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Ny talemelding venter. Kan ikke laste inn akkurat nå."</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Ny talepost venter. Kan ikke laste inn akkurat nå."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Konfigurer taleposten din"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Lyd er ikke tilgjengelig"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Konfigurer"</string>
@@ -82,7 +82,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Samtaleinformasjon"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Informasjon er ikke tilgjengelig"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Bruk tonetastatur"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Gå tilbake til aktiv samtale"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Gå tilbake til pågående samtale"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Legg til en samtale"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Innkommende samtale"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Utgående samtale"</string>
@@ -136,12 +136,12 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Angre"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Opprett ny kontakt"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Legg til for en kontakt"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Legg til i eksisterende kontakt"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Send SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Start en videosamtale"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Se hele anropsloggen"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye tapte anrop"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Med hurtigoppringing kan du ringe til favorittene dine og numre du ringer ofte, med bare ett trykk"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Hurtigoppringing ringer til favorittene dine og numrene du ringer ofte, med bare ett trykk"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ingen kontakter"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Trykk på bildet for å se alle numre, eller trykk på og hold nede for å omorganisere"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Fjern"</string>
@@ -187,5 +187,5 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtigsvar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Anrop"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Ringing til kontoer"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Ringe kontoer"</string>
 </resources>

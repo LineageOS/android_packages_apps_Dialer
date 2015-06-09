@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Skambučių istorija"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Skambinti <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Redaguoti numerį prieš skambutį"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Pridėti prie kontakto"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Pridėti prie adresatų"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Ištrinti iš skambučių istorijos"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Išvalyti skambučių istoriją"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ištrinti balso pašto pran."</string>
@@ -138,7 +138,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Anuliuoti"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Skambinti numeriu <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Kurti naują kontaktą"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Pridėti prie kontakto"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Pridėti prie esamo kontakto"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Siųsti SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Atlikti vaizdo skambutį"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Visos skambučių istorijos peržiūra"</string>
