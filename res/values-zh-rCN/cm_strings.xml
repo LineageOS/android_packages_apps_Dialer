@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">拨号盘 T9 搜索</string>
   <string name="t9_search_input_locale">T9 搜索输入</string>
   <string name="t9_search_input_locale_default">默认</string>
+  <string name="type_blacklist">已屏蔽的呼叫</string>
   <string name="call_log_stats_title">统计</string>
   <string name="callStatsDetailTitle">通话统计详情</string>
   <string name="call_stats">通话统计</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">呼出：<xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">未接</string>
   <string name="call_stats_missed_percent">未接：<xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">已屏蔽</string>
+  <string name="call_stats_blacklist_percent">已屏蔽：<xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">总计：<xliff:g id="call_count">%s</xliff:g>，<xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">总计：<xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">开始日期</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">重置时间范围</string>
   <string name="call_stats_sort_by_duration">以通话时间排序</string>
   <string name="call_stats_sort_by_count">以通话次数排序</string>
+  <string name="menu_add_to_blacklist">添加到呼叫黑名单</string>
+  <string name="toast_added_to_blacklist">%s 已添加到呼叫黑名单。</string>
   <string name="speed_dial_settings">快速拨号设置</string>
   <string name="speed_dial_not_set">（未设置）</string>
   <string name="speed_dial_replace">替换</string>
@@ -87,9 +92,13 @@
   <string name="call_log_all_calls_header">所有呼叫</string>
   <string name="calllog_search_hint">搜索通话记录</string>
   <string name="msim_ime_dialog_title">设备标识符</string>
+  <string name="call_log_blacklist_header">仅屏蔽呼叫</string>
   <string name="start_call_playback">播放录音</string>
   <string name="stop_call_playback">停止</string>
   <string name="call_playback_error_message">播放录音失败</string>
+  <string name="sensors_category_title">传感器选项</string>
+  <string name="smart_mute_title">智能静音</string>
+  <string name="smart_mute_summary">通过翻转设备静音来电</string>
   <string name="smart_dialer_title">智能呼叫</string>
   <string name="smart_dialer_summary">移动设备到您的耳边时，自动呼叫该联系人</string>
 </resources>

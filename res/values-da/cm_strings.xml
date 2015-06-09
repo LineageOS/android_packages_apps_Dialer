@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">T9-søgning på tastatur</string>
   <string name="t9_search_input_locale">Søgeinput med T9</string>
   <string name="t9_search_input_locale_default">Standard</string>
+  <string name="type_blacklist">Blokeret opkald</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer om opkaldsstatistik</string>
   <string name="call_stats">Opkaldsstatistik</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">Udgående: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Ubesvarede</string>
   <string name="call_stats_missed_percent">Ubesvarede: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blokeret</string>
+  <string name="call_stats_blacklist_percent">Blokeret: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">I alt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">I alt: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdato</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">Nulstil tidsinterval</string>
   <string name="call_stats_sort_by_duration">Sortér på opkaldsvarighed</string>
   <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
+  <string name="menu_add_to_blacklist">Tilføj til blokeret opkaldsliste</string>
+  <string name="toast_added_to_blacklist">%s tilføjet til blokeret opkaldsliste.</string>
   <string name="speed_dial_settings">Indstillinger for hurtigopkald</string>
   <string name="speed_dial_not_set">(ikke angivet)</string>
   <string name="speed_dial_replace">Erstat</string>
@@ -87,6 +92,7 @@
   <string name="call_log_all_calls_header">Alle opkald</string>
   <string name="calllog_search_hint">Søg i opkaldsloggen</string>
   <string name="msim_ime_dialog_title">Enheds-id</string>
+  <string name="call_log_blacklist_header">Kun blokeret opkald</string>
   <string name="start_call_playback">Afspil optagelse</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kunne ikke afspille optagelse</string>

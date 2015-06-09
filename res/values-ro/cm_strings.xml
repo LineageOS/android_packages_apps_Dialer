@@ -28,6 +28,7 @@
   <string name="preference_category_t9_dialpad_search">Căutare Dialpad T9</string>
   <string name="t9_search_input_locale">Căutare T9</string>
   <string name="t9_search_input_locale_default">Implicit</string>
+  <string name="type_blacklist">Apel blocat</string>
   <string name="call_log_stats_title">Statistici</string>
   <string name="callStatsDetailTitle">Detalii statistică apel</string>
   <string name="call_stats">Statistici apel</string>
@@ -41,6 +42,8 @@
   <string name="call_stats_outgoing">Efectuat: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Pierdute</string>
   <string name="call_stats_missed_percent">Pierdut: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blocat</string>
+  <string name="call_stats_blacklist_percent">Blocat: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data de început</string>
@@ -79,6 +82,7 @@
   <string name="call_log_all_calls_header">Toate apelurile</string>
   <string name="calllog_search_hint">Căutare în jurnalul de apeluri</string>
   <string name="msim_ime_dialog_title">Identificatorul dispozitivului</string>
+  <string name="call_log_blacklist_header">Doar apeluri blocate</string>
   <string name="start_call_playback">Redă înregistrarea</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Nu s-a reuşit redarea înregistrării</string>

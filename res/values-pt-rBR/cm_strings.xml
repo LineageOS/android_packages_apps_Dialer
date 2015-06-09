@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Pesquisa no teclado T9</string>
   <string name="t9_search_input_locale">Pesquisar entrada no teclado T9</string>
   <string name="t9_search_input_locale_default">Padrão</string>
+  <string name="type_blacklist">Chamada bloqueada</string>
   <string name="call_log_stats_title">Estatísticas</string>
   <string name="callStatsDetailTitle">Estatística de chamadas detalhadas</string>
   <string name="call_stats">Estatísticas de chamadas</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">Enviadas: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Perdidas</string>
   <string name="call_stats_missed_percent">Perdidas: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Bloqueada</string>
+  <string name="call_stats_blacklist_percent">Bloqueada: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data inicial</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">Redefinr tempo de intervalo</string>
   <string name="call_stats_sort_by_duration">Ordernar por duração de chamada</string>
   <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
+  <string name="menu_add_to_blacklist">Adicionar à lista de chamadas bloqueadas</string>
+  <string name="toast_added_to_blacklist">%s adicionado à lista de chamadas bloqueadas.</string>
   <string name="speed_dial_settings">Configurações de discagem rápida</string>
   <string name="speed_dial_not_set">(não definido)</string>
   <string name="speed_dial_replace">Substituir</string>
@@ -87,9 +92,13 @@
   <string name="call_log_all_calls_header">Todas as chamadas</string>
   <string name="calllog_search_hint">Pesquisar no registro de chamadas</string>
   <string name="msim_ime_dialog_title">Identificador de dispositivo</string>
+  <string name="call_log_blacklist_header">Somente chamadas bloqueadas</string>
   <string name="start_call_playback">Reproduzir a gravação</string>
   <string name="stop_call_playback">Parar</string>
   <string name="call_playback_error_message">Falha ao reproduzir a gravação</string>
+  <string name="sensors_category_title">Opções do sensor</string>
+  <string name="smart_mute_title">Silenciar inteligente</string>
+  <string name="smart_mute_summary">Silenciar a chamada recebida ao virar o dispositivo</string>
   <string name="smart_dialer_title">Chamada inteligente</string>
   <string name="smart_dialer_summary">Chamar automaticamente o contato movendo seu telefone ao seu ouvido</string>
 </resources>

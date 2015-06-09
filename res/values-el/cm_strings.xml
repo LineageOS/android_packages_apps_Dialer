@@ -96,6 +96,9 @@
   <string name="start_call_playback">Αναπαραγωγή καταγραφής</string>
   <string name="stop_call_playback">Διακοπή</string>
   <string name="call_playback_error_message">Αποτυχία αναπαραγωγής της καταγραφής κλήσης</string>
+  <string name="sensors_category_title">Επιλογές αισθητήρων</string>
+  <string name="smart_mute_title">Έξυπνη σίγαση</string>
+  <string name="smart_mute_summary">Σίγαση της εισερχόμενης κλήσης αναποδογυρίζοντας την συσκευή</string>
   <string name="smart_dialer_title">Έξυπνη κλήση</string>
   <string name="smart_dialer_summary">Αυτόματη κλήση της επαφής μετακινώντας τη συσκευή προς το αυτί σας</string>
 </resources>

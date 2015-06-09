@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">T9-поиск в номеронабирателе</string>
   <string name="t9_search_input_locale">Язык поиска</string>
   <string name="t9_search_input_locale_default">Язык системы</string>
+  <string name="type_blacklist">Заблокированный вызов</string>
   <string name="call_log_stats_title">Статистика</string>
   <string name="callStatsDetailTitle">Статистика вызовов</string>
   <string name="call_stats">Статистика звонков</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">Исходящих: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Пропущенных</string>
   <string name="call_stats_missed_percent">Пропущенных: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Заблокирован</string>
+  <string name="call_stats_blacklist_percent">Заблокированы: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Начальная дата</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">Сбросить фильтр</string>
   <string name="call_stats_sort_by_duration">Сорт. по длительности</string>
   <string name="call_stats_sort_by_count">Сорт. по количеству</string>
+  <string name="menu_add_to_blacklist">Добавить в чёрный список</string>
+  <string name="toast_added_to_blacklist">%s добавлен в черный список.</string>
   <string name="speed_dial_settings">Настройки быстрого набора</string>
   <string name="speed_dial_not_set">(не установлено)</string>
   <string name="speed_dial_replace">Изменить</string>
@@ -87,9 +92,13 @@
   <string name="call_log_all_calls_header">Все звонки</string>
   <string name="calllog_search_hint">Искать в журнале вызовов</string>
   <string name="msim_ime_dialog_title">Идентификатор устройства</string>
+  <string name="call_log_blacklist_header">Только заблокированные звонки</string>
   <string name="start_call_playback">Воспроизвести запись</string>
   <string name="stop_call_playback">Остановить</string>
   <string name="call_playback_error_message">Не удалось воспроизвести запись разговора</string>
+  <string name="sensors_category_title">Настройки датчиков</string>
+  <string name="smart_mute_title">Интеллект. отключение звука</string>
+  <string name="smart_mute_summary">Переверните устройство, чтобы приглушить звук входящего звонка</string>
   <string name="smart_dialer_title">Интеллектуальный вызов</string>
   <string name="smart_dialer_summary">Автоматически начинать звонок при поднесении телефона к уху</string>
 </resources>

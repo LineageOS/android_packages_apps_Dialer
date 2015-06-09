@@ -96,6 +96,9 @@
   <string name="start_call_playback">Пусти снимак</string>
   <string name="stop_call_playback">Заустави</string>
   <string name="call_playback_error_message">Пуштање снимка није успело</string>
+  <string name="sensors_category_title">Опције сензора</string>
+  <string name="smart_mute_title">Паметно утишавање</string>
+  <string name="smart_mute_summary">Утишај долазећи позив окретањем уређаја</string>
   <string name="smart_dialer_title">Паметни позив</string>
   <string name="smart_dialer_summary">Аутоматски позови контакт приношењем уређаја уху</string>
 </resources>
