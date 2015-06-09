@@ -47,6 +47,10 @@
         <xliff:g id="name">%s</xliff:g>
     </string>
 
+    <!-- Text for a menu item to report a call as having been incorrectly identified.
+         [CHAR LIMIT=30] -->
+    <string name="call_detail_menu_report">Report inaccurate number</string>
+
     <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
     <string name="recentCalls_editNumberBeforeCall">Edit number before call</string>
 
@@ -631,20 +635,9 @@
         Call details for <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
     </string>
 
-    <!-- Description for the "report" action for an entry in the call log. This action reports that
-         the phone number lookup performed for the entry was inaccurate. [CHAR LIMIT=NONE] -->
-    <string name="description_report_action">
-        Report <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
-    </string>
-
     <!-- Toast message which appears when a call log entry is deleted.
          [CHAR LIMIT=NONE] -->
     <string name="toast_entry_removed">Deleted from call history</string>
-
-    <!-- Button text for the "report" button displayed underneath an entry in the call log.
-         Tapping causes the call log entry to be reported to Google as a bad id.
-         [CHAR LIMIT=30] -->
-    <string name="call_log_action_report">Report</string>
 
     <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->

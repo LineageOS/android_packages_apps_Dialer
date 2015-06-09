@@ -70,7 +70,8 @@ import java.util.List;
  * This activity can be either started with the URI of a single call log entry, or with the
  * {@link #EXTRA_CALL_LOG_IDS} extra to specify a group of call log entries.
  */
-public class CallDetailActivity extends Activity {
+public class CallDetailActivity extends Activity
+        implements MenuItem.OnMenuItemClickListener {
     private static final String TAG = "CallDetail";
 
      /** A long array extra containing ids of call log entries to display. */
@@ -152,8 +153,8 @@ public class CallDetailActivity extends Activity {
 
             mHasEditNumberBeforeCallOption =
                     canPlaceCallsTo && !isSipNumber && !mIsVoicemailNumber;
-            mHasTrashOption = hasVoicemail();
-            mHasRemoveFromCallLogOption = !hasVoicemail();
+            mHasReportMenuOption = mContactInfoHelper.canReportAsInvalid(
+                    firstDetails.sourceType, firstDetails.objectId);
             invalidateOptionsMenu();
 
             ListView historyList = (ListView) findViewById(R.id.history);
@@ -208,7 +209,7 @@ public class CallDetailActivity extends Activity {
     private View mCallButton;
     private ContactInfoHelper mContactInfoHelper;
 
-    private String mNumber;
+    protected String mNumber;
     private boolean mIsVoicemailNumber;
     private String mDefaultCountryIso;
 
@@ -222,10 +223,7 @@ public class CallDetailActivity extends Activity {
 
     /** Whether we should show "edit number before call" in the options menu. */
     private boolean mHasEditNumberBeforeCallOption;
-    /** Whether we should show "trash" in the options menu. */
-    private boolean mHasTrashOption;
-    /** Whether we should show "remove from call log" in the options menu. */
-    private boolean mHasRemoveFromCallLogOption;
+    private boolean mHasReportMenuOption;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -270,7 +268,10 @@ public class CallDetailActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+        getCallDetails();
+    }
 
+    public void getCallDetails() {
         CallLogAsyncTaskUtil.getCallDetails(this, getCallLogEntryUris(), mCallLogAsyncTaskListener);
     }
 
@@ -327,30 +328,44 @@ public class CallDetailActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // This action deletes all elements in the group from the call log.
         // We don't have this action for voicemails, because you can just use the trash button.
-        menu.findItem(R.id.menu_remove_from_call_log).setVisible(mHasRemoveFromCallLogOption);
-        menu.findItem(R.id.menu_edit_number_before_call).setVisible(mHasEditNumberBeforeCallOption);
-        menu.findItem(R.id.menu_trash).setVisible(mHasTrashOption);
+        menu.findItem(R.id.menu_remove_from_call_log)
+                .setVisible(!hasVoicemail())
+                .setOnMenuItemClickListener(this);
+        menu.findItem(R.id.menu_edit_number_before_call)
+                .setVisible(mHasEditNumberBeforeCallOption)
+                .setOnMenuItemClickListener(this);
+        menu.findItem(R.id.menu_trash)
+                .setVisible(hasVoicemail())
+                .setOnMenuItemClickListener(this);
+        menu.findItem(R.id.menu_report)
+                .setVisible(mHasReportMenuOption)
+                .setOnMenuItemClickListener(this);
         return super.onPrepareOptionsMenu(menu);
     }
 
-    public void onMenuRemoveFromCallLog(MenuItem menuItem) {
-        final StringBuilder callIds = new StringBuilder();
-        for (Uri callUri : getCallLogEntryUris()) {
-            if (callIds.length() != 0) {
-                callIds.append(",");
-            }
-            callIds.append(ContentUris.parseId(callUri));
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_remove_from_call_log:
+                final StringBuilder callIds = new StringBuilder();
+                for (Uri callUri : getCallLogEntryUris()) {
+                    if (callIds.length() != 0) {
+                        callIds.append(",");
+                    }
+                    callIds.append(ContentUris.parseId(callUri));
+                }
+                CallLogAsyncTaskUtil.deleteCalls(
+                        this, callIds.toString(), mCallLogAsyncTaskListener);
+                break;
+            case R.id.menu_edit_number_before_call:
+                startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
+                break;
+            case R.id.menu_trash:
+                CallLogAsyncTaskUtil.deleteVoicemail(
+                        this, mVoicemailUri, mCallLogAsyncTaskListener);
+                break;
         }
-
-        CallLogAsyncTaskUtil.deleteCalls(this, callIds.toString(), mCallLogAsyncTaskListener);
-    }
-
-    public void onMenuEditNumberBeforeCall(MenuItem menuItem) {
-        startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
-    }
-
-    public void onMenuTrashVoicemail(MenuItem menuItem) {
-        CallLogAsyncTaskUtil.deleteVoicemail(this, mVoicemailUri, mCallLogAsyncTaskListener);
+        return true;
     }
 
     private void closeSystemDialogs() {

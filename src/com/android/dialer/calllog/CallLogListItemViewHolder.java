@@ -77,7 +77,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     public View addToExistingContactButtonView;
     public View sendMessageView;
     public View detailsButtonView;
-    public View reportButtonView;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -127,12 +126,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
      * descriptions on buttons in the actions ViewStub when it is inflated.
      */
     public CharSequence nameOrNumber;
-
-    /**
-     * Whether or not the contact info can be marked as invalid from the source where
-     * it was obtained.
-     */
-    public boolean canBeReportedAsInvalid;
 
     /**
      * The contact info for the contact displayed in this list item.
@@ -222,8 +215,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
      *
      * @param callLogItem The call log list item view.
      */
-    public void inflateActionViewStub(
-            final CallLogAdapter.OnReportButtonClickListener onReportButtonClickListener) {
+    public void inflateActionViewStub() {
         ViewStub stub = (ViewStub) rootView.findViewById(R.id.call_log_entry_actions_stub);
         if (stub != null) {
             actionsView = (ViewGroup) stub.inflate();
@@ -246,16 +238,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
 
             detailsButtonView = actionsView.findViewById(R.id.details_action);
             detailsButtonView.setOnClickListener(mActionListener);
-
-            reportButtonView = actionsView.findViewById(R.id.report_action);
-            reportButtonView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onReportButtonClickListener != null) {
-                        onReportButtonClickListener.onReportButtonClick(number);
-                    }
-                }
-            });
         }
 
         bindActionButtons();
@@ -327,12 +309,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         detailsButtonView.setTag(
                 IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
 
-        if (canBeReportedAsInvalid && !info.isBadData) {
-            reportButtonView.setVisibility(View.VISIBLE);
-        } else {
-            reportButtonView.setVisibility(View.GONE);
-        }
-
         if (info != null && UriUtils.isEncodedContactUri(info.lookupUri)) {
             createNewContactButtonView.setTag(IntentProvider.getAddContactIntentProvider(
                     info.lookupUri, info.name, info.number, info.type, true /* isNewContact */));
@@ -356,13 +332,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
      *
      * If the action views have never been shown yet for this view, inflate the view stub.
      */
-    public void showActions(boolean show,
-            final CallLogAdapter.OnReportButtonClickListener onReportButtonClickListener) {
+    public void showActions(boolean show) {
         expandVoicemailTranscriptionView(show);
 
         if (show) {
             // Inflate the view stub if necessary, and wire up the event handlers.
-            inflateActionViewStub(onReportButtonClickListener);
+            inflateActionViewStub();
 
             actionsView.setVisibility(View.VISIBLE);
             actionsView.setAlpha(1.0f);
@@ -438,7 +413,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 new TextView(context),
                 new View(context));
         viewHolder.detailsButtonView = new TextView(context);
-        viewHolder.reportButtonView = new TextView(context);
         viewHolder.actionsView = new View(context);
         viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
 
