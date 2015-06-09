@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Umlando wekholi"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Shayela <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Hlela inombolo ngaphambi kokushaya ucingo"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Engeza koxhumana naye"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Engeza kothintana nabo"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Susa kusukela kumlando wekholi"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Sula umlando wekholi"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Susa imeyili yezwi"</string>
@@ -136,7 +136,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Hlehlisa"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Shayela ku-<xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Dala oxhumana naye omusha"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Engeza koxhumana naye"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Engeza koxhumana naye okhona"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Thumela i-SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Yenza ikholi yevidiyo"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Buka wonke umlando wekholi"</string>
