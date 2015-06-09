@@ -390,6 +390,9 @@
     <!-- String used to display calls from pay phone in the call log -->
     <string name="payphone">Payphone</string>
 
+    <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
+    <string name="callDetailsShortDurationFormat"><xliff:g id="seconds" example="28">%s</xliff:g> sec</string>
+
     <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
     <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> min <xliff:g id="seconds" example="28">%s</xliff:g> sec</string>
 
