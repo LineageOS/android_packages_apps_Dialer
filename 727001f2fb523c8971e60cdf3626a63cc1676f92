@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a629dbe_3710d84e",
+        "filename": "src/com/android/dialer/calllog/PhoneAccountUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2015-06-09T03:24:32Z",
+      "side": 1,
+      "message": "might be nice to refactor this simple TTL cache into util, since you are using it in two places",
+      "revId": "727001f2fb523c8971e60cdf3626a63cc1676f92",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a629dbe_173af4cd",
+        "filename": "src/com/android/dialer/calllog/PhoneNumberUtilsWrapper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2015-06-09T03:24:32Z",
+      "side": 1,
+      "message": "if we made this cache static (similar to phone account handle) could we prevent modifying the constructors from the activity on down?",
+      "revId": "727001f2fb523c8971e60cdf3626a63cc1676f92",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba5da102_386529e1",
+        "filename": "src/com/android/dialer/dialpad/DialpadFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 10293
+      },
+      "writtenOn": "2015-06-09T03:24:32Z",
+      "side": 1,
+      "message": "can revert this file since you put hasVoicemailNumber back",
+      "revId": "727001f2fb523c8971e60cdf3626a63cc1676f92",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
