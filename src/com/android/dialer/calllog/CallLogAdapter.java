@@ -350,46 +350,13 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         int count = getGroupSize(position);
 
-        CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
-
-        // Default case: an item in the call log.
-        views.primaryActionView.setVisibility(View.VISIBLE);
-
         final String number = c.getString(CallLogQuery.NUMBER);
         final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
-        final long date = c.getLong(CallLogQuery.DATE);
-        final long duration = c.getLong(CallLogQuery.DURATION);
-        final int callType = c.getInt(CallLogQuery.CALL_TYPE);
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
-
-        final long rowId = c.getLong(CallLogQuery.ID);
-        views.rowId = rowId;
-
-        // Check if the day group has changed and display a header if necessary.
-        int currentGroup = getDayGroupForCall(rowId);
-        int previousGroup = getPreviousDayGroup(c);
-        if (currentGroup != previousGroup) {
-            views.dayGroupHeader.setVisibility(View.VISIBLE);
-            views.dayGroupHeader.setText(getGroupDescription(currentGroup));
-        } else {
-            views.dayGroupHeader.setVisibility(View.GONE);
-        }
-
-        // Store some values used when the actions ViewStub is inflated on expansion of the actions
-        // section.
-        views.number = number;
-        views.numberPresentation = numberPresentation;
-        views.callType = callType;
-        views.accountHandle = accountHandle;
-        views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
-        // Stash away the Ids of the calls so that we can support deleting a row in the call log.
-        views.callIds = getCallIds(c, count);
-
         final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(c);
-
         final boolean isVoicemailNumber =
                 mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
 
@@ -402,66 +369,81 @@ public class CallLogAdapter extends GroupingListAdapter
             // Lookup contacts with this number
             info = mContactInfoCache.getValue(number, countryIso, cachedContactInfo);
         }
-
-        final Uri lookupUri = info.lookupUri;
-        final String name = info.name;
-        final int ntype = info.type;
-        final String label = info.label;
-        final long photoId = info.photoId;
-        final Uri photoUri = info.photoUri;
         CharSequence formattedNumber = info.formattedNumber == null
                 ? null : PhoneNumberUtils.createTtsSpannable(info.formattedNumber);
-        final int[] callTypes = getCallTypes(c, count);
-        final String geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
-        final int sourceType = info.sourceType;
-        final int features = getCallFeatures(c, count);
-        final String transcription = c.getString(CallLogQuery.TRANSCRIPTION);
-        Long dataUsage = null;
+
+        final PhoneCallDetails details = new PhoneCallDetails(
+                mContext, number, numberPresentation, formattedNumber, isVoicemailNumber);
+        details.accountHandle = accountHandle;
+        details.callTypes = getCallTypes(c, count);
+        details.countryIso = countryIso;
+        details.date = c.getLong(CallLogQuery.DATE);
+        details.duration = c.getLong(CallLogQuery.DURATION);
+        details.features = getCallFeatures(c, count);
+        details.geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
+        details.transcription = c.getString(CallLogQuery.TRANSCRIPTION);
+
         if (!c.isNull(CallLogQuery.DATA_USAGE)) {
-            dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
+            details.dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
         }
 
-        final PhoneCallDetails details;
+        if (!TextUtils.isEmpty(info.name)) {
+            details.contactUri = info.lookupUri;
+            details.name = info.name;
+            details.numberType = info.type;
+            details.numberLabel = info.label;
+            details.photoUri = info.photoUri;
+            details.sourceType = info.sourceType;
+        }
 
+        CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
         views.info = info;
+        views.rowId = c.getLong(CallLogQuery.ID);
+        // Store values used when the actions ViewStub is inflated on expansion.
+        views.number = number;
+        views.numberPresentation = numberPresentation;
+        views.callType = c.getInt(CallLogQuery.CALL_TYPE);
+        views.accountHandle = accountHandle;
+        views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
+        // Stash away the Ids of the calls so that we can support deleting a row in the call log.
+        views.callIds = getCallIds(c, count);
 
         // The entry can only be reported as invalid if it has a valid ID and the source of the
         // entry supports marking entries as invalid.
-        views.canBeReportedAsInvalid = mContactInfoHelper.canReportAsInvalid(info.sourceType,
-                info.objectId);
+        views.canBeReportedAsInvalid = mContactInfoHelper.canReportAsInvalid(
+                info.sourceType, info.objectId);
+
+        // Default case: an item in the call log.
+        views.primaryActionView.setVisibility(View.VISIBLE);
+
+        // Check if the day group has changed and display a header if necessary.
+        int currentGroup = getDayGroupForCall(views.rowId);
+        int previousGroup = getPreviousDayGroup(c);
+        if (currentGroup != previousGroup) {
+            views.dayGroupHeader.setVisibility(View.VISIBLE);
+            views.dayGroupHeader.setText(getGroupDescription(currentGroup));
+        } else {
+            views.dayGroupHeader.setVisibility(View.GONE);
+        }
 
         // Update the expanded position if the rowIds match, in case ViewHolders were added/removed.
-        if (mCurrentlyExpandedRowId == rowId) {
+        // Then restore the state of the row on rebind.
+        if (mCurrentlyExpandedRowId == views.rowId) {
             mCurrentlyExpandedPosition = position;
         }
-        // Restore expansion state of the row on rebind. Inflate the actions ViewStub if required,
-        // and set its visibility state accordingly.
         views.showActions(mCurrentlyExpandedPosition == position, mOnReportButtonClickListener);
-
-        if (TextUtils.isEmpty(name)) {
-            details = new PhoneCallDetails(mContext, number, numberPresentation, formattedNumber,
-                    countryIso, geocode, callTypes, date, duration, accountHandle, features,
-                    dataUsage, transcription, isVoicemailNumber);
-        } else {
-            details = new PhoneCallDetails(mContext, number, numberPresentation, formattedNumber,
-                    countryIso, geocode, callTypes, date, duration, name, ntype, label, lookupUri,
-                    photoUri, sourceType, accountHandle, features, dataUsage, transcription,
-                    isVoicemailNumber);
-        }
-
-        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
+        views.updateCallButton();
 
         String nameForDefaultImage = null;
-        if (TextUtils.isEmpty(name)) {
+        if (TextUtils.isEmpty(info.name)) {
             nameForDefaultImage = details.displayNumber;
         } else {
-            nameForDefaultImage = name;
+            nameForDefaultImage = info.name;
         }
+        views.setPhoto(info.photoId, info.photoUri, info.lookupUri, nameForDefaultImage,
+                isVoicemailNumber, mContactInfoHelper.isBusiness(info.sourceType));
 
-        views.setPhoto(photoId, photoUri, lookupUri, nameForDefaultImage, isVoicemailNumber,
-                mContactInfoHelper.isBusiness(info.sourceType));
-
-        views.updateCallButton();
+        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {

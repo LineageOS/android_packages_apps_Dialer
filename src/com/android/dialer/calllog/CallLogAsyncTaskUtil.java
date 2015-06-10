@@ -139,34 +139,14 @@ public class CallLogAsyncTaskUtil {
             }
 
             // Read call log.
+            final String countryIso = cursor.getString(CallDetailQuery.COUNTRY_ISO_COLUMN_INDEX);
             final String number = cursor.getString(CallDetailQuery.NUMBER_COLUMN_INDEX);
             final int numberPresentation =
                     cursor.getInt(CallDetailQuery.NUMBER_PRESENTATION_COLUMN_INDEX);
-            final long date = cursor.getLong(CallDetailQuery.DATE_COLUMN_INDEX);
-            final long duration = cursor.getLong(CallDetailQuery.DURATION_COLUMN_INDEX);
-            final int callType = cursor.getInt(CallDetailQuery.CALL_TYPE_COLUMN_INDEX);
-            final String geocode = cursor.getString(CallDetailQuery.GEOCODED_LOCATION_COLUMN_INDEX);
-            final String transcription =
-                    cursor.getString(CallDetailQuery.TRANSCRIPTION_COLUMN_INDEX);
 
             final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                     cursor.getString(CallDetailQuery.ACCOUNT_COMPONENT_NAME),
                     cursor.getString(CallDetailQuery.ACCOUNT_ID));
-
-            String countryIso = cursor.getString(CallDetailQuery.COUNTRY_ISO_COLUMN_INDEX);
-            if (TextUtils.isEmpty(countryIso)) {
-                countryIso = GeoUtil.getCurrentCountryIso(context);
-            }
-
-            // Formatted phone number.
-            final CharSequence formattedNumber;
-            // Read contact specifics.
-            final CharSequence nameText;
-            final int numberType;
-            final CharSequence numberLabel;
-            final Uri photoUri;
-            final Uri lookupUri;
-            int sourceType;
 
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfoHelper contactInfoHelper =
@@ -178,39 +158,36 @@ public class CallLogAsyncTaskUtil {
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
                             && !isVoicemail;
             ContactInfo info = shouldLookupNumber
-                            ? contactInfoHelper.lookupNumber(number, countryIso) : null;
+                            ? contactInfoHelper.lookupNumber(number, countryIso)
+                            : ContactInfo.EMPTY;
+            PhoneCallDetails details = new PhoneCallDetails(
+                    context, number, numberPresentation, info.formattedNumber, isVoicemail);
 
-            if (info == null) {
-                formattedNumber = PhoneNumberDisplayUtil.getDisplayNumber(
-                        context, accountHandle, number, numberPresentation, null, isVoicemail);
-                nameText = "";
-                numberType = 0;
-                numberLabel = "";
-                photoUri = null;
-                lookupUri = null;
-                sourceType = 0;
-            } else {
-                formattedNumber = info.formattedNumber;
-                nameText = info.name;
-                numberType = info.type;
-                numberLabel = info.label;
-                photoUri = info.photoUri;
-                lookupUri = info.lookupUri;
-                sourceType = info.sourceType;
-            }
+            details.accountHandle = accountHandle;
+            details.contactUri = info.lookupUri;
+            details.name = info.name;
+            details.numberType = info.type;
+            details.numberLabel = info.label;
+            details.photoUri = info.photoUri;
+            details.sourceType = info.sourceType;
 
+            details.callTypes = new int[] {
+                    cursor.getInt(CallDetailQuery.CALL_TYPE_COLUMN_INDEX)
+            };
+            details.date = cursor.getLong(CallDetailQuery.DATE_COLUMN_INDEX);
+            details.duration = cursor.getLong(CallDetailQuery.DURATION_COLUMN_INDEX);
+            details.features = cursor.getInt(CallDetailQuery.FEATURES);
+            details.geocode = cursor.getString(CallDetailQuery.GEOCODED_LOCATION_COLUMN_INDEX);
+            details.transcription = cursor.getString(CallDetailQuery.TRANSCRIPTION_COLUMN_INDEX);
 
-            final int features = cursor.getInt(CallDetailQuery.FEATURES);
+            details.countryIso = !TextUtils.isEmpty(countryIso) ? countryIso
+                    : GeoUtil.getCurrentCountryIso(context);
 
-            Long dataUsage = null;
             if (!cursor.isNull(CallDetailQuery.DATA_USAGE)) {
-                dataUsage = cursor.getLong(CallDetailQuery.DATA_USAGE);
+                details.dataUsage = cursor.getLong(CallDetailQuery.DATA_USAGE);
             }
 
-            return new PhoneCallDetails(context, number, numberPresentation, formattedNumber,
-                    countryIso, geocode, new int[]{ callType }, date, duration, nameText,
-                    numberType, numberLabel, lookupUri, photoUri, sourceType, accountHandle,
-                    features, dataUsage, transcription, isVoicemail);
+            return details;
         } finally {
             if (cursor != null) {
                 cursor.close();
