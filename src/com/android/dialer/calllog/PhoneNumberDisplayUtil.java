@@ -19,7 +19,6 @@ package com.android.dialer.calllog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
-import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -35,7 +34,6 @@ public class PhoneNumberDisplayUtil {
      */
     /* package */ static CharSequence getDisplayName(
             Context context,
-            PhoneAccountHandle accountHandle,
             CharSequence number,
             int presentation,
             boolean isVoicemail) {
@@ -60,19 +58,16 @@ public class PhoneNumberDisplayUtil {
     /**
      * Returns the string to display for the given phone number.
      *
-     * @param accountHandle The handle for the account corresponding to the call
      * @param number the number to display
      * @param formattedNumber the formatted number if available, may be null
      */
     public static CharSequence getDisplayNumber(
             Context context,
-            PhoneAccountHandle accountHandle,
             CharSequence number,
             int presentation,
             CharSequence formattedNumber,
             boolean isVoicemail) {
-        final CharSequence displayName =
-                getDisplayName(context, accountHandle, number, presentation, isVoicemail);
+        final CharSequence displayName = getDisplayName(context, number, presentation, isVoicemail);
         if (!TextUtils.isEmpty(displayName)) {
             return displayName;
         }

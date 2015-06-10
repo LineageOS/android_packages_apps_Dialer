@@ -28,7 +28,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
-import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -122,12 +121,8 @@ public class DefaultVoicemailNotifier {
             // Check if we already know the name associated with this number.
             String name = names.get(newCall.number);
             if (name == null) {
-                PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
-                        newCall.accountComponentName,
-                        newCall.accountId);
                 name = PhoneNumberDisplayUtil.getDisplayName(
                         mContext,
-                        accountHandle,
                         newCall.number,
                         newCall.numberPresentation,
                         /* isVoicemail */ false).toString();
