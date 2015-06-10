@@ -186,7 +186,7 @@ import com.android.dialer.R;
             callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
-        int stringID = getCallDescriptionStringID(details);
+        int stringID = getCallDescriptionStringID(details.callTypes);
         String accountLabel = PhoneAccountUtils.getAccountLabel(context, details.accountHandle);
 
         // Use chosen string resource to build up the message.
@@ -213,8 +213,8 @@ import com.android.dialer.R;
      * @param details Call details.
      * @return String resource ID to use.
      */
-    public int getCallDescriptionStringID(PhoneCallDetails details) {
-        int lastCallType = getLastCallType(details.callTypes);
+    public int getCallDescriptionStringID(int[] callTypes) {
+        int lastCallType = getLastCallType(callTypes);
         int stringID;
 
         if (lastCallType == Calls.VOICEMAIL_TYPE || lastCallType == Calls.MISSED_TYPE) {
