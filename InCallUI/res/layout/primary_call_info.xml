@@ -60,7 +60,9 @@
             android:scaleType="center"
             android:visibility="gone" />
 
-        <TextView android:id="@+id/callStateLabel"
+        <com.android.phone.common.widget.ResizingTextTextView
+            xmlns:ex="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/callStateLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
@@ -70,13 +72,15 @@
             android:alpha="0.7"
             android:singleLine="true"
             android:gravity="start"
-            android:ellipsize="end" />
+            android:ellipsize="end"
+            ex:resizing_text_min_size="@dimen/call_status_text_min_size" />
 
     </LinearLayout>
 
     <!-- Name (or the phone number, if we don't have a name to display). -->
-    <com.android.phone.common.widget.ResizingTextTextView android:id="@+id/name"
+    <com.android.phone.common.widget.ResizingTextTextView
         xmlns:ex="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-5dp"
