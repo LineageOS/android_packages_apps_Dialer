@@ -64,11 +64,8 @@ import java.util.List;
  * (all, missed or voicemails), specify it in the constructor.
  */
 public class CallLogFragment extends Fragment
-        implements CallLogQueryHandler.Listener, CallLogAdapter.OnReportButtonClickListener,
-        CallLogAdapter.CallFetcher {
+        implements CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
     private static final String TAG = "CallLogFragment";
-
-    private static final String REPORT_DIALOG_TAG = "report_dialog";
 
     /**
      * ID of the empty loader to defer other fragments.
@@ -278,8 +275,7 @@ public class CallLogFragment extends Fragment
                 this,
                 new ContactInfoHelper(getActivity(), currentCountryIso),
                 mVoicemailPlaybackPresenter,
-                isShowingRecentsTab,
-                this);
+                isShowingRecentsTab);
         mRecyclerView.setAdapter(mAdapter);
 
         fetchCalls();
@@ -443,22 +439,6 @@ public class CallLogFragment extends Fragment
             }
             CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
             CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
-        }
-    }
-
-    public void onBadDataReported(String number) {
-        if (number == null) {
-            return;
-        }
-        mAdapter.invalidateCache();
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void onReportButtonClick(String number) {
-        DialogFragment df = ObjectFactory.getReportDialogFragment(number);
-        if (df != null) {
-            df.setTargetFragment(this, 0);
-            df.show(getActivity().getFragmentManager(), REPORT_DIALOG_TAG);
         }
     }
 }

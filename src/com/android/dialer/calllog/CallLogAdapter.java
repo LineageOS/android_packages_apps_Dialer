@@ -59,11 +59,6 @@ public class CallLogAdapter extends GroupingListAdapter
         public void fetchCalls();
     }
 
-    /** Implements onClickListener for the report button. */
-    public interface OnReportButtonClickListener {
-        public void onReportButtonClick(String number);
-    }
-
     private static final int VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM = 10;
     private static final int NO_EXPANDED_LIST_ITEM = -1;
 
@@ -71,7 +66,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactInfoHelper mContactInfoHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
-    private final OnReportButtonClickListener mOnReportButtonClickListener;
     private ViewTreeObserver mViewTreeObserver = null;
 
     protected ContactInfoCache mContactInfoCache;
@@ -143,7 +137,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
             if (viewHolder.getAdapterPosition() == mCurrentlyExpandedPosition) {
                 // Hide actions, if the clicked item is the expanded item.
-                viewHolder.showActions(false, mOnReportButtonClickListener);
+                viewHolder.showActions(false);
                 mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
                 mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
             } else {
@@ -160,7 +154,7 @@ public class CallLogAdapter extends GroupingListAdapter
             notifyItemChanged(mCurrentlyExpandedPosition);
         }
         // Show the actions for the clicked list item.
-        viewHolder.showActions(true, mOnReportButtonClickListener);
+        viewHolder.showActions(true);
         mCurrentlyExpandedPosition = viewHolder.getAdapterPosition();
         mCurrentlyExpandedRowId = viewHolder.rowId;
     }
@@ -207,8 +201,7 @@ public class CallLogAdapter extends GroupingListAdapter
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            boolean isShowingRecentsTab,
-            OnReportButtonClickListener onReportButtonClickListener) {
+            boolean isShowingRecentsTab) {
         super(context);
 
         mContext = context;
@@ -216,7 +209,6 @@ public class CallLogAdapter extends GroupingListAdapter
         mContactInfoHelper = contactInfoHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
         mIsShowingRecentsTab = isShowingRecentsTab;
-        mOnReportButtonClickListener = onReportButtonClickListener;
 
         mContactInfoCache = new ContactInfoCache(
                 mContactInfoHelper, mOnContactInfoChangedListener);
@@ -394,6 +386,7 @@ public class CallLogAdapter extends GroupingListAdapter
             details.numberLabel = info.label;
             details.photoUri = info.photoUri;
             details.sourceType = info.sourceType;
+            details.objectId = info.objectId;
         }
 
         CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
@@ -407,11 +400,6 @@ public class CallLogAdapter extends GroupingListAdapter
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
-
-        // The entry can only be reported as invalid if it has a valid ID and the source of the
-        // entry supports marking entries as invalid.
-        views.canBeReportedAsInvalid = mContactInfoHelper.canReportAsInvalid(
-                info.sourceType, info.objectId);
 
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
@@ -431,7 +419,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (mCurrentlyExpandedRowId == views.rowId) {
             mCurrentlyExpandedPosition = position;
         }
-        views.showActions(mCurrentlyExpandedPosition == position, mOnReportButtonClickListener);
+        views.showActions(mCurrentlyExpandedPosition == position);
         views.updateCallButton();
 
         String nameForDefaultImage = null;
