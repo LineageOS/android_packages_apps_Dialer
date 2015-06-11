@@ -532,32 +532,26 @@
     <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
     <string name="remove_contact">Remove</string>
 
-    <!-- Button text for the "all contacts" button displayed on the main dialer screen above the
-         list of favorite phone numbers.  Navigates the user to the "All Contacts" list.
-         This text represents the same action as the text in string "menu_allContacts".
-         [CHAR LIMIT=21] -->
-    <string name="favorites_menu_all_contacts">ALL CONTACTS</string>
-
     <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
-         [CHAR LIMIT=50] -->
-    <string name="call_log_action_video_call">Video call</string>
-
-    <!-- Button text for the "LISTEN" button displayed underneath an entry in the call log.
-         Tapping navigates the user to the call details screen where the user can listen to the
-         voicemail represented by the call log entry.
          [CHAR LIMIT=30] -->
-    <string name="call_log_action_voicemail">LISTEN</string>
+    <string name="call_log_action_video_call">Video call</string>
 
     <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
          messaging app to send a SMS to the number represented by the call log entry.
-         [CHAR LIMIT=50] -->
+         [CHAR LIMIT=30] -->
     <string name="call_log_action_send_message">Send Message</string>
 
     <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
-         the call log entry. [CHAR LIMIT=50] -->
-    <string name="call_log_action_details">View details</string>
+         the call log entry. [CHAR LIMIT=30] -->
+    <string name="call_log_action_details">Call details</string>
+
+    <!-- Button text for the button displayed underneath an entry in the call log, which when
+         tapped triggers a return call to the named user. [CHAR LIMIT=30] -->
+    <string name="call_log_action_call">
+        Call <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
+    </string>
 
     <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
@@ -609,6 +603,36 @@
     <string name="description_voicemail_action">
         Listen to voicemail from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
     </string>
+
+    <!-- String describing the "play voicemail" action for an entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_voicemail_play">
+        Play voicemail from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
+    </string>
+
+    <!-- String describing the "pause voicemail" action for an entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_voicemail_pause">
+        Pause voicemail from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
+    </string>
+
+
+    <!-- String describing the "delete voicemail" action for an entry in the call log.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <string name="description_voicemail_delete">
+        Delete voicemail from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
+    </string>
+
+    <!-- String describing the number of unread voicemails, displayed as a number badge on a tab.
+         Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+         [CHAR LIMIT=NONE] -->
+    <plurals name="description_voicemail_unread">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> unread voicemail</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> unread voicemails</item>
+    </plurals>
 
     <!-- Description for the "create new contact" action for an entry in the call log. This action
          opens a screen for creating a new contact for this name or number. [CHAR LIMIT=NONE] -->
