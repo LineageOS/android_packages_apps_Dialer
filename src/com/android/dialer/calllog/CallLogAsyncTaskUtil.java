@@ -170,9 +170,10 @@ public class CallLogAsyncTaskUtil {
             details.numberLabel = info.label;
             details.photoUri = info.photoUri;
             details.sourceType = info.sourceType;
+            details.objectId = info.objectId;
 
             details.callTypes = new int[] {
-                    cursor.getInt(CallDetailQuery.CALL_TYPE_COLUMN_INDEX)
+                cursor.getInt(CallDetailQuery.CALL_TYPE_COLUMN_INDEX)
             };
             details.date = cursor.getLong(CallDetailQuery.DATE_COLUMN_INDEX);
             details.duration = cursor.getLong(CallDetailQuery.DURATION_COLUMN_INDEX);
