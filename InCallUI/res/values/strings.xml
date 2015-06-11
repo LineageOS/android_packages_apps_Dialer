@@ -87,21 +87,21 @@
     <string name="voicemail_settings_number_label">Voicemail number</string>
 
     <!-- Card titles -->
-    <!-- In-call screen: status label for a call in the "dialing" state -->
+    <!-- In-call screen: status label for a call in the "dialing" state [CHAR LIMIT=25] -->
     <string name="card_title_dialing">Dialing</string>
-    <!-- In-call screen: status label for a re-dialing call -->
+    <!-- In-call screen: status label for a re-dialing call [CHAR LIMIT=25] -->
     <string name="card_title_redialing">Redialing</string>
-    <!-- In-call screen: status label for a conference call -->
+    <!-- In-call screen: status label for a conference call [CHAR LIMIT=25] -->
     <string name="card_title_conf_call">Conference call</string>
-    <!-- In-call screen: status label for an incoming call -->
+    <!-- In-call screen: status label for an incoming call [CHAR LIMIT=25] -->
     <string name="card_title_incoming_call">Incoming call</string>
-    <!-- In-call screen: status label displayed briefly after a call ends -->
+    <!-- In-call screen: status label displayed briefly after a call ends [CHAR LIMIT=25] -->
     <string name="card_title_call_ended">Call ended</string>
-    <!-- In-call screen: status label for call that's on hold -->
+    <!-- In-call screen: status label for call that's on hold [CHAR LIMIT=25] -->
     <string name="card_title_on_hold">On hold</string>
-    <!-- In-call screen: status label for a call that's in the process of hanging up -->
+    <!-- In-call screen: status label for a call that's in the process of hanging up [CHAR LIMIT=25] -->
     <string name="card_title_hanging_up">Hanging up</string>
-    <!-- In-call screen: status label for a call that's in CDMA flash mode -->
+    <!-- In-call screen: status label for a call that's in CDMA flash mode [CHAR LIMIT=25] -->
     <string name="card_title_in_call">In call</string>
     <!-- In-call screen: special status label that shows your own phone
          number during emergency callback mode (ECM) [CHAR LIMIT=30] -->
