@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Histórico de chamadas"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ligar a <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes de efectuar a chamada"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Adicionar aos contactos"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Adicionar a um contacto"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Eliminar do histórico de chamadas"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Limpar histórico de chamadas"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eliminar correio de voz"</string>
@@ -47,6 +47,12 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Apenas chamadas recebidas"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Apenas chamadas efetuadas"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Apenas chamadas não atendidas"</string>
+    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
+    <skip />
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Atualizações do correio de voz não disponíveis"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Nova mensag. corr. voz a aguardar. Não é poss. carregar agora."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Configurar o correio de voz"</string>
@@ -107,6 +113,8 @@
     <string name="voicemail" msgid="3851469869202611441">"Correio de voz"</string>
     <string name="private_num" msgid="6374339738119166953">"Número particular"</string>
     <string name="payphone" msgid="7726415831153618726">"Telefone público"</string>
+    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
+    <skip />
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> seg."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Não é possível ligar para este número"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Para configurar o correio de voz, aceda a Menu &gt; Definições."</string>
@@ -136,7 +144,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Anular"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Telefonar para <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Criar novo contacto"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Adicionar ao contacto existente"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Adicionar a um contacto"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Enviar SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fazer videochamada"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Ver histórico de chamadas completo"</string>
@@ -145,11 +153,12 @@
     <string name="all_contacts_empty" msgid="2299508125100209367">"Sem contactos"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toque na imagem para ver todos os números ou toque sem soltar para reordenar"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remover"</string>
-    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TODOS OS CONTACTOS"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videochamada"</string>
-    <string name="call_log_action_voicemail" msgid="4978620572562925654">"OUVIR"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Enviar mensagem"</string>
-    <string name="call_log_action_details" msgid="7957138590190911171">"Ver detalhes"</string>
+    <!-- no translation found for call_log_action_details (701345508704970622) -->
+    <skip />
+    <!-- no translation found for call_log_action_call (463690849042459842) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Chamada não atendida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Chamada atendida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Telefonar para <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -158,6 +167,13 @@
     <string name="description_call_action" msgid="4000549004089776147">"Telefonar a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Fazer videochamada com <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Ouvir o correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
+    <skip />
+    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
+    <skip />
+    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
+    <skip />
+    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Criar contacto para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Adicionar <xliff:g id="NAMEORNUMBER">^1</xliff:g> ao contacto existente"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalhes de chamadas de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>

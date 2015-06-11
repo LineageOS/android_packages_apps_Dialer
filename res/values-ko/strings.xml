@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"통화 기록"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"전화걸기: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"통화하기 전에 번호 수정"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"주소록에 추가"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"연락처에 추가"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"통화 기록에서 삭제"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"통화 기록 삭제"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"음성사서함 삭제"</string>
@@ -47,6 +47,12 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"수신 전화만"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"발신 전화만"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"부재중 전화만"</string>
+    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
+    <skip />
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"음성사서함 업데이트를 사용할 수 없습니다."</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"새로운 음성사서함이 대기 중이지만 현재 로드할 수 없습니다."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"음성사서함 설정"</string>
@@ -107,6 +113,8 @@
     <string name="voicemail" msgid="3851469869202611441">"음성사서함"</string>
     <string name="private_num" msgid="6374339738119166953">"비공개 번호"</string>
     <string name="payphone" msgid="7726415831153618726">"공중전화"</string>
+    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
+    <skip />
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g>분 <xliff:g id="SECONDS">%s</xliff:g>초"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"이 번호로 전화를 걸 수 없습니다."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"음성사서함을 설정하려면 메뉴 &gt; 설정으로 이동하세요."</string>
@@ -136,7 +144,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"실행취소"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g>에 전화"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"새 연락처 만들기"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"기존 연락처에 추가"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"연락처에 추가"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS 보내기"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"화상 통화하기"</string>
     <string name="show_call_history" msgid="1141502332266697170">"전체 통화 기록 조회"</string>
@@ -145,11 +153,12 @@
     <string name="all_contacts_empty" msgid="2299508125100209367">"주소록 없음"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"이미지를 터치하여 모든 번호를 확인하거나 길게 터치하여 재정렬합니다."</string>
     <string name="remove_contact" msgid="1080555335283662961">"삭제"</string>
-    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"모든 연락처"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"화상 통화"</string>
-    <string name="call_log_action_voicemail" msgid="4978620572562925654">"듣기"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"메시지 보내기"</string>
-    <string name="call_log_action_details" msgid="7957138590190911171">"세부정보 보기"</string>
+    <!-- no translation found for call_log_action_details (701345508704970622) -->
+    <skip />
+    <!-- no translation found for call_log_action_call (463690849042459842) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>의 부재중 전화(<xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>)"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>에게 걸려온 수신 전화(<xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>)"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>에게 건 전화(<xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>)"</string>
@@ -158,6 +167,13 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>에 전화 걸기"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>에 화상 통화 걸기"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> 음성사서함 듣기"</string>
+    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
+    <skip />
+    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
+    <skip />
+    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
+    <skip />
+    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> 연락처 만들기"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>님을 기존 연락처에 추가합니다."</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>의 통화 세부정보"</string>
