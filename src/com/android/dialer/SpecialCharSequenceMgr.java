@@ -90,6 +90,43 @@ public class SpecialCharSequenceMgr {
      */
     private static QueryHandler sPreviousAdnQueryHandler;
 
+    public static class HandleAdnEntryAccountSelectedCallback extends SelectPhoneAccountListener{
+        final private TelecomManager mTelecomManager;
+        final private QueryHandler mQueryHandler;
+        final private SimContactQueryCookie mCookie;
+
+        public HandleAdnEntryAccountSelectedCallback(TelecomManager telecomManager,
+                QueryHandler queryHandler, SimContactQueryCookie cookie) {
+            mTelecomManager = telecomManager;
+            mQueryHandler = queryHandler;
+            mCookie = cookie;
+        }
+
+        @Override
+        public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
+                boolean setDefault) {
+            Uri uri = mTelecomManager.getAdnUriForPhoneAccount(selectedAccountHandle);
+            handleAdnQuery(mQueryHandler, mCookie, uri);
+            // TODO: Show error dialog if result isn't valid.
+        }
+
+    }
+
+    public static class HandleMmiAccountSelectedCallback extends SelectPhoneAccountListener{
+        final private Context mContext;
+        final private String mInput;
+        public HandleMmiAccountSelectedCallback(Context context, String input) {
+            mContext = context.getApplicationContext();
+            mInput = input;
+        }
+
+        @Override
+        public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
+                boolean setDefault) {
+            TelecomUtil.handleMmi(mContext, mInput, selectedAccountHandle);
+        }
+    }
+
     /** This class is never instantiated. */
     private SpecialCharSequenceMgr() {
     }
@@ -155,9 +192,8 @@ public class SpecialCharSequenceMgr {
      * This code works alongside the Asynchronous query handler {@link QueryHandler}
      * and query cancel handler implemented in {@link SimContactQueryCookie}.
      */
-    static boolean handleAdnEntry(final Context context, String input, EditText textField) {
+    static boolean handleAdnEntry(Context context, String input, EditText textField) {
         /* ADN entries are of the form "N(N)(N)#" */
-
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager == null
@@ -221,23 +257,11 @@ public class SpecialCharSequenceMgr {
                     Uri uri = telecomManager.getAdnUriForPhoneAccount(null);
                     handleAdnQuery(handler, sc, uri);
                 } else if (subscriptionAccountHandles.size() > 1){
-                    SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
-                        @Override
-                        public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
-                                boolean setDefault) {
-                            Uri uri =
-                                    telecomManager.getAdnUriForPhoneAccount(selectedAccountHandle);
-                            handleAdnQuery(handler, sc, uri);
-                            //TODO: show error dialog if result isn't valid
-                        }
-                        @Override
-                        public void onDialogDismissed() {}
-                    };
+                    SelectPhoneAccountListener callback =
+                            new HandleAdnEntryAccountSelectedCallback(telecomManager, handler, sc);
 
-                    // NOTE: If you want to support rotation of this dialog need
-                    // to refactor the listener and set it in DialpadFragment.onCreate()
                     DialogFragment dialogFragment = SelectPhoneAccountDialogFragment.newInstance(
-                            subscriptionAccountHandles, listener);
+                            subscriptionAccountHandles, callback);
                     dialogFragment.show(((Activity) context).getFragmentManager(),
                             TAG_SELECT_ACCT_FRAGMENT);
                 } else {
@@ -287,20 +311,9 @@ public class SpecialCharSequenceMgr {
                 // a subscription account.
                 return TelecomUtil.handleMmi(context, input, null);
             } else if (subscriptionAccountHandles.size() > 1){
-                SelectPhoneAccountListener listener = new SelectPhoneAccountListener() {
-                    @Override
-                    public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
-                            boolean setDefault) {
-                        TelecomUtil.handleMmi(context.getApplicationContext(),
-                                input, selectedAccountHandle);
-                        //TODO: show error dialog if result isn't valid
-                    }
-                    @Override
-                    public void onDialogDismissed() {}
-                };
+                SelectPhoneAccountListener listener =
+                        new HandleMmiAccountSelectedCallback(context, input);
 
-                // NOTE: If you want to support rotation of this dialog need
-                // to refactor the listener and set it in DialpadFragment.onCreate()
                 DialogFragment dialogFragment = SelectPhoneAccountDialogFragment.newInstance(
                         subscriptionAccountHandles, listener);
                 dialogFragment.show(((Activity) context).getFragmentManager(),
