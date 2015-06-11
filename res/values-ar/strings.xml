@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"سجل المكالمات"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"الاتصال بـ <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"تعديل الرقم قبل الاتصال"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"إضافة إلى جهات الاتصال"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"إضافة إلى جهة اتصال"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"حذف من سجل المكالمات"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"محو سجل المكالمات"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"حذف بريد صوتي"</string>
@@ -51,6 +51,12 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"المكالمات الواردة فقط"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"المكالمات الصادرة فقط"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"المكالمات الفائتة فقط"</string>
+    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
+    <skip />
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"تحديثات البريد الصوتي غير متاحة"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"ليس هناك بريد صوتي قيد الانتظار. لا يمكن التحميل في الوقت الحالي."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"إعداد البريد الصوتي"</string>
@@ -111,6 +117,8 @@
     <string name="voicemail" msgid="3851469869202611441">"البريد الصوتي"</string>
     <string name="private_num" msgid="6374339738119166953">"رقم خاص"</string>
     <string name="payphone" msgid="7726415831153618726">"هاتف يعمل بالعملة"</string>
+    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
+    <skip />
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> دقيقة <xliff:g id="SECONDS">%s</xliff:g> ثانية"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"لا يمكن الاتصال بهذا الرقم"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"‏لإعداد البريد الصوتي، انتقل إلى القائمة &gt; الإعدادات."</string>
@@ -140,7 +148,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"تراجع"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"الاتصال بالرقم <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"إنشاء جهة اتصال جديدة"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"إضافة إلى جهة الاتصال الحالية"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"إضافة إلى جهة اتصال"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"‏إرسال رسالة قصيرة SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"إجراء مكالمة فيديو"</string>
     <string name="show_call_history" msgid="1141502332266697170">"عرض سجل المكالمات بالكامل"</string>
@@ -149,11 +157,12 @@
     <string name="all_contacts_empty" msgid="2299508125100209367">"لا توجد جهات اتصال"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"المس الصورة للاطلاع على جميع الأرقام أو المس مع الاستمرار لإعادة الترتيب"</string>
     <string name="remove_contact" msgid="1080555335283662961">"إزالة"</string>
-    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"جميع جهات الاتصال"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"مكالمة فيديو"</string>
-    <string name="call_log_action_voicemail" msgid="4978620572562925654">"استماع"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"إرسال رسالة"</string>
-    <string name="call_log_action_details" msgid="7957138590190911171">"عرض التفاصيل"</string>
+    <!-- no translation found for call_log_action_details (701345508704970622) -->
+    <skip />
+    <!-- no translation found for call_log_action_call (463690849042459842) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"مكالمة لم يرد عليها من <xliff:g id="NAMEORNUMBER">^1</xliff:g>، <xliff:g id="TYPEORLOCATION">^2</xliff:g>، <xliff:g id="TIMEOFCALL">^3</xliff:g>، <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"تم الرد على مكالمة من <xliff:g id="NAMEORNUMBER">^1</xliff:g>، <xliff:g id="TYPEORLOCATION">^2</xliff:g>، <xliff:g id="TIMEOFCALL">^3</xliff:g>، <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"اتصال بـ <xliff:g id="NAMEORNUMBER">^1</xliff:g>، <xliff:g id="TYPEORLOCATION">^2</xliff:g>، <xliff:g id="TIMEOFCALL">^3</xliff:g>، <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -162,6 +171,13 @@
     <string name="description_call_action" msgid="4000549004089776147">"الاتصال بـ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"إجراء مكالمة فيديو مع <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"استماع إلى بريد صوتي من <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
+    <skip />
+    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
+    <skip />
+    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
+    <skip />
+    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"إنشاء جهة اتصال لـ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"إضافة <xliff:g id="NAMEORNUMBER">^1</xliff:g> إلى جهة اتصال حالية"</string>
     <string name="description_details_action" msgid="2433827152749491785">"تفاصيل الاتصال لـ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>

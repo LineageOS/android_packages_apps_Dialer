@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Զանգերի պատմություն"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Զանգել <xliff:g id="NAME">%s</xliff:g>-ին"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Խմբագրել համարը զանգելուց առաջ"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Ավելացնել կոնտակտներում"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Ավելացնել կոնտակտների ցանկին"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Ջնջել զանգերի պատմությունից"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Մաքրել զանգերի պատմությունը"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ջնջել ձայնային փոստը"</string>
@@ -47,6 +47,12 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Միայն մուտքային զանգեր"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Միայն ելքային զանգերը"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Միայն բաց թողնված զանգերը"</string>
+    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
+    <skip />
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Ձայնային փոստի տվյալները չի հաջողվում բեռնել"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Նոր ձայնային հաղորդագրություն կա: Այս պահին հնարավոր չէ բեռնել:"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Կարգավորեք ձայնային փոստը"</string>
@@ -107,6 +113,8 @@
     <string name="voicemail" msgid="3851469869202611441">"Ձայնային փոստ"</string>
     <string name="private_num" msgid="6374339738119166953">"Անձնական համարը"</string>
     <string name="payphone" msgid="7726415831153618726">"Հանրային հեռախոս"</string>
+    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
+    <skip />
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> րոպե <xliff:g id="SECONDS">%s</xliff:g> վայրկյան"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Հնարավոր չէ զանգահարել այս համարով"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ձայնային փոստը կարգավորելու համար գնացեք Ցանկ &gt; Կարգավորումներ:"</string>
@@ -136,7 +144,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Հետարկել"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Զանգել <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Ստեղծել նոր կոնտակտ"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Ավելացնել առկա կոնտակտին"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Ավելացնել կոնտակտին"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Ուղարկել SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Կատարել տեսազանգ"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Դիտել բոլոր զանգերի պատմությունը"</string>
@@ -145,11 +153,12 @@
     <string name="all_contacts_empty" msgid="2299508125100209367">"Կոտնակտներ չկան"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Բոլոր համարները տեսնելու համար հպեք պատկերին: Վերադասավորելու համար հպեք և պահեք:"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Հեռացնել"</string>
-    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ԲՈԼՈՐ ԿՈՆՏԱԿՏՆԵՐԸ"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Տեսազանգ"</string>
-    <string name="call_log_action_voicemail" msgid="4978620572562925654">"ԼՍԵԼ"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Ուղարկել հաղորդագրություն"</string>
-    <string name="call_log_action_details" msgid="7957138590190911171">"Տեսնել մանրամասները"</string>
+    <!-- no translation found for call_log_action_details (701345508704970622) -->
+    <skip />
+    <!-- no translation found for call_log_action_call (463690849042459842) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Բաց է թողնվել զանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտից, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>:"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Ընդունվել է զանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտից, <xliff:g id="TYPEORLOCATION">^2</xliff:g> , <xliff:g id="TIMEOFCALL">^3</xliff:g> , <xliff:g id="PHONEACCOUNT">^4</xliff:g>:"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Զանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտին, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>:"</string>
@@ -158,6 +167,13 @@
     <string name="description_call_action" msgid="4000549004089776147">"Զանգել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ին"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Տեսազանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտին:"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Լսել ձայնային փոստը <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ից"</string>
+    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
+    <skip />
+    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
+    <skip />
+    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
+    <skip />
+    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը կոնտակտների ցանկին"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը առկա կոնտակտին"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> զանգի մասին տվյալներ"</string>

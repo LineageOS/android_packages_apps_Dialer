@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Samtalshistorik"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ring <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Redigera nummer före samtal"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Lägg till i Kontakter"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Lägg till som kontakt"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Radera från samtalshistoriken"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Rensa samtalshistorik"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ta bort röstmeddelande"</string>
@@ -47,6 +47,12 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Endast inkommande samtal"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Endast utgående samtal"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Endast missade samtal"</string>
+    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
+    <skip />
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Uppdateringar för röstbrevlådan är inte tillgängliga"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Ett nytt röstmeddelande väntar. Det går inte att läsa in det för tillfället."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Konfigurera röstbrevlådan"</string>
@@ -107,6 +113,8 @@
     <string name="voicemail" msgid="3851469869202611441">"Röstbrevlåda"</string>
     <string name="private_num" msgid="6374339738119166953">"Privat nummer"</string>
     <string name="payphone" msgid="7726415831153618726">"Telefonautomat"</string>
+    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
+    <skip />
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> sek"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Det går inte att ringa det här numret"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Välj Meny &gt; Inställningar om du vill konfigurera röstbrevlådan."</string>
@@ -136,7 +144,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Ångra"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Ring <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Skapa ny kontakt"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Lägg till i befintlig kontakt"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Lägg till i kontakt"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Skicka sms"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Ring videosamtal"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Visa hela samtalshistoriken"</string>
@@ -145,11 +153,12 @@
     <string name="all_contacts_empty" msgid="2299508125100209367">"Inga kontakter"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Tryck på bilden och visa alla nummer eller tryck länge om du vill ändra ordningen"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ta bort"</string>
-    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ALLA KONTAKTER"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videosamtal"</string>
-    <string name="call_log_action_voicemail" msgid="4978620572562925654">"LYSSNA"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Skicka meddelande"</string>
-    <string name="call_log_action_details" msgid="7957138590190911171">"Visa information"</string>
+    <!-- no translation found for call_log_action_details (701345508704970622) -->
+    <skip />
+    <!-- no translation found for call_log_action_call (463690849042459842) -->
+    <skip />
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Missat samtal från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Besvarat samtal från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Ring till <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -158,6 +167,13 @@
     <string name="description_call_action" msgid="4000549004089776147">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Ring videosamtal till <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Lyssna på ett röstmeddelande från <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
+    <skip />
+    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
+    <skip />
+    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
+    <skip />
+    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Skapa en kontakt för <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Lägg till <xliff:g id="NAMEORNUMBER">^1</xliff:g> i befintliga kontakter"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Samtalsinformation för <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
