@@ -184,8 +184,6 @@ public class VoicemailPlaybackPresenter
         mView = view;
         mView.setPresenter(this);
 
-        mView.onSpeakerphoneOn(isSpeakerphoneOn());
-
         if (mVoicemailUri != null && mVoicemailUri.equals(voicemailUri)) {
             // Handles rotation case where playback view is set for the same voicemail.
             if (mIsPrepared) {
@@ -193,11 +191,17 @@ public class VoicemailPlaybackPresenter
             } else {
                 checkForContent();
             }
+            mView.onSpeakerphoneOn(isSpeakerphoneOn());
         } else {
             mVoicemailUri = voicemailUri;
             mPosition = 0;
             mIsPlaying = startPlayingImmediately;
+
+            // Default to earpiece.
+            mView.onSpeakerphoneOn(false);
+
             checkForContent();
+
         }
     }
 
