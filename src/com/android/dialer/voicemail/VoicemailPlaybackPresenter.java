@@ -523,7 +523,8 @@ public class VoicemailPlaybackPresenter
     }
 
     private void enableProximitySensor() {
-        if (mProximityWakeLock == null || isSpeakerphoneOn() || !mMediaPlayer.isPlaying()) {
+        if (mProximityWakeLock == null || isSpeakerphoneOn() ||
+                !mIsPrepared || !mMediaPlayer.isPlaying()) {
             return;
         }
 
