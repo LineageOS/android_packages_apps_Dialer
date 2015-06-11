@@ -127,8 +127,10 @@ public class VoicemailPlaybackPresenter
 
     private Uri mVoicemailUri;
     private int mPosition;
-    private boolean mIsPrepared;
     private boolean mIsPlaying;
+    // MediaPlayer crashes on some method calls if not prepared but does not have a method which
+    // exposes its prepared state. Store this locally, so we can check and prevent crashes.
+    private boolean mIsPrepared;
 
     private boolean mShouldResumePlaybackAfterSeeking;
 
@@ -444,6 +446,10 @@ public class VoicemailPlaybackPresenter
 
     @Override
     public void onAudioFocusChange(int focusChange) {
+        if (!mIsPrepared) {
+            return;
+        }
+
         boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
                 focusChange == AudioManager.AUDIOFOCUS_LOSS;
         if (mMediaPlayer.isPlaying() && lostFocus) {
@@ -458,6 +464,10 @@ public class VoicemailPlaybackPresenter
      * playing.
      */
     public void resumePlayback() {
+        if (!mIsPrepared) {
+            return;
+        }
+
         mIsPlaying = true;
 
         if (!mMediaPlayer.isPlaying()) {
@@ -491,6 +501,10 @@ public class VoicemailPlaybackPresenter
      * Pauses voicemail playback at the current position. Null-op if already paused.
      */
     public void pausePlayback() {
+        if (!mIsPrepared) {
+            return;
+        }
+
         mPosition = mMediaPlayer.getCurrentPosition();
         mIsPlaying = false;
 
@@ -523,8 +537,8 @@ public class VoicemailPlaybackPresenter
     }
 
     private void enableProximitySensor() {
-        if (mProximityWakeLock == null || isSpeakerphoneOn() ||
-                !mIsPrepared || !mMediaPlayer.isPlaying()) {
+        if (mProximityWakeLock == null || isSpeakerphoneOn() || !mIsPrepared
+                || !mMediaPlayer.isPlaying()) {
             return;
         }
 
