@@ -60,6 +60,7 @@ public class PhoneCallDetails {
     public CharSequence numberLabel;
     // The URI of the contact associated with this phone call.
     public Uri contactUri;
+
     /**
      * The photo URI of the picture of the contact that is associated with this phone call or
      * null if there is none.
@@ -70,6 +71,9 @@ public class PhoneCallDetails {
 
     // The source type of the contact associated with this call.
     public int sourceType;
+
+    // The object id type of the contact associated with this call.
+    public String objectId;
 
     // The unique identifier for the account associated with the call.
     public PhoneAccountHandle accountHandle;
