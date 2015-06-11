@@ -130,6 +130,17 @@
     <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
     <string name="call_log_missed_header">Missed calls only</string>
 
+    <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
+    <string name="visual_voicemail_title">Visual voicemail</string>
+
+    <!-- Promo card text for visual voicemail. -->
+    <string name="visual_voicemail_text">
+        See and listen to your voicemail, without having to call a number. Data charges may apply.
+    </string>
+
+    <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
+    <string name="visual_voicemail_settings">Settings</string>
+
     <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
