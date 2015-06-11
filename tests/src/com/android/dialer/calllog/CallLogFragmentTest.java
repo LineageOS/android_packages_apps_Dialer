@@ -453,7 +453,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
-                viewHolder.inflateActionViewStub(null);
+                viewHolder.inflateActionViewStub();
             }
         });
         getInstrumentation().waitForIdleSync();

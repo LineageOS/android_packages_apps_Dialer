@@ -18,11 +18,9 @@ package com.android.dialerbind;
 
 import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
 
-import android.app.DialogFragment;
 import android.content.Context;
 
 import com.android.dialer.calllog.CallLogAdapter;
-import com.android.dialer.calllog.CallLogAdapter.OnReportButtonClickListener;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
@@ -49,18 +47,12 @@ public class ObjectFactory {
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            boolean isShowingRecentsTab,
-            OnReportButtonClickListener onReportButtonClickListener) {
+            boolean isShowingRecentsTab) {
         return new CallLogAdapter(
                 context,
                 callFetcher,
                 contactInfoHelper,
                 voicemailPlaybackPresenter,
-                isShowingRecentsTab,
-                onReportButtonClickListener);
-    }
-
-    public static DialogFragment getReportDialogFragment(String number) {
-        return null;
+                isShowingRecentsTab);
     }
 }

@@ -104,10 +104,6 @@ import com.android.dialer.R;
         views.detailsButtonView.setContentDescription(
                 TextUtils.expandTemplate(
                         mResources.getString(R.string.description_details_action), nameOrNumber));
-
-        views.reportButtonView.setContentDescription(
-                TextUtils.expandTemplate(
-                        mResources.getString(R.string.description_report_action), nameOrNumber));
     }
 
     /**
