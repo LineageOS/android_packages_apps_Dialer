@@ -78,7 +78,7 @@ public class VoicemailPlaybackPresenter
         void disableUiElements();
         void enableUiElements();
         void onPlaybackError(Exception e);
-        void onPlaybackStarted(MediaPlayer mediaPlayer, ScheduledExecutorService executorService);
+        void onPlaybackStarted(int duration, ScheduledExecutorService executorService);
         void onPlaybackStopped();
         void onSpeakerphoneOn(boolean on);
         void setClipPosition(int clipPositionInMillis, int clipLengthInMillis);
@@ -196,6 +196,7 @@ public class VoicemailPlaybackPresenter
         } else {
             mVoicemailUri = voicemailUri;
             mPosition = 0;
+            mDuration.set(0);
             mIsPlaying = startPlayingImmediately;
             checkForContent();
         }
@@ -484,7 +485,7 @@ public class VoicemailPlaybackPresenter
         }
 
         enableProximitySensor();
-        mView.onPlaybackStarted(mMediaPlayer, getScheduledExecutorServiceInstance());
+        mView.onPlaybackStarted(mDuration.get(), getScheduledExecutorServiceInstance());
     }
 
     /**
@@ -564,6 +565,10 @@ public class VoicemailPlaybackPresenter
 
     public Uri getVoicemailUri() {
         return mVoicemailUri;
+    }
+
+    public int getMediaPlayerPosition() {
+        return mIsPrepared ? mMediaPlayer.getCurrentPosition() : 0;
     }
 
     private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {

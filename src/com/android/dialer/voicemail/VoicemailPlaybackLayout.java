@@ -69,17 +69,13 @@ public class VoicemailPlaybackLayout extends LinearLayout
         /** Update rate for the slider, 30fps. */
         private static final int SLIDER_UPDATE_PERIOD_MILLIS = 1000 / 30;
 
-        private final MediaPlayer mMediaPlayer;
-        private final int mDuration;
+        private int mDuration;
         private final ScheduledExecutorService mExecutorService;
         private final Object mLock = new Object();
         @GuardedBy("mLock") private ScheduledFuture<?> mScheduledFuture;
 
-        public PositionUpdater(
-                MediaPlayer mediaPlayer,
-                ScheduledExecutorService executorService) {
-            mMediaPlayer = mediaPlayer;
-            mDuration = mediaPlayer.getDuration();
+        public PositionUpdater(int duration, ScheduledExecutorService executorService) {
+            mDuration = duration;
             mExecutorService = executorService;
         }
 
@@ -90,11 +86,11 @@ public class VoicemailPlaybackLayout extends LinearLayout
                 public void run() {
                     int currentPosition = 0;
                     synchronized (mLock) {
-                        if (mScheduledFuture == null) {
+                        if (mScheduledFuture == null || mPresenter == null) {
                             // This task has been canceled. Just stop now.
                             return;
                         }
-                        currentPosition = mMediaPlayer.getCurrentPosition();
+                        currentPosition = mPresenter.getMediaPlayerPosition();
                     }
                     setClipPosition(currentPosition, mDuration);
                 }
@@ -234,9 +230,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     @Override
-    public void onPlaybackStarted(
-            MediaPlayer mediaPlayer,
-            ScheduledExecutorService executorService) {
+    public void onPlaybackStarted(int duration, ScheduledExecutorService executorService) {
         mIsPlaying = true;
 
         mStartStopButton.setImageResource(R.drawable.ic_hold_pause);
@@ -245,7 +239,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
             onSpeakerphoneOn(mPresenter.isSpeakerphoneOn());
         }
 
-        mPositionUpdater = new PositionUpdater(mediaPlayer, executorService);
+        mPositionUpdater = new PositionUpdater(duration, executorService);
         mPositionUpdater.startUpdating();
     }
 
