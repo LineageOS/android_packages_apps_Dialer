@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -68,7 +67,6 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
@@ -79,14 +77,13 @@ import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.HapticFeedback;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
-
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
@@ -157,6 +154,7 @@ public class DialpadFragment extends Fragment
     /** Stream type used to play the DTMF tones off call, and mapped to the volume control keys */
     private static final int DIAL_TONE_STREAM_TYPE = AudioManager.STREAM_DTMF;
 
+
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
     private DialpadView mDialpadView;
@@ -188,6 +186,7 @@ public class DialpadFragment extends Fragment
      */
     private String mProhibitedPhoneNumberRegexp;
 
+    private PseudoEmergencyAnimator mPseudoEmergencyAnimator;
 
     // Last number dialed, retrieved asynchronously from the call DB
     // in onCreate. This number is displayed when the user hits the
@@ -307,6 +306,7 @@ public class DialpadFragment extends Fragment
         if (mDialpadQueryListener != null) {
             mDialpadQueryListener.onDialpadQueryChanged(mDigits.getText().toString());
         }
+
         updateDeleteButtonEnabledState();
     }
 
@@ -722,6 +722,10 @@ public class DialpadFragment extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mPseudoEmergencyAnimator != null) {
+            mPseudoEmergencyAnimator.destroy();
+            mPseudoEmergencyAnimator = null;
+        }
         ((Context) getActivity()).unregisterReceiver(mCallStateReceiver);
     }
 
@@ -1659,4 +1663,24 @@ public class DialpadFragment extends Fragment
     public void setYFraction(float yFraction) {
         ((DialpadSlidingRelativeLayout) getView()).setYFraction(yFraction);
     }
+
+    public void process_quote_emergency_unquote(String query) {
+        if (PseudoEmergencyAnimator.PSEUDO_EMERGENCY_NUMBER.equals(query)) {
+            if (mPseudoEmergencyAnimator == null) {
+                mPseudoEmergencyAnimator = new PseudoEmergencyAnimator(
+                        new PseudoEmergencyAnimator.ViewProvider() {
+                            @Override
+                            public View getView() {
+                                return DialpadFragment.this.getView();
+                            }
+                        });
+            }
+            mPseudoEmergencyAnimator.start();
+        } else {
+            if (mPseudoEmergencyAnimator != null) {
+                mPseudoEmergencyAnimator.end();
+            }
+        }
+    }
+
 }
