@@ -64,7 +64,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /**
      * Call type similar to Calls.INCOMING_TYPE used to specify all types instead of one particular
-     * type.
+     * type. Exception: excludes Calls.VOICEMAIL_TYPE.
      */
     public static final int CALL_TYPE_ALL = -1;
 
@@ -167,10 +167,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         if (callType > CALL_TYPE_ALL) {
             where.append(" AND ");
-            // Add a clause to fetch only items of type voicemail.
             where.append(String.format("(%s = ?)", Calls.TYPE));
-            // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+        } else {
+            where.append(" AND NOT ");
+            where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");
         }
 
         if (newerThan > 0) {
