@@ -1080,6 +1080,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
             mSearchView.setText(normalizedQuery);
         }
+
+        try {
+            if (mDialpadFragment != null && mDialpadFragment.isVisible()) {
+                mDialpadFragment.process_quote_emergency_unquote(normalizedQuery);
+            }
+        } catch (Exception ignored) {
+            // Skip any exceptions for this piece of code
+        }
+
     }
 
     @Override
