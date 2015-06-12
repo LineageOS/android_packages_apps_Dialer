@@ -78,7 +78,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails() {
         setPhoneCallDetailsWithNumber("12125551234", Calls.PRESENTATION_ALLOWED,
                 "1-212-555-1234");
-        assertEquals(View.VISIBLE, mViewHolder.callActionView.getVisibility());
+        assertEquals(View.VISIBLE, mViewHolder.primaryActionButtonView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_Unknown() {

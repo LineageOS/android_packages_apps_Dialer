@@ -85,13 +85,13 @@
 
         <ImageView
             android:id="@+id/call_back_button"
-            android:layout_width="@dimen/call_button_dimen"
-            android:layout_height="@dimen/call_button_dimen"
+            android:layout_width="@dimen/call_log_list_item_primary_action_dimen"
+            android:layout_height="@dimen/call_log_list_item_primary_action_dimen"
             android:layout_marginEnd="16dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_call_24dp"
             android:scaleType="center"
-            android:tint="@color/recent_call_log_item_phone_icon_tint"
+            android:tint="@color/call_log_list_item_primary_action_icon_tint"
             android:contentDescription="@string/description_call_log_call_action"
             android:visibility="gone" />
 
