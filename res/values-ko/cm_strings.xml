@@ -26,9 +26,9 @@
   <string name="enable_people_lookup_summary">다이얼러 검색시 온라인 사람 찾기 결과 표시</string>
   <string name="enable_reverse_lookup_title">역순 검색</string>
   <string name="enable_reverse_lookup_summary">모르는 번호로부터 전화 수신시 발신자 정보 검색</string>
-  <string name="forward_lookup_provider_title">정방향 검색 제공자</string>
-  <string name="people_lookup_provider_title">주소록 검색 제공자</string>
-  <string name="reverse_lookup_provider_title">역순 검색 제공자</string>
+  <string name="forward_lookup_provider_title">정방향 조회 검색 제공자</string>
+  <string name="people_lookup_provider_title">사람 검색 제공자</string>
+  <string name="reverse_lookup_provider_title">역방향 조회 검색 제공자</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 중국 (CN)</string>
   <string name="preference_category_t9_dialpad_search">다이얼패드 T9 검색</string>
   <string name="t9_search_input_locale">T9 검색 입력</string>

@@ -122,6 +122,7 @@
   <string name="simContacts_title">Kontakter vun der SIM-Kaart</string>
   <string name="voice_search_not_available">Sich mat der Stëmm net disponibel</string>
   <string name="call_not_available">Kann keen Telefonsuruff maachen, well d\'Telefons-App desaktivéiert gouf.</string>
+  <string name="dialer_hint_find_contact">Numm oder Telefonsnummer aginn</string>
   <string name="recentMissed_empty">Keng Uriff</string>
   <string name="recentVoicemails_empty">Keng rezent Mailbox-Opnamen</string>
   <string name="show_favorites_only">Just Favoritten uweisen</string>
