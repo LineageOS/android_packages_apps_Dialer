@@ -22,6 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telepono"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"History ng tawag"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Tawagan si <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"Iulat ang hindi wastong numero"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"I-edit ang numero bago tumawag"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Idagdag sa isang contact"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"I-delete mula sa history ng tawag"</string>
@@ -47,12 +48,9 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Mga papasok na tawag lang"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Mga papalabas na tawag lang"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Mga hindi nasagot na tawag lang"</string>
-    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
-    <skip />
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"Visual voicemail"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"Tingnan at pakinggan ang iyong voicemail, nang hindi kinakailangang tumawag sa isang numero. Maaaring may mga singilin para sa data."</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"Mga setting"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Walang available na mga update sa voicemail"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"May naghihintay na bagong voicemail. Hindi ma-load sa ngayon."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"I-set up ang iyong voicemail"</string>
@@ -113,8 +111,7 @@
     <string name="voicemail" msgid="3851469869202611441">"Voicemail"</string>
     <string name="private_num" msgid="6374339738119166953">"Pribadong numero"</string>
     <string name="payphone" msgid="7726415831153618726">"Payphone"</string>
-    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
-    <skip />
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> sec"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Hindi matawagan ang numerong ito"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Upang mag-set up ng voicemail, pumunta sa Menu &gt; Mga Setting."</string>
@@ -155,10 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Alisin"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Mag-video call"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Magpadala ng Mensahe"</string>
-    <!-- no translation found for call_log_action_details (701345508704970622) -->
-    <skip />
-    <!-- no translation found for call_log_action_call (463690849042459842) -->
-    <skip />
+    <string name="call_log_action_details" msgid="701345508704970622">"Mga detalye ng tawag"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"Tawagan ang/si <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Hindi nasagot na tawag mula kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Nasagot na tawag mula kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Tawag kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -167,19 +162,17 @@
     <string name="description_call_action" msgid="4000549004089776147">"Tawagan ang/si <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"I-video call si/ang <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Makinig sa voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
-    <skip />
-    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
-    <skip />
-    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
-    <skip />
-    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
+    <string name="description_voicemail_play" msgid="2689369874037785439">"I-play ang voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"I-pause ang voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"I-delete ang voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <plurals name="description_voicemail_unread" formatted="false" msgid="2875295056910058203">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> hindi pa nababasang voicemail</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> na hindi pa nababasang voicemail</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Gumawa ng contact para kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Idagdag si/ang <xliff:g id="NAMEORNUMBER">^1</xliff:g> sa umiiral nang contact"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Mga detalye ng tawag para sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"Iulat si/ang <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Na-delete mula sa history ng tawag"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"Mag-ulat"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Ngayon"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Kahapon"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Mas Luma"</string>

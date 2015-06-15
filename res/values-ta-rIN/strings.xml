@@ -22,6 +22,8 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு வரலாறு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
+    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"தொடர்பில் சேர்"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"அழைப்பு வரலாற்றில் இருந்து நீக்கு"</string>
@@ -177,9 +179,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>க்கான தொடர்பை உருவாக்கும்"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"இருக்கும் தொடர்பில் <xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐச் சேர்க்கும்"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் அழைப்பு விவரங்கள்"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐப் புகாரளிக்கும்"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"அழைப்பு வரலாற்றிலிருந்து நீக்கப்பட்டது"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"புகாரளி"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"இன்று"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"நேற்று"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"பழையது"</string>

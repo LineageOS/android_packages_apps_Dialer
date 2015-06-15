@@ -22,6 +22,8 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"ទូរស័ព្ទ"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ប្រវត្តិ​ហៅ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"ហៅ <xliff:g id="NAME">%s</xliff:g>"</string>
+    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"កែ​លេខ​មុន​ពេល​ហៅ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"បន្ថែមទៅទំនាក់ទំនង"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"លុបចេញពីប្រវត្តិហៅ"</string>
@@ -177,9 +179,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"បង្កើតទំនាក់ទំនងសម្រាប់ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"បន្ថែម <xliff:g id="NAMEORNUMBER">^1</xliff:g> ទៅទំនាក់ទំនងដែលមានស្រាប់"</string>
     <string name="description_details_action" msgid="2433827152749491785">"ព័ត៌មាន​លម្អិត​ហៅ​សម្រាប់ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"រាយការណ៍ពី <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"បានលុបចេញពីប្រវត្តិហៅ"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"រាយការណ៍"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ថ្ងៃនេះ"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ម្សិលមិញ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"ចាស់ៗ"</string>

@@ -22,6 +22,8 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"ಫೋನ್"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ಕರೆ ಇತಿಹಾಸ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
+    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸಿ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ಕರೆ ಇತಿಹಾಸದಿಂದ ಅಳಿಸಿ"</string>
@@ -53,7 +55,7 @@
     <skip />
     <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
     <skip />
-    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"ಧ್ವನಿಮೇಲ್‌ ನವೀಕರಣಗಳು ಇದೀಗ ಲಭ್ಯವಿಲ್ಲ"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"ಧ್ವನಿಮೇಲ್‌ ಅಪ್‌ಡೇಟ್‌ಗಳು ಇದೀಗ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"ಹೊಸ ಧ್ವನಿಮೇಲ್ ಕಾಯುತ್ತಿದೆ. ಇದೀಗ ಲೋಡ್‌ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್‌ ಹೊಂದಿಸಿ"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ಆಡಿಯೋ ಲಭ್ಯವಿಲ್ಲ"</string>
@@ -178,9 +180,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ಗೆ ಸಂಪರ್ಕವನ್ನು ರಚಿಸಿ"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಸಂಪರ್ಕಕ್ಕೆ <xliff:g id="NAMEORNUMBER">^1</xliff:g> ಸೇರಿಸಿ"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ಗೆ ಸಂಪರ್ಕದ ವಿವರಗಳು"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ವರದಿಮಾಡಿ"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ಕರೆ ಇತಿಹಾಸದಿಂದ ಅಳಿಸಲಾಗಿದೆ"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"ವರದಿ ಮಾಡು"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ಇಂದು"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ನಿನ್ನೆ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"ಹಳೆಯದು"</string>

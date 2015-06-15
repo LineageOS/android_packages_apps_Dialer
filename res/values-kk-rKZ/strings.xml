@@ -22,6 +22,8 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Қоңыраулар тарихы"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> нөміріне қоңырау шалу"</string>
+    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Қоңырау алдында нөмірді жөндеңіз"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Контактіге қосу"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Қоңыраулар тарихынан жою"</string>
@@ -47,12 +49,9 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Келген қоңыраулар ғана"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Шығыс қоңыраулары ғана"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Қабылданбаған қоңыраулар ғана"</string>
-    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
-    <skip />
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"Визуалды дауыстық хабар"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"Нөмірге қоңырау шалмастан, дауыстық поштаңызды қараңыз және тыңдаңыз. Деректер ақысы алынуы мүмкін."</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"Параметрлер"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Дауыстық пошта жаңартулары қол жетімді емес"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Жаңа дауыстық хабар күтуде. Дәл қазір жүктеу мүмкін емес."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Дауыс-хабарды реттеу"</string>
@@ -113,8 +112,7 @@
     <string name="voicemail" msgid="3851469869202611441">"Дауыстық пошта"</string>
     <string name="private_num" msgid="6374339738119166953">"Жеке нөмір"</string>
     <string name="payphone" msgid="7726415831153618726">"Автомат-телефон"</string>
-    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
-    <skip />
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Бұл нөмірге қоңырау шалу мүмкін емес"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Дауыс-хабарын жасақтау үшін Mәзір &gt; Параметрлер тармақтарына кіріңіз."</string>
@@ -155,10 +153,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Алып тастау"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Бейне қоңырау"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Хабар жіберу"</string>
-    <!-- no translation found for call_log_action_details (701345508704970622) -->
-    <skip />
-    <!-- no translation found for call_log_action_call (463690849042459842) -->
-    <skip />
+    <string name="call_log_action_details" msgid="701345508704970622">"Қоңырау мәліметтері"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> нөміріне қоңырау шалу"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> қоңырауы өткізіп алынды, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> қоңырауына жауап берілді, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> нөміріне қоңырау шалу, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -167,19 +163,17 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> нөміріне қоңырау шалу"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> бейне қоңырау шалу."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> дауыстық хабарын тыңдау"</string>
-    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
-    <skip />
-    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
-    <skip />
-    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
-    <skip />
-    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
+    <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> дауыстық хабары ойнатылады"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> дауыстық хабары кідіртіледі"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ішінен дауыстық хабарды жояды"</string>
+    <plurals name="description_voicemail_unread" formatted="false" msgid="2875295056910058203">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> оқылмаған дауыстық хабар</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> оқылмаған дауыстық хабар</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> үшін контакт жасау"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> бар контактіге қосу"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> үшін қоңырау мәліметтері"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"Есеп: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Қоңыраулар тарихынан жойылды"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"Есеп"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Бүгін"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Кеше"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Ескілеу"</string>
