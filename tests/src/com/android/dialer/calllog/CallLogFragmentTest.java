@@ -326,13 +326,14 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
                 mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
-        viewHolder.updateCallButton();
+        viewHolder.updatePrimaryActionButton();
 
         // The primaryActionView tag is set in the
         // {@link com.android.dialer.calllog.CallLogAdapter#bindView} method.  If it is possible
         // to place a call to the phone number, a call intent will have been created for the
         // primaryActionView.
-        IntentProvider intentProvider = (IntentProvider) viewHolder.callActionView.getTag();
+        IntentProvider intentProvider =
+                (IntentProvider) viewHolder.primaryActionButtonView.getTag();
         Intent intent = intentProvider.getIntent(mActivity);
         // Starts a call.
         assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
@@ -375,12 +376,13 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             if (presentation == Calls.PRESENTATION_RESTRICTED ||
                     presentation == Calls.PRESENTATION_UNKNOWN) {
                 //If number is not callable, the primary action view should have a null tag.
-                assertNull(mItem.callActionView.getTag());
+                assertNull(mItem.primaryActionButtonView.getTag());
             } else {
                 //If the number is callable, the primary action view should have a non-null tag.
-                assertNotNull(mItem.callActionView.getTag());
+                assertNotNull(mItem.primaryActionButtonView.getTag());
 
-                IntentProvider intentProvider = (IntentProvider)mItem.callActionView.getTag();
+                IntentProvider intentProvider =
+                        (IntentProvider) mItem.primaryActionButtonView.getTag();
                 Intent callIntent = intentProvider.getIntent(mActivity);
 
                 //The intent should be to make the call
@@ -457,7 +459,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             }
         });
         getInstrumentation().waitForIdleSync();
-        viewHolder.updateCallButton();
+        viewHolder.updatePrimaryActionButton();
     }
 
     private void bindViewForTest(CallLogListItemViewHolder viewHolder) {
