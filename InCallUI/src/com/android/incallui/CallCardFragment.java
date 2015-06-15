@@ -255,10 +255,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         });
 
         mCallStateButton = view.findViewById(R.id.callStateButton);
-        mCallStateButton.setOnClickListener(new View.OnClickListener() {
+        mCallStateButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 getPresenter().onCallStateButtonTouched();
+                return false;
             }
         });
 
