@@ -109,6 +109,7 @@ public class VoicemailPlaybackTest extends InstrumentationTestCase {
         // There is a background check that is testing to see if we have the content available.
         // Once that task completes, we shouldn't be showing the fetching message.
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+        getInstrumentation().waitForIdleSync();
 
         assertHasOneTextViewContaining("Buffering");
         assertHasZeroTextViewsContaining("Loading voicemail");
@@ -119,6 +120,7 @@ public class VoicemailPlaybackTest extends InstrumentationTestCase {
         setPlaybackViewForPresenter();
 
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+        getInstrumentation().waitForIdleSync();
 
         // The media player will have thrown an IOException since the file doesn't exist.
         // This should have put a failed to play message on screen, buffering is gone.
