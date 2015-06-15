@@ -389,7 +389,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         details.date = TEST_DATE;
         details.duration = TEST_DURATION;
         details.geocode = TEST_GEOCODE;
-        details.numberLabel = ContactInfo.GEOCODE_AS_LABEL;
     }
 
     private boolean isVoicemail(String number) {

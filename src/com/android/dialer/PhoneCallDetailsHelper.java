@@ -181,11 +181,11 @@ public class PhoneCallDetailsHelper {
                 && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.accountHandle,
                         details.number)) {
 
-            if (details.numberLabel == ContactInfo.GEOCODE_AS_LABEL) {
+            if (TextUtils.isEmpty(details.name) && !TextUtils.isEmpty(details.geocode)) {
                 numberFormattedLabel = details.geocode;
             } else {
-                numberFormattedLabel = Phone.getTypeLabel(mResources, details.numberType,
-                        details.numberLabel);
+                numberFormattedLabel = Phone.getTypeLabel(
+                        mResources, details.numberType, details.numberLabel);
             }
         }
 
