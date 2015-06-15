@@ -30,6 +30,7 @@ import android.telecom.GatewayInfo;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -536,6 +537,17 @@ public class Call {
 
         // otherwise compare call Ids
         return call1.getId().equals(call2.getId());
+    }
+
+    public static boolean areSameNumber(Call call1, Call call2) {
+        if (call1 == null && call2 == null) {
+            return true;
+        } else if (call1 == null || call2 == null) {
+            return false;
+        }
+
+        // otherwise compare call Numbers
+        return TextUtils.equals(call1.getNumber(), call2.getNumber());
     }
 
     public int getSessionModificationState() {

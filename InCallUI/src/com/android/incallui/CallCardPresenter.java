@@ -201,8 +201,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         Log.d(this, "Primary call: " + primary);
         Log.d(this, "Secondary call: " + secondary);
 
-        final boolean primaryChanged = !Call.areSame(mPrimary, primary);
-        final boolean secondaryChanged = !Call.areSame(mSecondary, secondary);
+        final boolean primaryChanged = !(Call.areSame(mPrimary, primary) &&
+                Call.areSameNumber(mPrimary, primary));
+        final boolean secondaryChanged = !(Call.areSame(mSecondary, secondary) &&
+                Call.areSameNumber(mSecondary, secondary));
 
         mSecondary = secondary;
         Call previousPrimary = mPrimary;
