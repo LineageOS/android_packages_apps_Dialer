@@ -35,7 +35,7 @@
     <string name="pause_prompt_no" msgid="6686238803236884877">"No"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"Reemplazar el carácter comodín con"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Llamada en conferencia <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Núm. de correo de voz"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Correo de voz"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Marcando"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Volviendo a marcar"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Llamada en conferencia"</string>
