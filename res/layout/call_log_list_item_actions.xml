@@ -29,6 +29,21 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/call_action"
+        style="@style/CallLogActionStyle">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_call_24dp" />
+
+        <TextView
+            android:id="@+id/call_action_text"
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/description_call_log_call_action" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/video_call_action"
         style="@style/CallLogActionStyle">
 
