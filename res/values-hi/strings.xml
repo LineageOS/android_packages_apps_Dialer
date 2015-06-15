@@ -22,6 +22,8 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"फ़ोन"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"कॉल इतिहास"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> को कॉल करें"</string>
+    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"कॉल करने से पहले नंबर संपादित करें"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"किसी संपर्क में जोड़ें"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"कॉल इतिहास से साफ़ करें"</string>
@@ -177,9 +179,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> के लिए संपर्क बनाएं"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को मौजूदा संपर्क में जोड़ें"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> के कॉल विवरण"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> की रिपोर्ट करें"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"कॉल इतिहास से हटाएं"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"रिपोर्ट करें"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"आज"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"कल"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"पुराना"</string>

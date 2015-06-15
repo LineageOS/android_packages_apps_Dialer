@@ -22,6 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"ਫੋਨ"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ਕਾਲ ਇਤਿਹਾਸ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ਨੂੰ ਕਾਲ ਕਰੋ"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"ਗ਼ਲਤ ਨੰਬਰ ਦੀ ਰਿਪੋਰਟ ਕਰੋ"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ਕਾਲ ਤੋਂ ਪਹਿਲਾਂ ਨੰਬਰ ਸੰਪਾਦਿਤ ਕਰੋ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ਇੱਕ ਸੰਪਰਕ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ਕਾਲ ਇਤਿਹਾਸ ਵਿੱਚੋਂ ਮਿਟਾਓ"</string>
@@ -47,12 +48,9 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ਕੇਵਲ ਇਨਕਮਿੰਗ ਕਾਲਾਂ"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"ਕੇਵਲ ਆਊਟਗੋਇੰਗ ਕਾਲਾਂ"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"ਕੇਵਲ ਮਿਸਡ ਕਾਲਾਂ"</string>
-    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
-    <skip />
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"ਵਿਜੁਅਲ ਵੌਇਸਮੇਲ"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"ਇੱਕ ਨੰਬਰ ਤੇ ਕਾਲ ਕੀਤੇ ਬਿਨਾਂ, ਆਪਣੀ ਵੌਇਸਮੇਲ ਦੇਖੋ ਅਤੇ ਸੁਣੋ। ਡਾਟਾ ਖ਼ਰਚੇ ਲਾਗੂ ਹੋ ਸਕਦੇ ਹਨ।"</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"ਸੈਟਿੰਗਾਂ"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"ਵੌਇਸਮੇਲ ਅਪਡੇਟਾਂ ਉਪਲਬਧ ਨਹੀਂ"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"ਨਵੀਂ ਵੌਇਸਮੇਲ ਉਡੀਕ ਰਹੀ ਹੈ। ਹੁਣ ਲੋਡ ਨਹੀਂ ਕਰ ਸਕਦਾ।"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"ਆਪਣੀ ਵੌਇਸਮੇਲ ਸੈਟ ਅਪ ਕਰੋ"</string>
@@ -113,8 +111,7 @@
     <string name="voicemail" msgid="3851469869202611441">"ਵੌਇਸਮੇਲ"</string>
     <string name="private_num" msgid="6374339738119166953">"ਨਿੱਜੀ ਨੰਬਰ"</string>
     <string name="payphone" msgid="7726415831153618726">"ਪੇਫੋਨ"</string>
-    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
-    <skip />
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> ਸਕਿੰਟ"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> ਮਿੰਟ <xliff:g id="SECONDS">%s</xliff:g> ਸਕਿੰਟ"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ਇਸ ਨੰਬਰ ਤੇ ਕਾਲ ਨਹੀਂ ਕਰ ਸਕਦਾ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ਵੌਇਸਮੇਲ ਸੈਟ ਅਪ ਕਰਨ ਲਈ, ਮੀਨੂ &gt; ਸੈਟਿੰਗਾਂ ਤੇ ਜਾਓ।"</string>
@@ -155,10 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"ਹਟਾਓ"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"ਵੀਡੀਓ ਕਾਲ"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"ਸੁਨੇਹਾ ਭੇਜੋ"</string>
-    <!-- no translation found for call_log_action_details (701345508704970622) -->
-    <skip />
-    <!-- no translation found for call_log_action_call (463690849042459842) -->
-    <skip />
+    <string name="call_log_action_details" msgid="701345508704970622">"ਕਾਲ ਵੇਰਵੇ"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਨੂੰ ਕਾਲ ਕਰੋ"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ਦੀ ਮਿਸਡ ਕਾਲ।"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ਦੀ ਕਾਲ ਦਾ ਜਵਾਬ ਦਿੱਤਾ।"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ਨੂੰ ਕਾਲ ਕਰੋ।"</string>
@@ -167,19 +162,17 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਨੂੰ ਕਾਲ ਕਰੋ"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"ਵੀਡੀਓ ਕਾਲ <xliff:g id="NAMEORNUMBER">^1</xliff:g>।"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਦੀ ਵੌਇਸਮੇਲ ਚੁਣੋ"</string>
-    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
-    <skip />
-    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
-    <skip />
-    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
-    <skip />
-    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
+    <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਤੋਂ ਵੌਇਸਮੇਲ ਪਲੇ ਕਰੋ"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਤੋਂ ਵੌਇਸਮੇਲ ਰੋਕੋ"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਤੋਂ ਵੌਇਸਮੇਲ ਮਿਟਾਓ"</string>
+    <plurals name="description_voicemail_unread" formatted="false" msgid="2875295056910058203">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ਅਨਰੀਡ ਵੌਇਸਮੇਲਾਂ</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ਅਨਰੀਡ ਵੌਇਸਮੇਲਾਂ</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਲਈ ਸੰਪਰਕ ਬਣਾਓ"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਨੂੰ ਮੌਜੂਦਾ ਸੰਪਰਕ ਵਿੱਚ ਜੋੜੋ"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਲਈ ਕਾਲ ਵੇਰਵੇ"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਦੀ ਰਿਪੋਰਟ ਕਰੋ"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ਕਾਲ ਇਤਿਹਾਸ ਵਿੱਚੋਂ ਮਿਟਾਇਆ ਗਿਆ"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"ਰਿਪੋਰਟ"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ਅੱਜ"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ਕੱਲ੍ਹ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"ਪੁਰਾਣੇ"</string>

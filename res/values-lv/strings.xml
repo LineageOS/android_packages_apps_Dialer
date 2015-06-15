@@ -22,6 +22,8 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Zvanīt"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Zvanu vēsture"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Zvanīt: <xliff:g id="NAME">%s</xliff:g>"</string>
+    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Rediģēt numuru pirms zvanīšanas"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Pievienot kontaktpersonai"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Dzēst no zvanu vēstures"</string>
@@ -178,9 +180,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Izveidojiet kontaktpersonu, izmantojot vienumu <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Pievienojiet vienumu <xliff:g id="NAMEORNUMBER">^1</xliff:g> esošai kontaktpersonai."</string>
     <string name="description_details_action" msgid="2433827152749491785">"Zvanu informācija par šādu numuru: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"Ziņojiet par kontaktpersonu <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Dzēsts no zvanu vēstures."</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"Ziņot"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Šodien"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Vakar"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Vecāki zvani"</string>

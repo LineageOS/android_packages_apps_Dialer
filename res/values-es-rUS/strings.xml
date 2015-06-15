@@ -22,6 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historial de llamadas"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Llamar a <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"Informar número incorrecto"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes de llamar"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Agregar a un contacto"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Eliminar del historial de llamadas"</string>
@@ -177,9 +178,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Crear un contacto para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Agregar <xliff:g id="NAMEORNUMBER">^1</xliff:g> a un contacto existente"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalles de llamada de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"Informar <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Se eliminó del historial de llamadas."</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"Informar"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hoy"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ayer"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Antiguos"</string>

@@ -22,6 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Điện thoại"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Nhật ký cuộc gọi"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Gọi <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"Báo cáo số không chính xác"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Chỉnh sửa số trước khi gọi"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Thêm vào liên hệ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Xóa khỏi nhật ký cuộc gọi"</string>
@@ -177,9 +178,7 @@
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Tạo địa chỉ liên hệ cho <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Thêm <xliff:g id="NAMEORNUMBER">^1</xliff:g> vào địa chỉ liên hệ hiện có"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Chi tiết cuộc gọi cho <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"Báo cáo <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Đã xóa khỏi nhật ký cuộc gọi"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"Báo cáo"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Hôm nay"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Hôm qua"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Cũ hơn"</string>

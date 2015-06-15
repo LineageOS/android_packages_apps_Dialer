@@ -22,6 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"ഫോണ്‍"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"കോള്‍‌ ചരിത്രം"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"വിളിക്കുക <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"കൃത്യമല്ലാത്ത നമ്പർ റിപ്പോർട്ടുചെയ്യുക"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ഒരു കോൺടാക്റ്റിൽ ചേർക്കുക"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"കോൾ ചരിത്രത്തിൽ നിന്ന് മായ്‌ക്കുക"</string>
@@ -47,12 +48,9 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ഇൻകമിംഗ് കോളുകൾ മാത്രം"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"ഔട്ട്‌ഗോയിംഗ് കോളുകൾ മാത്രം"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"മിസ്‌ഡ് കോളുകൾ മാത്രം"</string>
-    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
-    <skip />
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"വിഷ്വൽ വോയ്‌സ്‌മെയിൽ"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"ഏതെങ്കിലും നമ്പറിലേക്ക് വിളിക്കാതെ തന്നെ, വോയ്സ്‌മെയിൽ കാണുക, കേൾക്കുക. ഡാറ്റാ നിരക്കുകൾ ബാധകമായേക്കാം."</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"ക്രമീകരണം"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"വോയ്‌സ്‌മെയിൽ അപ്‌ഡേറ്റുകൾ ലഭ്യമല്ല"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"പുതിയ വോയ്‌സ്‌മെയിൽ കാത്തിരിക്കുന്നു. ഇപ്പോൾ ലോഡുചെയ്യാനാവില്ല."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുക"</string>
@@ -113,8 +111,7 @@
     <string name="voicemail" msgid="3851469869202611441">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="private_num" msgid="6374339738119166953">"സ്വകാര്യ നമ്പർ"</string>
     <string name="payphone" msgid="7726415831153618726">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
-    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
-    <skip />
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> സെക്കൻഡ്"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> മി. <xliff:g id="SECONDS">%s</xliff:g> സെ."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ഈ നമ്പറിലേക്ക് കോൾ ചെയ്യാനാവില്ല"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുന്നതിന്, മെനു &gt; ക്രമീകരണങ്ങൾ എന്നതിലേക്ക് പോകുക."</string>
@@ -155,10 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"നീക്കംചെയ്യുക"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"വീഡിയോ കോള്‍"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"സന്ദേശം അയയ്ക്കുക"</string>
-    <!-- no translation found for call_log_action_details (701345508704970622) -->
-    <skip />
-    <!-- no translation found for call_log_action_call (463690849042459842) -->
-    <skip />
+    <string name="call_log_action_details" msgid="701345508704970622">"കോൾ വിശദാംശങ്ങൾ"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പർ/വ്യക്തിയെ വിളിക്കൂ"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിൽ നിന്നുള്ള മിസ്ഡ് കോൾ."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിൽ നിന്നുള്ള മറുപടി നൽകിയ കോൾ."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> എന്നതിലേക്കുള്ള കോൾ."</string>
@@ -167,19 +162,17 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> വിളിക്കുക"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നതുമായി വീഡിയോ കോൾ നടത്തുക."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളിൽ നിന്നുള്ള വോയ്‌സ്മെയിൽ കേൾക്കുക"</string>
-    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
-    <skip />
-    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
-    <skip />
-    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
-    <skip />
-    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
+    <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പറിൽ/വ്യക്തിയിൽ നിന്നുള്ള വോയ്സ്‌മെയിൽ പ്ലേ ചെയ്യുക"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പറിൽ/വ്യക്തിയിൽ നിന്നുള്ള വോയ്സ്‌മെയിൽ തൽക്കാലം നിർത്തുക"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പറിൽ/വ്യക്തിയിൽ നിന്നുള്ള വോയ്സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
+    <plurals name="description_voicemail_unread" formatted="false" msgid="2875295056910058203">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> വായിക്കാത്ത വോയ്‌സ്‌മെയിലുകൾ</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> വായിക്കാത്ത വോയ്‌സ്‌മെയിൽ</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നതിനായി കോൺടാക്റ്റ് സൃഷ്‌ടിക്കുക"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"നിലവിലുള്ള കോൺടാക്റ്റിലേക്ക് <xliff:g id="NAMEORNUMBER">^1</xliff:g> ചേർക്കുക"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളുടെ കോൾ വിശദാംശങ്ങൾ"</string>
-    <string name="description_report_action" msgid="5011961125980353172">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> റിപ്പോർട്ടുചെയ്യുക"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"കോൾ ചരിത്രത്തിൽ നിന്ന് ഇല്ലാതാക്കി"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"റിപ്പോർട്ടുചെയ്യുക"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ഇന്ന്"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ഇന്നലെ"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"പഴയത്"</string>
