@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.widget.QuickContactBadge;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -42,6 +43,7 @@ import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.PhoneCallDetailsViews;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
@@ -51,7 +53,8 @@ import com.android.dialer.voicemail.VoicemailPlaybackLayout;
  *
  * This object also contains UI logic pertaining to the view, to isolate it from the CallLogAdapter.
  */
-public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
+public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener {
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -66,12 +69,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     /** The view containing the details for the call log row, including the action buttons. */
     public final CardView callLogEntryView;
     /** The actionable view which places a call to the number corresponding to the call log row. */
-    public final View callActionView;
+    public final ImageView primaryActionButtonView;
 
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
     /** The button views below are assigned only when the action section is expanded. */
     public VoicemailPlaybackLayout voicemailPlaybackView;
+    public View callButtonView;
     public View videoCallButtonView;
     public View createNewContactButtonView;
     public View addToExistingContactButtonView;
@@ -135,7 +139,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
     private final Context mContext;
-    private final View.OnClickListener mActionListener;
     private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
@@ -144,7 +147,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
 
     private CallLogListItemViewHolder(
             Context context,
-            View.OnClickListener actionListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
@@ -154,11 +156,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             PhoneCallDetailsViews phoneCallDetailsViews,
             CardView callLogEntryView,
             TextView dayGroupHeader,
-            View callActionView) {
+            ImageView primaryActionButtonView) {
         super(rootView);
 
         mContext = context;
-        mActionListener = actionListener;
         mPhoneNumberUtilsWrapper = phoneNumberUtilsWrapper;
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
@@ -169,7 +170,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         this.phoneCallDetailsViews = phoneCallDetailsViews;
         this.callLogEntryView = callLogEntryView;
         this.dayGroupHeader = dayGroupHeader;
-        this.callActionView = callActionView;
+        this.primaryActionButtonView = primaryActionButtonView;
 
         Resources resources = mContext.getResources();
         mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
@@ -180,22 +181,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
 
         quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
-        if (callActionView != null) {
-            callActionView.setOnClickListener(mActionListener);
-        }
+        primaryActionButtonView.setOnClickListener(this);
     }
 
     public static CallLogListItemViewHolder create(
             View view,
             Context context,
-            View.OnClickListener actionListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
 
         return new CallLogListItemViewHolder(
                 context,
-                actionListener,
                 phoneNumberUtilsWrapper,
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
@@ -205,7 +202,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 PhoneCallDetailsViews.fromView(view),
                 (CardView) view.findViewById(R.id.call_log_row),
                 (TextView) view.findViewById(R.id.call_log_day_group_label),
-                view.findViewById(R.id.call_icon));
+                (ImageView) view.findViewById(R.id.primary_action_button));
     }
 
     /**
@@ -223,54 +220,55 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
             voicemailPlaybackView = (VoicemailPlaybackLayout) actionsView
                     .findViewById(R.id.voicemail_playback_layout);
 
+            callButtonView = actionsView.findViewById(R.id.call_action);
+            callButtonView.setOnClickListener(this);
+
             videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
-            videoCallButtonView.setOnClickListener(mActionListener);
+            videoCallButtonView.setOnClickListener(this);
 
             createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
-            createNewContactButtonView.setOnClickListener(mActionListener);
+            createNewContactButtonView.setOnClickListener(this);
 
             addToExistingContactButtonView =
                     actionsView.findViewById(R.id.add_to_existing_contact_action);
-            addToExistingContactButtonView.setOnClickListener(mActionListener);
+            addToExistingContactButtonView.setOnClickListener(this);
 
             sendMessageView = actionsView.findViewById(R.id.send_message_action);
-            sendMessageView.setOnClickListener(mActionListener);
+            sendMessageView.setOnClickListener(this);
 
             detailsButtonView = actionsView.findViewById(R.id.details_action);
-            detailsButtonView.setOnClickListener(mActionListener);
+            detailsButtonView.setOnClickListener(this);
         }
 
         bindActionButtons();
     }
 
-    public void updateCallButton() {
-        boolean canPlaceCallToNumber =
-                PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
+    public void updatePrimaryActionButton() {
+        if (TextUtils.isEmpty(voicemailUri)) {
+            boolean canPlaceCallToNumber =
+                    PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
 
-        if (canPlaceCallToNumber) {
-            boolean isVoicemailNumber =
-                    mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
-            if (isVoicemailNumber) {
-                // Make a general call to voicemail to ensure that if there are multiple accounts
-                // it does not call the voicemail number of a specific phone account.
-                callActionView.setTag(IntentProvider.getReturnVoicemailCallIntentProvider());
-            } else {
-                callActionView.setTag(IntentProvider.getReturnCallIntentProvider(number));
-            }
+            if (canPlaceCallToNumber) {
+                boolean isVoicemailNumber =
+                        mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
+                if (isVoicemailNumber) {
+                    // Call to generic voicemail number, in case there are multiple accounts.
+                    primaryActionButtonView.setTag(
+                            IntentProvider.getReturnVoicemailCallIntentProvider());
+                } else {
+                    primaryActionButtonView.setTag(
+                            IntentProvider.getReturnCallIntentProvider(number));
+                }
 
-            if (nameOrNumber != null) {
-                callActionView.setContentDescription(TextUtils.expandTemplate(
+                primaryActionButtonView.setContentDescription(TextUtils.expandTemplate(
                         mContext.getString(R.string.description_call_action),
                         nameOrNumber));
+                primaryActionButtonView.setImageResource(R.drawable.ic_call_24dp);
+                primaryActionButtonView.setVisibility(View.VISIBLE);
             } else {
-                callActionView.setContentDescription(
-                        mContext.getString(R.string.description_call_log_call_action));
+                primaryActionButtonView.setTag(null);
+                primaryActionButtonView.setVisibility(View.GONE);
             }
-
-            callActionView.setVisibility(View.VISIBLE);
-        } else {
-            callActionView.setTag(null);
-            callActionView.setVisibility(View.GONE);
         }
     }
 
@@ -282,13 +280,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         boolean canPlaceCallToNumber =
                 PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
 
+        if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
+            callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+            ((TextView) callButtonView.findViewById(R.id.call_action_text))
+                    .setText(TextUtils.expandTemplate(
+                            mContext.getString(R.string.call_log_action_call),
+                            nameOrNumber));
+            callButtonView.setVisibility(View.VISIBLE);
+        } else {
+            callButtonView.setVisibility(View.GONE);
+        }
+
         // If one of the calls had video capabilities, show the video call button.
         if (CallUtil.isVideoEnabled(mContext) && canPlaceCallToNumber &&
                 phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
             videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
             videoCallButtonView.setVisibility(View.VISIBLE);
         } else {
-            videoCallButtonView.setTag(null);
             videoCallButtonView.setVisibility(View.GONE);
         }
 
@@ -392,6 +400,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    @Override
+    public void onClick(View view) {
+        final IntentProvider intentProvider = (IntentProvider) view.getTag();
+        if (intentProvider != null) {
+            final Intent intent = intentProvider.getIntent(mContext);
+            // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+            if (intent != null) {
+                DialerUtils.startActivityWithErrorToast(mContext, intent);
+            }
+        }
+    }
+
     @NeededForTesting
     public static CallLogListItemViewHolder createForTest(Context context) {
         Resources resources = context.getResources();
@@ -401,7 +421,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
 
         CallLogListItemViewHolder viewHolder = new CallLogListItemViewHolder(
                 context,
-                null /* actionListener */,
                 phoneNumberUtilsWrapper,
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources),
                 null /* voicemailPlaybackPresenter */,
@@ -411,7 +430,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder {
                 PhoneCallDetailsViews.createForTest(context),
                 new CardView(context),
                 new TextView(context),
-                new View(context));
+                new ImageView(context));
         viewHolder.detailsButtonView = new TextView(context);
         viewHolder.actionsView = new View(context);
         viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);

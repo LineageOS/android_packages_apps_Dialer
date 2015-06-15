@@ -41,7 +41,6 @@ import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -104,24 +103,6 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
-
-    /** Listener for the primary or secondary actions in the list.
-     *  Primary opens the call details.
-     *  Secondary calls or plays.
-     **/
-    private final View.OnClickListener mActionListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            final IntentProvider intentProvider = (IntentProvider) view.getTag();
-            if (intentProvider != null) {
-                final Intent intent = intentProvider.getIntent(mContext);
-                // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-                if (intent != null) {
-                    DialerUtils.startActivityWithErrorToast(mContext, intent);
-                }
-            }
-        }
-    };
 
     /**
      * The OnClickListener used to expand or collapse the action buttons of a call log entry.
@@ -308,7 +289,6 @@ public class CallLogAdapter extends GroupingListAdapter
         CallLogListItemViewHolder viewHolder = CallLogListItemViewHolder.create(
                 view,
                 mContext,
-                mActionListener,
                 mPhoneNumberUtilsWrapper,
                 mCallLogViewsHelper,
                 mVoicemailPlaybackPresenter);
@@ -414,13 +394,15 @@ public class CallLogAdapter extends GroupingListAdapter
             views.dayGroupHeader.setVisibility(View.GONE);
         }
 
+        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
+
         // Update the expanded position if the rowIds match, in case ViewHolders were added/removed.
         // Then restore the state of the row on rebind.
         if (mCurrentlyExpandedRowId == views.rowId) {
             mCurrentlyExpandedPosition = position;
         }
         views.showActions(mCurrentlyExpandedPosition == position);
-        views.updateCallButton();
+        views.updatePrimaryActionButton();
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(info.name)) {
