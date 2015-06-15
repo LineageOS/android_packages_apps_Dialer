@@ -227,8 +227,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_WithCachedName() {
         mCursor.moveToFirst();
-        // provide a default custom label instead of an empty string, which corresponds to
-        // {@value com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
@@ -255,8 +253,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_HomeLabel() {
         mCursor.moveToFirst();
-        // provide a default custom label instead of an empty string, which corresponds to
-        // {@value com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_HOME, TEST_DEFAULT_CUSTOM_LABEL);
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
@@ -270,8 +266,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     @MediumTest
     public void testBindView_WorkLabel() {
         mCursor.moveToFirst();
-        // provide a default custom label instead of an empty string, which corresponds to
-        // {@link com.android.dialer.calllog.ContactInfo#GEOCODE_AS_LABEL}
         insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
                 "John Doe", Phone.TYPE_WORK, TEST_DEFAULT_CUSTOM_LABEL);
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)

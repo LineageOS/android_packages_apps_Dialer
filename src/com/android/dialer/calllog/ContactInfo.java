@@ -48,8 +48,6 @@ public class ContactInfo {
 
     public static ContactInfo EMPTY = new ContactInfo();
 
-    public static String GEOCODE_AS_LABEL = "";
-
     public int sourceType = 0;
 
     @Override
