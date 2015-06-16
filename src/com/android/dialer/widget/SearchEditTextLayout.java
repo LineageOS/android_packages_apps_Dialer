@@ -61,13 +61,14 @@ public class SearchEditTextLayout extends FrameLayout {
 
     private ValueAnimator mAnimator;
 
-    private OnBackButtonClickedListener mOnBackButtonClickedListener;
+    private Callback mCallback;
 
     /**
      * Listener for the back button next to the search view being pressed
      */
-    public interface OnBackButtonClickedListener {
+    public interface Callback {
         public void onBackButtonClicked();
+        public void onSearchViewClicked();
     }
 
     public SearchEditTextLayout(Context context, AttributeSet attrs) {
@@ -78,8 +79,8 @@ public class SearchEditTextLayout extends FrameLayout {
         mPreImeKeyListener = listener;
     }
 
-    public void setOnBackButtonClickedListener(OnBackButtonClickedListener listener) {
-        mOnBackButtonClickedListener = listener;
+    public void setCallback(Callback listener) {
+        mCallback = listener;
     }
 
     @Override
@@ -126,6 +127,15 @@ public class SearchEditTextLayout extends FrameLayout {
             }
         });
 
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCallback != null) {
+                    mCallback.onSearchViewClicked();
+                }
+            }
+        });
+
         mSearchView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -151,8 +161,8 @@ public class SearchEditTextLayout extends FrameLayout {
         findViewById(R.id.search_back_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnBackButtonClickedListener != null) {
-                    mOnBackButtonClickedListener.onBackButtonClicked();
+                if (mCallback != null) {
+                    mCallback.onBackButtonClicked();
                 }
             }
         });
