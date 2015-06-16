@@ -147,7 +147,7 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
      */
     @MediumTest
     public void testCallViewIsNotVisibleForPrivateAndUnknownNumbers() {
-        final int SIZE = 100;
+        final int SIZE = 50;
         mList = new CallLogListItemViewHolder[SIZE];
 
         // Insert the first batch of entries.
@@ -320,7 +320,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
                 mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
         bindViewForTest(viewHolder);
-        viewHolder.updatePrimaryActionButton();
 
         // The primaryActionView tag is set in the
         // {@link com.android.dialer.calllog.CallLogAdapter#bindView} method.  If it is possible
@@ -453,7 +452,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             }
         });
         getInstrumentation().waitForIdleSync();
-        viewHolder.updatePrimaryActionButton();
     }
 
     private void bindViewForTest(CallLogListItemViewHolder viewHolder) {

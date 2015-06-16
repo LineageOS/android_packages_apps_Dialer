@@ -145,8 +145,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     private final int mPhotoSize;
 
+    private View.OnClickListener mExpandCollapseListener;
+    private boolean mVoicemailPrimaryActionButtonClicked;
+
     private CallLogListItemViewHolder(
             Context context,
+            View.OnClickListener expandCollapseListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
@@ -160,6 +164,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         super(rootView);
 
         mContext = context;
+        mExpandCollapseListener = expandCollapseListener;
         mPhoneNumberUtilsWrapper = phoneNumberUtilsWrapper;
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
@@ -182,17 +187,20 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
         primaryActionButtonView.setOnClickListener(this);
+        primaryActionView.setOnClickListener(mExpandCollapseListener);
     }
 
     public static CallLogListItemViewHolder create(
             View view,
             Context context,
+            View.OnClickListener expandCollapseListener,
             PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
 
         return new CallLogListItemViewHolder(
                 context,
+                expandCollapseListener,
                 phoneNumberUtilsWrapper,
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
@@ -243,8 +251,17 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         bindActionButtons();
     }
 
-    public void updatePrimaryActionButton() {
-        if (TextUtils.isEmpty(voicemailUri)) {
+    private void updatePrimaryActionButton(boolean isExpanded) {
+        if (!TextUtils.isEmpty(voicemailUri)) {
+            // Treat as voicemail list item; show play button if not expanded.
+            if (!isExpanded) {
+                primaryActionButtonView.setImageResource(R.drawable.ic_play_arrow_24dp);
+                primaryActionButtonView.setVisibility(View.VISIBLE);
+            } else {
+                primaryActionButtonView.setVisibility(View.GONE);
+            }
+        } else {
+            // Treat as normal list item; show call button, if possible.
             boolean canPlaceCallToNumber =
                     PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
 
@@ -306,7 +323,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             Uri uri = Uri.parse(voicemailUri);
             mVoicemailPlaybackPresenter.setPlaybackView(
-                    voicemailPlaybackView, uri, false /* startPlayingImmediately */);
+                    voicemailPlaybackView, uri, mVoicemailPrimaryActionButtonClicked);
+            mVoicemailPrimaryActionButtonClicked = false;
 
             CallLogAsyncTaskUtil.markVoicemailAsRead(mContext, uri);
         } else {
@@ -356,6 +374,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 actionsView.setVisibility(View.GONE);
             }
         }
+
+        updatePrimaryActionButton(show);
     }
 
     public void expandVoicemailTranscriptionView(boolean isExpanded) {
@@ -402,12 +422,17 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onClick(View view) {
-        final IntentProvider intentProvider = (IntentProvider) view.getTag();
-        if (intentProvider != null) {
-            final Intent intent = intentProvider.getIntent(mContext);
-            // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
-            if (intent != null) {
-                DialerUtils.startActivityWithErrorToast(mContext, intent);
+        if (view.getId() == R.id.primary_action_button && !TextUtils.isEmpty(voicemailUri)) {
+            mVoicemailPrimaryActionButtonClicked = true;
+            mExpandCollapseListener.onClick(primaryActionView);
+        } else {
+            final IntentProvider intentProvider = (IntentProvider) view.getTag();
+            if (intentProvider != null) {
+                final Intent intent = intentProvider.getIntent(mContext);
+                // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+                if (intent != null) {
+                    DialerUtils.startActivityWithErrorToast(mContext, intent);
+                }
             }
         }
     }
@@ -421,6 +446,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         CallLogListItemViewHolder viewHolder = new CallLogListItemViewHolder(
                 context,
+                null /* expandCollapseListener */,
                 phoneNumberUtilsWrapper,
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources),
                 null /* voicemailPlaybackPresenter */,
