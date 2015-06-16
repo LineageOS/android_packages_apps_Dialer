@@ -116,9 +116,13 @@ public class CallLogAdapter extends GroupingListAdapter
                 return;
             }
 
+            // Always reset the voicemail playback state on expand or collapse.
+            mVoicemailPlaybackPresenter.reset();
+
             if (viewHolder.getAdapterPosition() == mCurrentlyExpandedPosition) {
                 // Hide actions, if the clicked item is the expanded item.
                 viewHolder.showActions(false);
+
                 mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
                 mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
             } else {
@@ -289,6 +293,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallLogListItemViewHolder viewHolder = CallLogListItemViewHolder.create(
                 view,
                 mContext,
+                mExpandCollapseListener,
                 mPhoneNumberUtilsWrapper,
                 mCallLogViewsHelper,
                 mVoicemailPlaybackPresenter);
@@ -297,7 +302,6 @@ public class CallLogAdapter extends GroupingListAdapter
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
 
         viewHolder.primaryActionView.setTag(viewHolder);
-        viewHolder.primaryActionView.setOnClickListener(mExpandCollapseListener);
 
         return viewHolder;
     }
@@ -402,7 +406,6 @@ public class CallLogAdapter extends GroupingListAdapter
             mCurrentlyExpandedPosition = position;
         }
         views.showActions(mCurrentlyExpandedPosition == position);
-        views.updatePrimaryActionButton();
 
         String nameForDefaultImage = null;
         if (TextUtils.isEmpty(info.name)) {
