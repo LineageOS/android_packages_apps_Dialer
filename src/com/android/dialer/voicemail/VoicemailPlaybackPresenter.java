@@ -178,6 +178,18 @@ public class VoicemailPlaybackPresenter
         mMediaPlayer.setOnCompletionListener(this);
     }
 
+    public void reset() {
+        pausePlayback();
+
+        mView = null;
+        mVoicemailUri = null;
+
+        mIsPrepared = false;
+        mIsPlaying = false;
+        mPosition = 0;
+        mDuration.set(0);
+    }
+
     /**
      * Specify the view which this presenter controls and the voicemail for playback.
      */
@@ -204,7 +216,6 @@ public class VoicemailPlaybackPresenter
             mView.onSpeakerphoneOn(false);
 
             checkForContent();
-
         }
     }
 
@@ -341,7 +352,9 @@ public class VoicemailPlaybackPresenter
         public void run() {
             if (mIsWaitingForResult.getAndSet(false)) {
                 mContext.getContentResolver().unregisterContentObserver(this);
-                mView.setFetchContentTimeout();
+                if (mView != null) {
+                    mView.setFetchContentTimeout();
+                }
             }
         }
 
@@ -384,7 +397,11 @@ public class VoicemailPlaybackPresenter
      * and it will call {@link #onError()} otherwise.
      */
     private void prepareToPlayContent() {
+        if (mView == null) {
+            return;
+        }
         mIsPrepared = false;
+
         mView.setIsBuffering();
 
         try {
@@ -402,7 +419,11 @@ public class VoicemailPlaybackPresenter
      */
     @Override
     public void onPrepared(MediaPlayer mp) {
+        if (mView == null) {
+            return;
+        }
         mIsPrepared = true;
+
         mDuration.set(mMediaPlayer.getDuration());
 
         mView.enableUiElements();
@@ -421,7 +442,7 @@ public class VoicemailPlaybackPresenter
      */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        handleError(new IllegalStateException("MediaPlayer error listener invoked"));
+        handleError(new IllegalStateException("MediaPlayer error listener invoked: " + extra));
         return true;
     }
 
