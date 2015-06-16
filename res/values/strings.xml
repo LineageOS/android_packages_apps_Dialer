@@ -641,12 +641,12 @@
         Delete voicemail from <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
     </string>
 
-    <!-- String describing the number of unread voicemails, displayed as a number badge on a tab.
+    <!-- String describing the number of new voicemails, displayed as a number badge on a tab.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
     <plurals name="description_voicemail_unread">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> unread voicemail</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> unread voicemails</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> new voicemail</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> new voicemails</item>
     </plurals>
 
     <!-- Description for the "create new contact" action for an entry in the call log. This action
