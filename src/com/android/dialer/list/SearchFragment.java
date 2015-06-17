@@ -50,6 +50,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     private static final String TAG  = SearchFragment.class.getSimpleName();
 
     private OnListFragmentScrolledListener mActivityScrollListener;
+    private View.OnTouchListener mActivityOnTouchListener;
 
     /*
      * Stores the untouched user-entered string that is used to populate the add to contacts
@@ -123,6 +124,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     int totalItemCount) {
             }
         });
+        if (mActivityOnTouchListener != null) {
+            listView.setOnTouchListener(mActivityOnTouchListener);
+        }
 
         updatePosition(false /* animate */);
     }
@@ -297,5 +301,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             // Clear out any existing call shortcuts.
             getAdapter().setQueryString(null);
         }
+    }
+
+    public void setOnTouchListener(View.OnTouchListener onTouchListener) {
+        mActivityOnTouchListener = onTouchListener;
     }
 }
