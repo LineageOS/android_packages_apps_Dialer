@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Xóa nhật ký cuộc gọi?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Thao tác này sẽ xóa tất cả cuộc gọi khỏi nhật ký của bạn"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Đang xóa nhật ký cuộc gọi…"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Thư thoại </item>
-      <item quantity="one">Thư thoại</item>
-    </plurals>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one" msgid="1746619685488504230">"Thư thoại"</item>
+    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> Thư thoại"</item>
+  </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Phát"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Thư thoại mới từ <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -48,12 +48,9 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Chỉ cuộc gọi đến"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Chỉ cuộc gọi đi"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Chỉ cuộc gọi nhỡ"</string>
-    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
-    <skip />
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"Thư thoại kèm theo hình ảnh"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"Xem và nghe thư thoại của bạn mà không phải thực hiện cuộc gọi. Bạn có thể mất phí dữ liệu."</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"Cài đặt"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Không có cập nhật thư thoại"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Đang chờ thư thoại mới. Không thể tải ngay bây giờ."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Thiết lập thư thoại của bạn"</string>
@@ -114,8 +111,7 @@
     <string name="voicemail" msgid="3851469869202611441">"Thư thoại"</string>
     <string name="private_num" msgid="6374339738119166953">"Số cá nhân"</string>
     <string name="payphone" msgid="7726415831153618726">"Điện thoại công cộng"</string>
-    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
-    <skip />
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> giây"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> phút <xliff:g id="SECONDS">%s</xliff:g> giây"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Không thể gọi số này"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Để thiết lập thư thoại, đi tới Menu &gt; Cài đặt."</string>
@@ -156,10 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"Xóa"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Cuộc gọi điện video"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Gửi tin nhắn"</string>
-    <!-- no translation found for call_log_action_details (701345508704970622) -->
-    <skip />
-    <!-- no translation found for call_log_action_call (463690849042459842) -->
-    <skip />
+    <string name="call_log_action_details" msgid="701345508704970622">"Chi tiết cuộc gọi"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"Gọi <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Gọi tới <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -168,13 +162,11 @@
     <string name="description_call_action" msgid="4000549004089776147">"Gọi <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Gọi điện video cho <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Nghe thư thoại từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
-    <skip />
-    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
-    <skip />
-    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
-    <skip />
-    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
+    <string name="description_voicemail_play" msgid="2689369874037785439">"Phát thư thoại từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"Tạm dừng thư thoại từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"Xóa thư thoại từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
+    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Tạo địa chỉ liên hệ cho <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Thêm <xliff:g id="NAMEORNUMBER">^1</xliff:g> vào địa chỉ liên hệ hiện có"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Chi tiết cuộc gọi cho <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>

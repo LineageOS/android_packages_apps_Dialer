@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Διαγραφή ιστορικού κλήσεων;"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Αυτό θα διαγράψει όλες τις κλήσεις από το ιστορικό σας"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Διαγραφή ιστορικού κλήσεων…"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Μηνύματα αυτόμ. τηλεφωνητή </item>
-      <item quantity="one">Μήνυμα αυτόματου τηλεφωνητή</item>
-    </plurals>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one" msgid="1746619685488504230">"Αυτόματος τηλεφωνητής"</item>
+    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> μηνύμ. αυτόμ. τηλεφωνητή"</item>
+  </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Αναπαραγωγή"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Νέα μην. αυτ. τηλεφ. από <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -165,10 +165,8 @@
     <string name="description_voicemail_play" msgid="2689369874037785439">"Ακρόαση μηνύματος αυτόματου τηλεφωνητή από <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"Παύση μηνύματος αυτόματου τηλεφωνητή από <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"Διαγραφή μηνύματος αυτόματου τηλεφωνητή από <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="2875295056910058203">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> μη αναγνωσμένα μηνύματα στον αυτόματο τηλεφωνητή</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> μη αναγνωσμένο μήνυμα στον αυτόματο τηλεφωνητή</item>
-    </plurals>
+    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
+    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Δημιουργία επαφής για <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Προσθήκη <xliff:g id="NAMEORNUMBER">^1</xliff:g> σε υπάρχουσα επαφή"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Λεπτομέρειες κλήσης για <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
