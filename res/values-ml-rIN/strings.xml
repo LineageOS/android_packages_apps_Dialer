@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"കോൾ ചരിത്രം മായ്‌ക്കണോ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ഇത് നിങ്ങളുടെ ചരിത്രത്തിൽ നിന്ന് എല്ലാ കോളുകളും ഇല്ലാതാക്കും"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"കോൾ ചരിത്രം മായ്‌ക്കുന്നു..."</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> വോയ്‌സ്‌മെയിലുകൾ </item>
-      <item quantity="one">വോയ്‌സ്‌മെയിൽ</item>
-    </plurals>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one" msgid="1746619685488504230">"വോയ്‌സ്‌മെയിൽ"</item>
+    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> വോയ്‌സ്മെയിലുകൾ"</item>
+  </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"പ്ലേ ചെയ്യുക"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
@@ -165,10 +165,8 @@
     <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പറിൽ/വ്യക്തിയിൽ നിന്നുള്ള വോയ്സ്‌മെയിൽ പ്ലേ ചെയ്യുക"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പറിൽ/വ്യക്തിയിൽ നിന്നുള്ള വോയ്സ്‌മെയിൽ തൽക്കാലം നിർത്തുക"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്ന നമ്പറിൽ/വ്യക്തിയിൽ നിന്നുള്ള വോയ്സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="2875295056910058203">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> വായിക്കാത്ത വോയ്‌സ്‌മെയിലുകൾ</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> വായിക്കാത്ത വോയ്‌സ്‌മെയിൽ</item>
-    </plurals>
+    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
+    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നതിനായി കോൺടാക്റ്റ് സൃഷ്‌ടിക്കുക"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"നിലവിലുള്ള കോൺടാക്റ്റിലേക്ക് <xliff:g id="NAMEORNUMBER">^1</xliff:g> ചേർക്കുക"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> എന്നയാളുടെ കോൾ വിശദാംശങ്ങൾ"</string>

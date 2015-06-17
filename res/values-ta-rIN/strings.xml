@@ -22,8 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு வரலாறு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
-    <!-- no translation found for call_detail_menu_report (587960283417977382) -->
-    <skip />
+    <string name="call_detail_menu_report" msgid="587960283417977382">"தவறான எண் எனப் புகாரளி"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"தொடர்பில் சேர்"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"அழைப்பு வரலாற்றில் இருந்து நீக்கு"</string>
@@ -34,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"அழைப்பு வரலாற்றை அழிக்கவா?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"வரலாற்றிலிருந்து எல்லா அழைப்புகளும் நீக்கப்படும்"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"அழைப்பு வரலாற்றை அழிக்கிறது…"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> குரலஞ்சல்கள் </item>
-      <item quantity="one">குரலஞ்சல்</item>
-    </plurals>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one" msgid="1746619685488504230">"குரலஞ்சல்"</item>
+    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> குரலஞ்சல்கள்"</item>
+  </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"இயக்கு"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> இன் புதிய குரலஞ்சல்"</string>
@@ -49,12 +48,9 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"உள்வரும் அழைப்புகள் மட்டும்"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"வெளிச்செல்லும் அழைப்புகள் மட்டும்"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"தவறிய அழைப்புகள் மட்டும்"</string>
-    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
-    <skip />
-    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
-    <skip />
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"விஷூவல் குரலஞ்சல்"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"எண்ணை அழைக்காமலே, குரலஞ்சலைப் பார்க்கலாம் மற்றும் கேட்கலாம். இதற்கு தரவுக் கட்டணங்கள் விதிக்கப்படலாம்."</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"அமைப்புகள்"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"குரலஞ்சல் புதுப்பிப்புகள் இல்லை"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"புதிய குரலஞ்சல் காத்திருக்கிறது. தற்போது ஏற்ற முடியாது."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"குரலஞ்சலை அமைக்கவும்"</string>
@@ -115,8 +111,7 @@
     <string name="voicemail" msgid="3851469869202611441">"குரலஞ்சல்"</string>
     <string name="private_num" msgid="6374339738119166953">"தனிப்பட்ட எண்"</string>
     <string name="payphone" msgid="7726415831153618726">"கட்டணத் தொலைபேசி"</string>
-    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
-    <skip />
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> வி"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> நிமிடம் <xliff:g id="SECONDS">%s</xliff:g> வினாடி"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"இந்த எண்ணை அழைக்க முடியாது"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்பு."</string>
@@ -157,10 +152,8 @@
     <string name="remove_contact" msgid="1080555335283662961">"அகற்று"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"வீடியோ அழைப்பு"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"செய்தி அனுப்பு"</string>
-    <!-- no translation found for call_log_action_details (701345508704970622) -->
-    <skip />
-    <!-- no translation found for call_log_action_call (463690849042459842) -->
-    <skip />
+    <string name="call_log_action_details" msgid="701345508704970622">"அழைப்பு விவரங்கள்"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐ அழை"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"தவறிய அழைப்பு: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"பேசிய அழைப்பு: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"அழைத்த அழைப்பு: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -169,13 +162,11 @@
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐ அழை"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐ வீடியோவில் அழைக்கும்."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலைக் கேள்"</string>
-    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
-    <skip />
-    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
-    <skip />
-    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
-    <skip />
-    <!-- no translation found for description_voicemail_unread (2875295056910058203) -->
+    <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலை இயக்கும்"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலை இடைநிறுத்தும்"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலை நீக்கும்"</string>
+    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
+    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>க்கான தொடர்பை உருவாக்கும்"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"இருக்கும் தொடர்பில் <xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐச் சேர்க்கும்"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் அழைப்பு விவரங்கள்"</string>
