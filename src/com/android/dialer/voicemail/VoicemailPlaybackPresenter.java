@@ -121,6 +121,7 @@ public class VoicemailPlaybackPresenter
      */
     private final AtomicInteger mDuration = new AtomicInteger(0);
 
+    private Activity mActivity;
     private Context mContext;
     private PlaybackView mView;
     private static MediaPlayer mMediaPlayer;
@@ -147,10 +148,13 @@ public class VoicemailPlaybackPresenter
     private PowerManager.WakeLock mProximityWakeLock;
     private AudioManager mAudioManager;
 
-    public VoicemailPlaybackPresenter(Context context, Bundle savedInstanceState) {
-        mContext = context;
+    public VoicemailPlaybackPresenter(Activity activity, Bundle savedInstanceState) {
+        mActivity = activity;
+        mContext = activity;
         mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+
+        mActivity.setVolumeControlStream(VoicemailPlaybackPresenter.PLAYBACK_STREAM);
 
         if (savedInstanceState != null) {
             // Restores playback state when activity is recreated, such as after rotation.
