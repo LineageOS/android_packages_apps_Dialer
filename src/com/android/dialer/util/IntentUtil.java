@@ -34,6 +34,7 @@ public class IntentUtil {
 
     public static final String CALL_ACTION = Intent.ACTION_CALL;
     private static final String SMS_URI_PREFIX = "sms:";
+    private static final int NO_PHONE_TYPE = -1;
 
     /**
      * Return an Intent for making a phone call. Scheme (e.g. tel, sip) will be determined
@@ -156,7 +157,7 @@ public class IntentUtil {
         return getNewContactIntent(
                 null /* name */,
                 phoneNumber /* phoneNumber */,
-                -1 /* phoneNumberType */);
+                NO_PHONE_TYPE);
     }
 
     public static Intent getNewContactIntent(
@@ -176,7 +177,7 @@ public class IntentUtil {
         return getAddToExistingContactIntent(
                 null /* name */,
                 phoneNumber /* phoneNumber */,
-                -1 /* phoneNumberType */);
+                NO_PHONE_TYPE);
     }
 
     public static Intent getAddToExistingContactIntent(
@@ -194,7 +195,7 @@ public class IntentUtil {
         if (name != null) {
             intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
         }
-        if (phoneNumberType != -1) {
+        if (phoneNumberType != NO_PHONE_TYPE) {
             intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, phoneNumberType);
         }
     }
