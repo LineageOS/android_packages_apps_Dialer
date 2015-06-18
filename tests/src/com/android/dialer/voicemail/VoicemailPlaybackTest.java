@@ -18,6 +18,7 @@ package com.android.dialer.voicemail;
 
 import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.CHECK_FOR_CONTENT;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -25,13 +26,14 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.provider.VoicemailContract;
-import android.test.InstrumentationTestCase;
+import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.contacts.common.test.IntegrationTestUtils;
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.FakeAsyncTaskExecutor;
 import com.android.dialer.util.LocaleTestUtils;
@@ -48,13 +50,13 @@ import java.util.Locale;
  * Unit tests for the {@link VoicemailPlaybackPresenter} and {@link VoicemailPlaybackLayout}.
  */
 @LargeTest
-public class VoicemailPlaybackTest extends InstrumentationTestCase {
+public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<CallLogActivity> {
     private static final String TEST_ASSET_NAME = "quick_test_recording.mp3";
     private static final String MIME_TYPE = "audio/mp3";
     private static final String CONTACT_NUMBER = "+1412555555";
     private static final String VOICEMAIL_FILE_LOCATION = "/sdcard/sadlfj893w4j23o9sfu.mp3";
 
-    private Context mContext;
+    private Activity mActivity;
     private VoicemailPlaybackPresenter mPresenter;
     private VoicemailPlaybackLayout mLayout;
 
@@ -62,6 +64,10 @@ public class VoicemailPlaybackTest extends InstrumentationTestCase {
     private IntegrationTestUtils mTestUtils;
     private LocaleTestUtils mLocaleTestUtils;
     private FakeAsyncTaskExecutor mFakeAsyncTaskExecutor;
+
+    public VoicemailPlaybackTest() {
+        super(CallLogActivity.class);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -75,10 +81,11 @@ public class VoicemailPlaybackTest extends InstrumentationTestCase {
         mLocaleTestUtils = new LocaleTestUtils(getInstrumentation().getTargetContext());
         mLocaleTestUtils.setLocale(Locale.US);
 
-        mContext = getInstrumentation().getTargetContext();
-        mLayout = new VoicemailPlaybackLayout(mContext);
+        mActivity = getActivity();
+        mLayout = new VoicemailPlaybackLayout(mActivity);
         mLayout.onFinishInflate();
-        mPresenter = new VoicemailPlaybackPresenter(mContext, null);
+
+        mPresenter = new VoicemailPlaybackPresenter(mActivity, null);
     }
 
     @Override
