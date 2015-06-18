@@ -861,6 +861,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
     private void onDialogDismissed() {
         mDialog = null;
+        CallList.getInstance().onErrorDialogDismissed();
         InCallPresenter.getInstance().onDismissDialog();
     }
 }

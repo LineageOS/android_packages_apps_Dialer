@@ -28,6 +28,7 @@ import com.google.common.collect.Maps;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,6 +61,8 @@ public class CallList {
             new ConcurrentHashMap<Listener, Boolean>(8, 0.9f, 1));
     private final HashMap<String, List<CallUpdateListener>> mCallUpdateListenerMap = Maps
             .newHashMap();
+    private final Set<Call> mPendingDisconnectCalls = Collections.newSetFromMap(
+            new ConcurrentHashMap<Call, Boolean>(8, 0.9f, 1));
 
     /**
      * Static singleton accessor method.
@@ -391,6 +394,19 @@ public class CallList {
     }
 
     /**
+     * Called when the user has dismissed an error dialog. This indicates acknowledgement of
+     * the disconnect cause, and that any pending disconnects should immediately occur.
+     */
+    public void onErrorDialogDismissed() {
+        final Iterator<Call> iterator = mPendingDisconnectCalls.iterator();
+        while (iterator.hasNext()) {
+            Call call = iterator.next();
+            iterator.remove();
+            finishDisconnectedCall(call);
+        }
+    }
+
+    /**
      * Processes an update for a single call.
      *
      * @param call The call to update.
@@ -438,6 +454,7 @@ public class CallList {
                 // Set up a timer to destroy the call after X seconds.
                 final Message msg = mHandler.obtainMessage(EVENT_DISCONNECTED_TIMEOUT, call);
                 mHandler.sendMessageDelayed(msg, getDelayForDisconnect(call));
+                mPendingDisconnectCalls.add(call);
 
                 mCallById.put(call.getId(), call);
                 mCallByTelecommCall.put(call.getTelecommCall(), call);
@@ -467,9 +484,9 @@ public class CallList {
                 delay = DISCONNECTED_CALL_SHORT_TIMEOUT_MS;
                 break;
             case DisconnectCause.REMOTE:
+            case DisconnectCause.ERROR:
                 delay = DISCONNECTED_CALL_MEDIUM_TIMEOUT_MS;
                 break;
-            case DisconnectCause.ERROR:
             case DisconnectCause.REJECTED:
             case DisconnectCause.MISSED:
             case DisconnectCause.CANCELED:
@@ -505,6 +522,9 @@ public class CallList {
      * Sets up a call for deletion and notifies listeners of change.
      */
     private void finishDisconnectedCall(Call call) {
+        if (mPendingDisconnectCalls.contains(call)) {
+            mPendingDisconnectCalls.remove(call);
+        }
         call.setState(Call.State.IDLE);
         updateCallInMap(call);
         notifyGenericListeners();
