@@ -183,7 +183,9 @@ public class PhoneCallDetailsHelper {
 
             if (TextUtils.isEmpty(details.name) && !TextUtils.isEmpty(details.geocode)) {
                 numberFormattedLabel = details.geocode;
-            } else {
+            } else if (!(details.numberType == Phone.TYPE_CUSTOM
+                    && TextUtils.isEmpty(details.numberLabel))) {
+                // Get type label only if it will not be "Custom" because of an empty number label.
                 numberFormattedLabel = Phone.getTypeLabel(
                         mResources, details.numberType, details.numberLabel);
             }
