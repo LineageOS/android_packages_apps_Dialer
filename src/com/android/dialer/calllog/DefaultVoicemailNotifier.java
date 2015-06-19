@@ -32,8 +32,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.list.ListsFragment;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
@@ -172,10 +174,10 @@ public class DefaultVoicemailNotifier {
         final Intent contentIntent;
         // Open the call log.
         // TODO: Send to recents tab in Dialer instead.
-        contentIntent = new Intent(Intent.ACTION_VIEW, Calls.CONTENT_URI);
-        contentIntent.putExtra(Calls.EXTRA_CALL_TYPE_FILTER, Calls.VOICEMAIL_TYPE);
-        notificationBuilder.setContentIntent(
-                PendingIntent.getActivity(mContext, 0, contentIntent, 0));
+        contentIntent = new Intent(mContext, DialtactsActivity.class);
+        contentIntent.putExtra(DialtactsActivity.EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_VOICEMAIL);
+        notificationBuilder.setContentIntent(PendingIntent.getActivity(
+                mContext, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
         // The text to show in the ticker, describing the new event.
         if (callToNotify != null) {
