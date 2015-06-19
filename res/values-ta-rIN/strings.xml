@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"அழைப்பு வரலாற்றை அழிக்கவா?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"வரலாற்றிலிருந்து எல்லா அழைப்புகளும் நீக்கப்படும்"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"அழைப்பு வரலாற்றை அழிக்கிறது…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"குரலஞ்சல்"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> குரலஞ்சல்கள்"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> குரலஞ்சல்கள் </item>
+      <item quantity="one">குரலஞ்சல்</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"இயக்கு"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> இன் புதிய குரலஞ்சல்"</string>
@@ -165,8 +165,10 @@
     <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலை இயக்கும்"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலை இடைநிறுத்தும்"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் குரலஞ்சலை நீக்கும்"</string>
-    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
-    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
+    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> புதிய குரலஞ்சல்கள்</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> புதிய குரலஞ்சல்</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>க்கான தொடர்பை உருவாக்கும்"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"இருக்கும் தொடர்பில் <xliff:g id="NAMEORNUMBER">^1</xliff:g>ஐச் சேர்க்கும்"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> இன் அழைப்பு விவரங்கள்"</string>
