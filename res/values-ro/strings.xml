@@ -33,10 +33,11 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Ștergeți istoricul apelurilor?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Astfel vor fi șterse toate apelurile din istoric"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Se șterge istoricul apelurilor…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Mesaj vocal"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> (de) mesaje vocale"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> mesaje vocale </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> de mesaje vocale </item>
+      <item quantity="one">Mesaj vocal</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Redaţi"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mesaj vocal nou de la <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -165,8 +166,11 @@
     <string name="description_voicemail_play" msgid="2689369874037785439">"Redați mesajul vocal de la <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"Întrerupeți mesajul vocal de la <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"Ștergeți mesajul vocal de la <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
-    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
+    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> mesaje vocale noi</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de mesaje vocale noi</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> mesaj vocal nou</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Creați o persoană de contact pentru <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Adăugați <xliff:g id="NAMEORNUMBER">^1</xliff:g> la o persoană de contact existentă"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detaliile apelului pentru <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>

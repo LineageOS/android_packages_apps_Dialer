@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ඇමතුම් ඉතිහාසය හිස් කරන්නද?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"මෙය ඔබේ ඉතිහාසයෙන් සියලු ඇමතුම් මකනු ඇත"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ඇමතුම් ඉතිහාසය හිස් කරමින්…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"හඬ තැපෑල"</item>
-    <item quantity="other" msgid="5513481419205061254">"හඬ තැපැල් <xliff:g id="COUNT">%1$d</xliff:g>"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one">හඬ තැපැල් <xliff:g id="COUNT">%1$d</xliff:g> </item>
+      <item quantity="other">හඬ තැපැල් <xliff:g id="COUNT">%1$d</xliff:g> </item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"ධාවනය කරන්න"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> වෙතින් නව හඬ තැපැලක්"</string>
@@ -165,8 +165,10 @@
     <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> වෙතින් වන හඬ තැපෑල ධාවනය කරන්න"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> වෙතින් වන හඬ තැපෑල විරාම කරන්න"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> වෙතින් වන හඬ තැපෑල මකන්න"</string>
-    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
-    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
+    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
+      <item quantity="one">නව හඬ තැපැල් <xliff:g id="COUNT_1">%d</xliff:g></item>
+      <item quantity="other">නව හඬ තැපැල් <xliff:g id="COUNT_1">%d</xliff:g></item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> සඳහා සම්බන්ධතාවක් සාදන්න"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"පවතින සම්බන්ධතාව වෙත <xliff:g id="NAMEORNUMBER">^1</xliff:g> එක් කරන්න"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> සඳහා ඇමතුම් විස්තර"</string>

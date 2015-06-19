@@ -33,10 +33,12 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить журнал звонков?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Журнал звонков будет удален."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Очистка журнала звонков…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Голосовая почта"</item>
-    <item quantity="other" msgid="5513481419205061254">"Голосовые сообщения: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> голосовое сообщение </item>
+      <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> голосовых сообщения </item>
+      <item quantity="many"> <xliff:g id="COUNT">%1$d</xliff:g> голосовых сообщений </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> голосового сообщения </item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Прослушать"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Новое гол. сообщение: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -165,8 +167,12 @@
     <string name="description_voicemail_play" msgid="2689369874037785439">"Прослушать голосовое сообщение от контакта <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"Приостановить голосовое сообщение от контакта <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"Удалить голосовое сообщение от контакта <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <!-- no translation found for description_voicemail_unread:one (7696932581011971051) -->
-    <!-- no translation found for description_voicemail_unread:other (6193373902017653176) -->
+    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> новое голосовое сообщение</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> новых голосовых сообщения</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> новых голосовых сообщений</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> нового голосового сообщения</item>
+    </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"Добавить контакт: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Добавить \"<xliff:g id="NAMEORNUMBER">^1</xliff:g>\" к контакту"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> – сведения о вызове"</string>
