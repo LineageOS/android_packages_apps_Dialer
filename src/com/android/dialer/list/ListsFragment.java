@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Trace;
+import android.preference.PreferenceManager;
 import android.provider.CallLog.Calls;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -62,7 +63,7 @@ public class ListsFragment extends Fragment
     // Oldest recents entry to display is 2 weeks old.
     private static final long OLDEST_RECENTS_DATE = 1000L * 60 * 60 * 24 * 14;
 
-    private static final String KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER =
+    private static final String PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER =
             "has_active_voicemail_provider";
 
     public interface HostInterface {
@@ -81,7 +82,9 @@ public class ListsFragment extends Fragment
     private AllContactsFragment mAllContactsFragment;
     private CallLogFragment mVoicemailFragment;
 
+    private SharedPreferences mPrefs;
     private boolean mHasActiveVoicemailProvider;
+
     private VoicemailStatusHelper mVoicemailStatusHelper;
     private ArrayList<OnPageChangeListener> mOnPageChangeListeners =
             new ArrayList<OnPageChangeListener>();
@@ -165,10 +168,10 @@ public class ListsFragment extends Fragment
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
 
-        if (savedInstanceState != null) {
-            mHasActiveVoicemailProvider = savedInstanceState.getBoolean(
-                    KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
-        }
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mHasActiveVoicemailProvider = mPrefs.getBoolean(
+                PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
+
         Trace.endSection();
     }
 
@@ -235,12 +238,6 @@ public class ListsFragment extends Fragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, mHasActiveVoicemailProvider);
-    }
-
-    @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         mTabIndex = getRtlPosition(position);
 
@@ -283,6 +280,10 @@ public class ListsFragment extends Fragment
             mHasActiveVoicemailProvider = hasActiveVoicemailProvider;
             mViewPagerAdapter.notifyDataSetChanged();
             mViewPagerTabs.setViewPager(mViewPager);
+
+            mPrefs.edit()
+                    .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, hasActiveVoicemailProvider)
+                    .commit();
         }
     }
 
