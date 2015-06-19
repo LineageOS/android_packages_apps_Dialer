@@ -85,7 +85,7 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         mLayout = new VoicemailPlaybackLayout(mActivity);
         mLayout.onFinishInflate();
 
-        mPresenter = new VoicemailPlaybackPresenter(mActivity, null);
+        mPresenter = VoicemailPlaybackPresenter.getInstance(mActivity, null);
     }
 
     @Override

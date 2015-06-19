@@ -56,10 +56,13 @@ import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Contains the controlling logic for a voicemail playback UI.
+ * Contains the controlling logic for a voicemail playback in the call log. It is closely coupled
+ * to assumptions about the behaviors and lifecycle of the call log, in particular in the
+ * {@link CallLogFragment} and {@link CallLogAdapter}.
  * <p>
  * This controls a single {@link com.android.dialer.voicemail.VoicemailPlaybackLayout}. A single
- * instance can be reused for different such layouts, using {@link #setVoicemailPlaybackView}.
+ * instance can be reused for different such layouts, using {@link #setVoicemailPlaybackView}. This
+ * is to facilitate reuse across different voicemail call log entries.
  * <p>
  * This class is not thread safe. The thread policy for this class is thread-confinement, all calls
  * into this class from outside must be done from the main UI thread.
@@ -77,7 +80,7 @@ public class VoicemailPlaybackPresenter
         int getDesiredClipPosition();
         void disableUiElements();
         void enableUiElements();
-        void onPlaybackError(Exception e);
+        void onPlaybackError();
         void onPlaybackStarted(int duration, ScheduledExecutorService executorService);
         void onPlaybackStopped();
         void onSpeakerphoneOn(boolean on);
@@ -85,7 +88,7 @@ public class VoicemailPlaybackPresenter
         void setFetchContentTimeout();
         void setIsBuffering();
         void setIsFetchingContent();
-        void setPresenter(VoicemailPlaybackPresenter presenter);
+        void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri);
     }
 
     /** The enumeration of {@link AsyncTask} objects we use in this class. */
@@ -121,12 +124,14 @@ public class VoicemailPlaybackPresenter
      */
     private final AtomicInteger mDuration = new AtomicInteger(0);
 
+    private static VoicemailPlaybackPresenter sInstance;
+
     private Activity mActivity;
     private Context mContext;
     private PlaybackView mView;
-    private static MediaPlayer mMediaPlayer;
-
     private Uri mVoicemailUri;
+
+    private MediaPlayer mMediaPlayer;
     private int mPosition;
     private boolean mIsPlaying;
     // MediaPlayer crashes on some method calls if not prepared but does not have a method which
@@ -134,9 +139,10 @@ public class VoicemailPlaybackPresenter
     private boolean mIsPrepared;
 
     private boolean mShouldResumePlaybackAfterSeeking;
+    private int mInitialOrientation;
 
     // Used to run async tasks that need to interact with the UI.
-    private final AsyncTaskExecutor mAsyncTaskExecutor;
+    private AsyncTaskExecutor mAsyncTaskExecutor;
     private static ScheduledExecutorService mScheduledExecutorService;
     /**
      * Used to handle the result of a successful or time-out fetch result.
@@ -148,12 +154,49 @@ public class VoicemailPlaybackPresenter
     private PowerManager.WakeLock mProximityWakeLock;
     private AudioManager mAudioManager;
 
-    public VoicemailPlaybackPresenter(Activity activity, Bundle savedInstanceState) {
+    /**
+     * Obtain singleton instance of this class. Use a single instance to provide a consistent
+     * listener to the AudioManager when requesting and abandoning audio focus.
+     *
+     * Otherwise, after rotation the previous listener will still be active but a new listener
+     * will be provided to calls to the AudioManager, which is bad. For example, abandoning
+     * audio focus with the new listeners results in an AUDIO_FOCUS_GAIN callback to the
+     * previous listener, which is the opposite of the intended behavior.
+     */
+    public static VoicemailPlaybackPresenter getInstance(
+            Activity activity, Bundle savedInstanceState) {
+        if (sInstance == null) {
+            sInstance = new VoicemailPlaybackPresenter(activity);
+        }
+
+        sInstance.init(activity, savedInstanceState);
+        return sInstance;
+    }
+
+    /**
+     * Initialize variables which are activity-independent and state-independent.
+     */
+    private VoicemailPlaybackPresenter(Activity activity) {
+        Context context = activity.getApplicationContext();
+        mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
+        PowerManager powerManager =
+                (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
+            mProximityWakeLock = powerManager.newWakeLock(
+                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
+        }
+    }
+
+    /**
+     * Update variables which are activity-dependent or state-dependent.
+     */
+    private void init(Activity activity, Bundle savedInstanceState) {
         mActivity = activity;
         mContext = activity;
-        mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
-        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
+        mInitialOrientation = mContext.getResources().getConfiguration().orientation;
         mActivity.setVolumeControlStream(VoicemailPlaybackPresenter.PLAYBACK_STREAM);
 
         if (savedInstanceState != null) {
@@ -163,27 +206,58 @@ public class VoicemailPlaybackPresenter
             mPosition = savedInstanceState.getInt(CLIP_POSITION_KEY, 0);
             mIsPlaying = savedInstanceState.getBoolean(IS_PLAYING_STATE_KEY, false);
         }
-
-        PowerManager powerManager =
-                (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
-            mProximityWakeLock = powerManager.newWakeLock(
-                    PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
-        }
-
-        // mMediaPlayer is static to enable seamless playback during rotation. If we do not create
-        // a new MediaPlayer, we still need to update listeners to the current Presenter instance.
-        if (mMediaPlayer == null) {
-            mMediaPlayer = new MediaPlayer();
-            mIsPrepared = false;
-        }
-        mMediaPlayer.setOnPreparedListener(this);
-        mMediaPlayer.setOnErrorListener(this);
-        mMediaPlayer.setOnCompletionListener(this);
     }
 
+    /**
+     * Must be invoked when the parent Activity is saving it state.
+     */
+    public void onSaveInstanceState(Bundle outState) {
+        if (mView != null) {
+            outState.putParcelable(VOICEMAIL_URI_KEY, mVoicemailUri);
+            outState.putBoolean(IS_PREPARED_KEY, mIsPrepared);
+            outState.putInt(CLIP_POSITION_KEY, mView.getDesiredClipPosition());
+            outState.putBoolean(IS_PLAYING_STATE_KEY, mIsPlaying);
+        }
+    }
+
+    /**
+     * Specify the view which this presenter controls and the voicemail to prepare to play.
+     */
+    public void setPlaybackView(
+            PlaybackView view, Uri voicemailUri, boolean startPlayingImmediately) {
+        mView = view;
+        mView.setPresenter(this, voicemailUri);
+
+        if (mMediaPlayer != null && voicemailUri.equals(mVoicemailUri)) {
+            // Handles case where MediaPlayer was retained after an orientation change.
+            onPrepared(mMediaPlayer);
+            mView.onSpeakerphoneOn(isSpeakerphoneOn());
+        } else {
+            if (!voicemailUri.equals(mVoicemailUri)) {
+                mPosition = 0;
+            }
+
+            mVoicemailUri = voicemailUri;
+            mDuration.set(0);
+            mIsPlaying = startPlayingImmediately;
+
+            checkForContent();
+
+            // Default to earpiece.
+            mView.onSpeakerphoneOn(false);
+        }
+    }
+
+    /**
+     * Reset the presenter for playback.
+     */
     public void reset() {
-        pausePlayback();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+
+        disableProximitySensor(false /* waitForFarState */);
 
         mView = null;
         mVoicemailUri = null;
@@ -195,49 +269,32 @@ public class VoicemailPlaybackPresenter
     }
 
     /**
-     * Specify the view which this presenter controls and the voicemail for playback.
+     * Must be invoked when the parent activity is paused.
      */
-    public void setPlaybackView(
-            PlaybackView view, Uri voicemailUri, boolean startPlayingImmediately) {
-        mView = view;
-        mView.setPresenter(this);
-
-        if (mVoicemailUri != null && mVoicemailUri.equals(voicemailUri)) {
-            // Handles rotation case where playback view is set for the same voicemail.
-            if (mIsPrepared) {
-                onPrepared(mMediaPlayer);
-            } else {
-                checkForContent();
-            }
-            mView.onSpeakerphoneOn(isSpeakerphoneOn());
-        } else {
-            mVoicemailUri = voicemailUri;
-            mPosition = 0;
-            mDuration.set(0);
-            mIsPlaying = startPlayingImmediately;
-
-            // Default to earpiece.
-            mView.onSpeakerphoneOn(false);
-
-            checkForContent();
+    public void onPause() {
+        int orientation = mContext.getResources().getConfiguration().orientation;
+        if (mInitialOrientation != orientation && mIsPrepared) {
+            // If an orientation change triggers the pause, retain the MediaPlayer.
+            Log.d(TAG, "onPause: Orientation changed.");
+            return;
         }
-    }
 
-    public void onPause(boolean isFinishing) {
-        // Do not pause for orientation changes.
-        if (mIsPrepared && mMediaPlayer.isPlaying() && isFinishing) {
-            pausePlayback();
+        // Release the media player, otherwise there may be failures.
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
         }
 
         disableProximitySensor(false /* waitForFarState */);
     }
 
-    public void onDestroy(boolean isFinishing) {
-        // Do not release for orientation changes.
-        if (mIsPrepared && isFinishing) {
-            mMediaPlayer.release();
-            mIsPrepared = false;
-        }
+    /**
+     * Must be invoked when the parent activity is destroyed.
+     */
+    public void onDestroy() {
+        // Clear references to avoid leaks from the singleton instance.
+        mActivity = null;
+        mContext = null;
 
         if (mScheduledExecutorService != null) {
             mScheduledExecutorService.shutdown();
@@ -248,17 +305,6 @@ public class VoicemailPlaybackPresenter
             mFetchResultHandler.destroy();
             mFetchResultHandler = null;
         }
-
-        disableProximitySensor(false /* waitForFarState */);
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        if (mView != null) {
-            outState.putParcelable(VOICEMAIL_URI_KEY, mVoicemailUri);
-            outState.putBoolean(IS_PREPARED_KEY, mIsPrepared);
-            outState.putInt(CLIP_POSITION_KEY, mView.getDesiredClipPosition());
-            outState.putBoolean(IS_PLAYING_STATE_KEY, mIsPlaying);
-        }
     }
 
     /**
@@ -268,7 +314,7 @@ public class VoicemailPlaybackPresenter
      * voicemail we've been asked to play has any content available.
      * <p>
      * Notify the user that we are fetching the content, then check to see if the content field in
-     * the DB is set. If set, we proceed to {@link #prepareToPlayContent()} method. If not set, make
+     * the DB is set. If set, we proceed to {@link #prepareContent()} method. If not set, make
      * a request to fetch the content asynchronously via {@link #requestContent()}.
      */
     private void checkForContent() {
@@ -282,7 +328,7 @@ public class VoicemailPlaybackPresenter
             @Override
             public void onPostExecute(Boolean hasContent) {
                 if (hasContent) {
-                    prepareToPlayContent();
+                    prepareContent();
                 } else {
                     requestContent();
                 }
@@ -314,7 +360,7 @@ public class VoicemailPlaybackPresenter
      * will trigger a broadcast to request that the content be downloaded. It will add a listener to
      * the content resolver so that it will be notified when the has_content field changes. It will
      * also set a timer. If the has_content field changes to true within the allowed time, we will
-     * proceed to {@link #prepareToPlayContent()}. If the has_content field does not
+     * proceed to {@link #prepareContent()}. If the has_content field does not
      * become true within the allowed time, we will update the ui to reflect the fact that content
      * was not available.
      */
@@ -323,8 +369,7 @@ public class VoicemailPlaybackPresenter
             mFetchResultHandler.destroy();
         }
 
-        mFetchResultHandler = new FetchResultHandler(new Handler());
-        mFetchResultHandler.registerContentObserver(mVoicemailUri);
+        mFetchResultHandler = new FetchResultHandler(new Handler(), mVoicemailUri);
 
         // Send voicemail fetch request.
         Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, mVoicemailUri);
@@ -336,17 +381,13 @@ public class VoicemailPlaybackPresenter
         private AtomicBoolean mIsWaitingForResult = new AtomicBoolean(true);
         private final Handler mFetchResultHandler;
 
-        public FetchResultHandler(Handler handler) {
+        public FetchResultHandler(Handler handler, Uri voicemailUri) {
             super(handler);
             mFetchResultHandler = handler;
-        }
 
-        public void registerContentObserver(Uri voicemailUri) {
-            if (mIsWaitingForResult.get()) {
-                mContext.getContentResolver().registerContentObserver(
-                        voicemailUri, false, this);
-                mFetchResultHandler.postDelayed(this, FETCH_CONTENT_TIMEOUT_MS);
-            }
+            mContext.getContentResolver().registerContentObserver(
+                    voicemailUri, false, this);
+            mFetchResultHandler.postDelayed(this, FETCH_CONTENT_TIMEOUT_MS);
         }
 
         /**
@@ -354,7 +395,7 @@ public class VoicemailPlaybackPresenter
          */
         @Override
         public void run() {
-            if (mIsWaitingForResult.getAndSet(false)) {
+            if (mIsWaitingForResult.getAndSet(false) && mContext != null) {
                 mContext.getContentResolver().unregisterContentObserver(this);
                 if (mView != null) {
                     mView.setFetchContentTimeout();
@@ -363,7 +404,7 @@ public class VoicemailPlaybackPresenter
         }
 
         public void destroy() {
-            if (mIsWaitingForResult.getAndSet(false)) {
+            if (mIsWaitingForResult.getAndSet(false) && mContext != null) {
                 mContext.getContentResolver().unregisterContentObserver(this);
                 mFetchResultHandler.removeCallbacks(this);
             }
@@ -380,12 +421,10 @@ public class VoicemailPlaybackPresenter
 
                 @Override
                 public void onPostExecute(Boolean hasContent) {
-                    if (hasContent) {
-                        if (mIsWaitingForResult.getAndSet(false)) {
-                            mContext.getContentResolver().unregisterContentObserver(
-                                    FetchResultHandler.this);
-                            prepareToPlayContent();
-                        }
+                    if (hasContent && mContext != null && mIsWaitingForResult.getAndSet(false)) {
+                        mContext.getContentResolver().unregisterContentObserver(
+                                FetchResultHandler.this);
+                        prepareContent();
                     }
                 }
             });
@@ -400,15 +439,27 @@ public class VoicemailPlaybackPresenter
      * media player. If preparation is successful, the media player will {@link #onPrepared()},
      * and it will call {@link #onError()} otherwise.
      */
-    private void prepareToPlayContent() {
+    private void prepareContent() {
         if (mView == null) {
             return;
         }
-        mIsPrepared = false;
+        Log.d(TAG, "prepareContent");
+
+        // Release the previous media player, otherwise there may be failures.
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
 
         mView.setIsBuffering();
+        mIsPrepared = false;
 
         try {
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setOnPreparedListener(this);
+            mMediaPlayer.setOnErrorListener(this);
+            mMediaPlayer.setOnCompletionListener(this);
+
             mMediaPlayer.reset();
             mMediaPlayer.setDataSource(mContext, mVoicemailUri);
             mMediaPlayer.setAudioStreamType(PLAYBACK_STREAM);
@@ -426,12 +477,15 @@ public class VoicemailPlaybackPresenter
         if (mView == null) {
             return;
         }
+        Log.d(TAG, "onPrepared");
         mIsPrepared = true;
 
         mDuration.set(mMediaPlayer.getDuration());
 
         mView.enableUiElements();
+        Log.d(TAG, "onPrepared: mPosition=" + mPosition);
         mView.setClipPosition(mPosition, mDuration.get());
+        mMediaPlayer.seekTo(mPosition);
 
         if (mIsPlaying) {
             resumePlayback();
@@ -451,12 +505,15 @@ public class VoicemailPlaybackPresenter
     }
 
     private void handleError(Exception e) {
+        Log.d(TAG, "handleError: Could not play voicemail " + e);
+
         if (mIsPrepared) {
             mMediaPlayer.release();
+            mMediaPlayer = null;
             mIsPrepared = false;
         }
 
-        mView.onPlaybackError(e);
+        mView.onPlaybackError();
 
         mPosition = 0;
         mIsPlaying = false;
@@ -476,15 +533,12 @@ public class VoicemailPlaybackPresenter
 
     @Override
     public void onAudioFocusChange(int focusChange) {
-        if (!mIsPrepared) {
-            return;
-        }
-
-        boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
-                focusChange == AudioManager.AUDIOFOCUS_LOSS;
-        if (mMediaPlayer.isPlaying() && lostFocus) {
+        Log.d(TAG, "onAudioFocusChange: focusChange=" + focusChange);
+        boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
+                || focusChange == AudioManager.AUDIOFOCUS_LOSS;
+        if (mIsPlaying && focusChange == AudioManager.AUDIOFOCUS_LOSS) {
             pausePlayback();
-        } else if (!mMediaPlayer.isPlaying() && focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+        } else if (!mIsPlaying && focusChange == AudioManager.AUDIOFOCUS_GAIN) {
             resumePlayback();
         }
     }
@@ -506,25 +560,25 @@ public class VoicemailPlaybackPresenter
             mMediaPlayer.seekTo(mPosition);
 
             try {
-                // Grab audio focus here
+                // Grab audio focus.
                 int result = mAudioManager.requestAudioFocus(
-                        VoicemailPlaybackPresenter.this,
+                        this,
                         PLAYBACK_STREAM,
                         AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-
                 if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                     throw new RejectedExecutionException("Could not capture audio focus.");
                 }
 
-                // Can throw RejectedExecutionException
+                // Can throw RejectedExecutionException.
                 mMediaPlayer.start();
             } catch (RejectedExecutionException e) {
                 handleError(e);
             }
         }
 
-        enableProximitySensor();
+        Log.d(TAG, "Resumed playback at " + mPosition + ".");
         mView.onPlaybackStarted(mDuration.get(), getScheduledExecutorServiceInstance());
+        enableProximitySensor();
     }
 
     /**
@@ -535,17 +589,17 @@ public class VoicemailPlaybackPresenter
             return;
         }
 
-        mPosition = mMediaPlayer.getCurrentPosition();
         mIsPlaying = false;
 
         if (mMediaPlayer.isPlaying()) {
             mMediaPlayer.pause();
         }
 
-        mAudioManager.abandonAudioFocus(this);
-        mView.onPlaybackStopped();
+        mPosition = mMediaPlayer.getCurrentPosition();
+        Log.d(TAG, "Paused playback at " + mPosition + ".");
 
-        // Always disable the proximity sensor on stop.
+        mView.onPlaybackStopped();
+        mAudioManager.abandonAudioFocus(this);
         disableProximitySensor(true /* waitForFarState */);
     }
 
@@ -567,6 +621,9 @@ public class VoicemailPlaybackPresenter
     }
 
     private void enableProximitySensor() {
+        // Disable until proximity sensor behavior in onPause is fixed: b/21932251.
+
+        /*
         if (mProximityWakeLock == null || isSpeakerphoneOn() || !mIsPrepared
                 || !mMediaPlayer.isPlaying()) {
             return;
@@ -578,6 +635,7 @@ public class VoicemailPlaybackPresenter
         } else {
             Log.i(TAG, "Proximity wake lock already acquired");
         }
+        */
     }
 
     private void disableProximitySensor(boolean waitForFarState) {
@@ -606,12 +664,8 @@ public class VoicemailPlaybackPresenter
         return mAudioManager.isSpeakerphoneOn();
     }
 
-    public Uri getVoicemailUri() {
-        return mVoicemailUri;
-    }
-
     public int getMediaPlayerPosition() {
-        return mIsPrepared ? mMediaPlayer.getCurrentPosition() : 0;
+        return mIsPrepared && mMediaPlayer != null ? mMediaPlayer.getCurrentPosition() : 0;
     }
 
     private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
