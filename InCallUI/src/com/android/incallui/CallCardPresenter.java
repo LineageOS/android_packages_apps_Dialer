@@ -228,6 +228,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
 
+        if (previousPrimary != null && mPrimary == null) {
+            CallList.getInstance().removeCallUpdateListener(previousPrimary.getId(), this);
+        }
+
         if (mSecondary == null) {
             // Secondary call may have ended.  Update the ui.
             mSecondaryContactInfo = null;
