@@ -50,8 +50,9 @@ import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Displays and plays a single voicemail.
- * <p>
+ * Displays and plays a single voicemail. See {@link VoicemailPlaybackPresenter} for
+ * details on the voicemail playback implementation.
+ *
  * This class is not thread-safe, it is thread-confined. All calls to all public
  * methods on this class are expected to come from the main ui thread.
  */
@@ -178,12 +179,13 @@ public class VoicemailPlaybackLayout extends LinearLayout
             if (mPresenter == null) {
                 return;
             }
-            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mPresenter.getVoicemailUri(), null);
+            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mVoicemailUri, null);
         }
     };
 
     private Context mContext;
     private VoicemailPlaybackPresenter mPresenter;
+    private Uri mVoicemailUri;
 
     private boolean mIsPlaying = false;
 
@@ -209,8 +211,9 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     @Override
-    public void setPresenter(VoicemailPlaybackPresenter presenter) {
+    public void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri) {
         mPresenter = presenter;
+        mVoicemailUri = voicemailUri;
     }
 
     @Override
@@ -256,15 +259,13 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     @Override
-    public void onPlaybackError(Exception e) {
+    public void onPlaybackError() {
         if (mPositionUpdater != null) {
             mPositionUpdater.stopUpdating();
         }
 
         disableUiElements();
         mPlaybackPosition.setText(getString(R.string.voicemail_playback_error));
-
-        Log.e(TAG, "Could not play voicemail", e);
     }
 
 
