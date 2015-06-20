@@ -1643,12 +1643,17 @@ public class DialpadFragment extends Fragment
             if (mAnimate) {
                 dialpadView.animateShow();
             }
+            mFloatingActionButtonController.setVisible(false);
             mFloatingActionButtonController.scaleIn(mAnimate ? mDialpadSlideInDuration : 0);
             activity.onDialpadShown();
             mDigits.requestFocus();
         }
-        if (hidden && mAnimate) {
-            mFloatingActionButtonController.scaleOut();
+        if (hidden) {
+            if (mAnimate) {
+                mFloatingActionButtonController.scaleOut();
+            } else {
+                mFloatingActionButtonController.setVisible(false);
+            }
         }
     }
 
