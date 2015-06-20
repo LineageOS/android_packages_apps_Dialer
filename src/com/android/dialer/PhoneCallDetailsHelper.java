@@ -18,6 +18,7 @@ package com.android.dialer;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -140,6 +141,12 @@ public class PhoneCallDetailsHelper {
             views.voicemailTranscriptionView.setText(null);
             views.voicemailTranscriptionView.setVisibility(View.GONE);
         }
+
+        // Bold if not read
+        Typeface typeface = details.isRead ? Typeface.SANS_SERIF : Typeface.DEFAULT_BOLD;
+        views.nameView.setTypeface(typeface);
+        views.voicemailTranscriptionView.setTypeface(typeface);
+        views.callLocationAndDate.setTypeface(typeface);
     }
 
     /**
