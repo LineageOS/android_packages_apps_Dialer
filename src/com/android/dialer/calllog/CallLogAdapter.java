@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.os.Trace;
+import android.provider.CallLog;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -289,7 +290,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private ViewHolder createCallLogEntryViewHolder(ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
-
         CallLogListItemViewHolder viewHolder = CallLogListItemViewHolder.create(
                 view,
                 mContext,
@@ -358,6 +358,9 @@ public class CallLogAdapter extends GroupingListAdapter
         details.features = getCallFeatures(c, count);
         details.geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         details.transcription = c.getString(CallLogQuery.TRANSCRIPTION);
+        if (details.callTypes[0] == CallLog.Calls.VOICEMAIL_TYPE) {
+            details.isRead = c.getInt(CallLogQuery.IS_READ) == 1;
+        }
 
         if (!c.isNull(CallLogQuery.DATA_USAGE)) {
             details.dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
