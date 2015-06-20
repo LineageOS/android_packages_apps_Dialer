@@ -19,12 +19,9 @@ package com.android.dialer;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telecom.PhoneAccountHandle;
-import android.text.TextUtils;
 
 /**
  * The details of a phone call to be shown in the UI.
@@ -87,8 +84,17 @@ public class PhoneCallDetails {
     // Voicemail transcription
     public String transcription;
 
+    // The display string for the number.
     public String displayNumber;
+
+    // Whether the contact number is a voicemail number.
     public boolean isVoicemail;
+
+    /**
+     * If this is a voicemail, whether the message is read. For other types of calls, this defaults
+     * to {@code true}.
+     */
+    public boolean isRead = true;
 
     /**
      * Constructor with required fields for the details of a call with a number associated with a
@@ -104,7 +110,6 @@ public class PhoneCallDetails {
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
         this.isVoicemail = isVoicemail;
-
         this.displayNumber = PhoneNumberDisplayUtil.getDisplayNumber(
                 context,
                 this.number,
