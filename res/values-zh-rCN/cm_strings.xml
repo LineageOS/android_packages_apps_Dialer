@@ -100,5 +100,4 @@
   <string name="smart_mute_title">智能静音</string>
   <string name="smart_mute_summary">通过翻转设备静音来电</string>
   <string name="smart_dialer_title">智能呼叫</string>
-  <string name="smart_dialer_summary">移动设备到您的耳边时，自动呼叫该联系人</string>
 </resources>

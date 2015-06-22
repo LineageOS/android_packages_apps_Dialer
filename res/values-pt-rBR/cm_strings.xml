@@ -100,5 +100,4 @@
   <string name="smart_mute_title">Silenciar inteligente</string>
   <string name="smart_mute_summary">Silenciar a chamada recebida ao virar o dispositivo</string>
   <string name="smart_dialer_title">Chamada inteligente</string>
-  <string name="smart_dialer_summary">Chamar automaticamente o contato movendo seu telefone ao seu ouvido</string>
 </resources>

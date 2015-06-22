@@ -100,5 +100,5 @@
   <string name="smart_mute_title">Έξυπνη σίγαση</string>
   <string name="smart_mute_summary">Σίγαση της εισερχόμενης κλήσης αναποδογυρίζοντας την συσκευή</string>
   <string name="smart_dialer_title">Έξυπνη κλήση</string>
-  <string name="smart_dialer_summary">Αυτόματη κλήση της επαφής μετακινώντας τη συσκευή προς το αυτί σας</string>
+  <string name="smart_dialer_summary">Αυτόματη κλήση του πληκτρολογημένου αριθμού μετακινώντας τη συσκευή προς το αυτί σας</string>
 </resources>

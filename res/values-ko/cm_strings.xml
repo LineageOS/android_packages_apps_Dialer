@@ -100,5 +100,4 @@
   <string name="smart_mute_title">스마트 음소거</string>
   <string name="smart_mute_summary">휴대전화를 뒤집어 수신되는 전화 음소거</string>
   <string name="smart_dialer_title">스마트 전화</string>
-  <string name="smart_dialer_summary">휴대전화를 귀에 가까이 대어 자동으로 연락처에 전화</string>
 </resources>

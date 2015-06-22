@@ -100,5 +100,4 @@
   <string name="smart_mute_title">Akıllı ses kesme</string>
   <string name="smart_mute_summary">Cihazı çevirince gelen çağrıyı sessize alır</string>
   <string name="smart_dialer_title">Akıllı arama</string>
-  <string name="smart_dialer_summary">Cihazı kulağınıza götürünce kişiyi otomatik arar</string>
 </resources>

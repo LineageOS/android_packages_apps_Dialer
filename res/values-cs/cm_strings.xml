@@ -100,5 +100,5 @@
   <string name="smart_mute_title">Chytré ztlumení</string>
   <string name="smart_mute_summary">Ztišit příchozí volání otočením zařízení</string>
   <string name="smart_dialer_title">Inteligentní vytáčení</string>
-  <string name="smart_dialer_summary">Provedení automatického vytáčení při přiložení zařízení k uchu</string>
+  <string name="smart_dialer_summary">Automaticky vytočit zvolené číslo přesunutím zařízení k uchu</string>
 </resources>

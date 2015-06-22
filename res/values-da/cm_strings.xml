@@ -97,5 +97,4 @@
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kunne ikke afspille optagelse</string>
   <string name="smart_dialer_title">Smart-opkald</string>
-  <string name="smart_dialer_summary">Ringer automatisk op til kontaktpersonen ved at flytte din enhed op til øret</string>
 </resources>

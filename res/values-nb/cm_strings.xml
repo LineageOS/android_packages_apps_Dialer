@@ -91,5 +91,4 @@
   <string name="stop_call_playback">stopp</string>
   <string name="call_playback_error_message">Kunne ikke spille av opptak</string>
   <string name="smart_dialer_title">Smart samtale</string>
-  <string name="smart_dialer_summary">Automatisk ringe kontakten ved å flytte enheten til øret</string>
 </resources>

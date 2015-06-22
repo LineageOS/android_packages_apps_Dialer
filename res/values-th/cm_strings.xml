@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">แผงค้นหา T9</string>
   <string name="t9_search_input_locale">ป้อนข้อมูลค้นหา T9</string>
   <string name="t9_search_input_locale_default">ค่าเริ่มต้น</string>
+  <string name="type_blacklist">บล็อคสาย</string>
   <string name="call_log_stats_title">สถิติ</string>
   <string name="callStatsDetailTitle">รายละเอียดสถิติการโทร</string>
   <string name="call_stats">สถิติการโทร</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">สายโทรออก: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">สายที่ไม่ได้รับ</string>
   <string name="call_stats_missed_percent">สายที่ไม่ได้รับ: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">บล็อค</string>
+  <string name="call_stats_blacklist_percent">บล็อค: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">ทั้งหมด: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">ทั้งหมด: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">วันเริ่มต้น</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">รีเซ็ตขอบเขตเวลา</string>
   <string name="call_stats_sort_by_duration">เรียงตามระยะเวลาโทร</string>
   <string name="call_stats_sort_by_count">เรียงตามจำนวนครั้งการโทร</string>
+  <string name="menu_add_to_blacklist">เพิ่มไปยังรายชื่อที่ถูกบล็อค</string>
+  <string name="toast_added_to_blacklist">%s ถูกเพิ่มไปยังรายชื่อที่ถูกบล็อค</string>
   <string name="speed_dial_settings">ตั้งค่าการโทรอย่างรวดเร็ว</string>
   <string name="speed_dial_not_set">(ไม่ได้กำหนด)</string>
   <string name="speed_dial_replace">แทน​ที่</string>
@@ -87,9 +92,12 @@
   <string name="call_log_all_calls_header">การใช้สายทั้งหมด</string>
   <string name="calllog_search_hint">ค้นหาประวัติการโทร</string>
   <string name="msim_ime_dialog_title">รหัสอุปกรณ์</string>
+  <string name="call_log_blacklist_header">บล็อคการโทรเท่านั้น</string>
   <string name="start_call_playback">เล่นบันทึก</string>
   <string name="stop_call_playback">หยุด</string>
   <string name="call_playback_error_message">ไม่สามารถเล่นบันทึกได้</string>
+  <string name="sensors_category_title">ตั้งค่าเซนเซอร์</string>
+  <string name="smart_mute_title">ปิดเสียงอัจฉริยะ</string>
+  <string name="smart_mute_summary">ปิดเสียงเรียกเข้าโดยการพลิกอุปกรณ์</string>
   <string name="smart_dialer_title">การโทรอัจฉริยะ</string>
-  <string name="smart_dialer_summary">โทรออกไปหารายชื่อที่กำหนดอัตโนมัติเมื่อคุณยกโทรศัพท์ขึ้นมาแนบหู</string>
 </resources>
