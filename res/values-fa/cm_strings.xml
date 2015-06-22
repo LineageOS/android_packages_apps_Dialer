@@ -22,4 +22,5 @@
   <string name="enable_reverse_lookup_title">جستجوی برعکس</string>
   <string name="date_qs_lastmonth">ماه گذشته</string>
   <string name="speed_dial_delete">حذف</string>
+  <string name="video_call">تماس ویدیویی</string>
 </resources>

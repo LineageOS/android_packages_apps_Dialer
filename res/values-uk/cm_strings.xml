@@ -91,5 +91,4 @@
   <string name="stop_call_playback">Зупинити</string>
   <string name="call_playback_error_message">Не вдалося відтворити запис</string>
   <string name="smart_dialer_title">Розумний виклик</string>
-  <string name="smart_dialer_summary">Автоматично телефонувати контакту, у випадку піднесення пристрою до вуха</string>
 </resources>

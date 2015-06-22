@@ -16,17 +16,82 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="nearby_places">Proksimaj lokoj</string>
+  <string name="people">Personoj</string>
+  <string name="lookup_settings_label">Serĉado de telefonnumero</string>
+  <string name="lookup_settings_description">Serĉado de nekonataj telefonnumeroj</string>
+  <string name="enable_forward_lookup_title">Rekta serĉado</string>
+  <string name="enable_forward_lookup_summary">Montri proksimajn lokojn dum serĉado</string>
+  <string name="enable_people_lookup_title">Serĉado de personoj</string>
+  <string name="enable_people_lookup_summary">Montri retajn rezultojn dum serĉado en la ciferilo</string>
+  <string name="enable_reverse_lookup_title">Inversa serĉado</string>
+  <string name="forward_lookup_provider_title">Provizanto de rekta serĉado</string>
+  <string name="reverse_lookup_provider_title">Provizanto de inversa serĉado</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn ĉina (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Serĉo per T9 klavaro</string>
+  <string name="t9_search_input_locale">Enigo per T9 klavaro</string>
   <string name="t9_search_input_locale_default">Defaŭlto</string>
+  <string name="type_blacklist">Blokita alvoko</string>
   <string name="call_log_stats_title">Statistikoj</string>
+  <string name="callStatsDetailTitle">Detaloj pri alvokaj statistikoj</string>
+  <string name="call_stats">Statistikoj pri alvokoj</string>
   <string name="call_stats_refresh">Aktualiga klavo</string>
+  <string name="activity_title_call_stats">Statistikoj pri alvokoj</string>
   <string name="call_stats_nav_all">Ĉio</string>
+  <string name="call_stats_nav_outgoing">Foriranta</string>
+  <string name="call_stats_nav_missed">Maltrafitaj</string>
+  <string name="call_stats_missed">Maltrafitaj</string>
+  <string name="call_stats_missed_percent">Maltrafitaj: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blokita</string>
+  <string name="call_stats_blacklist_percent">Blokita: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Sumo: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Sumo: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Komencdato</string>
+  <string name="call_stats_filter_to">Fina dato</string>
+  <string name="call_stats_filter_picker_title">Filtra intervalo</string>
+  <string name="date_quick_selection">Rapida elekto</string>
+  <string name="date_qs_currentmonth">Aktuala monato</string>
+  <string name="date_qs_currentquarter">Aktuala jarkvarono</string>
+  <string name="date_qs_currentyear">Aktuala jaro</string>
   <string name="date_qs_lastweek">Lastsemajne</string>
   <string name="date_qs_lastmonth">Lastmonate</string>
+  <string name="date_qs_lastquarter">Lasta jarkvarono</string>
   <string name="date_qs_lastyear">Lastjare</string>
+  <string name="call_stats_date_filter">Agordi tempan intervalon</string>
+  <string name="call_stats_reset_filter">Rekomencigi tempan intervalon</string>
+  <string name="call_stats_sort_by_duration">Ordigi laŭ alvoka daŭro</string>
+  <string name="call_stats_sort_by_count">Ordigi laŭ alvoka nombro</string>
+  <string name="menu_add_to_blacklist">Aldoni al blokita listo</string>
+  <string name="toast_added_to_blacklist">%s estis aldonita al la blokita listo.</string>
+  <string name="speed_dial_settings">Agordi rapidan numerumon</string>
+  <string name="speed_dial_not_set">(ne agordita)</string>
   <string name="speed_dial_replace">Anstataŭigi</string>
-  <string name="speed_dial_delete">Foriga klavo</string>
+  <string name="speed_dial_delete">Forigi</string>
+  <string name="speed_dial_unassigned_dialog_message">Neniu ago estas atribuita por la klavo \'<xliff:g id="number">%s</xliff:g>\'. Ĉu vi deziras atribui agon nun?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Por uzi rapidan alvokon, malŝaltu unue aviadilan reĝimon.</string>
   <string name="yes">Jes</string>
   <string name="no">Ne</string>
+  <string name="incall_vibration_category_title">Vibrado okaze de alvoko</string>
+  <string name="incall_vibrate_outgoing_title">Vibrado okaze de respondo</string>
+  <string name="vibrate_call_waiting">Vibrado okaze de atendado</string>
+  <string name="incall_vibrate_hangup_title">Vibrado okaze de fino de alvoko</string>
+  <string name="incall_vibrate_45_title">Vibrado ĉiuminute</string>
+  <string name="incall_vibrate_45_summary">Vibrado je la 45a sekundo de ĉiuj minutoj dum forirantaj alvokoj</string>
+  <string name="detailed_incall_info_title">Detaligitaj informoj pri alvokanto</string>
+  <string name="detailed_incall_info_summary">Montri pliajn informojn pri la alvokanto en la alvoka ekrano</string>
+  <string name="video_call">Vida alvoko</string>
+  <string name="call_duration_active">Aktiva daŭro:</string>
+  <string name="call_duration_call_out">Alvoka daŭro:</string>
+  <string name="call_log_show_all_slots">Ĉiuj SIM-oj</string>
+  <string name="call_log_all_calls_header">Ĉiuj alvokoj</string>
+  <string name="calllog_search_hint">Serĉi en la protokolo</string>
+  <string name="msim_ime_dialog_title">Identigilo de la aparato</string>
+  <string name="call_log_blacklist_header">Nur blokitaj alvokoj</string>
+  <string name="start_call_playback">Ludi registradon</string>
   <string name="stop_call_playback">Ĉesi</string>
+  <string name="call_playback_error_message">Fiaskis ludi registradon</string>
+  <string name="sensors_category_title">Sentilaj opcioj</string>
+  <string name="smart_mute_title">Inteligenta silentigo</string>
+  <string name="smart_mute_summary">Silentigi la envenajn alvokojn renversante la aparaton</string>
+  <string name="smart_dialer_title">Inteligenta alvoko</string>
 </resources>

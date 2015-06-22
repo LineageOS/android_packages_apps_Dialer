@@ -97,5 +97,4 @@
   <string name="stop_call_playback">Detener</string>
   <string name="call_playback_error_message">Ocurrió un error al reproducir la grabación</string>
   <string name="smart_dialer_title">Llamada inteligente</string>
-  <string name="smart_dialer_summary">Llamar automáticamente al contacto al acercar el dispositivo a tu oreja</string>
 </resources>

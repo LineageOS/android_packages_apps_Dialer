@@ -100,5 +100,4 @@
   <string name="smart_mute_title">Sumanusis nutildymas</string>
   <string name="smart_mute_summary">Nutildyti įeinančius skambučius apverčiant įrenginį</string>
   <string name="smart_dialer_title">Sumanusis skambutis</string>
-  <string name="smart_dialer_summary">Automatiškai skambinti kontaktui pridedant įrenginį prie ausies</string>
 </resources>

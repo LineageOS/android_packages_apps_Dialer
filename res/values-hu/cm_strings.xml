@@ -100,5 +100,4 @@
   <string name="smart_mute_title">Intelligens némítás</string>
   <string name="smart_mute_summary">Elnémítja a bejövő hívást a készülék lefordításával</string>
   <string name="smart_dialer_title">Intelligens hívás</string>
-  <string name="smart_dialer_summary">A névjegy automatikus hívása, ha a telefont a füléhez emeli</string>
 </resources>

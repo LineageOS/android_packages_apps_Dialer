@@ -100,5 +100,4 @@
   <string name="smart_mute_title">Älykäs vaimennus</string>
   <string name="smart_mute_summary">Hiljennä tulevat puhelut kääntämällä laite</string>
   <string name="smart_dialer_title">Älykäs puhelu</string>
-  <string name="smart_dialer_summary">Soita automaattisesti siirtämällä laite korvalle</string>
 </resources>

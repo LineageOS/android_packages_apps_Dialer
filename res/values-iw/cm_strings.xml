@@ -96,6 +96,9 @@
   <string name="start_call_playback">נגן הקלטה</string>
   <string name="stop_call_playback">עצור</string>
   <string name="call_playback_error_message">נכשל בניגון הקלטה</string>
+  <string name="sensors_category_title">אפשרויות חיישן</string>
+  <string name="smart_mute_title">השתקה חכמה</string>
+  <string name="smart_mute_summary">השתק שיחה נכנסת על ידי הפיכת המכשיר</string>
   <string name="smart_dialer_title">שיחה חכמה</string>
-  <string name="smart_dialer_summary">חייג אוטומטית לאיש הקשר באמצעות קירוב המכשיר לאוזן</string>
+  <string name="smart_dialer_summary">התקשר למספר שחויג באופן אוטומטי באמצעות הצמדת המכשיר לאוזנך</string>
 </resources>
