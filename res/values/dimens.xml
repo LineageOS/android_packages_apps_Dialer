@@ -134,4 +134,15 @@
     <dimen name="preference_summary_line_spacing_extra">4dp</dimen>
 
     <dimen name="call_log_list_item_primary_action_dimen">36dp</dimen>
+
+    <!-- Dimensions for promo cards -->
+    <dimen name="promo_card_icon_size">24dp</dimen>
+    <dimen name="promo_card_start_padding">16dp</dimen>
+    <dimen name="promo_card_top_padding">21dp</dimen>
+    <dimen name="promo_card_main_padding">24dp</dimen>
+    <dimen name="promo_card_title_padding">12dp</dimen>
+    <dimen name="promo_card_action_vertical_padding">4dp</dimen>
+    <dimen name="promo_card_action_end_padding">4dp</dimen>
+    <dimen name="promo_card_action_between_padding">11dp</dimen>
+    <dimen name="promo_card_line_spacing">4dp</dimen>
 </resources>
