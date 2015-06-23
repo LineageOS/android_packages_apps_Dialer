@@ -270,7 +270,7 @@ public class InCallPresenter implements CallList.Listener,
             throw new IllegalArgumentException("registerActivity cannot be called with null");
         }
         if (mInCallActivity != null && mInCallActivity != inCallActivity) {
-            Log.wtf(this, "Setting a second activity before destroying the first.");
+            Log.w(this, "Setting a second activity before destroying the first.");
         }
         updateActivity(inCallActivity);
     }
