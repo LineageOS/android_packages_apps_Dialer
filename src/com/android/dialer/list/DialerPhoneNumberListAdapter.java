@@ -160,7 +160,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 break;
             case SHORTCUT_SEND_SMS_MESSAGE:
                 text = resources.getString(R.string.search_shortcut_send_sms_message);
-                drawableId = R.drawable.ic_textsms_24dp;
+                drawableId = R.drawable.ic_message_24dp;
                 break;
             case SHORTCUT_MAKE_VIDEO_CALL:
                 text = resources.getString(R.string.search_shortcut_make_video_call);

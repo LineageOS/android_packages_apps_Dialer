@@ -161,8 +161,7 @@
     <style name="CallLogActionStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/call_log_action_height</item>
-        <item name="android:background">@drawable/call_log_action_border</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
     </style>
