@@ -133,6 +133,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Just for backward compatibility. Should behave as same as {@link Intent#ACTION_DIAL}.
      */
     private static final String ACTION_TOUCH_DIALER = "com.android.phone.action.TOUCH_DIALER";
+    public static final String EXTRA_SHOW_TAB = "EXTRA_SHOW_TAB";
 
     private static final int ACTIVITY_REQUEST_CODE_VOICE_SEARCH = 1;
 
@@ -539,6 +540,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
             mIsRestarting = false;
         }
+
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
         mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
@@ -902,6 +904,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         setIntent(newIntent);
         mStateSaved = false;
         displayFragment(newIntent);
+
+        if (newIntent.hasExtra(EXTRA_SHOW_TAB)) {
+            mListsFragment.showTab(
+                    getIntent().getIntExtra(EXTRA_SHOW_TAB, mListsFragment.TAB_INDEX_SPEED_DIAL));
+        }
 
         invalidateOptionsMenu();
     }
