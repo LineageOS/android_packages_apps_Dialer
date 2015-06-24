@@ -18,16 +18,20 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.os.Trace;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +65,21 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private static final int VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM = 10;
     private static final int NO_EXPANDED_LIST_ITEM = -1;
+
+    private static final int VOICEMAIL_PROMO_CARD_POSITION = 0;
+    /**
+     * View type for voicemail promo card.  Note: Numbering starts at 20 to avoid collision
+     * with {@link com.android.common.widget.GroupingListAdapter#ITEM_TYPE_IN_GROUP}, and
+     * {@link CallLogAdapter#VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM}.
+     */
+    private static final int VIEW_TYPE_VOICEMAIL_PROMO_CARD = 20;
+
+    /**
+     * The key for the show voicemail promo card preference which will determine whether the promo
+     * card was permanently dismissed or not.
+     */
+    private static final String SHOW_VOICEMAIL_PROMO_CARD = "show_voicemail_promo_card";
+    private static final boolean SHOW_VOICEMAIL_PROMO_CARD_DEFAULT = true;
 
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
@@ -97,6 +116,10 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private boolean mLoading = true;
 
+    private SharedPreferences mPrefs;
+
+    private boolean mShowPromoCard = false;
+
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogViewsHelper;
 
@@ -132,6 +155,30 @@ public class CallLogAdapter extends GroupingListAdapter
                 expandViewHolderActions(viewHolder);
             }
 
+        }
+    };
+
+    /**
+     * Click handler used to dismiss the promo card when the user taps the "ok" button.
+     */
+    private final View.OnClickListener mOkActionListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            dismissVoicemailPromoCard();
+        }
+    };
+
+    /**
+     * Click handler used to send the user to the voicemail settings screen and then dismiss the
+     * promo card.
+     */
+    private final View.OnClickListener mVoicemailSettingsActionListener =
+            new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
+            mContext.startActivity(intent);
+            dismissVoicemailPromoCard();
         }
     };
 
@@ -212,6 +259,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
         mCallLogViewsHelper = new CallLogListItemHelper(phoneCallDetailsHelper, resources);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        maybeShowVoicemailPromoCard();
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -279,6 +328,8 @@ public class CallLogAdapter extends GroupingListAdapter
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM) {
             return ShowCallHistoryViewHolder.create(mContext, parent);
+        } else if (viewType == VIEW_TYPE_VOICEMAIL_PROMO_CARD) {
+            return createVoicemailPromoCardViewHolder(parent);
         }
         return createCallLogEntryViewHolder(parent);
     }
@@ -313,19 +364,52 @@ public class CallLogAdapter extends GroupingListAdapter
      * TODO: This gets called 20-30 times when Dialer starts up for a single call log entry and
      * should not. It invokes cross-process methods and the repeat execution can get costly.
      *
-     * @param callLogItemView the view corresponding to this entry
-     * @param count the number of entries in the current item, greater than 1 if it is a group
+     * @param ViewHolder The view corresponding to this entry.
+     * @param position The position of the entry.
      */
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        if (getItemViewType(position) == VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM) {
-            return;
-        }
         Trace.beginSection("onBindViewHolder: " + position);
+
+        switch (getItemViewType(position)) {
+            case VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM:
+                break;
+            case VIEW_TYPE_VOICEMAIL_PROMO_CARD:
+                bindVoicemailPromoCardViewHolder(viewHolder);
+                break;
+            default:
+                bindCallLogListViewHolder(viewHolder, position);
+                break;
+        }
+
+        Trace.endSection();
+    }
+
+    /**
+     * Binds the promo card view holder.
+     *
+     * @param viewHolder The promo card view holder.
+     */
+    protected void bindVoicemailPromoCardViewHolder(ViewHolder viewHolder) {
+        PromoCardViewHolder promoCardViewHolder = (PromoCardViewHolder) viewHolder;
+
+        promoCardViewHolder.getSettingsTextView().setOnClickListener(
+                mVoicemailSettingsActionListener);
+        promoCardViewHolder.getOkTextView().setOnClickListener(mOkActionListener);
+    }
+
+    /**
+     * Binds the view holder for the call log list item view.
+     *
+     * @param viewHolder The call log list item view holder.
+     * @param position The position of the list item.
+     */
+
+    private void bindCallLogListViewHolder(ViewHolder viewHolder, int position) {
         Cursor c = (Cursor) getItem(position);
         if (c == null) {
-            Trace.endSection();
             return;
         }
+
         int count = getGroupSize(position);
 
         final String number = c.getString(CallLogQuery.NUMBER);
@@ -428,20 +512,33 @@ public class CallLogAdapter extends GroupingListAdapter
             mViewTreeObserver = views.rootView.getViewTreeObserver();
             mViewTreeObserver.addOnPreDrawListener(this);
         }
-        Trace.endSection();
     }
 
     @Override
     public int getItemCount() {
-        return super.getItemCount() + (isShowingRecentsTab() ? 1 : 0);
+        return super.getItemCount() + ((isShowingRecentsTab() || mShowPromoCard) ? 1 : 0);
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == getItemCount() - 1 && isShowingRecentsTab()) {
             return VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM;
+        } else if (position == VOICEMAIL_PROMO_CARD_POSITION && mShowPromoCard) {
+            return VIEW_TYPE_VOICEMAIL_PROMO_CARD;
         }
         return super.getItemViewType(position);
+    }
+
+    /**
+     * Retrieves an item at the specified position, taking into account the presence of a promo
+     * card.
+     *
+     * @param position The position to retrieve.
+     * @return The item at that position.
+     */
+    @Override
+    public Object getItem(int position) {
+        return super.getItem(position - (mShowPromoCard ? 1 : 0));
     }
 
     protected boolean isShowingRecentsTab() {
@@ -596,5 +693,38 @@ public class CallLogAdapter extends GroupingListAdapter
        } else {
            return mContext.getResources().getString(R.string.call_log_header_other);
        }
+    }
+
+    /**
+     * Determines if the voicemail promo card should be shown or not.  The voicemail promo card will
+     * be shown as the first item in the voicemail tab.
+     */
+    private void maybeShowVoicemailPromoCard() {
+        boolean showPromoCard = mPrefs.getBoolean(SHOW_VOICEMAIL_PROMO_CARD,
+                SHOW_VOICEMAIL_PROMO_CARD_DEFAULT);
+        mShowPromoCard = (mVoicemailPlaybackPresenter != null) && showPromoCard;
+    }
+
+    /**
+     * Dismisses the voicemail promo card and refreshes the call log.
+     */
+    private void dismissVoicemailPromoCard() {
+        mPrefs.edit().putBoolean(SHOW_VOICEMAIL_PROMO_CARD, false).apply();
+        mShowPromoCard = false;
+        notifyItemRemoved(VOICEMAIL_PROMO_CARD_POSITION);
+    }
+
+    /**
+     * Creates the view holder for the voicemail promo card.
+     *
+     * @param parent The parent view.
+     * @return The {@link ViewHolder}.
+     */
+    protected ViewHolder createVoicemailPromoCardViewHolder(ViewGroup parent) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View view = inflater.inflate(R.layout.voicemail_promo_card, parent, false);
+
+        PromoCardViewHolder viewHolder = PromoCardViewHolder.create(view);
+        return viewHolder;
     }
 }
