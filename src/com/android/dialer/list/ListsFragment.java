@@ -84,6 +84,8 @@ public class ListsFragment extends Fragment
 
     private SharedPreferences mPrefs;
     private boolean mHasActiveVoicemailProvider;
+    private boolean mHasFetchedVoicemailStatus;
+    private boolean mShowVoicemailTabAfterVoicemailStatusIsFetched;
 
     private VoicemailStatusHelper mVoicemailStatusHelper;
     private ArrayList<OnPageChangeListener> mOnPageChangeListeners =
@@ -167,6 +169,7 @@ public class ListsFragment extends Fragment
         Trace.endSection();
 
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
+        mHasFetchedVoicemailStatus = false;
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mHasActiveVoicemailProvider = mPrefs.getBoolean(
@@ -204,7 +207,7 @@ public class ListsFragment extends Fragment
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOffscreenPageLimit(TAB_COUNT_WITH_VOICEMAIL - 1);
         mViewPager.setOnPageChangeListener(this);
-        mViewPager.setCurrentItem(getRtlPosition(TAB_INDEX_SPEED_DIAL));
+        showTab(TAB_INDEX_SPEED_DIAL);
 
         mTabTitles = new String[TAB_COUNT_WITH_VOICEMAIL];
         mTabTitles[TAB_INDEX_SPEED_DIAL] = getResources().getString(R.string.tab_speed_dial);
@@ -237,6 +240,24 @@ public class ListsFragment extends Fragment
         }
     }
 
+    /**
+     * Shows the tab with the specified index. If the voicemail tab index is specified, but the
+     * voicemail status hasn't been fetched, it will try to show the tab after the voicemail status
+     * has been fetched.
+     */
+    public void showTab(int index) {
+        if (index == TAB_INDEX_VOICEMAIL) {
+            if (mHasActiveVoicemailProvider) {
+                mViewPager.setCurrentItem(getRtlPosition(TAB_INDEX_VOICEMAIL));
+            } else if (!mHasFetchedVoicemailStatus) {
+                // Try to show the voicemail tab after the voicemail status returns.
+                mShowVoicemailTabAfterVoicemailStatusIsFetched = true;
+            }
+        } else {
+            mViewPager.setCurrentItem(getRtlPosition(index));
+        }
+    }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         mTabIndex = getRtlPosition(position);
@@ -251,6 +272,9 @@ public class ListsFragment extends Fragment
     @Override
     public void onPageSelected(int position) {
         mTabIndex = getRtlPosition(position);
+
+        // Show the tab which has been selected instead.
+        mShowVoicemailTabAfterVoicemailStatusIsFetched = false;
 
         final int count = mOnPageChangeListeners.size();
         for (int i = 0; i < count; i++) {
@@ -269,6 +293,8 @@ public class ListsFragment extends Fragment
 
     @Override
     public void onVoicemailStatusFetched(Cursor statusCursor) {
+        mHasFetchedVoicemailStatus = true;
+
         if (getActivity() == null || getActivity().isFinishing()) {
             return;
         }
@@ -284,6 +310,11 @@ public class ListsFragment extends Fragment
             mPrefs.edit()
                     .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, hasActiveVoicemailProvider)
                     .commit();
+        }
+
+        if (mHasActiveVoicemailProvider && mShowVoicemailTabAfterVoicemailStatusIsFetched) {
+            mShowVoicemailTabAfterVoicemailStatusIsFetched = false;
+            showTab(TAB_INDEX_VOICEMAIL);
         }
     }
 
