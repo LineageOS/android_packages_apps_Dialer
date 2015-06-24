@@ -36,6 +36,11 @@
     <!-- Color of the text describing an unconsumed voicemail. -->
     <color name="call_log_voicemail_highlight_color">#33b5e5</color>
 
+    <!-- Background color of visual voicemail promo card. -->
+    <color name="visual_voicemail_promo_card_background">#673ab7</color>
+    <color name="visual_voicemail_promo_card_divider">#7d57c1</color>
+    <color name="promo_card_text">#ffffff</color>
+
     <!-- Tint of the recent card phone icon; 30% black -->
     <color name="call_log_list_item_primary_action_icon_tint">#4d000000</color>
 
