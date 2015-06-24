@@ -83,7 +83,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     private ConferenceManagerFragment mConferenceManagerFragment;
     private FragmentManager mChildFragmentManager;
 
-    private boolean mIsForegroundActivity;
+    private boolean mIsVisible;
     private AlertDialog mDialog;
 
     /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
@@ -252,6 +252,8 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         Log.d(this, "onStart()...");
         super.onStart();
 
+        mIsVisible = true;
+
         if (mOrientationEventListener.canDetectOrientation()) {
             Log.v(this, "Orientation detection enabled.");
             mOrientationEventListener.enable();
@@ -270,8 +272,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     protected void onResume() {
         Log.i(this, "onResume()...");
         super.onResume();
-
-        mIsForegroundActivity = true;
 
         InCallPresenter.getInstance().setThemeColors();
         InCallPresenter.getInstance().onUiShowing(true);
@@ -298,10 +298,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     @Override
     protected void onPause() {
         Log.d(this, "onPause()...");
-        super.onPause();
-
-        mIsForegroundActivity = false;
-
         if (mDialpadFragment != null ) {
             mDialpadFragment.onDialerKeyUp(null);
         }
@@ -310,11 +306,13 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         if (isFinishing()) {
             InCallPresenter.getInstance().unsetActivity(this);
         }
+        super.onPause();
     }
 
     @Override
     protected void onStop() {
         Log.d(this, "onStop()...");
+        mIsVisible = false;
         InCallPresenter.getInstance().updateIsChangingConfigurations();
         InCallPresenter.getInstance().onActivityStopped();
         mOrientationEventListener.disable();
@@ -353,10 +351,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     }
 
     /**
-     * Returns true when theActivity is in foreground (between onResume and onPause).
+     * Returns true when the Activity is currently visible (between onStart and onStop).
      */
-    /* package */ boolean isForegroundActivity() {
-        return mIsForegroundActivity;
+    /* package */ boolean isVisible() {
+        return mIsVisible;
     }
 
     private boolean hasPendingDialogs() {
@@ -791,7 +789,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     }
 
     public void showPostCharWaitDialog(String callId, String chars) {
-        if (isForegroundActivity()) {
+        if (isVisible()) {
             final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
             fragment.show(getFragmentManager(), "postCharWait");
 
