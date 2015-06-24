@@ -272,8 +272,8 @@ public class VoicemailPlaybackPresenter
      * Must be invoked when the parent activity is paused.
      */
     public void onPause() {
-        int orientation = mContext.getResources().getConfiguration().orientation;
-        if (mInitialOrientation != orientation && mIsPrepared) {
+        if (mContext != null && mIsPrepared
+                && mInitialOrientation != mContext.getResources().getConfiguration().orientation) {
             // If an orientation change triggers the pause, retain the MediaPlayer.
             Log.d(TAG, "onPause: Orientation changed.");
             return;
