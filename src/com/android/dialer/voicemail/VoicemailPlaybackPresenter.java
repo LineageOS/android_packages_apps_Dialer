@@ -337,6 +337,10 @@ public class VoicemailPlaybackPresenter
     }
 
     private boolean queryHasContent(Uri voicemailUri) {
+        if (voicemailUri == null) {
+            return false;
+        }
+
         ContentResolver contentResolver = mContext.getContentResolver();
         Cursor cursor = contentResolver.query(
                 voicemailUri, HAS_CONTENT_PROJECTION, null, null, null);
