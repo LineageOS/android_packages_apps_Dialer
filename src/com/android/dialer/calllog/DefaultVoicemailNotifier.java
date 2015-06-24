@@ -149,6 +149,12 @@ public class DefaultVoicemailNotifier {
             }
         }
 
+        // If there is only one voicemail, set its transcription as the "long text".
+        String transcription = null;
+        if (newCalls.length == 1) {
+            transcription = newCalls[0].transcription;
+        }
+
         if (newCallUri != null && callToNotify == null) {
             Log.e(TAG, "The new call could not be found in the call log: " + newCallUri);
         }
@@ -163,6 +169,7 @@ public class DefaultVoicemailNotifier {
                 .setSmallIcon(icon)
                 .setContentTitle(title)
                 .setContentText(callers)
+                .setStyle(new Notification.BigTextStyle().bigText(transcription))
                 .setColor(resources.getColor(R.color.dialer_theme_color))
                 .setDefaults(callToNotify != null ? Notification.DEFAULT_ALL : 0)
                 .setDeleteIntent(createMarkNewVoicemailsAsOldIntent())
@@ -205,15 +212,23 @@ public class DefaultVoicemailNotifier {
         public final int numberPresentation;
         public final String accountComponentName;
         public final String accountId;
+        public final String transcription;
 
-        public NewCall(Uri callsUri, Uri voicemailUri, String number,
-                int numberPresentation, String accountComponentName, String accountId) {
+        public NewCall(
+                Uri callsUri,
+                Uri voicemailUri,
+                String number,
+                int numberPresentation,
+                String accountComponentName,
+                String accountId,
+                String transcription) {
             this.callsUri = callsUri;
             this.voicemailUri = voicemailUri;
             this.number = number;
             this.numberPresentation = numberPresentation;
             this.accountComponentName = accountComponentName;
             this.accountId = accountId;
+            this.transcription = transcription;
         }
     }
 
@@ -236,8 +251,13 @@ public class DefaultVoicemailNotifier {
      */
     private static final class DefaultNewCallsQuery implements NewCallsQuery {
         private static final String[] PROJECTION = {
-            Calls._ID, Calls.NUMBER, Calls.VOICEMAIL_URI, Calls.NUMBER_PRESENTATION,
-            Calls.PHONE_ACCOUNT_COMPONENT_NAME, Calls.PHONE_ACCOUNT_ID
+            Calls._ID,
+            Calls.NUMBER,
+            Calls.VOICEMAIL_URI,
+            Calls.NUMBER_PRESENTATION,
+            Calls.PHONE_ACCOUNT_COMPONENT_NAME,
+            Calls.PHONE_ACCOUNT_ID,
+            Calls.TRANSCRIPTION
         };
         private static final int ID_COLUMN_INDEX = 0;
         private static final int NUMBER_COLUMN_INDEX = 1;
@@ -245,6 +265,7 @@ public class DefaultVoicemailNotifier {
         private static final int NUMBER_PRESENTATION_COLUMN_INDEX = 3;
         private static final int PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX = 4;
         private static final int PHONE_ACCOUNT_ID_COLUMN_INDEX = 5;
+        private static final int TRANSCRIPTION_COLUMN_INDEX = 6;
 
         private final ContentResolver mContentResolver;
 
@@ -279,10 +300,14 @@ public class DefaultVoicemailNotifier {
             Uri callsUri = ContentUris.withAppendedId(
                     Calls.CONTENT_URI_WITH_VOICEMAIL, cursor.getLong(ID_COLUMN_INDEX));
             Uri voicemailUri = voicemailUriString == null ? null : Uri.parse(voicemailUriString);
-            return new NewCall(callsUri, voicemailUri, cursor.getString(NUMBER_COLUMN_INDEX),
+            return new NewCall(
+                    callsUri,
+                    voicemailUri,
+                    cursor.getString(NUMBER_COLUMN_INDEX),
                     cursor.getInt(NUMBER_PRESENTATION_COLUMN_INDEX),
                     cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX),
-                    cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX));
+                    cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX),
+                    cursor.getString(TRANSCRIPTION_COLUMN_INDEX));
         }
     }
 
