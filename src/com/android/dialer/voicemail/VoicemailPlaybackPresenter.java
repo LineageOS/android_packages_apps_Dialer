@@ -33,6 +33,7 @@ import android.os.PowerManager;
 import android.provider.VoicemailContract;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import android.widget.SeekBar;
 
 import com.android.dialer.R;
@@ -285,6 +286,7 @@ public class VoicemailPlaybackPresenter
             mMediaPlayer = null;
         }
 
+        mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
         disableProximitySensor(false /* waitForFarState */);
     }
 
@@ -578,7 +580,11 @@ public class VoicemailPlaybackPresenter
 
         Log.d(TAG, "Resumed playback at " + mPosition + ".");
         mView.onPlaybackStarted(mDuration.get(), getScheduledExecutorServiceInstance());
-        enableProximitySensor();
+        if (isSpeakerphoneOn()) {
+            mActivity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            enableProximitySensor();
+        }
     }
 
     /**
@@ -600,6 +606,8 @@ public class VoicemailPlaybackPresenter
 
         mView.onPlaybackStopped();
         mAudioManager.abandonAudioFocus(this);
+
+        mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
         disableProximitySensor(true /* waitForFarState */);
     }
 
@@ -621,11 +629,8 @@ public class VoicemailPlaybackPresenter
     }
 
     private void enableProximitySensor() {
-        // Disable until proximity sensor behavior in onPause is fixed: b/21932251.
-
-        /*
         if (mProximityWakeLock == null || isSpeakerphoneOn() || !mIsPrepared
-                || !mMediaPlayer.isPlaying()) {
+                || mMediaPlayer == null || !mMediaPlayer.isPlaying()) {
             return;
         }
 
@@ -635,7 +640,6 @@ public class VoicemailPlaybackPresenter
         } else {
             Log.i(TAG, "Proximity wake lock already acquired");
         }
-        */
     }
 
     private void disableProximitySensor(boolean waitForFarState) {
@@ -653,10 +657,15 @@ public class VoicemailPlaybackPresenter
 
     public void setSpeakerphoneOn(boolean on) {
         mAudioManager.setSpeakerphoneOn(on);
+
         if (on) {
             disableProximitySensor(false /* waitForFarState */);
+            if (mIsPrepared && mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+                mActivity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
         } else {
             enableProximitySensor();
+            mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
