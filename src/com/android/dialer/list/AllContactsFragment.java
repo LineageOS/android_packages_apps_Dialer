@@ -75,7 +75,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         super.onLoadFinished(loader, data);
 
-        if (data.getCount() == 0) {
+        if (data == null || data.getCount() == 0) {
             mEmptyListView.setVisibility(View.VISIBLE);
         }
     }
