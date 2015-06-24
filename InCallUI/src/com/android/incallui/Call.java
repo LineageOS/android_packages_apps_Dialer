@@ -319,7 +319,6 @@ public class Call {
     private static int translateState(int state) {
         switch (state) {
             case android.telecom.Call.STATE_NEW:
-                return Call.State.NEW;
             case android.telecom.Call.STATE_CONNECTING:
                 return Call.State.CONNECTING;
             case android.telecom.Call.STATE_SELECT_PHONE_ACCOUNT:

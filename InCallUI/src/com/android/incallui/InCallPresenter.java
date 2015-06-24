@@ -738,7 +738,7 @@ public class InCallPresenter implements CallList.Listener,
      * Returns true if the incall app is the foreground application.
      */
     public boolean isShowingInCallUi() {
-        return (isActivityStarted() && mInCallActivity.isForegroundActivity());
+        return (isActivityStarted() && mInCallActivity.isVisible());
     }
 
     /**
