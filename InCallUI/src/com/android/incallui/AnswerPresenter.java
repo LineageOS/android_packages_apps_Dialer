@@ -48,6 +48,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     @Override
     public void onUiShowing(boolean showing) {
         if (showing) {
+            CallList.getInstance().addListener(this);
             final CallList calls = CallList.getInstance();
             Call call;
             call = calls.getIncomingCall();
@@ -60,6 +61,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
                 processVideoUpgradeRequestCall(call);
             }
         } else {
+            CallList.getInstance().removeListener(this);
             // This is necessary because the activity can be destroyed while an incoming call exists.
             // This happens when back button is pressed while incoming call is still being shown.
             if (mCallId != null) {
