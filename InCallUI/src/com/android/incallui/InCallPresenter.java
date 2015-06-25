@@ -647,7 +647,7 @@ public class InCallPresenter implements CallList.Listener,
             if (mStatusBarNotifier == null) {
                 // The In Call UI has crashed but the notification still stayed up. We should not
                 // come to this stage.
-                StatusBarNotifier.clearInCallNotification(context);
+                StatusBarNotifier.clearAllCallNotifications(context);
             }
             return;
         }
@@ -671,7 +671,7 @@ public class InCallPresenter implements CallList.Listener,
         // By the time we receive this intent, we could be shut down and call list
         // could be null.  Bail in those cases.
         if (mCallList == null) {
-            StatusBarNotifier.clearInCallNotification(context);
+            StatusBarNotifier.clearAllCallNotifications(context);
             return;
         }
 
@@ -689,7 +689,7 @@ public class InCallPresenter implements CallList.Listener,
         // By the time we receive this intent, we could be shut down and call list
         // could be null.  Bail in those cases.
         if (mCallList == null) {
-            StatusBarNotifier.clearInCallNotification(context);
+            StatusBarNotifier.clearAllCallNotifications(context);
             return;
         }
 
@@ -703,7 +703,7 @@ public class InCallPresenter implements CallList.Listener,
         Log.d(this, " acceptUpgradeRequest videoState " + videoState);
         // Bail if we have been shut down and the call list is null.
         if (mCallList == null) {
-            StatusBarNotifier.clearInCallNotification(context);
+            StatusBarNotifier.clearAllCallNotifications(context);
             Log.e(this, " acceptUpgradeRequest mCallList is empty so returning");
             return;
         }
@@ -720,7 +720,7 @@ public class InCallPresenter implements CallList.Listener,
         Log.d(this, " declineUpgradeRequest");
         // Bail if we have been shut down and the call list is null.
         if (mCallList == null) {
-            StatusBarNotifier.clearInCallNotification(context);
+            StatusBarNotifier.clearAllCallNotifications(context);
             Log.e(this, " declineUpgradeRequest mCallList is empty so returning");
             return;
         }
