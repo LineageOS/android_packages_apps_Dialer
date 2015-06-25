@@ -15,7 +15,17 @@
 -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="false"
-        android:drawable="@drawable/ic_vm_play_dis" />
-    <item android:drawable="@drawable/ic_vm_play_dk" />
+
+    <item android:state_enabled="false">
+        <bitmap
+            android:src="@drawable/ic_pause_24dp"
+            android:tint="@color/voicemail_icon_disabled_tint" />
+    </item>
+
+    <item>
+        <bitmap
+            android:src="@drawable/ic_pause_24dp"
+            android:tint="@color/voicemail_playpause_icon_tint" />
+    </item>
+
 </selector>

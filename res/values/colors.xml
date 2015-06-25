@@ -30,9 +30,11 @@
     <color name="setting_background_color">#ffffff</color>
     <color name="setting_button_color">#eee</color>
 
+    <!-- 70% black -->
+    <color name="call_log_icon_tint">#b3000000</color>
+    <color name="call_log_list_item_primary_action_icon_tint">@color/call_log_icon_tint</color>
     <!-- Color of the text describing an unconsumed missed call. -->
     <color name="call_log_missed_call_highlight_color">@color/dialer_red_highlight_color</color>
-
     <!-- Color of the text describing an unconsumed voicemail. -->
     <color name="call_log_voicemail_highlight_color">#33b5e5</color>
 
@@ -41,19 +43,13 @@
     <color name="visual_voicemail_promo_card_divider">#7d57c1</color>
     <color name="promo_card_text">#ffffff</color>
 
-    <!-- Tint of the recent card phone icon; 30% black -->
-    <color name="call_log_list_item_primary_action_icon_tint">#4d000000</color>
-
-    <color name="voicemail_playback_icon_tint">#8e8e8e</color>
-
-    <!--
-         Colour of voicemail progress bar to the right of position indicator.
-         Same as the background color of the dialer
-    -->
+    <color name="voicemail_icon_tint">@color/call_log_icon_tint</color>
+    <color name="voicemail_icon_disabled_tint">#80000000</color>
+    <color name="voicemail_playpause_icon_tint">@color/dialer_theme_color</color>
+    <!-- Colour of voicemail progress bar to the right of position indicator. -->
     <color name="voicemail_playback_seek_bar_yet_to_play">#cecece</color>
-
     <!-- Colour of voicemail progress bar to the left of position indicator. -->
-    <color name="voicemail_playback_seek_bar_already_played">#39c9ff</color>
+    <color name="voicemail_playback_seek_bar_already_played">@color/dialer_theme_color</color>
 
     <!-- Standard color for selected items. -->
     <color name="item_selected">#660099cc</color>
