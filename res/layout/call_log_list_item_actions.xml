@@ -28,6 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/call_log_action_divider" />
+
     <LinearLayout
         android:id="@+id/call_action"
         style="@style/CallLogActionStyle">
@@ -91,7 +96,7 @@
 
         <ImageView
             style="@style/CallLogActionIconStyle"
-            android:src="@drawable/ic_textsms_24dp" />
+            android:src="@drawable/ic_message_24dp" />
 
         <TextView
             style="@style/CallLogActionTextStyle"
@@ -105,7 +110,7 @@
 
         <ImageView
             style="@style/CallLogActionIconStyle"
-            android:src="@drawable/ic_more_horiz_24dp" />
+            android:src="@drawable/ic_info_outline_24dp" />
 
         <TextView
             style="@style/CallLogActionTextStyle"
