@@ -39,11 +39,10 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
-import com.android.dialer.PhoneCallDetailsHelper;
-import com.android.dialer.PhoneCallDetailsViews;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
@@ -139,7 +138,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
     private final Context mContext;
-    private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    private final TelecomCallLogCache mTelecomCallLogCache;
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
 
@@ -151,7 +150,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private CallLogListItemViewHolder(
             Context context,
             View.OnClickListener expandCollapseListener,
-            PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
+            TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             View rootView,
@@ -165,7 +164,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         mContext = context;
         mExpandCollapseListener = expandCollapseListener;
-        mPhoneNumberUtilsWrapper = phoneNumberUtilsWrapper;
+        mTelecomCallLogCache = telecomCallLogCache;
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
 
@@ -194,14 +193,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             View view,
             Context context,
             View.OnClickListener expandCollapseListener,
-            PhoneNumberUtilsWrapper phoneNumberUtilsWrapper,
+            TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
 
         return new CallLogListItemViewHolder(
                 context,
                 expandCollapseListener,
-                phoneNumberUtilsWrapper,
+                telecomCallLogCache,
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
                 view,
@@ -263,11 +262,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             // Treat as normal list item; show call button, if possible.
             boolean canPlaceCallToNumber =
-                    PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
+                    PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation);
 
             if (canPlaceCallToNumber) {
                 boolean isVoicemailNumber =
-                        mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
+                        mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
                 if (isVoicemailNumber) {
                     // Call to generic voicemail number, in case there are multiple accounts.
                     primaryActionButtonView.setTag(
@@ -294,8 +293,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      * buttons.
      */
     private void bindActionButtons() {
-        boolean canPlaceCallToNumber =
-                PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation);
+        boolean canPlaceCallToNumber = PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation);
 
         if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
             callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
@@ -309,7 +307,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         }
 
         // If one of the calls had video capabilities, show the video call button.
-        if (CallUtil.isVideoEnabled(mContext) && canPlaceCallToNumber &&
+        if (mTelecomCallLogCache.isVideoEnabled() && canPlaceCallToNumber &&
                 phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
             videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
             videoCallButtonView.setVisibility(View.VISIBLE);
@@ -440,15 +438,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     @NeededForTesting
     public static CallLogListItemViewHolder createForTest(Context context) {
         Resources resources = context.getResources();
-        PhoneNumberUtilsWrapper phoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(context);
+        TelecomCallLogCache telecomCallLogCache = new TelecomCallLogCache(context);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
-                context, resources, phoneNumberUtilsWrapper);
+                context, resources, telecomCallLogCache);
 
         CallLogListItemViewHolder viewHolder = new CallLogListItemViewHolder(
                 context,
                 null /* expandCollapseListener */,
-                phoneNumberUtilsWrapper,
-                new CallLogListItemHelper(phoneCallDetailsHelper, resources),
+                telecomCallLogCache,
+                new CallLogListItemHelper(phoneCallDetailsHelper, resources, telecomCallLogCache),
                 null /* voicemailPlaybackPresenter */,
                 new View(context),
                 new QuickContactBadge(context),

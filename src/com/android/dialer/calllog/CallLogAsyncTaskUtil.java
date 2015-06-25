@@ -32,6 +32,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
+import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -151,12 +152,9 @@ public class CallLogAsyncTaskUtil {
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfoHelper contactInfoHelper =
                     new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context));
-            PhoneNumberUtilsWrapper phoneNumberUtilsWrapper =
-                    new PhoneNumberUtilsWrapper(context);
-            boolean isVoicemail = phoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
+            boolean isVoicemail = PhoneNumberUtil.isVoicemailNumber(context, accountHandle, number);
             boolean shouldLookupNumber =
-                    PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                            && !isVoicemail;
+                    PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemail;
             ContactInfo info = shouldLookupNumber
                             ? contactInfoHelper.lookupNumber(number, countryIso)
                             : ContactInfo.EMPTY;

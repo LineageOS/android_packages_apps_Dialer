@@ -57,9 +57,9 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
-import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
-import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
 
 import java.util.List;
@@ -116,11 +116,10 @@ public class CallDetailActivity extends Activity
 
             // Cache the details about the phone number.
             final boolean canPlaceCallsTo =
-                    PhoneNumberUtilsWrapper.canPlaceCallsTo(mNumber, numberPresentation);
-            final PhoneNumberUtilsWrapper phoneUtils = new PhoneNumberUtilsWrapper(mContext);
+                    PhoneNumberUtil.canPlaceCallsTo(mNumber, numberPresentation);
             mIsVoicemailNumber =
-                    phoneUtils.isVoicemailNumber(accountHandle, mNumber);
-            final boolean isSipNumber = PhoneNumberUtilsWrapper.isSipNumber(mNumber);
+                    PhoneNumberUtil.isVoicemailNumber(mContext, accountHandle, mNumber);
+            final boolean isSipNumber = PhoneNumberUtil.isSipNumber(mNumber);
 
             final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
 

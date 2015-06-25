@@ -24,7 +24,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.dialer.PhoneCallDetails;
-import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
 
 /**
@@ -37,6 +36,7 @@ import com.android.dialer.R;
     private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
     /** Resources to look up strings. */
     private final Resources mResources;
+    private final TelecomCallLogCache mTelecomCallLogCache;
 
     /**
      * Creates a new helper instance.
@@ -45,9 +45,12 @@ import com.android.dialer.R;
      * @param phoneNumberHelper used to process phone number
      */
     public CallLogListItemHelper(
-            PhoneCallDetailsHelper phoneCallDetailsHelper, Resources resources) {
+            PhoneCallDetailsHelper phoneCallDetailsHelper,
+            Resources resources,
+            TelecomCallLogCache telecomCallLogCache) {
         mPhoneCallDetailsHelper = phoneCallDetailsHelper;
         mResources = resources;
+        mTelecomCallLogCache = telecomCallLogCache;
     }
 
     /**
@@ -58,14 +61,15 @@ import com.android.dialer.R;
      * @param details the details of a phone call needed to fill in the data
      */
     public void setPhoneCallDetails(
-            Context context, CallLogListItemViewHolder views, PhoneCallDetails details) {
+            CallLogListItemViewHolder views,
+            PhoneCallDetails details) {
         mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
 
         // Set the accessibility text for the contact badge
         views.quickContactView.setContentDescription(getContactBadgeDescription(details));
 
         // Set the primary action accessibility description
-        views.primaryActionView.setContentDescription(getCallDescription(context, details));
+        views.primaryActionView.setContentDescription(getCallDescription(details));
 
         // Cache name or number of caller.  Used when setting the content descriptions of buttons
         // when the actions ViewStub is inflated.
@@ -151,7 +155,7 @@ import com.android.dialer.R;
      * @param details Details of call.
      * @return Return call action description.
      */
-    public CharSequence getCallDescription(Context context, PhoneCallDetails details) {
+    public CharSequence getCallDescription(PhoneCallDetails details) {
         int lastCallType = getLastCallType(details.callTypes);
         boolean isVoiceMail = lastCallType == Calls.VOICEMAIL_TYPE;
 
@@ -183,7 +187,7 @@ import com.android.dialer.R;
         }
 
         int stringID = getCallDescriptionStringID(details.callTypes);
-        String accountLabel = PhoneAccountUtils.getAccountLabel(context, details.accountHandle);
+        String accountLabel = mTelecomCallLogCache.getAccountLabel(details.accountHandle);
 
         // Use chosen string resource to build up the message.
         CharSequence onAccountLabel = accountLabel == null

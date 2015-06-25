@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.dialer.R;
+import com.android.dialer.util.PhoneNumberUtil;
 
 /**
  * Helper for formatting and managing the display of phone numbers.
@@ -49,7 +50,7 @@ public class PhoneNumberDisplayUtil {
         if (isVoicemail) {
             return context.getResources().getString(R.string.voicemail);
         }
-        if (PhoneNumberUtilsWrapper.isLegacyUnknownNumbers(number)) {
+        if (PhoneNumberUtil.isLegacyUnknownNumbers(number)) {
             return context.getResources().getString(R.string.unknown);
         }
         return "";

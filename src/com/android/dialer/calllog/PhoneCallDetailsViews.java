@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.dialer;
+package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.dialer.calllog.CallTypeIconsView;
+import com.android.dialer.R;
 
 /**
  * Encapsulates the views that are used to display the details of a phone call in the call log.

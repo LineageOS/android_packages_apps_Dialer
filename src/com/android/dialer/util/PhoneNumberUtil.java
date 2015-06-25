@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.calllog;
+package com.android.dialer.util;
 
 import android.content.Context;
 import android.provider.CallLog;
@@ -31,28 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- */
-public class PhoneNumberUtilsWrapper {
+public class PhoneNumberUtil {
     private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
-    private static final long MAX_VOICEMAIL_CACHE_AGE_IN_MS = 60 * 1000;  // 60 seconds
-    private final Context mContext;
-
-    // Keeps a cache of recently-made voicemail queries.  The entire point of this cache is to
-    // reduce the number of cross-process requests to TelecomManager.
-    // Maps from a phone-account/number pair to a boolean because multiple numbers could return true
-    // for the voicemail number if those numbers are not pre-normalized.
-    //
-    // TODO: Dialer should be fixed so as not to check isVoicemail() so often but at the time of
-    // this writing, that was a much larger undertaking than creating this cache.
-    private final Map<Pair<PhoneAccountHandle, CharSequence>, Boolean> mVoicemailQueryCache =
-            new HashMap<>();
-    private long mVoicemailCacheTimestamp = 0;
-
-    public PhoneNumberUtilsWrapper(Context context) {
-        mContext = context;
-    }
 
     /** Returns true if it is possible to place a call to the given number. */
     public static boolean canPlaceCallsTo(CharSequence number, int presentation) {
@@ -64,34 +44,15 @@ public class PhoneNumberUtilsWrapper {
      * Returns true if the given number is the number of the configured voicemail. To be able to
      * mock-out this, it is not a static method.
      */
-    public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
+    public static boolean isVoicemailNumber(
+            Context context, PhoneAccountHandle accountHandle, CharSequence number) {
         if (TextUtils.isEmpty(number)) {
             return false;
         }
 
-        long currentTime = System.currentTimeMillis();
-        // check the age of the voicemail cache first.
-        if (currentTime - mVoicemailCacheTimestamp > MAX_VOICEMAIL_CACHE_AGE_IN_MS) {
-            mVoicemailQueryCache.clear();
-
-            // We set the timestamp of the voicemail cache to the point where the cache is recreated
-            // instead of when an item is added.
-            // 1) This is easier to write
-            // 2) Ensures that the oldest entry is never older than MAX_VOICEMAIL_CACHE_AGE
-            mVoicemailCacheTimestamp = currentTime;
-        }
-
-        Pair<PhoneAccountHandle, CharSequence> key = new Pair<>(accountHandle, number);
-        if (mVoicemailQueryCache.containsKey(key)) {
-            return mVoicemailQueryCache.get(key);
-        } else {
-            final TelecomManager telecomManager =
-                    (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
-            Boolean isVoicemail =
-                    telecomManager.isVoiceMailNumber(accountHandle, number.toString());
-            mVoicemailQueryCache.put(key, isVoicemail);
-            return isVoicemail;
-        }
+        final TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        return telecomManager.isVoiceMailNumber(accountHandle, number.toString());
     }
 
     /**
@@ -102,8 +63,11 @@ public class PhoneNumberUtilsWrapper {
         return number != null && PhoneNumberHelper.isUriNumber(number.toString());
     }
 
-    public boolean isUnknownNumberThatCanBeLookedUp(PhoneAccountHandle accountHandle,
-            CharSequence number, int presentation) {
+    public static boolean isUnknownNumberThatCanBeLookedUp(
+            Context context,
+            PhoneAccountHandle accountHandle,
+            CharSequence number,
+            int presentation) {
         if (presentation == CallLog.Calls.PRESENTATION_UNKNOWN) {
             return false;
         }
@@ -116,7 +80,7 @@ public class PhoneNumberUtilsWrapper {
         if (TextUtils.isEmpty(number)) {
             return false;
         }
-        if (isVoicemailNumber(accountHandle, number)) {
+        if (isVoicemailNumber(context, accountHandle, number)) {
             return false;
         }
         if (isLegacyUnknownNumbers(number)) {
