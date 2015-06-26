@@ -74,7 +74,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="top|center_horizontal"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/contactPhoto"
+            android:importantForAccessibility="no"
             android:background="@android:color/white"
             android:src="@drawable/img_no_image_automirrored" />
 
