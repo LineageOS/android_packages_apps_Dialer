@@ -70,13 +70,13 @@ public class VoicemailPlaybackLayout extends LinearLayout
         /** Update rate for the slider, 30fps. */
         private static final int SLIDER_UPDATE_PERIOD_MILLIS = 1000 / 30;
 
-        private int mDuration;
+        private int mDurationMs;
         private final ScheduledExecutorService mExecutorService;
         private final Object mLock = new Object();
         @GuardedBy("mLock") private ScheduledFuture<?> mScheduledFuture;
 
-        public PositionUpdater(int duration, ScheduledExecutorService executorService) {
-            mDuration = duration;
+        public PositionUpdater(int durationMs, ScheduledExecutorService executorService) {
+            mDurationMs = durationMs;
             mExecutorService = executorService;
         }
 
@@ -85,15 +85,15 @@ public class VoicemailPlaybackLayout extends LinearLayout
             post(new Runnable() {
                 @Override
                 public void run() {
-                    int currentPosition = 0;
+                    int currentPositionMs = 0;
                     synchronized (mLock) {
                         if (mScheduledFuture == null || mPresenter == null) {
                             // This task has been canceled. Just stop now.
                             return;
                         }
-                        currentPosition = mPresenter.getMediaPlayerPosition();
+                        currentPositionMs = mPresenter.getMediaPlayerPosition();
                     }
-                    setClipPosition(currentPosition, mDuration);
+                    setClipPosition(currentPositionMs, mDurationMs);
                 }
             });
         }
@@ -193,7 +193,9 @@ public class VoicemailPlaybackLayout extends LinearLayout
     private ImageButton mStartStopButton;
     private ImageButton mPlaybackSpeakerphone;
     private ImageButton mDeleteButton;
-    private TextView mPlaybackPosition;
+    private TextView mStateText;
+    private TextView mPositionText;
+    private TextView mTotalDurationText;
 
     private PositionUpdater mPositionUpdater;
 
@@ -224,7 +226,9 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mStartStopButton = (ImageButton) findViewById(R.id.playback_start_stop);
         mPlaybackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
         mDeleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
-        mPlaybackPosition = (TextView) findViewById(R.id.playback_position_text);
+        mStateText = (TextView) findViewById(R.id.playback_state_text);
+        mPositionText = (TextView) findViewById(R.id.playback_position_text);
+        mTotalDurationText = (TextView) findViewById(R.id.total_duration_text);
 
         mPlaybackSeek.setOnSeekBarChangeListener(mSeekBarChangeListener);
         mStartStopButton.setOnClickListener(mStartStopButtonListener);
@@ -236,7 +240,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     public void onPlaybackStarted(int duration, ScheduledExecutorService executorService) {
         mIsPlaying = true;
 
-        mStartStopButton.setImageResource(R.drawable.ic_hold_pause);
+        mStartStopButton.setImageResource(R.drawable.ic_pause);
 
         if (mPresenter != null) {
             onSpeakerphoneOn(mPresenter.isSpeakerphoneOn());
@@ -250,7 +254,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     public void onPlaybackStopped() {
         mIsPlaying = false;
 
-        mStartStopButton.setImageResource(R.drawable.ic_play);
+        mStartStopButton.setImageResource(R.drawable.ic_play_arrow);
 
         if (mPositionUpdater != null) {
             mPositionUpdater.stopUpdating();
@@ -265,7 +269,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         }
 
         disableUiElements();
-        mPlaybackPosition.setText(getString(R.string.voicemail_playback_error));
+        mPositionText.setText(getString(R.string.voicemail_playback_error));
     }
 
 
@@ -275,12 +279,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
         }
 
         if (on) {
-            mPlaybackSpeakerphone.setImageResource(R.drawable.ic_speakerphone_on);
+            mPlaybackSpeakerphone.setImageResource(R.drawable.ic_volume_up_24dp);
             // Speaker is now on, tapping button will turn it off.
             mPlaybackSpeakerphone.setContentDescription(
                     mContext.getString(R.string.voicemail_speaker_off));
         } else {
-            mPlaybackSpeakerphone.setImageResource(R.drawable.ic_speakerphone_off);
+            mPlaybackSpeakerphone.setImageResource(R.drawable.ic_volume_down_24dp);
             // Speaker is now off, tapping button will turn it on.
             mPlaybackSpeakerphone.setContentDescription(
                     mContext.getString(R.string.voicemail_speaker_on));
@@ -288,33 +292,36 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     @Override
-    public void setClipPosition(int clipPositionInMillis, int clipLengthInMillis) {
-        int seekBarPosition = Math.max(0, clipPositionInMillis);
-        int seekBarMax = Math.max(seekBarPosition, clipLengthInMillis);
+    public void setClipPosition(int positionMs, int durationMs) {
+        int seekBarPositionMs = Math.max(0, positionMs);
+        int seekBarMax = Math.max(seekBarPositionMs, durationMs);
         if (mPlaybackSeek.getMax() != seekBarMax) {
             mPlaybackSeek.setMax(seekBarMax);
         }
 
-        mPlaybackSeek.setProgress(seekBarPosition);
-        mPlaybackPosition.setText(formatAsMinutesAndSeconds(seekBarMax - seekBarPosition));
+        mPlaybackSeek.setProgress(seekBarPositionMs);
+
+        mPositionText.setText(formatAsMinutesAndSeconds(seekBarPositionMs));
+        mTotalDurationText.setText(formatAsMinutesAndSeconds(durationMs));
+        mStateText.setText(null);
     }
 
     @Override
     public void setIsBuffering() {
         disableUiElements();
-        mPlaybackPosition.setText(getString(R.string.voicemail_buffering));
+        mStateText.setText(getString(R.string.voicemail_buffering));
     }
 
     @Override
     public void setIsFetchingContent() {
         disableUiElements();
-        mPlaybackPosition.setText(getString(R.string.voicemail_fetching_content));
+        mStateText.setText(getString(R.string.voicemail_fetching_content));
     }
 
     @Override
     public void setFetchContentTimeout() {
         disableUiElements();
-        mPlaybackPosition.setText(getString(R.string.voicemail_fetching_timout));
+        mStateText.setText(getString(R.string.voicemail_fetching_timout));
     }
 
     @Override
@@ -328,6 +335,9 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mPlaybackSpeakerphone.setEnabled(false);
         mPlaybackSeek.setProgress(0);
         mPlaybackSeek.setEnabled(false);
+
+        mPositionText.setText(formatAsMinutesAndSeconds(0));
+        mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
     }
 
     @Override
