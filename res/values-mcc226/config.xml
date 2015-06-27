@@ -14,6 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Allow recording for country: Romania-->
+<!--Legal precedent source: http://www.dsclex.ro/coduri/cciv2.htm
+    http://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
+    http://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php -->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
