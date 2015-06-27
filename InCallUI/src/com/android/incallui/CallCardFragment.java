@@ -42,6 +42,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -92,6 +93,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      * resetting to its previous value.
      */
     private static final long CALL_STATE_LABEL_RESET_DELAY_MS = 3000;
+    /**
+     * Amount of time to wait before sending an announcement via the accessibility manager.
+     * When the call state changes to an outgoing or incoming state for the first time, the
+     * UI can often be changing due to call updates or contact lookup. This allows the UI
+     * to settle to a stable state to ensure that the correct information is announced.
+     */
+    private static final long ACCESSIBILITY_ANNOUNCEMENT_DELAY_MS = 500;
 
     private AnimatorSet mAnimatorSet;
     private int mShrinkAnimationDuration;
@@ -604,15 +612,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         } else {
             mCallStateVideoCallIcon.setVisibility(View.GONE);
         }
-
-        if (state == Call.State.INCOMING) {
-            if (callStateLabel != null) {
-                getView().announceForAccessibility(callStateLabel.getCallStateLabel());
-            }
-            if (mPrimaryName.getText() != null) {
-                getView().announceForAccessibility(mPrimaryName.getText());
-            }
-        }
     }
 
     private void setCallStateLabel(CallStateLabel callStateLabel) {
@@ -861,9 +860,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_ANNOUNCEMENT) {
             dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
             dispatchPopulateAccessibilityEvent(event, mPrimaryName);
+            dispatchPopulateAccessibilityEvent(event, mCallTypeLabel);
             dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
             return;
         }
@@ -875,6 +875,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         dispatchPopulateAccessibilityEvent(event, mSecondaryCallProviderLabel);
 
         return;
+    }
+
+    @Override
+    public void sendAccessibilityAnnouncement() {
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getView() != null && getView().getParent() != null) {
+                    AccessibilityEvent event = AccessibilityEvent.obtain(
+                            AccessibilityEvent.TYPE_ANNOUNCEMENT);
+                    dispatchPopulateAccessibilityEvent(event);
+                    getView().getParent().requestSendAccessibilityEvent(getView(), event);
+                }
+            }
+        }, ACCESSIBILITY_ANNOUNCEMENT_DELAY_MS);
     }
 
     @Override

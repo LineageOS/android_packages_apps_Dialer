@@ -35,6 +35,7 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.view.accessibility.AccessibilityManager;
 
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -279,6 +280,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Hide the end call button instantly if we're receiving an incoming call.
         getUi().setEndCallButtonEnabled(shouldShowEndCallButton(mPrimary, callState),
                 callState != Call.State.INCOMING /* animate */);
+
+        maybeSendAccessibilityEvent(oldState, newState);
     }
 
     @Override
@@ -828,6 +831,23 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return true;
     }
 
+    private void maybeSendAccessibilityEvent(InCallState oldState, InCallState newState) {
+        if (mContext == null) {
+            return;
+        }
+        final AccessibilityManager am = (AccessibilityManager) mContext.getSystemService(
+                Context.ACCESSIBILITY_SERVICE);
+        if (!am.isEnabled()) {
+            return;
+        }
+        if ((oldState != InCallState.OUTGOING && newState == InCallState.OUTGOING)
+                || (oldState != InCallState.INCOMING && newState == InCallState.INCOMING)) {
+            if (getUi() != null) {
+                getUi().sendAccessibilityAnnouncement();
+            }
+        }
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setCallCardVisible(boolean visible);
@@ -851,5 +871,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void showManageConferenceCallButton(boolean visible);
         boolean isManageConferenceVisible();
         void animateForNewOutgoingCall();
+        void sendAccessibilityAnnouncement();
     }
 }
