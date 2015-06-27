@@ -21,17 +21,23 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Space;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
@@ -63,11 +69,20 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     private int mShowDialpadDuration;
     private int mHideDialpadDuration;
 
+    /**
+     * Used to resize the list view containing search results so that it fits the available space
+     * above the dialpad. Does not have a user-visible effect in regular touch usage (since the
+     * dialpad hides that portion of the ListView anyway), but improves usability in accessibility
+     * mode.
+     */
+    private Space mSpacer;
+
     private HostInterface mActivity;
 
     public interface HostInterface {
         public boolean isActionBarShowing();
         public boolean isDialpadShown();
+        public int getDialpadHeight();
         public int getActionBarHideOffset();
         public int getActionBarHeight();
     }
@@ -270,17 +285,35 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                     mActivity.isDialpadShown() ? 0 : mActionBarHeight -mShadowHeight;
         }
         if (animate) {
-            Interpolator interpolator =
-                    mActivity.isDialpadShown() ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT ;
-            int duration =
-                    mActivity.isDialpadShown() ? mShowDialpadDuration : mHideDialpadDuration;
+            // If the dialpad will be shown, then this animation involves sliding the list up.
+            final boolean slideUp = mActivity.isDialpadShown();
+
+            Interpolator interpolator = slideUp ? AnimUtils.EASE_IN : AnimUtils.EASE_OUT ;
+            int duration = slideUp ? mShowDialpadDuration : mHideDialpadDuration;
             getView().setTranslationY(startTranslationValue);
             getView().animate()
                     .translationY(endTranslationValue)
                     .setInterpolator(interpolator)
-                    .setDuration(duration);
+                    .setDuration(duration)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            if (!slideUp) {
+                                resizeListView();
+                            }
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            if (slideUp) {
+                                resizeListView();
+                            }
+                        }
+                    });
+
         } else {
             getView().setTranslationY(endTranslationValue);
+            resizeListView();
         }
 
         // There is padding which should only be applied when the dialpad is not shown.
@@ -291,6 +324,19 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 paddingTop,
                 listView.getPaddingEnd(),
                 listView.getPaddingBottom());
+    }
+
+    public void resizeListView() {
+        if (mSpacer == null) {
+            return;
+        }
+        int spacerHeight = mActivity.isDialpadShown() ? mActivity.getDialpadHeight() : 0;
+        if (spacerHeight != mSpacer.getHeight()) {
+            final LinearLayout.LayoutParams lp =
+                    (LinearLayout.LayoutParams) mSpacer.getLayoutParams();
+            lp.height = spacerHeight;
+            mSpacer.setLayoutParams(lp);
+        }
     }
 
     @Override
@@ -305,5 +351,17 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
     public void setOnTouchListener(View.OnTouchListener onTouchListener) {
         mActivityOnTouchListener = onTouchListener;
+    }
+
+    @Override
+    protected View inflateView(LayoutInflater inflater, ViewGroup container) {
+        final LinearLayout parent = (LinearLayout) super.inflateView(inflater, container);
+        final int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mSpacer = new Space(getActivity());
+            parent.addView(mSpacer,
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
+        }
+        return parent;
     }
 }
