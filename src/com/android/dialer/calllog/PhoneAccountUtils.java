@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Methods to help extract {@code PhoneAccount} information from database and Telecomm sources
+ * Methods to help extract {@code PhoneAccount} information from database and Telecomm sources.
  */
 public class PhoneAccountUtils {
     /**
@@ -87,7 +87,7 @@ public class PhoneAccountUtils {
      * Retrieve the account metadata, but if the account does not exist or the device has only a
      * single registered and enabled account, return null.
      */
-    private static PhoneAccount getAccountOrNull(Context context,
+     static PhoneAccount getAccountOrNull(Context context,
             PhoneAccountHandle accountHandle) {
         TelecomManager telecomManager =
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
