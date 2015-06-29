@@ -24,7 +24,6 @@ import android.view.View;
 
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
-import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
 
 /**
@@ -60,12 +59,13 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         super.setUp();
         mContext = getContext();
         mResources = mContext.getResources();
-        final TestPhoneNumberUtilsWrapper phoneUtils =
-                new TestPhoneNumberUtilsWrapper(mContext, TEST_VOICEMAIL_NUMBER);
+        final TestTelecomCallLogCache phoneUtils =
+                new TestTelecomCallLogCache(mContext, TEST_VOICEMAIL_NUMBER);
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, mResources, phoneUtils);
-        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mResources);
+        mHelper = new CallLogListItemHelper(phoneCallDetailsHelper, mResources, phoneUtils);
         mViewHolder = CallLogListItemViewHolder.createForTest(mContext);
+
     }
 
     @Override
@@ -104,13 +104,13 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     public void testSetPhoneCallDetails_ReadVoicemail() {
         PhoneCallDetails details = getPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        mHelper.setPhoneCallDetails(getContext(), mViewHolder, details);
+        mHelper.setPhoneCallDetails(mViewHolder, details);
         assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_UnreadVoicemail() {
         PhoneCallDetails details = getPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        mHelper.setPhoneCallDetails(getContext(), mViewHolder, details);
+        mHelper.setPhoneCallDetails(mViewHolder, details);
         assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
@@ -176,7 +176,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testGetCallDescription_NoVoicemailOutgoing() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(Calls.OUTGOING_TYPE, Calls.OUTGOING_TYPE);
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -188,7 +188,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testGetCallDescription_NoVoicemailIncoming() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE);
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -200,7 +200,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testGetCallDescription_NoVoicemailMissed() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(Calls.MISSED_TYPE, Calls.OUTGOING_TYPE);
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
         assertFalse(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -212,7 +212,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testGetCallDescription_Voicemail() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE, Calls.OUTGOING_TYPE);
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_new_voicemail)));
     }
@@ -223,7 +223,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
      */
     public void testGetCallDescription_NumCallsSingle() {
         PhoneCallDetails details = getPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE);
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
 
         // Rather than hard coding the "X calls" string message, we'll generate it with an empty
         // number of calls, and trim the resulting string.  This gets us just the word "calls",
@@ -240,7 +240,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testGetCallDescription_NumCallsMultiple() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(Calls.VOICEMAIL_TYPE, Calls.INCOMING_TYPE);
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
         assertTrue(description.toString()
                 .contains(this.mResources.getString(R.string.description_num_calls, 2)));
     }
@@ -254,7 +254,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 getPhoneCallDetailsWithTypes(Calls.INCOMING_TYPE, Calls.INCOMING_TYPE);
         details.features = Calls.FEATURES_VIDEO;
 
-        CharSequence description = mHelper.getCallDescription(getContext(), details);
+        CharSequence description = mHelper.getCallDescription(details);
         final boolean isVideoEnabled = CallUtil.isVideoEnabled(getContext());
         assertTrue(description.toString()
                 .contains(this.mResources.getString(
@@ -284,7 +284,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         PhoneCallDetails details = getPhoneCallDetails(
                 number, presentation, formattedNumber);
         details.callTypes = new int[]{ callType };
-        mHelper.setPhoneCallDetails(mContext, mViewHolder, details);
+        mHelper.setPhoneCallDetails(mViewHolder, details);
     }
 
     private PhoneCallDetails getPhoneCallDetails(

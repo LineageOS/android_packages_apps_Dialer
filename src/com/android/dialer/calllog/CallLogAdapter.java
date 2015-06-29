@@ -42,10 +42,10 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.PhoneCallDetails;
-import com.android.dialer.PhoneCallDetailsHelper;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
+import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -123,10 +123,11 @@ public class CallLogAdapter extends GroupingListAdapter
     private boolean mShowPromoCard = false;
 
     /** Instance of helper class for managing views. */
-    private final CallLogListItemHelper mCallLogViewsHelper;
+    private final CallLogListItemHelper mCallLogListItemHelper;
 
-    /** Helper to access Telephony phone number utils class */
-    protected final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    /** Cache for repeated requests to TelecomManager. */
+    protected final TelecomCallLogCache mTelecomCallLogCache;
+
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
 
@@ -256,10 +257,11 @@ public class CallLogAdapter extends GroupingListAdapter
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
-        mPhoneNumberUtilsWrapper = new PhoneNumberUtilsWrapper(mContext);
+        mTelecomCallLogCache = new TelecomCallLogCache(mContext);
         PhoneCallDetailsHelper phoneCallDetailsHelper =
-                new PhoneCallDetailsHelper(mContext, resources, mPhoneNumberUtilsWrapper);
-        mCallLogViewsHelper = new CallLogListItemHelper(phoneCallDetailsHelper, resources);
+                new PhoneCallDetailsHelper(mContext, resources, mTelecomCallLogCache);
+        mCallLogListItemHelper =
+                new CallLogListItemHelper(phoneCallDetailsHelper, resources, mTelecomCallLogCache);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         maybeShowVoicemailPromoCard();
@@ -329,6 +331,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void pauseCache() {
         mContactInfoCache.stop();
+        mTelecomCallLogCache.reset();
     }
 
     @Override
@@ -359,8 +362,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 view,
                 mContext,
                 mExpandCollapseListener,
-                mPhoneNumberUtilsWrapper,
-                mCallLogViewsHelper,
+                mTelecomCallLogCache,
+                mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
@@ -432,14 +435,13 @@ public class CallLogAdapter extends GroupingListAdapter
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(c);
         final boolean isVoicemailNumber =
-                mPhoneNumberUtilsWrapper.isVoicemailNumber(accountHandle, number);
+                mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
 
         // Note: Binding of the action buttons is done as required in configureActionViews when the
         // user expands the actions ViewStub.
 
         ContactInfo info = ContactInfo.EMPTY;
-        if (PhoneNumberUtilsWrapper.canPlaceCallsTo(number, numberPresentation)
-                && !isVoicemailNumber) {
+        if (PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemailNumber) {
             // Lookup contacts with this number
             info = mContactInfoCache.getValue(number, countryIso, cachedContactInfo);
         }
@@ -499,7 +501,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.dayGroupHeader.setVisibility(View.GONE);
         }
 
-        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
+        mCallLogListItemHelper.setPhoneCallDetails(views, details);
 
         if (mCurrentlyExpandedRowId == views.rowId) {
             // In case ViewHolders were added/removed, update the expanded position if the rowIds
@@ -522,7 +524,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.setPhoto(info.photoId, info.photoUri, info.lookupUri, nameForDefaultImage,
                 isVoicemailNumber, mContactInfoHelper.isBusiness(info.sourceType));
 
-        mCallLogViewsHelper.setPhoneCallDetails(mContext, views, details);
+        mCallLogListItemHelper.setPhoneCallDetails(views, details);
 
         // Listen for the first draw
         if (mViewTreeObserver == null) {

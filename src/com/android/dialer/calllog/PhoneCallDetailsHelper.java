@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer;
+package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -31,10 +31,10 @@ import android.widget.TextView;
 
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
-import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.calllog.PhoneNumberUtilsWrapper;
+import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.PhoneNumberUtil;
 
 import com.google.common.collect.Lists;
 
@@ -51,8 +51,7 @@ public class PhoneCallDetailsHelper {
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
-    // Helper classes.
-    private final PhoneNumberUtilsWrapper mPhoneNumberUtilsWrapper;
+    private final TelecomCallLogCache mTelecomCallLogCache;
 
     /**
      * List of items to be concatenated together for accessibility descriptions
@@ -66,11 +65,13 @@ public class PhoneCallDetailsHelper {
      *
      * @param resources used to look up strings
      */
-    public PhoneCallDetailsHelper(Context context, Resources resources,
-            PhoneNumberUtilsWrapper phoneUtils) {
+    public PhoneCallDetailsHelper(
+            Context context,
+            Resources resources,
+            TelecomCallLogCache telecomCallLogCache) {
         mContext = context;
         mResources = resources;
-        mPhoneNumberUtilsWrapper = phoneUtils;
+        mTelecomCallLogCache = telecomCallLogCache;
     }
 
     /** Fills the call details views with content. */
@@ -106,7 +107,7 @@ public class PhoneCallDetailsHelper {
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
         // Set the account label if it exists.
-        String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, details.accountHandle);
+        String accountLabel = mTelecomCallLogCache.getAccountLabel(details.accountHandle);
 
         if (accountLabel != null) {
             views.callAccountLabel.setVisibility(View.VISIBLE);
@@ -185,8 +186,7 @@ public class PhoneCallDetailsHelper {
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
                 && !PhoneNumberHelper.isUriNumber(details.number.toString())
-                && !mPhoneNumberUtilsWrapper.isVoicemailNumber(details.accountHandle,
-                        details.number)) {
+                && !mTelecomCallLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
 
             if (TextUtils.isEmpty(details.name) && !TextUtils.isEmpty(details.geocode)) {
                 numberFormattedLabel = details.geocode;
