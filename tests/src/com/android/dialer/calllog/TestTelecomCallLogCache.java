@@ -23,10 +23,10 @@ import android.telecom.PhoneAccountHandle;
  * Modified version of {@link com.android.dialer.calllog.PhoneNumberDisplayHelper} to be used in
  * tests that allows injecting the voicemail number.
  */
-public final class TestPhoneNumberUtilsWrapper extends PhoneNumberUtilsWrapper {
+public final class TestTelecomCallLogCache extends TelecomCallLogCache {
     private CharSequence mVoicemailNumber;
 
-    public TestPhoneNumberUtilsWrapper(Context context, CharSequence voicemailNumber) {
+    public TestTelecomCallLogCache(Context context, CharSequence voicemailNumber) {
         super(context);
         mVoicemailNumber = voicemailNumber;
     }
