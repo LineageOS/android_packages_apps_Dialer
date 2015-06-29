@@ -1281,8 +1281,17 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return mActionBarController;
     }
 
+    @Override
     public boolean isDialpadShown() {
         return mIsDialpadShown;
+    }
+
+    @Override
+    public int getDialpadHeight() {
+        if (mDialpadFragment != null) {
+            return mDialpadFragment.getDialpadHeight();
+        }
+        return 0;
     }
 
     @Override
