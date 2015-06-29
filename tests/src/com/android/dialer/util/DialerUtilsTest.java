@@ -16,7 +16,7 @@
 
 package com.android.dialer.util;
 
-import com.android.dialer.PhoneCallDetailsHelper;
+import com.android.dialer.calllog.PhoneCallDetailsHelper;
 import com.google.common.collect.Lists;
 
 import android.content.Context;

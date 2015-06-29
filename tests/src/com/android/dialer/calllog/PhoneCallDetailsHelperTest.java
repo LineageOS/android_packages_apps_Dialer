@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer;
+package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,15 +25,15 @@ import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.calllog.TestPhoneNumberUtilsWrapper;
+import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.R;
 import com.android.dialer.util.LocaleTestUtils;
 
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * Unit tests for {@link PhoneCallDetailsHelper}.
+ * Unit tests for {@link PhoneCallDetailsHelper}.m
  */
 public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     /** The number to be used to access the voicemail. */
@@ -60,7 +60,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private PhoneCallDetailsViews mViews;
     private TextView mNameView;
     private LocaleTestUtils mLocaleTestUtils;
-    private TestPhoneNumberUtilsWrapper mPhoneUtils;
+    private TestTelecomCallLogCache mPhoneUtils;
 
     private Context mContext;
 
@@ -69,8 +69,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         super.setUp();
         mContext = getContext();
         Resources resources = mContext.getResources();
-        mPhoneUtils = new TestPhoneNumberUtilsWrapper(mContext, TEST_VOICEMAIL_NUMBER);
-        final TestPhoneNumberUtilsWrapper phoneUtils = new TestPhoneNumberUtilsWrapper(
+        mPhoneUtils = new TestTelecomCallLogCache(mContext, TEST_VOICEMAIL_NUMBER);
+        final TestTelecomCallLogCache phoneUtils = new TestTelecomCallLogCache(
                 mContext, TEST_VOICEMAIL_NUMBER);
         mHelper = new PhoneCallDetailsHelper(mContext, resources, phoneUtils);
         mHelper.setCurrentTimeForTest(
