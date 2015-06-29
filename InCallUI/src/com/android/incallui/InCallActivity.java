@@ -24,6 +24,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
@@ -861,5 +862,17 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
         mDialog = null;
         CallList.getInstance().onErrorDialogDismissed();
         InCallPresenter.getInstance().onDismissDialog();
+    }
+
+    public void setExcludeFromRecents(boolean exclude) {
+        ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> tasks = am.getAppTasks();
+        int taskId = getTaskId();
+        for (int i=0; i<tasks.size(); i++) {
+            ActivityManager.AppTask task = tasks.get(i);
+            if (task.getTaskInfo().id == taskId) {
+                task.setExcludeFromRecents(exclude);
+            }
+        }
     }
 }

@@ -252,6 +252,7 @@ public class InCallPresenter implements CallList.Listener,
         final boolean doFinish = (mInCallActivity != null && isActivityStarted());
         Log.i(this, "Hide in call UI: " + doFinish);
         if (doFinish) {
+            mInCallActivity.setExcludeFromRecents(true);
             mInCallActivity.finish();
 
             if (mAccountSelectionCancelled) {
@@ -315,6 +316,7 @@ public class InCallPresenter implements CallList.Listener,
             }
 
             mInCallActivity = inCallActivity;
+            mInCallActivity.setExcludeFromRecents(false);
 
             // By the time the UI finally comes up, the call may already be disconnected.
             // If that's the case, we may need to show an error dialog.
@@ -1309,9 +1311,7 @@ public class InCallPresenter implements CallList.Listener,
 
     public Intent getInCallIntent(boolean showDialpad, boolean newOutgoingCall) {
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
-        intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                | Intent.FLAG_ACTIVITY_NO_USER_ACTION
-                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         intent.setClass(mContext, InCallActivity.class);
         if (showDialpad) {
