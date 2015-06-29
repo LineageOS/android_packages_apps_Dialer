@@ -339,7 +339,7 @@ public class VoicemailPlaybackPresenter
     }
 
     private boolean queryHasContent(Uri voicemailUri) {
-        if (voicemailUri == null) {
+        if (voicemailUri == null || mContext == null) {
             return false;
         }
 
