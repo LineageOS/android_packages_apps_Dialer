@@ -402,6 +402,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 .setOnClickListener(mSearchViewOnClickListener);
         searchEditTextLayout.findViewById(R.id.search_box_start_search)
                 .setOnClickListener(mSearchViewOnClickListener);
+        searchEditTextLayout.setOnClickListener(mSearchViewOnClickListener);
         searchEditTextLayout.setCallback(new SearchEditTextLayout.Callback() {
             @Override
             public void onBackButtonClicked() {
