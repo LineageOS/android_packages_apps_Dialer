@@ -33,18 +33,27 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -138,7 +147,6 @@ public class CallLogAdapter extends GroupingListAdapter
         @Override
         public void onClick(View v) {
             CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) v.getTag();
-
             if (viewHolder == null) {
                 return;
             }
@@ -184,6 +192,68 @@ public class CallLogAdapter extends GroupingListAdapter
             dismissVoicemailPromoCard();
         }
     };
+
+    /**
+     * Listener that is triggered to populate the context menu with actions to perform on the call's
+     * number, when the call log entry is long pressed.
+     */
+    private final View.OnCreateContextMenuListener mOnCreateContextMenuListener =
+            new View.OnCreateContextMenuListener() {
+                @Override
+                public void onCreateContextMenu(ContextMenu menu, View v,
+                        ContextMenuInfo menuInfo) {
+                    final CallLogListItemViewHolder vh =
+                            (CallLogListItemViewHolder) v.getTag();
+                    if (TextUtils.isEmpty(vh.number)) {
+                        return;
+                    }
+
+                    menu.setHeaderTitle(vh.number);
+
+                    final MenuItem copyItem = menu.add(
+                            ContextMenu.NONE,
+                            R.id.context_menu_copy_to_clipboard,
+                            ContextMenu.NONE,
+                            R.string.copy_text);
+
+                    copyItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            ClipboardUtils.copyText(CallLogAdapter.this.mContext, null,
+                                    vh.number, true);
+                            return true;
+                        }
+                    });
+
+                    // The edit number before call does not show up if any of the conditions apply:
+                    // 1) Number cannot be called
+                    // 2) Number is the voicemail number
+                    // 3) Number is a SIP address
+
+                    if (!PhoneNumberUtil.canPlaceCallsTo(vh.number, vh.numberPresentation)
+                            || mTelecomCallLogCache.isVoicemailNumber(vh.accountHandle, vh.number)
+                            || PhoneNumberUtil.isSipNumber(vh.number)) {
+                        return;
+                    }
+
+                    final MenuItem editItem = menu.add(
+                            ContextMenu.NONE,
+                            R.id.context_menu_edit_before_call,
+                            ContextMenu.NONE,
+                            R.string.recentCalls_editNumberBeforeCall);
+
+                    editItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            final Intent intent = new Intent(Intent.ACTION_DIAL,
+                                    CallUtil.getCallUri(vh.number));
+                            intent.setClass(mContext, DialtactsActivity.class);
+                            DialerUtils.startActivityWithErrorToast(mContext, intent);
+                            return true;
+                        }
+                    });
+                }
+            };
 
     private void expandViewHolderActions(CallLogListItemViewHolder viewHolder) {
         // If another item is expanded, notify it that it has changed. Its actions will be
@@ -369,6 +439,7 @@ public class CallLogAdapter extends GroupingListAdapter
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
 
+        viewHolder.primaryActionView.setOnCreateContextMenuListener(mOnCreateContextMenuListener);
         viewHolder.primaryActionView.setTag(viewHolder);
 
         return viewHolder;
