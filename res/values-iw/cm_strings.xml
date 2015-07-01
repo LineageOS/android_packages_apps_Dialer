@@ -42,11 +42,11 @@
   <string name="call_stats_nav_all">הכל</string>
   <string name="call_stats_nav_incoming">נכנסות</string>
   <string name="call_stats_nav_outgoing">יוצאות</string>
-  <string name="call_stats_nav_missed">פוספסו</string>
+  <string name="call_stats_nav_missed">לא נענו</string>
   <string name="call_stats_incoming">נכנסות: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_outgoing">יוצאות: <xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_missed">פוספסו</string>
-  <string name="call_stats_missed_percent">פוספסו: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">לא נענו</string>
+  <string name="call_stats_missed_percent">לא נענו: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_blacklist">נחסמו</string>
   <string name="call_stats_blacklist_percent">נחסמו: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">סך הכל: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
