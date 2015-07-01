@@ -66,6 +66,7 @@
   <string name="speed_dial_replace">Înlocuire</string>
   <string name="speed_dial_delete">Ștergeți</string>
   <string name="speed_dial_unassigned_dialog_title">Cheie neatribuită</string>
+  <string name="speed_dial_unassigned_dialog_message">Nicio acțiune de apel rapid nu este atribuită acestui număr \'<xliff:g id="number">%s</xliff:g>\'. Vreți să atribuiți o acțiune acum?</string>
   <string name="yes">Da</string>
   <string name="no">Nu</string>
   <string name="incall_vibration_category_title">Vibrare în apel</string>

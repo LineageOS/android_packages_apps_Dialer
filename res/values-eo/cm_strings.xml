@@ -25,7 +25,9 @@
   <string name="enable_people_lookup_title">Serĉado de personoj</string>
   <string name="enable_people_lookup_summary">Montri retajn rezultojn dum serĉado en la ciferilo</string>
   <string name="enable_reverse_lookup_title">Inversa serĉado</string>
+  <string name="enable_reverse_lookup_summary">Serĉi informojn pri personoj aŭ lokoj por nekonataj alvenintaj alvokoj</string>
   <string name="forward_lookup_provider_title">Provizanto de rekta serĉado</string>
+  <string name="people_lookup_provider_title">Provizanto por serĉi homojn</string>
   <string name="reverse_lookup_provider_title">Provizanto de inversa serĉado</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn ĉina (CN)</string>
   <string name="preference_category_t9_dialpad_search">Serĉo per T9 klavaro</string>
@@ -38,8 +40,11 @@
   <string name="call_stats_refresh">Aktualiga klavo</string>
   <string name="activity_title_call_stats">Statistikoj pri alvokoj</string>
   <string name="call_stats_nav_all">Ĉio</string>
+  <string name="call_stats_nav_incoming">Envenanta</string>
   <string name="call_stats_nav_outgoing">Foriranta</string>
   <string name="call_stats_nav_missed">Maltrafitaj</string>
+  <string name="call_stats_incoming">Alveninta: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Foriranta: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Maltrafitaj</string>
   <string name="call_stats_missed_percent">Maltrafitaj: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_blacklist">Blokita</string>
@@ -67,6 +72,7 @@
   <string name="speed_dial_not_set">(ne agordita)</string>
   <string name="speed_dial_replace">Anstataŭigi</string>
   <string name="speed_dial_delete">Forigi</string>
+  <string name="speed_dial_unassigned_dialog_title">Neatribuita klavo</string>
   <string name="speed_dial_unassigned_dialog_message">Neniu ago estas atribuita por la klavo \'<xliff:g id="number">%s</xliff:g>\'. Ĉu vi deziras atribui agon nun?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Por uzi rapidan alvokon, malŝaltu unue aviadilan reĝimon.</string>
   <string name="yes">Jes</string>
@@ -94,4 +100,5 @@
   <string name="smart_mute_title">Inteligenta silentigo</string>
   <string name="smart_mute_summary">Silentigi la envenajn alvokojn renversante la aparaton</string>
   <string name="smart_dialer_title">Inteligenta alvoko</string>
+  <string name="smart_dialer_summary">Aŭtomate alvoki la numerumitan numeron per proksimigado de la aparato al orelo</string>
 </resources>

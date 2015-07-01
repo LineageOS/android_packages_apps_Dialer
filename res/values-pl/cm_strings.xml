@@ -100,4 +100,5 @@
   <string name="smart_mute_title">Inteligentne wyciszanie</string>
   <string name="smart_mute_summary">Wycisz połączenie przychodzące przez obrót urządzenia</string>
   <string name="smart_dialer_title">Inteligentne połączenie</string>
+  <string name="smart_dialer_summary">Automatycznie wybierz wpisany numer poprzez przyłożenie urządzenia do ucha</string>
 </resources>

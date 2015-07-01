@@ -21,10 +21,14 @@
   <string name="lookup_settings_label">Telefonnummersökning</string>
   <string name="lookup_settings_description">Sökning av okända telefonnummer</string>
   <string name="enable_forward_lookup_title">Platssökning</string>
+  <string name="enable_people_lookup_title">Personsökning</string>
+  <string name="enable_people_lookup_summary">Visa online-resultat för personer vid sökning med knappsatsen</string>
   <string name="enable_reverse_lookup_title">Omvänd sökning</string>
+  <string name="forward_lookup_provider_title">Platssökningstjänst</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
   <string name="t9_search_input_locale">T9-sökinmatning</string>
   <string name="t9_search_input_locale_default">Standard</string>
+  <string name="type_blacklist">Blockerat samtal</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer för samtalsstatus</string>
   <string name="call_stats">Samtalsstatistik</string>
@@ -38,6 +42,7 @@
   <string name="call_stats_outgoing">Utgående: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Missade</string>
   <string name="call_stats_missed_percent">Missade: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blockerad</string>
   <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdatum</string>
