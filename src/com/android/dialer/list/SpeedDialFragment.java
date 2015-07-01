@@ -194,7 +194,12 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         super.onResume();
 
         if (PermissionsUtil.hasContactsPermissions(getActivity())) {
-            getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+            if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
+                getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null,
+                        mContactTileLoaderListener);
+            } else {
+                getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+            }
         }
         Trace.endSection();
     }
