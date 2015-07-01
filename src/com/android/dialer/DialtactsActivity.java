@@ -903,6 +903,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public void onNewIntent(Intent newIntent) {
         setIntent(newIntent);
+
         mStateSaved = false;
         displayFragment(newIntent);
 
@@ -1215,6 +1216,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
+        if (phoneNumber == null) {
+            // Invalid phone number, but let the call go through so that InCallUI can show
+            // an error message.
+            phoneNumber = "";
+        }
         Intent intent = isVideoCall ?
                 IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
                 IntentUtil.getCallIntent(phoneNumber, getCallOrigin());
