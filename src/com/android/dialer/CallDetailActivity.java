@@ -47,6 +47,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
@@ -267,6 +268,7 @@ public class CallDetailActivity extends Activity
     @Override
     public void onResume() {
         super.onResume();
+        PermissionsUtil.updateCachedPermissions(this);
         getCallDetails();
     }
 
