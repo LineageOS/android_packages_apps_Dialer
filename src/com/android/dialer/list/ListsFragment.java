@@ -347,6 +347,10 @@ public class ListsFragment extends Fragment
         return mRemoveView;
     }
 
+    public int getTabCount() {
+        return mViewPagerAdapter.getCount();
+    }
+
     private int getRtlPosition(int position) {
         if (DialerUtils.isRtl()) {
             return mViewPagerAdapter.getCount() - 1 - position;
