@@ -44,11 +44,6 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         super(context);
 
         mCountryIso = GeoUtil.getCurrentCountryIso(context);
-
-        // Enable all shortcuts by default
-        for (int i = 0; i < mShortcutEnabled.length; i++) {
-            mShortcutEnabled[i] = true;
-        }
     }
 
     @Override
@@ -65,6 +60,12 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             if (mShortcutEnabled[i]) count++;
         }
         return count;
+    }
+
+    public void disableAllShortcuts() {
+        for (int i = 0; i < mShortcutEnabled.length; i++) {
+            mShortcutEnabled[i] = false;
+        }
     }
 
     @Override

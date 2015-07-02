@@ -345,7 +345,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             super.startLoading();
         } else if (TextUtils.isEmpty(getQueryString())) {
             // Clear out any existing call shortcuts.
-            getAdapter().setQueryString(null);
+            final DialerPhoneNumberListAdapter adapter =
+                    (DialerPhoneNumberListAdapter) getAdapter();
+            adapter.disableAllShortcuts();
         }
     }
 
