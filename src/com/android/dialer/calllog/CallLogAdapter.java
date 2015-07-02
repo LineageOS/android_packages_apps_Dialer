@@ -361,10 +361,13 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public void changeCursor(Cursor cursor) {
-        // Data has changed; reset so that the first call log list item will be expanded.
-        mHasBoundFirstView = false;
-        mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
-        mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
+        // Don't auto-expand the first item for the voicemail list fragment since that will
+        // trigger an unwanted voicemail download and playback.
+        if (mVoicemailPlaybackPresenter == null) {
+            mHasBoundFirstView = false;
+            mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+            mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
+        }
 
         super.changeCursor(cursor);
     }
@@ -578,8 +581,10 @@ public class CallLogAdapter extends GroupingListAdapter
             // In case ViewHolders were added/removed, update the expanded position if the rowIds
             // match so that we can restore the correct expanded state on rebind.
             mCurrentlyExpandedPosition = position;
-        } else if (!mHasBoundFirstView) {
+        } else if (!mHasBoundFirstView && mVoicemailPlaybackPresenter == null) {
             // Expand the first view when loading the call log to expose the actions.
+            // Don't auto-expand the first item for the voicemail list fragment since that will
+            // trigger an unwanted voicemail download and playback.
             mCurrentlyExpandedRowId = views.rowId;
             mCurrentlyExpandedPosition = position;
             mHasBoundFirstView = true;
