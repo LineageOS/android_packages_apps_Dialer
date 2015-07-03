@@ -521,7 +521,9 @@ public class VoicemailPlaybackPresenter
             mIsPrepared = false;
         }
 
-        mView.onPlaybackError();
+        if (mView != null) {
+            mView.onPlaybackError();
+        }
 
         mPosition = 0;
         mIsPlaying = false;
@@ -536,7 +538,9 @@ public class VoicemailPlaybackPresenter
 
         // Reset the seekbar position to the beginning.
         mPosition = 0;
-        mView.setClipPosition(0, mDuration.get());
+        if (mView != null) {
+            mView.setClipPosition(0, mDuration.get());
+        }
     }
 
     @Override
@@ -610,7 +614,9 @@ public class VoicemailPlaybackPresenter
         mPosition = mMediaPlayer.getCurrentPosition();
         Log.d(TAG, "Paused playback at " + mPosition + ".");
 
-        mView.onPlaybackStopped();
+        if (mView != null) {
+            mView.onPlaybackStopped();
+        }
         mAudioManager.abandonAudioFocus(this);
 
         mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
