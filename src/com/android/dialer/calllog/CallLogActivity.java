@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.ViewPagerTabs;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
@@ -150,6 +151,7 @@ public class CallLogActivity extends Activity implements ViewPager.OnPageChangeL
     protected void onResume() {
         mIsResumed = true;
         super.onResume();
+        PermissionsUtil.updateCachedPermissions(this);
         sendScreenViewForChildFragment(mViewPager.getCurrentItem());
     }
 
