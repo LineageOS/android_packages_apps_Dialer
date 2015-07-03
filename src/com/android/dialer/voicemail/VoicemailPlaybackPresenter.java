@@ -619,7 +619,9 @@ public class VoicemailPlaybackPresenter
         }
         mAudioManager.abandonAudioFocus(this);
 
-        mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+        if (mActivity != null) {
+            mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
         disableProximitySensor(true /* waitForFarState */);
     }
 
