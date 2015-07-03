@@ -545,6 +545,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
         mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+
+        if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
+            int index = getIntent().getIntExtra(EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_SPEED_DIAL);
+            if (index < mListsFragment.getTabCount()) {
+                mListsFragment.showTab(index);
+            }
+        }
+
         Trace.endSection();
     }
 
@@ -905,11 +913,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         setIntent(newIntent);
         mStateSaved = false;
         displayFragment(newIntent);
-
-        if (newIntent.hasExtra(EXTRA_SHOW_TAB)) {
-            mListsFragment.showTab(
-                    getIntent().getIntExtra(EXTRA_SHOW_TAB, mListsFragment.TAB_INDEX_SPEED_DIAL));
-        }
 
         invalidateOptionsMenu();
     }
