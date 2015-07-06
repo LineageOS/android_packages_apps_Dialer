@@ -679,7 +679,9 @@ public class VoicemailPlaybackPresenter
             }
         } else {
             enableProximitySensor();
-            mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+            if (mActivity != null) {
+                mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
         }
     }
 
