@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Dzēst zvanu vēsturi"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Dzēst balss pasta ziņojumu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Kopīgot balss pastu"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Nav neviena zvana."</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Nav zvanu"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vai dzēst zvanu vēsturi?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tiks dzēsti visi vēsturē saglabātie zvani."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Notiek zvanu vēstures dzēšana…"</string>
@@ -107,7 +107,7 @@
     <string name="description_send_text_message" msgid="3118485319691414221">"Sūtīt īsziņu šai kontaktpersonai: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nenoklausīti balss pasta ziņojumi"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Sākt meklēšanu ar balsi"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Zvaniet: <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Zvanīt: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Nezināms"</string>
     <string name="voicemail" msgid="3851469869202611441">"Balss pasts"</string>
     <string name="private_num" msgid="6374339738119166953">"Privāts numurs"</string>
@@ -127,7 +127,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nevar veikt tālruņa zvanu, jo lietojumprogramma Tālrunis tika atspējota."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Šajā ierīcē nav nevienas šai darbībai piemērotas lietotnes."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Ievadiet vārdu/tālruņa numuru"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Nav neviena zvana."</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Nav zvanu"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Nav neviena nesena balss pasta ziņojuma."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Rādīt tikai izlasi"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Vēsture"</string>
@@ -140,14 +140,14 @@
     <string name="tab_voicemail" msgid="155024725947496746">"Balss pasts"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Noņemts no izlases"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Atsaukt"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zvaniet: <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zvanīt: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Izveidot jaunu kontaktpersonu"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Pievienot kontaktpersonai"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Sūtīt īsziņu"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Veikt videozvanu"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Visas zvanu vēstures skatīšana"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Jauni neatbildēti zvani: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Izmantojot ātros zvanus, varat ar vienu pieskārienu zvanīt kontaktpersonām, kuras ir pievienotas jūsu izlasei vai kurām bieži zvanāt."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Ar ātrajiem zvaniem varat ar vienu pieskārienu zvanīt uz bieži izmantotajiem numuriem."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Nav kontaktpersonu"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Pieskarieties attēlam, lai skatītu visus numurus, vai pieskarieties attēlam un turiet to, lai veiktu pārkārtošanu."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Noņemt"</string>

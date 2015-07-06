@@ -24,7 +24,7 @@
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"ನಿಖರವಾಗಿಲ್ಲದ ಸಂಖ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸಿ"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸು"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ಕರೆ ಇತಿಹಾಸದಿಂದ ಅಳಿಸಿ"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ಧ್ವನಿಮೇಲ್‌ ಅಳಿಸಿ"</string>
@@ -85,7 +85,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"ಎಲ್ಲಾ ಸಂಪರ್ಕಗಳು"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ಕರೆಯ ವಿವರಗಳು"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ವಿವರಗಳು ಲಭ್ಯವಿಲ್ಲ"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ಸ್ಪರ್ಶದ ಟೋನ್ ಕೀಪ್ಯಾಡ್ ಬಳಸಿ"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ಸ್ಪರ್ಶ ಟೋನ್ ಕೀಪ್ಯಾಡ್ ಬಳಸಿ"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"ಪ್ರತ್ಯತ್ತರ ಕರೆಯು ಪ್ರಗತಿಯಲ್ಲಿದೆ"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"ಕರೆಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="type_incoming" msgid="6502076603836088532">"ಒಳಬರುವ ಕರೆ"</string>
@@ -141,13 +141,13 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ರದ್ದುಮಾಡು"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ಹೊಸ ಸಂಪರ್ಕವನ್ನು ರಚಿಸಿ"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸಿ"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ಹೊಸ ಸಂಪರ್ಕ ರಚಿಸು"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸು"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS ಕಳುಹಿಸು"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="show_call_history" msgid="1141502332266697170">"ಕರೆಯ ಪೂರ್ಣ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂದರೆ, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನ ಸಂಪರ್ಕಗಳು ಹಾಗೂ ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದೇ ಒಂದು ಸ್ಪರ್ಶದಲ್ಲಿ ಡಯಲ್‌ ಮಾಡುವುದು."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂದರೆ, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನ ಸಂಪರ್ಕಗಳು ಹಾಗೂ ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದೇ ಒಂದು ಸ್ಪರ್ಶದಲ್ಲಿ ಡಯಲ್‌ ಮಾಡುವಿಕೆ."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>
@@ -189,7 +189,7 @@
     <string name="accessibility_settings_title" msgid="6068141142874046249">"ಪ್ರವೇಶಿಸುವಿಕೆ"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ಫೋನ್ ರಿಂಗ್‌ಟೋನ್"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ಕರೆಗಳಿಗೂ ಸಹ ವೈಬ್ರೇಟ್‌"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ಡಯಲ್‌ಪ್ಯಾಡ್‌ ಧ್ವನಿಗಳು"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ಡಯಲ್‌ಪ್ಯಾಡ್‌ ಟೋನ್‌ಗಳು"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"ಡಯಲ್‌ಪ್ಯಾಡ್‌ ಟೋನ್ ಅಳತೆ"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"ಸಾಮಾನ್ಯ"</item>

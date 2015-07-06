@@ -131,7 +131,7 @@
     <string name="show_favorites_only" msgid="5520072531022614595">"Vis bare favoritter"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Logg"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Ikke besvart"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Ubesvart"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Talemeldinger"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Hurtigvalg"</string>
     <string name="tab_recents" msgid="929949073851377206">"Sist brukte"</string>
@@ -188,7 +188,7 @@
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Tilgjengelighet"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Telefonringetone"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrer også når det ringer"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tastetoner for tastaturet"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tastetoner"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Tonelengde for tastaturet"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Normal"</item>
@@ -196,5 +196,5 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtigsvar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Anrop"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Ringing til kontoer"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Ringekontoer"</string>
 </resources>
