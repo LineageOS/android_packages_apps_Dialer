@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Äänipuhelu"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Hyväksy"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Hylkää"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Soita takaisin"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Soita"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Viesti"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Poista lentokonetila käytöstä ennen puhelun soittamista."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ei rekisteröity verkkoon."</string>
