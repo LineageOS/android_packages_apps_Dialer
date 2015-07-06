@@ -52,7 +52,7 @@
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Video qo‘ng‘iroq so‘rovi rad etildi"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Teskari qo‘ng‘iroq raqamingiz\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Favqulodda holatlar uchun teskari qo‘ng‘iroq raqamingiz\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="2107666444937350731">"Terilmoqda"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Raqam terilmoqda"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Javobsiz qo‘ng‘iroq"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Javobsiz qo‘ng‘iroqlar"</string>
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ta javobsiz qo‘ng‘iroq"</string>
@@ -70,7 +70,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Ovozli pochta raqami noma’lum"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Xizmat mavjud emas"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Tanlangan tarmoq (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) mavjud emas"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"Javob berish"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Javob"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Go‘shakni qo‘yish"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Ovoz"</string>
@@ -131,7 +131,7 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"O‘z javobingizni yozing..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Bekor qilish"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Jo‘natish"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Javob berish"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Javob"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS yuborish"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Rad qilish"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Video qo\'ng\'iroq sifatida javob berish"</string>

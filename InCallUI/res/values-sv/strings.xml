@@ -77,7 +77,7 @@
     <string name="notification_action_accept" msgid="2898609801209468429">"Godkänn"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Avvisa"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ring upp"</string>
-    <string name="notification_missedCall_message" msgid="3049928912736917988">"Meddelande"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Sms:a"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Om du vill ringa ett samtal måste du först inaktivera flygplansläge."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Inte registrerat på nätverk."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Det finns inget mobilnät tillgängligt."</string>

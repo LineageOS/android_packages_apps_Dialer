@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Voz"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Aceptar"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Descartar"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Devolver llamada"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Llamar"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mensaje"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Para realizar una llamada, primero debes desactivar el modo avión."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"No registrado en la red."</string>
