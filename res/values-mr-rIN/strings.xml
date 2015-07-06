@@ -86,7 +86,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"कॉल तपशील"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"तपशील उपलब्ध नाहीत"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"स्‍पर्श टोन कीपॅडचा वापर करा"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"कॉल प्रगतीपथावर, वर परत जा"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"चालू असलेल्या कॉलवर परत जा"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"कॉल जोडा"</string>
     <string name="type_incoming" msgid="6502076603836088532">"येणारा कॉल"</string>
     <string name="type_outgoing" msgid="343108709599392641">"केले जाणारे कॉल"</string>
@@ -146,7 +146,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"व्‍हिडिओ कॉल करा"</string>
     <string name="show_call_history" msgid="1141502332266697170">"संपूर्ण कॉल इतिहास पहा"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> नवीन सुटलेले कॉल"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"स्पीड डायल हे आवडीच्या आणि आपण नेहमी कॉल करता त्या नंबरवर एकदाच-स्पर्श करण्याचे डायलिंग आहे"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"स्पीड डायल हे आवडीच्या आणि आपण नेहमी कॉल करता त्या नंबरवर एकदाच-स्पर्श करून कॉल करण्याचे डायलिंग आहे"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"कोणतेही संपर्क नाहीत"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"सर्व नंबर पाहण्यासाठी प्रतिमेस स्पर्श करा किंवा पुन्हा क्रम लावण्यासाठी स्पर्श करा आणि धरून ठेवा"</string>
     <string name="remove_contact" msgid="1080555335283662961">"काढा"</string>

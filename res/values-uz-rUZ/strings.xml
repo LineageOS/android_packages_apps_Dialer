@@ -120,7 +120,7 @@
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM kartadan yuklanmoqda…"</string>
-    <string name="simContacts_title" msgid="27341688347689769">"SIM karta kontaktlari"</string>
+    <string name="simContacts_title" msgid="27341688347689769">"SIM-karta kontaktlari"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"Hech qanday kontakt ilovasi yo‘q"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"Ovozli qidiruv mavjud emas"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Telefon ilovasi o‘chirib qo‘yilgani sababli telefon qo‘ng‘iroqlarini amalga oshirib bo‘lmaydi."</string>

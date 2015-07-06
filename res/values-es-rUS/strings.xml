@@ -146,7 +146,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Realizar videollamada"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Ver historial de llamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> llamadas perdidas nuevas"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"El marcado rápido te permite llamar a tus contactos favoritos y a los números que llamas con más frecuencia con solo tocar la pantalla una vez."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"La opción de marcado rápido te permite llamar a tus contactos favoritos y a los números que llamas con más frecuencia con solo tocar la pantalla una vez."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"No hay contactos."</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca la imagen para ver todos los números o mantenla presionada para cambiar el orden."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminar"</string>

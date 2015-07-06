@@ -29,7 +29,7 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Išvalyti skambučių istoriją"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ištrinti balso pašto pran."</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Bendrinti balso paštą"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Nėra skambučių"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Skambučių nėra"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Išvalyti skambučių istoriją?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Bus ištrinti visi skambučiai iš istorijos"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Išvaloma skambučių istorija..."</string>
@@ -128,7 +128,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Negalima skambinti telefonu, nes Telefono programa išjungta."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Šiame įrenginyje nėra tam skirtos programos"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Įveskite vardą ar telefono nr."</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Nėra skambučių"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Skambučių nėra"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Nėra naujų balso pašto pranešimų"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Rodyti tik mėgstamiausius"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Istorija"</string>

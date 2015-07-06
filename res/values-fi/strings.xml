@@ -24,7 +24,7 @@
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Soita: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Ilmoita epätarkasta numerosta"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Muokkaa numeroa ennen puhelua"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Lisää kontakteihin"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Lisää yhteystietoihin"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Poista soittohistoriasta"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Tyhjennä soittohistoria"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Poista vastaajaviesti"</string>
@@ -140,13 +140,13 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Poistettu suosikeista"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Kumoa"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Soita <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Luo uudet yhteystiedot"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Lisää kontakteihin"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Luo uusi yhteystieto"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Lisää yhteystietoihin"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Lähetä tekstiviesti"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Soita videopuhelu"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Näytä koko soittohistoria"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uutta vastaamatonta puhelua"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella suosikeillesi ja muihin usein käyttämiisi numeroihin."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella usein käyttämiisi numeroihin."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ei yhteystietoja"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Katso kaikki numerot koskettamalla kuvaa tai järjestele tietoja koskettamalla kuvaa pitkään"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Poista"</string>

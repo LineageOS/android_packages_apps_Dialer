@@ -131,7 +131,7 @@
     <string name="show_favorites_only" msgid="5520072531022614595">"Εμφάνιση μόνο των αγαπημένων"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Ιστορικό"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Όλα"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Αναπάντητη"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Αναπάντητες"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Φωνητικό μήνυμα"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Γρήγορη κλήση"</string>
     <string name="tab_recents" msgid="929949073851377206">"Πρόσφατα"</string>
@@ -139,14 +139,14 @@
     <string name="tab_voicemail" msgid="155024725947496746">"Αυτόματος τηλεφωνητής"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Καταργήθηκε από τα αγαπημένα"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Αναίρεση"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Κλήση του αριθμού <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Καλέστε το <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Δημιουργία νέας επαφής"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Προσθήκη σε μια επαφή"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Αποστολή SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Πραγματοποίηση βιντεοκλήσης"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Προβολή πλήρους ιστορικού κλήσεων"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> νέες αναπάντητες κλήσεις"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Η ταχεία κλήση είναι κλήση που μπορείτε να πραγματοποιήσετε με ένα πλήκτρο για τους αγαπημένους σας αριθμούς που καλείτε συχνά"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Με την ταχεία κλήση μπορείτε να καλέσετε τους αγαπημένους σας αριθμούς, πατώντας ένα πλήκτρο"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Δεν υπάρχουν επαφές"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Πατήστε την εικόνα για να δείτε όλους τους αριθμούς ή αγγίξτε παρατεταμένα για αναδιάταξη"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Κατάργηση"</string>
@@ -187,7 +187,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Ήχοι και δόνηση"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Προσβασιμότητα"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ήχος κλήσης τηλεφώνου"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Επίσης δόνηση για κλήσεις"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Και δόνηση στις κλήσεις"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Τόνοι πληκτρολογίου κλήσης"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Διάρκεια ήχου πληκτρολογίου κλήσης"</string>
   <string-array name="dtmf_tone_length_entries">
