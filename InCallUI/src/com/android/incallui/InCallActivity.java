@@ -203,7 +203,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         // If the dialpad fragment already exists, retrieve it.  This is important when rotating as
         // we will not be able to hide or show the dialpad after the rotation otherwise.
         Fragment existingFragment =
-                mChildFragmentManager.findFragmentByTag(DialpadFragment.class.getName());
+                getFragmentManager().findFragmentByTag(DialpadFragment.class.getName());
         if (existingFragment != null) {
             mDialpadFragment = (DialpadFragment) existingFragment;
         }
