@@ -29,6 +29,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
+import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.telecom.PhoneAccount;
@@ -553,6 +554,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (index < mListsFragment.getTabCount()) {
                 mListsFragment.showTab(index);
             }
+        } else if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
+            mListsFragment.showTab(ListsFragment.TAB_INDEX_RECENTS);
         }
 
         Trace.endSection();

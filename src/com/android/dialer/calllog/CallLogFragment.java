@@ -292,20 +292,6 @@ public class CallLogFragment extends Fragment
         mAdapter.onRestoreInstanceState(savedInstanceState);
     }
 
-    /**
-     * Based on the new intent, decide whether the list should be configured
-     * to scroll up to display the first item.
-     */
-    public void configureScreenFromIntent(Intent newIntent) {
-        // Typically, when switching to the call-log we want to show the user
-        // the same section of the list that they were most recently looking
-        // at.  However, under some circumstances, we want to automatically
-        // scroll to the top of the list to present the newest call items.
-        // For example, immediately after a call is finished, we want to
-        // display information about that call.
-        mScrollToTop = Calls.CONTENT_TYPE.equals(newIntent.getType());
-    }
-
     @Override
     public void onStart() {
         // Start the empty loader now to defer other fragments.  We destroy it when both calllog
