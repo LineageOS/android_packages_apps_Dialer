@@ -108,8 +108,6 @@ public class CallLogAdapter extends GroupingListAdapter
     // Tracks the rowId of the currently expanded list item, so the position can be updated if there
     // are any changes to the call log entries, such as additions or removals.
     private long mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
-    // Whether the first call log list item has been automatically expanded for a new cursor.
-    private boolean mHasBoundFirstView;
 
     /**
      *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
@@ -359,19 +357,6 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallFetcher.fetchCalls();
     }
 
-    @Override
-    public void changeCursor(Cursor cursor) {
-        // Don't auto-expand the first item for the voicemail list fragment since that will
-        // trigger an unwanted voicemail download and playback.
-        if (mVoicemailPlaybackPresenter == null) {
-            mHasBoundFirstView = false;
-            mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
-            mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
-        }
-
-        super.changeCursor(cursor);
-    }
-
     public void setLoading(boolean loading) {
         mLoading = loading;
     }
@@ -581,14 +566,8 @@ public class CallLogAdapter extends GroupingListAdapter
             // In case ViewHolders were added/removed, update the expanded position if the rowIds
             // match so that we can restore the correct expanded state on rebind.
             mCurrentlyExpandedPosition = position;
-        } else if (!mHasBoundFirstView && mVoicemailPlaybackPresenter == null) {
-            // Expand the first view when loading the call log to expose the actions.
-            // Don't auto-expand the first item for the voicemail list fragment since that will
-            // trigger an unwanted voicemail download and playback.
-            mCurrentlyExpandedRowId = views.rowId;
-            mCurrentlyExpandedPosition = position;
-            mHasBoundFirstView = true;
         }
+
         views.showActions(mCurrentlyExpandedPosition == position);
 
         String nameForDefaultImage = null;
