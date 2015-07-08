@@ -75,6 +75,21 @@ public class VoicemailPlaybackLayout extends LinearLayout
         private final Object mLock = new Object();
         @GuardedBy("mLock") private ScheduledFuture<?> mScheduledFuture;
 
+        private Runnable mUpdateClipPositionRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentPositionMs = 0;
+                synchronized (mLock) {
+                    if (mScheduledFuture == null || mPresenter == null) {
+                        // This task has been canceled. Just stop now.
+                        return;
+                    }
+                    currentPositionMs = mPresenter.getMediaPlayerPosition();
+                }
+                setClipPosition(currentPositionMs, mDurationMs);
+            }
+        };
+
         public PositionUpdater(int durationMs, ScheduledExecutorService executorService) {
             mDurationMs = durationMs;
             mExecutorService = executorService;
@@ -82,28 +97,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         @Override
         public void run() {
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    int currentPositionMs = 0;
-                    synchronized (mLock) {
-                        if (mScheduledFuture == null || mPresenter == null) {
-                            // This task has been canceled. Just stop now.
-                            return;
-                        }
-                        currentPositionMs = mPresenter.getMediaPlayerPosition();
-                    }
-                    setClipPosition(currentPositionMs, mDurationMs);
-                }
-            });
+            post(mUpdateClipPositionRunnable);
         }
 
         public void startUpdating() {
             synchronized (mLock) {
-                if (mScheduledFuture != null) {
-                    mScheduledFuture.cancel(false);
-                    mScheduledFuture = null;
-                }
+                cancelPendingRunnables();
                 mScheduledFuture = mExecutorService.scheduleAtFixedRate(
                         this, 0, SLIDER_UPDATE_PERIOD_MILLIS, TimeUnit.MILLISECONDS);
             }
@@ -111,11 +110,16 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         public void stopUpdating() {
             synchronized (mLock) {
-                if (mScheduledFuture != null) {
-                    mScheduledFuture.cancel(false);
-                    mScheduledFuture = null;
-                }
+                cancelPendingRunnables();
             }
+        }
+
+        private void cancelPendingRunnables() {
+            if (mScheduledFuture != null) {
+                mScheduledFuture.cancel(true);
+                mScheduledFuture = null;
+            }
+            removeCallbacks(mUpdateClipPositionRunnable);
         }
     }
 
@@ -139,7 +143,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            setClipPosition(seekBar.getProgress(), seekBar.getMax());
+            setClipPosition(progress, seekBar.getMax());
         }
     };
 
@@ -246,6 +250,10 @@ public class VoicemailPlaybackLayout extends LinearLayout
             onSpeakerphoneOn(mPresenter.isSpeakerphoneOn());
         }
 
+        if (mPositionUpdater != null) {
+            mPositionUpdater.stopUpdating();
+            mPositionUpdater = null;
+        }
         mPositionUpdater = new PositionUpdater(duration, executorService);
         mPositionUpdater.startUpdating();
     }
