@@ -86,7 +86,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Toată agenda"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detaliile apelului"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Nu sunt disponibile detalii"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilizaţi tastatura DTMF"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tastatura tactilă cu sunet"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Reveniţi la apelul în curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Adăugaţi un apel"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Apel de intrare"</string>
@@ -142,7 +142,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Anulați"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Apelați <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Creați o intrare nouă"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Adăugați la un contact"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Adăugați la o intrare"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Trimiteți SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Inițiați un apel video"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Vedeți istoricul complet al apelurilor"</string>

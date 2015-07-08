@@ -187,7 +187,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sons et vibreur"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Accessibilité"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Sonnerie du téléphone"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibreur aussi pour les appels"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrer aussi pour les appels"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Son du clavier"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Durée de la tonalité du clavier"</string>
   <string-array name="dtmf_tone_length_entries">

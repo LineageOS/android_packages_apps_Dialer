@@ -126,7 +126,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"전화 애플리케이션을 사용 중지했으므로 전화를 걸 수 없습니다."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"이 기기에 작업을 처리할 수 있는 앱이 없습니다."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"이름 또는 전화번호 입력"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"부재중 통화 없음"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"부재중 전화 없음"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"최근 음성사서함 없음"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"즐겨찾는 연락처만 표시"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"기록"</string>
