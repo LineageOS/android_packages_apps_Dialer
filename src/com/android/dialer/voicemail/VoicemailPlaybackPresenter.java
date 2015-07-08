@@ -207,6 +207,11 @@ public class VoicemailPlaybackPresenter
             mPosition = savedInstanceState.getInt(CLIP_POSITION_KEY, 0);
             mIsPlaying = savedInstanceState.getBoolean(IS_PLAYING_STATE_KEY, false);
         }
+
+        if (mMediaPlayer == null) {
+            mIsPrepared = false;
+            mIsPlaying = false;
+        }
     }
 
     /**
@@ -240,9 +245,14 @@ public class VoicemailPlaybackPresenter
 
             mVoicemailUri = voicemailUri;
             mDuration.set(0);
-            mIsPlaying = startPlayingImmediately;
 
-            checkForContent();
+            if (startPlayingImmediately) {
+                // Since setPlaybackView can get called during the view binding process, we don't
+                // want to reset mIsPlaying to false if the user is currently playing the
+                // voicemail and the view is rebound.
+                mIsPlaying = startPlayingImmediately;
+                checkForContent();
+            }
 
             // Default to earpiece.
             mView.onSpeakerphoneOn(false);
@@ -284,6 +294,7 @@ public class VoicemailPlaybackPresenter
         if (mMediaPlayer != null) {
             mMediaPlayer.release();
             mMediaPlayer = null;
+            mIsPrepared = false;
         }
 
         if (mActivity != null) {
@@ -489,6 +500,7 @@ public class VoicemailPlaybackPresenter
         mIsPrepared = true;
 
         mDuration.set(mMediaPlayer.getDuration());
+        mPosition = mMediaPlayer.getCurrentPosition();
 
         mView.enableUiElements();
         Log.d(TAG, "onPrepared: mPosition=" + mPosition);
@@ -561,6 +573,10 @@ public class VoicemailPlaybackPresenter
      */
     public void resumePlayback() {
         if (!mIsPrepared) {
+            // If we haven't downloaded the voicemail yet, attempt to download it.
+            checkForContent();
+            mIsPlaying = true;
+
             return;
         }
 
@@ -607,7 +623,7 @@ public class VoicemailPlaybackPresenter
 
         mIsPlaying = false;
 
-        if (mMediaPlayer.isPlaying()) {
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
             mMediaPlayer.pause();
         }
 
