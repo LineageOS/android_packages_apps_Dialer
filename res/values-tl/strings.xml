@@ -31,7 +31,7 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Ibahagi ang voicemail"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Walang mga tawag"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"I-clear ang history ng tawag?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ide-delete nito ang lahat ng tawag mula sa iyong history"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Idi-delete nito ang lahat ng tawag mula sa iyong history"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Kini-clear ang history ng tawag…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> Voicemail </item>
@@ -183,7 +183,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Mag-play nang mas mabagal."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Simulan o i-pause ang pag-playback."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"Mga opsyon sa pagpapakita"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Mga display option"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Tunog at pag-vibrate"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Pagiging Naa-access"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ringtone ng telepono"</string>
@@ -196,5 +196,5 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Mga mabilisang tugon"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Mga Tawag"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Mga account sa pagtawag"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Account sa pagtawag"</string>
 </resources>
