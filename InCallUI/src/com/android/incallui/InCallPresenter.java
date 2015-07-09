@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.ActivityManager.TaskDescription;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -1486,12 +1487,17 @@ public class InCallPresenter implements CallList.Listener,
         }
 
         final Resources resources = mInCallActivity.getResources();
+        final int color;
         if (resources.getBoolean(R.bool.is_layout_landscape)) {
-            mInCallActivity.getWindow().setStatusBarColor(
-                    resources.getColor(R.color.statusbar_background_color));
+            color = resources.getColor(R.color.statusbar_background_color, null);
         } else {
-            mInCallActivity.getWindow().setStatusBarColor(mThemeColors.mSecondaryColor);
+            color = mThemeColors.mSecondaryColor;
         }
+
+        mInCallActivity.getWindow().setStatusBarColor(color);
+        final TaskDescription td = new TaskDescription(
+                resources.getString(R.string.notification_ongoing_call), null, color);
+        mInCallActivity.setTaskDescription(td);
     }
 
     /**
