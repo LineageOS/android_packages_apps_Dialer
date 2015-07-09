@@ -348,6 +348,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             final DialerPhoneNumberListAdapter adapter =
                     (DialerPhoneNumberListAdapter) getAdapter();
             adapter.disableAllShortcuts();
+        } else {
+            // The contact list is not going to change (we have no results since permissions are
+            // denied), but the shortcuts might because of the different query, so update the
+            // list.
+            getAdapter().notifyDataSetChanged();
         }
     }
 
