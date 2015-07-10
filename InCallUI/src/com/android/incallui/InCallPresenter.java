@@ -219,6 +219,9 @@ public class InCallPresenter implements CallList.Listener,
         mProximitySensor = proximitySensor;
         addListener(mProximitySensor);
 
+        addIncomingCallListener(mAnswerPresenter);
+        addInCallUiListener(mAnswerPresenter);
+
         mCallList = callList;
 
         // This only gets called by the service so this is okay.
@@ -1556,8 +1559,6 @@ public class InCallPresenter implements CallList.Listener,
      * Private constructor. Must use getInstance() to get this singleton.
      */
     private InCallPresenter() {
-        addIncomingCallListener(mAnswerPresenter);
-        addInCallUiListener(mAnswerPresenter);
     }
 
     /**
