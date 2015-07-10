@@ -71,18 +71,16 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     @Override
     public void onIncomingCall(InCallState oldState, InCallState newState, Call call) {
         Log.d(this, "onIncomingCall: " + this);
-        if (getUi() != null) {
-            Call modifyCall = CallList.getInstance().getVideoUpgradeRequestCall();
-            if (modifyCall != null) {
-                showAnswerUi(false);
-                Log.d(this, "declining upgrade request id: ");
-                CallList.getInstance().removeCallUpdateListener(mCallId, this);
-                InCallPresenter.getInstance().declineUpgradeRequest(getUi().getContext());
-            }
-            if (!call.getId().equals(mCallId)) {
-                // A new call is coming in.
-                processIncomingCall(call);
-            }
+        Call modifyCall = CallList.getInstance().getVideoUpgradeRequestCall();
+        if (modifyCall != null) {
+            showAnswerUi(false);
+            Log.d(this, "declining upgrade request id: ");
+            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            InCallPresenter.getInstance().declineUpgradeRequest(getUi().getContext());
+        }
+        if (!call.getId().equals(mCallId)) {
+            // A new call is coming in.
+            processIncomingCall(call);
         }
     }
 
@@ -98,7 +96,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     public void onDisconnect(Call call) {
         // no-op
     }
-    
+
     public void onSessionModificationStateChange(int sessionModificationState) {
         boolean isUpgradePending = sessionModificationState ==
                 Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
