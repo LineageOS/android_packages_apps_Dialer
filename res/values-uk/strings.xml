@@ -110,7 +110,7 @@
     <string name="description_start_voice_search" msgid="520539488194946012">"Розпочати голосовий пошук"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Подзвонити на <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Невідомий"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Голос. пошта"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Голосова пошта"</string>
     <string name="private_num" msgid="6374339738119166953">"Приватний номер"</string>
     <string name="payphone" msgid="7726415831153618726">"Таксофон"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> с"</string>
@@ -134,7 +134,7 @@
     <string name="call_log_activity_title" msgid="4612824396355272023">"Історія"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Усі"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропущені"</string>
-    <string name="call_log_voicemail_title" msgid="940422274047025948">"Голос.пошта"</string>
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"Голосова пошта"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Швидкий набір"</string>
     <string name="tab_recents" msgid="929949073851377206">"Останні"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Контакти"</string>

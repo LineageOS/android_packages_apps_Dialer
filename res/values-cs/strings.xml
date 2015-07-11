@@ -29,9 +29,9 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Vymazat historii volání"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Smazat hlasovou zprávu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Sdílet hlasovou schránku"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Žádná volání"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vymazat historii volání?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tímto z historie smažete všechna volání."</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Žádné hovory"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vymazat historii hovorů?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tímto z historie smažete všechny hovory."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Mazání historie volání…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> hlasové zprávy </item>
@@ -108,7 +108,7 @@
     <string name="description_send_text_message" msgid="3118485319691414221">"Odeslat zprávu SMS kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nevyslechnutá hlasová zpráva"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Spustit hlasové vyhledávání"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Zavolat na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Zavolat <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Neznámé"</string>
     <string name="voicemail" msgid="3851469869202611441">"Hlasová schránka"</string>
     <string name="private_num" msgid="6374339738119166953">"Soukromé číslo"</string>
@@ -128,7 +128,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Telefonický hovor nelze uskutečnit, protože aplikace Telefon byla zakázána."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Pro tuto akci v zařízení nemáte žádnou aplikaci."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Zadejte jméno nebo tel. číslo."</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Žádná volání"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Žádné hovory"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"Žádné nedávné hlasové zprávy"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Zobrazit pouze oblíbené"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historie"</string>
@@ -141,14 +141,14 @@
     <string name="tab_voicemail" msgid="155024725947496746">"Hlasová schránka"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Odebráno z oblíbených"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Vrátit zpět"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zavolat na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zavolat <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Vytvořit nový kontakt"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Přidat ke kontaktu"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Odeslat SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Uskutečnit videohovor"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Zobrazit celou historii volání"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Nové zmeškané hovory: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Rychlá volba je vytáčení oblíbených kontaktů a často volaných čísel jedním klepnutím."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Rychlá volba představuje vytáčení oblíbených kontaktů a často volaných čísel jedním klepnutím."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Žádné kontakty"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Klepnutím na obrázek zobrazíte všechna čísla. Klepnutím a podržením upravíte uspořádání."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstranit"</string>

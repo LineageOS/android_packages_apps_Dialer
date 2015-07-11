@@ -31,7 +31,7 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Sesli mesajı paylaş"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Çağrı yok"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Çağrı geçmişi temizlensin mi?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Bu işlem, geçmişinizdeki bütün çağrıları silecek"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Bu işlem, geçmişinizdeki tüm çağrıları silecek"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Çağrı geçmişi temizleniyor…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Sesli Mesaj </item>

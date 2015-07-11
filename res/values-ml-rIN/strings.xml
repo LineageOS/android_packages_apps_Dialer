@@ -24,7 +24,7 @@
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"വിളിക്കുക <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"കൃത്യമല്ലാത്ത നമ്പർ റിപ്പോർട്ടുചെയ്യുക"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"ഒരു കോൺടാക്റ്റിൽ ചേർക്കുക"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"കോൾ ചരിത്രത്തിൽ നിന്ന് മായ്‌ക്കുക"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
@@ -89,10 +89,10 @@
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"വിളിച്ചുകൊണ്ടിരിക്കുന്ന കോളിലേക്ക് മടങ്ങുക"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"കോൾ ചേർക്കുക"</string>
     <string name="type_incoming" msgid="6502076603836088532">"ഇന്‍കമിംഗ് കോള്‍"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"ഔട്ട്‌ഗോയിംഗ് കോൾ"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"വിളിച്ച കോൾ"</string>
     <string name="type_missed" msgid="2720502601640509542">"മിസ്‌ഡ് കോൾ"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"ഇൻകമിംഗ് വീഡിയോ കോൾ"</string>
-    <string name="type_outgoing_video" msgid="2858140021680755266">"ഔട്ട്ഗോയിംഗ് വീഡിയോ കോൾ"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"വിളിച്ച വീഡിയോ കോൾ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"വീഡിയോ കോൾ നഷ്‌ടമായി"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"ഇൻകമിംഗ് കോളുകൾ"</string>
@@ -141,7 +141,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"പഴയപടിയാക്കുക"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"വിളിക്കുക <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"പുതിയകോൺടാക്റ്റ് സൃഷ്‌ടിക്കൂ"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ഒരു കോൺടാക്റ്റിൽ ചേർക്കുക"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS അയയ്ക്കുക"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
     <string name="show_call_history" msgid="1141502332266697170">"മുഴുവൻ കോൾ ചരിത്രവും കാണുക"</string>
@@ -196,5 +196,5 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളുചെയ്യാനുള്ള അക്കൗണ്ട്"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളിംഗ് അക്കൗണ്ട്"</string>
 </resources>

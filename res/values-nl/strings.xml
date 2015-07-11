@@ -139,7 +139,7 @@
     <string name="tab_voicemail" msgid="155024725947496746">"Voicemail"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Verwijderd uit favorieten"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Ongedaan maken"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Bel <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> bellen"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Nieuw contact maken"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Toevoegen aan een contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Sms verzenden"</string>
