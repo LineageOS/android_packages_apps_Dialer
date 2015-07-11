@@ -62,7 +62,7 @@
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Выбор номера"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Выбор номера"</string>
-    <string name="make_primary" msgid="5829291915305113983">"Запомнить выбранное"</string>
+    <string name="make_primary" msgid="5829291915305113983">"Запомнить выбор"</string>
     <string name="description_search_button" msgid="3660807558587384889">"поиск"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"набор номера"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"набираемый номер"</string>
