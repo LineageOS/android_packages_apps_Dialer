@@ -89,10 +89,10 @@
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"വിളിച്ചുകൊണ്ടിരിക്കുന്ന കോളിലേക്ക് മടങ്ങുക"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"കോൾ ചേർക്കുക"</string>
     <string name="type_incoming" msgid="6502076603836088532">"ഇന്‍കമിംഗ് കോള്‍"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"ഔട്ട്‌ഗോയിംഗ് കോൾ"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"വിളിച്ച കോൾ"</string>
     <string name="type_missed" msgid="2720502601640509542">"മിസ്‌ഡ് കോൾ"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"ഇൻകമിംഗ് വീഡിയോ കോൾ"</string>
-    <string name="type_outgoing_video" msgid="2858140021680755266">"ഔട്ട്ഗോയിംഗ് വീഡിയോ കോൾ"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"വിളിച്ച വീഡിയോ കോൾ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"വീഡിയോ കോൾ നഷ്‌ടമായി"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"ഇൻകമിംഗ് കോളുകൾ"</string>
