@@ -74,7 +74,7 @@
     <string name="notification_action_end_call" msgid="6069460915123531620">"قطع تماس"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"ویدیو"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"صدا"</string>
-    <string name="notification_action_accept" msgid="2898609801209468429">"پذیرش"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"پذیرفتن"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"ردکردن"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"پاسخ تماس"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"پیام"</string>
@@ -133,15 +133,15 @@
     <string name="custom_message_send" msgid="5795754217085747742">"ارسال"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"پاسخ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ارسال پیامک"</string>
-    <string name="description_target_decline" msgid="4789834364389731957">"عدم پذیرش"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"نپذیرفتن"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"پاسخ به صورت تماس ویدیویی"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"پاسخ به صورت تماس صوتی"</string>
-    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"پذیرش درخواست ویدیو"</string>
-    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"رد کردن درخواست ویدیو"</string>
-    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"پذیرش درخواست ارسال ویدیو"</string>
-    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"رد کردن درخواست انتقال ویدیو"</string>
-    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"پذیرش درخواست دریافت ویدیو"</string>
-    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"رد کردن درخواست دریافت ویدیو"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"پذیرفتن درخواست ویدیو"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"نپذیرفتن درخواست ویدیو"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"پذیرفتن درخواست ارسال ویدیو"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"نپذیرفتن درخواست انتقال ویدیو"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"پذیرفتن درخواست دریافت ویدیو"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"نپذیرفتن درخواست دریافت ویدیو"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به بالا بلغزانید."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به چپ بلغزانید."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به راست بلغزانید."</string>

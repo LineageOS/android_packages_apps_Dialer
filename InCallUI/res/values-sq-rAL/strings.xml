@@ -75,7 +75,7 @@
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Zanore"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Prano"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"Refuzo"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Injoro"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Telefono"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mesazh"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Për të kryer telefonatë, së pari çaktivizo modalitetin e aeroplanit."</string>
