@@ -46,10 +46,14 @@
   <string name="notification_new_voicemail_ticker">Nei Mailboxopnam vum <xliff:g id="caller">%1$s</xliff:g></string>
   <string name="voicemail_playback_error">Konnt d\'Mailbox-Opnam net ofspillen</string>
   <string name="voicemail_buffering">Pufferung\u2026</string>
+  <string name="voicemail_fetching_content">Mailbox gëtt gelueden\u2026</string>
+  <string name="voicemail_fetching_timout">Kann d\'Mailbox net lueden</string>
   <string name="call_log_voicemail_header">Just Mailbox-Uriff</string>
   <string name="call_log_incoming_header">Just erakommend Uriff</string>
   <string name="call_log_outgoing_header">Just erausgoend Uriff</string>
   <string name="call_log_missed_header">Just verpasst Uriff</string>
+  <string name="voicemail_status_voicemail_not_available">Mailbox-Aktualisatiounen net disponibel</string>
+  <string name="voicemail_status_messages_waiting">Neie Mailbox-Message waart. Ka momentan net geluede ginn.</string>
   <string name="voicemail_status_configure_voicemail">Deng Mailbox astellen</string>
   <string name="voicemail_status_audio_not_available">Toun net disponibel</string>
   <string name="voicemail_status_action_configure">Ariichten</string>
@@ -106,12 +110,15 @@
   <string name="description_new_voicemail">Nei Mailboxopnam.</string>
   <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> Uriff.</string>
   <string name="description_video_call">Videouruff.</string>
+  <string name="description_send_text_message">Dem/Der <xliff:g id="name">%1$s</xliff:g> eng SMS schécken</string>
   <string name="description_call_log_unheard_voicemail">Ongelauschtert Mailboxopnam</string>
   <string name="description_start_voice_search">Sich mat der Stëmm starten</string>
   <string name="menu_callNumber"><xliff:g id="number">%s</xliff:g> uruffen</string>
   <string name="unknown">Onbekannt</string>
   <string name="voicemail">Sproochopnam</string>
   <string name="private_num">Privat Nummer</string>
+  <string name="payphone">Telefonskabinn</string>
+  <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> Min. <xliff:g id="seconds" example="28">%s</xliff:g> Sek.</string>
   <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Kann dës Nummer net uruffen</string>
   <string name="dialog_voicemail_not_ready_message">Konfiguréier deng Mailbox ënner Menü &gt; Astellungen.</string>
   <string name="dialog_voicemail_airplane_mode_message">Schalt de Fligermodus aus fir d\'Mailbox unzeruffen.</string>
@@ -120,8 +127,10 @@
   <string name="meid">MEID</string>
   <string name="simContacts_emptyLoading">Gëtt vun der SIM-Kaart gelueden\u2026</string>
   <string name="simContacts_title">Kontakter vun der SIM-Kaart</string>
+  <string name="add_contact_not_available">Keng Kontakt-App disponibel</string>
   <string name="voice_search_not_available">Sich mat der Stëmm net disponibel</string>
   <string name="call_not_available">Kann keen Telefonsuruff maachen, well d\'Telefons-App desaktivéiert gouf.</string>
+  <string name="activity_not_available">Keng App fir deen Zweck op dësem Apparat</string>
   <string name="dialer_hint_find_contact">Numm oder Telefonsnummer aginn</string>
   <string name="recentMissed_empty">Keng Uriff</string>
   <string name="recentVoicemails_empty">Keng rezent Mailbox-Opnamen</string>
@@ -142,15 +151,28 @@
   <string name="search_shortcut_make_video_call">Videouruff maachen</string>
   <string name="recents_footer_text">Vollstännegen Uruffhistorique uweisen</string>
   <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> nei verpasst Uriff</string>
+  <string name="speed_dial_empty">D\'Séiert Wielen baut en Uruff op mat enger Beréierung op d\'Favoritten an dacks ugerufft Nummeren</string>
   <string name="all_contacts_empty">Keng Kontakter</string>
+  <string name="contact_tooltip">D\'Bild drécke fir all Nummeren ze gesinn, oder d\'Bild beréieren an hale fir et ze réckelen</string>
   <string name="description_dismiss">Verwerfen</string>
   <string name="remove_contact">Ewechhuelen</string>
   <string name="favorites_menu_all_contacts">ALL D\'KONTAKTER</string>
   <string name="call_log_action_call_back">ZRÉCKRUFFEN</string>
   <string name="call_log_action_call">URUFFEN</string>
+  <string name="call_log_action_redial">NEES WIELEN</string>
   <string name="call_log_action_video_call">VIDEOURUFF</string>
   <string name="call_log_action_voicemail">LAUSCHTEREN</string>
   <string name="call_log_action_details">DETAILER</string>
+  <string name="description_incoming_missed_call">Verpassten Uruff vum <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
+  <string name="description_incoming_answered_call">Beäntwerten Uruff vum <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
+  <string name="description_outgoing_call">Erausgoenden Uruff u(n) <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
+  <string name="description_phone_account">mat <xliff:g id="phoneAccount" example="SIM 1">^1</xliff:g></string>
+  <string name="description_call_back_action"><xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g> zréckruffen</string>
+  <string name="description_video_call_action">Videouruff fir <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g>.</string>
+  <string name="description_voicemail_action">Mailboxopnam vum <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g> lauschteren</string>
+  <string name="description_details_action">Uruffdetailer fir <xliff:g id="nameOrNumber" example="John Smith">%1$s</xliff:g></string>
+  <string name="toast_entry_removed">Aus dem Uruffhistorique geläscht</string>
+  <string name="toast_caller_id_reported">Nummer gouf dem Google gemellt</string>
   <string name="call_log_action_report">MELLEN</string>
   <string name="call_log_header_today">Haut</string>
   <string name="call_log_header_yesterday">Gëschter</string>
@@ -171,4 +193,5 @@
   <string name="other_settings_title">Aner</string>
   <string name="respond_via_sms_setting_title">Séier Äntwerten</string>
   <string name="call_settings_label">Uriff</string>
+  <string name="phone_account_settings_label">Uruffkonten</string>
 </resources>

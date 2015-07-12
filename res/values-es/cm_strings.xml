@@ -96,5 +96,9 @@
   <string name="start_call_playback">Reproducir grabación</string>
   <string name="stop_call_playback">Detener</string>
   <string name="call_playback_error_message">Ocurrió un error al reproducir la grabación</string>
+  <string name="sensors_category_title">Opciones del sensor</string>
+  <string name="smart_mute_title">Silenciado inteligente</string>
+  <string name="smart_mute_summary">Silenciar una llamada entrante volteando el dispositivo</string>
   <string name="smart_dialer_title">Llamada inteligente</string>
+  <string name="smart_dialer_summary">Llamar automáticamente al número marcado al acercar el dispositivo a la oreja</string>
 </resources>

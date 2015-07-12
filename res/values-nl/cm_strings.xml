@@ -96,5 +96,9 @@
   <string name="start_call_playback">Opname afspelen</string>
   <string name="stop_call_playback">Stoppen</string>
   <string name="call_playback_error_message">Opname afspelen mislukt</string>
+  <string name="sensors_category_title">Instellingen sensoren</string>
+  <string name="smart_mute_title">Slim dempen</string>
+  <string name="smart_mute_summary">Inkomende oproepen dempen door het apparaat om te draaien</string>
   <string name="smart_dialer_title">Slim bellen</string>
+  <string name="smart_dialer_summary">Gekozen nummer automatisch bellen door uw apparaat naar uw oor te bewegen</string>
 </resources>
