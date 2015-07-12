@@ -100,4 +100,5 @@
   <string name="smart_mute_title">SIlenci intel·ligent</string>
   <string name="smart_mute_summary">Silencia la trucada entrant capgirant el dispositiu</string>
   <string name="smart_dialer_title">Trucada intel·ligent</string>
+  <string name="smart_dialer_summary">Truca automàticament al número de telèfon marcat al moure el dispositiu a l\'orella</string>
 </resources>

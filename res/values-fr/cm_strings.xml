@@ -100,4 +100,5 @@
   <string name="smart_mute_title">Mode muet intelligent</string>
   <string name="smart_mute_summary">Rendre l\'appel entrant muet en retournant l\'appareil</string>
   <string name="smart_dialer_title">Appel intelligent</string>
+  <string name="smart_dialer_summary">Appel automatique du numéro composé lorsque vous approchez votre téléphone de votre oreille</string>
 </resources>

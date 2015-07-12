@@ -96,5 +96,9 @@
   <string name="start_call_playback">Afspil optagelse</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kunne ikke afspille optagelse</string>
+  <string name="sensors_category_title">Sensor-indstillinger</string>
+  <string name="smart_mute_title">Smart lyddæmp</string>
+  <string name="smart_mute_summary">Slå lyden fra ved indgående opkald ved at vende enheden</string>
   <string name="smart_dialer_title">Smart-opkald</string>
+  <string name="smart_dialer_summary">Lav automatisk et opkald til det indtastede nummer ved at tage enheden op til øret</string>
 </resources>
