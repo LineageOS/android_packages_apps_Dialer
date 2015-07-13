@@ -51,6 +51,9 @@ public class SoundSettingsFragment extends PreferenceFragment
     private static final int NO_VIBRATION_FOR_CALLS = 0;
     private static final int DO_VIBRATION_FOR_CALLS = 1;
 
+
+    private static final int DTMF_TONE_TYPE_NORMAL = 0;
+
     private static final int SHOW_CARRIER_SETTINGS = 0;
     private static final int HIDE_CARRIER_SETTINGS = 1;
 
@@ -112,7 +115,8 @@ public class SoundSettingsFragment extends PreferenceFragment
             mDtmfToneLength.setOnPreferenceChangeListener(this);
             mDtmfToneLength.setValueIndex(
                     Settings.System.getInt(context.getContentResolver(),
-                        Settings.System.DTMF_TONE_WHEN_DIALING, PLAY_DTMF_TONE));
+                        Settings.System.DTMF_TONE_TYPE_WHEN_DIALING,
+                        DTMF_TONE_TYPE_NORMAL));
         } else {
             getPreferenceScreen().removePreference(mDtmfToneLength);
             mDtmfToneLength = null;
