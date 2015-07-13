@@ -16,6 +16,9 @@
 
 package com.android.dialer.calllog;
 
+import static android.Manifest.permission.READ_CALL_LOG;
+import static android.Manifest.permission.READ_CONTACTS;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -32,6 +35,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.PhoneAccountUtils;
@@ -66,8 +70,8 @@ public class DefaultVoicemailNotifier {
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             ContentResolver contentResolver = context.getContentResolver();
             sInstance = new DefaultVoicemailNotifier(context, notificationManager,
-                    createNewCallsQuery(contentResolver),
-                    createNameLookupQuery(contentResolver));
+                    createNewCallsQuery(context, contentResolver),
+                    createNameLookupQuery(context, contentResolver));
         }
         return sInstance;
     }
@@ -243,8 +247,9 @@ public class DefaultVoicemailNotifier {
     }
 
     /** Create a new instance of {@link NewCallsQuery}. */
-    public static NewCallsQuery createNewCallsQuery(ContentResolver contentResolver) {
-        return new DefaultNewCallsQuery(contentResolver);
+    public static NewCallsQuery createNewCallsQuery(Context context,
+            ContentResolver contentResolver) {
+        return new DefaultNewCallsQuery(context.getApplicationContext(), contentResolver);
     }
 
     /**
@@ -270,13 +275,19 @@ public class DefaultVoicemailNotifier {
         private static final int TRANSCRIPTION_COLUMN_INDEX = 6;
 
         private final ContentResolver mContentResolver;
+        private final Context mContext;
 
-        private DefaultNewCallsQuery(ContentResolver contentResolver) {
+        private DefaultNewCallsQuery(Context context, ContentResolver contentResolver) {
+            mContext = context;
             mContentResolver = contentResolver;
         }
 
         @Override
         public NewCall[] query() {
+            if (!PermissionsUtil.hasPermission(mContext, READ_CALL_LOG)) {
+                Log.w(TAG, "No READ_CALL_LOG permission, returning null for calls lookup.");
+                return null;
+            }
             final String selection = String.format("%s = 1 AND %s = ?", Calls.NEW, Calls.TYPE);
             final String[] selectionArgs = new String[]{ Integer.toString(Calls.VOICEMAIL_TYPE) };
             Cursor cursor = null;
@@ -326,8 +337,9 @@ public class DefaultVoicemailNotifier {
     }
 
     /** Create a new instance of {@link NameLookupQuery}. */
-    public static NameLookupQuery createNameLookupQuery(ContentResolver contentResolver) {
-        return new DefaultNameLookupQuery(contentResolver);
+    public static NameLookupQuery createNameLookupQuery(Context context,
+            ContentResolver contentResolver) {
+        return new DefaultNameLookupQuery(context.getApplicationContext(), contentResolver);
     }
 
     /**
@@ -339,13 +351,19 @@ public class DefaultVoicemailNotifier {
         private static final int DISPLAY_NAME_COLUMN_INDEX = 0;
 
         private final ContentResolver mContentResolver;
+        private final Context mContext;
 
-        private DefaultNameLookupQuery(ContentResolver contentResolver) {
+        private DefaultNameLookupQuery(Context context, ContentResolver contentResolver) {
+            mContext = context;
             mContentResolver = contentResolver;
         }
 
         @Override
         public String query(String number) {
+            if (!PermissionsUtil.hasPermission(mContext, READ_CONTACTS)) {
+                Log.w(TAG, "No READ_CONTACTS permission, returning null for name lookup.");
+                return null;
+            }
             Cursor cursor = null;
             try {
                 cursor = mContentResolver.query(
