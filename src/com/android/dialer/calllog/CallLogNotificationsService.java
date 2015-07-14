@@ -79,7 +79,7 @@ public class CallLogNotificationsService extends IntentService {
             return;
         }
 
-        if (!PermissionsUtil.hasPhonePermissions(this)) {
+        if (!PermissionsUtil.hasPermission(this, android.Manifest.permission.READ_CALL_LOG)) {
             return;
         }
 
