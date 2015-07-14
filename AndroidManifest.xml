@@ -19,8 +19,8 @@
     coreApp="true">
 
     <uses-sdk
-        android:minSdkVersion="MNC"
-        android:targetSdkVersion="MNC" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
 
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
