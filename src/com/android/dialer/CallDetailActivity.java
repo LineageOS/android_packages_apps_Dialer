@@ -268,7 +268,6 @@ public class CallDetailActivity extends Activity
     @Override
     public void onResume() {
         super.onResume();
-        PermissionsUtil.updateCachedPermissions(this);
         getCallDetails();
     }
 

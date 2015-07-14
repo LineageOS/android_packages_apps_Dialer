@@ -513,7 +513,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         Trace.beginSection(TAG + " onResume");
         super.onResume();
 
-        PermissionsUtil.updateCachedPermissions(this);
         mStateSaved = false;
         if (mFirstLaunch) {
             displayFragment(getIntent());
