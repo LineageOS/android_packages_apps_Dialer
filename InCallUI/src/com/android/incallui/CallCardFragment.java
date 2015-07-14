@@ -19,7 +19,6 @@ package com.android.incallui;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
-import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
@@ -282,9 +281,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mPrimaryName.setElegantTextHeight(false);
         mCallStateLabel.setElegantTextHeight(false);
-
-        final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
-        transition.enableTransitionType(LayoutTransition.CHANGING);
     }
 
     @Override
@@ -1010,9 +1006,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
 
-        final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
-        transition.disableTransitionType(LayoutTransition.CHANGING);
-
         mIsAnimating = true;
 
         observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -1182,9 +1175,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         setViewStatePostAnimation(mCallStateIcon);
 
         mPrimaryCallCardContainer.removeOnLayoutChangeListener(layoutChangeListener);
-
-        final LayoutTransition transition = mPrimaryCallInfo.getLayoutTransition();
-        transition.enableTransitionType(LayoutTransition.CHANGING);
 
         mFloatingActionButtonController.scaleIn(AnimUtils.NO_DELAY);
     }
