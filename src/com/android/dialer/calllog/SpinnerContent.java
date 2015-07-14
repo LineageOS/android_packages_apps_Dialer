@@ -43,8 +43,7 @@ public class SpinnerContent {
     private static final int INDEX_CALL_TYPE_INCOMING = 1;
     private static final int INDEX_CALL_TYPE_OUTGOING = 2;
     private static final int INDEX_CALL_TYPE_MISSED = 3;
-    private static final int INDEX_CALL_TYPE_BLACKLIST = 4;
-    private static final int INDEX_CALL_TYPE_VOICEMAIL = 5;
+    private static final int INDEX_CALL_TYPE_VOICEMAIL = 4;
 
     public static void setSpinnerContentValue(Spinner spinner, int value) {
         for (int i = 0, count = spinner.getCount(); i < count; i++) {
@@ -116,14 +115,6 @@ public class SpinnerContent {
                 case INDEX_CALL_TYPE_MISSED:
                     value = CallLog.Calls.MISSED_TYPE;
                     label = context.getString(R.string.call_log_missed_header);
-                    break;
-                case INDEX_CALL_TYPE_BLACKLIST:
-                    if (BlacklistUtils.isBlacklistEnabled(context)) {
-                        value = CallLog.Calls.BLACKLIST_TYPE;
-                        label = context.getString(R.string.call_log_blacklist_header);
-                    } else {
-                        continue;
-                    }
                     break;
                 case INDEX_CALL_TYPE_VOICEMAIL:
                     value = CallLog.Calls.VOICEMAIL_TYPE;

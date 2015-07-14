@@ -93,7 +93,4 @@
     <!-- The string used to represent an unknown location for a phone number in the call log
        Do not translate. -->
     <string name="call_log_empty_geocode" translatable="false"></string>
-
-    <!-- Filter by blacklist calls option -->
-    <string name="call_log_blacklist_header">Blacklist calls only</string>
 </resources>
