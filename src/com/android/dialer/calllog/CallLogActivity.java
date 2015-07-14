@@ -151,7 +151,6 @@ public class CallLogActivity extends Activity implements ViewPager.OnPageChangeL
     protected void onResume() {
         mIsResumed = true;
         super.onResume();
-        PermissionsUtil.updateCachedPermissions(this);
         sendScreenViewForChildFragment(mViewPager.getCurrentItem());
     }
 
