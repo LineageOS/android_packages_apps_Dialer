@@ -16,6 +16,9 @@
 
 package com.android.dialer.interactions;
 
+import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.WRITE_CONTACTS;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,7 +44,8 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        if (!PermissionsUtil.hasContactsPermissions(context)) {
+        if (!PermissionsUtil.hasPermission(context, READ_CONTACTS)
+            || !PermissionsUtil.hasPermission(context, WRITE_CONTACTS)) {
             return;
         }
         if (intent != null && Intent.ACTION_NEW_OUTGOING_CALL.equals(intent.getAction())) {
@@ -65,14 +69,29 @@ public class UndemoteOutgoingCallReceiver extends BroadcastReceiver {
         // If the contact is not demoted, this will not do anything. Otherwise, it will
         // restore it to an unpinned position. If it was a frequently called contact, it will
         // show up once again show up on the favorites screen.
-        PinnedPositions.undemote(context.getContentResolver(), id);
+        if (PermissionsUtil.hasPermission(context, WRITE_CONTACTS)) {
+            try {
+                PinnedPositions.undemote(context.getContentResolver(), id);
+            } catch (SecurityException e) {
+                // Just in case
+            }
+        }
     }
 
     private long getContactIdFromPhoneNumber(Context context, String number) {
+        if (!PermissionsUtil.hasPermission(context, READ_CONTACTS)) {
+            return NO_CONTACT_FOUND;
+        }
         final Uri contactUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI,
                 Uri.encode(number));
-        final Cursor cursor = context.getContentResolver().query(contactUri, new String[] {
-                PhoneLookup._ID}, null, null, null);
+        final Cursor cursor;
+        try {
+            cursor = context.getContentResolver().query(contactUri, new String[] {
+                    PhoneLookup._ID}, null, null, null);
+        } catch (SecurityException e) {
+            // Just in case
+            return NO_CONTACT_FOUND;
+        }
         if (cursor == null) {
             return NO_CONTACT_FOUND;
         }
