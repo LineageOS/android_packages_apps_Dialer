@@ -27,6 +27,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,6 +67,20 @@ public class LookupUtils {
         return EntityUtils.toString(response.getEntity());
     }
 
+    public static String[] allRegexResults(String input, String regex, boolean dotall) {
+        if (input == null) {
+            return null;
+        }
+        Pattern pattern = Pattern.compile(regex, dotall ? Pattern.DOTALL : 0);
+        Matcher matcher = pattern.matcher(input);
+
+        List<String> regexResults = new ArrayList<String>();
+        while (matcher.find()) {
+            regexResults.add(matcher.group(1).trim());
+        }
+        return regexResults.toArray(new String[regexResults.size()]);
+    }
+
     public static String firstRegexResult(String input, String regex, boolean dotall) {
         if (input == null) {
             return null;
@@ -81,4 +97,3 @@ public class LookupUtils {
         return Html.fromHtml(input).toString().trim();
     }
 }
-
