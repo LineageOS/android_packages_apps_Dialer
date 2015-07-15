@@ -187,7 +187,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Уменьшить скорость воспроизведения."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Начать или приостановить воспроизведение."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"Упорядочить"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Отображение контактов"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Звуки и вибрация"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Специальные возможности"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Рингтон"</string>

@@ -73,11 +73,11 @@
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"વધુ વિકલ્પો"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ડાયલ પેડ"</string>
     <string name="menu_copy" msgid="6108677035381940698">"કૉપિ કરો"</string>
-    <string name="menu_show_outgoing_only" msgid="1965570298133301970">"ફક્ત આઉટગોઇંગ દર્શાવો"</string>
-    <string name="menu_show_incoming_only" msgid="7534206815238877417">"ફક્ત આવનારા દર્શાવો"</string>
-    <string name="menu_show_missed_only" msgid="154473166059743996">"ફક્ત છૂટેલ દર્શાવો"</string>
-    <string name="menu_show_voicemails_only" msgid="1898421289561435703">"ફક્ત વૉઇસમેઇલ્સ દર્શાવો"</string>
-    <string name="menu_show_all_calls" msgid="7560347482073345885">"તમામ કૉલ્સ દર્શાવો"</string>
+    <string name="menu_show_outgoing_only" msgid="1965570298133301970">"ફક્ત આઉટગોઇંગ બતાવો"</string>
+    <string name="menu_show_incoming_only" msgid="7534206815238877417">"ફક્ત આવનારા બતાવો"</string>
+    <string name="menu_show_missed_only" msgid="154473166059743996">"ફક્ત છૂટેલ બતાવો"</string>
+    <string name="menu_show_voicemails_only" msgid="1898421289561435703">"ફક્ત વૉઇસમેઇલ્સ બતાવો"</string>
+    <string name="menu_show_all_calls" msgid="7560347482073345885">"તમામ કૉલ્સ બતાવો"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2-સંકડનો વિરામ ઉમેરો"</string>
     <string name="add_wait" msgid="3360818652790319634">"પ્રતીક્ષા ઉમેરો"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"સેટિંગ્સ"</string>
@@ -128,7 +128,7 @@
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"નામ અથવા ફોન નંબર દાખલ કરો"</string>
     <string name="recentMissed_empty" msgid="4901789420356796156">"કોઈ કૉલ્સ નથી"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"કોઈ તાજેતરના વૉઇસમેઇલ્સ નથી"</string>
-    <string name="show_favorites_only" msgid="5520072531022614595">"ફક્ત મનપસંદ દર્શાવો"</string>
+    <string name="show_favorites_only" msgid="5520072531022614595">"ફક્ત મનપસંદ બતાવો"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ઇતિહાસ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"તમામ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"છૂટેલ"</string>
