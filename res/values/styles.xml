@@ -218,18 +218,22 @@
         <item name="cardBackgroundColor">@color/background_dialer_call_log_list_item</item>
     </style>
 
-    <style name="PromoCardActionStyle">
+    <style name="TextActionStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/call_log_action_height</item>
         <item name="android:gravity">end|center_vertical</item>
         <item name="android:paddingStart">@dimen/call_log_action_horizontal_padding</item>
         <item name="android:paddingEnd">@dimen/call_log_action_horizontal_padding</item>
-        <item name="android:textColor">@color/promo_card_text</item>
-        <item name="android:textSize">@dimen/call_log_list_item_actions_text_size</item>
+        <item name="android:textColor">@color/dialtacts_theme_color</item>
         <item name="android:fontFamily">"sans-serif-medium"</item>
         <item name="android:focusable">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="PromoCardActionStyle" parent="TextActionStyle">
+        <item name="android:textColor">@color/promo_card_text</item>
+        <item name="android:textSize">@dimen/call_log_list_item_actions_text_size</item>
     </style>
 
     <style name="VoicemailPlaybackLayoutTextStyle">
