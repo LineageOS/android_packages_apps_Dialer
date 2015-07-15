@@ -20,7 +20,7 @@
 
     <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
-    <string name="applicationLabel">Dialer</string>
+    <string name="applicationLabel">Phone</string>
 
     <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
