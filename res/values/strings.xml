@@ -70,7 +70,10 @@
     <string name="recentCalls_shareVoicemail">Share voicemail</string>
 
     <!-- Text displayed when the call log is empty. -->
-    <string name="recentCalls_empty">No calls</string>
+    <string name="recentCalls_empty">Your call log is empty</string>
+
+    <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+    <string name="recentCalls_empty_action">Make a call</string>
 
     <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
     <string name="clearCallLogConfirmation_title">Clear call history?</string>
@@ -466,10 +469,10 @@
     <string name="view_full_call_history_font_family">sans-serif</string>
 
     <!-- Text displayed when the list of missed calls is empty -->
-    <string name="recentMissed_empty">No calls</string>
+    <string name="recentMissed_empty">You have no missed calls.</string>
 
     <!-- Text displayed when the list of voicemails is empty -->
-    <string name="recentVoicemails_empty">No recent voicemails</string>
+    <string name="recentVoicemails_empty">Your voicemail inbox is empty.</string>
 
     <!--  Menu option to show favorite contacts only -->
     <string name="show_favorites_only">Show favorites only</string>
@@ -533,10 +536,16 @@
     <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
 
     <!-- Shown when there are no speed dial favorites. -->
-    <string name="speed_dial_empty">Speed dial is one\u2011touch dialing for favorites and numbers you call often</string>
+    <string name="speed_dial_empty">No one is on your speed dial yet</string>
+
+    <!-- Shown as an action when there are no speed dial favorites -->
+    <string name="speed_dial_empty_add_favorite_action">Add a favorite</string>
 
     <!-- Shown when there are no contacts in the all contacts list. -->
-    <string name="all_contacts_empty">No contacts</string>
+    <string name="all_contacts_empty">You don\'t have any contacts yet</string>
+
+    <!-- Shown as an action when the all contacts list is empty -->
+    <string name="all_contacts_empty_add_contact_action">Add a contact</string>
 
     <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
          card can be tapped to bring up a list of all numbers, or long pressed to start reordering
@@ -780,4 +789,28 @@
     <string name="play_dtmf_preference_key" translatable="false">button_play_dtmf_tone</string>
     <!-- DO NOT TRANSLATE. Internal key for DTMF tone length preference. -->
     <string name="dtmf_tone_length_preference_key" translatable="false">button_dtmf_settings</string>
+
+    <!-- The label of the button used to turn on a single permission -->
+    <string name="permission_single_turn_on">Turn on</string>
+
+    <!--  The label of the button used to turn on multiple permissions -->
+    <string name="permission_multiple_turn_on">Set permissions</string>
+
+    <!-- Shown as a prompt to turn on the contacts permission to enable speed dial -->
+    <string name="permission_no_speeddial">To enable speed dial,\n turn on the the Contacts permission.</string>
+
+    <!-- Shown as a prompt to turn on the phone permission to enable the call log -->
+    <string name="permission_no_calllog">To see your call log,\n turn on the Phone permission.</string>
+
+    <!-- Shown as a prompt to turn on the contacts permission to show all contacts -->
+    <string name="permission_no_contacts">To see your contacts,\n turn on the Contacts permission.</string>
+
+    <!-- Shown as a prompt to turn on the phone permission to show voicemails -->
+    <string name="permission_no_voicemail">To access your voicemail,\n turn on the Phone permission.</string>
+
+    <!-- Shown as a prompt to turn on contacts and location permissions to allow contact and nearby places search -->
+    <string name="permission_no_search">To search your contacts and nearby locations, turn on the Contacts and Location permissions.</string>
+
+    <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+    <string name="permission_place_call">To place a call,\n turn on the Phone permission.</string>
 </resources>
