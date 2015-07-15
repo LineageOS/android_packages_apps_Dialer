@@ -627,7 +627,8 @@ public class VoicemailPlaybackPresenter
             mMediaPlayer.pause();
         }
 
-        mPosition = mMediaPlayer.getCurrentPosition();
+        mPosition = mMediaPlayer == null ? 0 : mMediaPlayer.getCurrentPosition();
+
         Log.d(TAG, "Paused playback at " + mPosition + ".");
 
         if (mView != null) {
@@ -646,7 +647,9 @@ public class VoicemailPlaybackPresenter
      * playing to know whether to resume playback once the user selects a new position.
      */
     public void pausePlaybackForSeeking() {
-        mShouldResumePlaybackAfterSeeking = mMediaPlayer.isPlaying();
+        if (mMediaPlayer != null) {
+            mShouldResumePlaybackAfterSeeking = mMediaPlayer.isPlaying();
+        }
         pausePlayback();
     }
 
