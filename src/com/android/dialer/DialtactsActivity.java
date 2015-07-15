@@ -66,6 +66,7 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.calllog.CallLogActivity;
+import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
@@ -101,6 +102,7 @@ import java.util.List;
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
+        CallLogFragment.HostInterface,
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
@@ -1207,6 +1209,24 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mListsFragment.getRemoveView().setDragDropController(dragController);
     }
 
+    /**
+     * Implemented to satisfy {@link SpeedDialFragment.HostInterface}
+     */
+    @Override
+    public void showAllContactsTab() {
+        if (mListsFragment != null) {
+            mListsFragment.showTab(ListsFragment.TAB_INDEX_ALL_CONTACTS);
+        }
+    }
+
+    /**
+     * Implemented to satisfy {@link CallLogFragment.HostInterface}
+     */
+    @Override
+    public void showDialpad() {
+        showDialpadFragment(true);
+    }
+
     @Override
     public void onPickPhoneNumberAction(Uri dataUri) {
         // Specify call-origin so that users will see the previous tab instead of
@@ -1321,7 +1341,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public int getActionBarHeight() {
         return mActionBarHeight;
     }
-
 
     private int getFabAlignment() {
         if (!mIsLandscape && !isInSearchUi() &&

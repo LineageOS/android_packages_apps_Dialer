@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.dialer.R;
+import com.android.dialer.widget.EmptyContentView;
 import com.android.incallui.CallCardFragment;
 import com.android.incallui.Log;
 
@@ -113,27 +114,6 @@ public class DialerUtils {
             }
         }
         return null;
-    }
-
-    /**
-     * Sets the image asset and text for an empty list view (see empty_list_view.xml).
-     *
-     * @param emptyListView The empty list view.
-     * @param imageResId The resource id for the drawable to set as the image.
-     * @param strResId The resource id for the string to set as the message.
-     * @param res The resources to obtain the image and string from.
-     */
-    public static void configureEmptyListView(
-            View emptyListView, int imageResId, int strResId, Resources res) {
-        ImageView emptyListViewImage =
-                (ImageView) emptyListView.findViewById(R.id.emptyListViewImage);
-
-        emptyListViewImage.setImageDrawable(res.getDrawable(imageResId));
-        emptyListViewImage.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-
-        TextView emptyListViewMessage =
-                (TextView) emptyListView.findViewById(R.id.emptyListViewMessage);
-        emptyListViewMessage.setText(res.getString(strResId));
     }
 
     /**

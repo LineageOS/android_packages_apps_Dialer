@@ -16,6 +16,8 @@
 
 package com.android.dialer.calllog;
 
+import static android.Manifest.permission.READ_CALL_LOG;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
@@ -26,6 +28,7 @@ import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -46,6 +49,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.list.ListsFragment.HostInterface;
@@ -55,6 +59,8 @@ import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialerbind.ObjectFactory;
 
 import java.util.List;
@@ -63,8 +69,8 @@ import java.util.List;
  * Displays a list of call log entries. To filter for a particular kind of call
  * (all, missed or voicemails), specify it in the constructor.
  */
-public class CallLogFragment extends Fragment
-        implements CallLogQueryHandler.Listener, CallLogAdapter.CallFetcher {
+public class CallLogFragment extends Fragment implements CallLogQueryHandler.Listener,
+        CallLogAdapter.CallFetcher, OnEmptyViewActionButtonClickedListener {
     private static final String TAG = "CallLogFragment";
 
     /**
@@ -81,6 +87,8 @@ public class CallLogFragment extends Fragment
     // No date-based filtering.
     private static final int NO_DATE_LIMIT = 0;
 
+    private static final int READ_CALL_LOG_PERMISSION_REQUEST_CODE = 1;
+
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
@@ -91,7 +99,7 @@ public class CallLogFragment extends Fragment
     /** Whether there is at least one voicemail source installed. */
     private boolean mVoicemailSourcesAvailable = false;
 
-    private View mEmptyListView;
+    private EmptyContentView mEmptyListView;
     private KeyguardManager mKeyguardManager;
 
     private boolean mEmptyLoaderRunning;
@@ -116,6 +124,8 @@ public class CallLogFragment extends Fragment
     private final ContentObserver mVoicemailStatusObserver = new CustomContentObserver();
     private boolean mRefreshDataRequired = true;
 
+    private boolean mHasReadCallLogPermission = false;
+
     // Exactly same variable is in Fragment as a package private.
     private boolean mMenuVisible = true;
 
@@ -130,6 +140,16 @@ public class CallLogFragment extends Fragment
     // the date filter are included.  If zero, no date-based filtering occurs.
     private long mDateLimit = NO_DATE_LIMIT;
 
+    /*
+     * True if this instance of the CallLogFragment is the Recents screen shown in
+     * DialtactsActivity.
+     */
+    private boolean mIsRecentsFragment;
+
+    public interface HostInterface {
+        public void showDialpad();
+    }
+
     public CallLogFragment() {
         this(CallLogQueryHandler.CALL_TYPE_ALL, NO_LOG_LIMIT);
     }
@@ -139,9 +159,7 @@ public class CallLogFragment extends Fragment
     }
 
     public CallLogFragment(int filterType, int logLimit) {
-        super();
-        mCallTypeFilter = filterType;
-        mLogLimit = logLimit;
+        this(filterType, logLimit, NO_DATE_LIMIT);
     }
 
     /**
@@ -162,7 +180,8 @@ public class CallLogFragment extends Fragment
      * @param dateLimit limits results to calls occurring on or after the specified date.
      */
     public CallLogFragment(int filterType, int logLimit, long dateLimit) {
-        this(filterType, logLimit);
+        mCallTypeFilter = filterType;
+        mLogLimit = logLimit;
         mDateLimit = dateLimit;
     }
 
@@ -174,6 +193,8 @@ public class CallLogFragment extends Fragment
             mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
             mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
         }
+
+        mIsRecentsFragment = mLogLimit != NO_LOG_LIMIT;
 
         final Activity activity = getActivity();
         final ContentResolver resolver = activity.getContentResolver();
@@ -268,7 +289,9 @@ public class CallLogFragment extends Fragment
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mEmptyListView = view.findViewById(R.id.empty_list_view);
+        mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
+        mEmptyListView.setImage(R.drawable.empty_call_log);
+        mEmptyListView.setActionClickedListener(this);
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         boolean isShowingRecentsTab = mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT;
@@ -287,7 +310,6 @@ public class CallLogFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         updateEmptyMessage(mCallTypeFilter);
         mAdapter.onRestoreInstanceState(savedInstanceState);
     }
@@ -305,6 +327,16 @@ public class CallLogFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        final boolean hasReadCallLogPermission =
+                PermissionsUtil.hasPermission(getActivity(), READ_CALL_LOG);
+        if (!mHasReadCallLogPermission && hasReadCallLogPermission) {
+            // We didn't have the permission before, and now we do. Force a refresh of the call log.
+            // Note that this code path always happens on a fresh start, but mRefreshDataRequired
+            // is already true in that case anyway.
+            mRefreshDataRequired = true;
+            updateEmptyMessage(mCallTypeFilter);
+        }
+        mHasReadCallLogPermission = hasReadCallLogPermission;
         refreshData();
     }
 
@@ -359,6 +391,17 @@ public class CallLogFragment extends Fragment
     }
 
     private void updateEmptyMessage(int filterType) {
+        final Context context = getActivity();
+        if (context == null) {
+            return;
+        }
+
+        if (!PermissionsUtil.hasPermission(context, READ_CALL_LOG)) {
+            mEmptyListView.setDescription(R.string.permission_no_calllog);
+            mEmptyListView.setActionLabel(R.string.permission_single_turn_on);
+            return;
+        }
+
         final int messageId;
         switch (filterType) {
             case Calls.MISSED_TYPE:
@@ -374,8 +417,12 @@ public class CallLogFragment extends Fragment
                 throw new IllegalArgumentException("Unexpected filter type in CallLogFragment: "
                         + filterType);
         }
-        DialerUtils.configureEmptyListView(
-                mEmptyListView, R.drawable.empty_call_log, messageId, getResources());
+        mEmptyListView.setDescription(messageId);
+        if (mIsRecentsFragment) {
+            mEmptyListView.setActionLabel(R.string.recentCalls_empty_action);
+        } else {
+            mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
+        }
     }
 
     CallLogAdapter getAdapter() {
@@ -435,6 +482,32 @@ public class CallLogFragment extends Fragment
             }
             CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
             CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
+        }
+    }
+
+    @Override
+    public void onEmptyViewActionButtonClicked(String[] permissions) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        if (!PermissionsUtil.hasPermission(activity, READ_CALL_LOG)) {
+            requestPermissions(new String[] {READ_CALL_LOG}, READ_CALL_LOG_PERMISSION_REQUEST_CODE);
+        } else if (mIsRecentsFragment) {
+            // Show dialpad if we are the recents fragment.
+            ((HostInterface) activity).showDialpad();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            int[] grantResults) {
+        if (requestCode == READ_CALL_LOG_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+                // Force a refresh of the data since we were missing the permission before this.
+                mRefreshDataRequired = true;
+            }
         }
     }
 }
