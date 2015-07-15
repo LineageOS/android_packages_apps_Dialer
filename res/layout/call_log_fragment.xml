@@ -27,11 +27,10 @@
         android:paddingStart="@dimen/call_log_horizontal_margin"
         android:paddingEnd="@dimen/call_log_horizontal_margin" />
 
-    <include
+    <com.android.dialer.widget.EmptyContentView
         android:id="@+id/empty_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/empty_list_view"
         android:visibility="gone" />
 
 </FrameLayout>
