@@ -131,11 +131,11 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Eigene Antwort schreiben..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Abbrechen"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Senden"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Antworten"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Annehmen"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS senden"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Ablehnen"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Antworten mit Videoanruf"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Antworten mit Audioanruf"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Als Videoanruf annehmen"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Als normalen Anruf annehmen"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Videoanfrage akzeptieren"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Videoanfrage ablehnen"</string>
     <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Anfrage für ausgehenden Videoanruf akzeptieren"</string>
