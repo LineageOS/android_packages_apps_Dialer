@@ -36,6 +36,7 @@ public final class LookupSettings {
 
     /** People lookup providers */
     public static final String PLP_WHITEPAGES = "WhitePages";
+    public static final String PLP_AUSKUNFT = "Auskunft";
     public static final String PLP_DEFAULT = PLP_WHITEPAGES;
 
     /** Reverse lookup providers */
@@ -48,6 +49,7 @@ public final class LookupSettings {
     public static final String RLP_CYNGN_CHINESE = "CyngnChinese";
     public static final String RLP_DASTELEFONBUCH = "DasTelefonbuch";
     public static final String RLP_GEBELD = "Gebeld";
+    public static final String RLP_AUSKUNFT = "Auskunft";
     public static final String RLP_DEFAULT = RLP_OPENCNAM;
 
     private LookupSettings() {
