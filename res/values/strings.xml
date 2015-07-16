@@ -797,7 +797,7 @@
     <string name="permission_multiple_turn_on">Set permissions</string>
 
     <!-- Shown as a prompt to turn on the contacts permission to enable speed dial -->
-    <string name="permission_no_speeddial">To enable speed dial,\n turn on the the Contacts permission.</string>
+    <string name="permission_no_speeddial">To enable speed dial,\n turn on the Contacts permission.</string>
 
     <!-- Shown as a prompt to turn on the phone permission to enable the call log -->
     <string name="permission_no_calllog">To see your call log,\n turn on the Phone permission.</string>
