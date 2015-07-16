@@ -115,7 +115,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
     @Override
     protected View inflateView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.show_all_contacts_fragment, null);
+        return inflater.inflate(R.layout.all_contacts_fragment, null);
     }
 
     @Override
