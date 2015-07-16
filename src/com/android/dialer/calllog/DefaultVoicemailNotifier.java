@@ -302,6 +302,9 @@ public class DefaultVoicemailNotifier {
                     newCalls[cursor.getPosition()] = createNewCallsFromCursor(cursor);
                 }
                 return newCalls;
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Exception when querying Contacts Provider for calls lookup");
+                return null;
             } finally {
                 MoreCloseables.closeQuietly(cursor);
             }
@@ -371,6 +374,9 @@ public class DefaultVoicemailNotifier {
                         PROJECTION, null, null, null);
                 if (cursor == null || !cursor.moveToFirst()) return null;
                 return cursor.getString(DISPLAY_NAME_COLUMN_INDEX);
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Exception when querying Contacts Provider for name lookup");
+                return null;
             } finally {
                 if (cursor != null) {
                     cursor.close();
