@@ -25,12 +25,13 @@
         android:id="@+id/emptyListViewMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="84dp"
         android:gravity="center_horizontal|top"
         android:textSize="@dimen/empty_list_message_text_size"
         android:textColor="@color/empty_list_text_color"
         android:paddingRight="16dp"
-        android:paddingLeft="16dp" />
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
 
     <TextView
         android:id="@+id/emptyListViewAction"
@@ -46,5 +47,9 @@
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         style="@style/TextActionStyle" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
 </merge>
