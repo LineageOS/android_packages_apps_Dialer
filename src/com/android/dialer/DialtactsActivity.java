@@ -103,6 +103,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         DialpadFragment.OnDialpadQueryChangedListener,
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
+        DialpadFragment.HostInterface,
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
@@ -486,8 +487,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     }
                 });
 
-        setupActivityOverlay();
-
         Trace.endSection();
 
         Trace.beginSection(TAG + " initialize smart dialing");
@@ -495,19 +494,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         SmartDialPrefix.initializeNanpSettings(this);
         Trace.endSection();
         Trace.endSection();
-    }
-
-    private void setupActivityOverlay() {
-        final View activityOverlay = findViewById(R.id.activity_overlay);
-        activityOverlay.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (!mIsDialpadShown) {
-                    maybeExitSearchUi();
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -1147,7 +1133,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } catch (Exception ignored) {
             // Skip any exceptions for this piece of code
         }
+    }
 
+    @Override
+    public boolean onDialpadSpacerTouchWithEmptyQuery() {
+        if (mInDialpadSearch && mSmartDialSearchFragment != null
+                && !mSmartDialSearchFragment.isShowingPermissionRequest()) {
+            hideDialpadFragment(true /* animate */, true /* clearDialpad */);
+            return true;
+        }
+        return false;
     }
 
     @Override
