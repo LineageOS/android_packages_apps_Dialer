@@ -32,10 +32,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 
-import org.codeaurora.ims.QtiCallConstants;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
-
+import com.android.incallui.InCallVideoCallCallbackNotifier.SessionModificationListener;
+import org.codeaurora.ims.QtiCallConstants;
 
 /**
  * This class listens to incoming events for the listener classes it implements. It should
@@ -45,9 +45,12 @@ import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
  * {@class CallSubstateNotifier} notifies it through the onCallSubstateChanged callback.
  */
 public class InCallMessageController implements InCallSubstateListener, VideoEventListener,
-        CallList.Listener {
+        CallList.Listener, InCallSessionModificationCauseListener {
 
     private static InCallMessageController sInCallMessageController;
+
+    private PrimaryCallTracker mPrimaryCallTracker;
+
     private Context mContext;
 
     /**
@@ -57,25 +60,33 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
     }
 
     /**
-     * Handles set up of the {@class InCallSubstateListener}. Instantiates the context needed by
-     * the class and adds a listener to listen to call substate changes.
+     * Handles set up of the {@class InCallMessageController}. Instantiates the context needed by
+     * the class and adds a listener to listen to call substate changes, video event changes,
+     * session modification cause changes, call state changes.
      */
     public void setUp(Context context) {
         mContext = context;
+        mPrimaryCallTracker = new PrimaryCallTracker();
         CallSubstateNotifier.getInstance().addListener(this);
         InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this);
         CallList.getInstance().addListener(this);
+        SessionModificationCauseNotifier.getInstance().addListener(this);
+        InCallPresenter.getInstance().addListener(mPrimaryCallTracker);
     }
 
     /**
-     * Handles tear down of the {@class InCallSubstateListener}. Sets the context to null and
-     * unregisters it's call substate listener.
+     * Handles tear down of the {@class InCallMessageController}. Sets the context to null and
+     * unregisters it's call substate,  video event, session modification cause, call state
+     * listeners.
      */
     public void tearDown() {
         mContext = null;
         CallSubstateNotifier.getInstance().removeListener(this);
         InCallVideoCallCallbackNotifier.getInstance().removeVideoEventListener(this);
         CallList.getInstance().removeListener(this);
+        SessionModificationCauseNotifier.getInstance().removeListener(this);
+        InCallPresenter.getInstance().removeListener(mPrimaryCallTracker);
+        mPrimaryCallTracker = null;
     }
 
     /**
@@ -97,8 +108,8 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         Log.d(this, "onCallSubstateChanged - Call : " + call + " call substate changed to " +
                 callSubstate);
 
-        if (mContext == null) {
-            Log.e(this, "onCallSubstateChanged - Context is null. Return");
+        if (mContext == null || !mPrimaryCallTracker.isPrimaryCall(call)) {
+            Log.e(this, "onCallSubstateChanged - Context is null/not primary call.");
             return;
         }
 
@@ -141,11 +152,11 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
      */
     @Override
     public void onVideoQualityChanged(final Call call, final int videoQuality) {
-        Log.d(this, "Call : " + call + " onVideoQualityChanged. Video quality changed to " +
+        Log.d(this, "onVideoQualityChanged: - Call : " + call + " Video quality changed to " +
                 videoQuality);
 
-        if (mContext == null) {
-            Log.e(this, "onVideoQualityChanged - Context is null. Return");
+        if (mContext == null || !mPrimaryCallTracker.isPrimaryCall(call)) {
+            Log.e(this, "onVideoQualityChanged - Context is null/not primary call.");
             return;
         }
         final Resources resources = mContext.getResources();
@@ -166,7 +177,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         Log.d(this, "onCallSessionEvent: event = " + event);
 
         if (mContext == null) {
-            Log.e(this, "onCallSessionEvent - Context is null. Return");
+            Log.e(this, "onCallSessionEvent - Context is null.");
             return;
         }
         final Resources resources = mContext.getResources();
@@ -257,5 +268,60 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
          default:
              break;
        }
+    }
+
+    /*
+     * Handles any session modifictaion cause changes in the call.
+     *
+     * @param call The call for which orientation mode changed.
+     * @param sessionModificationCause The new session modifictaion cause
+     */
+    @Override
+    public void onSessionModificationCauseChanged(Call call, int sessionModificationCause) {
+        Log.d(this, "onSessionModificationCauseChanged: Call : " + call +
+                " Call modified due to "  + sessionModificationCause);
+
+        if (mContext == null || !mPrimaryCallTracker.isPrimaryCall(call)) {
+            Log.e(this,
+                    "onSessionModificationCauseChanged- Context is null/not primary call.");
+            return;
+        }
+
+        QtiCallUtils.displayToast(mContext,
+                getSessionModificationCauseResourceId(sessionModificationCause));
+    }
+
+    /**
+     * This method returns the string resource id (i.e. display string) that corresponds to the
+     * session modification cause code.
+     */
+    private static int getSessionModificationCauseResourceId(int cause) {
+        switch(cause) {
+            case QtiCallConstants.CAUSE_CODE_UNSPECIFIED:
+                return R.string.session_modify_cause_unspecified;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_UPGRADE_LOCAL_REQ:
+                return R.string.session_modify_cause_upgrade_local_request;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_UPGRADE_REMOTE_REQ:
+                return R.string.session_modify_cause_upgrade_remote_request;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_LOCAL_REQ:
+                return R.string.session_modify_cause_downgrade_local_request;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_REMOTE_REQ:
+                return R.string.session_modify_cause_downgrade_remote_request;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_RTP_TIMEOUT:
+                return R.string.session_modify_cause_downgrade_rtp_timeout;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_QOS:
+                return R.string.session_modify_cause_downgrade_qos;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_PACKET_LOSS:
+                return R.string.session_modify_cause_downgrade_packet_loss;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_LOW_THRPUT:
+                return R.string.session_modify_cause_downgrade_low_thrput;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_THERM_MITIGATION:
+                return R.string.session_modify_cause_downgrade_thermal_mitigation;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_LIPSYNC:
+                return R.string.session_modify_cause_downgrade_lipsync;
+            case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_GENERIC_ERROR:
+            default:
+                return R.string.session_modify_cause_downgrade_generic_error;
+        }
     }
 }

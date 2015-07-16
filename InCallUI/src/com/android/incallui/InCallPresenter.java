@@ -23,6 +23,7 @@ import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Point;
@@ -349,7 +350,9 @@ public class InCallPresenter implements CallList.Listener,
         mCallList.setFilteredNumberQueryHandler(mFilteredQueryHandler);
 
         InCallMessageController.getInstance().setUp(mContext);
+        OrientationModeHandler.getInstance().setUp();
         addDetailsListener(CallSubstateNotifier.getInstance());
+        addDetailsListener(SessionModificationCauseNotifier.getInstance());
 
         InCallZoomController.getInstance().setUp(mContext);
         Log.d(this, "Finished InCallPresenter.setUp");
@@ -375,9 +378,11 @@ public class InCallPresenter implements CallList.Listener,
         InCallUiStateNotifier.getInstance().tearDown();
         InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
         InCallMessageController.getInstance().tearDown();
+        OrientationModeHandler.getInstance().tearDown();
         removeDetailsListener(CallSubstateNotifier.getInstance());
 
         InCallZoomController.getInstance().tearDown();
+        removeDetailsListener(SessionModificationCauseNotifier.getInstance());
     }
 
     private void attemptFinishActivity() {
@@ -920,6 +925,9 @@ public class InCallPresenter implements CallList.Listener,
         Call call = mCallList.getIncomingCall();
         if (call != null) {
             TelecomAdapter.getInstance().answerCall(call.getId(), videoState);
+            if (VideoUtils.isVideoCall(videoState)) {
+                showInCall(false, false/* newOutgoingCall */);
+            }
         }
     }
 
@@ -1752,25 +1760,17 @@ public class InCallPresenter implements CallList.Listener,
      * Configures the in-call UI activity so it can change orientations or not. Enables the
      * orientation event listener if allowOrientationChange is true, disables it if false.
      *
-     * @param allowOrientationChange {@code True} if the in-call UI can change between portrait
-     *      and landscape.  {@Code False} if the in-call UI should be locked in portrait.
+     * @param orientation {@link ActivityInfo#screenOrientation} Actual orientation value to set
      */
-    public void setInCallAllowsOrientationChange(boolean allowOrientationChange) {
+    public void setInCallAllowsOrientationChange(int orientation) {
         if (mInCallActivity == null) {
             Log.e(this, "InCallActivity is null. Can't set requested orientation.");
             return;
         }
 
-        if (!allowOrientationChange) {
-            mInCallActivity.setRequestedOrientation(
-                    InCallOrientationEventListener.NO_SENSOR_SCREEN_ORIENTATION);
-        } else {
-            // Using SCREEN_ORIENTATION_FULL_SENSOR allows for reverse-portrait orientation, where
-            // SCREEN_ORIENTATION_SENSOR does not.
-            mInCallActivity.setRequestedOrientation(
-                    InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
-        }
-        mInCallActivity.enableInCallOrientationEventListener(allowOrientationChange);
+        mInCallActivity.setRequestedOrientation(orientation);
+        mInCallActivity.enableInCallOrientationEventListener(
+                orientation == InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
     }
 
     public void enableScreenTimeout(boolean enable) {

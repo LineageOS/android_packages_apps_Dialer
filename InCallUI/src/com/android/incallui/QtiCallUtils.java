@@ -41,6 +41,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.content.pm.ActivityInfo;
 import android.telecom.InCallService.VideoCall;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -49,6 +50,7 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 
 import org.codeaurora.internal.IExtTelephony;
+import org.codeaurora.ims.QtiCallConstants;
 
 /**
  * This class contains Qti specific utiltity functions.
@@ -419,5 +421,22 @@ public class QtiCallUtils {
             Log.e(LOG_TAG, "Exception : " + ex);
         }
         return (dsdaEnabled == null) ? false : dsdaEnabled;
+    }
+
+    /**
+     * This method converts the QtiCallConstants' Orientation modes to the ActivityInfo
+     * screen orientation mode.
+     */
+    public static int toUiOrientationMode(int orientationMode) {
+        switch(orientationMode) {
+            case QtiCallConstants.ORIENTATION_MODE_LANDSCAPE:
+                return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+            case QtiCallConstants.ORIENTATION_MODE_PORTRAIT:
+                return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+            case QtiCallConstants.ORIENTATION_MODE_DYNAMIC:
+                return ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR;
+            default:
+                return ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+        }
     }
 }

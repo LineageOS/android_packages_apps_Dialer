@@ -574,6 +574,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         } else if (isVideoCall) {
             Log.d(this, "onPrimaryCallChanged: Entering video mode...");
 
+            checkForOrientationAllowedChange(newPrimaryCall);
             updateCameraSelection(newPrimaryCall);
             enterVideoMode(newPrimaryCall);
         }
@@ -631,8 +632,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private void checkForOrientationAllowedChange(Call call) {
-        InCallPresenter.getInstance().setInCallAllowsOrientationChange(
-                VideoUtils.isVideoCall(call));
+        final int currMode = OrientationModeHandler.getInstance().getCurrentOrientation();
+        final int newMode = OrientationModeHandler.getInstance().getOrientation(call);
+
+        if (newMode != currMode) {
+            InCallPresenter.getInstance().setInCallAllowsOrientationChange(newMode);
+        }
     }
 
     /**
