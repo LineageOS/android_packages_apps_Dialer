@@ -151,7 +151,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
             if (mVoicemailPlaybackPresenter != null) {
                 // Always reset the voicemail playback state on expand or collapse.
-                mVoicemailPlaybackPresenter.reset();
+                mVoicemailPlaybackPresenter.resetAll();
             }
 
             if (viewHolder.getAdapterPosition() == mCurrentlyExpandedPosition) {
