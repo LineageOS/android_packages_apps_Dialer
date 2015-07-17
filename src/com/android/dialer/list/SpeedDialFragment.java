@@ -25,6 +25,7 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -63,6 +64,8 @@ import java.util.HashMap;
 public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener,
         EmptyContentView.OnEmptyViewActionButtonClickedListener {
+
+    private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
     /**
      * By default, the animation code assumes that all items in a list view are of the same height
@@ -470,10 +473,20 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         }
 
         if (!PermissionsUtil.hasPermission(activity, READ_CONTACTS)) {
-            requestPermissions(new String[] {READ_CONTACTS}, 0);
+            requestPermissions(new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
         } else {
             // Switch tabs
             ((HostInterface) activity).showAllContactsTab();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            int[] grantResults) {
+        if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length == 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+                PermissionsUtil.notifyPermissionGranted(getActivity(), READ_CONTACTS);
+            }
         }
     }
 }
