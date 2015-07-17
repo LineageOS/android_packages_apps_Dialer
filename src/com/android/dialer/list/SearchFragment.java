@@ -15,6 +15,8 @@
  */
 package com.android.dialer.list;
 
+import static android.Manifest.permission.READ_CONTACTS;
+
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
@@ -50,6 +52,7 @@ import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.animation.AnimUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
@@ -78,6 +81,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     private Space mSpacer;
 
     private HostInterface mActivity;
+
+    protected EmptyContentView mEmptyView;
 
     public interface HostInterface {
         public boolean isActionBarShowing();
@@ -124,6 +129,13 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         final View parentView = getView();
 
         final ListView listView = getListView();
+
+        if (mEmptyView == null) {
+            mEmptyView = new EmptyContentView(getActivity());
+            ((ViewGroup) getListView().getParent()).addView(mEmptyView);
+            getListView().setEmptyView(mEmptyView);
+            setupEmptyView();
+        }
 
         listView.setBackgroundColor(res.getColor(R.color.background_dialer_results));
         listView.setClipToPadding(false);
@@ -341,7 +353,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
     @Override
     protected void startLoading() {
-        if (PermissionsUtil.hasContactsPermissions(getActivity())) {
+        if (PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
             super.startLoading();
         } else if (TextUtils.isEmpty(getQueryString())) {
             // Clear out any existing call shortcuts.
@@ -354,6 +366,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
             // list.
             getAdapter().notifyDataSetChanged();
         }
+
+        setupEmptyView();
     }
 
     public void setOnTouchListener(View.OnTouchListener onTouchListener) {
@@ -371,4 +385,6 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         }
         return parent;
     }
+
+    protected void setupEmptyView() {}
 }

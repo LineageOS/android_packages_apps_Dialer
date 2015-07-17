@@ -463,7 +463,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
     }
 
     @Override
-    public void onEmptyViewActionButtonClicked(String[] permissions) {
+    public void onEmptyViewActionButtonClicked() {
         final Activity activity = getActivity();
         if (activity == null) {
             return;
