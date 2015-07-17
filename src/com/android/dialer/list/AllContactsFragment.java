@@ -19,6 +19,9 @@ package com.android.dialer.list;
 import static android.Manifest.permission.READ_CONTACTS;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -52,6 +55,17 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
 
     private EmptyContentView mEmptyListView;
 
+    /**
+     * Listen to broadcast events about permissions in order to be notified if the READ_CONTACTS
+     * permission is granted via the UI in another fragment.
+     */
+    private BroadcastReceiver mReadContactsPermissionGrantedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            reloadData();
+        }
+    };
+
     public AllContactsFragment() {
         setQuickContactEnabled(false);
         setAdjustSelectionBoundsEnabled(true);
@@ -73,6 +87,20 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
         mEmptyListView.setVisibility(View.GONE);
 
         ViewUtil.addBottomPaddingToListViewForFab(getListView(), getResources());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        PermissionsUtil.registerPermissionReceiver(getActivity(),
+                mReadContactsPermissionGrantedReceiver, READ_CONTACTS);
+    }
+
+    @Override
+    public void onStop() {
+        PermissionsUtil.unregisterPermissionReceiver(getActivity(),
+                mReadContactsPermissionGrantedReceiver);
+        super.onStop();
     }
 
     @Override
