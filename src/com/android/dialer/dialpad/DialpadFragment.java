@@ -135,6 +135,15 @@ public class DialpadFragment extends Fragment
         void onDialpadQueryChanged(String query);
     }
 
+    public interface HostInterface {
+        /**
+         * Notifies the parent activity that the space above the dialpad has been tapped with
+         * no query in the dialpad present. In most situations this will cause the dialpad to
+         * be dismissed, unless there happens to be content showing.
+         */
+        boolean onDialpadSpacerTouchWithEmptyQuery();
+    }
+
     private static final boolean DEBUG = DialtactsActivity.DEBUG;
 
     // This is the amount of screen the dialpad fragment takes up when fully displayed
@@ -385,7 +394,9 @@ public class DialpadFragment extends Fragment
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (isDigitsEmpty()) {
-                    hideAndClearDialpad(true);
+                    if (getActivity() != null) {
+                        return ((HostInterface) getActivity()).onDialpadSpacerTouchWithEmptyQuery();
+                    }
                     return true;
                 }
                 return false;

@@ -18,6 +18,7 @@ package com.android.dialer.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,15 +30,15 @@ import com.android.dialer.R;
 public class EmptyContentView extends LinearLayout implements View.OnClickListener {
 
     public static final int NO_LABEL = 0;
+    public static final int NO_IMAGE = 0;
 
     private ImageView mImageView;
     private TextView mDescriptionView;
     private TextView mActionView;
-    private String[] mPermissions = new String[] {};
     private OnEmptyViewActionButtonClickedListener mOnActionButtonClickedListener;
 
     public interface OnEmptyViewActionButtonClickedListener {
-        public void onEmptyViewActionButtonClicked(String[] permissions);
+        public void onEmptyViewActionButtonClicked();
     }
 
     public EmptyContentView(Context context) {
@@ -60,11 +61,6 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
         final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.empty_content_view, this);
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         mImageView = (ImageView) findViewById(R.id.emptyListViewImage);
         mDescriptionView = (TextView) findViewById(R.id.emptyListViewMessage);
         mActionView = (TextView) findViewById(R.id.emptyListViewAction);
@@ -72,11 +68,22 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     }
 
     public void setDescription(int resourceId) {
-        mDescriptionView.setText(resourceId);
+        if (resourceId == NO_LABEL) {
+            mDescriptionView.setText(null);
+            mDescriptionView.setVisibility(View.GONE);
+        } else {
+            mDescriptionView.setText(resourceId);
+            mDescriptionView.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setImage(int resourceId) {
         mImageView.setImageResource(resourceId);
+        if (resourceId == NO_LABEL) {
+            mImageView.setVisibility(View.GONE);
+        } else {
+            mImageView.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setActionLabel(int resourceId) {
@@ -89,6 +96,12 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
         }
     }
 
+    public boolean isShowingContent() {
+        return mImageView.getVisibility() == View.VISIBLE
+                || mDescriptionView.getVisibility() == View.VISIBLE
+                || mActionView.getVisibility() == View.VISIBLE;
+    }
+
     public void setActionClickedListener(OnEmptyViewActionButtonClickedListener listener) {
         mOnActionButtonClickedListener = listener;
     }
@@ -96,7 +109,7 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (mOnActionButtonClickedListener != null) {
-            mOnActionButtonClickedListener.onEmptyViewActionButtonClicked(mPermissions);
+            mOnActionButtonClickedListener.onEmptyViewActionButtonClicked();
         }
     }
 }
