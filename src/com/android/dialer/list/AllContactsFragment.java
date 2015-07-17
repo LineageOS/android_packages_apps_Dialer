@@ -133,7 +133,7 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     }
 
     @Override
-    public void onEmptyViewActionButtonClicked(String[] permissions) {
+    public void onEmptyViewActionButtonClicked() {
         final Activity activity = getActivity();
         if (activity == null) {
             return;

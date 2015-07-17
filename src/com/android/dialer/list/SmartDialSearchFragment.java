@@ -15,20 +15,32 @@
  */
 package com.android.dialer.list;
 
+import static android.Manifest.permission.CALL_PHONE;
+
+import android.app.Activity;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
+import com.android.dialer.R;
+import com.android.dialer.widget.EmptyContentView;
+
+import java.util.ArrayList;
 
 /**
  * Implements a fragment to load and display SmartDial search results.
  */
-public class SmartDialSearchFragment extends SearchFragment {
+public class SmartDialSearchFragment extends SearchFragment
+        implements EmptyContentView.OnEmptyViewActionButtonClickedListener {
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
+
+    private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
 
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
@@ -68,5 +80,43 @@ public class SmartDialSearchFragment extends SearchFragment {
     protected Uri getPhoneUri(int position) {
         final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
         return adapter.getDataUri(position);
+    }
+
+    @Override
+    protected void setupEmptyView() {
+        if (mEmptyView != null && getActivity() != null) {
+            if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
+                mEmptyView.setImage(R.drawable.empty_contacts);
+                mEmptyView.setActionLabel(R.string.permission_single_turn_on);
+                mEmptyView.setDescription(R.string.permission_place_call);
+                mEmptyView.setActionClickedListener(this);
+            } else {
+                mEmptyView.setImage(EmptyContentView.NO_IMAGE);
+                mEmptyView.setActionLabel(EmptyContentView.NO_LABEL);
+                mEmptyView.setDescription(EmptyContentView.NO_LABEL);
+            }
+        }
+    }
+
+    @Override
+    public void onEmptyViewActionButtonClicked() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        requestPermissions(new String[] {CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            int[] grantResults) {
+        if (requestCode == CALL_PHONE_PERMISSION_REQUEST_CODE) {
+            setupEmptyView();
+        }
+    }
+
+    public boolean isShowingPermissionRequest() {
+        return mEmptyView != null && mEmptyView.isShowingContent();
     }
 }
