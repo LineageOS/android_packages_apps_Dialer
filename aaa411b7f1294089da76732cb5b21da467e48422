@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff0f0b1f_50eec988",
+        "filename": "src/com/android/dialer/calllog/SpinnerContent.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 9621
+      },
+      "writtenOn": "2015-07-17T03:53:41Z",
+      "side": 0,
+      "message": "This should be handled by the isBlacklistEnabled check, I think we want to keep this code here but that check should return false on unsupported builds.",
+      "revId": "aaa411b7f1294089da76732cb5b21da467e48422",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
