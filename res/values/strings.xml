@@ -808,8 +808,8 @@
     <!-- Shown as a prompt to turn on the phone permission to show voicemails -->
     <string name="permission_no_voicemail">To access your voicemail,\n turn on the Phone permission.</string>
 
-    <!-- Shown as a prompt to turn on contacts and location permissions to allow contact and nearby places search -->
-    <string name="permission_no_search">To search your contacts and nearby locations, turn on the Contacts and Location permissions.</string>
+    <!-- Shown as a prompt to turn on contacts permissions to allow contact search -->
+    <string name="permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
 
     <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
     <string name="permission_place_call">To place a call,\n turn on the Phone permission.</string>
