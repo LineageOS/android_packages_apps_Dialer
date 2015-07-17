@@ -43,7 +43,6 @@
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:text="@string/permission_single_turn_on"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         style="@style/TextActionStyle" />
