@@ -18,8 +18,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Lugares cercanos</string>
   <string name="people">Personas</string>
-  <string name="lookup_settings_label">Búsqueda de números de telefóno</string>
-  <string name="lookup_settings_description">Buscar números de telefóno desconocidos</string>
+  <string name="lookup_settings_label">Búsqueda de números de teléfono</string>
+  <string name="lookup_settings_description">Buscar números de teléfono desconocidos</string>
   <string name="enable_forward_lookup_title">Búsqueda directa</string>
   <string name="enable_forward_lookup_summary">Muestra lugares cercanos cuando se busca en el marcador</string>
   <string name="enable_people_lookup_title">Búsqueda de personas</string>

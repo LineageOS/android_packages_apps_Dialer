@@ -100,4 +100,5 @@
   <string name="smart_mute_title">Inteligentné stlmenie</string>
   <string name="smart_mute_summary">Stlmiť prichádzajúci hovor otočením zariadenia</string>
   <string name="smart_dialer_title">Inteligentné vytáčanie</string>
+  <string name="smart_dialer_summary">Automaticky vytočiť volané číslo presunutím zariadenia k uchu</string>
 </resources>
