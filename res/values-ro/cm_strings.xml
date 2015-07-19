@@ -75,7 +75,7 @@
   <string name="incall_vibrate_hangup_title">Vibrare la terminare apel</string>
   <string name="incall_vibrate_45_title">Vibrare la fiecare minut</string>
   <string name="incall_vibrate_45_summary">Vibrează la secunda 45 a fiecărui minut în timpul convorbirilor efectuate</string>
-  <string name="detailed_incall_info_title">Informaţii detaliate ale apelantului</string>
+  <string name="detailed_incall_info_title">Informații detaliate ale apelantului</string>
   <string name="video_call">Apel video</string>
   <string name="call_duration_active">Durata activă:</string>
   <string name="call_duration_call_out">Durată apel:</string>

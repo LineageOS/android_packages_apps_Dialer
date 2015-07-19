@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Pencarian dialpad T9</string>
   <string name="t9_search_input_locale">Masukan pencarian T9</string>
   <string name="t9_search_input_locale_default">Standar</string>
+  <string name="type_blacklist">Telepon yang di blok</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Rincian statistik panggilan</string>
   <string name="call_stats">Statistik panggilan</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">Keluar: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Terlewati</string>
   <string name="call_stats_missed_percent">Terlewati: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Diblok</string>
+  <string name="call_stats_blacklist_percent">Diblok: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Tanggal mulai</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">Kembalikan rentang waktu</string>
   <string name="call_stats_sort_by_duration">Urut sesuai durasi panggilan</string>
   <string name="call_stats_sort_by_count">Urut sesuai jumlah panggilan</string>
+  <string name="menu_add_to_blacklist">Tambahkan ke daftar blokir penelpon</string>
+  <string name="toast_added_to_blacklist">%s ditambahkan ke daftar blokir penelpon.</string>
   <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
   <string name="speed_dial_not_set">(tidak ditetapkan)</string>
   <string name="speed_dial_replace">Ganti</string>
@@ -87,8 +92,13 @@
   <string name="call_log_all_calls_header">Semua panggilan</string>
   <string name="calllog_search_hint">Cari log panggilan</string>
   <string name="msim_ime_dialog_title">Identifikasi perangkat</string>
+  <string name="call_log_blacklist_header">Hanya panggilan yang diblok saja</string>
   <string name="start_call_playback">Putar rekaman</string>
   <string name="stop_call_playback">Hentikan</string>
   <string name="call_playback_error_message">Gagal untuk memutar rekaman</string>
+  <string name="sensors_category_title">Opsi sensor</string>
+  <string name="smart_mute_title">Senyap Pintar</string>
+  <string name="smart_mute_summary">Senyapkan telepon masuk dengan membalik perangkat</string>
   <string name="smart_dialer_title">Panggilan pintar</string>
+  <string name="smart_dialer_summary">Otomatis telpon nomor yang dimasukkan dengan mendekatkan perangkat ke telinga</string>
 </resources>
