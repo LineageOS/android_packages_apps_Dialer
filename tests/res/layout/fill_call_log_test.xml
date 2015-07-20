@@ -86,6 +86,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/call_type_outgoing"
                 android:textSize="9sp" />
+            <RadioButton
+                android:id="@+id/call_type_voicemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_type_voicemail"
+                android:textSize="9sp" />
         </RadioGroup>
         <CheckBox
             android:id="@+id/call_type_video"

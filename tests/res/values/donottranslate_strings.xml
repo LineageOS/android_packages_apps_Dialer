@@ -42,6 +42,7 @@
     <string name="call_type_missed">Missed</string>
     <string name="call_type_outgoing">Outgoing</string>
     <string name="call_type_video">Video</string>
+    <string name="call_type_voicemail">Voicemail</string>
     <string name="call_date">Call date</string>
     <string name="call_time">Call time</string>
     <string name="edit">Edit</string>
