@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Samtal"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Samtalshistorik"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Rensa samtalshistorik"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ta bort röstmeddelande"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Dela röstmeddelande"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Inga samtal"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Samtalsloggen är tom"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Ring ett samtal"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vill du rensa samtalshistoriken?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Alla samtal raderas från historiken"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Rensar samtalshistoriken ..."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Det går inte att ringa eftersom appen Telefon har inaktiverats."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Det finns ingen app för detta på enheten"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Ange ett namn eller telefonnummer"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Inga samtal"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Inga nya röstmeddelanden"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Du har inga missade samtal."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Din röstbrevlåda är tom."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Visa endast favoriter"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historik"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alla"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Ring videosamtal"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Visa hela samtalshistoriken"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nya missade samtal"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Kortnummer är snabbval för favoritkontakter och nummer du ringer till ofta"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Inga kontakter"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Du har ingen kontakt som snabbval ännu"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Lägg till en favorit"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Du har inga kontakter ännu"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Lägg till en kontakt"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Tryck på bilden och visa alla nummer eller tryck länge om du vill ändra ordningen"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ta bort"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videosamtal"</string>
@@ -197,4 +200,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Snabbsvar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Samtal"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Konton för samtal"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktivera"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ange behörigheter"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Om du vill aktivera snabbval\n aktiverar du behörigheten för Kontakter."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Om du vill visa samtalsloggen\n aktiverar du behörigheten för Telefon."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Om du vill visa kontakter\n aktiverar du behörigheten för Kontakter."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Om du vill komma åt röstbrevlådan\n aktiverar du behörigheten för Telefon."</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"Om du vill ringa ett samtal\n aktiverar du behörigheten för Telefon."</string>
 </resources>

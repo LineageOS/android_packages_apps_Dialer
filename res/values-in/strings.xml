@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Aplikasi Telepon"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Telepon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telepon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telepon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Riwayat panggilan"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Hapus riwayat panggilan"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Hapus pesan suara"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Bagikan kotak pesan"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Tidak ada panggilan telepon"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Log panggilan kosong"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Lakukan panggilan telepon"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Hapus riwayat panggilan?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tindakan ini akan menghapus semua panggilan telepon dari riwayat"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Menghapus riwayat panggilan..."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Tidak dapat melakukan panggilan telepon karena aplikasi Telepon telah dinonaktifkan."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Tidak ada aplikasi untuk tindakan tersebut di perangkat ini"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Masukkan nama / nomor telepon"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Tidak ada panggilan telepon"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Tidak ada pesan suara terbaru"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Tidak ada panggilan yang tidak terjawab."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Kotak masuk pesan suara kosong."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Hanya tampilkan favorit"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Riwayat"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Lakukan video call"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Lihat riwayat panggilan telepon lengkap"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> panggilan tidak terjawab baru"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Panggilan cepat adalah panggilan satu sentuhan untuk favorit dan nomor yang sering ditelepon"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Tidak ada kontak"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Daftar panggilan cepat masih kosong"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Tambahkan favorit"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Anda belum memiliki kontak"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Tambahkan kontak"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Sentuh foto untuk melihat semua nomor atau sentuh &amp; tahan untuk menyusun ulang"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Hapus"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Panggilan video"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respons cepat"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Panggilan telepon"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Akun panggilan"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktifkan"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Setel izin"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Untuk mengaktifkan panggilan cepat,\n aktifkan izin Kontak."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Untuk melihat log panggilan,\n aktifkan izin Telepon."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Untuk melihat kontak,\n aktifkan izin Kontak."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Untuk mengakses pesan suara,\n aktifkan izin Telepon."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Untuk menelusuri kontak, aktifkan izin Kontak."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Untuk melakukan panggilan,\n aktifkan izin Telepon."</string>
 </resources>

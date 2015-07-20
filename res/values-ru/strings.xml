@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Телефон"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Телефон"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Кнопки"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Журнал звонков."</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Очистить журнал звонков"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Удалить голосовое сообщение"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Поделиться"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Звонков нет"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Журнал вызовов пуст"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Позвонить"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить журнал звонков?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Журнал звонков будет удален."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Очистка журнала звонков…"</string>
@@ -128,8 +129,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Нельзя совершать телефонные звонки, поскольку приложение \"Телефон\" отключено."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"На устройстве нет подходящего приложения"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Введите имя или номер телефона"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Звонков нет"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Сообщений нет."</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Нет пропущенных вызовов"</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Нет входящих голосовых сообщений"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Только часто используемые"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Журнал"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Все"</string>
@@ -148,8 +149,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Начать видеовстречу"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Посмотреть весь журнал звонков"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Пропущенных вызовов: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Настройте быстрый набор, чтобы вам было удобнее звонить на часто используемые номера."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Ничего не найдено."</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Нет номеров для быстрого набора"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Настроить быстрый набор"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Нет контактов"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Добавить контакт"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Коснитесь изображения, чтобы увидеть все номера, или нажмите и удерживайте, чтобы изменить порядок"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Удалить"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Видеовстреча"</string>
@@ -187,7 +190,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Уменьшить скорость воспроизведения."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Начать или приостановить воспроизведение."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"Упорядочить"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Отображение контактов"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Звуки и вибрация"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Специальные возможности"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Рингтон"</string>
@@ -201,4 +204,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Вызовы"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Аккаунты для звонков"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Включить"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Задать разрешения"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Чтобы настроить быстрый набор,\n включите разрешение \"Контакты\"."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Чтобы открыть журнал вызовов,\n включите разрешение \"Телефон\"."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Чтобы перейти к списку контактов,\n включите разрешение \"Контакты\"."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Чтобы перейти к голосовым сообщениям,\n включите разрешение \"Телефон\"."</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"Чтобы позвонить,\n включите разрешение \"Телефон\"."</string>
 </resources>
