@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Símaforrit"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Sími"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Sími"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Sími"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Símtalaferill"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Hreinsa símtalaferil"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eyða talhólfsskilaboðum"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Deila talhólfsskilaboðum"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Engin símtöl"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Símtalaskráin er tóm"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Hringja símtal"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Hreinsa símtalaferil?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Þetta eyðir öllum símtölum af ferlinum"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Hreinsar símtalaferil…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Ekki er hægt að hringja vegna þess að forritið Sími hefur verið gert óvirkt."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Ekkert forrit fyrir þetta er í tækinu"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Sláðu inn nafn eða símanúmer"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Engin símtöl"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Engin nýleg talhólfsskilaboð"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Þú ert ekki með nein ósvöruð símtöl."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Talhólfið þitt er tómt."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Sýna aðeins uppáhaldstengiliði"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Ferill"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Allt"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Hringja myndsímtal"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Skoða símtalaferil í heild"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ný ósvöruð símtöl"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Með hraðvali geturðu hringt með einni snertingu í uppáhaldstengiliðina og númer sem þú hringir oft í"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Engir tengiliðir"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Þú ert ekki með neinn í hraðvali enn sem komið er"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Bæta uppáhaldi við"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Þú ert ekki með neina tengiliði enn sem komið er"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Bæta tengilið við"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Snertu myndina til að sjá öll númer eða haltu henni inni til að endurraða"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Fjarlægja"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Myndsímtal"</string>
@@ -197,4 +200,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Snarsvör"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Símtöl"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Símtalareikningar"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Kveikja"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Stilla heimildir"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Kveiktu á tengiliðaheimildinni\ntil að gera hraðval virkt."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Kveiktu á símaheimildinni\ntil að sjá símtalaskrána."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Kveiktu á tengiliðaheimildinni\ntil að sjá tengiliðina þína."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Kveiktu á símaheimildinni\ntil að fá aðgang að talhólfinu."</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"Kveiktu á símaheimildinni\ntil að hringja símtal."</string>
 </resources>

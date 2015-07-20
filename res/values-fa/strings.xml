@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"شماره‌گیر"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"تلفن"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"تلفن"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"تلفن"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"سابقه تماس"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"پاک کردن سابقه تماس"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"حذف پست صوتی"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"اشتراک‌گذاری پست صوتی"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"هیچ تماسی وجود ندارد"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"گزارش تماس شما خالی است"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"برقراری تماس تلفنی"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"سابقه تماس پاک شود؟"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"این کار همه تماس‌ها را از سابقه شما حذف می‌کند"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"در حال پاک کردن سابقه تماس..."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"برقراری تماس تلفنی ممکن نیست، زیرا برنامه تلفن غیرفعال شده است."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"هیچ برنامه‌ای برای انجام این کار در این دستگاه نصب نیست"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"نام یا شماره تلفنی وارد کنید"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"هیچ تماسی وجود ندارد"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"هیچ پست صوتی اخیری وجود ندارد"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"تماس از دست رفته‌ای ندارید."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"صندوق پست صوتی‌تان خالی است."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"فقط نمایش موارد دلخواه"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"سابقه"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"همه موارد"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"برقراری تماس ویدیویی"</string>
     <string name="show_call_history" msgid="1141502332266697170">"مشاهده سابقه تماس به صورت کامل"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> تماس‌ بی‌پاسخ جدید"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"شماره‌گیری سریع: شماره‌گیری تک لمسی برای مخاطبین برگزیده و شماره‌هایی است که اغلب با آنها تماس می‌گیرید"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"هیچ مخاطبی موجود نیست"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"هنوز کسی در فهرست شماره‌گیری سریع شما نیست"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"افزودن مورد دلخواه"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"هنوز هیچ مخاطبی ندارید"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"افزودن مخاطب"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"برای مشاهده همه شماره‌ها، تصویر را لمس کنید یا برای ترتیب مجدد لمس کنید و نگه دارید"</string>
     <string name="remove_contact" msgid="1080555335283662961">"حذف"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"تماس ویدیویی"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"پاسخ‌های سریع"</string>
     <string name="call_settings_label" msgid="313434211353070209">"تماس‌ها"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"حساب‌های تماس"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"روشن کردن"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"تنظیم مجوزها"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"برای فعال کردن شماره‌گیر سریع\n مجوز «مخاطبین» را روشن کنید."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"برای دیدن گزارش تماس،\n مجوز تلفن را روشن کنید."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"برای دیدن مخاطبینتان،\n مجوز مخاطبین را روشن کنید."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"برای دسترسی به پست صوتی‌تان،\n مجوز تلفن را روشن کنید."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"برای جستجوی مخاطبینتان، مجوزهای مخاطبین را روشن کنید."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"برای برقراری تماس،\n مجوز تلفن را روشن کنید."</string>
 </resources>

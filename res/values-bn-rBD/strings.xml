@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"ডায়ালার"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"ফোন"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ফোন"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ফোন"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"কল ইতিহাস"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"কল ইতিহাস সাফ করুন"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ভয়েসমেল মুছুন"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ভয়েসমেল ভাগ করুন"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"কোনো কল নেই"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"আপনার কল লগ খালি রয়েছে"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"একটি কল করুন"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"কল ইতিহাস সাফ করবেন?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"এটি আপনার ইতিহাস থেকে সমস্ত কল মুছে দেবে"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"কল ইতিহাস সাফ করা হচ্ছে…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"কোনো ফোন কল করা যাবে না কারণ ফোন অ্যাপ্লিকেশানটি অক্ষম করা হয়েছে৷"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"এর জন্য এই ডিভাইসে কোনো অ্যাপ্লিকেশান নেই"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"কোনো নাম বা ফোন নম্বর লিখুন"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"কোনো কল নেই"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"কোনো সাম্প্রতিক ভয়েসমেল নেই"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"আপনার কোনো মিসড কল নেই।"</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"আপনার ভয়েসমেলের ইনবক্স খালি রয়েছে।"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"কেবলমাত্র পছন্দসইগুলি দেখান"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ইতিহাস"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"সমস্ত"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ভিডিও কল করুন"</string>
     <string name="show_call_history" msgid="1141502332266697170">"সম্পূর্ণ কল ইতিহাস দেখুন"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>টি নতুন মিসড কল"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"আপনি প্রায়শই কল করেন এমন পছন্দসই ব্যক্তি এবং নম্বরগুলির জন্য দ্রুত ডায়াল হল একবার-স্পর্শের মাধ্যমে ডায়াল করার ব্যবস্থা"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"কোনো পরিচিতি নেই"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"আপনার স্পীড ডায়ালে এখনও পর্যন্ত কেউ নেই"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"একটি পছন্দসই যোগ করুন"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"আপনার এখনও পর্যন্ত কোনো পরিচিতি নেই"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"একটি পরিচিতি যোগ করুন"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"সমস্ত নম্বর দেখতে চিত্রে স্পর্শ করুন বা রেকর্ড করতে ধরে রাখুন"</string>
     <string name="remove_contact" msgid="1080555335283662961">"সরান"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"ভিডিও কল"</string>
@@ -197,4 +200,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"দ্রুত প্রতিক্রিয়াগুলি"</string>
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"কলিং অ্যাকাউন্টগুলি"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"চালু করুন"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"অনুমতিগুলি সেট করুন"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"স্পীড ডায়াল সক্ষম করতে,\n পরিচিতিগুলির অনুমতি চালু করুন।"</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"আপনার কল লগ দেখতে,\n ফোনের অনুমতি চালু করুন।"</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"আপনার পরিচিতিগুলি দেখতে,\n পরিচিতিগুলির অনুমতি চালু করুন।"</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"আপনার ভয়েসমেল অ্যাক্সেস করতে,\n ফোনের অনুমতি চালু করুন।"</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"একটি কল করার জন্য,\n ফোনের অনুমতি চালু করুন।"</string>
 </resources>

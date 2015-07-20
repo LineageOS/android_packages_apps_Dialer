@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Istoricul apelurilor"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Ștergeți istoricul apelurilor"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ștergeţi mesajul vocal"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Distribuiţi mesajul vocal"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Niciun apel"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Jurnalul de apeluri este gol"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Apelați"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Ștergeți istoricul apelurilor?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Astfel vor fi șterse toate apelurile din istoric"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Se șterge istoricul apelurilor…"</string>
@@ -127,8 +128,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nu se poate efectua un apel telefonic, deoarece aplicația Telefon a fost dezactivată."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Pe dispozitiv nu există nicio aplicație pentru această acțiune"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Introduceți nume sau număr"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Niciun apel"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Niciun mesaj vocal recent"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Nu aveți niciun apel nepreluat."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Nu există mesaje primite în mesageria vocală."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Afișați numai preferate"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Istoric"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Toate"</string>
@@ -147,8 +148,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Inițiați un apel video"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Vedeți istoricul complet al apelurilor"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> (de) apeluri nepreluate noi"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Apelarea rapidă este apelarea printr-o singură atingere a numerelor preferate și a numerelor pe care le apelați frecvent"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Nu există persoane de contact"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Nicio persoană de contact setată pentru apelarea rapidă"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Adăugați o persoană de contact preferată"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Nu aveți încă persoane de contact"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Adăugați o persoană de contact"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Atingeți imaginea pentru a vedea toate numerele sau atingeți lung pentru reordonare"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminați"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Apel video"</string>
@@ -199,4 +202,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Răspunsuri rapide"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Apeluri"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Conturi pentru apelare"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Activați"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Setați permisiunile"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Pentru a activa apelarea rapidă,\n activați permisiunea Agendă."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Pentru a vedea jurnalul de apeluri,\n activați permisiunea Telefon."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Pentru a vedea persoanele de contact,\n activați permisiunea Agendă."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Pentru a accesa mesageria vocală,\n activați permisiunea Telefon."</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"Pentru a efectua un apel,\n activați permisiunea Telefon."</string>
 </resources>

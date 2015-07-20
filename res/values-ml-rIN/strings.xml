@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"ഡയലർ"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"ഫോണ്‍"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ഫോണ്‍"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ഫോണ്‍"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"കോള്‍‌ ചരിത്രം"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"വോയ്‌സ്‌മെയിൽ പങ്കിടുക"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"കോളുകളൊന്നുമില്ല"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"നിങ്ങളുടെ കോൾ ലോഗ് ശൂന്യമാണ്"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"ഒരു കോൾ ചെയ്യുക"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"കോൾ ചരിത്രം മായ്‌ക്കണോ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ഇത് നിങ്ങളുടെ ചരിത്രത്തിൽ നിന്ന് എല്ലാ കോളുകളും ഇല്ലാതാക്കും"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"കോൾ ചരിത്രം മായ്‌ക്കുന്നു..."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"അതിനായി ഈ ഉപകരണത്തിൽ അപ്ലിക്കേഷനുകളൊന്നുമില്ല"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ഒരു പേരോ ഫോൺ നമ്പറോ നൽകുക"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"കോളുകളൊന്നുമില്ല"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"പുതിയ വോയ്‌സ്‌‌മെയിലുകളൊന്നുമില്ല"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"നിങ്ങൾക്ക് മിസ്‌ഡ് കോളുകളൊന്നുമില്ല."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"നിങ്ങളുടെ വോയ്സ്മെയിൽ ഇൻബോക്സ് ശൂന്യമാണ്."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"പ്രിയപ്പെട്ടവ മാത്രം കാണിക്കുക"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ചരിത്രം"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"എല്ലാം"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
     <string name="show_call_history" msgid="1141502332266697170">"മുഴുവൻ കോൾ ചരിത്രവും കാണുക"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> പുതിയ മിസ്‌ഡ് കോളുകൾ"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"നിങ്ങൾ ഇടയ്ക്കിടെ വിളിക്കുന്ന പ്രിയപ്പെട്ടവർക്കും നമ്പറുകൾക്കുമായി ഒരൊറ്റ സ്പർശനത്തിൽ ഡയൽ ചെയ്യുന്ന സവിശേഷതയാണ് സ്‌പീഡ് ഡയൽ"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"കോൺടാക്റ്റുകളൊന്നുമില്ല"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"ഇതുവരെ ആരും നിങ്ങളുടെ സ്പീഡ് ഡയലിൽ ഇല്ല"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"പ്രിയപ്പെട്ടത് ചേർക്കുക"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"നിങ്ങൾക്ക് ഇതുവരെയും കോൺടാക്റ്റുകൾ ഒന്നുമില്ല."</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ഒരു കോണ്‍ടാക്റ്റ് ചേര്‍ക്കുക"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"എല്ലാ നമ്പറുകളും കാണാൻ ചിത്രം സ്‌പർശിക്കുക അല്ലെങ്കിൽ വീണ്ടും ക്രമീകരിക്കാൻ സ്‌പർശിച്ച് പിടിക്കുക"</string>
     <string name="remove_contact" msgid="1080555335283662961">"നീക്കംചെയ്യുക"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"വീഡിയോ കോള്‍"</string>
@@ -197,4 +200,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളിംഗ് അക്കൗണ്ട്"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"ഓണാക്കുക"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"അനുമതികൾ സജ്ജമാക്കുക"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"സ്‌പീഡ് ഡയൽ പ്രവർത്തനക്ഷമാക്കാൻ,\n കോൺടാക്റ്റുകൾക്കുള്ള അനുമതി ഓണാക്കുക."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"നിങ്ങളുടെ കോൾ ലോഗ് കാണുന്നതിന്,\n ഫോൺ അനുമതി ഓണാക്കുക."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ കാണുന്നതിന്,\n കോൺടാക്റ്റുകളുടെ അനുമതി ഓണാക്കുക."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ ആക്സസ് ചെയ്യുന്നതിന്,\n ഫോൺ അനുമതി ഓണാക്കുക."</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"കോൾ ചെയ്യുന്നതിന്,\n ഫോൺ അനുമതി ഓണാക്കുക."</string>
 </resources>

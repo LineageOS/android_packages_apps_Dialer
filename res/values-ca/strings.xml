@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Telèfon"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Telèfon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telèfon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telèfon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historial de trucades"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Esborra l\'historial de trucades"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Suprimeix missatge de veu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Comparteix la bústia de veu"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"No hi ha cap trucada."</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"El registre de trucades està buit"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Fes una trucada"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Esborrar l\'historial de trucades?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se suprimiran totes les trucades de l\'historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Esborrant historial de trucades..."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"No es pot fer una trucada telefònica perquè s\'ha desactivat l\'aplicació de telèfon."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"No hi ha cap aplicació per a això en aquest dispositiu."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Escriu un nom o un telèfon"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"No hi ha cap trucada."</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"No hi ha cap correu de veu recent."</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"No tens cap trucada perduda."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"La safata d\'entrada de la bústia de veu està buida."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostra només els preferits"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historial"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Totes"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fes una videotrucada"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Consulta tot l\'historial de trucades"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> trucades perdudes noves"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"El marcatge ràpid et permet trucar amb un toc als teus contactes preferits i als números de telèfon que més utilitzes."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"No hi ha cap contacte."</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Encara no tens cap contacte al marcatge ràpid"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Afegeix un contacte preferit"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Encara no tens cap contacte"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Afegeix un contacte"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca la imatge per veure tots els números i toca-la i mantén-la premuda per reordenar-los."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Suprimeix"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videotrucada"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostes ràpides"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Trucades"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Comptes de trucades"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Activa"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Estableix els permisos"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Per activar el marcatge ràpid,\n activa el permís de Contactes."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Per veure el registre de trucades,\nactiva el permís de Telèfon."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Per veure els contactes,\nactiva el permís de Contactes."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Per accedir a la bústia de veu,\nactiva el permís de Telèfon."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Per cercar els teus contactes, activa els permisos de Contactes."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Per fer una trucada,\nactiva el permís de Telèfon."</string>
 </resources>

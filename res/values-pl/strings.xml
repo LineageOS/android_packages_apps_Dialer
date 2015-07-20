@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Telefon"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historia połączeń"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Wyczyść historię połączeń"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Usuń pocztę głosową"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Udostępnij pocztę głosową"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Brak połączeń"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Rejestr połączeń jest pusty"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Zadzwoń"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Wyczyścić historię połączeń?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Spowoduje to usunięcie wszystkich połączeń z historii."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Czyszczę historię połączeń…"</string>
@@ -128,8 +129,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nie można zadzwonić, ponieważ aplikacja Telefon została wyłączona."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Na urządzeniu nie ma aplikacji, która mogłaby wykonać tę czynność"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Wpisz imię i nazwisko lub numer telefonu"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Brak połączeń"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Brak najnowszych wiadomości głosowych"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Nie masz nieodebranych połączeń."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Skrzynka odbiorcza poczty głosowej jest pusta."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Pokaż tylko ulubione"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historia"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Wszystkie"</string>
@@ -148,8 +149,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Rozmowa wideo"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Wyświetl pełną historię połączeń"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Nowe nieodebrane połączenia: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Szybkie wybieranie pozwala jednym kliknięciem zadzwonić pod ulubione lub częste numery"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Brak kontaktów"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Lista szybkiego wybierania jest pusta"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodaj do ulubionych"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Nie masz jeszcze żadnych kontaktów"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Dodaj kontakt"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Kliknij obraz, by zobaczyć wszystkie numery, lub kliknij go i przytrzymaj, by zmienić kolejność"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Usuń"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Rozmowa wideo"</string>
@@ -201,4 +204,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Szybkie odpowiedzi"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Połączenia"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Konta telefoniczne"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Włącz"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ustaw uprawnienia"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Aby umożliwić szybkie wybieranie,\nwłącz uprawnienie Kontakty."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Aby wyświetlić rejestr połączeń,\n włącz uprawnienie Telefon."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Aby wyświetlić kontakty,\n włącz uprawnienie Kontakty."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Aby uzyskać dostęp do poczty głosowej,\n włącz uprawnienie Telefon."</string>
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <string name="permission_place_call" msgid="7588803619716288478">"Aby zadzwonić,\n włącz uprawnienie Telefon."</string>
 </resources>
