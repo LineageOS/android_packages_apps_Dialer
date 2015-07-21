@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ClipboardUtils;
@@ -206,13 +207,17 @@ public class CallLogAdapter extends GroupingListAdapter
                         return;
                     }
 
-                    menu.setHeaderTitle(vh.number);
+                    if (vh.callType == CallLog.Calls.VOICEMAIL_TYPE) {
+                        menu.setHeaderTitle(mContext.getResources().getText(R.string.voicemail));
+                    } else {
+                        menu.setHeaderTitle(vh.number);
+                    }
 
                     final MenuItem copyItem = menu.add(
                             ContextMenu.NONE,
                             R.id.context_menu_copy_to_clipboard,
                             ContextMenu.NONE,
-                            R.string.copy_text);
+                            R.string.copy_number_text);
 
                     copyItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
                         @Override
@@ -228,28 +233,49 @@ public class CallLogAdapter extends GroupingListAdapter
                     // 2) Number is the voicemail number
                     // 3) Number is a SIP address
 
-                    if (!PhoneNumberUtil.canPlaceCallsTo(vh.number, vh.numberPresentation)
-                            || mTelecomCallLogCache.isVoicemailNumber(vh.accountHandle, vh.number)
-                            || PhoneNumberUtil.isSipNumber(vh.number)) {
-                        return;
+                    if (PhoneNumberUtil.canPlaceCallsTo(vh.number, vh.numberPresentation)
+                            && !mTelecomCallLogCache.isVoicemailNumber(vh.accountHandle, vh.number)
+                            && !PhoneNumberUtil.isSipNumber(vh.number)) {
+                        final MenuItem editItem = menu.add(
+                                ContextMenu.NONE,
+                                R.id.context_menu_edit_before_call,
+                                ContextMenu.NONE,
+                                R.string.recentCalls_editNumberBeforeCall);
+
+                        editItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                final Intent intent = new Intent(Intent.ACTION_DIAL,
+                                        CallUtil.getCallUri(vh.number));
+                                intent.setClass(mContext, DialtactsActivity.class);
+                                DialerUtils.startActivityWithErrorToast(mContext, intent);
+                                return true;
+                            }
+                        });
                     }
 
-                    final MenuItem editItem = menu.add(
-                            ContextMenu.NONE,
-                            R.id.context_menu_edit_before_call,
-                            ContextMenu.NONE,
-                            R.string.recentCalls_editNumberBeforeCall);
-
-                    editItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            final Intent intent = new Intent(Intent.ACTION_DIAL,
-                                    CallUtil.getCallUri(vh.number));
-                            intent.setClass(mContext, DialtactsActivity.class);
-                            DialerUtils.startActivityWithErrorToast(mContext, intent);
-                            return true;
-                        }
-                    });
+                    if (vh.callType == CallLog.Calls.VOICEMAIL_TYPE) {
+                        final MenuItem copyTranscriptItem = menu.add(
+                                ContextMenu.NONE,
+                                R.id.context_menu_copy_transcript_to_clipboard,
+                                ContextMenu.NONE,
+                                R.string.copy_transcript_text
+                        );
+                        copyTranscriptItem.setOnMenuItemClickListener(
+                                new OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                final TextView view = vh.phoneCallDetailsViews.
+                                        voicemailTranscriptionView;
+                                ClipboardUtils.copyText(
+                                        CallLogAdapter.this.mContext,
+                                        null,
+                                        view.getText(),
+                                        true);
+                                return true;
+                            }
+                        });
+                    }
                 }
             };
 

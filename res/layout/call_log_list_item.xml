@@ -96,7 +96,6 @@
                         android:textSize="@dimen/call_log_secondary_text_size"
                         android:singleLine="true"
                         android:ellipsize="marquee"
-                        android:textIsSelectable="true"
                         android:visibility="gone" />
 
                     <LinearLayout

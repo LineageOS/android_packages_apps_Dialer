@@ -51,6 +51,12 @@
          [CHAR LIMIT=30] -->
     <string name="call_detail_menu_report">Report inaccurate number</string>
 
+    <!-- Option displayed in context menu to copy long pressed phone number to clipboard [CHAR LIMIT=64] -->
+    <string name="copy_number_text">Copy number to clipboard</string>
+
+    <!-- Option displayed in context menu to copy long pressed voicemail transcription to clipboard [CHAR LIMIT=64] -->
+    <string name="copy_transcript_text">Copy transcription to clipboard</string>
+
     <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
     <string name="recentCalls_editNumberBeforeCall">Edit number before call</string>
 
