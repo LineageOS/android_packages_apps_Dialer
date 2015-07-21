@@ -92,6 +92,10 @@ public class VoicemailPlaybackPresenter
         void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri);
     }
 
+    public interface OnVoicemailDeletedListener {
+        void onVoicemailDeleted(Uri uri);
+    }
+
     /** The enumeration of {@link AsyncTask} objects we use in this class. */
     public enum Tasks {
         CHECK_FOR_CONTENT,
@@ -154,6 +158,8 @@ public class VoicemailPlaybackPresenter
     private Handler mHandler = new Handler();
     private PowerManager.WakeLock mProximityWakeLock;
     private AudioManager mAudioManager;
+
+    private OnVoicemailDeletedListener mOnVoicemailDeletedListener;
 
     /**
      * Obtain singleton instance of this class. Use a single instance to provide a consistent
@@ -708,8 +714,19 @@ public class VoicemailPlaybackPresenter
         return mAudioManager.isSpeakerphoneOn();
     }
 
+    public void setOnVoicemailDeletedListener(OnVoicemailDeletedListener listener) {
+        mOnVoicemailDeletedListener = listener;
+    }
+
     public int getMediaPlayerPosition() {
         return mIsPrepared && mMediaPlayer != null ? mMediaPlayer.getCurrentPosition() : 0;
+    }
+
+    /* package */ void onVoicemailDeleted() {
+        // Trampoline the event notification to the interested listener
+        if (mOnVoicemailDeletedListener != null) {
+            mOnVoicemailDeletedListener.onVoicemailDeleted(mVoicemailUri);
+        }
     }
 
     private static synchronized ScheduledExecutorService getScheduledExecutorServiceInstance() {
