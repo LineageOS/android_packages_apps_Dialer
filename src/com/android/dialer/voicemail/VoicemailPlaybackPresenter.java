@@ -266,7 +266,17 @@ public class VoicemailPlaybackPresenter
     }
 
     /**
-     * Reset the presenter for playback.
+     * Reset the presenter for playback back to its original state.
+     */
+    public void resetAll() {
+        reset();
+
+        mView = null;
+        mVoicemailUri = null;
+    }
+
+    /**
+     * Reset the presenter such that it is as if the voicemail has not been played.
      */
     public void reset() {
         if (mMediaPlayer != null) {
@@ -276,13 +286,15 @@ public class VoicemailPlaybackPresenter
 
         disableProximitySensor(false /* waitForFarState */);
 
-        mView = null;
-        mVoicemailUri = null;
-
         mIsPrepared = false;
         mIsPlaying = false;
         mPosition = 0;
         mDuration.set(0);
+
+        if (mView != null) {
+            mView.onPlaybackStopped();
+            mView.setClipPosition(0, mDuration.get());
+        }
     }
 
     /**
@@ -297,16 +309,11 @@ public class VoicemailPlaybackPresenter
         }
 
         // Release the media player, otherwise there may be failures.
-        if (mMediaPlayer != null) {
-            mMediaPlayer.release();
-            mMediaPlayer = null;
-            mIsPrepared = false;
-        }
+        reset();
 
         if (mActivity != null) {
             mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
-        disableProximitySensor(false /* waitForFarState */);
     }
 
     /**
