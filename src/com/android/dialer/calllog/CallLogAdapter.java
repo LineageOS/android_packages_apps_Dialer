@@ -66,7 +66,9 @@ import java.util.HashMap;
  * Adapter class to fill in data for the Call Log.
  */
 public class CallLogAdapter extends GroupingListAdapter
-        implements ViewTreeObserver.OnPreDrawListener, CallLogGroupBuilder.GroupCreator {
+        implements ViewTreeObserver.OnPreDrawListener,
+                CallLogGroupBuilder.GroupCreator,
+                VoicemailPlaybackPresenter.OnVoicemailDeletedListener {
 
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -340,6 +342,9 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallFetcher = callFetcher;
         mContactInfoHelper = contactInfoHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
+        if (mVoicemailPlaybackPresenter != null) {
+            mVoicemailPlaybackPresenter.setOnVoicemailDeletedListener(this);
+        }
         mIsShowingRecentsTab = isShowingRecentsTab;
 
         mContactInfoCache = new ContactInfoCache(
@@ -643,6 +648,12 @@ public class CallLogAdapter extends GroupingListAdapter
 
     protected boolean isShowingRecentsTab() {
         return mIsShowingRecentsTab;
+    }
+
+    @Override
+    public void onVoicemailDeleted(Uri uri) {
+        mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
+        mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
     }
 
     /**
