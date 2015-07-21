@@ -185,6 +185,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
             }
             mPresenter.pausePlayback();
             CallLogAsyncTaskUtil.deleteVoicemail(mContext, mVoicemailUri, null);
+            mPresenter.onVoicemailDeleted();
         }
     };
 
