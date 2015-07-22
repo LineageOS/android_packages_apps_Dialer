@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"අංකිත මුහුණ"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"දුරකථනය"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"දුරකථනය"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"දුරකථනය"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ඇමතුම් ඉතිහාසය"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ඇමතුම් ඉතිහාසය හිස් කරන්න"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"හඬ තැපෑල මකන්න"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"හඬ තැපෑල බෙදාගන්න"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"ඇමතුම් නැත"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"ඔබගේ ඇමතුම් ලොගය හිස් ය"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"ඇමතුමක් ලබාගන්න"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ඇමතුම් ඉතිහාසය හිස් කරන්නද?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"මෙය ඔබේ ඉතිහාසයෙන් සියලු ඇමතුම් මකනු ඇත"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ඇමතුම් ඉතිහාසය හිස් කරමින්…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"දුරකථන යෙදුම අබල කර ඇති නිසා දුරකථන ඇමතුම ලබාගැනීම කළ නොහැක."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"මෙම උපාංගයෙහි ඒ සඳහා යෙදුමක් නැත"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"නමක් හෝ දුරකථන අංකයක් ඇතුළු කරන්න"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"ඇමතුම් නැත"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"මෑත හඬ තැපැල් නැත"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"ඔබ මඟ හැරුණු ඇමතුම් නැත."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"ඔබේ හඬ තැපැල් එන ලිපි හිස්ය."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ප්‍රියතමයන් පමණක් පෙන්වන්න"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ඉතිහාසය"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"සියලු"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"වීඩියෝ ඇමතුමක් ලබාගන්න"</string>
     <string name="show_call_history" msgid="1141502332266697170">"සම්පූර්ණ ඇමතුම් ඉතිහාසය බලන්න"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"නව මඟ හැරුණු ඇමතුම් <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"වේග ඩයලනය යනු ප්‍රියතමයන් සහ ඔබ නිතර අමතන අංක සඳහා එක්-ස්පර්ශ ඩයල් කිරීමකි"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"සබඳතා නැත"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"ඔබගේ වේග ඩයල් එකේ තවමත් කවුරුවත් නැහැ"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ප්‍රියතම ලෙස එක් කරන්න"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"ඔබ තවමත් සම්බන්ධතා නැහැ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"සම්බන්ධතාවයක් එකතු කරන්න"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"සියලු අංක බැලීමට අනුරුව ස්පර්ශ කරන්න නැතහොත් &amp; යළි ඇණවුම් කිරීමට අල්ලාගෙන සිටින්න"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ඉවත් කරන්න"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"වීඩියෝ ඇමතුම"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ක්ෂණික ප්‍රතිචාර"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ඇමතුම්"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ගිණුම් ඇමතීම"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"ක්‍රියාත්මක කරන්න"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"අවසර සකසන්න"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"වේග ඩයල් කිරීම සබල කිරීමට,\n සම්බන්ධතා අවසරය ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"ඔබගේ ඇමතුම ලොගය බැලීමට,\n දුරකථන අවසරය ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"ඔබේ සම්බන්ධතා බැලීමට,\n සම්බන්ධතා අවසර ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"ඔබගේ හඬ තැපැල් වෙත ප්‍රවේශ වීම සඳහා,\n දුරකථන අවසර ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"ඔබේ සම්බන්ධතා සෙවීමට, සම්බන්ධතා අවසර ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"ඇමතුමක් ලබාගැනීම සඳහා,\n දුරකථන අවසර ක්‍රියාත්මක කරන්න."</string>
 </resources>

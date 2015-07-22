@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Тергіш"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Телефон"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Қоңыраулар тарихы"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Қоңыраулар тарихын тазалау"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Дауыс-хабарды жою"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Дауыс-хабармен бөлісу"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Қоңыраулар жоқ"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Қоңыраулар журналы бос"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Қоңырау шалу"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Қоңыраулар тарихын тазалау керек пе?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Бұл тарихтан барлық қоңырауларды жояды"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Қоңыраулар тарихы тазалануда…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Телефон қоңырауын шалу мүмкін емес, өйткені «Телефон» қолданбасы өшірілген."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Бұл үшін осы құрылғыда қолданба жоқ"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Атты немесе телефон нөм. енг."</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Қоңыраулар жоқ"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Жақындағы дауыстық хабарлар жоқ"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Қабылданбаған қоңыраулар жоқ."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Дауыс поштасының \"Кіріс\" қалтасы бос."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Сүйіктілерді ғана көрсету"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Тарих"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Барлық"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Бейне қоңырау шалу"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Толық қоңыраулар тарихын көру"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> жаңа қабылданбаған қоңыраулар"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Жылдам теру – таңдаулыларды және жиі қоңырау шалатын нөмірлерді бір түртумен теру"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Ешқандай контактілер жоқ"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Жылдам теруде әлі ешкім жоқ"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Таңдаулыны қосу"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Әлі ешқандай контактілер жоқ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Контакт қосу"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Барлық нөмірлерді көру үшін түртіңіз немесе ретін өзгерту үшін түртіп, ұстап тұрыңыз"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Алып тастау"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Бейне қоңырау"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Жылдам жауаптар"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Қоңыраулар"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Есептік жазбаларға қоңыр. шалу"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Қосу"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Рұқсаттар орнату"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Жылдам теруді қосу үшін\n \"Контактілер\" рұқсатын қосыңыз."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Қоңыраулар журналын көру үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Контактілерді көру үшін\n \"Контактілер\" рұқсатын қосыңыз."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Дауыс поштасы көрсетілуі үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Контактілерді іздеу үшін \"Контактілер\" рұқсаттарын қосыңыз."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Қоңырау шалу үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
 </resources>

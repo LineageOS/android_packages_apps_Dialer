@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"拨号"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"电话"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"电话"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"拨号"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"通话记录"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"清除通话记录"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"删除语音邮件"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"分享语音邮件"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"没有任何通话"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"您没有任何通话记录"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"拨打电话"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通话记录吗？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"这会删除您的所有通话记录"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通话记录…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"“电话”应用已被停用，因此无法拨打电话。"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"此设备上没有可执行此操作的应用"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"输入姓名或电话号码"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"没有未接电话"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"最近没有语音邮件"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"您没有任何未接电话。"</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"您未收到任何语音邮件。"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"仅显示收藏的联系人"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"通话记录"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"发起视频通话"</string>
     <string name="show_call_history" msgid="1141502332266697170">"查看全部通话记录"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速拨号功能，只需轻轻一点即可拨打收藏联系人的电话号码以及经常拨打的电话号码。"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"没有联系人"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"您的快速拨号功能尚未收藏任何联系人"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"添加常用联系人"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"您还没有任何联系人"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"添加联系人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"触摸图片可查看所有号码，触摸并按住可重新排序"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"视频通话"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通话"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐户"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"开启"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"设置权限"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"要启用快速拨号功能，\n请开启“通讯录”权限。"</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"要查看您的通话记录，\n请开启“电话”权限。"</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"要查看您的联系人，\n请开启“通讯录”权限。"</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"要使用您的语音信箱，\n请开启“电话”权限。"</string>
+    <string name="permission_no_search" msgid="84152933267902056">"要搜索您的联系人，请开启“通讯录”权限。"</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"要拨打电话，\n请开启“电话”权限。"</string>
 </resources>

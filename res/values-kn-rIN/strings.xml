@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"ಡಯಲರ್"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"ಫೋನ್"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ಫೋನ್"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ಫೋನ್"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ಕರೆ ಇತಿಹಾಸ"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ಧ್ವನಿಮೇಲ್‌ ಅಳಿಸಿ"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ಧ್ವನಿಮೇಲ್‌ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"ಯಾವುದೇ ಕರೆಗಳಿಲ್ಲ"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"ನಿಮ್ಮ ಕರೆಯ ಲಾಗ್ ಖಾಲಿ ಇದೆ"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"ಕರೆ ಮಾಡಿ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸುವುದೇ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ಇದು ನಿಮ್ಮ ಇತಿಹಾಸದಿಂದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು ಅಳಿಸುತ್ತದೆ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…"</string>
@@ -127,8 +128,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿರುವುದರಿಂದ ಫೋನ್ ಕರೆ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ಈ ಸಾಧನದಲ್ಲಿ ಅದಕ್ಕಾಗಿ ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಲ್ಲ"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ಹೆಸರು ಅಥವಾ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"ಯಾವುದೇ ಕರೆಗಳಿಲ್ಲ"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"ಯಾವುದೇ ಇತ್ತೀಚಿನ ಧ್ವನಿಮೇಲ್‌ಗಳಿಲ್ಲ"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"ನೀವು ಯಾವುದೇ ತಪ್ಪಿದ ಕರೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಇನ್‌ಬಾಕ್ಸ್ ಖಾಲಿ ಇದೆ."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ಇತಿಹಾಸ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
@@ -147,8 +148,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="show_call_history" msgid="1141502332266697170">"ಕರೆಯ ಪೂರ್ಣ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂದರೆ, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನ ಸಂಪರ್ಕಗಳು ಹಾಗೂ ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದೇ ಒಂದು ಸ್ಪರ್ಶದಲ್ಲಿ ಡಯಲ್‌ ಮಾಡುವಿಕೆ."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"ನಿಮ್ಮ ವೇಗದ ಡಯಲ್‌ನಲ್ಲಿ ಇದುವರೆಗೆ ಯಾರೂ ಇಲ್ಲ"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ಮೆಚ್ಚಿನದನ್ನು ಸೇರಿಸಿ"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"ನೀವು ಇನ್ನೂ ಯಾವುದೇ ಸಂಪರ್ಕಗಳನ್ನು ಹೊಂದಿಲ್ಲ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ಸಂಪರ್ಕ ಸೇರಿಸಿ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"ವೀಡಿಯೊ ಕರೆ"</string>
@@ -198,4 +201,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ಕರೆಗಳು"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"ಆನ್ ಮಾಡು"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸು"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"ವೇಗ ಡಯಲ್ ಸಕ್ರಿಯಗೊಳಿಸಲು, \n ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"ನಿಮ್ಮ ಕರೆಯ ಲಾಗ್ ನೋಡಲು, \n ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ನೋಡಲು, \n ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಪ್ರವೇಶಿಸಲು, \n ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಹುಡುಕಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಗಳನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"ಕರೆ ಮಾಡಲು, \n ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
 </resources>

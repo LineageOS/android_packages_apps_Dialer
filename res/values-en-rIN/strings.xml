@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Dialler"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Telephone"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Phone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Phone"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Call history"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Clear call history"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Delete voicemail"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Share voicemail"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"No calls"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Your call log is empty"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Make a call"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Clear call history?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"This will delete all calls from your history"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Clearing call history…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Cannot make a phone call because the Phone application has been disabled."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"No app for that on this device"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Enter a name or phone number"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"No calls"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"No recent voicemails"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"You have no missed calls."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Your voicemail inbox is empty."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Show favourites only"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"History"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"All"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Make video call"</string>
     <string name="show_call_history" msgid="1141502332266697170">"View full call history"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> new missed calls"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Speed dial is one‑touch dialling for favourites and numbers that you call often"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"No contacts"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"No one is on your speed dial yet"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Add a favourite"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"You don\'t have any contacts yet"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Add a contact"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Touch image to see all numbers or touch &amp; hold to reorder"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remove"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Video call"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Quick responses"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Calls"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Calling accounts"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Turn on"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Set permissions"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"To enable speed dial,\n turn on the Contacts permission."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"To see your call log,\n turn on the Phone permission."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"To see your contacts,\n turn on the Contacts permission."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"To access your voicemail,\n turn on the Phone permission."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"To search your contacts, turn on the Contacts permissions."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"To place a call,\n turn on the Phone permission."</string>
 </resources>

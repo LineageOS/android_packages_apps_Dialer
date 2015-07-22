@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Dialer"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"ફોન"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ફોન"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ફોન"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"કૉલ ઇતિહાસ"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"કૉલ ઇતિહાસ સાફ કરો"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"વૉઇસમેઇલ કાઢી નાખો"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"વૉઇસમેઇલ શેર કરો"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"કોઈ કૉલ્સ નથી"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"તમારો કૉલ લૉગ ખાલી છે"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"એક કૉલ કરો"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"કૉલ ઇતિહાસ સાફ કરીએ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"આ તમારા ઇતિહાસમાંથી તમામ કૉલ્સ કાઢી નાખશે"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"કૉલ ઇતિહાસ સાફ કરી રહ્યાં છે…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ફોન કૉલ કરી શકાતો નથી કારણ કે ફોન એપ્લિકેશન અક્ષમ કરવામાં આવી છે."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"આ ઉપકરણ પર તે માટે કોઈ એપ્લિકેશન નથી"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"નામ અથવા ફોન નંબર દાખલ કરો"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"કોઈ કૉલ્સ નથી"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"કોઈ તાજેતરના વૉઇસમેઇલ્સ નથી"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"તમારી પાસે કોઇ છૂટેલાં કૉલ્સ નથી."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"તમારું વૉઇસમેઇલ ઇનબોક્સ ખાલી છે."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ફક્ત મનપસંદ બતાવો"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ઇતિહાસ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"તમામ"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"વિડિઓ કૉલ કરો"</string>
     <string name="show_call_history" msgid="1141502332266697170">"પૂર્ણ કૉલ ઇતિહાસ જુઓ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> નવા છૂટેલા કૉલ્સ"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"સ્પીડ ડાયલ એ મનપસંદ અને તમે વારંવાર કૉલ કરો છો તે 1નંબર્સ માટે વન-ટચ ડાયલિંગ છે."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"સંપર્કો નથી"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"તમારા ઝડપી ડાયલ પર હજી સુધી કોઇ નથી"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"એક મનપસંદ ઉમેરો"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"તમે હજી સુધી કોઇપણ સંપર્કો ધરાવતાં નથી"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"સંપર્ક ઉમેરો"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"બધા નંબર્સ જોવા માટે છબી ટેપ કરો અથવા પુનઃક્રમાંકિત કરવા માટે પકડી રાખો"</string>
     <string name="remove_contact" msgid="1080555335283662961">"દૂર કરો"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"વિડિઓ કૉલ"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ઝડપી પ્રતિસાદ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"કૉલ્સ"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"કૉલિંગ એકાઉન્ટ્સ"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"ચાલુ કરો"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"પરવાનગીઓ સેટ કરો"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"ઝડપી ડાયલ સક્ષમ કરવા માટે,\n સંપર્કોની પરવાનગી ચાલુ કરો."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"તમારા કૉલ લોગ જોવા માટે,\n ફોન પરવાનગી ચાલુ કરો."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"તમારા સંપર્કો જોવા માટે,\n સંપર્કોની પરવાનગી ચાલુ કરો."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"તમારો વૉઇસમેઇલ ઍક્સેસ કરવા માટે,\n ફોન પરવાનગી ચાલુ કરો."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"તમારા સંપર્કો શોધવા માટે, સંપર્કોની પરવાનગીઓ ચાલુ કરો."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"કૉલ કરવા માટે,\n ફોન પરવાનગી ચાલુ કરો."</string>
 </resources>

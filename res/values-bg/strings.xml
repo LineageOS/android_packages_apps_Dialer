@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Набиране"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Телефон"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"История на обажданията"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Изчистване на историята на обажд."</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Изтриване на гласова поща"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Споделяне на гласова поща"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Няма обаждания"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Списъкът с обажданията е празен"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Обаждане"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Да се изчисти ли историята на обажд.?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Така ще се изтрият всички обаждания от историята ви"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Историята на обажд. се изчиства…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Не може да се осъществи телефонно обаждане, защото приложението Телефон е деактивирано."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"На устройството няма приложение за това действие"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Въведете име или тел. номер"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Няма обаждания"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Няма скорошни съобщения в гласовата поща"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Нямате пропуснати обаждания."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Входящата ви гласова поща е празна."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Показване само на любимите"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"История"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Всички"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Провеждане на видеообаждане"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Преглед на цялата история на обажданията"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> нови пропуснати обаждания"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Чрез бързото набиране се свързвате с едно докосване с любими контакти и с номера, на които се обаждате често"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Няма контакти"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Още нямате контакти за бързо набиране"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Добавяне на любим контакт"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Още нямате контакти"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Добавяне на контакт"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Докоснете изображението, за да видите всички номера, или го натиснете и задръжте за пренареждане"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Премахване"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Видеообаждане"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Бързи отговори"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Обаждания"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Профили за обаждане"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Включване"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Задаване на разрешенията"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"За да активирате бързото набиране,\nвключете разрешението за контакти."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"За да видите списъка с обажданията си,\nвключете разрешението за телефон."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"За да видите контактите си,\nвключете разрешението за контакти."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"За да осъществите достъп до гласовата си поща,\nвключете разрешението за телефон."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"За да търсите в контактите си, включете разрешенията за тях."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"За да извършите обаждане,\nвключете разрешението за телефон."</string>
 </resources>

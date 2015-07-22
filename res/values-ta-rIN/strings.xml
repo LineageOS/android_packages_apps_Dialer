@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"டயலர்"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"ஃபோன்"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ஃபோன்"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு பதிவு"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"அழைப்பு வரலாற்றை அழி"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"குரலஞ்சலை நீக்கு"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"குரலஞ்சலைப் பகிர்"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"அழைப்புகள் இல்லை"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"அழைப்புப் பதிவு காலியாக உள்ளது"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"அழை"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"அழைப்பு பதிவை அழிக்கவா?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"பதிவிலிருந்து எல்லா அழைப்புகளும் நீக்கப்படும்"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"அழைப்பு வரலாற்றை அழிக்கிறது…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Phone பயன்பாடு முடக்கப்பட்டுள்ளதால், ஃபோன் அழைப்பைச் செய்ய முடியாது."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"சாதனத்தில் இந்தச் செயலைச் செய்வதற்கான பயன்பாடு எதுவும் இல்லை"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"பெயர் (அ) ஃபோன் எண்ணை உள்ளிடுக"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"அழைப்புகள் இல்லை"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"சமீபத்திய குரலஞ்சல்கள் இல்லை"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"தவறிய அழைப்புகள் இல்லை."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"குரலஞ்சல் இன்பாக்ஸ் காலியாக உள்ளது."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"பிடித்தவற்றை மட்டும் காட்டு"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"வரலாறு"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"எல்லாம்"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"வீடியோவில் அழை"</string>
     <string name="show_call_history" msgid="1141502332266697170">"அழைப்பு பதிவு முழுவதையும் காட்டு"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> புதிய தவறிய அழைப்புகள்"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"விரைவு டயல் என்பது பிடித்த மற்றும் நீங்கள் அடிக்கடி அழைக்கும் எண்களை ஒரே தொடுதலின் மூலம் டயல் செய்யும் அம்சமாகும்."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"தொடர்புகள் இல்லை"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"இன்னும் விரைவு டயலில் யாரையும் சேர்க்கவில்லை"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"பிடித்தவராகச் சேர்"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"இதுவரை எந்தத் தொடர்புகளும் இல்லை"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ஒரு தொடர்பைச் சேர்க்கவும்"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"எல்லா எண்களையும் பார்க்க, படத்தைத் தொடவும் அல்லது மறுவரிசைப்படுத்த தொட்டுப் பிடித்திருக்கவும்"</string>
     <string name="remove_contact" msgid="1080555335283662961">"அகற்று"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"வீடியோ அழைப்பு"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"விரைவு பதில்கள்"</string>
     <string name="call_settings_label" msgid="313434211353070209">"அழைப்புகள்"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"அழைப்பு கணக்குகள்"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"இயக்கு"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"அனுமதிகளை அமை"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"விரைவு டயலை இயக்க,\n தொடர்புகள் அனுமதியை இயக்கவும்."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"அழைப்புப் பதிவைப் பார்க்க,\n ஃபோன் அனுமதியை இயக்கவும்."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"தொடர்புகளைப் பார்க்க,\n தொடர்புகள் அனுமதியை இயக்கவும்."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"குரலஞ்சலை அணுக,\n ஃபோன் அனுமதியை இயக்கவும்."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"தொடர்புகளைத் தேட, தொடர்புகள் அனுமதிகளை இயக்கவும்."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"அழைக்க,\n ஃபோன் அனுமதியை இயக்கவும்."</string>
 </resources>

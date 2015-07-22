@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Appeler"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Téléphone"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Téléphone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Téléphone"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historique des appels"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Effacer l\'historique d\'appels"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Supprimer le message vocal"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Partager le message vocal"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Aucun appel"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Votre journal d\'appels est vide"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Faire un appel"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Effacer l\'historique des appels?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tous les appels seront supprimés de votre historique."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Suppression historique des appels…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Impossible d\'effectuer un appel téléphonique, car l\'application Téléphone a été désactivée."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Cette action ne peut être effectuée par aucune application sur cet appareil."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Entrez nom ou numéro de tél."</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Aucun appel"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Aucun message vocal récent"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Vous n\'avez aucun appel manqué."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"La boîte de réception de votre messagerie vocale est vide."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Afficher les contacts favoris uniquement"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historique"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tous"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Faire un appel vidéo"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Afficher tout l\'historique des appels"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nouveaux appels manqués"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"La numérotation abrégée vous permet d\'appeler vos contacts favoris et les numéros que vous appelez fréquemment d\'un simple toucher du doigt."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Aucun contact"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Aucun contact ne figure dans vos numéros de composition abrégée"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ajouter un favori"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Vous n\'avez pas encore de contacts"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Ajouter un contact"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Touchez l\'image pour afficher tous les numéros, ou maintenez votre doigt sur l\'écran pour les réorganiser"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Supprimer"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Appel vidéo"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Réponses rapides"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Appels"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Comptes d\'appel"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Activer"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Définir les autorisations"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Pour activer la numérotation abrégée, \nactivez l\'autorisation Contacts."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Pour voir votre journal d\'appels, \nactivez l\'autorisation Téléphone."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Pour voir vos contacts, \nactivez l\'autorisation Contacts."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Pour accéder à votre messagerie vocale, \nactivez l\'autorisation Téléphone."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Pour rechercher vos contacts et les lieux à proximité, activez les autorisations Contacts."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Pour faire un appel, \nactivez l\'autorisation Téléphone."</string>
 </resources>

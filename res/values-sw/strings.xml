@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Kibonyezi"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Simu"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Nambari ya simu"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Simu"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Rekodi ya simu zilizopigwa"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Futa rekodi ya simu zilizopigwa"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Futa ujumbe wa sauti"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Shiriki ujumbe wa sauti"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"Hakuna simu zilizopigwa"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"Rekodi yako ya nambari za simu haina rekodi"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Piga simu"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Je, ungependa kufuta rekodi ya simu zilizopigwa?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hii itafuta simu zote kutoka rekodi zako"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Inafuta rekodi ya simu zilizopigwa..."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Haiwezi kupiga simu kwa sababu programu ya Simu imezimwa."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Hakuna programu kwa ajili ya hiyo kwenye kifaa hiki"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Andika jina au nambari ya simu"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"Hakuna simu zilizopigwa"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Hakuna ujumbe wa sauti wa hivi majuzi"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"Huna simu ulizokosa."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Kikasha chako cha ujumbe wa sauti hakina ujumbe."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Onyesha zinazopendwa tu"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historia"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Zote"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Piga Hangout ya video"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Tazama historia kamili ya simu"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Simu <xliff:g id="NUMBER">%s</xliff:g> za karibuni ambazo hazikujibiwa"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Unaowasiliana nao zaidi ni upigaji simu wa kugusa mara moja kwa vipendeleo na nambari unazopiga mara kwa mara"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"Hakuna anwani"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Hakuna mtu aliye katika orodha yako ya watu unaowasiliana nao zaidi"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ongeza kipendwa"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Bado huna anwani zozote"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Ongeza anwani"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Gusa picha ili uone nambari zote au gusa na ushikilie ili upange upya"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ondoa"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Hangout ya Video"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Majibu ya haraka"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Simu zilizopigwa"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Akaunti za simu"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Washa"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Weka ruhusa"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Ili kuwasha kipengele cha unaowasiliana nao zaidi,\n washa ruhusa za Anwani."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Ili uweze kuona rekodi yako ya nambari za simu, \n washa ruhusa ya Simu."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Ili uweze kuona anwani zako, \n washa ruhusa ya Anwani."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Ili ufikie ujumbe wako wa sauti, \n washa ruhusa ya Simu."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Ili utafute anwani zako, washa ruhusa za Anwani."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Ili upige simu, \n washa ruhusa ya Simu."</string>
 </resources>

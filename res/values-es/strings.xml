@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"Marcador"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Teléfono"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Teléfono"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historial de llamadas"</string>
@@ -29,7 +29,8 @@
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Borrar historial de llamadas"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eliminar mensaje de voz"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Compartir mensaje de voz"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"No hay llamadas"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"El registro de llamadas está vacío"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Hacer una llamada"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"¿Borrar historial de llamadas?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se eliminarán todas las llamadas del historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Borrando historial de llamadas…"</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"No se puede hacer llamadas porque se ha inhabilitado la aplicación Teléfono."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"No hay aplicaciones para esa acción en este dispositivo"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Escribe un nombre o un teléfono"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"No hay llamadas"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"No hay mensajes de voz recientes"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"No tienes llamadas perdidas."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"La bandeja de entrada del buzón de voz está vacía."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar solo favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historial"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
@@ -146,8 +147,10 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Hacer videollamada"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Ver historial de llamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> llamadas perdidas nuevas"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"La marcación rápida te permite llamar a tus contactos favoritos y a los números que llamas con más frecuencia con solo tocar la pantalla una vez"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"No hay contactos"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Aún no tienes contactos en la función de marcación rápida"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Añadir un favorito"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Aún no tienes contactos"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Añadir un contacto"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca la imagen para ver todos los números o mantenla pulsada para cambiar el orden"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminar"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videollamada"</string>
@@ -197,4 +200,12 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respuestas rápidas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Llamadas"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Cuentas de llamadas"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"Activar"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Establecer permisos"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Para habilitar la marcación rápida,\n activa el permiso de contactos."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Para ver el registro de llamadas,\n activa el permiso del teléfono."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Para ver tus contactos,\n activa el permiso de contactos."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Para acceder al buzón de voz,\n activa el permiso del teléfono."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Para poder buscar tus contactos, activa los permisos de contactos."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Para hacer una llamada,\n activa el permiso del teléfono."</string>
 </resources>
