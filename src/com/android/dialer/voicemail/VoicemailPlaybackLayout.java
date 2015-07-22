@@ -278,7 +278,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         }
 
         disableUiElements();
-        mPositionText.setText(getString(R.string.voicemail_playback_error));
+        mStateText.setText(getString(R.string.voicemail_playback_error));
     }
 
 
