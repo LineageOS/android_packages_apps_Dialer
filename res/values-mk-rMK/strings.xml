@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"За да ја видите евиденцијата на повици,\n вклучете ја дозволата за телефон."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"За да ги видите контактите,\n вклучете ја дозволата за контакти."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"За да пристапите кон говорната пошта,\n вклучете ја дозволата за телефон."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"За да ги пребарувате контактите, вклучете ги дозволите за контакти."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"За повици,\n вклучете ја дозволата за телефон."</string>
 </resources>

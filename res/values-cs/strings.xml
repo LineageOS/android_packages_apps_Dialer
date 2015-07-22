@@ -210,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Chcete-li zobrazit seznam hovorů,\n zapněte oprávnění Telefon."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Chcete-li zobrazit kontakty,\n zapněte oprávnění Kontakty."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Chcete-li používat hlasovou schránku,\n zapněte oprávnění Telefon."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Chcete-li uskutečnit hovor,\n zapněte oprávnění Telefon."</string>
 </resources>

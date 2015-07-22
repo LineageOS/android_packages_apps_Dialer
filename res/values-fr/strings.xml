@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Pour consulter votre journal d\'appels,\n activez l\'autorisation Téléphone."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Pour consulter vos contacts,\n activez l\'autorisation Contacts."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Pour accéder à votre messagerie vocale,\n activez l\'autorisation Téléphone."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Pour rechercher vos contacts, activez l\'autorisation Contacts."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Pour passer un appel,\n activez l\'autorisation Téléphone."</string>
 </resources>

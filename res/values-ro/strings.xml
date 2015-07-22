@@ -208,7 +208,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Pentru a vedea jurnalul de apeluri,\n activați permisiunea Telefon."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Pentru a vedea persoanele de contact,\n activați permisiunea Agendă."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Pentru a accesa mesageria vocală,\n activați permisiunea Telefon."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Pentru a căuta în persoanele de contact, activați permisiunea Agendă."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Pentru a efectua un apel,\n activați permisiunea Telefon."</string>
 </resources>

@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"如要查看通話記錄，\n請開放「手機」權限。"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"如要查看聯絡人，\n請開放「通訊錄」權限。"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"如要存取留言信箱，\n請開放「手機」權限。"</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"如要搜尋聯絡人，請開啟「通訊錄」權限。"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"如要撥號，\n請開放「手機」權限。"</string>
 </resources>

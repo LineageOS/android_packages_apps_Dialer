@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"통화 기록을 보려면\n전화 권한을 사용 설정하세요."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"주소록을 보려면\n주소록 권한을 사용 설정하세요."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"음성사서함에 액세스하려면\n전화 권한을 사용 설정하세요."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"주소록을 검색하려면 주소록 권한을 사용하도록 설정하세요."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"전화를 걸려면\n전화 권한을 사용 설정하세요."</string>
 </resources>

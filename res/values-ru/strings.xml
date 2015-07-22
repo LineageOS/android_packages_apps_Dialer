@@ -210,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Чтобы открыть журнал вызовов,\n включите разрешение \"Телефон\"."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Чтобы перейти к списку контактов,\n включите разрешение \"Контакты\"."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Чтобы перейти к голосовым сообщениям,\n включите разрешение \"Телефон\"."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Для поиска контактов включите разрешение \"Контакты\"."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Чтобы позвонить,\n включите разрешение \"Телефон\"."</string>
 </resources>

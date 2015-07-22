@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"आपला कॉल लॉग पाहण्यासाठी,\n फोन परवानगी चालू करा."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"आपले संपर्क पाहण्‍यासाठी,\n संपर्क परवानगी चालू करा."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"आपल्या व्हॉइसमेलमध्‍ये प्रवेश करण्‍यासाठी,\n फोन परवानगी चालू करा."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"आपले संपर्क शोधण्‍यासाठी, संपर्क परवानग्या चालू करा."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"कॉल करण्‍यासाठी,\n फोन परवानगी चालू करा."</string>
 </resources>

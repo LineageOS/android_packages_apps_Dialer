@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Kõnelogi nägemiseks\n lülitage sisse telefoniluba."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Kontaktide nägemiseks\n lülitage sisse kontaktiluba."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Kõnepostile juurdepääsemiseks\n lülitage sisse telefoniluba."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Kontaktide otsimiseks lülitage sisse kontaktiload."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Helistamiseks\n lülitage sisse telefoniluba."</string>
 </resources>

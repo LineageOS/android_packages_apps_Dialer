@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Kveiktu á símaheimildinni\ntil að sjá símtalaskrána."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Kveiktu á tengiliðaheimildinni\ntil að sjá tengiliðina þína."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Kveiktu á símaheimildinni\ntil að fá aðgang að talhólfinu."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Kveiktu á heimildunum fyrir tengiliði til að leita að tengiliðum."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Kveiktu á símaheimildinni\ntil að hringja símtal."</string>
 </resources>

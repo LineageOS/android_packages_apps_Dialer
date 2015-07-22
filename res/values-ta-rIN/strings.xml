@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"அழைப்புப் பதிவைப் பார்க்க,\n ஃபோன் அனுமதியை இயக்கவும்."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"தொடர்புகளைப் பார்க்க,\n தொடர்புகள் அனுமதியை இயக்கவும்."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"குரலஞ்சலை அணுக,\n ஃபோன் அனுமதியை இயக்கவும்."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"தொடர்புகளைத் தேட, தொடர்புகள் அனுமதிகளை இயக்கவும்."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"அழைக்க,\n ஃபோன் அனுமதியை இயக்கவும்."</string>
 </resources>

@@ -208,7 +208,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Lai skatītu zvanu žurnālu,\n ieslēdziet atļauju Tālrunis."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Lai skatītu kontaktpersonas, \n ieslēdziet atļauju Kontaktpersonas."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Lai piekļūtu balss pastam,\nieslēdziet atļauju Tālrunis."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Lai meklētu savas kontaktpersonas, ieslēdziet atļauju Kontaktpersonas."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Lai veiktu zvanu,\nieslēdziet atļauju Tālrunis."</string>
 </resources>

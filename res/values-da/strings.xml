@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"For at se din opkaldsliste skal du\n slå tilladelsen Telefon til."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"For at se dine kontaktpersoner skal du\n slå tilladelsen Kontaktpersoner til."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"For at få adgang til din telefonsvarer skal du\n slå tilladelsen Telefon til."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Hvis du vil søge i dine kontaktpersoner, skal du slå tilladelserne Kontaktpersoner til."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"For at foretage et opkald skal du \n slå tilladelsen Telefon til."</string>
 </resources>

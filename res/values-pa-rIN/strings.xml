@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"ਆਪਣੇ ਕਾਲ ਲੌਗ ਨੂੰ ਦੇਖਣ ਲਈ,\n ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"ਤੁਹਾਡੇ,\n ਸੰਪਰਕ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"ਆਪਣੇ ਵੌਇਸਮੇਲ ਨੂੰ ਐਕਸੈਸ ਕਰਨ ਲਈ,\n ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"ਆਪਣੇ ਸੰਪਰਕਾਂ ਦੀ ਖੋਜ ਕਰਨ ਲਈ,, ਸੰਪਰਕ ਅਨੁਮਤੀਆਂ ਨੂੰ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"ਕੋਈ ਕਾਲ ਕਰਨ ਲਈ,\n ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
 </resources>

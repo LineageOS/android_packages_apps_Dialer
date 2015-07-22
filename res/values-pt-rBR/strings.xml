@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Para ver seu registro de chamadas,\n ative a permissão para \"Telefone\"."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Para ver seus contatos,\n ative a permissão para \"Contatos\"."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Para acessar seu correio de voz,\n ative a permissão para \"Telefone\"."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Para pesquisar seus contatos, ative as permissões para \"Contatos\"."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Para fazer uma chamada,\n ative a permissão para \"Telefone\"."</string>
 </resources>

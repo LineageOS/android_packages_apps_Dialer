@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Ili uweze kuona rekodi yako ya nambari za simu, \n washa ruhusa ya Simu."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Ili uweze kuona anwani zako, \n washa ruhusa ya Anwani."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Ili ufikie ujumbe wako wa sauti, \n washa ruhusa ya Simu."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Ili utafute anwani zako, washa ruhusa za Anwani."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Ili upige simu, \n washa ruhusa ya Simu."</string>
 </resources>

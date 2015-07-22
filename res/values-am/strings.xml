@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"የጥሪ ምዝግብ ማስታወሻዎን ለማየት\n የስልክ ፍቃዱን ያብሩ።"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"የእርስዎን እውቂያዎች ለማየት\n የእውቂያዎች ፍቃዱን ያብሩ።"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"የእርስዎን ድምጽ መልዕክት ለመድረስ\n የስልክ ፍቃዱን ያብሩ።"</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"የእርስዎን እውቂያዎች ለመከታተል የእውቂያዎች ፍቃዶችን ያብሩ።"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"አንድ ጥሪ ለማድረግ\n የስልክ ፍቃዱን ያብሩ።"</string>
 </resources>

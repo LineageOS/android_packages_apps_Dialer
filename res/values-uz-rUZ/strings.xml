@@ -202,10 +202,10 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Qo‘ng‘iroq hisoblari"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Yoqish"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ruxsatnomalarni sozlash"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Tezkor raqam terish uchun\n Kontaktlar ruxsatnomasini yoqing."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Qo‘ng‘iroqlar jurnalini ko‘rish uchun\n Telefon ruxsatnomasini yoqing."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Kontaktlarni ko‘rish uchun\n Kontaktlar ruxsatnomasini yoqing."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Ovozli pochtaga kirish uchun\n Telefon ruxsatnomasini yoqing."</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Tezkor raqam terish uchun\n “Kontaktlar” ruxsatnomasini yoqing."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Qo‘ng‘iroqlar jurnalini ko‘rish uchun\n “Telefon” ruxsatnomasini yoqing."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Kontaktlarni ko‘rish uchun\n “Kontaktlar” ruxsatnomasini yoqing."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Ovozli pochtaga kirish uchun\n “Telefon” ruxsatnomasini yoqing."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kontaktlarni qidirish uchun Kontaktlar ruxsatnomasini yoqing."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Qo‘ng‘iroq qilish uchun\n Telefon ruxsatnomasini yoqing."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Qo‘ng‘iroq qilish uchun\n “Telefon” ruxsatnomasini yoqing."</string>
 </resources>

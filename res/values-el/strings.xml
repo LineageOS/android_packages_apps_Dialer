@@ -206,7 +206,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Για να δείτε το αρχείο καταγραφής κλήσεών σας,\n ενεργοποιήστε την άδεια Τηλεφώνου."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Για να δείτε τις επαφές σας,\n ενεργοποιήστε την άδεια Επαφών."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Για να μεταβείτε στον αυτόματο τηλεφωνητή,\n ενεργοποιήστε την άδεια Τηλεφώνου."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Για να κάνετε αναζήτηση στις επαφές σας, ενεργοποιήστε τις άδειες \"Επαφές\"."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Για να πραγματοποιήσετε κλήση,\n ενεργοποιήστε την άδεια Τηλεφώνου."</string>
 </resources>
