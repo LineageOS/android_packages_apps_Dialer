@@ -202,7 +202,7 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"खाता कलिङ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"सक्रिय पार्नुहोस्"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"अनुमतिहरू सेट गर्नुहोस्"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"गति डायल सक्रिय गर्न, \n सम्पर्क अनुमति सक्रिय गर्नुहोस्।"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"स्पिड डायल सक्रिय गर्न, \n सम्पर्क अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="permission_no_calllog" msgid="8969825954337678018">"तपाईँको कल लग हेर्न,\n फोन अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"तपाईँका सम्पर्कहरू हेर्न,\n सम्पर्कहरू अनुमति सक्रिय गर्नुहोस्"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"तपाईँको भ्वाइसमेल पहुँच गर्न,\n फोन अनुमति सक्रिय गर्नुहोस्।"</string>

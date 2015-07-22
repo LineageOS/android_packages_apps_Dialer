@@ -206,7 +206,7 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Аккаунты для звонков"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Включить"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Задать разрешения"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Чтобы настроить быстрый набор,\n включите разрешение \"Контакты\"."</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Чтобы настроить быстрый набор,\nвключите разрешение \"Контакты\"."</string>
     <string name="permission_no_calllog" msgid="8969825954337678018">"Чтобы открыть журнал вызовов,\n включите разрешение \"Телефон\"."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Чтобы перейти к списку контактов,\n включите разрешение \"Контакты\"."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Чтобы перейти к голосовым сообщениям,\n включите разрешение \"Телефон\"."</string>

@@ -228,7 +228,7 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Чалуу каттоо эсептери"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Күйгүзүү"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Уруксаттарды берүү"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Тез терүүнү иштетүү үчүн,\n Байланыштарга уруксатты күйгүзүңүз."</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Тез терүүнү иштетүү үчүн,\n \"Байланыштар\" уруксатын күйгүзүңүз."</string>
     <string name="permission_no_calllog" msgid="8969825954337678018">"Чалуу таржымалыңызды көрүү үчүн,\n \"Телефон\" уруксатын күйгүзүңүз."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Байланыштарыңызды көрүү үчүн,\n \"Байланыштар\" уруксатын күйгүзүңүз."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Үн почтаңызга кирүү үчүн,\n \"Телефон\" уруксатын күйгүзүңүз."</string>
