@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"कल इतिहास"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"कल <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"गलत नम्बर रिपोर्ट गर्नुहोस्"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"क्लिपबोर्डमा नम्बर प्रतिलिपि गर्नुहोस्"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"क्लिपबोर्डमा ट्रान्सक्रिप्सन प्रतिलिपि गर्नुहोस्"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"कल गर्नुअगाडी नम्बर सम्पादन गर्नुहोस्"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"सम्पर्कमा थप्नुहोस्"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"कल इतिहासबाट मेट्नुहोस्"</string>
@@ -206,7 +204,7 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"खाता कलिङ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"सक्रिय पार्नुहोस्"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"अनुमतिहरू सेट गर्नुहोस्"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"गति डायल सक्रिय गर्न, \n सम्पर्क अनुमति सक्रिय गर्नुहोस्।"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"स्पिड डायल सक्रिय गर्न, \n सम्पर्क अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="permission_no_calllog" msgid="8969825954337678018">"तपाईँको कल लग हेर्न,\n फोन अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"तपाईँका सम्पर्कहरू हेर्न,\n सम्पर्कहरू अनुमति सक्रिय गर्नुहोस्"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"तपाईँको भ्वाइसमेल पहुँच गर्न,\n फोन अनुमति सक्रिय गर्नुहोस्।"</string>

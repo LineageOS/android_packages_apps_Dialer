@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"कॉल इतिहास"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> को कॉल करें"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"गलत संख्या की रिपोर्ट करें"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"नंबर को क्‍लिपबोर्ड पर कॉपी करें"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"लिप्यंतरण को क्‍लिपबोर्ड पर कॉपी करें"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"कॉल करने से पहले नंबर संपादित करें"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"किसी संपर्क में जोड़ें"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"कॉल इतिहास से साफ़ करें"</string>

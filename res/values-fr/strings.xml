@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historique des appels"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Appeler <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Signaler un numéro incorrect"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"Copier le numéro dans le presse-papiers"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"Copier la transcription dans le presse-papiers"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Modifier le numéro avant d\'effectuer l\'appel"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Ajouter à un contact"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Supprimer de l\'historique des appels"</string>

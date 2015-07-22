@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு பதிவு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"தவறான எண் எனப் புகாரளி"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"எண்ணைக் கிளிப்போர்டுக்கு நகலெடு"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"டிரான்ஸ்கிரிப்ஷனைக் கிளிப்போர்டுக்கு நகலெடு"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"தொடர்பில் சேர்"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"அழைப்பு வரலாற்றில் இருந்து நீக்கு"</string>
