@@ -23,6 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Oproepgeschiedenis"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> bellen"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Onjuist nummer melden"</string>
+    <string name="copy_number_text" msgid="5160503544191297770">"Nummer kopiëren naar klembord"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"Transcript kopiëren naar klembord"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Nummer bewerken voor bellen"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Toevoegen aan een contact"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Verwijderen uit oproepgeschiedenis"</string>

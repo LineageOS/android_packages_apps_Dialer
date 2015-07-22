@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Дуудлагын түүх"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> руу залгах"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Тохиромжгүй дугаарыг мэдээлэх"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Дуудлага хийхийн өмнө дугаарыг засах"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Харилцагчийн хаягт нэмэх"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Дуудлагын түүхээс устгах"</string>
@@ -30,7 +34,7 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Дуут шууданг устгах"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Дуут шууданг хуваалцах"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"Таны дуудлагын жагсаалт хоосон байна"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Дуудлага хийх"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Залгах"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Дуудлагын түүхийг устгах уу?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Энэ нь таны хийсэн бүх дуудлагыг түүхээс устгана."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Дуудлагын түүхийг устгаж байна..."</string>
@@ -128,7 +132,7 @@
     <string name="activity_not_available" msgid="2287665636817987623">"Энэхүү төхөөрөмж дээр тухайн үйлдлийг гүйцэтгэх апликейшн байхгүй байна."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Нэр эсвэл утасны дугаар оруулна уу"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"Танд аваагүй дуудлага байхгүй байна."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Таны дуут шуудангийн ирсэн имэйл хоосон байна."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Таны дуут шуудангийн хайрцаг хоосон байна."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Зөвхөн дуртайнуудыг харуулах"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Түүх"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Бүгд"</string>

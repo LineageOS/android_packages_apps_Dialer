@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Símtalaferill"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Hringja í <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Tilkynna rangt númer"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Breyta númeri áður en hringt er"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Bæta við tengilið"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Eyða af símtalaferli"</string>
@@ -206,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Kveiktu á símaheimildinni\ntil að sjá símtalaskrána."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Kveiktu á tengiliðaheimildinni\ntil að sjá tengiliðina þína."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Kveiktu á símaheimildinni\ntil að fá aðgang að talhólfinu."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Kveiktu á heimildunum fyrir tengiliði til að leita að tengiliðum."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Kveiktu á símaheimildinni\ntil að hringja símtal."</string>
 </resources>

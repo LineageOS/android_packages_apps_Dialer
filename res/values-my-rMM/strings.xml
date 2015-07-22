@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ခေါ်ဆိုမှု မှတ်တမ်း"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"မတိကျသော နံပါတ်အား သတင်းပို့ပါ"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ဖုန်းမခေါ်ခင် နံပါတ်အားပြင်ရန်"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"အဆက်အသွယ်သို့ ပေါင်းထည့်ရန်"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ခေါ်ဆိုမှု မှတ်တမ်း ထဲမှာ ဖျက်ရန်"</string>

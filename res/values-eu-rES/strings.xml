@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Deien historia"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Deitu <xliff:g id="NAME">%s</xliff:g> erabiltzaileari"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Jakinarazi zenb. okerra dela"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editatu zenbakia deitu aurretik"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Gehitu kontaktuetan"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Ezabatu deien historiatik"</string>
@@ -148,7 +152,7 @@
     <string name="show_call_history" msgid="1141502332266697170">"Ikusi deien historia osoa"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> dei galdu berri"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Ez duzu inor markatze bizkorrean oraindik"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Gehitu gogoko bat"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Gehitu gogokoak"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Ez duzu kontakturik oraindik"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Gehitu kontaktua"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu ukituta berrantolatzeko"</string>
@@ -206,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Deien erregistroa ikusteko,\n aktibatu telefonoa atzitzeko baimena."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Kontaktuak ikusteko,\n aktibatu kontaktuak atzitzeko baimena."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Erantzungailua atzitzeko,\n aktibatu telefonoa atzitzeko baimena."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Kontaktuak bilatzeko, aktibatu kontaktuak atzitzeko baimenak."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Deiak egiteko,\n aktibatu telefonoa atzitzeko baimena."</string>
 </resources>

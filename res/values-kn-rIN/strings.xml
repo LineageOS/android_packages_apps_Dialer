@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ಕರೆ ಇತಿಹಾಸ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"ನಿಖರವಾಗಿಲ್ಲದ ಸಂಖ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸು"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ಕರೆ ಇತಿಹಾಸದಿಂದ ಅಳಿಸಿ"</string>

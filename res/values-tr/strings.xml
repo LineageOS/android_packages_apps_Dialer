@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Çağrı geçmişi"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ara: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Hatalı numarayı bildir"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Önce numarayı düzenle"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Bir kişiye ekle"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Çağrı geçmişinden sil"</string>
@@ -149,7 +153,7 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> yeni cevapsız çağrı"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Hızlı arama listenizde henüz kimse yok"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Favori ekle"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"Henüz hiçbir kişiniz yok"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Henüz kayıtlı kişi yok"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Kişi ekle"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Tüm numaraları görmek için resme dokunun veya yeniden sıralamak için dokunup basılı tutun"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Kaldır"</string>
@@ -203,10 +207,9 @@
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aç"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"İzinleri ayarla"</string>
     <string name="permission_no_speeddial" msgid="7449042208802130085">"Hızlı aramayı etkinleştirmek için\n Kişiler iznini açın."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Çağrı kaydınızı görmek için\n Telefon izninizi açın."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Kişilerinizi görmek için\n Kişiler izninizi açın."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Sesli mesajınıza erişmek için\n Telefon izninizi açın."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
-    <string name="permission_place_call" msgid="7588803619716288478">"Telefon etmek için\n Telefon izninizi açın."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Çağrı kaydınızı görmek için\n Telefon iznini açın."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Kişilerinizi görmek için\n Kişiler iznini açın."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Sesli mesajınıza erişmek için\n Telefon iznini açın."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Kişilerinizde arama yapmak için Kişiler izinlerini açın."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Telefon etmek için\n Telefon iznini açın."</string>
 </resources>

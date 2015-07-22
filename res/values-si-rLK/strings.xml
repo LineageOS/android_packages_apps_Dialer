@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ඇමතුම් ඉතිහාසය"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> අමතන්න"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"වැරදි අංකය වාර්තා කරන්න"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ඇමතීමට කලින් අංකය වෙනස් කරන්න"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"සම්බන්ධතාවකට එක් කරන්න"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ඇමතුම් ඉතිහාසයෙන් මකන්න"</string>
@@ -203,9 +207,9 @@
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ක්‍රියාත්මක කරන්න"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"අවසර සකසන්න"</string>
     <string name="permission_no_speeddial" msgid="7449042208802130085">"වේග ඩයල් කිරීම සබල කිරීමට,\n සම්බන්ධතා අවසරය ක්‍රියාත්මක කරන්න."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"ඔබගේ ඇමතුම ලොගය බැලීමට,\n දුරකථන අවසරය සක්‍රිය කරන්න."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"ඔබේ සම්බන්ධතා බැලීමට,\n සම්බන්ධතා අවසර සක්‍රිය කරන්න."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"ඔබගේ හඬ තැපැල් වෙත ප්‍රවේශ වීම සඳහා,\n දුරකථන අවසර සක්‍රිය කරන්න."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"ඔබගේ ඇමතුම ලොගය බැලීමට,\n දුරකථන අවසරය ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"ඔබේ සම්බන්ධතා බැලීමට,\n සම්බන්ධතා අවසර ක්‍රියාත්මක කරන්න."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"ඔබගේ හඬ තැපැල් වෙත ප්‍රවේශ වීම සඳහා,\n දුරකථන අවසර ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_no_search" msgid="84152933267902056">"ඔබේ සම්බන්ධතා සෙවීමට, සම්බන්ධතා අවසර ක්‍රියාත්මක කරන්න."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"ඇමතුමක් ලබාගැනීම සඳහා,\n දුරකථන අවසර සක්‍රිය කරන්න."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"ඇමතුමක් ලබාගැනීම සඳහා,\n දුරකථන අවසර ක්‍රියාත්මක කරන්න."</string>
 </resources>

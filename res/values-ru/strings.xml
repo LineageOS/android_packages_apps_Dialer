@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Журнал звонков."</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Вызов: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Ошибка в номере"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Изменить номер и вызвать"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Добавить к контакту"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Удалить из журнала звонков"</string>
@@ -210,7 +214,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"Чтобы открыть журнал вызовов,\n включите разрешение \"Телефон\"."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"Чтобы перейти к списку контактов,\n включите разрешение \"Контакты\"."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Чтобы перейти к голосовым сообщениям,\n включите разрешение \"Телефон\"."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"Для поиска контактов включите разрешение \"Контакты\"."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Чтобы позвонить,\n включите разрешение \"Телефон\"."</string>
 </resources>

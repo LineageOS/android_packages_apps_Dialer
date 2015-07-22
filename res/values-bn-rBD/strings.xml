@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"কল ইতিহাস"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> কে কল করুন"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"ভুল নম্বর প্রতিবেদন করুন"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"কল করার আগে নম্বর সম্পাদনা করুন"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"একটি পরিচিতিতে যোগ করুন"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"কল ইতিহাস থেকে মুছুন"</string>
@@ -206,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"আপনার কল লগ দেখতে,\n ফোনের অনুমতি চালু করুন।"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"আপনার পরিচিতিগুলি দেখতে,\n পরিচিতিগুলির অনুমতি চালু করুন।"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"আপনার ভয়েসমেল অ্যাক্সেস করতে,\n ফোনের অনুমতি চালু করুন।"</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"আপনার পরিচিতিগুলি অনুসন্ধান করতে, পরিচিতির অনুমতিগুলি চালু করুন।"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"একটি কল করার জন্য,\n ফোনের অনুমতি চালু করুন।"</string>
 </resources>

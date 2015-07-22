@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Anropslogg"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ring <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Rapportér feil nummer"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Rediger nummer før anrop"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Legg til for en kontakt"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Slett fra anropsloggen"</string>
@@ -30,7 +34,7 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Slett talepost"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Del talepost"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"Samtaleloggen din er tom"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Start en samtale"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Ring"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vil du slette anropsloggen?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Dette sletter alle anrop fra loggen"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Sletter anropsloggen …"</string>
@@ -202,11 +206,10 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Ringekontoer"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Slå på"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Angi tillatelser"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"For å slå på hurtigoppringning,\n slå på tillatelsen for Kontakter."</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"For å aktivere hurtigoppringning,\n slå på tillatelsen for Kontakter."</string>
     <string name="permission_no_calllog" msgid="8969825954337678018">"For å se anropsloggen,\n slå på tillatelsen for telefon."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"For å se kontaktene dine,\n slå på tillatelsen for Kontakter."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"For å få tilgang til talepostkassen,\n slå på tillatelsen for telefon."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"For å søke i kontaktene dine, slå på tillatelser for Kontakter."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"For å ringe,\n slå på tillatelsen for telefon."</string>
 </resources>

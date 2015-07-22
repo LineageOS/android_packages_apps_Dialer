@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"通話紀錄"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"撥電話給<xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"回報號碼錯誤"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"撥打電話前編輯號碼"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"新增至聯絡人"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"從通話紀錄中刪除"</string>
@@ -206,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"如要查看您的通話紀錄，\n請開啟「電話」存取權限。"</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"如要查看您的聯絡人，\n請開啟「聯絡人」存取權限。"</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"如要存取語音信箱，\n請開啟「電話」存取權限。"</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"如要搜尋您的聯絡人，請開啟「聯絡人」存取權限。"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"如要撥打電話，\n請開啟「電話」存取權限。"</string>
 </resources>

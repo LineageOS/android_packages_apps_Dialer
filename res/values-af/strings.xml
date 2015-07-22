@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Oproepgeskiedenis"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Bel <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Gee onakkurate nommer aan"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Redigeer nommer voor oproep"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Voeg by \'n kontak"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Vee uit oproepgeskiedenis"</string>
@@ -147,7 +151,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Maak video-oproep"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Bekyk volledige oproepgeskiedenis"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nuwe gemiste oproepe"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Niemand is al op jou spoedbel nie"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Daar is nog niemand op jou spoedbel nie"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Voeg \'n gunsteling by"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Jy het nog nie enige kontakte nie"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Voeg \'n kontak by"</string>

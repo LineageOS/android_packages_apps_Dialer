@@ -23,6 +23,10 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"통화 기록"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"전화걸기: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"적절하지 않은 번호 신고하기"</string>
+    <!-- no translation found for copy_number_text (5160503544191297770) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
+    <skip />
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"통화하기 전에 번호 수정"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"연락처에 추가"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"통화 기록에서 삭제"</string>
@@ -206,7 +210,6 @@
     <string name="permission_no_calllog" msgid="8969825954337678018">"통화 기록을 보려면\n전화 권한을 사용 설정하세요."</string>
     <string name="permission_no_contacts" msgid="4427828429876890950">"주소록을 보려면\n주소록 권한을 사용 설정하세요."</string>
     <string name="permission_no_voicemail" msgid="7785949850839671813">"음성사서함에 액세스하려면\n전화 권한을 사용 설정하세요."</string>
-    <!-- no translation found for permission_no_search (84152933267902056) -->
-    <skip />
+    <string name="permission_no_search" msgid="84152933267902056">"주소록을 검색하려면 주소록 권한을 사용하도록 설정하세요."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"전화를 걸려면\n전화 권한을 사용 설정하세요."</string>
 </resources>
