@@ -464,7 +464,7 @@
 
     <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
-    <string name="dialer_hint_find_contact">Enter a name or phone number</string>
+    <string name="dialer_hint_find_contact">Search contacts</string>
 
     <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->

@@ -55,6 +55,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.activity.TransactionSafeActivity;
@@ -393,8 +394,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(null);
 
-        SearchEditTextLayout searchEditTextLayout =
-                (SearchEditTextLayout) actionBar.getCustomView().findViewById(R.id.search_view_container);
+        SearchEditTextLayout searchEditTextLayout = (SearchEditTextLayout) actionBar
+                .getCustomView().findViewById(R.id.search_view_container);
         searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
 
         mActionBarController = new ActionBarController(this, searchEditTextLayout);
@@ -544,6 +545,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
             mListsFragment.showTab(ListsFragment.TAB_INDEX_RECENTS);
         }
+
+        setSearchBoxHint();
 
         Trace.endSection();
     }
@@ -837,6 +840,20 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else {
             mVoiceSearchButton.setVisibility(View.GONE);
         }
+    }
+
+    protected int getSearchBoxHint () {
+        return R.string.dialer_hint_find_contact;
+    }
+
+    /**
+     * Sets the hint text for the contacts search box
+     */
+    private void setSearchBoxHint() {
+        SearchEditTextLayout searchEditTextLayout = (SearchEditTextLayout) getActionBar()
+                .getCustomView().findViewById(R.id.search_view_container);
+        ((TextView) searchEditTextLayout.findViewById(R.id.search_box_start_search))
+                .setHint(getSearchBoxHint());
     }
 
     protected OptionsPopupMenu buildOptionsMenu(View invoker) {
