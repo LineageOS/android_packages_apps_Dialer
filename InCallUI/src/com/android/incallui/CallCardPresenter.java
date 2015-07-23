@@ -582,13 +582,22 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             Log.d(TAG, "Update primary display info for " + mPrimaryContactInfo);
 
             String name = getNameForCall(mPrimaryContactInfo);
-            String number = getNumberForCall(mPrimaryContactInfo);
+            String number;
+
+            // If a child number is present, use it instead of the 2nd line.
+            boolean isChildNumberShown = !TextUtils.isEmpty(mPrimary.getChildNumber());
+            if (isChildNumberShown) {
+                number = mContext.getString(R.string.child_number, mPrimary.getChildNumber());
+            } else {
+                number = getNumberForCall(mPrimaryContactInfo);
+            }
+
             boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
             ui.setPrimary(
                     number,
                     name,
                     nameIsNumber,
-                    mPrimaryContactInfo.label,
+                    isChildNumberShown ? null : mPrimaryContactInfo.label,
                     mPrimaryContactInfo.photo,
                     mPrimaryContactInfo.isSipCall);
         } else {
