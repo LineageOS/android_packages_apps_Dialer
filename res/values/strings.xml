@@ -813,4 +813,7 @@
 
     <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
     <string name="permission_place_call">To place a call,\n turn on the Phone permission.</string>
+
+    <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead.-->
+    <string name="toast_cannot_write_system_settings">Phone app does not have permission to write to system settings.</string>
 </resources>
