@@ -61,6 +61,8 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
         final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.empty_content_view, this);
+        // Don't let touches fall through the empty view.
+        setClickable(true);
         mImageView = (ImageView) findViewById(R.id.emptyListViewImage);
         mDescriptionView = (TextView) findViewById(R.id.emptyListViewMessage);
         mActionView = (TextView) findViewById(R.id.emptyListViewAction);
