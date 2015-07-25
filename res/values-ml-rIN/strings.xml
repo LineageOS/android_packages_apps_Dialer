@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"കോള്‍‌ ചരിത്രം"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"വിളിക്കുക <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"കൃത്യമല്ലാത്ത നമ്പർ റിപ്പോർട്ടുചെയ്യുക"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"ക്ലിപ്പ്‌ബോർഡിലേക്ക് നമ്പർ പകർത്തുക"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"ക്ലിപ്പ്‌ബോർഡിലേക്ക് ട്രാൻസ്ക്രിപ്ഷൻ പകർത്തുക"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"കോൾ ചരിത്രത്തിൽ നിന്ന് മായ്‌ക്കുക"</string>
@@ -130,7 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"വോയ്‌സ് തിരയൽ ലഭ്യമല്ല"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"അതിനായി ഈ ഉപകരണത്തിൽ അപ്ലിക്കേഷനുകളൊന്നുമില്ല"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ഒരു പേരോ ഫോൺ നമ്പറോ നൽകുക"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"കോണ്‍‌ടാക്റ്റുകള്‍ തിരയുക"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"നിങ്ങൾക്ക് മിസ്‌ഡ് കോളുകളൊന്നുമില്ല."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"നിങ്ങളുടെ വോയ്സ്മെയിൽ ഇൻബോക്സ് ശൂന്യമാണ്."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"പ്രിയപ്പെട്ടവ മാത്രം കാണിക്കുക"</string>

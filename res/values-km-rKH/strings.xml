@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ប្រវត្តិ​ហៅ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"ហៅ <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"រាយការណ៍ពីលេខដែលមិនត្រឹមត្រូវ"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"ចម្លងលេខទៅក្តារតម្បៀតខ្ទាស់"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"ចម្លងការចម្លងទៅក្តារតម្បៀតខ្ទាស់"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"កែ​លេខ​មុន​ពេល​ហៅ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"បន្ថែមទៅទំនាក់ទំនង"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"លុបចេញពីប្រវត្តិហៅ"</string>
@@ -130,7 +128,8 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"ការស្វែងរកជាសម្លេងមិនមានទេ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"មិន​អាច​ហៅ​បាន​ទេ​ ព្រោះ​កម្មវិធី​ទូរស័ព្ទ​ត្រូវ​បាន​បិទ។"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"មិនមានកម្មវិធីសម្រាប់សកម្មភាពនេះនៅលើឧបករណ៍នេះទេ"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"បញ្ចូលឈ្មោះ ឬលេខទូរស័ព្ទ"</string>
+    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
+    <skip />
     <string name="recentMissed_empty" msgid="6213733029875741604">"អ្នកមិនមានការខកខានទទួលទូរស័ព្ទទេ។"</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"ប្រអប់ទទួលសារជាសំឡេងរបស់អ្នកទទេ។"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"បង្ហាញ​តែ​​និយម​ប្រើ​ប៉ុណ្ណោះ"</string>

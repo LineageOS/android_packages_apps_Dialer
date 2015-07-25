@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Nhật ký cuộc gọi"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Gọi <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Báo cáo số không chính xác"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"Sao chép số điện thoại vào khay nhớ tạm"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"Sao chép bản ghi âm vào khay nhớ tạm"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Chỉnh sửa số trước khi gọi"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Thêm vào liên hệ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Xóa khỏi nhật ký cuộc gọi"</string>
@@ -130,7 +128,8 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Không có tính năng tìm kiếm bằng giọng nói"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Không thể thực hiện cuộc gọi điện thoại vì ứng dụng Điện thoại đã bị tắt."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Không có ứng dụng nào cho thao tác đó trên thiết bị này"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Nhập tên hoặc số điện thoại"</string>
+    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
+    <skip />
     <string name="recentMissed_empty" msgid="6213733029875741604">"Bạn không có cuộc gọi nhỡ nào."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Hộp thư thoại đến của bạn trống."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Chỉ hiển thị liên hệ ưa thích"</string>

@@ -128,7 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Raddleit er ekki í boði"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Ekki er hægt að hringja vegna þess að forritið Sími hefur verið gert óvirkt."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Ekkert forrit fyrir þetta er í tækinu"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Sláðu inn nafn eða símanúmer"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Leita að tengiliðum"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"Þú ert ekki með nein ósvöruð símtöl."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Talhólfið þitt er tómt."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Sýna aðeins uppáhaldstengiliði"</string>

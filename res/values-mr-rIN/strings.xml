@@ -128,7 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"व्हॉइस शोध उपलब्ध नाही"</string>
     <string name="call_not_available" msgid="8941576511946492225">"फोन अनुप्रयोग अक्षम केला गेला असल्याने फोन कॉल करणे शक्य नाही."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"या डिव्हाइसवर त्यासाठी कोणताही अॅप नाही"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"नाव किंवा फोन नंबर प्रविष्ट करा"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"संपर्क शोधा"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"आपल्‍याकडे कोणतेही सुटलेले कॉल नाहीत."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"आपला व्हॉइसमेल इनबॉक्स रिक्त आहे."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"केवळ आवडीचे दर्शवा"</string>

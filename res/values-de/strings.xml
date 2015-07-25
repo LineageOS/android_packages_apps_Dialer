@@ -128,7 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Sprachsuche nicht verfügbar"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Es kann kein Anruf getätigt werden, da die App \"Telefon\" deaktiviert wurde."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Keine entsprechende App auf diesem Gerät"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Namen/Telefonnummer eingeben"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"In Kontakten suchen"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"Keine verpassten Anrufe"</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Ihr Mailbox-Posteingang ist leer."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Nur Favoriten anzeigen"</string>

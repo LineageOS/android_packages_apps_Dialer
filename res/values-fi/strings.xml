@@ -128,7 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Puhehaku ei ole käytettävissä"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Puhelua ei voi soittaa, koska Puhelin-sovellus on poistettu käytöstä."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Laitteessa ei ole kyseiseen toimintoon tarvittavaa sovellusta"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Anna nimi tai puhelinnumero"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Hae yhteystietoja"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"Sinulla ei ole vastaamattomia puheluita."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Puhelinvastaajasi postilaatikko on tyhjä."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Näytä vain suosikit"</string>

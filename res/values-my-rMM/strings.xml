@@ -23,10 +23,8 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ခေါ်ဆိုမှု မှတ်တမ်း"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"မတိကျသော နံပါတ်အား သတင်းပို့ပါ"</string>
-    <!-- no translation found for copy_number_text (5160503544191297770) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (2979980182146897370) -->
-    <skip />
+    <string name="copy_number_text" msgid="5160503544191297770">"ကလစ်ဘုတ်တွင် နံပါတ်ကို ကူးယူရန်"</string>
+    <string name="copy_transcript_text" msgid="2979980182146897370">"အသံမှစာပြောင်းထားသည်ကို ကလစ်ဘုတ်သို့ ကူးယူရန်"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ဖုန်းမခေါ်ခင် နံပါတ်အားပြင်ရန်"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"အဆက်အသွယ်သို့ ပေါင်းထည့်ရန်"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ခေါ်ဆိုမှု မှတ်တမ်း ထဲမှာ ဖျက်ရန်"</string>
@@ -130,7 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"အသံဖြင့် ရှာဖွေမှု မရှိ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ဖုန်း အပလီကေးရှင်းကို ပိတ်ထား၍ ဖုန်း ခေါ်ဆိုမှု မပြုလုပ်နိုင်ခဲ့ပါ။"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ဒီကိရိယာထဲမှာ အဲဒါ့အတွက် app မရှိပါ"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"အမည် သို့မဟုတ် ဖုန်း နံပါတ်ကို ရိုက်ထည့်ပါ"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"အဆက်အသွယ်များရှာပါ"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"သင့်တွင် လွဲသွားသည့်ခေါ်ဆိုမှုများ မရှိပါ။"</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"သင့်အသံမေးလ် စာတိုက်ပုံးတွင် ဘာမှမရှိပါ။"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"အနှစ်သက်ဆုံးများသာ ပြပါ"</string>

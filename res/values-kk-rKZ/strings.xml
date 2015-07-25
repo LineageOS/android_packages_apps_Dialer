@@ -128,7 +128,8 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Дауыс арқылы іздеу қол жетімді емес"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Телефон қоңырауын шалу мүмкін емес, өйткені «Телефон» қолданбасы өшірілген."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Бұл үшін осы құрылғыда қолданба жоқ"</string>
-    <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Атты немесе телефон нөм. енг."</string>
+    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
+    <skip />
     <string name="recentMissed_empty" msgid="6213733029875741604">"Қабылданбаған қоңыраулар жоқ."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Дауыс поштасының \"Кіріс\" қалтасы бос."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Сүйіктілерді ғана көрсету"</string>
