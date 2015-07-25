@@ -1,23 +1,22 @@
 package com.android.dialer.settings;
 
-import com.google.common.collect.Lists;
-
-import android.content.ComponentName;
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.UserHandle;
+import android.os.Process;
 import android.os.UserManager;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceActivity.Header;
+import android.provider.Settings;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.android.dialer.DialtactsActivity;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 
 import java.util.List;
@@ -25,8 +24,6 @@ import java.util.List;
 public class DialerSettingsActivity extends PreferenceActivity {
 
     protected SharedPreferences mPreferences;
-
-    private static final int OWNER_HANDLE_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +41,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
         Header soundSettingsHeader = new Header();
         soundSettingsHeader.titleRes = R.string.sounds_and_vibration_title;
         soundSettingsHeader.fragment = SoundSettingsFragment.class.getName();
+        soundSettingsHeader.id = R.id.settings_header_sounds_and_vibration;
         target.add(soundSettingsHeader);
 
         Header quickResponseSettingsHeader = new Header();
@@ -88,6 +86,24 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 target.add(accessibilitySettingsHeader);
             }
         }
+    }
+
+    @Override
+    public void onHeaderClick(Header header, int position) {
+        if (header.id == R.id.settings_header_sounds_and_vibration) {
+            // If we don't have the AppOp to write to system settings, go to system sound settings
+            // instead. Otherwise, perform the super implementation (which launches our own
+            // preference fragment.
+            if (!PermissionsUtil.hasAppOp(this, AppOpsManager.OPSTR_WRITE_SETTINGS)) {
+                Toast.makeText(
+                        this,
+                        getResources().getString(R.string.toast_cannot_write_system_settings),
+                        Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
+                return;
+            }
+        }
+        super.onHeaderClick(header, position);
     }
 
     @Override
