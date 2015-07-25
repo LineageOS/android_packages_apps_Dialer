@@ -17,4 +17,5 @@
 <resources>
     <item type="id" name="context_menu_copy_to_clipboard" />
     <item type="id" name="context_menu_edit_before_call" />
+    <item type="id" name="settings_header_sounds_and_vibration" />
 </resources>
