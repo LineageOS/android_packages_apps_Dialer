@@ -65,8 +65,7 @@ import java.util.HashMap;
  * Adapter class to fill in data for the Call Log.
  */
 public class CallLogAdapter extends GroupingListAdapter
-        implements ViewTreeObserver.OnPreDrawListener,
-                CallLogGroupBuilder.GroupCreator,
+        implements CallLogGroupBuilder.GroupCreator,
                 VoicemailPlaybackPresenter.OnVoicemailDeletedListener {
 
     /** Interface used to initiate a refresh of the content. */
@@ -96,7 +95,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactInfoHelper mContactInfoHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
-    private ViewTreeObserver mViewTreeObserver = null;
 
     protected ContactInfoCache mContactInfoCache;
 
@@ -294,16 +292,6 @@ public class CallLogAdapter extends GroupingListAdapter
                 }
             };
 
-    @Override
-    public boolean onPreDraw() {
-        // We only wanted to listen for the first draw (and this is it).
-        unregisterPreDrawListener();
-        if (PermissionsUtil.hasContactsPermissions(mContext)) {
-            mContactInfoCache.start();
-        }
-        return true;
-    }
-
     public CallLogAdapter(
             Context context,
             CallFetcher callFetcher,
@@ -375,21 +363,8 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     }
 
-    /**
-     * Stop receiving onPreDraw() notifications.
-     */
-    private void unregisterPreDrawListener() {
-        if (mViewTreeObserver != null && mViewTreeObserver.isAlive()) {
-            mViewTreeObserver.removeOnPreDrawListener(this);
-        }
-        mViewTreeObserver = null;
-    }
-
     public void invalidateCache() {
         mContactInfoCache.invalidate();
-
-        // Restart the request-processing thread after the next draw.
-        unregisterPreDrawListener();
     }
 
     public void pauseCache() {
@@ -585,12 +560,6 @@ public class CallLogAdapter extends GroupingListAdapter
                 isVoicemailNumber, mContactInfoHelper.isBusiness(info.sourceType));
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
-
-        // Listen for the first draw
-        if (mViewTreeObserver == null) {
-            mViewTreeObserver = views.rootView.getViewTreeObserver();
-            mViewTreeObserver.addOnPreDrawListener(this);
-        }
     }
 
     @Override
