@@ -208,4 +208,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Để truy cập thư thoại của bạn,\n bật quyền đối với Điện thoại."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Để tìm kiếm liên hệ của bạn, hãy bật quyền đối với Danh bạ."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Để thực hiện cuộc gọi,\n bật quyền đối với Điện thoại."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

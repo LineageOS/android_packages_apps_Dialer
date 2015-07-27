@@ -208,4 +208,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Pour accéder à votre messagerie vocale,\n activez l\'autorisation Téléphone."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Pour rechercher vos contacts, activez l\'autorisation Contacts."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Pour passer un appel,\n activez l\'autorisation Téléphone."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

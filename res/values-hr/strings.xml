@@ -210,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Da biste pristupili govornoj pošti,\n uključite dopuštenje za telefon."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Da biste pretraživali kontakte, uključite dopuštenja za kontakte."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Da biste uputili poziv,\n uključite dopuštenje za telefon."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

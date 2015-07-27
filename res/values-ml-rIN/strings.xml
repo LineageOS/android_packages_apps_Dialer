@@ -208,4 +208,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ ആക്സസ് ചെയ്യുന്നതിന്,\n ഫോൺ അനുമതി ഓണാക്കുക."</string>
     <string name="permission_no_search" msgid="84152933267902056">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ തിരയുന്നതിന് കോൺടാക്റ്റുകൾക്കുള്ള അനുമതികൾ ഓണാക്കുക."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"കോൾ ചെയ്യുന്നതിന്,\n ഫോൺ അനുമതി ഓണാക്കുക."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>
