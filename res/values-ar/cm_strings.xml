@@ -18,8 +18,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">الأماكن القريبة</string>
   <string name="people">الناس</string>
+  <string name="lookup_settings_label">البحث عن رقم الهاتف</string>
+  <string name="lookup_settings_description">البحث عن أرقام الهاتف غير المعروفة</string>
+  <string name="enable_forward_lookup_title">بحث إلى الأمام</string>
+  <string name="enable_forward_lookup_summary">إظهار الأماكن القريبة عند البحث في المتصل</string>
+  <string name="enable_people_lookup_title">بحث عن أشخاص</string>
+  <string name="enable_people_lookup_summary">إظهار نتائج البحث عن أشخاص على الإنترنت عند البحث في المسجل</string>
+  <string name="enable_reverse_lookup_title">بحث عكسي</string>
+  <string name="enable_reverse_lookup_summary">البحث عن معلومات حول شخص أو مكان للأرقام غير المعروفة في المكالمات الواردة</string>
+  <string name="forward_lookup_provider_title">موفر البحث إلى الأمام</string>
+  <string name="people_lookup_provider_title">موفر بحث عن أشخاص</string>
+  <string name="reverse_lookup_provider_title">موفر البحث العكسي</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn الصينية (CN)</string>
+  <string name="preference_category_t9_dialpad_search">بحث لوحة الطلب T9</string>
+  <string name="t9_search_input_locale">إدخال بحث T9</string>
+  <string name="t9_search_input_locale_default">افتراضي</string>
+  <string name="type_blacklist">مكالمة محظورة </string>
   <string name="call_log_stats_title">الإحصائيات</string>
   <string name="callStatsDetailTitle">اإحصائيات تفاصيل الإتصال</string>
+  <string name="call_stats">إحصاءات المكالمات</string>
+  <string name="call_stats_refresh">تحديث</string>
+  <string name="activity_title_call_stats">إحصاءات المكالمات</string>
   <string name="call_stats_nav_all">الكل</string>
   <string name="call_stats_nav_incoming">الوارد</string>
   <string name="call_stats_nav_outgoing">الفائتة</string>
@@ -28,6 +47,8 @@
   <string name="call_stats_outgoing">خارج التغطية <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">لم يتم الرد عليه</string>
   <string name="call_stats_missed_percent">لم يتم الرد عليها: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">محظور</string>
+  <string name="call_stats_blacklist_percent">محظور:%% <xliff:g id="percent">%d </xliff:g></string>
   <string name="call_stats_header_total">المجموع: <xliff:g id="call_count">%s</xliff:g><xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">المجموع: <xliff:g id="call_count"> %s </xliff:g></string>
   <string name="call_stats_filter_from">تاريخ البداية</string>
@@ -45,4 +66,39 @@
   <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
   <string name="call_stats_sort_by_duration">فرز حسب مدة المكالمة</string>
   <string name="call_stats_sort_by_count">فرز حسب عدد المكالمات</string>
+  <string name="menu_add_to_blacklist">إضافة إلى قائمة المتصلين المحظورين</string>
+  <string name="toast_added_to_blacklist">إضافة %s إلى قائمة المتصلين المحظورين</string>
+  <string name="speed_dial_settings">إعدادات الاتصال السريع</string>
+  <string name="speed_dial_not_set">(لم يتم تعيين)</string>
+  <string name="speed_dial_replace">استبدال</string>
+  <string name="speed_dial_delete">حذف</string>
+  <string name="speed_dial_unassigned_dialog_title">المفتاح غير معين</string>
+  <string name="speed_dial_unassigned_dialog_message">لم يتم تعيين أي إجراء اتصال سريع للمفتاح الرقم \'<xliff:g id="number">%s</xliff:g>\'. هل تريد تعيين إجراء الآن؟</string>
+  <string name="dialog_speed_dial_airplane_mode_message">لاستخدام الاتصال الهاتفي السريع، قم أولاً بإيقاف تشغيل وضع الطيران.</string>
+  <string name="yes">نعم</string>
+  <string name="no">لا</string>
+  <string name="incall_vibration_category_title">الاهتزاز في المكالمة</string>
+  <string name="incall_vibrate_outgoing_title">اهتزاز عند الرد</string>
+  <string name="vibrate_call_waiting">الاهتزاز أثناء انتظار المكالمة</string>
+  <string name="incall_vibrate_hangup_title">اهتزاز عند إنهاء المكالمة</string>
+  <string name="incall_vibrate_45_title">اهتزاز كل دقيقة</string>
+  <string name="incall_vibrate_45_summary">يهتز عند علامة الثانية 45 لكل دقيقة أثناء المكالمات الصادرة</string>
+  <string name="detailed_incall_info_title">معلومات مفصلة عن المتصل</string>
+  <string name="detailed_incall_info_summary">عرض معلومات إضافية حول المتصل في شاشة المكالمة الواردة</string>
+  <string name="video_call">مكالمة فيديو</string>
+  <string name="call_duration_active">المدة النشطة:</string>
+  <string name="call_duration_call_out">مدة المكالمة:</string>
+  <string name="call_log_show_all_slots">جميع شرائح SIM</string>
+  <string name="call_log_all_calls_header">جميع المكالمات</string>
+  <string name="calllog_search_hint">البحث في سجل المكالمات</string>
+  <string name="msim_ime_dialog_title">معرف الجهاز</string>
+  <string name="call_log_blacklist_header">المكالمات المحظورة فقط</string>
+  <string name="start_call_playback">تشغيل التسجيل</string>
+  <string name="stop_call_playback">إيقاف</string>
+  <string name="call_playback_error_message">فشل تشغيل التسجيل</string>
+  <string name="sensors_category_title">خيارات المستشعر</string>
+  <string name="smart_mute_title">الكتم الذكي</string>
+  <string name="smart_mute_summary">كتم صوت المكالمة الواردة بقلب الجهاز</string>
+  <string name="smart_dialer_title">المكالمة الذكية</string>
+  <string name="smart_dialer_summary">يطلب جهة الاتصال تلقائياً بمجرد أن ترفع هاتفك إلى أذنك</string>
 </resources>

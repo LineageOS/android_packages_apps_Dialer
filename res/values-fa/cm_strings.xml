@@ -18,9 +18,87 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">مکان‌های نزدیک</string>
   <string name="people">افراد</string>
+  <string name="lookup_settings_label">جستجوی شماره تلفن</string>
+  <string name="lookup_settings_description">جستجوی شماره تلفن‌های ناشناس</string>
+  <string name="enable_forward_lookup_title">ارسال جستجو</string>
+  <string name="enable_forward_lookup_summary">نمایش مکان‌های نزدیک هنگام جستجو در شماره‌گیر</string>
   <string name="enable_people_lookup_title">جستجوی افراد</string>
+  <string name="enable_people_lookup_summary">نمایش نتایج آنلاین افراد هنگام جستجو در شماره‌گیر</string>
   <string name="enable_reverse_lookup_title">جستجوی برعکس</string>
+  <string name="enable_reverse_lookup_summary">جستجوی اطلاعات مربوط به افراد یا مکان‌ها برای شماره‌های ناشناس در تماس‌های ورودی</string>
+  <string name="forward_lookup_provider_title">ارسال ارائه‌دهنده سرویس جستجو</string>
+  <string name="people_lookup_provider_title">ارائه‌دهنده سرویس جستجوی افراد</string>
+  <string name="reverse_lookup_provider_title">ارائه‌دهنده سرویس جستجوی معکوس</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn چینی (CN)</string>
+  <string name="preference_category_t9_dialpad_search">جستجوی صفحه شماره‌گیری T9</string>
+  <string name="t9_search_input_locale">ورودی جستجوی T9</string>
+  <string name="t9_search_input_locale_default">پیش‌فرض</string>
+  <string name="type_blacklist">تماس مسدود شده</string>
+  <string name="call_log_stats_title">آمار</string>
+  <string name="callStatsDetailTitle">جزئیات آمار تماس</string>
+  <string name="call_stats">آمار تماس</string>
+  <string name="call_stats_refresh">تازه‌سازی</string>
+  <string name="activity_title_call_stats">آمار تماس</string>
+  <string name="call_stats_nav_all">همه</string>
+  <string name="call_stats_nav_incoming">ورودی</string>
+  <string name="call_stats_nav_outgoing">خروجی</string>
+  <string name="call_stats_nav_missed">از دست رفته</string>
+  <string name="call_stats_incoming">ورودی: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">خروجی: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">از دست رفته</string>
+  <string name="call_stats_missed_percent">از دست رفته: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">مسدود شده</string>
+  <string name="call_stats_blacklist_percent">مسدود شده: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">مجموع: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">مجموع: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">تاریخ شروع</string>
+  <string name="call_stats_filter_to">تاریخ اتمام</string>
+  <string name="call_stats_filter_picker_title">محدوده فیلتر</string>
+  <string name="date_quick_selection">انتخاب سریع</string>
+  <string name="date_qs_currentmonth">ماه فعلی</string>
+  <string name="date_qs_currentquarter">سه ماهه فعلی</string>
+  <string name="date_qs_currentyear">سال فعلی</string>
+  <string name="date_qs_lastweek">هفته گذشته</string>
   <string name="date_qs_lastmonth">ماه گذشته</string>
+  <string name="date_qs_lastquarter">سه ماهه گذشته</string>
+  <string name="date_qs_lastyear">سال گذشته</string>
+  <string name="call_stats_date_filter">تنظیم محدوده زمانی</string>
+  <string name="call_stats_reset_filter">تنظیم مجدد محدوده زمانی</string>
+  <string name="call_stats_sort_by_duration">دسته‌بندی بر اساس مدت تماس</string>
+  <string name="call_stats_sort_by_count">دسته‌بندی بر اساس تعداد تماس</string>
+  <string name="menu_add_to_blacklist">افزودن به لیست تماس‌گیرنده‌های مسدود شده</string>
+  <string name="toast_added_to_blacklist">%s به لیست تماس‌گیرنده‌های مسدود شده افزوده شد.</string>
+  <string name="speed_dial_settings">تنظیمات تماس سریع</string>
+  <string name="speed_dial_not_set">(تنظیم نشده)</string>
+  <string name="speed_dial_replace">جایگزین کردن</string>
   <string name="speed_dial_delete">حذف</string>
+  <string name="speed_dial_unassigned_dialog_title">کلید تعیین‌نشده</string>
+  <string name="speed_dial_unassigned_dialog_message">هیچ عمل تماس سریعی به کلید «<xliff:g id="number">%s</xliff:g>» اختصاص داده نشده است. آیا اکنون یک عمل را اختصاص می‌دهید؟</string>
+  <string name="dialog_speed_dial_airplane_mode_message">برای استفاده از تماس سریع باید ابتدا حالت پرواز را خاموش کنید.</string>
+  <string name="yes">بله</string>
+  <string name="no">خیر</string>
+  <string name="incall_vibration_category_title">لرزش در هنگام تماس</string>
+  <string name="incall_vibrate_outgoing_title">لرزش هنگام پاسخگویی</string>
+  <string name="vibrate_call_waiting">لرزش هنگام انتظار تماس</string>
+  <string name="incall_vibrate_hangup_title">لرزش هنگام قطع</string>
+  <string name="incall_vibrate_45_title">لرزش هر یک دقیقه</string>
+  <string name="incall_vibrate_45_summary">لرزش در ثانیه 45 هر دقیقه از تماس‌های خروجی</string>
+  <string name="detailed_incall_info_title">اطلاعات مفصل تماس‌گیرنده</string>
+  <string name="detailed_incall_info_summary">نمایش اطلاعات اضافی در مورد تماس‌گیرنده در صفحه تماس ورودی</string>
   <string name="video_call">تماس ویدیویی</string>
+  <string name="call_duration_active">مدت زمان فعال:</string>
+  <string name="call_duration_call_out">مدت زمان تماس:</string>
+  <string name="call_log_show_all_slots">تمام سیمکارت‌ها</string>
+  <string name="call_log_all_calls_header">تمام تماس‌ها</string>
+  <string name="calllog_search_hint">جستجوی گزارش تماس</string>
+  <string name="msim_ime_dialog_title">شناسه دستگاه</string>
+  <string name="call_log_blacklist_header">تنها تماس‌های مسدود شده</string>
+  <string name="start_call_playback">پخش مورد ضبط‌‌شده</string>
+  <string name="stop_call_playback">توقف</string>
+  <string name="call_playback_error_message">پخش مورد ضبط‌شده ناموفق بود</string>
+  <string name="sensors_category_title">گزینه‌های حسگر</string>
+  <string name="smart_mute_title">بی‌صدا کردن هوشمند</string>
+  <string name="smart_mute_summary">بی‌صدا کردن تماس ورودی به وسیله وارونه‌کردن دستگاه</string>
+  <string name="smart_dialer_title">تماس هوشمند</string>
+  <string name="smart_dialer_summary">تماس خودکار با شماره گرفته شده، به وسیله نزدیک‌کردن دستگاه به گوش</string>
 </resources>
