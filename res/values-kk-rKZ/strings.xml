@@ -128,8 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Дауыс арқылы іздеу қол жетімді емес"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Телефон қоңырауын шалу мүмкін емес, өйткені «Телефон» қолданбасы өшірілген."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Бұл үшін осы құрылғыда қолданба жоқ"</string>
-    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
-    <skip />
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Контактілерді іздеу"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"Қабылданбаған қоңыраулар жоқ."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Дауыс поштасының \"Кіріс\" қалтасы бос."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Сүйіктілерді ғана көрсету"</string>
@@ -211,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Дауыс поштасы көрсетілуі үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Контактілерді іздеу үшін \"Контактілер\" рұқсаттарын қосыңыз."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Қоңырау шалу үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

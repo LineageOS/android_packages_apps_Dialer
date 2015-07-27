@@ -128,8 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"හඬ සෙවුම ලබාගත නොහැකිය"</string>
     <string name="call_not_available" msgid="8941576511946492225">"දුරකථන යෙදුම අබල කර ඇති නිසා දුරකථන ඇමතුම ලබාගැනීම කළ නොහැක."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"මෙම උපාංගයෙහි ඒ සඳහා යෙදුමක් නැත"</string>
-    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
-    <skip />
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"සම්බන්ධතා සෙවීම"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"ඔබ මඟ හැරුණු ඇමතුම් නැත."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"ඔබේ හඬ තැපැල් එන ලිපි හිස්ය."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ප්‍රියතමයන් පමණක් පෙන්වන්න"</string>
@@ -211,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"ඔබගේ හඬ තැපැල් වෙත ප්‍රවේශ වීම සඳහා,\n දුරකථන අවසර ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_no_search" msgid="84152933267902056">"ඔබේ සම්බන්ධතා සෙවීමට, සම්බන්ධතා අවසර ක්‍රියාත්මක කරන්න."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"ඇමතුමක් ලබාගැනීම සඳහා,\n දුරකථන අවසර ක්‍රියාත්මක කරන්න."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

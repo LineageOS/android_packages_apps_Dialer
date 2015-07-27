@@ -210,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"अपना वॉइसमेल ऐक्‍सेस करने के लिए,\n फ़ोन अनुमति को चालू करें."</string>
     <string name="permission_no_search" msgid="84152933267902056">"अपने संपर्कों की खोज करने के लिए, संपर्क अनुमतियों को चालू करें."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"कॉल करने के लिए,\n फ़ोन अनुमति को चालू करें."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

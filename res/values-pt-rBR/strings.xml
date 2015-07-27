@@ -210,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Para acessar seu correio de voz,\n ative a permissão para \"Telefone\"."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Para pesquisar seus contatos, ative as permissões para \"Contatos\"."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Para fazer uma chamada,\n ative a permissão para \"Telefone\"."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

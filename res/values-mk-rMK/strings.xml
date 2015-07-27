@@ -128,8 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Гласовното пребарување не е достапно"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Не може да се воспостави телефонски повик, бидејќи апликацијата Телефон е оневозможена."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Нема апликација за тоа на уредот"</string>
-    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
-    <skip />
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Пребарајте контакти"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"Немате пропуштени повици."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Приемното сандаче на говорната пошта е празно."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Прикажи само омилени"</string>
@@ -211,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"За да пристапите кон говорната пошта,\n вклучете ја дозволата за телефон."</string>
     <string name="permission_no_search" msgid="84152933267902056">"За да ги пребарувате контактите, вклучете ги дозволите за контакти."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"За повици,\n вклучете ја дозволата за телефон."</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>

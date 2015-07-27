@@ -128,8 +128,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"音声検索を利用できません"</string>
     <string name="call_not_available" msgid="8941576511946492225">"電話アプリが無効になっているため発信できません。"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"この操作を行うアプリが端末上にありません"</string>
-    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
-    <skip />
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"連絡先を検索"</string>
     <string name="recentMissed_empty" msgid="6213733029875741604">"不在着信はありません。"</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"ボイスメール受信トレイは空です。"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"お気に入りのみを表示"</string>
@@ -211,4 +210,6 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"ボイスメールにアクセスするには、\n電話権限をONにしてください。"</string>
     <string name="permission_no_search" msgid="84152933267902056">"連絡先を検索するには、連絡先権限をONにしてください。"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"電話をかけるには、\n電話権限をONにしてください。"</string>
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
 </resources>
