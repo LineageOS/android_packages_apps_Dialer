@@ -608,7 +608,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.floating_action_button:
-                if (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+                if (mListsFragment.getCurrentTabIndex()
+                        == ListsFragment.TAB_INDEX_ALL_CONTACTS && !mInRegularSearch) {
                     DialerUtils.startActivityWithErrorToast(
                             this,
                             IntentUtil.getNewContactIntent(),
