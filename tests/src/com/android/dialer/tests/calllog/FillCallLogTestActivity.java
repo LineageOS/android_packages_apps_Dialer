@@ -23,14 +23,19 @@ import android.app.DialogFragment;
 import android.app.LoaderManager;
 import android.app.TimePickerDialog;
 import android.content.ContentProviderClient;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.CallLog.Calls;
+import android.provider.VoicemailContract;
+import android.provider.VoicemailContract.Status;
+import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.format.DateFormat;
@@ -72,6 +77,7 @@ public class FillCallLogTestActivity extends Activity {
     private RadioButton mCallTypeIncoming;
     private RadioButton mCallTypeMissed;
     private RadioButton mCallTypeOutgoing;
+    private RadioButton mCallTypeVoicemail;
     private CheckBox mCallTypeVideo;
     private RadioButton mPresentationAllowed;
     private RadioButton mPresentationRestricted;
@@ -125,6 +131,7 @@ public class FillCallLogTestActivity extends Activity {
         mCallTypeIncoming = (RadioButton) findViewById(R.id.call_type_incoming);
         mCallTypeMissed = (RadioButton) findViewById(R.id.call_type_missed);
         mCallTypeOutgoing = (RadioButton) findViewById(R.id.call_type_outgoing);
+        mCallTypeVoicemail = (RadioButton) findViewById(R.id.call_type_voicemail);
         mCallTypeVideo = (CheckBox) findViewById(R.id.call_type_video);
         mPresentationAllowed = (RadioButton) findViewById(R.id.presentation_allowed);
         mPresentationPayphone = (RadioButton) findViewById(R.id.presentation_payphone);
@@ -375,6 +382,8 @@ public class FillCallLogTestActivity extends Activity {
             return Calls.INCOMING_TYPE;
         } else if (mCallTypeOutgoing.isChecked()) {
             return Calls.OUTGOING_TYPE;
+        } else if (mCallTypeVoicemail.isChecked()) {
+            return Calls.VOICEMAIL_TYPE;
         } else {
             return Calls.MISSED_TYPE;
         }
@@ -497,9 +506,13 @@ public class FillCallLogTestActivity extends Activity {
             dataUsage = (long) RNG.nextInt(52428800);
         }
 
-        Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
-                getManualCallType(), features, getManualAccount(),
-                dateTime.getTimeInMillis(), RNG.nextInt(60 * 60), dataUsage);
+        if (getManualCallType() == Calls.VOICEMAIL_TYPE) {
+            addManualVoicemail(dateTime.getTimeInMillis());
+        } else {
+            Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
+                    getManualCallType(), features, getManualAccount(),
+                    dateTime.getTimeInMillis(), RNG.nextInt(60 * 60), dataUsage);
+        }
 
         // Subtract offset from the call date/time and store as new date/time
         int offset = Integer.parseInt(mOffset.getText().toString());
@@ -512,5 +525,36 @@ public class FillCallLogTestActivity extends Activity {
         mCallTimeMinute = dateTime.get(Calendar.MINUTE);
         setDisplayDate();
         setDisplayTime();
+    }
+
+    private void addManualVoicemail(Long time) {
+        final ContentValues contentValues = new ContentValues();
+        contentValues.put(Voicemails.DATE, time);
+        contentValues.put(Voicemails.NUMBER, mPhoneNumber.getText().toString());
+        contentValues.put(Voicemails.DURATION, 5000);
+        contentValues.put(Voicemails.SOURCE_PACKAGE, getPackageName());
+        contentValues.put(Voicemails.SOURCE_DATA, 500);
+        contentValues.put(Voicemails.IS_READ, 0);
+
+        getContentResolver().insert(VoicemailContract.Voicemails.buildSourceUri(getPackageName()),
+                contentValues);
+
+        updateVoicemailStatus();
+    }
+
+    private void updateVoicemailStatus() {
+        ContentResolver contentResolver = getContentResolver();
+        Uri statusUri = VoicemailContract.Status.buildSourceUri(getPackageName());
+        final PhoneAccountHandle accountHandle = getManualAccount();
+
+        ContentValues values = new ContentValues();
+        values.put(Status.PHONE_ACCOUNT_COMPONENT_NAME, getPackageName());
+        values.put(Status.PHONE_ACCOUNT_ID, "ACCOUNT_ID");
+        values.put(Status.CONFIGURATION_STATE, VoicemailContract.Status.CONFIGURATION_STATE_OK);
+        values.put(Status.DATA_CHANNEL_STATE, VoicemailContract.Status.DATA_CHANNEL_STATE_OK);
+        values.put(Status.NOTIFICATION_CHANNEL_STATE,
+                VoicemailContract.Status.NOTIFICATION_CHANNEL_STATE_OK);
+
+        contentResolver.insert(statusUri, values);
     }
 }
