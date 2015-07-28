@@ -28,6 +28,7 @@ import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
 import android.telecom.InCallService.VideoCall;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
@@ -35,12 +36,20 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Describes a single call and its state.
  */
 @NeededForTesting
 public class Call {
+    /**
+     * Call extras key used to store a child number associated with the current call.
+     * Used to communicate that the connection was received via a child phone number associated with
+     * the {@link PhoneAccount}'s primary number.
+     */
+    public static final String EXTRA_CHILD_ADDRESS = "android.telecom.EXTRA_CHILD_ADDRESS";
+
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
@@ -254,6 +263,7 @@ public class Call {
     private int mModifyToVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
     private InCallVideoCallCallback mVideoCallCallback;
+    private String mChildNumber;
 
     /**
      * Used only to create mock calls for testing
@@ -313,6 +323,14 @@ public class Call {
             mChildCallIds.add(
                     CallList.getInstance().getCallByTelecommCall(
                             mTelecommCall.getChildren().get(i)).getId());
+        }
+
+        Bundle callExtras = mTelecommCall.getDetails().getExtras();
+        if (callExtras != null && callExtras.containsKey(EXTRA_CHILD_ADDRESS)) {
+            String childNumber = callExtras.getString(EXTRA_CHILD_ADDRESS);
+            if (!Objects.equals(childNumber, mChildNumber)) {
+                mChildNumber = childNumber;
+            }
         }
     }
 
@@ -391,6 +409,13 @@ public class Call {
 
     public Bundle getExtras() {
         return mTelecommCall == null ? null : mTelecommCall.getDetails().getExtras();
+    }
+
+    /**
+     * @return The child number for the call, or {@code null} if none specified.
+     */
+    public String getChildNumber() {
+        return mChildNumber;
     }
 
     /** Returns call disconnect cause, defined by {@link DisconnectCause}. */
