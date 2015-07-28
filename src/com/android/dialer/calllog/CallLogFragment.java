@@ -338,6 +338,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
         mHasReadCallLogPermission = hasReadCallLogPermission;
         refreshData();
+        mAdapter.startCache();
     }
 
     @Override
