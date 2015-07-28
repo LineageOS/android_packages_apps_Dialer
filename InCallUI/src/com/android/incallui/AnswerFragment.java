@@ -297,6 +297,13 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                         getPresenter().onDismissDialog();
                     }
                 })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        dismissCustomMessagePopup();
+                        getPresenter().onDismissDialog();
+                    }
+                })
                 .setTitle(R.string.respond_via_sms_custom_message);
         mCustomMessagePopup = builder.create();
 
