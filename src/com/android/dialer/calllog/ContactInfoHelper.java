@@ -298,6 +298,10 @@ public class ContactInfoHelper {
      */
     public void updateCallLogContactInfo(String number, String countryIso, ContactInfo updatedInfo,
             ContactInfo callLogInfo) {
+        if (!PermissionsUtil.hasPermission(mContext, android.Manifest.permission.WRITE_CALL_LOG)) {
+            return;
+        }
+
         final ContentValues values = new ContentValues();
         boolean needsUpdate = false;
 
