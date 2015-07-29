@@ -169,4 +169,6 @@
     </plurals>
     <string name="profile_photo_description" msgid="5609894336203315400">"Profil fotosu"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Kamera deaktivdir"</string>
+    <!-- no translation found for child_number (7437330400723805538) -->
+    <skip />
 </resources>
