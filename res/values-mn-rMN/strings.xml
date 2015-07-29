@@ -208,6 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Дуут шуудангаа ашиглахын тулд,\n Утасны зөвшөөрлийг идэвхжүүлнэ үү."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Харилцагчаа хайхын тулд, Харилцагчийн жагсаалтын зөвшөөрлийг идэвхжүүлнэ үү."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Дуудлага хийхийн тулд,\n Утасны зөвшөөрлийг идэвхжүүлнэ үү."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Гар утасны апп-д системийн тохиргоо бичих зөвшөөрөл байхгүй байна."</string>
 </resources>

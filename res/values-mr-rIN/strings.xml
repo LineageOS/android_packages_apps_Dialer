@@ -208,6 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"आपल्या व्हॉइसमेलमध्‍ये प्रवेश करण्‍यासाठी,\n फोन परवानगी चालू करा."</string>
     <string name="permission_no_search" msgid="84152933267902056">"आपले संपर्क शोधण्‍यासाठी, संपर्क परवानग्या चालू करा."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"कॉल करण्‍यासाठी,\n फोन परवानगी चालू करा."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"फोन अॅपला सिस्टीम स‍ेटिंग्जमध्ये लिहिण्याची परवानगी नाही."</string>
 </resources>

@@ -208,6 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"ដើម្បីចូលដំណើរការសារជាសំឡេង\n សូមបើកសិទ្ធិអនុញ្ញាតទូរស័ព្ទ។"</string>
     <string name="permission_no_search" msgid="84152933267902056">"ដើម្បីស្វែងរកទំនាក់ទំនងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតទំនាក់ទំនង។"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"ដើម្បីធ្វើការហៅ\n សូមបើកសិទ្ធិអនុញ្ញាតទូរស័ព្ទ។"</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"កម្មវិធីទូរស័ព្ទមិនមានសិទ្ធិអនុញ្ញាតដើម្បីសរសេរការកំណត់ប្រព័ន្ធទេ។"</string>
 </resources>

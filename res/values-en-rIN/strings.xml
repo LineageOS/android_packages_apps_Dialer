@@ -208,6 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"To access your voicemail,\n turn on the Phone permission."</string>
     <string name="permission_no_search" msgid="84152933267902056">"To search your contacts, turn on the Contacts permissions."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"To place a call,\n turn on the Phone permission."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Phone app does not have permission to write to system settings."</string>
 </resources>
