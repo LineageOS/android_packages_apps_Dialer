@@ -146,7 +146,7 @@ public class IntentUtil {
     }
 
     public static Intent getSendSmsIntent(CharSequence phoneNumber) {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse(SMS_URI_PREFIX + phoneNumber));
+        return new Intent(Intent.ACTION_SENDTO, Uri.parse(SMS_URI_PREFIX + phoneNumber));
     }
 
     public static Intent getNewContactIntent() {
