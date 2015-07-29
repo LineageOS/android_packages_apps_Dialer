@@ -210,6 +210,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"আপনার ভয়েসমেল অ্যাক্সেস করতে,\n ফোনের অনুমতি চালু করুন।"</string>
     <string name="permission_no_search" msgid="84152933267902056">"আপনার পরিচিতিগুলি অনুসন্ধান করতে, পরিচিতির অনুমতিগুলি চালু করুন।"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"একটি কল করার জন্য,\n ফোনের অনুমতি চালু করুন।"</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ফোনের অ্যাপ্লিকেশানকে সিস্টেম সেটিংসে লেখার অনুমতি দেওয়া হয়নি।"</string>
 </resources>

@@ -210,6 +210,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"የእርስዎን ድምጽ መልዕክት ለመድረስ\n የስልክ ፍቃዱን ያብሩ።"</string>
     <string name="permission_no_search" msgid="84152933267902056">"የእርስዎን እውቂያዎች ለመከታተል የእውቂያዎች ፍቃዶችን ያብሩ።"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"አንድ ጥሪ ለማድረግ\n የስልክ ፍቃዱን ያብሩ።"</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"የስልክ መተግበሪያ ወደ የስርዓት ቅንብሮች የመጻፍ ፍቃድ የለውም።"</string>
 </resources>
