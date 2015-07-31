@@ -209,4 +209,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಪ್ರವೇಶಿಸಲು, \n ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_no_search" msgid="84152933267902056">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಹುಡುಕಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಗಳನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"ಕರೆ ಮಾಡಲು, \n ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಬರೆಯಲು ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ."</string>
 </resources>

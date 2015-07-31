@@ -208,4 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"तपाईँको भ्वाइसमेल पहुँच गर्न,\n फोन अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="permission_no_search" msgid="84152933267902056">"तपाईँको सम्पर्कहरू खोज गर्न सम्पर्क अनुमतिहरू सक्रिय गर्नुहोस्।"</string>
     <string name="permission_place_call" msgid="7588803619716288478">"एउटा कल गर्न,\n फोन अनुमति सक्रिय गर्नुहोस्।"</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"प्रणाली सेटिङहरूमा लेख्न फोन अनुप्रयोगसँग अनुमति छैन।"</string>
 </resources>

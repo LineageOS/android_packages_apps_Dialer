@@ -208,4 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Erantzungailua atzitzeko,\n aktibatu telefonoa atzitzeko baimena."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kontaktuak bilatzeko, aktibatu kontaktuak atzitzeko baimenak."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Deiak egiteko,\n aktibatu telefonoa atzitzeko baimena."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonoaren aplikazioak ez du baimenik sistemaren ezarpenetan ezer idazteko."</string>
 </resources>

@@ -208,4 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"ເພື່ອ​ເຂົ້າ​ຫາ​ຂໍ້​ຄວາມ​ສຽງ​ຂອງ​ທ່ານ,\n ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ໂທ​ລະ​ສັບ."</string>
     <string name="permission_no_search" msgid="84152933267902056">"ເພື່ອຄົ້ນຫາລາຍາຊື່ຂອງທ່ານ, ໃຫ້ເປີດການອະນຸຍາດລາຍຊື່."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"ເພື່ອ​ໂທ​ອອກ,\n ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ໂທ​ລະ​ສັບ."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ແອັບໂທລະສັບບໍ່ມີການອະນຸຍາດໃຫ້ຂຽນໃສ່ການຕັ້ງຄ່າລະບົບ."</string>
 </resources>

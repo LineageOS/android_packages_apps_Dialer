@@ -208,4 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Дауыс поштасы көрсетілуі үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Контактілерді іздеу үшін \"Контактілер\" рұқсаттарын қосыңыз."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Қоңырау шалу үшін\n \"Телефон\" рұқсатын қосыңыз."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Телефон қолданбасында жүйелік параметрлерге жазуға рұқсат жоқ."</string>
 </resources>

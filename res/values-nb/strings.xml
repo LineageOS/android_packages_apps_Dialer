@@ -189,7 +189,7 @@
     <string name="display_options_title" msgid="7812852361055667468">"Visningsalternativer"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Lyder og vibrasjon"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Tilgjengelighet"</string>
-    <string name="ringtone_title" msgid="760362035635084653">"Telefonringetone"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Telefonringelyd"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrer også når det ringer"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tastetoner"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Tonelengde for tastaturet"</string>
@@ -208,4 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"For å få tilgang til talepostkassen,\n slå på tillatelsen for telefon."</string>
     <string name="permission_no_search" msgid="84152933267902056">"For å søke i kontaktene dine, slå på tillatelser for Kontakter."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"For å ringe,\n slå på tillatelsen for telefon."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonappen har ikke tillatelse til å skrive til systeminnstillinger."</string>
 </resources>

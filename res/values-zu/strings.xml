@@ -208,4 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Ukuze ufinyelele kuvoyisimeyili yakho,\n vula imvume yefoni."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Ukuze useshe oxhumana nabo, vula izimvume zoxhumana nabo."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Ukuze wenze ikholi,\n vula imvume yefoni."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Uhlelo lokusebenza lefoni alinayo imvume yokubhalela kuzilungiselelo zesistimu."</string>
 </resources>
