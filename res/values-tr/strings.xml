@@ -210,6 +210,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Sesli mesajınıza erişmek için\n Telefon iznini açın."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kişilerinizde arama yapmak için Kişiler izinlerini açın."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Telefon etmek için\n Telefon iznini açın."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefon uygulamasının sistem ayarlarına yazma izni yok."</string>
 </resources>

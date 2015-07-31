@@ -64,7 +64,7 @@
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Selectaţi numărul"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Selectaţi numărul"</string>
-    <string name="make_primary" msgid="5829291915305113983">"Reţineţi această alegere"</string>
+    <string name="make_primary" msgid="5829291915305113983">"Rețineți această alegere"</string>
     <string name="description_search_button" msgid="3660807558587384889">"căutare"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"apelaţi"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"numărul de apelat"</string>
@@ -212,6 +212,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Pentru a accesa mesageria vocală,\n activați permisiunea Telefon."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Pentru a căuta în persoanele de contact, activați permisiunea Agendă."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Pentru a efectua un apel,\n activați permisiunea Telefon."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplicația Telefon nu are permisiunea să modifice setările de sistem."</string>
 </resources>

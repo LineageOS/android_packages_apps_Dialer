@@ -212,6 +212,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Lai piekļūtu balss pastam,\nieslēdziet atļauju Tālrunis."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Lai meklētu savas kontaktpersonas, ieslēdziet atļauju Kontaktpersonas."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Lai veiktu zvanu,\nieslēdziet atļauju Tālrunis."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Tālruņa lietotnei nav atļaujas rakstīt sistēmas iestatījumos."</string>
 </resources>
