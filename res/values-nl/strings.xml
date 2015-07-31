@@ -208,6 +208,5 @@
     <string name="permission_no_voicemail" msgid="7785949850839671813">"Als u uw voicemail wilt beluisteren,\n schakelt u de telefoontoestemming in."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Als u naar contacten wilt zoeken, schakelt u de contacttoestemming in."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Als u iemand wilt bellen,\n schakelt u de telefoontoestemming in."</string>
-    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
-    <skip />
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefoon-app heeft geen toestemming om systeeminstellingen te schrijven."</string>
 </resources>
