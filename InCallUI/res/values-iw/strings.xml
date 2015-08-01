@@ -175,6 +175,5 @@
     </plurals>
     <string name="profile_photo_description" msgid="5609894336203315400">"תמונת פרופיל"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"מצלמה כבויה"</string>
-    <!-- no translation found for child_number (7437330400723805538) -->
-    <skip />
+    <string name="child_number" msgid="7437330400723805538">"דרך <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
 </resources>
