@@ -131,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
+                android:textAlignment="viewStart"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/incall_call_banner_subtext_color"
                 android:textSize="@dimen/call_label_text_size"
