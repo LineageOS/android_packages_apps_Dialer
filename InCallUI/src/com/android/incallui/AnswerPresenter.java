@@ -108,6 +108,11 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
+    @Override
+    public void onLastForwardedNumberChange() {
+        // no-op
+    }
+
     private boolean isVideoUpgradePending(Call call) {
         return call.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
