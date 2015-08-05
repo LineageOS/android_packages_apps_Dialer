@@ -22,6 +22,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.os.Trace;
@@ -526,13 +528,16 @@ public class CallLogAdapter extends GroupingListAdapter
         views.rowId = c.getLong(CallLogQuery.ID);
         // Store values used when the actions ViewStub is inflated on expansion.
         views.number = number;
+        views.displayNumber = details.displayNumber;
         views.numberPresentation = numberPresentation;
         views.callType = c.getInt(CallLogQuery.CALL_TYPE);
         views.accountHandle = accountHandle;
         views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
-
+        views.isBusiness = mContactInfoHelper.isBusiness(info.sourceType);
+        views.numberType = (String) Phone.getTypeLabel(mContext.getResources(), details.numberType,
+                details.numberLabel);
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
 
@@ -563,7 +568,7 @@ public class CallLogAdapter extends GroupingListAdapter
             nameForDefaultImage = info.name;
         }
         views.setPhoto(info.photoId, info.photoUri, info.lookupUri, nameForDefaultImage,
-                isVoicemailNumber, mContactInfoHelper.isBusiness(info.sourceType));
+                isVoicemailNumber, views.isBusiness);
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
     }
