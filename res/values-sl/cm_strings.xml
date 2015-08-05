@@ -21,7 +21,7 @@
   <string name="lookup_settings_label">Iskanje telefonske številke</string>
   <string name="lookup_settings_description">Iskanje neznanih telefonskih številk</string>
   <string name="enable_forward_lookup_title">Iskanje naprej</string>
-  <string name="enable_forward_lookup_summary">Prikaži bližnje kraje med iskanjem v klicalniku</string>
+  <string name="enable_forward_lookup_summary">Prikaži bližnja mesta med iskanjem v klicalniku</string>
   <string name="enable_people_lookup_title">Iskanje ljudi</string>
   <string name="enable_people_lookup_summary">Prikaži spletne rezultate za ljudi med iskanjem v klicalniku</string>
   <string name="enable_reverse_lookup_title">Obratno iskanje</string>
@@ -86,19 +86,19 @@
   <string name="detailed_incall_info_title">Podrobni podatki o klicatelju</string>
   <string name="detailed_incall_info_summary">Prikaži dodatne podatke o klicatelju na zaslonu dohodnega klica</string>
   <string name="video_call">Video klic</string>
-  <string name="call_duration_active">Dejavno trajanje:</string>
+  <string name="call_duration_active">Trajanje dejavnega klica:</string>
   <string name="call_duration_call_out">Trajanje klica:</string>
   <string name="call_log_show_all_slots">Vse kartice SIM</string>
   <string name="call_log_all_calls_header">Vsi klici</string>
   <string name="calllog_search_hint">Išči po dnevniku klicev</string>
   <string name="msim_ime_dialog_title">Določevalec naprave</string>
   <string name="call_log_blacklist_header">Samo blokirani klici</string>
-  <string name="start_call_playback">Predvajaj posneti klic</string>
+  <string name="start_call_playback">Predvajaj posnetek</string>
   <string name="stop_call_playback">Ustavi</string>
-  <string name="call_playback_error_message">Predvajanje posnetega klice je spodletelo</string>
+  <string name="call_playback_error_message">Predvajanje posnetka je spodletelo</string>
   <string name="sensors_category_title">Možnosti tipala</string>
   <string name="smart_mute_title">Pametno utišanje</string>
   <string name="smart_mute_summary">Utišaj dohodne klice z obračanjem naprave</string>
   <string name="smart_dialer_title">Pametni klic</string>
-  <string name="smart_dialer_summary">Samodejno pokliči klicano številko s pomikom telefona k ušesu</string>
+  <string name="smart_dialer_summary">Samodejno pokliči klicano številko s pomikom naprave k ušesu</string>
 </resources>

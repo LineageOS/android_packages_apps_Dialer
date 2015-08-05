@@ -66,8 +66,8 @@
   <string name="call_stats_reset_filter">Reimposta intervallo</string>
   <string name="call_stats_sort_by_duration">Ordina per durata</string>
   <string name="call_stats_sort_by_count">Ordina per numero</string>
-  <string name="menu_add_to_blacklist">Aggiungi all\'elenco chiamanti bloccati</string>
-  <string name="toast_added_to_blacklist">%s aggiunto alla lista chiamanti bloccati.</string>
+  <string name="menu_add_to_blacklist">Aggiungi all\'elenco bloccati</string>
+  <string name="toast_added_to_blacklist">%s aggiunto alla lista bloccati.</string>
   <string name="speed_dial_settings">Impostazioni composizione rapida</string>
   <string name="speed_dial_not_set">(non impostato)</string>
   <string name="speed_dial_replace">Sostituisci</string>

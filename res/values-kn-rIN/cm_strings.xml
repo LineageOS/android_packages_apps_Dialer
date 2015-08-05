@@ -74,11 +74,11 @@
   <string name="speed_dial_delete">ಅಳಿಸಿ</string>
   <string name="speed_dial_unassigned_dialog_title">ಕೀ ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ</string>
   <string name="speed_dial_unassigned_dialog_message">ಈ \'<xliff:g id="number">%s</xliff:g>\' ಸಂಖ್ಯೆ ಕೀಗೆ ಯಾವುದೇ ವೇಗ ಡಯಲ್ ಕ್ರಿಯೆಯನ್ನು ನಿಯೋಜಿಸಿಲ್ಲ. ನೀವು ಒಂದು ಕ್ರಿಯೆಯನ್ನು ನಿಯೋಜಿಸಲು ಬಯಸುವಿರಾ?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">ವೇಗ ಡಯಲ್ ಉಪಯೋಗಿಸಲು, ಮೊದಲು ಏರ್‍ಪ್ಲೇನ್ ಮೋಡ್ ಆಫ್ ಮಾಡಿ.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">ವೇಗ ಡಯಲ್ ಉಪಯೋಗಿಸಲು, ಮೊದಲು ಏರೋಪ್ಲೇನ್ ಮೋಡ್ ಆಫ್ ಮಾಡಿ.</string>
   <string name="yes">ಹೌದು</string>
   <string name="no">ಬೇಡ</string>
   <string name="incall_vibration_category_title">ಒಳ-ಕರೆ ಕಂಪನ</string>
-  <string name="incall_vibrate_outgoing_title">ಉತ್ತರಿಸಿದಾಗ ಕಂಪನಿಸು</string>
+  <string name="incall_vibrate_outgoing_title">ಉತ್ತರಿಸಿದಾಗ ಕಂಪಿಸು</string>
   <string name="vibrate_call_waiting">ಕರೆ ನಿರೀಕ್ಷೆಯಲ್ಲಿರುವಾಗ ಕಂಪಿಸು</string>
   <string name="incall_vibrate_hangup_title">ಸ್ಥಗಿತಗೊಳಿಸಿದಾಗ ಕಂಪಿಸು</string>
   <string name="incall_vibrate_45_title">ಪ್ರತೀ ನಿಮಿಷಕ್ಕೊಮ್ಮೆ ಕಂಪಿಸು</string>
