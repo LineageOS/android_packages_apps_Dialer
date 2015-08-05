@@ -160,6 +160,20 @@ public class CallList {
         }
     }
 
+    /**
+     * Called when a single call has changed session modification state.
+     *
+     * @param call The call.
+     */
+    public void onLastForwardedNumberChange(Call call) {
+        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
+        if (listeners != null) {
+            for (CallUpdateListener listener : listeners) {
+                listener.onLastForwardedNumberChange();
+            }
+        }
+    }
+
     public void notifyCallUpdateListeners(Call call) {
         final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
@@ -611,5 +625,10 @@ public class CallList {
          * @param sessionModificationState The new session modification state.
          */
         public void onSessionModificationStateChange(int sessionModificationState);
+
+        /**
+         * Notifies of a change to the last forwarded number for a call.
+         */
+        public void onLastForwardedNumberChange();
     }
 }
