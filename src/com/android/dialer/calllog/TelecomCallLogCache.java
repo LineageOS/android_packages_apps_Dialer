@@ -52,6 +52,7 @@ public class TelecomCallLogCache {
             new HashMap<>();
     private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new HashMap<>();
     private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new HashMap<>();
+    private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new HashMap<>();
 
     private boolean mHasCheckedForVideoEnabled;
     private boolean mIsVideoEnabled;
@@ -64,6 +65,7 @@ public class TelecomCallLogCache {
         mVoicemailQueryCache.clear();
         mPhoneAccountLabelCache.clear();
         mPhoneAccountColorCache.clear();
+        mPhoneAccountCallWithNoteCache.clear();
 
         mHasCheckedForVideoEnabled = false;
         mIsVideoEnabled = false;
@@ -120,5 +122,23 @@ public class TelecomCallLogCache {
             mIsVideoEnabled = CallUtil.isVideoEnabled(mContext);
         }
         return mIsVideoEnabled;
+    }
+
+    /**
+     * Determines if the PhoneAccount supports specifying a call subject (i.e. calling with a note)
+     * for outgoing calls.
+     *
+     * @param accountHandle The PhoneAccount handle.
+     * @return {@code true} if calling with a note is supported, {@code false} otherwise.
+     */
+    public boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle) {
+        if (mPhoneAccountCallWithNoteCache.containsKey(accountHandle)) {
+            return mPhoneAccountCallWithNoteCache.get(accountHandle);
+        } else {
+            Boolean supportsCallWithNote =
+                    PhoneAccountUtils.getAccountSupportsCallSubject(mContext, accountHandle);
+            mPhoneAccountCallWithNoteCache.put(accountHandle, supportsCallWithNote);
+            return supportsCallWithNote;
+        }
     }
 }
