@@ -18,13 +18,13 @@ package com.android.incallui;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.testing.NeededForTesting;
-import com.android.incallui.CallList.Listener;
 
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
+import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
 import android.telecom.InCallService.VideoCall;
@@ -43,13 +43,6 @@ import java.util.Objects;
  */
 @NeededForTesting
 public class Call {
-    /**
-     * Call extras key used to store a child number associated with the current call.
-     * Used to communicate that the connection was received via a child phone number associated with
-     * the {@link PhoneAccount}'s primary number.
-     */
-    public static final String EXTRA_CHILD_ADDRESS = "android.telecom.EXTRA_CHILD_ADDRESS";
-
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
@@ -264,6 +257,8 @@ public class Call {
 
     private InCallVideoCallCallback mVideoCallCallback;
     private String mChildNumber;
+    private String mLastForwardedNumber;
+    private String mCallSubject;
 
     /**
      * Used only to create mock calls for testing
@@ -326,10 +321,44 @@ public class Call {
         }
 
         Bundle callExtras = mTelecommCall.getDetails().getExtras();
-        if (callExtras != null && callExtras.containsKey(EXTRA_CHILD_ADDRESS)) {
-            String childNumber = callExtras.getString(EXTRA_CHILD_ADDRESS);
-            if (!Objects.equals(childNumber, mChildNumber)) {
-                mChildNumber = childNumber;
+        if (callExtras != null) {
+            // Child address arrives when the call is first set up, so we do not need to notify the
+            // UI of this.
+            if (callExtras.containsKey(Connection.EXTRA_CHILD_ADDRESS)) {
+                String childNumber = callExtras.getString(Connection.EXTRA_CHILD_ADDRESS);
+                if (!Objects.equals(childNumber, mChildNumber)) {
+                    mChildNumber = childNumber;
+                }
+            }
+
+            // Last forwarded number comes in as an array of strings.  We want to choose the last
+            // item in the array.  The forwarding numbers arrive independently of when the call is
+            // originally set up, so we need to notify the the UI of the change.
+            if (callExtras.containsKey(Connection.EXTRA_LAST_FORWARDED_NUMBER)) {
+                ArrayList<String> lastForwardedNumbers =
+                        callExtras.getStringArrayList(Connection.EXTRA_LAST_FORWARDED_NUMBER);
+
+                if (lastForwardedNumbers != null) {
+                    String lastForwardedNumber = null;
+                    if (!lastForwardedNumbers.isEmpty()) {
+                        lastForwardedNumber = lastForwardedNumbers.get(
+                                lastForwardedNumbers.size() - 1);
+                    }
+
+                    if (!Objects.equals(lastForwardedNumber, mLastForwardedNumber)) {
+                        mLastForwardedNumber = lastForwardedNumber;
+                        CallList.getInstance().onLastForwardedNumberChange(this);
+                    }
+                }
+            }
+
+            // Call subject is present in the extras at the start of call, so we do not need to
+            // notify any other listeners of this.
+            if (callExtras.containsKey(Connection.EXTRA_CALL_SUBJECT)) {
+                String callSubject = callExtras.getString(Connection.EXTRA_CALL_SUBJECT);
+                if (!Objects.equals(mCallSubject, callSubject)) {
+                    mCallSubject = callSubject;
+                }
             }
         }
     }
@@ -416,6 +445,20 @@ public class Call {
      */
     public String getChildNumber() {
         return mChildNumber;
+    }
+
+    /**
+     * @return The last forwarded number for the call, or {@code null} if none specified.
+     */
+    public String getLastForwardedNumber() {
+        return mLastForwardedNumber;
+    }
+
+    /**
+     * @return The call subject, or {@code null} if none specified.
+     */
+    public String getCallSubject() {
+        return mCallSubject;
     }
 
     /** Returns call disconnect cause, defined by {@link DisconnectCause}. */
