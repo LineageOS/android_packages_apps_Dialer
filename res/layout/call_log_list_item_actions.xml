@@ -105,6 +105,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/call_with_note_action"
+        style="@style/CallLogActionStyle">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_call_note_white_24dp" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_with_a_note" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/details_action"
         style="@style/CallLogActionStyle">
 

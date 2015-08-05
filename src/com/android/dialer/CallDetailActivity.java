@@ -50,6 +50,7 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
@@ -162,7 +163,7 @@ public class CallDetailActivity extends Activity
                     new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
 
             String lookupKey = contactUri == null ? null
-                    : ContactInfoHelper.getLookupKeyFromUri(contactUri);
+                    : UriUtils.getLookupKeyFromUri(contactUri);
 
             final boolean isBusiness = mContactInfoHelper.isBusiness(firstDetails.sourceType);
 

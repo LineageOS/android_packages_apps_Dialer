@@ -84,6 +84,21 @@ public class PhoneAccountUtils {
     }
 
     /**
+     * Determine whether a phone account supports call subjects.
+     *
+     * @return {@code true} if call subjects are supported, {@code false} otherwise.
+     */
+    public static boolean getAccountSupportsCallSubject(Context context,
+            PhoneAccountHandle accountHandle) {
+        TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+
+        return account == null ? false :
+                account.hasCapabilities(PhoneAccount.CAPABILITY_CALL_SUBJECT);
+    }
+
+    /**
      * Retrieve the account metadata, but if the account does not exist or the device has only a
      * single registered and enabled account, return null.
      */
