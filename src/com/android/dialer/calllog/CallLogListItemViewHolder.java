@@ -279,10 +279,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             }
         } else {
             // Treat as normal list item; show call button, if possible.
-            boolean canPlaceCallToNumber =
-                    PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation);
-
-            if (canPlaceCallToNumber) {
+            if (PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation)) {
                 boolean isVoicemailNumber =
                         mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
                 if (isVoicemailNumber) {
@@ -364,7 +361,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             addToExistingContactButtonView.setVisibility(View.GONE);
         }
 
-        sendMessageView.setTag(IntentProvider.getSendSmsIntentProvider(number));
+        if (canPlaceCallToNumber) {
+            sendMessageView.setTag(IntentProvider.getSendSmsIntentProvider(number));
+            sendMessageView.setVisibility(View.VISIBLE);
+        } else {
+            sendMessageView.setVisibility(View.GONE);
+        }
 
         mCallLogListItemHelper.setActionContentDescriptions(this);
 
