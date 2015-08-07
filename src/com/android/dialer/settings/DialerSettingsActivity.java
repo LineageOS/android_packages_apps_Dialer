@@ -91,10 +91,10 @@ public class DialerSettingsActivity extends PreferenceActivity {
     @Override
     public void onHeaderClick(Header header, int position) {
         if (header.id == R.id.settings_header_sounds_and_vibration) {
-            // If we don't have the AppOp to write to system settings, go to system sound settings
-            // instead. Otherwise, perform the super implementation (which launches our own
-            // preference fragment.
-            if (!PermissionsUtil.hasAppOp(this, AppOpsManager.OPSTR_WRITE_SETTINGS)) {
+            // If we don't have the permission to write to system settings, go to system sound
+            // settings instead. Otherwise, perform the super implementation (which launches our
+            // own preference fragment.
+            if (!Settings.System.canWrite(this)) {
                 Toast.makeText(
                         this,
                         getResources().getString(R.string.toast_cannot_write_system_settings),
