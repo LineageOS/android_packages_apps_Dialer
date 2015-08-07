@@ -47,6 +47,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
@@ -1086,6 +1087,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 animator.start();
             }
         });
+    }
+
+    @Override
+    public void showNoteSentToast() {
+        Toast.makeText(getContext(), R.string.note_sent, Toast.LENGTH_LONG).show();
     }
 
     public void onDialpadVisibilityChange(boolean isShown) {

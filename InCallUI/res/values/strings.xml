@@ -460,4 +460,8 @@
     <!-- Used to inform the user that a call was received via a number other than the primary
         phone number associated with their device. [CHAR LIMIT=16] -->
     <string name="child_number">via <xliff:g id="child_number" example="650-555-1212">%s</xliff:g></string>
+
+    <!-- Used to inform the user that the note associated with an outgoing call has been sent.
+         [CHAR LIMIT=32] -->
+    <string name="note_sent">Note sent</string>
 </resources>
