@@ -67,7 +67,9 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
@@ -896,9 +898,12 @@ public class DialpadFragment extends Fragment
 
                 boolean enable = !isDigitsEmpty();
                 for (int i = 0; i < menu.size(); i++) {
-                    menu.getItem(i).setEnabled(enable);
+                    MenuItem item = menu.getItem(i);
+                    item.setEnabled(enable);
+                    if (item.getItemId() == R.id.menu_call_with_note) {
+                        item.setVisible(CallUtil.isCallWithSubjectSupported(getContext()));
+                    }
                 }
-
                 super.show();
             }
         };
@@ -1469,6 +1474,10 @@ public class DialpadFragment extends Fragment
                 return true;
             case R.id.menu_add_wait:
                 updateDialString(WAIT);
+                return true;
+            case R.id.menu_call_with_note:
+                CallSubjectDialog.start(getActivity(), mDigits.getText().toString());
+                hideAndClearDialpad(false);
                 return true;
             default:
                 return false;
