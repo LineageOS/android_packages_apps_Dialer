@@ -442,7 +442,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (mPrimary.isEmergencyCall() || showCallbackNumber) {
             callbackNumber = getSubscriptionNumber();
         } else {
-            StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
+            StatusHints statusHints = mPrimary.getTelecomCall().getDetails().getStatusHints();
             if (statusHints != null) {
                 Bundle extras = statusHints.getExtras();
                 if (extras != null) {
@@ -749,7 +749,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * For example, "calling via [Account/Google Voice]" for outgoing calls.
      */
     private String getConnectionLabel() {
-        StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
+        StatusHints statusHints = mPrimary.getTelecomCall().getDetails().getStatusHints();
         if (statusHints != null && !TextUtils.isEmpty(statusHints.getLabel())) {
             return statusHints.getLabel().toString();
         }
@@ -771,7 +771,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private Drawable getCallStateIcon() {
         // Return connection icon if one exists.
-        StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
+        StatusHints statusHints = mPrimary.getTelecomCall().getDetails().getStatusHints();
         if (statusHints != null && statusHints.getIcon() != null) {
             Drawable icon = statusHints.getIcon().loadDrawable(mContext);
             if (icon != null) {
@@ -940,7 +940,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     private boolean shouldShowNoteSentToast(Call call) {
         return call != null && !TextUtils
-                .isEmpty(call.getTelecommCall().getDetails().getIntentExtras().getString(
+                .isEmpty(call.getTelecomCall().getDetails().getIntentExtras().getString(
                         TelecomManager.EXTRA_CALL_SUBJECT)) &&
                 (call.getState() == Call.State.DIALING || call.getState() == Call.State.CONNECTING);
     }

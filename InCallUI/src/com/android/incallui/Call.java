@@ -59,7 +59,7 @@ public class Call {
         public static final int DISCONNECTED = 10;  /* State after a call disconnects */
         public static final int CONFERENCED = 11;   /* Call part of a conference call */
         public static final int SELECT_PHONE_ACCOUNT = 12; /* Waiting for account selection */
-        public static final int CONNECTING = 13;    /* Waiting for Telecomm broadcast to finish */
+        public static final int CONNECTING = 13;    /* Waiting for Telecom broadcast to finish */
 
 
         public static boolean isConnectingOrConnected(int state) {
@@ -180,7 +180,7 @@ public class Call {
             new android.telecom.Call.Callback() {
                 @Override
                 public void onStateChanged(android.telecom.Call call, int newState) {
-                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call + " newState="
+                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " newState="
                             + newState);
                     update();
                 }
@@ -188,7 +188,7 @@ public class Call {
                 @Override
                 public void onParentChanged(android.telecom.Call call,
                         android.telecom.Call newParent) {
-                    Log.d(this, "TelecommCallCallback onParentChanged call=" + call + " newParent="
+                    Log.d(this, "TelecomCallCallback onParentChanged call=" + call + " newParent="
                             + newParent);
                     update();
                 }
@@ -202,7 +202,7 @@ public class Call {
                 @Override
                 public void onDetailsChanged(android.telecom.Call call,
                         android.telecom.Call.Details details) {
-                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call + " details="
+                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " details="
                             + details);
                     update();
                 }
@@ -210,7 +210,7 @@ public class Call {
                 @Override
                 public void onCannedTextResponsesLoaded(android.telecom.Call call,
                         List<String> cannedTextResponses) {
-                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call
+                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call
                             + " cannedTextResponses=" + cannedTextResponses);
                     update();
                 }
@@ -218,7 +218,7 @@ public class Call {
                 @Override
                 public void onPostDialWait(android.telecom.Call call,
                         String remainingPostDialSequence) {
-                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call
+                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call
                             + " remainingPostDialSequence=" + remainingPostDialSequence);
                     update();
                 }
@@ -226,14 +226,14 @@ public class Call {
                 @Override
                 public void onVideoCallChanged(android.telecom.Call call,
                         VideoCall videoCall) {
-                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call + " videoCall="
+                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " videoCall="
                             + videoCall);
                     update();
                 }
 
                 @Override
                 public void onCallDestroyed(android.telecom.Call call) {
-                    Log.d(this, "TelecommCallCallback onStateChanged call=" + call);
+                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call);
                     call.unregisterCallback(mTelecomCallCallback);
                 }
 
@@ -244,7 +244,7 @@ public class Call {
                 }
             };
 
-    private android.telecom.Call mTelecommCall;
+    private android.telecom.Call mTelecomCall;
     private boolean mIsEmergencyCall;
     private Uri mHandle;
     private final String mId;
@@ -268,21 +268,21 @@ public class Call {
      */
     @NeededForTesting
     Call(int state) {
-        mTelecommCall = null;
+        mTelecomCall = null;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
         setState(state);
     }
 
-    public Call(android.telecom.Call telecommCall) {
-        mTelecommCall = telecommCall;
+    public Call(android.telecom.Call telecomCall) {
+        mTelecomCall = telecomCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
 
-        updateFromTelecommCall();
-        mTelecommCall.registerCallback(mTelecomCallCallback);
+        updateFromTelecomCall();
+        mTelecomCall.registerCallback(mTelecomCallCallback);
     }
 
-    public android.telecom.Call getTelecommCall() {
-        return mTelecommCall;
+    public android.telecom.Call getTelecomCall() {
+        return mTelecomCall;
     }
 
     /**
@@ -296,7 +296,7 @@ public class Call {
     private void update() {
         Trace.beginSection("Update");
         int oldState = getState();
-        updateFromTelecommCall();
+        updateFromTelecomCall();
         if (oldState != getState() && getState() == Call.State.DISCONNECTED) {
             CallList.getInstance().onDisconnect(this);
         } else {
@@ -305,26 +305,26 @@ public class Call {
         Trace.endSection();
     }
 
-    private void updateFromTelecommCall() {
-        Log.d(this, "updateFromTelecommCall: " + mTelecommCall.toString());
-        setState(translateState(mTelecommCall.getState()));
-        setDisconnectCause(mTelecommCall.getDetails().getDisconnectCause());
+    private void updateFromTelecomCall() {
+        Log.d(this, "updateFromTelecomCall: " + mTelecomCall.toString());
+        setState(translateState(mTelecomCall.getState()));
+        setDisconnectCause(mTelecomCall.getDetails().getDisconnectCause());
 
-        if (mTelecommCall.getVideoCall() != null) {
+        if (mTelecomCall.getVideoCall() != null) {
             if (mVideoCallCallback == null) {
                 mVideoCallCallback = new InCallVideoCallCallback(this);
             }
-            mTelecommCall.getVideoCall().registerCallback(mVideoCallCallback);
+            mTelecomCall.getVideoCall().registerCallback(mVideoCallCallback);
         }
 
         mChildCallIds.clear();
-        for (int i = 0; i < mTelecommCall.getChildren().size(); i++) {
+        for (int i = 0; i < mTelecomCall.getChildren().size(); i++) {
             mChildCallIds.add(
-                    CallList.getInstance().getCallByTelecommCall(
-                            mTelecommCall.getChildren().get(i)).getId());
+                    CallList.getInstance().getCallByTelecomCall(
+                            mTelecomCall.getChildren().get(i)).getId());
         }
 
-        Bundle callExtras = mTelecommCall.getDetails().getExtras();
+        Bundle callExtras = mTelecomCall.getDetails().getExtras();
         if (callExtras != null) {
             // Child address arrives when the call is first set up, so we do not need to notify the
             // UI of this.
@@ -368,7 +368,7 @@ public class Call {
 
         // If the handle of the call has changed, update state for the call determining if it is an
         // emergency call.
-        Uri newHandle = mTelecommCall.getDetails().getHandle();
+        Uri newHandle = mTelecomCall.getDetails().getHandle();
         if (!Objects.equals(mHandle, newHandle)) {
             mHandle = newHandle;
             updateEmergencyCallState();
@@ -404,18 +404,18 @@ public class Call {
     }
 
     public String getNumber() {
-        if (mTelecommCall == null) {
+        if (mTelecomCall == null) {
             return null;
         }
-        if (mTelecommCall.getDetails().getGatewayInfo() != null) {
-            return mTelecommCall.getDetails().getGatewayInfo()
+        if (mTelecomCall.getDetails().getGatewayInfo() != null) {
+            return mTelecomCall.getDetails().getGatewayInfo()
                     .getOriginalAddress().getSchemeSpecificPart();
         }
         return getHandle() == null ? null : getHandle().getSchemeSpecificPart();
     }
 
     public Uri getHandle() {
-        return mTelecommCall == null ? null : mTelecommCall.getDetails().getHandle();
+        return mTelecomCall == null ? null : mTelecomCall.getDetails().getHandle();
     }
 
     public boolean isEmergencyCall() {
@@ -423,7 +423,7 @@ public class Call {
     }
 
     public int getState() {
-        if (mTelecommCall != null && mTelecommCall.getParent() != null) {
+        if (mTelecomCall != null && mTelecomCall.getParent() != null) {
             return State.CONFERENCED;
         } else {
             return mState;
@@ -435,25 +435,25 @@ public class Call {
     }
 
     public int getNumberPresentation() {
-        return mTelecommCall == null ? null : mTelecommCall.getDetails().getHandlePresentation();
+        return mTelecomCall == null ? null : mTelecomCall.getDetails().getHandlePresentation();
     }
 
     public int getCnapNamePresentation() {
-        return mTelecommCall == null ? null
-                : mTelecommCall.getDetails().getCallerDisplayNamePresentation();
+        return mTelecomCall == null ? null
+                : mTelecomCall.getDetails().getCallerDisplayNamePresentation();
     }
 
     public String getCnapName() {
-        return mTelecommCall == null ? null
-                : getTelecommCall().getDetails().getCallerDisplayName();
+        return mTelecomCall == null ? null
+                : getTelecomCall().getDetails().getCallerDisplayName();
     }
 
     public Bundle getIntentExtras() {
-        return mTelecommCall == null ? null : mTelecommCall.getDetails().getIntentExtras();
+        return mTelecomCall == null ? null : mTelecomCall.getDetails().getIntentExtras();
     }
 
     public Bundle getExtras() {
-        return mTelecommCall == null ? null : mTelecommCall.getDetails().getExtras();
+        return mTelecomCall == null ? null : mTelecomCall.getDetails().getExtras();
     }
 
     /**
@@ -492,17 +492,17 @@ public class Call {
 
     /** Returns the possible text message responses. */
     public List<String> getCannedSmsResponses() {
-        return mTelecommCall.getCannedTextResponses();
+        return mTelecomCall.getCannedTextResponses();
     }
 
     /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
     public boolean can(int capabilities) {
-        int supportedCapabilities = mTelecommCall.getDetails().getCallCapabilities();
+        int supportedCapabilities = mTelecomCall.getDetails().getCallCapabilities();
 
         if ((capabilities & android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE) != 0) {
             // We allow you to merge if the capabilities allow it or if it is a call with
             // conferenceable calls.
-            if (mTelecommCall.getConferenceableCalls().isEmpty() &&
+            if (mTelecomCall.getConferenceableCalls().isEmpty() &&
                 ((android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE
                         & supportedCapabilities) == 0)) {
                 // Cannot merge calls if there are no calls to merge with.
@@ -510,33 +510,33 @@ public class Call {
             }
             capabilities &= ~android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE;
         }
-        return (capabilities == (capabilities & mTelecommCall.getDetails().getCallCapabilities()));
+        return (capabilities == (capabilities & mTelecomCall.getDetails().getCallCapabilities()));
     }
 
     public boolean hasProperty(int property) {
-        return mTelecommCall.getDetails().hasProperty(property);
+        return mTelecomCall.getDetails().hasProperty(property);
     }
 
     /** Gets the time when the call first became active. */
     public long getConnectTimeMillis() {
-        return mTelecommCall.getDetails().getConnectTimeMillis();
+        return mTelecomCall.getDetails().getConnectTimeMillis();
     }
 
     public boolean isConferenceCall() {
-        return mTelecommCall.getDetails().hasProperty(
+        return mTelecomCall.getDetails().hasProperty(
                 android.telecom.Call.Details.PROPERTY_CONFERENCE);
     }
 
     public GatewayInfo getGatewayInfo() {
-        return mTelecommCall == null ? null : mTelecommCall.getDetails().getGatewayInfo();
+        return mTelecomCall == null ? null : mTelecomCall.getDetails().getGatewayInfo();
     }
 
     public PhoneAccountHandle getAccountHandle() {
-        return mTelecommCall == null ? null : mTelecommCall.getDetails().getAccountHandle();
+        return mTelecomCall == null ? null : mTelecomCall.getDetails().getAccountHandle();
     }
 
     public VideoCall getVideoCall() {
-        return mTelecommCall == null ? null : mTelecommCall.getVideoCall();
+        return mTelecomCall == null ? null : mTelecomCall.getVideoCall();
     }
 
     public List<String> getChildCallIds() {
@@ -544,15 +544,15 @@ public class Call {
     }
 
     public String getParentId() {
-        android.telecom.Call parentCall = mTelecommCall.getParent();
+        android.telecom.Call parentCall = mTelecomCall.getParent();
         if (parentCall != null) {
-            return CallList.getInstance().getCallByTelecommCall(parentCall).getId();
+            return CallList.getInstance().getCallByTelecomCall(parentCall).getId();
         }
         return null;
     }
 
     public int getVideoState() {
-        return mTelecommCall.getDetails().getVideoState();
+        return mTelecomCall.getDetails().getVideoState();
     }
 
     public boolean isVideoCall(Context context) {
@@ -608,7 +608,7 @@ public class Call {
      * repeated calls to isEmergencyNumber.
      */
     private void updateEmergencyCallState() {
-        Uri handle = mTelecommCall.getDetails().getHandle();
+        Uri handle = mTelecomCall.getDetails().getHandle();
         mIsEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
                 handle == null ? "" : handle.getSchemeSpecificPart());
     }
@@ -649,7 +649,7 @@ public class Call {
 
     @Override
     public String toString() {
-        if (mTelecommCall == null) {
+        if (mTelecomCall == null) {
             // This should happen only in testing since otherwise we would never have a null
             // Telecom call.
             return String.valueOf(mId);
@@ -660,11 +660,11 @@ public class Call {
                 mId,
                 State.toString(getState()),
                 android.telecom.Call.Details
-                        .capabilitiesToString(mTelecommCall.getDetails().getCallCapabilities()),
+                        .capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 getParentId(),
-                this.mTelecommCall.getConferenceableCalls(),
-                VideoProfile.videoStateToString(mTelecommCall.getDetails().getVideoState()),
+                this.mTelecomCall.getConferenceableCalls(),
+                VideoProfile.videoStateToString(mTelecomCall.getDetails().getVideoState()),
                 mSessionModificationState,
                 getVideoSettings());
     }

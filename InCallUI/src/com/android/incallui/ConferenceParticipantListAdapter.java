@@ -335,9 +335,9 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
                     new ContactLookupCallback(this));
         }
 
-        boolean thisRowCanSeparate = mParentCanSeparate && call.getTelecommCall().getDetails().can(
+        boolean thisRowCanSeparate = mParentCanSeparate && call.getTelecomCall().getDetails().can(
                 android.telecom.Call.Details.CAPABILITY_SEPARATE_FROM_CONFERENCE);
-        boolean thisRowCanDisconnect = call.getTelecommCall().getDetails().can(
+        boolean thisRowCanDisconnect = call.getTelecomCall().getDetails().can(
                 android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE);
 
         setCallerInfoForRow(result, contactCache.name, contactCache.number, contactCache.label,

@@ -90,7 +90,7 @@ public class CallerInfoUtils {
          TelecomManager telecomManager =
                  (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
          return telecomManager.isVoiceMailNumber(
-                 call.getTelecommCall().getDetails().getAccountHandle(), call.getNumber());
+                 call.getTelecomCall().getDetails().getAccountHandle(), call.getNumber());
     }
 
     /**

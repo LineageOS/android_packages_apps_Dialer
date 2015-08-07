@@ -50,7 +50,7 @@ public class CallList {
     private static CallList sInstance = new CallList();
 
     private final HashMap<String, Call> mCallById = new HashMap<>();
-    private final HashMap<android.telecom.Call, Call> mCallByTelecommCall = new HashMap<>();
+    private final HashMap<android.telecom.Call, Call> mCallByTelecomCall = new HashMap<>();
     private final HashMap<String, List<String>> mCallTextReponsesMap = Maps.newHashMap();
     /**
      * ConcurrentHashMap constructor params: 8 is initial table size, 0.9f is
@@ -79,9 +79,9 @@ public class CallList {
     CallList() {
     }
 
-    public void onCallAdded(android.telecom.Call telecommCall) {
+    public void onCallAdded(android.telecom.Call telecomCall) {
         Trace.beginSection("onCallAdded");
-        Call call = new Call(telecommCall);
+        Call call = new Call(telecomCall);
         Log.d(this, "onCallAdded: callState=" + call.getState());
         if (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING) {
@@ -92,9 +92,9 @@ public class CallList {
         Trace.endSection();
     }
 
-    public void onCallRemoved(android.telecom.Call telecommCall) {
-        if (mCallByTelecommCall.containsKey(telecommCall)) {
-            Call call = mCallByTelecommCall.get(telecommCall);
+    public void onCallRemoved(android.telecom.Call telecomCall) {
+        if (mCallByTelecomCall.containsKey(telecomCall)) {
+            Call call = mCallByTelecomCall.get(telecomCall);
             if (updateCallInMap(call)) {
                 Log.w(this, "Removing call not previously disconnected " + call.getId());
             }
@@ -352,8 +352,8 @@ public class CallList {
         return mCallById.get(callId);
     }
 
-    public Call getCallByTelecommCall(android.telecom.Call telecommCall) {
-        return mCallByTelecommCall.get(telecommCall);
+    public Call getCallByTelecomCall(android.telecom.Call telecomCall) {
+        return mCallByTelecomCall.get(telecomCall);
     }
 
     public List<String> getTextResponses(String callId) {
@@ -473,16 +473,16 @@ public class CallList {
                 mPendingDisconnectCalls.add(call);
 
                 mCallById.put(call.getId(), call);
-                mCallByTelecommCall.put(call.getTelecommCall(), call);
+                mCallByTelecomCall.put(call.getTelecomCall(), call);
                 updated = true;
             }
         } else if (!isCallDead(call)) {
             mCallById.put(call.getId(), call);
-            mCallByTelecommCall.put(call.getTelecommCall(), call);
+            mCallByTelecomCall.put(call.getTelecomCall(), call);
             updated = true;
         } else if (mCallById.containsKey(call.getId())) {
             mCallById.remove(call.getId());
-            mCallByTelecommCall.remove(call.getTelecommCall());
+            mCallByTelecomCall.remove(call.getTelecomCall());
             updated = true;
         }
 
