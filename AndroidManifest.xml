@@ -172,6 +172,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.android.contacts.common.dialog.CallSubjectHistory"
+                  android:theme="@style/Theme.CallSubjectSelector">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
+
         <!-- Backwards compatibility: "Phone" from Gingerbread and earlier -->
         <activity-alias android:name="DialtactsActivity"
             android:targetActivity=".DialtactsActivity"
