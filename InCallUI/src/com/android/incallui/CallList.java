@@ -161,7 +161,9 @@ public class CallList {
     }
 
     /**
-     * Called when a single call has changed session modification state.
+     * Called when the last forwarded number changes for a call.  With IMS, the last forwarded
+     * number changes due to a supplemental service notification, so it is not pressent at the
+     * start of the call.
      *
      * @param call The call.
      */

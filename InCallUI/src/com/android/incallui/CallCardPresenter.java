@@ -76,6 +76,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private CallTimer mCallTimer;
     private Context mContext;
     private boolean mSpinnerShowing = false;
+    private boolean mHasShownToast = false;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -120,6 +121,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Call may be null if disconnect happened already.
         if (call != null) {
             mPrimary = call;
+            if (shouldShowNoteSentToast(mPrimary)) {
+                final CallCardUi ui = getUi();
+                if (ui != null) {
+                    ui.showNoteSentToast();
+                }
+            }
             CallList.getInstance().addCallUpdateListener(call.getId(), this);
 
             // start processing lookups right away.
@@ -212,6 +219,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         mSecondary = secondary;
         Call previousPrimary = mPrimary;
         mPrimary = primary;
+
+        if (primaryChanged && shouldShowNoteSentToast(primary)) {
+            ui.showNoteSentToast();
+        }
 
         // Refresh primary call information if either:
         // 1. Primary call changed.
@@ -915,6 +926,20 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject());
     }
 
+    /**
+     * Determines whether the "note sent" toast should be shown.  It should be shown for a new
+     * outgoing call with a subject.
+     *
+     * @param call The call
+     * @return {@code true} if the toast should be shown, {@code false} otherwise.
+     */
+    private boolean shouldShowNoteSentToast(Call call) {
+        return call != null && !TextUtils
+                .isEmpty(call.getTelecommCall().getDetails().getIntentExtras().getString(
+                        TelecomManager.EXTRA_CALL_SUBJECT)) &&
+                (call.getState() == Call.State.DIALING || call.getState() == Call.State.CONNECTING);
+    }
+
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setCallCardVisible(boolean visible);
@@ -942,5 +967,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         boolean isCallSubjectVisible();
         void animateForNewOutgoingCall();
         void sendAccessibilityAnnouncement();
+        void showNoteSentToast();
     }
 }
