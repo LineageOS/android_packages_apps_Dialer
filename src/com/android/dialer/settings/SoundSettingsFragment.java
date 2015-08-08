@@ -132,7 +132,7 @@ public class SoundSettingsFragment extends PreferenceFragment
     public void onResume() {
         super.onResume();
 
-        if (!PermissionsUtil.hasAppOp(getContext(), AppOpsManager.OPSTR_WRITE_SETTINGS)) {
+        if (!Settings.System.canWrite(getContext())) {
             // If the user launches this setting fragment, then toggles the WRITE_SYSTEM_SETTINGS
             // AppOp, then close the fragment since there is nothing useful to do.
             getActivity().onBackPressed();
@@ -155,7 +155,7 @@ public class SoundSettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (!PermissionsUtil.hasAppOp(getContext(), AppOpsManager.OPSTR_WRITE_SETTINGS)) {
+        if (!Settings.System.canWrite(getContext())) {
             // A user shouldn't be able to get here, but this protects against monkey crashes.
             Toast.makeText(
                     getContext(),
@@ -181,7 +181,7 @@ public class SoundSettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (!PermissionsUtil.hasAppOp(getContext(), AppOpsManager.OPSTR_WRITE_SETTINGS)) {
+        if (!Settings.System.canWrite(getContext())) {
             Toast.makeText(
                     getContext(),
                     getResources().getString(R.string.toast_cannot_write_system_settings),
