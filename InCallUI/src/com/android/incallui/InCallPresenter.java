@@ -120,28 +120,34 @@ public class InCallPresenter implements CallList.Listener,
     private final android.telecom.Call.Callback mCallCallback =
             new android.telecom.Call.Callback() {
         @Override
-        public void onPostDialWait(android.telecom.Call call, String remainingPostDialSequence) {
-            onPostDialCharWait(mCallList.getCallByTelecommCall(call).getId(),
-                    remainingPostDialSequence);
+        public void onPostDialWait(android.telecom.Call telecomCall,
+                String remainingPostDialSequence) {
+            final Call call = mCallList.getCallByTelecommCall(telecomCall);
+            if (call == null) {
+                Log.w(this, "Call not found in call list: " + telecomCall);
+                return;
+            }
+            onPostDialCharWait(call.getId(), remainingPostDialSequence);
         }
 
         @Override
-        public void onDetailsChanged(android.telecom.Call call,
+        public void onDetailsChanged(android.telecom.Call telecomCall,
                 android.telecom.Call.Details details) {
+            final Call call = mCallList.getCallByTelecommCall(telecomCall);
+            if (call == null) {
+                Log.w(this, "Call not found in call list: " + telecomCall);
+                return;
+            }
             for (InCallDetailsListener listener : mDetailsListeners) {
-                listener.onDetailsChanged(mCallList.getCallByTelecommCall(call),
-                        details);
+                listener.onDetailsChanged(call, details);
             }
         }
 
         @Override
-        public void onConferenceableCallsChanged(
-                android.telecom.Call call, List<android.telecom.Call> conferenceableCalls) {
-            Log.i(this, "onConferenceableCallsChanged: " + call);
-            for (InCallDetailsListener listener : mDetailsListeners) {
-                listener.onDetailsChanged(mCallList.getCallByTelecommCall(call),
-                        call.getDetails());
-            }
+        public void onConferenceableCallsChanged(android.telecom.Call telecomCall,
+                List<android.telecom.Call> conferenceableCalls) {
+            Log.i(this, "onConferenceableCallsChanged: " + telecomCall);
+            onDetailsChanged(telecomCall, telecomCall.getDetails());
         }
     };
 
