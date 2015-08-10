@@ -78,7 +78,7 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Refuzați"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Sunați"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mesaj"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Pentru a efectua un apel, mai întâi dezactivaţi modul Avion."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Pentru a efectua un apel, mai întâi dezactivați modul Avion."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Neînregistrat în reţea."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Rețeaua mobilă nu este disponibilă"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Pentru a apela, introduceți un număr valid."</string>
@@ -102,11 +102,11 @@
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Reluați apelul"</string>
     <string name="onscreenEndCallText" msgid="9039601192595655846">"Încheiați apelul"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tastatură numerică"</string>
-    <string name="onscreenMuteText" msgid="5011369181754261374">"Dezactivaţi sunetul"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Dezactivați sunetul"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Adăugaţi un apel"</string>
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Îmbinaţi apelurile"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Schimbaţi"</string>
-    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gestionaţi apelurile"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gestionați apelurile"</string>
     <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Gestionați teleconferința"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"Apel video"</string>
@@ -153,7 +153,7 @@
     <string name="ringtone_title" msgid="6374978286202084684">"Ton de apel telefon"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrează când sună"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ton de apel și vibrare"</string>
-    <string name="manageConferenceLabel" msgid="4691922394301969053">"Gestionaţi teleconferinţa"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Gestionați teleconferinţa"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Număr de urgență"</string>
     <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> secunde</item>
@@ -173,4 +173,6 @@
     <string name="profile_photo_description" msgid="5609894336203315400">"Fotografie de profil"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Camera este oprită"</string>
     <string name="child_number" msgid="7437330400723805538">"pe <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <!-- no translation found for note_sent (3548700178238244595) -->
+    <skip />
 </resources>
