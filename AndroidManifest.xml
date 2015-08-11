@@ -22,7 +22,6 @@
         android:minSdkVersion="23"
         android:targetSdkVersion="23" />
 
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
@@ -296,5 +295,12 @@
                 <action android:name="android.telecom.InCallService"/>
             </intent-filter>
         </service>
+
+        <provider
+            android:name=".database.FilteredNumberProvider"
+            android:authorities="com.android.dialer"
+            android:exported="false"
+            android:multiprocess="false"
+            />
     </application>
 </manifest>
