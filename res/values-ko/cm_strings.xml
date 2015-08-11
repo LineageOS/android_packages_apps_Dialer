@@ -18,8 +18,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">주변 장소</string>
   <string name="people">사람</string>
-  <string name="lookup_settings_label">전화 번호 검색</string>
-  <string name="lookup_settings_description">알 수 없는 전화 번호 검색</string>
+  <string name="lookup_settings_label">전화번호 검색</string>
+  <string name="lookup_settings_description">알 수 없는 전화번호 검색</string>
   <string name="enable_forward_lookup_title">순서대로 검색</string>
   <string name="enable_forward_lookup_summary">다이얼러 검색시 근처 장소 표시</string>
   <string name="enable_people_lookup_title">사람 찾기</string>

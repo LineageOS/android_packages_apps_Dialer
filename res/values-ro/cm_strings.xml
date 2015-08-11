@@ -19,9 +19,14 @@
   <string name="nearby_places">Locații în apropiere</string>
   <string name="people">Persoane</string>
   <string name="lookup_settings_label">Căutare număr de telefon</string>
-  <string name="enable_forward_lookup_title">Căutare redirecţionată</string>
+  <string name="lookup_settings_description">Căutare numere de telefon necunoscute</string>
+  <string name="enable_forward_lookup_title">Căutare redirecționată</string>
+  <string name="enable_forward_lookup_summary">Arată locațiile din apropiere când se caută în dialer</string>
   <string name="enable_people_lookup_title">Căutare persoane</string>
+  <string name="enable_people_lookup_summary">Arată rezultatele online pentru persoane când caut în dialer</string>
   <string name="enable_reverse_lookup_title">Căutare inversă</string>
+  <string name="enable_reverse_lookup_summary">Caută informații despre persoană sau locație pentru numerele necunoscute la primirea apelurilor</string>
+  <string name="forward_lookup_provider_title">Furnizor de căutare avansată</string>
   <string name="people_lookup_provider_title">Furnizor de căutare a persoanelor</string>
   <string name="reverse_lookup_provider_title">Furnizor de căutare inversă</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chineză (CN)</string>
@@ -67,6 +72,7 @@
   <string name="speed_dial_delete">Ștergeți</string>
   <string name="speed_dial_unassigned_dialog_title">Cheie neatribuită</string>
   <string name="speed_dial_unassigned_dialog_message">Nicio acțiune de apel rapid nu este atribuită acestui număr \'<xliff:g id="number">%s</xliff:g>\'. Vreți să atribuiți o acțiune acum?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pentru a utiliza apelarea rapidă, în primul rând opriți modul avion.</string>
   <string name="yes">Da</string>
   <string name="no">Nu</string>
   <string name="incall_vibration_category_title">Vibrare în apel</string>
@@ -76,6 +82,7 @@
   <string name="incall_vibrate_45_title">Vibrare la fiecare minut</string>
   <string name="incall_vibrate_45_summary">Vibrează la secunda 45 a fiecărui minut în timpul convorbirilor efectuate</string>
   <string name="detailed_incall_info_title">Informații detaliate ale apelantului</string>
+  <string name="detailed_incall_info_summary">Afișează informații suplimentare despre apelant în ecranul de apel primit</string>
   <string name="video_call">Apel video</string>
   <string name="call_duration_active">Durata activă:</string>
   <string name="call_duration_call_out">Durată apel:</string>
@@ -86,5 +93,8 @@
   <string name="call_log_blacklist_header">Doar apeluri blocate</string>
   <string name="start_call_playback">Redă înregistrarea</string>
   <string name="stop_call_playback">Stop</string>
-  <string name="call_playback_error_message">Nu s-a reuşit redarea înregistrării</string>
+  <string name="call_playback_error_message">Nu s-a reușit redarea înregistrării</string>
+  <string name="sensors_category_title">Opțiuni senzor</string>
+  <string name="smart_mute_title">Mut inteligent</string>
+  <string name="smart_dialer_title">Apel inteligent</string>
 </resources>
