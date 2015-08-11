@@ -141,10 +141,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     private long mDateLimit = NO_DATE_LIMIT;
 
     /*
-     * True if this instance of the CallLogFragment is the Recents screen shown in
-     * DialtactsActivity.
+     * True if this instance of the CallLogFragment shown in the CallLogActivity.
      */
-    private boolean mIsRecentsFragment;
+    private boolean mIsCallLogActivity = false;
 
     public interface HostInterface {
         public void showDialpad();
@@ -156,6 +155,11 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     public CallLogFragment(int filterType) {
         this(filterType, NO_LOG_LIMIT);
+    }
+
+    public CallLogFragment(int filterType, boolean isCallLogActivity) {
+        this(filterType, NO_LOG_LIMIT);
+        mIsCallLogActivity = isCallLogActivity;
     }
 
     public CallLogFragment(int filterType, int logLimit) {
@@ -193,8 +197,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
             mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
         }
-
-        mIsRecentsFragment = mLogLimit != NO_LOG_LIMIT;
 
         final Activity activity = getActivity();
         final ContentResolver resolver = activity.getContentResolver();
@@ -294,13 +296,12 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mEmptyListView.setActionClickedListener(this);
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        boolean isShowingRecentsTab = mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT;
         mAdapter = ObjectFactory.newCallLogAdapter(
                 getActivity(),
                 this,
                 new ContactInfoHelper(getActivity(), currentCountryIso),
                 mVoicemailPlaybackPresenter,
-                isShowingRecentsTab);
+                mIsCallLogActivity);
         mRecyclerView.setAdapter(mAdapter);
 
         fetchCalls();
@@ -419,10 +420,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                         + filterType);
         }
         mEmptyListView.setDescription(messageId);
-        if (mIsRecentsFragment) {
-            mEmptyListView.setActionLabel(R.string.recentCalls_empty_action);
-        } else {
+        if (mIsCallLogActivity) {
             mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
+        } else {
+            mEmptyListView.setActionLabel(R.string.recentCalls_empty_action);
         }
     }
 
@@ -495,7 +496,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
         if (!PermissionsUtil.hasPermission(activity, READ_CALL_LOG)) {
             requestPermissions(new String[] {READ_CALL_LOG}, READ_CALL_LOG_PERMISSION_REQUEST_CODE);
-        } else if (mIsRecentsFragment) {
+        } else if (!mIsCallLogActivity) {
             // Show dialpad if we are the recents fragment.
             ((HostInterface) activity).showDialpad();
         }

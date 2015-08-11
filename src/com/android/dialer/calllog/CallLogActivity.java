@@ -39,8 +39,6 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.voicemail.VoicemailStatusHelper;
-import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
 public class CallLogActivity extends Activity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
@@ -67,9 +65,10 @@ public class CallLogActivity extends Activity implements ViewPager.OnPageChangeL
         public Fragment getItem(int position) {
             switch (position) {
                 case TAB_INDEX_ALL:
-                    return new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
+                    return new CallLogFragment(
+                            CallLogQueryHandler.CALL_TYPE_ALL, true /* isCallLogActivity */);
                 case TAB_INDEX_MISSED:
-                    return new CallLogFragment(Calls.MISSED_TYPE);
+                    return new CallLogFragment(Calls.MISSED_TYPE, true /* isCallLogActivity */);
             }
             throw new IllegalStateException("No fragment at position " + position);
         }

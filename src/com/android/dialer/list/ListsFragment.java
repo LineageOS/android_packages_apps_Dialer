@@ -59,10 +59,6 @@ public class ListsFragment extends Fragment
     public static final int TAB_COUNT_DEFAULT = 3;
     public static final int TAB_COUNT_WITH_VOICEMAIL = 4;
 
-    private static final int MAX_RECENTS_ENTRIES = 20;
-    // Oldest recents entry to display is 2 weeks old.
-    private static final long OLDEST_RECENTS_DATE = 1000L * 60 * 60 * 24 * 14;
-
     private static final String PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER =
             "has_active_voicemail_provider";
 
@@ -116,8 +112,7 @@ public class ListsFragment extends Fragment
                     mSpeedDialFragment = new SpeedDialFragment();
                     return mSpeedDialFragment;
                 case TAB_INDEX_RECENTS:
-                    mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL,
-                            MAX_RECENTS_ENTRIES, System.currentTimeMillis() - OLDEST_RECENTS_DATE);
+                    mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
                     return mRecentsFragment;
                 case TAB_INDEX_ALL_CONTACTS:
                     mAllContactsFragment = new AllContactsFragment();
