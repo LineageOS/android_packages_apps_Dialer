@@ -170,6 +170,5 @@
     <string name="profile_photo_description" msgid="5609894336203315400">"個人資料相片"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"關閉相機"</string>
     <string name="child_number" msgid="7437330400723805538">"透過 <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for note_sent (3548700178238244595) -->
-    <skip />
+    <string name="note_sent" msgid="3548700178238244595">"備註已送出"</string>
 </resources>
