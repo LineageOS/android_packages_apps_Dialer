@@ -31,6 +31,7 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -244,6 +245,8 @@ public class Call {
             };
 
     private android.telecom.Call mTelecommCall;
+    private boolean mIsEmergencyCall;
+    private Uri mHandle;
     private final String mId;
     private int mState = State.INVALID;
     private DisconnectCause mDisconnectCause;
@@ -273,6 +276,7 @@ public class Call {
     public Call(android.telecom.Call telecommCall) {
         mTelecommCall = telecommCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
+
         updateFromTelecommCall();
         mTelecommCall.registerCallback(mTelecomCallCallback);
     }
@@ -361,6 +365,14 @@ public class Call {
                 }
             }
         }
+
+        // If the handle of the call has changed, update state for the call determining if it is an
+        // emergency call.
+        Uri newHandle = mTelecommCall.getDetails().getHandle();
+        if (!Objects.equals(mHandle, newHandle)) {
+            mHandle = newHandle;
+            updateEmergencyCallState();
+        }
     }
 
     private static int translateState(int state) {
@@ -404,6 +416,10 @@ public class Call {
 
     public Uri getHandle() {
         return mTelecommCall == null ? null : mTelecommCall.getDetails().getHandle();
+    }
+
+    public boolean isEmergencyCall() {
+        return mIsEmergencyCall;
     }
 
     public int getState() {
@@ -574,7 +590,7 @@ public class Call {
     public void setSessionModificationState(int state) {
         if (state == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
             Log.e(this,
-            "setSessionModificationState not to be called for RECEIVED_UPGRADE_TO_VIDEO_REQUEST");
+                    "setSessionModificationState not to be called for RECEIVED_UPGRADE_TO_VIDEO_REQUEST");
             return;
         }
 
@@ -585,6 +601,16 @@ public class Call {
         if (hasChanged) {
             CallList.getInstance().onSessionModificationStateChange(this, state);
         }
+    }
+
+    /**
+     * Determines if the call handle is an emergency number or not and caches the result to avoid
+     * repeated calls to isEmergencyNumber.
+     */
+    private void updateEmergencyCallState() {
+        Uri handle = mTelecommCall.getDetails().getHandle();
+        mIsEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
+                handle == null ? "" : handle.getSchemeSpecificPart());
     }
 
     private void setModifyToVideoState(int newVideoState) {
