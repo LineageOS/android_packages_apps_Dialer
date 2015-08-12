@@ -173,6 +173,5 @@
     <string name="profile_photo_description" msgid="5609894336203315400">"Fotografie de profil"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Camera este oprită"</string>
     <string name="child_number" msgid="7437330400723805538">"pe <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for note_sent (3548700178238244595) -->
-    <skip />
+    <string name="note_sent" msgid="3548700178238244595">"Nota a fost trimisă"</string>
 </resources>

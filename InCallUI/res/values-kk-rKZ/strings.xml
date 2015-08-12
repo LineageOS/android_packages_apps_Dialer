@@ -170,6 +170,5 @@
     <string name="profile_photo_description" msgid="5609894336203315400">"Профиль фотосуреті"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Камераны өшіру"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> арқылы"</string>
-    <!-- no translation found for note_sent (3548700178238244595) -->
-    <skip />
+    <string name="note_sent" msgid="3548700178238244595">"Ескертпе жіберілді"</string>
 </resources>
