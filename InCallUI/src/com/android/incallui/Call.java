@@ -590,7 +590,7 @@ public class Call {
     public void setSessionModificationState(int state) {
         if (state == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
             Log.e(this,
-                    "setSessionModificationState not to be called for RECEIVED_UPGRADE_TO_VIDEO_REQUEST");
+                    "setSessionModificationState not valid for RECEIVED_UPGRADE_TO_VIDEO_REQUEST");
             return;
         }
 
