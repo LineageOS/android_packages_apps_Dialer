@@ -437,11 +437,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // 1. This is an emergency call.
         // 2. The phone is in Emergency Callback Mode, which means we should show the callback
         //    number.
-        boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
-                getNumberFromHandle(mPrimary.getHandle()));
         boolean showCallbackNumber = mPrimary.hasProperty(Details.PROPERTY_EMERGENCY_CALLBACK_MODE);
 
-        if (isEmergencyCall || showCallbackNumber) {
+        if (mPrimary.isEmergencyCall() || showCallbackNumber) {
             callbackNumber = getSubscriptionNumber();
         } else {
             StatusHints statusHints = mPrimary.getTelecommCall().getDetails().getStatusHints();
@@ -461,7 +459,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             callbackNumber = null;
         }
 
-        getUi().setCallbackNumber(callbackNumber, isEmergencyCall || showCallbackNumber);
+        getUi().setCallbackNumber(callbackNumber, mPrimary.isEmergencyCall() || showCallbackNumber);
     }
 
     public void updateCallTime() {
@@ -657,8 +655,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         if (mEmergencyCallListener != null) {
-            boolean isEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
-                    getNumberFromHandle(mPrimary.getHandle()));
+            boolean isEmergencyCall = mPrimary.isEmergencyCall();
             mEmergencyCallListener.onCallUpdated((BaseFragment) ui, isEmergencyCall);
         }
     }
