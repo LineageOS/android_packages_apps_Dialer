@@ -76,14 +76,12 @@ public class CallLogAdapter extends GroupingListAdapter
         public void fetchCalls();
     }
 
-    private static final int VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM = 10;
     private static final int NO_EXPANDED_LIST_ITEM = -1;
 
     private static final int VOICEMAIL_PROMO_CARD_POSITION = 0;
     /**
      * View type for voicemail promo card.  Note: Numbering starts at 20 to avoid collision
-     * with {@link com.android.common.widget.GroupingListAdapter#ITEM_TYPE_IN_GROUP}, and
-     * {@link CallLogAdapter#VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM}.
+     * with {@link com.android.common.widget.GroupingListAdapter#ITEM_TYPE_IN_GROUP}.
      */
     private static final int VIEW_TYPE_VOICEMAIL_PROMO_CARD = 20;
 
@@ -96,12 +94,12 @@ public class CallLogAdapter extends GroupingListAdapter
 
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
-    private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
+    protected final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
 
     protected ContactInfoCache mContactInfoCache;
 
-    private boolean mIsShowingRecentsTab;
+    private boolean mIsCallLogActivity;
 
     private static final String KEY_EXPANDED_POSITION = "expanded_position";
     private static final String KEY_EXPANDED_ROW_ID = "expanded_row_id";
@@ -130,7 +128,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private SharedPreferences mPrefs;
 
-    private boolean mShowPromoCard = false;
+    private boolean mShowVoicemailPromoCard = false;
 
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogListItemHelper;
@@ -325,7 +323,7 @@ public class CallLogAdapter extends GroupingListAdapter
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            boolean isShowingRecentsTab) {
+            boolean isCallLogActivity) {
         super(context);
 
         mContext = context;
@@ -335,7 +333,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.setOnVoicemailDeletedListener(this);
         }
-        mIsShowingRecentsTab = isShowingRecentsTab;
+        mIsCallLogActivity = isCallLogActivity;
 
         mContactInfoCache = new ContactInfoCache(
                 mContactInfoHelper, mOnContactInfoChangedListener);
@@ -413,9 +411,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM) {
-            return ShowCallHistoryViewHolder.create(mContext, parent);
-        } else if (viewType == VIEW_TYPE_VOICEMAIL_PROMO_CARD) {
+        if (viewType == VIEW_TYPE_VOICEMAIL_PROMO_CARD) {
             return createVoicemailPromoCardViewHolder(parent);
         }
         return createCallLogEntryViewHolder(parent);
@@ -459,8 +455,6 @@ public class CallLogAdapter extends GroupingListAdapter
         Trace.beginSection("onBindViewHolder: " + position);
 
         switch (getItemViewType(position)) {
-            case VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM:
-                break;
             case VIEW_TYPE_VOICEMAIL_PROMO_CARD:
                 bindVoicemailPromoCardViewHolder(viewHolder);
                 break;
@@ -601,14 +595,12 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public int getItemCount() {
-        return super.getItemCount() + ((isShowingRecentsTab() || mShowPromoCard) ? 1 : 0);
+        return super.getItemCount() + (mShowVoicemailPromoCard ? 1 : 0);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == getItemCount() - 1 && isShowingRecentsTab()) {
-            return VIEW_TYPE_SHOW_CALL_HISTORY_LIST_ITEM;
-        } else if (position == VOICEMAIL_PROMO_CARD_POSITION && mShowPromoCard) {
+        if (position == VOICEMAIL_PROMO_CARD_POSITION && mShowVoicemailPromoCard) {
             return VIEW_TYPE_VOICEMAIL_PROMO_CARD;
         }
         return super.getItemViewType(position);
@@ -623,11 +615,11 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     @Override
     public Object getItem(int position) {
-        return super.getItem(position - (mShowPromoCard ? 1 : 0));
+        return super.getItem(position - (mShowVoicemailPromoCard ? 1 : 0));
     }
 
-    protected boolean isShowingRecentsTab() {
-        return mIsShowingRecentsTab;
+    protected boolean isCallLogActivity() {
+        return mIsCallLogActivity;
     }
 
     @Override
@@ -793,7 +785,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private void maybeShowVoicemailPromoCard() {
         boolean showPromoCard = mPrefs.getBoolean(SHOW_VOICEMAIL_PROMO_CARD,
                 SHOW_VOICEMAIL_PROMO_CARD_DEFAULT);
-        mShowPromoCard = (mVoicemailPlaybackPresenter != null) && showPromoCard;
+        mShowVoicemailPromoCard = (mVoicemailPlaybackPresenter != null) && showPromoCard;
     }
 
     /**
@@ -801,7 +793,7 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     private void dismissVoicemailPromoCard() {
         mPrefs.edit().putBoolean(SHOW_VOICEMAIL_PROMO_CARD, false).apply();
-        mShowPromoCard = false;
+        mShowVoicemailPromoCard = false;
         notifyItemRemoved(VOICEMAIL_PROMO_CARD_POSITION);
     }
 

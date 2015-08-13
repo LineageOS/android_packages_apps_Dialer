@@ -47,12 +47,12 @@ public class ObjectFactory {
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            boolean isShowingRecentsTab) {
+            boolean isCallLogActivity) {
         return new CallLogAdapter(
                 context,
                 callFetcher,
                 contactInfoHelper,
                 voicemailPlaybackPresenter,
-                isShowingRecentsTab);
+                isCallLogActivity);
     }
 }
