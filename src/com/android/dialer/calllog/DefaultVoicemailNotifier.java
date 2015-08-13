@@ -184,7 +184,6 @@ public class DefaultVoicemailNotifier {
         // Determine the intent to fire when the notification is clicked on.
         final Intent contentIntent;
         // Open the call log.
-        // TODO: Send to recents tab in Dialer instead.
         contentIntent = new Intent(mContext, DialtactsActivity.class);
         contentIntent.putExtra(DialtactsActivity.EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_VOICEMAIL);
         notificationBuilder.setContentIntent(PendingIntent.getActivity(

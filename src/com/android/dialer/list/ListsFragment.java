@@ -52,7 +52,7 @@ public class ListsFragment extends Fragment
     private static final String TAG = "ListsFragment";
 
     public static final int TAB_INDEX_SPEED_DIAL = 0;
-    public static final int TAB_INDEX_RECENTS = 1;
+    public static final int TAB_INDEX_HISTORY = 1;
     public static final int TAB_INDEX_ALL_CONTACTS = 2;
     public static final int TAB_INDEX_VOICEMAIL = 3;
 
@@ -74,7 +74,7 @@ public class ListsFragment extends Fragment
     private View mRemoveViewContent;
 
     private SpeedDialFragment mSpeedDialFragment;
-    private CallLogFragment mRecentsFragment;
+    private CallLogFragment mHistoryFragment;
     private AllContactsFragment mAllContactsFragment;
     private CallLogFragment mVoicemailFragment;
 
@@ -111,9 +111,9 @@ public class ListsFragment extends Fragment
                 case TAB_INDEX_SPEED_DIAL:
                     mSpeedDialFragment = new SpeedDialFragment();
                     return mSpeedDialFragment;
-                case TAB_INDEX_RECENTS:
-                    mRecentsFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
-                    return mRecentsFragment;
+                case TAB_INDEX_HISTORY:
+                    mHistoryFragment = new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
+                    return mHistoryFragment;
                 case TAB_INDEX_ALL_CONTACTS:
                     mAllContactsFragment = new AllContactsFragment();
                     return mAllContactsFragment;
@@ -133,8 +133,8 @@ public class ListsFragment extends Fragment
                     (Fragment) super.instantiateItem(container, position);
             if (fragment instanceof SpeedDialFragment) {
                 mSpeedDialFragment = (SpeedDialFragment) fragment;
-            } else if (fragment instanceof CallLogFragment && position == TAB_INDEX_RECENTS) {
-                mRecentsFragment = (CallLogFragment) fragment;
+            } else if (fragment instanceof CallLogFragment && position == TAB_INDEX_HISTORY) {
+                mHistoryFragment = (CallLogFragment) fragment;
             } else if (fragment instanceof AllContactsFragment) {
                 mAllContactsFragment = (AllContactsFragment) fragment;
             } else if (fragment instanceof CallLogFragment && position == TAB_INDEX_VOICEMAIL) {
@@ -206,13 +206,13 @@ public class ListsFragment extends Fragment
 
         mTabTitles = new String[TAB_COUNT_WITH_VOICEMAIL];
         mTabTitles[TAB_INDEX_SPEED_DIAL] = getResources().getString(R.string.tab_speed_dial);
-        mTabTitles[TAB_INDEX_RECENTS] = getResources().getString(R.string.tab_recents);
+        mTabTitles[TAB_INDEX_HISTORY] = getResources().getString(R.string.tab_history);
         mTabTitles[TAB_INDEX_ALL_CONTACTS] = getResources().getString(R.string.tab_all_contacts);
         mTabTitles[TAB_INDEX_VOICEMAIL] = getResources().getString(R.string.tab_voicemail);
 
         mTabIcons = new int[TAB_COUNT_WITH_VOICEMAIL];
         mTabIcons[TAB_INDEX_SPEED_DIAL] = R.drawable.tab_speed_dial;
-        mTabIcons[TAB_INDEX_RECENTS] = R.drawable.tab_recents;
+        mTabIcons[TAB_INDEX_HISTORY] = R.drawable.tab_history;
         mTabIcons[TAB_INDEX_ALL_CONTACTS] = R.drawable.tab_contacts;
         mTabIcons[TAB_INDEX_VOICEMAIL] = R.drawable.tab_voicemail;
 
@@ -363,8 +363,8 @@ public class ListsFragment extends Fragment
             case TAB_INDEX_SPEED_DIAL:
                 fragmentName = SpeedDialFragment.class.getSimpleName();
                 break;
-            case TAB_INDEX_RECENTS:
-                fragmentName = CallLogFragment.class.getSimpleName() + "#Recents";
+            case TAB_INDEX_HISTORY:
+                fragmentName = CallLogFragment.class.getSimpleName() + "#History";
                 break;
             case TAB_INDEX_ALL_CONTACTS:
                 fragmentName = AllContactsFragment.class.getSimpleName();

@@ -240,7 +240,7 @@ public class CallLogAdapter extends GroupingListAdapter
                                 ContextMenu.NONE,
                                 R.id.context_menu_edit_before_call,
                                 ContextMenu.NONE,
-                                R.string.recentCalls_editNumberBeforeCall);
+                                R.string.call_log_edit_number_before_call);
 
                         editItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
                             @Override
