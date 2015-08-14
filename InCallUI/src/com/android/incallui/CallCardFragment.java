@@ -1135,8 +1135,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         mFloatingActionButtonController.align(
-                mIsLandscape ? FloatingActionButtonController.ALIGN_QUARTER_END
-                        : FloatingActionButtonController.ALIGN_MIDDLE,
+                FloatingActionButtonController.ALIGN_MIDDLE,
                 0 /* offsetX */,
                 offsetY,
                 true);

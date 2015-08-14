@@ -21,9 +21,6 @@
 
     <!-- Dimensions for CallCard elements (the normal in-call UI) -->
 
-    <!-- Height of the "call banner" overlay on top of the upper part of the call info area.
-         Note: This is the default size for small (<600dp height) devices: larger screen sizes apply
-         the values in values-h600dp/dimens.xml. -->
     <dimen name="call_banner_height">90dp</dimen>
     <dimen name="incall_action_bar_elevation">3dp</dimen>
 

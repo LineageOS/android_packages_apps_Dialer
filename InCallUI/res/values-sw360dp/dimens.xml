@@ -18,9 +18,6 @@
 <resources>
     <!-- Dimensions for CallCard elements (the normal in-call UI) -->
 
-    <!-- Height of the "call banner" overlay on top of the upper part of
-         the call info area. -->
-    <dimen name="call_banner_height">122dp</dimen>
     <!-- Text size for the name in the call info. -->
     <dimen name="call_status_text_size">22sp</dimen>
     <dimen name="call_status_text_min_size">18sp</dimen>
