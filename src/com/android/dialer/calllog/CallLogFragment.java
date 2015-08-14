@@ -407,13 +407,13 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         final int messageId;
         switch (filterType) {
             case Calls.MISSED_TYPE:
-                messageId = R.string.recentMissed_empty;
+                messageId = R.string.call_log_missed_empty;
                 break;
             case Calls.VOICEMAIL_TYPE:
-                messageId = R.string.recentVoicemails_empty;
+                messageId = R.string.call_log_voicemail_empty;
                 break;
             case CallLogQueryHandler.CALL_TYPE_ALL:
-                messageId = R.string.recentCalls_empty;
+                messageId = R.string.call_log_all_empty;
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected filter type in CallLogFragment: "
@@ -422,8 +422,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mEmptyListView.setDescription(messageId);
         if (mIsCallLogActivity) {
             mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
-        } else {
-            mEmptyListView.setActionLabel(R.string.recentCalls_empty_action);
+        } else if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
+            mEmptyListView.setActionLabel(R.string.call_log_all_empty_action);
         }
     }
 
@@ -497,7 +497,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         if (!PermissionsUtil.hasPermission(activity, READ_CALL_LOG)) {
             requestPermissions(new String[] {READ_CALL_LOG}, READ_CALL_LOG_PERMISSION_REQUEST_CODE);
         } else if (!mIsCallLogActivity) {
-            // Show dialpad if we are the recents fragment.
+            // Show dialpad if we are not in the call log activity.
             ((HostInterface) activity).showDialpad();
         }
     }

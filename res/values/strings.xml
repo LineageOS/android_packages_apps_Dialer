@@ -40,12 +40,7 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-    <string name="recentCallsIconLabel">Call history</string>
-
-    <!-- Menu item used to call a contact from the call log -->
-    <string name="recentCalls_callNumber">Call
-        <xliff:g id="name">%s</xliff:g>
-    </string>
+    <string name="callHistoryIconLabel">Call history</string>
 
     <!-- Text for a menu item to report a call as having been incorrectly identified.
          [CHAR LIMIT=30] -->
@@ -58,28 +53,16 @@
     <string name="copy_transcript_text">Copy transcription to clipboard</string>
 
     <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
-    <string name="recentCalls_editNumberBeforeCall">Edit number before call</string>
-
-    <!-- Menu item used to add a number from the call log to contacts -->
-    <string name="recentCalls_addToContact">Add to a contact</string>
+    <string name="call_log_edit_number_before_call">Edit number before call</string>
 
     <!-- Menu item used to remove a single call from the call log -->
-    <string name="recentCalls_removeFromRecentList">Delete from call history</string>
+    <string name="call_log_remove_from_call_log">Delete from call history</string>
 
     <!-- Menu item used to remove all calls from the call log -->
-    <string name="recentCalls_deleteAll">Clear call history</string>
+    <string name="call_log_delete_all">Clear call history</string>
 
     <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
-    <string name="recentCalls_trashVoicemail">Delete voicemail</string>
-
-    <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
-    <string name="recentCalls_shareVoicemail">Share voicemail</string>
-
-    <!-- Text displayed when the call log is empty. -->
-    <string name="recentCalls_empty">Your call log is empty</string>
-
-    <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
-    <string name="recentCalls_empty_action">Make a call</string>
+    <string name="call_log_trash_voicemail">Delete voicemail</string>
 
     <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
     <string name="clearCallLogConfirmation_title">Clear call history?</string>
@@ -474,17 +457,23 @@
          Do not translate. -->
     <string name="view_full_call_history_font_family">sans-serif</string>
 
+    <!-- Text displayed when the call log is empty. -->
+    <string name="call_log_all_empty">Your call history is empty</string>
+
+    <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
+    <string name="call_log_all_empty_action">Make a call</string>
+
     <!-- Text displayed when the list of missed calls is empty -->
-    <string name="recentMissed_empty">You have no missed calls.</string>
+    <string name="call_log_missed_empty">You have no missed calls.</string>
 
     <!-- Text displayed when the list of voicemails is empty -->
-    <string name="recentVoicemails_empty">Your voicemail inbox is empty.</string>
+    <string name="call_log_voicemail_empty">Your voicemail inbox is empty.</string>
 
     <!--  Menu option to show favorite contacts only -->
     <string name="show_favorites_only">Show favorites only</string>
 
     <!--  Title of activity that displays a list of all calls -->
-    <string name="call_log_activity_title">History</string>
+    <string name="call_log_activity_title">Call History</string>
 
     <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
@@ -502,8 +491,8 @@
          [CHAR LIMIT=40] -->
     <string name="tab_speed_dial">Speed dial</string>
 
-    <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
-    <string name="tab_recents">Recents</string>
+    <!-- Accessibility text for the tab showing the call history. [CHAR LIMIT=40] -->
+    <string name="tab_history">Call History</string>
 
     <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
     <string name="tab_all_contacts">Contacts</string>

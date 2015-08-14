@@ -189,7 +189,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     };
 
     /**
-     * Fragment containing the speed dial list, recents list, and all contacts list.
+     * Fragment containing the speed dial list, call history list, and all contacts list.
      */
     private ListsFragment mListsFragment;
 
@@ -543,7 +543,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 mListsFragment.showTab(index);
             }
         } else if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
-            mListsFragment.showTab(ListsFragment.TAB_INDEX_RECENTS);
+            mListsFragment.showTab(ListsFragment.TAB_INDEX_HISTORY);
         }
 
         setSearchBoxHint();
@@ -1282,13 +1282,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         int tabIndex = mListsFragment.getCurrentTabIndex();
 
-        // Scroll the button from center to end when moving from the Speed Dial to Recents tab.
-        // In RTL, scroll when the current tab is Recents instead of Speed Dial, because the order
-        // of the tabs is reversed and the ViewPager returns the left tab position during scroll.
+        // Scroll the button from center to end when moving from the Speed Dial to Call History tab.
+        // In RTL, scroll when the current tab is Call History instead, since the order of the tabs
+        // is reversed and the ViewPager returns the left tab position during scroll.
         boolean isRtl = DialerUtils.isRtl();
         if (!isRtl && tabIndex == ListsFragment.TAB_INDEX_SPEED_DIAL && !mIsLandscape) {
             mFloatingActionButtonController.onPageScrolled(positionOffset);
-        } else if (isRtl && tabIndex == ListsFragment.TAB_INDEX_RECENTS && !mIsLandscape) {
+        } else if (isRtl && tabIndex == ListsFragment.TAB_INDEX_HISTORY && !mIsLandscape) {
             mFloatingActionButtonController.onPageScrolled(1 - positionOffset);
         } else if (tabIndex != ListsFragment.TAB_INDEX_SPEED_DIAL) {
             mFloatingActionButtonController.onPageScrolled(1);

@@ -132,7 +132,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
             </intent-filter>
-            <intent-filter android:label="@string/recentCallsIconLabel">
+            <intent-filter android:label="@string/callHistoryIconLabel">
                 <action android:name="com.android.phone.action.RECENT_CALLS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.TAB" />
