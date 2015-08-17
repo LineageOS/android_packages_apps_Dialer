@@ -20,19 +20,19 @@
     <string name="applicationLabel" msgid="7762561155467201526">"ஃபோன்"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ஃபோன்"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு பதிவு"</string>
-    <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
+    <!-- no translation found for callHistoryIconLabel (3734413397291301223) -->
+    <skip />
     <string name="call_detail_menu_report" msgid="587960283417977382">"தவறான எண் எனப் புகாரளி"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"எண்ணைக் கிளிப்போர்டுக்கு நகலெடு"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"டிரான்ஸ்கிரிப்ஷனைக் கிளிப்போர்டுக்கு நகலெடு"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"தொடர்பில் சேர்"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"அழைப்பு வரலாற்றில் இருந்து நீக்கு"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"அழைப்பு வரலாற்றை அழி"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"குரலஞ்சலை நீக்கு"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"குரலஞ்சலைப் பகிர்"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"அழைப்புப் பதிவு காலியாக உள்ளது"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"அழை"</string>
+    <!-- no translation found for call_log_edit_number_before_call (812234391186201782) -->
+    <skip />
+    <!-- no translation found for call_log_remove_from_call_log (4538253384399338463) -->
+    <skip />
+    <!-- no translation found for call_log_delete_all (4677609108288680411) -->
+    <skip />
+    <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
+    <skip />
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"அழைப்பு பதிவை அழிக்கவா?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"பதிவிலிருந்து எல்லா அழைப்புகளும் நீக்கப்படும்"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"அழைப்பு வரலாற்றை அழிக்கிறது…"</string>
@@ -129,15 +129,23 @@
     <string name="call_not_available" msgid="8941576511946492225">"Phone பயன்பாடு முடக்கப்பட்டுள்ளதால், ஃபோன் அழைப்பைச் செய்ய முடியாது."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"சாதனத்தில் இந்தச் செயலைச் செய்வதற்கான பயன்பாடு எதுவும் இல்லை"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"தொடர்புகளைத் தேடுக"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"தவறிய அழைப்புகள் இல்லை."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"குரலஞ்சல் இன்பாக்ஸ் காலியாக உள்ளது."</string>
+    <!-- no translation found for call_log_all_empty (8357417710416340920) -->
+    <skip />
+    <!-- no translation found for call_log_all_empty_action (9093210119068366147) -->
+    <skip />
+    <!-- no translation found for call_log_missed_empty (3927274175205520135) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
+    <skip />
     <string name="show_favorites_only" msgid="5520072531022614595">"பிடித்தவற்றை மட்டும் காட்டு"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"வரலாறு"</string>
+    <!-- no translation found for call_log_activity_title (7949633151371183580) -->
+    <skip />
     <string name="call_log_all_title" msgid="3566738938889333307">"எல்லாம்"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"தவறியவை"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"குரலஞ்சல்"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"விரைவு டயல்"</string>
-    <string name="tab_recents" msgid="929949073851377206">"சமீபத்தியவை"</string>
+    <!-- no translation found for tab_history (2563144697322434940) -->
+    <skip />
     <string name="tab_all_contacts" msgid="1410922767166533690">"தொடர்புகள்"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"குரலஞ்சல்"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"பிடித்தவற்றிலிருந்து அகற்றப்பட்டது"</string>
@@ -147,7 +155,6 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"தொடர்பில் சேர்"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS அனுப்பு"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"வீடியோவில் அழை"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"அழைப்பு பதிவு முழுவதையும் காட்டு"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> புதிய தவறிய அழைப்புகள்"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"இன்னும் விரைவு டயலில் யாரையும் சேர்க்கவில்லை"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"பிடித்தவராகச் சேர்"</string>

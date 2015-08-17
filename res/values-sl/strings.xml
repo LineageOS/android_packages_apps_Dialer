@@ -20,19 +20,19 @@
     <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Zgodovina klicev"</string>
-    <string name="recentCalls_callNumber" msgid="1756372533999226126">"Pokliči <xliff:g id="NAME">%s</xliff:g>"</string>
+    <!-- no translation found for callHistoryIconLabel (3734413397291301223) -->
+    <skip />
     <string name="call_detail_menu_report" msgid="587960283417977382">"Prijavite netočno številko"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Kopiraj številko v odložišče"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Kopiraj prepis v odložišče"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Pred klicanjem uredi številko"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Dodaj stiku"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Izbris iz zgodovine klicev"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Izbriši zgodovino klicev"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Brisanje sporočil odzivnika"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Skupna raba odzivnika"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"Vaš dnevnik klicev je prazen"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Klicanje"</string>
+    <!-- no translation found for call_log_edit_number_before_call (812234391186201782) -->
+    <skip />
+    <!-- no translation found for call_log_remove_from_call_log (4538253384399338463) -->
+    <skip />
+    <!-- no translation found for call_log_delete_all (4677609108288680411) -->
+    <skip />
+    <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
+    <skip />
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Želite izbrisati zgodovino klicev?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"S tem boste iz zgodovine izbrisali vse klice"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Izbris zgodovine klicev …"</string>
@@ -131,15 +131,23 @@
     <string name="call_not_available" msgid="8941576511946492225">"Ni mogoče opraviti telefonskega klica, ker je aplikacija Telefon onemogočena."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"V tej napravi ni aplikacije za to"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Iskanje stikov"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"Nimate zgrešenih klicev."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Vaša mapa s sporočili v odzivniku je prazna."</string>
+    <!-- no translation found for call_log_all_empty (8357417710416340920) -->
+    <skip />
+    <!-- no translation found for call_log_all_empty_action (9093210119068366147) -->
+    <skip />
+    <!-- no translation found for call_log_missed_empty (3927274175205520135) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
+    <skip />
     <string name="show_favorites_only" msgid="5520072531022614595">"Pokaži samo priljubljene"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Zgodovina"</string>
+    <!-- no translation found for call_log_activity_title (7949633151371183580) -->
+    <skip />
     <string name="call_log_all_title" msgid="3566738938889333307">"Vsi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Neodgovorjeni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Odzivnik"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Hitro izbiranje"</string>
-    <string name="tab_recents" msgid="929949073851377206">"Nedavni"</string>
+    <!-- no translation found for tab_history (2563144697322434940) -->
+    <skip />
     <string name="tab_all_contacts" msgid="1410922767166533690">"Stiki"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Odzivnik"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Odstranjeno iz priljubljenih"</string>
@@ -149,7 +157,6 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Dodaj stiku"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Pošlji SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Opravi videoklic"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Prikaz celotne zgodovine klicev"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Št. novih zgrešenih klicev: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Na seznamu za hitro klicanje nimate še nikogar"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodajanje priljubljenega"</string>

@@ -20,19 +20,14 @@
     <string name="applicationLabel" msgid="7762561155467201526">"Телефон"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Историја на повици"</string>
-    <string name="recentCalls_callNumber" msgid="1756372533999226126">"Повикај <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="callHistoryIconLabel" msgid="3734413397291301223">"Историја на повици"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Пријави неточен број"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Копирај го бројот во таблата со исечоци"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Копирај го преписот во таблата со исечоци"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Уреди број пред повик"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Додај на контакт"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Избришете од историјата на повици"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Избришете историја на повици?"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Избриши говорна пошта"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Сподели говорна пошта"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"Евиденцијата на повици е празна"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Повикај"</string>
+    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Уредете го бројот пред повикот"</string>
+    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Избришете од историјата на повици"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Избришете ја историјата на повици"</string>
+    <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Избришете ја говорната пошта"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Избришете историја на повици?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ова ќе ги избрише сите повици од историјата"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Се чисти историјата на повици…"</string>
@@ -129,15 +124,17 @@
     <string name="call_not_available" msgid="8941576511946492225">"Не може да се воспостави телефонски повик, бидејќи апликацијата Телефон е оневозможена."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Нема апликација за тоа на уредот"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Пребарајте контакти"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"Немате пропуштени повици."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Приемното сандаче на говорната пошта е празно."</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"Историјата на повици е празна"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"Повикај"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Немате пропуштени повици."</string>
+    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Приемното сандаче на говорната пошта е празно."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Прикажи само омилени"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Историја"</string>
+    <string name="call_log_activity_title" msgid="7949633151371183580">"Историја на повици"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Сите"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропуштени"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Говорна пошта"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Брзо бирање"</string>
-    <string name="tab_recents" msgid="929949073851377206">"Неодамнешни"</string>
+    <string name="tab_history" msgid="2563144697322434940">"Историја на повици"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Контакти"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Говорна пошта"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Отстранет од омилени"</string>
@@ -147,7 +144,6 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Додај на контакт"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Испрати СМС"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Остварете видеоповик"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Погледнете цела историја на повик"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> нови пропуштени повици"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Сè уште немате никого на брзо бирање"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Додај омилено"</string>

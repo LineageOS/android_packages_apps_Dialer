@@ -21,21 +21,19 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <!-- no translation found for dialerIconLabel (6500826552823403796) -->
     <skip />
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Чалуулар таржымалы"</string>
-    <!-- no translation found for recentCalls_callNumber (1756372533999226126) -->
+    <!-- no translation found for callHistoryIconLabel (3734413397291301223) -->
     <skip />
     <string name="call_detail_menu_report" msgid="587960283417977382">"Номер туура эмес"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Номер буферге көчүрүлсүн"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Транскрипция буферге көчүрүлсүн"</string>
-    <!-- no translation found for recentCalls_editNumberBeforeCall (7756171675833267857) -->
+    <!-- no translation found for call_log_edit_number_before_call (812234391186201782) -->
     <skip />
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Байланышка кошуу"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Чалуулар таржымалынан жок кылуу"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Чалуулар таржымалын тазалоо"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Үнкатты жок кылуу"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Үнкатты бөлүшүү"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"Чалуулар таржымалында эч нерсе жок"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Чалуу"</string>
+    <!-- no translation found for call_log_remove_from_call_log (4538253384399338463) -->
+    <skip />
+    <!-- no translation found for call_log_delete_all (4677609108288680411) -->
+    <skip />
+    <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
+    <skip />
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Чалуулар таржымалы тазалансынбы?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ушуну менен бул таржымалдагы бардык чалуулар жок болот"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Чалуулар таржымалы тазаланууда…"</string>
@@ -155,15 +153,23 @@
     <string name="call_not_available" msgid="8941576511946492225">"Телефон колдонмосу өчүрүлгөндүктөн, чалуу мүмкүн болбой жатат."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Бул түзмөктө ал үчүн колдонмо жок"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Байланыштардан издеп көрүңүз"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"Байкалбай калган чалуулар жок."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Үн почтаңыздын келген билдирүүлөр куржуну бош."</string>
+    <!-- no translation found for call_log_all_empty (8357417710416340920) -->
+    <skip />
+    <!-- no translation found for call_log_all_empty_action (9093210119068366147) -->
+    <skip />
+    <!-- no translation found for call_log_missed_empty (3927274175205520135) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
+    <skip />
     <string name="show_favorites_only" msgid="5520072531022614595">"Тандамалдарды гана көрсөтүү"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Тарыхы"</string>
+    <!-- no translation found for call_log_activity_title (7949633151371183580) -->
+    <skip />
     <string name="call_log_all_title" msgid="3566738938889333307">"Бардыгы"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Өткөзүлгөндөр"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Үнкат"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Тез терүү"</string>
-    <string name="tab_recents" msgid="929949073851377206">"Акыркылар"</string>
+    <!-- no translation found for tab_history (2563144697322434940) -->
+    <skip />
     <string name="tab_all_contacts" msgid="1410922767166533690">"Байланыштар"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Үн почтасы"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Тандамалдардан өчүрүлдү"</string>
@@ -173,7 +179,6 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Байланышка кошуу"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS жөнөтүү"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Видео түрүндө чалуу"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Чалуулардын толук таржымалын көрүү"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> жаңы өткөзүлгөн чалуу"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Азырынча тез териле турган номерлер жок"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Сүйүктүү номер кошуу"</string>

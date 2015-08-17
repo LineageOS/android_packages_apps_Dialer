@@ -20,19 +20,14 @@
     <string name="applicationLabel" msgid="7762561155467201526">"Гар утас"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Утас"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Утас"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"Дуудлагын түүх"</string>
-    <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> руу залгах"</string>
+    <string name="callHistoryIconLabel" msgid="3734413397291301223">"Дуудлагын түүх"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Тохиромжгүй дугаарыг мэдээлэх"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Тоог түр санах ойд хуулах"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Хөрвүүлэлтийг түр санах ойд хуулах"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Дуудлага хийхийн өмнө дугаарыг засах"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Харилцагчийн хаягт нэмэх"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Дуудлагын түүхээс устгах"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Дуудлагын түүхийг устгах уу?"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Дуут шууданг устгах"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Дуут шууданг хуваалцах"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"Таны дуудлагын жагсаалт хоосон байна"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Залгах"</string>
+    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Дуудлага хийхийн өмнө дугаарыг засах"</string>
+    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Дуудлагын түүхээс устгах"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Дуудлагын түүхийг устгах уу?"</string>
+    <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Дуут шууданг устгах"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Дуудлагын түүхийг устгах уу?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Энэ нь таны хийсэн бүх дуудлагыг түүхээс устгана."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Дуудлагын түүхийг устгаж байна..."</string>
@@ -129,15 +124,17 @@
     <string name="call_not_available" msgid="8941576511946492225">"Утас аппликешныг идэвхгүйжүүлсэн тул утасны дуудлага хийх боломжгүй."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Энэхүү төхөөрөмж дээр тухайн үйлдлийг гүйцэтгэх апликейшн байхгүй байна."</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Харилцагч хайх"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"Танд аваагүй дуудлага байхгүй байна."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Таны дуут шуудангийн хайрцаг хоосон байна."</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"Таны дуудлагын түүх хоосон байна"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"Дуудлага хийх"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Танд аваагүй дуудлага байхгүй байна."</string>
+    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Таны дуут шуудангийн хайрцаг хоосон байна."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Зөвхөн дуртайнуудыг харуулах"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"Түүх"</string>
+    <string name="call_log_activity_title" msgid="7949633151371183580">"Дуудлагын түүх"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Бүгд"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Аваагүй"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Дуут шуудан"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Түргэн залгалт"</string>
-    <string name="tab_recents" msgid="929949073851377206">"Саяхных"</string>
+    <string name="tab_history" msgid="2563144697322434940">"Дуудлагын түүх"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Харилцагчид"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Дуут шуудан"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Дуртай жагсаалтаас хасав"</string>
@@ -147,7 +144,6 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Харилцагчийн хаягт нэмэх"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Мессеж илгээх"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Видео дуудлага хийх"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Дуудлагын түүхийг бүхэлд нь харах"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> шинэ аваагүй дуудлага"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Таны яаралтай залгах тохиргоон дээр одоогоор харилцагч байхгүй байна"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Таалагдсан хэсэгт нэмэх"</string>

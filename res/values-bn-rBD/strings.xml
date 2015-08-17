@@ -20,19 +20,14 @@
     <string name="applicationLabel" msgid="7762561155467201526">"ফোন"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ফোন"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ফোন"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"কল ইতিহাস"</string>
-    <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> কে কল করুন"</string>
+    <string name="callHistoryIconLabel" msgid="3734413397291301223">"কলের ইতিহাস"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"ভুল নম্বর প্রতিবেদন করুন"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"ক্লিপবোর্ডে নম্বর প্রতিলিপি করুন"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"ক্লিপবোর্ডে ট্রান্সক্রিপশন প্রতিলিপি করুন"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"কল করার আগে নম্বর সম্পাদনা করুন"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"একটি পরিচিতিতে যোগ করুন"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"কল ইতিহাস থেকে মুছুন"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"কল ইতিহাস সাফ করুন"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ভয়েসমেল মুছুন"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ভয়েসমেল ভাগ করুন"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"আপনার কল লগ খালি রয়েছে"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"একটি কল করুন"</string>
+    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"কল করার আগে নম্বর সম্পাদনা করুন"</string>
+    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"কল ইতিহাস থেকে মুছুন"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"কলের ইতিহাস সাফ করুন"</string>
+    <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ভয়েসমেল মুছুন"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"কল ইতিহাস সাফ করবেন?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"এটি আপনার ইতিহাস থেকে সমস্ত কল মুছে দেবে"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"কল ইতিহাস সাফ করা হচ্ছে…"</string>
@@ -129,15 +124,17 @@
     <string name="call_not_available" msgid="8941576511946492225">"কোনো ফোন কল করা যাবে না কারণ ফোন অ্যাপ্লিকেশানটি অক্ষম করা হয়েছে৷"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"এর জন্য এই ডিভাইসে কোনো অ্যাপ্লিকেশান নেই"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"পরিচিতিগুলি অনুসন্ধান করুন"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"আপনার কোনো মিসড কল নেই।"</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"আপনার ভয়েসমেলের ইনবক্স খালি রয়েছে।"</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"আপনার কলের ইতিহাস খালি আছে"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"একটি কল করুন"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"আপনার কোনো মিসড কল নেই।"</string>
+    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"আপনার ভয়েসমেলের ইনবক্স খালি রয়েছে।"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"কেবলমাত্র পছন্দসইগুলি দেখান"</string>
-    <string name="call_log_activity_title" msgid="4612824396355272023">"ইতিহাস"</string>
+    <string name="call_log_activity_title" msgid="7949633151371183580">"কলের ইতিহাস"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"সমস্ত"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"মিসড"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ভয়েসমেল"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"দ্রুত ডায়াল"</string>
-    <string name="tab_recents" msgid="929949073851377206">"সাম্প্রতিকগুলি"</string>
+    <string name="tab_history" msgid="2563144697322434940">"কলের ইতিহাস"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"পরিচিতিগুলি"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"ভয়েস মেল"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"পছন্দসই থেকে সরানো হয়েছে"</string>
@@ -147,7 +144,6 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"একটি পরিচিতিতে যোগ করুন"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS পাঠান"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ভিডিও কল করুন"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"সম্পূর্ণ কল ইতিহাস দেখুন"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>টি নতুন মিসড কল"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"আপনার স্পীড ডায়ালে এখনও পর্যন্ত কেউ নেই"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"একটি পছন্দসই যোগ করুন"</string>
