@@ -19,12 +19,17 @@ res_dirs := res \
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
-    frameworks/support/v7/cardview/res frameworks/support/v7/recyclerview/res
+    frameworks/support/v7/appcompat/res \
+    frameworks/support/v7/cardview/res \
+    frameworks/support/v7/recyclerview/res \
+    frameworks/support/design/res
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
+    --extra-packages android.support.v7.appcompat \
     --extra-packages android.support.v7.cardview \
     --extra-packages android.support.v7.recyclerview \
+    --extra-packages android.support.design \
     --extra-packages com.android.incallui \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common
@@ -34,8 +39,10 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
     android-support-v13 \
     android-support-v4 \
+    android-support-v7-appcompat \
     android-support-v7-cardview \
     android-support-v7-recyclerview \
+    android-support-design \
     com.android.services.telephony.common \
     com.android.vcard \
     guava \

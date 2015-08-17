@@ -16,7 +16,6 @@
 
 package com.android.dialer;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
@@ -32,6 +31,7 @@ import android.os.Trace;
 import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
 import android.text.Editable;
@@ -58,7 +58,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.contacts.common.interactions.TouchPointManager;
@@ -389,7 +388,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         getWindow().setBackgroundDrawable(null);
 
         Trace.beginSection(TAG + " setup Views");
-        final ActionBar actionBar = getActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setCustomView(R.layout.search_edittext);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(null);
@@ -851,7 +850,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * Sets the hint text for the contacts search box
      */
     private void setSearchBoxHint() {
-        SearchEditTextLayout searchEditTextLayout = (SearchEditTextLayout) getActionBar()
+        SearchEditTextLayout searchEditTextLayout = (SearchEditTextLayout) getSupportActionBar()
                 .getCustomView().findViewById(R.id.search_view_container);
         ((TextView) searchEditTextLayout.findViewById(R.id.search_box_start_search))
                 .setHint(getSearchBoxHint());
@@ -1342,12 +1341,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public int getActionBarHideOffset() {
-        return getActionBar().getHideOffset();
+        return getSupportActionBar().getHideOffset();
     }
 
     @Override
     public void setActionBarHideOffset(int offset) {
-        getActionBar().setHideOffset(offset);
+        getSupportActionBar().setHideOffset(offset);
     }
 
     @Override

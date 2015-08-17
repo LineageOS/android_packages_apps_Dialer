@@ -15,15 +15,21 @@
   ~ limitations under the License
   -->
 <resources>
-    <style name="DialtactsTheme"
-           parent="android:Theme.Material.Light">
+    <style name="DialtactsTheme" parent="Theme.AppCompat.Light">
         <item name="android:textColorPrimary">@color/dialtacts_primary_text_color</item>
         <item name="android:textColorSecondary">@color/dialtacts_secondary_text_color</item>
+
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="android:windowActionModeOverlay">true</item>
+        <item name="windowActionModeOverlay">true</item>
         <item name="android:actionBarStyle">@style/DialtactsActionBarStyle</item>
+        <item name="actionBarStyle">@style/DialtactsActionBarStyle</item>
         <!-- Style for the overflow button in the actionbar. -->
         <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
+        <item name="actionOverflowButtonStyle">@style/DialtactsActionBarOverflow</item>
+
         <!--  Drawable for the back button -->
         <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -96,13 +102,19 @@
     </style>
 
     <style name="DialtactsThemeWithoutActionBarOverlay" parent="DialtactsTheme">
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
         <item name="android:windowActionBarOverlay">false</item>
+        <item name="windowActionBarOverlay">false</item>
         <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
+        <item name="actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
     <!-- Hide the actionbar title during the activity preview -->
     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
         <item name="android:actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
+        <item name="actionBarStyle">@style/DialtactsActionBarWithoutTitleStyle</item>
+
         <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
         <item name="android:fastScrollTrackDrawable">@null</item>
     </style>
@@ -121,23 +133,36 @@
         <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
-    <style name="DialtactsActionBarStyle" parent="android:Widget.Material.ActionBar">
+    <style name="DialtactsActionBarStyle"
+           parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
         <item name="android:background">@color/actionbar_background_color</item>
+        <item name="background">@color/actionbar_background_color</item>
         <item name="android:titleTextStyle">@style/DialtactsActionBarTitleText</item>
+        <item name="titleTextStyle">@style/DialtactsActionBarTitleText</item>
         <item name="android:height">@dimen/action_bar_height</item>
+        <item name="height">@dimen/action_bar_height</item>
         <item name="android:elevation">@dimen/action_bar_elevation</item>
+        <item name="elevation">@dimen/action_bar_elevation</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
+        <item name="icon">@android:color/transparent</item>
         <!-- Shift the title text to the right -->
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+        <item name="contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
     <style name="DialtactsActionBarWithoutTitleStyle" parent="DialtactsActionBarStyle">
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
         <item name="android:displayOptions"></item>
+        <item name="displayOptions"></item>
         <item name="android:height">@dimen/action_bar_height_large</item>
+        <item name="height">@dimen/action_bar_height_large</item>
         <!-- Override ActionBar title offset to keep search box aligned left -->
         <item name="android:contentInsetStart">0dp</item>
+        <item name="contentInsetStart">0dp</item>
         <item name="android:contentInsetEnd">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
     </style>
 
     <!-- Text in the action bar at the top of the screen -->
