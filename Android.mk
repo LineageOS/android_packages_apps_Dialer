@@ -34,7 +34,6 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common
 
-LOCAL_JAVA_LIBRARIES := telephony-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
     android-support-v13 \
@@ -43,7 +42,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v7-cardview \
     android-support-v7-recyclerview \
     android-support-design \
-    com.android.services.telephony.common \
     com.android.vcard \
     guava \
     libphonenumber
