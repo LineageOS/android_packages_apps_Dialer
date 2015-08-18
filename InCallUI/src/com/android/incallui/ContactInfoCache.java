@@ -34,9 +34,9 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialer.util.MoreStrings;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ObjectFactory;
-import com.android.services.telephony.common.MoreStrings;
 
 import org.json.JSONException;
 import org.json.JSONObject;
