@@ -88,6 +88,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     };
 
+    private static final String IS_DIALPAD_SHOWING_KEY = "is_dialpad_showing";
+
     /**
      * The duration of time (in milliseconds) a call state label should remain visible before
      * resetting to its previous value.
@@ -189,6 +191,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 R.dimen.end_call_floating_action_button_diameter);
         mFabSmallDiameter = getResources().getDimensionPixelOffset(
                 R.dimen.end_call_floating_action_button_small_diameter);
+
+        if (savedInstanceState != null) {
+            mIsDialpadShowing = savedInstanceState.getBoolean(IS_DIALPAD_SHOWING_KEY, false);
+        }
     }
 
     @Override
@@ -198,6 +204,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         final CallList calls = CallList.getInstance();
         final Call call = calls.getFirstCall();
         getPresenter().init(getActivity(), call);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(IS_DIALPAD_SHOWING_KEY, mIsDialpadShowing);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
