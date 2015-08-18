@@ -109,6 +109,9 @@ public class CallLogAdapter extends GroupingListAdapter
     // Tracks the rowId of the currently expanded list item, so the position can be updated if there
     // are any changes to the call log entries, such as additions or removals.
     private long mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
+    private int mHiddenPosition = RecyclerView.NO_POSITION;
+    private Uri mHiddenItemUri = null;
+    private boolean mPendingHide = false;
 
     /**
      *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
@@ -399,7 +402,15 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     }
 
-    public void pauseCache() {
+    public void onPause() {
+        pauseCache();
+        if (mHiddenItemUri != null) {
+            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mHiddenItemUri, null);
+        }
+    }
+
+    @VisibleForTesting
+    /* package */ void pauseCache() {
         mContactInfoCache.stop();
         mTelecomCallLogCache.reset();
     }
@@ -595,7 +606,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
     @Override
     public int getItemCount() {
-        return super.getItemCount() + (mShowVoicemailPromoCard ? 1 : 0);
+        return super.getItemCount() + (mShowVoicemailPromoCard ? 1 : 0)
+                - (mHiddenPosition != RecyclerView.NO_POSITION ? 1 : 0);
     }
 
     @Override
@@ -615,17 +627,79 @@ public class CallLogAdapter extends GroupingListAdapter
      */
     @Override
     public Object getItem(int position) {
-        return super.getItem(position - (mShowVoicemailPromoCard ? 1 : 0));
+        return super.getItem(position - (mShowVoicemailPromoCard ? 1 : 0)
+                + ((mHiddenPosition != RecyclerView.NO_POSITION && position >= mHiddenPosition)
+                        ? 1 : 0));
     }
 
     protected boolean isCallLogActivity() {
         return mIsCallLogActivity;
     }
 
+    /**
+     * In order to implement the "undo" function, when a voicemail is "deleted" i.e. when the user
+     * clicks the delete button, the deleted item is temporarily hidden from the list. If a user
+     * clicks delete on a second item before the first item's undo option has expired, the first
+     * item is immediately deleted so that only one item can be "undoed" at a time.
+     */
     @Override
     public void onVoicemailDeleted(Uri uri) {
+        if (mHiddenItemUri == null) {
+            // Immediately hide the currently expanded card.
+            mHiddenPosition = mCurrentlyExpandedPosition;
+            notifyDataSetChanged();
+        } else {
+            // This means that there was a previous item that was hidden in the UI but not
+            // yet deleted from the database (call it a "pending delete"). Delete this previous item
+            // now since it is only possible to do one "undo" at a time.
+            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mHiddenItemUri, null);
+
+            // Set pending hide action so that the current item is hidden only after the previous
+            // item is permanently deleted.
+            mPendingHide = true;
+        }
+
+        collapseExpandedCard();
+
+        // Save the new hidden item uri in case it needs to be deleted from the database when
+        // a user attempts to delete another item.
+        mHiddenItemUri = uri;
+    }
+
+    private void collapseExpandedCard() {
         mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
         mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+    }
+
+    /**
+     * When the user clicks "undo", the hidden item is unhidden.
+     */
+    @Override
+    public void onVoicemailDeleteUndo() {
+        mHiddenPosition = RecyclerView.NO_POSITION;
+        mHiddenItemUri = null;
+
+        mPendingHide = false;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * This callback signifies that a database deletion has completed. This means that if there is
+     * an item pending deletion, it will be hidden because the previous item that was in "undo" mode
+     * has been removed from the database. Otherwise it simply resets the hidden state because there
+     * are no pending deletes and thus no hidden items.
+     */
+    @Override
+    public void onVoicemailDeletedInDatabase() {
+        if (mPendingHide) {
+            mHiddenPosition = mCurrentlyExpandedPosition;
+            mPendingHide = false;
+        } else {
+            // There should no longer be any hidden item because it has been deleted from the
+            // database.
+            mHiddenPosition = RecyclerView.NO_POSITION;
+            mHiddenItemUri = null;
+        }
     }
 
     /**
@@ -640,8 +714,16 @@ public class CallLogAdapter extends GroupingListAdapter
         int startingPosition = cursor.getPosition();
         int dayGroup = CallLogGroupBuilder.DAY_GROUP_NONE;
         if (cursor.moveToPrevious()) {
-            long previousRowId = cursor.getLong(CallLogQuery.ID);
-            dayGroup = getDayGroupForCall(previousRowId);
+            // If the previous entry is hidden (deleted in the UI but not in the database), skip it
+            // and check the card above it. A list with the voicemail promo card at the top will be
+            // 1-indexed because the 0th index is the promo card iteself.
+            int previousViewPosition = mShowVoicemailPromoCard ? startingPosition :
+                startingPosition - 1;
+            if (previousViewPosition != mHiddenPosition ||
+                    (previousViewPosition == mHiddenPosition && cursor.moveToPrevious())) {
+                long previousRowId = cursor.getLong(CallLogQuery.ID);
+                dayGroup = getDayGroupForCall(previousRowId);
+            }
         }
         cursor.moveToPosition(startingPosition);
         return dayGroup;

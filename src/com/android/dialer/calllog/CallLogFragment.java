@@ -347,7 +347,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.onPause();
         }
-        mAdapter.pauseCache();
+        mAdapter.onPause();
         super.onPause();
     }
 
@@ -360,7 +360,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     @Override
     public void onDestroy() {
-        mAdapter.pauseCache();
         mAdapter.changeCursor(null);
 
         if (mVoicemailPlaybackPresenter != null) {

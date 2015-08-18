@@ -64,6 +64,12 @@
     <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
     <string name="call_log_trash_voicemail">Delete voicemail</string>
 
+    <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=20] -->
+    <string name="snackbar_voicemail_deleted">Voicemail deleted</string>
+
+    <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
+    <string name="snackbar_voicemail_deleted_undo">UNDO</string>
+
     <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
     <string name="clearCallLogConfirmation_title">Clear call history?</string>
 
