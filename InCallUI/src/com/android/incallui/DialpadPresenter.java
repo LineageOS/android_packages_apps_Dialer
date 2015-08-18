@@ -60,7 +60,7 @@ public class DialpadPresenter extends Presenter<DialpadPresenter.DialpadUi>
 
             // Append this key to the "digits" widget.
             getUi().appendDigitsToField(c);
-            // Plays the tone through Telecomm.
+            // Plays the tone through Telecom.
             TelecomAdapter.getInstance().playDtmfTone(mCall.getId(), c);
         } else {
             Log.d(this, "ignoring dtmf request for '" + c + "'");

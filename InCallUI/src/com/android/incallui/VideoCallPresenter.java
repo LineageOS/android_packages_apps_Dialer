@@ -597,7 +597,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Checks for a change to the video call and changes it if required.
      */
     private void checkForVideoCallChange(Call call) {
-        final VideoCall videoCall = call.getTelecommCall().getVideoCall();
+        final VideoCall videoCall = call.getTelecomCall().getVideoCall();
         Log.d(this, "checkForVideoCallChange: videoCall=" + videoCall + " mVideoCall="
                 + mVideoCall);
         if (!Objects.equals(videoCall, mVideoCall)) {
@@ -612,7 +612,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param videoCall The new video call.
      */
     private void changeVideoCall(Call call) {
-        final VideoCall videoCall = call.getTelecommCall().getVideoCall();
+        final VideoCall videoCall = call.getTelecomCall().getVideoCall();
         Log.d(this, "changeVideoCall to videoCall=" + videoCall + " mVideoCall=" + mVideoCall);
         // Null out the surfaces on the previous video call.
         if (mVideoCall != null) {

@@ -53,13 +53,13 @@ final class TelecomAdapter implements InCallServiceListener {
         mInCallService = null;
     }
 
-    private android.telecom.Call getTelecommCallById(String callId) {
+    private android.telecom.Call getTelecomCallById(String callId) {
         Call call = CallList.getInstance().getCallById(callId);
-        return call == null ? null : call.getTelecommCall();
+        return call == null ? null : call.getTelecomCall();
     }
 
     void answerCall(String callId, int videoState) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.answer(videoState);
         } else {
@@ -68,7 +68,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void rejectCall(String callId, boolean rejectWithMessage, String message) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.reject(rejectWithMessage, message);
         } else {
@@ -77,7 +77,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void disconnectCall(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.disconnect();
         } else {
@@ -86,7 +86,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void holdCall(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.hold();
         } else {
@@ -95,7 +95,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void unholdCall(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.unhold();
         } else {
@@ -120,7 +120,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void separateCall(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.splitFromConference();
         } else {
@@ -129,7 +129,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void merge(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             List<android.telecom.Call> conferenceable = call.getConferenceableCalls();
             if (!conferenceable.isEmpty()) {
@@ -146,7 +146,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void swap(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             if (call.getDetails().can(
                     android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE)) {
@@ -179,7 +179,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void playDtmfTone(String callId, char digit) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.playDtmfTone(digit);
         } else {
@@ -188,7 +188,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void stopDtmfTone(String callId) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.stopDtmfTone();
         } else {
@@ -197,7 +197,7 @@ final class TelecomAdapter implements InCallServiceListener {
     }
 
     void postDialContinue(String callId, boolean proceed) {
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.postDialContinue(proceed);
         } else {
@@ -211,7 +211,7 @@ final class TelecomAdapter implements InCallServiceListener {
             // TODO: Do we really want to send null accountHandle?
         }
 
-        android.telecom.Call call = getTelecommCallById(callId);
+        android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
             call.phoneAccountSelected(accountHandle, setDefault);
         } else {

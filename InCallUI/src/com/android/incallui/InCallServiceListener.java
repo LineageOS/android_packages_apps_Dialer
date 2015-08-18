@@ -19,7 +19,7 @@ package com.android.incallui;
 import android.telecom.InCallService;
 
 /**
- * Interface implemented by In-Call components that maintain a reference to the Telecomm API
+ * Interface implemented by In-Call components that maintain a reference to the Telecom API
  * {@code InCallService} object. Clarifies the expectations associated with the relevant method
  * calls.
  */

@@ -24,9 +24,9 @@ import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
 /**
- * Used to receive updates about calls from the Telecomm component.  This service is bound to
- * Telecomm while there exist calls which potentially require UI. This includes ringing (incoming),
- * dialing (outgoing), and active calls. When the last call is disconnected, Telecomm will unbind to
+ * Used to receive updates about calls from the Telecom component.  This service is bound to
+ * Telecom while there exist calls which potentially require UI. This includes ringing (incoming),
+ * dialing (outgoing), and active calls. When the last call is disconnected, Telecom will unbind to
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
 public class InCallServiceImpl extends InCallService {

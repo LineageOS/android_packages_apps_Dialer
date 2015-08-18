@@ -122,7 +122,7 @@ public class InCallPresenter implements CallList.Listener,
         @Override
         public void onPostDialWait(android.telecom.Call telecomCall,
                 String remainingPostDialSequence) {
-            final Call call = mCallList.getCallByTelecommCall(telecomCall);
+            final Call call = mCallList.getCallByTelecomCall(telecomCall);
             if (call == null) {
                 Log.w(this, "Call not found in call list: " + telecomCall);
                 return;
@@ -133,7 +133,7 @@ public class InCallPresenter implements CallList.Listener,
         @Override
         public void onDetailsChanged(android.telecom.Call telecomCall,
                 android.telecom.Call.Details details) {
-            final Call call = mCallList.getCallByTelecommCall(telecomCall);
+            final Call call = mCallList.getCallByTelecomCall(telecomCall);
             if (call == null) {
                 Log.w(this, "Call not found in call list: " + telecomCall);
                 return;
@@ -1068,7 +1068,7 @@ public class InCallPresenter implements CallList.Listener,
         // re-initiate the start-up animation, so we do not need to do anything here.
         //
         // It is also possible to go into an intermediate state where the call has been initiated
-        // but Telecomm has not yet returned with the details of the call (handle, gateway, etc.).
+        // but Telecom has not yet returned with the details of the call (handle, gateway, etc.).
         // This pending outgoing state can also launch the call screen.
         //
         // This is different from the incoming call sequence because we do not need to shock the
@@ -1163,7 +1163,7 @@ public class InCallPresenter implements CallList.Listener,
      * @param call
      */
     private void setDisconnectCauseForMissingAccounts(Call call) {
-        android.telecom.Call telecomCall = call.getTelecommCall();
+        android.telecom.Call telecomCall = call.getTelecomCall();
 
         Bundle extras = telecomCall.getDetails().getIntentExtras();
         // Initialize the extras bundle to avoid NPE
@@ -1576,7 +1576,7 @@ public class InCallPresenter implements CallList.Listener,
         WAITING_FOR_ACCOUNT,
 
         // UI is starting up but no call has been initiated yet.
-        // The UI is waiting for Telecomm to respond.
+        // The UI is waiting for Telecom to respond.
         PENDING_OUTGOING,
 
         // User is dialing out
