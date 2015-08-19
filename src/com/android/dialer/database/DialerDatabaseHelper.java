@@ -38,6 +38,7 @@ import android.util.Log;
 
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.StopWatch;
+import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
@@ -60,6 +61,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class DialerDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DialerDatabaseHelper";
     private static final boolean DEBUG = false;
+    private boolean mIsTestInstance = false;
 
     private static DialerDatabaseHelper sSingleton = null;
 
@@ -73,7 +75,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KitKat
      * </pre>
      */
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -86,6 +88,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     private static final int MAX_ENTRIES = 20;
 
     public interface Tables {
+        /** Saves a list of numbers to be blocked.*/
+        static final String FILTERED_NUMBER_TABLE = "filtered_numbers_table";
         /** Saves the necessary smart dial information of all contacts. */
         static final String SMARTDIAL_TABLE = "smartdial_table";
         /** Saves all possible prefixes to refer to a contacts.*/
@@ -334,7 +338,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      */
     @VisibleForTesting
     static DialerDatabaseHelper getNewInstanceForTest(Context context) {
-        return new DialerDatabaseHelper(context, null);
+        return new DialerDatabaseHelper(context, null, true);
+    }
+
+    protected DialerDatabaseHelper(Context context, String databaseName, boolean isTestInstance) {
+        this(context, databaseName, DATABASE_VERSION);
+        mIsTestInstance = isTestInstance;
     }
 
     protected DialerDatabaseHelper(Context context, String databaseName) {
@@ -358,36 +367,51 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
     private void setupTables(SQLiteDatabase db) {
         dropTables(db);
-        db.execSQL("CREATE TABLE " + Tables.SMARTDIAL_TABLE + " (" +
-                SmartDialDbColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                SmartDialDbColumns.DATA_ID + " INTEGER, " +
-                SmartDialDbColumns.NUMBER + " TEXT," +
-                SmartDialDbColumns.CONTACT_ID + " INTEGER," +
-                SmartDialDbColumns.LOOKUP_KEY + " TEXT," +
-                SmartDialDbColumns.DISPLAY_NAME_PRIMARY + " TEXT, " +
-                SmartDialDbColumns.PHOTO_ID + " INTEGER, " +
-                SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME + " LONG, " +
-                SmartDialDbColumns.LAST_TIME_USED + " LONG, " +
-                SmartDialDbColumns.TIMES_USED + " INTEGER, " +
-                SmartDialDbColumns.STARRED + " INTEGER, " +
-                SmartDialDbColumns.IS_SUPER_PRIMARY + " INTEGER, " +
-                SmartDialDbColumns.IN_VISIBLE_GROUP + " INTEGER, " +
-                SmartDialDbColumns.IS_PRIMARY + " INTEGER" +
-        ");");
+        db.execSQL("CREATE TABLE " + Tables.SMARTDIAL_TABLE + " ("
+                + SmartDialDbColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + SmartDialDbColumns.DATA_ID + " INTEGER, "
+                + SmartDialDbColumns.NUMBER + " TEXT,"
+                + SmartDialDbColumns.CONTACT_ID + " INTEGER,"
+                + SmartDialDbColumns.LOOKUP_KEY + " TEXT,"
+                + SmartDialDbColumns.DISPLAY_NAME_PRIMARY + " TEXT, "
+                + SmartDialDbColumns.PHOTO_ID + " INTEGER, "
+                + SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME + " LONG, "
+                + SmartDialDbColumns.LAST_TIME_USED + " LONG, "
+                + SmartDialDbColumns.TIMES_USED + " INTEGER, "
+                + SmartDialDbColumns.STARRED + " INTEGER, "
+                + SmartDialDbColumns.IS_SUPER_PRIMARY + " INTEGER, "
+                + SmartDialDbColumns.IN_VISIBLE_GROUP + " INTEGER, "
+                + SmartDialDbColumns.IS_PRIMARY + " INTEGER"
+                + ");");
 
-        db.execSQL("CREATE TABLE " + Tables.PREFIX_TABLE + " (" +
-                PrefixColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PrefixColumns.PREFIX + " TEXT COLLATE NOCASE, " +
-                PrefixColumns.CONTACT_ID + " INTEGER" +
-                ");");
+        db.execSQL("CREATE TABLE " + Tables.PREFIX_TABLE + " ("
+                + PrefixColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + PrefixColumns.PREFIX + " TEXT COLLATE NOCASE, "
+                + PrefixColumns.CONTACT_ID + " INTEGER"
+                + ");");
 
-        db.execSQL("CREATE TABLE " + Tables.PROPERTIES + " (" +
-                PropertiesColumns.PROPERTY_KEY + " TEXT PRIMARY KEY, " +
-                PropertiesColumns.PROPERTY_VALUE + " TEXT " +
-                ");");
+        db.execSQL("CREATE TABLE " + Tables.PROPERTIES + " ("
+                + PropertiesColumns.PROPERTY_KEY + " TEXT PRIMARY KEY, "
+                + PropertiesColumns.PROPERTY_VALUE + " TEXT "
+                + ");");
 
+        // This will need to also be updated in setupTablesForFilteredNumberTest and onUpgrade.
+        // Hardcoded so we know on glance what columns are updated in setupTables,
+        // and to be able to guarantee the state of the DB at each upgrade step.
+        db.execSQL("CREATE TABLE " + Tables.FILTERED_NUMBER_TABLE + " ("
+                + FilteredNumberColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + FilteredNumberColumns.NORMALIZED_NUMBER + " TEXT,"
+                + FilteredNumberColumns.COUNTRY_ISO + " TEXT,"
+                + FilteredNumberColumns.TIMES_FILTERED + " INTEGER,"
+                + FilteredNumberColumns.LAST_TIME_FILTERED + " LONG,"
+                + FilteredNumberColumns.CREATION_TIME + " LONG,"
+                + FilteredNumberColumns.TYPE + " INTEGER,"
+                + FilteredNumberColumns.SOURCE + " INTEGER"
+                + ");");
         setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
-        resetSmartDialLastUpdatedTime();
+        if (!mIsTestInstance) {
+            resetSmartDialLastUpdatedTime();
+        }
     }
 
     public void dropTables(SQLiteDatabase db) {
@@ -412,6 +436,20 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 4) {
             setupTables(db);
             return;
+        }
+
+        if (oldVersion < 5) {
+            db.execSQL("CREATE TABLE " + Tables.FILTERED_NUMBER_TABLE + " ("
+                    + FilteredNumberColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + FilteredNumberColumns.NORMALIZED_NUMBER + " TEXT,"
+                    + FilteredNumberColumns.COUNTRY_ISO + " TEXT,"
+                    + FilteredNumberColumns.TIMES_FILTERED + " INTEGER,"
+                    + FilteredNumberColumns.LAST_TIME_FILTERED + " LONG,"
+                    + FilteredNumberColumns.CREATION_TIME + " LONG,"
+                    + FilteredNumberColumns.TYPE + " INTEGER,"
+                    + FilteredNumberColumns.SOURCE + " INTEGER"
+                    + ");");
+            oldVersion = 5;
         }
 
         if (oldVersion != DATABASE_VERSION) {

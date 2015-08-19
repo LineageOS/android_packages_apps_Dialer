@@ -305,5 +305,12 @@
                 <action android:name="android.telecom.InCallService"/>
             </intent-filter>
         </service>
+
+        <provider
+            android:name=".database.FilteredNumberProvider"
+            android:authorities="com.android.dialer"
+            android:exported="false"
+            android:multiprocess="false"
+            />
     </application>
 </manifest>
