@@ -20,19 +20,14 @@
     <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
-    <!-- no translation found for callHistoryIconLabel (3734413397291301223) -->
-    <skip />
+    <string name="callHistoryIconLabel" msgid="3734413397291301223">"Istoricul apelurilor"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Raportați numărul ca incorect"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Copiați numărul în clipboard"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Copiați transcrierea în clipboard"</string>
-    <!-- no translation found for call_log_edit_number_before_call (812234391186201782) -->
-    <skip />
-    <!-- no translation found for call_log_remove_from_call_log (4538253384399338463) -->
-    <skip />
-    <!-- no translation found for call_log_delete_all (4677609108288680411) -->
-    <skip />
-    <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
-    <skip />
+    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Modificați numărul înainte de apelare"</string>
+    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Ștergeți din istoricul apelurilor"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Ștergeți istoricul apelurilor"</string>
+    <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ștergeți mesajul vocal"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Ștergeți istoricul apelurilor?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Astfel vor fi șterse toate apelurile din istoric"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Se șterge istoricul apelurilor…"</string>
@@ -130,23 +125,17 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nu se poate efectua un apel telefonic, deoarece aplicația Telefon a fost dezactivată."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Pe dispozitiv nu există nicio aplicație pentru această acțiune"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Căutați persoane de contact"</string>
-    <!-- no translation found for call_log_all_empty (8357417710416340920) -->
-    <skip />
-    <!-- no translation found for call_log_all_empty_action (9093210119068366147) -->
-    <skip />
-    <!-- no translation found for call_log_missed_empty (3927274175205520135) -->
-    <skip />
-    <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
-    <skip />
+    <string name="call_log_all_empty" msgid="8357417710416340920">"Istoricul apelurilor este gol"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"Apelați"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Nu aveți niciun apel nepreluat."</string>
+    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Nu există mesaje primite în mesageria vocală."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Afișați numai preferate"</string>
-    <!-- no translation found for call_log_activity_title (7949633151371183580) -->
-    <skip />
+    <string name="call_log_activity_title" msgid="7949633151371183580">"Istoricul apelurilor"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Toate"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nepreluate"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mesagerie vocală"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Apelare rapidă"</string>
-    <!-- no translation found for tab_history (2563144697322434940) -->
-    <skip />
+    <string name="tab_history" msgid="2563144697322434940">"Istoricul apelurilor"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Agendă"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Mesagerie vocală"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"S-a eliminat din preferate"</string>
