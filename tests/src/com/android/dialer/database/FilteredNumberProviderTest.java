@@ -32,7 +32,8 @@ public class FilteredNumberProviderTest extends
     private static final String TIME_ZONE_AMERICA_LOS_ANGELES = "America/Los_Angeles";
     private static final String DEFAULT_TIMEZONE = TIME_ZONE_AMERICA_LOS_ANGELES;
     private static final String DEFAULT_COUNTRY_ISO = "US";
-    private static final String TEST_NUMBER = "+1234567890";
+    private static final String TEST_NUMBER = "234567890";
+    private static final String TEST_NORMALIZED_NUMBER = "+1234567890";
     private static final long TEST_TIME = 1439936706;
 
     public FilteredNumberProviderTest () {
@@ -141,7 +142,7 @@ public class FilteredNumberProviderTest extends
         v.put(FilteredNumberContract.FilteredNumberColumns.LAST_TIME_FILTERED, TEST_TIME);
         int rows = mResolver.update(FilteredNumberContract.FilteredNumber.CONTENT_URI, v,
                 FilteredNumberContract.FilteredNumberColumns.NORMALIZED_NUMBER + " = ?",
-                new String[]{TEST_NUMBER});
+                new String[]{TEST_NORMALIZED_NUMBER});
         assertEquals(rows, 1);
 
         ContentValues expected = getTestValues(TEST_TIME);
@@ -186,7 +187,9 @@ public class FilteredNumberProviderTest extends
     private ContentValues getTestValues(Long timeNow) {
         ContentValues v = new ContentValues();
         v.putNull(FilteredNumberContract.FilteredNumberColumns._ID);
-        v.put(FilteredNumberContract.FilteredNumberColumns.NORMALIZED_NUMBER, TEST_NUMBER);
+        v.put(FilteredNumberContract.FilteredNumberColumns.NORMALIZED_NUMBER,
+                TEST_NORMALIZED_NUMBER);
+        v.put(FilteredNumberContract.FilteredNumberColumns.NUMBER, TEST_NUMBER);
         v.put(FilteredNumberContract.FilteredNumberColumns.COUNTRY_ISO, DEFAULT_COUNTRY_ISO);
         v.put(FilteredNumberContract.FilteredNumberColumns.TIMES_FILTERED, 0);
         v.putNull(FilteredNumberContract.FilteredNumberColumns.LAST_TIME_FILTERED);

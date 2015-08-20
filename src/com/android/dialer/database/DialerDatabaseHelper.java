@@ -75,7 +75,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KitKat
      * </pre>
      */
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -400,7 +400,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         // and to be able to guarantee the state of the DB at each upgrade step.
         db.execSQL("CREATE TABLE " + Tables.FILTERED_NUMBER_TABLE + " ("
                 + FilteredNumberColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + FilteredNumberColumns.NORMALIZED_NUMBER + " TEXT,"
+                + FilteredNumberColumns.NORMALIZED_NUMBER + " TEXT UNIQUE,"
+                + FilteredNumberColumns.NUMBER + " TEXT,"
                 + FilteredNumberColumns.COUNTRY_ISO + " TEXT,"
                 + FilteredNumberColumns.TIMES_FILTERED + " INTEGER,"
                 + FilteredNumberColumns.LAST_TIME_FILTERED + " LONG,"
@@ -418,6 +419,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tables.PREFIX_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.PROPERTIES);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.FILTERED_NUMBER_TABLE);
     }
 
     @Override
@@ -438,10 +440,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             return;
         }
 
-        if (oldVersion < 5) {
+        if (oldVersion < 6) {
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.FILTERED_NUMBER_TABLE);
             db.execSQL("CREATE TABLE " + Tables.FILTERED_NUMBER_TABLE + " ("
                     + FilteredNumberColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + FilteredNumberColumns.NORMALIZED_NUMBER + " TEXT,"
+                    + FilteredNumberColumns.NORMALIZED_NUMBER + " TEXT UNIQUE,"
+                    + FilteredNumberColumns.NUMBER + " TEXT,"
                     + FilteredNumberColumns.COUNTRY_ISO + " TEXT,"
                     + FilteredNumberColumns.TIMES_FILTERED + " INTEGER,"
                     + FilteredNumberColumns.LAST_TIME_FILTERED + " LONG,"
@@ -449,7 +453,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                     + FilteredNumberColumns.TYPE + " INTEGER,"
                     + FilteredNumberColumns.SOURCE + " INTEGER"
                     + ");");
-            oldVersion = 5;
+            oldVersion = 6;
         }
 
         if (oldVersion != DATABASE_VERSION) {

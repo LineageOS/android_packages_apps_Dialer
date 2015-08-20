@@ -298,7 +298,7 @@
 
         <provider
             android:name=".database.FilteredNumberProvider"
-            android:authorities="com.android.dialer"
+            android:authorities="com.android.dialer.database.filterednumberprovider"
             android:exported="false"
             android:multiprocess="false"
             />

@@ -16,8 +16,15 @@
 
 package com.android.dialer.database;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.telephony.PhoneNumberUtils;
+
+import com.android.dialerbind.ObjectFactory;
 
 /**
  * <p>
@@ -29,7 +36,7 @@ import android.provider.BaseColumns;
 public final class FilteredNumberContract {
 
     /** The authority for the filtered numbers provider */
-    public static final String AUTHORITY = "com.android.dialer";
+    public static final String AUTHORITY = ObjectFactory.getFilteredNumberProviderAuthority();
 
     /** A content:// style uri to the authority for the filtered numbers provider */
     public static final Uri AUTHORITY_URI = Uri.parse("content://" + AUTHORITY);
@@ -61,6 +68,13 @@ public final class FilteredNumberContract {
          * TYPE: TEXT
          */
         static final String NORMALIZED_NUMBER = "normalized_number";
+        /**
+         * Represents the number to be filtered, for formatting and
+         * used with country iso for contact lookups.
+         *
+         * TYPE: TEXT
+         */
+        static final String NUMBER = "number";
         /**
          * The country code representing the country detected when
          * the phone number was added to the database.
@@ -111,7 +125,7 @@ public final class FilteredNumberContract {
      * <h3>Operations</h3>
      * <dl>
      * <dt><b>Insert</b></dt>
-     * <dd>Required fields: NORMALIZED_NUMBER, TYPE, SOURCE.
+     * <dd>Required fields: NUMBER, NORMALIZED_NUMBER, TYPE, SOURCE.
      * A default value will be used for the other fields if left null.</dd>
      * <dt><b>Update</b></dt>
      * <dt><b>Delete</b></dt>
@@ -144,6 +158,5 @@ public final class FilteredNumberContract {
          */
         public static final String CONTENT_ITEM_TYPE =
                 "vnd.android.cursor.item/filtered_numbers_table";
-
     }
 }
