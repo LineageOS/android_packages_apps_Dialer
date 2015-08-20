@@ -66,8 +66,8 @@
   <string name="call_stats_reset_filter">אפס טווח זמן</string>
   <string name="call_stats_sort_by_duration">מיין לפי משך שיחה</string>
   <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
-  <string name="menu_add_to_blacklist">הוסף לרשימת החסומים</string>
-  <string name="toast_added_to_blacklist">%s נוספו לרשימת המתקשרים החסומים.</string>
+  <string name="menu_add_to_blacklist">הוסף לרשימת המתקשרים החסומים</string>
+  <string name="toast_added_to_blacklist">%s נוסף לרשימת המתקשרים החסומים.</string>
   <string name="speed_dial_settings">הגדרות חיוג מהיר</string>
   <string name="speed_dial_not_set">(לא מוגדר)</string>
   <string name="speed_dial_replace">החלף</string>
