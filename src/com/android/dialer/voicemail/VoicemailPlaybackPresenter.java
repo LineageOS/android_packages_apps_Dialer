@@ -94,6 +94,8 @@ public class VoicemailPlaybackPresenter
 
     public interface OnVoicemailDeletedListener {
         void onVoicemailDeleted(Uri uri);
+        void onVoicemailDeleteUndo();
+        void onVoicemailDeletedInDatabase();
     }
 
     /** The enumeration of {@link AsyncTask} objects we use in this class. */
@@ -730,9 +732,23 @@ public class VoicemailPlaybackPresenter
     }
 
     /* package */ void onVoicemailDeleted() {
-        // Trampoline the event notification to the interested listener
+        // Trampoline the event notification to the interested listener.
         if (mOnVoicemailDeletedListener != null) {
             mOnVoicemailDeletedListener.onVoicemailDeleted(mVoicemailUri);
+        }
+    }
+
+    /* package */ void onVoicemailDeleteUndo() {
+        // Trampoline the event notification to the interested listener.
+        if (mOnVoicemailDeletedListener != null) {
+            mOnVoicemailDeletedListener.onVoicemailDeleteUndo();
+        }
+    }
+
+    /* package */ void onVoicemailDeletedInDatabase() {
+        // Trampoline the event notification to the interested listener.
+        if (mOnVoicemailDeletedListener != null) {
+            mOnVoicemailDeletedListener.onVoicemailDeletedInDatabase();
         }
     }
 

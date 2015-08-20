@@ -22,10 +22,12 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.VoicemailContract;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.android.common.io.MoreCloseables;
+import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 
@@ -58,8 +61,10 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @NotThreadSafe
 public class VoicemailPlaybackLayout extends LinearLayout
-        implements VoicemailPlaybackPresenter.PlaybackView {
+        implements VoicemailPlaybackPresenter.PlaybackView,
+        CallLogAsyncTaskUtil.CallLogAsyncTaskListener {
     private static final String TAG = VoicemailPlaybackLayout.class.getSimpleName();
+    private static final int VOICEMAIL_DELETE_DELAY_MS = 3000;
 
     /**
      * Controls the animation of the playback slider.
@@ -184,8 +189,36 @@ public class VoicemailPlaybackLayout extends LinearLayout
                 return;
             }
             mPresenter.pausePlayback();
-            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mVoicemailUri, null);
             mPresenter.onVoicemailDeleted();
+
+            final Uri deleteUri = mVoicemailUri;
+            final Runnable deleteCallback = new Runnable() {
+                @Override
+                public void run() {
+                    if (mVoicemailUri == deleteUri) {
+                        CallLogAsyncTaskUtil.deleteVoicemail(mContext, deleteUri,
+                                VoicemailPlaybackLayout.this);
+                    }
+                }
+            };
+
+            final Handler handler = new Handler();
+            // Add a little buffer time in case the user clicked "undo" at the end of the delay
+            // window.
+            handler.postDelayed(deleteCallback, VOICEMAIL_DELETE_DELAY_MS + 50);
+
+            Snackbar.make(VoicemailPlaybackLayout.this, R.string.snackbar_voicemail_deleted,
+                            Snackbar.LENGTH_LONG)
+                    .setDuration(VOICEMAIL_DELETE_DELAY_MS)
+                    .setAction(R.string.snackbar_voicemail_deleted_undo,
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    mPresenter.onVoicemailDeleteUndo();
+                                        handler.removeCallbacks(deleteCallback);
+                                }
+                            })
+                    .show();
         }
     };
 
@@ -282,7 +315,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mStateText.setText(getString(R.string.voicemail_playback_error));
     }
 
-
     public void onSpeakerphoneOn(boolean on) {
         if (mPresenter != null) {
             mPresenter.setSpeakerphoneOn(on);
@@ -356,6 +388,17 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mPlaybackSpeakerphone.setEnabled(true);
         mPlaybackSeek.setEnabled(true);
     }
+
+    @Override
+    public void onDeleteCall() {}
+
+    @Override
+    public void onDeleteVoicemail() {
+        mPresenter.onVoicemailDeletedInDatabase();
+    }
+
+    @Override
+    public void onGetCallDetails(PhoneCallDetails[] details) {}
 
     private String getString(int resId) {
         return mContext.getString(resId);
