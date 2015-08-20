@@ -366,15 +366,25 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Handles clicks on the video surfaces by toggling full screen state.
-     * Informs the {@link InCallPresenter} of the change so that it can inform the
-     * {@link CallCardPresenter} of the change.
+     * Handles clicks on the video surfaces by toggling full screen state if surface is
+     * SURFACE_DISPLAY. Call onPreviewSurfaceClicked of InCallZoomController if preview surface
+     * is clicked. Informs the {@link InCallPresenter} of the change for Display surface so that
+     * it can inform the {@link CallCardPresenter} of the change.
      *
      * @param surfaceId The video surface receiving the click.
      */
     public void onSurfaceClick(int surfaceId) {
-        boolean isFullscreen = InCallPresenter.getInstance().toggleFullscreenMode();
-        Log.v(this, "toggleFullScreen = " + isFullscreen);
+        switch (surfaceId) {
+            case VideoCallFragment.SURFACE_DISPLAY:
+                boolean isFullscreen = InCallPresenter.getInstance().toggleFullscreenMode();
+                Log.d(this, "toggleFullScreen = " + isFullscreen);
+                break;
+            case VideoCallFragment.SURFACE_PREVIEW:
+                InCallZoomController.getInstance().onPreviewSurfaceClicked(mVideoCall);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -723,9 +733,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             mPreviewSurfaceState = PreviewSurfaceState.CAMERA_SET;
 
             videoCall.requestCameraCapabilities();
+            InCallZoomController.getInstance().onCameraEnabled(cameraManager.getActiveCameraId());
         } else {
             mPreviewSurfaceState = PreviewSurfaceState.NONE;
             videoCall.setCamera(null);
+            InCallZoomController.getInstance().onCameraEnabled(null);
         }
     }
 
