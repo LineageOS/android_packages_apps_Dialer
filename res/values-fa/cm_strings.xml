@@ -23,7 +23,7 @@
   <string name="enable_forward_lookup_title">ارسال جستجو</string>
   <string name="enable_forward_lookup_summary">نمایش مکان‌های نزدیک هنگام جستجو در شماره‌گیر</string>
   <string name="enable_people_lookup_title">جستجوی افراد</string>
-  <string name="enable_people_lookup_summary">نمایش نتایج آنلاین افراد هنگام جستجو در شماره‌گیر</string>
+  <string name="enable_people_lookup_summary">نمایش نتایج آنلاین برای افراد هنگام جستجو در شماره‌گیر</string>
   <string name="enable_reverse_lookup_title">جستجوی برعکس</string>
   <string name="enable_reverse_lookup_summary">جستجوی اطلاعات مربوط به افراد یا مکان‌ها برای شماره‌های ناشناس در تماس‌های ورودی</string>
   <string name="forward_lookup_provider_title">ارسال ارائه‌دهنده سرویس جستجو</string>
