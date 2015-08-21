@@ -35,6 +35,10 @@ public class ObjectFactory {
         return null;
     }
 
+    public static String getFilteredNumberProviderAuthority() {
+        return "com.android.dialer.database.filterednumberprovider";
+    }
+
     /**
      * Create a new instance of the call log adapter.
      * @param context The context to use.

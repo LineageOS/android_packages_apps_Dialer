@@ -33,6 +33,7 @@ import android.util.Log;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.dialerbind.ObjectFactory;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.Arrays;
@@ -50,14 +51,6 @@ public class FilteredNumberProvider extends ContentProvider {
     private static final int FILTERED_NUMBERS_TABLE_ID = 2;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-    static {
-        sUriMatcher.addURI(FilteredNumberContract.AUTHORITY,
-                FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE,
-                FILTERED_NUMBERS_TABLE);
-        sUriMatcher.addURI(FilteredNumberContract.AUTHORITY,
-                FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE + "/#",
-                FILTERED_NUMBERS_TABLE_ID);
-    }
 
     @Override
     public boolean onCreate() {
@@ -65,6 +58,12 @@ public class FilteredNumberProvider extends ContentProvider {
         if (mDialerDatabaseHelper == null) {
             return false;
         }
+        sUriMatcher.addURI(ObjectFactory.getFilteredNumberProviderAuthority(),
+                FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE,
+                FILTERED_NUMBERS_TABLE);
+        sUriMatcher.addURI(ObjectFactory.getFilteredNumberProviderAuthority(),
+                FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE + "/#",
+                FILTERED_NUMBERS_TABLE_ID);
         return true;
     }
 
