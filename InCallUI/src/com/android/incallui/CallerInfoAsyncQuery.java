@@ -288,7 +288,7 @@ public class CallerInfoAsyncQuery {
 
                         // Use the number entered by the user for display.
                         if (!TextUtils.isEmpty(cw.number)) {
-                            mCallerInfo.phoneNumber = PhoneNumberHelper.formatNumber(cw.number,
+                            mCallerInfo.phoneNumber = PhoneNumberUtils.formatNumber(cw.number,
                                     mCallerInfo.normalizedNumber,
                                     TelephonyManagerUtils.getCurrentCountryIso(mQueryContext,
                                             Locale.getDefault()));
