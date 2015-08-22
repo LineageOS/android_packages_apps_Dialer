@@ -417,9 +417,11 @@ public class VoicemailPlaybackPresenter
             super(handler);
             mFetchResultHandler = handler;
 
-            mContext.getContentResolver().registerContentObserver(
-                    voicemailUri, false, this);
-            mFetchResultHandler.postDelayed(this, FETCH_CONTENT_TIMEOUT_MS);
+            if (mContext != null) {
+                mContext.getContentResolver().registerContentObserver(
+                        voicemailUri, false, this);
+                mFetchResultHandler.postDelayed(this, FETCH_CONTENT_TIMEOUT_MS);
+            }
         }
 
         /**
