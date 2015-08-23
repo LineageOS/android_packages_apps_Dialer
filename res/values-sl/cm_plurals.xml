@@ -16,10 +16,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_log_stats_title">آمار</string>
-  <string name="callStatsDetailTitle">جزئیات آمار تماس</string>
-  <string name="video_call">تماس ویدیویی</string>
-  <string name="video_call_settings">تنظیمات تماس ویدیویی</string>
-  <string name="description_videocall">تماس ویدیویی <xliff:g id="name">%1$s</xliff:g></string>
-  <string name="speed_dial_delete">حذف</string>
+  <plurals name="hour">
+    <item quantity="one">%d ura</item>
+    <item quantity="two">%d uri</item>
+    <item quantity="few">%d ure</item>
+    <item quantity="other">%d ur</item>
+  </plurals>
+  <plurals name="minute">
+    <item quantity="one">%d min.</item>
+    <item quantity="two">%d min.</item>
+    <item quantity="few">%d min.</item>
+    <item quantity="other">%d min.</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">%d sek.</item>
+    <item quantity="two">%d sek.</item>
+    <item quantity="few">%d sek.</item>
+    <item quantity="other">%d sek.</item>
+  </plurals>
 </resources>
