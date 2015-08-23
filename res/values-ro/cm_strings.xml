@@ -45,13 +45,13 @@
   <string name="call_stats_sort_by_count">Sortare după numărul de apeluri</string>
   <string name="menu_add_to_blacklist">Adaugă la lista neagră</string>
   <string name="toast_added_to_blacklist"><xliff:g id="number"> %s </xliff:g> adăugat la lista neagră</string>
-  <string name="menu_delete_from_blacklist">Ştergeţi din lista neagră</string>
+  <string name="menu_delete_from_blacklist">Ștergeți din lista neagră</string>
   <string name="toast_deleted_from_blacklist"><xliff:g id="number">%s</xliff:g> eliminat din lista neagră</string>
   <string name="nearby_places">Locații în apropiere</string>
   <string name="people">Oameni</string>
   <string name="start_call_playback">Redă înregistrarea</string>
   <string name="stop_call_playback">Stop</string>
-  <string name="call_playback_error_message">Nu s-a reuşit să se redea înregistrarea</string>
+  <string name="call_playback_error_message">Nu s-a reușit redarea înregistrării</string>
   <string name="calllog_search_hint">Căutare în jurnalul de apeluri</string>
   <string name="video_call">Apel video</string>
   <string name="video_call_settings">Setări apel video</string>
@@ -61,8 +61,8 @@
   <string name="speed_dial_replace">Înlocuire</string>
   <string name="speed_dial_delete">Ștergeți</string>
   <string name="speed_dial_unassigned_dialog_title">Cheie neatribuită</string>
-  <string name="speed_dial_unassigned_dialog_message">Niciun contact cu apelare rapidă nu este atribuit tastei \'<xliff:g id="number">%s</xliff:g>\'. Vreți să atribuiţi un contact acum?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">"Pentru a utiliza apelarea rapidă, în primul rând opriţi modul avion."</string>
+  <string name="speed_dial_unassigned_dialog_message">Niciun contact cu apelare rapidă nu este atribuit tastei \'<xliff:g id="number">%s</xliff:g>\'. Vreți să atribuiți un contact acum?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">"Pentru a utiliza apelarea rapidă, în primul rând opriți modul avion."</string>
   <string name="msim_ime_dialog_title">Identificatorul dispozitivului</string>
   <string name="multi_sim_slot_name">SIM <xliff:g id="index">%d</xliff:g></string>
   <string name="call_log_show_all_slots">Toate SIM-urile</string>

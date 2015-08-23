@@ -16,10 +16,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_log_stats_title">آمار</string>
-  <string name="callStatsDetailTitle">جزئیات آمار تماس</string>
-  <string name="video_call">تماس ویدیویی</string>
-  <string name="video_call_settings">تنظیمات تماس ویدیویی</string>
-  <string name="description_videocall">تماس ویدیویی <xliff:g id="name">%1$s</xliff:g></string>
-  <string name="speed_dial_delete">حذف</string>
+  <string name="call_log_stats_title">Statistikoj</string>
 </resources>
