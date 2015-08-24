@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"통화 기록에서 삭제"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"통화 기록 삭제"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"음성사서함 삭제"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"음성사서함 삭제됨"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"실행취소"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"통화 기록을 삭제하시겠습니까?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"모든 통화가 기록에서 삭제됩니다."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"통화 기록을 삭제하는 중…"</string>

@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"कल इतिहासबाट मेट्नुहोस्"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"कल इतिहास मेटाउनुहोस्"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"भ्वाइसमेल हटाउनुहोस्"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"भ्वाइस मेल मेटाइयो"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"अनडू गर्नुहोस्"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कल इतिहास हटाउने हो?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"यस कार्यले तपाईँको इतिहासबाट सबै कल मेट्नेछ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"कल इतिहास हाटउँदै..."</string>
@@ -126,7 +128,7 @@
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"सम्पर्क ठेगानाहरू खोज्नुहोस्"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"तपाईँको कल इतिहास खाली छ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"कल गर्नुहोस्"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"तपाईँको कुनै पनि कल छुटेका छैनन्।"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"तपाईँसँग कुनै पनि छुटेका कलहरू छैनन्।"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"तपाईँको भ्वाइस मेल खाली छ।"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"मनपर्ने मात्र देखाउनुहोस्"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"कल इतिहास"</string>

@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Qo‘ng‘iroqlar tarixidan o‘chirish"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Qo‘ng‘iroqlar tarixini tozalash"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ovozli xabarni o‘chirish"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Ovozli pochta o‘chirildi"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"QAYTARISH"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Qo‘ng‘iroqlar tarixi tozalansinmi?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Barcha qo‘ng‘iroqlar tarixi o‘chib ketadi."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Qo‘ng‘iroqlar tarixi tozalanmoqda…"</string>

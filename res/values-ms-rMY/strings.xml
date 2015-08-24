@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Padamkan daripada sejarah panggilan"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Kosongkan sejarah panggilan"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Padamkan mel suara"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mel suara dipadamkan"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"BUAT ASAL"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kosongkan sejarah panggilan?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tindakan ini akan memadamkan semua panggilan daripada sejarah anda"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Mengosongkan sejarah panggilan..."</string>

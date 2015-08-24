@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Usuń z historii połączeń"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Wyczyść historię połączeń"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Usuń pocztę głosową"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Poczta usunięta"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"COFNIJ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Wyczyścić historię połączeń?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Spowoduje to usunięcie wszystkich połączeń z historii."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Czyszczę historię połączeń…"</string>

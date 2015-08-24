@@ -29,6 +29,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Чалуулар таржымалынан жок кылуу"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Чалуулар таржымалын тазалоо"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Үн почтасын жок кылуу"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Үн почтасы жок кылнд"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"КАЙТАРУУ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Чалуулар таржымалы тазалансынбы?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ушуну менен бул таржымалдагы бардык чалуулар жок болот"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Чалуулар таржымалы тазаланууда…"</string>
@@ -150,7 +152,7 @@
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Байланыштардан издеп көрүңүз"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Чалуулар таржымалыңыз бош"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Чалуу"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Байкалбай калган чалуулар жок."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Алынбай калган чалуулар жок."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Үн почтаңыздын келген билдирүүлөр куржуну бош."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Тандамалдарды гана көрсөтүү"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Чалуулар таржымалы"</string>

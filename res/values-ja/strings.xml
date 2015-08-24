@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"通話履歴から削除"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"通話履歴を消去"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ボイスメールを削除"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ボイスメールの削除"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"元に戻す"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"通話履歴を消去しますか？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"消去すると、すべての通話が履歴から削除されます"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"通話履歴の消去中…"</string>
@@ -188,7 +190,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"音とバイブレーション"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"ユーザー補助機能"</string>
     <string name="ringtone_title" msgid="760362035635084653">"着信音"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"着信時もバイブレーションON"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"着信時にバイブレーションもON"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ダイヤルパッドの音"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"ダイヤルパッドの音の長さ"</string>
   <string-array name="dtmf_tone_length_entries">

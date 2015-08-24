@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Избриши из историје позива"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Обриши историју позива"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Избриши говорну поруку"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Гов. пошта је избрисана"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ОПОЗОВИ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Желите да обришете историју позива?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ово ће избрисати све позиве из историје"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Брише се историја позива…"</string>

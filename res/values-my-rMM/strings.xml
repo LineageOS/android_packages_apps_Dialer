@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"ခေါ်ဆိုမှု မှတ်တမ်း ထဲမှာ ဖျက်ရန်"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ခေါ်ဆိုမှု မှတ်တမ်း ရှင်းရန်"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"အသံပို့စာ အားဖျက်ရန်"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"အသံမေးလ် ရှာတွေ့ခဲ့"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ပြန်ဖျက်ရန်"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ခေါ်ဆိုမှု မှတ်တမ်းကို ရှင်းပစ်ရမလား?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ဒါက သင့် မှတ်တမ်းထဲက ခေါ်ဆိုမှုများ  အားလုံးကို ဖျက်ပစ်မည်"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ခေါ်ဆိုမှု မှတ်တမ်းကို ရှင်းနေ…"</string>

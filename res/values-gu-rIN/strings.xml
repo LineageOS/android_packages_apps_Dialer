@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"કૉલ ઇતિહાસમાંથી કાઢી નાખો"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"કૉલ ઇતિહાસ સાફ કરો"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"વૉઇસમેઇલ કાઢી નાખો"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"વૉઇસમેઇલ કાઢી નાખ્યો"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"પૂર્વવત્ કરો"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"કૉલ ઇતિહાસ સાફ કરીએ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"આ તમારા ઇતિહાસમાંથી તમામ કૉલ્સ કાઢી નાખશે"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"કૉલ ઇતિહાસ સાફ કરી રહ્યાં છે…"</string>

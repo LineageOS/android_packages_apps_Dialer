@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Удалить из журнала звонков"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Очистить журнал звонков"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Удалить голосовое сообщение"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Сообщение удалено"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ОТМЕНИТЬ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистить журнал звонков?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Журнал звонков будет удален."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Очистка журнала звонков…"</string>

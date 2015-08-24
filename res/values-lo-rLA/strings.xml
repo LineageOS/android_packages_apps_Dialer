@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"ລຶບ​ຈາກ​ປະ​ຫວັດ​ການ​ໂທ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ລຶບ​ປະ​ຫວັດ​ການ​ໂທ​"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ລຶບຂໍ້ຄວາມສຽງ"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ລຶບ​ຂໍ້​ຄວາມ​ສຽງ​ແລ້ວ"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ບໍ່​ເຮັດ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ລຶບ​ປະ​ຫວັດ​ການ​ໂທ​ບໍ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ອັນ​ນີ້​ຈະ​ລຶບ​ທຸກ​ສາຍ​ໂທ​ຈາກ​ປະ​ຫວັດ​ຂອງ​ທ່ານ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ກຳ​ລັງ​ລຶບ​ປະ​ຫວັດ​ການ​ໂທ…"</string>

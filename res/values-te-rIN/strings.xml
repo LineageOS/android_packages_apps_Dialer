@@ -28,6 +28,8 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"కాల్ చరిత్ర నుండి తొలగించు"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"కాల్ చరిత్రను తీసివేయి"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"వాయిస్ మెయిల్‌ను తొలగించు"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"వాయిస్‌‍మెయిల్ తొలగించింది"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"చర్యరద్దు"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"కాల్ చరిత్రను క్లియర్ చేయాలా?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"దీని వలన మీ చరిత్ర నుండి అన్ని కాల్‌లు తొలగించబడతాయి"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"కాల్ చరిత్రను క్లియర్ చేస్తోంది…"</string>

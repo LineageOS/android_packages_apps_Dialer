@@ -24,10 +24,12 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"Informar dun número incorrecto"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Copiar número no portapapeis"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Copiar transcrición no portapapeis"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Editar número antes chamar"</string>
+    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Editar número antes de chamar"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Eliminar do historial de chamadas"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Borrar historial de chamadas"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eliminar correo de voz"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Correo voz eliminado"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESFACER"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Borrar o historial de chamadas?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Esta acción eliminará todas as chamadas do teu historial"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Borrando historial de chamadas…"</string>
