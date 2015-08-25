@@ -587,6 +587,10 @@ public class VoicemailPlaybackPresenter
      * playing.
      */
     public void resumePlayback() {
+        if (mView == null) {
+            return;
+        }
+
         if (!mIsPrepared) {
             // If we haven't downloaded the voicemail yet, attempt to download it.
             checkForContent();
