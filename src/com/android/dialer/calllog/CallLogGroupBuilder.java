@@ -20,6 +20,7 @@ import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.Time;
+import android.text.TextUtils;
 
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -46,9 +47,8 @@ public class CallLogGroupBuilder {
          * dialed.
          * @param cursorPosition The starting position of the group in the cursor.
          * @param size The size of the group.
-         * @param expanded Whether the group is expanded; always false for the call log.
          */
-        public void addGroup(int cursorPosition, int size, boolean expanded);
+        public void addGroup(int cursorPosition, int size);
 
         /**
          * Defines the interface for tracking the day group each call belongs to.  Calls in a call
@@ -94,7 +94,7 @@ public class CallLogGroupBuilder {
 
     /**
      * Finds all groups of adjacent entries in the call log which should be grouped together and
-     * calls {@link GroupCreator#addGroup(int, int, boolean)} on {@link #mGroupCreator} for each of
+     * calls {@link GroupCreator#addGroup(int, int)} on {@link #mGroupCreator} for each of
      * them.
      * <p>
      * For entries that are not grouped with others, we do not need to create a group of size one.
@@ -114,98 +114,70 @@ public class CallLogGroupBuilder {
 
         // Get current system time, used for calculating which day group calls belong to.
         long currentTime = System.currentTimeMillis();
-
-        int currentGroupSize = 1;
         cursor.moveToFirst();
-        // The number of the first entry in the group.
-        String firstNumber = cursor.getString(CallLogQuery.NUMBER);
-        // This is the type of the first call in the group.
-        int firstCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
-
-        // The account information of the first entry in the group.
-        String firstAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
-        String firstAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
 
         // Determine the day group for the first call in the cursor.
         final long firstDate = cursor.getLong(CallLogQuery.DATE);
         final long firstRowId = cursor.getLong(CallLogQuery.ID);
-        int currentGroupDayGroup = getDayGroup(firstDate, currentTime);
-        mGroupCreator.setDayGroup(firstRowId, currentGroupDayGroup);
+        int groupDayGroup = getDayGroup(firstDate, currentTime);
+        mGroupCreator.setDayGroup(firstRowId, groupDayGroup);
+
+        // Instantiate the group values to those of the first call in the cursor.
+        String groupNumber = cursor.getString(CallLogQuery.NUMBER);
+        int groupCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
+        String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
+        String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
+        int groupSize = 1;
+
+        String number;
+        int callType;
+        String accountComponentName;
+        String accountId;
 
         while (cursor.moveToNext()) {
-            // The number of the current row in the cursor.
-            final String currentNumber = cursor.getString(CallLogQuery.NUMBER);
-            final int callType = cursor.getInt(CallLogQuery.CALL_TYPE);
-            final String currentAccountComponentName = cursor.getString(
-                    CallLogQuery.ACCOUNT_COMPONENT_NAME);
-            final String currentAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
+            // Obtain the values for the current call to group.
+            number = cursor.getString(CallLogQuery.NUMBER);
+            callType = cursor.getInt(CallLogQuery.CALL_TYPE);
+            accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
+            accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
 
-            final boolean sameNumber = equalNumbers(firstNumber, currentNumber);
-            final boolean sameAccountComponentName = Objects.equals(
-                    firstAccountComponentName,
-                    currentAccountComponentName);
-            final boolean sameAccountId = Objects.equals(
-                    firstAccountId,
-                    currentAccountId);
-            final boolean sameAccount = sameAccountComponentName && sameAccountId;
+            final boolean isSameNumber = equalNumbers(groupNumber, number);
+            final boolean isSameAccount = isSameAccount(
+                    groupAccountComponentName, accountComponentName, groupAccountId, accountId);
 
-            final boolean shouldGroup;
-            final long currentCallId = cursor.getLong(CallLogQuery.ID);
-            final long date = cursor.getLong(CallLogQuery.DATE);
-
-            if (!sameNumber || !sameAccount) {
-                // Should only group with calls from the same number.
-                shouldGroup = false;
-            } else if (firstCallType == Calls.VOICEMAIL_TYPE) {
-                // never group voicemail.
-                shouldGroup = false;
-            } else {
-                // Incoming, outgoing, and missed calls group together.
-                shouldGroup = callType != Calls.VOICEMAIL_TYPE;
-            }
-
-            if (shouldGroup) {
+            // Group with the same number and account which are not voicemail.
+            if (isSameNumber && isSameAccount
+                    && (callType != Calls.VOICEMAIL_TYPE)
+                    && (groupCallType != Calls.VOICEMAIL_TYPE)) {
                 // Increment the size of the group to include the current call, but do not create
-                // the group until we find a call that does not match.
-                currentGroupSize++;
+                // the group until finding a call that does not match.
+                groupSize++;
             } else {
-                // The call group has changed, so determine the day group for the new call group.
-                // This ensures all calls grouped together in the call log are assigned the same
-                // day group.
-                currentGroupDayGroup = getDayGroup(date, currentTime);
+                // The call group has changed. Determine the day group for the new call group.
+                final long date = cursor.getLong(CallLogQuery.DATE);
+                groupDayGroup = getDayGroup(date, currentTime);
 
-                // Create a group for the previous set of calls, excluding the current one, but do
-                // not create a group for a single call.
-                if (currentGroupSize > 1) {
-                    addGroup(cursor.getPosition() - currentGroupSize, currentGroupSize);
-                }
+                // Create a group for the previous group of calls, which does not include the
+                // current call.
+                mGroupCreator.addGroup(cursor.getPosition() - groupSize, groupSize);
+
                 // Start a new group; it will include at least the current call.
-                currentGroupSize = 1;
-                // The current entry is now the first in the group.
-                firstNumber = currentNumber;
-                firstCallType = callType;
-                firstAccountComponentName = currentAccountComponentName;
-                firstAccountId = currentAccountId;
+                groupSize = 1;
+
+                // Update the group values to those of the current call.
+                groupNumber = number;
+                groupCallType = callType;
+                groupAccountComponentName = accountComponentName;
+                groupAccountId = accountId;
             }
 
             // Save the day group associated with the current call.
-            mGroupCreator.setDayGroup(currentCallId, currentGroupDayGroup);
+            final long currentCallId = cursor.getLong(CallLogQuery.ID);
+            mGroupCreator.setDayGroup(currentCallId, groupDayGroup);
         }
-        // If the last set of calls at the end of the call log was itself a group, create it now.
-        if (currentGroupSize > 1) {
-            addGroup(count - currentGroupSize, currentGroupSize);
-        }
-    }
 
-    /**
-     * Creates a group of items in the cursor.
-     * <p>
-     * The group is always unexpanded.
-     *
-     * @see CallLogAdapter#addGroup(int, int, boolean)
-     */
-    private void addGroup(int cursorPosition, int size) {
-        mGroupCreator.addGroup(cursorPosition, size, false);
+        // Create a group for the last set of calls.
+        mGroupCreator.addGroup(count - groupSize, groupSize);
     }
 
     @VisibleForTesting
@@ -215,6 +187,10 @@ public class CallLogGroupBuilder {
         } else {
             return PhoneNumberUtils.compare(number1, number2);
         }
+    }
+
+    private boolean isSameAccount(String name1, String name2, String id1, String id2) {
+        return TextUtils.equals(name1, name2) && TextUtils.equals(id1, id2);
     }
 
     @VisibleForTesting

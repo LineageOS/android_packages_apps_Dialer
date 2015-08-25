@@ -35,7 +35,9 @@ import java.util.List;
  */
 @SmallTest
 public class CallLogAdapterTest extends AndroidTestCase {
-    private static final String TEST_NUMBER = "12345678";
+    private static final String TEST_NUMBER_1 = "12345678";
+    private static final String TEST_NUMBER_2 = "87654321";
+    private static final String TEST_NUMBER_3 = "18273645";
     private static final String TEST_NAME = "name";
     private static final String TEST_NUMBER_LABEL = "label";
     private static final int TEST_NUMBER_TYPE = 1;
@@ -46,7 +48,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     private MatrixCursor mCursor;
     private View mView;
-    private ViewHolder mViewHolder;
+    private CallLogListItemViewHolder mViewHolder;
 
     @Override
     protected void setUp() throws Exception {
@@ -98,7 +100,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         TestContactInfoCache.Request request = mAdapter.getContactInfoCache().requests.get(0);
         // It is for the number we need to show.
-        assertEquals(TEST_NUMBER, request.number);
+        assertEquals(TEST_NUMBER_1, request.number);
         // It has the right country.
         assertEquals(TEST_COUNTRY_ISO, request.countryIso);
         // Since there is nothing in the cache, it is an immediate request.
@@ -125,7 +127,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     public void testBindView_NoCallLogButMemoryCache_EnqueueRequest() {
         mCursor.addRow(createCallLogEntry());
-        mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, createContactInfo());
+        mAdapter.injectContactInfoForTest(TEST_NUMBER_1, TEST_COUNTRY_ISO, createContactInfo());
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
@@ -141,7 +143,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     public void testBindView_BothCallLogAndMemoryCache_NoEnqueueRequest() {
         mCursor.addRow(createCallLogEntryWithCachedValues());
-        mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, createContactInfo());
+        mAdapter.injectContactInfoForTest(TEST_NUMBER_1, TEST_COUNTRY_ISO, createContactInfo());
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
@@ -157,7 +159,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         // Contact info contains a different name.
         ContactInfo info = createContactInfo();
         info.name = "new name";
-        mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, info);
+        mAdapter.injectContactInfoForTest(TEST_NUMBER_1, TEST_COUNTRY_ISO, info);
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
@@ -171,10 +173,37 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertFalse("should not be immediate", request.immediate);
     }
 
+    public void testBindVoicemailPromoCard() {
+        mCursor.addRow(createCallLogEntry(TEST_NUMBER_1));
+        mCursor.addRow(createCallLogEntry(TEST_NUMBER_1));
+        mCursor.addRow(createCallLogEntry(TEST_NUMBER_2));
+        mCursor.addRow(createCallLogEntry(TEST_NUMBER_2));
+        mCursor.addRow(createCallLogEntry(TEST_NUMBER_2));
+        mCursor.addRow(createCallLogEntry(TEST_NUMBER_3));
+
+        // Bind the voicemail promo card.
+        mAdapter.showVoicemailPromoCard(true);
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(PromoCardViewHolder.createForTest(getContext()), 0);
+
+        // Check that displaying the promo card does not affect the grouping or list display.
+        mAdapter.onBindViewHolder(mViewHolder, 1);
+        assertEquals(2, mAdapter.getGroupSize(1));
+        assertEquals(TEST_NUMBER_1, mViewHolder.number);
+
+        mAdapter.onBindViewHolder(mViewHolder, 2);
+        assertEquals(3, mAdapter.getGroupSize(2));
+        assertEquals(TEST_NUMBER_2, mViewHolder.number);
+
+        mAdapter.onBindViewHolder(mViewHolder, 3);
+        assertEquals(1, mAdapter.getGroupSize(3));
+        assertEquals(TEST_NUMBER_3, mViewHolder.number);
+    }
+
     /** Returns a contact info with default values. */
     private ContactInfo createContactInfo() {
         ContactInfo info = new ContactInfo();
-        info.number = TEST_NUMBER;
+        info.number = TEST_NUMBER_1;
         info.name = TEST_NAME;
         info.type = TEST_NUMBER_TYPE;
         info.label = TEST_NUMBER_LABEL;
@@ -183,8 +212,12 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     /** Returns a call log entry without cached values. */
     private Object[] createCallLogEntry() {
+        return createCallLogEntry(TEST_NUMBER_1);
+    }
+
+    private Object[] createCallLogEntry(String testNumber) {
         Object[] values = CallLogQueryTestUtils.createTestValues();
-        values[CallLogQuery.NUMBER] = TEST_NUMBER;
+        values[CallLogQuery.NUMBER] = testNumber;
         values[CallLogQuery.COUNTRY_ISO] = TEST_COUNTRY_ISO;
         return values;
     }
@@ -211,6 +244,10 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         public TestContactInfoCache getContactInfoCache() {
             return (TestContactInfoCache) mContactInfoCache;
+        }
+
+        public void showVoicemailPromoCard(boolean show) {
+            mShowVoicemailPromoCard = true;
         }
     }
 

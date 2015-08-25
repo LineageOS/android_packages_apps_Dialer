@@ -131,7 +131,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     private SharedPreferences mPrefs;
 
-    private boolean mShowVoicemailPromoCard = false;
+    protected boolean mShowVoicemailPromoCard = false;
 
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogListItemHelper;
@@ -628,6 +628,11 @@ public class CallLogAdapter extends GroupingListAdapter
                         ? 1 : 0));
     }
 
+    @Override
+    public int getGroupSize(int position) {
+        return super.getGroupSize(position - (mShowVoicemailPromoCard ? 1 : 0));
+    }
+
     protected boolean isCallLogActivity() {
         return mIsCallLogActivity;
     }
@@ -792,11 +797,6 @@ public class CallLogAdapter extends GroupingListAdapter
     void injectContactInfoForTest(String number, String countryIso, ContactInfo contactInfo) {
         // TODO: Remove this and test the cache directly.
         mContactInfoCache.injectContactInfoForTest(number, countryIso, contactInfo);
-    }
-
-    @Override
-    public void addGroup(int cursorPosition, int size, boolean expanded) {
-        super.addGroup(cursorPosition, size, expanded);
     }
 
     /**

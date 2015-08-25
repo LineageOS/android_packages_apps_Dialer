@@ -15,11 +15,13 @@
  */
 package com.android.dialer.calllog;
 
-import com.android.dialer.R;
-
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.android.contacts.common.testing.NeededForTesting;
+import com.android.dialer.R;
 
 /**
  * View holder class for a promo card which will appear in the voicemail tab.
@@ -67,5 +69,13 @@ public class PromoCardViewHolder extends RecyclerView.ViewHolder {
      */
     public View getOkTextView() {
         return mOkTextView;
+    }
+
+    @NeededForTesting
+    public static PromoCardViewHolder createForTest(Context context) {
+        PromoCardViewHolder viewHolder = new PromoCardViewHolder(new View(context));
+        viewHolder.mSettingsTextView = new View(context);
+        viewHolder.mOkTextView = new View(context);
+        return viewHolder;
     }
 }

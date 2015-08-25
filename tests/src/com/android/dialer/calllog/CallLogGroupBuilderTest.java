@@ -82,7 +82,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         addCallLogEntry(TEST_NUMBER1, Calls.INCOMING_TYPE);
         mBuilder.addGroups(mCursor);
         assertEquals(1, mFakeGroupCreator.groups.size());
-        assertGroupIs(0, 3, false, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(0, 3, mFakeGroupCreator.groups.get(0));
     }
 
     public void testAddGroups_MatchingIncomingAndOutgoing() {
@@ -91,13 +91,12 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         addCallLogEntry(TEST_NUMBER1, Calls.INCOMING_TYPE);
         mBuilder.addGroups(mCursor);
         assertEquals(1, mFakeGroupCreator.groups.size());
-        assertGroupIs(0, 3, false, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(0, 3, mFakeGroupCreator.groups.get(0));
     }
 
     public void testAddGroups_Voicemail() {
         // Does not group with other types of calls, include voicemail themselves.
         assertCallsAreNotGrouped(Calls.VOICEMAIL_TYPE, Calls.MISSED_TYPE);
-        //assertCallsAreNotGrouped(Calls.VOICEMAIL_TYPE, Calls.MISSED_TYPE, Calls.MISSED_TYPE);
         assertCallsAreNotGrouped(Calls.VOICEMAIL_TYPE, Calls.VOICEMAIL_TYPE);
         assertCallsAreNotGrouped(Calls.VOICEMAIL_TYPE, Calls.INCOMING_TYPE);
         assertCallsAreNotGrouped(Calls.VOICEMAIL_TYPE, Calls.OUTGOING_TYPE);
@@ -150,8 +149,8 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
                 Calls.OUTGOING_TYPE);
         mBuilder.addGroups(mCursor);
         assertEquals(2, mFakeGroupCreator.groups.size());
-        assertGroupIs(1, 4, false, mFakeGroupCreator.groups.get(0));
-        assertGroupIs(8, 3, false, mFakeGroupCreator.groups.get(1));
+        assertGroupIs(1, 4, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(8, 3, mFakeGroupCreator.groups.get(1));
     }
 
     public void testEqualPhoneNumbers() {
@@ -228,7 +227,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         addMultipleCallLogEntries(TEST_NUMBER1, types);
         mBuilder.addGroups(mCursor);
         assertEquals(1, mFakeGroupCreator.groups.size());
-        assertGroupIs(0, types.length, false, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(0, types.length, mFakeGroupCreator.groups.get(0));
 
     }
 
@@ -266,10 +265,9 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
     }
 
     /** Asserts that the group matches the given values. */
-    private void assertGroupIs(int cursorPosition, int size, boolean expanded, GroupSpec group) {
+    private void assertGroupIs(int cursorPosition, int size, GroupSpec group) {
         assertEquals(cursorPosition, group.cursorPosition);
         assertEquals(size, group.size);
-        assertEquals(expanded, group.expanded);
     }
 
     /** Defines an added group. Used by the {@link FakeGroupCreator}. */
@@ -278,13 +276,10 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         public final int cursorPosition;
         /** The number of elements in the group. */
         public final int size;
-        /** Whether the group should be initially expanded. */
-        public final boolean expanded;
 
-        public GroupSpec(int cursorPosition, int size, boolean expanded) {
+        public GroupSpec(int cursorPosition, int size) {
             this.cursorPosition = cursorPosition;
             this.size = size;
-            this.expanded = expanded;
         }
     }
 
@@ -294,8 +289,8 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         public final List<GroupSpec> groups = newArrayList();
 
         @Override
-        public void addGroup(int cursorPosition, int size, boolean expanded) {
-            groups.add(new GroupSpec(cursorPosition, size, expanded));
+        public void addGroup(int cursorPosition, int size) {
+            groups.add(new GroupSpec(cursorPosition, size));
         }
 
         @Override

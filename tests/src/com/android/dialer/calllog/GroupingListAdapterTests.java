@@ -16,10 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import static com.android.dialer.calllog.GroupingListAdapter.ITEM_TYPE_GROUP_HEADER;
-import static com.android.dialer.calllog.GroupingListAdapter.ITEM_TYPE_IN_GROUP;
-import static com.android.dialer.calllog.GroupingListAdapter.ITEM_TYPE_STANDALONE;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -63,17 +59,12 @@ public class GroupingListAdapterTests extends AndroidTestCase {
                 if (TextUtils.equals(value, currentValue)) {
                     groupItemCount++;
                 } else {
-                    if (groupItemCount > 1) {
-                        addGroup(i - groupItemCount, groupItemCount, false);
-                    }
-
+                    addGroup(i - groupItemCount, groupItemCount);
                     groupItemCount = 1;
                     currentValue = value;
                 }
             }
-            if (groupItemCount > 1) {
-                addGroup(count - groupItemCount, groupItemCount, false);
-            }
+            addGroup(count - groupItemCount, groupItemCount);
         }
 
         @Override
@@ -92,7 +83,6 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         }
     };
 
-
     private void buildCursor(String... numbers) {
         mCursor = new MatrixCursor(PROJECTION);
         mNextId = 1;
@@ -107,170 +97,51 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
 
         assertEquals(3, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 2);
+        assertMetadata(0, 1, "1");
+        assertMetadata(1, 1, "2");
+        assertMetadata(2, 1, "3");
     }
 
-    public void testGroupingWithCollapsedGroupAtTheBeginning() {
+    public void testGroupingWithGroupAtTheBeginning() {
         buildCursor("1", "1", "2");
         mAdapter.changeCursor(mCursor);
 
         assertEquals(2, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_GROUP_HEADER, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 2);
+        assertMetadata(0, 2, "1");
+        assertMetadata(1, 1, "2");
     }
 
-    public void testGroupingWithExpandedGroupAtTheBeginning() {
-        buildCursor("1", "1", "2");
-        mAdapter.changeCursor(mCursor);
-        mAdapter.toggleGroup(0);
-
-        assertEquals(4, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_GROUP_HEADER, true, 0);
-        assertPositionMetadata(1, ITEM_TYPE_IN_GROUP, false, 0);
-        assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
-        assertPositionMetadata(3, ITEM_TYPE_STANDALONE, false, 2);
-    }
-
-    public void testGroupingWithExpandCollapseCycleAtTheBeginning() {
-        buildCursor("1", "1", "2");
-        mAdapter.changeCursor(mCursor);
-        mAdapter.toggleGroup(0);
-        mAdapter.toggleGroup(0);
-
-        assertEquals(2, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_GROUP_HEADER, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 2);
-    }
-
-    public void testGroupingWithCollapsedGroupInTheMiddle() {
+    public void testGroupingWithGroupInTheMiddle() {
         buildCursor("1", "2", "2", "2", "3");
         mAdapter.changeCursor(mCursor);
 
         assertEquals(3, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 4);
+        assertMetadata(0, 1, "1");
+        assertMetadata(1, 3, "2");
+        assertMetadata(2, 1, "3");
     }
 
-    public void testGroupingWithExpandedGroupInTheMiddle() {
-        buildCursor("1", "2", "2", "2", "3");
-        mAdapter.changeCursor(mCursor);
-        mAdapter.toggleGroup(1);
-
-        assertEquals(6, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, true, 1);
-        assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
-        assertPositionMetadata(3, ITEM_TYPE_IN_GROUP, false, 2);
-        assertPositionMetadata(4, ITEM_TYPE_IN_GROUP, false, 3);
-        assertPositionMetadata(5, ITEM_TYPE_STANDALONE, false, 4);
-    }
-
-    public void testGroupingWithCollapsedGroupAtTheEnd() {
+    public void testGroupingWithGroupAtTheEnd() {
         buildCursor("1", "2", "3", "3", "3");
         mAdapter.changeCursor(mCursor);
 
         assertEquals(3, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_GROUP_HEADER, false, 2);
+        assertMetadata(0, 1, "1");
+        assertMetadata(1, 1, "2");
+        assertMetadata(2, 3, "3");
     }
 
-    public void testGroupingWithExpandedGroupAtTheEnd() {
-        buildCursor("1", "2", "3", "3", "3");
-        mAdapter.changeCursor(mCursor);
-        mAdapter.toggleGroup(2);
-
-        assertEquals(6, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_STANDALONE, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_GROUP_HEADER, true, 2);
-        assertPositionMetadata(3, ITEM_TYPE_IN_GROUP, false, 2);
-        assertPositionMetadata(4, ITEM_TYPE_IN_GROUP, false, 3);
-        assertPositionMetadata(5, ITEM_TYPE_IN_GROUP, false, 4);
-    }
-
-    public void testGroupingWithMultipleCollapsedGroups() {
+    public void testGroupingWithMultipleGroups() {
         buildCursor("1", "2", "2", "3", "4", "4", "5", "5", "6");
         mAdapter.changeCursor(mCursor);
 
         assertEquals(6, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 3);
-        assertPositionMetadata(3, ITEM_TYPE_GROUP_HEADER, false, 4);
-        assertPositionMetadata(4, ITEM_TYPE_GROUP_HEADER, false, 6);
-        assertPositionMetadata(5, ITEM_TYPE_STANDALONE, false, 8);
-    }
-
-    public void testGroupingWithMultipleExpandedGroups() {
-        buildCursor("1", "2", "2", "3", "4", "4", "5", "5", "6");
-        mAdapter.changeCursor(mCursor);
-        mAdapter.toggleGroup(1);
-
-        // Note that expanding the group of 2's shifted the group of 5's down from the
-        // 4th to the 6th position
-        mAdapter.toggleGroup(6);
-
-        assertEquals(10, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, true, 1);
-        assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
-        assertPositionMetadata(3, ITEM_TYPE_IN_GROUP, false, 2);
-        assertPositionMetadata(4, ITEM_TYPE_STANDALONE, false, 3);
-        assertPositionMetadata(5, ITEM_TYPE_GROUP_HEADER, false, 4);
-        assertPositionMetadata(6, ITEM_TYPE_GROUP_HEADER, true, 6);
-        assertPositionMetadata(7, ITEM_TYPE_IN_GROUP, false, 6);
-        assertPositionMetadata(8, ITEM_TYPE_IN_GROUP, false, 7);
-        assertPositionMetadata(9, ITEM_TYPE_STANDALONE, false, 8);
-    }
-
-    public void testPositionCache() {
-        buildCursor("1", "2", "2", "3", "4", "4", "5", "5", "6");
-        mAdapter.changeCursor(mCursor);
-
-        // First pass - building up cache
-        assertEquals(6, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 3);
-        assertPositionMetadata(3, ITEM_TYPE_GROUP_HEADER, false, 4);
-        assertPositionMetadata(4, ITEM_TYPE_GROUP_HEADER, false, 6);
-        assertPositionMetadata(5, ITEM_TYPE_STANDALONE, false, 8);
-
-        // Second pass - using cache
-        assertEquals(6, mAdapter.getItemCount());
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, false, 1);
-        assertPositionMetadata(2, ITEM_TYPE_STANDALONE, false, 3);
-        assertPositionMetadata(3, ITEM_TYPE_GROUP_HEADER, false, 4);
-        assertPositionMetadata(4, ITEM_TYPE_GROUP_HEADER, false, 6);
-        assertPositionMetadata(5, ITEM_TYPE_STANDALONE, false, 8);
-
-        // Invalidate cache by expanding a group
-        mAdapter.toggleGroup(1);
-
-        // First pass - building up cache
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, true, 1);
-        assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
-        assertPositionMetadata(3, ITEM_TYPE_IN_GROUP, false, 2);
-        assertPositionMetadata(4, ITEM_TYPE_STANDALONE, false, 3);
-        assertPositionMetadata(5, ITEM_TYPE_GROUP_HEADER, false, 4);
-        assertPositionMetadata(6, ITEM_TYPE_GROUP_HEADER, false, 6);
-        assertPositionMetadata(7, ITEM_TYPE_STANDALONE, false, 8);
-
-        // Second pass - using cache
-        assertPositionMetadata(0, ITEM_TYPE_STANDALONE, false, 0);
-        assertPositionMetadata(1, ITEM_TYPE_GROUP_HEADER, true, 1);
-        assertPositionMetadata(2, ITEM_TYPE_IN_GROUP, false, 1);
-        assertPositionMetadata(3, ITEM_TYPE_IN_GROUP, false, 2);
-        assertPositionMetadata(4, ITEM_TYPE_STANDALONE, false, 3);
-        assertPositionMetadata(5, ITEM_TYPE_GROUP_HEADER, false, 4);
-        assertPositionMetadata(6, ITEM_TYPE_GROUP_HEADER, false, 6);
-        assertPositionMetadata(7, ITEM_TYPE_STANDALONE, false, 8);
+        assertMetadata(0, 1, "1");
+        assertMetadata(1, 2, "2");
+        assertMetadata(2, 1, "3");
+        assertMetadata(3, 2, "4");
+        assertMetadata(4, 2, "5");
+        assertMetadata(5, 1, "6");
     }
 
     public void testGroupDescriptorArrayGrowth() {
@@ -287,14 +158,9 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         assertEquals(250, mAdapter.getItemCount());
     }
 
-    private void assertPositionMetadata(int position, int itemType, boolean isExpanded,
-            int cursorPosition) {
-        GroupingListAdapter.PositionMetadata metadata = new GroupingListAdapter.PositionMetadata();
-        mAdapter.obtainPositionMetadata(metadata, position);
-        assertEquals(itemType, metadata.itemType);
-        if (metadata.itemType == ITEM_TYPE_GROUP_HEADER) {
-            assertEquals(isExpanded, metadata.isExpanded);
-        }
-        assertEquals(cursorPosition, metadata.cursorPosition);
+    private void assertMetadata(int listPosition, int groupSize, String objectValue) {
+        assertEquals(groupSize, mAdapter.getGroupSize(listPosition));
+        MatrixCursor cursor = (MatrixCursor) mAdapter.getItem(listPosition);
+        assertEquals(objectValue, (String) cursor.getString(GROUPING_COLUMN_INDEX));
     }
 }
