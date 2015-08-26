@@ -39,7 +39,6 @@ import android.widget.SeekBar;
 import com.android.dialer.R;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
-
 import com.android.common.io.MoreCloseables;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
@@ -48,7 +47,6 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -242,7 +240,7 @@ public class VoicemailPlaybackPresenter
         mView = view;
         mView.setPresenter(this, voicemailUri);
 
-        if (mMediaPlayer != null && voicemailUri.equals(mVoicemailUri)) {
+        if (mMediaPlayer != null && mIsPrepared && voicemailUri.equals(mVoicemailUri)) {
             // Handles case where MediaPlayer was retained after an orientation change.
             onPrepared(mMediaPlayer);
             mView.onSpeakerphoneOn(isSpeakerphoneOn());
