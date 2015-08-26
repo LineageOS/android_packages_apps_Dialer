@@ -50,6 +50,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -208,9 +209,6 @@ public class DialpadFragment extends Fragment
     // determines if we want to playback local DTMF tones.
     private boolean mDTMFToneEnabled;
 
-    // Vibration (haptic feedback) for dialer key presses.
-    private final HapticFeedback mHaptic = new HapticFeedback();
-
     /** Identifier for the "Add Call" intent extra. */
     private static final String ADD_CALL_MODE_KEY = "add_call_mode";
 
@@ -329,13 +327,6 @@ public class DialpadFragment extends Fragment
         mFirstLaunch = state == null;
 
         mCurrentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-
-        try {
-            mHaptic.init(getActivity(),
-                         getResources().getBoolean(R.bool.config_enable_dialer_key_vibration));
-        } catch (Resources.NotFoundException nfe) {
-             Log.e(TAG, "Vibrate control bool missing.", nfe);
-        }
 
         mProhibitedPhoneNumberRegexp = getResources().getString(
                 R.string.config_prohibited_phone_number_regexp);
@@ -651,9 +642,6 @@ public class DialpadFragment extends Fragment
 
         stopWatch.lap("dtwd");
 
-        // Retrieve the haptic feedback setting.
-        mHaptic.checkSystemSetting();
-
         stopWatch.lap("hptc");
 
         mPressedDialpadKeys.clear();
@@ -787,7 +775,7 @@ public class DialpadFragment extends Fragment
                 break;
         }
 
-        mHaptic.vibrate();
+        getView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, keyCode);
         mDigits.onKeyDown(keyCode, event);
 
@@ -916,7 +904,7 @@ public class DialpadFragment extends Fragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.dialpad_floating_action_button:
-                mHaptic.vibrate();
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 handleDialButtonPressed();
                 break;
             case R.id.deleteButton: {
