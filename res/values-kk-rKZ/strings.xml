@@ -29,7 +29,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Қоңыраулар тарихын тазалау"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Дауыстық хабарды жою"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Дауыстық хабар жойылды"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"БОЛДЫРМАУ"</string>
+    <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"КЕРІ ҚАЙТАРУ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Қоңыраулар тарихын тазалау керек пе?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Бұл тарихтан барлық қоңырауларды жояды"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Қоңыраулар тарихы тазалануда…"</string>
