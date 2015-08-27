@@ -354,12 +354,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     @Override
-    public void setIsBuffering() {
-        disableUiElements();
-        mStateText.setText(getString(R.string.voicemail_buffering));
-    }
-
-    @Override
     public void setIsFetchingContent() {
         disableUiElements();
         mStateText.setText(getString(R.string.voicemail_fetching_content));

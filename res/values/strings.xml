@@ -111,9 +111,6 @@
     <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
     <string name="voicemail_playback_error">Couldn\'t play voicemail</string>
 
-    <!-- Message to display before we have prepared the media player, i.e. before we know duration. [CHAR LIMIT=40] -->
-    <string name="voicemail_buffering">Buffering\u2026</string>
-
     <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
     <string name="voicemail_fetching_content">Loading voicemail\u2026</string>
 

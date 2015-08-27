@@ -85,7 +85,6 @@ public class VoicemailPlaybackPresenter
         void onSpeakerphoneOn(boolean on);
         void setClipPosition(int clipPositionInMillis, int clipLengthInMillis);
         void setFetchContentTimeout();
-        void setIsBuffering();
         void setIsFetchingContent();
         void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri);
     }
@@ -346,7 +345,6 @@ public class VoicemailPlaybackPresenter
      * a request to fetch the content asynchronously via {@link #requestContent()}.
      */
     private void checkForContent() {
-        mView.setIsFetchingContent();
         mAsyncTaskExecutor.submit(Tasks.CHECK_FOR_CONTENT, new AsyncTask<Void, Void, Boolean>() {
             @Override
             public Boolean doInBackground(Void... params) {
@@ -402,6 +400,8 @@ public class VoicemailPlaybackPresenter
         }
 
         mFetchResultHandler = new FetchResultHandler(new Handler(), mVoicemailUri);
+
+        mView.setIsFetchingContent();
 
         // Send voicemail fetch request.
         Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, mVoicemailUri);
@@ -485,7 +485,7 @@ public class VoicemailPlaybackPresenter
             mMediaPlayer = null;
         }
 
-        mView.setIsBuffering();
+        mView.disableUiElements();
         mIsPrepared = false;
 
         try {
