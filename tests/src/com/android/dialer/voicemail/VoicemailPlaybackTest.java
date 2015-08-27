@@ -183,7 +183,8 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         ContentValues values = new ContentValues();
         values.put(VoicemailContract.Voicemails.NUMBER, CONTACT_NUMBER);
         values.put(VoicemailContract.Voicemails.HAS_CONTENT, 1);
-        values.put(VoicemailContract.Voicemails._DATA, VOICEMAIL_FILE_LOCATION);
+        // VoicemailContract.Voicemails._DATA
+        values.put("_data", VOICEMAIL_FILE_LOCATION);
         mVoicemailUri = contentResolver.insert(VoicemailContract.Voicemails.CONTENT_URI, values);
     }
 

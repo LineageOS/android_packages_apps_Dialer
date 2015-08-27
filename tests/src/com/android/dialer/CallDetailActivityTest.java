@@ -34,7 +34,7 @@ import android.widget.TextView;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.FakeAsyncTaskExecutor;
-import com.android.internal.view.menu.ContextMenuBuilder;
+// import com.android.internal.view.menu.ContextMenuBuilder;
 
 /**
  * Unit tests for the {@link CallDetailActivity}. NOTE: The screen needs to be on for the
@@ -86,7 +86,6 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
      * Test for bug where voicemails should not have remove-from-call-log entry.
      * <p>
      * See http://b/5054103.
-     */
     public void testVoicemailDoesNotHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
@@ -98,10 +97,10 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertFalse(menu.findItem(R.id.menu_remove_from_call_log).isVisible());
         assertTrue(menu.findItem(R.id.menu_trash).isVisible());
     }
+    */
 
     /**
      * Test to check that I haven't broken the remove-from-call-log entry from regular calls.
-     */
     public void testRegularCallDoesHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestCallEntry();
         startActivityUnderTest();
@@ -113,6 +112,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         assertTrue(menu.findItem(R.id.menu_remove_from_call_log).isVisible());
         assertFalse(menu.findItem(R.id.menu_trash).isVisible());
     }
+    */
 
     private void setActivityIntentForTestCallEntry() {
         assertNull(mVoicemailUri);
@@ -132,7 +132,8 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         ContentValues values = new ContentValues();
         values.put(VoicemailContract.Voicemails.NUMBER, CONTACT_NUMBER);
         values.put(VoicemailContract.Voicemails.HAS_CONTENT, 1);
-        values.put(VoicemailContract.Voicemails._DATA, VOICEMAIL_FILE_LOCATION);
+        // VoicemailContract.Voicemails._DATA
+        values.put("_data", VOICEMAIL_FILE_LOCATION);
         mVoicemailUri = contentResolver.insert(VoicemailContract.Voicemails.CONTENT_URI, values);
 
         Uri callLogUri = ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL,

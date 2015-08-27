@@ -25,6 +25,7 @@ import android.app.TimePickerDialog;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -36,6 +37,7 @@ import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.format.DateFormat;
@@ -407,7 +409,8 @@ public class FillCallLogTestActivity extends Activity {
     }
 
     private PhoneAccountHandle getManualAccount() {
-        TelecomManager telecomManager = TelecomManager.from(this);
+        TelecomManager telecomManager =
+            (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
         List <PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
         if (mAccount0.isChecked()) {
             return accountHandles.get(0);
@@ -509,7 +512,7 @@ public class FillCallLogTestActivity extends Activity {
         if (getManualCallType() == Calls.VOICEMAIL_TYPE) {
             addManualVoicemail(dateTime.getTimeInMillis());
         } else {
-            Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
+            addCall(mPhoneNumber.getText().toString(), getManualPresentation(),
                     getManualCallType(), features, getManualAccount(),
                     dateTime.getTimeInMillis(), RNG.nextInt(60 * 60), dataUsage);
         }
@@ -525,6 +528,73 @@ public class FillCallLogTestActivity extends Activity {
         mCallTimeMinute = dateTime.get(Calendar.MINUTE);
         setDisplayDate();
         setDisplayTime();
+    }
+
+    // Copied and modified to compile unbundled from android.provider.CallLog
+    public Uri addCall(String number,
+            int presentation, int callType, int features, PhoneAccountHandle accountHandle,
+            long start, int duration, Long dataUsage) {
+        final ContentResolver resolver = getContentResolver();
+        int numberPresentation = Calls.PRESENTATION_ALLOWED;
+
+        TelecomManager tm = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
+
+        String accountAddress = null;
+        if (tm != null && accountHandle != null) {
+            PhoneAccount account = tm.getPhoneAccount(accountHandle);
+            if (account != null) {
+                Uri address = account.getSubscriptionAddress();
+                if (address != null) {
+                    accountAddress = address.getSchemeSpecificPart();
+                }
+            }
+        }
+
+        if (numberPresentation != Calls.PRESENTATION_ALLOWED) {
+            number = "";
+        }
+
+        // accountHandle information
+        String accountComponentString = null;
+        String accountId = null;
+        if (accountHandle != null) {
+            accountComponentString = accountHandle.getComponentName().flattenToString();
+            accountId = accountHandle.getId();
+        }
+
+        ContentValues values = new ContentValues(6);
+
+        values.put(Calls.NUMBER, number);
+        values.put(Calls.NUMBER_PRESENTATION, Integer.valueOf(numberPresentation));
+        values.put(Calls.TYPE, Integer.valueOf(callType));
+        values.put(Calls.FEATURES, features);
+        values.put(Calls.DATE, Long.valueOf(start));
+        values.put(Calls.DURATION, Long.valueOf(duration));
+        if (dataUsage != null) {
+            values.put(Calls.DATA_USAGE, dataUsage);
+        }
+        values.put(Calls.PHONE_ACCOUNT_COMPONENT_NAME, accountComponentString);
+        values.put(Calls.PHONE_ACCOUNT_ID, accountId);
+        // Calls.PHONE_ACCOUNT_ADDRESS
+        values.put("phone_account_address", accountAddress);
+        values.put(Calls.NEW, Integer.valueOf(1));
+
+        if (callType == Calls.MISSED_TYPE) {
+            values.put(Calls.IS_READ, 0);
+        }
+
+        return addEntryAndRemoveExpiredEntries(this, Calls.CONTENT_URI, values);
+    }
+
+    // Copied from android.provider.CallLog
+    private static Uri addEntryAndRemoveExpiredEntries(Context context, Uri uri,
+            ContentValues values) {
+        final ContentResolver resolver = context.getContentResolver();
+        Uri result = resolver.insert(uri, values);
+        resolver.delete(uri, "_id IN " +
+                "(SELECT _id FROM calls ORDER BY " + Calls.DEFAULT_SORT_ORDER
+                + " LIMIT -1 OFFSET 500)", null);
+        return result;
     }
 
     private void addManualVoicemail(Long time) {

@@ -18,6 +18,7 @@ package com.android.dialer.interactions;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,6 +37,7 @@ import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction.PhoneItem;
 import com.android.dialer.util.TestConstants;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +60,16 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
         @Override
         void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
             this.mPhoneList = phoneList;
+        }
+
+        public void waitForLoader() {
+            final CursorLoader loader = getLoader();
+            try {
+                final Method waitMethod = CursorLoader.class.getMethod("waitForLoader");
+                waitMethod.invoke(loader, null);
+            } catch(Exception e) {
+                // ignore
+            }
         }
     }
 
@@ -87,7 +99,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                 mContext, ContactDisplayUtils.INTERACTION_SMS, null);
 
         interaction.startInteraction(contactUri);
-        interaction.getLoader().waitForLoader();
+        interaction.waitForLoader();
 
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
@@ -106,7 +118,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                 mContext, ContactDisplayUtils.INTERACTION_SMS, null);
 
         interaction.startInteraction(dataUri);
-        interaction.getLoader().waitForLoader();
+        interaction.waitForLoader();
 
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
@@ -127,7 +139,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                 mContext, ContactDisplayUtils.INTERACTION_SMS, null);
 
         interaction.startInteraction(contactUri);
-        interaction.getLoader().waitForLoader();
+        interaction.waitForLoader();
 
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
@@ -168,7 +180,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                 mContext, ContactDisplayUtils.INTERACTION_CALL, null);
 
         interaction.startInteraction(contactUri);
-        interaction.getLoader().waitForLoader();
+        interaction.waitForLoader();
 
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
@@ -186,7 +198,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                 mContext, ContactDisplayUtils.INTERACTION_CALL, null);
 
         interaction.startInteraction(contactUri);
-        interaction.getLoader().waitForLoader();
+        interaction.waitForLoader();
 
         Intent intent = mContext.getIntentForStartActivity();
         assertNotNull(intent);
@@ -207,7 +219,7 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                 mContext, ContactDisplayUtils.INTERACTION_CALL, null);
 
         interaction.startInteraction(contactUri);
-        interaction.getLoader().waitForLoader();
+        interaction.waitForLoader();
 
         List<PhoneItem> items = interaction.mPhoneList;
         assertNotNull(items);
