@@ -82,4 +82,30 @@ public class DialpadFragmentTest extends TestCase {
         assertTrue(DialpadFragment.canAddDigit("55;55", 3, 3, ',')); // WAIT & PAUSE
         assertTrue(DialpadFragment.canAddDigit("55,55", 3, 4, ';'));
     }
+
+    public void testGetFormattedDigits_NoPostDialString() {
+        assertEquals("(510) 333-7596",
+                DialpadFragment.getFormattedDigits("5103337596", null, "US"));
+        assertEquals("(510) 333-7596",
+                DialpadFragment.getFormattedDigits("5103337596", "+15103337596", "US"));
+    }
+
+    public void testGetFormattedDigits_WithPostDialString() {
+        assertEquals("(510) 333-7596,1234",
+                DialpadFragment.getFormattedDigits("5103337596,1234", null, "US"));
+        assertEquals("(510) 333-7596;;1234",
+                DialpadFragment.getFormattedDigits("5103337596;;1234", null, "US"));
+        assertEquals("(510) 333-7596;123,,4",
+                DialpadFragment.getFormattedDigits("(510)3337596;123,,4", "+15103337596", "US"));
+    }
+
+    public void testGetFormattedDigits_PostDialStringOnly() {
+        assertEquals(",1234567", DialpadFragment.getFormattedDigits(",1234567", null, "US"));
+        assertEquals(";4321", DialpadFragment.getFormattedDigits(";4321", null, "US"));
+    }
+
+    public void testGetFormattedDigits_Invalid() {
+        assertEquals(null, DialpadFragment.getFormattedDigits(null, null, "US"));
+        assertEquals("", DialpadFragment.getFormattedDigits("", "+15104233335", "US"));
+    }
 }

@@ -560,17 +560,46 @@ public class DialpadFragment extends Fragment
      * Sets formatted digits to digits field.
      */
     private void setFormattedDigits(String data, String normalizedNumber) {
-        // strip the non-dialable numbers out of the data string.
-        String dialString = PhoneNumberUtils.extractNetworkPortion(data);
-        dialString =
-                PhoneNumberUtils.formatNumber(dialString, normalizedNumber, mCurrentCountryIso);
-        if (!TextUtils.isEmpty(dialString)) {
+        final String formatted = getFormattedDigits(data, normalizedNumber, mCurrentCountryIso);
+        if (!TextUtils.isEmpty(formatted)) {
             Editable digits = mDigits.getText();
-            digits.replace(0, digits.length(), dialString);
+            digits.replace(0, digits.length(), formatted);
             // for some reason this isn't getting called in the digits.replace call above..
             // but in any case, this will make sure the background drawable looks right
             afterTextChanged(digits);
         }
+    }
+
+    /**
+     * Format the provided string of digits into one that represents a properly formatted phone
+     * number.
+     *
+     * @param dialString String of characters to format
+     * @param normalizedNumber the E164 format number whose country code is used if the given
+     *         phoneNumber doesn't have the country code.
+     * @param countryIso The country code representing the format to use if the provided normalized
+     *         number is null or invalid.
+     * @return the provided string of digits as a formatted phone number, retaining any
+     *         post-dial portion of the string.
+     */
+    @VisibleForTesting
+    static String getFormattedDigits(String dialString, String normalizedNumber, String countryIso) {
+        String number = PhoneNumberUtils.extractNetworkPortion(dialString);
+        // Also retrieve the post dial portion of the provided data, so that the entire dial
+        // string can be reconstituted later.
+        final String postDial = PhoneNumberUtils.extractPostDialPortion(dialString);
+
+        if (TextUtils.isEmpty(number)) {
+            return postDial;
+        }
+
+        number = PhoneNumberUtils.formatNumber(number, normalizedNumber, countryIso);
+
+        if (TextUtils.isEmpty(postDial)) {
+            return number;
+        }
+
+        return number.concat(postDial);
     }
 
     private void configureKeypadListeners(View fragmentView) {
