@@ -202,10 +202,9 @@ public class CallLogAdapter extends GroupingListAdapter
     private final View.OnCreateContextMenuListener mOnCreateContextMenuListener =
             new View.OnCreateContextMenuListener() {
                 @Override
-                public void onCreateContextMenu(ContextMenu menu, View v,
-                        ContextMenuInfo menuInfo) {
-                    final CallLogListItemViewHolder vh =
-                            (CallLogListItemViewHolder) v.getTag();
+                public void onCreateContextMenu(
+                        ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+                    final CallLogListItemViewHolder vh = (CallLogListItemViewHolder) v.getTag();
                     if (TextUtils.isEmpty(vh.number)) {
                         return;
                     }
@@ -225,8 +224,7 @@ public class CallLogAdapter extends GroupingListAdapter
                     copyItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            ClipboardUtils.copyText(CallLogAdapter.this.mContext, null,
-                                    vh.number, true);
+                            ClipboardUtils.copyText(mContext, null, vh.number, true);
                             return true;
                         }
                     });
@@ -248,8 +246,8 @@ public class CallLogAdapter extends GroupingListAdapter
                         editItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
-                                final Intent intent = new Intent(Intent.ACTION_DIAL,
-                                        CallUtil.getCallUri(vh.number));
+                                final Intent intent = new Intent(
+                                        Intent.ACTION_DIAL, CallUtil.getCallUri(vh.number));
                                 intent.setClass(mContext, DialtactsActivity.class);
                                 DialerUtils.startActivityWithErrorToast(mContext, intent);
                                 return true;
@@ -257,27 +255,25 @@ public class CallLogAdapter extends GroupingListAdapter
                         });
                     }
 
-                    if (vh.callType == CallLog.Calls.VOICEMAIL_TYPE) {
+                    final TextView transcriptView =
+                            vh.phoneCallDetailsViews.voicemailTranscriptionView;
+                    if (vh.callType == CallLog.Calls.VOICEMAIL_TYPE
+                            && transcriptView.length() > 0) {
                         final MenuItem copyTranscriptItem = menu.add(
                                 ContextMenu.NONE,
                                 R.id.context_menu_copy_transcript_to_clipboard,
                                 ContextMenu.NONE,
-                                R.string.copy_transcript_text
-                        );
+                                R.string.copy_transcript_text);
+
                         copyTranscriptItem.setOnMenuItemClickListener(
                                 new OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                final TextView view = vh.phoneCallDetailsViews.
-                                        voicemailTranscriptionView;
-                                ClipboardUtils.copyText(
-                                        CallLogAdapter.this.mContext,
-                                        null,
-                                        view.getText(),
-                                        true);
-                                return true;
-                            }
-                        });
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem item) {
+                                        ClipboardUtils.copyText(
+                                                mContext, null, transcriptView.getText(), true);
+                                        return true;
+                                    }
+                                });
                     }
                 }
             };
