@@ -279,6 +279,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             }
          }
         TelecomAdapter.getInstance().merge(mCall.getId());
+        InCallAudioManager.getInstance().onMergeClicked();
     }
 
     public void addParticipantClicked() {

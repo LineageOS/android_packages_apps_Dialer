@@ -725,11 +725,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         maybeAutoEnterFullscreen(call);
     }
 
-    private static boolean isSpeakerEnabledForVideoCalls() {
-        // TODO: Make this a carrier configurable setting. For now this is always true. b/20090407
-        return true;
-    }
-
     private void enableCamera(VideoCall videoCall, boolean isCameraRequired) {
         Log.d(this, "enableCamera: VideoCall=" + videoCall + " enabling=" + isCameraRequired);
         if (videoCall == null) {

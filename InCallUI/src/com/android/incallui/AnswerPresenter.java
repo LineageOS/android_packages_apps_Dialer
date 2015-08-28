@@ -327,7 +327,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             InCallPresenter.getInstance().acceptUpgradeRequest(videoState, context);
         } else {
             Log.d(this, "onAnswer (answerCall) mCallId=" + mCallId + " videoState=" + videoState);
-            TelecomAdapter.getInstance().answerCall(mCall[phoneId].getId(), videoState);
+            InCallPresenter.getInstance().answerIncomingCall(context, videoState);
         }
     }
 
