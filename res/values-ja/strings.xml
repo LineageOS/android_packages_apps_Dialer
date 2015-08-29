@@ -41,7 +41,6 @@
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>、<xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g>から新着ボイスメール"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"ボイスメールを再生できませんでした"</string>
-    <string name="voicemail_buffering" msgid="738287747618697097">"バッファリング中..."</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"ボイスメールを読み込んでいます…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"ボイスメールを読み込めませんでした"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ボイスメールのある着信のみ"</string>
@@ -109,7 +108,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g>に発信"</string>
     <string name="unknown" msgid="740067747858270469">"通知不可能"</string>
     <string name="voicemail" msgid="3851469869202611441">"ボイスメール"</string>
-    <string name="private_num" msgid="6374339738119166953">"非通知"</string>
+    <string name="private_num" msgid="6374339738119166953">"非通知設定"</string>
     <string name="payphone" msgid="7726415831153618726">"公衆電話"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g>秒"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g>分<xliff:g id="SECONDS">%s</xliff:g>秒"</string>

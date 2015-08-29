@@ -41,7 +41,6 @@
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> ဆီမှ အသံစာ အသစ်"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"အသံမေးလ်ကို ဖွင့်မပေးနိုင်ခဲ့"</string>
-    <string name="voicemail_buffering" msgid="738287747618697097">"ယာယီကြားခံနေစဉ်…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"အသံမေးလ်ကို တင်ပေးနေ…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"အသံမေးလ်ကို တင်မပေးနိုင်ခဲ့"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"အသံမေးလ်ပါသော အဝင်ခေါ်ဆိုမှုများသာ"</string>

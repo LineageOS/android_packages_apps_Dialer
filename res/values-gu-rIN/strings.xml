@@ -41,7 +41,6 @@
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> તરફથી નવો વૉઇસમેઇલ."</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"વૉઇસમેઇલ ચલાવી શકાઈ નથી"</string>
-    <string name="voicemail_buffering" msgid="738287747618697097">"બફર કરી રહ્યું છે…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"વૉઇસમેઇલ લોડ કરી રહ્યું છે…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"વૉઇસમેઇલ લોડ કરી શકાઈ નથી"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ફક્ત વૉઇસમેઇલ સાથેના કૉલ્સ"</string>

@@ -28,7 +28,7 @@
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Ezabatu deien historiatik"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Garbitu deien historia"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ezabatu ahots-mezua"</string>
-    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Ezabatu da ahots-mezua"</string>
+    <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Ahots-mezua ezabatzea"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESEGIN"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Deien historia garbitu nahi duzu?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Historiako dei guztiak ezabatuko dira"</string>
@@ -41,7 +41,6 @@
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> deitzailearen ahots-mezu berria"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Ezin izan dira erreproduzitu ahots-mezuak"</string>
-    <string name="voicemail_buffering" msgid="738287747618697097">"Buferreratzen…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Erantzungailua kargatzen…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Ezin izan da kargatu erantzungailua"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Erantzungailuko deiak soilik"</string>

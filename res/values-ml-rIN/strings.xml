@@ -41,7 +41,6 @@
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"വോയ്‌സ്‌മെയിൽ പ്‌ലേ ചെയ്യാനായില്ല"</string>
-    <string name="voicemail_buffering" msgid="738287747618697097">"ബഫർ ചെയ്യുന്നു…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"വോയ്‌സ്‌മെയിൽ ലോഡുചെയ്യുന്നു..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"വോയ്‌സ്‌മെയിൽ ലോഡുചെയ്യാനായില്ല"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"വോയ്‌സ്മെയിൽ ഉള്ള കോളുകൾ മാത്രം"</string>
