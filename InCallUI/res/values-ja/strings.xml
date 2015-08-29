@@ -20,7 +20,7 @@
     <string name="phoneAppLabel" product="default" msgid="906161039445636857">"電話"</string>
     <string name="onHold" msgid="9035493194749959955">"保留中"</string>
     <string name="unknown" msgid="6878797917991465859">"通知不可能"</string>
-    <string name="private_num" msgid="6713286113000232309">"非通知"</string>
+    <string name="private_num" msgid="6713286113000232309">"非通知設定"</string>
     <string name="payphone" msgid="4793877574636445118">"公衆電話"</string>
     <string name="confCall" msgid="1904840547188336828">"グループ通話"</string>
     <string name="call_lost" msgid="6183862117003999578">"通話が遮断されました"</string>
