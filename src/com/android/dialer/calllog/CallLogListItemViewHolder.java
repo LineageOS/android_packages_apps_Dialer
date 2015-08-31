@@ -21,12 +21,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -34,12 +37,17 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.filterednumber.FilterNumberDialogFragment;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
@@ -52,7 +60,8 @@ import com.android.dialer.voicemail.VoicemailPlaybackLayout;
  * This object also contains UI logic pertaining to the view, to isolate it from the CallLogAdapter.
  */
 public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
-        implements View.OnClickListener {
+        implements View.OnClickListener, MenuItem.OnMenuItemClickListener,
+        View.OnCreateContextMenuListener {
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -116,10 +125,22 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public String numberType;
 
     /**
+     * The country iso for the call. Cached here as the call back
+     * intent is set only when the actions ViewStub is inflated.
+     */
+    public String countryIso;
+
+    /**
      * The type of call for the current call log entry.  Cached here as the call back
      * intent is set only when the actions ViewStub is inflated.
      */
     public int callType;
+
+    /**
+     * ID for blocked numbers database.
+     * Set when context menu is created, if the number is blocked.
+     */
+    public Integer blockId;
 
     /**
      * The account for the current call log entry.  Cached here as the call back
@@ -156,6 +177,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private final TelecomCallLogCache mTelecomCallLogCache;
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
+    private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     private final int mPhotoSize;
 
@@ -168,6 +190,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
             View rootView,
             QuickContactBadge quickContactView,
             View primaryActionView,
@@ -182,6 +205,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         mTelecomCallLogCache = telecomCallLogCache;
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
+        mFilteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
 
         this.rootView = rootView;
         this.quickContactView = quickContactView;
@@ -202,6 +226,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         primaryActionButtonView.setOnClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
+        primaryActionView.setOnCreateContextMenuListener(this);
     }
 
     public static CallLogListItemViewHolder create(
@@ -210,7 +235,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             View.OnClickListener expandCollapseListener,
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
-            VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
+            VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
 
         return new CallLogListItemViewHolder(
                 context,
@@ -218,6 +244,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 telecomCallLogCache,
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
+                filteredNumberAsyncQueryHandler,
                 view,
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
@@ -225,6 +252,92 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 (CardView) view.findViewById(R.id.call_log_row),
                 (TextView) view.findViewById(R.id.call_log_day_group_label),
                 (ImageView) view.findViewById(R.id.primary_action_button));
+    }
+
+    @Override
+    public void onCreateContextMenu(
+            final ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (TextUtils.isEmpty(number)) {
+            return;
+        }
+
+        if (callType == CallLog.Calls.VOICEMAIL_TYPE) {
+            menu.setHeaderTitle(mContext.getResources().getText(R.string.voicemail));
+        } else {
+            menu.setHeaderTitle(number);
+        }
+
+        menu.add(ContextMenu.NONE, R.id.context_menu_copy_to_clipboard, ContextMenu.NONE,
+                R.string.copy_number_text)
+                .setOnMenuItemClickListener(this);
+
+        // The edit number before call does not show up if any of the conditions apply:
+        // 1) Number cannot be called
+        // 2) Number is the voicemail number
+        // 3) Number is a SIP address
+
+        if (PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation)
+                && !mTelecomCallLogCache.isVoicemailNumber(accountHandle, number)
+                && !PhoneNumberUtil.isSipNumber(number)) {
+            menu.add(ContextMenu.NONE, R.id.context_menu_edit_before_call, ContextMenu.NONE,
+                    R.string.call_log_edit_number_before_call)
+                    .setOnMenuItemClickListener(this);
+        }
+
+        if (callType == CallLog.Calls.VOICEMAIL_TYPE
+                && phoneCallDetailsViews.voicemailTranscriptionView.length() > 0) {
+            menu.add(ContextMenu.NONE, R.id.context_menu_copy_transcript_to_clipboard,
+                    ContextMenu.NONE, R.string.copy_transcript_text)
+                    .setOnMenuItemClickListener(this);
+        }
+
+        try {
+            mFilteredNumberAsyncQueryHandler.isBlocked(
+                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                        @Override
+                        public void onCheckComplete(Integer id) {
+                            blockId = id;
+                            int blockTitleId = blockId == null ? R.string.call_log_block_number
+                                    : R.string.call_log_unblock_number;
+                            final MenuItem blockItem = menu.add(
+                                    ContextMenu.NONE,
+                                    R.id.context_menu_block_number,
+                                    ContextMenu.NONE,
+                                    blockTitleId);
+                            blockItem.setOnMenuItemClickListener(
+                                    CallLogListItemViewHolder.this);
+                        }
+                    }, info.normalizedNumber, number, countryIso);
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.context_menu_block_number:
+                FilterNumberDialogFragment newFragment =
+                        FilterNumberDialogFragment.newInstance(blockId, info.normalizedNumber,
+                                number, countryIso, info.formattedNumber);
+                newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
+                newFragment.show(((Activity) mContext).getFragmentManager(),
+                        FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                return true;
+            case R.id.context_menu_copy_to_clipboard:
+                ClipboardUtils.copyText(mContext, null, number, true);
+                return true;
+            case R.id.context_menu_copy_transcript_to_clipboard:
+                ClipboardUtils.copyText(mContext, null,
+                        phoneCallDetailsViews.voicemailTranscriptionView.getText(), true);
+                return true;
+            case R.id.context_menu_edit_before_call:
+                final Intent intent = new Intent(
+                        Intent.ACTION_DIAL, CallUtil.getCallUri(number));
+                intent.setClass(mContext, DialtactsActivity.class);
+                DialerUtils.startActivityWithErrorToast(mContext, intent);
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -488,6 +601,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 telecomCallLogCache,
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources, telecomCallLogCache),
                 null /* voicemailPlaybackPresenter */,
+                null /* filteredNumberAsyncQueryHandler */,
                 new View(context),
                 new QuickContactBadge(context),
                 new View(context),

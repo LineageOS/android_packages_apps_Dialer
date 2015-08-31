@@ -74,6 +74,9 @@ import com.android.dialer.R;
         // Cache name or number of caller.  Used when setting the content descriptions of buttons
         // when the actions ViewStub is inflated.
         views.nameOrNumber = getNameOrNumber(details);
+
+        // Cache country iso. Used for number filtering.
+        views.countryIso = details.countryIso;
     }
 
     /**
