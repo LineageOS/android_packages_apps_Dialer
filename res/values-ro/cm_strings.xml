@@ -66,6 +66,8 @@
   <string name="call_stats_reset_filter">Resetare interval de timp</string>
   <string name="call_stats_sort_by_duration">Sortare după durata apelului</string>
   <string name="call_stats_sort_by_count">Sortare după numărul de apeluri</string>
+  <string name="menu_add_to_blacklist">Adăugare la lista apelanților blocați</string>
+  <string name="toast_added_to_blacklist">%s adăugat la lista apelanților blocați.</string>
   <string name="speed_dial_settings">Setări apelare rapidă</string>
   <string name="speed_dial_not_set">(nu este setată)</string>
   <string name="speed_dial_replace">Înlocuire</string>
