@@ -481,7 +481,10 @@ public class DialpadFragment extends Fragment
      * @param intent The intent.
      * @return {@literal true} if add call operation was requested.  {@literal false} otherwise.
      */
-    private static boolean isAddCallMode(Intent intent) {
+    public static boolean isAddCallMode(Intent intent) {
+        if (intent == null) {
+            return false;
+        }
         final String action = intent.getAction();
         if (Intent.ACTION_DIAL.equals(action) || Intent.ACTION_VIEW.equals(action)) {
             // see if we are "adding a call" from the InCallScreen; false by default.
