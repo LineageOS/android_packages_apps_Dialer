@@ -586,6 +586,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             } else {
                 mCallStateLabel.startAnimation(mPulseAnimation);
             }
+        } else {
+            mCallStateLabel.clearAnimation();
         }
 
         if (callStateIcon != null) {
@@ -606,10 +608,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 ((AnimationDrawable) callStateIcon).start();
             }
         } else {
-            Animation callStateIconAnimation = mCallStateIcon.getAnimation();
-            if (callStateIconAnimation != null) {
-                callStateIconAnimation.cancel();
-            }
+            mCallStateIcon.clearAnimation();
 
             // Invoke setAlpha(float) instead of setAlpha(int) to set the view's alpha. This is
             // needed because the pulse animation operates on the view alpha.
