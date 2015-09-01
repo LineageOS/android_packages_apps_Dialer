@@ -59,6 +59,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final int UPDATE_MARK_MISSED_CALL_AS_READ_TOKEN = 56;
     /** The token for the query to fetch voicemail status messages. */
     private static final int QUERY_VOICEMAIL_STATUS_TOKEN = 57;
+    /** The token for the query to fetch the number of unread voicemails. */
+    private static final int QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN = 58;
 
     private final int mLogLimit;
 
@@ -144,6 +146,13 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
             startQuery(QUERY_VOICEMAIL_STATUS_TOKEN, null, Status.CONTENT_URI,
                     VoicemailStatusHelperImpl.PROJECTION, null, null, null);
+        }
+    }
+
+    public void fetchVoicemailUnreadCount() {
+        if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
+            startQuery(QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN, null, Voicemails.CONTENT_URI,
+                new String[] { Voicemails._ID }, Voicemails.IS_READ + "=0", null, null);
         }
     }
 
@@ -243,6 +252,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 }
             } else if (token == QUERY_VOICEMAIL_STATUS_TOKEN) {
                 updateVoicemailStatus(cursor);
+            } else if (token == QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN) {
+                updateVoicemailUnreadCount(cursor);
             } else {
                 Log.w(TAG, "Unknown query completed: ignoring: " + token);
             }
@@ -273,10 +284,20 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
     }
 
+    private void updateVoicemailUnreadCount(Cursor statusCursor) {
+        final Listener listener = mListener.get();
+        if (listener != null) {
+            listener.onVoicemailUnreadCountFetched(statusCursor);
+        }
+    }
+
     /** Listener to completion of various queries. */
     public interface Listener {
         /** Called when {@link CallLogQueryHandler#fetchVoicemailStatus()} completes. */
         void onVoicemailStatusFetched(Cursor statusCursor);
+
+        /** Called when {@link CallLogQueryHandler#fetchVoicemailUnreadCount()} completes. */
+        void onVoicemailUnreadCountFetched(Cursor cursor);
 
         /**
          * Called when {@link CallLogQueryHandler#fetchCalls(int)} complete.

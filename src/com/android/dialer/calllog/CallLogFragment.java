@@ -284,6 +284,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     }
 
     @Override
+    public void onVoicemailUnreadCountFetched(Cursor cursor) {}
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         View view = inflater.inflate(R.layout.call_log_fragment, container, false);
 

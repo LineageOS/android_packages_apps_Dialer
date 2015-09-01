@@ -693,6 +693,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     /**
+     * Update the number of unread voicemails (potentially other tabs) displayed next to the tab
+     * icon.
+     */
+    public void updateTabUnreadCounts() {
+        mListsFragment.updateTabUnreadCounts();
+    }
+
+    /**
      * Initiates a fragment transaction to show the dialpad fragment. Animations and other visual
      * updates are handled by a callback which is invoked after the dialpad fragment is shown.
      * @see #onDialpadShown
