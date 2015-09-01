@@ -113,6 +113,10 @@ public class RegularSearchFragment extends SearchFragment
             int[] grantResults) {
         if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
             setupEmptyView();
+            if (grantResults != null && grantResults.length == 1
+                    && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
+                PermissionsUtil.notifyPermissionGranted(getActivity(), READ_CONTACTS);
+            }
         }
     }
 }
