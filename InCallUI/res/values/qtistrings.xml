@@ -97,4 +97,14 @@
 
     <!-- Text for the onscreen "Add Participant" button -->
     <string name="onscreenAddParticipant">Add Participant</string>
+
+    <!-- Title of the IMS to CS redial dialog -->
+    <string name="cs_redial_option">Redial Option</string>
+    <!-- Message text of the IMS to CS redial dialog -->
+    <string name="cs_redial_msg">Unable to make an IMS Video call, try to dial as non-IMS voice call
+?</string>
+    <!-- Yes option of the IMS to CS redial dialog -->
+    <string name="cs_redial_yes">Yes</string>
+    <!-- No option of the IMS to CS redial dialog -->
+    <string name="cs_redial_no">No</string>
 </resources>

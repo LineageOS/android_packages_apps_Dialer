@@ -391,7 +391,8 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     }
 
     private boolean hasPendingDialogs() {
-        return mDialog != null || (mAnswerFragment != null && mAnswerFragment.hasPendingDialogs());
+        return mDialog != null || (mAnswerFragment != null && mAnswerFragment.hasPendingDialogs())
+                || InCallCsRedialHandler.getInstance().hasPendingDialogs();
     }
 
     @Override
@@ -892,6 +893,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         if (mAnswerFragment != null) {
             mAnswerFragment.dismissPendingDialogs();
         }
+        InCallCsRedialHandler.getInstance().dismissPendingDialogs();
     }
 
     /**
