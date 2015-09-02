@@ -907,11 +907,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
 
-        final boolean phoneIsInUse = phoneIsInUse();
-        if (phoneIsInUse || (intent.getData() !=  null && isDialIntent(intent))) {
+        final boolean showDialpadChooser = phoneIsInUse() && !DialpadFragment.isAddCallMode(intent);
+        if (showDialpadChooser || (intent.getData() != null && isDialIntent(intent))) {
             showDialpadFragment(false);
             mDialpadFragment.setStartedFromNewIntent(true);
-            if (phoneIsInUse && !mDialpadFragment.isVisible()) {
+            if (showDialpadChooser && !mDialpadFragment.isVisible()) {
                 mInCallDialpadUp = true;
             }
         }
