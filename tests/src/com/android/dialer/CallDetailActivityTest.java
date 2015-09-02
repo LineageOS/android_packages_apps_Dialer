@@ -29,12 +29,12 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.Suppress;
 import android.view.Menu;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.FakeAsyncTaskExecutor;
-// import com.android.internal.view.menu.ContextMenuBuilder;
 
 /**
  * Unit tests for the {@link CallDetailActivity}. NOTE: The screen needs to be on for the
@@ -86,33 +86,33 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
      * Test for bug where voicemails should not have remove-from-call-log entry.
      * <p>
      * See http://b/5054103.
+     */
     public void testVoicemailDoesNotHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
         mFakeAsyncTaskExecutor.runTask(GET_CALL_DETAILS);
 
-        Menu menu = new ContextMenuBuilder(mActivityUnderTest);
-        mActivityUnderTest.onCreateOptionsMenu(menu);
-        mActivityUnderTest.onPrepareOptionsMenu(menu);
-        assertFalse(menu.findItem(R.id.menu_remove_from_call_log).isVisible());
-        assertTrue(menu.findItem(R.id.menu_trash).isVisible());
+        Menu optionsMenu = (new PopupMenu(mActivityUnderTest, null)).getMenu();
+        mActivityUnderTest.onCreateOptionsMenu(optionsMenu);
+        mActivityUnderTest.onPrepareOptionsMenu(optionsMenu);
+        assertFalse(optionsMenu.findItem(R.id.menu_remove_from_call_log).isVisible());
+        assertTrue(optionsMenu.findItem(R.id.menu_trash).isVisible());
     }
-    */
 
     /**
      * Test to check that I haven't broken the remove-from-call-log entry from regular calls.
+     */
     public void testRegularCallDoesHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestCallEntry();
         startActivityUnderTest();
         mFakeAsyncTaskExecutor.runTask(GET_CALL_DETAILS);
 
-        Menu menu = new ContextMenuBuilder(mActivityUnderTest);
-        mActivityUnderTest.onCreateOptionsMenu(menu);
-        mActivityUnderTest.onPrepareOptionsMenu(menu);
-        assertTrue(menu.findItem(R.id.menu_remove_from_call_log).isVisible());
-        assertFalse(menu.findItem(R.id.menu_trash).isVisible());
+        Menu optionsMenu = (new PopupMenu(mActivityUnderTest, null)).getMenu();
+        mActivityUnderTest.onCreateOptionsMenu(optionsMenu);
+        mActivityUnderTest.onPrepareOptionsMenu(optionsMenu);
+        assertTrue(optionsMenu.findItem(R.id.menu_remove_from_call_log).isVisible());
+        assertFalse(optionsMenu.findItem(R.id.menu_trash).isVisible());
     }
-    */
 
     private void setActivityIntentForTestCallEntry() {
         assertNull(mVoicemailUri);
