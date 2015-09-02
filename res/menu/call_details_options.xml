@@ -13,7 +13,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/call_details_menu">
 
     <item android:id="@+id/menu_trash"
         android:icon="@drawable/ic_delete_24dp"
