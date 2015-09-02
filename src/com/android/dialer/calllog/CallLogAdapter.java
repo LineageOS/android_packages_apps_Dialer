@@ -79,11 +79,9 @@ public class CallLogAdapter extends GroupingListAdapter
     private static final int NO_EXPANDED_LIST_ITEM = -1;
 
     private static final int VOICEMAIL_PROMO_CARD_POSITION = 0;
-    /**
-     * View type for voicemail promo card.  Note: Numbering starts at 20 to avoid collision
-     * with {@link com.android.common.widget.GroupingListAdapter#ITEM_TYPE_IN_GROUP}.
-     */
-    private static final int VIEW_TYPE_VOICEMAIL_PROMO_CARD = 20;
+
+    protected static final int VIEW_TYPE_NORMAL = 0;
+    private static final int VIEW_TYPE_VOICEMAIL_PROMO_CARD = 1;
 
     /**
      * The key for the show voicemail promo card preference which will determine whether the promo
@@ -481,9 +479,9 @@ public class CallLogAdapter extends GroupingListAdapter
     protected void bindVoicemailPromoCardViewHolder(ViewHolder viewHolder) {
         PromoCardViewHolder promoCardViewHolder = (PromoCardViewHolder) viewHolder;
 
-        promoCardViewHolder.getSettingsTextView().setOnClickListener(
-                mVoicemailSettingsActionListener);
-        promoCardViewHolder.getOkTextView().setOnClickListener(mOkActionListener);
+        promoCardViewHolder.getSecondaryActionView()
+                .setOnClickListener(mVoicemailSettingsActionListener);
+        promoCardViewHolder.getPrimaryActionView().setOnClickListener(mOkActionListener);
     }
 
     /**

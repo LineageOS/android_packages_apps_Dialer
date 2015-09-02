@@ -126,7 +126,7 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
      * that position.
      */
     public int getGroupSize(int listPosition) {
-        if (listPosition >= mGroupMetadata.size()) {
+        if (listPosition < 0 || listPosition >= mGroupMetadata.size()) {
             return 0;
         }
 
@@ -138,7 +138,7 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
      * corresponding to that position.
      */
     public Object getItem(int listPosition) {
-        if (mCursor == null || listPosition >= mGroupMetadata.size()) {
+        if (mCursor == null || listPosition < 0 || listPosition >= mGroupMetadata.size()) {
             return null;
         }
 
