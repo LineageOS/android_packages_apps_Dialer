@@ -247,7 +247,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         }
 
         public void showVoicemailPromoCard(boolean show) {
-            mShowVoicemailPromoCard = true;
+            mShowVoicemailPromoCard = show;
         }
     }
 
