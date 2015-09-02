@@ -21,6 +21,7 @@
     <color name="dialtacts_secondary_text_color">#737373</color>
     <color name="dialer_red_highlight_color">#ff1744</color>
     <color name="dialer_green_highlight_color">#00c853</color>
+    <color name="dialer_blue_highlight_color">#00a8ff</color>
 
     <color name="setting_background_color">#ffffff</color>
     <color name="setting_button_color">#eee</color>
@@ -91,8 +92,11 @@
     <!-- Color for blacklist call icons. -->
     <color name="blacklisted_call">#ff000000</color>
 
-    <!-- Color for answered or outgoing call icons. -->
-    <color name="answered_call">@color/dialer_green_highlight_color</color>
+    <!-- Color for answered call icons. -->
+    <color name="answered_incoming_call">@color/dialer_blue_highlight_color</color>
+
+    <!-- Color for outgoing call icons. -->
+    <color name="answered_outgoing_call">@color/dialer_green_highlight_color</color>
 
     <!-- Color for icons in the actionbar -->
     <color name="actionbar_icon_color">#ffffff</color>
