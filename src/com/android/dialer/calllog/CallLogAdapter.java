@@ -22,12 +22,10 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.os.Trace;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.provider.CallLog;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -35,28 +33,18 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.TextView;
 
-import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.util.PermissionsUtil;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
-import com.android.dialer.util.DialerUtils;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -96,6 +84,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final ContactInfoHelper mContactInfoHelper;
     protected final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
+    private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     protected ContactInfoCache mContactInfoCache;
 
@@ -195,89 +184,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     };
 
-    /**
-     * Listener that is triggered to populate the context menu with actions to perform on the call's
-     * number, when the call log entry is long pressed.
-     */
-    private final View.OnCreateContextMenuListener mOnCreateContextMenuListener =
-            new View.OnCreateContextMenuListener() {
-                @Override
-                public void onCreateContextMenu(
-                        ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-                    final CallLogListItemViewHolder vh = (CallLogListItemViewHolder) v.getTag();
-                    if (TextUtils.isEmpty(vh.number)) {
-                        return;
-                    }
-
-                    if (vh.callType == CallLog.Calls.VOICEMAIL_TYPE) {
-                        menu.setHeaderTitle(mContext.getResources().getText(R.string.voicemail));
-                    } else {
-                        menu.setHeaderTitle(vh.number);
-                    }
-
-                    final MenuItem copyItem = menu.add(
-                            ContextMenu.NONE,
-                            R.id.context_menu_copy_to_clipboard,
-                            ContextMenu.NONE,
-                            R.string.copy_number_text);
-
-                    copyItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            ClipboardUtils.copyText(mContext, null, vh.number, true);
-                            return true;
-                        }
-                    });
-
-                    // The edit number before call does not show up if any of the conditions apply:
-                    // 1) Number cannot be called
-                    // 2) Number is the voicemail number
-                    // 3) Number is a SIP address
-
-                    if (PhoneNumberUtil.canPlaceCallsTo(vh.number, vh.numberPresentation)
-                            && !mTelecomCallLogCache.isVoicemailNumber(vh.accountHandle, vh.number)
-                            && !PhoneNumberUtil.isSipNumber(vh.number)) {
-                        final MenuItem editItem = menu.add(
-                                ContextMenu.NONE,
-                                R.id.context_menu_edit_before_call,
-                                ContextMenu.NONE,
-                                R.string.call_log_edit_number_before_call);
-
-                        editItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                final Intent intent = new Intent(
-                                        Intent.ACTION_DIAL, CallUtil.getCallUri(vh.number));
-                                intent.setClass(mContext, DialtactsActivity.class);
-                                DialerUtils.startActivityWithErrorToast(mContext, intent);
-                                return true;
-                            }
-                        });
-                    }
-
-                    final TextView transcriptView =
-                            vh.phoneCallDetailsViews.voicemailTranscriptionView;
-                    if (vh.callType == CallLog.Calls.VOICEMAIL_TYPE
-                            && transcriptView.length() > 0) {
-                        final MenuItem copyTranscriptItem = menu.add(
-                                ContextMenu.NONE,
-                                R.id.context_menu_copy_transcript_to_clipboard,
-                                ContextMenu.NONE,
-                                R.string.copy_transcript_text);
-
-                        copyTranscriptItem.setOnMenuItemClickListener(
-                                new OnMenuItemClickListener() {
-                                    @Override
-                                    public boolean onMenuItemClick(MenuItem item) {
-                                        ClipboardUtils.copyText(
-                                                mContext, null, transcriptView.getText(), true);
-                                        return true;
-                                    }
-                                });
-                    }
-                }
-            };
-
     private void expandViewHolderActions(CallLogListItemViewHolder viewHolder) {
         // If another item is expanded, notify it that it has changed. Its actions will be
         // hidden when it is re-binded because we change mCurrentlyExpandedPosition below.
@@ -351,6 +257,8 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         maybeShowVoicemailPromoCard();
+        mFilteredNumberAsyncQueryHandler =
+                new FilteredNumberAsyncQueryHandler(mContext.getContentResolver());
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -439,12 +347,12 @@ public class CallLogAdapter extends GroupingListAdapter
                 mExpandCollapseListener,
                 mTelecomCallLogCache,
                 mCallLogListItemHelper,
-                mVoicemailPlaybackPresenter);
+                mVoicemailPlaybackPresenter,
+                mFilteredNumberAsyncQueryHandler);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
 
-        viewHolder.primaryActionView.setOnCreateContextMenuListener(mOnCreateContextMenuListener);
         viewHolder.primaryActionView.setTag(viewHolder);
 
         return viewHolder;

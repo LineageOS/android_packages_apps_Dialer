@@ -21,6 +21,8 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
 
@@ -51,15 +53,28 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
 
     public interface OnCheckBlockedListener {
-        public void onQueryComplete(Integer id);
+        /**
+         * Invoked after querying if a number is blocked.
+         * @param id The ID of the row if blocked, null otherwise.
+         */
+        public void onCheckComplete(Integer id);
     }
 
     public interface OnBlockNumberListener {
-        public void onInsertComplete(Uri uri);
+        /**
+         * Invoked after inserting a blocked number.
+         * @param uri The uri of the newly created row.
+         */
+        public void onBlockComplete(Uri uri);
     }
 
     public interface OnUnblockNumberListener {
-        public void onDeleteComplete(int rows);
+        /**
+         * Invoked after removing a blocked number
+         * @param rows The number of rows affected (expected value 1).
+         * @param values The deleted data (used for restoration).
+         */
+        public void onUnblockComplete(int rows, ContentValues values);
     }
 
     @Override
@@ -93,7 +108,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     /**
      * Check if the number + country iso given has been blocked.
      * This method normalizes the number for the lookup if normalizedNumber is null.
-     * Returns to the listener the the ID of the row if blocked, null otherwise.
      */
     public final void isBlocked(final OnCheckBlockedListener listener,
                                 String normalizedNumber, String number, String countryIso) {
@@ -108,25 +122,24 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
     /**
      * Check if the normalized number given has been blocked.
-     * Returns to the listener  the ID of the row if blocked, null otherwise.
      */
     public final void isBlocked(final OnCheckBlockedListener listener,
-                                       String normalizedNumber) {
+                                String normalizedNumber) {
         startQuery(NO_TOKEN,
                 new Listener() {
                     @Override
                     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
                         if (cursor.getCount() != 1) {
-                            listener.onQueryComplete(null);
+                            listener.onCheckComplete(null);
                             return;
                         }
                         cursor.moveToFirst();
                         if (cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns.TYPE))
                                 != FilteredNumberTypes.BLOCKED_NUMBER) {
-                            listener.onQueryComplete(null);
+                            listener.onCheckComplete(null);
                             return;
                         }
-                        listener.onQueryComplete(
+                        listener.onCheckComplete(
                                 cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID)));
                     }
                 },
@@ -139,22 +152,11 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
     /**
      * Add a number manually blocked by the user.
-     * Returns to the listener the URL of the newly created row.
      */
     public final void blockNumber(final OnBlockNumberListener listener,
-                                  String number, String countryIso) {
-        blockNumber(listener,
-                PhoneNumberUtils.formatNumberToE164(number, countryIso), number, countryIso);
-    }
-
-    /**
-     * Add a number manually blocked by the user.
-     * Returns to the listener the URL of the newly created row.
-     */
-    public final void blockNumber(final OnBlockNumberListener listener,
-                                        String normalizedNumber, String number, String countryIso) {
+                                  String normalizedNumber, String number, String countryIso) {
         if (normalizedNumber == null) {
-            blockNumber(listener, number, countryIso);
+            normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         }
         ContentValues v = new ContentValues();
         v.put(FilteredNumberColumns.NORMALIZED_NUMBER, normalizedNumber);
@@ -162,30 +164,61 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         v.put(FilteredNumberColumns.COUNTRY_ISO, countryIso);
         v.put(FilteredNumberColumns.TYPE, FilteredNumberTypes.BLOCKED_NUMBER);
         v.put(FilteredNumberColumns.SOURCE, FilteredNumberSources.USER);
+        blockNumber(listener, v);
+    }
+
+    /**
+     * Block a number with specified ContentValues. Can be manually added or a restored row
+     * from performing the 'undo' action after unblocking.
+     */
+    public final void blockNumber(final OnBlockNumberListener listener, ContentValues values) {
         startInsert(NO_TOKEN,
                 new Listener() {
                     @Override
                     public void onInsertComplete(int token, Object cookie, Uri uri) {
-                        listener.onInsertComplete(uri);
+                        listener.onBlockComplete(uri);
                     }
-                }, getContentUri(null), v);
+                }, getContentUri(null), values);
     }
 
     /**
      * Removes row from database.
      * Caller should call {@link FilteredNumberAsyncQueryHandler#isBlocked} first.
-     * @param id the ID of the row to remove, from {@link FilteredNumberAsyncQueryHandler#isBlocked}.
-     * Returns to the listener the number of rows affected. Expected value is 1.
+     * @param id The ID of row to remove, from {@link FilteredNumberAsyncQueryHandler#isBlocked}.
      */
     public final void unblock(final OnUnblockNumberListener listener, Integer id) {
         if (id == null) {
             throw new IllegalArgumentException("Null id passed into unblock");
         }
-        startDelete(NO_TOKEN, new Listener() {
+        unblock(listener, getContentUri(id));
+    }
+
+    /**
+     * Removes row from database.
+     * @param uri The uri of row to remove, from
+     *         {@link FilteredNumberAsyncQueryHandler#blockNumber}.
+     */
+    public final void unblock(final OnUnblockNumberListener listener, final Uri uri) {
+        startQuery(NO_TOKEN, new Listener() {
             @Override
-            public void onDeleteComplete(int token, Object cookie, int result) {
-                listener.onDeleteComplete(result);
+            public void onQueryComplete(int token, Object cookie, Cursor cursor) {
+                if (cursor.getCount() != 1) {
+                    throw new SQLiteDatabaseCorruptException
+                            ("Returned " + cursor.getCount() + " rows for uri "
+                                    + uri + "where 1 expected.");
+                }
+                cursor.moveToFirst();
+                final ContentValues values = new ContentValues();
+                DatabaseUtils.cursorRowToContentValues(cursor, values);
+                values.remove(FilteredNumberColumns._ID);
+
+                startDelete(NO_TOKEN, new Listener() {
+                    @Override
+                    public void onDeleteComplete(int token, Object cookie, int result) {
+                        listener.onUnblockComplete(result, values);
+                    }
+                }, uri, null, null);
             }
-        }, getContentUri(id), null, null);
+        }, uri, null, null, null, null);
     }
 }
