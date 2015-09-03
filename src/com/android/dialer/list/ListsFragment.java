@@ -110,6 +110,7 @@ public class ListsFragment extends Fragment
      * The position of the currently selected tab.
      */
     private int mTabIndex = TAB_INDEX_SPEED_DIAL;
+    private CallLogQueryHandler mCallLogQueryHandler;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager fm) {
@@ -199,9 +200,9 @@ public class ListsFragment extends Fragment
         }
 
         // Fetch voicemail status to determine if we should show the voicemail tab.
-        CallLogQueryHandler callLogQueryHandler =
+        mCallLogQueryHandler =
                 new CallLogQueryHandler(getActivity(), getActivity().getContentResolver(), this);
-        callLogQueryHandler.fetchVoicemailStatus();
+        mCallLogQueryHandler.fetchVoicemailStatus();
         Trace.endSection();
     }
 
@@ -227,13 +228,13 @@ public class ListsFragment extends Fragment
         mTabTitles[TAB_INDEX_VOICEMAIL] = getResources().getString(R.string.tab_voicemail);
 
         mTabIcons = new int[TAB_COUNT_WITH_VOICEMAIL];
-        mTabIcons[TAB_INDEX_SPEED_DIAL] = R.drawable.tab_speed_dial;
-        mTabIcons[TAB_INDEX_HISTORY] = R.drawable.tab_history;
-        mTabIcons[TAB_INDEX_ALL_CONTACTS] = R.drawable.tab_contacts;
-        mTabIcons[TAB_INDEX_VOICEMAIL] = R.drawable.tab_voicemail;
+        mTabIcons[TAB_INDEX_SPEED_DIAL] = R.drawable.ic_grade_24dp;
+        mTabIcons[TAB_INDEX_HISTORY] = R.drawable.ic_schedule_24dp;
+        mTabIcons[TAB_INDEX_ALL_CONTACTS] = R.drawable.ic_people_24dp;
+        mTabIcons[TAB_INDEX_VOICEMAIL] = R.drawable.ic_voicemail_24dp;
 
         mViewPagerTabs = (ViewPagerTabs) parentView.findViewById(R.id.lists_pager_header);
-        mViewPagerTabs.setTabIcons(mTabIcons);
+        mViewPagerTabs.configureTabIcons(mTabIcons);
         mViewPagerTabs.setViewPager(mViewPager);
         addOnPageChangeListener(mViewPagerTabs);
 
@@ -319,14 +320,35 @@ public class ListsFragment extends Fragment
             mViewPagerTabs.setViewPager(mViewPager);
 
             mPrefs.edit()
-                    .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, hasActiveVoicemailProvider)
-                    .commit();
+                  .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, hasActiveVoicemailProvider)
+                  .commit();
+        }
+
+        if (hasActiveVoicemailProvider) {
+            mCallLogQueryHandler.fetchVoicemailUnreadCount();
         }
 
         if (mHasActiveVoicemailProvider && mShowVoicemailTabAfterVoicemailStatusIsFetched) {
             mShowVoicemailTabAfterVoicemailStatusIsFetched = false;
             showTab(TAB_INDEX_VOICEMAIL);
         }
+    }
+
+    @Override
+    public void onVoicemailUnreadCountFetched(Cursor cursor) {
+        if (getActivity() == null || getActivity().isFinishing() || cursor == null) {
+            return;
+        }
+
+        int count = 0;
+        try {
+            count = cursor.getCount();
+        } finally {
+            cursor.close();
+        }
+
+        mViewPagerTabs.setUnreadCount(count, TAB_INDEX_VOICEMAIL);
+        mViewPagerTabs.setViewPager(mViewPager);
     }
 
     @Override
@@ -337,6 +359,16 @@ public class ListsFragment extends Fragment
 
     public int getCurrentTabIndex() {
         return mTabIndex;
+    }
+
+    /**
+     * External method to update unread count because the unread count changes when the user
+     * expands a voicemail in the call log.
+     */
+    public void updateTabUnreadCounts() {
+        if (mHasActiveVoicemailProvider) {
+            mCallLogQueryHandler.fetchVoicemailUnreadCount();
+        }
     }
 
     public void showRemoveView(boolean show) {

@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
@@ -246,6 +247,8 @@ public class CallLogAsyncTaskUtil {
                 Intent intent = new Intent(context, CallLogNotificationsService.class);
                 intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);
                 context.startService(intent);
+
+                ((DialtactsActivity) context).updateTabUnreadCounts();
                 return null;
             }
         });
