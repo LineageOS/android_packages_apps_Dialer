@@ -35,6 +35,7 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.MoreStrings;
+import com.android.incallui.Call.LogState;
 import com.android.incallui.service.PhoneNumberService;
 import com.android.incalluibind.ObjectFactory;
 
@@ -269,6 +270,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             ContactCacheEntry entry = new ContactCacheEntry();
             entry.name = info.getDisplayName();
             entry.number = info.getNumber();
+            entry.contactLookupResult = info.getLookupSource();
             final int type = info.getPhoneType();
             final String label = info.getPhoneLabel();
             if (type == Phone.TYPE_CUSTOM) {
@@ -502,6 +504,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         cce.location = displayLocation;
         cce.label = label;
         cce.isSipCall = isSipCall;
+
+        if (info.contactExists) {
+            cce.contactLookupResult = LogState.LOOKUP_LOCAL_CONTACT;
+        }
     }
 
     /**
@@ -579,6 +585,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public Uri displayPhotoUri;
         public Uri lookupUri; // Sent to NotificationMananger
         public String lookupKey;
+        public int contactLookupResult = LogState.LOOKUP_NOT_FOUND;
 
         @Override
         public String toString() {
@@ -591,6 +598,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("isSipCall", isSipCall)
                     .add("contactUri", contactUri)
                     .add("displayPhotoUri", displayPhotoUri)
+                    .add("contactLookupResult", contactLookupResult)
                     .toString();
         }
     }

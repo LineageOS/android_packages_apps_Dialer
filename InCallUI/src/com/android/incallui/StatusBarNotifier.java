@@ -176,6 +176,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
                 Call call = CallList.getInstance().getCallById(callId);
                 if (call != null) {
+                    call.getLogState().contactLookupResult = entry.contactLookupResult;
                     buildAndSendNotification(call, entry);
                 }
             }

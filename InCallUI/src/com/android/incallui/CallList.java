@@ -24,6 +24,8 @@ import android.telecom.PhoneAccount;
 
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.logging.Logger;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
@@ -134,6 +136,7 @@ public class CallList {
     public void onCallRemoved(android.telecom.Call telecomCall) {
         if (mCallByTelecomCall.containsKey(telecomCall)) {
             Call call = mCallByTelecomCall.get(telecomCall);
+            Logger.logCall(call);
             if (updateCallInMap(call)) {
                 Log.w(this, "Removing call not previously disconnected " + call.getId());
             }
