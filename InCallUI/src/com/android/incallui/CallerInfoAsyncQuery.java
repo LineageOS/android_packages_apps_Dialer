@@ -29,6 +29,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 
@@ -343,11 +344,7 @@ public class CallerInfoAsyncQuery {
 
         // Construct the URI object and query params, and start the query.
 
-        final Uri contactRef = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon()
-                .appendPath(info.phoneNumber)
-                .appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS,
-                        String.valueOf(PhoneNumberHelper.isUriNumber(info.phoneNumber)))
-                .build();
+        final Uri contactRef = ContactInfoHelper.getContactInfoLookupUri(info.phoneNumber);
 
         if (DBG) {
             Log.d(LOG_TAG, "==> contactRef: " + sanitizeUriToString(contactRef));
