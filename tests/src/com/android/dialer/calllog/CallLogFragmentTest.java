@@ -19,7 +19,6 @@ package com.android.dialer.calllog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -171,46 +170,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
     }
 
     @MediumTest
-    public void testCallAndGroupviewHolder_GroupView() {
-        mCursor.moveToFirst();
-        insertPrivate(NOW, 0);
-        insertPrivate(NOW, 0);
-        insertPrivate(NOW, 0);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        mAdapter.onBindViewHolder(viewHolder, /* position */ 0);
-    }
-
-    @MediumTest
-    public void testCallAndGroupviewHolder_StandAloneView() {
-        mCursor.moveToFirst();
-        insertPrivate(NOW, 0);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        bindViewForTest(viewHolder);
-    }
-
-    @MediumTest
-    public void testCallAndGroupviewHolder_ChildView() {
-        mCursor.moveToFirst();
-        insertPrivate(NOW, 0);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        mAdapter.onBindViewHolder(viewHolder, /* position */ 0);
-    }
-
-    @MediumTest
-    public void testBindView_NumberOnlyNoCache() {
-        mCursor.moveToFirst();
-        insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        bindViewForTest(viewHolder);
-
-        assertNameIs(viewHolder, TEST_NUMBER);
-    }
-
-    @MediumTest
     public void testBindView_NumberOnlyDbCachedFormattedNumber() {
         mCursor.moveToFirst();
         Object[] values = getValuesToInsert(TEST_NUMBER,
@@ -290,61 +249,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         assertLabel(viewHolder, TEST_FORMATTED_NUMBER, numberLabel);
     }
 
-    @MediumTest
-    public void testBindView_WithQuickContactBadge() {
-        mCursor.moveToFirst();
-        insertWithCachedValues(TEST_NUMBER, NOW, 0, Calls.INCOMING_TYPE,
-                "John Doe", Phone.TYPE_HOME, "");
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        bindViewForTest(viewHolder);
-
-        assertTrue(viewHolder.quickContactView.isEnabled());
-    }
-
-    @MediumTest
-    public void testBindView_WithoutQuickContactBadge() {
-        mCursor.moveToFirst();
-        insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        bindViewForTest(viewHolder);
-
-        assertFalse(viewHolder.quickContactView.isEnabled());
-    }
-
-    @MediumTest
-    public void testBindView_CallButton() {
-        mCursor.moveToFirst();
-        insert(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0, Calls.INCOMING_TYPE);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        bindViewForTest(viewHolder);
-
-        // The primaryActionView tag is set in the
-        // {@link com.android.dialer.calllog.CallLogAdapter#bindView} method.  If it is possible
-        // to place a call to the phone number, a call intent will have been created for the
-        // primaryActionView.
-        IntentProvider intentProvider =
-                (IntentProvider) viewHolder.primaryActionButtonView.getTag();
-        Intent intent = intentProvider.getIntent(mActivity);
-        // Starts a call.
-        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
-        // To the entry's number.
-        assertEquals(Uri.parse("tel:" + TEST_NUMBER), intent.getData());
-    }
-
-    @MediumTest
-    public void testBindView_VoicemailUri() {
-        mCursor.moveToFirst();
-        insertVoicemail(TEST_NUMBER, Calls.PRESENTATION_ALLOWED, NOW, 0);
-        CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
-                mAdapter.onCreateViewHolder(mParentView, /* viewType */ 0);
-        bindViewForTest(viewHolder);
-
-        assertEquals(Uri.parse(viewHolder.voicemailUri),
-                ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, 1));
-    }
 
     /** Returns the label associated with a given phone type. */
     private CharSequence getTypeLabel(int phoneType) {
@@ -383,7 +287,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
             }
         }
     }
-
 
     //
     // HELPERS to setup the tests.
@@ -552,22 +455,6 @@ public class CallLogFragmentTest extends ActivityInstrumentationTestCase2<Fragme
         values[CallLogQuery.CALL_TYPE] = type;
         values[CallLogQuery.COUNTRY_ISO] = TEST_COUNTRY_ISO;
         return values;
-    }
-
-    /**
-     * Insert a new voicemail entry in the test DB.
-     * @param number The phone number.
-     * @param presentation Number representing display rules for "allowed",
-     *               "payphone", "restricted", or "unknown".
-     * @param date In millisec since epoch. Use NOW to use the current time.
-     * @param duration In seconds of the call. Use RAND_DURATION to pick a random one.
-     */
-    private void insertVoicemail(String number, int presentation, long date, int duration) {
-        Object[] values = getValuesToInsert(number, presentation, date, duration, Calls.VOICEMAIL_TYPE);
-        // Must have the same index as the row.
-        values[CallLogQuery.VOICEMAIL_URI] =
-                ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, mIndex);
-        insertValues(values);
     }
 
     /**
