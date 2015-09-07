@@ -24,6 +24,11 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"Prijavite netočno številko"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Kopiraj številko v odložišče"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Kopiraj prepis v odložišče"</string>
+    <string name="call_log_block_number" msgid="9136148344344811297">"Blokiraj številko"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"Številka <xliff:g id="NUMBER">%1$s</xliff:g> je dodana na seznam blokiranih številk"</string>
+    <string name="call_log_unblock_number" msgid="3875011281703247750">"Odblokiraj številko"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Številka <xliff:g id="NUMBER">%1$s</xliff:g> je odstranjena s seznama blokiranih številk"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"RAZVELJAVI"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Uredi številko pred klicem"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Izbris iz zgodovine klicev"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Izbriši zgodovino klicev"</string>
@@ -136,6 +141,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Vsi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Neodgovorjeni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Odzivnik"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Želite dodati številko <xliff:g id="NUMBER">%1$s</xliff:g> na seznam blokiranih številk?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"Blokiraj številko"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Želite odstraniti številko <xliff:g id="NUMBER">%1$s</xliff:g> s seznama blokiranih številk?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"Odblokiraj številko"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Hitro izbiranje"</string>
     <string name="tab_history" msgid="2563144697322434940">"Zgodovina klicev"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Stiki"</string>

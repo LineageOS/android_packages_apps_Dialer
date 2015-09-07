@@ -24,6 +24,11 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"Jakinarazi zenb. okerra dela"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Kopiatu zenbakia arbelean"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Kopiatu transkripzioa arbelean"</string>
+    <string name="call_log_block_number" msgid="9136148344344811297">"Blokeatu zenbakia"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> gehitu da blokeatutakoen zerrendan"</string>
+    <string name="call_log_unblock_number" msgid="3875011281703247750">"Desblokeatu zenbakia"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> gehitu da desblokeatutakoen zerrendan"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"DESEGIN"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Editatu zenbakia deitu aurretik"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Ezabatu deien historiatik"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Garbitu deien historia"</string>
@@ -134,6 +139,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Guztiak"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Galduak"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Erantzungailuko deiak"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g> gehitu nahi duzu blokeatutako zerrendan?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"Blokeatu zenbakia"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g> kendu nahi duzu blokeatutakoen zerrendatik?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"Desblokeatu zenbakia"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Markatze bizkorra"</string>
     <string name="tab_history" msgid="2563144697322434940">"Deien historia"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktuak"</string>

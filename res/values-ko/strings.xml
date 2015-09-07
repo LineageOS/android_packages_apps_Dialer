@@ -24,6 +24,11 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"적절하지 않은 번호 신고하기"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"전화번호를 클립보드에 복사"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"변환된 텍스트를 클립보드에 복사"</string>
+    <string name="call_log_block_number" msgid="9136148344344811297">"번호 차단"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g>번이 차단 목록에 추가되었습니다."</string>
+    <string name="call_log_unblock_number" msgid="3875011281703247750">"번호 차단 해제"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g>번이 차단 목록에서 삭제되었습니다."</string>
+    <string name="block_number_undo" msgid="591338370336724156">"실행취소"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"통화하기 전에 번호 수정"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"통화 기록에서 삭제"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"통화 기록 삭제"</string>
@@ -134,6 +139,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"전체"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"부재중 전화"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"음성사서함"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g>번을 차단 목록에 추가할까요?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"번호 차단"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g>번을 차단 목록에서 삭제할까요?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"번호 차단 해제"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"단축번호"</string>
     <string name="tab_history" msgid="2563144697322434940">"통화 기록"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"주소록"</string>

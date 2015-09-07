@@ -24,6 +24,11 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"गलत संख्या की रिपोर्ट करें"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"नंबर को क्‍लिपबोर्ड पर कॉपी करें"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"लिप्यंतरण को क्‍लिपबोर्ड पर कॉपी करें"</string>
+    <string name="call_log_block_number" msgid="9136148344344811297">"नंबर अवरुद्ध करें"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध सूची में जोड़ा गया"</string>
+    <string name="call_log_unblock_number" msgid="3875011281703247750">"नंबर अनवरोधित करें"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध सूची से निकाला गया"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"वापस लाएं"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"कॉल करने से पहले नंबर संपादित करें"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"कॉल इतिहास से साफ़ करें"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"कॉल इतिहास साफ़ करें"</string>
@@ -134,6 +139,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"वॉयस मेल"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g> को अपनी अवरुद्ध सूची में जोड़ें?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"नंबर अवरुद्ध करें"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g> को आपकी अवरुद्ध सूची से निकालें?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"नंबर अनवरोधित करें"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"स्पीड डायल"</string>
     <string name="tab_history" msgid="2563144697322434940">"कॉल इतिहास"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"संपर्क"</string>

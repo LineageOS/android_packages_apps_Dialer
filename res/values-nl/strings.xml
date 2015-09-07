@@ -24,6 +24,11 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"Onjuist nummer melden"</string>
     <string name="copy_number_text" msgid="5160503544191297770">"Nummer kopiëren naar klembord"</string>
     <string name="copy_transcript_text" msgid="2979980182146897370">"Transcript kopiëren naar klembord"</string>
+    <string name="call_log_block_number" msgid="9136148344344811297">"Nummer blokkeren"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> toegevoegd aan blokkeerlijst"</string>
+    <string name="call_log_unblock_number" msgid="3875011281703247750">"Blokkeren van nummer opheffen"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> verwijderd uit blokkeerlijst"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"ONGEDAAN MAKEN"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Nummer bewerken vóór bellen"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Verwijderen uit oproepgeschiedenis"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Oproepgeschiedenis wissen"</string>
@@ -31,7 +36,7 @@
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Voicemail verwijderd"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ONGED. MKN"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Oproepgeschiedenis wissen?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hiermee worden alle oproepen uit uw geschiedenis verwijderd"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hiermee worden alle oproepen uit je geschiedenis verwijderd"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Oproepgeschiedenis wissen…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> voicemails </item>
@@ -48,11 +53,11 @@
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Alleen uitgaande oproepen"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Alleen gemiste oproepen"</string>
     <string name="visual_voicemail_title" msgid="4574199312906348905">"Visuele voicemail"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"Bekijk en beluister uw voicemail, zonder dat u een nummer hoeft te bellen. Er kunnen kosten voor gegevensgebruik in rekening worden gebracht."</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"Bekijk en beluister je voicemail, zonder dat je een nummer hoeft te bellen. Er kunnen kosten voor gegevensgebruik in rekening worden gebracht."</string>
     <string name="visual_voicemail_settings" msgid="8090338793118794741">"Instellingen"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Voicemailupdates niet beschikbaar"</string>
-    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"U heeft nieuwe voicemail. Kan nu niet laden."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Uw voicemail instellen"</string>
+    <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Je hebt nieuwe voicemail. Kan nu niet laden."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Je voicemail instellen"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Audio niet beschikbaar"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Instellen"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Bellen met voicemail"</string>
@@ -113,8 +118,8 @@
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> sec."</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sec."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Kan dit nummer niet bellen"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Voor het instellen van voicemail, gaat u naar \'Menu\' &gt; \'Instellingen\'."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Als u uw voicemail wilt bellen, moet u eerst de Vliegtuigmodus uitschakelen."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Voor het instellen van voicemail, ga je naar \'Menu\' &gt; \'Instellingen\'."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Als je je voicemail wilt bellen, moet je eerst de Vliegtuigmodus uitschakelen."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Laden..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI-nummer"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -125,15 +130,19 @@
     <string name="call_not_available" msgid="8941576511946492225">"Kan niet bellen omdat de Telefoon-app is uitgeschakeld."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Daarvoor is geen app beschikbaar op dit apparaat"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Contacten zoeken"</string>
-    <string name="call_log_all_empty" msgid="8357417710416340920">"Uw oproepgeschiedenis is leeg"</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"Je oproepgeschiedenis is leeg"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Bellen"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"U heeft geen gemiste oproepen."</string>
-    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Uw voicemail-inbox is leeg."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Je hebt geen gemiste oproepen."</string>
+    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Je voicemail-inbox is leeg."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Alleen favorieten weergeven"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Oproepgeschiedenis"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Gemist"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g> toevoegen aan je blokkeerlijst?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"Nummer blokkeren"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g> verwijderen uit je blokkeerlijst?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"Blokkeren van nummer opheffen"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Snelkeuze"</string>
     <string name="tab_history" msgid="2563144697322434940">"Oproepgeschiedenis"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contacten"</string>
@@ -146,9 +155,9 @@
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Sms verzenden"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videogesprek starten"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nieuwe gemiste oproepen"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Er staat nog niemand in uw snelkeuzelijst"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Er staat nog niemand in je snelkeuzelijst"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Een favoriet toevoegen"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"U heeft nog geen contacten"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Je hebt nog geen contacten"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Contact toevoegen"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Tik op de afbeelding om alle nummers te bekijken of blijf de afbeelding aanraken om opnieuw te rangschikken"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Verwijderen"</string>
@@ -201,11 +210,11 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Oproepaccounts"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Inschakelen"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Toestemmingen instellen"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Als u de snelkeuzefunctie wilt inschakelen,\n schakelt u de contacttoestemming in."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Als u uw gesprekkenlijst wilt bekijken,\n schakelt u de telefoontoestemming in."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Als u uw contacten wilt bekijken,\n schakelt u de contacttoestemming in."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Als u uw voicemail wilt beluisteren,\n schakelt u de telefoontoestemming in."</string>
-    <string name="permission_no_search" msgid="84152933267902056">"Als u naar contacten wilt zoeken, schakelt u de contacttoestemming in."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Als u iemand wilt bellen,\n schakelt u de telefoontoestemming in."</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"Als je de snelkeuzefunctie wilt inschakelen,\n schakel je de contacttoestemming in."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"Als je je gesprekkenlijst wilt bekijken,\n schakel je de telefoontoestemming in."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"Als je je contacten wilt bekijken,\n schakel je de contacttoestemming in."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"Als je je voicemail wilt beluisteren,\n schakel je de telefoontoestemming in."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Als je naar contacten wilt zoeken, schakel je de contacttoestemming in."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"Als je iemand wilt bellen,\n schakel je de telefoontoestemming in."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefoon-app heeft geen toestemming om systeeminstellingen te schrijven."</string>
 </resources>
