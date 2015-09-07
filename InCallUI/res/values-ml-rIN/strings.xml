@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജമാക്കുക"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;സജ്ജീകരിച്ചിട്ടില്ല&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"മറ്റ് കോൾ ക്രമീകരണങ്ങൾ"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേന വിളിക്കുന്നു"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> വഴി വിളിക്കുന്നു"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേനയുള്ള ഇൻകമിംഗ്"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"കോൺടാക്റ്റ് ഫോട്ടോ"</string>
     <string name="goPrivate" msgid="865837794424530980">"സ്വകാര്യം എന്നതിലേക്ക് പോകുക"</string>

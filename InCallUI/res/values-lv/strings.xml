@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Iestatīšana"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nav iestatīts&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Citi zvanu iestatījumi"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Zvans, ko nodrošina <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Zvanu nodrošina <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Ienākošie zvani, ko nodrošina <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"kontaktpersonas fotoattēls"</string>
     <string name="goPrivate" msgid="865837794424530980">"pārslēgt uz privāto režīmu"</string>

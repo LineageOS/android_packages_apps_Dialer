@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Postavljanje"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nije postavljeno&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Ostale postavke poziva"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Pozivanje putem operatera <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Poziv preko <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Dolazni pozivi putem davatelja <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"kontakt fotografija"</string>
     <string name="goPrivate" msgid="865837794424530980">"na privatno"</string>

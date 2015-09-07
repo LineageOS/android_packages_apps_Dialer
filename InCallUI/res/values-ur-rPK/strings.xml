@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"سیٹ اپ"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"‏&lt;سیٹ نہیں ہے&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"دیگر کال کی ترتیبات"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> کی معرفت کال ہو رہی ہے"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"کالنگ بذریعہ <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> کے ذریعے موصول ہونے والی"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"رابطہ کی تصویر"</string>
     <string name="goPrivate" msgid="865837794424530980">"نجی ہوجائیں"</string>

@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"సెటప్"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;సెట్ చేయలేదు&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"ఇతర కాల్ సెట్టింగ్‌లు"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ద్వారా కాల్ చేయబడుతోంది"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g>తో కాల్ వెళుతోంది"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ద్వారా ఇన్‌కమింగ్"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"పరిచయ ఫోటో"</string>
     <string name="goPrivate" msgid="865837794424530980">"ప్రైవేట్‌గా వెళ్లు"</string>
