@@ -60,6 +60,7 @@ public class Call {
         public static final int CONFERENCED = 11;   /* Call part of a conference call */
         public static final int SELECT_PHONE_ACCOUNT = 12; /* Waiting for account selection */
         public static final int CONNECTING = 13;    /* Waiting for Telecom broadcast to finish */
+        public static final int BLOCKED = 14;       /* The number was found on the block list */
 
 
         public static boolean isConnectingOrConnected(int state) {
@@ -112,6 +113,8 @@ public class Call {
                     return "SELECT_PHONE_ACCOUNT";
                 case CONNECTING:
                     return "CONNECTING";
+                case BLOCKED:
+                    return "BLOCKED";
                 default:
                     return "UNKNOWN";
             }
@@ -307,8 +310,11 @@ public class Call {
 
     private void updateFromTelecomCall() {
         Log.d(this, "updateFromTelecomCall: " + mTelecomCall.toString());
-        setState(translateState(mTelecomCall.getState()));
-        setDisconnectCause(mTelecomCall.getDetails().getDisconnectCause());
+        final int translatedState = translateState(mTelecomCall.getState());
+        if (mState != State.BLOCKED) {
+            setState(translatedState);
+            setDisconnectCause(mTelecomCall.getDetails().getDisconnectCause());
+        }
 
         if (mTelecomCall.getVideoCall() != null) {
             if (mVideoCallCallback == null) {
@@ -412,6 +418,12 @@ public class Call {
                     .getOriginalAddress().getSchemeSpecificPart();
         }
         return getHandle() == null ? null : getHandle().getSchemeSpecificPart();
+    }
+
+    public void blockCall() {
+        // TODO: Some vibration still occurs.
+        mTelecomCall.reject(false, null);
+        setState(State.BLOCKED);
     }
 
     public Uri getHandle() {

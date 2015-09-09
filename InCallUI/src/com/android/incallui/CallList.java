@@ -23,6 +23,7 @@ import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Maintains the list of active calls and notifies interested classes of changes to the call list
@@ -46,6 +48,7 @@ public class CallList {
     private static final int DISCONNECTED_CALL_LONG_TIMEOUT_MS = 5000;
 
     private static final int EVENT_DISCONNECTED_TIMEOUT = 1;
+    private static final long BLOCK_QUERY_TIMEOUT_MS = 1000;
 
     private static CallList sInstance = new CallList();
 
@@ -63,6 +66,7 @@ public class CallList {
             .newHashMap();
     private final Set<Call> mPendingDisconnectCalls = Collections.newSetFromMap(
             new ConcurrentHashMap<Call, Boolean>(8, 0.9f, 1));
+    private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
 
     /**
      * Static singleton accessor method.
@@ -79,17 +83,52 @@ public class CallList {
     CallList() {
     }
 
-    public void onCallAdded(android.telecom.Call telecomCall) {
+    public void onCallAdded(android.telecom.Call telecomCall, final String countryIso) {
         Trace.beginSection("onCallAdded");
-        Call call = new Call(telecomCall);
+        final Call call = new Call(telecomCall);
         Log.d(this, "onCallAdded: callState=" + call.getState());
+        // Check if call should be blocked.
+        if (!call.isEmergencyCall() && call.getState() == Call.State.INCOMING) {
+            final AtomicBoolean hasTimedOut = new AtomicBoolean(false);
+            // Proceed with call if query is slow.
+            // Call may be blocked later when FilteredQueryHandler returns.
+            final Handler handler = new Handler();
+            final Runnable runnable = new Runnable() {
+                public void run() {
+                    hasTimedOut.set(true);
+                    onCallAddedInternal(call);
+                }
+            };
+            handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
+            mFilteredQueryHandler.isBlocked(
+                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                        @Override
+                        public void onCheckComplete(final Integer id) {
+                            if (!hasTimedOut.get()) {
+                                handler.removeCallbacks(runnable);
+                            }
+                            if (id == null) {
+                                if (!hasTimedOut.get()) {
+                                    onCallAddedInternal(call);
+                                }
+                            } else {
+                                call.blockCall();
+                            }
+                        }
+                    }, null, call.getNumber(), countryIso);
+        } else {
+            onCallAddedInternal(call);
+        }
+        Trace.endSection();
+    }
+
+    private void onCallAddedInternal(Call call) {
         if (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING) {
             onIncoming(call, call.getCannedSmsResponses());
         } else {
             onUpdate(call);
         }
-        Trace.endSection();
     }
 
     public void onCallRemoved(android.telecom.Call telecomCall) {
@@ -581,6 +620,10 @@ public class CallList {
             }
         }
     };
+
+    public void setFilteredNumberQueryHandler(FilteredNumberAsyncQueryHandler handler) {
+        mFilteredQueryHandler = handler;
+    }
 
     /**
      * Listener interface for any class that wants to be notified of changes
