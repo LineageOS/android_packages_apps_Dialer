@@ -29,6 +29,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
+import android.telecom.TelecomManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -425,7 +426,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         boolean isIncomingOrWaiting = call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING;
 
-        if (isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject())) {
+        if (isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject()) &&
+                call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED) {
             return call.getCallSubject();
         }
 

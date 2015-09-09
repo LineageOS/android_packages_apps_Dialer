@@ -58,6 +58,7 @@ public class CallerInfoUtils {
         info.name = info.cnapName;
         info.numberPresentation = call.getNumberPresentation();
         info.namePresentation = call.getCnapNamePresentation();
+        info.callSubject = call.getCallSubject();
 
         String number = call.getNumber();
         if (!TextUtils.isEmpty(number)) {
