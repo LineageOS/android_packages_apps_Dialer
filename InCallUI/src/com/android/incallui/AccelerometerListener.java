@@ -30,7 +30,7 @@ import android.util.Log;
  * orientation of the phone. The client of this class is notified when
  * the orientation changes between horizontal and vertical.
  */
-public final class AccelerometerListener {
+public class AccelerometerListener {
     private static final String TAG = "AccelerometerListener";
     private static final boolean DEBUG = true;
     private static final boolean VDEBUG = false;
@@ -63,10 +63,13 @@ public final class AccelerometerListener {
         public void orientationChanged(int orientation);
     }
 
-    public AccelerometerListener(Context context, OrientationListener listener) {
-        mListener = listener;
+    public AccelerometerListener(Context context) {
         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    }
+
+    public void setListener(OrientationListener listener) {
+        mListener = listener;
     }
 
     public void enable(boolean enable) {
@@ -155,7 +158,9 @@ public final class AccelerometerListener {
                                 : (mOrientation == ORIENTATION_VERTICAL ? "vertical"
                                     : "unknown")));
                     }
-                    mListener.orientationChanged(mOrientation);
+                    if (mListener != null) {
+                        mListener.orientationChanged(mOrientation);
+                    }
                 }
                 break;
             }
