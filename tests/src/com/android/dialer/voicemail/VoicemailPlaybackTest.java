@@ -143,8 +143,7 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
         getInstrumentation().waitForIdleSync();
 
-        // Force the speakerphone to false to start.
-        mPresenter.setSpeakerphoneOn(false);
+        // Check that the speakerphone is false to start.
         assertFalse(mPresenter.isSpeakerphoneOn());
 
         View speakerphoneButton = mLayout.findViewById(R.id.playback_speakerphone);

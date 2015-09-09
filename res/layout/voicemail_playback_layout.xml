@@ -71,7 +71,7 @@
 
                 <ImageButton android:id="@+id/playback_speakerphone"
                     style="@style/VoicemailPlaybackLayoutButtonStyle"
-                    android:src="@drawable/ic_speakerphone_on"
+                    android:src="@drawable/ic_volume_down_24dp"
                     android:tint="@color/voicemail_icon_tint"
                     android:contentDescription="@string/description_playback_speakerphone" />
 
