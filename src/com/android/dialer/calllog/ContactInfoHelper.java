@@ -75,30 +75,22 @@ public class ContactInfoHelper {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
-        final ContactInfo info;
 
-        // Determine the contact info.
+        ContactInfo info;
+
         if (PhoneNumberHelper.isUriNumber(number)) {
-            // This "number" is really a SIP address.
-            ContactInfo sipInfo = queryContactInfoForSipAddress(number);
-            if (sipInfo == null || sipInfo == ContactInfo.EMPTY) {
-                // Check whether the "username" part of the SIP address is
-                // actually the phone number of a contact.
+            // The number is a SIP address..
+            info = lookupContactFromUri(getContactInfoLookupUri(number));
+            if (info == null || info == ContactInfo.EMPTY) {
+                // If lookup failed, check if the "username" of the SIP address is a phone number.
                 String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
                 if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
-                    sipInfo = queryContactInfoForPhoneNumber(username, countryIso);
+                    info = queryContactInfoForPhoneNumber(username, countryIso);
                 }
             }
-            info = sipInfo;
         } else {
             // Look for a contact that has the given phone number.
-            ContactInfo phoneInfo = queryContactInfoForPhoneNumber(number, countryIso);
-
-            if (phoneInfo == null || phoneInfo == ContactInfo.EMPTY) {
-                // Check whether the phone number has been saved as an "Internet call" number.
-                phoneInfo = queryContactInfoForSipAddress(number);
-            }
-            info = phoneInfo;
+            info = queryContactInfoForPhoneNumber(number, countryIso);
         }
 
         final ContactInfo updatedInfo;
@@ -201,28 +193,6 @@ public class ContactInfoHelper {
     }
 
     /**
-     * Determines the contact information for the given SIP address.
-     * <p>
-     * It returns the contact info if found.
-     * <p>
-     * If no contact corresponds to the given SIP address, returns {@link ContactInfo#EMPTY}.
-     * <p>
-     * If the lookup fails for some other reason, it returns null.
-     */
-    private ContactInfo queryContactInfoForSipAddress(String sipAddress) {
-        if (TextUtils.isEmpty(sipAddress)) {
-            return null;
-        }
-        final ContactInfo info;
-
-        // "contactNumber" is a SIP address, so use the PhoneLookup table with the SIP parameter.
-        Uri.Builder uriBuilder = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon();
-        uriBuilder.appendPath(Uri.encode(sipAddress));
-        uriBuilder.appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS, "1");
-        return lookupContactFromUri(uriBuilder.build());
-    }
-
-    /**
      * Determines the contact information for the given phone number.
      * <p>
      * It returns the contact info if found.
@@ -235,21 +205,8 @@ public class ContactInfoHelper {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
-        String contactNumber = number;
-        if (!TextUtils.isEmpty(countryIso)) {
-            // Normalize the number: this is needed because the PhoneLookup query below does not
-            // accept a country code as an input.
-            String numberE164 = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-            if (!TextUtils.isEmpty(numberE164)) {
-                // Only use it if the number could be formatted to E164.
-                contactNumber = numberE164;
-            }
-        }
 
-        // The "contactNumber" is a regular phone number, so use the PhoneLookup table.
-        Uri uri = Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
-                Uri.encode(contactNumber));
-        ContactInfo info = lookupContactFromUri(uri);
+        ContactInfo info = lookupContactFromUri(getContactInfoLookupUri(number));
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
         } else if (mCachedNumberLookupService != null) {
@@ -391,6 +348,16 @@ public class ContactInfoHelper {
         } catch (SQLiteFullException e) {
             Log.e(TAG, "Unable to update contact info in call log db", e);
         }
+    }
+
+    public static Uri getContactInfoLookupUri(String number) {
+        // Get URI for the number in the PhoneLookup table, with a parameter to indicate whether
+        // the number is a SIP number.
+        return PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon()
+                .appendPath(Uri.encode(number))
+                .appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS,
+                        String.valueOf(PhoneNumberHelper.isUriNumber(number)))
+                .build();
     }
 
     /**
