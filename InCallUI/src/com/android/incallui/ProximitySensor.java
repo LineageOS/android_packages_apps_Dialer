@@ -18,8 +18,11 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.PowerManager;
 import android.telecom.CallAudioState;
+import android.view.Display;
 
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -44,6 +47,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     private final PowerManager.WakeLock mProximityWakeLock;
     private final AudioModeProvider mAudioModeProvider;
     private final AccelerometerListener mAccelerometerListener;
+    private final ProximityDisplayListener mDisplayListener;
     private int mOrientation = AccelerometerListener.ORIENTATION_UNKNOWN;
     private boolean mUiShowing = false;
     private boolean mIsPhoneOffhook = false;
@@ -53,7 +57,8 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     // Gets updated whenever there is a Configuration change
     private boolean mIsHardKeyboardOpen;
 
-    public ProximitySensor(Context context, AudioModeProvider audioModeProvider) {
+    public ProximitySensor(Context context, AudioModeProvider audioModeProvider,
+            AccelerometerListener accelerometerListener) {
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (mPowerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
             mProximityWakeLock = mPowerManager.newWakeLock(
@@ -62,7 +67,13 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
             Log.w(TAG, "Device does not support proximity wake lock.");
             mProximityWakeLock = null;
         }
-        mAccelerometerListener = new AccelerometerListener(context, this);
+        mAccelerometerListener = accelerometerListener;
+        mAccelerometerListener.setListener(this);
+
+        mDisplayListener = new ProximityDisplayListener(
+                (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE));
+        mDisplayListener.register();
+
         mAudioModeProvider = audioModeProvider;
         mAudioModeProvider.addListener(this);
     }
@@ -71,6 +82,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         mAudioModeProvider.removeListener(this);
 
         mAccelerometerListener.enable(false);
+        mDisplayListener.unregister();
 
         turnOffProximitySensor(true);
     }
@@ -151,10 +163,16 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         updateProximitySensorMode();
     }
 
+    void onDisplayStateChanged(boolean isDisplayOn) {
+        Log.i(this, "isDisplayOn: " + isDisplayOn);
+        mAccelerometerListener.enable(isDisplayOn);
+    }
+
     /**
      * TODO: There is no way to determine if a screen is off due to proximity or if it is
      * legitimately off, but if ever we can do that in the future, it would be useful here.
      * Until then, this function will simply return true of the screen is off.
+     * TODO: Investigate whether this can be replaced with the ProximityDisplayListener.
      */
     public boolean isScreenReallyOff() {
         return !mPowerManager.isScreenOn();
@@ -251,4 +269,49 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                 turnOffProximitySensor(screenOnImmediately);
             }
         }
+
+    /**
+     * Implementation of a {@link DisplayListener} that maintains a binary state:
+     * Screen on vs screen off. Used by the proximity sensor manager to decide whether or not
+     * it needs to listen to accelerometer events.
+     */
+    public class ProximityDisplayListener implements DisplayListener {
+        private DisplayManager mDisplayManager;
+        private boolean mIsDisplayOn = true;
+
+        ProximityDisplayListener(DisplayManager displayManager) {
+            mDisplayManager = displayManager;
+        }
+
+        void register() {
+            mDisplayManager.registerDisplayListener(this, null);
+        }
+
+        void unregister() {
+            mDisplayManager.unregisterDisplayListener(this);
+        }
+
+        @Override
+        public void onDisplayRemoved(int displayId) {
+        }
+
+        @Override
+        public void onDisplayChanged(int displayId) {
+            if (displayId == Display.DEFAULT_DISPLAY) {
+                final Display display = mDisplayManager.getDisplay(displayId);
+
+                final boolean isDisplayOn = display.getState() != Display.STATE_OFF;
+                // For call purposes, we assume that as long as the screen is not truly off, it is
+                // considered on, even if it is in an unknown or low power idle state.
+                if (isDisplayOn != mIsDisplayOn) {
+                    mIsDisplayOn = isDisplayOn;
+                    onDisplayStateChanged(mIsDisplayOn);
+                }
+            }
+        }
+
+        @Override
+        public void onDisplayAdded(int displayId) {
+        }
+    }
 }
