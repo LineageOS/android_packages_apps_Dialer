@@ -19,6 +19,8 @@ package com.android.incallui;
 import android.content.Context;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -418,7 +420,9 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
             numberTypeTextView.setVisibility(View.GONE);
         } else {
             numberTextView.setVisibility(View.VISIBLE);
-            numberTextView.setText(PhoneNumberUtils.createTtsSpannable(callerNumber));
+            numberTextView.setText(PhoneNumberUtils.createTtsSpannable(
+                    BidiFormatter.getInstance().unicodeWrap(
+                            callerNumber, TextDirectionHeuristics.LTR)));
             numberTypeTextView.setVisibility(View.VISIBLE);
             numberTypeTextView.setText(callerNumberType);
         }
