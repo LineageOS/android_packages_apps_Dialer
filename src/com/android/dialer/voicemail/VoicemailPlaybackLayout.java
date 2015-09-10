@@ -159,7 +159,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         @Override
         public void onClick(View v) {
             if (mPresenter != null) {
-                mPresenter.toggleSpeakerphone();
+                onSpeakerphoneOn(!mPresenter.isSpeakerphoneOn());
             }
         }
     };
@@ -286,6 +286,10 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         mStartStopButton.setImageResource(R.drawable.ic_pause);
 
+        if (mPresenter != null) {
+            onSpeakerphoneOn(mPresenter.isSpeakerphoneOn());
+        }
+
         if (mPositionUpdater != null) {
             mPositionUpdater.stopUpdating();
             mPositionUpdater = null;
@@ -317,6 +321,10 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     public void onSpeakerphoneOn(boolean on) {
+        if (mPresenter != null) {
+            mPresenter.setSpeakerphoneOn(on);
+        }
+
         if (on) {
             mPlaybackSpeakerphone.setImageResource(R.drawable.ic_volume_up_24dp);
             // Speaker is now on, tapping button will turn it off.
@@ -365,6 +373,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     @Override
     public void disableUiElements() {
         mStartStopButton.setEnabled(false);
+        mPlaybackSpeakerphone.setEnabled(false);
         mPlaybackSeek.setProgress(0);
         mPlaybackSeek.setEnabled(false);
 
@@ -375,6 +384,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     @Override
     public void enableUiElements() {
         mStartStopButton.setEnabled(true);
+        mPlaybackSpeakerphone.setEnabled(true);
         mPlaybackSeek.setEnabled(true);
 
         mPositionText.setVisibility(View.VISIBLE);
