@@ -60,7 +60,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * {@link CallLogFragment} and {@link CallLogAdapter}.
  * <p>
  * This controls a single {@link com.android.dialer.voicemail.VoicemailPlaybackLayout}. A single
- * instance can be reused for different such layouts, using {@link #setVoicemailPlaybackView}. This
+ * instance can be reused for different such layouts, using {@link #setPlaybackView}. This
  * is to facilitate reuse across different voicemail call log entries.
  * <p>
  * This class is not thread safe. The thread policy for this class is thread-confinement, all calls
@@ -120,6 +120,8 @@ public class VoicemailPlaybackPresenter
     // If present in the saved instance bundle, indicates where to set the playback slider.
     private static final String CLIP_POSITION_KEY =
             VoicemailPlaybackPresenter.class.getName() + ".CLIP_POSITION_KEY";
+    private static final String IS_SPEAKERPHONE_ON_KEY =
+            VoicemailPlaybackPresenter.class.getName() + ".IS_SPEAKER_PHONE_ON";
 
     /**
      * The most recently cached duration. We cache this since we don't want to keep requesting it
@@ -141,6 +143,7 @@ public class VoicemailPlaybackPresenter
     // MediaPlayer crashes on some method calls if not prepared but does not have a method which
     // exposes its prepared state. Store this locally, so we can check and prevent crashes.
     private boolean mIsPrepared;
+    private boolean mIsSpeakerphoneOn;
 
     private boolean mShouldResumePlaybackAfterSeeking;
     private int mInitialOrientation;
@@ -211,6 +214,7 @@ public class VoicemailPlaybackPresenter
             mIsPrepared = savedInstanceState.getBoolean(IS_PREPARED_KEY);
             mPosition = savedInstanceState.getInt(CLIP_POSITION_KEY, 0);
             mIsPlaying = savedInstanceState.getBoolean(IS_PLAYING_STATE_KEY, false);
+            mIsSpeakerphoneOn = savedInstanceState.getBoolean(IS_SPEAKERPHONE_ON_KEY, false);
         }
 
         if (mMediaPlayer == null) {
@@ -228,6 +232,7 @@ public class VoicemailPlaybackPresenter
             outState.putBoolean(IS_PREPARED_KEY, mIsPrepared);
             outState.putInt(CLIP_POSITION_KEY, mView.getDesiredClipPosition());
             outState.putBoolean(IS_PLAYING_STATE_KEY, mIsPlaying);
+            outState.putBoolean(IS_SPEAKERPHONE_ON_KEY, mIsSpeakerphoneOn);
         }
     }
 
@@ -239,16 +244,21 @@ public class VoicemailPlaybackPresenter
         mView = view;
         mView.setPresenter(this, voicemailUri);
 
+        // Handles cases where the same entry is binded again when scrolling in list, or where
+        // the MediaPlayer was retained after an orientation change.
         if (mMediaPlayer != null && mIsPrepared && voicemailUri.equals(mVoicemailUri)) {
-            // Handles case where MediaPlayer was retained after an orientation change.
             onPrepared(mMediaPlayer);
-            mView.onSpeakerphoneOn(isSpeakerphoneOn());
         } else {
             if (!voicemailUri.equals(mVoicemailUri)) {
+                mVoicemailUri = voicemailUri;
                 mPosition = 0;
+                // Default to earpiece.
+                setSpeakerphoneOn(false);
+            } else {
+                // Update the view to the current speakerphone state.
+                mView.onSpeakerphoneOn(mIsSpeakerphoneOn);
             }
 
-            mVoicemailUri = voicemailUri;
             mDuration.set(0);
 
             if (startPlayingImmediately) {
@@ -258,9 +268,6 @@ public class VoicemailPlaybackPresenter
                 mIsPlaying = startPlayingImmediately;
                 checkForContent();
             }
-
-            // Default to earpiece.
-            mView.onSpeakerphoneOn(false);
         }
     }
 
@@ -595,7 +602,6 @@ public class VoicemailPlaybackPresenter
             // If we haven't downloaded the voicemail yet, attempt to download it.
             checkForContent();
             mIsPlaying = true;
-
             return;
         }
 
@@ -616,6 +622,7 @@ public class VoicemailPlaybackPresenter
                     throw new RejectedExecutionException("Could not capture audio focus.");
                 }
 
+                setSpeakerphoneOn(mIsSpeakerphoneOn);
                 // Can throw RejectedExecutionException.
                 mMediaPlayer.start();
             } catch (RejectedExecutionException e) {
@@ -625,11 +632,6 @@ public class VoicemailPlaybackPresenter
 
         Log.d(TAG, "Resumed playback at " + mPosition + ".");
         mView.onPlaybackStarted(mDuration.get(), getScheduledExecutorServiceInstance());
-        if (isSpeakerphoneOn()) {
-            mActivity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-        } else {
-            enableProximitySensor();
-        }
     }
 
     /**
@@ -681,7 +683,7 @@ public class VoicemailPlaybackPresenter
     }
 
     private void enableProximitySensor() {
-        if (mProximityWakeLock == null || isSpeakerphoneOn() || !mIsPrepared
+        if (mProximityWakeLock == null || mIsSpeakerphoneOn || !mIsPrepared
                 || mMediaPlayer == null || !mMediaPlayer.isPlaying()) {
             return;
         }
@@ -707,24 +709,32 @@ public class VoicemailPlaybackPresenter
         }
     }
 
-    public void setSpeakerphoneOn(boolean on) {
-        mAudioManager.setSpeakerphoneOn(on);
-
-        if (on) {
-            disableProximitySensor(false /* waitForFarState */);
-            if (mIsPrepared && mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-                mActivity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        } else {
-            enableProximitySensor();
-            if (mActivity != null) {
-                mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        }
+    public void toggleSpeakerphone() {
+        setSpeakerphoneOn(!mIsSpeakerphoneOn);
     }
 
-    public boolean isSpeakerphoneOn() {
-        return mAudioManager.isSpeakerphoneOn();
+    private void setSpeakerphoneOn(boolean on) {
+        mView.onSpeakerphoneOn(on);
+        if (mIsSpeakerphoneOn == on) {
+            return;
+        }
+
+        mIsSpeakerphoneOn = on;
+        mAudioManager.setSpeakerphoneOn(mIsSpeakerphoneOn);
+
+        if (mIsPlaying) {
+            if (on) {
+                disableProximitySensor(false /* waitForFarState */);
+                if (mIsPrepared && mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+                    mActivity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            } else {
+                enableProximitySensor();
+                if (mActivity != null) {
+                    mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            }
+        }
     }
 
     public void setOnVoicemailDeletedListener(OnVoicemailDeletedListener listener) {
