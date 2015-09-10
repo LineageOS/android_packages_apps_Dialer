@@ -50,8 +50,8 @@
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Video aanvragen"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Kan geen videogesprek starten"</string>
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoverzoek geweigerd"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Uw terugbelnummer\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Uw terugbelnummer bij alarm\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Je terugbelnummer\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Je terugbelnummer bij alarm\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Kiezen"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Gemiste oproep"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Gemiste oproepen"</string>
@@ -78,10 +78,10 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Sluiten"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Terugbellen"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Bericht"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Als u wilt bellen, moet u eerst de Vliegtuigmodus uitschakelen."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Als je wilt bellen, moet je eerst de Vliegtuigmodus uitschakelen."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Niet geregistreerd op netwerk."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mobiel netwerk niet beschikbaar."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Als u wilt bellen, moet u een geldig nummer invoeren."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Als je wilt bellen, moet je een geldig nummer invoeren."</string>
     <string name="incall_error_call_failed" msgid="6302746943230078197">"Kan niet bellen."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI-reeks starten..."</string>
     <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Service wordt niet ondersteund."</string>
