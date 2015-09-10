@@ -536,13 +536,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialerDatabaseHelper.startSmartDialUpdateThread();
         mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
 
-        if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
+        if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
+            // Externally specified extras take precedence to EXTRA_SHOW_TAB, which is only
+            // used internally.
+            final Bundle extras = getIntent().getExtras();
+            if (extras != null
+                    && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
+                mListsFragment.showTab(ListsFragment.TAB_INDEX_VOICEMAIL);
+            } else {
+                mListsFragment.showTab(ListsFragment.TAB_INDEX_HISTORY);
+            }
+        } else if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
             int index = getIntent().getIntExtra(EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_SPEED_DIAL);
             if (index < mListsFragment.getTabCount()) {
                 mListsFragment.showTab(index);
             }
-        } else if (Calls.CONTENT_TYPE.equals(getIntent().getType())) {
-            mListsFragment.showTab(ListsFragment.TAB_INDEX_HISTORY);
         }
 
         setSearchBoxHint();
