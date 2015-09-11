@@ -23,6 +23,11 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
+import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+
+import java.util.Locale;
+
 /**
  * Used to receive updates about calls from the Telecom component.  This service is bound to
  * Telecom while there exist calls which potentially require UI. This includes ringing (incoming),
@@ -43,7 +48,10 @@ public class InCallServiceImpl extends InCallService {
 
     @Override
     public void onCallAdded(Call call) {
-        CallList.getInstance().onCallAdded(call);
+        final String countryIso = TelephonyManagerUtils.getCurrentCountryIso(
+                getApplicationContext(),
+                Locale.getDefault());
+        CallList.getInstance().onCallAdded(call, countryIso);
         InCallPresenter.getInstance().onCallAdded(call);
     }
 
@@ -76,6 +84,8 @@ public class InCallServiceImpl extends InCallService {
         InCallPresenter.getInstance().onServiceBind();
         InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
         TelecomAdapter.getInstance().setInCallService(this);
+        CallList.getInstance().setFilteredNumberQueryHandler(
+                new FilteredNumberAsyncQueryHandler(getContentResolver()));
 
         return super.onBind(intent);
     }
