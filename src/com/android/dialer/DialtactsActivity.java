@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.os.Trace;
 import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
@@ -52,7 +53,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -143,7 +143,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
-    private FrameLayout mParentLayout;
+    private CoordinatorLayout mParentLayout;
 
     /**
      * Fragment containing the dialpad that slides into view
@@ -468,7 +468,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mSlideIn.setAnimationListener(mSlideInListener);
         mSlideOut.setAnimationListener(mSlideOutListener);
 
-        mParentLayout = (FrameLayout) findViewById(R.id.dialtacts_mainlayout);
+        mParentLayout = (CoordinatorLayout) findViewById(R.id.dialtacts_mainlayout);
         mParentLayout.setOnDragListener(new LayoutOnDragListener());
         floatingActionButtonContainer.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
