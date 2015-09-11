@@ -18,8 +18,26 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">接近的地點</string>
   <string name="people">聯絡人</string>
+  <string name="lookup_settings_description">查詢不明的電話號碼</string>
+  <string name="enable_forward_lookup_title">轉駁查詢</string>
+  <string name="enable_forward_lookup_summary">在撥號器中搜尋時，顯示附近的地點</string>
+  <string name="enable_people_lookup_title">聯絡人查詢</string>
+  <string name="enable_people_lookup_summary">在撥號器中搜尋時，顯示聯絡人的線上結果</string>
+  <string name="enable_reverse_lookup_title">反向查詢</string>
+  <string name="enable_reverse_lookup_summary">查詢不明來電號碼的聯絡人或地點資料</string>
+  <string name="forward_lookup_provider_title">轉駁查詢提供商</string>
+  <string name="people_lookup_provider_title">聯絡人查詢提供商</string>
+  <string name="reverse_lookup_provider_title">反向查詢提供商</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn 中國 (CN)</string>
+  <string name="preference_category_t9_dialpad_search">撥號鍵盤 T9 搜尋</string>
+  <string name="t9_search_input_locale">T9 搜尋輸入</string>
+  <string name="t9_search_input_locale_default">預設</string>
+  <string name="type_blacklist">已封鎖的通話</string>
   <string name="call_log_stats_title">統計資料</string>
   <string name="callStatsDetailTitle">通話統計詳細資料</string>
+  <string name="call_stats">通話統計</string>
+  <string name="call_stats_refresh">重新整理</string>
+  <string name="activity_title_call_stats">通話統計</string>
   <string name="call_stats_nav_all">全部</string>
   <string name="call_stats_nav_incoming">來電</string>
   <string name="call_stats_nav_outgoing">撥出</string>
@@ -28,6 +46,8 @@
   <string name="call_stats_outgoing">撥出：<xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">未接</string>
   <string name="call_stats_missed_percent">未接：<xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">已封鎖</string>
+  <string name="call_stats_blacklist_percent">已封鎖： <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">總計：<xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">總計：<xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">開始日期</string>
@@ -45,4 +65,30 @@
   <string name="call_stats_reset_filter">重設時間範圍</string>
   <string name="call_stats_sort_by_duration">以通話時間排序</string>
   <string name="call_stats_sort_by_count">以通話次數排序</string>
+  <string name="menu_add_to_blacklist">新增至通話黑名單</string>
+  <string name="toast_added_to_blacklist">%s 已新增至通話黑名單。</string>
+  <string name="speed_dial_settings">快速撥號設定</string>
+  <string name="speed_dial_not_set">（未設定）</string>
+  <string name="speed_dial_replace">替換</string>
+  <string name="speed_dial_delete">刪除</string>
+  <string name="speed_dial_unassigned_dialog_title">未指定按鍵</string>
+  <string name="speed_dial_unassigned_dialog_message">號碼鍵「<xliff:g id="number">%s</xliff:g>」未指定快速撥號操作。是否現在指定一個操作？</string>
+  <string name="dialog_speed_dial_airplane_mode_message">若要使用快速撥號，請先關閉飛航模式。</string>
+  <string name="yes">是</string>
+  <string name="no">否</string>
+  <string name="incall_vibration_category_title">通話震動</string>
+  <string name="detailed_incall_info_title">來電者詳細資訊</string>
+  <string name="detailed_incall_info_summary">在來電畫面顯示來電者的其他資訊</string>
+  <string name="video_call">視像通話</string>
+  <string name="call_duration_active">活動持續時間：</string>
+  <string name="call_duration_call_out">通話持續時間：</string>
+  <string name="call_log_show_all_slots">所有 SIM 卡</string>
+  <string name="call_log_all_calls_header">所有通話</string>
+  <string name="calllog_search_hint">搜尋通話記錄</string>
+  <string name="msim_ime_dialog_title">裝置識別碼</string>
+  <string name="call_log_blacklist_header">僅已封鎖通話</string>
+  <string name="start_call_playback">播放錄音</string>
+  <string name="stop_call_playback">停止</string>
+  <string name="call_playback_error_message">無法播放錄音</string>
+  <string name="sensors_category_title">感應器選項</string>
 </resources>
