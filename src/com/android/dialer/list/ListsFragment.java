@@ -265,7 +265,7 @@ public class ListsFragment extends Fragment
                 // Try to show the voicemail tab after the voicemail status returns.
                 mShowVoicemailTabAfterVoicemailStatusIsFetched = true;
             }
-        } else {
+        } else if (index < getTabCount()){
             mViewPager.setCurrentItem(getRtlPosition(index));
         }
     }
