@@ -28,7 +28,7 @@
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> blok siyahısına əlavə edildi"</string>
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Blokdan çıxarma nömrəsi"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> blok siyahısından çıxarılıb"</string>
-    <string name="block_number_undo" msgid="591338370336724156">"GERİ QAYTARIN"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"LƏĞV EDİN"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Zəng etmədən öncə nömrəyə düzəliş edin"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Zəng tarixçəsindən sil"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Zəng tarixçəsini təmizləyin"</string>
@@ -141,7 +141,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Səsli poçt"</string>
     <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g> blok siyahınıza əlavə edilsin?"</string>
     <string name="blockNumberOk" msgid="7100294572365950840">"Blok nömrəsi"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g> blok siyahınızdan silinsin?"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g> blok siyasından silinsin?"</string>
     <string name="unblockNumberOk" msgid="6946016365620899872">"Blokdan çıxarma nömrəsi"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Sürətli nömrə yığımı"</string>
     <string name="tab_history" msgid="2563144697322434940">"Zəng Tarixçəsi"</string>

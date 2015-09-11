@@ -139,7 +139,7 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Guztiak"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Galduak"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Erantzungailuko deiak"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g> gehitu nahi duzu blokeatutako zerrendan?"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g> gehitu nahi duzu blokeatutakoen zerrendan?"</string>
     <string name="blockNumberOk" msgid="7100294572365950840">"Blokeatu zenbakia"</string>
     <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g> kendu nahi duzu blokeatutakoen zerrendatik?"</string>
     <string name="unblockNumberOk" msgid="6946016365620899872">"Desblokeatu zenbakia"</string>
