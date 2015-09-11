@@ -118,10 +118,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
 
-    /** @see #getCallOrigin() */
-    private static final String CALL_ORIGIN_DIALTACTS =
-            "com.android.dialer.DialtactsActivity";
-
     private static final String KEY_IN_REGULAR_SEARCH_UI = "in_regular_search_ui";
     private static final String KEY_IN_DIALPAD_SEARCH_UI = "in_dialpad_search_ui";
     private static final String KEY_SEARCH_QUERY = "search_query";
@@ -959,16 +955,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     /**
-     * Returns an appropriate call origin for this Activity. May return null when no call origin
-     * should be used (e.g. when some 3rd party application launched the screen. Call origin is
-     * for remembering the tab in which the user made a phone call, so the external app's DIAL
-     * request should not be counted.)
-     */
-    public String getCallOrigin() {
-        return !isDialIntent(getIntent()) ? CALL_ORIGIN_DIALTACTS : null;
-    }
-
-    /**
      * Shows the search fragment
      */
     private void enterSearchUi(boolean smartDialSearch, String query, boolean animate) {
@@ -1260,7 +1246,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // Specify call-origin so that users will see the previous tab instead of
         // CallLog screen (search UI will be automatically exited).
         PhoneNumberInteraction.startInteractionForPhoneCall(
-                DialtactsActivity.this, dataUri, getCallOrigin());
+                DialtactsActivity.this, dataUri, null);
         mClearSearchOnPause = true;
     }
 
@@ -1277,8 +1263,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             phoneNumber = "";
         }
         Intent intent = isVideoCall ?
-                IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
-                IntentUtil.getCallIntent(phoneNumber, getCallOrigin());
+                IntentUtil.getVideoCallIntent(phoneNumber, (String) null) :
+                IntentUtil.getCallIntent(phoneNumber, (String) null);
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }
