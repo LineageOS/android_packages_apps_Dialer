@@ -57,8 +57,6 @@ import org.codeaurora.ims.QtiCallConstants;
  */
 public class QtiCallUtils {
 
-    private static final int INVALID_INDEX = -1;
-
     private static String LOG_TAG = "QtiCallUtils";
 
     /**
@@ -150,18 +148,27 @@ public class QtiCallUtils {
         final ArrayList<CharSequence> items = new ArrayList<CharSequence>();
         final ArrayList<Integer> itemToCallType = new ArrayList<Integer>();
         final Resources res = context.getResources();
+
         // Prepare the string array and mapping.
-        items.add(res.getText(R.string.modify_call_option_voice));
-        itemToCallType.add(VideoProfile.STATE_AUDIO_ONLY);
+        if (hasVoiceCapabilities(call)) {
+            items.add(res.getText(R.string.modify_call_option_voice));
+            itemToCallType.add(VideoProfile.STATE_AUDIO_ONLY);
+        }
 
-        items.add(res.getText(R.string.modify_call_option_vt_rx));
-        itemToCallType.add(VideoProfile.STATE_RX_ENABLED);
+        if (hasReceiveVideoCapabilities(call)) {
+            items.add(res.getText(R.string.modify_call_option_vt_rx));
+            itemToCallType.add(VideoProfile.STATE_RX_ENABLED);
+        }
 
-        items.add(res.getText(R.string.modify_call_option_vt_tx));
-        itemToCallType.add(VideoProfile.STATE_TX_ENABLED);
+        if (hasTransmitVideoCapabilities(call)) {
+            items.add(res.getText(R.string.modify_call_option_vt_tx));
+            itemToCallType.add(VideoProfile.STATE_TX_ENABLED);
+        }
 
-        items.add(res.getText(R.string.modify_call_option_vt));
-        itemToCallType.add(VideoProfile.STATE_BIDIRECTIONAL);
+        if (hasReceiveVideoCapabilities(call) && hasTransmitVideoCapabilities(call)) {
+            items.add(res.getText(R.string.modify_call_option_vt));
+            itemToCallType.add(VideoProfile.STATE_BIDIRECTIONAL);
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.modify_call_option_title);
@@ -181,9 +188,6 @@ public class QtiCallUtils {
         };
         final int currUnpausedVideoState = VideoUtils.getUnPausedVideoState(call.getVideoState());
         final int index = itemToCallType.indexOf(currUnpausedVideoState);
-        if (index == INVALID_INDEX) {
-            return;
-        }
         builder.setSingleChoiceItems(items.toArray(new CharSequence[0]), index, listener);
         alert = builder.create();
         alert.show();
@@ -458,5 +462,44 @@ public class QtiCallUtils {
         } else {
             return R.drawable.ic_rx_videocam;
         }
+    }
+
+    /**
+     * Returns true if the CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO is set to false.
+     * Note that - CAPABILITY_SUPPORTS_DOWNGRADE_TO_VOICE_LOCAL and
+     * CAPABILITY_SUPPORTS_DOWNGRADE_TO_VOICE_REMOTE maps to
+     * CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO
+     */
+    public static boolean hasVoiceCapabilities(Call call) {
+        return call != null &&
+                !call.can(android.telecom.Call.Details.CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO);
+    }
+
+    /**
+     * Returns true if local has the VT Transmit and if remote capability has VT Receive set i.e.
+     * Local can transmit and remote can receive
+     */
+    public static boolean hasTransmitVideoCapabilities(Call call) {
+        return call != null &&
+                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX);
+    }
+
+    /**
+     * Returns true if local has the VT Receive and if remote capability has VT Transmit set i.e.
+     * Local can transmit and remote can receive
+     */
+    public static boolean hasReceiveVideoCapabilities(Call call) {
+        return call != null &&
+                call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_RX)
+                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_TX);
+    }
+
+    /**
+     * Returns true if both voice and video capabilities (see above) are set
+     */
+    public static boolean hasVoiceOrVideoCapabilities(Call call) {
+        return hasVoiceCapabilities(call) || hasTransmitVideoCapabilities(call)
+                || hasReceiveVideoCapabilities(call);
     }
 }

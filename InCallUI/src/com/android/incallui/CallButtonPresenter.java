@@ -458,7 +458,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
         final boolean useExt = QtiCallUtils.useExt(ui.getContext());
-        final boolean showUpgradeToVideo = (!isVideo || useExt) && hasVideoCallCapabilities(call);
+
+        final boolean isCallActive = call.getState() == Call.State.ACTIVE;
+        final boolean showUpgradeToVideo = (!isVideo  && !useExt && hasVideoCallCapabilities(call))
+                || (useExt && QtiCallUtils.hasVoiceOrVideoCapabilities(call)
+                && (isCallActive || isCallOnHold));
+
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final int callState = call.getState();
 
@@ -479,8 +484,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.setHold(isCallOnHold);
         ui.showButton(BUTTON_MUTE, showMute);
         ui.showButton(BUTTON_ADD_CALL, showAddCall);
-        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo ||
-                 (useExt && showDowngradeToAudio));
+        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
         ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio && !useExt);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt);
