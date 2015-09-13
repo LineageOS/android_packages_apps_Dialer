@@ -920,7 +920,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         boolean isIncomingOrWaiting = mPrimary.getState() == Call.State.INCOMING ||
                 mPrimary.getState() == Call.State.CALL_WAITING;
-        return isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject());
+        return isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject()) &&
+                call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED;
     }
 
     /**
