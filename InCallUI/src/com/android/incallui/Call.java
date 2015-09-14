@@ -175,6 +175,60 @@ public class Call {
         }
     }
 
+    /**
+     * Tracks any state variables that is useful for logging. There is some amount of overlap with
+     * existing call member variables, but this duplication helps to ensure that none of these
+     * logging variables will interface with/and affect call logic.
+     */
+    public static class LogState {
+        public static final int LOOKUP_NOT_FOUND = 1;
+        public static final int LOOKUP_LOCAL_CONTACT = 2;
+        public static final int LOOKUP_LOCAL_CACHE = 3;
+        public static final int LOOKUP_REMOTE_CONTACT = 4;
+        public static final int LOOKUP_EMERGENCY = 5;
+        public static final int LOOKUP_VOICEMAIL = 6;
+
+        public DisconnectCause disconnectCause;
+        public boolean isIncoming = false;
+        public int contactLookupResult = LOOKUP_NOT_FOUND;
+        // TODO: Populate this field by passing in extras from Dialer
+        public int callInitiationMethod;
+        public long duration = 0;
+
+        @Override
+        public String toString() {
+            return String.format(Locale.US, "["
+                        + "%s, " // DisconnectCause toString already describes the object type
+                        + "isIncoming: %s, "
+                        + "contactLookup: %s, "
+                        + "callInitiation: %s, "
+                        + "duration: %s"
+                        + "]",
+                    disconnectCause,
+                    isIncoming,
+                    lookupToString(contactLookupResult),
+                    callInitiationMethod,
+                    duration);
+        }
+
+        private static String lookupToString(int lookupType) {
+            switch (lookupType) {
+                case LOOKUP_LOCAL_CONTACT:
+                    return "Local";
+                case LOOKUP_LOCAL_CACHE:
+                    return "Cache";
+                case LOOKUP_REMOTE_CONTACT:
+                    return "Remote";
+                case LOOKUP_EMERGENCY:
+                    return "Emergency";
+                case LOOKUP_VOICEMAIL:
+                    return "Voicemail";
+                default:
+                    return "Not found";
+            }
+        }
+    }
+
 
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
@@ -265,6 +319,8 @@ public class Call {
     private String mChildNumber;
     private String mLastForwardedNumber;
     private String mCallSubject;
+
+    private LogState mLogState = new LogState();
 
     /**
      * Used only to create mock calls for testing
@@ -444,6 +500,12 @@ public class Call {
 
     public void setState(int state) {
         mState = state;
+        if (mState == State.INCOMING) {
+            mLogState.isIncoming = true;
+        } else if (mState == State.DISCONNECTED) {
+            mLogState.duration = getConnectTimeMillis() == 0 ?
+                    0: System.currentTimeMillis() - getConnectTimeMillis();
+        }
     }
 
     public int getNumberPresentation() {
@@ -500,6 +562,7 @@ public class Call {
 
     public void setDisconnectCause(DisconnectCause disconnectCause) {
         mDisconnectCause = disconnectCause;
+        mLogState.disconnectCause = mDisconnectCause;
     }
 
     /** Returns the possible text message responses. */
@@ -657,6 +720,10 @@ public class Call {
 
     public int getSessionModificationState() {
         return mSessionModificationState;
+    }
+
+    public LogState getLogState() {
+        return mLogState;
     }
 
     @Override

@@ -40,8 +40,6 @@ import java.util.Locale;
 
 /**
  * Looks up caller information for the given phone number.
- *
- * {@hide}
  */
 public class CallerInfo {
     private static final String TAG = "CallerInfo";

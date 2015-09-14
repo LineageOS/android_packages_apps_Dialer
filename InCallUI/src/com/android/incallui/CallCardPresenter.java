@@ -37,6 +37,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.incallui.Call.LogState;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -516,6 +517,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         updateContactEntry(entry, isPrimary);
         if (entry.name != null) {
             Log.d(TAG, "Contact found: " + entry);
+        }
+        final Call call = CallList.getInstance().getCallById(callId);
+        if (call != null) {
+            call.getLogState().contactLookupResult = entry.contactLookupResult;
         }
         if (entry.contactUri != null) {
             CallerInfoUtils.sendViewNotification(mContext, entry.contactUri);
