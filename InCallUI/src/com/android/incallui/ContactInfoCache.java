@@ -442,13 +442,13 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 if (TextUtils.isEmpty(number)) {
                     // No name *or* number! Display a generic "unknown" string
                     // (or potentially some other default based on the presentation.)
-                    displayName = getPresentationString(context, presentation);
+                    displayName = getPresentationString(context, presentation, info.callSubject);
                     Log.d(TAG, "  ==> no name *or* number! displayName = " + displayName);
                 } else if (presentation != TelecomManager.PRESENTATION_ALLOWED) {
                     // This case should never happen since the network should never send a phone #
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
-                    displayName = getPresentationString(context, presentation);
+                    displayName = getPresentationString(context, presentation, info.callSubject);
                     Log.d(TAG, "  ==> presentation not allowed! displayName = " + displayName);
                 } else if (!TextUtils.isEmpty(info.cnapName)) {
                     // No name, but we do have a valid CNAP name, so use that.
@@ -485,7 +485,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     // This case should never happen since the network should never send a name
                     // AND a restricted presentation. However we leave it here in case of weird
                     // network behavior
-                    displayName = getPresentationString(context, presentation);
+                    displayName = getPresentationString(context, presentation, info.callSubject);
                     Log.d(TAG, "  ==> valid name, but presentation not allowed!" +
                             " displayName = " + displayName);
                 } else {
@@ -530,14 +530,22 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     }
 
     /**
-     * Gets name strings based on some special presentation modes.
+     * Gets name strings based on some special presentation modes and the associated custom label.
      */
-    private static String getPresentationString(Context context, int presentation) {
+    private static String getPresentationString(Context context, int presentation,
+             String customLabel) {
         String name = context.getString(R.string.unknown);
-        if (presentation == TelecomManager.PRESENTATION_RESTRICTED) {
-            name = context.getString(R.string.private_num);
-        } else if (presentation == TelecomManager.PRESENTATION_PAYPHONE) {
-            name = context.getString(R.string.payphone);
+        if (!TextUtils.isEmpty(customLabel) &&
+                ((presentation == TelecomManager.PRESENTATION_UNKNOWN) ||
+                 (presentation == TelecomManager.PRESENTATION_RESTRICTED))) {
+            name = customLabel;
+            return name;
+        } else {
+            if (presentation == TelecomManager.PRESENTATION_RESTRICTED) {
+                name = context.getString(R.string.private_num);
+            } else if (presentation == TelecomManager.PRESENTATION_PAYPHONE) {
+                name = context.getString(R.string.payphone);
+            }
         }
         return name;
     }

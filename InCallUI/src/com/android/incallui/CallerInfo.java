@@ -141,6 +141,12 @@ public class CallerInfo {
      */
     public boolean isCachedPhotoCurrent;
 
+    /**
+     * String which holds the call subject sent as extra from the lower layers for this call. This
+     * is used to display the no-caller ID reason for restricted/unknown number presentation.
+     */
+    public String callSubject;
+
     private boolean mIsEmergency;
     private boolean mIsVoiceMail;
 
