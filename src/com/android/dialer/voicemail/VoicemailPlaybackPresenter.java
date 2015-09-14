@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.media.AudioManager;
-import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -68,8 +67,7 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @NotThreadSafe
 @VisibleForTesting
-public class VoicemailPlaybackPresenter
-        implements OnAudioFocusChangeListener, MediaPlayer.OnPreparedListener,
+public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListener,
                 MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
     private static final String TAG = VoicemailPlaybackPresenter.class.getSimpleName();
@@ -105,7 +103,6 @@ public class VoicemailPlaybackPresenter
         VoicemailContract.Voicemails.HAS_CONTENT,
     };
 
-    public static final int PLAYBACK_STREAM = AudioManager.STREAM_VOICE_CALL;
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
     // Time to wait for content to be fetched before timing out.
     private static final long FETCH_CONTENT_TIMEOUT_MS = 20000;
@@ -159,7 +156,7 @@ public class VoicemailPlaybackPresenter
     private FetchResultHandler mFetchResultHandler;
     private Handler mHandler = new Handler();
     private PowerManager.WakeLock mProximityWakeLock;
-    private AudioManager mAudioManager;
+    private VoicemailAudioManager mVoicemailAudioManager;
 
     private OnVoicemailDeletedListener mOnVoicemailDeletedListener;
 
@@ -188,7 +185,7 @@ public class VoicemailPlaybackPresenter
     private VoicemailPlaybackPresenter(Activity activity) {
         Context context = activity.getApplicationContext();
         mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
-        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mVoicemailAudioManager = new VoicemailAudioManager(context, this);
 
         PowerManager powerManager =
                 (PowerManager) context.getSystemService(Context.POWER_SERVICE);
@@ -206,7 +203,7 @@ public class VoicemailPlaybackPresenter
         mContext = activity;
 
         mInitialOrientation = mContext.getResources().getConfiguration().orientation;
-        mActivity.setVolumeControlStream(VoicemailPlaybackPresenter.PLAYBACK_STREAM);
+        mActivity.setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
 
         if (savedInstanceState != null) {
             // Restores playback state when activity is recreated, such as after rotation.
@@ -503,7 +500,7 @@ public class VoicemailPlaybackPresenter
 
             mMediaPlayer.reset();
             mMediaPlayer.setDataSource(mContext, mVoicemailUri);
-            mMediaPlayer.setAudioStreamType(PLAYBACK_STREAM);
+            mMediaPlayer.setAudioStreamType(VoicemailAudioManager.PLAYBACK_STREAM);
             mMediaPlayer.prepareAsync();
         } catch (IOException e) {
             handleError(e);
@@ -577,15 +574,22 @@ public class VoicemailPlaybackPresenter
         }
     }
 
-    @Override
-    public void onAudioFocusChange(int focusChange) {
-        Log.d(TAG, "onAudioFocusChange: focusChange=" + focusChange);
-        boolean lostFocus = focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
-                || focusChange == AudioManager.AUDIOFOCUS_LOSS;
-        if (mIsPlaying && focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-            pausePlayback();
-        } else if (!mIsPlaying && focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+    /**
+     * Only play voicemail when audio focus is granted. When it is lost (usually by another
+     * application requesting focus), pause playback.
+     *
+     * @param gainedFocus {@code true} if the audio focus was gained, {@code} false otherwise.
+     */
+    public void onAudioFocusChange(boolean gainedFocus) {
+        if (mIsPlaying == gainedFocus) {
+            // Nothing new here, just exit.
+            return;
+        }
+
+        if (!mIsPlaying) {
             resumePlayback();
+        } else {
+            pausePlayback();
         }
     }
 
@@ -614,16 +618,10 @@ public class VoicemailPlaybackPresenter
 
             try {
                 // Grab audio focus.
-                int result = mAudioManager.requestAudioFocus(
-                        this,
-                        PLAYBACK_STREAM,
-                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-                if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                    throw new RejectedExecutionException("Could not capture audio focus.");
-                }
+                // Can throw RejectedExecutionException.
+                mVoicemailAudioManager.requestAudioFocus();
 
                 setSpeakerphoneOn(mIsSpeakerphoneOn);
-                // Can throw RejectedExecutionException.
                 mMediaPlayer.start();
             } catch (RejectedExecutionException e) {
                 handleError(e);
@@ -655,7 +653,8 @@ public class VoicemailPlaybackPresenter
         if (mView != null) {
             mView.onPlaybackStopped();
         }
-        mAudioManager.abandonAudioFocus(this);
+
+        mVoicemailAudioManager.abandonAudioFocus();
 
         if (mActivity != null) {
             mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -720,7 +719,7 @@ public class VoicemailPlaybackPresenter
         }
 
         mIsSpeakerphoneOn = on;
-        mAudioManager.setSpeakerphoneOn(mIsSpeakerphoneOn);
+        mVoicemailAudioManager.turnOnSpeaker(on);
 
         if (mIsPlaying) {
             if (on) {
