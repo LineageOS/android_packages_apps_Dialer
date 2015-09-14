@@ -83,6 +83,7 @@ import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
@@ -1262,9 +1263,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             // an error message.
             phoneNumber = "";
         }
-        Intent intent = isVideoCall ?
-                IntentUtil.getVideoCallIntent(phoneNumber, (String) null) :
-                IntentUtil.getCallIntent(phoneNumber, (String) null);
+
+        final Intent intent = new CallIntentBuilder(phoneNumber)
+                .setIsVideoCall(isVideoCall)
+                .build();
+
         DialerUtils.startActivityWithErrorToast(this, intent);
         mClearSearchOnPause = true;
     }

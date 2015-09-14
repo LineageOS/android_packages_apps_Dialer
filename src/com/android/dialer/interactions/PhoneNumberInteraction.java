@@ -53,6 +53,7 @@ import com.android.dialer.R;
 import com.android.dialer.TransactionSafeActivity;
 import com.android.dialer.contact.ContactUpdateService;
 import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -322,7 +323,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                         Intent.ACTION_SENDTO, Uri.fromParts("sms", phoneNumber, null));
                 break;
             default:
-                intent = IntentUtil.getCallIntent(phoneNumber, callOrigin);
+                intent = new CallIntentBuilder(phoneNumber).build();
                 break;
         }
         DialerUtils.startActivityWithErrorToast(context, intent);

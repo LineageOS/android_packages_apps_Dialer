@@ -16,32 +16,22 @@
 
 package com.android.dialer;
 
-import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.VoicemailContract.Voicemails;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -49,7 +39,6 @@ import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
-import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.util.UriUtils;
@@ -57,16 +46,11 @@ import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
-import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.calllog.PhoneNumberDisplayUtil;
-import com.android.dialer.util.DialerUtils;
-import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
-
-import java.util.List;
 
 /**
  * Displays the details of a specific call log entry.
@@ -252,11 +236,11 @@ public class CallDetailActivity extends AppCompatActivity
         mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
 
-        mCallButton = (View) findViewById(R.id.call_back_button);
+        mCallButton = findViewById(R.id.call_back_button);
         mCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(IntentUtil.getCallIntent(mNumber));
+                mContext.startActivity(new CallIntentBuilder(mNumber).build());
             }
         });
 
