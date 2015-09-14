@@ -427,7 +427,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
                 call.getState() == Call.State.CALL_WAITING;
 
         if (isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject()) &&
-                call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED) {
+                call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED &&
+                call.isCallSubjectSupported()) {
             return call.getCallSubject();
         }
 
