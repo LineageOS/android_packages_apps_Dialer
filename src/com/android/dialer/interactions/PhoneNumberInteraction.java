@@ -521,7 +521,17 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
     @VisibleForTesting
     /* package */ void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
-        PhoneDisambiguationDialogFragment.show(((Activity)mContext).getFragmentManager(),
-                phoneList, mInteractionType, mCallOrigin);
+        final Activity activity = (Activity) mContext;
+        if (activity.isDestroyed()) {
+            // Check whether the activity is still running
+            return;
+        }
+        try {
+            PhoneDisambiguationDialogFragment.show(activity.getFragmentManager(),
+                    phoneList, mInteractionType, mCallOrigin);
+        } catch (IllegalStateException e) {
+            // ignore to be safe. Shouldn't happen because we checked the
+            // activity wasn't destroyed, but to be safe.
+        }
     }
 }
