@@ -176,10 +176,6 @@ public class ListsFragment extends Fragment
         Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedInstanceState);
 
-        Trace.beginSection(TAG + " getCurrentCountryIso");
-        final String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        Trace.endSection();
-
         mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
         mHasFetchedVoicemailStatus = false;
 
