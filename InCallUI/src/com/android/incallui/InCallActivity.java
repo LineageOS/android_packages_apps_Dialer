@@ -239,6 +239,7 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
     @Override
     protected void onSaveInstanceState(Bundle out) {
+        mIsVisible = false;
         // TODO: The dialpad fragment should handle this as part of its own state
         out.putBoolean(SHOW_DIALPAD_EXTRA,
                 mCallButtonFragment != null && mCallButtonFragment.isDialpadVisible());
@@ -399,6 +400,9 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
         // BACK is also used to exit out of any "special modes" of the
         // in-call UI:
+        if (!isVisible()) {
+            return;
+        }
 
         if ((mConferenceManagerFragment == null || !mConferenceManagerFragment.isVisible())
                 && (mCallCardFragment == null || !mCallCardFragment.isVisible())) {
