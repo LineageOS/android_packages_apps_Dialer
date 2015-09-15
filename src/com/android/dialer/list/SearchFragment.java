@@ -53,6 +53,7 @@ import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.widget.EmptyContentView;
+import com.android.incallui.Call.LogState;
 import com.android.phone.common.animation.AnimUtils;
 
 public class SearchFragment extends PhoneNumberPickerFragment {
@@ -250,7 +251,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 number = adapter.getQueryString();
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-                    listener.onCallNumberDirectly(number);
+                    listener.onCallNumberDirectly(number, false /* isVideoCall */,
+                            getCallInitiationType(false /* isRemoteDirectory */));
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
@@ -275,7 +277,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 number = adapter.getQueryString();
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-                    listener.onCallNumberDirectly(number, true /* isVideoCall */);
+                    listener.onCallNumberDirectly(number, true /* isVideoCall */,
+                            getCallInitiationType(false /* isRemoteDirectory */));
                 }
                 break;
         }

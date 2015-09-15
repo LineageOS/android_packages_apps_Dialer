@@ -20,6 +20,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -28,7 +29,7 @@ import com.android.contacts.common.list.PinnedHeaderListView;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialerbind.ObjectFactory;
-
+import com.android.incallui.Call.LogState;
 import com.android.dialer.R;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
@@ -118,5 +119,11 @@ public class RegularSearchFragment extends SearchFragment
                 PermissionsUtil.notifyPermissionGranted(getActivity(), READ_CONTACTS);
             }
         }
+    }
+
+    @Override
+    protected int getCallInitiationType(boolean isRemoteDirectory) {
+        return isRemoteDirectory ? LogState.INITIATION_REMOTE_DIRECTORY
+                : LogState.INITIATION_REGULAR_SEARCH;
     }
 }
