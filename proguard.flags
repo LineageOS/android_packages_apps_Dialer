@@ -12,4 +12,9 @@
 @com.android.dialer.NeededForReflection *;
 }
 
+# For design libraries
+-keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
 -verbose
