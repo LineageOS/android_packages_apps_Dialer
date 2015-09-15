@@ -131,6 +131,8 @@ public class CallList {
         } else {
             onUpdate(call);
         }
+
+        call.logCallInitiationType();
     }
 
     public void onCallRemoved(android.telecom.Call telecomCall) {
