@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.internal.telephony.ConfigResourceUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 
@@ -24,6 +25,7 @@ import java.util.List;
 public class DialerSettingsActivity extends PreferenceActivity {
 
     protected SharedPreferences mPreferences;
+    private ConfigResourceUtil mConfigResUtil = new ConfigResourceUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,15 @@ public class DialerSettingsActivity extends PreferenceActivity {
         soundSettingsHeader.id = R.id.settings_header_sounds_and_vibration;
         target.add(soundSettingsHeader);
 
-        Header quickResponseSettingsHeader = new Header();
-        Intent quickResponseSettingsIntent =
-                new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
-        quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
-        quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
-        target.add(quickResponseSettingsHeader);
+        if (mConfigResUtil.getBooleanValue(this,
+                        "config_reject_call_via_sms_enabled")) {
+            Header quickResponseSettingsHeader = new Header();
+            Intent quickResponseSettingsIntent =
+                    new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
+            quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
+            quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
+            target.add(quickResponseSettingsHeader);
+        }
 
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
