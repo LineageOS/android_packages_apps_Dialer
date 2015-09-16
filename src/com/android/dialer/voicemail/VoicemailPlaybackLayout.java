@@ -276,9 +276,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mDeleteButton.setOnClickListener(mDeleteButtonListener);
 
         mPositionText.setText(formatAsMinutesAndSeconds(0));
-        mPositionText.setVisibility(View.INVISIBLE);
         mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
-        mTotalDurationText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -368,9 +366,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mStartStopButton.setEnabled(false);
         mPlaybackSeek.setProgress(0);
         mPlaybackSeek.setEnabled(false);
-
-        mPositionText.setText(formatAsMinutesAndSeconds(0));
-        mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
     }
 
     @Override

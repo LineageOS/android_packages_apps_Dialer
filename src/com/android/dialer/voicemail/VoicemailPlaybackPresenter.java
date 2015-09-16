@@ -101,6 +101,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
     private static final String[] HAS_CONTENT_PROJECTION = new String[] {
         VoicemailContract.Voicemails.HAS_CONTENT,
+        VoicemailContract.Voicemails.DURATION
     };
 
     private static final int NUMBER_OF_THREADS_IN_POOL = 2;
@@ -256,14 +257,13 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                 mView.onSpeakerphoneOn(mIsSpeakerphoneOn);
             }
 
-            mDuration.set(0);
+            checkForContent();
 
             if (startPlayingImmediately) {
                 // Since setPlaybackView can get called during the view binding process, we don't
                 // want to reset mIsPlaying to false if the user is currently playing the
                 // voicemail and the view is rebound.
                 mIsPlaying = startPlayingImmediately;
-                checkForContent();
             }
         }
     }
@@ -360,7 +360,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                 if (hasContent) {
                     prepareContent();
                 } else {
-                    requestContent();
+                    mView.setClipPosition(0, mDuration.get());
                 }
             }
         });
@@ -373,10 +373,14 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
         ContentResolver contentResolver = mContext.getContentResolver();
         Cursor cursor = contentResolver.query(
-                voicemailUri, HAS_CONTENT_PROJECTION, null, null, null);
+                voicemailUri, null, null, null, null);
         try {
             if (cursor != null && cursor.moveToNext()) {
-                return cursor.getInt(cursor.getColumnIndexOrThrow(
+                int duration = cursor.getInt(cursor.getColumnIndex(
+                        VoicemailContract.Voicemails.DURATION));
+                // Convert database duration (seconds) into mDuration (milliseconds)
+                mDuration.set(duration > 0 ? duration * 1000 : 0);
+                return cursor.getInt(cursor.getColumnIndex(
                         VoicemailContract.Voicemails.HAS_CONTENT)) == 1;
             }
         } finally {
@@ -604,7 +608,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
         if (!mIsPrepared) {
             // If we haven't downloaded the voicemail yet, attempt to download it.
-            checkForContent();
+            requestContent();
             mIsPlaying = true;
             return;
         }
