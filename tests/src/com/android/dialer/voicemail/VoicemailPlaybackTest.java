@@ -17,6 +17,7 @@
 package com.android.dialer.voicemail;
 
 import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.CHECK_FOR_CONTENT;
+import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.CHECK_CONTENT_AFTER_CHANGE;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -31,7 +32,6 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.contacts.common.test.IntegrationTestUtils;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.util.AsyncTaskExecutors;
@@ -61,7 +61,6 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
     private VoicemailPlaybackLayout mLayout;
 
     private Uri mVoicemailUri;
-    private IntegrationTestUtils mTestUtils;
     private LocaleTestUtils mLocaleTestUtils;
     private FakeAsyncTaskExecutor mFakeAsyncTaskExecutor;
 
@@ -75,7 +74,6 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
 
         mFakeAsyncTaskExecutor = new FakeAsyncTaskExecutor(getInstrumentation());
         AsyncTaskExecutors.setFactoryForTest(mFakeAsyncTaskExecutor.getFactory());
-        mTestUtils = new IntegrationTestUtils(getInstrumentation());
 
         // Some of the tests rely on the text - safest to force a specific locale.
         mLocaleTestUtils = new LocaleTestUtils(getInstrumentation().getTargetContext());
@@ -95,53 +93,71 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         mLocaleTestUtils.restoreLocale();
         mLocaleTestUtils = null;
 
-        mLayout = null;
-        mPresenter = null;
-        mTestUtils = null;
+        mPresenter.clearInstance();
         AsyncTaskExecutors.setFactoryForTest(null);
+
+        mActivity = null;
+        mPresenter = null;
+        mLayout = null;
 
         super.tearDown();
     }
 
     public void testFetchingVoicemail() throws Throwable {
-        setUriForRealFileVoicemailEntry();
+        setUriForUnfetchedVoicemailEntry();
         setPlaybackViewForPresenter();
-        assertHasOneTextViewContaining("Loading voicemail");
+
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.resumePlayback();
+            }
+        });
+        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+        getInstrumentation().waitForIdleSync();
+
+        assertStateTextContains("Loading voicemail");
     }
 
     public void testWhenCheckForContentCompletes() throws Throwable {
         setUriForRealFileVoicemailEntry();
         setPlaybackViewForPresenter();
 
-        // There is a background check that is testing to see if we have the content available.
-        // Once that task completes, we shouldn't be showing the fetching message.
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.resumePlayback();
+            }
+        });
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
         getInstrumentation().waitForIdleSync();
 
-        assertHasOneTextViewContaining("Buffering");
-        assertHasZeroTextViewsContaining("Loading voicemail");
+        // Since the content is already fetched, don't show the loading message.
+        assertStateTextNotContains("Loading voicemail");
     }
 
     public void testInvalidVoicemailShowsErrorMessage() throws Throwable {
         setUriForInvalidVoicemailEntry();
         setPlaybackViewForPresenter();
 
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.resumePlayback();
+            }
+        });
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
         getInstrumentation().waitForIdleSync();
 
         // The media player will have thrown an IOException since the file doesn't exist.
         // This should have put a failed to play message on screen, buffering is gone.
-        assertHasOneTextViewContaining("Couldn't play voicemail");
-        assertHasZeroTextViewsContaining("Buffering");
+        assertStateTextContains("Couldn't play voicemail");
+        assertStateTextNotContains("Buffering");
     }
 
     public void testClickingSpeakerphoneButton() throws Throwable {
         setUriForRealFileVoicemailEntry();
         setPlaybackViewForPresenter();
-
-        // Wait for check for content to complete.
-        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
-        getInstrumentation().waitForIdleSync();
 
         // Check that the speakerphone is false to start.
         assertFalse(mPresenter.isSpeakerphoneOn());
@@ -176,6 +192,18 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         }
     }
 
+    private void setUriForUnfetchedVoicemailEntry() {
+        assertNull(mVoicemailUri);
+        ContentValues values = new ContentValues();
+        values.put(VoicemailContract.Voicemails.DATE, String.valueOf(System.currentTimeMillis()));
+        values.put(VoicemailContract.Voicemails.NUMBER, CONTACT_NUMBER);
+        values.put(VoicemailContract.Voicemails.MIME_TYPE, MIME_TYPE);
+        values.put(VoicemailContract.Voicemails.HAS_CONTENT, 0);
+        String packageName = getInstrumentation().getTargetContext().getPackageName();
+        mVoicemailUri = getContentResolver().insert(
+                VoicemailContract.Voicemails.buildSourceUri(packageName), values);
+    }
+
     private void setUriForInvalidVoicemailEntry() {
         assertNull(mVoicemailUri);
         ContentResolver contentResolver = getContentResolver();
@@ -204,18 +232,14 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         }
     }
 
-    private void assertHasOneTextViewContaining(String text) throws Throwable {
+    private void assertStateTextContains(String text) throws Throwable {
         assertNotNull(mLayout);
-        List<TextView> views = mTestUtils.getTextViewsWithString(mLayout, text);
-        assertEquals("There should have been one TextView with text '" + text + "' but found "
-                + views, 1, views.size());
+        assertTrue(mLayout.getStateText().contains(text));
     }
 
-    private void assertHasZeroTextViewsContaining(String text) throws Throwable {
+    private void assertStateTextNotContains(String text) throws Throwable {
         assertNotNull(mLayout);
-        List<TextView> views = mTestUtils.getTextViewsWithString(mLayout, text);
-        assertEquals("There should have been no TextViews with text '" + text + "' but found "
-                + views, 0,  views.size());
+        assertFalse(mLayout.getStateText().contains(text));
     }
 
     private ContentResolver getContentResolver() {

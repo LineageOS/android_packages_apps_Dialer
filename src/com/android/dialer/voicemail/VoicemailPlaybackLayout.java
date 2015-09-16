@@ -42,6 +42,7 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
 import java.util.concurrent.TimeUnit;
@@ -410,5 +411,10 @@ public class VoicemailPlaybackLayout extends LinearLayout
             minutes = 99;
         }
         return String.format("%02d:%02d", minutes, seconds);
+    }
+
+    @VisibleForTesting
+    public String getStateText() {
+        return mStateText.getText().toString();
     }
 }
