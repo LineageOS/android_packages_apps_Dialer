@@ -22,14 +22,16 @@ import android.content.Intent;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.telephony.PhoneNumberUtils;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.LargeTest;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
@@ -42,24 +44,32 @@ import java.util.Random;
 
 /**
  * Unit tests for {@link CallLogAdapter}.
+ *
+ * adb shell am instrument \
+ *     -e com.android.dialer.calllog.CallLogAdapterTest \
+ *     -w com.android.dialer.tests/android.test.InstrumentationTestRunner
  */
-@SmallTest
 public class CallLogAdapterTest extends AndroidTestCase {
+    private static final String EMPTY_STRING = "";
     private static final int NO_VALUE_SET = -1;
 
+    private static final String TEST_CACHED_NAME = "name";
+    private static final String TEST_CACHED_NUMBER_LABEL = "label";
+    private static final int TEST_CACHED_NUMBER_TYPE = 1;
+    private static final String TEST_COUNTRY_ISO = "US";
+    private static final String TEST_DEFAULT_CUSTOM_LABEL = "myLabel";
+    private static final Uri TEST_LOOKUP_URI = Uri.parse("content://contacts/2");
+
+    private static final String TEST_NUMBER = "12125551000";
     private static final String TEST_NUMBER_1 = "12345678";
     private static final String TEST_NUMBER_2 = "87654321";
     private static final String TEST_NUMBER_3 = "18273645";
-    private static final String TEST_NAME = "name";
-    private static final String TEST_NUMBER_LABEL = "label";
-    private static final int TEST_NUMBER_TYPE = 1;
-    private static final String TEST_COUNTRY_ISO = "US";
+    private static final String TEST_FORMATTED_NUMBER = "1 212-555-1000";
 
     // The object under test.
     private TestCallLogAdapter mAdapter;
 
     private MatrixCursor mCursor;
-    private int mCursorSize;
 
     private View mView;
     private CallLogListItemViewHolder mViewHolder;
@@ -88,117 +98,188 @@ public class CallLogAdapterTest extends AndroidTestCase {
                 };
 
         mAdapter = new TestCallLogAdapter(getContext(), fakeCallFetcher, fakeContactInfoHelper);
+
         // The cursor used in the tests to store the entries to display.
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
         mCursor.moveToFirst();
+
         // The views into which to store the data.
-        mView = new LinearLayout(getContext());
         mViewHolder = CallLogListItemViewHolder.createForTest(getContext());
-        mView.setTag(mViewHolder);
     }
 
     @Override
     protected void tearDown() throws Exception {
         mAdapter = null;
         mCursor = null;
-        mView = null;
         super.tearDown();
     }
 
     @MediumTest
     public void testBindView_NumberOnlyNoCache() {
         createCallLogEntry();
-        mAdapter.changeCursor(mCursor);
 
+        mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
-        assertNameIs(mViewHolder, TEST_NUMBER_1);
+
+        assertNameIs(mViewHolder, TEST_NUMBER);
     }
 
     @MediumTest
     public void testBindView_PrivateCall() {
         createPrivateCallLogEntry();
-        mAdapter.changeCursor(mCursor);
 
+        mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
+
         assertEquals(Calls.PRESENTATION_RESTRICTED, mViewHolder.numberPresentation);
+        assertNull(mViewHolder.primaryActionButtonView.getTag());
+    }
+
+    @MediumTest
+    public void testBindView_UnknownCall() {
+        createUnknownCallLogEntry();
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertEquals(Calls.PRESENTATION_UNKNOWN, mViewHolder.numberPresentation);
+        assertNull(mViewHolder.primaryActionButtonView.getTag());
     }
 
     @MediumTest
     public void testBindView_WithoutQuickContactBadge() {
         createCallLogEntry();
-        mAdapter.changeCursor(mCursor);
 
+        mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
+
         assertFalse(mViewHolder.quickContactView.isEnabled());
     }
 
     @MediumTest
     public void testBindView_CallButton() {
         createCallLogEntry();
-        mAdapter.changeCursor(mCursor);
 
+        mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // The primaryActionView tag is set when the ViewHolder is binded. If it is possible
         // to place a call to the phone number, a call intent will have been created which
         // starts a phone call to the entry's number.
-        IntentProvider intentProvider =
-                (IntentProvider) mViewHolder.primaryActionButtonView.getTag();
-        Intent intent = intentProvider.getIntent(getContext());
-        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
-        assertEquals(Uri.parse("tel:" + TEST_NUMBER_1), intent.getData());
+        assertHasCallAction(mViewHolder);
     }
 
     @MediumTest
     public void testBindView_VoicemailUri() {
         createVoicemailCallLogEntry();
-        mAdapter.changeCursor(mCursor);
 
+        mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
+
         assertEquals(Uri.parse(mViewHolder.voicemailUri),
                 ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, 0));
+        assertNull(mViewHolder.primaryActionButtonView.getTag());
     }
 
-    public void testBindView_NoCallLogCacheNorMemoryCache_EnqueueRequest() {
-        createCallLogEntry();
+    @MediumTest
+    public void testPresentationAfterRebindingViewHolders() {
+        final int increment = 10;
+        final int size = increment * 4;
 
-        // Bind the views of a single row.
+        // Instantiate list of ViewHolders.
+        CallLogListItemViewHolder[] holders = new CallLogListItemViewHolder[size];
+        for (int i = 0; i < size; i++) {
+            holders[i] = CallLogListItemViewHolder.createForTest(getContext());
+        }
+
+        // Add first set of entries to the cursor.
+        for (int i = 0; i < increment; i++) {
+            createCallLogEntry();
+            createPrivateCallLogEntry();
+            createCallLogEntry();
+            createUnknownCallLogEntry();
+        }
+
         mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        // Verify correct appearance for presentation.
+        for (int i = 0; i < size; i++) {
+            mAdapter.onBindViewHolder(holders[i], i);
+            if (holders[i].numberPresentation == Calls.PRESENTATION_ALLOWED) {
+                assertHasCallAction(holders[i]);
+            } else {
+                assertNull(holders[i].primaryActionButtonView.getTag());
+                assertEquals(holders[i].number, EMPTY_STRING);
+            }
+        }
+
+        // Append the rest of the entries to the cursor. Keep the first set of ViewHolders
+        // so they are updated and not buitl from scratch. This checks for bugs which may
+        // be evident only after the call log is updated.
+        for (int i = 0; i < increment; i++) {
+            createPrivateCallLogEntry();
+            createCallLogEntry();
+            createUnknownCallLogEntry();
+            createCallLogEntry();
+        }
+
+        mCursor.move(size);
+
+        // Verify correct appearnce for presentation.
+        for (int i = 0; i < size; i++) {
+            mAdapter.onBindViewHolder(holders[i], i + size);
+            if (holders[i].numberPresentation == Calls.PRESENTATION_ALLOWED) {
+                assertHasCallAction(holders[i]);
+            } else {
+                assertNull(holders[i].primaryActionButtonView.getTag());
+                assertEquals(holders[i].number, EMPTY_STRING);
+            }
+        }
+    }
+
+   @MediumTest
+   public void testBindView_NoCallLogCacheNorMemoryCache_EnqueueRequest() {
+       createCallLogEntry();
+
+       // Bind the views of a single row.
+       mAdapter.changeCursor(mCursor);
+       mAdapter.onBindViewHolder(mViewHolder, 0);
+
+       // There is one request for contact details.
+       assertEquals(1, mAdapter.getContactInfoCache().requests.size());
+
+       TestContactInfoCache.Request request = mAdapter.getContactInfoCache().requests.get(0);
+       // It is for the number we need to show.
+       assertEquals(TEST_NUMBER, request.number);
+       // It has the right country.
+       assertEquals(TEST_COUNTRY_ISO, request.countryIso);
+       // Since there is nothing in the cache, it is an immediate request.
+       assertTrue("should be immediate", request.immediate);
+   }
+
+   @MediumTest
+   public void testBindView_CallLogCacheButNoMemoryCache_EnqueueRequest() {
+       createCallLogEntryWithCachedValues(false);
+
+       // Bind the views of a single row.
+       mAdapter.changeCursor(mCursor);
+       mAdapter.onBindViewHolder(mViewHolder, 0);
 
         // There is one request for contact details.
         assertEquals(1, mAdapter.getContactInfoCache().requests.size());
 
         TestContactInfoCache.Request request = mAdapter.getContactInfoCache().requests.get(0);
-        // It is for the number we need to show.
-        assertEquals(TEST_NUMBER_1, request.number);
-        // It has the right country.
-        assertEquals(TEST_COUNTRY_ISO, request.countryIso);
-        // Since there is nothing in the cache, it is an immediate request.
-        assertTrue("should be immediate", request.immediate);
-    }
 
-    public void testBindView_CallLogCacheButNoMemoryCache_EnqueueRequest() {
-        mCursor.addRow(createCallLogEntryWithCachedValues());
-
-        // Bind the views of a single row.
-        mAdapter.changeCursor(mCursor);
-        mAdapter.onBindViewHolder(mViewHolder, 0);
-
-        // There is one request for contact details.
-        assertEquals(1, mAdapter.getContactInfoCache().requests.size());
-
-        TestContactInfoCache.Request request = mAdapter.getContactInfoCache().requests.get(0);
         // The values passed to the request, match the ones in the call log cache.
-        assertEquals(TEST_NAME, request.callLogInfo.name);
-        assertEquals(1, request.callLogInfo.type);
-        assertEquals(TEST_NUMBER_LABEL, request.callLogInfo.label);
+        assertEquals(TEST_CACHED_NAME, request.callLogInfo.name);
+        assertEquals(TEST_CACHED_NUMBER_TYPE, request.callLogInfo.type);
+        assertEquals(TEST_CACHED_NUMBER_LABEL, request.callLogInfo.label);
     }
 
-
+    @MediumTest
     public void testBindView_NoCallLogButMemoryCache_EnqueueRequest() {
         createCallLogEntry();
-        mAdapter.injectContactInfoForTest(TEST_NUMBER_1, TEST_COUNTRY_ISO, createContactInfo());
+        mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, createContactInfo());
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
@@ -212,9 +293,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertFalse("should not be immediate", request.immediate);
     }
 
+    @MediumTest
     public void testBindView_BothCallLogAndMemoryCache_NoEnqueueRequest() {
-        mCursor.addRow(createCallLogEntryWithCachedValues());
-        mAdapter.injectContactInfoForTest(TEST_NUMBER_1, TEST_COUNTRY_ISO, createContactInfo());
+        createCallLogEntryWithCachedValues(true);
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
@@ -224,13 +305,14 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertEquals(0, mAdapter.getContactInfoCache().requests.size());
     }
 
-    public void testBindView_MismatchBetwenCallLogAndMemoryCache_EnqueueRequest() {
-        mCursor.addRow(createCallLogEntryWithCachedValues());
+    @MediumTest
+    public void testBindView_MismatchBetweenCallLogAndMemoryCache_EnqueueRequest() {
+        createCallLogEntryWithCachedValues(false);
 
         // Contact info contains a different name.
         ContactInfo info = createContactInfo();
         info.name = "new name";
-        mAdapter.injectContactInfoForTest(TEST_NUMBER_1, TEST_COUNTRY_ISO, info);
+        mAdapter.injectContactInfoForTest(TEST_NUMBER, TEST_COUNTRY_ISO, info);
 
         // Bind the views of a single row.
         mAdapter.changeCursor(mCursor);
@@ -244,6 +326,98 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertFalse("should not be immediate", request.immediate);
     }
 
+    @MediumTest
+    public void testBindView_WithCachedName() {
+        createCallLogEntryWithCachedValues(
+                "John Doe",
+                Phone.TYPE_HOME,
+                TEST_CACHED_NUMBER_LABEL);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, "John Doe");
+        assertLabel(mViewHolder, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
+    }
+
+    @MediumTest
+    public void testBindView_UriNumber() {
+        createCallLogEntryWithCachedValues(
+                "sip:johndoe@gmail.com",
+                Calls.INCOMING_TYPE,
+                "John Doe",
+                Phone.TYPE_HOME,
+                TEST_DEFAULT_CUSTOM_LABEL,
+                EMPTY_STRING,
+                false /* inject */);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, "John Doe");
+        assertLabel(mViewHolder, "sip:johndoe@gmail.com", "sip:johndoe@gmail.com");
+    }
+
+    @MediumTest
+    public void testBindView_HomeLabel() {
+        createCallLogEntryWithCachedValues(
+                "John Doe",
+                Phone.TYPE_HOME,
+                TEST_CACHED_NUMBER_LABEL);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, "John Doe");
+        assertLabel(mViewHolder, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_HOME));
+    }
+
+    @MediumTest
+    public void testBindView_WorkLabel() {
+        createCallLogEntryWithCachedValues(
+                "John Doe",
+                Phone.TYPE_WORK,
+                TEST_CACHED_NUMBER_LABEL);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, "John Doe");
+        assertLabel(mViewHolder, TEST_FORMATTED_NUMBER, getTypeLabel(Phone.TYPE_WORK));
+    }
+
+    @MediumTest
+    public void testBindView_CustomLabel() {
+        createCallLogEntryWithCachedValues(
+                "John Doe",
+                Phone.TYPE_CUSTOM,
+                TEST_DEFAULT_CUSTOM_LABEL);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, "John Doe");
+        assertLabel(mViewHolder, TEST_FORMATTED_NUMBER, TEST_DEFAULT_CUSTOM_LABEL);
+    }
+
+    @MediumTest
+    public void testBindView_NumberOnlyDbCachedFormattedNumber() {
+        createCallLogEntryWithCachedValues(
+                TEST_NUMBER,
+                Calls.INCOMING_TYPE,
+                EMPTY_STRING,
+                TEST_CACHED_NUMBER_TYPE,
+                TEST_CACHED_NUMBER_LABEL,
+                TEST_FORMATTED_NUMBER,
+                false /* inject */);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, TEST_FORMATTED_NUMBER);
+    }
+
+    @MediumTest
     public void testBindVoicemailPromoCard() {
         createCallLogEntry(TEST_NUMBER_1);
         createCallLogEntry(TEST_NUMBER_1);
@@ -271,51 +445,106 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertEquals(TEST_NUMBER_3, mViewHolder.number);
     }
 
-    /** Returns a contact info with default values. */
-    private ContactInfo createContactInfo() {
-        ContactInfo info = new ContactInfo();
-        info.number = TEST_NUMBER_1;
-        info.name = TEST_NAME;
-        info.type = TEST_NUMBER_TYPE;
-        info.label = TEST_NUMBER_LABEL;
-        return info;
-    }
-
-    /** Returns a call log entry without cached values. */
     private void createCallLogEntry() {
-        createCallLogEntry(TEST_NUMBER_1);
+        createCallLogEntry(TEST_NUMBER);
     }
 
-    private void  createCallLogEntry(String testNumber) {
-        createCallLogEntry(testNumber, NO_VALUE_SET, NO_VALUE_SET, NO_VALUE_SET, NO_VALUE_SET);
+    private void createCallLogEntry(String testNumber) {
+        createCallLogEntry(testNumber, NO_VALUE_SET, NO_VALUE_SET);
     }
 
     private void createPrivateCallLogEntry() {
-        createCallLogEntry("", Calls.PRESENTATION_RESTRICTED, NO_VALUE_SET, 0, Calls.INCOMING_TYPE);
+        createCallLogEntry(EMPTY_STRING, Calls.PRESENTATION_RESTRICTED, Calls.INCOMING_TYPE);
+    }
+
+    private void createUnknownCallLogEntry() {
+        createCallLogEntry(EMPTY_STRING, Calls.PRESENTATION_UNKNOWN, Calls.INCOMING_TYPE);
     }
 
     private void createVoicemailCallLogEntry() {
-        createCallLogEntry(TEST_NUMBER_1, NO_VALUE_SET, NO_VALUE_SET, NO_VALUE_SET,
-                Calls.VOICEMAIL_TYPE, true /* isVoicemail */);
+        createCallLogEntry(TEST_NUMBER, NO_VALUE_SET, Calls.VOICEMAIL_TYPE);
     }
 
-    private void createCallLogEntry(
-            String number, int presentation, long date, int duration, int type) {
-        createCallLogEntry(number, presentation, date, duration, type, false /* isVoicemail */);
+    private void createCallLogEntry(String number, int presentation, int type) {
+        Object[] values = getValues(number, presentation, type);
+        mCursor.addRow(values);
     }
 
-    private void createCallLogEntry(
+    private void createCallLogEntryWithCachedValues(boolean inject) {
+        createCallLogEntryWithCachedValues(
+                TEST_NUMBER,
+                NO_VALUE_SET,
+                TEST_CACHED_NAME,
+                TEST_CACHED_NUMBER_TYPE,
+                TEST_CACHED_NUMBER_LABEL,
+                EMPTY_STRING,
+                inject);
+    }
+
+    private void createCallLogEntryWithCachedValues(
+            String cachedName, int cachedNumberType, String cachedNumberLabel) {
+        createCallLogEntryWithCachedValues(
+                TEST_NUMBER,
+                NO_VALUE_SET,
+                cachedName,
+                cachedNumberType,
+                cachedNumberLabel,
+                EMPTY_STRING,
+                false /* inject */);
+    }
+
+    /**
+     * Inserts a new call log entry
+     *
+     * It includes the values for the cached contact associated with the number.
+     *
+     * @param number The phone number.
+     * @param type Either Call.OUTGOING_TYPE or Call.INCOMING_TYPE or Call.MISSED_TYPE.
+     * @param cachedName The name of the contact with this number
+     * @param cachedNumberType The type of the number, from the contact with this number.
+     * @param cachedNumberLabel The label of the number, from the contact with this number.
+     * @param cachedFormattedNumber The formatted number, from the contact with this number.
+     * @param inject Whether to inject the contact info into the adapter's ContactInfoCache.
+    */
+    private void createCallLogEntryWithCachedValues(
+            String number,
+            int type,
+            String cachedName,
+            int cachedNumberType,
+            String cachedNumberLabel,
+            String cachedFormattedNumber,
+            boolean inject) {
+        Object[] values = getValues(number, NO_VALUE_SET, type);
+        values[CallLogQuery.CACHED_NAME] = cachedName;
+        values[CallLogQuery.CACHED_NUMBER_TYPE] = cachedNumberType;
+        values[CallLogQuery.CACHED_NUMBER_LABEL] = cachedNumberLabel;
+        values[CallLogQuery.CACHED_FORMATTED_NUMBER] = cachedFormattedNumber;
+
+        mCursor.addRow(values);
+
+        if (inject) {
+            ContactInfo contactInfo =
+                    createContactInfo(cachedName, cachedNumberType, cachedNumberLabel);
+            mAdapter.injectContactInfoForTest(number, TEST_COUNTRY_ISO, contactInfo);
+        }
+    }
+
+    /**
+     * @param number The phone number.
+     * @param presentation Number representing display rules for "allowed",
+     *               "payphone", "restricted", or "unknown".
+     * @param date In millisec since epoch. Use NOW to use the current time.
+     */
+    private Object[] getValues(
             String number,
             int presentation,
-            long date,
-            int duration,
-            int type,
-            boolean isVoicemail) {
+            int type) {
         Object[] values = CallLogQueryTestUtils.createTestValues();
 
-        values[CallLogQuery.ID] = mCursorSize;
+        values[CallLogQuery.ID] = mCursor.getCount();
         values[CallLogQuery.COUNTRY_ISO] = TEST_COUNTRY_ISO;
-        values[CallLogQuery.DATE] = date != NO_VALUE_SET ? date : new Date().getTime();
+        values[CallLogQuery.DATE] = new Date().getTime();
+        values[CallLogQuery.DURATION] = mRandom.nextInt(10 * 60);
 
         if (!TextUtils.isEmpty(number)) {
             values[CallLogQuery.NUMBER] = number;
@@ -323,36 +552,66 @@ public class CallLogAdapterTest extends AndroidTestCase {
         if (presentation != NO_VALUE_SET) {
             values[CallLogQuery.NUMBER_PRESENTATION] = presentation;
         }
-        if (duration != NO_VALUE_SET) {
-            values[CallLogQuery.DURATION] = (duration < 0) ? mRandom.nextInt(10 * 60) : duration;
-        }
         if (type != NO_VALUE_SET) {
             values[CallLogQuery.CALL_TYPE] = type;
         }
-        if (isVoicemail) {
-            values[CallLogQuery.VOICEMAIL_URI] =
-                ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, mCursorSize);
+        if (type == Calls.VOICEMAIL_TYPE) {
+            values[CallLogQuery.VOICEMAIL_URI] = ContentUris.withAppendedId(
+                    VoicemailContract.Voicemails.CONTENT_URI, mCursor.getCount());
         }
 
-        mCursor.addRow(values);
-        mCursorSize++;
-    }
-
-    // Returns a call log entry with a cached values.
-    private Object[] createCallLogEntryWithCachedValues() {
-        Object[] values = CallLogQueryTestUtils.createTestValues();
-        values[CallLogQuery.NUMBER] = TEST_NUMBER_1;
-        values[CallLogQuery.COUNTRY_ISO] = TEST_COUNTRY_ISO;
-        values[CallLogQuery.CACHED_NAME] = TEST_NAME;
-        values[CallLogQuery.CACHED_NUMBER_TYPE] = TEST_NUMBER_TYPE;
-        values[CallLogQuery.CACHED_NUMBER_LABEL] = TEST_NUMBER_LABEL;
         return values;
     }
 
-    // Asserts that the name text view is shown and contains the given text./
+    private ContactInfo createContactInfo() {
+        return createContactInfo(
+                TEST_CACHED_NAME,
+                TEST_CACHED_NUMBER_TYPE,
+                TEST_CACHED_NUMBER_LABEL);
+    }
+
+    /** Returns a contact info with default values. */
+    private ContactInfo createContactInfo(String name, int type, String label) {
+        ContactInfo info = new ContactInfo();
+        info.number = TEST_NUMBER;
+        info.name = name;
+        info.type = type;
+        info.label = label;
+        info.formattedNumber = TEST_FORMATTED_NUMBER;
+        info.normalizedNumber = TEST_NUMBER;
+        info.lookupUri = TEST_LOOKUP_URI;
+        return info;
+    }
+
+    // Asserts that the name text view is shown and contains the given text.
     private void assertNameIs(CallLogListItemViewHolder viewHolder, String name) {
         assertEquals(View.VISIBLE, viewHolder.phoneCallDetailsViews.nameView.getVisibility());
         assertEquals(name, viewHolder.phoneCallDetailsViews.nameView.getText());
+    }
+
+    // Asserts that the label text view contains the given text.
+    private void assertLabel(
+            CallLogListItemViewHolder viewHolder, CharSequence number, CharSequence label) {
+        if (label != null) {
+            assertTrue(viewHolder.phoneCallDetailsViews.callLocationAndDate.getText()
+                    .toString().contains(label));
+        }
+    }
+
+    private void assertHasCallAction(CallLogListItemViewHolder viewHolder) {
+        // The primaryActionView tag is set when the ViewHolder is binded. If it is possible
+        // to place a call to the phone number, a call intent will have been created which
+        // starts a phone call to the entry's number.
+        IntentProvider intentProvider =
+                (IntentProvider) viewHolder.primaryActionButtonView.getTag();
+        Intent intent = intentProvider.getIntent(getContext());
+        assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
+        assertEquals(Uri.parse("tel:" + TEST_NUMBER), intent.getData());
+    }
+
+    /** Returns the label associated with a given phone type. */
+    private CharSequence getTypeLabel(int phoneType) {
+        return Phone.getTypeLabel(getContext().getResources(), phoneType, "");
     }
 
     /// Subclass of {@link CallLogAdapter} used in tests to intercept certain calls.
