@@ -781,4 +781,9 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
     public boolean isSpeakerphoneOn() {
         return mIsSpeakerphoneOn;
     }
+
+    @VisibleForTesting
+    public void clearInstance() {
+        sInstance = null;
+    }
 }
