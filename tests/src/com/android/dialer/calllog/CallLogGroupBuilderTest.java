@@ -66,14 +66,14 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
     public void testAddGroups_OneCall() {
         addCallLogEntry(TEST_NUMBER1, Calls.INCOMING_TYPE);
         mBuilder.addGroups(mCursor);
-        assertEquals(0, mFakeGroupCreator.groups.size());
+        assertEquals(1, mFakeGroupCreator.groups.size());
     }
 
     public void testAddGroups_TwoCallsNotMatching() {
         addCallLogEntry(TEST_NUMBER1, Calls.INCOMING_TYPE);
         addCallLogEntry(TEST_NUMBER2, Calls.INCOMING_TYPE);
         mBuilder.addGroups(mCursor);
-        assertEquals(0, mFakeGroupCreator.groups.size());
+        assertEquals(2, mFakeGroupCreator.groups.size());
     }
 
     public void testAddGroups_ThreeCallsMatching() {
@@ -136,21 +136,25 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
 
     public void testAddGroups_Mixed() {
         addMultipleCallLogEntries(TEST_NUMBER1,
-                Calls.VOICEMAIL_TYPE,  // Stand-alone
-                Calls.INCOMING_TYPE,  // Group 1: 1-4
+                Calls.VOICEMAIL_TYPE,   // Group 1:Stand-alone
+                Calls.INCOMING_TYPE,    // Group 2: 1-4
                 Calls.OUTGOING_TYPE,
                 Calls.MISSED_TYPE,
                 Calls.MISSED_TYPE,
-                Calls.VOICEMAIL_TYPE,  // Stand-alone
-                Calls.INCOMING_TYPE,  // Stand-alone
-                Calls.VOICEMAIL_TYPE,  // Stand-alone
-                Calls.MISSED_TYPE, // Group 2: 8-10
+                Calls.VOICEMAIL_TYPE,   // Group 3: Stand-alone
+                Calls.INCOMING_TYPE,    // Group 4: Stand-alone
+                Calls.VOICEMAIL_TYPE,   // Group 5: Stand-alone
+                Calls.MISSED_TYPE,      // Group 6: 8-10
                 Calls.MISSED_TYPE,
                 Calls.OUTGOING_TYPE);
         mBuilder.addGroups(mCursor);
-        assertEquals(2, mFakeGroupCreator.groups.size());
-        assertGroupIs(1, 4, mFakeGroupCreator.groups.get(0));
-        assertGroupIs(8, 3, mFakeGroupCreator.groups.get(1));
+        assertEquals(6, mFakeGroupCreator.groups.size());
+        assertGroupIs(0, 1, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(1, 4, mFakeGroupCreator.groups.get(1));
+        assertGroupIs(5, 1, mFakeGroupCreator.groups.get(2));
+        assertGroupIs(6, 1, mFakeGroupCreator.groups.get(3));
+        assertGroupIs(7, 1, mFakeGroupCreator.groups.get(4));
+        assertGroupIs(8, 3, mFakeGroupCreator.groups.get(5));
     }
 
     public void testEqualPhoneNumbers() {
@@ -237,7 +241,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         clearFakeGroupCreator();
         addMultipleCallLogEntries(TEST_NUMBER1, types);
         mBuilder.addGroups(mCursor);
-        assertEquals(0, mFakeGroupCreator.groups.size());
+        assertEquals(types.length, mFakeGroupCreator.groups.size());
     }
 
     /** Adds a set of calls with the given types, all from the same number, in the old section. */
