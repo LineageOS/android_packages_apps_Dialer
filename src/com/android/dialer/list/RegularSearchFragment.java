@@ -15,12 +15,10 @@
  */
 package com.android.dialer.list;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CONTACTS;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
