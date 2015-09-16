@@ -18,6 +18,8 @@ package com.android.incallui;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.dialer.util.IntentUtil;
+import com.android.incallui.Call.LogState;
 
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
@@ -181,6 +183,10 @@ public class Call {
      * logging variables will interface with/and affect call logic.
      */
     public static class LogState {
+
+        // Contact lookup type constants
+        // Unknown lookup result (lookup not completed yet?)
+        public static final int LOOKUP_UNKNOWN = 0;
         public static final int LOOKUP_NOT_FOUND = 1;
         public static final int LOOKUP_LOCAL_CONTACT = 2;
         public static final int LOOKUP_LOCAL_CACHE = 3;
@@ -188,11 +194,24 @@ public class Call {
         public static final int LOOKUP_EMERGENCY = 5;
         public static final int LOOKUP_VOICEMAIL = 6;
 
+        // Call initiation type constants
+        public static final int INITIATION_UNKNOWN = 0;
+        public static final int INITIATION_INCOMING = 1;
+        public static final int INITIATION_DIALPAD = 2;
+        public static final int INITIATION_SPEED_DIAL = 3;
+        public static final int INITIATION_NEARBY_PLACES = 4;
+        public static final int INITIATION_SMART_DIAL = 5;
+        public static final int INITIATION_REGULAR_SEARCH = 6;
+        public static final int INITIATION_CALL_LOG = 7;
+        public static final int INITIATION_CALL_LOG_FILTER = 8;
+        public static final int INITIATION_VOICEMAIL_LOG = 9;
+        public static final int INITIATION_CALL_DETAILS = 10;
+        public static final int INITIATION_QUICK_CONTACTS = 11;
+
         public DisconnectCause disconnectCause;
         public boolean isIncoming = false;
-        public int contactLookupResult = LOOKUP_NOT_FOUND;
-        // TODO: Populate this field by passing in extras from Dialer
-        public int callInitiationMethod;
+        public int contactLookupResult = LOOKUP_UNKNOWN;
+        public int callInitiationMethod = INITIATION_UNKNOWN;
         public long duration = 0;
 
         @Override
@@ -207,7 +226,7 @@ public class Call {
                     disconnectCause,
                     isIncoming,
                     lookupToString(contactLookupResult),
-                    callInitiationMethod,
+                    initiationToString(callInitiationMethod),
                     duration);
         }
 
@@ -225,6 +244,27 @@ public class Call {
                     return "Voicemail";
                 default:
                     return "Not found";
+            }
+        }
+
+        private static String initiationToString(int initiationType) {
+            switch (initiationType) {
+                case INITIATION_INCOMING:
+                    return "Incoming";
+                case INITIATION_DIALPAD:
+                    return "Dialpad";
+                case INITIATION_SPEED_DIAL:
+                    return "Speed Dial";
+                case INITIATION_NEARBY_PLACES:
+                    return "Nearby Places";
+                case INITIATION_CALL_LOG:
+                    return "Call Log";
+                case INITIATION_CALL_LOG_FILTER:
+                    return "Call Log Filter";
+                case INITIATION_VOICEMAIL_LOG:
+                    return "Voicemail Log";
+                default:
+                    return "Unknown";
             }
         }
     }
@@ -724,6 +764,19 @@ public class Call {
 
     public LogState getLogState() {
         return mLogState;
+    }
+
+    /**
+     * Logging utility methods
+     */
+    public void logCallInitiationType() {
+        if (getState() == State.INCOMING) {
+            getLogState().callInitiationMethod = LogState.INITIATION_INCOMING;
+        } else if (getIntentExtras() != null) {
+            getLogState().callInitiationMethod =
+                getIntentExtras().getInt(IntentUtil.EXTRA_CALL_INITIATION_TYPE,
+                        LogState.INITIATION_UNKNOWN);
+        }
     }
 
     @Override
