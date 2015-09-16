@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
 
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
@@ -112,12 +113,20 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     public final void isBlocked(final OnCheckBlockedListener listener,
                                 String normalizedNumber, String number, String countryIso) {
         if (normalizedNumber == null) {
-            normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+            normalizedNumber = getNormalizedNumber(number, countryIso);
             if (normalizedNumber == null) {
                 throw new IllegalArgumentException("Invalid phone number");
             }
         }
         isBlocked(listener, normalizedNumber);
+    }
+
+    private String getNormalizedNumber(String number, String countryIso) {
+        if (PhoneNumberHelper.isUriNumber(number)) {
+            return number;
+        } else {
+            return PhoneNumberUtils.formatNumberToE164(number, countryIso);
+        }
     }
 
     /**
@@ -156,7 +165,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     public final void blockNumber(final OnBlockNumberListener listener,
                                   String normalizedNumber, String number, String countryIso) {
         if (normalizedNumber == null) {
-            normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+            normalizedNumber = getNormalizedNumber(number, countryIso);
         }
         ContentValues v = new ContentValues();
         v.put(FilteredNumberColumns.NORMALIZED_NUMBER, normalizedNumber);
