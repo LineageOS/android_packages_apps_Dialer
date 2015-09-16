@@ -34,6 +34,7 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
@@ -89,6 +90,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     private static final int READ_CALL_LOG_PERMISSION_REQUEST_CODE = 1;
 
+    private static final int EVENT_UPDATE_DISPLAY = 1;
+
+    private static final long MILLIS_IN_MINUTE = 60 * 1000;
+
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
@@ -105,6 +110,18 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     private boolean mEmptyLoaderRunning;
     private boolean mCallLogFetched;
     private boolean mVoicemailStatusFetched;
+
+    private final Handler mDisplayUpdateHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case EVENT_UPDATE_DISPLAY:
+                    refreshData();
+                    rescheduleDisplayUpdate();
+                    break;
+            }
+        }
+    };
 
     private final Handler mHandler = new Handler();
 
@@ -343,10 +360,14 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mHasReadCallLogPermission = hasReadCallLogPermission;
         refreshData();
         mAdapter.startCache();
+
+        rescheduleDisplayUpdate();
     }
 
     @Override
     public void onPause() {
+        cancelDisplayUpdate();
+
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.onPause();
         }
@@ -516,5 +537,26 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 mRefreshDataRequired = true;
             }
         }
+    }
+
+    /**
+     * Schedules an update to the relative call times (X mins ago).
+     */
+    private void rescheduleDisplayUpdate() {
+        if (!mDisplayUpdateHandler.hasMessages(EVENT_UPDATE_DISPLAY)) {
+            long time = System.currentTimeMillis();
+            // This value allows us to change the display relatively close to when the time changes
+            // from one minute to the next.
+            long millisUtilNextMinute = MILLIS_IN_MINUTE - (time % MILLIS_IN_MINUTE);
+            mDisplayUpdateHandler.sendEmptyMessageDelayed(
+                    EVENT_UPDATE_DISPLAY, millisUtilNextMinute);
+        }
+    }
+
+    /**
+     * Cancels any pending update requests to update the relative call times (X mins ago).
+     */
+    private void cancelDisplayUpdate() {
+        mDisplayUpdateHandler.removeMessages(EVENT_UPDATE_DISPLAY);
     }
 }
