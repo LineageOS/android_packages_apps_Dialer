@@ -89,6 +89,7 @@ import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.Callback;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.incallui.Call.LogState;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -1243,21 +1244,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public void onPickPhoneNumberAction(Uri dataUri) {
-        // Specify call-origin so that users will see the previous tab instead of
-        // CallLog screen (search UI will be automatically exited).
-        PhoneNumberInteraction.startInteractionForPhoneCall(
-                DialtactsActivity.this, dataUri, null);
+    public void onPickPhoneNumberAction(Uri dataUri, int callInitiationType) {
         mClearSearchOnPause = true;
+        PhoneNumberInteraction.startInteractionForPhoneCall(
+                DialtactsActivity.this, dataUri, callInitiationType);
     }
 
     @Override
-    public void onCallNumberDirectly(String phoneNumber) {
-        onCallNumberDirectly(phoneNumber, false /* isVideoCall */);
-    }
-
-    @Override
-    public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
+    public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall,
+            int callInitiationType) {
         if (phoneNumber == null) {
             // Invalid phone number, but let the call go through so that InCallUI can show
             // an error message.
@@ -1266,6 +1261,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final Intent intent = new CallIntentBuilder(phoneNumber)
                 .setIsVideoCall(isVideoCall)
+                .setCallInitiationType(callInitiationType)
                 .build();
 
         DialerUtils.startActivityWithErrorToast(this, intent);
