@@ -96,8 +96,6 @@
     <dimen name="search_box_left_padding">8dp</dimen>
     <!-- Search box interior padding - right -->
     <dimen name="search_box_right_padding">8dp</dimen>
-    <!-- Padding around the icon in the search box. -->
-    <dimen name="search_box_icon_margin">4dp</dimen>
     <dimen name="search_box_search_icon_padding">2dp</dimen>
     <dimen name="search_box_collapsed_text_margin_left">22dp</dimen>
     <dimen name="search_list_padding_top">16dp</dimen>
