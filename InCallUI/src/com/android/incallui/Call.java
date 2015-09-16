@@ -199,7 +199,7 @@ public class Call {
         public static final int INITIATION_INCOMING = 1;
         public static final int INITIATION_DIALPAD = 2;
         public static final int INITIATION_SPEED_DIAL = 3;
-        public static final int INITIATION_NEARBY_PLACES = 4;
+        public static final int INITIATION_REMOTE_DIRECTORY = 4;
         public static final int INITIATION_SMART_DIAL = 5;
         public static final int INITIATION_REGULAR_SEARCH = 6;
         public static final int INITIATION_CALL_LOG = 7;
@@ -255,14 +255,22 @@ public class Call {
                     return "Dialpad";
                 case INITIATION_SPEED_DIAL:
                     return "Speed Dial";
-                case INITIATION_NEARBY_PLACES:
-                    return "Nearby Places";
+                case INITIATION_REMOTE_DIRECTORY:
+                    return "Remote Directory";
+                case INITIATION_SMART_DIAL:
+                    return "Smart Dial";
+                case INITIATION_REGULAR_SEARCH:
+                    return "Regular Search";
                 case INITIATION_CALL_LOG:
                     return "Call Log";
                 case INITIATION_CALL_LOG_FILTER:
                     return "Call Log Filter";
                 case INITIATION_VOICEMAIL_LOG:
                     return "Voicemail Log";
+                case INITIATION_CALL_DETAILS:
+                    return "Call Details";
+                case INITIATION_QUICK_CONTACTS:
+                    return "Quick Contacts";
                 default:
                     return "Unknown";
             }
