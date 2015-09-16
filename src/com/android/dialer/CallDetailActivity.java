@@ -51,6 +51,7 @@ import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
+import com.android.incallui.Call.LogState;
 
 /**
  * Displays the details of a specific call log entry.
@@ -240,7 +241,10 @@ public class CallDetailActivity extends AppCompatActivity
         mCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new CallIntentBuilder(mNumber).build());
+                mContext.startActivity(
+                        new CallIntentBuilder(mNumber)
+                                .setCallInitiationType(LogState.INITIATION_CALL_DETAILS)
+                                .build());
             }
         });
 

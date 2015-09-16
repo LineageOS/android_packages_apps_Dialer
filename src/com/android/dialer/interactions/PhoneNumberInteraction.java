@@ -54,6 +54,7 @@ import com.android.dialer.TransactionSafeActivity;
 import com.android.dialer.contact.ContactUpdateService;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
+import com.android.incallui.Call.LogState;
 import com.android.dialer.util.DialerUtils;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -189,21 +190,20 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
         private static final String ARG_PHONE_LIST = "phoneList";
         private static final String ARG_INTERACTION_TYPE = "interactionType";
-        private static final String ARG_CALL_ORIGIN = "callOrigin";
+        private static final String ARG_CALL_INITIATION_TYPE = "callInitiation";
 
         private int mInteractionType;
         private ListAdapter mPhonesAdapter;
         private List<PhoneItem> mPhoneList;
-        private String mCallOrigin;
+        private int mCallInitiationType;
 
-        public static void show(FragmentManager fragmentManager,
-                ArrayList<PhoneItem> phoneList, int interactionType,
-                String callOrigin) {
+        public static void show(FragmentManager fragmentManager, ArrayList<PhoneItem> phoneList,
+                int interactionType, int callInitiationType) {
             PhoneDisambiguationDialogFragment fragment = new PhoneDisambiguationDialogFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(ARG_PHONE_LIST, phoneList);
-            bundle.putSerializable(ARG_INTERACTION_TYPE, interactionType);
-            bundle.putString(ARG_CALL_ORIGIN, callOrigin);
+            bundle.putInt(ARG_INTERACTION_TYPE, interactionType);
+            bundle.putInt(ARG_CALL_INITIATION_TYPE, callInitiationType);
             fragment.setArguments(bundle);
             fragment.show(fragmentManager, TAG);
         }
@@ -213,7 +213,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             final Activity activity = getActivity();
             mPhoneList = getArguments().getParcelableArrayList(ARG_PHONE_LIST);
             mInteractionType = getArguments().getInt(ARG_INTERACTION_TYPE);
-            mCallOrigin = getArguments().getString(ARG_CALL_ORIGIN);
+            mCallInitiationType = getArguments().getInt(ARG_CALL_INITIATION_TYPE);
 
             mPhonesAdapter = new PhoneItemAdapter(activity, mPhoneList, mInteractionType);
             final LayoutInflater inflater = activity.getLayoutInflater();
@@ -242,7 +242,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 }
 
                 PhoneNumberInteraction.performAction(activity, phoneItem.phoneNumber,
-                        mInteractionType, mCallOrigin);
+                        mInteractionType, mCallInitiationType);
             } else {
                 dialog.dismiss();
             }
@@ -281,7 +281,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     private final OnDismissListener mDismissListener;
     private final int mInteractionType;
 
-    private final String mCallOrigin;
+    private final int mCallInitiationType;
     private boolean mUseDefault;
 
     private static final int UNKNOWN_CONTACT_ID = -1;
@@ -298,24 +298,25 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     @VisibleForTesting
     /* package */ PhoneNumberInteraction(Context context, int interactionType,
             DialogInterface.OnDismissListener dismissListener) {
-        this(context, interactionType, dismissListener, null);
+        this(context, interactionType, dismissListener, LogState.INITIATION_UNKNOWN);
     }
 
     private PhoneNumberInteraction(Context context, int interactionType,
-            DialogInterface.OnDismissListener dismissListener, String callOrigin) {
+            DialogInterface.OnDismissListener dismissListener, int callInitiationType) {
         mContext = context;
         mInteractionType = interactionType;
         mDismissListener = dismissListener;
-        mCallOrigin = callOrigin;
+        mCallInitiationType = callInitiationType;
     }
 
     private void performAction(String phoneNumber) {
-        PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mCallOrigin);
+        PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType,
+                mCallInitiationType);
     }
 
     private static void performAction(
             Context context, String phoneNumber, int interactionType,
-            String callOrigin) {
+            int callInitiationType) {
         Intent intent;
         switch (interactionType) {
             case ContactDisplayUtils.INTERACTION_SMS:
@@ -323,7 +324,9 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                         Intent.ACTION_SENDTO, Uri.fromParts("sms", phoneNumber, null));
                 break;
             default:
-                intent = new CallIntentBuilder(phoneNumber).build();
+                intent = new CallIntentBuilder(phoneNumber)
+                        .setCallInitiationType(callInitiationType)
+                        .build();
                 break;
         }
         DialerUtils.startActivityWithErrorToast(context, intent);
@@ -448,54 +451,15 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     }
 
     /**
-     * Start call action using given contact Uri. If there are multiple candidates for the phone
-     * call, dialog is automatically shown and the user is asked to choose one.
-     *
      * @param activity that is calling this interaction. This must be of type
      * {@link TransactionSafeActivity} because we need to check on the activity state after the
      * phone numbers have been queried for.
-     * @param uri contact Uri (built from {@link Contacts#CONTENT_URI}) or data Uri
-     * (built from {@link Data#CONTENT_URI}). Contact Uri may show the disambiguation dialog while
-     * data Uri won't.
-     */
-    public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri) {
-        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri, true);
-    }
-
-    /**
-     * Start call action using given contact Uri. If there are multiple candidates for the phone
-     * call, dialog is automatically shown and the user is asked to choose one.
-     *
-     * @param activity that is calling this interaction. This must be of type
-     * {@link TransactionSafeActivity} because we need to check on the activity state after the
-     * phone numbers have been queried for.
-     * @param uri contact Uri (built from {@link Contacts#CONTENT_URI}) or data Uri
-     * (built from {@link Data#CONTENT_URI}). Contact Uri may show the disambiguation dialog while
-     * data Uri won't.
-     * @param useDefault Whether or not to use the primary(default) phone number. If true, the
-     * primary phone number will always be used by default if one is available. If false, a
-     * disambiguation dialog will be shown regardless of whether or not a primary phone number
-     * is available.
+     * @param callInitiationType Indicates the UI affordance that was used to initiate the call.
      */
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
-            boolean useDefault) {
-        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri, useDefault);
-    }
-
-    /**
-     * @param activity that is calling this interaction. This must be of type
-     * {@link TransactionSafeActivity} because we need to check on the activity state after the
-     * phone numbers have been queried for.
-     * @param callOrigin If non null, {@link PhoneConstants#EXTRA_CALL_ORIGIN} will be
-     * appended to the Intent initiating phone call. See comments in Phone package (PhoneApp)
-     * for more detail.
-     */
-    public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
-            String callOrigin) {
-        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null, callOrigin))
-                .startInteraction(uri, true);
+            int callInitiationType) {
+        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null,
+                callInitiationType)).startInteraction(uri, true);
     }
 
     /**
@@ -529,7 +493,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         }
         try {
             PhoneDisambiguationDialogFragment.show(activity.getFragmentManager(),
-                    phoneList, mInteractionType, mCallOrigin);
+                    phoneList, mInteractionType, mCallInitiationType);
         } catch (IllegalStateException e) {
             // ignore to be safe. Shouldn't happen because we checked the
             // activity wasn't destroyed, but to be safe.

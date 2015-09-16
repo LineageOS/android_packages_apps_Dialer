@@ -82,6 +82,7 @@ import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
+import com.android.incallui.Call.LogState;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
@@ -1045,7 +1046,9 @@ public class DialpadFragment extends Fragment
 
     public void callVoicemail() {
         DialerUtils.startActivityWithErrorToast(getActivity(),
-                new CallIntentBuilder(CallUtil.getVoicemailUri()).build());
+                new CallIntentBuilder(CallUtil.getVoicemailUri())
+                        .setCallInitiationType(LogState.INITIATION_DIALPAD)
+                        .build());
         hideAndClearDialpad(false);
     }
 
@@ -1141,7 +1144,9 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                final Intent intent = new CallIntentBuilder(number).build();
+                final Intent intent = new CallIntentBuilder(number).
+                        setCallInitiationType(LogState.INITIATION_DIALPAD)
+                        .build();
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 hideAndClearDialpad(false);
             }

@@ -81,7 +81,14 @@ public class DialerUtils {
                 // All dialer-initiated calls should pass the touch point to the InCallUI
                 Point touchPoint = TouchPointManager.getInstance().getPoint();
                 if (touchPoint.x != 0 || touchPoint.y != 0) {
-                    Bundle extras = new Bundle();
+                    Bundle extras;
+                    // Make sure to not accidentally clobber any existing extras
+                    if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+                        extras = intent.getParcelableExtra(
+                                TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
+                    } else {
+                        extras = new Bundle();
+                    }
                     extras.putParcelable(TouchPointManager.TOUCH_POINT, touchPoint);
                     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
                 }

@@ -30,6 +30,7 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
 import com.android.dialer.widget.EmptyContentView;
+import com.android.incallui.Call.LogState;
 
 import java.util.ArrayList;
 
@@ -114,6 +115,11 @@ public class SmartDialSearchFragment extends SearchFragment
         if (requestCode == CALL_PHONE_PERMISSION_REQUEST_CODE) {
             setupEmptyView();
         }
+    }
+
+    @Override
+    protected int getCallInitiationType(boolean isRemoteDirectory) {
+        return LogState.INITIATION_SMART_DIAL;
     }
 
     public boolean isShowingPermissionRequest() {
