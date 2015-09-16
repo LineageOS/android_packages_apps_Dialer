@@ -25,13 +25,19 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.google.common.collect.Sets;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.Phonenumber;
+import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 public class PhoneNumberUtil {
+    private static final String TAG = "PhoneNumberUtil";
     private static final Set<String> LEGACY_UNKNOWN_NUMBERS = Sets.newHashSet("-1", "-2", "-3");
 
     /** Returns true if it is possible to place a call to the given number. */
@@ -91,5 +97,42 @@ public class PhoneNumberUtil {
 
     public static boolean isLegacyUnknownNumbers(CharSequence number) {
         return number != null && LEGACY_UNKNOWN_NUMBERS.contains(number.toString());
+    }
+
+    /**
+     * @return a geographical description string for the specified number.
+     * @see com.android.i18n.phonenumbers.PhoneNumberOfflineGeocoder
+     */
+    public static String getGeoDescription(Context context, String number) {
+        Log.v(TAG, "getGeoDescription('" + number + "')...");
+
+        if (TextUtils.isEmpty(number)) {
+            return null;
+        }
+
+        com.google.i18n.phonenumbers.PhoneNumberUtil util =
+                com.google.i18n.phonenumbers.PhoneNumberUtil.getInstance();
+        PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
+
+        Locale locale = context.getResources().getConfiguration().locale;
+        String countryIso = TelephonyManagerUtils.getCurrentCountryIso(context, locale);
+        Phonenumber.PhoneNumber pn = null;
+        try {
+            Log.v(TAG, "parsing '" + number
+                    + "' for countryIso '" + countryIso + "'...");
+            pn = util.parse(number, countryIso);
+            Log.v(TAG, "- parsed number: " + pn);
+        } catch (NumberParseException e) {
+            Log.v(TAG, "getGeoDescription: NumberParseException for incoming number '" +
+                    number + "'");
+        }
+
+        if (pn != null) {
+            String description = geocoder.getDescriptionForNumber(pn, locale);
+            Log.v(TAG, "- got description: '" + description + "'");
+            return description;
+        }
+
+        return null;
     }
 }

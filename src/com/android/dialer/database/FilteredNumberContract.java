@@ -61,7 +61,7 @@ public final class FilteredNumberContract {
 
     public interface FilteredNumberColumns {
         // TYPE: INTEGER
-        static final String _ID = "id";
+        static final String _ID = "_id";
         /**
          * Represents the number to be filtered, normalized to compare phone numbers for equality.
          *
