@@ -85,6 +85,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         void setFetchContentTimeout();
         void setIsFetchingContent();
         void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri);
+        void resetSeekBar();
     }
 
     public interface OnVoicemailDeletedListener {
@@ -272,16 +273,20 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * Reset the presenter for playback back to its original state.
      */
     public void resetAll() {
-        reset();
+        pausePresenter(true);
 
         mView = null;
         mVoicemailUri = null;
     }
 
     /**
-     * Reset the presenter such that it is as if the voicemail has not been played.
+     * When navigating away from voicemail playback, we need to release the media player,
+     * pause the UI and save the position.
+     *
+     * @param reset {@code true} if we want to reset the position of the playback, {@code false} if
+     * we want to retain the current position (in case we return to the voicemail).
      */
-    public void reset() {
+    public void pausePresenter(boolean reset) {
         if (mMediaPlayer != null) {
             mMediaPlayer.release();
             mMediaPlayer = null;
@@ -291,12 +296,19 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
         mIsPrepared = false;
         mIsPlaying = false;
-        mPosition = 0;
-        mDuration.set(0);
+
+        if (reset) {
+            // We want to reset the position whether or not the view is valid.
+            mPosition = 0;
+        }
 
         if (mView != null) {
             mView.onPlaybackStopped();
-            mView.setClipPosition(0, mDuration.get());
+            if (reset) {
+                mView.setClipPosition(0, mDuration.get());
+            } else {
+                mPosition = mView.getDesiredClipPosition();
+            }
         }
     }
 
@@ -312,7 +324,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         }
 
         // Release the media player, otherwise there may be failures.
-        reset();
+        pausePresenter(false);
 
         if (mActivity != null) {
             mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -345,8 +357,8 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * voicemail we've been asked to play has any content available.
      * <p>
      * Notify the user that we are fetching the content, then check to see if the content field in
-     * the DB is set. If set, we proceed to {@link #prepareContent()} method. If not set, make
-     * a request to fetch the content asynchronously via {@link #requestContent()}.
+     * the DB is set. If set, we proceed to {@link #prepareContent()} method. We get the duration of
+     * the voicemail from the query and set it if the content is not available.
      */
     private void checkForContent() {
         mAsyncTaskExecutor.submit(Tasks.CHECK_FOR_CONTENT, new AsyncTask<Void, Void, Boolean>() {
@@ -360,6 +372,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                 if (hasContent) {
                     prepareContent();
                 } else {
+                    mView.resetSeekBar();
                     mView.setClipPosition(0, mDuration.get());
                 }
             }
@@ -523,7 +536,6 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         mIsPrepared = true;
 
         mDuration.set(mMediaPlayer.getDuration());
-        mPosition = mMediaPlayer.getCurrentPosition();
 
         Log.d(TAG, "onPrepared: mPosition=" + mPosition);
         mView.setClipPosition(mPosition, mDuration.get());
@@ -618,6 +630,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         if (!mMediaPlayer.isPlaying()) {
             // Clamp the start position between 0 and the duration.
             mPosition = Math.max(0, Math.min(mPosition, mDuration.get()));
+
             mMediaPlayer.seekTo(mPosition);
 
             try {
