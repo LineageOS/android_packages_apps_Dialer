@@ -184,6 +184,23 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE;
     }
 
+    /**
+     * Query for all contacts that have been updated since the last time the smart dial database
+     * was updated.
+     */
+    public static interface UpdatedContactQuery {
+        static final Uri URI = ContactsContract.Contacts.CONTENT_URI;
+
+        static final String[] PROJECTION = new String[] {
+                ContactsContract.Contacts._ID  // 0
+        };
+
+        static final int UPDATED_CONTACT_ID = 0;
+
+        static final String SELECT_UPDATED_CLAUSE =
+                ContactsContract.Contacts.CONTACT_LAST_UPDATED_TIMESTAMP + " > ?";
+    }
+
     /** Query options for querying the deleted contact database.*/
     public static interface DeleteContactQuery {
        static final Uri URI = ContactsContract.DeletedContacts.CONTENT_URI;
@@ -563,15 +580,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      * Removes rows in the smartdial database that matches the contacts that have been deleted
      * by other apps since last update.
      *
-     * @param db Database pointer to the dialer database.
-     * @param last_update_time Time stamp of last update on the smartdial database
+     * @param db Database to operate on.
+     * @param deletedContactCursor Cursor containing rows of deleted contacts
      */
-    private void removeDeletedContacts(SQLiteDatabase db, String last_update_time) {
-        final Cursor deletedContactCursor = mContext.getContentResolver().query(
-                DeleteContactQuery.URI,
-                DeleteContactQuery.PROJECTION,
-                DeleteContactQuery.SELECT_UPDATED_CLAUSE,
-                new String[] {last_update_time}, null);
+    @VisibleForTesting
+    void removeDeletedContacts(SQLiteDatabase db, Cursor deletedContactCursor) {
         if (deletedContactCursor == null) {
             return;
         }
@@ -592,6 +605,15 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             deletedContactCursor.close();
             db.endTransaction();
         }
+    }
+
+    private Cursor getDeletedContactCursor(String lastUpdateMillis) {
+        return mContext.getContentResolver().query(
+                DeleteContactQuery.URI,
+                DeleteContactQuery.PROJECTION,
+                DeleteContactQuery.SELECT_UPDATED_CLAUSE,
+                new String[] {lastUpdateMillis},
+                null);
     }
 
     /**
@@ -637,11 +659,14 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      * @param db Database pointer to the smartdial database
      * @param updatedContactCursor Cursor pointing to the list of recently updated contacts.
      */
-    private void removeUpdatedContacts(SQLiteDatabase db, Cursor updatedContactCursor) {
+    @VisibleForTesting
+    void removeUpdatedContacts(SQLiteDatabase db, Cursor updatedContactCursor) {
         db.beginTransaction();
         try {
+            updatedContactCursor.moveToPosition(-1);
             while (updatedContactCursor.moveToNext()) {
-                final Long contactId = updatedContactCursor.getLong(PhoneQuery.PHONE_CONTACT_ID);
+                final Long contactId =
+                        updatedContactCursor.getLong(UpdatedContactQuery.UPDATED_CONTACT_ID);
 
                 db.delete(Tables.SMARTDIAL_TABLE, SmartDialDbColumns.CONTACT_ID + "=" +
                         contactId, null);
@@ -814,59 +839,75 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             if (DEBUG) {
                 Log.v(TAG, "Last updated at " + lastUpdateMillis);
             }
-            /** Queries the contact database to get contacts that have been updated since the last
-             * update time.
-             */
-            final Cursor updatedContactCursor = mContext.getContentResolver().query(PhoneQuery.URI,
-                    PhoneQuery.PROJECTION, PhoneQuery.SELECTION,
-                    new String[]{lastUpdateMillis}, null);
-            if (updatedContactCursor == null) {
-                if (DEBUG) {
-                    Log.e(TAG, "SmartDial query received null for cursor");
-                }
-                return;
-            }
 
             /** Sets the time after querying the database as the current update time. */
             final Long currentMillis = System.currentTimeMillis();
 
-            try {
-                if (DEBUG) {
-                    stopWatch.lap("Queried the Contacts database");
-                }
+            if (DEBUG) {
+                stopWatch.lap("Queried the Contacts database");
+            }
 
-                /** Prevents the app from reading the dialer database when updating. */
-                sInUpdate.getAndSet(true);
+            /** Prevents the app from reading the dialer database when updating. */
+            sInUpdate.getAndSet(true);
 
-                /** Removes contacts that have been deleted. */
-                removeDeletedContacts(db, lastUpdateMillis);
-                removePotentiallyCorruptedContacts(db, lastUpdateMillis);
+            /** Removes contacts that have been deleted. */
+            removeDeletedContacts(db, getDeletedContactCursor(lastUpdateMillis));
+            removePotentiallyCorruptedContacts(db, lastUpdateMillis);
 
-                if (DEBUG) {
-                    stopWatch.lap("Finished deleting deleted entries");
-                }
+            if (DEBUG) {
+                stopWatch.lap("Finished deleting deleted entries");
+            }
 
-                /** If the database did not exist before, jump through deletion as there is nothing
-                 * to delete.
+            /** If the database did not exist before, jump through deletion as there is nothing
+             * to delete.
+             */
+            if (!lastUpdateMillis.equals("0")) {
+                /** Removes contacts that have been updated. Updated contact information will be
+                 * inserted later. Note that this has to use a separate result set from
+                 * updatePhoneCursor, since it is possible for a contact to be updated (e.g.
+                 * phone number deleted), but have no results show up in updatedPhoneCursor (since
+                 * all of its phone numbers have been deleted).
                  */
-                if (!lastUpdateMillis.equals("0")) {
-                    /** Removes contacts that have been updated. Updated contact information will be
-                     * inserted later.
-                     */
-                    removeUpdatedContacts(db, updatedContactCursor);
-                    if (DEBUG) {
-                        stopWatch.lap("Finished deleting updated entries");
-                    }
+                final Cursor updatedContactCursor = mContext.getContentResolver().query(
+                        UpdatedContactQuery.URI,
+                        UpdatedContactQuery.PROJECTION,
+                        UpdatedContactQuery.SELECT_UPDATED_CLAUSE,
+                        new String[] {lastUpdateMillis},
+                        null
+                        );
+                if (updatedContactCursor == null) {
+                    Log.e(TAG, "SmartDial query received null for cursor");
+                    return;
                 }
+                try {
+                    removeUpdatedContacts(db, updatedContactCursor);
+                } finally {
+                    updatedContactCursor.close();
+                }
+                if (DEBUG) {
+                    stopWatch.lap("Finished deleting entries belonging to updated contacts");
+                }
+            }
 
-                /** Inserts recently updated contacts to the smartdial database.*/
-                insertUpdatedContactsAndNumberPrefix(db, updatedContactCursor, currentMillis);
+            /** Queries the contact database to get all phone numbers that have been updated since the last
+             * update time.
+             */
+            final Cursor updatedPhoneCursor = mContext.getContentResolver().query(PhoneQuery.URI,
+                    PhoneQuery.PROJECTION, PhoneQuery.SELECTION,
+                    new String[]{lastUpdateMillis}, null);
+            if (updatedPhoneCursor == null) {
+                Log.e(TAG, "SmartDial query received null for cursor");
+                return;
+            }
+
+            try {
+                /** Inserts recently updated phone numbers to the smartdial database.*/
+                insertUpdatedContactsAndNumberPrefix(db, updatedPhoneCursor, currentMillis);
                 if (DEBUG) {
                     stopWatch.lap("Finished building the smart dial table");
                 }
             } finally {
-                /** Inserts prefixes of phone numbers into the prefix table.*/
-                updatedContactCursor.close();
+                updatedPhoneCursor.close();
             }
 
             /** Gets a list of distinct contacts which have been updated, and adds the name prefixes
