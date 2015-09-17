@@ -461,43 +461,7 @@ public class CallerInfo {
      */
     public void updateGeoDescription(Context context, String fallbackNumber) {
         String number = TextUtils.isEmpty(phoneNumber) ? fallbackNumber : phoneNumber;
-        geoDescription = getGeoDescription(context, number);
-    }
-
-    /**
-     * @return a geographical description string for the specified number.
-     * @see com.android.i18n.phonenumbers.PhoneNumberOfflineGeocoder
-     */
-    private static String getGeoDescription(Context context, String number) {
-        Log.v(TAG, "getGeoDescription('" + number + "')...");
-
-        if (TextUtils.isEmpty(number)) {
-            return null;
-        }
-
-        PhoneNumberUtil util = PhoneNumberUtil.getInstance();
-        PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
-
-        Locale locale = context.getResources().getConfiguration().locale;
-        String countryIso = TelephonyManagerUtils.getCurrentCountryIso(context, locale);
-        PhoneNumber pn = null;
-        try {
-            Log.v(TAG, "parsing '" + number
-                    + "' for countryIso '" + countryIso + "'...");
-            pn = util.parse(number, countryIso);
-            Log.v(TAG, "- parsed number: " + pn);
-        } catch (NumberParseException e) {
-            Log.v(TAG, "getGeoDescription: NumberParseException for incoming number '" +
-                    number + "'");
-        }
-
-        if (pn != null) {
-            String description = geocoder.getDescriptionForNumber(pn, locale);
-            Log.v(TAG, "- got description: '" + description + "'");
-            return description;
-        }
-
-        return null;
+        geoDescription = com.android.dialer.util.PhoneNumberUtil.getGeoDescription(context, number);
     }
 
     /**
