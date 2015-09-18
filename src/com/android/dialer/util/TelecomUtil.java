@@ -26,6 +26,9 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TelecomUtil {
     private static final String TAG = "TelecomUtil";
     private static boolean sWarningLogged = false;
@@ -78,6 +81,20 @@ public class TelecomUtil {
         return false;
     }
 
+    public static List<PhoneAccountHandle> getCallCapablePhoneAccounts(Context context) {
+        if (hasReadPhoneStatePermission(context)) {
+            return getTelecomManager(context).getCallCapablePhoneAccounts();
+        }
+        return new ArrayList<>();
+    }
+
+    public static boolean isInCall(Context context) {
+        if (hasReadPhoneStatePermission(context)) {
+            return getTelecomManager(context).isInCall();
+        }
+        return false;
+    }
+
     public static Uri getCallLogUri(Context context) {
         return hasReadWriteVoicemailPermissions(context) ? Calls.CONTENT_URI_WITH_VOICEMAIL
                 : Calls.CONTENT_URI;
@@ -92,6 +109,16 @@ public class TelecomUtil {
     public static boolean hasModifyPhoneStatePermission(Context context) {
         return isDefaultDialer(context)
                 || hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE);
+    }
+
+    public static boolean hasReadPhoneStatePermission(Context context) {
+        return isDefaultDialer(context)
+                || hasPermission(context, Manifest.permission.READ_PHONE_STATE);
+    }
+
+    public static boolean hasCallPhonePermission(Context context) {
+        return isDefaultDialer(context)
+                || hasPermission(context, Manifest.permission.CALL_PHONE);
     }
 
     private static boolean hasPermission(Context context, String permission) {

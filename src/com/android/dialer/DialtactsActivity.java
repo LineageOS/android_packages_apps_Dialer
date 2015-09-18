@@ -83,6 +83,7 @@ import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
@@ -1182,7 +1183,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     private boolean phoneIsInUse() {
-        return getTelecomManager().isInCall();
+        return TelecomUtil.isInCall(this);
     }
 
     private boolean canIntentBeHandled(Intent intent) {
