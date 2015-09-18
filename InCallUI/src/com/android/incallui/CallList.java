@@ -102,22 +102,26 @@ public class CallList {
                 }
             };
             handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
-            mFilteredQueryHandler.isBlocked(
-                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-                        @Override
-                        public void onCheckComplete(final Integer id) {
-                            if (!hasTimedOut.get()) {
-                                handler.removeCallbacks(runnable);
-                            }
-                            if (id == null) {
+            try {
+                mFilteredQueryHandler.isBlocked(
+                        new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                            @Override
+                            public void onCheckComplete(final Integer id) {
                                 if (!hasTimedOut.get()) {
-                                    onCallAddedInternal(call);
+                                    handler.removeCallbacks(runnable);
                                 }
-                            } else {
-                                call.blockCall();
+                                if (id == null) {
+                                    if (!hasTimedOut.get()) {
+                                        onCallAddedInternal(call);
+                                    }
+                                } else {
+                                    call.blockCall();
+                                }
                             }
-                        }
-                    }, null, call.getNumber(), countryIso);
+                        }, null, call.getNumber(), countryIso);
+            } catch (IllegalArgumentException e) {
+                Log.d(this, "onCallAdded: invalid number, skipping block checking");
+            }
         } else {
             onCallAddedInternal(call);
         }
