@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Sozlash"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Ko‘rsatilmagan&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Boshqa qo‘ng‘iroq sozlamalari"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> orqali qo‘ng‘rioq qilinmoqda"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> orqali qo‘ng‘iroq"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Kiruvchi qo‘ng‘iroqlar <xliff:g id="PROVIDER_NAME">%s</xliff:g> orqali"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"kontakt surati"</string>
     <string name="goPrivate" msgid="865837794424530980">"alohidaga o‘tish"</string>

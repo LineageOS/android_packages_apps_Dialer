@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"ಸೆಟಪ್"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ಹೊಂದಿಸಿಲ್ಲ&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"ಇತರ ಕರೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಮೂಲಕ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g>ನಿಂದ ಕರೆ ಆಗುತ್ತಿದೆ"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಅವರ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"ಸಂಪರ್ಕ ಫೋಟೋ"</string>
     <string name="goPrivate" msgid="865837794424530980">"ಖಾಸಗಿಯಾಗಿ ಹೋಗಿ"</string>

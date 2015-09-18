@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Asetukset"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Ei asetettu&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Muut puheluasetukset"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Käytetään operaattoria <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Operaattorilla <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Saapuva puhelu (<xliff:g id="PROVIDER_NAME">%s</xliff:g>)"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"yhteyshenkilön valokuva"</string>
     <string name="goPrivate" msgid="865837794424530980">"muuta yksityiseksi"</string>

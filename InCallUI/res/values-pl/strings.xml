@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Konfiguracja"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nie ustawiono&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Inne ustawienia połączeń"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Nawiązywanie połączenia przez <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Połączenie przez <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Przychodzące przez <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"zdjęcie kontaktu"</string>
     <string name="goPrivate" msgid="865837794424530980">"przejdź do rozmowy prywatnej"</string>
