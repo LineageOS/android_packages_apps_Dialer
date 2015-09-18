@@ -320,6 +320,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                         FilterNumberDialogFragment.newInstance(blockId, info.normalizedNumber,
                                 number, countryIso, info.formattedNumber);
                 newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
+                newFragment.setParentView(
+                        ((Activity) mContext).findViewById(R.id.floating_action_button_container));
                 newFragment.show(((Activity) mContext).getFragmentManager(),
                         FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
                 return true;

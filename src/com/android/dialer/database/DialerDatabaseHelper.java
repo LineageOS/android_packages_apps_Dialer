@@ -75,7 +75,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KitKat
      * </pre>
      */
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -440,7 +440,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             return;
         }
 
-        if (oldVersion < 6) {
+        if (oldVersion < 7) {
             db.execSQL("DROP TABLE IF EXISTS " + Tables.FILTERED_NUMBER_TABLE);
             db.execSQL("CREATE TABLE " + Tables.FILTERED_NUMBER_TABLE + " ("
                     + FilteredNumberColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -453,7 +453,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                     + FilteredNumberColumns.TYPE + " INTEGER,"
                     + FilteredNumberColumns.SOURCE + " INTEGER"
                     + ");");
-            oldVersion = 6;
+            oldVersion = 7;
         }
 
         if (oldVersion != DATABASE_VERSION) {

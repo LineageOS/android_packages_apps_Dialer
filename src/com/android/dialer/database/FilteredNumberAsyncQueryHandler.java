@@ -121,7 +121,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         isBlocked(listener, normalizedNumber);
     }
 
-    private String getNormalizedNumber(String number, String countryIso) {
+    public static String getNormalizedNumber(String number, String countryIso) {
         if (PhoneNumberHelper.isUriNumber(number)) {
             return number;
         } else {
