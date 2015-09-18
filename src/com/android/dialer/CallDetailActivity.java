@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
@@ -39,6 +40,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.util.UriUtils;
@@ -260,6 +262,14 @@ public class CallDetailActivity extends AppCompatActivity
     public void onResume() {
         super.onResume();
         getCallDetails();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            TouchPointManager.getInstance().setPoint((int) ev.getRawX(), (int) ev.getRawY());
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     public void getCallDetails() {
