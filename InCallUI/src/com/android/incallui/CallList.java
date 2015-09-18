@@ -102,25 +102,28 @@ public class CallList {
                 }
             };
             handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
-            try {
-                mFilteredQueryHandler.isBlocked(
-                        new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-                            @Override
-                            public void onCheckComplete(final Integer id) {
-                                if (!hasTimedOut.get()) {
-                                    handler.removeCallbacks(runnable);
-                                }
-                                if (id == null) {
-                                    if (!hasTimedOut.get()) {
-                                        onCallAddedInternal(call);
-                                    }
-                                } else {
-                                    call.blockCall();
-                                }
+            if (mFilteredQueryHandler.startBlockedQuery(
+                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                        @Override
+                        public void onCheckComplete(final Integer id) {
+                            if (!hasTimedOut.get()) {
+                                handler.removeCallbacks(runnable);
                             }
-                        }, null, call.getNumber(), countryIso);
-            } catch (IllegalArgumentException e) {
-                Log.d(this, "onCallAdded: invalid number, skipping block checking");
+                            if (id == null) {
+                                if (!hasTimedOut.get()) {
+                                    onCallAddedInternal(call);
+                                }
+                            } else {
+                                call.blockCall();
+                            }
+                        }
+                    }, null, call.getNumber(), countryIso)) {
+                Log.d(this, "onCallAdded: invalid number "
+                        + call.getNumber() + ", skipping block checking");
+                if (!hasTimedOut.get()) {
+                    handler.removeCallbacks(runnable);
+                    onCallAddedInternal(call);
+                }
             }
         } else {
             onCallAddedInternal(call);
