@@ -114,6 +114,7 @@ public class CallList {
                                     onCallAddedInternal(call);
                                 }
                             } else {
+                                mFilteredQueryHandler.incrementFilteredCount(id);
                                 call.blockCall();
                             }
                         }
