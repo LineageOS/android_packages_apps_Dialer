@@ -253,6 +253,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                 mPosition = 0;
                 // Default to earpiece.
                 setSpeakerphoneOn(false);
+                mVoicemailAudioManager.setSpeakerphoneOn(false);
             } else {
                 // Update the view to the current speakerphone state.
                 mView.onSpeakerphoneOn(mIsSpeakerphoneOn);
@@ -313,9 +314,18 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
     }
 
     /**
+     * Must be invoked when the parent activity is resumed.
+     */
+    public void onResume() {
+        mVoicemailAudioManager.registerReceivers();
+    }
+
+    /**
      * Must be invoked when the parent activity is paused.
      */
     public void onPause() {
+        mVoicemailAudioManager.unregisterReceivers();
+
         if (mContext != null && mIsPrepared
                 && mInitialOrientation != mContext.getResources().getConfiguration().orientation) {
             // If an orientation change triggers the pause, retain the MediaPlayer.
@@ -329,6 +339,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         if (mActivity != null) {
             mActivity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
+
     }
 
     /**
@@ -637,9 +648,8 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                 // Grab audio focus.
                 // Can throw RejectedExecutionException.
                 mVoicemailAudioManager.requestAudioFocus();
-
-                setSpeakerphoneOn(mIsSpeakerphoneOn);
                 mMediaPlayer.start();
+                setSpeakerphoneOn(mIsSpeakerphoneOn);
             } catch (RejectedExecutionException e) {
                 handleError(e);
             }
@@ -725,21 +735,29 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         }
     }
 
+    /**
+     * This is for use by UI interactions only. It simplifies UI logic.
+     */
     public void toggleSpeakerphone() {
+        mVoicemailAudioManager.setSpeakerphoneOn(!mIsSpeakerphoneOn);
         setSpeakerphoneOn(!mIsSpeakerphoneOn);
     }
 
-    private void setSpeakerphoneOn(boolean on) {
+    /**
+     * This method only handles app-level changes to the speakerphone. Audio layer changes should
+     * be handled separately. This is so that the VoicemailAudioManager can trigger changes to
+     * the presenter without the presenter triggering the audio manager and duplicating actions.
+     */
+    public void setSpeakerphoneOn(boolean on) {
         mView.onSpeakerphoneOn(on);
-        if (mIsSpeakerphoneOn == on) {
-            return;
-        }
 
         mIsSpeakerphoneOn = on;
-        mVoicemailAudioManager.turnOnSpeaker(on);
 
+        // This should run even if speakerphone is not being toggled because we may be switching
+        // from earpiece to headphone and vise versa. Also upon initial setup the default audio
+        // source is the earpiece, so we want to trigger the proximity sensor.
         if (mIsPlaying) {
-            if (on) {
+            if (on || mVoicemailAudioManager.isWiredHeadsetPluggedIn()) {
                 disableProximitySensor(false /* waitForFarState */);
                 if (mIsPrepared && mMediaPlayer != null && mMediaPlayer.isPlaying()) {
                     mActivity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);

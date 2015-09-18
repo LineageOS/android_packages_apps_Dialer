@@ -362,6 +362,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mAdapter.startCache();
 
         rescheduleDisplayUpdate();
+
+        if (mVoicemailPlaybackPresenter != null) {
+            mVoicemailPlaybackPresenter.onResume();
+        }
     }
 
     @Override
