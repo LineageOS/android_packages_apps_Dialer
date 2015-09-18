@@ -139,7 +139,7 @@ public class BlockedNumberFragment extends ListFragment implements
                             }
                         }
                     };
-                    mFilteredNumberAsyncQueryHandler.isBlocked(
+                    mFilteredNumberAsyncQueryHandler.startBlockedQuery(
                             onCheckListener, normalizedNumber, number, countryIso);
                 }
             }

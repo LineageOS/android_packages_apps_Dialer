@@ -291,25 +291,22 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     .setOnMenuItemClickListener(this);
         }
 
-        try {
-            mFilteredNumberAsyncQueryHandler.isBlocked(
-                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-                        @Override
-                        public void onCheckComplete(Integer id) {
-                            blockId = id;
-                            int blockTitleId = blockId == null ? R.string.call_log_block_number
-                                    : R.string.call_log_unblock_number;
-                            final MenuItem blockItem = menu.add(
-                                    ContextMenu.NONE,
-                                    R.id.context_menu_block_number,
-                                    ContextMenu.NONE,
-                                    blockTitleId);
-                            blockItem.setOnMenuItemClickListener(
-                                    CallLogListItemViewHolder.this);
-                        }
-                    }, info.normalizedNumber, number, countryIso);
-        } catch (IllegalArgumentException e) {
-        }
+        mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                    @Override
+                    public void onCheckComplete(Integer id) {
+                        blockId = id;
+                        int blockTitleId = blockId == null ? R.string.call_log_block_number
+                                : R.string.call_log_unblock_number;
+                        final MenuItem blockItem = menu.add(
+                                ContextMenu.NONE,
+                                R.id.context_menu_block_number,
+                                ContextMenu.NONE,
+                                blockTitleId);
+                        blockItem.setOnMenuItemClickListener(
+                                CallLogListItemViewHolder.this);
+                    }
+            }, info.normalizedNumber, number, countryIso);
     }
 
     @Override
