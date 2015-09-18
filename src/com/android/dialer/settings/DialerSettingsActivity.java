@@ -15,24 +15,20 @@
  */
 package com.android.dialer.settings;
 
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.UserManager;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
+import com.android.dialer.filterednumber.BlockedNumberFragment;
 
 import java.util.List;
 
@@ -89,6 +85,11 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
                 phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
                 target.add(phoneAccountSettingsHeader);
             }
+
+            Header blockedCallsHeader = new Header();
+            blockedCallsHeader.titleRes = R.string.blocked_calls_settings_label;
+            blockedCallsHeader.fragment = BlockedNumberFragment.class.getName();
+            target.add(blockedCallsHeader);
 
             if (telephonyManager.isTtyModeSupported()
                     || telephonyManager.isHearingAidCompatibilitySupported()) {

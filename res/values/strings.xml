@@ -805,6 +805,40 @@
     <!-- Label for the call settings section [CHAR LIMIT=30] -->
     <string name="call_settings_label">Calls</string>
 
+    <!-- Label for the blocked calls settings section [CHAR LIMIT=30] -->
+    <string name="blocked_calls_settings_label">Spam and blocked calls</string>
+
+    <!-- String describing the delete icon on a blocked number list item.
+        When tapped, it will show a dialog confirming the unblocking of the number.
+        [CHAR LIMIT=NONE]-->
+    <string name="description_blocked_number_list_delete">Unblock number</string>
+
+    <!-- Displayed in the blocked numbers list when there are no blocked numbers.
+        [CHAR LIMIT=NONE] -->
+    <string name="listNoBlockedNumbers">No blocked numbers</string>
+
+    <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
+    <string name="blockNumber">Add number</string>
+
+    <!-- Heading for the block list in the "Spam and blocked calls" settings. [CHAR LIMIT=64] -->
+    <string name="blockList">Block list</string>
+
+    <!-- Label for progress dialog when validating a number to be added to the block list.
+        [CHAR LIMIT=64] -->
+    <string name="checkingNumber">Checking
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
+    </string>
+
+    <!-- Error message shown when user tries to add invalid number to the block list.
+        [CHAR LIMIT=64] -->
+    <string name="invalidNumber"><xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
+        is invalid.</string>
+
+    <!-- Error message shown when user tries to add a number to the block list that was already
+        blocked. [CHAR LIMIT=64] -->
+    <string name="alreadyBlocked"><xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
+        is already blocked.</string>
+
     <!-- Label for the phone account settings [CHAR LIMIT=30] -->
     <string name="phone_account_settings_label">Calling accounts</string>
 
