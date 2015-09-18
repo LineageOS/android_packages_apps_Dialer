@@ -19,6 +19,7 @@ package com.android.dialer.voicemail;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -238,6 +239,8 @@ public class VoicemailPlaybackLayout extends LinearLayout
     private TextView mTotalDurationText;
 
     private PositionUpdater mPositionUpdater;
+    private Drawable mVoicemailSeekHandleEnabled;
+    private Drawable mVoicemailSeekHandleDisabled;
 
     public VoicemailPlaybackLayout(Context context) {
         this(context, null);
@@ -277,6 +280,11 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         mPositionText.setText(formatAsMinutesAndSeconds(0));
         mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
+
+        mVoicemailSeekHandleEnabled = getResources().getDrawable(
+                R.drawable.ic_voicemail_seek_handle, mContext.getTheme());
+        mVoicemailSeekHandleDisabled = getResources().getDrawable(
+                R.drawable.ic_voicemail_seek_handle_disabled, mContext.getTheme());
     }
 
     @Override
@@ -365,17 +373,22 @@ public class VoicemailPlaybackLayout extends LinearLayout
     @Override
     public void disableUiElements() {
         mStartStopButton.setEnabled(false);
-        mPlaybackSeek.setProgress(0);
         mPlaybackSeek.setEnabled(false);
+        mPlaybackSeek.setThumb(mVoicemailSeekHandleDisabled);
     }
 
     @Override
     public void enableUiElements() {
         mStartStopButton.setEnabled(true);
         mPlaybackSeek.setEnabled(true);
+        mPlaybackSeek.setThumb(mVoicemailSeekHandleEnabled);
+    }
 
-        mPositionText.setVisibility(View.VISIBLE);
-        mTotalDurationText.setVisibility(View.VISIBLE);
+    @Override
+    public void resetSeekBar() {
+        mPlaybackSeek.setProgress(0);
+        mPlaybackSeek.setEnabled(false);
+        mPlaybackSeek.setThumb(mVoicemailSeekHandleDisabled);
     }
 
     @Override
