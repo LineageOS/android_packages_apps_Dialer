@@ -315,6 +315,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mStateText.setText(getString(R.string.voicemail_playback_error));
     }
 
+    @Override
     public void onSpeakerphoneOn(boolean on) {
         if (on) {
             mPlaybackSpeakerphone.setImageResource(R.drawable.ic_volume_up_24dp);
@@ -352,7 +353,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
     @Override
     public void setFetchContentTimeout() {
-        disableUiElements();
+        mStartStopButton.setEnabled(true);
         mStateText.setText(getString(R.string.voicemail_fetching_timout));
     }
 
