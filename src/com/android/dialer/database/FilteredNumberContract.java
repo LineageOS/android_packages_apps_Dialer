@@ -16,13 +16,8 @@
 
 package com.android.dialer.database;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.telephony.PhoneNumberUtils;
 
 import com.android.dialerbind.ObjectFactory;
 
@@ -137,10 +132,16 @@ public final class FilteredNumberContract {
     public static class FilteredNumber implements BaseColumns {
 
         public static final String FILTERED_NUMBERS_TABLE = "filtered_numbers_table";
+        public static final String FILTERED_NUMBERS_INCREMENT_FILTERED_COUNT =
+                "filtered_numbers_increment_filtered_count";
 
         public static final Uri CONTENT_URI = Uri.withAppendedPath(
                 AUTHORITY_URI,
                 FILTERED_NUMBERS_TABLE);
+
+        public static final Uri CONTENT_URI_INCREMENT_FILTERED_COUNT = Uri.withAppendedPath(
+                AUTHORITY_URI,
+                FILTERED_NUMBERS_INCREMENT_FILTERED_COUNT);
 
         /**
          * This utility class cannot be instantiated.
