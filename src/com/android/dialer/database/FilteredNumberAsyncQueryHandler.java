@@ -109,16 +109,19 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     /**
      * Check if the number + country iso given has been blocked.
      * This method normalizes the number for the lookup if normalizedNumber is null.
+     * @return {@code true} if the number was invalid and couldn't be checked,
+     * {@code false} otherwise,
      */
-    public final void isBlocked(final OnCheckBlockedListener listener,
-                                String normalizedNumber, String number, String countryIso) {
+    public final boolean startBlockedQuery(final OnCheckBlockedListener listener,
+                                        String normalizedNumber, String number, String countryIso) {
         if (normalizedNumber == null) {
             normalizedNumber = getNormalizedNumber(number, countryIso);
             if (normalizedNumber == null) {
-                throw new IllegalArgumentException("Invalid phone number");
+                return true;
             }
         }
-        isBlocked(listener, normalizedNumber);
+        startBlockedQuery(listener, normalizedNumber);
+        return false;
     }
 
     public static String getNormalizedNumber(String number, String countryIso) {
@@ -132,8 +135,8 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     /**
      * Check if the normalized number given has been blocked.
      */
-    public final void isBlocked(final OnCheckBlockedListener listener,
-                                String normalizedNumber) {
+    public final void startBlockedQuery(final OnCheckBlockedListener listener,
+                                        String normalizedNumber) {
         startQuery(NO_TOKEN,
                 new Listener() {
                     @Override
@@ -192,8 +195,8 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
     /**
      * Removes row from database.
-     * Caller should call {@link FilteredNumberAsyncQueryHandler#isBlocked} first.
-     * @param id The ID of row to remove, from {@link FilteredNumberAsyncQueryHandler#isBlocked}.
+     * Caller should call {@link FilteredNumberAsyncQueryHandler#startBlockedQuery} first.
+     * @param id The ID of row to remove, from {@link FilteredNumberAsyncQueryHandler#startBlockedQuery}.
      */
     public final void unblock(final OnUnblockNumberListener listener, Integer id) {
         if (id == null) {
