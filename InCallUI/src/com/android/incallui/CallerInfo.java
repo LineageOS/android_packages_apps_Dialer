@@ -247,7 +247,7 @@ public class CallerInfo {
                 // in the database.
                 columnIndex = cursor.getColumnIndex(PhoneLookup.CUSTOM_RINGTONE);
                 if ((columnIndex != -1) && (cursor.getString(columnIndex) != null)) {
-                    if (cursor.getString(columnIndex).equals("")) {
+                    if (TextUtils.isEmpty(cursor.getString(columnIndex))) {
                         // make it consistent with frameworks/base/.../CallerInfo.java
                         info.contactRingtoneUri = Uri.EMPTY;
                     } else {
