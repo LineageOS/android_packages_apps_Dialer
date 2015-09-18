@@ -48,6 +48,8 @@ public class CallLogActivity extends AppCompatActivity implements ViewPager.OnPa
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
 
+    private boolean mIsVisible;
+
     private String[] mTabTitles;
 
     private static final int TAB_INDEX_ALL = 0;
@@ -161,6 +163,31 @@ public class CallLogActivity extends AppCompatActivity implements ViewPager.OnPa
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mIsVisible = false;
+    }
+
+    @Override
+    protected void onStop() {
+        mIsVisible = false;
+        super.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        mIsVisible = false;
+        super.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Returns true when the Activity is currently visible (between onStart and onStop).
+     */
+    /* package */ boolean isVisible() {
+        return mIsVisible;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.call_log_options, menu);
@@ -180,6 +207,10 @@ public class CallLogActivity extends AppCompatActivity implements ViewPager.OnPa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (!isVisible()) {
+            return true;
+        }
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 final Intent intent = new Intent(this, DialtactsActivity.class);
