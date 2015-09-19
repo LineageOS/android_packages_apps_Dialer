@@ -80,22 +80,30 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
     @Override
     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-        ((Listener) cookie).onQueryComplete(token, cookie, cursor);
+        if (cookie != null) {
+            ((Listener) cookie).onQueryComplete(token, cookie, cursor);
+        }
     }
 
     @Override
     protected void onInsertComplete(int token, Object cookie, Uri uri) {
-        ((Listener) cookie).onInsertComplete(token, cookie, uri);
+        if (cookie != null) {
+            ((Listener) cookie).onInsertComplete(token, cookie, uri);
+        }
     }
 
     @Override
     protected void onUpdateComplete(int token, Object cookie, int result) {
-        ((Listener) cookie).onUpdateComplete(token, cookie, result);
+        if (cookie != null) {
+            ((Listener) cookie).onUpdateComplete(token, cookie, result);
+        }
     }
 
     @Override
     protected void onDeleteComplete(int token, Object cookie, int result) {
-        ((Listener) cookie).onDeleteComplete(token, cookie, result);
+        if (cookie != null) {
+            ((Listener) cookie).onDeleteComplete(token, cookie, result);
+        }
     }
 
     private static Uri getContentUri(Integer id) {
@@ -104,6 +112,12 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
             uri = ContentUris.withAppendedId(uri, id);
         }
         return uri;
+    }
+
+    public final void incrementFilteredCount(Integer id) {
+        startUpdate(NO_TOKEN, null,
+                ContentUris.withAppendedId(FilteredNumber.CONTENT_URI_INCREMENT_FILTERED_COUNT, id),
+                null, null, null);
     }
 
     /**
