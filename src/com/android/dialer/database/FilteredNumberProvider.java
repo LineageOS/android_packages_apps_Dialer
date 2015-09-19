@@ -22,12 +22,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.os.Binder;
 import android.text.TextUtils;
-import android.text.format.Time;
 import android.util.Log;
 
 import com.android.contacts.common.GeoUtil;
@@ -49,6 +49,7 @@ public class FilteredNumberProvider extends ContentProvider {
 
     private static final int FILTERED_NUMBERS_TABLE = 1;
     private static final int FILTERED_NUMBERS_TABLE_ID = 2;
+    private static final int FILTERED_NUMBERS_INCREMENT_FILTERED_COUNT = 3;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -64,6 +65,10 @@ public class FilteredNumberProvider extends ContentProvider {
         sUriMatcher.addURI(ObjectFactory.getFilteredNumberProviderAuthority(),
                 FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_TABLE + "/#",
                 FILTERED_NUMBERS_TABLE_ID);
+        sUriMatcher.addURI(ObjectFactory.getFilteredNumberProviderAuthority(),
+                FilteredNumberContract.FilteredNumber.FILTERED_NUMBERS_INCREMENT_FILTERED_COUNT
+                        + "/#",
+                FILTERED_NUMBERS_INCREMENT_FILTERED_COUNT);
         return true;
     }
 
@@ -121,9 +126,7 @@ public class FilteredNumberProvider extends ContentProvider {
 
     @VisibleForTesting
     protected long getCurrentTimeMs() {
-        Time timeNow = new Time();
-        timeNow.setToNow();
-        return timeNow.toMillis(false);
+        return System.currentTimeMillis();
     }
 
     private void setDefaultValues(ContentValues values) {
@@ -171,6 +174,20 @@ public class FilteredNumberProvider extends ContentProvider {
             case FILTERED_NUMBERS_TABLE_ID:
                 selection = getSelectionWithId(selection, ContentUris.parseId(uri));
                 break;
+            case FILTERED_NUMBERS_INCREMENT_FILTERED_COUNT:
+                final long id = ContentUris.parseId(uri);
+                try {
+                    db.execSQL(" UPDATE " + DialerDatabaseHelper.Tables.FILTERED_NUMBER_TABLE
+                            + " SET" + FilteredNumberColumns.TIMES_FILTERED + "="
+                            + FilteredNumberColumns.TIMES_FILTERED + "+1,"
+                            + FilteredNumberColumns.LAST_TIME_FILTERED + "="
+                            + getCurrentTimeMs()
+                            + " WHERE " + FilteredNumberColumns._ID + "=" + id);
+                } catch (SQLException e) {
+                    Log.d(TAG, "Could not update blocked statistics for " + id);
+                    return 0;
+                }
+                return 1;
             default:
                 throw new IllegalArgumentException("Unknown uri: " + uri);
         }
