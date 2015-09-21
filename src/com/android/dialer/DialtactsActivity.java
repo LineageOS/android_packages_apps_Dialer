@@ -812,7 +812,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     public void onDialpadShown() {
         Assert.assertNotNull(mDialpadFragment);
-        if (mDialConferenceButtonPressed) {
+        if (mDialConferenceButtonPressed || !mIsDialpadShown) {
             mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
             mDialConferenceButtonPressed = false;
         } else {
@@ -1298,8 +1298,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     && ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
         }
         if(mConferenceDialButton != null) {
-            mConferenceDialButton.setVisibility((enabled && imsUseEnabled) ?
-                    View.VISIBLE : View.GONE);
+            boolean isCurrentTabAllContacts = (mListsFragment != null) &&
+                    (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_ALL_CONTACTS);
+            mConferenceDialButton.setVisibility((enabled && imsUseEnabled &&
+                    !isCurrentTabAllContacts) ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -1438,10 +1440,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         int tabIndex = mListsFragment.getCurrentTabIndex();
         mPreviouslySelectedTabIndex = tabIndex;
         if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+            setConferenceDialButtonVisibility(false);
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.ic_person_add_24dp),
                     getResources().getString(R.string.search_shortcut_create_new_contact));
         } else {
+            setConferenceDialButtonVisibility(true);
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.fab_ic_dial),
                     getResources().getString(R.string.action_menu_dialpad_button));
