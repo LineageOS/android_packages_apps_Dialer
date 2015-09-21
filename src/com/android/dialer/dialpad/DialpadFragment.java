@@ -81,6 +81,7 @@ import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.incallui.Call.LogState;
 import com.android.phone.common.CallLogAsync;
@@ -1478,8 +1479,12 @@ public class DialpadFragment extends Fragment
      * @return true if the phone is "in use", meaning that at least one line
      *              is active (ie. off hook or ringing or dialing, or on hold).
      */
-    public boolean isPhoneInUse() {
-        return getTelecomManager().isInCall();
+    private boolean isPhoneInUse() {
+        final Context context = getActivity();
+        if (context != null) {
+            return TelecomUtil.isInCall(context);
+        }
+        return false;
     }
 
     /**
