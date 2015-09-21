@@ -16,16 +16,12 @@
 
 package com.android.dialer.database;
 
+import static com.android.dialer.database.DatabaseTestUtils.*;
+
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.test.suitebuilder.annotation.Suppress;
 import android.test.AndroidTestCase;
-import android.text.TextUtils;
-import android.util.Log;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Data;
 
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
@@ -89,76 +85,6 @@ public class SmartDialPrefixTest extends AndroidTestCase {
         final SQLiteDatabase db = mTestHelper.getWritableDatabase();
         mTestHelper.removeAllContacts(db);
         super.tearDown();
-    }
-
-    @Suppress
-    public void testForNewContacts() {
-    }
-
-    @Suppress
-    public void testForUpdatedContacts() {
-    }
-
-    @Suppress
-    public void testForDeletedContacts() {
-    }
-
-    @Suppress
-    public void testSize() {
-    }
-
-
-    private MatrixCursor constructNewNameCursor() {
-        final MatrixCursor cursor = new MatrixCursor(new String[]{
-                DialerDatabaseHelper.SmartDialDbColumns.DISPLAY_NAME_PRIMARY,
-                DialerDatabaseHelper.SmartDialDbColumns.CONTACT_ID});
-        return cursor;
-    }
-
-    private MatrixCursor constructNewContactCursor() {
-        final MatrixCursor cursor = new MatrixCursor(new String[]{
-                    Phone._ID,                          // 0
-                    Phone.TYPE,                         // 1
-                    Phone.LABEL,                        // 2
-                    Phone.NUMBER,                       // 3
-                    Phone.CONTACT_ID,                   // 4
-                    Phone.LOOKUP_KEY,                   // 5
-                    Phone.DISPLAY_NAME_PRIMARY,         // 6
-                    Phone.PHOTO_ID,                     // 7
-                    Data.LAST_TIME_USED,                // 8
-                    Data.TIMES_USED,                    // 9
-                    Contacts.STARRED,                   // 10
-                    Data.IS_SUPER_PRIMARY,              // 11
-                    Contacts.IN_VISIBLE_GROUP,          // 12
-                    Data.IS_PRIMARY});                  // 13
-        return cursor;
-    }
-
-    private ContactNumber constructNewContactWithDummyIds(MatrixCursor contactCursor,
-            MatrixCursor nameCursor, String number, int id, String displayName) {
-        return constructNewContact(contactCursor, nameCursor, id, number, id, String.valueOf(id),
-                displayName, 0, 0, 0, 0, 0, 0, 0);
-    }
-
-    private ContactNumber constructNewContact(MatrixCursor contactCursor, MatrixCursor nameCursor,
-            int id, String number, int contactId, String lookupKey, String displayName, int photoId,
-            int lastTimeUsed, int timesUsed, int starred, int isSuperPrimary, int inVisibleGroup,
-            int isPrimary) {
-        assertNotNull(contactCursor);
-        assertNotNull(nameCursor);
-
-        if (TextUtils.isEmpty(number)) {
-            // Add a dummy number, otherwise DialerDatabaseHelper simply ignores the entire
-            // row if the number is empty
-            number = "0";
-        }
-
-        contactCursor.addRow(new Object[]{id, "", "", number, contactId, lookupKey, displayName,
-                photoId, lastTimeUsed, timesUsed, starred, isSuperPrimary, inVisibleGroup,
-                isPrimary});
-        nameCursor.addRow(new Object[]{displayName, contactId});
-
-        return new ContactNumber(contactId, id, displayName, number, lookupKey, 0);
     }
 
     private ArrayList<ContactNumber> getLooseMatchesFromDb(String query) {
