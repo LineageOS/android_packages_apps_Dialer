@@ -54,8 +54,8 @@ public class BlockedNumberFragment extends ListFragment implements
             mAdapter = new BlockedNumberAdapter(getContext(), mFilteredNumberAsyncQueryHandler);
         }
         setListAdapter(mAdapter);
-        final Button addNumberBtn = (Button) getActivity().findViewById(R.id.add_number_button);
-        addNumberBtn.setOnClickListener(this);
+        getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
+        getListView().getEmptyView().findViewById(R.id.add_number_button).setOnClickListener(this);
     }
 
     @Override
