@@ -120,6 +120,7 @@ public class TelecomCallLogCache {
     public boolean isVideoEnabled() {
         if (!mHasCheckedForVideoEnabled) {
             mIsVideoEnabled = CallUtil.isVideoEnabled(mContext);
+            mHasCheckedForVideoEnabled = true;
         }
         return mIsVideoEnabled;
     }
