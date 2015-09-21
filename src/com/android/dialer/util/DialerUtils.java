@@ -33,18 +33,12 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.dialer.R;
-import com.android.dialer.widget.EmptyContentView;
-import com.android.incallui.CallCardFragment;
-import com.android.incallui.Log;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -94,7 +88,14 @@ public class DialerUtils {
                 }
                 final TelecomManager tm =
                         (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-                tm.placeCall(intent.getData(), intent.getExtras());
+                if (TelecomUtil.hasCallPhonePermission(context)) {
+                    tm.placeCall(intent.getData(), intent.getExtras());
+                } else {
+                    // TODO: Make calling activity show request permission dialog and handle
+                    // callback results appropriately.
+                    Toast.makeText(context, "Cannot place call without Phone permission",
+                            Toast.LENGTH_SHORT);
+                }
             } else {
                 context.startActivity(intent);
             }
