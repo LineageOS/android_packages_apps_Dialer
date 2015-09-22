@@ -15,6 +15,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/blocked_number_fragment"
     android:orientation="vertical"
     android:background="@color/blocked_number_background"
     android:layout_width="match_parent"
