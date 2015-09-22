@@ -89,7 +89,8 @@ public class BlockedNumberAdapter extends SimpleCursorAdapter {
                         FilterNumberDialogFragment.newInstance(id, normalizedNumber, number,
                                 countryIso, displayNumber);
                 newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
-                newFragment.setParentView(view);
+                newFragment.setParentView(
+                        ((Activity) mContext).findViewById(R.id.blocked_number_fragment));
                 newFragment.show(((Activity) mContext).getFragmentManager(),
                         FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
             }
