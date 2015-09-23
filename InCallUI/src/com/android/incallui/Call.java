@@ -494,7 +494,7 @@ public class Call {
 
         // If the phone account handle of the call is set, cache capability bit indicating whether
         // the phone account supports call subjects.
-        PhoneAccountHandle newPhoneAccountHandle = mTelecommCall.getDetails().getAccountHandle();
+        PhoneAccountHandle newPhoneAccountHandle = mTelecomCall.getDetails().getAccountHandle();
         if (!Objects.equals(mPhoneAccountHandle, newPhoneAccountHandle)) {
             mPhoneAccountHandle = newPhoneAccountHandle;
 
