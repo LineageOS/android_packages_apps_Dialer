@@ -42,7 +42,6 @@ import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
@@ -272,10 +271,6 @@ public class DialpadFragment extends Fragment
 
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-    }
-
-    private TelecomManager getTelecomManager() {
-        return (TelecomManager) getActivity().getSystemService(Context.TELECOM_SERVICE);
     }
 
     @Override
@@ -980,7 +975,7 @@ public class DialpadFragment extends Fragment
                     List<PhoneAccountHandle> subscriptionAccountHandles =
                             PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
                     boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
-                            getTelecomManager().getDefaultOutgoingPhoneAccount(
+                            TelecomUtil.getDefaultOutgoingPhoneAccount(getActivity(),
                                     PhoneAccount.SCHEME_VOICEMAIL));
                     boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
                             && !hasUserSelectedDefault;
@@ -1462,7 +1457,7 @@ public class DialpadFragment extends Fragment
      * or "return to call" from the dialpad chooser.
      */
     private void returnToInCallScreen(boolean showDialpad) {
-        getTelecomManager().showInCallScreen(showDialpad);
+        TelecomUtil.showInCallScreen(getActivity(), showDialpad);
 
         // Finally, finish() ourselves so that we don't stay on the
         // activity stack.
@@ -1579,20 +1574,19 @@ public class DialpadFragment extends Fragment
      *
      * @return true if voicemail is enabled and accessible. Note that this can be false
      * "temporarily" after the app boot.
-     * @see TelecomManager#getVoiceMailNumber(PhoneAccountHandle)
      */
     private boolean isVoicemailAvailable() {
         try {
             PhoneAccountHandle defaultUserSelectedAccount =
-                    getTelecomManager().getDefaultOutgoingPhoneAccount(
+                    TelecomUtil.getDefaultOutgoingPhoneAccount(getActivity(),
                             PhoneAccount.SCHEME_VOICEMAIL);
             if (defaultUserSelectedAccount == null) {
                 // In a single-SIM phone, there is no default outgoing phone account selected by
                 // the user, so just call TelephonyManager#getVoicemailNumber directly.
                 return !TextUtils.isEmpty(getTelephonyManager().getVoiceMailNumber());
             } else {
-                return !TextUtils.isEmpty(
-                        getTelecomManager().getVoiceMailNumber(defaultUserSelectedAccount));
+                return !TextUtils.isEmpty(TelecomUtil.getVoicemailNumber(getActivity(),
+                        defaultUserSelectedAccount));
             }
         } catch (SecurityException se) {
             // Possibly no READ_PHONE_STATE privilege.

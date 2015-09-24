@@ -23,6 +23,9 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
+import com.android.contacts.common.util.PermissionsUtil;
+import com.android.dialer.util.TelecomUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +41,8 @@ public class PhoneAccountUtils {
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
 
         List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<PhoneAccountHandle>();
-        List<PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
+        final List<PhoneAccountHandle> accountHandles =
+                TelecomUtil.getCallCapablePhoneAccounts(context);
         for (PhoneAccountHandle accountHandle : accountHandles) {
             PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
             if (account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
