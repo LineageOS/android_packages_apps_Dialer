@@ -110,4 +110,9 @@
 
     <!-- Ripple color used over light backgrounds. -->
     <color name="ripple_light">#40000000</color>
+
+    <color name="call_context_title_text_color">@color/incall_call_banner_subtext_color</color>
+    <color name="contact_call_context_message_text_color">@color/dialer_theme_color</color>
+    <color name="contact_call_context_message_background_color">@color/incall_call_banner_subtext_color</color>
+    <color name="contact_call_context_detail_text_color">@color/incall_call_banner_subtext_color</color>
 </resources>
