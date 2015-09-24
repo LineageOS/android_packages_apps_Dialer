@@ -86,11 +86,10 @@ public class DialerUtils {
                     extras.putParcelable(TouchPointManager.TOUCH_POINT, touchPoint);
                     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
                 }
-                final TelecomManager tm =
-                        (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-                if (TelecomUtil.hasCallPhonePermission(context)) {
-                    tm.placeCall(intent.getData(), intent.getExtras());
-                } else {
+
+                final boolean hasCallPermission = TelecomUtil.placeCall(context, intent.getData(),
+                        intent.getExtras());
+                if (!hasCallPermission) {
                     // TODO: Make calling activity show request permission dialog and handle
                     // callback results appropriately.
                     Toast.makeText(context, "Cannot place call without Phone permission",

@@ -34,7 +34,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
-import android.telecom.TelecomManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -370,7 +369,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             TouchPointManager.getInstance().setPoint((int) ev.getRawX(), (int) ev.getRawY());
         }
         return super.dispatchTouchEvent(ev);
-
     }
 
     @Override
@@ -929,7 +927,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         final boolean callKey = Intent.ACTION_CALL_BUTTON.equals(intent.getAction());
 
         if (callKey) {
-            getTelecomManager().showInCallScreen(false);
+            TelecomUtil.showInCallScreen(this, false);
             return true;
         }
 
@@ -1338,10 +1336,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageScrollStateChanged(int state) {
-    }
-
-    private TelecomManager getTelecomManager() {
-        return (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
     }
 
     @Override

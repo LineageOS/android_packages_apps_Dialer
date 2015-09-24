@@ -19,7 +19,6 @@ package com.android.dialer.util;
 import android.content.Context;
 import android.provider.CallLog;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -55,10 +54,7 @@ public class PhoneNumberUtil {
         if (TextUtils.isEmpty(number)) {
             return false;
         }
-
-        final TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        return telecomManager.isVoiceMailNumber(accountHandle, number.toString());
+        return TelecomUtil.isVoicemailNumber(context, accountHandle, number.toString());
     }
 
     /**

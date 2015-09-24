@@ -20,6 +20,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -29,9 +30,26 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Performs permission checks before calling into TelecomManager. Each method is self-explanatory -
+ * perform the required check and return the fallback default if the permission is missing,
+ * otherwise return the value from TelecomManager.
+ *
+ */
 public class TelecomUtil {
     private static final String TAG = "TelecomUtil";
     private static boolean sWarningLogged = false;
+
+    public static void showInCallScreen(Context context, boolean showDialpad) {
+        if (hasReadPhoneStatePermission(context)) {
+            try {
+                getTelecomManager(context).showInCallScreen(showDialpad);
+            } catch (SecurityException e) {
+                // Just in case
+                Log.w(TAG, "TelecomManager.showInCallScreen called without permission.");
+            }
+        }
+    }
 
     public static void silenceRinger(Context context) {
         if (hasModifyPhoneStatePermission(context)) {
@@ -81,6 +99,14 @@ public class TelecomUtil {
         return false;
     }
 
+    public static PhoneAccountHandle getDefaultOutgoingPhoneAccount(Context context,
+            String uriScheme) {
+        if (hasReadPhoneStatePermission(context)) {
+            return getTelecomManager(context).getDefaultOutgoingPhoneAccount(uriScheme);
+        }
+        return null;
+    }
+
     public static List<PhoneAccountHandle> getCallCapablePhoneAccounts(Context context) {
         if (hasReadPhoneStatePermission(context)) {
             return getTelecomManager(context).getCallCapablePhoneAccounts();
@@ -91,6 +117,39 @@ public class TelecomUtil {
     public static boolean isInCall(Context context) {
         if (hasReadPhoneStatePermission(context)) {
             return getTelecomManager(context).isInCall();
+        }
+        return false;
+    }
+
+    public static boolean isVoicemailNumber(Context context, PhoneAccountHandle accountHandle,
+            String number) {
+        if (hasReadPhoneStatePermission(context)) {
+            return getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+        }
+        return false;
+    }
+
+    public static String getVoicemailNumber(Context context, PhoneAccountHandle accountHandle) {
+        if (hasReadPhoneStatePermission(context)) {
+            return getTelecomManager(context).getVoiceMailNumber(accountHandle);
+        }
+        return null;
+    }
+
+    /**
+     * Tries to place a call using the {@link TelecomManager}.
+     *
+     * @param context a valid context.
+     * @param address Handle to call.
+     * @param extras Bundle of extras to attach to the call intent.
+     *
+     * @return {@code true} if we successfully attempted to place the call, {@code false} if it
+     *         failed due to a permission check.
+     */
+    public static boolean placeCall(Context context, Uri address, Bundle extras) {
+        if (hasCallPhonePermission(context)) {
+            getTelecomManager(context).placeCall(address, extras);
+            return true;
         }
         return false;
     }
