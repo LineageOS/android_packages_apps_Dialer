@@ -101,7 +101,6 @@
   <string name="meid">MEID</string>
   <string name="simContacts_emptyLoading">نیشاندان له‌ سیمکارده‌وه‌\u2026</string>
   <string name="simContacts_title">په‌یوه‌ندی سیمکارد</string>
-  <string name="call_log_activity_title_font_family">sans-serif-light</string>
   <string name="show_favorites_only">نیشاندانی ته‌نیا دڵخوازه‌کان</string>
   <string name="call_log_activity_title">مێژوو</string>
   <string name="call_log_all_title">هه‌موو</string>

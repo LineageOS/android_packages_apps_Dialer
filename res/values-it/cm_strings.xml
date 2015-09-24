@@ -97,8 +97,8 @@
   <string name="stop_call_playback">Ferma</string>
   <string name="call_playback_error_message">Impossibile riprodurre la registrazione</string>
   <string name="sensors_category_title">Opzioni sensore</string>
-  <string name="smart_mute_title">Smart mute</string>
+  <string name="smart_mute_title">Muto intelligente</string>
   <string name="smart_mute_summary">Silenzia la chiamata in arrivo capovolgendo il dispositivo</string>
-  <string name="smart_dialer_title">Smart Call</string>
+  <string name="smart_dialer_title">Chiamata intelligente</string>
   <string name="smart_dialer_summary">Chiama automaticamente il numero composto avvicinando il dispositivo all\'orecchio</string>
 </resources>

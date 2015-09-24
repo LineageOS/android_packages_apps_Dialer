@@ -105,8 +105,6 @@
   <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM…</string>
   <string name="simContacts_title">Contautos de tarxeta SIM</string>
   <string name="call_not_available">Nun pue facese una llamada porque l\'app Teléfonu ta deshabilitada.</string>
-  <string name="call_log_activity_title_font_family">sans-serif-light</string>
-  <string name="view_full_call_history_font_family">sans-serif</string>
   <string name="show_favorites_only">Amosar namái favoritos</string>
   <string name="call_log_activity_title">Historial</string>
   <string name="call_log_all_title">Too</string>

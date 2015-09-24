@@ -32,7 +32,7 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <string name="preference_category_t9_dialpad_search">Iskanje tipkovnice za klicanje T9</string>
   <string name="t9_search_input_locale">Vnos iskanja T9</string>
-  <string name="t9_search_input_locale_default">Privzeto</string>
+  <string name="t9_search_input_locale_default">Privzeti</string>
   <string name="type_blacklist">Blokiran klic</string>
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Podrobnosti statistike klicev</string>
