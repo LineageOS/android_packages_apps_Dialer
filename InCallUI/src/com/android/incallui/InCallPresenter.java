@@ -1079,7 +1079,7 @@ public class InCallPresenter implements CallList.Listener,
         // Direct transition from PENDING_OUTGOING -> INCALL means that there was an error in the
         // outgoing call process, so the UI should be brought up to show an error dialog.
         showCallUi |= (InCallState.PENDING_OUTGOING == mInCallState
-                && InCallState.INCALL == newState && !isActivityStarted());
+                && InCallState.INCALL == newState && !isShowingInCallUi());
 
         // Another exception - InCallActivity is in charge of disconnecting a call with no
         // valid accounts set. Bring the UI up if this is true for the current pending outgoing
