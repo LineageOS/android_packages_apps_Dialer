@@ -119,7 +119,7 @@ public class FilteredNumberProviderTest extends
         // Delete row
         int rows = mResolver.delete(
                 FilteredNumberContract.FilteredNumber.CONTENT_URI,
-                "id = ?",
+                FilteredNumberContract.FilteredNumberColumns._ID + " = ?",
                 new String[]{Long.toString(id)});
         assertEquals(rows, 1);
 
