@@ -669,8 +669,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 // involve querying a {@link ProviderStatusLoader}, which we don't want to do right
                 // now in Dialtacts for (potential) performance reasons. Compare with how it is
                 // done in {@link PeopleActivity}.
-                ImportExportDialogFragment.show(getFragmentManager(), true,
-                        DialtactsActivity.class);
+                if (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_SPEED_DIAL) {
+                    ImportExportDialogFragment.show(getFragmentManager(), true,
+                            DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_FAVORITES);
+                } else {
+                    ImportExportDialogFragment.show(getFragmentManager(), true,
+                            DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_DEFAULT);
+                }
                 return true;
             case R.id.menu_clear_frequents:
                 ClearFrequentsDialog.show(getFragmentManager());
