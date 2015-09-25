@@ -27,7 +27,6 @@ import android.provider.CallLog.Calls;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,15 +39,14 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.TransactionSafeActivity;
 
-public class CallLogActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
     private CallLogFragment mAllCallsFragment;
     private CallLogFragment mMissedCallsFragment;
-
-    private boolean mIsVisible;
 
     private String[] mTabTitles;
 
@@ -163,31 +161,6 @@ public class CallLogActivity extends AppCompatActivity implements ViewPager.OnPa
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mIsVisible = false;
-    }
-
-    @Override
-    protected void onStop() {
-        mIsVisible = false;
-        super.onStop();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        mIsVisible = false;
-        super.onSaveInstanceState(outState);
-    }
-
-    /**
-     * Returns true when the Activity is currently visible (between onStart and onStop).
-     */
-    /* package */ boolean isVisible() {
-        return mIsVisible;
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.call_log_options, menu);
@@ -207,7 +180,7 @@ public class CallLogActivity extends AppCompatActivity implements ViewPager.OnPa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (!isVisible()) {
+        if (!isSafeToCommitTransactions()) {
             return true;
         }
 
