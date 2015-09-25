@@ -158,8 +158,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
 
-    private boolean mIsVisible;
-
     /**
      * Animation that slides in.
      */
@@ -564,25 +562,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mIsVisible = true;
-    }
-
-    @Override
-    protected void onStop() {
-        mIsVisible = false;
-        super.onStop();
-    }
-
-    /**
-     * Returns true when the Activity is currently visible (between onStart and onStop).
-     */
-    /* package */ boolean isVisible() {
-        return mIsVisible;
-    }
-
-    @Override
     protected void onPause() {
         if (mClearSearchOnPause) {
             hideDialpadAndSearchUi();
@@ -596,7 +575,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        mIsVisible = false;
         super.onSaveInstanceState(outState);
         outState.putString(KEY_SEARCH_QUERY, mSearchQuery);
         outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
@@ -669,7 +647,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        if (!isVisible()) {
+        if (!isSafeToCommitTransactions()) {
             return true;
         }
 

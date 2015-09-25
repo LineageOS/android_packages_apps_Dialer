@@ -35,37 +35,10 @@ import java.util.List;
 public class DialerSettingsActivity extends AppCompatPreferenceActivity {
     protected SharedPreferences mPreferences;
 
-    private boolean mIsVisible;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mIsVisible = true;
-    }
-
-    @Override
-    protected void onStop() {
-        mIsVisible = false;
-        super.onStop();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle out) {
-        mIsVisible = false;
-        super.onSaveInstanceState(out);
-    }
-
-    /**
-     * Returns true when the Activity is currently visible (between onStart and onStop).
-     */
-    /* package */ boolean isVisible() {
-        return mIsVisible;
     }
 
     @Override
@@ -159,7 +132,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
     @Override
     public void onBackPressed() {
-        if (!isVisible()) {
+        if (!isSafeToCommitTransactions()) {
             return;
         }
         super.onBackPressed();

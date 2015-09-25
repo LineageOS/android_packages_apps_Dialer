@@ -32,11 +32,14 @@ import android.view.ViewGroup;
 public class AppCompatPreferenceActivity extends PreferenceActivity {
     private AppCompatDelegate mDelegate;
 
+    private boolean mIsSafeToCommitTransactions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+        mIsSafeToCommitTransactions = true;
     }
 
     @Override
@@ -118,5 +121,35 @@ public class AppCompatPreferenceActivity extends PreferenceActivity {
             mDelegate = AppCompatDelegate.create(this, null);
         }
         return mDelegate;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mIsSafeToCommitTransactions = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mIsSafeToCommitTransactions = true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mIsSafeToCommitTransactions = false;
+    }
+
+    /**
+     * Returns true if it is safe to commit {@link FragmentTransaction}s at this time, based on
+     * whether {@link Activity#onSaveInstanceState} has been called or not.
+     *
+     * Make sure that the current activity calls into
+     * {@link super.onSaveInstanceState(Bundle outState)} (if that method is overridden),
+     * so the flag is properly set.
+     */
+    public boolean isSafeToCommitTransactions() {
+        return mIsSafeToCommitTransactions;
     }
 }
