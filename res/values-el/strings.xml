@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Γρήγορες απαντήσεις"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Κλήσεις"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Ανεπιθύμ. και αποκλ. κλήσεις"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Κατάργηση αποκλεισμού αριθμού"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Δεν υπάρχουν αποκλεισμένοι αριθμοί"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Προσθήκη αριθμού"</string>
+    <string name="blockList" msgid="285204949255078310">"Λίστα αποκλεισμού"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Έλεγχος <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"Ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g> δεν είναι έγκυρος."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"Ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g> αποκλείστηκε ήδη."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Λογαριασμοί κλήσης"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Ενεργοποίηση"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ορισμός αδειών"</string>

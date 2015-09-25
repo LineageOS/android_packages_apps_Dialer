@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"സ്പാമും ബ്ലോക്കുചെയ്ത കോളുകളും"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ബ്ലോക്കുചെയ്ത നമ്പറുകൾ ഇല്ല"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"നമ്പർ ചേർക്കുക"</string>
+    <string name="blockList" msgid="285204949255078310">"ബ്ലോക്ക് ലിസ്റ്റ്"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> പരിശോധിക്കുന്നു"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> അസാധുവാണ്."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"ഇതിനകം തന്നെ <xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്തിരിക്കുന്നു"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളിംഗ് അക്കൗണ്ട്"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ഓണാക്കുക"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"അനുമതികൾ സജ്ജമാക്കുക"</string>

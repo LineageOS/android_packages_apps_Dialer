@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Mga mabilisang tugon"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Mga Tawag"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam at mga na-block na tawag"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Alisin sa pagkaka-block ang numero"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Walang mga naka-block na numero"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Magdagdag ng numero"</string>
+    <string name="blockList" msgid="285204949255078310">"Listahan ng mga naka-block"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Sinusuri ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"Hindi wasto ang <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"Naka-block na ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Account sa pagtawag"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"I-on"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Magtakda ng mga pahintulot"</string>

@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Gyors válaszok"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Hívások"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam és letiltott hívások"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Szám tiltásának feloldása"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nincs letiltott szám"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Szám hozzáadása"</string>
+    <string name="blockList" msgid="285204949255078310">"Tiltólista"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"A(z) <xliff:g id="NUMBER">%1$s</xliff:g> ellenőrzése"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"A(z) <xliff:g id="NUMBER">%1$s</xliff:g> érvénytelen."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"A következő szám már le van tiltva: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Telefonos fiókok"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Engedélyezés"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Engedélyek beállítása"</string>

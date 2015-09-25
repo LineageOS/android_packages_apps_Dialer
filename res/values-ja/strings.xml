@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"迷惑電話/ブロックした通話"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"番号のブロックを解除"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ブロックした番号はありません"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"電話番号を追加"</string>
+    <string name="blockList" msgid="285204949255078310">"ブロックリスト"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g>を確認しています"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g>は無効な番号です。"</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g>は既にブロックしています。"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通話アカウント"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ONにする"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"権限を設定"</string>

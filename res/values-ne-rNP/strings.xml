@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"द्रुत प्रतिक्रियाहरू"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कलहरू"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"स्प्याम र रोकिएका कलहरू"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"रोक लगाइएका नम्बरहरू कुनै पनि छैन"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"नम्बर थप्नुहोस्"</string>
+    <string name="blockList" msgid="285204949255078310">"रोकिएको सूची"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> जाँच गर्दै"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> अमान्य छ।"</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> पहिले नै रोकिएको छ।"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"खाता कलिङ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"सक्रिय पार्नुहोस्"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"अनुमतिहरू सेट गर्नुहोस्"</string>

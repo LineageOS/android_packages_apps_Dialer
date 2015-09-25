@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"द्रुत प्रतिसाद"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कॉल"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"स्पॅम आणि अवरोधित केलेले कॉल"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नंबर अनावरोधित करा"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"कोणतेही अवरोधित केलेले नंबर नाहीत"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"नंबर जोडा"</string>
+    <string name="blockList" msgid="285204949255078310">"अवरोधित सूची"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> तपासत आहे"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> अवैध आहे."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> आधीच अवरोधित केलेला आहे."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"कॉल करण्याची खाती"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"चालू करा"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"परवानग्या सेट करा"</string>

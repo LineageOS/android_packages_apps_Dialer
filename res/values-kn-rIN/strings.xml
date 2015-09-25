@@ -208,6 +208,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ಕರೆಗಳು"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"ಸ್ಪ್ಯಾಮ್ ಮತ್ತು ನಿರ್ಬಂಧಿಸಲಾದ ಕರೆಗಳು"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ಯಾವುದೇ ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳಿಲ್ಲ"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>
+    <string name="blockList" msgid="285204949255078310">"ಪಟ್ಟಿಯನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ಅಮಾನ್ಯವಾಗಿದೆ."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ಈಗಾಗಲೇ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ಆನ್ ಮಾಡು"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸು"</string>

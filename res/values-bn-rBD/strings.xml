@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"দ্রুত প্রতিক্রিয়াগুলি"</string>
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"স্প্যাম এবং অবরুদ্ধ কলগুলি"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"নম্বর অবরোধ মুক্ত করুন"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"কোনো অবরুদ্ধ নম্বর নেই"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"একটি নম্বর যোগ করুন"</string>
+    <string name="blockList" msgid="285204949255078310">"কালো তালিকা"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> পরীক্ষা করা হচ্ছে"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> অবৈধ৷"</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ইতিমধ্যেই অববোধ করা রয়েছে৷"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"কলিং অ্যাকাউন্টগুলি"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"চালু করুন"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"অনুমতিগুলি সেট করুন"</string>
