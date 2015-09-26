@@ -368,6 +368,8 @@ public class Call {
     private String mLastForwardedNumber;
     private String mCallSubject;
 
+    private long mTimeAddedMs;
+
     private LogState mLogState = new LogState();
 
     /**
@@ -386,6 +388,8 @@ public class Call {
 
         updateFromTelecomCall();
         mTelecomCall.registerCallback(mTelecomCallCallback);
+
+        mTimeAddedMs = System.currentTimeMillis();
     }
 
     public android.telecom.Call getTelecomCall() {
@@ -513,6 +517,10 @@ public class Call {
         return mId;
     }
 
+    public long getTimeAddedMs() {
+        return mTimeAddedMs;
+    }
+
     public String getNumber() {
         if (mTelecomCall == null) {
             return null;
@@ -525,7 +533,6 @@ public class Call {
     }
 
     public void blockCall() {
-        // TODO: Some vibration still occurs.
         mTelecomCall.reject(false, null);
         setState(State.BLOCKED);
     }

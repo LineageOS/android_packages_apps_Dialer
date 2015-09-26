@@ -23,7 +23,7 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
-import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.contacts.common.GeoUtil;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 
 import java.util.Locale;
@@ -48,9 +48,7 @@ public class InCallServiceImpl extends InCallService {
 
     @Override
     public void onCallAdded(Call call) {
-        final String countryIso = TelephonyManagerUtils.getCurrentCountryIso(
-                getApplicationContext(),
-                Locale.getDefault());
+        final String countryIso = GeoUtil.getCurrentCountryIso(getApplicationContext());
         CallList.getInstance().onCallAdded(call, countryIso);
         InCallPresenter.getInstance().onCallAdded(call);
     }
