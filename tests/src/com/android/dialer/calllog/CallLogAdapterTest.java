@@ -35,6 +35,7 @@ import android.view.View;
 
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
+import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TestConstants;
 import com.google.common.collect.Lists;
 
@@ -344,7 +345,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
     public void testBindView_UriNumber() {
         createCallLogEntryWithCachedValues(
                 "sip:johndoe@gmail.com",
-                Calls.INCOMING_TYPE,
+                AppCompatConstants.CALLS_INCOMING_TYPE,
                 "John Doe",
                 Phone.TYPE_HOME,
                 TEST_DEFAULT_CUSTOM_LABEL,
@@ -404,7 +405,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
     public void testBindView_NumberOnlyDbCachedFormattedNumber() {
         createCallLogEntryWithCachedValues(
                 TEST_NUMBER,
-                Calls.INCOMING_TYPE,
+                AppCompatConstants.CALLS_INCOMING_TYPE,
                 EMPTY_STRING,
                 TEST_CACHED_NUMBER_TYPE,
                 TEST_CACHED_NUMBER_LABEL,
@@ -454,11 +455,17 @@ public class CallLogAdapterTest extends AndroidTestCase {
     }
 
     private void createPrivateCallLogEntry() {
-        createCallLogEntry(EMPTY_STRING, Calls.PRESENTATION_RESTRICTED, Calls.INCOMING_TYPE);
+        createCallLogEntry(
+                EMPTY_STRING,
+                Calls.PRESENTATION_RESTRICTED,
+                AppCompatConstants.CALLS_INCOMING_TYPE);
     }
 
     private void createUnknownCallLogEntry() {
-        createCallLogEntry(EMPTY_STRING, Calls.PRESENTATION_UNKNOWN, Calls.INCOMING_TYPE);
+        createCallLogEntry(
+                EMPTY_STRING,
+                Calls.PRESENTATION_UNKNOWN,
+                AppCompatConstants.CALLS_INCOMING_TYPE);
     }
 
     private void createVoicemailCallLogEntry() {
@@ -499,7 +506,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
      * It includes the values for the cached contact associated with the number.
      *
      * @param number The phone number.
-     * @param type Either Call.OUTGOING_TYPE or Call.INCOMING_TYPE or Call.MISSED_TYPE.
+     * @param type Valid value of {@code Calls.TYPE}.
      * @param cachedName The name of the contact with this number
      * @param cachedNumberType The type of the number, from the contact with this number.
      * @param cachedNumberLabel The label of the number, from the contact with this number.
@@ -555,7 +562,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         if (type != NO_VALUE_SET) {
             values[CallLogQuery.CALL_TYPE] = type;
         }
-        if (type == Calls.VOICEMAIL_TYPE) {
+        if (type == AppCompatConstants.CALLS_VOICEMAIL_TYPE) {
             values[CallLogQuery.VOICEMAIL_URI] = ContentUris.withAppendedId(
                     VoicemailContract.Voicemails.CONTENT_URI, mCursor.getCount());
         }

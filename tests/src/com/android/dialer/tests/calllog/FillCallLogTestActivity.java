@@ -55,6 +55,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.dialer.tests.R;
+import com.android.dialer.util.AppCompatConstants;
 
 import java.util.Calendar;
 import java.util.List;
@@ -70,7 +71,9 @@ public class FillCallLogTestActivity extends Activity {
 
     private static final Random RNG = new Random();
     private static final int[] CALL_TYPES = new int[] {
-        Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE, Calls.MISSED_TYPE,
+        AppCompatConstants.CALLS_INCOMING_TYPE,
+        AppCompatConstants.CALLS_OUTGOING_TYPE,
+        AppCompatConstants.CALLS_MISSED_TYPE
     };
 
     private TextView mNumberTextView;
@@ -394,15 +397,15 @@ public class FillCallLogTestActivity extends Activity {
      */
     private int getManualCallType() {
         if (mCallTypeIncoming.isChecked()) {
-            return Calls.INCOMING_TYPE;
+            return AppCompatConstants.CALLS_INCOMING_TYPE;
         } else if (mCallTypeOutgoing.isChecked()) {
-            return Calls.OUTGOING_TYPE;
+            return AppCompatConstants.CALLS_OUTGOING_TYPE;
         } else if (mCallTypeVoicemail.isChecked()) {
-            return Calls.VOICEMAIL_TYPE;
+            return AppCompatConstants.CALLS_VOICEMAIL_TYPE;
         } else if (mCallTypeCustom.isChecked()) {
             return Integer.parseInt(mCustomCallTypeTextView.getText().toString());
         } else {
-            return Calls.MISSED_TYPE;
+            return AppCompatConstants.CALLS_MISSED_TYPE;
         }
     }
 
@@ -524,7 +527,7 @@ public class FillCallLogTestActivity extends Activity {
             dataUsage = (long) RNG.nextInt(52428800);
         }
 
-        if (getManualCallType() == Calls.VOICEMAIL_TYPE) {
+        if (getManualCallType() == AppCompatConstants.CALLS_VOICEMAIL_TYPE) {
             addManualVoicemail(dateTime.getTimeInMillis());
         } else {
             addCall(mPhoneNumber.getText().toString(), getManualPresentation(),
@@ -594,7 +597,7 @@ public class FillCallLogTestActivity extends Activity {
         values.put("phone_account_address", accountAddress);
         values.put(Calls.NEW, Integer.valueOf(1));
 
-        if (callType == Calls.MISSED_TYPE) {
+        if (callType == AppCompatConstants.CALLS_MISSED_TYPE) {
             values.put(Calls.IS_READ, 0);
         }
 

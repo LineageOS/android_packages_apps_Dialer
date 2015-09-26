@@ -36,6 +36,7 @@ import android.util.Log;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
@@ -180,7 +181,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             selectionArgs.add(Integer.toString(callType));
         } else {
             where.append(" AND NOT ");
-            where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");
+            where.append("(" + Calls.TYPE + " = " + AppCompatConstants.CALLS_VOICEMAIL_TYPE + ")");
         }
 
         if (newerThan > 0) {
