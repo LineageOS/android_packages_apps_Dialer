@@ -59,7 +59,7 @@
         android:text="@string/add_custom_entry"
         />
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
@@ -92,6 +92,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/call_type_voicemail"
                 android:textSize="9sp" />
+            <RadioButton
+                android:id="@+id/call_type_custom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custom"
+                android:textSize="9sp" />
+            <EditText
+                android:id="@+id/call_type_custom_text"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:inputType="number" />
         </RadioGroup>
         <CheckBox
             android:id="@+id/call_type_video"

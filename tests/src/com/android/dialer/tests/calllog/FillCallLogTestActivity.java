@@ -42,6 +42,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -80,6 +81,8 @@ public class FillCallLogTestActivity extends Activity {
     private RadioButton mCallTypeMissed;
     private RadioButton mCallTypeOutgoing;
     private RadioButton mCallTypeVoicemail;
+    private RadioButton mCallTypeCustom;
+    private EditText mCustomCallTypeTextView;
     private CheckBox mCallTypeVideo;
     private RadioButton mPresentationAllowed;
     private RadioButton mPresentationRestricted;
@@ -134,6 +137,8 @@ public class FillCallLogTestActivity extends Activity {
         mCallTypeMissed = (RadioButton) findViewById(R.id.call_type_missed);
         mCallTypeOutgoing = (RadioButton) findViewById(R.id.call_type_outgoing);
         mCallTypeVoicemail = (RadioButton) findViewById(R.id.call_type_voicemail);
+        mCallTypeCustom = (RadioButton) findViewById(R.id.call_type_custom);
+        mCustomCallTypeTextView = (EditText) findViewById(R.id.call_type_custom_text);
         mCallTypeVideo = (CheckBox) findViewById(R.id.call_type_video);
         mPresentationAllowed = (RadioButton) findViewById(R.id.presentation_allowed);
         mPresentationPayphone = (RadioButton) findViewById(R.id.presentation_payphone);
@@ -145,6 +150,14 @@ public class FillCallLogTestActivity extends Activity {
         mOffset = (EditText) findViewById(R.id.delta_after_add);
         mAccount0 = (RadioButton) findViewById(R.id.account0);
         mAccount1 = (RadioButton) findViewById(R.id.account1);
+
+        mCustomCallTypeTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mCallTypeCustom.toggle();
+                return false;
+            }
+        });
 
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
@@ -386,6 +399,8 @@ public class FillCallLogTestActivity extends Activity {
             return Calls.OUTGOING_TYPE;
         } else if (mCallTypeVoicemail.isChecked()) {
             return Calls.VOICEMAIL_TYPE;
+        } else if (mCallTypeCustom.isChecked()) {
+            return Integer.parseInt(mCustomCallTypeTextView.getText().toString());
         } else {
             return Calls.MISSED_TYPE;
         }
