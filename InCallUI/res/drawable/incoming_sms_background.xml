@@ -17,9 +17,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners
-        android:topLeftRadius="@dimen/contact_call_content_message_background_main_radius"
-        android:topRightRadius="@dimen/contact_call_content_message_background_main_radius"
-        android:bottomRightRadius="@dimen/contact_call_content_message_background_main_radius"
-        android:bottomLeftRadius="@dimen/contact_call_content_message_background_accent_radius"/>
-    <solid android:color="@color/contact_call_context_message_background_color" />
+        android:topLeftRadius="@dimen/person_contact_context_message_background_main_radius"
+        android:topRightRadius="@dimen/person_contact_context_message_background_main_radius"
+        android:bottomRightRadius="@dimen/person_contact_context_message_background_main_radius"
+        android:bottomLeftRadius="@dimen/person_contact_context_message_background_accent_radius"/>
+    <solid android:color="@color/person_contact_context_message_background_color" />
 </shape>
