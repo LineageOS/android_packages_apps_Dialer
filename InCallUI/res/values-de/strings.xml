@@ -23,7 +23,7 @@
     <string name="private_num" msgid="6713286113000232309">"Private Nummer"</string>
     <string name="payphone" msgid="4793877574636445118">"Münztelefon"</string>
     <string name="confCall" msgid="1904840547188336828">"Telefonkonferenz"</string>
-    <string name="call_lost" msgid="6183862117003999578">"Anruf abgebrochen"</string>
+    <string name="call_lost" msgid="6183862117003999578">"Verbindung unterbrochen"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Lautsprecher"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Handy-Kopfhörer"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Kabelgebundenes Headset"</string>
