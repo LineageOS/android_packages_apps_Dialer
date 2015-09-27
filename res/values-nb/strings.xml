@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtigsvar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Anrop"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Nettsøppel og blokkerte anrop"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Opphev blokkeringen av nummeret"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Ingen blokkerte numre"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Legg til nummer"</string>
+    <string name="blockList" msgid="285204949255078310">"Blokkeringsliste"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Sjekker <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> er ugyldig."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> er allerede blokkert."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Ringekontoer"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Slå på"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Angi tillatelser"</string>

@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Réponses rapides"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Appels"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Pourriel et appels bloqués"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Débloquer le numéro"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Aucun numéro bloqué"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Ajouter un numéro"</string>
+    <string name="blockList" msgid="285204949255078310">"Liste de blocage"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Vérification du numéro <xliff:g id="NUMBER">%1$s</xliff:g> en cours..."</string>
+    <string name="invalidNumber" msgid="619058581062192851">"Le numéro <xliff:g id="NUMBER">%1$s</xliff:g> n\'est pas valide."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"Le numéro <xliff:g id="NUMBER">%1$s</xliff:g> est déjà bloqué."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Comptes d\'appel"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Activer"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Définir les autorisations"</string>

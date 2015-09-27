@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Erantzun bizkorrak"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Deiak"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spama eta dei blokeatuak"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desblokeatu zenbakia"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Ez dago zenbaki blokeaturik"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Gehitu zenbakia"</string>
+    <string name="blockList" msgid="285204949255078310">"Dei blokeatuen zerrenda"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> egiaztatzen ari gara"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> zenbakiak ez du balio."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> blokeatuta dago dagoeneko."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Deiak egiteko kontuak"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktibatu"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ezarri baimenak"</string>

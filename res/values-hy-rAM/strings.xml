@@ -207,6 +207,14 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Արագ պատասխաններ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Զանգեր"</string>
+    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Լցոն և արգելափակված զանգեր"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Արգելաբացել համարը"</string>
+    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Արգելափակված համարներ չկան"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Ավելացնել համար"</string>
+    <string name="blockList" msgid="285204949255078310">"Արգելափակումների ցանկ"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> համարի ստուգում"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը սխալ է:"</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> համարն արդեն արգելափակված է:"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Հաշիվներ զանգերի համար"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Միացնել"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Թույլտվությունների սահմանում"</string>
