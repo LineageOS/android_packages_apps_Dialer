@@ -96,7 +96,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"در حال روشن کردن رادیو..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"سرویسی در دسترس نیست. دوباره امتحان کنید..."</string>
     <string name="dial_emergency_error" msgid="1509085166367420355">"نمی‌توانید تماس بگیرید. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> یک شماره اضطراری نیست."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی‌ توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"استفاده از صفحه‌کلید برای شماره گیری"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"نگه داشتن تماس"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"از سرگیری تماس"</string>
