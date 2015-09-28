@@ -51,6 +51,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
+import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
@@ -63,7 +64,7 @@ import java.util.Locale;
 /**
  * Main activity that the user interacts with while in a live call.
  */
-public class InCallActivity extends Activity implements FragmentDisplayManager {
+public class InCallActivity extends TransactionSafeActivity implements FragmentDisplayManager {
 
     public static final String TAG = InCallActivity.class.getSimpleName();
 
@@ -84,7 +85,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     private ConferenceManagerFragment mConferenceManagerFragment;
     private FragmentManager mChildFragmentManager;
 
-    private boolean mIsVisible;
     private AlertDialog mDialog;
 
     /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
@@ -239,7 +239,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
 
     @Override
     protected void onSaveInstanceState(Bundle out) {
-        mIsVisible = false;
         // TODO: The dialpad fragment should handle this as part of its own state
         out.putBoolean(SHOW_DIALPAD_EXTRA,
                 mCallButtonFragment != null && mCallButtonFragment.isDialpadVisible());
@@ -253,8 +252,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     protected void onStart() {
         Log.d(this, "onStart()...");
         super.onStart();
-
-        mIsVisible = true;
 
         if (mOrientationEventListener.canDetectOrientation()) {
             Log.v(this, "Orientation detection enabled.");
@@ -314,7 +311,6 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     @Override
     protected void onStop() {
         Log.d(this, "onStop()...");
-        mIsVisible = false;
         InCallPresenter.getInstance().updateIsChangingConfigurations();
         InCallPresenter.getInstance().onActivityStopped();
         mOrientationEventListener.disable();
@@ -353,10 +349,10 @@ public class InCallActivity extends Activity implements FragmentDisplayManager {
     }
 
     /**
-     * Returns true when the Activity is currently visible (between onStart and onStop).
+     * Returns true when the Activity is currently visible.
      */
     /* package */ boolean isVisible() {
-        return mIsVisible;
+        return isSafeToCommitTransactions();
     }
 
     private boolean hasPendingDialogs() {
