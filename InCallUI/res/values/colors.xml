@@ -115,4 +115,5 @@
     <color name="contact_call_context_message_text_color">@color/dialer_theme_color</color>
     <color name="contact_call_context_message_background_color">@color/incall_call_banner_subtext_color</color>
     <color name="contact_call_context_detail_text_color">@color/incall_call_banner_subtext_color</color>
+    <color name="business_call_context_text_color">@color/incall_call_banner_subtext_color</color>
 </resources>
