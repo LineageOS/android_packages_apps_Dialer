@@ -148,6 +148,13 @@
                   android:exported="false">
         </activity>
 
+        <activity android:name="com.android.dialer.filterednumber.BlockedNumberSearchActivity"
+            android:label="@string/dialer_settings_label"
+            android:parentActivityName="com.android.dialer.settings.DialerSettingsActivity"
+            android:theme="@style/DialtactsActivityTheme"
+            android:windowSoftInputMode="stateVisible">
+        </activity>
+
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
             android:theme="@style/DialtactsThemeWithoutActionBarOverlay"

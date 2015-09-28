@@ -31,7 +31,7 @@ import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
  * List adapter to display regular search results.
  */
 public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
-    private boolean mIsQuerySipAddress;
+    protected boolean mIsQuerySipAddress;
 
     public RegularSearchListAdapter(Context context) {
         super(context);
@@ -84,16 +84,20 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
                 && hasDigitsInQueryString();
         mIsQuerySipAddress = PhoneNumberHelper.isUriNumber(queryString);
 
+        if (isChanged(showNumberShortcuts)) {
+            notifyDataSetChanged();
+        }
+        super.setQueryString(queryString);
+    }
+
+    protected boolean isChanged(boolean showNumberShortcuts) {
         boolean changed = false;
         changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL,
                 showNumberShortcuts || mIsQuerySipAddress);
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
-        if (changed) {
-            notifyDataSetChanged();
-        }
-        super.setQueryString(queryString);
+        return changed;
     }
 
     /**

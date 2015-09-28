@@ -470,6 +470,10 @@
          [CHAR LIMIT=30] -->
     <string name="dialer_hint_find_contact">Search contacts</string>
 
+    <!-- Hint displayed in add blocked number search box when there is no query typed.
+         [CHAR LIMIT=30] -->
+    <string name="block_number_search_hint">Add number or search contacts</string>
+
     <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
     <string name="call_log_activity_title_font_family">sans-serif-light</string>
@@ -558,6 +562,9 @@
 
     <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
     <string name="search_shortcut_make_video_call">Make video call</string>
+
+    <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
+    <string name="search_shortcut_block_number">Block number</string>
 
     <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
     <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
