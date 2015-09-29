@@ -15,26 +15,19 @@
  */
 package com.android.dialer.filterednumber;
 
-import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.contacts.common.GeoUtil;
-import com.android.contacts.common.dialog.IndeterminateProgressDialog;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.database.FilteredNumberContract;
 
 public class BlockedNumberFragment extends ListFragment implements
@@ -105,50 +98,6 @@ public class BlockedNumberFragment extends ListFragment implements
 
     @Override
     public void onClick(final View v) {
-        final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
-        final EditText numberField = new EditText(getContext());
-        final DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                final String number = numberField.getText().toString();
-                final IndeterminateProgressDialog progressDialog =
-                        IndeterminateProgressDialog.show(getFragmentManager(),
-                                getString(R.string.checkingNumber, number), null, 1000);
-                final String normalizedNumber =
-                        FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
-                if (normalizedNumber == null) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    final OnCheckBlockedListener onCheckListener = new OnCheckBlockedListener() {
-                        @Override
-                        public void onCheckComplete(Integer id) {
-                            progressDialog.dismiss();
-                            if (id == null) {
-                                FilterNumberDialogFragment newFragment =
-                                        FilterNumberDialogFragment.newInstance(id, normalizedNumber,
-                                                number, countryIso, number);
-                                newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
-                                newFragment.setParentView(v);
-                                newFragment.show(getActivity().getFragmentManager(),
-                                        FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
-                            } else {
-                                Toast.makeText(getContext(),
-                                        getString(R.string.alreadyBlocked, number),
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    };
-                    mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                            onCheckListener, normalizedNumber, number, countryIso);
-                }
-            }
-        };
-        new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.blockNumber))
-                .setView(numberField)
-                .setPositiveButton(getString(R.string.blockNumberOk), okListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .show();
+        startActivity(new Intent(getActivity(), BlockedNumberSearchActivity.class));
     }
 }

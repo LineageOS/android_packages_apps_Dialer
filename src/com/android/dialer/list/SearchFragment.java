@@ -106,8 +106,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         try {
             mActivityScrollListener = (OnListFragmentScrolledListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnListFragmentScrolledListener");
+            Log.d(TAG, activity.toString() + " doesn't implement OnListFragmentScrolledListener. " +
+                    "Ignoring.");
         }
     }
 
@@ -144,7 +144,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
+                if (mActivityScrollListener != null) {
+                    mActivityScrollListener.onListFragmentScrollStateChange(scrollState);
+                }
             }
 
             @Override

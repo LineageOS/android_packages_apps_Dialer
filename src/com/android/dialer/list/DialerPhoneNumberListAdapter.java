@@ -33,8 +33,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public final static int SHORTCUT_ADD_TO_EXISTING_CONTACT = 2;
     public final static int SHORTCUT_SEND_SMS_MESSAGE = 3;
     public final static int SHORTCUT_MAKE_VIDEO_CALL = 4;
+    public final static int SHORTCUT_BLOCK_NUMBER = 5;
 
-    public final static int SHORTCUT_COUNT = 5;
+    public final static int SHORTCUT_COUNT = 6;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
@@ -166,6 +167,10 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             case SHORTCUT_MAKE_VIDEO_CALL:
                 text = resources.getString(R.string.search_shortcut_make_video_call);
                 drawableId = R.drawable.ic_videocam;
+                break;
+            case SHORTCUT_BLOCK_NUMBER:
+                text = resources.getString(R.string.search_shortcut_block_number);
+                drawableId = R.drawable.ic_not_interested_googblue_24dp;
                 break;
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");
