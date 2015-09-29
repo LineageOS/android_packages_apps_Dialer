@@ -116,6 +116,8 @@ public class CallList {
                             } else {
                                 mFilteredQueryHandler.incrementFilteredCount(id);
                                 call.blockCall();
+                                Log.d(this, "onCallAdded: "
+                                        + Log.pii(call.getNumber()) + " blocked.");
                             }
                         }
                     }, null, call.getNumber(), countryIso)) {
