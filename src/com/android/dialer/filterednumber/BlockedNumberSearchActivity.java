@@ -137,13 +137,12 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPickPhoneNumberAction(Uri dataUri, int callInitiationType) {
-        Log.w(TAG, "onPickPhoneNumberAction unsupported, ignoring.");
+    public void onPickDataUri(Uri dataUri, int callInitiationType) {
+        Log.w(TAG, "onPickDataUri unsupported, ignoring.");
     }
 
     @Override
-    public void onCallNumberDirectly(
-            String phoneNumber, boolean isVideoCall, int callInitiationType) {
+    public void onPickPhoneNumber(String phoneNumber, boolean isVideoCall, int callInitiationType) {
         blockNumber(phoneNumber);
     }
 

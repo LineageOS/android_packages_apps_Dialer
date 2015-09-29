@@ -47,12 +47,12 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 // Handles click on a search result, either contact or nearby places result.
                 number = adapter.getPhoneNumber(position);
-                listener.onCallNumberDirectly(number, false, getCallInitiationType(false));
+                listener.onPickPhoneNumber(number, false, getCallInitiationType(false));
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_BLOCK_NUMBER:
                 // Handles click on 'Block number' shortcut to add the user query as a number.
                 number = adapter.getQueryString();
-                listener.onCallNumberDirectly(number, false, getCallInitiationType(false));
+                listener.onPickPhoneNumber(number, false, getCallInitiationType(false));
                 break;
             default:
                 Log.w(TAG, "Ignoring unsupported shortcut type: " + shortcutType);

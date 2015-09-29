@@ -52,7 +52,6 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.incallui.Call.LogState;
 
@@ -116,7 +115,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         @Override
         public void onContactSelected(Uri contactUri, Rect targetRect) {
             if (mPhoneNumberPickerActionListener != null) {
-                mPhoneNumberPickerActionListener.onPickPhoneNumberAction(contactUri,
+                mPhoneNumberPickerActionListener.onPickDataUri(contactUri,
                         LogState.INITIATION_SPEED_DIAL);
             }
         }
@@ -124,7 +123,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         @Override
         public void onCallNumberDirectly(String phoneNumber) {
             if (mPhoneNumberPickerActionListener != null) {
-                mPhoneNumberPickerActionListener.onCallNumberDirectly(phoneNumber,
+                mPhoneNumberPickerActionListener.onPickPhoneNumber(phoneNumber,
                         false /* isVideoCall */, LogState.INITIATION_SPEED_DIAL);
             }
         }
