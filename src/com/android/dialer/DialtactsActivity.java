@@ -1252,15 +1252,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public void onPickPhoneNumberAction(Uri dataUri, int callInitiationType) {
+    public void onPickDataUri(Uri dataUri, int callInitiationType) {
         mClearSearchOnPause = true;
         PhoneNumberInteraction.startInteractionForPhoneCall(
                 DialtactsActivity.this, dataUri, callInitiationType);
     }
 
     @Override
-    public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall,
-            int callInitiationType) {
+    public void onPickPhoneNumber(String phoneNumber, boolean isVideoCall, int callInitiationType) {
         if (phoneNumber == null) {
             // Invalid phone number, but let the call go through so that InCallUI can show
             // an error message.
