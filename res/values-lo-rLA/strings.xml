@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ບໍ່​ສາ​ມາດ​ໂທ​ໄດ​້​ເນື່ອງ​ຈາກ​ແອັບ​ພ​ລິ​ເຄ​ຊັນ​ໂທ​ລະ​ສັບ​ຖືກ​ປິດ​ການ​ນຳ​ໃຊ້​ໄວ້."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ບໍ່​ມີ​ແອັ​ບຯ​ສຳ​ລັບ​ສິ່ງນັ້ນ​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ນີ້"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"ຊອກຫາລາຍຊື່ຜູ່ຕິດຕໍ່"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"ປະ​ຫວັດ​ການ​ໂທ​ຂອງ​ທ່ານ​ຫວ່າງ​ເປົ່າ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"​ໂທ​ອອກ"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"ທ່ານ​ມີ​ສາຍ​ບໍ່​ໄດ້​ຮັບ."</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ເພີ່ມ​ໃສ່​ລາຍ​ຊື່"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ສົ່ງ SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"​ໂທ​ອອກ​ດ້ວຍ​ວິ​ດີ​ໂອ"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ສາຍທີ່ບໍ່ໄດ້ຮັບໃໝ່"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"ບໍ່​ມີ​ຜູ້​ໃດ​ຢູ່​ໃນ​ການ​ໂທ​ດ່ວນ​ຂອງ​ທ່ານ​ເທື່ອ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ເພີ່ມ​ລາຍ​ການ​ທີ່​ມັກ"</string>

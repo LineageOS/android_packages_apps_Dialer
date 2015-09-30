@@ -130,6 +130,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"फोन अनुप्रयोग अक्षम केला गेला असल्याने फोन कॉल करणे शक्य नाही."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"या डिव्हाइसवर त्यासाठी कोणताही अॅप नाही"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"संपर्क शोधा"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"नंबर जोडा किंवा संपर्क शोधा"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"आपला कॉल इतिहास रिक्त आहे"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"एक कॉल करा"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"आपल्‍याकडे कोणतेही सुटलेले कॉल नाहीत."</string>
@@ -154,6 +155,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"संपर्कांमध्‍ये जोडा"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS पाठवा"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"व्‍हिडिओ कॉल करा"</string>
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"नंबर अवरोधित करा"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> नवीन सुटलेले कॉल"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"अद्याप आपल्‍या स्पीड डायलवर कोणीही नाही"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"एक आवडते जोडा"</string>

@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Утас аппликешныг идэвхгүйжүүлсэн тул утасны дуудлага хийх боломжгүй."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Энэхүү төхөөрөмж дээр тухайн үйлдлийг гүйцэтгэх апликейшн байхгүй байна."</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Харилцагч хайх"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"Таны дуудлагын түүх хоосон байна"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Дуудлага хийх"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Танд аваагүй дуудлага байхгүй байна."</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Харилцагчийн хаягт нэмэх"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Мессеж илгээх"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Видео дуудлага хийх"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> шинэ аваагүй дуудлага"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Таны яаралтай залгах тохиргоон дээр одоогоор харилцагч байхгүй байна"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Таалагдсан хэсэгт нэмэх"</string>

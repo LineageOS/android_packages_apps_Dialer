@@ -130,6 +130,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Es kann kein Anruf getätigt werden, da die App \"Telefon\" deaktiviert wurde."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Keine entsprechende App auf diesem Gerät"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"In Kontakten suchen"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Nummer hinzufügen oder in Kontakten suchen"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Ihre Anrufliste ist leer."</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Anrufen"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Keine verpassten Anrufe"</string>
@@ -154,6 +155,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Zu Kontakt hinzufügen"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS senden"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videoanruf starten"</string>
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Nummer blockieren"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> neue verpasste Anrufe"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Sie haben noch für niemanden eine Kurzwahl festgelegt."</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Favoriten hinzufügen"</string>

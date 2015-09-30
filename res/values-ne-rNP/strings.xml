@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"फोन अनुप्रयोग असक्षम गरिएकोले फोन गर्न सकिँदैन।"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"यस यन्त्रमा त्यसका लागि कुनै पनि अनुप्रयोग छैन"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"सम्पर्क ठेगानाहरू खोज्नुहोस्"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"तपाईँको कल इतिहास खाली छ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"कल गर्नुहोस्"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"तपाईँसँग कुनै पनि छुटेका कलहरू छैनन्।"</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"सम्पर्कमा थप्नुहोस्"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS पठाउनुहोस्"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"भिडियो कल बनाउनुहोस्"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> नयाँ छुटेका कलहरु"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"तपाईँको स्पिड डायलमा अझसम्म कोही छैन"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"एक मनपर्ने थप्नुहोस्"</string>

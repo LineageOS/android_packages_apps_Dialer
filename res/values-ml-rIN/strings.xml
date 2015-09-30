@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"അതിനായി ഈ ഉപകരണത്തിൽ അപ്ലിക്കേഷനുകളൊന്നുമില്ല"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"കോണ്‍‌ടാക്റ്റുകള്‍ തിരയുക"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"നിങ്ങളുടെ കോൾ ചരിത്രം ശൂന്യമാണ്"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ഒരു കോൾ ചെയ്യുക"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"നിങ്ങൾക്ക് മിസ്‌ഡ് കോളുകളൊന്നുമില്ല."</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS അയയ്ക്കുക"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> പുതിയ മിസ്‌ഡ് കോളുകൾ"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"ഇതുവരെ ആരും നിങ്ങളുടെ സ്പീഡ് ഡയലിൽ ഇല്ല"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"പ്രിയപ്പെട്ടത് ചേർക്കുക"</string>

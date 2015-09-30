@@ -132,6 +132,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Нельзя совершать телефонные звонки, поскольку приложение \"Телефон\" отключено."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"На устройстве нет подходящего приложения"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Поиск в контактах"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"В журнале пока нет звонков."</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Вызов"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Нет пропущенных вызовов"</string>
@@ -156,6 +158,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Добавить к контакту"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Отправить SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Начать видеовстречу"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"Пропущенных вызовов: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Нет номеров для быстрого набора"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Настроить быстрый набор"</string>

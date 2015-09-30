@@ -130,6 +130,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Det er ikke muligt at foretage et telefonopkald, fordi applikationen Telefon er deaktiveret."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Der findes Ingen app til det på denne enhed"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Søg efter kontaktpersoner"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Tilføj nummer, eller søg i kontaktpersoner"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Din opkaldshistorik er tom"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Foretag et opkald"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Du har ingen ubesvarede opkald."</string>
@@ -154,6 +155,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Føj til en kontaktperson"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Send sms"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Foretag videoopkald"</string>
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Bloker nummer"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nye ubesvarede opkald"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Der er endnu ingen kontaktpersoner i Hurtigopkald"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Angiv en kontaktperson som foretrukken"</string>

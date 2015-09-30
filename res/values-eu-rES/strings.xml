@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Ezin da telefono-deirik egin Telefonoa aplikazioa desgaitu egin delako."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Ez dago hori egin dezakeen aplikaziorik gailu honetan"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Bilatu kontaktuetan"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"Hutsik dago deien historia"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Deitu"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Ez duzu galdutako deirik."</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Gehitu kontaktuetan"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Bidali SMS mezua"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Egin bideo-deia"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> dei galdu berri"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Ez duzu inor markatze bizkorrean oraindik"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Gehitu gogokoak"</string>

@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Ekki er hægt að hringja vegna þess að forritið Sími hefur verið gert óvirkt."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Ekkert forrit fyrir þetta er í tækinu"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Leita að tengiliðum"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"Símtalaferillinn er auður"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Hringja símtal"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Þú ert ekki með nein ósvöruð símtöl."</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Bæta við tengilið"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Senda SMS-skilaboð"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Hringja myndsímtal"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ný ósvöruð símtöl"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Þú ert ekki með neinn í hraðvali enn sem komið er"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Bæta uppáhaldi við"</string>

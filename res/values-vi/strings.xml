@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Không thể thực hiện cuộc gọi điện thoại vì ứng dụng Điện thoại đã bị tắt."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Không có ứng dụng nào cho thao tác đó trên thiết bị này"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Tìm kiếm liên hệ"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"Nhật ký cuộc gọi của bạn trống"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Gọi điện"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Bạn không có cuộc gọi nhỡ nào."</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Thêm vào liên hệ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Gửi SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Gọi điện video"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> cuộc gọi nhỡ mới"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Chưa có ai trong danh bạ quay số nhanh của bạn"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Thêm liên hệ quay số nhanh yêu thích"</string>

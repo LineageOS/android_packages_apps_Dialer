@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ไม่สามารถโทรศัพท์ได้เนื่องจากแอปพลิเคชันโทรศัพท์ถูกปิดใช้งาน"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ไม่มีแอปสำหรับการทำงานนั้นบนอุปกรณ์นี้"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"ค้นหารายชื่อติดต่อ"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"ประวัติการโทรว่างเปล่า"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"โทรออก"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"คุณไม่มีสายที่ไม่ได้รับ"</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"เพิ่มในรายชื่อติดต่อ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ส่ง SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ใช้แฮงเอาท์วิดีโอ"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"สายที่ไม่ได้รับใหม่ <xliff:g id="NUMBER">%s</xliff:g> สาย"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"ยังไม่ได้กำหนดผู้ใดในการโทรด่วน"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"เพิ่มรายการโปรด"</string>

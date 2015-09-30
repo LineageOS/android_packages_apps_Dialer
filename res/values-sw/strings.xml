@@ -130,6 +130,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Haiwezi kupiga simu kwa sababu programu ya Simu imezimwa."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Hakuna programu kwa ajili ya hiyo kwenye kifaa hiki"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Tafuta anwani"</string>
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
     <string name="call_log_all_empty" msgid="8357417710416340920">"Rekodi yako ya simu zilizopigwa haina chochote"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Piga simu"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Huna simu ulizokosa kupokea"</string>
@@ -154,6 +156,8 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Ongeza kwenye anwani"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Tuma SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Piga Hangout ya video"</string>
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
     <string name="num_missed_calls" msgid="8081736535604293886">"Simu <xliff:g id="NUMBER">%s</xliff:g> za karibuni ambazo hazikujibiwa"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Hakuna mtu aliye katika orodha yako ya watu unaowasiliana nao zaidi"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ongeza kipendwa"</string>
