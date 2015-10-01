@@ -471,7 +471,7 @@
     <string name="dialer_hint_find_contact">Search contacts</string>
 
     <!-- Hint displayed in add blocked number search box when there is no query typed.
-         [CHAR LIMIT=30] -->
+         [CHAR LIMIT=40] -->
     <string name="block_number_search_hint">Add number or search contacts</string>
 
     <!-- String resource for the font-family to use for the call log activity's title

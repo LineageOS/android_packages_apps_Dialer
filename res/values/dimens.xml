@@ -153,5 +153,5 @@
     <dimen name="blocked_number_primary_text_size">16sp</dimen>
     <dimen name="blocked_number_secondary_text_size">12sp</dimen>
     <dimen name="blocked_number_delete_icon_size">32dp</dimen>
-    <dimen name="blocked_number_search_text_size">16sp</dimen>
+    <dimen name="blocked_number_search_text_size">14sp</dimen>
 </resources>
