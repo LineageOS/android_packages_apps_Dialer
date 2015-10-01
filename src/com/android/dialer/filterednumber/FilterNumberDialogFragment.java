@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,8 @@ import android.view.View;
 
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
 
 public class FilterNumberDialogFragment extends DialogFragment {
     public static final String BLOCK_DIALOG_FRAGMENT = "blockUnblockNumberDialog";
@@ -40,6 +43,23 @@ public class FilterNumberDialogFragment extends DialogFragment {
 
     private FilteredNumberAsyncQueryHandler mHandler;
     private View mParentView;
+    private OnBlockListener mOnBlockListener;
+    private OnUndoBlockListener mOnUndoBlockListener;
+
+    public interface OnBlockListener {
+        /**
+         * Invoked after inserting a blocked number.
+         * @param uri The uri of the newly created row.
+         */
+        public void onBlockComplete(Uri uri);
+    }
+
+    public interface OnUndoBlockListener {
+        /**
+         * Invoked on undoing the blocking of a number.
+         */
+        public void onUndoBlockComplete();
+    }
 
     public void setQueryHandler (FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
         mHandler = filteredNumberAsyncQueryHandler;
@@ -47,6 +67,14 @@ public class FilterNumberDialogFragment extends DialogFragment {
 
     public void setParentView(View view) {
         mParentView = view;
+    }
+
+    public void setOnBlockListener(OnBlockListener listener) {
+        mOnBlockListener = listener;
+    }
+
+    public void setOnUndoBlockListener(OnUndoBlockListener listener) {
+        mOnUndoBlockListener = listener;
     }
 
     public static FilterNumberDialogFragment newInstance(Integer blockId, String normalizedNumber,
@@ -95,50 +123,62 @@ public class FilterNumberDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    public void blockNumber() {
-        final String displayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
-        final String message = getString(R.string.snackbar_number_blocked, displayNumber);
-        final String undoMessage = getString(R.string.snackbar_number_unblocked, displayNumber);
-        final FilteredNumberAsyncQueryHandler.OnUnblockNumberListener undoListener =
-                new FilteredNumberAsyncQueryHandler.OnUnblockNumberListener() {
-                    @Override
-                    public void onUnblockComplete(int rows, ContentValues values) {
-                        Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
-                    }
-                };
+    private String getBlockedMessage(String displayNumber) {
+        return getString(R.string.snackbar_number_blocked, displayNumber);
+    }
 
-        mHandler.blockNumber(
-                new FilteredNumberAsyncQueryHandler.OnBlockNumberListener() {
-                    @Override
-                    public void onBlockComplete(final Uri uri) {
-                        Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
-                                .setAction(R.string.block_number_undo,
-                                        // Delete the newly created row on 'undo'.
-                                        new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                mHandler.unblock(undoListener, uri);
-                                            }
-                                        })
-                                .show();
-                    }
-                }, getArguments().getString(ARG_NORMALIZED_NUMBER),
+    private String getUnblockedMessage(String displayNumber) {
+        return getString(R.string.snackbar_number_unblocked, displayNumber);
+    }
+
+    private void blockNumber() {
+        final String displayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
+        final String message = getBlockedMessage(displayNumber);
+        final String undoMessage = getUnblockedMessage(displayNumber);
+        final OnUnblockNumberListener onUndoListener = new OnUnblockNumberListener() {
+            @Override
+            public void onUnblockComplete(int rows, ContentValues values) {
+                Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+                if (mOnUndoBlockListener != null) {
+                    mOnUndoBlockListener.onUndoBlockComplete();
+                }
+            }
+        };
+        final OnBlockNumberListener onBlockNumberListener = new OnBlockNumberListener() {
+            @Override
+            public void onBlockComplete(final Uri uri) {
+                Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.block_number_undo,
+                                // Delete the newly created row on 'undo'.
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mHandler.unblock(onUndoListener, uri);
+                                    }
+                                })
+                        .show();
+                if (mOnBlockListener != null) {
+                    mOnBlockListener.onBlockComplete(uri);
+                }
+            }
+        };
+        mHandler.blockNumber(onBlockNumberListener, getArguments().getString(ARG_NORMALIZED_NUMBER),
                 getArguments().getString(ARG_NUMBER), getArguments().getString(ARG_COUNTRY_ISO));
     }
 
-    public void unblockNumber() {
+    private void unblockNumber() {
         final String displayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
-        final String message = getString(R.string.snackbar_number_unblocked, displayNumber);
-        final String undoMessage = getString(R.string.snackbar_number_blocked, displayNumber);
-        final FilteredNumberAsyncQueryHandler.OnBlockNumberListener undoListener =
-                new FilteredNumberAsyncQueryHandler.OnBlockNumberListener() {
+        final String message = getUnblockedMessage(displayNumber);
+        final String undoMessage = getBlockedMessage(displayNumber);
+        final OnBlockNumberListener undoListener =
+                new OnBlockNumberListener() {
                     @Override
                     public void onBlockComplete(final Uri uri) {
                         Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
                     }
                 };
         mHandler.unblock(
-                new FilteredNumberAsyncQueryHandler.OnUnblockNumberListener() {
+                new OnUnblockNumberListener() {
                     @Override
                     public void onUnblockComplete(int rows, final ContentValues values) {
                         Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)

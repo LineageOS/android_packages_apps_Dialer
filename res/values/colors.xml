@@ -111,6 +111,7 @@
     <color name="delete_icon_tint">#6D6D6D</color>
     <color name="blocked_number_background">#E0E0E0</color>
     <color name="blocked_number_accent_color">#42A5F5</color>
+    <color name="blocked_number_block_color">#F44336</color>
 
     <!-- Colors for onboarding flow -->
     <color name="onboarding_primary_text_color">#ffffff</color>
