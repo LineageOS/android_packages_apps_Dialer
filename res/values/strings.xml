@@ -833,6 +833,21 @@
     <!-- Label for the blocked calls settings section [CHAR LIMIT=30] -->
     <string name="blocked_calls_settings_label">Spam and blocked calls</string>
 
+    <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
+         This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
+         and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
+    <string name="blocked_call_settings_import_description">
+        You previously marked some callers to be automatically sent to voicemail via other apps.
+    </string>
+
+    <!-- Labe for button to view numbers of contacts previous marked to be sent to voicemail.
+         [CHAR_LIMIT=20] -->
+    <string name="blocked_call_settings_view_numbers_button">View Numbers</string>
+
+    <!-- Label for button to import settings for sending contacts to voicemail into Dialer's block
+         list. [CHAR_LIMIT=20] -->
+    <string name="blocked_call_settings_import_button">Import</string>
+
     <!-- String describing the delete icon on a blocked number list item.
         When tapped, it will show a dialog confirming the unblocking of the number.
         [CHAR LIMIT=NONE]-->
