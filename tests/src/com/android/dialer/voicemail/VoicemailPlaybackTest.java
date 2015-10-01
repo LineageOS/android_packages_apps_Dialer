@@ -111,12 +111,9 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
             @Override
             public void run() {
                 mPresenter.resumePlayback();
+                assertStateTextContains("Loading voicemail");
             }
         });
-        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
-        getInstrumentation().waitForIdleSync();
-
-        assertStateTextContains("Loading voicemail");
     }
 
     public void testWhenCheckForContentCompletes() throws Throwable {
@@ -132,8 +129,7 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
         getInstrumentation().waitForIdleSync();
 
-        // Since the content is already fetched, don't show the loading message.
-        assertStateTextNotContains("Loading voicemail");
+        assertStateTextContains("Loading voicemail");
     }
 
     public void testInvalidVoicemailShowsErrorMessage() throws Throwable {
@@ -232,12 +228,12 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         }
     }
 
-    private void assertStateTextContains(String text) throws Throwable {
+    private void assertStateTextContains(String text) {
         assertNotNull(mLayout);
         assertTrue(mLayout.getStateText().contains(text));
     }
 
-    private void assertStateTextNotContains(String text) throws Throwable {
+    private void assertStateTextNotContains(String text) {
         assertNotNull(mLayout);
         assertFalse(mLayout.getStateText().contains(text));
     }
