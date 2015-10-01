@@ -40,6 +40,8 @@ import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -151,11 +153,21 @@ public class FillCallLogTestActivity extends Activity {
         mAccount0 = (RadioButton) findViewById(R.id.account0);
         mAccount1 = (RadioButton) findViewById(R.id.account1);
 
-        mCustomCallTypeTextView.setOnTouchListener(new View.OnTouchListener() {
+        mCustomCallTypeTextView.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing.
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Toggle the custom call type radio button if the text is changed/focused.
                 mCallTypeCustom.toggle();
-                return false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing.
             }
         });
 
