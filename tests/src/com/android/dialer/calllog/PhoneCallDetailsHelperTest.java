@@ -41,6 +41,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     /** The date of the call log entry. */
     private static final long TEST_DATE =
         new GregorianCalendar(2011, 5, 3, 13, 0, 0).getTimeInMillis();
+    private static final long INJECTED_CURRENT_DATE =
+        new GregorianCalendar(2011, 5, 4, 13, 0, 0).getTimeInMillis();
     /** A test duration value for phone calls. */
     private static final long TEST_DURATION = 62300;
     /** The number of the caller/callee in the log entry. */
@@ -73,8 +75,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         final TestTelecomCallLogCache phoneUtils = new TestTelecomCallLogCache(
                 mContext, TEST_VOICEMAIL_NUMBER);
         mHelper = new PhoneCallDetailsHelper(mContext, resources, phoneUtils);
-        mHelper.setCurrentTimeForTest(
-                new GregorianCalendar(2011, 5, 4, 13, 0, 0).getTimeInMillis());
+        mHelper.setCurrentTimeForTest(INJECTED_CURRENT_DATE);
         mViews = PhoneCallDetailsViews.createForTest(mContext);
         mNameView = new TextView(mContext);
         mLocaleTestUtils = new LocaleTestUtils(mContext);
@@ -111,10 +112,25 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertNameEqualsResource(R.string.voicemail);
     }
 
-    public void testSetPhoneCallDetails_Normal() {
-        setPhoneCallDetailsWithNumber("14125551212",
-                Calls.PRESENTATION_ALLOWED, "1-412-555-1212");
-        assertTrue(mViews.callLocationAndDate.getText().toString().contains("Yesterday"));
+    // Voicemail date string has 3 different formats depending on how long ago the call was placed
+    public void testSetVoicemailPhoneCallDetails_Today() {
+        setVoicemailPhoneCallDetailsWithDate(System.currentTimeMillis());
+        assertDateEquals("Today at");
+    }
+
+    public void testSetVoicemailPhoneCallDetails_WithinCurrentYear() {
+        mHelper.setCurrentTimeForTest(INJECTED_CURRENT_DATE);
+        String formattedTestDate = "Jun 3 at 1:00 PM";
+        setVoicemailPhoneCallDetailsWithDate(TEST_DATE);
+        assertDateEquals(formattedTestDate);
+    }
+
+    public void testSetVoicemailPhoneCallDetails_OutsideCurrentYear() {
+        mHelper.setCurrentTimeForTest(INJECTED_CURRENT_DATE);
+        long testDate = new GregorianCalendar(2009, 5, 3, 13, 0, 0).getTimeInMillis();
+        String formattedTestDate = "Jun 3, 2009 at 1:00 PM";
+        setVoicemailPhoneCallDetailsWithDate(testDate);
+        assertDateEquals(formattedTestDate);
     }
 
     /** Asserts that a char sequence is actually a Spanned corresponding to the expected HTML. */
@@ -300,7 +316,6 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
             assertEquals(id, mViews.callTypeIcons.getCallType(index));
         }
         assertEquals(View.VISIBLE, mViews.callTypeIcons.getVisibility());
-        assertTrue(mViews.callLocationAndDate.getText().toString().contains("Yesterday"));
     }
 
     /**
@@ -339,6 +354,13 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private void setPhoneCallDetailsWithDate(long date) {
         PhoneCallDetails details = getPhoneCallDetails();
         details.date = date;
+        mHelper.setPhoneCallDetails(mViews, details);
+    }
+
+    private void setVoicemailPhoneCallDetailsWithDate(long date) {
+        PhoneCallDetails details = getPhoneCallDetails();
+        details.date = date;
+        details.callTypes = new int[] {Calls.VOICEMAIL_TYPE};
         mHelper.setPhoneCallDetails(mViews, details);
     }
 

@@ -16,11 +16,11 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.collect.Lists;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telecom.PhoneAccount;
@@ -34,16 +34,15 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
-import com.android.dialer.util.PhoneNumberUtil;
-
-import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Helper class to fill in the views in {@link PhoneCallDetailsViews}.
  */
 public class PhoneCallDetailsHelper {
+
     /** The maximum number of icons will be shown to represent the call types in a group. */
     private static final int MAX_CALL_TYPE_ICONS = 3;
 
@@ -52,6 +51,9 @@ public class PhoneCallDetailsHelper {
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
     private final TelecomCallLogCache mTelecomCallLogCache;
+
+    /** Calendar used to construct dates */
+    private final Calendar mCalendar;
 
     /**
      * List of items to be concatenated together for accessibility descriptions
@@ -72,6 +74,7 @@ public class PhoneCallDetailsHelper {
         mContext = context;
         mResources = resources;
         mTelecomCallLogCache = telecomCallLogCache;
+        mCalendar = Calendar.getInstance();
     }
 
     /** Fills the call details views with content. */
@@ -178,6 +181,7 @@ public class PhoneCallDetailsHelper {
      * For a call, if there is an associated contact for the caller, return the known call type
      * (e.g. mobile, home, work).  If there is no associated contact, attempt to use the caller's
      * location if known.
+     *
      * @param details Call details to use.
      * @return Type of call (mobile/home) if known, or the location of the caller (if known).
      */
@@ -205,16 +209,62 @@ public class PhoneCallDetailsHelper {
     }
 
     /**
-     * Get the call date/time of the call, relative to the current time.
-     * e.g. 3 minutes ago
+     * Get the call date/time of the call. For the call log this is relative to the current time.
+     * e.g. 3 minutes ago. For voicemail, see {@link #getGranularDateTime(PhoneCallDetails)}
+     *
      * @param details Call details to use.
      * @return String representing when the call occurred.
      */
     public CharSequence getCallDate(PhoneCallDetails details) {
-        return DateUtils.getRelativeTimeSpanString(details.date,
-                getCurrentTimeMillis(),
-                DateUtils.MINUTE_IN_MILLIS,
-                DateUtils.FORMAT_ABBREV_RELATIVE);
+        if (details.callTypes[0] == Calls.VOICEMAIL_TYPE) {
+            return getGranularDateTime(details);
+        }
+
+        return DateUtils.getRelativeTimeSpanString(details.date, getCurrentTimeMillis(),
+                DateUtils.MINUTE_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE);
+    }
+
+    /**
+     * Get the granular version of the call date/time of the call. The result is always in the form
+     * 'DATE at TIME'. The date value changes based on when the call was created.
+     *
+     * If created today, DATE is 'Today'
+     * If created this year, DATE is 'MMM dd'
+     * Otherwise, DATE is 'MMM dd, yyyy'
+     *
+     * TIME is the localized time format, e.g. 'hh:mm a' or 'HH:mm'
+     *
+     * @param details Call details to use
+     * @return String representing when the call occurred
+     */
+    public CharSequence getGranularDateTime(PhoneCallDetails details) {
+        return mResources.getString(R.string.voicemailCallLogDateTimeFormat,
+                getGranularDate(details.date),
+                DateUtils.formatDateTime(mContext, details.date, DateUtils.FORMAT_SHOW_TIME));
+    }
+
+    /**
+     * Get the granular version of the call date. See {@link #getGranularDateTime(PhoneCallDetails)}
+     */
+    private String getGranularDate(long date) {
+        if (DateUtils.isToday(date)) {
+            return mResources.getString(R.string.voicemailCallLogToday);
+        }
+        return DateUtils.formatDateTime(mContext, date, DateUtils.FORMAT_SHOW_DATE
+                | DateUtils.FORMAT_ABBREV_MONTH
+                | (shouldShowYear(date) ? DateUtils.FORMAT_SHOW_YEAR : DateUtils.FORMAT_NO_YEAR));
+    }
+
+    /**
+     * Determines whether the year should be shown for the given date
+     *
+     * @return {@code true} if date is within the current year, {@code false} otherwise
+     */
+    private boolean shouldShowYear(long date) {
+        mCalendar.setTimeInMillis(getCurrentTimeMillis());
+        int currentYear = mCalendar.get(Calendar.YEAR);
+        mCalendar.setTimeInMillis(date);
+        return currentYear != mCalendar.get(Calendar.YEAR);
     }
 
     /** Sets the text of the header view for the details page of a phone call. */

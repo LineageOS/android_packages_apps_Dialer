@@ -424,6 +424,15 @@
     <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
     <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> min <xliff:g id="seconds" example="28">%s</xliff:g> sec</string>
 
+    <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
+         explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
+         current day -->
+    <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+
+    <!-- A format string used for displaying the date and time for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM
+         The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
+    <string name="voicemailCallLogDateTimeFormat"><xliff:g id="date" example="Jul 25, 2014">%1$s</xliff:g> at <xliff:g id="time" example="2:49 PM">%2$s</xliff:g></string>
+
     <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
     <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Can\'t call this number</string>
