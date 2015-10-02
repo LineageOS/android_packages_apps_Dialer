@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.R;
 
 /**
@@ -220,11 +221,12 @@ import com.android.dialer.R;
         int lastCallType = getLastCallType(callTypes);
         int stringID;
 
-        if (lastCallType == Calls.VOICEMAIL_TYPE || lastCallType == Calls.MISSED_TYPE) {
+        if (lastCallType == AppCompatConstants.CALLS_VOICEMAIL_TYPE
+                || lastCallType == AppCompatConstants.CALLS_MISSED_TYPE) {
             //Message: Missed call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
             //<PhoneAccount>.
             stringID = R.string.description_incoming_missed_call;
-        } else if (lastCallType == Calls.INCOMING_TYPE) {
+        } else if (lastCallType == AppCompatConstants.CALLS_INCOMING_TYPE) {
             //Message: Answered call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
             //<PhoneAccount>.
             stringID = R.string.description_incoming_answered_call;

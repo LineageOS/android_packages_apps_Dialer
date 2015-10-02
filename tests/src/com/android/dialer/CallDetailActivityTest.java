@@ -33,6 +33,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
+import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.FakeAsyncTaskExecutor;
 
@@ -121,7 +122,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         ContentValues values = new ContentValues();
         values.put(CallLog.Calls.NUMBER, CONTACT_NUMBER);
         values.put(CallLog.Calls.NUMBER_PRESENTATION, CallLog.Calls.PRESENTATION_ALLOWED);
-        values.put(CallLog.Calls.TYPE, CallLog.Calls.INCOMING_TYPE);
+        values.put(CallLog.Calls.TYPE, AppCompatConstants.CALLS_INCOMING_TYPE);
         mCallLogUri = contentResolver.insert(CallLog.Calls.CONTENT_URI, values);
         setActivityIntent(new Intent(Intent.ACTION_VIEW, mCallLogUri));
     }

@@ -31,6 +31,7 @@ import android.util.Log;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.PhoneNumberUtil;
@@ -45,6 +46,7 @@ public class CallLogAsyncTaskUtil {
     public enum Tasks {
         DELETE_VOICEMAIL,
         DELETE_CALL,
+        MARK_BLOCKED,
         MARK_VOICEMAIL_READ,
         GET_CALL_DETAILS,
     }
@@ -79,11 +81,30 @@ public class CallLogAsyncTaskUtil {
         static final int TRANSCRIPTION_COLUMN_INDEX = 11;
     }
 
+    private static class CallLogMarkBlockedQuery {
+        static final String[] PROJECTION = new String[] {
+            CallLog.Calls._ID,
+            CallLog.Calls.DATE
+        };
+
+        static final int ID_COLUMN_INDEX = 0;
+        static final int DATE_COLUMN_INDEX = 1;
+    }
+
     public interface CallLogAsyncTaskListener {
         public void onDeleteCall();
         public void onDeleteVoicemail();
         public void onGetCallDetails(PhoneCallDetails[] details);
     }
+
+    public interface OnCallLogQueryFinishedListener {
+        public void onQueryFinished(boolean hasEntry);
+    }
+
+    // Try to identify if a call log entry corresponds to a number which was blocked. We match by
+    // by comparing its creation time to the time it was added in the InCallUi and seeing if they
+    // fall within a certain threshold.
+    private static final int MATCH_BLOCKED_CALL_THRESHOLD_MS = 1500;
 
     private static AsyncTaskExecutor sAsyncTaskExecutor;
 
@@ -156,8 +177,8 @@ public class CallLogAsyncTaskUtil {
             boolean isVoicemail = PhoneNumberUtil.isVoicemailNumber(context, accountHandle, number);
             boolean shouldLookupNumber =
                     PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemail;
-
             ContactInfo info = ContactInfo.EMPTY;
+
             if (shouldLookupNumber) {
                 ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso);
                 info = lookupInfo != null ? lookupInfo : ContactInfo.EMPTY;
@@ -205,7 +226,7 @@ public class CallLogAsyncTaskUtil {
      *
      * @param context The context.
      * @param callIds String of the callIds to delete from the call log, delimited by commas (",").
-     * @param callLogAsyncTaskListenerg The listener to invoke after the entries have been deleted.
+     * @param callLogAsyncTaskListener The listener to invoke after the entries have been deleted.
      */
     public static void deleteCalls(
             final Context context,
@@ -215,25 +236,87 @@ public class CallLogAsyncTaskUtil {
             initTaskExecutor();
         }
 
-        sAsyncTaskExecutor.submit(Tasks.DELETE_CALL,
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    public Void doInBackground(Void... params) {
-                        context.getContentResolver().delete(
-                                TelecomUtil.getCallLogUri(context),
-                                CallLog.Calls._ID + " IN (" + callIds + ")", null);
-                        return null;
-                    }
+        sAsyncTaskExecutor.submit(Tasks.DELETE_CALL, new AsyncTask<Void, Void, Void>() {
+            @Override
+            public Void doInBackground(Void... params) {
+                context.getContentResolver().delete(
+                        TelecomUtil.getCallLogUri(context),
+                        CallLog.Calls._ID + " IN (" + callIds + ")", null);
+                return null;
+            }
 
-                    @Override
-                    public void onPostExecute(Void result) {
-                        if (callLogAsyncTaskListener != null) {
-                            callLogAsyncTaskListener.onDeleteCall();
-                        }
-                    }
-                });
-
+            @Override
+            public void onPostExecute(Void result) {
+                if (callLogAsyncTaskListener != null) {
+                    callLogAsyncTaskListener.onDeleteCall();
+                }
+            }
+        });
     }
+
+    /**
+     * Marks last call made by the number the call type of the specified call as BLOCKED in the call log.
+     *
+     * @param context The context.
+     * @param number Number of which to mark the most recent call as BLOCKED.
+     * @param timeAddedMs The time the number was added to InCall, in milliseconds.
+     * @param listener The listener to invoke after looking up for a call log entry matching the
+     *     number and time added.
+     */
+    public static void markCallAsBlocked(
+            final Context context,
+            final String number,
+            final long timeAddedMs,
+            final OnCallLogQueryFinishedListener listener) {
+        if (sAsyncTaskExecutor == null) {
+            initTaskExecutor();
+        }
+
+        sAsyncTaskExecutor.submit(Tasks.MARK_BLOCKED, new AsyncTask<Void, Void, Long>() {
+            @Override
+            public Long doInBackground(Void... params) {
+                // First, lookup the call log entry of the most recent call with this number.
+                Cursor cursor = context.getContentResolver().query(
+                        TelecomUtil.getCallLogUri(context),
+                        CallLogMarkBlockedQuery.PROJECTION,
+                        CallLog.Calls.NUMBER + "= ?",
+                        new String[] { number },
+                        CallLog.Calls.DATE + " DESC LIMIT 1");
+
+                // If found, return the call log entry id.
+                if (cursor.moveToFirst()) {
+                    long creationTime = cursor.getLong(CallLogMarkBlockedQuery.DATE_COLUMN_INDEX);
+                    if (timeAddedMs > creationTime
+                            && timeAddedMs - creationTime < MATCH_BLOCKED_CALL_THRESHOLD_MS) {
+                        return cursor.getLong(CallLogMarkBlockedQuery.ID_COLUMN_INDEX);
+                    }
+                }
+                return (long) -1;
+            }
+
+            @Override
+            public void onPostExecute(Long callLogEntryId) {
+                if (listener != null) {
+                    listener.onQueryFinished(callLogEntryId >= 0);
+                }
+
+                if (callLogEntryId < 0) {
+                    return;
+                }
+
+                // Then, update that call log entry to have type BLOCKED.
+                final ContentValues values = new ContentValues();
+                values.put(CallLog.Calls.TYPE, AppCompatConstants.CALLS_BLOCKED_TYPE);
+
+                context.getContentResolver().update(
+                        TelecomUtil.getCallLogUri(context),
+                        values,
+                        CallLog.Calls._ID + "= ?",
+                        new String[] { Long.toString(callLogEntryId) });
+            }
+        });
+    }
+
 
     public static void markVoicemailAsRead(final Context context, final Uri voicemailUri) {
         if (sAsyncTaskExecutor == null) {
@@ -266,21 +349,20 @@ public class CallLogAsyncTaskUtil {
             initTaskExecutor();
         }
 
-        sAsyncTaskExecutor.submit(Tasks.DELETE_VOICEMAIL,
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    public Void doInBackground(Void... params) {
-                        context.getContentResolver().delete(voicemailUri, null, null);
-                        return null;
-                    }
+        sAsyncTaskExecutor.submit(Tasks.DELETE_VOICEMAIL, new AsyncTask<Void, Void, Void>() {
+            @Override
+            public Void doInBackground(Void... params) {
+                context.getContentResolver().delete(voicemailUri, null, null);
+                return null;
+            }
 
-                    @Override
-                    public void onPostExecute(Void result) {
-                        if (callLogAsyncTaskListener != null) {
-                            callLogAsyncTaskListener.onDeleteVoicemail();
-                        }
-                    }
-                });
+            @Override
+            public void onPostExecute(Void result) {
+                if (callLogAsyncTaskListener != null) {
+                    callLogAsyncTaskListener.onDeleteVoicemail();
+                }
+            }
+        });
     }
 
     @VisibleForTesting

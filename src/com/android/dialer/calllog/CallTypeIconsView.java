@@ -23,13 +23,13 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.provider.CallLog.Calls;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.dialer.R;
+import com.android.dialer.util.AppCompatConstants;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -106,13 +106,13 @@ public class CallTypeIconsView extends View {
 
     private Drawable getCallTypeDrawable(int callType) {
         switch (callType) {
-            case Calls.INCOMING_TYPE:
+            case AppCompatConstants.CALLS_INCOMING_TYPE:
                 return mResources.incoming;
-            case Calls.OUTGOING_TYPE:
+            case AppCompatConstants.CALLS_OUTGOING_TYPE:
                 return mResources.outgoing;
-            case Calls.MISSED_TYPE:
+            case AppCompatConstants.CALLS_MISSED_TYPE:
                 return mResources.missed;
-            case Calls.VOICEMAIL_TYPE:
+            case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
                 return mResources.voicemail;
             default:
                 // It is possible for users to end up with calls with unknown call types in their
