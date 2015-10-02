@@ -137,6 +137,9 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
             update(callId, entry);
         }
 
+        @Override
+        public void onContactInteractionsInfoComplete(String callId, ContactCacheEntry entry) {}
+
         /**
          * Updates the contact information for a participant.
          *

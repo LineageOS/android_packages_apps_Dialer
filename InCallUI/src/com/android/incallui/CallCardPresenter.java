@@ -36,8 +36,10 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.ListAdapter;
 
 import com.android.incallui.Call.LogState;
+import com.android.incallui.Call.State;
 import com.android.incallui.InCallContactInteractions.ContactContextInfo;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -48,6 +50,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incalluibind.ObjectFactory;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -60,7 +63,7 @@ import com.google.common.base.Preconditions;
  */
 public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         implements InCallStateListener, IncomingCallListener, InCallDetailsListener,
-        InCallEventListener, CallList.CallUpdateListener {
+        InCallEventListener, CallList.CallUpdateListener, DistanceHelper.Listener {
 
     public interface EmergencyCallListener {
         public void onCallUpdated(BaseFragment fragment, boolean isEmergency);
@@ -71,6 +74,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private final EmergencyCallListener mEmergencyCallListener =
             ObjectFactory.newEmergencyCallListener();
+    private DistanceHelper mDistanceHelper;
 
     private Call mPrimary;
     private Call mSecondary;
@@ -80,6 +84,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private Context mContext;
     private boolean mSpinnerShowing = false;
     private boolean mHasShownToast = false;
+    private InCallContactInteractions mInCallContactInteractions;
 
     public static class ContactLookupCallback implements ContactInfoCacheCallback {
         private final WeakReference<CallCardPresenter> mCallCardPresenter;
@@ -106,6 +111,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
 
+        @Override
+        public void onContactInteractionsInfoComplete(String callId, ContactCacheEntry entry) {
+            CallCardPresenter presenter = mCallCardPresenter.get();
+            if (presenter != null) {
+                presenter.onContactInteractionsInfoComplete(callId, entry);
+            }
+        }
     }
 
     public CallCardPresenter() {
@@ -120,6 +132,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
+        mDistanceHelper = ObjectFactory.newDistanceHelper(mContext, this);
 
         // Call may be null if disconnect happened already.
         if (call != null) {
@@ -172,6 +185,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             CallList.getInstance().removeCallUpdateListener(mPrimary.getId(), this);
         }
 
+        if (mDistanceHelper != null) {
+            mDistanceHelper.cleanUp();
+        }
+
         mPrimary = null;
         mPrimaryContactInfo = null;
         mSecondaryContactInfo = null;
@@ -208,6 +225,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         } else if (newState == InCallState.INCALL) {
             primary = getCallToDisplay(callList, null, false);
             secondary = getCallToDisplay(callList, primary, true);
+        }
+
+        if (mInCallContactInteractions != null) {
+            ui.showContactContext(newState != InCallState.INCOMING);
         }
 
         Log.d(this, "Primary call: " + primary);
@@ -540,6 +561,54 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                         mPrimary.getVideoState(), mPrimary.getState());
                 getUi().setPrimaryImage(entry.photo, showContactPhoto);
             }
+        }
+    }
+
+    private void onContactInteractionsInfoComplete(String callId, ContactCacheEntry entry) {
+        if (getUi() == null) {
+            return;
+        }
+
+        if (mPrimary != null && callId.equals(mPrimary.getId())) {
+            mPrimaryContactInfo.locationAddress = entry.locationAddress;
+            updateContactInteractions();
+        }
+    }
+
+    @Override
+    public void onLocationReady() {
+        // This will only update the contacts interactions data if the location returns after
+        // the contact information is found.
+        updateContactInteractions();
+    }
+
+    private void updateContactInteractions() {
+        if (mPrimary != null && mPrimaryContactInfo != null
+                && mPrimaryContactInfo.locationAddress != null) {
+            setInCallContactInteractionsType(true);
+
+            mInCallContactInteractions.setBusinessInfo(
+                    mPrimaryContactInfo.locationAddress,
+                    mDistanceHelper.calculateDistance(mPrimaryContactInfo.locationAddress));
+            getUi().setContactContext(
+                    null,
+                    mInCallContactInteractions.getListAdapter());
+            getUi().showContactContext(mPrimary.getState() != State.INCOMING);
+        }
+    }
+
+    /**
+     * Update the contact interactions type so that the correct UI is shown.
+     *
+     * @param isBusiness {@code true} if the interaction is a business interaction, {@code false} if
+     * it is a personal contact.
+     */
+    private void setInCallContactInteractionsType(boolean isBusiness) {
+        if (mInCallContactInteractions == null) {
+            mInCallContactInteractions =
+                    new InCallContactInteractions(mContext, isBusiness);
+        } else {
+            mInCallContactInteractions.setIsBusiness(isBusiness);
         }
     }
 
@@ -954,7 +1023,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
-        void setContactContext(boolean isBusiness, List<ContactContextInfo> info);
+        void setContactContext(String title, ListAdapter listAdapter);
+        void showContactContext(boolean show);
         void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isSipCall, boolean isContactPhotoShown);

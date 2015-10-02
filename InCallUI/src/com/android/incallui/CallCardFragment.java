@@ -46,15 +46,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
-import com.android.incallui.InCallContactInteractions.BusinessContextInfo;
-import com.android.incallui.InCallContactInteractions.PersonContextInfo;
-import com.android.incallui.InCallContactInteractions.ContactContextInfo;
 import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;
@@ -336,23 +334,18 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setContactContext(boolean isBusiness, List<ContactContextInfo> info) {
-        mPhoto.setVisibility(View.GONE);
-        mPrimaryCallCardContainer.setElevation(0);
-        mContactContext.setVisibility(View.VISIBLE);
-
-        if (mInCallContactInteractions == null) {
-            mInCallContactInteractions =
-                    new InCallContactInteractions(getView().getContext(), isBusiness);
-        } else {
-            mInCallContactInteractions.setIsBusiness(isBusiness);
-        }
-
-        mContactContextTitle.setText(mInCallContactInteractions.getContactContextTitle());
-        mInCallContactInteractions.setData(info);
-        mContactContextListView.setAdapter(mInCallContactInteractions.getListAdapter());
+    public void setContactContext(String title, ListAdapter listAdapter) {
+        mContactContextTitle.setText(title);
+        mContactContextListView.setAdapter(listAdapter);
     }
 
+    @Override
+    public void showContactContext(boolean show) {
+            mPhoto.setVisibility(show ? View.GONE : View.VISIBLE);
+            mPrimaryCallCardContainer.setElevation(
+                    show ? 0 : getResources().getDimension(R.dimen.primary_call_elevation));
+            mContactContext.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
 
     /**
      * Sets the visibility of the primary call card.
