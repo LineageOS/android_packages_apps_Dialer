@@ -17,6 +17,7 @@ package com.android.dialer.onboard;
 
 import android.app.Activity;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.Suppress;
 
 public class OnboardingControllerTest extends AndroidTestCase {
     private MockOnboardUi mOnboardUi;
@@ -68,12 +69,14 @@ public class OnboardingControllerTest extends AndroidTestCase {
         mController = new OnboardingController(mOnboardUi);
     }
 
+    @Suppress
     public void testNoScreensToDisplay_OnboardingFlowImmediatelyCompleted() {
         mController.showNextScreen();
         assertEquals(-1, mOnboardUi.currentScreen);
         assertTrue(mOnboardUi.completedOnboardingFlow);
     }
 
+    @Suppress
     public void testSkipAllScreens_OnboardingFlowImmediatelyCompleted() {
         mController.addScreen(new MockScreen(false /* shouldShowScreen */,
                 true /* canSkipScreen */));
@@ -86,6 +89,7 @@ public class OnboardingControllerTest extends AndroidTestCase {
         assertTrue(mOnboardUi.completedOnboardingFlow);
     }
 
+    @Suppress
     public void testFirstScreenNotNeeded_ShowsSecondScreen() {
         mController.addScreen(new MockScreen(false /* shouldShowScreen */,
                 false /* canSkipScreen */));
@@ -95,6 +99,7 @@ public class OnboardingControllerTest extends AndroidTestCase {
         assertEquals(1, mOnboardUi.currentScreen);
     }
 
+    @Suppress
     public void testScreenRequired() {
         final MockScreen mockScreen =
                 new MockScreen(true /* shouldShowScreen */, false /* canSkipScreen */);
@@ -128,6 +133,7 @@ public class OnboardingControllerTest extends AndroidTestCase {
      * For example, setting the default dialer in the first screen will automatically grant
      * permissions such that the second permissions screen is no longer needed.
      */
+    @Suppress
     public void testFirstScreenCompleted_SkipsSecondScreen() {
         final MockScreen mockScreen1 =
                 new MockScreen(true /* shouldShowScreen */, true /* canSkipScreen */);
@@ -151,6 +157,7 @@ public class OnboardingControllerTest extends AndroidTestCase {
      * Verifies the use case where skipping the first screen will proceed to show the second screen
      * since the necessary conditions to skip the second screen have not been met.
      */
+    @Suppress
     public void testFirstScreenSkipped_ShowsSecondScreen() {
         final MockScreen mockScreen1 =
                 new MockScreen(true /* shouldShowScreen */, true /* canSkipScreen */);
