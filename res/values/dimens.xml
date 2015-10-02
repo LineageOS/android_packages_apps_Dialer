@@ -39,9 +39,9 @@
     <!-- Size of contact photos in the call log and call details. -->
     <dimen name="contact_photo_size">40dp</dimen>
     <dimen name="call_detail_button_spacing">2dip</dimen>
-    <dimen name="call_detail_horizontal_margin">16dp</dimen>
-    <dimen name="call_detail_top_margin">36dp</dimen>
-    <dimen name="call_detail_bottom_margin">32dp</dimen>
+    <dimen name="call_detail_horizontal_margin">20dp</dimen>
+    <dimen name="call_detail_top_margin">16dp</dimen>
+    <dimen name="call_detail_bottom_margin">16dp</dimen>
     <dimen name="call_detail_header_top_margin">20dp</dimen>
     <dimen name="call_detail_header_bottom_margin">9dp</dimen>
     <dimen name="call_detail_translation_z">0.5dp</dimen>
