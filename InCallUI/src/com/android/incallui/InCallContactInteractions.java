@@ -85,26 +85,16 @@ public class InCallContactInteractions {
     }
 
     public static abstract class ContactContextInfo {
-        Context mContext;
-
-        public ContactContextInfo(Context context) {
-            mContext = context;
-        }
-
-        public abstract void setListView(View listItem);
+        public abstract void bindView(View listItem);
     }
 
     public static class BusinessContextInfo extends ContactContextInfo {
-        public BusinessContextInfo(Context context) {
-            super(context);
-        }
-
         int iconId;
         String heading;
         String detail;
 
         @Override
-        public void setListView(View listItem) {
+        public void bindView(View listItem) {
             ImageView imageView = (ImageView) listItem.findViewById(R.id.icon);
             TextView headingTextView = (TextView) listItem.findViewById(R.id.heading);
             TextView detailTextView = (TextView) listItem.findViewById(R.id.detail);
@@ -113,7 +103,7 @@ public class InCallContactInteractions {
                 return;
             }
 
-            imageView.setImageDrawable(mContext.getDrawable(this.iconId));
+            imageView.setImageDrawable(listItem.getContext().getDrawable(this.iconId));
             headingTextView.setText(this.heading);
             detailTextView.setText(this.detail);
         }
@@ -124,12 +114,8 @@ public class InCallContactInteractions {
         String message;
         String detail;
 
-        public PersonContextInfo(Context context) {
-            super(context);
-        }
-
         @Override
-        public void setListView(View listItem) {
+        public void bindView(View listItem) {
             TextView messageTextView = (TextView) listItem.findViewById(R.id.message);
             TextView detailTextView = (TextView) listItem.findViewById(R.id.detail);
 
@@ -180,7 +166,7 @@ public class InCallContactInteractions {
                 return listItem;
             }
 
-            item.setListView(listItem);
+            item.bindView(listItem);
 
             return listItem;
         }
