@@ -38,6 +38,8 @@ import java.util.ArrayList;
  * Adapter for a ListView containing history items from the details of a call.
  */
 public class CallDetailHistoryAdapter extends BaseAdapter {
+    /** The top element is a blank header, which is hidden under the rest of the UI. */
+    private static final int VIEW_TYPE_HEADER = 0;
     /** Each history item shows the detail of a call. */
     private static final int VIEW_TYPE_HISTORY_ITEM = 1;
 
@@ -67,37 +69,53 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mPhoneCallDetails.length;
+        return mPhoneCallDetails.length + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return mPhoneCallDetails[position];
+        if (position == 0) {
+            return null;
+        }
+        return mPhoneCallDetails[position - 1];
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        if (position == 0) {
+            return -1;
+        }
+        return position - 1;
     }
 
     @Override
     public int getViewTypeCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (position == 0) {
+            return VIEW_TYPE_HEADER;
+        }
         return VIEW_TYPE_HISTORY_ITEM;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if (position == 0) {
+            final View header = convertView == null
+                    ? mLayoutInflater.inflate(R.layout.call_detail_history_header, parent, false)
+                    : convertView;
+            return header;
+        }
+
         // Make sure we have a valid convertView to start with
         final View result  = convertView == null
                 ? mLayoutInflater.inflate(R.layout.call_detail_history_item, parent, false)
                 : convertView;
 
-        PhoneCallDetails details = mPhoneCallDetails[position];
+        PhoneCallDetails details = mPhoneCallDetails[position - 1];
         CallTypeIconsView callTypeIconView =
                 (CallTypeIconsView) result.findViewById(R.id.call_type_icon);
         TextView callTypeTextView = (TextView) result.findViewById(R.id.call_type_text);
