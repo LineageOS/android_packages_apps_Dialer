@@ -244,6 +244,12 @@
         <activity android:name="com.android.contacts.common.vcard.ExportVCardActivity"
                   android:theme="@style/BackgroundOnlyTheme"/>
 
+        <activity
+            android:name="com.android.dialer.onboard.OnboardingActivity"
+            android:theme="@style/OnboardingFlowTheme"
+            android:screenOrientation="nosensor"
+            android:exported="false" />
+
         <service
             android:name="com.android.contacts.common.vcard.VCardService"
             android:exported="false"/>
