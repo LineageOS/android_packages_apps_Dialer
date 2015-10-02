@@ -309,13 +309,13 @@
          is already in progress.) -->
     <string name="dialer_addAnotherCall">Add call</string>
 
-    <!-- Title for incoming call details screen -->
+    <!-- Title for incoming call type. [CHAR LIMIT=40] -->
     <string name="type_incoming">Incoming call</string>
 
-    <!-- Title for outgoing call details screen -->
+    <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
     <string name="type_outgoing">Outgoing call</string>
 
-    <!-- Title for missed call details screen -->
+    <!-- Title for missed call type. [CHAR LIMIT=40] -->
     <string name="type_missed">Missed call</string>
 
     <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
@@ -329,6 +329,12 @@
 
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>
+
+    <!-- Title for rejected call type. [CHAR LIMIT=40] -->
+    <string name="type_rejected">Declined call</string>
+
+    <!-- Title for blocked call type. [CHAR LIMIT=40] -->
+    <string name="type_blocked">Blocked call</string>
 
     <!-- Description for incoming calls going to voice mail vs. not -->
     <string name="actionIncomingCall">Incoming calls</string>

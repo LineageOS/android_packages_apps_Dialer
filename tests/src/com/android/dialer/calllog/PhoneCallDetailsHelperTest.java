@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.LocaleTestUtils;
 
 import java.util.GregorianCalendar;
@@ -149,17 +150,17 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     public void testSetPhoneCallDetails_CallTypeIcons() {
-        setPhoneCallDetailsWithCallTypeIcons(Calls.INCOMING_TYPE);
-        assertCallTypeIconsEquals(Calls.INCOMING_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(AppCompatConstants.CALLS_INCOMING_TYPE);
+        assertCallTypeIconsEquals(AppCompatConstants.CALLS_INCOMING_TYPE);
 
-        setPhoneCallDetailsWithCallTypeIcons(Calls.OUTGOING_TYPE);
-        assertCallTypeIconsEquals(Calls.OUTGOING_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(AppCompatConstants.CALLS_OUTGOING_TYPE);
+        assertCallTypeIconsEquals(AppCompatConstants.CALLS_OUTGOING_TYPE);
 
-        setPhoneCallDetailsWithCallTypeIcons(Calls.MISSED_TYPE);
-        assertCallTypeIconsEquals(Calls.MISSED_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(AppCompatConstants.CALLS_MISSED_TYPE);
+        assertCallTypeIconsEquals(AppCompatConstants.CALLS_MISSED_TYPE);
 
-        setPhoneCallDetailsWithCallTypeIcons(Calls.VOICEMAIL_TYPE);
-        assertCallTypeIconsEquals(Calls.VOICEMAIL_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(AppCompatConstants.CALLS_VOICEMAIL_TYPE);
+        assertCallTypeIconsEquals(AppCompatConstants.CALLS_VOICEMAIL_TYPE);
     }
 
     /**
@@ -185,18 +186,31 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     public void testSetPhoneCallDetails_MultipleCallTypeIcons() {
-        setPhoneCallDetailsWithCallTypeIcons(Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE);
-        assertCallTypeIconsEquals(Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(
+                AppCompatConstants.CALLS_INCOMING_TYPE,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+        assertCallTypeIconsEquals(
+                AppCompatConstants.CALLS_INCOMING_TYPE,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
 
-        setPhoneCallDetailsWithCallTypeIcons(Calls.MISSED_TYPE, Calls.MISSED_TYPE);
-        assertCallTypeIconsEquals(Calls.MISSED_TYPE, Calls.MISSED_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(
+                AppCompatConstants.CALLS_MISSED_TYPE,
+                AppCompatConstants.CALLS_MISSED_TYPE);
+        assertCallTypeIconsEquals(
+                AppCompatConstants.CALLS_MISSED_TYPE,
+                AppCompatConstants.CALLS_MISSED_TYPE);
     }
 
     public void testSetPhoneCallDetails_MultipleCallTypeIconsLastOneDropped() {
-        setPhoneCallDetailsWithCallTypeIcons(Calls.MISSED_TYPE, Calls.MISSED_TYPE,
-                Calls.INCOMING_TYPE, Calls.OUTGOING_TYPE);
+        setPhoneCallDetailsWithCallTypeIcons(
+                AppCompatConstants.CALLS_MISSED_TYPE,
+                AppCompatConstants.CALLS_MISSED_TYPE,
+                AppCompatConstants.CALLS_INCOMING_TYPE,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
         assertCallTypeIconsEqualsPlusOverflow("(4)",
-                Calls.MISSED_TYPE, Calls.MISSED_TYPE, Calls.INCOMING_TYPE);
+                AppCompatConstants.CALLS_MISSED_TYPE,
+                AppCompatConstants.CALLS_MISSED_TYPE,
+                AppCompatConstants.CALLS_INCOMING_TYPE);
     }
 
     public void testSetPhoneCallDetails_Geocode() {
@@ -322,7 +336,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private void setPhoneCallDetailsWithNumber(String number, int presentation,
             String formattedNumber) {
         PhoneCallDetails details = getPhoneCallDetails(number, presentation, formattedNumber);
-        details.callTypes = new int[]{ Calls.VOICEMAIL_TYPE };
+        details.callTypes = new int[]{ AppCompatConstants.CALLS_VOICEMAIL_TYPE };
         mHelper.setPhoneCallDetails(mViews, details);
     }
 
@@ -384,7 +398,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     }
 
     private void setDefaultDetails(PhoneCallDetails details) {
-        details.callTypes = new int[]{ Calls.INCOMING_TYPE };
+        details.callTypes = new int[]{ AppCompatConstants.CALLS_INCOMING_TYPE };
         details.countryIso = TEST_COUNTRY_ISO;
         details.date = TEST_DATE;
         details.duration = TEST_DURATION;
