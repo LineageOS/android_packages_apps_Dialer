@@ -16,6 +16,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/call_details_menu">
 
+    <item android:id="@+id/menu_trash"
+        android:icon="@drawable/ic_delete_24dp"
+        android:showAsAction="ifRoom"
+        android:title="@string/call_log_trash_voicemail" />
+
+    <item android:id="@+id/menu_remove_from_call_log"
+        android:icon="@drawable/ic_delete_24dp"
+        android:showAsAction="ifRoom"
+        android:title="@string/call_log_remove_from_call_log" />
+
     <item android:id="@+id/menu_edit_number_before_call"
         android:title="@string/call_log_edit_number_before_call" />
 

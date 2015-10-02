@@ -70,9 +70,6 @@
     <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
     <string name="block_number_undo">UNDO</string>
 
-    <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
-    <string name="call_details_delete">Delete</string>
-
     <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
     <string name="call_log_edit_number_before_call">Edit number before call</string>
 
