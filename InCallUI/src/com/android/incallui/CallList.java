@@ -89,6 +89,7 @@ public class CallList {
         Trace.beginSection("onCallAdded");
         final Call call = new Call(telecomCall);
         Log.d(this, "onCallAdded: callState=" + call.getState());
+
         // Check if call should be blocked.
         if (!call.isEmergencyCall() && call.getState() == Call.State.INCOMING) {
             final AtomicBoolean hasTimedOut = new AtomicBoolean(false);
@@ -118,6 +119,10 @@ public class CallList {
                                 call.blockCall();
                                 Log.d(this, "onCallAdded: "
                                         + Log.pii(call.getNumber()) + " blocked.");
+
+                                // Call back to the presenter so it can update the call log.
+                                InCallPresenter.getInstance().onCallBlocked(
+                                        call.getNumber(), call.getTimeAddedMs());
                             }
                         }
                     }, null, call.getNumber(), countryIso)) {
