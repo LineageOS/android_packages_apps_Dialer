@@ -22,24 +22,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.CallLog;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.Surface;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil.OnCallLogQueryFinishedListener;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.incalluibind.ObjectFactory;
 import com.google.common.base.Preconditions;
 
@@ -100,6 +110,7 @@ public class InCallPresenter implements CallList.Listener,
     private boolean mAccountSelectionCancelled = false;
     private InCallCameraManager mInCallCameraManager = null;
     private AnswerPresenter mAnswerPresenter = new AnswerPresenter();
+    private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
 
     /**
      * Whether or not we are currently bound and waiting for Telecom to send us a new call.
@@ -151,6 +162,80 @@ public class InCallPresenter implements CallList.Listener,
         }
     };
 
+    private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+        public void onCallStateChanged(int state, String incomingNumber) {
+            if (state == TelephonyManager.CALL_STATE_RINGING) {
+                // Check if the number is blocked, to silence the ringer.
+                String countryIso = GeoUtil.getCurrentCountryIso(mContext);
+                mFilteredQueryHandler.startBlockedQuery(
+                        mOnCheckBlockedListener, null, incomingNumber, countryIso);
+            }
+        }
+    };
+
+    private final OnCheckBlockedListener mOnCheckBlockedListener = new OnCheckBlockedListener() {
+        @Override
+        public void onCheckComplete(final Integer id) {
+            if (id != null) {
+                // Silence the ringer now to prevent ringing and vibration before the call is
+                // terminated when Telecom attempts to add it.
+                getTelecomManager().silenceRinger();
+            }
+        }
+    };
+
+    /**
+     * Observes the CallLog for changes so that when call log entries for blocked calls are added
+     * they can be marked with the blocked call type. Times out if too much time has passed.
+     */
+    private class BlockedNumberContentObserver extends ContentObserver {
+        private static final int TIMEOUT_MS = 5000;
+
+        private Handler mHandler;
+        private String mNumber;
+        private long mTimeAddedMs;
+
+        public BlockedNumberContentObserver(Handler handler, String number, long timeAddedMs) {
+            super(handler);
+
+            mHandler = handler;
+            mNumber = number;
+            mTimeAddedMs = timeAddedMs;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            CallLogAsyncTaskUtil.markCallAsBlocked(mContext, mNumber, mTimeAddedMs,
+                    new OnCallLogQueryFinishedListener() {
+                        @Override
+                        public void onQueryFinished(boolean hasEntry) {
+                            if (mContext != null && hasEntry) {
+                                unregister();
+                            }
+                        }
+                    });
+        }
+
+        public void register() {
+            if (mContext != null) {
+                mContext.getContentResolver().registerContentObserver(
+                        CallLog.CONTENT_URI, true, this);
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        unregister();
+                    }
+                }, TIMEOUT_MS);
+            }
+        }
+
+        private void unregister() {
+            if (mContext != null) {
+                mContext.getContentResolver().unregisterContentObserver(this);
+            }
+        }
+    };
+
     /**
      * Is true when the activity has been previously started. Some code needs to know not just if
      * the activity is currently up, but if it had been previously shown in foreground for this
@@ -176,6 +261,7 @@ public class InCallPresenter implements CallList.Listener,
     private MaterialPalette mThemeColors;
 
     private TelecomManager mTelecomManager;
+    private TelephonyManager mTelephonyManager;
 
     public static synchronized InCallPresenter getInstance() {
         if (sInCallPresenter == null) {
@@ -239,6 +325,11 @@ public class InCallPresenter implements CallList.Listener,
 
         VideoPauseController.getInstance().setUp(this);
 
+        mFilteredQueryHandler = new FilteredNumberAsyncQueryHandler(context.getContentResolver());
+        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        mCallList.setFilteredNumberQueryHandler(mFilteredQueryHandler);
+
         Log.d(this, "Finished InCallPresenter.setUp");
     }
 
@@ -255,6 +346,7 @@ public class InCallPresenter implements CallList.Listener,
         mServiceConnected = false;
         attemptCleanup();
 
+        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         VideoPauseController.getInstance().tearDown();
     }
 
@@ -391,9 +483,8 @@ public class InCallPresenter implements CallList.Listener,
      * TODO: Consider listening to CallList callbacks to do this instead of receiving a direct
      * method invocation from InCallService.
      */
-    public void onCallAdded(android.telecom.Call call) {
-        // Since a call has been added we are no longer waiting for Telecom to send us a
-        // call.
+    public void onCallAdded(final android.telecom.Call call) {
+        // Since a call has been added we are no longer waiting for Telecom to send us a call.
         setBoundAndWaitingForOutgoingCall(false, null);
         call.registerCallback(mCallCallback);
     }
@@ -490,6 +581,14 @@ public class InCallPresenter implements CallList.Listener,
         if (isActivityStarted()) {
             mInCallActivity.dismissKeyguard(false);
         }
+    }
+
+    public void onCallBlocked(String number, long timeAddedMs) {
+        BlockedNumberContentObserver contentObserver =
+                new BlockedNumberContentObserver(new Handler(), number, timeAddedMs);
+
+        // BlockedNumberContentObserver will unregister after successful log or timeout.
+        contentObserver.register();
     }
 
     /**
