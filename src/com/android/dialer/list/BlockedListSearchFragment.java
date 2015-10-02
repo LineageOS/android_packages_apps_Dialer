@@ -15,48 +15,138 @@
  */
 package com.android.dialer.list;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.net.Uri;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
+import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.dialog.IndeterminateProgressDialog;
 import com.android.contacts.common.list.ContactEntryListAdapter;
-import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.contacts.common.list.ContactListItemView;
+import com.android.dialer.R;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.filterednumber.FilterNumberDialogFragment;
 
 public class BlockedListSearchFragment extends RegularSearchFragment {
     private static final String TAG = BlockedListSearchFragment.class.getSimpleName();
+
+    private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+
+    public void setFilteredNumberAsyncQueryHandler(FilteredNumberAsyncQueryHandler handler) {
+        mFilteredNumberAsyncQueryHandler = handler;
+    }
 
     @Override
     protected ContactEntryListAdapter createListAdapter() {
         BlockedListSearchAdapter adapter = new BlockedListSearchAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(usesCallableUri());
+        adapter.setFilteredNumberAsyncQueryHandler(mFilteredNumberAsyncQueryHandler);
         return adapter;
     }
 
     @Override
-    protected void onItemClick(int position, long id) {
-        final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
-        final int shortcutType = adapter.getShortcutTypeFromPosition(position);
-        final OnPhoneNumberPickerActionListener listener = getOnPhoneNumberPickerListener();
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+        final int adapterPosition = position - getListView().getHeaderViewsCount();
+        final BlockedListSearchAdapter adapter = (BlockedListSearchAdapter) getAdapter();
+        final int shortcutType = adapter.getShortcutTypeFromPosition(adapterPosition);
+        final Integer blockId = (Integer) view.getTag(R.id.block_id);
         final String number;
-
-        if (listener == null) {
-            Log.d(TAG, "getOnPhoneNumberPickerListener() returned null in onItemClick.");
-            return;
-        }
-
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 // Handles click on a search result, either contact or nearby places result.
-                number = adapter.getPhoneNumber(position);
-                listener.onPickPhoneNumber(number, false, getCallInitiationType(false));
+                number = adapter.getPhoneNumber(adapterPosition);
+                blockContactNumber(adapter, (ContactListItemView) view, number, blockId);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_BLOCK_NUMBER:
                 // Handles click on 'Block number' shortcut to add the user query as a number.
                 number = adapter.getQueryString();
-                listener.onPickPhoneNumber(number, false, getCallInitiationType(false));
+                blockNumber(number);
                 break;
             default:
                 Log.w(TAG, "Ignoring unsupported shortcut type: " + shortcutType);
                 break;
         }
+    }
+
+    // Prevent SearchFragment.onItemClicked from being called.
+    @Override
+    protected void onItemClick(int position, long id) {
+    }
+
+    private void blockNumber(final String number) {
+        final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
+        final IndeterminateProgressDialog progressDialog =
+                IndeterminateProgressDialog.show(getFragmentManager(),
+                        getString(R.string.checkingNumber, number), null, 500);
+        final String normalizedNumber =
+                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
+        if (normalizedNumber == null) {
+            progressDialog.dismiss();
+            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final OnCheckBlockedListener onCheckListener = new OnCheckBlockedListener() {
+            @Override
+            public void onCheckComplete(Integer id) {
+                progressDialog.dismiss();
+                if (id == null) {
+                    final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
+                            .newInstance(id, normalizedNumber, number, countryIso, number);
+                    newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
+                    newFragment.setParentView(
+                            getActivity().findViewById(R.id.search_activity_container));
+                    newFragment.show(
+                            getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                onCheckListener, normalizedNumber, number, countryIso);
+    }
+
+    private void blockContactNumber(final BlockedListSearchAdapter adapter,
+                                    final ContactListItemView view, final String number,
+                                    final Integer blockId) {
+        final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
+        final String normalizedNumber =
+                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
+        if (normalizedNumber == null) {
+            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (blockId != null) {
+            Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
+                .newInstance(blockId, normalizedNumber, number, countryIso, number);
+        newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
+        newFragment.setParentView(getActivity().findViewById(R.id.search_activity_container));
+        newFragment.setOnUndoBlockListener(new FilterNumberDialogFragment.OnUndoBlockListener() {
+            @Override
+            public void onUndoBlockComplete() {
+                adapter.setViewUnblocked(view);
+            }
+        });
+        newFragment.setOnBlockListener(new FilterNumberDialogFragment.OnBlockListener() {
+            @Override
+            public void onBlockComplete(Uri uri) {
+                adapter.setViewBlocked(view, Long.valueOf(ContentUris.parseId(uri)).intValue());
+            }
+        });
+        newFragment.show(getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
     }
 }

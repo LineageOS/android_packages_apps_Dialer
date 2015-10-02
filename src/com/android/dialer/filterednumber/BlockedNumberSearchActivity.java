@@ -36,14 +36,14 @@ import com.android.contacts.common.dialog.IndeterminateProgressDialog;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.list.BlockedListSearchAdapter;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.BlockedListSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.widget.SearchEditTextLayout;
 
 public class BlockedNumberSearchActivity extends AppCompatActivity
-        implements SearchFragment.HostInterface, OnPhoneNumberPickerActionListener {
-    private static final String TAG = "BlockedNumberSearch";
+        implements SearchFragment.HostInterface {
     private static final String TAG_BLOCKED_SEARCH_FRAGMENT = "blocked_search";
 
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
@@ -115,7 +115,7 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
             return;
         }
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        SearchFragment fragment = (SearchFragment) getFragmentManager()
+        BlockedListSearchFragment fragment = (BlockedListSearchFragment) getFragmentManager()
                 .findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
         if (fragment == null) {
             fragment = new BlockedListSearchFragment();
@@ -125,6 +125,8 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
         }
         fragment.setHasOptionsMenu(false);
         fragment.setShowEmptyListForNullQuery(true);
+        fragment.setDirectorySearchEnabled(false);
+        fragment.setFilteredNumberAsyncQueryHandler(mFilteredNumberAsyncQueryHandler);
         transaction.commit();
     }
 
@@ -132,65 +134,6 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof BlockedListSearchFragment) {
             mSearchFragment = (BlockedListSearchFragment) fragment;
-            mSearchFragment.setOnPhoneNumberPickerActionListener(this);
-        }
-    }
-
-    @Override
-    public void onPickDataUri(Uri dataUri, int callInitiationType) {
-        Log.w(TAG, "onPickDataUri unsupported, ignoring.");
-    }
-
-    @Override
-    public void onPickPhoneNumber(String phoneNumber, boolean isVideoCall, int callInitiationType) {
-        blockNumber(phoneNumber);
-    }
-
-    @Override
-    public void onShortcutIntentCreated(Intent intent) {
-        Log.w(TAG, "Unsupported intent has come (" + intent + "). Ignoring.");
-    }
-
-    @Override
-    public void onHomeInActionBarSelected() {
-    }
-
-    private void blockNumber(final String number) {
-        final String countryIso = GeoUtil.getCurrentCountryIso(BlockedNumberSearchActivity.this);
-        final IndeterminateProgressDialog progressDialog =
-                IndeterminateProgressDialog.show(getFragmentManager(),
-                        getString(R.string.checkingNumber, number), null, 500);
-        final String normalizedNumber =
-                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
-        if (normalizedNumber == null) {
-            progressDialog.dismiss();
-            Toast.makeText(
-                    BlockedNumberSearchActivity.this, getString(R.string.invalidNumber, number),
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            final FilteredNumberAsyncQueryHandler.OnCheckBlockedListener onCheckListener =
-                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-                        @Override
-                        public void onCheckComplete(Integer id) {
-                            progressDialog.dismiss();
-                            if (id == null) {
-                                final FilterNumberDialogFragment newFragment =
-                                        FilterNumberDialogFragment.newInstance(id, normalizedNumber,
-                                                number, countryIso, number);
-                                newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
-                                newFragment.setParentView(
-                                        findViewById(R.id.search_activity_container));
-                                newFragment.show(getFragmentManager(),
-                                        FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
-                            } else {
-                                Toast.makeText(BlockedNumberSearchActivity.this,
-                                        getString(R.string.alreadyBlocked, number),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    };
-            mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                    onCheckListener, normalizedNumber, number, countryIso);
         }
     }
 
