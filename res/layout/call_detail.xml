@@ -60,7 +60,8 @@
                 android:textColor="?attr/call_log_primary_text_color"
                 android:textSize="@dimen/call_log_primary_text_size"
                 android:includeFontPadding="false"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="3dp"
                 android:singleLine="true" />
 
             <TextView
