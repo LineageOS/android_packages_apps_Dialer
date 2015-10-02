@@ -464,4 +464,10 @@
     <!-- Used to inform the user that the note associated with an outgoing call has been sent.
          [CHAR LIMIT=32] -->
     <string name="note_sent">Note sent</string>
+
+    <!-- Title for the call context with a person-type contact. [CHAR LIMIT=40] -->
+    <string name="person_contact_context_title">Recent messages</string>
+
+    <!-- Title for the call context with a business-type contact. [CHAR LIMIT=40] -->
+    <string name="business_contact_context_title">Business info</string>
 </resources>

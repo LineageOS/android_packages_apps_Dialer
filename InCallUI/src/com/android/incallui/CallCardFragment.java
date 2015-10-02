@@ -46,11 +46,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
+import com.android.incallui.InCallContactInteractions.BusinessContextInfo;
+import com.android.incallui.InCallContactInteractions.PersonContextInfo;
+import com.android.incallui.InCallContactInteractions.ContactContextInfo;
 import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;
@@ -122,7 +126,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private ImageView mHdAudioIcon;
     private ImageView mForwardIcon;
     private View mCallNumberAndLabel;
-    private ImageView mPhoto;
     private TextView mElapsedTime;
     private Drawable mPrimaryPhotoDrawable;
     private TextView mCallSubject;
@@ -141,6 +144,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private View mSecondaryCallConferenceCallIcon;
     private View mSecondaryCallVideoCallIcon;
     private View mProgressSpinner;
+
+    // Call card content
+    private View mCallCardContent;
+    private ImageView mPhoto;
+    private View mContactContext;
+    private TextView mContactContextTitle;
+    private ListView mContactContextListView;
 
     private View mManageConferenceCallButton;
 
@@ -167,6 +177,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private CharSequence mPostResetCallStateLabel;
     private boolean mCallStateLabelResetPending = false;
     private Handler mHandler;
+
+    private InCallContactInteractions mInCallContactInteractions;
 
     @Override
     public CallCardPresenter.CallCardUi getUi() {
@@ -235,6 +247,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = view.findViewById(R.id.secondary_call_info);
         mSecondaryCallProviderInfo = view.findViewById(R.id.secondary_call_provider_info);
+        mCallCardContent = view.findViewById(R.id.call_card_content);
         mPhoto = (ImageView) view.findViewById(R.id.photo);
         mPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +255,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 getPresenter().onContactPhotoClick();
             }
         });
+        mContactContext = view.findViewById(R.id.contact_context);
+        mContactContextTitle = (TextView) view.findViewById(R.id.contactContextTitle);
+        mContactContextListView = (ListView) view.findViewById(R.id.contactContextInfo);
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
@@ -318,6 +334,25 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void setProgressSpinnerVisible(boolean visible) {
         mProgressSpinner.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
+
+    @Override
+    public void setContactContext(boolean isBusiness, List<ContactContextInfo> info) {
+        mPhoto.setVisibility(View.GONE);
+        mPrimaryCallCardContainer.setElevation(0);
+        mContactContext.setVisibility(View.VISIBLE);
+
+        if (mInCallContactInteractions == null) {
+            mInCallContactInteractions =
+                    new InCallContactInteractions(getView().getContext(), isBusiness);
+        } else {
+            mInCallContactInteractions.setIsBusiness(isBusiness);
+        }
+
+        mContactContextTitle.setText(mInCallContactInteractions.getContactContextTitle());
+        mInCallContactInteractions.setData(info);
+        mContactContextListView.setAdapter(mInCallContactInteractions.getListAdapter());
+    }
+
 
     /**
      * Sets the visibility of the primary call card.
@@ -1051,6 +1086,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
         mCallButtonsContainer.setBackgroundColor(themeColors.mPrimaryColor);
         mCallSubject.setTextColor(themeColors.mPrimaryColor);
+        mCallCardContent.setBackgroundColor(themeColors.mPrimaryColor);
+        //TODO: set color of message text in call context "recent messages" to be the theme color.
 
         mCurrentThemeColors = themeColors;
     }
