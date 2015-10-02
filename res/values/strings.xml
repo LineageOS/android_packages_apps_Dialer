@@ -884,4 +884,22 @@
 
     <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead.-->
     <string name="toast_cannot_write_system_settings">Phone app does not have permission to write to system settings.</string>
+
+    <!-- Title of the onboarding screen that asks the user to make Phone the default Phone app -->
+    <string name="request_default_dialer_screen_title">A better way of calling is calling</string>
+
+    <!-- Content of the onboarding screen that asks the user to make Phone the default Phone app -->
+    <string name="request_default_dialer_screen_content">Make Phone your default phone app to be able to do things like see who\'s calling you, even when they\'re not in your contacts.</string>
+
+    <!-- Title of the onboarding screen that asks the user to grant us the Contacts and Phone permissions -->
+    <string name="request_permissions_screen_title">Get talking to your friends and family</string>
+
+    <!-- Content of the onboarding screen that asks the user to grant us the Contacts and Phone permissions -->
+    <string name="request_permissions_screen_content">Phone will need to access your phone and contacts to make calls to people in your contacts.</string>
+
+    <!-- The label of the button used to skip a screen in the onboarding flow -->
+    <string name="onboarding_skip_button">Skip</string>
+
+    <!-- The label of the button used to go to the next screen in the onboarding flow -->
+    <string name="onboarding_next_button">Next</string>
 </resources>
