@@ -36,17 +36,17 @@ public class DefaultDialerOnboardScreenTest extends AndroidTestCase {
     }
 
     public void testNeverRequestedForDefaultDialer_shouldShowScreen() {
-        when(mPermissionsChecker.previouslyRequestedDefaultDialer()).thenReturn(false);
+        when(mPermissionsChecker.hasAlreadyRequestedDefaultDialer()).thenReturn(false);
         assertTrue(mScreen.shouldShowScreen());
     }
 
     public void testAlreadyAskedForDefaultDialer_shouldNotShowScreen() {
-        when(mPermissionsChecker.previouslyRequestedDefaultDialer()).thenReturn(true);
+        when(mPermissionsChecker.hasAlreadyRequestedDefaultDialer()).thenReturn(true);
         assertFalse(mScreen.shouldShowScreen());
     }
 
     public void testAlreadySetAsDefaultDialer_shouldNotShowScreen() {
-        when(mPermissionsChecker.previouslyRequestedDefaultDialer()).thenReturn(false);
+        when(mPermissionsChecker.hasAlreadyRequestedDefaultDialer()).thenReturn(false);
         when(mPermissionsChecker.isDefaultOrSystemDialer()).thenReturn(true);
         assertFalse(mScreen.shouldShowScreen());
     }
