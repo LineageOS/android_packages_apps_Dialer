@@ -74,25 +74,25 @@
 
             <!-- Call context -->
             <LinearLayout
-                android:id="@+id/call_context"
+                android:id="@+id/contact_context"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:background="@color/incall_background_color"
                 android:visibility="gone">
-                <TextView android:id="@+id/contextTitle"
-                    android:textSize="@dimen/call_context_title_text_size"
-                    android:textColor="@color/call_context_title_text_color"
+                <TextView android:id="@+id/contactContextTitle"
+                    android:textSize="@dimen/contact_context_title_text_size"
+                    android:textColor="@color/contact_context_title_text_color"
                     android:fontFamily="sans-serif-medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/call_context_title_margin_bottom"/>
-                <ListView android:id="@+id/callContextInfo"
+                    android:layout_marginBottom="@dimen/contact_context_title_margin_bottom"/>
+                <ListView android:id="@+id/contactContextInfo"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      android:divider="@null"
-                     android:dividerHeight="@dimen/call_context_list_item_padding"/>
+                     android:dividerHeight="@dimen/contact_context_list_item_padding"/>
             </LinearLayout>
         </FrameLayout>
 

@@ -38,6 +38,7 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.incallui.Call.LogState;
+import com.android.incallui.InCallContactInteractions.ContactContextInfo;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -48,6 +49,7 @@ import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import com.google.common.base.Preconditions;
 
@@ -952,6 +954,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
+        void setContactContext(boolean isBusiness, List<ContactContextInfo> info);
         void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
                 Drawable photo, boolean isSipCall, boolean isContactPhotoShown);
