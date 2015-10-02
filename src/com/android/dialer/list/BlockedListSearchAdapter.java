@@ -16,20 +16,74 @@
 package com.android.dialer.list;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.view.View;
+
+import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.list.ContactListItemView;
+import com.android.dialer.R;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 
 /**
  * List adapter to display search results for adding a blocked number.
  */
 public class BlockedListSearchAdapter extends RegularSearchListAdapter {
 
+    private Resources mResources;
+    private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+
     public BlockedListSearchAdapter(Context context) {
         super(context);
+        mResources = context.getResources();
         disableAllShortcuts();
         setShortcutEnabled(SHORTCUT_BLOCK_NUMBER, true);
+    }
+
+    public void setFilteredNumberAsyncQueryHandler(FilteredNumberAsyncQueryHandler handler) {
+        mFilteredNumberAsyncQueryHandler = handler;
     }
 
     @Override
     protected boolean isChanged(boolean showNumberShortcuts) {
         return setShortcutEnabled(SHORTCUT_BLOCK_NUMBER, showNumberShortcuts || mIsQuerySipAddress);
+    }
+
+    public void setViewBlocked(ContactListItemView view, Integer id) {
+        view.setTag(R.id.block_id, id);
+        final int textColor = mResources.getColor(R.color.blocked_number_block_color);
+        view.getDataView().setTextColor(textColor);
+        view.getLabelView().setTextColor(textColor);
+        //TODO: Add icon
+    }
+
+    public void setViewUnblocked(ContactListItemView view) {
+        view.setTag(R.id.block_id, null);
+        final int textColor = mResources.getColor(R.color.dialtacts_secondary_text_color);
+        view.getDataView().setTextColor(textColor);
+        view.getLabelView().setTextColor(textColor);
+        //TODO: Remove icon
+    }
+
+    @Override
+    protected void bindView(View itemView, int partition, Cursor cursor, int position) {
+        super.bindView(itemView, partition, cursor, position);
+        final ContactListItemView view = (ContactListItemView) itemView;
+        final String number = getPhoneNumber(position);
+        final String countryIso = GeoUtil.getCurrentCountryIso(mContext);
+        final String normalizedNumber =
+                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
+        final FilteredNumberAsyncQueryHandler.OnCheckBlockedListener onCheckListener =
+                new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                    @Override
+                    public void onCheckComplete(Integer id) {
+                        if (id != null) {
+                            setViewBlocked(view, id);
+                        }
+                    }
+                };
+        mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                onCheckListener, normalizedNumber, number, countryIso);
     }
 }
