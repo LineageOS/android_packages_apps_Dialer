@@ -84,11 +84,9 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     }
 
     /**
-     * Test for bug where voicemails should not have remove-from-call-log entry.
-     * <p>
-     * See http://b/5054103.
+     * Verifies the trash menu item is present and a voicemail URI is set.
      */
-    public void testVoicemailDoesNotHaveRemoveFromCallLog() throws Throwable {
+    public void testVoicemailDeleteButton() throws Throwable {
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
         mFakeAsyncTaskExecutor.runTask(GET_CALL_DETAILS);
@@ -96,12 +94,13 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         Menu optionsMenu = (new PopupMenu(mActivityUnderTest, null)).getMenu();
         mActivityUnderTest.onCreateOptionsMenu(optionsMenu);
         mActivityUnderTest.onPrepareOptionsMenu(optionsMenu);
-        assertFalse(optionsMenu.findItem(R.id.menu_remove_from_call_log).isVisible());
-        assertTrue(optionsMenu.findItem(R.id.menu_trash).isVisible());
+
+        assertTrue(optionsMenu.findItem(R.id.call_detail_delete_menu_item).isVisible());
+        assertTrue(mActivityUnderTest.hasVoicemail());
     }
 
     /**
-     * Test to check that I haven't broken the remove-from-call-log entry from regular calls.
+     * Verifies the trash menu item is present and a voicemail URI is not set.
      */
     public void testRegularCallDoesHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestCallEntry();
@@ -111,8 +110,9 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
         Menu optionsMenu = (new PopupMenu(mActivityUnderTest, null)).getMenu();
         mActivityUnderTest.onCreateOptionsMenu(optionsMenu);
         mActivityUnderTest.onPrepareOptionsMenu(optionsMenu);
-        assertTrue(optionsMenu.findItem(R.id.menu_remove_from_call_log).isVisible());
-        assertFalse(optionsMenu.findItem(R.id.menu_trash).isVisible());
+
+        assertTrue(optionsMenu.findItem(R.id.call_detail_delete_menu_item).isVisible());
+        assertFalse(mActivityUnderTest.hasVoicemail());
     }
 
     private void setActivityIntentForTestCallEntry() {
