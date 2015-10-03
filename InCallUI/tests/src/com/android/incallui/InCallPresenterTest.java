@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.TelephonyManager;
 import android.test.InstrumentationTestCase;
 
 import com.android.incallui.InCallPresenter.InCallState;
@@ -41,6 +42,7 @@ public class InCallPresenterTest extends InstrumentationTestCase {
 
     InCallPresenter mInCallPresenter;
     @Mock private Context mContext;
+    @Mock private TelephonyManager mTelephonyManager;
 
     @Override
     protected void setUp() throws Exception {
@@ -49,6 +51,8 @@ public class InCallPresenterTest extends InstrumentationTestCase {
                 getInstrumentation().getTargetContext().getCacheDir().getPath());
         MockitoAnnotations.initMocks(this);
         mCallList = new MockCallListWrapper();
+
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
 
         mInCallPresenter = InCallPresenter.getInstance();
         mInCallPresenter.setUp(mContext, mCallList.getCallList(), mAudioModeProvider,
