@@ -18,6 +18,7 @@ package com.android.dialer.list;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,16 +38,19 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
 
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
-    public void setFilteredNumberAsyncQueryHandler(FilteredNumberAsyncQueryHandler handler) {
-        mFilteredNumberAsyncQueryHandler = handler;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(
+                getContext().getContentResolver());
     }
+
 
     @Override
     protected ContactEntryListAdapter createListAdapter() {
         BlockedListSearchAdapter adapter = new BlockedListSearchAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(usesCallableUri());
-        adapter.setFilteredNumberAsyncQueryHandler(mFilteredNumberAsyncQueryHandler);
         return adapter;
     }
 
@@ -100,7 +104,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
                 if (id == null) {
                     final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
                             .newInstance(id, normalizedNumber, number, countryIso, number);
-                    newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
                     newFragment.setParentView(
                             getActivity().findViewById(R.id.search_activity_container));
                     newFragment.show(
@@ -133,7 +136,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
         }
         final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
                 .newInstance(blockId, normalizedNumber, number, countryIso, number);
-        newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
         newFragment.setParentView(getActivity().findViewById(R.id.search_activity_container));
         newFragment.setOnUndoBlockListener(new FilterNumberDialogFragment.OnUndoBlockListener() {
             @Override

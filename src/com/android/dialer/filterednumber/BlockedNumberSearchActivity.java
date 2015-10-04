@@ -126,7 +126,6 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
         fragment.setHasOptionsMenu(false);
         fragment.setShowEmptyListForNullQuery(true);
         fragment.setDirectorySearchEnabled(false);
-        fragment.setFilteredNumberAsyncQueryHandler(mFilteredNumberAsyncQueryHandler);
         transaction.commit();
     }
 

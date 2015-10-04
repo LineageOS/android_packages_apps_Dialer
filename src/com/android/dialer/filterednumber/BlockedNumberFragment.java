@@ -34,17 +34,14 @@ public class BlockedNumberFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
 
     private BlockedNumberAdapter mAdapter;
-    private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LayoutInflater inflater = LayoutInflater.from(getContext());
         getListView().addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
-        mFilteredNumberAsyncQueryHandler =
-                new FilteredNumberAsyncQueryHandler(getActivity().getContentResolver());
         if (mAdapter == null) {
-            mAdapter = new BlockedNumberAdapter(getContext(), mFilteredNumberAsyncQueryHandler);
+            mAdapter = new BlockedNumberAdapter(getContext());
         }
         setListAdapter(mAdapter);
         getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);

@@ -39,10 +39,9 @@ public class BlockedListSearchAdapter extends RegularSearchListAdapter {
         mResources = context.getResources();
         disableAllShortcuts();
         setShortcutEnabled(SHORTCUT_BLOCK_NUMBER, true);
-    }
 
-    public void setFilteredNumberAsyncQueryHandler(FilteredNumberAsyncQueryHandler handler) {
-        mFilteredNumberAsyncQueryHandler = handler;
+        mFilteredNumberAsyncQueryHandler =
+                new FilteredNumberAsyncQueryHandler(context.getContentResolver());
     }
 
     @Override
