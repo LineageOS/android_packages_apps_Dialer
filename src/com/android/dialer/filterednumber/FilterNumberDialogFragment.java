@@ -123,6 +123,12 @@ public class FilterNumberDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    @Override
+    public void onDestroy() {
+        this.dismissAllowingStateLoss();
+        super.onDestroy();
+    }
+
     private String getBlockedMessage(String displayNumber) {
         return getString(R.string.snackbar_number_blocked, displayNumber);
     }
