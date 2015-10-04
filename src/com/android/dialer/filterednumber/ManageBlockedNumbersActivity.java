@@ -18,6 +18,7 @@ package com.android.dialer.filterednumber;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -26,6 +27,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
@@ -42,15 +44,22 @@ import com.android.dialer.list.BlockedListSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.widget.SearchEditTextLayout;
 
-public class BlockedNumberSearchActivity extends AppCompatActivity
+public class ManageBlockedNumbersActivity extends AppCompatActivity
         implements SearchFragment.HostInterface {
+
+    private static final String TAG_BLOCKED_MANAGEMENT_FRAGMENT = "blocked_management";
     private static final String TAG_BLOCKED_SEARCH_FRAGMENT = "blocked_search";
 
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+
+    private BlockedNumberFragment mManagementFragment;
     private SearchFragment mSearchFragment;
+
     private EditText mSearchView;
     private ActionBar mActionBar;
     private String mSearchQuery;
+
+    private boolean mIsShowingManagementUi;
 
     private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
         @Override
@@ -72,17 +81,93 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
         }
     };
 
+    private final SearchEditTextLayout.Callback mSearchLayoutCallback =
+            new SearchEditTextLayout.Callback() {
+                @Override
+                public void onBackButtonClicked() {
+                    showManagementUi();
+                }
+
+                @Override
+                public void onSearchViewClicked() {
+                }
+            };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.blocked_numbers_activity);
+
         mFilteredNumberAsyncQueryHandler =
                 new FilteredNumberAsyncQueryHandler(getContentResolver());
 
-        setContentView(R.layout.search_activity);
+        showManagementUi();
+    }
 
+    private void showManagementUi() {
+        mIsShowingManagementUi = true;
+
+        showManagementUiActionBar();
+
+        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (mSearchFragment != null) {
+            transaction.hide(mSearchFragment);
+        }
+
+        BlockedNumberFragment fragment = (BlockedNumberFragment) getFragmentManager()
+                .findFragmentByTag(TAG_BLOCKED_MANAGEMENT_FRAGMENT);
+        if (fragment == null) {
+            fragment = new BlockedNumberFragment();
+            transaction.add(R.id.blocked_numbers_activity_container, fragment,
+                    TAG_BLOCKED_MANAGEMENT_FRAGMENT);
+        } else {
+            transaction.show(fragment);
+        }
+        transaction.commit();
+    }
+
+    private void showManagementUiActionBar() {
+        mActionBar = getSupportActionBar();
+        ColorDrawable backgroundDrawable = new ColorDrawable(getColor(R.color.dialer_theme_color));
+        mActionBar.setBackgroundDrawable(backgroundDrawable);
+        mActionBar.setElevation(getResources().getDimensionPixelSize(R.dimen.action_bar_elevation));
+        mActionBar.setDisplayShowCustomEnabled(false);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayShowHomeEnabled(true);
+        mActionBar.setDisplayShowTitleEnabled(true);
+        mActionBar.setTitle(R.string.manage_blocked_numbers_label);
+    }
+
+    public void enterSearchUi() {
+        mIsShowingManagementUi = false;
+
+        showSearchUiActionBar();
+
+        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (mManagementFragment != null) {
+            transaction.hide(mManagementFragment);
+        }
+
+        BlockedListSearchFragment fragment = (BlockedListSearchFragment) getFragmentManager()
+                .findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
+        if (fragment == null) {
+            fragment = new BlockedListSearchFragment();
+            fragment.setHasOptionsMenu(false);
+            fragment.setShowEmptyListForNullQuery(true);
+            fragment.setDirectorySearchEnabled(false);
+            transaction.add(R.id.blocked_numbers_activity_container, fragment,
+                    TAG_BLOCKED_SEARCH_FRAGMENT);
+        } else {
+            transaction.show(fragment);
+        }
+        transaction.commit();
+    }
+
+    private void showSearchUiActionBar() {
         mActionBar = getSupportActionBar();
         mActionBar.setCustomView(R.layout.search_edittext);
         mActionBar.setBackgroundDrawable(null);
+        mActionBar.setElevation(0);
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(false);
         mActionBar.setDisplayShowHomeEnabled(false);
@@ -90,49 +175,41 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
         final SearchEditTextLayout searchEditTextLayout = (SearchEditTextLayout) mActionBar
                 .getCustomView().findViewById(R.id.search_view_container);
         searchEditTextLayout.expand(false, true);
-        searchEditTextLayout.setCallback(new SearchEditTextLayout.Callback() {
-            @Override
-            public void onBackButtonClicked() {
-                onBackPressed();
-            }
-
-            @Override
-            public void onSearchViewClicked() {
-            }
-        });
+        searchEditTextLayout.setCallback(mSearchLayoutCallback);
 
         mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
         mSearchView.setHint(R.string.block_number_search_hint);
+
+        // TODO: Don't set custom text size; use default search text size.
         mSearchView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimension(R.dimen.blocked_number_search_text_size));
-
-        enterSearchUi();
-    }
-
-    private void enterSearchUi() {
-        if (mSearchFragment != null) {
-            return;
-        }
-        final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        BlockedListSearchFragment fragment = (BlockedListSearchFragment) getFragmentManager()
-                .findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
-        if (fragment == null) {
-            fragment = new BlockedListSearchFragment();
-            transaction.add(R.id.search_activity_container, fragment, TAG_BLOCKED_SEARCH_FRAGMENT);
-        } else {
-            transaction.show(fragment);
-        }
-        fragment.setHasOptionsMenu(false);
-        fragment.setShowEmptyListForNullQuery(true);
-        fragment.setDirectorySearchEnabled(false);
-        transaction.commit();
     }
 
     @Override
     public void onAttachFragment(Fragment fragment) {
-        if (fragment instanceof BlockedListSearchFragment) {
+        if (fragment instanceof BlockedNumberFragment) {
+            mManagementFragment = (BlockedNumberFragment) fragment;
+        } else if (fragment instanceof BlockedListSearchFragment) {
             mSearchFragment = (BlockedListSearchFragment) fragment;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mIsShowingManagementUi) {
+            super.onBackPressed();
+        } else {
+            showManagementUi();
         }
     }
 
@@ -158,6 +235,6 @@ public class BlockedNumberSearchActivity extends AppCompatActivity
 
     @Override
     public int getActionBarHeight() {
-        return getResources().getDimensionPixelSize(R.dimen.action_bar_height_large);
+        return getSupportActionBar().getHeight();
     }
 }

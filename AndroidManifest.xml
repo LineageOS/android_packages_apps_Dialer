@@ -142,17 +142,17 @@
         </activity>
 
         <activity android:name="com.android.dialer.settings.DialerSettingsActivity"
-                  android:label="@string/dialer_settings_label"
-                  android:parentActivityName="com.android.dialer.DialtactsActivity"
-                  android:theme="@style/SettingsStyle"
-                  android:exported="false">
+              android:label="@string/dialer_settings_label"
+              android:parentActivityName="com.android.dialer.DialtactsActivity"
+              android:theme="@style/SettingsStyle"
+              android:exported="false">
         </activity>
 
-        <activity android:name="com.android.dialer.filterednumber.BlockedNumberSearchActivity"
-            android:label="@string/dialer_settings_label"
+        <activity android:name="com.android.dialer.filterednumber.ManageBlockedNumbersActivity"
+            android:label="@string/manage_blocked_numbers_label"
             android:parentActivityName="com.android.dialer.settings.DialerSettingsActivity"
-            android:theme="@style/DialtactsActivityTheme"
-            android:windowSoftInputMode="stateVisible">
+            android:theme="@style/ManageBlockedNumbersStyle"
+            android:exported="false">
         </activity>
 
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
@@ -162,11 +162,9 @@
         </activity>
 
         <activity android:name="com.android.dialer.CallDetailActivity"
-                  android:label="@string/callDetailTitle"
-                  android:theme="@style/CallDetailActivityTheme"
-                  android:icon="@mipmap/ic_launcher_phone"
-                  android:parentActivityName="com.android.dialer.calllog.CallLogActivity"
-            >
+            android:label="@string/callDetailTitle"
+            android:theme="@style/CallDetailActivityTheme"
+            android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>

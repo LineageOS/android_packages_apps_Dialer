@@ -830,8 +830,8 @@
     <!-- Label for the call settings section [CHAR LIMIT=30] -->
     <string name="call_settings_label">Calls</string>
 
-    <!-- Label for the blocked calls settings section [CHAR LIMIT=30] -->
-    <string name="blocked_calls_settings_label">Spam and blocked calls</string>
+    <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
+    <string name="manage_blocked_numbers_label">Blocked numbers</string>
 
     <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
          This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
