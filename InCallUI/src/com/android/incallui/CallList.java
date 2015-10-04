@@ -25,6 +25,7 @@ import android.telecom.PhoneAccount;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.logging.Logger;
+import com.android.incallui.util.TelecomCallUtil;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
@@ -85,61 +86,11 @@ public class CallList {
     CallList() {
     }
 
-    public void onCallAdded(android.telecom.Call telecomCall, final String countryIso) {
+    public void onCallAdded(final android.telecom.Call telecomCall) {
         Trace.beginSection("onCallAdded");
         final Call call = new Call(telecomCall);
         Log.d(this, "onCallAdded: callState=" + call.getState());
 
-        // Check if call should be blocked.
-        if (!call.isEmergencyCall() && call.getState() == Call.State.INCOMING) {
-            final AtomicBoolean hasTimedOut = new AtomicBoolean(false);
-            // Proceed with call if query is slow.
-            // Call may be blocked later when FilteredQueryHandler returns.
-            final Handler handler = new Handler();
-            final Runnable runnable = new Runnable() {
-                public void run() {
-                    hasTimedOut.set(true);
-                    onCallAddedInternal(call);
-                }
-            };
-            handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
-            if (mFilteredQueryHandler.startBlockedQuery(
-                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-                        @Override
-                        public void onCheckComplete(final Integer id) {
-                            if (!hasTimedOut.get()) {
-                                handler.removeCallbacks(runnable);
-                            }
-                            if (id == null) {
-                                if (!hasTimedOut.get()) {
-                                    onCallAddedInternal(call);
-                                }
-                            } else {
-                                mFilteredQueryHandler.incrementFilteredCount(id);
-                                call.blockCall();
-                                Log.d(this, "onCallAdded: "
-                                        + Log.pii(call.getNumber()) + " blocked.");
-
-                                // Call back to the presenter so it can update the call log.
-                                InCallPresenter.getInstance().onCallBlocked(
-                                        call.getNumber(), call.getTimeAddedMs());
-                            }
-                        }
-                    }, null, call.getNumber(), countryIso)) {
-                Log.d(this, "onCallAdded: invalid number "
-                        + call.getNumber() + ", skipping block checking");
-                if (!hasTimedOut.get()) {
-                    handler.removeCallbacks(runnable);
-                    onCallAddedInternal(call);
-                }
-            }
-        } else {
-            onCallAddedInternal(call);
-        }
-        Trace.endSection();
-    }
-
-    private void onCallAddedInternal(Call call) {
         if (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING) {
             onIncoming(call, call.getCannedSmsResponses());
@@ -148,6 +99,7 @@ public class CallList {
         }
 
         call.logCallInitiationType();
+        Trace.endSection();
     }
 
     public void onCallRemoved(android.telecom.Call telecomCall) {
