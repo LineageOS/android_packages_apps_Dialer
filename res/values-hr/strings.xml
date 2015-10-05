@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Deblokiraj broj"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Broj <xliff:g id="NUMBER">%1$s</xliff:g> uklonjen je s popisa blokiranih"</string>
     <string name="block_number_undo" msgid="591338370336724156">"PONIŠTI"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Uredi broj prije poziva"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Izbriši iz povijesti poziva"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Izbriši povijest poziva"</string>
@@ -100,6 +102,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Odlazni videopoziv"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Propušten videopoziv"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Govorna pošta"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"Dolazni pozivi"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Reprodukcija govorne pošte"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Prikaz kontakta <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -118,6 +124,10 @@
     <string name="payphone" msgid="7726415831153618726">"Javna telefonska govornica"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Nije moguće nazvati taj broj"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Da biste postavili govornu poštu, idite na Izbornik &gt; Postavke."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Da biste nazvali govornu poštu, najprije isključite način rada u zrakoplovu."</string>
@@ -131,8 +141,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Telefoniranje nije moguće jer je aplikacija Telefon onemogućena."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Na ovom uređaju nema aplikacije za to"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Pretražite kontakte"</string>
-    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
-    <skip />
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Dodaj broj ili potraži kontakt"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Vaša je povijest poziva prazna"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Uputite poziv"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nemate propuštene pozive."</string>
@@ -157,8 +166,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Dodaj kontaktu"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Pošalji SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Uputite videopoziv"</string>
-    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
-    <skip />
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blokiraj broj"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Broj novih propuštenih poziva: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Još nemate nikog na brzom biranju"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodaj favorit"</string>
@@ -231,4 +239,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"Da biste pretraživali kontakte, uključite dopuštenja za kontakte."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Da biste uputili poziv,\n uključite dopuštenje za telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacija Telefon nema dopuštenje za pisanje u postavke sustava."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>

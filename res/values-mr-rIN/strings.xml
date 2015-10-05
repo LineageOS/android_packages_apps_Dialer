@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"नंबर अनावरोधित करा"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"अवरोधित करा सूचीमधून <xliff:g id="NUMBER">%1$s</xliff:g> काढला"</string>
     <string name="block_number_undo" msgid="591338370336724156">"पूर्ववत करा"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"कॉल करण्यापूर्वी नंबर संपादित करा"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"कॉल इतिहासातून हटवा"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"कॉल इतिहास साफ करा"</string>
@@ -99,6 +101,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"जाणारे व्हिडिओ कॉल"</string>
     <string name="type_missed_video" msgid="954396897034220545">"सुटलेला व्हिडिओ कॉल"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"व्हॉइसमेल"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"येणारे कॉल"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"व्हॉइसमेल प्ले करा"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क पहा"</string>
@@ -117,6 +123,10 @@
     <string name="payphone" msgid="7726415831153618726">"सार्वजनिक फोन"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> सेकंद"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> मिनिट <xliff:g id="SECONDS">%s</xliff:g> सेकंद"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"या नंबरवर कॉल करू शकत नाही"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"व्हॉइसमेल सेट करण्‍यासाठी, मेनू आणि सेटिंग्‍ज वर जा."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"व्हॉइसमेलला कॉल करण्यासाठी, प्रथम विमान मोड बंद करा."</string>
@@ -227,4 +237,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"आपले संपर्क शोधण्‍यासाठी, संपर्क परवानग्या चालू करा."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"कॉल करण्‍यासाठी,\n फोन परवानगी चालू करा."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"फोन अॅपला सिस्टीम स‍ेटिंग्जमध्ये लिहिण्याची परवानगी नाही."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>

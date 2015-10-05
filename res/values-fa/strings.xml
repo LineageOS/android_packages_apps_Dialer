@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"رفع انسداد شماره"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> از فهرست مسدودها حذف شد"</string>
     <string name="block_number_undo" msgid="591338370336724156">"واگرد"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"ویرایش شماره قبل از تماس"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"حذف از سابقه تماس"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"پاک کردن سابقه تماس"</string>
@@ -99,6 +101,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"تماس ویدیویی خروجی"</string>
     <string name="type_missed_video" msgid="954396897034220545">"تماس ویدیویی بی‌پاسخ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"پست صوتی"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"تماس‌های ورودی"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"پخش پست صوتی"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"مشاهده مخاطب <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -117,6 +123,10 @@
     <string name="payphone" msgid="7726415831153618726">"تلفن عمومی"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> ثانیه"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> دقیقه <xliff:g id="SECONDS">%s</xliff:g> ثانیه"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"تماس با این شماره ممکن نیست"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"‏برای راه‌اندازی پست صوتی به منو &gt; تنظیمات بروید."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"برای تماس با پست صوتی، ابتدا حالت هواپیما را غیرفعال کنید."</string>
@@ -130,8 +140,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"برقراری تماس تلفنی ممکن نیست، زیرا برنامه تلفن غیرفعال شده است."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"هیچ برنامه‌ای برای انجام این کار در این دستگاه نصب نیست"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"جستجوی مخاطبین"</string>
-    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
-    <skip />
+    <string name="block_number_search_hint" msgid="5409571607043872758">"افزودن شماره یا جستجوی مخاطب"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"سابقه تماستان خالی است"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"برقراری تماس تلفنی"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"تماس از دست رفته‌ای ندارید."</string>
@@ -156,8 +165,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"افزودن به مخاطب"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ارسال پیامک"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"برقراری تماس ویدیویی"</string>
-    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
-    <skip />
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"مسدود کردن شماره"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> تماس‌ بی‌پاسخ جدید"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"هنوز کسی در فهرست شماره‌گیری سریع شما نیست"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"افزودن مورد دلخواه"</string>
@@ -229,4 +237,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"برای جستجوی مخاطبینتان، مجوزهای مخاطبین را روشن کنید."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"برای برقراری تماس،\n مجوز تلفن را روشن کنید."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"برنامه تلفن اجازه نوشتن در تنظیمات سیستم را ندارد."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>

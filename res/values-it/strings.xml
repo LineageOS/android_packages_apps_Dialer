@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Sblocca numero"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Numero <xliff:g id="NUMBER">%1$s</xliff:g> rimosso dall\'elenco di numeri bloccati"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ANNULLA"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Modifica numero prima di chiamare"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Elimina da cronologia chiamate"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Cancella cronologia chiamate"</string>
@@ -99,6 +101,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Videochiamata in uscita"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Videochiamata persa"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Segreteria"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"Chiamate in arrivo"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Riproduci messaggio vocale"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Visualizza <xliff:g id="NAME">%1$s</xliff:g> contatto"</string>
@@ -117,6 +123,10 @@
     <string name="payphone" msgid="7726415831153618726">"Cabina telefonica"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> secondi"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min e <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Impossibile chiamare questo numero"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Per configurare la segreteria, seleziona Menu &gt; Impostazioni."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per chiamare la segreteria, disattiva la modalità aereo."</string>
@@ -227,4 +237,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"Per cercare nei tuoi contatti, attiva le autorizzazioni Contatti."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Per fare una telefonata,\n attiva l\'autorizzazione Telefono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'app Telefono non dispone dell\'autorizzazione per modificare le impostazioni di sistema."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>

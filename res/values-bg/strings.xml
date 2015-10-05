@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Отблокиране на номера"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Премахнахте <xliff:g id="NUMBER">%1$s</xliff:g> от списъка с блокирани номера"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ОТМЯНА"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Редактиране на номер преди обаждане"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Изтриване от историята на обажданията"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята на обажданията"</string>
@@ -99,6 +101,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Изходящо видеообаждане"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Пропуснато видеообаждане"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Гласова поща"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"Вх. обаждания"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Пускане на гласовата поща"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Преглед на контактa <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -117,6 +123,10 @@
     <string name="payphone" msgid="7726415831153618726">"Обществен телефон"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> сек"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Не можете да се обадите на този номер"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"За да настроите гласовата поща, отворете „Меню“ &gt; „Настройки“."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"За да чуете гласовата си поща, първо изключете самолетния режим."</string>
@@ -130,8 +140,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Не може да се осъществи телефонно обаждане, защото приложението Телефон е деактивирано."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"На устройството няма приложение за това действие"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Търсене в контактите"</string>
-    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
-    <skip />
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Доб. номер или потърс. контакт"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Историята на обажданията ви е празна"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Извършване на обаждане"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Нямате пропуснати обаждания."</string>
@@ -156,8 +165,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Добавяне към контакт"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Изпращане на SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Провеждане на видеообаждане"</string>
-    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
-    <skip />
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Блокиране на номера"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> нови пропуснати обаждания"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Още нямате контакти за бързо набиране"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Добавяне на любим контакт"</string>
@@ -229,4 +237,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"За да търсите в контактите си, включете разрешенията за тях."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"За да извършите обаждане,\nвключете разрешението за телефон."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Приложението Телефон няма разрешение да записва в системните настройки."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>

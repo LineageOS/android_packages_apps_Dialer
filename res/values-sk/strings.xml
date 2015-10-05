@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Zrušiť blokovanie čísla"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Číslo <xliff:g id="NUMBER">%1$s</xliff:g> bolo odstránené zo zoznamu blokovaných čísel"</string>
     <string name="block_number_undo" msgid="591338370336724156">"SPÄŤ"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Pred volaním upraviť číslo"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Odstrániť z histórie hovorov"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Vymazať históriu hovorov?"</string>
@@ -101,6 +103,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Odchádzajúci videohovor"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Zmeškaný videohovor"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Hlasová schránka"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"Prichádzajúce hovory"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Prehrať hlasovú správu"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Zobraziť kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -119,6 +125,10 @@
     <string name="payphone" msgid="7726415831153618726">"Telefónny automat"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> s"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Na toto číslo nie je možné volať"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ak chcete nastaviť hlasovú schránku, prejdite na položku Menu &gt; Nastavenia."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Ak chcete volať hlasovú schránku, najprv vypnite režim v lietadle."</string>
@@ -132,8 +142,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nie je možné volať, pretože aplikácia Telefón bola deaktivovaná."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Na tomto zariadení nie je aplikácia na vykonanie danej akcie"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Hľadať kontakty"</string>
-    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
-    <skip />
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Pridajte číslo / vyhľadajte v kontaktoch"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"História hovorov je prázdna"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Zavolať"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nemáte žiadne zmeškané hovory."</string>
@@ -158,8 +167,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Pridať ku kontaktu"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Odoslať SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Uskutočniť videohovor"</string>
-    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
-    <skip />
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blokovať číslo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Počet nových zmeškaných hovorov: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"V rýchlom vytáčaní zatiaľ nemáte žiadny kontakt"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Pridať obľúbený kontakt"</string>
@@ -233,4 +241,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"Ak chcete hľadať kontakty, zapnite povolenie Kontakty."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"Ak chcete uskutočniť hovor,\n zapnite povolenie Telefón."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefónna aplikácia nemá povolenie na zápis do nastavení systému."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>

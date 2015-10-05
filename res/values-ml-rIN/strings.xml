@@ -29,6 +29,8 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"ബ്ലോക്ക് ലിസ്റ്റിൽ നിന്ന് <xliff:g id="NUMBER">%1$s</xliff:g> നീക്കംചെയ്തു"</string>
     <string name="block_number_undo" msgid="591338370336724156">"പഴയപടിയാക്കുക"</string>
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"കോൾ ചരിത്രത്തിൽ നിന്ന് മായ്‌ക്കുക"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
@@ -99,6 +101,10 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"വിളിച്ച വീഡിയോ കോൾ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"വീഡിയോ കോൾ നഷ്‌ടമായി"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"വോയ്‌സ്‌മെയിൽ"</string>
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
     <string name="actionIncomingCall" msgid="6028930669817038600">"ഇൻകമിംഗ് കോളുകൾ"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"വോയ്‌സ്‌മെയിൽ പ്ലേ ചെയ്യുക"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> എന്ന കോൺടാക്റ്റ് കാണുക"</string>
@@ -117,6 +123,10 @@
     <string name="payphone" msgid="7726415831153618726">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> സെക്കൻഡ്"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> മി. <xliff:g id="SECONDS">%s</xliff:g> സെ."</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ഈ നമ്പറിലേക്ക് കോൾ ചെയ്യാനാവില്ല"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"വോയ്‌സ്‌മെയിൽ സജ്ജീകരിക്കുന്നതിന്, മെനു &gt; ക്രമീകരണങ്ങൾ എന്നതിലേക്ക് പോകുക."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"വോയ്‌സ്‌മെയിൽ വിളിക്കാൻ ആദ്യം ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കുക."</string>
@@ -130,8 +140,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"ഫോൺ അപ്ലിക്കേഷൻ പ്രവർത്തനരഹിതമാക്കിയിരിക്കുന്നതിനാൽ ഫോൺ കോൾ ചെയ്യാനാകില്ല."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"അതിനായി ഈ ഉപകരണത്തിൽ അപ്ലിക്കേഷനുകളൊന്നുമില്ല"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"കോണ്‍‌ടാക്റ്റുകള്‍ തിരയുക"</string>
-    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
-    <skip />
+    <string name="block_number_search_hint" msgid="5409571607043872758">"നമ്പർ ചേർക്കുക അല്ലെങ്കിൽ കോൺടാക്റ്റുകൾ തിരയുക"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"നിങ്ങളുടെ കോൾ ചരിത്രം ശൂന്യമാണ്"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ഒരു കോൾ ചെയ്യുക"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"നിങ്ങൾക്ക് മിസ്‌ഡ് കോളുകളൊന്നുമില്ല."</string>
@@ -156,8 +165,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS അയയ്ക്കുക"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"വീഡിയോ കോൾ ചെയ്യുക"</string>
-    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
-    <skip />
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"നമ്പർ ബ്ലോക്കുചെയ്യുക"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> പുതിയ മിസ്‌ഡ് കോളുകൾ"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"ഇതുവരെ ആരും നിങ്ങളുടെ സ്പീഡ് ഡയലിൽ ഇല്ല"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"പ്രിയപ്പെട്ടത് ചേർക്കുക"</string>
@@ -229,4 +237,16 @@
     <string name="permission_no_search" msgid="84152933267902056">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ തിരയുന്നതിന് കോൺടാക്റ്റുകൾക്കുള്ള അനുമതികൾ ഓണാക്കുക."</string>
     <string name="permission_place_call" msgid="7588803619716288478">"കോൾ ചെയ്യുന്നതിന്,\n ഫോൺ അനുമതി ഓണാക്കുക."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"സിസ്റ്റം ക്രമീകരണത്തിലേക്ക് എഴുതാൻ ഫോൺ ആപ്പിന് അനുമതിയില്ല."</string>
+    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
+    <skip />
+    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
+    <skip />
+    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
+    <skip />
+    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
+    <skip />
+    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
+    <skip />
 </resources>
