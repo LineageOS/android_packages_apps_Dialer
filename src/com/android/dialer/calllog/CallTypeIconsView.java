@@ -114,6 +114,8 @@ public class CallTypeIconsView extends View {
                 return mResources.missed;
             case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
                 return mResources.voicemail;
+            case AppCompatConstants.CALLS_BLOCKED_TYPE:
+                return mResources.blocked;
             default:
                 // It is possible for users to end up with calls with unknown call types in their
                 // call history, possibly due to 3rd party call log implementations (e.g. to
@@ -150,29 +152,22 @@ public class CallTypeIconsView extends View {
 
     private static class Resources {
 
-        /**
-         * Drawable representing an incoming answered call.
-         */
+        // Drawable representing an incoming answered call.
         public final Drawable incoming;
 
-        /**
-         * Drawable respresenting an outgoing call.
-         */
+        // Drawable respresenting an outgoing call.
         public final Drawable outgoing;
 
-        /**
-         * Drawable representing an incoming missed call.
-         */
+        // Drawable representing an incoming missed call.
         public final Drawable missed;
 
-        /**
-         * Drawable representing a voicemail.
-         */
+        // Drawable representing a voicemail.
         public final Drawable voicemail;
 
-        /**
-         * Drawable repesenting a video call.
-         */
+        // Drawable representing a blocked call.
+        public final Drawable blocked;
+
+        //  Drawable repesenting a video call.
         public final Drawable videoCall;
 
         /**
@@ -204,21 +199,26 @@ public class CallTypeIconsView extends View {
 
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
 
-            // Get the video call icon, scaled to match the height of the call arrows.
-            // We want the video call icon to be the same height as the call arrows, while keeping
-            // the same width aspect ratio.
-            Bitmap videoIcon = BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_videocam_24dp);
-            int scaledHeight = missed.getIntrinsicHeight();
-            int scaledWidth = (int) ((float) videoIcon.getWidth() *
-                    ((float) missed.getIntrinsicHeight() /
-                            (float) videoIcon.getHeight()));
-            Bitmap scaled = Bitmap.createScaledBitmap(videoIcon, scaledWidth, scaledHeight, false);
-            videoCall = new BitmapDrawable(context.getResources(), scaled);
+            blocked = getScaledBitmap(context, R.drawable.ic_block_24dp);
+            blocked.setColorFilter(r.getColor(R.color.blocked_call), PorterDuff.Mode.MULTIPLY);
+
+            videoCall = getScaledBitmap(context, R.drawable.ic_videocam_24dp);
             videoCall.setColorFilter(r.getColor(R.color.dialtacts_secondary_text_color),
                     PorterDuff.Mode.MULTIPLY);
 
             iconMargin = r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
+        }
+
+        // Gets the icon, scaled to the height of the call type icons. This helps display all the
+        // icons to be the same height, while preserving their width aspect ratio.
+        private Drawable getScaledBitmap(Context context, int resourceId) {
+            Bitmap icon = BitmapFactory.decodeResource(context.getResources(), resourceId);
+            int scaledHeight =
+                    context.getResources().getDimensionPixelSize(R.dimen.call_type_icon_size);
+            int scaledWidth = (int) ((float) icon.getWidth()
+                    * ((float) scaledHeight / (float) icon.getHeight()));
+            Bitmap scaledIcon = Bitmap.createScaledBitmap(icon, scaledWidth, scaledHeight, false);
+            return new BitmapDrawable(context.getResources(), scaledIcon);
         }
     }
 }
