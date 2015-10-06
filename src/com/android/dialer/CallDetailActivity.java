@@ -237,6 +237,9 @@ public class CallDetailActivity extends AppCompatActivity
 
         mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
 
+        ListView historyList = (ListView) findViewById(R.id.history);
+        historyList.addHeaderView(mInflater.inflate(R.layout.call_detail_header, null));
+
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
         mQuickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
