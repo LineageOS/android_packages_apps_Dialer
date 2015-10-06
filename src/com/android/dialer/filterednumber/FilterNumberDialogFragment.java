@@ -61,10 +61,6 @@ public class FilterNumberDialogFragment extends DialogFragment {
         public void onUndoBlockComplete();
     }
 
-    public void setQueryHandler (FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
-        mHandler = filteredNumberAsyncQueryHandler;
-    }
-
     public void setParentView(View view) {
         mParentView = view;
     }
@@ -97,6 +93,8 @@ public class FilterNumberDialogFragment extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
         final boolean isBlocked = getArguments().containsKey(ARG_BLOCK_ID);
         final String displayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
+
+        mHandler = new FilteredNumberAsyncQueryHandler(getContext().getContentResolver());
 
         String message;
         String okText;
