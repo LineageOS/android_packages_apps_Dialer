@@ -19,9 +19,11 @@ package com.android.dialer.onboard;
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_CONTACTS;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -45,6 +47,8 @@ public class OnboardingActivity extends TransactionSafeActivity implements Onboa
         PermissionsChecker, OnboardingFragment.HostInterface {
     public static final String KEY_ALREADY_REQUESTED_DEFAULT_DIALER =
             "key_already_requested_default_dialer";
+    public static final String KEY_CALLING_ACTIVITY_INTENT =
+            "key_calling_activity_intent";
 
     public static final int SCREEN_DEFAULT_DIALER = 0;
     public static final int SCREEN_PERMISSIONS = 1;
@@ -95,6 +99,16 @@ public class OnboardingActivity extends TransactionSafeActivity implements Onboa
     public void completeOnboardingFlow() {
         final Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
         editor.putBoolean(KEY_ALREADY_REQUESTED_DEFAULT_DIALER, true).apply();
+
+        // Once we have completed the onboarding flow, relaunch the activity that called us, so
+        // that we return the user to the intended activity.
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            final Intent previousActivityIntent =
+                    getIntent().getExtras().getParcelable(KEY_CALLING_ACTIVITY_INTENT);
+            if (previousActivityIntent != null) {
+                startActivity(previousActivityIntent);
+            }
+        }
         finish();
     }
 
@@ -114,9 +128,58 @@ public class OnboardingActivity extends TransactionSafeActivity implements Onboa
     }
 
     @Override
-    public boolean previouslyRequestedDefaultDialer() {
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+    public boolean hasAlreadyRequestedDefaultDialer() {
+        return getAlreadyRequestedDefaultDialerFromPreferences(this);
+    }
+
+    private static boolean getAlreadyRequestedDefaultDialerFromPreferences(Context context) {
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getBoolean(KEY_ALREADY_REQUESTED_DEFAULT_DIALER, false);
+    }
+
+    /**
+     * Checks the current permissions/application state to determine if the
+     * {@link OnboardingActivity} should be displayed. The onboarding flow should be launched if
+     * the current application is NOT the system dialer AND any of these criteria are true.
+     *
+     * 1) The phone application is not currently the default dialer AND we have not
+     * previously displayed a prompt to ask the user to set our app as the default dialer.
+     * 2) The phone application does not have the Phone permission.
+     * 3) The phone application does not have the Contacts permission.
+     *
+     * The exception if the current application is the system dialer applies because:
+     *
+     * 1) The system dialer must always provide immediate access to the dialpad to allow
+     * emergency calls to be made.
+     * 2) In order for the system dialer to require the onboarding flow, the user must have
+     * intentionally removed certain permissions/selected a different dialer. This assumes the
+     * that the user understands the implications of the actions previously taken. For example,
+     * removing the Phone permission from the system dialer displays a dialog that warns the
+     * user that this might break certain core phone functionality. Furthermore, various elements in
+     * the Dialer will prompt the user to grant permissions as needed.
+     *
+     * @param context A valid context object.
+     * @return {@code true} if the onboarding flow should be launched to request for the
+     *         necessary permissions or prompt the user to make us the default dialer, {@code false}
+     *         otherwise.
+     */
+    public static boolean shouldStartOnboardingActivity(Context context) {
+        // Since there is no official TelecomManager API to check for the system dialer,
+        // check to see if we have the system-only MODIFY_PHONE_STATE permission.
+        if (PermissionsUtil.hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE)) {
+            return false;
+        }
+
+        return (!getAlreadyRequestedDefaultDialerFromPreferences(context)
+                && !TelecomUtil.isDefaultDialer(context))
+                        || !PermissionsUtil.hasPhonePermissions(context)
+                        || !PermissionsUtil.hasContactsPermissions(context);
+    }
+
+    public static void startOnboardingActivity(Activity callingActivity) {
+        final Intent intent = new Intent(callingActivity, OnboardingActivity.class);
+        intent.putExtra(KEY_CALLING_ACTIVITY_INTENT, callingActivity.getIntent());
+        callingActivity.startActivity(intent);
     }
 
     /**
@@ -180,7 +243,7 @@ public class OnboardingActivity extends TransactionSafeActivity implements Onboa
 
         @Override
         public boolean shouldShowScreen() {
-            return !mPermissionsChecker.previouslyRequestedDefaultDialer()
+            return !mPermissionsChecker.hasAlreadyRequestedDefaultDialer()
                     && !mPermissionsChecker.isDefaultOrSystemDialer();
         }
 

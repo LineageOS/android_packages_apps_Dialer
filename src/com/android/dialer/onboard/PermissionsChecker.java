@@ -23,5 +23,5 @@ public interface PermissionsChecker {
     public boolean hasPhonePermissions();
     public boolean hasContactsPermissions();
     public boolean isDefaultOrSystemDialer();
-    public boolean previouslyRequestedDefaultDialer();
+    public boolean hasAlreadyRequestedDefaultDialer();
 }

@@ -80,6 +80,7 @@ import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
+import com.android.dialer.onboard.OnboardingActivity;
 import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.TelecomUtil;
@@ -373,6 +374,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         Trace.beginSection(TAG + " onCreate");
         super.onCreate(savedInstanceState);
+
+        if (OnboardingActivity.shouldStartOnboardingActivity(this)) {
+            OnboardingActivity.startOnboardingActivity(this);
+            finish();
+        }
 
         mFirstLaunch = true;
 
