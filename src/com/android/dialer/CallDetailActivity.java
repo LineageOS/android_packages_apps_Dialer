@@ -47,6 +47,7 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
+import com.android.dialer.onboard.OnboardingActivity;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfoHelper;
@@ -219,6 +220,11 @@ public class CallDetailActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        if (OnboardingActivity.shouldStartOnboardingActivity(this)) {
+            OnboardingActivity.startOnboardingActivity(this);
+            finish();
+        }
 
         mContext = this;
 
