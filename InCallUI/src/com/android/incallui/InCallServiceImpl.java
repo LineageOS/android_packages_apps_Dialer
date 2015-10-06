@@ -23,10 +23,7 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
-import com.android.contacts.common.GeoUtil;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
-
-import java.util.Locale;
 
 /**
  * Used to receive updates about calls from the Telecom component.  This service is bound to
@@ -48,14 +45,11 @@ public class InCallServiceImpl extends InCallService {
 
     @Override
     public void onCallAdded(Call call) {
-        final String countryIso = GeoUtil.getCurrentCountryIso(getApplicationContext());
-        CallList.getInstance().onCallAdded(call, countryIso);
         InCallPresenter.getInstance().onCallAdded(call);
     }
 
     @Override
     public void onCallRemoved(Call call) {
-        CallList.getInstance().onCallRemoved(call);
         InCallPresenter.getInstance().onCallRemoved(call);
     }
 
@@ -82,8 +76,6 @@ public class InCallServiceImpl extends InCallService {
         InCallPresenter.getInstance().onServiceBind();
         InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
         TelecomAdapter.getInstance().setInCallService(this);
-        CallList.getInstance().setFilteredNumberQueryHandler(
-                new FilteredNumberAsyncQueryHandler(getContentResolver()));
 
         return super.onBind(intent);
     }
@@ -102,7 +94,6 @@ public class InCallServiceImpl extends InCallService {
         Log.v(this, "tearDown");
         // Tear down the InCall system
         TelecomAdapter.getInstance().clearInCallService();
-        CallList.getInstance().clearOnDisconnect();
         InCallPresenter.getInstance().tearDown();
     }
 

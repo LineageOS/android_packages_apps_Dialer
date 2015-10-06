@@ -50,6 +50,7 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.OnCallLogQueryFinishedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
 import com.google.common.base.Preconditions;
 
@@ -57,6 +58,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -74,6 +76,8 @@ public class InCallPresenter implements CallList.Listener,
 
     private static final String EXTRA_FIRST_TIME_SHOWN =
             "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
+
+    private static final long BLOCK_QUERY_TIMEOUT_MS = 1000;
 
     private static final Bundle EMPTY_EXTRAS = new Bundle();
 
@@ -195,6 +199,13 @@ public class InCallPresenter implements CallList.Listener,
         private String mNumber;
         private long mTimeAddedMs;
 
+        private Runnable mTimeoutRunnable = new Runnable() {
+            @Override
+            public void run() {
+                unregister();
+            }
+        };
+
         public BlockedNumberContentObserver(Handler handler, String number, long timeAddedMs) {
             super(handler);
 
@@ -220,17 +231,13 @@ public class InCallPresenter implements CallList.Listener,
             if (mContext != null) {
                 mContext.getContentResolver().registerContentObserver(
                         CallLog.CONTENT_URI, true, this);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        unregister();
-                    }
-                }, TIMEOUT_MS);
+                mHandler.postDelayed(mTimeoutRunnable, TIMEOUT_MS);
             }
         }
 
         private void unregister() {
             if (mContext != null) {
+                mHandler.removeCallbacks(mTimeoutRunnable);
                 mContext.getContentResolver().unregisterContentObserver(this);
             }
         }
@@ -343,6 +350,8 @@ public class InCallPresenter implements CallList.Listener,
      */
     public void tearDown() {
         Log.d(this, "tearDown");
+        mCallList.clearOnDisconnect();
+
         mServiceConnected = false;
         attemptCleanup();
 
@@ -479,21 +488,85 @@ public class InCallPresenter implements CallList.Listener,
         bringToForeground(showDialpad);
     }
 
-    /**
-     * TODO: Consider listening to CallList callbacks to do this instead of receiving a direct
-     * method invocation from InCallService.
-     */
     public void onCallAdded(final android.telecom.Call call) {
+        // Check if call should be blocked.
+        if (!TelecomCallUtil.isEmergencyCall(call)
+                && call.getState() == android.telecom.Call.STATE_RINGING) {
+            maybeBlockCall(call);
+        } else {
+            mCallList.onCallAdded(call);
+        }
+
         // Since a call has been added we are no longer waiting for Telecom to send us a call.
         setBoundAndWaitingForOutgoingCall(false, null);
         call.registerCallback(mCallCallback);
     }
 
     /**
-     * TODO: Consider listening to CallList callbacks to do this instead of receiving a direct
-     * method invocation from InCallService.
+     * Checks whether a call should be blocked, and blocks it if so. Otherwise, it adds the call
+     * to the CallList so it can proceed as normal. There is a timeout, so if the function for
+     * checking whether a function is blocked does not return in a reasonable time, we proceed
+     * with adding the call anyways.
      */
+    private void maybeBlockCall(final android.telecom.Call call) {
+        final String countryIso = GeoUtil.getCurrentCountryIso(mContext);
+        final String number = TelecomCallUtil.getNumber(call);
+        final long timeAdded = System.currentTimeMillis();
+
+        // Though AtomicBoolean's can be scary, don't fear, as in this case it is only used on the
+        // main UI thread. It is needed so we can change its value within different scopes, since
+        // that cannot be done with a final boolean.
+        final AtomicBoolean hasTimedOut = new AtomicBoolean(false);
+
+        final Handler handler = new Handler();
+
+        // Proceed if the query is slow; the call may still be blocked after the query returns.
+        final Runnable runnable = new Runnable() {
+            public void run() {
+                hasTimedOut.set(true);
+                mCallList.onCallAdded(call);
+            }
+        };
+        handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
+
+        OnCheckBlockedListener onCheckBlockedListener = new OnCheckBlockedListener() {
+            @Override
+            public void onCheckComplete(final Integer id) {
+                if (!hasTimedOut.get()) {
+                    handler.removeCallbacks(runnable);
+                }
+                if (id == null) {
+                    if (!hasTimedOut.get()) {
+                        mCallList.onCallAdded(call);
+                    }
+                } else {
+                    call.reject(false, null);
+                    Log.d(this, "checkForBlockedCall: " + Log.pii(number) + " blocked.");
+
+                    mFilteredQueryHandler.incrementFilteredCount(id);
+
+                    // Register observer to update the call log.
+                    // BlockedNumberContentObserver will unregister after successful log or timeout.
+                    BlockedNumberContentObserver contentObserver =
+                            new BlockedNumberContentObserver(new Handler(), number, timeAdded);
+                    contentObserver.register();
+                }
+            }
+        };
+
+        boolean isInvalidNumber = mFilteredQueryHandler.startBlockedQuery(
+                onCheckBlockedListener, null, number, countryIso);
+        if (isInvalidNumber) {
+            Log.d(this, "checkForBlockedCall: invalid number, skipping block checking");
+            if (!hasTimedOut.get()) {
+                handler.removeCallbacks(runnable);
+                mCallList.onCallAdded(call);
+            }
+        }
+    }
+
     public void onCallRemoved(android.telecom.Call call) {
+        mCallList.onCallRemoved(call);
         call.unregisterCallback(mCallCallback);
     }
 
@@ -581,14 +654,6 @@ public class InCallPresenter implements CallList.Listener,
         if (isActivityStarted()) {
             mInCallActivity.dismissKeyguard(false);
         }
-    }
-
-    public void onCallBlocked(String number, long timeAddedMs) {
-        BlockedNumberContentObserver contentObserver =
-                new BlockedNumberContentObserver(new Handler(), number, timeAddedMs);
-
-        // BlockedNumberContentObserver will unregister after successful log or timeout.
-        contentObserver.register();
     }
 
     /**

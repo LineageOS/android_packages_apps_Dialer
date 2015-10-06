@@ -20,6 +20,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.util.IntentUtil;
 import com.android.incallui.Call.LogState;
+import com.android.incallui.util.TelecomCallUtil;
 
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
@@ -546,14 +547,7 @@ public class Call {
     }
 
     public String getNumber() {
-        if (mTelecomCall == null) {
-            return null;
-        }
-        if (mTelecomCall.getDetails().getGatewayInfo() != null) {
-            return mTelecomCall.getDetails().getGatewayInfo()
-                    .getOriginalAddress().getSchemeSpecificPart();
-        }
-        return getHandle() == null ? null : getHandle().getSchemeSpecificPart();
+        return TelecomCallUtil.getNumber(mTelecomCall);
     }
 
     public void blockCall() {
@@ -770,9 +764,7 @@ public class Call {
      * repeated calls to isEmergencyNumber.
      */
     private void updateEmergencyCallState() {
-        Uri handle = mTelecomCall.getDetails().getHandle();
-        mIsEmergencyCall = PhoneNumberUtils.isEmergencyNumber(
-                handle == null ? "" : handle.getSchemeSpecificPart());
+        mIsEmergencyCall = TelecomCallUtil.isEmergencyCall(mTelecomCall);
     }
 
     private void setModifyToVideoState(int newVideoState) {
