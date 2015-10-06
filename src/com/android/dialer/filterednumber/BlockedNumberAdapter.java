@@ -35,7 +35,6 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.util.PhoneNumberUtil;
 
@@ -46,16 +45,13 @@ public class BlockedNumberAdapter extends SimpleCursorAdapter {
     private Resources mResources;
     private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
     private ContactPhotoManager mContactPhotoManager;
-    private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
-    public BlockedNumberAdapter(Context context,
-                                FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
+    public BlockedNumberAdapter(Context context) {
         super(context, R.layout.blocked_number_item, null, new String[]{}, new int[]{}, 0);
         mContext = context;
         mContactInfoHelper = new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context));
         mContactPhotoManager = ContactPhotoManager.getInstance(context);
         mResources = context.getResources();
-        mFilteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
     }
 
     @Override
@@ -88,7 +84,6 @@ public class BlockedNumberAdapter extends SimpleCursorAdapter {
                 FilterNumberDialogFragment newFragment =
                         FilterNumberDialogFragment.newInstance(id, normalizedNumber, number,
                                 countryIso, displayNumber);
-                newFragment.setQueryHandler(mFilteredNumberAsyncQueryHandler);
                 newFragment.setParentView(
                         ((Activity) mContext).findViewById(R.id.blocked_number_fragment));
                 newFragment.show(((Activity) mContext).getFragmentManager(),
