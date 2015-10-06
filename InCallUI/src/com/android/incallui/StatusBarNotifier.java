@@ -654,4 +654,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     public void onLastForwardedNumberChange() {
         // no-op
     }
+
+    @Override
+    public void onChildNumberChange() {
+        // no-op
+    }
 }

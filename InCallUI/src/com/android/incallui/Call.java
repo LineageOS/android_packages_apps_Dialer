@@ -334,12 +334,13 @@ public class Call {
 
         Bundle callExtras = mTelecommCall.getDetails().getExtras();
         if (callExtras != null) {
-            // Child address arrives when the call is first set up, so we do not need to notify the
-            // UI of this.
+            // Check for a change in the child address and notify any listeners.
             if (callExtras.containsKey(Connection.EXTRA_CHILD_ADDRESS)) {
                 String childNumber = callExtras.getString(Connection.EXTRA_CHILD_ADDRESS);
+
                 if (!Objects.equals(childNumber, mChildNumber)) {
                     mChildNumber = childNumber;
+                    CallList.getInstance().onChildNumberChange(this);
                 }
             }
 
