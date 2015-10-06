@@ -16,6 +16,7 @@
 package com.android.dialer.list;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -36,12 +37,18 @@ import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClicked
 public class RegularSearchFragment extends SearchFragment
         implements OnEmptyViewActionButtonClickedListener {
 
-    private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
 
     private static final CachedNumberLookupService mCachedNumberLookupService =
         ObjectFactory.newCachedNumberLookupService();
+
+    public interface HostInterface {
+        public boolean isNearbyPlacesSearchEnabled();
+    }
+
+    private String mPermissionToRequest;
 
     public RegularSearchFragment() {
         configureDirectorySearch();
@@ -64,6 +71,7 @@ public class RegularSearchFragment extends SearchFragment
         ((PinnedHeaderListView) getListView()).setScrollToSectionOnHeaderTouch(true);
     }
 
+    @Override
     protected ContactEntryListAdapter createListAdapter() {
         RegularSearchListAdapter adapter = new RegularSearchListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
@@ -84,15 +92,36 @@ public class RegularSearchFragment extends SearchFragment
     @Override
     protected void setupEmptyView() {
         if (mEmptyView != null && getActivity() != null) {
+            final int imageResource;
+            final int actionLabelResource;
+            final int descriptionResource;
+            final OnEmptyViewActionButtonClickedListener listener;
             if (!PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
-                mEmptyView.setImage(R.drawable.empty_contacts);
-                mEmptyView.setActionLabel(R.string.permission_single_turn_on);
-                mEmptyView.setDescription(R.string.permission_no_search);
-                mEmptyView.setActionClickedListener(this);
+                imageResource = R.drawable.empty_contacts;
+                actionLabelResource = R.string.permission_single_turn_on;
+                descriptionResource = R.string.permission_no_search;
+                listener = this;
+                mPermissionToRequest = READ_CONTACTS;
+            } else if (((HostInterface) getActivity()).isNearbyPlacesSearchEnabled()
+                    && !PermissionsUtil.hasPermission(getActivity(), ACCESS_FINE_LOCATION)) {
+                imageResource = R.drawable.empty_contacts;
+                actionLabelResource = R.string.permission_single_turn_on;
+                descriptionResource = R.string.permission_no_location_for_search;
+                listener = this;
+                mPermissionToRequest = ACCESS_FINE_LOCATION;
             } else {
-                mEmptyView.setImage(EmptyContentView.NO_IMAGE);
-                mEmptyView.setActionLabel(EmptyContentView.NO_LABEL);
-                mEmptyView.setDescription(EmptyContentView.NO_LABEL);
+                imageResource = EmptyContentView.NO_IMAGE;
+                actionLabelResource = EmptyContentView.NO_LABEL;
+                descriptionResource = EmptyContentView.NO_LABEL;
+                listener = null;
+                mPermissionToRequest = null;
+            }
+
+            mEmptyView.setImage(imageResource);
+            mEmptyView.setActionLabel(actionLabelResource);
+            mEmptyView.setDescription(descriptionResource);
+            if (listener != null) {
+                mEmptyView.setActionClickedListener(listener);
             }
         }
     }
@@ -104,17 +133,20 @@ public class RegularSearchFragment extends SearchFragment
             return;
         }
 
-        requestPermissions(new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+        if (READ_CONTACTS.equals(mPermissionToRequest)
+                || ACCESS_FINE_LOCATION.equals(mPermissionToRequest)) {
+            requestPermissions(new String[] {mPermissionToRequest}, PERMISSION_REQUEST_CODE);
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
             int[] grantResults) {
-        if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
             setupEmptyView();
             if (grantResults != null && grantResults.length == 1
                     && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-                PermissionsUtil.notifyPermissionGranted(getActivity(), READ_CONTACTS);
+                PermissionsUtil.notifyPermissionGranted(getActivity(), mPermissionToRequest);
             }
         }
     }
