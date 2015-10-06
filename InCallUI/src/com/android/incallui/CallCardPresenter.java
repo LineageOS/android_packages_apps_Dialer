@@ -513,7 +513,15 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private void onContactInfoComplete(String callId, ContactCacheEntry entry, boolean isPrimary) {
-        updateContactEntry(entry, isPrimary);
+        final boolean entryMatchesExistingCall =
+                (isPrimary && mPrimary != null && TextUtils.equals(callId,  mPrimary.getId())) ||
+                (!isPrimary && mSecondary != null && TextUtils.equals(callId, mSecondary.getId()));
+        if (entryMatchesExistingCall) {
+            updateContactEntry(entry, isPrimary);
+        } else {
+            Log.w(this, "Dropping stale contact lookup info for " + callId);
+        }
+
         if (entry.name != null) {
             Log.d(TAG, "Contact found: " + entry);
         }
