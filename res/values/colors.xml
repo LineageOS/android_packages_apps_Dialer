@@ -92,9 +92,10 @@
 
     <!-- Color for missed call icons. -->
     <color name="missed_call">#ff2e58</color>
-
     <!-- Color for answered or outgoing call icons. -->
     <color name="answered_call">@color/dialer_green_highlight_color</color>
+    <!-- Color for blocked call icons. -->
+    <color name="blocked_call">@color/dialtacts_secondary_text_color</color>
 
     <!-- Color for icons in the actionbar -->
     <color name="actionbar_icon_color">#ffffff</color>
