@@ -44,7 +44,7 @@
     <dimen name="call_detail_bottom_margin">16dp</dimen>
     <dimen name="call_detail_header_top_margin">20dp</dimen>
     <dimen name="call_detail_header_bottom_margin">9dp</dimen>
-    <dimen name="call_detail_translation_z">0.5dp</dimen>
+    <dimen name="call_detail_elevation">0.5dp</dimen>
     <dimen name="transcription_top_margin">18dp</dimen>
     <dimen name="transcription_bottom_margin">18dp</dimen>
 
