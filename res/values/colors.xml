@@ -111,6 +111,7 @@
     <color name="divider_line_color">#c7c7c7</color>
 
     <!--  Colors for blocked numbers list -->
+    <color name="blocked_contact_background">#afafaf</color>
     <color name="blocked_number_primary_text_color">@color/dialtacts_primary_text_color</color>
     <color name="blocked_number_secondary_text_color">@color/dialtacts_secondary_text_color</color>
     <color name="delete_icon_tint">#6D6D6D</color>
