@@ -113,6 +113,11 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         // no-op
     }
 
+    @Override
+    public void onChildNumberChange() {
+        // no-op
+    }
+
     private boolean isVideoUpgradePending(Call call) {
         return call.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
