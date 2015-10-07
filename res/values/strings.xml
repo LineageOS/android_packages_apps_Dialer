@@ -876,48 +876,51 @@
     <!-- DO NOT TRANSLATE. Internal key for DTMF tone length preference. -->
     <string name="dtmf_tone_length_preference_key" translatable="false">button_dtmf_settings</string>
 
-    <!-- The label of the button used to turn on a single permission -->
+    <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
     <string name="permission_single_turn_on">Turn on</string>
 
-    <!--  The label of the button used to turn on multiple permissions -->
+    <!--  The label of the button used to turn on multiple permissions [CHAR LIMIT=30]-->
     <string name="permission_multiple_turn_on">Set permissions</string>
 
-    <!-- Shown as a prompt to turn on the contacts permission to enable speed dial -->
-    <string name="permission_no_speeddial">To enable speed dial,\n turn on the Contacts permission.</string>
+    <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
+    <string name="permission_no_speeddial">To enable speed dial, turn on the Contacts permission.</string>
 
-    <!-- Shown as a prompt to turn on the phone permission to enable the call log -->
-    <string name="permission_no_calllog">To see your call log,\n turn on the Phone permission.</string>
+    <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
+    <string name="permission_no_calllog">To see your call log, turn on the Phone permission.</string>
 
-    <!-- Shown as a prompt to turn on the contacts permission to show all contacts -->
-    <string name="permission_no_contacts">To see your contacts,\n turn on the Contacts permission.</string>
+    <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
+    <string name="permission_no_contacts">To see your contacts, turn on the Contacts permission.</string>
 
-    <!-- Shown as a prompt to turn on the phone permission to show voicemails -->
-    <string name="permission_no_voicemail">To access your voicemail,\n turn on the Phone permission.</string>
+    <!-- Shown as a prompt to turn on the phone permission to show voicemails [CHAR LIMIT=NONE]-->
+    <string name="permission_no_voicemail">To access your voicemail, turn on the Phone permission.</string>
 
-    <!-- Shown as a prompt to turn on contacts permissions to allow contact search -->
+    <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
     <string name="permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
 
-    <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-    <string name="permission_place_call">To place a call,\n turn on the Phone permission.</string>
+    <!-- Shown as a prompt to turn on location permissions and/or enable location to allow nearby places search [CHAR LIMIT=NONE]-->
+    <string name="permission_no_location_for_search">To search nearby locations, allow Phone to access your location.</string>
 
-    <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead.-->
+    <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
+    <string name="permission_place_call">To place a call, turn on the Phone permission.</string>
+
+    <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
     <string name="toast_cannot_write_system_settings">Phone app does not have permission to write to system settings.</string>
 
-    <!-- Title of the onboarding screen that asks the user to make Phone the default Phone app -->
+    <!-- Title of the onboarding screen that asks the user to make Phone the default Phone app [CHAR LIMIT=NONE]-->
     <string name="request_default_dialer_screen_title">A better way of calling is calling</string>
 
-    <!-- Content of the onboarding screen that asks the user to make Phone the default Phone app -->
+    <!-- Content of the onboarding screen that asks the user to make Phone the default Phone app [CHAR LIMIT=NONE]-->
     <string name="request_default_dialer_screen_content">Make Phone your default phone app to be able to do things like see who\'s calling you, even when they\'re not in your contacts.</string>
 
-    <!-- Title of the onboarding screen that asks the user to grant us the Contacts and Phone permissions -->
+    <!-- Title of the onboarding screen that asks the user to grant us the Contacts and Phone permissions [CHAR LIMIT=NONE]-->
     <string name="request_permissions_screen_title">Get talking to your friends and family</string>
 
-    <!-- Content of the onboarding screen that asks the user to grant us the Contacts and Phone permissions -->
+    <!-- Content of the onboarding screen that asks the user to grant us the Contacts and Phone permissions [CHAR LIMIT=NONE]-->
     <string name="request_permissions_screen_content">Phone will need to access your phone and contacts to make calls to people in your contacts.</string>
 
-    <!-- The label of the button used to skip a screen in the onboarding flow -->
+    <!-- The label of the button used to skip a screen in the onboarding flow [CHAR LIMIT=30]-->
     <string name="onboarding_skip_button">Skip</string>
 
-    <!-- The label of the button used to go to the next screen in the onboarding flow -->
+    <!-- The label of the button used to go to the next screen in the onboarding flow [CHAR LIMIT=30]-->
     <string name="onboarding_next_button">Next</string>
 </resources>

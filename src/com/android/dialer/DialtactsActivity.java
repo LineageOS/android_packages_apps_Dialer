@@ -110,6 +110,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
+        RegularSearchFragment.HostInterface,
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         PopupMenu.OnMenuItemClickListener,
@@ -868,6 +869,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else {
             mVoiceSearchButton.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public boolean isNearbyPlacesSearchEnabled() {
+        return false;
     }
 
     protected int getSearchBoxHint () {
