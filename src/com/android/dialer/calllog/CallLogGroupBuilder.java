@@ -24,6 +24,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.dialer.util.AppCompatConstants;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -145,10 +146,11 @@ public class CallLogGroupBuilder {
             final boolean isSameAccount = isSameAccount(
                     groupAccountComponentName, accountComponentName, groupAccountId, accountId);
 
-            // Group with the same number and account which are not voicemail.
-            if (isSameNumber && isSameAccount
-                    && (callType != Calls.VOICEMAIL_TYPE)
-                    && (groupCallType != Calls.VOICEMAIL_TYPE)) {
+            // Group with the same number and account. Never group voicemails. Only group blocked
+            // calls with other blocked calls.
+            if (isSameNumber && isSameAccount && areBothNotVoicemail(callType, groupCallType)
+                    && (areBothNotBlocked(callType, groupCallType)
+                            || areBothBlocked(callType, groupCallType))) {
                 // Increment the size of the group to include the current call, but do not create
                 // the group until finding a call that does not match.
                 groupSize++;
@@ -239,5 +241,20 @@ public class CallLogGroupBuilder {
         } else {
             return DAY_GROUP_OTHER;
         }
+    }
+
+    private boolean areBothNotVoicemail(int callType, int groupCallType) {
+        return callType != AppCompatConstants.CALLS_VOICEMAIL_TYPE
+                && groupCallType != AppCompatConstants.CALLS_VOICEMAIL_TYPE;
+    }
+
+    private boolean areBothNotBlocked(int callType, int groupCallType) {
+        return callType != AppCompatConstants.CALLS_BLOCKED_TYPE
+                && groupCallType != AppCompatConstants.CALLS_BLOCKED_TYPE;
+    }
+
+    private boolean areBothBlocked(int callType, int groupCallType) {
+        return callType == AppCompatConstants.CALLS_BLOCKED_TYPE
+                && groupCallType == AppCompatConstants.CALLS_BLOCKED_TYPE;
     }
 }

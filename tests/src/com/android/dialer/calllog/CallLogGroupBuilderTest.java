@@ -95,7 +95,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         assertGroupIs(0, 3, mFakeGroupCreator.groups.get(0));
     }
 
-    public void testAddGroups_Voicemail() {
+    public void testGrouping_Voicemail() {
         // Does not group with other types of calls, include voicemail themselves.
         assertCallsAreNotGrouped(
                 AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_MISSED_TYPE);
@@ -107,7 +107,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
                 AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_OUTGOING_TYPE);
     }
 
-    public void testAddGroups_Missed() {
+    public void testGrouping_Missed() {
         // Groups with one or more missed calls.
         assertCallsAreGrouped(
                 AppCompatConstants.CALLS_MISSED_TYPE, AppCompatConstants.CALLS_MISSED_TYPE);
@@ -124,7 +124,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
                 AppCompatConstants.CALLS_MISSED_TYPE, AppCompatConstants.CALLS_OUTGOING_TYPE);
     }
 
-    public void testAddGroups_Incoming() {
+    public void testGrouping_Incoming() {
         // Groups with one or more incoming or outgoing.
         assertCallsAreGrouped(
                 AppCompatConstants.CALLS_INCOMING_TYPE, AppCompatConstants.CALLS_INCOMING_TYPE);
@@ -145,7 +145,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
                 AppCompatConstants.CALLS_INCOMING_TYPE, AppCompatConstants.CALLS_VOICEMAIL_TYPE);
     }
 
-    public void testAddGroups_Outgoing() {
+    public void testGrouping_Outgoing() {
         // Groups with one or more incoming or outgoing.
         assertCallsAreGrouped(
                 AppCompatConstants.CALLS_OUTGOING_TYPE, AppCompatConstants.CALLS_INCOMING_TYPE);
@@ -166,20 +166,31 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
                 AppCompatConstants.CALLS_INCOMING_TYPE, AppCompatConstants.CALLS_VOICEMAIL_TYPE);
     }
 
+    public void testGrouping_Blocked() {
+        assertCallsAreNotGrouped(
+                AppCompatConstants.CALLS_BLOCKED_TYPE, AppCompatConstants.CALLS_INCOMING_TYPE);
+        assertCallsAreNotGrouped(
+                AppCompatConstants.CALLS_BLOCKED_TYPE, AppCompatConstants.CALLS_OUTGOING_TYPE);
+        assertCallsAreNotGrouped(
+                AppCompatConstants.CALLS_BLOCKED_TYPE, AppCompatConstants.CALLS_MISSED_TYPE);
+
+    }
+
     public void testAddGroups_Mixed() {
         addMultipleCallLogEntries(TEST_NUMBER1,
-                AppCompatConstants.CALLS_VOICEMAIL_TYPE,   // Group 1:Stand-alone
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE,   // Group 1: 0
                 AppCompatConstants.CALLS_INCOMING_TYPE,    // Group 2: 1-4
                 AppCompatConstants.CALLS_OUTGOING_TYPE,
                 AppCompatConstants.CALLS_MISSED_TYPE,
                 AppCompatConstants.CALLS_MISSED_TYPE,
-                AppCompatConstants.CALLS_VOICEMAIL_TYPE,   // Group 3: Stand-alone
-                AppCompatConstants.CALLS_INCOMING_TYPE,    // Group 4: Stand-alone
-                AppCompatConstants.CALLS_VOICEMAIL_TYPE,   // Group 5: Stand-alone
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE,   // Group 3: 5
+                AppCompatConstants.CALLS_INCOMING_TYPE,    // Group 4: 6
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE,   // Group 5: 7
                 AppCompatConstants.CALLS_MISSED_TYPE,      // Group 6: 8-10
                 AppCompatConstants.CALLS_MISSED_TYPE,
                 AppCompatConstants.CALLS_OUTGOING_TYPE);
         mBuilder.addGroups(mCursor);
+
         assertEquals(6, mFakeGroupCreator.groups.size());
         assertGroupIs(0, 1, mFakeGroupCreator.groups.get(0));
         assertGroupIs(1, 4, mFakeGroupCreator.groups.get(1));
@@ -187,6 +198,23 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         assertGroupIs(6, 1, mFakeGroupCreator.groups.get(3));
         assertGroupIs(7, 1, mFakeGroupCreator.groups.get(4));
         assertGroupIs(8, 3, mFakeGroupCreator.groups.get(5));
+    }
+
+    public void testAddGroups_Blocked() {
+        addMultipleCallLogEntries(TEST_NUMBER1,
+                AppCompatConstants.CALLS_INCOMING_TYPE,     // Group 1: 0-1
+                AppCompatConstants.CALLS_OUTGOING_TYPE,
+                AppCompatConstants.CALLS_BLOCKED_TYPE,      // Group 2: 2
+                AppCompatConstants.CALLS_MISSED_TYPE,       // Group 3: 3
+                AppCompatConstants.CALLS_BLOCKED_TYPE,      // Group 4: 4-5
+                AppCompatConstants.CALLS_BLOCKED_TYPE);
+        mBuilder.addGroups(mCursor);
+
+        assertEquals(4, mFakeGroupCreator.groups.size());
+        assertGroupIs(0, 2, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(2, 1, mFakeGroupCreator.groups.get(1));
+        assertGroupIs(3, 1, mFakeGroupCreator.groups.get(2));
+        assertGroupIs(4, 2, mFakeGroupCreator.groups.get(3));
     }
 
     public void testEqualPhoneNumbers() {
