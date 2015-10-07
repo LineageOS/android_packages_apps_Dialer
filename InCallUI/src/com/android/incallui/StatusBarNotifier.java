@@ -270,7 +270,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
          * Fire off the notification
          */
         Notification notification = builder.build();
-        if (mCurrentNotification != notificationType) {
+        if (mCurrentNotification != notificationType && mCurrentNotification != NOTIFICATION_NONE) {
             Log.i(this, "Previous notification already showing - cancelling "
                     + mCurrentNotification);
             mNotificationManager.cancel(mCurrentNotification);
