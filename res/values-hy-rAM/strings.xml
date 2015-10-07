@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Արգելաբացել համարը"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g>-ը հեռացվել է արգելափակված համարների ցանկից:"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ՀԵՏԱՐԿԵԼ"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"Ջնջել"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Խմբագրել համարը զանգահարելուց առաջ"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Ջնջել զանգերի պատմությունից"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Ջնջել զանգերի պատմությունը"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Ելքային տեսազանգ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Բաց թողնված տեսազանգ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Ձայնային փոստ"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"Մերժված զանգ"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Արգելափակված զանգ"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Մուտքային զանգեր"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Նվագարկել ձայնային փոստը"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Դիտել <xliff:g id="NAME">%1$s</xliff:g> կոնտակտը"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> րոպե <xliff:g id="SECONDS">%s</xliff:g> վայրկյան"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g>-ին, ժամը <xliff:g id="TIME">%2$s</xliff:g>-ին"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Հնարավոր չէ զանգահարել այս համարով"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ձայնային փոստը կարգավորելու համար գնացեք Ցանկ &gt; Կարգավորումներ:"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Ձայնային փոստին զանգելու համար նախ անջատեք թռիչքային ռեժիմը:"</string>
@@ -140,7 +136,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Հնարավոր չէ զանգահարել, քանի որ Հեռախոս հավելվածն անջատված է:"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Սարքի վրա համապատասխան հավելված չկա"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Որոնել կոնտակտներ"</string>
-    <string name="block_number_search_hint" msgid="5409571607043872758">"Ավելացրեք համար կամ որոնեք կոնտակտներ"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Ավելացրեք համար/որոնեք կոնտակտներ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Ձեր զանգերի պատմությունը դատարկ է"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Զանգահարել"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Բաց թողած զանգեր չունեք:"</string>
@@ -230,23 +226,24 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Հաշիվներ զանգերի համար"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Միացնել"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Թույլտվությունների սահմանում"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Արագ համարահավաքը միացնելու համար\n միացրեք Կոնտակտներ թույլտվությունը:"</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Զանգերի մատյանը տեսնելու համար\n միացրեք Հեռախոս թույլտվությունը:"</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Ձեր կոնտակտները տեսնելու համար\n միացրեք Կոնտակտներ թույլտվությունը:"</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Ձայնային փոստից օգտվելու համար\n միացրեք Հեռախոս թույլտվությունը:"</string>
+    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
+    <skip />
+    <!-- no translation found for permission_no_calllog (555711464287041043) -->
+    <skip />
+    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
+    <skip />
+    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
+    <skip />
     <string name="permission_no_search" msgid="84152933267902056">"Կոնտակտները որոնելու համար միացրեք Կոնտակտների թույլտվությունները:"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Զանգ կատարելու համար\n միացրեք Հեռախոս թույլտվությունը:"</string>
+    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
+    <skip />
+    <!-- no translation found for permission_place_call (2101287782615887547) -->
+    <skip />
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Հեռախոս հավելվածը համակարգի կարգավորումները գրելու թույլտվություն չունի:"</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Զանգելուց լավը միայն զանգելն է"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Հեռախոսը դարձրեք ձեր հեռախոսի կանխադրված հավելվածը, որպեսզի կարողանանք տեսնել, թե ով է ձեզ զանգել՝ նույնիսկ եթե տվյալ անձը ձեր կոնտակտներում չէ:"</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Զրուցեք ձեր ընկերների և հարազատների հետ"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"Ձեր կոնտակտներում պահված մարդկանց զանգելու համար Հեռախոս հավելվածին անհրաժեշտ է օգտագործել ձեր հեռախոսը և կոնտակտները:"</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"Բաց թողնել"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"Հաջորդը"</string>
 </resources>

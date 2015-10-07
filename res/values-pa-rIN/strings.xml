@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> ਨੂੰ ਬਲੌਕ ਸੂਚੀ ਤੋਂ ਹਟਾਇਆ ਗਿਆ"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ਪਹਿਲਾਂ ਵਰਗਾ ਕਰੋ"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"ਹਟਾਓ"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"ਕਾਲ ਤੋਂ ਪਹਿਲਾਂ ਨੰਬਰ ਸੰਪਾਦਿਤ ਕਰੋ"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"ਕਾਲ ਇਤਿਹਾਸ ਵਿੱਚੋਂ ਮਿਟਾਓ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ਕਾਲ ਇਤਿਹਾਸ ਹਟਾਓ"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"ਆਊਟਗੋਇੰਗ ਵੀਡੀਓ ਕਾਲ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"ਮਿਸਡ ਵੀਡੀਓ ਕਾਲ"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"ਵੌਇਸਮੇਲ"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"ਅਸਵੀਕਾਰ ਕੀਤੀ ਕਾਲ"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"ਬਲੌਕ ਕੀਤੀ ਕਾਲ"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"ਇਨਕਮਿੰਗ ਕਾਲਾਂ"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"ਵੌਇਸਮੇਲ ਪਲੇ ਕਰੋ"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"ਸੰਪਰਕ <xliff:g id="NAME">%1$s</xliff:g> ਦੇਖੋ"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> ਮਿੰਟ <xliff:g id="SECONDS">%s</xliff:g> ਸਕਿੰਟ"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> ਨੂੰ <xliff:g id="TIME">%2$s</xliff:g> ਵਜੇ"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ਇਸ ਨੰਬਰ ਤੇ ਕਾਲ ਨਹੀਂ ਕਰ ਸਕਦਾ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ਵੌਇਸਮੇਲ ਸੈਟ ਅਪ ਕਰਨ ਲਈ, ਮੀਨੂ &gt; ਸੈਟਿੰਗਾਂ ਤੇ ਜਾਓ।"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"ਵੌਇਸਮੇਲ ਕਾਲ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਏਅਰਪਲੇਨ ਮੋਡ ਬੰਦ ਕਰੋ।"</string>
@@ -230,23 +226,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ਕਾਲਿੰਗ ਖਾਤੇ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ਚਾਲੂ ਕਰੋ"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ਅਨੁਮਤੀਆਂ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"ਸਪੀਡ ਡਾਇਲ ਨੂੰ ਸਮਰਥਿਤ ਕਰਨ ਲਈ,\n ਸੰਪਰਕ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"ਆਪਣੇ ਕਾਲ ਲੌਗ ਨੂੰ ਦੇਖਣ ਲਈ,\n ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"ਤੁਹਾਡੇ,\n ਸੰਪਰਕ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"ਆਪਣੇ ਵੌਇਸਮੇਲ ਨੂੰ ਐਕਸੈਸ ਕਰਨ ਲਈ,\n ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"ਸਪੀਡ ਡਾਇਲ ਨੂੰ ਸਮਰੱਥ ਕਰਨ ਲਈ, ਸੰਪਰਕ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"ਆਪਣਾ ਕਾਲ ਲੌਗ ਵੇਖਣ ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"ਆਪਣੇ ਸੰਪਰਕਾਂ ਨੂੰ ਵੇਖਣ ਲਈ, ਸੰਪਰਕ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"ਆਪਣੀ ਵੌਇਸਮੇਲ ਐਕਸੈਸ ਕਰਨ ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="permission_no_search" msgid="84152933267902056">"ਆਪਣੇ ਸੰਪਰਕਾਂ ਦੀ ਖੋਜ ਕਰਨ ਲਈ,, ਸੰਪਰਕ ਅਨੁਮਤੀਆਂ ਨੂੰ ਚਾਲੂ ਕਰੋ।"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"ਕੋਈ ਕਾਲ ਕਰਨ ਲਈ,\n ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"ਨੇੜਲੇ ਨਿਰਧਾਰਿਤ ਸਥਾਨ ਖੋਜਣ ਲਈ, ਫ਼ੋਨ ਨੂੰ ਤੁਹਾਡਾ ਨਿਰਧਾਰਿਤ ਸਥਾਨ ਐਕਸੈਸ ਦੀ ਆਗਿਆ ਦਿਓ।"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"ਕਾਲ ਕਰਨ ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ਫ਼ੋਨ ਐਪ ਦੇ ਕੋਲ ਸਿਸਟਮ ਸੈਟਿੰਗਜ਼ ਵਿੱਚ ਲਿੱਖਣ ਦੀ ਅਨੁਮਤੀ ਨਹੀਂ ਹੁੰਦੀ ਹੈ।"</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ਕਾਲ ਕਰਨ ਦਾ ਬਿਹਤਰ ਤਰੀਕਾ ਕਾਲ ਕਰਨਾ ਹੈ"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Phone ਨੂੰ ਆਪਣੀ ਮੂਲ ਫ਼ੋਨ ਐਪ ਬਣਾਉਣ ਨਾਲ ਤੁਸੀਂ ਇਹ ਕੰਮ ਕਰ ਸਕਦੇ ਹੋ ਜਿਵੇਂ ਕਿ ਇਹ ਵੇਖਣਾ ਕੀ ਤੁਹਾਨੂੰ ਕੌਣ ਕਾਲ ਕਰ ਰਿਹਾ ਹੈ, ਭਾਵੇਂ ਉਹ ਤੁਹਾਡੇ ਸੰਪਰਕਾਂ ਵਿੱਚ ਨਾ ਹੋਵੇ।"</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"ਆਪਣੇ ਪਰਿਵਾਰ ਅਤੇ ਦੌਸਤਾਂ ਨਾਲ ਗੱਲਾਂ ਕਰੋ"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"Phone ਨੂੰ ਤੁਹਾਡੇ ਸੰਪਰਕ ਵਿੱਚ ਦਿੱਤੇ ਲੋਕਾਂ ਨੂੰ ਕਾਲ ਕਰਨ ਲਈ ਤੁਹਾਡੇ ਫ਼ੋਨ ਅਤੇ ਸੰਪਰਕ ਨੂੰ ਐਕਸੈਸ ਕਰਨ ਦੀ ਲੋੜ ਹੋਵੇਗੀ।"</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"ਛੱਡੋ"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"ਅਗਲਾ"</string>
 </resources>

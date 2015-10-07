@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"နံပါတ်ကို ပိတ်ဆို့မှုမှ ဖြုတ်မည်"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> ကို ပိတ်ဆို့မှုစာရင်းမှ ဖယ်ရှားပြီးပါပြီ"</string>
     <string name="block_number_undo" msgid="591338370336724156">"နောက်ပြန်လုပ်ပါ"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"ဖျက်ရန်"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"ဖုန်းမခေါ်ခင် နံပါတ်အားပြင်ရန်"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"ခေါ်ဆိုမှု မှတ်တမ်း ထဲမှာ ဖျက်ရန်"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ခေါ်ဆိုမှု မှတ်တမ်း ရှင်းရန်"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"ပြုလုပ်နေဆဲ ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="type_missed_video" msgid="954396897034220545">"လွတ်သွားသော ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"အသံစာပို့စနစ်"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"ငြင်းဆိုခဲ့သည့် ခေါ်ဆိုမှု"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"ခေါ်ဆိုမှု ပိတ်ဆို့ထား"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"အဝင်ခေါ်ဆိုမှုများ"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"အသံပို့စာ နားထောင်ရန်"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> လိပ်စာကြည့်ရန်"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> မိနစ် <xliff:g id="SECONDS">%s</xliff:g> စက္ကန့်"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g> ၌"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ဒီနံပါတ်ကို မခေါ်ဆိုနိုင်ပါ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"အသံစာပို့စနစ်ကို ပြင်ဆင်ရန်၊ မီနူး ပြီးနောက် ဆက်တင် သို့သွားပါ"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"အသံစာပို့စနစ်ကို ခေါ်ဆိုမှုပြုရန် လေယာဉ်ပျံပေါ်သုံးစနစ်ကို ပိတ်ပါ"</string>
@@ -230,23 +226,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ခေါ်ဆိုသော အကောင့်များ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ဖွင့်ထားရန်"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ခွင့်ပြုချက်များ သတ်မှတ်မည်"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"လျှင်မြန်စွာ ဖုန်းခေါ်ဆိုရန်၊ \n အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"သင့်ခေါ်ဆိုမှု မှတ်တမ်းကိုကြည့်ရန်၊ \n ဖုန်းခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"သင့်အဆက်အသွယ်များကို ကြည့်ရန်၊ \n အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"သင့်အသံမေးလ်ကို အသုံးပြုရန်၊ \n ဖုန်းခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"မြန်နှုန်းမြင့်ဖုန်းခေါ်ဆိုမှုကို ဖွင့်ရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"ခေါ်ဆိုမှုမှတ်တမ်းကို ကြည့်ရန်၊ ဖုန်းခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"အဆက်အသွယ်များကိုကြည့်ရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"အသံမေးလ်ကိုအသုံးပြုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="permission_no_search" msgid="84152933267902056">"သင့်အဆက်အသွယ်များကို ရှာဖွေရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်များကို ဖွင့်ပါ။"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"ဖုန်းခေါ်ဆိုရန်၊ \n ဖုန်းခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"အနီးတဝိုက်ရှိနေရာများကို ရှာဖွေရန်၊ တည်နေရာကိုတွေ့နိုင်ရန် သင့်ဖုန်းကို ခွင့်ပြုပါ။"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"ဖုန်းခေါ်ဆိုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ဖုန်း အက်ပ်ဆီတွင် စနစ် ဆက်တင်များသို့ ရေးသားခွင့် မရှိပါ။"</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ခေါ်ဆိုရာတွင် မိမိက ခေါ်ဆိုခြင်းမှာ ပိုကောင်းပါသည်"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"သင်၏ ဖုန်းကို သင်၏ ပုံမှန် ဖုန်း အက်ပ် ပြုလုပ်လျက် သင့်ကို ခေါ်ဆိုသူက ဘယ်သူလဲ၊ သူတို့ သင်၏ အဆက်အသွယ်များထဲမှာ မရှိတောင်၊ မြင်နိုင်ခြင်းလို အရာများကို လုပ်လာနိုင်ပါမည်။"</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"သင်၏ မိတ်ဆွေများ နှင့် မိသားစုကို စကားပြောနိုင်ပါပြီ"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"Phone သင်၏ အဆက်အသွယ်များထဲက သူများကို ခေါ်ဆိုရန် ဖုန်းသည် သင်၏ ဖုန်း နှင့် အဆက်အသွယ်များကို အသုံးပြုရန် လိုအပ်မည်။"</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"ကျော်ရန်"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"နောက်တစ်ခု"</string>
 </resources>

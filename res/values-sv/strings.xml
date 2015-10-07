@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Häv blockeringen av telefonnumret"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> har tagits bort från listan över blockerade nummer"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ÅNGRA"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"Radera"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Redigera nummer före samtal"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Radera från samtalshistoriken"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Rensa samtalshistorik"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Utgående videosamtal"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Missat videosamtal"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Röstmeddelande"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"Avvisat samtal"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Blockerat samtal"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Inkommande samtal"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Spela upp röstmeddelande"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Visa kontakten <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> sek"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> kl. <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Det går inte att ringa det här numret"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Välj Meny &gt; Inställningar om du vill konfigurera röstbrevlådan."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Om du vill ringa röstbrevlådan måste du först inaktivera flygplansläget."</string>
@@ -230,23 +226,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Konton för samtal"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktivera"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ange behörigheter"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Om du vill aktivera snabbval\n aktiverar du behörigheten för Kontakter."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Om du vill visa samtalsloggen\n aktiverar du behörigheten för Telefon."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Om du vill visa kontakter\n aktiverar du behörigheten för Kontakter."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Om du vill komma åt röstbrevlådan\n aktiverar du behörigheten för Telefon."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Du måste aktivera behörigheten Kontakter för att kunna använda snabbuppringning."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Du måste aktivera behörigheten Telefon för att kunna visa samtalsloggen."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Du måste aktivera behörigheten Kontakter för att kunna visa kontakterna."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Du måste aktivera behörigheten Telefon för att kunna komma åt röstmeddelanden."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Aktivera behörigheter för Kontakter om du vill söka bland kontakterna."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Om du vill ringa ett samtal\n aktiverar du behörigheten för Telefon."</string>
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Du måste ge Telefon tillgång till din plats för att kunna söka efter platser i närheten."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Du måste aktivera behörigheten Telefon för att kunna ringa."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonappen har inte skrivbehörighet i systeminställningarna."</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Ett bättre sätt att ringa"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Om du anger Telefon som standardapp för samtal kan du bland annat se vem som ringer även när du inte har personen bland dina kontakter."</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Prata med familj och vänner"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"Appen Telefon behöver ha åtkomst till mobilen och dina kontakter för att ringa personer i din kontaktlista."</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"Hoppa över"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"Nästa"</string>
 </resources>

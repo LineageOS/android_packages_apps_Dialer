@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Odblokiraj številko"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Številka <xliff:g id="NUMBER">%1$s</xliff:g> je odstranjena s seznama blokiranih številk"</string>
     <string name="block_number_undo" msgid="591338370336724156">"RAZVELJAVI"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"Izbris"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Uredi številko pred klicem"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Izbris iz zgodovine klicev"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Izbriši zgodovino klicev"</string>
@@ -103,10 +102,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Odhodni videoklic"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Zamudili ste videoklic"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Odzivnik"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"Zavrnjen klic"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Blokiran klic"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Dohodni klici"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Predvajanje sporočil glasovne pošte"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Ogled stika <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -127,8 +124,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> ob <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Te številke ni mogoče klicati"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Če želite nastaviti odzivnik, odprite Meni &gt; Nastavitve."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Če želite poklicati odzivnik, najprej izklopite način za letalo."</string>
@@ -234,23 +230,24 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Računi za klicanje"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Vklop"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Nastavi dovoljenja"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Če želite omogočiti hitro klicanje,\n vklopite dovoljenje za stike."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Če si želite ogledati dnevnik klicev,\n vklopite dovoljenje za telefon."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Če si želite ogledati stike,\n vklopite dovoljenje za stike."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Če želite dostopati do sporočil v odzivniku,\n vklopite dovoljenje za telefon."</string>
+    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
+    <skip />
+    <!-- no translation found for permission_no_calllog (555711464287041043) -->
+    <skip />
+    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
+    <skip />
+    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
+    <skip />
     <string name="permission_no_search" msgid="84152933267902056">"Če želite iskati po stikih, vklopite dovoljenje za stike."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Če želite klicati,\n vklopite dovoljenje za telefon."</string>
+    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
+    <skip />
+    <!-- no translation found for permission_place_call (2101287782615887547) -->
+    <skip />
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacija Telefon nima dovoljenja za pisanje v sistemske nastavitve."</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Kliče boljši način klicanja"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Nastavite Telefon kot privzeto aplikacijo za telefon, tako da bo lahko na primer prikazano, kdo kliče, tudi če klicatelj ni med stiki."</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Pogovarjajte se s prijatelji in sorodniki"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"Za klicanje oseb med stiki potrebuje Telefon dostop do telefona in stikov."</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"Preskoči"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"Naprej"</string>
 </resources>

@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"解除封鎖號碼"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"已從封鎖清單移除 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="block_number_undo" msgid="591338370336724156">"復原"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"刪除"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"在撥號前編輯號碼"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"從通話記錄中刪除"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"清除通話記錄"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"撥出的視像通話"</string>
     <string name="type_missed_video" msgid="954396897034220545">"未接視像通話"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"留言信箱"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"拒絕來電"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"封鎖來電"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"來電"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"播放語音留言"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"查看聯絡人<xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> 分 <xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g><xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"無法撥打這個電話號碼"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"如要設定留言信箱，請移至 [選單] &gt; [設定]。"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"如要致電留言信箱，請先關閉飛行模式。"</string>
@@ -230,23 +226,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通話帳戶"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"開放權限"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"設定權限"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"如要啟用快速撥號功能，\n請開放「通訊錄」權限。"</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"如要查看通話記錄，\n請開放「手機」權限。"</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"如要查看聯絡人，\n請開放「通訊錄」權限。"</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"如要存取留言信箱，\n請開放「手機」權限。"</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"如要啟用快速撥號功能，請開放「通訊錄」權限。"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"如要查看通話記錄，請開放「手機」權限。"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"如要查看聯絡人，請開放「通訊錄」權限。"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"如要存取留言信箱，請開放「手機」權限。"</string>
     <string name="permission_no_search" msgid="84152933267902056">"如要搜尋聯絡人，請開啟「通訊錄」權限。"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"如要撥號，\n請開放「手機」權限。"</string>
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"如要搜尋附近地點，請允許「手機」存取您的位置。"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"如要撥打電話，請開放「手機」權限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"手機應用程式沒有系統設定的寫入權限。"</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"通話是最佳的聯繫方式"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"設定「手機」為預設手機應用程式，即使來電者不在您的通訊錄內，仍可查看來電者資料。"</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"與親友聊天"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"「手機」需要存取手機和通訊錄，方可致電通訊錄內的聯絡人。"</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"略過"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"繼續"</string>
 </resources>

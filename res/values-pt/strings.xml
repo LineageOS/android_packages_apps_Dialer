@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"Desbloquear número"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> removido da lista de bloqueio"</string>
     <string name="block_number_undo" msgid="591338370336724156">"DESFAZER"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"Excluir"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Editar número antes de chamar"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Excluir do histórico de chamadas"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Limpar histórico de chamadas"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Vídeo chamada realizada"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Vídeo chamada perdida"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Correio de voz"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"Chamada recusada"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Chamada bloqueada"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Chamadas recebidas"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Reproduzir mensagem de voz"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Visualizar contato <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> m <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> às <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Não é possível ligar para este número"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Para configurar o correio de voz, vá para Menu &gt; Configurações."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Para ligar para o correio de voz, primeiro desative o modo avião."</string>
@@ -230,23 +226,24 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Contas de chamadas"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Ativar"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Definir permissões"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Para ativar a discagem rápida,\n ative a permissão para \"Contatos\"."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Para ver seu registro de chamadas,\n ative a permissão para \"Telefone\"."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Para ver seus contatos,\n ative a permissão para \"Contatos\"."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Para acessar seu correio de voz,\n ative a permissão para \"Telefone\"."</string>
+    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
+    <skip />
+    <!-- no translation found for permission_no_calllog (555711464287041043) -->
+    <skip />
+    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
+    <skip />
+    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
+    <skip />
     <string name="permission_no_search" msgid="84152933267902056">"Para pesquisar seus contatos, ative as permissões para \"Contatos\"."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Para fazer uma chamada,\n ative a permissão para \"Telefone\"."</string>
+    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
+    <skip />
+    <!-- no translation found for permission_place_call (2101287782615887547) -->
+    <skip />
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"O app Telefone não tem permissão para gravar nas configurações do sistema."</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Um jeito melhor de fazer chamadas está chamando você"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Faça do app \"Telefone\" seu aplicativo padrão para fazer coisas como ver quem está ligando para você, mesmo quando essa pessoa não estiver nos seus contatos."</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Converse com seus amigos e familiares"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"O app Telefone precisa acessar seu smartphone e seu contatos para fazer chamadas para as pessoas que estão nos seus contatos."</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"Pular"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"Próxima"</string>
 </resources>

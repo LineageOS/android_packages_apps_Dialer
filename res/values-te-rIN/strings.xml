@@ -29,8 +29,7 @@
     <string name="call_log_unblock_number" msgid="3875011281703247750">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"నిరోధక జాబితా నుండి <xliff:g id="NUMBER">%1$s</xliff:g> తీసివేయబడింది"</string>
     <string name="block_number_undo" msgid="591338370336724156">"రద్దు చేయి"</string>
-    <!-- no translation found for call_details_delete (1833359621896346955) -->
-    <skip />
+    <string name="call_details_delete" msgid="1833359621896346955">"తొలగించు"</string>
     <string name="call_log_edit_number_before_call" msgid="812234391186201782">"కాల్ చేసే ముందు నంబర్‌ను సవరించు"</string>
     <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"కాల్ చరిత్ర నుండి తొలగించు"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"కాల్ చరిత్రను తీసివేయి"</string>
@@ -101,10 +100,8 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"అవుట్‌గోయింగ్ వీడియో కాల్"</string>
     <string name="type_missed_video" msgid="954396897034220545">"సమాధానమివ్వని వీడియో కాల్‌"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"వాయిస్ మెయిల్"</string>
-    <!-- no translation found for type_rejected (7783201828312472691) -->
-    <skip />
-    <!-- no translation found for type_blocked (3521686227115330015) -->
-    <skip />
+    <string name="type_rejected" msgid="7783201828312472691">"నిరాకరించిన కాల్"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"బ్లాక్ చేసిన కాల్"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"ఇన్‌కమింగ్ కాల్‌లు"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"వాయిస్ మెయిల్ ప్లే చేయండి"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> పరిచయాన్ని వీక్షించండి"</string>
@@ -125,8 +122,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> నిమి <xliff:g id="SECONDS">%s</xliff:g> సెక"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
-    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g>కి"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ఈ నంబర్‌కు కాల్ చేయలేరు"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"వాయిస్ మెయిల్ సెటప్ చేయడానికి, మెను &gt; సెట్టింగ్‌లకు వెళ్లండి."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"వాయిస్ మెయిల్ కాల్ చేయడానికి, మొదట ఎయిర్‌ప్లైన్ మోడ్‌ను ఆపివేయండి."</string>
@@ -230,23 +226,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"కాల్ చేసే ఖాతాలు"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ఆన్ చేయి"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"అనుమతులను సెట్ చేయి"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"స్పీడ్ డయల్‌ను ప్రారంభించడానికి,\n పరిచయాల అనుమతిని ఆన్ చేయండి."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"మీ కాల్ లాగ్‌ను చూడటానికి,\n ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"మీ పరిచయాలను చూడటానికి,\n పరిచయాల అనుమతిని ఆన్ చేయండి."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"మీ వాయిస్‌మెయిల్‌ను ప్రాప్యత చేయడానికి,\n ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"స్పీడ్ డయల్‌ను ప్రారంభించడానికి, పరిచయాల అనుమతిని ఆన్ చేయండి."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"మీ కాల్ లాగ్‌ను చూడటానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"మీ పరిచయాలను చూడటానికి, పరిచయాల అనుమతిని ఆన్ చేయండి."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"మీ వాయిస్ మెయిల్‌ను ప్రాప్యత చేయడానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
     <string name="permission_no_search" msgid="84152933267902056">"మీ పరిచయాలను శోధించడానికి, పరిచయాల అనుమతులను ఆన్ చేయండి."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"కాల్ చేయడానికి,\n ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"సమీప స్థానాలను శోధించడం కోసం, మీ స్థానాన్ని ప్రాప్యత చేయడానికి ఫోన్‌ను అనుమతించండి."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"కాల్ చేయడానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"సిస్టమ్ సెట్టింగ్‌లకు వ్రాయడం కోసం ఫోన్ అనువర్తనానికి అనుమతి లేదు."</string>
-    <!-- no translation found for request_default_dialer_screen_title (685643766987775056) -->
-    <skip />
-    <!-- no translation found for request_default_dialer_screen_content (6149997762086838421) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_title (7628851957217029400) -->
-    <skip />
-    <!-- no translation found for request_permissions_screen_content (24495396532130179) -->
-    <skip />
-    <!-- no translation found for onboarding_skip_button (3955670727733408256) -->
-    <skip />
-    <!-- no translation found for onboarding_next_button (8492839445714599756) -->
-    <skip />
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"కాల్ చేయడానికి ఫోన్ కాలింగ్ ఉత్తమ మార్గం"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"మీ పరిచయాల్లో లేకపోయినప్పటికీ మీకు కాల్ చేస్తున్నవారిని చూడటం వంటి అంశాలను చేయగలగడానికి ఫోన్‌ను మీ డిఫాల్ట్ అనువర్తనంగా చేయండి."</string>
+    <string name="request_permissions_screen_title" msgid="7628851957217029400">"మీ స్నేహితులు మరియు కుటుంబ సభ్యులతో మాట్లాడండి"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"మీ పరిచయాల్లోని వ్యక్తులకు కాల్‌లు చేయడం కోసం ఫోన్‌కు మీ ఫోన్ మరియు పరిచయాలకు ప్రాప్యత అనుమతించాలి."</string>
+    <string name="onboarding_skip_button" msgid="3955670727733408256">"దాటవేయి"</string>
+    <string name="onboarding_next_button" msgid="8492839445714599756">"తదుపరి"</string>
 </resources>
