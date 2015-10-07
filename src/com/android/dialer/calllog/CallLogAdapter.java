@@ -493,15 +493,7 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         views.showActions(mCurrentlyExpandedPosition == position);
-
-        String nameForDefaultImage = null;
-        if (TextUtils.isEmpty(info.name)) {
-            nameForDefaultImage = details.displayNumber;
-        } else {
-            nameForDefaultImage = info.name;
-        }
-        views.setPhoto(info.photoId, info.photoUri, info.lookupUri, nameForDefaultImage,
-                isVoicemailNumber, views.isBusiness);
+        views.updatePhoto();
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
     }
