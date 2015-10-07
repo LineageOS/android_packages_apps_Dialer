@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"कैमरा बंद है"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> के द्वारा"</string>
     <string name="note_sent" msgid="3548700178238244595">"नोट भेज दिया गया है"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"हाल ही के संदेश"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"व्यवसाय जानकारी"</string>
 </resources>

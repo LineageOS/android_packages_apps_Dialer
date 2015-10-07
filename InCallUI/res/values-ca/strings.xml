@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"Càmera desactivada"</string>
     <string name="child_number" msgid="7437330400723805538">"mitjançant <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"S\'ha enviat la nota"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Missatges recents"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Informació de l\'empresa"</string>
 </resources>

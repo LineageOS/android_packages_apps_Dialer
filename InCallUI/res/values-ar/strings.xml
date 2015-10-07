@@ -183,4 +183,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"تم إيقاف الكاميرا"</string>
     <string name="child_number" msgid="7437330400723805538">"عبر <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"تم إرسال الملاحظة"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"الرسائل الأخيرة"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"معلومات النشاط التجاري"</string>
 </resources>

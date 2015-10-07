@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"カメラをオフ"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g>に着信"</string>
     <string name="note_sent" msgid="3548700178238244595">"メモを送信しました"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"最近のメッセージ"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"ビジネス情報"</string>
 </resources>

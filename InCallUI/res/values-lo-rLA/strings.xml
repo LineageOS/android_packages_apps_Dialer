@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"ກ້ອງ​ຖ່າຍ​ຮູບ​ປິດ"</string>
     <string name="child_number" msgid="7437330400723805538">"ຜ່ານ <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"ສົ່ງ​ບັນ​ທຶກ​ແລ້ວ"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"ຂໍ້​ຄວາມ​ບໍ່​ດົນ​ມາ​ນີ້"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"ຂໍ້​ມູນ​ທຸ​ລະ​ກິດ"</string>
 </resources>

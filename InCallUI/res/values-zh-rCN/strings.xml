@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"关闭摄像头"</string>
     <string name="child_number" msgid="7437330400723805538">"通过 <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"已发送记事"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"最近的信息"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"商家信息"</string>
 </resources>

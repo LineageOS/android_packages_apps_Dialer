@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"ਕੈਮਰਾ ਬੰਦ"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> ਰਾਹੀਂ"</string>
     <string name="note_sent" msgid="3548700178238244595">"ਸੂਚਨਾ ਭੇਜੀ ਗਈ"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"ਹਾਲੀਆ ਸੁਨੇਹੇ"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"ਵਪਾਰ ਜਾਣਕਾਰੀ"</string>
 </resources>

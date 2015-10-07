@@ -171,4 +171,6 @@
     <string name="camera_off_description" msgid="5689494614359429889">"Camera off"</string>
     <string name="child_number" msgid="7437330400723805538">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"Note sent"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Recent messages"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Business info"</string>
 </resources>
