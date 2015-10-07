@@ -527,11 +527,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         view.setSingleLine(!isExpanded);
     }
 
-    public void setPhoto(long photoId, Uri photoUri, Uri contactUri, String displayName,
-            boolean isVoicemail, boolean isBusiness) {
-        quickContactView.assignContactUri(contactUri);
+    public void updatePhoto() {
+        quickContactView.assignContactUri(info.lookupUri);
         quickContactView.setOverlay(null);
 
+        final boolean isVoicemail = mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
         if (isVoicemail) {
             contactType = ContactPhotoManager.TYPE_VOICEMAIL;
@@ -539,19 +539,17 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             contactType = ContactPhotoManager.TYPE_BUSINESS;
         }
 
-        String lookupKey = null;
-        if (contactUri != null) {
-            lookupKey = UriUtils.getLookupKeyFromUri(contactUri);
-        }
-
-        DefaultImageRequest request = new DefaultImageRequest(
+        final String lookupKey = info.lookupUri != null
+                ? UriUtils.getLookupKeyFromUri(info.lookupUri) : null;
+        final String displayName = TextUtils.isEmpty(info.name) ? displayNumber : info.name;
+        final DefaultImageRequest request = new DefaultImageRequest(
                 displayName, lookupKey, contactType, true /* isCircular */);
 
-        if (photoId == 0 && photoUri != null) {
-            ContactPhotoManager.getInstance(mContext).loadPhoto(quickContactView, photoUri,
+        if (info.photoId == 0 && info.photoUri != null) {
+            ContactPhotoManager.getInstance(mContext).loadPhoto(quickContactView, info.photoUri,
                     mPhotoSize, false /* darkTheme */, true /* isCircular */, request);
         } else {
-            ContactPhotoManager.getInstance(mContext).loadThumbnail(quickContactView, photoId,
+            ContactPhotoManager.getInstance(mContext).loadThumbnail(quickContactView, info.photoId,
                     false /* darkTheme */, true /* isCircular */, request);
         }
     }
