@@ -22,6 +22,9 @@
     <color name="dialer_red_highlight_color">#ff1744</color>
     <color name="dialer_green_highlight_color">#00c853</color>
 
+    <color name="dialer_button_text_color">#fff</color>
+    <color name="dialer_flat_button_text_color">@color/dialer_theme_color</color>
+
     <!-- Color for the setting text. -->
     <color name="setting_primary_color">@color/dialtacts_primary_text_color</color>
     <!-- Color for the setting description text. -->
@@ -105,6 +108,7 @@
     <color name="floating_action_button_touch_tint">#80ffffff</color>
 
     <color name="call_log_action_divider">#eeeeee</color>
+    <color name="divider_line_color">#c7c7c7</color>
 
     <!--  Colors for blocked numbers list -->
     <color name="blocked_number_primary_text_color">@color/dialtacts_primary_text_color</color>
@@ -113,9 +117,11 @@
     <color name="blocked_number_background">#E0E0E0</color>
     <color name="blocked_number_accent_color">#42A5F5</color>
     <color name="blocked_number_block_color">#F44336</color>
+    <color name="blocked_number_header_color">@color/dialer_theme_color</color>
 
     <!-- Colors for onboarding flow -->
     <color name="onboarding_primary_text_color">#ffffff</color>
     <color name="onboarding_default_dialer_screen_background_color">#e06055</color>
     <color name="onboarding_permissions_screen_background_color">#689f38</color>
+
 </resources>

@@ -14,27 +14,67 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView"
+    <TextView android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/blockList"
-        android:paddingStart="@dimen/blocked_number_horizontal_margin"
-        android:paddingTop="@dimen/blocked_number_top_margin"
-        android:paddingBottom="@dimen/blocked_number_bottom_margin"
-        android:textColor="@color/blocked_number_accent_color"
+        android:textColor="@color/blocked_number_header_color"
+        android:padding="@dimen/blocked_number_container_padding"
         style="@android:style/TextAppearance.Material.Subhead" />
 
-    <Button
-        android:id="@+id/add_number_button"
+    <RelativeLayout android:id="@+id/importsettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView android:id="@+id/import_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_call_settings_import_description"
+            android:textSize="@dimen/blocked_number_settings_description_text_size"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="@dimen/blocked_number_container_padding"
+            android:paddingEnd="@dimen/blocked_number_container_padding" />
+
+        <Button android:id="@+id/import_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/import_description"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/blocked_number_container_padding"
+            android:text="@string/blocked_call_settings_import_button"
+            style="@style/DialerFlatButtonStyle" />
+
+        <Button android:id="@+id/view_numbers_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/import_description"
+            android:layout_toLeftOf="@id/import_button"
+            android:text="@string/blocked_call_settings_view_numbers_button"
+            style="@style/DialerFlatButtonStyle" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/import_button"
+            android:background="@color/divider_line_color"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+    </RelativeLayout>
+
+    <Button android:id="@+id/add_number_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/blockNumber"
-        android:layout_gravity="right"
-        android:textColor="@color/blocked_number_accent_color"
-        style="?android:attr/borderlessButtonStyle" />
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/blocked_number_container_padding"
+        android:layout_marginTop="8dp"
+        android:text="@string/blockNumber" />
 
 </LinearLayout>
