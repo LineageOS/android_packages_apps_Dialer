@@ -347,6 +347,19 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         updatePrimaryDisplayInfo();
     }
 
+    /**
+     * Handles a change to the child number by refreshing the primary call info.
+     */
+    @Override
+    public void onChildNumberChange() {
+        Log.v(this, "onChildNumberChange");
+
+        if (mPrimary == null) {
+            return;
+        }
+        updatePrimaryDisplayInfo();
+    }
+
     private String getSubscriptionNumber() {
         // If it's an emergency call, and they're not populating the callback number,
         // then try to fall back to the phone sub info (to hopefully get the SIM's

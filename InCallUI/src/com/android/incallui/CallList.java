@@ -176,6 +176,21 @@ public class CallList {
         }
     }
 
+    /**
+     * Called when the child number changes for a call.  The child number can be received after a
+     * call is initially set up, so we need to be able to inform listeners of the change.
+     *
+     * @param call The call.
+     */
+    public void onChildNumberChange(Call call) {
+        final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
+        if (listeners != null) {
+            for (CallUpdateListener listener : listeners) {
+                listener.onChildNumberChange();
+            }
+        }
+    }
+
     public void notifyCallUpdateListeners(Call call) {
         final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
@@ -632,5 +647,10 @@ public class CallList {
          * Notifies of a change to the last forwarded number for a call.
          */
         public void onLastForwardedNumberChange();
+
+        /**
+         * Notifies of a change to the child number for a call.
+         */
+        public void onChildNumberChange();
     }
 }
