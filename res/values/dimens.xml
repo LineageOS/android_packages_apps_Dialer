@@ -15,6 +15,8 @@
   ~ limitations under the License
 -->
 <resources>
+    <dimen name="button_horizontal_padding">16dp</dimen>
+
     <!--
           Drag to remove view (in dp because it is used in conjunction with a statically
           sized icon
@@ -147,6 +149,7 @@
     <dimen name="voicemail_playback_top_padding">12dp</dimen>
 
     <!-- Size of entries in blocked numbers list -->
+    <dimen name="blocked_number_container_padding">16dp</dimen>
     <dimen name="blocked_number_horizontal_margin">16dp</dimen>
     <dimen name="blocked_number_top_margin">16dp</dimen>
     <dimen name="blocked_number_bottom_margin">16dp</dimen>
@@ -154,6 +157,7 @@
     <dimen name="blocked_number_secondary_text_size">12sp</dimen>
     <dimen name="blocked_number_delete_icon_size">32dp</dimen>
     <dimen name="blocked_number_search_text_size">14sp</dimen>
+    <dimen name="blocked_number_settings_description_text_size">16sp</dimen>
 
     <dimen name="call_type_icon_size">12dp</dimen>
 </resources>
