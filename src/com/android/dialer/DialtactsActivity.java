@@ -110,7 +110,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
-        RegularSearchFragment.HostInterface,
+        RegularSearchFragment.CapabilityChecker,
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         PopupMenu.OnMenuItemClickListener,
@@ -607,6 +607,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (RegularSearchFragment) fragment;
             mRegularSearchFragment.setOnPhoneNumberPickerActionListener(this);
+            mRegularSearchFragment.setCapabilityChecker(this);
         } else if (fragment instanceof ListsFragment) {
             mListsFragment = (ListsFragment) fragment;
             mListsFragment.addOnPageChangeListener(this);

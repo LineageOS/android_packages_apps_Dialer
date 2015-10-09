@@ -29,6 +29,7 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialerbind.ObjectFactory;
 import com.android.incallui.Call.LogState;
+
 import com.android.dialer.R;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
@@ -44,11 +45,12 @@ public class RegularSearchFragment extends SearchFragment
     private static final CachedNumberLookupService mCachedNumberLookupService =
         ObjectFactory.newCachedNumberLookupService();
 
-    public interface HostInterface {
+    public interface CapabilityChecker {
         public boolean isNearbyPlacesSearchEnabled();
     }
 
     private String mPermissionToRequest;
+    private CapabilityChecker mCapabilityChecker;
 
     public RegularSearchFragment() {
         configureDirectorySearch();
@@ -58,6 +60,12 @@ public class RegularSearchFragment extends SearchFragment
     public void onStart() {
         super.onStart();
         AnalyticsUtil.sendScreenView(this);
+    }
+
+    @Override
+    public void onDetach() {
+        mCapabilityChecker = null;
+        super.onDetach();
     }
 
     public void configureDirectorySearch() {
@@ -102,7 +110,7 @@ public class RegularSearchFragment extends SearchFragment
                 descriptionResource = R.string.permission_no_search;
                 listener = this;
                 mPermissionToRequest = READ_CONTACTS;
-            } else if (((HostInterface) getActivity()).isNearbyPlacesSearchEnabled()
+            } else if (isNearbyPlacesSearchEnabled()
                     && !PermissionsUtil.hasPermission(getActivity(), ACCESS_FINE_LOCATION)) {
                 imageResource = R.drawable.empty_contacts;
                 actionLabelResource = R.string.permission_single_turn_on;
@@ -155,5 +163,16 @@ public class RegularSearchFragment extends SearchFragment
     protected int getCallInitiationType(boolean isRemoteDirectory) {
         return isRemoteDirectory ? LogState.INITIATION_REMOTE_DIRECTORY
                 : LogState.INITIATION_REGULAR_SEARCH;
+    }
+
+    public void setCapabilityChecker(CapabilityChecker capabilityChecker) {
+        mCapabilityChecker = capabilityChecker;
+    }
+
+    private boolean isNearbyPlacesSearchEnabled() {
+        if (mCapabilityChecker != null) {
+            return mCapabilityChecker.isNearbyPlacesSearchEnabled();
+        }
+        return false;
     }
 }
