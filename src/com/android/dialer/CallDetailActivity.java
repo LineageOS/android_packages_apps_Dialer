@@ -229,8 +229,7 @@ public class CallDetailActivity extends AppCompatActivity
     private TextView mAccountLabel;
     private View mCallButton;
 
-    private View mBlockNumberActionItem;
-    private TextView mBlockNumberActionItemText;
+    private TextView mBlockNumberActionItem;
     private View mEditBeforeCallActionItem;
     private View mReportActionItem;
 
@@ -284,9 +283,8 @@ public class CallDetailActivity extends AppCompatActivity
             }
         });
 
-        mBlockNumberActionItem = findViewById(R.id.call_detail_action_block);
+        mBlockNumberActionItem = (TextView) findViewById(R.id.call_detail_action_block);
         mBlockNumberActionItem.setOnClickListener(this);
-        mBlockNumberActionItemText = (TextView) findViewById(R.id.call_detail_action_block_text);
         mEditBeforeCallActionItem = findViewById(R.id.call_detail_action_edit_before_call);
         mEditBeforeCallActionItem.setOnClickListener(this);
         mReportActionItem = findViewById(R.id.call_detail_action_report);
@@ -443,9 +441,9 @@ public class CallDetailActivity extends AppCompatActivity
             public void onCheckComplete(Integer id) {
                 mBlockedNumberId = id;
                 if (mBlockedNumberId == null) {
-                    mBlockNumberActionItemText.setText(R.string.action_block_number);
+                    mBlockNumberActionItem.setText(R.string.action_block_number);
                 } else {
-                    mBlockNumberActionItemText.setText(R.string.action_unblock_number);
+                    mBlockNumberActionItem.setText(R.string.action_unblock_number);
                 }
 
                 mBlockNumberActionItem.setVisibility(View.VISIBLE);

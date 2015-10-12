@@ -23,59 +23,34 @@
         android:layout_height="@dimen/divider_line_thickness"
         android:background="@color/call_log_action_divider" />
 
-    <LinearLayout android:id="@+id/call_detail_action_block"
+    <TextView android:id="@+id/call_detail_action_block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:text="@string/action_block_number"
+        android:drawableLeft="@drawable/ic_call_detail_block"
+        style="@style/CallDetailActionItemStyle" />
+
+    <TextView android:id="@+id/call_detail_action_copy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_copy_number_text"
+        android:drawableLeft="@drawable/ic_call_detail_content_copy"
+        style="@style/CallDetailActionItemStyle" />
+
+    <TextView android:id="@+id/call_detail_action_edit_before_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_edit_number_before_call"
+        android:drawableLeft="@drawable/ic_call_detail_edit"
         android:visibility="gone"
-        style="@style/CallDetailActionItemStyle">
+        style="@style/CallDetailActionItemStyle" />
 
-        <TextView android:id="@+id/call_detail_action_block_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_block_number" />
-
-    </LinearLayout>
-
-    <LinearLayout android:id="@+id/call_detail_action_copy"
+    <TextView android:id="@+id/call_detail_action_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="@style/CallDetailActionItemStyle">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_copy_number_text" />
-
-    </LinearLayout>
-
-    <LinearLayout android:id="@+id/call_detail_action_edit_before_call"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:text="@string/action_report_number"
+        android:drawableLeft="@drawable/ic_call_detail_report"
         android:visibility="gone"
-        style="@style/CallDetailActionItemStyle">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_edit_number_before_call" />
-
-    </LinearLayout>
-
-    <LinearLayout android:id="@+id/call_detail_action_report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        style="@style/CallDetailActionItemStyle">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_report_number" />
-
-    </LinearLayout>
+        style="@style/CallDetailActionItemStyle" />
 
 </LinearLayout>
