@@ -155,9 +155,13 @@ public class CallLogAsyncTaskUtil {
             boolean isVoicemail = PhoneNumberUtil.isVoicemailNumber(context, accountHandle, number);
             boolean shouldLookupNumber =
                     PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemail;
-            ContactInfo info = shouldLookupNumber
-                            ? contactInfoHelper.lookupNumber(number, countryIso)
-                            : ContactInfo.EMPTY;
+
+            ContactInfo info = ContactInfo.EMPTY;
+            if (shouldLookupNumber) {
+                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso);
+                info = lookupInfo != null ? lookupInfo : ContactInfo.EMPTY;
+            }
+
             PhoneCallDetails details = new PhoneCallDetails(
                     context, number, numberPresentation, info.formattedNumber, isVoicemail);
 
