@@ -44,13 +44,16 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
+import com.android.dialer.contactinfo.NumberWithCountryIso;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -85,6 +88,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     protected ContactInfoCache mContactInfoCache;
+    protected final Map<NumberWithCountryIso, Integer> mBlockedIdCache;
 
     private boolean mIsCallLogActivity;
 
@@ -248,6 +252,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
         mTelecomCallLogCache = new TelecomCallLogCache(mContext);
+        mBlockedIdCache = new HashMap<NumberWithCountryIso, Integer>();
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, resources, mTelecomCallLogCache);
         mCallLogListItemHelper =
@@ -296,6 +301,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void invalidateCache() {
         mContactInfoCache.invalidate();
+        mBlockedIdCache.clear();
     }
 
     public void startCache() {
@@ -456,7 +462,7 @@ public class CallLogAdapter extends GroupingListAdapter
             details.objectId = info.objectId;
         }
 
-        CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
+        final CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
         views.info = info;
         views.rowId = c.getLong(CallLogQuery.ID);
         // Store values used when the actions ViewStub is inflated on expansion.
@@ -492,8 +498,28 @@ public class CallLogAdapter extends GroupingListAdapter
             mCurrentlyExpandedPosition = position;
         }
 
+        // Update the photo, once we know whether the user's number is blocked or not.
+        final NumberWithCountryIso blockedIdKey = new NumberWithCountryIso(number, countryIso);
+        if (mBlockedIdCache.containsKey(blockedIdKey)) {
+            views.blockId = mBlockedIdCache.get(blockedIdKey);
+            views.updatePhoto();
+        } else {
+            views.blockId = null;
+            boolean failed = mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                        new OnCheckBlockedListener() {
+                    @Override
+                    public void onCheckComplete(Integer id) {
+                        mBlockedIdCache.put(blockedIdKey, id);
+                        views.blockId = id;
+                        views.updatePhoto();
+                    }
+                }, null, number, countryIso);
+            if (failed) {
+                views.updatePhoto();
+            }
+        }
+
         views.showActions(mCurrentlyExpandedPosition == position);
-        views.updatePhoto();
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
     }
