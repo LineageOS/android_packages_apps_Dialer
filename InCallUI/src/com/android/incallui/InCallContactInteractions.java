@@ -17,6 +17,8 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.location.Address;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,9 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Wrapper class for objects that are used in generating the context about the contact in the InCall
@@ -64,13 +68,40 @@ public class InCallContactInteractions {
         }
     }
 
-    /**
-     * Set the data for the list adapter.
-     * @param data The data to add to the list adapter. This completely replaces any previous data.
-     */
-    public void setData(List<ContactContextInfo> data) {
+    public void setBusinessInfo(Address address, float distance) {
         mListAdapter.clear();
-        mListAdapter.addAll(data);
+        mListAdapter.addAll(constructBusinessContextInfo(address, distance));
+    }
+
+    private List<ContactContextInfo> constructBusinessContextInfo(Address address, float distance) {
+        List<ContactContextInfo> info = new ArrayList<ContactContextInfo>();
+
+        BusinessContextInfo headerInfo = new BusinessContextInfo();
+        headerInfo.iconId = R.drawable.ic_business_white_24dp;
+        headerInfo.heading = getContactContextTitle();
+        info.add(headerInfo);
+
+        //TODO: hours of operation information
+
+        // Location information
+        BusinessContextInfo distanceInfo = new BusinessContextInfo();
+        distanceInfo.iconId = R.drawable.ic_location_on_white_24dp;
+        if (distance != DistanceHelper.DISTANCE_NOT_FOUND) {
+            //TODO: add a setting to allow the user to select "KM" or "MI" as their distance units.
+            if (Locale.US.equals(Locale.getDefault())) {
+                distanceInfo.heading = mContext.getString(R.string.distance_imperial_away,
+                        distance * DistanceHelper.MILES_PER_METER);
+            } else {
+                distanceInfo.heading = mContext.getString(R.string.distance_metric_away,
+                        distance * DistanceHelper.KILOMETERS_PER_METER);
+            }
+        }
+        if (address != null) {
+            distanceInfo.detail = address.getAddressLine(0);
+        }
+        info.add(distanceInfo);
+
+        return info;
     }
 
     /**
@@ -99,13 +130,20 @@ public class InCallContactInteractions {
             TextView headingTextView = (TextView) listItem.findViewById(R.id.heading);
             TextView detailTextView = (TextView) listItem.findViewById(R.id.detail);
 
-            if (this.iconId == 0 || this.heading == null || this.detail == null) {
+            if (this.iconId == 0 || (this.heading == null && this.detail == null)) {
                 return;
             }
 
             imageView.setImageDrawable(listItem.getContext().getDrawable(this.iconId));
+
             headingTextView.setText(this.heading);
+            headingTextView.setVisibility(TextUtils.isEmpty(this.heading)
+                    ? View.GONE : View.VISIBLE);
+
             detailTextView.setText(this.detail);
+            detailTextView.setVisibility(TextUtils.isEmpty(this.detail)
+                    ? View.GONE : View.VISIBLE);
+
         }
     }
 
@@ -157,9 +195,7 @@ public class InCallContactInteractions {
             LayoutInflater inflater = (LayoutInflater)
                     getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View listItem;
-            listItem = inflater.inflate(mResId, null);
-
+            View listItem = inflater.inflate(mResId, null);
             ContactContextInfo item = getItem(position);
 
             if (item == null) {
@@ -167,7 +203,6 @@ public class InCallContactInteractions {
             }
 
             item.bindView(listItem);
-
             return listItem;
         }
     }

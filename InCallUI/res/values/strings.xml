@@ -470,4 +470,11 @@
 
     <!-- Title for the call context with a business-type contact. [CHAR LIMIT=40] -->
     <string name="business_contact_context_title">Business info</string>
+
+    <!-- Distance strings for business caller ID context. -->
+
+    <!-- Used to inform the user how far away a location is in miles. [CHAR LIMIT=NONE] -->
+    <string name="distance_imperial_away"><xliff:g id="distance">%.1f</xliff:g> mi away</string>
+    <!-- Used to inform the user how far away a location is in kilometers. [CHAR LIMIT=NONE] -->
+    <string name="distance_metric_away"><xliff:g id="distance">%.1f</xliff:g> km away</string>
 </resources>
