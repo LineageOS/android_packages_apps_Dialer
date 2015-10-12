@@ -241,6 +241,21 @@
         <item name="android:textColorLink">@color/dialtacts_theme_color</item>
     </style>
 
+    <style name="ManageBlockedNumbersStyle" parent="SettingsStyle">
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/ManageBlockedNumbersActionBarStyle</item>
+        <item name="actionBarStyle">@style/ManageBlockedNumbersActionBarStyle</item>
+        <item name="android:fastScrollTrackDrawable">@null</item>
+    </style>
+
+    <style name="ManageBlockedNumbersActionBarStyle" parent="DialtactsActionBarWithoutTitleStyle">
+        <!-- Styles that require AppCompat compatibility, remember to update both sets -->
+        <item name="android:height">@dimen/action_bar_height</item>
+        <item name="height">@dimen/action_bar_height</item>
+    </style>
+
     <!-- Inherit from Theme.Material.Light.Dialog instead of Theme.Material.Light.Dialog.Alert
     since the Alert dialog is private. They are identical anyway. -->
     <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog">
