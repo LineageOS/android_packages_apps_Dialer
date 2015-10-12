@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telefon"</string>
-    <string name="onHold" msgid="9035493194749959955">"În aşteptare"</string>
+    <string name="onHold" msgid="9035493194749959955">"În așteptare"</string>
     <string name="unknown" msgid="6878797917991465859">"Necunoscut"</string>
     <string name="private_num" msgid="6713286113000232309">"Număr privat"</string>
     <string name="payphone" msgid="4793877574636445118">"Telefon public"</string>
@@ -41,7 +41,7 @@
     <string name="card_title_conf_call" msgid="1162980346189744501">"Teleconferinţă"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Apel primit"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Apel încheiat"</string>
-    <string name="card_title_on_hold" msgid="821463117892339942">"În aşteptare"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"În așteptare"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Se închide telefonul"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"În timpul apelului"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Numărul meu este <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
@@ -59,7 +59,7 @@
     <string name="notification_missedCallTicker" msgid="504686252427747209">"Apel nepreluat de la <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Apel în desfăşurare"</string>
     <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Apel Wi-Fi în desfășurare"</string>
-    <string name="notification_on_hold" msgid="3480694969511790465">"În aşteptare"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"În așteptare"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Apel de intrare"</string>
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Apel prin Wi-Fi primit"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Apel video primit"</string>
