@@ -199,7 +199,7 @@ public class CallTypeIconsView extends View {
 
             voicemail = r.getDrawable(R.drawable.ic_call_voicemail_holo_dark);
 
-            blocked = getScaledBitmap(context, R.drawable.ic_block_18dp);
+            blocked = getScaledBitmap(context, R.drawable.ic_block_24dp);
             blocked.setColorFilter(r.getColor(R.color.blocked_call), PorterDuff.Mode.MULTIPLY);
 
             videoCall = getScaledBitmap(context, R.drawable.ic_videocam_24dp);

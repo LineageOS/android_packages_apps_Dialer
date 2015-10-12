@@ -149,10 +149,14 @@
     <style name="CallDetailActionItemStyle">
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">@dimen/call_detail_action_item_drawable_padding</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">@dimen/call_detail_action_item_padding_horizontal</item>
         <item name="android:paddingEnd">@dimen/call_detail_action_item_padding_horizontal</item>
         <item name="android:paddingTop">@dimen/call_detail_action_item_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/call_detail_action_item_padding_vertical</item>
+        <item name="android:textColor">@color/call_detail_footer_text_color</item>
+        <item name="android:textSize">@dimen/call_detail_action_item_text_size</item>
     </style>
 
     <style name="DialtactsActionBarStyle"
