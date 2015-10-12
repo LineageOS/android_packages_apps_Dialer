@@ -90,6 +90,7 @@ import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialer.widget.SearchEditTextLayout.Callback;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.dialerbind.ObjectFactory;
 import com.android.incallui.Call.LogState;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
@@ -110,7 +111,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         ListsFragment.HostInterface,
         SpeedDialFragment.HostInterface,
         SearchFragment.HostInterface,
-        RegularSearchFragment.CapabilityChecker,
         OnDragDropListener,
         OnPhoneNumberPickerActionListener,
         PopupMenu.OnMenuItemClickListener,
@@ -607,7 +607,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (RegularSearchFragment) fragment;
             mRegularSearchFragment.setOnPhoneNumberPickerActionListener(this);
-            mRegularSearchFragment.setCapabilityChecker(this);
         } else if (fragment instanceof ListsFragment) {
             mListsFragment = (ListsFragment) fragment;
             mListsFragment.addOnPageChangeListener(this);
@@ -872,7 +871,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     }
 
-    @Override
     public boolean isNearbyPlacesSearchEnabled() {
         return false;
     }
@@ -1020,7 +1018,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (smartDialSearch) {
                 fragment = new SmartDialSearchFragment();
             } else {
-                fragment = new RegularSearchFragment();
+                fragment = ObjectFactory.newRegularSearchFragment();
                 fragment.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {

@@ -16,7 +16,6 @@
 package com.android.dialer.list;
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -38,7 +37,7 @@ import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClicked
 public class RegularSearchFragment extends SearchFragment
         implements OnEmptyViewActionButtonClickedListener {
 
-    private static final int PERMISSION_REQUEST_CODE = 1;
+    public static final int PERMISSION_REQUEST_CODE = 1;
 
     private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
 
@@ -49,8 +48,7 @@ public class RegularSearchFragment extends SearchFragment
         public boolean isNearbyPlacesSearchEnabled();
     }
 
-    private String mPermissionToRequest;
-    private CapabilityChecker mCapabilityChecker;
+    protected String mPermissionToRequest;
 
     public RegularSearchFragment() {
         configureDirectorySearch();
@@ -64,7 +62,6 @@ public class RegularSearchFragment extends SearchFragment
 
     @Override
     public void onDetach() {
-        mCapabilityChecker = null;
         super.onDetach();
     }
 
@@ -110,13 +107,6 @@ public class RegularSearchFragment extends SearchFragment
                 descriptionResource = R.string.permission_no_search;
                 listener = this;
                 mPermissionToRequest = READ_CONTACTS;
-            } else if (isNearbyPlacesSearchEnabled()
-                    && !PermissionsUtil.hasPermission(getActivity(), ACCESS_FINE_LOCATION)) {
-                imageResource = R.drawable.empty_contacts;
-                actionLabelResource = R.string.permission_single_turn_on;
-                descriptionResource = R.string.permission_no_location_for_search;
-                listener = this;
-                mPermissionToRequest = ACCESS_FINE_LOCATION;
             } else {
                 imageResource = EmptyContentView.NO_IMAGE;
                 actionLabelResource = EmptyContentView.NO_LABEL;
@@ -141,8 +131,7 @@ public class RegularSearchFragment extends SearchFragment
             return;
         }
 
-        if (READ_CONTACTS.equals(mPermissionToRequest)
-                || ACCESS_FINE_LOCATION.equals(mPermissionToRequest)) {
+        if (READ_CONTACTS.equals(mPermissionToRequest)) {
             requestPermissions(new String[] {mPermissionToRequest}, PERMISSION_REQUEST_CODE);
         }
     }
@@ -163,16 +152,5 @@ public class RegularSearchFragment extends SearchFragment
     protected int getCallInitiationType(boolean isRemoteDirectory) {
         return isRemoteDirectory ? LogState.INITIATION_REMOTE_DIRECTORY
                 : LogState.INITIATION_REGULAR_SEARCH;
-    }
-
-    public void setCapabilityChecker(CapabilityChecker capabilityChecker) {
-        mCapabilityChecker = capabilityChecker;
-    }
-
-    private boolean isNearbyPlacesSearchEnabled() {
-        if (mCapabilityChecker != null) {
-            return mCapabilityChecker.isNearbyPlacesSearchEnabled();
-        }
-        return false;
     }
 }
