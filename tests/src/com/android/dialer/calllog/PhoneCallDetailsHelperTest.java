@@ -116,14 +116,14 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     // Voicemail date string has 3 different formats depending on how long ago the call was placed
     public void testSetVoicemailPhoneCallDetails_Today() {
         setVoicemailPhoneCallDetailsWithDate(System.currentTimeMillis());
-        assertDateEquals("Today at");
+        assertLocationAndDateContains("Today at");
     }
 
     public void testSetVoicemailPhoneCallDetails_WithinCurrentYear() {
         mHelper.setCurrentTimeForTest(INJECTED_CURRENT_DATE);
         String formattedTestDate = "Jun 3 at 1:00 PM";
         setVoicemailPhoneCallDetailsWithDate(TEST_DATE);
-        assertDateEquals(formattedTestDate);
+        assertLocationAndDateContains(formattedTestDate);
     }
 
     public void testSetVoicemailPhoneCallDetails_OutsideCurrentYear() {
@@ -131,7 +131,12 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         long testDate = new GregorianCalendar(2009, 5, 3, 13, 0, 0).getTimeInMillis();
         String formattedTestDate = "Jun 3, 2009 at 1:00 PM";
         setVoicemailPhoneCallDetailsWithDate(testDate);
-        assertDateEquals(formattedTestDate);
+        assertLocationAndDateContains(formattedTestDate);
+    }
+
+    public void testVoicemailLocationNotShownWithDate() {
+        setVoicemailPhoneCallDetailsWithDate(TEST_DATE);
+        assertLocationAndDateExactEquals("Jun 3 at 1:00 PM");
     }
 
     /** Asserts that a char sequence is actually a Spanned corresponding to the expected HTML. */
@@ -150,19 +155,19 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 3, 13, 0, 0).getTimeInMillis());
-        assertDateEquals("0 min. ago");
+        assertLocationAndDateContains("0 min. ago");
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 3, 12, 0, 0).getTimeInMillis());
-        assertDateEquals("1 hr. ago");
+        assertLocationAndDateContains("1 hr. ago");
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 2, 13, 0, 0).getTimeInMillis());
-        assertDateEquals("Yesterday");
+        assertLocationAndDateContains("Yesterday");
 
         setPhoneCallDetailsWithDate(
                 new GregorianCalendar(2011, 5, 1, 13, 0, 0).getTimeInMillis());
-        assertDateEquals("2 days ago");
+        assertLocationAndDateContains("2 days ago");
     }
 
     public void testSetPhoneCallDetails_CallTypeIcons() {
@@ -232,24 +237,24 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_Geocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", "Pennsylvania");
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertLabelEquals("Pennsylvania"); // The geocode is shown as the label.
+        assertLocationAndDateContains("Pennsylvania"); // The geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_NoGeocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", null);
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertLabelEquals(EMPTY_GEOCODE); // The empty geocode is shown as the label.
+        assertLocationAndDateContains(EMPTY_GEOCODE); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_EmptyGeocode() {
         setPhoneCallDetailsWithNumberAndGeocode("+14125555555", "1-412-555-5555", "");
         assertNameEquals("1-412-555-5555");  // The phone number is shown as the name.
-        assertLabelEquals(EMPTY_GEOCODE); // The empty geocode is shown as the label.
+        assertLocationAndDateContains(EMPTY_GEOCODE); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_NoGeocodeForVoicemail() {
         setPhoneCallDetailsWithNumberAndGeocode(TEST_VOICEMAIL_NUMBER, "", "United States");
-        assertLabelEquals(EMPTY_GEOCODE); // The empty geocode is shown as the label.
+        assertLocationAndDateContains(EMPTY_GEOCODE); // The empty geocode is shown as the label.
     }
 
     public void testSetPhoneCallDetails_Highlighted() {
@@ -297,6 +302,25 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertEquals("John Doe", mNameView.getText().toString());
     }
 
+    public void testGetCallTypeOrLocation_Geocode() {
+        assertEquals(TEST_GEOCODE, mHelper.getCallTypeOrLocation(getPhoneCallDetails()));
+    }
+
+    public void testGetCallTypeOrLocation_CallType() {
+        PhoneCallDetails details = getPhoneCallDetails();
+        details.geocode = null;
+        details.numberType = Calls.INCOMING_TYPE;
+        mHelper.setPhoneTypeLabelForTest("mobile");
+        assertEquals("mobile", mHelper.getCallTypeOrLocation(details));
+    }
+
+    public void testGetCallTypeOrLocation_DisplayNumber() {
+        PhoneCallDetails details = getPhoneCallDetails("", Calls.PRESENTATION_ALLOWED,
+                TEST_FORMATTED_NUMBER);
+        details.name = "name";
+        assertEquals(TEST_FORMATTED_NUMBER, mHelper.getCallTypeOrLocation(details));
+    }
+
     /** Asserts that the name text field contains the value of the given string resource. */
     private void assertNameEqualsResource(int resId) {
         assertNameEquals(getContext().getString(resId));
@@ -307,14 +331,14 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertEquals(text, mViews.nameView.getText().toString());
     }
 
-    /** Asserts that the label text field contains the given string value. */
-    private void assertLabelEquals(String text) {
+    /** Asserts that the location and date text field contains the given string value. */
+    private void assertLocationAndDateContains(String text) {
         assertTrue(mViews.callLocationAndDate.getText().toString().contains(text));
     }
 
-    /** Asserts that the date text field contains the given string value. */
-    private void assertDateEquals(String text) {
-        assertTrue(mViews.callLocationAndDate.getText().toString().contains(text));
+    /** Asserts that the location and date text field exactly equals the given string value. */
+    private void assertLocationAndDateExactEquals(String text) {
+        assertEquals(text, mViews.callLocationAndDate.getText());
     }
 
     /** Asserts that the video icon is shown. */

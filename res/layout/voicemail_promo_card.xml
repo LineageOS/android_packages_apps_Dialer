@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/background_dialer_white"
-                    android:textSize="@dimen/call_log_secondary_text_size"
+                    android:textSize="@dimen/call_log_detail_text_size"
                     android:text="@string/visual_voicemail_text"
                     android:lineSpacingExtra="@dimen/promo_card_line_spacing"
                     android:singleLine="false"/>

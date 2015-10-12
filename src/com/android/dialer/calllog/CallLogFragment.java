@@ -18,20 +18,14 @@ package com.android.dialer.calllog;
 
 import static android.Manifest.permission.READ_CALL_LOG;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -44,27 +38,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
-import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
-import com.android.dialer.list.ListsFragment.HostInterface;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
-import com.android.dialer.voicemail.VoicemailStatusHelper;
-import com.android.dialer.voicemail.VoicemailStatusHelper.StatusMessage;
-import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialerbind.ObjectFactory;
-
-import java.util.List;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call

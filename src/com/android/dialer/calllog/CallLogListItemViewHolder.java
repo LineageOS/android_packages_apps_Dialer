@@ -162,6 +162,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public CharSequence nameOrNumber;
 
     /**
+     * The call type or Location associated with the call. Cached here for use when setting text
+     * for a voicemail log's call button
+     */
+    public CharSequence callTypeOrLocation;
+
+    /**
      * Whether this row is for a business or not.
      */
     public boolean isBusiness;
@@ -170,8 +176,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      * The contact info for the contact displayed in this list item.
      */
     public ContactInfo info;
-
-    private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
     private final Context mContext;
     private final TelecomCallLogCache mTelecomCallLogCache;
@@ -342,8 +346,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      * Configures the action buttons in the expandable actions ViewStub. The ViewStub is not
      * inflated during initial binding, so click handlers, tags and accessibility text must be set
      * here, if necessary.
-     *
-     * @param callLogItem The call log list item view.
      */
     public void inflateActionViewStub() {
         ViewStub stub = (ViewStub) rootView.findViewById(R.id.call_log_entry_actions_stub);
@@ -427,6 +429,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     .setText(TextUtils.expandTemplate(
                             mContext.getString(R.string.call_log_action_call),
                             nameOrNumber));
+            TextView callTypeOrLocationView = ((TextView) callButtonView.findViewById(
+                    R.id.call_type_or_location_text));
+            if (callType == Calls.VOICEMAIL_TYPE && !TextUtils.isEmpty(callTypeOrLocation)) {
+                callTypeOrLocationView.setText(callTypeOrLocation);
+                callTypeOrLocationView.setVisibility(View.VISIBLE);
+            } else {
+                callTypeOrLocationView.setVisibility(View.GONE);
+            }
             callButtonView.setVisibility(View.VISIBLE);
         } else {
             callButtonView.setVisibility(View.GONE);
@@ -455,9 +465,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             voicemailPlaybackView.setVisibility(View.GONE);
         }
 
-        detailsButtonView.setVisibility(View.VISIBLE);
-        detailsButtonView.setTag(
+        if (callType == Calls.VOICEMAIL_TYPE) {
+            detailsButtonView.setVisibility(View.GONE);
+        } else {
+            detailsButtonView.setVisibility(View.VISIBLE);
+            detailsButtonView.setTag(
                 IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
+        }
 
         if (info != null && UriUtils.isEncodedContactUri(info.lookupUri)) {
             createNewContactButtonView.setTag(IntentProvider.getAddContactIntentProvider(
@@ -495,7 +509,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      * If the action views have never been shown yet for this view, inflate the view stub.
      */
     public void showActions(boolean show) {
-        expandVoicemailTranscriptionView(show);
+        showOrHideVoicemailTranscriptionView(show);
 
         if (show) {
             // Inflate the view stub if necessary, and wire up the event handlers.
@@ -514,17 +528,17 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         updatePrimaryActionButton(show);
     }
 
-    public void expandVoicemailTranscriptionView(boolean isExpanded) {
+    public void showOrHideVoicemailTranscriptionView(boolean isExpanded) {
         if (callType != Calls.VOICEMAIL_TYPE) {
             return;
         }
 
         final TextView view = phoneCallDetailsViews.voicemailTranscriptionView;
-        if (TextUtils.isEmpty(view.getText())) {
+        if (!isExpanded || TextUtils.isEmpty(view.getText())) {
+            view.setVisibility(View.GONE);
             return;
         }
-        view.setMaxLines(isExpanded ? VOICEMAIL_TRANSCRIPTION_MAX_LINES : 1);
-        view.setSingleLine(!isExpanded);
+        view.setVisibility(View.VISIBLE);
     }
 
     public void updatePhoto() {

@@ -57,7 +57,6 @@ import com.android.dialer.R;
     /**
      * Sets the name, label, and number for a contact.
      *
-     * @param context The application context.
      * @param views the views to populate
      * @param details the details of a phone call needed to fill in the data
      */
@@ -75,6 +74,10 @@ import com.android.dialer.R;
         // Cache name or number of caller.  Used when setting the content descriptions of buttons
         // when the actions ViewStub is inflated.
         views.nameOrNumber = getNameOrNumber(details);
+
+        // The call type or Location associated with the call. Use when setting text for a
+        // voicemail log's call button
+        views.callTypeOrLocation = mPhoneCallDetailsHelper.getCallTypeOrLocation(details);
 
         // Cache country iso. Used for number filtering.
         views.countryIso = details.countryIso;

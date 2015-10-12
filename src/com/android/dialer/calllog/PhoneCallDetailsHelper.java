@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 import android.content.Context;
@@ -50,6 +51,9 @@ public class PhoneCallDetailsHelper {
     private final Resources mResources;
     /** The injected current time in milliseconds since the epoch. Used only by tests. */
     private Long mCurrentTimeMillisForTest;
+
+    private CharSequence mPhoneTypeLabelForTest;
+
     private final TelecomCallLogCache mTelecomCallLogCache;
 
     /** Calendar used to construct dates */
@@ -138,12 +142,9 @@ public class PhoneCallDetailsHelper {
 
         views.nameView.setText(nameText);
 
-        if (isVoicemail && !TextUtils.isEmpty(details.transcription)) {
-            views.voicemailTranscriptionView.setText(details.transcription);
-            views.voicemailTranscriptionView.setVisibility(View.VISIBLE);
-        } else {
-            views.voicemailTranscriptionView.setText(null);
-            views.voicemailTranscriptionView.setVisibility(View.GONE);
+        if (isVoicemail) {
+            views.voicemailTranscriptionView.setText(TextUtils.isEmpty(details.transcription) ? null
+                    : details.transcription);
         }
 
         // Bold if not read
@@ -151,10 +152,14 @@ public class PhoneCallDetailsHelper {
         views.nameView.setTypeface(typeface);
         views.voicemailTranscriptionView.setTypeface(typeface);
         views.callLocationAndDate.setTypeface(typeface);
+        views.callLocationAndDate.setTextColor(mResources.getColor(
+                details.isRead ? R.color.call_log_detail_color : R.color.call_log_unread_text_color,
+                mContext.getTheme()));
     }
 
     /**
-     * Builds a string containing the call location and date.
+     * Builds a string containing the call location and date. For voicemail logs only the call date
+     * is returned because location information is displayed in the call action button
      *
      * @param details The call details.
      * @return The call location and date string.
@@ -162,15 +167,18 @@ public class PhoneCallDetailsHelper {
     private CharSequence getCallLocationAndDate(PhoneCallDetails details) {
         mDescriptionItems.clear();
 
-        // Get type of call (ie mobile, home, etc) if known, or the caller's location.
-        CharSequence callTypeOrLocation = getCallTypeOrLocation(details);
+        if (details.callTypes[0] != Calls.VOICEMAIL_TYPE) {
+            // Get type of call (ie mobile, home, etc) if known, or the caller's location.
+            CharSequence callTypeOrLocation = getCallTypeOrLocation(details);
 
-        // Only add the call type or location if its not empty.  It will be empty for unknown
-        // callers.
-        if (!TextUtils.isEmpty(callTypeOrLocation)) {
-            mDescriptionItems.add(callTypeOrLocation);
+            // Only add the call type or location if its not empty.  It will be empty for unknown
+            // callers.
+            if (!TextUtils.isEmpty(callTypeOrLocation)) {
+                mDescriptionItems.add(callTypeOrLocation);
+            }
         }
-        // The date of this call, relative to the current time.
+
+        // The date of this call
         mDescriptionItems.add(getCallDate(details));
 
         // Create a comma separated list from the call type or location, and call date.
@@ -197,8 +205,8 @@ public class PhoneCallDetailsHelper {
             } else if (!(details.numberType == Phone.TYPE_CUSTOM
                     && TextUtils.isEmpty(details.numberLabel))) {
                 // Get type label only if it will not be "Custom" because of an empty number label.
-                numberFormattedLabel = Phone.getTypeLabel(
-                        mResources, details.numberType, details.numberLabel);
+                numberFormattedLabel = MoreObjects.firstNonNull(mPhoneTypeLabelForTest,
+                        Phone.getTypeLabel(mResources, details.numberType, details.numberLabel));
             }
         }
 
@@ -206,6 +214,11 @@ public class PhoneCallDetailsHelper {
             numberFormattedLabel = details.displayNumber;
         }
         return numberFormattedLabel;
+    }
+
+    @NeededForTesting
+    public void setPhoneTypeLabelForTest(CharSequence phoneTypeLabel) {
+        this.mPhoneTypeLabelForTest = phoneTypeLabel;
     }
 
     /**
