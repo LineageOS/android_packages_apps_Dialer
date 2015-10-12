@@ -86,13 +86,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
 
     private void blockNumber(final String number) {
         final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
-        final IndeterminateProgressDialog progressDialog =
-                IndeterminateProgressDialog.show(getFragmentManager(),
-                        getString(R.string.checkingNumber, number), null, 500);
         final String normalizedNumber =
                 FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
         if (normalizedNumber == null) {
-            progressDialog.dismiss();
             Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
                     Toast.LENGTH_SHORT).show();
             return;
@@ -100,12 +96,11 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
         final OnCheckBlockedListener onCheckListener = new OnCheckBlockedListener() {
             @Override
             public void onCheckComplete(Integer id) {
-                progressDialog.dismiss();
                 if (id == null) {
                     final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
                             .newInstance(id, normalizedNumber, number, countryIso, number);
                     newFragment.setParentView(
-                            getActivity().findViewById(R.id.search_activity_container));
+                            getActivity().findViewById(R.id.blocked_numbers_activity_container));
                     newFragment.show(
                             getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
                 } else {
@@ -118,9 +113,11 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
                 onCheckListener, normalizedNumber, number, countryIso);
     }
 
-    private void blockContactNumber(final BlockedListSearchAdapter adapter,
-                                    final ContactListItemView view, final String number,
-                                    final Integer blockId) {
+    private void blockContactNumber(
+            final BlockedListSearchAdapter adapter,
+            final ContactListItemView view,
+            final String number,
+            final Integer blockId) {
         final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
         final String normalizedNumber =
                 FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
@@ -136,19 +133,8 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
         }
         final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
                 .newInstance(blockId, normalizedNumber, number, countryIso, number);
-        newFragment.setParentView(getActivity().findViewById(R.id.search_activity_container));
-        newFragment.setOnUndoBlockListener(new FilterNumberDialogFragment.OnUndoBlockListener() {
-            @Override
-            public void onUndoBlockComplete() {
-                adapter.setViewUnblocked(view);
-            }
-        });
-        newFragment.setOnBlockListener(new FilterNumberDialogFragment.OnBlockListener() {
-            @Override
-            public void onBlockComplete(Uri uri) {
-                adapter.setViewBlocked(view, Long.valueOf(ContentUris.parseId(uri)).intValue());
-            }
-        });
+        newFragment.setParentView(
+                getActivity().findViewById(R.id.blocked_numbers_activity_container));
         newFragment.show(getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
     }
 }

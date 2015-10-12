@@ -28,7 +28,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.dialer.R;
-import com.android.dialer.filterednumber.BlockedNumberFragment;
+import com.android.dialer.filterednumber.ManageBlockedNumbersActivity;
 
 import java.util.List;
 
@@ -87,8 +87,8 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             }
 
             Header blockedCallsHeader = new Header();
-            blockedCallsHeader.titleRes = R.string.blocked_calls_settings_label;
-            blockedCallsHeader.fragment = BlockedNumberFragment.class.getName();
+            blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
+            blockedCallsHeader.intent = new Intent(this, ManageBlockedNumbersActivity.class);
             target.add(blockedCallsHeader);
 
             if (telephonyManager.isTtyModeSupported()

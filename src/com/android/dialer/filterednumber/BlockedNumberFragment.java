@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.dialer.R;
-import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberContract;
 
 public class BlockedNumberFragment extends ListFragment implements
@@ -38,12 +37,14 @@ public class BlockedNumberFragment extends ListFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         LayoutInflater inflater = LayoutInflater.from(getContext());
         getListView().addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
         if (mAdapter == null) {
             mAdapter = new BlockedNumberAdapter(getContext());
         }
         setListAdapter(mAdapter);
+
         getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
         getListView().getEmptyView().findViewById(R.id.add_number_button).setOnClickListener(this);
     }
@@ -61,8 +62,8 @@ public class BlockedNumberFragment extends ListFragment implements
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.blocked_number_fragment, container, false);
         return view;
     }
@@ -95,6 +96,10 @@ public class BlockedNumberFragment extends ListFragment implements
 
     @Override
     public void onClick(final View v) {
-        startActivity(new Intent(getActivity(), BlockedNumberSearchActivity.class));
+        ManageBlockedNumbersActivity manageBlockedNumbersActivity =
+                (ManageBlockedNumbersActivity) getActivity();
+        if (manageBlockedNumbersActivity != null && v.getId() == R.id.add_number_button) {
+            manageBlockedNumbersActivity.enterSearchUi();
+        }
     }
 }
