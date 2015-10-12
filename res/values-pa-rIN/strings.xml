@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ਤਤਕਾਲ ਜਵਾਬ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ਕਾਲਾਂ"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"ਸਪੈਮ ਅਤੇ ਬਲੌਕ ਕੀਤੀਆਂ ਕਾਲਾਂ"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ਤੁਹਾਡੇ ਚਿੰਨ੍ਹਿਤ ਕੀਤੇ ਪਿਛਲੇ ਕੁਝ ਕਾਲਰ ਹੋਰ ਐਪਸ ਦੁਆਰਾ ਆਟੋਮੈਟਿਕ ਤੌਰ ਤੇ ਵੌਇਸਮੇਲ ਨੂੰ ਭੇਜੇ ਗਏ ਹਨ।"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ਨੰਬਰ ਵਿਖਾਓ"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ਆਯਾਤ ਕਰੋ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ਕੋਈ ਬਲੌਕ ਕੀਤੇ ਨੰਬਰ ਨਹੀਂ ਹਨ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"ਨੰਬਰ ਜੋੜੋ"</string>

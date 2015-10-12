@@ -220,6 +220,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Greiti atsakai"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Skambučiai"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Šlamštas ir užblokuoti skambučiai"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Naudodami kitas programas anksčiau buvote pažymėję, kad kai kurie skambintojai būtų automatiškai nusiųsti į balso paštą."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Žr. skaičius"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importuoti"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Panaikinti numerio blokavimą"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nėra užblokuotų numerių"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Pridėti numerį"</string>
@@ -230,19 +233,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Skambinimo paskyros"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Įjungti"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Nustatyti leidimus"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Jei norite įgalinti spartųjį rinkimą, įjunkite Kontaktų programos leidimą."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Jei norite peržiūrėti skambučių žurnalą, įjunkite Telefono programos leidimą."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Jei norite peržiūrėti kontaktus, įjunkite Kontaktų programos leidimą."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Jei norite pasiekti balso paštą, įjunkite Telefono programos leidimą."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kad galėtumėte ieškoti kontaktų, įjunkite Kontaktų leidimus."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Jei norite ieškoti netoliese esančių vietovių, leiskite Telefono programai pasiekti vietovę."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Jei norite paskambinti, įjunkite Telefono programos leidimą."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefono programa neturi leidimo keisti sistemos nustatymų."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Geresnis būdas iškviesti – skambinti"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Padarykite Telefono programą savo numatytąja telefono programa, kad galėtumėte, pvz., matyti, kas jums skambina, net jei to asmens nėra kontaktuose."</string>

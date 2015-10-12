@@ -218,6 +218,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Ātrās atbildes"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Zvani"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Mēstules un bloķētie zvani"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Jūs iepriekš atzīmējāt dažus zvanītājus, kuri automātiski jānovirza uz balss pastu, izmantojot citas lietotnes."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Skatīt numurus"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importēt"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Atbloķēt numuru"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nav neviena bloķēta numura"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Pievienot numuru"</string>

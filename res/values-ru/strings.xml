@@ -220,6 +220,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Вызовы"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Спам и заблокированные звонки"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Ранее вы указали, что вызовы от некоторых абонентов должны автоматически направляться в голосовую почту через другие приложения."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Просмотреть номера"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортировать"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Разблокировать номер"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Нет заблокированных номеров"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Добавить номер"</string>
@@ -230,22 +233,16 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Аккаунты для звонков"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Включить"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Задать разрешения"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Чтобы настроить быстрый набор, предоставьте приложению разрешение \"Контакты\"."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Чтобы открыть список вызовов, предоставьте приложению разрешение \"Телефон\"."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Чтобы открыть список контактов, предоставьте приложению разрешение \"Контакты\"."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Чтобы получить доступ к голосовой почте, предоставьте приложению разрешение \"Телефон\"."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Для поиска контактов включите разрешение \"Контакты\"."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Чтобы найти места поблизости, предоставьте приложению \"Телефон\" доступ к данным о вашем местоположении."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Чтобы позвонить, предоставьте приложению разрешение \"Телефон\"."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"У приложения \"Телефон\" нет разрешения на изменение системных настроек."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Настройте приложение для звонков"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Назначьте Телефон приложением для звонков по умолчанию. Тогда вы сможете видеть номера звонящих вам, даже если их нет в списке контактов, и выполнять другие действия."</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Назначьте Телефон приложением для звонков по умолчанию. Вы сможете видеть, кто вам звонит, даже если их нет в списке контактов."</string>
     <string name="request_permissions_screen_title" msgid="7628851957217029400">"Общайтесь с родными и близкими"</string>
     <string name="request_permissions_screen_content" msgid="24495396532130179">"Чтобы звонить людям из списка контактов, разрешите приложению \"Телефон\" доступ к телефону и контактам."</string>
     <string name="onboarding_skip_button" msgid="3955670727733408256">"Пропустить"</string>

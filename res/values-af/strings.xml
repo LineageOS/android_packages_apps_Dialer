@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Vinnige antwoorde"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Oproepe"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Strooipos en geblokkeerde oproepe"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Jy het sommige bellers vroeër gemerk om outomaties via ander programme na stemboodskapdiens gestuur te word."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Bekyk nommers"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Voer in"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Deblokkeer nommer"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Geen geblokkeerde nommers nie"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Voeg nommer by"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Oproeprekeninge"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Skakel aan"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Stel toestemmings"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Skakel die kontaktetoestemming aan om spoedbel te aktiveer."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Skakel die foontoestemming aan om jou oproeprekord te sien."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Skakel die kontaktetoestemming aan om jou kontakte te sien."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Skakel die foontoestemming aan om na jou stemboodskapdiens te gaan."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Skakel die Kontakte-toestemmings aan om jou kontakte te deursoek."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Laat Foon toe om toegang tot jou ligging te verkry om nabygeleë liggings te soek."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Skakel die foontoestemming aan om \'n oproep te maak."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Foonprogram het nie toestemming om stelselinstellings te stel nie."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"\'n Beter manier om te bel is om te bel"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Maak Foon jou verstekfoonprogram om goed te kan doen soos om te sien wie jou bel, selfs as die persoon nie in jou kontakte is nie."</string>

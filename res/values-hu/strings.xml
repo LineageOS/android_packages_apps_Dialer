@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Gyors válaszok"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Hívások"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam és letiltott hívások"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Más alkalmazásokban korábban beállította, hogy bizonyos személyeket automatikusan a hangpostafiókba irányítsa a rendszer, amikor felhívják Önt."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Számok megtekintése"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importálás"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Szám tiltásának feloldása"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nincs letiltott szám"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Szám hozzáadása"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Telefonos fiókok"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Engedélyezés"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Engedélyek beállítása"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Gyorshívás engedélyezéséhez kapcsolja be a Névjegyek engedélyt."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"A hívásnapló megtekintéséhez kapcsolja be a Telefon engedélyt."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"A névjegyek megtekintéséhez kapcsolja be a Névjegyek engedélyt."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"A hangposta eléréséhez kapcsolja be a Telefon engedélyt."</string>
     <string name="permission_no_search" msgid="84152933267902056">"A névjegyek kereséséhez adja meg a Névjegyek engedélyeket."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Közeli helyek kereséséhez engedélyezze, hogy a Telefon hozzáférjen a helyadatokhoz."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Hívásindításhoz kapcsolja be a Telefon engedélyt."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"A Telefon alkalmazásnak nincs engedélye szerkeszteni a rendszerbeállításokat."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"A hívás ideálisabb módja a hívás"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Tegye a Telefon alkalmazást az alapértelmezett telefonos alkalmazásává, hogy például akkor is megtekinthesse, ki hívja Önt, ha az illető nem szerepel a névjegyek között."</string>

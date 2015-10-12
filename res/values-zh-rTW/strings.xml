@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回應"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"垃圾內容和已封鎖的來電"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您之前曾將某些來電者標示為自動透過其他應用程式轉到語音信箱。"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看號碼"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"匯入"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"解除封鎖號碼"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"沒有已封鎖的號碼"</string>
     <string name="blockNumber" msgid="3312666193996551842">"新增號碼"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通話帳戶"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"開啟"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"設定權限"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"如要啟用快速撥號，請開啟「聯絡人」存取權限。"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"如要查看您的通話紀錄，請開啟「電話」存取權限。"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"如要查看您的聯絡人，請開啟「聯絡人」存取權限。"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"如要存取您的語音信箱，請開啟「電話」存取權限。"</string>
     <string name="permission_no_search" msgid="84152933267902056">"如要搜尋您的聯絡人，請開啟「聯絡人」存取權限。"</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"如要搜尋附近地點，請授權「電話」存取您的位置資訊。"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"如要撥打電話，請開啟「電話」存取權限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話應用程式的權限不足，無法寫入系統設定。"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"通話方式再進化"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"將「電話」設為您的預設電話應用程式，以便執行各種操作，例如查看來電者 (即使對方不是您的聯絡人)。"</string>

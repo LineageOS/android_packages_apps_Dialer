@@ -217,6 +217,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ಕರೆಗಳು"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"ಸ್ಪ್ಯಾಮ್ ಮತ್ತು ನಿರ್ಬಂಧಿಸಲಾದ ಕರೆಗಳು"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ನೀವು ಈ ಹಿಂದೆ ಗುರುತು ಮಾಡಲಾದ ಕೆಲವು ಕಾಲರ್‌ಗಳನ್ನು ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೂಲಕ ಧ್ವನಿಮೇಲ್‌ಗೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲಾಗುತ್ತದೆ."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ಸಂಖ್ಯೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ಆಮದು ಮಾಡಿ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ಯಾವುದೇ ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳಿಲ್ಲ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>
@@ -227,19 +230,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ಆನ್ ಮಾಡು"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸು"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"ವೇಗ ಡಯಲ್ ಸಕ್ರಿಯಗೊಳಿಸಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"ನಿಮ್ಮ ಕರೆಯ ಲಾಗ್ ಅನ್ನು ವೀಕ್ಷಿಸಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ವೀಕ್ಷಿಸಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಪ್ರವೇಶಿಸಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_no_search" msgid="84152933267902056">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಹುಡುಕಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಗಳನ್ನು ಆನ್ ಮಾಡಿ."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"ಸಮೀಪದ ಸ್ಥಳಗಳನ್ನು ಹುಡುಕಲು, ಫೋನ್‌ಗೆ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಪ್ರವೇಶಿಸಲು ಅನುಮತಿಸಿ."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"ಕರೆ ಮಾಡಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಬರೆಯಲು ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ಉತ್ತಮ ರೀತಿಯಲ್ಲಿ ಕರೆ ಮಾಡುವುದೆಂದರೆ ಕರೆ ಮಾಡುವುದು"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"ನಿಮ್ಮ ಸಂಪರ್ಕದಲ್ಲಿ ಇಲ್ಲದಿದ್ದರೂ ಕೂಡಾ ನಿಮಗೆ ಯಾರು ಕರೆ ಮಾಡುತ್ತಿದ್ದಾರೆ ಎಂಬಂತಹ ವಿಷಯವನ್ನು ತಿಳಿದುಕೊಳ್ಳಲು ಫೋನ್‌ ಅನ್ನು ನಿಮ್ಮ ಡೀಫಾಲ್ಟ್‌ ಫೋನ್‌ ಅಪ್ಲಿಕೇಶನ್‌ ಆಗಿ ಮಾಡಿ."</string>

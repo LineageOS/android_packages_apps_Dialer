@@ -220,6 +220,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"תגובות מהירות"</string>
     <string name="call_settings_label" msgid="313434211353070209">"שיחות"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"ספאם ושיחות חסומות"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"סימנת בעבר באמצעות יישומים אחרים כמה מתקשרים שיישלחו באופן אוטומטי לדואר קולי."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"הצג מספרים"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"יבא"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"בטל חסימת מספר"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"אין מספרים חסומים"</string>
     <string name="blockNumber" msgid="3312666193996551842">"הוסף מספר"</string>

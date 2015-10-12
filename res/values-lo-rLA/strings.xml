@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ການຕອບແບບວ່ອງໄວ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"​ການ​ໂທ"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"ສະ​ແປມ ແລະ ສາຍ​ໂທ​ທີ່​ຖືກບ​ລັອກ"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ຜ່ານ​ມາ​ທ່ານ​ໄດ້​ໝາຍ​ຜູ້​ໂທ​ບາງ​ຄົນ​ໃຫ້​ຖືກ​ສົ່ງ​​ຫາ​ຂໍ້​ຄວາມ​ສຽງໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ​ຜ່ານ​ແອັບ​ອື່ນ​."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ເບິ່ງ​ຕົວ​ເລກ"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ນໍາເຂົ້າ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ປົດ​ບ​ລັອກ​ໝາຍ​ເລກ"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ບໍ່​ມີ​ໝາຍ​ເລກ​ທີ່​ຖືກບ​ລັອກ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"ເພີ່ມໝາຍເລກ"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ບັນ​ຊີ​ໂທ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ເປີດ​"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ຕັ້ງ​ການ​ອະ​ນຸ​ຍາດ"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"ເພື່ອ​ເປີດ​ໃຊ້​ງານ​ການໂທດ່ວນ, ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ລາຍ​ຊື່."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"ເພື່ອ​ເບິ່ງ​ບັນ​ທຶກ​ການ​ໂທ​ຂອງ​ທ່ານ, ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ໂທ​ລະ​ສັບ."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"ເພື່ອ​ເບິ່ງ​ລາຍ​ຊື່​ຂອງ​ທ່ານ, ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ລາຍ​ຊື່"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"ເພື່ອ​ເຂົ້າ​ຫາ​ຂໍ້​ຄວາມ​ສຽງ​ຂອງ​ທ່ານ, ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ໂທ​ລະ​ສັບ."</string>
     <string name="permission_no_search" msgid="84152933267902056">"ເພື່ອຄົ້ນຫາລາຍາຊື່ຂອງທ່ານ, ໃຫ້ເປີດການອະນຸຍາດລາຍຊື່."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"ເພື່ອ​ຊອກ​ຫາ​ທີ່​ຕັ້ງ​ໃກ້​ຄຽງ, ອະ​ນຸ​ຍາດ​ໃຫ້​ໂທ​ລະ​ສັບ​ເຂົ້າ​ຫາ​ທີ່​ຕັ້ງ​ຂອງ​ທ່ານ."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"ເພື່ອ​ເຮັດການໂທ, ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ໂທ​ລະ​ສັບ."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ແອັບໂທລະສັບບໍ່ມີການອະນຸຍາດໃຫ້ຂຽນໃສ່ການຕັ້ງຄ່າລະບົບ."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ວິ​ທີ​ການ​ໂທ​ທີ່​ດີ​ກ່​ວາ​ແມ່ນ​ການ​ໂທ"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"ເຮັດ​ໃຫ້​ໂທ​ລະ​ສັບ​ຂອງ​ທ່ານ​ເປັນ​ແອັບໂທ​ລະ​ສັບ​ເລີ່ມຕົ້ນ ເພື່ອ​ໃຫ້​ສາ​ມາດ​ເຮັດ​ສິ່ງ​ຕ່າງໆ​ໄດ້​ເຊັ່ນ: ເຫັນ​ຜູ້​ທີ່​ກຳ​ລັງ​ໂທ​ຫາ​ທ່ານ, ແມ້​ວ່າ ເມື່ອ​ພວກ​ມັນ​ບໍ່​ຢູ່​ໃນ​ລາຍ​ຊື່​ຕິດ​ຕໍ່​ຂອງ​ທ່ານ."</string>

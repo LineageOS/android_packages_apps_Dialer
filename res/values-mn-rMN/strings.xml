@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Шуурхай хариунууд"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Дуудлага"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Спам болон блоклосон дуудлага"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Та бусад апп ашиглан автоматаар дуут шуудан илгээх зарим дуудлага хүлээн авагч хүмүүсийг тэмдэглэсэн."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Дугаар харах"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортлох"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Дугаар блокноос гаргах"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Блоклосон дугаар байхгүй"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Дугаар нэмэх"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Дуудах акаунт"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Идэвхжүүлэх"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Зөвшөөрөл тохируулах"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Яаралтай дуудлагыг идэвхжүүлэхийн тулд Харилцагчдын зөвшөөрлийг идэвхжүүлнэ үү."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Дуудлагын жагсаалтыг харахын тулд утасны зөвшөөрлийг идэвхжүүлнэ үү."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Харилцагчдаа харахын тулд Харилцагчдын зөвшөөрлийг идэвхжүүлнэ үү."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Дуут шууданд хандахын тулд Утасны зөвшөөрлийг идэвхжүүлнэ үү."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Харилцагчаа хайхын тулд, Харилцагчийн жагсаалтын зөвшөөрлийг идэвхжүүлнэ үү."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Ойролцоох байршлыг хайхын тулд Утсанд таны байршилд хандахыг зөвшөөрнө үү."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Залгахын тулд Утасны зөвшөөрлийг идэвхжүүлнэ үү."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Гар утасны апп-д системийн тохиргоо бичих зөвшөөрөл алга."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Дуудлага хийх илүү сайн арга нь залгах юм"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Phone-г утасныхаа үндсэн апп болгосноор, тань руу залгаж байгаа хүнийг харилцагчийн жагсаалтад байхгүй ч гэсэн харах боломжтой."</string>

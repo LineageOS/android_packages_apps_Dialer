@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ឆ្លើយតប​រហ័ស"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ការហៅ"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"សារឥតបានការ និងការហៅដែលបានទប់ស្កាត់"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"កាលពីមុនអ្នកបានដាក់សម្គាល់ឲ្យបញ្ជូនអ្នកហៅមួយចំនួនដោយស្វ័យប្រវត្តិទៅកាន់សារជាសំឡេងតាមរយៈកម្មវិធីផ្សេងទៀត។"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"មើលលេខ"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"នាំចូល"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ឈប់ទប់ស្កាត់លេខ"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"គ្មានលេខដែលបានទប់ស្កាត់ទេ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"បន្ថែមលេខ"</string>

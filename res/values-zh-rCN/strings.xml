@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通话"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"垃圾内容和已屏蔽的来电"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您之前曾将部分来电者标记为自动通过其他应用转到语音信箱。"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看号码"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"导入"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"取消屏蔽号码"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"没有已屏蔽的号码"</string>
     <string name="blockNumber" msgid="3312666193996551842">"添加号码"</string>
@@ -226,24 +229,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐户"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"开启"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"设置权限"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"要启用快速拨号功能，请开启“通讯录”权限。"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"要查看您的通话记录，请开启“电话”权限。"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"要查看您的联系人，请开启“通讯录”权限。"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"要使用您的语音信箱，请开启“电话”权限。"</string>
     <string name="permission_no_search" msgid="84152933267902056">"要搜索您的联系人，请开启“通讯录”权限。"</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"要搜索附近的地点，请允许“电话”使用您的位置信息。"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"要拨打电话，请开启“电话”权限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"电话应用不具备写入系统设置的权限。"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"最好的通话方式是打电话"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"将“电话”设为您的默认电话应用，以便执行各种操作，例如查看来电者（即使对方不在您的通讯录中）。"</string>
+    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"尽享更出色的通话体验"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"将“电话”设为您的默认电话应用，以享用各种便利功能，例如了解来电者的身份（即使对方不在您的通讯录中）。"</string>
     <string name="request_permissions_screen_title" msgid="7628851957217029400">"与亲朋好友通话"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"您需要授权“电话”访问您的手机和通讯录，才能通过该应用给您通讯录中的人打电话。"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"您需要授权“电话”使用您手机的电话功能和通讯录，才能通过该应用给您通讯录中的人打电话。"</string>
     <string name="onboarding_skip_button" msgid="3955670727733408256">"跳过"</string>
     <string name="onboarding_next_button" msgid="8492839445714599756">"下一步"</string>
 </resources>

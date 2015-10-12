@@ -220,6 +220,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Rychlé odpovědi"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Volání"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam a blokované hovory"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Pomocí dalších aplikací jste dříve některé volající označili k automatickému přesměrování do hlasové schránky."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Zobrazit čísla"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importovat"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Zrušit blokování čísla"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nemáte žádná blokovaná čísla"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Přidat číslo"</string>
@@ -230,19 +233,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Účty pro volání"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Zapnout"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Nastavit oprávnění"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Chcete-li povolit rychlé vytáčení, aktivujte oprávnění Kontakty."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Chcete-li zobrazit seznam hovorů, aktivujte oprávnění Telefon."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Chcete-li zobrazit kontakty, aktivujte oprávnění Kontakty."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Chcete-li přejít do hlasové schránky, aktivujte oprávnění Telefon."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Chcete-li vyhledat místa v okolí, povolte aplikaci Telefon přístup k vaší poloze."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Chcete-li uskutečnit hovor, aktivujte oprávnění Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikace Telefon nemá oprávnění provádět zápis do nastavení systému."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Přichází lepší způsob telefonování"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Abyste mohli například zobrazit, kdo vám volá, i když volajícího nemáte v kontaktech, je nutné jako výchozí aplikaci pro telefonování nastavit aplikaci Telefon."</string>

@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Izimpendulo ezisheshayo"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Amakholi"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Ugaxekile namakholi avinjiwe"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Ngaphambilini umake abanye abashayi ukuthi bathunyelwe ngokuzenzakalelayo kuvoyisimeyili ngezinhlelo zokusebenza."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Buka izinombolo"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Ngenisa"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Vulela inombolo"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Azikho izinombolo ezivinjiwe"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Engeza inombolo"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Ama-akhawunti wokushaya"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Vula"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Setha izimvume"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Nika amandla ukudayela okusheshayo, vula imvume yoxhumana nabo."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Ukuze ubone irekhodi lakho lamakholi, vuma imvume yefoni."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Ukuze ubone oxhumana nabo, vula imvume yoxhumana nabo."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Ukuze ufinyelele ivoyisimeyili, vula imvume yefoni."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Ukuze useshe oxhumana nabo, vula izimvume zoxhumana nabo."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Ukuze useshe izindawo eziseduze, vumela ifoni ukuthi ifinyelele indawo."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Ukuze ubeke ikholi, vula imvume yefoni."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Uhlelo lokusebenza lefoni alinayo imvume yokubhalela kuzilungiselelo zesistimu."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Indlela engcono yokushaya ukushaya"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Yenza ifoni uhlelo lwakho lokusebenza lwefoni oluzenzakalelayo ukuthi lukwazi ukwenza izinto ezifana nokubona ukuthi ubani okushayelayo, nanoma angekho koxhumana nabo."</string>

@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"സ്പാമും ബ്ലോക്കുചെയ്ത കോളുകളും"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"മറ്റ് ആപ്സ് വഴി വോയ്സ്‌മെയിൽ സ്വയമേവ അയയ്ക്കുന്നതിന് കോൾ ചെയ്യുന്നവരിൽ ചിലരെ നിങ്ങൾ മുമ്പ് അടയാളപ്പെടുത്തി."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"നമ്പറുകൾ കാണുക"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ഇമ്പോർട്ടുചെയ്യുക"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ബ്ലോക്കുചെയ്ത നമ്പറുകൾ ഇല്ല"</string>
     <string name="blockNumber" msgid="3312666193996551842">"നമ്പർ ചേർക്കുക"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളിംഗ് അക്കൗണ്ട്"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ഓണാക്കുക"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"അനുമതികൾ സജ്ജമാക്കുക"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"സ്പീഡ് ഡയൽ പ്രവർത്തനക്ഷമാക്കുന്നതിന്, \'കോൺടാക്റ്റുകൾ\' അനുമതി ഓണാക്കുക."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"നിങ്ങളുടെ കോൾ ലോഗ് കാണുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ കാണുന്നതിന്, \'കോൺടാക്റ്റുകൾ\' അനുമതി ഓണാക്കുക."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ ആക്സസ് ചെയ്യുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക."</string>
     <string name="permission_no_search" msgid="84152933267902056">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ തിരയുന്നതിന് കോൺടാക്റ്റുകൾക്കുള്ള അനുമതികൾ ഓണാക്കുക."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"സമീപത്തുള്ള ലൊക്കേഷനുകൾ തിരയുന്നതിന്, നിങ്ങളുടെ ലൊക്കേഷൻ ആക്സസ് ചെയ്യാൻ \'ഫോണി\'നെ അനുവദിക്കുക."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"കോൾ വിളിക്കുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"സിസ്റ്റം ക്രമീകരണത്തിലേക്ക് എഴുതാൻ ഫോൺ ആപ്പിന് അനുമതിയില്ല."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"വിളിക്കുന്നതിനുള്ള മികച്ച മാർഗ്ഗം വിളിക്കുക തന്നെയാണ്"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"വിളിക്കുന്നവർ നിങ്ങളുടെ കോൺടാക്റ്റിൽ ഇല്ലെങ്കിൽ പോലും, ആരാണ് വിളിക്കുന്നതെന്ന് കാണുക പോലെയുള്ള കാര്യങ്ങൾ ചെയ്യുന്നതിന് ഫോണിനെ നിങ്ങളുടെ സ്ഥിര ഫോൺ ആപ്പ് ആക്കുക."</string>

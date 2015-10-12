@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"فوری جوابات"</string>
     <string name="call_settings_label" msgid="313434211353070209">"کالز"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"سپام اور مسدود کردہ کالز"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"آپ نے پہلے کچھ کالرز کو خودکار طور پر بذریعہ دیگر ایپس صوتی میل کو بھیجنا نشان زد کیا تھا۔"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"نمبرز دیکھیں"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"درآمد کریں"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"نمبر غیر مسدود کریں"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"کوئی مسدود کردہ نمبرز نہیں"</string>
     <string name="blockNumber" msgid="3312666193996551842">"نمبر شامل کریں"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"کالنگ اکاؤنٹس"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"آن کریں"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"اجازتیں طے کریں"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"اسپیڈ ڈائل کو فعال کرنے کیلئے رابطوں کی اجازت آن کریں۔"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"اپنا کال لاگ دیکھنے کیلئے فون کی اجازت آن کریں۔"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"اپنے رابطے دیکھنے کیلئے رابطوں کی اجازت آن کریں۔"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"اپنی صوتی میل تک رسائی کیلئے فون کی اجازت آن کریں۔"</string>
     <string name="permission_no_search" msgid="84152933267902056">"اپنے رابطوں کو تلاش کرنے کیلئے رابطوں کی اجازتیں آن کریں۔"</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"قریبی مقامات تلاش کرنے کیلئے فون کو اپنے مقام تک رسائی کی اجازت دیں۔"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"کال کرنے کیلئے فون کی اجازت آن کریں۔"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"فون ایپ کے پاس سسٹم ترتیبات کو لکھنے کی اجازت نہیں ہے۔"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"کال کرنے کا بہتر طریقہ کالنگ ہے"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"مختلف کام سرانجام دینے کیلئے فون کو اپنی ڈیفالٹ فون ایپ بنائیں مثلا یہ دیکھنے کیلئے کہ آپ کو کون کال کر رہا ہے، چاہے وہ آپ کے رابطوں میں نہ بھی ہو۔"</string>

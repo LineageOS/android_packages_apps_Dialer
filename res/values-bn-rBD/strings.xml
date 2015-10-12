@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"দ্রুত প্রতিক্রিয়াগুলি"</string>
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"স্প্যাম এবং অবরুদ্ধ কলগুলি"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"আপনি আগে থেকেই অন্য অ্যাপ্লিকেশানগুলির মাধ্যমে স্বয়ংক্রিয়ভাবে ভয়েস মেল পাঠানোর জন্য কিছু কলারকে চিহ্নিত করেছেন৷"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"নম্বরগুলি দেখুন"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"আমদানি করুন"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"নম্বর অবরোধ মুক্ত করুন"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"কোনো অবরুদ্ধ নম্বর নেই"</string>
     <string name="blockNumber" msgid="3312666193996551842">"একটি নম্বর যোগ করুন"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"কলিং অ্যাকাউন্টগুলি"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"চালু করুন"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"অনুমতিগুলি সেট করুন"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"স্পীড ডায়াল সক্ষম করতে, পরিচিতিগুলির অনুমতি চালু করুন।"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"আপনার কল লগ দেখতে, ফোনের অনুমতি চালু করুন।"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"আপনার পরিচিতিগুলি দেখতে, পরিচিতিগুলির অনুমতি চালু করুন।"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"আপনার ভয়েসমেল অ্যাক্সেস করতে, ফোনের অনুমতি চালু করুন।"</string>
     <string name="permission_no_search" msgid="84152933267902056">"আপনার পরিচিতিগুলি অনুসন্ধান করতে, পরিচিতির অনুমতিগুলি চালু করুন।"</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"আশেপাশের স্থানগুলি অনুসন্ধান করতে, ফোনকে আপনার অবস্থানের অ্যাক্সেসের অনুমতি দিন।"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"একটি কল করতে, ফোনের অনুমতি চালু করুন।"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ফোনের অ্যাপ্লিকেশানকে সিস্টেম সেটিংসে লেখার অনুমতি দেওয়া হয়নি।"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"কল করার একটি ভালো উপায় হল কল করা"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"পরিচিতিগুলির মধ্যে না থাকলেও কারা আপনাকে ফোন করছে দেখার জন্য এবং এই ধরনের জিনিসগুলি করতে, Phone কে আপনার ডিফল্ট ফোন অ্যাপ্লিকেশান হিসাবে সেট করুন৷"</string>

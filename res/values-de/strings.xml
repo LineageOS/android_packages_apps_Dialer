@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Kurzantworten"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Anrufe"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam und blockierte Anrufe"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Sie haben zuvor einige Anrufer markiert, die automatisch über andere Apps an die Mailbox gesendet werden."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Nummern anzeigen"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importieren"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Blockierung der Nummer aufheben"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Keine blockierten Nummern"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Nummer hinzufügen"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Anrufkonten"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktivieren"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Berechtigungen festlegen"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Aktivieren Sie die Berechtigung \"Kontakte\", um die Kurzwahlfunktion zu verwenden."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Aktivieren Sie die Berechtigung \"Telefon\", um Ihr Anrufprotokoll abzurufen."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Aktivieren Sie die Berechtigung \"Kontakte\", um Ihre Kontakte abzurufen."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Aktivieren Sie die Berechtigung \"Telefon\", um auf Ihre Mailbox zuzugreifen."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Aktivieren Sie die Berechtigungen \"Kontakte\", um nach Ihren Kontakten zu suchen."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Gestatten Sie \"Telefon\" den Zugriff auf Ihren Standort, um nach Orten in der Nähe zu suchen."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Aktivieren Sie die Berechtigung \"Telefon\", um einen Anruf zu tätigen."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Die App \"Telefon\" ist nicht berechtigt, die Systemeinstellungen zu überschreiben."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Eine bessere Art des Anrufens ist anzurufen"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Machen Sie \"Telefon\" zur Standard-Telefon-App, um z. B. zu sehen, wer Sie anruft, selbst wenn der Anrufer nicht in Ihren Kontakten enthalten ist."</string>

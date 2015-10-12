@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Бързи отговори"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Обаждания"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Спам и блокирани обаждания"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"По-рано означихте обажданията от някои контакти автоматично да се прехвърлят към гласова поща чрез други приложения."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Преглед на номерата"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортиране"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Отблокиране на номера"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Няма блокирани номера"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Добавяне на номер"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Профили за обаждане"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Включване"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Задаване на разрешенията"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"За да активирате бързото набиране, включете разрешението за Контакти."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"За да видите списъка с обажданията си, включете разрешението за Телефон."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"За да видите контактите си, включете разрешението за Контакти."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"За да осъществите достъп до гласовата си поща, включете разрешението за Телефон."</string>
     <string name="permission_no_search" msgid="84152933267902056">"За да търсите в контактите си, включете разрешенията за тях."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"За да търсите местоположения в района, разрешете на Телефон да осъществява достъп до вашето."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"За да извършите обаждане, включете разрешението за Телефон."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Приложението Телефон няма разрешение да записва в системните настройки."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Представяме ви по-добър начин за обаждане"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Направете Телефон стандартното си приложение за телефон – с негова помощ сте в състояние да виждате кой ви се обажда дори когато съответният човек не е в контактите ви."</string>

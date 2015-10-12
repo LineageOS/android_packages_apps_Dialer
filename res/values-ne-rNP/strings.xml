@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"द्रुत प्रतिक्रियाहरू"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कलहरू"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"स्प्याम र रोकिएका कलहरू"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"तपाईँले पहिल्यै केही कल गर्ने व्यक्तिहरूलाई अन्य अनुप्रयोगहरू मार्फत स्वत: रूपमा भ्वाइस मेल पठाउन नै चिन्ह लगाउनु भएको थियो।"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"नम्बरहरू हेर्नुहोस्"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"आयात गर्नुहोस्"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"रोक लगाइएका नम्बरहरू कुनै पनि छैन"</string>
     <string name="blockNumber" msgid="3312666193996551842">"नम्बर थप्नुहोस्"</string>
@@ -226,24 +229,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"खाता कलिङ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"सक्रिय पार्नुहोस्"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"अनुमतिहरू सेट गर्नुहोस्"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"तीव्र डायल सक्षम गर्न, सम्पर्क अनुमति सक्षम गर्नुहोस्।"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"आफ्नो कल लग हेर्न, फोन अनुमति सक्रिय गर्नुहोस्।"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"आफ्नो सम्पर्क हेर्न सम्पर्क अनुमति सक्रिय गर्नुहोस्।"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"आफ्नो भ्वाइस मेल पहुँच गर्न, फोन अनुमति सक्रिय गर्नुहोस्"</string>
     <string name="permission_no_search" msgid="84152933267902056">"तपाईँको सम्पर्कहरू खोज गर्न सम्पर्क अनुमतिहरू सक्रिय गर्नुहोस्।"</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"नजिकका स्थानहरू खोजी गर्न, आफ्नो फोनलाई स्थान पहुँच गर्न अनुमति दिनुहोस्।"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"कल गर्न फोन अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"प्रणाली सेटिङहरूमा लेख्न फोन अनुप्रयोगसँग अनुमति छैन।"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"कलिङ कल गर्नै एउटा राम्रो तरिका हो"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"तपाईँलाई आफ्नो सम्पर्क ठेगानाहरूमा नभए पनि कसले कल गरिरहेको छ हेर्ने जस्ता कुराहरू गर्न सक्षम हुन Phoneलाई आफ्नो पूर्वनिर्धारित फोन अनुप्रयोग बनाउनुहोस्।"</string>
+    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"आफ्नो सम्पर्कमा नभए पनि  तपाईँलाई कसले फोन गरिरहेको छ हेर्ने सामर्थ्य राख्न Phone लाई आफ्नो पूर्वनिर्धारित अनुप्रयोग बनाउनुहोस् ।"</string>
     <string name="request_permissions_screen_title" msgid="7628851957217029400">"आफना मित्रहरू र परिवारसँग सम्पर्कमा रहनुहोस्"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"फोनलाई तपाईँको सम्पर्कहरूमा भएका व्यक्तिहरूलाई कलहरू गर्न तपाईँको फोनमाथि पहुँच हुन आवश्यक छ।"</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"तपाईँको सम्पर्कमा रहेका व्यक्तिहरूलाई फोन गर्न Phone लाई तपाईँको फोन र सम्पर्कहरूमाथि पहुँच हुन आवश्यक हुनेछ।"</string>
     <string name="onboarding_skip_button" msgid="3955670727733408256">"छोड्नुहोस्"</string>
     <string name="onboarding_next_button" msgid="8492839445714599756">"अर्को"</string>
 </resources>

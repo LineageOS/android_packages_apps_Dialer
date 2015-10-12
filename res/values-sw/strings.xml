@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Majibu ya haraka"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Simu zilizopigwa"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Barua taka na simu zilizozuiwa"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Hapo awali uliwekea alama baadhi ya wanaopiga ili simu zao ziingie kwenye ujumbe wa sauti kupitia programu nyingine."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Angalia Nambari"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Leta"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Ondolea nambari kizuizi"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Hakuna nambari zilizozuiwa"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Ongeza nambari"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Akaunti za simu"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Washa"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Weka ruhusa"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Ili kuwasha kipengele cha unaowasiliana nao zaidi, washa ruhusa ya Anwani."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Ili uone rekodi yako ya nambari za simu, washa ruhusa ya Simu."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Ili uone anwani zako, washa ruhusa ya Anwani."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Ili ufikie ujumbe wako wa sauti, washa ruhusa ya Simu."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Ili utafute anwani zako, washa ruhusa za Anwani."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Ili utafute maeneo ya karibu nawe, ruhusu Simu ifikie mahali ulipo."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Ili upige simu, washa ruhusa ya Simu."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Programu ya simu haina ruhusa ya kuandika kwenye mipangilio ya mfumo."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Njia bora ya kupiga simu ndiyo hii"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Weka Simu iwe programu yako chaguo-msingi ya simu ili uweze kufanya vitu kama vile kuona anayekupigia, hata wakati nambari yake haipo katika anwani zako."</string>

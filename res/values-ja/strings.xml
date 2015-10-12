@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"迷惑電話/ブロックした通話"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"以前に一部の発信者について、他のアプリを通じて自動的にボイスメールに転送するようマークを付けています。"</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"番号を表示"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"インポート"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"番号のブロックを解除"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ブロックした番号はありません"</string>
     <string name="blockNumber" msgid="3312666193996551842">"電話番号を追加"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通話アカウント"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ONにする"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"権限を設定"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"クイックアクセスを有効にするには、連絡先権限をONにしてください。"</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"通話履歴を表示するには、電話権限をONにしてください。"</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"連絡先を表示するには、連絡先権限をONにしてください。"</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"ボイスメールにアクセスするには、電話権限をONにしてください。"</string>
     <string name="permission_no_search" msgid="84152933267902056">"連絡先を検索するには、連絡先権限をONにしてください。"</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"周辺のスポットを検索するには、電話アプリに位置情報へのアクセスを許可してください。"</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"電話をかけるには、電話権限をONにしてください。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話アプリにはシステム設定への書き込み権限がありません。"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"電話アプリを通話用のデフォルトアプリに設定"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"発信元（連絡先に登録されていない発信元も含む）の表示などを利用するには、電話アプリを通話用のデフォルトアプリに設定してください。"</string>

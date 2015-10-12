@@ -218,6 +218,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Брзи одговори"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Позиви"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Непожељни и блокирани позиви"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Раније сте означили неке позиваоце које аутоматски треба преусмерити на говорну пошту преко других апликација."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Прикажи бројеве"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Увeзи"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Деблокирај број"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Нема блокираних бројева"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Додај број"</string>
@@ -228,19 +231,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Налози за позивање"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Укључи"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Подеси дозволе"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Да бисте омогућили брзо бирање, укључите дозволу за Контакте."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Да бисте видели евиденцију позива, укључите дозволу за Телефон."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Да бисте видели контакте, укључите дозволу за Контакте."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Да бисте приступили говорној пошти, укључите дозволу за Телефон."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Да бисте претражили контакте, укључите дозволе за Контакте."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Да бисте претражили локације у околини, дозволите да Телефон приступа локацији."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Да бисте упутили позив, укључите дозволу за Телефон."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Апликација Телефон нема дозволу за уписивање у системска подешавања."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Још бољи начин за упућивање и примање позива"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Омогућите да Телефон буде подразумевана апликација за телефонирање да бисте, између осталог, могли да видите ко вас зове, чак и када тај број није сачуван у контактима."</string>

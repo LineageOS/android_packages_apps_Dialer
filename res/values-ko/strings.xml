@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"빠른 응답"</string>
     <string name="call_settings_label" msgid="313434211353070209">"통화"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"스팸 및 차단된 통화"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"이전에 다른 앱을 통해 일부 발신자를 자동으로 음성사서함으로 보내도록 표시했습니다."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"개수 보기"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"가져오기"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"번호 차단 해제"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"차단된 번호가 없습니다."</string>
     <string name="blockNumber" msgid="3312666193996551842">"번호 추가"</string>
@@ -226,24 +229,18 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"통화 계정"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"사용"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"권한 설정"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"단축번호를 사용하려면 주소록 권한을 사용하도록 설정하세요."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"통화 기록을 보려면 전화 권한을 사용하도록 설정하세요."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"주소록을 보려면 주소록 권한을 사용하도록 설정하세요."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"음성사서함에 액세스하려면 전화 권한을 사용하도록 설정하세요."</string>
     <string name="permission_no_search" msgid="84152933267902056">"주소록을 검색하려면 주소록 권한을 사용하도록 설정하세요."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"주변 위치를 검색하려면 스마트폰이 내 위치에 액세스할 수 있도록 허용하세요."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"전화를 걸려면 전화 권한을 사용하도록 설정하세요."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"전화 앱은 시스템 설정에 쓸 수 있는 권한이 없습니다."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"전화 앱으로 더 나은 통화 환경 경험"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"전화를 기본 통화 앱으로 설정하면 연락처에 없는 사용자가 전화를 걸어도 발신자를 확인할 수 있는 등 다양한 기능을 사용할 수 있습니다."</string>
     <string name="request_permissions_screen_title" msgid="7628851957217029400">"친구나 가족과 연락 주고받기"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"연락처에 있는 사용자에게 전화하려면 전화 앱이 전화 및 주소록에 액세스할 수 있어야 합니다."</string>
+    <string name="request_permissions_screen_content" msgid="24495396532130179">"주소록에 있는 사용자에게 전화하려면 전화 앱이 전화 및 주소록에 액세스할 수 있어야 합니다."</string>
     <string name="onboarding_skip_button" msgid="3955670727733408256">"건너뛰기"</string>
     <string name="onboarding_next_button" msgid="8492839445714599756">"다음"</string>
 </resources>

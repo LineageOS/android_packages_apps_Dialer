@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Trả lời nhanh"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Cuộc gọi"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Cuộc gọi bị chặn và spam"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Trước đây bạn đã đánh dấu một số người gọi sẽ được tự động gửi tới thư thoại qua các ứng dụng khác."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Xem số"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Nhập"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Bỏ chặn số"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Không có số nào bị chặn"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Thêm số"</string>

@@ -216,6 +216,9 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Tezkor javoblar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Qo‘ng‘iroqlar"</string>
     <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam va bloklangan raqamlar"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Ba’zi kiruvchi kontaktlaringiz boshqa ilovalar orqali avtomatik ovozli xabar yo‘llaydigan qilib belgilagansiz."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Sonini ko‘rish"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import qilish"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Raqamni blokdan chiqarish"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Bloklangan raqamlar mavjud emas"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Raqam qo‘shish"</string>
@@ -226,19 +229,13 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Qo‘ng‘iroq hisoblari"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Yoqish"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ruxsatnomalarni sozlash"</string>
-    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
-    <skip />
-    <!-- no translation found for permission_no_calllog (555711464287041043) -->
-    <skip />
-    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
-    <skip />
-    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
-    <skip />
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Tezkor raqam terish uchun “Kontaktlar” ruxsatnomasini yoqing."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Qo‘ng‘iroqlaringiz ro‘yxatini ko‘rish uchun “Telefon” ruxsatnomasini yoqing."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Kontaktlaringizni ko‘rish uchun “Kontaktlar” ruxsatnomasini yoqing."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Ovozli pochtaga kirish uchun “Telefon” ruxsatnomasini yoqing."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kontaktlarni qidirish uchun “Kontaktlar” ruxsatnomasini yoqing."</string>
-    <!-- no translation found for permission_no_location_for_search (7237797649497237650) -->
-    <skip />
-    <!-- no translation found for permission_place_call (2101287782615887547) -->
-    <skip />
+    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Yaqin-atrofdagi joylarni qidirish uchun “Telefon” ruxsatnomasiga joylashuvingiz haqidagi ma’lumotlarni ko‘rishga ruxsat bering."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Qo‘ng‘iroq qilish uchun “Telefon” ruxsatnomasini yoqing."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefon ilovasida tizim sozlamalarini o‘zgartirish uchun ruxsat yo‘q."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Qo‘ng‘iroq qilishning eng yaxshi yo‘li qo‘ng‘iroq qilishdir"</string>
     <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Hatto kontaktlaringizda bo‘lmasa ham kim qo‘ng‘iroq qilayotganini ko‘rishingiz mumkin bo‘lgan holatlarni amalga oshira olishi uchun Telefon ilovasini birlamchi telefon ilovasi qilib belgilang."</string>
