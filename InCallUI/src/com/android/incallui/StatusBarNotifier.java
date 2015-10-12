@@ -189,6 +189,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
                     buildAndSendNotification(call, entry);
                 }
             }
+
+            @Override
+            public void onContactInteractionsInfoComplete(String callId, ContactCacheEntry entry) {}
         });
     }
 

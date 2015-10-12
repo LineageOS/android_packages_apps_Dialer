@@ -60,6 +60,7 @@ public interface PhoneNumberService {
         public String getPhoneLabel();
         public String getNormalizedNumber();
         public String getImageUrl();
+        public String getLookupKey();
         public boolean isBusiness();
         public int getLookupSource();
     }

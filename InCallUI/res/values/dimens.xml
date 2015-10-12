@@ -133,6 +133,7 @@
     <dimen name="person_contact_context_detail_padding_top">7dp</dimen>
     <dimen name="person_contact_context_detail_text_size">14sp</dimen>
 
+    <dimen name="business_contact_context_end_padding">10dp</dimen>
     <dimen name="business_contact_context_image_size">25dp</dimen>
     <dimen name="business_contact_context_image_padding">20dp</dimen>
     <dimen name="business_contact_context_heading_font_size">18sp</dimen>

@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.incallui.CallCardPresenter.EmergencyCallListener;
+import com.android.incallui.ContactUtils;
+import com.android.incallui.DistanceHelper;
 import com.android.incallui.service.PhoneNumberService;
 
 public class ObjectFactory {
@@ -43,6 +45,15 @@ public class ObjectFactory {
      * touched while in a call.
      */
     public static Intent getCallStateButtonBroadcastIntent(Context context) {
+        return null;
+    }
+
+    public static DistanceHelper newDistanceHelper(Context context,
+            DistanceHelper.Listener listener) {
+        return null;
+    }
+
+    public static ContactUtils getContactUtilsInstance(Context context) {
         return null;
     }
 }
