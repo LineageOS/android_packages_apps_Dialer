@@ -39,6 +39,7 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
@@ -64,8 +65,13 @@ public class CallLogActivity extends Activity implements ViewPager.OnPageChangeL
         }
 
         @Override
+        public long getItemId(int position) {
+            return getRtlPosition(position);
+        }
+
+        @Override
         public Fragment getItem(int position) {
-            switch (position) {
+            switch (getRtlPosition(position)) {
                 case TAB_INDEX_ALL:
                     return new CallLogFragment(CallLogQueryHandler.CALL_TYPE_ALL);
                 case TAB_INDEX_MISSED:
@@ -228,5 +234,12 @@ public class CallLogActivity extends Activity implements ViewPager.OnPageChangeL
                 return "Missed";
         }
         return null;
+    }
+
+    private int getRtlPosition(int position) {
+        if (DialerUtils.isRtl()) {
+            return mViewPagerAdapter.getCount() - 1 - position;
+        }
+        return position;
     }
 }
