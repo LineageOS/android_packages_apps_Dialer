@@ -42,25 +42,24 @@
     [CHAR LIMIT=NONE] -->
     <string name="callHistoryIconLabel">Call history</string>
 
-    <!-- Text for a menu item to report a call as having been incorrectly identified.
-         [CHAR LIMIT=30] -->
-    <string name="call_detail_menu_report">Report inaccurate number</string>
+    <!-- Text for a menu item to report a call as having been incorrectly identified. [CHAR LIMIT=48] -->
+    <string name="action_report_number">Report inaccurate number</string>
 
-    <!-- Option displayed in context menu to copy long pressed phone number to clipboard [CHAR LIMIT=64] -->
-    <string name="copy_number_text">Copy number to clipboard</string>
+    <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
+    <string name="action_copy_number_text">Copy number</string>
 
-    <!-- Option displayed in context menu to copy long pressed voicemail transcription to clipboard [CHAR LIMIT=64] -->
-    <string name="copy_transcript_text">Copy transcription to clipboard</string>
+    <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
+    <string name="copy_transcript_text">Copy transcription</string>
 
-    <!-- Menu item used to block a number from the call log [CHAR LIMIT=64] -->
-    <string name="call_log_block_number">Block number</string>
+    <!-- Label for action to block a number. [CHAR LIMIT=48] -->
+    <string name="action_block_number">Block number</string>
 
     <!-- Text for snackbar to undo blocking a number. [CHAR LIMIT=64] -->
     <string name="snackbar_number_blocked">
         <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> added to block list</string>
 
-    <!-- Menu item used to unblock a number from the call log [CHAR LIMIT=64]-->
-    <string name="call_log_unblock_number">Unblock number</string>
+    <!-- Label for action to unblock a number [CHAR LIMIT=48]-->
+    <string name="action_unblock_number">Unblock number</string>
 
     <!-- Text for snackbar to undo unblocking a number. [CHAR LIMIT=64] -->
     <string name="snackbar_number_unblocked">
@@ -73,11 +72,8 @@
     <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
     <string name="call_details_delete">Delete</string>
 
-    <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
-    <string name="call_log_edit_number_before_call">Edit number before call</string>
-
-    <!-- Menu item used to remove a single call from the call log -->
-    <string name="call_log_remove_from_call_log">Delete from call history</string>
+    <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
+    <string name="action_edit_number_before_call">Edit number before call</string>
 
     <!-- Menu item used to remove all calls from the call log -->
     <string name="call_log_delete_all">Clear call history</string>
@@ -259,9 +255,6 @@
     <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
     <string name="action_menu_dialpad_button">dial pad</string>
-
-    <!-- Menu item to copy something [CHAR_LIMIT=10] -->
-    <string name="menu_copy">Copy</string>
 
     <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
     <string name="menu_show_outgoing_only">Show outgoing only</string>
