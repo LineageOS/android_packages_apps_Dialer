@@ -40,6 +40,7 @@ import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.TransactionSafeActivity;
+import com.android.dialer.util.DialerUtils;
 
 public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
@@ -63,8 +64,13 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
         }
 
         @Override
+        public long getItemId(int position) {
+            return getRtlPosition(position);
+        }
+
+        @Override
         public Fragment getItem(int position) {
-            switch (position) {
+            switch (getRtlPosition(position)) {
                 case TAB_INDEX_ALL:
                     return new CallLogFragment(
                             CallLogQueryHandler.CALL_TYPE_ALL, true /* isCallLogActivity */);
@@ -232,5 +238,12 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
                 return "Missed";
         }
         return null;
+    }
+
+    private int getRtlPosition(int position) {
+        if (DialerUtils.isRtl()) {
+            return mViewPagerAdapter.getCount() - 1 - position;
+        }
+        return position;
     }
 }
