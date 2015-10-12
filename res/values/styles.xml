@@ -146,6 +146,15 @@
         <item name="android:actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
+    <style name="CallDetailActionItemStyle">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingStart">@dimen/call_detail_action_item_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/call_detail_action_item_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/call_detail_action_item_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/call_detail_action_item_padding_vertical</item>
+    </style>
+
     <style name="DialtactsActionBarStyle"
            parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <!-- Styles that require AppCompat compatibility, remember to update both sets -->

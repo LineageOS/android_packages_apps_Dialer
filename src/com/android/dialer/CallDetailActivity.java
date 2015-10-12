@@ -28,6 +28,7 @@ import android.telecom.PhoneAccountHandle;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.GeoUtil;
@@ -52,6 +54,10 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
@@ -64,8 +70,10 @@ import com.android.incallui.Call.LogState;
  * {@link #EXTRA_CALL_LOG_IDS} extra to specify a group of call log entries.
  */
 public class CallDetailActivity extends AppCompatActivity
-        implements MenuItem.OnMenuItemClickListener {
-    private static final String TAG = "CallDetail";
+        implements MenuItem.OnMenuItemClickListener, View.OnClickListener,
+                FilterNumberDialogFragment.OnBlockListener,
+                FilterNumberDialogFragment.OnUndoBlockListener {
+    private static final String TAG = CallDetailActivity.class.getSimpleName();
 
      /** A long array extra containing ids of call log entries to display. */
     public static final String EXTRA_CALL_LOG_IDS = "EXTRA_CALL_LOG_IDS";
@@ -97,31 +105,28 @@ public class CallDetailActivity extends AppCompatActivity
                 return;
             }
 
-            // We know that all calls are from the same number and the same contact, so pick the
-            // first.
-            PhoneCallDetails firstDetails = details[0];
-            mNumber = TextUtils.isEmpty(firstDetails.number) ?
-                    null : firstDetails.number.toString();
-            final int numberPresentation = firstDetails.numberPresentation;
-            final Uri contactUri = firstDetails.contactUri;
-            final Uri photoUri = firstDetails.photoUri;
-            final PhoneAccountHandle accountHandle = firstDetails.accountHandle;
+            // All calls are from the same number and same contact, so pick the first detail.
+            mDetails = details[0];
+            mNumber = TextUtils.isEmpty(mDetails.number) ?
+                    null : mDetails.number.toString();
+            mDisplayNumber = mDetails.displayNumber;
+            final int numberPresentation = mDetails.numberPresentation;
+            final Uri contactUri = mDetails.contactUri;
+            final Uri photoUri = mDetails.photoUri;
+            final PhoneAccountHandle accountHandle = mDetails.accountHandle;
 
             // Cache the details about the phone number.
-            final boolean canPlaceCallsTo =
-                    PhoneNumberUtil.canPlaceCallsTo(mNumber, numberPresentation);
             mIsVoicemailNumber =
                     PhoneNumberUtil.isVoicemailNumber(mContext, accountHandle, mNumber);
-            final boolean isSipNumber = PhoneNumberUtil.isSipNumber(mNumber);
 
-            final CharSequence callLocationOrType = getNumberTypeOrLocation(firstDetails);
+            final CharSequence callLocationOrType = getNumberTypeOrLocation(mDetails);
 
-            final CharSequence displayNumber = firstDetails.displayNumber;
+            final CharSequence displayNumber = mDetails.displayNumber;
             final String displayNumberStr = mBidiFormatter.unicodeWrap(
                     displayNumber.toString(), TextDirectionHeuristics.LTR);
 
-            if (!TextUtils.isEmpty(firstDetails.name)) {
-                mCallerName.setText(firstDetails.name);
+            if (!TextUtils.isEmpty(mDetails.name)) {
+                mCallerName.setText(mDetails.name);
                 mCallerNumber.setText(callLocationOrType + " " + displayNumberStr);
             } else {
                 mCallerName.setText(displayNumberStr);
@@ -133,8 +138,6 @@ public class CallDetailActivity extends AppCompatActivity
                 }
             }
 
-            mCallButton.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
-
             String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, accountHandle);
             if (!TextUtils.isEmpty(accountLabel)) {
                 mAccountLabel.setText(accountLabel);
@@ -143,20 +146,31 @@ public class CallDetailActivity extends AppCompatActivity
                 mAccountLabel.setVisibility(View.GONE);
             }
 
-            mHasEditNumberBeforeCallOption =
+            final boolean canPlaceCallsTo =
+                    PhoneNumberUtil.canPlaceCallsTo(mNumber, mDetails.numberPresentation);
+            mCallButton.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
+
+            final boolean isSipNumber = PhoneNumberUtil.isSipNumber(mNumber);
+            final boolean showEditNumberBeforeCallAction =
                     canPlaceCallsTo && !isSipNumber && !mIsVoicemailNumber;
-            mHasReportMenuOption = mContactInfoHelper.canReportAsInvalid(
-                    firstDetails.sourceType, firstDetails.objectId);
+            mEditBeforeCallActionItem.setVisibility(
+                    showEditNumberBeforeCallAction ? View.VISIBLE : View.GONE);
+
+            final boolean showReportAction = mContactInfoHelper.canReportAsInvalid(
+                    mDetails.sourceType, mDetails.objectId);
+            mReportActionItem.setVisibility(
+                    showReportAction ? View.VISIBLE : View.GONE);
+
+            updateBlockActionItem();
             invalidateOptionsMenu();
 
-            ListView historyList = (ListView) findViewById(R.id.history);
-            historyList.setAdapter(
+            mHistoryList.setAdapter(
                     new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
 
             String lookupKey = contactUri == null ? null
                     : UriUtils.getLookupKeyFromUri(contactUri);
 
-            final boolean isBusiness = mContactInfoHelper.isBusiness(firstDetails.sourceType);
+            final boolean isBusiness = mContactInfoHelper.isBusiness(mDetails.sourceType);
 
             final int contactType =
                     mIsVoicemailNumber ? ContactPhotoManager.TYPE_VOICEMAIL :
@@ -164,10 +178,10 @@ public class CallDetailActivity extends AppCompatActivity
                     ContactPhotoManager.TYPE_DEFAULT;
 
             String nameForDefaultImage;
-            if (TextUtils.isEmpty(firstDetails.name)) {
-                nameForDefaultImage = firstDetails.displayNumber;
+            if (TextUtils.isEmpty(mDetails.name)) {
+                nameForDefaultImage = mDetails.displayNumber;
             } else {
-                nameForDefaultImage = firstDetails.name.toString();
+                nameForDefaultImage = mDetails.name.toString();
             }
 
             loadContactPhotos(
@@ -193,29 +207,34 @@ public class CallDetailActivity extends AppCompatActivity
     };
 
     private Context mContext;
+    private ContactInfoHelper mContactInfoHelper;
     private CallTypeHelper mCallTypeHelper;
+    private ContactPhotoManager mContactPhotoManager;
+    private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+    private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
+    private LayoutInflater mInflater;
+    private Resources mResources;
+
+    private PhoneCallDetails mDetails;
+    protected String mNumber;
+    private Uri mVoicemailUri;
+    private boolean mIsVoicemailNumber;
+    private String mDefaultCountryIso;
+    private String mDisplayNumber;
+
+    private ListView mHistoryList;
     private QuickContactBadge mQuickContactBadge;
     private TextView mCallerName;
     private TextView mCallerNumber;
     private TextView mAccountLabel;
     private View mCallButton;
-    private ContactInfoHelper mContactInfoHelper;
 
-    protected String mNumber;
-    private boolean mIsVoicemailNumber;
-    private String mDefaultCountryIso;
+    private View mBlockNumberActionItem;
+    private TextView mBlockNumberActionItemText;
+    private View mEditBeforeCallActionItem;
+    private View mReportActionItem;
 
-    /* package */ LayoutInflater mInflater;
-    /* package */ Resources mResources;
-    /** Helper to load contact photos. */
-    private ContactPhotoManager mContactPhotoManager;
-
-    private Uri mVoicemailUri;
-    private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
-
-    /** Whether we should show "edit number before call" in the options menu. */
-    private boolean mHasEditNumberBeforeCallOption;
-    private boolean mHasReportMenuOption;
+    private Integer mBlockedNumberId;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -227,18 +246,23 @@ public class CallDetailActivity extends AppCompatActivity
         }
 
         mContext = this;
-
-        setContentView(R.layout.call_detail);
-
-        mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         mResources = getResources();
-
+        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
         mCallTypeHelper = new CallTypeHelper(getResources());
+        mFilteredNumberAsyncQueryHandler =
+                new FilteredNumberAsyncQueryHandler(getContentResolver());
 
         mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
 
-        ListView historyList = (ListView) findViewById(R.id.history);
-        historyList.addHeaderView(mInflater.inflate(R.layout.call_detail_header, null));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setContentView(R.layout.call_detail);
+        mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        mHistoryList = (ListView) findViewById(R.id.history);
+        mHistoryList.addHeaderView(mInflater.inflate(R.layout.call_detail_header, null));
+        mHistoryList.addFooterView(
+                mInflater.inflate(R.layout.call_detail_footer, null), null, false);
 
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
@@ -260,8 +284,16 @@ public class CallDetailActivity extends AppCompatActivity
             }
         });
 
-        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mBlockNumberActionItem = findViewById(R.id.call_detail_action_block);
+        mBlockNumberActionItem.setOnClickListener(this);
+        mBlockNumberActionItemText = (TextView) findViewById(R.id.call_detail_action_block_text);
+        mEditBeforeCallActionItem = findViewById(R.id.call_detail_action_edit_before_call);
+        mEditBeforeCallActionItem.setOnClickListener(this);
+        mReportActionItem = findViewById(R.id.call_detail_action_report);
+        mReportActionItem.setOnClickListener(this);
+
+        View copyActionItem = findViewById(R.id.call_detail_action_copy);
+        copyActionItem.setOnClickListener(this);
 
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
@@ -275,6 +307,16 @@ public class CallDetailActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBlockComplete(Uri uri) {
+        updateBlockActionItem();
+    }
+
+    @Override
+    public void onUndoBlockComplete() {
+        updateBlockActionItem();
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             TouchPointManager.getInstance().setPoint((int) ev.getRawX(), (int) ev.getRawY());
@@ -284,11 +326,6 @@ public class CallDetailActivity extends AppCompatActivity
 
     public void getCallDetails() {
         CallLogAsyncTaskUtil.getCallDetails(this, getCallLogEntryUris(), mCallLogAsyncTaskListener);
-    }
-
-    @NeededForTesting
-    public boolean hasVoicemail() {
-        return mVoicemailUri != null;
     }
 
     /**
@@ -341,19 +378,7 @@ public class CallDetailActivity extends AppCompatActivity
         deleteMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         deleteMenuItem.setOnMenuItemClickListener(this);
 
-        getMenuInflater().inflate(R.menu.call_details_options, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_edit_number_before_call)
-                .setVisible(mHasEditNumberBeforeCallOption)
-                .setOnMenuItemClickListener(this);
-        menu.findItem(R.id.menu_report)
-                .setVisible(mHasReportMenuOption)
-                .setOnMenuItemClickListener(this);
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -375,14 +400,65 @@ public class CallDetailActivity extends AppCompatActivity
                             this, callIds.toString(), mCallLogAsyncTaskListener);
                 }
                 break;
-            case R.id.menu_edit_number_before_call:
-                startActivity(new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber)));
-                break;
         }
         return true;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.call_detail_action_block:
+                // TODO: Use helper, this code is repeated in several places.
+                FilterNumberDialogFragment newFragment =
+                        FilterNumberDialogFragment.newInstance(
+                                mBlockedNumberId, null, mNumber, null, mDisplayNumber);
+                // TODO: Cleanup this listener pattern. This only works correctly for undoing
+                // blocking, not undoing unblocking.
+                newFragment.setOnBlockListener(this);
+                newFragment.setOnUndoBlockListener(this);
+                newFragment.setParentView(findViewById(R.id.call_detail));
+                newFragment.show(
+                        getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                break;
+            case R.id.call_detail_action_copy:
+                ClipboardUtils.copyText(mContext, null, mNumber, true);
+                break;
+            case R.id.call_detail_action_edit_before_call:
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber));
+                DialerUtils.startActivityWithErrorToast(mContext, dialIntent);
+                break;
+            default:
+                Log.wtf(TAG, "Unexpected onClick event from " + view);
+                break;
+        }
+    }
+
+    private void updateBlockActionItem() {
+        if (mDetails == null) {
+            return;
+        }
+
+        mFilteredNumberAsyncQueryHandler.startBlockedQuery(new OnCheckBlockedListener() {
+            @Override
+            public void onCheckComplete(Integer id) {
+                mBlockedNumberId = id;
+                if (mBlockedNumberId == null) {
+                    mBlockNumberActionItemText.setText(R.string.action_block_number);
+                } else {
+                    mBlockNumberActionItemText.setText(R.string.action_unblock_number);
+                }
+
+                mBlockNumberActionItem.setVisibility(View.VISIBLE);
+            }
+        }, null, mNumber, mDetails.countryIso);
+    }
+
     private void closeSystemDialogs() {
         sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+    }
+
+    @NeededForTesting
+    public boolean hasVoicemail() {
+        return mVoicemailUri != null;
     }
 }

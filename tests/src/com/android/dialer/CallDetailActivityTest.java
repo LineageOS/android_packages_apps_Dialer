@@ -16,7 +16,7 @@
 
 package com.android.dialer;
 
-import static com.android.dialer.calllog.CallLogAsyncTaskUtil.Tasks.GET_CALL_DETAILS;
+import static com.android.dialer.calllog.CallLogAsyncTaskUtil.Tasks;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -89,14 +89,20 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     public void testVoicemailDeleteButton() throws Throwable {
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
-        mFakeAsyncTaskExecutor.runTask(GET_CALL_DETAILS);
+        mFakeAsyncTaskExecutor.runTask(Tasks.GET_CALL_DETAILS);
 
         Menu optionsMenu = (new PopupMenu(mActivityUnderTest, null)).getMenu();
         mActivityUnderTest.onCreateOptionsMenu(optionsMenu);
         mActivityUnderTest.onPrepareOptionsMenu(optionsMenu);
 
-        assertTrue(optionsMenu.findItem(R.id.call_detail_delete_menu_item).isVisible());
         assertTrue(mActivityUnderTest.hasVoicemail());
+        mActivityUnderTest.runOnUiThread(new Runnable() {
+            public void run() {
+                mActivityUnderTest.findViewById(R.id.call_detail_delete_menu_item).performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        mFakeAsyncTaskExecutor.runTask(Tasks.DELETE_VOICEMAIL);
     }
 
     /**
@@ -105,14 +111,20 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     public void testRegularCallDoesHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestCallEntry();
         startActivityUnderTest();
-        mFakeAsyncTaskExecutor.runTask(GET_CALL_DETAILS);
+        mFakeAsyncTaskExecutor.runTask(Tasks.GET_CALL_DETAILS);
 
         Menu optionsMenu = (new PopupMenu(mActivityUnderTest, null)).getMenu();
         mActivityUnderTest.onCreateOptionsMenu(optionsMenu);
         mActivityUnderTest.onPrepareOptionsMenu(optionsMenu);
 
-        assertTrue(optionsMenu.findItem(R.id.call_detail_delete_menu_item).isVisible());
         assertFalse(mActivityUnderTest.hasVoicemail());
+        mActivityUnderTest.runOnUiThread(new Runnable() {
+            public void run() {
+                mActivityUnderTest.findViewById(R.id.call_detail_delete_menu_item).performClick();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        mFakeAsyncTaskExecutor.runTask(Tasks.DELETE_CALL);
     }
 
     private void setActivityIntentForTestCallEntry() {

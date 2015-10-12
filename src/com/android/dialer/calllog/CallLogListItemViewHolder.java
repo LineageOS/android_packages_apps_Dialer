@@ -268,7 +268,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         }
 
         menu.add(ContextMenu.NONE, R.id.context_menu_copy_to_clipboard, ContextMenu.NONE,
-                R.string.copy_number_text)
+                R.string.action_copy_number_text)
                 .setOnMenuItemClickListener(this);
 
         // The edit number before call does not show up if any of the conditions apply:
@@ -280,7 +280,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 && !mTelecomCallLogCache.isVoicemailNumber(accountHandle, number)
                 && !PhoneNumberUtil.isSipNumber(number)) {
             menu.add(ContextMenu.NONE, R.id.context_menu_edit_before_call, ContextMenu.NONE,
-                    R.string.call_log_edit_number_before_call)
+                    R.string.action_edit_number_before_call)
                     .setOnMenuItemClickListener(this);
         }
 
@@ -296,8 +296,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     @Override
                     public void onCheckComplete(Integer id) {
                         blockId = id;
-                        int blockTitleId = blockId == null ? R.string.call_log_block_number
-                                : R.string.call_log_unblock_number;
+                        int blockTitleId = blockId == null ? R.string.action_block_number
+                                : R.string.action_unblock_number;
                         final MenuItem blockItem = menu.add(
                                 ContextMenu.NONE,
                                 R.id.context_menu_block_number,

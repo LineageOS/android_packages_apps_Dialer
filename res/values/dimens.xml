@@ -16,6 +16,7 @@
 -->
 <resources>
     <dimen name="button_horizontal_padding">16dp</dimen>
+    <dimen name="divider_line_thickness">2dp</dimen>
 
     <!--
           Drag to remove view (in dp because it is used in conjunction with a statically
@@ -47,6 +48,8 @@
     <dimen name="call_detail_header_top_margin">20dp</dimen>
     <dimen name="call_detail_header_bottom_margin">9dp</dimen>
     <dimen name="call_detail_elevation">0.5dp</dimen>
+    <dimen name="call_detail_action_item_padding_horizontal">36dp</dimen>
+    <dimen name="call_detail_action_item_padding_vertical">16dp</dimen>
     <dimen name="transcription_top_margin">18dp</dimen>
     <dimen name="transcription_bottom_margin">18dp</dimen>
 
