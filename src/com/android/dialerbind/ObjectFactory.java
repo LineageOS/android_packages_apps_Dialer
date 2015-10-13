@@ -22,6 +22,7 @@ import android.content.Context;
 
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
