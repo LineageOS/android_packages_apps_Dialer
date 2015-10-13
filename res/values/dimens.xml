@@ -167,4 +167,6 @@
     <dimen name="blocked_number_settings_description_text_size">16sp</dimen>
 
     <dimen name="call_type_icon_size">12dp</dimen>
+
+    <dimen name="onboard_screen_side_padding">20dp</dimen>
 </resources>
