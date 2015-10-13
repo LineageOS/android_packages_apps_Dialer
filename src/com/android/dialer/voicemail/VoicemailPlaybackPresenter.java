@@ -625,7 +625,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * playing.
      */
     public void resumePlayback() {
-        if (mView == null) {
+        if (mView == null || mContext == null) {
             return;
         }
 
@@ -638,7 +638,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
         mIsPlaying = true;
 
-        if (!mMediaPlayer.isPlaying()) {
+        if (mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             // Clamp the start position between 0 and the duration.
             mPosition = Math.max(0, Math.min(mPosition, mDuration.get()));
 
