@@ -16,10 +16,29 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="nearby_places">Yaxındakı yerlər</string>
+  <string name="nearby_places">Yaxındakı məkanlar</string>
   <string name="people">İnsanlar</string>
+  <string name="lookup_settings_label">Telefon nömrəsi axtar</string>
+  <string name="lookup_settings_description">Bilinməyən telefon nömrələrini axtar</string>
+  <string name="enable_forward_lookup_title">Birbaşa axtarış</string>
+  <string name="enable_forward_lookup_summary">Nömrə yığımında axtarış edərkən yaxın yerləri göstər</string>
+  <string name="enable_people_lookup_title">Şəxs axtarışı</string>
+  <string name="enable_people_lookup_summary">Nömrə yığımında axtarış edərkən şəxslər üçün xətdə nəticələrini göstər</string>
+  <string name="enable_reverse_lookup_title">Geri axtarış</string>
+  <string name="enable_reverse_lookup_summary">Gələn zənglərdə bilinməyən nömrələr üçün şəxs və ya yer haqqında məlumat axtar</string>
+  <string name="forward_lookup_provider_title">Axtarış yönləndirmə təchizatçısı</string>
+  <string name="people_lookup_provider_title">Şəxs axtarış təchizatçısı</string>
+  <string name="reverse_lookup_provider_title">Geri axtarış təchizatçısı</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Çincə (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Nömrə yığımı T9 axtarışı</string>
+  <string name="t9_search_input_locale">T9 axtarış daxiletmə</string>
+  <string name="t9_search_input_locale_default">İlkin</string>
+  <string name="type_blacklist">Əngəllənən zəng</string>
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Zəng statistikası təfsilatı</string>
+  <string name="call_stats">Zəng statistikaları</string>
+  <string name="call_stats_refresh">Yenilə</string>
+  <string name="activity_title_call_stats">Zəng statistikaları</string>
   <string name="call_stats_nav_all">Hamısı</string>
   <string name="call_stats_nav_incoming">Gələn</string>
   <string name="call_stats_nav_outgoing">Gedən</string>
@@ -28,21 +47,58 @@
   <string name="call_stats_outgoing">Gedən: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Cavabsız</string>
   <string name="call_stats_missed_percent">Cavabsız: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Əngəlləndi</string>
+  <string name="call_stats_blacklist_percent">Əngəlləndi: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Ümumi: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Ümumi: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Başlanğıc tarixi</string>
   <string name="call_stats_filter_to">Bitmə tarixi</string>
+  <string name="call_stats_filter_picker_title">Filtr aralığı</string>
+  <string name="date_quick_selection">Cəld seçim</string>
   <string name="date_qs_currentmonth">Hazırki ay</string>
+  <string name="date_qs_currentquarter">Hazırki rüb</string>
   <string name="date_qs_currentyear">Hazırki il</string>
   <string name="date_qs_lastweek">Keçən həftə</string>
   <string name="date_qs_lastmonth">Keçən ay</string>
+  <string name="date_qs_lastquarter">Son rüb</string>
   <string name="date_qs_lastyear">Keçən il</string>
+  <string name="call_stats_date_filter">Vaxt aralığını nizamla</string>
+  <string name="call_stats_reset_filter">Vaxt aralığını sıfırla</string>
   <string name="call_stats_sort_by_duration">Zəng müddətinə görə sırala</string>
   <string name="call_stats_sort_by_count">Zəng sayına görə sırala</string>
+  <string name="menu_add_to_blacklist">Əngəllənən zəng edənlər siyahısına əlavə et</string>
+  <string name="toast_added_to_blacklist">%s əngəllənən zəng edənlər siyahısına əlavə edildi.</string>
+  <string name="speed_dial_settings">Cəld yığım tənzimləmələri</string>
   <string name="speed_dial_not_set">(tənzimlənməyib)</string>
   <string name="speed_dial_replace">Dəyişdir</string>
   <string name="speed_dial_delete">Sil</string>
+  <string name="speed_dial_unassigned_dialog_title">Nömrə təyin edilmədi</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' nömrəsinə cəld nömrə yığımı təyin edilmədi. İndi təyin etmək istərdiniz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Cəld nömrə yığımından istifadə etmək üçün uçuş rejimini bağlayın.</string>
   <string name="yes">Bəli</string>
   <string name="no">Xeyr</string>
+  <string name="incall_vibration_category_title">Gələn zəng titrəməsi</string>
+  <string name="incall_vibrate_outgoing_title">Cavab verәrkәn titrət</string>
+  <string name="vibrate_call_waiting">Zəng gözlədiləndə titrət</string>
+  <string name="incall_vibrate_hangup_title">Söndürüləndə titrət</string>
+  <string name="incall_vibrate_45_title">Hər dəqiqə titrət</string>
+  <string name="incall_vibrate_45_summary">Gedən zənglərin hər dəqiqəsinin 45-ci saniyəsində titrəyər</string>
+  <string name="detailed_incall_info_title">Zəng edənin təfsilatlı məlumatı</string>
+  <string name="detailed_incall_info_summary">Gələn zəng ekranında zəng edən haqqında əlavə məlumat göstər</string>
   <string name="video_call">Görüntülü zəng</string>
+  <string name="call_duration_active">Aktiv müddət:</string>
+  <string name="call_duration_call_out">Zəng müddəti:</string>
   <string name="call_log_show_all_slots">Bütün SIMlər</string>
+  <string name="call_log_all_calls_header">Bütün zənglər</string>
   <string name="calllog_search_hint">Zəng qeydini axtar</string>
+  <string name="msim_ime_dialog_title">Cihaz təyinedicisi</string>
+  <string name="call_log_blacklist_header">Yalnız əngəllənən zənglər</string>
+  <string name="start_call_playback">Səsyazmanı oynat</string>
+  <string name="stop_call_playback">Dayandır</string>
+  <string name="call_playback_error_message">Səsyazma oynadıla bilmədi</string>
+  <string name="sensors_category_title">Sensor seçimləri</string>
+  <string name="smart_mute_title">Ağıllı səs kəsmə</string>
+  <string name="smart_mute_summary">Cihazı çevirəndə gələn zəngi səssizə alar</string>
+  <string name="smart_dialer_title">Ağıllı zəng</string>
+  <string name="smart_dialer_summary">Cihazınızı qulağınıza apardıqda yığılan nömrəyə avtomatik zəng edilər</string>
 </resources>

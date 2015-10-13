@@ -87,7 +87,6 @@
   <string name="contact_list_loading">يۈكلەۋاتىدۇ…</string>
   <string name="simContacts_emptyLoading">SIM كارتىدىن يۈكلەۋاتىدۇ…</string>
   <string name="simContacts_title">SIM كارتىدىكى ئالاقەداشلار</string>
-  <string name="call_log_activity_title_font_family">sans-serif-light</string>
   <string name="show_favorites_only">دائىملىق ئالاقەداشلارنىلا كۆرسەت</string>
   <string name="call_log_activity_title">تارىخ</string>
   <string name="call_log_all_title">ھەممىسى</string>

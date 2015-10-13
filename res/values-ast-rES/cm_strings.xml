@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Guetar Dialpad T9</string>
   <string name="t9_search_input_locale">Entrada gueta T9</string>
   <string name="t9_search_input_locale_default">Predetermináu</string>
+  <string name="type_blacklist">Llamada bloquiada</string>
   <string name="call_log_stats_title">Estadístiques</string>
   <string name="callStatsDetailTitle">Detalles de llamada</string>
   <string name="call_stats">Estadístiques de llamaes</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">Salientes: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Perdíes</string>
   <string name="call_stats_missed_percent">Perdíes: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Bloquiada</string>
+  <string name="call_stats_blacklist_percent">Bloquiaes: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data aniciu</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">Restablecer rangu de dates</string>
   <string name="call_stats_sort_by_duration">Ordenar por duración</string>
   <string name="call_stats_sort_by_count">Ordenar por númb. llamaes</string>
+  <string name="menu_add_to_blacklist">Amestar a la llista de contautos bloquiaos</string>
+  <string name="toast_added_to_blacklist">%s amestaos a la llista de contautos bloquiaos.</string>
   <string name="speed_dial_settings">Axustes de marcáu rápidu</string>
   <string name="speed_dial_not_set">(ensin afitar)</string>
   <string name="speed_dial_replace">Trocar</string>
@@ -87,7 +92,13 @@
   <string name="call_log_all_calls_header">Toles llamaes</string>
   <string name="calllog_search_hint">Guetar rexistru de llamaes</string>
   <string name="msim_ime_dialog_title">Identificador del preséu</string>
+  <string name="call_log_blacklist_header">Namái llamaes bloquiaes</string>
   <string name="start_call_playback">Reproducir grabación</string>
   <string name="stop_call_playback">Detener</string>
   <string name="call_playback_error_message">Nun pudo reproducise la grabación</string>
+  <string name="sensors_category_title">Opciones de sensores</string>
+  <string name="smart_mute_title">Silenciu intelixente</string>
+  <string name="smart_mute_summary">Silencia la llamada entrante voltiando\'l preséu</string>
+  <string name="smart_dialer_title">Llamada intelixente</string>
+  <string name="smart_dialer_summary">Llama automáticamente al númberu marcáu moviendo\'l to preséu a la to oreya</string>
 </resources>

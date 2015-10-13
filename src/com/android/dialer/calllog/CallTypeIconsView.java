@@ -200,11 +200,11 @@ public class CallTypeIconsView extends View {
             final android.content.res.Resources r = context.getResources();
 
             incoming = r.getDrawable(R.drawable.ic_call_arrow);
-            incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+            incoming.setColorFilter(r.getColor(R.color.answered_incoming_call), PorterDuff.Mode.MULTIPLY);
 
             // Create a rotated instance of the call arrow for outgoing calls.
             outgoing = BitmapUtil.getRotatedDrawable(r, R.drawable.ic_call_arrow, 180f);
-            outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+            outgoing.setColorFilter(r.getColor(R.color.answered_outgoing_call), PorterDuff.Mode.MULTIPLY);
 
             // Need to make a copy of the arrow drawable, otherwise the same instance colored
             // above will be recolored here.
