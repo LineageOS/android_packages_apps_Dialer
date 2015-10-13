@@ -13,32 +13,36 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
+     android:orientation="horizontal"
      android:paddingEnd="@dimen/business_contact_context_end_padding">
      <ImageView android:id="@+id/icon"
          android:layout_width="@dimen/business_contact_context_image_size"
          android:layout_height="@dimen/business_contact_context_image_size"
+         android:layout_marginLeft="@dimen/business_contact_context_image_padding"
+         android:layout_marginRight="@dimen/business_contact_context_image_padding"
+         android:layout_gravity="center"
          android:scaleType="centerCrop"
          android:tint="@color/business_contact_context_text_color"
-         android:alpha="0.8"
-         android:layout_centerVertical="true"
-         android:layout_marginLeft="@dimen/business_contact_context_image_padding"
-         android:layout_marginRight="@dimen/business_contact_context_image_padding"/>
-     <TextView android:id="@+id/heading"
+         android:alpha="0.8"/>
+     <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_toEndOf="@id/icon"
-         android:textSize="@dimen/business_contact_context_heading_font_size"
-         android:textColor="@color/business_contact_context_text_color"
-         android:fontFamily="sans-serif-medium"/>
-     <TextView android:id="@+id/detail"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_toEndOf="@id/icon"
-         android:layout_below="@id/heading"
-         android:textSize="@dimen/business_contact_context_detail_font_size"
-         android:textColor="@color/business_contact_context_text_color"
-         android:fontFamily="sans-serif-medium"/>
- </RelativeLayout>
+         android:layout_gravity="center"
+         android:orientation="vertical">
+         <TextView android:id="@+id/heading"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textSize="@dimen/business_contact_context_heading_font_size"
+             android:textColor="@color/business_contact_context_text_color"
+             android:fontFamily="sans-serif-medium"/>
+         <TextView android:id="@+id/detail"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textSize="@dimen/business_contact_context_detail_font_size"
+             android:textColor="@color/business_contact_context_text_color"
+             android:fontFamily="sans-serif-medium"/>
+     </LinearLayout>
+ </LinearLayout>

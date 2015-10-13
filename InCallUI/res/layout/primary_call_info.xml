@@ -21,18 +21,25 @@
     other status info.  This info is shown as a "banner" overlaid across the top of contact photo.
     -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/primary_call_banner"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:minHeight="@dimen/call_banner_height"
     android:paddingStart="@dimen/call_banner_side_padding"
     android:paddingEnd="@dimen/call_banner_side_padding"
-    android:clipChildren="false"
-    android:clipToPadding="false"
     android:animateLayoutChanges="true"
     android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/primary_call_banner"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center">
 
     <LinearLayout android:id="@+id/callSubjectLayout"
                   android:layout_width="match_parent"
@@ -196,4 +203,14 @@
         android:ellipsize="end"
         android:visibility="gone" />
 
+    </LinearLayout>
+
+    <!-- Contact photo for primary call info -->
+    <ImageView android:id="@+id/photoSmall"
+        android:layout_width="@dimen/contact_context_small_photo_size"
+        android:layout_height="@dimen/contact_context_small_photo_size"
+        android:layout_marginLeft="@dimen/call_banner_side_padding"
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no"
+        android:src="@drawable/img_no_image_automirrored" />
 </LinearLayout>  <!-- End of call_banner -->
