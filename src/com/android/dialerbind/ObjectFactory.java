@@ -65,4 +65,8 @@ public class ObjectFactory {
         // no-op
         return null;
     }
+
+    public static RegularSearchFragment newRegularSearchFragment() {
+        return new RegularSearchFragment();
+    }
 }
