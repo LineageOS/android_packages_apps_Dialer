@@ -21,7 +21,9 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,16 @@ import com.android.dialer.database.FilteredNumberContract;
 public class BlockedNumberFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
 
+    private static class SendToVoicemailContactQuery {
+        static final String[] PROJECTION = {
+            Contacts._ID
+        };
+
+        static final String SELECT_SEND_TO_VOICEMAIL_TRUE = Contacts.SEND_TO_VOICEMAIL + "=1";
+    }
+
     private BlockedNumberAdapter mAdapter;
+    private View mImportSettings;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -47,6 +58,8 @@ public class BlockedNumberFragment extends ListFragment implements
 
         getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
         getListView().getEmptyView().findViewById(R.id.add_number_button).setOnClickListener(this);
+
+        mImportSettings = getActivity().findViewById(R.id.importsettings);
     }
 
     @Override
@@ -59,6 +72,12 @@ public class BlockedNumberFragment extends ListFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkForSendToVoicemailContact();
     }
 
     @Override
@@ -101,5 +120,45 @@ public class BlockedNumberFragment extends ListFragment implements
         if (manageBlockedNumbersActivity != null && v.getId() == R.id.add_number_button) {
             manageBlockedNumbersActivity.enterSearchUi();
         }
+    }
+
+    /**
+     * Checks if there exists a contact with {@code Contacts.SEND_TO_VOICEMAIL} set to true,
+     * and updates the visibility of the import settings buttons accordingly.
+     */
+    private void checkForSendToVoicemailContact() {
+        final AsyncTask task = new AsyncTask<Object, Void, Boolean>() {
+            @Override
+            public Boolean doInBackground(Object[]  params) {
+                if (getActivity() == null) {
+                    return false;
+                }
+
+                final Cursor cursor = getActivity().getContentResolver().query(
+                        Contacts.CONTENT_URI,
+                        SendToVoicemailContactQuery.PROJECTION,
+                        SendToVoicemailContactQuery.SELECT_SEND_TO_VOICEMAIL_TRUE,
+                        null,
+                        null);
+
+                boolean hasSendToVoicemailContacts = false;
+                if (cursor != null) {
+                    try {
+                        hasSendToVoicemailContacts = cursor.getCount() > 0;
+                    } finally {
+                        cursor.close();
+                    }
+                }
+
+                return hasSendToVoicemailContacts;
+            }
+
+            @Override
+            public void onPostExecute(Boolean hasSendToVoicemailContact) {
+                final int visibility = hasSendToVoicemailContact ? View.VISIBLE : View.GONE;
+                mImportSettings.setVisibility(visibility);
+            }
+        };
+        task.execute();
     }
 }
