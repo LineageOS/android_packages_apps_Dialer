@@ -68,11 +68,13 @@ public class BlockedListSearchAdapter extends RegularSearchListAdapter {
     @Override
     protected void bindView(View itemView, int partition, Cursor cursor, int position) {
         super.bindView(itemView, partition, cursor, position);
+
         final ContactListItemView view = (ContactListItemView) itemView;
+        // Reset view state to unblocked.
+        setViewUnblocked(view);
+
         final String number = getPhoneNumber(position);
         final String countryIso = GeoUtil.getCurrentCountryIso(mContext);
-        final String normalizedNumber =
-                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
         final FilteredNumberAsyncQueryHandler.OnCheckBlockedListener onCheckListener =
                 new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
                     @Override
@@ -83,6 +85,6 @@ public class BlockedListSearchAdapter extends RegularSearchListAdapter {
                     }
                 };
         mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                onCheckListener, normalizedNumber, number, countryIso);
+                onCheckListener, null, number, countryIso);
     }
 }
