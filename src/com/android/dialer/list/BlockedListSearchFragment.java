@@ -32,8 +32,10 @@ import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.ManageBlockedNumbersActivity;
 
-public class BlockedListSearchFragment extends RegularSearchFragment {
+public class BlockedListSearchFragment extends RegularSearchFragment
+        implements FilterNumberDialogFragment.Callback {
     private static final String TAG = BlockedListSearchFragment.class.getSimpleName();
 
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
@@ -44,7 +46,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
         mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(
                 getContext().getContentResolver());
     }
-
 
     @Override
     protected ContactEntryListAdapter createListAdapter() {
@@ -79,9 +80,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
         }
     }
 
-    // Prevent SearchFragment.onItemClicked from being called.
     @Override
     protected void onItemClick(int position, long id) {
+        // Prevent SearchFragment.onItemClicked from being called.
     }
 
     private void blockNumber(final String number) {
@@ -97,12 +98,15 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
             @Override
             public void onCheckComplete(Integer id) {
                 if (id == null) {
-                    final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
-                            .newInstance(id, normalizedNumber, number, countryIso, number);
-                    newFragment.setParentView(
-                            getActivity().findViewById(R.id.blocked_numbers_activity_container));
-                    newFragment.show(
-                            getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                    FilterNumberDialogFragment.show(
+                            id,
+                            normalizedNumber,
+                            number,
+                            countryIso,
+                            number,
+                            R.id.blocked_numbers_activity_container,
+                            getFragmentManager(),
+                            null /* callback */);
                 } else {
                     Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
                             Toast.LENGTH_SHORT).show();
@@ -111,6 +115,21 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
         };
         mFilteredNumberAsyncQueryHandler.startBlockedQuery(
                 onCheckListener, normalizedNumber, number, countryIso);
+    }
+
+    @Override
+    public void onChangeFilteredNumberSuccess() {
+        ManageBlockedNumbersActivity activity = (ManageBlockedNumbersActivity) getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        activity.showManagementUi();
+    }
+
+    @Override
+    public void onChangeFilteredNumberUndo() {
+        getAdapter().notifyDataSetChanged();
     }
 
     private void blockContactNumber(
@@ -131,10 +150,15 @@ public class BlockedListSearchFragment extends RegularSearchFragment {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment
-                .newInstance(blockId, normalizedNumber, number, countryIso, number);
-        newFragment.setParentView(
-                getActivity().findViewById(R.id.blocked_numbers_activity_container));
-        newFragment.show(getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+
+        FilterNumberDialogFragment.show(
+                blockId,
+                normalizedNumber,
+                number,
+                countryIso,
+                number,
+                R.id.blocked_numbers_activity_container,
+                getFragmentManager(),
+                this);
     }
 }
