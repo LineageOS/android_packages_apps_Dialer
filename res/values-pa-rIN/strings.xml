@@ -21,17 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ਫੋਨ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ਫੋਨ"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"ਕਾਲ ਇਤਿਹਾਸ"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"ਗ਼ਲਤ ਨੰਬਰ ਦੀ ਰਿਪੋਰਟ ਕਰੋ"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"ਨੰਬਰ ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"ਪ੍ਰਤਿਲਿਪੀ ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"</string>
-    <string name="call_log_block_number" msgid="9136148344344811297">"ਨੰਬਰ ਨੂੰ ਬਲੌਕ ਕਰੋ"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"ਗਲਤ ਨੰਬਰ ਦੀ ਰਿਪੋਰਟ ਕਰੋ"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"ਨੰਬਰ ਕਾਪੀ ਕਰੋ"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"ਲਿਪੀ ਬਦਲਣਾ ਕਾਪੀ ਕਰੋ"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"ਨੰਬਰ ਨੂੰ ਬਲੌਕ ਕਰੋ"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> ਨੂੰ ਬਲੌਕ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ"</string>
-    <string name="call_log_unblock_number" msgid="3875011281703247750">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> ਨੂੰ ਬਲੌਕ ਸੂਚੀ ਤੋਂ ਹਟਾਇਆ ਗਿਆ"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ਪਹਿਲਾਂ ਵਰਗਾ ਕਰੋ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"ਹਟਾਓ"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"ਕਾਲ ਤੋਂ ਪਹਿਲਾਂ ਨੰਬਰ ਸੰਪਾਦਿਤ ਕਰੋ"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"ਕਾਲ ਇਤਿਹਾਸ ਵਿੱਚੋਂ ਮਿਟਾਓ"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"ਕਾਲ ਤੋਂ ਪਹਿਲਾਂ ਨੰਬਰ ਸੰਪਾਦਿਤ ਕਰੋ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ਕਾਲ ਇਤਿਹਾਸ ਹਟਾਓ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ਵੌਇਸਮੇਲ ਮਿਟਾਓ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ਵੌਇਸਮੇਲ ਮਿਟਾਈ ਗਈ"</string>
@@ -77,7 +76,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"ਕਾਲ ਇਤਿਹਾਸ"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"ਹੋਰ ਚੋਣਾਂ"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ਡਾਇਲ ਪੈਡ"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"ਕਾਪੀ ਕਰੋ"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"ਕੇਵਲ ਆਊਟਗੋਇੰਗ ਦਿਖਾਓ"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"ਕੇਵਲ ਇਨਕਮਿੰਗ ਦਿਖਾਓ"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"ਕੇਵਲ ਮਿਸਡ ਦਿਖਾਓ"</string>
@@ -215,7 +213,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ਤਤਕਾਲ ਜਵਾਬ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ਕਾਲਾਂ"</string>
-    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"ਸਪੈਮ ਅਤੇ ਬਲੌਕ ਕੀਤੀਆਂ ਕਾਲਾਂ"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"ਬਲੌਕ ਕੀਤੇ ਨੰਬਰ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ਤੁਹਾਡੇ ਚਿੰਨ੍ਹਿਤ ਕੀਤੇ ਪਿਛਲੇ ਕੁਝ ਕਾਲਰ ਹੋਰ ਐਪਸ ਦੁਆਰਾ ਆਟੋਮੈਟਿਕ ਤੌਰ ਤੇ ਵੌਇਸਮੇਲ ਨੂੰ ਭੇਜੇ ਗਏ ਹਨ।"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ਨੰਬਰ ਵਿਖਾਓ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ਆਯਾਤ ਕਰੋ"</string>

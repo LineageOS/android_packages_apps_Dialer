@@ -21,17 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"الهاتف"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"الهاتف"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"سجل المكالمات"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"الإبلاغ عن رقم غير دقيق"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"نسخ الرقم إلى الحافظة"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"نسخ الكتابة الصوتية إلى الحافظة"</string>
-    <string name="call_log_block_number" msgid="9136148344344811297">"حظر الرقم"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"الإبلاغ عن رقم غير دقيق"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"نسخ الرقم"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"نسخ الكتابة الصوتية"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"حظر الرقم"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"تمت إضافة <xliff:g id="NUMBER">%1$s</xliff:g> إلى قائمة الحظر"</string>
-    <string name="call_log_unblock_number" msgid="3875011281703247750">"إلغاء حظر الرقم"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"إلغاء حظر الرقم"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"تمت إزالة <xliff:g id="NUMBER">%1$s</xliff:g> من قائمة الحظر"</string>
     <string name="block_number_undo" msgid="591338370336724156">"تراجع"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"حذف"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"تعديل الرقم قبل الاتصال"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"حذف من سجل المكالمات"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"تعديل الرقم قبل الاتصال"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"محو سجل المكالمات"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"حذف رسالة البريد الصوتي"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"تم حذف الرسالة الصوتية"</string>
@@ -81,7 +80,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"سجل المكالمات"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"مزيد من الخيارات"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"لوحة الطلب"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"نسخ"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"عرض الصادر فقط"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"عرض الوارد فقط"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"عرض الفائت فقط"</string>
@@ -223,7 +221,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"الردود السريعة"</string>
     <string name="call_settings_label" msgid="313434211353070209">"المكالمات"</string>
-    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"المكالمات غير المرغوب فيها والمحظورة"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"الأرقام المحظورة"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"سبق لك تعيين بعض المتصلين على الإرسال تلقائيًا للبريد الصوتي عبر التطبيقات الأخرى."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"عرض الأرقام"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"استيراد"</string>

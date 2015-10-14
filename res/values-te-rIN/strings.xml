@@ -21,17 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ఫోన్"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ఫోన్"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"కాల్ చరిత్ర"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"సరికాని నంబర్‌ను నివేదించు"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"నంబర్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయి"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"లిప్యంతరీకరణను క్లిప్‌బోర్డ్‌కు కాపీ చేయి"</string>
-    <string name="call_log_block_number" msgid="9136148344344811297">"నంబర్‌ను బ్లాక్ చేయి"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"సరికాని నంబర్‌ను నివేదించు"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"నంబర్‌ను కాపీ చేయి"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"లిప్యంతరీకరణను కాపీ చేయి"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"నంబర్‌ను బ్లాక్ చేయి"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"నిరోధక జాబితాకు <xliff:g id="NUMBER">%1$s</xliff:g> జోడించబడింది"</string>
-    <string name="call_log_unblock_number" msgid="3875011281703247750">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"నిరోధక జాబితా నుండి <xliff:g id="NUMBER">%1$s</xliff:g> తీసివేయబడింది"</string>
     <string name="block_number_undo" msgid="591338370336724156">"రద్దు చేయి"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"తొలగించు"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"కాల్ చేసే ముందు నంబర్‌ను సవరించు"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"కాల్ చరిత్ర నుండి తొలగించు"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"కాల్ చేయడానికి ముందు నంబర్‌ను సవరించు"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"కాల్ చరిత్రను తీసివేయి"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"వాయిస్ మెయిల్‌ను తొలగించు"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"వాయిస్‌‍మెయిల్ తొలగించింది"</string>
@@ -77,7 +76,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"కాల్ చరిత్ర"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"మరిన్ని ఎంపికలు"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"డయల్ ప్యాడ్"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"కాపీ చేయి"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"అవుట్‌గోయింగ్ మాత్రమే చూపు"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"ఇన్‌కమింగ్ మాత్రమే చూపు"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"సమాధానం ఇవ్వనివి మాత్రమే చూపు"</string>
@@ -215,7 +213,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"శీఘ్ర ప్రతిస్పందనలు"</string>
     <string name="call_settings_label" msgid="313434211353070209">"కాల్‌లు"</string>
-    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"స్పామ్, బ్లాక్ చేసిన కాల్‌లు"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"బ్లాక్ చేయబడిన నంబర్‌లు"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"మీరు ఇంతకుముందే కొంతమంది కాలర్‌లను స్వయంచాలకంగా ఇతర అనువర్తనాల ద్వారా వాయిస్ మెయిల్‌కి పంపేందుకు గుర్తు పెట్టారు."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"నంబర్‌లను వీక్షించండి"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"దిగుమతి చేయి"</string>

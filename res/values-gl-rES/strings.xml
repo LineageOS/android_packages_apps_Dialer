@@ -21,17 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Teléfono"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Teléfono"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Historial de chamadas"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Informar dun número incorrecto"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"Copiar número no portapapeis"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"Copiar transcrición no portapapeis"</string>
-    <string name="call_log_block_number" msgid="9136148344344811297">"Bloquear número"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"Informar dun número incorrecto"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"Copiar número"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"Copiar transcrición"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"Bloquear número"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"Engadiuse o <xliff:g id="NUMBER">%1$s</xliff:g> á lista de bloqueo"</string>
-    <string name="call_log_unblock_number" msgid="3875011281703247750">"Desbloquear número"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Desbloquear número"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Eliminouse o <xliff:g id="NUMBER">%1$s</xliff:g> da lista de bloqueo"</string>
     <string name="block_number_undo" msgid="591338370336724156">"DESFACER"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Eliminar"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Editar número antes de chamar"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Eliminar do historial de chamadas"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Editar número antes de chamar"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Borrar historial de chamadas"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eliminar correo de voz"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Correo voz eliminado"</string>
@@ -77,7 +76,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historial de chamadas"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Máis opcións"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"teclado de marcación"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"Copiar"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Mostrar só as saíntes"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Mostrar só as entrantes"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"Mostrar só as perdidas"</string>
@@ -215,7 +213,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostas rápidas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chamadas"</string>
-    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam e chamadas bloqueadas"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Números bloqueados"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Previamente marcaches algúns emisores da chamada para que se envíen automaticamente ao correo de voz a través doutras aplicacións."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ver números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importar"</string>

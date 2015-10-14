@@ -21,17 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Historie volání"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Nahlásit nesprávné číslo"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"Zkopírovat číslo do schránky"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"Zkopírovat přepis do schránky"</string>
-    <string name="call_log_block_number" msgid="9136148344344811297">"Blokovat číslo"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"Nahlásit nesprávné číslo"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"Kopírovat číslo"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"Kopírovat přepis"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"Blokovat číslo"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"Číslo <xliff:g id="NUMBER">%1$s</xliff:g> bylo přidáno do seznamu blokovaných"</string>
-    <string name="call_log_unblock_number" msgid="3875011281703247750">"Zrušit blokování čísla"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Zrušit blokování čísla"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Číslo <xliff:g id="NUMBER">%1$s</xliff:g> bylo odstraněno ze seznamu blokovaných"</string>
     <string name="block_number_undo" msgid="591338370336724156">"VRÁTIT"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Smazat"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Před voláním upravit číslo"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Smazat z historie volání"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Před voláním upravit číslo"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Vymazat historii volání"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Smazat hlasovou zprávu"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Hlas. zpráva smazána"</string>
@@ -79,7 +78,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historie volání"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Více možností"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"číselník"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"Kopírovat"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Zobrazit pouze odchozí"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Zobrazit pouze příchozí"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"Zobrazit pouze zmeškané"</string>
@@ -219,7 +217,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Rychlé odpovědi"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Volání"</string>
-    <string name="blocked_calls_settings_label" msgid="5773670607878194549">"Spam a blokované hovory"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blokovaná čísla"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Pomocí dalších aplikací jste dříve některé volající označili k automatickému přesměrování do hlasové schránky."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Zobrazit čísla"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importovat"</string>
