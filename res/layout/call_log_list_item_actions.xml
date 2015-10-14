@@ -19,6 +19,7 @@
     android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/call_log_actions_bottom_padding"
     android:orientation="vertical"
     android:visibility="visible"
     android:importantForAccessibility="1">
@@ -35,16 +36,27 @@
 
     <LinearLayout
         android:id="@+id/call_action"
+        android:paddingTop="@dimen/call_log_actions_top_padding"
         style="@style/CallLogActionStyle">
 
         <ImageView
             style="@style/CallLogActionIconStyle"
             android:src="@drawable/ic_call_24dp" />
 
-        <TextView
-            android:id="@+id/call_action_text"
-            style="@style/CallLogActionTextStyle"
-            android:text="@string/description_call_log_call_action" />
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/call_action_text"
+                style="@style/CallLogActionTextStyle"
+                android:text="@string/description_call_log_call_action" />
+
+            <TextView
+              android:id="@+id/call_type_or_location_text"
+              style="@style/CallLogActionSupportTextStyle"/>
+        </LinearLayout>
 
     </LinearLayout>
 

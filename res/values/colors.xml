@@ -33,8 +33,20 @@
     <color name="setting_background_color">#ffffff</color>
     <color name="setting_button_color">#eee</color>
 
+    <!-- 54% black -->
+    <color name="call_log_icon_tint">#8a000000</color>
+    <!-- 87% black -->
+    <color name="call_log_primary_color">#de000000</color>
+    <!-- 54% black -->
+    <color name="call_log_detail_color">#8a000000</color>
+    <!-- 87% black -->
+    <color name="call_log_voicemail_transcript_color">#de000000</color>
     <!-- 70% black -->
-    <color name="call_log_icon_tint">#b3000000</color>
+    <color name="call_log_action_color">#b3000000</color>
+    <!-- 54% black -->
+    <color name="call_log_day_group_heading_color">#8a000000</color>
+    <!-- 87% black-->
+    <color name="call_log_unread_text_color">#de000000</color>
     <color name="call_log_list_item_primary_action_icon_tint">@color/call_log_icon_tint</color>
     <!-- Color of the text describing an unconsumed missed call. -->
     <color name="call_log_missed_call_highlight_color">@color/dialer_red_highlight_color</color>
