@@ -173,4 +173,8 @@
     <string name="note_sent" msgid="3548700178238244595">"Գրառումը ուղարկված է"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"Վերջին հաղորդագրությունները"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"Բիզնես տեղեկատվություն"</string>
+    <!-- no translation found for distance_imperial_away (437508440176409037) -->
+    <skip />
+    <!-- no translation found for distance_metric_away (166931929505893599) -->
+    <skip />
 </resources>

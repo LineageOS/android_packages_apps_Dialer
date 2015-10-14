@@ -173,4 +173,6 @@
     <string name="note_sent" msgid="3548700178238244595">"ส่งโน้ตแล้ว"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"ข้อความล่าสุด"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"ข้อมูลธุรกิจ"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"อยู่ห่างออกไป <xliff:g id="DISTANCE">%.1f</xliff:g> ไมล์"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"อยู่ห่างออกไป <xliff:g id="DISTANCE">%.1f</xliff:g> กม."</string>
 </resources>

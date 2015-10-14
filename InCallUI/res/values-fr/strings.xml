@@ -173,4 +173,6 @@
     <string name="note_sent" msgid="3548700178238244595">"La note a bien été envoyée."</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"Messages récents"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"Informations sur l\'établissement"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"À <xliff:g id="DISTANCE">%.1f</xliff:g> mi"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"À <xliff:g id="DISTANCE">%.1f</xliff:g> km"</string>
 </resources>

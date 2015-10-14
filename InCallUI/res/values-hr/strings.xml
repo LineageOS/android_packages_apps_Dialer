@@ -176,4 +176,6 @@
     <string name="note_sent" msgid="3548700178238244595">"Bilješka je poslana"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"Nedavne poruke"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"Informacije o tvrtki"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> mi udaljenosti"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> km udaljenosti"</string>
 </resources>

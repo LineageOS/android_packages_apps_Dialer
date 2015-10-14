@@ -179,4 +179,6 @@
     <string name="note_sent" msgid="3548700178238244595">"Нотатку надіслано"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"Останні повідомлення"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"Інформація про компанію"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"За <xliff:g id="DISTANCE">%.1f</xliff:g> мил."</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"За <xliff:g id="DISTANCE">%.1f</xliff:g> км"</string>
 </resources>

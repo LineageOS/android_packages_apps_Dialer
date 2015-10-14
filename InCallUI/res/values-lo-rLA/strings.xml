@@ -173,4 +173,6 @@
     <string name="note_sent" msgid="3548700178238244595">"ສົ່ງ​ບັນ​ທຶກ​ແລ້ວ"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"ຂໍ້​ຄວາມ​ບໍ່​ດົນ​ມາ​ນີ້"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"ຂໍ້​ມູນ​ທຸ​ລະ​ກິດ"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> ໄມ​ລ໌​ ຫ່າງ​ອອກ​ໄປ"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> ກມ ຫ່າງ​ອອກ​ໄປ"</string>
 </resources>
