@@ -230,6 +230,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private View mVoiceSearchButton;
 
     private String mSearchQuery;
+    private String mDialpadQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
@@ -604,6 +605,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (fragment instanceof SmartDialSearchFragment) {
             mSmartDialSearchFragment = (SmartDialSearchFragment) fragment;
             mSmartDialSearchFragment.setOnPhoneNumberPickerActionListener(this);
+            if (!TextUtils.isEmpty(mDialpadQuery)) {
+                mSmartDialSearchFragment.setAddToContactNumber(mDialpadQuery);
+            }
         } else if (fragment instanceof SearchFragment) {
             mRegularSearchFragment = (RegularSearchFragment) fragment;
             mRegularSearchFragment.setOnPhoneNumberPickerActionListener(this);
@@ -1142,6 +1146,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onDialpadQueryChanged(String query) {
+        mDialpadQuery = query;
         if (mSmartDialSearchFragment != null) {
             mSmartDialSearchFragment.setAddToContactNumber(query);
         }
