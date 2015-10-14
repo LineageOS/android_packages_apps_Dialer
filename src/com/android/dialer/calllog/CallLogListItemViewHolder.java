@@ -111,6 +111,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public String number;
 
     /**
+     * The post-dial numbers that are dialed following the phone number.
+     */
+    public String postDialDigits;
+
+    /**
      * The formatted phone number to display.
      */
     public String displayNumber;
@@ -416,7 +421,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                             IntentProvider.getReturnVoicemailCallIntentProvider());
                 } else {
                     primaryActionButtonView.setTag(
-                            IntentProvider.getReturnCallIntentProvider(number));
+                            IntentProvider.getReturnCallIntentProvider(number + postDialDigits));
                 }
 
                 primaryActionButtonView.setContentDescription(TextUtils.expandTemplate(
@@ -596,7 +601,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     info.lookupUri,
                     (String) nameOrNumber /* top line of contact view in call subject dialog */,
                     isBusiness,
-                    number, /* callable number used for ACTION_CALL intent */
+                    number,
                     TextUtils.isEmpty(info.name) ? null : displayNumber, /* second line of contact
                                                                            view in dialog. */
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */

@@ -39,6 +39,9 @@ import com.android.dialer.util.TelecomUtil;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CallLogAsyncTaskUtil {
     private static String TAG = CallLogAsyncTaskUtil.class.getSimpleName();
 
@@ -51,8 +54,9 @@ public class CallLogAsyncTaskUtil {
         GET_CALL_DETAILS,
     }
 
-    private static class CallDetailQuery {
-        static final String[] CALL_LOG_PROJECTION = new String[] {
+    private static final class CallDetailQuery {
+
+        private static final String[] CALL_LOG_PROJECTION_INTERNAL = new String[] {
             CallLog.Calls.DATE,
             CallLog.Calls.DURATION,
             CallLog.Calls.NUMBER,
@@ -66,6 +70,7 @@ public class CallLogAsyncTaskUtil {
             CallLog.Calls.DATA_USAGE,
             CallLog.Calls.TRANSCRIPTION
         };
+        public static final String[] CALL_LOG_PROJECTION;
 
         static final int DATE_COLUMN_INDEX = 0;
         static final int DURATION_COLUMN_INDEX = 1;
@@ -79,6 +84,17 @@ public class CallLogAsyncTaskUtil {
         static final int FEATURES = 9;
         static final int DATA_USAGE = 10;
         static final int TRANSCRIPTION_COLUMN_INDEX = 11;
+        static final int POST_DIAL_DIGITS = 12;
+
+        static {
+            ArrayList<String> projectionList = new ArrayList<>();
+            projectionList.addAll(Arrays.asList(CALL_LOG_PROJECTION_INTERNAL));
+            if (PhoneNumberDisplayUtil.canShowPostDial()) {
+                projectionList.add(AppCompatConstants.POST_DIAL_DIGITS);
+            }
+            projectionList.trimToSize();
+            CALL_LOG_PROJECTION = projectionList.toArray(new String[projectionList.size()]);
+        }
     }
 
     private static class CallLogDeleteBlockedCallQuery {
@@ -164,6 +180,8 @@ public class CallLogAsyncTaskUtil {
             // Read call log.
             final String countryIso = cursor.getString(CallDetailQuery.COUNTRY_ISO_COLUMN_INDEX);
             final String number = cursor.getString(CallDetailQuery.NUMBER_COLUMN_INDEX);
+            final String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+                    ? cursor.getString(CallDetailQuery.POST_DIAL_DIGITS) : "";
             final int numberPresentation =
                     cursor.getInt(CallDetailQuery.NUMBER_PRESENTATION_COLUMN_INDEX);
 
@@ -185,7 +203,8 @@ public class CallLogAsyncTaskUtil {
             }
 
             PhoneCallDetails details = new PhoneCallDetails(
-                    context, number, numberPresentation, info.formattedNumber, isVoicemail);
+                    context, number, numberPresentation, info.formattedNumber,
+                    postDialDigits, isVoicemail);
 
             details.accountHandle = accountHandle;
             details.contactUri = info.lookupUri;

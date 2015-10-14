@@ -31,6 +31,8 @@ import android.text.TextUtils;
 public class PhoneCallDetails {
     // The number of the other party involved in the call.
     public CharSequence number;
+    // Post-dial digits associated with the outgoing call.
+    public String postDialDigits;
     // The number presenting rules set by the network, e.g., {@link Calls#PRESENTATION_ALLOWED}
     public int numberPresentation;
     // The formatted version of {@link #number}.
@@ -114,16 +116,19 @@ public class PhoneCallDetails {
             CharSequence number,
             int numberPresentation,
             CharSequence formattedNumber,
+            CharSequence postDialDigits,
             boolean isVoicemail) {
         this.number = number;
         this.numberPresentation = numberPresentation;
         this.formattedNumber = formattedNumber;
         this.isVoicemail = isVoicemail;
+        this.postDialDigits = postDialDigits.toString();
         this.displayNumber = PhoneNumberDisplayUtil.getDisplayNumber(
                 context,
                 this.number,
                 this.numberPresentation,
                 this.formattedNumber,
+                this.postDialDigits,
                 this.isVoicemail).toString();
     }
 

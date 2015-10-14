@@ -17,10 +17,9 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.os.Build;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.dialer.R;
 import com.android.dialer.util.PhoneNumberUtil;
@@ -67,6 +66,7 @@ public class PhoneNumberDisplayUtil {
             CharSequence number,
             int presentation,
             CharSequence formattedNumber,
+            CharSequence postDialDigits,
             boolean isVoicemail) {
         final CharSequence displayName = getDisplayName(context, number, presentation, isVoicemail);
         if (!TextUtils.isEmpty(displayName)) {
@@ -76,9 +76,18 @@ public class PhoneNumberDisplayUtil {
         if (!TextUtils.isEmpty(formattedNumber)) {
             return formattedNumber;
         } else if (!TextUtils.isEmpty(number)) {
-            return number;
+            return number.toString() + postDialDigits;
         } else {
             return "";
         }
+    }
+
+    /**
+     * Returns whether we can expect the post-dial digits to be in the call log.
+     *
+     * These digits will be present in versions N+.
+     */
+    public static boolean canShowPostDial() {
+        return Build.VERSION.SDK_INT > Build.VERSION_CODES.M;
     }
 }

@@ -58,6 +58,8 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private static final String TEST_GEOCODE = "United States";
     /** Empty geocode label */
     private static final String EMPTY_GEOCODE = "";
+    /** Empty post-dial digits label */
+    private static final String EMPTY_POSTDIAL = "";
 
     /** The object under test. */
     private PhoneCallDetailsHelper mHelper;
@@ -428,6 +430,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 TEST_NUMBER,
                 Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
+                EMPTY_POSTDIAL,
                 false /* isVoicemail */);
         setDefaultDetails(details);
         return details;
@@ -440,6 +443,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
                 number,
                 presentation,
                 formattedNumber,
+                EMPTY_POSTDIAL,
                 isVoicemail(number));
         setDefaultDetails(details);
         return details;
