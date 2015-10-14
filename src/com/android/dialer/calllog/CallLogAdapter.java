@@ -367,7 +367,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * TODO: This gets called 20-30 times when Dialer starts up for a single call log entry and
      * should not. It invokes cross-process methods and the repeat execution can get costly.
      *
-     * @param ViewHolder The view corresponding to this entry.
+     * @param viewHolder The view corresponding to this entry.
      * @param position The position of the entry.
      */
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
@@ -419,7 +419,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
-        final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(c);
+        final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(c);
         final boolean isVoicemailNumber =
                 mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
 
