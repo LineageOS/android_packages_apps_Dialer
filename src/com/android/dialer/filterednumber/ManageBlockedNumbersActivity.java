@@ -104,7 +104,7 @@ public class ManageBlockedNumbersActivity extends AppCompatActivity
         showManagementUi();
     }
 
-    private void showManagementUi() {
+    public void showManagementUi() {
         mIsShowingManagementUi = true;
 
         showManagementUiActionBar();

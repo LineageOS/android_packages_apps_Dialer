@@ -47,6 +47,7 @@ import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListe
 import com.android.dialer.contactinfo.NumberWithCountryIso;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.filterednumber.FilterNumberDialogFragment;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -60,7 +61,8 @@ import java.util.Map;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements CallLogGroupBuilder.GroupCreator,
-                VoicemailPlaybackPresenter.OnVoicemailDeletedListener {
+                VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
+                FilterNumberDialogFragment.Callback {
 
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -352,7 +354,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 mTelecomCallLogCache,
                 mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter,
-                mFilteredNumberAsyncQueryHandler);
+                mFilteredNumberAsyncQueryHandler,
+                this);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
@@ -625,6 +628,18 @@ public class CallLogAdapter extends GroupingListAdapter
             mHiddenPosition = RecyclerView.NO_POSITION;
             mHiddenItemUri = null;
         }
+    }
+
+    @Override
+    public void onChangeFilteredNumberSuccess() {
+        mBlockedIdCache.clear();
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void onChangeFilteredNumberUndo() {
+        mBlockedIdCache.clear();
+        notifyDataSetChanged();
     }
 
     /**

@@ -81,13 +81,15 @@ public class BlockedNumberAdapter extends SimpleCursorAdapter {
         deleteNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FilterNumberDialogFragment newFragment =
-                        FilterNumberDialogFragment.newInstance(id, normalizedNumber, number,
-                                countryIso, displayNumber);
-                newFragment.setParentView(
-                        ((Activity) mContext).findViewById(R.id.blocked_number_fragment));
-                newFragment.show(((Activity) mContext).getFragmentManager(),
-                        FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                FilterNumberDialogFragment.show(
+                        id,
+                        normalizedNumber,
+                        number,
+                        countryIso,
+                        displayNumber,
+                        R.id.blocked_number_fragment,
+                        ((Activity) mContext).getFragmentManager(),
+                        null /* callback */);
             }
         });
 

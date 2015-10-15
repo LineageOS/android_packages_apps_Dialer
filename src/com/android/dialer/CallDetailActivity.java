@@ -71,8 +71,7 @@ import com.android.incallui.Call.LogState;
  */
 public class CallDetailActivity extends AppCompatActivity
         implements MenuItem.OnMenuItemClickListener, View.OnClickListener,
-                FilterNumberDialogFragment.OnBlockListener,
-                FilterNumberDialogFragment.OnUndoBlockListener {
+                FilterNumberDialogFragment.Callback {
     private static final String TAG = CallDetailActivity.class.getSimpleName();
 
      /** A long array extra containing ids of call log entries to display. */
@@ -305,16 +304,6 @@ public class CallDetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBlockComplete(Uri uri) {
-        updateBlockActionItem();
-    }
-
-    @Override
-    public void onUndoBlockComplete() {
-        updateBlockActionItem();
-    }
-
-    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             TouchPointManager.getInstance().setPoint((int) ev.getRawX(), (int) ev.getRawY());
@@ -406,17 +395,15 @@ public class CallDetailActivity extends AppCompatActivity
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.call_detail_action_block:
-                // TODO: Use helper, this code is repeated in several places.
-                FilterNumberDialogFragment newFragment =
-                        FilterNumberDialogFragment.newInstance(
-                                mBlockedNumberId, null, mNumber, null, mDisplayNumber);
-                // TODO: Cleanup this listener pattern. This only works correctly for undoing
-                // blocking, not undoing unblocking.
-                newFragment.setOnBlockListener(this);
-                newFragment.setOnUndoBlockListener(this);
-                newFragment.setParentView(findViewById(R.id.call_detail));
-                newFragment.show(
-                        getFragmentManager(), FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                FilterNumberDialogFragment.show(
+                        mBlockedNumberId,
+                        null /* normalizedNumber */,
+                        mNumber,
+                        null /* countryIso */,
+                        mDisplayNumber,
+                        R.id.call_detail,
+                        getFragmentManager(),
+                        this);
                 break;
             case R.id.call_detail_action_copy:
                 ClipboardUtils.copyText(mContext, null, mNumber, true);
@@ -429,6 +416,16 @@ public class CallDetailActivity extends AppCompatActivity
                 Log.wtf(TAG, "Unexpected onClick event from " + view);
                 break;
         }
+    }
+
+    @Override
+    public void onChangeFilteredNumberSuccess() {
+        updateBlockActionItem();
+    }
+
+    @Override
+    public void onChangeFilteredNumberUndo() {
+        updateBlockActionItem();
     }
 
     private void updateBlockActionItem() {

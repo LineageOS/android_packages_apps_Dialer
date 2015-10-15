@@ -61,7 +61,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackLayout;
  */
 public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener, MenuItem.OnMenuItemClickListener,
-        View.OnCreateContextMenuListener {
+                View.OnCreateContextMenuListener {
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -182,6 +182,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+    private final FilterNumberDialogFragment.Callback mFilteredNumberDialogCallback;
 
     private final int mPhotoSize;
 
@@ -195,6 +196,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
+            FilterNumberDialogFragment.Callback filteredNumberDialogCallback,
             View rootView,
             QuickContactBadge quickContactView,
             View primaryActionView,
@@ -210,6 +212,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
         mFilteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
+        mFilteredNumberDialogCallback = filteredNumberDialogCallback;
 
         this.rootView = rootView;
         this.quickContactView = quickContactView;
@@ -226,6 +229,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         phoneCallDetailsViews.nameView.setElegantTextHeight(false);
         phoneCallDetailsViews.callLocationAndDate.setElegantTextHeight(false);
 
+        quickContactView.setOverlay(null);
         quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
         primaryActionButtonView.setOnClickListener(this);
@@ -240,7 +244,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
+            FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
+            FilterNumberDialogFragment.Callback filteredNumberDialogCallback) {
 
         return new CallLogListItemViewHolder(
                 context,
@@ -249,6 +254,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
                 filteredNumberAsyncQueryHandler,
+                filteredNumberDialogCallback,
                 view,
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
@@ -317,13 +323,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.context_menu_block_number:
-                FilterNumberDialogFragment newFragment =
-                        FilterNumberDialogFragment.newInstance(blockId, info.normalizedNumber,
-                                number, countryIso, displayNumber);
-                newFragment.setParentView(
-                        ((Activity) mContext).findViewById(R.id.floating_action_button_container));
-                newFragment.show(((Activity) mContext).getFragmentManager(),
-                        FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+                FilterNumberDialogFragment.show(
+                        blockId,
+                        info.normalizedNumber,
+                        number,
+                        countryIso,
+                        displayNumber,
+                        R.id.floating_action_button_container,
+                        ((Activity) mContext).getFragmentManager(),
+                        mFilteredNumberDialogCallback);
                 return true;
             case R.id.context_menu_copy_to_clipboard:
                 ClipboardUtils.copyText(mContext, null, number, true);
@@ -542,7 +550,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     public void updatePhoto() {
-        quickContactView.setOverlay(null);
         quickContactView.assignContactUri(info.lookupUri);
 
         if (blockId != null) {
@@ -617,6 +624,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources, telecomCallLogCache),
                 null /* voicemailPlaybackPresenter */,
                 null /* filteredNumberAsyncQueryHandler */,
+                null /* filteredNumberDialogCallback */,
                 new View(context),
                 new QuickContactBadge(context),
                 new View(context),
