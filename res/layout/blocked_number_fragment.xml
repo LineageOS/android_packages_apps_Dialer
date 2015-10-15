@@ -27,23 +27,22 @@
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="0dp">
 
-        <ListView android:id="@id/android:list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/background_dialer_white"
-            android:layout_weight="1"
-            android:drawSelectorOnTop="false"
-            android:headerDividersEnabled="false" />
-
         <LinearLayout
-            android:id="@android:id/empty"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_dialer_white">
 
             <include layout="@layout/blocked_number_header" />
 
-            <TextView android:id="@id/android:empty"
+            <ListView android:id="@id/android:list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawSelectorOnTop="false"
+                android:headerDividersEnabled="false" />
+
+            <TextView android:id="@android:id/empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingStart="@dimen/blocked_number_horizontal_margin"
