@@ -26,7 +26,9 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
@@ -57,6 +59,7 @@ public class FilterNumberDialogFragment extends DialogFragment {
     private static final String ARG_PARENT_VIEW_ID = "parentViewId";
 
     private String mDisplayNumber;
+    private String mNormalizedNumber;
 
     private FilteredNumberAsyncQueryHandler mHandler;
     private View mParentView;
@@ -105,7 +108,14 @@ public class FilterNumberDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         final boolean isBlocked = getArguments().containsKey(ARG_BLOCK_ID);
+
         mDisplayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
+        if (TextUtils.isEmpty(mNormalizedNumber)) {
+            String number = getArguments().getString(ARG_NUMBER);
+            String countryIso = getArguments().getString(ARG_COUNTRY_ISO);
+            mNormalizedNumber =
+                    FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
+        }
 
         mHandler = new FilteredNumberAsyncQueryHandler(getContext().getContentResolver());
         mParentView = getActivity().findViewById(getArguments().getInt(ARG_PARENT_VIEW_ID));
@@ -133,6 +143,18 @@ public class FilterNumberDialogFragment extends DialogFragment {
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         return builder.create();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        String number = getArguments().getString(ARG_NUMBER);
+        if (TextUtils.isEmpty(mNormalizedNumber) ||
+                !FilteredNumbersUtil.canBlockNumber(getActivity(), number)) {
+            dismiss();
+            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
