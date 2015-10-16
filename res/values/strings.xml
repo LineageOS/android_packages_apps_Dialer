@@ -826,6 +826,10 @@
     <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
     <string name="manage_blocked_numbers_label">Blocked numbers</string>
 
+    <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
+         [CHAR_LIMIT=30] -->
+    <string name="import_send_to_voicemail_numbers_label">Import numbers</string>
+
     <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
          This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
          and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->

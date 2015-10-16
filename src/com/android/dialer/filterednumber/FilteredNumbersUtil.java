@@ -63,14 +63,16 @@ public class FilteredNumbersUtil {
         static final int ID_COLUMN_INDEX = 0;
     }
 
-    private static class PhoneQuery {
+    public static class PhoneQuery {
         static final String[] PROJECTION = {
+            Contacts._ID,
             Phone.NORMALIZED_NUMBER,
             Phone.NUMBER
         };
 
-        static final int NORMALIZED_NUMBER_COLUMN_INDEX = 0;
-        static final int NUMBER_COLUMN_INDEX = 1;
+        static final int ID_COLUMN_INDEX = 0;
+        static final int NORMALIZED_NUMBER_COLUMN_INDEX = 1;
+        static final int NUMBER_COLUMN_INDEX = 2;
 
         static final String SELECT_SEND_TO_VOICEMAIL_TRUE = Contacts.SEND_TO_VOICEMAIL + "=1";
     }

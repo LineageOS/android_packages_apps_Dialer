@@ -13,12 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="0dp">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -77,4 +72,4 @@
         android:layout_marginTop="8dp"
         android:text="@string/blockNumber" />
 
-</android.support.v7.widget.CardView>
+</merge>
