@@ -202,7 +202,9 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 new Listener() {
                     @Override
                     public void onInsertComplete(int token, Object cookie, Uri uri) {
-                        listener.onBlockComplete(uri);
+                        if (listener != null ) {
+                            listener.onBlockComplete(uri);
+                        }
                     }
                 }, getContentUri(null), values);
     }
@@ -241,7 +243,9 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 startDelete(NO_TOKEN, new Listener() {
                     @Override
                     public void onDeleteComplete(int token, Object cookie, int result) {
-                        listener.onUnblockComplete(result, values);
+                        if (listener != null) {
+                            listener.onUnblockComplete(result, values);
+                        }
                     }
                 }, uri, null, null);
             }
