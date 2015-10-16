@@ -52,7 +52,8 @@ public class BlockedNumberFragment extends ListFragment implements
         LayoutInflater inflater = LayoutInflater.from(getContext());
         getListView().addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
         if (mAdapter == null) {
-            mAdapter = new BlockedNumberAdapter(getContext());
+            mAdapter = BlockedNumberAdapter.newBlockedNumberAdapter(
+                    getContext(), getActivity().getFragmentManager());
         }
         setListAdapter(mAdapter);
 
