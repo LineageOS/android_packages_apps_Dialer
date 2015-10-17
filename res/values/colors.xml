@@ -24,6 +24,7 @@
 
     <color name="dialer_button_text_color">#fff</color>
     <color name="dialer_flat_button_text_color">@color/dialer_theme_color</color>
+    <color name="dialer_snackbar_action_text_color">@color/dialer_theme_color</color>
 
     <!-- Color for the setting text. -->
     <color name="setting_primary_color">@color/dialtacts_primary_text_color</color>

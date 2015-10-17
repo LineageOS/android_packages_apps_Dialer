@@ -209,6 +209,8 @@ public class VoicemailPlaybackLayout extends LinearLayout
             // window.
             handler.postDelayed(deleteCallback, VOICEMAIL_DELETE_DELAY_MS + 50);
 
+            final int actionTextColor =
+                    mContext.getResources().getColor(R.color.dialer_snackbar_action_text_color);
             Snackbar.make(VoicemailPlaybackLayout.this, R.string.snackbar_voicemail_deleted,
                             Snackbar.LENGTH_LONG)
                     .setDuration(VOICEMAIL_DELETE_DELAY_MS)
@@ -220,6 +222,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
                                         handler.removeCallbacks(deleteCallback);
                                 }
                             })
+                    .setActionTextColor(actionTextColor)
                     .show();
         }
     };
