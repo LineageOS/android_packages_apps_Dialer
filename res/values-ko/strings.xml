@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"이전에 다른 앱을 통해 일부 발신자를 자동으로 음성사서함으로 보내도록 표시했습니다."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"개수 보기"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"가져오기"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"가져오지 못했습니다."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"번호 차단 해제"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"차단된 번호가 없습니다."</string>
     <string name="blockNumber" msgid="3312666193996551842">"번호 추가"</string>

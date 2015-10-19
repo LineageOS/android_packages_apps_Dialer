@@ -218,6 +218,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ನೀವು ಈ ಹಿಂದೆ ಗುರುತು ಮಾಡಲಾದ ಕೆಲವು ಕಾಲರ್‌ಗಳನ್ನು ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೂಲಕ ಧ್ವನಿಮೇಲ್‌ಗೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ಸಂಖ್ಯೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ಆಮದು ಮಾಡಿ"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ಆಮದು ವಿಫಲವಾಗಿದೆ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ಯಾವುದೇ ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳಿಲ್ಲ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>

@@ -21,22 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"电话"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"拨号"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"通话记录"</string>
-    <!-- no translation found for action_report_number (4635403959812186162) -->
-    <skip />
-    <!-- no translation found for action_copy_number_text (588249522108594155) -->
-    <skip />
-    <!-- no translation found for copy_transcript_text (5652787482893879382) -->
-    <skip />
-    <!-- no translation found for action_block_number (1482657602262262134) -->
-    <skip />
+    <string name="action_report_number" msgid="4635403959812186162">"报告错误的号码"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"复制号码"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"复制转录内容"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"屏蔽号码"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"已将 <xliff:g id="NUMBER">%1$s</xliff:g> 添加到屏蔽列表"</string>
-    <!-- no translation found for action_unblock_number (3043777622269776127) -->
-    <skip />
+    <string name="action_unblock_number" msgid="3043777622269776127">"取消屏蔽号码"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"已将 <xliff:g id="NUMBER">%1$s</xliff:g> 从屏蔽列表中移除"</string>
     <string name="block_number_undo" msgid="591338370336724156">"撤消"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"删除"</string>
-    <!-- no translation found for action_edit_number_before_call (3100221149873436485) -->
-    <skip />
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"拨打之前修改号码"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"清除通话记录"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"删除语音邮件"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"语音邮件已删除"</string>
@@ -219,11 +213,12 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通话"</string>
-    <!-- no translation found for manage_blocked_numbers_label (2216902471020644446) -->
-    <skip />
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"已屏蔽的号码"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您曾通过其他应用将某些来电者设为自动转到语音信箱。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看号码"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"导入"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"取消屏蔽号码"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"没有已屏蔽的号码"</string>
     <string name="blockNumber" msgid="3312666193996551842">"添加号码"</string>

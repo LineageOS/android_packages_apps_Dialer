@@ -217,6 +217,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Deitzaile batzuk beste aplikazio batzuen bidez erantzungailura automatikoki bidaltzea aukeratu duzu."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ikusi zenbakiak"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Inportatu"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desblokeatu zenbakia"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Ez dago zenbaki blokeaturik"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Gehitu zenbakia"</string>

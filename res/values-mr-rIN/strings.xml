@@ -217,6 +217,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"आपण पूर्वीपासून काही कॉलरना स्वयंचलितपणे इतर अॅप्सद्वारे व्हॉइसमेलमध्ये पाठविण्यासाठी चिन्हांकित केले आहे."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"नंबर पहा"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"आयात करा"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नंबर अनावरोधित करा"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"कोणतेही अवरोधित केलेले नंबर नाहीत"</string>
     <string name="blockNumber" msgid="3312666193996551842">"नंबर जोडा"</string>

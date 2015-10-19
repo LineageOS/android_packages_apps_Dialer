@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Sebelum ini anda telah menandakan beberapa pemanggil dihantar ke mel suara secara automatik melalui aplikasi lain."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Lihat nombor"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Pengimportan gagal"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Nyahsekat nombor"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Tiada nombor disekat"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Tambah nombor"</string>

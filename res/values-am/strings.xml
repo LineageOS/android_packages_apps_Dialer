@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ከዚህ ቀደም አንዳንድ ደዋዮች በሌሎች መተግበሪያዎች በኩል በራስ-ሰር ወደ የድምፅ መልዕክት እንዲላኩ ምልክት አድርገባቸው ነበር።"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ቁጥሮችን ይመልከቱ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"አስመጣ"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ማስመጣት አልተሳካም"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ቁጥርን አታግድ"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ምንም የታገዱ ቁጥሮች የሉም"</string>
     <string name="blockNumber" msgid="3312666193996551842">"ቁጥር አክል"</string>

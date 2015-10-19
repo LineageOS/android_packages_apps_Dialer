@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Disa telefonues i ke shënuar më parë që të dërgohen automatikisht drejt postës zanore përmes aplikacioneve të tjera."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Shiko numrat"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importo"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importimi dështoi"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Zhblloko numrin"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Asnjë numër i bllokuar"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Shto numër"</string>

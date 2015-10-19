@@ -217,6 +217,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"আপনি আগে থেকেই অন্য অ্যাপ্লিকেশানগুলির মাধ্যমে স্বয়ংক্রিয়ভাবে ভয়েস মেল পাঠানোর জন্য কিছু কলারকে চিহ্নিত করেছেন৷"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"নম্বরগুলি দেখুন"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"আমদানি করুন"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"নম্বর অবরোধ মুক্ত করুন"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"কোনো অবরুদ্ধ নম্বর নেই"</string>
     <string name="blockNumber" msgid="3312666193996551842">"একটি নম্বর যোগ করুন"</string>

@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Minarkahan mo na dati ang ilang tumatawag na awtomatikong ipadala sa voicemail sa pamamagitan ng iba pang mga app."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Tingnan ang Numero"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"I-import"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Hindi nakapag-import"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Alisin sa pagkaka-block ang numero"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Walang mga naka-block na numero"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Magdagdag ng numero"</string>

@@ -219,6 +219,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Раније сте означили неке позиваоце које аутоматски треба преусмерити на говорну пошту преко других апликација."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Прикажи бројеве"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Увeзи"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Деблокирај број"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Нема блокираних бројева"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Додај број"</string>

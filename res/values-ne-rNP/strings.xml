@@ -30,7 +30,7 @@
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> लाई ब्लक सूचीबाट हटाइयो"</string>
     <string name="block_number_undo" msgid="591338370336724156">"अनडू गर्नुहोस्"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"मेटाउनुहोस्"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"कल गर्न अगाडी नम्बर सम्पादन गर्नुहोस्"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"कल गर्न अगाडि नम्बर सम्पादन गर्नुहोस्"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"कल इतिहास मेटाउनुहोस्"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"भ्वाइसमेल हटाउनुहोस्"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"भ्वाइस मेल मेटाइयो"</string>
@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"तपाईँले पहिल्यै केही कल गर्ने व्यक्तिहरूलाई अन्य अनुप्रयोगहरू मार्फत स्वत: रूपमा भ्वाइस मेल पठाउन नै चिन्ह लगाउनु भएको थियो।"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"नम्बरहरू हेर्नुहोस्"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"आयात गर्नुहोस्"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"आयात असफल भयो"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"रोक लगाइएका नम्बरहरू कुनै पनि छैन"</string>
     <string name="blockNumber" msgid="3312666193996551842">"नम्बर थप्नुहोस्"</string>

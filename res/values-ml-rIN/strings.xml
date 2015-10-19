@@ -217,6 +217,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"മറ്റ് ആപ്സ് വഴി വോയ്സ്‌മെയിൽ സ്വയമേവ അയയ്ക്കുന്നതിന് കോൾ ചെയ്യുന്നവരിൽ ചിലരെ നിങ്ങൾ മുമ്പ് അടയാളപ്പെടുത്തി."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"നമ്പറുകൾ കാണുക"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ഇമ്പോർട്ടുചെയ്യുക"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ബ്ലോക്കുചെയ്ത നമ്പറുകൾ ഇല്ല"</string>
     <string name="blockNumber" msgid="3312666193996551842">"നമ്പർ ചേർക്കുക"</string>

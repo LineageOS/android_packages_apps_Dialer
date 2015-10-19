@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"You previously marked some callers to be automatically sent to voicemail via other apps."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"View Numbers"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import failed"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Unblock number"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"No blocked numbers"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Add number"</string>

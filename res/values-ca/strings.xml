@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Has indicat que les trucades d\'alguns contactes s\'enviïn automàticament a la bústia de veu mitjançant altres aplicacions."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Mostra els números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Error en la importació"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloqueja el número"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"No hi ha números bloquejats"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Afegeix-hi el número"</string>

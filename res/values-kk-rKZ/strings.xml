@@ -26,11 +26,11 @@
     <string name="copy_transcript_text" msgid="5652787482893879382">"Транскрипцияны көшіру"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Нөмірді бөгеу"</string>
     <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеу тізіміне қосылды"</string>
-    <string name="action_unblock_number" msgid="3043777622269776127">"Нөмірді бөгеуден шығару"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Нөмірге рұқсат беру"</string>
     <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеу тізімінен жойылды"</string>
     <string name="block_number_undo" msgid="591338370336724156">"КЕРІ ОРЫНДАУ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Жою"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Қоңырау алдында нөмірді өңдеу"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Қоңырау алдында нөмірді өзгерту"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Қоңыраулар тарихын тазалау"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Дауыстық хабарды жою"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Дауыстық хабар жойылды"</string>
@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Сіз бұрын кейбір қоңырау шалушыларды басқа қолданбалар арқылы дауыс поштасына автоматты түрде жіберу үшін белгілеген."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Нөмірлерді көру"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импорттау"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Импорттау сәтсіз аяқталды"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Нөмірді бөгеуден шығару"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Бөгелген нөмірлер жоқ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Нөмір қосу"</string>

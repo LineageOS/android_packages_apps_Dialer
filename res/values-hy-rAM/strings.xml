@@ -217,6 +217,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Համաձայն ձեր նախկին կարգավորումների՝ որոշ զանգողների պետք է ինքնաշխատորեն ուղարկվի ձայնային փոստ այլ հավելվածների միջոցով:"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Կոնտակտների թիվը"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Ներմուծում"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Արգելաբացել համարը"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Արգելափակված համարներ չկան"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Ավելացնել համար"</string>

@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"သင်သည် ယခင်က အချို့ခေါ်ဆိုသူများကို အလိုအလျောက် အခြား အက်ပ်များမှ တဆင့် အသံစာသို့ ပို့ရန် မှတ်ပေးခဲ့သည်။"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"နံပါတ်များကို ကြည့်ရန်"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"တင်သွင်းရန်"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"တင်သွင်းမှု မအောင်မြင်ပါ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"နံပါတ်ကို ဖွင့်မည်"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ပိတ်ဆို့ထားသည့် နံပါတ်မရှိပါ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"နံပါတ်ထပ်ထည့်ပါ"</string>

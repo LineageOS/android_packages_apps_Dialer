@@ -217,6 +217,7 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您早前透過其他應用程式標記部分來電者，將他們的來電自動轉駁至留言信箱。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看電話號碼"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"匯入"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"匯入失敗"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"解除封鎖號碼"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"沒有已封鎖號碼"</string>
     <string name="blockNumber" msgid="3312666193996551842">"新增電話號碼"</string>

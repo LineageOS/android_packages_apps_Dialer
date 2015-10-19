@@ -214,9 +214,10 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Шуурхай хариунууд"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Дуудлага"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Блоклосон дугаар"</string>
-    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Та бусад апп ашиглан автоматаар дуут шуудан илгээх зарим дуудлага хүлээн авагч хүмүүсийг тэмдэглэсэн."</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Тань руу залгасан зарим хүмүүсийг бусад апп ашиглан автоматаар дуут шуудан илгээж байхаар өмнө нь тэмдэглэсэн."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Дугаар харах"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортлох"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Импортолж чадсангүй"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Дугаар блокноос гаргах"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Блоклосон дугаар байхгүй"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Дугаар нэмэх"</string>

@@ -218,9 +218,11 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Вызовы"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Заблокированные номера"</string>
-    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Ранее вы указали, что вызовы от некоторых абонентов должны автоматически направляться в голосовую почту через другие приложения."</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Вы настроили перенаправление вызовов от некоторых абонентов в голосовую почту в других приложениях."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Просмотреть номера"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортировать"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Разблокировать номер"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Нет заблокированных номеров"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Добавить номер"</string>

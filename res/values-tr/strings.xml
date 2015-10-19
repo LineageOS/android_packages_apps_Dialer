@@ -217,6 +217,8 @@
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Bazı arayanları, diğer uygulamalar aracılığıyla otomatik olarak sesli mesaj gönderilmesi için önceden işaretlediniz."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Numaraları Görüntüle"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"İçe aktar"</string>
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Numaranın engellemesini kaldır"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Engellenmiş numara yok"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Numara ekle"</string>
