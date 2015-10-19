@@ -106,17 +106,9 @@ public class CallDetailActivity extends AppCompatActivity
 
             // All calls are from the same number and same contact, so pick the first detail.
             mDetails = details[0];
-            mNumber = TextUtils.isEmpty(mDetails.number) ?
-                    null : mDetails.number.toString();
+            mNumber = TextUtils.isEmpty(mDetails.number) ? null : mDetails.number.toString();
             mDisplayNumber = mDetails.displayNumber;
             final int numberPresentation = mDetails.numberPresentation;
-            final Uri contactUri = mDetails.contactUri;
-            final Uri photoUri = mDetails.photoUri;
-            final PhoneAccountHandle accountHandle = mDetails.accountHandle;
-
-            // Cache the details about the phone number.
-            mIsVoicemailNumber =
-                    PhoneNumberUtil.isVoicemailNumber(mContext, accountHandle, mNumber);
 
             final CharSequence callLocationOrType = getNumberTypeOrLocation(mDetails);
 
@@ -137,7 +129,8 @@ public class CallDetailActivity extends AppCompatActivity
                 }
             }
 
-            String accountLabel = PhoneAccountUtils.getAccountLabel(mContext, accountHandle);
+            String accountLabel =
+                    PhoneAccountUtils.getAccountLabel(mContext, mDetails.accountHandle);
             if (!TextUtils.isEmpty(accountLabel)) {
                 mAccountLabel.setText(accountLabel);
                 mAccountLabel.setVisibility(View.VISIBLE);
@@ -150,8 +143,10 @@ public class CallDetailActivity extends AppCompatActivity
             mCallButton.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
 
             final boolean isSipNumber = PhoneNumberUtil.isSipNumber(mNumber);
+            final boolean isVoicemailNumber =
+                    PhoneNumberUtil.isVoicemailNumber(mContext, mDetails.accountHandle, mNumber);
             final boolean showEditNumberBeforeCallAction =
-                    canPlaceCallsTo && !isSipNumber && !mIsVoicemailNumber;
+                    canPlaceCallsTo && !isSipNumber && !isVoicemailNumber;
             mEditBeforeCallActionItem.setVisibility(
                     showEditNumberBeforeCallAction ? View.VISIBLE : View.GONE);
 
@@ -160,31 +155,13 @@ public class CallDetailActivity extends AppCompatActivity
             mReportActionItem.setVisibility(
                     showReportAction ? View.VISIBLE : View.GONE);
 
-            updateBlockActionItem();
             invalidateOptionsMenu();
 
             mHistoryList.setAdapter(
                     new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
 
-            String lookupKey = contactUri == null ? null
-                    : UriUtils.getLookupKeyFromUri(contactUri);
+            updatePhotoAndBlockActionItem();
 
-            final boolean isBusiness = mContactInfoHelper.isBusiness(mDetails.sourceType);
-
-            final int contactType =
-                    mIsVoicemailNumber ? ContactPhotoManager.TYPE_VOICEMAIL :
-                    isBusiness ? ContactPhotoManager.TYPE_BUSINESS :
-                    ContactPhotoManager.TYPE_DEFAULT;
-
-            String nameForDefaultImage;
-            if (TextUtils.isEmpty(mDetails.name)) {
-                nameForDefaultImage = mDetails.displayNumber;
-            } else {
-                nameForDefaultImage = mDetails.name.toString();
-            }
-
-            loadContactPhotos(
-                    contactUri, photoUri, nameForDefaultImage, lookupKey, contactType);
             findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
         }
 
@@ -217,7 +194,6 @@ public class CallDetailActivity extends AppCompatActivity
     private PhoneCallDetails mDetails;
     protected String mNumber;
     private Uri mVoicemailUri;
-    private boolean mIsVoicemailNumber;
     private String mDefaultCountryIso;
     private String mDisplayNumber;
 
@@ -275,6 +251,9 @@ public class CallDetailActivity extends AppCompatActivity
         mCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.isEmpty(mNumber)) {
+                    return;
+                }
                 mContext.startActivity(
                         new CallIntentBuilder(mNumber)
                                 .setCallInitiationType(LogState.INITIATION_CALL_DETAILS)
@@ -339,21 +318,6 @@ public class CallDetailActivity extends AppCompatActivity
         return uris;
     }
 
-    /** Load the contact photos and places them in the corresponding views. */
-    private void loadContactPhotos(Uri contactUri, Uri photoUri, String displayName,
-            String lookupKey, int contactType) {
-
-        final DefaultImageRequest request = new DefaultImageRequest(displayName, lookupKey,
-                contactType, true /* isCircular */);
-
-        mQuickContactBadge.assignContactUri(contactUri);
-        mQuickContactBadge.setContentDescription(
-                mResources.getString(R.string.description_contact_details, displayName));
-
-        mContactPhotoManager.loadDirectoryPhoto(mQuickContactBadge, photoUri,
-                false /* darkTheme */, true /* isCircular */, request);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final MenuItem deleteMenuItem = menu.add(
@@ -399,7 +363,7 @@ public class CallDetailActivity extends AppCompatActivity
                         mBlockedNumberId,
                         null /* normalizedNumber */,
                         mNumber,
-                        null /* countryIso */,
+                        mDetails.countryIso,
                         mDisplayNumber,
                         R.id.call_detail,
                         getFragmentManager(),
@@ -420,32 +384,81 @@ public class CallDetailActivity extends AppCompatActivity
 
     @Override
     public void onChangeFilteredNumberSuccess() {
-        updateBlockActionItem();
+        updatePhotoAndBlockActionItem();
     }
 
     @Override
     public void onChangeFilteredNumberUndo() {
-        updateBlockActionItem();
+        updatePhotoAndBlockActionItem();
     }
 
-    private void updateBlockActionItem() {
+    private void updatePhotoAndBlockActionItem() {
         if (mDetails == null) {
             return;
         }
 
-        mFilteredNumberAsyncQueryHandler.startBlockedQuery(new OnCheckBlockedListener() {
-            @Override
-            public void onCheckComplete(Integer id) {
-                mBlockedNumberId = id;
-                if (mBlockedNumberId == null) {
-                    mBlockNumberActionItem.setText(R.string.action_block_number);
-                } else {
-                    mBlockNumberActionItem.setText(R.string.action_unblock_number);
-                }
+        boolean failed = mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                new OnCheckBlockedListener() {
+                    @Override
+                    public void onCheckComplete(Integer id) {
+                        mBlockedNumberId = id;
 
-                mBlockNumberActionItem.setVisibility(View.VISIBLE);
-            }
-        }, null, mNumber, mDetails.countryIso);
+                        updateContactPhoto();
+                        updateBlockActionItem();
+                    }
+                }, null, mNumber, mDetails.countryIso);
+
+        if (failed) {
+            updateContactPhoto();
+            updateBlockActionItem();
+        }
+    }
+
+    // Loads and displays the contact photo.
+    private void updateContactPhoto() {
+        if (mDetails == null) {
+            return;
+        }
+
+        if (mBlockedNumberId != null) {
+            mQuickContactBadge.setImageDrawable(mContext.getDrawable(R.drawable.blocked_contact));
+            return;
+        }
+
+        final boolean isVoicemailNumber =
+                PhoneNumberUtil.isVoicemailNumber(mContext, mDetails.accountHandle, mNumber);
+        final boolean isBusiness = mContactInfoHelper.isBusiness(mDetails.sourceType);
+        int contactType = ContactPhotoManager.TYPE_DEFAULT;
+        if (isVoicemailNumber) {
+            contactType = ContactPhotoManager.TYPE_VOICEMAIL;
+        } else if (isBusiness) {
+            contactType = ContactPhotoManager.TYPE_BUSINESS;
+        }
+
+        final String displayName = TextUtils.isEmpty(mDetails.name)
+                ? mDetails.displayNumber : mDetails.name.toString();
+        final String lookupKey = mDetails.contactUri == null
+                ? null : UriUtils.getLookupKeyFromUri(mDetails.contactUri);
+
+        final DefaultImageRequest request =
+                new DefaultImageRequest(displayName, lookupKey, contactType, true /* isCircular */);
+
+        mQuickContactBadge.assignContactUri(mDetails.contactUri);
+        mQuickContactBadge.setContentDescription(
+                mResources.getString(R.string.description_contact_details, displayName));
+
+        mContactPhotoManager.loadDirectoryPhoto(mQuickContactBadge, mDetails.photoUri,
+                false /* darkTheme */, true /* isCircular */, request);
+    }
+
+    private void updateBlockActionItem() {
+        if (mBlockedNumberId == null) {
+            mBlockNumberActionItem.setText(R.string.action_block_number);
+        } else {
+            mBlockNumberActionItem.setText(R.string.action_unblock_number);
+        }
+
+        mBlockNumberActionItem.setVisibility(View.VISIBLE);
     }
 
     private void closeSystemDialogs() {

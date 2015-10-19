@@ -159,13 +159,14 @@ public class FilterNumberDialogFragment extends DialogFragment {
     private void blockNumber() {
         final String message = getBlockedMessage();
         final String undoMessage = getUnblockedMessage();
+        final Callback callback = mCallback;
 
         final OnUnblockNumberListener onUndoListener = new OnUnblockNumberListener() {
             @Override
             public void onUnblockComplete(int rows, ContentValues values) {
                 Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
-                if (mCallback != null) {
-                    mCallback.onChangeFilteredNumberUndo();
+                if (callback != null) {
+                    callback.onChangeFilteredNumberUndo();
                 }
             }
         };
@@ -185,8 +186,8 @@ public class FilterNumberDialogFragment extends DialogFragment {
                         .setAction(R.string.block_number_undo, undoListener)
                         .show();
 
-                if (mCallback != null) {
-                    mCallback.onChangeFilteredNumberSuccess();
+                if (callback != null) {
+                    callback.onChangeFilteredNumberSuccess();
                 }
             }
         };
@@ -201,13 +202,14 @@ public class FilterNumberDialogFragment extends DialogFragment {
     private void unblockNumber() {
         final String message = getUnblockedMessage();
         final String undoMessage = getBlockedMessage();
+        final Callback callback = mCallback;
 
         final OnBlockNumberListener onUndoListener = new OnBlockNumberListener() {
             @Override
             public void onBlockComplete(final Uri uri) {
                 Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
-                if (mCallback != null) {
-                    mCallback.onChangeFilteredNumberUndo();
+                if (callback != null) {
+                    callback.onChangeFilteredNumberUndo();
                 }
             }
         };
@@ -227,8 +229,8 @@ public class FilterNumberDialogFragment extends DialogFragment {
                         .setAction(R.string.block_number_undo, undoListener)
                         .show();
 
-                if (mCallback != null) {
-                    mCallback.onChangeFilteredNumberSuccess();
+                if (callback != null) {
+                    callback.onChangeFilteredNumberSuccess();
                 }
             }
         }, getArguments().getInt(ARG_BLOCK_ID));
