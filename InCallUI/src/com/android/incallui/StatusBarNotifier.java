@@ -118,6 +118,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * @see #updateInCallNotification(InCallState,CallList)
      */
     private void cancelNotification() {
+        if (!TextUtils.isEmpty(mCallId)) {
+            CallList.getInstance().removeCallUpdateListener(mCallId, this);
+            mCallId = null;
+        }
         if (mCurrentNotification != NOTIFICATION_NONE) {
             Log.d(this, "cancelInCall()...");
             mNotificationManager.cancel(mCurrentNotification);
@@ -161,7 +165,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         final boolean isIncoming = (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING);
 
-        if (mCallId != null) {
+        if (!TextUtils.isEmpty(mCallId)) {
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
         }
         mCallId = call.getId();
