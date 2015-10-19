@@ -32,7 +32,7 @@
     <string name="pause_prompt_str" msgid="1789964702154314806">"تون‌های ارسالی\n"</string>
     <string name="send_button" msgid="4106860097497818751">"ارسال"</string>
     <string name="pause_prompt_yes" msgid="3564467212025151797">"بله"</string>
-    <string name="pause_prompt_no" msgid="6686238803236884877">"خیر"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"نه"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"جایگزینی نویسه عمومی با"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"تماس کنفرانسی <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"شماره پست صوتی"</string>

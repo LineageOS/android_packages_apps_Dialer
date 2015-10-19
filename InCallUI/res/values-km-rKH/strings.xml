@@ -173,8 +173,6 @@
     <string name="note_sent" msgid="3548700178238244595">"បានផ្ញើចំណាំ"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"សារថ្មីៗ"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"ព័ត៌មានធុរកិច្ច"</string>
-    <!-- no translation found for distance_imperial_away (437508440176409037) -->
-    <skip />
-    <!-- no translation found for distance_metric_away (166931929505893599) -->
-    <skip />
+    <string name="distance_imperial_away" msgid="437508440176409037">"ចម្ងាយ <xliff:g id="DISTANCE">%.1f</xliff:g> ម៉ាយល៍"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"ចម្ងាយ <xliff:g id="DISTANCE">%.1f</xliff:g> គម"</string>
 </resources>

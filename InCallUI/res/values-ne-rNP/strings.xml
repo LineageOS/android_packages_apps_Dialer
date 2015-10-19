@@ -173,8 +173,6 @@
     <string name="note_sent" msgid="3548700178238244595">"नोट पठाइयो"</string>
     <string name="person_contact_context_title" msgid="723266617256740572">"भर्खरैका सन्देशहरू"</string>
     <string name="business_contact_context_title" msgid="5334864183374669765">"व्यवसाय जानकारी"</string>
-    <!-- no translation found for distance_imperial_away (437508440176409037) -->
-    <skip />
-    <!-- no translation found for distance_metric_away (166931929505893599) -->
-    <skip />
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> माइल टाढा"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> किलोमिटर टाढा"</string>
 </resources>
