@@ -314,6 +314,10 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void onPause() {
         pauseCache();
+
+        // Clear blocked id cache so that changes in blocked status will be reflected in the UI.
+        mBlockedIdCache.clear();
+
         if (mHiddenItemUri != null) {
             CallLogAsyncTaskUtil.deleteVoicemail(mContext, mHiddenItemUri, null);
         }
