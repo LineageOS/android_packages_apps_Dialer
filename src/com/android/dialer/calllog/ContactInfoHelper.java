@@ -175,23 +175,42 @@ public class ContactInfoHelper {
         Cursor phonesCursor =
                 mContext.getContentResolver().query(uri, PhoneQuery._PROJECTION, null, null, null);
 
+        String data = uri.getPathSegments().size() > 1 ? uri.getLastPathSegment() : "";
+
         if (phonesCursor != null) {
             try {
                 if (phonesCursor.moveToFirst()) {
                     info = new ContactInfo();
+                    String lookupKey = null;
                     long contactId = phonesCursor.getLong(PhoneQuery.PERSON_ID);
-                    String lookupKey = phonesCursor.getString(PhoneQuery.LOOKUP_KEY);
-                    info.lookupKey = lookupKey;
-                    info.lookupUri = Contacts.getLookupUri(contactId, lookupKey);
-                    info.name = phonesCursor.getString(PhoneQuery.NAME);
                     info.type = phonesCursor.getInt(PhoneQuery.PHONE_TYPE);
                     info.label = phonesCursor.getString(PhoneQuery.LABEL);
                     info.number = phonesCursor.getString(PhoneQuery.MATCHED_NUMBER);
                     info.normalizedNumber = phonesCursor.getString(PhoneQuery.NORMALIZED_NUMBER);
-                    info.photoId = phonesCursor.getLong(PhoneQuery.PHOTO_ID);
-                    info.photoUri =
-                            UriUtils.parseUriOrNull(phonesCursor.getString(PhoneQuery.PHOTO_URI));
                     info.formattedNumber = null;
+                    if (PhoneNumberUtils.isGlobalPhoneNumber(data)) {
+                        lookupKey = phonesCursor.getString(PhoneQuery.LOOKUP_KEY);
+                        info.name = phonesCursor.getString(PhoneQuery.NAME);
+                        info.photoId = phonesCursor.getLong(PhoneQuery.PHOTO_ID);
+                        info.photoUri = UriUtils.parseUriOrNull(
+                                phonesCursor.getString(PhoneQuery.PHOTO_URI));
+                    } else {
+                        try {
+                            lookupKey = phonesCursor.getString(
+                                    phonesCursor.getColumnIndexOrThrow("lookup"));
+                            info.name = phonesCursor.getString(
+                                    phonesCursor.getColumnIndexOrThrow("display_name"));
+                            info.photoId = phonesCursor.getLong(
+                                    phonesCursor.getColumnIndexOrThrow("photo_id"));
+                            info.photoUri = UriUtils.parseUriOrNull(phonesCursor.getString(
+                                    phonesCursor.getColumnIndexOrThrow("photo_file_id")));
+                        } catch (IllegalArgumentException e) {
+                            Log.e(TAG, "Contact information invalid, cannot find needed column(s)",
+                                    e);
+                        }
+                    }
+                    info.lookupKey = lookupKey;
+                    info.lookupUri = Contacts.getLookupUri(contactId, lookupKey);
                 } else {
                     info = ContactInfo.EMPTY;
                 }
