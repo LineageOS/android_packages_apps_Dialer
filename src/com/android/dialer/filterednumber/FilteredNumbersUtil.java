@@ -26,6 +26,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -33,6 +34,8 @@ import java.util.List;
 
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
+import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 
 /**
  * Utility to help with tasks related to filtered numbers.
@@ -179,6 +182,35 @@ public class FilteredNumbersUtil {
             }
         };
         task.execute();
+    }
+
+     /**
+     * WARNING: This method should NOT be executed on the UI thread.
+     * Use {@code FilteredNumberAsyncQueryHandler} to asynchronously check if a number is blocked.
+     */
+    public static boolean isBlocked(Context context, String number, String countryIso) {
+        final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+        if (TextUtils.isEmpty(normalizedNumber)) {
+            return false;
+        }
+
+        final Cursor cursor = context.getContentResolver().query(
+                FilteredNumber.CONTENT_URI,
+                new String[] { FilteredNumberColumns._ID },
+                FilteredNumberColumns.NORMALIZED_NUMBER + "=?",
+                new String[] { normalizedNumber },
+                null);
+
+        boolean isBlocked = false;
+        if (cursor != null) {
+            try {
+                isBlocked = cursor.getCount() > 0;
+            } finally {
+                cursor.close();
+            }
+        }
+
+        return isBlocked;
     }
 
     public static boolean canBlockNumber(Context context, String number) {

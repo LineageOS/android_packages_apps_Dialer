@@ -39,9 +39,13 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.list.ListsFragment;
 import com.google.common.collect.Maps;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -96,14 +100,14 @@ public class DefaultVoicemailNotifier {
     public void updateNotification(Uri newCallUri) {
         // Lookup the list of new voicemails to include in the notification.
         // TODO: Move this into a service, to avoid holding the receiver up.
-        final NewCall[] newCalls = mNewCallsQuery.query();
+        final List<NewCall> newCalls = mNewCallsQuery.query();
 
         if (newCalls == null) {
             // Query failed, just return.
             return;
         }
 
-        if (newCalls.length == 0) {
+        if (newCalls.size() == 0) {
             // No voicemails to notify about: clear the notification.
             clearNotification();
             return;
@@ -122,7 +126,16 @@ public class DefaultVoicemailNotifier {
         NewCall callToNotify = null;
 
         // Iterate over the new voicemails to determine all the information above.
-        for (NewCall newCall : newCalls) {
+        Iterator<NewCall> itr = newCalls.iterator();
+        while (itr.hasNext()) {
+            NewCall newCall = itr.next();
+
+            // Skip notifying for numbers which are blocked.
+            if (FilteredNumbersUtil.isBlocked(mContext, newCall.number, newCall.countryIso)) {
+                itr.remove();
+                continue;
+            }
+
             // Check if we already know the name associated with this number.
             String name = names.get(newCall.number);
             if (name == null) {
@@ -155,10 +168,14 @@ public class DefaultVoicemailNotifier {
             }
         }
 
+        if (newCalls.isEmpty()) {
+            return;
+        }
+
         // If there is only one voicemail, set its transcription as the "long text".
         String transcription = null;
-        if (newCalls.length == 1) {
-            transcription = newCalls[0].transcription;
+        if (newCalls.size() == 1) {
+            transcription = newCalls.get(0).transcription;
         }
 
         if (newCallUri != null && callToNotify == null) {
@@ -167,7 +184,7 @@ public class DefaultVoicemailNotifier {
 
         // Determine the title of the notification and the icon for it.
         final String title = resources.getQuantityString(
-                R.plurals.notification_voicemail_title, newCalls.length, newCalls.length);
+                R.plurals.notification_voicemail_title, newCalls.size(), newCalls.size());
         // TODO: Use the photo of contact if all calls are from the same person.
         final int icon = android.R.drawable.stat_notify_voicemail;
 
@@ -218,6 +235,7 @@ public class DefaultVoicemailNotifier {
         public final String accountComponentName;
         public final String accountId;
         public final String transcription;
+        public final String countryIso;
 
         public NewCall(
                 Uri callsUri,
@@ -226,7 +244,8 @@ public class DefaultVoicemailNotifier {
                 int numberPresentation,
                 String accountComponentName,
                 String accountId,
-                String transcription) {
+                String transcription,
+                String countryIso) {
             this.callsUri = callsUri;
             this.voicemailUri = voicemailUri;
             this.number = number;
@@ -234,6 +253,7 @@ public class DefaultVoicemailNotifier {
             this.accountComponentName = accountComponentName;
             this.accountId = accountId;
             this.transcription = transcription;
+            this.countryIso = countryIso;
         }
     }
 
@@ -242,7 +262,7 @@ public class DefaultVoicemailNotifier {
         /**
          * Returns the new calls for which a notification should be generated.
          */
-        public NewCall[] query();
+        public List<NewCall> query();
     }
 
     /** Create a new instance of {@link NewCallsQuery}. */
@@ -263,7 +283,8 @@ public class DefaultVoicemailNotifier {
             Calls.NUMBER_PRESENTATION,
             Calls.PHONE_ACCOUNT_COMPONENT_NAME,
             Calls.PHONE_ACCOUNT_ID,
-            Calls.TRANSCRIPTION
+            Calls.TRANSCRIPTION,
+            Calls.COUNTRY_ISO
         };
         private static final int ID_COLUMN_INDEX = 0;
         private static final int NUMBER_COLUMN_INDEX = 1;
@@ -272,6 +293,7 @@ public class DefaultVoicemailNotifier {
         private static final int PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX = 4;
         private static final int PHONE_ACCOUNT_ID_COLUMN_INDEX = 5;
         private static final int TRANSCRIPTION_COLUMN_INDEX = 6;
+        private static final int COUNTRY_ISO_COLUMN_INDEX = 7;
 
         private final ContentResolver mContentResolver;
         private final Context mContext;
@@ -282,7 +304,7 @@ public class DefaultVoicemailNotifier {
         }
 
         @Override
-        public NewCall[] query() {
+        public List<NewCall> query() {
             if (!PermissionsUtil.hasPermission(mContext, READ_CALL_LOG)) {
                 Log.w(TAG, "No READ_CALL_LOG permission, returning null for calls lookup.");
                 return null;
@@ -296,9 +318,9 @@ public class DefaultVoicemailNotifier {
                 if (cursor == null) {
                     return null;
                 }
-                NewCall[] newCalls = new NewCall[cursor.getCount()];
+                List<NewCall> newCalls = new LinkedList<NewCall>();
                 while (cursor.moveToNext()) {
-                    newCalls[cursor.getPosition()] = createNewCallsFromCursor(cursor);
+                    newCalls.add(createNewCallsFromCursor(cursor));
                 }
                 return newCalls;
             } catch (RuntimeException e) {
@@ -322,7 +344,8 @@ public class DefaultVoicemailNotifier {
                     cursor.getInt(NUMBER_PRESENTATION_COLUMN_INDEX),
                     cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX),
                     cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX),
-                    cursor.getString(TRANSCRIPTION_COLUMN_INDEX));
+                    cursor.getString(TRANSCRIPTION_COLUMN_INDEX),
+                    cursor.getString(COUNTRY_ISO_COLUMN_INDEX));
         }
     }
 
