@@ -455,8 +455,12 @@ public class CallDetailActivity extends AppCompatActivity
     private void updateBlockActionItem() {
         if (mBlockedNumberId == null) {
             mBlockNumberActionItem.setText(R.string.action_block_number);
+            mBlockNumberActionItem.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_call_detail_block, 0, 0, 0);
         } else {
             mBlockNumberActionItem.setText(R.string.action_unblock_number);
+            mBlockNumberActionItem.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_call_detail_unblock, 0, 0, 0);
         }
 
         mBlockNumberActionItem.setVisibility(View.VISIBLE);
