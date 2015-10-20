@@ -17,7 +17,9 @@
 package com.android.incallui;
 
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
+@SmallTest
 public class CallerInfoUtilsTest extends AndroidTestCase {
     public void testToLogSafeNumber_email() {
         assertEquals("xxx@xxx.xxx", CallerInfoUtils.toLogSafePhoneNumber("foo@foo.com"));

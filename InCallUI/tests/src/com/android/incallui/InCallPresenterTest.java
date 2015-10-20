@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.test.InstrumentationTestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.android.incallui.InCallPresenter.InCallState;
 
@@ -32,6 +33,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+@MediumTest
 public class InCallPresenterTest extends InstrumentationTestCase {
     private MockCallListWrapper mCallList;
     @Mock private InCallActivity mInCallActivity;
