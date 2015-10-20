@@ -587,6 +587,10 @@ public class VoicemailPlaybackPresenter
      * playing.
      */
     public void resumePlayback() {
+        if (mView == null || mContext == null) {
+            return;
+        }
+
         if (!mIsPrepared) {
             // If we haven't downloaded the voicemail yet, attempt to download it.
             checkForContent();
@@ -597,7 +601,7 @@ public class VoicemailPlaybackPresenter
 
         mIsPlaying = true;
 
-        if (!mMediaPlayer.isPlaying()) {
+        if (mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             // Clamp the start position between 0 and the duration.
             mPosition = Math.max(0, Math.min(mPosition, mDuration.get()));
             mMediaPlayer.seekTo(mPosition);
