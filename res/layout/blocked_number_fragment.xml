@@ -23,6 +23,7 @@
     android:background="@color/blocked_number_background">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/hide_blocked_calls_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
