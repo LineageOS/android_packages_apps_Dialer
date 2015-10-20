@@ -17,8 +17,10 @@ package com.android.dialer.onboard;
 
 import android.app.Activity;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 import android.test.suitebuilder.annotation.Suppress;
 
+@SmallTest
 public class OnboardingControllerTest extends AndroidTestCase {
     private MockOnboardUi mOnboardUi;
     private OnboardingController mController;

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
@@ -34,8 +35,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- * Unit tests for {@link PhoneCallDetailsHelper}.m
+ * Unit tests for {@link PhoneCallDetailsHelper}.
  */
+@MediumTest
 public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     /** The number to be used to access the voicemail. */
     private static final String TEST_VOICEMAIL_NUMBER = "125";
