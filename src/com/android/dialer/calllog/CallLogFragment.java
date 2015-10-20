@@ -42,6 +42,7 @@ import android.view.ViewGroup;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
+import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.widget.EmptyContentView;
@@ -124,6 +125,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     private boolean mRefreshDataRequired = true;
 
     private boolean mHasReadCallLogPermission = false;
+    private boolean mShouldHideBlockedCalls = false;
 
     // Exactly same variable is in Fragment as a package private.
     private boolean mMenuVisible = true;
@@ -208,6 +210,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 mContactsObserver);
         resolver.registerContentObserver(Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
+
+        mShouldHideBlockedCalls = FilteredNumbersUtil.shouldHideBlockedCalls(getActivity());
 
         if (mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
             mVoicemailPlaybackPresenter = VoicemailPlaybackPresenter
@@ -339,9 +343,14 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mRefreshDataRequired = true;
             updateEmptyMessage(mCallTypeFilter);
         }
+        if (mShouldHideBlockedCalls != FilteredNumbersUtil.shouldHideBlockedCalls(getActivity())) {
+            mShouldHideBlockedCalls = !mShouldHideBlockedCalls;
+            mRefreshDataRequired = true;
+        }
+
         mHasReadCallLogPermission = hasReadCallLogPermission;
         refreshData();
-        mAdapter.startCache();
+        mAdapter.onResume();
 
         rescheduleDisplayUpdate();
 
