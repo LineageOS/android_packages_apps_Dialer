@@ -44,7 +44,8 @@ public class BlockedNumberFragment extends ListFragment implements
         super.onActivityCreated(savedInstanceState);
 
         if (mAdapter == null) {
-            mAdapter = new BlockedNumberAdapter(getContext());
+            mAdapter = BlockedNumberAdapter.newBlockedNumberAdapter(
+                    getContext(), getActivity().getFragmentManager());
         }
         setListAdapter(mAdapter);
 
