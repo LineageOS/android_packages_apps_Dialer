@@ -80,10 +80,6 @@ public class FilteredNumberProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
-        Log.d(TAG, "query: uri=" + uri + "  projection=" + Arrays.toString(projection) +
-                "  selection=[" + selection + "]  args=" + Arrays.toString(selectionArgs) +
-                "  order=[" + sortOrder + "] CPID=" + Binder.getCallingPid());
-
         final SQLiteDatabase db = mDialerDatabaseHelper.getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         qb.setTables(DialerDatabaseHelper.Tables.FILTERED_NUMBER_TABLE);
