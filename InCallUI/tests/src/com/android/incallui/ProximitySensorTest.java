@@ -22,6 +22,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.test.InstrumentationTestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 
 import com.android.incallui.InCallPresenter.InCallState;
 
@@ -29,6 +30,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+@MediumTest
 public class ProximitySensorTest extends InstrumentationTestCase {
     @Mock private AccelerometerListener mAccelerometerListener;
     private MockCallListWrapper mCallList;
