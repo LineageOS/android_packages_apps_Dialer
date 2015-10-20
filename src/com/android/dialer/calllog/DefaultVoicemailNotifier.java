@@ -131,8 +131,13 @@ public class DefaultVoicemailNotifier {
             NewCall newCall = itr.next();
 
             // Skip notifying for numbers which are blocked.
-            if (FilteredNumbersUtil.isBlocked(mContext, newCall.number, newCall.countryIso)) {
+            if (FilteredNumbersUtil.shouldBlockVoicemail(
+                    mContext, newCall.number, newCall.countryIso, newCall.dateMs)) {
                 itr.remove();
+
+                if (FilteredNumbersUtil.shouldHideBlockedCalls(mContext)) {
+                    mContext.getContentResolver().delete(newCall.voicemailUri, null, null);
+                }
                 continue;
             }
 
@@ -236,6 +241,7 @@ public class DefaultVoicemailNotifier {
         public final String accountId;
         public final String transcription;
         public final String countryIso;
+        public final long dateMs;
 
         public NewCall(
                 Uri callsUri,
@@ -245,7 +251,8 @@ public class DefaultVoicemailNotifier {
                 String accountComponentName,
                 String accountId,
                 String transcription,
-                String countryIso) {
+                String countryIso,
+                long dateMs) {
             this.callsUri = callsUri;
             this.voicemailUri = voicemailUri;
             this.number = number;
@@ -254,6 +261,7 @@ public class DefaultVoicemailNotifier {
             this.accountId = accountId;
             this.transcription = transcription;
             this.countryIso = countryIso;
+            this.dateMs = dateMs;
         }
     }
 
@@ -284,7 +292,8 @@ public class DefaultVoicemailNotifier {
             Calls.PHONE_ACCOUNT_COMPONENT_NAME,
             Calls.PHONE_ACCOUNT_ID,
             Calls.TRANSCRIPTION,
-            Calls.COUNTRY_ISO
+            Calls.COUNTRY_ISO,
+            Calls.DATE
         };
         private static final int ID_COLUMN_INDEX = 0;
         private static final int NUMBER_COLUMN_INDEX = 1;
@@ -294,6 +303,7 @@ public class DefaultVoicemailNotifier {
         private static final int PHONE_ACCOUNT_ID_COLUMN_INDEX = 5;
         private static final int TRANSCRIPTION_COLUMN_INDEX = 6;
         private static final int COUNTRY_ISO_COLUMN_INDEX = 7;
+        private static final int DATE_COLUMN_INDEX = 8;
 
         private final ContentResolver mContentResolver;
         private final Context mContext;
@@ -345,7 +355,8 @@ public class DefaultVoicemailNotifier {
                     cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX),
                     cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX),
                     cursor.getString(TRANSCRIPTION_COLUMN_INDEX),
-                    cursor.getString(COUNTRY_ISO_COLUMN_INDEX));
+                    cursor.getString(COUNTRY_ISO_COLUMN_INDEX),
+                    cursor.getLong(DATE_COLUMN_INDEX));
         }
     }
 
