@@ -24,7 +24,9 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.test.ProviderTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 
+@MediumTest
 public class FilteredNumberProviderTest extends
         ProviderTestCase2<FilteredNumberProviderTest.TestFilteredNumberProvider> {
     private ContentResolver mResolver;

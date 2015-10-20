@@ -18,12 +18,14 @@ package com.android.dialer.onboard;
 import static org.mockito.Mockito.when;
 
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import com.android.dialer.onboard.OnboardingActivity.DefaultDialerOnboardingScreen;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+@SmallTest
 public class DefaultDialerOnboardScreenTest extends AndroidTestCase {
     private DefaultDialerOnboardingScreen mScreen;
     @Mock private PermissionsChecker mPermissionsChecker;

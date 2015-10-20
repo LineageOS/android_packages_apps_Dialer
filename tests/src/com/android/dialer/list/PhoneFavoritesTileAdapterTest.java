@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.ContactsContract.PinnedPositions;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactEntry;
@@ -11,6 +12,7 @@ import com.android.dialer.list.PhoneFavoritesTileAdapter.OnDataSetChangedForAnim
 
 import java.util.ArrayList;
 
+@SmallTest
 public class PhoneFavoritesTileAdapterTest extends AndroidTestCase {
     private PhoneFavoritesTileAdapter mAdapter;
     private static final OnDataSetChangedForAnimationListener

@@ -21,6 +21,7 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.support.v7.widget.RecyclerView;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import android.view.ViewGroup;
  *   adb shell am instrument -e class com.android.dialer.calllog.GroupingListAdapterTests \
  *     -w com.android.dialer.tests/android.test.InstrumentationTestRunner
  */
+@MediumTest
 public class GroupingListAdapterTests extends AndroidTestCase {
 
     static private final String[] PROJECTION = new String[] {
@@ -161,6 +163,6 @@ public class GroupingListAdapterTests extends AndroidTestCase {
     private void assertMetadata(int listPosition, int groupSize, String objectValue) {
         assertEquals(groupSize, mAdapter.getGroupSize(listPosition));
         MatrixCursor cursor = (MatrixCursor) mAdapter.getItem(listPosition);
-        assertEquals(objectValue, (String) cursor.getString(GROUPING_COLUMN_INDEX));
+        assertEquals(objectValue, cursor.getString(GROUPING_COLUMN_INDEX));
     }
 }

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.view.View;
 
 import com.android.contacts.common.CallUtil;
@@ -30,6 +31,7 @@ import com.android.dialer.util.AppCompatConstants;
 /**
  * Unit tests for {@link CallLogListItemHelper}.
  */
+@MediumTest
 public class CallLogListItemHelperTest extends AndroidTestCase {
     /** A test phone number for phone calls. */
     private static final String TEST_NUMBER = "14125555555";
@@ -273,7 +275,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
 
     /** Asserts that the primary action view does not have a call intent. */
     private void assertNoCallIntent() {
-        Object intentProvider = (IntentProvider)mViewHolder.primaryActionView.getTag();
+        Object intentProvider = mViewHolder.primaryActionView.getTag();
         // The intent provider should be null as there is no ability to make a call.
         assertNull(intentProvider);
     }

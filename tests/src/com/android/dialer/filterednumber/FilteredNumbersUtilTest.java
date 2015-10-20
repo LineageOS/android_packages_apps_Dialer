@@ -23,6 +23,7 @@ import android.content.Context;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import org.mockito.Matchers;
 import org.mockito.Mock;
@@ -30,6 +31,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.LinkedList;
 
+@SmallTest
 public class FilteredNumbersUtilTest extends AndroidTestCase {
 
     private static final String NORMAL_PHONE_NUMBER = "555-555-5555";
