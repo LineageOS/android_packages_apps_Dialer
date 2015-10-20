@@ -15,13 +15,16 @@
  */
 package com.android.dialer.filterednumber;
 
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -32,8 +35,7 @@ import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 
 /**
- * Utility to help with tasks related to importing filtered numbers, namely migrating the
- * SEND_TO_VOICEMAIL from Contacts.
+ * Utility to help with tasks related to filtered numbers.
  */
 public class FilteredNumbersUtil {
 
@@ -177,5 +179,22 @@ public class FilteredNumbersUtil {
             }
         };
         task.execute();
+    }
+
+    public static boolean canBlockNumber(Context context, String number) {
+        if (PhoneNumberUtils.isEmergencyNumber(number)) {
+            return false;
+        }
+
+        TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        List<PhoneAccountHandle> phoneAccountHandles = telecomManager.getCallCapablePhoneAccounts();
+        for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+            if (telecomManager.isVoiceMailNumber(phoneAccountHandle, number)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -27,6 +27,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -48,6 +49,7 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
@@ -301,22 +303,24 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     .setOnMenuItemClickListener(this);
         }
 
-        mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
-                    @Override
-                    public void onCheckComplete(Integer id) {
-                        blockId = id;
-                        int blockTitleId = blockId == null ? R.string.action_block_number
-                                : R.string.action_unblock_number;
-                        final MenuItem blockItem = menu.add(
-                                ContextMenu.NONE,
-                                R.id.context_menu_block_number,
-                                ContextMenu.NONE,
-                                blockTitleId);
-                        blockItem.setOnMenuItemClickListener(
-                                CallLogListItemViewHolder.this);
-                    }
-            }, info.normalizedNumber, number, countryIso);
+        if (FilteredNumbersUtil.canBlockNumber(mContext, number)) {
+            mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                    new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                        @Override
+                        public void onCheckComplete(Integer id) {
+                            blockId = id;
+                            int blockTitleId = blockId == null ? R.string.action_block_number
+                                    : R.string.action_unblock_number;
+                            final MenuItem blockItem = menu.add(
+                                    ContextMenu.NONE,
+                                    R.id.context_menu_block_number,
+                                    ContextMenu.NONE,
+                                    blockTitleId);
+                            blockItem.setOnMenuItemClickListener(
+                                    CallLogListItemViewHolder.this);
+                        }
+                    }, info.normalizedNumber, number, countryIso);
+        }
     }
 
     @Override

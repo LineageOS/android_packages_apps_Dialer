@@ -87,20 +87,13 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
     private void blockNumber(final String number) {
         final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
-        final String normalizedNumber =
-                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
-        if (normalizedNumber == null) {
-            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
         final OnCheckBlockedListener onCheckListener = new OnCheckBlockedListener() {
             @Override
             public void onCheckComplete(Integer id) {
                 if (id == null) {
                     FilterNumberDialogFragment.show(
                             id,
-                            normalizedNumber,
+                            null,
                             number,
                             countryIso,
                             number,
@@ -113,8 +106,12 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                 }
             }
         };
-        mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                onCheckListener, normalizedNumber, number, countryIso);
+        boolean failed = mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+                onCheckListener, null, number, countryIso);
+        if (failed) {
+            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -137,14 +134,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             final ContactListItemView view,
             final String number,
             final Integer blockId) {
-        final String countryIso = GeoUtil.getCurrentCountryIso(getContext());
-        final String normalizedNumber =
-                FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
-        if (normalizedNumber == null) {
-            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
         if (blockId != null) {
             Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
                     Toast.LENGTH_SHORT).show();
@@ -153,9 +142,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
         FilterNumberDialogFragment.show(
                 blockId,
-                normalizedNumber,
+                null,
                 number,
-                countryIso,
+                GeoUtil.getCurrentCountryIso(getContext()),
                 number,
                 R.id.blocked_numbers_activity_container,
                 getFragmentManager(),

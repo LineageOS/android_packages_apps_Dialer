@@ -49,14 +49,15 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
-import com.android.dialer.onboard.OnboardingActivity;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.onboard.OnboardingActivity;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
@@ -393,7 +394,7 @@ public class CallDetailActivity extends AppCompatActivity
     }
 
     private void updatePhotoAndBlockActionItem() {
-        if (mDetails == null) {
+        if (mDetails == null || !FilteredNumbersUtil.canBlockNumber(this, mNumber)) {
             return;
         }
 
