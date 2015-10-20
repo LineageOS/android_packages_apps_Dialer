@@ -178,10 +178,15 @@ public class FilterNumberDialogFragment extends DialogFragment {
         return getString(R.string.snackbar_number_unblocked, mDisplayNumber);
     }
 
+    private int getActionTextColor() {
+        return getContext().getResources().getColor(R.color.dialer_snackbar_action_text_color);
+    }
+
     private void blockNumber() {
         final String message = getBlockedMessage();
         final String undoMessage = getUnblockedMessage();
         final Callback callback = mCallback;
+        final int actionTextColor = getActionTextColor();
 
         final OnUnblockNumberListener onUndoListener = new OnUnblockNumberListener() {
             @Override
@@ -206,6 +211,7 @@ public class FilterNumberDialogFragment extends DialogFragment {
 
                 Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
                         .setAction(R.string.block_number_undo, undoListener)
+                        .setActionTextColor(actionTextColor)
                         .show();
 
                 if (callback != null) {
@@ -225,6 +231,7 @@ public class FilterNumberDialogFragment extends DialogFragment {
         final String message = getUnblockedMessage();
         final String undoMessage = getBlockedMessage();
         final Callback callback = mCallback;
+        final int actionTextColor = getActionTextColor();
 
         final OnBlockNumberListener onUndoListener = new OnBlockNumberListener() {
             @Override
@@ -249,6 +256,7 @@ public class FilterNumberDialogFragment extends DialogFragment {
 
                 Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
                         .setAction(R.string.block_number_undo, undoListener)
+                        .setActionTextColor(actionTextColor)
                         .show();
 
                 if (callback != null) {
