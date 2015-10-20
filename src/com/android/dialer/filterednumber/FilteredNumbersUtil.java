@@ -19,6 +19,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
@@ -41,6 +42,8 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
  * Utility to help with tasks related to filtered numbers.
  */
 public class FilteredNumbersUtil {
+
+    private static final String HIDE_BLOCKED_CALLS_PREF_KEY = "hide_blocked_calls";
 
     public interface CheckForSendToVoicemailContactListener {
         public void onComplete(boolean hasSendToVoicemailContact);
@@ -211,6 +214,24 @@ public class FilteredNumbersUtil {
         }
 
         return isBlocked;
+    }
+
+    public static boolean shouldHideBlockedCalls(Context context) {
+        if (context == null) {
+            return false;
+        }
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(FilteredNumbersUtil.HIDE_BLOCKED_CALLS_PREF_KEY, false);
+    }
+
+    public static void setShouldHideBlockedCalls(Context context, boolean shouldHide) {
+        if (context == null) {
+            return;
+        }
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(FilteredNumbersUtil.HIDE_BLOCKED_CALLS_PREF_KEY, shouldHide)
+                .apply();
     }
 
     public static boolean canBlockNumber(Context context, String number) {

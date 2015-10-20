@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class BlockedNumberFragment extends ListFragment implements
 
     private BlockedNumberAdapter mAdapter;
 
+    private Switch mHideSettingSwitch;
     private View mImportSettings;
     private View mImportButton;
 
@@ -49,7 +52,13 @@ public class BlockedNumberFragment extends ListFragment implements
         }
         setListAdapter(mAdapter);
 
-        getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
+        mHideSettingSwitch = (Switch) getActivity().findViewById(R.id.hide_blocked_calls_switch);
+        mHideSettingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                FilteredNumbersUtil.setShouldHideBlockedCalls(getActivity(), isChecked);
+            }
+        });
 
         mImportSettings = getActivity().findViewById(R.id.import_settings);
         mImportButton = getActivity().findViewById(R.id.import_button);
@@ -65,6 +74,8 @@ public class BlockedNumberFragment extends ListFragment implements
                         });
             }
         });
+
+        getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +102,8 @@ public class BlockedNumberFragment extends ListFragment implements
                         mImportSettings.setVisibility(visibility);
                     }
                 });
+
+        mHideSettingSwitch.setChecked(FilteredNumbersUtil.shouldHideBlockedCalls(getActivity()));
     }
 
     @Override
