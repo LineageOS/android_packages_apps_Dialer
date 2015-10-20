@@ -260,10 +260,11 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogListItemHelper =
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources, mTelecomCallLogCache);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        maybeShowVoicemailPromoCard();
         mFilteredNumberAsyncQueryHandler =
                 new FilteredNumberAsyncQueryHandler(mContext.getContentResolver());
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        maybeShowVoicemailPromoCard();
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -306,7 +307,7 @@ public class CallLogAdapter extends GroupingListAdapter
         mBlockedIdCache.clear();
     }
 
-    public void startCache() {
+    public void onResume() {
         if (PermissionsUtil.hasPermission(mContext, android.Manifest.permission.READ_CONTACTS)) {
             mContactInfoCache.start();
         }

@@ -33,11 +33,9 @@
             android:layout_height="wrap_content"
             android:text="@string/blocked_call_settings_import_description"
             android:textSize="@dimen/blocked_number_settings_description_text_size"
-            android:lineSpacingMultiplier="1.2"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:paddingStart="@dimen/blocked_number_container_padding"
-            android:paddingEnd="@dimen/blocked_number_container_padding" />
+            android:paddingEnd="@dimen/blocked_number_container_padding"
+            style="@style/BlockedNumbersDescriptionTextStyle" />
 
         <Button android:id="@+id/import_button"
             android:layout_width="wrap_content"

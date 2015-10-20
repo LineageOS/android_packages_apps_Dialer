@@ -36,6 +36,7 @@ import android.util.Log;
 
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
@@ -177,7 +178,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         if (callType > CALL_TYPE_ALL) {
             where.append(" AND ");
-            where.append(String.format("(%s = ?)", Calls.TYPE));
+            where.append("(" + Calls.TYPE + " = ?)");
             selectionArgs.add(Integer.toString(callType));
         } else {
             where.append(" AND NOT ");
@@ -186,8 +187,16 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         if (newerThan > 0) {
             where.append(" AND ");
-            where.append(String.format("(%s > ?)", Calls.DATE));
+            where.append("(" + Calls.DATE + " > ?)");
             selectionArgs.add(Long.toString(newerThan));
+        }
+
+        final boolean shouldHideBlockedCalls =
+                FilteredNumbersUtil.shouldHideBlockedCalls(mContext);
+        if (shouldHideBlockedCalls) {
+            where.append(" AND ");
+            where.append("(" + Calls.TYPE + " != ?)");
+            selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
         }
 
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
