@@ -749,6 +749,10 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * the presenter without the presenter triggering the audio manager and duplicating actions.
      */
     public void setSpeakerphoneOn(boolean on) {
+        if (mView == null) {
+            return;
+        }
+
         mView.onSpeakerphoneOn(on);
 
         mIsSpeakerphoneOn = on;
