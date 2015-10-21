@@ -64,7 +64,7 @@ public class BlockedNumberAdapter extends NumberAdapter {
                         normalizedNumber,
                         number,
                         countryIso,
-                        null,
+                        number,
                         R.id.blocked_number_fragment,
                         getFragmentManager(),
                         null /* callback */);
@@ -72,5 +72,11 @@ public class BlockedNumberAdapter extends NumberAdapter {
         });
 
         updateView(view, number, countryIso);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        // Always return false, so that the header with blocking-related options always shows.
+        return false;
     }
 }

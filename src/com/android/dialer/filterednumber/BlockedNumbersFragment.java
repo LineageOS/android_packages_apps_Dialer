@@ -57,6 +57,10 @@ public class BlockedNumbersFragment extends ListFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        LayoutInflater inflater =
+                (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        getListView().addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
+
         if (mAdapter == null) {
             mAdapter = BlockedNumberAdapter.newBlockedNumberAdapter(
                     getContext(), getActivity().getFragmentManager());
