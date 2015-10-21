@@ -50,6 +50,7 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.OnCallLogQueryFinishedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
+import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
 import com.google.common.base.Preconditions;
@@ -491,6 +492,7 @@ public class InCallPresenter implements CallList.Listener,
     public void onCallAdded(final android.telecom.Call call) {
         // Check if call should be blocked.
         if (!TelecomCallUtil.isEmergencyCall(call)
+                && !FilteredNumbersUtil.hasRecentEmergencyCall(mContext)
                 && call.getState() == android.telecom.Call.STATE_RINGING) {
             maybeBlockCall(call);
         } else {
@@ -653,6 +655,10 @@ public class InCallPresenter implements CallList.Listener,
 
         if (isActivityStarted()) {
             mInCallActivity.dismissKeyguard(false);
+        }
+
+        if (call.isEmergencyCall()) {
+            FilteredNumbersUtil.recordLastEmergencyCallTime(mContext);
         }
     }
 
