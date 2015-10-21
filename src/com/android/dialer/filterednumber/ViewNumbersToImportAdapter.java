@@ -24,11 +24,10 @@ import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 
-public class BlockedNumberAdapter extends NumberAdapter {
+public class ViewNumbersToImportAdapter extends NumberAdapter {
 
-    private BlockedNumberAdapter(
+    private ViewNumbersToImportAdapter(
             Context context,
             FragmentManager fragmentManager,
             ContactInfoHelper contactInfoHelper,
@@ -36,9 +35,9 @@ public class BlockedNumberAdapter extends NumberAdapter {
         super(context, fragmentManager, contactInfoHelper, contactPhotoManager);
     }
 
-    public static BlockedNumberAdapter newBlockedNumberAdapter(
+    public static ViewNumbersToImportAdapter newViewNumbersToImportAdapter(
             Context context, FragmentManager fragmentManager) {
-        return new BlockedNumberAdapter(
+        return new ViewNumbersToImportAdapter(
                 context,
                 fragmentManager,
                 new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context)),
@@ -48,29 +47,11 @@ public class BlockedNumberAdapter extends NumberAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         super.bindView(view, context, cursor);
-        final Integer id = cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID));
-        final String countryIso = cursor.getString(cursor.getColumnIndex(
-                FilteredNumberColumns.COUNTRY_ISO));
-        final String number = cursor.getString(cursor.getColumnIndex(FilteredNumberColumns.NUMBER));
-        final String normalizedNumber = cursor.getString(cursor.getColumnIndex(
-                FilteredNumberColumns.NORMALIZED_NUMBER));
 
-        final View deleteButton = view.findViewById(R.id.delete_button);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FilterNumberDialogFragment.show(
-                        id,
-                        normalizedNumber,
-                        number,
-                        countryIso,
-                        null,
-                        R.id.blocked_number_fragment,
-                        getFragmentManager(),
-                        null /* callback */);
-            }
-        });
+        final String number = cursor.getString(
+                FilteredNumbersUtil.PhoneQuery.NUMBER_COLUMN_INDEX);
 
-        updateView(view, number, countryIso);
+        view.findViewById(R.id.delete_button).setVisibility(View.GONE);
+        updateView(view, number, null /* countryIso */);
     }
 }

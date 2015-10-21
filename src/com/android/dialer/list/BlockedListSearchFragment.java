@@ -19,9 +19,15 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.contacts.common.GeoUtil;
@@ -33,6 +39,7 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.FilterNumberDialogFragment;
 import com.android.dialer.filterednumber.ManageBlockedNumbersActivity;
+import com.android.dialer.widget.SearchEditTextLayout;
 
 public class BlockedListSearchFragment extends RegularSearchFragment
         implements FilterNumberDialogFragment.Callback {
@@ -40,11 +47,73 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
+    private EditText mSearchView;
+    private String mSearchQuery;
+
+    private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            final String newText = s.toString();
+            if (newText.equals(mSearchQuery)) {
+                return;
+            }
+            mSearchQuery = newText;
+            setQueryString(mSearchQuery, false);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
+
+    private final SearchEditTextLayout.Callback mSearchLayoutCallback =
+            new SearchEditTextLayout.Callback() {
+                @Override
+                public void onBackButtonClicked() {
+                    getActivity().onBackPressed();
+                }
+
+                @Override
+                public void onSearchViewClicked() {
+                }
+            };
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(
                 getContext().getContentResolver());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setCustomView(R.layout.search_edittext);
+        actionBar.setBackgroundDrawable(null);
+        actionBar.setElevation(0);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+
+        final SearchEditTextLayout searchEditTextLayout = (SearchEditTextLayout) actionBar
+                .getCustomView().findViewById(R.id.search_view_container);
+        searchEditTextLayout.expand(false, true);
+        searchEditTextLayout.setCallback(mSearchLayoutCallback);
+
+        mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
+        mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
+        mSearchView.setHint(R.string.block_number_search_hint);
+
+        // TODO: Don't set custom text size; use default search text size.
+        mSearchView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.blocked_number_search_text_size));
     }
 
     @Override

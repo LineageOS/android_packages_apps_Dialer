@@ -22,13 +22,17 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.Switch;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogQueryHandler;
@@ -38,7 +42,7 @@ import com.android.dialer.filterednumber.FilteredNumbersUtil.ImportSendToVoicema
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
-public class BlockedNumberFragment extends ListFragment
+public class BlockedNumbersFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener,
                 CallLogQueryHandler.Listener {
 
@@ -48,7 +52,6 @@ public class BlockedNumberFragment extends ListFragment
 
     private Switch mHideSettingSwitch;
     private View mImportSettings;
-    private View mImportButton;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -73,44 +76,39 @@ public class BlockedNumberFragment extends ListFragment
         });
 
         mImportSettings = getActivity().findViewById(R.id.import_settings);
-        mImportButton = getActivity().findViewById(R.id.import_button);
-        mImportButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FilteredNumbersUtil.importSendToVoicemailContacts(
-                        getActivity(), new ImportSendToVoicemailContactsListener() {
-                            @Override
-                            public void onImportComplete() {
-                                mImportSettings.setVisibility(View.GONE);
-                            }
-                        });
-            }
-        });
 
+        getActivity().findViewById(R.id.import_button).setOnClickListener(this);;
+        getActivity().findViewById(R.id.view_numbers_button).setOnClickListener(this);
         getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
         setListAdapter(null);
+        super.onDestroy();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        LayoutInflater inflater =
-                (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ListView listView = (ListView) getActivity().findViewById(R.id.blocked_numbers_list);
-        listView.addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
-
         getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        ColorDrawable backgroundDrawable =
+                new ColorDrawable(getActivity().getColor(R.color.dialer_theme_color));
+        actionBar.setBackgroundDrawable(backgroundDrawable);
+        actionBar.setElevation(getResources().getDimensionPixelSize(R.dimen.action_bar_elevation));
+        actionBar.setDisplayShowCustomEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(R.string.manage_blocked_numbers_label);
+
         FilteredNumbersUtil.checkForSendToVoicemailContact(
                 getActivity(), new CheckForSendToVoicemailContactListener() {
                     @Override
@@ -158,11 +156,29 @@ public class BlockedNumberFragment extends ListFragment
     }
 
     @Override
-    public void onClick(final View v) {
+    public void onClick(final View view) {
         ManageBlockedNumbersActivity manageBlockedNumbersActivity =
                 (ManageBlockedNumbersActivity) getActivity();
-        if (manageBlockedNumbersActivity != null && v.getId() == R.id.add_number_button) {
-            manageBlockedNumbersActivity.enterSearchUi();
+        if (manageBlockedNumbersActivity == null) {
+            return;
+        }
+
+        switch (view.getId()) {
+            case R.id.add_number_button:
+                manageBlockedNumbersActivity.enterSearchUi();
+                break;
+            case R.id.view_numbers_button:
+                manageBlockedNumbersActivity.showNumbersToImportPreviewUi();
+                break;
+            case R.id.import_button:
+                FilteredNumbersUtil.importSendToVoicemailContacts(manageBlockedNumbersActivity,
+                        new ImportSendToVoicemailContactsListener() {
+                            @Override
+                            public void onImportComplete() {
+                                mImportSettings.setVisibility(View.GONE);
+                            }
+                        });
+                break;
         }
     }
 
