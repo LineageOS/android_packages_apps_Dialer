@@ -191,7 +191,8 @@ public class FilteredNumbersUtil {
      * WARNING: This method should NOT be executed on the UI thread.
      * Use {@code FilteredNumberAsyncQueryHandler} to asynchronously check if a number is blocked.
      */
-    public static boolean isBlocked(Context context, String number, String countryIso) {
+    public static boolean shouldBlockVoicemail(
+            Context context, String number, String countryIso, long dateMs) {
         final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         if (TextUtils.isEmpty(normalizedNumber)) {
             return false;
@@ -199,21 +200,26 @@ public class FilteredNumbersUtil {
 
         final Cursor cursor = context.getContentResolver().query(
                 FilteredNumber.CONTENT_URI,
-                new String[] { FilteredNumberColumns._ID },
+                new String[] {
+                    FilteredNumberColumns.CREATION_TIME
+                },
                 FilteredNumberColumns.NORMALIZED_NUMBER + "=?",
                 new String[] { normalizedNumber },
                 null);
 
-        boolean isBlocked = false;
+        boolean shouldBlock = false;
         if (cursor != null) {
             try {
-                isBlocked = cursor.getCount() > 0;
+                cursor.moveToFirst();
+
+                // Block if number is found and it was added before this voicemail was received.
+                shouldBlock = cursor.getCount() > 0 && dateMs > cursor.getLong(0);
             } finally {
                 cursor.close();
             }
         }
 
-        return isBlocked;
+        return shouldBlock;
     }
 
     public static boolean shouldHideBlockedCalls(Context context) {
