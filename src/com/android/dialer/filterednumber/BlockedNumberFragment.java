@@ -31,14 +31,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.filterednumber.FilteredNumbersUtil.CheckForSendToVoicemailContactListener;
 import com.android.dialer.filterednumber.FilteredNumbersUtil.ImportSendToVoicemailContactsListener;
+import com.android.dialer.voicemail.VoicemailStatusHelper;
+import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 
-public class BlockedNumberFragment extends ListFragment implements
-        LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
+public class BlockedNumberFragment extends ListFragment
+        implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener,
+                CallLogQueryHandler.Listener {
 
     private BlockedNumberAdapter mAdapter;
+    private CallLogQueryHandler mCallLogQueryHandler;
+    private VoicemailStatusHelper mVoicemailStatusHelper;
 
     private Switch mHideSettingSwitch;
     private View mImportSettings;
@@ -53,6 +59,10 @@ public class BlockedNumberFragment extends ListFragment implements
                     getContext(), getActivity().getFragmentManager());
         }
         setListAdapter(mAdapter);
+
+        mCallLogQueryHandler
+                = new CallLogQueryHandler(getContext(), getContext().getContentResolver(), this);
+        mVoicemailStatusHelper = new VoicemailStatusHelperImpl();
 
         mHideSettingSwitch = (Switch) getActivity().findViewById(R.id.hide_blocked_calls_switch);
         mHideSettingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -101,7 +111,6 @@ public class BlockedNumberFragment extends ListFragment implements
     @Override
     public void onResume() {
         super.onResume();
-
         FilteredNumbersUtil.checkForSendToVoicemailContact(
                 getActivity(), new CheckForSendToVoicemailContactListener() {
                     @Override
@@ -112,6 +121,7 @@ public class BlockedNumberFragment extends ListFragment implements
                 });
 
         mHideSettingSwitch.setChecked(FilteredNumbersUtil.shouldHideBlockedCalls(getActivity()));
+        mCallLogQueryHandler.fetchVoicemailStatus();
     }
 
     @Override
@@ -154,5 +164,28 @@ public class BlockedNumberFragment extends ListFragment implements
         if (manageBlockedNumbersActivity != null && v.getId() == R.id.add_number_button) {
             manageBlockedNumbersActivity.enterSearchUi();
         }
+    }
+
+    @Override
+    public void onVoicemailStatusFetched(Cursor cursor) {
+        final boolean hasVisualVoicemailSource =
+                mVoicemailStatusHelper.getNumberActivityVoicemailSources(cursor) > 0;
+        View hideSetting = getActivity().findViewById(R.id.hide_blocked_calls_setting);
+        if (hasVisualVoicemailSource) {
+            hideSetting.setVisibility(View.VISIBLE);
+        } else {
+            hideSetting.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onVoicemailUnreadCountFetched(Cursor cursor) {
+        // Do nothing.
+    }
+
+    @Override
+    public boolean onCallsFetched(Cursor cursor) {
+        // Do nothing.
+        return false;
     }
 }
