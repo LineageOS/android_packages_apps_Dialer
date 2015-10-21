@@ -121,6 +121,8 @@
     <dimen name="conference_call_manager_button_dimension">46dp</dimen>
 
     <dimen name="contact_context_title_text_size">14sp</dimen>
+    <dimen name="contact_context_title_image_size">19dp</dimen>
+    <dimen name="contact_context_title_image_side_padding">23dp</dimen>
     <dimen name="contact_context_title_margin_bottom">13dp</dimen>
     <dimen name="contact_context_list_item_padding">13dp</dimen>
 
@@ -136,6 +138,8 @@
     <dimen name="business_contact_context_end_padding">10dp</dimen>
     <dimen name="business_contact_context_image_size">25dp</dimen>
     <dimen name="business_contact_context_image_padding">20dp</dimen>
-    <dimen name="business_contact_context_heading_font_size">18sp</dimen>
-    <dimen name="business_contact_context_detail_font_size">13sp</dimen>
+    <dimen name="business_contact_context_heading_font_size">16sp</dimen>
+    <dimen name="business_contact_context_detail_font_size">12sp</dimen>
+
+    <dimen name="contact_context_small_photo_size">80dp</dimen>
 </resources>

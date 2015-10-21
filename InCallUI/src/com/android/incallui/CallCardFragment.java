@@ -21,13 +21,18 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Trace;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
@@ -46,6 +51,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -133,6 +139,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     // Container view that houses the primary call information
     private ViewGroup mPrimaryCallInfo;
     private View mCallButtonsContainer;
+    private ImageView mPhotoSmall;
 
     // Secondary caller info
     private View mSecondaryCallInfo;
@@ -145,10 +152,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     // Call card content
     private View mCallCardContent;
-    private ImageView mPhoto;
+    private ImageView mPhotoLarge;
     private View mContactContext;
     private TextView mContactContextTitle;
     private ListView mContactContextListView;
+    private LinearLayout mContactContextListHeaders;
 
     private View mManageConferenceCallButton;
 
@@ -246,16 +254,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mSecondaryCallInfo = view.findViewById(R.id.secondary_call_info);
         mSecondaryCallProviderInfo = view.findViewById(R.id.secondary_call_provider_info);
         mCallCardContent = view.findViewById(R.id.call_card_content);
-        mPhoto = (ImageView) view.findViewById(R.id.photo);
-        mPhoto.setOnClickListener(new View.OnClickListener() {
+        mPhotoLarge = (ImageView) view.findViewById(R.id.photoLarge);
+        mPhotoLarge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getPresenter().onContactPhotoClick();
             }
         });
+
         mContactContext = view.findViewById(R.id.contact_context);
         mContactContextTitle = (TextView) view.findViewById(R.id.contactContextTitle);
         mContactContextListView = (ListView) view.findViewById(R.id.contactContextInfo);
+        // This layout stores all the list header layouts so they can be easily removed.
+        mContactContextListHeaders = new LinearLayout(getView().getContext());
+        mContactContextListView.addHeaderView(mContactContextListHeaders);
+
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
@@ -267,6 +280,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
         mPrimaryCallInfo = (ViewGroup) view.findViewById(R.id.primary_call_banner);
         mCallButtonsContainer = view.findViewById(R.id.callButtonFragment);
+        mPhotoSmall = (ImageView) view.findViewById(R.id.photoSmall);
+        mPhotoSmall.setVisibility(View.GONE);
         mInCallMessageLabel = (TextView) view.findViewById(R.id.connectionServiceMessage);
         mProgressSpinner = view.findViewById(R.id.progressSpinner);
 
@@ -334,17 +349,23 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
-    public void setContactContext(String title, ListAdapter listAdapter) {
-        mContactContextTitle.setText(title);
+    public void setContactContextTitle(View headerView) {
+        mContactContextListHeaders.removeAllViews();
+        mContactContextListHeaders.addView(headerView);
+    }
+
+    @Override
+    public void setContactContextContent(ListAdapter listAdapter) {
         mContactContextListView.setAdapter(listAdapter);
     }
 
     @Override
     public void showContactContext(boolean show) {
-            mPhoto.setVisibility(show ? View.GONE : View.VISIBLE);
-            mPrimaryCallCardContainer.setElevation(
-                    show ? 0 : getResources().getDimension(R.dimen.primary_call_elevation));
-            mContactContext.setVisibility(show ? View.VISIBLE : View.GONE);
+        showImageView(mPhotoLarge, !show);
+        showImageView(mPhotoSmall, show);
+        mPrimaryCallCardContainer.setElevation(
+                show ? 0 : getResources().getDimension(R.dimen.primary_call_elevation));
+        mContactContext.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -498,7 +519,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void setPrimaryImage(Drawable image, boolean isVisible) {
         if (image != null) {
-            setDrawableToImageView(mPhoto, image, isVisible);
+            setDrawableToImageViews(image);
+            showImageView(mPhotoLarge, isVisible);
         }
     }
 
@@ -560,7 +582,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         showInternetCallLabel(isSipCall);
 
-        setDrawableToImageView(mPhoto, photo, isContactPhotoShown);
+        setDrawableToImageViews(photo);
+        showImageView(mPhotoLarge, isContactPhotoShown);
     }
 
     @Override
@@ -620,7 +643,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // photo is hidden when the incoming video surface is shown.
         // The contact photo visibility can also change in setPrimary().
         boolean showContactPhoto = !VideoCallPresenter.showIncomingVideo(videoState, state);
-        mPhoto.setVisibility(showContactPhoto ? View.VISIBLE : View.GONE);
+        mPhotoLarge.setVisibility(showContactPhoto ? View.VISIBLE : View.GONE);
 
         // Check if the call subject is showing -- if it is, we want to bypass showing the call
         // state.
@@ -807,30 +830,84 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    private void setDrawableToImageView(ImageView view, Drawable photo, boolean isVisible) {
+    /**
+     * Set all the ImageViews to the same photo. Currently there are 2 photo views: the large one
+     * (which fills about the bottom half of the screen) and the small one, which displays as a
+     * circle next to the primary contact info. This method does not handle whether the ImageView
+     * is shown or not.
+     *
+     * @param photo The photo to set for the image views.
+     */
+    private void setDrawableToImageViews(Drawable photo) {
         if (photo == null) {
-            photo = ContactInfoCache.getInstance(
-                    view.getContext()).getDefaultContactPhotoDrawable();
+            photo = ContactInfoCache.getInstance(getView().getContext())
+                            .getDefaultContactPhotoDrawable();
         }
 
-        if (mPrimaryPhotoDrawable == photo) {
+        if (mPrimaryPhotoDrawable == photo){
             return;
         }
         mPrimaryPhotoDrawable = photo;
 
-        final Drawable current = view.getDrawable();
-        if (current == null) {
-            view.setImageDrawable(photo);
+        mPhotoLarge.setImageDrawable(photo);
+
+        // Modify the drawable to be round for the smaller ImageView.
+        Bitmap bitmap = drawableToBitmap(photo);
+        if (bitmap != null) {
+            final RoundedBitmapDrawable drawable =
+                    RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            drawable.setAntiAlias(true);
+            drawable.setCornerRadius(bitmap.getHeight() / 2);
+            photo = drawable;
+        }
+        mPhotoSmall.setImageDrawable(photo);
+    }
+
+    /**
+     * Helper method for image view to handle animations.
+     *
+     * @param view The image view to show or hide.
+     * @param isVisible {@code true} if we want to show the image, {@code false} to hide it.
+     */
+    private void showImageView(ImageView view, boolean isVisible) {
+        if (view.getDrawable() == null) {
             if (isVisible) {
                 AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
             }
         } else {
-            // Cross fading is buggy and not noticable due to the multiple calls to this method
-            // that switch drawables in the middle of the cross-fade animations. Just set the
+            // Cross fading is buggy and not noticeable due to the multiple calls to this method
+            // that switch drawables in the middle of the cross-fade animations. Just show the
             // photo directly instead.
-            view.setImageDrawable(photo);
             view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         }
+    }
+
+    /**
+     * Converts a drawable into a bitmap.
+     *
+     * @param drawable the drawable to be converted.
+     */
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        Bitmap bitmap;
+        if (drawable instanceof BitmapDrawable) {
+            bitmap = ((BitmapDrawable) drawable).getBitmap();
+        } else {
+            if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+                // Needed for drawables that are just a colour.
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            } else {
+                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            }
+
+            Log.i(TAG, "Created bitmap with width " + bitmap.getWidth() + ", height "
+                    + bitmap.getHeight());
+
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+        }
+        return bitmap;
     }
 
     /**

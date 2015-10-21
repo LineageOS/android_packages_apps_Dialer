@@ -64,7 +64,7 @@
             android:id="@+id/call_card_content">
 
             <!-- Contact photo for primary call info -->
-            <ImageView android:id="@+id/photo"
+            <ImageView android:id="@+id/photoLarge"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"

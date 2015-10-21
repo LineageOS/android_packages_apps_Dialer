@@ -44,10 +44,14 @@ public class InCallContactInteractions {
     private Context mContext;
     private InCallContactInteractionsListAdapter mListAdapter;
     private boolean mIsBusiness;
+    private View mBusinessHeaderView;
+    private LayoutInflater mInflater;
 
     public InCallContactInteractions(Context context, boolean isBusiness) {
         mContext = context;
-        setIsBusiness(isBusiness);
+        mInflater = (LayoutInflater)
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        switchContactType(isBusiness);
     }
 
     public InCallContactInteractionsListAdapter getListAdapter() {
@@ -55,17 +59,22 @@ public class InCallContactInteractions {
     }
 
     /**
-     * Resets the "isBusiness" value, also recreates the list adapter with the resource
-     * corresponding to the new isBusiness value.
+     * Switches the "isBusiness" value, if applicable. Recreates the list adapter with the resource
+     * corresponding to the new isBusiness value if the "isBusiness" value is switched.
+     *
      * @param isBusiness Whether or not the contact is a business.
+     *
+     * @return {@code true} if a new list adapter was created, {@code} otherwise.
      */
-    public void setIsBusiness(boolean isBusiness) {
+    public boolean switchContactType(boolean isBusiness) {
         if (mIsBusiness != isBusiness || mListAdapter == null) {
             mIsBusiness = isBusiness;
             mListAdapter = new InCallContactInteractionsListAdapter(mContext,
                     mIsBusiness ? R.layout.business_context_info_list_item
                             : R.layout.person_context_info_list_item);
+            return true;
         }
+        return false;
     }
 
     public void setBusinessInfo(Address address, float distance) {
@@ -73,13 +82,16 @@ public class InCallContactInteractions {
         mListAdapter.addAll(constructBusinessContextInfo(address, distance));
     }
 
+    public View getBusinessListHeaderView() {
+        if (mBusinessHeaderView == null) {
+            mBusinessHeaderView = mInflater.inflate(
+                    R.layout.business_contact_context_list_header, null);
+        }
+        return mBusinessHeaderView;
+    }
+
     private List<ContactContextInfo> constructBusinessContextInfo(Address address, float distance) {
         List<ContactContextInfo> info = new ArrayList<ContactContextInfo>();
-
-        BusinessContextInfo headerInfo = new BusinessContextInfo();
-        headerInfo.iconId = R.drawable.ic_business_white_24dp;
-        headerInfo.heading = getContactContextTitle();
-        info.add(headerInfo);
 
         //TODO: hours of operation information
 
@@ -192,10 +204,7 @@ public class InCallContactInteractions {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater)
-                    getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View listItem = inflater.inflate(mResId, null);
+            View listItem = mInflater.inflate(mResId, null);
             ContactContextInfo item = getItem(position);
 
             if (item == null) {
