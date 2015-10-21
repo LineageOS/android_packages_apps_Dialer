@@ -17,12 +17,14 @@ package com.android.dialer.filterednumber;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +89,12 @@ public class BlockedNumberFragment extends ListFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LayoutInflater inflater =
+                (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ListView listView = (ListView) getActivity().findViewById(R.id.blocked_numbers_list);
+        listView.addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
+
         getLoaderManager().initLoader(0, null, this);
     }
 
