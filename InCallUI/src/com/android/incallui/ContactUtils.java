@@ -17,6 +17,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.location.Address;
+import android.util.Pair;
 
 import com.android.incalluibind.ObjectFactory;
 
@@ -35,8 +36,9 @@ public abstract class ContactUtils {
     }
 
     public interface Listener {
-        public void onAddressDetailsFound(Address address);
+        public void onContactInteractionsFound(Address address, Pair<String, String> openingHours);
     }
 
-    public abstract String getAddressFromLookupKey(String lookupKey, Listener listener);
+    public abstract boolean retrieveContactInteractionsFromLookupKey(String lookupKey,
+            Listener listener);
 }
