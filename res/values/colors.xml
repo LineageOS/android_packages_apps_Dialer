@@ -132,6 +132,7 @@
     <color name="blocked_number_accent_color">#42A5F5</color>
     <color name="blocked_number_block_color">#F44336</color>
     <color name="blocked_number_header_color">@color/dialer_theme_color</color>
+    <color name="blocked_number_disabled_emergency_header_color">#616161</color>
 
     <!-- Colors for onboarding flow -->
     <color name="onboarding_primary_text_color">#ffffff</color>

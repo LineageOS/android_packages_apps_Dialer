@@ -44,6 +44,11 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 public class FilteredNumbersUtil {
 
     private static final String HIDE_BLOCKED_CALLS_PREF_KEY = "hide_blocked_calls";
+    // Pref key for storing the time, in milliseconds after epoch, of end of the last emergency call.
+    private static final String LAST_EMERGENCY_CALL_PREF_KEY = "last_emergency_call";
+
+    // Disable incoming call blocking if there was a call within the past 2 days.
+    private static final long EMERGENCY_CALL_RECENCY_THRESHOLD_MS = 1000 * 60 * 60 * 24 * 2;
 
     public interface CheckForSendToVoicemailContactListener {
         public void onComplete(boolean hasSendToVoicemailContact);
@@ -238,7 +243,32 @@ public class FilteredNumbersUtil {
         }
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putBoolean(FilteredNumbersUtil.HIDE_BLOCKED_CALLS_PREF_KEY, shouldHide)
+                .putBoolean(HIDE_BLOCKED_CALLS_PREF_KEY, shouldHide)
+                .apply();
+    }
+
+    public static boolean hasRecentEmergencyCall(Context context) {
+        if (context == null) {
+            return false;
+        }
+
+        Long lastEmergencyCallTime = PreferenceManager.getDefaultSharedPreferences(context)
+                .getLong(LAST_EMERGENCY_CALL_PREF_KEY, 0);
+        if (lastEmergencyCallTime == 0) {
+            return false;
+        }
+
+        return (System.currentTimeMillis() - lastEmergencyCallTime)
+                    < EMERGENCY_CALL_RECENCY_THRESHOLD_MS;
+    }
+
+    public static void recordLastEmergencyCallTime(Context context) {
+        if (context == null) {
+            return;
+        }
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putLong(LAST_EMERGENCY_CALL_PREF_KEY, System.currentTimeMillis())
                 .apply();
     }
 

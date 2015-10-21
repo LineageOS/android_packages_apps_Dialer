@@ -826,6 +826,21 @@
     <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
     <string name="manage_blocked_numbers_label">Blocked numbers</string>
 
+    <!-- Label for a section describing that call blocking is temporarily disabled because an
+         emergency call was made. [CHAR LIMIT=40] -->
+    <string name="blocked_numbers_disabled_emergency_header_label">
+        Call blocking temporarily off
+    </string>
+
+    <!-- Description that call blocking is temporarily disabled because the user called an
+         emergency number, and explains that call blocking will be re-enabled after a buffer
+         period has passed. [CHAR LIMIT=NONE] -->
+    <string name="blocked_numbers_disabled_emergency_desc">
+        Call blocking has been disabled because you contacted emergency services from this phone
+        within the last 48 hours. It will be automatically reenabled once the 48 hour period
+        expires.
+    </string>
+
     <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
          [CHAR_LIMIT=30] -->
     <string name="import_send_to_voicemail_numbers_label">Import numbers</string>
@@ -858,10 +873,6 @@
         When tapped, it will show a dialog confirming the unblocking of the number.
         [CHAR LIMIT=NONE]-->
     <string name="description_blocked_number_list_delete">Unblock number</string>
-
-    <!-- Displayed in the blocked numbers list when there are no blocked numbers.
-        [CHAR LIMIT=NONE] -->
-    <string name="listNoBlockedNumbers">No blocked numbers</string>
 
     <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
     <string name="blockNumber">Add number</string>
