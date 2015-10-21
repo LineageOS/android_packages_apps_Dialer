@@ -168,6 +168,7 @@ public class BlockedNumberFragment extends ListFragment
 
     @Override
     public void onVoicemailStatusFetched(Cursor cursor) {
+        final View hideSetting = getActivity().findViewById(R.id.hide_blocked_calls_setting);
         if (cursor == null) {
             hideSetting.setVisibility(View.GONE);
             return;
@@ -175,7 +176,6 @@ public class BlockedNumberFragment extends ListFragment
 
         final boolean hasVisualVoicemailSource =
                 mVoicemailStatusHelper.getNumberActivityVoicemailSources(cursor) > 0;
-        View hideSetting = getActivity().findViewById(R.id.hide_blocked_calls_setting);
         if (hasVisualVoicemailSource) {
             hideSetting.setVisibility(View.VISIBLE);
         } else {
