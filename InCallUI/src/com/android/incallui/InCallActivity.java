@@ -87,16 +87,24 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
 
     private AlertDialog mDialog;
 
-    /** Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume} */
+    /**
+     * Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume}
+     */
     private boolean mShowDialpadRequested;
 
-    /** Use to determine if the dialpad should be animated on show. */
+    /**
+     * Use to determine if the dialpad should be animated on show.
+     */
     private boolean mAnimateDialpadOnShow;
 
-    /** Use to determine the DTMF Text which should be pre-populated in the dialpad. */
+    /**
+     * Use to determine the DTMF Text which should be pre-populated in the dialpad.
+     */
     private String mDtmfText;
 
-    /** Use to pass parameters for showing the PostCharDialog to {@link #onResume} */
+    /**
+     * Use to pass parameters for showing the PostCharDialog to {@link #onResume}
+     */
     private boolean mShowPostCharWaitDialogOnResume;
     private String mShowPostCharWaitDialogCallId;
     private String mShowPostCharWaitDialogChars;
@@ -120,13 +128,16 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle,
                     setDefault);
         }
+
         @Override
         public void onDialogDismissed() {
             InCallPresenter.getInstance().cancelAccountSelection();
         }
     };
 
-    /** Listener for orientation changes. */
+    /**
+     * Listener for orientation changes.
+     */
     private OrientationEventListener mOrientationEventListener;
 
     /**
@@ -195,7 +206,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             mDtmfText = icicle.getString(DIALPAD_TEXT_EXTRA);
 
             SelectPhoneAccountDialogFragment dialogFragment = (SelectPhoneAccountDialogFragment)
-                getFragmentManager().findFragmentByTag(TAG_SELECT_ACCT_FRAGMENT);
+                    getFragmentManager().findFragmentByTag(TAG_SELECT_ACCT_FRAGMENT);
             if (dialogFragment != null) {
                 dialogFragment.setListener(mSelectAcctListener);
             }
@@ -297,7 +308,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     @Override
     protected void onPause() {
         Log.d(this, "onPause()...");
-        if (mDialpadFragment != null ) {
+        if (mDialpadFragment != null) {
             mDialpadFragment.onDialerKeyUp(null);
         }
 
@@ -438,7 +449,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         // push input to the dialer.
         if (mDialpadFragment != null && (mDialpadFragment.isVisible()) &&
-                (mDialpadFragment.onDialerKeyUp(event))){
+                (mDialpadFragment.onDialerKeyUp(event))) {
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_CALL) {
             // Always consume CALL to be sure the PhoneWindow won't do anything with it
@@ -521,8 +532,8 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
      * Handles changes in device rotation.
      *
      * @param rotation The new device rotation (one of: {@link Surface#ROTATION_0},
-     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
-     *      {@link Surface#ROTATION_270}).
+     * {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
+     * {@link Surface#ROTATION_270}).
      */
     private void doOrientationChanged(int rotation) {
         Log.d(this, "doOrientationChanged prevOrientation=" + sPreviousRotation +
@@ -738,10 +749,13 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         throw new IllegalStateException("Unexpected fragment: " + tag);
     }
 
-    public void showDialpadFragment(boolean show, boolean animate) {
+    /**
+     * @return {@code true} while the visibility of the dialpad has actually changed.
+     */
+    public boolean showDialpadFragment(boolean show, boolean animate) {
         // If the dialpad is already visible, don't animate in. If it's gone, don't animate out.
         if ((show && isDialpadVisible()) || (!show && !isDialpadVisible())) {
-            return;
+            return false;
         }
         // We don't do a FragmentTransaction on the hide case because it will be dealt with when
         // the listener is fired after an animation finishes.
@@ -760,6 +774,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         if (sensor != null) {
             sensor.onDialpadVisible(show);
         }
+        return true;
     }
 
     public boolean isDialpadVisible() {
@@ -774,7 +789,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
      * Hides or shows the conference manager fragment.
      *
      * @param show {@code true} if the conference manager should be shown, {@code false} if it
-     *                         should be hidden.
+     * should be hidden.
      */
     public void showConferenceFragment(boolean show) {
         showFragment(TAG_CONFERENCE_FRAGMENT, show, true);
@@ -791,7 +806,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
 
     public void showPostCharWaitDialog(String callId, String chars) {
         if (isVisible()) {
-            final PostCharDialogFragment fragment = new PostCharDialogFragment(callId,  chars);
+            final PostCharDialogFragment fragment = new PostCharDialogFragment(callId, chars);
             fragment.show(getFragmentManager(), "postCharWait");
 
             mShowPostCharWaitDialogOnResume = false;
@@ -817,7 +832,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
 
         if (!isFinishing() && !TextUtils.isEmpty(disconnectCause.getDescription())
                 && (disconnectCause.getCode() == DisconnectCause.ERROR ||
-                        disconnectCause.getCode() == DisconnectCause.RESTRICTED)) {
+                disconnectCause.getCode() == DisconnectCause.RESTRICTED)) {
             showErrorDialog(disconnectCause.getDescription());
         }
     }
@@ -846,12 +861,14 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         onDialogDismissed();
-                    }})
+                    }
+                })
                 .setOnCancelListener(new OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         onDialogDismissed();
-                    }})
+                    }
+                })
                 .create();
 
         mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -865,10 +882,10 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     }
 
     public void setExcludeFromRecents(boolean exclude) {
-        ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.AppTask> tasks = am.getAppTasks();
         int taskId = getTaskId();
-        for (int i=0; i<tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             ActivityManager.AppTask task = tasks.get(i);
             if (task.getTaskInfo().id == taskId) {
                 try {

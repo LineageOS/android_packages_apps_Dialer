@@ -51,6 +51,7 @@ public class CallButtonFragment
         extends BaseFragment<CallButtonPresenter, CallButtonPresenter.CallButtonUi>
         implements CallButtonPresenter.CallButtonUi, OnMenuItemClickListener, OnDismissListener,
         View.OnClickListener {
+
     private static final int INVALID_INDEX = -1;
     private int mButtonMaxVisible;
     // The button is currently visible in the UI
@@ -61,6 +62,7 @@ public class CallButtonFragment
     private static final int BUTTON_MENU = 3;
 
     public interface Buttons {
+
         public static final int BUTTON_AUDIO = 0;
         public static final int BUTTON_MUTE = 1;
         public static final int BUTTON_DIALPAD = 2;
@@ -153,7 +155,7 @@ public class CallButtonFragment
         mOverflowButton = (ImageButton) parent.findViewById(R.id.overflowButton);
         mOverflowButton.setOnClickListener(this);
         mManageVideoCallConferenceButton = (ImageButton) parent.findViewById(
-            R.id.manageVideoCallConferenceButton);
+                R.id.manageVideoCallConferenceButton);
         mManageVideoCallConferenceButton.setOnClickListener(this);
         return parent;
     }
@@ -181,7 +183,7 @@ public class CallButtonFragment
         int id = view.getId();
         Log.d(this, "onClick(View " + view + ", id " + id + ")...");
 
-        switch(id) {
+        switch (id) {
             case R.id.audioButton:
                 onAudioButtonClicked();
                 break;
@@ -258,11 +260,11 @@ public class CallButtonFragment
         }
 
         ImageButton[] normalButtons = {
-            mSwapButton,
-            mChangeToVideoButton,
-            mAddCallButton,
-            mMergeButton,
-            mOverflowButton
+                mSwapButton,
+                mChangeToVideoButton,
+                mAddCallButton,
+                mMergeButton,
+                mOverflowButton
         };
 
         for (ImageButton button : normalButtons) {
@@ -472,7 +474,7 @@ public class CallButtonFragment
                     }
                     addToOverflowMenu(i, button, menu);
                 }
-            } else if (visibility == BUTTON_HIDDEN){
+            } else if (visibility == BUTTON_HIDDEN) {
                 button.setVisibility(View.GONE);
             }
         }
@@ -781,9 +783,11 @@ public class CallButtonFragment
 
     @Override
     public void displayDialpad(boolean value, boolean animate) {
-        mShowDialpadButton.setSelected(value);
         if (getActivity() != null && getActivity() instanceof InCallActivity) {
-            ((InCallActivity) getActivity()).showDialpadFragment(value, animate);
+            boolean changed = ((InCallActivity) getActivity()).showDialpadFragment(value, animate);
+            if (changed) {
+                mShowDialpadButton.setSelected(value);
+            }
         }
     }
 
