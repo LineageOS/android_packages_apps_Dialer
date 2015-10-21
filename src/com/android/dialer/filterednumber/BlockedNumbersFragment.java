@@ -52,6 +52,7 @@ public class BlockedNumbersFragment extends ListFragment
 
     private Switch mHideSettingSwitch;
     private View mImportSettings;
+    private View mBlockedNumbersDisabledForEmergency;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class BlockedNumbersFragment extends ListFragment
         });
 
         mImportSettings = getActivity().findViewById(R.id.import_settings);
+        mBlockedNumbersDisabledForEmergency =
+                getActivity().findViewById(R.id.blocked_numbers_disabled_for_emergency);
 
         getActivity().findViewById(R.id.import_button).setOnClickListener(this);;
         getActivity().findViewById(R.id.view_numbers_button).setOnClickListener(this);
@@ -122,8 +125,14 @@ public class BlockedNumbersFragment extends ListFragment
                     }
                 });
 
-        mHideSettingSwitch.setChecked(FilteredNumbersUtil.shouldHideBlockedCalls(getActivity()));
+        mHideSettingSwitch.setChecked(FilteredNumbersUtil.shouldHideBlockedCalls(getContext()));
         mCallLogQueryHandler.fetchVoicemailStatus();
+
+        if (FilteredNumbersUtil.hasRecentEmergencyCall(getContext())) {
+            mBlockedNumbersDisabledForEmergency.setVisibility(View.VISIBLE);
+        } else {
+            mBlockedNumbersDisabledForEmergency.setVisibility(View.GONE);
+        }
     }
 
     @Override

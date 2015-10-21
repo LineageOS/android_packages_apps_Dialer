@@ -27,12 +27,4 @@
         android:divider="@null"
         android:headerDividersEnabled="false" />
 
-    <TextView android:id="@android:id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/blocked_number_horizontal_margin"
-        android:paddingTop="@dimen/blocked_number_top_margin"
-        android:paddingBottom="@dimen/blocked_number_bottom_margin"
-        android:text="@string/listNoBlockedNumbers" />
-
 </LinearLayout>

@@ -19,6 +19,31 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <LinearLayout android:id="@+id/blocked_numbers_disabled_for_emergency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="8dp"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_numbers_disabled_emergency_header_label"
+            android:textStyle="bold"
+            android:textColor="@color/blocked_number_disabled_emergency_header_color"
+            style="@style/BlockedNumbersDescriptionTextStyle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_numbers_disabled_emergency_desc"
+            style="@style/BlockedNumbersDescriptionTextStyle" />
+
+    </LinearLayout>
+
+
     <android.support.v7.widget.CardView
         android:id="@+id/hide_blocked_calls_setting"
         android:layout_width="match_parent"
