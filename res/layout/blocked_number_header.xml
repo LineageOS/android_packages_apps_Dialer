@@ -13,63 +13,114 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/blockList"
-        android:textColor="@color/blocked_number_header_color"
-        android:padding="@dimen/blocked_number_container_padding"
-        style="@android:style/TextAppearance.Material.Subhead" />
-
-    <RelativeLayout android:id="@+id/import_settings"
+    <android.support.v7.widget.CardView
+        android:id="@+id/hide_blocked_calls_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_marginBottom="8dp"
+        card_view:cardCornerRadius="0dp">
 
-        <TextView android:id="@+id/import_description"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/blocked_call_settings_import_description"
-            android:textSize="@dimen/blocked_number_settings_description_text_size"
-            android:paddingStart="@dimen/blocked_number_container_padding"
-            android:paddingEnd="@dimen/blocked_number_container_padding"
-            style="@style/BlockedNumbersDescriptionTextStyle" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:paddingEnd="8dp"
+            android:background="@android:color/white">
 
-        <Button android:id="@+id/import_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/import_description"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/blocked_number_container_padding"
-            android:text="@string/blocked_call_settings_import_button"
-            style="@style/DialerFlatButtonStyle" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/blocked_call_settings_hide_setting"
+                style="@style/BlockedNumbersDescriptionTextStyle" />
 
-        <Button android:id="@+id/view_numbers_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/import_description"
-            android:layout_toLeftOf="@id/import_button"
-            android:text="@string/blocked_call_settings_view_numbers_button"
-            style="@style/DialerFlatButtonStyle" />
+            <Switch android:id="@+id/hide_blocked_calls_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/import_button"
-            android:background="@color/divider_line_color"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+        </LinearLayout>
 
-    </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
-    <Button android:id="@+id/add_number_button"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="@dimen/blocked_number_container_padding"
-        android:layout_marginTop="8dp"
-        android:text="@string/blockNumber" />
+        card_view:cardCornerRadius="0dp">
 
-</merge>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <TextView android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blockList"
+                android:textColor="@color/blocked_number_header_color"
+                android:padding="@dimen/blocked_number_container_padding"
+                style="@android:style/TextAppearance.Material.Subhead" />
+
+            <RelativeLayout android:id="@+id/import_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView android:id="@+id/import_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/blocked_call_settings_import_description"
+                    android:textSize="@dimen/blocked_number_settings_description_text_size"
+                    android:paddingStart="@dimen/blocked_number_container_padding"
+                    android:paddingEnd="@dimen/blocked_number_container_padding"
+                    style="@style/BlockedNumbersDescriptionTextStyle" />
+
+                <Button android:id="@+id/import_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/import_description"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/blocked_number_container_padding"
+                    android:text="@string/blocked_call_settings_import_button"
+                    style="@style/DialerFlatButtonStyle" />
+
+                <Button android:id="@+id/view_numbers_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/import_description"
+                    android:layout_toLeftOf="@id/import_button"
+                    android:text="@string/blocked_call_settings_view_numbers_button"
+                    style="@style/DialerFlatButtonStyle" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/import_button"
+                    android:background="@color/divider_line_color"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </RelativeLayout>
+
+            <Button android:id="@+id/add_number_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/blocked_number_container_padding"
+                android:layout_marginBottom="8dp"
+                android:text="@string/blockNumber" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -14,7 +14,6 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/blocked_number_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,67 +21,18 @@
     android:paddingTop="?android:attr/actionBarSize"
     android:background="@color/blocked_number_background">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/hide_blocked_calls_setting"
+    <ListView android:id="@id/android:list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        card_view:cardCornerRadius="0dp">
+        android:divider="@null"
+        android:headerDividersEnabled="false" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="16dp"
-            android:paddingEnd="8dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/blocked_call_settings_hide_setting"
-                style="@style/BlockedNumbersDescriptionTextStyle" />
-
-            <Switch android:id="@+id/hide_blocked_calls_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp" />
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
+    <TextView android:id="@android:id/empty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="0dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_dialer_white">
-
-            <include layout="@layout/blocked_number_header" />
-
-            <ListView android:id="@id/android:list"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:drawSelectorOnTop="false"
-                android:headerDividersEnabled="false" />
-
-            <TextView android:id="@android:id/empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="@dimen/blocked_number_horizontal_margin"
-                android:paddingTop="@dimen/blocked_number_top_margin"
-                android:paddingBottom="@dimen/blocked_number_bottom_margin"
-                android:text="@string/listNoBlockedNumbers" />
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/blocked_number_horizontal_margin"
+        android:paddingTop="@dimen/blocked_number_top_margin"
+        android:paddingBottom="@dimen/blocked_number_bottom_margin"
+        android:text="@string/listNoBlockedNumbers" />
 
 </LinearLayout>
