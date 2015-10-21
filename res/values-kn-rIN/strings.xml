@@ -215,7 +215,11 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ಕರೆಗಳು"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳು"</string>
+    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
+    <skip />
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ನೀವು ಈ ಹಿಂದೆ ಗುರುತು ಮಾಡಲಾದ ಕೆಲವು ಕಾಲರ್‌ಗಳನ್ನು ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೂಲಕ ಧ್ವನಿಮೇಲ್‌ಗೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲಾಗುತ್ತದೆ."</string>
+    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
+    <skip />
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ಸಂಖ್ಯೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ಆಮದು ಮಾಡಿ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ಆಮದು ವಿಫಲವಾಗಿದೆ"</string>

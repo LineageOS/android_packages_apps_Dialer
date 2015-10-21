@@ -214,11 +214,14 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Risposte rapide"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chiamate"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Numeri bloccati"</string>
+    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
+    <skip />
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Hai già contrassegnato alcuni chiamanti da inviare automaticamente alla segreteria tramite altre app."</string>
+    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
+    <skip />
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Visualizza numeri"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
-    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
-    <skip />
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importazione non riuscita"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Sblocca numero"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nessun numero bloccato"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Aggiungi numero"</string>

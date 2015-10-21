@@ -218,7 +218,11 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"תגובות מהירות"</string>
     <string name="call_settings_label" msgid="313434211353070209">"שיחות"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"מספרים חסומים"</string>
+    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
+    <skip />
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"סימנת בעבר באמצעות יישומים אחרים כמה מתקשרים שיישלחו באופן אוטומטי לדואר קולי."</string>
+    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
+    <skip />
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"הצג מספרים"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"יבא"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"הייבוא נכשל"</string>

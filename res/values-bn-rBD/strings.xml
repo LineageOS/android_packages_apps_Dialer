@@ -214,11 +214,14 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"দ্রুত প্রতিক্রিয়াগুলি"</string>
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"অবরুদ্ধ নম্বরগুলি"</string>
+    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
+    <skip />
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"আপনি আগে থেকেই অন্য অ্যাপ্লিকেশানগুলির মাধ্যমে স্বয়ংক্রিয়ভাবে ভয়েস মেল পাঠানোর জন্য কিছু কলারকে চিহ্নিত করেছেন৷"</string>
+    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
+    <skip />
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"নম্বরগুলি দেখুন"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"আমদানি করুন"</string>
-    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
-    <skip />
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"আমদানি ব্যর্থ হয়েছে"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"নম্বর অবরোধ মুক্ত করুন"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"কোনো অবরুদ্ধ নম্বর নেই"</string>
     <string name="blockNumber" msgid="3312666193996551842">"একটি নম্বর যোগ করুন"</string>

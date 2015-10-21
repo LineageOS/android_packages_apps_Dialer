@@ -214,11 +214,14 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"द्रुत प्रतिसाद"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कॉल"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"अवरोधित केलेले नंबर"</string>
+    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
+    <skip />
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"आपण पूर्वीपासून काही कॉलरना स्वयंचलितपणे इतर अॅप्सद्वारे व्हॉइसमेलमध्ये पाठविण्यासाठी चिन्हांकित केले आहे."</string>
+    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
+    <skip />
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"नंबर पहा"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"आयात करा"</string>
-    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
-    <skip />
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"आयात अयशस्वी झाले"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नंबर अनावरोधित करा"</string>
     <string name="listNoBlockedNumbers" msgid="6606744099305857849">"कोणतेही अवरोधित केलेले नंबर नाहीत"</string>
     <string name="blockNumber" msgid="3312666193996551842">"नंबर जोडा"</string>
