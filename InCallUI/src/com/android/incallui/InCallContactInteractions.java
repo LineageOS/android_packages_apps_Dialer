@@ -16,9 +16,13 @@
 
 package com.android.incallui;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.content.Context;
 import android.location.Address;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +33,11 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,6 +49,7 @@ import java.util.Locale;
  * is a business contact or not and logic for the manipulation of data for the call context.
  */
 public class InCallContactInteractions {
+    private static final String TAG = InCallContactInteractions.class.getSimpleName();
     private Context mContext;
     private InCallContactInteractionsListAdapter mListAdapter;
     private boolean mIsBusiness;
@@ -77,11 +86,6 @@ public class InCallContactInteractions {
         return false;
     }
 
-    public void setBusinessInfo(Address address, float distance) {
-        mListAdapter.clear();
-        mListAdapter.addAll(constructBusinessContextInfo(address, distance));
-    }
-
     public View getBusinessListHeaderView() {
         if (mBusinessHeaderView == null) {
             mBusinessHeaderView = mInflater.inflate(
@@ -90,30 +94,121 @@ public class InCallContactInteractions {
         return mBusinessHeaderView;
     }
 
-    private List<ContactContextInfo> constructBusinessContextInfo(Address address, float distance) {
+    public void setBusinessInfo(Address address, float distance,
+            Pair<String, String> openingHours) {
+        mListAdapter.clear();
         List<ContactContextInfo> info = new ArrayList<ContactContextInfo>();
 
-        //TODO: hours of operation information
+        // Hours of operation
+        if (openingHours != null) {
+            BusinessContextInfo hoursInfo = constructHoursInfo(openingHours);
+            if (hoursInfo != null) {
+                info.add(hoursInfo);
+            }
+        }
 
         // Location information
-        BusinessContextInfo distanceInfo = new BusinessContextInfo();
-        distanceInfo.iconId = R.drawable.ic_location_on_white_24dp;
+        if (address != null) {
+            BusinessContextInfo locationInfo = constructLocationInfo(address, distance);
+            info.add(locationInfo);
+        }
+
+        mListAdapter.addAll(info);
+    }
+
+    /**
+     * Construct a BusinessContextInfo object containing hours of operation information.
+     * The format is:
+     *      [Open now/Closed now]
+     *      [Hours]
+     *
+     * @param openingHours
+     * @return BusinessContextInfo object with the schedule icon, the heading set to whether the
+     * business is open or not and the details set to the hours of operation.
+     */
+    private BusinessContextInfo constructHoursInfo(Pair<String, String> openingHours) {
+        return constructHoursInfoByTime(Calendar.getInstance(), openingHours);
+    }
+
+    /**
+     * Pass in arbitrary current calendar time.
+     */
+    @VisibleForTesting
+    BusinessContextInfo constructHoursInfoByTime(
+            Calendar currentTime, Pair<String, String> openingHours) {
+        BusinessContextInfo hoursInfo = new BusinessContextInfo();
+        hoursInfo.iconId = R.drawable.ic_schedule_white_24dp;
+
+        Calendar openTime = getCalendarFromTime(currentTime, openingHours.first);
+        Calendar closeTime = getCalendarFromTime(currentTime, openingHours.second);
+
+        if (openTime == null || closeTime == null) {
+            return null;
+        }
+
+        if (currentTime.after(openTime) && currentTime.before(closeTime)) {
+            hoursInfo.heading = mContext.getString(R.string.open_now);
+        } else {
+            hoursInfo.heading = mContext.getString(R.string.closed_now);
+        }
+
+        hoursInfo.detail = mContext.getString(
+                R.string.opening_hours,
+                DateFormat.getTimeFormat(mContext).format(openTime.getTime()),
+                DateFormat.getTimeFormat(mContext).format(closeTime.getTime()));
+        return hoursInfo;
+    }
+
+    /**
+     * Construct a BusinessContextInfo object with the location information of the business.
+     * The format is:
+     *      [Straight line distance in miles or kilometers]
+     *      [Address without state/country/etc.]
+     *
+     * @param address An Address object containing address details of the business
+     * @param distance The distance to the location in meters
+     * @return A BusinessContextInfo object with the location icon, the heading as the distance to
+     * the business and the details containing the address.
+     */
+    @VisibleForTesting
+    BusinessContextInfo constructLocationInfo(Address address, float distance) {
+        if (address == null) {
+            return null;
+        }
+
+        BusinessContextInfo locationInfo = new BusinessContextInfo();
+        locationInfo.iconId = R.drawable.ic_location_on_white_24dp;
         if (distance != DistanceHelper.DISTANCE_NOT_FOUND) {
             //TODO: add a setting to allow the user to select "KM" or "MI" as their distance units.
             if (Locale.US.equals(Locale.getDefault())) {
-                distanceInfo.heading = mContext.getString(R.string.distance_imperial_away,
+                locationInfo.heading = mContext.getString(R.string.distance_imperial_away,
                         distance * DistanceHelper.MILES_PER_METER);
             } else {
-                distanceInfo.heading = mContext.getString(R.string.distance_metric_away,
+                locationInfo.heading = mContext.getString(R.string.distance_metric_away,
                         distance * DistanceHelper.KILOMETERS_PER_METER);
             }
         }
-        if (address != null) {
-            distanceInfo.detail = address.getAddressLine(0);
-        }
-        info.add(distanceInfo);
+        locationInfo.detail = address.getAddressLine(0);
+        return locationInfo;
+    }
 
-        return info;
+    /**
+     * Get a calendar object set to the current calendar date and the time set to the "hhmm" string
+     * passed in.
+     */
+    private Calendar getCalendarFromTime(Calendar currentTime, String time) {
+        try {
+            Calendar newCalendar = Calendar.getInstance();
+            newCalendar.setTime(new SimpleDateFormat("hhmm").parse(time));
+            newCalendar.set(
+                    currentTime.get(Calendar.YEAR),
+                    currentTime.get(Calendar.MONTH),
+                    currentTime.get(Calendar.DATE));
+            return newCalendar;
+        } catch (ParseException e) {
+            Log.w(TAG, "Could not parse time string" + time);
+        }
+        return null;
     }
 
     /**
