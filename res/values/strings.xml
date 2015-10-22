@@ -827,7 +827,7 @@
     <string name="manage_blocked_numbers_label">Blocked numbers</string>
 
     <!-- Label for a section describing that call blocking is temporarily disabled because an
-         emergency call was made. [CHAR LIMIT=40] -->
+         emergency call was made. [CHAR LIMIT=50] -->
     <string name="blocked_numbers_disabled_emergency_header_label">
         Call blocking temporarily off
     </string>
