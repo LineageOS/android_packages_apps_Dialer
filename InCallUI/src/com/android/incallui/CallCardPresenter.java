@@ -608,8 +608,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private void updateContactInteractions() {
         if (mPrimary != null && mPrimaryContactInfo != null
-                && mPrimaryContactInfo.locationAddress != null) {
-
+                && (mPrimaryContactInfo.locationAddress != null
+                        || mPrimaryContactInfo.openingHours != null)) {
             // TODO: This is hardcoded to "isBusiness" because functionality to differentiate
             // between business and personal has not yet been added.
             if (setInCallContactInteractionsType(true /* isBusiness */)) {
@@ -619,7 +619,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
             mInCallContactInteractions.setBusinessInfo(
                     mPrimaryContactInfo.locationAddress,
-                    mDistanceHelper.calculateDistance(mPrimaryContactInfo.locationAddress));
+                    mDistanceHelper.calculateDistance(mPrimaryContactInfo.locationAddress),
+                    mPrimaryContactInfo.openingHours);
             getUi().setContactContextContent(mInCallContactInteractions.getListAdapter());
             getUi().showContactContext(mPrimary.getState() != State.INCOMING);
         }

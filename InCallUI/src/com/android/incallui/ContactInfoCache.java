@@ -30,6 +30,7 @@ import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
+import android.util.Pair;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
@@ -299,10 +300,11 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 entry.photo = mContext.getResources().getDrawable(R.drawable.img_business);
             }
 
-            String address = null;
+            boolean hasContactInteractions = false;
             if (mContactUtils != null) {
-                // This method will callback "onAddressDetailsFound".
-                address = mContactUtils.getAddressFromLookupKey(info.getLookupKey(), this);
+                // This method will callback "onContactInteractionsFound".
+                hasContactInteractions = mContactUtils.retrieveContactInteractionsFromLookupKey(
+                        info.getLookupKey(), this);
             }
 
             // Add the contact info to the cache.
@@ -310,7 +312,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             sendInfoNotifications(mCallId, entry);
 
             // If there is no image then we should not expect another callback.
-            if (info.getImageUrl() == null && address == null) {
+            if (info.getImageUrl() == null && !hasContactInteractions) {
                 // We're done, so clear callbacks
                 clearCallbacks(mCallId);
             }
@@ -322,9 +324,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
 
         @Override
-        public void onAddressDetailsFound(Address address) {
+        public void onContactInteractionsFound(Address address, Pair<String, String> openingHours) {
             final ContactCacheEntry entry = mInfoMap.get(mCallId);
             entry.locationAddress = address;
+            entry.openingHours = openingHours;
             sendContactInteractionsNotifications(mCallId, entry);
             clearCallbacks(mCallId);
         }
@@ -622,6 +625,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public Uri lookupUri; // Sent to NotificationMananger
         public String lookupKey;
         public Address locationAddress;
+        public Pair<String, String> openingHours;
         public int contactLookupResult = LogState.LOOKUP_NOT_FOUND;
 
         @Override
@@ -636,6 +640,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("contactUri", contactUri)
                     .add("displayPhotoUri", displayPhotoUri)
                     .add("locationAddress", locationAddress)
+                    .add("openingHours", openingHours)
                     .add("contactLookupResult", contactLookupResult)
                     .toString();
         }
