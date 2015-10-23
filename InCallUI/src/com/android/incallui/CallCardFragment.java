@@ -1156,7 +1156,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
         mCallButtonsContainer.setBackgroundColor(themeColors.mPrimaryColor);
         mCallSubject.setTextColor(themeColors.mPrimaryColor);
-        mCallCardContent.setBackgroundColor(themeColors.mPrimaryColor);
+        mContactContext.setBackgroundColor(themeColors.mPrimaryColor);
         //TODO: set color of message text in call context "recent messages" to be the theme color.
 
         mCurrentThemeColors = themeColors;
