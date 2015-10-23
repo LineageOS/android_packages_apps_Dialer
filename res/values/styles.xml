@@ -120,6 +120,8 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:colorButtonNormal">@color/onboarding_next_button_color</item>
+        <item name="colorButtonNormal">@color/onboarding_next_button_color</item>
     </style>
 
     <!-- Hide the actionbar title during the activity preview -->

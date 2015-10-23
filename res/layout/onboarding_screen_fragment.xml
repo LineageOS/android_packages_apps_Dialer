@@ -17,7 +17,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp" >
+    android:paddingBottom="20dp" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/onboarding_screen_background_image"
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/onboarding_screen_title"
@@ -25,42 +32,40 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/onboarding_screen_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/onboarding_primary_text_color" />
+        android:textColor="@color/onboarding_primary_text_color"
+        android:layout_marginStart="@dimen/onboard_screen_side_padding"
+        android:layout_marginEnd="@dimen/onboard_screen_side_padding" />
 
     <TextView
         android:id="@id/onboarding_screen_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/onboarding_buttons_container"
+        android:layout_above="@+id/onboard_next_button"
         android:layout_marginTop="20dp"
-        android:textColor="@color/onboarding_primary_text_color" />
+        android:textColor="@color/onboarding_primary_text_color"
+        android:layout_marginStart="@dimen/onboard_screen_side_padding"
+        android:layout_marginEnd="@dimen/onboard_screen_side_padding" />
 
-    <LinearLayout
-        android:id="@id/onboarding_buttons_container"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/onboard_skip_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@id/onboard_next_button"
+        android:layout_toStartOf="@id/onboard_next_button"
+        android:text="@string/onboarding_skip_button"
+        android:textColor="@color/onboarding_primary_text_color"
+        style="?android:attr/borderlessButtonStyle" />
+
+    <Button
+        android:id="@id/onboard_next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp" >
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="@dimen/onboard_screen_side_padding"
+        android:text="@string/onboarding_next_button"
+        android:textColor="@color/onboarding_primary_text_color"
+        style="@android:style/Widget.Material.Button" />
 
-        <Button
-            android:id="@+id/onboard_skip_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/onboarding_skip_button"
-            android:textColor="@color/onboarding_primary_text_color"
-            style="?android:attr/borderlessButtonStyle" />
-
-        <Button
-            android:id="@+id/onboard_next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/onboarding_next_button"
-            android:textColor="@color/onboarding_primary_text_color"
-            style="?android:attr/borderlessButtonStyle" />
-
-    </LinearLayout>
 </RelativeLayout>
