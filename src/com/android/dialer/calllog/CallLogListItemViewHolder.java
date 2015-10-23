@@ -276,7 +276,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (callType == CallLog.Calls.VOICEMAIL_TYPE) {
             menu.setHeaderTitle(mContext.getResources().getText(R.string.voicemail));
         } else {
-            menu.setHeaderTitle(number);
+            menu.setHeaderTitle(PhoneNumberUtils.createTtsSpannable(number));
         }
 
         menu.add(ContextMenu.NONE, R.id.context_menu_copy_to_clipboard, ContextMenu.NONE,
