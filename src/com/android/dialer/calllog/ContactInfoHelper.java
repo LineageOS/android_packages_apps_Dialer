@@ -41,6 +41,8 @@ import com.android.dialerbind.ObjectFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Utility class to look up the contact information for a given number.
  */
@@ -149,68 +151,45 @@ public class ContactInfoHelper {
      * The {@link ContactInfo#formattedNumber} field is always set to {@code null} in the returned
      * value.
      */
-    public ContactInfo lookupContactFromUri(Uri uri) {
+    private ContactInfo lookupContactFromUri(Uri uri) {
         if (uri == null) {
             return null;
         }
         if (!PermissionsUtil.hasContactsPermissions(mContext)) {
             return ContactInfo.EMPTY;
         }
+        final ContactInfo info;
+        Cursor phonesCursor =
+                mContext.getContentResolver().query(uri, PhoneQuery._PROJECTION, null, null, null);
 
-        Cursor phoneLookupCursor = mContext.getContentResolver().query(uri,
-                PhoneQuery.PHONE_LOOKUP_PROJECTION, null, null, null);
-
-        if (phoneLookupCursor == null) {
-            return null;
-        }
-
-        try {
-            if (!phoneLookupCursor.moveToFirst()) {
-                return ContactInfo.EMPTY;
+        if (phonesCursor != null) {
+            try {
+                if (phonesCursor.moveToFirst()) {
+                    info = new ContactInfo();
+                    long contactId = phonesCursor.getLong(PhoneQuery.PERSON_ID);
+                    String lookupKey = phonesCursor.getString(PhoneQuery.LOOKUP_KEY);
+                    info.lookupKey = lookupKey;
+                    info.lookupUri = Contacts.getLookupUri(contactId, lookupKey);
+                    info.name = phonesCursor.getString(PhoneQuery.NAME);
+                    info.type = phonesCursor.getInt(PhoneQuery.PHONE_TYPE);
+                    info.label = phonesCursor.getString(PhoneQuery.LABEL);
+                    info.number = phonesCursor.getString(PhoneQuery.MATCHED_NUMBER);
+                    info.normalizedNumber = phonesCursor.getString(PhoneQuery.NORMALIZED_NUMBER);
+                    info.photoId = phonesCursor.getLong(PhoneQuery.PHOTO_ID);
+                    info.photoUri =
+                            UriUtils.parseUriOrNull(phonesCursor.getString(PhoneQuery.PHOTO_URI));
+                    info.formattedNumber = null;
+                } else {
+                    info = ContactInfo.EMPTY;
+                }
+            } finally {
+                phonesCursor.close();
             }
-            String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
-            ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
-            contactInfo.nameAlternative = lookUpDisplayNameAlternative(lookupKey);
-            return contactInfo;
-        } finally {
-            phoneLookupCursor.close();
+        } else {
+            // Failed to fetch the data, ignore this request.
+            info = null;
         }
-    }
-
-    private ContactInfo createPhoneLookupContactInfo(Cursor phoneLookupCursor, String lookupKey) {
-        ContactInfo info = new ContactInfo();
-        info.lookupKey = lookupKey;
-        info.lookupUri = Contacts.getLookupUri(phoneLookupCursor.getLong(PhoneQuery.PERSON_ID),
-                lookupKey);
-        info.name = phoneLookupCursor.getString(PhoneQuery.NAME);
-        info.type = phoneLookupCursor.getInt(PhoneQuery.PHONE_TYPE);
-        info.label = phoneLookupCursor.getString(PhoneQuery.LABEL);
-        info.number = phoneLookupCursor.getString(PhoneQuery.MATCHED_NUMBER);
-        info.normalizedNumber = phoneLookupCursor.getString(PhoneQuery.NORMALIZED_NUMBER);
-        info.photoId = phoneLookupCursor.getLong(PhoneQuery.PHOTO_ID);
-        info.photoUri = UriUtils.parseUriOrNull(phoneLookupCursor.getString(PhoneQuery.PHOTO_URI));
-        info.formattedNumber = null;
         return info;
-    }
-
-    private String lookUpDisplayNameAlternative(String lookupKey) {
-        Uri uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
-
-        Cursor cursor = mContext.getContentResolver().query(uri,
-                PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, null, null, null);
-
-        if (cursor == null) {
-            return null;
-        }
-
-        try {
-            if (!cursor.moveToFirst()) {
-                return null;
-            }
-            return cursor.getString(PhoneQuery.NAME_ALTERNATIVE);
-        } finally {
-            cursor.close();
-        }
     }
 
     /**
@@ -388,6 +367,7 @@ public class ContactInfoHelper {
      */
     public static ContactInfo getContactInfo(Cursor c) {
         ContactInfo info = new ContactInfo();
+
         info.lookupUri = UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_LOOKUP_URI));
         info.name = c.getString(CallLogQuery.CACHED_NAME);
         info.type = c.getInt(CallLogQuery.CACHED_NUMBER_TYPE);
@@ -426,4 +406,6 @@ public class ContactInfoHelper {
         return mCachedNumberLookupService != null
                 && mCachedNumberLookupService.canReportAsInvalid(sourceType, objectId);
     }
+
+
 }

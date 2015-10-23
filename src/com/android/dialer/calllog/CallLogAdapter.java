@@ -16,20 +16,18 @@
 
 package com.android.dialer.calllog;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.os.Trace;
 import android.preference.PreferenceManager;
 import android.provider.CallLog;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -41,7 +39,6 @@ import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
@@ -53,6 +50,8 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.filterednumber.FilterNumberDialogFragment;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
+
+import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -119,13 +118,11 @@ public class CallLogAdapter extends GroupingListAdapter
      *  its day group.  This hashmap provides a means of determining the previous day group without
      *  having to reverse the cursor to the start of the previous day call log entry.
      */
-    private HashMap<Long, Integer> mDayGroups = new HashMap<>();
+    private HashMap<Long,Integer> mDayGroups = new HashMap<Long, Integer>();
 
     private boolean mLoading = true;
 
     private SharedPreferences mPrefs;
-
-    private ContactsPreferences mContactsPreferences;
 
     protected boolean mShowVoicemailPromoCard = false;
 
@@ -257,7 +254,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
         mTelecomCallLogCache = new TelecomCallLogCache(mContext);
-        mBlockedIdCache = new HashMap<>();
+        mBlockedIdCache = new HashMap<NumberWithCountryIso, Integer>();
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, resources, mTelecomCallLogCache);
         mCallLogListItemHelper =
@@ -267,7 +264,6 @@ public class CallLogAdapter extends GroupingListAdapter
                 new FilteredNumberAsyncQueryHandler(mContext.getContentResolver());
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        mContactsPreferences = new ContactsPreferences(mContext);
         maybeShowVoicemailPromoCard();
     }
 
@@ -315,7 +311,6 @@ public class CallLogAdapter extends GroupingListAdapter
         if (PermissionsUtil.hasPermission(mContext, android.Manifest.permission.READ_CONTACTS)) {
             mContactInfoCache.start();
         }
-        mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     }
 
     public void onPause() {
@@ -465,10 +460,9 @@ public class CallLogAdapter extends GroupingListAdapter
             details.dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
         }
 
-        String preferredName = getPreferredDisplayName(info);
-        if (!TextUtils.isEmpty(preferredName)) {
+        if (!TextUtils.isEmpty(info.name)) {
             details.contactUri = info.lookupUri;
-            details.name = preferredName;
+            details.name = info.name;
             details.numberType = info.type;
             details.numberLabel = info.label;
             details.photoUri = info.photoUri;
@@ -536,14 +530,6 @@ public class CallLogAdapter extends GroupingListAdapter
         views.showActions(mCurrentlyExpandedPosition == position);
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
-    }
-
-    private String getPreferredDisplayName(ContactInfo contactInfo) {
-        if (mContactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY ||
-                TextUtils.isEmpty(contactInfo.nameAlternative)) {
-            return contactInfo.name;
-        }
-        return contactInfo.nameAlternative;
     }
 
     @Override
