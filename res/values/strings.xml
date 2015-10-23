@@ -929,9 +929,6 @@
     <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
     <string name="permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
 
-    <!-- Shown as a prompt to turn on location permissions and/or enable location to allow nearby places search [CHAR LIMIT=NONE]-->
-    <string name="permission_no_location_for_search">To search nearby locations, allow Phone to access your location.</string>
-
     <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
     <string name="permission_place_call">To place a call, turn on the Phone permission.</string>
 
