@@ -477,8 +477,10 @@
     <string name="distance_imperial_away"><xliff:g id="distance">%.1f</xliff:g> mi away</string>
     <!-- Used to inform the user how far away a location is in kilometers. [CHAR LIMIT=NONE] -->
     <string name="distance_metric_away"><xliff:g id="distance">%.1f</xliff:g> km away</string>
-    <!-- Used to indicate the opening hours for a location as a time span. [CHAR LIMIT=NONE] -->
-    <string name="opening_hours"><xliff:g id="open_time">%s</xliff:g> - <xliff:g id="close_time">%s</xliff:g></string>
+    <!-- A shortened way to display a business address. Formatted [street address], [city/locality]. -->
+    <string name="display_address"><xliff:g id="street_address">%1$s</xliff:g>, <xliff:g id="locality">%2$s</xliff:g></string>
+    <!-- Used to indicate the opening hours for a location as a time span. e.g. "11 am - 9 pm" [CHAR LIMIT=NONE] -->
+    <string name="opening_hours"><xliff:g id="open_time">%1$s</xliff:g> - <xliff:g id="close_time">%2$s</xliff:g></string>
     <!-- Displayed when a place is open. -->
     <string name="open_now">Open now</string>
     <!-- Displayed when a place is closed. -->
