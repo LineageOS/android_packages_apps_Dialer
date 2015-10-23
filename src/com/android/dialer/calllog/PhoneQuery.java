@@ -16,19 +16,13 @@
 
 package com.android.dialer.calllog;
 
-import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
 
 /**
- * The queries to look up the {@link ContactInfo} for a given number in the Call Log.
+ * The query to look up the {@link ContactInfo} for a given number in the Call Log.
  */
 final class PhoneQuery {
-
-    /**
-     * Projection to look up the ContactInfo. Does not include DISPLAY_NAME_ALTERNATIVE as that
-     * column isn't available in ContactsCommon.PhoneLookup
-     */
-    public static final String[] PHONE_LOOKUP_PROJECTION = new String[] {
+    public static final String[] _PROJECTION = new String[] {
             PhoneLookup._ID,
             PhoneLookup.DISPLAY_NAME,
             PhoneLookup.TYPE,
@@ -48,13 +42,4 @@ final class PhoneQuery {
     public static final int PHOTO_ID = 6;
     public static final int LOOKUP_KEY = 7;
     public static final int PHOTO_URI = 8;
-
-    /**
-     * Projection to look up a contact's DISPLAY_NAME_ALTERNATIVE
-     */
-    public static final String[] DISPLAY_NAME_ALTERNATIVE_PROJECTION = new String[] {
-            Contacts.DISPLAY_NAME_ALTERNATIVE,
-    };
-
-    public static final int NAME_ALTERNATIVE = 0;
 }

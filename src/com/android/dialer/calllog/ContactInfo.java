@@ -34,7 +34,6 @@ public class ContactInfo {
      */
     public String lookupKey;
     public String name;
-    public String nameAlternative;
     public int type;
     public String label;
     public String number;
@@ -71,7 +70,6 @@ public class ContactInfo {
         ContactInfo other = (ContactInfo) obj;
         if (!UriUtils.areEqual(lookupUri, other.lookupUri)) return false;
         if (!TextUtils.equals(name, other.name)) return false;
-        if (!TextUtils.equals(nameAlternative, other.nameAlternative)) return false;
         if (type != other.type) return false;
         if (!TextUtils.equals(label, other.label)) return false;
         if (!TextUtils.equals(number, other.number)) return false;
@@ -85,11 +83,9 @@ public class ContactInfo {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).add("lookupUri", lookupUri).add("name", name)
-                .add("nameAlternative", nameAlternative)
-                .add("type", type).add("label", label)
-                .add("number", number).add("formattedNumber",formattedNumber)
-                .add("normalizedNumber", normalizedNumber).add("photoId", photoId)
+        return Objects.toStringHelper(this).add("lookupUri", lookupUri).add("name", name).add(
+                "type", type).add("label", label).add("number", number).add("formattedNumber",
+                formattedNumber).add("normalizedNumber", normalizedNumber).add("photoId", photoId)
                 .add("photoUri", photoUri).add("objectId", objectId).toString();
     }
 }
