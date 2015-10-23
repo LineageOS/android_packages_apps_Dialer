@@ -257,6 +257,7 @@ public class OnboardingActivity extends TransactionSafeActivity implements Onboa
                     SCREEN_DEFAULT_DIALER,
                     canSkipScreen(),
                     R.color.onboarding_default_dialer_screen_background_color,
+                    R.drawable.ill_onboard_default,
                     R.string.request_default_dialer_screen_title,
                     R.string.request_default_dialer_screen_content
             );
@@ -294,6 +295,7 @@ public class OnboardingActivity extends TransactionSafeActivity implements Onboa
                     SCREEN_PERMISSIONS,
                     canSkipScreen(),
                     R.color.onboarding_permissions_screen_background_color,
+                    R.drawable.ill_onboard_permissions,
                     R.string.request_permissions_screen_title,
                     R.string.request_permissions_screen_content
             );

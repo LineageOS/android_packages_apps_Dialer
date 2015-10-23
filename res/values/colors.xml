@@ -138,6 +138,7 @@
     <color name="onboarding_primary_text_color">#ffffff</color>
     <color name="onboarding_default_dialer_screen_background_color">#e06055</color>
     <color name="onboarding_permissions_screen_background_color">#689f38</color>
+    <color name="onboarding_next_button_color">#ffffff</color>
 
     <!-- Grey 700 -->
     <color name="call_detail_footer_text_color">#616161</color>

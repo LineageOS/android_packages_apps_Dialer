@@ -21,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.dialer.R;
@@ -28,7 +30,8 @@ import com.android.dialer.R;
 public class OnboardingFragment extends Fragment implements OnClickListener {
     public static final String ARG_SCREEN_ID = "arg_screen_id";
     public static final String ARG_CAN_SKIP_SCREEN = "arg_can_skip_screen";
-    public static final String ARG_BACKGROUND_COLOR_RESOURCE = "arg_background_color";
+    public static final String ARG_BACKGROUND_COLOR_RESOURCE = "arg_background_color_resource";
+    public static final String ARG_BACKGROUND_IMAGE_RESOURCE="arg_background_image_resource";
     public static final String ARG_TEXT_TITLE_RESOURCE = "arg_text_title_resource";
     public static final String ARG_TEXT_CONTENT_RESOURCE = "arg_text_content_resource";
 
@@ -42,11 +45,12 @@ public class OnboardingFragment extends Fragment implements OnClickListener {
     public OnboardingFragment() {}
 
     public OnboardingFragment(int screenId, boolean canSkipScreen, int backgroundColorResourceId,
-            int textTitleResourceId, int textContentResourceId) {
+            int backgroundImageResourceId, int textTitleResourceId, int textContentResourceId) {
         final Bundle args = new Bundle();
         args.putInt(ARG_SCREEN_ID, screenId);
         args.putBoolean(ARG_CAN_SKIP_SCREEN, canSkipScreen);
         args.putInt(ARG_BACKGROUND_COLOR_RESOURCE, backgroundColorResourceId);
+        args.putInt(ARG_BACKGROUND_IMAGE_RESOURCE, backgroundImageResourceId);
         args.putInt(ARG_TEXT_TITLE_RESOURCE, textTitleResourceId);
         args.putInt(ARG_TEXT_CONTENT_RESOURCE, textContentResourceId);
         setArguments(args);
@@ -62,12 +66,17 @@ public class OnboardingFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.onboarding_screen_fragment, container, false);
-        view.setBackgroundColor(getResources().getColor(
-                getArguments().getInt(ARG_BACKGROUND_COLOR_RESOURCE), null));
+        final int backgroundColor = getResources().getColor(
+                getArguments().getInt(ARG_BACKGROUND_COLOR_RESOURCE), null);
+        view.setBackgroundColor(backgroundColor);
+        ((ImageView) view.findViewById(R.id.onboarding_screen_background_image)).setImageResource(
+                getArguments().getInt(ARG_BACKGROUND_IMAGE_RESOURCE));
         ((TextView) view.findViewById(R.id.onboarding_screen_content)).
                 setText(getArguments().getInt(ARG_TEXT_CONTENT_RESOURCE));
         ((TextView) view.findViewById(R.id.onboarding_screen_title)).
-        setText(getArguments().getInt(ARG_TEXT_TITLE_RESOURCE));
+                setText(getArguments().getInt(ARG_TEXT_TITLE_RESOURCE));
+        ((Button) view.findViewById(R.id.onboard_next_button)).setTextColor(backgroundColor);
+
         if (!getArguments().getBoolean(ARG_CAN_SKIP_SCREEN)) {
             view.findViewById(R.id.onboard_skip_button).setVisibility(View.INVISIBLE);
         }
