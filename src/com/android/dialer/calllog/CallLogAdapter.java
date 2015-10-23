@@ -211,7 +211,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 // Only expand if actions are not already expanded, because triggering the expand
                 // function on clicks causes the action views to lose the focus indicator.
                 CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) host.getTag();
-                if (mCurrentlyExpandedPosition != viewHolder.getAdapterPosition()) {
+                if (mVoicemailPlaybackPresenter == null &&
+                        mCurrentlyExpandedPosition != viewHolder.getAdapterPosition()) {
                     expandViewHolderActions((CallLogListItemViewHolder) host.getTag());
                 }
             }
