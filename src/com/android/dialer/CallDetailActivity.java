@@ -24,7 +24,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.app.AppCompatActivity;
-import android.telecom.PhoneAccountHandle;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -45,6 +44,7 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.interactions.TouchPointManager;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.calllog.CallDetailHistoryAdapter;
@@ -109,7 +109,6 @@ public class CallDetailActivity extends AppCompatActivity
             mDetails = details[0];
             mNumber = TextUtils.isEmpty(mDetails.number) ? null : mDetails.number.toString();
             mDisplayNumber = mDetails.displayNumber;
-            final int numberPresentation = mDetails.numberPresentation;
 
             final CharSequence callLocationOrType = getNumberTypeOrLocation(mDetails);
 
@@ -117,8 +116,10 @@ public class CallDetailActivity extends AppCompatActivity
             final String displayNumberStr = mBidiFormatter.unicodeWrap(
                     displayNumber.toString(), TextDirectionHeuristics.LTR);
 
-            if (!TextUtils.isEmpty(mDetails.name)) {
-                mCallerName.setText(mDetails.name);
+            mDetails.nameDisplayOrder = mContactsPreferences.getDisplayOrder();
+
+            if (!TextUtils.isEmpty(mDetails.getPreferredName())) {
+                mCallerName.setText(mDetails.getPreferredName());
                 mCallerNumber.setText(callLocationOrType + " " + displayNumberStr);
             } else {
                 mCallerName.setText(displayNumberStr);
@@ -174,7 +175,7 @@ public class CallDetailActivity extends AppCompatActivity
          * @return The phone number type or location.
          */
         private CharSequence getNumberTypeOrLocation(PhoneCallDetails details) {
-            if (!TextUtils.isEmpty(details.name)) {
+            if (!TextUtils.isEmpty(details.namePrimary)) {
                 return Phone.getTypeLabel(mResources, details.numberType,
                         details.numberLabel);
             } else {
@@ -185,6 +186,7 @@ public class CallDetailActivity extends AppCompatActivity
 
     private Context mContext;
     private ContactInfoHelper mContactInfoHelper;
+    private ContactsPreferences mContactsPreferences;
     private CallTypeHelper mCallTypeHelper;
     private ContactPhotoManager mContactPhotoManager;
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
@@ -223,6 +225,7 @@ public class CallDetailActivity extends AppCompatActivity
         mContext = this;
         mResources = getResources();
         mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
+        mContactsPreferences = new ContactsPreferences(mContext);
         mCallTypeHelper = new CallTypeHelper(getResources());
         mFilteredNumberAsyncQueryHandler =
                 new FilteredNumberAsyncQueryHandler(getContentResolver());
@@ -280,6 +283,7 @@ public class CallDetailActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+        mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
         getCallDetails();
     }
 
@@ -436,8 +440,8 @@ public class CallDetailActivity extends AppCompatActivity
             contactType = ContactPhotoManager.TYPE_BUSINESS;
         }
 
-        final String displayName = TextUtils.isEmpty(mDetails.name)
-                ? mDetails.displayNumber : mDetails.name.toString();
+        final String displayName = TextUtils.isEmpty(mDetails.namePrimary)
+                ? mDetails.displayNumber : mDetails.namePrimary.toString();
         final String lookupKey = mDetails.contactUri == null
                 ? null : UriUtils.getLookupKeyFromUri(mDetails.contactUri);
 

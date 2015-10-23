@@ -189,7 +189,8 @@ public class CallLogAsyncTaskUtil {
 
             details.accountHandle = accountHandle;
             details.contactUri = info.lookupUri;
-            details.name = info.name;
+            details.namePrimary = info.name;
+            details.nameAlternative = info.nameAlternative;
             details.numberType = info.type;
             details.numberLabel = info.label;
             details.photoUri = info.photoUri;

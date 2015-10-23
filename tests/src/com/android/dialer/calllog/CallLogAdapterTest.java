@@ -24,17 +24,13 @@ import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.telephony.PhoneNumberUtils;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.LargeTest;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.contactinfo.ContactInfoCache;
-import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TestConstants;
 import com.google.common.collect.Lists;
@@ -54,7 +50,10 @@ public class CallLogAdapterTest extends AndroidTestCase {
     private static final String EMPTY_STRING = "";
     private static final int NO_VALUE_SET = -1;
 
-    private static final String TEST_CACHED_NAME = "name";
+    private static final String TEST_CACHED_NAME_PRIMARY = "Cached Name";
+    private static final String TEST_CACHED_NAME_ALTERNATIVE = "Name Cached";
+    private static final String CONTACT_NAME_PRIMARY = "Contact Name";
+    private static final String CONTACT_NAME_ALTERNATIVE = "Name, Contact";
     private static final String TEST_CACHED_NUMBER_LABEL = "label";
     private static final int TEST_CACHED_NUMBER_TYPE = 1;
     private static final String TEST_COUNTRY_ISO = "US";
@@ -177,6 +176,63 @@ public class CallLogAdapterTest extends AndroidTestCase {
     }
 
     @MediumTest
+    public void testBindView_FirstNameFirstOrder() {
+        createCallLogEntry();
+
+        mAdapter.getContactInfoCache()
+                .mockGetValue(createContactInfo(CONTACT_NAME_PRIMARY, CONTACT_NAME_ALTERNATIVE));
+
+        setNameDisplayOrder(getContext(), ContactsPreferences.DISPLAY_ORDER_PRIMARY);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+        assertEquals(CONTACT_NAME_PRIMARY, mViewHolder.phoneCallDetailsViews.nameView.getText());
+    }
+
+    @MediumTest
+    public void testBindView_LastNameFirstOrder() {
+        createCallLogEntry();
+
+        mAdapter.getContactInfoCache()
+                .mockGetValue(createContactInfo(CONTACT_NAME_PRIMARY, CONTACT_NAME_ALTERNATIVE));
+
+        setNameDisplayOrder(getContext(), ContactsPreferences.DISPLAY_ORDER_ALTERNATIVE);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+        assertEquals(CONTACT_NAME_ALTERNATIVE,
+                mViewHolder.phoneCallDetailsViews.nameView.getText());
+    }
+
+    @MediumTest
+    public void testBindView_NameOrderCorrectOnChange() {
+        createCallLogEntry();
+
+        mAdapter.getContactInfoCache()
+                .mockGetValue(createContactInfo(CONTACT_NAME_PRIMARY, CONTACT_NAME_ALTERNATIVE));
+
+        Context context = getContext();
+        setNameDisplayOrder(context, ContactsPreferences.DISPLAY_ORDER_PRIMARY);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+        assertEquals(CONTACT_NAME_PRIMARY,
+                mViewHolder.phoneCallDetailsViews.nameView.getText());
+
+        setNameDisplayOrder(context, ContactsPreferences.DISPLAY_ORDER_ALTERNATIVE);
+        mAdapter.onResume();
+
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+        assertEquals(CONTACT_NAME_ALTERNATIVE,
+                mViewHolder.phoneCallDetailsViews.nameView.getText());
+    }
+
+    private void setNameDisplayOrder(Context context, int displayOrder) {
+        context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE).edit().putInt(
+                ContactsPreferences.DISPLAY_ORDER_KEY, displayOrder).commit();
+    }
+
+    @MediumTest
     public void testBindView_VoicemailUri() {
         createVoicemailCallLogEntry();
 
@@ -278,7 +334,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         TestContactInfoCache.Request request = mAdapter.getContactInfoCache().requests.get(0);
 
         // The values passed to the request, match the ones in the call log cache.
-        assertEquals(TEST_CACHED_NAME, request.callLogInfo.name);
+        assertEquals(TEST_CACHED_NAME_PRIMARY, request.callLogInfo.name);
         assertEquals(TEST_CACHED_NUMBER_TYPE, request.callLogInfo.type);
         assertEquals(TEST_CACHED_NUMBER_LABEL, request.callLogInfo.label);
     }
@@ -487,7 +543,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         createCallLogEntryWithCachedValues(
                 TEST_NUMBER,
                 NO_VALUE_SET,
-                TEST_CACHED_NAME,
+                TEST_CACHED_NAME_PRIMARY,
                 TEST_CACHED_NUMBER_TYPE,
                 TEST_CACHED_NUMBER_LABEL,
                 EMPTY_STRING,
@@ -537,7 +593,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         if (inject) {
             ContactInfo contactInfo =
-                    createContactInfo(cachedName, cachedNumberType, cachedNumberLabel);
+                    createContactInfo(cachedName, cachedName, cachedNumberType, cachedNumberLabel);
             mAdapter.injectContactInfoForTest(number, TEST_COUNTRY_ISO, contactInfo);
         }
     }
@@ -578,16 +634,24 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     private ContactInfo createContactInfo() {
         return createContactInfo(
-                TEST_CACHED_NAME,
+                TEST_CACHED_NAME_PRIMARY,
+                TEST_CACHED_NAME_ALTERNATIVE);
+    }
+
+    private ContactInfo createContactInfo(String namePrimary, String nameAlternative) {
+        return createContactInfo(
+                namePrimary,
+                nameAlternative,
                 TEST_CACHED_NUMBER_TYPE,
                 TEST_CACHED_NUMBER_LABEL);
     }
 
     /** Returns a contact info with default values. */
-    private ContactInfo createContactInfo(String name, int type, String label) {
+    private ContactInfo createContactInfo(String namePrimary, String nameAlternative, int type, String label) {
         ContactInfo info = new ContactInfo();
         info.number = TEST_NUMBER;
-        info.name = name;
+        info.name = namePrimary;
+        info.nameAlternative = nameAlternative;
         info.type = type;
         info.label = label;
         info.formattedNumber = TEST_FORMATTED_NUMBER;
@@ -663,9 +727,33 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         public final List<Request> requests = Lists.newArrayList();
 
+        /**
+         * Dummy contactInfo to return in the even that the getValue method has been mocked
+         */
+        private ContactInfo mContactInfo;
+
         public TestContactInfoCache(
                 ContactInfoHelper contactInfoHelper, OnContactInfoChangedListener listener) {
             super(contactInfoHelper, listener);
+        }
+
+        /**
+         * Sets the given value to be returned by all calls to
+         * {@link #getValue(String, String, ContactInfo)}
+         *
+         * @param contactInfo the contactInfo
+         */
+        public void mockGetValue(ContactInfo contactInfo) {
+            this.mContactInfo = contactInfo;
+        }
+
+        @Override
+        public ContactInfo getValue(String number, String countryIso,
+                ContactInfo cachedContactInfo) {
+            if (mContactInfo != null) {
+                return mContactInfo;
+            }
+            return super.getValue(number, countryIso, cachedContactInfo);
         }
 
         @Override

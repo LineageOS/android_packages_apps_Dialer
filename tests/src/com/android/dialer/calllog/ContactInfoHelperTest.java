@@ -33,7 +33,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
     private static final String TEST_COUNTRY_ISO = "US";
     private static final String TEST_DISPLAY_NAME = "Display Name";
     private static final String TEST_DISPLAY_NAME_ALTERNATIVE = "Name, Display";
-    private static final String[] TEST_DISPLAY_NAME_ALTERNATIVE_ROW = new String[]{null,
+    private static final String[] TEST_DISPLAY_NAME_ALTERNATIVE_ROW = new String[]{
             TEST_DISPLAY_NAME_ALTERNATIVE};
     private static final String TEST_LOOKUP_KEY = "lookupKey";
     private static final String[] TEST_LOOKUP_ROW = new String[]{null, TEST_DISPLAY_NAME,

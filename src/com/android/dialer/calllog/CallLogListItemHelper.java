@@ -260,8 +260,8 @@ import com.android.dialer.R;
      */
     private CharSequence getNameOrNumber(PhoneCallDetails details) {
         final CharSequence recipient;
-        if (!TextUtils.isEmpty(details.name)) {
-            recipient = details.name;
+        if (!TextUtils.isEmpty(details.getPreferredName())) {
+            recipient = details.getPreferredName();
         } else {
             recipient = details.displayNumber;
         }

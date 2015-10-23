@@ -16,12 +16,14 @@
 
 package com.android.dialer;
 
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 
 import android.content.Context;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
+import android.text.TextUtils;
 
 /**
  * The details of a phone call to be shown in the UI.
@@ -50,7 +52,14 @@ public class PhoneCallDetails {
     // The duration of the call in milliseconds, or 0 for missed calls.
     public long duration;
     // The name of the contact, or the empty string.
-    public CharSequence name;
+    public CharSequence namePrimary;
+    // The alternative name of the contact, e.g. last name first, or the empty string
+    public CharSequence nameAlternative;
+    /**
+     * The user's preference on name display order, last name first or first time first.
+     * {@see ContactsPreferences}
+     */
+    public int nameDisplayOrder;
     // The type of phone, e.g., {@link Phone#TYPE_HOME}, 0 if not available.
     public int numberType;
     // The custom label associated with the phone number in the contact, or the empty string.
@@ -116,5 +125,19 @@ public class PhoneCallDetails {
                 this.numberPresentation,
                 this.formattedNumber,
                 this.isVoicemail).toString();
+    }
+
+    /**
+     * Returns the preferred name for the call details as specified by the
+     * {@link #nameDisplayOrder}
+     *
+     * @return the preferred name
+     */
+    public CharSequence getPreferredName() {
+        if (nameDisplayOrder == ContactsPreferences.DISPLAY_ORDER_PRIMARY
+                || TextUtils.isEmpty(nameAlternative)) {
+            return namePrimary;
+        }
+        return nameAlternative;
     }
 }
