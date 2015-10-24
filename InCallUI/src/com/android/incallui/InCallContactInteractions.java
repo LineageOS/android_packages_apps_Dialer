@@ -127,15 +127,15 @@ public class InCallContactInteractions {
      * business is open or not and the details set to the hours of operation.
      */
     private BusinessContextInfo constructHoursInfo(Pair<String, String> openingHours) {
-        return constructHoursInfoByTime(Calendar.getInstance(), openingHours);
+        return constructHoursInfo(Calendar.getInstance(), openingHours);
     }
 
     /**
      * Pass in arbitrary current calendar time.
      */
     @VisibleForTesting
-    BusinessContextInfo constructHoursInfoByTime(
-            Calendar currentTime, Pair<String, String> openingHours) {
+    BusinessContextInfo constructHoursInfo(Calendar currentTime,
+            Pair<String, String> openingHours) {
         BusinessContextInfo hoursInfo = new BusinessContextInfo();
         hoursInfo.iconId = R.drawable.ic_schedule_white_24dp;
 
@@ -170,8 +170,13 @@ public class InCallContactInteractions {
      * @return A BusinessContextInfo object with the location icon, the heading as the distance to
      * the business and the details containing the address.
      */
+    private BusinessContextInfo constructLocationInfo(Address address, float distance) {
+        return constructLocationInfo(Locale.getDefault(), address, distance);
+    }
+
     @VisibleForTesting
-    BusinessContextInfo constructLocationInfo(Address address, float distance) {
+    BusinessContextInfo constructLocationInfo(Locale locale, Address address,
+            float distance) {
         if (address == null) {
             return null;
         }
@@ -180,7 +185,7 @@ public class InCallContactInteractions {
         locationInfo.iconId = R.drawable.ic_location_on_white_24dp;
         if (distance != DistanceHelper.DISTANCE_NOT_FOUND) {
             //TODO: add a setting to allow the user to select "KM" or "MI" as their distance units.
-            if (Locale.US.equals(Locale.getDefault())) {
+            if (Locale.US.equals(locale)) {
                 locationInfo.heading = mContext.getString(R.string.distance_imperial_away,
                         distance * DistanceHelper.MILES_PER_METER);
             } else {
@@ -188,7 +193,14 @@ public class InCallContactInteractions {
                         distance * DistanceHelper.KILOMETERS_PER_METER);
             }
         }
-        locationInfo.detail = address.getAddressLine(0);
+        if (address.getLocality() != null) {
+            locationInfo.detail = mContext.getString(
+                    R.string.display_address,
+                    address.getAddressLine(0),
+                    address.getLocality());
+        } else {
+            locationInfo.detail = address.getAddressLine(0);
+        }
         return locationInfo;
     }
 
