@@ -23,8 +23,6 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
-import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -273,19 +271,6 @@ public class FilteredNumbersUtil {
     }
 
     public static boolean canBlockNumber(Context context, String number) {
-        if (PhoneNumberUtils.isEmergencyNumber(number)) {
-            return false;
-        }
-
-        TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        List<PhoneAccountHandle> phoneAccountHandles = telecomManager.getCallCapablePhoneAccounts();
-        for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
-            if (telecomManager.isVoiceMailNumber(phoneAccountHandle, number)) {
-                return false;
-            }
-        }
-
-        return true;
+        return !PhoneNumberUtils.isEmergencyNumber(number) && !TextUtils.isEmpty(number);
     }
 }
