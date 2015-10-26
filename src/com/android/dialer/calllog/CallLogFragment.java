@@ -33,8 +33,8 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -309,7 +309,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 mVoicemailPlaybackPresenter,
                 mIsCallLogActivity);
         mRecyclerView.setAdapter(mAdapter);
-
         fetchCalls();
         return view;
     }
