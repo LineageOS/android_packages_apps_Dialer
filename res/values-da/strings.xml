@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtigt svar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Opkald"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blokerede telefonnumre"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Opkaldsblokering er midlertidigt slået fra"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Opkaldsblokering er blevet deaktiveret, da du inden for de sidste 48 timer har kontaktet en alarmcentral. Blokeringen aktiveres automatisk igen, når perioden på 48 timer er udløbet."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importér numre"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Du har tidligere angivet, at nogle opkaldere automatisk skal sendes til telefonsvareren via andre apps."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Skjul opkald og slet talebeskeder fra blokerede numre."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Se numre"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importér"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importen mislykkedes"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Ophæv blokering af nummer"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Der er ingen blokerede numre"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Tilføj nummer"</string>
     <string name="blockList" msgid="285204949255078310">"Blokeringsliste"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Kontrollerer <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Slå tilladelsen Kontaktpersoner til for at se dine kontaktpersoner."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Slå tilladelsen Telefon til for at få adgang til din telefonsvarer,"</string>
     <string name="permission_no_search" msgid="84152933267902056">"Hvis du vil søge i dine kontaktpersoner, skal du slå tilladelserne Kontaktpersoner til."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Giv Telefon adgang til din placering for at søge efter steder i nærheden."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Slå tilladelsen Telefon til for at foretage et opkald."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Opkaldsappen har ikke tilladelse til at ændre systemindstillinger."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Her er en bedre måde at ringe på"</string>

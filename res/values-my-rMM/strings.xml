@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"အမြန် တုံ့ပြန်ချက်များ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ခေါ်ဆိုမှုများ"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"ပိတ်ထားသည့် နံ့ပါတ်များ"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"ခေါ်ဆိုမှုပိတ်ဆို့ခြင်း ယာယီပိတ်ထားသည်"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"သင်သည် လွန်ခဲ့သည့် ၄၈ နာရီအတွင်း ဤဖုန်းဖြင့် အရေးပေါ်ဌာနကိုဖုန်း ခေါ်ဆိုခဲ့သောကြောင့် ခေါ်ဆိုမှုပိတ်ဆို့ခြင်းကို ဖြုတ်ထားသည်။ ၄၈ နာရီကျော်လွန်သည်နှင့် ၎င်းကိုအလိုအလျောက် ပြန်ဖွင့်ပေးပါမည်။"</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"နံပါတ်များ သွင်းရန်"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"သင်သည် ယခင်က အချို့ခေါ်ဆိုသူများကို အလိုအလျောက် အခြား အက်ပ်များမှ တဆင့် အသံစာသို့ ပို့ရန် မှတ်ပေးခဲ့သည်။"</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"ပိတ်ဆို့ထားသည့် နံပါတ်များထံမှ ခေါ်ဆိုမှုများ နှင့် အသံစာများကို ဝှက်ထားသည်။"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"နံပါတ်များကို ကြည့်ရန်"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"တင်သွင်းရန်"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"တင်သွင်းမှု မအောင်မြင်ပါ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"နံပါတ်ကို ဖွင့်မည်"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ပိတ်ဆို့ထားသည့် နံပါတ်မရှိပါ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"နံပါတ်ထပ်ထည့်ပါ"</string>
     <string name="blockList" msgid="285204949255078310">"ပိတ်ဆို့မှု စာရင်း"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> ကိုစစ်ဆေးနေသည်"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"အဆက်အသွယ်များကိုကြည့်ရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်ကို ဖွင့်ပါ။"</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"အသံမေးလ်ကိုအသုံးပြုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="permission_no_search" msgid="84152933267902056">"သင့်အဆက်အသွယ်များကို ရှာဖွေရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်များကို ဖွင့်ပါ။"</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"အနီးတဝိုက်ရှိနေရာများကို ရှာဖွေရန်၊ တည်နေရာကိုတွေ့နိုင်ရန် သင့်ဖုန်းကို ခွင့်ပြုပါ။"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ဖုန်းခေါ်ဆိုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ဖုန်း အက်ပ်ဆီတွင် စနစ် ဆက်တင်များသို့ ရေးသားခွင့် မရှိပါ။"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ခေါ်ဆိုရာတွင် မိမိက ခေါ်ဆိုခြင်းမှာ ပိုကောင်းပါသည်"</string>

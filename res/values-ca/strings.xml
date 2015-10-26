@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostes ràpides"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Trucades"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Números bloquejats"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Bloqueig de trucades desactivat tempor."</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"El bloqueig de trucades s\'ha desactivat perquè has contactat amb els serveis d\'emergència des d\'aquest telèfon durant les últimes 48 hores. Es tornarà a activar automàticament una vegada transcorregut el període de 48 hores."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importa els números"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Has indicat que les trucades d\'alguns contactes s\'enviïn automàticament a la bústia de veu mitjançant altres aplicacions."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Amaga les trucades i suprimeix els correus de veu dels números bloquejats"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Mostra els números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Error en la importació"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloqueja el número"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"No hi ha números bloquejats"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Afegeix-hi el número"</string>
     <string name="blockList" msgid="285204949255078310">"Llista de bloquejats"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"S\'està comprovant <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Activa el permís Contactes per veure els teus contactes."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Activa el permís Telèfon per accedir a la bústia de veu."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Per cercar els teus contactes, activa els permisos de Contactes."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Permet que el Telèfon accedeixi a la teva ubicació per cercar-ne de properes."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Activa el permís Telèfon per fer una trucada."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'aplicació Telèfon no té permís per escriure a la configuració del sistema."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Arriba una millor manera de trucar"</string>

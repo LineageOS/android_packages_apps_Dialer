@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Gyors válaszok"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Hívások"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Letiltott számok"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Hívástiltás átmenetileg felfüggesztve"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Felfüggesztettük a hívások tiltását, mert az elmúlt 48 órában tárcsázta a segélyhívót erről a telefonról. A funkciót automatikusan újból engedélyezzük 48 óra elteltével."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Számok importálása"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Más alkalmazásokban korábban beállította, hogy bizonyos személyeket automatikusan a hangpostafiókba irányítsa a rendszer, amikor felhívják Önt."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Hívások elrejtése és hangpostaüzenetek törlése letiltott számok esetén."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Számok megtekintése"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importálás"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Az importálás nem sikerült"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Szám tiltásának feloldása"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nincs letiltott szám"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Szám hozzáadása"</string>
     <string name="blockList" msgid="285204949255078310">"Tiltólista"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"A(z) <xliff:g id="NUMBER">%1$s</xliff:g> ellenőrzése"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"A névjegyek megtekintéséhez kapcsolja be a Névjegyek engedélyt."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"A hangposta eléréséhez kapcsolja be a Telefon engedélyt."</string>
     <string name="permission_no_search" msgid="84152933267902056">"A névjegyek kereséséhez adja meg a Névjegyek engedélyeket."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Közeli helyek kereséséhez engedélyezze, hogy a Telefon hozzáférjen a helyadatokhoz."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Hívásindításhoz kapcsolja be a Telefon engedélyt."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"A Telefon alkalmazásnak nincs engedélye szerkeszteni a rendszerbeállításokat."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"A hívás ideálisabb módja a hívás"</string>

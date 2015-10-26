@@ -218,16 +218,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Быстрые ответы"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Вызовы"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Заблокированные номера"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Блокировка вызовов временно отключена"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Блокировка вызовов отключена, поскольку вы недавно набирали номер экстренной службы. Когда с момента звонка пройдет 48 часов, эта функция включится автоматически."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Импортировать номера"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Вы настроили перенаправление вызовов от некоторых абонентов в голосовую почту в других приложениях."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Скрывать звонки и удалять голосовые сообщения от заблокированных контактов."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Просмотреть номера"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортировать"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ошибка импорта"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Разблокировать номер"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Нет заблокированных номеров"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Добавить номер"</string>
     <string name="blockList" msgid="285204949255078310">"Черный список"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Проверка номера <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -241,7 +240,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Чтобы открыть список контактов, предоставьте приложению разрешение \"Контакты\"."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Чтобы получить доступ к голосовой почте, предоставьте приложению разрешение \"Телефон\"."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Для поиска контактов включите разрешение \"Контакты\"."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Чтобы найти места поблизости, предоставьте приложению \"Телефон\" доступ к данным о вашем местоположении."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Чтобы позвонить, предоставьте приложению разрешение \"Телефон\"."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"У приложения \"Телефон\" нет разрешения на изменение системных настроек."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Настройте приложение для звонков"</string>

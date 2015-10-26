@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respons pantas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Panggilan"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Nombor yang disekat"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Sekatan panggilan dimatikan sementara"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Sekatan panggilan telah dilumpuhkan kerana anda menghubungi perkhidmatan kecemasan daripada telefon ini dalam masa 48 jam yang lalu. Ciri ini akan didayakan semula secara automatik apabila tempoh 48 jam berakhir."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Import nombor"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Sebelum ini anda telah menandakan beberapa pemanggil dihantar ke mel suara secara automatik melalui aplikasi lain."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Sembunyi panggilan dan padamkan mel suara daripada nombor yang disekat."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Lihat nombor"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Pengimportan gagal"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Nyahsekat nombor"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Tiada nombor disekat"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Tambah nombor"</string>
     <string name="blockList" msgid="285204949255078310">"Senarai sekatan"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Menyemak <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Untuk melihat kenalan anda, hidupkan kebenaran Kenalan."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Untuk mengakses mel suara anda, hidupkan kebenaran Telefon."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Untuk mencari kenalan anda, hidupkan kebenaran Kenalan."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Untuk mencari lokasi berdekatan, benarkan Telefon untuk mengakses lokasi anda."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Untuk membuat panggilan, hidupkan kebenaran Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Apl telefon tiada kebenaran untuk menulis ke tetapan sistem."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Cara yang lebih baik untuk memanggil ialah membuat panggilan"</string>

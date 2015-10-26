@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hızlı yanıtlar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Çağrılar"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Engellenen numaralar"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Çağrı engelleme geçici olarak kapalı"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Son 48 saat içinde bu telefondan acil servislerle iletişimde bulunduğunuz için çağrı engelleme modu devre dışı bırakıldı. 48 saatlik süre dolduktan sonra çağrı engelleme modu otomatik olarak tekrar etkinleştirilecektir."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Numaraları içe aktar"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Bazı arayanları, diğer uygulamalar aracılığıyla otomatik olarak sesli mesaj gönderilmesi için önceden işaretlediniz."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Engellenen numaralardan gelen çağrıları gizle ve bırakılan sesli mesajları sil."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Numaraları Görüntüle"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"İçe aktar"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"İçe aktarma başarısız oldu"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Numaranın engellemesini kaldır"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Engellenmiş numara yok"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Numara ekle"</string>
     <string name="blockList" msgid="285204949255078310">"Engellenenler listesi"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> kontrol ediliyor"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Kişilerinizi görmek için Kişiler iznini açın."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Sesli mesajınıza erişmek için Telefon iznini açın."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kişilerinizde arama yapmak için Kişiler izinlerini açın."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Yakındaki konumlarda arama yapmak için Telefon\'un konumunuza erişmesine izin verin."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Telefon etmek için Telefon iznini açın."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefon uygulamasının sistem ayarlarına yazma izni yok."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Telefon etmenin daha iyi bir yolu var"</string>

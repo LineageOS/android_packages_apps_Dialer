@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Erantzun bizkorrak"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Deiak"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blokeatutako zenbakiak"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Deien blokeoa aldi baterako desgaituta"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Deiak blokeatzeko aukera desgaitu egin da, azken 48 orduetan larrialdi-zerbitzuekin harremanetan jarri zarelako telefono honetatik. Berriro gaituko da 48 orduko epea igaro ondoren."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Inportatu zenbakiak"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Deitzaile batzuk beste aplikazio batzuen bidez erantzungailura automatikoki bidaltzea aukeratu duzu."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Ezkutatu deiak eta ezabatu blokeatutako zenbakien erantzungailu-mezuak."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ikusi zenbakiak"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Inportatu"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ezin izan da inportatu"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desblokeatu zenbakia"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Ez dago zenbaki blokeaturik"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Gehitu zenbakia"</string>
     <string name="blockList" msgid="285204949255078310">"Dei blokeatuen zerrenda"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> egiaztatzen ari gara"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Kontaktuak ikusteko, aktibatu Kontaktuak erabiltzeko baimena."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Erantzungailuan sartzeko, aktibatu Telefonoa erabiltzeko baimena."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kontaktuak bilatzeko, aktibatu kontaktuak atzitzeko baimenak."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Inguruko kokapenak bilatzeko, baimendu Telefonoa eginbideari kokapena erabiltzea."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Deiak egiteko, aktibatu Telefonoa erabiltzeko baimena."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonoaren aplikazioak ez du baimenik sistemaren ezarpenetan ezer idazteko."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Deiak egiteko modu hobea da Telefonoa aplikazioa"</string>

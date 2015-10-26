@@ -218,16 +218,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Greiti atsakai"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Skambučiai"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Užblokuoti numeriai"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Skamb. blokavimo funkcija laikinai išj."</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Skambučių blokavimo funkcija buvo išjungta, nes iš šio telefono buvote susisiekę su pagalbos tarnybomis per pastarąsias 48 val. Ši funkcija bus automatiškai įgalinta iš naujo, kai 48 val. laikotarpis pasibaigs."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importuoti numerius"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Naudodami kitas programas anksčiau buvote pažymėję, kad kai kurie skambintojai būtų automatiškai nusiųsti į balso paštą."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Paslėpkite skambučius ir ištrinkite balso pašto pranešimus iš užblokuotų numerių."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Žr. skaičius"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importuoti"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importuoti nepavyko"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Panaikinti numerio blokavimą"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Nėra užblokuotų numerių"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Pridėti numerį"</string>
     <string name="blockList" msgid="285204949255078310">"Blokavimo sąrašas"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Tikrinamas <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -241,7 +240,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Jei norite peržiūrėti kontaktus, įjunkite Kontaktų programos leidimą."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Jei norite pasiekti balso paštą, įjunkite Telefono programos leidimą."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kad galėtumėte ieškoti kontaktų, įjunkite Kontaktų leidimus."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Jei norite ieškoti netoliese esančių vietovių, leiskite Telefono programai pasiekti vietovę."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Jei norite paskambinti, įjunkite Telefono programos leidimą."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefono programa neturi leidimo keisti sistemos nustatymų."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Geresnis būdas iškviesti – skambinti"</string>

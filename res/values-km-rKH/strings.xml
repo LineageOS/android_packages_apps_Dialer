@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ឆ្លើយតប​រហ័ស"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ការហៅ"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"លេខបានរារាំង"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"ការរារាំងការហៅត្រូវបានបិទជាបណ្តោះអាសន្ន"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ការរារាំងការហៅត្រូវបានបិទដំណើរការ ដោយសារតែអ្នកបានទាក់ទងទៅសេវាអាសន្នចេញពីទូរស័ព្ទនេះក្នុងចន្លោះពេល 48 ម៉ោងកន្លងមកនេះ។ វានឹងបើកដំណើរការឡើងវិញ បន្ទាប់ពីរយៈពេល 48 ម៉ោងផុតកំណត់។"</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"នាំចូលលេខ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"កាលពីមុនអ្នកបានដាក់សម្គាល់ឲ្យបញ្ជូនអ្នកហៅមួយចំនួនដោយស្វ័យប្រវត្តិទៅកាន់សារជាសំឡេងតាមរយៈកម្មវិធីផ្សេងទៀត។"</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"លាក់ការហៅ និងលុបសារជាសំឡេងពីលេខដែលបានរារាំង។"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"មើលលេខ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"នាំចូល"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ការនាំចូលបានបរាជ័យ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ឈប់ទប់ស្កាត់លេខ"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"គ្មានលេខដែលបានទប់ស្កាត់ទេ"</string>
     <string name="blockNumber" msgid="3312666193996551842">"បន្ថែមលេខ"</string>
     <string name="blockList" msgid="285204949255078310">"បញ្ជីទប់ស្កាត់"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"កំពុងពិនិត្យ <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"ដើម្បីមើលទំនាក់ទំនងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីទំនាក់ទំនង។"</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"ដើម្បីចូលដំណើរការសារជាសំឡេងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីហៅទូរស័ព្ទ។"</string>
     <string name="permission_no_search" msgid="84152933267902056">"ដើម្បីស្វែងរកទំនាក់ទំនងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតទំនាក់ទំនង។"</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"ដើម្បីស្វែងរកទីតាំងនៅក្បែរ សូមអនុញ្ញាតឲ្យកម្មវិធីហៅទូរស័ព្ទចូលដំណើរការទីតាំងរបស់អ្នក។"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ដើម្បីធ្វើការហៅទូរស័ព្ទ សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីហៅទូរស័ព្ទ។"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"កម្មវិធីទូរស័ព្ទមិនមានសិទ្ធិអនុញ្ញាតដើម្បីសរសេរការកំណត់ប្រព័ន្ធទេ។"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"មធ្យោបាយប្រសើរសម្រាប់ការហៅទូរស័ព្ទគឺធ្វើការហៅទូរស័ព្ទ"</string>

@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Pikavastaukset"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Puhelut"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Estetyt numerot"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Puheluesto väliaikaisesti pois käytöstä"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Puheluiden estäminen on poistettu käytöstä, koska olet ottanut yhteyttä hätäpalveluihin tästä puhelimesta viimeisen 48 tunnin aikana. Esto otetaan automaattisesti uudelleen käyttöön, kun puhelusta on kulunut 48 tuntia."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Tuo numerot"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Valitsit aiemmin muilla sovelluksilla, että tiettyjen soittajien puhelut siirretään automaattisesti vastaajaan."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Piilota estetystä numerosta tulevat puhelut ja poista ääniviestit."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Näytä numerot"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Tuo"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Tuonti epäonnistui."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Poista numeron esto"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Ei estettyjä numeroita"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Lisää numero"</string>
     <string name="blockList" msgid="285204949255078310">"Estolista"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Tarkistetaan kohdetta <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Jos haluat katsella yhteystietojasi, ota Yhteystiedot-käyttöoikeus käyttöön."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Jos haluat käyttää puhelinvastaajaa, ota Puhelin-käyttöoikeus käyttöön."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Jos haluat hakea kontaktejasi, ota käyttöön kontaktien käyttöoikeudet."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Jos haluat hakea tietoja lähellä olevista kohteista, myönnä Puhelimelle sijaintisi käyttöoikeus."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Jos haluat soittaa puheluja, ota Puhelin-käyttöoikeus käyttöön."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Puhelinsovelluksella ei ole oikeutta muokata järjestelmän asetuksia."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Parempi tapa soittaa puheluja"</string>

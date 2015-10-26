@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Mga mabilisang tugon"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Mga Tawag"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Mga naka-block na numero"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Pansamantalang na-off ang call blocking"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Na-disable ang pagba-block ng tawag dahil nakipag-ugnayan ka sa mga pang-emergency na serbisyo mula sa teleponong ito sa nakalipas na 48 oras. Awtomatiko itong muling i-enable kapag nag-expire na ang 48 oras."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"I-import ang mga numero"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Minarkahan mo na dati ang ilang tumatawag na awtomatikong ipadala sa voicemail sa pamamagitan ng iba pang mga app."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Itago ang mga tawag at i-delete ang mga voicemail mula sa mga naka-block na numero."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Tingnan ang Numero"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"I-import"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Hindi nakapag-import"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Alisin sa pagkaka-block ang numero"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Walang mga naka-block na numero"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Magdagdag ng numero"</string>
     <string name="blockList" msgid="285204949255078310">"Listahan ng mga naka-block"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Sinusuri ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Upang makita ang iyong mga contact, i-on ang pahintulot ng Mga Contact."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Upang ma-access ang iyong voicemail, i-on ang pahintulot ng Telepono."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Upang hanapin ang iyong mga contact, i-on ang mga pahintulot sa Mga Contact."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Upang maghanap sa mga kalapit na lokasyon, payagan ang Telepono na i-access ang iyong lokasyon."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Upang tumawag, i-on ang pahintulot ng Telepono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Walang pahintulot ang app ng Telepono na mag-write sa mga setting ng system."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Ang mas mainam na paraan ng pagtawag ay pagtawag"</string>

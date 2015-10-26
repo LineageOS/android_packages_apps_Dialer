@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Réponses rapides"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Appels"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Numéros bloqués"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blocage appels désactivé temporairement"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Le blocage des appels a été désactivé, car vous avez communiqué avec les services d\'urgence à partir de ce téléphone au cours des dernières 48 heures. Le blocage sera réactivé automatiquement après 48 heures."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importer les numéros"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Vous avez indiqué que certains appelants devaient automatiquement être renvoyés vers la messagerie vocale par d\'autres applications."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Masquer les appels et supprimer les messages vocaux provenant des numéros bloqués."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Afficher les numéros"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importer"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Échec de l\'importation"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Débloquer le numéro"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Aucun numéro bloqué"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Ajouter un numéro"</string>
     <string name="blockList" msgid="285204949255078310">"Liste de blocage"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Vérification du numéro <xliff:g id="NUMBER">%1$s</xliff:g> en cours..."</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Pour consulter vos contacts, activez l\'autorisation Contacts."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Pour accéder à votre messagerie vocale, activez l\'autorisation Téléphone."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Pour rechercher vos contacts et les lieux à proximité, activez les autorisations Contacts."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Pour rechercher les endroits à proximité, autorisez l\'application Téléphone à accéder à votre position."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Pour faire un appel, activez l\'autorisation Téléphone."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'application Téléphone n\'est pas autorisée à modifier les paramètres du système."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Une meilleure façon d\'appeler vous appelle"</string>

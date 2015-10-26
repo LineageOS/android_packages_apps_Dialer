@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"ブロックした番号"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"通話のブロックは一時的にOFFです"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、通話のブロックは無効になっています。48時間経過すると、通話のブロックは自動的に有効になります。"</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"番号をインポート"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"以前に一部の発信者について、他のアプリを通じて自動的にボイスメールに転送するようマークを付けています。"</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"ブロックされた番号からの通話を非表示にし、ボイスメールを削除します。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"番号を表示"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"インポート"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"インポートに失敗しました"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"番号のブロックを解除"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ブロックした番号はありません"</string>
     <string name="blockNumber" msgid="3312666193996551842">"電話番号を追加"</string>
     <string name="blockList" msgid="285204949255078310">"ブロックリスト"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g>を確認しています"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"連絡先を表示するには、連絡先権限をONにしてください。"</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"ボイスメールにアクセスするには、電話権限をONにしてください。"</string>
     <string name="permission_no_search" msgid="84152933267902056">"連絡先を検索するには、連絡先権限をONにしてください。"</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"周辺のスポットを検索するには、電話アプリに位置情報へのアクセスを許可してください。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"電話をかけるには、電話権限をONにしてください。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話アプリにはシステム設定への書き込み権限がありません。"</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"電話アプリを通話用のデフォルトアプリに設定"</string>

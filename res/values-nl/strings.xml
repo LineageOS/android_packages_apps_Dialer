@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Snelle reacties"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Oproepen"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Geblokkeerde nummers"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Oproepblokkering tijdelijk uitgeschakeld"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Oproepblokkering is uitgeschakeld omdat je in de afgelopen 48 uur contact met de noodhulpdiensten hebt opgenomen via deze telefoon. De functie wordt automatisch weer ingeschakeld nadat de periode van 48 uur is verstreken."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Nummers importeren"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Je hebt via andere apps al aangegeven dat bepaalde bellers moeten worden doorgeschakeld naar de voicemail."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Oproepen verbergen en voicemails verwijderen van geblokkeerde nummers."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Nummers bekijken"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importeren"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importeren mislukt"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Blokkeren van nummer opheffen"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Geen geblokkeerde nummers"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Nummer toevoegen"</string>
     <string name="blockList" msgid="285204949255078310">"Blokkeerlijst"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> controleren"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Als je je contacten wilt bekijken, schakel je de machtiging voor Contacten in."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Als je je voicemail wilt beluisteren, schakel je de machtiging voor Telefoon in."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Als je naar contacten wilt zoeken, schakel je de contacttoestemming in."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Als je locaties in de buurt wilt zoeken, geef je Telefoon toegang tot je locatie."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Als je iemand wilt bellen, schakel je de machtiging voor Telefoon in."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefoon-app heeft geen toestemming om systeeminstellingen te schrijven."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Een betere manier van bellen is bellen"</string>

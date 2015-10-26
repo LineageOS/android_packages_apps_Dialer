@@ -214,16 +214,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostas rápidas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chamadas"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Números bloqueados"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"O bloqueo de chamadas desactivouse temporalmente"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"O bloqueo de chamadas desactivouse porque contactaches cos servizos de emerxencias desde este teléfono nas últimas 48 horas. Volverase activar automaticamente unha vez que pase o período de 48 horas."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importar números"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Previamente marcaches algúns emisores da chamada para que se envíen automaticamente ao correo de voz a través doutras aplicacións."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Oculta chamadas e elimina correos de voz de números bloqueados."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ver números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importar"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Produciuse un erro na importación"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloquear número"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"Non hai números bloqueados"</string>
     <string name="blockNumber" msgid="3312666193996551842">"Engadir número"</string>
     <string name="blockList" msgid="285204949255078310">"Bloquear lista"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"Comprobando o <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -237,7 +236,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"Para ver os teus contactos, activa o permiso de Contactos."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"Para acceder ao correo de voz, activa o permiso de Teléfono."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Para buscar os teus contactos, activa os permisos de Contactos."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"Para buscar localizacións próximas, permite que o Teléfono acceda á túa localización."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Para facer unha chamada, activa o permiso de Teléfono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"A aplicación Teléfono non ten permiso para modificar a configuración do sistema."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Unha forma mellor de realizar chamadas"</string>

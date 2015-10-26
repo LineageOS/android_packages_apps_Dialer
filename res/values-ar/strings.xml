@@ -222,16 +222,15 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"الردود السريعة"</string>
     <string name="call_settings_label" msgid="313434211353070209">"المكالمات"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"الأرقام المحظورة"</string>
-    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
-    <skip />
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"حظر المكالمات معطّل مؤقتًا"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"تم تعطيل حظر المكالمات لأنك اتصلت بخدمات الطوارئ خلال 48 ساعة ماضية. وستتم إعادة تمكينه تلقائيًا بعد انتهاء هذه الفترة التي تبلغ 48 ساعة."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"استيراد الأرقام"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"سبق لك تعيين بعض المتصلين على الإرسال تلقائيًا للبريد الصوتي عبر التطبيقات الأخرى."</string>
-    <!-- no translation found for blocked_call_settings_hide_setting (8323988380331424420) -->
-    <skip />
+    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"يمكنك إخفاء المكالمات وحذف رسائل البريد الصوتي من الأرقام المحظورة."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"عرض الأرقام"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"استيراد"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"أخفق الاستيراد"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"إلغاء حظر الرقم"</string>
-    <string name="listNoBlockedNumbers" msgid="6606744099305857849">"ليست هناك أرقام محظورة"</string>
     <string name="blockNumber" msgid="3312666193996551842">"إضافة رقم"</string>
     <string name="blockList" msgid="285204949255078310">"قائمة الحظر"</string>
     <string name="checkingNumber" msgid="4144298066501252393">"جارٍ فحص <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
@@ -245,7 +244,6 @@
     <string name="permission_no_contacts" msgid="6237980143178936279">"للاطلاع على جهات الاتصال، شغِّل إذن جهات الاتصال."</string>
     <string name="permission_no_voicemail" msgid="8306280257799917574">"للوصول إلى البريد الصوتي، شغِّل إذن الهاتف."</string>
     <string name="permission_no_search" msgid="84152933267902056">"للبحث عن جهات الاتصال، عليك تشغيل أذونات جهات الاتصال."</string>
-    <string name="permission_no_location_for_search" msgid="7237797649497237650">"للبحث عن مواقع قريبة، يجب السماح للهاتف بالوصول إلى موقعك."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"لإجراء مكالمة، شغِّل إذن الهاتف."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ليس لدى تطبيق الهاتف إذن لتعديل إعدادات النظام."</string>
     <string name="request_default_dialer_screen_title" msgid="685643766987775056">"إليك وسيلة أفضل للاتصال"</string>
