@@ -414,6 +414,7 @@ public class DialpadFragment extends Fragment
         return mDigits != null;
     }
 
+    @VisibleForTesting
     public EditText getDigitsWidget() {
         return mDigits;
     }
@@ -970,7 +971,7 @@ public class DialpadFragment extends Fragment
                 // Just for safety we also check if the digits field is empty or not.
                 if (isDigitsEmpty() || TextUtils.equals(mDigits.getText(), "1")) {
                     // We'll try to initiate voicemail and thus we want to remove irrelevant string.
-                    removePreviousDigitIfPossible();
+                    removePreviousDigitIfPossible('1');
 
                     List<PhoneAccountHandle> subscriptionAccountHandles =
                             PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
@@ -1007,8 +1008,13 @@ public class DialpadFragment extends Fragment
                 return false;
             }
             case R.id.zero: {
-                // Remove tentative input ('0') done by onTouch().
-                removePreviousDigitIfPossible();
+                if (mPressedDialpadKeys.contains(view)) {
+                    // If the zero key is currently pressed, then the long press occurred by touch
+                    // (and not via other means like certain accessibility input methods).
+                    // Remove the '0' that was input when the key was first pressed.
+                    removePreviousDigitIfPossible('0');
+                }
+
                 keyPressed(KeyEvent.KEYCODE_PLUS);
 
                 // Stop tone immediately
@@ -1029,12 +1035,16 @@ public class DialpadFragment extends Fragment
     }
 
     /**
-     * Remove the digit just before the current position. This can be used if we want to replace
-     * the previous digit or cancel previously entered character.
+     * Remove the digit just before the current position of the cursor, iff the following conditions
+     *  are true:
+     * 1) The cursor is not positioned at index 0.
+     * 2) The digit before the current cursor position matches the current digit.
+     *
+     * @param digit to remove from the digits view.
      */
-    private void removePreviousDigitIfPossible() {
+    private void removePreviousDigitIfPossible(char digit) {
         final int currentPosition = mDigits.getSelectionStart();
-        if (currentPosition > 0) {
+        if (currentPosition > 0 && digit == mDigits.getText().charAt(currentPosition - 1)) {
             mDigits.setSelection(currentPosition);
             mDigits.getText().delete(currentPosition - 1, currentPosition);
         }
