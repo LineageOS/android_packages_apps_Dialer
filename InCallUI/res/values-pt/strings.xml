@@ -46,7 +46,7 @@
     <string name="card_title_in_call" msgid="6346543933068225205">"Em chamada"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Meu número é <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Conectando vídeo"</string>
-    <string name="card_title_video_call" msgid="5898636679563320218">"Vídeo chamada"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Vídeochamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Solicitando vídeo"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível conectar a vídeo chamada"</string>
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Solicitação de vídeo rejeitada"</string>
@@ -109,7 +109,7 @@
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gerenciar chamadas"</string>
     <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Gerenciar teleconferência"</string>
     <string name="onscreenAudioText" msgid="1710087112800041743">"Áudio"</string>
-    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Vídeo ch."</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Vídeocham."</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Alterar para chamada de voz"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Alternar câmera"</string>
     <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Pausar vídeo"</string>
@@ -175,4 +175,9 @@
     <string name="business_contact_context_title" msgid="5334864183374669765">"Informações sobre a empresa"</string>
     <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> milhas de distância"</string>
     <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> km de distância"</string>
+    <!-- no translation found for display_address (7307400970699471708) -->
+    <skip />
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Aberto agora"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Fechado agora"</string>
 </resources>

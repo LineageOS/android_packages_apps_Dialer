@@ -175,4 +175,12 @@
     <string name="business_contact_context_title" msgid="5334864183374669765">"کاروباری معلومات"</string>
     <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> میل دور"</string>
     <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> کلومیٹر دور"</string>
+    <!-- no translation found for display_address (7307400970699471708) -->
+    <skip />
+    <!-- no translation found for opening_hours (3064872780183247123) -->
+    <skip />
+    <!-- no translation found for open_now (6439301193613349163) -->
+    <skip />
+    <!-- no translation found for closed_now (9175774453982778909) -->
+    <skip />
 </resources>
