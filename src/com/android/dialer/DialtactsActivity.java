@@ -16,6 +16,8 @@
 
 package com.android.dialer;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
@@ -128,7 +130,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String KEY_FIRST_LAUNCH = "first_launch";
     private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
 
-    private static final String TAG_DIALPAD_FRAGMENT = "dialpad";
+    @VisibleForTesting
+    public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
     private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
     private static final String TAG_SMARTDIAL_SEARCH_FRAGMENT = "smartdial";
     private static final String TAG_FAVORITES_FRAGMENT = "favorites";
