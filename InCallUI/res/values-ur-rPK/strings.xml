@@ -177,10 +177,7 @@
     <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> کلومیٹر دور"</string>
     <!-- no translation found for display_address (7307400970699471708) -->
     <skip />
-    <!-- no translation found for opening_hours (3064872780183247123) -->
-    <skip />
-    <!-- no translation found for open_now (6439301193613349163) -->
-    <skip />
-    <!-- no translation found for closed_now (9175774453982778909) -->
-    <skip />
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"ابھی کھلا ہے"</string>
+    <string name="closed_now" msgid="9175774453982778909">"اب بند ہے"</string>
 </resources>
