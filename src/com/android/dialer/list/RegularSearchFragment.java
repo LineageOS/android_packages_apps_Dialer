@@ -60,11 +60,6 @@ public class RegularSearchFragment extends SearchFragment
         AnalyticsUtil.sendScreenView(this);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     public void configureDirectorySearch() {
         setDirectorySearchEnabled(true);
         setDirectoryResultLimit(SEARCH_DIRECTORY_RESULT_LIMIT);
