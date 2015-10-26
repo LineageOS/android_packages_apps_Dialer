@@ -48,7 +48,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     private EditText mSearchView;
-    private String mSearchQuery;
 
     private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
         @Override
@@ -57,12 +56,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            final String newText = s.toString();
-            if (newText.equals(mSearchQuery)) {
-                return;
-            }
-            mSearchQuery = newText;
-            setQueryString(mSearchQuery, false);
+            setQueryString(s.toString(), false);
         }
 
         @Override
@@ -86,6 +80,10 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Show list of all phone numbers when search query is empty.
+        setShowEmptyListForNullQuery(false);
+
         mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(
                 getContext().getContentResolver());
     }
