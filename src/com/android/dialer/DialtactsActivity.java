@@ -48,7 +48,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -83,16 +82,14 @@ import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.settings.DialerSettingsActivity;
-import com.android.dialer.util.IntentUtil;
-import com.android.dialer.util.TelecomUtil;
-import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.IntentUtil.CallIntentBuilder;
+import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
-import com.android.dialer.widget.SearchEditTextLayout.Callback;
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.dialerbind.ObjectFactory;
-import com.android.incallui.Call.LogState;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -756,6 +753,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mActionBarController.onDialpadUp();
 
         mListsFragment.getView().animate().alpha(0).withLayer();
+
+        //adjust the title, so the user will know where we're at when the activity start/resumes.
+        setTitle(R.string.launcherDialpadActivityLabel);
     }
 
     /**
@@ -808,6 +808,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 exitSearchUi();
             }
         }
+        //reset the title to normal.
+        setTitle(R.string.launcherActivityLabel);
     }
 
     /**

@@ -26,6 +26,9 @@
          used in the Launcher icon. -->
     <string name="launcherActivityLabel">Phone</string>
 
+
+    <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
+    <string name="launcherDialpadActivityLabel">Phone Dialpad</string>
     <!-- The description text for the dialer tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.

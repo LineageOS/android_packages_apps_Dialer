@@ -44,8 +44,8 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
-import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.R;
+import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.widget.EmptyContentView;
@@ -136,6 +136,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         listView.setBackgroundColor(res.getColor(R.color.background_dialer_results));
         listView.setClipToPadding(false);
         setVisibleScrollbarEnabled(false);
+
+        //Turn of accessibility live region as the list constantly update itself and spam messages.
+        listView.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
+        ContentChangedFilter.addToParent(listView);
+
         listView.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
