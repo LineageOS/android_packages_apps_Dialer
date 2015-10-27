@@ -57,7 +57,6 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.FilterNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
-import com.android.dialer.onboard.OnboardingActivity;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
@@ -216,11 +215,6 @@ public class CallDetailActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
-        if (OnboardingActivity.shouldStartOnboardingActivity(this)) {
-            OnboardingActivity.startOnboardingActivity(this);
-            finish();
-        }
 
         mContext = this;
         mResources = getResources();

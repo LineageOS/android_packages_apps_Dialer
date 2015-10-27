@@ -115,15 +115,6 @@
         <item name="actionOverflowButtonStyle">@style/DialtactsActionBarOverflowWhite</item>
     </style>
 
-    <style name="OnboardingFlowTheme" parent="DialtactsThemeWithoutActionBarOverlay">
-        <item name="android:windowActionBar">false</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:colorButtonNormal">@color/onboarding_next_button_color</item>
-        <item name="colorButtonNormal">@color/onboarding_next_button_color</item>
-    </style>
-
     <!-- Hide the actionbar title during the activity preview -->
     <style name="DialtactsActivityTheme" parent="DialtactsTheme">
         <!-- Styles that require AppCompat compatibility, remember to update both sets -->
