@@ -132,12 +132,12 @@ public class PhoneCallDetailsHelper {
 
         final CharSequence nameText;
         final CharSequence displayNumber = details.displayNumber;
-        if (TextUtils.isEmpty(details.name)) {
+        if (TextUtils.isEmpty(details.getPreferredName())) {
             nameText = displayNumber;
             // We have a real phone number as "nameView" so make it always LTR
             views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
         } else {
-            nameText = details.name;
+            nameText = details.getPreferredName();
         }
 
         views.nameView.setText(nameText);
@@ -200,7 +200,7 @@ public class PhoneCallDetailsHelper {
                 && !PhoneNumberHelper.isUriNumber(details.number.toString())
                 && !mTelecomCallLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
 
-            if (TextUtils.isEmpty(details.name) && !TextUtils.isEmpty(details.geocode)) {
+            if (TextUtils.isEmpty(details.namePrimary) && !TextUtils.isEmpty(details.geocode)) {
                 numberFormattedLabel = details.geocode;
             } else if (!(details.numberType == Phone.TYPE_CUSTOM
                     && TextUtils.isEmpty(details.numberLabel))) {
@@ -210,7 +210,7 @@ public class PhoneCallDetailsHelper {
             }
         }
 
-        if (!TextUtils.isEmpty(details.name) && TextUtils.isEmpty(numberFormattedLabel)) {
+        if (!TextUtils.isEmpty(details.namePrimary) && TextUtils.isEmpty(numberFormattedLabel)) {
             numberFormattedLabel = details.displayNumber;
         }
         return numberFormattedLabel;
@@ -284,8 +284,8 @@ public class PhoneCallDetailsHelper {
     @NeededForTesting
     public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
         final CharSequence nameText;
-        if (!TextUtils.isEmpty(details.name)) {
-            nameText = details.name;
+        if (!TextUtils.isEmpty(details.namePrimary)) {
+            nameText = details.namePrimary;
         } else if (!TextUtils.isEmpty(details.displayNumber)) {
             nameText = details.displayNumber;
         } else {

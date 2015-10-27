@@ -466,10 +466,11 @@ public class CallLogAdapter extends GroupingListAdapter
             details.dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
         }
 
-        String preferredName = getPreferredDisplayName(info);
-        if (!TextUtils.isEmpty(preferredName)) {
+        if (!TextUtils.isEmpty(info.name) || !TextUtils.isEmpty(info.nameAlternative)) {
             details.contactUri = info.lookupUri;
-            details.name = preferredName;
+            details.namePrimary = info.name;
+            details.nameAlternative = info.nameAlternative;
+            details.nameDisplayOrder = mContactsPreferences.getDisplayOrder();
             details.numberType = info.type;
             details.numberLabel = info.label;
             details.photoUri = info.photoUri;
