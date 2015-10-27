@@ -319,7 +319,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     public void testGetCallTypeOrLocation_DisplayNumber() {
         PhoneCallDetails details = getPhoneCallDetails("", Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER);
-        details.name = "name";
+        details.namePrimary = "name";
         assertEquals(TEST_FORMATTED_NUMBER, mHelper.getCallTypeOrLocation(details));
     }
 
@@ -418,7 +418,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
     private void setCallDetailsHeader(String name) {
         PhoneCallDetails details = getPhoneCallDetails();
-        details.name = name;
+        details.namePrimary = name;
         mHelper.setCallDetailsHeader(mNameView, details);
     }
 
