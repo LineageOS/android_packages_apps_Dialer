@@ -164,7 +164,6 @@ import com.android.dialer.R;
      */
     public CharSequence getCallDescription(PhoneCallDetails details) {
         int lastCallType = getLastCallType(details.callTypes);
-        boolean isVoiceMail = lastCallType == Calls.VOICEMAIL_TYPE;
 
         // Get the name or number of the caller.
         final CharSequence nameOrNumber = getNameOrNumber(details);
@@ -177,11 +176,6 @@ import com.android.dialer.R;
 
         SpannableStringBuilder callDescription = new SpannableStringBuilder();
 
-        // Prepend the voicemail indication.
-        if (isVoiceMail) {
-            callDescription.append(mResources.getString(R.string.description_new_voicemail));
-        }
-
         // Add number of calls if more than one.
         if (details.callTypes.length > 1) {
             callDescription.append(mResources.getString(R.string.description_num_calls,
@@ -193,7 +187,7 @@ import com.android.dialer.R;
             callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
-        int stringID = getCallDescriptionStringID(details.callTypes);
+        int stringID = getCallDescriptionStringID(details.callTypes, details.isRead);
         String accountLabel = mTelecomCallLogCache.getAccountLabel(details.accountHandle);
 
         // Use chosen string resource to build up the message.
@@ -217,15 +211,16 @@ import com.android.dialer.R;
     /**
      * Determine the appropriate string ID to describe a call for accessibility purposes.
      *
-     * @param details Call details.
+     * @param callTypes The type of call corresponding to this entry or multiple if this entry
+     * represents multiple calls grouped together.
+     * @param isRead If the entry is a voicemail, {@code true} if the voicemail is read.
      * @return String resource ID to use.
      */
-    public int getCallDescriptionStringID(int[] callTypes) {
+    public int getCallDescriptionStringID(int[] callTypes, boolean isRead) {
         int lastCallType = getLastCallType(callTypes);
         int stringID;
 
-        if (lastCallType == AppCompatConstants.CALLS_VOICEMAIL_TYPE
-                || lastCallType == AppCompatConstants.CALLS_MISSED_TYPE) {
+        if (lastCallType == AppCompatConstants.CALLS_MISSED_TYPE) {
             //Message: Missed call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
             //<PhoneAccount>.
             stringID = R.string.description_incoming_missed_call;
@@ -233,6 +228,11 @@ import com.android.dialer.R;
             //Message: Answered call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
             //<PhoneAccount>.
             stringID = R.string.description_incoming_answered_call;
+        } else if (lastCallType == AppCompatConstants.CALLS_VOICEMAIL_TYPE) {
+            //Message: (Unread) [V/v]oicemail from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
+            //<PhoneAccount>.
+            stringID = isRead ? R.string.description_read_voicemail
+                : R.string.description_unread_voicemail;
         } else {
             //Message: Call to <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>, <PhoneAccount>.
             stringID = R.string.description_outgoing_call;

@@ -313,7 +313,7 @@ public class ListsFragment extends Fragment
         if (hasActiveVoicemailProvider != mHasActiveVoicemailProvider) {
             mHasActiveVoicemailProvider = hasActiveVoicemailProvider;
             mViewPagerAdapter.notifyDataSetChanged();
-            mViewPagerTabs.setViewPager(mViewPager);
+            mViewPagerTabs.updateTab(TAB_INDEX_VOICEMAIL);
 
             mPrefs.edit()
                   .putBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, hasActiveVoicemailProvider)
@@ -344,7 +344,7 @@ public class ListsFragment extends Fragment
         }
 
         mViewPagerTabs.setUnreadCount(count, TAB_INDEX_VOICEMAIL);
-        mViewPagerTabs.setViewPager(mViewPager);
+        mViewPagerTabs.updateTab(TAB_INDEX_VOICEMAIL);
     }
 
     @Override
