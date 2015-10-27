@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -41,9 +42,12 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         implements FilterNumberDialogFragment.Callback {
     private static final String TAG = BlockedListSearchFragment.class.getSimpleName();
 
+    private static final String KEY_SEARCH_QUERY = "search_query";
+
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     private EditText mSearchView;
+    private String mSearchQuery;
 
     private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
         @Override
@@ -52,7 +56,8 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            setQueryString(s.toString(), false);
+            mSearchQuery = s.toString();
+            setQueryString(mSearchQuery, false);
         }
 
         @Override
@@ -72,7 +77,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                 }
             };
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +86,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
         mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(
                 getContext().getContentResolver());
+        if (savedInstanceState != null) {
+            mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
+        }
     }
 
     @Override
@@ -90,8 +97,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setCustomView(R.layout.search_edittext);
-        actionBar.setBackgroundDrawable(null);
-        actionBar.setElevation(0);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowHomeEnabled(false);
@@ -100,10 +105,18 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                 .getCustomView().findViewById(R.id.search_view_container);
         searchEditTextLayout.expand(false, true);
         searchEditTextLayout.setCallback(mSearchLayoutCallback);
+        searchEditTextLayout.setBackgroundDrawable(null);
 
         mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
         mSearchView.setHint(R.string.block_number_search_hint);
+
+        searchEditTextLayout.findViewById(R.id.search_box_expanded)
+                .setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+
+        if (!TextUtils.isEmpty(mSearchQuery)) {
+            mSearchView.setText(mSearchQuery);
+        }
 
         // TODO: Don't set custom text size; use default search text size.
         mSearchView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -111,10 +124,17 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_SEARCH_QUERY, getAdapter().getQueryString());
+    }
+
+    @Override
     protected ContactEntryListAdapter createListAdapter() {
         BlockedListSearchAdapter adapter = new BlockedListSearchAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(usesCallableUri());
+        adapter.setQueryString(mSearchQuery);
         return adapter;
     }
 
@@ -183,7 +203,8 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         if (activity == null) {
             return;
         }
-        activity.onBackPressed();
+
+        activity.showManagementUi();
     }
 
     @Override
