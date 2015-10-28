@@ -15,9 +15,6 @@
  */
 package com.android.dialer.list;
 
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +28,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.contacts.common.GeoUtil;
-import com.android.contacts.common.dialog.IndeterminateProgressDialog;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.dialer.R;
@@ -187,8 +183,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         if (activity == null) {
             return;
         }
-
-        activity.showManagementUi();
+        activity.onBackPressed();
     }
 
     @Override
