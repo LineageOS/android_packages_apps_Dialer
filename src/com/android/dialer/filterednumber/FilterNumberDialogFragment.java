@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -187,6 +188,7 @@ public class FilterNumberDialogFragment extends DialogFragment {
         final String undoMessage = getUnblockedMessage();
         final Callback callback = mCallback;
         final int actionTextColor = getActionTextColor();
+        final Context context = getContext();
 
         final OnUnblockNumberListener onUndoListener = new OnUnblockNumberListener() {
             @Override
@@ -216,6 +218,10 @@ public class FilterNumberDialogFragment extends DialogFragment {
 
                 if (callback != null) {
                     callback.onChangeFilteredNumberSuccess();
+                }
+
+                if (context != null && FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
+                    FilteredNumbersUtil.maybeNotifyCallBlockingDisabled(context);
                 }
             }
         };
