@@ -21,11 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefono"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefono"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Cronologia chiamate"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Segnala numero sbagliato"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"Copia numero negli appunti"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"Copia trascrizione negli appunti"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Modifica numero prima di chiamare"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Elimina da cronologia chiamate"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"Segnala numero sbagliato"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"Copia numero"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"Copia trascrizione"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"Blocca numero"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"Numero <xliff:g id="NUMBER">%1$s</xliff:g> aggiunto all\'elenco di numeri bloccati"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Sblocca numero"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Numero <xliff:g id="NUMBER">%1$s</xliff:g> rimosso dall\'elenco di numeri bloccati"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"ANNULLA"</string>
+    <string name="call_details_delete" msgid="1833359621896346955">"Elimina"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Modifica numero prima di effettuare la chiamata"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Cancella cronologia chiamate"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Elimina messaggi della segreteria"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mes vocali eliminati"</string>
@@ -71,7 +76,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Cronologia chiamate"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Altre opzioni"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"tastierino"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"Copia"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Mostra solo in uscita"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Mostra solo in arrivo"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"Mostra solo senza risposta"</string>
@@ -94,12 +98,13 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Videochiamata in uscita"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Videochiamata persa"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Segreteria"</string>
+    <string name="type_rejected" msgid="7783201828312472691">"Chiamata rifiutata"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Chiamata bloccata"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Chiamate in arrivo"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Riproduci messaggio vocale"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Visualizza <xliff:g id="NAME">%1$s</xliff:g> contatto"</string>
     <string name="description_call" msgid="3443678121983852666">"Chiama <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Dettagli contatto <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Nuovo messaggio di segreteria."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> chiamate."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videochiamata."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Invia SMS a <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -112,6 +117,9 @@
     <string name="payphone" msgid="7726415831153618726">"Cabina telefonica"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> secondi"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min e <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> alle ore <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Impossibile chiamare questo numero"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Per configurare la segreteria, seleziona Menu &gt; Impostazioni."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per chiamare la segreteria, disattiva la modalità aereo."</string>
@@ -125,6 +133,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Impossibile effettuare una telefonata perché l\'applicazione Telefono è stata disattivata."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Sul dispositivo non sono presenti app per tale azione"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Cerca nei contatti"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Aggiungi numero/cerca contatti"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"La cronologia delle chiamate è vuota"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Fai una chiamata"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nessuna chiamata senza risposta."</string>
@@ -134,6 +143,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Tutte"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perse"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Segreteria"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Aggiungere il numero <xliff:g id="NUMBER">%1$s</xliff:g> all\'elenco di numeri bloccati?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"Blocca numero"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Rimuovere il numero <xliff:g id="NUMBER">%1$s</xliff:g> dall\'elenco di numeri bloccati?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"Sblocca numero"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Composizione rapida"</string>
     <string name="tab_history" msgid="2563144697322434940">"Cronologia chiamate"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contatti"</string>
@@ -145,6 +158,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Aggiungi a un contatto"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Invia SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fai una videochiamata"</string>
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blocca numero"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nuove chiamate senza risposta"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Nessun preferito disponibile nella Composizione rapida"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Aggiungi un preferito"</string>
@@ -158,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Chiama <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Chiamata senza risposta di <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Risposta alla chiamata di <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Chiamata a <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"da o verso <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Chiama"</string>
@@ -198,14 +216,29 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Risposte rapide"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chiamate"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Numeri bloccati"</string>
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blocco chiamate temporaneam. disattivato"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Il blocco chiamate è stato disattivato perché hai contattato servizi di emergenza da questo telefono nelle ultime 48 ore. Verrà riattivato automaticamente una volta trascorso il periodo di 48 ore."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importa numeri"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Hai già contrassegnato alcuni chiamanti da inviare automaticamente alla segreteria tramite altre app."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Nascondi le chiamate ed elimina automaticamente i nuovi messaggi vocali dei numeri bloccati."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Visualizza numeri"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importazione non riuscita"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Sblocca numero"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Aggiungi numero"</string>
+    <string name="blockList" msgid="285204949255078310">"Elenco di numeri bloccati"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Controllo di <xliff:g id="NUMBER">%1$s</xliff:g> in corso"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> non è valido."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> è già bloccato."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Account di chiamata"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Attiva"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Imposta autorizzazioni"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Per attivare la composizione rapida,\n attiva l\'autorizzazione Contatti."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Per accedere al registro chiamate,\n attiva l\'autorizzazione Telefono."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Per accedere ai tuoi contatti,\n attiva l\'autorizzazione Contatti."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Per accedere alla segreteria,\n attiva l\'autorizzazione Telefono."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Per attivare la composizione rapida, attiva l\'autorizzazione Contatti."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Per accedere al registro chiamate, attiva l\'autorizzazione sul telefono."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Per accedere ai tuoi contatti, attiva l\'autorizzazione Contatti."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Per accedere alla segreteria, attiva l\'autorizzazione sul telefono."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Per cercare nei tuoi contatti, attiva le autorizzazioni Contatti."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Per fare una telefonata,\n attiva l\'autorizzazione Telefono."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Per fare una chiamata, attiva l\'autorizzazione sul telefono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'app Telefono non dispone dell\'autorizzazione per modificare le impostazioni di sistema."</string>
 </resources>

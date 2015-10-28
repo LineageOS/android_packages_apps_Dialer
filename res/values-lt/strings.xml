@@ -21,11 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefonas"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefonas"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Skambučių istorija"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Pranešti apie netikslų numerį"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"Kopijuoti numerį į iškarpinę"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"Kopijuoti transkribuotą tekstą į iškarpinę"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Redaguoti numerį prieš skambinant"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Ištrinti iš skambučių istorijos"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"Pranešti apie netikslų numerį"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"Kopijuoti numerį"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"Kopijuoti transkribuotą tekstą"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"Blokuoti numerį"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> pridėtas prie blokavimo sąrašo"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Panaikinti numerio blokavimą"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> pašalintas iš blokavimo sąrašo"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"ANULIUOTI"</string>
+    <string name="call_details_delete" msgid="1833359621896346955">"Ištrinti"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Redaguoti numerį prieš skambinant"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Išvalyti skambučių istoriją"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ištrinti balso pašto pranešim."</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Balso pšt. ištrintas"</string>
@@ -73,7 +78,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Skambučių istorija"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Daugiau parinkčių"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"skambinimo skydelis"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"Kopijuoti"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Rodyti tik išsiunčiamus"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Rodyti tik gaunamus"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"Rodyti tik praleistus"</string>
@@ -96,12 +100,13 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Siunčiamasis vaizdo skambutis"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Praleistas vaizdo skambutis"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Balso paštas"</string>
+    <string name="type_rejected" msgid="7783201828312472691">"Atmestas skambutis"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Užblokuotas skambutis"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Gaunami skambučiai"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Paleisti balso pašto pranešimus"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Žiūrėti kontaktą <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Skambinti <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Išsami kontaktinė informacija: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Naujas balso pašto pranešimas."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"Skambučių: <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Vaizdo skambutis."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Siųsti SMS <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -114,6 +119,9 @@
     <string name="payphone" msgid="7726415831153618726">"Taksofonas"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> sek."</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sek."</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Negalima skambinti šiuo numeriu"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Jei norite nustatyti balso paštą, eikite į „Meniu“ &gt; „Nustatymai“."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Jei norite skambinti į balso paštą, išjunkite lėktuvo režimą."</string>
@@ -127,6 +135,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Negalima skambinti telefonu, nes Telefono programa išjungta."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Šiame įrenginyje nėra tam skirtos programos"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Ieškokite kontaktų"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Prid. nr. arba iešk. kontaktų"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Skambučių istorija yra tuščia"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Skambinti"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nėra jokių praleistų skambučių."</string>
@@ -136,6 +145,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Visi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Praleisti"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Balso paštas"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Pridėti <xliff:g id="NUMBER">%1$s</xliff:g> prie blokavimo sąrašo?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"Blokuoti numerį"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Pašalinti <xliff:g id="NUMBER">%1$s</xliff:g> iš blokavimo sąrašo?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"Panaikinti numerio blokavimą"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Spartusis rinkimas"</string>
     <string name="tab_history" msgid="2563144697322434940">"Skambučių istorija"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktai"</string>
@@ -147,6 +160,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Pridėti prie kontakto"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Siųsti SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Atlikti vaizdo skambutį"</string>
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blokuoti numerį"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Naujų praleistų skambučių: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Dar nieko neįtraukėte į sparčiojo rinkimo sąrašą"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Pridėti mėgstamiausią veiklą"</string>
@@ -160,6 +174,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Skambinti <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Praleistas skambutis: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Atsakytas skambutis: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Skambutis: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Skambinti"</string>
@@ -202,14 +220,29 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Greiti atsakai"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Skambučiai"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Užblokuoti numeriai"</string>
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Skamb. blokavimo funkcija laikinai išj."</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Skambučių blokavimo funkcija buvo išjungta, nes iš šio telefono buvote susisiekę su pagalbos tarnybomis per pastarąsias 48 val. Ši funkcija bus automatiškai įgalinta iš naujo, kai 48 val. laikotarpis pasibaigs."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importuoti numerius"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Naudodami kitas programas anksčiau buvote pažymėję, kad kai kurie skambintojai būtų automatiškai nusiųsti į balso paštą."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Slėpti skambučius ir automatiškai ištrinti balso pašto pranešimus iš užblokuotų numerių."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Žr. skaičius"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importuoti"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importuoti nepavyko"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Panaikinti numerio blokavimą"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Pridėti numerį"</string>
+    <string name="blockList" msgid="285204949255078310">"Blokavimo sąrašas"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Tikrinamas <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> yra netinkamas numeris."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> jau užblokuotas."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Skambinimo paskyros"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Įjungti"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Nustatyti leidimus"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Kad įgalintumėte spartųjį rinkimą,\n įjunkite Kontaktų leidimą."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Norėdami peržiūrėti skambučių žurnalą,\n įjunkite telefono leidimą."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Norėdami peržiūrėti kontaktus,\n įjunkite kontaktų leidimą."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Norėdami pasiekti balso paštą,\n įjunkite telefono leidimą."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Jei norite įgalinti spartųjį rinkimą, įjunkite Kontaktų programos leidimą."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Jei norite peržiūrėti skambučių žurnalą, įjunkite Telefono programos leidimą."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Jei norite peržiūrėti kontaktus, įjunkite Kontaktų programos leidimą."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Jei norite pasiekti balso paštą, įjunkite Telefono programos leidimą."</string>
     <string name="permission_no_search" msgid="84152933267902056">"Kad galėtumėte ieškoti kontaktų, įjunkite Kontaktų leidimus."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Norėdami skambinti,\n įjunkite telefono leidimą."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Jei norite paskambinti, įjunkite Telefono programos leidimą."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefono programa neturi leidimo keisti sistemos nustatymų."</string>
 </resources>

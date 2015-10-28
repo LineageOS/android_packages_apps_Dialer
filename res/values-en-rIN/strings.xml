@@ -21,11 +21,16 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Phone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Phone"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Call history"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Report inaccurate number"</string>
-    <string name="copy_number_text" msgid="5160503544191297770">"Copy number to clipboard"</string>
-    <string name="copy_transcript_text" msgid="2979980182146897370">"Copy transcription to clipboard"</string>
-    <string name="call_log_edit_number_before_call" msgid="812234391186201782">"Edit number before call"</string>
-    <string name="call_log_remove_from_call_log" msgid="4538253384399338463">"Delete from call history"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"Report inaccurate number"</string>
+    <string name="action_copy_number_text" msgid="588249522108594155">"Copy number"</string>
+    <string name="copy_transcript_text" msgid="5652787482893879382">"Copy transcription"</string>
+    <string name="action_block_number" msgid="1482657602262262134">"Block number"</string>
+    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> added to block list"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"Unblock number"</string>
+    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> removed from block list"</string>
+    <string name="block_number_undo" msgid="591338370336724156">"UNDO"</string>
+    <string name="call_details_delete" msgid="1833359621896346955">"delete"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Edit number before call"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Clear call history"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Delete voicemail"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Voicemail deleted"</string>
@@ -71,7 +76,6 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Call History"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"More options"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"dial pad"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"Copy"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Show outgoing only"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Show incoming only"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"Show missed only"</string>
@@ -94,12 +98,13 @@
     <string name="type_outgoing_video" msgid="2858140021680755266">"Outgoing video call"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Missed video call"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Voicemail"</string>
+    <string name="type_rejected" msgid="7783201828312472691">"Declined call"</string>
+    <string name="type_blocked" msgid="3521686227115330015">"Blocked call"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Incoming calls"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Play voicemail"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"View contact <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Call <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Contact details for <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"New voicemail."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> calls."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Video call."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Send SMS to <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -112,6 +117,9 @@
     <string name="payphone" msgid="7726415831153618726">"Payphone"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> sec"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> at <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Can\'t call this number"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"To set up voicemail, go to Menu &gt; Settings."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"To call voicemail, first turn off Aeroplane mode."</string>
@@ -125,6 +133,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"Cannot make a phone call because the Phone application has been disabled."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"No app for that on this device"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Search contacts"</string>
+    <string name="block_number_search_hint" msgid="5409571607043872758">"Add number or search contacts"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Your call history is empty"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Make a call"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"You have no missed calls."</string>
@@ -134,6 +143,10 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"All"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Missed"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
+    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Add <xliff:g id="NUMBER">%1$s</xliff:g> to your block list?"</string>
+    <string name="blockNumberOk" msgid="7100294572365950840">"Block number"</string>
+    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Remove <xliff:g id="NUMBER">%1$s</xliff:g> from your block list?"</string>
+    <string name="unblockNumberOk" msgid="6946016365620899872">"Unblock number"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Speed dial"</string>
     <string name="tab_history" msgid="2563144697322434940">"Call history"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contacts"</string>
@@ -145,6 +158,7 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Add to a contact"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Send SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Make video call"</string>
+    <string name="search_shortcut_block_number" msgid="4787156645163436072">"Block number"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> new missed calls"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"No one is on your speed dial yet"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Add a favourite"</string>
@@ -158,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Call <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Missed call from <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Answered call from <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Call to <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"on <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Call"</string>
@@ -198,14 +216,29 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Quick responses"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Calls"</string>
+    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blocked numbers"</string>
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Call blocking temporarily off"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Call blocking has been disabled because you contacted emergency services from this phone within the last 48 hours. It will be automatically re-enabled once the 48 hour period expires."</string>
+    <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Import numbers"</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"You previously marked some callers to be automatically sent to voicemail via other apps."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Hide calls and automatically delete new voicemails from blocked numbers."</string>
+    <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"View Numbers"</string>
+    <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import"</string>
+    <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import failed"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Unblock number"</string>
+    <string name="blockNumber" msgid="3312666193996551842">"Add number"</string>
+    <string name="blockList" msgid="285204949255078310">"Block list"</string>
+    <string name="checkingNumber" msgid="4144298066501252393">"Checking <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> is invalid."</string>
+    <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> is already blocked."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Calling accounts"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Turn on"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Set permissions"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"To enable speed dial,\n turn on the Contacts permission."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"To see your call log,\n turn on the Phone permission."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"To see your contacts,\n turn on the Contacts permission."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"To access your voicemail,\n turn on the Phone permission."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"To enable speed dial, turn on the Contacts permission."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"To see your call log, turn on the Phone permission."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"To see your contacts, turn on the Contacts permission."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"To access your voicemail, turn on the Phone permission."</string>
     <string name="permission_no_search" msgid="84152933267902056">"To search your contacts, turn on the Contacts permissions."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"To place a call,\n turn on the Phone permission."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"To place a call, turn on the Phone permission."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Phone app does not have permission to write to system settings."</string>
 </resources>
