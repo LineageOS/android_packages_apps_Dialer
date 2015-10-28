@@ -360,7 +360,6 @@ public class CallDetailActivity extends AppCompatActivity
             case R.id.call_detail_action_block:
                 BlockNumberDialogFragment.show(
                         mBlockedNumberId,
-                        null /* normalizedNumber */,
                         mNumber,
                         mDetails.countryIso,
                         mDisplayNumber,

@@ -58,7 +58,6 @@ public class BlockNumberDialogFragment extends DialogFragment {
     private static final String BLOCK_DIALOG_FRAGMENT = "BlockNumberDialog";
 
     private static final String ARG_BLOCK_ID = "argBlockId";
-    private static final String ARG_NORMALIZED_NUMBER = "argNormalizedNumber";
     private static final String ARG_NUMBER = "argNumber";
     private static final String ARG_COUNTRY_ISO = "argCountryIso";
     private static final String ARG_DISPLAY_NUMBER = "argDisplayNumber";
@@ -66,7 +65,6 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
     private String mNumber;
     private String mDisplayNumber;
-    private String mNormalizedNumber;
     private String mCountryIso;
 
     private FilteredNumberAsyncQueryHandler mHandler;
@@ -75,7 +73,6 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
     public static void show(
             Integer blockId,
-            String normalizedNumber,
             String number,
             String countryIso,
             String displayNumber,
@@ -83,7 +80,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
             FragmentManager fragmentManager,
             Callback callback) {
         final BlockNumberDialogFragment newFragment = BlockNumberDialogFragment.newInstance(
-                blockId, normalizedNumber, number, countryIso, displayNumber, parentViewId);
+                blockId, number, countryIso, displayNumber, parentViewId);
 
         newFragment.setCallback(callback);
         newFragment.show(fragmentManager, BlockNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
@@ -91,7 +88,6 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
     private static BlockNumberDialogFragment newInstance(
             Integer blockId,
-            String normalizedNumber,
             String number,
             String countryIso,
             String displayNumber,
@@ -104,7 +100,6 @@ public class BlockNumberDialogFragment extends DialogFragment {
         if (parentViewId != null) {
             args.putInt(ARG_PARENT_VIEW_ID, parentViewId.intValue());
         }
-        args.putString(ARG_NORMALIZED_NUMBER, normalizedNumber);
         args.putString(ARG_NUMBER, number);
         args.putString(ARG_COUNTRY_ISO, countryIso);
         args.putString(ARG_DISPLAY_NUMBER, displayNumber);
@@ -119,12 +114,8 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
         mNumber = getArguments().getString(ARG_NUMBER);
         mDisplayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
-        mNormalizedNumber = getArguments().getString(ARG_NORMALIZED_NUMBER);
         mCountryIso = getArguments().getString(ARG_COUNTRY_ISO);
 
-        if (TextUtils.isEmpty(mNormalizedNumber)) {
-            mNormalizedNumber = PhoneNumberUtils.formatNumberToE164(mNumber, mCountryIso);
-        }
         if (TextUtils.isEmpty(mDisplayNumber)) {
             mDisplayNumber = mNumber;
         }
@@ -160,7 +151,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNormalizedNumber)) {
+        if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNumber)) {
             dismiss();
             Toast.makeText(getContext(), getString(R.string.invalidNumber, mDisplayNumber),
                     Toast.LENGTH_SHORT).show();
@@ -237,7 +228,6 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
         mHandler.blockNumber(
                 onBlockNumberListener,
-                mNormalizedNumber,
                 mNumber,
                 mCountryIso);
     }
