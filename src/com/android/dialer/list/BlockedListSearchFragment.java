@@ -203,8 +203,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         if (activity == null) {
             return;
         }
-
-        activity.showManagementUi();
+        activity.onBackPressed();
     }
 
     @Override
