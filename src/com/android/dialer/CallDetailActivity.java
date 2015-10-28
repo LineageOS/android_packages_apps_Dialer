@@ -394,7 +394,7 @@ public class CallDetailActivity extends AppCompatActivity
             return;
         }
 
-        boolean failed = mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+        final boolean success = mFilteredNumberAsyncQueryHandler.isBlockedNumber(
                 new OnCheckBlockedListener() {
                     @Override
                     public void onCheckComplete(Integer id) {
@@ -403,9 +403,9 @@ public class CallDetailActivity extends AppCompatActivity
                         updateContactPhoto();
                         updateBlockActionItem();
                     }
-                }, null, mNumber, mDetails.countryIso);
+                }, mNumber, mDetails.countryIso);
 
-        if (failed) {
+        if (!success) {
             updateContactPhoto();
             updateBlockActionItem();
         }

@@ -303,7 +303,7 @@ public class FilteredNumbersUtil {
         // If the user has blocked numbers, notify that call blocking is temporarily disabled.
         FilteredNumberAsyncQueryHandler queryHandler =
                 new FilteredNumberAsyncQueryHandler(context.getContentResolver());
-        queryHandler.hasBlockedNumbersAsync(new OnHasBlockedNumbersListener() {
+        queryHandler.hasBlockedNumbers(new OnHasBlockedNumbersListener() {
             @Override
             public void onHasBlockedNumbers(boolean hasBlockedNumbers) {
                 if (context == null || !hasBlockedNumbers) {
