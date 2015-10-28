@@ -79,6 +79,13 @@ public class BlockedNumbersFragment extends ListFragment
                 FilteredNumbersUtil.setShouldHideBlockedCalls(getActivity(), isChecked);
             }
         });
+        getActivity().findViewById(R.id.hide_blocked_calls_setting).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        mHideSettingSwitch.toggle();
+                    }
+                });
 
         mImportSettings = getActivity().findViewById(R.id.import_settings);
         mBlockedNumbersDisabledForEmergency =
