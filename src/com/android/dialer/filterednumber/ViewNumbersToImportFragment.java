@@ -72,6 +72,10 @@ public class ViewNumbersToImportFragment extends ListFragment
 
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle(R.string.import_send_to_voicemail_numbers_label);
+        actionBar.setDisplayShowCustomEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         getActivity().findViewById(R.id.cancel_button).setOnClickListener(this);
         getActivity().findViewById(R.id.import_button).setOnClickListener(this);

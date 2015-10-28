@@ -109,7 +109,6 @@ public class BlockedNumbersFragment extends ListFragment
         ColorDrawable backgroundDrawable =
                 new ColorDrawable(getActivity().getColor(R.color.dialer_theme_color));
         actionBar.setBackgroundDrawable(backgroundDrawable);
-        actionBar.setElevation(getResources().getDimensionPixelSize(R.dimen.action_bar_elevation));
         actionBar.setDisplayShowCustomEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -138,8 +137,7 @@ public class BlockedNumbersFragment extends ListFragment
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.blocked_number_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.blocked_number_fragment, container, false);
     }
 
     @Override

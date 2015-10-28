@@ -120,7 +120,7 @@ public class ManageBlockedNumbersActivity extends AppCompatActivity
 
     @Override
     public boolean isActionBarShowing() {
-        return true;
+        return false;
     }
 
     @Override
@@ -135,11 +135,11 @@ public class ManageBlockedNumbersActivity extends AppCompatActivity
 
     @Override
     public int getActionBarHideOffset() {
-        return getSupportActionBar().getHideOffset();
+        return 0;
     }
 
     @Override
     public int getActionBarHeight() {
-        return getSupportActionBar().getHeight();
+        return 0;
     }
 }
