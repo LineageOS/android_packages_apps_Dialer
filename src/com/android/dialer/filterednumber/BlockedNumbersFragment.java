@@ -15,6 +15,7 @@
  */
 package com.android.dialer.filterednumber;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -202,7 +203,12 @@ public class BlockedNumbersFragment extends ListFragment
 
     @Override
     public void onVoicemailStatusFetched(Cursor cursor) {
-        final View hideSetting = getActivity().findViewById(R.id.hide_blocked_calls_setting);
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        final View hideSetting = activity.findViewById(R.id.hide_blocked_calls_setting);
         if (cursor == null) {
             hideSetting.setVisibility(View.GONE);
             return;
