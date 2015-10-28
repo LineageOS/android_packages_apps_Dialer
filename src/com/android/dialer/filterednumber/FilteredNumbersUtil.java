@@ -23,6 +23,7 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
+import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
@@ -46,7 +48,29 @@ public class FilteredNumbersUtil {
     private static final String LAST_EMERGENCY_CALL_PREF_KEY = "last_emergency_call";
 
     // Disable incoming call blocking if there was a call within the past 2 days.
-    private static final long EMERGENCY_CALL_RECENCY_THRESHOLD_MS = 1000 * 60 * 60 * 24 * 2;
+    private static final long RECENT_EMERGENCY_CALL_THRESHOLD_MS = 1000 * 60 * 60 * 24 * 2;
+
+    /**
+     * Used for testing to specify that a custom threshold should be used instead of the default.
+     * This custom threshold will only be used when setting this log tag to VERBOSE:
+     *
+     *     adb shell setprop log.tag.DebugEmergencyCall VERBOSE
+     *
+     */
+    @NeededForTesting
+    private static final String DEBUG_EMERGENCY_CALL_TAG = "DebugEmergencyCall";
+
+    /**
+     * Used for testing to specify the custom threshold value, in milliseconds for whether an
+     * emergency call is "recent". The default value will be used if this custom threshold is less
+     * than zero. For example, to set this threshold to 60 seconds:
+     *
+     *     adb shell settings put system dialer_emergency_call_threshold_ms 60000
+     *
+     */
+    @NeededForTesting
+    private static final String RECENT_EMERGENCY_CALL_THRESHOLD_SETTINGS_KEY =
+            "dialer_emergency_call_threshold_ms";
 
     public interface CheckForSendToVoicemailContactListener {
         public void onComplete(boolean hasSendToVoicemailContact);
@@ -257,7 +281,7 @@ public class FilteredNumbersUtil {
         }
 
         return (System.currentTimeMillis() - lastEmergencyCallTime)
-                    < EMERGENCY_CALL_RECENCY_THRESHOLD_MS;
+                < getRecentEmergencyCallThresholdMs(context);
     }
 
     public static void recordLastEmergencyCallTime(Context context) {
@@ -272,5 +296,17 @@ public class FilteredNumbersUtil {
 
     public static boolean canBlockNumber(Context context, String number) {
         return !PhoneNumberUtils.isEmergencyNumber(number) && !TextUtils.isEmpty(number);
+    }
+
+    private static long getRecentEmergencyCallThresholdMs(Context context) {
+        if (android.util.Log.isLoggable(
+                DEBUG_EMERGENCY_CALL_TAG, android.util.Log.VERBOSE)) {
+            long thresholdMs = Settings.System.getLong(
+                    context.getContentResolver(),
+                    RECENT_EMERGENCY_CALL_THRESHOLD_SETTINGS_KEY, 0);
+            return thresholdMs > 0 ? thresholdMs : RECENT_EMERGENCY_CALL_THRESHOLD_MS;
+        } else {
+            return RECENT_EMERGENCY_CALL_THRESHOLD_MS;
+        }
     }
 }
