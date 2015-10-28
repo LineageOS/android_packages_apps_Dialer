@@ -172,8 +172,8 @@ public class InCallPresenter implements CallList.Listener,
             if (state == TelephonyManager.CALL_STATE_RINGING) {
                 // Check if the number is blocked, to silence the ringer.
                 String countryIso = GeoUtil.getCurrentCountryIso(mContext);
-                mFilteredQueryHandler.startBlockedQuery(
-                        mOnCheckBlockedListener, null, incomingNumber, countryIso);
+                mFilteredQueryHandler.isBlockedNumber(
+                        mOnCheckBlockedListener, incomingNumber, countryIso);
             }
         }
     };
@@ -556,9 +556,9 @@ public class InCallPresenter implements CallList.Listener,
             }
         };
 
-        boolean isInvalidNumber = mFilteredQueryHandler.startBlockedQuery(
-                onCheckBlockedListener, null, number, countryIso);
-        if (isInvalidNumber) {
+        final boolean success = mFilteredQueryHandler.isBlockedNumber(
+                onCheckBlockedListener, number, countryIso);
+        if (!success) {
             Log.d(this, "checkForBlockedCall: invalid number, skipping block checking");
             if (!hasTimedOut.get()) {
                 handler.removeCallbacks(runnable);
