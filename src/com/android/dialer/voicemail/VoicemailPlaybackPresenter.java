@@ -246,6 +246,10 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         // Handles cases where the same entry is binded again when scrolling in list, or where
         // the MediaPlayer was retained after an orientation change.
         if (mMediaPlayer != null && mIsPrepared && voicemailUri.equals(mVoicemailUri)) {
+            // If the voicemail card was rebinded, we need to set the position to the appropriate
+            // point. Since we retain the media player, we can just set it to the position of the
+            // media player.
+            mPosition = mMediaPlayer.getCurrentPosition();
             onPrepared(mMediaPlayer);
         } else {
             if (!voicemailUri.equals(mVoicemailUri)) {
