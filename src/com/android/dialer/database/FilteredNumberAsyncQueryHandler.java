@@ -129,21 +129,13 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     public final boolean startBlockedQuery(final OnCheckBlockedListener listener,
                                         String normalizedNumber, String number, String countryIso) {
         if (normalizedNumber == null) {
-            normalizedNumber = getNormalizedNumber(number, countryIso);
+            normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
             if (normalizedNumber == null) {
                 return true;
             }
         }
         startBlockedQuery(listener, normalizedNumber);
         return false;
-    }
-
-    public static String getNormalizedNumber(String number, String countryIso) {
-        if (PhoneNumberHelper.isUriNumber(number)) {
-            return number;
-        } else {
-            return PhoneNumberUtils.formatNumberToE164(number, countryIso);
-        }
     }
 
     /**
@@ -182,7 +174,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     public final void blockNumber(final OnBlockNumberListener listener,
                                   String normalizedNumber, String number, String countryIso) {
         if (normalizedNumber == null) {
-            normalizedNumber = getNormalizedNumber(number, countryIso);
+            normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         }
         ContentValues v = new ContentValues();
         v.put(FilteredNumberColumns.NORMALIZED_NUMBER, normalizedNumber);

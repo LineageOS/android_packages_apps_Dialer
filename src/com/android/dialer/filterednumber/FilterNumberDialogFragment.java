@@ -26,6 +26,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -58,8 +59,10 @@ public class FilterNumberDialogFragment extends DialogFragment {
     private static final String ARG_DISPLAY_NUMBER = "argDisplayNumber";
     private static final String ARG_PARENT_VIEW_ID = "parentViewId";
 
+    private String mNumber;
     private String mDisplayNumber;
     private String mNormalizedNumber;
+    private String mCountryIso;
 
     private FilteredNumberAsyncQueryHandler mHandler;
     private View mParentView;
@@ -109,12 +112,16 @@ public class FilterNumberDialogFragment extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
         final boolean isBlocked = getArguments().containsKey(ARG_BLOCK_ID);
 
+        mNumber = getArguments().getString(ARG_NUMBER);
         mDisplayNumber = getArguments().getString(ARG_DISPLAY_NUMBER);
+        mNormalizedNumber = getArguments().getString(ARG_NORMALIZED_NUMBER);
+        mCountryIso = getArguments().getString(ARG_COUNTRY_ISO);
+
         if (TextUtils.isEmpty(mNormalizedNumber)) {
-            String number = getArguments().getString(ARG_NUMBER);
-            String countryIso = getArguments().getString(ARG_COUNTRY_ISO);
-            mNormalizedNumber =
-                    FilteredNumberAsyncQueryHandler.getNormalizedNumber(number, countryIso);
+            mNormalizedNumber = PhoneNumberUtils.formatNumberToE164(mNumber, mCountryIso);
+        }
+        if (TextUtils.isEmpty(mDisplayNumber)) {
+            mDisplayNumber = mNumber;
         }
 
         mHandler = new FilteredNumberAsyncQueryHandler(getContext().getContentResolver());
@@ -148,11 +155,9 @@ public class FilterNumberDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        String number = getArguments().getString(ARG_NUMBER);
-        if (TextUtils.isEmpty(mNormalizedNumber) ||
-                !FilteredNumbersUtil.canBlockNumber(getActivity(), number)) {
+        if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNormalizedNumber)) {
             dismiss();
-            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
+            Toast.makeText(getContext(), getString(R.string.invalidNumber, mDisplayNumber),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -222,9 +227,9 @@ public class FilterNumberDialogFragment extends DialogFragment {
 
         mHandler.blockNumber(
                 onBlockNumberListener,
-                getArguments().getString(ARG_NORMALIZED_NUMBER),
-                getArguments().getString(ARG_NUMBER),
-                getArguments().getString(ARG_COUNTRY_ISO));
+                mNormalizedNumber,
+                mNumber,
+                mCountryIso);
     }
 
     private void unblockNumber() {
