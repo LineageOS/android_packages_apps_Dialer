@@ -155,20 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिङ्गटोन र भाइब्रेट"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"सम्मेलन कल प्रबन्ध गर्नुहोस्"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आपतकालीन नम्बर"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> सेकेन्ड</item>
-      <item quantity="one">१ सेकेन्ड</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> मिनेट</item>
-      <item quantity="one">१ मिनेट</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> घन्टा</item>
-      <item quantity="one">१ घन्टा</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"प्रोफाइल तस्बिर"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"क्यामेरा बन्द"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> बाट"</string>
     <string name="note_sent" msgid="3548700178238244595">"नोट पठाइयो"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"भर्खरैका सन्देशहरू"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"व्यवसाय जानकारी"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> माइल टाढा"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> किलोमिटर टाढा"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"अहिले खुला छ"</string>
+    <string name="closed_now" msgid="9175774453982778909">"अब बन्द भयो"</string>
 </resources>

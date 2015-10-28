@@ -23,7 +23,7 @@
     <string name="private_num" msgid="6713286113000232309">"Private Nummer"</string>
     <string name="payphone" msgid="4793877574636445118">"Münztelefon"</string>
     <string name="confCall" msgid="1904840547188336828">"Telefonkonferenz"</string>
-    <string name="call_lost" msgid="6183862117003999578">"Anruf abgebrochen"</string>
+    <string name="call_lost" msgid="6183862117003999578">"Verbindung unterbrochen"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Lautsprecher"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Handy-Kopfhörer"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Kabelgebundenes Headset"</string>
@@ -155,20 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Klingelton &amp; Vibration"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Telefonkonferenz verwalten"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Notrufnummer"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Sekunden</item>
-      <item quantity="one">1 Sekunde</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Minuten</item>
-      <item quantity="one">1 Minute</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Stunden</item>
-      <item quantity="one">1 Stunde</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"Profilfoto"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Kamera aus"</string>
     <string name="child_number" msgid="7437330400723805538">"über <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"Notiz gesendet"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Zuletzt eingegangene Nachrichten"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Geschäftsinformationen"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> Meilen entfernt"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> Kilometer entfernt"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> bis <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Jetzt geöffnet"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Jetzt geschlossen"</string>
 </resources>

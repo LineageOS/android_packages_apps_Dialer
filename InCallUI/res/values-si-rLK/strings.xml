@@ -155,20 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"හදිසි ඇමතුම් අංකය"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="one">තත්පර <xliff:g id="COUNT">%d</xliff:g></item>
-      <item quantity="other">තත්පර <xliff:g id="COUNT">%d</xliff:g></item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="one">මිනිත්තු <xliff:g id="COUNT">%d</xliff:g></item>
-      <item quantity="other">මිනිත්තු <xliff:g id="COUNT">%d</xliff:g></item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="one">පැය <xliff:g id="COUNT">%d</xliff:g></item>
-      <item quantity="other">පැය <xliff:g id="COUNT">%d</xliff:g></item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"පැතිකඩ ඡායාරූපය"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"කැමරාව ක්‍රියාවිරහිතයි"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> හරහා"</string>
     <string name="note_sent" msgid="3548700178238244595">"සටහන යවන ලදී"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"මෑත පණිවිඩ"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"ව්‍යාපාර තොරතුරු"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"සැතපුම් <xliff:g id="DISTANCE">%.1f</xliff:g>ක් ඈතින්"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"කි.මි. <xliff:g id="DISTANCE">%.1f</xliff:g>ක් ඈතින්"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"දැන් විවෘතයි"</string>
+    <string name="closed_now" msgid="9175774453982778909">"දැන් වසා ඇත"</string>
 </resources>

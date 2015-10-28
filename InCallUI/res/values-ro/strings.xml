@@ -18,7 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telefon"</string>
-    <string name="onHold" msgid="9035493194749959955">"În aşteptare"</string>
+    <string name="onHold" msgid="9035493194749959955">"În așteptare"</string>
     <string name="unknown" msgid="6878797917991465859">"Necunoscut"</string>
     <string name="private_num" msgid="6713286113000232309">"Număr privat"</string>
     <string name="payphone" msgid="4793877574636445118">"Telefon public"</string>
@@ -28,9 +28,9 @@
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Casca dispozitivului"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Cască cu fir"</string>
     <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
-    <string name="wait_prompt_str" msgid="7601815427707856238">"Trimiteţi următoarele tonuri?\n"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Trimiteți următoarele tonuri?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"Se trimit tonuri\n"</string>
-    <string name="send_button" msgid="4106860097497818751">"Trimiteţi"</string>
+    <string name="send_button" msgid="4106860097497818751">"Trimiteți"</string>
     <string name="pause_prompt_yes" msgid="3564467212025151797">"Da"</string>
     <string name="pause_prompt_no" msgid="6686238803236884877">"Nu"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"Înlocuiţi metacaracterul cu"</string>
@@ -41,7 +41,7 @@
     <string name="card_title_conf_call" msgid="1162980346189744501">"Teleconferinţă"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Apel primit"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Apel încheiat"</string>
-    <string name="card_title_on_hold" msgid="821463117892339942">"În aşteptare"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"În așteptare"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"Se închide telefonul"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"În timpul apelului"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Numărul meu este <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
@@ -59,7 +59,7 @@
     <string name="notification_missedCallTicker" msgid="504686252427747209">"Apel nepreluat de la <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Apel în desfăşurare"</string>
     <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Apel Wi-Fi în desfășurare"</string>
-    <string name="notification_on_hold" msgid="3480694969511790465">"În aşteptare"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"În așteptare"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Apel de intrare"</string>
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Apel prin Wi-Fi primit"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Apel video primit"</string>
@@ -132,7 +132,7 @@
     <string name="custom_message_cancel" msgid="7516406059429609296">"Anulați"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Trimiteți"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"Răspundeţi"</string>
-    <string name="description_target_send_sms" msgid="2098326025587950144">"Trimiteţi SMS"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"Trimiteți SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Refuzaţi"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Răspundeți ca apel video"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Răspundeți ca apel audio"</string>
@@ -146,8 +146,8 @@
     <string name="description_direction_left" msgid="7129873384376533287">"Glisați spre stânga pentru <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"Glisați spre dreapta pentru <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
     <string name="description_direction_down" msgid="4317245625565166742">"Glisați în jos pentru <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibraţii"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibraţii"</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibrații"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibrații"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Sunet"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Sunet prestabilit (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Ton de apel telefon"</string>
@@ -155,23 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ton de apel și vibrare"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gestionați teleconferinţa"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Număr de urgență"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> secunde</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de secunde</item>
-      <item quantity="one">O secundă</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> minute</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de minute</item>
-      <item quantity="one">Un minut</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> ore</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> de ore</item>
-      <item quantity="one">O oră</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"Fotografie de profil"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Camera este oprită"</string>
     <string name="child_number" msgid="7437330400723805538">"pe <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"Nota a fost trimisă"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Mesaje recente"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Informații despre companie"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> mi distanță"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> km distanță"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> – <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Acum este deschis"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Acum este închis"</string>
 </resources>

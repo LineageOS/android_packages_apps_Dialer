@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Налаштування"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Не встановлено&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Інші налаштування виклику"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Виклик здійснюється за допомогою <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Виклик через <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Вхідні дзвінки через оператора <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"фото контакта"</string>
     <string name="goPrivate" msgid="865837794424530980">"конфіденц."</string>
@@ -155,26 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Сигнал дзвінка та вібросигнал"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Керувати конференц-викликом"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Екстрений номер"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> секунда</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> секунди</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> секунд</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> секунди</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> хвилина</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> хвилини</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> хвилин</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> хвилини</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> година</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> години</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> годин</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> години</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"Фотографія профілю"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Камеру вимкнено"</string>
     <string name="child_number" msgid="7437330400723805538">"на номер <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"Нотатку надіслано"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Останні повідомлення"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Інформація про компанію"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"За <xliff:g id="DISTANCE">%.1f</xliff:g> мил."</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"За <xliff:g id="DISTANCE">%.1f</xliff:g> км"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> – <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Відчинено"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Зачинено"</string>
 </resources>

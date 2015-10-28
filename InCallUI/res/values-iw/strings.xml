@@ -155,26 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"רינגטון ורטט"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"נהל שיחת ועידה"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"מספר חירום"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> שניות</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> שניות</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> שניות</item>
-      <item quantity="one">שנייה אחת</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> דקות</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> דקות</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> דקות</item>
-      <item quantity="one">דקה אחת</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> שעות</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> שעות</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> שעות</item>
-      <item quantity="one">שעה אחת</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"תמונת פרופיל"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"מצלמה כבויה"</string>
     <string name="child_number" msgid="7437330400723805538">"דרך <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"ההערה נשלחה"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"הודעות אחרונות"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"פרטי עסק"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"במרחק <xliff:g id="DISTANCE">%.1f</xliff:g> מייל"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"במרחק <xliff:g id="DISTANCE">%.1f</xliff:g> ק\"מ"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"פתוח עכשיו"</string>
+    <string name="closed_now" msgid="9175774453982778909">"סגור עכשיו"</string>
 </resources>

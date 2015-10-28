@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Konfigurimi"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;I pavendosur&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Cilësime të tjera të telefonatës"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Po telefonon përmes <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Telefonatë përmes <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Hyrëse nga <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"fotografia e kontaktit"</string>
     <string name="goPrivate" msgid="865837794424530980">"bëje private"</string>
@@ -155,20 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Me zile dhe me dridhje"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Menaxho telefonatën-konferencë"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Numri i urgjencës"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sekonda</item>
-      <item quantity="one">1 sekondë</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minuta</item>
-      <item quantity="one">1 minutë</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> orë</item>
-      <item quantity="one">1 orë</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"Fotografia e profilit"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Kamera joaktive"</string>
     <string name="child_number" msgid="7437330400723805538">"përmes <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"Shënimi u dërgua"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Mesazhet e fundit"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Informacioni i biznesit"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> milje larg"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> km larg"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Tani është hapur"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Tani është mbyllur"</string>
 </resources>

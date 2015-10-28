@@ -50,8 +50,8 @@
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Video aanvragen"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Kan geen videogesprek starten"</string>
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoverzoek geweigerd"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Uw terugbelnummer\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Uw terugbelnummer bij alarm\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Je terugbelnummer\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Je terugbelnummer bij alarm\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Kiezen"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Gemiste oproep"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Gemiste oproepen"</string>
@@ -78,10 +78,10 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Sluiten"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Terugbellen"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Bericht"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Als u wilt bellen, moet u eerst de Vliegtuigmodus uitschakelen."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Als je wilt bellen, moet je eerst de Vliegtuigmodus uitschakelen."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Niet geregistreerd op netwerk."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mobiel netwerk niet beschikbaar."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Als u wilt bellen, moet u een geldig nummer invoeren."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Als je wilt bellen, moet je een geldig nummer invoeren."</string>
     <string name="incall_error_call_failed" msgid="6302746943230078197">"Kan niet bellen."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI-reeks starten..."</string>
     <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Service wordt niet ondersteund."</string>
@@ -155,20 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Beltoon en trillen"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Telefonische vergadering beheren"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Alarmnummer"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> seconden</item>
-      <item quantity="one">1 seconde</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minuten</item>
-      <item quantity="one">1 minuut</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> uur</item>
-      <item quantity="one">1 uur</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"Profielfoto"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"Camera uit"</string>
     <string name="child_number" msgid="7437330400723805538">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"Notitie verzonden"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Recente berichten"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Bedrijfsinformatie"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> mijl hiervandaan"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> km hiervandaan"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Nu geopend"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Nu gesloten"</string>
 </resources>

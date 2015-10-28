@@ -32,7 +32,7 @@
     <string name="pause_prompt_str" msgid="1789964702154314806">"تون‌های ارسالی\n"</string>
     <string name="send_button" msgid="4106860097497818751">"ارسال"</string>
     <string name="pause_prompt_yes" msgid="3564467212025151797">"بله"</string>
-    <string name="pause_prompt_no" msgid="6686238803236884877">"خیر"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"نه"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"جایگزینی نویسه عمومی با"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"تماس کنفرانسی <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"شماره پست صوتی"</string>
@@ -96,7 +96,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"در حال روشن کردن رادیو..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"سرویسی در دسترس نیست. دوباره امتحان کنید..."</string>
     <string name="dial_emergency_error" msgid="1509085166367420355">"نمی‌توانید تماس بگیرید. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> یک شماره اضطراری نیست."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی‌ توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"استفاده از صفحه‌کلید برای شماره گیری"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"نگه داشتن تماس"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"از سرگیری تماس"</string>
@@ -155,20 +155,22 @@
     <string name="preference_category_ringtone" msgid="5197960752529332721">"آهنگ‌ زنگ و لرزش"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"مدیریت تماس کنفرانس"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"شماره اضطراری"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ثانیه</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ثانیه</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> دقیقه</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> دقیقه</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ساعت</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ساعت</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
     <string name="profile_photo_description" msgid="5609894336203315400">"عکس نمایه"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"دوربین خاموش"</string>
     <string name="child_number" msgid="7437330400723805538">"از طریق <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
     <string name="note_sent" msgid="3548700178238244595">"یادداشت ارسال شد"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"پیام‌های جدید"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"اطلاعات کسب و کار"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> مایل دورتر"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> کیلومتر دورتر"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>،‫ <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> تا <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"اکنون باز است"</string>
+    <string name="closed_now" msgid="9175774453982778909">"اکنون بسته است"</string>
 </resources>
