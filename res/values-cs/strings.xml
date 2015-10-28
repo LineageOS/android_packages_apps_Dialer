@@ -107,7 +107,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Zobrazit kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Volat kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Podrobnosti kontaktu pro <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Nová hlasová zpráva"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"Počet hovorů: <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>"</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videohovor"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Odeslat zprávu SMS kontaktu <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -175,6 +174,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Volat kontakt <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Nepřijatý hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Přijatý hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Odchozí hovor: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"v účtu <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Volat"</string>
@@ -222,7 +225,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Protože jste z tohoto telefonu během posledních 48 hodin volali na tísňovou linku, bylo blokování hovorů vypnuto. Po uplynutí 48 hodin se automaticky znovu zapne."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importovat čísla"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Pomocí dalších aplikací jste dříve některé volající označili k automatickému přesměrování do hlasové schránky."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Skrýt hovory a smazat hlasové zprávy z blokovaných čísel."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Skrýt hovory a automaticky smazat nové hlasové zprávy z blokovaných čísel"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Zobrazit čísla"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importovat"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import se nezdařil."</string>
@@ -242,10 +245,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Chcete-li uskutečnit hovor, aktivujte oprávnění Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikace Telefon nemá oprávnění provádět zápis do nastavení systému."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Přichází lepší způsob telefonování"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Abyste mohli například zobrazit, kdo vám volá, i když volajícího nemáte v kontaktech, je nutné jako výchozí aplikaci pro telefonování nastavit aplikaci Telefon."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Začněte hovořit s přáteli a rodinou"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Aby bylo možné volat lidem ve vašich kontaktech, aplikace Telefon potřebuje přístup k telefonu a kontaktům."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Přeskočit"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Další"</string>
 </resources>

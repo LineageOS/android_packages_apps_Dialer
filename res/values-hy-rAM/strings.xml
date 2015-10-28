@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Դիտել <xliff:g id="NAME">%1$s</xliff:g> կոնտակտը"</string>
     <string name="description_call" msgid="3443678121983852666">"Զանգել <xliff:g id="NAME">%1$s</xliff:g>-ին"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>-ի կոնտակտային տվյալները"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Նոր ձայնային հաղորդագրություն:"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> զանգ:"</string>
     <string name="description_video_call" msgid="2933838090743214204">"Տեսազանգ"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Ուղարկել SMS <xliff:g id="NAME">%1$s</xliff:g>-ին"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Զանգել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ին"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Բաց է թողնվել զանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտից, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>:"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Ընդունվել է զանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտից, <xliff:g id="TYPEORLOCATION">^2</xliff:g> , <xliff:g id="TIMEOFCALL">^3</xliff:g> , <xliff:g id="PHONEACCOUNT">^4</xliff:g>:"</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Զանգ <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտին, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>:"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Զանգել"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Զանգերի արգելափակումը կասեցվել է, քանի որ վերջին 48 ժամվա ընթացքում դուք այս հեռախոսից զանգել եք արտակարգ իրավիճակների ծառայություններին: 48 ժամ տևողությամբ ժամանակահատվածի ավարտից հետո այն ավտոմատ կերպով կվերամիացվի:"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Ներմուծել համարները"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Համաձայն ձեր նախկին կարգավորումների՝ որոշ զանգողների պետք է ինքնաշխատորեն ուղարկվի ձայնային փոստ այլ հավելվածների միջոցով:"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Թաքցնել զանգերը և ջնջել ձայնային փոստի հաղորդագրությունները արգելափակված համարներից:"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Թաքցնել զանգերը և ավտոմատ կերպով ջնջել ձայնային փոստի նոր հաղորդագրությունները արգելափակված համարներից:"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Կոնտակտների թիվը"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Ներմուծում"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ներմուծումը չհաջողվեց"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Կոնտակտները որոնելու համար միացրեք Կոնտակտների թույլտվությունները:"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Զանգ կատարելու համար միացրեք Հեռախոսի թույլտվությունը:"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Հեռախոս հավելվածը համակարգի կարգավորումները գրելու թույլտվություն չունի:"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Զանգելուց լավը միայն զանգելն է"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Հեռախոսը դարձրեք ձեր հեռախոսի կանխադրված հավելվածը, որպեսզի կարողանանք տեսնել, թե ով է ձեզ զանգել՝ նույնիսկ եթե տվյալ անձը ձեր կոնտակտներում չէ:"</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Զրուցեք ձեր ընկերների և հարազատների հետ"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Ձեր կոնտակտներում պահված մարդկանց զանգելու համար Հեռախոս հավելվածին անհրաժեշտ է օգտագործել ձեր հեռախոսը և կոնտակտները:"</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Բաց թողնել"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Հաջորդը"</string>
 </resources>

@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Bheka oxhumana naye <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Fonela <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Imininingwane yokuxhumana ka-<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Ivoyisimeyili entsha."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> amakholi."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Ikholi yevidiyo."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Thumela i-SMS ku-<xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Shayela ku-<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Ikholi egejiwe kusuka ku-<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Phendula ikholi kusuka ku-<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Ikholi eya ku-<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"ku-<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Shaya"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Ukuvimbela ikholi kukhutshaziwe ngoba uxhumane nabosizo oluphuthumayo kusukela kule foni phakathi kwamahora angu-48 wokugcina. Kuzophinda kunikwe amandla ngokuzenzakalela uma sokuphele isikhathi samahora angu-48."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Ngenisa izinombolo"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Ngaphambilini umake abanye abashayi ukuthi bathunyelwe ngokuzenzakalelayo kuvoyisimeyili ngezinhlelo zokusebenza."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Fihla amakholi futhi ususe amavoyisimeyili kusuka kuzinombolo ezivinjiwe."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Fihla amakholi uphinde ususe ngokuzenzakalela amavoyisimeyili amasha kusukela kuzinombolo ezivinjiwe."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Buka izinombolo"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Ngenisa"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ukulanda akuphumelelanga"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Ukuze useshe oxhumana nabo, vula izimvume zoxhumana nabo."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Ukuze ubeke ikholi, vula imvume yefoni."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Uhlelo lokusebenza lefoni alinayo imvume yokubhalela kuzilungiselelo zesistimu."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Indlela engcono yokushaya ukushaya"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Yenza ifoni uhlelo lwakho lokusebenza lwefoni oluzenzakalelayo ukuthi lukwazi ukwenza izinto ezifana nokubona ukuthi ubani okushayelayo, nanoma angekho koxhumana nabo."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Khuluma nabangani bakho nomndeni"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Ifoni izodinga ukufinyelela kufoni yakho noxhumana nabo ukuze yenze amakholi kubantu abakubantu oxhumana nabo."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Yeqa"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Okulandelayo"</string>
 </resources>

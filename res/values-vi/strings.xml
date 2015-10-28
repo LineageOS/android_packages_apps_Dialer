@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Xem thông tin liên hệ của <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Gọi <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Chi tiết liên lạc cho <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Thư thoại mới."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> cuộc gọi."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Gọi điện video."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Gửi SMS cho <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Gọi <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Cuộc gọi nhỡ từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Cuộc gọi đã trả lời từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Gọi tới <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"trên <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Gọi"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Tính năng chặn cuộc gọi đã bị tắt vì bạn đã liên hệ với dịch vụ khẩn cấp từ điện thoại này trong vòng 48 giờ qua. Tính năng này sẽ được bật lại tự động sau khi khoảng thời gian 48 giờ kết thúc."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Nhập số"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Trước đây bạn đã đánh dấu một số người gọi sẽ được tự động gửi tới thư thoại qua các ứng dụng khác."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Ẩn cuộc gọi và xóa thư thoại khỏi các số bị chặn."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Ẩn cuộc gọi và tự động xóa thư thoại mới khỏi các số bị chặn."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Xem số"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Nhập"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Nhập không thành công"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Để tìm kiếm liên hệ của bạn, hãy bật quyền đối với Danh bạ."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Để thực hiện cuộc gọi, bật quyền đối với Điện thoại."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Ứng dụng Điện thoại không có quyền ghi vào cài đặt hệ thống."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Một cách để gọi tốt hơn là hãy gọi điện thoại"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Đặt Điện thoại làm ứng dụng điện thoại mặc định của bạn để có thể làm những việc như biết người đang gọi cho bạn ngay cả khi họ không có trong danh bạ của bạn."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Hãy trò chuyện với bạn bè và gia đình bạn"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Ứng dụng Điện thoại cần quyền truy cập vào điện thoại và danh bạ của bạn để gọi điện cho những người trong danh bạ của bạn."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Bỏ qua"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Tiếp theo"</string>
 </resources>

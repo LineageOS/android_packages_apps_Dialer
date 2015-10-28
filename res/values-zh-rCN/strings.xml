@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"查看联系人<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"呼叫<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>的详细联系信息"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"有新的语音邮件。"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>次通话。"</string>
     <string name="description_video_call" msgid="2933838090743214204">"视频通话。"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"向<xliff:g id="NAME">%1$s</xliff:g>发送短信"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>通话"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的未接电话。"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的已接电话。"</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="TIMEOFCALL">^3</xliff:g>通过 <xliff:g id="PHONEACCOUNT">^4</xliff:g> 拨打给<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的电话。"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"通过 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"拨打电话"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"来电拦截功能已停用，因为您在过去 48 小时内使用该手机拨打了紧急服务电话。系统会在 48 小时的期限结束后自动重新启用该功能。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"导入号码"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您曾通过其他应用将某些来电者设为自动转到语音信箱。"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"隐藏已屏蔽号码的来电，并删除相关语音邮件。"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"隐藏已屏蔽号码的来电，并自动删除来自这些号码的新语音邮件。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看号码"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"导入"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"导入失败"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"要搜索您的联系人，请开启“通讯录”权限。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"要拨打电话，请开启“电话”权限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"电话应用不具备写入系统设置的权限。"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"尽享更出色的通话体验"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"将“电话”设为您的默认电话应用，以享用各种便利功能，例如了解来电者的身份（即使对方不在您的通讯录中）。"</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"与亲朋好友通话"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"您需要授权“电话”使用您手机的电话功能和通讯录，才能通过该应用给您通讯录中的人打电话。"</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"跳过"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"下一步"</string>
 </resources>

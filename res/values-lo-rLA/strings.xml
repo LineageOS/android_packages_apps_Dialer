@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"ເບິ່ງລາຍຊື່ຜູ່ຕິດຕໍ່ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"ໂທຫາ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"ລາຍລະອຽດ​ລາຍຊື່​ຜູ່ຕິດຕໍ່​ສຳລັບ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"ຂໍ້ຄວາມ​ສຽງ​ໃໝ່."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ການໂທ."</string>
     <string name="description_video_call" msgid="2933838090743214204">"ການ​ໂທ​ດ້ວຍ​ວິ​ດີ​ໂອ."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"ສົ່ງ SMS ຫາ <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"ໂທຫາ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"ສາຍ​ບໍ່​ໄດ້​ຮັບ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"ຮັບ​ສາຍ​ໂທ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"ໂທ​ຫາ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"ຢູ່​ເທິງ <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ໂທ"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ການບ​ລັອກ​ສາຍ​ໂທ​ຖືກ​ປິດ​ໃຊ້​ງານ​ແລ້ວ ເພາະ​ວ່າ​ທ່ານ​ໄດ້​ຕິດ​ຕໍ່​ຫາ​ຝ່າຍ​ບໍ​ລິ​ການ​ສຸກ​ເສີນ​ຈາກ​ໂທ​ລະ​ສັບ​ນີ້​ພາຍ​ໃນ 48 ຊົ່ວ​ໂມງ​ສຸດ​ທ້າຍ. ມັນ​ຈະ​ຖືກ​ເປີດ​ໃຊ້​ງານ​ອີກ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ ເມື່ອ​ໝົດ​ໄລ​ຍະ 48 ຊົ່ວ​ໂມງ​ໄປ​ແລ້ວ."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"ນຳ​ຕົວ​ເລກ​ເຂົ້າ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ຜ່ານ​ມາ​ທ່ານ​ໄດ້​ໝາຍ​ຜູ້​ໂທ​ບາງ​ຄົນ​ໃຫ້​ຖືກ​ສົ່ງ​​ຫາ​ຂໍ້​ຄວາມ​ສຽງໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ​ຜ່ານ​ແອັບ​ອື່ນ​."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"ເຊື່ອງ​ສາຍ​ໂທ ແລະ ລຶບ​ຂໍ້​ຄວາມ​ສຽງ​ຈາກ​ເບີ​ທີ່​ຖືກບ​ລັອກ​ແລ້ວ."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"ເຊື່ອງ​ສາຍ​ໂທ ແລະ ລຶບ​ຂໍ້​ຄວາມ​ສຽງ​ໃໝ່ຈາກ​ເບີ​ທີ່​ຖືກບ​ລັອກ​ແລ້ວໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ເບິ່ງ​ຕົວ​ເລກ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ນໍາເຂົ້າ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ນຳ​ເຂົ້າ​ລົ້ມ​ເຫລວ"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"ເພື່ອຄົ້ນຫາລາຍາຊື່ຂອງທ່ານ, ໃຫ້ເປີດການອະນຸຍາດລາຍຊື່."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ເພື່ອ​ເຮັດການໂທ, ເປີດ​ການ​ອະ​ນຸ​ຍາດ​ໂທ​ລະ​ສັບ."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ແອັບໂທລະສັບບໍ່ມີການອະນຸຍາດໃຫ້ຂຽນໃສ່ການຕັ້ງຄ່າລະບົບ."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ວິ​ທີ​ການ​ໂທ​ທີ່​ດີ​ກ່​ວາ​ແມ່ນ​ການ​ໂທ"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"ເຮັດ​ໃຫ້​ໂທ​ລະ​ສັບ​ຂອງ​ທ່ານ​ເປັນ​ແອັບໂທ​ລະ​ສັບ​ເລີ່ມຕົ້ນ ເພື່ອ​ໃຫ້​ສາ​ມາດ​ເຮັດ​ສິ່ງ​ຕ່າງໆ​ໄດ້​ເຊັ່ນ: ເຫັນ​ຜູ້​ທີ່​ກຳ​ລັງ​ໂທ​ຫາ​ທ່ານ, ແມ້​ວ່າ ເມື່ອ​ພວກ​ມັນ​ບໍ່​ຢູ່​ໃນ​ລາຍ​ຊື່​ຕິດ​ຕໍ່​ຂອງ​ທ່ານ."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"ລົມ​ກັບ​ໝູ່ ແລະ ຄອບ​ຄົວ​ຂອງ​ທ່ານ"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"ໂທ​ລະ​ສັບ​ຈະ​ຕ້ອງ​ໄດ້​ມີ​ການ​ເຂົ້າ​ຫາ​ໂທ​ລະ​ສັບ ແລະ ລາຍ​ຊື່​ຕິດ​ຕໍ່​ຂອງ​ທ່ານ ເພື່ອ​ໂທ​ຫາ​ຄົນ​ຢູ່​ໃນ​ລາຍ​ຊື່​ຕິດ​ຕໍ່​ຂອງ​ທ່ານ."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"ຂ້າມ"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"ຕໍ່​ໄປ"</string>
 </resources>

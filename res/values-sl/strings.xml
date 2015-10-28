@@ -107,7 +107,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Ogled stika <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Klicanje osebe <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Podrobnosti stika za <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Novo sporočilo v odzivniku."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"Št. klicev: <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videoklic."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Pošlji SMS prejemniku <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -175,6 +174,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Kliči osebo/številko <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Neodgovorjen klic od: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Odgovorjen klic od: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Klic za: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"z računom: <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Klic"</string>
@@ -222,7 +225,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Blokiranje klicev je onemogočeno, ker ste se v zadnjih 48 urah s tem telefonom obrnili na nujno pomoč. Ko 48-urno obdobje poteče, bo blokiranje klicev samodejno znova omogočeno."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Uvoz številk"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Označili ste, naj nekatere klicatelje druge aplikacije samodejno preusmerijo v odzivnik."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Skrij klice in izbriši sporočila v odzivniku za blokirane številke."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Skrij klice in samodejno izbriši nova sporočila v odzivniku za blokirane številke."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ogled številk"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Uvozi"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Uvoz ni uspel"</string>
@@ -242,10 +245,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Če želite iskati po stikih, vklopite dovoljenje za stike."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Če želite klicati, vklopite dovoljenje za telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacija Telefon nima dovoljenja za pisanje v sistemske nastavitve."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Kliče boljši način klicanja"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Nastavite Telefon kot privzeto aplikacijo za telefon, tako da bo lahko na primer prikazano, kdo kliče, tudi če klicatelj ni med stiki."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Pogovarjajte se s prijatelji in sorodniki"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Za klicanje oseb med stiki potrebuje Telefon dostop do telefona in stikov."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Preskoči"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Naprej"</string>
 </resources>

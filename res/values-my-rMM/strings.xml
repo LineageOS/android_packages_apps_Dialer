@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> လိပ်စာကြည့်ရန်"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> ရဲ့ အဆက်အသွယ် အသေးစိတ်"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"အသံပို့စာ အသစ်"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ခါ"</string>
     <string name="description_video_call" msgid="2933838090743214204">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g>ထံသို့  SMS ပို့ရန်"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> အား ခေါ်ပါ"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>၊ <xliff:g id="TYPEORLOCATION">^2</xliff:g>၊ <xliff:g id="TIMEOFCALL">^3</xliff:g>၊ <xliff:g id="PHONEACCOUNT">^4</xliff:g> မှ ခေါ်ဆိုမှု လွတ်သွား၏။"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>၊ <xliff:g id="TYPEORLOCATION">^2</xliff:g>၊ <xliff:g id="TIMEOFCALL">^3</xliff:g>၊ <xliff:g id="PHONEACCOUNT">^4</xliff:g> မှ ခ​ေါ်ဆိုမှုအား ဖြေထား၏။"</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>၊ <xliff:g id="TYPEORLOCATION">^2</xliff:g>၊ <xliff:g id="TIMEOFCALL">^3</xliff:g>၊ <xliff:g id="PHONEACCOUNT">^4</xliff:g> အား ခေါ်ခြင်း။"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> ၌"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ခေါ်ဆိုမှု"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"သင်သည် လွန်ခဲ့သည့် ၄၈ နာရီအတွင်း ဤဖုန်းဖြင့် အရေးပေါ်ဌာနကိုဖုန်း ခေါ်ဆိုခဲ့သောကြောင့် ခေါ်ဆိုမှုပိတ်ဆို့ခြင်းကို ဖြုတ်ထားသည်။ ၄၈ နာရီကျော်လွန်သည်နှင့် ၎င်းကိုအလိုအလျောက် ပြန်ဖွင့်ပေးပါမည်။"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"နံပါတ်များ သွင်းရန်"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"သင်သည် ယခင်က အချို့ခေါ်ဆိုသူများကို အလိုအလျောက် အခြား အက်ပ်များမှ တဆင့် အသံစာသို့ ပို့ရန် မှတ်ပေးခဲ့သည်။"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"ပိတ်ဆို့ထားသည့် နံပါတ်များထံမှ ခေါ်ဆိုမှုများ နှင့် အသံစာများကို ဝှက်ထားသည်။"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"ပိတ်ဆို့ထားသည့်နံပါတ်များမှ ခေါ်ဆိုမှုများကို ဝှက်ပြီး အသံစာအသစ်များကို အလိုအလျောက် ဖျက်ပါ။"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"နံပါတ်များကို ကြည့်ရန်"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"တင်သွင်းရန်"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"တင်သွင်းမှု မအောင်မြင်ပါ"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"သင့်အဆက်အသွယ်များကို ရှာဖွေရန်၊ အဆက်အသွယ်ခွင့်ပြုချက်များကို ဖွင့်ပါ။"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ဖုန်းခေါ်ဆိုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ဖုန်း အက်ပ်ဆီတွင် စနစ် ဆက်တင်များသို့ ရေးသားခွင့် မရှိပါ။"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"ခေါ်ဆိုရာတွင် မိမိက ခေါ်ဆိုခြင်းမှာ ပိုကောင်းပါသည်"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"သင်၏ ဖုန်းကို သင်၏ ပုံမှန် ဖုန်း အက်ပ် ပြုလုပ်လျက် သင့်ကို ခေါ်ဆိုသူက ဘယ်သူလဲ၊ သူတို့ သင်၏ အဆက်အသွယ်များထဲမှာ မရှိတောင်၊ မြင်နိုင်ခြင်းလို အရာများကို လုပ်လာနိုင်ပါမည်။"</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"သင်၏ မိတ်ဆွေများ နှင့် မိသားစုကို စကားပြောနိုင်ပါပြီ"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Phone သင်၏ အဆက်အသွယ်များထဲက သူများကို ခေါ်ဆိုရန် ဖုန်းသည် သင်၏ ဖုန်း နှင့် အဆက်အသွယ်များကို အသုံးပြုရန် လိုအပ်မည်။"</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"ကျော်ရန်"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"နောက်တစ်ခု"</string>
 </resources>

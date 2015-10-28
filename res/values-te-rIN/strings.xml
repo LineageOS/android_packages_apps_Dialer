@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> పరిచయాన్ని వీక్షించండి"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g>కు కాల్ చేయండి"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> యొక్క సంప్రదింపు వివరాలు"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"కొత్త వాయిస్ మెయిల్."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> కాల్‌లు."</string>
     <string name="description_video_call" msgid="2933838090743214204">"వీడియో కాల్."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g>కి SMS పంపు"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>కి కాల్ చేయి"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g> నుండి <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g>కి మిస్డ్ కాల్ ఇచ్చారు."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g> నుండి <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g>కి చేసిన కాల్‌కి సమాధానం ఇచ్చారు."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>కి <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g> నుండి కాల్ చేసారు."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>లో"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"కాల్ చేయి"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"మీరు గత 48 గంటల వ్యవధిలో ఈ ఫోన్ నుండి అత్యవసర సేవలను సంప్రదించినందున కాల్ బ్లాకింగ్ నిలిపివేయబడింది. 48 గంటల వ్యవధి ముగిసిన తర్వాత ఇది స్వయంచాలకంగా పునఃప్రారంభించబడుతుంది."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"నంబర్‌లను దిగుమతి చేయి"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"మీరు ఇంతకుముందే కొంతమంది కాలర్‌లను స్వయంచాలకంగా ఇతర అనువర్తనాల ద్వారా వాయిస్ మెయిల్‌కి పంపేందుకు గుర్తు పెట్టారు."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"బ్లాక్ చేసిన నంబర్‌ల నుండి కాల్‌లను దాచండి మరియు వాయిస్ మెయిల్‌లను తొలగించండి."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"బ్లాక్ చేసిన నంబర్‌ల నుండి కాల్‌లను దాచండి మరియు కొత్త వాయిస్ మెయిల్‌లను స్వయంచాలకంగా తొలగించండి."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"నంబర్‌లను వీక్షించండి"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"దిగుమతి చేయి"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"దిగుమతి విఫలమైంది"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"మీ పరిచయాలను శోధించడానికి, పరిచయాల అనుమతులను ఆన్ చేయండి."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"కాల్ చేయడానికి, ఫోన్ అనుమతిని ఆన్ చేయండి."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"సిస్టమ్ సెట్టింగ్‌లకు వ్రాయడం కోసం ఫోన్ అనువర్తనానికి అనుమతి లేదు."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"కాల్ చేయడానికి ఫోన్ కాలింగ్ ఉత్తమ మార్గం"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"మీ పరిచయాల్లో లేకపోయినప్పటికీ మీకు కాల్ చేస్తున్నవారిని చూడటం వంటి అంశాలను చేయగలగడానికి ఫోన్‌ను మీ డిఫాల్ట్ అనువర్తనంగా చేయండి."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"మీ స్నేహితులు మరియు కుటుంబ సభ్యులతో మాట్లాడండి"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"మీ పరిచయాల్లోని వ్యక్తులకు కాల్‌లు చేయడం కోసం ఫోన్‌కు మీ ఫోన్ మరియు పరిచయాలకు ప్రాప్యత అనుమతించాలి."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"దాటవేయి"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"తదుపరి"</string>
 </resources>

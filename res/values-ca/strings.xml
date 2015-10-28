@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Visualitza el contacte <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Truca a <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Dades de contacte de: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Missatge de veu nou"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> trucades"</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videotrucada"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Envia un SMS a <xliff:g id="NAME">%1$s</xliff:g>."</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Truca a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Trucada perduda de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Trucada resposta de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Trucada a <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"a <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Truca"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"El bloqueig de trucades s\'ha desactivat perquè has contactat amb els serveis d\'emergència des d\'aquest telèfon durant les últimes 48 hores. Es tornarà a activar automàticament una vegada transcorregut el període de 48 hores."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importa els números"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Has indicat que les trucades d\'alguns contactes s\'enviïn automàticament a la bústia de veu mitjançant altres aplicacions."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Amaga les trucades i suprimeix els correus de veu dels números bloquejats"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Amaga les trucades i suprimeix automàticament els correus de veu nous dels números bloquejats."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Mostra els números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Error en la importació"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Per cercar els teus contactes, activa els permisos de Contactes."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Activa el permís Telèfon per fer una trucada."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'aplicació Telèfon no té permís per escriure a la configuració del sistema."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Arriba una millor manera de trucar"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Fes que Telèfon sigui l\'aplicació de telèfon predeterminada per poder veure qui t\'està trucant encara que no formi part dels teus contactes."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Truca als teus amics i familiars"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"L\'aplicació Telèfon requereix accés al telèfon i als contactes perquè puguis trucar a persones dels contactes."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Omet"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Següent"</string>
 </resources>

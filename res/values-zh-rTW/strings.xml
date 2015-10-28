@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"查看聯絡人<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"撥電話給<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"「<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>」的聯絡詳細資料"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"新的語音留言。"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"通話 <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> 次。"</string>
     <string name="description_video_call" msgid="2933838090743214204">"視訊通話。"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"傳送簡訊給<xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"撥號給「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"未接來電：<xliff:g id="NAMEORNUMBER">^1</xliff:g>/<xliff:g id="TYPEORLOCATION">^2</xliff:g>/<xliff:g id="TIMEOFCALL">^3</xliff:g>/<xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"已接來電：<xliff:g id="NAMEORNUMBER">^1</xliff:g>/<xliff:g id="TYPEORLOCATION">^2</xliff:g>/<xliff:g id="TIMEOFCALL">^3</xliff:g>/<xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"撥出通話：<xliff:g id="NAMEORNUMBER">^1</xliff:g>/<xliff:g id="TYPEORLOCATION">^2</xliff:g>/<xliff:g id="TIMEOFCALL">^3</xliff:g>/<xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"透過 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"撥號"</string>
@@ -215,10 +218,10 @@
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"已封鎖的號碼"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"來電封鎖功能已暫時關閉"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"由於您在過去 48 小時內使用這支手機撥打緊急服務電話，因此來電封鎖功能已停用。系統將自動在 48 小時後重新啟用這項功能。"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"由於您曾在過去 48 小時內使用這支手機撥打緊急服務電話，因此來電封鎖功能已停用。此功能停用達 48 小時後，將由系統自動重新啟用。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"匯入電話號碼"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您之前曾將某些來電者標示為自動透過其他應用程式轉到語音信箱。"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"將已封鎖號碼的來電隱藏並刪除相關語音留言。"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"將已封鎖號碼的來電隱藏並自動刪除新的語音留言。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看號碼"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"匯入"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"匯入失敗"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"如要搜尋您的聯絡人，請開啟「聯絡人」存取權限。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"如要撥打電話，請開啟「電話」存取權限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話應用程式的權限不足，無法寫入系統設定。"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"通話方式再進化"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"將「電話」設為您的預設電話應用程式，以便執行各種操作，例如查看來電者 (即使對方不是您的聯絡人)。"</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"與親朋好友進行通話"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"您必須授權「電話」應用程式存取您的手機和聯絡人資料，才能透過該應用程式致電給您的聯絡人。"</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"略過"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"繼續"</string>
 </resources>

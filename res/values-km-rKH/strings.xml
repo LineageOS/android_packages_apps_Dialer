@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"មើល​ទំ​នាក់ទំនង <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"ហៅ <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"ព័ត៌មាន​លម្អិត​ទំនាក់ទំនង​សម្រាប់ <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"សារ​ជា​សំឡេង​ថ្មី។"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"ការ​ហៅ <xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ។"</string>
     <string name="description_video_call" msgid="2933838090743214204">"ការ​ហៅ​ជា​វីដេអូ​។"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"ផ្ញើសារ SMS ទៅ <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"ហៅ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"ខកខានទទួលកាហៅពី <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>។"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"បានឆ្លើយតបការហៅពី <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>។"</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"ហៅទៅ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>។"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"នៅ <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ហៅ"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ការរារាំងការហៅត្រូវបានបិទដំណើរការ ដោយសារតែអ្នកបានទាក់ទងទៅសេវាអាសន្នចេញពីទូរស័ព្ទនេះក្នុងចន្លោះពេល 48 ម៉ោងកន្លងមកនេះ។ វានឹងបើកដំណើរការឡើងវិញ បន្ទាប់ពីរយៈពេល 48 ម៉ោងផុតកំណត់។"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"នាំចូលលេខ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"កាលពីមុនអ្នកបានដាក់សម្គាល់ឲ្យបញ្ជូនអ្នកហៅមួយចំនួនដោយស្វ័យប្រវត្តិទៅកាន់សារជាសំឡេងតាមរយៈកម្មវិធីផ្សេងទៀត។"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"លាក់ការហៅ និងលុបសារជាសំឡេងពីលេខដែលបានរារាំង។"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"លាក់ការហៅ និងលុបសារជាសំឡេងថ្មីដោយស្វ័យប្រវត្តិពីលេខដែលបានរារាំង។"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"មើលលេខ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"នាំចូល"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ការនាំចូលបានបរាជ័យ"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"ដើម្បីស្វែងរកទំនាក់ទំនងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតទំនាក់ទំនង។"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ដើម្បីធ្វើការហៅទូរស័ព្ទ សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីហៅទូរស័ព្ទ។"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"កម្មវិធីទូរស័ព្ទមិនមានសិទ្ធិអនុញ្ញាតដើម្បីសរសេរការកំណត់ប្រព័ន្ធទេ។"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"មធ្យោបាយប្រសើរសម្រាប់ការហៅទូរស័ព្ទគឺធ្វើការហៅទូរស័ព្ទ"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"កំណត់ឲ្យកម្មវិធីហៅទូរស័ព្ទជាកម្មវិធីទូរស័ព្ទលំនាំដើមរបស់អ្នក ដើម្បីមានលទ្ធភាពធ្វើសកម្មភាពដូចជាមើលថាតើអ្នកណាហៅទូរស័ព្ទមកអ្នក បើទោះបីជាពួកគេមិនមាននៅក្នុងទំនាក់ទំនងរបស់អ្នកក៏ដោយ។"</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"និយាយទៅកាន់មិត្តភក្តិ និងក្រុមគ្រួសាររបស់អ្នក"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"កម្មវិធីហៅទូរស័ព្ទនឹងត្រូវការចូលដំណើរការទូរស័ព្ទ និងទំនាក់ទំនងរបស់អ្នកដើម្បីធ្វើការហៅទៅកាន់មនុស្សនៅក្នុងទំនាក់ទំនងរបស់អ្នក។"</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"រំលង"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"បន្ទាប់"</string>
 </resources>

@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क पहा"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> ला कॉल  करा"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> साठी संपर्क तपशील"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"नवीन व्हॉइसमेल."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> कॉल."</string>
     <string name="description_video_call" msgid="2933838090743214204">"व्हिडिओ कॉल."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> वर SMS पाठवा"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> वर कॉल करा"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> वरून कॉल सुटला."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> वरून कॉलला उत्तर दिले."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> वर कॉल करा."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> वर"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"कॉल करा"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"आपण मागील 48 तासात या फोनवरून आणीबाणी सेवांशी संपर्क साधला असल्याने कॉल अवरोधित करणे अक्षम केले गेले आहे. एकदा 48 तासांचा कालावधी कालबाह्य झाला की ते स्वयंचलितपणे पुन्हा सक्षम केले जाईल."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"नंबर अायात करा"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"आपण पूर्वीपासून काही कॉलरना स्वयंचलितपणे इतर अॅप्सद्वारे व्हॉइसमेलमध्ये पाठविण्यासाठी चिन्हांकित केले आहे."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"कॉल लपवा आणि अवरोधित नंबरवरून व्हॉइसमेल हटवा."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"अवरोधित नंबर वरील कॉल लपवा आणि स्वयंचलितपणे नवीन व्हॉइसमेल हटवा."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"नंबर पहा"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"आयात करा"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"आयात अयशस्वी झाले"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"आपले संपर्क शोधण्‍यासाठी, संपर्क परवानग्या चालू करा."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"कॉल करण्यासाठी, फोन परवानगी चालू करा."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"फोन अॅपला सिस्टीम स‍ेटिंग्जमध्ये लिहिण्याची परवानगी नाही."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"कॉल करण्याची उत्कृष्ट पद्धत कॉल करणे आहे"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"आपल्या संपर्कामध्ये नसलेली व्यक्ती आपल्याला कॉल करीत असली तरीही आपल्याला कोण कॉल करीत आहे हे पाहणे यासारख्या गोष्टी सक्षम करण्यासाठी आपल्या फोनला डीफॉल्ट फोन अॅप बनवा."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"आपल्या मित्र आणि कुटुंबाशी बोला"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"आपल्या संपर्कातील लोकांना कॉल करण्यासाठी फोन ला आपल्या फोन ‍आणि संपर्कांमध्ये प्रवेश करण्याची आवश्यकता असेल."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"वगळा"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"पुढील"</string>
 </resources>

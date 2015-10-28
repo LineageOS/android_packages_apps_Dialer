@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Shiko kontaktin <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Telefono <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Detajet e kontaktit për <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Postë e re zanore."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> telefonata."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Telefonatë me video."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Dërgo SMS te <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Telefono <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Telefonatë e humbur nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Telefonatë e përgjigjur nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Telefonatë për <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"në <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telefono"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Bllokimi i telefonatave është çaktivizuar sepse kontaktove me shërbimet e urgjencës nga ky telefon brenda 48 orëve të fundit. Ai do të riaktivizohet automatikisht pas skadimit të periudhës prej 48 orë."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importo numrat"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Disa telefonues i ke shënuar më parë që të dërgohen automatikisht drejt postës zanore përmes aplikacioneve të tjera."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Fshih telefonatat dhe fshi postat zanore nga numrat e bllokuar."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Fshih telefonatat dhe fshi automatikisht postat zanore nga numrat e bllokuar."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Shiko numrat"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importo"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importimi dështoi"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Për të kërkuar kontaktet, aktivizo lejet e Kontakteve"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Për të kryer një telefonatë, aktivizo lejen e Telefonit."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacionet e telefonit nuk kanë leje të shkruajnë në cilësimet e sistemit."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Një mënyrë më e mirë për të telefonuar është telefonata"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Bëje \"Telefonin\" aplikacionin e parazgjedhur të telefonit për të arritur të bësh gjëra të tilla si p.sh. të shikosh kush po të telefonon, edhe kur nuk janë në kontaktet e tua."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Vazhdo të flasësh me shokët dhe me familjen tënde"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Aplikacioni \"Telefoni\" do të ketë nevojë të ketë qasje te telefoni dhe kontaktet e tua për të kryer telefonata me personat në kontaktet e tua."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Kapërce"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Përpara"</string>
 </resources>

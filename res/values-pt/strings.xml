@@ -94,9 +94,9 @@
     <string name="type_incoming" msgid="6502076603836088532">"Chamada recebida"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Chamada efetuada"</string>
     <string name="type_missed" msgid="2720502601640509542">"Chamada perdida"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"Vídeo chamada recebida"</string>
-    <string name="type_outgoing_video" msgid="2858140021680755266">"Vídeo chamada realizada"</string>
-    <string name="type_missed_video" msgid="954396897034220545">"Vídeo chamada perdida"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"Videochamada recebida"</string>
+    <string name="type_outgoing_video" msgid="2858140021680755266">"Videochamada realizada"</string>
+    <string name="type_missed_video" msgid="954396897034220545">"Videochamada perdida"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"Correio de voz"</string>
     <string name="type_rejected" msgid="7783201828312472691">"Chamada recusada"</string>
     <string name="type_blocked" msgid="3521686227115330015">"Chamada bloqueada"</string>
@@ -105,9 +105,8 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Visualizar contato <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Ligar para <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Detalhes de contato para <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Nova mensagem de voz."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> chamadas."</string>
-    <string name="description_video_call" msgid="2933838090743214204">"Vídeochamada."</string>
+    <string name="description_video_call" msgid="2933838090743214204">"Videochamada."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Enviar SMS para <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nova mensagem de voz"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Iniciar pesquisa por voz"</string>
@@ -158,7 +157,7 @@
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Criar novo contato"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Adicionar a um contato"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Enviar SMS"</string>
-    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fazer vídeo chamada"</string>
+    <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fazer videochamada"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Bloquear número"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> novas chamadas perdidas"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Ainda não há ninguém na sua discagem rápida"</string>
@@ -167,17 +166,21 @@
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Adicionar um contato"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toque na imagem para ver todos os números ou toque e segure para reordenar"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remover"</string>
-    <string name="call_log_action_video_call" msgid="7724301709041128296">"Vídeochamada"</string>
+    <string name="call_log_action_video_call" msgid="7724301709041128296">"Videochamada"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Enviar mensagem"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Detalhes da chamada"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Ligar para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Chamada perdida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Chamada atendida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Chamada para <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"em <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Ligar"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Ligar para <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"Vídeochamada <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_video_call_action" msgid="7386922428155062213">"Videochamada <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Ouvir mensagem de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_play" msgid="2689369874037785439">"Reproduzir correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"Pausar correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"O bloqueio de chamadas foi desativado porque você entrou em contato com serviços de emergência usando este telefone nas últimas 48 horas. Ele será reativado automaticamente depois de um período de 48 horas."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importar números"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Anteriormente, você marcou alguns autores de chamada para serem enviados automaticamente para o correio de voz por meio de outros apps."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Ocultar chamadas e excluir correios de voz de números bloqueados."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Ocultar chamadas e excluir automaticamente novos correios de voz de números bloqueados."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ver números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importar"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Falha na importação"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Para pesquisar seus contatos, ative as permissões para \"Contatos\"."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Para fazer uma chamada, ative a permissão para o app Telefone."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"O app Telefone não tem permissão para gravar nas configurações do sistema."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Um jeito melhor de fazer chamadas está chamando você"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Faça do app \"Telefone\" seu aplicativo padrão para fazer coisas como ver quem está ligando para você, mesmo quando essa pessoa não estiver nos seus contatos."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Converse com seus amigos e familiares"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"O app Telefone precisa acessar seu smartphone e seu contatos para fazer chamadas para as pessoas que estão nos seus contatos."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Pular"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Próxima"</string>
 </resources>

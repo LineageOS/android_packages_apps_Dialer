@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> পরিচিতি দেখুন"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> কে কল করুন"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> পরিচিতির বিশদ বিবরণ"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"নতুন ভয়েসমেল৷"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>টি কল৷"</string>
     <string name="description_video_call" msgid="2933838090743214204">"ভিডিও কল।"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> কে SMS পাঠান"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> এর কল"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> থেকে মিস হওয়া কল৷"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> এর থেকে উত্তর দেওয়া কল৷"</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> এ কল করুন৷"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> এ"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"কল করুন"</string>
@@ -215,10 +218,10 @@
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
     <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"অবরুদ্ধ নম্বরগুলি"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"কল অবরোধ সাময়িকভাবে বন্ধ রয়েছে"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"কল অবরোধ অক্ষম করা হয়েছে কারণ আপনি শেষ ২৮ ঘন্টার মধ্যে এই ফোন থেকে জরুরি পরিষেবায় যোগাযোগ করেছেন। ২৮ ঘন্টার সময়সীমা পেরিয়ে গেলেই এটি স্বয়ংক্রিয়ভাবে পুনরায় সক্ষম হবে।"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"কল অবরোধ অক্ষম করা হয়েছে কারণ আপনি গত ২৮ ঘন্টার মধ্যে এই ফোন থেকে জরুরি পরিষেবায় যোগাযোগ করেছেন। ২৮ ঘন্টার সময়সীমা পেরিয়ে গেলেই এটি স্বয়ংক্রিয়ভাবে পুনরায় সক্ষম হবে।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"নম্বরগুলি আমদানি করুন"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"আপনি আগে থেকেই অন্য অ্যাপ্লিকেশানগুলির মাধ্যমে স্বয়ংক্রিয়ভাবে ভয়েস মেল পাঠানোর জন্য কিছু কলারকে চিহ্নিত করেছেন৷"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"অবরোধ করা নম্বরগুলি থেকে কলগুলি লুকান এবং ভয়েসমেলগুলি মুছুন।"</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"অবরোধ করা নম্বরগুলি থেকে কলগুলি লুকান এবং স্বয়ংক্রিয়ভাবে ভয়েসমেলগুলি মুছুন।"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"নম্বরগুলি দেখুন"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"আমদানি করুন"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"আমদানি ব্যর্থ হয়েছে"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"আপনার পরিচিতিগুলি অনুসন্ধান করতে, পরিচিতির অনুমতিগুলি চালু করুন।"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"একটি কল করতে, ফোনের অনুমতি চালু করুন।"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ফোনের অ্যাপ্লিকেশানকে সিস্টেম সেটিংসে লেখার অনুমতি দেওয়া হয়নি।"</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"কল করার একটি ভালো উপায় হল কল করা"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"পরিচিতিগুলির মধ্যে না থাকলেও কারা আপনাকে ফোন করছে দেখার জন্য এবং এই ধরনের জিনিসগুলি করতে, Phone কে আপনার ডিফল্ট ফোন অ্যাপ্লিকেশান হিসাবে সেট করুন৷"</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"আপনার বন্ধু ও পরিবারের সাথে কথা বলার সুযোগ পান"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"আপনার পরিচিতিতে থাকা ব্যক্তিদের কল করার জন্য আপনার ফোন এবং পরিচিতিগুলিতে Phone এর অ্যাক্সেস প্রয়োজন৷"</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"এড়িয়ে যান"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"পরবর্তী"</string>
 </resources>

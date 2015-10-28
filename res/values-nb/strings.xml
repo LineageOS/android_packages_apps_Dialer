@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Se kontakten <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Ring til <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Kontaktinformasjon for <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Ny talemelding."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> samtaler."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videoanrop."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Send SMS til <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Ubesvart anrop fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Besvart anrop fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Ring til <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"på <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Ring"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Blokkering av anrop er slått av fordi du kontaktet nødtjenester fra denne telefonen i løpet av de siste 48 timene. Funksjonen blir automatisk slått på igjen når perioden på 48 timer er utløpt."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importér numre"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Du markerte tidligere noen anropere for automatisk overføring til talepost via andre apper."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Skjul anrop og slett talemeldinger fra blokkerte numre."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Skjul anrop, og slett ny talepost fra blokkerte numre automatisk."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Se numre"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importér"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importeringen mislyktes"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"For å søke i kontaktene dine, slå på tillatelser for Kontakter."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"For å ringe, slå på Telefon-tillatelsen."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonappen har ikke tillatelse til å skrive til systeminnstillinger."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"En bedre måte å ringe på"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Angi Telefon som standard telefonapp for å kunne gjøre ting som å se hvem som ringer deg, selv når de ikke er lagret i kontaktene dine."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Snakk med venner og familie"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Du må gi Telefon tilgang til telefonen og kontaktene for å ringe folk i kontaktene dine."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Hopp over"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Neste"</string>
 </resources>

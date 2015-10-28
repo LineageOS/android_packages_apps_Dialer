@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Προβολή επαφής <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Κλήση του χρήστη <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Στοιχεία επικοινωνίας του <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Νέο μήνυμα στον αυτόματο τηλεφωνητή."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> κλήσεις."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Βιντεοκλήση."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Αποστολή SMS στο χρήστη <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Κλήση <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Αναπάντητη κλήση από <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Ληφθείσα κλήση από <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"Κλήση προς <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"σε <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Κλήση"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Η φραγή κλήσεων έχει απενεργοποιηθεί προσωρινά επειδή επικοινωνήσατε με τις υπηρεσίες έκτακτης ανάγκης από αυτό το τηλέφωνο μέσα στις τελευταίες 48 ώρες. Θα ενεργοποιηθεί ξανά αυτόματα μόλις λήξει η περίοδος των 48 ωρών."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Εισαγωγή αριθμών"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Στο παρελθόν ρυθμίσατε ορισμένους καλούντες ώστε να αποστέλλονται αυτόματα στον τηλεφωνητή μέσω άλλων εφαρμογών."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"Αποκρύψτε κλήσεις και διαγράψτε φωνητικά μηνύματα από αποκλεισμένους αριθμούς."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Αποκρύψτε κλήσεις και διαγράψτε αυτόματα τα φωνητικά μηνύματα από αποκλεισμένους αριθμούς."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Προβολή αριθμών"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Εισαγωγή"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Αποτυχία εισαγωγής"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"Για να κάνετε αναζήτηση στις επαφές σας, ενεργοποιήστε τις άδειες \"Επαφές\"."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Για να πραγματοποιήσετε μια κλήση, ενεργοποιήστε την άδεια τηλεφώνου."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Η εφαρμογή \"Τηλέφωνο\" δεν έχει άδεια εγγραφής στις ρυθμίσεις συστήματος."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"Ένας καλύτερος τρόπος πραγματοποίησης κλήσεων"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"Κάντε το Τηλέφωνο την προεπιλεγμένη εφαρμογή τηλεφώνου σας για να έχετε πρόσβαση σε δυνατότητες, όπως προβολή των καλούντων, ακόμη και όταν δεν βρίσκονται στις επαφές σας."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"Συνομιλήστε με τους φίλους και την οικογένειά σας"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"Το Τηλέφωνο θα πρέπει να έχει πρόσβαση στο τηλέφωνο και τις επαφές σας προκειμένου να πραγματοποιεί κλήσεις στα άτομα στις επαφές σας."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"Παράλειψη"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"Επόμενο"</string>
 </resources>

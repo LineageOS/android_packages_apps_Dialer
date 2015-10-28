@@ -105,7 +105,6 @@
     <string name="description_view_contact" msgid="5205669345700598415">"კონტაქტის <xliff:g id="NAME">%1$s</xliff:g> ნახვა"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g>-თან დარეკვა"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>-ის კონტაქტის დეტალები"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"ახალი ხმოვანი ფოსტა."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> ზარი."</string>
     <string name="description_video_call" msgid="2933838090743214204">"ვიდეოზარი."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"გააგზავნეთ SMS <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -173,6 +172,10 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-თან დარეკვა"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"გამოტოვებული ზარი აბონენტისგან: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"უპასუხო ზარი აბონენტისგან <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
     <string name="description_outgoing_call" msgid="6386364390619734734">"ზარი აბონენტთან <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>-ზე"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"დარეკვა"</string>
@@ -218,7 +221,7 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ზარების დაბლოკვა გაითიშა, რადგან ბოლო 48 საათში ამ ტელეფონიდან საგანგებო სამსახურებს დაუკავშირდით. 48 საათის გასვლის შემდეგ ის ავტომატურად ჩაირთვება."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"ნომრების იმპორტი"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"სხვა აპების მეშვეობით თქვენ მიერ ადრე ზოგიერთი აბონენტის ხმოვან ფოსტაზე ავტომატური გადამისამართება მოინიშნა."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="8323988380331424420">"დაბლოკილი ნომრებიდან მიღებული ზარებისა და ხმოვანი ფოსტის დამალვა."</string>
+    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"დაბლოკილი ნომრებიდან ზარების დამალვა და ახალი ხმოვანი ფოსტის ავტომატური წაშლა."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ნომრების ნახვა"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"იმპორტი"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"იმპორტი ვერ მოხერხდა"</string>
@@ -238,10 +241,4 @@
     <string name="permission_no_search" msgid="84152933267902056">"თქვენი კონტაქტების მოსაძებნად ჩართეთ კონტაქტების ნებართვები."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ზარის განსახორციელებლად, ჩართეთ ტელეფონის ნებართვა."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ტელეფონის აპს სისტემის პარამეტრებში ჩაწერის ნებართვა არ აქვს."</string>
-    <string name="request_default_dialer_screen_title" msgid="685643766987775056">"დარეკვაზე უკეთესი მხოლოდ ზარის განხორციელებაა"</string>
-    <string name="request_default_dialer_screen_content" msgid="6149997762086838421">"გახადეთ Phone ტელეფონის ნაგულისხმევ აპად და იხილეთ, მაგალითად, ვინ გირეკავთ მაშინაც კი, თუ ეს პიროვნება თქვენს კონტაქტებში არ არის."</string>
-    <string name="request_permissions_screen_title" msgid="7628851957217029400">"დაუკავშირდით ოჯახსა და მეგობრებს"</string>
-    <string name="request_permissions_screen_content" msgid="24495396532130179">"თქვენს კონტაქტებთან ზარის განსახორციელებლად Phone თქვენს ტელეფონსა და კონტაქტებზე წვდომას საჭიროებს."</string>
-    <string name="onboarding_skip_button" msgid="3955670727733408256">"გამოტოვება"</string>
-    <string name="onboarding_next_button" msgid="8492839445714599756">"შემდეგი"</string>
 </resources>
