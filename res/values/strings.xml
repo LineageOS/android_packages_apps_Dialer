@@ -883,12 +883,6 @@
     <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
     <string name="blockList">Block list</string>
 
-    <!-- Label for progress dialog when validating a number to be added to the block list.
-        [CHAR LIMIT=64] -->
-    <string name="checkingNumber">Checking
-        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
-    </string>
-
     <!-- Error message shown when user tries to add invalid number to the block list.
         [CHAR LIMIT=64] -->
     <string name="invalidNumber"><xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
@@ -898,6 +892,19 @@
         blocked. [CHAR LIMIT=64] -->
     <string name="alreadyBlocked"><xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
         is already blocked.</string>
+
+    <!-- Title of notification telling the user that call blocking has been temporarily disabled.
+         [CHAR LIMIT=56] -->
+    <string name="call_blocking_disabled_notification_title">
+        Call blocking disabled for 48 hours
+    </string>
+
+    <!-- Text for notification which provides the reason that call blocking has been temporarily
+         disabled. Namely, we disable call blocking after an emergency call in case of return
+         phone calls made by emergency services. [CHAR LIMIT=64] -->
+    <string name="call_blocking_disabled_notification_text">
+        Disabled because an emergency call was made.
+    </string>
 
     <!-- Label for the phone account settings [CHAR LIMIT=30] -->
     <string name="phone_account_settings_label">Calling accounts</string>

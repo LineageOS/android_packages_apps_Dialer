@@ -15,8 +15,12 @@
  */
 package com.android.dialer.filterednumber;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -35,6 +39,7 @@ import java.util.List;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 
@@ -43,12 +48,20 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
  */
 public class FilteredNumbersUtil {
 
-    private static final String HIDE_BLOCKED_CALLS_PREF_KEY = "hide_blocked_calls";
-    // Pref key for storing the time, in milliseconds after epoch, of end of the last emergency call.
-    private static final String LAST_EMERGENCY_CALL_PREF_KEY = "last_emergency_call";
-
     // Disable incoming call blocking if there was a call within the past 2 days.
     private static final long RECENT_EMERGENCY_CALL_THRESHOLD_MS = 1000 * 60 * 60 * 24 * 2;
+
+    private static final String HIDE_BLOCKED_CALLS_PREF_KEY = "hide_blocked_calls";
+    // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.
+    private static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
+
+    // Pref key for storing whether a notification has been dispatched to notify the user that call
+    // blocking has been disabled because of a recent emergency call.
+    private static final String NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY =
+            "notified_call_blocking_disabled_by_emergency_call";
+
+    public static final String CALL_BLOCKING_NOTIFICATION_TAG = "call_blocking";
+    public static final int CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID = 10;
 
     /**
      * Used for testing to specify that a custom threshold should be used instead of the default.
@@ -256,7 +269,7 @@ public class FilteredNumbersUtil {
             return false;
         }
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(FilteredNumbersUtil.HIDE_BLOCKED_CALLS_PREF_KEY, false);
+                .getBoolean(HIDE_BLOCKED_CALLS_PREF_KEY, false);
     }
 
     public static void setShouldHideBlockedCalls(Context context, boolean shouldHide) {
@@ -275,7 +288,7 @@ public class FilteredNumbersUtil {
         }
 
         Long lastEmergencyCallTime = PreferenceManager.getDefaultSharedPreferences(context)
-                .getLong(LAST_EMERGENCY_CALL_PREF_KEY, 0);
+                .getLong(LAST_EMERGENCY_CALL_MS_PREF_KEY, 0);
         if (lastEmergencyCallTime == 0) {
             return false;
         }
@@ -288,10 +301,59 @@ public class FilteredNumbersUtil {
         if (context == null) {
             return;
         }
+
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putLong(LAST_EMERGENCY_CALL_PREF_KEY, System.currentTimeMillis())
+                .putLong(LAST_EMERGENCY_CALL_MS_PREF_KEY, System.currentTimeMillis())
+                .putBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, false)
                 .apply();
+
+        maybeNotifyCallBlockingDisabled(context);
+    }
+
+    public static void maybeNotifyCallBlockingDisabled(final Context context) {
+        // Skip if the user has already received a notification for the most recent emergency call.
+        if (PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, false)) {
+            return;
+        }
+
+        // If the user has blocked numbers, notify that call blocking is temporarily disabled.
+        FilteredNumberAsyncQueryHandler queryHandler =
+                new FilteredNumberAsyncQueryHandler(context.getContentResolver());
+        queryHandler.hasBlockedNumbersAsync(new OnHasBlockedNumbersListener() {
+            @Override
+            public void onHasBlockedNumbers(boolean hasBlockedNumbers) {
+                if (context == null || !hasBlockedNumbers) {
+                    return;
+                }
+
+                NotificationManager notificationManager = (NotificationManager)
+                        context.getSystemService(Context.NOTIFICATION_SERVICE);
+                Notification.Builder builder = new Notification.Builder(context)
+                        .setSmallIcon(R.drawable.ic_block_24dp)
+                        .setContentTitle(context.getString(
+                                R.string.call_blocking_disabled_notification_title))
+                        .setContentText(context.getString(
+                                R.string.call_blocking_disabled_notification_text));
+
+                final Intent contentIntent =
+                        new Intent(context, ManageBlockedNumbersActivity.class);
+                builder.setContentIntent(PendingIntent.getActivity(
+                        context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+
+                notificationManager.notify(
+                        CALL_BLOCKING_NOTIFICATION_TAG,
+                        CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID,
+                        builder.build());
+
+                // Record that the user has been notified for this emergency call.
+                PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit()
+                    .putBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, true)
+                    .apply();
+            }
+        });
     }
 
     public static boolean canBlockNumber(Context context, String number) {
