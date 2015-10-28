@@ -133,7 +133,8 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     protected ContactEntryListAdapter createListAdapter() {
         BlockedListSearchAdapter adapter = new BlockedListSearchAdapter(getActivity());
         adapter.setDisplayPhotos(true);
-        adapter.setUseCallableUri(usesCallableUri());
+        // Don't show SIP addresses.
+        adapter.setUseCallableUri(false);
         adapter.setQueryString(mSearchQuery);
         return adapter;
     }

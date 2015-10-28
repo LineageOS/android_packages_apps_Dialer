@@ -33,6 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
@@ -295,7 +296,8 @@ public class FilteredNumbersUtil {
     }
 
     public static boolean canBlockNumber(Context context, String number) {
-        return !PhoneNumberUtils.isEmergencyNumber(number) && !TextUtils.isEmpty(number);
+        return !TextUtils.isEmpty(number) && !PhoneNumberUtils.isEmergencyNumber(number)
+                && !PhoneNumberHelper.isUriNumber(number);
     }
 
     private static long getRecentEmergencyCallThresholdMs(Context context) {
