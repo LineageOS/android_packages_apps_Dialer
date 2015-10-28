@@ -175,8 +175,7 @@
     <string name="business_contact_context_title" msgid="5334864183374669765">"کاروباری معلومات"</string>
     <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> میل دور"</string>
     <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> کلومیٹر دور"</string>
-    <!-- no translation found for display_address (7307400970699471708) -->
-    <skip />
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>، <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
     <string name="opening_hours" msgid="3064872780183247123">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
     <string name="open_now" msgid="6439301193613349163">"ابھی کھلا ہے"</string>
     <string name="closed_now" msgid="9175774453982778909">"اب بند ہے"</string>

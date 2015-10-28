@@ -48,7 +48,7 @@
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Conectando vídeo"</string>
     <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Solicitando vídeo"</string>
-    <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível conectar a vídeo chamada"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível conectar a videochamada"</string>
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Solicitação de vídeo rejeitada"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Seu número de retorno de chamada\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Seu número de retorno de chamada de emergência\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
@@ -62,7 +62,7 @@
     <string name="notification_on_hold" msgid="3480694969511790465">"Em espera"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Recebendo chamada"</string>
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Chamada Wi-Fi recebida"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Recebendo vídeo chamada"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Recebendo videochamada"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Recebendo solicitação de vídeo"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Novo correio de voz"</string>
     <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Novo correio de voz (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -134,7 +134,7 @@
     <string name="description_target_answer" msgid="7205604197797472471">"Responder"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Enviar SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Recusar"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Atender como vídeo chamada"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Atender como videochamada"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Atender como chamada de áudio"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Aceitar solicitação de vídeo"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Recusar solicitação de vídeo"</string>
