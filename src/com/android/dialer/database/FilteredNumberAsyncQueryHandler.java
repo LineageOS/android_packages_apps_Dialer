@@ -78,6 +78,14 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         public void onUnblockComplete(int rows, ContentValues values);
     }
 
+    public interface OnHasBlockedNumbersListener {
+        /**
+         * @param hasBlockedNumbers {@code true} if any blocked numbers are stored.
+         *     {@code false} otherwise.
+         */
+        public void onHasBlockedNumbers(boolean hasBlockedNumbers);
+    }
+
     @Override
     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
         if (cookie != null) {
@@ -118,6 +126,21 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         startUpdate(NO_TOKEN, null,
                 ContentUris.withAppendedId(FilteredNumber.CONTENT_URI_INCREMENT_FILTERED_COUNT, id),
                 null, null, null);
+    }
+
+    public final void hasBlockedNumbersAsync(final OnHasBlockedNumbersListener listener) {
+        startQuery(NO_TOKEN,
+                new Listener() {
+                    @Override
+                    protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+                        listener.onHasBlockedNumbers(cursor.getCount() > 0);
+                    }
+                },
+                getContentUri(null),
+                new String[]{ FilteredNumberColumns._ID },
+                FilteredNumberColumns.TYPE + "=" + FilteredNumberTypes.BLOCKED_NUMBER,
+                null,
+                null);
     }
 
     /**
