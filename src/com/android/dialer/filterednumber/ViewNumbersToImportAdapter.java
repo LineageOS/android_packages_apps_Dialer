@@ -25,7 +25,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 
-public class ViewNumbersToImportAdapter extends NumberAdapter {
+public class ViewNumbersToImportAdapter extends NumbersAdapter {
 
     private ViewNumbersToImportAdapter(
             Context context,

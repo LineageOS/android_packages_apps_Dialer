@@ -36,7 +36,7 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.util.PhoneNumberUtil;
 
-public class NumberAdapter extends SimpleCursorAdapter {
+public class NumbersAdapter extends SimpleCursorAdapter {
 
     private Context mContext;
     private FragmentManager mFragmentManager;
@@ -45,7 +45,7 @@ public class NumberAdapter extends SimpleCursorAdapter {
     private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
     private ContactPhotoManager mContactPhotoManager;
 
-    public NumberAdapter(
+    public NumbersAdapter(
             Context context,
             FragmentManager fragmentManager,
             ContactInfoHelper contactInfoHelper,

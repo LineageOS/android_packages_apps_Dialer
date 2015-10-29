@@ -47,7 +47,7 @@ public class BlockedNumbersFragment extends ListFragment
         implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener,
                 CallLogQueryHandler.Listener {
 
-    private BlockedNumberAdapter mAdapter;
+    private BlockedNumbersAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
     private VoicemailStatusHelper mVoicemailStatusHelper;
 
@@ -64,7 +64,7 @@ public class BlockedNumbersFragment extends ListFragment
         getListView().addHeaderView(inflater.inflate(R.layout.blocked_number_header, null));
 
         if (mAdapter == null) {
-            mAdapter = BlockedNumberAdapter.newBlockedNumberAdapter(
+            mAdapter = BlockedNumbersAdapter.newBlockedNumbersAdapter(
                     getContext(), getActivity().getFragmentManager());
         }
         setListAdapter(mAdapter);
