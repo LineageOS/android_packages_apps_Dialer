@@ -148,7 +148,7 @@
               android:exported="false">
         </activity>
 
-        <activity android:name="com.android.dialer.filterednumber.ManageBlockedNumbersActivity"
+        <activity android:name="com.android.dialer.filterednumber.BlockedNumbersSettingsActivity"
             android:label="@string/manage_blocked_numbers_label"
             android:parentActivityName="com.android.dialer.settings.DialerSettingsActivity"
             android:theme="@style/ManageBlockedNumbersStyle"
