@@ -37,7 +37,7 @@ import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.BlockedListSearchFragment;
 import com.android.dialer.list.SearchFragment;
 
-public class ManageBlockedNumbersActivity extends AppCompatActivity
+public class BlockedNumbersSettingsActivity extends AppCompatActivity
         implements SearchFragment.HostInterface {
 
     private static final String TAG_BLOCKED_MANAGEMENT_FRAGMENT = "blocked_management";
@@ -55,6 +55,9 @@ public class ManageBlockedNumbersActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Shows fragment with the list of currently blocked numbers and settings related to blocking.
+     */
     public void showManagementUi() {
         BlockedNumbersFragment fragment = (BlockedNumbersFragment) getFragmentManager()
                 .findFragmentByTag(TAG_BLOCKED_MANAGEMENT_FRAGMENT);
@@ -68,7 +71,10 @@ public class ManageBlockedNumbersActivity extends AppCompatActivity
                 .commit();
     }
 
-    public void enterSearchUi() {
+    /**
+     * Shows fragment with search UI for browsing/finding numbers to block.
+     */
+    public void showSearchUi() {
         BlockedListSearchFragment fragment = (BlockedListSearchFragment) getFragmentManager()
                 .findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
         if (fragment == null) {
@@ -85,6 +91,11 @@ public class ManageBlockedNumbersActivity extends AppCompatActivity
                 .commit();
     }
 
+    /**
+     * Shows fragment with UI to preview the numbers of contacts currently marked as
+     * send-to-voicemail in Contacts. These numbers can be imported into Dialer's blocked number
+     * list.
+     */
     public void showNumbersToImportPreviewUi() {
         ViewNumbersToImportFragment fragment = (ViewNumbersToImportFragment) getFragmentManager()
                 .findFragmentByTag(TAG_VIEW_NUMBERS_TO_IMPORT_FRAGMENT);

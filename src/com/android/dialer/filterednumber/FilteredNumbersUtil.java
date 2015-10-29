@@ -339,7 +339,7 @@ public class FilteredNumbersUtil {
                                 R.string.call_blocking_disabled_notification_text));
 
                 final Intent contentIntent =
-                        new Intent(context, ManageBlockedNumbersActivity.class);
+                        new Intent(context, BlockedNumbersSettingsActivity.class);
                 builder.setContentIntent(PendingIntent.getActivity(
                         context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 

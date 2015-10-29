@@ -176,21 +176,20 @@ public class BlockedNumbersFragment extends ListFragment
 
     @Override
     public void onClick(final View view) {
-        ManageBlockedNumbersActivity manageBlockedNumbersActivity =
-                (ManageBlockedNumbersActivity) getActivity();
-        if (manageBlockedNumbersActivity == null) {
+        BlockedNumbersSettingsActivity activity = (BlockedNumbersSettingsActivity) getActivity();
+        if (activity == null) {
             return;
         }
 
         switch (view.getId()) {
             case R.id.add_number_button:
-                manageBlockedNumbersActivity.enterSearchUi();
+                activity.showSearchUi();
                 break;
             case R.id.view_numbers_button:
-                manageBlockedNumbersActivity.showNumbersToImportPreviewUi();
+                activity.showNumbersToImportPreviewUi();
                 break;
             case R.id.import_button:
-                FilteredNumbersUtil.importSendToVoicemailContacts(manageBlockedNumbersActivity,
+                FilteredNumbersUtil.importSendToVoicemailContacts(activity,
                         new ImportSendToVoicemailContactsListener() {
                             @Override
                             public void onImportComplete() {
