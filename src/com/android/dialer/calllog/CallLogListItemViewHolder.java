@@ -48,7 +48,7 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
@@ -184,7 +184,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
-    private final FilterNumberDialogFragment.Callback mFilteredNumberDialogCallback;
+    private final BlockNumberDialogFragment.Callback mFilteredNumberDialogCallback;
 
     private final int mPhotoSize;
 
@@ -198,7 +198,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
-            FilterNumberDialogFragment.Callback filteredNumberDialogCallback,
+            BlockNumberDialogFragment.Callback filteredNumberDialogCallback,
             View rootView,
             QuickContactBadge quickContactView,
             View primaryActionView,
@@ -247,7 +247,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
-            FilterNumberDialogFragment.Callback filteredNumberDialogCallback) {
+            BlockNumberDialogFragment.Callback filteredNumberDialogCallback) {
 
         return new CallLogListItemViewHolder(
                 context,
@@ -327,7 +327,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.context_menu_block_number:
-                FilterNumberDialogFragment.show(
+                BlockNumberDialogFragment.show(
                         blockId,
                         info.normalizedNumber,
                         number,

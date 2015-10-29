@@ -59,7 +59,7 @@ public class BlockedNumberAdapter extends NumberAdapter {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FilterNumberDialogFragment.show(
+                BlockNumberDialogFragment.show(
                         id,
                         normalizedNumber,
                         number,

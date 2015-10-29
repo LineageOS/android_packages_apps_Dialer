@@ -55,7 +55,7 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
@@ -71,7 +71,7 @@ import com.android.incallui.Call.LogState;
  */
 public class CallDetailActivity extends AppCompatActivity
         implements MenuItem.OnMenuItemClickListener, View.OnClickListener,
-                FilterNumberDialogFragment.Callback {
+                BlockNumberDialogFragment.Callback {
     private static final String TAG = CallDetailActivity.class.getSimpleName();
 
      /** A long array extra containing ids of call log entries to display. */
@@ -358,7 +358,7 @@ public class CallDetailActivity extends AppCompatActivity
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.call_detail_action_block:
-                FilterNumberDialogFragment.show(
+                BlockNumberDialogFragment.show(
                         mBlockedNumberId,
                         null /* normalizedNumber */,
                         mNumber,
