@@ -37,7 +37,11 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
 
-public class FilterNumberDialogFragment extends DialogFragment {
+/**
+ * Fragment for confirming and enacting blocking/unblocking a number. Also invokes snackbar
+ * providing undo functionality.
+ */
+public class BlockNumberDialogFragment extends DialogFragment {
 
     /**
      * Use a callback interface to update UI after success/undo. Favor this approach over other
@@ -51,7 +55,7 @@ public class FilterNumberDialogFragment extends DialogFragment {
         public void onChangeFilteredNumberUndo();
     }
 
-    private static final String BLOCK_DIALOG_FRAGMENT = "blockUnblockNumberDialog";
+    private static final String BLOCK_DIALOG_FRAGMENT = "BlockNumberDialog";
 
     private static final String ARG_BLOCK_ID = "argBlockId";
     private static final String ARG_NORMALIZED_NUMBER = "argNormalizedNumber";
@@ -78,21 +82,21 @@ public class FilterNumberDialogFragment extends DialogFragment {
             Integer parentViewId,
             FragmentManager fragmentManager,
             Callback callback) {
-        final FilterNumberDialogFragment newFragment = FilterNumberDialogFragment.newInstance(
+        final BlockNumberDialogFragment newFragment = BlockNumberDialogFragment.newInstance(
                 blockId, normalizedNumber, number, countryIso, displayNumber, parentViewId);
 
         newFragment.setCallback(callback);
-        newFragment.show(fragmentManager, FilterNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
+        newFragment.show(fragmentManager, BlockNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
     }
 
-    private static FilterNumberDialogFragment newInstance(
+    private static BlockNumberDialogFragment newInstance(
             Integer blockId,
             String normalizedNumber,
             String number,
             String countryIso,
             String displayNumber,
             Integer parentViewId) {
-        final FilterNumberDialogFragment fragment = new FilterNumberDialogFragment();
+        final BlockNumberDialogFragment fragment = new BlockNumberDialogFragment();
         final Bundle args = new Bundle();
         if (blockId != null) {
             args.putInt(ARG_BLOCK_ID, blockId.intValue());
