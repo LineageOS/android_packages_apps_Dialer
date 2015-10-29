@@ -193,7 +193,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
     public final void blockNumber(
             final OnBlockNumberListener listener, String number, String countryIso) {
-        blockNumber(null, number, countryIso);
+        blockNumber(listener, null, number, countryIso);
     }
 
     /**
