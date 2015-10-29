@@ -26,9 +26,9 @@ import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 
-public class BlockedNumberAdapter extends NumberAdapter {
+public class BlockedNumbersAdapter extends NumbersAdapter {
 
-    private BlockedNumberAdapter(
+    private BlockedNumbersAdapter(
             Context context,
             FragmentManager fragmentManager,
             ContactInfoHelper contactInfoHelper,
@@ -36,9 +36,9 @@ public class BlockedNumberAdapter extends NumberAdapter {
         super(context, fragmentManager, contactInfoHelper, contactPhotoManager);
     }
 
-    public static BlockedNumberAdapter newBlockedNumberAdapter(
+    public static BlockedNumbersAdapter newBlockedNumbersAdapter(
             Context context, FragmentManager fragmentManager) {
-        return new BlockedNumberAdapter(
+        return new BlockedNumbersAdapter(
                 context,
                 fragmentManager,
                 new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context)),
