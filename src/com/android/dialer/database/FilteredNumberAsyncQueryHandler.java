@@ -191,11 +191,19 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 null);
     }
 
+    public final void blockNumber(
+            final OnBlockNumberListener listener, String number, String countryIso) {
+        blockNumber(null, number, countryIso);
+    }
+
     /**
      * Add a number manually blocked by the user.
      */
-    public final void blockNumber(final OnBlockNumberListener listener,
-                                  String normalizedNumber, String number, String countryIso) {
+    public final void blockNumber(
+            final OnBlockNumberListener listener,
+            String normalizedNumber,
+            String number,
+            String countryIso) {
         if (normalizedNumber == null) {
             normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         }
