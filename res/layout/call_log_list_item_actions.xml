@@ -19,7 +19,6 @@
     android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/call_log_actions_bottom_padding"
     android:orientation="vertical"
     android:visibility="visible"
     android:importantForAccessibility="1">
