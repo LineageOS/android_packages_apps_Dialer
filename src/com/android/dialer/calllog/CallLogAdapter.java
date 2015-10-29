@@ -50,7 +50,7 @@ import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListe
 import com.android.dialer.contactinfo.NumberWithCountryIso;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
-import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -63,7 +63,7 @@ import java.util.Map;
 public class CallLogAdapter extends GroupingListAdapter
         implements CallLogGroupBuilder.GroupCreator,
                 VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
-                FilterNumberDialogFragment.Callback {
+                BlockNumberDialogFragment.Callback {
 
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {

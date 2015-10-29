@@ -34,12 +34,12 @@ import com.android.contacts.common.list.ContactListItemView;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
-import com.android.dialer.filterednumber.FilterNumberDialogFragment;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.ManageBlockedNumbersActivity;
 import com.android.dialer.widget.SearchEditTextLayout;
 
 public class BlockedListSearchFragment extends RegularSearchFragment
-        implements FilterNumberDialogFragment.Callback {
+        implements BlockNumberDialogFragment.Callback {
     private static final String TAG = BlockedListSearchFragment.class.getSimpleName();
 
     private static final String KEY_SEARCH_QUERY = "search_query";
@@ -175,7 +175,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             @Override
             public void onCheckComplete(Integer id) {
                 if (id == null) {
-                    FilterNumberDialogFragment.show(
+                    BlockNumberDialogFragment.show(
                             id,
                             null,
                             number,
@@ -224,7 +224,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             return;
         }
 
-        FilterNumberDialogFragment.show(
+        BlockNumberDialogFragment.show(
                 blockId,
                 null,
                 number,
