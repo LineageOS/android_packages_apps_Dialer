@@ -191,13 +191,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             selectionArgs.add(Long.toString(newerThan));
         }
 
-        final boolean shouldHideBlockedCalls =
-                FilteredNumbersUtil.shouldHideBlockedCalls(mContext);
-        if (shouldHideBlockedCalls) {
-            where.append(" AND ");
-            where.append("(" + Calls.TYPE + " != ?)");
-            selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
-        }
+        // Always hide blocked calls.
+        where.append(" AND ");
+        where.append("(" + Calls.TYPE + " != ?)");
+        selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
 
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
         final String selection = where.length() > 0 ? where.toString() : null;

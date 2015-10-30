@@ -52,7 +52,6 @@ public class FilteredNumbersUtil {
     // Disable incoming call blocking if there was a call within the past 2 days.
     private static final long RECENT_EMERGENCY_CALL_THRESHOLD_MS = 1000 * 60 * 60 * 24 * 2;
 
-    private static final String HIDE_BLOCKED_CALLS_PREF_KEY = "hide_blocked_calls";
     // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.
     private static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
 
@@ -264,24 +263,6 @@ public class FilteredNumbersUtil {
         }
 
         return shouldBlock;
-    }
-
-    public static boolean shouldHideBlockedCalls(Context context) {
-        if (context == null) {
-            return false;
-        }
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(HIDE_BLOCKED_CALLS_PREF_KEY, false);
-    }
-
-    public static void setShouldHideBlockedCalls(Context context, boolean shouldHide) {
-        if (context == null) {
-            return;
-        }
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(HIDE_BLOCKED_CALLS_PREF_KEY, shouldHide)
-                .apply();
     }
 
     public static boolean hasRecentEmergencyCall(Context context) {

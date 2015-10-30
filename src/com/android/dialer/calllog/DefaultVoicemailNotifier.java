@@ -135,9 +135,8 @@ public class DefaultVoicemailNotifier {
                     mContext, newCall.number, newCall.countryIso, newCall.dateMs)) {
                 itr.remove();
 
-                if (FilteredNumbersUtil.shouldHideBlockedCalls(mContext)) {
-                    mContext.getContentResolver().delete(newCall.voicemailUri, null, null);
-                }
+                // Delete the voicemail.
+                mContext.getContentResolver().delete(newCall.voicemailUri, null, null);
                 continue;
             }
 
