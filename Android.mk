@@ -7,6 +7,12 @@ incallui_dir := ../InCallUI
 contacts_common_dir := ../ContactsCommon
 phone_common_dir := ../PhoneCommon
 
+ifeq ($(TARGET_BUILD_APPS),)
+support_library_root_dir := frameworks/support
+else
+support_library_root_dir := prebuilts/sdk/current/support
+endif
+
 src_dirs := src \
     $(incallui_dir)/src \
     $(contacts_common_dir)/src \
@@ -19,10 +25,10 @@ res_dirs := res \
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
-    frameworks/support/v7/appcompat/res \
-    frameworks/support/v7/cardview/res \
-    frameworks/support/v7/recyclerview/res \
-    frameworks/support/design/res
+    $(support_library_root_dir)/v7/cardview/res \
+    $(support_library_root_dir)/v7/recyclerview/res \
+    $(support_library_root_dir)/v7/appcompat/res \
+    $(support_library_root_dir)/design/res
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
