@@ -95,6 +95,11 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
         setMeasuredDimension(width, height);
     }
 
+    @Override
+    protected String getNameForView(ContactEntry contactEntry) {
+        return contactEntry.getPreferredDisplayName();
+    }
+
     public ContactEntry getContactEntry() {
         return mContactEntry;
     }

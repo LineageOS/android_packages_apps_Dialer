@@ -202,7 +202,9 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
     public void onResume() {
         Trace.beginSection(TAG + " onResume");
         super.onResume();
-
+        if (mContactTileAdapter != null) {
+            mContactTileAdapter.refreshContactsPreferences();
+        }
         if (PermissionsUtil.hasContactsPermissions(getActivity())) {
             if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
                 getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null,
