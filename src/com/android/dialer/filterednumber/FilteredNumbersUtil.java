@@ -336,7 +336,8 @@ public class FilteredNumbersUtil {
                         .setContentTitle(context.getString(
                                 R.string.call_blocking_disabled_notification_title))
                         .setContentText(context.getString(
-                                R.string.call_blocking_disabled_notification_text));
+                                R.string.call_blocking_disabled_notification_text))
+                        .setAutoCancel(true);
 
                 final Intent contentIntent =
                         new Intent(context, BlockedNumbersSettingsActivity.class);
