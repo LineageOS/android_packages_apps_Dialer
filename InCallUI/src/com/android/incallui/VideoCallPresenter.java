@@ -557,6 +557,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             updateCameraSelection(newPrimaryCall);
             enterVideoMode(newPrimaryCall);
         }
+        checkForOrientationAllowedChange(newPrimaryCall);
     }
 
     private boolean isVideoMode() {
