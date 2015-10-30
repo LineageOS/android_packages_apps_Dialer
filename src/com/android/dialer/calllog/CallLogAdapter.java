@@ -56,6 +56,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -71,6 +72,8 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     private static final int NO_EXPANDED_LIST_ITEM = -1;
+    // ConcurrentHashMap doesn't store null values. Use this value for numbers which aren't blocked.
+    private static final int NOT_BLOCKED = -1;
 
     private static final int VOICEMAIL_PROMO_CARD_POSITION = 0;
 
@@ -91,7 +94,10 @@ public class CallLogAdapter extends GroupingListAdapter
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     protected ContactInfoCache mContactInfoCache;
-    protected final Map<NumberWithCountryIso, Integer> mBlockedIdCache;
+    // Declaring static, since this can be shared across different instances, such as history and
+    // voicemail, so when the cache is cleared in one instance, it propagates across all instances.
+    private static final Map<NumberWithCountryIso, Integer> mBlockedIdCache =
+            new ConcurrentHashMap<>();
 
     private boolean mIsCallLogActivity;
 
@@ -257,7 +263,6 @@ public class CallLogAdapter extends GroupingListAdapter
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
         mTelecomCallLogCache = new TelecomCallLogCache(mContext);
-        mBlockedIdCache = new HashMap<>();
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, resources, mTelecomCallLogCache);
         mCallLogListItemHelper =
@@ -516,7 +521,8 @@ public class CallLogAdapter extends GroupingListAdapter
         // Update the photo, once we know whether the user's number is blocked or not.
         final NumberWithCountryIso blockedIdKey = new NumberWithCountryIso(number, countryIso);
         if (mBlockedIdCache.containsKey(blockedIdKey)) {
-            views.blockId = mBlockedIdCache.get(blockedIdKey);
+            int blockedId = mBlockedIdCache.get(blockedIdKey);
+            views.blockId = blockedId != NOT_BLOCKED ? blockedId : null;
             views.updatePhoto();
         } else {
             views.blockId = null;
@@ -524,7 +530,7 @@ public class CallLogAdapter extends GroupingListAdapter
                         new OnCheckBlockedListener() {
                     @Override
                     public void onCheckComplete(Integer id) {
-                        mBlockedIdCache.put(blockedIdKey, id);
+                        mBlockedIdCache.put(blockedIdKey, id != null ? id : NOT_BLOCKED);
                         views.blockId = id;
                         views.updatePhoto();
                     }
