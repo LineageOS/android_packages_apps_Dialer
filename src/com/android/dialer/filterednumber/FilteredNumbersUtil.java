@@ -235,7 +235,7 @@ public class FilteredNumbersUtil {
      * Use {@code FilteredNumberAsyncQueryHandler} to asynchronously check if a number is blocked.
      */
     public static boolean shouldBlockVoicemail(
-            Context context, String number, String countryIso, long dateMs) {
+            Context context, String number, String countryIso, long voicemailDateMs) {
         final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         if (TextUtils.isEmpty(normalizedNumber)) {
             return false;
@@ -256,7 +256,8 @@ public class FilteredNumbersUtil {
                 cursor.moveToFirst();
 
                 // Block if number is found and it was added before this voicemail was received.
-                shouldBlock = cursor.getCount() > 0 && dateMs > cursor.getLong(0);
+                final long numberBlockedTimeMs = cursor.getLong(0);
+                shouldBlock = cursor.getCount() > 0 && voicemailDateMs > numberBlockedTimeMs;
             } finally {
                 cursor.close();
             }
