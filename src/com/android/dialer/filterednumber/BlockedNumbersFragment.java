@@ -94,7 +94,7 @@ public class BlockedNumbersFragment extends ListFragment
 
         getActivity().findViewById(R.id.import_button).setOnClickListener(this);;
         getActivity().findViewById(R.id.view_numbers_button).setOnClickListener(this);
-        getActivity().findViewById(R.id.add_number_button).setOnClickListener(this);
+        getActivity().findViewById(R.id.add_number_textview).setOnClickListener(this);
     }
 
     @Override
@@ -182,7 +182,7 @@ public class BlockedNumbersFragment extends ListFragment
         }
 
         switch (view.getId()) {
-            case R.id.add_number_button:
+            case R.id.add_number_textview:
                 activity.showSearchUi();
                 break;
             case R.id.view_numbers_button:

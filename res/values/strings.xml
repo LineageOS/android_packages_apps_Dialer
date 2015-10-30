@@ -878,7 +878,7 @@
     <string name="description_blocked_number_list_delete">Unblock number</string>
 
     <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
-    <string name="blockNumber">Add number</string>
+    <string name="addBlockedNumber">Add number</string>
 
     <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
     <string name="blockList">Block list</string>

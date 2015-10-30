@@ -15,15 +15,6 @@
      limitations under the License.
 -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <solid android:color="@color/divider_line_color" />
-        </shape>
-    </item>
-    <item android:bottom="1dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@android:color/white" />
-        </shape>
-    </item>
-</layer-list>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/ic_add_24dp"
+    android:tint="@color/blocked_number_icon_tint" />

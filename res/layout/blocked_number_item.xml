@@ -25,7 +25,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:focusable="true"
-    android:background="@drawable/blocked_number_item_background">
+    android:background="@android:color/white">
 
     <QuickContactBadge
         android:id="@+id/quick_contact_photo"
@@ -69,7 +69,7 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_remove"
         android:scaleType="center"
-        android:tint="@color/delete_icon_tint"
+        android:tint="@color/blocked_number_icon_tint"
         android:contentDescription="@string/description_blocked_number_list_delete" />
 
 </LinearLayout>
