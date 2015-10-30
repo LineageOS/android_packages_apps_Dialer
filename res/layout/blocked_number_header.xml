@@ -136,18 +136,29 @@
                     android:layout_height="1dp"
                     android:layout_below="@id/import_button"
                     android:background="@color/divider_line_color"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginTop="8dp" />
 
             </RelativeLayout>
 
-            <Button android:id="@+id/add_number_button"
-                android:layout_width="wrap_content"
+            <TextView android:id="@+id/add_number_textview"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/blocked_number_container_padding"
-                android:layout_marginBottom="8dp"
-                android:text="@string/blockNumber" />
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/blocked_number_primary_text_color"
+                android:textSize="@dimen/blocked_number_primary_text_size"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingEnd="@dimen/blocked_number_container_padding"
+                android:paddingStart="24dp"
+                android:drawableStart="@drawable/ic_blocked_numbers_settings_add"
+                android:drawablePadding="24dp"
+                android:text="@string/addBlockedNumber" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="72dp"
+                android:background="@color/divider_line_color" />
 
         </LinearLayout>
 
