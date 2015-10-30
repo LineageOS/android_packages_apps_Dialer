@@ -46,7 +46,7 @@ public class CallLogAsyncTaskUtil {
     public enum Tasks {
         DELETE_VOICEMAIL,
         DELETE_CALL,
-        MARK_BLOCKED,
+        DELETE_BLOCKED_CALL,
         MARK_VOICEMAIL_READ,
         GET_CALL_DETAILS,
     }
@@ -81,7 +81,7 @@ public class CallLogAsyncTaskUtil {
         static final int TRANSCRIPTION_COLUMN_INDEX = 11;
     }
 
-    private static class CallLogMarkBlockedQuery {
+    private static class CallLogDeleteBlockedCallQuery {
         static final String[] PROJECTION = new String[] {
             CallLog.Calls._ID,
             CallLog.Calls.DATE
@@ -104,7 +104,7 @@ public class CallLogAsyncTaskUtil {
     // Try to identify if a call log entry corresponds to a number which was blocked. We match by
     // by comparing its creation time to the time it was added in the InCallUi and seeing if they
     // fall within a certain threshold.
-    private static final int MATCH_BLOCKED_CALL_THRESHOLD_MS = 1500;
+    private static final int MATCH_BLOCKED_CALL_THRESHOLD_MS = 3000;
 
     private static AsyncTaskExecutor sAsyncTaskExecutor;
 
@@ -256,15 +256,16 @@ public class CallLogAsyncTaskUtil {
     }
 
     /**
-     * Marks last call made by the number the call type of the specified call as BLOCKED in the call log.
+     * Deletes the last call made by the number within a threshold of the call time added in the
+     * call log, assuming it is a blocked call for which no entry should be shown.
      *
      * @param context The context.
-     * @param number Number of which to mark the most recent call as BLOCKED.
+     * @param number Number of blocked call, for which to delete the call log entry.
      * @param timeAddedMs The time the number was added to InCall, in milliseconds.
      * @param listener The listener to invoke after looking up for a call log entry matching the
      *     number and time added.
      */
-    public static void markCallAsBlocked(
+    public static void deleteBlockedCall(
             final Context context,
             final String number,
             final long timeAddedMs,
@@ -273,23 +274,30 @@ public class CallLogAsyncTaskUtil {
             initTaskExecutor();
         }
 
-        sAsyncTaskExecutor.submit(Tasks.MARK_BLOCKED, new AsyncTask<Void, Void, Long>() {
+        sAsyncTaskExecutor.submit(Tasks.DELETE_BLOCKED_CALL, new AsyncTask<Void, Void, Long>() {
             @Override
             public Long doInBackground(Void... params) {
                 // First, lookup the call log entry of the most recent call with this number.
                 Cursor cursor = context.getContentResolver().query(
                         TelecomUtil.getCallLogUri(context),
-                        CallLogMarkBlockedQuery.PROJECTION,
+                        CallLogDeleteBlockedCallQuery.PROJECTION,
                         CallLog.Calls.NUMBER + "= ?",
                         new String[] { number },
                         CallLog.Calls.DATE + " DESC LIMIT 1");
 
-                // If found, return the call log entry id.
+                // If match is found, delete this call log entry and return the call log entry id.
                 if (cursor.moveToFirst()) {
-                    long creationTime = cursor.getLong(CallLogMarkBlockedQuery.DATE_COLUMN_INDEX);
+                    long creationTime =
+                            cursor.getLong(CallLogDeleteBlockedCallQuery.DATE_COLUMN_INDEX);
                     if (timeAddedMs > creationTime
                             && timeAddedMs - creationTime < MATCH_BLOCKED_CALL_THRESHOLD_MS) {
-                        return cursor.getLong(CallLogMarkBlockedQuery.ID_COLUMN_INDEX);
+                        long callLogEntryId =
+                                cursor.getLong(CallLogDeleteBlockedCallQuery.ID_COLUMN_INDEX);
+                        context.getContentResolver().delete(
+                                TelecomUtil.getCallLogUri(context),
+                                CallLog.Calls._ID + " IN (" + callLogEntryId + ")",
+                                null);
+                        return callLogEntryId;
                     }
                 }
                 return (long) -1;
@@ -300,20 +308,6 @@ public class CallLogAsyncTaskUtil {
                 if (listener != null) {
                     listener.onQueryFinished(callLogEntryId >= 0);
                 }
-
-                if (callLogEntryId < 0) {
-                    return;
-                }
-
-                // Then, update that call log entry to have type BLOCKED.
-                final ContentValues values = new ContentValues();
-                values.put(CallLog.Calls.TYPE, AppCompatConstants.CALLS_BLOCKED_TYPE);
-
-                context.getContentResolver().update(
-                        TelecomUtil.getCallLogUri(context),
-                        values,
-                        CallLog.Calls._ID + "= ?",
-                        new String[] { Long.toString(callLogEntryId) });
             }
         });
     }
