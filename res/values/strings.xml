@@ -855,12 +855,6 @@
         You previously marked some callers to be automatically sent to voicemail via other apps.
     </string>
 
-    <!-- Text for a setting to hide blocked calls and automatically delete new voicemail from block
-         numbers. [CHAR LIMIT=NONE] -->
-    <string name="blocked_call_settings_hide_setting">
-        Hide calls and automatically delete new voicemails from blocked numbers.
-    </string>
-
     <!-- Label for button to view numbers of contacts previous marked to be sent to voicemail.
          [CHAR_LIMIT=20] -->
     <string name="blocked_call_settings_view_numbers_button">View Numbers</string>
