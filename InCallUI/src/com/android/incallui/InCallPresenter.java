@@ -190,8 +190,8 @@ public class InCallPresenter implements CallList.Listener,
     };
 
     /**
-     * Observes the CallLog for changes so that when call log entries for blocked calls are added
-     * they can be marked with the blocked call type. Times out if too much time has passed.
+     * Observes the CallLog to delete the call log entry for the blocked call after it is added.
+     * Times out if too much time has passed.
      */
     private class BlockedNumberContentObserver extends ContentObserver {
         private static final int TIMEOUT_MS = 5000;
@@ -217,7 +217,7 @@ public class InCallPresenter implements CallList.Listener,
 
         @Override
         public void onChange(boolean selfChange) {
-            CallLogAsyncTaskUtil.markCallAsBlocked(mContext, mNumber, mTimeAddedMs,
+            CallLogAsyncTaskUtil.deleteBlockedCall(mContext, mNumber, mTimeAddedMs,
                     new OnCallLogQueryFinishedListener() {
                         @Override
                         public void onQueryFinished(boolean hasEntry) {
