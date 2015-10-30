@@ -303,7 +303,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     .setOnMenuItemClickListener(this);
         }
 
-        if (FilteredNumbersUtil.canBlockNumber(mContext, number)) {
+        if (FilteredNumbersUtil.canBlockNumber(mContext, number, countryIso)) {
             mFilteredNumberAsyncQueryHandler.startBlockedQuery(
                     new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
                         @Override

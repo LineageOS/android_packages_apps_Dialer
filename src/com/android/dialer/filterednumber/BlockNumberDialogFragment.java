@@ -151,7 +151,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNumber)) {
+        if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNumber, mCountryIso)) {
             dismiss();
             Toast.makeText(getContext(), getString(R.string.invalidNumber, mDisplayNumber),
                     Toast.LENGTH_SHORT).show();
