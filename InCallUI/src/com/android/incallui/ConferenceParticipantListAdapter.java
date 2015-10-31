@@ -16,6 +16,8 @@
 
 package com.android.incallui;
 
+import com.google.common.base.MoreObjects;
+
 import android.content.Context;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
@@ -32,6 +34,8 @@ import android.widget.TextView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 
 import java.lang.ref.WeakReference;
@@ -199,6 +203,11 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     private final Context mContext;
 
     /**
+     * ContactsPreferences used to lookup displayName preferences
+     */
+    private final ContactsPreferences mContactsPreferences;
+
+    /**
      * The layout inflater used to inflate new views.
      */
     private final LayoutInflater mLayoutInflater;
@@ -226,6 +235,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
 
         mListView = listView;
         mContext = context;
+        mContactsPreferences = new ContactsPreferences(mContext);
         mLayoutInflater = layoutInflater;
         mContactPhotoManager = contactPhotoManager;
     }
@@ -238,6 +248,8 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
      *                                      conference.
      */
     public void updateParticipants(List<Call> conferenceParticipants, boolean parentCanSeparate) {
+        mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
+        mContactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
         mParentCanSeparate = parentCanSeparate;
         updateParticipantInfo(conferenceParticipants);
     }
@@ -345,7 +357,10 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         boolean thisRowCanDisconnect = call.getTelecomCall().getDetails().can(
                 android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE);
 
-        setCallerInfoForRow(result, contactCache.name, contactCache.number, contactCache.label,
+        setCallerInfoForRow(result, contactCache.namePrimary,
+                ContactDisplayUtils.getPreferredDisplayName(contactCache.namePrimary,
+                        contactCache.nameAlternative, mContactsPreferences.getDisplayOrder()),
+                contactCache.number, contactCache.label,
                 contactCache.lookupKey, contactCache.displayPhotoUri, thisRowCanSeparate,
                 thisRowCanDisconnect);
 
@@ -383,9 +398,9 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
      * @param thisRowCanSeparate {@code True} if this participant can separate from the conference.
      * @param thisRowCanDisconnect {@code True} if this participant can be disconnected.
      */
-    private final void setCallerInfoForRow(View view, String callerName, String callerNumber,
-            String callerNumberType, String lookupKey, Uri photoUri, boolean thisRowCanSeparate,
-            boolean thisRowCanDisconnect) {
+    private final void setCallerInfoForRow(View view, String callerName, String preferredName,
+            String callerNumber, String callerNumberType, String lookupKey, Uri photoUri,
+            boolean thisRowCanSeparate, boolean thisRowCanDisconnect) {
 
         final ImageView photoView = (ImageView) view.findViewById(R.id.callerPhoto);
         final TextView nameTextView = (TextView) view.findViewById(R.id.conferenceCallerName);
@@ -415,7 +430,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         mContactPhotoManager.loadDirectoryPhoto(photoView, photoUri, false, true, imageRequest);
 
         // set the caller name
-        nameTextView.setText(callerName);
+        nameTextView.setText(preferredName);
 
         // set the caller number in subscript, or make the field disappear.
         if (TextUtils.isEmpty(callerNumber)) {
@@ -491,15 +506,21 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         Collections.sort(mConferenceParticipants, new Comparator<ParticipantInfo>() {
             public int compare(ParticipantInfo p1, ParticipantInfo p2) {
                 // Contact names might be null, so replace with empty string.
-                String p1Name = p1.getContactCacheEntry().name;
-                if (p1Name == null) {
-                    p1Name = "";
-                }
+                ContactCacheEntry c1 = p1.getContactCacheEntry();
+                String p1Name = MoreObjects.firstNonNull(
+                        ContactDisplayUtils.getPreferredSortName(
+                                c1.namePrimary,
+                                c1.nameAlternative,
+                                mContactsPreferences.getSortOrder()),
+                        "");
 
-                String p2Name = p2.getContactCacheEntry().name;
-                if (p2Name == null) {
-                    p2Name = "";
-                }
+                ContactCacheEntry c2 = p2.getContactCacheEntry();
+                String p2Name = MoreObjects.firstNonNull(
+                        ContactDisplayUtils.getPreferredSortName(
+                                c2.namePrimary,
+                                c2.nameAlternative,
+                                mContactsPreferences.getSortOrder()),
+                        "");
 
                 return p1Name.compareToIgnoreCase(p2Name);
             }

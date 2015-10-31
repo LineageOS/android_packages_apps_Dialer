@@ -1265,6 +1265,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                                     ContactsContract.CommonDataKinds.Phone.PHOTO_URI,
                                     ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY,
                                     ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_ALTERNATIVE
                             }, null, null, null);
                     if (cursor != null) {
                         try {
@@ -1275,8 +1276,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                                         ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
                                 mProfileInfo.displayPhotoUri = photoUri == null ? null
                                         : Uri.parse(photoUri);
-                                mProfileInfo.name = cursor.getString(cursor.getColumnIndex(
+                                mProfileInfo.namePrimary = cursor.getString(cursor.getColumnIndex(
                                         ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                                mProfileInfo.nameAlternative = cursor.getString(
+                                        cursor.getColumnIndex(ContactsContract.CommonDataKinds
+                                                        .Phone.DISPLAY_NAME_ALTERNATIVE));
                             }
                         } finally {
                             cursor.close();
@@ -1296,7 +1300,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                     }
                     ContactPhotoManager.DefaultImageRequest imageRequest = (mProfileInfo != null)
                             ? null :
-                            new ContactPhotoManager.DefaultImageRequest(mProfileInfo.name,
+                            new ContactPhotoManager.DefaultImageRequest(mProfileInfo.namePrimary,
                                     mProfileInfo.lookupKey, false /* isCircularPhoto */);
 
                     ImageView photoView = ui.getPreviewPhotoView();

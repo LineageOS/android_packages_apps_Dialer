@@ -16,8 +16,6 @@
 
 package com.android.incallui;
 
-import com.android.contacts.common.util.PhoneNumberHelper;
-import com.android.contacts.common.util.TelephonyManagerUtils;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -31,12 +29,8 @@ import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
-import com.google.i18n.phonenumbers.NumberParseException;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
-
-import java.util.Locale;
+import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.contacts.common.util.TelephonyManagerUtils;
 
 /**
  * Looks up caller information for the given phone number.
@@ -72,6 +66,7 @@ public class CallerInfo {
      * for a connection, but the number should be displayable.
      */
     public String name;
+    public String nameAlternative;
     public String phoneNumber;
     public String normalizedNumber;
     public String forwardingNumber;

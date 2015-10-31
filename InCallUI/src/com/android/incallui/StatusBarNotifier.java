@@ -33,7 +33,9 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.BitmapUtil;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -57,6 +59,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private static final int NOTIFICATION_INCOMING_CALL = 2;
 
     private final Context mContext;
+    private final ContactsPreferences mContactsPreferences;
     private final ContactInfoCache mContactInfoCache;
     private final NotificationManager mNotificationManager;
     private int mCurrentNotification = NOTIFICATION_NONE;
@@ -71,6 +74,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache) {
         Preconditions.checkNotNull(context);
         mContext = context;
+        mContactsPreferences = new ContactsPreferences(context);
         mContactInfoCache = contactInfoCache;
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -360,13 +364,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
-        if (TextUtils.isEmpty(contactInfo.name)) {
-            return TextUtils.isEmpty(contactInfo.number) ? null
-                    : BidiFormatter.getInstance().unicodeWrap(
-                            contactInfo.number.toString(), TextDirectionHeuristics.LTR);
+
+        String preferredName = ContactDisplayUtils.getPreferredDisplayName(contactInfo.namePrimary,
+                contactInfo.nameAlternative, mContactsPreferences.getDisplayOrder());
+        if (TextUtils.isEmpty(preferredName)) {
+            return TextUtils.isEmpty(contactInfo.number) ? null : BidiFormatter.getInstance()
+                    .unicodeWrap(contactInfo.number, TextDirectionHeuristics.LTR);
         }
 
-        return contactInfo.name;
+        return preferredName;
     }
 
     private void addPersonReference(Notification.Builder builder, ContactCacheEntry contactInfo,
