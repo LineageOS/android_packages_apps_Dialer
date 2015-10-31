@@ -196,7 +196,6 @@ public class CallDetailActivity extends AppCompatActivity
     private PhoneCallDetails mDetails;
     protected String mNumber;
     private Uri mVoicemailUri;
-    private String mDefaultCountryIso;
     private String mDisplayNumber;
 
     private ListView mHistoryList;
@@ -242,7 +241,6 @@ public class CallDetailActivity extends AppCompatActivity
         mCallerName = (TextView) findViewById(R.id.caller_name);
         mCallerNumber = (TextView) findViewById(R.id.caller_number);
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
-        mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
 
         mCallButton = findViewById(R.id.call_back_button);
@@ -391,7 +389,8 @@ public class CallDetailActivity extends AppCompatActivity
     }
 
     private void updatePhotoAndBlockActionItem() {
-        if (mDetails == null || !FilteredNumbersUtil.canBlockNumber(this, mNumber)) {
+        if (mDetails == null ||
+                !FilteredNumbersUtil.canBlockNumber(this, mNumber, mDetails.countryIso)) {
             return;
         }
 
