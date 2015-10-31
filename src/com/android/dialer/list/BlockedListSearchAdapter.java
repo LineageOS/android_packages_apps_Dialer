@@ -84,7 +84,7 @@ public class BlockedListSearchAdapter extends RegularSearchListAdapter {
                         }
                     }
                 };
-        mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                onCheckListener, null, number, countryIso);
+        mFilteredNumberAsyncQueryHandler.isBlockedNumber(
+                onCheckListener, number, countryIso);
     }
 }

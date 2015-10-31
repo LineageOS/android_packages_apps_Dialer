@@ -526,7 +526,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.updatePhoto();
         } else {
             views.blockId = null;
-            boolean failed = mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+            final boolean success = mFilteredNumberAsyncQueryHandler.isBlockedNumber(
                         new OnCheckBlockedListener() {
                     @Override
                     public void onCheckComplete(Integer id) {
@@ -534,8 +534,8 @@ public class CallLogAdapter extends GroupingListAdapter
                         views.blockId = id;
                         views.updatePhoto();
                     }
-                }, null, number, countryIso);
-            if (failed) {
+                }, number, countryIso);
+            if (!success) {
                 views.updatePhoto();
             }
         }

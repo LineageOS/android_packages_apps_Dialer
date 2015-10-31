@@ -25,6 +25,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
+import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
@@ -128,7 +129,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 null, null, null);
     }
 
-    public final void hasBlockedNumbersAsync(final OnHasBlockedNumbersListener listener) {
+    public final void hasBlockedNumbers(final OnHasBlockedNumbersListener listener) {
         startQuery(NO_TOKEN,
                 new Listener() {
                     @Override
@@ -144,28 +145,18 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
 
     /**
-     * Check if the number + country iso given has been blocked.
-     * This method normalizes the number for the lookup if normalizedNumber is null.
-     * @return {@code true} if the number was invalid and couldn't be checked,
-     * {@code false} otherwise,
+     * Check if this number has been blocked.
+     *
+     * @return {@code false} if the number was invalid and couldn't be checked,
+     *     {@code true} otherwise,
      */
-    public final boolean startBlockedQuery(final OnCheckBlockedListener listener,
-                                        String normalizedNumber, String number, String countryIso) {
-        if (normalizedNumber == null) {
-            normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-            if (normalizedNumber == null) {
-                return true;
-            }
+    public final boolean isBlockedNumber(
+            final OnCheckBlockedListener listener, String number, String countryIso) {
+        final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+        if (TextUtils.isEmpty(normalizedNumber)) {
+            return false;
         }
-        startBlockedQuery(listener, normalizedNumber);
-        return false;
-    }
 
-    /**
-     * Check if the normalized number given has been blocked.
-     */
-    public final void startBlockedQuery(final OnCheckBlockedListener listener,
-                                        String normalizedNumber) {
         startQuery(NO_TOKEN,
                 new Listener() {
                     @Override
@@ -185,10 +176,12 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                     }
                 },
                 getContentUri(null),
-                new String[]{FilteredNumberColumns._ID, FilteredNumberColumns.TYPE},
+                new String[]{ FilteredNumberColumns._ID, FilteredNumberColumns.TYPE },
                 FilteredNumberColumns.NORMALIZED_NUMBER + " = ?",
-                new String[]{normalizedNumber},
+                new String[]{ normalizedNumber },
                 null);
+
+        return true;
     }
 
     public final void blockNumber(

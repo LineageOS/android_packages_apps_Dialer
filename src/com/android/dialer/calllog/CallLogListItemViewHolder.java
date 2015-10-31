@@ -304,7 +304,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         }
 
         if (FilteredNumbersUtil.canBlockNumber(mContext, number, countryIso)) {
-            mFilteredNumberAsyncQueryHandler.startBlockedQuery(
+            mFilteredNumberAsyncQueryHandler.isBlockedNumber(
                     new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
                         @Override
                         public void onCheckComplete(Integer id) {
@@ -319,7 +319,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                             blockItem.setOnMenuItemClickListener(
                                     CallLogListItemViewHolder.this);
                         }
-                    }, info.normalizedNumber, number, countryIso);
+                    }, number, countryIso);
         }
     }
 
