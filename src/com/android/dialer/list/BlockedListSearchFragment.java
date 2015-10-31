@@ -189,9 +189,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                 }
             }
         };
-        boolean failed = mFilteredNumberAsyncQueryHandler.startBlockedQuery(
-                onCheckListener, null, number, countryIso);
-        if (failed) {
+        final boolean success = mFilteredNumberAsyncQueryHandler.isBlockedNumber(
+                onCheckListener, number, countryIso);
+        if (!success) {
             Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
                     Toast.LENGTH_SHORT).show();
         }
