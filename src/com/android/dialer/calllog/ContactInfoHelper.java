@@ -170,7 +170,7 @@ public class ContactInfoHelper {
             }
             String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
             ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
-            contactInfo.nameAlternative = lookUpDisplayNameAlternative(lookupKey);
+            contactInfo.nameAlternative = lookUpDisplayNameAlternative(mContext, lookupKey);
             return contactInfo;
         } finally {
             phoneLookupCursor.close();
@@ -193,10 +193,14 @@ public class ContactInfoHelper {
         return info;
     }
 
-    private String lookUpDisplayNameAlternative(String lookupKey) {
+    public static String lookUpDisplayNameAlternative(Context context, String lookupKey) {
+        if (lookupKey == null) {
+            return null;
+        }
+
         Uri uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
 
-        Cursor cursor = mContext.getContentResolver().query(uri,
+        Cursor cursor = context.getContentResolver().query(uri,
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, null, null, null);
 
         if (cursor == null) {

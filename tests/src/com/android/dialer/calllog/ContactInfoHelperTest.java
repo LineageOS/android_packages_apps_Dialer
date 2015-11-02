@@ -57,11 +57,11 @@ public class ContactInfoHelperTest extends AndroidTestCase {
         mContactInfoHelper = new ContactInfoHelper(mContext, TEST_COUNTRY_ISO);
     }
 
-    public void testLookupContactFromUriNullUri() {
+    public void testLookupContactFromUri_NullUri() {
         Assert.assertNull(mContactInfoHelper.lookupContactFromUri(null));
     }
 
-    public void testLookupContactFromUriNoResults() {
+    public void testLookupContactFromUri_NoResults() {
         setUpQueryExpectations(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
                 PhoneQuery.PHONE_LOOKUP_PROJECTION);
 
@@ -70,7 +70,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
         mContext.verify();
     }
 
-    public void testLookupContactFromUriNoDisplayNameAlternative() {
+    public void testLookupContactFromUri_NoDisplayNameAlternative() {
         setUpQueryExpectations(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
                 PhoneQuery.PHONE_LOOKUP_PROJECTION, TEST_LOOKUP_ROW);
         setUpQueryExpectations(displayNameAlternativeUri,
@@ -83,7 +83,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
         mContext.verify();
     }
 
-    public void testLookupContactFromUriWithDisplayNameAlternative() {
+    public void testLookupContactFromUri_HasDisplayNameAlternative() {
         setUpQueryExpectations(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
                 PhoneQuery.PHONE_LOOKUP_PROJECTION, TEST_LOOKUP_ROW);
         setUpQueryExpectations(displayNameAlternativeUri,
@@ -93,6 +93,25 @@ public class ContactInfoHelperTest extends AndroidTestCase {
                 PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI);
         Assert.assertEquals(TEST_DISPLAY_NAME, contactInfo.name);
         Assert.assertEquals(TEST_DISPLAY_NAME_ALTERNATIVE, contactInfo.nameAlternative);
+        mContext.verify();
+    }
+
+    public void testLookupDisplayNameAlternative_NullLookup() {
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, null));
+    }
+
+    public void testLookupDisplayNameAlternative_NoResults() {
+        setUpQueryExpectations(displayNameAlternativeUri,
+                PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION);
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY));
+        mContext.verify();
+    }
+
+    public void testLookupDisplayNameAlternative_HasDisplayNameAlternative() {
+        setUpQueryExpectations(displayNameAlternativeUri,
+                PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, TEST_DISPLAY_NAME_ALTERNATIVE_ROW);
+        Assert.assertEquals(TEST_DISPLAY_NAME_ALTERNATIVE,
+                mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY));
         mContext.verify();
     }
 
