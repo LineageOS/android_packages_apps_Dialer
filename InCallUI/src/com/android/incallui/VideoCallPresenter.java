@@ -771,8 +771,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     /**
      * Determines if the incoming video surface should be shown based on the current videoState and
-     * callState.  The video surface is shown when incoming video is not paused, the call is active,
-     * and video reception is enabled.
+     * callState.  The video surface is shown when incoming video is not paused, the call is active
+     * or dialing and video reception is enabled.
      *
      * @param videoState The current video state.
      * @param callState The current call state.
@@ -785,8 +785,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         boolean isPaused = VideoProfile.isPaused(videoState);
         boolean isCallActive = callState == Call.State.ACTIVE;
+        //Show incoming Video for dialing calls to support early media
+        boolean isCallOutgoing = Call.State.isDialing(callState) ||
+                callState == Call.State.CONNECTING;
 
-        return !isPaused && isCallActive && VideoProfile.isReceptionEnabled(videoState);
+        return !isPaused && (isCallActive || isCallOutgoing) &&
+                VideoProfile.isReceptionEnabled(videoState);
     }
 
     /**
