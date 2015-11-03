@@ -251,11 +251,11 @@ public class FilteredNumbersUtil {
         boolean shouldBlock = false;
         if (cursor != null) {
             try {
-                cursor.moveToFirst();
-
-                // Block if number is found and it was added before this voicemail was received.
-                final long numberBlockedTimeMs = cursor.getLong(0);
-                shouldBlock = cursor.getCount() > 0 && voicemailDateMs > numberBlockedTimeMs;
+                if (cursor.moveToFirst()) {
+                    // Block if number is found and it was added before this voicemail was received.
+                    final long numberBlockedTimeMs = cursor.getLong(0);
+                    shouldBlock = cursor.getCount() > 0 && voicemailDateMs > numberBlockedTimeMs;
+                }
             } finally {
                 cursor.close();
             }
