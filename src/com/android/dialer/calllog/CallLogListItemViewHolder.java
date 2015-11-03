@@ -558,11 +558,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public void updatePhoto() {
         quickContactView.assignContactUri(info.lookupUri);
 
-        if (blockId != null) {
-            quickContactView.setImageDrawable(mContext.getDrawable(R.drawable.blocked_contact));
-            return;
-        }
-
         final boolean isVoicemail = mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
         if (isVoicemail) {
