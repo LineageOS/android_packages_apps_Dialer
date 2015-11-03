@@ -47,24 +47,18 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
-import com.android.dialer.contactinfo.NumberWithCountryIso;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
-import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Adapter class to fill in data for the Call Log.
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements CallLogGroupBuilder.GroupCreator,
-                VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
-                BlockNumberDialogFragment.Callback {
+                VoicemailPlaybackPresenter.OnVoicemailDeletedListener {
 
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -94,10 +88,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     protected ContactInfoCache mContactInfoCache;
-    // Declaring static, since this can be shared across different instances, such as history and
-    // voicemail, so when the cache is cleared in one instance, it propagates across all instances.
-    private static final Map<NumberWithCountryIso, Integer> mBlockedIdCache =
-            new ConcurrentHashMap<>();
 
     private boolean mIsCallLogActivity;
 
@@ -313,7 +303,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void invalidateCache() {
         mContactInfoCache.invalidate();
-        mBlockedIdCache.clear();
     }
 
     public void onResume() {
@@ -325,9 +314,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void onPause() {
         pauseCache();
-
-        // Clear blocked id cache so that changes in blocked status will be reflected in the UI.
-        mBlockedIdCache.clear();
 
         if (mHiddenItemUri != null) {
             CallLogAsyncTaskUtil.deleteVoicemail(mContext, mHiddenItemUri, null);
@@ -370,7 +356,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter,
                 mFilteredNumberAsyncQueryHandler,
-                this);
+                null);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
@@ -518,29 +504,8 @@ public class CallLogAdapter extends GroupingListAdapter
             mCurrentlyExpandedPosition = position;
         }
 
-        // Update the photo, once we know whether the user's number is blocked or not.
-        final NumberWithCountryIso blockedIdKey = new NumberWithCountryIso(number, countryIso);
-        if (mBlockedIdCache.containsKey(blockedIdKey)) {
-            int blockedId = mBlockedIdCache.get(blockedIdKey);
-            views.blockId = blockedId != NOT_BLOCKED ? blockedId : null;
-            views.updatePhoto();
-        } else {
-            views.blockId = null;
-            final boolean success = mFilteredNumberAsyncQueryHandler.isBlockedNumber(
-                        new OnCheckBlockedListener() {
-                    @Override
-                    public void onCheckComplete(Integer id) {
-                        mBlockedIdCache.put(blockedIdKey, id != null ? id : NOT_BLOCKED);
-                        views.blockId = id;
-                        views.updatePhoto();
-                    }
-                }, number, countryIso);
-            if (!success) {
-                views.updatePhoto();
-            }
-        }
-
         views.showActions(mCurrentlyExpandedPosition == position);
+        views.updatePhoto();
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
     }
@@ -654,18 +619,6 @@ public class CallLogAdapter extends GroupingListAdapter
             mHiddenPosition = RecyclerView.NO_POSITION;
             mHiddenItemUri = null;
         }
-    }
-
-    @Override
-    public void onChangeFilteredNumberSuccess() {
-        mBlockedIdCache.clear();
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public void onChangeFilteredNumberUndo() {
-        mBlockedIdCache.clear();
-        notifyDataSetChanged();
     }
 
     /**
