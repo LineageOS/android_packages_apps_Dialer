@@ -16,6 +16,11 @@
 
 package com.android.incallui;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,9 +30,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Looper;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -43,11 +48,6 @@ import com.android.incalluibind.ObjectFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -218,7 +218,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         ContactCacheEntry cacheEntry = mInfoMap.get(callId);
         // Ensure we always have a cacheEntry. Replace the existing entry if
         // it has no name or if we found a local contact.
-        if (cacheEntry == null || TextUtils.isEmpty(cacheEntry.name) ||
+        if (cacheEntry == null || TextUtils.isEmpty(cacheEntry.namePrimary) ||
                 callerInfo.contactExists) {
             cacheEntry = buildEntry(mContext, callId, callerInfo, presentationMode, isIncoming);
             mInfoMap.put(callId, cacheEntry);
@@ -273,7 +273,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             }
 
             ContactCacheEntry entry = new ContactCacheEntry();
-            entry.name = info.getDisplayName();
+            entry.namePrimary = info.getDisplayName();
             entry.number = info.getNumber();
             entry.contactLookupResult = info.getLookupSource();
             final int type = info.getPhoneType();
@@ -512,7 +512,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     Log.d(TAG, "  ==> valid name, but presentation not allowed!" +
                             " displayName = " + displayName);
                 } else {
+                    // Causes cce.namePrimary to be set as info.name below. CallCardPresenter will
+                    // later determine whether to use the name or nameAlternative when presenting
                     displayName = info.name;
+                    cce.nameAlternative = info.nameAlternative;
                     displayNumber = number;
                     label = info.phoneLabel;
                     Log.d(TAG, "  ==>  name is present in CallerInfo: displayName '" + displayName
@@ -520,7 +523,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 }
             }
 
-        cce.name = displayName;
+        cce.namePrimary = displayName;
         cce.number = displayNumber;
         cce.location = displayLocation;
         cce.label = label;
@@ -612,7 +615,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
     }
 
     public static class ContactCacheEntry {
-        public String name;
+        public String namePrimary;
+        public String nameAlternative;
         public String number;
         public String location;
         public String label;
@@ -631,7 +635,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         @Override
         public String toString() {
             return MoreObjects.toStringHelper(this)
-                    .add("name", MoreStrings.toSafeString(name))
+                    .add("name", MoreStrings.toSafeString(namePrimary))
+                    .add("nameAlternative", MoreStrings.toSafeString(nameAlternative))
                     .add("number", MoreStrings.toSafeString(number))
                     .add("location", MoreStrings.toSafeString(location))
                     .add("label", label)

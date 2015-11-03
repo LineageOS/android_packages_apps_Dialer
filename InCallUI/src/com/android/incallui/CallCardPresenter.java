@@ -16,15 +16,14 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
 import android.Manifest;
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.Call.Details;
@@ -40,9 +39,9 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ListAdapter;
 
-import com.android.incallui.Call.LogState;
+import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.Call.State;
-import com.android.incallui.InCallContactInteractions.ContactContextInfo;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -52,11 +51,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incalluibind.ObjectFactory;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.List;
-
-import com.google.common.base.Preconditions;
 
 /**
  * Presenter for the Call Card Fragment.
@@ -84,6 +79,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
     private Context mContext;
+    private ContactsPreferences mContactsPreferences;
     private boolean mSpinnerShowing = false;
     private boolean mHasShownToast = false;
     private InCallContactInteractions mInCallContactInteractions;
@@ -135,6 +131,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
         mDistanceHelper = ObjectFactory.newDistanceHelper(mContext, this);
+        mContactsPreferences = new ContactsPreferences(mContext);
 
         // Call may be null if disconnect happened already.
         if (call != null) {
@@ -161,6 +158,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     @Override
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
+
+        if (mContactsPreferences != null) {
+            mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
+        }
 
         // Contact search may have completed before ui is ready.
         if (mPrimaryContactInfo != null) {
@@ -562,9 +563,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             Log.w(this, "Dropping stale contact lookup info for " + callId);
         }
 
-        if (entry.name != null) {
-            Log.d(TAG, "Contact found: " + entry);
-        }
         final Call call = CallList.getInstance().getCallById(callId);
         if (call != null) {
             call.getLogState().contactLookupResult = entry.contactLookupResult;
@@ -909,20 +907,27 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     /**
      * Gets the name to display for the call.
      */
-    private static String getNameForCall(ContactCacheEntry contactInfo) {
-        if (TextUtils.isEmpty(contactInfo.name)) {
+    private String getNameForCall(ContactCacheEntry contactInfo) {
+        String preferredName = ContactDisplayUtils.getPreferredDisplayName(
+                contactInfo.namePrimary,
+                contactInfo.nameAlternative,
+                mContactsPreferences.getDisplayOrder());
+        if (TextUtils.isEmpty(preferredName)) {
             return contactInfo.number;
         }
-        return contactInfo.name;
+        return preferredName;
     }
 
     /**
      * Gets the number to display for a call.
      */
-    private static String getNumberForCall(ContactCacheEntry contactInfo) {
+    private String getNumberForCall(ContactCacheEntry contactInfo) {
         // If the name is empty, we use the number for the name...so dont show a second
         // number in the number field
-        if (TextUtils.isEmpty(contactInfo.name)) {
+        if (TextUtils.isEmpty(ContactDisplayUtils.getPreferredDisplayName(
+                contactInfo.namePrimary,
+                contactInfo.nameAlternative,
+                mContactsPreferences.getDisplayOrder()))) {
             return contactInfo.location;
         }
         return contactInfo.number;
