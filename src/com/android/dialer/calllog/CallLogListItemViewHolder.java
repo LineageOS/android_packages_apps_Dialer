@@ -467,7 +467,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         }
 
         // For voicemail calls, show the voicemail playback layout; hide otherwise.
-        if (callType == Calls.VOICEMAIL_TYPE && mVoicemailPlaybackPresenter != null) {
+        if (callType == Calls.VOICEMAIL_TYPE && mVoicemailPlaybackPresenter != null
+                && !TextUtils.isEmpty(voicemailUri)) {
             voicemailPlaybackView.setVisibility(View.VISIBLE);
 
             Uri uri = Uri.parse(voicemailUri);
