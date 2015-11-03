@@ -48,7 +48,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -83,16 +82,14 @@ import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.settings.DialerSettingsActivity;
-import com.android.dialer.util.IntentUtil;
-import com.android.dialer.util.TelecomUtil;
-import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.IntentUtil.CallIntentBuilder;
+import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
-import com.android.dialer.widget.SearchEditTextLayout.Callback;
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.dialerbind.ObjectFactory;
-import com.android.incallui.Call.LogState;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -782,7 +779,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
         if (clearDialpad) {
+            // Temporarily disable accessibility when we clear the dialpad, since it should be
+            // invisible and should not announce anything.
+            mDialpadFragment.getDigitsWidget().setImportantForAccessibility(
+                    View.IMPORTANT_FOR_ACCESSIBILITY_NO);
             mDialpadFragment.clearDialpad();
+            mDialpadFragment.getDigitsWidget().setImportantForAccessibility(
+                    View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
         }
         if (!mIsDialpadShown) {
             return;
