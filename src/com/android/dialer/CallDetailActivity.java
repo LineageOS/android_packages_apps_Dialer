@@ -161,7 +161,8 @@ public class CallDetailActivity extends AppCompatActivity
             mHistoryList.setAdapter(
                     new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
 
-            updatePhotoAndBlockActionItem();
+            updateFilteredNumberChanges();
+            updateContactPhoto();
 
             findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
         }
@@ -380,15 +381,15 @@ public class CallDetailActivity extends AppCompatActivity
 
     @Override
     public void onChangeFilteredNumberSuccess() {
-        updatePhotoAndBlockActionItem();
+        updateFilteredNumberChanges();
     }
 
     @Override
     public void onChangeFilteredNumberUndo() {
-        updatePhotoAndBlockActionItem();
+        updateFilteredNumberChanges();
     }
 
-    private void updatePhotoAndBlockActionItem() {
+    private void updateFilteredNumberChanges() {
         if (mDetails == null ||
                 !FilteredNumbersUtil.canBlockNumber(this, mNumber, mDetails.countryIso)) {
             return;
@@ -399,14 +400,11 @@ public class CallDetailActivity extends AppCompatActivity
                     @Override
                     public void onCheckComplete(Integer id) {
                         mBlockedNumberId = id;
-
-                        updateContactPhoto();
                         updateBlockActionItem();
                     }
                 }, mNumber, mDetails.countryIso);
 
         if (!success) {
-            updateContactPhoto();
             updateBlockActionItem();
         }
     }
@@ -414,11 +412,6 @@ public class CallDetailActivity extends AppCompatActivity
     // Loads and displays the contact photo.
     private void updateContactPhoto() {
         if (mDetails == null) {
-            return;
-        }
-
-        if (mBlockedNumberId != null) {
-            mQuickContactBadge.setImageDrawable(mContext.getDrawable(R.drawable.blocked_contact));
             return;
         }
 
