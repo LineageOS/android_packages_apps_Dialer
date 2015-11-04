@@ -192,7 +192,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mPhoneNumberTypeIndex = ContactTileLoaderFactory.PHONE_NUMBER_TYPE;
         mPhoneNumberLabelIndex = ContactTileLoaderFactory.PHONE_NUMBER_LABEL;
         mPinnedIndex = ContactTileLoaderFactory.PINNED;
-        mContactIdIndex = ContactTileLoaderFactory.CONTACT_ID;
+        mContactIdIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_DATA;
 
 
         mPresenceIndex = ContactTileLoaderFactory.CONTACT_PRESENCE;
