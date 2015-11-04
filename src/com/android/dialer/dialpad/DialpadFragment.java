@@ -16,6 +16,8 @@
 
 package com.android.dialer.dialpad;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,7 +29,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -80,14 +81,13 @@ import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
-import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
+import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.Call.LogState;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
-import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashSet;
 import java.util.List;
