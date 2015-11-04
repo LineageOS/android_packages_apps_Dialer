@@ -782,7 +782,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return;
         }
         if (clearDialpad) {
+            // Temporarily disable accessibility when we clear the dialpad, since it should be
+            // invisible and should not announce anything.
+            mDialpadFragment.getDigitsWidget().setImportantForAccessibility(
+                    View.IMPORTANT_FOR_ACCESSIBILITY_NO);
             mDialpadFragment.clearDialpad();
+            mDialpadFragment.getDigitsWidget().setImportantForAccessibility(
+                    View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
         }
         if (!mIsDialpadShown) {
             return;
