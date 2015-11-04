@@ -211,6 +211,11 @@ public class CallLogAdapter extends GroupingListAdapter
                 // function on clicks causes the action views to lose the focus indicator.
                 CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder) host.getTag();
                 if (mCurrentlyExpandedPosition != viewHolder.getAdapterPosition()) {
+                    if (mVoicemailPlaybackPresenter != null) {
+                        // Always reset the voicemail playback state on expand.
+                        mVoicemailPlaybackPresenter.resetAll();
+                    }
+
                     expandViewHolderActions((CallLogListItemViewHolder) host.getTag());
                 }
             }
