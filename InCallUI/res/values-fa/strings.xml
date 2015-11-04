@@ -32,7 +32,7 @@
     <string name="pause_prompt_str" msgid="1789964702154314806">"تون‌های ارسالی\n"</string>
     <string name="send_button" msgid="4106860097497818751">"ارسال"</string>
     <string name="pause_prompt_yes" msgid="3564467212025151797">"بله"</string>
-    <string name="pause_prompt_no" msgid="6686238803236884877">"خیر"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"نه"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"جایگزینی نویسه عمومی با"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"تماس کنفرانسی <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"شماره پست صوتی"</string>
@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"تماس ویدیویی"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"درحال درخواست تماس ویدیویی"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"اتصال تماس ویدیویی ممکن نیست"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"تماس ویدیویی (موقتاً متوقف شد)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"درخواست ویدیو رد شد"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"شماره پاسخ تماس شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"شماره پاسخ تماس اضطراری شما\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"شماره‌گیری"</string>
@@ -74,7 +74,7 @@
     <string name="notification_action_end_call" msgid="6069460915123531620">"قطع تماس"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"ویدیو"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"صدا"</string>
-    <string name="notification_action_accept" msgid="2898609801209468429">"پذیرش"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"پذیرفتن"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"ردکردن"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"پاسخ تماس"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"پیام"</string>
@@ -96,7 +96,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"در حال روشن کردن رادیو..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"سرویسی در دسترس نیست. دوباره امتحان کنید..."</string>
     <string name="dial_emergency_error" msgid="1509085166367420355">"نمی‌توانید تماس بگیرید. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> یک شماره اضطراری نیست."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"نمی‌ توانید تماس بگیرید. یک شماره اضطراری را شماره‌گیری کنید."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"استفاده از صفحه‌کلید برای شماره گیری"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"نگه داشتن تماس"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"از سرگیری تماس"</string>
@@ -133,15 +133,15 @@
     <string name="custom_message_send" msgid="5795754217085747742">"ارسال"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"پاسخ"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"ارسال پیامک"</string>
-    <string name="description_target_decline" msgid="4789834364389731957">"عدم پذیرش"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"نپذیرفتن"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"پاسخ به صورت تماس ویدیویی"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"پاسخ به صورت تماس صوتی"</string>
-    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"پذیرش درخواست ویدیو"</string>
-    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"رد کردن درخواست ویدیو"</string>
-    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"پذیرش درخواست ارسال ویدیو"</string>
-    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"رد کردن درخواست انتقال ویدیو"</string>
-    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"پذیرش درخواست دریافت ویدیو"</string>
-    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"رد کردن درخواست دریافت ویدیو"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"پذیرفتن درخواست ویدیو"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"نپذیرفتن درخواست ویدیو"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"پذیرفتن درخواست ارسال ویدیو"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"نپذیرفتن درخواست انتقال ویدیو"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"پذیرفتن درخواست دریافت ویدیو"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"نپذیرفتن درخواست دریافت ویدیو"</string>
     <string name="description_direction_up" msgid="4441409581444516690">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به بالا بلغزانید."</string>
     <string name="description_direction_left" msgid="7129873384376533287">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به چپ بلغزانید."</string>
     <string name="description_direction_right" msgid="2122584234531957308">"برای <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> به راست بلغزانید."</string>
@@ -152,20 +152,17 @@
     <string name="default_notification_description" msgid="78174796906240970">"صدای پیش‌فرض (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"آهنگ زنگ تلفن"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ارتعاش هنگام زنگ زدن"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"تکمیل خودکار صفحه شماره‌گیری"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"آهنگ‌ زنگ و لرزش"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"مدیریت تماس کنفرانس"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"شماره اضطراری"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ثانیه</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ثانیه</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> دقیقه</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> دقیقه</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ساعت</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ساعت</item>
-    </plurals>
+    <!-- no translation found for duration_seconds:one (4296754689081318051) -->
+    <!-- no translation found for duration_seconds:other (7116072887772353987) -->
+    <!-- no translation found for duration_minutes:one (5246933669517357278) -->
+    <!-- no translation found for duration_minutes:other (1463783376450965028) -->
+    <!-- no translation found for duration_hours:one (4973081819895630068) -->
+    <!-- no translation found for duration_hours:other (3502790149304199676) -->
+    <string name="profile_photo_description" msgid="5609894336203315400">"عکس نمایه"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"دوربین خاموش"</string>
+    <string name="child_number" msgid="7437330400723805538">"از طریق <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"یادداشت ارسال شد"</string>
 </resources>
