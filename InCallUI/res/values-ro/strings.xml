@@ -79,7 +79,7 @@
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Sunați"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mesaj"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Pentru a efectua un apel, mai întâi dezactivați modul Avion."</string>
-    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Neînregistrat în reţea."</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Neînregistrat în rețea."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Rețeaua mobilă nu este disponibilă"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Pentru a apela, introduceți un număr valid."</string>
     <string name="incall_error_call_failed" msgid="6302746943230078197">"Nu se poate apela."</string>
