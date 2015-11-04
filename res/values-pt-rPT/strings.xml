@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telemóvel"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telemóvel"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefone"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Histórico de chamadas"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Denunciar número incorreto"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Telefonar a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Chamada não atendida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Chamada atendida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"Mensagem de correio de voz não lida de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"Mensagem de correio de voz de <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Telefonar para <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"em <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telefonar"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"O bloqueio de chamadas foi desativado porque contactou os serviços de emergência a partir deste telemóvel nas últimas 48 horas. O bloqueio será automaticamente reativado assim que expirar o período de 48 horas."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importar números"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Anteriormente, marcou alguns autores de chamadas para serem automaticamente enviados para o correio de voz através de outras aplicações."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Ocultar chamadas e eliminar automaticamente novas mensagens de correio de voz de números bloqueados."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Ver números"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importar"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Falha ao importar"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloquear número"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"Adicionar número"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"Adicionar número"</string>
     <string name="blockList" msgid="285204949255078310">"Lista de números bloqueados"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"A verificar <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> é inválido."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> já está bloqueado."</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Bloqueio de chamadas desativado durante 48 horas"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Desativado porque foi efetuada uma chamada de emergência."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Contas de chamadas"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Ativar"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Definir autorizações"</string>
