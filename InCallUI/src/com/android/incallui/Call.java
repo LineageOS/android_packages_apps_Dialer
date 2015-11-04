@@ -213,7 +213,10 @@ public class Call {
         public boolean isIncoming = false;
         public int contactLookupResult = LOOKUP_UNKNOWN;
         public int callInitiationMethod = INITIATION_UNKNOWN;
+        // If this was a conference call, the total number of calls involved in the conference.
+        public int conferencedCalls = 0;
         public long duration = 0;
+        public boolean isLogged = false;
 
         @Override
         public String toString() {
@@ -433,11 +436,16 @@ public class Call {
         }
 
         mChildCallIds.clear();
-        for (int i = 0; i < mTelecomCall.getChildren().size(); i++) {
+        final int numChildCalls = mTelecomCall.getChildren().size();
+        for (int i = 0; i < numChildCalls; i++) {
             mChildCallIds.add(
                     CallList.getInstance().getCallByTelecomCall(
                             mTelecomCall.getChildren().get(i)).getId());
         }
+
+        // The number of conferenced calls can change over the course of the call, so use the
+        // maximum number of conferenced child calls as the metric for conference call usage.
+        mLogState.conferencedCalls = Math.max(numChildCalls, mLogState.conferencedCalls);
 
         Bundle callExtras = mTelecomCall.getDetails().getExtras();
         if (callExtras != null) {
