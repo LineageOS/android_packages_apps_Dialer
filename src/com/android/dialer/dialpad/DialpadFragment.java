@@ -34,6 +34,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+//import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
@@ -65,6 +66,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -72,6 +74,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -101,6 +104,7 @@ import com.android.phone.common.dialpad.DialpadView;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.List;
@@ -242,6 +246,16 @@ public class DialpadFragment extends Fragment
     private String mCurrentCountryIso;
 
     private CallStateReceiver mCallStateReceiver;
+
+    // Elements related to call method and VoLTE
+    private Spinner mCallMethodSpinner;
+    private CallMethodSpinnerAdapter mCallMethodSpinnerAdapter;
+    private View mCallMethodVolte;      // Container for call method and VoLTE
+    private View mVolteAnnunciator;     // VoLTE annunciator
+    private View mVolteSpace;           // VoLTE layout spacing
+    private List<VolteUtils.CallMethodInfo> mAvailableProviders;
+    private boolean mSingleProvider = false;
+    private VolteUtils mVolteUtils;
 
     private class CallStateReceiver extends BroadcastReceiver {
         /**
@@ -439,6 +453,22 @@ public class DialpadFragment extends Fragment
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 floatingActionButtonContainer, floatingActionButton);
+
+        // Call method spinner and VoLTE annunciator
+        mVolteUtils = new VolteUtils(this, mContext);
+        mAvailableProviders = mVolteUtils.getSimInfoList();
+        mSingleProvider = mAvailableProviders.size() <= 1;
+        mCallMethodSpinner = (Spinner) fragmentView.findViewById(R.id.call_method_spinner);
+        mCallMethodSpinnerAdapter = new CallMethodSpinnerAdapter(mContext, mAvailableProviders);
+        mCallMethodSpinner.setAdapter(mCallMethodSpinnerAdapter);
+        mCallMethodSpinner.setOnItemSelectedListener(callMethodChanged);
+        mCallMethodSpinner.setVisibility(mSingleProvider ? View.GONE : View.VISIBLE);
+
+        mCallMethodVolte = fragmentView.findViewById(R.id.call_method_volte);
+        mVolteAnnunciator = fragmentView.findViewById(R.id.volte_annunciator);
+        mVolteSpace = fragmentView.findViewById(R.id.volte_annunciator_space);
+
+        mVolteUtils.setCallMethod(mVolteUtils.getDefaultSimInfo());
 
         return fragmentView;
     }
@@ -1616,6 +1646,38 @@ public class DialpadFragment extends Fragment
      */
     private boolean phoneIsCdma() {
         return getTelephonyManager().getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA;
+    }
+
+    // Call method spinner changes handled here
+    private OnItemSelectedListener callMethodChanged = new OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            VolteUtils.CallMethodInfo callMethodInfo =
+                (VolteUtils.CallMethodInfo) parent.getItemAtPosition(position);
+            mVolteUtils.setCallMethod(callMethodInfo);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Stub
+            // Nothing was selected, do not change current selection
+        }
+    };
+
+    /**
+     * Add or remove the "VoLTE" logo.
+     */
+    public void setVolteInUse(boolean volte) {
+        if (mCallMethodSpinnerAdapter != null) {
+            mCallMethodSpinnerAdapter.setVolteInUse(volte);
+        }
+        int vis = volte ? View.VISIBLE : View.GONE;
+        if (mSingleProvider) {
+            if (mCallMethodVolte != null) mCallMethodVolte.setVisibility(vis);
+        } else {
+            if (mVolteAnnunciator != null) mVolteAnnunciator.setVisibility(vis);
+            if (mVolteSpace != null) mVolteSpace.setVisibility(vis);
+        }
     }
 
     @Override
