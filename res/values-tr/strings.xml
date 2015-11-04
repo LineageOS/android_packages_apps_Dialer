@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Çağrı geçmişi"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Hatalı numarayı bildir"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Telefon et: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Cevapsız çağrı: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Cevaplanan çağrı: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"Dinlenmemiş sesli posta: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"Sesli posta: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Yapılan çağrı: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> üzerinde"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telefon et"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Son 48 saat içinde bu telefondan acil servislerle iletişimde bulunduğunuz için çağrı engelleme modu devre dışı bırakıldı. 48 saatlik süre dolduktan sonra çağrı engelleme modu otomatik olarak tekrar etkinleştirilecektir."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Numaraları içe aktar"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Bazı arayanları, diğer uygulamalar aracılığıyla otomatik olarak sesli mesaj gönderilmesi için önceden işaretlediniz."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Engellenen numaralardan gelen çağrıları gizle ve yeni sesli mesajları otomatik olarak sil."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Numaraları Görüntüle"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"İçe aktar"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"İçe aktarma başarısız oldu"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Numaranın engellemesini kaldır"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"Numara ekle"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"Numara ekle"</string>
     <string name="blockList" msgid="285204949255078310">"Engellenenler listesi"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> kontrol ediliyor"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefon geçersiz."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> numaralı telefon zaten engellendi."</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Çağrı engelleme 48 saat süreyle devre dışı bırakıldı"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Acil durum çağrısı yapıldığından devre dışı bırakıldı."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Çağrı hesapları"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aç"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"İzinleri ayarla"</string>

@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"ఫోన్"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ఫోన్"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ఫోన్"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"కాల్ చరిత్ర"</string>
     <string name="action_report_number" msgid="4635403959812186162">"సరికాని నంబర్‌ను నివేదించు"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>కి కాల్ చేయి"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g> నుండి <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g>కి మిస్డ్ కాల్ ఇచ్చారు."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g> నుండి <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g>కి చేసిన కాల్‌కి సమాధానం ఇచ్చారు."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> నుండి చదవని వాయిస్ మెయిల్, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> నుండి వాయిస్ మెయిల్, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>కి <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g> నుండి కాల్ చేసారు."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>లో"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"కాల్ చేయి"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"మీరు గత 48 గంటల వ్యవధిలో ఈ ఫోన్ నుండి అత్యవసర సేవలను సంప్రదించినందున కాల్ బ్లాకింగ్ నిలిపివేయబడింది. 48 గంటల వ్యవధి ముగిసిన తర్వాత ఇది స్వయంచాలకంగా పునఃప్రారంభించబడుతుంది."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"నంబర్‌లను దిగుమతి చేయి"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"మీరు ఇంతకుముందే కొంతమంది కాలర్‌లను స్వయంచాలకంగా ఇతర అనువర్తనాల ద్వారా వాయిస్ మెయిల్‌కి పంపేందుకు గుర్తు పెట్టారు."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"బ్లాక్ చేసిన నంబర్‌ల నుండి కాల్‌లను దాచండి మరియు కొత్త వాయిస్ మెయిల్‌లను స్వయంచాలకంగా తొలగించండి."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"నంబర్‌లను వీక్షించండి"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"దిగుమతి చేయి"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"దిగుమతి విఫలమైంది"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"నంబర్‌ను జోడించు"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"నంబర్‌ను జోడించు"</string>
     <string name="blockList" msgid="285204949255078310">"నిరోధక జాబితా"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g>ని తనిఖీ చేస్తోంది"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> చెల్లదు."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ఇప్పటికే బ్లాక్ చేయబడింది."</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"48 గంటల పాటు కాల్ బ్లాకింగ్ నిలిపివేయబడింది"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"అత్యవసర కాల్ చేసినందున నిలిపివేయబడింది."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"కాల్ చేసే ఖాతాలు"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ఆన్ చేయి"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"అనుమతులను సెట్ చేయి"</string>

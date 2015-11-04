@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Телефон"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Тел."</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Історія дзвінків"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Повідомити про неправильний номер"</string>
@@ -174,10 +176,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>: телефонувати"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Пропущений дзвінок: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Прийнятий дзвінок: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"Непрочитане голосове повідомлення: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"Голосове повідомлення: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Вихідний дзвінок: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"Обліковий запис: <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Виклик"</string>
@@ -225,16 +225,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Блокування дзвінків вимкнено, оскільки ви зверталися з цього телефона в екстрені служби протягом останніх 48 годин. Ця функція автоматично ввімкнеться, коли мине 48 годин."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Імпортувати номери"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Ви позначили абонентів, чиї дзвінки мають автоматично спрямовуватися на голосову пошту через інші додатки."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Не показувати виклики й автоматично видаляти нові голосові повідомлення із заблокованих номерів."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Переглянути номери"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Імпортувати"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Не вдалось імпортувати"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Розблокувати номер"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"Додати номер"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"Додати номер"</string>
     <string name="blockList" msgid="285204949255078310">"Список блокування"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"Перевірка номера <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Номер <xliff:g id="NUMBER">%1$s</xliff:g> недісний."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Номер <xliff:g id="NUMBER">%1$s</xliff:g> уже заблоковано."</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Блокування викликів вимкнено на 48 годин"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Блокування вимкнено, оскільки ви зробили екстрений виклик."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Обл. записи для дзвінків"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Увімкнути"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Налаштувати дозволи"</string>
