@@ -60,6 +60,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -67,6 +68,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -91,6 +93,7 @@ import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -231,6 +234,17 @@ public class DialpadFragment extends Fragment
     private String mCurrentCountryIso;
 
     private CallStateReceiver mCallStateReceiver;
+
+    // Elements related to call method and VoLTE
+    private Spinner mCallMethodSpinner;
+    private CallMethodSpinnerAdapter mCallMethodSpinnerAdapter;
+    private View mCallMethodVolteSingleProvider;      // Single provider call method and VoLTE
+    private View mCallMethodVolteMultipleProviders;   // Multiple provider call methods and VoLTE
+    /*private View mVolteAnnunciator;                   // VoLTE annunciator
+    private View mVolteSpace;                         // VoLTE layout spacing*/
+    private List<VolteUtils.CallMethodInfo> mAvailableProviders;
+    private boolean mSingleProvider = false;
+    private VolteUtils mVolteUtils;
 
     private class CallStateReceiver extends BroadcastReceiver {
         /**
@@ -412,8 +426,27 @@ public class DialpadFragment extends Fragment
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 floatingActionButtonContainer, floatingActionButton);
+
+        // Call method spinner and VoLTE annunciator
+        mVolteUtils = new VolteUtils(this, getContext());
+        updateProviders();
+        mCallMethodSpinner = (Spinner) fragmentView.findViewById(R.id.call_method_spinner);
+        mCallMethodSpinnerAdapter = new CallMethodSpinnerAdapter(getContext(), mAvailableProviders);
+        mCallMethodSpinner.setAdapter(mCallMethodSpinnerAdapter);
+        mCallMethodSpinner.setOnItemSelectedListener(callMethodChanged);
+        mCallMethodSpinner.setVisibility(mSingleProvider ? View.GONE : View.VISIBLE);
+        mCallMethodVolteSingleProvider =
+                fragmentView.findViewById(R.id.call_method_volte_single_provider);
+        mCallMethodVolteMultipleProviders =
+                fragmentView.findViewById(R.id.call_method_volte_multiple_providers);
+        //mVolteAnnunciator = fragmentView.findViewById(R.id.volte_annunciator);
+        //mVolteSpace = fragmentView.findViewById(R.id.volte_annunciator_space);
+
+        mVolteUtils.setCallMethod(mVolteUtils.getDefaultSimInfo());
+
         Trace.endSection();
         Trace.endSection();
+
         return fragmentView;
     }
 
@@ -1520,6 +1553,55 @@ public class DialpadFragment extends Fragment
      */
     private boolean phoneIsCdma() {
         return getTelephonyManager().getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA;
+    }
+
+    // Call method spinner changes handled here
+    private OnItemSelectedListener callMethodChanged = new OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            VolteUtils.CallMethodInfo callMethodInfo =
+                (VolteUtils.CallMethodInfo) parent.getItemAtPosition(position);
+            mVolteUtils.setCallMethod(callMethodInfo);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Stub
+            // Nothing was selected, do not change current selection
+        }
+    };
+
+    public void updateProviders() {
+        mAvailableProviders = mVolteUtils.getSimInfoList();
+        mSingleProvider = mAvailableProviders.size() <= 1;
+    }
+
+    /**
+     * Add or remove the "VoLTE" logo.
+     */
+    public void setVolteInUse(boolean volte) {
+        if (mCallMethodSpinnerAdapter != null) {
+            mCallMethodSpinnerAdapter.setVolteInUse(volte);
+        }
+        if (volte) {
+            updateProviders();
+            if (mSingleProvider) {
+                Log.d(TAG, "single provider");
+                //if (mCallMethodVolte != null) mCallMethodVolte.setVisibility(vis);
+                mCallMethodVolteSingleProvider.setVisibility(View.VISIBLE);
+                mCallMethodVolteMultipleProviders.setVisibility(View.GONE);
+            } else {
+                Log.d(TAG, "multiple providers");
+            /*if (mVolteAnnunciator != null) mVolteAnnunciator.setVisibility(vis);
+            if (mVolteSpace != null) mVolteSpace.setVisibility(vis);*/
+                mCallMethodVolteSingleProvider.setVisibility(View.GONE);
+                mCallMethodVolteMultipleProviders.setVisibility(View.VISIBLE);
+            }
+        } else {
+            Log.d(TAG, "volte not available");
+            mCallMethodVolteSingleProvider.setVisibility(View.GONE);
+            mCallMethodVolteMultipleProviders.setVisibility(View.GONE);
+        }
     }
 
     @Override

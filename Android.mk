@@ -33,7 +33,8 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common
 
-LOCAL_JAVA_LIBRARIES := telephony-common
+LOCAL_JAVA_LIBRARIES := telephony-common \
+                        ims-common
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
