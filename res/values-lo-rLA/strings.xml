@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"ໂທລະສັບ"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ໂທລະສັບ"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ໂທລະສັບ"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"ປະຫວັດການໂທ"</string>
     <string name="action_report_number" msgid="4635403959812186162">"ລາຍງານໝາຍເລກທີ່ບໍ່ຖືກຕ້ອງ"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"ໂທຫາ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"ສາຍ​ບໍ່​ໄດ້​ຮັບ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"ຮັບ​ສາຍ​ໂທ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"ຂໍ້​ຄວາມ​ສຽງ​ບໍ່​ໄດ້​ອ່ານ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"ຂໍ້​ຄວາມ​ສຽງ​ຈາກ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"ໂທ​ຫາ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"ຢູ່​ເທິງ <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ໂທ"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ການບ​ລັອກ​ສາຍ​ໂທ​ຖືກ​ປິດ​ໃຊ້​ງານ​ແລ້ວ ເພາະ​ວ່າ​ທ່ານ​ໄດ້​ຕິດ​ຕໍ່​ຫາ​ຝ່າຍ​ບໍ​ລິ​ການ​ສຸກ​ເສີນ​ຈາກ​ໂທ​ລະ​ສັບ​ນີ້​ພາຍ​ໃນ 48 ຊົ່ວ​ໂມງ​ສຸດ​ທ້າຍ. ມັນ​ຈະ​ຖືກ​ເປີດ​ໃຊ້​ງານ​ອີກ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ ເມື່ອ​ໝົດ​ໄລ​ຍະ 48 ຊົ່ວ​ໂມງ​ໄປ​ແລ້ວ."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"ນຳ​ຕົວ​ເລກ​ເຂົ້າ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ຜ່ານ​ມາ​ທ່ານ​ໄດ້​ໝາຍ​ຜູ້​ໂທ​ບາງ​ຄົນ​ໃຫ້​ຖືກ​ສົ່ງ​​ຫາ​ຂໍ້​ຄວາມ​ສຽງໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ​ຜ່ານ​ແອັບ​ອື່ນ​."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"ເຊື່ອງ​ສາຍ​ໂທ ແລະ ລຶບ​ຂໍ້​ຄວາມ​ສຽງ​ໃໝ່ຈາກ​ເບີ​ທີ່​ຖືກບ​ລັອກ​ແລ້ວໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ເບິ່ງ​ຕົວ​ເລກ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ນໍາເຂົ້າ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ນຳ​ເຂົ້າ​ລົ້ມ​ເຫລວ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ປົດ​ບ​ລັອກ​ໝາຍ​ເລກ"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"ເພີ່ມໝາຍເລກ"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"ເພີ່ມໝາຍເລກ"</string>
     <string name="blockList" msgid="285204949255078310">"ລາຍ​ການບ​ລັອກ"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"ກຳ​ລັງ​ກວດ​ເບິ່ງ <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ບໍ່ຖືກຕ້ອງ."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ຖືກ​ບ​ລັອກ​ແລ້ວ."</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"ການບ​ລັອກ​ສາຍ​ໂທ​ຖືກ​ປິດ​ໃຊ້​ງານ​ແລ້ວ​ເປັນ​ເວ​ລາ 48 ຊົ່​ວ​ໂມງ"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"ປິດ​ໃຊ້​ງານ​ແລ້ວ ເພາະ​ວ່າ​ໄດ້​ມີ​ການ​ໂທ​ສຸກ​ເສີນ."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ບັນ​ຊີ​ໂທ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ເປີດ​"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ຕັ້ງ​ການ​ອະ​ນຸ​ຍາດ"</string>

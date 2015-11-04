@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telepono"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telepono"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telepono"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"History ng tawag"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Iulat ang hindi wastong numero"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"Tawagan ang/si <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Hindi nasagot na tawag mula kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Nasagot na tawag mula kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"Hindi pa nababasang voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"Voicemail mula sa/kay <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Tawag kay/sa <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"sa <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Tumawag"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Na-disable ang pagba-block ng tawag dahil nakipag-ugnayan ka sa mga pang-emergency na serbisyo mula sa teleponong ito sa nakalipas na 48 oras. Awtomatiko itong muling i-enable kapag nag-expire na ang 48 oras."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"I-import ang mga numero"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Minarkahan mo na dati ang ilang tumatawag na awtomatikong ipadala sa voicemail sa pamamagitan ng iba pang mga app."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"Itago ang mga tawag at awtomatikong i-delete ang mga bagong voicemail sa mula sa mga naka-block na numero."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Tingnan ang Numero"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"I-import"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Hindi nakapag-import"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Alisin sa pagkaka-block ang numero"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"Magdagdag ng numero"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"Magdagdag ng numero"</string>
     <string name="blockList" msgid="285204949255078310">"Listahan ng mga naka-block"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"Sinusuri ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Hindi wasto ang <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Naka-block na ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Na-disable ang pagba-block ng tawag sa loob ng 48 oras"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Na-disable dahil tumawag para sa emergency."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Account sa pagtawag"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"I-on"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Magtakda ng mga pahintulot"</string>
