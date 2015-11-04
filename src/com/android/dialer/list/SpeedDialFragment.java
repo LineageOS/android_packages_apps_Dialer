@@ -255,6 +255,11 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         mListView.setOnScrollListener(mScrollListener);
         mListView.setFastScrollEnabled(false);
         mListView.setFastScrollAlwaysVisible(false);
+
+        //prevent content changes of the list from firing accessibility events.
+        mListView.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
+        ContentChangedFilter.addToParent(mListView);
+
         Trace.endSection();
         return mParentView;
     }
