@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"电话"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"电话"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"拨号"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"通话记录"</string>
     <string name="action_report_number" msgid="4635403959812186162">"报告错误的号码"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>通话"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的未接电话。"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的已接电话。"</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的未读语音邮件。"</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的语音邮件。"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="TIMEOFCALL">^3</xliff:g>通过 <xliff:g id="PHONEACCOUNT">^4</xliff:g> 拨打给<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的电话。"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"通过 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"拨打电话"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"来电拦截功能已停用，因为您在过去 48 小时内使用该手机拨打了紧急服务电话。系统会在 48 小时的期限结束后自动重新启用该功能。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"导入号码"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"您曾通过其他应用将某些来电者设为自动转到语音信箱。"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"隐藏已屏蔽号码的来电，并自动删除来自这些号码的新语音邮件。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看号码"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"导入"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"导入失败"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"取消屏蔽号码"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"添加号码"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"添加号码"</string>
     <string name="blockList" msgid="285204949255078310">"屏蔽列表"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"正在检查 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> 无效。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> 已被屏蔽。"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"来电拦截功能将停用 48 小时"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"此功能已停用，因为您拨打了紧急呼救电话。"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐户"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"开启"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"设置权限"</string>

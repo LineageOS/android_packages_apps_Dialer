@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"ಫೋನ್"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ಫೋನ್"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ಫೋನ್"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"ಕರೆ ಇತಿಹಾಸ"</string>
     <string name="action_report_number" msgid="4635403959812186162">"ನಿಖರವಾಗಿಲ್ಲದ ಸಂಖ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ"</string>
@@ -173,10 +175,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ಕರೆ ಮಾಡಿ"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ರಿಂದ ತಪ್ಪಿದ ಕರೆ."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ರಿಂದ ಕರೆಗೆ ಉತ್ತರಿಸಲಾಗಿದೆ."</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ರಿಂದ ಓದದಿರುವ ಧ್ವನಿಮೇಲ್."</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ರಿಂದ ಧ್ವನಿಮೇಲ್."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ಗೆ ಕರೆ."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> ನಲ್ಲಿ"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ಕರೆಮಾಡಿ"</string>
@@ -222,16 +222,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ನೀವು ಕಳೆದ 48 ಗಂಟೆಗಳಲ್ಲಿ ಈ ಫೋನ್‌ನಿಂದ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಸಂಪರ್ಕಿಸಿರುವ ಕಾರಣದಿಂದ ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ. ಒಮ್ಮೆ 48 ಗಂಟೆಗಳ ಅವಧಿಯು ಮುಕ್ತಾಯಗೊಂಡ ನಂತರ ಅದನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮರುಸಕ್ರಿಯಗೊಳಿಸಲಾಗುವುದು."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"ಸಂಖ್ಯೆಗಳನ್ನು ಆಮದು ಮಾಡಿ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ನೀವು ಈ ಹಿಂದೆ ಗುರುತು ಮಾಡಲಾದ ಕೆಲವು ಕಾಲರ್‌ಗಳನ್ನು ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೂಲಕ ಧ್ವನಿಮೇಲ್‌ಗೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲಾಗುತ್ತದೆ."</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳಿಂದ ಕರೆಗಳನ್ನು ಮರೆಮಾಡಿ ಮತ್ತು ಹೊಸ ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಿ."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ಸಂಖ್ಯೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ಆಮದು ಮಾಡಿ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ಆಮದು ವಿಫಲವಾಗಿದೆ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="blockList" msgid="285204949255078310">"ಪಟ್ಟಿಯನ್ನು ನಿರ್ಬಂಧಿಸಿ"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"<xliff:g id="NUMBER">%1$s</xliff:g> ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ಅಮಾನ್ಯವಾಗಿದೆ."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ಈಗಾಗಲೇ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ."</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"ಕರೆ ನಿರ್ಬಂಧಿಸುವಿಕೆ 48 ಗಂಟೆಗಳವರೆಗೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"ತುರ್ತು ಕರೆಯನ್ನು ಮಾಡಿರುವ ಕಾರಣದಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ."</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ಕರೆ ಮಾಡುವ ಖಾತೆಗಳು"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ಆನ್ ಮಾಡು"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸು"</string>

@@ -19,6 +19,8 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"ስልክ"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ስልክ"</string>
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
     <string name="dialerIconLabel" msgid="6500826552823403796">"ስልክ"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"የጥሪ ታሪክ"</string>
     <string name="action_report_number" msgid="4635403959812186162">"ትክክለኛ ያልሆነ ቁጥርን ሪፓርት አድርግ"</string>
@@ -172,10 +174,8 @@
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ይደውሉ"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g> ያመለጠ ጥሪ።"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g> መልስ የተሰጠው ጥሪ።"</string>
-    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
-    <skip />
-    <!-- no translation found for description_read_voicemail (133974208364152610) -->
-    <skip />
+    <string name="description_unread_voicemail" msgid="5826351827625665597">"ያልተነበበ የድምጽ ፖስታ ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g>።"</string>
+    <string name="description_read_voicemail" msgid="133974208364152610">"የድምጽ ፖስታ ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g>።"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"ወደ <xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g> ደውል።"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"በ<xliff:g id="PHONEACCOUNT">^1</xliff:g> ላይ"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ደውል"</string>
@@ -221,16 +221,16 @@
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ባለፉት 48 ሰዓቶች ውስጥ ከዚህ ስልክ ሆነው የአስቸኳይ አደጋ አገልግሎቶችን ስላነጋገሩ ጥሪን ማገድ ተሰናክሏል። አንዴ የ48 ሰዓቱ ጊዜ ካለፈ በኋላ በራስ-ሰር ዳግም ይነቃል።"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"ቁጥሮችን አስመጣ"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"ከዚህ ቀደም አንዳንድ ደዋዮች በሌሎች መተግበሪያዎች በኩል በራስ-ሰር ወደ የድምፅ መልዕክት እንዲላኩ ምልክት አድርገባቸው ነበር።"</string>
-    <string name="blocked_call_settings_hide_setting" msgid="3443004532024659782">"ከታገዱ ቁጥሮች የመጡ ጥሪዎችን ደብቅና አዲስ የድምጽ መልዕክቶችን በራስ-ሰር ይሰርዙ።"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ቁጥሮችን ይመልከቱ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"አስመጣ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ማስመጣት አልተሳካም"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ቁጥርን አታግድ"</string>
-    <string name="blockNumber" msgid="3312666193996551842">"ቁጥር አክል"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"ቁጥር አክል"</string>
     <string name="blockList" msgid="285204949255078310">"የእግድ ዝርዝር"</string>
-    <string name="checkingNumber" msgid="4144298066501252393">"በመፈተሽ ላይ <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ልክ ያልኾነ ነው።"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ቀድሞውኑ ታግዷል።"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"የጥሪ እገዳ ለ48 ሰዓቶች ተሰናክሏል።"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"የአስቸኳይ አደጋ ጥሪ ስለተደረገ ተሰናክሏል።"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"የመደወያ መለያዎች"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"አብራ"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ፍቃዶችን አዋቅር"</string>
