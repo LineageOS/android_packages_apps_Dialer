@@ -31,6 +31,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.dialer.calllog.ContactInfoHelper;
 
 /**
  * Looks up caller information for the given phone number.
@@ -175,6 +176,12 @@ public class CallerInfo {
                 columnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
                 if (columnIndex != -1) {
                     info.name = cursor.getString(columnIndex);
+                }
+
+                columnIndex = cursor.getColumnIndex(PhoneLookup.LOOKUP_KEY);
+                if (columnIndex != -1) {
+                    info.nameAlternative = ContactInfoHelper.lookUpDisplayNameAlternative(
+                            context, cursor.getString(columnIndex));
                 }
 
                 // Look for the number
