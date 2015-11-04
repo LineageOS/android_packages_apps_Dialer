@@ -31,6 +31,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -153,7 +154,7 @@ public class DefaultVoicemailNotifier {
                     // Look it up in the database.
                     name = mNameLookupQuery.query(newCall.number);
                     if (TextUtils.isEmpty(name)) {
-                        name = newCall.number;
+                        name = PhoneNumberUtils.formatNumber(newCall.number, newCall.countryIso);
                     }
                 }
                 names.put(newCall.number, name);
