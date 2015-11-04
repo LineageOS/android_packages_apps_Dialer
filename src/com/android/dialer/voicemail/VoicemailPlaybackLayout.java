@@ -376,8 +376,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     @Override
     public void disableUiElements() {
         mStartStopButton.setEnabled(false);
-        mPlaybackSeek.setEnabled(false);
-        mPlaybackSeek.setThumb(mVoicemailSeekHandleDisabled);
+        resetSeekBar();
     }
 
     @Override
