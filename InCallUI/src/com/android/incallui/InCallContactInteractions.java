@@ -139,23 +139,22 @@ public class InCallContactInteractions {
         BusinessContextInfo hoursInfo = new BusinessContextInfo();
         hoursInfo.iconId = R.drawable.ic_schedule_white_24dp;
 
-        Calendar openTime = getCalendarFromTime(currentTime, openingHours.first);
-        Calendar closeTime = getCalendarFromTime(currentTime, openingHours.second);
+        // Note: the date of these {@link Date}s are set to January 1, 1970. The object is just
+        // used as a storage for the time.
+        Date openingDateTime = getSimpleDateTime(openingHours.first);
+        Date closingDateTime = getSimpleDateTime(openingHours.second);
 
-        if (openTime == null || closeTime == null) {
+        if (openingDateTime == null || closingDateTime == null) {
             return null;
         }
 
-        if (currentTime.after(openTime) && currentTime.before(closeTime)) {
-            hoursInfo.heading = mContext.getString(R.string.open_now);
-        } else {
-            hoursInfo.heading = mContext.getString(R.string.closed_now);
-        }
+        hoursInfo.heading = isOpen(openingDateTime, closingDateTime, currentTime)
+                ? mContext.getString(R.string.open_now) : mContext.getString(R.string.closed_now);
 
         hoursInfo.detail = mContext.getString(
                 R.string.opening_hours,
-                DateFormat.getTimeFormat(mContext).format(openTime.getTime()),
-                DateFormat.getTimeFormat(mContext).format(closeTime.getTime()));
+                DateFormat.getTimeFormat(mContext).format(openingDateTime),
+                DateFormat.getTimeFormat(mContext).format(closingDateTime));
         return hoursInfo;
     }
 
@@ -205,22 +204,54 @@ public class InCallContactInteractions {
     }
 
     /**
-     * Get a calendar object set to the current calendar date and the time set to the "hhmm" string
-     * passed in.
+     * Get a {@link Date} object corresponding to a particular time.
+     *
+     * @param time A string containing a time in the format "hhmm".
+     * @return A {@link Date} object with the time set to the parsed value of the "time" parameter
+     * and the date set to January 1, 1970. Or {@code null} if the input string is not able to be
+     * parsed.
      */
-    private Calendar getCalendarFromTime(Calendar currentTime, String time) {
+    private Date getSimpleDateTime(String time) {
         try {
-            Calendar newCalendar = Calendar.getInstance();
-            newCalendar.setTime(new SimpleDateFormat("hhmm").parse(time));
-            newCalendar.set(
-                    currentTime.get(Calendar.YEAR),
-                    currentTime.get(Calendar.MONTH),
-                    currentTime.get(Calendar.DATE));
-            return newCalendar;
+            return new SimpleDateFormat("hhmm").parse(time);
         } catch (ParseException e) {
-            Log.w(TAG, "Could not parse time string" + time);
+            Log.w(TAG, "Could not parse time string " + time);
         }
         return null;
+    }
+
+    /**
+     * Check whether the current time falls between the opening time and the closing time.
+     *
+     * @param openingTime A {@link Date} object with the time set to the opening time and the date
+     * set to January 1, 1970.
+     * @param closingTime A {@link Date} object with the time set to the closing time and the date
+     * set to January 1, 1970.
+     * @param currentDateTime A {@link Calendar} object with the current date and time.
+     * @return {@code true} if the current time falls within the opening and closing time bounds and
+     * {@code false} otherwise.
+     */
+    private boolean isOpen(Date openingTime, Date closingTime, Calendar currentDateTime) {
+        Calendar openTimeCalendar = Calendar.getInstance();
+        openTimeCalendar.setTime(openingTime);
+
+        Calendar closeTimeCalendar = Calendar.getInstance();
+        closeTimeCalendar.setTime(closingTime);
+
+        if (openTimeCalendar.compareTo(closeTimeCalendar) >= 0) {
+            // If the open time is the same or after the close time, add a day to the close time
+            // calendar.
+            closeTimeCalendar.add(Calendar.DATE, 1);
+        }
+
+        // Since the date doesn't actually matter, it's easier to set the current date to the
+        // opening date rather than change both the calendars for the open time and the close time.
+        currentDateTime.set(
+                openTimeCalendar.get(Calendar.YEAR),
+                openTimeCalendar.get(Calendar.MONTH),
+                openTimeCalendar.get(Calendar.DATE));
+
+        return currentDateTime.after(openTimeCalendar) && currentDateTime.before(closeTimeCalendar);
     }
 
     /**

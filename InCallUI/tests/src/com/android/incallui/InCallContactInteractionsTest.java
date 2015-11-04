@@ -44,6 +44,26 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
         assertEquals(mContext.getString(R.string.open_now), info.heading);
     }
 
+    public void testIsOpenNow_ClosingAfterMidnight() {
+        Calendar currentTimeForTest = Calendar.getInstance();
+        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 10);
+        BusinessContextInfo info =
+                mInCallContactInteractions.constructHoursInfo(
+                        currentTimeForTest,
+                        Pair.create("0800", "0100"));
+        assertEquals(mContext.getString(R.string.open_now), info.heading);
+    }
+
+    public void testIsOpenNow_Open24Hours() {
+        Calendar currentTimeForTest = Calendar.getInstance();
+        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 10);
+        BusinessContextInfo info =
+                mInCallContactInteractions.constructHoursInfo(
+                        currentTimeForTest,
+                        Pair.create("0800", "0800"));
+        assertEquals(mContext.getString(R.string.open_now), info.heading);
+    }
+
     public void testIsClosedNow_BeforeOpen() {
         Calendar currentTimeForTest = Calendar.getInstance();
         currentTimeForTest.set(Calendar.HOUR_OF_DAY, 6);
