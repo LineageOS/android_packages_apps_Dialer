@@ -328,6 +328,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         switch (item.getItemId()) {
             case R.id.context_menu_block_number:
                 BlockNumberDialogFragment.show(
+                        mContext,
                         blockId,
                         number,
                         countryIso,
