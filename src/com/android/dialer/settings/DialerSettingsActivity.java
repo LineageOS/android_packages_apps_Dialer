@@ -145,6 +145,17 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             target.add(videocallingHeader);
         }
 
+        boolean usageEnable = getResources().getBoolean(
+                R.bool.config_regional_call_data_usage_enable);
+        if (usageEnable) {
+            final Header historyInfoHeader = new Header();
+            historyInfoHeader.titleRes = R.string.call_data_info_label;
+            historyInfoHeader.summaryRes = R.string.call_data_info_description;
+            historyInfoHeader.intent = new Intent(Intent.ACTION_MAIN);
+            historyInfoHeader.intent
+                    .setAction("android.intent.action.SHOW_TIMERINFO");
+            target.add(historyInfoHeader);
+        }
     }
 
     @Override
