@@ -117,7 +117,7 @@
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sec."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Nu puteți apela acest număr"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Pentru a configura mesageria vocală, accesaţi Meniu &gt; Setări."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Pentru a apela mesageria vocală, mai întâi dezactivaţi modul Avion."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Pentru a apela mesageria vocală, mai întâi dezactivați modul Avion."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Se încarcă..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>

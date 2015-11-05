@@ -394,24 +394,6 @@ public class ContactInfoHelper {
     }
 
     /**
-     * Parses the given URI to determine the original lookup key of the contact.
-     */
-    public static String getLookupKeyFromUri(Uri lookupUri) {
-        // Would be nice to be able to persist the lookup key somehow to avoid having to parse
-        // the uri entirely just to retrieve the lookup key, but every uri is already parsed
-        // once anyway to check if it is an encoded JSON uri, so this has negligible effect
-        // on performance.
-        if (lookupUri != null && !UriUtils.isEncodedContactUri(lookupUri)) {
-            final List<String> segments = lookupUri.getPathSegments();
-            // This returns the third path segment of the uri, where the lookup key is located.
-            // See {@link android.provider.ContactsContract.Contacts#CONTENT_LOOKUP_URI}.
-            return (segments.size() < 3) ? null : Uri.encode(segments.get(2));
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * Returns the contact information stored in an entry of the call log.
      *
      * @param c A cursor pointing to an entry in the call log.

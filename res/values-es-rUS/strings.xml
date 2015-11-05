@@ -59,8 +59,8 @@
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Configurar"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Llamar buzón de voz"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="sms_disambig_title" msgid="5846266399240630846">"Elije un número"</string>
-    <string name="call_disambig_title" msgid="4392886850104795739">"Elije un número"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"Elige un número"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"Elige un número"</string>
     <string name="make_primary" msgid="5829291915305113983">"Recuerda esta opción"</string>
     <string name="description_search_button" msgid="3660807558587384889">"búsqueda"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"marcar"</string>
