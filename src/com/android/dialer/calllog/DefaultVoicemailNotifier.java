@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
@@ -213,8 +214,11 @@ public class DefaultVoicemailNotifier {
 
         // The text to show in the ticker, describing the new event.
         if (callToNotify != null) {
-            notificationBuilder.setTicker(resources.getString(
-                    R.string.notification_new_voicemail_ticker, names.get(callToNotify.number)));
+            CharSequence msg = ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                    resources,
+                    R.string.notification_new_voicemail_ticker,
+                    names.get(callToNotify.number));
+            notificationBuilder.setTicker(msg);
         }
 
         mNotificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notificationBuilder.build());

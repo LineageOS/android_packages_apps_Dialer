@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactListItemView;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
@@ -185,7 +186,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                             getFragmentManager(),
                             BlockedListSearchFragment.this);
                 } else {
-                    Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
+                    Toast.makeText(getContext(),
+                            ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+                                    R.string.alreadyBlocked, number),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -193,7 +196,9 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         final boolean success = mFilteredNumberAsyncQueryHandler.isBlockedNumber(
                 onCheckListener, number, countryIso);
         if (!success) {
-            Toast.makeText(getContext(), getString(R.string.invalidNumber, number),
+            Toast.makeText(getContext(),
+                    ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                            getResources(), R.string.invalidNumber, number),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -218,7 +223,8 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             final String number,
             final Integer blockId) {
         if (blockId != null) {
-            Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
+            Toast.makeText(getContext(), ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                            getResources(), R.string.alreadyBlocked, number),
                     Toast.LENGTH_SHORT).show();
             return;
         }
