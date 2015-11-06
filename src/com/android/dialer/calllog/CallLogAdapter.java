@@ -48,6 +48,9 @@ import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -361,7 +364,22 @@ public class CallLogAdapter extends GroupingListAdapter
                 mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter,
                 mFilteredNumberAsyncQueryHandler,
-                null);
+                new Callback() {
+                    @Override
+                    public void onFilterNumberSuccess() {
+                        Logger.logInteraction(
+                                InteractionEvent.BLOCK_NUMBER_CALL_LOG);
+                    }
+
+                    @Override
+                    public void onUnfilterNumberSuccess() {
+                        Logger.logInteraction(
+                                InteractionEvent.UNBLOCK_NUMBER_CALL_LOG);
+                    }
+
+                    @Override
+                    public void onChangeFilteredNumberUndo() {}
+                });
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);

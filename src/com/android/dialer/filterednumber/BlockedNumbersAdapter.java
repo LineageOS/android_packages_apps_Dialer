@@ -26,6 +26,8 @@ import com.android.contacts.common.GeoUtil;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 
 public class BlockedNumbersAdapter extends NumbersAdapter {
 
@@ -67,7 +69,19 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
                         PhoneNumberUtils.formatNumber(number, countryIso),
                         R.id.blocked_number_fragment,
                         getFragmentManager(),
-                        null /* callback */);
+                        new BlockNumberDialogFragment.Callback() {
+                            @Override
+                            public void onFilterNumberSuccess() {}
+
+                            @Override
+                            public void onUnfilterNumberSuccess() {
+                                Logger.logInteraction(
+                                        InteractionEvent.UNBLOCK_NUMBER_MANAGEMENT_SCREEN);
+                            }
+
+                            @Override
+                            public void onChangeFilteredNumberUndo() {}
+                        });
             }
         });
 
