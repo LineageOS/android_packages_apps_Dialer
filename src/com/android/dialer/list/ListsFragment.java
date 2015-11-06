@@ -46,6 +46,7 @@ import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
@@ -403,25 +404,22 @@ public class ListsFragment extends Fragment
             return;
         }
 
-        String fragmentName;
-        String tag = null;
+        int screenType;
         switch (getCurrentTabIndex()) {
             case TAB_INDEX_SPEED_DIAL:
-                fragmentName = SpeedDialFragment.class.getSimpleName();
+                screenType = ScreenEvent.SPEED_DIAL;
                 break;
             case TAB_INDEX_HISTORY:
-                fragmentName = CallLogFragment.class.getSimpleName();
-                tag = "History";
+                screenType = ScreenEvent.CALL_LOG;
                 break;
             case TAB_INDEX_ALL_CONTACTS:
-                fragmentName = AllContactsFragment.class.getSimpleName();
+                screenType = ScreenEvent.ALL_CONTACTS;
                 break;
             case TAB_INDEX_VOICEMAIL:
-                fragmentName = CallLogFragment.class.getSimpleName();
-                tag = "Voicemail";
+                screenType = ScreenEvent.VOICEMAIL_LOG;
             default:
                 return;
         }
-        Logger.logScreenView(fragmentName, getActivity(), tag);
+        Logger.logScreenView(screenType, getActivity());
     }
 }

@@ -41,6 +41,7 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.TransactionSafeActivity;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.util.DialerUtils;
 
 public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener {
@@ -223,22 +224,7 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     }
 
     private void sendScreenViewForChildFragment(int position) {
-        Logger.logScreenView(CallLogFragment.class.getSimpleName(), this,
-                getFragmentTagForPosition(position));
-    }
-
-    /**
-     * Returns the fragment located at the given position in the {@link ViewPagerAdapter}. May
-     * be null if the position is invalid.
-     */
-    private String getFragmentTagForPosition(int position) {
-        switch (position) {
-            case TAB_INDEX_ALL:
-                return "All";
-            case TAB_INDEX_MISSED:
-                return "Missed";
-        }
-        return null;
+        Logger.logScreenView(ScreenEvent.CALL_LOG_FILTER, this);
     }
 
     private int getRtlPosition(int position) {
