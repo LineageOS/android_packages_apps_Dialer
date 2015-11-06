@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 
 /**
@@ -147,9 +148,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         final String number = getFormattedQueryString();
         switch (shortcutType) {
             case SHORTCUT_DIRECT_CALL:
-                text = resources.getString(
-                        R.string.search_shortcut_call_number,
-                        mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
+                text = ContactDisplayUtils.getTtsSpannedPhoneNumberString(resources,
+                                R.string.search_shortcut_call_number,
+                                mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
                 drawableId = R.drawable.ic_search_phone;
                 break;
             case SHORTCUT_CREATE_NEW_CONTACT:

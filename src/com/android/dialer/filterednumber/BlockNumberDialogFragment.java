@@ -134,13 +134,15 @@ public class BlockNumberDialogFragment extends DialogFragment
         String okText;
         String message;
         if (isBlocked) {
-            title = getTtsSpannedPhoneNumberString(R.string.unblock_number_confirmation_title,
-                mDisplayNumber);
+            title = ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+                    R.string.unblock_number_confirmation_title,
+                    mDisplayNumber);
             okText = getString(R.string.unblock_number_ok);
             message = null;
         } else {
-            title = getTtsSpannedPhoneNumberString(R.string.block_number_confirmation_title,
-                mDisplayNumber);
+            title = ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+                    R.string.block_number_confirmation_title,
+                    mDisplayNumber);
             okText = getString(R.string.block_number_ok);
             if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
                 message = getString(R.string.block_number_confirmation_message_vvm);
@@ -177,7 +179,9 @@ public class BlockNumberDialogFragment extends DialogFragment
         super.onActivityCreated(savedInstanceState);
         if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNumber, mCountryIso)) {
             dismiss();
-            Toast.makeText(getContext(), getString(R.string.invalidNumber, mDisplayNumber),
+            Toast.makeText(getContext(),
+                    ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                            getResources(), R.string.invalidNumber, mDisplayNumber),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -195,17 +199,14 @@ public class BlockNumberDialogFragment extends DialogFragment
         mCallback = callback;
     }
 
-    private CharSequence getTtsSpannedPhoneNumberString(int id,String number){
-        String msg = getString(id, mDisplayNumber);
-        return ContactDisplayUtils.getTelephoneTtsSpannable(msg,mDisplayNumber);
-    }
-
     private CharSequence getBlockedMessage() {
-        return getTtsSpannedPhoneNumberString(R.string.snackbar_number_blocked, mDisplayNumber);
+        return ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+                R.string.snackbar_number_blocked, mDisplayNumber);
     }
 
     private CharSequence getUnblockedMessage() {
-        return getTtsSpannedPhoneNumberString(R.string.snackbar_number_unblocked, mDisplayNumber);
+        return ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+                R.string.snackbar_number_unblocked, mDisplayNumber);
     }
 
     private int getActionTextColor() {
