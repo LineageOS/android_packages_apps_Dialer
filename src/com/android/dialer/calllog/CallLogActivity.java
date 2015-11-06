@@ -40,6 +40,7 @@ import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.TransactionSafeActivity;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
 
 public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener {
@@ -222,7 +223,7 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     }
 
     private void sendScreenViewForChildFragment(int position) {
-        AnalyticsUtil.sendScreenView(CallLogFragment.class.getSimpleName(), this,
+        Logger.logScreenView(CallLogFragment.class.getSimpleName(), this,
                 getFragmentTagForPosition(position));
     }
 
