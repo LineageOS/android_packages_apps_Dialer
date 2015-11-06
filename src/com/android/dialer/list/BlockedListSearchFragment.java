@@ -15,6 +15,7 @@
  */
 package com.android.dialer.list;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -182,7 +183,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                             number,
                             R.id.blocked_numbers_activity_container,
                             getFragmentManager(),
-                            null /* callback */);
+                            BlockedListSearchFragment.this);
                 } else {
                     Toast.makeText(getContext(), getString(R.string.alreadyBlocked, number),
                             Toast.LENGTH_SHORT).show();
@@ -199,7 +200,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
 
     @Override
     public void onChangeFilteredNumberSuccess() {
-        BlockedNumbersSettingsActivity activity = (BlockedNumbersSettingsActivity) getActivity();
+        Activity activity = getActivity();
         if (activity == null) {
             return;
         }
