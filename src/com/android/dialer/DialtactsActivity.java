@@ -81,6 +81,7 @@ import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -526,7 +527,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             // This is only called when the activity goes from resumed -> paused -> resumed, so it
             // will not cause an extra view to be sent out on rotation
             if (mIsDialpadShown) {
-                AnalyticsUtil.sendScreenView(mDialpadFragment, this);
+                Logger.logFragmentView(mDialpadFragment);
             }
             mIsRestarting = false;
         }
@@ -741,7 +742,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mDialpadFragment.setAnimate(animate);
-        AnalyticsUtil.sendScreenView(mDialpadFragment);
+        // logScreenView is used here explicitly to provide the activity as the DialpadFragment
+        // might not have been attached yet.
+        Logger.logScreenView(DialpadFragment.class.getSimpleName(), this, null);
         ft.commit();
 
         if (animate) {
