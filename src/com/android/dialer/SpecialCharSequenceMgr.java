@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.dialer.calllog.PhoneAccountUtils;
@@ -474,9 +475,9 @@ public class SpecialCharSequenceMgr {
 
                     // display the name as a toast
                     Context context = sc.progressDialog.getContext();
-                    name = context.getString(R.string.menu_callNumber, name);
-                    Toast.makeText(context, name, Toast.LENGTH_SHORT)
-                        .show();
+                    CharSequence msg = ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                            context.getResources(), R.string.menu_callNumber, name);
+                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 }
             } finally {
                 MoreCloseables.closeQuietly(c);
