@@ -59,7 +59,7 @@
 
     <!-- Text for snackbar to undo blocking a number. [CHAR LIMIT=64] -->
     <string name="snackbar_number_blocked">
-        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> added to block list</string>
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> blocked</string>
 
     <!-- Label for action to unblock a number [CHAR LIMIT=48]-->
     <string name="action_unblock_number">Unblock number</string>
@@ -67,7 +67,7 @@
     <!-- Text for snackbar to undo unblocking a number. [CHAR LIMIT=64] -->
     <string name="snackbar_number_unblocked">
         <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
-        removed from block list</string>
+        unblocked</string>
 
     <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
     <string name="block_number_undo">UNDO</string>
@@ -519,19 +519,31 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_voicemail_title">Voicemail</string>
 
-    <!-- Confirmation dialog for blocking a number. [CHAR LIMIT=NONE] -->
-    <string name="blockNumberConfirmation">Add
+    <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_title">Add
         <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> to your block list?</string>
 
+    <!-- Confirmation dialog message for blocking a number with visual voicemail active.
+         [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_message_vvm">
+        Future calls from this number will be blocked and voicemails will be automatically deleted.
+    </string>
+
+    <!-- Confirmation dialog message for blocking a number with no visual voicemail.
+         [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_message_no_vvm">
+         Future calls from this number will be blocked. Voicemails may still reach you.
+    </string>
+
     <!-- Block number alert dialog button [CHAR LIMIT=32] -->
-    <string name="blockNumberOk">Block number</string>
+    <string name="block_number_ok">BLOCK</string>
 
     <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
-    <string name="unblockNumberConfirmation">Remove
-        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> from your block list?</string>
+    <string name="unblock_number_confirmation_title">Unblock
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
 
     <!-- Unblock number alert dialog button [CHAR LIMIT=32] -->
-    <string name="unblockNumberOk">Unblock number</string>
+    <string name="unblock_number_ok">UNBLOCK</string>
 
     <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
          [CHAR LIMIT=40] -->
@@ -830,7 +842,7 @@
     <string name="call_settings_label">Calls</string>
 
     <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
-    <string name="manage_blocked_numbers_label">Blocked numbers</string>
+    <string name="manage_blocked_numbers_label">Call blocking</string>
 
     <!-- Label for a section describing that call blocking is temporarily disabled because an
          emergency call was made. [CHAR LIMIT=50] -->
@@ -877,8 +889,20 @@
     <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
     <string name="addBlockedNumber">Add number</string>
 
+    <!-- Footer message of number blocking screen with visual voicemail active.
+        [CHAR LIMIT=NONE] -->
+    <string name="block_number_footer_message_vvm">
+        Adding a number blocks all future calls and voicemails will be automatically deleted.
+    </string>
+
+    <!-- Footer message of number blocking screen with no visual voicemail.
+         [CHAR LIMIT=NONE] -->
+    <string name="block_number_footer_message_no_vvm">
+         Adding a number blocks all future calls. Voicemails may still reach you.
+    </string>
+
     <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
-    <string name="blockList">Block list</string>
+    <string name="block_list">Blocked numbers</string>
 
     <!-- Error message shown when user tries to add invalid number to the block list.
         [CHAR LIMIT=64] -->

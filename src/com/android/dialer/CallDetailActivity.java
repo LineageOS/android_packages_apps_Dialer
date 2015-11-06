@@ -358,6 +358,7 @@ public class CallDetailActivity extends AppCompatActivity
         switch(view.getId()) {
             case R.id.call_detail_action_block:
                 BlockNumberDialogFragment.show(
+                        this,
                         mBlockedNumberId,
                         mNumber,
                         mDetails.countryIso,

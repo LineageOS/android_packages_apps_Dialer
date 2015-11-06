@@ -133,6 +133,7 @@
     <color name="blocked_number_block_color">#F44336</color>
     <color name="blocked_number_header_color">@color/dialer_theme_color</color>
     <color name="blocked_number_disabled_emergency_header_color">#616161</color>
+    <color name="add_blocked_number_icon_color">#bdbdbd</color>
 
     <!-- Grey 700 -->
     <color name="call_detail_footer_text_color">#616161</color>
