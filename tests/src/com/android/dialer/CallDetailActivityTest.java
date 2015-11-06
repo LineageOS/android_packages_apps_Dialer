@@ -86,6 +86,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     /**
      * Verifies the trash menu item is present and a voicemail URI is set.
      */
+    @Suppress
     public void testVoicemailDeleteButton() throws Throwable {
         setActivityIntentForTestVoicemailEntry();
         startActivityUnderTest();
@@ -108,6 +109,7 @@ public class CallDetailActivityTest extends ActivityInstrumentationTestCase2<Cal
     /**
      * Verifies the trash menu item is present and a voicemail URI is not set.
      */
+    @Suppress
     public void testRegularCallDoesHaveRemoveFromCallLog() throws Throwable {
         setActivityIntentForTestCallEntry();
         startActivityUnderTest();
