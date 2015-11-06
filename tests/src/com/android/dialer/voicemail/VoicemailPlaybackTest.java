@@ -29,6 +29,7 @@ import android.net.Uri;
 import android.provider.VoicemailContract;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
+import android.test.suitebuilder.annotation.Suppress;
 import android.view.View;
 import android.widget.TextView;
 
@@ -116,6 +117,7 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         });
     }
 
+    @Suppress
     public void testWhenCheckForContentCompletes() throws Throwable {
         setUriForRealFileVoicemailEntry();
         setPlaybackViewForPresenter();
@@ -132,6 +134,7 @@ public class VoicemailPlaybackTest extends ActivityInstrumentationTestCase2<Call
         assertStateTextContains("Loading voicemail");
     }
 
+    @Suppress
     public void testInvalidVoicemailShowsErrorMessage() throws Throwable {
         setUriForInvalidVoicemailEntry();
         setPlaybackViewForPresenter();
