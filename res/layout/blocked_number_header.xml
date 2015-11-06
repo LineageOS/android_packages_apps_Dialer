@@ -60,7 +60,7 @@
             <TextView android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/blockList"
+                android:text="@string/block_list"
                 android:textColor="@color/blocked_number_header_color"
                 android:padding="@dimen/blocked_number_container_padding"
                 style="@android:style/TextAppearance.Material.Subhead" />
@@ -105,21 +105,48 @@
 
             </RelativeLayout>
 
-            <TextView android:id="@+id/add_number_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/blocked_number_primary_text_color"
-                android:textSize="@dimen/blocked_number_primary_text_size"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp"
-                android:paddingEnd="@dimen/blocked_number_container_padding"
-                android:paddingStart="24dp"
-                android:drawableStart="@drawable/ic_blocked_numbers_settings_add"
-                android:drawablePadding="24dp"
-                android:text="@string/addBlockedNumber" />
+            <LinearLayout
+              android:id="@+id/add_number_linear_layout"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingStart="@dimen/blocked_number_horizontal_margin"
+              android:paddingTop="@dimen/blocked_number_top_margin"
+              android:paddingBottom="@dimen/blocked_number_bottom_margin"
+              android:baselineAligned="false"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:focusable="true"
+              android:clickable="true"
+              android:background="?android:attr/selectableItemBackground"
+              android:contentDescription="@string/addBlockedNumber">
+
+                <ImageView
+                  android:id="@+id/add_number_icon"
+                  android:layout_width="@dimen/contact_photo_size"
+                  android:layout_height="@dimen/contact_photo_size"
+                  android:importantForAccessibility="no" />
+                <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:orientation="vertical"
+                  android:gravity="center_vertical"
+                  android:layout_marginStart="@dimen/blocked_number_horizontal_margin">
+
+                    <TextView android:id="@+id/add_number_textview"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/blocked_number_primary_text_color"
+                      android:textSize="@dimen/blocked_number_primary_text_size"
+                      android:includeFontPadding="false"
+                      android:layout_marginBottom="5dp"
+                      android:text="@string/addBlockedNumber" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <View
+                android:id="@+id/blocked_number_list_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="72dp"

@@ -16,8 +16,8 @@
 package com.android.dialer.filterednumber;
 
 import android.app.FragmentManager;
-import android.database.Cursor;
 import android.content.Context;
+import android.database.Cursor;
 import android.view.View;
 
 import com.android.contacts.common.ContactPhotoManager;
@@ -46,7 +46,7 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         super.bindView(view, context, cursor);
         final Integer id = cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID));
         final String countryIso = cursor.getString(cursor.getColumnIndex(
@@ -60,6 +60,7 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
             @Override
             public void onClick(View view) {
                 BlockNumberDialogFragment.show(
+                        context,
                         id,
                         number,
                         countryIso,

@@ -36,7 +36,6 @@ import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
-import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 import com.android.dialer.widget.SearchEditTextLayout;
 
 public class BlockedListSearchFragment extends RegularSearchFragment
@@ -177,6 +176,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             public void onCheckComplete(Integer id) {
                 if (id == null) {
                     BlockNumberDialogFragment.show(
+                            getContext(),
                             id,
                             number,
                             countryIso,
@@ -224,6 +224,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         }
 
         BlockNumberDialogFragment.show(
+                getContext(),
                 blockId,
                 number,
                 GeoUtil.getCurrentCountryIso(getContext()),

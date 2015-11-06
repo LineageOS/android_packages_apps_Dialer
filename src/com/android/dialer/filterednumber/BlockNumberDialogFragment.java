@@ -23,25 +23,26 @@ import android.app.FragmentManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
+import com.android.dialer.voicemail.VisualVoicemailEnabledChecker;
 
 /**
  * Fragment for confirming and enacting blocking/unblocking a number. Also invokes snackbar
  * providing undo functionality.
  */
-public class BlockNumberDialogFragment extends DialogFragment {
+public class BlockNumberDialogFragment extends DialogFragment
+        implements VisualVoicemailEnabledChecker.Callback{
 
     /**
      * Use a callback interface to update UI after success/undo. Favor this approach over other
@@ -69,9 +70,12 @@ public class BlockNumberDialogFragment extends DialogFragment {
 
     private FilteredNumberAsyncQueryHandler mHandler;
     private View mParentView;
+    private VisualVoicemailEnabledChecker mVoicemailEnabledChecker;
     private Callback mCallback;
+    private AlertDialog mAlertDialog;
 
     public static void show(
+            Context context,
             Integer blockId,
             String number,
             String countryIso,
@@ -80,13 +84,14 @@ public class BlockNumberDialogFragment extends DialogFragment {
             FragmentManager fragmentManager,
             Callback callback) {
         final BlockNumberDialogFragment newFragment = BlockNumberDialogFragment.newInstance(
-                blockId, number, countryIso, displayNumber, parentViewId);
+                context, blockId, number, countryIso, displayNumber, parentViewId);
 
         newFragment.setCallback(callback);
         newFragment.show(fragmentManager, BlockNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
     }
 
     private static BlockNumberDialogFragment newInstance(
+            Context context,
             Integer blockId,
             String number,
             String countryIso,
@@ -104,6 +109,8 @@ public class BlockNumberDialogFragment extends DialogFragment {
         args.putString(ARG_COUNTRY_ISO, countryIso);
         args.putString(ARG_DISPLAY_NUMBER, displayNumber);
         fragment.setArguments(args);
+        fragment.mVoicemailEnabledChecker = new VisualVoicemailEnabledChecker(context,fragment);
+        fragment.mVoicemailEnabledChecker.asyncUpdate();
         return fragment;
     }
 
@@ -123,17 +130,28 @@ public class BlockNumberDialogFragment extends DialogFragment {
         mHandler = new FilteredNumberAsyncQueryHandler(getContext().getContentResolver());
         mParentView = getActivity().findViewById(getArguments().getInt(ARG_PARENT_VIEW_ID));
 
-        String message;
+        CharSequence title;
         String okText;
+        String message;
         if (isBlocked) {
-            message = getString(R.string.unblockNumberConfirmation, mDisplayNumber);
-            okText = getString(R.string.unblockNumberOk);
+            title = getTtsSpannedPhoneNumberString(R.string.unblock_number_confirmation_title,
+                mDisplayNumber);
+            okText = getString(R.string.unblock_number_ok);
+            message = null;
         } else {
-            message = getString(R.string.blockNumberConfirmation, mDisplayNumber);
-            okText = getString(R.string.blockNumberOk);
+            title = getTtsSpannedPhoneNumberString(R.string.block_number_confirmation_title,
+                mDisplayNumber);
+            okText = getString(R.string.block_number_ok);
+            if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
+                message = getString(R.string.block_number_confirmation_message_vvm);
+            } else {
+                message = getString(R.string.block_number_confirmation_message_no_vvm);
+            }
         }
 
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(okText, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -142,10 +160,16 @@ public class BlockNumberDialogFragment extends DialogFragment {
                         } else {
                             blockNumber();
                         }
+                        mAlertDialog = null;
                     }
                 })
-                .setNegativeButton(android.R.string.cancel, null);
-        return builder.create();
+                .setNegativeButton(android.R.string.cancel,  new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mAlertDialog = null;
+                    }
+                });
+        mAlertDialog = builder.create();
+        return mAlertDialog;
     }
 
     @Override
@@ -171,12 +195,17 @@ public class BlockNumberDialogFragment extends DialogFragment {
         mCallback = callback;
     }
 
-    private String getBlockedMessage() {
-        return getString(R.string.snackbar_number_blocked, mDisplayNumber);
+    private CharSequence getTtsSpannedPhoneNumberString(int id,String number){
+        String msg = getString(id, mDisplayNumber);
+        return ContactDisplayUtils.getTelephoneTtsSpannable(msg,mDisplayNumber);
     }
 
-    private String getUnblockedMessage() {
-        return getString(R.string.snackbar_number_unblocked, mDisplayNumber);
+    private CharSequence getBlockedMessage() {
+        return getTtsSpannedPhoneNumberString(R.string.snackbar_number_blocked, mDisplayNumber);
+    }
+
+    private CharSequence getUnblockedMessage() {
+        return getTtsSpannedPhoneNumberString(R.string.snackbar_number_unblocked, mDisplayNumber);
     }
 
     private int getActionTextColor() {
@@ -184,8 +213,8 @@ public class BlockNumberDialogFragment extends DialogFragment {
     }
 
     private void blockNumber() {
-        final String message = getBlockedMessage();
-        final String undoMessage = getUnblockedMessage();
+        final CharSequence message = getBlockedMessage();
+        final CharSequence undoMessage = getUnblockedMessage();
         final Callback callback = mCallback;
         final int actionTextColor = getActionTextColor();
         final Context context = getContext();
@@ -233,8 +262,8 @@ public class BlockNumberDialogFragment extends DialogFragment {
     }
 
     private void unblockNumber() {
-        final String message = getUnblockedMessage();
-        final String undoMessage = getBlockedMessage();
+        final CharSequence message = getUnblockedMessage();
+        final CharSequence undoMessage = getBlockedMessage();
         final Callback callback = mCallback;
         final int actionTextColor = getActionTextColor();
 
@@ -269,5 +298,20 @@ public class BlockNumberDialogFragment extends DialogFragment {
                 }
             }
         }, getArguments().getInt(ARG_BLOCK_ID));
+    }
+
+    @Override
+    public void onVisualVoicemailEnabledStatusChanged(boolean newStatus){
+        updateActiveVoicemailProvider();
+    }
+
+    private void updateActiveVoicemailProvider(){
+        if(mAlertDialog != null) {
+            if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
+                mAlertDialog.setMessage(getString(R.string.block_number_confirmation_message_vvm));
+            } else {
+                mAlertDialog.setMessage(getString(R.string.block_number_confirmation_message_no_vvm));
+            }
+        }
     }
 }
