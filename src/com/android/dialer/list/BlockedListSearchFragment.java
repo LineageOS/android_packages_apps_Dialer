@@ -187,7 +187,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                             BlockedListSearchFragment.this);
                 } else {
                     Toast.makeText(getContext(),
-                            ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+                            ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                                     R.string.alreadyBlocked, number),
                             Toast.LENGTH_SHORT).show();
                 }
@@ -197,7 +197,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                 onCheckListener, number, countryIso);
         if (!success) {
             Toast.makeText(getContext(),
-                    ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                    ContactDisplayUtils.getTtsSpannedPhoneNumber(
                             getResources(), R.string.invalidNumber, number),
                     Toast.LENGTH_SHORT).show();
         }
@@ -223,7 +223,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             final String number,
             final Integer blockId) {
         if (blockId != null) {
-            Toast.makeText(getContext(), ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+            Toast.makeText(getContext(), ContactDisplayUtils.getTtsSpannedPhoneNumber(
                             getResources(), R.string.alreadyBlocked, number),
                     Toast.LENGTH_SHORT).show();
             return;
