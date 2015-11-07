@@ -475,7 +475,7 @@ public class SpecialCharSequenceMgr {
 
                     // display the name as a toast
                     Context context = sc.progressDialog.getContext();
-                    CharSequence msg = ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                    CharSequence msg = ContactDisplayUtils.getTtsSpannedPhoneNumber(
                             context.getResources(), R.string.menu_callNumber, name);
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 }
