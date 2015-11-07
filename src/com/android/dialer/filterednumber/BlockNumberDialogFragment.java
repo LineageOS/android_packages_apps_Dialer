@@ -138,7 +138,7 @@ public class BlockNumberDialogFragment extends DialogFragment
                     R.string.unblock_number_confirmation_title,
                     mDisplayNumber);
             okText = getString(R.string.unblock_number_ok);
-            message = null;
+            message = getString(R.string.unblock_number_confirmation_message);
         } else {
             title = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                     R.string.block_number_confirmation_title,
