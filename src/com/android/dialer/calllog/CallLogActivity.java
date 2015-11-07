@@ -41,7 +41,6 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.TransactionSafeActivity;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenTagConstants;
 import com.android.dialer.util.DialerUtils;
 
 public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener {
@@ -224,7 +223,7 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     }
 
     private void sendScreenViewForChildFragment(int position) {
-        Logger.logScreenView(ScreenTagConstants.CALL_LOG, this,
+        Logger.logScreenView(CallLogFragment.class.getSimpleName(), this,
                 getFragmentTagForPosition(position));
     }
 
@@ -235,9 +234,9 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     private String getFragmentTagForPosition(int position) {
         switch (position) {
             case TAB_INDEX_ALL:
-                return ScreenTagConstants.CALL_LOG_ALL;
+                return "All";
             case TAB_INDEX_MISSED:
-                return ScreenTagConstants.CALL_LOG_MISSED;
+                return "Missed";
         }
         return null;
     }
