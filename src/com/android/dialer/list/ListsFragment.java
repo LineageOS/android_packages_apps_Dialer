@@ -46,7 +46,6 @@ import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenTagConstants;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.voicemail.VoicemailStatusHelper;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
@@ -412,14 +411,14 @@ public class ListsFragment extends Fragment
                 break;
             case TAB_INDEX_HISTORY:
                 fragmentName = CallLogFragment.class.getSimpleName();
-                tag = ScreenTagConstants.CALL_LOG_HISTORY;
+                tag = "History";
                 break;
             case TAB_INDEX_ALL_CONTACTS:
                 fragmentName = AllContactsFragment.class.getSimpleName();
                 break;
             case TAB_INDEX_VOICEMAIL:
                 fragmentName = CallLogFragment.class.getSimpleName();
-                tag = ScreenTagConstants.CALL_LOG_VOICEMAIL;
+                tag = "Voicemail";
             default:
                 return;
         }
