@@ -19,6 +19,8 @@ package com.android.dialer.calllog;
 import static android.Manifest.permission.READ_CALL_LOG;
 import static android.Manifest.permission.READ_CONTACTS;
 
+import com.google.common.collect.Maps;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -40,10 +42,8 @@ import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
-import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.list.ListsFragment;
-import com.google.common.collect.Maps;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -214,7 +214,7 @@ public class DefaultVoicemailNotifier {
 
         // The text to show in the ticker, describing the new event.
         if (callToNotify != null) {
-            CharSequence msg = ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+            CharSequence msg = ContactDisplayUtils.getTtsSpannedPhoneNumber(
                     resources,
                     R.string.notification_new_voicemail_ticker,
                     names.get(callToNotify.number));

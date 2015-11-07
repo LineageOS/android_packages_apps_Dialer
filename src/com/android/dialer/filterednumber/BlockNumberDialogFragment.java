@@ -134,13 +134,13 @@ public class BlockNumberDialogFragment extends DialogFragment
         String okText;
         String message;
         if (isBlocked) {
-            title = ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+            title = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                     R.string.unblock_number_confirmation_title,
                     mDisplayNumber);
             okText = getString(R.string.unblock_number_ok);
             message = null;
         } else {
-            title = ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+            title = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                     R.string.block_number_confirmation_title,
                     mDisplayNumber);
             okText = getString(R.string.block_number_ok);
@@ -180,7 +180,7 @@ public class BlockNumberDialogFragment extends DialogFragment
         if (!FilteredNumbersUtil.canBlockNumber(getActivity(), mNumber, mCountryIso)) {
             dismiss();
             Toast.makeText(getContext(),
-                    ContactDisplayUtils.getTtsSpannedPhoneNumberString(
+                    ContactDisplayUtils.getTtsSpannedPhoneNumber(
                             getResources(), R.string.invalidNumber, mDisplayNumber),
                     Toast.LENGTH_SHORT).show();
         }
@@ -200,12 +200,12 @@ public class BlockNumberDialogFragment extends DialogFragment
     }
 
     private CharSequence getBlockedMessage() {
-        return ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+        return ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                 R.string.snackbar_number_blocked, mDisplayNumber);
     }
 
     private CharSequence getUnblockedMessage() {
-        return ContactDisplayUtils.getTtsSpannedPhoneNumberString(getResources(),
+        return ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                 R.string.snackbar_number_unblocked, mDisplayNumber);
     }
 

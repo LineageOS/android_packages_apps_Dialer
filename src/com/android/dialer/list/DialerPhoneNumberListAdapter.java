@@ -148,9 +148,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         final String number = getFormattedQueryString();
         switch (shortcutType) {
             case SHORTCUT_DIRECT_CALL:
-                text = ContactDisplayUtils.getTtsSpannedPhoneNumberString(resources,
-                                R.string.search_shortcut_call_number,
-                                mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
+                text = ContactDisplayUtils.getTtsSpannedPhoneNumber(resources,
+                        R.string.search_shortcut_call_number,
+                        mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
                 drawableId = R.drawable.ic_search_phone;
                 break;
             case SHORTCUT_CREATE_NEW_CONTACT:
