@@ -82,6 +82,7 @@ import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenTagConstants;
 import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -527,7 +528,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             // This is only called when the activity goes from resumed -> paused -> resumed, so it
             // will not cause an extra view to be sent out on rotation
             if (mIsDialpadShown) {
-                Logger.logFragmentView(mDialpadFragment);
+                Logger.logScreenView(ScreenTagConstants.DIALPAD, this,
+                        ScreenTagConstants.DIALPAD_DIALER);
             }
             mIsRestarting = false;
         }
@@ -682,6 +684,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     ImportExportDialogFragment.show(getFragmentManager(), true,
                             DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_DEFAULT);
                 }
+                Logger.logScreenView(ScreenTagConstants.IMPORT_EXPORT_CONTACTS, this, null);
                 return true;
             case R.id.menu_clear_frequents:
                 ClearFrequentsDialog.show(getFragmentManager());
@@ -744,7 +747,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialpadFragment.setAnimate(animate);
         // logScreenView is used here explicitly to provide the activity as the DialpadFragment
         // might not have been attached yet.
-        Logger.logScreenView(DialpadFragment.class.getSimpleName(), this, null);
+        Logger.logScreenView(ScreenTagConstants.DIALPAD, this,
+                ScreenTagConstants.DIALPAD_DIALER);
         ft.commit();
 
         if (animate) {
