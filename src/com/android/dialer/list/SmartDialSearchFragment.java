@@ -28,6 +28,8 @@ import android.view.View;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.R;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.incallui.Call.LogState;
@@ -42,6 +44,12 @@ public class SmartDialSearchFragment extends SearchFragment
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
 
     private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Logger.logScreenView(ScreenEvent.SMART_DIAL_SEARCH, getActivity());
+    }
 
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
