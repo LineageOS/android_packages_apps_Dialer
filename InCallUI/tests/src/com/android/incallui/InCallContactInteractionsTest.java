@@ -22,9 +22,18 @@ import android.util.Pair;
 
 import com.android.incallui.InCallContactInteractions.BusinessContextInfo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * Tests for InCallContactInteractions class methods for formatting info for display.
+ *
+ * NOTE: tests assume system settings are set to 12hr time format and US locale. This means that
+ * the output of InCallContactInteractions methods are compared against strings in 12hr time format
+ * and US locale address formatting unless otherwise specified.
+ */
 public class InCallContactInteractionsTest extends AndroidTestCase {
     private InCallContactInteractions mInCallContactInteractions;
     private static final float TEST_DISTANCE = (float) 1234.56;
@@ -34,64 +43,147 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
         mInCallContactInteractions = new InCallContactInteractions(mContext, true /* isBusiness */);
     }
 
-    public void testIsOpenNow() {
-        Calendar currentTimeForTest = Calendar.getInstance();
-        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 10);
-        BusinessContextInfo info =
+    public void testIsOpenNow_NowMatchesOpenTime() {
+        assertEquals(mContext.getString(R.string.open_now),
                 mInCallContactInteractions.constructHoursInfo(
-                        currentTimeForTest,
-                        Pair.create("0800", "2000"));
-        assertEquals(mContext.getString(R.string.open_now), info.heading);
+                        getTestCalendarWithHour(8),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(20))))
+                .heading);
     }
 
     public void testIsOpenNow_ClosingAfterMidnight() {
-        Calendar currentTimeForTest = Calendar.getInstance();
-        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 10);
-        BusinessContextInfo info =
+        assertEquals(mContext.getString(R.string.open_now),
                 mInCallContactInteractions.constructHoursInfo(
-                        currentTimeForTest,
-                        Pair.create("0800", "0100"));
-        assertEquals(mContext.getString(R.string.open_now), info.heading);
+                        getTestCalendarWithHour(10),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHourAndDaysFromToday(1, 1))))
+                .heading);
     }
 
     public void testIsOpenNow_Open24Hours() {
-        Calendar currentTimeForTest = Calendar.getInstance();
-        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 10);
-        BusinessContextInfo info =
+        assertEquals(mContext.getString(R.string.open_now),
                 mInCallContactInteractions.constructHoursInfo(
-                        currentTimeForTest,
-                        Pair.create("0800", "0800"));
-        assertEquals(mContext.getString(R.string.open_now), info.heading);
+                        getTestCalendarWithHour(10),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHourAndDaysFromToday(8, 1))))
+                .heading);
+    }
+
+    public void testIsOpenNow_AfterMiddayBreak() {
+        assertEquals(mContext.getString(R.string.open_now),
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(13),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(10)),
+                                Pair.create(
+                                        getTestCalendarWithHour(12),
+                                        getTestCalendarWithHour(15))))
+                .heading);
+    }
+
+    public void testIsClosedNow_DuringMiddayBreak() {
+        assertEquals(mContext.getString(R.string.closed_now),
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(11),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(10)),
+                                Pair.create(
+                                        getTestCalendarWithHour(12),
+                                        getTestCalendarWithHour(15))))
+                .heading);
     }
 
     public void testIsClosedNow_BeforeOpen() {
-        Calendar currentTimeForTest = Calendar.getInstance();
-        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 6);
-        BusinessContextInfo info =
+        assertEquals(mContext.getString(R.string.closed_now),
                 mInCallContactInteractions.constructHoursInfo(
-                        currentTimeForTest,
-                        Pair.create("0800", "2000"));
-        assertEquals(mContext.getString(R.string.closed_now), info.heading);
+                        getTestCalendarWithHour(6),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(20))))
+                .heading);
+    }
+
+    public void testIsClosedNow_NowMatchesClosedTime() {
+        assertEquals(mContext.getString(R.string.closed_now),
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(20),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(20))))
+                .heading);
     }
 
     public void testIsClosedNow_AfterClosed() {
-        Calendar currentTimeForTest = Calendar.getInstance();
-        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 21);
-        BusinessContextInfo info =
+        assertEquals(mContext.getString(R.string.closed_now),
                 mInCallContactInteractions.constructHoursInfo(
-                        currentTimeForTest,
-                        Pair.create("0800", "2000"));
-        assertEquals(mContext.getString(R.string.closed_now), info.heading);
+                        getTestCalendarWithHour(21),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(20))))
+                .heading);
+    }
+
+    public void testOpeningHours_SingleOpenRange() {
+        assertEquals("8:00 AM - 8:00 PM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(21),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(20))))
+                .detail);
+    }
+
+    public void testOpeningHours_TwoOpenRanges() {
+        assertEquals("8:00 AM - 10:00 AM, 12:00 PM - 3:00 PM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(13),
+                        Arrays.asList(
+                                Pair.create(
+                                    getTestCalendarWithHour(8),
+                                    getTestCalendarWithHour(10)),
+                                Pair.create(
+                                        getTestCalendarWithHour(12),
+                                        getTestCalendarWithHour(15))))
+                .detail);
+    }
+
+    public void testOpeningHours_MultipleOpenRanges() {
+        assertEquals("8:00 AM - 10:00 AM, 12:00 PM - 3:00 PM, 5:00 PM - 9:00 PM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(13),
+                        Arrays.asList(
+                                Pair.create(
+                                    getTestCalendarWithHour(8),
+                                    getTestCalendarWithHour(10)),
+                                Pair.create(
+                                        getTestCalendarWithHour(12),
+                                        getTestCalendarWithHour(15)),
+                                Pair.create(
+                                        getTestCalendarWithHour(17),
+                                        getTestCalendarWithHour(21))))
+                .detail);
     }
 
     public void testInvalidOpeningHours() {
-        Calendar currentTimeForTest = Calendar.getInstance();
-        currentTimeForTest.set(Calendar.HOUR_OF_DAY, 21);
-        BusinessContextInfo info =
+        assertEquals(null,
                 mInCallContactInteractions.constructHoursInfo(
-                        currentTimeForTest,
-                        Pair.create("", "2000"));
-        assertEquals(null, info);
+                        getTestCalendarWithHour(21),
+                        new ArrayList<Pair<Calendar, Calendar>>()));
     }
 
     public void testLocationInfo_ForUS() {
@@ -149,5 +241,20 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
         address.setAddressLine(0, "Test address");
         address.setLocality("Test locality");
         return address;
+    }
+
+    private Calendar getTestCalendarWithHour(int hour) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar;
+    }
+
+    private Calendar getTestCalendarWithHourAndDaysFromToday(int hour, int daysFromToday) {
+        Calendar calendar = getTestCalendarWithHour(hour);
+        calendar.add(Calendar.DATE, daysFromToday);
+        return calendar;
     }
 }

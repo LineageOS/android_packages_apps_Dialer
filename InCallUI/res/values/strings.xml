@@ -479,8 +479,14 @@
     <string name="distance_metric_away"><xliff:g id="distance">%.1f</xliff:g> km away</string>
     <!-- A shortened way to display a business address. Formatted [street address], [city/locality]. -->
     <string name="display_address"><xliff:g id="street_address">%1$s</xliff:g>, <xliff:g id="locality">%2$s</xliff:g></string>
-    <!-- Used to indicate the opening hours for a location as a time span. e.g. "11 am - 9 pm" [CHAR LIMIT=NONE] -->
-    <string name="opening_hours"><xliff:g id="open_time">%1$s</xliff:g> - <xliff:g id="close_time">%2$s</xliff:g></string>
+    <!-- Used to indicate hours of operation for a location as a time span. e.g. "11 am - 9 pm" [CHAR LIMIT=NONE] -->
+    <string name="open_time_span"><xliff:g id="open_time">%1$s</xliff:g> - <xliff:g id="close_time">%2$s</xliff:g></string>
+    <!-- Used to indicate a series of opening hours for a location.
+         This first argument may be one or more time spans. e.g. "11 am - 9 pm, 9 pm - 11 pm"
+         The second argument is an additional time span. e.g. "11 pm - 1 am"
+         The string is used to build a list of opening hours.
+         [CHAR LIMIT=NONE] -->
+    <string name="opening_hours"><xliff:g id="earlier_times">%1$s</xliff:g>, <xliff:g id="later_time">%2$s</xliff:g></string>
     <!-- Displayed when a place is open. -->
     <string name="open_now">Open now</string>
     <!-- Displayed when a place is closed. -->

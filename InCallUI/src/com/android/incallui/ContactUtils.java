@@ -21,6 +21,9 @@ import android.util.Pair;
 
 import com.android.incalluibind.ObjectFactory;
 
+import java.util.Calendar;
+import java.util.List;
+
 /**
  * Utility functions to help manipulate contact data.
  */
@@ -36,7 +39,8 @@ public abstract class ContactUtils {
     }
 
     public interface Listener {
-        public void onContactInteractionsFound(Address address, Pair<String, String> openingHours);
+        public void onContactInteractionsFound(Address address,
+                List<Pair<Calendar, Calendar>> openingHours);
     }
 
     public abstract boolean retrieveContactInteractionsFromLookupKey(String lookupKey,
