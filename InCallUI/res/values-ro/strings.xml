@@ -69,7 +69,7 @@
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Apelați <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Număr mesagerie vocală necunoscut"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Fără serviciu"</string>
-    <string name="notification_network_selection_text" msgid="2607085729661923269">"Reţeaua selectată (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nu este disponibilă"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Rețeaua selectată (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) nu este disponibilă"</string>
     <string name="notification_action_answer" msgid="6700362365135365143">"Răspundeți"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Încheiaţi apelul"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Videoclip"</string>
@@ -103,7 +103,7 @@
     <string name="onscreenEndCallText" msgid="9039601192595655846">"Încheiați apelul"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tastatură numerică"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Dezactivați sunetul"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"Adăugaţi un apel"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Adăugați un apel"</string>
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Îmbinaţi apelurile"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Schimbaţi"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gestionați apelurile"</string>
@@ -131,7 +131,7 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Scrieți propriul răspuns…"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Anulați"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Trimiteți"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Răspundeţi"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Răspundeți"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"Trimiteți SMS"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Refuzaţi"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"Răspundeți ca apel video"</string>
