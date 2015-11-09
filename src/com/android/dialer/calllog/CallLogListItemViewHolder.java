@@ -18,8 +18,8 @@ package com.android.dialer.calllog;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -34,8 +34,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import android.widget.QuickContactBadge;
 import android.widget.ImageView;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -52,8 +52,8 @@ import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
-import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
+import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -328,7 +328,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         switch (item.getItemId()) {
             case R.id.context_menu_block_number:
                 BlockNumberDialogFragment.show(
-                        mContext,
                         blockId,
                         number,
                         countryIso,
