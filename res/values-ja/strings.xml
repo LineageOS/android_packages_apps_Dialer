@@ -19,17 +19,16 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"電話"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"電話"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"電話ダイヤルパッド"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"電話"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"通話履歴"</string>
     <string name="action_report_number" msgid="4635403959812186162">"不正確な番号を報告"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"番号をコピー"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"音声文字変換をコピー"</string>
     <string name="action_block_number" msgid="1482657602262262134">"番号をブロック"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックリストに追加しました"</string>
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックしました"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"番号のブロックを解除"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックリストから削除しました"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g>のブロックを解除しました"</string>
     <string name="block_number_undo" msgid="591338370336724156">"元に戻す"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"削除"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"発信前に番号を編集"</string>
@@ -145,10 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"すべて"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ボイスメール"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックリストに追加しますか？"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"番号をブロック"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックリストから削除しますか？"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"番号のブロックを解除"</string>
+    <string name="block_number_confirmation_title" msgid="5464081996197833073">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックリストに追加しますか？"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"今後この番号からの着信をブロックし、ボイスメールを自動的に削除します。"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"今後この番号からの着信をブロックします。ボイスメールは引き続き受信します。"</string>
+    <string name="block_number_ok" msgid="770551992296781873">"ブロック"</string>
+    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g>のブロックを解除"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"ブロックを解除"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"クイックアクセス"</string>
     <string name="tab_history" msgid="2563144697322434940">"通話履歴"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"連絡先"</string>
@@ -169,7 +170,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"画像をタップするとすべての番号を表示でき、押し続けると並べ替えることができます"</string>
     <string name="remove_contact" msgid="1080555335283662961">"削除"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"ビデオハングアウト"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"メッセージを送信"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"メッセージを送信"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"通話の詳細"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>に発信"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）からの不在着信。"</string>
@@ -216,7 +217,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"ブロックした番号"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"通話をブロックしています"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"通話のブロックは一時的にOFFです"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、通話のブロックは無効になっています。48時間経過すると、通話のブロックは自動的に有効になります。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"番号をインポート"</string>
@@ -226,7 +227,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"インポートに失敗しました"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"番号のブロックを解除"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"電話番号を追加"</string>
-    <string name="blockList" msgid="285204949255078310">"ブロックリスト"</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"番号を追加すると、今後の着信がすべてブロックされ、ボイスメールは自動的に削除されます。"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"番号を追加すると、今後の着信がすべてブロックされます。ボイスメールは引き続き受信します。"</string>
+    <string name="block_list" msgid="7760188925338078011">"ブロックした番号"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g>は無効な番号です。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g>は既にブロックしています。"</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"通話のブロックは48時間経過するまで無効になりました"</string>

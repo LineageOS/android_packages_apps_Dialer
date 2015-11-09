@@ -19,17 +19,16 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telephone"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Phone"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Phone Dialpad"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Phone"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Call history"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Report inaccurate number"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Copy number"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Copy transcription"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Block number"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> added to block list"</string>
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> blocked"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Unblock number"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> removed from block list"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> unblocked"</string>
     <string name="block_number_undo" msgid="591338370336724156">"UNDO"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"delete"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Edit number before call"</string>
@@ -145,10 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"All"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Missed"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Add <xliff:g id="NUMBER">%1$s</xliff:g> to your block list?"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"Block number"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Remove <xliff:g id="NUMBER">%1$s</xliff:g> from your block list?"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"Unblock number"</string>
+    <string name="block_number_confirmation_title" msgid="5464081996197833073">"Add <xliff:g id="NUMBER">%1$s</xliff:g> to your block list?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Future calls from this number will be blocked and voicemails will be automatically deleted."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Future calls from this number will be blocked. Voicemails may still reach you."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"BLOCK"</string>
+    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"Unblock <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"UNBLOCK"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Speed dial"</string>
     <string name="tab_history" msgid="2563144697322434940">"Call history"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contacts"</string>
@@ -169,7 +170,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Touch image to see all numbers or touch &amp; hold to reorder"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remove"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Video call"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Send Message"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"Sending a message"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Call details"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Call <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Missed call from <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -216,7 +217,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Quick responses"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Calls"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blocked numbers"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Call blocking"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Call blocking temporarily off"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Call blocking has been disabled because you contacted emergency services from this phone within the last 48 hours. It will be automatically re-enabled once the 48 hour period expires."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Import numbers"</string>
@@ -226,7 +227,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import failed"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Unblock number"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Add number"</string>
-    <string name="blockList" msgid="285204949255078310">"Block list"</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Adding a number blocks all future calls and voicemails will be automatically deleted."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Adding a number blocks all future calls. Voicemails may still reach you."</string>
+    <string name="block_list" msgid="7760188925338078011">"Blocked numbers"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> is invalid."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> is already blocked."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Call blocking disabled for 48 hours"</string>
