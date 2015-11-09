@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactEntryListAdapter;
-import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
@@ -48,22 +47,18 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
 
     private EditText mSearchView;
-    private String mSearchQuery;
 
     private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mSearchQuery = s.toString();
-            setQueryString(mSearchQuery, false);
+            setQueryString(s.toString(), false);
         }
 
         @Override
-        public void afterTextChanged(Editable s) {
-        }
+        public void afterTextChanged(Editable s) {}
     };
 
     private final SearchEditTextLayout.Callback mSearchLayoutCallback =
@@ -82,14 +77,17 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Show list of all phone numbers when search query is empty.
-        setShowEmptyListForNullQuery(false);
-
+        setShowEmptyListForNullQuery(true);
+        /*
+         * Pass in the empty string here so ContactEntryListFragment#setQueryString interprets it as
+         * an empty search query, rather than as an uninitalized value. In the latter case, the
+         * adapter returned by #createListAdapter is used, which populates the view with contacts.
+         * Passing in the empty string forces ContactEntryListFragment to interpret it as an empty
+         * query, which results in showing an empty view
+         */
+        setQueryString(getQueryString() == null ? "" : getQueryString(), false);
         mFilteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(
                 getContext().getContentResolver());
-        if (savedInstanceState != null) {
-            mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
-        }
     }
 
     @Override
@@ -115,8 +113,8 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         searchEditTextLayout.findViewById(R.id.search_box_expanded)
                 .setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
 
-        if (!TextUtils.isEmpty(mSearchQuery)) {
-            mSearchView.setText(mSearchQuery);
+        if (!TextUtils.isEmpty(getQueryString())) {
+            mSearchView.setText(getQueryString());
         }
 
         // TODO: Don't set custom text size; use default search text size.
@@ -125,20 +123,16 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(KEY_SEARCH_QUERY, getAdapter().getQueryString());
-    }
-
-    @Override
     protected ContactEntryListAdapter createListAdapter() {
         BlockedListSearchAdapter adapter = new BlockedListSearchAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         // Don't show SIP addresses.
         adapter.setUseCallableUri(false);
-        adapter.setQueryString(mSearchQuery);
+        // Keep in sync with the queryString set in #onCreate
+        adapter.setQueryString(getQueryString() == null ? "" : getQueryString());
         return adapter;
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -152,7 +146,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 // Handles click on a search result, either contact or nearby places result.
                 number = adapter.getPhoneNumber(adapterPosition);
-                blockContactNumber(adapter, (ContactListItemView) view, number, blockId);
+                blockContactNumber(number, blockId);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_BLOCK_NUMBER:
                 // Handles click on 'Block number' shortcut to add the user query as a number.
@@ -217,11 +211,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         getAdapter().notifyDataSetChanged();
     }
 
-    private void blockContactNumber(
-            final BlockedListSearchAdapter adapter,
-            final ContactListItemView view,
-            final String number,
-            final Integer blockId) {
+    private void blockContactNumber(final String number, final Integer blockId) {
         if (blockId != null) {
             Toast.makeText(getContext(), ContactDisplayUtils.getTtsSpannedPhoneNumber(
                             getResources(), R.string.alreadyBlocked, number),
