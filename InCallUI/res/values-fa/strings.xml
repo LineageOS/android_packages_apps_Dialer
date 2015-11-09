@@ -126,7 +126,7 @@
     <string name="calling_via_template" msgid="4839419581866928142">"تماس از طریق <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"تماس‌های ورودی از طریق <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"عکس مخاطب"</string>
-    <string name="goPrivate" msgid="865837794424530980">"برو به خصوصی"</string>
+    <string name="goPrivate" msgid="865837794424530980">"رفتن به خصوصی"</string>
     <string name="selectContact" msgid="781975788478987237">"انتخاب حساب"</string>
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"نوشتن پاسخ خود…"</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"لغو"</string>
