@@ -82,6 +82,7 @@ import com.android.dialer.list.SearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.settings.DialerSettingsActivity;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -527,7 +528,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             // This is only called when the activity goes from resumed -> paused -> resumed, so it
             // will not cause an extra view to be sent out on rotation
             if (mIsDialpadShown) {
-                Logger.logFragmentView(mDialpadFragment);
+                Logger.logScreenView(ScreenEvent.DIALPAD, this);
             }
             mIsRestarting = false;
         }
@@ -682,12 +683,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     ImportExportDialogFragment.show(getFragmentManager(), true,
                             DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_DEFAULT);
                 }
+                Logger.logScreenView(ScreenEvent.IMPORT_EXPORT_CONTACTS, this);
                 return true;
             case R.id.menu_clear_frequents:
                 ClearFrequentsDialog.show(getFragmentManager());
+                Logger.logScreenView(ScreenEvent.CLEAR_FREQUENTS, this);
                 return true;
             case R.id.menu_call_settings:
                 handleMenuSettings();
+                Logger.logScreenView(ScreenEvent.SETTINGS, this);
                 return true;
         }
         return false;
@@ -742,9 +746,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         mDialpadFragment.setAnimate(animate);
-        // logScreenView is used here explicitly to provide the activity as the DialpadFragment
-        // might not have been attached yet.
-        Logger.logScreenView(DialpadFragment.class.getSimpleName(), this, null);
+        Logger.logScreenView(ScreenEvent.DIALPAD, this);
         ft.commit();
 
         if (animate) {

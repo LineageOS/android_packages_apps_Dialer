@@ -17,8 +17,8 @@
 package com.android.dialer.logging;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialerbind.ObjectFactory;
@@ -28,7 +28,7 @@ import com.android.incallui.Call;
  * Single entry point for all logging/analytics-related work for all user interactions.
  */
 public abstract class Logger {
-    public static final String FRAGMENT_TAG_SEPARATOR = "#";
+    public static final String TAG = "Logger";
 
     public static Logger getInstance() {
         return ObjectFactory.getLoggerInstance();
@@ -47,49 +47,25 @@ public abstract class Logger {
     }
 
     /**
-     * Logs an event indicating that a fragment was displayed.
-     *
-     * @param fragment to log an event for.
-     */
-    public static void logFragmentView(Fragment fragment) {
-        if (fragment == null) {
-            return;
-        }
-
-        logScreenView(fragment.getClass().getSimpleName(), fragment.getActivity(), null);
-    }
-
-    /**
      * Logs an event indicating that a screen was displayed.
      *
-     * @param screenName of the displayed screen.
+     * @param screenType integer identifier of the displayed screen
      * @param activity Parent activity of the displayed screen.
-     * @param tag Optional string used to provide additional information about the screen.
      */
-    public static void logScreenView(String screenName, Activity activity, String tag) {
+    public static void logScreenView(int screenType, Activity activity) {
         final Logger logger = getInstance();
         if (logger != null) {
-            logger.logScreenViewImpl(getScreenNameWithTag(screenName, tag));
+            logger.logScreenViewImpl(screenType);
         }
 
-        AnalyticsUtil.sendScreenView(screenName, activity, tag);
-    }
-
-    /**
-     * Build a tagged version of the provided screenName if the tag is non-empty.
-     *
-     * @param screenName Name of the screen.
-     * @param tag Optional tag describing the screen.
-     * @return the unchanged screenName if the tag is {@code null} or empty, the tagged version of
-     *         the screenName otherwise.
-     */
-    public static String getScreenNameWithTag(String screenName, String tag) {
-        if (TextUtils.isEmpty(tag)) {
-            return screenName;
+        final String screenName = ScreenEvent.getScreenName(screenType);
+        if (!TextUtils.isEmpty(screenName)) {
+            AnalyticsUtil.sendScreenView(screenName, activity, null);
+        } else {
+            Log.w(TAG, "Unknown screenType: " + screenType);
         }
-        return screenName + FRAGMENT_TAG_SEPARATOR + tag;
     }
 
     public abstract void logCallImpl(Call call);
-    public abstract void logScreenViewImpl(String screenName);
+    public abstract void logScreenViewImpl(int screenType);
 }
