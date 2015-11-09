@@ -19,17 +19,18 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Telefonens knappsats"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Samtalshistorik"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Rapportera fel nummer"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Kopiera nummer"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Kopiera transkription"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Blockera nummer"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> har lagts till i listan över blockerade nummer"</string>
+    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
+    <skip />
     <string name="action_unblock_number" msgid="3043777622269776127">"Häv blockeringen av numret"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> har tagits bort från listan över blockerade nummer"</string>
+    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
+    <skip />
     <string name="block_number_undo" msgid="591338370336724156">"ÅNGRA"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Radera"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Redigera nummer före samtal"</string>
@@ -145,10 +146,18 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Alla"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Missade"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Röstbrevlåda"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Vill du lägga till <xliff:g id="NUMBER">%1$s</xliff:g> på listan över blockerade nummer?"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"Blockera nummer"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Vill du ta bort <xliff:g id="NUMBER">%1$s</xliff:g> från listan över blockerade nummer?"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"Häv blockeringen av numret"</string>
+    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
+    <skip />
+    <!-- no translation found for block_number_ok (770551992296781873) -->
+    <skip />
+    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
+    <skip />
+    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
+    <skip />
     <string name="tab_speed_dial" msgid="7552166276545648893">"Kortnummer"</string>
     <string name="tab_history" msgid="2563144697322434940">"Samtalshistorik"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakter"</string>
@@ -169,7 +178,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Tryck på bilden och visa alla nummer eller tryck länge om du vill ändra ordningen"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ta bort"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videosamtal"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Skicka meddelande"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"Skicka ett meddelande"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Samtalsinfo"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Missat samtal från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -216,7 +225,8 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Snabbsvar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Samtal"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blockerade nummer"</string>
+    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blockeringen har inaktiverats tillfälligt"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Samtalsblockering har inaktiverats eftersom du ringde ett larmnummer från den här mobilen under de senaste 48 timmarna. Blockeringen aktiveras igen när 48 timmar har gått."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importera nummer"</string>
@@ -226,7 +236,12 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Det gick inte att importera"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Häv blockeringen av numret"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Lägg till telefonnummer"</string>
-    <string name="blockList" msgid="285204949255078310">"Lista över blockerade nummer"</string>
+    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
+    <skip />
+    <!-- no translation found for block_list (7760188925338078011) -->
+    <skip />
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> är inte giltigt."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> är redan blockerat."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Samtalsblockeringen har inaktiverats i 48 timmar"</string>

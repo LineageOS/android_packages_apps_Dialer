@@ -19,17 +19,18 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Številčnica telefona"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Zgodovina klicev"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Prijavi netočno številko"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Kopiranje številke"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Kopiraj prepis"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Blokiranje številke"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"Številka <xliff:g id="NUMBER">%1$s</xliff:g> je dodana na seznam blokiranih številk"</string>
+    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
+    <skip />
     <string name="action_unblock_number" msgid="3043777622269776127">"Odblokiranje telefonske številke"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"Številka <xliff:g id="NUMBER">%1$s</xliff:g> je odstranjena s seznama blokiranih številk"</string>
+    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
+    <skip />
     <string name="block_number_undo" msgid="591338370336724156">"RAZVELJAVI"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Izbris"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Urejanje številke pred klicem"</string>
@@ -147,10 +148,18 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Vsi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Neodgovorjeni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Odzivnik"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Želite dodati številko <xliff:g id="NUMBER">%1$s</xliff:g> na seznam blokiranih številk?"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"Blokiraj številko"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Želite odstraniti številko <xliff:g id="NUMBER">%1$s</xliff:g> s seznama blokiranih številk?"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"Odblokiraj številko"</string>
+    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
+    <skip />
+    <!-- no translation found for block_number_ok (770551992296781873) -->
+    <skip />
+    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
+    <skip />
+    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
+    <skip />
     <string name="tab_speed_dial" msgid="7552166276545648893">"Hitro izbiranje"</string>
     <string name="tab_history" msgid="2563144697322434940">"Zgodovina klicev"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Stiki"</string>
@@ -171,7 +180,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Dotaknite se slike, če želite videti vse številke, ali pa se je dotaknite in pridržite, če želite spremeniti vrstni red."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstrani"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videoklic"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Pošlji sporočilo"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"Pošljite sporočilo"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Podrobnosti klica"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Kliči osebo/številko <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Neodgovorjen klic od: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -220,7 +229,8 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hitri odgovori"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Klici"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Blokirane številke"</string>
+    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blokiranje klicev je začasno izklopljeno"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Blokiranje klicev je onemogočeno, ker ste se v zadnjih 48 urah s tem telefonom obrnili na nujno pomoč. Ko 48-urno obdobje poteče, bo blokiranje klicev samodejno znova omogočeno."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Uvoz številk"</string>
@@ -230,7 +240,12 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Uvoz ni uspel"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Odblokiranje telefonske številke"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Dodaj telefonsko številko"</string>
-    <string name="blockList" msgid="285204949255078310">"Seznam blokiranih telefonskih številk"</string>
+    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
+    <skip />
+    <!-- no translation found for block_list (7760188925338078011) -->
+    <skip />
     <string name="invalidNumber" msgid="619058581062192851">"Telefonska številka <xliff:g id="NUMBER">%1$s</xliff:g> je neveljavna."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Telefonska številka <xliff:g id="NUMBER">%1$s</xliff:g> je že blokirana."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Blokiranje klicev je onemogočeno za 48 ur"</string>
