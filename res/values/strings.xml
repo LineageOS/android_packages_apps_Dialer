@@ -520,8 +520,8 @@
     <string name="call_log_voicemail_title">Voicemail</string>
 
     <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
-    <string name="block_number_confirmation_title">Add
-        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> to your block list?</string>
+    <string name="block_number_confirmation_title">Block
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
 
     <!-- Confirmation dialog message for blocking a number with visual voicemail active.
          [CHAR LIMIT=NONE] -->
@@ -540,7 +540,13 @@
 
     <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
     <string name="unblock_number_confirmation_title">Unblock
-        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
+
+    <!-- Confirmation dialog message for unblocking a number.
+         [CHAR LIMIT=NONE] -->
+    <string name="unblock_number_confirmation_message">
+         This number will no longer be blocked from calling you.
+    </string>
 
     <!-- Unblock number alert dialog button [CHAR LIMIT=32] -->
     <string name="unblock_number_ok">UNBLOCK</string>
