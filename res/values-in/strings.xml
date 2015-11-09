@@ -19,17 +19,16 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telepon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telepon"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Tombol Nomor Ponsel"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telepon"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Riwayat panggilan"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Laporkan nomor yang tidak akurat"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Salin nomor"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Salin transkripsi"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Blokir nomor"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> ditambahkan ke daftar blokir"</string>
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> diblokir"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Bebaskan nomor"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> dihapus dari daftar blokir"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> dibebaskan"</string>
     <string name="block_number_undo" msgid="591338370336724156">"URUNGKAN"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Hapus"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Edit nomor sebelum memanggil"</string>
@@ -145,10 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tak Dijawab"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"PesanSuara"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"Tambahkan <xliff:g id="NUMBER">%1$s</xliff:g> ke daftar blokir?"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"Blokir nomor"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"Hapus <xliff:g id="NUMBER">%1$s</xliff:g> dari daftar blokir?"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"Bebaskan nomor"</string>
+    <string name="block_number_confirmation_title" msgid="5464081996197833073">"Tambahkan <xliff:g id="NUMBER">%1$s</xliff:g> ke daftar blokir?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Panggilan telepon di masa mendatang dari nomor ini akan diblokir dan pesan suara akan dihapus secara otomatis."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Panggilan telepon di masa mendatang dari nomor ini akan diblokir. Pesan suara mungkin masih masuk."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"BLOKIR"</string>
+    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"Bebaskan <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"BEBASKAN"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Panggilan cepat"</string>
     <string name="tab_history" msgid="2563144697322434940">"Riwayat Panggilan"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontak"</string>
@@ -169,7 +170,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Sentuh foto untuk melihat semua nomor atau sentuh &amp; tahan untuk menyusun ulang"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Hapus"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Panggilan video"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Kirim Pesan"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"Kirim pesan"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Detail panggilan"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Telepon <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Panggilan tak terjawab dari <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -216,7 +217,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respons cepat"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Panggilan telepon"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"Nomor yang diblokir"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Pemblokiran panggilan telepon"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blokir panggilan dinonaktifkan sementara"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Pemblokiran panggilan telepon telah dinonaktifkan karena Anda menghubungi layanan darurat dari telepon ini dalam 48 jam terakhir. Akan diaktifkan kembali secara otomatis setelah masa 48 jam berakhir."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Impor nomor"</string>
@@ -226,7 +227,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Impor gagal"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Bebaskan nomor"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Tambahkan nomor"</string>
-    <string name="blockList" msgid="285204949255078310">"Daftar blokir"</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Jika nomor ditambahkan, semua panggilan telepon dan pesan suara di masa mendatang akan dihapus secara otomatis."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Jika nomor ditambahkan, semua panggilan telepon di masa mendatang diblokir. Pesan suara mungkin masih masuk."</string>
+    <string name="block_list" msgid="7760188925338078011">"Nomor yang diblokir"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> tidak valid."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> sudah diblokir."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Pemblokiran panggilan dinonaktifkan selama 48 jam"</string>

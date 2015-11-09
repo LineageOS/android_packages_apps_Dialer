@@ -19,17 +19,18 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"電話"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"電話"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"電話撥號鍵盤"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"電話"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"通話紀錄"</string>
     <string name="action_report_number" msgid="4635403959812186162">"回報號碼錯誤"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"複製號碼"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"複製留言轉錄內容"</string>
     <string name="action_block_number" msgid="1482657602262262134">"封鎖號碼"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"已將 <xliff:g id="NUMBER">%1$s</xliff:g> 加到封鎖清單"</string>
+    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
+    <skip />
     <string name="action_unblock_number" msgid="3043777622269776127">"解除封鎖號碼"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"已將 <xliff:g id="NUMBER">%1$s</xliff:g> 從封鎖清單中移除"</string>
+    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
+    <skip />
     <string name="block_number_undo" msgid="591338370336724156">"復原"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"刪除"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"撥打前編輯號碼"</string>
@@ -145,10 +146,18 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"語音留言"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"要將 <xliff:g id="NUMBER">%1$s</xliff:g> 加到封鎖清單嗎？"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"封鎖號碼"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"要將 <xliff:g id="NUMBER">%1$s</xliff:g> 從封鎖清單中移除嗎？"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"解除封鎖號碼"</string>
+    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
+    <skip />
+    <!-- no translation found for block_number_ok (770551992296781873) -->
+    <skip />
+    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
+    <skip />
+    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
+    <skip />
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速撥號"</string>
     <string name="tab_history" msgid="2563144697322434940">"通話紀錄"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"聯絡人"</string>
@@ -169,7 +178,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"輕觸圖片即可查看所有號碼，輕觸並按住則可重新排序"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"視訊通話"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"傳送訊息"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"傳送簡訊"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"通話詳細資料"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"撥號給「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"未接來電：<xliff:g id="NAMEORNUMBER">^1</xliff:g>/<xliff:g id="TYPEORLOCATION">^2</xliff:g>/<xliff:g id="TIMEOFCALL">^3</xliff:g>/<xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
@@ -216,7 +225,8 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回應"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"已封鎖的號碼"</string>
+    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
+    <skip />
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"來電封鎖功能已暫時關閉"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"由於您曾在過去 48 小時內使用這支手機撥打緊急服務電話，因此來電封鎖功能已停用。此功能停用達 48 小時後，將由系統自動重新啟用。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"匯入電話號碼"</string>
@@ -226,7 +236,12 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"匯入失敗"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"解除封鎖號碼"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"新增號碼"</string>
-    <string name="blockList" msgid="285204949255078310">"封鎖清單"</string>
+    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
+    <skip />
+    <!-- no translation found for block_list (7760188925338078011) -->
+    <skip />
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> 無效。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> 已在封鎖清單中。"</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"來電封鎖功能會停用 48 小時"</string>

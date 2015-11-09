@@ -19,17 +19,16 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"טלפון"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"טלפון"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"לוח חיוג של הטלפון"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"טלפון"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"היסטוריית שיחות"</string>
     <string name="action_report_number" msgid="4635403959812186162">"דווח על מספר לא מדויק"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"העתק מספר"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"העתק תמלול"</string>
     <string name="action_block_number" msgid="1482657602262262134">"חסום מספר"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> נוסף לרשימת המספרים החסומים"</string>
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> חסום"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"בטל חסימת מספר"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> הוסר מרשימת המספרים החסומים"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"בוטלה החסימה של <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="block_number_undo" msgid="591338370336724156">"בטל"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"מחק"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ערוך את המספר לפני השיחה"</string>
@@ -147,10 +146,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"הכל"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"שיחה שלא נענתה"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"דואר קולי"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"האם להוסיף את <xliff:g id="NUMBER">%1$s</xliff:g> לרשימת המספרים החסומים?"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"חסום מספר"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"האם להסיר את <xliff:g id="NUMBER">%1$s</xliff:g> מרשימת המספרים החסומים?"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"בטל חסימת מספר"</string>
+    <string name="block_number_confirmation_title" msgid="5464081996197833073">"האם להוסיף את <xliff:g id="NUMBER">%1$s</xliff:g> לרשימת המספרים החסומים?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"שיחות עתידיות מהמספר הזה ייחסמו והודעות הדואר הקולי יימחקו באופן אוטומטי."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"שיחות עתידיות מהמספר הזה ייחסמו. הודעות דואר קולי עשויות להגיע אליך."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"חסום"</string>
+    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"בטל את חסימת המספר <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"ביטול חסימה"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"חיוג מהיר"</string>
     <string name="tab_history" msgid="2563144697322434940">"היסטוריית שיחות"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"אנשי קשר"</string>
@@ -171,7 +172,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"גע בתמונה כדי לראות את כל המספרים או גע נגיעה ממושכת כדי לשנות את הסדר"</string>
     <string name="remove_contact" msgid="1080555335283662961">"הסר"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"שיחת וידאו"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"שלח הודעה"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"שלח הודעה"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"פרטי שיחה"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"התקשר אל <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"שיחה לא נענתה מ-<xliff:g id="NAMEORNUMBER">^1</xliff:g>‏, <xliff:g id="TYPEORLOCATION">^2</xliff:g>‏, <xliff:g id="TIMEOFCALL">^3</xliff:g>‏, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -220,7 +221,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"תגובות מהירות"</string>
     <string name="call_settings_label" msgid="313434211353070209">"שיחות"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"מספרים חסומים"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"חסימת שיחות"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"חסימת השיחות מושבתת באופן זמני"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"חסימת השיחות הושבתה מפני שיצרת קשר מטלפון זה עם שירותי חירום במהלך 48 השעות האחרונות. הפונקציה תופעל מחדש באופן אוטומטי בתום 48 השעות."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"יבא מספרים"</string>
@@ -230,7 +231,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"הייבוא נכשל"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"בטל חסימת מספר"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"הוסף מספר"</string>
-    <string name="blockList" msgid="285204949255078310">"רשימת חסומים"</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"הוספת מספר תחסום את כל השיחות העתידיות והודעות הדואר הקולי יימחקו באופן אוטומטי."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"הוספת מספר תחסום את כל השיחות העתידיות. הודעות דואר קולי עשויות להגיע אליך."</string>
+    <string name="block_list" msgid="7760188925338078011">"מספרים חסומים"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> אינו חוקי."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> כבר חסום."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"חסימת השיחות הושבתה ל-48 שעות"</string>

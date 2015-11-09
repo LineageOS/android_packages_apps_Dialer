@@ -19,17 +19,16 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"ફોન"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ફોન"</string>
-    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
-    <skip />
+    <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"ફોન ડાયલપેડ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ફોન"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"કૉલ ઇતિહાસ"</string>
     <string name="action_report_number" msgid="4635403959812186162">"અચોક્કસ નંબરની જાણ કરો"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"નંબર કૉપિ કરો"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"ટ્રાંસ્ક્રિપ્શન કૉપિ કરો"</string>
     <string name="action_block_number" msgid="1482657602262262134">"નંબર અવરોધિત કરો"</string>
-    <string name="snackbar_number_blocked" msgid="7781955823277176905">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધ સૂચિમાં ઉમેરવામાં આવ્યો"</string>
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> અવરોધિત કર્યો"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"નંબર અનાવરોધિત કરો"</string>
-    <string name="snackbar_number_unblocked" msgid="1773050692114037075">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધ સૂચિમાંથી દૂર કરવામાં આવ્યો"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> અનાવરોધિત કર્યો"</string>
     <string name="block_number_undo" msgid="591338370336724156">"પૂર્વવત્ કરો"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"કાઢી નાખો"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"કૉલ કરતાં પહેલાં નંબર સંપાદિત કરો"</string>
@@ -145,10 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"તમામ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"છૂટેલ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"વૉઇસમેઇલ"</string>
-    <string name="blockNumberConfirmation" msgid="4100247106771472057">"શું <xliff:g id="NUMBER">%1$s</xliff:g> ને તમારી અવરોધ સૂચિમાં ઉમેરીએ?"</string>
-    <string name="blockNumberOk" msgid="7100294572365950840">"નંબર અવરોધિત કરો"</string>
-    <string name="unblockNumberConfirmation" msgid="2987397910799869055">"અવરોધ સૂચિમાંથી <xliff:g id="NUMBER">%1$s</xliff:g> ને દૂર કરીએ?"</string>
-    <string name="unblockNumberOk" msgid="6946016365620899872">"નંબર અનાવરોધિત કરો"</string>
+    <string name="block_number_confirmation_title" msgid="5464081996197833073">"શું <xliff:g id="NUMBER">%1$s</xliff:g> ને તમારી અવરોધ સૂચિમાં ઉમેરીએ?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"આ નંબરથી આવનારા ભાવિ કૉલ્સ અવરોધિત કરવામાં આવશે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"આ નંબરથી આવનારા ભાવિ કૉલ્સ અવરોધિત કરવામાં આવશે. વૉઇસમેઇલ્સ હજી પણ તમારા સુધી પહોંચી શકે છે."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"અવરોધિત કરો"</string>
+    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> અનાવરોધિત કરો"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"અનાવરોધિત કરો"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"સ્પીડ ડાયલ"</string>
     <string name="tab_history" msgid="2563144697322434940">"કૉલ ઇતિહાસ"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"સંપર્કો"</string>
@@ -169,7 +170,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"બધા નંબર્સ જોવા માટે છબી ટેપ કરો અથવા પુનઃક્રમાંકિત કરવા માટે પકડી રાખો"</string>
     <string name="remove_contact" msgid="1080555335283662961">"દૂર કરો"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"વિડિઓ કૉલ"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"સંદેશ મોકલો"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"એક સંદેશ મોકલો"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"કૉલની વિગતો"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ને કૉલ કરો"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> નો છૂટેલ કૉલ"</string>
@@ -216,7 +217,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ઝડપી પ્રતિસાદ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"કૉલ્સ"</string>
-    <string name="manage_blocked_numbers_label" msgid="2216902471020644446">"અવરોધિત નંબરો"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"કૉલ અવરોધ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"કૉલ અવરોધિત કરવાનું અસ્થાયીરૂપે બંધ છે"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"કૉલ અવરોધિત કરવાનું અક્ષમ કરવામાં આવ્યું છે કારણ કે તમે આ ફોનમાંથી છેલ્લા 48 કલાકમાં કટોકટીની સેવાઓનો સંપર્ક કર્યો હતો. એકવાર 48 કલાકનો સમયગાળો સમાપ્ત થાય, પછી તે આપમેળે ફરીથી સક્ષમ કરવામાં આવશે."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"નંબર્સ આયાત કરો"</string>
@@ -226,7 +227,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"આયાત નિષ્ફળ થયું"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"નંબર અનાવરોધિત કરો"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"નંબર ઉમેરો"</string>
-    <string name="blockList" msgid="285204949255078310">"અવરોધ સૂચિ"</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"કોઈ નંબરને ઉમેરવાથી તમામ ભાવિ કૉલ્સ અવરોધિત થાય છે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"કોઈ નંબરને ઉમેરવાથી તમામ ભાવિ કૉલ્સ અવરોધિત થાય છે. વૉઇસમેઇલ્સ હજી પણ તમારા સુધી પહોંચી શકે છે."</string>
+    <string name="block_list" msgid="7760188925338078011">"અવરોધિત નંબરો"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> અમાન્ય છે."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ને પહેલેથી અવરોધિત કરવામાં આવ્યો છે."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"કૉલ અવરોધિત કરવાનું 48 કલાક માટે અક્ષમ કરાયું"</string>
