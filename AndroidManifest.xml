@@ -17,8 +17,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.dialer"
     coreApp="true"
-    android:versionCode="20306"
-    android:versionName="2.3.06">
+    android:versionCode="20307"
+    android:versionName="2.3.07">
 
     <uses-sdk
         android:minSdkVersion="23"
