@@ -430,10 +430,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         boolean isIncomingOrWaiting = call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING;
 
-        if (isIncomingOrWaiting && !TextUtils.isEmpty(call.getCallSubject()) &&
-                call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED &&
-                call.isCallSubjectSupported()) {
-            return call.getCallSubject();
+        if (isIncomingOrWaiting &&
+                call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED) {
+
+            if (!TextUtils.isEmpty(call.getChildNumber())) {
+                return mContext.getString(R.string.child_number, call.getChildNumber());
+            } else if (!TextUtils.isEmpty(call.getCallSubject()) && call.isCallSubjectSupported()) {
+                return call.getCallSubject();
+            }
         }
 
         int resId = R.string.notification_ongoing_call;
