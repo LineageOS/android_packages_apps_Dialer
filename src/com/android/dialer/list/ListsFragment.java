@@ -181,6 +181,7 @@ public class ListsFragment extends Fragment
     public void onResume() {
         Trace.beginSection(TAG + " onResume");
         super.onResume();
+
         mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (getUserVisibleHint()) {
             sendScreenViewForCurrentPosition();
@@ -304,7 +305,12 @@ public class ListsFragment extends Fragment
         if (hasActiveVoicemailProvider != mHasActiveVoicemailProvider) {
             mHasActiveVoicemailProvider = hasActiveVoicemailProvider;
             mViewPagerAdapter.notifyDataSetChanged();
-            mViewPagerTabs.updateTab(TAB_INDEX_VOICEMAIL);
+
+            if (hasActiveVoicemailProvider) {
+                mViewPagerTabs.updateTab(TAB_INDEX_VOICEMAIL);
+            } else {
+                mViewPagerTabs.removeTab(TAB_INDEX_VOICEMAIL);
+            }
 
             mPrefs.edit()
                   .putBoolean(VisualVoicemailEnabledChecker.PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER,
