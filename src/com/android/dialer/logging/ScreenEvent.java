@@ -121,6 +121,9 @@ public class ScreenEvent {
         sScreenNameMap.put(ScreenEvent.INCOMING_CALL, AnswerFragment.class.getSimpleName());
         sScreenNameMap.put(ScreenEvent.CONFERENCE_MANAGEMENT,
                 ConferenceManagerFragment.class.getSimpleName());
+        sScreenNameMap.put(ScreenEvent.INCALL_DIALPAD,
+                getScreenNameWithTag(DialpadFragment.class.getSimpleName(), "InCall"));
+
     }
 
     /**
