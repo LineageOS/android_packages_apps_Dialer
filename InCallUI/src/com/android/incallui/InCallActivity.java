@@ -55,6 +55,8 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.Call.State;
 
 import java.util.ArrayList;
@@ -695,6 +697,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             } else {
                 transaction.show(fragment);
             }
+            Logger.logScreenView(getScreenTypeForTag(tag), this);
         } else {
             transaction.hide(fragment);
         }
@@ -734,6 +737,21 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             return getFragmentManager();
         }
         throw new IllegalStateException("Unexpected fragment: " + tag);
+    }
+
+    private int getScreenTypeForTag(String tag) {
+        switch (tag) {
+            case TAG_DIALPAD_FRAGMENT:
+                return ScreenEvent.INCALL_DIALPAD;
+            case TAG_CALLCARD_FRAGMENT:
+                return ScreenEvent.INCALL;
+            case TAG_CONFERENCE_FRAGMENT:
+                return ScreenEvent.CONFERENCE_MANAGEMENT;
+            case TAG_ANSWER_FRAGMENT:
+                return ScreenEvent.INCOMING_CALL;
+            default:
+                return ScreenEvent.UNKNOWN;
+        }
     }
 
     private int getContainerIdForFragment(String tag) {
