@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -181,7 +182,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                             id,
                             number,
                             countryIso,
-                            number,
+                            PhoneNumberUtils.formatNumber(number, countryIso),
                             R.id.blocked_numbers_activity_container,
                             getFragmentManager(),
                             BlockedListSearchFragment.this);

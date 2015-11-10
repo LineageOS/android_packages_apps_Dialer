@@ -18,6 +18,7 @@ package com.android.dialer.filterednumber;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.database.Cursor;
+import android.telephony.PhoneNumberUtils;
 import android.view.View;
 
 import com.android.contacts.common.ContactPhotoManager;
@@ -64,7 +65,7 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
                         id,
                         number,
                         countryIso,
-                        number,
+                        PhoneNumberUtils.formatNumber(number, countryIso),
                         R.id.blocked_number_fragment,
                         getFragmentManager(),
                         null /* callback */);
