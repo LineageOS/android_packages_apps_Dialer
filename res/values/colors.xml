@@ -121,20 +121,20 @@
     <color name="floating_action_button_touch_tint">#80ffffff</color>
 
     <color name="call_log_action_divider">#eeeeee</color>
-    <color name="divider_line_color">#c7c7c7</color>
+    <color name="divider_line_color">#D8D8D8</color>
 
     <!--  Colors for blocked numbers list -->
     <color name="blocked_contact_background">#afafaf</color>
     <color name="blocked_number_primary_text_color">@color/dialtacts_primary_text_color</color>
     <color name="blocked_number_secondary_text_color">@color/dialtacts_secondary_text_color</color>
     <color name="blocked_number_icon_tint">#616161</color>
-    <color name="blocked_number_background">#E0E0E0</color>
+    <color name="blocked_number_background">#FFFFFF</color>
     <color name="blocked_number_accent_color">#42A5F5</color>
     <color name="blocked_number_block_color">#F44336</color>
     <color name="blocked_number_header_color">@color/dialer_theme_color</color>
     <color name="blocked_number_disabled_emergency_header_color">#616161</color>
+    <color name="blocked_number_disabled_emergency_background_color">#E0E0E0</color>
     <color name="add_blocked_number_icon_color">#bdbdbd</color>
-
     <!-- Grey 700 -->
     <color name="call_detail_footer_text_color">#616161</color>
     <color name="call_detail_footer_icon_tint">@color/call_detail_footer_text_color</color>
