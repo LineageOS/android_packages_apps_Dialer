@@ -43,6 +43,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.list.ListsFragment;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.widget.EmptyContentView;
@@ -400,6 +401,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public void fetchCalls() {
         mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
+
+        if (mVoicemailPlaybackPresenter != null) {
+            ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
+        }
     }
 
     private void updateEmptyMessage(int filterType) {
