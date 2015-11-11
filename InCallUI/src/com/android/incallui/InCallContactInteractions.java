@@ -49,7 +49,6 @@ import java.util.Locale;
  * is a business contact or not and logic for the manipulation of data for the call context.
  */
 public class InCallContactInteractions {
-    private static final String TAG = InCallContactInteractions.class.getSimpleName();
     private Context mContext;
     private InCallContactInteractionsListAdapter mListAdapter;
     private boolean mIsBusiness;
@@ -95,7 +94,7 @@ public class InCallContactInteractions {
     }
 
     public void setBusinessInfo(Address address, float distance,
-            Pair<String, String> openingHours) {
+            List<Pair<Calendar, Calendar>> openingHours) {
         mListAdapter.clear();
         List<ContactContextInfo> info = new ArrayList<ContactContextInfo>();
 
@@ -126,7 +125,7 @@ public class InCallContactInteractions {
      * @return BusinessContextInfo object with the schedule icon, the heading set to whether the
      * business is open or not and the details set to the hours of operation.
      */
-    private BusinessContextInfo constructHoursInfo(Pair<String, String> openingHours) {
+    private BusinessContextInfo constructHoursInfo(List<Pair<Calendar, Calendar>> openingHours) {
         return constructHoursInfo(Calendar.getInstance(), openingHours);
     }
 
@@ -135,26 +134,38 @@ public class InCallContactInteractions {
      */
     @VisibleForTesting
     BusinessContextInfo constructHoursInfo(Calendar currentTime,
-            Pair<String, String> openingHours) {
-        BusinessContextInfo hoursInfo = new BusinessContextInfo();
-        hoursInfo.iconId = R.drawable.ic_schedule_white_24dp;
-
-        // Note: the date of these {@link Date}s are set to January 1, 1970. The object is just
-        // used as a storage for the time.
-        Date openingDateTime = getSimpleDateTime(openingHours.first);
-        Date closingDateTime = getSimpleDateTime(openingHours.second);
-
-        if (openingDateTime == null || closingDateTime == null) {
+            List<Pair<Calendar, Calendar>> openingHours) {
+        if (currentTime == null || openingHours == null || openingHours.size() == 0) {
             return null;
         }
 
-        hoursInfo.heading = isOpen(openingDateTime, closingDateTime, currentTime)
-                ? mContext.getString(R.string.open_now) : mContext.getString(R.string.closed_now);
+        BusinessContextInfo hoursInfo = new BusinessContextInfo();
+        hoursInfo.iconId = R.drawable.ic_schedule_white_24dp;
 
-        hoursInfo.detail = mContext.getString(
-                R.string.opening_hours,
-                DateFormat.getTimeFormat(mContext).format(openingDateTime),
-                DateFormat.getTimeFormat(mContext).format(closingDateTime));
+        boolean isOpen = false;
+        for (Pair<Calendar, Calendar> hours : openingHours) {
+            if (hours.first.compareTo(currentTime) <= 0
+                    && currentTime.compareTo(hours.second) < 0) {
+                // If the current time is on or after the opening time and strictly before the
+                // closing time, then this business is open.
+                isOpen = true;
+            }
+
+            String openTimeSpan = mContext.getString(R.string.open_time_span,
+                    DateFormat.getTimeFormat(mContext).format(hours.first.getTime()),
+                    DateFormat.getTimeFormat(mContext).format(hours.second.getTime()));
+
+            if (TextUtils.isEmpty(hoursInfo.detail)) {
+                hoursInfo.detail = openTimeSpan;
+            } else {
+                hoursInfo.detail = mContext.getString(R.string.opening_hours, hoursInfo.detail,
+                        openTimeSpan);
+            }
+        }
+
+        hoursInfo.heading = isOpen ? mContext.getString(R.string.open_now)
+                : mContext.getString(R.string.closed_now);
+
         return hoursInfo;
     }
 
@@ -201,57 +212,6 @@ public class InCallContactInteractions {
             locationInfo.detail = address.getAddressLine(0);
         }
         return locationInfo;
-    }
-
-    /**
-     * Get a {@link Date} object corresponding to a particular time.
-     *
-     * @param time A string containing a time in the format "hhmm".
-     * @return A {@link Date} object with the time set to the parsed value of the "time" parameter
-     * and the date set to January 1, 1970. Or {@code null} if the input string is not able to be
-     * parsed.
-     */
-    private Date getSimpleDateTime(String time) {
-        try {
-            return new SimpleDateFormat("hhmm").parse(time);
-        } catch (ParseException e) {
-            Log.w(TAG, "Could not parse time string " + time);
-        }
-        return null;
-    }
-
-    /**
-     * Check whether the current time falls between the opening time and the closing time.
-     *
-     * @param openingTime A {@link Date} object with the time set to the opening time and the date
-     * set to January 1, 1970.
-     * @param closingTime A {@link Date} object with the time set to the closing time and the date
-     * set to January 1, 1970.
-     * @param currentDateTime A {@link Calendar} object with the current date and time.
-     * @return {@code true} if the current time falls within the opening and closing time bounds and
-     * {@code false} otherwise.
-     */
-    private boolean isOpen(Date openingTime, Date closingTime, Calendar currentDateTime) {
-        Calendar openTimeCalendar = Calendar.getInstance();
-        openTimeCalendar.setTime(openingTime);
-
-        Calendar closeTimeCalendar = Calendar.getInstance();
-        closeTimeCalendar.setTime(closingTime);
-
-        if (openTimeCalendar.compareTo(closeTimeCalendar) >= 0) {
-            // If the open time is the same or after the close time, add a day to the close time
-            // calendar.
-            closeTimeCalendar.add(Calendar.DATE, 1);
-        }
-
-        // Since the date doesn't actually matter, it's easier to set the current date to the
-        // opening date rather than change both the calendars for the open time and the close time.
-        currentDateTime.set(
-                openTimeCalendar.get(Calendar.YEAR),
-                openTimeCalendar.get(Calendar.MONTH),
-                openTimeCalendar.get(Calendar.DATE));
-
-        return currentDateTime.after(openTimeCalendar) && currentDateTime.before(closeTimeCalendar);
     }
 
     /**
