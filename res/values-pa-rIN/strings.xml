@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ਸਭ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ਮਿਸਡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ਵੌਇਸਮੇਲ"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"ਕੀ <xliff:g id="NUMBER">%1$s</xliff:g> ਨੂੰ ਆਪਣੀ ਬਲੌਕ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨਾ ਹੈ?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"ਕੀ <xliff:g id="NUMBER">%1$s</xliff:g> ਬਲੌਕ ਕਰਨਾ ਹੈ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ਇਸ ਨੰਬਰ ਤੋਂ ਭਵਿੱਖ ਵਿੱਚ ਕਾਲਾਂ ਬਲੌਕ ਕਰ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ। ਵੌਈਸਮੇਲਾਂ ਆਪਣੇ ਆਪ ਹਟਾ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ।"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ਇਸ ਨੰਬਰ ਤੋਂ ਭਵਿੱਖ ਦੀਆਂ ਕਾਲਾਂ ਬਲੌਕ ਕਰ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ। ਵੌਈਸਮੇਲਾਂ ਅਜੇ ਵੀ ਤੁਹਾਨੂੰ ਪਹੁੰਚ ਸਕਦੀਆਂ ਹਨ।"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ਬਲੌਕ ਕਰੋ"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> ਅਨਬਲੌਕ ਕਰੋ"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ਕੀ <xliff:g id="NUMBER">%1$s</xliff:g> ਅਨਲੌਕ ਕਰਨਾ ਹੈ?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ਇਸ ਨੰਬਰ ਨੂੰ ਇਸ ਤੋਂ ਬਾਅਦ ਤੁਹਾਨੂੰ ਕਾਲ ਕਰਨ ਤੋਂ ਬਲੌਕ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ।"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ਸਪੀਡ ਡਾਇਲ"</string>
     <string name="tab_history" msgid="2563144697322434940">"ਕਾਲ ਇਤਿਹਾਸ"</string>

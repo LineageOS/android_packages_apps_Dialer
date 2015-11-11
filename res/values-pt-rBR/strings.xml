@@ -26,11 +26,9 @@
     <string name="action_copy_number_text" msgid="588249522108594155">"Copiar número"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Copiar transcrição"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Bloquear número"</string>
-    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
-    <skip />
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"Número <xliff:g id="NUMBER">%1$s</xliff:g> bloqueado"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Desbloquear número"</string>
-    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
-    <skip />
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"Número <xliff:g id="NUMBER">%1$s</xliff:g> desbloqueado"</string>
     <string name="block_number_undo" msgid="591338370336724156">"DESFAZER"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Excluir"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Editar número antes de chamar"</string>
@@ -146,18 +144,13 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Correio de voz"</string>
-    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
-    <skip />
-    <!-- no translation found for block_number_ok (770551992296781873) -->
-    <skip />
-    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
-    <skip />
-    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
-    <skip />
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"Bloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Futuras chamadas feitas a partir deste número serão bloqueadas. Correios de voz serão excluídos automaticamente."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Futuras chamadas feitas a partir deste número serão bloqueados. Correios de voz ainda poderão chegar até você."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"BLOQUEAR"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Desbloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"As chamadas feitas a você por este número não serão mais bloqueadas."</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"DESBLOQUEAR"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Discagem rápida"</string>
     <string name="tab_history" msgid="2563144697322434940">"Histórico de chamadas"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contatos"</string>
@@ -225,8 +218,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostas rápidas"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chamadas"</string>
-    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
-    <skip />
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Bloqueio de chamadas"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Bloqueio de chamadas temporiamente desativado"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"O bloqueio de chamadas foi desativado porque você entrou em contato com serviços de emergência usando este telefone nas últimas 48 horas. Ele será reativado automaticamente depois de um período de 48 horas."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importar números"</string>
@@ -236,12 +228,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Falha na importação"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloquear número"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Adicionar número"</string>
-    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
-    <skip />
-    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
-    <skip />
-    <!-- no translation found for block_list (7760188925338078011) -->
-    <skip />
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"A adição de um número bloqueia todas as chamadas futuras. Correios de voz serão excluídos automaticamente."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"A adição de um número bloqueia todas as chamadas futuras. Correios de voz ainda poderão chegar até você."</string>
+    <string name="block_list" msgid="7760188925338078011">"Números bloqueados"</string>
     <string name="invalidNumber" msgid="619058581062192851">"O número <xliff:g id="NUMBER">%1$s</xliff:g> é inválido."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"O número <xliff:g id="NUMBER">%1$s</xliff:g> já está bloqueado."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Bloqueio de chamadas desativado por 48 horas"</string>

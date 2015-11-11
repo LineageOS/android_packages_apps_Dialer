@@ -26,11 +26,9 @@
     <string name="action_copy_number_text" msgid="588249522108594155">"Nömrəni kopyalayın"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Transkripsiyanı kopyalayın"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Nömrəni blok edin"</string>
-    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
-    <skip />
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> blok edilib"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Nömrəni blokdan çıxarın"</string>
-    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
-    <skip />
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> blokdan çıxarılıb"</string>
     <string name="block_number_undo" msgid="591338370336724156">"LƏĞV EDİN"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Silin"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Zəng etmədən öncə nömrəyə düzəliş edin"</string>
@@ -146,18 +144,13 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Bütün"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Buraxılmış"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Səsli poçt"</string>
-    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
-    <skip />
-    <!-- no translation found for block_number_ok (770551992296781873) -->
-    <skip />
-    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
-    <skip />
-    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
-    <skip />
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> nömrəsi blok edilsin?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Bu nömrədən gələcək zənglər blok ediləcək və səsli məktublar avtomatik silinəcək."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Bu nömrədən gələcək zənglər blok ediləcək. Səsli məktubları hələ də əldə edə bilərsiniz."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"BLOK"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> nömrəsi blokdan çıxarılsın?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Bu nömrə Sizə zəng etməyə qarşı artıq blok ediləcək."</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"BLOKDAN ÇIXARIN"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Sürətli nömrə yığımı"</string>
     <string name="tab_history" msgid="2563144697322434940">"Zəng Tarixçəsi"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktlar"</string>
@@ -225,8 +218,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Qısa cavablar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Zənglər"</string>
-    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
-    <skip />
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Zəng blok edilir"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Çağrının blok edilməsi müvəqqəti olaraq deaktiv edilib"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Son 48 saat ərzində bu telefondan təcili yardım xidmətləri ilə əlaqə saxladığınız üçün Çağrı Bloklanması deaktiv edildi. 48 saatlıq müddət başa çatdıqda avtomatik olaraq yenidən aktiv ediləcək."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Nömrələri import edin"</string>
@@ -236,12 +228,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import alınmadı"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Nömrəni blokdan çıxarın"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Nömrə əlavə edin"</string>
-    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
-    <skip />
-    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
-    <skip />
-    <!-- no translation found for block_list (7760188925338078011) -->
-    <skip />
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Nömrənin əlavə edilməsi bütün gələcək zəngləri blok edir və səsli məktublar avtomatik silinəcək."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Nömrənin əlavə edilməsi bütün gələcək zəngləri blok edir. Səsli məktubları hələ də əldə edə bilərsiniz."</string>
+    <string name="block_list" msgid="7760188925338078011">"Bloklanmış nömrələr"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> yanlışdır."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> artıq bloklanıb."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Çağrının bloklanması 48 saatlıq deaktiv edildi"</string>

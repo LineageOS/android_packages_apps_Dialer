@@ -148,11 +148,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"الكل"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"فائتة"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"البريد الصوتي"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"هل تريد إضافة <xliff:g id="NUMBER">%1$s</xliff:g> إلى قائمة الحظر؟"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"سيتم حظر المكالمات المستقبلية الواردة من هذا الرقم كما سيتم تلقائيًا حذف رسائل البريد الصوتي."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"سيتم حظر المكالمات المستقبلية الواردة من هذا الرقم، إلا أنه قد تصلك رسائل البريد الصوتي."</string>
     <string name="block_number_ok" msgid="770551992296781873">"حظر"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"إلغاء حظر <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"هل تريد إزالة حظر <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"لن يتم حظر اتصال هذا الرقم بك بعد الآن."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"إلغاء الحظر"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"اتصال سريع"</string>
     <string name="tab_history" msgid="2563144697322434940">"سجل المكالمات"</string>

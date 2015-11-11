@@ -145,11 +145,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ಮಿಸ್ಡ್‌‌ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"<xliff:g id="NUMBER">%1$s</xliff:g> ಸಂಖ್ಯೆಯನ್ನು ನಿಮ್ಮ ನಿರ್ಬಂಧ ಪಟ್ಟಿಗೆ ಸೇರಿಸುವುದೇ?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ಈ ಸಂಖ್ಯೆಯಿಂದ ಭವಿಷ್ಯದ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ಈ ಸಂಖ್ಯೆಗೆ ಭವಿಷ್ಯದ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು. ಧ್ವನಿಮೇಲ್‌ಗಳು ಈಗಲೂ ನಿಮಗೆ ತಲುಪಬಹುದು."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ನಿರ್ಬಂಧಿಸು"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧ ತೆಗೆಯಿರಿ"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧ ತೆಗೆಯುವುದೇ?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ನಿಮಗೆ ಕರೆ ಮಾಡುವಿಕೆಯ ಈ ಸಂಖ್ಯೆಯನ್ನು ಇನ್ನು ಮುಂದೆ ನಿರ್ಬಂಧಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ನಿರ್ಬಂಧ ತೆಗೆ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_history" msgid="2563144697322434940">"ಕರೆ ಇತಿಹಾಸ"</string>
