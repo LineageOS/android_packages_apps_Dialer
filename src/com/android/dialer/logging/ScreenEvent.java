@@ -21,7 +21,9 @@ import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
 import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.dialpad.DialpadFragment;
+import com.android.dialer.filterednumber.BlockedNumbersFragment;
 import com.android.dialer.list.AllContactsFragment;
+import com.android.dialer.list.BlockedListSearchFragment;
 import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.list.SmartDialSearchFragment;
 import com.android.dialer.list.SpeedDialFragment;
@@ -95,6 +97,16 @@ public class ScreenEvent {
     // The dialpad displayed in-call that is used to send dtmf tones.
     public static final int INCALL_DIALPAD = 16;
 
+    // Menu options displayed when long pressing on a call log entry.
+    public static final int CALL_LOG_CONTEXT_MENU = 17;
+
+    // Screen displayed to allow the user to see an overview of all blocked
+    // numbers.
+    public static final int BLOCKED_NUMBER_MANAGEMENT = 18;
+
+    // Screen displayed to allow the user to add a new blocked number.
+    public static final int BLOCKED_NUMBER_ADD_NUMBER = 19;
+
     static {
         sScreenNameMap.put(ScreenEvent.DIALPAD,
                 getScreenNameWithTag(DialpadFragment.class.getSimpleName(), "Dialer"));
@@ -123,7 +135,11 @@ public class ScreenEvent {
                 ConferenceManagerFragment.class.getSimpleName());
         sScreenNameMap.put(ScreenEvent.INCALL_DIALPAD,
                 getScreenNameWithTag(DialpadFragment.class.getSimpleName(), "InCall"));
-
+        sScreenNameMap.put(ScreenEvent.CALL_LOG_CONTEXT_MENU, "CallLogContextMenu");
+        sScreenNameMap.put(ScreenEvent.BLOCKED_NUMBER_MANAGEMENT,
+                BlockedNumbersFragment.class.getSimpleName());
+        sScreenNameMap.put(ScreenEvent.BLOCKED_NUMBER_ADD_NUMBER,
+                BlockedListSearchFragment.class.getSimpleName());
     }
 
     /**

@@ -1059,6 +1059,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mListsFragment.getView().animate().alpha(0).withLayer();
         }
         mListsFragment.setUserVisibleHint(false);
+
+        if (smartDialSearch) {
+            Logger.logScreenView(ScreenEvent.SMART_DIAL_SEARCH, this);
+        } else {
+            Logger.logScreenView(ScreenEvent.REGULAR_SEARCH, this);
+        }
     }
 
     /**
