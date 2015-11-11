@@ -144,12 +144,13 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"सबै"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छुटेको"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"आफ्नो निषेधित सूचीमा <xliff:g id="NUMBER">%1$s</xliff:g> थप्नुहुन्छ?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"यो नम्बर बाट सबै भविष्यका कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वतः मेटिनेछन्।"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"यो नम्बरबाट सबै भविष्यका कलहरू रोकिनेछन्। भ्वाइस मेलहरू अझै तपाईँकोमा पुग्‍न सक्छ।"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> माथि रोक लगाउने हो?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"यो नम्बर बाट सबै भविष्यका कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचालित रूपमा मेटिनेछन्।"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"यो नम्बरबाट सबै भविष्यका कलहरू रोकिनेछन्। भ्वाइस मेलहरू भने अझै तपाईँकोमा पुग्‍न सक्छ।"</string>
     <string name="block_number_ok" msgid="770551992296781873">"रोक्नुहोस्"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> रोक्नुहोस्"</string>
-    <string name="unblock_number_ok" msgid="6449899182699684786">"सुचारु"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> माथिको रोक हटाउने हो?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"तपाईँलाई कल गर्नको लागि यो नम्बर माथि अबदेखि रोक लगाइने छैन।"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"रोक हटाउनुहोस्"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"द्रूत डायल"</string>
     <string name="tab_history" msgid="2563144697322434940">"कल इतिहास"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"सम्पर्कहरू"</string>
@@ -227,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"आयात असफल भयो"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"नम्बर थप्नुहोस्"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"नम्बर थपि सबै भविष्यका कलहरू रोक्नुहोस् र भ्वाइसमेलहरू स्वतः मेट्नुहोस्।"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"नम्बर थपि सबै भविष्यका कलहरू रोक्नुहोस्। भ्वाइसमेलहरू अझै तपाईँकोमा पुग्‍न सक्छ।"</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"नम्बर थप्नाले सबै भविष्यका कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचआलित रूपमा मेटिनेछन्।"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"नम्बर थप्नाले सबै भविष्यका कलहरू रोकिनेछन्। भ्वाइसमेलहरू भने अझै तपाईँकोमा पुग्‍न सक्छ।"</string>
     <string name="block_list" msgid="7760188925338078011">"रोकिएका नम्बरहरू"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> अमान्य छ।"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> पहिले नै रोकिएको छ।"</string>

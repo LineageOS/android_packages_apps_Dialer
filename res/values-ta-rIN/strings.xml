@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"எல்லாம்"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"தவறியவை"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"குரலஞ்சல்"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐத் தடுப்புப் பட்டியலில் சேர்க்கவா?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐத் தடுக்கவா?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"இனி முதல் இந்த எண்ணின் அழைப்புகள் தடுக்கப்படுவதுடன், இதிலிருந்து வரும் குரலஞ்சல்களும் தானாகவே நீக்கப்படும்."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"இனி முதல் இந்த எண்ணின் அழைப்புகள் தடுக்கப்படும். எனினும் இந்த எண்ணிலிருந்து உங்களுக்கு குரலஞ்சல் அனுப்ப முடியும்."</string>
     <string name="block_number_ok" msgid="770551992296781873">"தடு"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐ அனுமதிக்கவும்"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐ அனுமதிக்கவா?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"இனி உங்களை அழைக்க இந்த எண் அனுமதிக்கப்படும்."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"அனுமதி"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"விரைவு டயல்"</string>
     <string name="tab_history" msgid="2563144697322434940">"அழைப்பு வரலாறு"</string>

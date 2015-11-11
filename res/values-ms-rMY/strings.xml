@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tidak dijawab"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mel suara"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"Tambahkan <xliff:g id="NUMBER">%1$s</xliff:g> ke senarai sekatan anda?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"Sekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Panggilan akan datang daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Panggilan akan datang daripada nombor ini akan disekat. Mel suara masih boleh sampai kepada anda."</string>
     <string name="block_number_ok" msgid="770551992296781873">"SEKAT"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"Nyahsekat <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Nyahsekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Nombor ini tidak akan disekat daripada memanggil anda lagi."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"NYAHSEKAT"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Dail laju"</string>
     <string name="tab_history" msgid="2563144697322434940">"Sejarah Panggilan"</string>

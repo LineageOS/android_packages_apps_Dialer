@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"အားလုံး"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"မကိုင်မိလိုက်သော"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"အသံစာ"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"သင့်ပိတ်ဆို့သည့်စာရင်းသို့ <xliff:g id="NUMBER">%1$s</xliff:g> ကိုထည့်မလား။"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>ကို ပိတ်ဆို့မလား။"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ဤနံပါတ်မှ ခေါ်ဆိုမှုများကို အနာဂတ်တွင် ပိတ်ဆို့သွားမည်ဖြစ်ပြီး အသံစာများကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ဤနံပါတ်မှ ခေါ်ဆိုမှုများကို အနာဂတ်တွင် ပိတ်ဆို့သွားပါမည်။ အသံစာကတော့ သင့်ထံရောက်ပါမည်။"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ပိတ်ဆို့ပါ"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> ကိုပိတ်ဆို့ခြင်းမှ ဖယ်ရှားပါ"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> အား ပိတ်ဆို့မှု ဖယ်ရှားလိုက်ရမလား။"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ဤနံပါတ်ကို သင့်အား ခေါ်ဆိုမရအောင် မပိတ်ဆို့တော့ပါ။"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ပိတ်ဆို့ခြင်းမှ ဖယ်ရှားပါ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"အမြန် နံပါတ်လှည့်မှု"</string>
     <string name="tab_history" msgid="2563144697322434940">"ခေါ်ဆိုမှု သမိုင်း"</string>
