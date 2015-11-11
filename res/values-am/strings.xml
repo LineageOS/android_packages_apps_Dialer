@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ሁሉም"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ያመለጡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"የድምፅ መልዕክት"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"<xliff:g id="NUMBER">%1$s</xliff:g> ወደ የእግድ ዝርዝርዎ ይታከል?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ይታገድ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ከዚህ ቁጥር የሚመጡ የወደፊት ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ከዚህ ቁጥር የሚመጡ የወደፊት ጥሪዎች ይታገዳሉ። የድምጽ መልዕክቶች አሁንም ሊደርሱዎት ይችላሉ።"</string>
     <string name="block_number_ok" msgid="770551992296781873">"አግድ"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"የ<xliff:g id="NUMBER">%1$s</xliff:g>ን እገዳ አንሳ"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"የ<xliff:g id="NUMBER">%1$s</xliff:g> እግድ ይነሳ?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ይህ ቁጥር ከአሁን በኋላ ወደ እርስዎ ከመደወል አይታገድም።"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"እገዳ አንሳ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ፈጣን ደውል"</string>
     <string name="tab_history" msgid="2563144697322434940">"የጥሪ ታሪክ"</string>

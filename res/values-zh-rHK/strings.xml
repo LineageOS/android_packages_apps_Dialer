@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"留言信箱"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"要將 <xliff:g id="NUMBER">%1$s</xliff:g> 加入封鎖清單嗎？"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"要封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"日後將會封鎖這個號碼的來電，而留言將會自動刪除。"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"日後將會封鎖這個號碼的來電，但來電仍可能會轉駁至留言信箱。"</string>
     <string name="block_number_ok" msgid="770551992296781873">"封鎖"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"解除封鎖 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"要解除封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"此號碼的來電封鎖將會解除。"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"解除封鎖"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速撥號"</string>
     <string name="tab_history" msgid="2563144697322434940">"通話記錄"</string>

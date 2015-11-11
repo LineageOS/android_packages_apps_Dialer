@@ -146,11 +146,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Všechny"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Zmeškané"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Schránka"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"Přidat číslo <xliff:g id="NUMBER">%1$s</xliff:g> do seznamu blokovaných?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokovat číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Budoucí volání z tohoto čísla budou zablokována. Hlasové zprávy budou automaticky smazány."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Budoucí volání z tohoto čísla budou zablokována. Nadále budete moci dostávat hlasové zprávy."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKOVAT"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"Odblokování čísla <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Odblokovat číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Příchozí hovory z tohoto čísla již nebudou blokovány."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ODBLOKOVAT"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Rychlá volba"</string>
     <string name="tab_history" msgid="2563144697322434940">"Historie volání"</string>

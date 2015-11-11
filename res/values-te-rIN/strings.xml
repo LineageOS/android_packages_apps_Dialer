@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"అన్నీ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"సమాధానం ఇవ్వలేదు"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"వాయిస్ మెయిల్"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"<xliff:g id="NUMBER">%1$s</xliff:g>ని మీ నిరోధక జాబితాకు జోడించాలా?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>ని బ్లాక్ చేయాలా?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"భవిష్యత్తులో ఈ నంబర్ నుండి కాల్‌లు బ్లాక్ చేయబడతాయి మరియు వాయిస్‌మెయిల్‌లు స్వయంచాలకంగా తొలగించబడతాయి."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"భవిష్యత్తులో ఈ నంబర్ నుండి కాల్‌లు బ్లాక్ చేయబడతాయి. వాయిస్‌మెయిల్‌లు ఇప్పటికీ మీకు అందవచ్చు."</string>
     <string name="block_number_ok" msgid="770551992296781873">"బ్లాక్ చేయి"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g>ని అన్‌బ్లాక్ చేయండి"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>ని అన్‌బ్లాక్ చేయాలా?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ఈ నంబర్ ఇకపై మీకు కాల్ చేయలేకుండా బ్లాక్ చేయబడదు."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"అన్‌బ్లాక్ చేయి"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"స్పీడ్ డయల్"</string>
     <string name="tab_history" msgid="2563144697322434940">"కాల్ చరిత్ర"</string>

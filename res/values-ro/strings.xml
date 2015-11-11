@@ -26,11 +26,9 @@
     <string name="action_copy_number_text" msgid="588249522108594155">"Copiați numărul"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Copiați transcrierea"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Blocați numărul"</string>
-    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
-    <skip />
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> a fost blocat"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Deblocați numărul"</string>
-    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
-    <skip />
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> a fost deblocat"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ANULAȚI"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Ștergeți"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Modificați numărul înainte de apelare"</string>
@@ -147,18 +145,13 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Toate"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nepreluate"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mesagerie vocală"</string>
-    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
-    <skip />
-    <!-- no translation found for block_number_ok (770551992296781873) -->
-    <skip />
-    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
-    <skip />
-    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
-    <skip />
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blocați <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Apelurile ulterioare de la acest număr vor fi blocate, iar mesajele vocale vor fi șterse automat."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Apelurile ulterioare de la acest număr vor fi blocate. Este posibil să primiți în continuare mesajele vocale."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"BLOCAȚI"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Deblocați <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Acest număr nu va mai fi blocat și va putea să vă apeleze."</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"DEBLOCAȚI"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Apelare rapidă"</string>
     <string name="tab_history" msgid="2563144697322434940">"Istoricul apelurilor"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Agendă"</string>
@@ -227,8 +220,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Răspunsuri rapide"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Apeluri"</string>
-    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
-    <skip />
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Blocarea apelurilor"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blocarea apelurilor e dezactivată temporar"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Blocarea apelurilor a fost dezactivată, deoarece ați contactat serviciile de urgență de pe acest telefon în ultimele 48 de ore. Funcția va fi reactivată automat după ce perioada de 48 de ore va expira."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Importați numere"</string>
@@ -238,12 +230,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importul nu a reușit"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Deblocați numărul"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Adăugați un număr"</string>
-    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
-    <skip />
-    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
-    <skip />
-    <!-- no translation found for block_list (7760188925338078011) -->
-    <skip />
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Dacă adăugați un număr, toate apelurile ulterioare de la acesta vor fi blocate, iar mesajele vocale vor fi șterse automat."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Dacă adăugați un număr, toate apelurile ulterioare de la acesta vor fi blocate. Este posibil să primiți în continuare mesajele vocale."</string>
+    <string name="block_list" msgid="7760188925338078011">"Numere blocate"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> nu este valid."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> este deja blocat."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Blocarea apelurilor este dezactivată pentru 48 de ore"</string>

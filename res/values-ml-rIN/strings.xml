@@ -26,11 +26,9 @@
     <string name="action_copy_number_text" msgid="588249522108594155">"നമ്പർ പകർത്തുക"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"ട്രാൻസ്ക്രിപ്ഷൻ പകർത്തുക"</string>
     <string name="action_block_number" msgid="1482657602262262134">"നമ്പർ ബ്ലോക്കുചെയ്യുക"</string>
-    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
-    <skip />
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്തു"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
-    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
-    <skip />
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> അൺബ്ലോക്കുചെയ്തു"</string>
     <string name="block_number_undo" msgid="591338370336724156">"പഴയപടിയാക്കുക"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"ഇല്ലാതാക്കുക"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
@@ -146,18 +144,13 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"എല്ലാം"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"മിസ്‌ഡ്"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"വോയ്‌സ്‌മെയിൽ"</string>
-    <!-- no translation found for block_number_confirmation_title (5464081996197833073) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_vvm (6648042022642582310) -->
-    <skip />
-    <!-- no translation found for block_number_confirmation_message_no_vvm (4396733241860410081) -->
-    <skip />
-    <!-- no translation found for block_number_ok (770551992296781873) -->
-    <skip />
-    <!-- no translation found for unblock_number_confirmation_title (6295378127436545644) -->
-    <skip />
-    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
-    <skip />
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്യണോ?"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ഈ നമ്പറിൽ നിന്നുള്ള ഭാവിയിലെ കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ഈ നമ്പറിൽ നിന്നുള്ള ഭാവിയിലെ കോളുകൾ ബ്ലോക്കുചെയ്യും. അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്മെയിലുകൾ സ്വീകരിക്കാനായേക്കാം."</string>
+    <string name="block_number_ok" msgid="770551992296781873">"ബ്ലോക്കുചെയ്യുക"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> അൺബ്ലോക്കുചെയ്യണോ?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"നിങ്ങളെ വിളിക്കുന്നതിൽ നിന്ന് ഈ നമ്പർ തുടർന്നങ്ങോട്ട് ബ്ലോക്കുചെയ്യപ്പെടില്ല."</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"സ്‌പീഡ് ഡയൽ"</string>
     <string name="tab_history" msgid="2563144697322434940">"കോൾ ചരിത്രം"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"കോണ്‍ടാക്റ്റുകള്‍"</string>
@@ -225,8 +218,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
-    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
-    <skip />
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"കോൾ ബ്ലോക്കുചെയ്യൽ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"കോൾ ബ്ലോക്കുചെയ്യൽ താൽക്കാലികമായി ഓഫാണ്"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"കഴിഞ്ഞ 48 മണിക്കൂറിനുള്ളിൽ നിങ്ങൾ ഈ ഫോണിൽ നിന്ന് അടിയന്തിര സേവനങ്ങളുമായി ബന്ധപ്പെട്ടതിനാൽ കോൾ ബ്ലോക്കുചെയ്യൽ പ്രവർത്തനരഹിതമാക്കി. 48 മണിക്കൂർ സമയപരിധി കഴിഞ്ഞയുടൻ ഇത് സ്വയമേവ പ്രവർത്തനക്ഷമമാക്കപ്പെടും."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"നമ്പറുകൾ ഇമ്പോർട്ടുചെയ്യുക"</string>
@@ -236,12 +228,9 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ഇമ്പോർട്ടുചെയ്യൽ പരാജയപ്പെട്ടു"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"നമ്പർ ചേർക്കുക"</string>
-    <!-- no translation found for block_number_footer_message_vvm (223620564509592329) -->
-    <skip />
-    <!-- no translation found for block_number_footer_message_no_vvm (5106836115211978689) -->
-    <skip />
-    <!-- no translation found for block_list (7760188925338078011) -->
-    <skip />
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ഒരു നമ്പർ ചേർത്താൽ ഭാവിയിലെ എല്ലാ കോളുകളും ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ഒരു നമ്പർ ചേർത്താൽ ഭാവിയിലെ എല്ലാ കോളുകളും ബ്ലോക്കുചെയ്യും. അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്മെയിലുകൾ സ്വീകരിക്കാനായേക്കാം."</string>
+    <string name="block_list" msgid="7760188925338078011">"ബ്ലോക്കുചെയ്ത നമ്പറുകൾ"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> അസാധുവാണ്."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"ഇതിനകം തന്നെ <xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്തിരിക്കുന്നു"</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"48 മണിക്കൂർ നേരത്തേക്ക് കോൾ ബ്ലോക്കുചെയ്യൽ പ്രവർത്തനരഹിതമാക്കി"</string>
