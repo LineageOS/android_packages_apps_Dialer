@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"તમામ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"છૂટેલ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"વૉઇસમેઇલ"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"શું <xliff:g id="NUMBER">%1$s</xliff:g> ને તમારી અવરોધ સૂચિમાં ઉમેરીએ?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધિત કરીએ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"આ નંબરથી આવનારા ભાવિ કૉલ્સ અવરોધિત કરવામાં આવશે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"આ નંબરથી આવનારા ભાવિ કૉલ્સ અવરોધિત કરવામાં આવશે. વૉઇસમેઇલ્સ હજી પણ તમારા સુધી પહોંચી શકે છે."</string>
     <string name="block_number_ok" msgid="770551992296781873">"અવરોધિત કરો"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> અનાવરોધિત કરો"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અનાવરોધિત કરીએ?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"આ નંબરને હવે તમને કૉલ કરવાથી અવરોધિત કરવામાં આવશે નહીં."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"અનાવરોધિત કરો"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"સ્પીડ ડાયલ"</string>
     <string name="tab_history" msgid="2563144697322434940">"કૉલ ઇતિહાસ"</string>

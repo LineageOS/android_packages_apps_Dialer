@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Lahat"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Di nasagot"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"Idagdag ang <xliff:g id="NUMBER">%1$s</xliff:g> sa iyong listahan ng naka-block?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"Gusto mo bang i-block ang <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Iba-block ang mga tawag sa hinaharap mula sa numerong ito at awtomatikong ide-delete ang mga voicemail."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Iba-block ang mga tawag sa hinaharap mula sa numerong ito. Maaari ka pa ring makatanggap ng mga voicemail."</string>
     <string name="block_number_ok" msgid="770551992296781873">"I-BLOCK"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"Alisin sa pagkaka-block ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Gusto mo bang alisin sa pagkaka-block ang <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Maaalis na sa pagkaka-block ang numerong ito at maaari ka na nitong matawagan."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ALISIN SA PAGKAKA-BLOCK"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Speed dial"</string>
     <string name="tab_history" msgid="2563144697322434940">"History ng Tawag"</string>

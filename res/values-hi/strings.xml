@@ -144,11 +144,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"वॉयस मेल"</string>
-    <string name="block_number_confirmation_title" msgid="5464081996197833073">"<xliff:g id="NUMBER">%1$s</xliff:g> को अपनी अवरुद्ध सूची में जोड़ें?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध करें?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"भविष्‍य में इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे और वॉइसमेल अपने आप हटा दिए जाएंगे."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"भविष्‍य में इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे. वॉइसमेल अभी भी आप तक पहुंच सकते हैं."</string>
     <string name="block_number_ok" msgid="770551992296781873">"अवरुद्ध करें"</string>
-    <string name="unblock_number_confirmation_title" msgid="6295378127436545644">"<xliff:g id="NUMBER">%1$s</xliff:g> को अनवरोधित करें"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> को अनवरोधित करें?"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"इस नंबर को अब आपको कॉल करने से अवरुद्ध नहीं किया जाएगा."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"अनवरोधित करें"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"स्पीड डायल"</string>
     <string name="tab_history" msgid="2563144697322434940">"कॉल इतिहास"</string>
