@@ -50,6 +50,8 @@ import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
@@ -321,6 +323,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                         }
                     }, number, countryIso);
         }
+
+        Logger.logScreenView(ScreenEvent.CALL_LOG_CONTEXT_MENU, (Activity) mContext);
     }
 
     @Override
@@ -362,7 +366,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public void inflateActionViewStub() {
         ViewStub stub = (ViewStub) rootView.findViewById(R.id.call_log_entry_actions_stub);
         if (stub != null) {
-            actionsView = (ViewGroup) stub.inflate();
+            actionsView = stub.inflate();
 
             voicemailPlaybackView = (VoicemailPlaybackLayout) actionsView
                     .findViewById(R.id.voicemail_playback_layout);

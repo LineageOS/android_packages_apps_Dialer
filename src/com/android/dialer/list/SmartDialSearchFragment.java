@@ -45,12 +45,6 @@ public class SmartDialSearchFragment extends SearchFragment
 
     private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Logger.logScreenView(ScreenEvent.SMART_DIAL_SEARCH, getActivity());
-    }
-
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
      */

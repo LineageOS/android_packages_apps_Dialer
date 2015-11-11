@@ -56,12 +56,6 @@ public class RegularSearchFragment extends SearchFragment
         configureDirectorySearch();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Logger.logScreenView(ScreenEvent.REGULAR_SEARCH, getActivity());
-    }
-
     public void configureDirectorySearch() {
         setDirectorySearchEnabled(true);
         setDirectoryResultLimit(SEARCH_DIRECTORY_RESULT_LIMIT);
