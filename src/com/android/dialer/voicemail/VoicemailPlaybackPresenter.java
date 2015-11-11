@@ -429,8 +429,14 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * proceed to {@link #prepareContent()}. If the has_content field does not
      * become true within the allowed time, we will update the ui to reflect the fact that content
      * was not available.
+     *
+     * @return whether issued request to fetch content
      */
-    private void requestContent() {
+    private boolean requestContent() {
+        if (mContext == null || mVoicemailUri == null) {
+            return false;
+        }
+
         if (mFetchResultHandler != null) {
             mFetchResultHandler.destroy();
         }
@@ -442,6 +448,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         // Send voicemail fetch request.
         Intent intent = new Intent(VoicemailContract.ACTION_FETCH_VOICEMAIL, mVoicemailUri);
         mContext.sendBroadcast(intent);
+        return true;
     }
 
     @ThreadSafe
@@ -629,14 +636,13 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * playing.
      */
     public void resumePlayback() {
-        if (mView == null || mContext == null) {
+        if (mView == null) {
             return;
         }
 
         if (!mIsPrepared) {
             // If we haven't downloaded the voicemail yet, attempt to download it.
-            requestContent();
-            mIsPlaying = true;
+            mIsPlaying = requestContent();
             return;
         }
 
