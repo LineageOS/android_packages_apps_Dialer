@@ -67,12 +67,6 @@ public class CallLogNotificationsService extends IntentService {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        mVoicemailQueryHandler = new VoicemailQueryHandler(this, getContentResolver());
-    }
-
-    @Override
     protected void onHandleIntent(Intent intent) {
         if (intent == null) {
             Log.d(TAG, "onHandleIntent: could not handle null intent");
@@ -84,6 +78,9 @@ public class CallLogNotificationsService extends IntentService {
         }
 
         if (ACTION_MARK_NEW_VOICEMAILS_AS_OLD.equals(intent.getAction())) {
+            if (mVoicemailQueryHandler == null) {
+                mVoicemailQueryHandler = new VoicemailQueryHandler(this, getContentResolver());
+            }
             mVoicemailQueryHandler.markNewVoicemailsAsOld();
         } else if (ACTION_UPDATE_NOTIFICATIONS.equals(intent.getAction())) {
             Uri voicemailUri = (Uri) intent.getParcelableExtra(EXTRA_NEW_VOICEMAIL_URI);
