@@ -36,6 +36,8 @@ import com.android.dialer.list.BlockedListSearchAdapter;
 import com.android.dialer.list.OnListFragmentScrolledListener;
 import com.android.dialer.list.BlockedListSearchFragment;
 import com.android.dialer.list.SearchFragment;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 
 public class BlockedNumbersSettingsActivity extends AppCompatActivity
         implements SearchFragment.HostInterface {
@@ -69,6 +71,8 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
                 .replace(R.id.blocked_numbers_activity_container, fragment,
                         TAG_BLOCKED_MANAGEMENT_FRAGMENT)
                 .commit();
+
+        Logger.logScreenView(ScreenEvent.BLOCKED_NUMBER_MANAGEMENT, this);
     }
 
     /**
@@ -89,6 +93,8 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
                         TAG_BLOCKED_SEARCH_FRAGMENT)
                 .addToBackStack(null)
                 .commit();
+
+        Logger.logScreenView(ScreenEvent.BLOCKED_NUMBER_ADD_NUMBER, this);
     }
 
     /**
