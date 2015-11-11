@@ -224,9 +224,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         final String contentTitle = getContentTitle(contactInfo, call);
 
         final int notificationType;
-        if ((state == Call.State.INCOMING
-                || state == Call.State.CALL_WAITING) &&
-                        !InCallPresenter.getInstance().isShowingInCallUi()) {
+        if (state == Call.State.INCOMING || state == Call.State.CALL_WAITING) {
             notificationType = NOTIFICATION_INCOMING_CALL;
         } else {
             notificationType = NOTIFICATION_IN_CALL;
@@ -251,7 +249,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         builder.setContentIntent(inCallPendingIntent);
 
         // Set the intent as a full screen intent as well if a call is incoming
-        if (notificationType == NOTIFICATION_INCOMING_CALL) {
+        if (notificationType == NOTIFICATION_INCOMING_CALL
+                && !InCallPresenter.getInstance().isShowingInCallUi()) {
             configureFullScreenIntent(builder, inCallPendingIntent, call);
             // Set the notification category for incoming calls
             builder.setCategory(Notification.CATEGORY_CALL);
