@@ -49,7 +49,9 @@ import com.android.incalluibind.ObjectFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -324,7 +326,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
 
         @Override
-        public void onContactInteractionsFound(Address address, Pair<String, String> openingHours) {
+        public void onContactInteractionsFound(Address address,
+                List<Pair<Calendar, Calendar>> openingHours) {
             final ContactCacheEntry entry = mInfoMap.get(mCallId);
             entry.locationAddress = address;
             entry.openingHours = openingHours;
@@ -629,7 +632,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public Uri lookupUri; // Sent to NotificationMananger
         public String lookupKey;
         public Address locationAddress;
-        public Pair<String, String> openingHours;
+        public List<Pair<Calendar, Calendar>> openingHours;
         public int contactLookupResult = LogState.LOOKUP_NOT_FOUND;
 
         @Override
