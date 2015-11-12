@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.R;
@@ -247,21 +248,21 @@ public class FilteredNumbersUtil {
                 FilteredNumberColumns.NORMALIZED_NUMBER + "=?",
                 new String[] { normalizedNumber },
                 null);
-
-        boolean shouldBlock = false;
-        if (cursor != null) {
-            try {
-                if (cursor.moveToFirst()) {
-                    // Block if number is found and it was added before this voicemail was received.
-                    final long numberBlockedTimeMs = cursor.getLong(0);
-                    shouldBlock = cursor.getCount() > 0 && voicemailDateMs > numberBlockedTimeMs;
-                }
-            } finally {
-                cursor.close();
-            }
+        if (cursor == null) {
+            return false;
         }
-
-        return shouldBlock;
+        try {
+                /*
+                 * Block if number is found and it was added before this voicemail was received.
+                 * The VVM's date is reported with precision to the minute, even though its
+                 * magnitude is in milliseconds, so we perform the comparison in minutes.
+                 */
+                return cursor.moveToFirst() &&
+                        TimeUnit.MINUTES.convert(voicemailDateMs, TimeUnit.MILLISECONDS) >=
+                                TimeUnit.MINUTES.convert(cursor.getLong(0), TimeUnit.MILLISECONDS);
+        } finally {
+            cursor.close();
+        }
     }
 
     public static boolean hasRecentEmergencyCall(Context context) {
