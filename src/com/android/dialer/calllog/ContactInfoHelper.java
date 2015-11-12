@@ -397,7 +397,11 @@ public class ContactInfoHelper {
         info.type = c.getInt(CallLogQuery.CACHED_NUMBER_TYPE);
         info.label = c.getString(CallLogQuery.CACHED_NUMBER_LABEL);
         String matchedNumber = c.getString(CallLogQuery.CACHED_MATCHED_NUMBER);
-        info.number = matchedNumber == null ? c.getString(CallLogQuery.NUMBER) : matchedNumber;
+        String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+                ? c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+        info.number = (matchedNumber == null) ?
+                c.getString(CallLogQuery.NUMBER) + postDialDigits : matchedNumber;
+
         info.normalizedNumber = c.getString(CallLogQuery.CACHED_NORMALIZED_NUMBER);
         info.photoId = c.getLong(CallLogQuery.CACHED_PHOTO_ID);
         info.photoUri = UriUtils.nullForNonContactsUri(

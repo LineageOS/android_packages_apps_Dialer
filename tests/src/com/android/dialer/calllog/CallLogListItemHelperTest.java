@@ -246,26 +246,34 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     /** Sets the details of a phone call using the specified phone number. */
     private void setPhoneCallDetailsWithNumber(String number,
             int presentation, String formattedNumber) {
-        setPhoneCallDetailsWithNumberAndType(number, presentation,
+        setPhoneCallDetailsWithNumberTypeAndPostDialDigits(number, "", presentation,
                 formattedNumber, Calls.INCOMING_TYPE);
     }
 
     /** Sets the details of a phone call using the specified phone number. */
     private void setPhoneCallDetailsWithNumberAndType(String number,
             int presentation, String formattedNumber, int callType) {
+        setPhoneCallDetailsWithNumberTypeAndPostDialDigits(number, "", presentation,
+                formattedNumber, callType);
+    }
+
+    /** Sets the details of a phone call using the specified phone number and post-dial digits. */
+    private void setPhoneCallDetailsWithNumberTypeAndPostDialDigits(String number,
+            String postDialDigits, int presentation, String formattedNumber, int callType) {
         PhoneCallDetails details = getPhoneCallDetails(
-                number, presentation, formattedNumber);
+                number, postDialDigits, presentation, formattedNumber);
         details.callTypes = new int[] {callType};
         mHelper.setPhoneCallDetails(mViewHolder, details);
     }
 
     private PhoneCallDetails getPhoneCallDetails(
-            String number, int presentation, String formattedNumber) {
+            String number, String postDialDigits, int presentation, String formattedNumber) {
         PhoneCallDetails details = new PhoneCallDetails(
                 mContext,
                 number,
                 presentation,
                 formattedNumber,
+                postDialDigits,
                 false /* isVoicemail */);
         setDefaultDetails(details);
         return details;
@@ -278,6 +286,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
                 TEST_NUMBER,
                 Calls.PRESENTATION_ALLOWED,
                 TEST_FORMATTED_NUMBER,
+                "",
                 false /* isVoicemail */);
         setDefaultDetails(details);
         details.callTypes = types;

@@ -35,6 +35,8 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
     private static final String TEST_NUMBER1 = "14125551234";
     /** A phone number for testing. */
     private static final String TEST_NUMBER2 = "14125555555";
+    /** A post-dial string for testing */
+    private static final String TEST_POST_DIAL_DIGITS = ";12435;0987";
 
     /** The object under test. */
     private CallLogGroupBuilder mBuilder;
@@ -84,6 +86,21 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         mBuilder.addGroups(mCursor);
         assertEquals(1, mFakeGroupCreator.groups.size());
         assertGroupIs(0, 3, mFakeGroupCreator.groups.get(0));
+    }
+
+    public void testAddGroups_WithPostDialMatching() {
+        addCallLogEntryWithPostDialDigits(TEST_NUMBER1, TEST_POST_DIAL_DIGITS,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+        addCallLogEntryWithPostDialDigits(TEST_NUMBER1, TEST_POST_DIAL_DIGITS,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+        addCallLogEntryWithPostDialDigits(TEST_NUMBER1, "",
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+
+        mBuilder.addGroups(mCursor);
+
+        assertEquals(2, mFakeGroupCreator.groups.size());
+        assertGroupIs(0, 2, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(2, 1, mFakeGroupCreator.groups.get(1));
     }
 
     public void testAddGroups_MatchingIncomingAndOutgoing() {
@@ -312,11 +329,17 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
     }
     /** Adds a call log entry with the given number and type to the cursor. */
     private void addCallLogEntry(String number, int type) {
+        addCallLogEntryWithPostDialDigits(number, "", type);
+    }
+
+    /** Adds a call log entry with the given number, post-dial digits, and type to the cursor. */
+    private void addCallLogEntryWithPostDialDigits(String number, String postDialDigits, int type) {
         mCursor.moveToNext();
         Object[] values = CallLogQueryTestUtils.createTestValues();
         values[CallLogQuery.ID] = mCursor.getPosition();
         values[CallLogQuery.NUMBER] = number;
         values[CallLogQuery.CALL_TYPE] = type;
+        values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
         mCursor.addRow(values);
     }
 

@@ -20,17 +20,24 @@ import static junit.framework.Assert.assertEquals;
 
 import android.provider.CallLog.Calls;
 
-import junit.framework.Assert;
-
 /**
  * Helper class to create test values for {@link CallLogQuery}.
  */
 public class CallLogQueryTestUtils {
     public static Object[] createTestValues() {
-        Object[] values = new Object[]{
-                0L, "", 0L, 0L, Calls.INCOMING_TYPE, "", "", "", null, 0, null, null, null, null,
-                0L, null, 0, Calls.PRESENTATION_ALLOWED, null, null, 0, null, null, null
-        };
+        Object[] values;
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            values = new Object[]{
+                    0L, "", 0L, 0L, Calls.INCOMING_TYPE, "", "", "", null, 0, null, null, null,
+                    null, 0L, null, 0, Calls.PRESENTATION_ALLOWED, null, null, 0, null, null,
+                    null, ""
+            };
+        } else {
+            values = new Object[]{
+                    0L, "", 0L, 0L, Calls.INCOMING_TYPE, "", "", "", null, 0, null, null, null,
+                    null, 0L, null, 0, Calls.PRESENTATION_ALLOWED, null, null, 0, null, null, null
+            };
+        }
         assertEquals(CallLogQuery._PROJECTION.length, values.length);
         return values;
     }
