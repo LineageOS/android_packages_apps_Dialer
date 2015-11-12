@@ -25,6 +25,7 @@ import com.android.incallui.InCallContactInteractions.BusinessContextInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -137,10 +138,10 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
                 .heading);
     }
 
-    public void testOpeningHours_SingleOpenRange() {
+    public void testOpeningHours_SingleOpenRangeWhileOpen() {
         assertEquals("8:00 AM - 8:00 PM",
                 mInCallContactInteractions.constructHoursInfo(
-                        getTestCalendarWithHour(21),
+                        getTestCalendarWithHour(12),
                         Arrays.asList(
                                 Pair.create(
                                         getTestCalendarWithHour(8),
@@ -148,10 +149,10 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
                 .detail);
     }
 
-    public void testOpeningHours_TwoOpenRanges() {
+    public void testOpeningHours_TwoOpenRangesWhileOpen() {
         assertEquals("8:00 AM - 10:00 AM, 12:00 PM - 3:00 PM",
                 mInCallContactInteractions.constructHoursInfo(
-                        getTestCalendarWithHour(13),
+                        getTestCalendarWithHour(12),
                         Arrays.asList(
                                 Pair.create(
                                     getTestCalendarWithHour(8),
@@ -162,20 +163,54 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
                 .detail);
     }
 
-    public void testOpeningHours_MultipleOpenRanges() {
-        assertEquals("8:00 AM - 10:00 AM, 12:00 PM - 3:00 PM, 5:00 PM - 9:00 PM",
+    public void testOpeningHours_AfterClosedNoTomorrow() {
+        assertEquals("Closed today at 8:00 PM",
                 mInCallContactInteractions.constructHoursInfo(
-                        getTestCalendarWithHour(13),
+                        getTestCalendarWithHour(21),
                         Arrays.asList(
                                 Pair.create(
-                                    getTestCalendarWithHour(8),
-                                    getTestCalendarWithHour(10)),
-                                Pair.create(
-                                        getTestCalendarWithHour(12),
-                                        getTestCalendarWithHour(15)),
-                                Pair.create(
-                                        getTestCalendarWithHour(17),
-                                        getTestCalendarWithHour(21))))
+                                        getTestCalendarWithHour(8),
+                                        getTestCalendarWithHour(20))))
+                .detail);
+    }
+
+    public void testMultipleOpenRanges_BeforeOpen() {
+        assertEquals("Opens today at 8:00 AM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(7),
+                        getMultipleOpeningHours())
+                .detail);
+    }
+
+    public void testMultipleOpenRanges_DuringFirstRange() {
+        assertEquals("Closes at 10:00 AM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(9),
+                        getMultipleOpeningHours())
+                .detail);
+    }
+
+    public void testMultipleOpenRanges_BeforeMiddleRange() {
+        assertEquals("Opens today at 12:00 PM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(11),
+                        getMultipleOpeningHours())
+                .detail);
+    }
+
+    public void testMultipleOpeningHours_DuringLastRange() {
+        assertEquals("Closes at 9:00 PM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(19),
+                        getMultipleOpeningHours())
+                .detail);
+    }
+
+    public void testMultipleOpeningHours_AfterClose() {
+        assertEquals("Opens tomorrow at 8:00 AM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(22),
+                        getMultipleOpeningHours())
                 .detail);
     }
 
@@ -256,5 +291,24 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
         Calendar calendar = getTestCalendarWithHour(hour);
         calendar.add(Calendar.DATE, daysFromToday);
         return calendar;
+    }
+
+    private List<Pair<Calendar, Calendar>> getMultipleOpeningHours() {
+        return Arrays.asList(
+                Pair.create(
+                    getTestCalendarWithHour(8),
+                    getTestCalendarWithHour(10)),
+                Pair.create(
+                        getTestCalendarWithHour(12),
+                        getTestCalendarWithHour(15)),
+                Pair.create(
+                        getTestCalendarWithHour(17),
+                        getTestCalendarWithHour(21)),
+                Pair.create(
+                        getTestCalendarWithHourAndDaysFromToday(8, 1),
+                        getTestCalendarWithHourAndDaysFromToday(10, 1)),
+                Pair.create(
+                        getTestCalendarWithHourAndDaysFromToday(12, 1),
+                        getTestCalendarWithHourAndDaysFromToday(8, 1)));
     }
 }
