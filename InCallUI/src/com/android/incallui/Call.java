@@ -208,11 +208,12 @@ public class Call {
         public static final int INITIATION_VOICEMAIL_LOG = 9;
         public static final int INITIATION_CALL_DETAILS = 10;
         public static final int INITIATION_QUICK_CONTACTS = 11;
+        public static final int INITIATION_EXTERNAL = 12;
 
         public DisconnectCause disconnectCause;
         public boolean isIncoming = false;
         public int contactLookupResult = LOOKUP_UNKNOWN;
-        public int callInitiationMethod = INITIATION_UNKNOWN;
+        public int callInitiationMethod = INITIATION_EXTERNAL;
         // If this was a conference call, the total number of calls involved in the conference.
         public int conferencedCalls = 0;
         public long duration = 0;
@@ -790,7 +791,7 @@ public class Call {
         } else if (getIntentExtras() != null) {
             getLogState().callInitiationMethod =
                 getIntentExtras().getInt(IntentUtil.EXTRA_CALL_INITIATION_TYPE,
-                        LogState.INITIATION_UNKNOWN);
+                        LogState.INITIATION_EXTERNAL);
         }
     }
 
