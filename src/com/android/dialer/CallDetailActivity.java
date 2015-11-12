@@ -57,6 +57,8 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
@@ -390,7 +392,14 @@ public class CallDetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onChangeFilteredNumberSuccess() {
+    public void onFilterNumberSuccess() {
+        Logger.logInteraction(InteractionEvent.BLOCK_NUMBER_CALL_DETAIL);
+        updateFilteredNumberChanges();
+    }
+
+    @Override
+    public void onUnfilterNumberSuccess() {
+        Logger.logInteraction(InteractionEvent.UNBLOCK_NUMBER_CALL_DETAIL);
         updateFilteredNumberChanges();
     }
 

@@ -26,11 +26,9 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Data;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -43,6 +41,8 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 
 /**
  * Utility to help with tasks related to filtered numbers.
@@ -164,10 +164,11 @@ public class FilteredNumbersUtil {
      */
     public static void importSendToVoicemailContacts(
             final Context context, final ImportSendToVoicemailContactsListener listener) {
+        Logger.logInteraction(InteractionEvent.IMPORT_SEND_TO_VOICEMAIL);
         final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler =
                 new FilteredNumberAsyncQueryHandler(context.getContentResolver());
 
-        final AsyncTask task = new AsyncTask<Object, Void, Boolean>() {
+        final AsyncTask<Object, Void, Boolean> task = new AsyncTask<Object, Void, Boolean>() {
             @Override
             public Boolean doInBackground(Object[] params) {
                 if (context == null) {

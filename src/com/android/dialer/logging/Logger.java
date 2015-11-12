@@ -66,6 +66,20 @@ public abstract class Logger {
         }
     }
 
+    /**
+     * Logs an interaction that occurred
+     *
+     * @param interaction an integer representing what interaction occurred.
+     * {@see com.android.dialer.logging.InteractionEvent}
+     */
+    public static void logInteraction(int interaction) {
+        final Logger logger = getInstance();
+        if (logger != null) {
+            logger.logInteractionImpl(interaction);
+        }
+    }
+
     public abstract void logCallImpl(Call call);
     public abstract void logScreenViewImpl(int screenType);
+    public abstract void logInteractionImpl(int dialerInteraction);
 }
