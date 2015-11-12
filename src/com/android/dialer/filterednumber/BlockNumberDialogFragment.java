@@ -41,8 +41,7 @@ import com.android.dialer.voicemail.VisualVoicemailEnabledChecker;
  * Fragment for confirming and enacting blocking/unblocking a number. Also invokes snackbar
  * providing undo functionality.
  */
-public class BlockNumberDialogFragment extends DialogFragment
-        implements VisualVoicemailEnabledChecker.Callback{
+public class BlockNumberDialogFragment extends DialogFragment {
 
     /**
      * Use a callback interface to update UI after success/undo. Favor this approach over other
@@ -72,10 +71,8 @@ public class BlockNumberDialogFragment extends DialogFragment
     private View mParentView;
     private VisualVoicemailEnabledChecker mVoicemailEnabledChecker;
     private Callback mCallback;
-    private AlertDialog mAlertDialog;
 
     public static void show(
-            Context context,
             Integer blockId,
             String number,
             String countryIso,
@@ -84,14 +81,13 @@ public class BlockNumberDialogFragment extends DialogFragment
             FragmentManager fragmentManager,
             Callback callback) {
         final BlockNumberDialogFragment newFragment = BlockNumberDialogFragment.newInstance(
-                context, blockId, number, countryIso, displayNumber, parentViewId);
+                blockId, number, countryIso, displayNumber, parentViewId);
 
         newFragment.setCallback(callback);
         newFragment.show(fragmentManager, BlockNumberDialogFragment.BLOCK_DIALOG_FRAGMENT);
     }
 
     private static BlockNumberDialogFragment newInstance(
-            Context context,
             Integer blockId,
             String number,
             String countryIso,
@@ -109,8 +105,6 @@ public class BlockNumberDialogFragment extends DialogFragment
         args.putString(ARG_COUNTRY_ISO, countryIso);
         args.putString(ARG_DISPLAY_NUMBER, displayNumber);
         fragment.setArguments(args);
-        fragment.mVoicemailEnabledChecker = new VisualVoicemailEnabledChecker(context,fragment);
-        fragment.mVoicemailEnabledChecker.asyncUpdate();
         return fragment;
     }
 
@@ -128,6 +122,11 @@ public class BlockNumberDialogFragment extends DialogFragment
         }
 
         mHandler = new FilteredNumberAsyncQueryHandler(getContext().getContentResolver());
+        mVoicemailEnabledChecker = new VisualVoicemailEnabledChecker(getActivity(), null);
+      	/**
+         * Choose not to update VoicemailEnabledChecker, as checks should already been done in
+         * all current use cases.
+         */
         mParentView = getActivity().findViewById(getArguments().getInt(ARG_PARENT_VIEW_ID));
 
         CharSequence title;
@@ -162,16 +161,10 @@ public class BlockNumberDialogFragment extends DialogFragment
                         } else {
                             blockNumber();
                         }
-                        mAlertDialog = null;
                     }
                 })
-                .setNegativeButton(android.R.string.cancel,  new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        mAlertDialog = null;
-                    }
-                });
-        mAlertDialog = builder.create();
-        return mAlertDialog;
+                .setNegativeButton(android.R.string.cancel, null);
+        return builder.create();
     }
 
     @Override
@@ -299,20 +292,5 @@ public class BlockNumberDialogFragment extends DialogFragment
                 }
             }
         }, getArguments().getInt(ARG_BLOCK_ID));
-    }
-
-    @Override
-    public void onVisualVoicemailEnabledStatusChanged(boolean newStatus){
-        updateActiveVoicemailProvider();
-    }
-
-    private void updateActiveVoicemailProvider(){
-        if(mAlertDialog != null) {
-            if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
-                mAlertDialog.setMessage(getString(R.string.block_number_confirmation_message_vvm));
-            } else {
-                mAlertDialog.setMessage(getString(R.string.block_number_confirmation_message_no_vvm));
-            }
-        }
     }
 }
