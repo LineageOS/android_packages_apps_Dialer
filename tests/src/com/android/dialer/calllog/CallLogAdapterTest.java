@@ -266,7 +266,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
     }
 
     @MediumTest
-    public void testBindView_ContactWithPrefix() {
+    public void testBindView_ContactWithPostDialDigits() {
         createCallLogEntry(TEST_NUMBER, TEST_POST_DIAL_DIGITS, NO_VALUE_SET, NO_VALUE_SET);
         mAdapter.injectContactInfoForTest(TEST_NUMBER + TEST_POST_DIAL_DIGITS, TEST_COUNTRY_ISO,
                 createContactInfo());
@@ -274,7 +274,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        assertNameIs(mViewHolder, TEST_CACHED_NAME);
+        assertNameIs(mViewHolder, TEST_CACHED_NAME_PRIMARY);
     }
 
     @MediumTest
