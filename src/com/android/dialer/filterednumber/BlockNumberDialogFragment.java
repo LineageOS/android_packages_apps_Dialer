@@ -36,6 +36,8 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
 import com.android.dialer.voicemail.VisualVoicemailEnabledChecker;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 
 /**
  * Fragment for confirming and enacting blocking/unblocking a number. Also invokes snackbar
@@ -51,8 +53,20 @@ public class BlockNumberDialogFragment extends DialogFragment {
      * upon rotation instead.
      */
     public interface Callback {
-        public void onChangeFilteredNumberSuccess();
-        public void onChangeFilteredNumberUndo();
+        /**
+         * Called when a number is successfully added to the set of filtered numbers
+         */
+        void onFilterNumberSuccess();
+
+        /**
+         * Called when a number is successfully removed from the set of filtered numbers
+         */
+        void onUnfilterNumberSuccess();
+
+        /**
+         * Called when the action of filtering or unfiltering a number is undone
+         */
+        void onChangeFilteredNumberUndo();
     }
 
     private static final String BLOCK_DIALOG_FRAGMENT = "BlockNumberDialog";
@@ -230,6 +244,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         // Delete the newly created row on 'undo'.
+                        Logger.logInteraction(InteractionEvent.UNDO_BLOCK_NUMBER);
                         mHandler.unblock(onUndoListener, uri);
                     }
                 };
@@ -240,7 +255,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
                         .show();
 
                 if (callback != null) {
-                    callback.onChangeFilteredNumberSuccess();
+                    callback.onFilterNumberSuccess();
                 }
 
                 if (context != null && FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
@@ -278,6 +293,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         // Re-insert the row on 'undo', with a new ID.
+                        Logger.logInteraction(InteractionEvent.UNDO_UNBLOCK_NUMBER);
                         mHandler.blockNumber(onUndoListener, values);
                     }
                 };
@@ -288,7 +304,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
                         .show();
 
                 if (callback != null) {
-                    callback.onChangeFilteredNumberSuccess();
+                    callback.onUnfilterNumberSuccess();
                 }
             }
         }, getArguments().getInt(ARG_BLOCK_ID));

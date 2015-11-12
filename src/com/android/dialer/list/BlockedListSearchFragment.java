@@ -37,6 +37,8 @@ import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.widget.SearchEditTextLayout;
 
 public class BlockedListSearchFragment extends RegularSearchFragment
@@ -198,7 +200,18 @@ public class BlockedListSearchFragment extends RegularSearchFragment
     }
 
     @Override
-    public void onChangeFilteredNumberSuccess() {
+    public void onFilterNumberSuccess() {
+        Logger.logInteraction(InteractionEvent.BLOCK_NUMBER_MANAGEMENT_SCREEN);
+        goBack();
+    }
+
+    @Override
+    public void onUnfilterNumberSuccess() {
+        Log.wtf(TAG, "Unblocked a number from the BlockedListSearchFragment");
+        goBack();
+    }
+
+    private void goBack() {
         Activity activity = getActivity();
         if (activity == null) {
             return;
