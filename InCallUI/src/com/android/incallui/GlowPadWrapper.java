@@ -46,7 +46,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         }
     };
 
-    private AnswerListener mAnswerListener;
+    private AnswerFragment mAnswerFragment;
     private boolean mPingEnabled = true;
     private boolean mTargetTriggered = false;
     private int mVideoState = VideoProfile.STATE_BIDIRECTIONAL;
@@ -113,24 +113,24 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         final int resId = getResourceIdForTarget(target);
         switch (resId) {
             case R.drawable.ic_lockscreen_answer:
-                mAnswerListener.onAnswer(VideoProfile.STATE_AUDIO_ONLY, getContext());
+                mAnswerFragment.onAnswer(VideoProfile.STATE_AUDIO_ONLY, getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline:
-                mAnswerListener.onDecline(getContext());
+                mAnswerFragment.onDecline(getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_text:
-                mAnswerListener.onText();
+                mAnswerFragment.onText();
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_videocam:
             case R.drawable.ic_lockscreen_answer_video:
-                mAnswerListener.onAnswer(mVideoState, getContext());
+                mAnswerFragment.onAnswer(mVideoState, getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline_video:
-                mAnswerListener.onDeclineUpgradeRequest(getContext());
+                mAnswerFragment.onDeclineUpgradeRequest(getContext());
                 mTargetTriggered = true;
                 break;
             default:
@@ -149,8 +149,8 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     }
 
-    public void setAnswerListener(AnswerListener listener) {
-        mAnswerListener = listener;
+    public void setAnswerFragment(AnswerFragment fragment) {
+        mAnswerFragment = fragment;
     }
 
     /**
@@ -160,12 +160,5 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
      */
     public void setVideoState(int videoState) {
         mVideoState = videoState;
-    }
-
-    public interface AnswerListener {
-        void onAnswer(int videoState, Context context);
-        void onDecline(Context context);
-        void onDeclineUpgradeRequest(Context context);
-        void onText();
     }
 }
