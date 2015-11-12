@@ -28,11 +28,12 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
@@ -283,7 +284,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (callType == CallLog.Calls.VOICEMAIL_TYPE) {
             menu.setHeaderTitle(mContext.getResources().getText(R.string.voicemail));
         } else {
-            menu.setHeaderTitle(PhoneNumberUtils.createTtsSpannable(number));
+            menu.setHeaderTitle(PhoneNumberUtils.createTtsSpannable(
+                    BidiFormatter.getInstance().unicodeWrap(number, TextDirectionHeuristics.LTR)));
         }
 
         menu.add(ContextMenu.NONE, R.id.context_menu_copy_to_clipboard, ContextMenu.NONE,
