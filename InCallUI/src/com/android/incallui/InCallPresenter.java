@@ -24,7 +24,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
@@ -33,7 +32,6 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -51,6 +49,8 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil.OnCallLogQueryFinishedLis
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.logging.InteractionEvent;
+import com.android.dialer.logging.Logger;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
 import com.google.common.base.Preconditions;
@@ -544,6 +544,7 @@ public class InCallPresenter implements CallList.Listener,
                 } else {
                     call.reject(false, null);
                     Log.d(this, "checkForBlockedCall: " + Log.pii(number) + " blocked.");
+                    Logger.logInteraction(InteractionEvent.CALL_BLOCKED);
 
                     mFilteredQueryHandler.incrementFilteredCount(id);
 
