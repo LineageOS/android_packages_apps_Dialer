@@ -423,6 +423,9 @@ public class CallLogAdapter extends GroupingListAdapter
         int count = getGroupSize(position);
 
         final String number = c.getString(CallLogQuery.NUMBER);
+        final String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+                ? c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+
         final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
@@ -438,13 +441,15 @@ public class CallLogAdapter extends GroupingListAdapter
         ContactInfo info = ContactInfo.EMPTY;
         if (PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemailNumber) {
             // Lookup contacts with this number
-            info = mContactInfoCache.getValue(number, countryIso, cachedContactInfo);
+            info = mContactInfoCache.getValue(number + postDialDigits,
+                    countryIso, cachedContactInfo);
         }
         CharSequence formattedNumber = info.formattedNumber == null
                 ? null : PhoneNumberUtils.createTtsSpannable(info.formattedNumber);
 
         final PhoneCallDetails details = new PhoneCallDetails(
-                mContext, number, numberPresentation, formattedNumber, isVoicemailNumber);
+                mContext, number, numberPresentation, formattedNumber,
+                postDialDigits, isVoicemailNumber);
         details.accountHandle = accountHandle;
         details.callTypes = getCallTypes(c, count);
         details.countryIso = countryIso;
@@ -478,6 +483,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.rowId = c.getLong(CallLogQuery.ID);
         // Store values used when the actions ViewStub is inflated on expansion.
         views.number = number;
+        views.postDialDigits = details.postDialDigits;
         views.displayNumber = details.displayNumber;
         views.numberPresentation = numberPresentation;
         views.callType = c.getInt(CallLogQuery.CALL_TYPE);

@@ -18,11 +18,17 @@ package com.android.dialer.calllog;
 
 import android.provider.CallLog.Calls;
 
+import com.android.dialer.util.AppCompatConstants;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * The query for the call log table.
  */
 public final class CallLogQuery {
-    public static final String[] _PROJECTION = new String[] {
+
+    private static final String[] _PROJECTION_INTERNAL = new String[] {
             Calls._ID,                          // 0
             Calls.NUMBER,                       // 1
             Calls.DATE,                         // 2
@@ -73,4 +79,18 @@ public final class CallLogQuery {
     public static final int DATA_USAGE = 21;
     public static final int TRANSCRIPTION = 22;
     public static final int CACHED_PHOTO_URI = 23;
+    public static final int POST_DIAL_DIGITS = 24;
+
+    public static final String[] _PROJECTION;
+
+    static {
+        ArrayList<String> projectionList = new ArrayList<String>();
+        projectionList.addAll(Arrays.asList(_PROJECTION_INTERNAL));
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            projectionList.add(AppCompatConstants.POST_DIAL_DIGITS);
+        }
+        projectionList.trimToSize();
+        _PROJECTION = projectionList.toArray(new String[projectionList.size()]);
+    }
+
 }

@@ -64,6 +64,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
     private static final String TEST_NUMBER_1 = "12345678";
     private static final String TEST_NUMBER_2 = "87654321";
     private static final String TEST_NUMBER_3 = "18273645";
+    private static final String TEST_POST_DIAL_DIGITS = ";12345";
     private static final String TEST_FORMATTED_NUMBER = "1 212-555-1000";
 
     // The object under test.
@@ -233,6 +234,16 @@ public class CallLogAdapterTest extends AndroidTestCase {
     }
 
     @MediumTest
+    public void testBindView_CallButtonWithPostDialDigits() {
+        createCallLogEntry(TEST_NUMBER, TEST_POST_DIAL_DIGITS, NO_VALUE_SET, NO_VALUE_SET);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertHasCallActionToGivenNumber(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
+    }
+
+    @MediumTest
     public void testBindView_VoicemailUri() {
         createVoicemailCallLogEntry();
 
@@ -242,6 +253,28 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertEquals(Uri.parse(mViewHolder.voicemailUri),
                 ContentUris.withAppendedId(VoicemailContract.Voicemails.CONTENT_URI, 0));
         assertNull(mViewHolder.primaryActionButtonView.getTag());
+    }
+
+    @MediumTest
+    public void testBindView_NumberWithPostDialDigits() {
+        createCallLogEntry(TEST_NUMBER, TEST_POST_DIAL_DIGITS, NO_VALUE_SET, NO_VALUE_SET);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
+    }
+
+    @MediumTest
+    public void testBindView_ContactWithPrefix() {
+        createCallLogEntry(TEST_NUMBER, TEST_POST_DIAL_DIGITS, NO_VALUE_SET, NO_VALUE_SET);
+        mAdapter.injectContactInfoForTest(TEST_NUMBER + TEST_POST_DIAL_DIGITS, TEST_COUNTRY_ISO,
+                createContactInfo());
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertNameIs(mViewHolder, TEST_CACHED_NAME);
     }
 
     @MediumTest
@@ -513,11 +546,12 @@ public class CallLogAdapterTest extends AndroidTestCase {
     }
 
     private void createCallLogEntry(String testNumber) {
-        createCallLogEntry(testNumber, NO_VALUE_SET, NO_VALUE_SET);
+        createCallLogEntry(testNumber, EMPTY_STRING, NO_VALUE_SET, NO_VALUE_SET);
     }
 
     private void createPrivateCallLogEntry() {
         createCallLogEntry(
+                EMPTY_STRING,
                 EMPTY_STRING,
                 Calls.PRESENTATION_RESTRICTED,
                 AppCompatConstants.CALLS_INCOMING_TYPE);
@@ -526,16 +560,17 @@ public class CallLogAdapterTest extends AndroidTestCase {
     private void createUnknownCallLogEntry() {
         createCallLogEntry(
                 EMPTY_STRING,
+                EMPTY_STRING,
                 Calls.PRESENTATION_UNKNOWN,
                 AppCompatConstants.CALLS_INCOMING_TYPE);
     }
 
     private void createVoicemailCallLogEntry() {
-        createCallLogEntry(TEST_NUMBER, NO_VALUE_SET, Calls.VOICEMAIL_TYPE);
+        createCallLogEntry(TEST_NUMBER, EMPTY_STRING, NO_VALUE_SET, Calls.VOICEMAIL_TYPE);
     }
 
-    private void createCallLogEntry(String number, int presentation, int type) {
-        Object[] values = getValues(number, presentation, type);
+    private void createCallLogEntry(String number, String postDialDigits, int presentation, int type) {
+        Object[] values = getValues(number, postDialDigits, presentation, type);
         mCursor.addRow(values);
     }
 
@@ -583,7 +618,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
             String cachedNumberLabel,
             String cachedFormattedNumber,
             boolean inject) {
-        Object[] values = getValues(number, NO_VALUE_SET, type);
+        Object[] values = getValues(number, EMPTY_STRING, NO_VALUE_SET, type);
         values[CallLogQuery.CACHED_NAME] = cachedName;
         values[CallLogQuery.CACHED_NUMBER_TYPE] = cachedNumberType;
         values[CallLogQuery.CACHED_NUMBER_LABEL] = cachedNumberLabel;
@@ -600,12 +635,14 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     /**
      * @param number The phone number.
+     * @param postDialDigits The post dial digits dialed (if any)
      * @param presentation Number representing display rules for "allowed",
      *               "payphone", "restricted", or "unknown".
-     * @param date In millisec since epoch. Use NOW to use the current time.
+     * @param type The type of the call (outgoing/ingoing)
      */
     private Object[] getValues(
             String number,
+            String postDialDigits,
             int presentation,
             int type) {
         Object[] values = CallLogQueryTestUtils.createTestValues();
@@ -617,6 +654,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         if (!TextUtils.isEmpty(number)) {
             values[CallLogQuery.NUMBER] = number;
+        }
+        if (!TextUtils.isEmpty(postDialDigits)) {
+            values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
         }
         if (presentation != NO_VALUE_SET) {
             values[CallLogQuery.NUMBER_PRESENTATION] = presentation;
@@ -676,14 +716,16 @@ public class CallLogAdapterTest extends AndroidTestCase {
     }
 
     private void assertHasCallAction(CallLogListItemViewHolder viewHolder) {
-        // The primaryActionView tag is set when the ViewHolder is binded. If it is possible
-        // to place a call to the phone number, a call intent will have been created which
-        // starts a phone call to the entry's number.
+        assertHasCallActionToGivenNumber(viewHolder, TEST_NUMBER);
+    }
+
+    private void assertHasCallActionToGivenNumber(CallLogListItemViewHolder viewHolder,
+            String number) {
         IntentProvider intentProvider =
                 (IntentProvider) viewHolder.primaryActionButtonView.getTag();
         Intent intent = intentProvider.getIntent(getContext());
         assertEquals(TestConstants.CALL_INTENT_ACTION, intent.getAction());
-        assertEquals(Uri.parse("tel:" + TEST_NUMBER), intent.getData());
+        assertEquals(Uri.parse("tel:" + Uri.encode(number)), intent.getData());
     }
 
     /** Returns the label associated with a given phone type. */

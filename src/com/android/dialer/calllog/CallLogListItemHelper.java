@@ -16,7 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
 import android.text.SpannableStringBuilder;
@@ -263,7 +262,7 @@ import com.android.dialer.R;
         if (!TextUtils.isEmpty(details.getPreferredName())) {
             recipient = details.getPreferredName();
         } else {
-            recipient = details.displayNumber;
+            recipient = details.displayNumber + details.postDialDigits;
         }
         return recipient;
     }

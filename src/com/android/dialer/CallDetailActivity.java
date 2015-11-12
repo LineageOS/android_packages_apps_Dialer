@@ -107,11 +107,19 @@ public class CallDetailActivity extends AppCompatActivity
             // All calls are from the same number and same contact, so pick the first detail.
             mDetails = details[0];
             mNumber = TextUtils.isEmpty(mDetails.number) ? null : mDetails.number.toString();
+            mPostDialDigits = TextUtils.isEmpty(mDetails.postDialDigits)
+                    ? "" : mDetails.postDialDigits;
             mDisplayNumber = mDetails.displayNumber;
 
             final CharSequence callLocationOrType = getNumberTypeOrLocation(mDetails);
 
-            final CharSequence displayNumber = mDetails.displayNumber;
+            final CharSequence displayNumber;
+            if (!TextUtils.isEmpty(mDetails.postDialDigits)) {
+                displayNumber = mDetails.number + mDetails.postDialDigits;
+            } else {
+                displayNumber = mDetails.displayNumber;
+            }
+
             final String displayNumberStr = mBidiFormatter.unicodeWrap(
                     displayNumber.toString(), TextDirectionHeuristics.LTR);
 
@@ -197,6 +205,7 @@ public class CallDetailActivity extends AppCompatActivity
     private PhoneCallDetails mDetails;
     protected String mNumber;
     private Uri mVoicemailUri;
+    private String mPostDialDigits = "";
     private String mDisplayNumber;
 
     private ListView mHistoryList;
@@ -252,7 +261,7 @@ public class CallDetailActivity extends AppCompatActivity
                     return;
                 }
                 mContext.startActivity(
-                        new CallIntentBuilder(mNumber)
+                        new CallIntentBuilder(getDialableNumber())
                                 .setCallInitiationType(LogState.INITIATION_CALL_DETAILS)
                                 .build());
             }
@@ -371,7 +380,8 @@ public class CallDetailActivity extends AppCompatActivity
                 ClipboardUtils.copyText(mContext, null, mNumber, true);
                 break;
             case R.id.call_detail_action_edit_before_call:
-                Intent dialIntent = new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(mNumber));
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                        CallUtil.getCallUri(getDialableNumber()));
                 DialerUtils.startActivityWithErrorToast(mContext, dialIntent);
                 break;
             default:
@@ -458,6 +468,10 @@ public class CallDetailActivity extends AppCompatActivity
 
     private void closeSystemDialogs() {
         sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+    }
+
+    private String getDialableNumber() {
+        return mNumber + mPostDialDigits;
     }
 
     @NeededForTesting

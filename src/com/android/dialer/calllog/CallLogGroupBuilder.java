@@ -17,7 +17,6 @@
 package com.android.dialer.calllog;
 
 import android.database.Cursor;
-import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.Time;
 import android.text.TextUtils;
@@ -27,8 +26,6 @@ import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.util.AppCompatConstants;
 
 import com.google.common.annotations.VisibleForTesting;
-
-import java.util.Objects;
 
 /**
  * Groups together calls in the call log.  The primary grouping attempts to group together calls
@@ -125,12 +122,15 @@ public class CallLogGroupBuilder {
 
         // Instantiate the group values to those of the first call in the cursor.
         String groupNumber = cursor.getString(CallLogQuery.NUMBER);
+        String groupPostDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+                ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
         int groupCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
         String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
         String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
         int groupSize = 1;
 
         String number;
+        String numberPostDialDigits;
         int callType;
         String accountComponentName;
         String accountId;
@@ -138,17 +138,21 @@ public class CallLogGroupBuilder {
         while (cursor.moveToNext()) {
             // Obtain the values for the current call to group.
             number = cursor.getString(CallLogQuery.NUMBER);
+            numberPostDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+                    ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
             callType = cursor.getInt(CallLogQuery.CALL_TYPE);
             accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
             accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
 
             final boolean isSameNumber = equalNumbers(groupNumber, number);
+            final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);
             final boolean isSameAccount = isSameAccount(
                     groupAccountComponentName, accountComponentName, groupAccountId, accountId);
 
             // Group with the same number and account. Never group voicemails. Only group blocked
             // calls with other blocked calls.
-            if (isSameNumber && isSameAccount && areBothNotVoicemail(callType, groupCallType)
+            if (isSameNumber && isSameAccount && isSamePostDialDigits
+                    && areBothNotVoicemail(callType, groupCallType)
                     && (areBothNotBlocked(callType, groupCallType)
                             || areBothBlocked(callType, groupCallType))) {
                 // Increment the size of the group to include the current call, but do not create
@@ -168,6 +172,7 @@ public class CallLogGroupBuilder {
 
                 // Update the group values to those of the current call.
                 groupNumber = number;
+                groupPostDialDigits = numberPostDialDigits;
                 groupCallType = callType;
                 groupAccountComponentName = accountComponentName;
                 groupAccountId = accountId;
