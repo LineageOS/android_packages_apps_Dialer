@@ -172,7 +172,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment
             public void onCheckComplete(Integer id) {
                 if (id == null) {
                     BlockNumberDialogFragment.show(
-                            getContext(),
                             id,
                             number,
                             countryIso,
@@ -221,7 +220,6 @@ public class BlockedListSearchFragment extends RegularSearchFragment
         }
 
         BlockNumberDialogFragment.show(
-                getContext(),
                 blockId,
                 number,
                 GeoUtil.getCurrentCountryIso(getContext()),

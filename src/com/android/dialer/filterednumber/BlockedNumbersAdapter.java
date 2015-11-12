@@ -61,7 +61,6 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
             @Override
             public void onClick(View view) {
                 BlockNumberDialogFragment.show(
-                        context,
                         id,
                         number,
                         countryIso,
