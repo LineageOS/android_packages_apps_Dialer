@@ -33,6 +33,7 @@ import android.telecom.GatewayInfo;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -372,6 +373,13 @@ public class Call {
     private String mChildNumber;
     private String mLastForwardedNumber;
     private String mCallSubject;
+    private PhoneAccountHandle mPhoneAccountHandle;
+
+    /**
+     * Indicates whether the phone account associated with this call supports specifying a call
+     * subject.
+     */
+    private boolean mIsCallSubjectSupported;
 
     private long mTimeAddedMs;
 
@@ -497,6 +505,22 @@ public class Call {
             mHandle = newHandle;
             updateEmergencyCallState();
         }
+
+        // If the phone account handle of the call is set, cache capability bit indicating whether
+        // the phone account supports call subjects.
+        PhoneAccountHandle newPhoneAccountHandle = mTelecomCall.getDetails().getAccountHandle();
+        if (!Objects.equals(mPhoneAccountHandle, newPhoneAccountHandle)) {
+            mPhoneAccountHandle = newPhoneAccountHandle;
+
+            if (mPhoneAccountHandle != null) {
+                TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
+                PhoneAccount phoneAccount = mgr.getPhoneAccount(mPhoneAccountHandle);
+                if (phoneAccount != null) {
+                    mIsCallSubjectSupported = phoneAccount.hasCapabilities(
+                            PhoneAccount.CAPABILITY_CALL_SUBJECT);
+                }
+            }
+        }
     }
 
     private static int translateState(int state) {
@@ -607,6 +631,14 @@ public class Call {
      */
     public String getCallSubject() {
         return mCallSubject;
+    }
+
+    /**
+     * @return {@code true} if the call's phone account supports call subjects, {@code false}
+     *      otherwise.
+     */
+    public boolean isCallSubjectSupported() {
+        return mIsCallSubjectSupported;
     }
 
     /** Returns call disconnect cause, defined by {@link DisconnectCause}. */
