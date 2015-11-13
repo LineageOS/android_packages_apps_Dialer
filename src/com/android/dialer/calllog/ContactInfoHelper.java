@@ -198,23 +198,26 @@ public class ContactInfoHelper {
             return null;
         }
 
-        Uri uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
+        final Uri uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
 
-        Cursor cursor = context.getContentResolver().query(uri,
-                PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, null, null, null);
-
-        if (cursor == null) {
-            return null;
-        }
-
+        Cursor cursor = null;
         try {
-            if (!cursor.moveToFirst()) {
-                return null;
+            cursor = context.getContentResolver().query(uri,
+                    PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                return cursor.getString(PhoneQuery.NAME_ALTERNATIVE);
             }
-            return cursor.getString(PhoneQuery.NAME_ALTERNATIVE);
+        } catch (IllegalArgumentException e) {
+            // Thrown for work profile queries. For those, we don't support
+            // alternative display names.
         } finally {
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         }
+
+        return null;
     }
 
     /**
