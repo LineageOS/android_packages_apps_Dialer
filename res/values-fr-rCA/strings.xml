@@ -228,7 +228,7 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Échec de l\'importation"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Débloquer le numéro"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Ajouter un numéro"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"L\'ajout d\'un numéro permet de bloquer tous les prochains appels, et les messages vocaux sont automatiquement supprimés."</string>
+    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"L\'ajout d\'un numéro permet de bloquer tous les prochains appels, et les messages vocaux seront automatiquement supprimés."</string>
     <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"L\'ajout d\'un numéro permet de bloquer tous les prochains appels. Vous continuerez peut-être de recevoir les messages vocaux."</string>
     <string name="block_list" msgid="7760188925338078011">"Numéros bloqués"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Le numéro <xliff:g id="NUMBER">%1$s</xliff:g> n\'est pas valide."</string>

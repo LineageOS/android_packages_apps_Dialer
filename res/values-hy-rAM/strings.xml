@@ -149,7 +149,7 @@
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Այս համարից զանգերը կարգելափակվեն: Սակայն դուք կկարողանաք ստանալ ձայնային փոստի հաղորդագրություններ:"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ԱՐԳԵԼԱՓԱԿԵԼ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Արգելաբացե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Այս համարի զանգերն այլևս չեն արգելափակվի:"</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Այս համարից զանգերն այլևս չեն արգելափակվի:"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ԱՐԳԵԼԱԲԱՑԵԼ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Արագ համարարկում"</string>
     <string name="tab_history" msgid="2563144697322434940">"Զանգերի պատմությունը"</string>

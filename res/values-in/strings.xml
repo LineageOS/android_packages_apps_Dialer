@@ -149,7 +149,7 @@
     <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Panggilan telepon di masa mendatang dari nomor ini akan diblokir. Pesan suara mungkin masih masuk."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKIR"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Bebaskan <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Nomor ini tidak akan diblokir lagi untuk menelepon Anda."</string>
+    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Nomor ini tidak akan diblokir lagi dan dapat menelepon Anda."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"BEBASKAN"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Panggilan cepat"</string>
     <string name="tab_history" msgid="2563144697322434940">"Riwayat Panggilan"</string>
