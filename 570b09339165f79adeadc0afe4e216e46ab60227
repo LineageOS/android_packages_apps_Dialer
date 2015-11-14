@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f2f7f8d_363328ae",
+        "filename": "src/com/android/dialer/lookup/LookupUtils.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "What\u0027s the point of the reformatting done here? AFAICT the previous header formatting seems fine.",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_16282c32",
+        "filename": "src/com/android/dialer/lookup/LookupUtils.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "Importing java.lang.* isn\u0027t necessary.",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_b61ef809",
+        "filename": "src/com/android/dialer/lookup/LookupUtils.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "Maybe a little more efficient:\n\nInputStream is \u003d new BufferedInputStream(urlConnection.getInputStream());\nByteArrayOutputStream baos \u003d new ByteArrayOutputStream();\nString result \u003d null;\ntry {\n    byte[] partial \u003d new byte[4096];\n    int read;\n    while ((read \u003d is.read(partial, 0, 4096)) !\u003d -1) {\n        baos.write(partial, 0, read);\n    }\n    result \u003d new String(baos.toByteArray());\n} finally {\n    is.close();\n    baos.close();\n    urlConnection.disconnect();\n}",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_7618901c",
+        "filename": "src/com/android/dialer/lookup/LookupUtils.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "Why not return the List\u003cString\u003e directly?",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_36d8c851",
+        "filename": "src/com/android/dialer/lookup/auskunft/AuskunftApi.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "Why not simply declare IOException as being thrown? ReverseLookup.lookupNumber() allows for that.",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_f6e12000",
+        "filename": "src/com/android/dialer/lookup/auskunft/AuskunftApi.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "for (int i \u003d 0; i \u003c names.length; i++) {\n\n(spaces)",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_b6e39805",
+        "filename": "src/com/android/dialer/lookup/auskunft/AuskunftReverseLookup.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "number_prefix_mobile -\u003e prefix (or mobileNumberPrefix)",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2f7f8d_76ed30ee",
+        "filename": "src/com/android/dialer/lookup/auskunft/AuskunftReverseLookup.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-14T20:14:52Z",
+      "side": 1,
+      "message": "This really does work? At least in DE, the default extension is usually 0, so for a number in the form +49 30 12345-678 the main number usually is +49 30 12345-0. Is that different in AT?",
+      "revId": "570b09339165f79adeadc0afe4e216e46ab60227",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
