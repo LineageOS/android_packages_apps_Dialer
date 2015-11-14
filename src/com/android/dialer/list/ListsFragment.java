@@ -360,7 +360,7 @@ public class ListsFragment extends Fragment
      * expands a voicemail in the call log.
      */
     public void updateTabUnreadCounts() {
-        if (mHasActiveVoicemailProvider) {
+        if (mHasActiveVoicemailProvider && mCallLogQueryHandler != null) {
             mCallLogQueryHandler.fetchVoicemailUnreadCount();
         }
     }
