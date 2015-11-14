@@ -176,10 +176,8 @@
     <string name="distance_imperial_away" msgid="437508440176409037">"<xliff:g id="DISTANCE">%.1f</xliff:g> 英里遠"</string>
     <string name="distance_metric_away" msgid="166931929505893599">"<xliff:g id="DISTANCE">%.1f</xliff:g> 公里遠"</string>
     <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>，<xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
-    <!-- no translation found for open_time_span (6709726401179550381) -->
-    <skip />
-    <!-- no translation found for opening_hours (8524931350345922176) -->
-    <skip />
+    <string name="open_time_span" msgid="6709726401179550381">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="8524931350345922176">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>，<xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
     <string name="open_now" msgid="6439301193613349163">"營業中"</string>
     <string name="closed_now" msgid="9175774453982778909">"今日已結束營業"</string>
 </resources>
