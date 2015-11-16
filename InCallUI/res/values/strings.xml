@@ -487,6 +487,14 @@
          The string is used to build a list of opening hours.
          [CHAR LIMIT=NONE] -->
     <string name="opening_hours"><xliff:g id="earlier_times">%1$s</xliff:g>, <xliff:g id="later_time">%2$s</xliff:g></string>
+    <!-- Used to express when a location will open the next day. [CHAR LIMIT=NONE] -->
+    <string name="opens_tomorrow_at">Opens tomorrow at <xliff:g id="open_time">%s</xliff:g></string>
+    <!-- Used to express the next time at which a location will be open today. [CHAR LIMIT=NONE] -->
+    <string name="opens_today_at">Opens today at <xliff:g id="open_time">%s</xliff:g></string>
+    <!-- Used to express the next time at which a location will close today. [CHAR LIMIT=NONE] -->
+    <string name="closes_today_at">Closes at <xliff:g id="close_time">%s</xliff:g></string>
+    <!-- Used to express the next time at which a location closed today if it is already closed. [CHAR LIMIT=NONE] -->
+    <string name="closed_today_at">Closed today at <xliff:g id="close_time">%s</xliff:g></string>
     <!-- Displayed when a place is open. -->
     <string name="open_now">Open now</string>
     <!-- Displayed when a place is closed. -->
