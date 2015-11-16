@@ -184,8 +184,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private boolean mCallStateLabelResetPending = false;
     private Handler mHandler;
 
-    private InCallContactInteractions mInCallContactInteractions;
-
     @Override
     public CallCardPresenter.CallCardUi getUi() {
         return this;
