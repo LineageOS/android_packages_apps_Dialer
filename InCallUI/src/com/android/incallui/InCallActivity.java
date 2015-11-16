@@ -26,8 +26,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
@@ -37,20 +37,19 @@ import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
-import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.Surface;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
-import com.android.phone.common.animation.AnimUtils;
-import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
@@ -58,6 +57,9 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.Call.State;
+import com.android.incallui.util.AccessibilityUtil;
+import com.android.phone.common.animation.AnimUtils;
+import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +124,8 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             showFragment(TAG_DIALPAD_FRAGMENT, false, true);
         }
     };
+
+    private OnTouchListener mDispatchTouchEventListener;
 
     private SelectPhoneAccountListener mSelectAcctListener = new SelectPhoneAccountListener() {
         @Override
@@ -461,6 +465,17 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (mDispatchTouchEventListener != null) {
+            boolean handled = mDispatchTouchEventListener.onTouch(null, ev);
+            if (handled) {
+                return true;
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_CALL:
@@ -513,7 +528,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         if (event.getRepeatCount() == 0 && handleDialerKeyDown(keyCode, event)) {
             return true;
         }
-
         return super.onKeyDown(keyCode, event);
     }
 
@@ -714,7 +728,11 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             mDialpadFragment = new DialpadFragment();
             return mDialpadFragment;
         } else if (TAG_ANSWER_FRAGMENT.equals(tag)) {
-            mAnswerFragment = new AnswerFragment();
+            if (AccessibilityUtil.isTalkBackEnabled(this)) {
+                mAnswerFragment = new AccessibleAnswerFragment();
+            } else {
+                mAnswerFragment = new GlowPadAnswerFragment();
+            }
             return mAnswerFragment;
         } else if (TAG_CONFERENCE_FRAGMENT.equals(tag)) {
             mConferenceManagerFragment = new ConferenceManagerFragment();
@@ -913,5 +931,14 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                 }
             }
         }
+    }
+
+
+    public OnTouchListener getDispatchTouchEventListener() {
+        return mDispatchTouchEventListener;
+    }
+
+    public void setDispatchTouchEventListener(OnTouchListener mDispatchTouchEventListener) {
+        this.mDispatchTouchEventListener = mDispatchTouchEventListener;
     }
 }

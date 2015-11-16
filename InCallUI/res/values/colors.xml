@@ -73,10 +73,13 @@
     <color name="glowpad_text_widget_ring_color">#ffffff</color>
     <color name="glowpad_widget_active_color">#ffffff</color>
     <color name="glowpad_text_widget_normal_tint">#cccccc</color>
-    <color name="glowpad_call_widget_normal_tint">@color/dialtacts_theme_color</color>
+    <color name="glowpad_call_widget_normal_tint">#00c853</color>
     <color name="glowpad_end_call_widget_normal_tint">#ff1744</color>
     <color name="glowpad_incoming_widget_tint">#a3a3a3</color>
     <color name="glowpad_incoming_widget_background_tint">#ffffff</color>
+
+    <!-- 70% opacity, white. -->
+    <color name="accessible_answer_hint_text_color">#B2FFFFFF</color>
 
     <!-- 20% opacity, theme color. -->
     <color name="incall_dialpad_touch_tint">#330288d1</color>
