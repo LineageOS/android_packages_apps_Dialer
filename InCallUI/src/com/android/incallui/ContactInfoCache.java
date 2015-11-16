@@ -241,6 +241,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 Log.d(TAG, "Contact lookup. Local contact found, starting image load");
                 // Load the image with a callback to update the image state.
                 // When the load is finished, onImageLoadComplete() will be called.
+                cacheEntry.isLoadingPhoto = true;
                 ContactsAsyncHelper.startObtainPhotoAsync(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE,
                         mContext, cacheEntry.displayPhotoUri, ContactInfoCache.this, callId);
             } else {
@@ -302,19 +303,21 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 entry.photo = mContext.getResources().getDrawable(R.drawable.img_business);
             }
 
-            boolean hasContactInteractions = false;
-            if (mContactUtils != null) {
-                // This method will callback "onContactInteractionsFound".
-                hasContactInteractions = mContactUtils.retrieveContactInteractionsFromLookupKey(
-                        info.getLookupKey(), this);
-            }
-
-            // Add the contact info to the cache.
             mInfoMap.put(mCallId, entry);
             sendInfoNotifications(mCallId, entry);
 
-            // If there is no image then we should not expect another callback.
-            if (info.getImageUrl() == null && !hasContactInteractions) {
+            if (mContactUtils != null) {
+                // This method will callback "onContactInteractionsFound".
+                entry.isLoadingContactInteractions =
+                        mContactUtils.retrieveContactInteractionsFromLookupKey(
+                                info.getLookupKey(), this);
+            }
+
+            entry.isLoadingPhoto = info.getImageUrl() != null;
+
+            // If there is no image or contact interactions then we should not expect another
+            // callback.
+            if (!entry.isLoadingPhoto && !entry.isLoadingContactInteractions) {
                 // We're done, so clear callbacks
                 clearCallbacks(mCallId);
             }
@@ -329,10 +332,23 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public void onContactInteractionsFound(Address address,
                 List<Pair<Calendar, Calendar>> openingHours) {
             final ContactCacheEntry entry = mInfoMap.get(mCallId);
+            if (entry == null) {
+                Log.e(this, "Contact context received for empty search entry.");
+                clearCallbacks(mCallId);
+                return;
+            }
+
+            entry.isLoadingContactInteractions = false;
+
+            Log.v(ContactInfoCache.this, "Setting contact interactions for entry: ", entry);
+
             entry.locationAddress = address;
             entry.openingHours = openingHours;
             sendContactInteractionsNotifications(mCallId, entry);
-            clearCallbacks(mCallId);
+
+            if (!entry.isLoadingPhoto) {
+                clearCallbacks(mCallId);
+            }
         }
     }
 
@@ -354,6 +370,9 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             clearCallbacks(callId);
             return;
         }
+
+        entry.isLoadingPhoto = false;
+
         Log.d(this, "setting photo for entry: ", entry);
 
         // Conference call icons are being handled in CallCardPresenter.
@@ -369,7 +388,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         }
 
         sendImageNotifications(callId, entry);
-        clearCallbacks(callId);
+
+        if (!entry.isLoadingContactInteractions) {
+            clearCallbacks(callId);
+        }
     }
 
     /**
@@ -617,6 +639,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public String label;
         public Drawable photo;
         public boolean isSipCall;
+        // Note in cache entry whether this is a pending async loading action to know whether to
+        // wait for its callback or not.
+        public boolean isLoadingPhoto;
+        public boolean isLoadingContactInteractions;
         /** This will be used for the "view" notification. */
         public Uri contactUri;
         /** Either a display photo or a thumbnail URI. */
