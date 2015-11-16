@@ -57,6 +57,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
@@ -271,6 +272,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
             menu.findItem(R.id.menu_history).setVisible(
                     PermissionsUtil.hasPhonePermissions(DialtactsActivity.this));
+            final MenuItem ConferDialerOption = menu.findItem(R.id.menu_4g_conference_call);
+            ConferDialerOption.setVisible(CallUtil.isConferDialerEnabled(getApplicationContext()));
             super.show();
         }
     }
@@ -674,6 +677,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_4g_conference_call:
+                this.startActivity(CallUtil.getConferenceDialerIntent(null));
+                break;
             case R.id.menu_history:
                 // Use explicit CallLogActivity intent instead of ACTION_VIEW +
                 // CONTENT_TYPE, so that we always open our call log from our dialer
