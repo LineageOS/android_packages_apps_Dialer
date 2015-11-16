@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.telecom.VideoProfile;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -34,23 +33,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
+import com.android.dialer.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- *
+ * Provides only common interface and functions. Should be derived to implement the actual UI.
  */
-public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresenter.AnswerUi>
-        implements GlowPadWrapper.AnswerListener, AnswerPresenter.AnswerUi {
+public abstract class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresenter.AnswerUi>
+        implements AnswerPresenter.AnswerUi {
 
     public static final int TARGET_SET_FOR_AUDIO_WITHOUT_SMS = 0;
     public static final int TARGET_SET_FOR_AUDIO_WITH_SMS = 1;
     public static final int TARGET_SET_FOR_VIDEO_WITHOUT_SMS = 2;
     public static final int TARGET_SET_FOR_VIDEO_WITH_SMS = 3;
     public static final int TARGET_SET_FOR_VIDEO_ACCEPT_REJECT_REQUEST = 4;
+
+    /**
+     * This fragment implement no UI at all. Derived class should do it.
+     */
+    @Override
+    public abstract View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState);
 
     /**
      * The popup showing the list of canned responses.
@@ -70,11 +76,6 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
 
     private final List<String> mSmsResponses = new ArrayList<>();
 
-    private GlowPadWrapper mGlowpad;
-
-    public AnswerFragment() {
-    }
-
     @Override
     public AnswerPresenter createPresenter() {
         return InCallPresenter.getInstance().getAnswerPresenter();
@@ -83,113 +84,6 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     @Override
     public AnswerPresenter.AnswerUi getUi() {
         return this;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mGlowpad = (GlowPadWrapper) inflater.inflate(R.layout.answer_fragment,
-                container, false);
-
-        Log.d(this, "Creating view for answer fragment ", this);
-        Log.d(this, "Created from activity", getActivity());
-        mGlowpad.setAnswerListener(this);
-
-        return mGlowpad;
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.d(this, "onDestroyView");
-        if (mGlowpad != null) {
-            mGlowpad.stopPing();
-            mGlowpad = null;
-        }
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onShowAnswerUi(boolean shown) {
-        Log.d(this, "Show answer UI: " + shown);
-        if (shown) {
-            mGlowpad.startPing();
-        } else {
-            mGlowpad.stopPing();
-        }
-    }
-
-    /**
-     * Sets targets on the glowpad according to target set identified by the parameter.
-     * @param targetSet Integer identifying the set of targets to use.
-     */
-    public void showTargets(int targetSet) {
-        showTargets(targetSet, VideoProfile.STATE_BIDIRECTIONAL);
-    }
-
-    /**
-     * Sets targets on the glowpad according to target set identified by the parameter.
-     * @param targetSet Integer identifying the set of targets to use.
-     */
-    @Override
-    public void showTargets(int targetSet, int videoState) {
-        final int targetResourceId;
-        final int targetDescriptionsResourceId;
-        final int directionDescriptionsResourceId;
-        final int handleDrawableResourceId;
-        mGlowpad.setVideoState(videoState);
-
-        switch (targetSet) {
-            case TARGET_SET_FOR_AUDIO_WITH_SMS:
-                targetResourceId = R.array.incoming_call_widget_audio_with_sms_targets;
-                targetDescriptionsResourceId =
-                        R.array.incoming_call_widget_audio_with_sms_target_descriptions;
-                directionDescriptionsResourceId =
-                        R.array.incoming_call_widget_audio_with_sms_direction_descriptions;
-                handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
-                break;
-            case TARGET_SET_FOR_VIDEO_WITHOUT_SMS:
-                targetResourceId = R.array.incoming_call_widget_video_without_sms_targets;
-                targetDescriptionsResourceId =
-                        R.array.incoming_call_widget_video_without_sms_target_descriptions;
-                directionDescriptionsResourceId =
-                        R.array.incoming_call_widget_video_without_sms_direction_descriptions;
-                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
-                break;
-            case TARGET_SET_FOR_VIDEO_WITH_SMS:
-                targetResourceId = R.array.incoming_call_widget_video_with_sms_targets;
-                targetDescriptionsResourceId =
-                        R.array.incoming_call_widget_video_with_sms_target_descriptions;
-                directionDescriptionsResourceId =
-                        R.array.incoming_call_widget_video_with_sms_direction_descriptions;
-                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
-                break;
-            case TARGET_SET_FOR_VIDEO_ACCEPT_REJECT_REQUEST:
-                targetResourceId =
-                    R.array.incoming_call_widget_video_request_targets;
-                targetDescriptionsResourceId =
-                        R.array.incoming_call_widget_video_request_target_descriptions;
-                directionDescriptionsResourceId = R.array
-                        .incoming_call_widget_video_request_target_direction_descriptions;
-                handleDrawableResourceId = R.drawable.ic_incall_video_handle;
-                break;
-            case TARGET_SET_FOR_AUDIO_WITHOUT_SMS:
-            default:
-                targetResourceId = R.array.incoming_call_widget_audio_without_sms_targets;
-                targetDescriptionsResourceId =
-                        R.array.incoming_call_widget_audio_without_sms_target_descriptions;
-                directionDescriptionsResourceId =
-                        R.array.incoming_call_widget_audio_without_sms_direction_descriptions;
-                handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
-                break;
-        }
-
-        if (targetResourceId != mGlowpad.getTargetResourceId()) {
-            mGlowpad.setTargetResources(targetResourceId);
-            mGlowpad.setTargetDescriptionsResourceId(targetDescriptionsResourceId);
-            mGlowpad.setDirectionDescriptionsResourceId(directionDescriptionsResourceId);
-            mGlowpad.setHandleDrawable(handleDrawableResourceId);
-            mGlowpad.reset(false);
-        }
     }
 
     @Override
@@ -207,9 +101,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                 new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
-                        if (mGlowpad != null) {
-                            mGlowpad.startPing();
-                        }
+                        onMessageDialogCancel();
                         dismissCannedResponsePopup();
                         getPresenter().onDismissDialog();
                     }
@@ -239,7 +131,7 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      * This is safe to call even if the popup is already dismissed, and even if you never called
      * showRespondViaSmsPopup() in the first place.
      */
-    private void dismissCannedResponsePopup() {
+    protected void dismissCannedResponsePopup() {
         if (mCannedResponsePopup != null) {
             mCannedResponsePopup.dismiss();  // safe even if already dismissed
             mCannedResponsePopup = null;
@@ -250,10 +142,10 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
      * Dismiss the custom compose message popup.
      */
     private void dismissCustomMessagePopup() {
-       if (mCustomMessagePopup != null) {
-           mCustomMessagePopup.dismiss();
-           mCustomMessagePopup = null;
-       }
+        if (mCustomMessagePopup != null) {
+            mCustomMessagePopup.dismiss();
+            mCustomMessagePopup = null;
+        }
     }
 
     public void dismissPendingDialogs() {
@@ -280,23 +172,23 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         builder.setCancelable(true).setView(et)
                 .setPositiveButton(R.string.custom_message_send,
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The order is arranged in a way that the popup will be destroyed when the
-                        // InCallActivity is about to finish.
-                        final String textMessage = et.getText().toString().trim();
-                        dismissCustomMessagePopup();
-                        getPresenter().rejectCallWithMessage(textMessage);
-                    }
-                })
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The order is arranged in a way that the popup will be destroyed
+                                // when the InCallActivity is about to finish.
+                                final String textMessage = et.getText().toString().trim();
+                                dismissCustomMessagePopup();
+                                getPresenter().rejectCallWithMessage(textMessage);
+                            }
+                        })
                 .setNegativeButton(R.string.custom_message_cancel,
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismissCustomMessagePopup();
-                        getPresenter().onDismissDialog();
-                    }
-                })
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dismissCustomMessagePopup();
+                                getPresenter().onDismissDialog();
+                            }
+                        })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
@@ -352,23 +244,19 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
         return getActivity();
     }
 
-    @Override
     public void onAnswer(int videoState, Context context) {
         Log.d(this, "onAnswer videoState=" + videoState + " context=" + context);
         getPresenter().onAnswer(videoState, context);
     }
 
-    @Override
     public void onDecline(Context context) {
         getPresenter().onDecline(context);
     }
 
-    @Override
     public void onDeclineUpgradeRequest(Context context) {
         InCallPresenter.getInstance().declineUpgradeRequest(context);
     }
 
-    @Override
     public void onText() {
         getPresenter().onText();
     }
@@ -399,5 +287,21 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
                 getPresenter().rejectCallWithMessage(message);
             }
         }
+    }
+
+    public void onShowAnswerUi(boolean shown) {
+        // Do Nothing
+    }
+
+    public void showTargets(int targetSet) {
+        // Do Nothing
+    }
+
+    public void showTargets(int targetSet, int videoState) {
+        // Do Nothing
+    }
+
+    protected void onMessageDialogCancel() {
+        // Do nothing.
     }
 }
