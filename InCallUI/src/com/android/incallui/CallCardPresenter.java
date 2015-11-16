@@ -608,6 +608,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mPrimaryContactInfo.openingHours);
             getUi().setContactContextContent(mInCallContactInteractions.getListAdapter());
             getUi().showContactContext(mPrimary.getState() != State.INCOMING);
+        } else {
+            getUi().showContactContext(false);
         }
     }
 
