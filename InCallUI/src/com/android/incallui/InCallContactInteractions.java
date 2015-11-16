@@ -142,31 +142,80 @@ public class InCallContactInteractions {
         BusinessContextInfo hoursInfo = new BusinessContextInfo();
         hoursInfo.iconId = R.drawable.ic_schedule_white_24dp;
 
-        boolean isOpen = false;
+        boolean isOpenNow = false;
+        // This variable records which interval the current time is after. 0 denotes none of the
+        // intervals, 1 after the first interval, etc.
+        int afterInterval = 0;
+        // This variable records counts the number of time intervals in today's opening hours.
+        int todaysIntervalCount = 0;
         for (Pair<Calendar, Calendar> hours : openingHours) {
             if (hours.first.compareTo(currentTime) <= 0
                     && currentTime.compareTo(hours.second) < 0) {
                 // If the current time is on or after the opening time and strictly before the
                 // closing time, then this business is open.
-                isOpen = true;
+                isOpenNow = true;
             }
 
-            String openTimeSpan = mContext.getString(R.string.open_time_span,
-                    DateFormat.getTimeFormat(mContext).format(hours.first.getTime()),
-                    DateFormat.getTimeFormat(mContext).format(hours.second.getTime()));
+            if (currentTime.get(Calendar.DAY_OF_YEAR) == hours.first.get(Calendar.DAY_OF_YEAR)) {
+                todaysIntervalCount += 1;
+            }
 
-            if (TextUtils.isEmpty(hoursInfo.detail)) {
-                hoursInfo.detail = openTimeSpan;
-            } else {
-                hoursInfo.detail = mContext.getString(R.string.opening_hours, hoursInfo.detail,
-                        openTimeSpan);
+            if (currentTime.compareTo(hours.second) > 0) {
+                // This assumes that the list of intervals is sorted by time.
+                afterInterval += 1;
             }
         }
 
-        hoursInfo.heading = isOpen ? mContext.getString(R.string.open_now)
+        hoursInfo.heading = isOpenNow ? mContext.getString(R.string.open_now)
                 : mContext.getString(R.string.closed_now);
 
+        /*
+         * The following logic determines what to display in various cases for hours of operation.
+         *
+         * - Display all intervals if open now and number of intervals is <=2.
+         * - Display next closing time if open now and number of intervals is >2.
+         * - Display next opening time if currently closed but opens later today.
+         * - Display last time it closed today if closed now and tomorrow's hours are unknown.
+         * - Display tomorrow's first open time if closed today and tomorrow's hours are known.
+         */
+        if (isOpenNow) {
+            if (todaysIntervalCount == 1) {
+                hoursInfo.detail = getTimeSpanStringForHours(openingHours.get(0));
+            } else if (todaysIntervalCount == 2) {
+                hoursInfo.detail = mContext.getString(R.string.opening_hours,
+                        getTimeSpanStringForHours(openingHours.get(0)),
+                        getTimeSpanStringForHours(openingHours.get(1)));
+            } else {
+                hoursInfo.detail = mContext.getString(R.string.closes_today_at,
+                        getFormattedTimeForCalendar(openingHours.get(afterInterval).second));
+            }
+        } else {
+            // Currently closed
+            final int lastIntervalToday = todaysIntervalCount - 1;
+            if (currentTime.before(openingHours.get(lastIntervalToday).first)) {
+                hoursInfo.detail = mContext.getString(R.string.opens_today_at,
+                        getFormattedTimeForCalendar(openingHours.get(afterInterval).first));
+            } else if (todaysIntervalCount < openingHours.size()){
+                // Assuming all intervals after today's intervals are exhausted are tomorrow's.
+                hoursInfo.detail = mContext.getString(R.string.opens_tomorrow_at,
+                        getFormattedTimeForCalendar(openingHours.get(todaysIntervalCount).first));
+            } else {
+                hoursInfo.detail = mContext.getString(R.string.closed_today_at,
+                        getFormattedTimeForCalendar(openingHours.get(lastIntervalToday).second));
+            }
+        }
+
         return hoursInfo;
+    }
+
+    String getFormattedTimeForCalendar(Calendar calendar) {
+        return DateFormat.getTimeFormat(mContext).format(calendar.getTime());
+    }
+
+    String getTimeSpanStringForHours(Pair<Calendar, Calendar> hours) {
+        return mContext.getString(R.string.open_time_span,
+                getFormattedTimeForCalendar(hours.first),
+                getFormattedTimeForCalendar(hours.second));
     }
 
     /**
