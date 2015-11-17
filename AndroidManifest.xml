@@ -81,7 +81,6 @@
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
-            android:enabled="@*android:bool/config_voice_capable"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
@@ -247,8 +246,7 @@
             android:exported="false"/>
         <!-- end vCard related -->
 
-        <receiver android:name=".calllog.CallLogReceiver"
-            android:enabled="@*android:bool/config_voice_capable">
+        <receiver android:name=".calllog.CallLogReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_VOICEMAIL" />
                 <data
