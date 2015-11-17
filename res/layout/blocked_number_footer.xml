@@ -14,27 +14,24 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:focusable="false">
 
     <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:layout_marginBottom="8dp"
-      android:padding="16dp"
-      android:background="@android:color/white"
-      android:focusable="true">
-
-      <TextView android:id="@+id/blocked_number_footer_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/blocked_number_secondary_text_color"
-        android:textSize="@dimen/blocked_number_primary_text_size"
-        android:text="@string/block_number_footer_message_vvm" />
+        android:orientation="vertical"
+        android:padding="@dimen/blocked_number_container_padding"
+        android:background="@android:color/white"
+        android:focusable="true">
 
+      <TextView android:id="@+id/blocked_number_footer_textview"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@color/blocked_number_secondary_text_color"
+          android:textSize="@dimen/blocked_number_settings_description_text_size"
+          android:text="@string/block_number_footer_message_vvm"/>
     </LinearLayout>
 </LinearLayout>
