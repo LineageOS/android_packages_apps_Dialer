@@ -141,5 +141,5 @@
     <dimen name="business_contact_context_heading_font_size">16sp</dimen>
     <dimen name="business_contact_context_detail_font_size">12sp</dimen>
 
-    <dimen name="contact_context_small_photo_size">80dp</dimen>
+    <dimen name="contact_context_small_photo_size">40dp</dimen>
 </resources>

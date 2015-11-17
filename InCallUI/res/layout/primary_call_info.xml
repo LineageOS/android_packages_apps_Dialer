@@ -106,19 +106,34 @@
 
         </LinearLayout>
 
-        <!-- Name (or the phone number, if we don't have a name to display). -->
-        <com.android.phone.common.widget.ResizingTextTextView
-            xmlns:ex="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/name"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-5dp"
-            android:fontFamily="sans-serif-light"
-            android:textAlignment="viewStart"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="@dimen/call_name_text_size"
-            android:singleLine="true"
-            ex:resizing_text_min_size="@dimen/call_name_text_min_size" />
+            android:layout_height="wrap_content">
+
+            <!-- Name (or the phone number, if we don't have a name to display). -->
+            <com.android.phone.common.widget.ResizingTextTextView
+                xmlns:ex="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:fontFamily="sans-serif-light"
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="@dimen/call_name_text_size"
+                android:singleLine="true"
+                ex:resizing_text_min_size="@dimen/call_name_text_min_size" />
+
+            <!-- Contact photo for primary call info -->
+            <ImageView android:id="@+id/photoSmall"
+                android:layout_width="@dimen/contact_context_small_photo_size"
+                android:layout_height="@dimen/contact_context_small_photo_size"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerCrop"
+                android:importantForAccessibility="no"
+                android:src="@drawable/img_no_image_automirrored" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,16 +161,18 @@
                 android:visibility="gone" />
 
             <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
-            <LinearLayout android:id="@+id/labelAndNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout android:id="@+id/labelAndNumber"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="start">
 
                 <TextView android:id="@+id/label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/incall_call_banner_subtext_color"
                     android:textSize="@dimen/call_label_text_size"
@@ -166,8 +183,9 @@
                 <TextView android:id="@+id/phoneNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="6dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@id/label"
                     android:textAlignment="viewStart"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/incall_call_banner_subtext_color"
@@ -175,19 +193,17 @@
                     android:singleLine="false"
                     android:visibility="gone" />
 
-            </LinearLayout>
+                <TextView android:id="@+id/elapsedTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/incall_call_banner_subtext_color"
+                    android:textSize="@dimen/call_label_text_size"
+                    android:visibility="gone" />
 
-            <!-- Elapsed time indication for a call in progress. -->
-            <TextView android:id="@+id/elapsedTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:textAlignment="viewEnd"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/incall_call_banner_subtext_color"
-                android:textSize="@dimen/call_label_text_size"
-                android:singleLine="true"
-                android:visibility="gone" />
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -203,13 +219,4 @@
             android:visibility="gone" />
 
     </LinearLayout>
-
-    <!-- Contact photo for primary call info -->
-    <ImageView android:id="@+id/photoSmall"
-        android:layout_width="@dimen/contact_context_small_photo_size"
-        android:layout_height="@dimen/contact_context_small_photo_size"
-        android:layout_marginLeft="@dimen/call_banner_side_padding"
-        android:scaleType="centerCrop"
-        android:importantForAccessibility="no"
-        android:src="@drawable/img_no_image_automirrored" />
 </LinearLayout>  <!-- End of call_banner -->
