@@ -526,13 +526,13 @@
     <!-- Confirmation dialog message for blocking a number with visual voicemail active.
          [CHAR LIMIT=NONE] -->
     <string name="block_number_confirmation_message_vvm">
-        Future calls from this number will be blocked and voicemails will be automatically deleted.
+        Calls from this number will be blocked and voicemails will be automatically deleted.
     </string>
 
     <!-- Confirmation dialog message for blocking a number with no visual voicemail.
          [CHAR LIMIT=NONE] -->
     <string name="block_number_confirmation_message_no_vvm">
-         Future calls from this number will be blocked. Voicemails may still reach you.
+        Calls from this number will be blocked, but the caller may still be able to leave you voicemails.
     </string>
 
     <!-- Block number alert dialog button [CHAR LIMIT=32] -->
@@ -898,13 +898,13 @@
     <!-- Footer message of number blocking screen with visual voicemail active.
         [CHAR LIMIT=NONE] -->
     <string name="block_number_footer_message_vvm">
-        Adding a number blocks all future calls and voicemails will be automatically deleted.
+        Calls from these numbers will be blocked and voicemails will be automatically deleted.
     </string>
 
     <!-- Footer message of number blocking screen with no visual voicemail.
          [CHAR LIMIT=NONE] -->
     <string name="block_number_footer_message_no_vvm">
-         Adding a number blocks all future calls. Voicemails may still reach you.
+         Calls from these numbers will be blocked, but they may still be able to leave you voicemails.
     </string>
 
     <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
