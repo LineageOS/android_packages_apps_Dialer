@@ -145,8 +145,10 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接电话"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"语音邮件"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"要屏蔽 <xliff:g id="NUMBER">%1$s</xliff:g> 吗？"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"系统将屏蔽该号码日后的来电，并将自动删除对方发送的语音邮件。"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"系统将屏蔽该号码日后的来电，但对方仍可能会给您发送语音邮件。"</string>
+    <!-- no translation found for block_number_confirmation_message_vvm (5655646611437082611) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_no_vvm (4511900601491718173) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"屏蔽"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"要取消屏蔽 <xliff:g id="NUMBER">%1$s</xliff:g> 吗？"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"系统将不再屏蔽此号码的来电。"</string>
@@ -228,8 +230,10 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"导入失败"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"取消屏蔽号码"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"添加号码"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"添加某个号码后，系统将会屏蔽该号码日后的所有来电，并将自动删除对方发送的语音邮件。"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"添加某个号码后，系统将会屏蔽该号码日后的所有来电，但对方仍可能会给您发送语音邮件。"</string>
+    <!-- no translation found for block_number_footer_message_vvm (5387302253765439712) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_no_vvm (223238617533822381) -->
+    <skip />
     <string name="block_list" msgid="7760188925338078011">"已屏蔽的号码"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> 无效。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> 已被屏蔽。"</string>

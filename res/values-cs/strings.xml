@@ -147,8 +147,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Zmeškané"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Schránka"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokovat číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Budoucí volání z tohoto čísla budou zablokována. Hlasové zprávy budou automaticky smazány."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Budoucí volání z tohoto čísla budou zablokována. Nadále budete moci dostávat hlasové zprávy."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Volání z tohoto čísla budou zablokována. Hlasové zprávy budou automaticky smazány."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Volání z tohoto čísla budou zablokována, avšak volající vám bude moci zanechat hlasovou zprávu."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKOVAT"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Odblokovat číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Příchozí hovory z tohoto čísla již nebudou blokovány."</string>
@@ -232,8 +232,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import se nezdařil."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Zrušit blokování čísla"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Přidat číslo"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Přidáním čísla zablokujete veškerá budoucí volání. Hlasové zprávy budou automaticky smazány."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Přidáním čísla zablokujete budoucí volání. Nadále budete moci dostávat hlasové zprávy."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Volání z těchto čísel budou zablokována. Hlasové zprávy budou automaticky smazány."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Volání z těchto čísel budou zablokována, avšak volající vám budou moci zanechat hlasovou zprávu."</string>
     <string name="block_list" msgid="7760188925338078011">"Blokovaná čísla"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Číslo <xliff:g id="NUMBER">%1$s</xliff:g> je neplatné."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Číslo <xliff:g id="NUMBER">%1$s</xliff:g> je již blokováno."</string>

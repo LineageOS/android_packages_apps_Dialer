@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ボイスメール"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックしますか？"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"今後この番号からの着信をブロックし、ボイスメールを自動的に削除します。"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"今後この番号からの着信をブロックします。ボイスメールは引き続き受信します。"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"この番号からの着信はブロックされますが、発信者は今後もボイスメールを残すことができます。"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ブロック"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>のブロックを解除しますか？"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"この番号からの着信はブロックされなくなります。"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"インポートに失敗しました"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"番号のブロックを解除"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"電話番号を追加"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"番号を追加すると、今後の着信がすべてブロックされ、ボイスメールは自動的に削除されます。"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"番号を追加すると、今後の着信がすべてブロックされます。ボイスメールは引き続き受信します。"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"この番号からの着信はブロックされますが、発信者は今後もボイスメールを残すことができます。"</string>
     <string name="block_list" msgid="7760188925338078011">"ブロックした番号"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g>は無効な番号です。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g>は既にブロックしています。"</string>

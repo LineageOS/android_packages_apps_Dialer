@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"মিসড"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ভয়েসমেল"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"এই নম্বর থেকে আসা ভবিষ্যৎ কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"এই নম্বর থেকে আসা ভবিষ্যৎ কলগুলি অবরোধ করা হবে৷ আপনি এখনও ভয়েসমেলগুলি পাবেন৷"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে, কিন্তু কলার হয়ত এখনও আপনাকে ভয়েসমেলগুলি পাঠাতে পারবে৷"</string>
     <string name="block_number_ok" msgid="770551992296781873">"অবরোধ করুন"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করবেন?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"আপনাকে কল করার জন্য এই নম্বরটি আর অবরুদ্ধ হিসাবে থাকবে না৷"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"আমদানি ব্যর্থ হয়েছে"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"নম্বর অবরোধ মুক্ত করুন"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"একটি নম্বর যোগ করুন"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"কোনো নম্বর যোগ করলে সেটির থেকে আসা সমস্ত ভবিষ্যৎ কলগুলি অবরোধ করবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"কোনো নম্বর যোগ করলে সেটির থেকে আসা সমস্ত ভবিষ্যৎ কলগুলি অবরোধ করবে৷ আপনি এখনও ভয়েসমেলগুলি পাবেন৷"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"এই নম্বরগুলি থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"এই নম্বরগুলি থেকে আসা কলগুলি অবরোধ করা হবে, কিন্তু তারা হয়ত এখনও আপনাকে ভয়েসমেলগুলি পাঠাতে পারবে৷"</string>
     <string name="block_list" msgid="7760188925338078011">"অবরুদ্ধ নম্বরগুলি"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> অবৈধ৷"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ইতিমধ্যেই অববোধ করা রয়েছে৷"</string>

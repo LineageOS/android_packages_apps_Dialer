@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"გამოტოვებული"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ხმოვანი ფოსტა"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"გსურთ, დაბლოკოთ <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ამ ნომრიდან შემოსული ზარები შემდგომში დაიბლოკება, ხოლო ხმოვანი ფოსტა ავტომატურად წაიშლება."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ამ ნომრიდან შემოსული ზარები შემდგომში დაიბლოკება. შეიძლება მაინც მიიღოთ ხმოვანი ფოსტა."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ამ ნომრიდან შემოსული ზარები დაიბლოკება, ხოლო ხმოვანი ფოსტა ავტომატურად წაიშლება."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ამ ნომრიდან შემოსული ზარები დაიბლოკება, თუმცა აბონენტს მაინც შეეძლება თქვენთვის ხმოვანი ფოსტის დატოვება."</string>
     <string name="block_number_ok" msgid="770551992296781873">"დაბლოკვა"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"გსურთ, განბლოკოთ <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ამ ნომრიდან შემომავალი ზარები აღარ დაიბლოკება."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"იმპორტი ვერ მოხერხდა"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ნომრის განბლოკვა"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ნომრის დამატება"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ნომრის დამატების შემთხვევაში, ყველა შემოსული ზარი და მთელი ხმოვანი ფოსტა შემდგომში ავტომატურად წაიშლება."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ნომრის დამატების შემთხვევაში, ყველა შემოსული ზარი შემდგომში დაიბლოკება. შეიძლება მაინც მიიღოთ ხმოვანი ფოსტა."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ამ ნომრებიდან შემოსული ზარები დაიბლოკება, ხოლო ხმოვანი ფოსტა ავტომატურად წაიშლება."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ამ ნომრებიდან შემოსული ზარები დაიბლოკება, თუმცა აბონენტებს მაინც შეეძლებათ თქვენთვის ხმოვანი ფოსტის დატოვება."</string>
     <string name="block_list" msgid="7760188925338078011">"დაბლოკილი ნომრები"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> არასწორია."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> უკვე დაბლოკილია."</string>

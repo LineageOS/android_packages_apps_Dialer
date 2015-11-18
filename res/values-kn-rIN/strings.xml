@@ -146,8 +146,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"ಮಿಸ್ಡ್‌‌ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ಈ ಸಂಖ್ಯೆಯಿಂದ ಭವಿಷ್ಯದ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ಈ ಸಂಖ್ಯೆಗೆ ಭವಿಷ್ಯದ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು. ಧ್ವನಿಮೇಲ್‌ಗಳು ಈಗಲೂ ನಿಮಗೆ ತಲುಪಬಹುದು."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು, ಆದರೆ ಕರೆಮಾಡುವವರು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಈಗಲೂ ನಿಮಗೆ ಕಳುಹಿಸಬಹುದು."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ನಿರ್ಬಂಧಿಸು"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧ ತೆಗೆಯುವುದೇ?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ನಿಮಗೆ ಕರೆ ಮಾಡುವಿಕೆಯ ಈ ಸಂಖ್ಯೆಯನ್ನು ಇನ್ನು ಮುಂದೆ ನಿರ್ಬಂಧಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
@@ -229,8 +229,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ಆಮದು ವಿಫಲವಾಗಿದೆ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ಸಂಖ್ಯೆ ಸೇರಿಸುವ ಮೂಲಕ ಭವಿಷ್ಯದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ. ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ಸಂಖ್ಯೆ ಸೇರಿಸುವ ಮೂಲಕ ಭವಿಷ್ಯದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ. ಧ್ವನಿಮೇಲ್‌ಗಳು ಈಗಲೂ ನಿಮಗೆ ತಲುಪಬಹುದು."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ಈ ಸಂಖ್ಯೆಗಳಿಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ಈ ಸಂಖ್ಯೆಗಳಿಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು, ಆದರೆ ಅವರು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಈಗಲೂ ನಿಮಗೆ ಕಳುಹಿಸಬಹುದು."</string>
     <string name="block_list" msgid="7760188925338078011">"ನಿರ್ಬಂಧಿಸಲಾದ ಸಂಖ್ಯೆಗಳು"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ಅಮಾನ್ಯವಾಗಿದೆ."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ಈಗಾಗಲೇ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ."</string>

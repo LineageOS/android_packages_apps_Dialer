@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"ខកខាន​ទទួល"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"សារ​ជា​សំឡេង"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"រារាំង <xliff:g id="NUMBER">%1$s</xliff:g> ឬ?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ការហៅលើកក្រោយៗចេញពីលេខនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ការហៅលើកក្រោយៗចេញពីលេខនេះនឹងត្រូវបានរារាំង។ សារជាសំឡេងនៅតែអាចឲ្យអ្នកប្រើបានដដែល។"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ការហៅចេញពីលេខនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ការហៅចេញពីលេខនេះនឹងត្រូវបានរារាំង ប៉ុន្តែអ្នកហៅនៅតែអាចទុកសារជាសំឡេងឲ្យអ្នកបាន។"</string>
     <string name="block_number_ok" msgid="770551992296781873">"រារាំង"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ឈប់រារាំង <xliff:g id="NUMBER">%1$s</xliff:g> ឬ?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"លេខនេះនឹងមិនត្រូវបានរារាំងពីការហៅមកអ្នកទៀតទេ"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ការនាំចូលបានបរាជ័យ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ឈប់ទប់ស្កាត់លេខ"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"បន្ថែមលេខ"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ការបន្ថែមលេខនឹងរារាំងការហៅលើក្រោយៗទាំងអស់ ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ការបន្ថែមលេខនឹងរារាំងការហៅលើក្រោយៗទាំងអស់។ សារជាសំឡេងនៅតែអាចឲ្យអ្នកប្រើបានដដែល។"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ការហៅចេញពីលេខទាំងនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ការហៅចេញពីលេខទាំងនេះនឹងត្រូវបានរារាំង ប៉ុន្តែពួកគេនៅតែអាចទុកសារជាសំឡេងឲ្យអ្នកបាន។"</string>
     <string name="block_list" msgid="7760188925338078011">"លេខដែលបានរារាំង"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> មិនត្រឹមត្រូវទេ"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ត្រូវបានទប់ស្កាត់រួចហើយ"</string>

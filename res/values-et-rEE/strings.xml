@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Vastamata"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Kõnepost"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Kas soovite blokeerida numbri <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Tulevased kõned sellelt numbrilt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Tulevased kõned sellelt numbrilt blokeeritakse. Kõnepostisõnumid võivad endiselt teieni jõuda."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Kõned sellelt numbrilt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Kõned sellelt numbrilt blokeeritakse, kuid helistaja saab võib-olla siiski teile kõnepostisõnumeid jätta."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKEERI"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Kas soovite deblokeerida numbri <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Selle numbri jaoks pole teile helistamine enam blokeeritud."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importimine ebaõnnestus"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Numbri deblokeerimine"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Lisa number"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Numbri lisamisel blokeeritakse kõik tulevased kõned ja kõnepostisõnumid kustutatakse automaatselt."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Numbri lisamisel blokeeritakse kõik tulevased kõned. Kõnepostisõnumid võivad endiselt teieni jõuda."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Kõned nendelt numbritelt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Kõned nendelt numbritelt blokeeritakse, kuid helistajad saavad võib-olla siiski teile kõnepostisõnumeid jätta."</string>
     <string name="block_list" msgid="7760188925338078011">"Blokeeritud numbrid"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> on kehtetu."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> on juba blokeeritud."</string>
