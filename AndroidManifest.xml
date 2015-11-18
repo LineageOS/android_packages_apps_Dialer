@@ -59,6 +59,9 @@
     <uses-permission android:name="android.permission.STOP_APP_SWITCHES" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="com.qualcomm.permission.USE_PHONE_SERVICE" />
+    <!-- Required to cancel notifications from non-primary users through
+         TelecommManager which is a singleton service -->
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
 
     <application
         android:name="DialerApplication"
