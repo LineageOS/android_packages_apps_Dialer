@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Аваагүй"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Дуут шуудан"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>-г блоклох уу?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Энэ дугаараас цаашид ирэх дуудлагыг блоклох бөгөөд дуут шуудан автоматаар устах болно."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Энэ дугаараас цаашид ирэх дуудлагыг блоклосон. Харин танд дуут шуудан илгээх боломжтой."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Энэ дугаараас ирэх дуудлагыг блоклох бөгөөд дуут шуудан автоматаар устах болно."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Энэ дугаараас ирэх дуудлагыг блоклосон, гэхдээ залгагч танд дуут шуудан илгээх боломжтой."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БЛОКЛОХ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>-г блокоос гаргах уу?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Энэ дугаараас танд ирэх цаашдын дуудлагыг блоклохгүй."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Импортолж чадсангүй"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Дугаар блокноос гаргах"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Дугаар нэмэх"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Блоклох дугаар нэмснээр ирээдүйд ирэх дуудлага, дуут шууданг автоматаар устгана."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Дугаар нэмснээр цаашид ирэх бүх дуудлагыг блоклоно. Харин танд дуут шуудан илгээх боломжтой."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Эдгээр дугаараас ирэх дуудлагыг блоклох бөгөөд дуут шууданг автоматаар устгана."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Эдгээр дугаараас ирэх дуудлагыг блоклох бөгөөд харин танд дуут шуудан илгээх боломжтой."</string>
     <string name="block_list" msgid="7760188925338078011">"Блоклосон дугаар"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> хүчингүй байна."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g>-г аль хэдийн блоклосон байна."</string>

@@ -147,8 +147,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропущені"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Голосова пошта"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Заблокувати номер <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Виклики з цього номера блокуватимуться, а голосові повідомлення автоматично видалятимуться."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Виклики з цього номера блокуватимуться, але ви можете отримувати голосові повідомлення."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Виклики з цього номера блокуватимуться, а голосові повідомлення автоматично видалятимуться."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Виклики з цього номера блокуватимуться, але абонент зможе залишати голосові повідомлення."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БЛОКУВАТИ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Розблокувати номер <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Дзвінки з цього номера більше не блокуватимуться."</string>
@@ -232,8 +232,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Не вдалось імпортувати"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Розблокувати номер"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Додати номер"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Якщо додати номер, усі виклики з нього блокуватимуться, а голосові повідомлення автоматично видалятимуться."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Якщо додати номер, усі виклики з нього блокуватимуться, але ви можете отримувати голосові повідомлення."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Виклики з цих номерів блокуватимуться, а голосові повідомлення автоматично видалятимуться."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Виклики з цих номерів блокуватимуться, але абоненти зможуть залишати голосові повідомлення."</string>
     <string name="block_list" msgid="7760188925338078011">"Заблоковані номери"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Номер <xliff:g id="NUMBER">%1$s</xliff:g> недісний."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Номер <xliff:g id="NUMBER">%1$s</xliff:g> уже заблоковано."</string>

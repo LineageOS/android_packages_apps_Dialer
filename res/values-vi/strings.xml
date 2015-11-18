@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Bị nhỡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Thư thoại"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Chặn <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Các cuộc gọi trong tương lai từ số này đều sẽ bị chặn và thư thoại sẽ tự động bị xóa."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Các cuộc gọi trong tương lai từ số này đều sẽ bị chặn. Bạn vẫn có thể nhận được thư thoại."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Các cuộc gọi từ số này sẽ bị chặn và thư thoại sẽ tự động bị xóa."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Các cuộc gọi từ số này sẽ bị chặn nhưng người gọi vẫn có thể để lại thư thoại cho bạn."</string>
     <string name="block_number_ok" msgid="770551992296781873">"CHẶN"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Bỏ chặn <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Số này sẽ không còn bị chặn gọi cho bạn nữa."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Nhập không thành công"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Bỏ chặn số"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Thêm số"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Thêm số sẽ chặn tất cả cuộc gọi trong tương lai và thư thoại sẽ tự động bị xóa."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Thêm số sẽ chặn tất cả cuộc gọi trong tương lai. Bạn vẫn có thể nhận được thư thoại."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Cuộc gọi từ các số này sẽ bị chặn và thư thoại sẽ tự động bị xóa."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Cuộc gọi từ các số này sẽ bị chặn nhưng họ vẫn có thể để lại thư thoại cho bạn."</string>
     <string name="block_list" msgid="7760188925338078011">"Số bị chặn"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> không hợp lệ."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> đã bị chặn."</string>

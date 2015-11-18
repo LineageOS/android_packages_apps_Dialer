@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Galduak"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Erantzungailuko deiak"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> blokeatu nahi duzu?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Aurrerantzean zenbaki honetatik egiten diren deiak blokeatu egingo dira, eta ahots-mezuak automatikoki ezabatuko dira."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Aurrerantzean zenbaki honetatik egiten diren deiak blokeatu egingo dira. Hala ere, baliteke ahots-mezuak jasotzen jarraitzea."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Zenbaki honetatik jasotzen diren deiak blokeatu egingo dira, eta mezuak automatikoki ezabatuko dira erantzungailutik."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Zenbaki honetatik jasotzen diren deiak blokeatu egingo dira, baina deitzaileak mezuak utzi ahal izango dizkizu erantzungailuan."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKEATU"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> desblokeatu nahi duzu?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Aurrerantzean, zenbakia ez da blokeatuta egongo eta zuri deitzeko gai izango da."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ezin izan da inportatu"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desblokeatu zenbakia"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Gehitu zenbakia"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Zenbakia gehitzen baduzu, aurrerantzean hartatik egiten diren deiak blokeatu egingo dira eta ahots-mezuak automatikoki ezabatuko dira."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Zenbakia gehitzen baduzu, aurrerantzean hartatik egiten diren deiak blokeatu egingo dira. Hala ere, baliteke ahots-mezuak jasotzen jarraitzea."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Zenbaki hauetatik jasotzen diren deiak blokeatu egingo dira, eta mezuak automatikoki ezabatuko dira erantzungailutik."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Zenbaki hauetatik jasotzen diren deiak blokeatu egingo dira, baina deitzaileek mezuak utzi ahal izango dizkizute erantzungailuan."</string>
     <string name="block_list" msgid="7760188925338078011">"Blokeatutako zenbakiak"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> zenbakiak ez du balio."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> blokeatuta dago dagoeneko."</string>

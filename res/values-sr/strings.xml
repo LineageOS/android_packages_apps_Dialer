@@ -146,8 +146,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропуштени"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Говорна пошта"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Желите ли да блокирате <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Будући позиви са овог броја ће бити блокирани и поруке говорне поште ће аутоматски бити брисане."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Будући позиви са овог броја ће бити блокирани. Поруке говорне поште ће вам вероватно ипак стизати."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Позиви са овог броја ће бити блокирани и поруке говорне поште ће се аутоматски брисати."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Позиви са овог броја ће бити блокирани, али позивалац и даље може да вам оставља поруке говорне поште."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БЛОКИРАЈ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Желите ли да деблокирате <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Деблокираћемо овај број и моћи ће да вам упућује позиве."</string>
@@ -230,8 +230,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Увоз није успео"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Деблокирај број"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Додај број"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Ако додате број, блокираћете све будуће позиве са њега и поруке говорне поште ће аутоматски бити брисане."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Ако додате број, блокираћете све будуће позиве са њега. Поруке говорне поште ће вам вероватно ипак стизати."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Позиви са ових бројева ће бити блокирани и поруке говорне поште ће се аутоматски брисати."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Позиви са ових бројева ће бити блокирани, али позиваоци са ових бројева ће и даље моћи да вам остављају поруке говорне поште."</string>
     <string name="block_list" msgid="7760188925338078011">"Блокирани бројеви"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> је неважећи."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> је већ блокиран."</string>

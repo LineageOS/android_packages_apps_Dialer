@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Não atendidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Corr. Voz"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Pretende bloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"As futuras chamadas a partir deste número serão bloqueadas e as mensagens de correio de voz serão automaticamente eliminadas."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"As futuras chamadas a partir deste número serão bloqueadas. Poderá continuar a receber mensagens de correio de voz."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"As chamadas a partir deste número serão bloqueadas e as mensagens de correio de voz serão automaticamente eliminadas."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"As chamadas a partir deste número serão bloqueadas, mas o autor da chamada poderá deixar-lhe mensagens de correio de voz."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOQUEAR"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Pretende desbloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Este número deixará de estar bloqueado e poderá telefonar para si."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Falha ao importar"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloquear número"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Adicionar número"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Adicionar um número bloqueia todas as futuras chamadas e as mensagens de correio de voz são automaticamente eliminadas."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Adicionar um número bloqueia todas as futuras chamadas. Poderá continuar a receber mensagens de correio de voz."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"As chamadas a partir destes números serão bloqueadas e as mensagens de correio de voz serão automaticamente eliminadas."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"As chamadas a partir destes números serão bloqueadas, mas os respetivos autores poderão deixar-lhe mensagens de correio de voz."</string>
     <string name="block_list" msgid="7760188925338078011">"Números bloqueados"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> é inválido."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> já está bloqueado."</string>

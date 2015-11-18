@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ຂໍ້ຄວາມສຽງ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"ບ​ລັອກ <xliff:g id="NUMBER">%1$s</xliff:g> ບໍ?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ສາຍ​ໂທ​ໃນອະນາຄົດ​ຈາກ​ເບີ​ໂທ​ນີ້​ຈະ​ຖືກບ​ລັອກໄວ້ ແລະ ຂໍ້​ຄວາມ​ສຽງຈະ​ຖືກ​ລຶບ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ສາຍ​ໂທ​ໃນອະນາຄົດ​ຈາກ​ເບີ​ໂທ​ນີ້​ຈະ​ຖືກບ​ລັອກໄວ້. ຂໍ້​ຄວາມ​ສຽງ​ຍັງ​ອາດ​ຈະ​ໄປເຖິງທ່ານ​ໄດ້​ຢູ່."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ການໂທຈາກເບີໂທນີ້ຈະຖືກບລັອກໄວ້ ແລະຂໍ້ຄວາມສຽງຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ການໂທຈາກເບີນີ້ຈະຖືກບລັອກໄວ້, ແຕ່ຜູ່ໂທອາດຈະຍັງສາມາດຝາກຂໍ້ຄວາມສຽງໃຫ້ທ່ານໄດ້."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ບລັອກ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ປົດ​ບ​ລັອກ <xliff:g id="NUMBER">%1$s</xliff:g> ບ​ໍ?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ເບີ​ນີ້​ຈະ​ບໍ່​ຖືກບ​ລັອກ​ຈາກ​ການ​ໂທ​ຫາ​ທ່ານ​ອີກ​ຕໍ່​ໄປ."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ນຳ​ເຂົ້າ​ລົ້ມ​ເຫລວ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ປົດ​ບ​ລັອກ​ໝາຍ​ເລກ"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ເພີ່ມໝາຍເລກ"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ການ​ເພີ່ມ​ເບີ​ຈະ​ບ​ລັອກສາຍ​ໂທ​ໃນອະນາຄົດ​. ຂໍ້​ຄວາມ​ສຽງຈະ​ຖືກ​ລຶບ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ການ​ເພີ່ມ​ເບີ​ຈະ​ບ​ລັອກສາຍ​ໂທ​ໃນອະນາຄົດ​. ຂໍ້​ຄວາມ​ສຽງ​ຍັງ​ອາດ​ຈະ​ໄປເຖິງທ່ານ​ໄດ້​ຢູ່."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ການໂທຈາກເບີໂທເຫຼົ່ານີ້ຈະຖືກບລັອກໄວ້ ແລະຂໍ້ຄວາມສຽງຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ການໂທຈາກເບີໂທເຫຼົ່ານີ້ຈະຖືກບລັອກໄວ້, ແຕ່ພວກເຂົາອາດຈະຍັງສາມາດຝາກຂໍ້ຄວາມສຽງໃຫ້ທ່ານໄດ້."</string>
     <string name="block_list" msgid="7760188925338078011">"ໝາຍເລກ​ທີ່ບລັອກ​ແລ້ວ"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ບໍ່ຖືກຕ້ອງ."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ຖືກ​ບ​ລັອກ​ແລ້ວ."</string>

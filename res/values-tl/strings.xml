@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Di nasagot"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Gusto mo bang i-block ang <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Iba-block ang mga tawag sa hinaharap mula sa numerong ito at awtomatikong ide-delete ang mga voicemail."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Iba-block ang mga tawag sa hinaharap mula sa numerong ito. Maaari ka pa ring makatanggap ng mga voicemail."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Iba-block ang mga tawag mula sa numerong ito at awtomatikong ide-delete ang mga voicemail."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Iba-block ang mga tawag mula sa numerong ito, ngunit makakapag-iwan pa rin sa iyo ng mga voicemail ang tumatawag."</string>
     <string name="block_number_ok" msgid="770551992296781873">"I-BLOCK"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Gusto mo bang alisin sa pagkaka-block ang <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Maaalis na sa pagkaka-block ang numerong ito at maaari ka na nitong matawagan."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Hindi nakapag-import"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Alisin sa pagkaka-block ang numero"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Magdagdag ng numero"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Kapag nagdagdag ng numero, maba-block ang lahat ng tawag sa hinaharap at awtomatikong ide-delete ang mga voicemail."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Kapag nagdagdag ng numero, maba-block ang lahat ng tawag sa hinaharap. Maaari ka pa ring makatanggap ng mga voicemail."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Iba-block ang mga tawag mula sa mga numerong ito at awtomatikong ide-delete ang mga voicemail."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Iba-block ang mga tawag mula sa numerong ito, ngunit makakapag-iwan pa rin sila sa iyo ng mga voicemail."</string>
     <string name="block_list" msgid="7760188925338078011">"Mga naka-block na numero"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Hindi wasto ang <xliff:g id="NUMBER">%1$s</xliff:g>."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Naka-block na ang <xliff:g id="NUMBER">%1$s</xliff:g>"</string>

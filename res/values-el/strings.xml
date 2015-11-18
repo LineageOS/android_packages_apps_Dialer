@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Αναπάντητες"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Φωνητικό μήνυμα"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Να αποκλειστεί ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g>;"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Θα αποκλειστούν οι μελλοντικές κλήσεις από αυτόν τον αριθμό, ενώ τα μηνύματα αυτόματου τηλεφωνητή θα διαγραφούν αυτόματα."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Θα αποκλειστούν οι μελλοντικές κλήσεις από αυτόν τον αριθμό. Θα εξακολουθήσετε να λαμβάνετε μηνύματα αυτόματου τηλεφωνητή."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Οι μελλοντικές κλήσεις από αυτόν τον αριθμό θα αποκλείονται και τα μηνύματα στον αυτόματο τηλεφωνητή θα διαγράφονται αυτόματα."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Οι κλήσεις από αυτόν τον αριθμό θα αποκλείονται, αλλά ο καλών ενδέχεται να μπορεί να αφήνει μηνύματα στον αυτόματο τηλεφωνητή."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ΑΠΟΚΛΕΙΣΜΟΣ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Να καταργηθεί ο αποκλεισμός του αριθμού <xliff:g id="NUMBER">%1$s</xliff:g>;"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Δεν θα αποκλείονται πλέον οι κλήσεις από αυτό τον αριθμό σε εσάς."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Αποτυχία εισαγωγής"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Κατάργηση αποκλεισμού αριθμού"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Προσθήκη αριθμού"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Με την προσθήκη ενός αριθμού, θα αποκλειστούν όλες οι μελλοντικές κλήσεις, ενώ τα μηνύματα αυτόματου τηλεφωνητή θα διαγραφούν."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Με την προσθήκη ενός αριθμού, θα αποκλειστούν όλες οι μελλοντικές κλήσεις. Θα εξακολουθήσετε να λαμβάνετε μηνύματα αυτόματου τηλεφωνητή."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Οι κλήσεις από αυτούς τους αριθμούς θα αποκλείονται και τα μηνύματα στον αυτόματο τηλεφωνητή θα διαγράφονται αυτόματα."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Οι κλήσεις από αυτούς τους αριθμούς θα αποκλείονται, αλλά ενδέχεται να λαμβάνετε από αυτούς μηνύματα στον αυτόματο τηλεφωνητή."</string>
     <string name="block_list" msgid="7760188925338078011">"Αποκλεισμένοι αριθμοί"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g> δεν είναι έγκυρος."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g> αποκλείστηκε ήδη."</string>

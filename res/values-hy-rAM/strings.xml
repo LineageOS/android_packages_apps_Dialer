@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Բաց թողնված"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Ձայնափոստ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Արգելափակե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Այս համարից զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Այս համարից զանգերը կարգելափակվեն: Սակայն դուք կկարողանաք ստանալ ձայնային փոստի հաղորդագրություններ:"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Այս համարից զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Այս համարից զանգերը կարգելափակվեն, սակայն զանգողը կկարողանա ձեզ համար ձայնային փոստի հաղորդագրություններ թողնել:"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ԱՐԳԵԼԱՓԱԿԵԼ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Արգելաբացե՞լ <xliff:g id="NUMBER">%1$s</xliff:g> համարը:"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Այս համարից զանգերն այլևս չեն արգելափակվի:"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ներմուծումը չհաջողվեց"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Արգելաբացել համարը"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Ավելացնել համար"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Եթե ավելացնեք համարը, դրա զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Եթե ավելացնեք համարը, դրա զանգերը կարգելափակվեն: Սակայն դուք կկարողանաք ստանալ ձայնային փոստի հաղորդագրություններ:"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Այս համարներից զանգերը կարգելափակվեն, իսկ ձայնային փոստի հաղորդագրություններն ավտոմատ կերպով կջնջվեն:"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Այս համարներից զանգերը կարգելափակվեն, սակայն նրանք կկարողանան ձեզ համար ձայնային փոստի հաղորդագրություններ թողնել:"</string>
     <string name="block_list" msgid="7760188925338078011">"Արգելափակված համարներ"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը սխալ է:"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> համարն արդեն արգելափակված է:"</string>

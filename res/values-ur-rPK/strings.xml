@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"چھوٹی ہوئی"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"صوتی میل"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> مسدود کریں؟"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"اس نمبر سے مستقبل میں کالز مسدود ہونگی اور صوتی میلز خودبخزد جذف ہو جائیں گی۔"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"اس نمبر سے مستقبل میں کالز مسدود ہونگی۔ صوتی میلز ممکن ہے اب بھی آپ تک پہنچ جائیں۔"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"اس نمبر سے کالز مسدود ہوجائیں گی اور صوتی میلز خودبخزد جذف ہو جائیں گی۔"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"اس نمبر سے کالز مسدود ہو جائیں گی گی لیکن ممکن ہے کالر پھر بھی آپ کیلئے صوتی میلز چھوڑ پائے۔"</string>
     <string name="block_number_ok" msgid="770551992296781873">"مسدود کریں"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> غیر مسدود کریں؟"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"اس نمبر پر سے آپ کو کال کرنا مزید مسدود نہیں رہے گا۔"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"درآمد کرنا ناکام ہوگیا"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"نمبر غیر مسدود کریں"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"نمبر شامل کریں"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"نمبر شامل کرنے سے مستقبل کی ساری کالز مسدود ہو جاتی ہیں اور صوتی میلز خودبخود حذف ہو جائیں گی۔"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"نمبر شامل کرنے سے مستقبل کی ساری کالز مسدود ہو جاتی ہیں۔ صوتی میلز ممکن ہے اب بھی آپ تک پہنچ جائیں۔"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ان نمبرز سے کالز مسدود ہوجائیں گی اور صوتی میلز خودبخود جذف ہو جائیں گی۔"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ان نمبرز سے کالز مسدود ہو جائیں گی گی لیکن ممکن ہے وہ پھر بھی آپ کیلئے صوتی میلز چھوڑ پائیں۔"</string>
     <string name="block_list" msgid="7760188925338078011">"مسدود کردہ نمبرز"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> غلط ہے۔"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> پہلے ہی مسدود ہے۔"</string>

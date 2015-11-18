@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"മിസ്‌ഡ്"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"വോയ്‌സ്‌മെയിൽ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്യണോ?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ഈ നമ്പറിൽ നിന്നുള്ള ഭാവിയിലെ കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ഈ നമ്പറിൽ നിന്നുള്ള ഭാവിയിലെ കോളുകൾ ബ്ലോക്കുചെയ്യും. അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്മെയിലുകൾ സ്വീകരിക്കാനായേക്കാം."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ഈ നമ്പറിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ഈ നമ്പറിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, എന്നാൽ വിളിക്കുന്നയാൾക്ക് അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്‌മെയിലുകൾ അയയ്ക്കാൻ കഴിഞ്ഞേക്കാം."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ബ്ലോക്കുചെയ്യുക"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> അൺബ്ലോക്കുചെയ്യണോ?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"നിങ്ങളെ വിളിക്കുന്നതിൽ നിന്ന് ഈ നമ്പർ തുടർന്നങ്ങോട്ട് ബ്ലോക്കുചെയ്യപ്പെടില്ല."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ഇമ്പോർട്ടുചെയ്യൽ പരാജയപ്പെട്ടു"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"നമ്പർ ചേർക്കുക"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ഒരു നമ്പർ ചേർത്താൽ ഭാവിയിലെ എല്ലാ കോളുകളും ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ഒരു നമ്പർ ചേർത്താൽ ഭാവിയിലെ എല്ലാ കോളുകളും ബ്ലോക്കുചെയ്യും. അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്മെയിലുകൾ സ്വീകരിക്കാനായേക്കാം."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ഈ നമ്പറുകളിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ഈ നമ്പറുകളിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, എന്നാൽ വിളിക്കുന്നവർക്ക് അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്‌മെയിലുകൾ അയയ്ക്കാൻ കഴിഞ്ഞേക്കാം."</string>
     <string name="block_list" msgid="7760188925338078011">"ബ്ലോക്കുചെയ്ത നമ്പറുകൾ"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> അസാധുവാണ്."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"ഇതിനകം തന്നെ <xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്തിരിക്കുന്നു"</string>

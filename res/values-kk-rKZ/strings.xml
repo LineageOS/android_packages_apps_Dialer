@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Қабылданбаған"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Дауыстық хабар"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеу керек пе?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Осы нөмірден болашақ қоңыраулар бөгеледі және дауыстық хабарлар автоматты түрде жойылады."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Осы нөмірден болашақ қоңыраулар бөгеледі. Дауыстық хабарлар сізге жете беруі мүмкін."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Осы нөмірден болашақ қоңыраулар бөгеледі және дауыстық хабарлар автоматты түрде жойылады."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Осы нөмірден қоңыраулар бөгеледі, бірақ қоңырау шалушы әлі де сізге дауыстық хабарлар қалдыра алуы мүмкін."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БӨГЕУ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеуден шығару керек пе?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Бұл нөмірдің сізге қоңырау соғуы енді бөгелмейді."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Импорттау сәтсіз аяқталды"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Нөмірді бөгеуден шығару"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Нөмір қосу"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Нөмірді қосу барлық болашақ қоңырауларды бөгейді және дауыстық хабарлар автоматты түрде жойылады."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Нөмірді қосу барлық болашақ қоңырауларды бөгейді. Дауыстық хабарлар сізге жете беруі мүмкін."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Осы нөмірлерден қоңыраулар бөгеледі және дауыстық хабарлар автоматты түрде жойылады."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Осы нөмірлерден қоңыраулар бөгеледі, бірақ олар әлі де сізге дауыстық хабарлар қалдыра алуы мүмкін."</string>
     <string name="block_list" msgid="7760188925338078011">"Бөгелген нөмірлер"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> жарамсыз."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеліп қойылған."</string>

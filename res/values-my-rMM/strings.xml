@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"မကိုင်မိလိုက်သော"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"အသံစာ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>ကို ပိတ်ဆို့မလား။"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ဤနံပါတ်မှ ခေါ်ဆိုမှုများကို အနာဂတ်တွင် ပိတ်ဆို့သွားမည်ဖြစ်ပြီး အသံစာများကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ဤနံပါတ်မှ ခေါ်ဆိုမှုများကို အနာဂတ်တွင် ပိတ်ဆို့သွားပါမည်။ အသံစာကတော့ သင့်ထံရောက်ပါမည်။"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ဤနံပါတ်မှခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်မည်ဖြစ်ပြီး အသံမေးလ်များကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ဤနံပါတ်မှ ခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်ပါမည်၊ သို့သော် ၎င်းတို့သည် သင့်ကို အသံမေးလ်ချန်ခဲ့နိုင်ပါသည်။"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ပိတ်ဆို့ပါ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> အား ပိတ်ဆို့မှု ဖယ်ရှားလိုက်ရမလား။"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ဤနံပါတ်ကို သင့်အား ခေါ်ဆိုမရအောင် မပိတ်ဆို့တော့ပါ။"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"တင်သွင်းမှု မအောင်မြင်ပါ"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"နံပါတ်ကို ဖွင့်မည်"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"နံပါတ် ထည့်သွင်းပါ"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"နံပါတ်တစ်ခုကို ပေါင်းထည့်ခြင်းအားဖြင့် ခေါ်ဆိုမှုများကို အနာဂတ်တွင် ပိတ်ဆို့သွားမည်ဖြစ်ပြီး အသံစာများကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"နံပါတ်တစ်ခုကို ပေါင်းထည့်ခြင်းအားဖြင့် ခေါ်ဆိုမှုများကို အနာဂတ်တွင် ပိတ်ဆို့သွားပါမည်။ အသံစာကတော့ သင့်ထံရောက်ပါမည်။"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ဤနံပါတ်များမှ ခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်မည်ဖြစ်ပြီး အသံမေးလ်များကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ဤနံပါတ်များမှ ခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်ပါမည်၊ သို့သော် ၎င်းတို့သည် သင့်ကို အသံမေးလ်ချန်ခဲ့နိုင်ပါသည်။"</string>
     <string name="block_list" msgid="7760188925338078011">"ပိတ်ထားသည့် နံပါတ်များ"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> သည်တရားမဝင်ပါ။"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> အားပိတ်ဆို့ထားပြီးပါပြီ။"</string>
