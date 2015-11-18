@@ -178,6 +178,10 @@
     <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
     <string name="open_time_span" msgid="6709726401179550381">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
     <string name="opening_hours" msgid="8524931350345922176">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="9168271983241323946">"Aukeaa huomenna kello <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="9011139983701379907">"Aukeaa tänään kello <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2623384032475495193">"Sulkeutuu tänään kello <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="324294933330883529">"Sulkeutui tänään kello <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="6439301193613349163">"Auki nyt"</string>
     <string name="closed_now" msgid="9175774453982778909">"Suljettu nyt"</string>
 </resources>

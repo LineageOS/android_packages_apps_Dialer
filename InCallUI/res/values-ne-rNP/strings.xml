@@ -178,6 +178,14 @@
     <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
     <string name="open_time_span" msgid="6709726401179550381">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
     <string name="opening_hours" msgid="8524931350345922176">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <!-- no translation found for opens_tomorrow_at (9168271983241323946) -->
+    <skip />
+    <!-- no translation found for opens_today_at (9011139983701379907) -->
+    <skip />
+    <!-- no translation found for closes_today_at (2623384032475495193) -->
+    <skip />
+    <!-- no translation found for closed_today_at (324294933330883529) -->
+    <skip />
     <string name="open_now" msgid="6439301193613349163">"अहिले खुला छ"</string>
     <string name="closed_now" msgid="9175774453982778909">"अब बन्द भयो"</string>
 </resources>
