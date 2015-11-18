@@ -274,6 +274,11 @@ public class DialpadFragment extends Fragment
     }
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         mWasEmptyBeforeTextChange = TextUtils.isEmpty(s);
     }
