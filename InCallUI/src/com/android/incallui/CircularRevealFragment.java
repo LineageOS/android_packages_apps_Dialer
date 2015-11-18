@@ -127,16 +127,18 @@ public class CircularRevealFragment extends Fragment {
                     vto.removeOnPreDrawListener(this);
                 }
                 final Animator animator = getRevealAnimator(mTouchPoint);
-                animator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setClipToOutline(false);
-                        if (mListener != null) {
-                            mListener.onCircularRevealComplete(getFragmentManager());
+                if (animator != null) {
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            view.setClipToOutline(false);
+                            if (mListener != null) {
+                                mListener.onCircularRevealComplete(getFragmentManager());
+                            }
                         }
-                    }
-                });
-                animator.start();
+                    });
+                    animator.start();
+                }
                 return false;
             }
         });
@@ -144,6 +146,9 @@ public class CircularRevealFragment extends Fragment {
 
     private Animator getRevealAnimator(Point touchPoint) {
         final Activity activity = getActivity();
+        if (activity == null) {
+            return null;
+        }
         final View view  = activity.getWindow().getDecorView();
         final Display display = activity.getWindowManager().getDefaultDisplay();
         final Point size = new Point();
