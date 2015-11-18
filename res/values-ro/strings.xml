@@ -146,8 +146,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nepreluate"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mesagerie vocală"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blocați <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Apelurile ulterioare de la acest număr vor fi blocate, iar mesajele vocale vor fi șterse automat."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Apelurile ulterioare de la acest număr vor fi blocate. Este posibil să primiți în continuare mesajele vocale."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Apelurile de la acest număr vor fi blocate, iar mesajele vocale vor fi șterse automat."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Apelurile de la acest număr vor fi blocate, dar apelantul va putea totuși să vă lase mesaje vocale."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOCAȚI"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Deblocați <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Acest număr nu va mai fi blocat și va putea să vă apeleze."</string>
@@ -230,8 +230,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importul nu a reușit"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Deblocați numărul"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Adăugați un număr"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Dacă adăugați un număr, toate apelurile ulterioare de la acesta vor fi blocate, iar mesajele vocale vor fi șterse automat."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Dacă adăugați un număr, toate apelurile ulterioare de la acesta vor fi blocate. Este posibil să primiți în continuare mesajele vocale."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Apelurile de la aceste numere vor fi blocate, iar mesajele vocale vor fi șterse automat."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Apelurile de la aceste numere vor fi blocate, dar apelanții vor putea totuși să vă lase mesaje vocale."</string>
     <string name="block_list" msgid="7760188925338078011">"Numere blocate"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> nu este valid."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> este deja blocat."</string>

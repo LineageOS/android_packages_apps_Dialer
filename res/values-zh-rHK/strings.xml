@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"留言信箱"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"要封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"日後將會封鎖這個號碼的來電，而留言將會自動刪除。"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"日後將會封鎖這個號碼的來電，但來電仍可能會轉駁至留言信箱。"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"將會封鎖這個號碼的來電，而留言將會自動刪除。"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"將會封鎖這個號碼的來電，但來電可能會轉駁至留言信箱。"</string>
     <string name="block_number_ok" msgid="770551992296781873">"封鎖"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"要解除封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"此號碼的來電封鎖將會解除。"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"匯入失敗"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"解除封鎖號碼"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"新增電話號碼"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"新增號碼會封鎖日後的所有來電，而留言將會自動刪除。"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"新增號碼會封鎖日後的所有來電，但來電仍可能會轉駁至留言信箱。"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"將會封鎖這些號碼的來電，而留言將會自動刪除。"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"將會封鎖這些號碼的來電，但來電可能會轉駁至留言信箱。"</string>
     <string name="block_list" msgid="7760188925338078011">"已封鎖的號碼"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> 無效。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"已封鎖 <xliff:g id="NUMBER">%1$s</xliff:g>。"</string>

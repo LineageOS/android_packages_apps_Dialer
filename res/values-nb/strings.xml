@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ubesvart"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Talemeldinger"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Vil du blokkere <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Fremtidige anrop fra dette nummeret blir blokkert, og talepost blir automatisk slettet."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Fremtidige anrop fra dette nummeret blir blokkert. Talepost kan likevel mottas."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Anrop fra dette nummeret blokkeres, og talepost blir automatisk slettet."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Anrop fra dette nummeret blokkeres, men den som ringer kan fortsatt legge igjen beskjeder i talepostkassen din."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKKÉR"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Vil du oppheve blokkeringen av <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Anrop fra dette nummeret blokkeres ikke lenger."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importeringen mislyktes"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Opphev blokkeringen av nummeret"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Legg til nummer"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Når du legger til et nummer, blokkeres alle fremtidige anrop og talepost blir automatisk slettet."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Når du legger til et nummer, blokkeres alle fremtidige anrop. Talepost kan likevel mottas."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Anrop fra disse numrene blokkeres, og talepost blir automatisk slettet."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Anrop fra dette nummeret blokkeres, men du kan fortsatt motta talepost."</string>
     <string name="block_list" msgid="7760188925338078011">"Blokkerte telefonnumre"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> er ugyldig."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> er allerede blokkert."</string>

@@ -147,8 +147,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Neodgovorjeni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Odzivnik"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Želite blokirati številko <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Prihodnji klici s te številke bodo blokirani in sporočila v odzivniku bodo samodejno izbrisana."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Prihodnji klici s te številke bodo blokirani. Sporočila v odzivniku vas še vedno lahko dosežejo."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Klici s te številke bodo blokirani in sporočila v odzivniku bodo samodejno izbrisana."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Klici s te številke bodo blokirani, klicatelj pa bo morda še vedno lahko pustil sporočila v odzivniku."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKIRAJ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Želite odblokirati številko <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Ta številka ne bo več blokirana in vas bo z nje mogoče klicati."</string>
@@ -232,8 +232,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Uvoz ni uspel"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Odblokiranje telefonske številke"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Dodaj telefonsko številko"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Če dodate številko, bodo blokirani vsi prihodnji klici in sporočila v odzivniku bodo samodejno izbrisana."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Če dodate številko, bodo blokirani vsi prihodnji klici. Sporočila v odzivniku vas še vedno lahko dosežejo."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Klici s teh številk bodo blokirani in sporočila v odzivniku bodo samodejno izbrisana."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Klici s teh številk bodo blokirani, klicatelji pa bodo morda še vedno lahko pustil sporočila v odzivniku."</string>
     <string name="block_list" msgid="7760188925338078011">"Blokirane številke"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Telefonska številka <xliff:g id="NUMBER">%1$s</xliff:g> je neveljavna."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Telefonska številka <xliff:g id="NUMBER">%1$s</xliff:g> je že blokirana."</string>

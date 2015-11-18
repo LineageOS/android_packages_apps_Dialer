@@ -145,8 +145,10 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"छुटेको"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> माथि रोक लगाउने हो?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"यो नम्बर बाट सबै भविष्यका कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचालित रूपमा मेटिनेछन्।"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"यो नम्बरबाट सबै भविष्यका कलहरू रोकिनेछन्। भ्वाइस मेलहरू भने अझै तपाईँकोमा पुग्‍न सक्छ।"</string>
+    <!-- no translation found for block_number_confirmation_message_vvm (5655646611437082611) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_no_vvm (4511900601491718173) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"रोक्नुहोस्"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> माथिको रोक हटाउने हो?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"तपाईँलाई कल गर्नको लागि यो नम्बर माथि अबदेखि रोक लगाइने छैन।"</string>
@@ -228,8 +230,10 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"आयात असफल भयो"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नम्बरमाथिको रोक हटाउनुहोस्"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"नम्बर थप्नुहोस्"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"नम्बर थप्नाले सबै भविष्यका कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचआलित रूपमा मेटिनेछन्।"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"नम्बर थप्नाले सबै भविष्यका कलहरू रोकिनेछन्। भ्वाइसमेलहरू भने अझै तपाईँकोमा पुग्‍न सक्छ।"</string>
+    <!-- no translation found for block_number_footer_message_vvm (5387302253765439712) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_no_vvm (223238617533822381) -->
+    <skip />
     <string name="block_list" msgid="7760188925338078011">"रोकिएका नम्बरहरू"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> अमान्य छ।"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> पहिले नै रोकिएको छ।"</string>

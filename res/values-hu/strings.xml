@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Nem fogadott"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Hangposta"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Letiltja a következő számot: <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"A jövőben le lesznek tiltva az erről a számról érkező hívások, és a rendszer automatikusan törölni fogja a számról érkező hangpostaüzeneteket is."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"A jövőben le lesznek tiltva az erről a számról érkező hívások. Hangpostán keresztül azonban továbbra is elérhetik Önt erről a számról."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Az erről a számról érkező hívásokat a rendszer letiltja, továbbá automatikusan törli az onnan érkező hangpostaüzeneteket is."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Az erről a számról érkező hívásokat letiltja a rendszer, azonban a hívó fél továbbra is hagyhat hangpostaüzeneteket."</string>
     <string name="block_number_ok" msgid="770551992296781873">"LETILTÁS"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Feloldja a következő szám tiltását: <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Ez a szám többé nem lesz letiltva, így hívás érkezhet róla."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Az importálás nem sikerült"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Szám tiltásának feloldása"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Szám hozzáadása"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Ha megad egy számot, akkor az onnan érkező összes hívást letiltja. A rendszer továbbá az onnan érkező összes hangpostaüzenetet is törölni fogja."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Ha megad egy számot, akkor az onnan érkező összes hívást letiltja. Hangpostán keresztül azonban továbbra is elérhetik Önt az adott a számról."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Az ezekről a számokról érkező hívásokat a rendszer letiltja, továbbá automatikusan törli az onnan érkező hangpostaüzeneteket is."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Az ezekről a számokról érkező hívásokat letiltja a rendszer, azonban a hívó felek továbbra is hagyhatnak hangpostaüzeneteket."</string>
     <string name="block_list" msgid="7760188925338078011">"Letiltott számok"</string>
     <string name="invalidNumber" msgid="619058581062192851">"A(z) <xliff:g id="NUMBER">%1$s</xliff:g> érvénytelen."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"A következő szám már le van tiltva: <xliff:g id="NUMBER">%1$s</xliff:g>."</string>

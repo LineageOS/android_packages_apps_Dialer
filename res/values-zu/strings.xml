@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Phuthelwe"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Ivoyisimeyili"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Vimba <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Amakholi wangakusasa kusuka kule nombolo azovinyelwa futhi amavoyisimeyili azosuswa ngokuzenzakalela."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Amakholi wangakusasa kusuka kule nombolo azovinjwa. Amavoyisimeyili angakufinyelela."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Amakholi wangakusasa kusuka kule nombolo azovinyelwa futhi amavoyisimeyili azosuswa ngokuzenzakalela."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Amakholi kusuka kule nombolo azovinjwa, kodwa inkampani yenenethiwekhi ingakwazi ukukushiyela amavoyisimeyili."</string>
     <string name="block_number_ok" msgid="770551992296781873">"VIMBA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Vulela i-<xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Le nombolo ngeke isavinjwa kusuka ekukushayeleni."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Ukulanda akuphumelelanga"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Vulela inombolo"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Engeza inombolo"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Ukwengeza inombolo kuvimbela wonke amakholi wangakusasa futhi amavoyisimeyili azosuswa ngokuzenzakalela."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Ukungeza inombolo kuvimbela wonke amakholi wangakusasa. Amavoyisimeyili angasakufinyelela."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Amakholi kusuka kulezi lzinombolo azovinjwa futhi amavoyisimeyili azosulwa ngokuzenzakalela."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Amakholi kusuka kulezi zinombolo azovinjwa, kodwa angakwazi ukushiya amavoyisimeyili."</string>
     <string name="block_list" msgid="7760188925338078011">"Izinombolo ezivinjiwe"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ayivumelekile."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> isivinjiwe kakade."</string>

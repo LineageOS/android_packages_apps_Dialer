@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Gemist"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> blokkeren?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Toekomstige opriepen van dit nummer worden geblokkeerd en voicemails worden automatisch verwijderd."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Toekomstige oproepen van dit nummer worden geblokkeerd. Je ontvangt nog wel voicemails."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Oproepen van dit nummer worden geblokkeerd en voicemails worden automatisch verwijderd."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Oproepen van dit nummer worden geblokkeerd, maar de beller kan nog wel voicemails achterlaten."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKKEREN"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Blokkering van <xliff:g id="NUMBER">%1$s</xliff:g> opheffen?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Oproepen vanaf dit nummer worden niet langer geblokkeerd."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importeren mislukt"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Blokkeren van nummer opheffen"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Nummer toevoegen"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Als je een nummer toevoegt, worden alle toekomstige oproepen geblokkeerd en voicemails worden automatisch verwijderd."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Als je een nummer toevoegt, worden alle toekomstige oproepen geblokkeerd. Je ontvangt nog wel voicemails."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Oproepen van deze nummers worden geblokkeerd en voicemails worden automatisch verwijderd."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Oproepen van deze nummers worden geblokkeerd, maar de bellers kunnen nog wel voicemail achterlaten."</string>
     <string name="block_list" msgid="7760188925338078011">"Geblokkeerde nummers"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> is ongeldig."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> is al geblokkeerd."</string>

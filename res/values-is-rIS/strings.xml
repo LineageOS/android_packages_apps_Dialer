@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ósvöruð"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Talhólf"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Setja <xliff:g id="NUMBER">%1$s</xliff:g> á bannlista?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Lokað verður fyrir frekari símtöl frá þessu númeri og talhólfsskilaboðum verður sjálfkrafa eytt."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Lokað verður fyrir frekari símtöl frá þessu númeri. Þú getur þó áfram fengið talhólfsskilaboð."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Lokað verður fyrir símtöl frá þessu númeri og talhólfsskilaboðum sjálfkrafa eytt."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Lokað verður fyrir símtöl frá þessu númeri. Hugsanlegt er að sá sem hringir geti engu að síður sent þér talhólfsskilaboð."</string>
     <string name="block_number_ok" msgid="770551992296781873">"SETJA Á BANNLISTA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Taka <xliff:g id="NUMBER">%1$s</xliff:g> af bannlista?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Ekki verður lengur lokað á símtöl úr þessu númeri."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Innflutningur mistókst"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Taka númer af bannlista"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Bæta númeri við"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Ef númeri er bætt við hér lokar það fyrir öll frekari símtöl og talhólfsskilaboðum verður sjálfkrafa eytt."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Ef númeri er bætt við hér lokar það fyrir öll frekari símtöl. Þú getur þó enn fengið talhólfsskilaboð."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Lokað verður fyrir símtöl frá þessum númerum og talhólfsskilaboðum sjálfkrafa eytt."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Lokað verður fyrir símtöl frá þessum númerum. Hugsanlegt er að þeir sem hringja geti engu að síður sent þér talhólfsskilaboð."</string>
     <string name="block_list" msgid="7760188925338078011">"Númer á bannlista"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> er ógilt."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> er nú þegar á bannlista."</string>

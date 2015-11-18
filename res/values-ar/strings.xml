@@ -149,8 +149,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"فائتة"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"البريد الصوتي"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"سيتم حظر المكالمات المستقبلية الواردة من هذا الرقم كما سيتم تلقائيًا حذف رسائل البريد الصوتي."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"سيتم حظر المكالمات المستقبلية الواردة من هذا الرقم، إلا أنه قد تصلك رسائل البريد الصوتي."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"سيتم حظر المكالمات الواردة من هذا الرقم كما سيتم تلقائيًا حذف الرسائل الصوتية."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"سيتم حظر المكالمات من هذا الرقم، إلا أنه سيظل بإمكان المتصل ترك رسائل صوتية."</string>
     <string name="block_number_ok" msgid="770551992296781873">"حظر"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"هل تريد إزالة حظر <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"لن يتم حظر اتصال هذا الرقم بك بعد الآن."</string>
@@ -236,8 +236,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"أخفق الاستيراد"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"إلغاء حظر الرقم"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"إضافة رقم"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"تؤدي إضافة الرقم إلى حظر جميع المكالمات المستقبلية الواردة منه كما سيتم تلقائيًا حذف رسائل البريد الصوتي."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"تؤدي إضافة الرقم إلى حظر جميع المكالمات المستقبلية الواردة منه، إلا أنه قد تصلك رسائل البريد الصوتي."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"سيتم حظر المكالمات من هذه الأرقام وسيتم حذف الرسائل الصوتية تلقائيًا."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"سيتم حظر المكالمات من هذه الأرقام، إلا أنه قد يظل بإمكانك ترك رسائلك الصوتية."</string>
     <string name="block_list" msgid="7760188925338078011">"الأرقام المحظورة"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> غير صالح."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"تم حظر <xliff:g id="NUMBER">%1$s</xliff:g>."</string>

@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"ያመለጡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"የድምፅ መልዕክት"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ይታገድ?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"ከዚህ ቁጥር የሚመጡ የወደፊት ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"ከዚህ ቁጥር የሚመጡ የወደፊት ጥሪዎች ይታገዳሉ። የድምጽ መልዕክቶች አሁንም ሊደርሱዎት ይችላሉ።"</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ከዚህ ቁጥር የሚመጡ ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ከዚህ ቁጥር የሚመጡ ጥሪዎች ይታገዳሉ፣ ነገር ግን ደዋዩ አሁንም የድምጽ መልዕክቶችን ሊተዉልዎ ይችላል።"</string>
     <string name="block_number_ok" msgid="770551992296781873">"አግድ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"የ<xliff:g id="NUMBER">%1$s</xliff:g> እግድ ይነሳ?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ይህ ቁጥር ከአሁን በኋላ ወደ እርስዎ ከመደወል አይታገድም።"</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ማስመጣት አልተሳካም"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ቁጥርን አታግድ"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ቁጥር አክል"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"ቁጥር ማከል ሁሉንም የወደፊት ጥሪዎች ያግዳል፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"ቁጥር ማከል ሁሉንም የወደፊት ጥሪዎችን ያግዳል። የድምጽ መልዕክቶች አሁንም ሊደርሱዎት ይችላሉ።"</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ከእነዚህ ቁትሮች የሚመጡ ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ከእነዚህ ቁትሮች የሚመጡ ጥሪዎች ይታገዳሉ፣ ነገር ግን አሁንም የድምጽ መልዕክቶችን ሊተዉልዎ ይችላሉ።"</string>
     <string name="block_list" msgid="7760188925338078011">"የታገዱ ቁጥሮች"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ልክ ያልኾነ ነው።"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ቀድሞውኑ ታግዷል።"</string>

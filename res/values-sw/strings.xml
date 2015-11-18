@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ambazo hazikupokewa"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Ujumbe wa sauti"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Ungependa kuzuia <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6648042022642582310">"Simu za siku zijazo kutoka kwa nambari hii zitazuiwa na ujumbe wa sauti utafutwa kiotomatiki."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4396733241860410081">"Simu za siku zijazo kutoka kwa nambari hii zitazuiwa. Huenda ukaendelea kupata ujumbe wa sauti."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Simu zinazopigwa kutoka nambari hii zitazuiwa na ujumbe wa sauti utafutwa kiotomatiki."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Simu zinazopigwa kutoka nambari hii zitazuiwa, lakini mpigaji bado anaweza kukutumia ujumbe wa sauti."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ZUIA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Ungependa kuondoa kizuizi kwenye <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Simu kutoka kwenye nambari hii hazitazuiwa tena."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Imeshindwa kuingiza"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Ondolea nambari kizuizi"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Ongeza nambari"</string>
-    <string name="block_number_footer_message_vvm" msgid="223620564509592329">"Kuongeza nambari kutazuia simu zote za siku zijazo na ujumbe wa sauti utafutwa kiotomatiki."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="5106836115211978689">"Kuongeza nambari kutazuia simu zote za siku zijazo. Huenda ukaendelea kupata ujumbe wa sauti."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Simu zinazopigwa kutoka nambari hizi zitazuiwa na ujumbe wa sauti utafutwa kiotomatiki."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Simu zinazopigwa kutoka nambari hizi zitazuiwa, lakini wapigaji bado wanaweza kukutumia ujumbe wa sauti."</string>
     <string name="block_list" msgid="7760188925338078011">"Nambari zilizozuiwa"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> si sahihi."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> tayari imezuiwa."</string>
