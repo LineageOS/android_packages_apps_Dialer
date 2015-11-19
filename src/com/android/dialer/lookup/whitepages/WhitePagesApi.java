@@ -24,10 +24,10 @@ import android.util.Log;
 import com.android.dialer.lookup.LookupSettings;
 import com.android.dialer.lookup.LookupUtils;
 
-import org.apache.http.client.methods.HttpGet;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -243,13 +243,13 @@ public class WhitePagesApi {
     }
 
     private static String httpGet(String url) throws IOException {
-        HttpGet get = new HttpGet(url);
-
+        Map<String, String> headers = null;
         if (mCookie != null) {
-            get.setHeader("Cookie", COOKIE + "=" + mCookie);
+            headers = new HashMap<String, String>();
+            headers.put("Cookie", COOKIE + "=" + mCookie);
         }
 
-        String output = LookupUtils.httpGet(get);
+        String output = LookupUtils.httpGet(url, headers);
         // If we can find a new cookie, use it
         Pattern p = Pattern.compile(COOKIE_REGEX, Pattern.DOTALL);
         Matcher m = p.matcher(output);
