@@ -28,6 +28,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.QuickContact;
+import android.support.v13.app.FragmentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,8 @@ import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClicked
  * Fragments to show all contacts with phone numbers.
  */
 public class AllContactsFragment extends ContactEntryListFragment<ContactEntryListAdapter>
-        implements OnEmptyViewActionButtonClickedListener {
+        implements OnEmptyViewActionButtonClickedListener,
+        FragmentCompat.OnRequestPermissionsResultCallback {
 
     private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
@@ -168,7 +170,8 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
         }
 
         if (!PermissionsUtil.hasPermission(activity, READ_CONTACTS)) {
-            requestPermissions(new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+          FragmentCompat.requestPermissions(this, new String[] {READ_CONTACTS},
+              READ_CONTACTS_PERMISSION_REQUEST_CODE);
         } else {
             // Add new contact
             DialerUtils.startActivityWithErrorToast(activity, IntentUtil.getNewContactIntent(),
