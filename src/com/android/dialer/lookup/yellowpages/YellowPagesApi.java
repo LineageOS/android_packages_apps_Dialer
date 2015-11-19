@@ -54,11 +54,11 @@ public class YellowPagesApi {
     }
 
     private void fetchPage() throws IOException {
-        mOutput = LookupUtils.httpGet(new HttpGet(mLookupUrl + mNumber));
+        mOutput = LookupUtils.httpGet(mLookupUrl + mNumber, null);
     }
 
     private String getPhotoUrl(String website) throws IOException {
-        String output = LookupUtils.httpGet(new HttpGet(website));
+        String output = LookupUtils.httpGet(website, null);
         String galleryRef = LookupUtils.firstRegexResult(output,
                 "href=\"([^\"]+gallery\\?lid=[^\"]+)\"", true);
         if (galleryRef == null) {
@@ -66,10 +66,8 @@ public class YellowPagesApi {
         }
 
         // Get first image
-        HttpGet get = new HttpGet("http://www.yellowpages.com" + galleryRef);
-        output = LookupUtils.httpGet(get);
-
-        return LookupUtils.firstRegexResult(output,
+        return LookupUtils.firstRegexResult(
+                LookupUtils.httpGet("http://www.yellowpages.com" + galleryRef, null),
                 "\"type\":\"image\",\"src\":\"([^\"]+)\"", true);
     }
 
