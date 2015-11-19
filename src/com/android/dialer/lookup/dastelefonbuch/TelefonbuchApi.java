@@ -21,8 +21,6 @@ import android.net.Uri;
 
 import com.android.dialer.lookup.LookupUtils;
 
-import org.apache.http.client.methods.HttpGet;
-
 import java.io.IOException;
 
 public class TelefonbuchApi {
@@ -48,7 +46,7 @@ public class TelefonbuchApi {
         // Cut out everything we're not interested in (scripts etc.) to
         // speed up the subsequent matching.
         String output = LookupUtils.firstRegexResult(
-                LookupUtils.httpGet(new HttpGet(uri.toString())),
+                LookupUtils.httpGet(uri.toString(), null),
                 ": Treffer(.*)Ende Treffer", true);
 
         String name = parseValue(output, NAME_REGEX, true, false);
