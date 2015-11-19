@@ -18,6 +18,7 @@ package com.android.dialer.lookup.yellowpages;
 
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
+import com.android.dialer.lookup.LookupUtils;
 import com.android.dialer.lookup.ReverseLookup;
 
 import android.content.ContentResolver;
@@ -28,13 +29,6 @@ import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.util.Log;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -61,23 +55,9 @@ public class YellowPagesReverseLookup extends ReverseLookup {
         String scheme = uri.getScheme();
 
         if (scheme.startsWith("http")) {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet(uri.toString());
-
             try {
-                HttpResponse response = client.execute(request);
-
-                int responseCode = response.getStatusLine().getStatusCode();
-
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                byte[] responseBytes = out.toByteArray();
-
-                if (responseCode == HttpStatus.SC_OK) {
-                    Bitmap bmp = BitmapFactory.decodeByteArray(
-                            responseBytes, 0, responseBytes.length);
-                    return bmp;
-                }
+                byte[] response = LookupUtils.httpGetBytes(uri.toString(), null);
+                return BitmapFactory.decodeByteArray(response, 0, response.length);
             } catch (IOException e) {
                 Log.e(TAG, "Failed to retrieve image", e);
             }
