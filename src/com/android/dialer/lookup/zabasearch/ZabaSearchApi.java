@@ -20,8 +20,6 @@ import android.text.TextUtils;
 
 import com.android.dialer.lookup.LookupUtils;
 
-import org.apache.http.client.methods.HttpGet;
-
 import java.io.IOException;
 
 public class ZabaSearchApi {
@@ -38,7 +36,7 @@ public class ZabaSearchApi {
     }
 
     private void fetchPage() throws IOException {
-        mOutput = LookupUtils.httpGet(new HttpGet(LOOKUP_URL + mNumber));
+        mOutput = LookupUtils.httpGet(LOOKUP_URL + mNumber, null);
     }
 
     private void buildContactInfo() {

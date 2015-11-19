@@ -29,8 +29,6 @@ import com.android.dialer.lookup.ReverseLookup;
 
 import cyanogenmod.providers.CMSettings;
 
-import org.apache.http.client.methods.HttpGet;
-
 import java.io.IOException;
 
 public class OpenCnamReverseLookup extends ReverseLookup {
@@ -106,6 +104,6 @@ public class OpenCnamReverseLookup extends ReverseLookup {
             builder.appendQueryParameter(AUTH_TOKEN, authToken);
         }
 
-        return LookupUtils.httpGet(new HttpGet(builder.build().toString()));
+        return LookupUtils.httpGet(builder.build().toString(), null);
     }
 }

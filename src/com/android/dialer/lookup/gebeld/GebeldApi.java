@@ -21,8 +21,6 @@ import android.net.Uri;
 
 import com.android.dialer.lookup.LookupUtils;
 
-import org.apache.http.client.methods.HttpGet;
-
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,7 +47,7 @@ public class GebeldApi {
         // Cut out everything we're not interested in (scripts etc.) to
         // speed up the subsequent matching.
         String output = LookupUtils.firstRegexResult(
-                LookupUtils.httpGet(new HttpGet(uri.toString())),
+                LookupUtils.httpGet(uri.toString(), null),
                 "<div class=\"small-12 large-4 columns information\">(.*?)</div>", true);
 
         String name = null;
