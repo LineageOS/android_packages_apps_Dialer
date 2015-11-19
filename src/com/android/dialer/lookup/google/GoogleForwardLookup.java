@@ -19,6 +19,7 @@ package com.android.dialer.lookup.google;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ForwardLookup;
+import com.android.dialer.lookup.LookupUtils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -31,14 +32,10 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.text.Html;
 import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -129,10 +126,10 @@ public class GoogleForwardLookup extends ForwardLookup {
                 builder = builder.appendQueryParameter(QUERY_RANDOM,
                         getRandomNoiseString());
 
-                String httpResponse = httpGetRequest(
-                        builder.build().toString());
-
-                JSONArray results = new JSONArray(httpResponse);
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("User-Agent", mUserAgent);
+                JSONArray results = new JSONArray(LookupUtils.httpGet(builder.build().toString(),
+                        headers));
 
                 if (DEBUG) Log.v(TAG, "Results: " + results);
 
@@ -248,49 +245,6 @@ public class GoogleForwardLookup extends ForwardLookup {
      */
     private int getRandomInteger(int max) {
         return (int) Math.floor(Math.random() * max);
-    }
-
-    /**
-     * Fetch a URL and return the response as a string encoded in either
-     * UTF-8 or the charset specified in the Content-Type header.
-     *
-     * @param url URL
-     * @return Response from server
-     */
-    private String httpGetRequest(String url) throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(url.toString());
-
-        request.setHeader("User-Agent", mUserAgent);
-
-        HttpResponse response = client.execute(request);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        response.getEntity().writeTo(out);
-
-        String charset = getCharsetFromContentType(
-                response.getEntity().getContentType().getValue());
-
-        return new String(out.toByteArray(), charset);
-    }
-
-    /**
-     * Extract the content encoding from the HTTP 'Content-Type' header.
-     *
-     * @param contentType The 'Content-Type' header
-     * @return The charset or "UTF-8"
-     */
-    private static String getCharsetFromContentType(String contentType) {
-        String[] split = contentType.split(";");
-
-        for (int i = 0; i < split.length; i++) {
-            String trimmed = split[i].trim();
-            if (trimmed.startsWith("charset=")) {
-                return trimmed.substring(8);
-            }
-        }
-
-        return "UTF-8";
     }
 
     /**
