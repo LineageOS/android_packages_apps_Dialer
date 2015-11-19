@@ -207,6 +207,7 @@ public class ContactBuilder {
 
             ContactInfo info = new ContactInfo();
             info.name = mName.displayName;
+            info.formattedNumber = mFormattedNumber;
             info.normalizedNumber = mNormalizedNumber;
             info.number = mPhoneNumbers.get(0).number;
             info.type = mPhoneNumbers.get(0).type;
