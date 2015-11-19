@@ -28,13 +28,7 @@ import android.util.Log;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ForwardLookup;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+import com.android.dialer.lookup.LookupUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,11 +82,7 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
                 RADIUS, lastLocation.getLatitude(), lastLocation.getLongitude());
 
         try {
-            String httpResponse = httpPostRequest(request);
-
-            JSONObject results = new JSONObject(httpResponse);
-
-            return getEntries(results);
+            return getEntries(new JSONObject(LookupUtils.httpPost(LOOKUP_URL, null, request)));
         } catch (IOException e) {
             Log.e(TAG, "Failed to execute query", e);
         } catch (JSONException e) {
@@ -177,14 +167,5 @@ public class OpenStreetMapForwardLookup extends ForwardLookup {
         } else {
             return null;
         }
-    }
-
-    private String httpPostRequest(String query) throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(LOOKUP_URL);
-
-        post.setEntity(new StringEntity(query));
-
-        return EntityUtils.toString(client.execute(post).getEntity());
     }
 }
