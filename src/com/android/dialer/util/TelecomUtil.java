@@ -181,7 +181,7 @@ public class TelecomUtil {
     }
 
     private static boolean hasPermission(Context context, String permission) {
-        return context.checkSelfPermission(permission)
+        return context.getPackageManager().checkPermission(permission, context.getPackageName())
                 == PackageManager.PERMISSION_GRANTED;
     }
 

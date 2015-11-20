@@ -22,6 +22,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v13.app.FragmentCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -40,7 +41,8 @@ import java.util.ArrayList;
  * Implements a fragment to load and display SmartDial search results.
  */
 public class SmartDialSearchFragment extends SearchFragment
-        implements EmptyContentView.OnEmptyViewActionButtonClickedListener {
+        implements EmptyContentView.OnEmptyViewActionButtonClickedListener,
+        FragmentCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
 
     private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
@@ -108,7 +110,8 @@ public class SmartDialSearchFragment extends SearchFragment
             return;
         }
 
-        requestPermissions(new String[] {CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
+        FragmentCompat.requestPermissions(this, new String[] {CALL_PHONE},
+            CALL_PHONE_PERMISSION_REQUEST_CODE);
     }
 
     @Override
