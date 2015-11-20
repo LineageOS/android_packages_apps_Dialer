@@ -23,6 +23,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -103,8 +104,8 @@ public class BlockedNumbersFragment extends ListFragment
         super.onResume();
 
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        ColorDrawable backgroundDrawable =
-                new ColorDrawable(getActivity().getColor(R.color.dialer_theme_color));
+        ColorDrawable backgroundDrawable = new ColorDrawable(
+                ActivityCompat.getColor(getActivity(), R.color.dialer_theme_color));
         actionBar.setBackgroundDrawable(backgroundDrawable);
         actionBar.setDisplayShowCustomEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
