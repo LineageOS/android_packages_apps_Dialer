@@ -1661,7 +1661,9 @@ public class InCallPresenter implements CallList.Listener,
         final Resources resources = mInCallActivity.getResources();
         final int color;
         if (resources.getBoolean(R.bool.is_layout_landscape)) {
-            color = resources.getColor(R.color.statusbar_background_color, null);
+            // TODO use ResourcesCompat.getColor(Resources, int, Resources.Theme) when available
+            // {@link Resources#getColor(int)} used for compatibility
+            color = resources.getColor(R.color.statusbar_background_color);
         } else {
             color = mThemeColors.mSecondaryColor;
         }
