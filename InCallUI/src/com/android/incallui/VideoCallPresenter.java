@@ -33,6 +33,7 @@ import android.view.Surface;
 import android.widget.ImageView;
 
 import com.android.contacts.common.ContactPhotoManager;
+import com.android.dialer.compat.DialerCompatUtils;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -225,6 +226,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         super.onUiReady(ui);
         Log.d(this, "onUiReady:");
 
+        // Do not register any listeners if video calling is not compatible to safeguard against
+        // any accidental calls of video calling code.
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return;
+        }
+
         // Register for call state changes last
         InCallPresenter.getInstance().addListener(this);
         InCallPresenter.getInstance().addDetailsListener(this);
@@ -250,6 +257,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     public void onUiUnready(VideoCallUi ui) {
         super.onUiUnready(ui);
         Log.d(this, "onUiUnready:");
+
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return;
+        }
 
         InCallPresenter.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
@@ -798,6 +809,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @return {@code true} if the incoming video surface should be shown, {@code false} otherwise.
      */
     public static boolean showIncomingVideo(int videoState, int callState) {
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return false;
+        }
+
         boolean isPaused = VideoProfile.isPaused(videoState);
         boolean isCallActive = callState == Call.State.ACTIVE;
 
@@ -813,6 +828,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      *      otherwise.
      */
     public static boolean showOutgoingVideo(int videoState) {
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return false;
+        }
+
         return VideoProfile.isTransmissionEnabled(videoState);
     }
 
