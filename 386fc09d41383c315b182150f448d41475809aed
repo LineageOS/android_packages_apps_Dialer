@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f515b1d_fb3ff3b2",
+        "filename": "src/com/android/dialer/lookup/google/GoogleForwardLookup.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-20T15:38:18Z",
+      "side": 0,
+      "message": "Why nuke the charset recognition?\n\nhttpGet() could do this by evaluating the response headers and passing the appropriate value into the String constructor.",
+      "revId": "386fc09d41383c315b182150f448d41475809aed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f515b1d_1b5bef2e",
+        "filename": "src/com/android/dialer/lookup/yellowpages/YellowPagesReverseLookup.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2015-11-20T15:38:18Z",
+      "side": 1,
+      "message": "This doesn\u0027t work (or at least is unsafe). The string constructor does charset evaluation, so it\u0027s not guaranteed that the byte array passed into it matches String.getBytes().\n\nI guess we rather should have a new method for this (httpGetBytes or something); that method could share most of the code with httpGet.",
+      "revId": "759ec0b60fbf86b01136d5f5e4a0680d7f955178",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
