@@ -579,12 +579,14 @@ public class CallList {
      */
     public void notifyCallsOfDeviceRotation(int rotation) {
         for (Call call : mCallById.values()) {
-            // First, ensure a VideoCall is set on the call so that the change can be sent to the
+            // First, ensure that the call videoState has video enabled (there is no need to set
+            // device orientation on a voice call which has not yet been upgraded to video).
+            // Second, ensure a VideoCall is set on the call so that the change can be sent to the
             // provider (a VideoCall can be present for a call that does not currently have video,
             // but can be upgraded to video).
-            // Second, ensure that the call videoState has video enabled (there is no need to set
-            // device orientation on a voice call which has not yet been upgraded to video).
-            if (call.getVideoCall() != null && CallUtils.isVideoCall(call)) {
+            // NOTE: is it necessary to use this order because getVideoCall references the class
+            // VideoProfile which is not available on APIs <23 (M).
+            if (CallUtils.isVideoCall(call) && call.getVideoCall() != null) {
                 call.getVideoCall().setDeviceOrientation(rotation);
             }
         }

@@ -285,7 +285,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // Only present the user with the option to answer as a video call if the incoming call is
         // a bi-directional video call.
-        if (VideoProfile.isBidirectional((call.getVideoState()))) {
+        if (CallUtils.isBidirectionalVideoCall(call)) {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);
