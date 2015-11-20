@@ -31,10 +31,6 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.R;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
@@ -43,6 +39,8 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utility to help with tasks related to filtered numbers.
@@ -53,11 +51,11 @@ public class FilteredNumbersUtil {
     private static final long RECENT_EMERGENCY_CALL_THRESHOLD_MS = 1000 * 60 * 60 * 24 * 2;
 
     // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.
-    private static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
+    protected static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
 
     // Pref key for storing whether a notification has been dispatched to notify the user that call
     // blocking has been disabled because of a recent emergency call.
-    private static final String NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY =
+    protected static final String NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY =
             "notified_call_blocking_disabled_by_emergency_call";
 
     public static final String CALL_BLOCKING_NOTIFICATION_TAG = "call_blocking";
@@ -238,6 +236,10 @@ public class FilteredNumbersUtil {
             Context context, String number, String countryIso, long voicemailDateMs) {
         final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         if (TextUtils.isEmpty(normalizedNumber)) {
+            return false;
+        }
+
+        if (hasRecentEmergencyCall(context)) {
             return false;
         }
 
