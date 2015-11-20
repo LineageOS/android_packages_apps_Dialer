@@ -30,6 +30,8 @@ package com.android.incallui;
 
 import android.telecom.VideoProfile;
 
+import com.android.dialer.compat.DialerCompatUtils;
+
 import com.google.common.base.Preconditions;
 
 public class CallUtils {
@@ -39,8 +41,20 @@ public class CallUtils {
     }
 
     public static boolean isVideoCall(int videoState) {
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return false;
+        }
+
         return VideoProfile.isTransmissionEnabled(videoState)
                 || VideoProfile.isReceptionEnabled(videoState);
+    }
+
+    public static boolean isBidirectionalVideoCall(Call call) {
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return false;
+        }
+
+        return VideoProfile.isBidirectional(call.getVideoState());
     }
 
     public static boolean isIncomingVideoCall(Call call) {
@@ -65,6 +79,10 @@ public class CallUtils {
     }
 
     public static boolean isAudioCall(Call call) {
+        if (!DialerCompatUtils.isVideoCompatible()) {
+            return true;
+        }
+
         return call != null && VideoProfile.isAudioOnly(call.getVideoState());
     }
 
