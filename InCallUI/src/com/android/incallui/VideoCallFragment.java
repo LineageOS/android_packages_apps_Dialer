@@ -435,12 +435,11 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
         mIsLandscape = getResources().getBoolean(R.bool.is_layout_landscape);
-
         Log.d(this, "onActivityCreated: IsLandscape=" + mIsLandscape);
         getPresenter().init(getActivity());
+
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override

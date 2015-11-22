@@ -242,6 +242,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this);
         mCurrentVideoState = VideoProfile.STATE_AUDIO_ONLY;
         mCurrentCallState = Call.State.INVALID;
+
+        final InCallPresenter.InCallState inCallState =
+             InCallPresenter.getInstance().getInCallState();
+        onStateChange(inCallState, inCallState, CallList.getInstance());
     }
 
     /**
