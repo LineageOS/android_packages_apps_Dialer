@@ -62,7 +62,6 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.interactions.ImportExportDialogFragment;
@@ -96,7 +95,6 @@ import com.android.dialer.widget.SearchEditTextLayout.Callback;
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.util.SettingsUtil;
-import com.android.ims.ImsManager;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
 import junit.framework.Assert;
@@ -170,8 +168,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private SmartDialSearchFragment mSmartDialSearchFragment;
 
-    private boolean mDialConferenceButtonPressed = false;
-
     /**
      * Animation that slides in.
      */
@@ -240,16 +236,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private PopupMenu mOverflowMenu;
     private EditText mSearchView;
     private View mVoiceSearchButton;
-    private View mDialCallButton;
 
     private String mSearchQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
     private DragDropController mDragDropController;
     private ActionBarController mActionBarController;
-    private ImageButton mFloatingActionButton;
 
-    private ImageButton mConferenceDialButton;
     private FloatingActionButtonController mFloatingActionButtonController;
 
     private int mActionBarHeight;
@@ -280,8 +273,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
             menu.findItem(R.id.menu_history).setVisible(
                     PermissionsUtil.hasPhonePermissions(DialtactsActivity.this));
-            final MenuItem ConferDialerOption = menu.findItem(R.id.menu_4g_conference_call);
-            ConferDialerOption.setVisible(CallUtil.isConferDialerEnabled(getApplicationContext()));
             super.show();
         }
     }
@@ -442,13 +433,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         final View floatingActionButtonContainer = findViewById(
                 R.id.floating_action_button_container);
-        mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
-        mDialCallButton =  findViewById(R.id.floating_action_button);
-        mFloatingActionButton.setOnClickListener(this);
-        mConferenceDialButton = (ImageButton) findViewById(R.id.dialConferenceButton);
-        mConferenceDialButton.setOnClickListener(this);
+        ImageButton floatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(this,
-                floatingActionButtonContainer,mFloatingActionButton);
+                floatingActionButtonContainer, floatingActionButton);
 
         ImageButton optionsMenuButton =
                 (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
@@ -461,7 +449,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.dialtacts_frame, new ListsFragment(), TAG_FAVORITES_FRAGMENT)
-                    .add(R.id.dialtacts_container, new DialpadFragment(), TAG_DIALPAD_FRAGMENT)
                     .commit();
         } else {
             mSearchQuery = savedInstanceState.getString(KEY_SEARCH_QUERY);
@@ -579,8 +566,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         prepareVoiceSearchButton();
         mDialerDatabaseHelper.startSmartDialUpdateThread();
         mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
-        setConferenceDialButtonImage(false);
-        setConferenceDialButtonVisibility(true);
 
         if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
             int index = getIntent().getIntExtra(EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_SPEED_DIAL);
@@ -654,10 +639,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.floating_action_button:
-                mDialConferenceButtonPressed = false;
-                if (mDialpadFragment != null) {
-                    mDialpadFragment.showDialConference(false);
-                }
                 if (mListsFragment.getCurrentTabIndex()
                         == ListsFragment.TAB_INDEX_ALL_CONTACTS && !mInRegularSearch) {
                     DialerUtils.startActivityWithErrorToast(
@@ -667,25 +648,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 } else if (!mIsDialpadShown) {
                     mInCallDialpadUp = false;
                     showDialpadFragment(true);
-                    mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
-                    mFloatingActionButton.setVisibility(view.VISIBLE);
-                    setConferenceDialButtonImage(false);
-                    setConferenceDialButtonVisibility(true);
-                } else {
-                    // Dial button was pressed; tell the Dialpad fragment
-                    mDialpadFragment.dialButtonPressed();
                 }
                 break;
-            case R.id.dialConferenceButton:
-                mDialConferenceButtonPressed = true;
-                showDialpadFragment(true);
-                mIsDialpadShown = false;
-                mDialCallButton.setVisibility(view.VISIBLE);
-                mDialpadFragment.dialConferenceButtonPressed();
-                mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
-                mFloatingActionButtonController.align(getFabAlignment(), true);
-                mFloatingActionButton.setVisibility(view.VISIBLE);
-            break;
             case R.id.voice_search_button:
                 try {
                     startActivityForResult(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
@@ -708,9 +672,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_4g_conference_call:
-                this.startActivity(CallUtil.getConferenceDialerIntent(null));
-                break;
             case R.id.menu_history:
                 // Use explicit CallLogActivity intent instead of ACTION_VIEW +
                 // CONTENT_TYPE, so that we always open our call log from our dialer
@@ -792,7 +753,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             maybeEnterSearchUi();
         }
         mActionBarController.onDialpadUp();
-        setConferenceDialButtonVisibility(animate);
 
         mListsFragment.getView().animate().alpha(0).withLayer();
     }
@@ -802,13 +762,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     public void onDialpadShown() {
         Assert.assertNotNull(mDialpadFragment);
-        if (mDialConferenceButtonPressed || !mIsDialpadShown) {
-            mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
-            mDialConferenceButtonPressed = false;
-        } else {
-            mFloatingActionButton.setImageResource(R.drawable.fab_ic_call);
-        }
-        mFloatingActionButtonController.align(getFabAlignment(), mDialpadFragment.getAnimate());
         if (mDialpadFragment.getAnimate()) {
             mDialpadFragment.getView().startAnimation(mSlideIn);
         } else {
@@ -830,8 +783,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (clearDialpad) {
             mDialpadFragment.clearDialpad();
         }
-        if (!mIsDialpadShown && !mDialpadFragment.isRecipientsShown()) {
-            mFloatingActionButtonController.align(getFabAlignment(), animate);
+        if (!mIsDialpadShown) {
             return;
         }
         mIsDialpadShown = false;
@@ -840,7 +792,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mListsFragment.sendScreenViewForCurrentPosition();
 
         updateSearchFragmentPosition();
-        mFloatingActionButton.setImageResource(R.drawable.fab_ic_dial);
 
         mFloatingActionButtonController.align(getFabAlignment(), animate);
         if (animate) {
@@ -861,7 +812,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /**
      * Finishes hiding the dialpad fragment after any animations are completed.
      */
-    public void commitDialpadFragmentHide() {
+    private void commitDialpadFragmentHide() {
         if (!mStateSaved && mDialpadFragment != null && !mDialpadFragment.isHidden()) {
             final FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.hide(mDialpadFragment);
@@ -1140,14 +1091,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (mStateSaved) {
             return;
         }
-        setConferenceDialButtonImage(false);
-        setConferenceDialButtonVisibility(true);
-        boolean mIsRecipientsShown = mDialpadFragment.isRecipientsShown();
-        if(mIsRecipientsShown) {
-            mDialpadFragment.hideAndClearDialConference();
-        }
-
-        if (mIsDialpadShown || mIsRecipientsShown) {
+        if (mIsDialpadShown) {
             if (TextUtils.isEmpty(mSearchQuery) ||
                     (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()
                             && mSmartDialSearchFragment.getAdapter().getCount() == 0)) {
@@ -1246,35 +1190,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                                      int totalItemCount) {
         // TODO: No-op for now. This should eventually show/hide the actionBar based on
         // interactions with the ListsFragments.
-    }
-
-    @Override
-    public void setConferenceDialButtonVisibility(boolean enabled) {
-        boolean imsUseEnabled =
-                ImsManager.isVolteEnabledByPlatform(this) &&
-                ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
-        if(mConferenceDialButton != null) {
-            boolean isCurrentTabAllContacts = (mListsFragment != null) &&
-                    (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_ALL_CONTACTS);
-            mConferenceDialButton.setVisibility((enabled && imsUseEnabled &&
-                    !isCurrentTabAllContacts) ? View.VISIBLE : View.GONE);
-        }
-    }
-
-    @Override
-    public void setConferenceDialButtonImage(boolean setAddParticipantButton) {
-        if(mConferenceDialButton != null) {
-            /*
-             * If dial conference view is shown, button should show dialpad
-             * image. Pressing the button again will return to normal dialpad
-             * view. If normal dialpad view is shown, button should show dial
-             * conference image. Pressing the button again will show dial
-             * conference view
-             */
-            mConferenceDialButton
-                    .setImageResource(setAddParticipantButton ? R.drawable.fab_ic_call
-                            : R.drawable.ic_add_group_holo_dark);
-        }
     }
 
     private boolean phoneIsInUse() {
@@ -1398,12 +1313,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     public void onPageSelected(int position) {
         int tabIndex = mListsFragment.getCurrentTabIndex();
         if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
-            setConferenceDialButtonVisibility(false);
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.ic_person_add_24dp),
                     getResources().getString(R.string.search_shortcut_create_new_contact));
         } else {
-            setConferenceDialButtonVisibility(true);
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.fab_ic_dial),
                     getResources().getString(R.string.action_menu_dialpad_button));
