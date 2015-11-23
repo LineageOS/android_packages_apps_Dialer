@@ -52,6 +52,11 @@ public class BlockedNumbersFragment extends ListFragment
     private View mBlockedNumberListDivider;
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 

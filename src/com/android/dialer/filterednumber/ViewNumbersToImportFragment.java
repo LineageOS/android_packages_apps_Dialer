@@ -44,6 +44,11 @@ public class ViewNumbersToImportFragment extends ListFragment
     private ViewNumbersToImportAdapter mAdapter;
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
