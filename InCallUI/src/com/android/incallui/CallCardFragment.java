@@ -1260,6 +1260,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         // If the previous launch animation is still running, cancel it so that we don't get
