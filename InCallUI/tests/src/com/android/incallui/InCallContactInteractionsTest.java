@@ -174,6 +174,17 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
                 .detail);
     }
 
+    public void testOpeningHours_NotOpenTodayOpenTomorrow() {
+        assertEquals("Opens tomorrow at 8:00 AM",
+                mInCallContactInteractions.constructHoursInfo(
+                        getTestCalendarWithHour(21),
+                        Arrays.asList(
+                                Pair.create(
+                                        getTestCalendarWithHourAndDaysFromToday(8, 1),
+                                        getTestCalendarWithHourAndDaysFromToday(10, 1))))
+                .detail);
+    }
+
     public void testMultipleOpenRanges_BeforeOpen() {
         assertEquals("Opens today at 8:00 AM",
                 mInCallContactInteractions.constructHoursInfo(
@@ -214,7 +225,7 @@ public class InCallContactInteractionsTest extends AndroidTestCase {
                 .detail);
     }
 
-    public void testInvalidOpeningHours() {
+    public void testNotOpenTodayOrTomorrow() {
         assertEquals(null,
                 mInCallContactInteractions.constructHoursInfo(
                         getTestCalendarWithHour(21),

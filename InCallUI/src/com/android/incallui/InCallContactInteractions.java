@@ -49,6 +49,8 @@ import java.util.Locale;
  * is a business contact or not and logic for the manipulation of data for the call context.
  */
 public class InCallContactInteractions {
+    private static final String TAG = InCallContactInteractions.class.getSimpleName();
+
     private Context mContext;
     private InCallContactInteractionsListAdapter mListAdapter;
     private boolean mIsBusiness;
@@ -126,7 +128,13 @@ public class InCallContactInteractions {
      * business is open or not and the details set to the hours of operation.
      */
     private BusinessContextInfo constructHoursInfo(List<Pair<Calendar, Calendar>> openingHours) {
-        return constructHoursInfo(Calendar.getInstance(), openingHours);
+        try {
+            return constructHoursInfo(Calendar.getInstance(), openingHours);
+        } catch (Exception e) {
+            // Catch all exceptions here because we don't want any crashes if something goes wrong.
+            Log.e(TAG, "Error constructing hours info: ", e);
+        }
+        return null;
     }
 
     /**
@@ -144,10 +152,12 @@ public class InCallContactInteractions {
 
         boolean isOpenNow = false;
         // This variable records which interval the current time is after. 0 denotes none of the
-        // intervals, 1 after the first interval, etc.
+        // intervals, 1 after the first interval, etc. It is also the index of the interval the
+        // current time is in (if open) or the next interval (if closed).
         int afterInterval = 0;
-        // This variable records counts the number of time intervals in today's opening hours.
+        // This variable counts the number of time intervals in today's opening hours.
         int todaysIntervalCount = 0;
+
         for (Pair<Calendar, Calendar> hours : openingHours) {
             if (hours.first.compareTo(currentTime) <= 0
                     && currentTime.compareTo(hours.second) < 0) {
@@ -177,31 +187,53 @@ public class InCallContactInteractions {
          * - Display next opening time if currently closed but opens later today.
          * - Display last time it closed today if closed now and tomorrow's hours are unknown.
          * - Display tomorrow's first open time if closed today and tomorrow's hours are known.
+         *
+         * NOTE: The logic below assumes that the intervals are sorted by ascending time. Possible
+         * TODO to modify the logic above and ensure this is true.
          */
         if (isOpenNow) {
             if (todaysIntervalCount == 1) {
                 hoursInfo.detail = getTimeSpanStringForHours(openingHours.get(0));
             } else if (todaysIntervalCount == 2) {
-                hoursInfo.detail = mContext.getString(R.string.opening_hours,
+                hoursInfo.detail = mContext.getString(
+                        R.string.opening_hours,
                         getTimeSpanStringForHours(openingHours.get(0)),
                         getTimeSpanStringForHours(openingHours.get(1)));
-            } else {
-                hoursInfo.detail = mContext.getString(R.string.closes_today_at,
+            } else if (afterInterval < openingHours.size()) {
+                // This check should not be necessary since if it is currently open, we should not
+                // be after the last interval, but just in case, we don't want to crash.
+                hoursInfo.detail = mContext.getString(
+                        R.string.closes_today_at,
                         getFormattedTimeForCalendar(openingHours.get(afterInterval).second));
             }
-        } else {
-            // Currently closed
+        } else { // Currently closed
             final int lastIntervalToday = todaysIntervalCount - 1;
-            if (currentTime.before(openingHours.get(lastIntervalToday).first)) {
-                hoursInfo.detail = mContext.getString(R.string.opens_today_at,
+            if (todaysIntervalCount == 0) { // closed today
+                hoursInfo.detail = mContext.getString(
+                        R.string.opens_tomorrow_at,
+                        getFormattedTimeForCalendar(openingHours.get(0).first));
+            } else if (currentTime.after(openingHours.get(lastIntervalToday).second)) {
+                // Passed hours for today
+                if (todaysIntervalCount < openingHours.size()) {
+                    // If all of today's intervals are exhausted, assume the next are tomorrow's.
+                    hoursInfo.detail = mContext.getString(
+                            R.string.opens_tomorrow_at,
+                            getFormattedTimeForCalendar(
+                                    openingHours.get(todaysIntervalCount).first));
+                } else {
+                    // Grab the last time it was open today.
+                    hoursInfo.detail = mContext.getString(
+                            R.string.closed_today_at,
+                            getFormattedTimeForCalendar(
+                                    openingHours.get(lastIntervalToday).second));
+                }
+            } else if (afterInterval < openingHours.size()) {
+                // This check should not be necessary since if it is currently before the last
+                // interval, afterInterval should be less than the count of intervals, but just in
+                // case, we don't want to crash.
+                hoursInfo.detail = mContext.getString(
+                        R.string.opens_today_at,
                         getFormattedTimeForCalendar(openingHours.get(afterInterval).first));
-            } else if (todaysIntervalCount < openingHours.size()){
-                // Assuming all intervals after today's intervals are exhausted are tomorrow's.
-                hoursInfo.detail = mContext.getString(R.string.opens_tomorrow_at,
-                        getFormattedTimeForCalendar(openingHours.get(todaysIntervalCount).first));
-            } else {
-                hoursInfo.detail = mContext.getString(R.string.closed_today_at,
-                        getFormattedTimeForCalendar(openingHours.get(lastIntervalToday).second));
             }
         }
 
