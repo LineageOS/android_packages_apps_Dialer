@@ -63,8 +63,8 @@ public class BlockedNumbersFragment extends ListFragment
         ImageView addNumberIcon = (ImageView) getActivity().findViewById(R.id.add_number_icon);
         LetterTileDrawable drawable = new LetterTileDrawable(getResources());
         drawable.setLetter(ADD_BLOCKED_NUMBER_ICON_LETTER);
-        drawable.setColor(getResources().getColor(R.color.add_blocked_number_icon_color,
-                getActivity().getTheme()));
+        drawable.setColor(ActivityCompat.getColor(getActivity(),
+                R.color.add_blocked_number_icon_color));
         drawable.setIsCircular(true);
         addNumberIcon.setImageDrawable(drawable);
 
