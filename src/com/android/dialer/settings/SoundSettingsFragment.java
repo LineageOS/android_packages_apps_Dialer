@@ -88,6 +88,11 @@ public class SoundSettingsFragment extends PreferenceFragment
     };
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

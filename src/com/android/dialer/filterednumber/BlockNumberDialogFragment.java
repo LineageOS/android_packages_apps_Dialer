@@ -123,6 +123,11 @@ public class BlockNumberDialogFragment extends DialogFragment {
     }
 
     @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         final boolean isBlocked = getArguments().containsKey(ARG_BLOCK_ID);
