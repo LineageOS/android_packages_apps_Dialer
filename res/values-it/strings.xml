@@ -146,7 +146,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Segreteria"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Bloccare il numero <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Le chiamate da questo numero verranno bloccate e i messaggi in segreteria verranno automaticamente eliminati."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Le chiamate da questo numero verranno bloccate, ma il chiamante potrebbe riuscire a lasciarti messaggi in segreteria."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Le chiamate da questo numero verranno bloccate, ma il chiamante potrebbe lasciarti messaggi in segreteria."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOCCA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Sbloccare il numero <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Questo numero non sarà più bloccato e potrà chiamarti."</string>
@@ -229,7 +229,7 @@
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Sblocca numero"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Aggiungi numero"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Le chiamate da questi numeri verranno bloccate e i messaggi in segreteria verranno automaticamente eliminati."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Le chiamate da questi numeri verranno bloccate, ma i chiamanti potrebbero riuscire a lasciarti messaggi in segreteria."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Le chiamate da questi numeri verranno bloccate, ma i chiamanti potrebbero lasciarti messaggi in segreteria."</string>
     <string name="block_list" msgid="7760188925338078011">"Numeri bloccati"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> non è valido."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> è già bloccato."</string>

@@ -146,7 +146,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"वॉयस मेल"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध करें?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे और वॉइसमेल अपने आप हटा दिए जाएंगे."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे, लेकिन कॉलर अब भी आपके लिए वॉइसमेल कर सकेगा."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे, लेकिन कॉलर अब भी आपके लिए वॉइसमेल भेज सकेंगे."</string>
     <string name="block_number_ok" msgid="770551992296781873">"अवरुद्ध करें"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> को अनवरोधित करें?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"इस नंबर को अब आपको कॉल करने से अवरुद्ध नहीं किया जाएगा."</string>
@@ -229,7 +229,7 @@
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नंबर अनवरोधित करें"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"नंबर जोड़ें"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"इन नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे और वॉइसमेल अपने आप हटा दिए जाएंगे."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"इन नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे, लेकिन वे अब भी आपके लिए वॉइसमेल कर सकेंगे."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"इन नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे, लेकिन वे अब भी आपके लिए वॉइसमेल भेज  सकेंगे."</string>
     <string name="block_list" msgid="7760188925338078011">"अवरोधित नंबर"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> अमान्य है."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> पहले से अवरोधित है."</string>
