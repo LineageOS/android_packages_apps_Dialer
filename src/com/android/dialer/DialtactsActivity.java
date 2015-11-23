@@ -568,8 +568,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         IntentFilter callStateIntentFilter = new IntentFilter();
         callStateIntentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         callStateIntentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE);
-        callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED);
         registerReceiver(mCallStateReceiver, callStateIntentFilter);
     }
 

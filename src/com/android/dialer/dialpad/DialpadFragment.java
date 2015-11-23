@@ -86,6 +86,7 @@ import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
@@ -263,19 +264,29 @@ public class DialpadFragment extends Fragment
          */
         @Override
         public void onReceive(Context context, Intent intent) {
-            // Log.i(TAG, "CallStateReceiver.onReceive");
-            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-            if ((TextUtils.equals(state, TelephonyManager.EXTRA_STATE_IDLE) ||
-                    TextUtils.equals(state, TelephonyManager.EXTRA_STATE_OFFHOOK))
-                    && isDialpadChooserVisible()) {
-                // Log.i(TAG, "Call ended with dialpad chooser visible!  Taking it down...");
-                // Note there's a race condition in the UI here: the
-                // dialpad chooser could conceivably disappear (on its
-                // own) at the exact moment the user was trying to select
-                // one of the choices, which would be confusing.  (But at
-                // least that's better than leaving the dialpad chooser
-                // onscreen, but useless...)
-                showDialpadChooser(false);
+            if (DEBUG) Log.i(TAG, "CallStateReceiver.onReceive");
+            switch (intent.getAction()) {
+                case TelephonyManager.ACTION_PHONE_STATE_CHANGED:
+                    String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+                    if ((TextUtils.equals(state, TelephonyManager.EXTRA_STATE_IDLE) ||
+                            TextUtils.equals(state, TelephonyManager.EXTRA_STATE_OFFHOOK))
+                            && isDialpadChooserVisible()) {
+                        // Log.i(TAG, "Call ended with dialpad chooser visible!  Taking it down...");
+                        // Note there's a race condition in the UI here: the
+                        // dialpad chooser could conceivably disappear (on its
+                        // own) at the exact moment the user was trying to select
+                        // one of the choices, which would be confusing.  (But at
+                        // least that's better than leaving the dialpad chooser
+                        // onscreen, but useless...)
+                        showDialpadChooser(false);
+                        break;
+                    }
+
+                case TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE:
+                case TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED:
+                    mSims = CallMethodUtils.getSimInfoList(getActivity());
+                    updateCallMethodSpinner();
+                    break;
             }
         }
     }
@@ -364,8 +375,10 @@ public class DialpadFragment extends Fragment
         mDialpadSlideInDuration = getResources().getInteger(R.integer.dialpad_slide_in_duration);
 
         if (mCallStateReceiver == null) {
-            IntentFilter callStateIntentFilter = new IntentFilter(
-                    TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+            IntentFilter callStateIntentFilter = new IntentFilter();
+            callStateIntentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+            callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE);
+            callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED);
             mCallStateReceiver = new CallStateReceiver();
             ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
         }
