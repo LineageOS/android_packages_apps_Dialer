@@ -145,8 +145,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Manqués"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mess. voc."</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Bloquer le numéro <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Les appels de ce numéro seront bloqués, et les messages vocaux seront automatiquement supprimés."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Les appels de ce numéro seront bloqués, mais il se peut que l\'appelant puisse quand même vous laisser des messages vocaux."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Les appels provenant de ce numéro seront bloqués et les messages vocaux seront automatiquement supprimés."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Les appels provenant de ce numéro seront bloqués, mais il se peut que l\'appelant puisse quand même vous laisser des messages vocaux."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOQUER"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Débloquer le numéro <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Les appels associés à ce numéro ne seront plus bloqués."</string>
@@ -228,8 +228,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Échec de l\'importation"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Débloquer le numéro"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Ajouter un numéro"</string>
-    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Les appels de ces numéros seront bloqués, et les messages vocaux seront automatiquement supprimés."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Les appels de ces numéros seront bloqués, mais il se peut que l\'es appelants puissent quand même vous laisser des messages vocaux."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Les appels provenant de ces numéros seront bloqués et les messages vocaux seront automatiquement supprimés."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Les appels provenant de ces numéros seront bloqués, mais il se peut que les appelants puissent quand même vous laisser des messages vocaux."</string>
     <string name="block_list" msgid="7760188925338078011">"Numéros bloqués"</string>
     <string name="invalidNumber" msgid="619058581062192851">"Le numéro <xliff:g id="NUMBER">%1$s</xliff:g> n\'est pas valide."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"Le numéro <xliff:g id="NUMBER">%1$s</xliff:g> est déjà bloqué."</string>

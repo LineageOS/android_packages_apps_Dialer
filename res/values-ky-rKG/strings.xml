@@ -169,8 +169,8 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Өткөзүлгөндөр"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Үнкат"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгөттөлсүнбү?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Бул номерден келген чалуулар бөгөттөлөт жана үн почталары автоматтык түрдө жок кылынат."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Бун номерден келген чалуулар бөгөттөлөт, бирок чалуучу сизге үн почталарын калтыра берет."</string>
+    <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Бул номерден келген чалуулар бөгөттөлөт жана үн билдирүүлөрү автоматтык түрдө жок кылынат."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Бул номерден келген чалуулар бөгөттөлөт, бирок чалуучу сизге үн билдирүүлөрүн калтыра берет."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БӨГӨТТӨӨ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгөттөн чыгарылсынбы?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Бул номерден болгон чалуулар мындан ары бөгөттөлбөйт."</string>
@@ -252,8 +252,8 @@
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Импорттолбой калды"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Номерди бөгөттөн чыгаруу"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Номер кошуу"</string>
-    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Бул номерлерден келген чалуулар бөгөттөлөт жана үн почталары автоматтык түрдө жок кылынат."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Бун номерлерден келген чалуулар бөгөттөлөт, бирок алар сизге үн почталарын калтыра берет."</string>
+    <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Бул номерлерден келген чалуулар бөгөттөлөт жана үн билдирүүлөрү автоматтык түрдө жок кылынат."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Бул номерлерден келген чалуулар бөгөттөлөт, бирок алар сизге үн билдирүүлөрүн калтыра берет."</string>
     <string name="block_list" msgid="7760188925338078011">"Бөгөттөлгөн номерлер"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> - жараксыз."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> мурунтан эле бөгөттөлгөн."</string>
