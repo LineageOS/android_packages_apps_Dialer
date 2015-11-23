@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -152,9 +153,8 @@ public class PhoneCallDetailsHelper {
         views.nameView.setTypeface(typeface);
         views.voicemailTranscriptionView.setTypeface(typeface);
         views.callLocationAndDate.setTypeface(typeface);
-        views.callLocationAndDate.setTextColor(mResources.getColor(
-                details.isRead ? R.color.call_log_detail_color : R.color.call_log_unread_text_color,
-                mContext.getTheme()));
+        views.callLocationAndDate.setTextColor(ContextCompat.getColor(mContext, details.isRead ?
+                R.color.call_log_detail_color : R.color.call_log_unread_text_color));
     }
 
     /**
