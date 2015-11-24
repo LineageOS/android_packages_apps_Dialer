@@ -56,7 +56,7 @@
 
         </LinearLayout>
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2">
@@ -145,7 +145,8 @@
                 android:layout_width="@dimen/end_call_floating_action_button_diameter"
                 android:layout_height="@dimen/end_call_floating_action_button_diameter"
                 android:background="@drawable/fab_red"
-                android:layout_gravity="bottom|center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/end_call_button_margin_bottom">
 
                 <ImageButton android:id="@+id/floating_end_call_action_button"
@@ -158,7 +159,7 @@
 
             </FrameLayout>
 
-        </FrameLayout>
+        </RelativeLayout>
 
     </LinearLayout>
     <!-- Secondary "Call info" block, for the background ("on hold") call. -->
