@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
+import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
@@ -181,7 +182,7 @@ public class TelecomUtil {
     }
 
     private static boolean hasPermission(Context context, String permission) {
-        return context.getPackageManager().checkPermission(permission, context.getPackageName())
+        return ContextCompat.checkSelfPermission(context, permission)
                 == PackageManager.PERMISSION_GRANTED;
     }
 
