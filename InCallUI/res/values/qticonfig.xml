@@ -40,4 +40,6 @@
     default value is false, true is for LatamOpenAMX
     -->
     <bool name="def_incallui_clearcode_enabled">false</bool>
+    <!-- Config to show/hide call duration in call detail -->
+    <bool name="call_duration_enabled">true</bool>
 </resources>

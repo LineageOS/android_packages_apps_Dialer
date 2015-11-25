@@ -118,7 +118,10 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
                 DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR);
         dateView.setText(dateValue);
         // Set the duration
-        if (Calls.VOICEMAIL_TYPE == callType || CallTypeHelper.isMissedCallType(callType)) {
+        boolean callDurationEnabled = mContext.getResources()
+                .getBoolean(R.bool.call_duration_enabled);
+        if (Calls.VOICEMAIL_TYPE == callType || CallTypeHelper.isMissedCallType(callType) ||
+                !callDurationEnabled) {
             durationView.setVisibility(View.GONE);
         } else {
             durationView.setVisibility(View.VISIBLE);
