@@ -227,7 +227,7 @@
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Error en la importació"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Desbloqueja el número"</string>
-    <string name="addBlockedNumber" msgid="6064812257482886526">"Afegeix el número"</string>
+    <string name="addBlockedNumber" msgid="6064812257482886526">"Afegeix un número"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Es bloquejaran les trucades d\'aquests números i els missatges de veu se suprimiran automàticament."</string>
     <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Es bloquejaran les trucades d\'aquests números, però és possible que continuïn deixant-te missatges de veu."</string>
     <string name="block_list" msgid="7760188925338078011">"Números bloquejats"</string>
