@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.dialer.R;
+import com.android.dialer.compat.SettingsCompat;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 
 import java.util.List;
@@ -109,7 +110,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             // If we don't have the permission to write to system settings, go to system sound
             // settings instead. Otherwise, perform the super implementation (which launches our
             // own preference fragment.
-            if (!Settings.System.canWrite(this)) {
+            if (!SettingsCompat.System.canWrite(this)) {
                 Toast.makeText(
                         this,
                         getResources().getString(R.string.toast_cannot_write_system_settings),
