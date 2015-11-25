@@ -25,6 +25,7 @@ import android.util.Log;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.R;
+import com.android.dialer.calllog.calllogcache.CallLogCache;
 
 /**
  * Helper class to fill in the views of a call log entry.
@@ -36,21 +37,22 @@ import com.android.dialer.R;
     private final PhoneCallDetailsHelper mPhoneCallDetailsHelper;
     /** Resources to look up strings. */
     private final Resources mResources;
-    private final TelecomCallLogCache mTelecomCallLogCache;
+    private final CallLogCache mCallLogCache;
 
     /**
      * Creates a new helper instance.
      *
      * @param phoneCallDetailsHelper used to set the details of a phone call
-     * @param phoneNumberHelper used to process phone number
+     * @param resources The object from which resources can be retrieved
+     * @param callLogCache A cache for values retrieved from telecom/telephony
      */
     public CallLogListItemHelper(
             PhoneCallDetailsHelper phoneCallDetailsHelper,
             Resources resources,
-            TelecomCallLogCache telecomCallLogCache) {
+            CallLogCache callLogCache) {
         mPhoneCallDetailsHelper = phoneCallDetailsHelper;
         mResources = resources;
-        mTelecomCallLogCache = telecomCallLogCache;
+        mCallLogCache = callLogCache;
     }
 
     /**
@@ -187,7 +189,7 @@ import com.android.dialer.R;
         }
 
         int stringID = getCallDescriptionStringID(details.callTypes, details.isRead);
-        String accountLabel = mTelecomCallLogCache.getAccountLabel(details.accountHandle);
+        String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
 
         // Use chosen string resource to build up the message.
         CharSequence onAccountLabel = accountLabel == null

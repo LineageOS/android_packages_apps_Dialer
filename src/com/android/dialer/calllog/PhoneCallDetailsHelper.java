@@ -35,6 +35,7 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.dialer.calllog.calllogcache.CallLogCache;
 import com.android.dialer.util.DialerUtils;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class PhoneCallDetailsHelper {
 
     private CharSequence mPhoneTypeLabelForTest;
 
-    private final TelecomCallLogCache mTelecomCallLogCache;
+    private final CallLogCache mCallLogCache;
 
     /** Calendar used to construct dates */
     private final Calendar mCalendar;
@@ -75,10 +76,10 @@ public class PhoneCallDetailsHelper {
     public PhoneCallDetailsHelper(
             Context context,
             Resources resources,
-            TelecomCallLogCache telecomCallLogCache) {
+            CallLogCache callLogCache) {
         mContext = context;
         mResources = resources;
-        mTelecomCallLogCache = telecomCallLogCache;
+        mCallLogCache = callLogCache;
         mCalendar = Calendar.getInstance();
     }
 
@@ -115,12 +116,12 @@ public class PhoneCallDetailsHelper {
         setCallCountAndDate(views, callCount, callLocationAndDate);
 
         // Set the account label if it exists.
-        String accountLabel = mTelecomCallLogCache.getAccountLabel(details.accountHandle);
+        String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
 
         if (accountLabel != null) {
             views.callAccountLabel.setVisibility(View.VISIBLE);
             views.callAccountLabel.setText(accountLabel);
-            int color = mTelecomCallLogCache.getAccountColor(details.accountHandle);
+            int color = mCallLogCache.getAccountColor(details.accountHandle);
             if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
                 int defaultColor = R.color.dialtacts_secondary_text_color;
                 views.callAccountLabel.setTextColor(mContext.getResources().getColor(defaultColor));
@@ -198,7 +199,7 @@ public class PhoneCallDetailsHelper {
         // Only show a label if the number is shown and it is not a SIP address.
         if (!TextUtils.isEmpty(details.number)
                 && !PhoneNumberHelper.isUriNumber(details.number.toString())
-                && !mTelecomCallLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
+                && !mCallLogCache.isVoicemailNumber(details.accountHandle, details.number)) {
 
             if (TextUtils.isEmpty(details.namePrimary) && !TextUtils.isEmpty(details.geocode)) {
                 numberFormattedLabel = details.geocode;
