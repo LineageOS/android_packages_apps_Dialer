@@ -30,4 +30,15 @@ public final class DialerCompatUtils {
         return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP)
                 >= Build.VERSION_CODES.M;
     }
+
+    /**
+     * Determines if this version is compatible with a default dialer. Can also force the version to
+     * be lower through SdkVersionOverride.
+     *
+     * @return {@code true} if default dialer is a feature on this device, {@code false} otherwise.
+     */
+    public static boolean isDefaultDialerCompatible() {
+        return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP)
+                >= Build.VERSION_CODES.M;
+    }
 }

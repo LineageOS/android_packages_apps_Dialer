@@ -28,6 +28,8 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.dialer.compat.DialerCompatUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -187,6 +189,10 @@ public class TelecomUtil {
     }
 
     public static boolean isDefaultDialer(Context context) {
+        if (!DialerCompatUtils.isDefaultDialerCompatible()) {
+            return false;
+        }
+
         final boolean result = TextUtils.equals(context.getPackageName(),
                 getTelecomManager(context).getDefaultDialerPackage());
         if (result) {
