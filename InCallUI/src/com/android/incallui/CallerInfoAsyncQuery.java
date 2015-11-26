@@ -16,23 +16,27 @@
 
 package com.android.incallui;
 
+import com.google.common.primitives.Longs;
+
 import android.content.AsyncQueryHandler;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.PhoneLookup;
+import android.provider.ContactsContract.Directory;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.android.dialer.calllog.ContactInfoHelper;
-import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.dialer.calllog.ContactInfoHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -50,6 +54,8 @@ public class CallerInfoAsyncQuery {
     private static final int EVENT_END_OF_QUEUE = 3;
     private static final int EVENT_EMERGENCY_NUMBER = 4;
     private static final int EVENT_VOICEMAIL_NUMBER = 5;
+
+    private static final boolean FLAG_N_FEATURE = false;
 
     private CallerInfoAsyncQueryHandler mHandler;
 
@@ -80,7 +86,6 @@ public class CallerInfoAsyncQuery {
         public int event;
         public String number;
     }
-
 
     /**
      * Simple exception used to communicate problems with the query pool.
@@ -158,7 +163,6 @@ public class CallerInfoAsyncQuery {
 
                     super.handleMessage(msg);
                 } else {
-
                     Log.d(this, "Processing event: " + cw.event + " token (arg1): " + msg.arg1 +
                             " command: " + msg.what + " query URI: " +
                             sanitizeUriToString(args.uri));
@@ -325,6 +329,37 @@ public class CallerInfoAsyncQuery {
     private CallerInfoAsyncQuery() {
     }
 
+    public static void startQuery(final int token, final Context context, final CallerInfo info,
+            final OnQueryCompleteListener listener, final Object cookie) {
+        Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startContactProviderQuery()... #####");
+        Log.d(LOG_TAG, "- number: " + info.phoneNumber);
+        Log.d(LOG_TAG, "- cookie: " + cookie);
+        OnQueryCompleteListener contactsProviderQueryCompleteListener =
+                new OnQueryCompleteListener() {
+                    @Override
+                    public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+                        Log.d(LOG_TAG, "contactsProviderQueryCompleteListener done");
+                        if (ci != null && ci.contactExists) {
+                            if (listener != null) {
+                                listener.onQueryComplete(token, cookie, ci);
+                            }
+                        } else {
+                            startOtherDirectoriesQuery(token, context, info, listener, cookie);
+                        }
+                    }
+                };
+        startDefaultDirectoryQuery(token, context, info, contactsProviderQueryCompleteListener,
+                cookie);
+    }
+
+    // Private methods
+    private static CallerInfoAsyncQuery startDefaultDirectoryQuery(int token, Context context,
+            CallerInfo info, OnQueryCompleteListener listener, Object cookie) {
+        // Construct the URI object and query params, and start the query.
+        Uri uri = ContactInfoHelper.getContactInfoLookupUri(info.phoneNumber);
+        return startQueryInternal(token, context, info, listener, cookie, uri);
+    }
+
     /**
      * Factory method to start the query based on a CallerInfo object.
      *
@@ -336,16 +371,8 @@ public class CallerInfoAsyncQuery {
      * PhoneUtils.startGetCallerInfo() decide which one to call based on
      * the phone type of the incoming connection.
      */
-    public static CallerInfoAsyncQuery startQuery(int token, Context context, CallerInfo info,
-            OnQueryCompleteListener listener, Object cookie) {
-        Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startQuery()... #####");
-        Log.d(LOG_TAG, "- number: " + info.phoneNumber);
-        Log.d(LOG_TAG, "- cookie: " + cookie);
-
-        // Construct the URI object and query params, and start the query.
-
-        final Uri contactRef = ContactInfoHelper.getContactInfoLookupUri(info.phoneNumber);
-
+    private static CallerInfoAsyncQuery startQueryInternal(int token, Context context,
+            CallerInfo info, OnQueryCompleteListener listener, Object cookie, Uri contactRef) {
         if (DBG) {
             Log.d(LOG_TAG, "==> contactRef: " + sanitizeUriToString(contactRef));
         }
@@ -371,12 +398,101 @@ public class CallerInfoAsyncQuery {
         c.mHandler.startQuery(token,
                               cw,  // cookie
                               contactRef,  // uri
-                              null,  // projection
+                              CallerInfo.DEFAULT_PHONELOOKUP_PROJECTION,  // projection
                               null,  // selection
                               null,  // selectionArgs
                               null);  // orderBy
         return c;
     }
+
+    private static void startOtherDirectoriesQuery(int token, Context context, CallerInfo info,
+            OnQueryCompleteListener listener, Object cookie) {
+        long[] directoryIds = getDirectoryIds(context);
+        int size = directoryIds.length;
+        if (size == 0) {
+            return;
+        }
+
+        OnQueryCompleteListener intermediateListener =
+                new DirectoryQueryCompleteListener(size, listener);
+
+        // The current implementation of multiple async query runs in single handler thread
+        // in AsyncQueryHandler.
+        // intermediateListener.onQueryComplete is also called from the same caller thread.
+        // TODO(b/26019872): use thread pool instead of single thread.
+        for (int i = 0; i < size; i++) {
+            long directoryId = directoryIds[i];
+            Uri uri = ContactInfoHelper.getContactInfoLookupUri(info.phoneNumber, directoryId);
+            if (DBG) {
+                Log.d(LOG_TAG, "directoryId: " + directoryId + " uri: " + uri);
+            }
+            startQueryInternal(token, context, info, intermediateListener, cookie, uri);
+        }
+    }
+
+    /* Directory lookup related code - START */
+    private static final String[] DIRECTORY_PROJECTION = new String[] {Directory._ID};
+
+    private static long[] getDirectoryIds(Context context) {
+        ArrayList<Long> results = new ArrayList<>();
+
+        Uri uri = Directory.CONTENT_URI;
+        // TODO(b/26019967):
+        // replace VERSION.CODENAME.startsWith("N") by VERSION.SDK_INT >= VERSION_CODES.NYC
+        if (FLAG_N_FEATURE && Build.VERSION.CODENAME.startsWith("N")) {
+            uri = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "directories_enterprise");
+        }
+
+        ContentResolver cr = context.getContentResolver();
+        Cursor cursor = cr.query(uri, DIRECTORY_PROJECTION, null, null, null);
+        addDirectoryIdsFromCursor(cursor, results);
+
+        return Longs.toArray(results);
+    }
+
+    private static void addDirectoryIdsFromCursor(Cursor cursor, ArrayList<Long> results) {
+        if (cursor != null) {
+            int idIndex = cursor.getColumnIndex(Directory._ID);
+            while (cursor.moveToNext()) {
+                long id = cursor.getLong(idIndex);
+                // TODO(b/26019967): in N SDK, use Directory.isRemoteDirectory
+                if (id != Directory.DEFAULT && id != Directory.LOCAL_INVISIBLE && id != 1000000000
+                        && id != 1000000001) {
+                    results.add(id);
+                }
+            }
+            cursor.close();
+        }
+    }
+
+    private static final class DirectoryQueryCompleteListener implements OnQueryCompleteListener {
+        int mCount;
+        boolean mIsListernerCalled;
+        OnQueryCompleteListener mListener;
+
+        DirectoryQueryCompleteListener(int size, OnQueryCompleteListener listener)  {
+            mCount = size;
+            mListener = listener;
+            mIsListernerCalled = false;
+        }
+
+        @Override
+        public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+            boolean shouldCallListener = false;
+            synchronized (this) {
+                mCount = mCount - 1;
+                if (!mIsListernerCalled && (ci.contactExists || mCount == 0)) {
+                    mIsListernerCalled = true;
+                    shouldCallListener = true;
+                }
+            }
+
+            if (shouldCallListener) {
+                mListener.onQueryComplete(token, cookie, ci);
+            }
+        }
+    }
+    /* Directory lookup related code - END */
 
     /**
      * Method to create a new CallerInfoAsyncQueryHandler object, ensuring correct
