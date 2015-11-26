@@ -18,6 +18,7 @@ package com.android.dialer.settings;
 
 import android.content.Context;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +33,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
+import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.dialer.R;
 import com.android.dialer.compat.SettingsCompat;
 import com.android.phone.common.util.SettingsUtil;
@@ -109,7 +111,8 @@ public class SoundSettingsFragment extends PreferenceFragment
 
         TelephonyManager telephonyManager =
                 (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager.canChangeDtmfToneLength()
+        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M
+                && telephonyManager.canChangeDtmfToneLength()
                 && (telephonyManager.isWorldPhone() || !shouldHideCarrierSettings())) {
             mDtmfToneLength.setOnPreferenceChangeListener(this);
             mDtmfToneLength.setValueIndex(

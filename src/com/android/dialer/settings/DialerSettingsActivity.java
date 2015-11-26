@@ -18,6 +18,7 @@ package com.android.dialer.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
@@ -27,6 +28,7 @@ import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.dialer.R;
 import com.android.dialer.compat.SettingsCompat;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
@@ -55,12 +57,16 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         soundSettingsHeader.id = R.id.settings_header_sounds_and_vibration;
         target.add(soundSettingsHeader);
 
-        Header quickResponseSettingsHeader = new Header();
-        Intent quickResponseSettingsIntent =
-                new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
-        quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
-        quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
-        target.add(quickResponseSettingsHeader);
+        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
+                >= Build.VERSION_CODES.M) {
+            Header quickResponseSettingsHeader = new Header();
+            Intent quickResponseSettingsIntent =
+                    new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
+            quickResponseSettingsHeader.titleRes = R.string.respond_via_sms_setting_title;
+            quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
+            target.add(quickResponseSettingsHeader);
+        }
+
 
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -92,8 +98,10 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             blockedCallsHeader.intent = new Intent(this, BlockedNumbersSettingsActivity.class);
             target.add(blockedCallsHeader);
 
-            if (telephonyManager.isTtyModeSupported()
-                    || telephonyManager.isHearingAidCompatibilitySupported()) {
+            if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
+                    >= Build.VERSION_CODES.M
+                    && (telephonyManager.isTtyModeSupported()
+                    || telephonyManager.isHearingAidCompatibilitySupported())) {
                 Header accessibilitySettingsHeader = new Header();
                 Intent accessibilitySettingsIntent =
                         new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
