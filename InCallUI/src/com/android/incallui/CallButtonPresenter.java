@@ -31,6 +31,9 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_BL
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_CONSULTATIVE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RECORD;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RXTX_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RX_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_VO_VIDEO_CALL;
 
 import android.content.Context;
 import android.os.Build;
@@ -44,6 +47,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.compat.CallSdkCompat;
 import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.dialer.util.PresenceHelper;
 import com.android.dialer.compat.UserManagerCompat;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallCameraManager.Listener;
@@ -69,6 +73,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
     private static final int MAX_PARTICIPANTS_LIMIT = 6;
+    private boolean mEnhanceEnable = false;
 
     // NOTE: Capability constant definition has been duplicated to avoid bundling
     // the Dialer with Frameworks.
@@ -81,6 +86,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void onUiReady(CallButtonUi ui) {
         super.onUiReady(ui);
 
+        mEnhanceEnable = ui.getContext().getResources().getBoolean(
+                R.bool.config_enable_enhance_video_call_ui);
         AudioModeProvider.getInstance().addListener(this);
 
         // register for call state changes last
@@ -335,6 +342,21 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         mCall.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
     }
 
+    public void changeToVideo(int videoState) {
+        if(mCall == null) {
+            return;
+        }
+
+        if(VideoProfile.isVideo(videoState) &&
+                !PresenceHelper.getVTCapability(mCall.getNumber())) {
+            Context context = getUi().getContext();
+            Toast.makeText(context,context.getString(R.string.video_call_cannot_upgrade),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final VideoProfile videoProfile = new VideoProfile(videoState);
+        QtiCallUtils.changeToVideoCall(mCall, videoProfile);
+    }
     /**
      * Switches the camera between the front-facing and back-facing camera.
      * @param useFrontFacingCamera True if we should switch to using the front-facing camera, or
@@ -478,19 +500,33 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             showAddParticipant = showAddParticipant&&(call.isConferenceCall());
         }
 
+        boolean showRxTx = false;
+        boolean showRx = false;
+        boolean showVolte = false;
+
+        if (mEnhanceEnable && showUpgradeToVideo) {
+            boolean isAudioAndVtCap = (VideoProfile.isAudioOnly(mCall.getVideoState()) &&
+                    PresenceHelper.getVTCapability(call.getNumber()));
+            showRxTx = (VideoProfile.isReceptionEnabled(mCall.getVideoState()) || isAudioAndVtCap);
+            showRx = (VideoProfile.isBidirectional(mCall.getVideoState()) || isAudioAndVtCap);
+            showVolte = VideoProfile.isVideo(mCall.getVideoState());
+            Log.v(this, "updateButtonsState showRxTx = " + showRxTx +
+                    " showRx" + showRx + " showVolte = " + showVolte);
+        }
+
         ui.showButton(BUTTON_AUDIO, true);
         ui.showButton(BUTTON_SWAP, showSwap);
         ui.showButton(BUTTON_HOLD, showHold);
         ui.setHold(isCallOnHold);
         ui.showButton(BUTTON_MUTE, showMute);
         ui.showButton(BUTTON_ADD_CALL, showAddCall);
-        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
+        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo && !mEnhanceEnable);
         ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio && !useExt);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt);
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
-        ui.enableAddParticipant(showAddParticipant);
+        ui.enableAddParticipant(showAddParticipant && !mEnhanceEnable);
 
         ui.showButton(BUTTON_RECORD, showRecord);
         /* Depending on the transfer capabilities, display the corresponding buttons */
@@ -506,6 +542,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             ui.showButton(BUTTON_TRANSFER_BLIND, false);
             ui.showButton(BUTTON_TRANSFER_ASSURED, false);
             ui.showButton(BUTTON_TRANSFER_CONSULTATIVE, false);
+        }
+        if (mEnhanceEnable) {
+            Log.v(this, "Add three new buttons");
+            ui.showButton(BUTTON_RXTX_VIDEO_CALL, showRxTx);
+            ui.showButton(BUTTON_RX_VIDEO_CALL, showRx);
+            ui.showButton(BUTTON_VO_VIDEO_CALL, showVolte);
         }
 
         ui.updateButtonStates();

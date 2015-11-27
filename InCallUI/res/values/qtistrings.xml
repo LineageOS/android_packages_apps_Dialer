@@ -177,4 +177,7 @@
     <string-array name="international_idp_values" translatable="false">
         <item>"0033"</item>
     </string-array>
+    <string name="video_call_downgrade_without_lte_toast">Move out of LTE coverage area downgrade the call.</string>
+    <string name="video_call">Video Calling</string>
+    <string name="video_call_cannot_upgrade">cannot accept video calls at this time</string>
 </resources>
