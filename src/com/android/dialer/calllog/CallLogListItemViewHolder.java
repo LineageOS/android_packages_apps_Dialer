@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
@@ -80,6 +81,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public View sendMessageView;
     public View detailsButtonView;
     public View callWithNoteButtonView;
+    public View blockCallerButtonView;
+
+    private ContactInfoHelper mContactInfoHelper;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -263,6 +267,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             callWithNoteButtonView = actionsView.findViewById(R.id.call_with_note_action);
             callWithNoteButtonView.setOnClickListener(this);
+
+            blockCallerButtonView = actionsView.findViewById(R.id.block_caller_action);
+            blockCallerButtonView.setOnClickListener(this);
         }
 
         bindActionButtons();
@@ -461,6 +468,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                                                                            view in dialog. */
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */
                     accountHandle);
+        } else if (view.getId() == R.id.block_caller_action) {
+            mContactInfoHelper = new ContactInfoHelper(mContext, GeoUtil.getCurrentCountryIso(mContext));
+            mContactInfoHelper.addNumberToBlacklist(number);
         } else {
             final IntentProvider intentProvider = (IntentProvider) view.getTag();
             if (intentProvider != null) {
@@ -496,6 +506,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         viewHolder.detailsButtonView = new TextView(context);
         viewHolder.actionsView = new View(context);
         viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
+        viewHolder.blockCallerButtonView = new TextView(context);
 
         return viewHolder;
     }
