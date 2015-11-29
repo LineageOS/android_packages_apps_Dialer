@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
+import android.graphics.PorterDuff.Mode;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -34,8 +35,11 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.telephony.util.BlacklistUtils;
+
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
@@ -80,6 +84,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public View sendMessageView;
     public View detailsButtonView;
     public View callWithNoteButtonView;
+    public View blockCallerButtonView;
+
+    private ContactInfoHelper mContactInfoHelper;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -192,7 +199,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         this.primaryActionButtonView = primaryActionButtonView;
 
         Resources resources = mContext.getResources();
-        mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
+        mPhotoSize = resources.getDimensionPixelSize(R.dimen.contact_photo_size);
 
         // Set text height to false on the TextViews so they don't have extra padding.
         phoneCallDetailsViews.nameView.setElegantTextHeight(false);
@@ -202,6 +209,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         primaryActionButtonView.setOnClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
+
+        mContactInfoHelper = new ContactInfoHelper(mContext,
+                GeoUtil.getCurrentCountryIso(mContext));
     }
 
     public static CallLogListItemViewHolder create(
@@ -263,6 +273,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             callWithNoteButtonView = actionsView.findViewById(R.id.call_with_note_action);
             callWithNoteButtonView.setOnClickListener(this);
+
+            blockCallerButtonView = actionsView.findViewById(R.id.block_caller_action);
+            blockCallerButtonView.setOnClickListener(this);
+            updateBlockCallerView();
         }
 
         bindActionButtons();
@@ -374,6 +388,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
         callWithNoteButtonView.setVisibility(
                 supportsCallSubject && !isVoicemailNumber ? View.VISIBLE : View.GONE);
+
+        // Remove block caller item if blacklist is disabled
+        if (mContactInfoHelper.canBlacklistCalls()) {
+            blockCallerButtonView.setVisibility(View.VISIBLE);
+        } else {
+            blockCallerButtonView.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -461,6 +482,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                                                                            view in dialog. */
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */
                     accountHandle);
+        } else if (view.getId() == R.id.block_caller_action) {
+            if (isBlackListed() != BlacklistUtils.MATCH_NONE) {
+                mContactInfoHelper.removeNumberFromBlacklist(number);
+            } else {
+                mContactInfoHelper.addNumberToBlacklist(number);
+            }
+            updateBlockCallerView();
         } else {
             final IntentProvider intentProvider = (IntentProvider) view.getTag();
             if (intentProvider != null) {
@@ -496,7 +524,40 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         viewHolder.detailsButtonView = new TextView(context);
         viewHolder.actionsView = new View(context);
         viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
+        viewHolder.blockCallerButtonView = new TextView(context);
 
         return viewHolder;
+    }
+
+    /**
+     * Update block caller text and image color
+     */
+    private void updateBlockCallerView() {
+        Resources res = mContext.getResources();
+        TextView blockCallerText =
+                (TextView) rootView.findViewById(R.id.block_caller_text);
+        ImageView blockCallerImage =
+                (ImageView) rootView.findViewById(R.id.block_caller_image);
+        if (isBlackListed() != BlacklistUtils.MATCH_NONE) {
+            blockCallerText.setText(R.string.call_log_action_unblock);
+            blockCallerText.setTextColor(res.getColor(
+                    R.color.call_log_action_block_red));
+            blockCallerImage.setColorFilter(res.getColor(
+                    R.color.call_log_action_block_red), Mode.SRC_ATOP);
+        } else {
+            blockCallerText.setText(R.string.call_log_action_block);
+            blockCallerText.setTextColor(res.getColor(
+                    R.color.call_log_action_block_gray));
+            blockCallerImage.setColorFilter(res.getColor(
+                    R.color.call_log_action_block_gray), Mode.SRC_ATOP);
+        }
+    }
+
+    /**
+     * Checks whether the number is blacklisted
+     */
+    public int isBlackListed() {
+        return BlacklistUtils.isListed(mContext,
+                number, BlacklistUtils.BLOCK_CALLS);
     }
 }

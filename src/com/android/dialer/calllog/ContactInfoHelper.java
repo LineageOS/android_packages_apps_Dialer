@@ -475,4 +475,20 @@ public class ContactInfoHelper {
         }
     }
 
+    /**
+     * Requests the given number to be removed from phone blacklist
+     *
+     * @param number the number to be removed from blacklist
+     */
+    public void removeNumberFromBlacklist(String number) {
+        Uri uri = Uri.withAppendedPath(Telephony.Blacklist.CONTENT_FILTER_BYNUMBER_URI, number);
+        int count = mContext.getContentResolver().delete(uri, null, null);
+
+        if (count != 0) {
+            // Give the user some feedback
+            String message = mContext.getString(R.string.toast_removed_from_blacklist, number);
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

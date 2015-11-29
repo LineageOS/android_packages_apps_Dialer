@@ -107,4 +107,8 @@
     <color name="floating_action_button_touch_tint">#80ffffff</color>
 
     <color name="call_log_action_divider">#eeeeee</color>
+
+    <!-- Color for call log blacklist item -->
+    <color name="call_log_action_block_red">#F44336</color>
+    <color name="call_log_action_block_gray">#616161</color>
 </resources>
