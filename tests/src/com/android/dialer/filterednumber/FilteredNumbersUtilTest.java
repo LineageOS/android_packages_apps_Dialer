@@ -15,6 +15,7 @@
  */
 package com.android.dialer.filterednumber;
 
+import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
 
 import com.android.contacts.common.test.mocks.ContactsMockContext;
@@ -46,6 +47,12 @@ public class FilteredNumbersUtilTest extends AndroidTestCase {
     public void setUp() throws Exception {
         super.setUp();
         mContext = new ContactsMockContext(getContext(), FilteredNumberContract.AUTHORITY);
+
+        // Reset whether an emergency number was dialed
+        PreferenceManager.getDefaultSharedPreferences(mContext)
+                .edit()
+                .putLong(FilteredNumbersUtil.LAST_EMERGENCY_CALL_MS_PREF_KEY, 0)
+                .apply();
     }
 
     public void testShouldBlockVoicemail_NotBlocked() {
@@ -76,6 +83,17 @@ public class FilteredNumbersUtilTest extends AndroidTestCase {
         setupShouldBlockVoicemailQuery(EARLIER_TIME);
         assertTrue(FilteredNumbersUtil.shouldBlockVoicemail(mContext, NORMALIZED_NUMBER,
                 COUNTRY_ISO, EARLIER_TIME + 30000));
+    }
+
+    public void testShouldBlockVoicemail_AfterEmergencyCall() {
+        // Just called emergency services
+        PreferenceManager.getDefaultSharedPreferences(mContext)
+                .edit()
+                .putLong(FilteredNumbersUtil.LAST_EMERGENCY_CALL_MS_PREF_KEY,
+                        System.currentTimeMillis())
+                .apply();
+        assertFalse(FilteredNumbersUtil.shouldBlockVoicemail(mContext, NORMALIZED_NUMBER,
+                COUNTRY_ISO, 0));
     }
 
     private void setupShouldBlockVoicemailQuery(long creationTimeMs) {
