@@ -110,10 +110,13 @@ public class CallTypeIconsView extends View {
     private Drawable getCallTypeDrawable(int callType) {
         switch (callType) {
             case AppCompatConstants.CALLS_INCOMING_TYPE:
+            case AppCompatConstants.INCOMING_IMS_TYPE:
                 return sResources.incoming;
             case AppCompatConstants.CALLS_OUTGOING_TYPE:
+            case AppCompatConstants.OUTGOING_IMS_TYPE:
                 return sResources.outgoing;
             case AppCompatConstants.CALLS_MISSED_TYPE:
+            case AppCompatConstants.MISSED_IMS_TYPE:
                 return sResources.missed;
             case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
                 return sResources.voicemail;

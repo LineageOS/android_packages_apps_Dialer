@@ -37,6 +37,12 @@ public class CallTypeHelper {
     private final CharSequence mOutgoingVideoName;
     /** Name used to identify missed video calls. */
     private final CharSequence mMissedVideoName;
+    /** Name used to identify incoming video calls. */
+    private final CharSequence mIncomingVoLTEName;
+    /** Name used to identify outgoing video calls. */
+    private final CharSequence mOutgoingVoLTEName;
+    /** Name used to identify missed video calls. */
+    private final CharSequence mMissedVoLTEName;
     /** Name used to identify voicemail calls. */
     private final CharSequence mVoicemailName;
     /** Name used to identify rejected calls. */
@@ -56,6 +62,9 @@ public class CallTypeHelper {
         mIncomingVideoName = resources.getString(R.string.type_incoming_video);
         mOutgoingVideoName = resources.getString(R.string.type_outgoing_video);
         mMissedVideoName = resources.getString(R.string.type_missed_video);
+        mIncomingVoLTEName = resources.getString(R.string.type_incoming_volte);
+        mOutgoingVoLTEName = resources.getString(R.string.type_outgoing_volte);
+        mMissedVoLTEName = resources.getString(R.string.type_missed_volte);
         mVoicemailName = resources.getString(R.string.type_voicemail);
         mRejectedName = resources.getString(R.string.type_rejected);
         mBlockedName = resources.getString(R.string.type_blocked);
@@ -73,6 +82,13 @@ public class CallTypeHelper {
                     return mIncomingName;
                 }
 
+            case AppCompatConstants.INCOMING_IMS_TYPE:
+                if (isVideoCall) {
+                    return mIncomingVideoName;
+                } else {
+                    return mIncomingVoLTEName;
+                }
+
             case AppCompatConstants.CALLS_OUTGOING_TYPE:
                 if (isVideoCall) {
                     return mOutgoingVideoName;
@@ -80,11 +96,25 @@ public class CallTypeHelper {
                     return mOutgoingName;
                 }
 
+            case AppCompatConstants.OUTGOING_IMS_TYPE:
+                if (isVideoCall) {
+                    return mOutgoingVideoName;
+                } else {
+                    return mOutgoingVoLTEName;
+                }
+
             case AppCompatConstants.CALLS_MISSED_TYPE:
                 if (isVideoCall) {
                     return mMissedVideoName;
                 } else {
                     return mMissedName;
+                }
+
+            case AppCompatConstants.MISSED_IMS_TYPE:
+                if (isVideoCall) {
+                    return mMissedVideoName;
+                } else {
+                    return mMissedVoLTEName;
                 }
 
             case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
@@ -105,14 +135,17 @@ public class CallTypeHelper {
     public Integer getHighlightedColor(int callType) {
         switch (callType) {
             case AppCompatConstants.CALLS_INCOMING_TYPE:
+            case AppCompatConstants.INCOMING_IMS_TYPE:
                 // New incoming calls are not highlighted.
                 return null;
 
             case AppCompatConstants.CALLS_OUTGOING_TYPE:
+            case AppCompatConstants.OUTGOING_IMS_TYPE:
                 // New outgoing calls are not highlighted.
                 return null;
 
             case AppCompatConstants.CALLS_MISSED_TYPE:
+            case AppCompatConstants.MISSED_IMS_TYPE:
                 return mNewMissedColor;
 
             case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
@@ -129,6 +162,8 @@ public class CallTypeHelper {
     public static boolean isMissedCallType(int callType) {
         return (callType != AppCompatConstants.CALLS_INCOMING_TYPE
                 && callType != AppCompatConstants.CALLS_OUTGOING_TYPE
+                && callType != AppCompatConstants.INCOMING_IMS_TYPE
+                && callType != AppCompatConstants.OUTGOING_IMS_TYPE
                 && callType != AppCompatConstants.CALLS_VOICEMAIL_TYPE);
     }
 }

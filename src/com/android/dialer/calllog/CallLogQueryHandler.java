@@ -195,13 +195,32 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
 
         if (callType > CALL_TYPE_ALL) {
-            where.append(" AND (").append(Calls.TYPE).append(" = ?)");
+            if (where.length() > 0) {
+                where.append(" AND ");
+            }
+
+            if ((callType == Calls.INCOMING_TYPE) || (callType == Calls.OUTGOING_TYPE)
+                    || (callType == Calls.MISSED_TYPE)) {
+                where.append(String.format("(%s = ? OR %s = ?)",
+                        Calls.TYPE, Calls.TYPE));
+            } else {
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+            }
             selectionArgs.add(Integer.toString(callType));
+            if (callType == Calls.INCOMING_TYPE) {
+                selectionArgs.add(Integer.toString(AppCompatConstants.INCOMING_IMS_TYPE));
+            } else if (callType == Calls.OUTGOING_TYPE) {
+                selectionArgs.add(Integer.toString(AppCompatConstants.OUTGOING_IMS_TYPE));
+            } else if (callType == Calls.MISSED_TYPE) {
+                selectionArgs.add(Integer.toString(AppCompatConstants.MISSED_IMS_TYPE));
+            }
         } else {
+            // Add a clause to fetch only items of type voicemail.
             where.append(" AND NOT ");
             where.append("(" + Calls.TYPE + " = " + AppCompatConstants.CALLS_VOICEMAIL_TYPE + ")");
         }
 
+        // Add a clause to fetch only items newer than the requested date
         if (newerThan > 0) {
             where.append(" AND (").append(Calls.DATE).append(" > ?)");
             selectionArgs.add(Long.toString(newerThan));

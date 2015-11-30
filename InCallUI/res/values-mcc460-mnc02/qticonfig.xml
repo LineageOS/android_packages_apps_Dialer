@@ -35,4 +35,6 @@
     <bool name="config_display_data_usage_toast">false</bool>
     <!-- Config to show/hide call duration in call detail -->
     <bool name="call_duration_enabled">false</bool>
+    <!-- Config to enable/disable ims call log -->
+    <bool name="ims_call_type_enabled">true</bool>
 </resources>

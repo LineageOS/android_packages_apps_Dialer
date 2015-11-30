@@ -42,4 +42,6 @@
     <bool name="def_incallui_clearcode_enabled">false</bool>
     <!-- Config to show/hide call duration in call detail -->
     <bool name="call_duration_enabled">true</bool>
+    <!-- Config to enable/disable ims call log -->
+    <bool name="ims_call_type_enabled">false</bool>
 </resources>

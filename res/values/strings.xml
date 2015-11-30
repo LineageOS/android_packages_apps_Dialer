@@ -365,6 +365,15 @@
     <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
     <string name="type_missed_video">Missed video call</string>
 
+    <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_incoming_volte">Incoming 4G voice call</string>
+
+    <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_outgoing_volte">Outgoing 4G voice call</string>
+
+    <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_missed_volte">Missed 4G voice call</string>
+
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>
 
