@@ -25,6 +25,7 @@ import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.LookupUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class AuskunftApi {
@@ -34,7 +35,7 @@ public final class AuskunftApi {
             "https://auskunft.at/suche";
 
     private static final String SEARCH_RESULTS_REGEX =
-            "(?i)class=[\"']?search-list(.*?)class=[\"']?pagination";
+            "(?i)<section[\\s]+class=[\"']?search-entry(.*?)?</section";
     private static final String NAME_REGEX =
             "(?i)<h1[\\s]+itemprop=[\"']?name[\"']?>(.*?)</h1";
     private static final String NUMBER_REGEX =
@@ -47,7 +48,7 @@ public final class AuskunftApi {
     private AuskunftApi() {
     }
 
-    public static ContactInfo[] query(String filter, int lookupType, String normalizedNumber,
+    public static List<ContactInfo> query(String filter, int lookupType, String normalizedNumber,
             String formattedNumber) throws IOException {
         // build URI
         Uri uri = Uri.parse(PEOPLE_LOOKUP_URL)
@@ -55,38 +56,36 @@ public final class AuskunftApi {
                 .appendQueryParameter("query", filter)
                 .build();
 
-        // get search results from HTML to speedup subsequent matching and avoid errors
-        String output = LookupUtils.firstRegexResult(LookupUtils.httpGet(uri.toString(), null),
-                SEARCH_RESULTS_REGEX, true);
+        // get all search entry sections
+        List<String> entries = LookupUtils.allRegexResults(LookupUtils.httpGet(uri.toString(),
+                null), SEARCH_RESULTS_REGEX, true);
 
-        // get all names, abort lookup if nothing found
-        List<String> names = LookupUtils.allRegexResults(output, NAME_REGEX, true);
-        if (names == null || names.isEmpty()) {
+        // abort lookup if nothing found
+        if (entries == null || entries.isEmpty()) {
             Log.w(TAG, "nothing found");
             return null;
         }
 
-        // get all numbers and addresses
-        List<String> numbers = LookupUtils.allRegexResults(output, NUMBER_REGEX, true);
-        List<String> addresses = LookupUtils.allRegexResults(output, ADDRESS_REGEX, true);
-
-        // abort on invalid data (all the data arrays must have the same size because we query
-        // all the results at once and expect them to be in the right order)
-        if (numbers == null || addresses == null || names.size() != numbers.size() ||
-                numbers.size() != addresses.size()) {
-            Log.w(TAG, "names, numbers and address data do not match");
-            return null;
-        }
-
-        // build and return contact list
-        ContactInfo[] details = new ContactInfo[names.size()];
-        for (int i = 0; i < names.size(); i++) {
+        // build response by iterating through the search entries and parsing their HTML data
+        List<ContactInfo> infos = new ArrayList<ContactInfo>();
+        for (String entry : entries) {
+            // parse wanted data and replace null values
+            String name = replaceNullResult(LookupUtils.firstRegexResult(entry, NAME_REGEX, true));
+            String address = replaceNullResult(LookupUtils.firstRegexResult(
+                    entry, ADDRESS_REGEX, true));
+            String number = replaceNullResult(LookupUtils.firstRegexResult(
+                    entry, NUMBER_REGEX, true));
+            // ignore entry if name or number is empty (should not occur)
+            // missing addresses won't be a problem (but do occur)
+            if (name.isEmpty() || number.isEmpty()) {
+                continue;
+            }
             // figure out if we have a business contact
-            boolean isBusiness = names.get(i).contains(BUSINESS_IDENTIFIER);
+            boolean isBusiness = name.contains(BUSINESS_IDENTIFIER);
             // cleanup results
-            String name = cleanupResult(names.get(i));
-            String number = cleanupResult(numbers.get(i));
-            String address = cleanupResult(addresses.get(i));
+            name = cleanupResult(name);
+            number = cleanupResult(number);
+            address = cleanupResult(address);
             // set normalized and formatted number if we're not doing a reverse lookup
             if (lookupType != ContactBuilder.REVERSE_LOOKUP) {
                 normalizedNumber = formattedNumber = number;
@@ -100,9 +99,9 @@ public final class AuskunftApi {
             builder.addWebsite(ContactBuilder.WebsiteUrl.createProfile(uri.toString()));
             builder.addAddress(ContactBuilder.Address.createFormattedHome(address));
             builder.setIsBusiness(isBusiness);
-            details[i] = builder.build();
+            infos.add(builder.build());
         }
-        return details;
+        return infos;
     }
 
     private static String cleanupResult(String result) {
@@ -118,5 +117,9 @@ public final class AuskunftApi {
         result = result.trim();
 
         return result;
+    }
+
+    private static String replaceNullResult(String result) {
+        return (result == null) ? "" : result;
     }
 }

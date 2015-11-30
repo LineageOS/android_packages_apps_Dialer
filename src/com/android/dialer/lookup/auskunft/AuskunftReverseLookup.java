@@ -23,6 +23,7 @@ import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ReverseLookup;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AuskunftReverseLookup extends ReverseLookup {
     private static final String TAG = AuskunftReverseLookup.class.getSimpleName();
@@ -39,8 +40,8 @@ public class AuskunftReverseLookup extends ReverseLookup {
         }
 
         // query the API and return null if nothing found or general error
-        ContactInfo[] infos = AuskunftApi.query(normalizedNumber, ContactBuilder.REVERSE_LOOKUP,
+        List<ContactInfo> infos = AuskunftApi.query(normalizedNumber, ContactBuilder.REVERSE_LOOKUP,
                 normalizedNumber, formattedNumber);
-        return (infos != null && infos.length != 0) ? infos[0] : null;
+        return (infos != null && !infos.isEmpty()) ? infos.get(0) : null;
     }
 }

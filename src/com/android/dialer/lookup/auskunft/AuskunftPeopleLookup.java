@@ -24,6 +24,7 @@ import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.PeopleLookup;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AuskunftPeopleLookup extends PeopleLookup {
     private static final String TAG = AuskunftPeopleLookup.class.getSimpleName();
@@ -33,12 +34,13 @@ public class AuskunftPeopleLookup extends PeopleLookup {
 
     @Override
     public ContactInfo[] lookup(Context context, String filter) {
-        ContactInfo[] infos = null;
+        List<ContactInfo> infos = null;
         try {
             infos = AuskunftApi.query(filter, ContactBuilder.PEOPLE_LOOKUP, null, null);
         } catch (IOException e) {
             Log.e(TAG, "People lookup failed", e);
         }
-        return infos;
+        return (infos != null && !infos.isEmpty())
+                ? infos.toArray(new ContactInfo[infos.size()]) : null;
     }
 }
