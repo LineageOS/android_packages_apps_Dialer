@@ -16,6 +16,24 @@
       "revId": "92d68a53842200571f00c4b9ec96bf2505099a6e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf8cb3f7_6005727a",
+        "filename": "src/com/android/dialer/lookup/auskunft/AuskunftApi.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 13766
+      },
+      "writtenOn": "2015-11-30T22:58:35Z",
+      "side": 1,
+      "message": "I see. Hmm I didn\u0027t want to touch the return type of the method because it matches nicely with what the PeopleLookup class is defining at https://github.com/CyanogenMod/android_packages_apps_Dialer/blob/2c80a616529cca11a8608e9144d578227570ba3f/src/com/android/dialer/lookup/PeopleLookup.java#L59\n\nDo you think it\u0027s a good solution to adapt my API to return lists and convert those list in my PeopleLookup implementation to an Array? (maybe at https://github.com/CyanogenMod/android_packages_apps_Dialer/blob/2c80a616529cca11a8608e9144d578227570ba3f/src/com/android/dialer/lookup/auskunft/AuskunftPeopleLookup.java#L42)",
+      "parentUuid": "bf8cb3f7_a0d93a23",
+      "revId": "92d68a53842200571f00c4b9ec96bf2505099a6e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
