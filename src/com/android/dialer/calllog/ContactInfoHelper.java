@@ -157,9 +157,14 @@ public class ContactInfoHelper {
             return ContactInfo.EMPTY;
         }
 
-        Cursor phoneLookupCursor = mContext.getContentResolver().query(uri,
-                PhoneQuery.PHONE_LOOKUP_PROJECTION, null, null, null);
-
+        Cursor phoneLookupCursor = null;
+        try {
+            phoneLookupCursor = mContext.getContentResolver().query(uri,
+                    PhoneQuery.PHONE_LOOKUP_PROJECTION, null, null, null);
+        } catch (NullPointerException e) {
+            // Trap NPE from pre-N CP2
+            return null;
+        }
         if (phoneLookupCursor == null) {
             return null;
         }
