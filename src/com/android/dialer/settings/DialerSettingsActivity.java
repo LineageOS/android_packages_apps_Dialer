@@ -65,28 +65,30 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
-        // Only show call setting menus if the current user is the primary/owner user.
-        if (isPrimaryUser()) {
-            // Show "Call Settings" if there is one SIM and "Phone Accounts" if there are more.
-            if (telephonyManager.getPhoneCount() <= 1) {
-                Header callSettingsHeader = new Header();
-                Intent callSettingsIntent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
-                callSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // "Call Settings" (full settings) is shown if the current user is primary user and there 
+        // is only one SIM. Before N, "Calling accounts" setting is shown if the current user is 
+        // primary user and there are multiple SIMs. In N+, "Calling accounts" is shown whenever
+        // "Call Settings" is not shown.
+        boolean isPrimaryUser = isPrimaryUser();
+        if (isPrimaryUser && telephonyManager.getPhoneCount() <= 1) {
+            Header callSettingsHeader = new Header();
+            Intent callSettingsIntent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
+            callSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                callSettingsHeader.titleRes = R.string.call_settings_label;
-                callSettingsHeader.intent = callSettingsIntent;
-                target.add(callSettingsHeader);
-            } else {
-                Header phoneAccountSettingsHeader = new Header();
-                Intent phoneAccountSettingsIntent =
-                        new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
-                phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            callSettingsHeader.titleRes = R.string.call_settings_label;
+            callSettingsHeader.intent = callSettingsIntent;
+            target.add(callSettingsHeader);
+        } else if (android.os.Build.VERSION.CODENAME.startsWith("N") || isPrimaryUser) {
+            Header phoneAccountSettingsHeader = new Header();
+            Intent phoneAccountSettingsIntent =
+                    new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
+            phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                phoneAccountSettingsHeader.titleRes = R.string.phone_account_settings_label;
-                phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
-                target.add(phoneAccountSettingsHeader);
-            }
-
+            phoneAccountSettingsHeader.titleRes = R.string.phone_account_settings_label;
+            phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
+            target.add(phoneAccountSettingsHeader);
+        }
+        if (isPrimaryUser) {
             Header blockedCallsHeader = new Header();
             blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
             blockedCallsHeader.intent = new Intent(this, BlockedNumbersSettingsActivity.class);
