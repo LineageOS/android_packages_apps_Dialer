@@ -43,6 +43,7 @@ import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.testing.NeededForTesting;
@@ -249,7 +250,9 @@ public class CallDetailActivity extends AppCompatActivity
 
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
-        mQuickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
+        if (CompatUtils.hasPrioritizedMimeType()) {
+            mQuickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
+        }
         mCallerName = (TextView) findViewById(R.id.caller_name);
         mCallerNumber = (TextView) findViewById(R.id.caller_number);
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);

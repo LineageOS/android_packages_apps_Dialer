@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfo;
@@ -63,9 +65,9 @@ public class NumbersAdapter extends SimpleCursorAdapter {
         final QuickContactBadge quickContactBadge =
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo);
         quickContactBadge.setOverlay(null);
-        quickContactBadge.setPrioritizedMimeType(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-
+        if (CompatUtils.hasPrioritizedMimeType()) {
+            quickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
+        }
         final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
         final CharSequence locationOrType = getNumberTypeOrLocation(info);
         final String displayNumber = getDisplayNumber(info);

@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.ContactEntryListFragment;
 import com.android.contacts.common.list.ContactListFilter;
@@ -152,8 +153,13 @@ public class AllContactsFragment extends ContactEntryListFragment<ContactEntryLi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final Uri uri = (Uri) view.getTag();
         if (uri != null) {
-            QuickContact.showQuickContact(getContext(), view, uri, null,
-                    Phone.CONTENT_ITEM_TYPE);
+            if (CompatUtils.hasPrioritizedMimeType()) {
+                QuickContact.showQuickContact(getContext(), view, uri, null,
+                        Phone.CONTENT_ITEM_TYPE);
+            } else {
+                QuickContact.showQuickContact(getActivity(), view, uri, QuickContact.MODE_LARGE,
+                        null);
+            }
         }
     }
 
