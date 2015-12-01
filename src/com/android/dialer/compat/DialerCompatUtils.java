@@ -41,4 +41,16 @@ public final class DialerCompatUtils {
         return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP)
                 >= Build.VERSION_CODES.M;
     }
+
+    /**
+     * Determines if this version has access to the
+     * {@link android.provider.CallLog.Calls.CACHED_PHOTO_URI} column
+     *
+     * @return {@code true} if {@link android.provider.CallLog.Calls.CACHED_PHOTO_URI} is available,
+     * {@code false} otherwise
+     */
+    public static boolean isCallsCachedPhotoUriCompatible() {
+        return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
+                >= Build.VERSION_CODES.M;
+    }
 }

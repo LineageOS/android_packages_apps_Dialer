@@ -18,10 +18,12 @@ package com.android.dialer.calllog;
 
 import android.provider.CallLog.Calls;
 
+import com.android.dialer.compat.DialerCompatUtils;
 import com.android.dialer.util.AppCompatConstants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * The query for the call log table.
@@ -52,7 +54,6 @@ public final class CallLogQuery {
             Calls.FEATURES,                     // 20
             Calls.DATA_USAGE,                   // 21
             Calls.TRANSCRIPTION,                // 22
-            Calls.CACHED_PHOTO_URI              // 23
     };
 
     public static final int ID = 0;
@@ -78,18 +79,32 @@ public final class CallLogQuery {
     public static final int FEATURES = 20;
     public static final int DATA_USAGE = 21;
     public static final int TRANSCRIPTION = 22;
-    public static final int CACHED_PHOTO_URI = 23;
-    public static final int POST_DIAL_DIGITS = 24;
+
+    // Indices for columns that may not be available, depending on the Sdk Version
+    /**
+     * Only available in versions >= M
+     * Call {@link DialerCompatUtils#isCallsCachedPhotoUriCompatible()} prior to use
+     */
+    public static int CACHED_PHOTO_URI = -1;
+
+    /**
+     * Only available in versions > M
+     * Call {@link PhoneNumberDisplayUtil#canShowPostDial()} prior to use
+     */
+    public static int POST_DIAL_DIGITS = -1;
 
     public static final String[] _PROJECTION;
 
     static {
-        ArrayList<String> projectionList = new ArrayList<String>();
-        projectionList.addAll(Arrays.asList(_PROJECTION_INTERNAL));
+        List<String> projectionList = Lists.newArrayList(_PROJECTION_INTERNAL);
+        if (DialerCompatUtils.isCallsCachedPhotoUriCompatible()) {
+            projectionList.add(Calls.CACHED_PHOTO_URI);
+            CACHED_PHOTO_URI = projectionList.size() - 1;
+        }
         if (PhoneNumberDisplayUtil.canShowPostDial()) {
             projectionList.add(AppCompatConstants.POST_DIAL_DIGITS);
+            POST_DIAL_DIGITS = projectionList.size() - 1;
         }
-        projectionList.trimToSize();
         _PROJECTION = projectionList.toArray(new String[projectionList.size()]);
     }
 
