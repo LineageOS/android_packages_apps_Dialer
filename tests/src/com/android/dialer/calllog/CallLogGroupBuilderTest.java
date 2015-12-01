@@ -98,9 +98,14 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
 
         mBuilder.addGroups(mCursor);
 
-        assertEquals(2, mFakeGroupCreator.groups.size());
-        assertGroupIs(0, 2, mFakeGroupCreator.groups.get(0));
-        assertGroupIs(2, 1, mFakeGroupCreator.groups.get(1));
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            assertEquals(2, mFakeGroupCreator.groups.size());
+            assertGroupIs(0, 2, mFakeGroupCreator.groups.get(0));
+            assertGroupIs(2, 1, mFakeGroupCreator.groups.get(1));
+        } else {
+            assertEquals(1, mFakeGroupCreator.groups.size());
+            assertGroupIs(0, 3, mFakeGroupCreator.groups.get(0));
+        }
     }
 
     public void testAddGroups_MatchingIncomingAndOutgoing() {
@@ -339,7 +344,9 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         values[CallLogQuery.ID] = mCursor.getPosition();
         values[CallLogQuery.NUMBER] = number;
         values[CallLogQuery.CALL_TYPE] = type;
-        values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
+        }
         mCursor.addRow(values);
     }
 
