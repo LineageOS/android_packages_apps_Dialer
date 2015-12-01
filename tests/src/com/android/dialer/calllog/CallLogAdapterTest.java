@@ -240,7 +240,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        assertHasCallActionToGivenNumber(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            assertHasCallActionToGivenNumber(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
+        }
     }
 
     @MediumTest
@@ -262,7 +264,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        assertNameIs(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            assertNameIs(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
+        }
     }
 
     @MediumTest
@@ -274,7 +278,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        assertNameIs(mViewHolder, TEST_CACHED_NAME_PRIMARY);
+        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+            assertNameIs(mViewHolder, TEST_CACHED_NAME_PRIMARY);
+        }
     }
 
     @MediumTest
@@ -655,7 +661,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         if (!TextUtils.isEmpty(number)) {
             values[CallLogQuery.NUMBER] = number;
         }
-        if (!TextUtils.isEmpty(postDialDigits)) {
+        if (!TextUtils.isEmpty(postDialDigits) && PhoneNumberDisplayUtil.canShowPostDial()) {
             values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
         }
         if (presentation != NO_VALUE_SET) {
