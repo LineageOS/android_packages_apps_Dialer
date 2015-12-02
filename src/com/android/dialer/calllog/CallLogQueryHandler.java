@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -34,6 +35,7 @@ import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import android.util.Log;
 
+import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
@@ -167,8 +169,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         List<String> selectionArgs = Lists.newArrayList();
 
         // Ignore voicemails marked as deleted
-        where.append(Voicemails.DELETED);
-        where.append(" = 0");
+        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
+                >= Build.VERSION_CODES.M) {
+            where.append(Voicemails.DELETED).append(" = 0");
+        }
 
         if (newOnly) {
             where.append(" AND ");
