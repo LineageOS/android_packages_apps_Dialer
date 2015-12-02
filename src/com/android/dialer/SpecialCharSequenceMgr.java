@@ -192,7 +192,6 @@ public class SpecialCharSequenceMgr {
      * and query cancel handler implemented in {@link SimContactQueryCookie}.
      */
     static boolean handleAdnEntry(Context context, String input, EditText textField) {
-        context = context.getApplicationContext();
         /* ADN entries are of the form "N(N)(N)#" */
         TelephonyManager telephonyManager =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -225,7 +224,7 @@ public class SpecialCharSequenceMgr {
                 // the dialer text field.
 
                 // create the async query handler
-                final QueryHandler handler = new QueryHandler (context.getContentResolver());
+                final QueryHandler handler = new QueryHandler(context.getContentResolver());
 
                 // create the cookie object
                 final SimContactQueryCookie sc = new SimContactQueryCookie(index - 1, handler,
@@ -248,16 +247,17 @@ public class SpecialCharSequenceMgr {
                 List<PhoneAccountHandle> subscriptionAccountHandles =
                         PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
 
+                Context applicationContext = context.getApplicationContext();
                 boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
-                        TelecomUtil.getDefaultOutgoingPhoneAccount(context,
+                        TelecomUtil.getDefaultOutgoingPhoneAccount(applicationContext,
                                 PhoneAccount.SCHEME_TEL));
 
                 if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
-                    Uri uri = TelecomUtil.getAdnUriForPhoneAccount(context, null);
+                    Uri uri = TelecomUtil.getAdnUriForPhoneAccount(applicationContext, null);
                     handleAdnQuery(handler, sc, uri);
                 } else if (subscriptionAccountHandles.size() > 1){
-                    SelectPhoneAccountListener callback =
-                            new HandleAdnEntryAccountSelectedCallback(context, handler, sc);
+                    SelectPhoneAccountListener callback = new HandleAdnEntryAccountSelectedCallback(
+                            applicationContext, handler, sc);
 
                     DialogFragment dialogFragment = SelectPhoneAccountDialogFragment.newInstance(
                             subscriptionAccountHandles, callback);
