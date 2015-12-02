@@ -17,10 +17,10 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
-    <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Opkald"</string>
+    <string name="launcherActivityLabel" msgid="1129729740601172692">"Opkald"</string>
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Telefontastatur"</string>
-    <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
+    <string name="dialerIconLabel" msgid="6500826552823403796">"Opkald"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Opkaldshistorik"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Rapportér et forkert nummer"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Kopiér nummeret"</string>
