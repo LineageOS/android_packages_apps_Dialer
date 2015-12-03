@@ -16,9 +16,9 @@
 
 package com.android.incallui;
 
-import android.telecom.CallAudioState;
-
 import com.google.common.collect.Lists;
+
+import com.android.dialer.compat.CallAudioStateCompat;
 
 import java.util.List;
 
@@ -30,19 +30,20 @@ public class AudioModeProvider {
     static final int AUDIO_MODE_INVALID = 0;
 
     private static AudioModeProvider sAudioModeProvider = new AudioModeProvider();
-    private int mAudioMode = CallAudioState.ROUTE_EARPIECE;
+    private int mAudioMode = CallAudioStateCompat.ROUTE_EARPIECE;
     private boolean mMuted = false;
-    private int mSupportedModes = CallAudioState.ROUTE_EARPIECE | CallAudioState.ROUTE_BLUETOOTH |
-        CallAudioState.ROUTE_WIRED_HEADSET | CallAudioState.ROUTE_SPEAKER;
+    private int mSupportedModes = CallAudioStateCompat.ROUTE_EARPIECE
+            | CallAudioStateCompat.ROUTE_BLUETOOTH | CallAudioStateCompat.ROUTE_WIRED_HEADSET
+            | CallAudioStateCompat.ROUTE_SPEAKER;
     private final List<AudioModeListener> mListeners = Lists.newArrayList();
 
     public static AudioModeProvider getInstance() {
         return sAudioModeProvider;
     }
 
-    public void onAudioStateChanged(CallAudioState audioState) {
-        onAudioModeChange(audioState.getRoute(), audioState.isMuted());
-        onSupportedAudioModeChange(audioState.getSupportedRouteMask());
+    public void onAudioStateChanged(boolean isMuted, int route, int supportedRouteMask) {
+        onAudioModeChange(route, isMuted);
+        onSupportedAudioModeChange(supportedRouteMask);
     }
 
     public void onAudioModeChange(int newMode, boolean muted) {

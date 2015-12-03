@@ -16,23 +16,30 @@
 
 package com.android.incallui;
 
-import static com.android.incallui.CallButtonFragment.Buttons.*;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_ADD_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_AUDIO;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_DIALPAD;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_HOLD;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MERGE;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MUTE;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_PAUSE_VIDEO;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_SWAP;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_SWITCH_CAMERA;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.telecom.CallAudioState;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
+import com.android.dialer.compat.CallAudioStateCompat;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallCameraManager.Listener;
 import com.android.incallui.InCallPresenter.CanAddCallListener;
+import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.incallui.InCallPresenter.InCallDetailsListener;
-
-import java.util.Objects;
 
 /**
  * Logic for call buttons.
@@ -177,7 +184,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // an update for onAudioMode().  This will make UI response immediate
         // if it turns out to be slow
 
-        Log.d(this, "Sending new Audio Mode: " + CallAudioState.audioRouteToString(mode));
+        Log.d(this, "Sending new Audio Mode: " + CallAudioStateCompat.audioRouteToString(mode));
         TelecomAdapter.getInstance().setAudioRoute(mode);
     }
 
@@ -186,7 +193,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     public void toggleSpeakerphone() {
         // this function should not be called if bluetooth is available
-        if (0 != (CallAudioState.ROUTE_BLUETOOTH & getSupportedAudio())) {
+        if (0 != (CallAudioStateCompat.ROUTE_BLUETOOTH & getSupportedAudio())) {
 
             // It's clear the UI is wrong, so update the supported mode once again.
             Log.e(this, "toggling speakerphone not allowed when bluetooth supported.");
@@ -194,11 +201,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        int newMode = CallAudioState.ROUTE_SPEAKER;
+        int newMode = CallAudioStateCompat.ROUTE_SPEAKER;
 
         // if speakerphone is already on, change to wired/earpiece
-        if (getAudioMode() == CallAudioState.ROUTE_SPEAKER) {
-            newMode = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
+        if (getAudioMode() == CallAudioStateCompat.ROUTE_SPEAKER) {
+            newMode = CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE;
         }
 
         setAudioMode(newMode);
