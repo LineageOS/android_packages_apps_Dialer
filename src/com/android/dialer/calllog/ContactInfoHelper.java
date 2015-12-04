@@ -19,6 +19,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -47,6 +48,11 @@ import org.json.JSONObject;
  */
 public class ContactInfoHelper {
     private static final String TAG = ContactInfoHelper.class.getSimpleName();
+
+    private static final boolean FLAG_PRE_N_FEATURE =
+            true // Enforce Pre-N (M) behavior in release build
+            || Build.VERSION.SDK_INT <= Build.VERSION_CODES.M
+            || !Build.VERSION.CODENAME.startsWith("N");
 
     private final Context mContext;
     private final String mCurrentCountryIso;
@@ -388,13 +394,31 @@ public class ContactInfoHelper {
     }
 
     public static Uri getContactInfoLookupUri(String number) {
+        return getContactInfoLookupUri(number, -1);
+    }
+
+    public static Uri getContactInfoLookupUri(String number, long directoryId) {
         // Get URI for the number in the PhoneLookup table, with a parameter to indicate whether
         // the number is a SIP number.
-        return PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon()
-                .appendPath(Uri.encode(number))
+        Uri uri = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI;
+        if (FLAG_PRE_N_FEATURE) {
+            if (directoryId != -1) {
+                // ENTERPRISE_CONTENT_FILTER_URI in M doesn't support directory lookup
+                uri = PhoneLookup.CONTENT_FILTER_URI;
+            } else {
+                // b/25900607 in M. PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, encodes twice.
+                number = Uri.encode(number);
+            }
+        }
+        Uri.Builder builder = uri.buildUpon()
+                .appendPath(number)
                 .appendQueryParameter(PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS,
-                        String.valueOf(PhoneNumberHelper.isUriNumber(number)))
-                .build();
+                String.valueOf(PhoneNumberHelper.isUriNumber(number)));
+        if (directoryId != -1) {
+            builder.appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
+                    String.valueOf(directoryId));
+        }
+        return builder.build();
     }
 
     /**
