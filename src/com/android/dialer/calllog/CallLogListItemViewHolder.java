@@ -27,7 +27,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -44,6 +43,7 @@ import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.compat.CompatUtils;
+import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.UriUtils;
@@ -286,7 +286,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (callType == CallLog.Calls.VOICEMAIL_TYPE) {
             menu.setHeaderTitle(mContext.getResources().getText(R.string.voicemail));
         } else {
-            menu.setHeaderTitle(PhoneNumberUtils.createTtsSpannable(
+            menu.setHeaderTitle(PhoneNumberUtilsCompat.createTtsSpannable(
                     BidiFormatter.getInstance().unicodeWrap(number, TextDirectionHeuristics.LTR)));
         }
 
