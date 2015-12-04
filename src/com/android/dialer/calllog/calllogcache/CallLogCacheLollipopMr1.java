@@ -14,67 +14,50 @@
  * limitations under the License
  */
 
-package com.android.dialer.calllog;
+package com.android.dialer.calllog.calllogcache;
 
 import android.content.Context;
-import android.provider.CallLog;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Pair;
 
-import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.PhoneNumberUtil;
-import com.google.common.collect.Sets;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * Keeps a cache of recently made queries to the Telecom process. The aim of this cache is to
- * reduce the number of cross-process requests to TelecomManager, which can negatively affect
- * performance.
+ * This is the CallLogCache for versions of dialer Lollipop Mr1 and above with support for
+ * multi-SIM devices.
  *
- * This is designed with the specific use case of the {@link CallLogAdapter} in mind.
+ * This class should not be initialized directly and instead be acquired from
+ * {@link CallLogCache#getCallLogCache}.
  */
-public class TelecomCallLogCache {
-    private final Context mContext;
-
+class CallLogCacheLollipopMr1 extends CallLogCache {
     // Maps from a phone-account/number pair to a boolean because multiple numbers could return true
     // for the voicemail number if those numbers are not pre-normalized.
-    // TODO: Dialer should be fixed so as not to check isVoicemail() so often but at the time of
-    // this writing, that was a much larger undertaking than creating this cache.
     private final Map<Pair<PhoneAccountHandle, CharSequence>, Boolean> mVoicemailQueryCache =
             new HashMap<>();
     private final Map<PhoneAccountHandle, String> mPhoneAccountLabelCache = new HashMap<>();
     private final Map<PhoneAccountHandle, Integer> mPhoneAccountColorCache = new HashMap<>();
     private final Map<PhoneAccountHandle, Boolean> mPhoneAccountCallWithNoteCache = new HashMap<>();
 
-    private boolean mHasCheckedForVideoEnabled;
-    private boolean mIsVideoEnabled;
-
-    public TelecomCallLogCache(Context context) {
-        mContext = context;
+    /* package */ CallLogCacheLollipopMr1(Context context) {
+        super(context);
     }
 
+    @Override
     public void reset() {
         mVoicemailQueryCache.clear();
         mPhoneAccountLabelCache.clear();
         mPhoneAccountColorCache.clear();
         mPhoneAccountCallWithNoteCache.clear();
 
-        mHasCheckedForVideoEnabled = false;
-        mIsVideoEnabled = false;
+        super.reset();
     }
 
-    /**
-     * Returns true if the given number is the number of the configured voicemail. To be able to
-     * mock-out this, it is not a static method.
-     */
+    @Override
     public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
         if (TextUtils.isEmpty(number)) {
             return false;
@@ -91,9 +74,7 @@ public class TelecomCallLogCache {
         }
     }
 
-    /**
-     * Extract account label from PhoneAccount object.
-     */
+    @Override
     public String getAccountLabel(PhoneAccountHandle accountHandle) {
         if (mPhoneAccountLabelCache.containsKey(accountHandle)) {
             return mPhoneAccountLabelCache.get(accountHandle);
@@ -104,9 +85,7 @@ public class TelecomCallLogCache {
         }
     }
 
-    /**
-     * Extract account color from PhoneAccount object.
-     */
+    @Override
     public int getAccountColor(PhoneAccountHandle accountHandle) {
         if (mPhoneAccountColorCache.containsKey(accountHandle)) {
             return mPhoneAccountColorCache.get(accountHandle);
@@ -117,21 +96,7 @@ public class TelecomCallLogCache {
         }
     }
 
-    public boolean isVideoEnabled() {
-        if (!mHasCheckedForVideoEnabled) {
-            mIsVideoEnabled = CallUtil.isVideoEnabled(mContext);
-            mHasCheckedForVideoEnabled = true;
-        }
-        return mIsVideoEnabled;
-    }
-
-    /**
-     * Determines if the PhoneAccount supports specifying a call subject (i.e. calling with a note)
-     * for outgoing calls.
-     *
-     * @param accountHandle The PhoneAccount handle.
-     * @return {@code true} if calling with a note is supported, {@code false} otherwise.
-     */
+    @Override
     public boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle) {
         if (mPhoneAccountCallWithNoteCache.containsKey(accountHandle)) {
             return mPhoneAccountCallWithNoteCache.get(accountHandle);
