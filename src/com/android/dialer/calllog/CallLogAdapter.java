@@ -41,6 +41,7 @@ import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.PhoneCallDetails;
@@ -465,7 +466,7 @@ public class CallLogAdapter extends GroupingListAdapter
                     countryIso, cachedContactInfo);
         }
         CharSequence formattedNumber = info.formattedNumber == null
-                ? null : PhoneNumberUtils.createTtsSpannable(info.formattedNumber);
+                ? null : PhoneNumberUtilsCompat.createTtsSpannable(info.formattedNumber);
 
         final PhoneCallDetails details = new PhoneCallDetails(
                 mContext, number, numberPresentation, formattedNumber,
