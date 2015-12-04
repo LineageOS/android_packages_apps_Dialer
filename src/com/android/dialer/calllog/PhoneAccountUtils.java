@@ -23,7 +23,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
-import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;

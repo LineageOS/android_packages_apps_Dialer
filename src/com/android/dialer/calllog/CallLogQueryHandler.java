@@ -38,7 +38,6 @@ import android.util.Log;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.PermissionsUtil;
-import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;

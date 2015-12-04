@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,33 +14,46 @@
  * limitations under the License
  */
 
-package com.android.dialer.calllog;
+package com.android.dialer.calllog.calllogcache;
 
 import android.content.Context;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-
-import com.android.dialer.calllog.calllogcache.CallLogCache;
+import android.telephony.PhoneNumberUtils;
+import android.text.TextUtils;
 
 /**
- * Modified version of {@link com.android.dialer.calllog.calllogcache.CallLogCache} to be used in
- * tests that allows injecting the voicemail number.
+ * This is a compatibility class for the CallLogCache for versions of dialer before Lollipop Mr1
+ * (the introduction of phone accounts).
  *
- * NOTE: This tests the pre-LMR1 version because currently none of the tests involve multi-SIM,
- * but...
- * TODO: write tests to test multi-SIM functionality in TelecomCallLogCache.
+ * This class should not be initialized directly and instead be acquired from
+ * {@link CallLogCache#getCallLogCache}.
  */
-public final class TestTelecomCallLogCache extends CallLogCache {
-    private CharSequence mVoicemailNumber;
+class CallLogCacheLollipop extends CallLogCache {
+    private String mVoicemailNumber;
 
-    public TestTelecomCallLogCache(Context context, CharSequence voicemailNumber) {
+    /* package */ CallLogCacheLollipop(Context context) {
         super(context);
-        mVoicemailNumber = voicemailNumber;
     }
 
     @Override
     public boolean isVoicemailNumber(PhoneAccountHandle accountHandle, CharSequence number) {
-        return mVoicemailNumber.equals(number);
+        if (TextUtils.isEmpty(number)) {
+            return false;
+        }
+
+        String numberString = number.toString();
+
+        if (!TextUtils.isEmpty(mVoicemailNumber)) {
+            return PhoneNumberUtils.compare(numberString, mVoicemailNumber);
+        }
+
+        if (PhoneNumberUtils.isVoiceMailNumber(numberString)) {
+            mVoicemailNumber = numberString;
+            return true;
+        }
+
+        return false;
     }
 
     @Override

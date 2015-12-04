@@ -45,6 +45,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.dialer.calllog.calllogcache.CallLogCache;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
@@ -131,8 +132,8 @@ public class CallLogAdapter extends GroupingListAdapter
     /** Instance of helper class for managing views. */
     private final CallLogListItemHelper mCallLogListItemHelper;
 
-    /** Cache for repeated requests to TelecomManager. */
-    protected final TelecomCallLogCache mTelecomCallLogCache;
+    /** Cache for repeated requests to Telecom/Telephony. */
+    protected final CallLogCache mCallLogCache;
 
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
@@ -260,11 +261,12 @@ public class CallLogAdapter extends GroupingListAdapter
         Resources resources = mContext.getResources();
         CallTypeHelper callTypeHelper = new CallTypeHelper(resources);
 
-        mTelecomCallLogCache = new TelecomCallLogCache(mContext);
+        mCallLogCache = CallLogCache.getCallLogCache(mContext);
+
         PhoneCallDetailsHelper phoneCallDetailsHelper =
-                new PhoneCallDetailsHelper(mContext, resources, mTelecomCallLogCache);
+                new PhoneCallDetailsHelper(mContext, resources, mCallLogCache);
         mCallLogListItemHelper =
-                new CallLogListItemHelper(phoneCallDetailsHelper, resources, mTelecomCallLogCache);
+                new CallLogListItemHelper(phoneCallDetailsHelper, resources, mCallLogCache);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
         mFilteredNumberAsyncQueryHandler =
                 new FilteredNumberAsyncQueryHandler(mContext.getContentResolver());
@@ -331,7 +333,7 @@ public class CallLogAdapter extends GroupingListAdapter
     @VisibleForTesting
     /* package */ void pauseCache() {
         mContactInfoCache.stop();
-        mTelecomCallLogCache.reset();
+        mCallLogCache.reset();
     }
 
     @Override
@@ -360,7 +362,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 view,
                 mContext,
                 mExpandCollapseListener,
-                mTelecomCallLogCache,
+                mCallLogCache,
                 mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter,
                 mFilteredNumberAsyncQueryHandler,
@@ -451,7 +453,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(c);
         final boolean isVoicemailNumber =
-                mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
+                mCallLogCache.isVoicemailNumber(accountHandle, number);
 
         // Note: Binding of the action buttons is done as required in configureActionViews when the
         // user expands the actions ViewStub.
