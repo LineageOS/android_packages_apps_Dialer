@@ -28,13 +28,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.os.Trace;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Trace;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.telecom.DisconnectCause;
-import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -46,7 +45,6 @@ import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -57,6 +55,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.phone.common.animation.AnimUtils;
@@ -496,7 +495,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPrimaryName.setText(null);
         } else {
             mPrimaryName.setText(nameIsNumber
-                    ? PhoneNumberUtils.createTtsSpannable(name)
+                    ? PhoneNumberUtilsCompat.createTtsSpannable(name)
                     : name);
 
             // Set direction of the name field
@@ -529,7 +528,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mPhoneNumber.setText(null);
             mPhoneNumber.setVisibility(View.GONE);
         } else {
-            mPhoneNumber.setText(PhoneNumberUtils.createTtsSpannable(number));
+            mPhoneNumber.setText(PhoneNumberUtilsCompat.createTtsSpannable(number));
             mPhoneNumber.setVisibility(View.VISIBLE);
             mPhoneNumber.setTextDirection(View.TEXT_DIRECTION_LTR);
         }
@@ -600,7 +599,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallVideoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
 
             mSecondaryCallName.setText(nameIsNumber
-                    ? PhoneNumberUtils.createTtsSpannable(name)
+                    ? PhoneNumberUtilsCompat.createTtsSpannable(name)
                     : name);
             if (hasProvider) {
                 mSecondaryCallProviderLabel.setText(providerLabel);
