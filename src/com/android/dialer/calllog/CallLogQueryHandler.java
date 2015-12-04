@@ -50,8 +50,6 @@ import java.util.List;
 
 /** Handles asynchronous queries to the call log. */
 public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
-    private static final String[] EMPTY_STRING_ARRAY = new String[0];
-
     private static final String TAG = "CallLogQueryHandler";
     private static final int NUM_LOGS_TO_DISPLAY = 1000;
 
@@ -162,27 +160,25 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     /** Fetches the list of calls in the call log. */
     private void fetchCalls(int token, int callType, boolean newOnly, long newerThan) {
-        // We need to check for NULL explicitly otherwise entries with where READ is NULL
-        // may not match either the query or its negation.
-        // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
         StringBuilder where = new StringBuilder();
         List<String> selectionArgs = Lists.newArrayList();
+
+        // Always hide blocked calls.
+        where.append("(").append(Calls.TYPE).append(" != ?)");
+        selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
 
         // Ignore voicemails marked as deleted
         if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
                 >= Build.VERSION_CODES.M) {
-            where.append(Voicemails.DELETED).append(" = 0");
+            where.append(" AND (").append(Voicemails.DELETED).append(" = 0)");
         }
 
         if (newOnly) {
-            where.append(" AND ");
-            where.append(Calls.NEW);
-            where.append(" = 1");
+            where.append(" AND (").append(Calls.NEW).append(" = 1)");
         }
 
         if (callType > CALL_TYPE_ALL) {
-            where.append(" AND ");
-            where.append("(" + Calls.TYPE + " = ?)");
+            where.append(" AND (").append(Calls.TYPE).append(" = ?)");
             selectionArgs.add(Integer.toString(callType));
         } else {
             where.append(" AND NOT ");
@@ -190,24 +186,17 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
 
         if (newerThan > 0) {
-            where.append(" AND ");
-            where.append("(" + Calls.DATE + " > ?)");
+            where.append(" AND (").append(Calls.DATE).append(" > ?)");
             selectionArgs.add(Long.toString(newerThan));
         }
-
-        // Always hide blocked calls.
-        where.append(" AND ");
-        where.append("(" + Calls.TYPE + " != ?)");
-        selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
 
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
         final String selection = where.length() > 0 ? where.toString() : null;
         Uri uri = TelecomUtil.getCallLogUri(mContext).buildUpon()
                 .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
-        startQuery(token, null, uri,
-                CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
-                Calls.DEFAULT_SORT_ORDER);
+        startQuery(token, null, uri, CallLogQuery._PROJECTION, selection, selectionArgs.toArray(
+                new String[selectionArgs.size()]), Calls.DEFAULT_SORT_ORDER);
     }
 
     /** Cancel any pending fetch request. */
