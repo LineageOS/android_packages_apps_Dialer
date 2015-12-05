@@ -20,7 +20,6 @@ import com.google.common.base.MoreObjects;
 
 import android.content.Context;
 import android.net.Uri;
-import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -34,6 +33,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -438,7 +438,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
             numberTypeTextView.setVisibility(View.GONE);
         } else {
             numberTextView.setVisibility(View.VISIBLE);
-            numberTextView.setText(PhoneNumberUtils.createTtsSpannable(
+            numberTextView.setText(PhoneNumberUtilsCompat.createTtsSpannable(
                     BidiFormatter.getInstance().unicodeWrap(
                             callerNumber, TextDirectionHeuristics.LTR)));
             numberTypeTextView.setVisibility(View.VISIBLE);
