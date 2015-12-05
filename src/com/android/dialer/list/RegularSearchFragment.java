@@ -31,6 +31,7 @@ import com.android.dialerbind.ObjectFactory;
 
 import com.android.dialer.R;
 import com.android.dialer.lookup.LookupCache;
+import com.android.dialer.lookup.LookupSettings;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
@@ -39,6 +40,7 @@ public class RegularSearchFragment extends SearchFragment
         implements OnEmptyViewActionButtonClickedListener {
 
     private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+    private static final int ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE = 2;
 
     private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
 
@@ -53,6 +55,12 @@ public class RegularSearchFragment extends SearchFragment
     public void onStart() {
         super.onStart();
         AnalyticsUtil.sendScreenView(this);
+
+        if (LookupSettings.isForwardLookupEnabled(getActivity())
+                || LookupSettings.isPeopleLookupEnabled(getActivity())) {
+            requestPermissions(new String[] {ACCESS_FINE_LOCATION},
+                    ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE);
+        }
     }
 
     public void configureDirectorySearch() {
