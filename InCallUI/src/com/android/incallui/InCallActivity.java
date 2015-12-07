@@ -82,6 +82,10 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     private static final String TAG_ANSWER_FRAGMENT = "tag_answer_fragment";
     private static final String TAG_SELECT_ACCT_FRAGMENT = "tag_select_acct_fragment";
 
+    private static final int DIALPAD_REQUEST_NONE = 1;
+    private static final int DIALPAD_REQUEST_SHOW = 2;
+    private static final int DIALPAD_REQUEST_HIDE = 3;
+
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
@@ -93,9 +97,12 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     private InCallOrientationEventListener mInCallOrientationEventListener;
 
     /**
-     * Use to pass 'showDialpad' from {@link #onNewIntent} to {@link #onResume}
+     * Used to indicate whether the dialpad should be hidden or shown {@link #onResume}.
+     * {@code #DIALPAD_REQUEST_SHOW} indicates that the dialpad should be shown.
+     * {@code #DIALPAD_REQUEST_HIDE} indicates that the dialpad should be hidden.
+     * {@code #DIALPAD_REQUEST_NONE} indicates no change should be made to dialpad visibility.
      */
-    private boolean mShowDialpadRequested;
+    private int mShowDialpadRequest = DIALPAD_REQUEST_NONE;
 
     /**
      * Use to determine if the dialpad should be animated on show.
@@ -193,13 +200,24 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
 
         mSlideOut.setAnimationListener(mSlideOutListener);
 
+        // If the dialpad fragment already exists, retrieve it.  This is important when rotating as
+        // we will not be able to hide or show the dialpad after the rotation otherwise.
+        Fragment existingFragment =
+                mChildFragmentManager.findFragmentByTag(DialpadFragment.class.getName());
+        if (existingFragment != null) {
+            mDialpadFragment = (DialpadFragment) existingFragment;
+        }
+
         if (icicle != null) {
             // If the dialpad was shown before, set variables indicating it should be shown and
             // populated with the previous DTMF text.  The dialpad is actually shown and populated
             // in onResume() to ensure the hosting CallCardFragment has been inflated and is ready
             // to receive it.
-            mShowDialpadRequested = icicle.getBoolean(SHOW_DIALPAD_EXTRA);
-            mAnimateDialpadOnShow = false;
+            if (icicle.containsKey(SHOW_DIALPAD_EXTRA)) {
+                boolean showDialpad = icicle.getBoolean(SHOW_DIALPAD_EXTRA);
+                mShowDialpadRequest = showDialpad ? DIALPAD_REQUEST_SHOW : DIALPAD_REQUEST_HIDE;
+                mAnimateDialpadOnShow = false;
+            }
             mDtmfText = icicle.getString(DIALPAD_TEXT_EXTRA);
 
             SelectPhoneAccountDialogFragment dialogFragment = (SelectPhoneAccountDialogFragment)
@@ -246,16 +264,31 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         InCallPresenter.getInstance().setThemeColors();
         InCallPresenter.getInstance().onUiShowing(true);
 
-        if (mShowDialpadRequested) {
-            mCallButtonFragment.displayDialpad(true /* show */,
-                    mAnimateDialpadOnShow /* animate */);
-            mShowDialpadRequested = false;
-            mAnimateDialpadOnShow = false;
+        // Clear fullscreen state onResume; the stored value may not match reality.
+        InCallPresenter.getInstance().clearFullscreen();
 
-            if (mDialpadFragment != null) {
-                mDialpadFragment.setDtmfText(mDtmfText);
-                mDtmfText = null;
+        // If there is a pending request to show or hide the dialpad, handle that now.
+        if (mShowDialpadRequest != DIALPAD_REQUEST_NONE) {
+            if (mShowDialpadRequest == DIALPAD_REQUEST_SHOW) {
+                // Exit fullscreen so that the user has access to the dialpad hide/show button and
+                // can hide the dialpad.  Important when showing the dialpad from within dialer.
+                InCallPresenter.getInstance().setFullScreen(false, true /* force */);
+
+                mCallButtonFragment.displayDialpad(true /* show */,
+                        mAnimateDialpadOnShow /* animate */);
+                mAnimateDialpadOnShow = false;
+
+                if (mDialpadFragment != null) {
+                    mDialpadFragment.setDtmfText(mDtmfText);
+                    mDtmfText = null;
+                }
+            } else {
+                Log.v(this, "onResume : force hide dialpad");
+                if (mDialpadFragment != null) {
+                    mCallButtonFragment.displayDialpad(false /* show */, false /* animate */);
+                }
             }
+            mShowDialpadRequest = DIALPAD_REQUEST_NONE;
         }
 
         if (mShowPostCharWaitDialogOnResume) {
@@ -592,16 +625,23 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             } else if (!newOutgoingCall) {
                 showCallCardFragment(true);
             }
-
             return;
         }
     }
 
+    /**
+     * When relaunching from the dialer app, {@code showDialpad} indicates whether the dialpad
+     * should be shown on launch.
+     *
+     * @param showDialpad {@code true} to indicate the dialpad should be shown on launch, and
+     *                                {@code false} to indicate no change should be made to the
+     *                                dialpad visibility.
+     */
     private void relaunchedFromDialer(boolean showDialpad) {
-        mShowDialpadRequested = showDialpad;
+        mShowDialpadRequest = showDialpad ? DIALPAD_REQUEST_SHOW : DIALPAD_REQUEST_NONE;
         mAnimateDialpadOnShow = true;
 
-        if (mShowDialpadRequested) {
+        if (mShowDialpadRequest == DIALPAD_REQUEST_SHOW) {
             // If there's only one line in use, AND it's on hold, then we're sure the user
             // wants to use the dialpad toward the exact line, so un-hold the holding line.
             final Call call = CallList.getInstance().getActiveOrBackgroundCall();

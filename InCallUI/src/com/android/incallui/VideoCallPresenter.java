@@ -75,12 +75,14 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     public static final boolean DEBUG = false;
 
     /**
-     * Runnable which is posted to schedule automatically entering fullscreen mode.
+     * Runnable which is posted to schedule automatically entering fullscreen mode.  Will not auto
+     * enter fullscreen mode if the dialpad is visible (doing so would make it impossible to exit
+     * the dialpad).
      */
     private Runnable mAutoFullscreenRunnable =  new Runnable() {
         @Override
         public void run() {
-            if (mAutoFullScreenPending) {
+            if (mAutoFullScreenPending && !InCallPresenter.getInstance().isDialpadVisible()) {
                 Log.v(this, "Automatically entering fullscreen mode.");
                 InCallPresenter.getInstance().setFullScreen(true);
                 mAutoFullScreenPending = false;

@@ -1132,10 +1132,17 @@ public class InCallPresenter implements CallList.Listener,
      * @return {@code true} if in-call is now in fullscreen mode.
      */
     public boolean toggleFullscreenMode() {
-        mIsFullScreen = !mIsFullScreen;
-        Log.v(this, "toggleFullscreenMode = " + mIsFullScreen);
-        notifyFullscreenModeChange(mIsFullScreen);
+        boolean isFullScreen = !mIsFullScreen;
+        Log.v(this, "toggleFullscreenMode = " + isFullScreen);
+        setFullScreen(isFullScreen);
         return mIsFullScreen;
+    }
+
+    /**
+     * Clears the previous fullscreen state.
+     */
+    public void clearFullscreen() {
+        mIsFullScreen = false;
     }
 
     /**
@@ -1145,8 +1152,26 @@ public class InCallPresenter implements CallList.Listener,
      *                                 otherwise.
      */
     public void setFullScreen(boolean isFullScreen) {
+        setFullScreen(isFullScreen, false /* force */);
+    }
+
+    /**
+     * Changes the fullscreen mode of the in-call UI.
+     *
+     * @param isFullScreen {@code true} if in-call should be in fullscreen mode, {@code false}
+     *                                 otherwise.
+     * @param force {@code true} if fullscreen mode should be set regardless of its current state.
+     */
+    public void setFullScreen(boolean isFullScreen, boolean force) {
         Log.v(this, "setFullScreen = " + isFullScreen);
-        if (mIsFullScreen == isFullScreen) {
+
+        // As a safeguard, ensure we cannot enter fullscreen if the dialpad is shown.
+        if (isDialpadVisible()) {
+            isFullScreen = false;
+            Log.v(this, "setFullScreen overridden as dialpad is shown = " + isFullScreen);
+        }
+
+        if (mIsFullScreen == isFullScreen && !force) {
             Log.v(this, "setFullScreen ignored as already in that state.");
             return;
         }
@@ -1624,6 +1649,18 @@ public class InCallPresenter implements CallList.Listener,
         }
 
         mInCallActivity.showConferenceFragment(show);
+    }
+
+    /**
+     * Determines if the dialpad is visible.
+     *
+     * @return {@code true} if the dialpad is visible, {@code false} otherwise.
+     */
+    public boolean isDialpadVisible() {
+        if (mInCallActivity == null) {
+            return false;
+        }
+        return mInCallActivity.isDialpadVisible();
     }
 
     /**

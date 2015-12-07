@@ -387,7 +387,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo);
-        ui.showButton(BUTTON_DIALPAD, !isVideo);
+        ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
 
         ui.updateButtonStates();

@@ -379,6 +379,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      */
     @Override
     public void setCallCardVisible(final boolean visible) {
+        Log.v(this, "setCallCardVisible : isVisible = " + visible);
         // When animating the hide/show of the views in a landscape layout, we need to take into
         // account whether we are in a left-to-right locale or a right-to-left locale and adjust
         // the animations accordingly.
@@ -400,9 +401,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             @Override
             public boolean onPreDraw() {
                 // We don't want to continue getting called.
-                if (observer.isAlive()) {
-                    observer.removeOnPreDrawListener(this);
-                }
+                getView().getViewTreeObserver().removeOnPreDrawListener(this);
 
                 float videoViewTranslation = 0f;
 
