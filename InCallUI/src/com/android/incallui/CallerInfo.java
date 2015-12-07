@@ -39,6 +39,19 @@ import com.android.dialer.calllog.ContactInfoHelper;
 public class CallerInfo {
     private static final String TAG = "CallerInfo";
 
+    public static final String[] DEFAULT_PHONELOOKUP_PROJECTION = new String[] {
+            PhoneLookup._ID,
+            PhoneLookup.DISPLAY_NAME,
+            PhoneLookup.LOOKUP_KEY,
+            PhoneLookup.NUMBER,
+            PhoneLookup.NORMALIZED_NUMBER,
+            PhoneLookup.LABEL,
+            PhoneLookup.TYPE,
+            PhoneLookup.PHOTO_URI,
+            PhoneLookup.CUSTOM_RINGTONE,
+            PhoneLookup.SEND_TO_VOICEMAIL
+    };
+
     /**
      * Please note that, any one of these member variables can be null,
      * and any accesses to them should be prepared to handle such a case.
