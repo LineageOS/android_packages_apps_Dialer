@@ -17,7 +17,6 @@
 package com.android.dialer.lookup.whitepages;
 
 import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.ReverseLookup;
 
 import android.content.Context;
@@ -25,38 +24,14 @@ import android.content.Context;
 import java.io.IOException;
 
 public class WhitePagesReverseLookup extends ReverseLookup {
-    private static final String TAG =
-            WhitePagesReverseLookup.class.getSimpleName();
+    private static final String TAG = WhitePagesReverseLookup.class.getSimpleName();
 
     public WhitePagesReverseLookup(Context context) {
     }
 
-    /**
-     * Perform phone number lookup.
-     *
-     * @param context The application context
-     * @param normalizedNumber The normalized phone number
-     * @param formattedNumber The formatted phone number
-     * @return The phone number info object
-     */
+    @Override
     public ContactInfo lookupNumber(Context context,
             String normalizedNumber, String formattedNumber) throws IOException {
-        WhitePagesApi.ContactInfo info = WhitePagesApi.reverseLookup(context, normalizedNumber);
-        if (info == null || info.name == null) {
-            return null;
-        }
-
-        ContactBuilder builder = new ContactBuilder(
-                ContactBuilder.REVERSE_LOOKUP,
-                normalizedNumber, formattedNumber);
-
-        builder.setName(ContactBuilder.Name.createDisplayName(info.name));
-        builder.addPhoneNumber(ContactBuilder.PhoneNumber.createMainNumber(info.formattedNumber));
-        builder.addWebsite(ContactBuilder.WebsiteUrl.createProfile(info.website));
-        if (info.address != null) {
-            builder.addAddress(ContactBuilder.Address.createFormattedHome(info.address));
-        }
-
-        return builder.build();
+        return WhitePagesApi.reverseLookup(context, normalizedNumber, formattedNumber);
     }
 }
