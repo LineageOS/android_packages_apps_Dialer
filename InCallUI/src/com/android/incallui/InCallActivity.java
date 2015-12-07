@@ -142,11 +142,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         }
     };
 
-    /**
-     * Listener for orientation changes.
-     */
-    private OrientationEventListener mOrientationEventListener;
-
     @Override
     protected void onCreate(Bundle icicle) {
         Log.d(this, "onCreate()...  this = " + this);
@@ -235,14 +230,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         Log.d(this, "onStart()...");
         super.onStart();
 
-        if (mOrientationEventListener.canDetectOrientation()) {
-            Log.v(this, "Orientation detection enabled.");
-            mOrientationEventListener.enable();
-        } else {
-            Log.v(this, "Orientation detection disabled.");
-            mOrientationEventListener.disable();
-        }
-
         // setting activity should be last thing in setup process
         InCallPresenter.getInstance().setActivity(this);
         enableInCallOrientationEventListener(getRequestedOrientation() ==
@@ -298,7 +285,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         enableInCallOrientationEventListener(false);
         InCallPresenter.getInstance().updateIsChangingConfigurations();
         InCallPresenter.getInstance().onActivityStopped();
-        mOrientationEventListener.disable();
         super.onStop();
     }
 
