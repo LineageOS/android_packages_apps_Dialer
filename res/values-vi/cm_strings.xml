@@ -17,4 +17,88 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Địa điểm gần kề</string>
+  <string name="people">Mọi người</string>
+  <string name="lookup_settings_label">Tra cứu số điện thoại</string>
+  <string name="lookup_settings_description">Tra cứu số điện thoại không biết</string>
+  <string name="enable_forward_lookup_title">Tra cứu xuôi</string>
+  <string name="enable_forward_lookup_summary">Hiển thị các địa điểm gần kề khi tìm kiếm trong trình quay số</string>
+  <string name="enable_people_lookup_title">Tra cứu mọi người</string>
+  <string name="enable_people_lookup_summary">Hiển thị kết quả trực tuyến về người khi tìm kiếm trong trình quay số</string>
+  <string name="enable_reverse_lookup_title">Tra cứu ngược</string>
+  <string name="enable_reverse_lookup_summary">Tra cứu thông tin về người hoặc vị trí cho những số gọi đến không biết</string>
+  <string name="forward_lookup_provider_title">Nhà cung cấp tra cứu xuôi</string>
+  <string name="people_lookup_provider_title">Nhà cung cấp tra cứu người</string>
+  <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Bàn phím tìm kiếm T9</string>
+  <string name="t9_search_input_locale">Ô tìm kiếm T9</string>
+  <string name="t9_search_input_locale_default">Mặc định</string>
+  <string name="type_blacklist">Cuộc gọi bị chặn</string>
+  <string name="call_log_stats_title">Thống kê</string>
+  <string name="callStatsDetailTitle">Chi tiết thống kê cuộc gọi</string>
+  <string name="call_stats">Thống kê cuộc gọi</string>
+  <string name="call_stats_refresh">Làm mới</string>
+  <string name="activity_title_call_stats">Thống kê cuộc gọi</string>
+  <string name="call_stats_nav_all">Tất cả</string>
+  <string name="call_stats_nav_incoming">Gọi đến</string>
+  <string name="call_stats_nav_outgoing">Gọi đi</string>
+  <string name="call_stats_nav_missed">Gọi nhỡ</string>
+  <string name="call_stats_incoming">Đến: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Đi: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">Gọi nhỡ</string>
+  <string name="call_stats_missed_percent">Nhỡ: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Bị chặn</string>
+  <string name="call_stats_blacklist_percent">Bị chặn: <xliff:g id="percent">%d </xliff:g>%%</string>
+  <string name="call_stats_header_total">Tổng số: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Tổng số: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Ngày bắt đầu</string>
+  <string name="call_stats_filter_to">Ngày kết thúc</string>
+  <string name="call_stats_filter_picker_title">Phạm vi lọc</string>
+  <string name="date_quick_selection">Chọn nhanh</string>
+  <string name="date_qs_currentmonth">Tháng hiện tại</string>
+  <string name="date_qs_currentquarter">Quý hiện tại</string>
+  <string name="date_qs_currentyear">Năm hiện tại</string>
+  <string name="date_qs_lastweek">Tuần trước</string>
+  <string name="date_qs_lastmonth">Tháng trước</string>
+  <string name="date_qs_lastquarter">Quý trước</string>
+  <string name="date_qs_lastyear">Năm trước</string>
+  <string name="call_stats_date_filter">Điều chỉnh khoảng thời gian</string>
+  <string name="call_stats_reset_filter">Đặt lại khoảng thời gian</string>
+  <string name="call_stats_sort_by_duration">Sắp xếp theo thời lượng cuộc gọi</string>
+  <string name="call_stats_sort_by_count">Sắp xếp theo số lượng cuộc gọi</string>
+  <string name="menu_add_to_blacklist">Thêm vào danh sách chặn người gọi</string>
+  <string name="toast_added_to_blacklist">%s được thêm vào danh sách chặn người gọi.</string>
+  <string name="speed_dial_settings">Thiết đặt quay số nhanh</string>
+  <string name="speed_dial_not_set">(không thiết lập)</string>
+  <string name="speed_dial_replace">Thay thế</string>
+  <string name="speed_dial_delete">Xóa</string>
+  <string name="speed_dial_unassigned_dialog_title">Phím chưa ấn định</string>
+  <string name="speed_dial_unassigned_dialog_message">Không có thao tác quay số nhanh nào được ấn định cho phím số \'<xliff:g id="number">%s</xliff:g>\'. Bạn có muốn ấn định một thao tác bây giờ không?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Để sử dụng quay số nhanh, trước tiên hãy tắt chế độ máy bay.</string>
+  <string name="yes">Có</string>
+  <string name="no">Không</string>
+  <string name="incall_vibration_category_title">Rung trong khi gọi</string>
+  <string name="incall_vibrate_outgoing_title">Rung khi trả lời</string>
+  <string name="vibrate_call_waiting">Rung khi chờ cuộc gọi</string>
+  <string name="incall_vibrate_hangup_title">Rung khi gác máy</string>
+  <string name="incall_vibrate_45_title">Rung mỗi phút</string>
+  <string name="incall_vibrate_45_summary">Rung tại giây 45 mỗi phút trong khi gọi đi</string>
+  <string name="detailed_incall_info_title">Thông tin chi tiết người gọi</string>
+  <string name="detailed_incall_info_summary">Hiển thị thêm thông tin về người gọi trong màn hình cuộc gọi đến</string>
+  <string name="video_call">Cuộc gọi video</string>
+  <string name="call_duration_active">Thời gian hoạt động:</string>
+  <string name="call_duration_call_out">Thời gian gọi:</string>
+  <string name="call_log_show_all_slots">Tất cả các SIM</string>
+  <string name="call_log_all_calls_header">Tất cả các cuộc gọi</string>
+  <string name="calllog_search_hint">Tìm trong nhật ký cuộc gọi</string>
+  <string name="msim_ime_dialog_title">Ký hiệu nhận dạng thiết bị</string>
+  <string name="call_log_blacklist_header">Chỉ các cuộc gọi bị chặn</string>
+  <string name="start_call_playback">Phát ghi âm</string>
+  <string name="stop_call_playback">Dừng</string>
+  <string name="call_playback_error_message">Không thể phát ghi âm</string>
+  <string name="sensors_category_title">Tùy chọn cảm biến</string>
+  <string name="smart_mute_title">Tắt tiếng thông minh</string>
+  <string name="smart_mute_summary">Tắt tiếng cuộc gọi đến bằng cách lật úp thiết bị</string>
+  <string name="smart_dialer_title">Cuộc gọi thông minh</string>
+  <string name="smart_dialer_summary">Tự động gọi đến số đã quay bằng cách đưa thiết bị lên tai của bạn</string>
 </resources>
