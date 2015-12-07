@@ -30,6 +30,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -47,11 +48,6 @@ import org.json.JSONObject;
  */
 public class ContactInfoHelper {
     private static final String TAG = ContactInfoHelper.class.getSimpleName();
-
-    private static final boolean FLAG_PRE_N_FEATURE =
-            true // Enforce Pre-N (M) behavior in release build
-            || Build.VERSION.SDK_INT <= Build.VERSION_CODES.M
-            || !Build.VERSION.CODENAME.startsWith("N");
 
     private final Context mContext;
     private final String mCurrentCountryIso;
@@ -392,7 +388,7 @@ public class ContactInfoHelper {
         // Get URI for the number in the PhoneLookup table, with a parameter to indicate whether
         // the number is a SIP number.
         Uri uri = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI;
-        if (FLAG_PRE_N_FEATURE) {
+        if (!ContactsUtils.FLAG_N_FEATURE) {
             if (directoryId != -1) {
                 // ENTERPRISE_CONTENT_FILTER_URI in M doesn't support directory lookup
                 uri = PhoneLookup.CONTENT_FILTER_URI;
