@@ -67,7 +67,7 @@ public class BlockedNumbersAdapter extends NumbersAdapter {
                         number,
                         countryIso,
                         PhoneNumberUtils.formatNumber(number, countryIso),
-                        R.id.blocked_number_fragment,
+                        R.id.blocked_numbers_activity_container,
                         getFragmentManager(),
                         new BlockNumberDialogFragment.Callback() {
                             @Override
