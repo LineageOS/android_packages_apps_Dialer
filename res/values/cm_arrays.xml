@@ -33,7 +33,7 @@
 
     <string-array name="people_lookup_provider_names" translatable="false">
         <item>Auskunft (AT)</item>
-        <item>WhitePages (US)</item>
+        <item>WhitePages</item>
     </string-array>
 
     <string-array name="reverse_lookup_providers" translatable="false">
@@ -53,8 +53,7 @@
         <item>Das Telefonbuch (DE)</item>
         <item>Gebeld (NL)</item>
         <item>OpenCnam (US)</item>
-        <item>WhitePages (US)</item>
-        <item>WhitePages (CA)</item>
+        <item>WhitePages</item>
         <item>YellowPages (US)</item>
         <item>YellowPages (CA)</item>
         <item>ZabaSearch (US)</item>
