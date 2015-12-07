@@ -1525,64 +1525,32 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     /**
-     * Handles changes to the device rotation.
+     * Notifies listeners of changes in orientation and notify calls of rotation angle change.
      *
-     * @param rotation The device rotation (one of: {@link Surface#ROTATION_0},
-     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
-     *      {@link Surface#ROTATION_270}).
-     */
-    public void onDeviceRotationChange(int rotation) {
-        Log.d(this, "onDeviceRotationChange: rotation=" + rotation);
-        // First translate to rotation in degrees.
-        if (mCallList != null) {
-            mCallList.notifyCallsOfDeviceRotation(toRotationAngle(rotation));
-        } else {
-            Log.w(this, "onDeviceRotationChange: CallList is null.");
-        }
-    }
-
-    /**
-     * Converts rotation constants to rotation in degrees.
-     * @param rotation Rotation constants (one of: {@link Surface#ROTATION_0},
-     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
-     *      {@link Surface#ROTATION_270}).
-     */
-    public static int toRotationAngle(int rotation) {
-        int rotationAngle;
-        switch (rotation) {
-            case Surface.ROTATION_0:
-                rotationAngle = 0;
-                break;
-            case Surface.ROTATION_90:
-                rotationAngle = 90;
-                break;
-            case Surface.ROTATION_180:
-                rotationAngle = 180;
-                break;
-            case Surface.ROTATION_270:
-                rotationAngle = 270;
-                break;
-            default:
-                rotationAngle = 0;
-        }
-        return rotationAngle;
-    }
-
-    /**
-     * Notifies listeners of changes in orientation (e.g. portrait/landscape).
-     *
-     * @param orientation The orientation of the device (one of: {@link Surface#ROTATION_0},
-     *      {@link Surface#ROTATION_90}, {@link Surface#ROTATION_180},
-     *      {@link Surface#ROTATION_270}).
+     * @param orientation The screen orientation of the device (one of:
+     * {@link InCallOrientationEventListener#SCREEN_ORIENTATION_0},
+     * {@link InCallOrientationEventListener#SCREEN_ORIENTATION_90},
+     * {@link InCallOrientationEventListener#SCREEN_ORIENTATION_180},
+     * {@link InCallOrientationEventListener#SCREEN_ORIENTATION_270}).
      */
     public void onDeviceOrientationChange(int orientation) {
+        Log.d(this, "onDeviceOrientationChange: orientation= " + orientation);
+
+        if (mCallList != null) {
+            mCallList.notifyCallsOfDeviceRotation(orientation);
+        } else {
+            Log.w(this, "onDeviceOrientationChange: CallList is null.");
+        }
+
+        // Notify listeners of device orientation changed.
         for (InCallOrientationListener listener : mOrientationListeners) {
             listener.onDeviceOrientationChanged(orientation);
         }
     }
 
     /**
-     * Configures the in-call UI activity so it can change orientations or not.
+     * Configures the in-call UI activity so it can change orientations or not. Enables the
+     * orientation event listener if allowOrientationChange is true, disables it if false.
      *
      * @param allowOrientationChange {@code True} if the in-call UI can change between portrait
      *      and landscape.  {@Code False} if the in-call UI should be locked in portrait.
@@ -1594,12 +1562,15 @@ public class InCallPresenter implements CallList.Listener,
         }
 
         if (!allowOrientationChange) {
-            mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+            mInCallActivity.setRequestedOrientation(
+                    InCallOrientationEventListener.NO_SENSOR_SCREEN_ORIENTATION);
         } else {
             // Using SCREEN_ORIENTATION_FULL_SENSOR allows for reverse-portrait orientation, where
             // SCREEN_ORIENTATION_SENSOR does not.
-            mInCallActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+            mInCallActivity.setRequestedOrientation(
+                    InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
         }
+        mInCallActivity.enableInCallOrientationEventListener(allowOrientationChange);
     }
 
     public void enableScreenTimeout(boolean enable) {
