@@ -23,6 +23,7 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
+import com.android.dialer.compat.CallAudioStateCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 
 /**
@@ -33,9 +34,11 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
  */
 public class InCallServiceImpl extends InCallService {
 
+    // TODO CallAudioState backporting blocked by InCallService backporting
     @Override
     public void onCallAudioStateChanged(CallAudioState audioState) {
-        AudioModeProvider.getInstance().onAudioStateChanged(audioState);
+        AudioModeProvider.getInstance().onAudioStateChanged(audioState.isMuted(),
+                audioState.getRoute(), audioState.getSupportedRouteMask());
     }
 
     @Override
