@@ -784,7 +784,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateIcon.setVisibility(View.GONE);
         }
 
-        if (CallUtils.isVideoCall(videoState)
+        if (VideoUtils.isVideoCall(videoState)
                 || (state == Call.State.ACTIVE && sessionModificationState
                         == Call.SessionModificationState.WAITING_FOR_RESPONSE)) {
             mCallStateVideoCallIcon.setVisibility(View.VISIBLE);
@@ -1036,7 +1036,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 } else if (sessionModificationState
                         == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
                     callStateLabel = context.getString(R.string.card_title_video_call_requesting);
-                } else if (CallUtils.isVideoCall(videoState)) {
+                } else if (VideoUtils.isVideoCall(videoState)) {
                     callStateLabel = context.getString(R.string.card_title_video_call);
                 }
                 break;
@@ -1060,7 +1060,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     callStateLabel = label;
                 } else if (isAccount) {
                     callStateLabel = context.getString(R.string.incoming_via_template, label);
-                } else if (CallUtils.isVideoCall(videoState)) {
+                } else if (VideoUtils.isVideoCall(videoState)) {
                     callStateLabel = context.getString(R.string.notification_incoming_video_call);
                 } else {
                     callStateLabel = context.getString(R.string.card_title_incoming_call);

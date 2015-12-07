@@ -266,7 +266,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
         int currVideoState = mCall.getVideoState();
-        int currUnpausedVideoState = CallUtils.getUnPausedVideoState(currVideoState);
+        int currUnpausedVideoState = VideoUtils.getUnPausedVideoState(currVideoState);
         currUnpausedVideoState |= VideoProfile.STATE_BIDIRECTIONAL;
 
         VideoProfile videoProfile = new VideoProfile(currUnpausedVideoState);
@@ -356,7 +356,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         Log.v(this, "updateButtonsState");
         final CallButtonUi ui = getUi();
 
-        final boolean isVideo = CallUtils.isVideoCall(call);
+        final boolean isVideo = VideoUtils.isVideoCall(call);
 
         // Common functionality (audio, hold, etc).
         // Show either HOLD or SWAP, but not both. If neither HOLD or SWAP is available:

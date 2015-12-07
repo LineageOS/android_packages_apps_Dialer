@@ -49,11 +49,11 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
     @Override
     public void onSessionModifyRequestReceived(VideoProfile videoProfile) {
         Log.d(this, " onSessionModifyRequestReceived videoProfile=" + videoProfile);
-        int previousVideoState = CallUtils.getUnPausedVideoState(mCall.getVideoState());
-        int newVideoState = CallUtils.getUnPausedVideoState(videoProfile.getVideoState());
+        int previousVideoState = VideoUtils.getUnPausedVideoState(mCall.getVideoState());
+        int newVideoState = VideoUtils.getUnPausedVideoState(videoProfile.getVideoState());
 
-        boolean wasVideoCall = CallUtils.isVideoCall(previousVideoState);
-        boolean isVideoCall = CallUtils.isVideoCall(newVideoState);
+        boolean wasVideoCall = VideoUtils.isVideoCall(previousVideoState);
+        boolean isVideoCall = VideoUtils.isVideoCall(newVideoState);
 
         // Check for upgrades to video and downgrades to audio.
         if (wasVideoCall && !isVideoCall) {
@@ -97,7 +97,7 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         } else if (requestedProfile != null && responseProfile != null) {
             boolean modifySucceeded = requestedProfile.getVideoState() ==
                     responseProfile.getVideoState();
-            boolean isVideoCall = CallUtils.isVideoCall(responseProfile.getVideoState());
+            boolean isVideoCall = VideoUtils.isVideoCall(responseProfile.getVideoState());
             if (modifySucceeded && isVideoCall) {
                 InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoSuccess(mCall);
             } else if (!modifySucceeded && isVideoCall) {

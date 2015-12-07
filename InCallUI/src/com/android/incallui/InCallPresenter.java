@@ -939,17 +939,26 @@ public class InCallPresenter implements CallList.Listener,
         return mIsActivityPreviouslyStarted;
     }
 
+    /**
+     * Determines if the In-Call app is currently changing configuration.
+     *
+     * @return {@code true} if the In-Call app is changing configuration.
+     */
     public boolean isChangingConfigurations() {
         return mIsChangingConfigurations;
     }
 
+    /**
+     * Tracks whether the In-Call app is currently in the process of changing configuration (i.e.
+     * screen orientation).
+     */
     /*package*/
     void updateIsChangingConfigurations() {
         mIsChangingConfigurations = false;
         if (mInCallActivity != null) {
             mIsChangingConfigurations = mInCallActivity.isChangingConfigurations();
         }
-        Log.d(this, "IsChangingConfigurations=" + mIsChangingConfigurations);
+        Log.v(this, "updateIsChangingConfigurations = " + mIsChangingConfigurations);
     }
 
 

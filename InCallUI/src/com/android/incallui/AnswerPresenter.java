@@ -181,7 +181,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         CallList.getInstance().addCallUpdateListener(mCallId, this);
 
         final int currentVideoState = call.getVideoState();
-        final int modifyToVideoState = call.getModifyToVideoState();
+        final int modifyToVideoState = call.getRequestedVideoState();
 
         if (currentVideoState == modifyToVideoState) {
             Log.w(this, "processVideoUpgradeRequestCall: Video states are same. Return.");
@@ -287,7 +287,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // Only present the user with the option to answer as a video call if the incoming call is
         // a bi-directional video call.
-        if (CallUtils.isBidirectionalVideoCall(call)) {
+        if (VideoUtils.isBidirectionalVideoCall(call)) {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
                 getUi().configureMessageDialog(textMsgs);

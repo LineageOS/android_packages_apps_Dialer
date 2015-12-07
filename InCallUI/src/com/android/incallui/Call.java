@@ -367,9 +367,9 @@ public class Call {
     private int mVideoState;
 
     /**
-     * mModifyToVideoState is used to store requested upgrade / downgrade video state
+     * mRequestedVideoState is used to store requested upgrade / downgrade video state
      */
-    private int mModifyToVideoState = VideoProfile.STATE_AUDIO_ONLY;
+    private int mRequestedVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
     private InCallVideoCallCallback mVideoCallCallback;
     private String mChildNumber;
@@ -743,35 +743,41 @@ public class Call {
 
     public boolean isVideoCall(Context context) {
         return CallUtil.isVideoEnabled(context) &&
-                CallUtils.isVideoCall(getVideoState());
+                VideoUtils.isVideoCall(getVideoState());
     }
 
     /**
-     * This method is called when we request for a video upgrade or downgrade. This handles the
-     * session modification state RECEIVED_UPGRADE_TO_VIDEO_REQUEST and sets the video state we
-     * want to upgrade/downgrade to.
+     * Handles incoming session modification requests.  Stores the pending video request and sets
+     * the session modification state to
+     * {@link SessionModificationState#RECEIVED_UPGRADE_TO_VIDEO_REQUEST} so that we can keep track
+     * of the fact the request was received.  Only upgrade requests require user confirmation and
+     * will be handled by this method.  The remote user can turn off their own camera without
+     * confirmation.
+     *
+     * @param videoState The requested video state.
      */
-    public void setSessionModificationTo(int videoState) {
-        Log.d(this, "setSessionModificationTo - video state= " + videoState);
+    public void setRequestedVideoState(int videoState) {
+        Log.d(this, "setRequestedVideoState - video state= " + videoState);
         if (videoState == getVideoState()) {
             mSessionModificationState = Call.SessionModificationState.NO_REQUEST;
-            Log.w(this,"setSessionModificationTo - Clearing session modification state");
-        } else {
-            mSessionModificationState =
-                Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
-            setModifyToVideoState(videoState);
-            CallList.getInstance().onUpgradeToVideo(this);
+            Log.w(this,"setRequestedVideoState - Clearing session modification state");
+            return;
         }
 
-        Log.d(this, "setSessionModificationTo - mSessionModificationState="
+        mSessionModificationState = Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+        mRequestedVideoState = videoState;
+        CallList.getInstance().onUpgradeToVideo(this);
+
+        Log.d(this, "setRequestedVideoState - mSessionModificationState="
             + mSessionModificationState + " video state= " + videoState);
         update();
     }
 
     /**
-     * This method is called to handle any other session modification states other than
-     * RECEIVED_UPGRADE_TO_VIDEO_REQUEST. We set the modification state and reset the video state
-     * when an upgrade request has been completed or failed.
+     * Set the session modification state.  Used to keep track of pending video session modification
+     * operations and to inform listeners of these changes.
+     *
+     * @param state the new session modification state.
      */
     public void setSessionModificationState(int state) {
         boolean hasChanged = mSessionModificationState != state;
@@ -791,12 +797,13 @@ public class Call {
         mIsEmergencyCall = TelecomCallUtil.isEmergencyCall(mTelecomCall);
     }
 
-    private void setModifyToVideoState(int newVideoState) {
-        mModifyToVideoState = newVideoState;
-    }
-
-    public int getModifyToVideoState() {
-        return mModifyToVideoState;
+    /**
+     * Gets the video state which was requested via a session modification request.
+     *
+     * @return The video state.
+     */
+    public int getRequestedVideoState() {
+        return mRequestedVideoState;
     }
 
     public static boolean areSame(Call call1, Call call2) {
@@ -821,6 +828,11 @@ public class Call {
         return TextUtils.equals(call1.getNumber(), call2.getNumber());
     }
 
+    /**
+     *  Gets the current video session modification state.
+     *
+     * @return The session modification state.
+     */
     public int getSessionModificationState() {
         return mSessionModificationState;
     }
