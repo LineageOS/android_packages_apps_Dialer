@@ -27,6 +27,7 @@ import android.telephony.TelephonyManager;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.incallui.service.PhoneNumberService;
 
 import java.io.IOException;
@@ -63,6 +64,21 @@ public class ReverseLookupService implements PhoneNumberService, Handler.Callbac
         }
 
         String countryIso = mTelephonyManager.getSimCountryIso().toUpperCase();
+
+        // For NANP, prepend the area code if the user didn't supply it
+        if (SmartDialPrefix.isCountryNanp(countryIso) &&
+                phoneNumber.replaceAll("[^0-9]", "").length() == 7) {
+            String myNumber = mTelephonyManager.getLine1Number().substring(0,3);
+            if (myNumber != null) {
+                String myRawNumber = myNumber.replaceAll("[^0-9]", "");
+                if (myRawNumber.length() == 10) {
+                    phoneNumber = "(" + myRawNumber.substring(1,4) + ") " + phoneNumber;
+                } else if (myRawNumber.length() == 9) {
+                    phoneNumber = "(" + myRawNumber.substring(0,3) + ") " + phoneNumber;
+                }
+            }
+        }
+
         String normalizedNumber = phoneNumber != null
                 ? PhoneNumberUtils.formatNumberToE164(phoneNumber, countryIso) : null;
 
