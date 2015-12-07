@@ -1073,7 +1073,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param height peer height
      */
     private void setDisplayVideoSize(int width, int height) {
-        Log.d(this, "setDisplayVideoSize:Received peer width=" + width + " peer height=" + height);
+        Log.v(this, "setDisplayVideoSize: Received peer width=" + width + " height=" + height);
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
@@ -1081,7 +1081,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         // Get current display size
         Point size = ui.getScreenSize();
-        Log.d("VideoCallPresenter", "setDisplayVideoSize: windowmgr width=" + size.x
+        Log.v(this, "setDisplayVideoSize: windowmgr width=" + size.x
                 + " windowmgr height=" + size.y);
         if (size.y * width > size.x * height) {
             // current display height is too much. Correct it

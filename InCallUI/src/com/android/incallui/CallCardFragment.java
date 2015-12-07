@@ -410,9 +410,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                     mPrimaryCallCardContainer.setTranslationY(visible ?
                             -mPrimaryCallCardContainer.getHeight() : 0);
 
-                    if (visible) {
-                        videoViewTranslation = videoView.getHeight() / 2 - spaceBesideCallCard / 2;
-                    }
+                    ViewGroup.LayoutParams p = videoView.getLayoutParams();
+                    videoViewTranslation = p.height / 2 - spaceBesideCallCard / 2;
                 }
 
                 // Perform animation of video view.
@@ -421,12 +420,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                         .setDuration(mVideoAnimationDuration);
                 if (mIsLandscape) {
                     videoViewAnimator
-                            .translationX(videoViewTranslation)
-                            .start();
+                            .translationX(visible ? videoViewTranslation : 0);
                 } else {
                     videoViewAnimator
-                            .translationY(videoViewTranslation)
-                            .start();
+                            .translationY(visible ? videoViewTranslation : 0);
                 }
                 videoViewAnimator.start();
 
