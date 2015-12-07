@@ -162,11 +162,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      */
     private int mPreviewSurfaceState = PreviewSurfaceState.NONE;
 
-    /**
-     * Saves the audio mode which was selected prior to going into a video call.
-     */
-    private static int sPrevVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
-
     private static boolean mIsVideoMode = false;
 
     /**
@@ -408,8 +403,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 " isVideoMode=" + isVideoMode());
 
         if (newState == InCallPresenter.InCallState.NO_CALLS) {
-            updateAudioMode(false);
-
             if (isVideoMode()) {
                 exitVideoMode();
             }
@@ -702,46 +695,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             enableCamera(videoCall, isCameraRequired(newVideoState));
         }
         mCurrentVideoState = newVideoState;
-        updateAudioMode(true);
 
         mIsVideoMode = true;
 
         maybeAutoEnterFullscreen(call);
-    }
-
-    //TODO: Move this into Telecom. InCallUI should not be this close to audio functionality.
-    private void updateAudioMode(boolean enableSpeaker) {
-        if (!isSpeakerEnabledForVideoCalls()) {
-            Log.d(this, "Speaker is disabled. Can't update audio mode");
-            return;
-        }
-
-        final TelecomAdapter telecomAdapter = TelecomAdapter.getInstance();
-        final boolean isPrevAudioModeValid =
-            sPrevVideoAudioMode != AudioModeProvider.AUDIO_MODE_INVALID;
-
-        Log.d(this, "Is previous audio mode valid = " + isPrevAudioModeValid + " enableSpeaker is "
-                + enableSpeaker);
-
-        // Set audio mode to previous mode if enableSpeaker is false.
-        if (isPrevAudioModeValid && !enableSpeaker) {
-            telecomAdapter.setAudioRoute(sPrevVideoAudioMode);
-            sPrevVideoAudioMode = AudioModeProvider.AUDIO_MODE_INVALID;
-            return;
-        }
-
-        int currentAudioMode = AudioModeProvider.getInstance().getAudioMode();
-
-        // Set audio mode to speaker if enableSpeaker is true and bluetooth or headset are not
-        // connected and it's a video call.
-        if (!isAudioRouteEnabled(currentAudioMode,
-            CallAudioState.ROUTE_BLUETOOTH | CallAudioState.ROUTE_WIRED_HEADSET) &&
-            !isPrevAudioModeValid && enableSpeaker && CallUtils.isVideoCall(mPrimaryCall)) {
-            sPrevVideoAudioMode = currentAudioMode;
-
-            Log.d(this, "Routing audio to speaker");
-            telecomAdapter.setAudioRoute(CallAudioState.ROUTE_SPEAKER);
-        }
     }
 
     private static boolean isSpeakerEnabledForVideoCalls() {
