@@ -569,9 +569,10 @@ public class CallList {
             // Second, ensure a VideoCall is set on the call so that the change can be sent to the
             // provider (a VideoCall can be present for a call that does not currently have video,
             // but can be upgraded to video).
+
             // NOTE: is it necessary to use this order because getVideoCall references the class
             // VideoProfile which is not available on APIs <23 (M).
-            if (CallUtils.isVideoCall(call) && call.getVideoCall() != null) {
+            if (VideoUtils.isVideoCall(call) && call.getVideoCall() != null) {
                 call.getVideoCall().setDeviceOrientation(rotation);
             }
         }

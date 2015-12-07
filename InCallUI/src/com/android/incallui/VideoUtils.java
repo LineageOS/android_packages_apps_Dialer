@@ -1,29 +1,17 @@
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+/*
+ * Copyright (C) 2015 The Android Open Source Project
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above
- *       copyright notice, this list of conditions and the following
- *       disclaimer in the documentation and/or other materials provided
- *       with the distribution.
- *     * Neither the name of The Linux Foundation nor the names of its
- *       contributors may be used to endorse or promote products derived
- *       from this software without specific prior written permission.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
- * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
- * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
  */
 
 package com.android.incallui;
@@ -34,7 +22,7 @@ import com.android.dialer.compat.DialerCompatUtils;
 
 import com.google.common.base.Preconditions;
 
-public class CallUtils {
+public class VideoUtils {
 
     public static boolean isVideoCall(Call call) {
         return call != null && isVideoCall(call.getVideoState());
@@ -58,7 +46,7 @@ public class CallUtils {
     }
 
     public static boolean isIncomingVideoCall(Call call) {
-        if (!CallUtils.isVideoCall(call)) {
+        if (!VideoUtils.isVideoCall(call)) {
             return false;
         }
         final int state = call.getState();
@@ -66,11 +54,11 @@ public class CallUtils {
     }
 
     public static boolean isActiveVideoCall(Call call) {
-        return CallUtils.isVideoCall(call) && call.getState() == Call.State.ACTIVE;
+        return VideoUtils.isVideoCall(call) && call.getState() == Call.State.ACTIVE;
     }
 
     public static boolean isOutgoingVideoCall(Call call) {
-        if (!CallUtils.isVideoCall(call)) {
+        if (!VideoUtils.isVideoCall(call)) {
             return false;
         }
         final int state = call.getState();

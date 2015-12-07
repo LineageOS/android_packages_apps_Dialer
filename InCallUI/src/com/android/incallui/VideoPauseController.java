@@ -1,34 +1,21 @@
-/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+/*
+ * Copyright (C) 2015 The Android Open Source Project
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above
- *       copyright notice, this list of conditions and the following
- *       disclaimer in the documentation and/or other materials provided
- *       with the distribution.
- *     * Neither the name of The Linux Foundation nor the names of its
- *       contributors may be used to endorse or promote products derived
- *       from this software without specific prior written permission.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
- * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
- * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
  */
 
 package com.android.incallui;
 
-import android.telecom.VideoProfile;
 import com.android.incallui.Call.State;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -42,7 +29,7 @@ import com.google.common.base.Preconditions;
  */
 class VideoPauseController implements InCallStateListener, IncomingCallListener,
         SessionModificationListener {
-    private static final String TAG = "VideoPauseController:";
+    private static final String TAG = "VideoPauseController";
 
     /**
      * Keeps track of the current active/foreground call.
@@ -168,7 +155,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         }
 
         boolean hasPrimaryCallChanged = !areSame(call, mPrimaryCallContext);
-        boolean canVideoPause = CallUtils.canVideoPause(call);
+        boolean canVideoPause = VideoUtils.canVideoPause(call);
         log("onStateChange, hasPrimaryCallChanged=" + hasPrimaryCallChanged);
         log("onStateChange, canVideoPause=" + canVideoPause);
         log("onStateChange, IsInBackground=" + mIsInBackground);
@@ -206,7 +193,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         log("onPrimaryCallChanged, IsInBackground=" + mIsInBackground);
 
         Preconditions.checkState(!areSame(call, mPrimaryCallContext));
-        final boolean canVideoPause = CallUtils.canVideoPause(call);
+        final boolean canVideoPause = VideoUtils.canVideoPause(call);
 
         if ((isIncomingCall(mPrimaryCallContext) || isDialing(mPrimaryCallContext))
                 && canVideoPause && !mIsInBackground) {
@@ -366,10 +353,10 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         if (resume) {
             log("sending resume request, call=" + call);
             call.getVideoCall()
-                    .sendSessionModifyRequest(CallUtils.makeVideoUnPauseProfile(call));
+                    .sendSessionModifyRequest(VideoUtils.makeVideoUnPauseProfile(call));
         } else {
             log("sending pause request, call=" + call);
-            call.getVideoCall().sendSessionModifyRequest(CallUtils.makeVideoPauseProfile(call));
+            call.getVideoCall().sendSessionModifyRequest(VideoUtils.makeVideoPauseProfile(call));
         }
     }
 
@@ -407,7 +394,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
      * @return {@code true} if the call is a video call, {@code false} otherwise.
      */
     private static boolean isVideoCall(CallContext callContext) {
-        return callContext != null && CallUtils.isVideoCall(callContext.getVideoState());
+        return callContext != null && VideoUtils.isVideoCall(callContext.getVideoState());
     }
 
     /**
