@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telefon"</string>
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Opkald"</string>
     <string name="onHold" msgid="9035493194749959955">"Ventende"</string>
     <string name="unknown" msgid="6878797917991465859">"Ukendt"</string>
     <string name="private_num" msgid="6713286113000232309">"Privat nummer"</string>
