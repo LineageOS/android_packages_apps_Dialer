@@ -70,6 +70,9 @@ public class ReverseLookupService implements PhoneNumberService, Handler.Callbac
         LookupRequest request = new LookupRequest();
         String countryIso = mTelephonyManager.getSimCountryIso().toUpperCase();
         request.normalizedNumber = PhoneNumberUtils.formatNumberToE164(phoneNumber, countryIso);
+        if (request.normalizedNumber == null) {
+            return;
+        }
         request.formattedNumber = PhoneNumberUtils.formatNumber(phoneNumber,
                 request.normalizedNumber, GeoUtil.getCurrentCountryIso(mContext));
         request.numberListener = numberListener;
