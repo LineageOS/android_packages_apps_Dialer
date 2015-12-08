@@ -60,7 +60,7 @@ LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
 
 # Uncomment the following line to build against the current SDK
 # This is required for building an unbundled app.
-LOCAL_SDK_VERSION := current
+LOCAL_SDK_VERSION := system_current
 
 include $(BUILD_PACKAGE)
 
