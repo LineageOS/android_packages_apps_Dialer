@@ -59,6 +59,7 @@
     <uses-permission android:name="android.permission.STOP_APP_SWITCHES" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="com.qualcomm.permission.USE_PHONE_SERVICE" />
+    <uses-permission android:name="android.permission.SEND_RESPOND_VIA_MESSAGE"/>
 
     <application
         android:name="DialerApplication"
