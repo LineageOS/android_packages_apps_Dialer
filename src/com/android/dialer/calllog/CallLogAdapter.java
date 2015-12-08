@@ -356,6 +356,12 @@ public class CallLogAdapter extends GroupingListAdapter
         mContactInfoCache.invalidate();
     }
 
+    public void startCache() {
+        if (PermissionsUtil.hasPermission(mContext, android.Manifest.permission.READ_CONTACTS)) {
+            mContactInfoCache.start();
+        }
+    }
+
     public void onResume() {
         if (PermissionsUtil.hasPermission(mContext, android.Manifest.permission.READ_CONTACTS)) {
             mContactInfoCache.start();

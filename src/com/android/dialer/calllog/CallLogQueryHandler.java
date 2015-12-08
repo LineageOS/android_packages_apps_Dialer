@@ -50,6 +50,8 @@ import java.util.List;
 
 /** Handles asynchronous queries to the call log. */
 public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
+    private static final String[] EMPTY_STRING_ARRAY = new String[0];
+
     private static final String TAG = "CallLogQueryHandler";
     private static final int NUM_LOGS_TO_DISPLAY = 1000;
 
@@ -75,6 +77,11 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
      * type. Exception: excludes Calls.VOICEMAIL_TYPE.
      */
     public static final int CALL_TYPE_ALL = -1;
+
+    /**
+     * To specify all slots.
+     */
+    public static final int CALL_SUB_ALL = -1;
 
     private final WeakReference<Listener> mListener;
 
@@ -150,6 +157,15 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         cancelFetch();
         if (PermissionsUtil.hasPhonePermissions(mContext)) {
             fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan);
+        } else {
+            updateAdapterData(null);
+        }
+    }
+
+    public void fetchCalls(int callType, long newerThan, int sub) {
+        cancelFetch();
+        if (PermissionsUtil.hasPhonePermissions(mContext)) {
+            fetchCalls(QUERY_CALLLOG_TOKEN, callType, false /* newOnly */, newerThan, sub);
         } else {
             updateAdapterData(null);
         }
@@ -234,6 +250,56 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         startQuery(token, null, uri, CallLogQuery._PROJECTION, selection, selectionArgs.toArray(
                 new String[selectionArgs.size()]), Calls.DEFAULT_SORT_ORDER);
     }
+
+    private void fetchCalls(int token, int callType, boolean newOnly,
+            long newerThan, int sub) {
+        // We need to check for NULL explicitly otherwise entries with where READ is NULL
+        // may not match either the query or its negation.
+        // We consider the calls that are not yet consumed (i.e. IS_READ = 0) as "new".
+        StringBuilder where = new StringBuilder();
+        List<String> selectionArgs = Lists.newArrayList();
+
+        // Ignore voicemails marked as deleted
+        where.append(Voicemails.DELETED);
+        where.append(" = 0");
+
+        if (newOnly) {
+            where.append(" AND ");
+            where.append(Calls.NEW);
+            where.append(" = 1");
+        }
+
+        if (callType > CALL_TYPE_ALL) {
+            where.append(" AND ");
+            where.append(String.format("(%s = ?)", Calls.TYPE));
+            selectionArgs.add(Integer.toString(callType));
+        } else {
+            where.append(" AND NOT ");
+            where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");
+        }
+
+        if (sub > CALL_SUB_ALL) {
+            where.append(" AND ");
+            where.append(String.format("(%s = ?)", Calls.PHONE_ACCOUNT_ID));
+            selectionArgs.add(Integer.toString(sub));
+        }
+
+        if (newerThan > 0) {
+            where.append(" AND ");
+            where.append(String.format("(%s > ?)", Calls.DATE));
+            selectionArgs.add(Long.toString(newerThan));
+        }
+
+        final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
+        final String selection = where.length() > 0 ? where.toString() : null;
+        Uri uri = TelecomUtil.getCallLogUri(mContext).buildUpon()
+                .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
+                .build();
+        startQuery(token, null, uri,
+                CallLogQuery._PROJECTION, selection, selectionArgs.toArray(EMPTY_STRING_ARRAY),
+                Calls.DEFAULT_SORT_ORDER);
+    }
+
 
     /** Cancel any pending fetch request. */
     private void cancelFetch() {
