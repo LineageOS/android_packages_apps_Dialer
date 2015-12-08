@@ -575,6 +575,16 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             if (DEBUG) {
                 Log.v(TAG, "Updating Finished");
             }
+            /** Gets the last update time on the database. */
+            final SharedPreferences databaseLastUpdateSharedPref = mContext.getSharedPreferences(
+                    DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
+            final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
+            editor.putLong(LAST_UPDATED_MILLIS, System.currentTimeMillis());
+            editor.apply();
+
+            // Notify content observers that smart dial database has been updated.
+            mContext.getContentResolver().notifyChange(SMART_DIAL_UPDATED_URI, null, false);
+
             super.onPostExecute(o);
         }
     }
@@ -1015,13 +1025,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             }
 
             sInUpdate.getAndSet(false);
-
-            final SharedPreferences.Editor editor = databaseLastUpdateSharedPref.edit();
-            editor.putLong(LAST_UPDATED_MILLIS, currentMillis);
-            editor.commit();
-
-            // Notify content observers that smart dial database has been updated.
-            mContext.getContentResolver().notifyChange(SMART_DIAL_UPDATED_URI, null, false);
         }
     }
 
