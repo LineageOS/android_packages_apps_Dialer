@@ -11,7 +11,10 @@ import android.util.Log;
 
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.compat.telecom.TelecomManagerCompat;
+import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 
 import java.util.Arrays;
 
@@ -85,6 +88,30 @@ public class CallerInfoUtils {
                 info);
 
         return info;
+    }
+
+    /**
+     * Creates a new {@link CachedContactInfo} from a {@link CallerInfo}
+     *
+     * @param lookupService the {@link CachedNumberLookupService} used to build a
+     *        new {@link CachedContactInfo}
+     * @param {@link CallerInfo} object
+     * @return a CachedContactInfo object created from this CallerInfo
+     * @throws NullPointerException if lookupService or ci are null
+     */
+    public static CachedContactInfo buildCachedContactInfo(CachedNumberLookupService lookupService,
+            CallerInfo ci) {
+        ContactInfo info = new ContactInfo();
+        info.name = ci.name;
+        info.type = ci.numberType;
+        info.label = ci.phoneLabel;
+        info.number = ci.phoneNumber;
+        info.normalizedNumber = ci.normalizedNumber;
+        info.photoUri = ci.contactDisplayPhotoUri;
+
+        CachedContactInfo cacheInfo = lookupService.buildCachedContactInfo(info);
+        cacheInfo.setLookupKey(ci.lookupKeyOrNull);
+        return cacheInfo;
     }
 
     public static boolean isVoiceMailNumber(Context context, Call call) {
