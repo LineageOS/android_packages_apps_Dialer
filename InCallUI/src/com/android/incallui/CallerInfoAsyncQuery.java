@@ -33,6 +33,7 @@ import android.provider.ContactsContract.Directory;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.dialer.calllog.ContactInfoHelper;
 
@@ -54,8 +55,6 @@ public class CallerInfoAsyncQuery {
     private static final int EVENT_END_OF_QUEUE = 3;
     private static final int EVENT_EMERGENCY_NUMBER = 4;
     private static final int EVENT_VOICEMAIL_NUMBER = 5;
-
-    private static final boolean FLAG_N_FEATURE = false;
 
     private CallerInfoAsyncQueryHandler mHandler;
 
@@ -437,9 +436,7 @@ public class CallerInfoAsyncQuery {
         ArrayList<Long> results = new ArrayList<>();
 
         Uri uri = Directory.CONTENT_URI;
-        // TODO(b/26019967):
-        // replace VERSION.CODENAME.startsWith("N") by VERSION.SDK_INT >= VERSION_CODES.NYC
-        if (FLAG_N_FEATURE && Build.VERSION.CODENAME.startsWith("N")) {
+        if (ContactsUtils.FLAG_N_FEATURE) {
             uri = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "directories_enterprise");
         }
 
