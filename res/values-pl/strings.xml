@@ -222,7 +222,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Szybkie odpowiedzi"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Połączenia"</string>
-    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Blokada połączeń"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Blokowanie połączeń"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Blokada połączeń tymczasowo wyłączona"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Blokada połączeń została wyłączona, ponieważ w ciągu ostatnich 48 godzin dzwoniono z tego telefonu na numer alarmowy. Blokada zostanie automatycznie przywrócona po upływie 48 godzin."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Zaimportuj numery"</string>
