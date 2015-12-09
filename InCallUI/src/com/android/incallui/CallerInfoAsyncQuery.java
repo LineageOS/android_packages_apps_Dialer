@@ -410,6 +410,9 @@ public class CallerInfoAsyncQuery {
         long[] directoryIds = getDirectoryIds(context);
         int size = directoryIds.length;
         if (size == 0) {
+            if (listener != null) {
+                listener.onQueryComplete(token, cookie, info);
+            }
             return;
         }
 
@@ -467,13 +470,13 @@ public class CallerInfoAsyncQuery {
 
     private static final class DirectoryQueryCompleteListener implements OnQueryCompleteListener {
         int mCount;
-        boolean mIsListernerCalled;
+        boolean mIsListenerCalled;
         OnQueryCompleteListener mListener;
 
         DirectoryQueryCompleteListener(int size, OnQueryCompleteListener listener)  {
             mCount = size;
             mListener = listener;
-            mIsListernerCalled = false;
+            mIsListenerCalled = false;
         }
 
         @Override
@@ -481,8 +484,8 @@ public class CallerInfoAsyncQuery {
             boolean shouldCallListener = false;
             synchronized (this) {
                 mCount = mCount - 1;
-                if (!mIsListernerCalled && (ci.contactExists || mCount == 0)) {
-                    mIsListernerCalled = true;
+                if (!mIsListenerCalled && (ci.contactExists || mCount == 0)) {
+                    mIsListenerCalled = true;
                     shouldCallListener = true;
                 }
             }
