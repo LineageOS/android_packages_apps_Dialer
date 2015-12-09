@@ -58,6 +58,7 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.Call.State;
+import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.animation.AnimationListenerAdapter;
@@ -572,7 +573,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
 
                 Bundle extras = null;
                 if (call != null) {
-                    extras = call.getTelecomCall().getDetails().getIntentExtras();
+                    extras = DetailsCompat.getIntentExtras(call.getTelecomCall().getDetails());
                 }
                 if (extras == null) {
                     // Initialize the extras bundle to avoid NPE
@@ -609,8 +610,8 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             Call pendingAccountSelectionCall = CallList.getInstance().getWaitingForAccountCall();
             if (pendingAccountSelectionCall != null) {
                 showCallCardFragment(false);
-                Bundle extras = pendingAccountSelectionCall
-                        .getTelecomCall().getDetails().getIntentExtras();
+                Bundle extras = DetailsCompat.getIntentExtras(pendingAccountSelectionCall
+                        .getTelecomCall().getDetails());
 
                 final List<PhoneAccountHandle> phoneAccountHandles;
                 if (extras != null) {
