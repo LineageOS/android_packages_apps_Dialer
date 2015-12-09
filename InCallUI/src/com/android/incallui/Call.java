@@ -16,15 +16,10 @@
 
 package com.android.incallui;
 
-import com.android.contacts.common.CallUtil;
-import com.android.contacts.common.testing.NeededForTesting;
-import com.android.dialer.util.IntentUtil;
-import com.android.incallui.Call.LogState;
-import com.android.incallui.util.TelecomCallUtil;
-
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Trace;
 import android.telecom.Connection;
@@ -35,8 +30,13 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.contacts.common.testing.NeededForTesting;
+import com.android.dialer.util.IntentUtil;
+import com.android.incallui.util.TelecomCallUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -287,73 +287,157 @@ public class Call {
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
 
-    private android.telecom.Call.Callback mTelecomCallCallback =
-            new android.telecom.Call.Callback() {
-                @Override
-                public void onStateChanged(android.telecom.Call call, int newState) {
-                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " newState="
-                            + newState);
-                    update();
-                }
+    private Object mTelecomCallCallback = newTelecomCallCallback();
 
-                @Override
-                public void onParentChanged(android.telecom.Call call,
-                        android.telecom.Call newParent) {
-                    Log.d(this, "TelecomCallCallback onParentChanged call=" + call + " newParent="
-                            + newParent);
-                    update();
-                }
+    private Object newTelecomCallCallback() {
+        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+            return newMarshmallowTelecomCallCallback();
+        }
+        return newLollipopTelecomCallCallback();
+    }
 
-                @Override
-                public void onChildrenChanged(android.telecom.Call call,
-                        List<android.telecom.Call> children) {
-                    update();
-                }
+    private Object newMarshmallowTelecomCallCallback() {
+        Log.i(this, "Using an android.telecom.Call$Callback");
+        return new android.telecom.Call.Callback() {
+            @Override
+            public void onStateChanged(android.telecom.Call call, int newState) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " newState="
+                        + newState);
+                update();
+            }
 
-                @Override
-                public void onDetailsChanged(android.telecom.Call call,
-                        android.telecom.Call.Details details) {
-                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " details="
-                            + details);
-                    update();
-                }
+            @Override
+            public void onParentChanged(android.telecom.Call call,
+                    android.telecom.Call newParent) {
+                Log.d(this, "TelecomCallCallback onParentChanged call=" + call + " newParent="
+                        + newParent);
+                update();
+            }
 
-                @Override
-                public void onCannedTextResponsesLoaded(android.telecom.Call call,
-                        List<String> cannedTextResponses) {
-                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call
-                            + " cannedTextResponses=" + cannedTextResponses);
-                    update();
-                }
+            @Override
+            public void onChildrenChanged(android.telecom.Call call,
+                    List<android.telecom.Call> children) {
+                update();
+            }
 
-                @Override
-                public void onPostDialWait(android.telecom.Call call,
-                        String remainingPostDialSequence) {
-                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call
-                            + " remainingPostDialSequence=" + remainingPostDialSequence);
-                    update();
-                }
+            @Override
+            public void onDetailsChanged(android.telecom.Call call,
+                    android.telecom.Call.Details details) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " details="
+                        + details);
+                update();
+            }
 
-                @Override
-                public void onVideoCallChanged(android.telecom.Call call,
-                        VideoCall videoCall) {
-                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " videoCall="
-                            + videoCall);
-                    update();
-                }
+            @Override
+            public void onCannedTextResponsesLoaded(android.telecom.Call call,
+                    List<String> cannedTextResponses) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call
+                        + " cannedTextResponses=" + cannedTextResponses);
+                update();
+            }
 
-                @Override
-                public void onCallDestroyed(android.telecom.Call call) {
-                    Log.d(this, "TelecomCallCallback onStateChanged call=" + call);
-                    call.unregisterCallback(mTelecomCallCallback);
-                }
+            @Override
+            public void onPostDialWait(android.telecom.Call call,
+                    String remainingPostDialSequence) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call
+                        + " remainingPostDialSequence=" + remainingPostDialSequence);
+                update();
+            }
 
-                @Override
-                public void onConferenceableCallsChanged(android.telecom.Call call,
-                        List<android.telecom.Call> conferenceableCalls) {
-                    update();
-                }
-            };
+            @Override
+            public void onVideoCallChanged(android.telecom.Call call,
+                    VideoCall videoCall) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " videoCall="
+                        + videoCall);
+                update();
+            }
+
+            @Override
+            public void onCallDestroyed(android.telecom.Call call) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call);
+                call.unregisterCallback(this);
+            }
+
+            @Override
+            public void onConferenceableCallsChanged(android.telecom.Call call,
+                    List<android.telecom.Call> conferenceableCalls) {
+                update();
+            }
+        };
+    }
+
+    private Object newLollipopTelecomCallCallback() {
+        // This code only runs for Google Experience phones on the pre-M sdk since only the system
+        // dialer can invoke the InCallUI code. This allows us to safely use the
+        // android.telecom.Call.Listener interface
+        Log.i(this, "Using an android.telecom.Call$Listener");
+        return new android.telecom.Call.Listener() {
+            @Override
+            public void onStateChanged(android.telecom.Call call, int newState) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " newState="
+                        + newState);
+                update();
+            }
+
+            @Override
+            public void onParentChanged(android.telecom.Call call,
+                    android.telecom.Call newParent) {
+                Log.d(this, "TelecomCallCallback onParentChanged call=" + call + " newParent="
+                        + newParent);
+                update();
+            }
+
+            @Override
+            public void onChildrenChanged(android.telecom.Call call,
+                    List<android.telecom.Call> children) {
+                update();
+            }
+
+            @Override
+            public void onDetailsChanged(android.telecom.Call call,
+                    android.telecom.Call.Details details) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " details="
+                        + details);
+                update();
+            }
+
+            @Override
+            public void onCannedTextResponsesLoaded(android.telecom.Call call,
+                    List<String> cannedTextResponses) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call
+                        + " cannedTextResponses=" + cannedTextResponses);
+                update();
+            }
+
+            @Override
+            public void onPostDialWait(android.telecom.Call call,
+                    String remainingPostDialSequence) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call
+                        + " remainingPostDialSequence=" + remainingPostDialSequence);
+                update();
+            }
+
+            @Override
+            public void onVideoCallChanged(android.telecom.Call call,
+                    VideoCall videoCall) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " videoCall="
+                        + videoCall);
+                update();
+            }
+
+            @Override
+            public void onCallDestroyed(android.telecom.Call call) {
+                Log.d(this, "TelecomCallCallback onStateChanged call=" + call);
+                call.unregisterCallback(this);
+            }
+
+            @Override
+            public void onConferenceableCallsChanged(android.telecom.Call call,
+                    List<android.telecom.Call> conferenceableCalls) {
+                update();
+            }
+        };
+    }
 
     private android.telecom.Call mTelecomCall;
     private boolean mIsEmergencyCall;
@@ -402,7 +486,12 @@ public class Call {
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
 
         updateFromTelecomCall();
-        mTelecomCall.registerCallback(mTelecomCallCallback);
+
+        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+            mTelecomCall.registerCallback((android.telecom.Call.Callback) mTelecomCallCallback);
+        } else {
+            mTelecomCall.addListener((android.telecom.Call.Listener) mTelecomCallCallback);
+        }
 
         mTimeAddedMs = System.currentTimeMillis();
     }
