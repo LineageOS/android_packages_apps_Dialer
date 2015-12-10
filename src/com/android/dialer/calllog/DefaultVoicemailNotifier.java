@@ -154,7 +154,7 @@ public class DefaultVoicemailNotifier {
                 if (TextUtils.isEmpty(name)) {
                     // Look it up in the database.
                     name = mNameLookupQuery.query(newCall.number);
-                    if (TextUtils.isEmpty(name)) {
+                    if (TextUtils.isEmpty(name) && !TextUtils.isEmpty(newCall.number)) {
                         name = PhoneNumberUtils.formatNumber(newCall.number, newCall.countryIso);
                     }
                 }
