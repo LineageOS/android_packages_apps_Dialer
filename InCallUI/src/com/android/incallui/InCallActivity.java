@@ -51,6 +51,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.android.contacts.common.activity.TransactionSafeActivity;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
@@ -594,8 +595,10 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                         InCallPresenter.getInstance());
 
                 // InCallActivity is responsible for disconnecting a new outgoing call if there
-                // is no way of making it (i.e. no valid call capable accounts)
-                if (InCallPresenter.isCallWithNoValidAccounts(call)) {
+                // is no way of making it (i.e. no valid call capable accounts).
+                // If the version is not MSIM compatible, then ignore this code.
+                if (CompatUtils.isMSIMCompatible()
+                        && InCallPresenter.isCallWithNoValidAccounts(call)) {
                     TelecomAdapter.getInstance().disconnectCall(call.getId());
                 }
 
