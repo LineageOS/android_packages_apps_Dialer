@@ -32,7 +32,7 @@ import android.view.Surface;
 import android.widget.ImageView;
 
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.dialer.compat.DialerCompatUtils;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallOrientationListener;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -224,7 +224,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         // Do not register any listeners if video calling is not compatible to safeguard against
         // any accidental calls of video calling code.
-        if (!DialerCompatUtils.isVideoCompatible()) {
+        if (!CompatUtils.isVideoCompatible()) {
             return;
         }
 
@@ -255,7 +255,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         super.onUiUnready(ui);
         Log.d(this, "onUiUnready:");
 
-        if (!DialerCompatUtils.isVideoCompatible()) {
+        if (!CompatUtils.isVideoCompatible()) {
             return;
         }
 
@@ -781,7 +781,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @return {@code true} if the incoming video surface should be shown, {@code false} otherwise.
      */
     public static boolean showIncomingVideo(int videoState, int callState) {
-        if (!DialerCompatUtils.isVideoCompatible()) {
+        if (!CompatUtils.isVideoCompatible()) {
             return false;
         }
 
@@ -800,7 +800,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      *      otherwise.
      */
     public static boolean showOutgoingVideo(int videoState) {
-        if (!DialerCompatUtils.isVideoCompatible()) {
+        if (!CompatUtils.isVideoCompatible()) {
             return false;
         }
 
