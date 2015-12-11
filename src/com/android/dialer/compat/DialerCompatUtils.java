@@ -21,17 +21,6 @@ import com.android.contacts.common.compat.SdkVersionOverride;
 
 public final class DialerCompatUtils {
     /**
-     * Determines if this version is compatible with video calling. Can also force the version to be
-     * lower through SdkVersionOverride.
-     *
-     * @return {@code true} if video calling is allowed, {@code false} otherwise.
-     */
-    public static boolean isVideoCompatible() {
-        return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP)
-                >= Build.VERSION_CODES.M;
-    }
-
-    /**
      * Determines if this version is compatible with a default dialer. Can also force the version to
      * be lower through SdkVersionOverride.
      *

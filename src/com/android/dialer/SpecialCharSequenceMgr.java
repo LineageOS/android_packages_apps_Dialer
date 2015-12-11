@@ -41,6 +41,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.common.io.MoreCloseables;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
@@ -246,13 +247,14 @@ public class SpecialCharSequenceMgr {
 
                 List<PhoneAccountHandle> subscriptionAccountHandles =
                         PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
-
                 Context applicationContext = context.getApplicationContext();
                 boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
                         TelecomUtil.getDefaultOutgoingPhoneAccount(applicationContext,
                                 PhoneAccount.SCHEME_TEL));
 
-                if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
+                if (!CompatUtils.isMSIMCompatible()) {
+                    handleAdnQuery(handler, sc, Uri.parse("content://icc/adn"));
+                } else if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
                     Uri uri = TelecomUtil.getAdnUriForPhoneAccount(applicationContext, null);
                     handleAdnQuery(handler, sc, uri);
                 } else if (subscriptionAccountHandles.size() > 1){
@@ -303,7 +305,8 @@ public class SpecialCharSequenceMgr {
             boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
                     TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL));
 
-            if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
+            if (!CompatUtils.isMSIMCompatible() || subscriptionAccountHandles.size() == 1
+                    || hasUserSelectedDefault) {
                 // Don't bring up the dialog for single-SIM or if the default outgoing account is
                 // a subscription account.
                 return TelecomUtil.handleMmi(context, input, null);
@@ -332,10 +335,14 @@ public class SpecialCharSequenceMgr {
                     R.string.imei : R.string.meid;
 
             List<String> deviceIds = new ArrayList<String>();
-            for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
-                String deviceId = telephonyManager.getDeviceId(slot);
-                if (!TextUtils.isEmpty(deviceId)) {
-                    deviceIds.add(deviceId);
+            if (!CompatUtils.isMSIMCompatible()) {
+                deviceIds.add(telephonyManager.getDeviceId());
+            } else {
+                for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
+                    String deviceId = telephonyManager.getDeviceId(slot);
+                    if (!TextUtils.isEmpty(deviceId)) {
+                        deviceIds.add(deviceId);
+                    }
                 }
             }
 

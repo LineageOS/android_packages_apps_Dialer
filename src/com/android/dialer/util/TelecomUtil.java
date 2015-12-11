@@ -25,9 +25,12 @@ import android.provider.CallLog.Calls;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.compat.DialerCompatUtils;
 
 import java.util.ArrayList;
@@ -111,7 +114,7 @@ public class TelecomUtil {
     }
 
     public static List<PhoneAccountHandle> getCallCapablePhoneAccounts(Context context) {
-        if (hasReadPhoneStatePermission(context)) {
+        if (hasReadPhoneStatePermission(context) && CompatUtils.isMSIMCompatible()) {
             return getTelecomManager(context).getCallCapablePhoneAccounts();
         }
         return new ArrayList<>();
@@ -127,14 +130,22 @@ public class TelecomUtil {
     public static boolean isVoicemailNumber(Context context, PhoneAccountHandle accountHandle,
             String number) {
         if (hasReadPhoneStatePermission(context)) {
-            return getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+            if (CompatUtils.isMSIMCompatible()) {
+                return getTelecomManager(context).isVoiceMailNumber(accountHandle, number);
+            } else {
+                return PhoneNumberUtils.isVoiceMailNumber(number);
+            }
         }
         return false;
     }
 
     public static String getVoicemailNumber(Context context, PhoneAccountHandle accountHandle) {
         if (hasReadPhoneStatePermission(context)) {
-            return getTelecomManager(context).getVoiceMailNumber(accountHandle);
+            if (CompatUtils.isMSIMCompatible()) {
+                return getTelecomManager(context).getVoiceMailNumber(accountHandle);
+            } else {
+                return getTelephonyManager(context).getVoiceMailNumber();
+            }
         }
         return null;
     }
@@ -209,5 +220,9 @@ public class TelecomUtil {
 
     private static TelecomManager getTelecomManager(Context context) {
         return (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+    }
+
+    private static TelephonyManager getTelephonyManager(Context context) {
+        return (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
     }
 }
