@@ -16,15 +16,16 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Looper;
 import android.telecom.InCallService;
 import android.telecom.PhoneAccountHandle;
 
-import com.google.common.base.Preconditions;
-
 import com.android.incallui.compat.telecom.DetailsCompat;
+import com.android.incallui.compat.telecom.InCallServiceCompat;
 
 import java.util.List;
 
@@ -107,7 +108,7 @@ final class TelecomAdapter implements InCallServiceListener {
 
     void mute(boolean shouldMute) {
         if (mInCallService != null) {
-            mInCallService.setMuted(shouldMute);
+            InCallServiceCompat.setMuted(mInCallService, shouldMute);
         } else {
             Log.e(this, "error mute, mInCallService is null");
         }
@@ -115,7 +116,7 @@ final class TelecomAdapter implements InCallServiceListener {
 
     void setAudioRoute(int route) {
         if (mInCallService != null) {
-            mInCallService.setAudioRoute(route);
+            InCallServiceCompat.setAudioRoute(mInCallService, route);
         } else {
             Log.e(this, "error setAudioRoute, mInCallService is null");
         }
@@ -221,8 +222,7 @@ final class TelecomAdapter implements InCallServiceListener {
         }
     }
 
-    boolean canAddCall() {
-        // Default to true if we are not connected to telecom.
-        return mInCallService == null ? true : mInCallService.canAddCall();
+    boolean canAddCall(Call call) {
+        return InCallServiceCompat.canAddCall(mInCallService, call);
     }
 }

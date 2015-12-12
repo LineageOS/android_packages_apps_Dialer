@@ -333,7 +333,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         updatePrimaryCallState();
 
         if (call.can(Details.CAPABILITY_MANAGE_CONFERENCE) !=
-                Details.can(details.getCallCapabilities(), Details.CAPABILITY_MANAGE_CONFERENCE)) {
+                DetailsCompat.can(details, Details.CAPABILITY_MANAGE_CONFERENCE)) {
             maybeShowManageConferenceCallButton();
         }
     }
