@@ -112,7 +112,7 @@
     <string name="onscreenVideoCallText" msgid="4800924186056115442">"تماس ویدیویی"</string>
     <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"تغییر به تماس صوتی"</string>
     <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"تغییر دوربین"</string>
-    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"توقف موقت ویدیو"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"مکث ویدیو"</string>
     <string name="onscreenOverflowText" msgid="2702376562345723132">"گزینه‌های بیشتر"</string>
     <string name="player_started" msgid="6046262510243983589">"پخش‌کننده راه‌اندازی شد"</string>
     <string name="player_stopped" msgid="8856926759436364963">"پخش‌کننده متوقف شد"</string>
