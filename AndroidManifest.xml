@@ -298,7 +298,8 @@
                   android:launchMode="singleInstance"
                   android:configChanges="keyboardHidden"
                   android:exported="false"
-                  android:screenOrientation="nosensor" >
+                  android:screenOrientation="nosensor"
+                  android:process="com.android.incallui">
         </activity>
 
         <service android:name="com.android.services.callrecorder.CallRecorderService"
@@ -312,18 +313,21 @@
                   android:launchMode="singleInstance"
                   android:noHistory="true"
                   android:excludeFromRecents="true"
-                  android:screenOrientation="nosensor" />
+                  android:screenOrientation="nosensor"
+                  android:process="com.android.incallui"/>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.InCallApp$NotificationBroadcastReceiver"
-                  android:exported="false">
+                  android:exported="false"
+                  android:process="com.android.incallui">
             <intent-filter>
                 <action android:name="com.android.incallui.ACTION_HANG_UP_ONGOING_CALL" />
             </intent-filter>
         </receiver>
 
         <service android:name="com.android.incallui.InCallServiceImpl"
-                 android:permission="android.permission.BIND_INCALL_SERVICE" >
+                 android:permission="android.permission.BIND_INCALL_SERVICE"
+                 android:process="com.android.incallui">
             <intent-filter>
                 <action android:name="android.telecom.InCallService"/>
             </intent-filter>
