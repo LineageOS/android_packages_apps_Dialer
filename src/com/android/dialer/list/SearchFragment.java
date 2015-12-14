@@ -15,8 +15,6 @@
  */
 package com.android.dialer.list;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
@@ -358,7 +356,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
     @Override
     protected void startLoading() {
-        if (PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
+        if (getActivity() == null) {
+            return;
+        }
+
+        if (PermissionsUtil.hasContactsPermissions(getActivity())) {
             super.startLoading();
         } else if (TextUtils.isEmpty(getQueryString())) {
             // Clear out any existing call shortcuts.
