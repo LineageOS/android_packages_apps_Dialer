@@ -36,6 +36,7 @@ import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.util.IntentUtil;
+import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incallui.util.TelecomCallUtil;
 
 import java.util.ArrayList;
@@ -715,7 +716,7 @@ public class Call {
     }
 
     public Bundle getIntentExtras() {
-        return mTelecomCall == null ? null : mTelecomCall.getDetails().getIntentExtras();
+        return DetailsCompat.getIntentExtras(mTelecomCall.getDetails());
     }
 
     public Bundle getExtras() {
@@ -789,7 +790,7 @@ public class Call {
     }
 
     public boolean hasProperty(int property) {
-        return mTelecomCall.getDetails().hasProperty(property);
+        return DetailsCompat.hasProperty(mTelecomCall.getDetails(), property);
     }
 
     /** Gets the time when the call first became active. */
@@ -798,8 +799,7 @@ public class Call {
     }
 
     public boolean isConferenceCall() {
-        return mTelecomCall.getDetails().hasProperty(
-                android.telecom.Call.Details.PROPERTY_CONFERENCE);
+        return hasProperty(android.telecom.Call.Details.PROPERTY_CONFERENCE);
     }
 
     public GatewayInfo getGatewayInfo() {
@@ -955,8 +955,7 @@ public class Call {
                 "videoState:%s, mSessionModificationState:%d, VideoSettings:%s]",
                 mId,
                 State.toString(getState()),
-                android.telecom.Call.Details
-                        .capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
+                DetailsCompat.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 getParentId(),
                 this.mTelecomCall.getConferenceableCalls(),

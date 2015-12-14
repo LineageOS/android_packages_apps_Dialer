@@ -49,6 +49,7 @@ import com.android.incallui.InCallPresenter.InCallEventListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
+import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
@@ -1069,10 +1070,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * @return {@code true} if the toast should be shown, {@code false} otherwise.
      */
     private boolean shouldShowNoteSentToast(Call call) {
-        return call != null && !TextUtils
-                .isEmpty(call.getTelecomCall().getDetails().getIntentExtras().getString(
-                        TelecomManager.EXTRA_CALL_SUBJECT)) &&
-                (call.getState() == Call.State.DIALING || call.getState() == Call.State.CONNECTING);
+        return call != null && hasCallSubject(call) && (call.getState() == Call.State.DIALING
+                || call.getState() == Call.State.CONNECTING);
+    }
+
+    private static boolean hasCallSubject(Call call) {
+        return !TextUtils.isEmpty(DetailsCompat.getIntentExtras(
+                call.getTelecomCall().getDetails()).getString(TelecomManager.EXTRA_CALL_SUBJECT));
     }
 
     public interface CallCardUi extends Ui {

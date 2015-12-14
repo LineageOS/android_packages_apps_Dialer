@@ -53,6 +53,7 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
 import com.google.common.base.Preconditions;
@@ -1445,7 +1446,7 @@ public class InCallPresenter implements CallList.Listener,
     private void setDisconnectCauseForMissingAccounts(Call call) {
         android.telecom.Call telecomCall = call.getTelecomCall();
 
-        Bundle extras = telecomCall.getDetails().getIntentExtras();
+        Bundle extras = DetailsCompat.getIntentExtras(telecomCall.getDetails());
         // Initialize the extras bundle to avoid NPE
         if (extras == null) {
             extras = new Bundle();

@@ -28,10 +28,12 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_SWITCH_CAME
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
+import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.dialer.compat.CallAudioStateCompat;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallCameraManager.Listener;
@@ -379,9 +381,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showAddCall = TelecomAdapter.getInstance().canAddCall();
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
-        final boolean showUpgradeToVideo = !isVideo &&
-                (call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
-                && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX));
+        final boolean showUpgradeToVideo = !isVideo && hasVideoCallCapabilities(call);
 
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
@@ -398,6 +398,15 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_MERGE, showMerge);
 
         ui.updateButtonStates();
+    }
+
+    private boolean hasVideoCallCapabilities(Call call) {
+        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+            return call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)
+                    && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX);
+        }
+        // In L, this single flag represents both video transmitting and receiving capabilities
+        return call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX);
     }
 
     public void refreshMuteState() {
