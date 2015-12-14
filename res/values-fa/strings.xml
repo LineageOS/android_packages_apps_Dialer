@@ -185,7 +185,7 @@
     <string name="description_video_call_action" msgid="7386922428155062213">"تماس ویدیویی با <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"گوش دادن به پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_play" msgid="2689369874037785439">"پخش پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"توقف موقت پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"مکث پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"حذف پست صوتی از <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
       <item quantity="one">‏<xliff:g id="COUNT_1">%d</xliff:g> پست صوتی جدید</item>
@@ -203,7 +203,7 @@
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"خاموش کردن بلندگو."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"پخش سریع‌تر"</string>
     <string name="voicemail_play_slower" msgid="4544796503902818832">"پخش آهسته‌تر."</string>
-    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"شروع یا توقف موقت بازپخش."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"شروع یا مکث بازپخش."</string>
     <string name="list_delimeter" msgid="4571593167738725100">"، "</string>
     <string name="display_options_title" msgid="7812852361055667468">"گزینه‌های نمایش"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"صدا و لرزش"</string>
