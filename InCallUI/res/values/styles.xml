@@ -76,7 +76,7 @@
          InCallActivity to have the correct Material style. -->
     <style name="Theme.InCallScreen" parent="@android:style/Theme.Material.Light">
         <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
