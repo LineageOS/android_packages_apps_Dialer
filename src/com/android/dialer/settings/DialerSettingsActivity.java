@@ -28,9 +28,11 @@ import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.dialer.R;
 import com.android.dialer.compat.SettingsCompat;
+import com.android.dialer.compat.UserManagerCompat;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 
 import java.util.List;
@@ -71,8 +73,8 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
-        // "Call Settings" (full settings) is shown if the current user is primary user and there 
-        // is only one SIM. Before N, "Calling accounts" setting is shown if the current user is 
+        // "Call Settings" (full settings) is shown if the current user is primary user and there
+        // is only one SIM. Before N, "Calling accounts" setting is shown if the current user is
         // primary user and there are multiple SIMs. In N+, "Calling accounts" is shown whenever
         // "Call Settings" is not shown.
         boolean isPrimaryUser = isPrimaryUser();
@@ -158,7 +160,6 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
      * @return Whether the current user is the primary user.
      */
     private boolean isPrimaryUser() {
-        final UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
-        return userManager.isSystemUser();
+        return UserManagerCompat.isSystemUser((UserManager) getSystemService(Context.USER_SERVICE));
     }
 }
