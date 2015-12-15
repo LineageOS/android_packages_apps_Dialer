@@ -94,6 +94,7 @@
 
     <style name="InCallActionBarStyle" parent="@android:style/Widget.Material.Light.ActionBar">
         <item name="android:background">@color/incall_action_bar_background_color</item>
+        <item name="android:backgroundStacked">@color/incall_banner_secondary_background_color</item>
         <item name="android:textColor">@color/incall_action_bar_text_color</item>
     </style>
 
