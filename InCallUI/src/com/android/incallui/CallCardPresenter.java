@@ -50,6 +50,7 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.compat.telecom.DetailsCompat;
+import com.android.dialer.compat.telecom.TelecomManagerCompat;
 import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
@@ -481,8 +482,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
 
-        TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
-        String simNumber = mgr.getLine1Number(mPrimary.getAccountHandle());
+        final String simNumber = TelecomManagerCompat.getLine1Number(
+                InCallPresenter.getInstance().getTelecomManager(),
+                InCallPresenter.getInstance().getTelephonyManager(),
+                mPrimary.getAccountHandle());
         if (!showCallbackNumber && PhoneNumberUtils.compare(callbackNumber, simNumber)) {
             Log.d(this, "Numbers are the same (and callback number is not being forced to show);" +
                     " not showing the callback number");

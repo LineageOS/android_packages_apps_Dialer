@@ -37,6 +37,7 @@ import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.util.IntentUtil;
 import com.android.incallui.compat.telecom.DetailsCompat;
+import com.android.incallui.compat.telecom.VideoProfileCompat;
 import com.android.incallui.util.TelecomCallUtil;
 
 import java.util.ArrayList;
@@ -958,7 +959,7 @@ public class Call {
                 mChildCallIds,
                 getParentId(),
                 this.mTelecomCall.getConferenceableCalls(),
-                VideoProfile.videoStateToString(mTelecomCall.getDetails().getVideoState()),
+                VideoProfileCompat.videoStateToString(mTelecomCall.getDetails().getVideoState()),
                 mSessionModificationState,
                 getVideoSettings());
     }
