@@ -429,7 +429,7 @@ public class Call {
             @Override
             public void onCallDestroyed(android.telecom.Call call) {
                 Log.d(this, "TelecomCallCallback onStateChanged call=" + call);
-                call.unregisterCallback(this);
+                call.removeListener(this);
             }
 
             @Override
