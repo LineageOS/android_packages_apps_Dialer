@@ -132,6 +132,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mElapsedTime;
     private Drawable mPrimaryPhotoDrawable;
     private TextView mCallSubject;
+    private ImageView mWorkProfileIcon;
 
     // Container view that houses the entire primary call card, including the call buttons
     private View mPrimaryCallCardContainer;
@@ -273,6 +274,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mCallStateIcon = (ImageView) view.findViewById(R.id.callStateIcon);
         mCallStateVideoCallIcon = (ImageView) view.findViewById(R.id.videoCallIcon);
+        mWorkProfileIcon = (ImageView) view.findViewById(R.id.workProfileIcon);
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mHdAudioIcon = (ImageView) view.findViewById(R.id.hdAudioIcon);
         mForwardIcon = (ImageView) view.findViewById(R.id.forwardIcon);
@@ -560,7 +562,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      */
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isSipCall, boolean isContactPhotoShown) {
+            Drawable photo, boolean isSipCall, boolean isContactPhotoShown, boolean isWorkContact) {
         Log.d(this, "Setting primary call");
         // set the name field.
         setPrimaryName(name, nameIsNumber);
@@ -582,6 +584,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         setDrawableToImageViews(photo);
         showImageView(mPhotoLarge, isContactPhotoShown);
+        showImageView(mWorkProfileIcon, isWorkContact);
     }
 
     @Override

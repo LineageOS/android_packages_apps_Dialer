@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ListAdapter;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
@@ -712,7 +713,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (mPrimary == null) {
             // Clear the primary display info.
-            ui.setPrimary(null, null, false, null, null, false, false);
+            ui.setPrimary(null, null, false, null, null, false, false, false);
             return;
         }
 
@@ -731,7 +732,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     null /* label */,
                     getConferencePhoto(mPrimary),
                     false /* isSipCall */,
-                    showContactPhoto);
+                    showContactPhoto,
+                    false /* isWorkContact */);
         } else if (mPrimaryContactInfo != null) {
             Log.d(TAG, "Update primary display info for " + mPrimaryContactInfo);
 
@@ -763,6 +765,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             maybeShowHdAudioIcon();
 
             boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
+            boolean isWorkContact = (mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
             ui.setPrimary(
                     number,
                     name,
@@ -770,12 +773,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     isChildNumberShown || isCallSubjectShown ? null : mPrimaryContactInfo.label,
                     mPrimaryContactInfo.photo,
                     mPrimaryContactInfo.isSipCall,
-                    showContactPhoto);
+                    showContactPhoto,
+                    isWorkContact);
 
             updateContactInteractions();
         } else {
             // Clear the primary display info.
-            ui.setPrimary(null, null, false, null, null, false, false);
+            ui.setPrimary(null, null, false, null, null, false, false, false);
         }
 
         if (mEmergencyCallListener != null) {
@@ -1091,7 +1095,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void showContactContext(boolean show);
         void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
-                Drawable photo, boolean isSipCall, boolean isContactPhotoShown);
+                Drawable photo, boolean isSipCall, boolean isContactPhotoShown,
+                boolean isWorkContact);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 String providerLabel, boolean isConference, boolean isVideoCall,
                 boolean isFullscreen);

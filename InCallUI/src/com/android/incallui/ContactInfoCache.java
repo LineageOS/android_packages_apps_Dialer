@@ -37,6 +37,7 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
@@ -553,6 +554,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         cce.location = displayLocation;
         cce.label = label;
         cce.isSipCall = isSipCall;
+        cce.userType = info.userType;
 
         if (info.contactExists) {
             cce.contactLookupResult = LogState.LOOKUP_LOCAL_CONTACT;
@@ -660,6 +662,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public Address locationAddress;
         public List<Pair<Calendar, Calendar>> openingHours;
         public int contactLookupResult = LogState.LOOKUP_NOT_FOUND;
+        public long userType = ContactsUtils.USER_TYPE_CURRENT;
 
         @Override
         public String toString() {
@@ -676,6 +679,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("locationAddress", locationAddress)
                     .add("openingHours", openingHours)
                     .add("contactLookupResult", contactLookupResult)
+                    .add("userType", userType)
                     .toString();
         }
     }

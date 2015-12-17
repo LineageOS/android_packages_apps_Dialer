@@ -34,6 +34,8 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
+import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
@@ -221,7 +223,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId = getIconToDisplay(call);
         Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
-        final String content = getContentString(call);
+        final String content =
+                getContentString(call, contactInfo.userType);
         final String contentTitle = getContentTitle(contactInfo, call);
 
         final int notificationType;
@@ -435,7 +438,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     /**
      * Returns the message to use with the notification.
      */
-    private String getContentString(Call call) {
+    private String getContentString(Call call, @UserType long userType) {
         boolean isIncomingOrWaiting = call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING;
 
@@ -469,7 +472,26 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             resId = R.string.notification_requesting_video_call;
         }
 
+        if (userType == ContactsUtils.USER_TYPE_WORK) {
+            resId = getWorkStringFromPersonalString(resId);
+        }
+
         return mContext.getString(resId);
+    }
+
+    private static int getWorkStringFromPersonalString(int resId) {
+        switch(resId) {
+            case R.string.notification_ongoing_call:
+                return R.string.notification_ongoing_work_call;
+            case R.string.notification_ongoing_call_wifi:
+                return R.string.notification_ongoing_work_call_wifi;
+            case R.string.notification_incoming_call_wifi:
+                return R.string.notification_incoming_work_call_wifi;
+            case R.string.notification_incoming_call:
+                return R.string.notification_incoming_work_call;
+            default:
+                return resId;
+        }
     }
 
     /**

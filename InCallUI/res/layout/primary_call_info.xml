@@ -69,6 +69,17 @@
             android:clipChildren="false"
             android:clipToPadding="false">
 
+            <ImageView android:id="@+id/workProfileIcon"
+                android:src="@drawable/ic_work_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_marginEnd="8dp"
+                android:baselineAlignBottom="true"
+                android:tint="@color/incall_accent_color"
+                android:scaleType="center"
+                android:visibility="gone" />
+
             <!-- Subscription provider or WiFi calling icon displayed to the left of the label -->
             <ImageView android:id="@+id/callStateIcon"
                 android:layout_width="24dp"

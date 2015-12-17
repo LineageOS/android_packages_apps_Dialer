@@ -16,12 +16,15 @@
 
 package com.android.incallui;
 
+import com.google.common.primitives.Longs;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
@@ -29,6 +32,8 @@ import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.dialer.calllog.ContactInfoHelper;
@@ -103,6 +108,7 @@ public class CallerInfo {
     public String lookupKeyOrNull;
     public boolean needUpdate;
     public Uri contactRefUri;
+    public @UserType long userType;
 
     /**
      * Contact display photo URI.  If a contact has no display photo but a thumbnail, it'll be
@@ -161,6 +167,7 @@ public class CallerInfo {
         // TODO: Move all the basic initialization here?
         mIsEmergency = false;
         mIsVoiceMail = false;
+        userType = ContactsUtils.USER_TYPE_CURRENT;
     }
 
     /**
@@ -180,6 +187,7 @@ public class CallerInfo {
         info.cachedPhoto = null;
         info.isCachedPhotoCurrent = false;
         info.contactExists = false;
+        info.userType = ContactsUtils.USER_TYPE_CURRENT;
 
         Log.v(TAG, "getCallerInfo() based on cursor...");
 
@@ -189,6 +197,7 @@ public class CallerInfo {
                 // care of here. Maybe we should store it in the
                 // CallerInfo object as well.
 
+                long contactId = 0L;
                 int columnIndex;
 
                 // Look for the name
@@ -231,7 +240,7 @@ public class CallerInfo {
                 // Look for the person_id.
                 columnIndex = getColumnIndexForPersonId(contactRef, cursor);
                 if (columnIndex != -1) {
-                    final long contactId = cursor.getLong(columnIndex);
+                    contactId = cursor.getLong(columnIndex);
                     if (contactId != 0 && !Contacts.isEnterpriseContactId(contactId)) {
                         info.contactIdOrZero = contactId;
                         Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero);
@@ -278,6 +287,12 @@ public class CallerInfo {
                 info.shouldSendToVoicemail = (columnIndex != -1) &&
                         ((cursor.getInt(columnIndex)) == 1);
                 info.contactExists = true;
+
+                // Determine userType by directoryId and contactId
+                final String directory = contactRef == null ? null
+                        : contactRef.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY);
+                final Long directoryId = directory == null ? null : Longs.tryParse(directory);
+                info.userType = ContactsUtils.determineUserType(directoryId, contactId);
             }
             cursor.close();
         }
@@ -524,7 +539,8 @@ public class CallerInfo {
                     .append("\ncachedPhoto: " + cachedPhoto)
                     .append("\nisCachedPhotoCurrent: " + isCachedPhotoCurrent)
                     .append("\nemergency: " + mIsEmergency)
-                    .append("\nvoicemail " + mIsVoiceMail)
+                    .append("\nvoicemail: " + mIsVoiceMail)
+                    .append("\nuserType: " + userType)
                     .append(" }")
                     .toString();
         } else {
