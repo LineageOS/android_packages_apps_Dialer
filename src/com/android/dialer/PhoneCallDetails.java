@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 
@@ -100,6 +101,9 @@ public class PhoneCallDetails {
 
     // Whether the contact number is a voicemail number.
     public boolean isVoicemail;
+
+    /** The {@link UserType} of the contact */
+    public @UserType long contactUserType;
 
     /**
      * If this is a voicemail, whether the message is read. For other types of calls, this defaults
