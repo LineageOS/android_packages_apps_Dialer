@@ -87,8 +87,7 @@ public class DialerUtils {
                     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
                 }
 
-                final boolean hasCallPermission = TelecomUtil.placeCall(context, intent.getData(),
-                        intent.getExtras());
+                final boolean hasCallPermission = TelecomUtil.placeCall((Activity) context, intent);
                 if (!hasCallPermission) {
                     // TODO: Make calling activity show request permission dialog and handle
                     // callback results appropriately.
