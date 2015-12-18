@@ -16,11 +16,12 @@
 
 package com.android.incallui;
 
+import com.google.common.base.Preconditions;
+
 import android.app.ActivityManager.TaskDescription;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Point;
@@ -36,12 +37,12 @@ import android.telecom.VideoProfile;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.view.Surface;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.testing.NeededForTesting;
@@ -56,15 +57,14 @@ import com.android.dialer.logging.Logger;
 import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
-import com.google.common.base.Preconditions;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Takes updates from the CallList and notifies the InCallActivity (UI)
@@ -1793,7 +1793,7 @@ public class InCallPresenter implements CallList.Listener,
                 final PhoneAccount account = tm.getPhoneAccount(phoneAccountHandle);
                 // For single-sim devices, there will be no selected highlight color, so the phone
                 // account will default to NO_HIGHLIGHT_COLOR.
-                if (account != null) {
+                if (account != null && CompatUtils.isLollipopMr1Compatible()) {
                     highlightColor = account.getHighlightColor();
                 }
             }
@@ -1811,6 +1811,13 @@ public class InCallPresenter implements CallList.Listener,
                     mContext.getSystemService(Context.TELECOM_SERVICE);
         }
         return mTelecomManager;
+    }
+
+    /**
+     * @return An instance of TelephonyManager
+     */
+    public TelephonyManager getTelephonyManager() {
+        return mTelephonyManager;
     }
 
     InCallActivity getActivity() {

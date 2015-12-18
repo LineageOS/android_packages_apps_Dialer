@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.dialer.compat.telecom.TelecomManagerCompat;
 
 import java.util.Arrays;
 
@@ -88,10 +89,10 @@ public class CallerInfoUtils {
     }
 
     public static boolean isVoiceMailNumber(Context context, Call call) {
-         TelecomManager telecomManager =
-                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-         return telecomManager.isVoiceMailNumber(
-                 call.getTelecomCall().getDetails().getAccountHandle(), call.getNumber());
+         return TelecomManagerCompat.isVoiceMailNumber(
+                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE),
+                 call.getTelecomCall().getDetails().getAccountHandle(),
+                 call.getNumber());
     }
 
     /**
