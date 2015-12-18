@@ -1284,10 +1284,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     }
 
     @Override
-    public void onPickDataUri(Uri dataUri, int callInitiationType) {
+    public void onPickDataUri(Uri dataUri, boolean isVideoCall, int callInitiationType) {
         mClearSearchOnPause = true;
         PhoneNumberInteraction.startInteractionForPhoneCall(
-                DialtactsActivity.this, dataUri, callInitiationType);
+                DialtactsActivity.this, dataUri, isVideoCall, callInitiationType);
     }
 
     @Override

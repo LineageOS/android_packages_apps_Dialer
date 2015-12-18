@@ -40,13 +40,13 @@
         <item name="section_header_background">@drawable/list_title_holo</item>
         <item name="list_section_header_height">32dip</item>
         <item name="list_item_padding_top">12dp</item>
-        <item name="list_item_padding_right">32dp</item>
+        <item name="list_item_padding_right">24dp</item>
         <item name="list_item_padding_bottom">12dp</item>
         <item name="list_item_padding_left">16dp</item>
         <item name="list_item_gap_between_image_and_text">
             @dimen/contact_browser_list_item_gap_between_image_and_text
         </item>
-        <item name="list_item_gap_between_label_and_data">5dip</item>
+        <item name="list_item_gap_between_label_and_data">8dip</item>
         <item name="list_item_presence_icon_margin">4dip</item>
         <item name="list_item_presence_icon_size">16dip</item>
         <item name="list_item_photo_size">@dimen/contact_browser_list_item_photo_size</item>
@@ -85,6 +85,10 @@
         <item name="android:colorControlActivated">@color/dialer_theme_color</item>
         <item name="android:colorButtonNormal">@color/dialer_theme_color</item>
         <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
+
+        <!-- Video call icon -->
+        <item name="list_item_video_call_icon_size">32dip</item>
+        <item name="list_item_video_call_icon_margin">8dip</item>
     </style>
 
     <style name="DialerButtonTextStyle" parent="@android:style/TextAppearance.Material.Widget.Button">

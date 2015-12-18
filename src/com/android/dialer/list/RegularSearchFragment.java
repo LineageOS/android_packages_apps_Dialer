@@ -74,6 +74,7 @@ public class RegularSearchFragment extends SearchFragment
         RegularSearchListAdapter adapter = new RegularSearchListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(usesCallableUri());
+        adapter.setListener(this);
         return adapter;
     }
 

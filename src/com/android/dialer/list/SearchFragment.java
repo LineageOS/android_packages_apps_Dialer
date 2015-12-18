@@ -232,6 +232,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         DialerPhoneNumberListAdapter adapter = new DialerPhoneNumberListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(super.usesCallableUri());
+        adapter.setListener(this);
         return adapter;
     }
 
