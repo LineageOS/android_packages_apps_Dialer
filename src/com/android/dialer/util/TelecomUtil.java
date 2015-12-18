@@ -17,10 +17,11 @@
 package com.android.dialer.util;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccountHandle;
@@ -32,6 +33,7 @@ import android.util.Log;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.compat.DialerCompatUtils;
+import com.android.dialer.compat.telecom.TelecomManagerCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,16 +155,16 @@ public class TelecomUtil {
     /**
      * Tries to place a call using the {@link TelecomManager}.
      *
-     * @param context a valid context.
+     * @param activity a valid activity.
      * @param address Handle to call.
      * @param extras Bundle of extras to attach to the call intent.
      *
      * @return {@code true} if we successfully attempted to place the call, {@code false} if it
      *         failed due to a permission check.
      */
-    public static boolean placeCall(Context context, Uri address, Bundle extras) {
-        if (hasCallPhonePermission(context)) {
-            getTelecomManager(context).placeCall(address, extras);
+    public static boolean placeCall(Activity activity, Intent intent) {
+        if (hasCallPhonePermission(activity)) {
+            TelecomManagerCompat.placeCall(activity, getTelecomManager(activity), intent);
             return true;
         }
         return false;
