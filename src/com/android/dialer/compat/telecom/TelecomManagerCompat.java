@@ -82,4 +82,18 @@ public class TelecomManagerCompat {
         }
         return PhoneNumberUtils.isVoiceMailNumber(number);
     }
+
+    /**
+     * Silences the ringer if a ringing call exists. Noop if {@link TelecomManager#silenceRinger()}
+     * is unavailable.
+     *
+     * @param telecomManager the {@link TelecomManager} to use to silence the ringer
+     * @throws NullPointerException if telecomManager is null
+     */
+    public static void silenceRinger(TelecomManager telecomManager) {
+        if (CompatUtils.isMarshmallowCompatible() || CompatUtils
+                .isMethodAvailable("android.telecom.TelecomManager", "silenceRinger")) {
+            telecomManager.silenceRinger();
+        }
+    }
 }
