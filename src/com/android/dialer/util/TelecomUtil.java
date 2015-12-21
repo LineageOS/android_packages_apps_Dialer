@@ -62,7 +62,7 @@ public class TelecomUtil {
     public static void silenceRinger(Context context) {
         if (hasModifyPhoneStatePermission(context)) {
             try {
-                getTelecomManager(context).silenceRinger();
+                TelecomManagerCompat.silenceRinger(getTelecomManager(context));
             } catch (SecurityException e) {
                 // Just in case
                 Log.w(TAG, "TelecomManager.silenceRinger called without permission.");
