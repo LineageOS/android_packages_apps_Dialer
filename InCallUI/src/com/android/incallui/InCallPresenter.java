@@ -54,6 +54,7 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlocke
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
@@ -237,7 +238,7 @@ public class InCallPresenter implements CallList.Listener,
             if (id != null) {
                 // Silence the ringer now to prevent ringing and vibration before the call is
                 // terminated when Telecom attempts to add it.
-                getTelecomManager().silenceRinger();
+                TelecomUtil.silenceRinger(mContext);
             }
         }
     };
