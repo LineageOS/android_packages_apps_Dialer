@@ -169,12 +169,18 @@ public class CallRecorderService extends Service {
             return true;
         } catch (IOException e) {
             Log.w(TAG, "Could not start recording for file " + outputPath, e);
+            Log.w(TAG, "Deleting failed recording " + outputPath);
+            file.delete();
         } catch (IllegalStateException e) {
             Log.w(TAG, "Could not start recording for file " + outputPath, e);
+            Log.w(TAG, "Deleting failed recording " + outputPath);
+            file.delete();
         } catch (RuntimeException e) {
             // only catch exceptions thrown by the MediaRecorder JNI code
             if (e.getMessage().indexOf("start failed") >= 0) {
                 Log.w(TAG, "Could not start recording for file " + outputPath, e);
+                Log.w(TAG, "Deleting failed recording " + outputPath);
+                file.delete();
             } else {
                 throw e;
             }
