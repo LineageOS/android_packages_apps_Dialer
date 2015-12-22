@@ -124,4 +124,17 @@ public class VideoProfileCompat {
     private static boolean hasState(int videoState, int state) {
         return (videoState & state) == state;
     }
+
+    /**
+     * Indicates whether the video state is bi-directional.
+     *
+     * @param videoState The video state.
+     * @return {@code True} if the video is bi-directional, {@code false} otherwise.
+     */
+    public static boolean isBidirectional(int videoState) {
+        if (CompatUtils.isMarshmallowCompatible()) {
+            return VideoProfile.isBidirectional(videoState);
+        }
+        return hasState(videoState, VideoProfile.STATE_BIDIRECTIONAL);
+    }
 }
