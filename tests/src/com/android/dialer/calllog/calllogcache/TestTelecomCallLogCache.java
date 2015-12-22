@@ -14,13 +14,11 @@
  * limitations under the License
  */
 
-package com.android.dialer.calllog;
+package com.android.dialer.calllog.calllogcache;
 
 import android.content.Context;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-
-import com.android.dialer.calllog.calllogcache.CallLogCache;
 
 /**
  * Modified version of {@link com.android.dialer.calllog.calllogcache.CallLogCache} to be used in

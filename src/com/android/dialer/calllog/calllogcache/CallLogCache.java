@@ -49,7 +49,7 @@ public abstract class CallLogCache {
      * Return the most compatible version of the TelecomCallLogCache.
      */
     public static CallLogCache getCallLogCache(Context context) {
-        if (CompatUtils.isMSIMCompatible()) {
+        if (CompatUtils.isClassAvailable("android.telecom.PhoneAccountHandle")) {
             return new CallLogCacheLollipopMr1(context);
         }
         return new CallLogCacheLollipop(context);

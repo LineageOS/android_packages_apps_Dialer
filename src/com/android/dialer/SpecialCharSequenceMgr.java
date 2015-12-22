@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.compat.CompatUtils;
+import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
@@ -252,12 +253,10 @@ public class SpecialCharSequenceMgr {
                         TelecomUtil.getDefaultOutgoingPhoneAccount(applicationContext,
                                 PhoneAccount.SCHEME_TEL));
 
-                if (!CompatUtils.isMSIMCompatible()) {
-                    handleAdnQuery(handler, sc, Uri.parse("content://icc/adn"));
-                } else if (subscriptionAccountHandles.size() == 1 || hasUserSelectedDefault) {
+                if (subscriptionAccountHandles.size() <= 1 || hasUserSelectedDefault) {
                     Uri uri = TelecomUtil.getAdnUriForPhoneAccount(applicationContext, null);
                     handleAdnQuery(handler, sc, uri);
-                } else if (subscriptionAccountHandles.size() > 1){
+                } else {
                     SelectPhoneAccountListener callback = new HandleAdnEntryAccountSelectedCallback(
                             applicationContext, handler, sc);
 
@@ -265,8 +264,6 @@ public class SpecialCharSequenceMgr {
                             subscriptionAccountHandles, callback);
                     dialogFragment.show(((Activity) context).getFragmentManager(),
                             TAG_SELECT_ACCT_FRAGMENT);
-                } else {
-                    return false;
                 }
 
                 return true;
@@ -305,12 +302,11 @@ public class SpecialCharSequenceMgr {
             boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
                     TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL));
 
-            if (!CompatUtils.isMSIMCompatible() || subscriptionAccountHandles.size() == 1
-                    || hasUserSelectedDefault) {
+            if (subscriptionAccountHandles.size() <= 1 || hasUserSelectedDefault) {
                 // Don't bring up the dialog for single-SIM or if the default outgoing account is
                 // a subscription account.
                 return TelecomUtil.handleMmi(context, input, null);
-            } else if (subscriptionAccountHandles.size() > 1){
+            } else {
                 SelectPhoneAccountListener listener =
                         new HandleMmiAccountSelectedCallback(context, input);
 
@@ -335,15 +331,17 @@ public class SpecialCharSequenceMgr {
                     R.string.imei : R.string.meid;
 
             List<String> deviceIds = new ArrayList<String>();
-            if (!CompatUtils.isMSIMCompatible()) {
-                deviceIds.add(telephonyManager.getDeviceId());
-            } else {
+            if (TelephonyManagerCompat.getPhoneCount(telephonyManager) > 1 &&
+                    CompatUtils.isMethodAvailable(TelephonyManagerCompat.TELEPHONY_MANAGER_CLASS,
+                            "getDeviceId", Integer.TYPE)) {
                 for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
                     String deviceId = telephonyManager.getDeviceId(slot);
                     if (!TextUtils.isEmpty(deviceId)) {
                         deviceIds.add(deviceId);
                     }
                 }
+            } else {
+                deviceIds.add(telephonyManager.getDeviceId());
             }
 
             AlertDialog alert = new AlertDialog.Builder(context)

@@ -15,22 +15,9 @@
  */
 package com.android.dialer.compat;
 
-import android.os.Build;
-
-import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.contacts.common.compat.CompatUtils;
 
 public final class DialerCompatUtils {
-    /**
-     * Determines if this version is compatible with a default dialer. Can also force the version to
-     * be lower through SdkVersionOverride.
-     *
-     * @return {@code true} if default dialer is a feature on this device, {@code false} otherwise.
-     */
-    public static boolean isDefaultDialerCompatible() {
-        return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP)
-                >= Build.VERSION_CODES.M;
-    }
-
     /**
      * Determines if this version has access to the
      * {@link android.provider.CallLog.Calls.CACHED_PHOTO_URI} column
@@ -39,7 +26,6 @@ public final class DialerCompatUtils {
      * {@code false} otherwise
      */
     public static boolean isCallsCachedPhotoUriCompatible() {
-        return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
-                >= Build.VERSION_CODES.M;
+        return CompatUtils.isMarshmallowCompatible();
     }
 }

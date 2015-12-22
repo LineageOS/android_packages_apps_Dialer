@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.dialer.calllog.calllogcache.TestTelecomCallLogCache;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.LocaleTestUtils;
 
