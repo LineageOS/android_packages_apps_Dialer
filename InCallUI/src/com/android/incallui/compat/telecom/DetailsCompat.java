@@ -19,7 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telecom.Call.Details;
 
-import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.incallui.Log;
 
 /**
@@ -41,7 +41,7 @@ public class DetailsCompat {
      * @return The given details' intent extras
      */
     public static Bundle getIntentExtras(Details details) {
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+        if (CompatUtils.isMarshmallowCompatible()) {
             return details.getIntentExtras();
         }
         return details.getExtras();
@@ -56,7 +56,7 @@ public class DetailsCompat {
      * @return Whether the specified property is supported.
      */
     public static boolean hasProperty(Details details, int property) {
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+        if (CompatUtils.isMarshmallowCompatible()) {
             return details.hasProperty(property);
         }
         return (details.getCallProperties() & property) != 0;
@@ -71,7 +71,7 @@ public class DetailsCompat {
      * @return Whether the specified capability is supported.
      */
     public static boolean can(Details details, int capability) {
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+        if (CompatUtils.isLollipopMr1Compatible()) {
             return details.can(capability);
         }
         return (details.getCallCapabilities() & capability) != 0;
@@ -84,7 +84,7 @@ public class DetailsCompat {
      * @return A human readable string representation.
      */
     public static String capabilitiesToString(int capabilities) {
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
+        if (CompatUtils.isLollipopMr1Compatible()) {
             return Details.capabilitiesToString(capabilities);
         }
         return capabilitiesToStringLollipop(capabilities);
