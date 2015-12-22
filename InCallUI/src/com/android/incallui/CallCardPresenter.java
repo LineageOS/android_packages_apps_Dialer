@@ -385,7 +385,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
         if (accountHandle != null) {
             TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
-            PhoneAccount account = mgr.getPhoneAccount(accountHandle);
+            PhoneAccount account = TelecomManagerCompat.getPhoneAccount(mgr, accountHandle);
             if (account != null) {
                 return getNumberFromHandle(account.getSubscriptionAddress());
             }
@@ -823,7 +823,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (accountHandle == null) {
             return null;
         }
-        return InCallPresenter.getInstance().getTelecomManager().getPhoneAccount(accountHandle);
+        return TelecomManagerCompat.getPhoneAccount(
+                InCallPresenter.getInstance().getTelecomManager(),
+                accountHandle);
     }
 
     /**
@@ -843,7 +845,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         PhoneAccount account = getAccountForCall(call);
         TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
         if (account != null && !TextUtils.isEmpty(account.getLabel())
-                && mgr.getCallCapablePhoneAccounts().size() > 1) {
+                && TelecomManagerCompat.getCallCapablePhoneAccounts(mgr).size() > 1) {
             return account.getLabel().toString();
         }
         return null;
