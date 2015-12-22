@@ -39,6 +39,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.SurfaceChangeListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
+import com.android.incallui.compat.telecom.VideoProfileCompat;
 
 import java.util.Objects;
 
@@ -487,8 +488,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         Log.d(this, "checkForVideoStateChange: isVideoCall= " + isVideoCall
                 + " hasVideoStateChanged=" + hasVideoStateChanged + " isVideoMode="
                 + isVideoMode() + " previousVideoState: " +
-                VideoProfile.videoStateToString(mCurrentVideoState) + " newVideoState: "
-                + VideoProfile.videoStateToString(call.getVideoState()));
+                VideoProfileCompat.videoStateToString(mCurrentVideoState) + " newVideoState: "
+                + VideoProfileCompat.videoStateToString(call.getVideoState()));
 
         if (!hasVideoStateChanged) {
             return;
@@ -658,12 +659,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private static boolean isCameraRequired(int videoState) {
-        return VideoProfile.isBidirectional(videoState) ||
-                VideoProfile.isTransmissionEnabled(videoState);
+        return VideoProfileCompat.isBidirectional(videoState) ||
+                VideoProfileCompat.isTransmissionEnabled(videoState);
     }
 
     private boolean isCameraRequired() {
-        return mPrimaryCall != null ? isCameraRequired(mPrimaryCall.getVideoState()) : false;
+        return mPrimaryCall != null && isCameraRequired(mPrimaryCall.getVideoState());
     }
 
     /**
@@ -760,7 +761,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (showIncomingVideo || showOutgoingVideo) {
             ui.showVideoViews(showOutgoingVideo, showIncomingVideo);
 
-            if (VideoProfile.isReceptionEnabled(videoState)) {
+            if (VideoProfileCompat.isReceptionEnabled(videoState)) {
                 loadProfilePhotoAsync();
             }
         } else {
@@ -768,7 +769,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         InCallPresenter.getInstance().enableScreenTimeout(
-                VideoProfile.isAudioOnly(videoState));
+                VideoProfileCompat.isAudioOnly(videoState));
     }
 
     /**
@@ -785,10 +786,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             return false;
         }
 
-        boolean isPaused = VideoProfile.isPaused(videoState);
+        boolean isPaused = VideoProfileCompat.isPaused(videoState);
         boolean isCallActive = callState == Call.State.ACTIVE;
 
-        return !isPaused && isCallActive && VideoProfile.isReceptionEnabled(videoState);
+        return !isPaused && isCallActive && VideoProfileCompat.isReceptionEnabled(videoState);
     }
 
     /**
@@ -804,7 +805,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             return false;
         }
 
-        return VideoProfile.isTransmissionEnabled(videoState);
+        return VideoProfileCompat.isTransmissionEnabled(videoState);
     }
 
     /**
@@ -1231,8 +1232,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private static int toCameraDirection(int videoState) {
-        return VideoProfile.isTransmissionEnabled(videoState) &&
-                !VideoProfile.isBidirectional(videoState)
+        return VideoProfileCompat.isTransmissionEnabled(videoState) &&
+                !VideoProfileCompat.isBidirectional(videoState)
                 ? Call.VideoSettings.CAMERA_DIRECTION_BACK_FACING
                 : Call.VideoSettings.CAMERA_DIRECTION_FRONT_FACING;
     }
