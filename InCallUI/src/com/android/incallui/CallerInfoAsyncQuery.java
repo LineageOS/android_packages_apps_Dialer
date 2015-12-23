@@ -36,6 +36,9 @@ import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.dialer.calllog.ContactInfoHelper;
+import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -415,8 +418,8 @@ public class CallerInfoAsyncQuery {
             return;
         }
 
-        OnQueryCompleteListener intermediateListener =
-                new DirectoryQueryCompleteListener(size, listener);
+        DirectoryQueryCompleteListenerFactory listenerFactory =
+                new DirectoryQueryCompleteListenerFactory(context, size, listener);
 
         // The current implementation of multiple async query runs in single handler thread
         // in AsyncQueryHandler.
@@ -428,6 +431,8 @@ public class CallerInfoAsyncQuery {
             if (DBG) {
                 Log.d(LOG_TAG, "directoryId: " + directoryId + " uri: " + uri);
             }
+            OnQueryCompleteListener intermediateListener =
+                    listenerFactory.newListener(directoryId);
             startQueryInternal(token, context, info, intermediateListener, cookie, uri);
         }
     }
@@ -465,19 +470,44 @@ public class CallerInfoAsyncQuery {
         }
     }
 
-    private static final class DirectoryQueryCompleteListener implements OnQueryCompleteListener {
+    private static final class DirectoryQueryCompleteListenerFactory {
+        // Make sure listener to be called once and only once
         int mCount;
         boolean mIsListenerCalled;
         OnQueryCompleteListener mListener;
+        Context mContext;
+        CachedNumberLookupService mCachedNumberLookupService =
+                ObjectFactory.newCachedNumberLookupService();
 
-        DirectoryQueryCompleteListener(int size, OnQueryCompleteListener listener)  {
+        private class DirectoryQueryCompleteListener implements OnQueryCompleteListener {
+            long mDirectoryId;
+
+            DirectoryQueryCompleteListener(long directoryId) {
+                mDirectoryId = directoryId;
+            }
+
+            @Override
+            public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+                if (ci.contactExists && mCachedNumberLookupService != null) {
+                    CachedContactInfo cachedContactInfo =
+                            CallerInfoUtils.buildCachedContactInfo(mCachedNumberLookupService, ci);
+                    String directoryLabel = mContext.getString(R.string.directory_search_label);
+                    cachedContactInfo.setDirectorySource(directoryLabel, mDirectoryId);
+                    mCachedNumberLookupService.addContact(mContext, cachedContactInfo);
+                }
+
+                callListenerIfNecessary(token, cookie, ci);
+            }
+        }
+
+        DirectoryQueryCompleteListenerFactory(Context context, int size, OnQueryCompleteListener listener)  {
             mCount = size;
             mListener = listener;
             mIsListenerCalled = false;
+            mContext = context;
         }
 
-        @Override
-        public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
+        private void callListenerIfNecessary(int token, Object cookie, CallerInfo ci) {
             boolean shouldCallListener = false;
             synchronized (this) {
                 mCount = mCount - 1;
@@ -486,10 +516,13 @@ public class CallerInfoAsyncQuery {
                     shouldCallListener = true;
                 }
             }
-
-            if (shouldCallListener) {
+            if (shouldCallListener && mListener != null) {
                 mListener.onQueryComplete(token, cookie, ci);
             }
+        }
+
+        public OnQueryCompleteListener newListener(long directoryId) {
+            return new DirectoryQueryCompleteListener(directoryId);
         }
     }
     /* Directory lookup related code - END */
