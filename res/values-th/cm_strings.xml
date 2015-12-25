@@ -16,5 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="nearby_places">สถานที่ใกล้เคียง</string>
+  <string name="people">บุคคล</string>
+  <string name="lookup_settings_label">ค้นหาหมายเลขโทรศัพท์</string>
   <string name="smart_dialer_summary">โทรหาหมายเลขที่มีการโทรออกโดยอัตโนมัติโดยเคลื่อนอุปกรณ์ไปที่หูของคุณ</string>
 </resources>

@@ -71,4 +71,34 @@
   <string name="speed_dial_settings">Axustes de marcación</string>
   <string name="speed_dial_not_set">(sen estabelecer)</string>
   <string name="speed_dial_replace">Substituír</string>
+  <string name="speed_dial_delete">Eliminar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla sen asignar</string>
+  <string name="speed_dial_unassigned_dialog_message">Non se asignou ningunha función de chamada rápida á tecla <xliff:g id="number">%s</xliff:g>. Quere asignala agora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcación rápida, primeiro desactive o modo avión.</string>
+  <string name="yes">Si</string>
+  <string name="no">Non</string>
+  <string name="incall_vibration_category_title">Vibración durante a chamada</string>
+  <string name="incall_vibrate_outgoing_title">Vibrar ao responder</string>
+  <string name="vibrate_call_waiting">Vibrar cando haxa unha chamada en espera</string>
+  <string name="incall_vibrate_hangup_title">Vibrar ao colgar</string>
+  <string name="incall_vibrate_45_title">Vibrar cada minuto</string>
+  <string name="incall_vibrate_45_summary">Vibra na marca dos 45 segundos de cada minuto durante as chamadas saíntes</string>
+  <string name="detailed_incall_info_title">Información detallada da chamada</string>
+  <string name="detailed_incall_info_summary">Amosar información adicional sobre a persoa que chama na pantalla de chamada entrante</string>
+  <string name="video_call">Videochamada</string>
+  <string name="call_duration_active">Duración activa:</string>
+  <string name="call_duration_call_out">Duración da chamada:</string>
+  <string name="call_log_show_all_slots">Todas as SIM</string>
+  <string name="call_log_all_calls_header">Todas as chamadas</string>
+  <string name="calllog_search_hint">Buscar no rexistro de chamadas</string>
+  <string name="msim_ime_dialog_title">Identificador de dispositivo</string>
+  <string name="call_log_blacklist_header">Só chamadas bloqueadas</string>
+  <string name="start_call_playback">Reproducir gravación</string>
+  <string name="stop_call_playback">Deter</string>
+  <string name="call_playback_error_message">Produciuse un fallo ao reproducir a gravación</string>
+  <string name="sensors_category_title">Opcións do sensor</string>
+  <string name="smart_mute_title">Silencio intelixente</string>
+  <string name="smart_mute_summary">Silenciará a chamada entrante se xira o dispositivo</string>
+  <string name="smart_dialer_title">Chamada intelixente</string>
+  <string name="smart_dialer_summary">Chamar automaticamente ao número marcado ao achegar o dispositivo á orella</string>
 </resources>

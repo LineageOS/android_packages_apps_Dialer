@@ -72,8 +72,8 @@
   <string name="speed_dial_not_set">（未設定）</string>
   <string name="speed_dial_replace">書き換える</string>
   <string name="speed_dial_delete">削除</string>
-  <string name="speed_dial_unassigned_dialog_title">キーに割り当てがありません</string>
-  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が割り当てられていません。動作を割り当てますか？</string>
+  <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
+  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
   <string name="dialog_speed_dial_airplane_mode_message">スピードダイヤルを使用するには、機内モードをOFFにしてください。</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
@@ -86,8 +86,8 @@
   <string name="detailed_incall_info_title">発信者の詳細情報</string>
   <string name="detailed_incall_info_summary">着信画面で発信者についての追加情報を表示する</string>
   <string name="video_call">ビデオ通話</string>
-  <string name="call_duration_active">アクティブ状態の長さ:</string>
-  <string name="call_duration_call_out">呼び出しの長さ:</string>
+  <string name="call_duration_active">アクティブ状態の時間:</string>
+  <string name="call_duration_call_out">呼び出し時間:</string>
   <string name="call_log_show_all_slots">すべてのSIM</string>
   <string name="call_log_all_calls_header">すべての通話</string>
   <string name="calllog_search_hint">通話履歴を検索</string>

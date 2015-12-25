@@ -74,7 +74,7 @@
   <string name="speed_dial_delete">Izbriši</string>
   <string name="speed_dial_unassigned_dialog_title">Nedodeljena tipka</string>
   <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja najprej izklopite način letenja.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja najprej izklopite način za letalo.</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <string name="incall_vibration_category_title">Vibriranje med klicem</string>
