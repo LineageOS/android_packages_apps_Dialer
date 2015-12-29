@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.R;
 import com.android.dialer.compat.SettingsCompat;
 import com.android.dialer.compat.UserManagerCompat;
@@ -59,8 +60,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         soundSettingsHeader.id = R.id.settings_header_sounds_and_vibration;
         target.add(soundSettingsHeader);
 
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
-                >= Build.VERSION_CODES.M) {
+        if (CompatUtils.isMarshmallowCompatible()) {
             Header quickResponseSettingsHeader = new Header();
             Intent quickResponseSettingsIntent =
                     new Intent(TelecomManager.ACTION_SHOW_RESPOND_VIA_SMS_SETTINGS);
@@ -68,7 +68,6 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
             target.add(quickResponseSettingsHeader);
         }
-
 
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -78,7 +77,8 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         // primary user and there are multiple SIMs. In N+, "Calling accounts" is shown whenever
         // "Call Settings" is not shown.
         boolean isPrimaryUser = isPrimaryUser();
-        if (isPrimaryUser && telephonyManager.getPhoneCount() <= 1) {
+        if (isPrimaryUser
+                && TelephonyManagerCompat.getPhoneCount(telephonyManager) <= 1) {
             Header callSettingsHeader = new Header();
             Intent callSettingsIntent = new Intent(TelecomManager.ACTION_SHOW_CALL_SETTINGS);
             callSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -102,10 +102,9 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             blockedCallsHeader.intent = new Intent(this, BlockedNumbersSettingsActivity.class);
             target.add(blockedCallsHeader);
 
-            if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M)
-                    >= Build.VERSION_CODES.M
-                    && (telephonyManager.isTtyModeSupported()
-                    || telephonyManager.isHearingAidCompatibilitySupported())) {
+            if (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)
+                    || TelephonyManagerCompat
+                    .isHearingAidCompatibilitySupported(telephonyManager)) {
                 Header accessibilitySettingsHeader = new Header();
                 Intent accessibilitySettingsIntent =
                         new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);

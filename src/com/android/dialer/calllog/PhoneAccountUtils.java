@@ -18,11 +18,12 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;
@@ -36,14 +37,11 @@ public class PhoneAccountUtils {
      * Return a list of phone accounts that are subscription/SIM accounts.
      */
     public static List<PhoneAccountHandle> getSubscriptionPhoneAccounts(Context context) {
-        final TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-
         List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<PhoneAccountHandle>();
         final List<PhoneAccountHandle> accountHandles =
                 TelecomUtil.getCallCapablePhoneAccounts(context);
         for (PhoneAccountHandle accountHandle : accountHandles) {
-            PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+            PhoneAccount account = TelecomUtil.getPhoneAccount(context, accountHandle);
             if (account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
                 subscriptionAccountHandles.add(accountHandle);
             }
@@ -54,7 +52,9 @@ public class PhoneAccountUtils {
     /**
      * Compose PhoneAccount object from component name and account id.
      */
-    public static PhoneAccountHandle getAccount(String componentString, String accountId) {
+    @Nullable
+    public static PhoneAccountHandle getAccount(@Nullable String componentString,
+            @Nullable String accountId) {
         if (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) {
             return null;
         }
@@ -65,7 +65,9 @@ public class PhoneAccountUtils {
     /**
      * Extract account label from PhoneAccount object.
      */
-    public static String getAccountLabel(Context context, PhoneAccountHandle accountHandle) {
+    @Nullable
+    public static String getAccountLabel(Context context,
+            @Nullable PhoneAccountHandle accountHandle) {
         PhoneAccount account = getAccountOrNull(context, accountHandle);
         if (account != null && account.getLabel() != null) {
             return account.getLabel().toString();
@@ -76,10 +78,8 @@ public class PhoneAccountUtils {
     /**
      * Extract account color from PhoneAccount object.
      */
-    public static int getAccountColor(Context context, PhoneAccountHandle accountHandle) {
-        TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+    public static int getAccountColor(Context context, @Nullable PhoneAccountHandle accountHandle) {
+        final PhoneAccount account = TelecomUtil.getPhoneAccount(context, accountHandle);
 
         // For single-sim devices the PhoneAccount will be NO_HIGHLIGHT_COLOR by default, so it is
         // safe to always use the account highlight color.
@@ -92,10 +92,8 @@ public class PhoneAccountUtils {
      * @return {@code true} if call subjects are supported, {@code false} otherwise.
      */
     public static boolean getAccountSupportsCallSubject(Context context,
-            PhoneAccountHandle accountHandle) {
-        TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
+            @Nullable PhoneAccountHandle accountHandle) {
+        final PhoneAccount account = TelecomUtil.getPhoneAccount(context, accountHandle);
 
         return account == null ? false :
                 account.hasCapabilities(PhoneAccount.CAPABILITY_CALL_SUBJECT);
@@ -105,14 +103,12 @@ public class PhoneAccountUtils {
      * Retrieve the account metadata, but if the account does not exist or the device has only a
      * single registered and enabled account, return null.
      */
-     static PhoneAccount getAccountOrNull(Context context,
-            PhoneAccountHandle accountHandle) {
-        TelecomManager telecomManager =
-                (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-        final PhoneAccount account = telecomManager.getPhoneAccount(accountHandle);
-        if (telecomManager.getCallCapablePhoneAccounts().size() <= 1) {
+    @Nullable
+    private static PhoneAccount getAccountOrNull(Context context,
+            @Nullable PhoneAccountHandle accountHandle) {
+        if (TelecomUtil.getCallCapablePhoneAccounts(context).size() <= 1) {
             return null;
         }
-        return account;
+        return TelecomUtil.getPhoneAccount(context, accountHandle);
     }
 }

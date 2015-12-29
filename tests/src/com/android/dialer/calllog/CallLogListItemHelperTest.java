@@ -26,6 +26,7 @@ import android.view.View;
 import com.android.contacts.common.CallUtil;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
+import com.android.dialer.calllog.calllogcache.TestTelecomCallLogCache;
 import com.android.dialer.util.AppCompatConstants;
 
 /**

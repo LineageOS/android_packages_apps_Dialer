@@ -39,7 +39,6 @@ import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -56,8 +55,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.tests.R;
 import com.android.dialer.util.AppCompatConstants;
+import com.android.dialer.util.TelecomUtil;
 
 import java.util.Calendar;
 import java.util.List;
@@ -439,9 +440,8 @@ public class FillCallLogTestActivity extends Activity {
     }
 
     private PhoneAccountHandle getManualAccount() {
-        TelecomManager telecomManager =
-            (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
-        List <PhoneAccountHandle> accountHandles = telecomManager.getCallCapablePhoneAccounts();
+        List <PhoneAccountHandle> accountHandles = TelecomUtil.getCallCapablePhoneAccounts(this);
+        //TODO: hide the corresponding radio buttons if no accounts are available.
         if (mAccount0.isChecked()) {
             return accountHandles.get(0);
         } else if (mAccount1.isChecked()){
@@ -567,11 +567,9 @@ public class FillCallLogTestActivity extends Activity {
         final ContentResolver resolver = getContentResolver();
         int numberPresentation = Calls.PRESENTATION_ALLOWED;
 
-        TelecomManager tm = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
-
         String accountAddress = null;
-        if (tm != null && accountHandle != null) {
-            PhoneAccount account = tm.getPhoneAccount(accountHandle);
+        if (accountHandle != null) {
+            PhoneAccount account = TelecomUtil.getPhoneAccount(this, accountHandle);
             if (account != null) {
                 Uri address = account.getSubscriptionAddress();
                 if (address != null) {
