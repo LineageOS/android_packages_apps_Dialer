@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ListAdapter;
 
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.Call.State;
@@ -50,7 +51,6 @@ import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.compat.telecom.DetailsCompat;
-import com.android.dialer.compat.telecom.TelecomManagerCompat;
 import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
