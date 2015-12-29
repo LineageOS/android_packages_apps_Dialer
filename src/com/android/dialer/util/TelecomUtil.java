@@ -32,8 +32,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.compat.CompatUtils;
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.compat.DialerCompatUtils;
-import com.android.dialer.compat.telecom.TelecomManagerCompat;
 
 import java.util.ArrayList;
 import java.util.List;
