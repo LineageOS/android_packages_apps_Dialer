@@ -34,6 +34,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.util.IntentUtil;
 import com.android.incallui.compat.telecom.DetailsCompat;
@@ -176,6 +177,7 @@ public class Call {
             return mCameraDirection;
         }
 
+        @Override
         public String toString() {
             return "(CameraDir:" + getCameraDir() + ")";
         }
@@ -609,7 +611,8 @@ public class Call {
 
             if (mPhoneAccountHandle != null) {
                 TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
-                PhoneAccount phoneAccount = mgr.getPhoneAccount(mPhoneAccountHandle);
+                PhoneAccount phoneAccount =
+                        TelecomManagerCompat.getPhoneAccount(mgr, mPhoneAccountHandle);
                 if (phoneAccount != null) {
                     mIsCallSubjectSupported = phoneAccount.hasCapabilities(
                             PhoneAccount.CAPABILITY_CALL_SUBJECT);

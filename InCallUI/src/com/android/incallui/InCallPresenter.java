@@ -44,6 +44,7 @@ import android.view.WindowManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.SdkVersionOverride;
+import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
@@ -1791,7 +1792,8 @@ public class InCallPresenter implements CallList.Listener,
             final TelecomManager tm = getTelecomManager();
 
             if (tm != null) {
-                final PhoneAccount account = tm.getPhoneAccount(phoneAccountHandle);
+                final PhoneAccount account =
+                        TelecomManagerCompat.getPhoneAccount(tm, phoneAccountHandle);
                 // For single-sim devices, there will be no selected highlight color, so the phone
                 // account will default to NO_HIGHLIGHT_COLOR.
                 if (account != null && CompatUtils.isLollipopMr1Compatible()) {
