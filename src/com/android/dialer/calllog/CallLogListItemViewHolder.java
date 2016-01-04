@@ -55,10 +55,16 @@ import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.service.SpamButtonRenderer;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
+import com.android.dialerbind.ObjectFactory;
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -197,6 +203,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private final BlockNumberDialogFragment.Callback mFilteredNumberDialogCallback;
 
     private final int mPhotoSize;
+
+    private ViewStub mSpamViewStub;
+    private SpamButtonRenderer mSpamButtonRenderer;
 
     private View.OnClickListener mExpandCollapseListener;
     private boolean mVoicemailPrimaryActionButtonClicked;
@@ -401,6 +410,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             callWithNoteButtonView = actionsView.findViewById(R.id.call_with_note_action);
             callWithNoteButtonView.setOnClickListener(this);
+
+            mSpamViewStub = (ViewStub) actionsView.findViewById(R.id.spam_actions_container);
+            mSpamButtonRenderer = ObjectFactory.newSpamButtonRenderer(mContext, mSpamViewStub);
         }
 
         bindActionButtons();
@@ -499,7 +511,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             detailsButtonView.setVisibility(View.VISIBLE);
             detailsButtonView.setTag(
-                IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
+                    IntentProvider.getCallDetailIntentProvider(rowId, callIds, null));
         }
 
         if (info != null && UriUtils.isEncodedContactUri(info.lookupUri)) {
@@ -530,6 +542,24 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 mCallLogCache.isVoicemailNumber(accountHandle, number);
         callWithNoteButtonView.setVisibility(
                 supportsCallSubject && !isVoicemailNumber ? View.VISIBLE : View.GONE);
+
+        if(mSpamButtonRenderer != null){
+            List<View> completeLogListItems = Lists.newArrayList(
+                    createNewContactButtonView,
+                    addToExistingContactButtonView,
+                    sendMessageView,
+                    callButtonView,
+                    callWithNoteButtonView,
+                    detailsButtonView,
+                    voicemailPlaybackView);
+            List<View> blockedNumberVisibleViews = new ArrayList<>();
+            List<View> spamNumberVisibleViews = Lists.newArrayList(detailsButtonView);
+
+            mSpamButtonRenderer.setCompleteListItemViews(completeLogListItems);
+            mSpamButtonRenderer.setFilteredNumberViews(blockedNumberVisibleViews);
+            mSpamButtonRenderer.setSpamFilteredViews(spamNumberVisibleViews);
+            mSpamButtonRenderer.render(number, countryIso);
+        }
     }
 
     /**
