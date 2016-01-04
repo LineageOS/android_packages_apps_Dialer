@@ -48,7 +48,7 @@
   <string name="call_stats_missed">Cevapsız</string>
   <string name="call_stats_missed_percent">Cevapsız: %%<xliff:g id="percent">%d</xliff:g></string>
   <string name="call_stats_blacklist">Engelli</string>
-  <string name="call_stats_blacklist_percent">Engellenen: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist_percent">Engelli: %%<xliff:g id="percent">%d</xliff:g></string>
   <string name="call_stats_header_total">Toplam: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Toplam: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Başlangıç tarihi</string>
@@ -65,9 +65,8 @@
   <string name="call_stats_date_filter">Zaman aralığını ayarla</string>
   <string name="call_stats_reset_filter">Zaman aralığını sıfırla</string>
   <string name="call_stats_sort_by_duration">Arama süresine göre sırala</string>
-  <string name="call_stats_sort_by_count">Arama sayısına göre sırala</string>
-  <string name="menu_add_to_blacklist">Engellenen arayan listesine ekle</string>
-  <string name="toast_added_to_blacklist">%s engellenen arayan listesine eklendi.</string>
+  <string name="menu_add_to_blacklist">Engelli arayan listesine ekle</string>
+  <string name="toast_added_to_blacklist">%s engelli arayan listesine eklendi.</string>
   <string name="speed_dial_settings">Hızlı arama ayarları</string>
   <string name="speed_dial_not_set">(ayarlanmadı)</string>
   <string name="speed_dial_replace">Değiştir</string>
@@ -82,8 +81,6 @@
   <string name="vibrate_call_waiting">Çağrı bekletildiğinde titre</string>
   <string name="incall_vibrate_hangup_title">Kapatıldığında titre</string>
   <string name="incall_vibrate_45_title">Her dakika titre</string>
-  <string name="incall_vibrate_45_summary">Giden aramaların her dakikasının 45. saniyesinde titreşir</string>
-  <string name="detailed_incall_info_title">Arayanın detaylı bilgileri</string>
   <string name="detailed_incall_info_summary">Gelen arama ekranında arayan hakkında daha fazla bilgi görüntüle</string>
   <string name="video_call">Görüntülü arama</string>
   <string name="call_duration_active">Etkin süre:</string>

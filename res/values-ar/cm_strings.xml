@@ -16,6 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="nearby_places">الأماكن القريبة</string>
+  <string name="people">الناس</string>
   <string name="lookup_settings_label">البحث عن رقم الهاتف</string>
   <string name="lookup_settings_description">البحث عن أرقام الهاتف غير المعروفة</string>
   <string name="enable_forward_lookup_title">بحث إلى الأمام</string>
@@ -32,11 +34,34 @@
   <string name="t9_search_input_locale">إدخال بحث T9</string>
   <string name="t9_search_input_locale_default">افتراضي</string>
   <string name="type_blacklist">مكالمة محظورة </string>
+  <string name="call_log_stats_title">الإحصائيات</string>
+  <string name="callStatsDetailTitle">تفاصيل إحصائيات المكالمة</string>
   <string name="call_stats">إحصاءات المكالمات</string>
   <string name="call_stats_refresh">تحديث</string>
   <string name="activity_title_call_stats">إحصاءات المكالمات</string>
+  <string name="call_stats_nav_all">الكل</string>
+  <string name="call_stats_nav_incoming">الوارد</string>
+  <string name="call_stats_nav_outgoing">الصادرة</string>
+  <string name="call_stats_nav_missed">فائتة</string>
+  <string name="call_stats_incoming">الوارد: <xliff:g id="percent">%d </xliff:g>%%</string>
+  <string name="call_stats_outgoing">صادرة <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">فائتة</string>
+  <string name="call_stats_missed_percent">فائتة: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_blacklist">محظور</string>
   <string name="call_stats_blacklist_percent">محظور:%% <xliff:g id="percent">%d </xliff:g></string>
+  <string name="call_stats_header_total">المجموع: <xliff:g id="call_count">%s</xliff:g><xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_filter_to">تاريخ الانتهاء</string>
+  <string name="call_stats_filter_picker_title">نطاق التصفية</string>
+  <string name="date_quick_selection">التحديد السريع</string>
+  <string name="date_qs_currentmonth">الشهر الحالي</string>
+  <string name="date_qs_currentquarter">الربع الحالي</string>
+  <string name="date_qs_currentyear">السنة الحالية</string>
+  <string name="date_qs_lastweek">الأسبوع الماضي</string>
+  <string name="date_qs_lastmonth">الشهر الماضي</string>
+  <string name="call_stats_date_filter">ضبط النطاق الزمني</string>
+  <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
+  <string name="call_stats_sort_by_duration">فرز بحسب مدة المكالمة</string>
+  <string name="call_stats_sort_by_count">فرز بحسب عدد المكالمات</string>
   <string name="menu_add_to_blacklist">إضافة إلى قائمة المتصلين المحظورين</string>
   <string name="toast_added_to_blacklist">إضافة %s إلى قائمة المتصلين المحظورين</string>
   <string name="speed_dial_settings">إعدادات الاتصال السريع</string>

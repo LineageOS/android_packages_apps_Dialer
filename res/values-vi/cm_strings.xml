@@ -16,10 +16,57 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="nearby_places">Địa điểm gần kề</string>
+  <string name="people">Mọi người</string>
+  <string name="lookup_settings_label">Tra cứu số điện thoại</string>
+  <string name="lookup_settings_description">Tra cứu số điện thoại không biết</string>
   <string name="enable_forward_lookup_title">Tra cứu xuôi</string>
+  <string name="enable_forward_lookup_summary">Hiển thị các địa điểm gần kề khi tìm kiếm trong trình quay số</string>
+  <string name="enable_people_lookup_title">Tra cứu mọi người</string>
+  <string name="enable_people_lookup_summary">Hiển thị kết quả trực tuyến về người khi tìm kiếm trong trình quay số</string>
+  <string name="enable_reverse_lookup_title">Tra cứu ngược</string>
+  <string name="enable_reverse_lookup_summary">Tra cứu thông tin về người hoặc vị trí cho những số gọi đến không biết</string>
   <string name="forward_lookup_provider_title">Nhà cung cấp tra cứu xuôi</string>
   <string name="people_lookup_provider_title">Nhà cung cấp tra cứu người</string>
   <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
+  <string name="preference_category_t9_dialpad_search">Bàn phím tìm kiếm T9</string>
+  <string name="t9_search_input_locale">Ô tìm kiếm T9</string>
+  <string name="t9_search_input_locale_default">Mặc định</string>
+  <string name="type_blacklist">Cuộc gọi bị chặn</string>
+  <string name="call_log_stats_title">Thống kê</string>
+  <string name="callStatsDetailTitle">Chi tiết thống kê cuộc gọi</string>
+  <string name="call_stats">Thống kê cuộc gọi</string>
+  <string name="call_stats_refresh">Làm mới</string>
+  <string name="activity_title_call_stats">Thống kê cuộc gọi</string>
+  <string name="call_stats_nav_all">Tất cả</string>
+  <string name="call_stats_nav_incoming">Gọi đến</string>
+  <string name="call_stats_nav_outgoing">Gọi đi</string>
+  <string name="call_stats_nav_missed">Gọi nhỡ</string>
+  <string name="call_stats_incoming">Đến: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_outgoing">Đi: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_missed">Gọi nhỡ</string>
+  <string name="call_stats_missed_percent">Nhỡ: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Bị chặn</string>
+  <string name="call_stats_blacklist_percent">Bị chặn: <xliff:g id="percent">%d </xliff:g>%%</string>
+  <string name="call_stats_header_total">Tổng số: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Tổng số: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Ngày bắt đầu</string>
+  <string name="call_stats_filter_to">Ngày kết thúc</string>
+  <string name="call_stats_filter_picker_title">Phạm vi lọc</string>
+  <string name="date_quick_selection">Chọn nhanh</string>
+  <string name="date_qs_currentmonth">Tháng hiện tại</string>
+  <string name="date_qs_currentquarter">Quý hiện tại</string>
+  <string name="date_qs_currentyear">Năm hiện tại</string>
+  <string name="date_qs_lastweek">Tuần trước</string>
+  <string name="date_qs_lastmonth">Tháng trước</string>
+  <string name="date_qs_lastquarter">Quý trước</string>
+  <string name="date_qs_lastyear">Năm trước</string>
+  <string name="call_stats_date_filter">Điều chỉnh khoảng thời gian</string>
+  <string name="call_stats_reset_filter">Đặt lại khoảng thời gian</string>
+  <string name="call_stats_sort_by_duration">Sắp xếp theo thời lượng cuộc gọi</string>
+  <string name="call_stats_sort_by_count">Sắp xếp theo số lượng cuộc gọi</string>
+  <string name="menu_add_to_blacklist">Thêm vào danh sách chặn người gọi</string>
   <string name="toast_added_to_blacklist">%s được thêm vào danh sách chặn người gọi.</string>
   <string name="speed_dial_settings">Thiết đặt quay số nhanh</string>
   <string name="speed_dial_not_set">(không thiết lập)</string>

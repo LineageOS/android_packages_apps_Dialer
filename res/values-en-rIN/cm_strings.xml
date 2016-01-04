@@ -33,6 +33,7 @@
   <string name="preference_category_t9_dialpad_search">Dialpad T9 search</string>
   <string name="t9_search_input_locale">T9 search input</string>
   <string name="t9_search_input_locale_default">Default</string>
+  <string name="type_blacklist">Blocked call</string>
   <string name="call_log_stats_title">Statistics</string>
   <string name="callStatsDetailTitle">Call stat details</string>
   <string name="call_stats">Call statistics</string>
@@ -46,6 +47,8 @@
   <string name="call_stats_outgoing">Outgoing: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Missed</string>
   <string name="call_stats_missed_percent">Missed: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blocked</string>
+  <string name="call_stats_blacklist_percent">Blocked: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Start date</string>
@@ -63,6 +66,8 @@
   <string name="call_stats_reset_filter">Reset time range</string>
   <string name="call_stats_sort_by_duration">Sort by call duration</string>
   <string name="call_stats_sort_by_count">Sort by call count</string>
+  <string name="menu_add_to_blacklist">Add to blocked caller list</string>
+  <string name="toast_added_to_blacklist">%s added to blocked caller list.</string>
   <string name="speed_dial_settings">Speed dial settings</string>
   <string name="speed_dial_not_set">(not set)</string>
   <string name="speed_dial_replace">Replace</string>
@@ -87,7 +92,13 @@
   <string name="call_log_all_calls_header">All calls</string>
   <string name="calllog_search_hint">Search call log</string>
   <string name="msim_ime_dialog_title">Device identifier</string>
+  <string name="call_log_blacklist_header">Blocked calls only</string>
   <string name="start_call_playback">Play recording</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Failed to play recording</string>
+  <string name="sensors_category_title">Sensor options</string>
+  <string name="smart_mute_title">Smart mute</string>
+  <string name="smart_mute_summary">Mute the incoming call by flipping the device</string>
+  <string name="smart_dialer_title">Smart call</string>
+  <string name="smart_dialer_summary">Automatically call the dialed number by moving your device to your ear</string>
 </resources>

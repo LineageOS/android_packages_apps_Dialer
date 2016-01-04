@@ -77,7 +77,7 @@
   <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegmodus uit te schakelen.</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
-  <string name="incall_vibration_category_title">Trillen tijdens bellen</string>
+  <string name="incall_vibration_category_title">Trillen tijdens gesprek</string>
   <string name="incall_vibrate_outgoing_title">Trillen bij aannemen</string>
   <string name="vibrate_call_waiting">Trillen bij wachten</string>
   <string name="incall_vibrate_hangup_title">Trillen bij ophangen</string>
