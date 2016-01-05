@@ -2,12 +2,15 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
@@ -41,11 +44,13 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
     private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
+    private boolean mVideoCallingEnabled = false;
 
     public DialerPhoneNumberListAdapter(Context context) {
         super(context);
 
         mCountryIso = GeoUtil.getCurrentCountryIso(context);
+        mVideoCallingEnabled = CallUtil.isVideoEnabled(context);
     }
 
     @Override
@@ -95,13 +100,24 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 assignShortcutToView((ContactListItemView) convertView, shortcutType);
                 return convertView;
             } else {
-                final ContactListItemView v = new ContactListItemView(getContext(), null);
+                final ContactListItemView v = new ContactListItemView(getContext(), null,
+                        mVideoCallingEnabled);
                 assignShortcutToView(v, shortcutType);
                 return v;
             }
         } else {
             return super.getView(position, convertView, parent);
         }
+    }
+
+    @Override
+    protected ContactListItemView newView(
+            Context context, int partition, Cursor cursor, int position, ViewGroup parent) {
+        final ContactListItemView view = super.newView(context, partition, cursor, position,
+                parent);
+
+        view.setSupportVideoCallIcon(mVideoCallingEnabled);
+        return view;
     }
 
     /**

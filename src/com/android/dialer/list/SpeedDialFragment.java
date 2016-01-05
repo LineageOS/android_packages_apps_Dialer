@@ -118,7 +118,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         public void onContactSelected(Uri contactUri, Rect targetRect) {
             if (mPhoneNumberPickerActionListener != null) {
                 mPhoneNumberPickerActionListener.onPickDataUri(contactUri,
-                        LogState.INITIATION_SPEED_DIAL);
+                        false /* isVideoCall */, LogState.INITIATION_SPEED_DIAL);
             }
         }
 
