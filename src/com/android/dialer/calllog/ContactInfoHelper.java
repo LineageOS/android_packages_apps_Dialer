@@ -26,6 +26,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
 import android.provider.ContactsContract.PhoneLookup;
+import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -72,6 +73,7 @@ public class ContactInfoHelper {
      * @param number the number to look up
      * @param countryIso the country associated with this number
      */
+    @Nullable
     public ContactInfo lookupNumber(String number, String countryIso) {
         if (TextUtils.isEmpty(number)) {
             return null;
