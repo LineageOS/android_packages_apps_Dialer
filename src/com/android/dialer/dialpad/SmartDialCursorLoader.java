@@ -102,6 +102,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
             row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
             row[PhoneQuery.PHOTO_ID] = contact.photoId;
             row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
+            row[PhoneQuery.CARRIER_PRESENCE] = contact.carrierPresence;
             cursor.addRow(row);
         }
         return cursor;

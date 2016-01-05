@@ -76,6 +76,6 @@ public class DatabaseTestUtils {
                 isPrimary});
         nameCursor.addRow(new Object[]{displayName, contactId});
 
-        return new ContactNumber(contactId, id, displayName, number, lookupKey, 0);
+        return new ContactNumber(contactId, id, displayName, number, lookupKey, 0, 0);
     }
 }

@@ -196,16 +196,23 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         private ListAdapter mPhonesAdapter;
         private List<PhoneItem> mPhoneList;
         private int mCallInitiationType;
+        private boolean mIsVideoCall;
 
         public static void show(FragmentManager fragmentManager, ArrayList<PhoneItem> phoneList,
-                int interactionType, int callInitiationType) {
-            PhoneDisambiguationDialogFragment fragment = new PhoneDisambiguationDialogFragment();
+                int interactionType, boolean isVideoCall, int callInitiationType) {
+            PhoneDisambiguationDialogFragment fragment = new PhoneDisambiguationDialogFragment(
+                isVideoCall);
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(ARG_PHONE_LIST, phoneList);
             bundle.putInt(ARG_INTERACTION_TYPE, interactionType);
             bundle.putInt(ARG_CALL_INITIATION_TYPE, callInitiationType);
             fragment.setArguments(bundle);
             fragment.show(fragmentManager, TAG);
+        }
+
+        public PhoneDisambiguationDialogFragment(boolean isVideoCall) {
+            super();
+            mIsVideoCall = isVideoCall;
         }
 
         @Override
@@ -242,7 +249,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 }
 
                 PhoneNumberInteraction.performAction(activity, phoneItem.phoneNumber,
-                        mInteractionType, mCallInitiationType);
+                        mInteractionType, mIsVideoCall, mCallInitiationType);
             } else {
                 dialog.dismiss();
             }
@@ -288,6 +295,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     private long mContactId = UNKNOWN_CONTACT_ID;
 
     private CursorLoader mLoader;
+    private boolean mIsVideoCall;
 
     /**
      * Constructs a new {@link PhoneNumberInteraction}. The constructor takes in a {@link Context}
@@ -298,25 +306,28 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     @VisibleForTesting
     /* package */ PhoneNumberInteraction(Context context, int interactionType,
             DialogInterface.OnDismissListener dismissListener) {
-        this(context, interactionType, dismissListener, LogState.INITIATION_UNKNOWN);
+        this(context, interactionType, dismissListener, false /*isVideoCall*/,
+                LogState.INITIATION_UNKNOWN);
     }
 
     private PhoneNumberInteraction(Context context, int interactionType,
-            DialogInterface.OnDismissListener dismissListener, int callInitiationType) {
+            DialogInterface.OnDismissListener dismissListener, boolean isVideoCall, 
+            int callInitiationType) {
         mContext = context;
         mInteractionType = interactionType;
         mDismissListener = dismissListener;
         mCallInitiationType = callInitiationType;
+        mIsVideoCall = isVideoCall;
     }
 
     private void performAction(String phoneNumber) {
-        PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType,
+        PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mIsVideoCall,
                 mCallInitiationType);
     }
 
     private static void performAction(
             Context context, String phoneNumber, int interactionType,
-            int callInitiationType) {
+            boolean isVideoCall, int callInitiationType) {
         Intent intent;
         switch (interactionType) {
             case ContactDisplayUtils.INTERACTION_SMS:
@@ -326,6 +337,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             default:
                 intent = new CallIntentBuilder(phoneNumber)
                         .setCallInitiationType(callInitiationType)
+                        .setIsVideoCall(isVideoCall)
                         .build();
                 break;
         }
@@ -454,12 +466,13 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      * @param activity that is calling this interaction. This must be of type
      * {@link TransactionSafeActivity} because we need to check on the activity state after the
      * phone numbers have been queried for.
+     * @param isVideoCall {@code true} if the call is a video call, {@code false} otherwise.
      * @param callInitiationType Indicates the UI affordance that was used to initiate the call.
      */
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
-            int callInitiationType) {
+            boolean isVideoCall, int callInitiationType) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null,
-                callInitiationType)).startInteraction(uri, true);
+                isVideoCall, callInitiationType)).startInteraction(uri, true);
     }
 
     /**
@@ -493,7 +506,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         }
         try {
             PhoneDisambiguationDialogFragment.show(activity.getFragmentManager(),
-                    phoneList, mInteractionType, mCallInitiationType);
+                    phoneList, mInteractionType, mIsVideoCall, mCallInitiationType);
         } catch (IllegalStateException e) {
             // ignore to be safe. Shouldn't happen because we checked the
             // activity wasn't destroyed, but to be safe.

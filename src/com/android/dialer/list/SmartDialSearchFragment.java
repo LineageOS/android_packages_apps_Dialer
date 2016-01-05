@@ -57,6 +57,7 @@ public class SmartDialSearchFragment extends SearchFragment
         adapter.setQuickContactEnabled(true);
         // Set adapter's query string to restore previous instance state.
         adapter.setQueryString(getQueryString());
+        adapter.setListener(this);
         return adapter;
     }
 
