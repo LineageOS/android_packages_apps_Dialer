@@ -51,6 +51,7 @@ import android.util.Log;
 
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.ViewPagerTabs;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
@@ -298,13 +299,17 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.delete_all) {
-            ClearCallLogDialog.show(getFragmentManager());
+            onDeleteCallLog();
             return true;
         } else if (item.getItemId() == R.id.search_calllog){
             enterSearchUi();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onDeleteCallLog() {
+        startActivity(new Intent(SimContactsConstants.ACTION_MULTI_PICK_CALL));
     }
 
     @Override
