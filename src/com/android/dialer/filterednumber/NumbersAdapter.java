@@ -15,10 +15,8 @@
  */
 package com.android.dialer.filterednumber;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.BidiFormatter;
@@ -43,7 +41,6 @@ public class NumbersAdapter extends SimpleCursorAdapter {
     private Context mContext;
     private FragmentManager mFragmentManager;
     private ContactInfoHelper mContactInfoHelper;
-    private Resources mResources;
     private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
     private ContactPhotoManager mContactPhotoManager;
 
@@ -68,11 +65,16 @@ public class NumbersAdapter extends SimpleCursorAdapter {
         if (CompatUtils.hasPrioritizedMimeType()) {
             quickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
         }
-        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
+
+        ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
+        if (info == null) {
+            info = new ContactInfo();
+            info.number = number;
+        }
         final CharSequence locationOrType = getNumberTypeOrLocation(info);
         final String displayNumber = getDisplayNumber(info);
-        final String displayNumberStr = mBidiFormatter.unicodeWrap(
-                displayNumber.toString(), TextDirectionHeuristics.LTR);
+        final String displayNumberStr = mBidiFormatter.unicodeWrap(displayNumber,
+                TextDirectionHeuristics.LTR);
 
         String nameForDefaultImage;
         if (!TextUtils.isEmpty(info.name)) {
