@@ -58,8 +58,11 @@ public class RegularSearchFragment extends SearchFragment
 
         if (LookupSettings.isForwardLookupEnabled(getActivity())
                 || LookupSettings.isPeopleLookupEnabled(getActivity())) {
-            requestPermissions(new String[] {ACCESS_FINE_LOCATION},
-                    ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE);
+            if (getActivity().checkSelfPermission(ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{ACCESS_FINE_LOCATION},
+                        ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE);
+            }
         }
     }
 
