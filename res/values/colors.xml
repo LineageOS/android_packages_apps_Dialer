@@ -111,4 +111,11 @@
     <!-- Color for call log blacklist item -->
     <color name="call_log_action_block_red">#F44336</color>
     <color name="call_log_action_block_gray">#616161</color>
+
+    <!-- Colors for incoming and outgoing calls in the call statistics -->
+    <color name="call_stats_incoming">#33b5e5</color>
+    <color name="call_stats_outgoing">#99cc00</color>
+    <color name="call_stats_missed">#eb1313</color>
+    <color name="call_stats_blacklist">#ebaf0d</color>
+    <color name="call_stats_bar_background">#88888888</color>
 </resources>
