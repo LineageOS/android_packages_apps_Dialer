@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Személy keresési szolgáltató</string>
   <string name="reverse_lookup_provider_title">Névkeresési szolgáltató</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kínai (CN)</string>
+  <string name="type_blacklist">Tiltólistára tett hívás</string>
   <string name="menu_add_to_blacklist">Hozzáadás a blokkolt hívók listájához</string>
   <string name="toast_added_to_blacklist">%s hozzáadva a blokkolt hívók listájához.</string>
+  <string name="toast_removed_from_blacklist">%s eltávolítva a blokkolt hívók listájáról.</string>
+  <string name="call_log_action_block">Hívó blokkolása</string>
+  <string name="call_log_action_unblock">Hívó blokkolva</string>
   <string name="speed_dial_settings">Gyorstárcsázó beállítások</string>
   <string name="speed_dial_not_set">(nincs beállítva)</string>
   <string name="speed_dial_replace">Cserél</string>

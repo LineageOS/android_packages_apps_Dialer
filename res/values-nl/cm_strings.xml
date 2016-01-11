@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Aanbieder mensen zoeken</string>
   <string name="reverse_lookup_provider_title">Aanbieder omgekeerd zoeken</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinees (CN)</string>
+  <string name="type_blacklist">Geblokkeerde oproep</string>
   <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
   <string name="toast_added_to_blacklist">%s toegevoegd aan zwarte lijst.</string>
+  <string name="toast_removed_from_blacklist">%s verwijderd uit zwarte lijst.</string>
+  <string name="call_log_action_block">Beller blokkeren</string>
+  <string name="call_log_action_unblock">Beller geblokkeerd</string>
   <string name="speed_dial_settings">Instellingen snelkiesnummers</string>
   <string name="speed_dial_not_set">(niet ingesteld)</string>
   <string name="speed_dial_replace">Vervangen</string>
@@ -44,7 +48,7 @@
   <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegmodus uit te schakelen.</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
-  <string name="incall_vibration_category_title">Trillen tijdens bellen</string>
+  <string name="incall_vibration_category_title">Trillen tijdens gesprek</string>
   <string name="incall_vibrate_outgoing_title">Trillen bij aannemen</string>
   <string name="incall_vibrate_call_waiting_title">Trillen bij wachten</string>
   <string name="incall_vibrate_hangup_title">Trillen bij ophangen</string>

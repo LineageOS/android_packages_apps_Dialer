@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Provedor de pesquisa de pessoas</string>
   <string name="reverse_lookup_provider_title">Provedor de pesquisa inversa</string>
   <string name="cyngn_reverse_lookup_provider_name">Chinês Cyngn (CN)</string>
+  <string name="type_blacklist">Chamada na lista negra</string>
   <string name="menu_add_to_blacklist">Adicionar à lista de chamadas bloqueadas</string>
   <string name="toast_added_to_blacklist">%s adicionado à lista de chamadas bloqueadas.</string>
+  <string name="toast_removed_from_blacklist">%s removido da lista de chamadas bloqueadas.</string>
+  <string name="call_log_action_block">Bloquear chamada</string>
+  <string name="call_log_action_unblock">Chamada bloqueada</string>
   <string name="speed_dial_settings">Configurações de discagem rápida</string>
   <string name="speed_dial_not_set">(não definido)</string>
   <string name="speed_dial_replace">Substituir</string>

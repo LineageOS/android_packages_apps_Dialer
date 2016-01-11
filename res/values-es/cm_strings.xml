@@ -21,24 +21,37 @@
   <string name="preference_category_t9_dialpad_search">Búsqueda en teclado T9</string>
   <string name="t9_search_input_locale">Entrada de búsqueda T9</string>
   <string name="t9_search_input_locale_default">Por defecto</string>
+  <string name="lookup_settings_label">Búsqueda de números de teléfono</string>
   <string name="lookup_settings_description">Buscar números de teléfono desconocidos</string>
+  <string name="enable_forward_lookup_title">Búsqueda directa</string>
   <string name="enable_forward_lookup_summary">Muestra lugares cercanos cuando se busca en el marcador</string>
   <string name="enable_people_lookup_title">Búsqueda de personas</string>
   <string name="enable_people_lookup_summary">Mostrar resultados en línea para las personas al buscar en el marcador</string>
   <string name="enable_reverse_lookup_title">Búsqueda inversa</string>
   <string name="enable_reverse_lookup_summary">Buscar información sobre la persona o lugar para llamadas de números desconocidos en llamadas entrantes</string>
+  <string name="forward_lookup_provider_title">Proveedor de búsqueda</string>
   <string name="people_lookup_provider_title">Proveedor de búsqueda de personas</string>
   <string name="reverse_lookup_provider_title">Proveedor de búsqueda inversa</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chino (CN)</string>
   <string name="type_blacklist">Llamada en lista negra</string>
+  <string name="menu_add_to_blacklist">Añadir a la lista de contactos bloqueados</string>
   <string name="toast_added_to_blacklist">%s añadidos a la lista de contactos bloqueados.</string>
   <string name="toast_removed_from_blacklist">%s eliminado de la lista de llamadas bloqueadas.</string>
   <string name="call_log_action_block">Bloqueo de llamadas</string>
   <string name="call_log_action_unblock">Llamada bloqueada</string>
   <string name="speed_dial_settings">Ajustes de marcado rápido</string>
+  <string name="speed_dial_not_set">(sin establecer)</string>
+  <string name="speed_dial_replace">Reemplazar</string>
   <string name="speed_dial_delete">Eliminar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla sin asignar</string>
+  <string name="speed_dial_unassigned_dialog_message">Ninguna acción rápida asignada al número \'<xliff:g id="number">%s</xliff:g>\'. ¿Quieres asignar una acción ahora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para usar la marcación rápida, primero desactiva el modo avión.</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
+  <string name="incall_vibration_category_title">Vibración en llamada</string>
+  <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
   <string name="incall_vibrate_call_waiting_title">Vibrar en llamada en espera</string>
+  <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
+  <string name="incall_vibrate_45_title">Vibrar cada minuto</string>
+  <string name="incall_vibrate_45_summary">Vibrar en el segundo 45 de cada minuto durante las llamadas salientes</string>
 </resources>

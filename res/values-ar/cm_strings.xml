@@ -16,6 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="nearby_places">الأماكن القريبة</string>
+  <string name="people">الناس</string>
   <string name="preference_category_t9_dialpad_search">بحث لوحة الطلب T9</string>
   <string name="t9_search_input_locale">إدخال بحث T9</string>
   <string name="t9_search_input_locale_default">افتراضي</string>

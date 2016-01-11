@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Fournisseur de données sur les appelants</string>
   <string name="reverse_lookup_provider_title">Fournisseur d\'annuaire inversé</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn chinois (CN)</string>
+  <string name="type_blacklist">Appel ajouté à la liste des appelants bloqués</string>
   <string name="menu_add_to_blacklist">Ajouter à la liste des appelants bloqués</string>
   <string name="toast_added_to_blacklist">%s ajouté à la liste des appelants bloqués.</string>
+  <string name="toast_removed_from_blacklist">%s supprimé de la liste des appelants bloqués.</string>
+  <string name="call_log_action_block">Bloquer l\'appelant</string>
+  <string name="call_log_action_unblock">Correspondant bloqué</string>
   <string name="speed_dial_settings">Paramètres de la numérotation rapide</string>
   <string name="speed_dial_not_set">(non défini)</string>
   <string name="speed_dial_replace">Remplacer</string>

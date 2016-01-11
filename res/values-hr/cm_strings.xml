@@ -18,4 +18,36 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Mjesta u blizini</string>
   <string name="people">Osobe</string>
+  <string name="preference_category_t9_dialpad_search">T9 pretraživanje u biraču brojeva</string>
+  <string name="t9_search_input_locale">T9 unos za pretraživanje</string>
+  <string name="t9_search_input_locale_default">Zadano</string>
+  <string name="lookup_settings_label">Pretraživanje po telefonskom broju</string>
+  <string name="lookup_settings_description">Pretraživanje nepoznatih telefonskih brojeva</string>
+  <string name="enable_forward_lookup_title">Pretraživanje po informacijama</string>
+  <string name="enable_forward_lookup_summary">Prikaz obližnjih mjesta prilikom pretraživanja u biraču broja</string>
+  <string name="enable_people_lookup_title">Pretraživanje ljudi</string>
+  <string name="enable_people_lookup_summary">Prikaži internetske rezultate za ljude prilikom pretraživanja u biraču broja</string>
+  <string name="enable_reverse_lookup_title">Obrnuto pretraživanje</string>
+  <string name="enable_reverse_lookup_summary">Pretraži podatke o osobi ili mjestu za nepoznate brojeve kod dolaznih poziva</string>
+  <string name="forward_lookup_provider_title">Pretraživanja po informacijama</string>
+  <string name="people_lookup_provider_title">Pretraživanja ljudi</string>
+  <string name="reverse_lookup_provider_title">Obrnuto pretraživanje</string>
+  <string name="cyngn_reverse_lookup_provider_name">Kineski Cyngn (CN)</string>
+  <string name="menu_add_to_blacklist">Dodaj na popis blokiranih pozivatelja</string>
+  <string name="toast_added_to_blacklist">%s dodan na popis blokiranih pozivatelja.</string>
+  <string name="speed_dial_settings">Postavke brzog biranja</string>
+  <string name="speed_dial_not_set">(nije postavljeno)</string>
+  <string name="speed_dial_replace">Zamijeni</string>
+  <string name="speed_dial_delete">Obriši</string>
+  <string name="speed_dial_unassigned_dialog_title">Tipka nije dodijeljena</string>
+  <string name="speed_dial_unassigned_dialog_message">Tipki \"<xliff:g id="number">%s</xliff:g>\" nije dodijeljena akcija brzog biranja. Želite li joj sada dodijeliti akciju?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Da biste koristili brzo biranje morate isključiti zrakoplovni način rada.</string>
+  <string name="yes">Da</string>
+  <string name="no">Ne</string>
+  <string name="incall_vibration_category_title">Vibracija za vrijeme poziva</string>
+  <string name="incall_vibrate_outgoing_title">Vibriraj prilikom javljanja</string>
+  <string name="incall_vibrate_call_waiting_title">Vibriraj prilikom poziva na čekanju</string>
+  <string name="incall_vibrate_hangup_title">Vibriraj prilikom prekida</string>
+  <string name="incall_vibrate_45_title">Vibriraj svake minute</string>
+  <string name="incall_vibrate_45_summary">Vibrira kad istekne prvih 45 sekundi svake minute odlaznog poziva</string>
 </resources>

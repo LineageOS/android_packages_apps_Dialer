@@ -36,6 +36,8 @@
   <string name="type_blacklist">Apel de pe lista neagră</string>
   <string name="menu_add_to_blacklist">Adăugare la lista apelanților blocați</string>
   <string name="toast_added_to_blacklist">%s adăugat la lista apelanților blocați.</string>
+  <string name="call_log_action_block">Blochează apelantul</string>
+  <string name="call_log_action_unblock">Apelant blocat</string>
   <string name="speed_dial_settings">Setări apelare rapidă</string>
   <string name="speed_dial_not_set">(nu este setată)</string>
   <string name="speed_dial_replace">Înlocuire</string>

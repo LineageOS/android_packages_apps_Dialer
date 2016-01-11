@@ -33,8 +33,11 @@
   <string name="people_lookup_provider_title">Personsøketjeneste</string>
   <string name="reverse_lookup_provider_title">Omvendt oppslag leverandør</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (CN)</string>
+  <string name="type_blacklist">Svartelistet samtale</string>
   <string name="menu_add_to_blacklist">Legg til blokkerte innringere</string>
   <string name="toast_added_to_blacklist">%s lagt til blokkerte innringere.</string>
+  <string name="call_log_action_block">Blokker ringer</string>
+  <string name="call_log_action_unblock">Ringer blokkert</string>
   <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
   <string name="speed_dial_not_set">(ikke angitt)</string>
   <string name="speed_dial_replace">Erstatt</string>

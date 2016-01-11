@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Ponudnik iskanja ljudi</string>
   <string name="reverse_lookup_provider_title">Ponudnik obratnega iskanja</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <string name="type_blacklist">Blokiran klic</string>
   <string name="menu_add_to_blacklist">Dodaj na seznam blokiranih klicateljev</string>
   <string name="toast_added_to_blacklist">%s dodan na seznam blokiranih klicateljev.</string>
+  <string name="toast_removed_from_blacklist">%s odstranjen s seznama blokiranih klicateljev.</string>
+  <string name="call_log_action_block">Blokiraj klicatelja</string>
+  <string name="call_log_action_unblock">Klicatelj blokiran</string>
   <string name="speed_dial_settings">Nastavitve hitrega klicanja</string>
   <string name="speed_dial_not_set">(ni nastavljeno)</string>
   <string name="speed_dial_replace">Nadomesti</string>
