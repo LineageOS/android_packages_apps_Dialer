@@ -34,6 +34,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
@@ -460,9 +461,7 @@ public class CallerInfoAsyncQuery {
             int idIndex = cursor.getColumnIndex(Directory._ID);
             while (cursor.moveToNext()) {
                 long id = cursor.getLong(idIndex);
-                // TODO(b/26019967): in N SDK, use Directory.isRemoteDirectory
-                if (id != Directory.DEFAULT && id != Directory.LOCAL_INVISIBLE && id != 1000000000
-                        && id != 1000000001) {
+                if (DirectoryCompat.isRemoteDirectory(id)) {
                     results.add(id);
                 }
             }
