@@ -50,6 +50,8 @@
   <string name="call_stats_blacklist">محظور</string>
   <string name="call_stats_blacklist_percent">محظور:%% <xliff:g id="percent">%d </xliff:g></string>
   <string name="call_stats_header_total">المجموع: <xliff:g id="call_count">%s</xliff:g><xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">المجموع: <xliff:g id="call_count"> %s </xliff:g></string>
+  <string name="call_stats_filter_from">تاريخ البداية</string>
   <string name="call_stats_filter_to">تاريخ الانتهاء</string>
   <string name="call_stats_filter_picker_title">نطاق التصفية</string>
   <string name="date_quick_selection">التحديد السريع</string>
@@ -58,6 +60,8 @@
   <string name="date_qs_currentyear">السنة الحالية</string>
   <string name="date_qs_lastweek">الأسبوع الماضي</string>
   <string name="date_qs_lastmonth">الشهر الماضي</string>
+  <string name="date_qs_lastquarter">الربع الأخير</string>
+  <string name="date_qs_lastyear">العام الماضي</string>
   <string name="call_stats_date_filter">ضبط النطاق الزمني</string>
   <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
   <string name="call_stats_sort_by_duration">فرز بحسب مدة المكالمة</string>

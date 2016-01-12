@@ -18,8 +18,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="nearby_places">Mjesta u blizini</string>
   <string name="people">Osobe</string>
+  <string name="lookup_settings_label">Pretraživanje po telefonskom broju</string>
+  <string name="lookup_settings_description">Pretraživanje nepoznatih telefonskih brojeva</string>
+  <string name="enable_forward_lookup_title">Pretraživanje po informacijama</string>
+  <string name="enable_forward_lookup_summary">Prikaz obližnjih mjesta prilikom pretraživanja u biraču broja</string>
+  <string name="enable_people_lookup_title">Pretraživanje ljudi</string>
+  <string name="enable_people_lookup_summary">Prikaži internetske rezultate za ljude prilikom pretraživanja u biraču broja</string>
+  <string name="enable_reverse_lookup_title">Obrnuto pretraživanje</string>
+  <string name="enable_reverse_lookup_summary">Pretraži podatke o osobi ili mjestu za nepoznate brojeve kod dolaznih poziva</string>
+  <string name="forward_lookup_provider_title">Pretraživanja po informacijama</string>
+  <string name="people_lookup_provider_title">Pretraživanja ljudi</string>
+  <string name="reverse_lookup_provider_title">Obrnuto pretraživanje</string>
+  <string name="cyngn_reverse_lookup_provider_name">Kineski Cyngn (CN)</string>
+  <string name="preference_category_t9_dialpad_search">T9 pretraživanje u biraču brojeva</string>
+  <string name="t9_search_input_locale">T9 unos za pretraživanje</string>
+  <string name="t9_search_input_locale_default">Zadano</string>
+  <string name="type_blacklist">Blokirani poziv</string>
   <string name="call_log_stats_title">Satatistike</string>
   <string name="callStatsDetailTitle">Detalji statistike poziva</string>
+  <string name="call_stats">Statistika poziva</string>
+  <string name="call_stats_refresh">Osvježi</string>
+  <string name="activity_title_call_stats">Statistika poziva</string>
   <string name="call_stats_nav_all">Svi pozivi</string>
   <string name="call_stats_nav_incoming">Dolazni</string>
   <string name="call_stats_nav_outgoing">Odlazni</string>
@@ -28,6 +47,8 @@
   <string name="call_stats_outgoing">Odlazni: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">Propušteni</string>
   <string name="call_stats_missed_percent">Propušteni: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">Blokiran</string>
+  <string name="call_stats_blacklist_percent">Blokiran: <xliff:g id="percent">%d </xliff:g>%%</string>
   <string name="call_stats_header_total">Ukupno: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Ukupno: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Od</string>
@@ -45,4 +66,39 @@
   <string name="call_stats_reset_filter">Poništi vremenski raspon</string>
   <string name="call_stats_sort_by_duration">Sortiraj po trajanju poziva</string>
   <string name="call_stats_sort_by_count">Sortiraj po broju poziva</string>
+  <string name="menu_add_to_blacklist">Dodaj na popis blokiranih pozivatelja</string>
+  <string name="toast_added_to_blacklist">%s dodan na popis blokiranih pozivatelja.</string>
+  <string name="speed_dial_settings">Postavke brzog biranja</string>
+  <string name="speed_dial_not_set">(nije postavljeno)</string>
+  <string name="speed_dial_replace">Zamijeni</string>
+  <string name="speed_dial_delete">Obriši</string>
+  <string name="speed_dial_unassigned_dialog_title">Tipka nije dodijeljena</string>
+  <string name="speed_dial_unassigned_dialog_message">Tipki \"<xliff:g id="number">%s</xliff:g>\" nije dodijeljena akcija brzog biranja. Želite li joj sada dodijeliti akciju?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Da biste koristili brzo biranje morate isključiti zrakoplovni način rada.</string>
+  <string name="yes">Da</string>
+  <string name="no">Ne</string>
+  <string name="incall_vibration_category_title">Vibracija za vrijeme poziva</string>
+  <string name="incall_vibrate_outgoing_title">Vibriraj prilikom javljanja</string>
+  <string name="vibrate_call_waiting">Vibriraj prilikom poziva na čekanju</string>
+  <string name="incall_vibrate_hangup_title">Vibriraj prilikom prekida</string>
+  <string name="incall_vibrate_45_title">Vibriraj svake minute</string>
+  <string name="incall_vibrate_45_summary">Vibrira kad istekne prvih 45 sekundi svake minute odlaznog poziva</string>
+  <string name="detailed_incall_info_title">Detaljne informacije o pozivatelju</string>
+  <string name="detailed_incall_info_summary">Prikaži dodatne informacije o pozivatelju na zaslonu dolaznog poziva</string>
+  <string name="video_call">Video poziv</string>
+  <string name="call_duration_active">Aktivno trajanje:</string>
+  <string name="call_duration_call_out">Trajanje poziva:</string>
+  <string name="call_log_show_all_slots">Sve SIM kartice</string>
+  <string name="call_log_all_calls_header">Svi pozivi</string>
+  <string name="calllog_search_hint">Traži ispis poziva</string>
+  <string name="msim_ime_dialog_title">Identifikator uređaja</string>
+  <string name="call_log_blacklist_header">Samo blokirani pozivi</string>
+  <string name="start_call_playback">Reproduciraj snimku</string>
+  <string name="stop_call_playback">Zaustavi</string>
+  <string name="call_playback_error_message">Reprodukcija snimke nije uspjela</string>
+  <string name="sensors_category_title">Opcije senzora</string>
+  <string name="smart_mute_title">Pametno utišavanje</string>
+  <string name="smart_mute_summary">Isključi zvuk dolaznog poziva okretanjem uređaja</string>
+  <string name="smart_dialer_title">Pametan poziv</string>
+  <string name="smart_dialer_summary">Automatski pozovi birani broj pomicanjem uređaja prema uhu</string>
 </resources>
