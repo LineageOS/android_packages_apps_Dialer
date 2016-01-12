@@ -332,48 +332,7 @@ public class Call {
                             mTelecommCall.getChildren().get(i)).getId());
         }
 
-        Bundle callExtras = mTelecommCall.getDetails().getExtras();
-        if (callExtras != null) {
-            // Check for a change in the child address and notify any listeners.
-            if (callExtras.containsKey(Connection.EXTRA_CHILD_ADDRESS)) {
-                String childNumber = callExtras.getString(Connection.EXTRA_CHILD_ADDRESS);
-
-                if (!Objects.equals(childNumber, mChildNumber)) {
-                    mChildNumber = childNumber;
-                    CallList.getInstance().onChildNumberChange(this);
-                }
-            }
-
-            // Last forwarded number comes in as an array of strings.  We want to choose the last
-            // item in the array.  The forwarding numbers arrive independently of when the call is
-            // originally set up, so we need to notify the the UI of the change.
-            if (callExtras.containsKey(Connection.EXTRA_LAST_FORWARDED_NUMBER)) {
-                ArrayList<String> lastForwardedNumbers =
-                        callExtras.getStringArrayList(Connection.EXTRA_LAST_FORWARDED_NUMBER);
-
-                if (lastForwardedNumbers != null) {
-                    String lastForwardedNumber = null;
-                    if (!lastForwardedNumbers.isEmpty()) {
-                        lastForwardedNumber = lastForwardedNumbers.get(
-                                lastForwardedNumbers.size() - 1);
-                    }
-
-                    if (!Objects.equals(lastForwardedNumber, mLastForwardedNumber)) {
-                        mLastForwardedNumber = lastForwardedNumber;
-                        CallList.getInstance().onLastForwardedNumberChange(this);
-                    }
-                }
-            }
-
-            // Call subject is present in the extras at the start of call, so we do not need to
-            // notify any other listeners of this.
-            if (callExtras.containsKey(Connection.EXTRA_CALL_SUBJECT)) {
-                String callSubject = callExtras.getString(Connection.EXTRA_CALL_SUBJECT);
-                if (!Objects.equals(mCallSubject, callSubject)) {
-                    mCallSubject = callSubject;
-                }
-            }
-        }
+        updateFromCallExtras(mTelecommCall.getDetails().getExtras());
 
         // If the handle of the call has changed, update state for the call determining if it is an
         // emergency call.
@@ -396,6 +355,77 @@ public class Call {
                     mIsCallSubjectSupported = phoneAccount.hasCapabilities(
                             PhoneAccount.CAPABILITY_CALL_SUBJECT);
                 }
+            }
+        }
+    }
+
+    /**
+     * Tests corruption of the {@code callExtras} bundle by calling {@link
+     * Bundle#containsKey(String)}. If the bundle is corrupted a {@link IllegalArgumentException}
+     * will be thrown and caught by this function.
+     *
+     * @param callExtras the bundle to verify
+     * @returns {@code true} if the bundle is corrupted, {@code false} otherwise.
+     */
+    protected boolean areCallExtrasCorrupted(Bundle callExtras) {
+        /**
+         * There's currently a bug in Telephony service (b/25613098) that could corrupt the
+         * extras bundle, resulting in a IllegalArgumentException while validating data under
+         * {@link Bundle#containsKey(String)}.
+         */
+        try {
+            callExtras.containsKey(Connection.EXTRA_CHILD_ADDRESS);
+            return false;
+        } catch (IllegalArgumentException e) {
+            Log.e(this, "CallExtras is corrupted, ignoring exception", e);
+            return true;
+        }
+    }
+
+    protected void updateFromCallExtras(Bundle callExtras) {
+        if (callExtras == null || areCallExtrasCorrupted(callExtras)) {
+            /**
+             * If the bundle is corrupted, abandon information update as a work around. These are
+             * not critical for the dialer to function.
+             */
+            return;
+        }
+        // Check for a change in the child address and notify any listeners.
+        if (callExtras.containsKey(Connection.EXTRA_CHILD_ADDRESS)) {
+            String childNumber = callExtras.getString(Connection.EXTRA_CHILD_ADDRESS);
+            if (!Objects.equals(childNumber, mChildNumber)) {
+                mChildNumber = childNumber;
+                CallList.getInstance().onChildNumberChange(this);
+            }
+        }
+
+        // Last forwarded number comes in as an array of strings.  We want to choose the
+        // last item in the array.  The forwarding numbers arrive independently of when the
+        // call is originally set up, so we need to notify the the UI of the change.
+        if (callExtras.containsKey(Connection.EXTRA_LAST_FORWARDED_NUMBER)) {
+            ArrayList<String> lastForwardedNumbers =
+                    callExtras.getStringArrayList(Connection.EXTRA_LAST_FORWARDED_NUMBER);
+
+            if (lastForwardedNumbers != null) {
+                String lastForwardedNumber = null;
+                if (!lastForwardedNumbers.isEmpty()) {
+                    lastForwardedNumber = lastForwardedNumbers.get(
+                            lastForwardedNumbers.size() - 1);
+                }
+
+                if (!Objects.equals(lastForwardedNumber, mLastForwardedNumber)) {
+                    mLastForwardedNumber = lastForwardedNumber;
+                    CallList.getInstance().onLastForwardedNumberChange(this);
+                }
+            }
+        }
+
+        // Call subject is present in the extras at the start of call, so we do not need to
+        // notify any other listeners of this.
+        if (callExtras.containsKey(Connection.EXTRA_CALL_SUBJECT)) {
+            String callSubject = callExtras.getString(Connection.EXTRA_CALL_SUBJECT);
+            if (!Objects.equals(mCallSubject, callSubject)) {
+                mCallSubject = callSubject;
             }
         }
     }
