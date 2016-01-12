@@ -29,8 +29,14 @@ import android.view.WindowManager;
  */
 public class PostCharDialogFragment extends DialogFragment {
 
+    private static final String STATE_CALL_ID = "CALL_ID";
+    private static final String STATE_POST_CHARS = "POST_CHARS";
+
     private String mCallId;
     private String mPostDialStr;
+
+    public PostCharDialogFragment() {
+    }
 
     public PostCharDialogFragment(String callId, String postDialStr) {
         mCallId = callId;
@@ -40,6 +46,11 @@ public class PostCharDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+
+        if (mPostDialStr == null && savedInstanceState != null) {
+            mCallId = savedInstanceState.getString(STATE_CALL_ID);
+            mPostDialStr = savedInstanceState.getString(STATE_POST_CHARS);
+        }
 
         final StringBuilder buf = new StringBuilder();
         buf.append(getResources().getText(R.string.wait_prompt_str));
@@ -70,5 +81,13 @@ public class PostCharDialogFragment extends DialogFragment {
         super.onCancel(dialog);
 
         TelecomAdapter.getInstance().postDialContinue(mCallId, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(STATE_CALL_ID, mCallId);
+        outState.putString(STATE_POST_CHARS, mPostDialStr);
     }
 }
