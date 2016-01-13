@@ -19,6 +19,7 @@ package com.android.dialer.calllog;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.UriUtils;
 import com.google.common.base.Objects;
 
@@ -46,6 +47,7 @@ public class ContactInfo {
     public Uri photoUri;
     public boolean isBadData;
     public String objectId;
+    public @UserType long userType;
 
     public static ContactInfo EMPTY = new ContactInfo();
 
@@ -80,6 +82,7 @@ public class ContactInfo {
         if (photoId != other.photoId) return false;
         if (!UriUtils.areEqual(photoUri, other.photoUri)) return false;
         if (!TextUtils.equals(objectId, other.objectId)) return false;
+        if (userType != other.userType) return false;
         return true;
     }
 

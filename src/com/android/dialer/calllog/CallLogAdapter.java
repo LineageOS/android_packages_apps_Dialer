@@ -41,6 +41,7 @@ import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PermissionsUtil;
@@ -55,6 +56,7 @@ import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
+import com.android.incallui.CallerInfo;
 
 import java.util.HashMap;
 
@@ -400,6 +402,7 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param viewHolder The view corresponding to this entry.
      * @param position The position of the entry.
      */
+    @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Trace.beginSection("onBindViewHolder: " + position);
 
@@ -497,6 +500,7 @@ public class CallLogAdapter extends GroupingListAdapter
             details.photoUri = info.photoUri;
             details.sourceType = info.sourceType;
             details.objectId = info.objectId;
+            details.contactUserType = info.userType;
         }
 
         final CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
@@ -517,6 +521,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 details.numberLabel);
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
+        views.workIconView.setVisibility(
+                details.contactUserType == ContactsUtils.USER_TYPE_WORK ? View.VISIBLE : View.GONE);
 
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);

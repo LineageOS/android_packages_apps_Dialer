@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.compat.ContactsCompat;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -41,6 +42,7 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
+import com.android.incallui.CallerInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -200,6 +202,9 @@ public class ContactInfoHelper {
         info.photoId = phoneLookupCursor.getLong(PhoneQuery.PHOTO_ID);
         info.photoUri = UriUtils.parseUriOrNull(phoneLookupCursor.getString(PhoneQuery.PHOTO_URI));
         info.formattedNumber = null;
+        info.userType = ContactsUtils.determineUserType(null,
+                phoneLookupCursor.getLong(PhoneQuery.PERSON_ID));
+
         return info;
     }
 

@@ -96,6 +96,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public View sendMessageView;
     public View detailsButtonView;
     public View callWithNoteButtonView;
+    public ImageView workIconView;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -233,6 +234,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         this.callLogEntryView = callLogEntryView;
         this.dayGroupHeader = dayGroupHeader;
         this.primaryActionButtonView = primaryActionButtonView;
+        this.workIconView = (ImageView) rootView.findViewById(R.id.work_profile_icon);
 
         Resources resources = mContext.getResources();
         mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);

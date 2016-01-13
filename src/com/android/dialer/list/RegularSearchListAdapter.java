@@ -21,6 +21,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.list.DirectoryPartition;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
@@ -45,19 +47,21 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         CachedContactInfo cacheInfo = lookupService.buildCachedContactInfo(info);
         final Cursor item = (Cursor) getItem(position);
         if (item != null) {
+            final DirectoryPartition partition =
+                (DirectoryPartition) getPartition(getPartitionForPosition(position));
+            final long directoryId = partition.getDirectoryId();
+
             info.name = item.getString(PhoneQuery.DISPLAY_NAME);
             info.type = item.getInt(PhoneQuery.PHONE_TYPE);
             info.label = item.getString(PhoneQuery.PHONE_LABEL);
             info.number = item.getString(PhoneQuery.PHONE_NUMBER);
             final String photoUriStr = item.getString(PhoneQuery.PHOTO_URI);
             info.photoUri = photoUriStr == null ? null : Uri.parse(photoUriStr);
+            info.userType = DirectoryCompat.isEnterpriseDirectoryId(directoryId)
+                    ? ContactsUtils.USER_TYPE_WORK : ContactsUtils.USER_TYPE_CURRENT;
 
             cacheInfo.setLookupKey(item.getString(PhoneQuery.LOOKUP_KEY));
 
-            final int partitionIndex = getPartitionForPosition(position);
-            final DirectoryPartition partition =
-                (DirectoryPartition) getPartition(partitionIndex);
-            final long directoryId = partition.getDirectoryId();
             final String sourceName = partition.getLabel();
             if (isExtendedDirectory(directoryId)) {
                 cacheInfo.setExtendedSource(sourceName, directoryId);
