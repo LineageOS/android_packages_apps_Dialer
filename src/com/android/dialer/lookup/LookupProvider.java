@@ -128,11 +128,11 @@ public class LookupProvider extends ContentProvider {
             String[] selectionArgs, String sortOrder) {
         if (DEBUG) Log.v(TAG, "query: " + uri);
 
+        Location lastLocation = null;
         final int match = sURIMatcher.match(uri);
 
         switch (match) {
         case NEARBY:
-        case PEOPLE:
             if (!PermissionsUtil.hasLocationPermissions(getContext())) {
                 Log.v(TAG, "Location permission is missing, ignoring query.");
                 return null;
@@ -143,12 +143,12 @@ public class LookupProvider extends ContentProvider {
                 return null;
             }
 
-            final Location lastLocation = getLastLocation();
-            if (lastLocation == null) {
+            if ((lastLocation = getLastLocation()) == null) {
                 Log.v(TAG, "No location available, ignoring query.");
                 return null;
             }
 
+        case PEOPLE:
             final String filter = Uri.encode(uri.getLastPathSegment());
             String limit = uri.getQueryParameter(ContactsContract.LIMIT_PARAM_KEY);
 
@@ -162,13 +162,14 @@ public class LookupProvider extends ContentProvider {
                 Log.e(TAG, "query: invalid limit parameter: '" + limit + "'");
             }
 
+            final Location finalLastLocation = lastLocation;
             final int finalMaxResults = maxResults;
 
             return execute(new Callable<Cursor>() {
                 @Override
                 public Cursor call() {
                     return handleFilter(match, projection, filter,
-                            finalMaxResults, lastLocation);
+                            finalMaxResults, finalLastLocation);
                 }
             }, "FilterThread");
         }
