@@ -56,6 +56,7 @@ import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
 
+import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_WORK_CALL;
 /**
  * Presenter for the Call Card Fragment.
  * <p>
@@ -722,6 +723,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         boolean showContactPhoto = !VideoCallPresenter
                 .showIncomingVideo(mPrimary.getVideoState(), mPrimary.getState());
 
+        // Call placed through a work phone account.
+        boolean hasWorkCallProperty = mPrimary.hasProperty(PROPERTY_WORK_CALL);
+
         if (mPrimary.isConferenceCall()) {
             Log.d(TAG, "Update primary display info for conference call.");
 
@@ -733,7 +737,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getConferencePhoto(mPrimary),
                     false /* isSipCall */,
                     showContactPhoto,
-                    false /* isWorkContact */);
+                    hasWorkCallProperty);
         } else if (mPrimaryContactInfo != null) {
             Log.d(TAG, "Update primary display info for " + mPrimaryContactInfo);
 
@@ -765,6 +769,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             maybeShowHdAudioIcon();
 
             boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
+            // Call with caller that is a work contact.
             boolean isWorkContact = (mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
             ui.setPrimary(
                     number,
@@ -774,7 +779,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mPrimaryContactInfo.photo,
                     mPrimaryContactInfo.isSipCall,
                     showContactPhoto,
-                    isWorkContact);
+                    hasWorkCallProperty || isWorkContact);
 
             updateContactInteractions();
         } else {
@@ -1095,8 +1100,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void showContactContext(boolean show);
         void setCallCardVisible(boolean visible);
         void setPrimary(String number, String name, boolean nameIsNumber, String label,
-                Drawable photo, boolean isSipCall, boolean isContactPhotoShown,
-                boolean isWorkContact);
+                Drawable photo, boolean isSipCall, boolean isContactPhotoShown, boolean isWorkCall);
         void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
                 String providerLabel, boolean isConference, boolean isVideoCall,
                 boolean isFullscreen);

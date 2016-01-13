@@ -559,10 +559,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      * @param isSipCall {@code true} if this is a SIP call.
      * @param isContactPhotoShown {@code true} if the contact photo should be shown (it will be
      *      updated even if it is not shown).
+     * @param isWorkCall Whether the call is placed through a work phone account or caller is a work
+              contact.
      */
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label,
-            Drawable photo, boolean isSipCall, boolean isContactPhotoShown, boolean isWorkContact) {
+            Drawable photo, boolean isSipCall, boolean isContactPhotoShown, boolean isWorkCall) {
         Log.d(this, "Setting primary call");
         // set the name field.
         setPrimaryName(name, nameIsNumber);
@@ -584,7 +586,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         setDrawableToImageViews(photo);
         showImageView(mPhotoLarge, isContactPhotoShown);
-        showImageView(mWorkProfileIcon, isWorkContact);
+        showImageView(mWorkProfileIcon, isWorkCall);
     }
 
     @Override
