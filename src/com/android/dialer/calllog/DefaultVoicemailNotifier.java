@@ -24,6 +24,7 @@ import com.google.common.collect.Maps;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -33,7 +34,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -194,13 +197,24 @@ public class DefaultVoicemailNotifier {
         // TODO: Use the photo of contact if all calls are from the same person.
         final int icon = android.R.drawable.stat_notify_voicemail;
 
+        Uri ringtoneUri = null;
+        boolean shouldVibrate = callToNotify != null;
+        if (callToNotify != null) {
+            PhoneAccountHandle accountHandle = new PhoneAccountHandle(
+                    ComponentName.unflattenFromString(callToNotify.accountComponentName),
+                    callToNotify.accountId);
+            ringtoneUri = getTelephonyManager().getVoicemailRingtoneUri(accountHandle);
+            shouldVibrate = getTelephonyManager().isVoicemailVibrationEnabled(accountHandle);
+        }
+
         Notification.Builder notificationBuilder = new Notification.Builder(mContext)
                 .setSmallIcon(icon)
                 .setContentTitle(title)
                 .setContentText(callers)
                 .setStyle(new Notification.BigTextStyle().bigText(transcription))
+                .setSound(ringtoneUri)
                 .setColor(resources.getColor(R.color.dialer_theme_color))
-                .setDefaults(callToNotify != null ? Notification.DEFAULT_ALL : 0)
+                .setDefaults(shouldVibrate ? Notification.DEFAULT_VIBRATE : 0)
                 .setDeleteIntent(createMarkNewVoicemailsAsOldIntent())
                 .setAutoCancel(true);
 
@@ -222,6 +236,10 @@ public class DefaultVoicemailNotifier {
         }
 
         mNotificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notificationBuilder.build());
+    }
+
+    private TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     /** Creates a pending intent that marks all new voicemails as old. */
