@@ -78,10 +78,10 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Ablehnen"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zurückrufen"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Nachricht"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Deaktivieren Sie zunächst den Flugmodus, um einen Anruf zu tätigen."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Deaktiviere zunächst den Flugmodus, um einen Anruf zu tätigen."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Nicht in Netzwerk registriert."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mobilfunknetz nicht verfügbar"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Geben Sie eine gültige Nummer ein."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Gib eine gültige Nummer ein."</string>
     <string name="incall_error_call_failed" msgid="6302746943230078197">"Anruf nicht möglich."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI-Sequenz wird gestartet..."</string>
     <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Dienst wird nicht unterstützt."</string>
@@ -96,7 +96,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Mobilfunkverbindung wird aktiviert..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Kein Service. Erneuter Versuch..."</string>
     <string name="dial_emergency_error" msgid="1509085166367420355">"Anruf nicht möglich. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> ist keine Notrufnummer."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Anruf nicht möglich. Wählen Sie eine Notrufnummer."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Anruf nicht möglich. Wähle eine Notrufnummer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Zum Wählen Tastatur verwenden"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Anruf halten"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Anruf fortsetzen"</string>
