@@ -47,6 +47,8 @@ import com.google.common.base.Preconditions;
 
 import java.util.Objects;
 
+import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_WORK_CALL;
+
 /**
  * This class adds Notifications to the status bar for the in-call experience.
  */
@@ -472,7 +474,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             resId = R.string.notification_requesting_video_call;
         }
 
-        if (userType == ContactsUtils.USER_TYPE_WORK) {
+        // Is the call placed through work connection service.
+        boolean isWorkCall = call.hasProperty(PROPERTY_WORK_CALL);
+        if(userType == ContactsUtils.USER_TYPE_WORK || isWorkCall) {
             resId = getWorkStringFromPersonalString(resId);
         }
 
