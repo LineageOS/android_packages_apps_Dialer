@@ -109,6 +109,7 @@ public class CallerInfoUtils {
         info.number = ci.phoneNumber;
         info.normalizedNumber = ci.normalizedNumber;
         info.photoUri = ci.contactDisplayPhotoUri;
+        info.userType = ci.userType;
 
         CachedContactInfo cacheInfo = lookupService.buildCachedContactInfo(info);
         cacheInfo.setLookupKey(ci.lookupKeyOrNull);
