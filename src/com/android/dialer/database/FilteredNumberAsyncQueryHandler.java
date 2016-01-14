@@ -134,7 +134,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 new Listener() {
                     @Override
                     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                        listener.onHasBlockedNumbers(cursor != null && cursor.getCount() > 0);
+                        listener.onHasBlockedNumbers(cursor.getCount() > 0);
                     }
                 },
                 getContentUri(null),
@@ -161,7 +161,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 new Listener() {
                     @Override
                     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                        if (cursor == null || cursor.getCount() != 1) {
+                        if (cursor.getCount() != 1) {
                             listener.onCheckComplete(null);
                             return;
                         }
@@ -246,10 +246,9 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         startQuery(NO_TOKEN, new Listener() {
             @Override
             public void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                int rowsReturned = cursor == null ? 0 : cursor.getCount();
-                if (rowsReturned != 1) {
+                if (cursor.getCount() != 1) {
                     throw new SQLiteDatabaseCorruptException
-                            ("Returned " + rowsReturned + " rows for uri "
+                            ("Returned " + cursor.getCount() + " rows for uri "
                                     + uri + "where 1 expected.");
                 }
                 cursor.moveToFirst();
