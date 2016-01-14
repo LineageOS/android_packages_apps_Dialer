@@ -34,17 +34,14 @@ public class FloatingActionButtonBehavior extends CoordinatorLayout.Behavior<Fra
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, FrameLayout child, View dependency) {
-        // This needs to return true to trigger the callback correctly.
-        return true;
+        return dependency instanceof SnackbarLayout;
     }
 
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, FrameLayout child,
             View dependency) {
-        if (dependency instanceof SnackbarLayout) {
-            float translationY = Math.min(0, dependency.getTranslationY() - dependency.getHeight());
-            child.setTranslationY(translationY);
-        }
+        float translationY = Math.min(0, dependency.getTranslationY() - dependency.getHeight());
+        child.setTranslationY(translationY);
         return true;
     }
 }
