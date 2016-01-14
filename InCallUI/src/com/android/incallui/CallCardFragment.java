@@ -714,11 +714,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             Drawable callStateIcon,
             String gatewayNumber,
             boolean isWifi,
-            boolean isConference) {
+            boolean isConference,
+            boolean isWorkCall) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
         CallStateLabel callStateLabel = getCallStateLabelFromState(state, videoState,
                 sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi,
-                isConference);
+                isConference, isWorkCall);
 
         Log.v(this, "setCallState " + callStateLabel.getCallStateLabel());
         Log.v(this, "AutoDismiss " + callStateLabel.isAutoDismissing());
@@ -1010,7 +1011,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      */
     private CallStateLabel getCallStateLabelFromState(int state, int videoState,
             int sessionModificationState, DisconnectCause disconnectCause, String label,
-            boolean isGatewayCall, boolean isWifi, boolean isConference) {
+            boolean isGatewayCall, boolean isWifi, boolean isConference, boolean isWorkCall) {
         final Context context = getView().getContext();
         CharSequence callStateLabel = null;  // Label to display as part of the call banner
 
@@ -1068,7 +1069,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 } else if (VideoUtils.isVideoCall(videoState)) {
                     callStateLabel = context.getString(R.string.notification_incoming_video_call);
                 } else {
-                    callStateLabel = context.getString(R.string.card_title_incoming_call);
+                    callStateLabel =
+                            context.getString(isWorkCall ? R.string.card_title_incoming_work_call
+                                    : R.string.card_title_incoming_call);
                 }
                 break;
             case Call.State.DISCONNECTING:
