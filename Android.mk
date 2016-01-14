@@ -34,9 +34,14 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages android.support.design \
     --extra-packages com.android.incallui \
     --extra-packages com.android.contacts.common \
-    --extra-packages com.android.phone.common
+    --extra-packages com.android.phone.common \
+    --extra-packages com.cyanogen.ambient
+
+LOCAL_STATIC_JAVA_AAR_LIBRARIES := \
+    ambientsdk
 
 LOCAL_JAVA_LIBRARIES := telephony-common
+LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
