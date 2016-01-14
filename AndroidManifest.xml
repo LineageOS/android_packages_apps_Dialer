@@ -296,8 +296,7 @@
                   android:launchMode="singleInstance"
                   android:configChanges="keyboardHidden"
                   android:exported="false"
-                  android:screenOrientation="nosensor"
-                  android:encryptionAware="true">
+                  android:screenOrientation="nosensor" >
         </activity>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
@@ -305,8 +304,7 @@
                   android:exported="false" />
 
         <service android:name="com.android.incallui.InCallServiceImpl"
-                 android:permission="android.permission.BIND_INCALL_SERVICE"
-                 android:encryptionAware="true">
+                 android:permission="android.permission.BIND_INCALL_SERVICE" >
             <meta-data android:name="android.telecom.IN_CALL_SERVICE_UI" android:value="true" />
             <intent-filter>
                 <action android:name="android.telecom.InCallService"/>
