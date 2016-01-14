@@ -95,6 +95,8 @@
     <string name="card_title_conf_call">Conference call</string>
     <!-- In-call screen: status label for an incoming call [CHAR LIMIT=25] -->
     <string name="card_title_incoming_call">Incoming call</string>
+    <!-- In-call screen: status label for an incoming work call [CHAR LIMIT=25] -->
+    <string name="card_title_incoming_work_call">Incoming work call</string>
     <!-- In-call screen: status label displayed briefly after a call ends [CHAR LIMIT=25] -->
     <string name="card_title_call_ended">Call ended</string>
     <!-- In-call screen: status label for call that's on hold [CHAR LIMIT=25] -->

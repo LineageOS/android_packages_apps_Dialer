@@ -318,7 +318,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     null,
                     null,
                     false /* isWifi */,
-                    false /* isConference */);
+                    false /* isConference */,
+                    false /* isWorkCall */);
             getUi().showHdAudioIndicator(false);
         }
 
@@ -410,6 +411,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private void updatePrimaryCallState() {
         if (getUi() != null && mPrimary != null) {
+            boolean isWorkCall = mPrimary.hasProperty(PROPERTY_WORK_CALL)
+                    || (mPrimaryContactInfo == null ? false
+                            : mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
             getUi().setCallState(
                     mPrimary.getState(),
                     mPrimary.getVideoState(),
@@ -419,7 +423,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getCallStateIcon(),
                     getGatewayNumber(),
                     mPrimary.hasProperty(Details.PROPERTY_WIFI),
-                    mPrimary.isConferenceCall());
+                    mPrimary.isConferenceCall(),
+                    isWorkCall);
 
             maybeShowHdAudioIcon();
             setCallbackNumber();
@@ -1108,7 +1113,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
                 Drawable connectionIcon, String gatewayNumber, boolean isWifi,
-                boolean isConference);
+                boolean isConference, boolean isWorkCall);
         void setPrimaryCallElapsedTime(boolean show, long duration);
         void setPrimaryName(String name, boolean nameIsNumber);
         void setPrimaryImage(Drawable image, boolean isVisible);
