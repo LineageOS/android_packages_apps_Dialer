@@ -42,6 +42,7 @@ import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
+import com.android.dialer.incall.CallMethodHelper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -52,6 +53,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.cyanogen.ambient.incall.CallableConstants.ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY;
 
 /**
  * Database helper for smart dial. Designed as a singleton to make sure there is
@@ -130,7 +133,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /** Query options for querying the contact database.*/
-    public static interface PhoneQuery {
+    public static class PhoneQuery {
        static final Uri URI = Phone.CONTENT_URI.buildUpon().
                appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY,
                        String.valueOf(Directory.DEFAULT)).
@@ -152,7 +155,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             Data.IS_SUPER_PRIMARY,              // 11
             Contacts.IN_VISIBLE_GROUP,          // 12
             Data.IS_PRIMARY,                    // 13
-        };
+            Data.MIMETYPE,                      // 14
+       };
 
         static final int PHONE_ID = 0;
         static final int PHONE_TYPE = 1;
@@ -183,6 +187,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
         static final String SELECTION = SELECT_UPDATED_CLAUSE + " AND " +
                 SELECT_IGNORE_LOOKUP_KEY_TOO_LONG_CLAUSE;
+
+        public static Uri constructExtendedUri(String mimeTypes) {
+            return (TextUtils.isEmpty(mimeTypes)) ? URI : URI.buildUpon()
+                    .appendQueryParameter(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mimeTypes)
+                    .build();
+        }
     }
 
     /** Query options for querying the deleted contact database.*/
@@ -851,10 +861,15 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             if (DEBUG) {
                 Log.v(TAG, "Last updated at " + lastUpdateMillis);
             }
+
+            // Get callable mimetypes from incall api, modify query uri accordingly
+            String mimeTypes = CallMethodHelper.getAllMimeTypes();
+            Uri uri = PhoneQuery.constructExtendedUri(mimeTypes);
+
             /** Queries the contact database to get contacts that have been updated since the last
              * update time.
              */
-            final Cursor updatedContactCursor = mContext.getContentResolver().query(PhoneQuery.URI,
+            final Cursor updatedContactCursor = mContext.getContentResolver().query(uri,
                     PhoneQuery.PROJECTION, PhoneQuery.SELECTION,
                     new String[]{lastUpdateMillis}, null);
             if (updatedContactCursor == null) {

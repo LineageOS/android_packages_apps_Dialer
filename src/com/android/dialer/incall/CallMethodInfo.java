@@ -18,10 +18,17 @@ package com.android.dialer.incall;
 
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
+import com.android.dialer.DialerApplication;
+import com.android.dialer.incall.CallMethodHelper;
+import com.android.phone.common.util.StartInCallCallReceiver;
+import com.cyanogen.ambient.incall.InCallServices;
 import com.cyanogen.ambient.incall.extension.CreditInfo;
+import com.cyanogen.ambient.incall.extension.OriginCodes;
+import com.cyanogen.ambient.incall.extension.StartCallRequest;
 import com.google.common.base.Objects;
 
 public class CallMethodInfo {
@@ -96,5 +103,15 @@ public class CallMethodInfo {
                     && Objects.equal(this.mIsInCallProvider, info.mIsInCallProvider);
         }
         return false;
+    }
+
+    public void placeCall(String origin, String number, Context c) {
+        StartInCallCallReceiver svcrr = CallMethodHelper.getVoIPResultReceiver(this, origin);
+
+        StartCallRequest request = new StartCallRequest(
+                number, OriginCodes.DIALPAD_DIRECT_DIAL, 0, svcrr);
+
+        InCallServices.getInstance().startOutCall(
+                DialerApplication.ACLIENT.get(c), this.mComponent, request);
     }
 }

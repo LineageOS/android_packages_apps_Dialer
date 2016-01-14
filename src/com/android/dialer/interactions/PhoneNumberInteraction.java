@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -37,6 +38,7 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,12 +54,15 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.contact.ContactUpdateService;
+import com.android.dialer.incall.CallMethodHelper;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Joiner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -241,7 +246,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 }
 
                 PhoneNumberInteraction.performAction(activity, phoneItem.phoneNumber,
-                        mInteractionType, mCallOrigin);
+                        mInteractionType, mCallOrigin, phoneItem.mimeType, phoneItem.id);
             } else {
                 dialog.dismiss();
             }
@@ -308,13 +313,14 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         mCallOrigin = callOrigin;
     }
 
-    private void performAction(String phoneNumber) {
-        PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mCallOrigin);
+    private void performAction(String phoneNumber, String mimeType, long id) {
+        PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mCallOrigin,
+                mimeType, id);
     }
 
     private static void performAction(
             Context context, String phoneNumber, int interactionType,
-            String callOrigin) {
+            String callOrigin, String mimeType, long id) {
         Intent intent;
         switch (interactionType) {
             case ContactDisplayUtils.INTERACTION_SMS:
@@ -322,7 +328,15 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                         Intent.ACTION_SENDTO, Uri.fromParts("sms", phoneNumber, null));
                 break;
             default:
-                intent = IntentUtil.getCallIntent(phoneNumber, callOrigin);
+                if (TextUtils.isEmpty(mimeType) ||
+                        TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE) ||
+                        TextUtils.equals(mimeType, SipAddress.CONTENT_ITEM_TYPE)) {
+                    intent = IntentUtil.getCallIntent(phoneNumber, callOrigin);
+                } else {
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    final Uri uri = ContentUris.withAppendedId(Data.CONTENT_URI, id);
+                    intent.setDataAndType(uri, mimeType);
+                }
                 break;
         }
         DialerUtils.startActivityWithErrorToast(context, intent);
@@ -336,7 +350,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     @VisibleForTesting
     /* package */ void startInteraction(Uri uri) {
-        startInteraction(uri, true);
+        startInteraction(uri, true, null);
     }
 
     /**
@@ -348,7 +362,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      * is available.
      */
     @VisibleForTesting
-    /* package */ void startInteraction(Uri uri, boolean useDefault) {
+    /* package */ void startInteraction(Uri uri, boolean useDefault,
+                                        String additionalCallableMimeTypes) {
         if (mLoader != null) {
             mLoader.reset();
         }
@@ -371,11 +386,30 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         mLoader = new CursorLoader(mContext,
                 queryUri,
                 PHONE_NUMBER_PROJECTION,
-                PHONE_NUMBER_SELECTION,
+                constructSelection(additionalCallableMimeTypes),
                 null,
                 null);
         mLoader.registerListener(0, this);
         mLoader.startLoading();
+    }
+
+    private String constructSelection(String additionalCallableMimeTypes) {
+        StringBuilder selection = new StringBuilder();
+        if (TextUtils.isEmpty(additionalCallableMimeTypes)) {
+            selection.append(PHONE_NUMBER_SELECTION);
+        } else {
+            selection.append(Data.MIMETYPE + " IN ('" + Phone.CONTENT_ITEM_TYPE + "', " +
+                    "'" + SipAddress.CONTENT_ITEM_TYPE + "'");
+            List<String> mimeTypesList =
+                    Arrays.asList(additionalCallableMimeTypes.split("\\s*,\\s*"));
+            if (mimeTypesList != null && !mimeTypesList.isEmpty()) {
+                selection.append(", '");
+                selection.append(Joiner.on("', '").skipNulls().join(mimeTypesList));
+                selection.append("'");
+            }
+            selection.append(") AND " + Data.DATA1 + " NOT NULL");
+        }
+        return selection.toString();
     }
 
     @Override
@@ -387,6 +421,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         try {
             ArrayList<PhoneItem> phoneList = new ArrayList<PhoneItem>();
             String primaryPhone = null;
+            String primaryMime = null;
+            long primaryId = 0;
             if (!isSafeToCommitTransactions()) {
                 onDismiss();
                 return;
@@ -399,6 +435,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 if (mUseDefault && cursor.getInt(IS_SUPER_PRIMARY) != 0) {
                     // Found super primary, call it.
                     primaryPhone = cursor.getString(NUMBER);
+                    primaryMime = cursor.getString(MIMETYPE);
+                    primaryId = cursor.getLong(_ID);
                 }
 
                 PhoneItem item = new PhoneItem();
@@ -414,7 +452,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             }
 
             if (mUseDefault && primaryPhone != null) {
-                performAction(primaryPhone);
+                performAction(primaryPhone, primaryMime, primaryId);
                 onDismiss();
                 return;
             }
@@ -425,7 +463,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             } else if (phoneList.size() == 1) {
                 PhoneItem item = phoneList.get(0);
                 onDismiss();
-                performAction(item.phoneNumber);
+                performAction(item.phoneNumber, item.mimeType, item.id);
             } else {
                 // There are multiple candidates. Let the user choose one.
                 showDisambiguationDialog(phoneList);
@@ -459,7 +497,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri, true);
+                .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
     }
 
     /**
@@ -480,7 +518,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
             boolean useDefault) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri, useDefault);
+                .startInteraction(uri, useDefault, CallMethodHelper.getAllEnabledMimeTypes());
     }
 
     /**
@@ -494,7 +532,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
             String callOrigin) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null, callOrigin))
-                .startInteraction(uri, true);
+                .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
     }
 
     /**
@@ -511,7 +549,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     public static void startInteractionForTextMessage(TransactionSafeActivity activity, Uri uri) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_SMS, null))
-                .startInteraction(uri, true);
+                .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
     }
 
     @VisibleForTesting

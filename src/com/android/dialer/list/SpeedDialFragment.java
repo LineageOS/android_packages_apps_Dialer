@@ -16,6 +16,7 @@
 package com.android.dialer.list;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.cyanogen.ambient.incall.CallableConstants.ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -23,6 +24,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ComponentName;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.pm.PackageManager;
@@ -52,6 +54,8 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
+import com.android.dialer.incall.CallMethodInfo;
+import com.android.dialer.incall.CallMethodHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.EmptyContentView;
 
@@ -86,6 +90,13 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
      */
     private static int LOADER_ID_CONTACT_TILE = 1;
 
+    /**
+     * Available Mime Types for favorites
+     */
+    private String mCallableMimeTypes;
+
+    private static final String AMBIENT_SUBSCRIPTION_ID = "SpeedDialFragment";
+
     public interface HostInterface {
         public void setDragDropController(DragDropController controller);
         public void showAllContactsTab();
@@ -95,7 +106,11 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         @Override
         public CursorLoader onCreateLoader(int id, Bundle args) {
             if (DEBUG) Log.d(TAG, "ContactTileLoaderListener#onCreateLoader.");
-            return ContactTileLoaderFactory.createStrequentPhoneOnlyLoader(getActivity());
+            String mimeTypes = (args != null) ?
+                    args.getString(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, null) : null;
+            return ContactTileLoaderFactory
+                    .createStrequentCallableExtendedLoader(getActivity(),
+                            ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mimeTypes);
         }
 
         @Override
@@ -196,18 +211,37 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         Trace.endSection();
     }
 
+    private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+        mCallableMimeTypes = CallMethodHelper.getAllEnabledMimeTypes();
+    }
+
+    CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
+            new CallMethodHelper.CallMethodReceiver() {
+                @Override
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                    providersUpdated(callMethodInfos);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mCallableMimeTypes);
+                    if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
+                        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, bundle,
+                                mContactTileLoaderListener);
+
+                    } else {
+                        getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+                    }
+                }
+            };
+
     @Override
     public void onResume() {
         Trace.beginSection(TAG + " onResume");
         super.onResume();
 
         if (PermissionsUtil.hasContactsPermissions(getActivity())) {
-            if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
-                getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null,
-                        mContactTileLoaderListener);
 
-            } else {
-                getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+
+            if(CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
+                providersUpdated(CallMethodHelper.getAllCallMethods());
             }
 
             mEmptyView.setDescription(R.string.speed_dial_empty);
@@ -308,10 +342,16 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
         if (PermissionsUtil.hasContactsPermissions(activity)) {
-            getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+            //getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
         } else {
             setEmptyViewVisibility(true);
         }
+    }
+
+    @Override
+    public void onPause() {
+        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
+        super.onPause();
     }
 
     /**

@@ -29,12 +29,15 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Trace;
 import android.provider.CallLog.Calls;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.PreferenceManager;
 import android.provider.CallLog.Calls;
+import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.telecom.PhoneAccount;
@@ -97,6 +100,11 @@ import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.util.SettingsUtil;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
+import com.cyanogen.ambient.incall.InCallServices;
+import com.cyanogen.ambient.incall.extension.StartCallRequest;
+import com.cyanogen.ambient.incall.extension.OriginCodes;
+
+import com.android.phone.common.util.StartInCallCallReceiver;
 import junit.framework.Assert;
 
 import java.util.ArrayList;
@@ -1269,15 +1277,35 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall) {
+        onCallNumberDirectly(phoneNumber, isVideoCall, null);
+    }
+
+    @Override
+    public void onCallNumberDirectly(String phoneNumber, boolean isVideoCall, String mimeType) {
         if (phoneNumber == null) {
             // Invalid phone number, but let the call go through so that InCallUI can show
             // an error message.
             phoneNumber = "";
         }
-        Intent intent = isVideoCall ?
-                IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
-                IntentUtil.getCallIntent(phoneNumber, getCallOrigin());
-        DialerUtils.startActivityWithErrorToast(this, intent);
+        if (TextUtils.isEmpty(mimeType) ||
+                TextUtils.equals(mimeType,
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE) ||
+                TextUtils.equals(mimeType,
+                        ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE)) {
+
+            Intent intent = isVideoCall ?
+                    IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
+                    IntentUtil.getCallIntent(phoneNumber, getCallOrigin());
+            DialerUtils.startActivityWithErrorToast(this, intent);
+
+        } else {
+            StartCallRequest request = new StartCallRequest(phoneNumber,
+                    OriginCodes.CONTACT_SEARCH, 0,
+                    new StartInCallCallReceiver(new Handler(Looper.getMainLooper())));
+
+            InCallServices.getInstance().startVoiceCallForMimeType(
+                    DialerApplication.ACLIENT.get(this), mimeType, request);
+        }
         mClearSearchOnPause = true;
     }
 

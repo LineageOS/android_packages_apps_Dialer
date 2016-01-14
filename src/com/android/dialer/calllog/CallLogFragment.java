@@ -62,6 +62,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialerbind.ObjectFactory;
+import com.cyanogen.ambient.incall.CallLogConstants;
 
 import java.util.List;
 
@@ -202,7 +203,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mCallLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, mLogLimit);
         mKeyguardManager =
                 (KeyguardManager) activity.getSystemService(Context.KEYGUARD_SERVICE);
-        resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
+        resolver.registerContentObserver(CallLogConstants.CONTENT_ALL_URI, true, mCallLogObserver);
         resolver.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true,
                 mContactsObserver);
         resolver.registerContentObserver(Status.CONTENT_URI, true, mVoicemailStatusObserver);

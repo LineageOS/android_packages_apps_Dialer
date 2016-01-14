@@ -26,6 +26,8 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.cyanogen.ambient.incall.CallLogConstants;
+
 public class TelecomUtil {
     private static final String TAG = "TelecomUtil";
     private static boolean sWarningLogged = false;
@@ -79,8 +81,9 @@ public class TelecomUtil {
     }
 
     public static Uri getCallLogUri(Context context) {
-        return hasReadWriteVoicemailPermissions(context) ? Calls.CONTENT_URI_WITH_VOICEMAIL
-                : Calls.CONTENT_URI;
+        return hasReadWriteVoicemailPermissions(context) ?
+                CallLogConstants.CONTENT_ALL_URI_WITH_VOICEMAIL
+                : CallLogConstants.CONTENT_ALL_URI;
     }
 
     public static boolean hasReadWriteVoicemailPermissions(Context context) {

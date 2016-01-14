@@ -22,13 +22,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -67,6 +66,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.contacts.common.CallUtil;
@@ -83,17 +83,24 @@ import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
+import com.android.dialer.incall.CallMethodInfo;
+import com.android.dialer.incall.CallMethodHelper;
+import com.android.dialer.incall.CallMethodUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
+import com.android.phone.common.incall.CallMethodSpinnerAdapter;
+import com.android.phone.common.util.StartInCallCallReceiver;
+import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Fragment that displays a twelve-key phone dialpad.
@@ -185,6 +192,27 @@ public class DialpadFragment extends Fragment
     private ToneGenerator mToneGenerator;
     private final Object mToneGeneratorLock = new Object();
     private View mSpacer;
+
+    /* Call Method Spinner */
+    private Spinner mCallMethodSpinner;
+    private CallMethodSpinnerAdapter mCallMethodSpinnerAdapter;
+
+    /* Call Method Infos */
+    private CallMethodInfo mCurrentCallMethodInfo;
+    private String mLastKnownCallMethod;
+    HashMap<ComponentName, CallMethodInfo> mAllAvailableProviders = new HashMap<>();
+    private List<CallMethodInfo> mSims;
+
+    /* InCall Plugin Listener ID */
+    private static final String AMBIENT_SUBSCRIPTION_ID = "DialpadFragment";
+
+    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
+            new CallMethodHelper.CallMethodReceiver() {
+                @Override
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                    providersUpdated(callMethodInfos);
+                }
+            };
 
     private FloatingActionButtonController mFloatingActionButtonController;
 
@@ -380,6 +408,9 @@ public class DialpadFragment extends Fragment
 
         mDelete = mDialpadView.getDeleteButton();
 
+        mCallMethodSpinner = mDialpadView.getCallMethodSpinner();
+        setupCallMethodSpinner();
+
         if (mDelete != null) {
             mDelete.setOnClickListener(this);
             mDelete.setOnLongClickListener(this);
@@ -415,6 +446,91 @@ public class DialpadFragment extends Fragment
         Trace.endSection();
         Trace.endSection();
         return fragmentView;
+    }
+
+    private void setupCallMethodSpinner() {
+        mCallMethodSpinnerAdapter = new CallMethodSpinnerAdapter(
+                getActivity().getApplicationContext(), new ArrayList<CallMethodInfo>());
+        mCallMethodSpinner.setAdapter(mCallMethodSpinnerAdapter);
+        mCallMethodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CallMethodInfo callMethodInfo = (CallMethodInfo) parent.getItemAtPosition(position);
+                if (mCurrentCallMethodInfo == null ||
+                        !callMethodInfo.equals(mCurrentCallMethodInfo)) {
+                    onCallMethodChanged(callMethodInfo);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Stub
+                // Nothing was selected, do not change current selection
+            }
+        });
+    }
+
+    private void onCallMethodChanged(CallMethodInfo callMethodInfo) {
+        mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(callMethodInfo);
+        mCurrentCallMethodInfo = callMethodInfo;
+        //mSmartDialAdapter.setSelectedCallMethod(mCurrentCallMethodInfo);
+        //String query = (mDigits != null) ? mDigits.getText().toString() : "";
+        //onDialpadQueryChanged(query, true);
+
+        if (callMethodInfo != null && callMethodInfo.mIsInCallProvider) {
+            //loadCreditComponentInfo(callMethodInfo);
+
+            // Hide overflow pause menu if call provider selected
+            //hideShowOverflow(false);
+        } else {
+
+            // show overflow pause menu if sim card
+            //hideShowOverflow(true);
+
+            //animateCreditBanner(true);
+        }
+        // Initalize type of hint to show
+        //hintConfiguration(fragmentView);
+    }
+
+    private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+        mAllAvailableProviders.clear();
+        CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
+        updateCallMethodSpinner();
+    }
+
+    private void updateCallMethodSpinner() {
+        mCallMethodSpinnerAdapter.clear();
+        mCallMethodSpinnerAdapter.addAll(mSims);
+        if (mAllAvailableProviders != null) {
+            mCallMethodSpinnerAdapter.addAll(mAllAvailableProviders);
+        }
+
+        if (mSims.size() <= 1 && mAllAvailableProviders.values().isEmpty()) {
+            // zero or one sim and no providers
+            mCallMethodSpinner.setVisibility(View.GONE);
+            CallMethodInfo info = (mCallMethodSpinnerAdapter.getCount() > 0) ?
+                    mCallMethodSpinnerAdapter.getItem(0) : null;
+            onCallMethodChanged(info);
+        } else {
+            // multiple call methods or single provider
+            CallMethodInfo defaultSim = CallMethodUtils.getDefaultDataSimInfo(getActivity());
+            int position = 0;
+            if (defaultSim != null) {
+                position = mCallMethodSpinnerAdapter.getPosition(
+                        CallMethodSpinnerAdapter.getCallMethodKey(defaultSim));
+            }
+            if (!TextUtils.isEmpty(mLastKnownCallMethod)) {
+                position = mCallMethodSpinnerAdapter.getPosition(mLastKnownCallMethod);
+            }
+
+            onCallMethodChanged(mCallMethodSpinnerAdapter.getItem(position));
+            mCallMethodSpinner.setSelection(position);
+            mCallMethodSpinner.setVisibility(View.VISIBLE);
+        }
+
+        //buildOverlayCoachMark(fragmentView);
+        //hintConfiguration(fragmentView);
     }
 
     private boolean isLayoutReady() {
@@ -647,6 +763,11 @@ public class DialpadFragment extends Fragment
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
         mDialpadQueryListener = activity;
 
+        mSims = CallMethodUtils.getSimInfoList(getActivity());
+        if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
+            CallMethodHelper.refreshDynamic();
+        }
+
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
 
         // Query the last dialed number. Do it first because hitting
@@ -716,6 +837,8 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
+
+        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
     }
 
     @Override
@@ -1177,11 +1300,16 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                final Intent intent = IntentUtil.getCallIntent(number,
-                        (getActivity() instanceof DialtactsActivity ?
-                                ((DialtactsActivity) getActivity()).getCallOrigin() : null));
-                DialerUtils.startActivityWithErrorToast(getActivity(), intent);
-                hideAndClearDialpad(false);
+                if (mCurrentCallMethodInfo.mIsInCallProvider) {
+                    mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
+                            number, getActivity());
+                } else {
+                    final Intent intent = IntentUtil.getCallIntent(number,
+                            (getActivity() instanceof DialtactsActivity ?
+                                    ((DialtactsActivity) getActivity()).getCallOrigin() : null));
+                    DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+                    hideAndClearDialpad(false);
+                }
             }
         }
     }

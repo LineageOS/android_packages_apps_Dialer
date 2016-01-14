@@ -22,9 +22,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 import com.android.dialer.DialerApplication;
+import com.android.phone.common.util.StartInCallCallReceiver;
 import com.cyanogen.ambient.common.api.AmbientApiClient;
 import com.cyanogen.ambient.common.api.Result;
 import com.cyanogen.ambient.common.api.ResultCallback;
@@ -189,6 +193,51 @@ public class CallMethodHelper {
             sInstance = new CallMethodHelper();
         }
         return sInstance;
+    }
+
+    /**
+     * Generic CallResultReceiver with basic error handling
+     * @param cmi
+     * @return
+     */
+    public static StartInCallCallReceiver getVoIPResultReceiver(final CallMethodInfo cmi,
+                                                                    final String originCode) {
+        StartInCallCallReceiver svcrr =
+                new StartInCallCallReceiver(new Handler(Looper.getMainLooper()));
+
+        svcrr.setReceiver(new StartInCallCallReceiver.Receiver() {
+
+            @Override
+            public void onReceiveResult(int resultCode, Bundle resultData) {
+                if (DEBUG) Log.i(TAG, "Got Start VoIP Call result callback code = " + resultCode);
+
+                switch (resultCode) {
+                    case StatusCodes.StartCall.CALL_FAILURE_INSUFFICIENT_CREDITS:
+                    case StatusCodes.StartCall.CALL_FAILURE_INVALID_NUMBER:
+                    case StatusCodes.StartCall.CALL_FAILURE_TIMEOUT:
+                    case StatusCodes.StartCall.CALL_FAILURE_UNAUTHENTICATED:
+                    case StatusCodes.StartCall.CALL_FAILURE:
+
+                        String text = getInstance().mContext.getResources()
+                                .getString(R.string.invalid_number_text);
+                        text = String.format(text, cmi.mName);
+                        Toast.makeText(getInstance().mContext, text, Toast.LENGTH_LONG).show();
+                        break;
+                    case StatusCodes.StartCall.CALL_CONNECTED:
+                        break;
+                    case StatusCodes.StartCall.HANDOVER_CONNECTED:
+                        break;
+                    default:
+                        Log.i(TAG, "Nothing to do for this Start VoIP Call resultcode = "
+                                + resultCode);
+                        break;
+                }
+
+            }
+
+        });
+
+        return svcrr;
     }
 
     /**

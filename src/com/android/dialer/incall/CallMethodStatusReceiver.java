@@ -22,16 +22,16 @@ public class CallMethodStatusReceiver extends BroadcastReceiver {
             if (pluginStatus == com.cyanogen.ambient.incall.InCallPluginStatus.ENABLED) {
 
                 String lastProviderEnabled =
-                        preferences.getString(InCallUtils.PREF_LAST_ENABLED_PROVIDER, null);
+                        preferences.getString(CallMethodUtils.PREF_LAST_ENABLED_PROVIDER, null);
 
                 // No provider was previously enabled, show coachmark
                 if (lastProviderEnabled == null) {
                     preferences.edit()
-                            .putBoolean(InCallUtils.PREF_SPINNER_COACHMARK_SHOW, true).apply();
+                            .putBoolean(CallMethodUtils.PREF_SPINNER_COACHMARK_SHOW, true).apply();
                 }
 
                 preferences.edit()
-                        .putString(InCallUtils.PREF_LAST_ENABLED_PROVIDER, pluginName).apply();
+                        .putString(CallMethodUtils.PREF_LAST_ENABLED_PROVIDER, pluginName).apply();
             }
         }
     }

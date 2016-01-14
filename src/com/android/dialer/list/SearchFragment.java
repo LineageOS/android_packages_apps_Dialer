@@ -250,7 +250,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 number = adapter.getQueryString();
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-                    listener.onCallNumberDirectly(number);
+                    listener.onCallNumberDirectly(number, false, adapter.getMimeType(position));
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
@@ -276,7 +276,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                         adapter.getQueryString() : mAddToContactNumber;
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-                    listener.onCallNumberDirectly(number, true /* isVideoCall */);
+                    listener.onCallNumberDirectly(number, true /* isVideoCall */,
+                            adapter.getMimeType(position));
                 }
                 break;
         }

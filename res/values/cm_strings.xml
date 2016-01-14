@@ -118,4 +118,6 @@
     <string name="wb_amr_format" translatable="false">AMR-WB</string>
     <string name="aac_format" translatable="false">AAC</string>
     <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
+
+    <string name="invalid_number_text">"%1$s could not make this call. Is the number correct?"</string>
 </resources>
