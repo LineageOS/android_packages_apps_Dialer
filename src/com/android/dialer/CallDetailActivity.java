@@ -153,6 +153,8 @@ public class CallDetailActivity extends AppCompatActivity
             final boolean canPlaceCallsTo =
                     PhoneNumberUtil.canPlaceCallsTo(mNumber, mDetails.numberPresentation);
             mCallButton.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
+            mCopyNumberActionItem.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
+            mBlockNumberActionItem.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
 
             final boolean isSipNumber = PhoneNumberUtil.isSipNumber(mNumber);
             final boolean isVoicemailNumber =
@@ -221,6 +223,7 @@ public class CallDetailActivity extends AppCompatActivity
     private TextView mBlockNumberActionItem;
     private View mEditBeforeCallActionItem;
     private View mReportActionItem;
+    private View mCopyNumberActionItem;
 
     private Integer mBlockedNumberId;
 
@@ -279,8 +282,8 @@ public class CallDetailActivity extends AppCompatActivity
         mReportActionItem = findViewById(R.id.call_detail_action_report);
         mReportActionItem.setOnClickListener(this);
 
-        View copyActionItem = findViewById(R.id.call_detail_action_copy);
-        copyActionItem.setOnClickListener(this);
+        mCopyNumberActionItem = findViewById(R.id.call_detail_action_copy);
+        mCopyNumberActionItem.setOnClickListener(this);
 
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
