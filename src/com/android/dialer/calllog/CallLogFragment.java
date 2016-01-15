@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.KeyguardManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -52,7 +53,9 @@ import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
+import com.android.dialer.incall.CallMethodInfo;
 import com.android.dialer.list.ListsFragment.HostInterface;
+import com.android.dialer.util.CallMethodHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
@@ -64,7 +67,10 @@ import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClicked
 import com.android.dialerbind.ObjectFactory;
 import com.cyanogen.ambient.incall.CallLogConstants;
 
+import java.util.HashMap;
 import java.util.List;
+
+import android.util.Log;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call
@@ -146,6 +152,22 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
      * DialtactsActivity.
      */
     private boolean mIsRecentsFragment;
+
+    /* InCall Plugin Listener ID */
+    private static final String AMBIENT_SUBSCRIPTION_ID = "CallLogFragment";
+
+    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
+            new CallMethodHelper.CallMethodReceiver() {
+                @Override
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                    // We moved this here because well, getting our call method data takes some time
+                    // we _should_cache this icon somewhere -> load that, then when this updates
+                    // we could update the icons. Currentlly the user has some ugly ugly flash
+                    // as some icons pop up.
+                    refreshData();
+                    mAdapter.startCache();
+                }
+            };
 
     public interface HostInterface {
         public void showDialpad();
@@ -338,8 +360,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             updateEmptyMessage(mCallTypeFilter);
         }
         mHasReadCallLogPermission = hasReadCallLogPermission;
-        refreshData();
-        mAdapter.startCache();
+
+
+        CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver);
     }
 
     @Override
@@ -348,6 +371,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mVoicemailPlaybackPresenter.onPause();
         }
         mAdapter.pauseCache();
+
+        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
+
         super.onPause();
     }
 

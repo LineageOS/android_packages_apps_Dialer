@@ -1,0 +1,16 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <QuickContactBadge
+        android:id="@+id/contact_photo"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
+    <ImageView
+            android:id="@+id/attribution_logo"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="bottom|right"
+            android:visibility="gone"/>
+
+</merge>

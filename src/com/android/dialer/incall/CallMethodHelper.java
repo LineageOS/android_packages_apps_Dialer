@@ -279,7 +279,11 @@ public class CallMethodHelper {
      * @return specific call method when given a component name.
      */
     public static CallMethodInfo getCallMethod(ComponentName cn) {
-        return mCallMethodInfos.get(cn);
+        if (mCallMethodInfos.containsKey(cn)) {
+            return mCallMethodInfos.get(cn);
+        } else {
+            return null;
+        }
     }
 
     /**

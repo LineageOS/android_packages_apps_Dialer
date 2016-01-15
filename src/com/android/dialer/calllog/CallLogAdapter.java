@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,6 +56,7 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
+import com.android.dialer.util.CallMethodHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
@@ -541,6 +543,11 @@ public class CallLogAdapter extends GroupingListAdapter
         // Default case: an item in the call log.
         views.primaryActionView.setVisibility(View.VISIBLE);
 
+        String component = c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME);
+        if (!TextUtils.isEmpty(component)) {
+            views.inCallComponentName = ComponentName.unflattenFromString(component);;
+        }
+
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
         int previousGroup = getPreviousDayGroup(c);
@@ -569,6 +576,8 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         views.setPhoto(info.photoId, info.photoUri, info.lookupUri, nameForDefaultImage,
                 isVoicemailNumber, views.isBusiness);
+
+        views.setAttributionImage(views.inCallComponentName);
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
     }

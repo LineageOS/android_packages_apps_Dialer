@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
+import android.telephony.PhoneNumberUtils;
 import com.android.dialer.DialerApplication;
 import com.android.dialer.incall.CallMethodHelper;
 import com.android.phone.common.util.StartInCallCallReceiver;
@@ -106,12 +107,24 @@ public class CallMethodInfo {
     }
 
     public void placeCall(String origin, String number, Context c) {
+        placeCall(origin, number, c, false);
+    }
+
+    public void placeCall(String origin, String number, Context c, boolean isVideoCall) {
         StartInCallCallReceiver svcrr = CallMethodHelper.getVoIPResultReceiver(this, origin);
+        StartCallRequest request = new StartCallRequest(number, origin, 0, svcrr);
 
-        StartCallRequest request = new StartCallRequest(
-                number, OriginCodes.DIALPAD_DIRECT_DIAL, 0, svcrr);
-
-        InCallServices.getInstance().startOutCall(
-                DialerApplication.ACLIENT.get(c), this.mComponent, request);
+        if (isVideoCall) {
+            InCallServices.getInstance().startVideoCall(
+                    DialerApplication.ACLIENT.get(c), this.mComponent, request);
+        } else {
+            if (PhoneNumberUtils.isGlobalPhoneNumber(number)) {
+                InCallServices.getInstance().startOutCall(
+                        DialerApplication.ACLIENT.get(c), this.mComponent, request);
+            } else {
+                InCallServices.getInstance().startVoiceCall(
+                        DialerApplication.ACLIENT.get(c), this.mComponent, request);
+            }
+        }
     }
 }
