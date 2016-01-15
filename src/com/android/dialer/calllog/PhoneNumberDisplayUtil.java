@@ -78,7 +78,7 @@ public class PhoneNumberDisplayUtil {
         } else if (!TextUtils.isEmpty(number)) {
             return number.toString() + postDialDigits;
         } else {
-            return "";
+            return context.getResources().getString(R.string.unknown);
         }
     }
 
