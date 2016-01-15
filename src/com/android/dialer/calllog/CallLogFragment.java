@@ -55,7 +55,7 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.R;
 import com.android.dialer.incall.CallMethodInfo;
 import com.android.dialer.list.ListsFragment.HostInterface;
-import com.android.dialer.util.CallMethodHelper;
+import com.android.dialer.incall.CallMethodHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;

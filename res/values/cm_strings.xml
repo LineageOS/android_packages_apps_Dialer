@@ -120,4 +120,7 @@
     <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
 
     <string name="invalid_number_text">"%1$s could not make this call. Is the number correct?"</string>
+
+    <!-- InCall Plugin Settings -->
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>
 </resources>

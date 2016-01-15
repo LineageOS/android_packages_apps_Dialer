@@ -39,7 +39,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.dialer.incall.CallMethodInfo;
-import com.android.dialer.util.CallMethodHelper;
+import com.android.dialer.incall.CallMethodHelper;
 import com.android.dialer.widget.DialerQuickContact;
 import com.android.internal.telephony.util.BlacklistUtils;
 
