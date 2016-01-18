@@ -54,11 +54,11 @@
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Nur ausgehende Anrufe"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Nur entgangene Anrufe"</string>
     <string name="visual_voicemail_title" msgid="4574199312906348905">"Visuelle Mailbox"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"Sie können Ihre Mailbox-Nachrichten einsehen und abhören, ohne eine Nummer anrufen zu müssen. Es können Datengebühren anfallen."</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"Du kannst deine Mailbox-Nachrichten einsehen und abhören, ohne eine Nummer anrufen zu müssen. Es können Datengebühren anfallen."</string>
     <string name="visual_voicemail_settings" msgid="8090338793118794741">"Einstellungen"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Keine Mailbox-Aktualisierungen verfügbar"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Neue Mailbox-Nachricht wartet. Laden momentan nicht möglich."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Richten Sie Ihre Mailbox ein."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Richte deine Mailbox ein."</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Audio nicht verfügbar"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Einrichten"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Mailbox anrufen"</string>
@@ -122,8 +122,8 @@
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> um <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Diese Nummer kann nicht angerufen werden."</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Konfigurieren Sie Ihre Mailbox unter \"Menü\" &gt; \"Einstellungen\"."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Deaktivieren Sie zunächst den Flugmodus, um die Mailbox anzurufen."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Konfiguriere deine Mailbox unter \"Menü\" &gt; \"Einstellungen\"."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Deaktiviere zunächst den Flugmodus, um die Mailbox anzurufen."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Wird geladen…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -146,7 +146,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mailbox-Nachrichten"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> blockieren?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Anrufe von dieser Nummer werden blockiert und Mailbox-Nachrichten automatisch gelöscht."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, Ihnen Mailbox-Nachrichten zu hinterlassen."</string>
+    <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, dir Mailbox-Nachrichten zu hinterlassen."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOCKIEREN"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Blockierung von <xliff:g id="NUMBER">%1$s</xliff:g> aufheben?"</string>
     <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Anrufe von dieser Nummer werden nicht mehr blockiert."</string>
@@ -164,9 +164,9 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videoanruf starten"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Nummer blockieren"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> neue verpasste Anrufe"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Sie haben noch für niemanden eine Kurzwahl festgelegt."</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Du hast noch für niemanden eine Kurzwahl festgelegt."</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Favoriten hinzufügen"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"Sie haben noch keine Kontakte."</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"Du hast noch keine Kontakte."</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Kontakt hinzufügen"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Bild berühren, um alle Nummern zu sehen, oder Bild berühren und halten, um sie neu anzuordnen"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Entfernen"</string>
@@ -220,16 +220,16 @@
     <string name="call_settings_label" msgid="313434211353070209">"Anrufe"</string>
     <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Anrufblockierung"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Anrufblockierung vorübergehend aus"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Die Anrufblockierung wurde deaktiviert, weil Sie innerhalb der letzten 48 Stunden mit diesem Telefon den Notruf gewählt haben. Nach Ablauf dieser 48-Stunden-Frist wird die Blockierung automatisch wieder aktiviert."</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Die Anrufblockierung wurde deaktiviert, weil du innerhalb der letzten 48 Stunden mit diesem Telefon den Notruf gewählt hast. Nach Ablauf dieser 48-Stunden-Frist wird die Blockierung automatisch wieder aktiviert."</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"Nummern importieren"</string>
-    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Sie haben zuvor einige Anrufer markiert, die automatisch über andere Apps an die Mailbox gesendet werden."</string>
+    <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"Du hast zuvor einige Anrufer markiert, die automatisch über andere Apps an die Mailbox gesendet werden."</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Nummern anzeigen"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importieren"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import fehlgeschlagen"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Blockierung der Nummer aufheben"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Nummer hinzufügen"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Anrufe von diesen Nummern werden blockiert und Mailbox-Nachrichten automatisch gelöscht."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Anrufe von diesen Nummern werden blockiert. Die Anrufer haben aber unter Umständen weiterhin die Möglichkeit, Ihnen Mailbox-Nachrichten zu hinterlassen."</string>
+    <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"Anrufe von diesen Nummern werden blockiert. Die Anrufer haben aber unter Umständen weiterhin die Möglichkeit, dir Mailbox-Nachrichten zu hinterlassen."</string>
     <string name="block_list" msgid="7760188925338078011">"Blockierte Nummern"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ist ungültig."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ist bereits blockiert."</string>
@@ -238,11 +238,11 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Anrufkonten"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktivieren"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Berechtigungen festlegen"</string>
-    <string name="permission_no_speeddial" msgid="6882563445996184051">"Aktivieren Sie die Berechtigung \"Kontakte\", um die Kurzwahlfunktion zu verwenden."</string>
-    <string name="permission_no_calllog" msgid="555711464287041043">"Aktivieren Sie die Berechtigung \"Telefon\", um Ihr Anrufprotokoll abzurufen."</string>
-    <string name="permission_no_contacts" msgid="6237980143178936279">"Aktivieren Sie die Berechtigung \"Kontakte\", um Ihre Kontakte abzurufen."</string>
-    <string name="permission_no_voicemail" msgid="8306280257799917574">"Aktivieren Sie die Berechtigung \"Telefon\", um auf Ihre Mailbox zuzugreifen."</string>
-    <string name="permission_no_search" msgid="84152933267902056">"Aktivieren Sie die Berechtigungen \"Kontakte\", um nach Ihren Kontakten zu suchen."</string>
-    <string name="permission_place_call" msgid="2101287782615887547">"Aktivieren Sie die Berechtigung \"Telefon\", um einen Anruf zu tätigen."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Aktiviere die Berechtigung \"Kontakte\", um die Kurzwahlfunktion zu verwenden."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Aktiviere die Berechtigung \"Telefon\", um dein Anrufprotokoll abzurufen."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Aktiviere die Berechtigung \"Kontakte\", um deine Kontakte abzurufen."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Aktiviere die Berechtigung \"Telefon\", um auf deine Mailbox zuzugreifen."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Aktiviere die Berechtigungen \"Kontakte\", um deine Kontakte zu suchen."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Aktiviere die Berechtigung \"Telefon\", um einen Anruf zu tätigen."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Die App \"Telefon\" ist nicht berechtigt, die Systemeinstellungen zu überschreiben."</string>
 </resources>
