@@ -40,6 +40,7 @@
     <string name="card_title_redialing" msgid="8253487008234167266">"पुन: डायल हो रहा है"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"कॉन्फ़्रेंस कॉल"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"इनकमिंग कॉल"</string>
+    <string name="card_title_incoming_work_call" msgid="5601475030981264422">"कार्यस्थल की आवक कॉल"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"कॉल समाप्त"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"होल्ड पर"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"कॉल समाप्त हो रहा है"</string>
@@ -58,10 +59,14 @@
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> छूटी कॉल"</string>
     <string name="notification_missedCallTicker" msgid="504686252427747209">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> की कॉल छूटी"</string>
     <string name="notification_ongoing_call" msgid="7068688957273482989">"चल रही कॉल"</string>
+    <string name="notification_ongoing_work_call" msgid="4071124825337695596">"कार्यस्थल की जारी कॉल"</string>
     <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"चल रहा वाई-फ़ाई कॉल"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="2914071877370405192">"कार्यस्थल की जारी वाई-फ़ाई कॉल"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"होल्ड पर"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"इनकमिंग कॉल"</string>
+    <string name="notification_incoming_work_call" msgid="3581021176870685239">"कार्यस्थल की आवक कॉल"</string>
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"इनकमिंग वाई-फ़ाई कॉल"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="7126555701581469722">"कार्यस्थल की वाई-फ़ाई आवक कॉल"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"इनकमिंग वीडियो कॉल"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"इनकमिंग वीडियो अनुरोध"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"नया वॉयस मेल"</string>
