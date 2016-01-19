@@ -17,7 +17,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
         android:id="@+id/emptyListViewImage"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_width="match_parent"
         android:gravity="center_horizontal" />
 
@@ -29,9 +29,93 @@
         android:textSize="@dimen/empty_list_message_text_size"
         android:textColor="@color/empty_list_text_color"
         android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingLeft="16dp" />
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/empty_dialpad_example_seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/T9SubTextStyleBold" />
+            <TextView
+                    android:id="@+id/empty_dialpad_pqrs"
+                    android:textColor="@color/recent_subtitle_color"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:text="@string/empty_dialpad_example_pqrs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/empty_dialpad_example_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/T9SubTextStyleBold" />
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/empty_dialpad_example_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/T9SubTextStyleBold" />
+            <TextView
+                    android:id="@+id/empty_dialpad_abc"
+                    android:textSize="10sp"
+                    android:textColor="@color/recent_subtitle_color"
+                    android:gravity="center"
+                    android:text="@string/empty_dialpad_example_abc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/empty_dialpad_example_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/T9SubTextStyleBold" />
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/empty_dialpad_example_six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/T9SubTextStyleBold" />
+            <TextView
+                    android:id="@+id/empty_dialpad_mno"
+                    android:textColor="@color/recent_subtitle_color"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:text="@string/empty_dialpad_example_mno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/emptyListViewAction"
@@ -41,8 +125,8 @@
         android:layout_gravity="center_horizontal"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         style="@style/TextActionStyle" />

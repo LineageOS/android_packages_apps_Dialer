@@ -79,6 +79,7 @@ import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
+import com.android.dialer.incall.CallMethodInfo;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.DragDropController;
 import com.android.dialer.list.ListsFragment;
@@ -116,6 +117,7 @@ import java.util.Locale;
  */
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         DialpadFragment.OnDialpadQueryChangedListener,
+        DialpadFragment.OnCallMethodChangedListener,
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
         DialpadFragment.HostInterface,
@@ -260,6 +262,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      * {@link #onResume()} to populate the search box.
      */
     private String mVoiceSearchQuery;
+
+    @Override
+    public void onCallMethodChangedListener(CallMethodInfo cmi) {
+        if (mSmartDialSearchFragment != null) {
+            mSmartDialSearchFragment.setCurrentCallMethod(cmi);
+        }
+    }
 
     protected class OptionsPopupMenu extends PopupMenu {
         public OptionsPopupMenu(Context context, View anchor) {

@@ -376,8 +376,11 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         mActivityOnTouchListener = onTouchListener;
     }
 
+    LayoutInflater mInflateView;
+
     @Override
     protected View inflateView(LayoutInflater inflater, ViewGroup container) {
+        mInflateView = inflater;
         final LinearLayout parent = (LinearLayout) super.inflateView(inflater, container);
         final int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {

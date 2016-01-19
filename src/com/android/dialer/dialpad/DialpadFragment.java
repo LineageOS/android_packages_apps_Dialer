@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -97,7 +98,9 @@ import com.android.phone.common.util.StartInCallCallReceiver;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -148,6 +151,10 @@ public class DialpadFragment extends Fragment
         void onDialpadQueryChanged(String query);
     }
 
+    public interface OnCallMethodChangedListener {
+        void onCallMethodChangedListener(CallMethodInfo cmi);
+    }
+
     public interface HostInterface {
         /**
          * Notifies the parent activity that the space above the dialpad has been tapped with
@@ -178,6 +185,8 @@ public class DialpadFragment extends Fragment
 
 
     private OnDialpadQueryChangedListener mDialpadQueryListener;
+
+    private OnCallMethodChangedListener mCallMethodChangedListener;
 
     private DialpadView mDialpadView;
     private EditText mDigits;
@@ -459,6 +468,7 @@ public class DialpadFragment extends Fragment
                 if (mCurrentCallMethodInfo == null ||
                         !callMethodInfo.equals(mCurrentCallMethodInfo)) {
                     onCallMethodChanged(callMethodInfo);
+                    mCallMethodChangedListener.onCallMethodChangedListener(callMethodInfo);
                 }
             }
 
@@ -470,6 +480,43 @@ public class DialpadFragment extends Fragment
         });
     }
 
+    private void callMethodCredits(CallMethodInfo cmi) {
+        String creditText = cmi.getCreditsDescriptionText(getResources());
+        String buttonText = null;
+
+        boolean warnIfLow = false;
+        if (TextUtils.isEmpty(creditText)) {
+            clearCallRateInformation();
+            return;
+        } else {
+            if (cmi.usesSubscriptions()) {
+                buttonText = cmi.mSubscriptionButtonText;
+            } else {
+                if (cmi.getCurrencyAmount() <= cmi.mCreditWarn) {
+                    warnIfLow = true;
+                }
+                buttonText = mCurrentCallMethodInfo.mCreditButtonText;
+            }
+        }
+        setCallRateInformation(creditText, buttonText, cmi.mManageCreditIntent);
+
+        /*creditsAvailable.setText(TextUtils.isEmpty(startText) ? "" : startText);
+        creditsAvailable.setTextColor(warnIfLow ? getResources().getColor(R.color
+                .credit_banner_alert_color) : getResources().getColor(R.color.dialer_theme_color));
+        creditWarningImage.setVisibility(warnIfLow ? View.VISIBLE : View.GONE);
+
+        if (!TextUtils.isEmpty(endText)) {
+            creditsIntentButton.setText(endText);
+            loadCreditIntent(mCurrentCallMethodInfo);
+        } else {
+            // if we're going to try to get the intent for this button, wait till we
+            // have that to show the credits banner. If there's no hope, assume that we
+            // will go on without the creditIntentButton.
+            //animateCreditBanner(false);
+        } */
+
+    }
+
     private void onCallMethodChanged(CallMethodInfo callMethodInfo) {
         mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(callMethodInfo);
         mCurrentCallMethodInfo = callMethodInfo;
@@ -478,11 +525,13 @@ public class DialpadFragment extends Fragment
         //onDialpadQueryChanged(query, true);
 
         if (callMethodInfo != null && callMethodInfo.mIsInCallProvider) {
+            callMethodCredits(callMethodInfo);
             //loadCreditComponentInfo(callMethodInfo);
 
             // Hide overflow pause menu if call provider selected
             //hideShowOverflow(false);
         } else {
+            clearCallRateInformation();
 
             // show overflow pause menu if sim card
             //hideShowOverflow(true);
@@ -669,11 +718,11 @@ public class DialpadFragment extends Fragment
     }
 
     public void clearCallRateInformation() {
-        setCallRateInformation(null, null);
+        setCallRateInformation(null, null, null);
     }
 
-    public void setCallRateInformation(String countryName, String displayRate) {
-        mDialpadView.setCallRateInformation(countryName, displayRate);
+    public void setCallRateInformation(String countryName, String displayRate, PendingIntent p) {
+        mDialpadView.setCallRateInformation(countryName, displayRate, p);
     }
 
     /**
@@ -762,6 +811,7 @@ public class DialpadFragment extends Fragment
 
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
         mDialpadQueryListener = activity;
+        mCallMethodChangedListener = activity;
 
         mSims = CallMethodUtils.getSimInfoList(getActivity());
         if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
@@ -1486,7 +1536,7 @@ public class DialpadFragment extends Fragment
      * for each item in the "dialpad chooser" list.
      */
     private static class DialpadChooserAdapter extends BaseAdapter {
-        private LayoutInflater mInflater;
+        public LayoutInflater mInflater;
 
         // Simple struct for a single "choice" item.
         static class ChoiceItem {

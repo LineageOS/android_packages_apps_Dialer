@@ -19,16 +19,20 @@ import static android.Manifest.permission.CALL_PHONE;
 
 import android.app.Activity;
 import android.content.Loader;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
+import com.android.dialer.incall.CallMethodInfo;
 import com.android.dialer.widget.EmptyContentView;
 
 import java.util.ArrayList;
@@ -41,6 +45,8 @@ public class SmartDialSearchFragment extends SearchFragment
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
 
     private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
+
+    private CallMethodInfo mCurrentCallMethod;
 
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
@@ -84,6 +90,8 @@ public class SmartDialSearchFragment extends SearchFragment
 
     @Override
     protected void setupEmptyView() {
+        final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
+        adapter.getCount();
         if (mEmptyView != null && getActivity() != null) {
             if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
                 mEmptyView.setImage(R.drawable.empty_contacts);
@@ -91,11 +99,36 @@ public class SmartDialSearchFragment extends SearchFragment
                 mEmptyView.setDescription(R.string.permission_place_call);
                 mEmptyView.setActionClickedListener(this);
             } else {
-                mEmptyView.setImage(EmptyContentView.NO_IMAGE);
-                mEmptyView.setActionLabel(EmptyContentView.NO_LABEL);
-                mEmptyView.setDescription(EmptyContentView.NO_LABEL);
+                if (adapter.getCount() == 0) {
+                    mEmptyView.setActionLabel(mEmptyView.NO_LABEL);
+                    mEmptyView.setImage(R.drawable.empty_contacts);
+
+                    if (mCurrentCallMethod == null) {
+                        Resources r = getResources();
+                        mEmptyView.setImage(R.drawable.empty_contacts);
+                        mEmptyView.setDescription(
+                                String.format(r.getString(R.string.empty_dialpad_t9_example),
+                                        r.getString(R.string.empty_dialpad_example_name)));
+
+                        int[] idsToFormat = new int[] {
+                                R.id.empty_dialpad_pqrs,
+                                R.id.empty_dialpad_abc,
+                                R.id.empty_dialpad_mno
+                        };
+                        for (int id : idsToFormat) {
+                            TextView textView = (TextView) mEmptyView.findViewById(id);
+                            textView.setText(Html.fromHtml(textView.getText().toString()));
+                        }
+                    } else {
+
+                    }
+                }
             }
         }
+    }
+
+    public void setCurrentCallMethod(CallMethodInfo cmi) {
+        mCurrentCallMethod = cmi;
     }
 
     @Override

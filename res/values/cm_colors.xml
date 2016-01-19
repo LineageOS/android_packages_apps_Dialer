@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- T9 hint color -->
+    <color name="recent_subtitle_color">#a79f9c</color>
+
+</resources>

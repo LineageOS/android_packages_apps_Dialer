@@ -23,14 +23,22 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.telephony.PhoneNumberUtils;
+import android.text.TextUtils;
+import android.util.Log;
 import com.android.dialer.DialerApplication;
 import com.android.dialer.incall.CallMethodHelper;
 import com.android.phone.common.util.StartInCallCallReceiver;
 import com.cyanogen.ambient.incall.InCallServices;
+import com.cyanogen.ambient.incall.extension.CreditBalance;
 import com.cyanogen.ambient.incall.extension.CreditInfo;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.ambient.incall.extension.StartCallRequest;
+import com.cyanogen.ambient.incall.extension.SubscriptionInfo;
 import com.google.common.base.Objects;
+
+import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.List;
 
 public class CallMethodInfo {
 
@@ -70,6 +78,8 @@ public class CallMethodInfo {
                 mLoginIcon, mActionOneIcon, mActionTwoIcon, pluginResources, mActionOneText,
                 mActionTwoText, mIsInCallProvider);
     }
+
+    public static final String TAG = "CallMethodInfo";
 
     @Override
     public boolean equals(Object object) {
@@ -126,5 +136,82 @@ public class CallMethodInfo {
                         DialerApplication.ACLIENT.get(c), this.mComponent, request);
             }
         }
+    }
+
+    private boolean isSubscription;
+    private boolean isCredits;
+    private int mCurrencyAmmount;
+
+    public String getCreditsDescriptionText(Resources r) {
+        String ret = null;
+        CreditInfo ci =  this.mProviderCreditInfo;
+
+        List<SubscriptionInfo> subscriptionInfos = ci.subscriptions;
+
+        if (subscriptionInfos != null && !subscriptionInfos.isEmpty()) {
+            int subscriptionSize = subscriptionInfos.size();
+            StringBuilder subscripText = new StringBuilder();
+            int extraCount = 0;
+            for (int i = 0; i < subscriptionSize; i++) {
+                SubscriptionInfo si = subscriptionInfos.get(i);
+                if (i >= 3) {
+                    extraCount++;
+                    if (i == subscriptionSize - 1) {
+                        subscripText.append("+" + extraCount);
+                    }
+                } else {
+                    // Region codes should be no larger than three char long the credits bar
+                    // can only show so much.
+                    if (si.regionCode.length() <= 3) {
+                        subscripText.append(si.regionCode);
+                        if (i < subscriptionSize - 1) {
+                            subscripText.append(", ");
+                        }
+                    }
+                }
+            }
+            return subscripText.toString();
+        } else {
+            CreditBalance balance = ci.balance;
+            if (balance != null) {
+                mCurrencyAmmount = (int) balance.balance;
+                try {
+                    if (balance.currencyCode != null) {
+                        Currency currencyCode = Currency.getInstance(balance.currencyCode);
+                        BigDecimal availableCredit = BigDecimal.valueOf(mCurrencyAmmount,
+                                currencyCode.getDefaultFractionDigits());
+
+
+                         return currencyCode.getSymbol(r.getConfiguration().locale)
+                                + availableCredit.toString();
+                    } else {
+                        throw new IllegalArgumentException();
+                    }
+                } catch (IllegalArgumentException e) {
+                    Log.w(TAG, "Unable to retrieve currency code for plugin: " +
+                            this.mComponent);
+
+                    return null;
+                }
+            } else {
+                Log.e(TAG, "Plugin has credit component but the balance and subscriptions are" +
+                        " null. This should never happen. Not showing credit banner due to " +
+                        "failures.");
+
+                return null;
+            }
+        }
+    }
+
+    public boolean usesSubscriptions() {
+        return isSubscription;
+    }
+
+    public boolean usesCurrency() {
+        return isCredits;
+    }
+
+    public int getCurrencyAmount() {
+        return mCurrencyAmmount;
     }
 }

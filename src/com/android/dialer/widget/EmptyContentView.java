@@ -17,6 +17,7 @@
 package com.android.dialer.widget;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -75,6 +76,16 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
             mDescriptionView.setVisibility(View.GONE);
         } else {
             mDescriptionView.setText(resourceId);
+            mDescriptionView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setDescription(String string) {
+        if (TextUtils.isEmpty(string)) {
+            mDescriptionView.setText(null);
+            mDescriptionView.setVisibility(View.GONE);
+        } else {
+            mDescriptionView.setText(string);
             mDescriptionView.setVisibility(View.VISIBLE);
         }
     }
