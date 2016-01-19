@@ -129,6 +129,11 @@
 
     </LinearLayout>
 
+    <ViewStub
+        android:id="@+id/spam_actions_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:id="@+id/details_action"
         style="@style/CallLogActionStyle">
