@@ -37,7 +37,7 @@
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mailbox gelöscht"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"Rückgängig"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Anrufliste löschen?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Alle Anrufe werden aus Ihrem Verlauf gelöscht."</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Alle Anrufe werden aus deinem Verlauf gelöscht."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Anrufliste wird gelöscht…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mailbox-Nachrichten </item>
@@ -135,10 +135,10 @@
     <string name="activity_not_available" msgid="2287665636817987623">"Keine entsprechende App auf diesem Gerät"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"In Kontakten suchen"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"Nummer hinzufügen oder in Kontakten suchen"</string>
-    <string name="call_log_all_empty" msgid="8357417710416340920">"Ihre Anrufliste ist leer."</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"Deine Anrufliste ist leer."</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Anrufen"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Keine verpassten Anrufe"</string>
-    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Ihr Mailbox-Posteingang ist leer."</string>
+    <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Dein Mailbox-Posteingang ist leer."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Nur Favoriten anzeigen"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Anrufliste"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
