@@ -51,8 +51,8 @@
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Videoanfrage wird gesendet."</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Videoanruf kann nicht verbunden werden."</string>
     <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoanfrage abgelehnt"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Ihre Rückrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Ihre Notrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Deine Rückrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Deine Notrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Verbindung wird aufgebaut..."</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Entgangener Anruf"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Entgangene Anrufe"</string>

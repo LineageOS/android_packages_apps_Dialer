@@ -61,12 +61,12 @@
     <string name="notification_ongoing_call" msgid="7068688957273482989">"Abian den deia"</string>
     <string name="notification_ongoing_work_call" msgid="4071124825337695596">"Laneko dei bat abian da"</string>
     <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Wi-Fi deia abian"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="2914071877370405192">"Laneko Wi-Fi dei bat abian da"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="2914071877370405192">"Wi-Fi bidezko laneko dei bat abian da"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"Zain"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"Sarrerako deia"</string>
     <string name="notification_incoming_work_call" msgid="3581021176870685239">"Laneko dei bat jaso da"</string>
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Sarrerako Wi-Fi deia"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="7126555701581469722">"Laneko Wi-Fi dei bat jaso da"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="7126555701581469722">"Wi-Fi bidezko laneko dei bat jaso da"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Sarrerako bideo-deia"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Sarrerako bideo-eskaera"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"Ahots-mezu berria"</string>
