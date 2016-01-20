@@ -844,6 +844,12 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     }
 
     public void showAnswerFragment(boolean show) {
+        // CallCardFragment is the parent fragment of AnswerFragment.
+        // Must create the CallCardFragment first before creating
+        // AnswerFragment if CallCardFragment is null.
+        if (show && getCallCardFragment() == null) {
+            showCallCardFragment(true);
+        }
         showFragment(TAG_ANSWER_FRAGMENT, show, true);
     }
 
@@ -887,6 +893,12 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         }
         if (mAnswerFragment != null) {
             mAnswerFragment.dismissPendingDialogs();
+        }
+
+        SelectPhoneAccountDialogFragment dialogFragment = (SelectPhoneAccountDialogFragment)
+                getFragmentManager().findFragmentByTag(TAG_SELECT_ACCT_FRAGMENT);
+        if (dialogFragment != null) {
+            dialogFragment.dismiss();
         }
     }
 
