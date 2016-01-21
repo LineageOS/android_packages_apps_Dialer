@@ -18,10 +18,9 @@ package com.android.incallui;
 
 import android.content.Context;
 
+import com.android.dialer.compat.UserManagerCompat;
 import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.InCallPresenter.InCallState;
-
-import android.telecom.VideoProfile;
 
 import java.util.List;
 
@@ -281,8 +280,8 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             return;
         }
         mHasTextMessages = textMsgs != null;
-        boolean withSms =
-                call.can(android.telecom.Call.Details.CAPABILITY_RESPOND_VIA_TEXT)
+        boolean withSms = UserManagerCompat.isUserUnlocked(getUi().getContext())
+                && call.can(android.telecom.Call.Details.CAPABILITY_RESPOND_VIA_TEXT)
                 && mHasTextMessages;
 
         // Only present the user with the option to answer as a video call if the incoming call is
