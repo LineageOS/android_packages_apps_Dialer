@@ -35,6 +35,7 @@ import android.telecom.VideoProfile;
 
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.dialer.compat.CallAudioStateCompat;
+import com.android.dialer.compat.UserManagerCompat;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallCameraManager.Listener;
 import com.android.incallui.InCallPresenter.CanAddCallListener;
@@ -378,7 +379,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 && call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
         final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
 
-        final boolean showAddCall = TelecomAdapter.getInstance().canAddCall(call);
+        final boolean showAddCall = TelecomAdapter.getInstance().canAddCall(call)
+                && UserManagerCompat.isUserUnlocked(ui.getContext());
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
         final boolean showUpgradeToVideo = !isVideo && hasVideoCallCapabilities(call);
