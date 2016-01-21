@@ -19,6 +19,7 @@ package com.android.incallui;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_ADD_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_AUDIO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_DIALPAD;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_DOWNGRADE_TO_AUDIO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_HOLD;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MERGE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MUTE;
@@ -33,6 +34,7 @@ import android.os.Bundle;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
+import com.android.contacts.common.compat.CallSdkCompat;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.dialer.compat.CallAudioStateCompat;
 import com.android.dialer.compat.UserManagerCompat;
@@ -260,8 +262,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        VideoProfile videoProfile = new VideoProfile(
-                VideoProfile.STATE_AUDIO_ONLY, VideoProfile.QUALITY_DEFAULT);
+        VideoProfile videoProfile = new VideoProfile(VideoProfile.STATE_AUDIO_ONLY);
         videoCall.sendSessionModifyRequest(videoProfile);
     }
 
@@ -384,7 +385,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
         final boolean showUpgradeToVideo = !isVideo && hasVideoCallCapabilities(call);
-
+        final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
         ui.showButton(BUTTON_AUDIO, true);
@@ -394,6 +395,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_MUTE, showMute);
         ui.showButton(BUTTON_ADD_CALL, showAddCall);
         ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
+        ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo);
         ui.showButton(BUTTON_DIALPAD, true);
@@ -409,6 +411,17 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
         // In L, this single flag represents both video transmitting and receiving capabilities
         return call.can(android.telecom.Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX);
+    }
+
+    /**
+     * Determines if downgrading from a video call to an audio-only call is supported.  In order to
+     * support downgrade to audio, the SDK version must be >= N and the call should NOT have the
+     * {@link android.telecom.Call.Details#CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO}.
+     * @param call The call.
+     * @return {@code true} if downgrading to an audio-only call from a video call is supported.
+     */
+    private boolean isDowngradeToAudioSupported(Call call) {
+        return !call.can(CallSdkCompat.Details.CAPABILITY_CANNOT_DOWNGRADE_VIDEO_TO_AUDIO);
     }
 
     public void refreshMuteState() {
