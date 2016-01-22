@@ -40,6 +40,7 @@ import com.android.dialer.util.DialerUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Helper class to fill in the views in {@link PhoneCallDetailsViews}.
@@ -110,10 +111,8 @@ public class PhoneCallDetailsHelper {
             callCount = null;
         }
 
-        CharSequence callLocationAndDate = getCallLocationAndDate(details);
-
-        // Set the call count, location and date.
-        setCallCountAndDate(views, callCount, callLocationAndDate);
+        // Set the call count, location, date and if voicemail, set the duration.
+        setDetailText(views, callCount, details);
 
         // Set the account label if it exists.
         String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
@@ -314,10 +313,11 @@ public class PhoneCallDetailsHelper {
         }
     }
 
-    /** Sets the call count and date. */
-    private void setCallCountAndDate(PhoneCallDetailsViews views, Integer callCount,
-            CharSequence dateText) {
+    /** Sets the call count, date, and if it is a voicemail, sets the duration. */
+    private void setDetailText(PhoneCallDetailsViews views, Integer callCount,
+                               PhoneCallDetails details) {
         // Combine the count (if present) and the date.
+        CharSequence dateText = getCallLocationAndDate(details);
         final CharSequence text;
         if (callCount != null) {
             text = mResources.getString(
@@ -326,6 +326,22 @@ public class PhoneCallDetailsHelper {
             text = dateText;
         }
 
-        views.callLocationAndDate.setText(text);
+        if (details.callTypes[0] == Calls.VOICEMAIL_TYPE) {
+            views.callLocationAndDate.setText(mResources.getString(
+                    R.string.voicemailCallLogDateTimeFormatWithDuration, text,
+                    getVoicemailDuration(details)));
+        } else {
+            views.callLocationAndDate.setText(text);
+        }
+
+    }
+
+    private String getVoicemailDuration(PhoneCallDetails details) {
+        long minutes = TimeUnit.SECONDS.toMinutes(details.duration);
+        long seconds = details.duration - TimeUnit.MINUTES.toSeconds(minutes);
+        if (minutes > 99) {
+            minutes = 99;
+        }
+        return mResources.getString(R.string.voicemailDurationFormat, minutes, seconds);
     }
 }

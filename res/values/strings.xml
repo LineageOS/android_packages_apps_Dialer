@@ -453,6 +453,12 @@
          The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
     <string name="voicemailCallLogDateTimeFormat"><xliff:g id="date" example="Jul 25, 2014">%1$s</xliff:g> at <xliff:g id="time" example="2:49 PM">%2$s</xliff:g></string>
 
+    <!-- Format for duration of voicemails which are displayed when viewing voicemail logs. For example "01:22" -->
+    <string name="voicemailDurationFormat"><xliff:g id="minutes" example="10">%1$02d</xliff:g>:<xliff:g id="seconds" example="20">%2$02d</xliff:g></string>
+
+    <!-- A format string used for displaying the date, time and duration for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM • 00:34 -->
+    <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g id="dateAndTime" example="Jul 25, 2014 at 2:49PM">%1$s</xliff:g> \u2022 <xliff:g id="duration" example="01:22">%2$s</xliff:g></string>
+
     <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
     <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Can\'t call this number</string>

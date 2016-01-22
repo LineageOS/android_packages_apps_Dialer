@@ -34,6 +34,8 @@ import com.android.dialer.util.LocaleTestUtils;
 
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Unit tests for {@link PhoneCallDetailsHelper}.
@@ -141,7 +143,27 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
     public void testVoicemailLocationNotShownWithDate() {
         setVoicemailPhoneCallDetailsWithDate(TEST_DATE);
-        assertLocationAndDateExactEquals("Jun 3 at 1:00 PM");
+        assertLocationAndDateExactEquals("Jun 3 at 1:00 PM • 99:20");
+    }
+
+    public void testVoicemailDuration() {
+        setVoicemailPhoneCallDetailsWithDuration(100);
+        assertDurationExactEquals("01:40");
+    }
+
+    public void testVoicemailDuration_Capped() {
+        setVoicemailPhoneCallDetailsWithDuration(TEST_DURATION);
+        assertDurationExactEquals("99:20");
+    }
+
+    public void testVoicemailDuration_Zero() {
+        setVoicemailPhoneCallDetailsWithDuration(0);
+        assertDurationExactEquals("00:00");
+    }
+
+    public void testVoicemailDuration_EvenMinute() {
+        setVoicemailPhoneCallDetailsWithDuration(60);
+        assertDurationExactEquals("01:00");
     }
 
     /** Asserts that a char sequence is actually a Spanned corresponding to the expected HTML. */
@@ -346,6 +368,14 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertEquals(text, mViews.callLocationAndDate.getText());
     }
 
+    /** Asserts that the duration is exactly as included in the location and date text field. */
+    private void assertDurationExactEquals(String text) {
+        Matcher matcher = Pattern.compile("(.*) (\\u2022) (\\d{2}:\\d{2})").matcher(
+                mViews.callLocationAndDate.getText());
+        assertEquals(true, matcher.matches());
+        assertEquals(text, matcher.group(3));
+    }
+
     /** Asserts that the video icon is shown. */
     private void assertIsVideoCall(boolean isVideoCall) {
         assertEquals(isVideoCall, mViews.callTypeIcons.isVideoShown());
@@ -403,6 +433,14 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private void setVoicemailPhoneCallDetailsWithDate(long date) {
         PhoneCallDetails details = getPhoneCallDetails();
         details.date = date;
+        details.callTypes = new int[] {Calls.VOICEMAIL_TYPE};
+        mHelper.setPhoneCallDetails(mViews, details);
+    }
+
+    /** Sets the voice mail details with default values and the given duration. */
+    private void setVoicemailPhoneCallDetailsWithDuration(long duration) {
+        PhoneCallDetails details = getPhoneCallDetails();
+        details.duration = duration;
         details.callTypes = new int[] {Calls.VOICEMAIL_TYPE};
         mHelper.setPhoneCallDetails(mViews, details);
     }
