@@ -241,7 +241,9 @@ public class CallerInfo {
                 columnIndex = getColumnIndexForPersonId(contactRef, cursor);
                 if (columnIndex != -1) {
                     contactId = cursor.getLong(columnIndex);
-                    if (contactId != 0 && !Contacts.isEnterpriseContactId(contactId)) {
+                    // QuickContacts in M doesn't support enterprise contact id
+                    if (contactId != 0 && (ContactsUtils.FLAG_N_FEATURE
+                            || !Contacts.isEnterpriseContactId(contactId))) {
                         info.contactIdOrZero = contactId;
                         Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero);
 

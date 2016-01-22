@@ -426,11 +426,14 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
             cce.displayPhotoUri = info.contactDisplayPhotoUri;
         }
 
-        if (info.lookupKeyOrNull == null || info.contactIdOrZero == 0) {
-            Log.v(TAG, "lookup key is null or contact ID is 0. Don't create a lookup uri.");
-            cce.lookupUri = null;
-        } else {
+        // Support any contact id in N because QuickContacts in N starts supporting enterprise
+        // contact id
+        if (info.lookupKeyOrNull != null
+                && (ContactsUtils.FLAG_N_FEATURE || info.contactIdOrZero != 0)) {
             cce.lookupUri = Contacts.getLookupUri(info.contactIdOrZero, info.lookupKeyOrNull);
+        } else {
+            Log.v(TAG, "lookup key is null or contact ID is 0 on M. Don't create a lookup uri.");
+            cce.lookupUri = null;
         }
 
         cce.photo = photo;
