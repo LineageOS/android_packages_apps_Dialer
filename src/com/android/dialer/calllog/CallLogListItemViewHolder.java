@@ -38,8 +38,6 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.dialer.incall.CallMethodInfo;
-import com.android.dialer.incall.CallMethodHelper;
 import com.android.dialer.widget.DialerQuickContact;
 import com.android.internal.telephony.util.BlacklistUtils;
 
@@ -55,6 +53,8 @@ import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
+import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 /**

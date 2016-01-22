@@ -54,10 +54,10 @@ import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
 import com.android.dialer.contact.ContactUpdateService;
-import com.android.dialer.incall.CallMethodHelper;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 
+import com.android.phone.common.incall.CallMethodHelper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 

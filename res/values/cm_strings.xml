@@ -134,6 +134,5 @@
 
     <!-- InCall Plugin Settings -->
     <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>
-
-
+    
 </resources>

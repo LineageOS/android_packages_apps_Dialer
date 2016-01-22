@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.android.dialer.DialtactsActivity;
+import com.android.phone.common.incall.CallMethodUtils;
 
 public class CallMethodStatusReceiver extends BroadcastReceiver {
 

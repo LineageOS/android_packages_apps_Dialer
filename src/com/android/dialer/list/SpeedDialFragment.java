@@ -54,10 +54,9 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
-import com.android.dialer.incall.CallMethodInfo;
-import com.android.dialer.incall.CallMethodHelper;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.EmptyContentView;
+import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

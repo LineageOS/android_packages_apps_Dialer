@@ -1,19 +1,16 @@
 package com.android.dialer.settings;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import com.android.dialer.DialerApplication;
-import com.android.dialer.incall.CallMethodInfo;
-import com.android.dialer.incall.CallMethodHelper;
+import com.android.phone.common.ambient.AmbientConnection;
+import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
 import com.cyanogen.ambient.callerinfo.CallerInfoServices;
 import com.cyanogen.ambient.callerinfo.results.IsAuthenticatedResult;
 import com.cyanogen.ambient.callerinfo.util.CallerInfoHelper;

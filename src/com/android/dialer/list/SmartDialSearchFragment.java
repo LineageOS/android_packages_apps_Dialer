@@ -24,18 +24,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
-import android.view.View;
 
 import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
-import com.android.dialer.incall.CallMethodInfo;
 import com.android.dialer.widget.EmptyContentView;
-
-import java.util.ArrayList;
+import com.android.phone.common.incall.CallMethodInfo;
 
 /**
  * Implements a fragment to load and display SmartDial search results.

@@ -33,10 +33,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Trace;
 import android.provider.CallLog.Calls;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.preference.PreferenceManager;
-import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
@@ -54,7 +51,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -79,7 +75,6 @@ import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
-import com.android.dialer.incall.CallMethodInfo;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.DragDropController;
 import com.android.dialer.list.ListsFragment;
@@ -95,9 +90,10 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
-import com.android.dialer.widget.SearchEditTextLayout.Callback;
 import com.android.dialerbind.DatabaseHelperManager;
 import com.android.phone.common.animation.AnimUtils;
+import com.android.phone.common.ambient.AmbientConnection;
+import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.util.SettingsUtil;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -1313,7 +1309,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     new StartInCallCallReceiver(new Handler(Looper.getMainLooper())));
 
             InCallServices.getInstance().startVoiceCallForMimeType(
-                    DialerApplication.ACLIENT.get(this), mimeType, request);
+                    AmbientConnection.CLIENT.get(this), mimeType, request);
         }
         mClearSearchOnPause = true;
     }

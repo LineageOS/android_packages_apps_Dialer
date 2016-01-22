@@ -10,7 +10,8 @@ phone_common_dir := ../PhoneCommon
 src_dirs := src \
     $(incallui_dir)/src \
     $(contacts_common_dir)/src \
-    $(phone_common_dir)/src
+    $(phone_common_dir)/src \
+    $(phone_common_dir)/src-ambient
 
 res_dirs := res \
     $(incallui_dir)/res \

@@ -42,7 +42,7 @@ import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
-import com.android.dialer.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodHelper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
