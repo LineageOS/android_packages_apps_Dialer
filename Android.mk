@@ -6,6 +6,8 @@ LOCAL_MODULE_TAGS := optional
 incallui_dir := ../InCallUI
 contacts_common_dir := ../ContactsCommon
 phone_common_dir := ../PhoneCommon
+supportdesign_dir := ../../../external/android/support-prebuilt/support-design
+appcompat_dir := ../../../external/android/support-prebuilt/appcompat
 
 src_dirs := src \
     $(incallui_dir)/src \
@@ -16,7 +18,9 @@ src_dirs := src \
 res_dirs := res \
     $(incallui_dir)/res \
     $(contacts_common_dir)/res \
-    $(phone_common_dir)/res
+    $(phone_common_dir)/res \
+    $(supportdesign_dir)/res \
+    $(appcompat_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs)) $(call all-Iaidl-files-under, $(src_dirs))
 LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/contacts/NameSplitter.java \
@@ -29,6 +33,8 @@ LOCAL_ASSET_DIR += $(LOCAL_PATH)/assets
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
+    --extra-packages android.support.design \
+    --extra-packages android.support.v7.appcompat \
     --extra-packages android.support.v7.cardview \
     --extra-packages android.support.v7.recyclerview \
     --extra-packages android.support.v7.appcompat \
@@ -56,7 +62,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     com.android.vcard \
     guava \
     libphonenumber \
-    org.cyanogenmod.platform.sdk
+    org.cyanogenmod.platform.sdk \
+    dialernext-android-support-design
 
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
@@ -69,6 +76,13 @@ LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
 #LOCAL_SDK_VERSION := current
 
 include $(BUILD_PACKAGE)
+
+include $(CLEAR_VARS)
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
+    dialernext-android-support-design:$(supportdesign_dir)/android-support-design.jar \
+    dialernext-android-support-v7-appcompat:$(appcompat_dir)/android-support-v7-appcompat.jar
+
+include $(BUILD_MULTI_PREBUILT)
 
 # Use the following include to make our test apk.
 include $(call all-makefiles-under,$(LOCAL_PATH))
