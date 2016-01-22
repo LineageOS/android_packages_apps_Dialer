@@ -150,6 +150,7 @@ public class DialpadFragment extends Fragment
 
     public interface OnCallMethodChangedListener {
         void onCallMethodChangedListener(CallMethodInfo cmi);
+        void onCallMethodsAvailable(HashMap<ComponentName, CallMethodInfo> availableProviders);
     }
 
     public interface HostInterface {
@@ -465,7 +466,6 @@ public class DialpadFragment extends Fragment
                 if (mCurrentCallMethodInfo == null ||
                         !callMethodInfo.equals(mCurrentCallMethodInfo)) {
                     onCallMethodChanged(callMethodInfo);
-                    mCallMethodChangedListener.onCallMethodChangedListener(callMethodInfo);
                 }
             }
 
@@ -517,6 +517,8 @@ public class DialpadFragment extends Fragment
     private void onCallMethodChanged(CallMethodInfo callMethodInfo) {
         mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(callMethodInfo);
         mCurrentCallMethodInfo = callMethodInfo;
+        mCallMethodChangedListener.onCallMethodChangedListener(callMethodInfo);
+
         //mSmartDialAdapter.setSelectedCallMethod(mCurrentCallMethodInfo);
         //String query = (mDigits != null) ? mDigits.getText().toString() : "";
         //onDialpadQueryChanged(query, true);
@@ -542,6 +544,7 @@ public class DialpadFragment extends Fragment
     private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
         mAllAvailableProviders.clear();
         CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
+        mCallMethodChangedListener.onCallMethodsAvailable(mAllAvailableProviders);
         updateCallMethodSpinner();
     }
 

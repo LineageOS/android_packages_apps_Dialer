@@ -2,5 +2,6 @@
 <resources>
     <!-- T9 hint color -->
     <color name="recent_subtitle_color">#a79f9c</color>
+    <color name="hint_image_color">#b1b1b1</color>
 
 </resources>

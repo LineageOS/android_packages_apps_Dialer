@@ -103,6 +103,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
     private int mStarredIndex;
     protected int mPinnedIndex;
     protected int mContactIdIndex;
+    private int mPhoneNumberMimeTypeIndex;
 
     /** Indicates whether a drag is in process. */
     private boolean mInDragging = false;
@@ -185,6 +186,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         mIsDefaultNumberIndex = ContactTileLoaderFactory.IS_DEFAULT_NUMBER;
         mPinnedIndex = ContactTileLoaderFactory.PINNED;
         mContactIdIndex = ContactTileLoaderFactory.CONTACT_ID_FOR_DATA;
+        mPhoneNumberMimeTypeIndex = ContactTileLoaderFactory.PHONE_NUMBER_MIMETYPE;
     }
 
     /**
@@ -283,6 +285,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
                     phoneNumberCustomLabel);
             contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+            contact.mimeType = cursor.getString(mPhoneNumberMimeTypeIndex);
 
             contact.pinned = pinned;
             mContactEntries.add(contact);

@@ -15,9 +15,13 @@
 -->
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Space android:layout_width="match_parent"
+           android:layout_height="20dp" />
+
     <ImageView
         android:id="@+id/emptyListViewImage"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         android:layout_width="match_parent"
         android:gravity="center_horizontal" />
 
@@ -28,14 +32,16 @@
         android:gravity="center_horizontal|top"
         android:textSize="@dimen/empty_list_message_text_size"
         android:textColor="@color/empty_list_text_color"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp" />
+        android:paddingRight="32dp"
+        android:paddingLeft="32dp" />
 
     <LinearLayout
+            android:id="@+id/emptyListViewSubMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal">
         <LinearLayout
@@ -133,6 +139,6 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="20dp" />
 
 </merge>

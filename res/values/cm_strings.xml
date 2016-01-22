@@ -131,6 +131,9 @@
     <string name="empty_dialpad_example_two" translatable="false">2</string>
     <string name="empty_dialpad_example_six" translatable="false">6</string>
     <string name="empty_dialpad_example_name" translatable="false">\"Sam\"</string>
+    <string name="sign_in_hint_text">Sign in to make %1$s calls</string>
+    <string name="wifi_hint_text">Try switching to %1$s to make calls over Wi-Fi.</string>
+    <string name="roaming_hint_text">%1$s is currently roaming. Try switching to %1$s to make calls over Wi-Fi.</string>
 
     <!-- InCall Plugin Settings -->
     <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>

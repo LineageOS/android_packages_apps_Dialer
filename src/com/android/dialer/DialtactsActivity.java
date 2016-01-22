@@ -20,13 +20,17 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +43,7 @@ import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -91,6 +96,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
 import com.android.dialerbind.DatabaseHelperManager;
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodInfo;
@@ -105,6 +111,7 @@ import com.android.phone.common.util.StartInCallCallReceiver;
 import junit.framework.Assert;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -259,10 +266,37 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private String mVoiceSearchQuery;
 
+    private CallMethodInfo mCurrentCallMethod;
+
     @Override
     public void onCallMethodChangedListener(CallMethodInfo cmi) {
         if (mSmartDialSearchFragment != null) {
             mSmartDialSearchFragment.setCurrentCallMethod(cmi);
+        }
+        mCurrentCallMethod = cmi;
+    }
+
+    public CallMethodInfo getCurrentCallMethod() {
+        return mCurrentCallMethod;
+    }
+
+    BroadcastReceiver mCallStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()) {
+                case ConnectivityManager.CONNECTIVITY_ACTION:
+                    if (mSmartDialSearchFragment != null) {
+                        mSmartDialSearchFragment.setupEmptyView();
+                    }
+                    break;
+            }
+        }
+    };
+
+    @Override
+    public void onCallMethodsAvailable(HashMap<ComponentName, CallMethodInfo> availableCallMethods) {
+        if (mSmartDialSearchFragment != null) {
+            mSmartDialSearchFragment.setAvailableCallMethods(availableCallMethods);
         }
     }
 
@@ -514,6 +548,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         Trace.endSection();
         Trace.endSection();
+
+        IntentFilter callStateIntentFilter = new IntentFilter();
+        callStateIntentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+        callStateIntentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE);
+        callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED);
+        registerReceiver(mCallStateReceiver, callStateIntentFilter);
     }
 
     @Override

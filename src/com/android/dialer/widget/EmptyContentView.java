@@ -17,6 +17,7 @@
 package com.android.dialer.widget;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     private ImageView mImageView;
     private TextView mDescriptionView;
     private TextView mActionView;
+    private View mSubView;
     private OnEmptyViewActionButtonClickedListener mOnActionButtonClickedListener;
 
     public interface OnEmptyViewActionButtonClickedListener {
@@ -67,7 +69,12 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
         mImageView = (ImageView) findViewById(R.id.emptyListViewImage);
         mDescriptionView = (TextView) findViewById(R.id.emptyListViewMessage);
         mActionView = (TextView) findViewById(R.id.emptyListViewAction);
+        mSubView = findViewById(R.id.emptyListViewSubMessage);
         mActionView.setOnClickListener(this);
+    }
+
+    public void setSubViewVisibility(int visibility){
+        mSubView.setVisibility(visibility);
     }
 
     public void setDescription(int resourceId) {
@@ -93,6 +100,15 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     public void setImage(int resourceId) {
         mImageView.setImageResource(resourceId);
         if (resourceId == NO_LABEL) {
+            mImageView.setVisibility(View.GONE);
+        } else {
+            mImageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setImage(Drawable drawable) {
+        mImageView.setImageDrawable(drawable);
+        if (drawable == null) {
             mImageView.setVisibility(View.GONE);
         } else {
             mImageView.setVisibility(View.VISIBLE);

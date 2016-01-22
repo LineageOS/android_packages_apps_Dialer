@@ -54,6 +54,9 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     /** Users' most frequent phone number. */
     private String mPhoneNumberString;
 
+    /** Users' most frequest phone number mimetype */
+    private String mPhoneNumberMimeTypeString;
+
     // Dummy clip data object that is attached to drag shadows so that text views
     // don't crash with an NPE if the drag shadow is released in their bounds
     private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
@@ -88,9 +91,11 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
         super.loadFromContact(entry);
         // Set phone number to null in case we're reusing the view.
         mPhoneNumberString = null;
+        mPhoneNumberMimeTypeString = null;
         if (entry != null) {
             // Grab the phone-number to call directly. See {@link onClick()}.
             mPhoneNumberString = entry.phoneNumber;
+            mPhoneNumberMimeTypeString = entry.mimeType;
 
             // If this is a blank entry, don't show anything.
             // TODO krelease: Just hide the view for now. For this to truly look like an empty row
@@ -127,7 +132,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
                     // call them at the number that you usually talk to them
                     // at (i.e. the one displayed in the UI), regardless of
                     // whether that's their default number.
-                    mListener.onCallNumberDirectly(mPhoneNumberString);
+                    mListener.onCallNumberDirectly(mPhoneNumberString, mPhoneNumberMimeTypeString);
                 }
             }
         };

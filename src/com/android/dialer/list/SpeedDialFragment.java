@@ -29,6 +29,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -134,9 +135,9 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         }
 
         @Override
-        public void onCallNumberDirectly(String phoneNumber) {
+        public void onCallNumberDirectly(String phoneNumber, String mimeType) {
             if (mPhoneNumberPickerActionListener != null) {
-                mPhoneNumberPickerActionListener.onCallNumberDirectly(phoneNumber);
+                mPhoneNumberPickerActionListener.onCallNumberDirectly(phoneNumber, false, mimeType);
             }
         }
 
