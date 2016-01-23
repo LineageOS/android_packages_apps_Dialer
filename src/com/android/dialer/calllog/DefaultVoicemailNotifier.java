@@ -16,9 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import static android.Manifest.permission.READ_CALL_LOG;
-import static android.Manifest.permission.READ_CONTACTS;
-
 import com.google.common.collect.Maps;
 
 import android.app.Notification;
@@ -29,32 +26,26 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.net.Uri;
-import android.provider.CallLog.Calls;
-import android.provider.ContactsContract.PhoneLookup;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.util.ContactDisplayUtils;
-import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.list.ListsFragment;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * VoicemailNotifier that shows a notification in the status bar.
+ * Shows a voicemail notification in the status bar.
  */
 public class DefaultVoicemailNotifier {
-    public static final String TAG = "DefaultVoicemailNotifier";
+    public static final String TAG = "VoicemailNotifier";
 
     /** The tag used to identify notifications from this class. */
     private static final String NOTIFICATION_TAG = "DefaultVoicemailNotifier";
@@ -65,30 +56,18 @@ public class DefaultVoicemailNotifier {
     private static DefaultVoicemailNotifier sInstance;
 
     private final Context mContext;
-    private final NotificationManager mNotificationManager;
-    private final NewCallsQuery mNewCallsQuery;
-    private final NameLookupQuery mNameLookupQuery;
 
     /** Returns the singleton instance of the {@link DefaultVoicemailNotifier}. */
-    public static synchronized DefaultVoicemailNotifier getInstance(Context context) {
+    public static DefaultVoicemailNotifier getInstance(Context context) {
         if (sInstance == null) {
-            NotificationManager notificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             ContentResolver contentResolver = context.getContentResolver();
-            sInstance = new DefaultVoicemailNotifier(context, notificationManager,
-                    createNewCallsQuery(context, contentResolver),
-                    createNameLookupQuery(context, contentResolver));
+            sInstance = new DefaultVoicemailNotifier(context);
         }
         return sInstance;
     }
 
-    private DefaultVoicemailNotifier(Context context,
-            NotificationManager notificationManager, NewCallsQuery newCallsQuery,
-            NameLookupQuery nameLookupQuery) {
+    private DefaultVoicemailNotifier(Context context) {
         mContext = context;
-        mNotificationManager = notificationManager;
-        mNewCallsQuery = newCallsQuery;
-        mNameLookupQuery = nameLookupQuery;
     }
 
     /**
@@ -102,16 +81,17 @@ public class DefaultVoicemailNotifier {
     public void updateNotification(Uri newCallUri) {
         // Lookup the list of new voicemails to include in the notification.
         // TODO: Move this into a service, to avoid holding the receiver up.
-        final List<NewCall> newCalls = mNewCallsQuery.query();
+        final List<NewCall> newCalls =
+                CallLogNotificationsHelper.getInstance(mContext).getNewVoicemails();
 
         if (newCalls == null) {
             // Query failed, just return.
             return;
         }
 
-        if (newCalls.size() == 0) {
+        if (newCalls.isEmpty()) {
             // No voicemails to notify about: clear the notification.
-            clearNotification();
+            getNotificationManager().cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
             return;
         }
 
@@ -145,19 +125,8 @@ public class DefaultVoicemailNotifier {
             // Check if we already know the name associated with this number.
             String name = names.get(newCall.number);
             if (name == null) {
-                name = PhoneNumberDisplayUtil.getDisplayName(
-                        mContext,
-                        newCall.number,
-                        newCall.numberPresentation,
-                        /* isVoicemail */ false).toString();
-                // If we cannot lookup the contact, use the number instead.
-                if (TextUtils.isEmpty(name)) {
-                    // Look it up in the database.
-                    name = mNameLookupQuery.query(newCall.number);
-                    if (TextUtils.isEmpty(name) && !TextUtils.isEmpty(newCall.number)) {
-                        name = PhoneNumberUtils.formatNumber(newCall.number, newCall.countryIso);
-                    }
-                }
+                name = CallLogNotificationsHelper.getInstance(mContext).getName(newCall.number,
+                        newCall.numberPresentation, newCall.countryIso);
                 names.put(newCall.number, name);
                 // This is a new caller. Add it to the back of the list of callers.
                 if (TextUtils.isEmpty(callers)) {
@@ -221,7 +190,8 @@ public class DefaultVoicemailNotifier {
             notificationBuilder.setTicker(msg);
         }
 
-        mNotificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notificationBuilder.build());
+        getNotificationManager().notify(NOTIFICATION_TAG, NOTIFICATION_ID,
+                notificationBuilder.build());
     }
 
     /** Creates a pending intent that marks all new voicemails as old. */
@@ -231,194 +201,7 @@ public class DefaultVoicemailNotifier {
         return PendingIntent.getService(mContext, 0, intent, 0);
     }
 
-    public void clearNotification() {
-        mNotificationManager.cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
-    }
-
-    /** Information about a new voicemail. */
-    private static final class NewCall {
-        public final Uri callsUri;
-        public final Uri voicemailUri;
-        public final String number;
-        public final int numberPresentation;
-        public final String accountComponentName;
-        public final String accountId;
-        public final String transcription;
-        public final String countryIso;
-        public final long dateMs;
-
-        public NewCall(
-                Uri callsUri,
-                Uri voicemailUri,
-                String number,
-                int numberPresentation,
-                String accountComponentName,
-                String accountId,
-                String transcription,
-                String countryIso,
-                long dateMs) {
-            this.callsUri = callsUri;
-            this.voicemailUri = voicemailUri;
-            this.number = number;
-            this.numberPresentation = numberPresentation;
-            this.accountComponentName = accountComponentName;
-            this.accountId = accountId;
-            this.transcription = transcription;
-            this.countryIso = countryIso;
-            this.dateMs = dateMs;
-        }
-    }
-
-    /** Allows determining the new calls for which a notification should be generated. */
-    public interface NewCallsQuery {
-        /**
-         * Returns the new calls for which a notification should be generated.
-         */
-        public List<NewCall> query();
-    }
-
-    /** Create a new instance of {@link NewCallsQuery}. */
-    public static NewCallsQuery createNewCallsQuery(Context context,
-            ContentResolver contentResolver) {
-        return new DefaultNewCallsQuery(context.getApplicationContext(), contentResolver);
-    }
-
-    /**
-     * Default implementation of {@link NewCallsQuery} that looks up the list of new calls to
-     * notify about in the call log.
-     */
-    private static final class DefaultNewCallsQuery implements NewCallsQuery {
-        private static final String[] PROJECTION = {
-            Calls._ID,
-            Calls.NUMBER,
-            Calls.VOICEMAIL_URI,
-            Calls.NUMBER_PRESENTATION,
-            Calls.PHONE_ACCOUNT_COMPONENT_NAME,
-            Calls.PHONE_ACCOUNT_ID,
-            Calls.TRANSCRIPTION,
-            Calls.COUNTRY_ISO,
-            Calls.DATE
-        };
-        private static final int ID_COLUMN_INDEX = 0;
-        private static final int NUMBER_COLUMN_INDEX = 1;
-        private static final int VOICEMAIL_URI_COLUMN_INDEX = 2;
-        private static final int NUMBER_PRESENTATION_COLUMN_INDEX = 3;
-        private static final int PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX = 4;
-        private static final int PHONE_ACCOUNT_ID_COLUMN_INDEX = 5;
-        private static final int TRANSCRIPTION_COLUMN_INDEX = 6;
-        private static final int COUNTRY_ISO_COLUMN_INDEX = 7;
-        private static final int DATE_COLUMN_INDEX = 8;
-
-        private final ContentResolver mContentResolver;
-        private final Context mContext;
-
-        private DefaultNewCallsQuery(Context context, ContentResolver contentResolver) {
-            mContext = context;
-            mContentResolver = contentResolver;
-        }
-
-        @Override
-        public List<NewCall> query() {
-            if (!PermissionsUtil.hasPermission(mContext, READ_CALL_LOG)) {
-                Log.w(TAG, "No READ_CALL_LOG permission, returning null for calls lookup.");
-                return null;
-            }
-            final String selection = String.format("%s = 1 AND %s = ?", Calls.NEW, Calls.TYPE);
-            final String[] selectionArgs = new String[]{ Integer.toString(Calls.VOICEMAIL_TYPE) };
-            Cursor cursor = null;
-            try {
-                cursor = mContentResolver.query(Calls.CONTENT_URI_WITH_VOICEMAIL, PROJECTION,
-                        selection, selectionArgs, Calls.DEFAULT_SORT_ORDER);
-                if (cursor == null) {
-                    return null;
-                }
-                List<NewCall> newCalls = new LinkedList<NewCall>();
-                while (cursor.moveToNext()) {
-                    newCalls.add(createNewCallsFromCursor(cursor));
-                }
-                return newCalls;
-            } catch (RuntimeException e) {
-                Log.w(TAG, "Exception when querying Contacts Provider for calls lookup");
-                return null;
-            } finally {
-                MoreCloseables.closeQuietly(cursor);
-            }
-        }
-
-        /** Returns an instance of {@link NewCall} created by using the values of the cursor. */
-        private NewCall createNewCallsFromCursor(Cursor cursor) {
-            String voicemailUriString = cursor.getString(VOICEMAIL_URI_COLUMN_INDEX);
-            Uri callsUri = ContentUris.withAppendedId(
-                    Calls.CONTENT_URI_WITH_VOICEMAIL, cursor.getLong(ID_COLUMN_INDEX));
-            Uri voicemailUri = voicemailUriString == null ? null : Uri.parse(voicemailUriString);
-            return new NewCall(
-                    callsUri,
-                    voicemailUri,
-                    cursor.getString(NUMBER_COLUMN_INDEX),
-                    cursor.getInt(NUMBER_PRESENTATION_COLUMN_INDEX),
-                    cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX),
-                    cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX),
-                    cursor.getString(TRANSCRIPTION_COLUMN_INDEX),
-                    cursor.getString(COUNTRY_ISO_COLUMN_INDEX),
-                    cursor.getLong(DATE_COLUMN_INDEX));
-        }
-    }
-
-    /** Allows determining the name associated with a given phone number. */
-    public interface NameLookupQuery {
-        /**
-         * Returns the name associated with the given number in the contacts database, or null if
-         * the number does not correspond to any of the contacts.
-         * <p>
-         * If there are multiple contacts with the same phone number, it will return the name of one
-         * of the matching contacts.
-         */
-        public String query(String number);
-    }
-
-    /** Create a new instance of {@link NameLookupQuery}. */
-    public static NameLookupQuery createNameLookupQuery(Context context,
-            ContentResolver contentResolver) {
-        return new DefaultNameLookupQuery(context.getApplicationContext(), contentResolver);
-    }
-
-    /**
-     * Default implementation of {@link NameLookupQuery} that looks up the name of a contact in the
-     * contacts database.
-     */
-    private static final class DefaultNameLookupQuery implements NameLookupQuery {
-        private static final String[] PROJECTION = { PhoneLookup.DISPLAY_NAME };
-        private static final int DISPLAY_NAME_COLUMN_INDEX = 0;
-
-        private final ContentResolver mContentResolver;
-        private final Context mContext;
-
-        private DefaultNameLookupQuery(Context context, ContentResolver contentResolver) {
-            mContext = context;
-            mContentResolver = contentResolver;
-        }
-
-        @Override
-        public String query(String number) {
-            if (!PermissionsUtil.hasPermission(mContext, READ_CONTACTS)) {
-                Log.w(TAG, "No READ_CONTACTS permission, returning null for name lookup.");
-                return null;
-            }
-            Cursor cursor = null;
-            try {
-                cursor = mContentResolver.query(
-                        Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number)),
-                        PROJECTION, null, null, null);
-                if (cursor == null || !cursor.moveToFirst()) return null;
-                return cursor.getString(DISPLAY_NAME_COLUMN_INDEX);
-            } catch (RuntimeException e) {
-                Log.w(TAG, "Exception when querying Contacts Provider for name lookup");
-                return null;
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-        }
+    private NotificationManager getNotificationManager() {
+        return (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 }
