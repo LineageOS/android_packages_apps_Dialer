@@ -40,7 +40,7 @@
     <string name="card_title_redialing" msgid="8253487008234167266">"A marcar novamente"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Chamada de conferência"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Chamada recebida"</string>
-    <string name="card_title_incoming_work_call" msgid="5601475030981264422">"Cham. de trab. recebida"</string>
+    <string name="card_title_incoming_work_call" msgid="5601475030981264422">"Chamada de trab. recebida"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Chamada terminada"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"Em espera"</string>
     <string name="card_title_hanging_up" msgid="3999101620995182450">"A desligar"</string>
