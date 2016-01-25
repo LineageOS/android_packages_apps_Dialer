@@ -54,8 +54,10 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.animation.AnimUtils;
+import com.android.phone.common.incall.CallMethodInfo;
 
-public class SearchFragment extends PhoneNumberPickerFragment {
+public class SearchFragment extends PhoneNumberPickerFragment
+        implements DialerPhoneNumberListAdapter.searchMethodClicked {
     private static final String TAG  = SearchFragment.class.getSimpleName();
 
     private OnListFragmentScrolledListener mActivityScrollListener;
@@ -83,6 +85,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
     private HostInterface mActivity;
 
     protected EmptyContentView mEmptyView;
+
+    public CallMethodInfo mCurrentCallMethodInfo;
 
     public interface HostInterface {
         public boolean isActionBarShowing();
@@ -229,13 +233,15 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         DialerPhoneNumberListAdapter adapter = new DialerPhoneNumberListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(super.usesCallableUri());
+        adapter.setSearchListner(this);
         return adapter;
     }
 
     @Override
-    protected void onItemClick(int position, long id) {
+    public void onItemClick(int position, long id) {
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
         final int shortcutType = adapter.getShortcutTypeFromPosition(position);
+
         final OnPhoneNumberPickerActionListener listener;
         final Intent intent;
         final String number;
@@ -243,6 +249,9 @@ public class SearchFragment extends PhoneNumberPickerFragment {
         Log.i(TAG, "onItemClick: shortcutType=" + shortcutType);
 
         switch (shortcutType) {
+            case DialerPhoneNumberListAdapter.SHORTCUT_INVALID_PROVIDER:
+                super.onProviderClick(position, id, getCurrentCallMethod());
+                break;
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 super.onItemClick(position, id);
                 break;
@@ -281,6 +290,15 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 }
                 break;
         }
+    }
+
+    public void setCurrentCallMethod(CallMethodInfo cmi) {
+        mCurrentCallMethodInfo = cmi;
+        setupEmptyView();
+    }
+
+    public CallMethodInfo getCurrentCallMethod() {
+        return mCurrentCallMethodInfo;
     }
 
     /**
@@ -355,7 +373,7 @@ public class SearchFragment extends PhoneNumberPickerFragment {
 
     @Override
     protected void startLoading() {
-        if (PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
+        if (isAdded() && PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
             super.startLoading();
         } else if (TextUtils.isEmpty(getQueryString())) {
             // Clear out any existing call shortcuts.

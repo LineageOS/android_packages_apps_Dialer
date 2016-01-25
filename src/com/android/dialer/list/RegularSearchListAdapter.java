@@ -104,6 +104,8 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
+        changed |= setShortcutEnabled(SHORTCUT_MAKE_INCALL_PROVIDER_CALL, showNumberShortcuts);
+
         if (changed) {
             notifyDataSetChanged();
         }

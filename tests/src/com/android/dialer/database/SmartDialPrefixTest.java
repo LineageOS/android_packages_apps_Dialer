@@ -137,13 +137,13 @@ public class SmartDialPrefixTest extends AndroidTestCase {
     private ContactNumber constructNewContactWithDummyIds(MatrixCursor contactCursor,
             MatrixCursor nameCursor, String number, int id, String displayName) {
         return constructNewContact(contactCursor, nameCursor, id, number, id, String.valueOf(id),
-                displayName, 0, 0, 0, 0, 0, 0, 0);
+                displayName, 0, 0, 0, 0, 0, 0, 0, null);
     }
 
     private ContactNumber constructNewContact(MatrixCursor contactCursor, MatrixCursor nameCursor,
             int id, String number, int contactId, String lookupKey, String displayName, int photoId,
             int lastTimeUsed, int timesUsed, int starred, int isSuperPrimary, int inVisibleGroup,
-            int isPrimary) {
+            int isPrimary, String mimetype) {
         assertNotNull(contactCursor);
         assertNotNull(nameCursor);
 
@@ -158,13 +158,13 @@ public class SmartDialPrefixTest extends AndroidTestCase {
                 isPrimary});
         nameCursor.addRow(new Object[]{displayName, contactId});
 
-        return new ContactNumber(contactId, id, displayName, number, lookupKey, 0);
+        return new ContactNumber(contactId, id, displayName, number, lookupKey, 0, mimetype);
     }
 
     private ArrayList<ContactNumber> getLooseMatchesFromDb(String query) {
         final SmartDialNameMatcher nameMatcher = new SmartDialNameMatcher(query,
                 SmartDialPrefix.getMap(), getContext());
-        return mTestHelper.getLooseMatches(query, nameMatcher);
+        return mTestHelper.getLooseMatches(query, nameMatcher, null);
     }
 
     public void testPutForFullName() {

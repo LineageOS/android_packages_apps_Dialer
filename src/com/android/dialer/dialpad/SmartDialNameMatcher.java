@@ -261,6 +261,11 @@ public class SmartDialNameMatcher {
     @VisibleForTesting
     boolean matchesCombination(String displayName, String query,
             ArrayList<SmartDialMatchPosition> matchList) {
+
+        if (displayName == null) {
+            return false;
+        }
+
         StringBuilder builder = new StringBuilder();
         constructEmptyMask(builder, displayName.length());
         mNameMatchMask = builder.toString();

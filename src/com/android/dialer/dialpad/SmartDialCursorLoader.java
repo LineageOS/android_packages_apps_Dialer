@@ -17,20 +17,28 @@
 package com.android.dialer.dialpad;
 
 import android.content.AsyncTaskLoader;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Loader.ForceLoadContentObserver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
 import com.android.contacts.common.util.PermissionsUtil;
+
+import com.android.phone.common.incall.CallMethodHelper;
+
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 import com.android.dialerbind.DatabaseHelperManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Implements a Loader<Cursor> class to asynchronously load SmartDial search results.
@@ -49,6 +57,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
 
     private ForceLoadContentObserver mObserver;
 
+    private String mCallableMimetype;
+    public static final String CALLABLE_EXTRA_NUMBER = "callable_extra_number";
+
     public SmartDialCursorLoader(Context context) {
         super(context);
         mContext = context;
@@ -58,7 +69,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
      * Configures the query string to be used to find SmartDial matches.
      * @param query The query string user typed.
      */
-    public void configureQuery(String query) {
+    public void configureQuery(String query, String callableMimetype) {
         if (DEBUG) {
             Log.v(TAG, "Configure new query to be " + query);
         }
@@ -66,6 +77,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
 
         /** Constructs a name matcher object for matching names. */
         mNameMatcher = new SmartDialNameMatcher(mQuery, SmartDialPrefix.getMap(), mContext);
+        mCallableMimetype = callableMimetype;
     }
 
     /**
@@ -86,23 +98,84 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         final DialerDatabaseHelper dialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(
                 mContext);
         final ArrayList<ContactNumber> allMatches = dialerDatabaseHelper.getLooseMatches(mQuery,
-                mNameMatcher);
+                mNameMatcher, mCallableMimetype);
 
         if (DEBUG) {
             Log.v(TAG, "Loaded matches " + String.valueOf(allMatches.size()));
         }
 
+        int projectionLength = PhoneQuery.PROJECTION_PRIMARY.length;
+        String [] projection = new String[projectionLength + 1];
+        System.arraycopy(PhoneQuery.PROJECTION_PRIMARY, 0, projection, 0, projectionLength);
+        projection[projectionLength] = CALLABLE_EXTRA_NUMBER;
+
         /** Constructs a cursor for the returned array of results. */
-        final MatrixCursor cursor = new MatrixCursor(PhoneQuery.PROJECTION_PRIMARY);
-        Object[] row = new Object[PhoneQuery.PROJECTION_PRIMARY.length];
+        final MatrixCursor cursor = new MatrixCursor(projection);
+        Object[] row = new Object[projectionLength + 1];
         for (ContactNumber contact : allMatches) {
-            row[PhoneQuery.PHONE_ID] = contact.dataId;
-            row[PhoneQuery.PHONE_NUMBER] = contact.phoneNumber;
-            row[PhoneQuery.CONTACT_ID] = contact.id;
-            row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
-            row[PhoneQuery.PHOTO_ID] = contact.photoId;
-            row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
-            cursor.addRow(row);
+            if (TextUtils.equals(contact.mimeType, mCallableMimetype) ||
+                    TextUtils.equals(contact.mimeType,
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)) {
+                row[PhoneQuery.CONTACT_ID] = contact.id;
+                row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
+                row[PhoneQuery.PHOTO_ID] = contact.photoId;
+                row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
+                row[PhoneQuery.PHONE_ID] = contact.dataId;
+
+                // The row object is resued, so explicitly set this to null in case the contact
+                // doesn't have extra numbers
+                row[projectionLength] = null;
+
+                String accountType = null;
+                String accountName = null;
+                Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,
+                        contact.id);
+                Cursor c = mContext.getContentResolver().query(
+                        contactUri,
+                        new String[]{ContactsContract.RawContacts.ACCOUNT_TYPE,
+                                ContactsContract.RawContacts.ACCOUNT_NAME},
+                        null, null, null);
+                if (c != null && c.moveToFirst()) {
+                    accountType = c.getString(0);
+                    accountName = c.getString(1);
+                    c.close();
+                }
+                row[PhoneQuery.PHONE_ACCOUNT_TYPE] = accountType;
+                row[PhoneQuery.PHONE_ACCOUNT_NAME] = accountName;
+
+                HashMap<String, String> allCallableNumbers = dialerDatabaseHelper
+                        .getCallableMimeTypeForContact(contact.id);
+
+                // Add the phone number as the primary option ALWAYS
+                // IF we don't do this, things often show up strange (only a UN w/o PN)
+                // if the user has no phone number tied to their account, then we can show other
+                // items. We do this for consistencies sake.
+                String extraContactNumber;
+                boolean gotStandardNumber = false;
+                if (allCallableNumbers.containsKey(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)) {
+                    extraContactNumber = allCallableNumbers.get(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
+
+                    row[PhoneQuery.PHONE_NUMBER] = extraContactNumber;
+                    row[PhoneQuery.PHONE_MIME_TYPE] =
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE;
+
+                    gotStandardNumber = true;
+                }
+
+                if (allCallableNumbers.containsKey(mCallableMimetype)) {
+                    extraContactNumber = allCallableNumbers.get(mCallableMimetype);
+                    // Make sure the extra number is not the same as the main number
+                    if (gotStandardNumber) {
+                        row[projectionLength] = extraContactNumber;
+                    } else {
+                        row[PhoneQuery.PHONE_NUMBER] = extraContactNumber;
+                        row[PhoneQuery.PHONE_MIME_TYPE] = mCallableMimetype;
+                    }
+                }
+
+
+                cursor.addRow(row);
+            }
         }
         return cursor;
     }

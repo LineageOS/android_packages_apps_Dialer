@@ -44,6 +44,7 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
     private final Context mContext;
 
     private SmartDialNameMatcher mNameMatcher;
+    SmartDialCursorLoader mLoader;
 
     public SmartDialNumberListAdapter(Context context) {
         super(context);
@@ -55,10 +56,15 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         }
     }
 
+    public SmartDialCursorLoader getLoader() {
+        return mLoader;
+    }
+
     /**
      * Sets query for the SmartDialCursorLoader.
      */
-    public void configureLoader(SmartDialCursorLoader loader) {
+    public void configureLoader(SmartDialCursorLoader loader, String mimeType) {
+        mLoader = loader;
         if (DEBUG) {
             Log.v(TAG, "Configure Loader with query" + getQueryString());
         }
@@ -66,10 +72,10 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         mNameMatcher = new SmartDialNameMatcher("", SmartDialPrefix.getMap(), mContext);
 
         if (getQueryString() == null) {
-            loader.configureQuery("");
+            mLoader.configureQuery("", mimeType);
             mNameMatcher.setQuery("");
         } else {
-            loader.configureQuery(getQueryString());
+            mLoader.configureQuery(getQueryString(), mimeType);
             mNameMatcher.setQuery(PhoneNumberUtils.normalizeNumber(getQueryString()));
         }
     }
@@ -126,6 +132,8 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
+        changed |= setShortcutEnabled(SHORTCUT_MAKE_INCALL_PROVIDER_CALL, showNumberShortcuts);
+
         if (changed) {
             notifyDataSetChanged();
         }

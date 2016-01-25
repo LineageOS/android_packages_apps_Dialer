@@ -5,9 +5,11 @@ import android.content.res.Resources;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
@@ -27,23 +29,33 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     private String mFormattedQueryString;
     private String mCountryIso;
 
+    public final static int SHORTCUT_INVALID_PROVIDER = -2;
     public final static int SHORTCUT_INVALID = -1;
     public final static int SHORTCUT_DIRECT_CALL = 0;
     public final static int SHORTCUT_CREATE_NEW_CONTACT = 1;
     public final static int SHORTCUT_ADD_TO_EXISTING_CONTACT = 2;
     public final static int SHORTCUT_SEND_SMS_MESSAGE = 3;
     public final static int SHORTCUT_MAKE_VIDEO_CALL = 4;
+    public final static int SHORTCUT_MAKE_INCALL_PROVIDER_CALL = 5;
 
-    public final static int SHORTCUT_COUNT = 5;
+    public static int SHORTCUT_COUNT = 6;
 
     private final boolean[] mShortcutEnabled = new boolean[SHORTCUT_COUNT];
 
+    private int mShortcutCurrent = SHORTCUT_INVALID;
+
     private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
+
+    private searchMethodClicked mSearchMethodListener = null;
 
     public DialerPhoneNumberListAdapter(Context context) {
         super(context);
 
         mCountryIso = GeoUtil.getCurrentCountryIso(context);
+    }
+
+    public void setSearchListner(searchMethodClicked clickedListener) {
+        mSearchMethodListener = clickedListener;
     }
 
     @Override
@@ -121,7 +133,11 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
             throw new IllegalArgumentException("Invalid position - greater than cursor count "
                     + " but not a shortcut.");
         }
-        return SHORTCUT_INVALID;
+
+        int returningShortcut = mShortcutCurrent;
+        mShortcutCurrent = SHORTCUT_INVALID;
+
+        return returningShortcut;
     }
 
     @Override
@@ -167,6 +183,12 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 text = resources.getString(R.string.search_shortcut_make_video_call);
                 drawableId = R.drawable.ic_videocam;
                 break;
+            case SHORTCUT_MAKE_INCALL_PROVIDER_CALL:
+                text = resources.getString(
+                        R.string.search_shortcut_call_number,
+                        mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
+                drawableId = R.drawable.ic_videocam;
+                break;
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");
         }
@@ -174,6 +196,22 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         v.setDisplayName(text);
         v.setPhotoPosition(super.getPhotoPosition());
         v.setAdjustSelectionBoundsEnabled(false);
+    }
+
+    public interface searchMethodClicked {
+        void onItemClick(int position, long id);
+    }
+
+    @Override
+    public View.OnClickListener bindExtraCallActionOnClick(TextView v, String text,
+                                                           final int position) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mShortcutCurrent = SHORTCUT_INVALID_PROVIDER;
+                mSearchMethodListener.onItemClick(position, 0L);
+            }
+        };
     }
 
     /**

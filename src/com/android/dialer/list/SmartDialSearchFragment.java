@@ -57,12 +57,12 @@ import java.util.Random;
  * Implements a fragment to load and display SmartDial search results.
  */
 public class SmartDialSearchFragment extends SearchFragment
-        implements EmptyContentView.OnEmptyViewActionButtonClickedListener {
+        implements EmptyContentView.OnEmptyViewActionButtonClickedListener,
+        DialerPhoneNumberListAdapter.searchMethodClicked {
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
 
     private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
 
-    private CallMethodInfo mCurrentCallMethod;
     private HashMap<ComponentName, CallMethodInfo> mAvailableCallMethods;
 
     /**
@@ -75,6 +75,8 @@ public class SmartDialSearchFragment extends SearchFragment
         adapter.setQuickContactEnabled(true);
         // Set adapter's query string to restore previous instance state.
         adapter.setQueryString(getQueryString());
+        adapter.setSearchListner(this);
+
         return adapter;
     }
 
@@ -87,10 +89,7 @@ public class SmartDialSearchFragment extends SearchFragment
         if (id == getDirectoryLoaderId()) {
             return super.onCreateLoader(id, args);
         } else {
-            final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
-            SmartDialCursorLoader loader = new SmartDialCursorLoader(super.getContext());
-            adapter.configureLoader(loader);
-            return loader;
+            return updateData();
         }
     }
 
@@ -105,13 +104,27 @@ public class SmartDialSearchFragment extends SearchFragment
         return adapter.getDataUri(position);
     }
 
+    private Loader<Cursor> updateData() {
+        final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
+
+        SmartDialCursorLoader loader = new SmartDialCursorLoader(super.getContext());
+
+        if (mCurrentCallMethodInfo != null) {
+            adapter.configureLoader(loader, mCurrentCallMethodInfo.mMimeType);
+        } else {
+            adapter.configureLoader(loader, null);
+        }
+
+        return loader;
+    }
+
     @Override
     public void setupEmptyView() {
         final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
         adapter.getCount();
 
-        if (mCurrentCallMethod == null) {
-            mCurrentCallMethod = ((DialtactsActivity) getActivity()).getCurrentCallMethod();
+        if (mCurrentCallMethodInfo == null) {
+            mCurrentCallMethodInfo = ((DialtactsActivity) getActivity()).getCurrentCallMethod();
         }
 
         if (mEmptyView != null && getActivity() != null) {
@@ -130,10 +143,10 @@ public class SmartDialSearchFragment extends SearchFragment
                     // the currently available ones are fine.
                     mAvailableCallMethods = CallMethodHelper.getAllCallMethods();
 
-                    if (mCurrentCallMethod == null && mAvailableCallMethods.isEmpty()) {
+                    if (mCurrentCallMethodInfo == null && mAvailableCallMethods.isEmpty()) {
                         showNormalT9Hint(r);
                     } else {
-                        if (mCurrentCallMethod != null && mCurrentCallMethod.mIsInCallProvider) {
+                        if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
                             showProviderHint(r);
                         } else {
                             showSuggestion(r);
@@ -165,14 +178,14 @@ public class SmartDialSearchFragment extends SearchFragment
 
     public void showProviderHint(Resources r) {
         String text;
-        if (!mCurrentCallMethod.mIsAuthenticated) {
+        if (!mCurrentCallMethodInfo.mIsAuthenticated) {
             // Sign into current selected call method to make calls
-            text = getString(R.string.sign_in_hint_text, mCurrentCallMethod.mName);
+            text = getString(R.string.sign_in_hint_text, mCurrentCallMethodInfo.mName);
         } else {
             // InCallApi provider specified hint
-            text = mCurrentCallMethod.mT9HintDescription;
+            text = mCurrentCallMethodInfo.mT9HintDescription;
         }
-        Drawable heroImage = mCurrentCallMethod.mSingleColorBrandIcon;
+        Drawable heroImage = mCurrentCallMethodInfo.mSingleColorBrandIcon;
         heroImage.setTint(r.getColor(R.color.hint_image_color));
         mEmptyView.setImage(heroImage);
         mEmptyView.setDescription(text);
@@ -186,17 +199,17 @@ public class SmartDialSearchFragment extends SearchFragment
 
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        if (mWifi.isConnected() && !mAvailableCallMethods.isEmpty() && mCurrentCallMethod != null) {
+        if (mWifi.isConnected() && !mAvailableCallMethods.isEmpty() && mCurrentCallMethodInfo != null) {
             String template;
             Drawable heroImage;
             String text;
             TelephonyManager tm =
                     (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
 
-            if (tm.isNetworkRoaming(mCurrentCallMethod.mSubId)) {
+            if (tm.isNetworkRoaming(mCurrentCallMethodInfo.mSubId)) {
                 heroImage = r.getDrawable(R.drawable.ic_roaming);
                 template = r.getString(R.string.roaming_hint_text);
-                text = String.format(template, mCurrentCallMethod.mName, hintTextRequest());
+                text = String.format(template, mCurrentCallMethodInfo.mName, hintTextRequest());
             } else {
                 heroImage = r.getDrawable(R.drawable.ic_signal_wifi_3_bar);
                 template = r.getString(R.string.wifi_hint_text);
@@ -219,9 +232,10 @@ public class SmartDialSearchFragment extends SearchFragment
         return valuesList.get(randomIndex).mName;
     }
 
+    @Override
     public void setCurrentCallMethod(CallMethodInfo cmi) {
-        mCurrentCallMethod = cmi;
-        setupEmptyView();
+        super.setCurrentCallMethod(cmi);
+        reloadData();
     }
 
     public void setAvailableCallMethods(HashMap<ComponentName, CallMethodInfo> callMethods) {

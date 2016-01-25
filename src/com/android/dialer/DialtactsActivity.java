@@ -100,6 +100,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.util.SettingsUtil;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -267,6 +268,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private String mVoiceSearchQuery;
 
     private CallMethodInfo mCurrentCallMethod;
+    private String AMBIENT_SUBSCRIPTION_ID = "DialtactsActivity";
+
+    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
+            new CallMethodHelper.CallMethodReceiver() {
+                @Override
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                    providersUpdated(callMethodInfos);
+                }
+            };
 
     @Override
     public void onCallMethodChangedListener(CallMethodInfo cmi) {
@@ -293,11 +303,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     };
 
-    @Override
-    public void onCallMethodsAvailable(HashMap<ComponentName, CallMethodInfo> availableCallMethods) {
+    private void providersUpdated(HashMap<ComponentName, CallMethodInfo> availableCallMethods) {
         if (mSmartDialSearchFragment != null) {
             mSmartDialSearchFragment.setAvailableCallMethods(availableCallMethods);
         }
+        // We don't want to update this until we know that our providers are loaded. otherwise
+        // we may miss some data.
+        updateSmartDialDatabase();
     }
 
     protected class OptionsPopupMenu extends PopupMenu {
@@ -563,7 +575,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         // make this call on resume in case user changed t9 locale in settings
         SmartDialPrefix.initializeNanpSettings(this);
+    }
 
+    private void updateSmartDialDatabase() {
         // if locale has changed since last time, refresh the smart dial db
         Locale locale = SettingsUtil.getT9SearchInputLocale(this);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -585,6 +599,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void onResume() {
         Trace.beginSection(TAG + " onResume");
         super.onResume();
+
+        if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
+            CallMethodHelper.refreshDynamic();
+        }
 
         mStateSaved = false;
         if (mFirstLaunch) {
