@@ -54,4 +54,37 @@
   <string name="incall_vibrate_hangup_title">Bibratu esekitzean</string>
   <string name="incall_vibrate_45_title">Bibratu minuturo</string>
   <string name="incall_vibrate_45_summary">Irteera deietan minuturo bibratzen du 45. segundoan</string>
+  <string name="call_log_show_all_slots">SIM guztiak</string>
+  <string name="call_log_all_calls_header">Dei guztiak</string>
+  <string name="call_log_blacklist_header">Blokeatutako deiak soilik</string>
+  <string name="call_log_stats_title">Estatistikak</string>
+  <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
+  <string name="call_stats_incoming">Jasoak: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Eginak: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Galduak: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blokeatuak: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Guztira: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Hasiera data</string>
+  <string name="call_stats_filter_to">Amaiera data</string>
+  <string name="call_stats_filter_picker_title">Daten heina</string>
+  <string name="date_quick_selection">Hautapen azkarra</string>
+  <string name="date_qs_currentmonth">Uneko hilabetea</string>
+  <string name="date_qs_currentquarter">Uneko hiruhilabetea</string>
+  <string name="date_qs_currentyear">Uneko urtea</string>
+  <string name="date_qs_lastweek">Azken astea</string>
+  <string name="date_qs_lastmonth">Azken hilabetea</string>
+  <string name="date_qs_lastquarter">Azken hiruhilabetea</string>
+  <string name="date_qs_lastyear">Azken urtea</string>
+  <string name="call_stats_date_filter">Data heina ezarri</string>
+  <string name="call_stats_reset_filter">Leheneratu denbora heina</string>
+  <string name="call_stats_sort_by_duration">Iraupenaren arabera sailkatu</string>
+  <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
+  <string name="call_stats_title_for_number">Zenbaki hau</string>
+  <string name="call_stats_title_of_total">Guztira</string>
+  <string name="call_stats_title_durations">Deien iraupenak</string>
+  <string name="call_stats_title_count">Dei kopurua</string>
+  <string name="call_stats_title_average_duration">Batezbesteko dei iraupena</string>
+  <string name="recent_calls_no_items_in_range">Zure deien egunkariak ez du deirik aukeratutako denbora tartean.</string>
 </resources>

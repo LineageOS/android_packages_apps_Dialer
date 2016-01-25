@@ -48,4 +48,25 @@
   <string name="incall_vibrate_hangup_title">له‌رینه‌وه‌ له‌کاتی وازهێنان</string>
   <string name="incall_vibrate_45_title">له‌رینه‌وه‌ هه‌موو سه‌ری خوله‌کێک</string>
   <string name="incall_vibrate_45_summary">له‌رینه‌وه‌ هه‌موو 45 چرکه‌یه‌ک له‌ خوله‌کێکدا</string>
+  <string name="call_log_show_all_slots">هەموو سیمکارتەکان</string>
+  <string name="call_log_all_calls_header">هەموو پەیوەندییەکان</string>
+  <string name="call_log_stats_title">سەرژمێرەیەکان</string>
+  <string name="callStatsDetailTitle">زانیاری پەیوەندی</string>
+  <string name="call_stats_header_total">سەرجەم: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">سەرجەم: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">بەرواری دەستپێکردن</string>
+  <string name="call_stats_filter_to">بەرواری کۆتایهاتن</string>
+  <string name="call_stats_filter_picker_title">ڕێژەی ڕێگریکردن</string>
+  <string name="date_quick_selection">هەڵبژاردنی خێرا</string>
+  <string name="date_qs_currentmonth">ئەم مانگە</string>
+  <string name="date_qs_currentquarter">چارەکی ئێستا</string>
+  <string name="date_qs_currentyear">ئەمساڵ</string>
+  <string name="date_qs_lastweek">هەمتەی پێشوو</string>
+  <string name="date_qs_lastmonth">مانگی پێشوو</string>
+  <string name="date_qs_lastquarter">دوایین چارەک</string>
+  <string name="date_qs_lastyear">ساڵی پێشوو</string>
+  <string name="call_stats_date_filter">ڕێکخستنی ڕێژەی کات</string>
+  <string name="call_stats_reset_filter">گێڕانەوەی ڕێژەی کات</string>
+  <string name="call_stats_sort_by_duration">ڕیزکردن بەپێی ماوەی پەیوەندی</string>
+  <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
 </resources>

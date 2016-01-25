@@ -25,4 +25,25 @@
   <string name="speed_dial_unassigned_dialog_title">යතුර පවරා නොමැත</string>
   <string name="yes">ඔව්</string>
   <string name="no">නැහැ</string>
+  <string name="call_log_show_all_slots">සියලුම් සිම්</string>
+  <string name="call_log_all_calls_header">සියලුම ඇමතුම්</string>
+  <string name="call_log_stats_title">සංඛ්‍යාති</string>
+  <string name="callStatsDetailTitle">ඇමතුම් තත්ව තොරතුරු</string>
+  <string name="call_stats_header_total">එකතුව: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">එකතුව: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">ඇරඹුම් දිනය</string>
+  <string name="call_stats_filter_to">අවසන් දිනය</string>
+  <string name="call_stats_filter_picker_title">පෙරහන පරාසය</string>
+  <string name="date_quick_selection">ඉක්මන් තේරීම</string>
+  <string name="date_qs_currentmonth">පවත්නා මාසය</string>
+  <string name="date_qs_currentquarter">පවත්නා කාර්තුව</string>
+  <string name="date_qs_currentyear">පවත්නා වර්ෂය</string>
+  <string name="date_qs_lastweek">අවසාන සතිය</string>
+  <string name="date_qs_lastmonth">අවසාන මාසය</string>
+  <string name="date_qs_lastquarter">අවසාන කාර්තුව</string>
+  <string name="date_qs_lastyear">අවසාන වර්ෂය</string>
+  <string name="call_stats_date_filter">කාල පරාසය සීරුමාරු කරන්න</string>
+  <string name="call_stats_reset_filter">කාල පරාසය ප්‍රත්‍යාරම්භ කරන්න</string>
+  <string name="call_stats_sort_by_duration">ඇමතුම් කාලමාත්‍රාව අනුව සුබෙදන්න</string>
+  <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
 </resources>

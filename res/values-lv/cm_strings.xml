@@ -47,4 +47,25 @@
   <string name="incall_vibrate_hangup_title">Vibrēt, pārtraucot</string>
   <string name="incall_vibrate_45_title">Vibrēt katru minūti</string>
   <string name="incall_vibrate_45_summary">Zvana laikā vibrēt katras minūtes 45. sekundē</string>
+  <string name="call_log_show_all_slots">Visas SIM kartes</string>
+  <string name="call_log_all_calls_header">Visi zvani</string>
+  <string name="call_log_stats_title">Statistika</string>
+  <string name="callStatsDetailTitle">Zvanu statistikas detaļas</string>
+  <string name="call_stats_header_total">Kopā: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Kopā: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Sākuma datums</string>
+  <string name="call_stats_filter_to">Beigu datums</string>
+  <string name="call_stats_filter_picker_title">Filtra diapazons</string>
+  <string name="date_quick_selection">Ātrā izvēle</string>
+  <string name="date_qs_currentmonth">Tekošais mēnesis</string>
+  <string name="date_qs_currentquarter">Tekošais ceturksnis</string>
+  <string name="date_qs_currentyear">Tekošais gads</string>
+  <string name="date_qs_lastweek">Iepriekšējā nedēļa</string>
+  <string name="date_qs_lastmonth">Iepriekšējais mēnesis</string>
+  <string name="date_qs_lastquarter">Iepriekšējais ceturksnis</string>
+  <string name="date_qs_lastyear">Iepriekšējais gads</string>
+  <string name="call_stats_date_filter">Pielāgot laika diapazonu</string>
+  <string name="call_stats_reset_filter">Atstatīt laika diapazonu</string>
+  <string name="call_stats_sort_by_duration">Kārtot pēc zvana ilguma</string>
+  <string name="call_stats_sort_by_count">Kārtot pēc zvanu skaita</string>
 </resources>

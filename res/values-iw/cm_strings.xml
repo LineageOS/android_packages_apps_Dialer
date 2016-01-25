@@ -54,4 +54,37 @@
   <string name="incall_vibrate_hangup_title">רטט בניתוק השיחה</string>
   <string name="incall_vibrate_45_title">רטט בכל דקה</string>
   <string name="incall_vibrate_45_summary">רטט בכל 45 שניות של כל דקה במהלך שיחה יוצאת</string>
+  <string name="call_log_show_all_slots">כל הסימים</string>
+  <string name="call_log_all_calls_header">כל השיחות</string>
+  <string name="call_log_blacklist_header">שיחות שנחסמו בלבד</string>
+  <string name="call_log_stats_title">סטטיסטיקה</string>
+  <string name="callStatsDetailTitle">פרטים של סטטיסטיקת שיחות</string>
+  <string name="call_stats_incoming">נכנסות: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_outgoing">יוצאות: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">לא נענו: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">נחסמו: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">סך הכל: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">סך הכל: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">תאריך התחלה</string>
+  <string name="call_stats_filter_to">תאריך סיום</string>
+  <string name="call_stats_filter_picker_title">מסנן טווח</string>
+  <string name="date_quick_selection">בחירה מהירה</string>
+  <string name="date_qs_currentmonth">חודש נוכחי</string>
+  <string name="date_qs_currentquarter">רבעון נוכחי</string>
+  <string name="date_qs_currentyear">שנה נוכחית</string>
+  <string name="date_qs_lastweek">שבוע שעבר</string>
+  <string name="date_qs_lastmonth">חודש אחרון</string>
+  <string name="date_qs_lastquarter">רבעון אחרון</string>
+  <string name="date_qs_lastyear">שנה שעברה</string>
+  <string name="call_stats_date_filter">התאמת טווח הזמן</string>
+  <string name="call_stats_reset_filter">אפס טווח זמן</string>
+  <string name="call_stats_sort_by_duration">מיין לפי משך שיחה</string>
+  <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
+  <string name="call_stats_title_for_number">המספר הזה</string>
+  <string name="call_stats_title_of_total">מתוך</string>
+  <string name="call_stats_title_durations">אורכי שיחה</string>
+  <string name="call_stats_title_count">מספר השיחות</string>
+  <string name="call_stats_title_average_duration">משך שיחה ממוצע</string>
+  <string name="recent_calls_no_items_in_range">יומן השיחות שלך אינו מכיל שיחות בטווח הזמן שנבחר.</string>
 </resources>

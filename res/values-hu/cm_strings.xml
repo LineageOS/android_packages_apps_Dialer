@@ -54,4 +54,26 @@
   <string name="incall_vibrate_hangup_title">Bontáskor rezeg</string>
   <string name="incall_vibrate_45_title">Percenként rezeg</string>
   <string name="incall_vibrate_45_summary">Minden 45. másodpercben rezeg a kimenő hívások során</string>
+  <string name="call_log_show_all_slots">Minden SIM</string>
+  <string name="call_log_all_calls_header">Minden hívás</string>
+  <string name="call_log_blacklist_header">Csak blokkolt hívások</string>
+  <string name="call_log_stats_title">Statisztikák</string>
+  <string name="callStatsDetailTitle">Részletek</string>
+  <string name="call_stats_header_total">Összesen: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Összesen: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Kezdete</string>
+  <string name="call_stats_filter_to">Vége</string>
+  <string name="call_stats_filter_picker_title">Időszak</string>
+  <string name="date_quick_selection">Gyors kiválasztás</string>
+  <string name="date_qs_currentmonth">Jelenlegi hónap</string>
+  <string name="date_qs_currentquarter">Jelenlegi negyedév</string>
+  <string name="date_qs_currentyear">Jelenlegi év</string>
+  <string name="date_qs_lastweek">Utolsó hét</string>
+  <string name="date_qs_lastmonth">Utolsó hónap</string>
+  <string name="date_qs_lastquarter">Utolsó negyedév</string>
+  <string name="date_qs_lastyear">Utolsó év</string>
+  <string name="call_stats_date_filter">Időszak beállítása</string>
+  <string name="call_stats_reset_filter">Időszak törlése</string>
+  <string name="call_stats_sort_by_duration">Rendezés hívások időtartama szerint</string>
+  <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
 </resources>
