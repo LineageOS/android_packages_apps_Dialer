@@ -28,6 +28,7 @@ import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.contacts.common.activity.AppCompatPreferenceActivity;
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
