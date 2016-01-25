@@ -50,4 +50,26 @@
   <string name="incall_vibrate_hangup_title">Vibrado okaze de fino de alvoko</string>
   <string name="incall_vibrate_45_title">Vibrado ĉiuminute</string>
   <string name="incall_vibrate_45_summary">Vibrado je la 45a sekundo de ĉiuj minutoj dum forirantaj alvokoj</string>
+  <string name="call_log_show_all_slots">Ĉiuj SIM-oj</string>
+  <string name="call_log_all_calls_header">Ĉiuj alvokoj</string>
+  <string name="call_log_blacklist_header">Nur blokitaj alvokoj</string>
+  <string name="call_log_stats_title">Statistikoj</string>
+  <string name="callStatsDetailTitle">Detaloj pri alvokaj statistikoj</string>
+  <string name="call_stats_header_total">Sumo: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Sumo: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Komencdato</string>
+  <string name="call_stats_filter_to">Fina dato</string>
+  <string name="call_stats_filter_picker_title">Filtra intervalo</string>
+  <string name="date_quick_selection">Rapida elekto</string>
+  <string name="date_qs_currentmonth">Aktuala monato</string>
+  <string name="date_qs_currentquarter">Aktuala jarkvarono</string>
+  <string name="date_qs_currentyear">Aktuala jaro</string>
+  <string name="date_qs_lastweek">Lastsemajne</string>
+  <string name="date_qs_lastmonth">Lastmonate</string>
+  <string name="date_qs_lastquarter">Lasta jarkvarono</string>
+  <string name="date_qs_lastyear">Lastjare</string>
+  <string name="call_stats_date_filter">Agordi tempan intervalon</string>
+  <string name="call_stats_reset_filter">Rekomencigi tempan intervalon</string>
+  <string name="call_stats_sort_by_duration">Ordigi laŭ alvoka daŭro</string>
+  <string name="call_stats_sort_by_count">Ordigi laŭ alvoka nombro</string>
 </resources>

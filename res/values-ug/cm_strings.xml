@@ -47,4 +47,25 @@
   <string name="incall_vibrate_hangup_title">ئۈزگەندە تىترەت</string>
   <string name="incall_vibrate_45_title">ھەر مىنۇتتا تىترەت</string>
   <string name="incall_vibrate_45_summary">سىرتتىكى نومۇرنى چاقىرغاندا ھەر 45 سېكۇنتتا بىر تىترىتىدۇ</string>
+  <string name="call_log_show_all_slots">ھەممە SIM كارتا</string>
+  <string name="call_log_all_calls_header">ھەممە چاقىرىشلار</string>
+  <string name="call_log_stats_title">سىتاتىستىكا</string>
+  <string name="callStatsDetailTitle">چاقىرىش تەپسىلاتى</string>
+  <string name="call_stats_header_total">جەمئى: <xliff:g id="call_count">%s</xliff:g>، <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">جەمئى: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">باشلاش چېسلاسى</string>
+  <string name="call_stats_filter_to">ئاخىرلىشىش چېسلاسى</string>
+  <string name="call_stats_filter_picker_title">سۈزگۈچ دائىرىسى</string>
+  <string name="date_quick_selection">تېز تاللاش</string>
+  <string name="date_qs_currentmonth">نۆۋەتتىكى ئاي</string>
+  <string name="date_qs_currentquarter">نۆۋەتتىكى پەسىل</string>
+  <string name="date_qs_currentyear">نۆۋەتتىكى يىل</string>
+  <string name="date_qs_lastweek">ئۆتكەن ھەپتە</string>
+  <string name="date_qs_lastmonth">ئۆتكەن ئاي</string>
+  <string name="date_qs_lastquarter">ئالدىنقى پەسىل</string>
+  <string name="date_qs_lastyear">ئۆتكەن يىل</string>
+  <string name="call_stats_date_filter">ۋاقىت دائىرىسى تەڭشەش</string>
+  <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
+  <string name="call_stats_sort_by_duration">داۋاملىشىش ۋاقتى بويىچە</string>
+  <string name="call_stats_sort_by_count">سۆزلىشىش قېتىمى بويىچە</string>
 </resources>

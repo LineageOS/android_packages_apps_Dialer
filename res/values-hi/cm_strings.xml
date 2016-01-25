@@ -50,4 +50,26 @@
   <string name="incall_vibrate_hangup_title">कॉल काट देने पर कंपन करें</string>
   <string name="incall_vibrate_45_title">हर मिनट कंपन करें</string>
   <string name="incall_vibrate_45_summary">जावक कॉलों के दौरान हर मिनट के 45वें सेकंड पर कंपन करता है</string>
+  <string name="call_log_show_all_slots">सब सिम</string>
+  <string name="call_log_all_calls_header">सब कॉल</string>
+  <string name="call_log_blacklist_header">केवल अवरुद्ध किए गए कॉल</string>
+  <string name="call_log_stats_title">आँकड़े</string>
+  <string name="callStatsDetailTitle">कॉल आँकड़ों का विवरण</string>
+  <string name="call_stats_header_total">कुल: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">कुल: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">शुरू तिथि</string>
+  <string name="call_stats_filter_to">अंत तिथि</string>
+  <string name="call_stats_filter_picker_title">फ़िल्टर रेंज</string>
+  <string name="date_quick_selection">तेज़ चयन</string>
+  <string name="date_qs_currentmonth">वर्तमान महीना</string>
+  <string name="date_qs_currentquarter">वर्तमान तिमाही</string>
+  <string name="date_qs_currentyear">वर्तमान वर्ष</string>
+  <string name="date_qs_lastweek">पिछला सप्ताह</string>
+  <string name="date_qs_lastmonth">पिछला महीना</string>
+  <string name="date_qs_lastquarter">पिछली तिमाही</string>
+  <string name="date_qs_lastyear">पिछला वर्ष</string>
+  <string name="call_stats_date_filter">समय रेंज को समायोजित करें</string>
+  <string name="call_stats_reset_filter">समय रेंज को रीसेट करें</string>
+  <string name="call_stats_sort_by_duration">कॉल अवधि के अनुसार छाँटें</string>
+  <string name="call_stats_sort_by_count">कॉल गिनती के अनुसार छाँटें</string>
 </resources>
