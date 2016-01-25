@@ -16,17 +16,25 @@
 
 package com.android.dialer.calllog;
 
+import static android.Manifest.permission.READ_CALL_LOG;
+import static android.Manifest.permission.READ_CONTACTS;
+
+import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.google.common.collect.Maps;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.telecom.PhoneAccountHandle;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -143,6 +151,7 @@ public class DefaultVoicemailNotifier {
             }
         }
 
+        // All the potential new voicemails have been removed, e.g. if they were spam.
         if (newCalls.isEmpty()) {
             return;
         }
@@ -163,13 +172,31 @@ public class DefaultVoicemailNotifier {
         // TODO: Use the photo of contact if all calls are from the same person.
         final int icon = android.R.drawable.stat_notify_voicemail;
 
+        Uri ringtoneUri = null;
+        int notificationDefaults = 0;
+        if (callToNotify != null) {
+            PhoneAccountHandle accountHandle = new PhoneAccountHandle(
+                    ComponentName.unflattenFromString(callToNotify.accountComponentName),
+                    callToNotify.accountId);
+            ringtoneUri = TelephonyManagerCompat
+                    .getVoicemailRingtoneUri(getTelephonyManager(), accountHandle);
+            if (ContactsUtils.FLAG_N_FEATURE) {
+                notificationDefaults = TelephonyManagerCompat.isVoicemailVibrationEnabled(
+                        getTelephonyManager(), accountHandle)
+                        ? Notification.DEFAULT_VIBRATE : 0;
+            } else {
+                notificationDefaults = Notification.DEFAULT_ALL;
+            }
+        }
+
         Notification.Builder notificationBuilder = new Notification.Builder(mContext)
                 .setSmallIcon(icon)
                 .setContentTitle(title)
                 .setContentText(callers)
                 .setStyle(new Notification.BigTextStyle().bigText(transcription))
                 .setColor(resources.getColor(R.color.dialer_theme_color))
-                .setDefaults(callToNotify != null ? Notification.DEFAULT_ALL : 0)
+                .setSound(ringtoneUri)
+                .setDefaults(notificationDefaults)
                 .setDeleteIntent(createMarkNewVoicemailsAsOldIntent())
                 .setAutoCancel(true);
 
@@ -203,5 +230,9 @@ public class DefaultVoicemailNotifier {
 
     private NotificationManager getNotificationManager() {
         return (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+    private TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
     }
 }
