@@ -100,7 +100,7 @@ public class PhoneNumberUtil {
      * @see com.android.i18n.phonenumbers.PhoneNumberOfflineGeocoder
      */
     public static String getGeoDescription(Context context, String number) {
-        Log.v(TAG, "getGeoDescription('" + number + "')...");
+        Log.v(TAG, "getGeoDescription('" + pii(number) + "')...");
 
         if (TextUtils.isEmpty(number)) {
             return null;
@@ -114,13 +114,13 @@ public class PhoneNumberUtil {
         String countryIso = TelephonyManagerUtils.getCurrentCountryIso(context, locale);
         Phonenumber.PhoneNumber pn = null;
         try {
-            Log.v(TAG, "parsing '" + number
+            Log.v(TAG, "parsing '" + pii(number)
                     + "' for countryIso '" + countryIso + "'...");
             pn = util.parse(number, countryIso);
-            Log.v(TAG, "- parsed number: " + pn);
+            Log.v(TAG, "- parsed number: " + pii(pn));
         } catch (NumberParseException e) {
             Log.v(TAG, "getGeoDescription: NumberParseException for incoming number '" +
-                    number + "'");
+                    pii(number) + "'");
         }
 
         if (pn != null) {
@@ -130,5 +130,9 @@ public class PhoneNumberUtil {
         }
 
         return null;
+    }
+
+    private static String pii(Object pii) {
+        return com.android.incallui.Log.pii(pii);
     }
 }
