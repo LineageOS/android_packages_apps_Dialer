@@ -18,7 +18,7 @@ import com.cyanogen.ambient.callerinfo.util.ProviderInfo;
 import com.cyanogen.ambient.common.api.AmbientApiClient;
 import com.cyanogen.ambient.common.api.PendingResult;
 import com.cyanogen.ambient.common.api.ResultCallback;
-import com.cyanogen.ambient.incall.InCallPluginStatus;
+import com.cyanogen.ambient.plugin.PluginStatus;
 import com.cyanogen.ambient.incall.util.InCallHelper;
 import com.google.common.collect.Lists;
 
@@ -163,8 +163,8 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
         if (mCallProviders != null) {
             for (CallMethodInfo cmi : mCallProviders) {
-                if (cmi.mStatus == InCallPluginStatus.ENABLED || cmi.mStatus ==
-                        InCallPluginStatus.DISABLED) {
+                if (cmi.mStatus == PluginStatus.ENABLED || cmi.mStatus ==
+                        PluginStatus.DISABLED) {
                     Header thing = new Header();
                     Bundle b = new Bundle();
                     b.putString(COMPONENT_NAME, cmi.mComponent.flattenToShortString());
@@ -174,7 +174,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
                     thing.summary = cmi.mSummary;
                     target.add(thing);
 
-                    if (cmi.mStatus == InCallPluginStatus.ENABLED && cmi.mSettingsIntent != null) {
+                    if (cmi.mStatus == PluginStatus.ENABLED && cmi.mSettingsIntent != null) {
                         thing = new Header();
 
                         thing.title = getResources().getString(R.string.incall_plugin_settings, cmi
@@ -296,7 +296,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
             Header header = ((Header) switchButton.getTag());
             if (header.extras != null && header.extras.containsKey(COMPONENT_NAME)) {
                 setCheckedStateWithoutTriggeringListener(switchButton,
-                        header.extras.getInt(COMPONENT_STATUS) == InCallPluginStatus.ENABLED);
+                        header.extras.getInt(COMPONENT_STATUS) == PluginStatus.ENABLED);
 
             }
         }
@@ -431,7 +431,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
                                 // by the ambient core package
                             }
                         }, componentName);
-        asyncTask.execute(isEnabled ? InCallPluginStatus.ENABLED : InCallPluginStatus.DISABLED);
+        asyncTask.execute(isEnabled ? PluginStatus.ENABLED : PluginStatus.DISABLED);
         extras.putBoolean(COMPONENT_STATUS, isEnabled);
     }
 }

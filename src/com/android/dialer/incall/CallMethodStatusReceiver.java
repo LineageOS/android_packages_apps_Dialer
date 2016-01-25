@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.android.dialer.DialtactsActivity;
 import com.android.phone.common.incall.CallMethodUtils;
+import com.cyanogen.ambient.plugin.PluginStatus;
+import com.cyanogen.ambient.plugin.PluginStatusConstants;
 
 public class CallMethodStatusReceiver extends BroadcastReceiver {
 
@@ -18,9 +20,9 @@ public class CallMethodStatusReceiver extends BroadcastReceiver {
                 .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 
         if (b != null) {
-            String pluginName = b.getString(com.cyanogen.ambient.incall.PluginStatusConstants.EXTRA_PLUGIN_COMPONENT);
-            int pluginStatus = b.getInt(com.cyanogen.ambient.incall.PluginStatusConstants.EXTRA_PLUGIN_STATUS);
-            if (pluginStatus == com.cyanogen.ambient.incall.InCallPluginStatus.ENABLED) {
+            String pluginName = b.getString(PluginStatusConstants.EXTRA_PLUGIN_COMPONENT);
+            int pluginStatus = b.getInt(PluginStatusConstants.EXTRA_PLUGIN_STATUS);
+            if (pluginStatus == PluginStatus.ENABLED) {
 
                 String lastProviderEnabled =
                         preferences.getString(CallMethodUtils.PREF_LAST_ENABLED_PROVIDER, null);
