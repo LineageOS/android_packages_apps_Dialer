@@ -1038,6 +1038,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     public boolean onTouch(View v, MotionEvent event) {
                         // Show the FAB when the user touches the lists fragment and the soft
                         // keyboard is hidden.
+                        hideDialpadFragment(true, false);
                         showFabInSearchUi();
                         return false;
                     }
