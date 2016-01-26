@@ -271,6 +271,12 @@
             android:exported="false"
         />
 
+        <receiver android:name=".calllog.MissedCallNotificationReceiver">
+            <intent-filter>
+                <action android:name="android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
         <!-- Service to update a contact -->
         <service
             android:name=".contact.ContactUpdateService"

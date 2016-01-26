@@ -78,6 +78,16 @@ public class CallLogNotificationsHelper {
     }
 
     /**
+     * Get all missed calls with the "new" flag set to 1.
+     *
+     * @return A list of NewCall objects where each object represents a new missed call.
+     */
+    @Nullable
+    public List<NewCall> getNewMissedCalls() {
+        return mNewCallsQuery.query(Calls.MISSED_TYPE);
+    }
+
+    /**
      * Given a number and number information (presentation and country ISO), get the best name
      * for display. If the name itself if already available, return that. Otherwise attempt to look
      * it up in the database. If that fails, fall back to displaying the number.

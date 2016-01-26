@@ -19,7 +19,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -32,7 +31,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.compat.ContactsCompat;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -42,7 +40,6 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
-import com.android.incallui.CallerInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
