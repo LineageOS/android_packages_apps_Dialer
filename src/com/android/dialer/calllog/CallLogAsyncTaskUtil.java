@@ -353,8 +353,6 @@ public class CallLogAsyncTaskUtil {
                 Intent intent = new Intent(context, CallLogNotificationsService.class);
                 intent.setAction(CallLogNotificationsService.ACTION_MARK_NEW_VOICEMAILS_AS_OLD);
                 context.startService(intent);
-
-                ((DialtactsActivity) context).updateTabUnreadCounts();
                 return null;
             }
         });
@@ -415,7 +413,6 @@ public class CallLogAsyncTaskUtil {
             }
         });
     }
-
 
     /**
      * Updates the duration of a voicemail call log entry if the duration given is greater than 0,

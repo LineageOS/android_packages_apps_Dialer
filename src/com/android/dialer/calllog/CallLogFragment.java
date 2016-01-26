@@ -473,9 +473,13 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         // We don't want to update any call data when keyguard is on because the user has likely not
         // seen the new calls yet.
         // This might be called before onCreate() and thus we need to check null explicitly.
-        if (mKeyguardManager != null && !mKeyguardManager.inKeyguardRestrictedInputMode()
-                && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-            CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
+        if (mKeyguardManager != null && !mKeyguardManager.inKeyguardRestrictedInputMode()) {
+            // On either of the transitions we update the missed call and voicemail notifications.
+            // While exiting we additionally consume all missed calls (by marking them as read).
+            mCallLogQueryHandler.markNewCallsAsOld();
+            if (mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
+                CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
+            }
         }
     }
 
