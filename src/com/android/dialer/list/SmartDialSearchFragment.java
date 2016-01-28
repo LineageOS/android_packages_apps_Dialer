@@ -18,10 +18,8 @@ package com.android.dialer.list;
 import static android.Manifest.permission.CALL_PHONE;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -33,16 +31,13 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.incall.CallMethodInfo;
@@ -63,7 +58,7 @@ public class SmartDialSearchFragment extends SearchFragment
 
     private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
 
-    private HashMap<ComponentName, CallMethodInfo> mAvailableCallMethods;
+    private HashMap<ComponentName, CallMethodInfo> mAvailableProviders;
 
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
@@ -121,7 +116,6 @@ public class SmartDialSearchFragment extends SearchFragment
     @Override
     public void setupEmptyView() {
         final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
-        adapter.getCount();
 
         if (mCurrentCallMethodInfo == null) {
             mCurrentCallMethodInfo = ((DialtactsActivity) getActivity()).getCurrentCallMethod();
@@ -133,25 +127,22 @@ public class SmartDialSearchFragment extends SearchFragment
                 mEmptyView.setActionLabel(R.string.permission_single_turn_on);
                 mEmptyView.setDescription(R.string.permission_place_call);
                 mEmptyView.setActionClickedListener(this);
-            } else {
-                if (adapter.getCount() == 0) {
-                    mEmptyView.setActionLabel(mEmptyView.NO_LABEL);
-                    mEmptyView.setImage(R.drawable.empty_contacts);
-                    Resources r = getResources();
+            } else if (adapter.getCount() == 0) {
+                mEmptyView.setActionLabel(mEmptyView.NO_LABEL);
+                mEmptyView.setImage(R.drawable.empty_contacts);
+                Resources r = getResources();
 
-                    // Get Current call methods, we don't want to update this suddenly so just
-                    // the currently available ones are fine.
-                    mAvailableCallMethods = CallMethodHelper.getAllCallMethods();
+                // Get Current InCall plugin specific call methods, we don't want to update this
+                // suddenly so just the currently available ones are fine.
+                //setAvailableProviders(CallMethodHelper.getAllCallMethods());
+                if (mAvailableProviders == null) {
+                    mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
+                }
 
-                    if (mCurrentCallMethodInfo == null && mAvailableCallMethods.isEmpty()) {
-                        showNormalT9Hint(r);
-                    } else {
-                        if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
-                            showProviderHint(r);
-                        } else {
-                            showSuggestion(r);
-                        }
-                    }
+                if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
+                    showProviderHint(r);
+                } else {
+                    showSuggestion(r);
                 }
             }
         }
@@ -190,7 +181,7 @@ public class SmartDialSearchFragment extends SearchFragment
         mEmptyView.setImage(heroImage);
         mEmptyView.setDescription(text);
         mEmptyView.setSubViewVisibility(View.GONE);
-        // TODO: put action button for loggin in or switching provider!
+        // TODO: put action button for login in or switching provider!
     }
 
     public void showSuggestion(Resources r) {
@@ -199,7 +190,20 @@ public class SmartDialSearchFragment extends SearchFragment
 
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        if (mWifi.isConnected() && !mAvailableCallMethods.isEmpty() && mCurrentCallMethodInfo != null) {
+        CallMethodInfo emergencyOnlyCallMethod = CallMethodInfo.getEmergencyCallMethod(getContext());
+        if ((mCurrentCallMethodInfo == null /*&& (mSims == null || mSims.isEmpty())*/) ||
+                (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.equals(emergencyOnlyCallMethod))) {
+            // If no sims available and emergency only call method selected,
+            // alert user that only emergency calls are allowed for the current call method.
+            String text = r.getString(R.string.emergency_call_hint_text);
+            Drawable heroImage = r.getDrawable(R.drawable.ic_nosim);
+            heroImage.setTint(r.getColor(R.color.emergency_call_icon_color));
+
+            mEmptyView.setImage(heroImage);
+            mEmptyView.setDescription(text);
+            mEmptyView.setSubViewVisibility(View.GONE);
+        } else if (mCurrentCallMethodInfo != null && !mCurrentCallMethodInfo.mIsInCallProvider &&
+                !mAvailableProviders.isEmpty() && mWifi.isConnected()) {
             String template;
             Drawable heroImage;
             String text;
@@ -226,7 +230,7 @@ public class SmartDialSearchFragment extends SearchFragment
     private String hintTextRequest() {
         // Randomly choose an item that is not a sim to prompt user to switch to
         List<CallMethodInfo> valuesList =
-                new ArrayList<CallMethodInfo>(mAvailableCallMethods.values());
+                new ArrayList<CallMethodInfo>(mAvailableProviders.values());
 
         int randomIndex = new Random().nextInt(valuesList.size());
         return valuesList.get(randomIndex).mName;
@@ -238,8 +242,14 @@ public class SmartDialSearchFragment extends SearchFragment
         reloadData();
     }
 
-    public void setAvailableCallMethods(HashMap<ComponentName, CallMethodInfo> callMethods) {
-        mAvailableCallMethods.putAll(callMethods);
+    public void setAvailableProviders(HashMap<ComponentName, CallMethodInfo> callMethods) {
+        if (mAvailableProviders != null) {
+            mAvailableProviders.clear();
+        } else {
+            mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
+        }
+        // Note: these should be available (enabled) providers only!
+        mAvailableProviders.putAll(callMethods);
         setupEmptyView();
     }
 
@@ -250,7 +260,7 @@ public class SmartDialSearchFragment extends SearchFragment
             return;
         }
 
-        requestPermissions(new String[] {CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
+        requestPermissions(new String[]{CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
     }
 
     @Override

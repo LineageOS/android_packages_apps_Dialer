@@ -306,14 +306,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     };
 
     private void providersUpdated(HashMap<ComponentName, CallMethodInfo> availableCallMethods) {
-        if (mSmartDialSearchFragment != null) {
-            mSmartDialSearchFragment.setAvailableCallMethods(availableCallMethods);
-        }
         // We don't want to update this until we know that our providers are loaded. otherwise
         // we may miss some data.
         updateSmartDialDatabase();
         mAvailableProviders.clear();
         CallMethodHelper.removeDisabled(availableCallMethods, mAvailableProviders);
+        if (mSmartDialSearchFragment != null) {
+            mSmartDialSearchFragment.setAvailableProviders(mAvailableProviders);
+        }
     }
 
     protected class OptionsPopupMenu extends PopupMenu {

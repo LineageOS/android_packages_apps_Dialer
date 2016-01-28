@@ -134,8 +134,9 @@
     <string name="sign_in_hint_text">Sign in to make %1$s calls</string>
     <string name="wifi_hint_text">Try switching to %1$s to make calls over Wi-Fi.</string>
     <string name="roaming_hint_text">%1$s is currently roaming. Try switching to %1$s to make calls over Wi-Fi.</string>
+    <string name="emergency_call_hint_text">No SIM. Emergency calls only.</string>
 
     <!-- InCall Plugin Settings -->
     <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>
-    
+
 </resources>

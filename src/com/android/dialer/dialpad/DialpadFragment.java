@@ -507,12 +507,25 @@ public class DialpadFragment extends Fragment
 
     private void updateCallMethodSpinner() {
         mCallMethodSpinnerAdapter.clear();
-        mCallMethodSpinnerAdapter.addAll(mSims);
+        // Add available SIMs or EmergencyCallMethod
+        if ((mSims == null || mSims.isEmpty()) &&
+                mAllAvailableProviders != null && !mAllAvailableProviders.isEmpty()) {
+            // Show "emergency call" option in spinner
+            mCallMethodSpinnerAdapter.add(CallMethodInfo.getEmergencyCallMethod(getContext()));
+        } else {
+            // Show available SIMs in spinner
+            mCallMethodSpinnerAdapter.addAll(mSims);
+        }
+
+        // Add available providers
         if (mAllAvailableProviders != null) {
+            // Show available providers in spinner
             mCallMethodSpinnerAdapter.addAll(mAllAvailableProviders);
         }
 
-        if (mSims.size() <= 1 && mAllAvailableProviders.values().isEmpty()) {
+        // Set currently selected CallMethod
+        if (mSims.size() <= 1 && mAllAvailableProviders != null &&
+                mAllAvailableProviders.isEmpty()) {
             // zero or one sim and no providers
             mCallMethodSpinner.setVisibility(View.GONE);
             CallMethodInfo info = (mCallMethodSpinnerAdapter.getCount() > 0) ?
@@ -520,7 +533,7 @@ public class DialpadFragment extends Fragment
             onCallMethodChanged(info);
         } else {
             // multiple call methods or single provider
-            CallMethodInfo defaultSim = CallMethodUtils.getDefaultDataSimInfo(getActivity());
+            CallMethodInfo defaultSim = CallMethodUtils.getDefaultSimInfo(getActivity());
             int position = 0;
             if (defaultSim != null) {
                 position = mCallMethodSpinnerAdapter.getPosition(
@@ -836,7 +849,6 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
-
     }
 
     @Override
@@ -1302,11 +1314,22 @@ public class DialpadFragment extends Fragment
                     mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
                             number, getActivity());
                 } else {
-                    final Intent intent = IntentUtil.getCallIntent(number,
-                            (getActivity() instanceof DialtactsActivity ?
-                                    ((DialtactsActivity) getActivity()).getCallOrigin() : null));
-                    DialerUtils.startActivityWithErrorToast(getActivity(), intent);
-                    hideAndClearDialpad(false);
+                    // TODO: implement multisim selection
+                    /*Context ctx = getContext().getApplicationContext();
+                    CallMethodInfo emergencyCallMethod = CallMethodInfo.getEmergencyCallMethod(ctx);
+                    if (PhoneNumberUtils.isEmergencyNumber(number) ||
+                            mCurrentCallMethodInfo == null ||
+                            mCurrentCallMethodInfo.equals(emergencyCallMethod)) {*/
+                        // No CallMethod specified or Emergency CallMethod (emergency call only)
+                        final Intent intent = IntentUtil.getCallIntent(number,
+                                (getActivity() instanceof DialtactsActivity ?
+                                        ((DialtactsActivity) getActivity())
+                                                .getCallOrigin() : null));
+                        DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+                        hideAndClearDialpad(false);
+                    /*} else {
+                        // CallMethod selected, use it.
+                    }*/
                 }
             }
         }
