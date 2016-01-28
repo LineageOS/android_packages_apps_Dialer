@@ -213,6 +213,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
 
     private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
         mCallableMimeTypes = CallMethodHelper.getAllEnabledMimeTypes();
+        loadSpeedDialFavorites();
     }
 
     CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
@@ -220,17 +221,14 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
                 @Override
                 public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
                     providersUpdated(callMethodInfos);
-                    Bundle bundle = new Bundle();
-                    bundle.putString(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mCallableMimeTypes);
-                    if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
-                        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, bundle,
-                                mContactTileLoaderListener);
-
-                    } else {
-                        getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
-                    }
                 }
             };
+
+    private void loadSpeedDialFavorites() {
+        Bundle bundle = new Bundle();
+        bundle.putString(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mCallableMimeTypes);
+        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, bundle, mContactTileLoaderListener);
+    }
 
     @Override
     public void onResume() {
@@ -238,7 +236,6 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         super.onResume();
 
         if (PermissionsUtil.hasContactsPermissions(getActivity())) {
-
 
             if(CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
                 providersUpdated(CallMethodHelper.getAllCallMethods());
