@@ -50,6 +50,7 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
             final DirectoryPartition partition =
                 (DirectoryPartition) getPartition(getPartitionForPosition(position));
             final long directoryId = partition.getDirectoryId();
+            final boolean isExtendedDirectory = isExtendedDirectory(directoryId);
 
             info.name = item.getString(PhoneQuery.DISPLAY_NAME);
             info.type = item.getInt(PhoneQuery.PHONE_TYPE);
@@ -57,13 +58,22 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
             info.number = item.getString(PhoneQuery.PHONE_NUMBER);
             final String photoUriStr = item.getString(PhoneQuery.PHOTO_URI);
             info.photoUri = photoUriStr == null ? null : Uri.parse(photoUriStr);
-            info.userType = DirectoryCompat.isEnterpriseDirectoryId(directoryId)
-                    ? ContactsUtils.USER_TYPE_WORK : ContactsUtils.USER_TYPE_CURRENT;
+            /*
+             * An extended directory is custom directory in the app, but not a directory provided by
+             * framework. So it can't be USER_TYPE_WORK.
+             *
+             * When a search result is selected, RegularSearchFragment calls getContactInfo and
+             * cache the resulting @{link ContactInfo} into local db. Set usertype to USER_TYPE_WORK
+             * only if it's NOT extended directory id and is enterprise directory.
+             */
+            info.userType = !isExtendedDirectory
+                    && DirectoryCompat.isEnterpriseDirectoryId(directoryId)
+                            ? ContactsUtils.USER_TYPE_WORK : ContactsUtils.USER_TYPE_CURRENT;
 
             cacheInfo.setLookupKey(item.getString(PhoneQuery.LOOKUP_KEY));
 
             final String sourceName = partition.getLabel();
-            if (isExtendedDirectory(directoryId)) {
+            if (isExtendedDirectory) {
                 cacheInfo.setExtendedSource(sourceName, directoryId);
             } else {
                 cacheInfo.setDirectorySource(sourceName, directoryId);
