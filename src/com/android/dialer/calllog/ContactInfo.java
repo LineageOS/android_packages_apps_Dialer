@@ -93,6 +93,7 @@ public class ContactInfo {
                 .add("type", type).add("label", label)
                 .add("number", number).add("formattedNumber",formattedNumber)
                 .add("normalizedNumber", normalizedNumber).add("photoId", photoId)
-                .add("photoUri", photoUri).add("objectId", objectId).toString();
+                .add("photoUri", photoUri).add("objectId", objectId)
+                .add("userType",userType).toString();
     }
 }
