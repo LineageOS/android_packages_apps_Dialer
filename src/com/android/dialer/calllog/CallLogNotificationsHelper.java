@@ -31,6 +31,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.util.TelecomUtil;
@@ -49,9 +50,12 @@ public class CallLogNotificationsHelper {
     public static CallLogNotificationsHelper getInstance(Context context) {
         if (sInstance == null) {
             ContentResolver contentResolver = context.getContentResolver();
+            String countryIso = GeoUtil.getCurrentCountryIso(context);
             sInstance = new CallLogNotificationsHelper(context,
                     createNewCallsQuery(context, contentResolver),
-                    createNameLookupQuery(context, contentResolver));
+                    createNameLookupQuery(context, contentResolver),
+                    new ContactInfoHelper(context, countryIso),
+                    countryIso);
         }
         return sInstance;
     }
@@ -59,12 +63,17 @@ public class CallLogNotificationsHelper {
     private final Context mContext;
     private final NewCallsQuery mNewCallsQuery;
     private final NameLookupQuery mNameLookupQuery;
+    private final ContactInfoHelper mContactInfoHelper;
+    private final String mCurrentCountryIso;
 
     CallLogNotificationsHelper(Context context, NewCallsQuery newCallsQuery,
-            NameLookupQuery nameLookupQuery) {
+            NameLookupQuery nameLookupQuery, ContactInfoHelper contactInfoHelper,
+            String countryIso) {
         mContext = context;
         mNewCallsQuery = newCallsQuery;
         mNameLookupQuery = nameLookupQuery;
+        mContactInfoHelper = contactInfoHelper;
+        mCurrentCountryIso = countryIso;
     }
 
     /**
@@ -89,8 +98,9 @@ public class CallLogNotificationsHelper {
 
     /**
      * Given a number and number information (presentation and country ISO), get the best name
-     * for display. If the name itself if already available, return that. Otherwise attempt to look
-     * it up in the database. If that fails, fall back to displaying the number.
+     * for display. If the name is empty but we have a special presentation, display that.
+     * Otherwise attempt to look it up in the database or the cache.
+     * If that fails, fall back to displaying the number.
      */
     public String getName(@Nullable String number, int numberPresentation,
                           @Nullable String countryIso) {
@@ -102,11 +112,24 @@ public class CallLogNotificationsHelper {
         if (!TextUtils.isEmpty(name)) {
             return name;
         }
+
         // Look it up in the database.
         name = mNameLookupQuery.query(number);
         if (!TextUtils.isEmpty(name)) {
             return name;
         }
+
+        if (countryIso == null) {
+            countryIso = mCurrentCountryIso;
+        }
+
+        // Look it up in the cache
+        ContactInfo contactInfo = mContactInfoHelper.lookupNumber(number, countryIso);
+
+        if (contactInfo != null && !TextUtils.isEmpty(contactInfo.name)) {
+            return contactInfo.name;
+        }
+
         if (!TextUtils.isEmpty(number)) {
             // If we cannot lookup the contact, use the number instead.
             return PhoneNumberUtils.formatNumber(number, countryIso);

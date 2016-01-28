@@ -26,7 +26,6 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
 import com.android.dialer.DialtactsActivity;
@@ -105,8 +104,7 @@ public class MissedCallNotifier {
                     .getName(useCallLog ? newestCall.number : number,
                             useCallLog ? newestCall.numberPresentation
                                     : Calls.PRESENTATION_ALLOWED,
-                            useCallLog ? newestCall.countryIso
-                                    : GeoUtil.getCurrentCountryIso(mContext));
+                            useCallLog ? newestCall.countryIso : null);
         } else {
             titleResId = R.string.notification_missedCallsTitle;
             expandedText =
