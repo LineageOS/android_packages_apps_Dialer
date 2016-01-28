@@ -99,6 +99,28 @@
     <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
     <string name="clearCallLogProgress_title">Clearing call history\u2026</string>
 
+    <!-- Title used for the activity for placing a call. This name appears
+         in activity disambig dialogs -->
+    <string name="userCallActivityLabel" product="default">Phone</string>
+
+    <!-- Notification strings -->
+    <!-- Missed call notification label, used when there's exactly one missed call -->
+    <string name="notification_missedCallTitle">Missed call</string>
+    <!-- Missed call notification label, used when there are two or more missed calls -->
+    <string name="notification_missedCallsTitle">Missed calls</string>
+    <!-- Missed call notification message used when there are multiple missed calls -->
+    <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%s</xliff:g> missed calls</string>
+    <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
+         The user will be able to call back to the person or the phone number.
+         [CHAR LIMIT=18] -->
+    <string name="notification_missedCall_call_back">Call back</string>
+    <!-- Message for "reply via sms" action, which is displayed in the missed call notification.
+         The user will be able to send text messages using the phone number.
+         [CHAR LIMIT=18] -->
+    <string name="notification_missedCall_message">Message</string>
+        <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
+    <string name="handle_restricted">RESTRICTED</string>
+
     <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
     <plurals name="notification_voicemail_title">
         <item quantity="one">Voicemail</item>
