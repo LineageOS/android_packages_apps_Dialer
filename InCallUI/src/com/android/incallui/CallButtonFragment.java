@@ -20,6 +20,7 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_ADD_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_AUDIO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_COUNT;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_DIALPAD;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_DOWNGRADE_TO_AUDIO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_HOLD;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MANAGE_VIDEO_CONFERENCE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MERGE;
@@ -81,11 +82,12 @@ public class CallButtonFragment
         public static final int BUTTON_SWAP = 4;
         public static final int BUTTON_UPGRADE_TO_VIDEO = 5;
         public static final int BUTTON_SWITCH_CAMERA = 6;
-        public static final int BUTTON_ADD_CALL = 7;
-        public static final int BUTTON_MERGE = 8;
-        public static final int BUTTON_PAUSE_VIDEO = 9;
-        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 10;
-        public static final int BUTTON_COUNT = 11;
+        public static final int BUTTON_DOWNGRADE_TO_AUDIO = 7;
+        public static final int BUTTON_ADD_CALL = 8;
+        public static final int BUTTON_MERGE = 9;
+        public static final int BUTTON_PAUSE_VIDEO = 10;
+        public static final int BUTTON_MANAGE_VIDEO_CONFERENCE = 11;
+        public static final int BUTTON_COUNT = 12;
     }
 
     private SparseIntArray mButtonVisibilityMap = new SparseIntArray(BUTTON_COUNT);
@@ -96,6 +98,7 @@ public class CallButtonFragment
     private CompoundButton mHoldButton;
     private ImageButton mSwapButton;
     private ImageButton mChangeToVideoButton;
+    private ImageButton mChangeToVoiceButton;
     private CompoundButton mSwitchCameraButton;
     private ImageButton mAddCallButton;
     private ImageButton mMergeButton;
@@ -155,6 +158,8 @@ public class CallButtonFragment
         mSwapButton.setOnClickListener(this);
         mChangeToVideoButton = (ImageButton) parent.findViewById(R.id.changeToVideoButton);
         mChangeToVideoButton.setOnClickListener(this);
+        mChangeToVoiceButton = (ImageButton) parent.findViewById(R.id.changeToVoiceButton);
+        mChangeToVoiceButton.setOnClickListener(this);
         mSwitchCameraButton = (CompoundButton) parent.findViewById(R.id.switchCameraButton);
         mSwitchCameraButton.setOnClickListener(this);
         mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
@@ -222,6 +227,9 @@ public class CallButtonFragment
             case R.id.changeToVideoButton:
                 getPresenter().changeToVideoClicked();
                 break;
+            case R.id.changeToVoiceButton:
+                getPresenter().changeToVoiceClicked();
+                break;
             case R.id.switchCameraButton:
                 getPresenter().switchCameraClicked(
                         mSwitchCameraButton.isSelected() /* useFrontFacingCamera */);
@@ -273,6 +281,7 @@ public class CallButtonFragment
         ImageButton[] normalButtons = {
                 mSwapButton,
                 mChangeToVideoButton,
+                mChangeToVoiceButton,
                 mAddCallButton,
                 mMergeButton,
                 mOverflowButton
@@ -362,6 +371,7 @@ public class CallButtonFragment
         mHoldButton.setEnabled(isEnabled);
         mSwapButton.setEnabled(isEnabled);
         mChangeToVideoButton.setEnabled(isEnabled);
+        mChangeToVoiceButton.setEnabled(isEnabled);
         mSwitchCameraButton.setEnabled(isEnabled);
         mAddCallButton.setEnabled(isEnabled);
         mMergeButton.setEnabled(isEnabled);
@@ -397,6 +407,8 @@ public class CallButtonFragment
                 return mSwapButton;
             case BUTTON_UPGRADE_TO_VIDEO:
                 return mChangeToVideoButton;
+            case BUTTON_DOWNGRADE_TO_AUDIO:
+                return mChangeToVoiceButton;
             case BUTTON_SWITCH_CAMERA:
                 return mSwitchCameraButton;
             case BUTTON_ADD_CALL:
