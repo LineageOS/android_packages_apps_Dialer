@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import com.android.dialer.DialtactsActivity;
+import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodUtils;
 import com.cyanogen.ambient.plugin.PluginStatus;
 import com.cyanogen.ambient.plugin.PluginStatusConstants;
@@ -15,6 +17,8 @@ public class CallMethodStatusReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle b = intent.getExtras();
+
+        CallMethodHelper.refresh();
 
         SharedPreferences preferences = context
                 .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);

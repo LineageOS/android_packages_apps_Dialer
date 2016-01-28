@@ -431,7 +431,9 @@ public class DialerSettingsActivity extends PreferenceActivity {
                                 // by the ambient core package
                             }
                         }, componentName);
-        asyncTask.execute(isEnabled ? PluginStatus.ENABLED : PluginStatus.DISABLED);
-        extras.putBoolean(COMPONENT_STATUS, isEnabled);
+
+        int status = isEnabled ? PluginStatus.ENABLED : PluginStatus.DISABLED;
+        asyncTask.execute(status);
+        extras.putInt(COMPONENT_STATUS, status);
     }
 }
