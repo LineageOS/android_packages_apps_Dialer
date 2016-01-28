@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Looper;
@@ -438,6 +439,10 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
         cce.photo = photo;
         cce.lookupKey = info.lookupKeyOrNull;
+        cce.contactRingtoneUri = info.contactRingtoneUri;
+        if (cce.contactRingtoneUri == null || cce.contactRingtoneUri == Uri.EMPTY) {
+            cce.contactRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        }
 
         return cce;
     }
@@ -666,6 +671,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         public List<Pair<Calendar, Calendar>> openingHours;
         public int contactLookupResult = LogState.LOOKUP_NOT_FOUND;
         public long userType = ContactsUtils.USER_TYPE_CURRENT;
+        public Uri contactRingtoneUri;
 
         @Override
         public String toString() {
@@ -683,6 +689,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                     .add("openingHours", openingHours)
                     .add("contactLookupResult", contactLookupResult)
                     .add("userType", userType)
+                    .add("contactRingtoneUri", contactRingtoneUri)
                     .toString();
         }
     }

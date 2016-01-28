@@ -16,7 +16,15 @@
 
 package com.android.incallui;
 
-import static com.android.incallui.NotificationBroadcastReceiver.*;
+import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_WORK_CALL;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VOICE_INCOMING_CALL;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_INCOMING_CALL;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_HANG_UP_ONGOING_CALL;
+
+import com.google.common.base.Preconditions;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -26,6 +34,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
@@ -36,6 +45,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
@@ -43,11 +53,7 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
 
-import com.google.common.base.Preconditions;
-
 import java.util.Objects;
-
-import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_WORK_CALL;
 
 /**
  * This class adds Notifications to the status bar for the in-call experience.
@@ -63,6 +69,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     // Notification for incoming calls. This is interruptive and will show up as a HUN.
     private static final int NOTIFICATION_INCOMING_CALL = 2;
 
+    private static final long[] VIBRATE_PATTERN = new long[] {0, 1000, 1000};
+
     private final Context mContext;
     private final ContactsPreferences mContactsPreferences;
     private final ContactInfoCache mContactInfoCache;
@@ -75,6 +83,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private String mSavedContentTitle;
     private String mCallId = null;
     private InCallState mInCallState;
+    private Uri mRingtone;
 
     public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache) {
         Preconditions.checkNotNull(context);
@@ -172,7 +181,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private void showNotification(final Call call) {
         final boolean isIncoming = (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING);
-
         if (!TextUtils.isEmpty(mCallId)) {
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
         }
@@ -237,7 +245,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         }
 
         if (!checkForChangeAndSaveData(iconResId, content, largeIcon, contentTitle, state,
-                notificationType)) {
+                notificationType, contactInfo.contactRingtoneUri)) {
             return;
         }
 
@@ -285,6 +293,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
          * Fire off the notification
          */
         Notification notification = builder.build();
+
+        if (shouldNotificationPlayRingtone(notificationType, contactInfo.contactRingtoneUri)) {
+            notification.flags |= Notification.FLAG_INSISTENT;
+            notification.sound = contactInfo.contactRingtoneUri;
+            AudioAttributes.Builder audioAttributes = new AudioAttributes.Builder();
+            audioAttributes.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC);
+            audioAttributes.setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE);
+            notification.audioAttributes = audioAttributes.build();
+            notification.vibrate = VIBRATE_PATTERN;
+        }
         if (mCurrentNotification != notificationType && mCurrentNotification != NOTIFICATION_NONE) {
             Log.i(this, "Previous notification already showing - cancelling "
                     + mCurrentNotification);
@@ -293,6 +311,15 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.i(this, "Displaying notification for " + notificationType);
         mNotificationManager.notify(notificationType, notification);
         mCurrentNotification = notificationType;
+    }
+
+    /*
+     * The Notification should only play the ringtone once it's had a chance to look up the contact.
+     * Until the lookup is complete, the ringtone Uri is null
+     */
+    private boolean shouldNotificationPlayRingtone(int notificationType, Uri ringtoneUri) {
+        return CompatUtils.isNCompatible() && notificationType == NOTIFICATION_INCOMING_CALL
+                && ringtoneUri != null;
     }
 
     private void createIncomingCallNotification(
@@ -326,7 +353,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * we do not issue a new notification for the exact same data.
      */
     private boolean checkForChangeAndSaveData(int icon, String content, Bitmap largeIcon,
-            String contentTitle, int state, int notificationType) {
+            String contentTitle, int state, int notificationType, Uri ringtone) {
 
         // The two are different:
         // if new title is not null, it should be different from saved version OR
@@ -336,9 +363,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
                 (contentTitle == null && mSavedContentTitle != null);
 
         // any change means we are definitely updating
-        boolean retval = (mSavedIcon != icon) || !Objects.equals(mSavedContent, content) ||
-                (mCallState != state) || (mSavedLargeIcon != largeIcon) ||
-                contentTitleChanged;
+        boolean retval = (mSavedIcon != icon) || !Objects.equals(mSavedContent, content)
+                || (mCallState != state) || (mSavedLargeIcon != largeIcon)
+                || contentTitleChanged || !Objects.equals(mRingtone, ringtone);
 
         // If we aren't showing a notification right now or the notification type is changing,
         // definitely do an update.
@@ -354,6 +381,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         mCallState = state;
         mSavedLargeIcon = largeIcon;
         mSavedContentTitle = contentTitle;
+        mRingtone = ringtone;
 
         if (retval) {
             Log.d(this, "Data changed.  Showing notification");
