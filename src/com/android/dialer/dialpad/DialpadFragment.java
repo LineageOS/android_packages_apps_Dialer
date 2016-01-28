@@ -209,17 +209,6 @@ public class DialpadFragment extends Fragment
     HashMap<ComponentName, CallMethodInfo> mAllAvailableProviders = new HashMap<>();
     private List<CallMethodInfo> mSims;
 
-    /* InCall Plugin Listener ID */
-    private static final String AMBIENT_SUBSCRIPTION_ID = "DialpadFragment";
-
-    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
-            new CallMethodHelper.CallMethodReceiver() {
-                @Override
-                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
-                    providersUpdated(callMethodInfos);
-                }
-            };
-
     private FloatingActionButtonController mFloatingActionButtonController;
 
     /**
@@ -495,22 +484,6 @@ public class DialpadFragment extends Fragment
             }
         }
         setCallRateInformation(creditText, buttonText, cmi.mManageCreditIntent);
-
-        /*creditsAvailable.setText(TextUtils.isEmpty(startText) ? "" : startText);
-        creditsAvailable.setTextColor(warnIfLow ? getResources().getColor(R.color
-                .credit_banner_alert_color) : getResources().getColor(R.color.dialer_theme_color));
-        creditWarningImage.setVisibility(warnIfLow ? View.VISIBLE : View.GONE);
-
-        if (!TextUtils.isEmpty(endText)) {
-            creditsIntentButton.setText(endText);
-            loadCreditIntent(mCurrentCallMethodInfo);
-        } else {
-            // if we're going to try to get the intent for this button, wait till we
-            // have that to show the credits banner. If there's no hope, assume that we
-            // will go on without the creditIntentButton.
-            //animateCreditBanner(false);
-        } */
-
     }
 
     private void onCallMethodChanged(CallMethodInfo callMethodInfo) {
@@ -518,29 +491,15 @@ public class DialpadFragment extends Fragment
         mCurrentCallMethodInfo = callMethodInfo;
         mCallMethodChangedListener.onCallMethodChangedListener(callMethodInfo);
 
-        //mSmartDialAdapter.setSelectedCallMethod(mCurrentCallMethodInfo);
-        //String query = (mDigits != null) ? mDigits.getText().toString() : "";
-        //onDialpadQueryChanged(query, true);
-
         if (callMethodInfo != null && callMethodInfo.mIsInCallProvider) {
             callMethodCredits(callMethodInfo);
-            //loadCreditComponentInfo(callMethodInfo);
-
-            // Hide overflow pause menu if call provider selected
-            //hideShowOverflow(false);
         } else {
             clearCallRateInformation();
-
-            // show overflow pause menu if sim card
-            //hideShowOverflow(true);
-
-            //animateCreditBanner(true);
         }
-        // Initalize type of hint to show
-        //hintConfiguration(fragmentView);
     }
 
-    private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+    public void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+        mSims = CallMethodUtils.getSimInfoList(getActivity());
         mAllAvailableProviders.clear();
         CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
         updateCallMethodSpinner();
@@ -575,9 +534,6 @@ public class DialpadFragment extends Fragment
             mCallMethodSpinner.setSelection(position);
             mCallMethodSpinner.setVisibility(View.VISIBLE);
         }
-
-        //buildOverlayCoachMark(fragmentView);
-        //hintConfiguration(fragmentView);
     }
 
     private boolean isLayoutReady() {
@@ -811,11 +767,6 @@ public class DialpadFragment extends Fragment
         mDialpadQueryListener = activity;
         mCallMethodChangedListener = activity;
 
-        mSims = CallMethodUtils.getSimInfoList(getActivity());
-        if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
-            CallMethodHelper.refreshDynamic();
-        }
-
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
 
         // Query the last dialed number. Do it first because hitting
@@ -886,7 +837,6 @@ public class DialpadFragment extends Fragment
 
         SpecialCharSequenceMgr.cleanup();
 
-        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
     }
 
     @Override

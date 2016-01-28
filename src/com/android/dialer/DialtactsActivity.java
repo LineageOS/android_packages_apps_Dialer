@@ -192,6 +192,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
      */
     private Animation mSlideOut;
 
+    HashMap<ComponentName, CallMethodInfo> mAvailableProviders = new HashMap<>();
+
     AnimationListenerAdapter mSlideInListener = new AnimationListenerAdapter() {
         @Override
         public void onAnimationEnd(Animation animation) {
@@ -310,6 +312,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // We don't want to update this until we know that our providers are loaded. otherwise
         // we may miss some data.
         updateSmartDialDatabase();
+        mAvailableProviders.clear();
+        CallMethodHelper.removeDisabled(availableCallMethods, mAvailableProviders);
     }
 
     protected class OptionsPopupMenu extends PopupMenu {
@@ -838,6 +842,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else {
             mDialpadFragment.setYFraction(0);
         }
+        mDialpadFragment.providersUpdated(mAvailableProviders);
 
         updateSearchFragmentPosition();
     }
