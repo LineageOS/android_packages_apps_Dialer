@@ -605,7 +605,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         super.onResume();
 
         if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
-            CallMethodHelper.refreshDynamic();
+            providersUpdated(CallMethodHelper.getAllCallMethods());
         }
 
         mStateSaved = false;
