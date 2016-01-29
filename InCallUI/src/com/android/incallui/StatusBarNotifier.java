@@ -61,6 +61,11 @@ import java.util.Objects;
 public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         CallList.CallUpdateListener {
 
+    /*
+     * Flag used to determine if the Dialer is responsible for playing ringtones for incoming calls.
+     */
+    private static final boolean IS_DIALER_RINGING_ENABLED = false;
+
     // Notification types
     // Indicates that no notification is currently showing.
     private static final int NOTIFICATION_NONE = 0;
@@ -318,7 +323,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * Until the lookup is complete, the ringtone Uri is null
      */
     private boolean shouldNotificationPlayRingtone(int notificationType, Uri ringtoneUri) {
-        return CompatUtils.isNCompatible() && notificationType == NOTIFICATION_INCOMING_CALL
+        return CompatUtils.isNCompatible() && IS_DIALER_RINGING_ENABLED
+                && notificationType == NOTIFICATION_INCOMING_CALL
                 && ringtoneUri != null;
     }
 
