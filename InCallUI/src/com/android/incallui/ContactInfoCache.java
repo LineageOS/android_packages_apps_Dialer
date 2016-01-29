@@ -297,6 +297,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                 // field is no longer used; it is persisted here in case
                 // the UI is ever changed to use it.
                 entry.location = oldEntry.location;
+                // Contact specific ringtone is obtained from local lookup.
+                entry.contactRingtoneUri = oldEntry.contactRingtoneUri;
             }
 
             // If no image and it's a business, switch to using the default business avatar.
