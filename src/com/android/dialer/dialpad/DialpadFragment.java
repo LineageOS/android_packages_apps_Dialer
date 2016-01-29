@@ -1914,6 +1914,13 @@ public class DialpadFragment extends Fragment
         return mDialpadView.getHeight();
     }
 
+    public int getDialpadWidth() {
+        if (mDialpadView == null) {
+            return 0;
+        }
+        return mDialpadView.getWidth();
+    }
+
     public void process_quote_emergency_unquote(String query) {
         if (PseudoEmergencyAnimator.PSEUDO_EMERGENCY_NUMBER.equals(query)) {
             if (mPseudoEmergencyAnimator == null) {

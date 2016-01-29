@@ -21,8 +21,10 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -123,6 +125,13 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
             mActionView.setText(resourceId);
             mActionView.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void setWidth(int width) {
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
+        lp.width = width;
+        lp.gravity = Gravity.LEFT;
+        requestLayout();
     }
 
     public boolean isShowingContent() {

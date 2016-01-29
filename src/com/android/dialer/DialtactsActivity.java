@@ -1448,6 +1448,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         return 0;
     }
 
+    public int getDialpadWidth() {
+        if (mDialpadFragment != null) {
+            return mDialpadFragment.getDialpadWidth();
+        }
+        return 0;
+    }
+
     @Override
     public int getActionBarHideOffset() {
         return getActionBar().getHideOffset();

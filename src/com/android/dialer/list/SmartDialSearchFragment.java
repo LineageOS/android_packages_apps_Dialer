@@ -117,11 +117,14 @@ public class SmartDialSearchFragment extends SearchFragment
     public void setupEmptyView() {
         final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
 
-        if (mCurrentCallMethodInfo == null) {
-            mCurrentCallMethodInfo = ((DialtactsActivity) getActivity()).getCurrentCallMethod();
-        }
+        DialtactsActivity dialActivity = (DialtactsActivity) getActivity();
 
-        if (mEmptyView != null && getActivity() != null) {
+        if (mEmptyView != null && dialActivity != null) {
+            if (mCurrentCallMethodInfo == null) {
+                mCurrentCallMethodInfo = dialActivity.getCurrentCallMethod();
+            }
+
+            mEmptyView.setWidth(dialActivity.getDialpadWidth());
             if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
                 mEmptyView.setImage(R.drawable.empty_contacts);
                 mEmptyView.setActionLabel(R.string.permission_single_turn_on);
