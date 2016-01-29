@@ -56,6 +56,8 @@ import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.incall.CallMethodInfo;
 
+import com.cyanogen.ambient.incall.extension.OriginCodes;
+
 public class SearchFragment extends PhoneNumberPickerFragment
         implements DialerPhoneNumberListAdapter.searchMethodClicked {
     private static final String TAG  = SearchFragment.class.getSimpleName();
@@ -250,7 +252,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
 
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID_PROVIDER:
-                super.onProviderClick(position, id, getCurrentCallMethod());
+                onProviderClick(position, id, getCurrentCallMethod());
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 super.onItemClick(position, id);
@@ -290,6 +292,12 @@ public class SearchFragment extends PhoneNumberPickerFragment
                 }
                 break;
         }
+    }
+
+    protected void onProviderClick(int position, long id, CallMethodInfo cmi) {
+        final String number = getPhoneNumber(position);
+        final String username = getUserName(position);
+        cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, username, getContext());
     }
 
     public void setCurrentCallMethod(CallMethodInfo cmi) {
