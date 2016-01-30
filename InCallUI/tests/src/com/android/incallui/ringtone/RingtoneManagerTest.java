@@ -72,4 +72,33 @@ public class RingtoneManagerTest extends AndroidTestCase {
         assertTrue(mRingtoneManager.shouldPlayRingtone(State.INCOMING,
                 RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)));
     }
+
+    public void testShouldPlayCallWaitingTone_M() {
+        if (CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertFalse(mRingtoneManager.shouldPlayCallWaitingTone(0));
+    }
+
+    public void testShouldPlayCallWaitingTone_N_NotCallWaiting() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertFalse(mRingtoneManager.shouldPlayCallWaitingTone(State.ACTIVE));
+    }
+
+    // Specific case for incoming since it plays its own sound
+    public void testShouldPlayCallWaitingTone_N_Incoming() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertFalse(mRingtoneManager.shouldPlayCallWaitingTone(State.INCOMING));
+    }
+
+    public void testShouldPlayCallWaitingTone_N() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertTrue(mRingtoneManager.shouldPlayCallWaitingTone(State.CALL_WAITING));
+    }
 }

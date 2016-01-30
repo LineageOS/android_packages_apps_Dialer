@@ -53,6 +53,19 @@ public class DialerRingtoneManager {
         return mForceDialerRingingEnabled || IS_DIALER_RINGING_ENABLED;
     }
 
+    /**
+     * Determines if a call waiting tone should be played for the the given call state
+     * (see {@link State}).
+     *
+     * @param callState the call state for the call being checked.
+     * @return {@code true} if the call waiting tone should be played, {@code false} otherwise.
+     */
+    public boolean shouldPlayCallWaitingTone(int callState) {
+        return CompatUtils.isNCompatible()
+                && isDialerRingingEnabled()
+                && callState == State.CALL_WAITING;
+    }
+
     @NeededForTesting
     void forceDialerRingingEnabled() {
         mForceDialerRingingEnabled = true;

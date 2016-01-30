@@ -305,6 +305,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             notification.audioAttributes = audioAttributes.build();
             notification.vibrate = VIBRATE_PATTERN;
         }
+        if (mDialerRingtoneManager.shouldPlayCallWaitingTone(callState)) {
+            // TODO (maxwelb) play call waiting
+        }
         if (mCurrentNotification != notificationType && mCurrentNotification != NOTIFICATION_NONE) {
             Log.i(this, "Previous notification already showing - cancelling "
                     + mCurrentNotification);
