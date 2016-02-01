@@ -26,6 +26,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.PhoneLookup;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -104,37 +105,61 @@ public class CallLogNotificationsHelper {
      */
     public String getName(@Nullable String number, int numberPresentation,
                           @Nullable String countryIso) {
-        String name = PhoneNumberDisplayUtil.getDisplayName(
-                mContext,
-                number,
-                numberPresentation,
-                false).toString();
-        if (!TextUtils.isEmpty(name)) {
-            return name;
-        }
+        return getContactInfo(number, numberPresentation, countryIso).name;
+    }
 
-        // Look it up in the database.
-        name = mNameLookupQuery.query(number);
-        if (!TextUtils.isEmpty(name)) {
-            return name;
-        }
-
+    /**
+     * Given a number and number information (presentation and country ISO), get
+     * {@link ContactInfo}. If the name is empty but we have a special presentation, display that.
+     * Otherwise attempt to look it up in the database or the cache.
+     * If that fails, fall back to displaying the number.
+     */
+    public @NonNull ContactInfo getContactInfo(@Nullable String number, int numberPresentation,
+                          @Nullable String countryIso) {
         if (countryIso == null) {
             countryIso = mCurrentCountryIso;
         }
 
-        // Look it up in the cache
-        ContactInfo contactInfo = mContactInfoHelper.lookupNumber(number, countryIso);
+        ContactInfo contactInfo = new ContactInfo();
+        contactInfo.number = number;
+        contactInfo.formattedNumber = PhoneNumberUtils.formatNumber(number, countryIso);
+        // contactInfo.normalizedNumber is not PhoneNumberUtils.normalizeNumber. Read ContactInfo.
+        contactInfo.normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
 
-        if (contactInfo != null && !TextUtils.isEmpty(contactInfo.name)) {
-            return contactInfo.name;
+        // 1. Special number representation.
+        contactInfo.name = PhoneNumberDisplayUtil.getDisplayName(
+                mContext,
+                number,
+                numberPresentation,
+                false).toString();
+        if (!TextUtils.isEmpty(contactInfo.name)) {
+            return contactInfo;
         }
 
-        if (!TextUtils.isEmpty(number)) {
-            // If we cannot lookup the contact, use the number instead.
-            return PhoneNumberUtils.formatNumber(number, countryIso);
+        // 2. Personal ContactsProvider phonelookup query.
+        contactInfo.name = mNameLookupQuery.query(number);
+        if (!TextUtils.isEmpty(contactInfo.name)) {
+            return contactInfo;
         }
-        return mContext.getResources().getString(R.string.unknown);
+
+        // 3. Look it up in the cache.
+        ContactInfo cachedContactInfo = mContactInfoHelper.lookupNumber(number, countryIso);
+
+        if (cachedContactInfo != null && !TextUtils.isEmpty(cachedContactInfo.name)) {
+            return cachedContactInfo;
+        }
+
+        if (!TextUtils.isEmpty(contactInfo.formattedNumber)) {
+            // 4. If we cannot lookup the contact, use the formatted number instead.
+            contactInfo.name = contactInfo.formattedNumber;
+        } else if (!TextUtils.isEmpty(number)) {
+            // 5. If number can't be formatted, use number.
+            contactInfo.name = number;
+        } else {
+            // 6. Otherwise, it's unknown number.
+            contactInfo.name = mContext.getResources().getString(R.string.unknown);
+        }
+        return contactInfo;
     }
 
     /** Removes the missed call notifications. */

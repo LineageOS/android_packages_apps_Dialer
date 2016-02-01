@@ -40,6 +40,15 @@ public class ContactInfo {
     public String label;
     public String number;
     public String formattedNumber;
+    /*
+     * ContactInfo.normalizedNumber is a column value returned by PhoneLookup query. By definition,
+     * it's E164 representation.
+     * http://developer.android.com/reference/android/provider/ContactsContract.PhoneLookupColumns.
+     * html#NORMALIZED_NUMBER.
+     *
+     * The fallback value, when PhoneLookup fails or else, should be either null or
+     * PhoneNumberUtils.formatNumberToE164.
+     */
     public String normalizedNumber;
     /** The photo for the contact, if available. */
     public long photoId;

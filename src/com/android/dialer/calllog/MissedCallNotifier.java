@@ -26,6 +26,7 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
 import com.android.dialer.DialtactsActivity;
@@ -97,14 +98,18 @@ public class MissedCallNotifier {
         // 1 missed call: <caller name || handle>
         // More than 1 missed call: <number of calls> + "missed calls"
         if (count == 1) {
-            titleResId = R.string.notification_missedCallTitle;
-
             //TODO: look up caller ID that is not in contacts.
-            expandedText = CallLogNotificationsHelper.getInstance(mContext)
-                    .getName(useCallLog ? newestCall.number : number,
+            ContactInfo contactInfo = CallLogNotificationsHelper.getInstance(mContext)
+                    .getContactInfo(useCallLog ? newestCall.number : number,
                             useCallLog ? newestCall.numberPresentation
                                     : Calls.PRESENTATION_ALLOWED,
                             useCallLog ? newestCall.countryIso : null);
+
+            titleResId = contactInfo.userType == ContactsUtils.USER_TYPE_WORK
+                    ? R.string.notification_missedWorkCallTitle
+                    : R.string.notification_missedCallTitle;
+
+            expandedText = contactInfo.name;
         } else {
             titleResId = R.string.notification_missedCallsTitle;
             expandedText =

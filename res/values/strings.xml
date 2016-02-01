@@ -106,6 +106,8 @@
     <!-- Notification strings -->
     <!-- Missed call notification label, used when there's exactly one missed call -->
     <string name="notification_missedCallTitle">Missed call</string>
+    <!-- Missed call notification label, used when there's exactly one missed call from work contact -->
+    <string name="notification_missedWorkCallTitle">Missed work call</string>
     <!-- Missed call notification label, used when there are two or more missed calls -->
     <string name="notification_missedCallsTitle">Missed calls</string>
     <!-- Missed call notification message used when there are multiple missed calls -->
