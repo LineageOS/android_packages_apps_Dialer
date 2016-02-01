@@ -59,10 +59,12 @@ import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
+import com.android.dialer.util.CallRecordingPlayer;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
+import com.android.services.callrecorder.CallRecordingDataStore;
 
 import java.util.List;
 
@@ -159,8 +161,8 @@ public class CallDetailActivity extends Activity
             invalidateOptionsMenu();
 
             ListView historyList = (ListView) findViewById(R.id.history);
-            historyList.setAdapter(
-                    new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
+            historyList.setAdapter(new CallDetailHistoryAdapter(mContext, mInflater,
+                        mCallTypeHelper, details, mCallRecordingDataStore, mCallRecordingPlayer));
 
             String lookupKey = contactUri == null ? null
                     : UriUtils.getLookupKeyFromUri(contactUri);
@@ -226,11 +228,15 @@ public class CallDetailActivity extends Activity
     private boolean mHasEditNumberBeforeCallOption;
     private boolean mHasReportMenuOption;
 
+    private CallRecordingDataStore mCallRecordingDataStore = new CallRecordingDataStore();
+    private CallRecordingPlayer mCallRecordingPlayer;
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mContext = this;
+        mCallRecordingPlayer = new CallRecordingPlayer(this);
 
         setContentView(R.layout.call_detail);
 
@@ -264,6 +270,13 @@ public class CallDetailActivity extends Activity
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCallRecordingDataStore.close();
+        mCallRecordingPlayer.stop();
     }
 
     @Override
