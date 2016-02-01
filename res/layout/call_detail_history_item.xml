@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,9 +23,23 @@
     android:paddingStart="@dimen/call_detail_horizontal_margin"
     android:paddingEnd="@dimen/call_log_outer_margin"
     android:orientation="vertical" >
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/recording_playback_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/recording_playback_button"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/call_type_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/recording_playback_button"
         android:orientation="horizontal" >
         <view
             class="com.android.dialer.calllog.CallTypeIconsView"
@@ -41,16 +55,25 @@
             android:textColor="?attr/call_log_primary_text_color"
             android:textSize="@dimen/call_log_primary_text_size" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/call_type_container"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/recording_playback_button"
         android:textColor="?attr/call_log_secondary_text_color"
         android:textSize="@dimen/call_log_secondary_text_size" />
+
     <TextView
         android:id="@+id/duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/recording_playback_button"
         android:textColor="?attr/call_log_secondary_text_color"
         android:textSize="@dimen/call_log_secondary_text_size" />
-</LinearLayout>
+
+</RelativeLayout>

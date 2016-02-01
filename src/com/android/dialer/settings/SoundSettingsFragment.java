@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.phone.common.util.SettingsUtil;
+import com.android.services.callrecorder.CallRecorderService;
 
 import java.lang.Boolean;
 import java.lang.CharSequence;
@@ -130,6 +131,11 @@ public class SoundSettingsFragment extends PreferenceFragment
         } else {
             getPreferenceScreen().removePreference(mDtmfToneLength);
             mDtmfToneLength = null;
+        }
+
+        if (!CallRecorderService.isEnabled(getActivity())) {
+            getPreferenceScreen().removePreference(
+                    findPreference(context.getString(R.string.call_recording_category_key)));
         }
     }
 

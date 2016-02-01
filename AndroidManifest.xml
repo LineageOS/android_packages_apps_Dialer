@@ -62,6 +62,8 @@
      start requests, even if they happen immediately after the user
      presses home. -->
     <uses-permission android:name="android.permission.STOP_APP_SWITCHES" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
     <uses-permission android:name="cyanogenmod.permission.WRITE_SETTINGS" />
 
     <application
@@ -320,6 +322,10 @@
                   android:exported="false"
                   android:screenOrientation="nosensor" >
         </activity>
+
+        <service android:name="com.android.services.callrecorder.CallRecorderService"
+                 android:process="com.android.incallui">
+        </service>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.NotificationBroadcastReceiver"
