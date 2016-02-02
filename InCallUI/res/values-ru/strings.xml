@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Видеовстреча"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Запрос видео"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Не удалось совершить видеовызов"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Видеозвонок (на паузе)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Видеовызов отклонен"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Номер обратного вызова:\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Номер обратного вызова для экстренных служб:\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Набор номера"</string>
@@ -75,7 +75,7 @@
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Голосовой вызов"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Принять"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"Закрыть"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Отклонить"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Позвонить"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Написать"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Перед тем как звонить, отключите режим полета."</string>
@@ -103,7 +103,7 @@
     <string name="onscreenEndCallText" msgid="9039601192595655846">"Завершить вызов"</string>
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Кнопки"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Откл. звук"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"+ вызов"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Добавить вызов"</string>
     <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Соединить"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Перевод звонка"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Управление вызовами"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"По умолчанию (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Рингтон"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Вибросигнал и рингтон"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Автозаполнение номера"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Рингтон и вибросигнал"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Управление конференц-связью"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Экстренная служба"</string>
@@ -174,4 +173,8 @@
       <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> часов</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> часа</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Фото профиля"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Камера отключена"</string>
+    <string name="child_number" msgid="7437330400723805538">"через <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Сообщение отправлено"</string>
 </resources>

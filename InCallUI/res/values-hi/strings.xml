@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"वीडियो कॉल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"वीडियो का अनुरोध किया जा रहा है"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"वीडियो कॉल कनेक्‍ट नहीं किया जा सकता"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"वीडियो काॅल (रोका गया)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"वीडियो अनुरोध अस्वीकार किया गया"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"आपका कॉलबैक नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"आपका आपातकालीन कॉलबैक नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"डायल हो रहा है"</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;सेट नहीं है&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"अन्य कॉल सेटिंग"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> के माध्यम से कॉल किया जा रहा है"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"कॉल <xliff:g id="PROVIDER_NAME">%s</xliff:g> से जा रही है"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> की ओर से इनकमिंग"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"संपर्क का फ़ोटो"</string>
     <string name="goPrivate" msgid="865837794424530980">"निजी हो जाएं"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"डिफ़ॉल्ट ध्वनि (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"फ़ोन रिंगटोन"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"रिंग आने पर कंपन करें"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"डायलपैड स्‍वत: पूर्ण"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन और कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"कॉन्फ़्रेंस कॉल प्रबंधित करें"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आपातकालीन नंबर"</string>
@@ -168,4 +167,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> घंटे</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> घंटे</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"प्रोफ़ाइल फ़ोटो"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"कैमरा बंद है"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> के द्वारा"</string>
+    <string name="note_sent" msgid="3548700178238244595">"नोट भेज दिया गया है"</string>
 </resources>

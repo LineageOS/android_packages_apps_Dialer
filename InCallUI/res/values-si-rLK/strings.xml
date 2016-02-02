@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"වීඩියෝ ඇමතුම"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"වීඩියෝවක් ඉල්ලමින්"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"වීඩියෝ ඇමතුම සම්බන්ධ කළ නොහැක"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"වීඩියෝ ඇමතුම (විරාමය)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"වීඩියෝ ඉල්ලීම ප්‍රතික්ෂේප කරන ලදී"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"ඔබට ආපසු කථා කිරීමේ අංකය\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"ඔබගේ හදිසි ඇමතුම් අංකය\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"අමතමින්"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"සුපුරුදු ශබ්දය (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"දුරකථන රිංටෝනය"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"රිංග් වන විට කම්පනයවේ"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ඩයල් පැඩය ස්වයං සම්පුර්ණ කරන්න"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"රිගින් ටෝන් සහ කම්පනය කරන්න"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"සම්මන්ත්‍රණ ඇමතුම කළමනාකරණය කරන්න"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"හදිසි ඇමතුම් අංකය"</string>
@@ -168,4 +167,8 @@
       <item quantity="one">පැය <xliff:g id="COUNT">%d</xliff:g></item>
       <item quantity="other">පැය <xliff:g id="COUNT">%d</xliff:g></item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"පැතිකඩ ඡායාරූපය"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"කැමරාව ක්‍රියාවිරහිතයි"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> හරහා"</string>
+    <string name="note_sent" msgid="3548700178238244595">"සටහන යවන ලදී"</string>
 </resources>

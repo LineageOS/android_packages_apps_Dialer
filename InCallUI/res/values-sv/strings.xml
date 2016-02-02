@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videosamtal"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Begär video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Det gick inte att ansluta till videosamtalet"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videosamtal (pausat)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videobegäran avslogs"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Ditt nummer för återuppringning\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Ditt nödnummer för återuppringning\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Ringer"</string>
@@ -77,7 +77,7 @@
     <string name="notification_action_accept" msgid="2898609801209468429">"Godkänn"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Avvisa"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ring upp"</string>
-    <string name="notification_missedCall_message" msgid="3049928912736917988">"Meddelande"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Sms:a"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Om du vill ringa ett samtal måste du först inaktivera flygplansläge."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Inte registrerat på nätverk."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Det finns inget mobilnät tillgängligt."</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Standardsignal (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Ringsignal"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Mobilen vibrerar när det ringer"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Autoslutförande för knappsats"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringsignal och vibrera"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Hantera konferenssamtal"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nödsamtalsnummer"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> timmar</item>
       <item quantity="one">1 timme</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Profilfoto"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Kamera av"</string>
+    <string name="child_number" msgid="7437330400723805538">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Anteckningen har skickats"</string>
 </resources>

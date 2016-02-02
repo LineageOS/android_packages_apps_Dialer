@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Appel vidéo"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Demande de vidéo en cours…"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Impossible d\'établir la connexion de l\'appel vidéo."</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Appel vidéo (interrompu)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Demande d\'appel vidéo refusée"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Votre numéro de rappel\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Votre numéro de rappel d\'urgence\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Numérotation en cours…"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Sonnerie par défaut (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Sonnerie du téléphone"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Mode Vibreur lorsque le tél. sonne"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Clavier à saisie semi-automatique"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Sonnerie et vibreur"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gérer la conférence téléphonique"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Numéro d\'urgence"</string>
@@ -168,4 +167,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> heure</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> heures</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Photo du profil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Caméra désactivée"</string>
+    <string name="child_number" msgid="7437330400723805538">"via le <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"La note a bien été envoyée."</string>
 </resources>

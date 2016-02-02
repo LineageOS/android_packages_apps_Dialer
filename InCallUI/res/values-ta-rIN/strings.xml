@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"வீடியோ அழைப்பு"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"வீடியோவைக் கோருகிறது"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"வீடியோ அழைப்பை இணைக்க முடியாது"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"வீடியோ அழைப்பு (இடைநிறுத்தப்பட்டது)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"வீடியோ கோரிக்கை புறக்கணிக்கப்பட்டது"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"உங்களைத் திரும்ப அழைப்பதற்கான எண்\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"அவசர அழைப்பு எண்\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"அழைக்கிறது"</string>
@@ -70,13 +70,13 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"குரலஞ்சல் எண் அறியப்படவில்லை"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"சேவை இல்லை"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"தேர்ந்தெடுத்த நெட்வொர்க் (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) கிடைக்கவில்லை"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"பதில்"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"எடு"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"துண்டி"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"வீடியோ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"குரல்"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ஏற்கிறேன்"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"நிராகரி"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"திருப்பி அழை"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"அழை"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"செய்தி"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"நெட்வொர்க்கில் பதிவுசெய்யப்படவில்லை."</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"இயல்பு ஒலி (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"தொலைபேசி ரிங்டோன்"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ரிங் ஆகும்போது அதிர்வை ஏற்படுத்து"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"டயல்பேட் தன்னிரப்பி"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ரிங்டோன் &amp; அதிர்வு"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"குழு அழைப்பை நிர்வகிக்கவும்"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"அவசரகால எண்"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> மணிநேரம்</item>
       <item quantity="one">1 மணிநேரம்</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"சுயவிவரப் படம்"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"கேமராவை முடக்கும்"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> வழியாக"</string>
+    <string name="note_sent" msgid="3548700178238244595">"குறிப்பு அனுப்பப்பட்டது"</string>
 </resources>

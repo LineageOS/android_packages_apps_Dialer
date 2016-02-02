@@ -36,7 +36,7 @@
     <string name="wild_prompt_str" msgid="5543521676355533577">"Thay thế ký tự tự do bằng"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Cuộc gọi hội nghị <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Số thư thoại"</string>
-    <string name="card_title_dialing" msgid="5769417478498348054">"Đang quay số"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Đang gọi"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Đang quay số lại"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Cuộc gọi hội nghị"</string>
     <string name="card_title_incoming_call" msgid="7364539451234646909">"Cuộc gọi đến"</string>
@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Cuộc gọi điện video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Đang yêu cầu video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Không kết nối được cuộc gọi điện video"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Cuộc gọi điện video (tạm dừng)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Đã từ chối yêu cầu video"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Số gọi lại của bạn\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Số gọi lại khẩn cấp của bạn\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Đang gọi"</string>
@@ -121,7 +121,7 @@
     <string name="unknown_call_session_event" msgid="2431061946920253582">"Sự kiện phiên cuộc gọi không xác định"</string>
     <string name="voicemail_provider" msgid="5135942703327136909">"Dịch vụ"</string>
     <string name="voicemail_settings" msgid="72448049107749316">"Thiết lập"</string>
-    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Chưa được đặt&gt;"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Chưa đặt&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Cài đặt cuộc gọi khác"</string>
     <string name="calling_via_template" msgid="4839419581866928142">"Gọi điện qua <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Cuộc gọi đến qua <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Âm thanh mặc định (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Nhạc chuông điện thoại"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Rung khi đổ chuông"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Bàn phím số tự động điền"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Nhạc chuông và rung"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Quản lý cuộc gọi hội nghị"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Số khẩn cấp"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> giờ</item>
       <item quantity="one">1 giờ</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Ảnh hồ sơ"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Tắt máy ảnh"</string>
+    <string name="child_number" msgid="7437330400723805538">"qua <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Đã gửi ghi chú"</string>
 </resources>

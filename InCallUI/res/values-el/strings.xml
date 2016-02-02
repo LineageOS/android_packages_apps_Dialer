@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Βιντεοκλήση"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Αίτημα βίντεο"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Δεν είναι δυνατή η σύνδεση βιντεοκλησης"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Βιντεοκλήση (Παύση)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Το αίτημα βίντεο απορρίφθηκε"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Αριθμός επανάκλησης\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Αριθμός επανάκλησης έκτακτης ανάγκης\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Κλήση"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Προεπιλεγμένος ήχος (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Ήχος κλήσης τηλεφώνου"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Δόνηση κατά το κουδούνισμα"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Αυτόμ. συμπλ. πληκτρολ. κλήσης"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ήχος κλήσης &amp; δόνηση"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Διαχείριση κλήσης συνδιάσκεψης"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Αριθμός έκτακτης ανάγκης"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ώρες</item>
       <item quantity="one">1 ώρα</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Φωτογραφία προφίλ"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Απενεργοποίηση κάμερας"</string>
+    <string name="child_number" msgid="7437330400723805538">"μέσω <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Η σημείωση εστάλη"</string>
 </resources>

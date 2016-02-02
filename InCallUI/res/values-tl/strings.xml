@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Video call"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Humihiling ng video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Hindi makakonekta sa video call"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Video call (Naka-pause)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Tinanggihan ang kahilingan sa video"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Ang iyong numero ng callback\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Ang iyong emergency na numero ng callback\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Dina-dial"</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Setup"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Hindi nakatakda&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Iba pang mga setting ng tawag"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Tumatawag sa pamamagitan ng <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Tumatawag via <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Papasok sa pamamagitan ng <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"larawan ng contact"</string>
     <string name="goPrivate" msgid="865837794424530980">"maging pribado"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Default na tunog (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Ringtone ng telepono"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"I-vibrate kapag nagri-ring"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"I-autocomplete ang dialpad"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringtone at Pag-vibrate"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Pamahalaan ang conference call"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Pang-emergency na numero"</string>
@@ -168,4 +167,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> oras</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> na oras</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Larawan sa profile"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Naka-off ang camera"</string>
+    <string name="child_number" msgid="7437330400723805538">"sa pamamagitan ng <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Naipadala ang tala"</string>
 </resources>

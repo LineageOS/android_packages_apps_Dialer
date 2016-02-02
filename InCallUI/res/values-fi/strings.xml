@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videopuhelu"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Videota pyydetään"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Videopuhelua ei voi soittaa"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videopuhelu (keskeytetty)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videopyyntö hylättiin."</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Takaisinsoittonumerosi\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Hätäpuhelujen takaisinsoittonumero\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Soitetaan"</string>
@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Äänipuhelu"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Hyväksy"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Hylkää"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Soita takaisin"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Soita"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Viesti"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Poista lentokonetila käytöstä ennen puhelun soittamista."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Ei rekisteröity verkkoon."</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Asetukset"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Ei asetettu&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Muut puheluasetukset"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Käytetään operaattoria <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Operaattorilla <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Saapuva puhelu (<xliff:g id="PROVIDER_NAME">%s</xliff:g>)"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"yhteyshenkilön valokuva"</string>
     <string name="goPrivate" msgid="865837794424530980">"muuta yksityiseksi"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Oletusääni (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Puhelimen soittoääni"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Käytä värinää"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Näppäimistön täydennys"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Soittoääni ja värinä"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Hallinnoi puhelinneuvottelua"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Hätänumero"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> tuntia</item>
       <item quantity="one">1 tunti</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Profiilikuva"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Kamera on pois käytöstä."</string>
+    <string name="child_number" msgid="7437330400723805538">"nron <xliff:g id="CHILD_NUMBER">%s</xliff:g> kautta"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Muistiinpano lähetettiin."</string>
 </resources>

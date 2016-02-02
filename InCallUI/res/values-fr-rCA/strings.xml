@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Appel vidéo"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Demande de vidéo en cours"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Impossible de connecter l\'appel vidéo"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Appel vidéo (en pause)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Demande vidéo refusée"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Votre numéro de rappel :\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Votre numéro de rappel d\'urgence :\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Numérotation en cours…"</string>
@@ -70,7 +70,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Numéro de messagerie vocale inconnu"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Aucun service"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Réseau sélectionné (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) non disponible"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"Réponse"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Répondre"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"Raccrocher"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"Vidéo"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Vocal"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Sonnerie par défaut (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Sonnerie du téléphone"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Mode Vibreur lorsque le tél. sonne"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Suggestions automatiques pour le pavé numérique"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Sonnerie et vibreur"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Gérer la conférence téléphonique"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Numéro d\'urgence"</string>
@@ -168,4 +167,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> heure</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> heures</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Photo de profil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Appareil photo désactiver"</string>
+    <string name="child_number" msgid="7437330400723805538">"au moyen du <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Note envoyée"</string>
 </resources>

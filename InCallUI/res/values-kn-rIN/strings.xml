@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"ವೀಡಿಯೊ ಕರೆ"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ವೀಡಿಯೊ ವಿನಂತಿಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"ವೀಡಿಯೊ ಕರೆಯನ್ನು ಸಂಪರ್ಕಪಡಿಸಲಾಗುವುದಿಲ್ಲ"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"ವೀಡಿಯೊ ಕರೆ (ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"ವೀಡಿಯೊ ವಿನಂತಿಯನ್ನು ತಿರಸ್ಕರಿಸಲಾಗಿದೆ"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"ನಿಮ್ಮ ಕರೆಯ ಸಂಖ್ಯೆ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"ನಿಮ್ಮ ತುರ್ತು ಕರೆಯ ಸಂಖ್ಯೆ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ಡಯಲ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
@@ -58,10 +58,10 @@
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ತಪ್ಪಿದ ಕರೆಗಳು"</string>
     <string name="notification_missedCallTicker" msgid="504686252427747209">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> ಅವರಿಂದ ಮಿಸ್ಡ್‌ ಕಾಲ್‌"</string>
     <string name="notification_ongoing_call" msgid="7068688957273482989">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ"</string>
-    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೈ-ಫೈ ಕರೆ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ Wi-Fi ಕರೆ"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"ತಡೆಹಿಡಿಯಲಾಗಿದೆ"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ಒಳಬರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"ಒಳಬರುವ ವೈ-ಫೈ ಕರೆ"</string>
+    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"ಒಳಬರುವ Wi-Fi ಕರೆ"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"ಒಳಬರುವ ವೀಡಿಯೊ ಕರೆ"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"ಒಳಬರುವ ವೀಡಿಯೊ ವಿನಂತಿ"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"ಹೊಸ ಧ್ವನಿಮೇಲ್‌"</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"ಸೆಟಪ್"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;ಹೊಂದಿಸಿಲ್ಲ&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"ಇತರ ಕರೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಮೂಲಕ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g>ನಿಂದ ಕರೆ ಆಗುತ್ತಿದೆ"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಅವರ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"ಸಂಪರ್ಕ ಫೋಟೋ"</string>
     <string name="goPrivate" msgid="865837794424530980">"ಖಾಸಗಿಯಾಗಿ ಹೋಗಿ"</string>
@@ -132,7 +132,7 @@
     <string name="custom_message_cancel" msgid="7516406059429609296">"ರದ್ದುಮಾಡು"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"ಕಳುಹಿಸು"</string>
     <string name="description_target_answer" msgid="7205604197797472471">"ಉತ್ತರ"</string>
-    <string name="description_target_send_sms" msgid="2098326025587950144">"SMS ಕಳುಹಿಸು"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"SMS ಕಳುಹಿಸಿ"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"ನಿರಾಕರಿಸು"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"ವೀಡಿಯೊ ಕರೆ ರೂಪದಲ್ಲಿ ಉತ್ತರಿಸಿ"</string>
     <string name="description_target_answer_audio_call" msgid="8396296303320994450">"ಆಡಿಯೊ ಕರೆಯಂತೆ ಉತ್ತರಿಸಿ"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"ಡೀಫಾಲ್ಟ್‌ ಧ್ವನಿ (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ಫೋನ್ ರಿಂಗ್‌ಟೋನ್"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"ರಿಂಗ್ ಆಗುವಾಗ ಕಂಪಿಸು"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ಸ್ವಯಂಪರಿಪೂರ್ಣತೆ ಡಯಲ್ ಪ್ಯಾಡ್"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"ರಿಂಗ್‌ಟೋನ್‌‌ &amp; ವೈಬ್ರೇಟ್‌"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"ಕಾನ್ಫರೆನ್ಸ್ ಕರೆಯನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"ತುರ್ತು ಸಂಖ್ಯೆ"</string>
@@ -168,4 +167,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ಗಂಟೆಗಳು</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ಗಂಟೆಗಳು</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"ಪ್ರೊಫೈಲ್ ಫೋಟೋ‌"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"ಕ್ಯಾಮರಾ ಆಫ್‌"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> ಮೂಲಕ"</string>
+    <string name="note_sent" msgid="3548700178238244595">"ಟಿಪ್ಪಣಿ ಕಳುಹಿಸಲಾಗಿದೆ"</string>
 </resources>

@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"视频通话"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"正在发出视频请求"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"无法连接视频通话"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"视频通话（已暂停）"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"视频请求被拒绝"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"您的回拨号码\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"您的紧急回拨号码\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"正在拨号"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"默认提示音 (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"手机铃声"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"响铃时振动"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"拨号键盘自动填充"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"铃声和振动"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"管理电话会议"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"紧急电话号码"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 小时</item>
       <item quantity="one">1 小时</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"个人资料照片"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"关闭摄像头"</string>
+    <string name="child_number" msgid="7437330400723805538">"通过 <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"已发送记事"</string>
 </resources>

@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"వీడియో కాల్"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"వీడియో కోసం అభ్యర్థిస్తోంది"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"వీడియో కాల్‌ను కనెక్ట్ చేయలేరు"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"వీడియో కాల్ (పాజ్ చేయబడింది)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"వీడియో అభ్యర్థన నిరాకరించబడింది"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"మీ కాల్‌బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"మీ అత్యవసర కాల్‌బ్యాక్ నంబర్\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"డయల్ చేస్తోంది"</string>
@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"వాయిస్"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"ఆమోదిస్తున్నాను"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"తీసివేయి"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"తిరిగి కాల్ చేయి"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"కాల్ చేయి"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"సందేశం"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"కాల్ చేయడానికి, మొదట ఎయిర్‌ప్లైన్ మోడ్‌ను ఆపివేయండి."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"నెట్‌వర్క్‌లో నమోదు కాలేదు."</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"సెటప్"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;సెట్ చేయలేదు&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"ఇతర కాల్ సెట్టింగ్‌లు"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ద్వారా కాల్ చేయబడుతోంది"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g>తో కాల్ వెళుతోంది"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ద్వారా ఇన్‌కమింగ్"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"పరిచయ ఫోటో"</string>
     <string name="goPrivate" msgid="865837794424530980">"ప్రైవేట్‌గా వెళ్లు"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"డిఫాల్ట్ ధ్వని (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ఫోన్ రింగ్‌టోన్"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"రింగ్ అవుతున్నప్పుడు వైబ్రేట్ చేయి"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"డయల్‌ప్యాడ్ స్వీయపూర్తి"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"రింగ్‌టోన్ &amp; వైబ్రేట్"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"కాన్ఫరెన్స్ కాల్‌ను నిర్వహించండి"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"అత్యవసర నంబర్"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> గంటలు</item>
       <item quantity="one">1 గంట</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"ప్రొఫైల్ ఫోటో"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"కెమెరా ఆఫ్‌లో ఉంది"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> ద్వారా"</string>
+    <string name="note_sent" msgid="3548700178238244595">"గమనిక పంపబడింది"</string>
 </resources>

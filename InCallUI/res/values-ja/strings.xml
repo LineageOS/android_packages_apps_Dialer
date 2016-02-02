@@ -20,7 +20,7 @@
     <string name="phoneAppLabel" product="default" msgid="906161039445636857">"電話"</string>
     <string name="onHold" msgid="9035493194749959955">"保留中"</string>
     <string name="unknown" msgid="6878797917991465859">"通知不可能"</string>
-    <string name="private_num" msgid="6713286113000232309">"非通知"</string>
+    <string name="private_num" msgid="6713286113000232309">"非通知設定"</string>
     <string name="payphone" msgid="4793877574636445118">"公衆電話"</string>
     <string name="confCall" msgid="1904840547188336828">"グループ通話"</string>
     <string name="call_lost" msgid="6183862117003999578">"通話が遮断されました"</string>
@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"ビデオハングアウト"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"ビデオハングアウトをリクエストしています"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"ビデオハングアウトを接続できません"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"ビデオハングアウト（一時停止）"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"ビデオハングアウトのリクエスト不承認"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"コールバック先\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"緊急通報コールバック先\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"発信中"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"デフォルトの通知音（<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>）"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"着信音"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"着信時のバイブレーション"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ダイヤルのオートコンプリート"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"着信音とバイブレーション"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"グループ通話オプション"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"緊急通報番号"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g>時間</item>
       <item quantity="one">1時間</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"プロフィール写真"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"カメラをオフ"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g>に着信"</string>
+    <string name="note_sent" msgid="3548700178238244595">"メモを送信しました"</string>
 </resources>
