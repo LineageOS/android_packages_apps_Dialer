@@ -23,7 +23,7 @@
     <string name="private_num" msgid="6713286113000232309">"Private Nummer"</string>
     <string name="payphone" msgid="4793877574636445118">"Münztelefon"</string>
     <string name="confCall" msgid="1904840547188336828">"Telefonkonferenz"</string>
-    <string name="call_lost" msgid="6183862117003999578">"Anruf abgebrochen"</string>
+    <string name="call_lost" msgid="6183862117003999578">"Verbindung unterbrochen"</string>
     <string name="audio_mode_speaker" msgid="27649582100085266">"Lautsprecher"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"Handy-Kopfhörer"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Kabelgebundenes Headset"</string>
@@ -49,9 +49,9 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videoanruf"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Videoanfrage wird gesendet."</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Videoanruf kann nicht verbunden werden."</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videoanruf (pausiert)"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Ihre Rückrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Ihre Notrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoanfrage abgelehnt"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Deine Rückrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Deine Notrufnummer:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Verbindung wird aufgebaut..."</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Entgangener Anruf"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Entgangene Anrufe"</string>
@@ -78,10 +78,10 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Ablehnen"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Zurückrufen"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Nachricht"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Deaktivieren Sie zunächst den Flugmodus, um einen Anruf zu tätigen."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Deaktiviere zunächst den Flugmodus, um einen Anruf zu tätigen."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Nicht in Netzwerk registriert."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mobilfunknetz nicht verfügbar"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Geben Sie eine gültige Nummer ein."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Gib eine gültige Nummer ein."</string>
     <string name="incall_error_call_failed" msgid="6302746943230078197">"Anruf nicht möglich."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI-Sequenz wird gestartet..."</string>
     <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Dienst wird nicht unterstützt."</string>
@@ -96,7 +96,7 @@
     <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Mobilfunkverbindung wird aktiviert..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Kein Service. Erneuter Versuch..."</string>
     <string name="dial_emergency_error" msgid="1509085166367420355">"Anruf nicht möglich. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> ist keine Notrufnummer."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Anruf nicht möglich. Wählen Sie eine Notrufnummer."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Anruf nicht möglich. Wähle eine Notrufnummer."</string>
     <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Zum Wählen Tastatur verwenden"</string>
     <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Anruf halten"</string>
     <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Anruf fortsetzen"</string>
@@ -131,11 +131,11 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Eigene Antwort schreiben..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"Abbrechen"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"Senden"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Antworten"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Annehmen"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS senden"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"Ablehnen"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Antworten mit Videoanruf"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Antworten mit Audioanruf"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Als Videoanruf annehmen"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Als normalen Anruf annehmen"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Videoanfrage akzeptieren"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Videoanfrage ablehnen"</string>
     <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Anfrage für ausgehenden Videoanruf akzeptieren"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Standardklingelton (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Klingelton"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Beim Klingeln vibrieren"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Wähltasten-Autovervollständigung"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Klingelton &amp; Vibration"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Telefonkonferenz verwalten"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Notrufnummer"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> Stunden</item>
       <item quantity="one">1 Stunde</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Profilfoto"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Kamera aus"</string>
+    <string name="child_number" msgid="7437330400723805538">"über <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Notiz gesendet"</string>
 </resources>

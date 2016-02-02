@@ -35,7 +35,7 @@
     <string name="pause_prompt_no" msgid="6686238803236884877">"Nei"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"Erstatt jokertegn med"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Telefonmøte <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Nummer til telefonsvarer"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Nummer til talepostkasse"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Ringer"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Slår nummer på nytt"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Telefonmøte"</string>
@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videoanrop"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Ber om video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Kan ikke koble til videosamtale"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videosamtale (satt på pause)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoforespørselen er avvist"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Ditt tilbakeringingsnummer\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Ditt tilbakeringingsnummer for nødsamtaler\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Slår nummeret"</string>
@@ -64,10 +64,10 @@
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Innkommende anrop via Wi-Fi"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Innkommende videoanrop"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Innkommende videoforespørsel"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"Nye beskjeder på telefonsvarer"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nye beskjeder på telefonsvarer (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Ny talemelding"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Nye talemeldinger (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Ring <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Mangler nummer til telefonsvarer"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Mangler nummer til talepostkasse"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Ingen tjeneste"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"Valgt nettverk (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) er ikke tilgjengelig"</string>
     <string name="notification_action_answer" msgid="6700362365135365143">"Svar"</string>
@@ -150,9 +150,8 @@
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibrering"</string>
     <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Lyd"</string>
     <string name="default_notification_description" msgid="78174796906240970">"Standardlyd (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
-    <string name="ringtone_title" msgid="6374978286202084684">"Telefonringetone"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Telefonringelyd"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrering når det ringer"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Tastaturets autofullføring"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Ringetone og vibrering"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Administrer konferansesamtale"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nødnummer"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> timer</item>
       <item quantity="one">1 time</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Profilbilde"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Kameraet er slått av"</string>
+    <string name="child_number" msgid="7437330400723805538">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Notatet er sendt"</string>
 </resources>

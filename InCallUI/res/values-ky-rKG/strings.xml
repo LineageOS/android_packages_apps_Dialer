@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Телефон"</string>
+    <string name="onHold" msgid="9035493194749959955">"Күтүлүүдө"</string>
+    <string name="unknown" msgid="6878797917991465859">"Белгисиз"</string>
+    <string name="private_num" msgid="6713286113000232309">"Купуя номер"</string>
+    <string name="payphone" msgid="4793877574636445118">"Таксофон"</string>
+    <string name="confCall" msgid="1904840547188336828">"Конференц-чалуу"</string>
+    <string name="call_lost" msgid="6183862117003999578">"Чалуу үзүлдү"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Катуу сүйлөткүч"</string>
+    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Гарнитура"</string>
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Зымдуу кулакчын"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Төмөнкү номер жөнөтүлсүнбү?\n"</string>
+    <string name="pause_prompt_str" msgid="1789964702154314806">"Тоналдык жөнөтүү болууда \n"</string>
+    <string name="send_button" msgid="4106860097497818751">"Жөнөтүү"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"Ооба"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"Жок"</string>
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Атайын белгини муну менен алмаштыр"</string>
+    <string name="caller_manage_header" msgid="3231519674734638786">"Конференц-чалуу <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Үн почтасынын номери"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"Терилүүдө"</string>
+    <string name="card_title_redialing" msgid="8253487008234167266">"Кайра терүү"</string>
+    <string name="card_title_conf_call" msgid="1162980346189744501">"Конференц-чалуу"</string>
+    <string name="card_title_incoming_call" msgid="7364539451234646909">"Кирүүчү чалуу"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Чалуу аяктады"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"Күтүлүүдө"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Телефон коюлууда"</string>
+    <string name="card_title_in_call" msgid="6346543933068225205">"Чалууда"</string>
+    <string name="card_title_my_phone_number" msgid="112428362494434191">"Менин номерим <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Видео туташтырылууда"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Видео чалуу"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Видео"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Видео чалууга туташуу мүмкүн болбой жатат"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Видео сурам четке кагылды"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Төмөнкү номерге кайра чалуу\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Төмөнкү номерге шашылыш кайра чалуу\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"Терилүүдө"</string>
+    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Кабыл алынбаган чалуу"</string>
+    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Кабыл алынбаган чалуулар"</string>
+    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> кабыл алынбаган чалуу"</string>
+    <string name="notification_missedCallTicker" msgid="504686252427747209">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> дегенден кабыл алынбаган чалуу"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Учурдагы чалуу"</string>
+    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Аткаруудагы Wi-Fi чалуу"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"Күтүлүүдө"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Кирүүчү чалуу"</string>
+    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Кирүүчү Wi-Fi чалуу"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Келип жаткан видео чалуу"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Келип жаткан видео сурамы"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Жаңы үн почтасы"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Жаңы үн почтасы (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> номерин терүү"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Үн почтасынын номери белгисиз"</string>
+    <string name="notification_network_selection_title" msgid="4224455487793492772">"Байланыш жок"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Тандалган тармак (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) жеткиликсиз"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Жооп берүү"</string>
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Телефонду коюу"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Үн"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Кабыл алуу"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Этибарга албоо"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Кайра чалуу"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Билдирүү"</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Чалуу үчүн, адегенде учак режимин өчүрүңүз."</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Тармакта катталган эмес."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"Уюктук тармак жеткиликтүү эмес."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Чалуу үчүн, жарактуу номер киргизиңиз."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Чалынбай жатат."</string>
+    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI кезеги башталууда…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Кызмат колдоого алынбайт."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Чалуулар которуштурулбай жатат."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Чалуу бөлүнбөй жатат."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Өткөрүлбөй жатат."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Конференц-байланышы түзүлбөй жатат."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Чалуу четке кагылбай жатат."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Чалуу(лар) бошотулбай жатат."</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP чалуу"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Шашылыш чалуу"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Радио күйгүзүлүүдө…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Кызмат жок. Кайра аракет кылууда…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Чалынбай жатат. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> өзгөчө кырдаал номери эмес."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Чалынбай жатат. Өзгөчө кырдаал номерин териңиз."</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Баскычтоп менен териңиз"</string>
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Чалууну Кармоо"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Чалууну Улантуу"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"Чалууну бүтүрүү"</string>
+    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Тергич"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Үнсүз"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Чалуу кошуу"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Чалууларды бириктирүү"</string>
+    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Алмаштыруу"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Чалууларды башкаруу"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Конференц-чалууну башкаруу"</string>
+    <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео чалуу"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Үн чалууга өзгөртүү"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Камерага которулуу"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Видеону бир азга токтото туруу"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Көбүрөөк параметрлер"</string>
+    <string name="player_started" msgid="6046262510243983589">"Ойноткуч башталды"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"Ойноткуч токтотулду"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"Камера даяр эмес"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"Камера даяр"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"Чалуу сеансынын окуясы белгисиз"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Кызмат"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Орнотуу"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Орнотулган эмес&gt;"</string>
+    <string name="other_settings" msgid="3672912580359716394">"Башка чалуу жөндөөлөрү"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> аркылуу чалуу"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> аркылуу келүүдө"</string>
+    <string name="contactPhoto" msgid="4713193418046639466">"байланыштын сүрөтү"</string>
+    <string name="goPrivate" msgid="865837794424530980">"купуя режимине өтүү"</string>
+    <string name="selectContact" msgid="781975788478987237">"байланыш тандоо"</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Каалганыңызды жазыңыз..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Жокко чыгаруу"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Жөнөтүү"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Жооп берүү"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"SMS жөнөтүү"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Четке кагуу"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Видео чалуу түрүндө жооп берүү"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Аудио чалуу жооп берүү"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Видео сурамын кабыл алуу"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Видео сурамын четке кагуу"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Видео өткөрүү өтүнүчүн кабыл алуу"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"Видео өткөрүү өтүнүчүн четке кагуу"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"Видео алуу өтүнүчүн кабыл алуу"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"Видео алуу өтүнүчүн четке кагуу"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн жогору жылмыштырыңыз."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн солго жылмыштырыңыз."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн оңго жылмыштырыңыз."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> үчүн төмөн сылап коюңуз."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Титиретүү"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Титиретүү"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Үнү"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Абалкы үнү (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Телефондун рингтону"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Шыңгырап жатканда титиретүү"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Рингтон жана Титирөө"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Конференц-чалууну башкаруу"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Куткаруучулардын номуру"</string>
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> секунд</item>
+      <item quantity="one">1 секунд</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> мүнөт</item>
+      <item quantity="one">1 мүнөт</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> саат</item>
+      <item quantity="one">1 саат</item>
+    </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Профиль сүрөтү"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Камера өчүк"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> аркылуу"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Билдирүү жөнөтүлдү"</string>
+</resources>

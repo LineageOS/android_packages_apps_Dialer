@@ -27,7 +27,7 @@
     <string name="audio_mode_speaker" msgid="27649582100085266">"स्पीकर"</string>
     <string name="audio_mode_earpiece" msgid="4156527186373869107">"हँडसेट इअरपीस"</string>
     <string name="audio_mode_wired_headset" msgid="1465350758489175975">"वायर्ड हेडसेट"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"ब"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"ब्लूटुथ"</string>
     <string name="wait_prompt_str" msgid="7601815427707856238">"खालील टोन पाठवायचे?\n"</string>
     <string name="pause_prompt_str" msgid="1789964702154314806">"टोन पाठवित आहे\n"</string>
     <string name="send_button" msgid="4106860097497818751">"पाठवा"</string>
@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"व्हिडिओ कॉल"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"व्हिडिओ विनंती करत आहे"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"व्हिडिओ कॉल कनेक्ट करू शकत नाही"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"व्हिडिओ कॉल (विराम दिला)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"व्हिडिओ विनंती नाकारली"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"आपला कॉलबॅक नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"आपला आणीबाणी कॉलबॅक नंबर\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"डायल करीत आहे"</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"सेटअप"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;सेट नाही&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"इतर कॉल सेटिंग्ज"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> द्वारे कॉल करीत आहे"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> द्वारे कॉल करत आहे"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> द्वारे येणारे"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"संपर्क फोटो"</string>
     <string name="goPrivate" msgid="865837794424530980">"खाजगी जा"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"डीफॉल्ट आवाज (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"फोन रिंगटोन"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"रिंग करताना कंपन करा"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"डायलपॅड स्वयंपूर्ण"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"रिंगटोन आणि कंपन"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"परिषद कॉल व्यवस्थापित करा"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"आणीबाणीचा नंबर"</string>
@@ -168,4 +167,8 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> तास</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> तास</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"प्रोफाईल फोटो"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"कॅमेरा बंद"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> द्वारा"</string>
+    <string name="note_sent" msgid="3548700178238244595">"टीप पाठविली"</string>
 </resources>

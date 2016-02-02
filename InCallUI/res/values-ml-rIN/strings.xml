@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"വീഡിയോ കോള്‍"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"വീഡിയോ അഭ്യർത്ഥിക്കുന്നു"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"വീഡിയോ കോളുമായി കണക്‌റ്റുചെയ്യാനാവില്ല"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"വീഡിയോ കോൾ (താൽക്കാലികമായി നിർത്തി)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"വീഡിയോ അഭ്യർത്ഥന നിരസിച്ചു"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"നിങ്ങൾ തിരിച്ചുവിളിക്കേണ്ട നമ്പർ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"അടിയന്തിരമായി നിങ്ങൾ തിരിച്ചുവിളിക്കേണ്ട നമ്പർ\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"ഡയൽ ചെയ്യുന്നു"</string>
@@ -58,10 +58,10 @@
     <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> മിസ്‌ഡ് കോളുകൾ"</string>
     <string name="notification_missedCallTicker" msgid="504686252427747209">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> എന്നതിൽ നിന്നുള്ള മിസ്‌ഡ് കോൾ"</string>
     <string name="notification_ongoing_call" msgid="7068688957273482989">"കോൾ സജീവമാണ്"</string>
-    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"ഓൺഗോയിംഗ് Wi-Fi കോൾ"</string>
+    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"ഓൺഗോയിംഗ് വൈഫൈ കോൾ"</string>
     <string name="notification_on_hold" msgid="3480694969511790465">"ഹോള്‍ഡിലാണ്"</string>
     <string name="notification_incoming_call" msgid="2820429205043529642">"ഇന്‍കമിംഗ് കോള്‍"</string>
-    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"ഇൻകമിംഗ് Wi-Fi കോൾ"</string>
+    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"ഇൻകമിംഗ് വൈഫൈ കോൾ"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"ഇൻകമിംഗ് വീഡിയോ കോൾ"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"ഇൻകമിംഗ് വീഡിയോ അഭ്യർത്ഥന"</string>
     <string name="notification_voicemail_title" msgid="8933468752045550523">"പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
@@ -70,7 +70,7 @@
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"വോയ്‌സ്‌മെയിൽ നമ്പർ അജ്ഞാതമാണ്"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"സേവനമില്ല"</string>
     <string name="notification_network_selection_text" msgid="2607085729661923269">"തിരഞ്ഞെടുത്ത നെറ്റ്‌വർക്ക് (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) ലഭ്യമല്ല"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"മറുപടി നൽകുക"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"മറുപടി"</string>
     <string name="notification_action_end_call" msgid="6069460915123531620">"ഹാംഗ് അപ്പ് ചെയ്യുക"</string>
     <string name="notification_action_answer_video" msgid="7809271910870211729">"വീഡിയോ"</string>
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"വോയ്‌സ്"</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"സജ്ജമാക്കുക"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;സജ്ജീകരിച്ചിട്ടില്ല&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"മറ്റ് കോൾ ക്രമീകരണങ്ങൾ"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേന വിളിക്കുന്നു"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> വഴി വിളിക്കുന്നു"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> മുഖേനയുള്ള ഇൻകമിംഗ്"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"കോൺടാക്റ്റ് ഫോട്ടോ"</string>
     <string name="goPrivate" msgid="865837794424530980">"സ്വകാര്യം എന്നതിലേക്ക് പോകുക"</string>
@@ -131,7 +131,7 @@
     <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"നിങ്ങളുടെ സ്വന്തം സന്ദേശമെഴുതുക..."</string>
     <string name="custom_message_cancel" msgid="7516406059429609296">"റദ്ദാക്കുക"</string>
     <string name="custom_message_send" msgid="5795754217085747742">"അയയ്‌ക്കുക"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"മറുപടി നൽകുക"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"മറുപടി"</string>
     <string name="description_target_send_sms" msgid="2098326025587950144">"SMS അയയ്ക്കുക"</string>
     <string name="description_target_decline" msgid="4789834364389731957">"നിരസിക്കുക"</string>
     <string name="description_target_answer_video_call" msgid="3495965588512395026">"വീഡിയോ കോളായി മറുപടി നൽകുക"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"സ്ഥിര ശബ്‌ദം (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"ഫോൺ റിംഗ്ടോൺ"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"റിംഗുചെയ്യുമ്പോൾ വൈബ്രേറ്റുചെയ്യുക"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"ഡയൽപാഡ് സ്വയംപൂർത്തിയാക്കൽ"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"റിംഗ്ടോണും വൈബ്രേറ്റുചെയ്യലും"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"അടിയന്തര നമ്പർ"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> മണിക്കൂർ</item>
       <item quantity="one">1 മണിക്കൂർ</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"പ്രൊഫൈല്‍ ഫോട്ടോ"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"ക്യാമറ ഓഫാക്കുക"</string>
+    <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> വഴി"</string>
+    <string name="note_sent" msgid="3548700178238244595">"കുറിപ്പ് അയച്ചു"</string>
 </resources>

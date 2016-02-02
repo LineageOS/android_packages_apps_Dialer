@@ -35,7 +35,7 @@
     <string name="pause_prompt_no" msgid="6686238803236884877">"No"</string>
     <string name="wild_prompt_str" msgid="5543521676355533577">"Reemplazar el carácter comodín con"</string>
     <string name="caller_manage_header" msgid="3231519674734638786">"Llamada en conferencia <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Núm. de correo de voz"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Correo de voz"</string>
     <string name="card_title_dialing" msgid="5769417478498348054">"Marcando"</string>
     <string name="card_title_redialing" msgid="8253487008234167266">"Volviendo a marcar"</string>
     <string name="card_title_conf_call" msgid="1162980346189744501">"Llamada en conferencia"</string>
@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videollamada"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Solicitando video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"No se puede conectar la videollamada."</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videollamada (pausada)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Se rechazó la solicitud de videollamada."</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Número de devolución de llamada\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Número de devolución de llamada de emergencia\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Marcando"</string>
@@ -76,7 +76,7 @@
     <string name="notification_action_answer_voice" msgid="1770796916369437773">"Voz"</string>
     <string name="notification_action_accept" msgid="2898609801209468429">"Aceptar"</string>
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Descartar"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Devolver llamada"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Llamar"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Mensaje"</string>
     <string name="incall_error_power_off" msgid="6550191216405193368">"Para realizar una llamada, primero debes desactivar el modo avión."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"No registrado en la red."</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Configuración"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Sin configurar&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Otras configuraciones de llamada"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Llamada a través de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Llamada vía <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Recibidas a través de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"foto de contacto"</string>
     <string name="goPrivate" msgid="865837794424530980">"pasar a modo privado"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Sonido predeterminado (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Tono del dispositivo"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrar al sonar"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Autocompletar con teclado"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Tono y vibración"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Administrar conferencia telefónica"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Número de emergencia"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> horas</item>
       <item quantity="one">1 hora</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Foto de perfil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Cámara desactivada"</string>
+    <string name="child_number" msgid="7437330400723805538">"a través del <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Se envió la nota"</string>
 </resources>

@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Pgln video"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Meminta video"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Tidak dapat menyambungkan panggilan video"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Panggilan video (Dijeda)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Permintaan video ditolak"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Nombor panggil balik anda\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Nombor panggil balik kecemasan anda\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Mendail"</string>
@@ -64,8 +64,8 @@
     <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Panggilan Wi-Fi masuk"</string>
     <string name="notification_incoming_video_call" msgid="7356836933934464805">"Panggilan video masuk"</string>
     <string name="notification_requesting_video_call" msgid="1405576812892369451">"Permintaan video masuk"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"Mel suara baru"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Mel suara baru (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Mel suara baharu"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Mel suara baharu (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Dail <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
     <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nombor mel suara tidak dikenali"</string>
     <string name="notification_network_selection_title" msgid="4224455487793492772">"Tiada perkhidmatan"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Bunyi lalai (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Nada dering telefon"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Bergetar apabila berdering"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Autolengkap pad dail"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Nada dering &amp; Bergetar"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Urus panggilan sidang"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nombor kecemasan"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> jam</item>
       <item quantity="one">1 jam</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Foto profil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Kamera dimatikan"</string>
+    <string name="child_number" msgid="7437330400723805538">"melalui <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Nota dihantar"</string>
 </resources>

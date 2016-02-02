@@ -49,7 +49,7 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videopoziv"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Zahtijevanje videopiziva"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Videopoziv nije uspostavljen"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videopoziv (pauziran)"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Zahtjev za videopoziv odbijen"</string>
     <string name="card_title_callback_number" msgid="7307938207564217293">"Vaš broj za povratni poziv\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Vaš broj za povratni poziv za hitne službe\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Biranje broja"</string>
@@ -123,7 +123,7 @@
     <string name="voicemail_settings" msgid="72448049107749316">"Postavljanje"</string>
     <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Nije postavljeno&gt;"</string>
     <string name="other_settings" msgid="3672912580359716394">"Ostale postavke poziva"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Pozivanje putem operatera <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"Poziv preko <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="1696993226115570960">"Dolazni pozivi putem davatelja <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="contactPhoto" msgid="4713193418046639466">"kontakt fotografija"</string>
     <string name="goPrivate" msgid="865837794424530980">"na privatno"</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Zadani zvuk (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Melodija zvona telefona"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrira dok zvoni"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Samodovr. povr. za biranje br."</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Melodija zvona i vibracija"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Upravljanje konferencijskim pozivom"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Broj hitne službe"</string>
@@ -171,4 +170,8 @@
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> sata</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sati</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Fotografija na profilu"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Fotoaparat je isključen"</string>
+    <string name="child_number" msgid="7437330400723805538">"putem <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Bilješka je poslana"</string>
 </resources>

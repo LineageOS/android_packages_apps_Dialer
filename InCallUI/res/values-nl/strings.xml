@@ -49,9 +49,9 @@
     <string name="card_title_video_call" msgid="5898636679563320218">"Videogesprek"</string>
     <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Video aanvragen"</string>
     <string name="card_title_video_call_error" msgid="9000555878389539225">"Kan geen videogesprek starten"</string>
-    <string name="card_title_video_call_paused" msgid="3753261320787432731">"Videogesprek (onderbreken)"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Uw terugbelnummer\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Uw terugbelnummer bij alarm\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Videoverzoek geweigerd"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"Je terugbelnummer\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Je terugbelnummer bij alarm\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="2107666444937350731">"Kiezen"</string>
     <string name="notification_missedCallTitle" msgid="7554385905572364535">"Gemiste oproep"</string>
     <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Gemiste oproepen"</string>
@@ -78,10 +78,10 @@
     <string name="notification_action_dismiss" msgid="2679969397930852858">"Sluiten"</string>
     <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Terugbellen"</string>
     <string name="notification_missedCall_message" msgid="3049928912736917988">"Bericht"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Als u wilt bellen, moet u eerst de Vliegtuigmodus uitschakelen."</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Als je wilt bellen, moet je eerst de Vliegtuigmodus uitschakelen."</string>
     <string name="incall_error_emergency_only" msgid="4678640422710818317">"Niet geregistreerd op netwerk."</string>
     <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mobiel netwerk niet beschikbaar."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Als u wilt bellen, moet u een geldig nummer invoeren."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Als je wilt bellen, moet je een geldig nummer invoeren."</string>
     <string name="incall_error_call_failed" msgid="6302746943230078197">"Kan niet bellen."</string>
     <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"MMI-reeks starten..."</string>
     <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Service wordt niet ondersteund."</string>
@@ -152,7 +152,6 @@
     <string name="default_notification_description" msgid="78174796906240970">"Standaardgeluid (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="6374978286202084684">"Beltoon telefoon"</string>
     <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Trillen bij bellen"</string>
-    <string name="dial_pad_autocomplete" msgid="7683489952557536398">"Toetsenblok automatisch aanvullen"</string>
     <string name="preference_category_ringtone" msgid="5197960752529332721">"Beltoon en trillen"</string>
     <string name="manageConferenceLabel" msgid="4691922394301969053">"Telefonische vergadering beheren"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Alarmnummer"</string>
@@ -168,4 +167,8 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> uur</item>
       <item quantity="one">1 uur</item>
     </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Profielfoto"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Camera uit"</string>
+    <string name="child_number" msgid="7437330400723805538">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Notitie verzonden"</string>
 </resources>
