@@ -16,8 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import static android.Manifest.permission.READ_CALL_LOG;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.KeyguardManager;
@@ -32,7 +30,7 @@ import android.os.Message;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
-import android.provider.VoicemailContract.Status;
+import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,13 +41,13 @@ import android.view.ViewGroup;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
-import com.android.dialer.filterednumber.FilteredNumbersUtil;
-import com.android.dialer.list.ListsFragment;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialerbind.ObjectFactory;
+
+import static android.Manifest.permission.READ_CALL_LOG;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call
@@ -84,11 +82,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     private LinearLayoutManager mLayoutManager;
     private CallLogAdapter mAdapter;
     private CallLogQueryHandler mCallLogQueryHandler;
-    private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private boolean mScrollToTop;
 
-    /** Whether there is at least one voicemail source installed. */
-    private boolean mVoicemailSourcesAvailable = false;
 
     private EmptyContentView mEmptyListView;
     private KeyguardManager mKeyguardManager;
@@ -111,7 +106,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     private final Handler mHandler = new Handler();
 
-    private class CustomContentObserver extends ContentObserver {
+    protected class CustomContentObserver extends ContentObserver {
         public CustomContentObserver() {
             super(mHandler);
         }
@@ -124,7 +119,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     // See issue 6363009
     private final ContentObserver mCallLogObserver = new CustomContentObserver();
     private final ContentObserver mContactsObserver = new CustomContentObserver();
-    private final ContentObserver mVoicemailStatusObserver = new CustomContentObserver();
     private boolean mRefreshDataRequired = true;
 
     private boolean mHasReadCallLogPermission = false;
@@ -210,13 +204,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         resolver.registerContentObserver(CallLog.CONTENT_URI, true, mCallLogObserver);
         resolver.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true,
                 mContactsObserver);
-        resolver.registerContentObserver(Status.CONTENT_URI, true, mVoicemailStatusObserver);
         setHasOptionsMenu(true);
-
-        if (mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-            mVoicemailPlaybackPresenter = VoicemailPlaybackPresenter
-                    .getInstance(activity, state);
-        }
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -292,7 +280,12 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         View view = inflater.inflate(R.layout.call_log_fragment, container, false);
+        setupView(view, null);
+        return view;
+    }
 
+    protected void setupView(
+            View view, @Nullable VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -306,11 +299,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 getActivity(),
                 this,
                 new ContactInfoHelper(getActivity(), currentCountryIso),
-                mVoicemailPlaybackPresenter,
+                voicemailPlaybackPresenter,
                 mIsCallLogActivity);
         mRecyclerView.setAdapter(mAdapter);
         fetchCalls();
-        return view;
     }
 
     @Override
@@ -348,19 +340,11 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mAdapter.onResume();
 
         rescheduleDisplayUpdate();
-
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onResume();
-        }
     }
 
     @Override
     public void onPause() {
         cancelDisplayUpdate();
-
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onPause();
-        }
         mAdapter.onPause();
         super.onPause();
     }
@@ -376,13 +360,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     public void onDestroy() {
         mAdapter.changeCursor(null);
 
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onDestroy();
-        }
-
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
-        getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
         super.onDestroy();
     }
 
@@ -394,19 +373,11 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         outState.putLong(KEY_DATE_LIMIT, mDateLimit);
 
         mAdapter.onSaveInstanceState(outState);
-
-        if (mVoicemailPlaybackPresenter != null) {
-            mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
-        }
     }
 
     @Override
     public void fetchCalls() {
         mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
-
-        if (mVoicemailPlaybackPresenter != null) {
-            ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
-        }
     }
 
     private void updateEmptyMessage(int filterType) {
