@@ -540,7 +540,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
         String component = c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME);
         if (!TextUtils.isEmpty(component)) {
-            views.inCallComponentName = ComponentName.unflattenFromString(component);;
+            views.inCallComponentName = ComponentName.unflattenFromString(component);
+        } else {
+            views.inCallComponentName = null;
         }
 
         // Check if the day group has changed and display a header if necessary.

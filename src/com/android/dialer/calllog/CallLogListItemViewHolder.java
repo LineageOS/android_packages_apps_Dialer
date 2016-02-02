@@ -471,12 +471,16 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     public void setAttributionImage(ComponentName cn) {
-        if (cn == null) return;
-        CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
-        if (cmi == null) {
-            Log.v(TAG, "Call Method was Null for: " + cn.toShortString());
+        if (cn == null) {
+            dialerQuickContact.setAttributionBadge(null);
         } else {
-            dialerQuickContact.setAttributionBadge(cmi.mBadgeIcon);
+            CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
+            if (cmi == null) {
+                dialerQuickContact.setAttributionBadge(null);
+                Log.v(TAG, "Call Method was Null for: " + cn.toShortString());
+            } else {
+                dialerQuickContact.setAttributionBadge(cmi.mBadgeIcon);
+            }
         }
     }
 
