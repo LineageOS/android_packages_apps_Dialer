@@ -544,7 +544,8 @@ public class CallLogAdapter extends GroupingListAdapter
         } else {
             views.inCallComponentName = null;
         }
-
+        views.callTimes = getCallTimes(c, count);
+        DeepLinkAssistant.getInstance(views,mContext).prepareUi(number);
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
         int previousGroup = getPreviousDayGroup(c);
@@ -665,6 +666,20 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(position);
         return callTypes;
+    }
+
+    /**
+     * Returns call times for the given number of items in the cursor
+     */
+    private long[] getCallTimes(Cursor cursor, int count) {
+        int position = cursor.getPosition();
+        long[] callTimes = new long[count];
+        for (int index = 0; index < count; ++index) {
+            callTimes[index] = cursor.getLong(CallLogQuery.DATE);
+            cursor.moveToNext();
+        }
+        cursor.moveToPosition(position);
+        return callTimes;
     }
 
     /**

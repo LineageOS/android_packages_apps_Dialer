@@ -55,6 +55,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.cyanogen.ambient.deeplink.DeepLink;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 /**
@@ -82,6 +83,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public final ImageView primaryActionButtonView;
     /** DialerQuickContact */
     public final DialerQuickContact dialerQuickContact;
+    /** DeepLink to be used when a link icon is clicked. */
+    public DeepLink mDeepLink;
 
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
@@ -89,6 +92,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public VoicemailPlaybackLayout voicemailPlaybackView;
     public View callButtonView;
     public View videoCallButtonView;
+    public View viewNoteButton;
     public View createNewContactButtonView;
     public View addToExistingContactButtonView;
     public View sendMessageView;
@@ -112,6 +116,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      */
     public long[] callIds;
 
+    /**
+     * The time for each call in callIds represented by the current call log entry.  Used when the
+     * user views the call log to determine note status
+     */
+    public long[] callTimes;
     /**
      * The callable phone number for the current call log entry.  Cached here as the call back
      * intent is set only when the actions ViewStub is inflated.
@@ -281,6 +290,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
             createNewContactButtonView.setOnClickListener(this);
 
+            viewNoteButton = actionsView.findViewById(R.id.view_note_action);
+            viewNoteButton.setOnClickListener(this);
+
             addToExistingContactButtonView =
                     actionsView.findViewById(R.id.add_to_existing_contact_action);
             addToExistingContactButtonView.setOnClickListener(this);
@@ -367,6 +379,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             cmi = CallMethodHelper.getCallMethod(inCallComponentName);
         }
 
+        if (mDeepLink != null) {
+            ImageView icon = (ImageView) viewNoteButton.findViewById(R.id.view_note_action_icon);
+            icon.setImageBitmap(mDeepLink.getBitmapIcon(mContext));
+        } else {
+            viewNoteButton.setVisibility(android.view.View.GONE);
+        }
         // If one of the calls had video capabilities, show the video call button.
         if (mTelecomCallLogCache.isVideoEnabled() && canPlaceCallToNumber &&
                 phoneCallDetailsViews.callTypeIcons.isVideoShown() ||
@@ -538,6 +556,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 mContactInfoHelper.addNumberToBlacklist(number);
             }
             updateBlockCallerView();
+        } else if (view.getId() == R.id.view_note_action) {
+            mContext.startActivity(mDeepLink.createViewIntent());
         } else {
             final Object tag = view.getTag();
             if (tag instanceof String && inCallComponentName != null) {

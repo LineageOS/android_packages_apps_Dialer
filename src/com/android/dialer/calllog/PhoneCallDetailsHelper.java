@@ -132,9 +132,12 @@ public class PhoneCallDetailsHelper {
         } else {
             nameText = details.name;
         }
-
+        views.nameWrapper.setVisibility(View.VISIBLE);
         views.nameView.setText(nameText);
-
+        views.nameView.setVisibility(View.VISIBLE);
+        if(views.noteIconView.getDrawable() == null) {
+            views.noteIconView.setVisibility(View.GONE);
+        }
         if (isVoicemail && !TextUtils.isEmpty(details.transcription)) {
             views.voicemailTranscriptionView.setText(details.transcription);
             views.voicemailTranscriptionView.setVisibility(View.VISIBLE);

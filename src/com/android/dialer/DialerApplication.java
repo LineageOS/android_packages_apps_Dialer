@@ -41,7 +41,7 @@ public class DialerApplication extends Application {
         AnalyticsUtil.initialize(this);
         Trace.endSection();
         Trace.endSection();
-
         CallMethodHelper.init(this);
+        DeepLinkIntegrationManager.getInstance().setUp(this);
     }
 }
