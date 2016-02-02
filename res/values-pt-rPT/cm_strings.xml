@@ -59,6 +59,10 @@
   <string name="call_log_blacklist_header">Apenas chamadas bloqueadas</string>
   <string name="call_log_stats_title">Estatísticas</string>
   <string name="callStatsDetailTitle">Detalhes de estatísticas de chamadas</string>
+  <string name="call_stats_incoming">Recebidas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_outgoing">Efetuadas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_blacklisted">Bloqueadas: <xliff:g id="value">%s </xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d </xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
