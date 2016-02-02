@@ -37,6 +37,7 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.calllog.CallLogQueryHandler;
+import com.android.dialer.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.util.DialerUtils;
@@ -126,7 +127,7 @@ public class ListsFragment extends Fragment
                     mAllContactsFragment = new AllContactsFragment();
                     return mAllContactsFragment;
                 case TAB_INDEX_VOICEMAIL:
-                    mVoicemailFragment = new CallLogFragment(Calls.VOICEMAIL_TYPE);
+                    mVoicemailFragment = new VisualVoicemailCallLogFragment();
                     return mVoicemailFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
