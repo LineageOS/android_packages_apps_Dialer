@@ -36,6 +36,7 @@
   <string name="type_blacklist">Apel de pe lista neagră</string>
   <string name="menu_add_to_blacklist">Adăugare la lista apelanților blocați</string>
   <string name="toast_added_to_blacklist">%s adăugat la lista apelanților blocați.</string>
+  <string name="toast_removed_from_blacklist">%s scos din lista apelanților blocați.</string>
   <string name="call_log_action_block">Blochează apelantul</string>
   <string name="call_log_action_unblock">Apelant blocat</string>
   <string name="speed_dial_settings">Setări apelare rapidă</string>
@@ -58,6 +59,9 @@
   <string name="call_log_blacklist_header">Doar apeluri blocate</string>
   <string name="call_log_stats_title">Statistici</string>
   <string name="callStatsDetailTitle">Detalii statistică apel</string>
+  <string name="call_stats_missed">Pierdut: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blocat: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data de început</string>
@@ -75,4 +79,9 @@
   <string name="call_stats_reset_filter">Resetare interval de timp</string>
   <string name="call_stats_sort_by_duration">Sortare după durata apelului</string>
   <string name="call_stats_sort_by_count">Sortare după numărul de apeluri</string>
+  <string name="call_stats_title_for_number">Acest număr</string>
+  <string name="call_stats_title_of_total">Din total</string>
+  <string name="call_stats_title_durations">Durate apeluri</string>
+  <string name="call_stats_title_count">Număr apeluri</string>
+  <string name="call_stats_title_average_duration">Durata medie a apelului</string>
 </resources>

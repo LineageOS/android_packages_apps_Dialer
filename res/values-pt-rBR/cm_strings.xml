@@ -59,6 +59,11 @@
   <string name="call_log_blacklist_header">Somente chamadas bloqueadas</string>
   <string name="call_log_stats_title">Estatísticas</string>
   <string name="callStatsDetailTitle">Estatística de chamadas detalhadas</string>
+  <string name="call_stats_incoming">Recebida: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Saída: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Perdida: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Bloqueada: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data inicial</string>
@@ -76,4 +81,10 @@
   <string name="call_stats_reset_filter">Redefinr tempo de intervalo</string>
   <string name="call_stats_sort_by_duration">Ordernar por duração de chamada</string>
   <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
+  <string name="call_stats_title_for_number">Este número</string>
+  <string name="call_stats_title_of_total">Do total</string>
+  <string name="call_stats_title_durations">Duração de chamada</string>
+  <string name="call_stats_title_count">Contagem de chamada</string>
+  <string name="call_stats_title_average_duration">Duração média de chamada</string>
+  <string name="recent_calls_no_items_in_range">Seu registro de chamadas não contém chamadas no intervalo de tempo selecionado.</string>
 </resources>

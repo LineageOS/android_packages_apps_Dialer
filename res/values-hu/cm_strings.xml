@@ -59,6 +59,11 @@
   <string name="call_log_blacklist_header">Csak blokkolt hívások</string>
   <string name="call_log_stats_title">Statisztikák</string>
   <string name="callStatsDetailTitle">Részletek</string>
+  <string name="call_stats_incoming">Bejövő: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Kimenő: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Nem fogadott: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blokkolt: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Összesen: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Összesen: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Kezdete</string>
@@ -76,4 +81,10 @@
   <string name="call_stats_reset_filter">Időszak törlése</string>
   <string name="call_stats_sort_by_duration">Rendezés hívások időtartama szerint</string>
   <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
+  <string name="call_stats_title_for_number">Ez a szám</string>
+  <string name="call_stats_title_of_total">Összesből</string>
+  <string name="call_stats_title_durations">Hívás időtartama</string>
+  <string name="call_stats_title_count">Hívásszám</string>
+  <string name="call_stats_title_average_duration">Átlagos hívásidőtartam</string>
+  <string name="recent_calls_no_items_in_range">Hívásnapló nem tartalmaz hívásokat a kiválasztott időtartományban.</string>
 </resources>
