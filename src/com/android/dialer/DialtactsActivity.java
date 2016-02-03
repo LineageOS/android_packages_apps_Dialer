@@ -60,10 +60,12 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.contacts.common.activity.TransactionSafeActivity;
@@ -80,6 +82,7 @@ import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
+import com.android.dialer.incall.CallMethodSpinnerHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.DragDropController;
 import com.android.dialer.list.ListsFragment;
@@ -101,6 +104,8 @@ import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodSpinnerAdapter;
+import com.android.phone.common.incall.CallMethodUtils;
 import com.android.phone.common.util.SettingsUtil;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 
@@ -121,7 +126,7 @@ import java.util.Locale;
  */
 public class DialtactsActivity extends TransactionSafeActivity implements View.OnClickListener,
         DialpadFragment.OnDialpadQueryChangedListener,
-        DialpadFragment.OnCallMethodChangedListener,
+        CallMethodSpinnerHelper.OnCallMethodChangedListener,
         OnListFragmentScrolledListener,
         CallLogFragment.HostInterface,
         DialpadFragment.HostInterface,
@@ -149,6 +154,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String KEY_SEARCH_QUERY = "search_query";
     private static final String KEY_FIRST_LAUNCH = "first_launch";
     private static final String KEY_IS_DIALPAD_SHOWN = "is_dialpad_shown";
+    private static final String KEY_CALL_METHOD_COMPONENT = "call_method_component";
 
     private static final String TAG_DIALPAD_FRAGMENT = "dialpad";
     private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
@@ -253,6 +259,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private EditText mSearchView;
     private View mVoiceSearchButton;
 
+    private String mLastKnownCallMethod;
+
     private String mSearchQuery;
 
     private DialerDatabaseHelper mDialerDatabaseHelper;
@@ -282,10 +290,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallMethodChangedListener(CallMethodInfo cmi) {
-        if (mSmartDialSearchFragment != null) {
-            mSmartDialSearchFragment.setCurrentCallMethod(cmi);
+        if (mCurrentCallMethod == null || !cmi.equals(mCurrentCallMethod)) {
+            mCurrentCallMethod = cmi;
+            String currentLastKnown = mLastKnownCallMethod;
+            mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(cmi);
+            if (currentLastKnown != null && !mLastKnownCallMethod.equals(currentLastKnown)) {
+                mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod);
+            }
+            if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
+                mSmartDialSearchFragment.setCurrentCallMethod(cmi);
+            } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
+                mRegularSearchFragment.setCurrentCallMethod(cmi);
+            }
+            if (mIsDialpadShown) {
+                mDialpadFragment.onCallMethodChanged(cmi);
+            }
         }
-        mCurrentCallMethod = cmi;
     }
 
     public CallMethodInfo getCurrentCallMethod() {
@@ -314,6 +334,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (mSmartDialSearchFragment != null) {
             mSmartDialSearchFragment.setAvailableProviders(mAvailableProviders);
         }
+        mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod);
+    }
+
+    public String getLastKnownCallMethod() {
+        return mLastKnownCallMethod;
     }
 
     protected class OptionsPopupMenu extends PopupMenu {
@@ -415,6 +440,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
     };
 
+    SearchEditTextLayout mSearchEditTextLayout;
+
     /**
      * Handles the user closing the soft keyboard.
      */
@@ -464,21 +491,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(null);
 
-        SearchEditTextLayout searchEditTextLayout =
+        mSearchEditTextLayout =
                 (SearchEditTextLayout) actionBar.getCustomView().findViewById(R.id.search_view_container);
-        searchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
+        mSearchEditTextLayout.setPreImeKeyListener(mSearchEditTextLayoutListener);
+        mSearchEditTextLayout.setCallMethodChangedListener(this);
 
-        mActionBarController = new ActionBarController(this, searchEditTextLayout);
+        mActionBarController = new ActionBarController(this, mSearchEditTextLayout);
 
-        mSearchView = (EditText) searchEditTextLayout.findViewById(R.id.search_view);
+        mSearchView = (EditText) mSearchEditTextLayout.findViewById(R.id.search_view);
         mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
-        mVoiceSearchButton = searchEditTextLayout.findViewById(R.id.voice_search_button);
-        searchEditTextLayout.findViewById(R.id.search_magnifying_glass)
+        mVoiceSearchButton = mSearchEditTextLayout.findViewById(R.id.voice_search_button);
+        mSearchEditTextLayout.findViewById(R.id.search_magnifying_glass)
                 .setOnClickListener(mSearchViewOnClickListener);
-        searchEditTextLayout.findViewById(R.id.search_box_start_search)
+        mSearchEditTextLayout.findViewById(R.id.search_box_start_search)
                 .setOnClickListener(mSearchViewOnClickListener);
-        searchEditTextLayout.setOnClickListener(mSearchViewOnClickListener);
-        searchEditTextLayout.setCallback(new SearchEditTextLayout.Callback() {
+        mSearchEditTextLayout.setOnClickListener(mSearchViewOnClickListener);
+        mSearchEditTextLayout.setCallback(new SearchEditTextLayout.Callback() {
             @Override
             public void onBackButtonClicked() {
                 onBackPressed();
@@ -502,9 +530,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 floatingActionButtonContainer, floatingActionButton);
 
         ImageButton optionsMenuButton =
-                (ImageButton) searchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
+                (ImageButton) mSearchEditTextLayout.findViewById(R.id.dialtacts_options_menu_button);
         optionsMenuButton.setOnClickListener(this);
-        mOverflowMenu = buildOptionsMenu(searchEditTextLayout);
+        mOverflowMenu = buildOptionsMenu(mSearchEditTextLayout);
         optionsMenuButton.setOnTouchListener(mOverflowMenu.getDragToOpenListener());
 
         // Add the favorites fragment but only if savedInstanceState is null. Otherwise the
@@ -519,6 +547,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mInDialpadSearch = savedInstanceState.getBoolean(KEY_IN_DIALPAD_SEARCH_UI);
             mFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
             mShowDialpadOnResume = savedInstanceState.getBoolean(KEY_IS_DIALPAD_SHOWN);
+            mLastKnownCallMethod = savedInstanceState.getString(KEY_CALL_METHOD_COMPONENT);
             mActionBarController.restoreInstanceState(savedInstanceState);
         }
 
@@ -674,6 +703,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_SEARCH_QUERY, mSearchQuery);
+        outState.putString(KEY_CALL_METHOD_COMPONENT, mLastKnownCallMethod);
         outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, mInRegularSearch);
         outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, mInDialpadSearch);
         outState.putBoolean(KEY_FIRST_LAUNCH, mFirstLaunch);
@@ -813,6 +843,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             ft.add(R.id.dialtacts_container, mDialpadFragment, TAG_DIALPAD_FRAGMENT);
         } else {
             ft.show(mDialpadFragment);
+        }
+
+        if (mCurrentCallMethod != null) {
+            // ensure the call method is updated in the fragment
+            mDialpadFragment.onCallMethodChanged(mCurrentCallMethod);
         }
 
         mDialpadFragment.setAnimate(animate);

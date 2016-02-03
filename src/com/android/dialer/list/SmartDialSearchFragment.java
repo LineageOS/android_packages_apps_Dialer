@@ -239,12 +239,6 @@ public class SmartDialSearchFragment extends SearchFragment
         return valuesList.get(randomIndex).mName;
     }
 
-    @Override
-    public void setCurrentCallMethod(CallMethodInfo cmi) {
-        super.setCurrentCallMethod(cmi);
-        reloadData();
-    }
-
     public void setAvailableProviders(HashMap<ComponentName, CallMethodInfo> callMethods) {
         if (mAvailableProviders != null) {
             mAvailableProviders.clear();

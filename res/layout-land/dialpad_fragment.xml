@@ -81,6 +81,24 @@
 
             </FrameLayout>
 
+            <FrameLayout
+                android:id="@+id/dialpad_floating_overflow"
+                android:layout_width="@dimen/floating_action_button_width"
+                android:layout_height="@dimen/floating_action_button_height"
+                android:layout_marginLeft="@dimen/dialpad_overflow_left_margin_landscape"
+                android:layout_above="@id/dialpad_floating_action_button_margin_bottom">
+
+                <ImageButton
+                    android:id="@+id/dialpad_overflow_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:tint="@color/overflow_tint_color"
+                    android:background="@drawable/btn_dialpad_key"
+                    android:src="@drawable/ic_overflow_menu"
+                    android:contentDescription="@string/description_dialpad_overflow"/>
+
+            </FrameLayout>
+
         </RelativeLayout>
 
     </LinearLayout>

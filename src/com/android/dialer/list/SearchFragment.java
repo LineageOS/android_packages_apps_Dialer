@@ -303,6 +303,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
     public void setCurrentCallMethod(CallMethodInfo cmi) {
         mCurrentCallMethodInfo = cmi;
         setupEmptyView();
+        reloadData();
     }
 
     public CallMethodInfo getCurrentCallMethod() {

@@ -139,4 +139,6 @@
     <!-- InCall Plugin Settings -->
     <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>
 
+    <!-- InCall Sign in button -->
+    <string name="sign_in_credit_banner_text">SIGN IN</string>
 </resources>

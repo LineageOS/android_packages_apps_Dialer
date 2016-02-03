@@ -84,6 +84,7 @@ import com.android.dialer.SpecialCharSequenceMgr;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
+import com.android.dialer.incall.CallMethodSpinnerHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.internal.telephony.TelephonyIntents;
@@ -149,10 +150,6 @@ public class DialpadFragment extends Fragment
         void onDialpadQueryChanged(String query);
     }
 
-    public interface OnCallMethodChangedListener {
-        void onCallMethodChangedListener(CallMethodInfo cmi);
-    }
-
     public interface HostInterface {
         /**
          * Notifies the parent activity that the space above the dialpad has been tapped with
@@ -184,8 +181,6 @@ public class DialpadFragment extends Fragment
 
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
-    private OnCallMethodChangedListener mCallMethodChangedListener;
-
     private DialpadView mDialpadView;
     private EditText mDigits;
     private int mDialpadSlideInDuration;
@@ -202,13 +197,10 @@ public class DialpadFragment extends Fragment
 
     /* Call Method Spinner */
     private Spinner mCallMethodSpinner;
-    private CallMethodSpinnerAdapter mCallMethodSpinnerAdapter;
 
     /* Call Method Infos */
     private CallMethodInfo mCurrentCallMethodInfo;
-    private String mLastKnownCallMethod;
     HashMap<ComponentName, CallMethodInfo> mAllAvailableProviders = new HashMap<>();
-    private List<CallMethodInfo> mSims;
 
     private FloatingActionButtonController mFloatingActionButtonController;
 
@@ -284,8 +276,7 @@ public class DialpadFragment extends Fragment
 
                 case TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE:
                 case TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED:
-                    mSims = CallMethodUtils.getSimInfoList(getActivity());
-                    updateCallMethodSpinner();
+                    updateSpinner();
                     break;
             }
         }
@@ -407,6 +398,9 @@ public class DialpadFragment extends Fragment
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
         mDigits.setElegantTextHeight(false);
+
+        mDialpadView.setOverflowMenuButton((ImageButton)
+                fragmentView.findViewById(R.id.dialpad_overflow_button));
         PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
         // Check for the presence of the keypad
         View oneButton = fragmentView.findViewById(R.id.one);
@@ -417,7 +411,13 @@ public class DialpadFragment extends Fragment
         mDelete = mDialpadView.getDeleteButton();
 
         mCallMethodSpinner = mDialpadView.getCallMethodSpinner();
-        setupCallMethodSpinner();
+
+        DialtactsActivity dActivity = (DialtactsActivity) getActivity();
+        if (dActivity != null) {
+            CallMethodSpinnerHelper.setupCallMethodSpinner(dActivity, mCallMethodSpinner,
+                    dActivity);
+        }
+
 
         if (mDelete != null) {
             mDelete.setOnClickListener(this);
@@ -456,53 +456,37 @@ public class DialpadFragment extends Fragment
         return fragmentView;
     }
 
-    private void setupCallMethodSpinner() {
-        mCallMethodSpinnerAdapter = new CallMethodSpinnerAdapter(
-                getActivity().getApplicationContext(), new ArrayList<CallMethodInfo>());
-        mCallMethodSpinner.setAdapter(mCallMethodSpinnerAdapter);
-        mCallMethodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CallMethodInfo callMethodInfo = (CallMethodInfo) parent.getItemAtPosition(position);
-                if (mCurrentCallMethodInfo == null ||
-                        !callMethodInfo.equals(mCurrentCallMethodInfo)) {
-                    onCallMethodChanged(callMethodInfo);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Stub
-                // Nothing was selected, do not change current selection
-            }
-        });
-    }
-
     private void callMethodCredits(CallMethodInfo cmi) {
         String creditText = cmi.getCreditsDescriptionText(getResources());
         String buttonText = null;
+        PendingIntent button;
 
         boolean warnIfLow = false;
         if (TextUtils.isEmpty(creditText)) {
             clearCallRateInformation();
             return;
         } else {
-            if (cmi.usesSubscriptions()) {
-                buttonText = cmi.mSubscriptionButtonText;
-            } else {
-                if (cmi.getCurrencyAmount() <= cmi.mCreditWarn) {
-                    warnIfLow = true;
+            if (cmi.mIsAuthenticated) {
+                button = cmi.mManageCreditIntent;
+                if (cmi.usesSubscriptions()) {
+                    buttonText = cmi.mSubscriptionButtonText;
+                } else {
+                    if (cmi.getCurrencyAmount() <= cmi.mCreditWarn) {
+                        warnIfLow = true;
+                    }
+                    buttonText = mCurrentCallMethodInfo.mCreditButtonText;
                 }
-                buttonText = mCurrentCallMethodInfo.mCreditButtonText;
+            } else {
+                buttonText = getString(R.string.sign_in_credit_banner_text);
+                creditText = "stuff";
+                button = cmi.mLoginIntent;
             }
         }
-        setCallRateInformation(creditText, buttonText, cmi.mManageCreditIntent);
+        setCallRateInformation(creditText, buttonText, button);
     }
 
-    private void onCallMethodChanged(CallMethodInfo callMethodInfo) {
-        mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(callMethodInfo);
+    public void onCallMethodChanged(CallMethodInfo callMethodInfo) {
         mCurrentCallMethodInfo = callMethodInfo;
-        mCallMethodChangedListener.onCallMethodChangedListener(callMethodInfo);
 
         if (callMethodInfo != null && callMethodInfo.mIsInCallProvider) {
             callMethodCredits(callMethodInfo);
@@ -512,53 +496,16 @@ public class DialpadFragment extends Fragment
     }
 
     public void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
-        mSims = CallMethodUtils.getSimInfoList(getActivity());
         mAllAvailableProviders.clear();
         CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
-        updateCallMethodSpinner();
+        updateSpinner();
     }
 
-    private void updateCallMethodSpinner() {
-        mCallMethodSpinnerAdapter.clear();
-        // Add available SIMs or EmergencyCallMethod
-        if ((mSims == null || mSims.isEmpty()) &&
-                mAllAvailableProviders != null && !mAllAvailableProviders.isEmpty()) {
-            // Show "emergency call" option in spinner
-            mCallMethodSpinnerAdapter.add(CallMethodInfo.getEmergencyCallMethod(getContext()));
-        } else {
-            // Show available SIMs in spinner
-            mCallMethodSpinnerAdapter.addAll(mSims);
-        }
-
-        // Add available providers
-        if (mAllAvailableProviders != null) {
-            // Show available providers in spinner
-            mCallMethodSpinnerAdapter.addAll(mAllAvailableProviders);
-        }
-
-        // Set currently selected CallMethod
-        if (mSims.size() <= 1 && mAllAvailableProviders != null &&
-                mAllAvailableProviders.isEmpty()) {
-            // zero or one sim and no providers
-            mCallMethodSpinner.setVisibility(View.GONE);
-            CallMethodInfo info = (mCallMethodSpinnerAdapter.getCount() > 0) ?
-                    mCallMethodSpinnerAdapter.getItem(0) : null;
-            onCallMethodChanged(info);
-        } else {
-            // multiple call methods or single provider
-            CallMethodInfo defaultSim = CallMethodUtils.getDefaultSimInfo(getActivity());
-            int position = 0;
-            if (defaultSim != null) {
-                position = mCallMethodSpinnerAdapter.getPosition(
-                        CallMethodSpinnerAdapter.getCallMethodKey(defaultSim));
-            }
-            if (!TextUtils.isEmpty(mLastKnownCallMethod)) {
-                position = mCallMethodSpinnerAdapter.getPosition(mLastKnownCallMethod);
-            }
-
-            onCallMethodChanged(mCallMethodSpinnerAdapter.getItem(position));
-            mCallMethodSpinner.setSelection(position);
-            mCallMethodSpinner.setVisibility(View.VISIBLE);
+    private void updateSpinner() {
+        DialtactsActivity dActivity = (DialtactsActivity) getActivity();
+        if (dActivity != null) {
+            CallMethodSpinnerHelper.updateCallMethodSpinnerAdapter(dActivity,
+                    mCallMethodSpinner, dActivity, dActivity.getLastKnownCallMethod());
         }
     }
 
@@ -702,6 +649,9 @@ public class DialpadFragment extends Fragment
     }
 
     public void setCallRateInformation(String countryName, String displayRate, PendingIntent p) {
+        if (mDialpadView == null) {
+            return;
+        }
         mDialpadView.setCallRateInformation(countryName, displayRate, p);
     }
 
@@ -791,7 +741,6 @@ public class DialpadFragment extends Fragment
 
         final DialtactsActivity activity = (DialtactsActivity) getActivity();
         mDialpadQueryListener = activity;
-        mCallMethodChangedListener = activity;
 
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
 
@@ -1069,6 +1018,7 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.dialpad_floating_action_button:
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
@@ -1084,7 +1034,8 @@ public class DialpadFragment extends Fragment
                 }
                 break;
             }
-            case R.id.dialpad_overflow: {
+            case R.id.dialpad_overflow:
+            case R.id.dialpad_overflow_button: {
                 mOverflowPopupMenu.show();
                 break;
             }
@@ -1325,7 +1276,7 @@ public class DialpadFragment extends Fragment
             } else {
                 if (mCurrentCallMethodInfo.mIsInCallProvider) {
                     mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
-                            number, getActivity());
+                            number, getActivity(), false, true);
                 } else {
                     // TODO: implement multisim selection
                     /*Context ctx = getContext().getApplicationContext();
