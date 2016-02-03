@@ -36,6 +36,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioAttributes;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
@@ -46,6 +47,7 @@ import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
@@ -72,7 +74,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private static final long[] VIBRATE_PATTERN = new long[] {0, 1000, 1000};
 
     private final Context mContext;
-    private final ContactsPreferences mContactsPreferences;
+    @Nullable private ContactsPreferences mContactsPreferences;
     private final ContactInfoCache mContactInfoCache;
     private final NotificationManager mNotificationManager;
     private final DialerRingtoneManager mDialerRingtoneManager;
@@ -89,7 +91,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache) {
         Preconditions.checkNotNull(context);
         mContext = context;
-        mContactsPreferences = new ContactsPreferences(context);
+        mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
         mContactInfoCache = contactInfoCache;
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -389,18 +391,21 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     /**
      * Returns the main string to use in the notification.
      */
-    private String getContentTitle(ContactCacheEntry contactInfo, Call call) {
+    @NeededForTesting
+    String getContentTitle(ContactCacheEntry contactInfo, Call call) {
         if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
 
-        String preferredName = ContactDisplayUtils.getPreferredDisplayName(contactInfo.namePrimary,
-                contactInfo.nameAlternative, mContactsPreferences.getDisplayOrder());
+        String preferredName = contactInfo.namePrimary;
+        if (mContactsPreferences != null) {
+            preferredName = ContactDisplayUtils.getPreferredDisplayName(contactInfo.namePrimary,
+                    contactInfo.nameAlternative, mContactsPreferences.getDisplayOrder());
+        }
         if (TextUtils.isEmpty(preferredName)) {
             return TextUtils.isEmpty(contactInfo.number) ? null : BidiFormatter.getInstance()
                     .unicodeWrap(contactInfo.number, TextDirectionHeuristics.LTR);
         }
-
         return preferredName;
     }
 
