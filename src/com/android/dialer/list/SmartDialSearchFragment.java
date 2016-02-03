@@ -28,9 +28,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntryListAdapter;
@@ -194,8 +196,8 @@ public class SmartDialSearchFragment extends SearchFragment
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
         CallMethodInfo emergencyOnlyCallMethod = CallMethodInfo.getEmergencyCallMethod(getContext());
-        if ((mCurrentCallMethodInfo == null /*&& (mSims == null || mSims.isEmpty())*/) ||
-                (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.equals(emergencyOnlyCallMethod))) {
+
+        if (mCurrentCallMethodInfo.equals(emergencyOnlyCallMethod)) {
             // If no sims available and emergency only call method selected,
             // alert user that only emergency calls are allowed for the current call method.
             String text = r.getString(R.string.emergency_call_hint_text);
@@ -205,23 +207,26 @@ public class SmartDialSearchFragment extends SearchFragment
             mEmptyView.setImage(heroImage);
             mEmptyView.setDescription(text);
             mEmptyView.setSubViewVisibility(View.GONE);
-        } else if (mCurrentCallMethodInfo != null && !mCurrentCallMethodInfo.mIsInCallProvider &&
-                !mAvailableProviders.isEmpty() && mWifi.isConnected()) {
+        } else if (!mCurrentCallMethodInfo.mIsInCallProvider && mWifi.isConnected()) {
+            TelephonyManager tm =
+                    (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
             String template;
             Drawable heroImage;
             String text;
-            TelephonyManager tm =
-                    (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
 
-            if (tm.isNetworkRoaming(mCurrentCallMethodInfo.mSubId)) {
+            if (TextUtils.isEmpty(tm.getNetworkOperator())) {
+                heroImage = r.getDrawable(R.drawable.ic_signal_wifi_3_bar);
+                template = r.getString(R.string.wifi_hint_text);
+                text = String.format(template, hintTextRequest());
+            } else if (tm.isNetworkRoaming(mCurrentCallMethodInfo.mSubId)) {
                 heroImage = r.getDrawable(R.drawable.ic_roaming);
                 template = r.getString(R.string.roaming_hint_text);
                 text = String.format(template, mCurrentCallMethodInfo.mName, hintTextRequest());
             } else {
-                heroImage = r.getDrawable(R.drawable.ic_signal_wifi_3_bar);
-                template = r.getString(R.string.wifi_hint_text);
-                text = String.format(template, hintTextRequest());
+                showNormalT9Hint(r);
+                return;
             }
+
             mEmptyView.setImage(heroImage);
             mEmptyView.setDescription(text);
             mEmptyView.setSubViewVisibility(View.GONE);
