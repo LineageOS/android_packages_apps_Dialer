@@ -304,6 +304,10 @@ public class SearchFragment extends PhoneNumberPickerFragment
         mCurrentCallMethodInfo = cmi;
         setupEmptyView();
         reloadData();
+        final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
+        if (adapter != null) {
+            adapter.setCurrentCallMethod(cmi);
+        }
     }
 
     public CallMethodInfo getCurrentCallMethod() {

@@ -2,9 +2,11 @@ package com.android.dialer.list;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
+import com.android.phone.common.incall.CallMethodInfo;
 import com.android.dialer.R;
 
 /**
@@ -25,6 +28,7 @@ import com.android.dialer.R;
  * list.
  */
 public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
+    private final static String TAG = DialerPhoneNumberListAdapter.class.getSimpleName();
 
     private String mFormattedQueryString;
     private String mCountryIso;
@@ -47,6 +51,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     private final BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
 
     private searchMethodClicked mSearchMethodListener = null;
+
+    private CallMethodInfo mCurrentCallMethodInfo;
 
     public DialerPhoneNumberListAdapter(Context context) {
         super(context);
@@ -214,6 +220,33 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         };
     }
 
+    @Override
+    protected void bindExtraCallAction(ContactListItemView view, Cursor cursor, int position) {
+        try {
+            int columnIndex = cursor.getColumnIndexOrThrow("callable_extra_number");
+            final String extra = cursor.getString(columnIndex);
+            final String  providerName =
+                    (mCurrentCallMethodInfo == null) ? null : mCurrentCallMethodInfo.mName;
+            TextView callProviderView = view.getCallProviderView();
+
+            if (!TextUtils.isEmpty(extra)) {
+                if (TextUtils.isEmpty(providerName)) {
+                    view.setExtraNumber(extra);
+                } else {
+                    String text = getContext().getString(R.string.extra_call_method_call_option,
+                            providerName);
+                    view.setExtraNumber(text);
+                }
+                callProviderView.setOnClickListener(
+                        bindExtraCallActionOnClick(callProviderView, extra, position));
+            } else {
+                view.setExtraNumber(null);
+            }
+        } catch (IllegalArgumentException e) {
+            Log.i(TAG, "Column does not exist", e);
+        }
+    }
+
     /**
      * @return True if the shortcut state (disabled vs enabled) was changed by this operation
      */
@@ -232,5 +265,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
         mFormattedQueryString = PhoneNumberUtils.formatNumber(
                 PhoneNumberUtils.normalizeNumber(queryString), mCountryIso);
         super.setQueryString(queryString);
+    }
+
+    public void setCurrentCallMethod(CallMethodInfo cmi) {
+        mCurrentCallMethodInfo = cmi;
     }
 }
