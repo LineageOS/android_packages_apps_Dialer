@@ -55,7 +55,7 @@ import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
-import com.android.dialer.service.SpamButtonRenderer;
+import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
@@ -205,8 +205,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     private final int mPhotoSize;
 
-    private ViewStub mSpamViewStub;
-    private SpamButtonRenderer mSpamButtonRenderer;
+    private ViewStub mExtendedBlockingViewStub;
+    private ExtendedBlockingButtonRenderer mExtendedBlockingButtonRenderer;
 
     private View.OnClickListener mExpandCollapseListener;
     private boolean mVoicemailPrimaryActionButtonClicked;
@@ -413,8 +413,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             callWithNoteButtonView = actionsView.findViewById(R.id.call_with_note_action);
             callWithNoteButtonView.setOnClickListener(this);
 
-            mSpamViewStub = (ViewStub) actionsView.findViewById(R.id.spam_actions_container);
-            mSpamButtonRenderer = ObjectFactory.newSpamButtonRenderer(mContext, mSpamViewStub);
+            mExtendedBlockingViewStub =
+                    (ViewStub) actionsView.findViewById(R.id.extended_blocking_actions_container);
+            mExtendedBlockingButtonRenderer = ObjectFactory
+                    .newExtendedBlockingButtonRenderer(mContext, mExtendedBlockingViewStub);
         }
 
         bindActionButtons();
@@ -545,7 +547,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         callWithNoteButtonView.setVisibility(
                 supportsCallSubject && !isVoicemailNumber ? View.VISIBLE : View.GONE);
 
-        if(mSpamButtonRenderer != null){
+        if(mExtendedBlockingButtonRenderer != null){
             List<View> completeLogListItems = Lists.newArrayList(
                     createNewContactButtonView,
                     addToExistingContactButtonView,
@@ -555,12 +557,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     detailsButtonView,
                     voicemailPlaybackView);
             List<View> blockedNumberVisibleViews = new ArrayList<>();
-            List<View> spamNumberVisibleViews = Lists.newArrayList(detailsButtonView);
+            List<View> extendedBlockingVisibleViews = Lists.newArrayList(detailsButtonView);
 
-            mSpamButtonRenderer.setCompleteListItemViews(completeLogListItems);
-            mSpamButtonRenderer.setFilteredNumberViews(blockedNumberVisibleViews);
-            mSpamButtonRenderer.setSpamFilteredViews(spamNumberVisibleViews);
-            mSpamButtonRenderer.render(number, countryIso);
+            mExtendedBlockingButtonRenderer.setCompleteListItemViews(completeLogListItems);
+            mExtendedBlockingButtonRenderer.setFilteredNumberViews(blockedNumberVisibleViews);
+            mExtendedBlockingButtonRenderer.setExtendedFilteredViews(extendedBlockingVisibleViews);
+            mExtendedBlockingButtonRenderer.render(number, countryIso);
         }
     }
 

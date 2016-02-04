@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Interface responsible for rendering spam buttons.
  */
-public interface SpamButtonRenderer {
+public interface ExtendedBlockingButtonRenderer {
 
     /**
      * Renders buttons for a phone number.
@@ -16,7 +16,7 @@ public interface SpamButtonRenderer {
 
     void setCompleteListItemViews(List<View> views);
 
-    void setSpamFilteredViews(List<View> views);
+    void setExtendedFilteredViews(List<View> views);
 
     void setFilteredNumberViews(List<View> views);
 

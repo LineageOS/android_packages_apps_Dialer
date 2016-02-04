@@ -130,7 +130,7 @@
     </LinearLayout>
 
     <ViewStub
-        android:id="@+id/spam_actions_container"
+        android:id="@+id/extended_blocking_actions_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
