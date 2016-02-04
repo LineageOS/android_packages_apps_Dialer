@@ -845,7 +845,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             ft.show(mDialpadFragment);
         }
 
-        if (mCurrentCallMethod != null) {
+        if (mCurrentCallMethod != null && mDialpadFragment.isAdded()) {
             // ensure the call method is updated in the fragment
             mDialpadFragment.onCallMethodChanged(mCurrentCallMethod);
         }
