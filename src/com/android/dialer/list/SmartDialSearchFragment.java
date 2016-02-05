@@ -209,7 +209,9 @@ public class SmartDialSearchFragment extends SearchFragment
                 mEmptyView.setImage(heroImage);
                 mEmptyView.setDescription(text);
                 mEmptyView.setSubViewVisibility(View.GONE);
-            } else if (!mCurrentCallMethodInfo.mIsInCallProvider && mWifi.isConnected()) {
+            } else if (!mAvailableProviders.isEmpty() &&
+                    !mCurrentCallMethodInfo.mIsInCallProvider &&
+                    mWifi.isConnected()) {
                 TelephonyManager tm =
                         (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
                 String template;
