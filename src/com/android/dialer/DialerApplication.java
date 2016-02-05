@@ -20,7 +20,6 @@ import android.app.Application;
 import android.os.Trace;
 
 import com.android.contacts.common.extensions.ExtensionsFactory;
-import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 
 public class DialerApplication extends Application {
 
@@ -32,9 +31,6 @@ public class DialerApplication extends Application {
         super.onCreate();
         Trace.beginSection(TAG + " ExtensionsFactory initialization");
         ExtensionsFactory.init(getApplicationContext());
-        Trace.endSection();
-        Trace.beginSection(TAG + " Analytics initialization");
-        AnalyticsUtil.initialize(this);
         Trace.endSection();
         Trace.endSection();
     }
