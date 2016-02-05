@@ -20,6 +20,7 @@ import com.google.common.base.MoreObjects;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -206,7 +207,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     /**
      * ContactsPreferences used to lookup displayName preferences
      */
-    private final ContactsPreferences mContactsPreferences;
+    @Nullable private final ContactsPreferences mContactsPreferences;
 
     /**
      * The layout inflater used to inflate new views.
@@ -236,7 +237,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
 
         mListView = listView;
         mContext = context;
-        mContactsPreferences = new ContactsPreferences(mContext);
+        mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
         mLayoutInflater = layoutInflater;
         mContactPhotoManager = contactPhotoManager;
     }
@@ -249,8 +250,10 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
      *                                      conference.
      */
     public void updateParticipants(List<Call> conferenceParticipants, boolean parentCanSeparate) {
-        mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-        mContactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
+        if (mContactsPreferences != null) {
+            mContactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
+            mContactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
+        }
         mParentCanSeparate = parentCanSeparate;
         updateParticipantInfo(conferenceParticipants);
     }
@@ -361,7 +364,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
 
         setCallerInfoForRow(result, contactCache.namePrimary,
                 ContactDisplayUtils.getPreferredDisplayName(contactCache.namePrimary,
-                        contactCache.nameAlternative, mContactsPreferences.getDisplayOrder()),
+                        contactCache.nameAlternative, mContactsPreferences),
                 contactCache.number, contactCache.label,
                 contactCache.lookupKey, contactCache.displayPhotoUri, thisRowCanSeparate,
                 thisRowCanDisconnect);
@@ -513,7 +516,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
                         ContactDisplayUtils.getPreferredSortName(
                                 c1.namePrimary,
                                 c1.nameAlternative,
-                                mContactsPreferences.getSortOrder()),
+                                mContactsPreferences),
                         "");
 
                 ContactCacheEntry c2 = p2.getContactCacheEntry();
@@ -521,7 +524,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
                         ContactDisplayUtils.getPreferredSortName(
                                 c2.namePrimary,
                                 c2.nameAlternative,
-                                mContactsPreferences.getSortOrder()),
+                                mContactsPreferences),
                         "");
 
                 return p1Name.compareToIgnoreCase(p2Name);

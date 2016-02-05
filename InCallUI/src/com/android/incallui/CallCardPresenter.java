@@ -936,13 +936,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      */
     @NeededForTesting
     String getNameForCall(ContactCacheEntry contactInfo) {
-        String preferredName = contactInfo.namePrimary;
-        if (mContactsPreferences != null) {
-            preferredName = ContactDisplayUtils.getPreferredDisplayName(
-                    contactInfo.namePrimary,
-                    contactInfo.nameAlternative,
-                    mContactsPreferences.getDisplayOrder());
-        }
+        String preferredName = ContactDisplayUtils.getPreferredDisplayName(
+                contactInfo.namePrimary,
+                contactInfo.nameAlternative,
+                mContactsPreferences);
         if (TextUtils.isEmpty(preferredName)) {
             return contactInfo.number;
         }
@@ -956,13 +953,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     String getNumberForCall(ContactCacheEntry contactInfo) {
         // If the name is empty, we use the number for the name...so don't show a second
         // number in the number field
-        String preferredName = contactInfo.namePrimary;
-        if (mContactsPreferences != null) {
-            preferredName = ContactDisplayUtils.getPreferredDisplayName(
+        String preferredName = ContactDisplayUtils.getPreferredDisplayName(
                     contactInfo.namePrimary,
                     contactInfo.nameAlternative,
-                    mContactsPreferences.getDisplayOrder());
-        }
+                    mContactsPreferences);
         if (TextUtils.isEmpty(preferredName)) {
             return contactInfo.location;
         }

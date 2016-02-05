@@ -397,11 +397,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
 
-        String preferredName = contactInfo.namePrimary;
-        if (mContactsPreferences != null) {
-            preferredName = ContactDisplayUtils.getPreferredDisplayName(contactInfo.namePrimary,
-                    contactInfo.nameAlternative, mContactsPreferences.getDisplayOrder());
-        }
+        String preferredName = ContactDisplayUtils.getPreferredDisplayName(contactInfo.namePrimary,
+                    contactInfo.nameAlternative, mContactsPreferences);
         if (TextUtils.isEmpty(preferredName)) {
             return TextUtils.isEmpty(contactInfo.number) ? null : BidiFormatter.getInstance()
                     .unicodeWrap(contactInfo.number, TextDirectionHeuristics.LTR);
