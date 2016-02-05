@@ -19,8 +19,7 @@ package com.android.dialerbind;
 import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
 
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.annotation.Nullable;
 import android.view.ViewStub;
 
 import com.android.dialer.calllog.CallLogAdapter;
@@ -28,6 +27,7 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.service.CachedNumberLookupService;
+import com.android.dialer.service.ExtendedBlockingManager;
 import com.android.dialer.service.SpamButtonRenderer;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -45,9 +45,15 @@ public class ObjectFactory {
         return "com.android.dialer.database.filterednumberprovider";
     }
 
+    @Nullable
     public static SpamButtonRenderer newSpamButtonRenderer(
             Context context,
             ViewStub stub) {
+        return null;
+    }
+
+    @Nullable
+    public static ExtendedBlockingManager getExtendedBlockingManager() {
         return null;
     }
 
