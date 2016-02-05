@@ -18,6 +18,7 @@ package com.android.dialer.widget;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,7 +39,9 @@ import com.android.dialer.R;
 import com.android.dialer.incall.CallMethodSpinnerHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.phone.common.animation.AnimUtils;
+import com.android.phone.common.incall.CallMethodInfo;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class SearchEditTextLayout extends FrameLayout {
@@ -286,7 +289,7 @@ public class SearchEditTextLayout extends FrameLayout {
             mVoiceSearchButtonView.setVisibility(View.GONE);
         }
         mOverflowButtonView.setVisibility(collapsedViewVisibility);
-        if (mCallMethodSpinner != null && mCallMethodChangedListener != null) {
+        if (mCallMethodSpinner != null && mCallMethodSpinner.getVisibility() == View.VISIBLE) {
             mBackButtonView.setVisibility(View.GONE);
         } else {
             mBackButtonView.setVisibility(collapsedViewVisibility);
@@ -357,7 +360,8 @@ public class SearchEditTextLayout extends FrameLayout {
                 mCallMethodChangedListener);
     }
 
-    public void updateSpinner(String lastKnownCallMethod) {
+    public void updateSpinner(String lastKnownCallMethod,  HashMap<ComponentName, CallMethodInfo>
+            availableProviders) {
         if (mCallMethodChangedListener != null) {
             CallMethodSpinnerHelper.setupCallMethodSpinner(
                     getContext(),
@@ -365,7 +369,8 @@ public class SearchEditTextLayout extends FrameLayout {
                     mCallMethodChangedListener);
 
             CallMethodSpinnerHelper.updateCallMethodSpinnerAdapter(getContext(),
-                    mCallMethodSpinner, mCallMethodChangedListener, lastKnownCallMethod);
+                    mCallMethodSpinner, mCallMethodChangedListener, lastKnownCallMethod,
+                    availableProviders);
         }
     }
 }

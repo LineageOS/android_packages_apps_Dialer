@@ -290,13 +290,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onCallMethodChangedListener(CallMethodInfo cmi) {
+        if (cmi == null) {
+            Log.e(TAG, "Somehow our CallMethod is Null. This should never happen.",
+                    new Exception());
+            return;
+        }
         if (mCurrentCallMethod == null || !cmi.equals(mCurrentCallMethod)) {
             mCurrentCallMethod = cmi;
             String currentLastKnown = mLastKnownCallMethod;
             mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(cmi);
-            if (currentLastKnown != null && !mLastKnownCallMethod.equals(currentLastKnown)) {
-                mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod);
-            }
+            mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod, mAvailableProviders);
             if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
                 mSmartDialSearchFragment.setCurrentCallMethod(cmi);
             } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
@@ -334,7 +337,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (mSmartDialSearchFragment != null) {
             mSmartDialSearchFragment.setAvailableProviders(mAvailableProviders);
         }
-        mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod);
+        mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod, mAvailableProviders);
     }
 
     public String getLastKnownCallMethod() {

@@ -505,7 +505,8 @@ public class DialpadFragment extends Fragment
         DialtactsActivity dActivity = (DialtactsActivity) getActivity();
         if (dActivity != null) {
             CallMethodSpinnerHelper.updateCallMethodSpinnerAdapter(dActivity,
-                    mCallMethodSpinner, dActivity, dActivity.getLastKnownCallMethod());
+                    mCallMethodSpinner, dActivity, dActivity.getLastKnownCallMethod(),
+                    mAllAvailableProviders);
         }
     }
 

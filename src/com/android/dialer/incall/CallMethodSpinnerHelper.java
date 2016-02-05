@@ -67,14 +67,14 @@ public class CallMethodSpinnerHelper {
      */
     public static void updateCallMethodSpinnerAdapter(Context context, Spinner callMethodSpinner,
                                                final OnCallMethodChangedListener changeListener,
-                                               String lastKnownCallMethod) {
+                                               String lastKnownCallMethod,
+                                               HashMap<ComponentName, CallMethodInfo>
+                                                              availableProviders) {
         CallMethodSpinnerAdapter callMethodSpinnerAdapter = (CallMethodSpinnerAdapter)
                 callMethodSpinner.getAdapter();
         callMethodSpinnerAdapter.clear();
 
         List<CallMethodInfo> sims = CallMethodUtils.getSimInfoList(context);
-        HashMap<ComponentName, CallMethodInfo> availableProviders =
-                CallMethodHelper.getAllCallMethods();
 
         // Add available SIMs or EmergencyCallMethod
         if (sims.isEmpty() && !availableProviders.isEmpty()) {
@@ -97,6 +97,7 @@ public class CallMethodSpinnerHelper {
         } else {
             // multiple call methods or single provider
             int position = 0;
+            callMethodSpinner.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(lastKnownCallMethod)) {
                 position = callMethodSpinnerAdapter.getPosition(lastKnownCallMethod);
             } else {
@@ -106,7 +107,7 @@ public class CallMethodSpinnerHelper {
                             CallMethodSpinnerAdapter.getCallMethodKey(defaultSim));
                 }
             }
-            
+
             changeListener.onCallMethodChangedListener(callMethodSpinnerAdapter.getItem(position));
             callMethodSpinner.setSelection(position);
         }
