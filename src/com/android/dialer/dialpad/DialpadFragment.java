@@ -276,7 +276,7 @@ public class DialpadFragment extends Fragment
 
                 case TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE:
                 case TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED:
-                    updateSpinner();
+                    updateSpinner(null, mAllAvailableProviders);
                     break;
             }
         }
@@ -478,7 +478,7 @@ public class DialpadFragment extends Fragment
                 }
             } else {
                 buttonText = getString(R.string.sign_in_credit_banner_text);
-                creditText = "stuff";
+                creditText = "";
                 button = cmi.mLoginIntent;
             }
         }
@@ -495,18 +495,24 @@ public class DialpadFragment extends Fragment
         }
     }
 
-    public void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+    public void providersUpdated(String lastKnownCallMethod, HashMap<ComponentName, CallMethodInfo>
+            callMethodInfos) {
         mAllAvailableProviders.clear();
         CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
-        updateSpinner();
+        updateSpinner(lastKnownCallMethod, callMethodInfos);
+
+        if (mCurrentCallMethodInfo != null &&
+                callMethodInfos.containsKey(mCurrentCallMethodInfo.mComponent)) {
+            onCallMethodChanged(callMethodInfos.get(mCurrentCallMethodInfo.mComponent));
+        }
     }
 
-    private void updateSpinner() {
+    public void updateSpinner(String lastKnownMethod, HashMap<ComponentName, CallMethodInfo>
+            availableProviders) {
         DialtactsActivity dActivity = (DialtactsActivity) getActivity();
         if (dActivity != null) {
             CallMethodSpinnerHelper.updateCallMethodSpinnerAdapter(dActivity,
-                    mCallMethodSpinner, dActivity, dActivity.getLastKnownCallMethod(),
-                    mAllAvailableProviders);
+                    mCallMethodSpinner, dActivity, lastKnownMethod, availableProviders);
         }
     }
 
