@@ -1,13 +1,16 @@
 package com.android.dialer.settings;
 
 import android.app.PendingIntent;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import com.android.dialer.DialerApplication;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
@@ -30,7 +33,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceActivity.Header;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -43,6 +45,8 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.android.dialer.R;
+import com.android.dialer.callerinfo.CallerInfoProviderPicker;
+import com.android.dialer.util.MetricsHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,7 +64,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
     private static final String SETTINGS_INTENT = "settings_intent";
 
     private static final int OWNER_HANDLE_ID = 0;
-    private CallerInfoHelper.ResolvedProvider mSelectProvider;
+    private CallerInfoHelper.ResolvedProvider mSelectedProvider;
     private ProviderInfo mSelectedProviderInfo;
     private boolean mPickerResult;
 
@@ -94,10 +98,10 @@ public class DialerSettingsActivity extends PreferenceActivity {
         if (CallerInfoHelper.getInstalledProviders(this).length > 0) {
             CallerInfoHelper.ResolvedProvider[] providers =
                     CallerInfoHelper.getInstalledProviders(this);
-            mSelectProvider = providers[0];
-            if (mSelectProvider != null ) {
+            mSelectedProvider = providers[0];
+            if (mSelectedProvider != null ) {
                 mSelectedProviderInfo =
-                        CallerInfoHelper.getProviderInfo(this, mSelectProvider.getComponent());
+                        CallerInfoHelper.getProviderInfo(this, mSelectedProvider.getComponent());
             }
         }
         super.onCreate(savedInstanceState);
@@ -153,6 +157,26 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
                 target.add(phoneAccountSettingsHeader);
             }
+        }
+
+        if (mSelectedProvider != null && mSelectedProviderInfo != null) {
+            final Header callInfoHeader = new Header();
+            callInfoHeader.title = mSelectedProviderInfo.getTitle();
+            callInfoHeader.id = R.id.callerinfo_provider;
+            int resId = mSelectedProviderInfo.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
+                    R.string.callerinfo_provider_summary : R.string.callerinfo_provider_summary_no_spam;
+            callInfoHeader.summaryRes = resId;
+            target.add(callInfoHeader);
+
+            final Header silenceSpamHeader = new Header();
+            silenceSpamHeader.titleRes = R.string.silence_spam_title;
+            silenceSpamHeader.summaryRes = R.string.silence_spam_summary;
+            target.add(silenceSpamHeader);
+
+            final Header blockHidden = new Header();
+            blockHidden.titleRes = R.string.block_hidden_title;
+            blockHidden.summaryRes = R.string.block_hidden_summary;
+            target.add(blockHidden);
         }
 
         Header speedDialHeader = new Header();
@@ -225,7 +249,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
         } else {
             // We don't have access to the hidden getHeaders() method, so grab the headers from
             // the intended adapter and then replace it with our own.
-            mHeaderAdapter = new HeaderAdapter(this, mCurrentHeaders, mSelectProvider);
+            mHeaderAdapter = new HeaderAdapter(this, mCurrentHeaders, mSelectedProvider);
             super.setListAdapter(mHeaderAdapter);
         }
     }
@@ -240,6 +264,27 @@ public class DialerSettingsActivity extends PreferenceActivity {
     protected void onResume() {
         super.onResume();
         if (mHeaderAdapter != null) {
+            if (!mPickerResult && CallerInfoHelper.getActiveProviderPackage(this) != null) {
+                PendingResult<IsAuthenticatedResult> result =
+                        CallerInfoServices.CallerInfoApi.isAuthenticated(
+                                AmbientConnection.CLIENT.get(this));
+                result.setResultCallback(new ResultCallback<IsAuthenticatedResult>() {
+                    @Override
+                    public void onResult(IsAuthenticatedResult isAuthenticatedResult) {
+                        if (!isAuthenticatedResult.getIsAuthenticated()) {
+                            CallerInfoHelper.setActiveProvider(DialerSettingsActivity.this, null);
+                        }
+                        if (mHeaderAdapter != null) {
+                            DialerSettingsActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mHeaderAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
             mPickerResult = false;
             mHeaderAdapter.notifyDataSetChanged();
         }
@@ -282,7 +327,66 @@ public class DialerSettingsActivity extends PreferenceActivity {
             Header header = ((Header) buttonView.getTag());
             if (header.extras != null && header.extras.containsKey(COMPONENT_NAME)) {
                 providerStateChanged(header.extras, isChecked, getContext());
+            } else if (header.id == R.id.callerinfo_provider) {
+                ComponentName activeProvider =
+                        CallerInfoHelper.getActiveProviderPackage(getContext());
+                // Add active provider check to make sure we don't show dialog
+                // when loading settings page after provider is already configured.
+                // This check is too simplistic when we have multiple providers, but
+                // we need to rework this UI in that case anyway.
+                if (isChecked && activeProvider == null) {
+                    Intent i = new Intent(getContext(), CallerInfoProviderPicker.class);
+                    i.putExtra(CallerInfoProviderPicker.METRICS_REASON_EXTRA,
+                            CallerInfoProviderPicker.REASON_DIALER_SETTINGS);
+                    ((Activity) getContext()).startActivityForResult(i, 0);
+                } else if (!isChecked) {
+                    confirmProviderDisable(buttonView);
+                }
+            } else if (header.titleRes == R.string.silence_spam_title) {
+                CallerInfoHelper.setSilenceSpamCalls(getContext(), isChecked);
+            } else if (header.titleRes == R.string.block_hidden_title) {
+                CallerInfoHelper.setBlockHiddenNumbers(getContext(), isChecked);
             }
+        }
+
+        private void confirmProviderDisable(final CompoundButton buttonView) {
+            final ProviderInfo providerInfo = CallerInfoHelper.getActiveProviderInfo(getContext());
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+            Resources res = getContext().getResources();
+            String title = res.getString(R.string.provider_disable_title, providerInfo.getTitle());
+            builder.setTitle(title);
+
+            int resId = providerInfo.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
+                    R.string.provider_disable_spam_message : R.string.provider_disable_message;
+            builder.setMessage(res.getString(resId, providerInfo.getTitle()));
+            builder.setPositiveButton(R.string.callerinfo_provider_auth_yes,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    MetricsHelper.Field field = new MetricsHelper.Field(
+                            MetricsHelper.Fields.PROVIDER_PACKAGE_NAME,
+                            providerInfo.getPackageName());
+                    CallerInfoHelper.setActiveProvider(getContext(), null);
+                    MetricsHelper.sendEvent(MetricsHelper.Categories.PROVIDER_STATE_CHANGES,
+                            MetricsHelper.Actions.PROVIDER_DISABLED,
+                            MetricsHelper.State.SETTINGS, field);
+                }
+            });
+            builder.setNegativeButton(R.string.pause_prompt_no,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    setCheckedStateWithoutTriggeringListener(buttonView, true);
+                }
+            });
+            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    setCheckedStateWithoutTriggeringListener(buttonView, true);
+                }
+            });
+            builder.show();
         }
 
         private void setCheckedStateWithoutTriggeringListener(CompoundButton button,
@@ -298,6 +402,18 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 setCheckedStateWithoutTriggeringListener(switchButton,
                         header.extras.getInt(COMPONENT_STATUS) == PluginStatus.ENABLED);
 
+            } else if (header.id == R.id.callerinfo_provider) {
+                ComponentName activeProvider = CallerInfoHelper.getActiveProviderPackage
+                        (getContext());
+                boolean checked = activeProvider != null
+                        && activeProvider.equals(mSelectProvider.getComponent());
+                setCheckedStateWithoutTriggeringListener(switchButton, checked);
+            } else if (header.titleRes == R.string.silence_spam_title) {
+                setCheckedStateWithoutTriggeringListener(switchButton,
+                        CallerInfoHelper.shouldSilenceSpamCalls(getContext()));
+            } else if (header.titleRes == R.string.block_hidden_title) {
+                setCheckedStateWithoutTriggeringListener(switchButton,
+                        CallerInfoHelper.shouldBlockHiddenNumbers(getContext()));
             }
         }
 
@@ -321,6 +437,9 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
         public static int getHeaderType(Header header) {
             if (header.extras != null && header.extras.containsKey(COMPONENT_NAME)) {
+                return HEADER_TYPE_SWITCH;
+            } else if (header.id == R.id.callerinfo_provider || header.titleRes == R.string
+                    .silence_spam_title || header.titleRes == R.string.block_hidden_title) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;

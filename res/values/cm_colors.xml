@@ -4,4 +4,8 @@
     <color name="recent_subtitle_color">#a79f9c</color>
     <color name="hint_image_color">#b1b1b1</color>
 
+    <color name="callerinfo_provider_picker_negative_color">#a8a8a8</color>
+    <color name="callerinfo_provider_picker_description_color">#8a000000</color>
+    <color name="callerinfo_provider_picker_disclaimer_color">#a6a6a6</color>
+
 </resources>

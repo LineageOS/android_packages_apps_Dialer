@@ -146,4 +146,28 @@
 
     <!-- InCall Sign in button -->
     <string name="sign_in_credit_banner_text">SIGN IN</string>
+
+    <!-- CallerInfo Provider Settings strings -->
+    <string name="callerinfo_provider_auth_yes">Yes</string>
+    <string name="callerinfo_provider_auth_no">No thanks</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> will have access to your contacts, Me profile, and Cyanogen OS account, which may include your email address.</string>
+    <string name="callerinfo_provider_auth_learn_more">Learn more</string>
+    <string name="callerinfo_provider_auth_desc">Welcome! Would you like <xliff:g id="provider_name">%s</xliff:g> to identify unknown callers and block unwanted calls?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Welcome! Would you like <xliff:g id="provider_name">%s</xliff:g> to identify unknown callers?</string>
+    <string name="callerinfo_provider_summary">Identifies unknown callers and spam</string>
+    <string name="callerinfo_provider_summary_no_spam">Identifies unknown callers</string>
+
+    <string name="silence_spam_title">Silence spam calls</string>
+    <string name="silence_spam_summary">Never let spam calls ring through</string>
+    <string name="block_hidden_title">Block hidden phone numbers</string>
+    <string name="block_hidden_summary">Consider hidden numbers as spam</string>
+    <string name="block_dialog_title">Block this caller?</string>
+    <string name="block_dialog_positive">Block</string>
+    <string name="block_dialog_negative">Cancel</string>
+    <string name="block_dialog_description">You will no longer receive calls or messages from this person.</string>
+    <string name="block_dialog_report_spam">Report as spam to <xliff:g id="provider">%s</xliff:g></string>
+
+    <string name="provider_disable_title">Disable %1$s?</string>
+    <string name="provider_disable_message">By disabling %1$s, you will not have caller ID.</string>
+    <string name="provider_disable_spam_message">By disabling %1$s, you will not have spam protection or caller ID.</string>
 </resources>

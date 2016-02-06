@@ -25,6 +25,8 @@
     <uses-permission android:name="com.cyanogen.ambient.permission.PUBLISH_DISCOVERY_NUDGE" />
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_DEEPLINK_SERVICE" />
 
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+
     <application>
 
         <receiver android:name=".incall.CallMethodStatusReceiver"
@@ -45,6 +47,11 @@
         </receiver>
 
         <service android:name=".discovery.DiscoveryService" />
+
+        <activity
+            android:name="com.android.dialer.callerinfo.CallerInfoProviderPicker"
+            android:theme="@style/Theme.Material.Light.Dialog.NoTitle"
+            android:exported="true" />
 
     </application>
 </manifest>
