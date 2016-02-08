@@ -249,7 +249,6 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 Call.areSameNumber(mPrimary, primary));
         final boolean secondaryChanged = !(Call.areSame(mSecondary, secondary) &&
                 Call.areSameNumber(mSecondary, secondary));
-        final boolean shouldShowCallSubject = shouldShowCallSubject(mPrimary);
 
         mSecondary = secondary;
         Call previousPrimary = mPrimary;
@@ -262,9 +261,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Refresh primary call information if either:
         // 1. Primary call changed.
         // 2. The call's ability to manage conference has changed.
-        if (mPrimary != null && (primaryChanged ||
-                ui.isManageConferenceVisible() != shouldShowManageConference()) ||
-                ui.isCallSubjectVisible() != shouldShowCallSubject) {
+        // 3. The call subject should be shown or hidden.
+        if (shouldRefreshPrimaryInfo(primaryChanged, ui, shouldShowCallSubject(mPrimary))) {
             // primary call has changed
             if (previousPrimary != null) {
                 CallList.getInstance().removeCallUpdateListener(previousPrimary.getId(), this);
@@ -394,6 +392,16 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
         updatePrimaryDisplayInfo();
+    }
+
+    private boolean shouldRefreshPrimaryInfo(boolean primaryChanged, CallCardUi ui,
+            boolean shouldShowCallSubject) {
+        if (mPrimary == null) {
+            return false;
+        }
+        return primaryChanged ||
+                ui.isManageConferenceVisible() != shouldShowManageConference() ||
+                ui.isCallSubjectVisible() != shouldShowCallSubject;
     }
 
     private String getSubscriptionNumber() {
