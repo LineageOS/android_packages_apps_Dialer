@@ -43,7 +43,7 @@
     <string name="card_title_incoming_work_call" msgid="5601475030981264422">"Kiruvchi ishchi qo‘ng‘irog‘i"</string>
     <string name="card_title_call_ended" msgid="5544730338889702298">"Qo‘ng‘iroq tugadi"</string>
     <string name="card_title_on_hold" msgid="821463117892339942">"Kutish holatida"</string>
-    <string name="card_title_hanging_up" msgid="3999101620995182450">"Go‘shak qo‘yilmoqda"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"Suhbat tugatilmoqda"</string>
     <string name="card_title_in_call" msgid="6346543933068225205">"Qo‘ng‘iroqda"</string>
     <string name="card_title_my_phone_number" msgid="112428362494434191">"Mening raqamim - <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
     <string name="card_title_video_call_connecting" msgid="297586766381973954">"Videoga ulanmoqda"</string>
