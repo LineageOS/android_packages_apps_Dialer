@@ -39,6 +39,13 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通话记录吗？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"这会删除您的所有通话记录"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通话记录…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"打电话"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"未接电话"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"未接工作来电"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"未接电话"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> 个未接电话"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"回电"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"发短信"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 封语音邮件</item>
       <item quantity="one">1 封语音邮件</item>
@@ -153,7 +160,7 @@
     <string name="unblock_number_ok" msgid="6449899182699684786">"取消屏蔽"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速拨号"</string>
     <string name="tab_history" msgid="2563144697322434940">"通话记录"</string>
-    <string name="tab_all_contacts" msgid="1410922767166533690">"联系人"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"通讯录"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"语音邮件"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"已从收藏中移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"撤消"</string>

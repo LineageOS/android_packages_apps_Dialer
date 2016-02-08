@@ -39,6 +39,13 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"통화 기록을 삭제하시겠습니까?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"모든 통화가 기록에서 삭제됩니다."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"통화 기록을 삭제하는 중…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"전화"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"부재중 전화"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"부재중 업무 통화"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"부재중 전화"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"부재중 전화 <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>통"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"전화 걸기"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"메시지"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other">음성메일 <xliff:g id="COUNT">%1$d</xliff:g>개</item>
       <item quantity="one">음성메일</item>

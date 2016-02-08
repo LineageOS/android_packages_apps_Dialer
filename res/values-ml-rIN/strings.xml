@@ -39,6 +39,13 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"കോൾ ചരിത്രം മായ്‌ക്കണോ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ഇത് നിങ്ങളുടെ ചരിത്രത്തിൽ നിന്ന് എല്ലാ കോളുകളും ഇല്ലാതാക്കും"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"കോൾ ചരിത്രം മായ്‌ക്കുന്നു..."</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ഫോൺ"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"മിസ്‌ഡ് കോൾ"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"മിസ്ഡ് ഔദ്യോഗിക കോൾ"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"മിസ്‌ഡ് കോളുകൾ"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> മിസ്‌ഡ് കോളുകൾ"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"തിരിച്ചുവിളിക്കുക"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"സന്ദേശം"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> വോയ്‌സ്‌മെയിലുകൾ </item>
       <item quantity="one">വോയ്‌സ്‌മെയിൽ</item>

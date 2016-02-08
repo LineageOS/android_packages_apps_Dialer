@@ -39,6 +39,13 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"האם לנקות את היסטוריית השיחות?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"פעולה זו תמחק את כל השיחות מההיסטוריה שלך"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"מנקה היסטוריית שיחות…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"טלפון"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"שיחה שלא נענתה"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"שיחה עסקית שלא נענתה"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"שיחות שלא נענו"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> שיחות שלא נענו"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"התקשר חזרה"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"הודעה"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="two"> <xliff:g id="COUNT">%1$d</xliff:g> הודעות דואר קולי </item>
       <item quantity="many"> <xliff:g id="COUNT">%1$d</xliff:g> הודעות דואר קולי </item>

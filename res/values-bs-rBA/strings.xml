@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- no translation found for applicationLabel (7762561155467201526) -->
+    <skip />
+    <!-- no translation found for launcherActivityLabel (1129729740601172692) -->
+    <skip />
+    <!-- no translation found for launcherDialpadActivityLabel (3959809805046059167) -->
+    <skip />
+    <!-- no translation found for dialerIconLabel (6500826552823403796) -->
+    <skip />
+    <!-- no translation found for callHistoryIconLabel (3734413397291301223) -->
+    <skip />
+    <!-- no translation found for action_report_number (4635403959812186162) -->
+    <skip />
+    <!-- no translation found for action_copy_number_text (588249522108594155) -->
+    <skip />
+    <!-- no translation found for copy_transcript_text (5652787482893879382) -->
+    <skip />
+    <!-- no translation found for action_block_number (1482657602262262134) -->
+    <skip />
+    <!-- no translation found for snackbar_number_blocked (939830142765936021) -->
+    <skip />
+    <!-- no translation found for action_unblock_number (3043777622269776127) -->
+    <skip />
+    <!-- no translation found for snackbar_number_unblocked (4854738171099045912) -->
+    <skip />
+    <!-- no translation found for block_number_undo (591338370336724156) -->
+    <skip />
+    <!-- no translation found for call_details_delete (1833359621896346955) -->
+    <skip />
+    <!-- no translation found for action_edit_number_before_call (3100221149873436485) -->
+    <skip />
+    <!-- no translation found for call_log_delete_all (4677609108288680411) -->
+    <skip />
+    <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
+    <skip />
+    <!-- no translation found for snackbar_voicemail_deleted (5098542835986188582) -->
+    <skip />
+    <!-- no translation found for snackbar_voicemail_deleted_undo (3741811385891289167) -->
+    <skip />
+    <!-- no translation found for clearCallLogConfirmation_title (801753155679372984) -->
+    <skip />
+    <!-- no translation found for clearCallLogConfirmation (7899552396101432827) -->
+    <skip />
+    <!-- no translation found for clearCallLogProgress_title (3372471156216306132) -->
+    <skip />
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefon"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Propušteni poziv"</string>
+    <!-- no translation found for notification_missedWorkCallTitle (8418335304394771688) -->
+    <skip />
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Propušteni pozivi"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"Propuštenih poziva: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Pozovi ovaj broj"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"Poruka"</string>
+    <!-- no translation found for notification_voicemail_title (9088953961148324851) -->
+    <!-- no translation found for notification_action_voicemail_play (6113133136977996863) -->
+    <skip />
+    <!-- no translation found for notification_voicemail_callers_list (1153954809339404149) -->
+    <skip />
+    <!-- no translation found for notification_new_voicemail_ticker (895342132049452081) -->
+    <skip />
+    <!-- no translation found for voicemail_playback_error (3356071912353297599) -->
+    <skip />
+    <!-- no translation found for voicemail_fetching_content (1287895365599580842) -->
+    <skip />
+    <!-- no translation found for voicemail_fetching_timout (3959428065511972176) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_header (3945407886667089173) -->
+    <skip />
+    <!-- no translation found for call_log_incoming_header (2787722299753674684) -->
+    <skip />
+    <!-- no translation found for call_log_outgoing_header (761009180766735769) -->
+    <skip />
+    <!-- no translation found for call_log_missed_header (8017148056610855956) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_title (4574199312906348905) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_text (164967285234132509) -->
+    <skip />
+    <!-- no translation found for visual_voicemail_settings (8090338793118794741) -->
+    <skip />
+    <!-- no translation found for voicemail_status_voicemail_not_available (5222480147701456390) -->
+    <skip />
+    <!-- no translation found for voicemail_status_messages_waiting (6329544650250068650) -->
+    <skip />
+    <!-- no translation found for voicemail_status_configure_voicemail (8300808991932816153) -->
+    <skip />
+    <!-- no translation found for voicemail_status_audio_not_available (2449801102560158082) -->
+    <skip />
+    <!-- no translation found for voicemail_status_action_configure (8671796489912239589) -->
+    <skip />
+    <!-- no translation found for voicemail_status_action_call_server (1824816252288551794) -->
+    <skip />
+    <!-- no translation found for call_log_item_count_and_date (7641933305703520787) -->
+    <skip />
+    <!-- no translation found for sms_disambig_title (5846266399240630846) -->
+    <skip />
+    <!-- no translation found for call_disambig_title (4392886850104795739) -->
+    <skip />
+    <!-- no translation found for make_primary (5829291915305113983) -->
+    <skip />
+    <!-- no translation found for description_search_button (3660807558587384889) -->
+    <skip />
+    <!-- no translation found for description_dial_button (1274091017188142646) -->
+    <skip />
+    <!-- no translation found for description_digits_edittext (8760207516497016437) -->
+    <skip />
+    <!-- no translation found for description_playback_start_stop (5060732345522492292) -->
+    <skip />
+    <!-- no translation found for description_playback_speakerphone (6008323900245707504) -->
+    <skip />
+    <!-- no translation found for description_playback_seek (4509404274968530055) -->
+    <skip />
+    <!-- no translation found for description_rate_decrease (3161652589401708284) -->
+    <skip />
+    <!-- no translation found for description_rate_increase (6324606574127052385) -->
+    <skip />
+    <!-- no translation found for action_menu_call_history_description (9018442816219748968) -->
+    <skip />
+    <!-- no translation found for action_menu_overflow_description (2303272250613084574) -->
+    <!-- no translation found for action_menu_overflow_description (2295659037509008453) -->
+    <skip />
+    <!-- no translation found for action_menu_dialpad_button (1425910318049008136) -->
+    <skip />
+    <!-- no translation found for menu_show_outgoing_only (1965570298133301970) -->
+    <skip />
+    <!-- no translation found for menu_show_incoming_only (7534206815238877417) -->
+    <skip />
+    <!-- no translation found for menu_show_missed_only (154473166059743996) -->
+    <skip />
+    <!-- no translation found for menu_show_voicemails_only (1898421289561435703) -->
+    <skip />
+    <!-- no translation found for menu_show_all_calls (7560347482073345885) -->
+    <skip />
+    <!-- no translation found for add_2sec_pause (9214012315201040129) -->
+    <skip />
+    <!-- no translation found for add_wait (3360818652790319634) -->
+    <skip />
+    <!-- no translation found for dialer_settings_label (4305043242594150479) -->
+    <skip />
+    <!-- no translation found for menu_newContact (1209922412763274638) -->
+    <skip />
+    <!-- no translation found for menu_allContacts (6948308384034051670) -->
+    <skip />
+    <!-- no translation found for callDetailTitle (5340227785196217938) -->
+    <skip />
+    <!-- no translation found for toast_call_detail_error (6947041258280380832) -->
+    <skip />
+    <!-- no translation found for dialer_useDtmfDialpad (1707548397435075040) -->
+    <skip />
+    <!-- no translation found for dialer_returnToInCallScreen (3719386377550913067) -->
+    <skip />
+    <!-- no translation found for dialer_addAnotherCall (4205688819890074468) -->
+    <skip />
+    <!-- no translation found for type_incoming (6502076603836088532) -->
+    <skip />
+    <!-- no translation found for type_outgoing (343108709599392641) -->
+    <skip />
+    <!-- no translation found for type_missed (2720502601640509542) -->
+    <skip />
+    <!-- no translation found for type_incoming_video (82323391702796181) -->
+    <skip />
+    <!-- no translation found for type_outgoing_video (2858140021680755266) -->
+    <skip />
+    <!-- no translation found for type_missed_video (954396897034220545) -->
+    <skip />
+    <!-- no translation found for type_voicemail (5153139450668549908) -->
+    <skip />
+    <!-- no translation found for type_rejected (7783201828312472691) -->
+    <skip />
+    <!-- no translation found for type_blocked (3521686227115330015) -->
+    <skip />
+    <!-- no translation found for actionIncomingCall (6028930669817038600) -->
+    <skip />
+    <!-- no translation found for description_call_log_play_button (651182125650429846) -->
+    <skip />
+    <!-- no translation found for description_view_contact (5205669345700598415) -->
+    <skip />
+    <!-- no translation found for description_call (3443678121983852666) -->
+    <skip />
+    <!-- no translation found for description_contact_details (51229793651342809) -->
+    <skip />
+    <!-- no translation found for description_num_calls (1601505153694540074) -->
+    <skip />
+    <!-- no translation found for description_video_call (2933838090743214204) -->
+    <skip />
+    <!-- no translation found for description_send_text_message (3118485319691414221) -->
+    <skip />
+    <!-- no translation found for description_call_log_unheard_voicemail (118101684236996786) -->
+    <skip />
+    <!-- no translation found for description_start_voice_search (520539488194946012) -->
+    <skip />
+    <!-- no translation found for menu_callNumber (997146291983360266) -->
+    <skip />
+    <!-- no translation found for unknown (740067747858270469) -->
+    <skip />
+    <!-- no translation found for voicemail (3851469869202611441) -->
+    <skip />
+    <!-- no translation found for private_num (6374339738119166953) -->
+    <skip />
+    <!-- no translation found for payphone (7726415831153618726) -->
+    <skip />
+    <!-- no translation found for callDetailsShortDurationFormat (3988146235579303592) -->
+    <skip />
+    <!-- no translation found for callDetailsDurationFormat (6061406028764382234) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
+    <skip />
+    <!-- no translation found for dialog_phone_call_prohibited_message (5730565540182492608) -->
+    <!-- no translation found for dialog_phone_call_prohibited_message (4313552620858880999) -->
+    <skip />
+    <!-- no translation found for dialog_voicemail_not_ready_message (4384716252789515378) -->
+    <skip />
+    <!-- no translation found for dialog_voicemail_airplane_mode_message (530922773669546093) -->
+    <skip />
+    <!-- no translation found for contact_list_loading (5488620820563977329) -->
+    <skip />
+    <!-- no translation found for imei (3045126336951684285) -->
+    <skip />
+    <!-- no translation found for meid (6210568493746275750) -->
+    <skip />
+    <!-- no translation found for simContacts_emptyLoading (6700035985448642408) -->
+    <skip />
+    <!-- no translation found for simContacts_title (27341688347689769) -->
+    <skip />
+    <!-- no translation found for add_contact_not_available (5547311613368004859) -->
+    <skip />
+    <!-- no translation found for voice_search_not_available (2977719040254285301) -->
+    <skip />
+    <!-- no translation found for call_not_available (8941576511946492225) -->
+    <skip />
+    <!-- no translation found for activity_not_available (2287665636817987623) -->
+    <skip />
+    <!-- no translation found for dialer_hint_find_contact (3574350254520035364) -->
+    <skip />
+    <!-- no translation found for block_number_search_hint (5409571607043872758) -->
+    <skip />
+    <!-- no translation found for call_log_all_empty (8357417710416340920) -->
+    <skip />
+    <!-- no translation found for call_log_all_empty_action (9093210119068366147) -->
+    <skip />
+    <!-- no translation found for call_log_missed_empty (3927274175205520135) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
+    <skip />
+    <!-- no translation found for show_favorites_only (5520072531022614595) -->
+    <skip />
+    <!-- no translation found for call_log_activity_title (7949633151371183580) -->
+    <skip />
+    <!-- no translation found for call_log_all_title (3566738938889333307) -->
+    <skip />
+    <!-- no translation found for call_log_missed_title (4541142293870638971) -->
+    <skip />
+    <!-- no translation found for call_log_voicemail_title (940422274047025948) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_title (6862219558186931304) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_vvm (5655646611437082611) -->
+    <skip />
+    <!-- no translation found for block_number_confirmation_message_no_vvm (4511900601491718173) -->
+    <skip />
+    <!-- no translation found for block_number_ok (770551992296781873) -->
+    <skip />
+    <!-- no translation found for unblock_number_confirmation_title (252824779504084354) -->
+    <skip />
+    <!-- no translation found for unblock_number_confirmation_message (8521058345002166692) -->
+    <skip />
+    <!-- no translation found for unblock_number_ok (6449899182699684786) -->
+    <skip />
+    <!-- no translation found for tab_speed_dial (7552166276545648893) -->
+    <skip />
+    <!-- no translation found for tab_history (2563144697322434940) -->
+    <skip />
+    <!-- no translation found for tab_all_contacts (1410922767166533690) -->
+    <skip />
+    <!-- no translation found for tab_voicemail (155024725947496746) -->
+    <skip />
+    <!-- no translation found for favorite_hidden (5011234945140912047) -->
+    <skip />
+    <!-- no translation found for favorite_hidden_undo (2508998611039406474) -->
+    <skip />
+    <!-- no translation found for search_shortcut_call_number (7277194656832895870) -->
+    <skip />
+    <!-- no translation found for search_shortcut_create_new_contact (1679917465521554093) -->
+    <skip />
+    <!-- no translation found for search_shortcut_add_to_contact (4327842393369915751) -->
+    <skip />
+    <!-- no translation found for search_shortcut_send_sms_message (2569304043345025525) -->
+    <skip />
+    <!-- no translation found for search_shortcut_make_video_call (1265971685034465166) -->
+    <skip />
+    <!-- no translation found for search_shortcut_block_number (4787156645163436072) -->
+    <skip />
+    <!-- no translation found for num_missed_calls (8081736535604293886) -->
+    <skip />
+    <!-- no translation found for speed_dial_empty (8838921693673366129) -->
+    <skip />
+    <!-- no translation found for speed_dial_empty_add_favorite_action (7944893641496695770) -->
+    <skip />
+    <!-- no translation found for all_contacts_empty (471370638298229686) -->
+    <skip />
+    <!-- no translation found for all_contacts_empty_add_contact_action (1515782853819374618) -->
+    <skip />
+    <!-- no translation found for contact_tooltip (2019777545923635266) -->
+    <skip />
+    <!-- no translation found for remove_contact (1080555335283662961) -->
+    <skip />
+    <!-- no translation found for call_log_action_video_call (7724301709041128296) -->
+    <skip />
+    <!-- no translation found for call_log_action_send_message (5679719296905285131) -->
+    <skip />
+    <!-- no translation found for call_log_action_details (701345508704970622) -->
+    <skip />
+    <!-- no translation found for call_log_action_call (463690849042459842) -->
+    <skip />
+    <!-- no translation found for description_incoming_missed_call (2381085098795943627) -->
+    <skip />
+    <!-- no translation found for description_incoming_answered_call (7117665748428816544) -->
+    <skip />
+    <!-- no translation found for description_unread_voicemail (5826351827625665597) -->
+    <skip />
+    <!-- no translation found for description_read_voicemail (133974208364152610) -->
+    <skip />
+    <!-- no translation found for description_outgoing_call (6386364390619734734) -->
+    <skip />
+    <!-- no translation found for description_phone_account (1767072759541443861) -->
+    <skip />
+    <!-- no translation found for description_call_log_call_action (3682561657090693134) -->
+    <skip />
+    <!-- no translation found for description_call_action (4000549004089776147) -->
+    <skip />
+    <!-- no translation found for description_video_call_action (7386922428155062213) -->
+    <skip />
+    <!-- no translation found for description_voicemail_action (8054891873788903063) -->
+    <skip />
+    <!-- no translation found for description_voicemail_play (2689369874037785439) -->
+    <skip />
+    <!-- no translation found for description_voicemail_pause (3905259748756919693) -->
+    <skip />
+    <!-- no translation found for description_voicemail_delete (2025472770630153436) -->
+    <skip />
+    <!-- no translation found for description_voicemail_unread (8708346053055570332) -->
+    <!-- no translation found for description_create_new_contact_action (818755978791008167) -->
+    <skip />
+    <!-- no translation found for description_add_to_existing_contact_action (6081200053494414351) -->
+    <skip />
+    <!-- no translation found for description_details_action (2433827152749491785) -->
+    <skip />
+    <!-- no translation found for toast_entry_removed (8010830299576311534) -->
+    <skip />
+    <!-- no translation found for call_log_header_today (3225248682434212981) -->
+    <skip />
+    <!-- no translation found for call_log_header_yesterday (9139172458834033092) -->
+    <skip />
+    <!-- no translation found for call_log_header_other (5769921959940709084) -->
+    <skip />
+    <!-- no translation found for call_detail_list_header (3752717059699600861) -->
+    <skip />
+    <!-- no translation found for voicemail_speaker_on (209154030283487068) -->
+    <skip />
+    <!-- no translation found for voicemail_speaker_off (7390530056413093958) -->
+    <skip />
+    <!-- no translation found for voicemail_play_faster (3444751008615323006) -->
+    <skip />
+    <!-- no translation found for voicemail_play_slower (4544796503902818832) -->
+    <skip />
+    <!-- no translation found for voicemail_play_start_pause (3687447935787768983) -->
+    <skip />
+    <!-- no translation found for list_delimeter (4571593167738725100) -->
+    <skip />
+    <!-- no translation found for display_options_title (7812852361055667468) -->
+    <skip />
+    <!-- no translation found for sounds_and_vibration_title (1692290115642160845) -->
+    <skip />
+    <!-- no translation found for accessibility_settings_title (6068141142874046249) -->
+    <skip />
+    <!-- no translation found for ringtone_title (760362035635084653) -->
+    <skip />
+    <!-- no translation found for vibrate_on_ring_title (3362916460327555241) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_enable_title (6571449695997521615) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_length_title (8581125689808919460) -->
+    <skip />
+    <!-- no translation found for dtmf_tone_length_entries:0 (1036113889050195575) -->
+    <!-- no translation found for dtmf_tone_length_entries:1 (6177579030803486015) -->
+    <!-- no translation found for respond_via_sms_setting_title (1318281521087951580) -->
+    <skip />
+    <!-- no translation found for call_settings_label (313434211353070209) -->
+    <skip />
+    <!-- no translation found for manage_blocked_numbers_label (5959801428936629196) -->
+    <skip />
+    <!-- no translation found for blocked_numbers_disabled_emergency_header_label (7870947220238070418) -->
+    <skip />
+    <!-- no translation found for blocked_numbers_disabled_emergency_desc (7755803249073401381) -->
+    <skip />
+    <!-- no translation found for import_send_to_voicemail_numbers_label (1606601823746799926) -->
+    <skip />
+    <!-- no translation found for blocked_call_settings_import_description (8640906226815125906) -->
+    <skip />
+    <!-- no translation found for blocked_call_settings_view_numbers_button (6698986720875955935) -->
+    <skip />
+    <!-- no translation found for blocked_call_settings_import_button (178821255125295473) -->
+    <skip />
+    <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
+    <!-- no translation found for description_blocked_number_list_delete (3240093199107796792) -->
+    <skip />
+    <!-- no translation found for addBlockedNumber (6064812257482886526) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_vvm (5387302253765439712) -->
+    <skip />
+    <!-- no translation found for block_number_footer_message_no_vvm (223238617533822381) -->
+    <skip />
+    <!-- no translation found for block_list (7760188925338078011) -->
+    <skip />
+    <!-- no translation found for invalidNumber (619058581062192851) -->
+    <skip />
+    <!-- no translation found for alreadyBlocked (282340105563646876) -->
+    <skip />
+    <!-- no translation found for call_blocking_disabled_notification_title (8185193413377920194) -->
+    <skip />
+    <!-- no translation found for call_blocking_disabled_notification_text (5330772013626378526) -->
+    <skip />
+    <!-- no translation found for phone_account_settings_label (5864322009841175294) -->
+    <skip />
+    <!-- no translation found for permission_single_turn_on (1543391076065465464) -->
+    <skip />
+    <!-- no translation found for permission_multiple_turn_on (2426278457455950554) -->
+    <skip />
+    <!-- no translation found for permission_no_speeddial (6882563445996184051) -->
+    <skip />
+    <!-- no translation found for permission_no_calllog (555711464287041043) -->
+    <skip />
+    <!-- no translation found for permission_no_contacts (6237980143178936279) -->
+    <skip />
+    <!-- no translation found for permission_no_voicemail (8306280257799917574) -->
+    <skip />
+    <!-- no translation found for permission_no_search (84152933267902056) -->
+    <skip />
+    <!-- no translation found for permission_place_call (2101287782615887547) -->
+    <skip />
+    <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
+    <skip />
+</resources>
