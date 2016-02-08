@@ -109,7 +109,7 @@
     <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Tastatură numerică"</string>
     <string name="onscreenMuteText" msgid="5011369181754261374">"Dezactivați sunetul"</string>
     <string name="onscreenAddCallText" msgid="5140385634712287403">"Adăugați un apel"</string>
-    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Îmbinaţi apelurile"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Îmbinați apelurile"</string>
     <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Schimbaţi"</string>
     <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gestionați apelurile"</string>
     <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Gestionați teleconferința"</string>

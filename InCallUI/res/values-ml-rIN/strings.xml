@@ -172,7 +172,7 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> മണിക്കൂർ</item>
       <item quantity="one">1 മണിക്കൂർ</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"പ്രൊഫൈല്‍ ഫോട്ടോ"</string>
+    <string name="profile_photo_description" msgid="5609894336203315400">"പ്രൊഫൈൽ ഫോട്ടോ"</string>
     <string name="camera_off_description" msgid="5689494614359429889">"ക്യാമറ ഓഫാക്കുക"</string>
     <string name="child_number" msgid="7437330400723805538">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> വഴി"</string>
     <string name="note_sent" msgid="3548700178238244595">"കുറിപ്പ് അയച്ചു"</string>
