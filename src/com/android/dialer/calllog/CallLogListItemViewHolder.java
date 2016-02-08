@@ -539,10 +539,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             }
             updateBlockCallerView();
         } else {
-            if (inCallComponentName != null) {
+            final Object tag = view.getTag();
+            if (tag instanceof String && inCallComponentName != null) {
                 CallMethodInfo cmi = CallMethodHelper.getCallMethod(inCallComponentName);
                 if (cmi != null) {
-                    String callProviderActionName = (String) view.getTag();
+                    String callProviderActionName = (String) tag;
                     switch (callProviderActionName) {
                         case "video":
                             cmi.placeCall(OriginCodes.CALL_LOG_CALL, number, mContext, true);
@@ -554,21 +555,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                             cmi.placeCall(OriginCodes.CALL_LOG_CALL, number, mContext);
                             break;
                         default:
-                            // Unsupported thing, use default intent
-                            final IntentProvider intentProvider = (IntentProvider) view.getTag();
-                            if (intentProvider != null) {
-                                final Intent intent = intentProvider.getIntent(mContext);
-                                // See IntentProvider.getCallDetailIntentProvider()
-                                // for why this may be null.
-                                if (intent != null) {
-                                    DialerUtils.startActivityWithErrorToast(mContext, intent);
-                                }
-                            }
+                            // Unsupported thing, we shouldn't get here
                             break;
                     }
                 }
             } else {
-                final IntentProvider intentProvider = (IntentProvider) view.getTag();
+                final IntentProvider intentProvider = (IntentProvider) tag;
                 if (intentProvider != null) {
                     final Intent intent = intentProvider.getIntent(mContext);
                     // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
