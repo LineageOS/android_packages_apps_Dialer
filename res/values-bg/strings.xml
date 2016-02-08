@@ -39,6 +39,12 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Да се изчисти ли историята на обажд.?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Така ще се изтрият всички обаждания от историята ви"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Историята на обажд. се изчиства…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Телефон"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Пропуснато обаждане"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Пропуснати обаждания"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> пропуснати обаждания"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Обратно обаждане"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"Съобщение"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> гласови съобщения </item>
       <item quantity="one">Гласово съобщение</item>

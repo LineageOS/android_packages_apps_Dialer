@@ -39,6 +39,12 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"કૉલ ઇતિહાસ સાફ કરીએ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"આ તમારા ઇતિહાસમાંથી તમામ કૉલ્સ કાઢી નાખશે"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"કૉલ ઇતિહાસ સાફ કરી રહ્યાં છે…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ફોન"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"છૂટેલો કૉલ"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"છૂટેલા કૉલ્સ"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> છૂટેલા કૉલ"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"કૉલ બૅક કરો"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"સંદેશ"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> વૉઇસમેઇલ્સ </item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> વૉઇસમેઇલ્સ </item>

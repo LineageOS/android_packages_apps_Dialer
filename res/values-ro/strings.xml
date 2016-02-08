@@ -39,12 +39,18 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Ștergeți istoricul apelurilor?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Astfel vor fi șterse toate apelurile din istoric"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Se șterge istoricul apelurilor…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefon"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Apel nepreluat"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Apeluri nepreluate"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> (de) apeluri nepreluate"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Apelați înapoi"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"Trimiteți mesaj"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> mesaje vocale </item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> de mesaje vocale </item>
       <item quantity="one">Mesaj vocal</item>
     </plurals>
-    <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Redaţi"</string>
+    <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Redați"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mesaj vocal nou de la <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Nu s-a putut reda mesageria vocală"</string>
@@ -103,7 +109,7 @@
     <string name="type_rejected" msgid="7783201828312472691">"Apel respins"</string>
     <string name="type_blocked" msgid="3521686227115330015">"Apel blocat"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Apeluri de intrare"</string>
-    <string name="description_call_log_play_button" msgid="651182125650429846">"Redaţi mesajul vocal"</string>
+    <string name="description_call_log_play_button" msgid="651182125650429846">"Redați mesajul vocal"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Afişaţi persoana din agendă <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Apelaţi pe <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Detalii de contact pentru <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
@@ -111,7 +117,7 @@
     <string name="description_video_call" msgid="2933838090743214204">"Apel video."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Trimiteți SMS la <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Mesaje vocale neascultate"</string>
-    <string name="description_start_voice_search" msgid="520539488194946012">"Începeţi căutarea vocală"</string>
+    <string name="description_start_voice_search" msgid="520539488194946012">"Începeți căutarea vocală"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Apelaţi <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Necunoscut"</string>
     <string name="voicemail" msgid="3851469869202611441">"Mesagerie vocală"</string>
