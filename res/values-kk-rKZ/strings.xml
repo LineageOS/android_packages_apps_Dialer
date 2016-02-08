@@ -39,6 +39,12 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Қоңыраулар тарихын тазалау керек пе?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Бұл тарихтан барлық қоңырауларды жояды"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Қоңыраулар тарихы тазалануда…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Телефон"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Өткізіп алған қоңырау"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Қабылданбаған қоңыраулар"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> өткізіп алған қоңырау"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Кері қоңырау шалу"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"Хабар"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> дауыстық хабар </item>
       <item quantity="one">Дауыстық хабар</item>

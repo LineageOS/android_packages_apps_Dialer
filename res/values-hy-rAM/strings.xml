@@ -39,6 +39,12 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Մաքրե՞լ զանգերի պատմությունը:"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Այս գործողությունը ամբողջովին կջնջի զանգերի պատմությունը"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Զանգերի պատմության մաքրում…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Հեռախոս"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Բաց թողնված զանգ"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Բաց թողնված զանգեր"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> բաց թողնված զանգ"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Հետ զանգել"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"Հաղորդագրություն"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> ձայնային փոստ </item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> ձայնային փոստ </item>
