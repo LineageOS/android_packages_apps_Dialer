@@ -39,6 +39,13 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ជម្រះប្រវត្តិហៅ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"វានឹងលុបការហៅទាំងអស់ចេញពីប្រវត្តិរបស់អ្នក"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"កំពុងជម្រះប្រវត្តិហៅ…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ទូរស័ព្ទ"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"ខកខាន​ទទួល"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"បានខកខានការហៅចូលពីកន្លែងការងារ"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"ខកខាន​ទទួល"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"ខកខានទទួល <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ដង"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"ហៅ​ទៅ​វិញ"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"សារ"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other">សារជាសម្លេង <xliff:g id="COUNT">%1$d</xliff:g> </item>
       <item quantity="one">សារជាសម្លេង</item>
