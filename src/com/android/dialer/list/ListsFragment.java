@@ -191,6 +191,7 @@ public class ListsFragment extends Fragment
         mCallLogQueryHandler =
                 new CallLogQueryHandler(getActivity(), getActivity().getContentResolver(), this);
         mCallLogQueryHandler.fetchVoicemailStatus();
+        mCallLogQueryHandler.fetchMissedCallsUnreadCount();
         Trace.endSection();
     }
 
@@ -346,6 +347,23 @@ public class ListsFragment extends Fragment
     }
 
     @Override
+    public void onMissedCallsUnreadCountFetched(Cursor cursor) {
+        if (getActivity() == null || getActivity().isFinishing() || cursor == null) {
+            return;
+        }
+
+        int count = 0;
+        try {
+            count = cursor.getCount();
+        } finally {
+            cursor.close();
+        }
+
+        mViewPagerTabs.setUnreadCount(count, TAB_INDEX_HISTORY);
+        mViewPagerTabs.updateTab(TAB_INDEX_HISTORY);
+    }
+
+    @Override
     public boolean onCallsFetched(Cursor statusCursor) {
         // Return false; did not take ownership of cursor
         return false;
@@ -360,8 +378,11 @@ public class ListsFragment extends Fragment
      * expands a voicemail in the call log.
      */
     public void updateTabUnreadCounts() {
-        if (mHasActiveVoicemailProvider && mCallLogQueryHandler != null) {
-            mCallLogQueryHandler.fetchVoicemailUnreadCount();
+        if (mCallLogQueryHandler != null) {
+            mCallLogQueryHandler.fetchMissedCallsUnreadCount();
+            if (mHasActiveVoicemailProvider) {
+                mCallLogQueryHandler.fetchVoicemailUnreadCount();
+            }
         }
     }
 
