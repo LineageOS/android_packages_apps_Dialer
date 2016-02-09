@@ -443,7 +443,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 supportsCallSubject && !isVoicemailNumber ? View.VISIBLE : View.GONE);
 
         // Remove block caller item if blacklist is disabled
-        if (mContactInfoHelper.canBlacklistCalls()) {
+        if (mContactInfoHelper.canBlacklistCalls() && (cmi == null || !cmi.mIsInCallProvider)) {
             blockCallerButtonView.setVisibility(View.VISIBLE);
         } else {
             blockCallerButtonView.setVisibility(View.GONE);
