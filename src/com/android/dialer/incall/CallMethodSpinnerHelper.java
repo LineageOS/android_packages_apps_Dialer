@@ -108,7 +108,6 @@ public class CallMethodSpinnerHelper {
                 }
             }
 
-            changeListener.onCallMethodChangedListener(callMethodSpinnerAdapter.getItem(position));
             callMethodSpinner.setSelection(position);
         }
     }
