@@ -299,15 +299,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (mCurrentCallMethod == null || !cmi.equals(mCurrentCallMethod)) {
             mCurrentCallMethod = cmi;
             mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod, mAvailableProviders);
-        }
-        if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
-            mSmartDialSearchFragment.setCurrentCallMethod(cmi);
-        } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
-            mRegularSearchFragment.setCurrentCallMethod(cmi);
-        }
-        if (mIsDialpadShown) {
-            mDialpadFragment.updateSpinner(mLastKnownCallMethod, mAvailableProviders);
-            mDialpadFragment.onCallMethodChanged(cmi);
+            if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
+                mSmartDialSearchFragment.setCurrentCallMethod(cmi);
+            } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
+                mRegularSearchFragment.setCurrentCallMethod(cmi);
+            }
+            if (mIsDialpadShown) {
+                mDialpadFragment.updateSpinner(mLastKnownCallMethod, mAvailableProviders);
+                mDialpadFragment.onCallMethodChanged(cmi);
+            }
+        } else if (cmi.mIsAuthenticated == mCurrentCallMethod.mIsAuthenticated ||
+                cmi.mProviderCreditInfo == mCurrentCallMethod.mProviderCreditInfo) {
+            mCurrentCallMethod = cmi;
+            if (mIsDialpadShown) {
+                mDialpadFragment.onCallMethodChanged(cmi);
+            }
         }
     }
 
