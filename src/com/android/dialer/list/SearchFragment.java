@@ -252,10 +252,14 @@ public class SearchFragment extends PhoneNumberPickerFragment
 
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID_PROVIDER:
-                onProviderClick(position, id, getCurrentCallMethod());
+                onProviderClick(position, getCurrentCallMethod(), false);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
-                super.onItemClick(position, id);
+                if (getCurrentCallMethod().mIsInCallProvider) {
+                    onProviderClick(position, getCurrentCallMethod(), true);
+                } else {
+                    super.onItemClick(position, id);
+                }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
                 number = adapter.getQueryString();
@@ -294,10 +298,14 @@ public class SearchFragment extends PhoneNumberPickerFragment
         }
     }
 
-    protected void onProviderClick(int position, long id, CallMethodInfo cmi) {
-        final String number = getPhoneNumber(position);
-        final String username = getUserName(position);
-        cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, username, getContext());
+    protected void onProviderClick(int position, CallMethodInfo cmi, boolean isPSTN) {
+        String contactData;
+        if (isPSTN) {
+            contactData = getPhoneNumber(position);
+        } else {
+            contactData = getUserName(position);
+        }
+        cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, contactData, getContext(), false, true);
     }
 
     public void setCurrentCallMethod(CallMethodInfo cmi) {
