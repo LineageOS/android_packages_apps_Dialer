@@ -303,11 +303,12 @@ public class SearchFragment extends PhoneNumberPickerFragment
     public void setCurrentCallMethod(CallMethodInfo cmi) {
         mCurrentCallMethodInfo = cmi;
         setupEmptyView();
-        reloadData();
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
         if (adapter != null) {
             adapter.setCurrentCallMethod(cmi);
         }
+        setAdditionalMimeTypeSearch(cmi.mMimeType);
+        reloadData();
     }
 
     public CallMethodInfo getCurrentCallMethod() {
