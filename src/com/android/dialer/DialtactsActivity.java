@@ -297,9 +297,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
         mLastKnownCallMethod = CallMethodSpinnerAdapter.getCallMethodKey(cmi);
         if (mCurrentCallMethod == null || !cmi.equals(mCurrentCallMethod)) {
+            mCurrentCallMethod = cmi;
             mSearchEditTextLayout.updateSpinner(mLastKnownCallMethod, mAvailableProviders);
         }
-        mCurrentCallMethod = cmi;
         if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
             mSmartDialSearchFragment.setCurrentCallMethod(cmi);
         } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
