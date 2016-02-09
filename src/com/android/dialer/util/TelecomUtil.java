@@ -81,9 +81,15 @@ public class TelecomUtil {
     }
 
     public static Uri getCallLogUri(Context context) {
+        return hasReadWriteVoicemailPermissions(context) ? Calls.CONTENT_URI_WITH_VOICEMAIL
+                : Calls.CONTENT_URI;
+    }
+
+    // Get extended Call Log Uri, InCallAPI inclusive.
+    // For use without call log id (will not work with specified call log ids)
+    public static Uri getAllCallLogUri(Context context) {
         return hasReadWriteVoicemailPermissions(context) ?
-                CallLogConstants.CONTENT_ALL_URI_WITH_VOICEMAIL
-                : CallLogConstants.CONTENT_ALL_URI;
+                CallLogConstants.CONTENT_ALL_URI_WITH_VOICEMAIL : CallLogConstants.CONTENT_ALL_URI;
     }
 
     public static boolean hasReadWriteVoicemailPermissions(Context context) {

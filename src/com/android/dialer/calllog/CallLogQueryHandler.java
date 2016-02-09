@@ -193,7 +193,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         final int limit = (mLogLimit == -1) ? NUM_LOGS_TO_DISPLAY : mLogLimit;
         final String selection = where.length() > 0 ? where.toString() : null;
-        Uri uri = TelecomUtil.getCallLogUri(mContext).buildUpon()
+        Uri uri = TelecomUtil.getAllCallLogUri(mContext).buildUpon()
                 .appendQueryParameter(Calls.LIMIT_PARAM_KEY, Integer.toString(limit))
                 .build();
         startQuery(token, null, uri,
