@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import com.android.dialer.util.TelecomUtil;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodSpinnerAdapter;
@@ -74,7 +75,13 @@ public class CallMethodSpinnerHelper {
                 callMethodSpinner.getAdapter();
         callMethodSpinnerAdapter.clear();
 
-        List<CallMethodInfo> sims = CallMethodUtils.getSimInfoList(context);
+        List<CallMethodInfo> sims = new ArrayList<CallMethodInfo>();
+        if (TelecomUtil.hasReadPhoneStatus(context)) {
+            // Todo: tell user why we need this and properly request and restart spinner if they
+            // grant it.
+            sims.clear();
+            sims.addAll(CallMethodUtils.getSimInfoList(context));
+        }
 
         // Add available SIMs or EmergencyCallMethod
         if (sims.isEmpty() && !availableProviders.isEmpty()) {
@@ -101,7 +108,10 @@ public class CallMethodSpinnerHelper {
             if (!TextUtils.isEmpty(lastKnownCallMethod)) {
                 position = callMethodSpinnerAdapter.getPosition(lastKnownCallMethod);
             } else {
-                CallMethodInfo defaultSim = CallMethodUtils.getDefaultSimInfo(context);
+                CallMethodInfo defaultSim = null;
+                if (TelecomUtil.hasReadPhoneStatus(context)) {
+                    defaultSim = CallMethodUtils.getDefaultSimInfo(context);
+                }
                 if (defaultSim != null) {
                     position = callMethodSpinnerAdapter.getPosition(
                             CallMethodSpinnerAdapter.getCallMethodKey(defaultSim));

@@ -103,6 +103,10 @@ public class TelecomUtil {
                 || hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE);
     }
 
+    public static boolean hasReadPhoneStatus(Context context) {
+        return hasPermission(context, Manifest.permission.READ_PHONE_STATE);
+    }
+
     private static boolean hasPermission(Context context, String permission) {
         return context.checkSelfPermission(permission)
                 == PackageManager.PERMISSION_GRANTED;
