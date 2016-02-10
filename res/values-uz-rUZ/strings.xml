@@ -93,7 +93,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Sozlamalar"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Yangi kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Barcha kontaktlar"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Qo‘ng‘roq tafsilotlari"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Qo‘ng‘iroq tafsilotlari"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Tafsilotlar mavjud emas"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tovushli raqam tergich"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Qo‘ng‘iroqqa qaytish"</string>
@@ -127,6 +127,10 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <!-- no translation found for voicemailDurationFormat (228211252076289564) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormatWithDuration (5118563814451588397) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Bu raqamga qo‘ng‘iroq qilib bo‘lmaydi"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Ovozli xabarni sozlash uchun \"Menyu\" &gt; \"Sozlamalar\"ga o‘ting."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Ovozli xabar jo‘natish uchun, avval \"Parvoz rejimi\"ni o‘chiring."</string>
