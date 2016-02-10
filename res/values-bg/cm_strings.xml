@@ -67,7 +67,7 @@
   <string name="call_stats_sort_by_duration">Подреди по продължителност на обаждането</string>
   <string name="call_stats_sort_by_count">Подреди по брой на обаждания</string>
   <string name="menu_add_to_blacklist">Добавяне към блокираните</string>
-  <string name="toast_added_to_blacklist">%s е добавен към списъка на блокираните.</string>
+  <string name="toast_added_to_blacklist">%s е добавен към списъка на блокираните абонати.</string>
   <string name="speed_dial_settings">Настройки за бързо набиране</string>
   <string name="speed_dial_not_set">(непосочени)</string>
   <string name="speed_dial_replace">Замени</string>
@@ -88,7 +88,7 @@
   <string name="video_call">Видео повикване</string>
   <string name="call_duration_active">Продължителност на активността:</string>
   <string name="call_duration_call_out">Времетраене на повикването:</string>
-  <string name="call_log_show_all_slots">Всички SIM карти</string>
+  <string name="call_log_show_all_slots">Всички СИМ карти</string>
   <string name="call_log_all_calls_header">Всички обаждания</string>
   <string name="calllog_search_hint">Търсене в регистара за повиквания</string>
   <string name="msim_ime_dialog_title">Идентификатор на устройството</string>

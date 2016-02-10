@@ -19,7 +19,7 @@
   <string name="nearby_places">Orte in der Nähe</string>
   <string name="people">Personen</string>
   <string name="lookup_settings_label">Telefonnummernsuche</string>
-  <string name="lookup_settings_description">Suche von unbekannten Telefonnummern</string>
+  <string name="lookup_settings_description">Suche nach unbekannten Telefonnummern</string>
   <string name="enable_forward_lookup_title">Vorwärtssuche</string>
   <string name="enable_forward_lookup_summary">Bei der Telefonnummernsuche Orte in der Nähe einschließen</string>
   <string name="enable_people_lookup_title">Personensuche</string>
@@ -30,7 +30,7 @@
   <string name="people_lookup_provider_title">Dienst für Personensuche</string>
   <string name="reverse_lookup_provider_title">Dienst für Rückwärtssuche</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinesisch (CN)</string>
-  <string name="preference_category_t9_dialpad_search">T9-Suche</string>
+  <string name="preference_category_t9_dialpad_search">Dialpad T9-Suche</string>
   <string name="t9_search_input_locale">T9-Eingabesprache</string>
   <string name="t9_search_input_locale_default">Standard</string>
   <string name="type_blacklist">Blockierter Anruf</string>
