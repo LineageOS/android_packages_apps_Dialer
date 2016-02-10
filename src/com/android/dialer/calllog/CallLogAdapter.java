@@ -545,7 +545,9 @@ public class CallLogAdapter extends GroupingListAdapter
             views.inCallComponentName = null;
         }
         views.callTimes = getCallTimes(c, count);
-        DeepLinkAssistant.getInstance(views,mContext).prepareUi(number);
+        views.mDeepLink = null;
+        DeepLinkHelper linkHelper = new DeepLinkHelper(views,mContext);
+        linkHelper.prepareUi(number);
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
         int previousGroup = getPreviousDayGroup(c);

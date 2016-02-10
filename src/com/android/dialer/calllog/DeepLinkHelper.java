@@ -33,26 +33,21 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeepLinkAssistant {
+public class DeepLinkHelper {
+
     private WeakReference<CallLogListItemViewHolder> mViews;
     private WeakReference<Context> mContext;
-    private static DeepLinkAssistant sInstance;
-    public static DeepLinkAssistant getInstance(CallLogListItemViewHolder holder, Context context) {
-        if(sInstance == null) {
-            sInstance = new DeepLinkAssistant();
-        }
-        sInstance.setContext(context);
-        sInstance.setViews(holder);
-        return sInstance;
+
+    public DeepLinkHelper(CallLogListItemViewHolder holder, Context context) {
+        setContext(context);
+        setViews(holder);
     }
 
-    private DeepLinkAssistant() {}
-
-    private  void setContext(Context context) {
+    private void setContext(Context context) {
         mContext = new WeakReference<Context>(context);
     }
 
-    private  void setViews(CallLogListItemViewHolder holder) {
+    private void setViews(CallLogListItemViewHolder holder) {
         mViews = new WeakReference<CallLogListItemViewHolder>(holder);
     }
 
@@ -63,12 +58,10 @@ public class DeepLinkAssistant {
                 if(link != null && link.getApplicationType() == DeepLinkApplicationType.NOTE &&
                         link.getIcon()!= DeepLink.DEFAULT_ICON) {
                     holder.mDeepLink = link;
-                    holder.phoneCallDetailsViews.noteIconView.setVisibility(
-                            android.view.View.VISIBLE);
-                    holder.phoneCallDetailsViews.noteIconView
-                            .setImageBitmap(holder.mDeepLink.getBitmapIcon(mContext.get()));
+                    break;
                 }
             }
+            updateViews();
         }
     }
 
@@ -104,12 +97,15 @@ public class DeepLinkAssistant {
     private void updateViews() {
         if(referencesAreValid()) {
             CallLogListItemViewHolder holder = mViews.get();
-
-            holder.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
-            holder.phoneCallDetailsViews.nameWrapper.requestLayout();
-            holder.phoneCallDetailsViews.noteIconView
-                    .setImageBitmap(holder.mDeepLink.getBitmapIcon
-                            (mContext.get()));
+            if(holder.mDeepLink == null) {
+                holder.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
+            } else {
+                holder.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
+                holder.phoneCallDetailsViews.nameWrapper.requestLayout();
+                holder.phoneCallDetailsViews.noteIconView
+                        .setImageBitmap(holder.mDeepLink.getBitmapIcon
+                                (mContext.get()));
+            }
         }
     }
     private final ResultCallback<DeepLinkResultList> mDeepLinkCallback = new
