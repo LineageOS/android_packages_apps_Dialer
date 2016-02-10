@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+~ Copyright (C) 2013 The Android Open Source Project
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~      http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/glowpad_background_color">
+    <RelativeLayout
+        android:id="@+id/accessible_answer_fragment_answer"
+        android:orientation="vertical"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_lockscreen_answer_activated_layer"
+            android:layout_centerInParent="true">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_target_answer"
+            android:textSize="12sp"
+            android:textColor="@color/accessible_answer_hint_text_color"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/accessible_answer_fragment_decline"
+        android:orientation="vertical"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_lockscreen_decline_activated_layer"
+            android:layout_centerInParent="true">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_target_decline"
+            android:textSize="12sp"
+            android:textColor="@color/accessible_answer_hint_text_color"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/accessible_answer_fragment_text"
+        android:orientation="vertical"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_above="@+id/accessible_answer_fragment_decline"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/description_target_send_sms"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_lockscreen_text">
+        </ImageView>
+    </LinearLayout>
+
+</RelativeLayout>

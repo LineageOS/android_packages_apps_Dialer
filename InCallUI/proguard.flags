@@ -1,0 +1,14 @@
+-keep class com.android.incallui.widget.multiwaveview.* {
+  *;
+}
+
+# Keep names that are used only by animation framework.
+-keepclasseswithmembers class com.android.incallui.AnimationUtils$CrossFadeDrawable {
+    *** setCrossFadeAlpha(...);
+}
+
+# Any class or method annotated with NeededForTesting or NeededForReflection.
+-keepclassmembers class * {
+@com.android.contacts.common.test.NeededForTesting *;
+@com.android.incallui.NeededForReflection *;
+}

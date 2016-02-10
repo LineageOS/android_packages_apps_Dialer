@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources>
+    <drawable name="grayBg">#FF333333</drawable>
+
+    <style name="info_label">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.info_label</item>
+        <item name="android:paddingEnd">4dip</item>
+    </style>
+
+    <style name="info_layout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingStart">10dip</item>
+        <item name="android:paddingTop">10dip</item>
+        <item name="android:paddingEnd">10dip</item>
+        <item name="android:paddingBottom">10dip</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="entry_layout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextAppearance" parent="android:TextAppearance">
+    </style>
+
+    <style name="TextAppearance.info_label">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!-- Buttons in the main "button row" of the in-call onscreen touch UI. -->
+    <style name="InCallButton">
+        <item name="android:layout_width">@dimen/in_call_button_dimension</item>
+        <item name="android:layout_height">@dimen/in_call_button_dimension</item>
+        <item name="android:layout_marginBottom">@dimen/call_button_margin_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/call_button_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/call_button_margin_horizontal</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <!-- "Compound button" variation of InCallButton.
+         These buttons have the concept of two states: checked and unchecked. This style is just
+         like "InCallButton" except that we also clear out android:background, android:textOn,
+         android:textOff, to avoid the default behavior of the ToggleButton class. -->
+    <style name="InCallCompoundButton" parent="InCallButton">
+        <item name="android:background">@null</item>
+        <item name="android:textOn">@null</item>
+        <item name="android:textOff">@null</item>
+    </style>
+
+    <!-- Theme for the InCallActivity activity. Should have a transparent background for the
+         circular reveal animation for a new outgoing call to work correctly. We don't just use
+         Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
+         InCallActivity to have the correct Material style. -->
+    <style name="Theme.InCallScreen" parent="@android:style/Theme.Material.Light">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
+        <item name="android:textColorPrimary">@color/incall_call_banner_text_color</item>
+        <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+        <item name="android:popupMenuStyle">@style/InCallPopupMenuStyle</item>
+        <item name="android:actionBarStyle">@style/InCallActionBarStyle</item>
+        <item name="android:buttonStyleToggle">@style/InCallCompoundButton</item>
+        <item name="android:alertDialogTheme">@android:style/Theme.Material.Light.Dialog.Alert</item>
+    </style>
+
+    <style name="InCallPopupMenuStyle" parent="@android:style/Theme.Material.Light">
+        <item name="android:textColorPrimary">@color/popup_menu_color</item>
+    </style>
+
+    <style name="InCallActionBarStyle" parent="@android:style/Widget.Material.Light.ActionBar">
+        <item name="android:background">@color/incall_action_bar_background_color</item>
+        <item name="android:textColor">@color/incall_action_bar_text_color</item>
+    </style>
+
+</resources>
