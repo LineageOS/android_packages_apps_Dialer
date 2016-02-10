@@ -342,5 +342,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <provider
+            android:name=".database.VoicemailArchiveProvider"
+            android:authorities="com.android.dialer.database.voicemailarchiveprovider"
+            android:exported="false"
+            android:multiprocess="false"
+            />
     </application>
 </manifest>

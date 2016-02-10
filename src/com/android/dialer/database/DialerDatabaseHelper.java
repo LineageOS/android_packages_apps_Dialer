@@ -39,6 +39,7 @@ import android.util.Log;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.database.VoicemailArchiveContract.VoicemailArchive;
 import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
@@ -75,7 +76,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KitKat
      * </pre>
      */
-    public static final int DATABASE_VERSION = 8;
+    public static final int DATABASE_VERSION = 9;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -94,6 +95,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         static final String SMARTDIAL_TABLE = "smartdial_table";
         /** Saves all possible prefixes to refer to a contacts.*/
         static final String PREFIX_TABLE = "prefix_table";
+        /** Saves all archived voicemail information. */
+        static final String VOICEMAIL_ARCHIVE_TABLE = "voicemail_archive_table";
         /** Database properties for internal use */
         static final String PROPERTIES = "properties";
     }
@@ -434,6 +437,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 + FilteredNumberColumns.TYPE + " INTEGER,"
                 + FilteredNumberColumns.SOURCE + " INTEGER"
                 + ");");
+
+        createVoicemailArchiveTable(db);
         setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
         if (!mIsTestInstance) {
             resetSmartDialLastUpdatedTime();
@@ -445,6 +450,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.PROPERTIES);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.FILTERED_NUMBER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.VOICEMAIL_ARCHIVE_TABLE);
     }
 
     @Override
@@ -484,6 +490,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 8) {
             upgradeToVersion8(db);
             oldVersion = 8;
+        }
+
+        if (oldVersion < 9) {
+            db.execSQL("DROP TABLE IF EXISTS " + Tables.VOICEMAIL_ARCHIVE_TABLE);
+            createVoicemailArchiveTable(db);
+            oldVersion = 9;
         }
 
         if (oldVersion != DATABASE_VERSION) {
@@ -650,6 +662,41 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 null);
         db.delete(Tables.SMARTDIAL_TABLE,
                 SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME + " > " + last_update_time, null);
+    }
+
+    /**
+     * All columns excluding MIME_TYPE, _DATA, ARCHIVED, SERVER_ID, are the same as
+     *  the columns in the {@link android.provider.CallLog.Calls} table.
+     *
+     *  @param db Database pointer to the dialer database.
+     */
+    private void createVoicemailArchiveTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + Tables.VOICEMAIL_ARCHIVE_TABLE + " ("
+                + VoicemailArchive._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + VoicemailArchive.NUMBER + " TEXT,"
+                + VoicemailArchive.DATE + " LONG,"
+                + VoicemailArchive.DURATION + " LONG,"
+                + VoicemailArchive.MIME_TYPE + " TEXT,"
+                + VoicemailArchive.COUNTRY_ISO + " TEXT,"
+                + VoicemailArchive._DATA + " TEXT,"
+                + VoicemailArchive.GEOCODED_LOCATION + " TEXT,"
+                + VoicemailArchive.CACHED_NAME + " TEXT,"
+                + VoicemailArchive.CACHED_NUMBER_TYPE + " INTEGER,"
+                + VoicemailArchive.CACHED_NUMBER_LABEL + " TEXT,"
+                + VoicemailArchive.CACHED_LOOKUP_URI + " TEXT,"
+                + VoicemailArchive.CACHED_MATCHED_NUMBER + " TEXT,"
+                + VoicemailArchive.CACHED_NORMALIZED_NUMBER + " TEXT,"
+                + VoicemailArchive.CACHED_PHOTO_ID + " LONG,"
+                + VoicemailArchive.CACHED_FORMATTED_NUMBER + " TEXT,"
+                + VoicemailArchive.ARCHIVED + " INTEGER,"
+                + VoicemailArchive.NUMBER_PRESENTATION + " INTEGER,"
+                + VoicemailArchive.ACCOUNT_COMPONENT_NAME + " TEXT,"
+                + VoicemailArchive.ACCOUNT_ID + " TEXT,"
+                + VoicemailArchive.FEATURES + " INTEGER,"
+                + VoicemailArchive.SERVER_ID + " INTEGER,"
+                + VoicemailArchive.TRANSCRIPTION + " TEXT,"
+                + VoicemailArchive.CACHED_PHOTO_URI + " TEXT"
+                + ");");
     }
 
     /**
