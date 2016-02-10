@@ -431,7 +431,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             addToExistingContactButtonView.setVisibility(View.GONE);
         }
 
-        sendMessageView.setTag(IntentProvider.getSendSmsIntentProvider(number));
+        if (cmi != null && cmi.mIsInCallProvider) {
+            sendMessageView.setVisibility(View.GONE);
+        } else {
+            sendMessageView.setVisibility(View.VISIBLE);
+            sendMessageView.setTag(IntentProvider.getSendSmsIntentProvider(number));
+        }
 
         mCallLogListItemHelper.setActionContentDescriptions(this);
 
