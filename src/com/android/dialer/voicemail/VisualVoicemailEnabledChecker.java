@@ -91,6 +91,11 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
     }
 
     @Override
+    public void onMissedCallsUnreadCountFetched(Cursor cursor) {
+        // Do nothing
+    }
+
+    @Override
     public boolean onCallsFetched(Cursor combinedCursor) {
         // Do nothing
         return false;

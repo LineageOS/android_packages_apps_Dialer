@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.AppCompatConstants;
@@ -51,6 +52,7 @@ public class CallLogAsyncTaskUtil {
         DELETE_CALL,
         DELETE_BLOCKED_CALL,
         MARK_VOICEMAIL_READ,
+        MARK_CALL_READ,
         GET_CALL_DETAILS,
     }
 
@@ -375,6 +377,39 @@ public class CallLogAsyncTaskUtil {
                 if (callLogAsyncTaskListener != null) {
                     callLogAsyncTaskListener.onDeleteVoicemail();
                 }
+            }
+        });
+    }
+
+    public static void markCallAsRead(final Context context, final long[] callIds) {
+        if (!PermissionsUtil.hasPhonePermissions(context)) {
+            return;
+        }
+        if (sAsyncTaskExecutor == null) {
+            initTaskExecutor();
+        }
+
+        sAsyncTaskExecutor.submit(Tasks.MARK_CALL_READ, new AsyncTask<Void, Void, Void>() {
+            @Override
+            public Void doInBackground(Void... params) {
+
+                StringBuilder where = new StringBuilder();
+                where.append(CallLog.Calls.TYPE).append(" = ").append(CallLog.Calls.MISSED_TYPE);
+                where.append(" AND ");
+
+                Long[] callIdLongs = new Long[callIds.length];
+                for (int i = 0; i < callIds.length; i++) {
+                    callIdLongs[i] = callIds[i];
+                }
+                where.append(CallLog.Calls._ID).append(
+                        " IN (" + TextUtils.join(",", callIdLongs) + ")");
+
+                ContentValues values = new ContentValues(1);
+                values.put(CallLog.Calls.IS_READ, "1");
+                context.getContentResolver().update(
+                        CallLog.Calls.CONTENT_URI, values, where.toString(), null);
+                ((DialtactsActivity) context).updateTabUnreadCounts();
+                return null;
             }
         });
     }

@@ -41,6 +41,7 @@ import android.view.ViewGroup;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
+import com.android.dialer.list.ListsFragment;
 import com.android.dialer.util.EmptyLoader;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.widget.EmptyContentView;
@@ -278,6 +279,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     public void onVoicemailUnreadCountFetched(Cursor cursor) {}
 
     @Override
+    public void onMissedCallsUnreadCountFetched(Cursor cursor) {}
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         View view = inflater.inflate(R.layout.call_log_fragment, container, false);
         setupView(view, null);
@@ -378,6 +382,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public void fetchCalls() {
         mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
+        ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
     }
 
     private void updateEmptyMessage(int filterType) {
@@ -443,7 +448,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
             fetchCalls();
             mCallLogQueryHandler.fetchVoicemailStatus();
-
+            mCallLogQueryHandler.fetchMissedCallsUnreadCount();
             updateOnTransition(true /* onEntry */);
             mRefreshDataRequired = false;
         } else {
@@ -467,12 +472,11 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             // On either of the transitions we update the missed call and voicemail notifications.
             // While exiting we additionally consume all missed calls (by marking them as read).
             mCallLogQueryHandler.markNewCallsAsOld();
-            if (!onEntry) {
-                mCallLogQueryHandler.markMissedCallsAsRead();
-            }
             if (mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
                 CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
-            } else {
+            } else if (((ListsFragment) getParentFragment()).getCurrentTabIndex() ==
+                    ListsFragment.TAB_INDEX_HISTORY && !onEntry) {
+                mCallLogQueryHandler.markMissedCallsAsRead();
                 CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
             }
         }
