@@ -48,6 +48,7 @@ import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
@@ -55,6 +56,7 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.CallMethodHelper;
 
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
@@ -236,13 +238,14 @@ public class SearchFragment extends PhoneNumberPickerFragment
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(super.usesCallableUri());
         adapter.setSearchListner(this);
+        adapter.setAvailableCallMethods(CallMethodHelper.getAllCallMethods());
         return adapter;
     }
 
     @Override
     public void onItemClick(int position, long id) {
         final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
-        final int shortcutType = adapter.getShortcutTypeFromPosition(position);
+        final int shortcutType = adapter.getShortcutTypeFromPosition(position, false);
 
         final OnPhoneNumberPickerActionListener listener;
         final Intent intent;
@@ -251,21 +254,22 @@ public class SearchFragment extends PhoneNumberPickerFragment
         Log.i(TAG, "onItemClick: shortcutType=" + shortcutType);
 
         switch (shortcutType) {
-            case DialerPhoneNumberListAdapter.SHORTCUT_INVALID_PROVIDER:
-                onProviderClick(position, getCurrentCallMethod(), false);
-                break;
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 if (getCurrentCallMethod().mIsInCallProvider) {
-                    onProviderClick(position, getCurrentCallMethod(), true);
+                    onProviderClick(position, getCurrentCallMethod());
                 } else {
                     super.onItemClick(position, id);
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
                 number = adapter.getQueryString();
-                listener = getOnPhoneNumberPickerListener();
-                if (listener != null && !checkForProhibitedPhoneNumber(number)) {
-                    listener.onCallNumberDirectly(number, false, adapter.getMimeType(position));
+                if (getCurrentCallMethod().mIsInCallProvider) {
+                    placePSTNCall(number, getCurrentCallMethod());
+                } else {
+                    listener = getOnPhoneNumberPickerListener();
+                    if (listener != null && !checkForProhibitedPhoneNumber(number)) {
+                        listener.onCallNumberDirectly(number, false, adapter.getMimeType(position));
+                    }
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_CREATE_NEW_CONTACT:
@@ -295,28 +299,36 @@ public class SearchFragment extends PhoneNumberPickerFragment
                             adapter.getMimeType(position));
                 }
                 break;
+            case DialerPhoneNumberListAdapter.SHORTCUT_PROVIDER_ACTION:
+                int truePosition = adapter.getShortcutTypeFromPosition(position, true);
+                int index = DialerPhoneNumberListAdapter.SHORTCUT_COUNT - truePosition - 1;
+                number = adapter.getQueryString();
+                CallMethodInfo cmi = adapter.getProviders().get(index);
+                cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, number, getContext());
+                break;
         }
     }
 
-    protected void onProviderClick(int position, CallMethodInfo cmi, boolean isPSTN) {
-        String contactData;
-        if (isPSTN) {
-            contactData = getPhoneNumber(position);
-        } else {
-            contactData = getUserName(position);
-        }
-        cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, contactData, getContext(), false, true);
+    private void placePSTNCall(String number, CallMethodInfo cmi) {
+        cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, number, getContext(), false, true);
+    }
+
+    protected void onProviderClick(int position, CallMethodInfo cmi) {
+        cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, getPhoneNumber(position), getContext(), false,
+                false, getPhoneNumberMimeType(position));
     }
 
     public void setCurrentCallMethod(CallMethodInfo cmi) {
-        mCurrentCallMethodInfo = cmi;
-        setupEmptyView();
-        final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
-        if (adapter != null) {
-            adapter.setCurrentCallMethod(cmi);
+        if (!cmi.equals(mCurrentCallMethodInfo)) {
+            mCurrentCallMethodInfo = cmi;
+            setupEmptyView();
+            final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
+            if (adapter != null) {
+                adapter.setCurrentCallMethod(cmi);
+            }
+            setAdditionalMimeTypeSearch(cmi.mMimeType);
+            reloadData();
         }
-        setAdditionalMimeTypeSearch(cmi.mMimeType);
-        reloadData();
     }
 
     public CallMethodInfo getCurrentCallMethod() {

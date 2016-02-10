@@ -36,6 +36,8 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 
+import com.android.phone.common.incall.CallMethodHelper;
+
 public class RegularSearchFragment extends SearchFragment
         implements OnEmptyViewActionButtonClickedListener {
 
@@ -81,6 +83,7 @@ public class RegularSearchFragment extends SearchFragment
         RegularSearchListAdapter adapter = new RegularSearchListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(usesCallableUri());
+        adapter.setAvailableCallMethods(CallMethodHelper.getAllCallMethods());
         return adapter;
     }
 

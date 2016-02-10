@@ -105,13 +105,10 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         }
 
         int projectionLength = PhoneQuery.PROJECTION_PRIMARY.length;
-        String [] projection = new String[projectionLength + 1];
-        System.arraycopy(PhoneQuery.PROJECTION_PRIMARY, 0, projection, 0, projectionLength);
-        projection[projectionLength] = CALLABLE_EXTRA_NUMBER;
 
         /** Constructs a cursor for the returned array of results. */
-        final MatrixCursor cursor = new MatrixCursor(projection);
-        Object[] row = new Object[projectionLength + 1];
+        final MatrixCursor cursor = new MatrixCursor(PhoneQuery.PROJECTION_PRIMARY);
+        Object[] row = new Object[projectionLength];
         for (ContactNumber contact : allMatches) {
             if (TextUtils.equals(contact.mimeType, mCallableMimetype) ||
                     TextUtils.equals(contact.mimeType,
@@ -121,59 +118,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
                 row[PhoneQuery.PHOTO_ID] = contact.photoId;
                 row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
                 row[PhoneQuery.PHONE_ID] = contact.dataId;
-
-                // The row object is resued, so explicitly set this to null in case the contact
-                // doesn't have extra numbers
-                row[projectionLength] = null;
-
-                String accountType = null;
-                String accountName = null;
-                Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI,
-                        contact.id);
-                Cursor c = mContext.getContentResolver().query(
-                        contactUri,
-                        new String[]{ContactsContract.RawContacts.ACCOUNT_TYPE,
-                                ContactsContract.RawContacts.ACCOUNT_NAME},
-                        null, null, null);
-                if (c != null && c.moveToFirst()) {
-                    accountType = c.getString(0);
-                    accountName = c.getString(1);
-                    c.close();
-                }
-                row[PhoneQuery.PHONE_ACCOUNT_TYPE] = accountType;
-                row[PhoneQuery.PHONE_ACCOUNT_NAME] = accountName;
-
-                HashMap<String, String> allCallableNumbers = dialerDatabaseHelper
-                        .getCallableMimeTypeForContact(contact.id);
-
-                // Add the phone number as the primary option ALWAYS
-                // IF we don't do this, things often show up strange (only a UN w/o PN)
-                // if the user has no phone number tied to their account, then we can show other
-                // items. We do this for consistencies sake.
-                String extraContactNumber;
-                boolean gotStandardNumber = false;
-                if (allCallableNumbers.containsKey(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)) {
-                    extraContactNumber = allCallableNumbers.get(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-
-                    row[PhoneQuery.PHONE_NUMBER] = extraContactNumber;
-                    row[PhoneQuery.PHONE_MIME_TYPE] =
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE;
-
-                    gotStandardNumber = true;
-                }
-
-                if (allCallableNumbers.containsKey(mCallableMimetype)) {
-                    extraContactNumber = allCallableNumbers.get(mCallableMimetype);
-                    // Make sure the extra number is not the same as the main number
-                    if (gotStandardNumber) {
-                        row[projectionLength] = extraContactNumber;
-                    } else {
-                        row[PhoneQuery.PHONE_NUMBER] = extraContactNumber;
-                        row[PhoneQuery.PHONE_MIME_TYPE] = mCallableMimetype;
-                    }
-                }
-
-
+                row[PhoneQuery.PHONE_NUMBER] = contact.phoneNumber;
+                row[PhoneQuery.PHONE_MIME_TYPE] = contact.mimeType;
+                row[PhoneQuery.PHONE_TYPE] = contact.phoneType;
                 cursor.addRow(row);
             }
         }

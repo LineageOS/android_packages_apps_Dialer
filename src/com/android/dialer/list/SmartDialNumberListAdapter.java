@@ -31,6 +31,8 @@ import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.dialpad.SmartDialMatchPosition;
 
+import com.android.phone.common.incall.CallMethodInfo;
+
 import java.util.ArrayList;
 
 /**
@@ -132,7 +134,14 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
         changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
         changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
                 showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
-        changed |= setShortcutEnabled(SHORTCUT_MAKE_INCALL_PROVIDER_CALL, showNumberShortcuts);
+
+        // Loop through available providers and enable or disable them in the quickactions depending
+        // on if they are selected in the spinner.
+        for (CallMethodInfo cmi : mProviders) {
+            int index = HARDCODED_SHORTCUT_COUNT + mProviders.size() - mProviders.indexOf(cmi) - 1;
+            changed |= setShortcutEnabled(index, showNumberShortcuts &&
+                    !cmi.equals(getCurrentCallMethod()));
+        }
 
         if (changed) {
             notifyDataSetChanged();
