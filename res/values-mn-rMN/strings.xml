@@ -128,6 +128,10 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g>-д"</string>
+    <!-- no translation found for voicemailDurationFormat (228211252076289564) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormatWithDuration (5118563814451588397) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Энэ дугаар луу залгах боломжгүй байна"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Дуут шууданг тохируулахын тулд Цэс &gt; Тохиргоо руу очно уу."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Дуут шуудан руу залгахын тулд юуны өмнө Нислэгийн төлвийг идэвхгүйжүүлнэ үү."</string>

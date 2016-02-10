@@ -128,6 +128,10 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"El <xliff:g id="DATE">%1$s</xliff:g> a la hora <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <!-- no translation found for voicemailDurationFormat (228211252076289564) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormatWithDuration (5118563814451588397) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"No se puede llamar a este número."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Para configurar el buzón de voz, ve a a Menú &gt; Configuración."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Para escuchar los mensajes de tu buzón de voz, desactiva primero el modo avión."</string>

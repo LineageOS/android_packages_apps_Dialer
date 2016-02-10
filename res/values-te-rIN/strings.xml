@@ -41,7 +41,7 @@
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"కాల్ చరిత్రను క్లియర్ చేస్తోంది…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ఫోన్"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"మిస్డ్ కాల్"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"మిస్డ్ కార్యాలయ కాల్"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"సమాధానమివ్వని కార్యాలయ కాల్"</string>
     <string name="notification_missedCallsTitle" msgid="4948840634672742797">"మిస్డ్ కాల్‌లు"</string>
     <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> మిస్డ్ కాల్‌లు"</string>
     <string name="notification_missedCall_call_back" msgid="1991552423738343203">"తిరిగి కాల్ చేయి"</string>
@@ -128,6 +128,10 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> <xliff:g id="TIME">%2$s</xliff:g>కి"</string>
+    <!-- no translation found for voicemailDurationFormat (228211252076289564) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormatWithDuration (5118563814451588397) -->
+    <skip />
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ఈ నంబర్‌కు కాల్ చేయలేరు"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"వాయిస్ మెయిల్ సెటప్ చేయడానికి, మెను &gt; సెట్టింగ్‌లకు వెళ్లండి."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"వాయిస్ మెయిల్ కాల్ చేయడానికి, మొదట ఎయిర్‌ప్లైన్ మోడ్‌ను ఆపివేయండి."</string>
