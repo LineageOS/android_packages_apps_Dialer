@@ -41,7 +41,7 @@
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"కాల్ చరిత్రను క్లియర్ చేస్తోంది…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ఫోన్"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"మిస్డ్ కాల్"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"మిస్డ్ కార్యాలయ కాల్"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"సమాధానమివ్వని కార్యాలయ కాల్"</string>
     <string name="notification_missedCallsTitle" msgid="4948840634672742797">"మిస్డ్ కాల్‌లు"</string>
     <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> మిస్డ్ కాల్‌లు"</string>
     <string name="notification_missedCall_call_back" msgid="1991552423738343203">"తిరిగి కాల్ చేయి"</string>

@@ -41,7 +41,7 @@
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Izbris zgodovine klicev …"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefoniranje"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"Neodgovorjeni klic"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"Zgrešen delovni klic"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"Neodgovorjen delovni klic"</string>
     <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Neodgovorjeni klici"</string>
     <string name="notification_missedCallsMsg" msgid="158790423221579961">"Št. neodgovorjenih klicev: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>"</string>
     <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Povratni klic"</string>
