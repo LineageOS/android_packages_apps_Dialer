@@ -386,7 +386,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         if (mDeepLink != null) {
             ImageView icon = (ImageView) viewNoteButton.findViewById(R.id.view_note_action_icon);
-            icon.setImageBitmap(mDeepLink.getBitmapIcon(mContext));
+            icon.setImageDrawable(mDeepLink.getDrawableIcon(mContext));
         } else {
             viewNoteButton.setVisibility(android.view.View.GONE);
         }

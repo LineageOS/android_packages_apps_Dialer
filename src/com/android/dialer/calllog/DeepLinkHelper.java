@@ -56,7 +56,7 @@ public class DeepLinkHelper {
             CallLogListItemViewHolder holder = mViews.get();
             for(DeepLink link: links) {
                 if(link != null && link.getApplicationType() == DeepLinkApplicationType.NOTE &&
-                        link.getIcon()!= DeepLink.DEFAULT_ICON) {
+                        link.getAlreadyHasContent()) {
                     holder.mDeepLink = link;
                     break;
                 }
@@ -103,8 +103,7 @@ public class DeepLinkHelper {
                 holder.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
                 holder.phoneCallDetailsViews.nameWrapper.requestLayout();
                 holder.phoneCallDetailsViews.noteIconView
-                        .setImageBitmap(holder.mDeepLink.getBitmapIcon
-                                (mContext.get()));
+                        .setImageDrawable(holder.mDeepLink.getDrawableIcon(mContext.get()));
             }
         }
     }
