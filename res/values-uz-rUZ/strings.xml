@@ -93,7 +93,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Sozlamalar"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Yangi kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Barcha kontaktlar"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Qo‘ng‘roq tafsilotlari"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Qo‘ng‘iroq tafsilotlari"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Tafsilotlar mavjud emas"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tovushli raqam tergich"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Qo‘ng‘iroqqa qaytish"</string>
