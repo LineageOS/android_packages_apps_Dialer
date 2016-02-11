@@ -3,7 +3,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
 
-incallui_dir := ../InCallUI
+incallui_dir := InCallUI
 contacts_common_dir := ../ContactsCommon
 phone_common_dir := ../PhoneCommon
 
