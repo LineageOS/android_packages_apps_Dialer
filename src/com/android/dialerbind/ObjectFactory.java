@@ -28,7 +28,7 @@ import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.ExtendedBlockingManager;
-import com.android.dialer.service.SpamButtonRenderer;
+import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 /**
@@ -46,7 +46,7 @@ public class ObjectFactory {
     }
 
     @Nullable
-    public static SpamButtonRenderer newSpamButtonRenderer(
+    public static ExtendedBlockingButtonRenderer newExtendedBlockingButtonRenderer(
             Context context,
             ViewStub stub) {
         return null;
