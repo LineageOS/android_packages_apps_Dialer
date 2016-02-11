@@ -1,0 +1,36 @@
+<!--Copyright (c) 2016, The Linux Foundation. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+    * Neither the name of The Linux Foundation nor the names of its
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="13dp"
+    android:height="11dp"
+    android:autoMirrored="true"
+    android:viewportHeight="11.0"
+    android:viewportWidth="13.0">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6.627,8.712c-0.404,0 -0.992,-0.063 -1.357,-0.185c-0.113,-0.039 -0.244,-0.01 -0.332,0.076L4.221,9.322C3.3,8.85 2.544,7.968 2.076,7.047l0.716,-0.718c0.091,-0.09 0.117,-0.218 0.081,-0.332c-0.12,-0.364 -0.186,-0.755 -0.186,-1.162c0,-0.181 -0.146,-0.326 -0.326,-0.326H1.223c-0.18,0 -0.326,0.146 -0.326,0.326c0,3.058 2.615,5.665 5.672,5.665c0.179,0 0.324,-0.146 0.324,-0.326V9.037C6.895,8.859 6.807,8.712 6.627,8.712zM10.857,0.5H4.212c-0.453,0 -0.683,0.379 -0.683,0.814v6.33c0,0.192 0.05,0.306 0.132,0.465C3.84,8.259 3.928,8.343 4.425,8.343l0.483,-0.483c0.188,-0.186 0.477,-0.254 0.725,-0.17C5.95,7.794 6.286,7.848 6.629,7.848c0.391,0 0.708,0.551 0.708,0.94v0.022h3.595c0.221,0 0.596,-0.19 0.596,-0.554V1.246C11.527,0.893 11.25,0.5 10.857,0.5zM4.561,7.166V1.514h5.972l0.001,5.652H4.561zM7.555,4.229c0.598,0 1.078,-0.48 1.078,-1.078c0,-0.599 -0.48,-1.137 -1.078,-1.137c-0.599,0 -1.08,0.538 -1.08,1.137C6.475,3.748 6.955,4.229 7.555,4.229zM8.178,4.877c-0.121,0 -1.02,-0.027 -1.186,-0.027c-0.506,0 -1.746,0.789 -1.746,0.899v0.76L9.87,6.492V5.746C9.869,5.624 8.504,4.877 8.178,4.877z" />
+</vector>
