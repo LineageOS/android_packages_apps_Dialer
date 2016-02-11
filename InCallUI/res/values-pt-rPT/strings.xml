@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+   -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Telemóvel"</string>
+    <string name="onHold" msgid="9035493194749959955">"Em espera"</string>
+    <string name="unknown" msgid="6878797917991465859">"Desconhecido"</string>
+    <string name="private_num" msgid="6713286113000232309">"Número particular"</string>
+    <string name="payphone" msgid="4793877574636445118">"Telefone público"</string>
+    <string name="confCall" msgid="1904840547188336828">"Chamada de conferência"</string>
+    <string name="call_lost" msgid="6183862117003999578">"A chamada caiu"</string>
+    <string name="audio_mode_speaker" msgid="27649582100085266">"Altifalante"</string>
+    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Auricular do aparelho"</string>
+    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Auscultadores com fios"</string>
+    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="7601815427707856238">"Enviar os seguintes tons?\n"</string>
+    <string name="pause_prompt_str" msgid="1789964702154314806">"A enviar tons\n"</string>
+    <string name="send_button" msgid="4106860097497818751">"Enviar"</string>
+    <string name="pause_prompt_yes" msgid="3564467212025151797">"Sim"</string>
+    <string name="pause_prompt_no" msgid="6686238803236884877">"Não"</string>
+    <string name="wild_prompt_str" msgid="5543521676355533577">"Substituir o carácter universal por"</string>
+    <string name="caller_manage_header" msgid="3231519674734638786">"Chamada de conferência <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Número do correio de voz"</string>
+    <string name="card_title_dialing" msgid="5769417478498348054">"A marcar"</string>
+    <string name="card_title_redialing" msgid="8253487008234167266">"A marcar novamente"</string>
+    <string name="card_title_conf_call" msgid="1162980346189744501">"Chamada de conferência"</string>
+    <string name="card_title_incoming_call" msgid="7364539451234646909">"Chamada recebida"</string>
+    <string name="card_title_incoming_work_call" msgid="5601475030981264422">"Chamada de trab. recebida"</string>
+    <string name="card_title_call_ended" msgid="5544730338889702298">"Chamada terminada"</string>
+    <string name="card_title_on_hold" msgid="821463117892339942">"Em espera"</string>
+    <string name="card_title_hanging_up" msgid="3999101620995182450">"A desligar"</string>
+    <string name="card_title_in_call" msgid="6346543933068225205">"A chamar"</string>
+    <string name="card_title_my_phone_number" msgid="112428362494434191">"O meu número é <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="297586766381973954">"A ligar vídeo"</string>
+    <string name="card_title_video_call" msgid="5898636679563320218">"Videochamada"</string>
+    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"A solicitar vídeo"</string>
+    <string name="card_title_video_call_error" msgid="9000555878389539225">"Não é possível ligar a videochamada"</string>
+    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Pedido de vídeo rejeitado"</string>
+    <string name="card_title_callback_number" msgid="7307938207564217293">"O seu número de retorno de chamada\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"O seu número de retorno de chamadas de emergência\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="2107666444937350731">"A marcar"</string>
+    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Chamada não atendida"</string>
+    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Chamadas não atendidas"</string>
+    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> chamadas não atendidas"</string>
+    <string name="notification_missedCallTicker" msgid="504686252427747209">"Chamada não atendida de <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="7068688957273482989">"Chamada em curso"</string>
+    <string name="notification_ongoing_work_call" msgid="4071124825337695596">"Chamada de trabalho em curso"</string>
+    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Chamada Wi-Fi em curso"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="2914071877370405192">"Chamada de trabalho por Wi-Fi em curso"</string>
+    <string name="notification_on_hold" msgid="3480694969511790465">"Em espera"</string>
+    <string name="notification_incoming_call" msgid="2820429205043529642">"Chamada recebida"</string>
+    <string name="notification_incoming_work_call" msgid="3581021176870685239">"Chamada de trabalho recebida"</string>
+    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Chamada Wi-Fi recebida"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="7126555701581469722">"Chamada de trabalho recebida por Wi-Fi"</string>
+    <string name="notification_incoming_video_call" msgid="7356836933934464805">"A receber videochamada"</string>
+    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Pedido de vídeo recebido"</string>
+    <string name="notification_voicemail_title" msgid="8933468752045550523">"Novo correio de voz"</string>
+    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Novo correio de voz (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Marcar <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Número do correio de voz desconhecido"</string>
+    <string name="notification_network_selection_title" msgid="4224455487793492772">"Nenhum serviço"</string>
+    <string name="notification_network_selection_text" msgid="2607085729661923269">"Rede selecionada (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) indisponível"</string>
+    <string name="notification_action_answer" msgid="6700362365135365143">"Atender"</string>
+    <string name="notification_action_end_call" msgid="6069460915123531620">"Desligar"</string>
+    <string name="notification_action_answer_video" msgid="7809271910870211729">"Vídeo"</string>
+    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Voz"</string>
+    <string name="notification_action_accept" msgid="2898609801209468429">"Aceitar"</string>
+    <string name="notification_action_dismiss" msgid="2679969397930852858">"Ignorar"</string>
+    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Ligar de volta"</string>
+    <string name="notification_missedCall_message" msgid="3049928912736917988">"Mensagem"</string>
+    <string name="incall_error_power_off" msgid="6550191216405193368">"Para efectuar uma chamada, desactive primeiro o modo para Avião."</string>
+    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Sem registo na rede."</string>
+    <string name="incall_error_out_of_service" msgid="4100065333878929223">"Rede móvel não disponível."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Para telefonar, introduza um número válido."</string>
+    <string name="incall_error_call_failed" msgid="6302746943230078197">"Não é possível telefonar."</string>
+    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"A iniciar sequência de MMI..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Serviço não suportado."</string>
+    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Não é possível alternar chamadas."</string>
+    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Não é possível separar a chamada."</string>
+    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Não é possível transferir."</string>
+    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Não é possível efetuar uma conferência."</string>
+    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Não é possível rejeitar a chamada."</string>
+    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Não é possível libertar a(s) chamada(s)."</string>
+    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Chamada SIP"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Chamada de emergência"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"A ligar o rádio..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Sem serviço. A tentar novamente…"</string>
+    <string name="dial_emergency_error" msgid="1509085166367420355">"Não é possível telefonar. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> não é um número de emergência."</string>
+    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Não é possível telefonar. Marque um número de emergência."</string>
+    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Utilizar o teclado para marcar"</string>
+    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Colocar a chamada em espera"</string>
+    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Retomar a chamada"</string>
+    <string name="onscreenEndCallText" msgid="9039601192595655846">"Terminar a chamada"</string>
+    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Teclado de marcação"</string>
+    <string name="onscreenMuteText" msgid="5011369181754261374">"Desativar som"</string>
+    <string name="onscreenAddCallText" msgid="5140385634712287403">"Adicionar chamada"</string>
+    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Intercalar chamadas"</string>
+    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Trocar"</string>
+    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Gerir chamadas"</string>
+    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Gerir chamada de conferência"</string>
+    <string name="onscreenAudioText" msgid="1710087112800041743">"Áudio"</string>
+    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Videochamada"</string>
+    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Mudar para chamada de voz"</string>
+    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Mudar de câmara"</string>
+    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Interromper vídeo"</string>
+    <string name="onscreenOverflowText" msgid="2702376562345723132">"Mais opções"</string>
+    <string name="player_started" msgid="6046262510243983589">"Leitor iniciado"</string>
+    <string name="player_stopped" msgid="8856926759436364963">"Leitor interrompido"</string>
+    <string name="camera_not_ready" msgid="4955261496193316240">"A câmara não está pronta"</string>
+    <string name="camera_ready" msgid="1903335385405807324">"Câmara pronta"</string>
+    <string name="unknown_call_session_event" msgid="2431061946920253582">"Evento de sessão de chamada desconhecido"</string>
+    <string name="voicemail_provider" msgid="5135942703327136909">"Serviço"</string>
+    <string name="voicemail_settings" msgid="72448049107749316">"Configuração"</string>
+    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Não definido&gt;"</string>
+    <string name="other_settings" msgid="3672912580359716394">"Outras definições de chamada"</string>
+    <string name="calling_via_template" msgid="4839419581866928142">"A chamar via <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="1696993226115570960">"Recebida através de <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="4713193418046639466">"fotografia do contacto"</string>
+    <string name="goPrivate" msgid="865837794424530980">"tornar privado"</string>
+    <string name="selectContact" msgid="781975788478987237">"seleccionar contacto"</string>
+    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Escrever a sua própria..."</string>
+    <string name="custom_message_cancel" msgid="7516406059429609296">"Cancelar"</string>
+    <string name="custom_message_send" msgid="5795754217085747742">"Enviar"</string>
+    <string name="description_target_answer" msgid="7205604197797472471">"Atender"</string>
+    <string name="description_target_send_sms" msgid="2098326025587950144">"Enviar SMS"</string>
+    <string name="description_target_decline" msgid="4789834364389731957">"Recusar"</string>
+    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Responder como videochamada"</string>
+    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Responder como chamada de áudio"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Aceitar o pedido de vídeo"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Recusar o pedido de vídeo"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Aceitar pedido para transmitir vídeo"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"Recusar pedido para transmitir vídeo"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"Aceitar pedido para receber vídeo"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"Recusar pedido para receber vídeo"</string>
+    <string name="description_direction_up" msgid="4441409581444516690">"Deslize lentamente para cima para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_left" msgid="7129873384376533287">"Deslize lentamente para a esquerda para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="2122584234531957308">"Deslize lentamente para a direita para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="4317245625565166742">"Deslize lentamente para baixo para <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Vibrar"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Vibrar"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Som"</string>
+    <string name="default_notification_description" msgid="78174796906240970">"Som predefinido (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="6374978286202084684">"Toque do telemóvel"</string>
+    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Vibrar ao tocar"</string>
+    <string name="preference_category_ringtone" msgid="5197960752529332721">"Tocar e Vibrar"</string>
+    <string name="manageConferenceLabel" msgid="4691922394301969053">"Gerir chamada de conferência"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Número de emergência"</string>
+    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> segundos</item>
+      <item quantity="one">1 segundo</item>
+    </plurals>
+    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minutos</item>
+      <item quantity="one">1 minuto</item>
+    </plurals>
+    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> horas</item>
+      <item quantity="one">1 hora</item>
+    </plurals>
+    <string name="profile_photo_description" msgid="5609894336203315400">"Foto do perfil"</string>
+    <string name="camera_off_description" msgid="5689494614359429889">"Câmara desligada"</string>
+    <string name="child_number" msgid="7437330400723805538">"através de <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="3548700178238244595">"Nota enviada"</string>
+    <string name="person_contact_context_title" msgid="723266617256740572">"Mensagens recentes"</string>
+    <string name="business_contact_context_title" msgid="5334864183374669765">"Informações da empresa"</string>
+    <string name="distance_imperial_away" msgid="437508440176409037">"A <xliff:g id="DISTANCE">%.1f</xliff:g> milhas de distância"</string>
+    <string name="distance_metric_away" msgid="166931929505893599">"A <xliff:g id="DISTANCE">%.1f</xliff:g> km de distância"</string>
+    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="6709726401179550381">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> – <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="8524931350345922176">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="9168271983241323946">"Abre amanhã às <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="9011139983701379907">"Abre hoje às <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="2623384032475495193">"Fecha às <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="324294933330883529">"Fechou hoje às <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="6439301193613349163">"Aberto agora"</string>
+    <string name="closed_now" msgid="9175774453982778909">"Fechado agora"</string>
+</resources>
