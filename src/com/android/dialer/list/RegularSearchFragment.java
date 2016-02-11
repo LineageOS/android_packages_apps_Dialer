@@ -27,6 +27,7 @@ import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.PinnedHeaderListView;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialerbind.ObjectFactory;
 
 import com.android.dialer.R;
@@ -36,10 +37,13 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 
+import com.android.phone.common.dialpad.CreditBarHelper;
 import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
 
 public class RegularSearchFragment extends SearchFragment
-        implements OnEmptyViewActionButtonClickedListener {
+        implements OnEmptyViewActionButtonClickedListener,
+        CreditBarHelper.CreditBarVisibilityListener {
 
     private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
     private static final int ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE = 2;
@@ -74,7 +78,22 @@ public class RegularSearchFragment extends SearchFragment
     }
 
     @Override
-    protected void onCreateView(LayoutInflater inflater, ViewGroup container) {
+    public void setCurrentCallMethod(CallMethodInfo cmi) {
+        super.setCurrentCallMethod(cmi);
+
+        DialtactsActivity da = (DialtactsActivity) getActivity();
+        if (da == null && !isAdded()) {
+            return;
+        }
+        if (cmi != null && cmi.mIsInCallProvider) {
+            CreditBarHelper.callMethodCredits(da.getGlobalCreditsBar(), cmi, getResources(), this);
+        } else {
+            CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
+        }
+    }
+
+    @Override
+    protected void onCreateView(LayoutInflater inflater, final ViewGroup container) {
         super.onCreateView(inflater, container);
         ((PinnedHeaderListView) getListView()).setScrollToSectionOnHeaderTouch(true);
     }
@@ -131,5 +150,12 @@ public class RegularSearchFragment extends SearchFragment
         if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
             setupEmptyView();
         }
+    }
+
+    @Override
+    public void creditsBarVisibilityChanged(int visibility) {
+        DialtactsActivity da = (DialtactsActivity) getActivity();
+
+        da.moveFabInSearchUI();
     }
 }

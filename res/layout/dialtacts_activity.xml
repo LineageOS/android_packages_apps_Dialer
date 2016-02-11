@@ -55,6 +55,68 @@
 
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/ild_global_container"
+        android:background="@color/background_dialer_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ild_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="6"
+            android:layout_marginTop="@dimen/ild_margin_height"
+            android:layout_marginBottom="@dimen/ild_margin_height">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_weight="3"
+                android:layout_marginStart="@dimen/dialpad_credits_padding"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/ild_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_weight="3"
+                android:layout_marginEnd="@dimen/dialpad_credits_padding"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/ild_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="end" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dialpad_separator_line_color" />
+
+    </FrameLayout>
+
     <!-- Host container for the contact tile drag shadow -->
     <FrameLayout
         android:id="@+id/activity_overlay"

@@ -90,6 +90,7 @@ import com.android.dialer.util.IntentUtil;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
+import com.android.phone.common.dialpad.CreditBarHelper;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
 import com.android.phone.common.incall.CallMethodHelper;
@@ -456,42 +457,22 @@ public class DialpadFragment extends Fragment
         return fragmentView;
     }
 
-    private void callMethodCredits(CallMethodInfo cmi) {
-        String creditText = cmi.getCreditsDescriptionText(getResources());
-        String buttonText = null;
-        PendingIntent button;
-
-        boolean warnIfLow = false;
-        if (TextUtils.isEmpty(creditText)) {
-            clearCallRateInformation();
-            return;
-        } else {
-            if (cmi.mIsAuthenticated) {
-                button = cmi.mManageCreditIntent;
-                if (cmi.usesSubscriptions()) {
-                    buttonText = cmi.mSubscriptionButtonText;
-                } else {
-                    if (cmi.getCurrencyAmount() <= cmi.mCreditWarn) {
-                        warnIfLow = true;
-                    }
-                    buttonText = mCurrentCallMethodInfo.mCreditButtonText;
-                }
-            } else {
-                buttonText = getString(R.string.sign_in_credit_banner_text);
-                creditText = "";
-                button = cmi.mLoginIntent;
-            }
-        }
-        setCallRateInformation(creditText, buttonText, button);
-    }
-
     public void onCallMethodChanged(CallMethodInfo callMethodInfo) {
         mCurrentCallMethodInfo = callMethodInfo;
 
+        CreditBarHelper.CreditBarVisibilityListener cbvl =
+                new CreditBarHelper.CreditBarVisibilityListener() {
+            @Override
+            public void creditsBarVisibilityChanged(int visibility) {
+                // do nothing yet
+            }
+        };
+
         if (callMethodInfo != null && callMethodInfo.mIsInCallProvider) {
-            callMethodCredits(callMethodInfo);
+            CreditBarHelper.callMethodCredits(mDialpadView.getRateContainer(), callMethodInfo,
+                    getResources(), cbvl);
         } else {
-            clearCallRateInformation();
+            CreditBarHelper.clearCallRateInformation(mDialpadView.getRateContainer(), cbvl);
         }
     }
 
@@ -649,17 +630,6 @@ public class DialpadFragment extends Fragment
 
     public void setStartedFromNewIntent(boolean value) {
         mStartedFromNewIntent = value;
-    }
-
-    public void clearCallRateInformation() {
-        setCallRateInformation(null, null, null);
-    }
-
-    public void setCallRateInformation(String countryName, String displayRate, PendingIntent p) {
-        if (mDialpadView == null) {
-            return;
-        }
-        mDialpadView.setCallRateInformation(countryName, displayRate, p);
     }
 
     /**

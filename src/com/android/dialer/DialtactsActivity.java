@@ -17,6 +17,7 @@
 package com.android.dialer;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
@@ -30,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -172,6 +174,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final int FAB_SCALE_IN_DELAY_MS = 300;
 
     private FrameLayout mParentLayout;
+
+    private FrameLayout mGlobalCreditsBar;
 
     /**
      * Fragment containing the dialpad that slides into view
@@ -609,6 +613,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     }
                 });
 
+        mGlobalCreditsBar = (FrameLayout) mParentLayout.findViewById(R.id.ild_global_container);
+
         Trace.endSection();
 
         Trace.beginSection(TAG + " initialize smart dialing");
@@ -689,7 +695,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         }
 
         prepareVoiceSearchButton();
-        mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+        moveFabInSearchUI();
 
         if (getIntent().hasExtra(EXTRA_SHOW_TAB)) {
             int index = getIntent().getIntExtra(EXTRA_SHOW_TAB, ListsFragment.TAB_INDEX_SPEED_DIAL);
@@ -1259,8 +1265,19 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFloatingActionButtonController.changeIcon(
                 getResources().getDrawable(R.drawable.fab_ic_dial),
                 getResources().getString(R.string.action_menu_dialpad_button));
-        mFloatingActionButtonController.align(getFabAlignment(), false /* animate */);
+
+        moveFabInSearchUI();
         mFloatingActionButtonController.scaleIn(FAB_SCALE_IN_DELAY_MS);
+    }
+
+    public void moveFabInSearchUI() {
+        if (mGlobalCreditsBar.getVisibility() == View.VISIBLE) {
+            mFloatingActionButtonController.align(
+                    FloatingActionButtonController.ALIGN_END, 0 /* offsetX */, -125, true);
+        } else {
+            mFloatingActionButtonController.align(
+                    FloatingActionButtonController.ALIGN_END, true /* animate */);
+        }
     }
 
     @Override
@@ -1510,6 +1527,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return mDialpadFragment.getDialpadWidth();
         }
         return 0;
+    }
+
+    public FrameLayout getGlobalCreditsBar() {
+        return mGlobalCreditsBar;
     }
 
     @Override

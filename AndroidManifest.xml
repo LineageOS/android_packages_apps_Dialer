@@ -89,7 +89,7 @@
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
             android:enabled="@*android:bool/config_voice_capable"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
