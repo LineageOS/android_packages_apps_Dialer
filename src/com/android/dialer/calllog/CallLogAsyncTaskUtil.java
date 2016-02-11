@@ -54,6 +54,7 @@ public class CallLogAsyncTaskUtil {
         MARK_VOICEMAIL_READ,
         MARK_CALL_READ,
         GET_CALL_DETAILS,
+        UPDATE_DURATION
     }
 
     private static final class CallDetailQuery {
@@ -409,6 +410,33 @@ public class CallLogAsyncTaskUtil {
                 context.getContentResolver().update(
                         CallLog.Calls.CONTENT_URI, values, where.toString(), null);
                 ((DialtactsActivity) context).updateTabUnreadCounts();
+                return null;
+            }
+        });
+    }
+
+
+    /**
+     * Updates the duration of a voicemail call log entry.
+     */
+    public static void updateVoicemailDuration(
+            final Context context,
+            final Uri voicemailUri,
+            final int duration) {
+        if (!PermissionsUtil.hasPhonePermissions(context)) {
+            return;
+        }
+
+        if (sAsyncTaskExecutor == null) {
+            initTaskExecutor();
+        }
+
+        sAsyncTaskExecutor.submit(Tasks.UPDATE_DURATION, new AsyncTask<Void, Void, Void>() {
+            @Override
+            public Void doInBackground(Void... params) {
+                ContentValues values = new ContentValues(1);
+                values.put(CallLog.Calls.DURATION, duration);
+                context.getContentResolver().update(voicemailUri, values, null, null);
                 return null;
             }
         });
