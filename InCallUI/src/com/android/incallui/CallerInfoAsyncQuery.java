@@ -41,6 +41,8 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialerbind.ObjectFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -520,11 +522,25 @@ public class CallerInfoAsyncQuery {
 
         private void addCallerInfoIntoCache(CallerInfo ci, long directoryId) {
             if (ci.contactExists && mCachedNumberLookupService != null) {
+                // 1. Cache caller info
                 CachedContactInfo cachedContactInfo = CallerInfoUtils
                         .buildCachedContactInfo(mCachedNumberLookupService, ci);
                 String directoryLabel = mContext.getString(R.string.directory_search_label);
                 cachedContactInfo.setDirectorySource(directoryLabel, directoryId);
                 mCachedNumberLookupService.addContact(mContext, cachedContactInfo);
+
+                // 2. Cache photo
+                if (ci.contactDisplayPhotoUri != null && ci.normalizedNumber != null) {
+                    try (InputStream in = mContext.getContentResolver()
+                            .openInputStream(ci.contactDisplayPhotoUri)) {
+                        if (in != null) {
+                            mCachedNumberLookupService.addPhoto(mContext, ci.normalizedNumber, in);
+                        }
+                    } catch (IOException e) {
+                        Log.e(LOG_TAG, "failed to fetch directory contact photo", e);
+                    }
+
+                }
             }
         }
 
