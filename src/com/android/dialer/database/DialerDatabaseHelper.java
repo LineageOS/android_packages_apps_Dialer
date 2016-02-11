@@ -84,7 +84,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KitKat
      * </pre>
      */
-    public static final int DATABASE_VERSION = 70005;
+    public static final int DATABASE_VERSION = 70006;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -302,7 +302,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                         && Objects.equal(this.phoneNumber, that.phoneNumber)
                         && Objects.equal(this.lookupKey, that.lookupKey)
                         && Objects.equal(this.photoId, that.photoId)
-                        && Objects.equal(this.mimeType, that.mimeType);
+                        && Objects.equal(this.mimeType, that.mimeType)
+                        && Objects.equal(this.phoneType, that.phoneType);
 
             }
             return false;
