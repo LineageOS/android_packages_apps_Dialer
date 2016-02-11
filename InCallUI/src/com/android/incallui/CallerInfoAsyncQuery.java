@@ -471,15 +471,15 @@ public class CallerInfoAsyncQuery {
 
     private static final class DirectoryQueryCompleteListenerFactory {
         // Make sure listener to be called once and only once
-        int mCount;
-        boolean mIsListenerCalled;
-        OnQueryCompleteListener mListener;
-        Context mContext;
-        CachedNumberLookupService mCachedNumberLookupService =
+        private int mCount;
+        private boolean mIsListenerCalled;
+        private final OnQueryCompleteListener mListener;
+        private final Context mContext;
+        private final CachedNumberLookupService mCachedNumberLookupService =
                 ObjectFactory.newCachedNumberLookupService();
 
         private class DirectoryQueryCompleteListener implements OnQueryCompleteListener {
-            long mDirectoryId;
+            private final long mDirectoryId;
 
             DirectoryQueryCompleteListener(long directoryId) {
                 mDirectoryId = directoryId;
@@ -487,26 +487,20 @@ public class CallerInfoAsyncQuery {
 
             @Override
             public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
-                if (ci.contactExists && mCachedNumberLookupService != null) {
-                    CachedContactInfo cachedContactInfo =
-                            CallerInfoUtils.buildCachedContactInfo(mCachedNumberLookupService, ci);
-                    String directoryLabel = mContext.getString(R.string.directory_search_label);
-                    cachedContactInfo.setDirectorySource(directoryLabel, mDirectoryId);
-                    mCachedNumberLookupService.addContact(mContext, cachedContactInfo);
-                }
-
-                callListenerIfNecessary(token, cookie, ci);
+                onDirectoryQueryComplete(token, cookie, ci, mDirectoryId);
             }
         }
 
-        DirectoryQueryCompleteListenerFactory(Context context, int size, OnQueryCompleteListener listener)  {
+        DirectoryQueryCompleteListenerFactory(Context context, int size,
+                OnQueryCompleteListener listener) {
             mCount = size;
             mListener = listener;
             mIsListenerCalled = false;
             mContext = context;
         }
 
-        private void callListenerIfNecessary(int token, Object cookie, CallerInfo ci) {
+        private void onDirectoryQueryComplete(int token, Object cookie, CallerInfo ci,
+                long directoryId) {
             boolean shouldCallListener = false;
             synchronized (this) {
                 mCount = mCount - 1;
@@ -515,8 +509,22 @@ public class CallerInfoAsyncQuery {
                     shouldCallListener = true;
                 }
             }
+
+            // Don't call callback in synchronized block because mListener.onQueryComplete may
+            // take long time to complete
             if (shouldCallListener && mListener != null) {
+                addCallerInfoIntoCache(ci, directoryId);
                 mListener.onQueryComplete(token, cookie, ci);
+            }
+        }
+
+        private void addCallerInfoIntoCache(CallerInfo ci, long directoryId) {
+            if (ci.contactExists && mCachedNumberLookupService != null) {
+                CachedContactInfo cachedContactInfo = CallerInfoUtils
+                        .buildCachedContactInfo(mCachedNumberLookupService, ci);
+                String directoryLabel = mContext.getString(R.string.directory_search_label);
+                cachedContactInfo.setDirectorySource(directoryLabel, directoryId);
+                mCachedNumberLookupService.addContact(mContext, cachedContactInfo);
             }
         }
 
