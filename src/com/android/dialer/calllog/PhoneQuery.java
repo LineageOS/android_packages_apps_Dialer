@@ -17,6 +17,7 @@
 package com.android.dialer.calllog;
 
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 
 /**
@@ -37,7 +38,25 @@ final class PhoneQuery {
             PhoneLookup.NORMALIZED_NUMBER,
             PhoneLookup.PHOTO_ID,
             PhoneLookup.LOOKUP_KEY,
-            PhoneLookup.PHOTO_URI};
+            PhoneLookup.PHOTO_URI
+    };
+
+    /**
+     * Similar to {@link PHONE_LOOKUP_PROJECTION}. Due to a bug in framework, the column name of
+     * contact id in normal phonelookup query is _id, but that in sip phonelookup query is
+     * contact_id.
+     */
+    public static final String[] SIP_PHONE_LOOKUP_PROJECTION = new String[] {
+            Data.CONTACT_ID,
+            PhoneLookup.DISPLAY_NAME,
+            PhoneLookup.TYPE,
+            PhoneLookup.LABEL,
+            PhoneLookup.NUMBER,
+            PhoneLookup.NORMALIZED_NUMBER,
+            PhoneLookup.PHOTO_ID,
+            PhoneLookup.LOOKUP_KEY,
+            PhoneLookup.PHOTO_URI
+    };
 
     public static final int PERSON_ID = 0;
     public static final int NAME = 1;
