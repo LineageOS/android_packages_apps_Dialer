@@ -58,7 +58,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
     }
 
     public void testLookupContactFromUri_NullUri() {
-        Assert.assertNull(mContactInfoHelper.lookupContactFromUri(null));
+        Assert.assertNull(mContactInfoHelper.lookupContactFromUri(null, false));
     }
 
     public void testLookupContactFromUri_NoResults() {
@@ -66,7 +66,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
                 PhoneQuery.PHONE_LOOKUP_PROJECTION);
 
         Assert.assertEquals(ContactInfo.EMPTY, mContactInfoHelper.lookupContactFromUri(
-                PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI));
+                PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, false));
         mContext.verify();
     }
 
@@ -77,7 +77,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION);
 
         ContactInfo contactInfo = mContactInfoHelper.lookupContactFromUri(
-                PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI);
+                PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, false);
         Assert.assertEquals(TEST_DISPLAY_NAME, contactInfo.name);
         Assert.assertNull(contactInfo.nameAlternative);
         mContext.verify();
@@ -90,7 +90,7 @@ public class ContactInfoHelperTest extends AndroidTestCase {
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, TEST_DISPLAY_NAME_ALTERNATIVE_ROW);
 
         ContactInfo contactInfo = mContactInfoHelper.lookupContactFromUri(
-                PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI);
+                PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, false);
         Assert.assertEquals(TEST_DISPLAY_NAME, contactInfo.name);
         Assert.assertEquals(TEST_DISPLAY_NAME_ALTERNATIVE, contactInfo.nameAlternative);
         mContext.verify();

@@ -40,6 +40,7 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
+import com.google.common.annotations.VisibleForTesting;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,17 +83,17 @@ public class ContactInfoHelper {
 
         if (PhoneNumberHelper.isUriNumber(number)) {
             // The number is a SIP address..
-            info = lookupContactFromUri(getContactInfoLookupUri(number));
+            info = lookupContactFromUri(getContactInfoLookupUri(number), true);
             if (info == null || info == ContactInfo.EMPTY) {
                 // If lookup failed, check if the "username" of the SIP address is a phone number.
                 String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
                 if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
-                    info = queryContactInfoForPhoneNumber(username, countryIso);
+                    info = queryContactInfoForPhoneNumber(username, countryIso, true);
                 }
             }
         } else {
             // Look for a contact that has the given phone number.
-            info = queryContactInfoForPhoneNumber(number, countryIso);
+            info = queryContactInfoForPhoneNumber(number, countryIso, false);
         }
 
         final ContactInfo updatedInfo;
@@ -153,7 +154,7 @@ public class ContactInfoHelper {
      * The {@link ContactInfo#formattedNumber} field is always set to {@code null} in the returned
      * value.
      */
-    public ContactInfo lookupContactFromUri(Uri uri) {
+    ContactInfo lookupContactFromUri(Uri uri, boolean isSip) {
         if (uri == null) {
             return null;
         }
@@ -163,8 +164,10 @@ public class ContactInfoHelper {
 
         Cursor phoneLookupCursor = null;
         try {
-            phoneLookupCursor = mContext.getContentResolver().query(uri,
-                    PhoneQuery.PHONE_LOOKUP_PROJECTION, null, null, null);
+            String[] projection = (isSip) ? PhoneQuery.SIP_PHONE_LOOKUP_PROJECTION
+                    : PhoneQuery.PHONE_LOOKUP_PROJECTION;
+            phoneLookupCursor = mContext.getContentResolver().query(uri, projection, null, null,
+                    null);
         } catch (NullPointerException e) {
             // Trap NPE from pre-N CP2
             return null;
@@ -241,12 +244,13 @@ public class ContactInfoHelper {
      * <p>
      * If the lookup fails for some other reason, it returns null.
      */
-    private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso) {
+    private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso,
+                                                       boolean isSip) {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
 
-        ContactInfo info = lookupContactFromUri(getContactInfoLookupUri(number));
+        ContactInfo info = lookupContactFromUri(getContactInfoLookupUri(number), isSip);
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
         } else if (mCachedNumberLookupService != null) {
