@@ -122,15 +122,8 @@
     <string name="invalid_number_text">"%1$s could not make this call. Is the number correct?"</string>
 
     <!-- T9 Search Text -->
-    <string name="empty_dialpad_t9_example">Search for %1$s by dialing:</string>
-    <string name="empty_dialpad_example_pqrs" translatable="false"><![CDATA[PQR<b>S</b>]]></string>
-    <string name="empty_dialpad_example_abc" translatable="false"><![CDATA[<b>A</b>BC]]></string>
-    <string name="empty_dialpad_example_mno" translatable="false"><![CDATA[<b>M</b>NO]]></string>
-    <string name="empty_dialpad_example_plus" translatable="false">+</string>
-    <string name="empty_dialpad_example_seven" translatable="false">7</string>
-    <string name="empty_dialpad_example_two" translatable="false">2</string>
-    <string name="empty_dialpad_example_six" translatable="false">6</string>
-    <string name="empty_dialpad_example_name" translatable="false">\"Sam\"</string>
+    <string name="empty_dialpad_t9_example">You can dial a phone number or\nsearch for a contact</string>
+    <string name="empty_dialpad_t9_example_subtext" translatable="false">7 + 2 + 6 = SAM</string>
     <string name="sign_in_hint_text">Sign in to make %1$s calls</string>
     <string name="wifi_hint_text">Try switching to %1$s to make calls over Wi-Fi.</string>
     <string name="roaming_hint_text">%1$s is currently roaming. Try switching to %1$s to make calls over Wi-Fi.</string>

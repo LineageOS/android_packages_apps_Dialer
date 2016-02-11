@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Loader;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -118,25 +119,30 @@ public class SmartDialSearchFragment extends SearchFragment
 
     @Override
     public void setupEmptyView() {
-        final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
-
         DialtactsActivity dialActivity = (DialtactsActivity) getActivity();
 
         if (mEmptyView != null && dialActivity != null) {
+            final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
             if (mCurrentCallMethodInfo == null) {
                 mCurrentCallMethodInfo = dialActivity.getCurrentCallMethod();
             }
 
+            Resources r = getResources();
             mEmptyView.setWidth(dialActivity.getDialpadWidth());
             if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
-                mEmptyView.setImage(R.drawable.empty_contacts);
+                int orientation = r.getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    mEmptyView.setImage(null);
+                } else {
+                    mEmptyView.setImage(R.drawable.empty_contacts);
+                }
                 mEmptyView.setActionLabel(R.string.permission_single_turn_on);
                 mEmptyView.setDescription(R.string.permission_place_call);
+                mEmptyView.setSubMessage(null);
                 mEmptyView.setActionClickedListener(this);
             } else if (adapter.getCount() == 0) {
                 mEmptyView.setActionLabel(mEmptyView.NO_LABEL);
-                mEmptyView.setImage(R.drawable.empty_contacts);
-                Resources r = getResources();
+                mEmptyView.setImage(null);
 
                 // Get Current InCall plugin specific call methods, we don't want to update this
                 // suddenly so just the currently available ones are fine.
@@ -155,22 +161,9 @@ public class SmartDialSearchFragment extends SearchFragment
     }
 
     public void showNormalT9Hint(Resources r) {
-        mEmptyView.setImage(R.drawable.empty_contacts);
-        mEmptyView.setDescription(
-                String.format(r.getString(R.string.empty_dialpad_t9_example),
-                        r.getString(R.string.empty_dialpad_example_name)));
-
-        int[] idsToFormat = new int[] {
-                R.id.empty_dialpad_pqrs,
-                R.id.empty_dialpad_abc,
-                R.id.empty_dialpad_mno
-        };
-        for (int id : idsToFormat) {
-            TextView textView = (TextView) mEmptyView.findViewById(id);
-            textView.setText(Html.fromHtml(textView.getText().toString()));
-            textView.setVisibility(View.VISIBLE);
-        }
-        mEmptyView.setSubViewVisibility(View.VISIBLE);
+        mEmptyView.setImage(null);
+        mEmptyView.setDescription(R.string.empty_dialpad_t9_example);
+        mEmptyView.setSubMessage(R.string.empty_dialpad_t9_example_subtext);
     }
 
     public void showProviderHint(Resources r) {
@@ -182,12 +175,18 @@ public class SmartDialSearchFragment extends SearchFragment
             // InCallApi provider specified hint
             text = mCurrentCallMethodInfo.mT9HintDescription;
         }
-        Drawable heroImage = mCurrentCallMethodInfo.mSingleColorBrandIcon;
-        heroImage.setTint(r.getColor(R.color.hint_image_color));
-        mEmptyView.setImage(heroImage);
-        mEmptyView.setDescription(text);
-        mEmptyView.setSubViewVisibility(View.GONE);
-        // TODO: put action button for login in or switching provider!
+        if (TextUtils.isEmpty(text)) {
+            showNormalT9Hint(r);
+        } else {
+            Drawable heroImage = mCurrentCallMethodInfo.mSingleColorBrandIcon;
+            heroImage.setTint(r.getColor(R.color.hint_image_color));
+
+            int orientation = r.getConfiguration().orientation;
+            mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
+            mEmptyView.setDescription(text);
+            mEmptyView.setSubMessage(null);
+            // TODO: put action button for login in or switching provider!
+        }
     }
 
     public void showSuggestion(Resources r) {
@@ -199,7 +198,7 @@ public class SmartDialSearchFragment extends SearchFragment
         CallMethodInfo emergencyOnlyCallMethod = CallMethodInfo.getEmergencyCallMethod(getContext());
 
         if (mCurrentCallMethodInfo != null) {
-
+            int orientation = r.getConfiguration().orientation;
             if (mCurrentCallMethodInfo.equals(emergencyOnlyCallMethod)) {
                 // If no sims available and emergency only call method selected,
                 // alert user that only emergency calls are allowed for the current call method.
@@ -207,9 +206,9 @@ public class SmartDialSearchFragment extends SearchFragment
                 Drawable heroImage = r.getDrawable(R.drawable.ic_nosim);
                 heroImage.setTint(r.getColor(R.color.emergency_call_icon_color));
 
-                mEmptyView.setImage(heroImage);
+                mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
                 mEmptyView.setDescription(text);
-                mEmptyView.setSubViewVisibility(View.GONE);
+                mEmptyView.setSubMessage(null);
             } else if (!mAvailableProviders.isEmpty() &&
                     !mCurrentCallMethodInfo.mIsInCallProvider &&
                     mWifi.isConnected()) {
@@ -232,9 +231,9 @@ public class SmartDialSearchFragment extends SearchFragment
                     return;
                 }
 
-                mEmptyView.setImage(heroImage);
+                mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
                 mEmptyView.setDescription(text);
-                mEmptyView.setSubViewVisibility(View.GONE);
+                mEmptyView.setSubMessage(null);
             } else {
                 showNormalT9Hint(r);
             }

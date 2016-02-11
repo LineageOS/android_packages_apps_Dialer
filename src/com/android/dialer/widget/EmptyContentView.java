@@ -37,9 +37,10 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     public static final int NO_IMAGE = 0;
 
     private ImageView mImageView;
+    private ImageView mImageViewSide;
     private TextView mDescriptionView;
+    private TextView mSubView;
     private TextView mActionView;
-    private View mSubView;
     private OnEmptyViewActionButtonClickedListener mOnActionButtonClickedListener;
 
     public interface OnEmptyViewActionButtonClickedListener {
@@ -69,14 +70,11 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
         // Don't let touches fall through the empty view.
         setClickable(true);
         mImageView = (ImageView) findViewById(R.id.emptyListViewImage);
+        mImageViewSide = (ImageView) findViewById(R.id.emptyListViewImageSide);
         mDescriptionView = (TextView) findViewById(R.id.emptyListViewMessage);
+        mSubView = (TextView) findViewById(R.id.emptyListViewSubMessage);
         mActionView = (TextView) findViewById(R.id.emptyListViewAction);
-        mSubView = findViewById(R.id.emptyListViewSubMessage);
         mActionView.setOnClickListener(this);
-    }
-
-    public void setSubViewVisibility(int visibility){
-        mSubView.setVisibility(visibility);
     }
 
     public void setDescription(int resourceId) {
@@ -99,21 +97,79 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
         }
     }
 
-    public void setImage(int resourceId) {
-        mImageView.setImageResource(resourceId);
+    public void setSubMessage(int resourceId) {
         if (resourceId == NO_LABEL) {
-            mImageView.setVisibility(View.GONE);
+            mSubView.setText(null);
+            mSubView.setVisibility(View.GONE);
         } else {
-            mImageView.setVisibility(View.VISIBLE);
+            mSubView.setText(resourceId);
+            mSubView.setVisibility(View.VISIBLE);
         }
     }
 
+    public void setSubMessage(String string) {
+        if (TextUtils.isEmpty(string)) {
+            mSubView.setText(null);
+            mSubView.setVisibility(View.GONE);
+        } else {
+            mSubView.setText(string);
+            mSubView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setImage(int resourceId) {
+        setImage(resourceId, false);
+    }
+
     public void setImage(Drawable drawable) {
+        setImage(drawable, false);
+    }
+
+    public void setImage(int resourceId, boolean side) {
+        mImageView.setImageResource(resourceId);
+        mImageViewSide.setImageResource(resourceId);
+
+        if (resourceId == NO_LABEL) {
+            mImageView.setVisibility(View.GONE);
+            mImageViewSide.setVisibility(View.GONE);
+        } else {
+            if (side) {
+                mImageView.setVisibility(View.GONE);
+                mImageViewSide.setVisibility(View.VISIBLE);
+            } else {
+                mImageView.setVisibility(View.VISIBLE);
+                mImageViewSide.setVisibility(View.GONE);
+            }
+        }
+
+        if (side) {
+            mDescriptionView.setGravity(Gravity.LEFT|Gravity.TOP);
+        } else {
+            mDescriptionView.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
+        }
+    }
+
+    public void setImage(Drawable drawable, boolean side) {
         mImageView.setImageDrawable(drawable);
+        mImageViewSide.setImageDrawable(drawable);
+
         if (drawable == null) {
             mImageView.setVisibility(View.GONE);
+            mImageViewSide.setVisibility(View.GONE);
         } else {
-            mImageView.setVisibility(View.VISIBLE);
+            if (side) {
+                mImageView.setVisibility(View.GONE);
+                mImageViewSide.setVisibility(View.VISIBLE);
+            } else {
+                mImageView.setVisibility(View.VISIBLE);
+                mImageViewSide.setVisibility(View.GONE);
+            }
+        }
+
+        if (side) {
+            mDescriptionView.setGravity(Gravity.LEFT | Gravity.TOP);
+        } else {
+            mDescriptionView.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP);
         }
     }
 
@@ -136,6 +192,7 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
 
     public boolean isShowingContent() {
         return mImageView.getVisibility() == View.VISIBLE
+                || mImageViewSide.getVisibility() == View.VISIBLE
                 || mDescriptionView.getVisibility() == View.VISIBLE
                 || mActionView.getVisibility() == View.VISIBLE;
     }

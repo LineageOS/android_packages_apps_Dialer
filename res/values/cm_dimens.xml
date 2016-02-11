@@ -4,4 +4,10 @@
     <dimen name="dialpad_credits_padding">14dp</dimen>
 
     <dimen name="call_log_spam_info_text_size">10sp</dimen>
+
+    <dimen name="empty_list_message_margin">24dp</dimen>
+    <dimen name="empty_list_message_view_spacing">16dp</dimen>
+    <dimen name="empty_list_message_space_bottom_height">40dp</dimen>
+    <dimen name="empty_list_message_image_size">72dp</dimen>
+    <dimen name="empty_list_message_side_image_size">36dp</dimen>
 </resources>
