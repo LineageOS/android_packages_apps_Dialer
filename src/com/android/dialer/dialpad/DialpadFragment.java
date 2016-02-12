@@ -90,13 +90,13 @@ import com.android.dialer.util.IntentUtil;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
-import com.android.phone.common.dialpad.CreditBarHelper;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodSpinnerAdapter;
 import com.android.phone.common.incall.CallMethodUtils;
+import com.android.phone.common.incall.CreditBarHelper;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 

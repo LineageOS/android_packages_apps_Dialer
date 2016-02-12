@@ -37,9 +37,9 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 
-import com.android.phone.common.dialpad.CreditBarHelper;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.CreditBarHelper;
 
 public class RegularSearchFragment extends SearchFragment
         implements OnEmptyViewActionButtonClickedListener,
