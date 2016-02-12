@@ -15,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.dialer.R;
@@ -223,8 +225,15 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 text = resources.getString(
                         R.string.search_shortcut_call_number,
                         mBidiFormatter.unicodeWrap(number, TextDirectionHeuristics.LTR));
-                drawableId = R.drawable.ic_search_phone;
-                drawableRaw = null;
+
+                CallMethodInfo ccm = getCurrentCallMethod();
+                if (ccm != null && ccm.mIsInCallProvider) {
+                    drawableId = 0;
+                    drawableRaw = ccm.mBadgeIcon;
+                } else {
+                    drawableId = R.drawable.ic_search_phone;
+                    drawableRaw = null;
+                }
                 break;
             case SHORTCUT_CREATE_NEW_CONTACT:
                 text = resources.getString(R.string.search_shortcut_create_new_contact);
@@ -290,14 +299,58 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     }
 
     public String getFormattedQueryString() {
+        if (PhoneNumberHelper.isUriNumber(getQueryString())) {
+            // Return unnormalized SIP address
+            return getQueryString();
+        }
         return mFormattedQueryString;
     }
 
     @Override
     public void setQueryString(String queryString) {
+        final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString())
+                && hasDigitsInQueryString();
+        boolean changed = false;
+        changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL,
+                showNumberShortcuts || PhoneNumberHelper.isUriNumber(queryString));
+        changed |= setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
+        changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
+                showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
+
+        // Loop through available providers and enable or disable them in the quickactions depending
+        // on if they are selected in the spinner.
+        for (CallMethodInfo cmi : mProviders) {
+            int index = HARDCODED_SHORTCUT_COUNT + mProviders.size() - mProviders.indexOf(cmi) - 1;
+            changed |= setShortcutEnabled(index, showNumberShortcuts &&
+                    !cmi.equals(getCurrentCallMethod()));
+        }
+
+        if (changed) {
+            notifyDataSetChanged();
+        }
+
         mFormattedQueryString = PhoneNumberUtils.formatNumber(
                 PhoneNumberUtils.normalizeNumber(queryString), mCountryIso);
         super.setQueryString(queryString);
+    }
+
+    /**
+     * Whether there is at least one digit in the query string.
+     */
+    private boolean hasDigitsInQueryString() {
+        String queryString = getQueryString();
+        if (queryString == null) {
+            return false;
+        }
+        int length = queryString.length();
+        for (int i = 0; i < length; i++) {
+            if (Character.isDigit(queryString.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setCurrentCallMethod(CallMethodInfo cmi) {

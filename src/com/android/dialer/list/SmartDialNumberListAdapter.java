@@ -51,7 +51,6 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
     public SmartDialNumberListAdapter(Context context) {
         super(context);
         mContext = context;
-        setShortcutEnabled(SmartDialNumberListAdapter.SHORTCUT_DIRECT_CALL, false);
 
         if (DEBUG) {
             Log.v(TAG, "Constructing List Adapter");
@@ -123,29 +122,5 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
             Log.w(TAG, "Cursor was null in getDataUri() call. Returning null instead.");
             return null;
         }
-    }
-
-    @Override
-    public void setQueryString(String queryString) {
-        final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString());
-        boolean changed = false;
-        changed |= setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
-                showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
-
-        // Loop through available providers and enable or disable them in the quickactions depending
-        // on if they are selected in the spinner.
-        for (CallMethodInfo cmi : mProviders) {
-            int index = HARDCODED_SHORTCUT_COUNT + mProviders.size() - mProviders.indexOf(cmi) - 1;
-            changed |= setShortcutEnabled(index, showNumberShortcuts &&
-                    !cmi.equals(getCurrentCallMethod()));
-        }
-
-        if (changed) {
-            notifyDataSetChanged();
-        }
-        super.setQueryString(queryString);
     }
 }

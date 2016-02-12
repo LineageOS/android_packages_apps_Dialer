@@ -18,27 +18,19 @@ package com.android.dialer.list;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.text.TextUtils;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.DirectoryPartition;
-import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
-
-import com.android.phone.common.incall.CallMethodInfo;
 
 /**
  * List adapter to display regular search results.
  */
 public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
-    private boolean mIsQuerySipAddress;
 
     public RegularSearchListAdapter(Context context) {
         super(context);
-        setShortcutEnabled(SHORTCUT_CREATE_NEW_CONTACT, false);
-        setShortcutEnabled(SHORTCUT_ADD_TO_EXISTING_CONTACT, false);
     }
 
     public ContactInfo getLookupContactInfo(int position) {
@@ -82,56 +74,5 @@ public class RegularSearchListAdapter extends DialerPhoneNumberListAdapter {
             }
         }
         return cacheInfo;
-    }
-
-    @Override
-    public String getFormattedQueryString() {
-        if (mIsQuerySipAddress) {
-            // Return unnormalized SIP address
-            return getQueryString();
-        }
-        return super.getFormattedQueryString();
-    }
-
-    @Override
-    public void setQueryString(String queryString) {
-        // Don't show actions if the query string contains a letter.
-        final boolean showNumberShortcuts = !TextUtils.isEmpty(getFormattedQueryString())
-                && hasDigitsInQueryString();
-        // Email addresses that could be SIP addresses are an exception.
-        mIsQuerySipAddress = PhoneNumberHelper.isUriNumber(queryString);
-        boolean changed = false;
-        changed |= setShortcutEnabled(SHORTCUT_DIRECT_CALL,
-                showNumberShortcuts || mIsQuerySipAddress);
-        changed |= setShortcutEnabled(SHORTCUT_SEND_SMS_MESSAGE, showNumberShortcuts);
-        changed |= setShortcutEnabled(SHORTCUT_MAKE_VIDEO_CALL,
-                showNumberShortcuts && CallUtil.isVideoEnabled(getContext()));
-
-        // Loop through available providers and enable or disable them in the quickactions depending
-        // on if they are selected in the spinner.
-        for (CallMethodInfo cmi : mProviders) {
-            int index = HARDCODED_SHORTCUT_COUNT + mProviders.size() - mProviders.indexOf(cmi) - 1;
-            changed |= setShortcutEnabled(index, showNumberShortcuts &&
-                    !cmi.equals(getCurrentCallMethod()));
-        }
-
-        if (changed) {
-            notifyDataSetChanged();
-        }
-        super.setQueryString(queryString);
-    }
-
-    /**
-     * Whether there is at least one digit in the query string.
-     */
-    private boolean hasDigitsInQueryString() {
-        String queryString = getQueryString();
-        int length = queryString.length();
-        for (int i = 0; i < length; i++) {
-            if (Character.isDigit(queryString.charAt(i))) {
-                return true;
-            }
-        }
-        return false;
     }
 }
