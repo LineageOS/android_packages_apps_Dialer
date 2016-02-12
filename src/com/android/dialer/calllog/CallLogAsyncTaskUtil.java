@@ -408,7 +408,6 @@ public class CallLogAsyncTaskUtil {
                 values.put(CallLog.Calls.IS_READ, "1");
                 context.getContentResolver().update(
                         CallLog.Calls.CONTENT_URI, values, where.toString(), null);
-                ((DialtactsActivity) context).updateTabUnreadCounts();
                 return null;
             }
         });

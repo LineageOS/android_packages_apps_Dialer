@@ -382,7 +382,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public void fetchCalls() {
         mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
-        ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
     }
 
     private void updateEmptyMessage(int filterType) {
@@ -474,10 +473,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mCallLogQueryHandler.markNewCallsAsOld();
             if (mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
                 CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
-            } else if (((ListsFragment) getParentFragment()).getCurrentTabIndex() ==
-                    ListsFragment.TAB_INDEX_HISTORY && !onEntry) {
-                mCallLogQueryHandler.markMissedCallsAsRead();
-                CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
             }
         }
     }
