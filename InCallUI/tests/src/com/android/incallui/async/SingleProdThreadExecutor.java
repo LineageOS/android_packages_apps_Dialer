@@ -22,7 +22,8 @@ import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * {@link PausableExecutor} for use in tests. It is intended to be used between one test thread
- * and one prod thread.
+ * and one prod thread. See {@link com.android.incallui.ringtone.InCallTonePlayerTest} for example
+ * usage.
  */
 @ThreadSafe
 public final class SingleProdThreadExecutor implements PausableExecutor {
