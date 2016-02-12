@@ -60,6 +60,12 @@
              android:elevation="4dp"
              android:layout_alignParentBottom="true" />
 
+    <include layout="@layout/manage_conference_call_button"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:elevation="5dp"
+             android:layout_alignParentBottom="true"/>
+
     <FrameLayout
         android:id="@+id/floating_end_call_action_button_container"
         android:layout_width="@dimen/end_call_floating_action_button_diameter"
@@ -147,12 +153,6 @@
                           android:dividerHeight="@dimen/contact_context_list_item_padding" />
             </LinearLayout>
         </FrameLayout>
-
-        <include layout="@layout/manage_conference_call_button"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_alignTop="@id/photoLarge" />
-
     </FrameLayout>
 
 </RelativeLayout>
