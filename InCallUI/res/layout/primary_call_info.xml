@@ -107,16 +107,18 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <!-- Name (or the phone number, if we don't have a name to display). -->
         <com.android.phone.common.widget.ResizingTextTextView
             xmlns:ex="http://schemas.android.com/apk/res-auto"
             android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginTop="-5dp"
             android:fontFamily="sans-serif-light"
             android:textAlignment="viewStart"
@@ -134,7 +136,7 @@
             android:scaleType="centerCrop"
             android:importantForAccessibility="no"
             android:src="@drawable/img_no_image_automirrored" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
