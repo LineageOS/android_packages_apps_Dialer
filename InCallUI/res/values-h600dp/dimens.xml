@@ -16,9 +16,14 @@
   -->
 
 <resources>
+    <!-- Whether or not this layout displays a large photo. -->
+    <bool name="has_large_photo">true</bool>
+
     <dimen name="call_banner_height">90dp</dimen>
 
     <dimen name="end_call_button_margin_bottom">15dp</dimen>
 
     <dimen name="floating_action_button_vertical_offset">-24dp</dimen>
+
+    <dimen name="dialpad_elevation">2dp</dimen>
 </resources>

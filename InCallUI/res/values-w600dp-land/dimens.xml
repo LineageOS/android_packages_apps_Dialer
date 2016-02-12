@@ -16,6 +16,9 @@
   -->
 
 <resources>
+    <!-- Whether or not this layout displays a large photo. -->
+    <bool name="has_large_photo">true</bool>
+
     <!-- Whether or not the landscape mode layout is currently being used -->
     <bool name="is_layout_landscape">true</bool>
     <!-- Height and width of the in-call buttons. -->
@@ -23,4 +26,6 @@
     <!-- Margin underneath the call buttons. This is used only in landscape mode and is sized
          so that the call buttons are center aligned with the end call button. -->
     <dimen name="call_buttons_bottom_margin">30dp</dimen>
+
+    <dimen name="dialpad_elevation">2dp</dimen>
 </resources>
