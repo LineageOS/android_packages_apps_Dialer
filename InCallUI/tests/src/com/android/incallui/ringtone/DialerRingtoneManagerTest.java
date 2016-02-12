@@ -21,7 +21,7 @@ import android.test.AndroidTestCase;
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.incallui.Call.State;
 
-public class RingtoneManagerTest extends AndroidTestCase {
+public class DialerRingtoneManagerTest extends AndroidTestCase {
 
     private DialerRingtoneManager mRingtoneManager;
 
