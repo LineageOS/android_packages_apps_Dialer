@@ -26,4 +26,6 @@
     <dimen name="floating_action_button_vertical_offset">-24dp</dimen>
 
     <dimen name="dialpad_elevation">2dp</dimen>
+
+    <dimen name="video_preview_margin">20dp</dimen>
 </resources>
