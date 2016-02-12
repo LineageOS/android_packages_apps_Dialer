@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
 
@@ -45,6 +46,17 @@ public class ContactInfo {
     public Uri photoUri;
     public boolean isBadData;
     public String objectId;
+
+    // the following fields are pertinent only in the presence of a
+    // valid {@link com.cyanogen.lookup.phonenumber.contract.LookupProvider}
+    public String city;
+    public String country;
+    public String address;
+    public boolean isSpam;
+    public int spamCount;
+    public String photoUrl;
+    public String lookupProviderName;
+    public Drawable attributionDrawable;
 
     public static ContactInfo EMPTY = new ContactInfo();
 

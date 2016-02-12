@@ -320,8 +320,10 @@ public class CallLogAdapter extends GroupingListAdapter
         mTelecomCallLogCache = new TelecomCallLogCache(mContext);
         PhoneCallDetailsHelper phoneCallDetailsHelper =
                 new PhoneCallDetailsHelper(mContext, resources, mTelecomCallLogCache);
+        LookupInfoPresenter lookupInfoPresenter = new LookupInfoPresenter(mContext, resources);
         mCallLogListItemHelper =
-                new CallLogListItemHelper(phoneCallDetailsHelper, resources, mTelecomCallLogCache);
+                new CallLogListItemHelper(phoneCallDetailsHelper, lookupInfoPresenter,
+                        resources, mTelecomCallLogCache);
         mCallLogGroupBuilder = new CallLogGroupBuilder(this);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         maybeShowVoicemailPromoCard();
@@ -407,7 +409,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 mExpandCollapseListener,
                 mTelecomCallLogCache,
                 mCallLogListItemHelper,
-                mVoicemailPlaybackPresenter);
+                mVoicemailPlaybackPresenter,
+                mContactInfoHelper);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
@@ -580,6 +583,7 @@ public class CallLogAdapter extends GroupingListAdapter
         views.setAttributionImage(views.inCallComponentName);
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
+        mCallLogListItemHelper.setLookupInfoDetails(views, info);
     }
 
     @Override

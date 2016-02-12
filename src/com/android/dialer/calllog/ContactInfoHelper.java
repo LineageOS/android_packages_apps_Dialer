@@ -43,6 +43,10 @@ import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
 
+import com.cyanogen.lookup.phonenumber.contract.LookupProvider;
+import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
+import com.cyanogen.lookup.phonenumber.request.LookupRequest;
+import com.cyanogen.lookup.phonenumber.response.LookupResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,6 +60,7 @@ public class ContactInfoHelper {
 
     private final Context mContext;
     private final String mCurrentCountryIso;
+    private final LookupProvider mLookupProvider;
 
     private static final CachedNumberLookupService mCachedNumberLookupService =
             ObjectFactory.newCachedNumberLookupService();
@@ -63,6 +68,12 @@ public class ContactInfoHelper {
     public ContactInfoHelper(Context context, String currentCountryIso) {
         mContext = context;
         mCurrentCountryIso = currentCountryIso;
+        LookupProvider lookupProvider = new LookupProviderImpl(context);
+        if (lookupProvider.initialize()) {
+            mLookupProvider = lookupProvider;
+        } else {
+            mLookupProvider = null;
+        }
     }
 
     /**
@@ -285,6 +296,26 @@ public class ContactInfoHelper {
                 info = cacheInfo.getContactInfo().isBadData ? null : cacheInfo.getContactInfo();
             } else {
                 info = null;
+            }
+        }
+        // always do a LookupProvider search, if available
+        if (mLookupProvider != null) {
+            LookupResponse response = mLookupProvider.blockingFetchInfo(
+                    new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso), null));
+            if (response != null) {
+                // map LookupResponse to ContactInfo
+                ContactInfo contactInfo = new ContactInfo();
+                contactInfo.lookupProviderName = response.mProviderName;
+                contactInfo.name = response.mName;
+                contactInfo.number = formatPhoneNumber(response.mNumber, null, countryIso);
+                contactInfo.city = response.mCity;
+                contactInfo.country = response.mCountry;
+                contactInfo.address = response.mAddress;
+                contactInfo.photoUrl = response.mPhotoUrl;
+                contactInfo.isSpam = response.mIsSpam;
+                contactInfo.spamCount = response.mSpamCount;
+                contactInfo.attributionDrawable = response.mAttributionLogo;
+                info = contactInfo;
             }
         }
         return info;

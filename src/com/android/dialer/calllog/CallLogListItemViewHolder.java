@@ -75,6 +75,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public final View primaryActionView;
     /** The details of the phone call. */
     public final PhoneCallDetailsViews phoneCallDetailsViews;
+    public final LookupInfoViews lookupInfoViews;
     /** The text of the header for a day grouping. */
     public final TextView dayGroupHeader;
     /** The view containing the details for the call log row, including the action buttons. */
@@ -203,10 +204,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            ContactInfoHelper contactInfoHelper,
             View rootView,
             DialerQuickContact dialerQuickContact,
             View primaryActionView,
             PhoneCallDetailsViews phoneCallDetailsViews,
+            LookupInfoViews lookupInfoViews,
             CardView callLogEntryView,
             TextView dayGroupHeader,
             ImageView primaryActionButtonView) {
@@ -217,11 +220,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         mTelecomCallLogCache = telecomCallLogCache;
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
+        mContactInfoHelper = contactInfoHelper;
 
         this.rootView = rootView;
         this.dialerQuickContact = dialerQuickContact;
         this.primaryActionView = primaryActionView;
         this.phoneCallDetailsViews = phoneCallDetailsViews;
+        this.lookupInfoViews = lookupInfoViews;
         this.callLogEntryView = callLogEntryView;
         this.dayGroupHeader = dayGroupHeader;
         this.primaryActionButtonView = primaryActionButtonView;
@@ -238,9 +243,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         primaryActionButtonView.setOnClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
-
-        mContactInfoHelper = new ContactInfoHelper(mContext,
-                GeoUtil.getCurrentCountryIso(mContext));
     }
 
     public static CallLogListItemViewHolder create(
@@ -249,7 +251,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             View.OnClickListener expandCollapseListener,
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
-            VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
+            VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            ContactInfoHelper contactInfoHelper) {
 
         return new CallLogListItemViewHolder(
                 context,
@@ -257,10 +260,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 telecomCallLogCache,
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
+                contactInfoHelper,
                 view,
                 (DialerQuickContact) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
                 PhoneCallDetailsViews.fromView(view),
+                LookupInfoViews.fromView(view),
                 (CardView) view.findViewById(R.id.call_log_row),
                 (TextView) view.findViewById(R.id.call_log_day_group_label),
                 (ImageView) view.findViewById(R.id.primary_action_button));
@@ -603,17 +608,22 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         TelecomCallLogCache telecomCallLogCache = new TelecomCallLogCache(context);
         PhoneCallDetailsHelper phoneCallDetailsHelper = new PhoneCallDetailsHelper(
                 context, resources, telecomCallLogCache);
+        LookupInfoPresenter lookupInfoPresenter = new LookupInfoPresenter(context,
+                context.getResources());
 
         CallLogListItemViewHolder viewHolder = new CallLogListItemViewHolder(
                 context,
                 null /* expandCollapseListener */,
                 telecomCallLogCache,
-                new CallLogListItemHelper(phoneCallDetailsHelper, resources, telecomCallLogCache),
+                new CallLogListItemHelper(phoneCallDetailsHelper, lookupInfoPresenter,
+                        resources, telecomCallLogCache),
                 null /* voicemailPlaybackPresenter */,
+                null /* ContactInfoHelper */,
                 new View(context),
                 new DialerQuickContact(context),
                 new View(context),
                 PhoneCallDetailsViews.createForTest(context),
+                LookupInfoViews.createForText(context),
                 new CardView(context),
                 new TextView(context),
                 new ImageView(context));

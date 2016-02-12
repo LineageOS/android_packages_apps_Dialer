@@ -44,9 +44,6 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages com.android.phone.common \
     --extra-packages com.cyanogen.ambient
 
-LOCAL_STATIC_JAVA_AAR_LIBRARIES := \
-    ambientsdk
-
 LOCAL_JAVA_LIBRARIES := telephony-common
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 
@@ -63,13 +60,18 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     guava \
     libphonenumber \
     org.cyanogenmod.platform.sdk \
-    dialernext-android-support-design
+    dialernext-android-support-design \
+    picasso-dialer
 
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
+
+# utilize ContactsCommon's phone-number-based contact-info lookup
+CONTACTS_COMMON_LOOKUP_PROVIDER ?= $(LOCAL_PATH)/$(contacts_common_dir)/info_lookup
+include $(CONTACTS_COMMON_LOOKUP_PROVIDER)/phonenumber_lookup_provider.mk
 
 # Uncomment the following line to build against the current SDK
 # This is required for building an unbundled app.
@@ -80,7 +82,8 @@ include $(BUILD_PACKAGE)
 include $(CLEAR_VARS)
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
     dialernext-android-support-design:$(supportdesign_dir)/android-support-design.jar \
-    dialernext-android-support-v7-appcompat:$(appcompat_dir)/android-support-v7-appcompat.jar
+    dialernext-android-support-v7-appcompat:$(appcompat_dir)/android-support-v7-appcompat.jar \
+    picasso-dialer:libs/picasso-2.5.2.jar
 
 include $(BUILD_MULTI_PREBUILT)
 

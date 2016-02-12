@@ -98,6 +98,18 @@
                             android:singleLine="true" />
 
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/spamInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/call_log_name_margin_bottom"
+                        android:layout_marginEnd="@dimen/call_log_icon_margin"
+                        android:textColor="@color/spam_contact_color"
+                        android:textSize="@dimen/call_log_spam_info_text_size"
+                        android:singleLine="true"
+                        android:visibility="gone" />
+
                     <TextView
                         android:id="@+id/voicemail_transcription"
                         android:layout_width="wrap_content"

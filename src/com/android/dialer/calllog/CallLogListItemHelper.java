@@ -37,6 +37,7 @@ import com.android.dialer.R;
     /** Resources to look up strings. */
     private final Resources mResources;
     private final TelecomCallLogCache mTelecomCallLogCache;
+    private final LookupInfoPresenter mLookupInfoPresenter;
 
     /**
      * Creates a new helper instance.
@@ -46,9 +47,11 @@ import com.android.dialer.R;
      */
     public CallLogListItemHelper(
             PhoneCallDetailsHelper phoneCallDetailsHelper,
+            LookupInfoPresenter lookupInfoPresenter,
             Resources resources,
             TelecomCallLogCache telecomCallLogCache) {
         mPhoneCallDetailsHelper = phoneCallDetailsHelper;
+        mLookupInfoPresenter = lookupInfoPresenter;
         mResources = resources;
         mTelecomCallLogCache = telecomCallLogCache;
     }
@@ -74,6 +77,10 @@ import com.android.dialer.R;
         // Cache name or number of caller.  Used when setting the content descriptions of buttons
         // when the actions ViewStub is inflated.
         views.nameOrNumber = getNameOrNumber(details);
+    }
+
+    public void setLookupInfoDetails(CallLogListItemViewHolder views, ContactInfo info) {
+        mLookupInfoPresenter.bindContactLookupInfo(views.lookupInfoViews, info);
     }
 
     /**
