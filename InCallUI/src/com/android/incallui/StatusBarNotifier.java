@@ -50,10 +50,14 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.incallui.Call.State;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
+import com.android.incallui.async.PausableExecutorImpl;
 import com.android.incallui.ringtone.DialerRingtoneManager;
+import com.android.incallui.ringtone.InCallTonePlayer;
+import com.android.incallui.ringtone.ToneGeneratorFactory;
 
 import java.util.Objects;
 
@@ -95,7 +99,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         mContactInfoCache = contactInfoCache;
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        mDialerRingtoneManager = new DialerRingtoneManager();
+        mDialerRingtoneManager = new DialerRingtoneManager(
+                new InCallTonePlayer(
+                        AudioModeProvider.getInstance(),
+                        new ToneGeneratorFactory(),
+                        new PausableExecutorImpl()),
+                CallList.getInstance());
         mCurrentNotification = NOTIFICATION_NONE;
     }
 
@@ -308,7 +317,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             notification.vibrate = VIBRATE_PATTERN;
         }
         if (mDialerRingtoneManager.shouldPlayCallWaitingTone(callState)) {
-            // TODO (maxwelb) play call waiting
+            Log.v(this, "Playing call waiting tone");
+            mDialerRingtoneManager.playCallWaitingTone();
         }
         if (mCurrentNotification != notificationType && mCurrentNotification != NOTIFICATION_NONE) {
             Log.i(this, "Previous notification already showing - cancelling "
@@ -699,7 +709,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
     @Override
     public void onCallChanged(Call call) {
-        // no-op
+        if (CallList.getInstance().getIncomingCall() == null) {
+            mDialerRingtoneManager.stopCallWaitingTone();
+        }
     }
 
     /**
