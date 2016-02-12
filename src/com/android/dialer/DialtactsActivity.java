@@ -104,6 +104,7 @@ import com.android.dialerbind.DatabaseHelperManager;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.ambient.AmbientConnection;
+import com.android.phone.common.dialpad.CreditBarHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodSpinnerAdapter;
@@ -873,6 +874,15 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             ft.show(mDialpadFragment);
         }
 
+        CreditBarHelper.CreditBarVisibilityListener cbvl =
+                new CreditBarHelper.CreditBarVisibilityListener() {
+                    @Override
+                    public void creditsBarVisibilityChanged(int visibility) {
+                        // do nothing yet
+                    }
+                };
+        CreditBarHelper.clearCallRateInformation(getGlobalCreditsBar(), cbvl);
+
         if (mCurrentCallMethod != null && mDialpadFragment.isAdded()) {
             // ensure the call method is updated in the fragment
             mDialpadFragment.onCallMethodChanged(mCurrentCallMethod);
@@ -935,6 +945,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mDialpadFragment.getView().startAnimation(mSlideOut);
         } else {
             commitDialpadFragmentHide();
+        }
+
+        if (mInRegularSearch) {
+            mRegularSearchFragment.updateCallCreditInfo();
         }
 
         mActionBarController.onDialpadDown();

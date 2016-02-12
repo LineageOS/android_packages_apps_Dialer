@@ -58,6 +58,23 @@ public class RegularSearchFragment extends SearchFragment
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        DialtactsActivity da = (DialtactsActivity) getActivity();
+        if (da != null) {
+            CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        updateCallCreditInfo();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         AnalyticsUtil.sendScreenView(this);
@@ -81,14 +98,18 @@ public class RegularSearchFragment extends SearchFragment
     public void setCurrentCallMethod(CallMethodInfo cmi) {
         super.setCurrentCallMethod(cmi);
 
+        updateCallCreditInfo();
+    }
+
+    public void updateCallCreditInfo() {
         DialtactsActivity da = (DialtactsActivity) getActivity();
-        if (da == null && !isAdded()) {
-            return;
-        }
-        if (cmi != null && cmi.mIsInCallProvider) {
-            CreditBarHelper.callMethodCredits(da.getGlobalCreditsBar(), cmi, getResources(), this);
-        } else {
-            CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
+        if (da != null) {
+            CallMethodInfo cmi = getCurrentCallMethod();
+            if (cmi != null && cmi.mIsInCallProvider && !da.isDialpadShown()) {
+                CreditBarHelper.callMethodCredits(da.getGlobalCreditsBar(), cmi, getResources(), this);
+            } else {
+                CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
+            }
         }
     }
 
