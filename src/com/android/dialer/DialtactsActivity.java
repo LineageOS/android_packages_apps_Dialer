@@ -673,6 +673,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
             providersUpdated(CallMethodHelper.getAllCallMethods());
+            CallMethodHelper.refreshDynamicItems();
         }
 
         mStateSaved = false;

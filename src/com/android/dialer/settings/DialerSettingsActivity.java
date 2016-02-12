@@ -94,6 +94,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
         // Needs to be done prior to super's onCreate
         if(CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
             providersUpdated(CallMethodHelper.getAllCallMethods());
+            CallMethodHelper.refreshDynamicItems();
         }
         if (CallerInfoHelper.getInstalledProviders(this).length > 0) {
             CallerInfoHelper.ResolvedProvider[] providers =

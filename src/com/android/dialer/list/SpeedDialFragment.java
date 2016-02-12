@@ -239,6 +239,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
 
             if(CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
                 providersUpdated(CallMethodHelper.getAllCallMethods());
+                CallMethodHelper.refreshDynamicItems();
             }
 
             mEmptyView.setDescription(R.string.speed_dial_empty);
