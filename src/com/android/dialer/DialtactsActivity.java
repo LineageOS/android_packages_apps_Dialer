@@ -104,7 +104,7 @@ import com.android.dialerbind.DatabaseHelperManager;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.ambient.AmbientConnection;
-import com.android.phone.common.dialpad.CreditBarHelper;
+import com.android.phone.common.incall.CreditBarHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodSpinnerAdapter;
