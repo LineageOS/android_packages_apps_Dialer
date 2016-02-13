@@ -304,7 +304,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
                 int index = DialerPhoneNumberListAdapter.SHORTCUT_COUNT - truePosition - 1;
                 number = adapter.getQueryString();
                 CallMethodInfo cmi = adapter.getProviders().get(index);
-                cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, number, getContext());
+                cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, number, getContext(), false, true);
                 break;
         }
     }
