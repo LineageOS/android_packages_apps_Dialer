@@ -1061,11 +1061,14 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 SmartDialDbColumns.PHONE_TYPE + ", " +
                 SmartDialDbColumns.MIMETYPE +
                 " FROM " + Tables.SMARTDIAL_TABLE +
-                " WHERE " + SmartDialDbColumns.MIMETYPE +  " = ?2 " +
+                " WHERE " + SmartDialDbColumns.MIMETYPE +  " = ?2 OR "
+                + SmartDialDbColumns.MIMETYPE + " = ?3 " +
                 " ORDER BY " + SmartDialSortingOrder.SORT_ORDER,
                 new String[] {
                         currentTimeStamp,
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE});
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
+                        usernameMimeType + ""
+                });
         if (cursor == null) {
             return result;
         }
