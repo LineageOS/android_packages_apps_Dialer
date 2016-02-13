@@ -61,11 +61,8 @@ public class InCallTonePlayerTest extends AndroidTestCase {
         super.tearDown();
         // Stop any playing so the InCallTonePlayer isn't stuck waiting for the tone to complete
         mInCallTonePlayer.stop();
-        // 3 milestones in InCallTonePlayer, ack them to ensure that the prod thread doesn't block
-        // forever. It's fine to ack for more milestones than are hit
-        mExecutor.ackMilestoneForTesting();
-        mExecutor.ackMilestoneForTesting();
-        mExecutor.ackMilestoneForTesting();
+        // Ack all milestones to ensure that the prod thread doesn't block forever
+        mExecutor.ackAllMilestonesForTesting();
     }
 
     public void testIsPlayingTone_False() {
