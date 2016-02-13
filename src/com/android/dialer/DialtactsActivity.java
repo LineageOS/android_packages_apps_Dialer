@@ -957,6 +957,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (TextUtils.isEmpty(mSearchQuery)) {
                 exitSearchUi();
             }
+            if (mInRegularSearch) {
+                mRegularSearchFragment.updateCallCreditInfo();
+            } else {
+                mSmartDialSearchFragment.updateCallCreditInfo();
+            }
         }
     }
 

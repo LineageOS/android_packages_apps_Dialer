@@ -95,25 +95,6 @@ public class RegularSearchFragment extends SearchFragment
     }
 
     @Override
-    public void setCurrentCallMethod(CallMethodInfo cmi) {
-        super.setCurrentCallMethod(cmi);
-
-        updateCallCreditInfo();
-    }
-
-    public void updateCallCreditInfo() {
-        DialtactsActivity da = (DialtactsActivity) getActivity();
-        if (da != null) {
-            CallMethodInfo cmi = getCurrentCallMethod();
-            if (cmi != null && cmi.mIsInCallProvider && !da.isDialpadShown()) {
-                CreditBarHelper.callMethodCredits(da.getGlobalCreditsBar(), cmi, getResources(), this);
-            } else {
-                CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
-            }
-        }
-    }
-
-    @Override
     protected void onCreateView(LayoutInflater inflater, final ViewGroup container) {
         super.onCreateView(inflater, container);
         ((PinnedHeaderListView) getListView()).setScrollToSectionOnHeaderTouch(true);
@@ -171,12 +152,5 @@ public class RegularSearchFragment extends SearchFragment
         if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
             setupEmptyView();
         }
-    }
-
-    @Override
-    public void creditsBarVisibilityChanged(int visibility) {
-        DialtactsActivity da = (DialtactsActivity) getActivity();
-
-        da.moveFabInSearchUI();
     }
 }

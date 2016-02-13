@@ -57,11 +57,13 @@ import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CreditBarHelper;
 
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 public class SearchFragment extends PhoneNumberPickerFragment
-        implements DialerPhoneNumberListAdapter.searchMethodClicked {
+        implements DialerPhoneNumberListAdapter.searchMethodClicked,
+        CreditBarHelper.CreditBarVisibilityListener {
     private static final String TAG  = SearchFragment.class.getSimpleName();
 
     private OnListFragmentScrolledListener mActivityScrollListener;
@@ -91,6 +93,12 @@ public class SearchFragment extends PhoneNumberPickerFragment
     protected EmptyContentView mEmptyView;
 
     public CallMethodInfo mCurrentCallMethodInfo;
+
+    @Override
+    public void creditsBarVisibilityChanged(int visibility) {
+        DialtactsActivity da = (DialtactsActivity) getActivity();
+        da.moveFabInSearchUI();
+    }
 
     public interface HostInterface {
         public boolean isActionBarShowing();
@@ -328,6 +336,19 @@ public class SearchFragment extends PhoneNumberPickerFragment
             }
             setAdditionalMimeTypeSearch(cmi.mMimeType);
             reloadData();
+        }
+        updateCallCreditInfo();
+    }
+
+    public void updateCallCreditInfo() {
+        DialtactsActivity da = (DialtactsActivity) getActivity();
+        if (da != null) {
+            CallMethodInfo cmi = getCurrentCallMethod();
+            if (cmi != null && cmi.mIsInCallProvider && !da.isDialpadShown()) {
+                CreditBarHelper.callMethodCredits(da.getGlobalCreditsBar(), cmi, getResources(), this);
+            } else {
+                CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
+            }
         }
     }
 
