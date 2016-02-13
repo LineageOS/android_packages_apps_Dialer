@@ -39,7 +39,6 @@ import javax.annotation.concurrent.NotThreadSafe;
  * Class responsible for playing in-call related tones in a background thread. This class only
  * allows one tone to be played at a time.
  */
-@NeededForTesting
 public class InCallTonePlayer {
 
     public static final int TONE_CALL_WAITING = 4;
@@ -62,7 +61,6 @@ public class InCallTonePlayer {
      * @throws NullPointerException if audioModeProvider, toneGeneratorFactory, or executor are
      * {@code null}.
      */
-    @NeededForTesting
     public InCallTonePlayer(AudioModeProvider audioModeProvider,
             ToneGeneratorFactory toneGeneratorFactory, PausableExecutor executor) {
         mAudioModeProvider = Preconditions.checkNotNull(audioModeProvider);
@@ -73,7 +71,6 @@ public class InCallTonePlayer {
     /**
      * @return {@code true} if a tone is currently playing, {@code false} otherwise
      */
-    @NeededForTesting
     public boolean isPlayingTone() {
         return mNumPlayingTones != null && mNumPlayingTones.getCount() > 0;
     }
@@ -85,7 +82,6 @@ public class InCallTonePlayer {
      * @throws IllegalStateException if a tone is already playing
      * @throws IllegalArgumentException if the tone is invalid
      */
-    @NeededForTesting
     public void play(int tone) {
         if (isPlayingTone()) {
             throw new IllegalStateException("Tone already playing");
@@ -155,7 +151,6 @@ public class InCallTonePlayer {
     /**
      * Stops playback of the current tone.
      */
-    @NeededForTesting
     public void stop() {
         if (mNumPlayingTones != null) {
             mNumPlayingTones.countDown();
