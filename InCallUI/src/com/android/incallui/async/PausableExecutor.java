@@ -45,6 +45,14 @@ public interface PausableExecutor extends Executor {
     void ackMilestoneForTesting();
 
     /**
+     * Method called from the test code to inform this executor that the tests are finished with all
+     * milestones. Future calls to {@link #milestone()} or {@link #awaitMilestoneForTesting()}
+     * should return immediately.
+     */
+    @NeededForTesting
+    void ackAllMilestonesForTesting();
+
+    /**
      * Method called from the test code to block until a milestone has been reached in the
      * production code.
      */
