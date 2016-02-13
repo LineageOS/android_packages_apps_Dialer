@@ -30,12 +30,13 @@ public final class SingleProdThreadExecutor implements PausableExecutor {
 
     private int mMilestonesReached;
     private int mMilestonesAcked;
+    private boolean mHasAckedAllMilestones;
 
     @Override
     public synchronized void milestone() {
         ++mMilestonesReached;
         notify();
-        while (mMilestonesReached > mMilestonesAcked) {
+        while (!mHasAckedAllMilestones && mMilestonesReached > mMilestonesAcked) {
             try {
                 wait();
             } catch (InterruptedException e) {}
@@ -49,8 +50,14 @@ public final class SingleProdThreadExecutor implements PausableExecutor {
     }
 
     @Override
+    public synchronized void ackAllMilestonesForTesting() {
+        mHasAckedAllMilestones = true;
+        notify();
+    }
+
+    @Override
     public synchronized void awaitMilestoneForTesting() throws InterruptedException {
-        while (mMilestonesReached <= mMilestonesAcked) {
+        while (!mHasAckedAllMilestones && mMilestonesReached <= mMilestonesAcked) {
             wait();
         }
     }

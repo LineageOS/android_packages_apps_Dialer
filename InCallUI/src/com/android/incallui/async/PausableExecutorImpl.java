@@ -30,6 +30,9 @@ public class PausableExecutorImpl implements PausableExecutor {
     public void ackMilestoneForTesting() {}
 
     @Override
+    public void ackAllMilestonesForTesting() {}
+
+    @Override
     public void awaitMilestoneForTesting() {}
 
     @Override
