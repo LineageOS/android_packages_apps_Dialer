@@ -56,6 +56,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
+import com.cyanogen.ambient.deeplink.DeepLink;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
@@ -539,18 +540,22 @@ public class CallLogAdapter extends GroupingListAdapter
         views.numberType = (String) Phone.getTypeLabel(mContext.getResources(), details.numberType,
                 details.numberLabel);
         // Default case: an item in the call log.
-        views.primaryActionView.setVisibility(View.VISIBLE);
+        DeepLink dl = getDeepLink(position);
+        views.mDeepLink = dl;
 
+        if (dl != null) {
+            views.mDeepLink = dl;
+            views.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
+            views.phoneCallDetailsViews.noteIconView.setImageDrawable(dl.getDrawableIcon(mContext));
+        } else {
+            views.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
+        }
         String component = c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME);
         if (!TextUtils.isEmpty(component)) {
             views.inCallComponentName = ComponentName.unflattenFromString(component);
         } else {
             views.inCallComponentName = null;
         }
-        views.callTimes = getCallTimes(c, count);
-        views.mDeepLink = null;
-        DeepLinkHelper linkHelper = new DeepLinkHelper(views,mContext);
-        linkHelper.prepareUi(number);
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
         int previousGroup = getPreviousDayGroup(c);
@@ -672,20 +677,6 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         cursor.moveToPosition(position);
         return callTypes;
-    }
-
-    /**
-     * Returns call times for the given number of items in the cursor
-     */
-    private long[] getCallTimes(Cursor cursor, int count) {
-        int position = cursor.getPosition();
-        long[] callTimes = new long[count];
-        for (int index = 0; index < count; ++index) {
-            callTimes[index] = cursor.getLong(CallLogQuery.DATE);
-            cursor.moveToNext();
-        }
-        cursor.moveToPosition(position);
-        return callTimes;
     }
 
     /**

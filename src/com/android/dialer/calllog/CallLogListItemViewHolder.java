@@ -118,11 +118,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public long[] callIds;
 
     /**
-     * The time for each call in callIds represented by the current call log entry.  Used when the
-     * user views the call log to determine note status
-     */
-    public long[] callTimes;
-    /**
      * The callable phone number for the current call log entry.  Cached here as the call back
      * intent is set only when the actions ViewStub is inflated.
      */
@@ -387,8 +382,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (mDeepLink != null) {
             ImageView icon = (ImageView) viewNoteButton.findViewById(R.id.view_note_action_icon);
             icon.setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+            viewNoteButton.setVisibility(View.VISIBLE);
         } else {
-            viewNoteButton.setVisibility(android.view.View.GONE);
+            viewNoteButton.setVisibility(View.GONE);
         }
         // If one of the calls had video capabilities, show the video call button.
         if (mTelecomCallLogCache.isVideoEnabled() && canPlaceCallToNumber &&
