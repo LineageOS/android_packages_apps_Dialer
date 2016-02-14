@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Verskaffer van mense soektog</string>
   <string name="reverse_lookup_provider_title">Verskaffer van omgekeerde soektog</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Sjinees (CN)</string>
+  <string name="type_blacklist">Swartgelysde oproep</string>
   <string name="menu_add_to_blacklist">Voeg by blokkeer lys</string>
   <string name="toast_added_to_blacklist">%s bygevoeg tot blokkeer oproep lys.</string>
+  <string name="toast_removed_from_blacklist">%s is verwyder van geblokkeerde oproep lys.</string>
+  <string name="call_log_action_block">Blok oproeper</string>
+  <string name="call_log_action_unblock">Oproeper is geblokkeer</string>
   <string name="speed_dial_settings">Snel keuse instellings</string>
   <string name="speed_dial_not_set">(nie gestel)</string>
   <string name="speed_dial_replace">Vervang</string>
@@ -55,6 +59,11 @@
   <string name="call_log_blacklist_header">Alleenlik geblokkeerde oproepe</string>
   <string name="call_log_stats_title">Statistieke</string>
   <string name="callStatsDetailTitle">Oproep stat besonderhede</string>
+  <string name="call_stats_incoming">Inkomend: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Uitgaande: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Gemis: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blokkeer: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Totaal: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Begin datum</string>
@@ -72,4 +81,10 @@
   <string name="call_stats_reset_filter">Herstel tyd reeks</string>
   <string name="call_stats_sort_by_duration">Sorteer volgens oproep tydsduur</string>
   <string name="call_stats_sort_by_count">Sorteer volgens oproepe</string>
+  <string name="call_stats_title_for_number">Hierdie nommer</string>
+  <string name="call_stats_title_of_total">Van totaal</string>
+  <string name="call_stats_title_durations">Oproep tydsduur</string>
+  <string name="call_stats_title_count">Aantal oproepe</string>
+  <string name="call_stats_title_average_duration">Gemiddelde oproep tydsduur</string>
+  <string name="recent_calls_no_items_in_range">Jou oproep lys het nie enige oproepe in die geselekteerde tydsduur nie.</string>
 </resources>

@@ -33,8 +33,12 @@
   <string name="people_lookup_provider_title">Pretraživanja ljudi</string>
   <string name="reverse_lookup_provider_title">Obrnuto pretraživanje</string>
   <string name="cyngn_reverse_lookup_provider_name">Kineski Cyngn (CN)</string>
+  <string name="type_blacklist">Poziv s crne liste</string>
   <string name="menu_add_to_blacklist">Dodaj na popis blokiranih pozivatelja</string>
   <string name="toast_added_to_blacklist">%s dodan na popis blokiranih pozivatelja.</string>
+  <string name="toast_removed_from_blacklist">%s uklonjen s popisa blokiranih pozivatelja.</string>
+  <string name="call_log_action_block">Blokiraj pozivatelja</string>
+  <string name="call_log_action_unblock">Pozivatelj blokiran</string>
   <string name="speed_dial_settings">Postavke brzog biranja</string>
   <string name="speed_dial_not_set">(nije postavljeno)</string>
   <string name="speed_dial_replace">Zamijeni</string>
@@ -72,4 +76,9 @@
   <string name="call_stats_reset_filter">Poništi vremenski raspon</string>
   <string name="call_stats_sort_by_duration">Sortiraj po trajanju poziva</string>
   <string name="call_stats_sort_by_count">Sortiraj po broju poziva</string>
+  <string name="call_stats_title_for_number">Ovaj broj</string>
+  <string name="call_stats_title_of_total">Od ukupno</string>
+  <string name="call_stats_title_durations">Trajanje poziva</string>
+  <string name="call_stats_title_count">Broj pozivanja</string>
+  <string name="call_stats_title_average_duration">Prosječno trajanje poziva</string>
 </resources>
