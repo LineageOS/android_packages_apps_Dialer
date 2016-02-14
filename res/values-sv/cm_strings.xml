@@ -35,6 +35,8 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
   <string name="menu_add_to_blacklist">Lägg till listan över blockerade nummer</string>
   <string name="toast_added_to_blacklist">%s lades till listan över blockerade nummer.</string>
+  <string name="toast_removed_from_blacklist">%s borttagen från listan med blockerade uppringare.</string>
+  <string name="call_log_action_block">Blockera uppringare</string>
   <string name="call_log_action_unblock">Uppringare blockerad</string>
   <string name="speed_dial_settings">Inställningar för kortnummer</string>
   <string name="speed_dial_not_set">(ej angivet)</string>
@@ -78,6 +80,10 @@
   <string name="call_stats_reset_filter">Återställ tidsintervall</string>
   <string name="call_stats_sort_by_duration">Sortera efter samtalstid</string>
   <string name="call_stats_sort_by_count">Sortera efter antal samtal</string>
+  <string name="call_stats_title_for_number">Detta nummer</string>
   <string name="call_stats_title_of_total">Av totalt</string>
+  <string name="call_stats_title_durations">Samtalslängder</string>
   <string name="call_stats_title_count">Antal samtal</string>
+  <string name="call_stats_title_average_duration">Genomsnittlig Samtalslängd</string>
+  <string name="recent_calls_no_items_in_range">Samtalsloggen innehåller inte några samtal i det valda tidsintervallet.</string>
 </resources>

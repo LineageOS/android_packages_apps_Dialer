@@ -75,4 +75,6 @@
   <string name="call_stats_reset_filter">Tilbakestille tidsområde</string>
   <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
   <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
+  <string name="call_stats_title_for_number">Dette nummeret</string>
+  <string name="call_stats_title_durations">Samtalevarighet</string>
 </resources>

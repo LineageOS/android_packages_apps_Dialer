@@ -82,6 +82,7 @@
   <string name="call_stats_sort_by_duration">Sortuj wg długości połączenia</string>
   <string name="call_stats_sort_by_count">Sortuj wg liczby połączeń</string>
   <string name="call_stats_title_for_number">Ten numer</string>
+  <string name="call_stats_title_of_total">Z całkowitej liczby</string>
   <string name="call_stats_title_durations">Czas trwania połączenia</string>
   <string name="call_stats_title_count">Liczba połączeń</string>
   <string name="call_stats_title_average_duration">Średni czas połączenia</string>
