@@ -229,7 +229,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         static final long LAST_TIME_USED_RECENT_MS = 30L * 24 * 60 * 60 * 1000;
 
         /** Time since last contact. */
-        static final String TIME_SINCE_LAST_USED_MS = "( ?1 - " +
+        static final String TIME_SINCE_LAST_USED_MS = "( ? - " +
                 Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.LAST_TIME_USED + ")";
 
         /** Contacts that have been used in the past 3 days rank higher than contacts that have
@@ -247,13 +247,14 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
          * of frequently called contacts.
          */
         static final String SORT_ORDER =
-                Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.STARRED + " DESC, "
+                Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.CONTACT_ID + ", "
+                + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.PHONE_TYPE + " DESC, "
+                + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.STARRED + " DESC, "
                 + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.IS_SUPER_PRIMARY + " DESC, "
                 + SORT_BY_DATA_USAGE + ", "
                 + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.TIMES_USED + " DESC, "
                 + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.IN_VISIBLE_GROUP + " DESC, "
                 + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.DISPLAY_NAME_PRIMARY + ", "
-                + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.CONTACT_ID + ", "
                 + Tables.SMARTDIAL_TABLE + "." + SmartDialDbColumns.IS_PRIMARY + " DESC";
     }
 
@@ -1029,6 +1030,38 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Helper method for creating the where and param entries for mimetypes
+     * @param builder our string builder
+     * @param listOfMimes a list of mimes
+     * @param params a String[] of params for the where string we are building
+     * @param isCustomMimes are these mimes from our InCallPlugins?
+     * @param selectMime CallMethod currently selected in the filter
+     * @param paramPos position to start writing our params, zero if initial.
+     */
+    private void buildWhereString(StringBuilder builder, String[] listOfMimes, String[] params,
+                                  boolean isCustomMimes, String selectMime, int paramPos) {
+
+        for (int i = 0; i < listOfMimes.length; i++) {
+            params[paramPos + i] = listOfMimes[i];
+
+            if (isCustomMimes) {
+                if (selectMime != null
+                        && CallMethodHelper.getAllEnabledMimeTypes().contains(selectMime)) {
+                    builder.append(SmartDialDbColumns.MIMETYPE + " = ?");
+                } else {
+                    builder.append(SmartDialDbColumns.MIMETYPE + " != ?");
+                }
+            } else {
+                builder.append(SmartDialDbColumns.MIMETYPE + " = ?");
+            }
+
+            if (i != listOfMimes.length - 1) {
+                builder.append(" OR ");
+            }
+        }
+    }
+
+    /**
      * Returns a list of candidate contacts where the query is a prefix of the dialpad index of
      * the contact's name or phone number.
      *
@@ -1053,6 +1086,27 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
         final String currentTimeStamp = Long.toString(System.currentTimeMillis());
 
+        String[] defaultMimes = new String[] {
+                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
+                ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE
+        };
+        String[] customMimes = CallMethodHelper.getAllEnabledMimeTypes().split(",");
+        String[] finalizedParams = new String[customMimes.length + defaultMimes.length + 1];
+
+        StringBuilder where = new StringBuilder();
+
+        if (customMimes.length > 0) {
+            buildWhereString(where, customMimes, finalizedParams, true, usernameMimeType, 0);
+
+            // Append an OR in between our custom mimes and our default mimes
+            where.append(" OR ");
+        }
+
+        buildWhereString(where, defaultMimes, finalizedParams, false, null, customMimes.length);
+
+        // setup currentTypeStamp param for our order by
+        finalizedParams[finalizedParams.length - 1] = currentTimeStamp;
+
         /** Queries the database to find contacts that have an index matching the query prefix. */
         final Cursor cursor = db.rawQuery("SELECT " +
                 SmartDialDbColumns.DATA_ID + ", " +
@@ -1064,14 +1118,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 SmartDialDbColumns.PHONE_TYPE + ", " +
                 SmartDialDbColumns.MIMETYPE +
                 " FROM " + Tables.SMARTDIAL_TABLE +
-                " WHERE " + SmartDialDbColumns.MIMETYPE +  " = ?2 OR "
-                + SmartDialDbColumns.MIMETYPE + " = ?3 " +
+                " WHERE " + where.toString() +
                 " ORDER BY " + SmartDialSortingOrder.SORT_ORDER,
-                new String[] {
-                        currentTimeStamp,
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
-                        usernameMimeType + ""
-                });
+                finalizedParams);
         if (cursor == null) {
             return result;
         }
@@ -1094,7 +1143,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 stopWatch.lap("Found column IDs");
             }
 
-            final Set<ContactMatch> duplicates = new HashSet<ContactMatch>();
             int counter = 0;
             if (DEBUG) {
                 stopWatch.lap("Moved cursor to start");
@@ -1110,20 +1158,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 final int phoneType = cursor.getInt(columnPhoneType);
                 final String mimeType = cursor.getString(columnMimetype);
 
-                /** If a contact already exists and another phone number of the contact is being
-                 * processed, skip the second instance.
-                 */
-                final ContactMatch contactMatch = new ContactMatch(lookupKey, id);
-                if (duplicates.contains(contactMatch)) {
-                    continue;
-                }
-
-                ContactNumber extraContactNumber = null;
-                if (!TextUtils.isEmpty(usernameMimeType)) {
-                    extraContactNumber = getContactNumberForMimeType(id, dataID, displayName,
-                            lookupKey, photoId, usernameMimeType);
-                }
-
                 /**
                  * If the contact has either the name or number OR a username
                  * that matches the query, add to the result.
@@ -1133,16 +1167,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                         (nameMatcher.matchesNumber(phoneNumber, query) != null);
                 if (nameMatches || numberMatches) {
                     /** If a contact has not been added, add it to the result and the hash set.*/
-                    duplicates.add(contactMatch);
                     result.add(new ContactNumber(id, dataID, displayName, phoneNumber, lookupKey,
                             photoId, mimeType, phoneType));
-
-                    // add as a "second" entry. the adapter will automagically append the item
-                    // to the first. These items have to be right next to each other.
-                    if (extraContactNumber != null
-                            && !extraContactNumber.phoneNumber.equals(phoneNumber)) {
-                        result.add(extraContactNumber);
-                    }
                     counter++;
                     if (DEBUG) {
                         stopWatch.lap("Added one result: Name: " + displayName);
@@ -1157,44 +1183,5 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         return result;
-    }
-
-    public ContactNumber getContactNumberForMimeType(long id, long dataID, String displayName,
-                                                       String lookupKey, long photoId,
-                                                       String requestedMime) {
-        final SQLiteDatabase db = getReadableDatabase();
-
-        final Cursor cursor = db.rawQuery("SELECT " +
-                        SmartDialDbColumns.NUMBER + ", " +
-                        SmartDialDbColumns.PHONE_TYPE +
-                        " FROM " + Tables.SMARTDIAL_TABLE +
-                        " WHERE " + SmartDialDbColumns.CONTACT_ID + " = ? AND " +
-                        SmartDialDbColumns.MIMETYPE + " = ?",
-                new String[] {Long.toString(id), requestedMime});
-
-        try {
-            if (cursor != null) {
-                while(cursor.moveToNext()) {
-
-                    /** Gets the column ID from the cursor.*/
-                    final int columnNumber = 0;
-                    final int columnPhoneType = 1;
-
-                    final String phoneNumber = cursor.getString(columnNumber);
-                    final int phoneType = cursor.getInt(columnPhoneType);
-
-                    if (phoneNumber != null) {
-                        return new ContactNumber(id, dataID, displayName, phoneNumber, lookupKey,
-                                photoId, requestedMime, phoneType);
-                    }
-                }
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-
-        return null;
     }
 }
