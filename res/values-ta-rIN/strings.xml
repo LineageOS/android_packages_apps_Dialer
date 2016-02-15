@@ -127,10 +127,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> அன்று <xliff:g id="TIME">%2$s</xliff:g> மணிக்கு"</string>
-    <!-- no translation found for voicemailDurationFormat (228211252076289564) -->
-    <skip />
-    <!-- no translation found for voicemailCallLogDateTimeFormatWithDuration (5118563814451588397) -->
-    <skip />
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"இந்த எண்ணை அழைக்க முடியாது"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"குரலஞ்சலை அமைக்க, செல்க மெனு &gt; அமைப்பு."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"குரலஞ்சலை அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
