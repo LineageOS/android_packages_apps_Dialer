@@ -17,179 +17,179 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Телефон"</string>
-    <string name="onHold" msgid="9035493194749959955">"На чекању"</string>
-    <string name="unknown" msgid="6878797917991465859">"Непознато"</string>
-    <string name="private_num" msgid="6713286113000232309">"Приватан број"</string>
-    <string name="payphone" msgid="4793877574636445118">"Телефонска говорница"</string>
-    <string name="confCall" msgid="1904840547188336828">"Конференцијски позив"</string>
-    <string name="call_lost" msgid="6183862117003999578">"Позив је прекинут"</string>
-    <string name="audio_mode_speaker" msgid="27649582100085266">"Звучник"</string>
-    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Слушалица телефона"</string>
-    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Жичане слушалице"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
-    <string name="wait_prompt_str" msgid="7601815427707856238">"Желите ли да пошаљете следеће тонове?\n"</string>
-    <string name="pause_prompt_str" msgid="1789964702154314806">"Тонови слања\n"</string>
-    <string name="send_button" msgid="4106860097497818751">"Пошаљи"</string>
-    <string name="pause_prompt_yes" msgid="3564467212025151797">"Да"</string>
-    <string name="pause_prompt_no" msgid="6686238803236884877">"Не"</string>
-    <string name="wild_prompt_str" msgid="5543521676355533577">"Замените џокер знак са"</string>
-    <string name="caller_manage_header" msgid="3231519674734638786">"Конференцијски позив <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Број говорне поште"</string>
-    <string name="card_title_dialing" msgid="5769417478498348054">"Позива се"</string>
-    <string name="card_title_redialing" msgid="8253487008234167266">"Поновно бирање"</string>
-    <string name="card_title_conf_call" msgid="1162980346189744501">"Конференцијски позив"</string>
-    <string name="card_title_incoming_call" msgid="7364539451234646909">"Долазни позив"</string>
-    <string name="card_title_incoming_work_call" msgid="5601475030981264422">"Долазни позив за Work"</string>
-    <string name="card_title_call_ended" msgid="5544730338889702298">"Позив је завршен"</string>
-    <string name="card_title_on_hold" msgid="821463117892339942">"На чекању"</string>
-    <string name="card_title_hanging_up" msgid="3999101620995182450">"Прекид везе"</string>
-    <string name="card_title_in_call" msgid="6346543933068225205">"У позиву"</string>
-    <string name="card_title_my_phone_number" msgid="112428362494434191">"Мој број је <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
-    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Повезивање са видео позивом"</string>
-    <string name="card_title_video_call" msgid="5898636679563320218">"Видео позив"</string>
-    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Захтевање видео позива"</string>
-    <string name="card_title_video_call_error" msgid="9000555878389539225">"Повезивање видео позива није успело"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Захтев за видео позив је одбијен"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Број за повратни позив\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Број за хитан повратни позив\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="2107666444937350731">"Бирање"</string>
-    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Пропуштен позив"</string>
-    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Пропуштени позиви"</string>
-    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"Број пропуштених позива: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>"</string>
-    <string name="notification_missedCallTicker" msgid="504686252427747209">"Пропуштен позив од: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
-    <string name="notification_ongoing_call" msgid="7068688957273482989">"Актуелни позив"</string>
-    <string name="notification_ongoing_work_call" msgid="4071124825337695596">"Текући позив за Work"</string>
-    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Текући Wi-Fi позив"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="2914071877370405192">"Текући позив за Work преко Wi-Fi-ја"</string>
-    <string name="notification_on_hold" msgid="3480694969511790465">"На чекању"</string>
-    <string name="notification_incoming_call" msgid="2820429205043529642">"Долазни позив"</string>
-    <string name="notification_incoming_work_call" msgid="3581021176870685239">"Долазни позив за Work"</string>
-    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Долазни Wi-Fi позив"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="7126555701581469722">"Долазни позив за Work преко Wi-Fi-ја"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Долазни видео позив"</string>
-    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Захтев за долазни видео позив"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"Нова говорна пошта"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Нова говорна пошта (<xliff:g id="COUNT">%d</xliff:g>)"</string>
-    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Позови <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Непознат број говорне поште"</string>
-    <string name="notification_network_selection_title" msgid="4224455487793492772">"Нема услуге"</string>
-    <string name="notification_network_selection_text" msgid="2607085729661923269">"Изабрана мрежа (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) није доступна"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"Одговори"</string>
-    <string name="notification_action_end_call" msgid="6069460915123531620">"Прекини везу"</string>
-    <string name="notification_action_answer_video" msgid="7809271910870211729">"Видео"</string>
-    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Гласовни"</string>
-    <string name="notification_action_accept" msgid="2898609801209468429">"Прихвати"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"Одбиј"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Узврати позив"</string>
-    <string name="notification_missedCall_message" msgid="3049928912736917988">"Порука"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Да бисте упутили позив, прво искључите режим рада у авиону."</string>
-    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Није регистровано на мрежи."</string>
-    <string name="incall_error_out_of_service" msgid="4100065333878929223">"Мобилна мрежа није доступна."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Да бисте упутили позив, унесите важећи број."</string>
-    <string name="incall_error_call_failed" msgid="6302746943230078197">"Позив није успео."</string>
-    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Покретање MMI секвенце"</string>
-    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Услуга није подржана."</string>
-    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Замена позива није успела."</string>
-    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Раздвајање позива није успело."</string>
-    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Пребацивање није успело."</string>
-    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Конференцијски позив није успео."</string>
-    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Одбијање позива није успело."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Успостављање позива није успело."</string>
-    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"SIP позив"</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Хитан позив"</string>
-    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Укључивање радија…"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Нема мреже. Поновни покушај…"</string>
-    <string name="dial_emergency_error" msgid="1509085166367420355">"Позив није успео. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> није број за хитне случајеве."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Позив није успео. Позовите број за хитне случајеве."</string>
-    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Користите тастатуру за позивање"</string>
-    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Стави позив на чекање"</string>
-    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Настави позив"</string>
-    <string name="onscreenEndCallText" msgid="9039601192595655846">"Заврши позив"</string>
-    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Нумеричка тастатура"</string>
-    <string name="onscreenMuteText" msgid="5011369181754261374">"Искључи звук"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"Додај позив"</string>
-    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Обједини позиве"</string>
-    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Замени"</string>
-    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Управљајте позивима"</string>
-    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Управљај конф. позивом"</string>
-    <string name="onscreenAudioText" msgid="1710087112800041743">"Аудио"</string>
-    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Видео поз."</string>
-    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Промени у гласовни позив"</string>
-    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Промени камеру"</string>
-    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Паузирај видео"</string>
-    <string name="onscreenOverflowText" msgid="2702376562345723132">"Још опција"</string>
-    <string name="player_started" msgid="6046262510243983589">"Плејер је покренут"</string>
-    <string name="player_stopped" msgid="8856926759436364963">"Плејер је заустављен"</string>
-    <string name="camera_not_ready" msgid="4955261496193316240">"Камера није спремна"</string>
-    <string name="camera_ready" msgid="1903335385405807324">"Камера је спремна"</string>
-    <string name="unknown_call_session_event" msgid="2431061946920253582">"Непознат догађај сесије позива"</string>
-    <string name="voicemail_provider" msgid="5135942703327136909">"Услуга"</string>
-    <string name="voicemail_settings" msgid="72448049107749316">"Подешавање"</string>
-    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Није подешено&gt;"</string>
-    <string name="other_settings" msgid="3672912580359716394">"Друга подешавања позива"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Позивање преко <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
-    <string name="incoming_via_template" msgid="1696993226115570960">"Долазна преко <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
-    <string name="contactPhoto" msgid="4713193418046639466">"фотографија контакта"</string>
-    <string name="goPrivate" msgid="865837794424530980">"иди на приватно"</string>
-    <string name="selectContact" msgid="781975788478987237">"изаберите контакт"</string>
-    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Напишите сами…"</string>
-    <string name="custom_message_cancel" msgid="7516406059429609296">"Откажи"</string>
-    <string name="custom_message_send" msgid="5795754217085747742">"Пошаљи"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Одговори"</string>
-    <string name="description_target_send_sms" msgid="2098326025587950144">"Пошаљи SMS"</string>
-    <string name="description_target_decline" msgid="4789834364389731957">"Одбиј"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Одговорите видео позивом"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Одговорите аудио-позивом"</string>
-    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Прихвати захтев за видео"</string>
-    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Одбиј захтев за видео"</string>
-    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Прихвати захтев за одлазни видео позив"</string>
-    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"Одбиј захтев за одлазни видео позив"</string>
-    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"Прихвати захтев за долазни видео позив"</string>
-    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"Одбиј захтев за долазни видео позив"</string>
-    <string name="description_direction_up" msgid="4441409581444516690">"Превуците нагоре за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="description_direction_left" msgid="7129873384376533287">"Превуците улево за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="description_direction_right" msgid="2122584234531957308">"Превуците удесно за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="description_direction_down" msgid="4317245625565166742">"Превуците надоле за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Вибрација"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Вибрација"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Звук"</string>
-    <string name="default_notification_description" msgid="78174796906240970">"Подразумевани звук (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
-    <string name="ringtone_title" msgid="6374978286202084684">"Мелодија звона телефона"</string>
-    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Вибрирај када звони"</string>
-    <string name="preference_category_ringtone" msgid="5197960752529332721">"Мелодија звона и вибрација"</string>
-    <string name="manageConferenceLabel" msgid="4691922394301969053">"Управљање конференцијским позивом"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Број за хитне случајеве"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
+    <string name="phoneAppLabel" product="default" msgid="4753450867264774000">"Телефон"</string>
+    <string name="onHold" msgid="527593602772521700">"На чекању"</string>
+    <string name="unknown" msgid="3646075119047488748">"Непознат"</string>
+    <string name="private_num" msgid="6081418498487514686">"Приватан број"</string>
+    <string name="payphone" msgid="5743050584468748607">"Телефонска говорница"</string>
+    <string name="confCall" msgid="3181961445236675173">"Конференцијски позив"</string>
+    <string name="call_lost" msgid="8208184291640961172">"Позив је прекинут"</string>
+    <string name="audio_mode_speaker" msgid="6160127758732918123">"Звучник"</string>
+    <string name="audio_mode_earpiece" msgid="3138677187223932893">"Слушалица телефона"</string>
+    <string name="audio_mode_wired_headset" msgid="583080366967943196">"Жичане наглавне слушалице"</string>
+    <string name="audio_mode_bluetooth" msgid="3188504589946495676">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="3784275777844586675">"Желите ли да пошаљете следеће тонове?\n"</string>
+    <string name="pause_prompt_str" msgid="4507496811727697620">"Тонови се шаљу\n"</string>
+    <string name="send_button" msgid="4054398309483035794">"Пошаљи"</string>
+    <string name="pause_prompt_yes" msgid="6738588490007499118">"Да"</string>
+    <string name="pause_prompt_no" msgid="417286529736964178">"Не"</string>
+    <string name="wild_prompt_str" msgid="8178750766679617355">"Замените џокер знак са"</string>
+    <string name="caller_manage_header" msgid="4036790479287738218">"Конференцијски позив <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="2951965862286532957">"Број говорне поште"</string>
+    <string name="card_title_dialing" msgid="5046026076417718916">"Позива се"</string>
+    <string name="card_title_redialing" msgid="8072468059192027844">"Поново се бира"</string>
+    <string name="card_title_conf_call" msgid="1747835072739982104">"Конференцијски позив"</string>
+    <string name="card_title_incoming_call" msgid="4138485434087223132">"Долазни позив"</string>
+    <string name="card_title_incoming_work_call" msgid="7000583925426981712">"Долазни позив за Work"</string>
+    <string name="card_title_call_ended" msgid="5249815286629136486">"Позив је завршен"</string>
+    <string name="card_title_on_hold" msgid="5633854828341577689">"На чекању"</string>
+    <string name="card_title_hanging_up" msgid="3402022578391538671">"Веза се прекида"</string>
+    <string name="card_title_in_call" msgid="5029165346952099302">"Позив је у току"</string>
+    <string name="card_title_my_phone_number" msgid="3749572971322520177">"Мој број је <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"Повезује се видео позив"</string>
+    <string name="card_title_video_call" msgid="6519406270853889302">"Видео позив"</string>
+    <string name="card_title_video_call_requesting" msgid="1611293204379882739">"Захтева се видео позив"</string>
+    <string name="card_title_video_call_error" msgid="8488074823425848193">"Повезивање видео позива није успело"</string>
+    <string name="card_title_video_call_rejected" msgid="2885215432045215465">"Захтев за видео позив је одбијен"</string>
+    <string name="card_title_callback_number" msgid="7646082782307705748">"Број за повратни позив\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Број за хитан повратни позив\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="8080968169444117163">"Позива се"</string>
+    <string name="notification_missedCallTitle" msgid="2774630248151712215">"Пропуштен позив"</string>
+    <string name="notification_missedCallsTitle" msgid="263275811089605859">"Пропуштени позиви"</string>
+    <string name="notification_missedCallsMsg" msgid="69408330370667429">"Број пропуштених позива: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>"</string>
+    <string name="notification_missedCallTicker" msgid="1599269453813734699">"Пропуштен позив од: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8633734299234807397">"Текући позив"</string>
+    <string name="notification_ongoing_work_call" msgid="3465083293325006579">"Текући позив за Work"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4140639349603930166">"Текући Wi-Fi позив"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="8469582753279163976">"Текући позив за Work преко Wi-Fi-ја"</string>
+    <string name="notification_on_hold" msgid="3151343576023182586">"На чекању"</string>
+    <string name="notification_incoming_call" msgid="5904745644632328863">"Долазни позив"</string>
+    <string name="notification_incoming_work_call" msgid="281305845895342925">"Долазни позив за Work"</string>
+    <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Долазни Wi-Fi позив"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Долазни позив за Work преко Wi-Fi-ја"</string>
+    <string name="notification_incoming_video_call" msgid="7814873581838165772">"Долазни видео позив"</string>
+    <string name="notification_requesting_video_call" msgid="4844596091477863245">"Захтев за долазни видео позив"</string>
+    <string name="notification_voicemail_title" msgid="7595628197933709144">"Нова порука говорне поште"</string>
+    <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Нова порука говорне поште (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="6496440879085042069">"Позови <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="5433652017869242375">"Непознат број говорне поште"</string>
+    <string name="notification_network_selection_title" msgid="6785177943238085441">"Мобилна мрежа није доступна"</string>
+    <string name="notification_network_selection_text" msgid="9097902390701009591">"Изабрана мрежа (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) није доступна"</string>
+    <string name="notification_action_answer" msgid="8418990052527593953">"Одговори"</string>
+    <string name="notification_action_end_call" msgid="2152010639043225860">"Прекини везу"</string>
+    <string name="notification_action_answer_video" msgid="2400233093494856655">"Видео"</string>
+    <string name="notification_action_answer_voice" msgid="3206168292649273866">"Гласовни"</string>
+    <string name="notification_action_accept" msgid="8595047032790476122">"Прихватам"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Одбаци"</string>
+    <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Узврати позив"</string>
+    <string name="notification_missedCall_message" msgid="2407410183079324393">"Пошаљи SMS"</string>
+    <string name="incall_error_power_off" msgid="3626117639377110403">"Да бисте упутили позив, прво искључите режим рада у авиону."</string>
+    <string name="incall_error_emergency_only" msgid="8704761887752183855">"Није регистровано на мрежи."</string>
+    <string name="incall_error_out_of_service" msgid="1830319376612608339">"Мобилна мрежа није доступна."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Да бисте упутили позив, унесите важећи број."</string>
+    <string name="incall_error_call_failed" msgid="2213413937257570551">"Позив није успео."</string>
+    <string name="incall_status_dialed_mmi" msgid="8864341962086874751">"Покреће се MMI секвенца..."</string>
+    <string name="incall_error_supp_service_unknown" msgid="3390926762577861268">"Услуга није подржана."</string>
+    <string name="incall_error_supp_service_switch" msgid="4893764463854753730">"Замена позива није успела."</string>
+    <string name="incall_error_supp_service_separate" msgid="5469628699581380277">"Раздвајање позива није успело."</string>
+    <string name="incall_error_supp_service_transfer" msgid="3220469890457973326">"Пребацивање није успело."</string>
+    <string name="incall_error_supp_service_conference" msgid="3100373998543200356">"Конференцијски позив није успео."</string>
+    <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"Одбијање позива није успело."</string>
+    <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"Успостављање позива није успело."</string>
+    <string name="incall_call_type_label_sip" msgid="1327822795765282192">"SIP позив"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Хитни позив"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Укључује се радио…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Мобилна мрежа није доступна. Покушавамо поново…"</string>
+    <string name="dial_emergency_error" msgid="582305854626092376">"Позив није успео. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> није број за хитне случајеве."</string>
+    <string name="dial_emergency_empty_error" msgid="199888628163390267">"Позив није успео. Позовите број за хитне случајеве."</string>
+    <string name="dialerKeyboardHintText" msgid="8533449463925408141">"Користите тастатуру за позивање"</string>
+    <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Стави позив на чекање"</string>
+    <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Настави позив"</string>
+    <string name="onscreenEndCallText" msgid="1416981593311001074">"Заврши позив"</string>
+    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"Нумеричка тастатура"</string>
+    <string name="onscreenMuteText" msgid="5303380507675232140">"Игнориши"</string>
+    <string name="onscreenAddCallText" msgid="5577548650466595598">"Додај позив"</string>
+    <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Обједини позиве"</string>
+    <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Замени"</string>
+    <string name="onscreenManageCallsText" msgid="5491297234697209677">"Управљај позивима"</string>
+    <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Управљај конференцијским позивом"</string>
+    <string name="onscreenAudioText" msgid="8963459818052898299">"Аудио"</string>
+    <string name="onscreenVideoCallText" msgid="1578940167445068369">"Видео позив"</string>
+    <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Промени у гласовни позив"</string>
+    <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Промени камеру"</string>
+    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Паузирај видео"</string>
+    <string name="onscreenOverflowText" msgid="7932741239724473887">"Још опција"</string>
+    <string name="player_started" msgid="3478865572468310331">"Плејер је покренут"</string>
+    <string name="player_stopped" msgid="1278611664986561535">"Плејер је заустављен"</string>
+    <string name="camera_not_ready" msgid="6614469280264241251">"Камера није спремна"</string>
+    <string name="camera_ready" msgid="2614541247814590887">"Камера је спремна"</string>
+    <string name="unknown_call_session_event" msgid="2947023743819984299">"Непознат догађај сесије позива"</string>
+    <string name="voicemail_provider" msgid="2878119321474918370">"Услуга"</string>
+    <string name="voicemail_settings" msgid="7548868784816068975">"Подешавање"</string>
+    <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;Није подешено&gt;"</string>
+    <string name="other_settings" msgid="6699076019841942826">"Друга подешавања позива"</string>
+    <string name="calling_via_template" msgid="3539373093109976255">"Позива се преко добављача <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="6281138766370092800">"Долазни позив преко <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="6028825355597675193">"слика контакта"</string>
+    <string name="goPrivate" msgid="3554069451018659483">"иди на приватно"</string>
+    <string name="selectContact" msgid="92191462970821951">"изаберите контакт"</string>
+    <string name="respond_via_sms_custom_message" msgid="8210393177674619127">"Напишите сами…"</string>
+    <string name="custom_message_cancel" msgid="5920059627508662163">"Откажи"</string>
+    <string name="custom_message_send" msgid="3798076337006735995">"Пошаљи"</string>
+    <string name="description_target_answer" msgid="1111945818996518320">"Одговори"</string>
+    <string name="description_target_send_sms" msgid="3652217769615310018">"Пошаљи SMS"</string>
+    <string name="description_target_decline" msgid="7108154434759234035">"Одбиј"</string>
+    <string name="description_target_answer_video_call" msgid="4655616461181308405">"Одговори видео позивом"</string>
+    <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Одговори аудио-позивом"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="384894008955682630">"Прихвати захтев за видео"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="7342968876159189300">"Одбиј захтев за видео"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="4586773853073826378">"Прихвати захтев за одлазни видео позив"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="1191166008711514234">"Одбиј захтев за одлазни видео позив"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="2224978927364021080">"Прихвати захтев за долазни видео позив"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="3151115394424918077">"Одбиј захтев за долазни видео позив"</string>
+    <string name="description_direction_up" msgid="1735018141439291766">"Превуците нагоре за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_left" msgid="6811598791620851239">"Превуците улево за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="5461971399586296023">"Превуците удесно за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="3331715227997561639">"Превуците надоле за <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="4595145399183729630">"Вибрација"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="2390729279972461242">"Вибрација"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="1996920553949534944">"Звук"</string>
+    <string name="default_notification_description" msgid="4950807644546509965">"Подразумевани звук (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="835582004693335905">"Мелодија звона телефона"</string>
+    <string name="vibrate_on_ring_title" msgid="5019791043398986665">"Вибрирај када звони"</string>
+    <string name="preference_category_ringtone" msgid="6246687516643676729">"Мелодија звона и вибрација"</string>
+    <string name="manageConferenceLabel" msgid="7237614418556336108">"Управљај конференцијским позивом"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Број за хитне случајеве"</string>
+    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> секунда</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> секунде</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> секунди</item>
     </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> минут</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> минута</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> минута</item>
     </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
+    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> сат</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> сата</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> сати</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"Слика профила"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"Камера је искључена"</string>
-    <string name="child_number" msgid="7437330400723805538">"на <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="note_sent" msgid="3548700178238244595">"Белешка је послата"</string>
-    <string name="person_contact_context_title" msgid="723266617256740572">"Недавне поруке"</string>
-    <string name="business_contact_context_title" msgid="5334864183374669765">"Информације о предузећу"</string>
-    <string name="distance_imperial_away" msgid="437508440176409037">"Удаљеност је <xliff:g id="DISTANCE">%.1f</xliff:g> mi"</string>
-    <string name="distance_metric_away" msgid="166931929505893599">"Удаљеност је <xliff:g id="DISTANCE">%.1f</xliff:g> km"</string>
-    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
-    <string name="open_time_span" msgid="6709726401179550381">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
-    <string name="opening_hours" msgid="8524931350345922176">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
-    <string name="opens_tomorrow_at" msgid="9168271983241323946">"Отвара се сутра у <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
-    <string name="opens_today_at" msgid="9011139983701379907">"Отвара се данас у <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
-    <string name="closes_today_at" msgid="2623384032475495193">"Затвара се у <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
-    <string name="closed_today_at" msgid="324294933330883529">"Затворило се данас у <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
-    <string name="open_now" msgid="6439301193613349163">"Тренутно отворено"</string>
-    <string name="closed_now" msgid="9175774453982778909">"Тренутно затворено"</string>
+    <string name="profile_photo_description" msgid="7958198110870319358">"Слика профила"</string>
+    <string name="camera_off_description" msgid="4220023868645225790">"Камера је искључена"</string>
+    <string name="child_number" msgid="4469090994612105532">"на <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="7623014827902758398">"Белешка је послата"</string>
+    <string name="person_contact_context_title" msgid="8490058088809090979">"Недавне поруке"</string>
+    <string name="business_contact_context_title" msgid="8448362898576496764">"Информације о предузећу"</string>
+    <string name="distance_imperial_away" msgid="2083362798225798740">"Удаљеност је <xliff:g id="DISTANCE">%.1f</xliff:g> mi"</string>
+    <string name="distance_metric_away" msgid="9021396592464955256">"Удаљеност је <xliff:g id="DISTANCE">%.1f</xliff:g> km"</string>
+    <string name="display_address" msgid="444235484565491291">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="2762952234657271236">"<xliff:g id="OPEN_TIME">%1$s</xliff:g>–<xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="7803506319518398380">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="3567511490448488788">"Отвара се сутра у <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="6281212768937222891">"Отвара се данас у <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="4822369201263491509">"Затвара се у <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4060072663433467233">"Затворило се данас у <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="4615706338669555999">"Тренутно отворено"</string>
+    <string name="closed_now" msgid="2635314668145282080">"Тренутно затворено"</string>
 </resources>
