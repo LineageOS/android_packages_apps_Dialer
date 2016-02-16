@@ -118,7 +118,6 @@ public class InCallTonePlayer {
     }
 
     private void playOnBackgroundThread(ToneGeneratorInfo info) {
-        // TODO (maxwelb): b/26936902 respect Do Not Disturb setting
         ToneGenerator toneGenerator = null;
         try {
             Log.v(this, "Starting tone " + info);
