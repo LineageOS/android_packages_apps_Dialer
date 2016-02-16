@@ -18,6 +18,7 @@ package com.android.dialer;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -64,6 +65,11 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
 import com.android.services.callrecorder.CallRecordingDataStore;
+import com.android.dialer.widget.DialerQuickContact;
+import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
+
+import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 import java.util.List;
 
@@ -76,6 +82,7 @@ import java.util.List;
 public class CallDetailActivity extends Activity
         implements MenuItem.OnMenuItemClickListener {
     private static final String TAG = "CallDetail";
+    private static final boolean DEBUG = false;
 
      /** A long array extra containing ids of call log entries to display. */
     public static final String EXTRA_CALL_LOG_IDS = "EXTRA_CALL_LOG_IDS";
@@ -115,7 +122,9 @@ public class CallDetailActivity extends Activity
             final int numberPresentation = firstDetails.numberPresentation;
             final Uri contactUri = firstDetails.contactUri;
             final Uri photoUri = firstDetails.photoUri;
+            final long photoId = firstDetails.photoId;
             final PhoneAccountHandle accountHandle = firstDetails.accountHandle;
+            mInCallComponentName = firstDetails.inCallComponentName;
 
             // Cache the details about the phone number.
             final boolean canPlaceCallsTo =
@@ -154,7 +163,8 @@ public class CallDetailActivity extends Activity
             }
 
             mHasEditNumberBeforeCallOption =
-                    canPlaceCallsTo && !isSipNumber && !mIsVoicemailNumber;
+                    canPlaceCallsTo && !isSipNumber && !mIsVoicemailNumber &&
+                            mInCallComponentName == null;
             mHasReportMenuOption = mContactInfoHelper.canReportAsInvalid(
                     firstDetails.sourceType, firstDetails.objectId);
             invalidateOptionsMenu();
@@ -180,8 +190,8 @@ public class CallDetailActivity extends Activity
                 nameForDefaultImage = firstDetails.name.toString();
             }
 
-            loadContactPhotos(
-                    contactUri, photoUri, nameForDefaultImage, lookupKey, contactType);
+            loadContactPhotos(contactUri, photoUri, nameForDefaultImage, lookupKey, contactType,
+                    photoId, mInCallComponentName);
             findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
         }
 
@@ -204,7 +214,7 @@ public class CallDetailActivity extends Activity
 
     private Context mContext;
     private CallTypeHelper mCallTypeHelper;
-    private QuickContactBadge mQuickContactBadge;
+    private DialerQuickContact mDialerQuickContact;
     private TextView mCallerName;
     private TextView mCallerNumber;
     private TextView mAccountLabel;
@@ -212,6 +222,7 @@ public class CallDetailActivity extends Activity
     private ContactInfoHelper mContactInfoHelper;
 
     protected String mNumber;
+    private ComponentName mInCallComponentName;
     private boolean mIsVoicemailNumber;
     private String mDefaultCountryIso;
 
@@ -244,9 +255,9 @@ public class CallDetailActivity extends Activity
 
         mVoicemailUri = getIntent().getParcelableExtra(EXTRA_VOICEMAIL_URI);
 
-        mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
-        mQuickContactBadge.setOverlay(null);
-        mQuickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
+        mDialerQuickContact = (DialerQuickContact) findViewById(R.id.quick_contact_photo);
+        mDialerQuickContact.setOverlay(null);
+        mDialerQuickContact.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
         mCallerName = (TextView) findViewById(R.id.caller_name);
         mCallerNumber = (TextView) findViewById(R.id.caller_number);
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
@@ -257,6 +268,13 @@ public class CallDetailActivity extends Activity
         mCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mInCallComponentName != null) {
+                    CallMethodInfo cmi = CallMethodHelper.getCallMethod(mInCallComponentName);
+                    if (cmi != null) {
+                        cmi.placeCall(OriginCodes.CALL_LOG_CALL, mNumber, mContext, true);
+                        return;
+                    }
+                }
                 mContext.startActivity(IntentUtil.getCallIntent(mNumber));
             }
         });
@@ -315,17 +333,38 @@ public class CallDetailActivity extends Activity
 
     /** Load the contact photos and places them in the corresponding views. */
     private void loadContactPhotos(Uri contactUri, Uri photoUri, String displayName,
-            String lookupKey, int contactType) {
+            String lookupKey, int contactType, long photoId, ComponentName inCallComponentName) {
 
         final DefaultImageRequest request = new DefaultImageRequest(displayName, lookupKey,
                 contactType, true /* isCircular */);
 
-        mQuickContactBadge.assignContactUri(contactUri);
-        mQuickContactBadge.setContentDescription(
+        mDialerQuickContact.assignContactUri(contactUri);
+        mDialerQuickContact.setContentDescription(
                 mResources.getString(R.string.description_contact_details, displayName));
+        setAttributionImage(inCallComponentName);
 
-        mContactPhotoManager.loadDirectoryPhoto(mQuickContactBadge, photoUri,
-                false /* darkTheme */, true /* isCircular */, request);
+        if (photoId == 0 && photoUri != null) {
+            mContactPhotoManager.loadDirectoryPhoto(mDialerQuickContact.getQuickContactBadge(),
+                    photoUri, false /* darkTheme */, true /* isCircular */, request);
+        } else {
+            ContactPhotoManager.getInstance(mContext).loadThumbnail(
+                    mDialerQuickContact.getQuickContactBadge(), photoId, false /* darkTheme */,
+                    true /* isCircular */, request);
+        }
+    }
+
+    private void setAttributionImage(ComponentName cn) {
+        if (cn == null) {
+            mDialerQuickContact.setAttributionBadge(null);
+        } else {
+            CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
+            if (cmi == null) {
+                mDialerQuickContact.setAttributionBadge(null);
+                if (DEBUG) Log.d(TAG, "Call Method was Null for: " + cn.toShortString());
+            } else {
+                mDialerQuickContact.setAttributionBadge(cmi.mBadgeIcon);
+            }
+        }
     }
 
     @Override
@@ -349,6 +388,9 @@ public class CallDetailActivity extends Activity
                 .setOnMenuItemClickListener(this);
         menu.findItem(R.id.menu_report)
                 .setVisible(mHasReportMenuOption)
+                .setOnMenuItemClickListener(this);
+        menu.findItem(R.id.menu_add_to_blacklist)
+                .setVisible(mInCallComponentName == null)
                 .setOnMenuItemClickListener(this);
         return super.onPrepareOptionsMenu(menu);
     }

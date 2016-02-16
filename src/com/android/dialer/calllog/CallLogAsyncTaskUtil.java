@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,8 @@ import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
+
+import com.cyanogen.ambient.incall.CallLogConstants;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -61,7 +64,9 @@ public class CallLogAsyncTaskUtil {
             CallLog.Calls.PHONE_ACCOUNT_ID,
             CallLog.Calls.FEATURES,
             CallLog.Calls.DATA_USAGE,
-            CallLog.Calls.TRANSCRIPTION
+            CallLog.Calls.TRANSCRIPTION,
+            CallLog.Calls.CACHED_PHOTO_ID,
+            CallLogConstants.PLUGIN_PACKAGE_NAME
         };
 
         static final int DATE_COLUMN_INDEX = 0;
@@ -76,6 +81,8 @@ public class CallLogAsyncTaskUtil {
         static final int FEATURES = 9;
         static final int DATA_USAGE = 10;
         static final int TRANSCRIPTION_COLUMN_INDEX = 11;
+        static final int CACHED_PHOTO_ID = 12;
+        static final int PLUGIN_PACKAGE_NAME = 13;
     }
 
     public interface CallLogAsyncTaskListener {
@@ -188,6 +195,17 @@ public class CallLogAsyncTaskUtil {
 
             if (!cursor.isNull(CallDetailQuery.DATA_USAGE)) {
                 details.dataUsage = cursor.getLong(CallDetailQuery.DATA_USAGE);
+            }
+
+            if (!cursor.isNull(CallDetailQuery.CACHED_PHOTO_ID)) {
+                details.photoId = cursor.getLong(CallDetailQuery.CACHED_PHOTO_ID);
+            }
+
+            String component = cursor.getString(CallDetailQuery.PLUGIN_PACKAGE_NAME);
+            if (!TextUtils.isEmpty(component)) {
+                details.inCallComponentName = ComponentName.unflattenFromString(component);
+            } else {
+                details.inCallComponentName = null;
             }
 
             return details;

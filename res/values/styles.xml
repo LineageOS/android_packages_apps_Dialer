@@ -275,7 +275,7 @@
         <item name="redColor">@color/missed_call</item>
         <item name="orangeColor">@color/blacklisted_call</item>
     </style>
-    
+
     <style name="Theme.Material.Light.Dialog.NoTitle" parent="@android:style/Theme.Material.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
     </style>

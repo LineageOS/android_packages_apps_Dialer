@@ -2,6 +2,7 @@ package com.android.dialer.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -71,4 +72,15 @@ public class DialerQuickContact extends FrameLayout {
         invalidate();
     }
 
+    public void setOverlay(Drawable overlay) {
+        mQuickContactBadge.setOverlay(overlay);
+    }
+
+    public void setPrioritizedMimeType(String prioritizedMimeType) {
+        mQuickContactBadge.setPrioritizedMimeType(prioritizedMimeType);
+    }
+
+    public void assignContactUri(Uri contactUri) {
+        mQuickContactBadge.assignContactUri(contactUri);
+    }
 }
