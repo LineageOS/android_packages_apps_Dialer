@@ -27,9 +27,11 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,8 +65,9 @@ import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialerbind.ObjectFactory;
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -74,7 +77,7 @@ import java.util.List;
  */
 public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener, MenuItem.OnMenuItemClickListener,
-                View.OnCreateContextMenuListener {
+        View.OnCreateContextMenuListener {
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -196,23 +199,29 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      */
     public ContactInfo info;
 
+    /**
+     * Whether the current log entry is a blocked number or not. Used in updatePhoto()
+     */
+    public boolean isBlocked;
+
     private final Context mContext;
     private final CallLogCache mCallLogCache;
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+
     private final BlockNumberDialogFragment.Callback mFilteredNumberDialogCallback;
 
     private final int mPhotoSize;
-
     private ViewStub mExtendedBlockingViewStub;
-    private ExtendedBlockingButtonRenderer mExtendedBlockingButtonRenderer;
+    private final ExtendedBlockingButtonRenderer mExtendedBlockingButtonRenderer;
 
     private View.OnClickListener mExpandCollapseListener;
     private boolean mVoicemailPrimaryActionButtonClicked;
 
     private CallLogListItemViewHolder(
             Context context,
+            ExtendedBlockingButtonRenderer.Listener eventListener,
             View.OnClickListener expandCollapseListener,
             CallLogCache callLogCache,
             CallLogListItemHelper callLogListItemHelper,
@@ -244,7 +253,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         this.dayGroupHeader = dayGroupHeader;
         this.primaryActionButtonView = primaryActionButtonView;
         this.workIconView = (ImageView) rootView.findViewById(R.id.work_profile_icon);
-
         Resources resources = mContext.getResources();
         mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
 
@@ -259,20 +267,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         primaryActionButtonView.setOnClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
         primaryActionView.setOnCreateContextMenuListener(this);
+        mExtendedBlockingButtonRenderer =
+                ObjectFactory.newExtendedBlockingButtonRenderer(mContext, eventListener);
     }
 
     public static CallLogListItemViewHolder create(
             View view,
             Context context,
+            ExtendedBlockingButtonRenderer.Listener eventListener,
             View.OnClickListener expandCollapseListener,
             CallLogCache callLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
             BlockNumberDialogFragment.Callback filteredNumberDialogCallback) {
-
         return new CallLogListItemViewHolder(
                 context,
+                eventListener,
                 expandCollapseListener,
                 callLogCache,
                 callLogListItemHelper,
@@ -415,8 +426,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             mExtendedBlockingViewStub =
                     (ViewStub) actionsView.findViewById(R.id.extended_blocking_actions_container);
-            mExtendedBlockingButtonRenderer = ObjectFactory
-                    .newExtendedBlockingButtonRenderer(mContext, mExtendedBlockingViewStub);
         }
 
         bindActionButtons();
@@ -556,13 +565,22 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     callWithNoteButtonView,
                     detailsButtonView,
                     voicemailPlaybackView);
-            List<View> blockedNumberVisibleViews = new ArrayList<>();
+
+            List<View> blockedNumberVisibleViews = Lists.newArrayList(detailsButtonView);
             List<View> extendedBlockingVisibleViews = Lists.newArrayList(detailsButtonView);
 
-            mExtendedBlockingButtonRenderer.setCompleteListItemViews(completeLogListItems);
-            mExtendedBlockingButtonRenderer.setFilteredNumberViews(blockedNumberVisibleViews);
-            mExtendedBlockingButtonRenderer.setExtendedFilteredViews(extendedBlockingVisibleViews);
-            mExtendedBlockingButtonRenderer.render(number, countryIso);
+            ExtendedBlockingButtonRenderer.ViewHolderInfo viewHolderInfo =
+                    new ExtendedBlockingButtonRenderer.ViewHolderInfo(
+                            completeLogListItems,
+                            extendedBlockingVisibleViews,
+                            blockedNumberVisibleViews,
+                            number,
+                            countryIso,
+                            nameOrNumber.toString(),
+                            displayNumber);
+            mExtendedBlockingButtonRenderer.setViewHolderInfo(viewHolderInfo);
+
+            mExtendedBlockingButtonRenderer.render(mExtendedBlockingViewStub);
         }
     }
 
@@ -606,6 +624,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     public void updatePhoto() {
         quickContactView.assignContactUri(info.lookupUri);
+
+        if (isBlocked && !TextUtils.isEmpty(number) /* maybe a private number ? */) {
+            quickContactView.setImageDrawable(mContext.getDrawable(R.drawable.blocked_contact));
+            phoneCallDetailsViews.callLocationAndDate.setText(
+                    mContext.getString(R.string.blocked_number_call_log_label));
+            return;
+        }
 
         final boolean isVoicemail = mCallLogCache.isVoicemailNumber(accountHandle, number);
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
@@ -670,6 +695,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         CallLogListItemViewHolder viewHolder = new CallLogListItemViewHolder(
                 context,
+                null,
                 null /* expandCollapseListener */,
                 callLogCache,
                 new CallLogListItemHelper(phoneCallDetailsHelper, resources, callLogCache),
