@@ -58,23 +58,6 @@ public class RegularSearchFragment extends SearchFragment
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        DialtactsActivity da = (DialtactsActivity) getActivity();
-        if (da != null) {
-            CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        updateCallCreditInfo();
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         AnalyticsUtil.sendScreenView(this);
