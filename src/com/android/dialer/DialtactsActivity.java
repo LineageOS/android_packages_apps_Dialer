@@ -442,7 +442,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()) {
                 mSmartDialSearchFragment.setQueryString(mSearchQuery, false /* delaySelection */);
             } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
-                mRegularSearchFragment.setCurrentCallMethod(getCurrentCallMethod());
+                if (mCurrentCallMethod != null) {
+                    mRegularSearchFragment.setCurrentCallMethod(mCurrentCallMethod);
+                }
                 mRegularSearchFragment.setQueryString(mSearchQuery, false /* delaySelection */);
             }
         }
