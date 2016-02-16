@@ -25,7 +25,7 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/ic_block_24dp"
+    <item android:drawable="@drawable/ic_report_24dp"
         android:width="18dp"
         android:height="18dp"
         android:gravity="center" />
