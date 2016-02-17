@@ -995,4 +995,7 @@
 
     <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
     <string name="toast_cannot_write_system_settings">Phone app does not have permission to write to system settings.</string>
+
+    <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
+    <string name="blocked_number_call_log_label">Blocked</string>
 </resources>

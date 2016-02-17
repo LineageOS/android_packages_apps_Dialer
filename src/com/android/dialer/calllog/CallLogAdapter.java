@@ -35,6 +35,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.ArrayMap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -54,18 +56,20 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
-import com.android.incallui.CallerInfo;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Adapter class to fill in data for the Call Log.
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements CallLogGroupBuilder.GroupCreator,
-                VoicemailPlaybackPresenter.OnVoicemailDeletedListener {
+                VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
+                ExtendedBlockingButtonRenderer.Listener {
 
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
@@ -93,6 +97,7 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+    private final Map<String, Boolean> mBlockedNumberCache = new ArrayMap<>();
 
     protected ContactInfoCache mContactInfoCache;
 
@@ -293,6 +298,24 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     }
 
+    @Override
+    public void onBlockedNumber(String number,String countryIso) {
+        String cacheKey = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+        if (!TextUtils.isEmpty(cacheKey)) {
+            mBlockedNumberCache.put(cacheKey, true);
+            notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onUnblockedNumber( String number, String countryIso) {
+        String cacheKey = PhoneNumberUtils.formatNumberToE164(number, countryIso);
+        if (!TextUtils.isEmpty(cacheKey)) {
+            mBlockedNumberCache.put(cacheKey, false);
+            notifyDataSetChanged();
+        }
+    }
+
     /**
      * Requery on background thread when {@link Cursor} changes.
      */
@@ -364,6 +387,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallLogListItemViewHolder viewHolder = CallLogListItemViewHolder.create(
                 view,
                 mContext,
+                this,
                 mExpandCollapseListener,
                 mCallLogCache,
                 mCallLogListItemHelper,
