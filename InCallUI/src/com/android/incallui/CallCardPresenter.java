@@ -278,7 +278,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mPrimary.getState() == Call.State.INCOMING);
             updatePrimaryDisplayInfo();
             maybeStartSearch(mPrimary, true);
-            mPrimary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+            maybeClearSessionModificationState(mPrimary);
         }
 
         if (previousPrimary != null && mPrimary == null) {
@@ -298,7 +298,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     mSecondary.getState() == Call.State.INCOMING);
             updateSecondaryDisplayInfo();
             maybeStartSearch(mSecondary, false);
-            mSecondary.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+            maybeClearSessionModificationState(mSecondary);
         }
 
         // Start/stop timers.
@@ -560,6 +560,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // no need to start search for conference calls which show generic info.
         if (call != null && !call.isConferenceCall()) {
             startContactInfoSearch(call, isPrimary, call.getState() == Call.State.INCOMING);
+        }
+    }
+
+    private void maybeClearSessionModificationState(Call call) {
+        if (call.getSessionModificationState() !=
+                Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
+            call.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
         }
     }
 
