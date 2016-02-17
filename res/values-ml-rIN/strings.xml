@@ -81,7 +81,7 @@
     <string name="description_rate_decrease" msgid="3161652589401708284">"പ്ലേബാക്ക് നിരക്ക് കുറയ്‌ക്കുക"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"പ്ലേബാക്ക് നിരക്ക് വർദ്ധിപ്പിക്കുക"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"കോള്‍‌ ചരിത്രം"</string>
-    <string name="action_menu_overflow_description" msgid="2303272250613084574">"കൂടുതല്‍ ഓപ്‌ഷനുകള്‍"</string>
+    <string name="action_menu_overflow_description" msgid="2303272250613084574">"കൂടുതൽ‍ ഓപ്‌ഷനുകള്‍"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ഡയൽ പാഡ്"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"ഔട്ട്‌ഗോയിംഗ് മാത്രം കാണിക്കുക"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"ഇൻ‌കമിംഗ് മാത്രം കാണിക്കുക"</string>
