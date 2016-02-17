@@ -115,6 +115,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private int mFabNormalDiameter;
     private int mFabSmallDiameter;
     private boolean mIsLandscape;
+    private boolean mHasLargePhoto;
     private boolean mIsDialpadShowing;
 
     // Primary caller info
@@ -1333,7 +1334,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         int offsetY = 0;
         if (!mIsDialpadShowing) {
             offsetY = mFloatingActionButtonVerticalOffset;
-            if (mSecondaryCallInfo.isShown()) {
+            if (mSecondaryCallInfo.isShown() && mHasLargePhoto) {
                 offsetY -= mSecondaryCallInfo.getHeight();
             }
         }
@@ -1363,6 +1364,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
 
         mIsLandscape = getResources().getBoolean(R.bool.is_layout_landscape);
+        mHasLargePhoto = getResources().getBoolean(R.bool.has_large_photo);
 
         final ViewGroup parent = ((ViewGroup) mPrimaryCallCardContainer.getParent());
         final ViewTreeObserver observer = parent.getViewTreeObserver();
