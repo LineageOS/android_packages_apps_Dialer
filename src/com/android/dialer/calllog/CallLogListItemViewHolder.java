@@ -317,7 +317,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             blockCallerButtonView = actionsView.findViewById(R.id.block_caller_action);
             blockCallerButtonView.setOnClickListener(this);
-            updateBlockCallerView();
         }
 
         bindActionButtons();
@@ -460,6 +459,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         // Remove block caller item if blacklist is disabled
         if (mContactInfoHelper.canBlacklistCalls() && (cmi == null || !cmi.mIsInCallProvider)) {
             blockCallerButtonView.setVisibility(View.VISIBLE);
+            updateBlockCallerView();
         } else {
             blockCallerButtonView.setVisibility(View.GONE);
         }
