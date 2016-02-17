@@ -44,20 +44,21 @@
                   android:layout_height="wrap_content"
                   android:layout_gravity="center_horizontal" />
 
-        <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-        <include layout="@layout/secondary_call_info"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="bottom" />
-
     </LinearLayout>
 
     <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
     <FrameLayout
         android:id="@+id/answer_and_dialpad_container"
         android:layout_width="match_parent"
-        android:elevation="7dp"
+        android:elevation="@dimen/dialpad_elevation"
         android:layout_height="match_parent" />
+
+    <!-- Secondary "Call info" block, for the background ("on hold") call. -->
+    <include layout="@layout/secondary_call_info"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:elevation="4dp"
+             android:layout_alignParentBottom="true" />
 
     <FrameLayout
         android:id="@+id/floating_end_call_action_button_container"

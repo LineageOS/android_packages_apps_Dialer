@@ -16,6 +16,9 @@
   -->
 
 <resources>
+    <!-- Whether or not this layout displays a large photo. -->
+    <bool name="has_large_photo">false</bool>
+
     <!-- Whether or not the landscape mode layout is currently being used -->
     <bool name="is_layout_landscape">false</bool>
 
@@ -57,8 +60,8 @@
     <!-- Height and width of the in-call buttons. -->
     <dimen name="in_call_button_dimension">48dp</dimen>
 
-    <dimen name="primary_call_elevation">5dp</dimen>
-    <dimen name="dialpad_elevation">2dp</dimen>
+    <dimen name="primary_call_elevation">0dp</dimen>
+    <dimen name="dialpad_elevation">5dp</dimen>
 
     <!-- The InCallUI dialpad will sometimes want digits sizes that are different from dialer.
          Note: These are the default sizes for small (<600dp height) devices: larger screen sizes
