@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Para pesquisar seus contatos, ative as permissões para \"Contatos\"."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Para fazer uma chamada, ative a permissão para o app Telefone."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"O app Telefone não tem permissão para gravar nas configurações do sistema."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

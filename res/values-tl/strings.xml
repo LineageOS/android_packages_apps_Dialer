@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Upang hanapin ang iyong mga contact, i-on ang mga pahintulot sa Mga Contact."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Upang tumawag, i-on ang pahintulot ng Telepono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Walang pahintulot ang app ng Telepono na mag-write sa mga setting ng system."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

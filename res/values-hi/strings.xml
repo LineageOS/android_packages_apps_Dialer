@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"अपने संपर्कों की खोज करने के लिए, संपर्क अनुमतियों को चालू करें."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"कॉल करने के लिए, फ़ोन अनुमति चालू करें."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"फ़ोन ऐप को सिस्टम सेटिंग में लिखने की अनुमति नहीं है."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

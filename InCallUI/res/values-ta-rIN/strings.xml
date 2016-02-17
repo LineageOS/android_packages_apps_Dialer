@@ -33,7 +33,7 @@
     <string name="send_button" msgid="4054398309483035794">"அனுப்பு"</string>
     <string name="pause_prompt_yes" msgid="6738588490007499118">"ஆம்"</string>
     <string name="pause_prompt_no" msgid="417286529736964178">"வேண்டாம்"</string>
-    <string name="wild_prompt_str" msgid="8178750766679617355">"இதற்குப் பதிலாக சிறப்புக்குறியை மாற்றியமை"</string>
+    <string name="wild_prompt_str" msgid="8178750766679617355">"சிறப்புக்குறியை இதன் மூலம் மாற்றியமை"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"குழு அழைப்பு: <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="2951965862286532957">"குரலஞ்சல் எண்"</string>
     <string name="card_title_dialing" msgid="5046026076417718916">"அழைக்கிறது"</string>
@@ -107,7 +107,7 @@
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"அழைப்பை மீண்டும் தொடங்கு"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"அழைப்பை முடி"</string>
     <string name="onscreenShowDialpadText" msgid="8798170898298132499">"டயல்பேடு"</string>
-    <string name="onscreenMuteText" msgid="5303380507675232140">"முடக்கு"</string>
+    <string name="onscreenMuteText" msgid="5303380507675232140">"ஒலியடக்கு"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"அழைப்பைச் சேர்"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"அழைப்புகளை இணை"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"மாற்று"</string>

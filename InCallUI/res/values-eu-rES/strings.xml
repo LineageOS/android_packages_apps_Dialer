@@ -82,7 +82,7 @@
     <string name="notification_action_accept" msgid="8595047032790476122">"Onartu"</string>
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Baztertu"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Itzuli deia"</string>
-    <string name="notification_missedCall_message" msgid="2407410183079324393">"Mezua"</string>
+    <string name="notification_missedCall_message" msgid="2407410183079324393">"Bidali SMSa"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Deitzeko, desaktibatu hegaldi modua."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Ez dago sarean erregistratuta."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Sare mugikorra ez dago erabilgarri."</string>

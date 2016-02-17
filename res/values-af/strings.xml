@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Skakel die Kontakte-toestemmings aan om jou kontakte te deursoek."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Skakel die foontoestemming aan om \'n oproep te maak."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Foonprogram het nie toestemming om stelselinstellings te stel nie."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

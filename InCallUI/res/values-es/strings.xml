@@ -84,7 +84,7 @@
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Llamar"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Mensaje"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Para realizar una llamada, primero debes desactivar el modo avión."</string>
-    <string name="incall_error_emergency_only" msgid="8704761887752183855">"No registrado en la red"</string>
+    <string name="incall_error_emergency_only" msgid="8704761887752183855">"No estás registrado en la red."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"La red móvil no está disponible."</string>
     <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Para realizar una llamada, introduce un número válido."</string>
     <string name="incall_error_call_failed" msgid="2213413937257570551">"No se puede establecer la llamada."</string>
@@ -101,8 +101,8 @@
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Activando señal móvil…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Sin servicio. Reintentado…"</string>
     <string name="dial_emergency_error" msgid="582305854626092376">"No se puede establecer la llamada. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> no es un número de emergencia."</string>
-    <string name="dial_emergency_empty_error" msgid="199888628163390267">"No se puede establecer la llamada. Marcar un número de emergencia."</string>
-    <string name="dialerKeyboardHintText" msgid="8533449463925408141">"Utilizar teclado para marcar"</string>
+    <string name="dial_emergency_empty_error" msgid="199888628163390267">"No se puede establecer la llamada. Marca un número de emergencia."</string>
+    <string name="dialerKeyboardHintText" msgid="8533449463925408141">"Usa el teclado para marcar"</string>
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Retener llamada"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Seguir con la llamada"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"Finalizar llamada"</string>

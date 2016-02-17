@@ -28,12 +28,12 @@
     <string name="audio_mode_earpiece" msgid="3138677187223932893">"हेन्डसेट इयरपिस"</string>
     <string name="audio_mode_wired_headset" msgid="583080366967943196">"तारसहितको हेडसेट"</string>
     <string name="audio_mode_bluetooth" msgid="3188504589946495676">"ब्लुटुथ"</string>
-    <string name="wait_prompt_str" msgid="3784275777844586675">"निम्न टोनहरू पठाउने?\n"</string>
+    <string name="wait_prompt_str" msgid="3784275777844586675">"निम्न टोनहरू पठाउने हो?\n"</string>
     <string name="pause_prompt_str" msgid="4507496811727697620">"टोनहरू\n पठाउँदै"</string>
     <string name="send_button" msgid="4054398309483035794">"पठाउनुहोस्"</string>
     <string name="pause_prompt_yes" msgid="6738588490007499118">"हो"</string>
     <string name="pause_prompt_no" msgid="417286529736964178">"होइन"</string>
-    <string name="wild_prompt_str" msgid="8178750766679617355">"यसलाई वाइल्ड वर्ण राखेर बदल्नुहोस्"</string>
+    <string name="wild_prompt_str" msgid="8178750766679617355">"यसलाई वाइल्ड क्यारेक्टर राखेर बदल्नुहोस्"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"सम्मेलन कल <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="2951965862286532957">"भ्वाइस मेल नम्बर"</string>
     <string name="card_title_dialing" msgid="5046026076417718916">"डायल गर्दै"</string>
@@ -59,9 +59,9 @@
     <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> छुटेका कलहरू"</string>
     <string name="notification_missedCallTicker" msgid="1599269453813734699">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> बाट आएको छुटेको कल"</string>
     <string name="notification_ongoing_call" msgid="8633734299234807397">"चलिरहेको कल"</string>
-    <string name="notification_ongoing_work_call" msgid="3465083293325006579">"चालू रहेको कार्यालयको कल"</string>
-    <string name="notification_ongoing_call_wifi" msgid="4140639349603930166">"चालू रहेको WI-Fi कल"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="8469582753279163976">"Wi-Fi मार्फत चालू रहेको कार्यालयको कल"</string>
+    <string name="notification_ongoing_work_call" msgid="3465083293325006579">"चालु रहेको कार्यालयको कल"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4140639349603930166">"चालु रहेको WI-Fi कल"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="8469582753279163976">"Wi-Fi मार्फत चालु रहेको कार्यालयको कल"</string>
     <string name="notification_on_hold" msgid="3151343576023182586">"होल्डमा"</string>
     <string name="notification_incoming_call" msgid="5904745644632328863">"आगमन कल"</string>
     <string name="notification_incoming_work_call" msgid="281305845895342925">"कार्यालयबाट आएको कल"</string>
@@ -103,7 +103,7 @@
     <string name="dial_emergency_error" msgid="582305854626092376">"कल गर्न सकिंदैन। <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> आपतकालीन नम्बर होइन।"</string>
     <string name="dial_emergency_empty_error" msgid="199888628163390267">"कल गर्न सकिंदैन। आपतकालीन नम्बर डायल गर्नुहोस्।"</string>
     <string name="dialerKeyboardHintText" msgid="8533449463925408141">"डायल गर्न किबोर्ड प्रयोग गर्नुहोस्"</string>
-    <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"कल होल्ड गर्नुहोस्"</string>
+    <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"कललाई होल्ड गर्नुहोस्"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"कललाई पुन: निरन्तरता दिनुहोस्"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"कल अन्त्य गर्नुहोस्"</string>
     <string name="onscreenShowDialpadText" msgid="8798170898298132499">"डायल प्याड"</string>
@@ -177,13 +177,13 @@
     <string name="child_number" msgid="4469090994612105532">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> बाट"</string>
     <string name="note_sent" msgid="7623014827902758398">"नोट पठाइयो"</string>
     <string name="person_contact_context_title" msgid="8490058088809090979">"भर्खरैका सन्देशहरू"</string>
-    <string name="business_contact_context_title" msgid="8448362898576496764">"व्यवसाय जानकारी"</string>
+    <string name="business_contact_context_title" msgid="8448362898576496764">"व्यवसाय बारे जानकारी"</string>
     <string name="distance_imperial_away" msgid="2083362798225798740">"<xliff:g id="DISTANCE">%.1f</xliff:g> माइल टाढा"</string>
     <string name="distance_metric_away" msgid="9021396592464955256">"<xliff:g id="DISTANCE">%.1f</xliff:g> किलोमिटर टाढा"</string>
     <string name="display_address" msgid="444235484565491291">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
     <string name="open_time_span" msgid="2762952234657271236">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
     <string name="opening_hours" msgid="7803506319518398380">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
-    <string name="opens_tomorrow_at" msgid="3567511490448488788">"भोली <xliff:g id="OPEN_TIME">%s</xliff:g> मा खुल्छ"</string>
+    <string name="opens_tomorrow_at" msgid="3567511490448488788">"भोलि <xliff:g id="OPEN_TIME">%s</xliff:g> मा खुल्छ"</string>
     <string name="opens_today_at" msgid="6281212768937222891">"आज <xliff:g id="OPEN_TIME">%s</xliff:g> मा खुल्छ"</string>
     <string name="closes_today_at" msgid="4822369201263491509">"<xliff:g id="CLOSE_TIME">%s</xliff:g> मा बन्द हुन्छ"</string>
     <string name="closed_today_at" msgid="4060072663433467233">"आज <xliff:g id="CLOSE_TIME">%s</xliff:g> मा बन्द भयो"</string>

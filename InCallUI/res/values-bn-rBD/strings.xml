@@ -121,8 +121,8 @@
     <string name="onscreenOverflowText" msgid="7932741239724473887">"আরো বিকল্প"</string>
     <string name="player_started" msgid="3478865572468310331">"প্লেয়ার শুরু হয়েছে"</string>
     <string name="player_stopped" msgid="1278611664986561535">"প্লেয়ার বন্ধ হয়ে গেছে"</string>
-    <string name="camera_not_ready" msgid="6614469280264241251">"ক্যামেরা প্রস্তুত নেই"</string>
-    <string name="camera_ready" msgid="2614541247814590887">"ক্যামেরা প্রস্তুত"</string>
+    <string name="camera_not_ready" msgid="6614469280264241251">"ক্যামেরা রেডি নয়"</string>
+    <string name="camera_ready" msgid="2614541247814590887">"ক্যামেরা রেডি"</string>
     <string name="unknown_call_session_event" msgid="2947023743819984299">"অজানা কল অধিবেশনের ইভেন্ট"</string>
     <string name="voicemail_provider" msgid="2878119321474918370">"পরিষেবা"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"সেটআপ"</string>

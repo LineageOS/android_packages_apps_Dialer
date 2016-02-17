@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"ដើម្បីស្វែងរកទំនាក់ទំនងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតទំនាក់ទំនង។"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ដើម្បីធ្វើការហៅទូរស័ព្ទ សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីហៅទូរស័ព្ទ។"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"កម្មវិធីទូរស័ព្ទមិនមានសិទ្ធិអនុញ្ញាតដើម្បីសរសេរការកំណត់ប្រព័ន្ធទេ។"</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

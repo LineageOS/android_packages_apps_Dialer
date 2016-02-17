@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"За да търсите в контактите си, включете разрешенията за тях."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"За да извършите обаждане, включете разрешението за Телефон."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Приложението Телефон няма разрешение да записва в системните настройки."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

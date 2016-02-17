@@ -81,7 +81,7 @@
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Veu"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Accepta"</string>
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Ignora"</string>
-    <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Torna truc."</string>
+    <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Torna trucada"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Missatge"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Per fer una trucada, primer desactiva el mode d\'avió."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"No s\'ha registrat a la xarxa."</string>
@@ -114,8 +114,8 @@
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Gestiona les trucades"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Gestiona la conferència"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"Àudio"</string>
-    <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videotruc."</string>
-    <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Canvia a trucada"</string>
+    <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videotrucada"</string>
+    <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Canvia a trucada de veu"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Canvia la càmera"</string>
     <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Posa en pausa el vídeo"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Més opcions"</string>

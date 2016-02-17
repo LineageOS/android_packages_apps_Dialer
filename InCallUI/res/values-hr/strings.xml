@@ -46,7 +46,7 @@
     <string name="card_title_hanging_up" msgid="3402022578391538671">"Prekidanje veze"</string>
     <string name="card_title_in_call" msgid="5029165346952099302">"Poziv u tijeku"</string>
     <string name="card_title_my_phone_number" msgid="3749572971322520177">"Moj je broj <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
-    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"Povezivanje videopoziva"</string>
+    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"Uspostavljanje videopoziva"</string>
     <string name="card_title_video_call" msgid="6519406270853889302">"Videopoziv"</string>
     <string name="card_title_video_call_requesting" msgid="1611293204379882739">"Zahtijevanje videopoziva"</string>
     <string name="card_title_video_call_error" msgid="8488074823425848193">"Videopoziv nije uspostavljen"</string>

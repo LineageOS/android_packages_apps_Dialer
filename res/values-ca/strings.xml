@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Per cercar els teus contactes, activa els permisos de Contactes."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Activa el permís Telèfon per fer una trucada."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'aplicació Telèfon no té permís per escriure a la configuració del sistema."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

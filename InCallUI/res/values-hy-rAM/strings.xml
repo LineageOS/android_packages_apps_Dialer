@@ -83,7 +83,7 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Փակել"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Հետ զանգել"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Հաղորդագրություն"</string>
-    <string name="incall_error_power_off" msgid="3626117639377110403">"Զանգ կատարելու համար նախ անջատեք թռիչքային ռեժիմը:"</string>
+    <string name="incall_error_power_off" msgid="3626117639377110403">"Զանգ կատարելու համար նախ անջատեք Ինքնաթիռային ռեժիմը:"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Ցանցում գրանցված չէ:"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Բջջային ցանցն անհասանելի է:"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Զանգ կատարելու համար մուտքագրեք ճիշտ համար:"</string>
@@ -147,10 +147,10 @@
     <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="1191166008711514234">"Մերժել տեսափոխանցման հարցումը"</string>
     <string name="description_target_accept_upgrade_to_video_receive_request" msgid="2224978927364021080">"Ընդունել տեսազանգ ստանալու հարցումը"</string>
     <string name="description_target_decline_upgrade_to_video_receive_request" msgid="3151115394424918077">"Մերժել տեսազանգ ստանալու հարցումը"</string>
-    <string name="description_direction_up" msgid="1735018141439291766">"Սահեցրեք վերև` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
-    <string name="description_direction_left" msgid="6811598791620851239">"Սահեցրեք ձախ` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
-    <string name="description_direction_right" msgid="5461971399586296023">"Սահեցրեք աջ` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
-    <string name="description_direction_down" msgid="3331715227997561639">"Սահեցրեք ցած՝ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>-ի համար:"</string>
+    <string name="description_direction_up" msgid="1735018141439291766">"Սահեցրեք վերև` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> գործառույթի համար:"</string>
+    <string name="description_direction_left" msgid="6811598791620851239">"Սահեցրեք ձախ` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> գործառույթի համար:"</string>
+    <string name="description_direction_right" msgid="5461971399586296023">"Սահեցրեք աջ` <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> գործառույթի համար:"</string>
+    <string name="description_direction_down" msgid="3331715227997561639">"Սահեցրեք ցած՝ <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> գործառույթի համար:"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="4595145399183729630">"Թրթռոց"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="2390729279972461242">"Թրթռոց"</string>
     <string name="voicemail_notification_ringtone_title" msgid="1996920553949534944">"Ձայն"</string>

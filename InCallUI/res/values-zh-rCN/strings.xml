@@ -46,10 +46,10 @@
     <string name="card_title_hanging_up" msgid="3402022578391538671">"正在挂断"</string>
     <string name="card_title_in_call" msgid="5029165346952099302">"正在通话"</string>
     <string name="card_title_my_phone_number" msgid="3749572971322520177">"我的电话号码：<xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
-    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"正在建立视频连接"</string>
+    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"正在接通视频"</string>
     <string name="card_title_video_call" msgid="6519406270853889302">"视频通话"</string>
     <string name="card_title_video_call_requesting" msgid="1611293204379882739">"正在发出视频请求"</string>
-    <string name="card_title_video_call_error" msgid="8488074823425848193">"无法建立视频通话连接"</string>
+    <string name="card_title_video_call_error" msgid="8488074823425848193">"无法接通视频通话"</string>
     <string name="card_title_video_call_rejected" msgid="2885215432045215465">"视频请求遭拒"</string>
     <string name="card_title_callback_number" msgid="7646082782307705748">"您的回拨号码如下：\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"您的紧急回拨号码如下：\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
@@ -68,7 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"WLAN 来电"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"WLAN 工作来电"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"视频通话来电"</string>
-    <string name="notification_requesting_video_call" msgid="4844596091477863245">"收到视频请求"</string>
+    <string name="notification_requesting_video_call" msgid="4844596091477863245">"收到视频通话请求"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"新语音邮件"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"新语音邮件 (<xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="notification_voicemail_text_format" msgid="6496440879085042069">"拨打 <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
@@ -131,7 +131,7 @@
     <string name="calling_via_template" msgid="3539373093109976255">"正在通过<xliff:g id="PROVIDER_NAME">%s</xliff:g>进行通话"</string>
     <string name="incoming_via_template" msgid="6281138766370092800">"有人通过<xliff:g id="PROVIDER_NAME">%s</xliff:g>来电"</string>
     <string name="contactPhoto" msgid="6028825355597675193">"联系人照片"</string>
-    <string name="goPrivate" msgid="3554069451018659483">"私聊"</string>
+    <string name="goPrivate" msgid="3554069451018659483">"单独通话"</string>
     <string name="selectContact" msgid="92191462970821951">"选择联系人"</string>
     <string name="respond_via_sms_custom_message" msgid="8210393177674619127">"自行撰写回复…"</string>
     <string name="custom_message_cancel" msgid="5920059627508662163">"取消"</string>
@@ -175,7 +175,7 @@
     <string name="profile_photo_description" msgid="7958198110870319358">"个人资料照片"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"摄像头已关闭"</string>
     <string name="child_number" msgid="4469090994612105532">"通过 <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="note_sent" msgid="7623014827902758398">"已发送记事"</string>
+    <string name="note_sent" msgid="7623014827902758398">"已发送备注"</string>
     <string name="person_contact_context_title" msgid="8490058088809090979">"最近的信息"</string>
     <string name="business_contact_context_title" msgid="8448362898576496764">"商家信息"</string>
     <string name="distance_imperial_away" msgid="2083362798225798740">"<xliff:g id="DISTANCE">%.1f</xliff:g> 英里远"</string>

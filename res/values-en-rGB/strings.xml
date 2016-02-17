@@ -254,4 +254,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"To search your contacts, turn on the Contacts permissions."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"To place a call, turn on the Phone permission."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Phone app does not have permission to write to system settings."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>
