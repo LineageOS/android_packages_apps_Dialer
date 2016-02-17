@@ -1293,11 +1293,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public void moveFabInSearchUI() {
         if (mGlobalCreditsBar.getVisibility() == View.VISIBLE) {
-            mFloatingActionButtonController.align(
-                    FloatingActionButtonController.ALIGN_END, 0 /* offsetX */, -125, true);
+            mFloatingActionButtonController.align(getFabAlignment(), 0 /* offsetX */, -125, true);
         } else {
-            mFloatingActionButtonController.align(
-                    FloatingActionButtonController.ALIGN_END, true /* animate */);
+            mFloatingActionButtonController.align(getFabAlignment(), true /* animate */);
         }
     }
 
