@@ -256,4 +256,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Щоб шукати контакти, увімкніть дозвіл \"Контакти\"."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Щоб зателефонувати, увімкніть дозвіл \"Телефон\"."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Додаток Телефон не має дозволу змінювати системні налаштування."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

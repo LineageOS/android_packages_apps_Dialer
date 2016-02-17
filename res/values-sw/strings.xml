@@ -252,4 +252,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Ili utafute anwani zako, washa ruhusa za Anwani."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Ili upige simu, washa ruhusa ya Simu."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Programu ya simu haina ruhusa ya kuandika kwenye mipangilio ya mfumo."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

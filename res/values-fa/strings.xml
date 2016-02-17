@@ -131,7 +131,7 @@
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"تماس با این شماره ممکن نیست"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"‏برای راه‌اندازی پست صوتی به منو &gt; تنظیمات بروید."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"برای تماس با پست صوتی، ابتدا حالت هواپیما را غیرفعال کنید."</string>
-    <string name="contact_list_loading" msgid="5488620820563977329">"در حال بارگیری..."</string>
+    <string name="contact_list_loading" msgid="5488620820563977329">"در حال بارکردن…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"در حال بارگیری سیم کارت..."</string>
@@ -252,4 +252,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"برای جستجوی مخاطبینتان، مجوزهای مخاطبین را روشن کنید."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"برای برقراری تماس، مجوز «تلفن» را روشن کنید."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"برنامه تلفن اجازه نوشتن در تنظیمات سیستم را ندارد."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

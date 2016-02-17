@@ -252,4 +252,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"連絡先を検索するには、連絡先権限をONにしてください。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"電話をかけるには、電話権限をONにしてください。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話アプリにはシステム設定への書き込み権限がありません。"</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>

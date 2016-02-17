@@ -260,4 +260,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"للبحث عن جهات الاتصال، عليك تشغيل أذونات جهات الاتصال."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"لإجراء مكالمة، شغِّل إذن الهاتف."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ليس لدى تطبيق الهاتف إذن لتعديل إعدادات النظام."</string>
+    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
 </resources>
