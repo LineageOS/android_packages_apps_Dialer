@@ -46,30 +46,31 @@ public abstract class IntentProvider {
 
     public abstract Intent getIntent(Context context);
 
-    public static IntentProvider getReturnCallIntentProvider(final String number) {
-        return getReturnCallIntentProvider(number, null);
+    public static IntentProvider getReturnCallIntentProvider(final String number, String origin) {
+        return getReturnCallIntentProvider(number, null, origin);
     }
 
     public static IntentProvider getReturnCallIntentProvider(final String number,
-            final PhoneAccountHandle accountHandle) {
+            final PhoneAccountHandle accountHandle, final String origin) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return IntentUtil.getCallIntent(number, accountHandle);
+                return IntentUtil.getCallIntent(number, accountHandle, origin);
             }
         };
     }
 
-    public static IntentProvider getReturnVideoCallIntentProvider(final String number) {
-        return getReturnVideoCallIntentProvider(number, null);
+    public static IntentProvider getReturnVideoCallIntentProvider(final String number,
+                                                                  String origin) {
+        return getReturnVideoCallIntentProvider(number, null, origin);
     }
 
     public static IntentProvider getReturnVideoCallIntentProvider(final String number,
-            final PhoneAccountHandle accountHandle) {
+            final PhoneAccountHandle accountHandle, final String origin) {
         return new IntentProvider() {
             @Override
             public Intent getIntent(Context context) {
-                return IntentUtil.getVideoCallIntent(number, accountHandle);
+                return IntentUtil.getVideoCallIntent(number, origin, accountHandle);
             }
         };
     }

@@ -59,6 +59,7 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 
 import com.android.phone.common.incall.CallMethodHelper;
+import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 
@@ -355,7 +356,10 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 }
                 break;
         }
-        DialerUtils.startActivityWithErrorToast(context, intent);
+        if (callOrigin == null) {
+            callOrigin = OriginCodes.CONTACTS_TAB;
+        }
+        DialerUtils.startActivityWithErrorToast(context, intent, callOrigin);
     }
 
     /**

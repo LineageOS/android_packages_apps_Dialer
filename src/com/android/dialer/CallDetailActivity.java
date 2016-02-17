@@ -275,7 +275,8 @@ public class CallDetailActivity extends Activity
                         return;
                     }
                 }
-                mContext.startActivity(IntentUtil.getCallIntent(mNumber));
+                mContext.startActivity(IntentUtil.getCallIntent(mNumber,
+                        OriginCodes.CALL_LOG_CALL));
             }
         });
 

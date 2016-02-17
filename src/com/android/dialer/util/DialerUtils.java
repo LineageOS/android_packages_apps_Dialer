@@ -44,6 +44,8 @@ import com.android.dialer.widget.EmptyContentView;
 import com.android.incallui.CallCardFragment;
 import com.android.incallui.Log;
 
+import com.android.phone.common.PhoneConstants;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -62,7 +64,19 @@ public class DialerUtils {
      * @param intent to start the activity with.
      */
     public static void startActivityWithErrorToast(Context context, Intent intent) {
-        startActivityWithErrorToast(context, intent, R.string.activity_not_available);
+        startActivityWithErrorToast(context, intent, R.string.activity_not_available, null);
+    }
+
+    /**
+     * Attempts to start an activity and displays a toast with the default error message if the
+     * activity is not found, instead of throwing an exception.
+     *
+     * @param context to start the activity with.
+     * @param intent to start the activity with.
+     * @param origin that started the call
+     */
+    public static void startActivityWithErrorToast(Context context, Intent intent, String origin) {
+        startActivityWithErrorToast(context, intent, R.string.activity_not_available, origin);
     }
 
     /**
@@ -75,6 +89,21 @@ public class DialerUtils {
      *              not found.
      */
     public static void startActivityWithErrorToast(Context context, Intent intent, int msgId) {
+        startActivityWithErrorToast(context, intent, msgId, null);
+    }
+
+    /**
+     * Attempts to start an activity and displays a toast with a provided error message if the
+     * activity is not found, instead of throwing an exception.
+     *
+     * @param context to start the activity with.
+     * @param intent to start the activity with.
+     * @param msgId Resource ID of the string to display in an error message if the activity is
+     *              not found.
+     * @param origin Area of the dialer app where the activity was started.
+     */
+    public static void startActivityWithErrorToast(Context context, Intent intent, int msgId,
+                                                   String origin) {
         try {
             if ((IntentUtil.CALL_ACTION.equals(intent.getAction())
                             && context instanceof Activity)) {
@@ -84,6 +113,9 @@ public class DialerUtils {
                     Bundle extras = new Bundle();
                     extras.putParcelable(TouchPointManager.TOUCH_POINT, touchPoint);
                     intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
+                }
+                if (origin != null) {
+                    intent.putExtra(PhoneConstants.EXTRA_CALL_ORIGIN, origin);
                 }
                 final TelecomManager tm =
                         (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);

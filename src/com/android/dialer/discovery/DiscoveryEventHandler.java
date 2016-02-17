@@ -1,7 +1,9 @@
 package com.android.dialer.discovery;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -28,6 +30,8 @@ import com.cyanogen.ambient.incall.results.InCallProviderInfoResult;
 import com.cyanogen.ambient.incall.results.PluginStatusResult;
 import com.cyanogen.ambient.plugin.PluginStatus;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -138,6 +142,31 @@ public class DiscoveryEventHandler {
                             NotificationNudge.Button button = (NotificationNudge.Button) action;
                             nn.addButton(button);
                         }
+
+                        Intent intent = new Intent(context, DiscoverySignalReceiver.class);
+                        intent.setAction(DiscoverySignalReceiver.DISCOVERY_NUDGE_SHOWN);
+
+                        String nudgeID;
+                        try {
+                            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+                            messageDigest.update(b.getString(NudgeKey.NOTIFICATION_PARAM_BODY)
+                                    .getBytes());
+                            nudgeID = new String(messageDigest.digest());
+                        } catch (NoSuchAlgorithmException e) {
+                            Log.e(TAG, "No Algo, defaulting to unknown", e);
+                            nudgeID = "unkown";
+                        }
+                        intent.putExtra(DiscoverySignalReceiver.NUDGE_ID, nudgeID);
+
+                        intent.putExtra(DiscoverySignalReceiver.NUDGE_KEY, key);
+
+                        intent.putExtra(DiscoverySignalReceiver.NUDGE_COMPONENT,
+                                component.flattenToShortString());
+
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        nn.setOnShowIntent(pendingIntent);
 
                         notificationNudges.add(nn);
                     }

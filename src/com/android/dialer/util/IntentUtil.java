@@ -26,6 +26,7 @@ import android.telecom.VideoProfile;
 
 import com.android.contacts.common.CallUtil;
 import com.android.phone.common.PhoneConstants;
+import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 /**
  * Utilities for creation of intents in Dialer, such as {@link Intent#ACTION_CALL}.
@@ -41,37 +42,38 @@ public class IntentUtil {
      * automatically.
      */
     public static Intent getCallIntent(String number) {
-        return getCallIntent(number, null, null);
+        return getCallIntent(number, null);
+    }
+
+    /**
+     * Return an Intent for making a phone call. Scheme (e.g. tel, sip) will be determined
+     * automatically.
+     */
+    public static Intent getCallIntent(String number, String origin) {
+        return getCallIntent(number, origin, null);
     }
 
     /**
      * Return an Intent for making a phone call. A given Uri will be used as is (without any
      * sanity check).
      */
-    public static Intent getCallIntent(Uri uri) {
-        return getCallIntent(uri, null, null);
-    }
-
-    /**
-     * A variant of {@link #getCallIntent(String)} but also accept a call origin.
-     * For more information about call origin, see comments in Phone package (PhoneApp).
-     */
-    public static Intent getCallIntent(String number, String callOrigin) {
-        return getCallIntent(CallUtil.getCallUri(number), callOrigin, null);
+    public static Intent getCallIntent(Uri uri, String origin) {
+        return getCallIntent(uri, origin, null);
     }
 
     /**
      * A variant of {@link #getCallIntent(String)} but also include {@code Account}.
      */
-    public static Intent getCallIntent(String number, PhoneAccountHandle accountHandle) {
-        return getCallIntent(number, null, accountHandle);
+    public static Intent getCallIntent(String number, PhoneAccountHandle accountHandle,
+                                       String origin) {
+        return getCallIntent(number, origin, accountHandle);
     }
 
     /**
      * A variant of {@link #getCallIntent(android.net.Uri)} but also include {@code Account}.
      */
-    public static Intent getCallIntent(Uri uri, PhoneAccountHandle accountHandle) {
-        return getCallIntent(uri, null, accountHandle);
+    public static Intent getCallIntent(Uri uri, PhoneAccountHandle accountHandle, String origin) {
+        return getCallIntent(uri, origin, accountHandle);
     }
 
     /**
@@ -115,15 +117,17 @@ public class IntentUtil {
      * A variant of {@link #getCallIntent(String, String, android.telecom.PhoneAccountHandle)} for
      * starting a video call.
      */
-    public static Intent getVideoCallIntent(String number, PhoneAccountHandle accountHandle) {
-        return getVideoCallIntent(number, null, accountHandle);
+    public static Intent getVideoCallIntent(String number, PhoneAccountHandle accountHandle,
+                                            String origin) {
+        return getVideoCallIntent(number, origin, accountHandle);
     }
 
     /**
      * A variant of {@link #getCallIntent(android.net.Uri)} for calling Voicemail.
      */
     public static Intent getVoicemailIntent() {
-        return getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null));
+        return getCallIntent(Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null),
+                OriginCodes.GENERIC_CALL);
     }
 
     /**

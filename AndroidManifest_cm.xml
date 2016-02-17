@@ -28,6 +28,9 @@
 
     <application>
 
+        <meta-data android:name="com.cyanogen.ambient.analytics.key"
+                   android:value="6l2dXt9DFioFa1Mfb4eZsM9l87Rl9hp1UL75tO9w"/>
+
         <receiver android:name=".incall.CallMethodStatusReceiver"
                   android:enabled="true"
                   android:exported="true">
@@ -59,6 +62,12 @@
             android:excludeFromRecents="true"
             android:noHistory="true"
             android:theme="@style/Theme.Material.Light.Dialog.NoTitle" />
+
+        <service android:name=".incall.InCallMetricsReceiver" >
+            <intent-filter>
+                <action android:name="cyanogen.ambient.core.incall.action.plugin_status_changed"/>
+            </intent-filter>
+        </service>
 
     </application>
 </manifest>

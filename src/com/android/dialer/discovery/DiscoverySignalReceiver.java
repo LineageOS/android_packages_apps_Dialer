@@ -1,6 +1,7 @@
 package com.android.dialer.discovery;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +13,9 @@ import android.util.Log;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.discovery.DiscoveryService;
+import com.android.dialer.incall.InCallMetricsHelper;
 import com.android.phone.common.incall.CallMethodUtils;
+import com.cyanogen.ambient.discovery.util.NudgeKey;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonemetadata;
@@ -22,6 +25,18 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
 
     private static final String TAG = "DiscoverySignalReceiver";
     private static final boolean DEBUG_CONNECTIVITY = false;
+
+    public static final String DISCOVERY_NUDGE_SHOWN =
+            "com.android.dialer.discovery.DiscoverySignalReceiver.ON_SHOW";
+
+    public static final String DISCOVERY_NUDGE_DISMISS =
+            "com.android.dialer.discovery.DiscoverySignalReceiver.ON_DISMISS";
+
+    public static final String NUDGE_SHARED_PREF = "nudge_shared_pref";
+
+    public static final String NUDGE_ID = "nudge_id";
+    public static final String NUDGE_KEY = "nudge_key";
+    public static final String NUDGE_COMPONENT = "nudge_component";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -53,6 +68,44 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
                             ++currentCount).apply();
                     startServiceForInternationalCallMade(context);
                 }
+                break;
+            case DISCOVERY_NUDGE_SHOWN:
+                String nudgeId = intent.getStringExtra(NUDGE_ID);
+                String nudgeKey = intent.getStringExtra(NUDGE_KEY);
+                ComponentName nudgeComponent =
+                        ComponentName.unflattenFromString(intent.getStringExtra(NUDGE_COMPONENT));
+
+                SharedPreferences sp = context.getSharedPreferences(NUDGE_SHARED_PREF,
+                        Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sp.edit();
+
+                NudgeItem ni = new NudgeItem(nudgeComponent, nudgeKey, nudgeId,
+                        System.currentTimeMillis());
+
+                String countKey = ni.getCountKey();
+                String timeKey = ni.getTimeKey();
+
+                long count = sp.getLong(countKey, 0) + 1;
+
+                editor.putLong(countKey, count);
+                editor.putLong(timeKey, System.currentTimeMillis());
+                editor.apply();
+
+                InCallMetricsHelper.Events event;
+                if (nudgeKey.equals(NudgeKey.NOTIFICATION_INTERNATIONAL_CALL)) {
+                    event = InCallMetricsHelper.Events.NUDGE_EVENT_INTL;
+                } else {
+                    event = InCallMetricsHelper.Events.NUDGE_EVENT_ROAMING;
+                }
+
+                InCallMetricsHelper.increaseCountOfMetric(nudgeComponent, event,
+                        InCallMetricsHelper.Categories.DISCOVERY_NUDGES,
+                        InCallMetricsHelper.Parameters.COUNT);
+
+                break;
+            case DISCOVERY_NUDGE_DISMISS:
+
                 break;
         }
 

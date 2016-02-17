@@ -1509,8 +1509,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             PhoneAccountHandle handle = CallMethodInfo.getPhoneAccountHandleFromCallMethodInfo(this,
                     cmi, phoneNumber);
             Intent intent = isVideoCall ?
-                    IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
-                    IntentUtil.getCallIntent(phoneNumber, getCallOrigin(), handle);
+                    IntentUtil.getVideoCallIntent(phoneNumber, OriginCodes.CONTACT_SEARCH) :
+                    IntentUtil.getCallIntent(phoneNumber, OriginCodes.CONTACT_SEARCH, handle);
             DialerUtils.startActivityWithErrorToast(this, intent);
         }
         mClearSearchOnPause = true;

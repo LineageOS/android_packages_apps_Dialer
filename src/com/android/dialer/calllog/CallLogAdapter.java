@@ -56,6 +56,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
+import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
@@ -246,7 +247,8 @@ public class CallLogAdapter extends GroupingListAdapter
                             final Intent intent = new Intent(Intent.ACTION_DIAL,
                                     CallUtil.getCallUri(vh.number));
                             intent.setClass(mContext, DialtactsActivity.class);
-                            DialerUtils.startActivityWithErrorToast(mContext, intent);
+                            DialerUtils.startActivityWithErrorToast(mContext, intent, OriginCodes
+                                    .CALL_LOG_CALL);
                             return true;
                         }
                     });

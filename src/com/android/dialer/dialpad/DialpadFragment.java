@@ -1267,7 +1267,7 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                startCall(number);
+                startCall(number, OriginCodes.DIALPAD_DIRECT_DIAL);
                 hideAndClearDialpad(false);
             }
         }
@@ -1884,8 +1884,7 @@ public class DialpadFragment extends Fragment
         if (phoneNumber == null) {
             showNoSpeedNumberDialog(number);
         } else {
-            startCall(phoneNumber);
-            getActivity().finish();
+            startCall(phoneNumber, OriginCodes.SPEED_DIAL);
         }
     }
 
@@ -1906,11 +1905,10 @@ public class DialpadFragment extends Fragment
                 .show();
     }
 
-    private void startCall(String number) {
+    private void startCall(String number, String origin) {
         if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider &&
                 !PhoneNumberUtils.isEmergencyNumber(number)) {
-            mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
-                    number, getActivity(), false, true);
+            mCurrentCallMethodInfo.placeCall(origin, number, getActivity(), false, true);
         } else {
             // If no sim is selected, or emergency callmethod selected, or number is
             // an emergency number, phone account handle should be null, and will use the
@@ -1924,7 +1922,7 @@ public class DialpadFragment extends Fragment
                             ((DialtactsActivity) getActivity())
                                     .getCallOrigin() : null),
                     handle);
-            DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+            DialerUtils.startActivityWithErrorToast(getActivity(), intent, origin);
         }
     }
 }
