@@ -84,8 +84,8 @@
                             android:id="@+id/contactHasNotesIcon"
                             android:layout_width="@dimen/call_log_primary_text_size"
                             android:layout_height="@dimen/call_log_primary_text_size"
-                            android:layout_marginBottom="@dimen/call_log_name_margin_bottom"
-                            android:layout_marginEnd="@dimen/call_log_name_margin_bottom" />
+                            android:layout_marginEnd="@dimen/call_log_name_margin_bottom"
+                            android:layout_gravity="center_vertical" />
 
                         <TextView
                             android:id="@+id/name"
