@@ -275,7 +275,8 @@ public class SearchFragment extends PhoneNumberPickerFragment {
                 DialerUtils.startActivityWithErrorToast(getActivity(), intent);
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_MAKE_VIDEO_CALL:
-                number = adapter.getQueryString();
+                number = TextUtils.isEmpty(mAddToContactNumber) ?
+                        adapter.getQueryString() : mAddToContactNumber;
                 listener = getOnPhoneNumberPickerListener();
                 if (listener != null && !checkForProhibitedPhoneNumber(number)) {
                     listener.onPickPhoneNumber(number, true /* isVideoCall */,
