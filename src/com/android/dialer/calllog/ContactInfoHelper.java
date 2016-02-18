@@ -285,6 +285,7 @@ public class ContactInfoHelper {
         Uri uri = Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
                 Uri.encode(contactNumber));
         ContactInfo info = lookupContactFromUri(uri);
+        boolean isLocalContact = info != null && info != ContactInfo.EMPTY;
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
         } else if (LookupCache.hasCachedContact(mContext, number)) {
@@ -298,8 +299,8 @@ public class ContactInfoHelper {
                 info = null;
             }
         }
-        // always do a LookupProvider search, if available
-        if (mLookupProvider != null) {
+        // always do a LookupProvider search, if available, for a non-contact
+        if (mLookupProvider != null && !isLocalContact) {
             LookupResponse response = mLookupProvider.blockingFetchInfo(
                     new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso), null));
             if (response != null) {
