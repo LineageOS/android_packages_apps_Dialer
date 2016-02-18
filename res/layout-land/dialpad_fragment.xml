@@ -28,7 +28,7 @@
             android:id="@+id/spacer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="4"
             android:background="#00000000" />
 
         <!-- Dialpad shadow -->
@@ -40,7 +40,7 @@
         <RelativeLayout
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="1">
+            android:layout_weight="6">
 
             <include layout="@layout/dialpad_view"
                  android:layout_height="match_parent"
