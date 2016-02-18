@@ -77,7 +77,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             showAnswerUi(false);
             Log.d(this, "declining upgrade request id: ");
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
-            InCallPresenter.getInstance().declineUpgradeRequest(getUi().getContext());
+            InCallPresenter.getInstance().declineUpgradeRequest();
         }
         if (!call.getId().equals(mCallId)) {
             // A new call is coming in.
