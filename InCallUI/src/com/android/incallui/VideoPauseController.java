@@ -27,8 +27,7 @@ import com.google.common.base.Preconditions;
  * This class is responsible for generating video pause/resume requests when the InCall UI is sent
  * to the background and subsequently brought back to the foreground.
  */
-class VideoPauseController implements InCallStateListener, IncomingCallListener,
-        SessionModificationListener {
+class VideoPauseController implements InCallStateListener, IncomingCallListener {
     private static final String TAG = "VideoPauseController";
 
     /**
@@ -105,7 +104,6 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         mInCallPresenter = Preconditions.checkNotNull(inCallPresenter);
         mInCallPresenter.addListener(this);
         mInCallPresenter.addIncomingCallListener(this);
-        InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
     }
 
     /**
@@ -114,7 +112,6 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
      */
     public void tearDown() {
         log("tearDown...");
-        InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
         mInCallPresenter.removeListener(this);
         mInCallPresenter.removeIncomingCallListener(this);
         clear();
@@ -257,46 +254,6 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         } else {
             onPause();
         }
-    }
-
-    /**
-     * Handles requests to upgrade to video.
-     *
-     * @param call The call the request was received for.
-     * @param videoState The video state that the request wants to upgrade to.
-     */
-    @Override
-    public void onUpgradeToVideoRequest(Call call, int videoState) {
-        // Not used.
-    }
-
-    /**
-     * Handles successful upgrades to video.
-     * @param call The call the request was successful for.
-     */
-    @Override
-    public void onUpgradeToVideoSuccess(Call call) {
-        // Not used.
-    }
-
-    /**
-     * Handles a failure to upgrade a call to video.
-     *
-     * @param status The failure status.
-     * @param call The call the request was successful for.
-     */
-    @Override
-    public void onUpgradeToVideoFail(int status, Call call) {
-        // TODO (ims-vt) Automatically bring in call ui to foreground.
-    }
-
-    /**
-     * Handles a downgrade of a call to audio-only.
-     *
-     * @param call The call which was downgraded to audio-only.
-     */
-    @Override
-    public void onDowngradeToAudio(Call call) {
     }
 
     /**

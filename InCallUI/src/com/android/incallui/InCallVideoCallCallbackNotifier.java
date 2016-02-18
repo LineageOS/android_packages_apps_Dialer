@@ -135,39 +135,6 @@ public class InCallVideoCallCallbackNotifier {
     }
 
     /**
-     * Inform listeners of a successful response to a video request for a call.
-     *
-     * @param call The call.
-     */
-    public void upgradeToVideoSuccess(Call call) {
-        for (SessionModificationListener listener : mSessionModificationListeners) {
-            listener.onUpgradeToVideoSuccess(call);
-        }
-    }
-
-    /**
-     * Inform listeners of an unsuccessful response to a video request for a call.
-     *
-     * @param call The call.
-     */
-    public void upgradeToVideoFail(int status, Call call) {
-        for (SessionModificationListener listener : mSessionModificationListeners) {
-            listener.onUpgradeToVideoFail(status, call);
-        }
-    }
-
-    /**
-     * Inform listeners of a downgrade to audio.
-     *
-     * @param call The call.
-     */
-    public void downgradeToAudio(Call call) {
-        for (SessionModificationListener listener : mSessionModificationListeners) {
-            listener.onDowngradeToAudio(call);
-        }
-    }
-
-    /**
      * Inform listeners of a call session event.
      *
      * @param event The call session event.
@@ -240,41 +207,16 @@ public class InCallVideoCallCallbackNotifier {
     }
 
     /**
-     * Listener interface for any class that wants to be notified of upgrade to video and downgrade
-     * to audio session modification requests.
+     * Listener interface for any class that wants to be notified of upgrade to video request.
      */
     public interface SessionModificationListener {
         /**
          * Called when a peer request is received to upgrade an audio-only call to a video call.
          *
          * @param call The call the request was received for.
-         * @param videoState The video state that the request wants to upgrade to.
+         * @param videoState The requested video state.
          */
         public void onUpgradeToVideoRequest(Call call, int videoState);
-
-        /**
-         * Called when a request to a peer to upgrade an audio-only call to a video call is
-         * successful.
-         *
-         * @param call The call the request was successful for.
-         */
-        public void onUpgradeToVideoSuccess(Call call);
-
-        /**
-         * Called when a request to a peer to upgrade an audio-only call to a video call is
-         * NOT successful. This can be if the peer chooses rejects the the video call, or if the
-         * peer does not support video calling, or if there is some error in sending the request.
-         *
-         * @param call The call the request was successful for.
-         */
-        public void onUpgradeToVideoFail(int status, Call call);
-
-        /**
-         * Called when a call has been downgraded to audio-only.
-         *
-         * @param call The call which was downgraded to audio-only.
-         */
-        public void onDowngradeToAudio(Call call);
     }
 
     /**

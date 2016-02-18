@@ -55,10 +55,8 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         boolean wasVideoCall = VideoUtils.isVideoCall(previousVideoState);
         boolean isVideoCall = VideoUtils.isVideoCall(newVideoState);
 
-        // Check for upgrades to video and downgrades to audio.
-        if (wasVideoCall && !isVideoCall) {
-            InCallVideoCallCallbackNotifier.getInstance().downgradeToAudio(mCall);
-        } else if (previousVideoState != newVideoState) {
+        // Check for upgrades to video.
+        if (!wasVideoCall && isVideoCall && previousVideoState != newVideoState) {
             InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoRequest(mCall,
                 newVideoState);
         }
@@ -93,21 +91,8 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
                             Call.SessionModificationState.REQUEST_FAILED);
                 }
             }
-            InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoFail(status, mCall);
-        } else if (requestedProfile != null && responseProfile != null) {
-            boolean modifySucceeded = requestedProfile.getVideoState() ==
-                    responseProfile.getVideoState();
-            boolean isVideoCall = VideoUtils.isVideoCall(responseProfile.getVideoState());
-            if (modifySucceeded && isVideoCall) {
-                InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoSuccess(mCall);
-            } else if (!modifySucceeded && isVideoCall) {
-                InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoFail(status, mCall);
-            } else if (modifySucceeded && !isVideoCall) {
-                InCallVideoCallCallbackNotifier.getInstance().downgradeToAudio(mCall);
-            }
-        } else {
-            Log.d(this, "onSessionModifyResponseReceived request and response Profiles are null");
         }
+
         // Finally clear the outstanding request.
         mCall.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
     }
