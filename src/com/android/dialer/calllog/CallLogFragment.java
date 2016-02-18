@@ -300,13 +300,15 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mEmptyListView.setImage(R.drawable.empty_call_log);
         mEmptyListView.setActionClickedListener(this);
 
+        int activityType = mIsCallLogActivity ? CallLogAdapter.ACTIVITY_TYPE_CALL_LOG :
+                CallLogAdapter.ACTIVITY_TYPE_DIALTACTS;
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mAdapter = ObjectFactory.newCallLogAdapter(
-                getActivity(),
-                this,
-                new ContactInfoHelper(getActivity(), currentCountryIso),
-                voicemailPlaybackPresenter,
-                mIsCallLogActivity);
+                        getActivity(),
+                        this,
+                        new ContactInfoHelper(getActivity(), currentCountryIso),
+                        voicemailPlaybackPresenter,
+                        activityType);
         mRecyclerView.setAdapter(mAdapter);
         fetchCalls();
     }

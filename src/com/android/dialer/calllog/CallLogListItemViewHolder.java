@@ -34,6 +34,7 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -200,6 +201,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
      */
     public boolean isBlocked;
 
+    /**
+     * Whether this is the archive tab or not.
+     */
+    public final boolean isArchiveTab;
+
     private final Context mContext;
     private final CallLogCache mCallLogCache;
     private final CallLogListItemHelper mCallLogListItemHelper;
@@ -230,7 +236,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             PhoneCallDetailsViews phoneCallDetailsViews,
             CardView callLogEntryView,
             TextView dayGroupHeader,
-            ImageView primaryActionButtonView) {
+            ImageView primaryActionButtonView,
+            boolean isArchiveTab) {
         super(rootView);
 
         mContext = context;
@@ -249,6 +256,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         this.dayGroupHeader = dayGroupHeader;
         this.primaryActionButtonView = primaryActionButtonView;
         this.workIconView = (ImageView) rootView.findViewById(R.id.work_profile_icon);
+        this.isArchiveTab = isArchiveTab;
         Resources resources = mContext.getResources();
         mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
 
@@ -276,7 +284,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
             FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler,
-            BlockNumberDialogFragment.Callback filteredNumberDialogCallback) {
+            BlockNumberDialogFragment.Callback filteredNumberDialogCallback,
+            boolean isArchiveTab) {
+
         return new CallLogListItemViewHolder(
                 context,
                 eventListener,
@@ -292,7 +302,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 PhoneCallDetailsViews.fromView(view),
                 (CardView) view.findViewById(R.id.call_log_row),
                 (TextView) view.findViewById(R.id.call_log_day_group_label),
-                (ImageView) view.findViewById(R.id.primary_action_button));
+                (ImageView) view.findViewById(R.id.primary_action_button),
+                isArchiveTab);
     }
 
     @Override
@@ -397,6 +408,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
             voicemailPlaybackView = (VoicemailPlaybackLayout) actionsView
                     .findViewById(R.id.voicemail_playback_layout);
+            if (isArchiveTab) {
+                voicemailPlaybackView.hideArchiveButton();
+            }
+
 
             callButtonView = actionsView.findViewById(R.id.call_action);
             callButtonView.setOnClickListener(this);
@@ -509,8 +524,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             mVoicemailPlaybackPresenter.setPlaybackView(
                     voicemailPlaybackView, uri, mVoicemailPrimaryActionButtonClicked);
             mVoicemailPrimaryActionButtonClicked = false;
-
-            CallLogAsyncTaskUtil.markVoicemailAsRead(mContext, uri);
+            // Only mark voicemail as read when not in archive tab
+            if (!isArchiveTab) {
+                CallLogAsyncTaskUtil.markVoicemailAsRead(mContext, uri);
+            }
         } else {
             voicemailPlaybackView.setVisibility(View.GONE);
         }
@@ -705,11 +722,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 PhoneCallDetailsViews.createForTest(context),
                 new CardView(context),
                 new TextView(context),
-                new ImageView(context));
+                new ImageView(context),
+                false);
         viewHolder.detailsButtonView = new TextView(context);
         viewHolder.actionsView = new View(context);
         viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
-
+        viewHolder.workIconView = new ImageButton(context);
         return viewHolder;
     }
 }

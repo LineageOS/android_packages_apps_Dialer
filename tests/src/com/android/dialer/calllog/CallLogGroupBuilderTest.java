@@ -129,6 +129,18 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
                 AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_OUTGOING_TYPE);
     }
 
+    public void testGrouping_VoicemailArchive() {
+        // Does not group with other types of calls, include voicemail themselves.
+        assertVoicemailsAreNotGrouped(
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_MISSED_TYPE);
+        assertVoicemailsAreNotGrouped(
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_VOICEMAIL_TYPE);
+        assertVoicemailsAreNotGrouped(
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_INCOMING_TYPE);
+        assertVoicemailsAreNotGrouped(
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE, AppCompatConstants.CALLS_OUTGOING_TYPE);
+    }
+
     public void testGrouping_Missed() {
         // Groups with one or more missed calls.
         assertCallsAreGrouped(
@@ -196,6 +208,21 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         assertCallsAreNotGrouped(
                 AppCompatConstants.CALLS_BLOCKED_TYPE, AppCompatConstants.CALLS_MISSED_TYPE);
 
+    }
+
+    public void testAddGroups_Separate() {
+        addMultipleCallLogEntries(TEST_NUMBER1,
+                AppCompatConstants.CALLS_VOICEMAIL_TYPE,    // Group 1: 0
+                AppCompatConstants.CALLS_INCOMING_TYPE,     // Group 2: 1
+                AppCompatConstants.CALLS_OUTGOING_TYPE,     // Group 3: 2
+                AppCompatConstants.CALLS_MISSED_TYPE);      // Group 4: 3
+        mBuilder.addVoicemailGroups(mCursor);
+
+        assertEquals(4, mFakeGroupCreator.groups.size());
+        assertGroupIs(0, 1, mFakeGroupCreator.groups.get(0));
+        assertGroupIs(1, 1, mFakeGroupCreator.groups.get(1));
+        assertGroupIs(2, 1, mFakeGroupCreator.groups.get(2));
+        assertGroupIs(3, 1, mFakeGroupCreator.groups.get(3));
     }
 
     public void testAddGroups_Mixed() {
@@ -323,6 +350,15 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         clearFakeGroupCreator();
         addMultipleCallLogEntries(TEST_NUMBER1, types);
         mBuilder.addGroups(mCursor);
+        assertEquals(types.length, mFakeGroupCreator.groups.size());
+    }
+
+    /** Asserts that voicemails are not grouped together with other types at all. */
+    private void assertVoicemailsAreNotGrouped(int... types) {
+        createCursor();
+        clearFakeGroupCreator();
+        addMultipleCallLogEntries(TEST_NUMBER1, types);
+        mBuilder.addVoicemailGroups(mCursor);
         assertEquals(types.length, mFakeGroupCreator.groups.size());
     }
 

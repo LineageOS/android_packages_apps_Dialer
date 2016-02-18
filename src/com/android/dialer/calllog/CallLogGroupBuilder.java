@@ -187,6 +187,33 @@ public class CallLogGroupBuilder {
         mGroupCreator.addGroup(count - groupSize, groupSize);
     }
 
+    /**
+     * Group cursor entries by date, with only one entry per group. This is used for listing
+     * voicemails in the archive tab.
+     */
+    public void addVoicemailGroups(Cursor cursor) {
+        if (cursor.getCount() == 0) {
+            return;
+        }
+
+        // Clear any previous day grouping information.
+        mGroupCreator.clearDayGroups();
+
+        // Get current system time, used for calculating which day group calls belong to.
+        long currentTime = System.currentTimeMillis();
+
+        // Reset cursor to start before the first row
+        cursor.moveToPosition(-1);
+
+        // Create an individual group for each voicemail
+        while (cursor.moveToNext()) {
+            mGroupCreator.addGroup(cursor.getPosition(), 1);
+            mGroupCreator.setDayGroup(cursor.getLong(CallLogQuery.ID),
+                    getDayGroup(cursor.getLong(CallLogQuery.DATE), currentTime));
+
+        }
+    }
+
     @VisibleForTesting
     boolean equalNumbers(String number1, String number2) {
         if (PhoneNumberHelper.isUriNumber(number1) || PhoneNumberHelper.isUriNumber(number2)) {

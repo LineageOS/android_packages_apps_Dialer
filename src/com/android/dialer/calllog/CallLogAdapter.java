@@ -16,7 +16,10 @@
 
 package com.android.dialer.calllog;
 
+import com.android.contacts.common.util.PermissionsUtil;
+
 import com.android.dialer.DialtactsActivity;
+import com.android.dialer.database.VoicemailArchiveContract;
 import com.google.common.annotations.VisibleForTesting;
 
 import android.content.Context;
@@ -72,6 +75,11 @@ public class CallLogAdapter extends GroupingListAdapter
                 VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
                 ExtendedBlockingButtonRenderer.Listener {
 
+    // Types of activities the call log adapter is used for
+    public static final int ACTIVITY_TYPE_CALL_LOG = 1;
+    public static final int ACTIVITY_TYPE_ARCHIVE = 2;
+    public static final int ACTIVITY_TYPE_DIALTACTS = 3;
+
     /** Interface used to initiate a refresh of the content. */
     public interface CallFetcher {
         public void fetchCalls();
@@ -102,7 +110,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
     protected ContactInfoCache mContactInfoCache;
 
-    private boolean mIsCallLogActivity;
+    private final int mActivityType;
 
     private static final String KEY_EXPANDED_POSITION = "expanded_position";
     private static final String KEY_EXPANDED_ROW_ID = "expanded_row_id";
@@ -172,7 +180,7 @@ public class CallLogAdapter extends GroupingListAdapter
             } else {
                 if (viewHolder.callType == CallLog.Calls.MISSED_TYPE) {
                     CallLogAsyncTaskUtil.markCallAsRead(mContext, viewHolder.callIds);
-                    if (!mIsCallLogActivity) {
+                    if (mActivityType == ACTIVITY_TYPE_DIALTACTS) {
                         ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
                     }
                 }
@@ -255,7 +263,7 @@ public class CallLogAdapter extends GroupingListAdapter
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            boolean isCallLogActivity) {
+            int activityType) {
         super(context);
 
         mContext = context;
@@ -265,7 +273,8 @@ public class CallLogAdapter extends GroupingListAdapter
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.setOnVoicemailDeletedListener(this);
         }
-        mIsCallLogActivity = isCallLogActivity;
+
+        mActivityType = activityType;
 
         mContactInfoCache = new ContactInfoCache(
                 mContactInfoHelper, mOnContactInfoChangedListener);
@@ -375,6 +384,11 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     @Override
+    public void addVoicemailGroups(Cursor cursor) {
+        mCallLogGroupBuilder.addVoicemailGroups(cursor);
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_VOICEMAIL_PROMO_CARD) {
             return createVoicemailPromoCardViewHolder(parent);
@@ -415,7 +429,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
                     @Override
                     public void onChangeFilteredNumberUndo() {}
-                });
+                }, mActivityType == ACTIVITY_TYPE_ARCHIVE);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
@@ -479,7 +493,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
         final String number = c.getString(CallLogQuery.NUMBER);
         final String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
-                ? c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+                && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
+                c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
 
         final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
@@ -506,17 +521,13 @@ public class CallLogAdapter extends GroupingListAdapter
                 mContext, number, numberPresentation, formattedNumber,
                 postDialDigits, isVoicemailNumber);
         details.accountHandle = accountHandle;
-        details.callTypes = getCallTypes(c, count);
         details.countryIso = countryIso;
         details.date = c.getLong(CallLogQuery.DATE);
         details.duration = c.getLong(CallLogQuery.DURATION);
         details.features = getCallFeatures(c, count);
         details.geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         details.transcription = c.getString(CallLogQuery.TRANSCRIPTION);
-        if (details.callTypes[0] == CallLog.Calls.VOICEMAIL_TYPE ||
-                details.callTypes[0] == CallLog.Calls.MISSED_TYPE) {
-            details.isRead = c.getInt(CallLogQuery.IS_READ) == 1;
-        }
+        details.callTypes = getCallTypes(c, count);
 
         if (!c.isNull(CallLogQuery.DATA_USAGE)) {
             details.dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
@@ -543,9 +554,8 @@ public class CallLogAdapter extends GroupingListAdapter
         views.postDialDigits = details.postDialDigits;
         views.displayNumber = details.displayNumber;
         views.numberPresentation = numberPresentation;
-        views.callType = c.getInt(CallLogQuery.CALL_TYPE);
+
         views.accountHandle = accountHandle;
-        views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
         views.isBusiness = mContactInfoHelper.isBusiness(info.sourceType);
@@ -564,6 +574,21 @@ public class CallLogAdapter extends GroupingListAdapter
             views.dayGroupHeader.setText(getGroupDescription(currentGroup));
         } else {
             views.dayGroupHeader.setVisibility(View.GONE);
+        }
+
+        if (mActivityType == ACTIVITY_TYPE_ARCHIVE) {
+            views.callType = CallLog.Calls.VOICEMAIL_TYPE;
+            views.voicemailUri = VoicemailArchiveContract.VoicemailArchive.buildWithId(c.getInt(
+                    c.getColumnIndex(VoicemailArchiveContract.VoicemailArchive._ID)))
+                    .toString();
+
+        } else {
+            if (details.callTypes[0] == CallLog.Calls.VOICEMAIL_TYPE ||
+                    details.callTypes[0] == CallLog.Calls.MISSED_TYPE) {
+                details.isRead = c.getInt(CallLogQuery.IS_READ) == 1;
+            }
+            views.callType = c.getInt(CallLogQuery.CALL_TYPE);
+            views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         }
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
@@ -613,7 +638,7 @@ public class CallLogAdapter extends GroupingListAdapter
     public Object getItem(int position) {
         return super.getItem(position - (mShowVoicemailPromoCard ? 1 : 0)
                 + ((mHiddenPosition != RecyclerView.NO_POSITION && position >= mHiddenPosition)
-                        ? 1 : 0));
+                ? 1 : 0));
     }
 
     @Override
@@ -622,7 +647,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     protected boolean isCallLogActivity() {
-        return mIsCallLogActivity;
+        return mActivityType == ACTIVITY_TYPE_CALL_LOG;
     }
 
     /**
@@ -740,6 +765,9 @@ public class CallLogAdapter extends GroupingListAdapter
      * It position in the cursor is unchanged by this function.
      */
     private int[] getCallTypes(Cursor cursor, int count) {
+        if (mActivityType == ACTIVITY_TYPE_ARCHIVE) {
+            return new int[] {CallLog.Calls.VOICEMAIL_TYPE};
+        }
         int position = cursor.getPosition();
         int[] callTypes = new int[count];
         for (int index = 0; index < count; ++index) {
@@ -851,7 +879,8 @@ public class CallLogAdapter extends GroupingListAdapter
     private void maybeShowVoicemailPromoCard() {
         boolean showPromoCard = mPrefs.getBoolean(SHOW_VOICEMAIL_PROMO_CARD,
                 SHOW_VOICEMAIL_PROMO_CARD_DEFAULT);
-        mShowVoicemailPromoCard = (mVoicemailPlaybackPresenter != null) && showPromoCard;
+        mShowVoicemailPromoCard = mActivityType != ACTIVITY_TYPE_ARCHIVE &&
+                (mVoicemailPlaybackPresenter != null) && showPromoCard;
     }
 
     /**
