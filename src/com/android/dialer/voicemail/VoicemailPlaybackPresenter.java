@@ -36,6 +36,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.SeekBar;
 
 import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.common.io.MoreCloseables;
@@ -556,6 +557,12 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         }
         Log.d(TAG, "onPrepared");
         mIsPrepared = true;
+
+        // Update the duration in the database if it was not previously retrieved
+        if (mDuration.get() == 0) {
+            CallLogAsyncTaskUtil.updateVoicemailDuration(mContext, mVoicemailUri,
+                    mMediaPlayer.getDuration() / 1000);
+        }
 
         mDuration.set(mMediaPlayer.getDuration());
 

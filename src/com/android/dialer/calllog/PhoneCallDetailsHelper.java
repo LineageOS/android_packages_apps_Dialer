@@ -326,7 +326,7 @@ public class PhoneCallDetailsHelper {
             text = dateText;
         }
 
-        if (details.callTypes[0] == Calls.VOICEMAIL_TYPE) {
+        if (details.callTypes[0] == Calls.VOICEMAIL_TYPE && details.duration > 0) {
             views.callLocationAndDate.setText(mResources.getString(
                     R.string.voicemailCallLogDateTimeFormatWithDuration, text,
                     getVoicemailDuration(details)));
