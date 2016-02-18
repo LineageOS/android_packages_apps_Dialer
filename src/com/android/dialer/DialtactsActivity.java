@@ -16,6 +16,7 @@
 
 package com.android.dialer;
 
+import com.android.dialer.voicemail.VoicemailArchiveActivity;
 import com.google.common.annotations.VisibleForTesting;
 
 import android.app.Fragment;
@@ -689,6 +690,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (resId == R.id.menu_call_settings) {
             handleMenuSettings();
             Logger.logScreenView(ScreenEvent.SETTINGS, this);
+            return true;
+        } else if (resId == R.id.menu_archive) {
+            final Intent intent = new Intent(this, VoicemailArchiveActivity.class);
+            startActivity(intent);
             return true;
         }
         return false;
