@@ -61,7 +61,7 @@
     <dimen name="in_call_button_dimension">48dp</dimen>
 
     <dimen name="primary_call_elevation">0dp</dimen>
-    <dimen name="dialpad_elevation">5dp</dimen>
+    <dimen name="dialpad_elevation">2dp</dimen>
 
     <!-- The InCallUI dialpad will sometimes want digits sizes that are different from dialer.
          Note: These are the default sizes for small (<600dp height) devices: larger screen sizes
@@ -117,7 +117,7 @@
          width of the preview.  When in landscape, this is the height. -->
     <dimen name="video_preview_small_dimension">90dp</dimen>
 
-    <dimen name="video_preview_margin">20dp</dimen>
+    <dimen name="video_preview_margin">0dp</dimen>
 
     <dimen name="end_call_floating_action_button_diameter">72dp</dimen>
     <dimen name="end_call_floating_action_button_small_diameter">56dp</dimen>
