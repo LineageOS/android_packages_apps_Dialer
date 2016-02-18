@@ -780,9 +780,11 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                 showFragment(TAG_DIALPAD_FRAGMENT, true, true);
                 mDialpadFragment.animateShowDialpad();
             }
-            mCallCardFragment.onDialpadVisibilityChange(show);
             mDialpadFragment.getView().startAnimation(show ? mSlideIn : mSlideOut);
         }
+        // Note:  onDialpadVisibilityChange is called here to ensure that the dialpad FAB
+        // repositions itself.
+        mCallCardFragment.onDialpadVisibilityChange(show);
 
         final ProximitySensor sensor = InCallPresenter.getInstance().getProximitySensor();
         if (sensor != null) {
