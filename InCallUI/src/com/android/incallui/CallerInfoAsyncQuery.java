@@ -18,13 +18,13 @@ package com.android.incallui;
 
 import com.google.common.primitives.Longs;
 
+import android.Manifest;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -35,6 +35,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.DirectoryCompat;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.TelephonyManagerUtils;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
@@ -339,6 +340,12 @@ public class CallerInfoAsyncQuery {
         Log.d(LOG_TAG, "##### CallerInfoAsyncQuery startContactProviderQuery()... #####");
         Log.d(LOG_TAG, "- number: " + info.phoneNumber);
         Log.d(LOG_TAG, "- cookie: " + cookie);
+        if (!PermissionsUtil.hasPermission(context, Manifest.permission.READ_CONTACTS)) {
+            Log.w(LOG_TAG, "Dialer doesn't have permission to read contacts.");
+            listener.onQueryComplete(token, cookie, info);
+            return;
+        }
+
         OnQueryCompleteListener contactsProviderQueryCompleteListener =
                 new OnQueryCompleteListener() {
                     @Override
