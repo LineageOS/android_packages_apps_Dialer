@@ -191,6 +191,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         private static final String ARG_PHONE_LIST = "phoneList";
         private static final String ARG_INTERACTION_TYPE = "interactionType";
         private static final String ARG_CALL_INITIATION_TYPE = "callInitiation";
+        private static final String ARG_IS_VIDEO_CALL = "is_video_call";
 
         private int mInteractionType;
         private ListAdapter mPhonesAdapter;
@@ -200,19 +201,18 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
         public static void show(FragmentManager fragmentManager, ArrayList<PhoneItem> phoneList,
                 int interactionType, boolean isVideoCall, int callInitiationType) {
-            PhoneDisambiguationDialogFragment fragment = new PhoneDisambiguationDialogFragment(
-                isVideoCall);
+            PhoneDisambiguationDialogFragment fragment = new PhoneDisambiguationDialogFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(ARG_PHONE_LIST, phoneList);
             bundle.putInt(ARG_INTERACTION_TYPE, interactionType);
             bundle.putInt(ARG_CALL_INITIATION_TYPE, callInitiationType);
+            bundle.putBoolean(ARG_IS_VIDEO_CALL, isVideoCall);
             fragment.setArguments(bundle);
             fragment.show(fragmentManager, TAG);
         }
 
-        public PhoneDisambiguationDialogFragment(boolean isVideoCall) {
+        public PhoneDisambiguationDialogFragment() {
             super();
-            mIsVideoCall = isVideoCall;
         }
 
         @Override
@@ -221,6 +221,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             mPhoneList = getArguments().getParcelableArrayList(ARG_PHONE_LIST);
             mInteractionType = getArguments().getInt(ARG_INTERACTION_TYPE);
             mCallInitiationType = getArguments().getInt(ARG_CALL_INITIATION_TYPE);
+            mIsVideoCall = getArguments().getBoolean(ARG_IS_VIDEO_CALL);
 
             mPhonesAdapter = new PhoneItemAdapter(activity, mPhoneList, mInteractionType);
             final LayoutInflater inflater = activity.getLayoutInflater();
