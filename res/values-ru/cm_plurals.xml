@@ -17,23 +17,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
-    <item quantity="one">%d ч.</item>
-    <item quantity="few">%d ч.</item>
-    <item quantity="other">%d ч.</item>
+    <item quantity="one">%d ч</item>
+    <item quantity="few">%d ч</item>
+    <item quantity="other">%d ч</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="one">%d мин.</item>
-    <item quantity="few">%d мин.</item>
-    <item quantity="other">%d мин.</item>
+    <item quantity="one">%d мин</item>
+    <item quantity="few">%d мин</item>
+    <item quantity="other">%d мин</item>
   </plurals>
   <plurals name="second">
-    <item quantity="one">%d сек.</item>
-    <item quantity="few">%d сек.</item>
-    <item quantity="other">%d сек.</item>
+    <item quantity="one">1 с</item>
+    <item quantity="few">%d с</item>
+    <item quantity="other">%d с</item>
   </plurals>
   <plurals name="call">
-    <item quantity="one">%d звонок</item>
-    <item quantity="few">%d звонка</item>
-    <item quantity="other">%d звонков</item>
+    <item quantity="one">1 вызов</item>
+    <item quantity="few">%d вызова</item>
+    <item quantity="other">%d вызовов</item>
   </plurals>
 </resources>
