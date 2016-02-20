@@ -16,11 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import static android.Manifest.permission.READ_CALL_LOG;
-import static android.Manifest.permission.READ_CONTACTS;
-
-import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.google.common.collect.Maps;
 
 import android.app.Notification;
@@ -33,11 +28,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.support.v4.util.Pair;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
@@ -172,22 +171,7 @@ public class DefaultVoicemailNotifier {
         // TODO: Use the photo of contact if all calls are from the same person.
         final int icon = android.R.drawable.stat_notify_voicemail;
 
-        Uri ringtoneUri = null;
-        int notificationDefaults = 0;
-        if (callToNotify != null) {
-            PhoneAccountHandle accountHandle = new PhoneAccountHandle(
-                    ComponentName.unflattenFromString(callToNotify.accountComponentName),
-                    callToNotify.accountId);
-            ringtoneUri = TelephonyManagerCompat
-                    .getVoicemailRingtoneUri(getTelephonyManager(), accountHandle);
-            if (ContactsUtils.FLAG_N_FEATURE) {
-                notificationDefaults = TelephonyManagerCompat.isVoicemailVibrationEnabled(
-                        getTelephonyManager(), accountHandle)
-                        ? Notification.DEFAULT_VIBRATE : 0;
-            } else {
-                notificationDefaults = Notification.DEFAULT_ALL;
-            }
-        }
+        Pair<Uri, Integer> info = getNotificationInfo(callToNotify);
 
         Notification.Builder notificationBuilder = new Notification.Builder(mContext)
                 .setSmallIcon(icon)
@@ -195,8 +179,8 @@ public class DefaultVoicemailNotifier {
                 .setContentText(callers)
                 .setStyle(new Notification.BigTextStyle().bigText(transcription))
                 .setColor(resources.getColor(R.color.dialer_theme_color))
-                .setSound(ringtoneUri)
-                .setDefaults(notificationDefaults)
+                .setSound(info.first)
+                .setDefaults(info.second)
                 .setDeleteIntent(createMarkNewVoicemailsAsOldIntent())
                 .setAutoCancel(true);
 
@@ -219,6 +203,36 @@ public class DefaultVoicemailNotifier {
 
         getNotificationManager().notify(NOTIFICATION_TAG, NOTIFICATION_ID,
                 notificationBuilder.build());
+    }
+
+    /**
+     * Determines which ringtone Uri and Notification defaults to use when updating the notification
+     * for the given call.
+     */
+    private Pair<Uri, Integer> getNotificationInfo(@Nullable NewCall callToNotify) {
+        if (callToNotify == null) {
+            return new Pair<>(null, 0);
+        }
+
+        if (callToNotify.accountComponentName == null || callToNotify.accountId == null) {
+            return new Pair<>(null, Notification.DEFAULT_ALL);
+        }
+
+        PhoneAccountHandle accountHandle = new PhoneAccountHandle(
+                ComponentName.unflattenFromString(callToNotify.accountComponentName),
+                callToNotify.accountId);
+        return new Pair<>(
+                TelephonyManagerCompat.getVoicemailRingtoneUri(
+                        getTelephonyManager(), accountHandle),
+                getNotificationDefaults(accountHandle));
+    }
+
+    private int getNotificationDefaults(PhoneAccountHandle accountHandle) {
+        if (ContactsUtils.FLAG_N_FEATURE) {
+            return TelephonyManagerCompat.isVoicemailVibrationEnabled(getTelephonyManager(),
+                    accountHandle) ? Notification.DEFAULT_VIBRATE : 0;
+        }
+        return Notification.DEFAULT_ALL;
     }
 
     /** Creates a pending intent that marks all new voicemails as old. */
