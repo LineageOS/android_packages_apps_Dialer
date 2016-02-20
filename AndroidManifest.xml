@@ -245,6 +245,9 @@
         <activity android:name="com.android.contacts.common.vcard.ExportVCardActivity"
                   android:theme="@style/BackgroundOnlyTheme"/>
 
+        <activity android:name="com.android.contacts.common.vcard.ShareVCardActivity"
+                  android:theme="@style/BackgroundOnlyTheme" />
+
         <service
             android:name="com.android.contacts.common.vcard.VCardService"
             android:exported="false"/>
@@ -329,5 +332,15 @@
             android:exported="false"
             android:multiprocess="false"
             />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/contacts_file_provider_authority"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 </manifest>
