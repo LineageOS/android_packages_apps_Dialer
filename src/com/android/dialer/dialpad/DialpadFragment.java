@@ -467,6 +467,8 @@ public class DialpadFragment extends Fragment
         } else {
             CreditBarHelper.clearCallRateInformation(mDialpadView.getRateContainer(), cbvl);
         }
+        mOverflowMenuButton.setVisibility(isDigitsEmpty() ||
+                mCurrentCallMethodInfo.mIsInCallProvider ? View.INVISIBLE : View.VISIBLE);
     }
 
     public void setCurrentCallMethod(CallMethodInfo callMethodInfo) {
@@ -761,7 +763,8 @@ public class DialpadFragment extends Fragment
         mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
         mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
         mOverflowMenuButton.setOnClickListener(this);
-        mOverflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+        mOverflowMenuButton.setVisibility(isDigitsEmpty() ||
+                mCurrentCallMethodInfo.mIsInCallProvider ? View.INVISIBLE : View.VISIBLE);
 
         if (mFirstLaunch) {
             // The onHiddenChanged callback does not get called the first time the fragment is
