@@ -380,7 +380,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 && call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
         final boolean isCallOnHold = call.getState() == Call.State.ONHOLD;
 
-        final boolean showAddCall = TelecomAdapter.getInstance().canAddCall(call)
+        final boolean showAddCall = TelecomAdapter.getInstance().canAddCall()
                 && UserManagerCompat.isUserUnlocked(ui.getContext());
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);

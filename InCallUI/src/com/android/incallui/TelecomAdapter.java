@@ -24,9 +24,6 @@ import android.os.Looper;
 import android.telecom.InCallService;
 import android.telecom.PhoneAccountHandle;
 
-import com.android.incallui.compat.telecom.DetailsCompat;
-import com.android.incallui.compat.telecom.InCallServiceCompat;
-
 import java.util.List;
 
 final class TelecomAdapter implements InCallServiceListener {
@@ -108,7 +105,7 @@ final class TelecomAdapter implements InCallServiceListener {
 
     void mute(boolean shouldMute) {
         if (mInCallService != null) {
-            InCallServiceCompat.setMuted(mInCallService, shouldMute);
+            mInCallService.setMuted(shouldMute);
         } else {
             Log.e(this, "error mute, mInCallService is null");
         }
@@ -116,7 +113,7 @@ final class TelecomAdapter implements InCallServiceListener {
 
     void setAudioRoute(int route) {
         if (mInCallService != null) {
-            InCallServiceCompat.setAudioRoute(mInCallService, route);
+            mInCallService.setAudioRoute(route);
         } else {
             Log.e(this, "error setAudioRoute, mInCallService is null");
         }
@@ -138,8 +135,7 @@ final class TelecomAdapter implements InCallServiceListener {
             if (!conferenceable.isEmpty()) {
                 call.conference(conferenceable.get(0));
             } else {
-                if (DetailsCompat.can(call.getDetails(),
-                        android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE)) {
+                if (call.getDetails().can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE)) {
                     call.mergeConference();
                 }
             }
@@ -151,8 +147,7 @@ final class TelecomAdapter implements InCallServiceListener {
     void swap(String callId) {
         android.telecom.Call call = getTelecomCallById(callId);
         if (call != null) {
-            if (DetailsCompat.can(call.getDetails(),
-                    android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE)) {
+            if (call.getDetails().can(android.telecom.Call.Details.CAPABILITY_SWAP_CONFERENCE)) {
                 call.swapConference();
             }
         } else {
@@ -222,7 +217,10 @@ final class TelecomAdapter implements InCallServiceListener {
         }
     }
 
-    boolean canAddCall(Call call) {
-        return InCallServiceCompat.canAddCall(mInCallService, call);
+    boolean canAddCall() {
+        if (mInCallService != null) {
+            return mInCallService.canAddCall();
+        }
+        return false;
     }
 }

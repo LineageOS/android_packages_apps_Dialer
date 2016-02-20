@@ -19,7 +19,6 @@ package com.android.incallui;
 import android.telecom.VideoProfile;
 
 import com.android.contacts.common.compat.CompatUtils;
-import com.android.incallui.compat.telecom.VideoProfileCompat;
 
 import com.google.common.base.Preconditions;
 
@@ -34,8 +33,8 @@ public class VideoUtils {
             return false;
         }
 
-        return VideoProfileCompat.isTransmissionEnabled(videoState)
-                || VideoProfileCompat.isReceptionEnabled(videoState);
+        return VideoProfile.isTransmissionEnabled(videoState)
+                || VideoProfile.isReceptionEnabled(videoState);
     }
 
     public static boolean isBidirectionalVideoCall(Call call) {
@@ -43,7 +42,7 @@ public class VideoUtils {
             return false;
         }
 
-        return VideoProfileCompat.isBidirectional(call.getVideoState());
+        return VideoProfile.isBidirectional(call.getVideoState());
     }
 
     public static boolean isIncomingVideoCall(Call call) {
@@ -72,7 +71,7 @@ public class VideoUtils {
             return true;
         }
 
-        return call != null && VideoProfileCompat.isAudioOnly(call.getVideoState());
+        return call != null && VideoProfile.isAudioOnly(call.getVideoState());
     }
 
     // TODO (ims-vt) Check if special handling is needed for CONF calls.
@@ -82,7 +81,7 @@ public class VideoUtils {
 
     public static VideoProfile makeVideoPauseProfile(Call call) {
         Preconditions.checkNotNull(call);
-        Preconditions.checkState(!VideoProfileCompat.isAudioOnly(call.getVideoState()));
+        Preconditions.checkState(!VideoProfile.isAudioOnly(call.getVideoState()));
         return new VideoProfile(getPausedVideoState(call.getVideoState()));
     }
 
