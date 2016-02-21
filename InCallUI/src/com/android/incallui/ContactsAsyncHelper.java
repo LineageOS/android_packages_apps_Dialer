@@ -30,6 +30,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.ContactsContract.Contacts;
 
+import com.android.dialer.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 

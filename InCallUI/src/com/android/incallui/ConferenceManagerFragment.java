@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.contacts.common.ContactPhotoManager;
+import com.android.dialer.R;
 
 import java.util.List;
 

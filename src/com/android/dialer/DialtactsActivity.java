@@ -620,35 +620,30 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.floating_action_button:
-                if (mListsFragment.getCurrentTabIndex()
-                        == ListsFragment.TAB_INDEX_ALL_CONTACTS && !mInRegularSearch) {
-                    DialerUtils.startActivityWithErrorToast(
-                            this,
-                            IntentUtil.getNewContactIntent(),
-                            R.string.add_contact_not_available);
-                } else if (!mIsDialpadShown) {
-                    mInCallDialpadUp = false;
-                    showDialpadFragment(true);
-                }
-                break;
-            case R.id.voice_search_button:
-                try {
-                    startActivityForResult(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
-                            ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
-                } catch (ActivityNotFoundException e) {
-                    Toast.makeText(DialtactsActivity.this, R.string.voice_search_not_available,
-                            Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.dialtacts_options_menu_button:
-                mOverflowMenu.show();
-                break;
-            default: {
-                Log.wtf(TAG, "Unexpected onClick event from " + view);
-                break;
+        int resId = view.getId();
+        if (resId == R.id.floating_action_button) {
+            if (mListsFragment.getCurrentTabIndex()
+                    == ListsFragment.TAB_INDEX_ALL_CONTACTS && !mInRegularSearch) {
+                DialerUtils.startActivityWithErrorToast(
+                        this,
+                        IntentUtil.getNewContactIntent(),
+                        R.string.add_contact_not_available);
+            } else if (!mIsDialpadShown) {
+                mInCallDialpadUp = false;
+                showDialpadFragment(true);
             }
+        } else if (resId == R.id.voice_search_button) {
+            try {
+                startActivityForResult(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH),
+                        ACTIVITY_REQUEST_CODE_VOICE_SEARCH);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(DialtactsActivity.this, R.string.voice_search_not_available,
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else if (resId == R.id.dialtacts_options_menu_button) {
+            mOverflowMenu.show();
+        } else {
+            Log.wtf(TAG, "Unexpected onClick event from " + view);
         }
     }
 
@@ -658,41 +653,37 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return true;
         }
 
-        switch (item.getItemId()) {
-            case R.id.menu_history:
-                // Use explicit CallLogActivity intent instead of ACTION_VIEW +
-                // CONTENT_TYPE, so that we always open our call log from our dialer
-                final Intent intent = new Intent(this, CallLogActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.menu_add_contact:
-                DialerUtils.startActivityWithErrorToast(
-                        this,
-                        IntentUtil.getNewContactIntent(),
-                        R.string.add_contact_not_available);
-                break;
-            case R.id.menu_import_export:
-                // We hard-code the "contactsAreAvailable" argument because doing it properly would
-                // involve querying a {@link ProviderStatusLoader}, which we don't want to do right
-                // now in Dialtacts for (potential) performance reasons. Compare with how it is
-                // done in {@link PeopleActivity}.
-                if (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_SPEED_DIAL) {
-                    ImportExportDialogFragment.show(getFragmentManager(), true,
-                            DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_FAVORITES);
-                } else {
-                    ImportExportDialogFragment.show(getFragmentManager(), true,
-                            DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_DEFAULT);
-                }
-                Logger.logScreenView(ScreenEvent.IMPORT_EXPORT_CONTACTS, this);
-                return true;
-            case R.id.menu_clear_frequents:
-                ClearFrequentsDialog.show(getFragmentManager());
-                Logger.logScreenView(ScreenEvent.CLEAR_FREQUENTS, this);
-                return true;
-            case R.id.menu_call_settings:
-                handleMenuSettings();
-                Logger.logScreenView(ScreenEvent.SETTINGS, this);
-                return true;
+        int resId = item.getItemId();
+        if (resId == R.id.menu_history) {// Use explicit CallLogActivity intent instead of ACTION_VIEW +
+            // CONTENT_TYPE, so that we always open our call log from our dialer
+            final Intent intent = new Intent(this, CallLogActivity.class);
+            startActivity(intent);
+        } else if (resId == R.id.menu_add_contact) {
+            DialerUtils.startActivityWithErrorToast(
+                    this,
+                    IntentUtil.getNewContactIntent(),
+                    R.string.add_contact_not_available);
+        } else if (resId == R.id.menu_import_export) {// We hard-code the "contactsAreAvailable" argument because doing it properly would
+            // involve querying a {@link ProviderStatusLoader}, which we don't want to do right
+            // now in Dialtacts for (potential) performance reasons. Compare with how it is
+            // done in {@link PeopleActivity}.
+            if (mListsFragment.getCurrentTabIndex() == ListsFragment.TAB_INDEX_SPEED_DIAL) {
+                ImportExportDialogFragment.show(getFragmentManager(), true,
+                        DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_FAVORITES);
+            } else {
+                ImportExportDialogFragment.show(getFragmentManager(), true,
+                        DialtactsActivity.class, ImportExportDialogFragment.EXPORT_MODE_DEFAULT);
+            }
+            Logger.logScreenView(ScreenEvent.IMPORT_EXPORT_CONTACTS, this);
+            return true;
+        } else if (resId == R.id.menu_clear_frequents) {
+            ClearFrequentsDialog.show(getFragmentManager());
+            Logger.logScreenView(ScreenEvent.CLEAR_FREQUENTS, this);
+            return true;
+        } else if (resId == R.id.menu_call_settings) {
+            handleMenuSettings();
+            Logger.logScreenView(ScreenEvent.SETTINGS, this);
+            return true;
         }
         return false;
     }

@@ -34,6 +34,7 @@ import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import com.android.dialer.R;
 
 public class CircularRevealFragment extends Fragment {
     static final String TAG = "CircularRevealFragment";

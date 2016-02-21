@@ -47,6 +47,7 @@ import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.OnCallLogQueryFinishedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;

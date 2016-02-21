@@ -361,30 +361,30 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.context_menu_block_number:
-                BlockNumberDialogFragment.show(
-                        blockId,
-                        number,
-                        countryIso,
-                        displayNumber,
-                        R.id.floating_action_button_container,
-                        ((Activity) mContext).getFragmentManager(),
-                        mFilteredNumberDialogCallback);
-                return true;
-            case R.id.context_menu_copy_to_clipboard:
-                ClipboardUtils.copyText(mContext, null, number, true);
-                return true;
-            case R.id.context_menu_copy_transcript_to_clipboard:
-                ClipboardUtils.copyText(mContext, null,
-                        phoneCallDetailsViews.voicemailTranscriptionView.getText(), true);
-                return true;
-            case R.id.context_menu_edit_before_call:
-                final Intent intent = new Intent(
-                        Intent.ACTION_DIAL, CallUtil.getCallUri(number));
-                intent.setClass(mContext, DialtactsActivity.class);
-                DialerUtils.startActivityWithErrorToast(mContext, intent);
-                return true;
+        int resId = item.getItemId();
+        if (resId == R.id.context_menu_block_number) {
+            BlockNumberDialogFragment.show(
+                    blockId,
+                    number,
+                    countryIso,
+                    displayNumber,
+                    R.id.floating_action_button_container,
+                    ((Activity) mContext).getFragmentManager(),
+                    mFilteredNumberDialogCallback);
+            return true;
+        } else if (resId == R.id.context_menu_copy_to_clipboard) {
+            ClipboardUtils.copyText(mContext, null, number, true);
+            return true;
+        } else if (resId == R.id.context_menu_copy_transcript_to_clipboard) {
+            ClipboardUtils.copyText(mContext, null,
+                    phoneCallDetailsViews.voicemailTranscriptionView.getText(), true);
+            return true;
+        } else if (resId == R.id.context_menu_edit_before_call) {
+            final Intent intent = new Intent(
+                    Intent.ACTION_DIAL, CallUtil.getCallUri(number));
+            intent.setClass(mContext, DialtactsActivity.class);
+            DialerUtils.startActivityWithErrorToast(mContext, intent);
+            return true;
         }
         return false;
     }

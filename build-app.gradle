@@ -29,6 +29,6 @@ dependencies {
     compile project(':vcard')
 
     compile project(':ContactsCommon')
-    compile project(':PhoneCommon')
     compile project(':InCallUI')
+    compile project(':PhoneCommon')
 }

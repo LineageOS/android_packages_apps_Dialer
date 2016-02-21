@@ -116,21 +116,18 @@ public class ViewNumbersToImportFragment extends ListFragment
 
     @Override
     public void onClick(final View view) {
-        switch (view.getId()) {
-            case R.id.import_button:
-                FilteredNumbersUtil.importSendToVoicemailContacts(getContext(),
-                        new ImportSendToVoicemailContactsListener() {
-                            @Override
-                            public void onImportComplete() {
-                                if (getActivity() != null) {
-                                    getActivity().onBackPressed();
-                                }
+        if (view.getId() == R.id.import_button) {
+            FilteredNumbersUtil.importSendToVoicemailContacts(getContext(),
+                    new ImportSendToVoicemailContactsListener() {
+                        @Override
+                        public void onImportComplete() {
+                            if (getActivity() != null) {
+                                getActivity().onBackPressed();
                             }
-                        });
-                break;
-            case R.id.cancel_button:
-                getActivity().onBackPressed();
-                break;
+                        }
+                    });
+        } else if (view.getId() == R.id.cancel_button) {
+            getActivity().onBackPressed();
         }
     }
 }
