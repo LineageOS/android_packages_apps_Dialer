@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+
+android {
+    sourceSets.main {
+        manifest.srcFile 'AndroidManifest.xml'
+        res.srcDirs = ['res']
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:23.1.+'
+    compile project(':PhoneCommon')
+    compile project(':ContactsCommon')
+}
