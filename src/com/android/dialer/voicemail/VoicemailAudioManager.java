@@ -19,9 +19,8 @@ package com.android.dialer.voicemail;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.telecom.CallAudioState;
 import android.util.Log;
-
-import com.android.dialer.compat.CallAudioStateCompat;
 
 import java.util.concurrent.RejectedExecutionException;
 
@@ -38,7 +37,7 @@ final class VoicemailAudioManager implements OnAudioFocusChangeListener,
     private VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private WiredHeadsetManager mWiredHeadsetManager;
     private boolean mWasSpeakerOn;
-    private CallAudioStateCompat mCallAudioState;
+    private CallAudioState mCallAudioState;
 
     public VoicemailAudioManager(Context context,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter) {
@@ -82,26 +81,25 @@ final class VoicemailAudioManager implements OnAudioFocusChangeListener,
 
         int newRoute = mCallAudioState.getRoute();  // start out with existing route
         if (newIsPluggedIn) {
-            newRoute = CallAudioStateCompat.ROUTE_WIRED_HEADSET;
+            newRoute = CallAudioState.ROUTE_WIRED_HEADSET;
         } else {
             if (mWasSpeakerOn) {
-                newRoute = CallAudioStateCompat.ROUTE_SPEAKER;
+                newRoute = CallAudioState.ROUTE_SPEAKER;
             } else {
-                newRoute = CallAudioStateCompat.ROUTE_EARPIECE;
+                newRoute = CallAudioState.ROUTE_EARPIECE;
             }
         }
 
-        mVoicemailPlaybackPresenter.setSpeakerphoneOn(newRoute == CallAudioStateCompat.ROUTE_SPEAKER);
+        mVoicemailPlaybackPresenter.setSpeakerphoneOn(newRoute == CallAudioState.ROUTE_SPEAKER);
 
         // We need to call this every time even if we do not change the route because the supported
         // routes changed either to include or not include WIRED_HEADSET.
         setSystemAudioState(
-                new CallAudioStateCompat(false /* muted */, newRoute, calculateSupportedRoutes()));
+                new CallAudioState(false /* muted */, newRoute, calculateSupportedRoutes()));
     }
 
     public void setSpeakerphoneOn(boolean on) {
-        setAudioRoute(on ? CallAudioStateCompat.ROUTE_SPEAKER
-                : CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE);
+        setAudioRoute(on ? CallAudioState.ROUTE_SPEAKER : CallAudioState.ROUTE_WIRED_OR_EARPIECE);
     }
 
     public boolean isWiredHeadsetPluggedIn() {
@@ -120,10 +118,10 @@ final class VoicemailAudioManager implements OnAudioFocusChangeListener,
     /**
      * Change the audio route, for example from earpiece to speakerphone.
      *
-     * @param route The new audio route to use. See {@link CallAudioStateCompat}.
+     * @param route The new audio route to use. See {@link CallAudioState}.
      */
     void setAudioRoute(int route) {
-        Log.v(TAG, "setAudioRoute, route: " + CallAudioStateCompat.audioRouteToString(route));
+        Log.v(TAG, "setAudioRoute, route: " + CallAudioState.audioRouteToString(route));
 
         // Change ROUTE_WIRED_OR_EARPIECE to a single entry.
         int newRoute = selectWiredOrEarpiece(route, mCallAudioState.getSupportedRouteMask());
@@ -137,25 +135,25 @@ final class VoicemailAudioManager implements OnAudioFocusChangeListener,
         if (mCallAudioState.getRoute() != newRoute) {
             // Remember the new speaker state so it can be restored when the user plugs and unplugs
             // a headset.
-            mWasSpeakerOn = newRoute == CallAudioStateCompat.ROUTE_SPEAKER;
-            setSystemAudioState(new CallAudioStateCompat(false /* muted */, newRoute,
+            mWasSpeakerOn = newRoute == CallAudioState.ROUTE_SPEAKER;
+            setSystemAudioState(new CallAudioState(false /* muted */, newRoute,
                     mCallAudioState.getSupportedRouteMask()));
         }
     }
 
-    private CallAudioStateCompat getInitialAudioState() {
+    private CallAudioState getInitialAudioState() {
         int supportedRouteMask = calculateSupportedRoutes();
-        int route = selectWiredOrEarpiece(CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE,
+        int route = selectWiredOrEarpiece(CallAudioState.ROUTE_WIRED_OR_EARPIECE,
                 supportedRouteMask);
-        return new CallAudioStateCompat(false /* muted */, route, supportedRouteMask);
+        return new CallAudioState(false /* muted */, route, supportedRouteMask);
     }
 
     private int calculateSupportedRoutes() {
-        int routeMask = CallAudioStateCompat.ROUTE_SPEAKER;
+        int routeMask = CallAudioState.ROUTE_SPEAKER;
         if (mWiredHeadsetManager.isPluggedIn()) {
-            routeMask |= CallAudioStateCompat.ROUTE_WIRED_HEADSET;
+            routeMask |= CallAudioState.ROUTE_WIRED_HEADSET;
         } else {
-            routeMask |= CallAudioStateCompat.ROUTE_EARPIECE;
+            routeMask |= CallAudioState.ROUTE_EARPIECE;
         }
         return routeMask;
     }
@@ -164,29 +162,29 @@ final class VoicemailAudioManager implements OnAudioFocusChangeListener,
         // Since they are mutually exclusive and one is ALWAYS valid, we allow a special input of
         // ROUTE_WIRED_OR_EARPIECE so that callers don't have to make a call to check which is
         // supported before calling setAudioRoute.
-        if (route == CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE) {
-            route = CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE & supportedRouteMask;
+        if (route == CallAudioState.ROUTE_WIRED_OR_EARPIECE) {
+            route = CallAudioState.ROUTE_WIRED_OR_EARPIECE & supportedRouteMask;
             if (route == 0) {
                 Log.wtf(TAG, "One of wired headset or earpiece should always be valid.");
                 // assume earpiece in this case.
-                route = CallAudioStateCompat.ROUTE_EARPIECE;
+                route = CallAudioState.ROUTE_EARPIECE;
             }
         }
         return route;
     }
 
-    private void setSystemAudioState(CallAudioStateCompat callAudioState) {
-        CallAudioStateCompat oldAudioState = mCallAudioState;
+    private void setSystemAudioState(CallAudioState callAudioState) {
+        CallAudioState oldAudioState = mCallAudioState;
         mCallAudioState = callAudioState;
 
         Log.i(TAG, "setSystemAudioState: changing from " + oldAudioState + " to "
                 + mCallAudioState);
 
         // Audio route.
-        if (mCallAudioState.getRoute() == CallAudioStateCompat.ROUTE_SPEAKER) {
+        if (mCallAudioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
             turnOnSpeaker(true);
-        } else if (mCallAudioState.getRoute() == CallAudioStateCompat.ROUTE_EARPIECE ||
-                mCallAudioState.getRoute() == CallAudioStateCompat.ROUTE_WIRED_HEADSET) {
+        } else if (mCallAudioState.getRoute() == CallAudioState.ROUTE_EARPIECE ||
+                mCallAudioState.getRoute() == CallAudioState.ROUTE_WIRED_HEADSET) {
             // Just handle turning off the speaker, the system will handle switching between wired
             // headset and earpiece.
             turnOnSpeaker(false);

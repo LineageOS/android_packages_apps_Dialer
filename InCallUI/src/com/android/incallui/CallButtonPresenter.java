@@ -31,12 +31,12 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.telecom.CallAudioState;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 
 import com.android.contacts.common.compat.CallSdkCompat;
 import com.android.contacts.common.compat.SdkVersionOverride;
-import com.android.dialer.compat.CallAudioStateCompat;
 import com.android.dialer.compat.UserManagerCompat;
 import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.InCallCameraManager.Listener;
@@ -189,7 +189,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         // an update for onAudioMode().  This will make UI response immediate
         // if it turns out to be slow
 
-        Log.d(this, "Sending new Audio Mode: " + CallAudioStateCompat.audioRouteToString(mode));
+        Log.d(this, "Sending new Audio Mode: " + CallAudioState.audioRouteToString(mode));
         TelecomAdapter.getInstance().setAudioRoute(mode);
     }
 
@@ -198,7 +198,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     public void toggleSpeakerphone() {
         // this function should not be called if bluetooth is available
-        if (0 != (CallAudioStateCompat.ROUTE_BLUETOOTH & getSupportedAudio())) {
+        if (0 != (CallAudioState.ROUTE_BLUETOOTH & getSupportedAudio())) {
 
             // It's clear the UI is wrong, so update the supported mode once again.
             Log.e(this, "toggling speakerphone not allowed when bluetooth supported.");
@@ -206,11 +206,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
-        int newMode = CallAudioStateCompat.ROUTE_SPEAKER;
+        int newMode = CallAudioState.ROUTE_SPEAKER;
 
         // if speakerphone is already on, change to wired/earpiece
-        if (getAudioMode() == CallAudioStateCompat.ROUTE_SPEAKER) {
-            newMode = CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE;
+        if (getAudioMode() == CallAudioState.ROUTE_SPEAKER) {
+            newMode = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
         }
 
         setAudioMode(newMode);
