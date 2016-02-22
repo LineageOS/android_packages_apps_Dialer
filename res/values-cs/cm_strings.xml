@@ -87,4 +87,7 @@
   <string name="call_stats_title_count">Počet hovorů</string>
   <string name="call_stats_title_average_duration">Průměrné délka hovoru</string>
   <string name="recent_calls_no_items_in_range">Seznam hovorů neobsahuje v daném časovém úseku žádná data.</string>
+  <string name="call_recording_category_title">Nahrávání hovorů</string>
+  <string name="call_recording_format">Formát zvuku</string>
+  <string name="call_playback_no_app_found_toast">Nenalezena žádná aplikace pro přehrávání vybraného záznamu.</string>
 </resources>

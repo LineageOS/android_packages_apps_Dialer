@@ -33,6 +33,7 @@
   <string name="people_lookup_provider_title">Leverantör för personsökning</string>
   <string name="reverse_lookup_provider_title">Leverantör för omvänd sökning</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
+  <string name="type_blacklist">Svartlistat samtal</string>
   <string name="menu_add_to_blacklist">Lägg till listan över blockerade nummer</string>
   <string name="toast_added_to_blacklist">%s lades till listan över blockerade nummer.</string>
   <string name="toast_removed_from_blacklist">%s borttagen från listan med blockerade uppringare.</string>
@@ -86,4 +87,7 @@
   <string name="call_stats_title_count">Antal samtal</string>
   <string name="call_stats_title_average_duration">Genomsnittlig Samtalslängd</string>
   <string name="recent_calls_no_items_in_range">Samtalsloggen innehåller inte några samtal i det valda tidsintervallet.</string>
+  <string name="call_recording_category_title">Samtalsinspelning</string>
+  <string name="call_recording_format">Ljudformat</string>
+  <string name="call_playback_no_app_found_toast">Ingen app kunde hittas för uppspelning av den valda inspelningen.</string>
 </resources>

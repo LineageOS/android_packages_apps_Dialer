@@ -59,6 +59,7 @@
   <string name="call_log_blacklist_header">Doar apeluri blocate</string>
   <string name="call_log_stats_title">Statistici</string>
   <string name="callStatsDetailTitle">Detalii statistică apel</string>
+  <string name="call_stats_incoming">Primit: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_outgoing">Efectuat: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">Pierdut: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blacklisted">Blocat: <xliff:g id="value">%s</xliff:g></string>
@@ -86,4 +87,7 @@
   <string name="call_stats_title_count">Număr apeluri</string>
   <string name="call_stats_title_average_duration">Durata medie a apelului</string>
   <string name="recent_calls_no_items_in_range">Istoricul apelurilor nu conține apeluri în intervalul de timp selectat.</string>
+  <string name="call_recording_category_title">Înregistrare apel</string>
+  <string name="call_recording_format">Format audio</string>
+  <string name="call_playback_no_app_found_toast">Nu s-a putut găsi nicio aplicație pentru redarea înregistrării selectate.</string>
 </resources>

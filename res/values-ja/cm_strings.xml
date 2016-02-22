@@ -49,10 +49,10 @@
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="incall_vibration_category_title">通話中のバイブレーション</string>
-  <string name="incall_vibrate_outgoing_title">応答時のバイブレーション</string>
-  <string name="incall_vibrate_call_waiting_title">割込通話時のバイブレーション</string>
-  <string name="incall_vibrate_hangup_title">通話終了時のバイブレーション</string>
-  <string name="incall_vibrate_45_title">時間ごとのバイブレーション</string>
+  <string name="incall_vibrate_outgoing_title">応答時に振動</string>
+  <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
+  <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
+  <string name="incall_vibrate_45_title">時間ごとに振動</string>
   <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
   <string name="call_log_show_all_slots">すべてのSIM</string>
   <string name="call_log_all_calls_header">すべての通話</string>

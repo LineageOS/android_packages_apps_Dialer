@@ -87,4 +87,7 @@
   <string name="call_stats_title_count">Contagem de chamada</string>
   <string name="call_stats_title_average_duration">Duração média de chamada</string>
   <string name="recent_calls_no_items_in_range">Seu registro de chamadas não contém chamadas no intervalo de tempo selecionado.</string>
+  <string name="call_recording_category_title">Gravação de chamadas</string>
+  <string name="call_recording_format">Formato de áudio</string>
+  <string name="call_playback_no_app_found_toast">Nenhum app pôde ser encontrado para a reprodução da gravação selecionada.</string>
 </resources>
