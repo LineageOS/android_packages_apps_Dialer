@@ -37,8 +37,8 @@
   <string name="menu_add_to_blacklist">Добавяне към списъка на блокираните контакти</string>
   <string name="toast_added_to_blacklist">%s е добавен към списъка на блокираните контакти.</string>
   <string name="toast_removed_from_blacklist">%s е отстранен от списъка с блокирани контакти.</string>
-  <string name="call_log_action_block">Блокиране на абоната</string>
-  <string name="call_log_action_unblock">Абоната е блокиран</string>
+  <string name="call_log_action_block">Блокиране на контакта</string>
+  <string name="call_log_action_unblock">Контакта е блокиран</string>
   <string name="speed_dial_settings">Бързо набиране</string>
   <string name="speed_dial_not_set">(не е зададен)</string>
   <string name="speed_dial_replace">Замени</string>
