@@ -53,7 +53,6 @@ import com.android.incallui.InCallPresenter.InCallEventListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
-import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
@@ -343,7 +342,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         updatePrimaryCallState();
 
         if (call.can(Details.CAPABILITY_MANAGE_CONFERENCE) !=
-                DetailsCompat.can(details, Details.CAPABILITY_MANAGE_CONFERENCE)) {
+                details.can(Details.CAPABILITY_MANAGE_CONFERENCE)) {
             maybeShowManageConferenceCallButton();
         }
     }
@@ -1120,8 +1119,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     private static boolean hasCallSubject(Call call) {
-        return !TextUtils.isEmpty(DetailsCompat.getIntentExtras(
-                call.getTelecomCall().getDetails()).getString(TelecomManager.EXTRA_CALL_SUBJECT));
+        return !TextUtils.isEmpty(call.getTelecomCall().getDetails().getIntentExtras()
+                .getString(TelecomManager.EXTRA_CALL_SUBJECT));
     }
 
     public interface CallCardUi extends Ui {

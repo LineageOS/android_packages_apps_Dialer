@@ -38,7 +38,6 @@ import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
-import com.android.incallui.compat.telecom.DetailsCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -356,10 +355,9 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
                     new ContactLookupCallback(this));
         }
 
-        boolean thisRowCanSeparate = mParentCanSeparate && DetailsCompat.can(
-                call.getTelecomCall().getDetails(),
+        boolean thisRowCanSeparate = mParentCanSeparate && call.getTelecomCall().getDetails().can(
                 android.telecom.Call.Details.CAPABILITY_SEPARATE_FROM_CONFERENCE);
-        boolean thisRowCanDisconnect = DetailsCompat.can(call.getTelecomCall().getDetails(),
+        boolean thisRowCanDisconnect = call.getTelecomCall().getDetails().can(
                 android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE);
 
         setCallerInfoForRow(result, contactCache.namePrimary,
