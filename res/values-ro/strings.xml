@@ -70,8 +70,8 @@
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Configurați"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Apel. mesag. vocală"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="sms_disambig_title" msgid="5846266399240630846">"Selectaţi numărul"</string>
-    <string name="call_disambig_title" msgid="4392886850104795739">"Selectaţi numărul"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"Selectați numărul"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"Selectați numărul"</string>
     <string name="make_primary" msgid="5829291915305113983">"Rețineți această alegere"</string>
     <string name="description_search_button" msgid="3660807558587384889">"căutare"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"apelați"</string>
@@ -97,10 +97,10 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Detaliile apelului"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Nu sunt disponibile detalii"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tastatura tactilă cu sunet"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Reveniţi la apelul în curs"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Reveniți la apelul în curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Adăugați un apel"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Apel de intrare"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Apel de ieşire"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Apel de ieșire"</string>
     <string name="type_missed" msgid="2720502601640509542">"Apel nepreluat"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Apel video primit"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Apel video efectuat"</string>
