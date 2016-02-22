@@ -164,8 +164,7 @@ public class ContactInfoHelper {
 
         Cursor phoneLookupCursor = null;
         try {
-            String[] projection = (isSip) ? PhoneQuery.SIP_PHONE_LOOKUP_PROJECTION
-                    : PhoneQuery.PHONE_LOOKUP_PROJECTION;
+            String[] projection = PhoneQuery.getPhoneLookupProjection(uri);
             phoneLookupCursor = mContext.getContentResolver().query(uri, projection, null, null,
                     null);
         } catch (NullPointerException e) {

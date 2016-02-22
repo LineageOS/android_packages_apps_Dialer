@@ -407,13 +407,15 @@ public class CallerInfoAsyncQuery {
             cw.event = EVENT_NEW_QUERY;
         }
 
+
+        String[] proejection = CallerInfo.getDefaultPhoneLookupProjection(contactRef);
         c.mHandler.startQuery(token,
-                              cw,  // cookie
-                              contactRef,  // uri
-                              CallerInfo.DEFAULT_PHONELOOKUP_PROJECTION,  // projection
-                              null,  // selection
-                              null,  // selectionArgs
-                              null);  // orderBy
+                cw,  // cookie
+                contactRef,  // uri
+                proejection, // projection
+                null,  // selection
+                null,  // selectionArgs
+                null);  // orderBy
         return c;
     }
 
