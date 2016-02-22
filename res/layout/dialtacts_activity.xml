@@ -57,7 +57,7 @@
 
     <FrameLayout
         android:id="@+id/ild_global_container"
-        android:background="@color/background_dialer_light"
+        android:background="@color/credit_banner_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -86,6 +86,7 @@
                     android:id="@+id/ild_country"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/credit_banner_text"
                     android:layout_gravity="start" />
 
             </LinearLayout>
@@ -104,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:textStyle="bold"
+                    android:textColor="@color/credit_banner_text"
                     android:layout_gravity="end" />
 
             </LinearLayout>
