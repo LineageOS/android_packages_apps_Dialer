@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
@@ -56,7 +55,6 @@ import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.TelecomUtil;
-import com.android.incallui.compat.telecom.DetailsCompat;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
 
@@ -139,89 +137,38 @@ public class InCallPresenter implements CallList.Listener,
      */
     private boolean mIsFullScreen = false;
 
-    private final Object mCallCallback = newTelecomCallCallback();
-
-    private Object newTelecomCallCallback() {
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-            return newMarshmallowTelecomCallCallback();
+    private final android.telecom.Call.Callback mCallCallback = new android.telecom.Call.Callback() {
+        @Override
+        public void onPostDialWait(android.telecom.Call telecomCall,
+                String remainingPostDialSequence) {
+            final Call call = mCallList.getCallByTelecomCall(telecomCall);
+            if (call == null) {
+                Log.w(this, "Call not found in call list: " + telecomCall);
+                return;
+            }
+            onPostDialCharWait(call.getId(), remainingPostDialSequence);
         }
-        return newLollipopTelecomCallCallback();
-    }
 
-    private Object newMarshmallowTelecomCallCallback() {
-        Log.i(this, "Using android.telecom.Call.Callback");
-        return new android.telecom.Call.Callback() {
-            @Override
-            public void onPostDialWait(android.telecom.Call telecomCall,
-                    String remainingPostDialSequence) {
-                final Call call = mCallList.getCallByTelecomCall(telecomCall);
-                if (call == null) {
-                    Log.w(this, "Call not found in call list: " + telecomCall);
-                    return;
-                }
-                onPostDialCharWait(call.getId(), remainingPostDialSequence);
+        @Override
+        public void onDetailsChanged(android.telecom.Call telecomCall,
+                android.telecom.Call.Details details) {
+            final Call call = mCallList.getCallByTelecomCall(telecomCall);
+            if (call == null) {
+                Log.w(this, "Call not found in call list: " + telecomCall);
+                return;
             }
+            for (InCallDetailsListener listener : mDetailsListeners) {
+                listener.onDetailsChanged(call, details);
+            }
+        }
 
-            @Override
-            public void onDetailsChanged(android.telecom.Call telecomCall,
-                    android.telecom.Call.Details details) {
-                final Call call = mCallList.getCallByTelecomCall(telecomCall);
-                if (call == null) {
-                    Log.w(this, "Call not found in call list: " + telecomCall);
-                    return;
-                }
-                for (InCallDetailsListener listener : mDetailsListeners) {
-                    listener.onDetailsChanged(call, details);
-                }
-            }
-
-            @Override
-            public void onConferenceableCallsChanged(android.telecom.Call telecomCall,
-                    List<android.telecom.Call> conferenceableCalls) {
-                Log.i(this, "onConferenceableCallsChanged: " + telecomCall);
-                onDetailsChanged(telecomCall, telecomCall.getDetails());
-            }
-        };
-    }
-
-    private Object newLollipopTelecomCallCallback() {
-        // This code only runs for Google Experience phones on the pre-M sdk since only the system
-        // dialer can invoke the InCallUI code. This allows us to safely use the
-        // android.telecom.Call.Listener interface
-        Log.i(this, "Using android.telecom.Call.Listener");
-        return new android.telecom.Call.Listener() {
-            @Override
-            public void onPostDialWait(android.telecom.Call telecomCall,
-                    String remainingPostDialSequence) {
-                final Call call = mCallList.getCallByTelecomCall(telecomCall);
-                if (call == null) {
-                    Log.w(this, "Call not found in call list: " + telecomCall);
-                    return;
-                }
-                onPostDialCharWait(call.getId(), remainingPostDialSequence);
-            }
-
-            @Override
-            public void onDetailsChanged(android.telecom.Call telecomCall,
-                    android.telecom.Call.Details details) {
-                final Call call = mCallList.getCallByTelecomCall(telecomCall);
-                if (call == null) {
-                    Log.w(this, "Call not found in call list: " + telecomCall);
-                    return;
-                }
-                for (InCallDetailsListener listener : mDetailsListeners) {
-                    listener.onDetailsChanged(call, details);
-                }
-            }
-
-            @Override
-            public void onConferenceableCallsChanged(android.telecom.Call telecomCall,
-                    List<android.telecom.Call> conferenceableCalls) {
-                Log.i(this, "onConferenceableCallsChanged: " + telecomCall);
-                onDetailsChanged(telecomCall, telecomCall.getDetails());
-            }
-        };
-    }
+        @Override
+        public void onConferenceableCallsChanged(android.telecom.Call telecomCall,
+                List<android.telecom.Call> conferenceableCalls) {
+            Log.i(this, "onConferenceableCallsChanged: " + telecomCall);
+            onDetailsChanged(telecomCall, telecomCall.getDetails());
+        }
+    };
 
     private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         public void onCallStateChanged(int state, String incomingNumber) {
@@ -559,11 +506,7 @@ public class InCallPresenter implements CallList.Listener,
 
         // Since a call has been added we are no longer waiting for Telecom to send us a call.
         setBoundAndWaitingForOutgoingCall(false, null);
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-            call.registerCallback((android.telecom.Call.Callback) mCallCallback);
-        } else {
-            call.addListener((android.telecom.Call.Listener) mCallCallback);
-        }
+        call.registerCallback(mCallCallback);
     }
 
     /**
@@ -632,11 +575,7 @@ public class InCallPresenter implements CallList.Listener,
 
     public void onCallRemoved(android.telecom.Call call) {
         mCallList.onCallRemoved(call);
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-            call.unregisterCallback((android.telecom.Call.Callback) mCallCallback);
-        } else {
-            call.removeListener((android.telecom.Call.Listener) mCallCallback);
-        }
+        call.unregisterCallback(mCallCallback);
     }
 
     public void onCanAddCallChanged(boolean canAddCall) {
@@ -1470,7 +1409,7 @@ public class InCallPresenter implements CallList.Listener,
     private void setDisconnectCauseForMissingAccounts(Call call) {
         android.telecom.Call telecomCall = call.getTelecomCall();
 
-        Bundle extras = DetailsCompat.getIntentExtras(telecomCall.getDetails());
+        Bundle extras = telecomCall.getDetails().getIntentExtras();
         // Initialize the extras bundle to avoid NPE
         if (extras == null) {
             extras = new Bundle();
