@@ -252,6 +252,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Харилцагчаа хайхын тулд, Харилцагчийн жагсаалтын зөвшөөрлийг идэвхжүүлнэ үү."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Залгахын тулд Утасны зөвшөөрлийг идэвхжүүлнэ үү."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Гар утасны апп-д системийн тохиргоо бичих зөвшөөрөл алга."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Блоклосон"</string>
 </resources>

@@ -252,6 +252,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"तपाईँको सम्पर्कहरू खोज गर्न सम्पर्क अनुमतिहरू सक्रिय गर्नुहोस्।"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"कल गर्न फोन अनुमति सक्रिय गर्नुहोस्।"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"प्रणाली सेटिङहरूमा लेख्न फोन अनुप्रयोगसँग अनुमति छैन।"</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"रोकियो"</string>
 </resources>

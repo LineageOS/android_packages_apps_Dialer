@@ -253,6 +253,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"ನಿಮ್ಮ ಸಂಪರ್ಕಗಳನ್ನು ಹುಡುಕಲು, ಸಂಪರ್ಕಗಳ ಅನುಮತಿಗಳನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"ಕರೆ ಮಾಡಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಬರೆಯಲು ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
 </resources>

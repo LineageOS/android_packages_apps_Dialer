@@ -252,6 +252,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"നിങ്ങളുടെ കോൺടാക്റ്റുകൾ തിരയുന്നതിന് കോൺടാക്റ്റുകൾക്കുള്ള അനുമതികൾ ഓണാക്കുക."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"കോൾ വിളിക്കുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"സിസ്റ്റം ക്രമീകരണത്തിലേക്ക് എഴുതാൻ ഫോൺ ആപ്പിന് അനുമതിയില്ല."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ബ്ലോക്കുചെയ്തു"</string>
 </resources>

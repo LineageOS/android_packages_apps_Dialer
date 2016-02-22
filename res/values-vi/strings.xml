@@ -252,6 +252,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Để tìm kiếm liên hệ của bạn, hãy bật quyền đối với Danh bạ."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Để thực hiện cuộc gọi, bật quyền đối với Điện thoại."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Ứng dụng Điện thoại không có quyền ghi vào cài đặt hệ thống."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bị chặn"</string>
 </resources>

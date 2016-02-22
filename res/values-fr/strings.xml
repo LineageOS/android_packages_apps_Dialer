@@ -252,6 +252,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Pour rechercher vos contacts, activez l\'autorisation Contacts."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Pour passer un appel, activez l\'autorisation Téléphone."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'application Téléphone n\'est pas autorisée à modifier les paramètres du système."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloqué"</string>
 </resources>

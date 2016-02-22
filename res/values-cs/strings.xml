@@ -256,6 +256,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Chcete-li uskutečnit hovor, aktivujte oprávnění Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikace Telefon nemá oprávnění provádět zápis do nastavení systému."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Blokováno"</string>
 </resources>

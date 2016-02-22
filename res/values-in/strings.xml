@@ -252,6 +252,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Untuk menelusuri kontak, aktifkan izin Kontak."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Untuk melakukan panggilan, aktifkan izin Telepon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikasi telepon tidak memiliki izin untuk menulis ke setelan sistem."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Diblokir"</string>
 </resources>
