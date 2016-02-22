@@ -3,6 +3,8 @@ package com.android.incallui;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.android.dialer.R;
+
 /**
  * Methods to parse time and date information in the InCallUi
  */

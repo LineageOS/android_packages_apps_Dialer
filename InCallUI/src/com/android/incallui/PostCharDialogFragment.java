@@ -23,6 +23,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.android.dialer.R;
+
 /**
  * Pop up an alert dialog with OK and Cancel buttons to allow user to Accept or Reject the WAIT
  * inserted as part of the Dial string.

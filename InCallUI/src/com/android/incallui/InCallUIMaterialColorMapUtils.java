@@ -6,6 +6,7 @@ import android.telecom.PhoneAccount;
 
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import com.android.dialer.R;
 
 public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
     private final TypedArray sPrimaryColors;
@@ -14,10 +15,8 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
 
     public InCallUIMaterialColorMapUtils(Resources resources) {
         super(resources);
-        sPrimaryColors = resources.obtainTypedArray(
-                com.android.incallui.R.array.background_colors);
-        sSecondaryColors = resources.obtainTypedArray(
-                com.android.incallui.R.array.background_colors_dark);
+        sPrimaryColors = resources.obtainTypedArray(R.array.background_colors);
+        sSecondaryColors = resources.obtainTypedArray(R.array.background_colors_dark);
         mResources = resources;
     }
 

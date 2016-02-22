@@ -54,6 +54,7 @@ import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import com.android.dialer.R;
 import com.android.dialer.compat.CallAudioStateCompat;
 
 /**
@@ -199,56 +200,40 @@ public class CallButtonFragment
         int id = view.getId();
         Log.d(this, "onClick(View " + view + ", id " + id + ")...");
 
-        switch (id) {
-            case R.id.audioButton:
-                onAudioButtonClicked();
-                break;
-            case R.id.addButton:
-                getPresenter().addCallClicked();
-                break;
-            case R.id.muteButton: {
-                getPresenter().muteClicked(!mMuteButton.isSelected());
-                break;
+        if (id == R.id.audioButton) {
+            onAudioButtonClicked();
+        } else if (id == R.id.addButton) {
+            getPresenter().addCallClicked();
+        } else if (id == R.id.muteButton) {
+            getPresenter().muteClicked(!mMuteButton.isSelected());
+        } else if (id == R.id.mergeButton) {
+            getPresenter().mergeClicked();
+            mMergeButton.setEnabled(false);
+        } else if (id == R.id.holdButton) {
+            getPresenter().holdClicked(!mHoldButton.isSelected());
+        } else if (id == R.id.swapButton) {
+            getPresenter().swapClicked();
+        } else if (id == R.id.dialpadButton) {
+            getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
+        } else if (id == R.id.changeToVideoButton) {
+            getPresenter().changeToVideoClicked();
+        } else if (id == R.id.changeToVoiceButton) {
+            getPresenter().changeToVoiceClicked();
+        } else if (id == R.id.switchCameraButton) {
+            getPresenter().switchCameraClicked(
+                    mSwitchCameraButton.isSelected() /* useFrontFacingCamera */);
+        } else if (id == R.id.pauseVideoButton) {
+            getPresenter().pauseVideoClicked(
+                    !mPauseVideoButton.isSelected() /* pause */);
+        } else if (id == R.id.overflowButton) {
+            if (mOverflowPopup != null) {
+                mOverflowPopup.show();
             }
-            case R.id.mergeButton:
-                getPresenter().mergeClicked();
-                mMergeButton.setEnabled(false);
-                break;
-            case R.id.holdButton: {
-                getPresenter().holdClicked(!mHoldButton.isSelected());
-                break;
-            }
-            case R.id.swapButton:
-                getPresenter().swapClicked();
-                break;
-            case R.id.dialpadButton:
-                getPresenter().showDialpadClicked(!mShowDialpadButton.isSelected());
-                break;
-            case R.id.changeToVideoButton:
-                getPresenter().changeToVideoClicked();
-                break;
-            case R.id.changeToVoiceButton:
-                getPresenter().changeToVoiceClicked();
-                break;
-            case R.id.switchCameraButton:
-                getPresenter().switchCameraClicked(
-                        mSwitchCameraButton.isSelected() /* useFrontFacingCamera */);
-                break;
-            case R.id.pauseVideoButton:
-                getPresenter().pauseVideoClicked(
-                        !mPauseVideoButton.isSelected() /* pause */);
-                break;
-            case R.id.overflowButton:
-                if (mOverflowPopup != null) {
-                    mOverflowPopup.show();
-                }
-                break;
-            case R.id.manageVideoCallConferenceButton:
-                onManageVideoCallConferenceClicked();
-                break;
-            default:
-                Log.wtf(this, "onClick: unexpected");
-                return;
+        } else if (id == R.id.manageVideoCallConferenceButton) {
+            onManageVideoCallConferenceClicked();
+        } else {
+            Log.wtf(this, "onClick: unexpected");
+            return;
         }
 
         view.performHapticFeedback(
@@ -394,34 +379,33 @@ public class CallButtonFragment
     }
 
     private View getButtonById(int id) {
-        switch (id) {
-            case BUTTON_AUDIO:
-                return mAudioButton;
-            case BUTTON_MUTE:
-                return mMuteButton;
-            case BUTTON_DIALPAD:
-                return mShowDialpadButton;
-            case BUTTON_HOLD:
-                return mHoldButton;
-            case BUTTON_SWAP:
-                return mSwapButton;
-            case BUTTON_UPGRADE_TO_VIDEO:
-                return mChangeToVideoButton;
-            case BUTTON_DOWNGRADE_TO_AUDIO:
-                return mChangeToVoiceButton;
-            case BUTTON_SWITCH_CAMERA:
-                return mSwitchCameraButton;
-            case BUTTON_ADD_CALL:
-                return mAddCallButton;
-            case BUTTON_MERGE:
-                return mMergeButton;
-            case BUTTON_PAUSE_VIDEO:
-                return mPauseVideoButton;
-            case BUTTON_MANAGE_VIDEO_CONFERENCE:
-                return mManageVideoCallConferenceButton;
-            default:
-                Log.w(this, "Invalid button id");
-                return null;
+        if (id == BUTTON_AUDIO) {
+            return mAudioButton;
+        } else if (id == BUTTON_MUTE) {
+            return mMuteButton;
+        } else if (id == BUTTON_DIALPAD) {
+            return mShowDialpadButton;
+        } else if (id == BUTTON_HOLD) {
+            return mHoldButton;
+        } else if (id == BUTTON_SWAP) {
+            return mSwapButton;
+        } else if (id == BUTTON_UPGRADE_TO_VIDEO) {
+            return mChangeToVideoButton;
+        } else if (id == BUTTON_DOWNGRADE_TO_AUDIO) {
+            return mChangeToVoiceButton;
+        } else if (id == BUTTON_SWITCH_CAMERA) {
+            return mSwitchCameraButton;
+        } else if (id == BUTTON_ADD_CALL) {
+            return mAddCallButton;
+        } else if (id == BUTTON_MERGE) {
+            return mMergeButton;
+        } else if (id == BUTTON_PAUSE_VIDEO) {
+            return mPauseVideoButton;
+        } else if (id == BUTTON_MANAGE_VIDEO_CONFERENCE) {
+            return mManageVideoCallConferenceButton;
+        } else {
+            Log.w(this, "Invalid button id");
+            return null;
         }
     }
 
@@ -540,24 +524,19 @@ public class CallButtonFragment
         Log.d(this, "  title: '" + item.getTitle() + "'");
 
         int mode = CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE;
+        int resId = item.getItemId();
 
-        switch (item.getItemId()) {
-            case R.id.audio_mode_speaker:
-                mode = CallAudioStateCompat.ROUTE_SPEAKER;
-                break;
-            case R.id.audio_mode_earpiece:
-            case R.id.audio_mode_wired_headset:
-                // InCallCallAudioState.ROUTE_EARPIECE means either the handset earpiece,
-                // or the wired headset (if connected.)
-                mode = CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE;
-                break;
-            case R.id.audio_mode_bluetooth:
-                mode = CallAudioStateCompat.ROUTE_BLUETOOTH;
-                break;
-            default:
-                Log.e(this, "onMenuItemClick:  unexpected View ID " + item.getItemId()
-                        + " (MenuItem = '" + item + "')");
-                break;
+        if (resId == R.id.audio_mode_speaker) {
+            mode = CallAudioStateCompat.ROUTE_SPEAKER;
+        } else if (resId == R.id.audio_mode_earpiece || resId == R.id.audio_mode_wired_headset) {
+            // InCallCallAudioState.ROUTE_EARPIECE means either the handset earpiece,
+            // or the wired headset (if connected.)
+            mode = CallAudioStateCompat.ROUTE_WIRED_OR_EARPIECE;
+        } else if (resId == R.id.audio_mode_bluetooth) {
+            mode = CallAudioStateCompat.ROUTE_BLUETOOTH;
+        } else {
+            Log.e(this, "onMenuItemClick:  unexpected View ID " + item.getItemId()
+                    + " (MenuItem = '" + item + "')");
         }
 
         getPresenter().setAudioMode(mode);

@@ -31,6 +31,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.android.dialer.R;
 import com.android.phone.common.animation.AnimUtils;
 import com.google.common.base.Objects;
 

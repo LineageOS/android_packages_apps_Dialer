@@ -37,6 +37,7 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;

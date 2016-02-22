@@ -50,6 +50,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.R;
 import com.android.incallui.Call.State;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -520,17 +521,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     }
 
     private static int getWorkStringFromPersonalString(int resId) {
-        switch(resId) {
-            case R.string.notification_ongoing_call:
-                return R.string.notification_ongoing_work_call;
-            case R.string.notification_ongoing_call_wifi:
-                return R.string.notification_ongoing_work_call_wifi;
-            case R.string.notification_incoming_call_wifi:
-                return R.string.notification_incoming_work_call_wifi;
-            case R.string.notification_incoming_call:
-                return R.string.notification_incoming_work_call;
-            default:
-                return resId;
+        if (resId == R.string.notification_ongoing_call) {
+            return R.string.notification_ongoing_work_call;
+        } else if (resId == R.string.notification_ongoing_call_wifi) {
+            return R.string.notification_ongoing_work_call_wifi;
+        } else if (resId == R.string.notification_incoming_call_wifi) {
+            return R.string.notification_incoming_work_call_wifi;
+        } else if (resId == R.string.notification_incoming_call) {
+            return R.string.notification_incoming_work_call;
+        } else {
+            return resId;
         }
     }
 

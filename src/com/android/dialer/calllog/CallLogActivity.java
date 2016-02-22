@@ -192,15 +192,14 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
             return true;
         }
 
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                final Intent intent = new Intent(this, DialtactsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                return true;
-            case R.id.delete_all:
-                ClearCallLogDialog.show(getFragmentManager());
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            final Intent intent = new Intent(this, DialtactsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.delete_all) {
+            ClearCallLogDialog.show(getFragmentManager());
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
