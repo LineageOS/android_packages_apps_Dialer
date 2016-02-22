@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import com.android.dialer.util.PhoneLookupUtil;
 import com.google.common.primitives.Longs;
 
 import android.content.Context;
@@ -32,6 +33,8 @@ import android.provider.ContactsContract.RawContacts;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import com.android.contacts.common.compat.CompatUtils;
+import com.android.contacts.common.compat.PhoneLookupSdkCompat;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -44,8 +47,9 @@ import com.android.dialer.calllog.ContactInfoHelper;
 public class CallerInfo {
     private static final String TAG = "CallerInfo";
 
-    public static final String[] DEFAULT_PHONELOOKUP_PROJECTION = new String[] {
-            PhoneLookup._ID,
+    // We should always use this projection starting from NYC onward.
+    private static final String[] DEFAULT_PHONELOOKUP_PROJECTION = new String[] {
+            PhoneLookupSdkCompat.CONTACT_ID,
             PhoneLookup.DISPLAY_NAME,
             PhoneLookup.LOOKUP_KEY,
             PhoneLookup.NUMBER,
@@ -56,6 +60,32 @@ public class CallerInfo {
             PhoneLookup.CUSTOM_RINGTONE,
             PhoneLookup.SEND_TO_VOICEMAIL
     };
+
+    // In pre-N, contact id is stored in {@link PhoneLookup._ID} in non-sip query.
+    private static final String[] BACKWARD_COMPATIBLE_NON_SIP_DEFAULT_PHONELOOKUP_PROJECTION =
+            new String[] {
+                    PhoneLookup._ID,
+                    PhoneLookup.DISPLAY_NAME,
+                    PhoneLookup.LOOKUP_KEY,
+                    PhoneLookup.NUMBER,
+                    PhoneLookup.NORMALIZED_NUMBER,
+                    PhoneLookup.LABEL,
+                    PhoneLookup.TYPE,
+                    PhoneLookup.PHOTO_URI,
+                    PhoneLookup.CUSTOM_RINGTONE,
+                    PhoneLookup.SEND_TO_VOICEMAIL
+    };
+
+    public static String[] getDefaultPhoneLookupProjection(Uri phoneLookupUri) {
+        if (CompatUtils.isNCompatible()) {
+            return DEFAULT_PHONELOOKUP_PROJECTION;
+        }
+        // Pre-N
+        boolean isSip = phoneLookupUri.getBooleanQueryParameter(
+                        ContactsContract.PhoneLookup.QUERY_PARAMETER_SIP_ADDRESS, false);
+        return (isSip) ? DEFAULT_PHONELOOKUP_PROJECTION
+                : BACKWARD_COMPATIBLE_NON_SIP_DEFAULT_PHONELOOKUP_PROJECTION;
+    }
 
     /**
      * Please note that, any one of these member variables can be null,
@@ -480,7 +510,7 @@ public class CallerInfo {
             // for phone numbers.
             // MIME type: PhoneLookup.CONTENT_TYPE (= "vnd.android.cursor.dir/phone_lookup")
             Log.v(TAG, "'phone_lookup' URI; using PhoneLookup._ID");
-            columnName = PhoneLookup._ID;
+            columnName = PhoneLookupUtil.getContactIdColumnNameForUri(contactRef);
         } else {
             Log.v(TAG, "Unexpected prefix for contactRef '" + url + "'");
         }
