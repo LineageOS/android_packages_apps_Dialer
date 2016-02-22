@@ -33,6 +33,7 @@
   <string name="people_lookup_provider_title">Leverantör för personsökning</string>
   <string name="reverse_lookup_provider_title">Leverantör för omvänd sökning</string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
+  <string name="type_blacklist">Svartlistat samtal</string>
   <string name="menu_add_to_blacklist">Lägg till listan över blockerade nummer</string>
   <string name="toast_added_to_blacklist">%s lades till listan över blockerade nummer.</string>
   <string name="toast_removed_from_blacklist">%s borttagen från listan med blockerade uppringare.</string>

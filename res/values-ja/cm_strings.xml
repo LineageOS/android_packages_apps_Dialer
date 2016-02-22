@@ -49,10 +49,10 @@
   <string name="yes">はい</string>
   <string name="no">いいえ</string>
   <string name="incall_vibration_category_title">通話中のバイブレーション</string>
-  <string name="incall_vibrate_outgoing_title">応答時のバイブレーション</string>
-  <string name="incall_vibrate_call_waiting_title">割込通話時のバイブレーション</string>
-  <string name="incall_vibrate_hangup_title">通話終了時のバイブレーション</string>
-  <string name="incall_vibrate_45_title">時間ごとのバイブレーション</string>
+  <string name="incall_vibrate_outgoing_title">応答時に振動</string>
+  <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
+  <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
+  <string name="incall_vibrate_45_title">時間ごとに振動</string>
   <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
   <string name="call_log_show_all_slots">すべてのSIM</string>
   <string name="call_log_all_calls_header">すべての通話</string>
@@ -87,7 +87,4 @@
   <string name="call_stats_title_count">通話回数</string>
   <string name="call_stats_title_average_duration">平均通話時間</string>
   <string name="recent_calls_no_items_in_range">指定した期間には通話履歴がありません。</string>
-  <string name="call_recording_category_title">通話の録音</string>
-  <string name="call_recording_format">音声フォーマット</string>
-  <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
 </resources>

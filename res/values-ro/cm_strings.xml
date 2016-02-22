@@ -59,6 +59,7 @@
   <string name="call_log_blacklist_header">Doar apeluri blocate</string>
   <string name="call_log_stats_title">Statistici</string>
   <string name="callStatsDetailTitle">Detalii statistică apel</string>
+  <string name="call_stats_incoming">Primit: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_outgoing">Efectuat: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">Pierdut: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blacklisted">Blocat: <xliff:g id="value">%s</xliff:g></string>
