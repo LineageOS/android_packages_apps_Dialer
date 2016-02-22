@@ -23,9 +23,9 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.provider.MediaStore.Audio;
 import android.support.annotation.Nullable;
+import android.telecom.CallAudioState;
 
 import com.android.contacts.common.testing.NeededForTesting;
-import com.android.dialer.compat.CallAudioStateCompat;
 import com.android.incallui.AudioModeProvider;
 import com.android.incallui.Log;
 import com.android.incallui.async.PausableExecutor;
@@ -110,7 +110,7 @@ public class InCallTonePlayer {
     }
 
     private int getPlaybackStream() {
-        if (mAudioModeProvider.getAudioMode() == CallAudioStateCompat.ROUTE_BLUETOOTH) {
+        if (mAudioModeProvider.getAudioMode() == CallAudioState.ROUTE_BLUETOOTH) {
             // TODO (maxwelb): b/26932998 play through bluetooth
             // return AudioManager.STREAM_BLUETOOTH_SCO;
         }
