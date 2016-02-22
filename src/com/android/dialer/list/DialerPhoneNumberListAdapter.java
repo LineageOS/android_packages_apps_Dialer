@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.ScaleDrawable;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
@@ -11,6 +12,7 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,6 +22,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.PhoneNumberHelper;
+import com.android.dialer.util.ImageUtils;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.dialer.R;
@@ -229,7 +232,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 CallMethodInfo ccm = getCurrentCallMethod();
                 if (ccm != null && ccm.mIsInCallProvider) {
                     drawableId = 0;
-                    drawableRaw = ccm.mBadgeIcon;
+                    drawableRaw = ImageUtils.scaleDrawable(ccm.mBadgeIcon, 0.5f);
                 } else {
                     drawableId = R.drawable.ic_search_phone;
                     drawableRaw = null;
@@ -270,7 +273,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                     text = resources.getString(R.string.sign_in_hint_text, cmi.mName);
                 }
                 drawableId = 0;
-                drawableRaw = cmi.mBadgeIcon;
+                drawableRaw = ImageUtils.scaleDrawable(cmi.mBadgeIcon, 0.5f);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");

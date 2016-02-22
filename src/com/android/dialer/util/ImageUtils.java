@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
@@ -178,5 +181,22 @@ public class ImageUtils {
         transitionDrawable.setCrossFadeEnabled(true);
         v.setBackground(transitionDrawable);
         transitionDrawable.startTransition(200);
+    }
+
+    /**
+     * Scales a drawable down to a certain level 0..1
+     * @param d drawable to scale
+     * @param scaleLevel size to scale to
+     * @return scaled drawable
+     */
+    public static Drawable scaleDrawable(Drawable d, float scaleLevel) {
+        if (d instanceof VectorDrawable) {
+            // if this is a vector drawable, this will already scale properly.
+            // leave it alone.
+            return d;
+        }
+        ScaleDrawable sd = new ScaleDrawable(d, Gravity.CENTER, scaleLevel, scaleLevel);
+        sd.setLevel(1);
+        return sd;
     }
 }
