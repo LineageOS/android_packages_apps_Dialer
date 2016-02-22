@@ -349,51 +349,45 @@ public class CallDetailActivity extends AppCompatActivity
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.call_detail_delete_menu_item:
-                if (hasVoicemail()) {
-                    CallLogAsyncTaskUtil.deleteVoicemail(
-                            this, mVoicemailUri, mCallLogAsyncTaskListener);
-                } else {
-                    final StringBuilder callIds = new StringBuilder();
-                    for (Uri callUri : getCallLogEntryUris()) {
-                        if (callIds.length() != 0) {
-                            callIds.append(",");
-                        }
-                        callIds.append(ContentUris.parseId(callUri));
+        if (item.getItemId() == R.id.call_detail_delete_menu_item) {
+            if (hasVoicemail()) {
+                CallLogAsyncTaskUtil.deleteVoicemail(
+                        this, mVoicemailUri, mCallLogAsyncTaskListener);
+            } else {
+                final StringBuilder callIds = new StringBuilder();
+                for (Uri callUri : getCallLogEntryUris()) {
+                    if (callIds.length() != 0) {
+                        callIds.append(",");
                     }
-                    CallLogAsyncTaskUtil.deleteCalls(
-                            this, callIds.toString(), mCallLogAsyncTaskListener);
+                    callIds.append(ContentUris.parseId(callUri));
                 }
-                break;
+                CallLogAsyncTaskUtil.deleteCalls(
+                        this, callIds.toString(), mCallLogAsyncTaskListener);
+            }
         }
         return true;
     }
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.call_detail_action_block:
-                BlockNumberDialogFragment.show(
-                        mBlockedNumberId,
-                        mNumber,
-                        mDetails.countryIso,
-                        mDisplayNumber,
-                        R.id.call_detail,
-                        getFragmentManager(),
-                        this);
-                break;
-            case R.id.call_detail_action_copy:
-                ClipboardUtils.copyText(mContext, null, mNumber, true);
-                break;
-            case R.id.call_detail_action_edit_before_call:
-                Intent dialIntent = new Intent(Intent.ACTION_DIAL,
-                        CallUtil.getCallUri(getDialableNumber()));
-                DialerUtils.startActivityWithErrorToast(mContext, dialIntent);
-                break;
-            default:
-                Log.wtf(TAG, "Unexpected onClick event from " + view);
-                break;
+        int resId = view.getId();
+        if (resId == R.id.call_detail_action_block) {
+            BlockNumberDialogFragment.show(
+                    mBlockedNumberId,
+                    mNumber,
+                    mDetails.countryIso,
+                    mDisplayNumber,
+                    R.id.call_detail,
+                    getFragmentManager(),
+                    this);
+        } else if (resId == R.id.call_detail_action_copy) {
+            ClipboardUtils.copyText(mContext, null, mNumber, true);
+        } else if (resId == R.id.call_detail_action_edit_before_call) {
+            Intent dialIntent = new Intent(Intent.ACTION_DIAL,
+                    CallUtil.getCallUri(getDialableNumber()));
+            DialerUtils.startActivityWithErrorToast(mContext, dialIntent);
+        } else {
+            Log.wtf(TAG, "Unexpected onClick event from " + view);
         }
     }
 

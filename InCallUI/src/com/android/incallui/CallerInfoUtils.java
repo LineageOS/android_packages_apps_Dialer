@@ -12,6 +12,7 @@ import android.util.Log;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;

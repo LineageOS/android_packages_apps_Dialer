@@ -180,22 +180,19 @@ public class BlockedNumbersFragment extends ListFragment
             return;
         }
 
-        switch (view.getId()) {
-            case R.id.add_number_linear_layout:
-                activity.showSearchUi();
-                break;
-            case R.id.view_numbers_button:
-                activity.showNumbersToImportPreviewUi();
-                break;
-            case R.id.import_button:
-                FilteredNumbersUtil.importSendToVoicemailContacts(activity,
-                        new ImportSendToVoicemailContactsListener() {
-                            @Override
-                            public void onImportComplete() {
-                                mImportSettings.setVisibility(View.GONE);
-                            }
-                        });
-                break;
+        int resId = view.getId();
+        if (resId == R.id.add_number_linear_layout) {
+            activity.showSearchUi();
+        } else if (resId == R.id.view_numbers_button) {
+            activity.showNumbersToImportPreviewUi();
+        } else if (resId == R.id.import_button) {
+            FilteredNumbersUtil.importSendToVoicemailContacts(activity,
+                    new ImportSendToVoicemailContactsListener() {
+                        @Override
+                        public void onImportComplete() {
+                            mImportSettings.setVisibility(View.GONE);
+                        }
+                    });
         }
     }
     @Override

@@ -37,6 +37,7 @@ import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.R;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 
 import java.lang.ref.WeakReference;

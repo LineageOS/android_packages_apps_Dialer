@@ -23,6 +23,7 @@ import android.telecom.VideoProfile;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.dialer.R;
 import com.android.incallui.widget.multiwaveview.GlowPadView;
 
 /**
@@ -111,31 +112,24 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
     public void onTrigger(View v, int target) {
         Log.d(this, "onTrigger() view=" + v + " target=" + target);
         final int resId = getResourceIdForTarget(target);
-        switch (resId) {
-            case R.drawable.ic_lockscreen_answer:
-                mAnswerFragment.onAnswer(VideoProfile.STATE_AUDIO_ONLY, getContext());
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_lockscreen_decline:
-                mAnswerFragment.onDecline(getContext());
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_lockscreen_text:
-                mAnswerFragment.onText();
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_videocam:
-            case R.drawable.ic_lockscreen_answer_video:
-                mAnswerFragment.onAnswer(mVideoState, getContext());
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_lockscreen_decline_video:
-                mAnswerFragment.onDeclineUpgradeRequest(getContext());
-                mTargetTriggered = true;
-                break;
-            default:
-                // Code should never reach here.
-                Log.e(this, "Trigger detected on unhandled resource. Skipping.");
+        if (resId == R.drawable.ic_lockscreen_answer) {
+            mAnswerFragment.onAnswer(VideoProfile.STATE_AUDIO_ONLY, getContext());
+            mTargetTriggered = true;
+        } else if (resId == R.drawable.ic_lockscreen_decline) {
+            mAnswerFragment.onDecline(getContext());
+            mTargetTriggered = true;
+        } else if (resId == R.drawable.ic_lockscreen_text) {
+            mAnswerFragment.onText();
+            mTargetTriggered = true;
+        } else if (resId == R.drawable.ic_videocam || resId == R.drawable.ic_lockscreen_answer_video) {
+            mAnswerFragment.onAnswer(mVideoState, getContext());
+            mTargetTriggered = true;
+        } else if (resId == R.drawable.ic_lockscreen_decline_video) {
+            mAnswerFragment.onDeclineUpgradeRequest(getContext());
+            mTargetTriggered = true;
+        } else {
+            // Code should never reach here.
+            Log.e(this, "Trigger detected on unhandled resource. Skipping.");
         }
     }
 

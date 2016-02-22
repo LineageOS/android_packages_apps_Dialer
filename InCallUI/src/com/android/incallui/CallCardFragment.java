@@ -58,6 +58,7 @@ import android.widget.Toast;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.contacts.common.widget.FloatingActionButtonController;
+import com.android.dialer.R;
 import com.android.phone.common.animation.AnimUtils;
 
 import java.util.List;

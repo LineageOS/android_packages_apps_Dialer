@@ -39,6 +39,7 @@ import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfoHelper;
 
 /**

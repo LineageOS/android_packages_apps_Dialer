@@ -50,7 +50,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.accessibility.AccessibilityNodeProvider;
 
-import com.android.incallui.R;
+import com.android.dialer.R;
 
 import java.util.ArrayList;
 import java.util.List;

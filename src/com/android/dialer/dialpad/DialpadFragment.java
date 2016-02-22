@@ -822,13 +822,12 @@ public class DialpadFragment extends Fragment
 
     @Override
     public boolean onKey(View view, int keyCode, KeyEvent event) {
-        switch (view.getId()) {
-            case R.id.digits:
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                    handleDialButtonPressed();
-                    return true;
-                }
-                break;
+        if (view.getId() == R.id.digits) {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                handleDialButtonPressed();
+                return true;
+            }
+
         }
         return false;
     }
@@ -843,59 +842,33 @@ public class DialpadFragment extends Fragment
     public void onPressed(View view, boolean pressed) {
         if (DEBUG) Log.d(TAG, "onPressed(). view: " + view + ", pressed: " + pressed);
         if (pressed) {
-            switch (view.getId()) {
-                case R.id.one: {
-                    keyPressed(KeyEvent.KEYCODE_1);
-                    break;
-                }
-                case R.id.two: {
-                    keyPressed(KeyEvent.KEYCODE_2);
-                    break;
-                }
-                case R.id.three: {
-                    keyPressed(KeyEvent.KEYCODE_3);
-                    break;
-                }
-                case R.id.four: {
-                    keyPressed(KeyEvent.KEYCODE_4);
-                    break;
-                }
-                case R.id.five: {
-                    keyPressed(KeyEvent.KEYCODE_5);
-                    break;
-                }
-                case R.id.six: {
-                    keyPressed(KeyEvent.KEYCODE_6);
-                    break;
-                }
-                case R.id.seven: {
-                    keyPressed(KeyEvent.KEYCODE_7);
-                    break;
-                }
-                case R.id.eight: {
-                    keyPressed(KeyEvent.KEYCODE_8);
-                    break;
-                }
-                case R.id.nine: {
-                    keyPressed(KeyEvent.KEYCODE_9);
-                    break;
-                }
-                case R.id.zero: {
-                    keyPressed(KeyEvent.KEYCODE_0);
-                    break;
-                }
-                case R.id.pound: {
-                    keyPressed(KeyEvent.KEYCODE_POUND);
-                    break;
-                }
-                case R.id.star: {
-                    keyPressed(KeyEvent.KEYCODE_STAR);
-                    break;
-                }
-                default: {
-                    Log.wtf(TAG, "Unexpected onTouch(ACTION_DOWN) event from: " + view);
-                    break;
-                }
+            int resId = view.getId();
+            if (resId == R.id.one) {
+                keyPressed(KeyEvent.KEYCODE_1);
+            } else if (resId == R.id.two) {
+                keyPressed(KeyEvent.KEYCODE_2);
+            } else if (resId == R.id.three) {
+                keyPressed(KeyEvent.KEYCODE_3);
+            } else if (resId == R.id.four) {
+                keyPressed(KeyEvent.KEYCODE_4);
+            } else if (resId == R.id.five) {
+                keyPressed(KeyEvent.KEYCODE_5);
+            } else if (resId == R.id.six) {
+                keyPressed(KeyEvent.KEYCODE_6);
+            } else if (resId == R.id.seven) {
+                keyPressed(KeyEvent.KEYCODE_7);
+            } else if (resId == R.id.eight) {
+                keyPressed(KeyEvent.KEYCODE_8);
+            } else if (resId == R.id.nine) {
+                keyPressed(KeyEvent.KEYCODE_9);
+            } else if (resId == R.id.zero) {
+                keyPressed(KeyEvent.KEYCODE_0);
+            } else if (resId == R.id.pound) {
+                keyPressed(KeyEvent.KEYCODE_POUND);
+            } else if (resId == R.id.star) {
+                keyPressed(KeyEvent.KEYCODE_STAR);
+            } else {
+                Log.wtf(TAG, "Unexpected onTouch(ACTION_DOWN) event from: " + view);
             }
             mPressedDialpadKeys.add(view);
         } else {
@@ -936,29 +909,21 @@ public class DialpadFragment extends Fragment
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.dialpad_floating_action_button:
-                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                handleDialButtonPressed();
-                break;
-            case R.id.deleteButton: {
-                keyPressed(KeyEvent.KEYCODE_DEL);
-                break;
+        int resId = view.getId();
+        if (resId == R.id.dialpad_floating_action_button) {
+            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            handleDialButtonPressed();
+        } else if (resId == R.id.deleteButton) {
+            keyPressed(KeyEvent.KEYCODE_DEL);
+        } else if (resId == R.id.digits) {
+            if (!isDigitsEmpty()) {
+                mDigits.setCursorVisible(true);
             }
-            case R.id.digits: {
-                if (!isDigitsEmpty()) {
-                    mDigits.setCursorVisible(true);
-                }
-                break;
-            }
-            case R.id.dialpad_overflow: {
-                mOverflowPopupMenu.show();
-                break;
-            }
-            default: {
-                Log.wtf(TAG, "Unexpected onClick() event from: " + view);
-                return;
-            }
+        } else if (resId == R.id.dialpad_overflow) {
+            mOverflowPopupMenu.show();
+        } else {
+            Log.wtf(TAG, "Unexpected onClick() event from: " + view);
+            return;
         }
     }
 
@@ -966,75 +931,61 @@ public class DialpadFragment extends Fragment
     public boolean onLongClick(View view) {
         final Editable digits = mDigits.getText();
         final int id = view.getId();
-        switch (id) {
-            case R.id.deleteButton: {
-                digits.clear();
-                return true;
-            }
-            case R.id.one: {
-                // '1' may be already entered since we rely on onTouch() event for numeric buttons.
-                // Just for safety we also check if the digits field is empty or not.
-                if (isDigitsEmpty() || TextUtils.equals(mDigits.getText(), "1")) {
-                    // We'll try to initiate voicemail and thus we want to remove irrelevant string.
-                    removePreviousDigitIfPossible('1');
+        if (id == R.id.deleteButton) {
+            digits.clear();
+            return true;
+        } else if (id == R.id.one) {
+            if (isDigitsEmpty() || TextUtils.equals(mDigits.getText(), "1")) {
+                // We'll try to initiate voicemail and thus we want to remove irrelevant string.
+                removePreviousDigitIfPossible('1');
 
-                    List<PhoneAccountHandle> subscriptionAccountHandles =
-                            PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
-                    boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
-                            TelecomUtil.getDefaultOutgoingPhoneAccount(getActivity(),
-                                    PhoneAccount.SCHEME_VOICEMAIL));
-                    boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
-                            && !hasUserSelectedDefault;
+                List<PhoneAccountHandle> subscriptionAccountHandles =
+                        PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
+                boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
+                        TelecomUtil.getDefaultOutgoingPhoneAccount(getActivity(),
+                                PhoneAccount.SCHEME_VOICEMAIL));
+                boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
+                        && !hasUserSelectedDefault;
 
-                    if (needsAccountDisambiguation || isVoicemailAvailable()) {
-                        // On a multi-SIM phone, if the user has not selected a default
-                        // subscription, initiate a call to voicemail so they can select an account
-                        // from the "Call with" dialog.
-                        callVoicemail();
-                    } else if (getActivity() != null) {
-                        // Voicemail is unavailable maybe because Airplane mode is turned on.
-                        // Check the current status and show the most appropriate error message.
-                        final boolean isAirplaneModeOn =
-                                Settings.System.getInt(getActivity().getContentResolver(),
-                                Settings.System.AIRPLANE_MODE_ON, 0) != 0;
-                        if (isAirplaneModeOn) {
-                            DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
-                                    R.string.dialog_voicemail_airplane_mode_message);
-                            dialogFragment.show(getFragmentManager(),
-                                    "voicemail_request_during_airplane_mode");
-                        } else {
-                            DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
-                                    R.string.dialog_voicemail_not_ready_message);
-                            dialogFragment.show(getFragmentManager(), "voicemail_not_ready");
-                        }
+                if (needsAccountDisambiguation || isVoicemailAvailable()) {
+                    // On a multi-SIM phone, if the user has not selected a default
+                    // subscription, initiate a call to voicemail so they can select an account
+                    // from the "Call with" dialog.
+                    callVoicemail();
+                } else if (getActivity() != null) {
+                    // Voicemail is unavailable maybe because Airplane mode is turned on.
+                    // Check the current status and show the most appropriate error message.
+                    final boolean isAirplaneModeOn =
+                            Settings.System.getInt(getActivity().getContentResolver(),
+                                    Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+                    if (isAirplaneModeOn) {
+                        DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
+                                R.string.dialog_voicemail_airplane_mode_message);
+                        dialogFragment.show(getFragmentManager(),
+                                "voicemail_request_during_airplane_mode");
+                    } else {
+                        DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
+                                R.string.dialog_voicemail_not_ready_message);
+                        dialogFragment.show(getFragmentManager(), "voicemail_not_ready");
                     }
-                    return true;
                 }
-                return false;
-            }
-            case R.id.zero: {
-                if (mPressedDialpadKeys.contains(view)) {
-                    // If the zero key is currently pressed, then the long press occurred by touch
-                    // (and not via other means like certain accessibility input methods).
-                    // Remove the '0' that was input when the key was first pressed.
-                    removePreviousDigitIfPossible('0');
-                }
-
-                keyPressed(KeyEvent.KEYCODE_PLUS);
-
-                // Stop tone immediately
-                stopTone();
-                mPressedDialpadKeys.remove(view);
-
                 return true;
             }
-            case R.id.digits: {
-                // Right now EditText does not show the "paste" option when cursor is not visible.
-                // To show that, make the cursor visible, and return false, letting the EditText
-                // show the option by itself.
-                mDigits.setCursorVisible(true);
-                return false;
+            return false;
+        } else if (id == R.id.zero) {
+            if (mPressedDialpadKeys.contains(view)) {
+                // If the zero key is currently pressed, then the long press occurred by touch
+                // (and not via other means like certain accessibility input methods).
+                // Remove the '0' that was input when the key was first pressed.
+                removePreviousDigitIfPossible('0');
             }
+            keyPressed(KeyEvent.KEYCODE_PLUS);
+            stopTone();
+            mPressedDialpadKeys.remove(view);
+            return true;
+        } else if (id == R.id.digits) {
+            mDigits.setCursorVisible(true);
+            return false;
         }
         return false;
     }
@@ -1438,31 +1389,20 @@ public class DialpadFragment extends Fragment
         DialpadChooserAdapter.ChoiceItem item =
                 (DialpadChooserAdapter.ChoiceItem) parent.getItemAtPosition(position);
         int itemId = item.id;
-        switch (itemId) {
-            case DialpadChooserAdapter.DIALPAD_CHOICE_USE_DTMF_DIALPAD:
-                // Log.i(TAG, "DIALPAD_CHOICE_USE_DTMF_DIALPAD");
-                // Fire off an intent to go back to the in-call UI
-                // with the dialpad visible.
-                returnToInCallScreen(true);
-                break;
-
-            case DialpadChooserAdapter.DIALPAD_CHOICE_RETURN_TO_CALL:
-                // Log.i(TAG, "DIALPAD_CHOICE_RETURN_TO_CALL");
-                // Fire off an intent to go back to the in-call UI
-                // (with the dialpad hidden).
-                returnToInCallScreen(false);
-                break;
-
-            case DialpadChooserAdapter.DIALPAD_CHOICE_ADD_NEW_CALL:
-                // Log.i(TAG, "DIALPAD_CHOICE_ADD_NEW_CALL");
-                // Ok, guess the user really did want to be here (in the
-                // regular Dialer) after all.  Bring back the normal Dialer UI.
-                showDialpadChooser(false);
-                break;
-
-            default:
-                Log.w(TAG, "onItemClick: unexpected itemId: " + itemId);
-                break;
+        if (itemId == DialpadChooserAdapter.DIALPAD_CHOICE_USE_DTMF_DIALPAD) {// Log.i(TAG, "DIALPAD_CHOICE_USE_DTMF_DIALPAD");
+            // Fire off an intent to go back to the in-call UI
+            // with the dialpad visible.
+            returnToInCallScreen(true);
+        } else if (itemId == DialpadChooserAdapter.DIALPAD_CHOICE_RETURN_TO_CALL) {// Log.i(TAG, "DIALPAD_CHOICE_RETURN_TO_CALL");
+            // Fire off an intent to go back to the in-call UI
+            // (with the dialpad hidden).
+            returnToInCallScreen(false);
+        } else if (itemId == DialpadChooserAdapter.DIALPAD_CHOICE_ADD_NEW_CALL) {// Log.i(TAG, "DIALPAD_CHOICE_ADD_NEW_CALL");
+            // Ok, guess the user really did want to be here (in the
+            // regular Dialer) after all.  Bring back the normal Dialer UI.
+            showDialpadChooser(false);
+        } else {
+            Log.w(TAG, "onItemClick: unexpected itemId: " + itemId);
         }
     }
 
@@ -1506,19 +1446,19 @@ public class DialpadFragment extends Fragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_2s_pause:
-                updateDialString(PAUSE);
-                return true;
-            case R.id.menu_add_wait:
-                updateDialString(WAIT);
-                return true;
-            case R.id.menu_call_with_note:
-                CallSubjectDialog.start(getActivity(), mDigits.getText().toString());
-                hideAndClearDialpad(false);
-                return true;
-            default:
-                return false;
+        int resId = item.getItemId();
+        if (resId == R.id.menu_2s_pause) {
+            updateDialString(PAUSE);
+            return true;
+        } else if (resId == R.id.menu_add_wait) {
+            updateDialString(WAIT);
+            return true;
+        } else if (resId == R.id.menu_call_with_note) {
+            CallSubjectDialog.start(getActivity(), mDigits.getText().toString());
+            hideAndClearDialpad(false);
+            return true;
+        } else {
+            return false;
         }
     }
 
