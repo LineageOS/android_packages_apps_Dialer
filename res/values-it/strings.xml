@@ -254,6 +254,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Per cercare nei tuoi contatti, attiva le autorizzazioni Contatti."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Per fare una chiamata, attiva l\'autorizzazione sul telefono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'app Telefono non dispone dell\'autorizzazione per modificare le impostazioni di sistema."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloccato"</string>
 </resources>

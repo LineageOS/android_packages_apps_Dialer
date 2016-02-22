@@ -254,6 +254,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"如要搜尋您的聯絡人，請開啟「聯絡人」存取權限。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"如要撥打電話，請開啟「電話」存取權限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話應用程式的權限不足，無法寫入系統設定。"</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"已封鎖"</string>
 </resources>

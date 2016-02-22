@@ -254,6 +254,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Aktivera behörigheter för Kontakter om du vill söka bland kontakterna."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Du måste aktivera behörigheten Telefon för att kunna ringa."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonappen har inte skrivbehörighet i systeminställningarna."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Blockerad"</string>
 </resources>

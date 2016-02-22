@@ -71,8 +71,8 @@
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Configurați"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Apel. mesag. vocală"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="sms_disambig_title" msgid="5846266399240630846">"Selectaţi numărul"</string>
-    <string name="call_disambig_title" msgid="4392886850104795739">"Selectaţi numărul"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"Selectați numărul"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"Selectați numărul"</string>
     <string name="make_primary" msgid="5829291915305113983">"Rețineți această alegere"</string>
     <string name="description_search_button" msgid="3660807558587384889">"căutare"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"apelați"</string>
@@ -88,8 +88,8 @@
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Numai apelurile efectuate"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Numai apelurile primite"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"Numai apelurile nepreluate"</string>
-    <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Afişaţi numai mesajele vocale"</string>
-    <string name="menu_show_all_calls" msgid="7560347482073345885">"Afişaţi toate apelurile"</string>
+    <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Afișați numai mesajele vocale"</string>
+    <string name="menu_show_all_calls" msgid="7560347482073345885">"Afișați toate apelurile"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Adăugați o pauză de 2 secunde"</string>
     <string name="add_wait" msgid="3360818652790319634">"Adăugați interval de așteptare"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Setări"</string>
@@ -98,10 +98,10 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Detaliile apelului"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Nu sunt disponibile detalii"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tastatura tactilă cu sunet"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Reveniţi la apelul în curs"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Reveniți la apelul în curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Adăugați un apel"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Apel de intrare"</string>
-    <string name="type_outgoing" msgid="343108709599392641">"Apel de ieşire"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Apel de ieșire"</string>
     <string name="type_missed" msgid="2720502601640509542">"Apel nepreluat"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Apel video primit"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Apel video efectuat"</string>
@@ -111,7 +111,7 @@
     <string name="type_blocked" msgid="3521686227115330015">"Apel blocat"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Apeluri de intrare"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Redați mesajul vocal"</string>
-    <string name="description_view_contact" msgid="5205669345700598415">"Afişaţi persoana din agendă <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_view_contact" msgid="5205669345700598415">"Afișați persoana din agendă <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Apelați pe <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Detalii de contact pentru <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> (de) apeluri."</string>
@@ -256,6 +256,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Pentru a căuta în persoanele de contact, activați permisiunea Agendă."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Pentru a apela, activați permisiunea Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplicația Telefon nu are permisiunea să modifice setările de sistem."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Blocat"</string>
 </resources>

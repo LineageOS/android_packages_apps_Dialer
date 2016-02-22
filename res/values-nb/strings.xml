@@ -254,6 +254,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"For å søke i kontaktene dine, slå på tillatelser for Kontakter."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"For å ringe, slå på Telefon-tillatelsen."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefonappen har ikke tillatelse til å skrive til systeminnstillinger."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Blokkert"</string>
 </resources>

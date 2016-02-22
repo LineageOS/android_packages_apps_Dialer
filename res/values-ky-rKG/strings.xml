@@ -278,6 +278,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Байланыштарыңызды издөө үчүн, Байланыштарга уруксатты күйгүзүңүз."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Чалуу үчүн, \"Телефон\" колдонмосуна уруксат бериңиз."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Телефон колдонмосунун Тутум жөндөөлөрүнө жазууга уруксаты жок."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Бөгөттөлгөн"</string>
 </resources>

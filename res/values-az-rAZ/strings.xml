@@ -254,6 +254,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"Kontaktlarınızı axtarmaq üçün, Kontakt icazələrini aktiv edin."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Zəng etmək üçün, Telefon icazəsini aktivləşdirin."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefon tətbiqinin sistem ayarlarına yazmaq icazəsi yoxdur."</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloklanıb"</string>
 </resources>

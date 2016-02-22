@@ -254,6 +254,5 @@
     <string name="permission_no_search" msgid="84152933267902056">"要搜索您的联系人，请开启“通讯录”权限。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"要拨打电话，请开启“电话”权限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"电话应用不具备写入系统设置的权限。"</string>
-    <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
-    <skip />
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"已屏蔽"</string>
 </resources>
