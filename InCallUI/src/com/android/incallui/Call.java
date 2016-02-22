@@ -19,9 +19,9 @@ package com.android.incallui;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Trace;
+import android.telecom.Call.Details;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import android.telecom.GatewayInfo;
@@ -37,8 +37,6 @@ import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.util.IntentUtil;
-import com.android.incallui.compat.telecom.DetailsCompat;
-import com.android.incallui.compat.telecom.VideoProfileCompat;
 import com.android.incallui.util.TelecomCallUtil;
 
 import java.util.ArrayList;
@@ -291,18 +289,8 @@ public class Call {
     private static final String ID_PREFIX = Call.class.getSimpleName() + "_";
     private static int sIdCounter = 0;
 
-    private Object mTelecomCallCallback = newTelecomCallCallback();
-
-    private Object newTelecomCallCallback() {
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-            return newMarshmallowTelecomCallCallback();
-        }
-        return newLollipopTelecomCallCallback();
-    }
-
-    private Object newMarshmallowTelecomCallCallback() {
-        Log.i(this, "Using an android.telecom.Call$Callback");
-        return new android.telecom.Call.Callback() {
+    private final android.telecom.Call.Callback mTelecomCallCallback =
+        new android.telecom.Call.Callback() {
             @Override
             public void onStateChanged(android.telecom.Call call, int newState) {
                 Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " newState="
@@ -367,81 +355,7 @@ public class Call {
                     List<android.telecom.Call> conferenceableCalls) {
                 update();
             }
-        };
-    }
-
-    private Object newLollipopTelecomCallCallback() {
-        // This code only runs for Google Experience phones on the pre-M sdk since only the system
-        // dialer can invoke the InCallUI code. This allows us to safely use the
-        // android.telecom.Call.Listener interface
-        Log.i(this, "Using an android.telecom.Call$Listener");
-        return new android.telecom.Call.Listener() {
-            @Override
-            public void onStateChanged(android.telecom.Call call, int newState) {
-                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " newState="
-                        + newState);
-                update();
-            }
-
-            @Override
-            public void onParentChanged(android.telecom.Call call,
-                    android.telecom.Call newParent) {
-                Log.d(this, "TelecomCallCallback onParentChanged call=" + call + " newParent="
-                        + newParent);
-                update();
-            }
-
-            @Override
-            public void onChildrenChanged(android.telecom.Call call,
-                    List<android.telecom.Call> children) {
-                update();
-            }
-
-            @Override
-            public void onDetailsChanged(android.telecom.Call call,
-                    android.telecom.Call.Details details) {
-                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " details="
-                        + details);
-                update();
-            }
-
-            @Override
-            public void onCannedTextResponsesLoaded(android.telecom.Call call,
-                    List<String> cannedTextResponses) {
-                Log.d(this, "TelecomCallCallback onStateChanged call=" + call
-                        + " cannedTextResponses=" + cannedTextResponses);
-                update();
-            }
-
-            @Override
-            public void onPostDialWait(android.telecom.Call call,
-                    String remainingPostDialSequence) {
-                Log.d(this, "TelecomCallCallback onStateChanged call=" + call
-                        + " remainingPostDialSequence=" + remainingPostDialSequence);
-                update();
-            }
-
-            @Override
-            public void onVideoCallChanged(android.telecom.Call call,
-                    VideoCall videoCall) {
-                Log.d(this, "TelecomCallCallback onStateChanged call=" + call + " videoCall="
-                        + videoCall);
-                update();
-            }
-
-            @Override
-            public void onCallDestroyed(android.telecom.Call call) {
-                Log.d(this, "TelecomCallCallback onStateChanged call=" + call);
-                call.removeListener(this);
-            }
-
-            @Override
-            public void onConferenceableCallsChanged(android.telecom.Call call,
-                    List<android.telecom.Call> conferenceableCalls) {
-                update();
-            }
-        };
-    }
+    };
 
     private android.telecom.Call mTelecomCall;
     private boolean mIsEmergencyCall;
@@ -491,11 +405,7 @@ public class Call {
 
         updateFromTelecomCall();
 
-        if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-            mTelecomCall.registerCallback((android.telecom.Call.Callback) mTelecomCallCallback);
-        } else {
-            mTelecomCall.addListener((android.telecom.Call.Listener) mTelecomCallCallback);
-        }
+        mTelecomCall.registerCallback(mTelecomCallCallback);
 
         mTimeAddedMs = System.currentTimeMillis();
     }
@@ -750,7 +660,7 @@ public class Call {
     }
 
     public Bundle getIntentExtras() {
-        return DetailsCompat.getIntentExtras(mTelecomCall.getDetails());
+        return mTelecomCall.getDetails().getIntentExtras();
     }
 
     public Bundle getExtras() {
@@ -824,7 +734,7 @@ public class Call {
     }
 
     public boolean hasProperty(int property) {
-        return DetailsCompat.hasProperty(mTelecomCall.getDetails(), property);
+        return mTelecomCall.getDetails().hasProperty(property);
     }
 
     /** Gets the time when the call first became active. */
@@ -989,11 +899,11 @@ public class Call {
                 "videoState:%s, mSessionModificationState:%d, VideoSettings:%s]",
                 mId,
                 State.toString(getState()),
-                DetailsCompat.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
+                Details.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
                 mChildCallIds,
                 getParentId(),
                 this.mTelecomCall.getConferenceableCalls(),
-                VideoProfileCompat.videoStateToString(mTelecomCall.getDetails().getVideoState()),
+                VideoProfile.videoStateToString(mTelecomCall.getDetails().getVideoState()),
                 mSessionModificationState,
                 getVideoSettings());
     }
