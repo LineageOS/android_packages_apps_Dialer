@@ -87,4 +87,7 @@
   <string name="call_stats_title_count">Dei kopurua</string>
   <string name="call_stats_title_average_duration">Batezbesteko dei iraupena</string>
   <string name="recent_calls_no_items_in_range">Zure deien egunkariak ez du deirik aukeratutako denbora tartean.</string>
+  <string name="call_recording_category_title">Dei grabaketa</string>
+  <string name="call_recording_format">Audio formatua</string>
+  <string name="call_playback_no_app_found_toast">Ezin izan da hautatutako grabaketa erreproduzitzeko aplikaziorik aurkitu.</string>
 </resources>

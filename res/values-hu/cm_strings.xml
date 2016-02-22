@@ -87,4 +87,7 @@
   <string name="call_stats_title_count">Hívásszám</string>
   <string name="call_stats_title_average_duration">Átlagos hívásidőtartam</string>
   <string name="recent_calls_no_items_in_range">Hívásnapló nem tartalmaz hívásokat a kiválasztott időtartományban.</string>
+  <string name="call_recording_category_title">Hívásrögzítés</string>
+  <string name="call_recording_format">Hangformátum</string>
+  <string name="call_playback_no_app_found_toast">Nem található alkalmazás a kiválasztott felvétel lejátszásához.</string>
 </resources>

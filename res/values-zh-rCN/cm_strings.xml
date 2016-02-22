@@ -87,4 +87,7 @@
   <string name="call_stats_title_count">通话次数</string>
   <string name="call_stats_title_average_duration">平均通话时长</string>
   <string name="recent_calls_no_items_in_range">您所选择的时间范围内不包含任何通话记录。</string>
+  <string name="call_recording_category_title">通话录音</string>
+  <string name="call_recording_format">音频格式</string>
+  <string name="call_playback_no_app_found_toast">没有找到可以回放所选录音的应用。</string>
 </resources>

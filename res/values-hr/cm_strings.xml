@@ -59,6 +59,11 @@
   <string name="call_log_blacklist_header">Samo blokirani pozivi</string>
   <string name="call_log_stats_title">Satatistike</string>
   <string name="callStatsDetailTitle">Detalji statistike poziva</string>
+  <string name="call_stats_incoming">Dolazni: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Odlazni: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Propušteni: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blokirani: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Ukupno: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Ukupno: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Od</string>
@@ -81,4 +86,8 @@
   <string name="call_stats_title_durations">Trajanje poziva</string>
   <string name="call_stats_title_count">Broj pozivanja</string>
   <string name="call_stats_title_average_duration">Prosječno trajanje poziva</string>
+  <string name="recent_calls_no_items_in_range">Vaš popis poziva ne sadrži nijedan poziv u odabranom razdoblju.</string>
+  <string name="call_recording_category_title">Snimanje poziva</string>
+  <string name="call_recording_format">Format zvuka</string>
+  <string name="call_playback_no_app_found_toast">Nema pronađene aplikacije da otvori odabranu snimku.</string>
 </resources>
