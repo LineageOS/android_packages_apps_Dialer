@@ -1,0 +1,63 @@
+include 'android-common'
+project(':android-common').projectDir = new File(rootDir, 'frameworks/ex/common')
+
+include 'aplos'
+project(':aplos').projectDir = new File(rootDir, 'vendor/unbundled_google/libs/aplos')
+project(':aplos').buildFileName = 'build-split.gradle'
+
+include 'bind'
+project(':bind').projectDir = new File(rootDir, 'vendor/unbundled_google/libraries/bind')
+
+include 'gdata'
+project(':gdata').projectDir = new File(rootDir, 'vendor/unbundled_google/libraries/gdata')
+
+include 'golly'
+project(':golly').projectDir = new File(rootDir, 'vendor/unbundled_google/libraries/golly')
+
+include 'gsf-client'
+project(':gsf-client').projectDir = new File(rootDir, 'vendor/unbundled_google/libraries/gsfclient')
+
+include 'jsr305'
+project(':jsr305').projectDir = new File(rootDir, 'external/jsr305')
+
+include 'guava'
+project(':guava').projectDir = new File(rootDir, 'external/guava')
+
+include 'libphonenumber'
+project(':libphonenumber').projectDir = new File(rootDir, 'external/libphonenumber')
+project(':libphonenumber').buildFileName = 'build-full.gradle'
+
+include 'libprotobuf'
+project(':libprotobuf').projectDir = new File(rootDir, 'external/protobuf')
+
+include 'pseudonymous-http'
+project(':pseudonymous-http').projectDir = new File(rootDir, 'vendor/unbundled_google/libraries/pseudonymous_http')
+
+include 's2utils'
+project(':s2utils').projectDir = new File(rootDir, 'external/s2utils')
+
+include 'smslib_pduutils'
+project(':smslib_pduutils').projectDir = new File(rootDir, 'external/smslib_pduutils')
+
+include 'volley'
+project(':volley').projectDir = new File(rootDir, 'frameworks/volley')
+project(':volley').buildFileName = 'rules.gradle'
+
+include 'vcard'
+project(':vcard').projectDir = new File(rootDir, 'frameworks/opt/vcard')
+
+include 'PhoneCommon'
+project(':PhoneCommon').projectDir = new File(rootDir, 'packages/apps/PhoneCommon')
+
+include 'ContactsCommon'
+project(':ContactsCommon').projectDir = new File(rootDir, 'packages/apps/ContactsCommon')
+
+include 'InCallUI'
+project(':InCallUI').projectDir = new File(rootDir, 'packages/apps/Dialer/InCallUI')
+
+include 'dialer'
+project(':dialer').projectDir = new File(rootDir, 'packages/apps/Dialer')
+project(':dialer').buildFileName = 'build-app.gradle'
+
+include 'googledialer'
+project(':googledialer').projectDir = new File(rootDir, 'vendor/unbundled_google/packages/GoogleDialer')
