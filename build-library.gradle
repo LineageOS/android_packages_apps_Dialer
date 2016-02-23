@@ -28,7 +28,7 @@ dependencies {
     compile project(':jsr305')
     compile project(':vcard')
 
-    compile project(':ContactsCommon')
-    compile project(':InCallUI')
-    compile project(':PhoneCommon')
+    compile project(':contactscommon')
+    compile project(':incallui')
+    compile project(':phonecommon')
 }
