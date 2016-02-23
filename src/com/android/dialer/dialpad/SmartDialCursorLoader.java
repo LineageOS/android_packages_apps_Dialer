@@ -112,7 +112,9 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         for (ContactNumber contact : allMatches) {
             if (TextUtils.equals(contact.mimeType, mCallableMimetype) ||
                     TextUtils.equals(contact.mimeType,
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)) {
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE) ||
+                    TextUtils.equals(contact.mimeType,
+                            ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE)) {
                 row[PhoneQuery.CONTACT_ID] = contact.id;
                 row[PhoneQuery.LOOKUP_KEY] = contact.lookupKey;
                 row[PhoneQuery.PHOTO_ID] = contact.photoId;

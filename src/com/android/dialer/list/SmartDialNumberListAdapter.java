@@ -20,11 +20,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android .provider.ContactsContract.CommonDataKinds.Phone;
+import android .provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.list.ContactListItemView;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
@@ -101,10 +102,26 @@ public class SmartDialNumberListAdapter extends DialerPhoneNumberListAdapter {
             }
         }
 
-        final SmartDialMatchPosition numberMatch = mNameMatcher.matchesNumber(cursor.getString(
-                PhoneQuery.PHONE_NUMBER));
-        if (numberMatch != null) {
-            view.addNumberHighlightSequence(numberMatch.start, numberMatch.end);
+        String mimeType = cursor.getString(PhoneQuery.PHONE_MIME_TYPE);
+        String number = cursor.getString(PhoneQuery.PHONE_NUMBER);
+        if (TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE) ||
+                TextUtils.equals(mimeType, SipAddress.CONTENT_ITEM_TYPE)) {
+            final SmartDialMatchPosition numberMatch = mNameMatcher.matchesNumber(number);
+            if (numberMatch != null) {
+                view.addNumberHighlightSequence(numberMatch.start, numberMatch.end);
+            }
+        } else {
+            if (mNameMatcher.matches(number)) {
+                final ArrayList<SmartDialMatchPosition> nameMatches =
+                        mNameMatcher.getMatchPositions();
+                for (SmartDialMatchPosition match : nameMatches) {
+                    view.addNumberHighlightSequence(match.start, match.end);
+                    if (DEBUG) {
+                        Log.v(TAG, number + " " + mNameMatcher.getQuery() + " " +
+                                String.valueOf(match.start));
+                    }
+                }
+            }
         }
     }
 

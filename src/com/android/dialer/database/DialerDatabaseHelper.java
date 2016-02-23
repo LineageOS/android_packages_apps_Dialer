@@ -1163,7 +1163,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                  * that matches the query, add to the result.
                  */
                 final boolean nameMatches = nameMatcher.matches(displayName);
-                final boolean numberMatches =
+                final boolean numberMatches = TextUtils.equals(mimeType, usernameMimeType) ?
+                        nameMatcher.matches(phoneNumber) :
                         (nameMatcher.matchesNumber(phoneNumber, query) != null);
                 if (nameMatches || numberMatches) {
                     /** If a contact has not been added, add it to the result and the hash set.*/
