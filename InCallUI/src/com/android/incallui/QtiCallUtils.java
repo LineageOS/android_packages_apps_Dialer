@@ -29,7 +29,8 @@
 
 package com.android.incallui;
 
-
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.telecom.VideoProfile;
 import android.telecom.Connection.VideoProvider;
 import android.widget.Toast;
@@ -40,7 +41,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.telecom.InCallService.VideoCall;
 
+import java.lang.reflect.*;
 import java.util.ArrayList;
+
+import org.codeaurora.internal.IExtTelephony;
 
 /**
  * This class contains Qti specific utiltity functions.
@@ -252,5 +256,65 @@ public class QtiCallUtils {
     private static boolean showVideoUpgradeOptions(int currentVideoState, int modifyToVideoState) {
         return currentVideoState == VideoProfile.STATE_AUDIO_ONLY &&
                 isEnabled(VideoProfile.STATE_BIDIRECTIONAL, modifyToVideoState);
+    }
+
+
+    /**
+     * Returns IExtTelephony handle
+     */
+    public static IExtTelephony getIExtTelephony() {
+        IExtTelephony mExtTelephony = null;
+        try {
+            Class c = Class.forName("android.os.ServiceManager");
+            Method m = c.getMethod("getService",new Class[]{String.class});
+
+            mExtTelephony =
+                IExtTelephony.Stub.asInterface((IBinder)m.invoke(null, "extphone"));
+        } catch (ClassNotFoundException e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        } catch (IllegalArgumentException e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        } catch (IllegalAccessException e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        } catch (InvocationTargetException e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        } catch (SecurityException e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        } catch (NoSuchMethodException e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        }
+        return mExtTelephony;
+    }
+
+    /**
+     * returns true if it is emrgency number else false
+     */
+    public static boolean isEmergencyNumber(String number) {
+        boolean isEmergencyNumber = false;
+
+        try {
+            isEmergencyNumber = getIExtTelephony().isEmergencyNumber(number);
+        } catch (RemoteException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        } catch (NullPointerException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        }
+        return isEmergencyNumber;
+    }
+
+    /**
+     * returns true if it is local emrgency number else false
+     */
+    public static boolean isLocalEmergencyNumber(String number) {
+        boolean isEmergencyNumber = false;
+
+        try {
+            isEmergencyNumber = getIExtTelephony().isLocalEmergencyNumber(number);
+        } catch (RemoteException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        } catch (NullPointerException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        }
+        return isEmergencyNumber;
     }
 }
