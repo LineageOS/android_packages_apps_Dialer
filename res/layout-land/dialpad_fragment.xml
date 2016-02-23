@@ -60,7 +60,7 @@
             <!-- Margin bottom and alignParentBottom don't work well together, so use a Space instead. -->
             <Space android:id="@+id/dialpad_floating_action_button_margin_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="8dp"
+                android:layout_height="@dimen/floating_action_button_margin_bottom"
                 android:layout_alignParentBottom="true" />
 
             <FrameLayout
