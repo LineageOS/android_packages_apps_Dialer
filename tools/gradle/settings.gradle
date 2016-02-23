@@ -46,18 +46,15 @@ project(':volley').buildFileName = 'rules.gradle'
 include 'vcard'
 project(':vcard').projectDir = new File(rootDir, 'frameworks/opt/vcard')
 
-include 'PhoneCommon'
-project(':PhoneCommon').projectDir = new File(rootDir, 'packages/apps/PhoneCommon')
+include 'phonecommon'
+project(':phonecommon').projectDir = new File(rootDir, 'packages/apps/PhoneCommon')
 
-include 'ContactsCommon'
-project(':ContactsCommon').projectDir = new File(rootDir, 'packages/apps/ContactsCommon')
+include 'contactscommon'
+project(':contactscommon').projectDir = new File(rootDir, 'packages/apps/ContactsCommon')
 
-include 'InCallUI'
-project(':InCallUI').projectDir = new File(rootDir, 'packages/apps/Dialer/InCallUI')
+include 'incallui'
+project(':incallui').projectDir = new File(rootDir, 'packages/apps/Dialer/InCallUI')
 
 include 'dialer'
 project(':dialer').projectDir = new File(rootDir, 'packages/apps/Dialer')
 project(':dialer').buildFileName = 'build-app.gradle'
-
-include 'googledialer'
-project(':googledialer').projectDir = new File(rootDir, 'vendor/unbundled_google/packages/GoogleDialer')
