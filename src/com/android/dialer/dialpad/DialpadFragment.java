@@ -274,11 +274,6 @@ public class DialpadFragment extends Fragment
                         showDialpadChooser(false);
                         break;
                     }
-
-                case TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE:
-                case TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED:
-                    updateSpinner(null, mAllAvailableProviders);
-                    break;
             }
         }
     }
@@ -369,8 +364,6 @@ public class DialpadFragment extends Fragment
         if (mCallStateReceiver == null) {
             IntentFilter callStateIntentFilter = new IntentFilter();
             callStateIntentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
-            callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE);
-            callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED);
             mCallStateReceiver = new CallStateReceiver();
             ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
         }
@@ -474,6 +467,11 @@ public class DialpadFragment extends Fragment
         } else {
             CreditBarHelper.clearCallRateInformation(mDialpadView.getRateContainer(), cbvl);
         }
+    }
+
+    public void setCurrentCallMethod(CallMethodInfo callMethodInfo) {
+        mCurrentCallMethodInfo = callMethodInfo;
+        CallMethodSpinnerHelper.setSelectedCallMethod(mCallMethodSpinner, callMethodInfo);
     }
 
     public void providersUpdated(String lastKnownCallMethod, HashMap<ComponentName, CallMethodInfo>

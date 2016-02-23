@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.android.phone.common.incall.CallMethodSpinnerAdapter.POSITION_UNKNOWN;
+
 /**
  * Helper class for generating and managing multiple provider selection spinners across the
  * Dialer UI
@@ -73,6 +75,7 @@ public class CallMethodSpinnerHelper {
                                                               availableProviders) {
         CallMethodSpinnerAdapter callMethodSpinnerAdapter = (CallMethodSpinnerAdapter)
                 callMethodSpinner.getAdapter();
+        int lastKnownPosition = callMethodSpinnerAdapter.getPosition(lastKnownCallMethod);
         callMethodSpinnerAdapter.clear();
 
         List<CallMethodInfo> sims = new ArrayList<CallMethodInfo>();
@@ -103,11 +106,13 @@ public class CallMethodSpinnerHelper {
             changeListener.onCallMethodChangedListener(info);
         } else {
             // multiple call methods or single provider
-            int position = 0;
+            int position = POSITION_UNKNOWN;
             callMethodSpinner.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(lastKnownCallMethod)) {
                 position = callMethodSpinnerAdapter.getPosition(lastKnownCallMethod);
-            } else {
+            }
+
+            if (position == POSITION_UNKNOWN) {
                 CallMethodInfo defaultSim = null;
                 if (TelecomUtil.hasReadPhoneStatus(context)) {
                     defaultSim = CallMethodUtils.getDefaultSimInfo(context);
@@ -116,10 +121,32 @@ public class CallMethodSpinnerHelper {
                     position = callMethodSpinnerAdapter.getPosition(
                             CallMethodSpinnerAdapter.getCallMethodKey(defaultSim));
                 }
+
+                if (position == POSITION_UNKNOWN) {
+                    // If all else fails, first position
+                    position = 0;
+                }
             }
 
-            callMethodSpinner.setSelection(position);
+            if (position < callMethodSpinnerAdapter.getCount()) {
+                if (lastKnownPosition != position) {
+                    callMethodSpinner.setSelection(position);
+                } else {
+                    // Adapter doesn't call onChanged if position dosn't change
+                    CallMethodInfo info = callMethodSpinnerAdapter.getItem(position);
+                    changeListener.onCallMethodChangedListener(info);
+                }
+            }
         }
     }
 
+    public static void setSelectedCallMethod(Spinner callMethodSpinner,
+                                             CallMethodInfo callMethodInfo) {
+        CallMethodSpinnerAdapter callMethodSpinnerAdapter =
+                (CallMethodSpinnerAdapter) callMethodSpinner.getAdapter();
+        int position = callMethodSpinnerAdapter.getPosition(callMethodInfo);
+        if (position > POSITION_UNKNOWN && position < callMethodSpinnerAdapter.getCount()) {
+            callMethodSpinner.setSelection(position);
+        }
+    }
 }
