@@ -88,6 +88,12 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     private static final int DIALPAD_REQUEST_SHOW = 2;
     private static final int DIALPAD_REQUEST_HIDE = 3;
 
+    /**
+     * This is used to relaunch the activity if resizing beyond which it needs to load different
+     * layout file.
+     */
+    private static final int SCREEN_HEIGHT_RESIZE_THRESHOLD = 500;
+
     private CallButtonFragment mCallButtonFragment;
     private CallCardFragment mCallCardFragment;
     private AnswerFragment mAnswerFragment;
@@ -252,7 +258,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         // setting activity should be last thing in setup process
         InCallPresenter.getInstance().setActivity(this);
         enableInCallOrientationEventListener(getRequestedOrientation() ==
-               InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
+                InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
 
         InCallPresenter.getInstance().onActivityStarted();
     }
@@ -350,6 +356,27 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             mConferenceManagerFragment = (ConferenceManagerFragment) fragment;
         } else if (fragment instanceof CallButtonFragment) {
             mCallButtonFragment = (CallButtonFragment) fragment;
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Configuration oldConfig = getResources().getConfiguration();
+        Log.v(this, String.format(
+                "incallui config changed, screen size: w%ddp x h%ddp old:w%ddp x h%ddp",
+                newConfig.screenWidthDp, newConfig.screenHeightDp,
+                oldConfig.screenWidthDp, oldConfig.screenHeightDp));
+        // Recreate this activity if height is changing beyond the threshold to load different
+        // layout file.
+        if (oldConfig.screenHeightDp < SCREEN_HEIGHT_RESIZE_THRESHOLD &&
+                newConfig.screenHeightDp > SCREEN_HEIGHT_RESIZE_THRESHOLD ||
+                oldConfig.screenHeightDp > SCREEN_HEIGHT_RESIZE_THRESHOLD &&
+                        newConfig.screenHeightDp < SCREEN_HEIGHT_RESIZE_THRESHOLD) {
+            Log.i(this, String.format(
+                    "Recreate activity due to resize beyond threshold: %d dp",
+                    SCREEN_HEIGHT_RESIZE_THRESHOLD));
+            recreate();
         }
     }
 
