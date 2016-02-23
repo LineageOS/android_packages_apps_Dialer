@@ -8,4 +8,7 @@
     <color name="callerinfo_provider_picker_description_color">#8a000000</color>
     <color name="callerinfo_provider_picker_disclaimer_color">#a6a6a6</color>
 
+    <color name="coach_mark_line_color">#48c0ed</color>
+    <color name="coach_mark_text_with_overlay">#FFF</color>
+    <color name="coach_mark_text">#000</color>
 </resources>

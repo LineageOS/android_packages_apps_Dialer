@@ -21,7 +21,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -69,7 +68,6 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
@@ -81,26 +79,23 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
-import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
+import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.incall.CallMethodSpinnerHelper;
+import com.android.dialer.util.CoachMarkDrawableHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
-import com.android.phone.common.incall.CallMethodSpinnerAdapter;
-import com.android.phone.common.incall.CallMethodUtils;
 import com.android.phone.common.incall.CreditBarHelper;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -370,11 +365,13 @@ public class DialpadFragment extends Fragment
         Trace.endSection();
     }
 
+    View fragmentView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         Trace.beginSection(TAG + " onCreateView");
         Trace.beginSection(TAG + " inflate view");
-        final View fragmentView = inflater.inflate(R.layout.dialpad_fragment, container,
+        fragmentView = inflater.inflate(R.layout.dialpad_fragment, container,
                 false);
         Trace.endSection();
         Trace.beginSection(TAG + " buildLayer");
@@ -487,6 +484,10 @@ public class DialpadFragment extends Fragment
                 callMethodInfos.containsKey(mCurrentCallMethodInfo.mComponent)) {
             onCallMethodChanged(callMethodInfos.get(mCurrentCallMethodInfo.mComponent));
         }
+
+        String unFormattedString = getString(R.string.provider_help);
+        CoachMarkDrawableHelper.assignViewTreeObserver(mDialpadView, getActivity(), fragmentView,
+                false, fragmentView.findViewById(R.id.listen_dismiss), unFormattedString);
     }
 
     public void updateSpinner(String lastKnownMethod, HashMap<ComponentName, CallMethodInfo>

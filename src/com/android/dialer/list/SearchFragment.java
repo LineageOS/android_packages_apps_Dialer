@@ -31,7 +31,6 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
@@ -51,6 +50,7 @@ import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.R;
+import com.android.dialer.util.CoachMarkDrawableHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.widget.EmptyContentView;
@@ -169,6 +169,15 @@ public class SearchFragment extends PhoneNumberPickerFragment
         });
         if (mActivityOnTouchListener != null) {
             listView.setOnTouchListener(mActivityOnTouchListener);
+        }
+
+        DialtactsActivity da = (DialtactsActivity) mActivity;
+        if (da != null && da.isInSearchUi()) {
+
+            String unFormattedString = getString(R.string.provider_search_help);
+            CoachMarkDrawableHelper.assignViewTreeObserverWithHeight(parentView, da,
+                    da.getSearchTextLayout(), mActivity.getActionBarHeight(), true,
+                    da.getSearchEditText(), unFormattedString, 0.8f);
         }
 
         updatePosition(false /* animate */);

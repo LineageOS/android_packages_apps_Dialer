@@ -1210,6 +1210,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (animate) {
             mListsFragment.getView().animate().alpha(0).withLayer();
         }
+
+        mSearchView.clearFocus();
         mListsFragment.setUserVisibleHint(false);
     }
 
@@ -1246,6 +1248,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             transaction.remove(mRegularSearchFragment);
         }
         transaction.commit();
+
+        // Left search UI, clear overlay coachmark if user has not dismissed it.
+        getSearchTextLayout().getOverlay().clear();
 
         mListsFragment.getView().animate().alpha(1).withLayer();
 
@@ -1566,6 +1571,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public FrameLayout getGlobalCreditsBar() {
         return mGlobalCreditsBar;
+    }
+
+    public View getSearchTextLayout() {
+        return mSearchEditTextLayout;
+    }
+
+    public View getSearchEditText() {
+        return mSearchView;
     }
 
     @Override

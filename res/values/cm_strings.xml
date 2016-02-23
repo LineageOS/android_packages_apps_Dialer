@@ -162,4 +162,7 @@
     <string name="provider_disable_spam_message">By disabling %1$s, you will not have spam protection or caller ID.</string>
 
     <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+
+    <string name="provider_help">"Make %1$s calls by\nswitching modes here"</string>
+    <string name="provider_search_help">"Search %1$s contacts by\nswitching modes here"</string>
 </resources>

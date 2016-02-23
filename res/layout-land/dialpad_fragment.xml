@@ -102,4 +102,11 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/listen_dismiss"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:focusable="false" />
+
 </view>
