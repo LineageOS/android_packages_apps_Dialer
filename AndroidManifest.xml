@@ -305,10 +305,11 @@
                   android:label="@string/phoneAppLabel"
                   android:excludeFromRecents="true"
                   android:launchMode="singleInstance"
-                  android:configChanges="keyboardHidden"
+                  android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
                   android:exported="false"
                   android:screenOrientation="nosensor"
-                  android:encryptionAware="true" >
+                  android:encryptionAware="true"
+                  android:resizeableActivity="true">
         </activity>
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
