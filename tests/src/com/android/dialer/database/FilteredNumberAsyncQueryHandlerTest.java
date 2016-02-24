@@ -16,16 +16,18 @@
 
 package com.android.dialer.database;
 
-import android.content.pm.ProviderInfo;
+import android.content.ContentValues;
 import android.net.Uri;
 import android.test.InstrumentationTestCase;
 import android.test.mock.MockContentResolver;
 
 import com.android.contacts.common.test.mocks.MockContentProvider;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
 
 import java.util.concurrent.CountDownLatch;
@@ -39,6 +41,7 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
     private static final Integer ID = 1;
     private static final Uri BLOCKED_NUMBER_URI =
             Uri.withAppendedPath(FilteredNumberContract.AUTHORITY_URI, "filtered_numbers_table");
+    private static final Uri EXPECTED_URI = Uri.fromParts("android", "google", "dialer");
 
     private final MockContentResolver mContentResolver = new MockContentResolver();
     private final MockContentProvider mContentProvider = new MockContentProvider();
@@ -46,16 +49,7 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        setUpProviderForAuthority(mContentProvider, FilteredNumberContract.AUTHORITY,
-                mContentResolver);
-    }
-
-    private void setUpProviderForAuthority(MockContentProvider provider, String authority,
-            MockContentResolver contentResolver) {
-        ProviderInfo providerInfo = new ProviderInfo();
-        providerInfo.authority = authority;
-        provider.attachInfo(null, providerInfo);
-        contentResolver.addProvider(authority, provider);
+        mContentResolver.addProvider(FilteredNumberContract.AUTHORITY, mContentProvider);
     }
 
     public void testIsBlockedNumber_NoResults() throws Throwable {
@@ -123,7 +117,51 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
         return mContentProvider.expectQuery(BLOCKED_NUMBER_URI).withProjection(
                 FilteredNumberColumns._ID)
                 .withSelection(FilteredNumberColumns.TYPE + "="
-                        + FilteredNumberTypes.BLOCKED_NUMBER);
+                        + FilteredNumberTypes.BLOCKED_NUMBER, null);
+    }
+
+    public void testBlockNumber() throws Throwable {
+        mContentProvider.expectInsert(BLOCKED_NUMBER_URI, newBlockNumberContentValues(),
+                EXPECTED_URI);
+        final BlockingArgumentCaptorOnBlockNumberListener listener =
+                new BlockingArgumentCaptorOnBlockNumberListener();
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new FilteredNumberAsyncQueryHandler(mContentResolver).blockNumber(listener,
+                        E164_NUMBER, NUMBER, COUNTRY_ISO);
+            }
+        });
+        assertTrue(listener.onBlockCompleteCalled.await(5000, TimeUnit.MILLISECONDS));
+        assertSame(EXPECTED_URI, listener.uri);
+        mContentProvider.verify();
+    }
+
+    public void testBlockNumber_NullNormalizedNumber() throws Throwable {
+        mContentProvider.expectInsert(BLOCKED_NUMBER_URI, newBlockNumberContentValues(),
+                EXPECTED_URI);
+        final BlockingArgumentCaptorOnBlockNumberListener listener =
+                new BlockingArgumentCaptorOnBlockNumberListener();
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new FilteredNumberAsyncQueryHandler(mContentResolver).blockNumber(listener,
+                        NUMBER, COUNTRY_ISO);
+            }
+        });
+        assertTrue(listener.onBlockCompleteCalled.await(5000, TimeUnit.MILLISECONDS));
+        assertSame(EXPECTED_URI, listener.uri);
+        mContentProvider.verify();
+    }
+
+    private ContentValues newBlockNumberContentValues() {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FilteredNumberColumns.NORMALIZED_NUMBER, E164_NUMBER);
+        contentValues.put(FilteredNumberColumns.NUMBER, NUMBER);
+        contentValues.put(FilteredNumberColumns.COUNTRY_ISO, COUNTRY_ISO);
+        contentValues.put(FilteredNumberColumns.TYPE, FilteredNumberTypes.BLOCKED_NUMBER);
+        contentValues.put(FilteredNumberColumns.SOURCE, FilteredNumberSources.USER);
+        return contentValues;
     }
 
     private class CheckBlockedListener implements OnCheckBlockedListener {
@@ -167,6 +205,21 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
                 throw new IllegalStateException("Waiting on callback timed out.");
             }
             return hasBlockedNumbers;
+        }
+    }
+
+    private class BlockingArgumentCaptorOnBlockNumberListener implements OnBlockNumberListener {
+        public final CountDownLatch onBlockCompleteCalled;
+        public Uri uri;
+
+        public BlockingArgumentCaptorOnBlockNumberListener() {
+            onBlockCompleteCalled = new CountDownLatch(1);
+        }
+
+        @Override
+        public void onBlockComplete(Uri uri) {
+            this.uri = uri;
+            onBlockCompleteCalled.countDown();
         }
     }
 }

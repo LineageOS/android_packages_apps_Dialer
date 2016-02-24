@@ -17,6 +17,7 @@ package com.android.dialer.filterednumber;
 
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import com.android.contacts.common.test.mocks.ContactsMockContext;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
@@ -24,6 +25,7 @@ import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 
+@SmallTest
 public class FilteredNumbersUtilTest extends AndroidTestCase {
 
     private static final String COUNTRY_ISO = "US";
