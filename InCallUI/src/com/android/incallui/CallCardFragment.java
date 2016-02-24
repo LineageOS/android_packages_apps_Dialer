@@ -649,6 +649,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // height will be determined on layout.
         if (isVisible) {
             mSecondaryCallInfo.setVisibility(View.VISIBLE);
+        } else {
+            mSecondaryCallInfo.setVisibility(View.GONE);
         }
 
         updateFabPositionForSecondaryCallInfo();
@@ -667,6 +669,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 int secondaryHeight = mSecondaryCallInfo.getHeight();
                 if (isVisible) {
                     mSecondaryCallInfo.setVisibility(View.GONE);
+                } else {
+                    mSecondaryCallInfo.setVisibility(View.VISIBLE);
                 }
                 Log.v(this, "setSecondaryInfoVisible: secondaryHeight = " + secondaryHeight);
 
