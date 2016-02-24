@@ -27,7 +27,6 @@ import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
-import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
