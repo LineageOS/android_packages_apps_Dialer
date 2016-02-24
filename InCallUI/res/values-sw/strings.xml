@@ -17,176 +17,180 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="906161039445636857">"Simu"</string>
-    <string name="onHold" msgid="9035493194749959955">"Inangoja"</string>
-    <string name="unknown" msgid="6878797917991465859">"Haijulikani"</string>
-    <string name="private_num" msgid="6713286113000232309">" Number isiyojulikana"</string>
-    <string name="payphone" msgid="4793877574636445118">"Simu ya kulipia"</string>
-    <string name="confCall" msgid="1904840547188336828">"Simu ya kongamano"</string>
-    <string name="call_lost" msgid="6183862117003999578">"Simu imekatwa"</string>
-    <string name="audio_mode_speaker" msgid="27649582100085266">"Spika"</string>
-    <string name="audio_mode_earpiece" msgid="4156527186373869107">"Kipaza sauti cha kichwani"</string>
-    <string name="audio_mode_wired_headset" msgid="1465350758489175975">"Viskizi vya maskio pasiwaya"</string>
-    <string name="audio_mode_bluetooth" msgid="3047641300848211128">"Bluetooth"</string>
-    <string name="wait_prompt_str" msgid="7601815427707856238">"Ungependa kutuma toni zifuatazo? \n"</string>
-    <string name="pause_prompt_str" msgid="1789964702154314806">"Inatuma toni\n"</string>
-    <string name="send_button" msgid="4106860097497818751">"Tuma"</string>
-    <string name="pause_prompt_yes" msgid="3564467212025151797">"Ndiyo"</string>
-    <string name="pause_prompt_no" msgid="6686238803236884877">"Hapana"</string>
-    <string name="wild_prompt_str" msgid="5543521676355533577">"Badilisha kibambo egemezi na"</string>
-    <string name="caller_manage_header" msgid="3231519674734638786">"Simu ya kongamano <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="8524164258691887790">"Nambari ya ujumbe wa sauti"</string>
-    <string name="card_title_dialing" msgid="5769417478498348054">"Inapiga"</string>
-    <string name="card_title_redialing" msgid="8253487008234167266">"Inapiga simu tena"</string>
-    <string name="card_title_conf_call" msgid="1162980346189744501">"Simu ya kongamano"</string>
-    <string name="card_title_incoming_call" msgid="7364539451234646909">"Simu inayoingia"</string>
-    <string name="card_title_incoming_work_call" msgid="5601475030981264422">"Simu ya kazi inayoingia"</string>
-    <string name="card_title_call_ended" msgid="5544730338889702298">"Simu imekamilika"</string>
-    <string name="card_title_on_hold" msgid="821463117892339942">"Inangoja"</string>
-    <string name="card_title_hanging_up" msgid="3999101620995182450">"Kukata simu"</string>
-    <string name="card_title_in_call" msgid="6346543933068225205">"Katika simu"</string>
-    <string name="card_title_my_phone_number" msgid="112428362494434191">"Nambari yangu ni <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
-    <string name="card_title_video_call_connecting" msgid="297586766381973954">"Inaunganisha video"</string>
-    <string name="card_title_video_call" msgid="5898636679563320218">"Hangout ya Video"</string>
-    <string name="card_title_video_call_requesting" msgid="4587504939739340937">"Inaomba video"</string>
-    <string name="card_title_video_call_error" msgid="9000555878389539225">"Haiwezi kuunganisha Hangout ya video"</string>
-    <string name="card_title_video_call_rejected" msgid="462358296694719787">"Ombi la video limekataliwa"</string>
-    <string name="card_title_callback_number" msgid="7307938207564217293">"Nambari yako ya kupigiwa simu\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="card_title_callback_number_emergency" msgid="8634765419223426754">"Nambari yako ya dharura ya kupigiwa simu\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="2107666444937350731">"Inapiga"</string>
-    <string name="notification_missedCallTitle" msgid="7554385905572364535">"Simu isiyojibiwa"</string>
-    <string name="notification_missedCallsTitle" msgid="1361677948941502522">"Simu zisizojibiwa"</string>
-    <string name="notification_missedCallsMsg" msgid="4575787816055205600">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> simu ambazo hazijajibiwa"</string>
-    <string name="notification_missedCallTicker" msgid="504686252427747209">"Simu isiyojibiwa kutoka <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
-    <string name="notification_ongoing_call" msgid="7068688957273482989">"Simu inayoendelea"</string>
-    <string name="notification_ongoing_work_call" msgid="4071124825337695596">"Simu ya kazi inayoendelea"</string>
-    <string name="notification_ongoing_call_wifi" msgid="8521553590606569379">"Simu ya Wi-Fi inayoendelea"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="2914071877370405192">"Simu ya Wi-Fi ya kazi inayoendelea"</string>
-    <string name="notification_on_hold" msgid="3480694969511790465">"Inangoja"</string>
-    <string name="notification_incoming_call" msgid="2820429205043529642">"Simu inayoingia"</string>
-    <string name="notification_incoming_work_call" msgid="3581021176870685239">"Simu ya kazi inayoingia"</string>
-    <string name="notification_incoming_call_wifi" msgid="9210706506594546627">"Simu ya Wi-Fi inayoingia"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="7126555701581469722">"Simu ya Wi-Fi ya kazi inayoingia"</string>
-    <string name="notification_incoming_video_call" msgid="7356836933934464805">"Hangout ya Video inayoingia"</string>
-    <string name="notification_requesting_video_call" msgid="1405576812892369451">"Ombi  linaloingia la video"</string>
-    <string name="notification_voicemail_title" msgid="8933468752045550523">"Ujumbe mpya wa sauti"</string>
-    <string name="notification_voicemail_title_count" msgid="4366360747660929916">"Barua mpya ya sauti <xliff:g id="COUNT">%d</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="4447323569453981685">"Piga <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="760963466895609716">"Nambari ya ujumbe wa sauti haijulikani."</string>
-    <string name="notification_network_selection_title" msgid="4224455487793492772">"Hakuna huduma"</string>
-    <string name="notification_network_selection_text" msgid="2607085729661923269">"Mtandao uliochaguliwa <xliff:g id="OPERATOR_NAME">%s</xliff:g> haupatikani"</string>
-    <string name="notification_action_answer" msgid="6700362365135365143">"Jibu"</string>
-    <string name="notification_action_end_call" msgid="6069460915123531620">"Kata simu"</string>
-    <string name="notification_action_answer_video" msgid="7809271910870211729">"Video"</string>
-    <string name="notification_action_answer_voice" msgid="1770796916369437773">"Sauti"</string>
-    <string name="notification_action_accept" msgid="2898609801209468429">"Kubali"</string>
-    <string name="notification_action_dismiss" msgid="2679969397930852858">"Ondoa"</string>
-    <string name="notification_missedCall_call_back" msgid="2684890353590890187">"Mpigie"</string>
-    <string name="notification_missedCall_message" msgid="3049928912736917988">"Ujumbe"</string>
-    <string name="incall_error_power_off" msgid="6550191216405193368">"Kupiga simu, kwanza zima hali ya ndege."</string>
-    <string name="incall_error_emergency_only" msgid="4678640422710818317">"Haijasajiliwa kwa mitandao"</string>
-    <string name="incall_error_out_of_service" msgid="4100065333878929223">"Mitandao ya simu za mkononi haipatikani"</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="1150414018684246528">"Ili upige simu, weka nambari sahihi."</string>
-    <string name="incall_error_call_failed" msgid="6302746943230078197">"Haiwezi kupiga simu."</string>
-    <string name="incall_status_dialed_mmi" msgid="3672498861336189563">"Inaanzisha msururu wa MMI…"</string>
-    <string name="incall_error_supp_service_unknown" msgid="323435289607131929">"Huduma haitumiki."</string>
-    <string name="incall_error_supp_service_switch" msgid="5237002176899962862">"Haiwezi kubadili simu."</string>
-    <string name="incall_error_supp_service_separate" msgid="7224393405134545246">"Haiwezi kutenganisha simu."</string>
-    <string name="incall_error_supp_service_transfer" msgid="7235952238189391438">"Haiwezi kuhamisha."</string>
-    <string name="incall_error_supp_service_conference" msgid="7010354362202271726">"Haiwezi kushiriki katika simu ya mkutano."</string>
-    <string name="incall_error_supp_service_reject" msgid="8998568661508655638">"Haiwezi kukataa simu."</string>
-    <string name="incall_error_supp_service_hangup" msgid="7434513517153834426">"Haiwezi kutoa simu."</string>
-    <string name="incall_call_type_label_sip" msgid="4931428719494190371">"Simu ya SIP"</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="4627849966634578257">"Simu ya dharura"</string>
-    <string name="emergency_enable_radio_dialog_message" msgid="207613549344420291">"Inawasha redio..."</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="5960061579996526883">"Hakuna huduma. Inajaribu tena..."</string>
-    <string name="dial_emergency_error" msgid="1509085166367420355">"Haiwezi kupiga simu. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> si nambari ya dharura."</string>
-    <string name="dial_emergency_empty_error" msgid="9130194953830414638">"Haiwezi kupiga simu. Piga simu nambari ya dharura."</string>
-    <string name="dialerKeyboardHintText" msgid="9192914825413747792">"Tumia kibodi kubonyeza"</string>
-    <string name="onscreenHoldText_unselected" msgid="7092499303393171276">"Shikilia Simu"</string>
-    <string name="onscreenHoldText_selected" msgid="7127901498507384249">"Endelea na Simu"</string>
-    <string name="onscreenEndCallText" msgid="9039601192595655846">"Kata Simu"</string>
-    <string name="onscreenShowDialpadText" msgid="8561805492659639893">"Kibao cha kupiga"</string>
-    <string name="onscreenMuteText" msgid="5011369181754261374">"Nyamazisha"</string>
-    <string name="onscreenAddCallText" msgid="5140385634712287403">"Ongeza simu"</string>
-    <string name="onscreenMergeCallsText" msgid="6640195098064538950">"Changanyisha simu"</string>
-    <string name="onscreenSwapCallsText" msgid="1602990689244030047">"Badili"</string>
-    <string name="onscreenManageCallsText" msgid="5473231160123254154">"Dhibiti simu"</string>
-    <string name="onscreenManageConferenceText" msgid="6801708317570467407">"Dhibiti simu ya kongamano"</string>
-    <string name="onscreenAudioText" msgid="1710087112800041743">"Kusikika"</string>
-    <string name="onscreenVideoCallText" msgid="4800924186056115442">"Hangout ya Video"</string>
-    <string name="onscreenChangeToVoiceText" msgid="5311407863653867937">"Badilisha iwe simu ya sauti"</string>
-    <string name="onscreenSwitchCameraText" msgid="5324543493442787798">"Badilisha kamera"</string>
-    <string name="onscreenPauseVideoText" msgid="5663965924921429203">"Sitisha video"</string>
-    <string name="onscreenOverflowText" msgid="2702376562345723132">"Chaguo zaidi"</string>
-    <string name="player_started" msgid="6046262510243983589">"Kichezaji Kimeanzishwa"</string>
-    <string name="player_stopped" msgid="8856926759436364963">"Kichezaji Kimekomeshwa"</string>
-    <string name="camera_not_ready" msgid="4955261496193316240">"Kamera haiko tayari"</string>
-    <string name="camera_ready" msgid="1903335385405807324">"Kamera iko tayari"</string>
-    <string name="unknown_call_session_event" msgid="2431061946920253582">"Tukio lisilojulikana la kipindi cha simu"</string>
-    <string name="voicemail_provider" msgid="5135942703327136909">"Huduma"</string>
-    <string name="voicemail_settings" msgid="72448049107749316">"Sanidi"</string>
-    <string name="voicemail_number_not_set" msgid="6724904736891087856">"&lt;Haijawekwa&gt;"</string>
-    <string name="other_settings" msgid="3672912580359716394">"Mipangilio mingine ya simu"</string>
-    <string name="calling_via_template" msgid="4839419581866928142">"Inapiga kupitia <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
-    <string name="incoming_via_template" msgid="1696993226115570960">"Simu zinazoingia kupitia <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
-    <string name="contactPhoto" msgid="4713193418046639466">"picha ya anwani"</string>
-    <string name="goPrivate" msgid="865837794424530980">"nenda kwa faragha"</string>
-    <string name="selectContact" msgid="781975788478987237">"chagua anwani"</string>
-    <string name="respond_via_sms_custom_message" msgid="6158880869935281078">"Andika yako binafsi..."</string>
-    <string name="custom_message_cancel" msgid="7516406059429609296">"Ghairi"</string>
-    <string name="custom_message_send" msgid="5795754217085747742">"Tuma"</string>
-    <string name="description_target_answer" msgid="7205604197797472471">"Jibu"</string>
-    <string name="description_target_send_sms" msgid="2098326025587950144">"Tuma SMS"</string>
-    <string name="description_target_decline" msgid="4789834364389731957">"Kataa"</string>
-    <string name="description_target_answer_video_call" msgid="3495965588512395026">"Pokea kama Hangout ya Video"</string>
-    <string name="description_target_answer_audio_call" msgid="8396296303320994450">"Pokea kama simu ya sauti"</string>
-    <string name="description_target_accept_upgrade_to_video_request" msgid="2894072808324604062">"Kubali ombi la video"</string>
-    <string name="description_target_decline_upgrade_to_video_request" msgid="4093888612888538776">"Kataa ombi la video"</string>
-    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="5311037889642077468">"Kubali ombi la kutuma kupitia hangout ya video"</string>
-    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="3636108065510415975">"Kataa ombi la kutuma kupitia hangout ya video"</string>
-    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="8668058323593087912">"Kubali ombi la kupokea kupitia hangout ya video"</string>
-    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="2355776509656298367">"Kataa ombi la kupokea kupitia hangout ya video"</string>
-    <string name="description_direction_up" msgid="4441409581444516690">"Sogeza juu ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> ."</string>
-    <string name="description_direction_left" msgid="7129873384376533287">"Sogeza kushoto ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="description_direction_right" msgid="2122584234531957308">"Sogeza kulia ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="description_direction_down" msgid="4317245625565166742">"Telezesha kidole chini kwa <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
-    <string name="voicemail_notification_vibrate_when_title" msgid="8361970092063604886">"Mtetemo"</string>
-    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="5739583146522136440">"Mtetemo"</string>
-    <string name="voicemail_notification_ringtone_title" msgid="2609519527849101590">"Sauti"</string>
-    <string name="default_notification_description" msgid="78174796906240970">"Sauti chaguo-msingi (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
-    <string name="ringtone_title" msgid="6374978286202084684">"Mlio wa simu"</string>
-    <string name="vibrate_on_ring_title" msgid="9197564612065258960">"Tetema wakati wa kulia"</string>
-    <string name="preference_category_ringtone" msgid="5197960752529332721">"Mlio wa simu na Mtetemo"</string>
-    <string name="manageConferenceLabel" msgid="4691922394301969053">"Dhibiti simu ya kongamano"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="8373041754188879871">"Nambari ya dharura"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="59971978269163609">
-      <item quantity="other">Sekunde <xliff:g id="COUNT">%d</xliff:g> </item>
+    <string name="phoneAppLabel" product="default" msgid="4753450867264774000">"Simu"</string>
+    <string name="onHold" msgid="527593602772521700">"Inangoja"</string>
+    <string name="unknown" msgid="3646075119047488748">"Isiyojulikana"</string>
+    <string name="private_num" msgid="6081418498487514686">"Nambari ya faragha"</string>
+    <string name="payphone" msgid="5743050584468748607">"Simu ya kulipia"</string>
+    <string name="confCall" msgid="3181961445236675173">"Simu ya mkutano"</string>
+    <string name="call_lost" msgid="8208184291640961172">"Simu imekatwa"</string>
+    <string name="audio_mode_speaker" msgid="6160127758732918123">"Spika"</string>
+    <string name="audio_mode_earpiece" msgid="3138677187223932893">"Kipaza sauti cha kichwani"</string>
+    <string name="audio_mode_wired_headset" msgid="583080366967943196">"Vifaa vya sauti visivyo na waya"</string>
+    <string name="audio_mode_bluetooth" msgid="3188504589946495676">"Bluetooth"</string>
+    <string name="wait_prompt_str" msgid="3784275777844586675">"Ungependa kutuma milio ya sauti inayofuata? \n"</string>
+    <string name="pause_prompt_str" msgid="4507496811727697620">"Inatuma milio ya simu\n"</string>
+    <string name="send_button" msgid="4054398309483035794">"Tuma"</string>
+    <string name="pause_prompt_yes" msgid="6738588490007499118">"Ndiyo"</string>
+    <string name="pause_prompt_no" msgid="417286529736964178">"Hapana"</string>
+    <string name="wild_prompt_str" msgid="8178750766679617355">"Badilisha herufi inayojitegemea kwa"</string>
+    <string name="caller_manage_header" msgid="4036790479287738218">"Simu ya mkutano <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
+    <string name="voicemail_settings_number_label" msgid="2951965862286532957">"Nambari ya ujumbe wa sauti"</string>
+    <string name="card_title_dialing" msgid="5046026076417718916">"Inapiga"</string>
+    <string name="card_title_redialing" msgid="8072468059192027844">"Inapiga simu tena"</string>
+    <string name="card_title_conf_call" msgid="1747835072739982104">"Simu ya mkutano"</string>
+    <string name="card_title_incoming_call" msgid="4138485434087223132">"Unapigiwa simu"</string>
+    <string name="card_title_incoming_work_call" msgid="7000583925426981712">"Simu ya kazi inayoingia"</string>
+    <string name="card_title_call_ended" msgid="5249815286629136486">"Simu imekamilika"</string>
+    <string name="card_title_on_hold" msgid="5633854828341577689">"Inangoja"</string>
+    <string name="card_title_hanging_up" msgid="3402022578391538671">"Kukata simu"</string>
+    <string name="card_title_in_call" msgid="5029165346952099302">"Katika simu"</string>
+    <string name="card_title_my_phone_number" msgid="3749572971322520177">"Nambari yangu ni <xliff:g id="MY_PHONE_NUMBER">%s</xliff:g>"</string>
+    <string name="card_title_video_call_connecting" msgid="9171270899902894036">"Inaunganisha video"</string>
+    <string name="card_title_video_call" msgid="6519406270853889302">"Hangout ya Video"</string>
+    <string name="card_title_video_call_requesting" msgid="1611293204379882739">"Inaomba video"</string>
+    <string name="card_title_video_call_error" msgid="8488074823425848193">"Haiwezi kuunganisha Hangout ya video"</string>
+    <string name="card_title_video_call_rejected" msgid="2885215432045215465">"Ombi la video limekataliwa"</string>
+    <string name="card_title_callback_number" msgid="7646082782307705748">"Nambari yako ya kupigiwa simu\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Nambari yako ya dharura ya kupigiwa simu\n<xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+    <string name="notification_dialing" msgid="8080968169444117163">"Inapiga"</string>
+    <string name="notification_missedCallTitle" msgid="2774630248151712215">"Simu ambayo hukujibu"</string>
+    <string name="notification_missedCallsTitle" msgid="263275811089605859">"Simu ambazo hukujibu"</string>
+    <string name="notification_missedCallsMsg" msgid="69408330370667429">"Simu <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ambazo hukujibu"</string>
+    <string name="notification_missedCallTicker" msgid="1599269453813734699">"Simu ambayo hukujibu kutoka <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_ongoing_call" msgid="8633734299234807397">"Simu inayoendelea"</string>
+    <string name="notification_ongoing_work_call" msgid="3465083293325006579">"Simu ya kazi inayoendelea"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4140639349603930166">"Simu ya Wi-Fi inayoendelea"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="8469582753279163976">"Simu ya Wi-Fi ya kazi inayoendelea"</string>
+    <string name="notification_on_hold" msgid="3151343576023182586">"Inangoja"</string>
+    <string name="notification_incoming_call" msgid="5904745644632328863">"Unapigiwa simu"</string>
+    <string name="notification_incoming_work_call" msgid="281305845895342925">"Unapigiwa simu ya kazi"</string>
+    <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Unapigiwa simu kupitia Wi-Fi"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Unapigiwa simu ya kazini kupitia Wi-Fi"</string>
+    <string name="notification_incoming_video_call" msgid="7814873581838165772">"Hangout ya Video inayoingia"</string>
+    <string name="notification_requesting_video_call" msgid="4844596091477863245">"Ombi linaloingia la video"</string>
+    <string name="notification_voicemail_title" msgid="7595628197933709144">"Ujumbe mpya wa sauti"</string>
+    <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Ujumbe (<xliff:g id="COUNT">%d</xliff:g>) mpya wa sauti"</string>
+    <string name="notification_voicemail_text_format" msgid="6496440879085042069">"Piga <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="5433652017869242375">"Nambari ya ujumbe wa sauti haijulikani."</string>
+    <string name="notification_network_selection_title" msgid="6785177943238085441">"Hakuna huduma"</string>
+    <string name="notification_network_selection_text" msgid="9097902390701009591">"Mtandao uliochaguliwa (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) haupatikani"</string>
+    <string name="notification_action_answer" msgid="8418990052527593953">"Jibu"</string>
+    <string name="notification_action_end_call" msgid="2152010639043225860">"Kata simu"</string>
+    <string name="notification_action_answer_video" msgid="2400233093494856655">"Video"</string>
+    <string name="notification_action_answer_voice" msgid="3206168292649273866">"Sauti"</string>
+    <string name="notification_action_accept" msgid="8595047032790476122">"Kubali"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Ondoa"</string>
+    <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Mpigie"</string>
+    <string name="notification_missedCall_message" msgid="2407410183079324393">"Ujumbe"</string>
+    <string name="incall_error_power_off" msgid="3626117639377110403">"Ili upige simu kwanza, zima Hali ya ndegeni."</string>
+    <string name="incall_error_emergency_only" msgid="8704761887752183855">"Haijasajiliwa kwenye mtandao."</string>
+    <string name="incall_error_out_of_service" msgid="1830319376612608339">"Mitandao ya simu za mkononi haipatikani."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Ili upige simu, weka nambari sahihi."</string>
+    <string name="incall_error_call_failed" msgid="2213413937257570551">"Haiwezi kupiga simu."</string>
+    <string name="incall_status_dialed_mmi" msgid="8864341962086874751">"Inaanzisha msururu wa MMI…"</string>
+    <string name="incall_error_supp_service_unknown" msgid="3390926762577861268">"Huduma haitumiki."</string>
+    <string name="incall_error_supp_service_switch" msgid="4893764463854753730">"Haiwezi kubadili simu."</string>
+    <string name="incall_error_supp_service_separate" msgid="5469628699581380277">"Haiwezi kutenganisha simu."</string>
+    <string name="incall_error_supp_service_transfer" msgid="3220469890457973326">"Haiwezi kuhamisha."</string>
+    <string name="incall_error_supp_service_conference" msgid="3100373998543200356">"Haiwezi kushiriki katika simu ya mkutano."</string>
+    <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"Haiwezi kukataa simu."</string>
+    <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"Haiwezi kutoa simu."</string>
+    <string name="incall_call_type_label_sip" msgid="1327822795765282192">"Simu ya SIP"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Simu ya dharura"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Inawasha redio..."</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Hakuna huduma. Inajaribu tena..."</string>
+    <string name="dial_emergency_error" msgid="582305854626092376">"Haiwezi kupiga simu. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> si nambari ya dharura."</string>
+    <string name="dial_emergency_empty_error" msgid="199888628163390267">"Haiwezi kupiga simu. Piga simu nambari ya dharura."</string>
+    <string name="dialerKeyboardHintText" msgid="8533449463925408141">"Tumia kibodi kubonyeza"</string>
+    <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Shikilia Simu"</string>
+    <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Endelea na Simu"</string>
+    <string name="onscreenEndCallText" msgid="1416981593311001074">"Kata Simu"</string>
+    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"Vitufe vya kupiga simu"</string>
+    <string name="onscreenMuteText" msgid="5303380507675232140">"Komesha"</string>
+    <string name="onscreenAddCallText" msgid="5577548650466595598">"Ongeza simu"</string>
+    <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Unganisha simu"</string>
+    <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Badili"</string>
+    <string name="onscreenManageCallsText" msgid="5491297234697209677">"Dhibiti simu"</string>
+    <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Dhibiti simu ya mkutano"</string>
+    <!-- no translation found for onscreenConferenceText (171855677185793827) -->
+    <skip />
+    <!-- no translation found for onscreenManageText (7625850560625708322) -->
+    <skip />
+    <string name="onscreenAudioText" msgid="8963459818052898299">"Sauti"</string>
+    <string name="onscreenVideoCallText" msgid="1578940167445068369">"Hangout ya Video"</string>
+    <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Badilisha iwe simu ya sauti"</string>
+    <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Badilisha kamera"</string>
+    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Sitisha video"</string>
+    <string name="onscreenOverflowText" msgid="7932741239724473887">"Chaguo zaidi"</string>
+    <string name="player_started" msgid="3478865572468310331">"Kichezaji Kimeanzishwa"</string>
+    <string name="player_stopped" msgid="1278611664986561535">"Kichezaji Kimekomeshwa"</string>
+    <string name="camera_not_ready" msgid="6614469280264241251">"Kamera haiko tayari"</string>
+    <string name="camera_ready" msgid="2614541247814590887">"Kamera iko tayari"</string>
+    <string name="unknown_call_session_event" msgid="2947023743819984299">"Tukio lisilojulikana la kipindi cha simu"</string>
+    <string name="voicemail_provider" msgid="2878119321474918370">"Huduma"</string>
+    <string name="voicemail_settings" msgid="7548868784816068975">"Weka mipangilio"</string>
+    <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;Haijawekwa&gt;"</string>
+    <string name="other_settings" msgid="6699076019841942826">"Mipangilio mingine ya simu"</string>
+    <string name="calling_via_template" msgid="3539373093109976255">"Kupiga simu kupitia <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="incoming_via_template" msgid="6281138766370092800">"Simu zinazoingia kupitia <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="6028825355597675193">"picha ya anwani"</string>
+    <string name="goPrivate" msgid="3554069451018659483">"tumia kwa faragha"</string>
+    <string name="selectContact" msgid="92191462970821951">"chagua anwani"</string>
+    <string name="respond_via_sms_custom_message" msgid="8210393177674619127">"Andika yako binafsi..."</string>
+    <string name="custom_message_cancel" msgid="5920059627508662163">"Ghairi"</string>
+    <string name="custom_message_send" msgid="3798076337006735995">"Tuma"</string>
+    <string name="description_target_answer" msgid="1111945818996518320">"Jibu"</string>
+    <string name="description_target_send_sms" msgid="3652217769615310018">"Tuma SMS"</string>
+    <string name="description_target_decline" msgid="7108154434759234035">"Kataa"</string>
+    <string name="description_target_answer_video_call" msgid="4655616461181308405">"Pokea kama Hangout ya Video"</string>
+    <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Pokea kama simu ya sauti"</string>
+    <string name="description_target_accept_upgrade_to_video_request" msgid="384894008955682630">"Kubali ombi la video"</string>
+    <string name="description_target_decline_upgrade_to_video_request" msgid="7342968876159189300">"Kataa ombi la video"</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="4586773853073826378">"Kubali ombi la kutuma kupitia hangout ya video"</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request" msgid="1191166008711514234">"Kataa ombi la kutuma kupitia hangout ya video"</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request" msgid="2224978927364021080">"Kubali ombi la kupokea kupitia hangout ya video"</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request" msgid="3151115394424918077">"Kataa ombi la kupokea kupitia hangout ya video"</string>
+    <string name="description_direction_up" msgid="1735018141439291766">"Telezesha kidole juu ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> ."</string>
+    <string name="description_direction_left" msgid="6811598791620851239">"Telezesha kidole kushoto ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_right" msgid="5461971399586296023">"Telezesha kidole kulia ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="description_direction_down" msgid="3331715227997561639">"Telezesha kidole chini ili <xliff:g id="TARGET_DESCRIPTION">%s</xliff:g>."</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="4595145399183729630">"Mtetemo"</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="2390729279972461242">"Mtetemo"</string>
+    <string name="voicemail_notification_ringtone_title" msgid="1996920553949534944">"Mlio"</string>
+    <string name="default_notification_description" msgid="4950807644546509965">"Sauti chaguo-msingi (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="ringtone_title" msgid="835582004693335905">"Mlio wa simu"</string>
+    <string name="vibrate_on_ring_title" msgid="5019791043398986665">"Tetema wakati wa kuita"</string>
+    <string name="preference_category_ringtone" msgid="6246687516643676729">"Mlio wa simu na Mtetemo"</string>
+    <string name="manageConferenceLabel" msgid="7237614418556336108">"Dhibiti simu ya mkutano"</string>
+    <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Nambari ya dharura"</string>
+    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
+      <item quantity="other">Sekunde <xliff:g id="COUNT">%d</xliff:g></item>
       <item quantity="one">Sekunde 1</item>
     </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="1103289948818175408">
+    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
       <item quantity="other">Dakika <xliff:g id="COUNT">%d</xliff:g></item>
-      <item quantity="one">Dakika 1 </item>
+      <item quantity="one">Dakika 1</item>
     </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7560637459014865969">
-      <item quantity="other">Saa <xliff:g id="COUNT">%d</xliff:g></item>
+    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
+      <item quantity="other">Saa <xliff:g id="COUNT">%d</xliff:g> </item>
       <item quantity="one">Saa 1</item>
     </plurals>
-    <string name="profile_photo_description" msgid="5609894336203315400">"Picha kwenye wasifu"</string>
-    <string name="camera_off_description" msgid="5689494614359429889">"Kamera imezimwa"</string>
-    <string name="child_number" msgid="7437330400723805538">"kupitia <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="note_sent" msgid="3548700178238244595">"Dokezo limetumwa"</string>
-    <string name="person_contact_context_title" msgid="723266617256740572">"Ujumbe wa hivi majuzi"</string>
-    <string name="business_contact_context_title" msgid="5334864183374669765">"Maelezo ya biashara"</string>
-    <string name="distance_imperial_away" msgid="437508440176409037">"Umbali wa maili <xliff:g id="DISTANCE">%.1f</xliff:g>"</string>
-    <string name="distance_metric_away" msgid="166931929505893599">"Umbali wa kilomita <xliff:g id="DISTANCE">%.1f</xliff:g>"</string>
-    <string name="display_address" msgid="7307400970699471708">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
-    <string name="open_time_span" msgid="6709726401179550381">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
-    <string name="opening_hours" msgid="8524931350345922176">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
-    <string name="opens_tomorrow_at" msgid="9168271983241323946">"Itafunguliwa kesho saa <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
-    <string name="opens_today_at" msgid="9011139983701379907">"Itafunguliwa leo saa <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
-    <string name="closes_today_at" msgid="2623384032475495193">"Hufungwa saa <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
-    <string name="closed_today_at" msgid="324294933330883529">"Imefungwa leo saa <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
-    <string name="open_now" msgid="6439301193613349163">"Sasa imefunguliwa"</string>
-    <string name="closed_now" msgid="9175774453982778909">"Sasa imefungwa"</string>
+    <string name="profile_photo_description" msgid="7958198110870319358">"Picha ya wasifu"</string>
+    <string name="camera_off_description" msgid="4220023868645225790">"Kamera imezimwa"</string>
+    <string name="child_number" msgid="4469090994612105532">"kupitia <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
+    <string name="note_sent" msgid="7623014827902758398">"Dokezo limetumwa"</string>
+    <string name="person_contact_context_title" msgid="8490058088809090979">"Ujumbe wa hivi majuzi"</string>
+    <string name="business_contact_context_title" msgid="8448362898576496764">"Maelezo ya biashara"</string>
+    <string name="distance_imperial_away" msgid="2083362798225798740">"Umbali wa maili <xliff:g id="DISTANCE">%.1f</xliff:g>"</string>
+    <string name="distance_metric_away" msgid="9021396592464955256">"Umbali wa kilomita <xliff:g id="DISTANCE">%.1f</xliff:g>"</string>
+    <string name="display_address" msgid="444235484565491291">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
+    <string name="open_time_span" msgid="2762952234657271236">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
+    <string name="opening_hours" msgid="7803506319518398380">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="3567511490448488788">"Itafunguliwa kesho saa <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="6281212768937222891">"Itafunguliwa leo saa <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="closes_today_at" msgid="4822369201263491509">"Hufungwa saa <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="closed_today_at" msgid="4060072663433467233">"Imefungwa leo saa <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
+    <string name="open_now" msgid="4615706338669555999">"Sasa imefunguliwa"</string>
+    <string name="closed_now" msgid="2635314668145282080">"Sasa imefungwa"</string>
 </resources>
