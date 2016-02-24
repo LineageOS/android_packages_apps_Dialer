@@ -257,6 +257,6 @@ public class PhoneNumberInteractionTest extends InstrumentationTestCase {
                         Phone.MIMETYPE,
                         Phone.CONTACT_ID)
                 .withSelection("mimetype IN ('vnd.android.cursor.item/phone_v2',"
-                        + " 'vnd.android.cursor.item/sip_address') AND data1 NOT NULL");
+                        + " 'vnd.android.cursor.item/sip_address') AND data1 NOT NULL", null);
     }
 }
