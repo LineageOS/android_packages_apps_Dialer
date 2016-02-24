@@ -62,6 +62,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final int QUERY_VOICEMAIL_STATUS_TOKEN = 57;
     /** The token for the query to fetch the number of unread voicemails. */
     private static final int QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN = 58;
+    /** The token for the query to fetch the number of missed calls. */
+    private static final int QUERY_MISSED_CALLS_UNREAD_COUNT_TOKEN = 59;
 
     private final int mLogLimit;
 
@@ -225,18 +227,24 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         if (!PermissionsUtil.hasPhonePermissions(mContext)) {
             return;
         }
-        // Mark all "new" calls as not new anymore.
-        StringBuilder where = new StringBuilder();
-        where.append(Calls.IS_READ).append(" = 0");
-        where.append(" AND ");
-        where.append(Calls.TYPE).append(" = ").append(Calls.MISSED_TYPE);
 
         ContentValues values = new ContentValues(1);
         values.put(Calls.IS_READ, "1");
 
         startUpdate(UPDATE_MARK_MISSED_CALL_AS_READ_TOKEN, null, Calls.CONTENT_URI, values,
-                where.toString(), null);
+                getUnreadMissedCallsQuery(), null);
     }
+
+    /** Fetch all missed calls received since last time the tab was opened. */
+    public void fetchMissedCallsUnreadCount() {
+        if (!PermissionsUtil.hasPhonePermissions(mContext)) {
+            return;
+        }
+
+        startQuery(QUERY_MISSED_CALLS_UNREAD_COUNT_TOKEN, null, Calls.CONTENT_URI,
+                new String[]{Calls._ID}, getUnreadMissedCallsQuery(), null, null);
+    }
+
 
     @Override
     protected synchronized void onNotNullableQueryComplete(int token, Object cookie,
@@ -253,6 +261,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
                 updateVoicemailStatus(cursor);
             } else if (token == QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN) {
                 updateVoicemailUnreadCount(cursor);
+            } else if (token == QUERY_MISSED_CALLS_UNREAD_COUNT_TOKEN) {
+                updateMissedCallsUnreadCount(cursor);
             } else {
                 Log.w(TAG, "Unknown query completed: ignoring: " + token);
             }
@@ -276,6 +286,17 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     }
 
+    /**
+     * @return Query string to get all unread missed calls.
+     */
+    private String getUnreadMissedCallsQuery() {
+        StringBuilder where = new StringBuilder();
+        where.append(Calls.IS_READ).append(" = 0");
+        where.append(" AND ");
+        where.append(Calls.TYPE).append(" = ").append(Calls.MISSED_TYPE);
+        return where.toString();
+    }
+
     private void updateVoicemailStatus(Cursor statusCursor) {
         final Listener listener = mListener.get();
         if (listener != null) {
@@ -290,6 +311,13 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         }
     }
 
+    private void updateMissedCallsUnreadCount(Cursor statusCursor) {
+        final Listener listener = mListener.get();
+        if (listener != null) {
+            listener.onMissedCallsUnreadCountFetched(statusCursor);
+        }
+    }
+
     /** Listener to completion of various queries. */
     public interface Listener {
         /** Called when {@link CallLogQueryHandler#fetchVoicemailStatus()} completes. */
@@ -297,6 +325,9 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         /** Called when {@link CallLogQueryHandler#fetchVoicemailUnreadCount()} completes. */
         void onVoicemailUnreadCountFetched(Cursor cursor);
+
+        /** Called when {@link CallLogQueryHandler#fetchMissedCallsUnreadCount()} completes. */
+        void onMissedCallsUnreadCountFetched(Cursor cursor);
 
         /**
          * Called when {@link CallLogQueryHandler#fetchCalls(int)} complete.
