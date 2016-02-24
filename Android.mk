@@ -6,8 +6,6 @@ LOCAL_MODULE_TAGS := optional
 incallui_dir := ../InCallUI
 contacts_common_dir := ../ContactsCommon
 phone_common_dir := ../PhoneCommon
-supportdesign_dir := ../../../external/android/support-prebuilt/support-design
-appcompat_dir := ../../../external/android/support-prebuilt/appcompat
 
 src_dirs := src \
     $(incallui_dir)/src \
@@ -18,17 +16,18 @@ src_dirs := src \
 res_dirs := res \
     $(incallui_dir)/res \
     $(contacts_common_dir)/res \
-    $(phone_common_dir)/res \
-    $(supportdesign_dir)/res \
-    $(appcompat_dir)/res
+    $(phone_common_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs)) $(call all-Iaidl-files-under, $(src_dirs))
 LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/contacts/NameSplitter.java \
                    ../../providers/ContactsProvider/src/com/android/providers/contacts/HanziToPinyin.java \
                    ../../providers/ContactsProvider/src/com/android/providers/contacts/util/NeededForTesting.java
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
-    frameworks/support/v7/cardview/res frameworks/support/v7/recyclerview/res \
-    frameworks/support/v7/appcompat/res frameworks/support/design/res
+    frameworks/support/v7/cardview/res \
+    frameworks/support/v7/recyclerview/res \
+    frameworks/support/v7/appcompat/res \
+    frameworks/support/design/res
+
 LOCAL_ASSET_DIR += $(LOCAL_PATH)/assets
 
 LOCAL_AAPT_FLAGS := \
@@ -49,6 +48,7 @@ LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
+    android-support-design \
     android-support-v13 \
     android-support-v4 \
     android-support-v7-appcompat \
@@ -60,7 +60,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     guava \
     libphonenumber \
     org.cyanogenmod.platform.sdk \
-    dialernext-android-support-design \
     picasso-dialer
 
 LOCAL_PACKAGE_NAME := Dialer
@@ -81,8 +80,6 @@ include $(BUILD_PACKAGE)
 
 include $(CLEAR_VARS)
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-    dialernext-android-support-design:$(supportdesign_dir)/android-support-design.jar \
-    dialernext-android-support-v7-appcompat:$(appcompat_dir)/android-support-v7-appcompat.jar \
     picasso-dialer:libs/picasso-2.5.2.jar
 
 include $(BUILD_MULTI_PREBUILT)
