@@ -158,7 +158,7 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
 
     public void testVoicemailDuration_Zero() {
         setVoicemailPhoneCallDetailsWithDuration(0);
-        assertDurationExactEquals("00:00");
+        assertLocationAndDateExactEquals("Jun 3 at 1:00 PM");
     }
 
     public void testVoicemailDuration_EvenMinute() {
