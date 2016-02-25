@@ -12,12 +12,14 @@ src_dirs := src \
     $(incallui_dir)/src \
     $(contacts_common_dir)/src \
     $(phone_common_dir)/src \
-    $(phone_common_dir)/src-ambient
+    $(phone_common_dir)/src-ambient \
+    $(uicommon_dir)/src
 
 res_dirs := res \
     $(incallui_dir)/res \
     $(contacts_common_dir)/res \
-    $(phone_common_dir)/res
+    $(phone_common_dir)/res \
+    $(uicommon_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs)) $(call all-Iaidl-files-under, $(src_dirs))
 LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/contacts/NameSplitter.java \
