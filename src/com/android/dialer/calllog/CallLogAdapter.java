@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import com.android.dialer.DialtactsActivity;
 import com.google.common.annotations.VisibleForTesting;
 
 import android.content.Context;
@@ -171,6 +172,9 @@ public class CallLogAdapter extends GroupingListAdapter
             } else {
                 if (viewHolder.callType == CallLog.Calls.MISSED_TYPE) {
                     CallLogAsyncTaskUtil.markCallAsRead(mContext, viewHolder.callIds);
+                    if (!mIsCallLogActivity) {
+                        ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
+                    }
                 }
                 expandViewHolderActions(viewHolder);
             }
