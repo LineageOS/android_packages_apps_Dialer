@@ -67,6 +67,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     private static final String KEY_FILTER_TYPE = "filter_type";
     private static final String KEY_LOG_LIMIT = "log_limit";
     private static final String KEY_DATE_LIMIT = "date_limit";
+    private static final String KEY_IS_CALL_LOG_ACTIVITY = "is_call_log_activity";
 
     // No limit specified for the number of logs to show; use the CallLogQueryHandler's default.
     private static final int NO_LOG_LIMIT = -1;
@@ -194,6 +195,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mCallTypeFilter = state.getInt(KEY_FILTER_TYPE, mCallTypeFilter);
             mLogLimit = state.getInt(KEY_LOG_LIMIT, mLogLimit);
             mDateLimit = state.getLong(KEY_DATE_LIMIT, mDateLimit);
+            mIsCallLogActivity = state.getBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
         }
 
         final Activity activity = getActivity();
@@ -355,7 +357,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     @Override
     public void onStop() {
-        updateOnTransition(false /* onEntry */);
+        updateOnTransition();
 
         super.onStop();
     }
@@ -375,6 +377,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         outState.putInt(KEY_FILTER_TYPE, mCallTypeFilter);
         outState.putInt(KEY_LOG_LIMIT, mLogLimit);
         outState.putLong(KEY_DATE_LIMIT, mDateLimit);
+        outState.putBoolean(KEY_IS_CALL_LOG_ACTIVITY, mIsCallLogActivity);
 
         mAdapter.onSaveInstanceState(outState);
     }
@@ -382,6 +385,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public void fetchCalls() {
         mCallLogQueryHandler.fetchCalls(mCallTypeFilter, mDateLimit);
+        if (!mIsCallLogActivity) {
+            ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
+        }
     }
 
     private void updateEmptyMessage(int filterType) {
@@ -429,7 +435,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         if (mMenuVisible != menuVisible) {
             mMenuVisible = menuVisible;
             if (!menuVisible) {
-                updateOnTransition(false /* onEntry */);
+                updateOnTransition();
             } else if (isResumed()) {
                 refreshData();
             }
@@ -448,7 +454,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             fetchCalls();
             mCallLogQueryHandler.fetchVoicemailStatus();
             mCallLogQueryHandler.fetchMissedCallsUnreadCount();
-            updateOnTransition(true /* onEntry */);
+            updateOnTransition();
             mRefreshDataRequired = false;
         } else {
             // Refresh the display of the existing data to update the timestamp text descriptions.
@@ -457,23 +463,17 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     }
 
     /**
-     * Updates the call data and notification state on entering or leaving the call log tab.
-     *
-     * If we are leaving the call log tab, mark all the missed calls as read.
+     * Updates the voicemail notification state.
      *
      * TODO: Move to CallLogActivity
      */
-    private void updateOnTransition(boolean onEntry) {
+    private void updateOnTransition() {
         // We don't want to update any call data when keyguard is on because the user has likely not
         // seen the new calls yet.
         // This might be called before onCreate() and thus we need to check null explicitly.
-        if (mKeyguardManager != null && !mKeyguardManager.inKeyguardRestrictedInputMode()) {
-            // On either of the transitions we update the missed call and voicemail notifications.
-            // While exiting we additionally consume all missed calls (by marking them as read).
-            mCallLogQueryHandler.markNewCallsAsOld();
-            if (mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
-                CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
-            }
+        if (mKeyguardManager != null && !mKeyguardManager.inKeyguardRestrictedInputMode()
+                && mCallTypeFilter == Calls.VOICEMAIL_TYPE) {
+            CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
         }
     }
 

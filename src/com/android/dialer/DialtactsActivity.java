@@ -240,6 +240,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private FloatingActionButtonController mFloatingActionButtonController;
 
     private int mActionBarHeight;
+    private int mPreviouslySelectedTabIndex;
 
     /**
      * The text returned from a voice search query.  Set in {@link #onActivityResult} and used in
@@ -423,7 +424,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mIsLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-
+        mPreviouslySelectedTabIndex = ListsFragment.TAB_INDEX_SPEED_DIAL;
         final View floatingActionButtonContainer = findViewById(
                 R.id.floating_action_button_container);
         ImageButton floatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
@@ -567,6 +568,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     protected void onPause() {
+        // Only clear missed calls if the pause was not triggered by an orientation change
+        // (or any other confirguration change)
+        if (!isChangingConfigurations()) {
+            updateMissedCalls();
+        }
         if (mClearSearchOnPause) {
             hideDialpadAndSearchUi();
             mClearSearchOnPause = false;
@@ -1328,7 +1334,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPageSelected(int position) {
+        updateMissedCalls();
         int tabIndex = mListsFragment.getCurrentTabIndex();
+        mPreviouslySelectedTabIndex = tabIndex;
         if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.ic_person_add_24dp),
@@ -1388,5 +1396,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return FloatingActionButtonController.ALIGN_MIDDLE;
         }
         return FloatingActionButtonController.ALIGN_END;
+    }
+
+    private void updateMissedCalls() {
+        if (mPreviouslySelectedTabIndex == ListsFragment.TAB_INDEX_HISTORY) {
+            mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
+        }
     }
 }

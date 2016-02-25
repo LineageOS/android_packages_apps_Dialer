@@ -36,6 +36,7 @@ import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogFragment;
+import com.android.dialer.calllog.CallLogNotificationsHelper;
 import com.android.dialer.calllog.CallLogQueryHandler;
 import com.android.dialer.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.logging.Logger;
@@ -376,7 +377,8 @@ public class ListsFragment extends Fragment
 
     /**
      * External method to update unread count because the unread count changes when the user
-     * expands a voicemail in the call log.
+     * expands a voicemail in the call log or when the user expands an unread call in the call
+     * history tab.
      */
     public void updateTabUnreadCounts() {
         if (mCallLogQueryHandler != null) {
@@ -386,6 +388,17 @@ public class ListsFragment extends Fragment
             }
         }
     }
+
+    /**
+     * External method to mark all missed calls as read.
+     */
+    public void markMissedCallsAsReadAndRemoveNotifications() {
+        if (mCallLogQueryHandler != null) {
+            mCallLogQueryHandler.markMissedCallsAsRead();
+            CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
+        }
+    }
+
 
     public void showRemoveView(boolean show) {
         mRemoveViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
