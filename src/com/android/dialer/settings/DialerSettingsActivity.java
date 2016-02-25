@@ -292,8 +292,8 @@ public class DialerSettingsActivity extends PreferenceActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
     }
 
