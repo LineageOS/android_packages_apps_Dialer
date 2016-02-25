@@ -343,8 +343,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
         mHasReadCallLogPermission = hasReadCallLogPermission;
 
-
-        CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver);
+        if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
+            refreshData();
+            mAdapter.startCache();
+        }
     }
 
     @Override
