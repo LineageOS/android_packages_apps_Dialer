@@ -84,11 +84,20 @@
     <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
     <string name="call_log_trash_voicemail">Delete voicemail</string>
 
+    <!-- Menu item used to archive a voicemail. [CHAR LIMIT=30] -->
+    <string name="call_log_archive_voicemail">Archive voicemail</string>
+
     <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
     <string name="snackbar_voicemail_deleted">Voicemail deleted</string>
 
+    <!-- Text for snackbar to undo a voicemail archive. [CHAR LIMIT=30] -->
+    <string name="snackbar_voicemail_archived">Voicemail archived</string>
+
     <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
     <string name="snackbar_voicemail_deleted_undo">UNDO</string>
+
+    <!-- Text for going to archive button in snackbar for voicemail archive. [CHAR LIMIT=10] -->
+    <string name="snackbar_voicemail_archived_goto">GOTO ARCHIVE</string>
 
     <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
     <string name="clearCallLogConfirmation_title">Clear call history?</string>
@@ -157,6 +166,9 @@
 
     <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
     <string name="voicemail_fetching_content">Loading voicemail\u2026</string>
+
+    <!-- Message to display whilst we are waiting for the content to be archived. [CHAR LIMIT=40] -->
+    <string name="voicemail_archiving_content">Archiving voicemail\u2026</string>
 
     <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
     <string name="voicemail_fetching_timout">Couldn\'t load voicemail</string>
@@ -531,11 +543,17 @@
     <!-- Text displayed when the list of voicemails is empty -->
     <string name="call_log_voicemail_empty">Your voicemail inbox is empty.</string>
 
+    <!-- Text displayed when the list of voicemail archives is empty -->
+    <string name="voicemail_archive_empty">Your voicemail archive is empty.</string>
+
     <!--  Menu option to show favorite contacts only -->
     <string name="show_favorites_only">Show favorites only</string>
 
     <!--  Title of activity that displays a list of all calls -->
     <string name="call_log_activity_title">Call History</string>
+
+    <!--  Title of activity that displays a list of all archived voicemails -->
+    <string name="voicemail_archive_activity_title">Voicemail Archive</string>
 
     <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
@@ -916,6 +934,9 @@
 
     <!-- Error toast message for when send to voicemail import fails. [CHAR LIMIT=40] -->
     <string name="send_to_voicemail_import_failed">Import failed</string>
+
+    <!-- Error toast message for when voicemail archive fails. [CHAR LIMIT=40] -->
+    <string name="voicemail_archive_failed">Failed to archive voicemail.</string>
 
     <!-- String describing the delete icon on a blocked number list item.
         When tapped, it will show a dialog confirming the unblocking of the number.
