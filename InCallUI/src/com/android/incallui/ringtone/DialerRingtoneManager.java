@@ -18,7 +18,9 @@ package com.android.incallui.ringtone;
 
 import com.google.common.base.Preconditions;
 
+import android.content.ContentResolver;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 
 import com.android.contacts.common.compat.CompatUtils;
@@ -67,6 +69,17 @@ public class DialerRingtoneManager {
         return isDialerRingingEnabled()
                 && translateCallStateForCallWaiting(callState) == State.INCOMING
                 && ringtoneUri != null;
+    }
+
+    /**
+     * Determines if an incoming call should vibrate as well as ring.
+     *
+     * @param resolver {@link ContentResolver} used to look up the
+     * {@link Settings.System#VIBRATE_WHEN_RINGING} setting.
+     * @return {@code true} if the call should vibrate, {@code false} otherwise.
+     */
+    public boolean shouldVibrate(ContentResolver resolver) {
+        return Settings.System.getInt(resolver, Settings.System.VIBRATE_WHEN_RINGING, 0) != 0;
     }
 
     /**

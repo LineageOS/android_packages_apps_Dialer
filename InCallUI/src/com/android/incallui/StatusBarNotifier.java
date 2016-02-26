@@ -315,7 +315,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             audioAttributes.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC);
             audioAttributes.setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE);
             notification.audioAttributes = audioAttributes.build();
-            notification.vibrate = VIBRATE_PATTERN;
+            if (mDialerRingtoneManager.shouldVibrate(mContext.getContentResolver())) {
+                notification.vibrate = VIBRATE_PATTERN;
+            }
         }
         if (mDialerRingtoneManager.shouldPlayCallWaitingTone(callState)) {
             Log.v(this, "Playing call waiting tone");
