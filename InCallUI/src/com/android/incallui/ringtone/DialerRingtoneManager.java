@@ -39,7 +39,7 @@ public class DialerRingtoneManager {
      * Flag used to determine if the Dialer is responsible for playing ringtones for incoming calls.
      * Once we're ready to enable Dialer Ringing, these flags should be removed.
      */
-    private static final boolean IS_DIALER_RINGING_ENABLED = true;
+    private static final boolean IS_DIALER_RINGING_ENABLED = false;
     private Boolean mIsDialerRingingEnabledForTesting;
 
     private final InCallTonePlayer mInCallTonePlayer;
