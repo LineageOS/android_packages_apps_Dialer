@@ -323,6 +323,9 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
                 }, ACCESSIBILITY_DTMF_STOP_DELAY_MILLIS);
             }
         }
+        if (v.getId() == R.id.dialpad_back) {
+            getActivity().onBackPressed();
+        }
     }
 
     @Override
@@ -437,6 +440,9 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadPrese
             mDtmfDialerField.setElegantTextHeight(false);
             configureKeypadListeners();
         }
+        View backButton = mDialpadView.findViewById(R.id.dialpad_back);
+        backButton.setVisibility(View.VISIBLE);
+        backButton.setOnClickListener(this);
 
         return parent;
     }
