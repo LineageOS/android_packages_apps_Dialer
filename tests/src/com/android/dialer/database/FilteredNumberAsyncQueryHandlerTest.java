@@ -16,6 +16,7 @@
 
 package com.android.dialer.database;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.provider.BlockedNumberContract;
@@ -31,6 +32,7 @@ import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
@@ -51,6 +53,8 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
             Uri.withAppendedPath(FilteredNumberContract.AUTHORITY_URI, "filtered_numbers_table");
     private static final Uri BLOCKED_NUMBER_URI = CompatUtils.isNCompatible() ? BLOCKED_NUMBER_URI_N
             : BLOCKED_NUMBER_URI_M;
+    private static final Uri BLOCKED_NUMBER_URI_WITH_ID =
+            ContentUris.withAppendedId(BLOCKED_NUMBER_URI, ID);
     private static final Uri EXPECTED_URI = Uri.fromParts("android", "google", "dialer");
 
     private final MockContentResolver mContentResolver = new MockContentResolver();
@@ -226,6 +230,60 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
         mContentProvider.verify();
     }
 
+    public void testUnblockNumber_Disabled() throws Throwable {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        FilteredNumberCompat.setIsEnabledForTest(false);
+        final MockContentResolver resolver = new MockContentResolver();
+        MockContentProvider disabledProvider = new MockContentProvider();
+        resolver.addProvider(FilteredNumberContract.AUTHORITY, disabledProvider);
+
+        Uri uriWithId = ContentUris.withAppendedId(BLOCKED_NUMBER_URI_M, ID);
+        disabledProvider.expectQuery(uriWithId)
+                .withProjection(null)
+                .withDefaultProjection(FilteredNumberCompat.getIdColumnName())
+                .withSelection(null, null)
+                .withSortOrder(null)
+                .returnRow(ID);
+        disabledProvider.expectDelete(uriWithId).returnRowsAffected(1);
+        final UnblockNumberListener listener = new UnblockNumberListener();
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new FilteredNumberAsyncQueryHandler(resolver).unblock(listener, ID);
+            }
+        });
+        assertNotNull(listener.waitForCallback());
+        disabledProvider.verify();
+    }
+
+    public void testUnblockNumber_NullId() {
+        try {
+            new FilteredNumberAsyncQueryHandler(mContentResolver).unblock(null, (Integer) null);
+            fail();
+        } catch (IllegalArgumentException e) {}
+    }
+
+    public void testUnblockNumber() throws Throwable {
+        mContentProvider.expectQuery(BLOCKED_NUMBER_URI_WITH_ID)
+                .withProjection(null)
+                .withDefaultProjection(FilteredNumberCompat.getIdColumnName())
+                .withSelection(null, null)
+                .withSortOrder(null)
+                .returnRow(ID);
+        mContentProvider.expectDelete(BLOCKED_NUMBER_URI_WITH_ID).returnRowsAffected(1);
+        final UnblockNumberListener listener = new UnblockNumberListener();
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new FilteredNumberAsyncQueryHandler(mContentResolver).unblock(listener, ID);
+            }
+        });
+        assertNotNull(listener.waitForCallback());
+        mContentProvider.verify();
+    }
+
     private Query newIsBlockedNumberExpectedQuery() {
         if (CompatUtils.isNCompatible()) {
             return newIsBlockedNumberExpectedQueryN();
@@ -351,6 +409,28 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
                 throw new IllegalStateException("Waiting on callback timed out.");
             }
             return uri;
+        }
+    }
+
+    private class UnblockNumberListener implements OnUnblockNumberListener {
+        public final CountDownLatch onUnblockCompleteCalled;
+        public Integer result;
+
+        public UnblockNumberListener() {
+            onUnblockCompleteCalled = new CountDownLatch(1);
+        }
+
+        @Override
+        public void onUnblockComplete(int rows, ContentValues values) {
+            result = rows;
+            onUnblockCompleteCalled.countDown();
+        }
+
+        public Integer waitForCallback() throws InterruptedException {
+            if (!onUnblockCompleteCalled.await(5000, TimeUnit.MILLISECONDS)) {
+                throw new IllegalStateException("Waiting on callback timed out.");
+            }
+            return result;
         }
     }
 }

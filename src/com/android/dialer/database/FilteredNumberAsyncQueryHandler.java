@@ -115,14 +115,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         }
     }
 
-    private static Uri getContentUri(Integer id) {
-        Uri uri = FilteredNumber.CONTENT_URI;
-        if (id != null) {
-            uri = ContentUris.withAppendedId(uri, id);
-        }
-        return uri;
-    }
-
     public final void incrementFilteredCount(Integer id) {
         // No concept of counts with new filtering
         if (FilteredNumberCompat.useNewFiltering()) {
@@ -228,22 +220,25 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     /**
      * Unblocks the number with the given id.
      *
-     * @param listener The {@link OnUnblockNumberListener} called after the number is unblocked.
+     * @param listener (optional) The {@link OnUnblockNumberListener} called after the number is
+     * unblocked.
      * @param id The id of the number to unblock.
      */
-    public void unblock(final OnUnblockNumberListener listener, Integer id) {
+    public void unblock(@Nullable final OnUnblockNumberListener listener, Integer id) {
         if (id == null) {
             throw new IllegalArgumentException("Null id passed into unblock");
         }
-        unblock(listener, getContentUri(id));
+        unblock(listener, FilteredNumberCompat.getContentUri(id));
     }
 
     /**
      * Removes row from database.
+     * @param listener (optional) The {@link OnUnblockNumberListener} called after the number is
+     * unblocked.
      * @param uri The uri of row to remove, from
-     *         {@link FilteredNumberAsyncQueryHandler#blockNumber}.
+     * {@link FilteredNumberAsyncQueryHandler#blockNumber}.
      */
-    public void unblock(final OnUnblockNumberListener listener, final Uri uri) {
+    public void unblock(@Nullable final OnUnblockNumberListener listener, final Uri uri) {
         startQuery(NO_TOKEN, new Listener() {
             @Override
             public void onQueryComplete(int token, Object cookie, Cursor cursor) {
@@ -256,7 +251,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 cursor.moveToFirst();
                 final ContentValues values = new ContentValues();
                 DatabaseUtils.cursorRowToContentValues(cursor, values);
-                values.remove(FilteredNumberColumns._ID);
+                values.remove(FilteredNumberCompat.getIdColumnName());
 
                 startDelete(NO_TOKEN, new Listener() {
                     @Override
