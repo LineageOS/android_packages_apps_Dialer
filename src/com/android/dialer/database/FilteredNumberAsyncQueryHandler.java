@@ -149,7 +149,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
      * @return {@code false} if the number was invalid and couldn't be checked,
      *     {@code true} otherwise,
      */
-    public final boolean isBlockedNumber(
+    public boolean isBlockedNumber(
             final OnCheckBlockedListener listener, String number, String countryIso) {
         final String normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         if (TextUtils.isEmpty(normalizedNumber)) {
@@ -183,7 +183,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         return true;
     }
 
-    public final void blockNumber(
+    public void blockNumber(
             final OnBlockNumberListener listener, String number, String countryIso) {
         blockNumber(listener, null, number, countryIso);
     }
@@ -191,7 +191,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     /**
      * Add a number manually blocked by the user.
      */
-    public final void blockNumber(
+    public void blockNumber(
             final OnBlockNumberListener listener,
             String normalizedNumber,
             String number,
@@ -212,7 +212,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
      * Block a number with specified ContentValues. Can be manually added or a restored row
      * from performing the 'undo' action after unblocking.
      */
-    public final void blockNumber(final OnBlockNumberListener listener, ContentValues values) {
+    public void blockNumber(final OnBlockNumberListener listener, ContentValues values) {
         startInsert(NO_TOKEN,
                 new Listener() {
                     @Override
@@ -229,7 +229,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
      * Caller should call {@link FilteredNumberAsyncQueryHandler#startBlockedQuery} first.
      * @param id The ID of row to remove, from {@link FilteredNumberAsyncQueryHandler#startBlockedQuery}.
      */
-    public final void unblock(final OnUnblockNumberListener listener, Integer id) {
+    public void unblock(final OnUnblockNumberListener listener, Integer id) {
         if (id == null) {
             throw new IllegalArgumentException("Null id passed into unblock");
         }
@@ -241,7 +241,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
      * @param uri The uri of row to remove, from
      *         {@link FilteredNumberAsyncQueryHandler#blockNumber}.
      */
-    public final void unblock(final OnUnblockNumberListener listener, final Uri uri) {
+    public void unblock(final OnUnblockNumberListener listener, final Uri uri) {
         startQuery(NO_TOKEN, new Listener() {
             @Override
             public void onQueryComplete(int token, Object cookie, Cursor cursor) {
