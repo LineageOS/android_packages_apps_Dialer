@@ -113,6 +113,8 @@
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Shintsha"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Phatha amakholi"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Phatha ucingo lwengqungquthela"</string>
+    <string name="onscreenConferenceText" msgid="171855677185793827">"Ikholi yenkomfa"</string>
+    <string name="onscreenManageText" msgid="7625850560625708322">"Phatha"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"Umsindo"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Ikholi yevidiyo"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Shintshela kukholi yezwi"</string>

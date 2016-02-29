@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Modifica numero prima di effettuare la chiamata"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Cancella cronologia chiamate"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Elimina messaggi della segreteria"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archivia messaggio vocale"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mes vocali eliminati"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Messaggio vocale archivato"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ANNULLA"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"VAI AL\'ARCHIVIO"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Cancellare la cronologia chiamate?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Verranno eliminate tutte le chiamate dalla cronologia"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Cancellazione cronologia chiamate…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nuovo messaggio vocale da <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Impossibile riprodurre i messaggi vocali"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Caricamento dei messaggi vocali…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Archiviazione messaggio vocale…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Impossibile caricare i messaggi vocali"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Solo chiamate con segreteria"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Solo chiamate in arrivo"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Fai una chiamata"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nessuna chiamata senza risposta."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"La segreteria è vuota."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"L\'archivio dei messaggi vocali è vuoto."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostra solo i preferiti"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Cronologia chiamate"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Archivio messaggi vocali"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tutte"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perse"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Segreteria"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Visualizza numeri"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importa"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importazione non riuscita"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Impossibile archiviare messaggio vocale."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Sblocca numero"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Aggiungi numero"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Le chiamate da questi numeri verranno bloccate e i messaggi in segreteria verranno automaticamente eliminati."</string>

@@ -113,6 +113,8 @@
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"切换"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"管理通话"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"管理电话会议"</string>
+    <string name="onscreenConferenceText" msgid="171855677185793827">"电话会议"</string>
+    <string name="onscreenManageText" msgid="7625850560625708322">"管理"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"音频"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"视频通话"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"改为语音通话"</string>

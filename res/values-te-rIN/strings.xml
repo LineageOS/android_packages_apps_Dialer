@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"కాల్ చేయడానికి ముందు నంబర్‌ను సవరించు"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"కాల్ చరిత్రను తీసివేయి"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"వాయిస్ మెయిల్‌ను తొలగించు"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"వాయిస్ మెయిల్‌ను ఆర్కైవ్ చేయి"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"వాయిస్‌‍మెయిల్ తొలగించింది"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"వాయిస్ మెయిల్ ఆర్కైవ్ అయింది"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"చర్యరద్దు"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ఆర్కైవ్‌కి వెళ్లు"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"కాల్ చరిత్రను క్లియర్ చేయాలా?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"దీని వలన మీ చరిత్ర నుండి అన్ని కాల్‌లు తొలగించబడతాయి"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"కాల్ చరిత్రను క్లియర్ చేస్తోంది…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> నుండి కొత్త వాయిస్ మెయిల్"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"వాయిస్ మెయిల్‌ను ప్లే చేయడం సాధ్యపడలేదు"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"వాయిస్ మెయిల్‌ను లోడ్ చేస్తోంది…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"వాయిస్ మెయిల్‌ను ఆర్కైవ్ చేస్తోంది…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"వాయిస్ మెయిల్‌ను లోడ్ చేయడం సాధ్యపడలేదు"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"వాయిస్ మెయిల్ కాల్‌లు మాత్రమే"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ఇన్‌కమింగ్ కాల్‌లు మాత్రమే"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"కాల్ చేయి"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"మీకు మిస్డ్ కాల్‌లు ఏవీ లేవు."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"మీ వాయిస్ మెయిల్ ఇన్‌బాక్స్ ఖాళీగా ఉంది."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"మీ వాయిస్ మెయిల్ ఆర్కైవ్ ఖాళీగా ఉంది."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ఇష్టమైనవాటిని మాత్రమే చూపు"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"కాల్ చరిత్ర"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"వాయిస్ మెయిల్ ఆర్కైవ్"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"అన్నీ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"సమాధానం ఇవ్వలేదు"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"వాయిస్ మెయిల్"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"నంబర్‌లను వీక్షించండి"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"దిగుమతి చేయి"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"దిగుమతి విఫలమైంది"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"వాయిస్ మెయిల్‌ను ఆర్కైవ్ చేయడం విఫలం."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"నంబర్‌ను అన్‌బ్లాక్ చేయి"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"నంబర్‌ను జోడించు"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ఈ నంబర్‌ల నుండి కాల్‌లు బ్లాక్ చేయబడతాయి మరియు వాయిస్‌మెయిల్‌లు స్వయంచాలకంగా తొలగించబడతాయి."</string>

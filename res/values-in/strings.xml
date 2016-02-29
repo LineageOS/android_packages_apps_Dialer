@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Edit nomor sebelum memanggil"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Hapus riwayat panggilan"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Hapus pesan suara"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arsipkan pesan suara"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Pesan suara dihapus"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Pesan suara diarsipkan"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"URUNGKAN"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"BUKA ARSIP"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Hapus riwayat panggilan?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tindakan ini akan menghapus semua panggilan telepon dari riwayat"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Menghapus riwayat panggilan..."</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Pesan suara baru dari <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Tidak dapat memutar pesan suara"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Memuat pesan suara..."</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Mengarsipkan pesan suara…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Tidak dapat memuat pesan suara"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Hanya panggilan dengan pesan suara"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Hanya panggilan masuk"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Lakukan panggilan telepon"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Tidak ada panggilan yang tidak terjawab."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Kotak masuk pesan suara kosong."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Arsip pesan suara Anda kosong."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Hanya tampilkan favorit"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Riwayat Panggilan"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Arsip Pesan Suara"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tak Dijawab"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"PesanSuara"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Lihat Nomor"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Impor"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Impor gagal"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Gagal mengarsipkan pesan suara."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Bebaskan nomor"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Tambahkan nomor"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Panggilan telepon dari nomor ini akan diblokir dan pesan suara akan dihapus secara otomatis."</string>

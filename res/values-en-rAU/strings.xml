@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Edit number before call"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Clear call history"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Delete voicemail"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archive voicemail"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Voicemail deleted"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Voicemail archived"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"UNDO"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"TO ARCHIVE"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Clear call history?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"This will delete all calls from your history"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Clearing call history…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"New voicemail from <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Couldn\'t play voicemail"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Loading voicemail…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Archiving voicemail…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Couldn\'t load voicemail"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Calls with voicemail only"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Incoming calls only"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Make a call"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"You have no missed calls."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Your voicemail inbox is empty."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Your voicemail archive is empty."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Show favourites only"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Call History"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Voicemail archive"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"All"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Missed"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
@@ -180,7 +186,7 @@
     <string name="contact_tooltip" msgid="2019777545923635266">"Touch image to see all numbers or touch &amp; hold to reorder"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Remove"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Video call"</string>
-    <string name="call_log_action_send_message" msgid="5679719296905285131">"Sending a message"</string>
+    <string name="call_log_action_send_message" msgid="5679719296905285131">"Send a message"</string>
     <string name="call_log_action_details" msgid="701345508704970622">"Call details"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Call <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Missed call from <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"View Numbers"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import failed"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Failed to archive voicemail."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Unblock number"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Add number"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Calls from these numbers will be blocked and voicemails will be automatically deleted."</string>

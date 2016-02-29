@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Raqamni o‘zgartirish va telefon qilish"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Qo‘ng‘iroqlar tarixini tozalash"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ovozli xabarni o‘chirish"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Ovozli pochtani arxivlash"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Ovozli pochta o‘chirildi"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Ovozli pochta arxivlandi"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"QAYTARISH"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ARXIVGA O‘TISH"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Qo‘ng‘iroqlar tarixi tozalansinmi?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Barcha qo‘ng‘iroqlar tarixi o‘chib ketadi."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Qo‘ng‘iroqlar tarixi tozalanmoqda…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g>dan yangi ovozli xabar"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Ovozli xabarni eshitib bo‘lmadi"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Ovozli xabar yuklanmoqda…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Ovozli pochta arxivlanmoqda…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Ovozli xabarni yuklab bo‘lmadi"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Faqat ovozli xabar qo‘ng‘iroqlari"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Faqat kiruvchi qo‘ng‘iroqlar"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Qo‘ng‘iroq qilish"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Sizda hech qanday javobsiz qo‘ng‘iroq yo‘q."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Ovozli pochta qutisi bo‘m-bo‘sh."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Ovozli pochta arxivingiz bo‘sh."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Faqat saralar ko‘rsatilsin"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Qo‘ng‘iroqlar tarixi"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Ovozli pochta arxivi"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Barchasi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Javobsiz"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Ovozli xabar"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Sonini ko‘rish"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import qilish"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import qilib bo‘lmadi"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Ovozli pochtani arxivlashda xatolik yuz berdi."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Raqamni blokdan chiqarish"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Raqam qo‘shish"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Bu raqamlardan kelgan qo‘ng‘iroqlar bloklanadi va ovozli xabarlari avtomatik o‘chiriladi."</string>

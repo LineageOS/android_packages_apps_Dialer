@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Breyta númeri áður en hringt er"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Hreinsa símtalaferil"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eyða talhólfsskilaboðum"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Setja talhólfsskilaboð í geymslu"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Talhólfi eytt"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Talhólfsskilaboð sett í geymslu"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"AFTURKALLA"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"FARA Í GEYMSLU"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Hreinsa símtalaferil?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Þetta eyðir öllum símtölum af ferlinum"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Hreinsar símtalaferil…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Ný talhólfsskilaboð frá <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Ekki tókst að spila talhólfsskilaboð"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Hleður talhólfsskilaboð…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Setur talhólfsskilaboð í geymslu..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Ekki tókst að hlaða talhólfsskilaboð"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Símtöl með talhólfi eingöngu"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Móttekin símtöl eingöngu"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Hringja símtal"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Þú ert ekki með nein ósvöruð símtöl."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Talhólfið þitt er tómt."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Talhólfsskilaboðageymslan er tóm."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Sýna aðeins uppáhaldstengiliði"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Símtalaferill"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Geymsla talhólfsskilaboða"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Allt"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ósvöruð"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Talhólf"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Skoða tölur"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Flytja inn"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Innflutningur mistókst"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Ekki tókst að setja talhólfsskilaboð í geymslu."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Taka númer af bannlista"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Bæta númeri við"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Lokað verður fyrir símtöl frá þessum númerum og talhólfsskilaboðum sjálfkrafa eytt."</string>

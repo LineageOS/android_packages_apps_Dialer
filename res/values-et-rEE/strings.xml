@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Muuda enne helistamist numbrit"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Kustuta kõneajalugu"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Kustuta kõnepost"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Kõnepostisõnumi arhiivimine"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Kõnepost kustutati"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Kõnepostisõnum arhiiviti"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"VÕTA TAGASI"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"AVA ARHIIV"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kas kustutada kõneajalugu?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"See kustutab ajaloost kõik kõned"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Kõneajaloo kustutamine ..."</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Uus kõnepostisõnum kasutajalt <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Kõneposti ei õnnestunud esitada"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Kõneposti laadimine ..."</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Kõnepostisõnumi arhiivimine …"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Kõneposti laadimine ebaõnnestus"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Ainult kõnepostiga kõned"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Ainult sissetulevad kõned"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Helista"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Vastamata kõnesid pole."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Kõneposti postkast on tühi."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Teie kõnepostisõnumite arhiiv on tühi."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Kuva ainult lemmikud"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Kõneajalugu"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Kõnepostisõnumite arhiiv"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Kõik"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Vastamata"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Kõnepost"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Vaata numbreid"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Impordi"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importimine ebaõnnestus"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Kõnepostisõnumi arhiivimine ebaõnnestus."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Numbri deblokeerimine"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Lisa number"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Kõned nendelt numbritelt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt."</string>

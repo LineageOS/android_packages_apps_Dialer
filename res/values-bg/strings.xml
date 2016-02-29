@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Редактиране на номера преди обаждане"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята на обажданията"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Изтриване на гласова поща"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архивиране на гласовата поща"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Гл. поща е изтрита"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Гласовата поща бе архивирана"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ОТМЯНА"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"КЪМ АРХИВА"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Да се изчисти ли историята на обажд.?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Така ще се изтрият всички обаждания от историята ви"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Историята на обажд. се изчиства…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Нова гласова поща от <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Гл. поща не можа да се възпроизведе"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Гласовата поща се зарежда…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Гласовата поща се архивира…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Гласовата поща не можа да се зареди"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Само обаждания с гласова поща"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Само входящи обаждания"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Извършване на обаждане"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Нямате пропуснати обаждания."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Входящата ви гласова поща е празна."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Архивът на гласовата ви поща е празен."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Показване само на любимите"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"История на обажданията"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Архив на гласовата поща"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Всички"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропуснати"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Гл. поща"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Преглед на номерата"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Импортиране"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Импортирането не бе успешно"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Неуспешно архивиране на гласовата поща."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Отблокиране на номера"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Добавяне на номер"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Обажданията от тези номера ще бъдат блокирани, а гласовите съобщения – автоматично изтривани."</string>

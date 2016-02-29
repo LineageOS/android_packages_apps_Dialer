@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ඇමතුමට පෙර අංකය සංස්කරණය කරන්න"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ඇමතුම් ඉතිහාසය හිස් කරන්න"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"හඬ තැපෑල මකන්න"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"හඬ තැපෑල සංරක්ෂණය කරන්න"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"හඬ තැපෑල මකන ලදී"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"හඬ තැපෑල සංරක්ෂණය කරන ලදී"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"අස් කරන්න"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"සංරක්ෂිතය වෙත යන්න"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ඇමතුම් ඉතිහාසය හිස් කරන්නද?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"මෙය ඔබේ ඉතිහාසයෙන් සියලු ඇමතුම් මකනු ඇත"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ඇමතුම් ඉතිහාසය හිස් කරමින්…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> වෙතින් නව හඬ තැපැලක්"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"හඬ තැපෑල වාදනය කිරීමට නොහැකි විය"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"හඬ තැපෑල ප්‍රවේශනය වෙමින්…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"හඬ තැපෑල සංරක්ෂණය කරමින්…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"හඬ තැපෑල ප්‍රවේශනය කිරීමට නොහැකි විය"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"හඬ තැපෑල සහිත ඇමතුම් පමණි"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"එන ඇමතුම් පමණි"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ඇමතුමක් සිදු කරන්න"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"ඔබට මඟ හැරුණු ඇමතුම් නැත."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ඔබේ හඬ තැපැල් එන ලිපි හිස්ය."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"ඔබේ හඬ තැපැල් සංරක්ෂිතය හිස්ය."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ප්‍රියතමයන් පමණක් පෙන්වන්න"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"ඇමතුම් ඉතිහාසය"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"හඬ තැපෑල් සංරක්ෂිතය"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"සියලු"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"මග හැරුණේය"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"හඬ තැපෑල"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"අංක බලන්න"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ආයාත කරන්න"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"අයාත කිරීම අසාර්ථක විය"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"හඬ තැපෑල සංරක්ෂනය කිරීමට අසමත් විය."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"අංකය අවහිර නොකරන්න"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"අංකයක් එක් කරන්න"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"මෙම අංක වෙතින් වන ඇමතුම් අවහිර කරනු ඇති අතර හඬ තැපැල් ස්වයංක්‍රියව මකනු ඇත."</string>

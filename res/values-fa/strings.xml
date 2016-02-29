@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ویرایش شماره قبل از تماس"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"پاک کردن سابقه تماس"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"حذف پست صوتی"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"بایگانی پست صوتی"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"پست صوتی حذف شد"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"پست صوتی بایگانی شد"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"واگرد"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"رفتن به بایگانی"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"سابقه تماس پاک شود؟"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"این کار همه تماس‌ها را از سابقه شما حذف می‌کند"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"در حال پاک کردن سابقه تماس..."</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"پست صوتی جدید از <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"پست صوتی پخش نشد"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"در حال بارگیری پست صوتی..."</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"در حال بایگانی کردن پست صوتی..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"پست صوتی بارگیری نشد"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"فقط تماس‌های دارای پست صوتی"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"فقط تماس‌های دریافتی"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"برقراری تماس تلفنی"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"تماس از دست رفته‌ای ندارید."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"صندوق پست صوتی‌تان خالی است."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"بایگانی پست صوتی خالی است."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"فقط نمایش موارد دلخواه"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"سابقه تماس"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"بایگانی پست صوتی"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"همه موارد"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"بی‌پاسخ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"پست صوتی"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"مشاهده شماره‌ها"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"وارد کردن"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"وارد کردن انجام نشد"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"پست صوتی بایگانی نشد."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"گشودن شماره"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"افزودن شماره"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"تماس‌‌ها از این شماره‌ها مسدود می‌شود و پست‌‌های صوتی به‌طور خودکار حذف می‌شود."</string>

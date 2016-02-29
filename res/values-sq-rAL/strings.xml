@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Redakto numrin para telefonatës"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Pastro historikun e telefonatave"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Fshije postën zanore"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arkivo postën zanore"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"U zbulua posta zanore"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Posta zanore u arkivua"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ZHBËJ"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"SHKO TEK ARKIVI"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Të pastrohet historiku i telefonatave?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Kjo do të fshijë të gjitha telefonatat nga historiku yt"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Po pastron historikun e telefonatave…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Postë e re zanore nga <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Posta zanore nuk mund të luhej"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Po ngarkon postën zanore…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Po arkivon postën zanore..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Posta zanore nuk mund të ngarkohej"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Vetëm telefonatat me mesazhe zanore"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Vetëm telefonatat hyrëse"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Bëj një telefonatë"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nuk ke thirrje të humbura."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Kutia hyrëse e postës tënde zanore është bosh."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Arkivi i postës tënde zanore është bosh."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Shfaq vetëm të preferuarat"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Historiku i telefonatave"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Arkivi i postës zanore"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Të gjitha"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Të humbura"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Posta zanore"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Shiko numrat"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importo"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Importimi dështoi"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Gabim në arkivimin e postës zanore."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Zhblloko numrin"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Shto një numër"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Telefonatat nga këta numra do të bllokohen dhe mesazhet zanore do të fshihen automatikisht."</string>

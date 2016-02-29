@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"拨打之前修改号码"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"清除通话记录"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"删除语音邮件"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"归档语音邮件"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"语音邮件已删除"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"已归档的语音邮件"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"撤消"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"转至归档"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通话记录吗？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"这会删除您的所有通话记录"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通话记录…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"来自<xliff:g id="CALLER">%1$s</xliff:g>的新语音邮件"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"无法播放语音邮件"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"正在加载语音邮件…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"正在归档语音邮件…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"无法加载语音邮件"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"只显示语音信箱留言"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"只显示来电"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"拨打电话"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"您没有任何未接电话。"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"您未收到任何语音邮件。"</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"没有已归档的语音邮件。"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"仅显示收藏的联系人"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"通话记录"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"语音邮件归档"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接电话"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"语音邮件"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"查看号码"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"导入"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"导入失败"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"无法归档语音邮件。"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"取消屏蔽号码"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"添加号码"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"系统将屏蔽这些号码的来电，并将自动删除这些来电者发送的语音邮件。"</string>

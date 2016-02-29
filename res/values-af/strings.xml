@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Wysig nommer voor oproep"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Vee oproepgeskiedenis uit"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Vee stemboodskap uit"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Argiveer stemboodskap"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Stemboodskap is uitgevee"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Stemboodskap is geargiveer"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ONTDOEN"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"GAAN NA ARGIEF"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vee oproepgeskiedenis uit?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Dit sal alle oproepe uit jou geskiedenis vee"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Vee tans oproepgeskiedenis uit …"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nuwe stemboodskap van <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Kon nie stemboodskap speel nie"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Laai tans stemboodskap …"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Argiveer tans stemboodskap …"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Kon nie stemboodskap laai nie"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Slegs oproepe met stemboodskappe"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Slegs inkomende oproepe"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Maak \'n oproep"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Jy het geen gemiste oproepe nie."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Jou stemboodskapdiens se inkassie is leeg."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Jou stemboodskap-argief is leeg."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Wys net gunstelinge"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Oproepgeskiedenis"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Stemboodskap-argief"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alles"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Gemis"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Stemboodskap"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Bekyk nommers"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Voer in"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Kon nie invoer nie"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Kon nie stemboodskap argiveer nie."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Deblokkeer nommer"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Voeg nommer by"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Oproepe van hierdie nommers af sal geblokkeer word en stemboodskappe sal outomaties uitgevee word."</string>

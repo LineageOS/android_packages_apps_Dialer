@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"कॉल करने से पहले नंबर संपादित करें"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"कॉल इतिहास साफ़ करें"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"वॉइसमेल हटाएं"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"वॉइसमेल संग्रहीत करें"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"वॉइसमेल हटाया गया"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"वॉइसमेल संग्रहीत किया गया"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"वापस लाएं"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"संग्रह पर जाएं"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कॉल इतिहास साफ़ करें?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"इससे आपके इतिहास से सभी कॉल हटा दिए जाएंगे"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"कॉल इतिहास साफ़ किया जा रहा है…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> की ओर से नया ध्‍वनिमेल"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"वॉइसमेल नहीं चलाया जा सका"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"वॉइसमेल लोड हो रहा है…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"वॉइसमेल संग्रहीत किया जा रहा है…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"वॉइसमेल लोड नहीं किया जा सका"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"केवल वॉयस मेल वाले कॉल"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"केवल इनकमिंग कॉल"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"कॉल करें"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"आपके पास कोई भी छूटा हुआ कॉल नहीं है."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"आपका वॉइसमेल इनबाॅक्‍स खाली है."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"आपका वॉइसमेल संग्रह खाली है."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"केवल पसंदीदा दिखाएं"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"कॉल इतिहास"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"वॉइसमेल संग्रह"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"वॉयस मेल"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"नंबर देखें"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"आयात करें"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"आयात करना विफल रहा"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"वॉइसमेल संग्रहीत नहीं कर सके."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"नंबर अनवरोधित करें"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"नंबर जोड़ें"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"इन नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे और वॉइसमेल अपने आप हटा दिए जाएंगे."</string>

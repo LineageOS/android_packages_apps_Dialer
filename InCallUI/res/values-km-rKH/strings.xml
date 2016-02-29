@@ -113,6 +113,8 @@
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"ប្ដូរ"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"គ្រប់គ្រង​ការ​ហៅ"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"គ្រប់គ្រងការហៅជាក្រុម"</string>
+    <string name="onscreenConferenceText" msgid="171855677185793827">"ការហៅជា​សន្និសិទ"</string>
+    <string name="onscreenManageText" msgid="7625850560625708322">"គ្រប់គ្រង"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"សំឡេង"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ហៅជាវីដេអូ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"ប្ដូរ​ទៅ​ការ​ហៅ​ជា​សំឡេង"</string>

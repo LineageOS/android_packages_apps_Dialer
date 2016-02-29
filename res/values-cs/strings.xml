@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Před voláním upravit číslo"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Vymazat historii volání"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Smazat hlasovou zprávu"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archivovat hlasovou zprávu"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Hlas. zpráva smazána"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Hlasová zpráva archivována"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"VRÁTIT"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"DO ARCHIVU"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vymazat historii hovorů?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tímto z historie smažete všechny hovory."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Mazání historie volání…"</string>
@@ -57,6 +60,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nová hlasová zpráva – <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Hlasovou schránku nelze přehrát."</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Načítání hlasové schránky…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Archivace hlasové zprávy…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Hlasovou schránku nelze načíst."</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Jen hovory s hlasovou schránkou"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Jen příchozí hovory"</string>
@@ -150,8 +154,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Zavolat"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Nemáte žádné zmeškané hovory."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Hlasová schránka je prázdná."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Archiv vašich hlasových zpráv je prázdný."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Zobrazit pouze oblíbené"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Historie volání"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Archiv hlasových zpráv"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Všechny"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Zmeškané"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Schránka"</string>
@@ -239,6 +245,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Zobrazit čísla"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importovat"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import se nezdařil."</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Hlasovou zprávu se nepodařilo archivovat"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Zrušit blokování čísla"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Přidat číslo"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Volání z těchto čísel budou zablokována. Hlasové zprávy budou automaticky smazány."</string>

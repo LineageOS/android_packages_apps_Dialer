@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ਕਾਲ ਤੋਂ ਪਹਿਲਾਂ ਨੰਬਰ ਸੰਪਾਦਿਤ ਕਰੋ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ਕਾਲ ਇਤਿਹਾਸ ਹਟਾਓ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ਵੌਇਸਮੇਲ ਮਿਟਾਓ"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖਬੱਧ ਕਰੋ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ਵੌਇਸਮੇਲ ਮਿਟਾਈ ਗਈ"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖਬੱਧ ਕੀਤੀ ਗਈ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ਪਹਿਲਾਂ ਵਰਗਾ ਕਰੋ"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ਪੁਰਾਲੇਖ \'ਤੇ ਜਾਓ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ਕੀ ਕਾਲ ਇਤਿਹਾਸ ਹਟਾਉਣਾ ਹੈ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ਇਹ ਤੁਹਾਡੇ ਇਤਿਹਾਸ ਤੋਂ ਸਾਰੀਆਂ ਕਾਲਾਂ ਮਿਟਾ ਦੇਵੇਗਾ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ਕਾਲ ਇਤਿਹਾਸ ਹਟਾ ਰਿਹਾ ਹੈ…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> ਦੀ ਨਵੀਂ ਵੌਇਸਮੇਲ"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"ਵੌਇਸਮੇਲ ਪਲੇ ਨਹੀਂ ਕਰ ਸਕਿਆ"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"ਵੌਇਸਮੇਲ ਲੋਡ ਕਰ ਰਿਹਾ ਹੈ…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖਬੱਧ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"ਵੌਇਸਮੇਲ ਲੋਡ ਨਹੀਂ ਕਰ ਸਕਿਆ"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ਕੇਵਲ ਵੌਇਸਮੇਲ ਵਾਲੀਆਂ ਕਾਲਾਂ"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ਕੇਵਲ ਇਨਕਮਿੰਗ ਕਾਲਾਂ"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ਇੱਕ ਕਾਲ ਕਰੋ"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਵੀ ਮਿਸਡ ਕਾਲਾਂ ਨਹੀਂ ਹਨ।"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ਤੁਹਾਡਾ ਵੌਇਸਮੇਲ ਇਨਬੌਕਸ ਖਾਲੀ ਹੈ।"</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"ਤੁਹਾਡਾ ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖ ਖ਼ਾਲੀ ਹੈ।"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ਕੇਵਲ ਮਨਪਸੰਦ ਦਿਖਾਓ"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"ਕਾਲ ਇਤਿਹਾਸ"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ਸਭ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ਮਿਸਡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ਵੌਇਸਮੇਲ"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ਨੰਬਰ ਵਿਖਾਓ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ਆਯਾਤ ਕਰੋ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ਆਯਾਤ ਅਸਫਲ ਹੋਇਆ"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"ਵੌਇਸਮੇਲ ਨੂੰ ਪੁਰਾਲੇਖਬੱਧ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ।"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ਨੰਬਰ ਨੂੰ ਅਨਬਲੌਕ ਕਰੋ"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ਨੰਬਰ ਜੋੜੋ"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ਇਹਨਾਂ ਨੰਬਰਾਂ ਤੋਂ ਕਾਲਾਂ ਬਲੌਕ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ ਅਤੇ ਵੌਇਸਮੇਲਾਂ ਆਪਣੇ ਆਪ ਮਿਟਾ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ।"</string>

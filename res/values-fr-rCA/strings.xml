@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Modifier le numéro avant l\'appel"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Effacer l\'historique des appels"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Supprimer le message vocal"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archiver les messages vocaux"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mess. vocal supprimé"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Messages vocaux archivés"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ANNULER"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ARCHIVE"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Effacer l\'historique des appels?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tous les appels seront supprimés de votre historique."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Suppression historique des appels…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nouveau message vocal de <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Impossible de lire le message vocal"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Chargement du message vocal en cours…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Archivage des messages vocaux en cours…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Impossible de charger la messagerie vocale"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Seulement les appels avec message vocal"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Seulement les appels entrants"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Faire un appel"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Vous n\'avez aucun appel manqué."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"La boîte de réception de votre messagerie vocale est vide."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Votre archive de messages vocaux est vide."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Afficher les contacts favoris uniquement"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Historique des appels"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Archive des messages vocaux"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Tous"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Manqués"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mess. voc."</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Afficher les numéros"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Importer"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Échec de l\'importation"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Échec de l\'archivage des messages vocaux"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Débloquer le numéro"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Ajouter un numéro"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Les appels provenant de ces numéros seront bloqués et les messages vocaux seront automatiquement supprimés."</string>

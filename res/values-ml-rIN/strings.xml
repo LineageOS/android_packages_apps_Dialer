@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്യുക"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"വോയ്സ്മെയിൽ ഇല്ലാതാക്കി"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്‌തു"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"പഴയപടിയാക്കുക"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ആർക്കൈവ് ബട്ടണിലേക്ക് പോകുക"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"കോൾ ചരിത്രം മായ്‌ക്കണോ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ഇത് നിങ്ങളുടെ ചരിത്രത്തിൽ നിന്ന് എല്ലാ കോളുകളും ഇല്ലാതാക്കും"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"കോൾ ചരിത്രം മായ്‌ക്കുന്നു..."</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> എന്നയാളിൽ നിന്നുള്ള പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"വോയ്‌സ്‌മെയിൽ പ്‌ലേ ചെയ്യാനായില്ല"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"വോയ്‌സ്‌മെയിൽ ലോഡുചെയ്യുന്നു..."</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്യുന്നു…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"വോയ്‌സ്‌മെയിൽ ലോഡുചെയ്യാനായില്ല"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"വോയ്‌സ്മെയിൽ ഉള്ള കോളുകൾ മാത്രം"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ഇൻകമിംഗ് കോളുകൾ മാത്രം"</string>
@@ -148,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ഒരു കോൾ ചെയ്യുക"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"നിങ്ങൾക്ക് മിസ്‌ഡ് കോളുകളൊന്നുമില്ല."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"നിങ്ങളുടെ വോയ്സ്മെയിൽ ഇൻബോക്സ് ശൂന്യമാണ്."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"നിങ്ങളുടെ വോയ്‌സ്‌മെയിൽ ആർക്കൈവ് ശൂന്യമാണ്."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"പ്രിയപ്പെട്ടവ മാത്രം കാണിക്കുക"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"കോൾ ചരിത്രം"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"വോയ്‌സ്മെയിൽ ആർക്കൈവ്"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"എല്ലാം"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"മിസ്‌ഡ്"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"വോയ്‌സ്‌മെയിൽ"</string>
@@ -235,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"നമ്പറുകൾ കാണുക"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ഇമ്പോർട്ടുചെയ്യുക"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ഇമ്പോർട്ടുചെയ്യൽ പരാജയപ്പെട്ടു"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്യാനായില്ല."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"നമ്പർ അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"നമ്പർ ചേർക്കുക"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ഈ നമ്പറുകളിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>

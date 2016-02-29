@@ -113,6 +113,8 @@
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"تبادلہ کریں"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"کالز کا نظم کریں"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"کانفرنس کال کا نظم کریں"</string>
+    <string name="onscreenConferenceText" msgid="171855677185793827">"کانفرنس کال"</string>
+    <string name="onscreenManageText" msgid="7625850560625708322">"نظم کریں"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"آڈیو"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ویڈیو کال"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"صوتی کال میں تبدیل کریں"</string>
