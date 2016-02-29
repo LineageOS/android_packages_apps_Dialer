@@ -48,6 +48,7 @@ import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
 import com.android.dialer.widget.ActionBarController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment that is used as the main screen of the Dialer.
@@ -106,8 +107,13 @@ public class ListsFragment extends Fragment
     private CallLogQueryHandler mCallLogQueryHandler;
 
     public class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragments = new ArrayList<>();
+
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
+            for (int i = 0; i < TAB_COUNT_WITH_VOICEMAIL; i++) {
+                mFragments.add(null);
+            }
         }
 
         @Override
@@ -135,7 +141,7 @@ public class ListsFragment extends Fragment
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Fragment instantiateItem(ViewGroup container, int position) {
             // On rotation the FragmentManager handles rotation. Therefore getItem() isn't called.
             // Copy the fragments that the FragmentManager finds so that we can store them in
             // instance variables for later.
@@ -150,7 +156,23 @@ public class ListsFragment extends Fragment
             } else if (fragment instanceof CallLogFragment && position == TAB_INDEX_VOICEMAIL) {
                 mVoicemailFragment = (CallLogFragment) fragment;
             }
+            mFragments.set(position, fragment);
             return fragment;
+        }
+
+        /**
+         * When {@link android.support.v4.view.PagerAdapter#notifyDataSetChanged} is called,
+         * this method is called on all pages to determine whether they need to be recreated.
+         * When the voicemail tab is removed, the view needs to be recreated by returning
+         * POSITION_NONE. If notifyDataSetChanged is called for some other reason, the voicemail
+         * tab is recreated only if it is active. All other tabs do not need to be recreated
+         * and POSITION_UNCHANGED is returned.
+         */
+        @Override
+        public int getItemPosition(Object object) {
+            return !mHasActiveVoicemailProvider &&
+                    mFragments.indexOf(object) == TAB_INDEX_VOICEMAIL ? POSITION_NONE :
+                    POSITION_UNCHANGED;
         }
 
         @Override
@@ -313,6 +335,7 @@ public class ListsFragment extends Fragment
                 mViewPagerTabs.updateTab(TAB_INDEX_VOICEMAIL);
             } else {
                 mViewPagerTabs.removeTab(TAB_INDEX_VOICEMAIL);
+                removeVoicemailFragment();
             }
 
             mPrefs.edit()
@@ -452,5 +475,13 @@ public class ListsFragment extends Fragment
                 return;
         }
         Logger.logScreenView(screenType, getActivity());
+    }
+
+    private void removeVoicemailFragment() {
+        if (mVoicemailFragment != null) {
+            getChildFragmentManager().beginTransaction().remove(mVoicemailFragment)
+                    .commitAllowingStateLoss();
+            mVoicemailFragment = null;
+        }
     }
 }
