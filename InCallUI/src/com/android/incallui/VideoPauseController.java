@@ -23,6 +23,8 @@ import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.SessionModificationListener;
 import com.google.common.base.Preconditions;
 
+import android.telecom.VideoProfile;
+
 /**
  * This class is responsible for generating video pause/resume requests when the InCall UI is sent
  * to the background and subsequently brought back to the foreground.
@@ -195,10 +197,11 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener,
         Preconditions.checkState(!areSame(call, mPrimaryCallContext));
         final boolean canVideoPause = VideoUtils.canVideoPause(call);
 
-        if ((isIncomingCall(mPrimaryCallContext) || isDialing(mPrimaryCallContext))
+        if ((isIncomingCall(mPrimaryCallContext) || isDialing(mPrimaryCallContext) ||
+                (call != null && VideoProfile.isPaused(call.getVideoState())))
                 && canVideoPause && !mIsInBackground) {
-            // Send resume request for the active call, if user rejects incoming call or ends
-            // dialing call and UI is in the foreground.
+            // Send resume request for the active call, if user rejects incoming call, ends dialing
+            // call, or the call was previously in a paused state and UI is in the foreground.
             sendRequest(call, true);
         } else if (isIncomingCall(call) && canVideoPause(mPrimaryCallContext)) {
             // Send pause request if there is an active video call, and we just received a new
