@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Zəng etmədən öncə nömrəyə düzəliş edin"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Zəng tarixçəsini təmizləyin"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Səsli məktubu silin"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Səsli poçtu arxivləşdirin"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Səsli məktub silindi"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Səsli poçt arxivləşdirildi"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"GERİ ALIN"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ARXİVƏ GEDİN"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Zəng tarixçəsi təmizlənsin?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Bu, tarixçənizdən bütün zəngləri siləcəkdir"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Zəng tarixçəsi silinir…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> adlı şəxsdən yeni səsli məktub"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Səsli poçtu səsləndirmək mümkün deyil"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Səsli poçt yüklənir…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Səsli poçt arxivləşdirilir…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Səsli poçtu yükləmək mümkün olmadı"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Yalnız səsli məktublu zənglər"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Yalnız daxil olan zənglər"</string>
@@ -128,6 +132,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> tarixində <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Bu nömrəyə zəng etmək mümkün deyil"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Səsli poçtu ayarlamaq üçün Menyu, sonra isə &gt; Ayarlara daxil olun."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Səsli poçta zəng etmək üçün Təyyarə rejimini söndürün."</string>
@@ -146,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Zəng edin"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Buraxılmış heç bir zənginiz yoxdur."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Səsli poçt qutunuz boşdur."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Səsli poçt arxiviliniz boşdur."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Yalnız seçilmişləri göstər"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Zəng Tarixçəsi"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Səsli Poçt Arxivi"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Bütün"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Buraxılmış"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Səsli poçt"</string>
@@ -233,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Rəqəmlərə baxın"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"İmport"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Import alınmadı"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Səsli poçtu arxivləşdirmək uğursuz oldu."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Nömrəni blokdan çıxarın"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Nömrə əlavə edin"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Bu nömrələrdən zənglər blok ediləcək və səsli məktublar avtomatik silinəcək."</string>

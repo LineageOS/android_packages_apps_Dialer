@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"કૉલ કરતાં પહેલાં નંબર સંપાદિત કરો"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"કૉલ ઇતિહાસ સાફ કરો"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"વૉઇસમેઇલ કાઢી નાખો"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"વૉઇસમેઇલને આર્કાઇવ કરો"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"વૉઇસમેઇલ કાઢી નાખ્યો"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"વૉઇસમેઇલ આર્કાઇવ કર્યો"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"પૂર્વવત્ કરો"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"આર્કાઇવ પર જાઓ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"કૉલ ઇતિહાસ સાફ કરીએ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"આ તમારા ઇતિહાસમાંથી તમામ કૉલ્સ કાઢી નાખશે"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"કૉલ ઇતિહાસ સાફ કરી રહ્યાં છે…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> તરફથી નવો વૉઇસમેઇલ."</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"વૉઇસમેઇલ ચલાવી શકાઈ નથી"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"વૉઇસમેઇલ લોડ કરી રહ્યું છે…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"વૉઇસમેઇલને આર્કાઇવ કરી રહ્યાં છે…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"વૉઇસમેઇલ લોડ કરી શકાઈ નથી"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ફક્ત વૉઇસમેઇલ સાથેના કૉલ્સ"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ફક્ત ઇનકમિંગ કૉલ્સ"</string>
@@ -128,6 +132,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> નાં રોજ <xliff:g id="TIME">%2$s</xliff:g> વાગ્યે"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"આ નંબર પર કૉલ કરી શકતાં નથી"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"વૉઇસમેઇલ સેટ કરવા માટે, મેનૂ &gt; સેટિંગ્સ પર જાઓ."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"વૉઇસમેઇલ પર કૉલ કરવા માટે, પહેલાં એરપ્લેન મોડને બંધ કરો."</string>
@@ -146,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"એક કૉલ કરો"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"તમારી પાસે કોઇ છૂટેલાં કૉલ્સ નથી."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"તમારું વૉઇસમેઇલ ઇનબોક્સ ખાલી છે."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"તમારું વૉઇસમેઇલ આર્કાઇવ ખાલી છે."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ફક્ત મનપસંદ બતાવો"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"કૉલ ઇતિહાસ"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"વૉઇસમેઇલ આર્કાઇવ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"તમામ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"છૂટેલ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"વૉઇસમેઇલ"</string>
@@ -233,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"સંખ્યા જુઓ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"આયાત કરો"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"આયાત નિષ્ફળ થયું"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"વૉઇસમેઇલને આર્કાઇવ કરવામાં નિષ્ફળ થયાં."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"નંબર અનાવરોધિત કરો"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"નંબર ઉમેરો"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે."</string>

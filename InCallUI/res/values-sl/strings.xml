@@ -113,10 +113,8 @@
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Zamenjaj"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Upravljaj klice"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Upravljaj konferenčne klice"</string>
-    <!-- no translation found for onscreenConferenceText (171855677185793827) -->
-    <skip />
-    <!-- no translation found for onscreenManageText (7625850560625708322) -->
-    <skip />
+    <string name="onscreenConferenceText" msgid="171855677185793827">"Konferenčni klic"</string>
+    <string name="onscreenManageText" msgid="7625850560625708322">"Upravljaj"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"Zvok"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videoklic"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Preklopi na glasovni klic"</string>

@@ -51,9 +51,15 @@
     <skip />
     <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
     <skip />
+    <!-- no translation found for call_log_archive_voicemail (9072936797223284265) -->
+    <skip />
     <!-- no translation found for snackbar_voicemail_deleted (5098542835986188582) -->
     <skip />
+    <!-- no translation found for snackbar_voicemail_archived (7442340403660554373) -->
+    <skip />
     <!-- no translation found for snackbar_voicemail_deleted_undo (3741811385891289167) -->
+    <skip />
+    <!-- no translation found for snackbar_voicemail_archived_goto (9186182602955185448) -->
     <skip />
     <!-- no translation found for clearCallLogConfirmation_title (801753155679372984) -->
     <skip />
@@ -79,6 +85,8 @@
     <!-- no translation found for voicemail_playback_error (3356071912353297599) -->
     <skip />
     <!-- no translation found for voicemail_fetching_content (1287895365599580842) -->
+    <skip />
+    <!-- no translation found for voicemail_archiving_content (722322091690281157) -->
     <skip />
     <!-- no translation found for voicemail_fetching_timout (3959428065511972176) -->
     <skip />
@@ -225,6 +233,10 @@
     <skip />
     <!-- no translation found for voicemailCallLogDateTimeFormat (4388070029056487713) -->
     <skip />
+    <!-- no translation found for voicemailDurationFormat (228211252076289564) -->
+    <skip />
+    <!-- no translation found for voicemailCallLogDateTimeFormatWithDuration (5118563814451588397) -->
+    <skip />
     <!-- no translation found for dialog_phone_call_prohibited_message (5730565540182492608) -->
     <!-- no translation found for dialog_phone_call_prohibited_message (4313552620858880999) -->
     <skip />
@@ -262,9 +274,13 @@
     <skip />
     <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
     <skip />
+    <!-- no translation found for voicemail_archive_empty (1087408796679056787) -->
+    <skip />
     <!-- no translation found for show_favorites_only (5520072531022614595) -->
     <skip />
     <!-- no translation found for call_log_activity_title (7949633151371183580) -->
+    <skip />
+    <!-- no translation found for voicemail_archive_activity_title (2638669189424535229) -->
     <skip />
     <!-- no translation found for call_log_all_title (3566738938889333307) -->
     <skip />
@@ -422,6 +438,8 @@
     <!-- no translation found for blocked_call_settings_import_button (178821255125295473) -->
     <skip />
     <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
+    <skip />
+    <!-- no translation found for voicemail_archive_failed (6263467962738772223) -->
     <skip />
     <!-- no translation found for description_blocked_number_list_delete (3240093199107796792) -->
     <skip />

@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ແກ້ໄຂໝາຍເລກກ່ອນໂທ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ລຶບ​ປະ​ຫວັດ​ການ​ໂທ​"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ລຶບຂໍ້ຄວາມສຽງ"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ຈັດເກັບຂໍ້ຄວາມສຽງເຂົ້າແຟ້ມ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ລຶບ​ຂໍ້​ຄວາມ​ສຽງ​ແລ້ວ"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ຈັດເກັບຂໍ້ຄວາມສຽງເຂົ້າແຟ້ມແລ້ວ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ບໍ່​ເຮັດ"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ໄປທີ່ແຟ້ມຈັດເກັບ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ລຶບ​ປະ​ຫວັດ​ການ​ໂທ​ບໍ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ອັນ​ນີ້​ຈະ​ລຶບ​ທຸກ​ສາຍ​ໂທ​ຈາກ​ປະ​ຫວັດ​ຂອງ​ທ່ານ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ກຳ​ລັງ​ລຶບ​ປະ​ຫວັດ​ການ​ໂທ…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"ບໍ່ມີຂໍ້ຄວາມສຽງຈາກ <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"ບໍ່​ສາ​ມາດ​ຫຼິ້ນ​ຂໍ້​ຄວາມ​ສຽງ​ໄດ້"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"ກຳ​ລັງ​ໂຫຼດ​ຂໍ້​ຄວາມ​ສຽງ…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"ກຳລັງຈັດເກັບຂໍ້ຄວາມສຽງເຂົ້າແຟ້ມ…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"ບໍ່​ສາ​ມາດ​ໂຫຼດ​ຂໍ້​ຄວາມ​ສຽງ​ໄດ້"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ເບີໂທຂໍ້ຄວາມສຽງເທົ່ານັ້ນ"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ສາຍໂທເຂົ້າເທົ່ານັ້ນ"</string>
@@ -128,6 +132,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> ເວລາ <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ບໍ່​ສາ​ມາດ​ໂທ​ຫາ​ເບີ​ນີ້​ໄດ້"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ເພື່ອຕັ້ງຄ່າຂໍ້ຄວາມສຽງ ໃຫ້ໄປທີ່ ເມນູ &gt; ການຕັ້ງຄ່າ."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"ເພື່ອໂທຫາເບີຂໍ້ຄວາມສຽງ ທ່ານຕ້ອງປິດໂໝດຢູ່ເທິງຍົນກ່ອນ."</string>
@@ -146,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"​ໂທ​ອອກ"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"ທ່ານ​ມີ​ສາຍ​ບໍ່​ໄດ້​ຮັບ."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ກ່ອງເຂົ້າ​ຂໍ້​ຄວາມ​ສຽງ​ຂອງ​ທ່ານ​ຫວ່າງ​ເປົ່າ."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"ແຟ້ມຈັດເກັບຂໍ້ຄວາມສຽງຂອງທ່ານຫວ່າງເປົ່າຢູ່."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ສະ​ແດງ​ສະເພາະລາຍການທີ່ນິຍົມເທົ່ານັ້ນ"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"ປະຫວັດການໂທ"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"ແຟ້ມຈັດເກັບຂໍ້ຄວາມສຽງ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ທັງໝົດ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ຂໍ້ຄວາມສຽງ"</string>
@@ -233,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ເບິ່ງ​ຕົວ​ເລກ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ນໍາເຂົ້າ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ນຳ​ເຂົ້າ​ລົ້ມ​ເຫລວ"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"ລົ້ມເຫລວໃນການຈັດເກັບຂໍ້ຄວາມສຽງເຂົ້າແຟ້ມ."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ປົດ​ບ​ລັອກ​ໝາຍ​ເລກ"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ເພີ່ມໝາຍເລກ"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ການໂທຈາກເບີໂທເຫຼົ່ານີ້ຈະຖືກບລັອກໄວ້ ແລະຂໍ້ຄວາມສຽງຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."</string>

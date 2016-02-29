@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ಧ್ವನಿಮೇಲ್‌ ಅಳಿಸಿ"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಿ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ಧ್ವನಿಮೇಲ್ ಅಳಿಸಲಾಗಿದೆ"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ರದ್ದುಮಾಡು"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ಆರ್ಕೈವ್‌ಗೆ ಹೋಗು"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸುವುದೇ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ಇದು ನಿಮ್ಮ ಇತಿಹಾಸದಿಂದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು ಅಳಿಸುತ್ತದೆ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> ಇವರಿಂದ ಹೊಸ ಧ್ವನಿಮೇಲ್‌"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"ಧ್ವನಿಮೇಲ್‌ ಪ್ಲೇ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"ಧ್ವನಿಮೇಲ್‌ ಲೋಡ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"ಧ್ವನಿಮೇಲ್‌ ಲೋಡ್‌ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ಧ್ವನಿಮೇಲ್‌ ಕರೆಗಳು ಮಾತ್ರ"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ಒಳಬರುವ ಕರೆಗಳು ಮಾತ್ರ"</string>
@@ -128,6 +132,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> ರಂದು <xliff:g id="TIME">%2$s</xliff:g> ಗಂಟೆಗೆ"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ಧ್ವನಿಮೇಲ್‌ ಹೊಂದಿಸಲು, ಮೆನು &gt; ಸೆಟ್ಟಿಂಗ್‌ಗಳುಗೆ ಹೋಗಿ."</string>
     <!-- no translation found for dialog_voicemail_airplane_mode_message (530922773669546093) -->
@@ -147,8 +153,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ಕರೆ ಮಾಡಿ"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"ನೀವು ಯಾವುದೇ ತಪ್ಪಿದ ಕರೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಇನ್‌ಬಾಕ್ಸ್ ಖಾಲಿ ಇದೆ."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಖಾಲಿಯಿದೆ."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"ಕರೆ ಇತಿಹಾಸ"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ಮಿಸ್ಡ್‌‌ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
@@ -234,6 +242,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"ಸಂಖ್ಯೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"ಆಮದು ಮಾಡಿ"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ಆಮದು ವಿಫಲವಾಗಿದೆ"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್‌ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ಸಂಖ್ಯೆಯನ್ನು ಅನಿರ್ಬಂಧಿಸು"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"ಸಂಖ್ಯೆಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ಈ ಸಂಖ್ಯೆಗಳಿಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>

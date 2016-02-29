@@ -113,10 +113,8 @@
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Tukar"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Kelola panggilan"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Kelola telewicara"</string>
-    <!-- no translation found for onscreenConferenceText (171855677185793827) -->
-    <skip />
-    <!-- no translation found for onscreenManageText (7625850560625708322) -->
-    <skip />
+    <string name="onscreenConferenceText" msgid="171855677185793827">"Konferensi telepon"</string>
+    <string name="onscreenManageText" msgid="7625850560625708322">"Kelola"</string>
     <string name="onscreenAudioText" msgid="8963459818052898299">"Audio"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Video call"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Ubah ke panggilan suara"</string>

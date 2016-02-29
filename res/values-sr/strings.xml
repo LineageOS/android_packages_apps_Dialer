@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Измени број пре позива"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Обриши историју позива"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Избриши говорну поруку"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архивирај говорну пошту"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Гов. пошта је избрисана"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Говорна пошта је архивирана"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ОПОЗОВИ"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"АРХИВА"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Желите да обришете историју позива?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ово ће избрисати све позиве из историје"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Брише се историја позива…"</string>
@@ -56,6 +59,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Нова говорна порука од <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Пуштање говорне поште није успело"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Говорна пошта се учитава…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Говорна пошта се архивира…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Учитавање говорне поште није успело"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Само позиви са говорном поштом"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Само долазни позиви"</string>
@@ -129,6 +133,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> у <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Није могуће позвати овај број"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Да бисте подесили говорну пошту, идите у Мени &gt; Подешавања."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Да бисте позвали говорну пошту, прво искључите режим авионa."</string>
@@ -147,8 +153,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Позови"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Немате ниједан пропуштен позив."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Пријемно сандуче говорне поште је празно."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Архива говорне поште је празна."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Прикажи само омиљене"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Историја позива"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Архива говорне поште"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Сви"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропуштени"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Говорна пошта"</string>
@@ -235,6 +243,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Прикажи бројеве"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Увeзи"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Увоз није успео"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Архивирање говорне поште није успело."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Деблокирај број"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Додај број"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Позиви са ових бројева ће бити блокирани и поруке говорне поште ће се аутоматски брисати."</string>

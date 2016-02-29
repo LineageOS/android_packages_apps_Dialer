@@ -34,8 +34,11 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"កែ​លេខ​មុន​ពេល​ហៅ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ជម្រះប្រវត្តិហៅ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"លុប​សារ​ជា​សំឡេង"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"រក្សាទុក​សារ​ជាសំឡេង​ក្នុង​ប័ណ្ណសារ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"បានលុបសារសម្លេង"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"បាន​រក្សាទុក​សារ​ជាសំឡេង​ក្នុង​ប័ណ្ណសារ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"​មិន​ធ្វើវិញ"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ទៅ​កាន់​ប័ណ្ណសារ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ជម្រះប្រវត្តិហៅ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"វានឹងលុបការហៅទាំងអស់ចេញពីប្រវត្តិរបស់អ្នក"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"កំពុងជម្រះប្រវត្តិហៅ…"</string>
@@ -55,6 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"សារ​ជា​សំឡេង​ថ្មី​ពី <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"មិនអាចចាក់សារជាសម្លេងបានទេ"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"កំពុងផ្ទុកសារជាសម្លេង…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"កំពុង​​រក្សាទុក​សារ​ជាសំឡេង​ក្នុង​ប័ណ្ណសារ..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"មិនអាចផ្ទុកសារជាសម្លេងបានទេ"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"តែ​ការ​ហៅ​ជា​សារ​សំឡេង"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"តែ​ការ​ហៅ​ចូល"</string>
@@ -128,6 +132,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> នៅម៉ោង <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"មិនអាចហៅលេខនេះបានទេ"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ដើម្បី​កំណត់​សារ​ជា​សំឡេង ចូល​ម៉ឺនុយ &gt; ការ​កំណត់។"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"ដើម្បី​ហៅ​សារ​ជា​សំឡេង ដំបូង​ត្រូវ​បិទ​របៀប​ពេល​ជិះ​យន្តហោះ។"</string>
@@ -146,8 +152,10 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ហៅទូរស័ព្ទ"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"អ្នកមិនមានការខកខានទទួលទូរស័ព្ទទេ។"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ប្រអប់ទទួលសារជាសំឡេងរបស់អ្នកទទេ។"</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"បណ្ណសារជាសំឡេងរបស់អ្នកគឺទទេ។"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"បង្ហាញ​តែ​​និយម​ប្រើ​ប៉ុណ្ណោះ"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"ប្រវត្តិហៅ"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"បណ្ណសារសារជាសំឡេង"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ទាំង​អស់"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ខកខាន​ទទួល"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"សារ​ជា​សំឡេង"</string>
@@ -233,6 +241,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"មើលលេខ"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"នាំចូល"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"ការនាំចូលបានបរាជ័យ"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"បាន​បរាជ័យ​រក្សាទុក​សារជាសំឡេង​ក្នុង​ប័ណ្ណសារ។"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"ឈប់ទប់ស្កាត់លេខ"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"បន្ថែមលេខ"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ការហៅចេញពីលេខទាំងនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
