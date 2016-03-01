@@ -765,9 +765,11 @@ public class DialpadFragment extends Fragment
         mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
         mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
         mOverflowMenuButton.setOnClickListener(this);
-        mOverflowMenuButton.setVisibility(isDigitsEmpty() ||
-                (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) ?
-                View.INVISIBLE : View.VISIBLE);
+
+        // If a call method does not exist currently, get it from our dialer activity;
+        if (mCurrentCallMethodInfo == null) {
+            onCallMethodChanged(activity.getCurrentCallMethod());
+        }
 
         if (mFirstLaunch) {
             // The onHiddenChanged callback does not get called the first time the fragment is
