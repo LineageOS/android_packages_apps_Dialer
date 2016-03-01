@@ -298,6 +298,10 @@ public class CallList {
         return getFirstCallWithState(Call.State.ACTIVE);
     }
 
+    public Call getSecondActiveCall() {
+        return getCallWithState(Call.State.ACTIVE, 1);
+    }
+
     public Call getBackgroundCall() {
         return getFirstCallWithState(Call.State.ONHOLD);
     }
