@@ -271,7 +271,7 @@ public class CallDetailActivity extends Activity
                 if (mInCallComponentName != null) {
                     CallMethodInfo cmi = CallMethodHelper.getCallMethod(mInCallComponentName);
                     if (cmi != null) {
-                        cmi.placeCall(OriginCodes.CALL_LOG_CALL, mNumber, mContext, true);
+                        cmi.placeCall(OriginCodes.CALL_LOG_CALL, mNumber, mContext);
                         return;
                     }
                 }
