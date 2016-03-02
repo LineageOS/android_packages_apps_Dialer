@@ -16,13 +16,14 @@
 
 package com.android.dialer.voicemail;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -30,24 +31,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.VoicemailContract;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager.LayoutParams;
-import android.widget.SeekBar;
 
-import com.android.dialer.R;
+import com.android.common.io.MoreCloseables;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
-import com.android.common.io.MoreCloseables;
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Preconditions;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -71,7 +67,7 @@ import javax.annotation.concurrent.ThreadSafe;
 public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListener,
                 MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
-    private static final String TAG = VoicemailPlaybackPresenter.class.getSimpleName();
+    private static final String TAG = "VmPlaybackPresenter";
 
     /** Contract describing the behaviour we need from the ui we are controlling. */
     public interface PlaybackView {
@@ -99,6 +95,11 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
     public enum Tasks {
         CHECK_FOR_CONTENT,
         CHECK_CONTENT_AFTER_CHANGE,
+    }
+
+    private interface OnContentCheckedListener {
+
+        void onContentChecked(boolean hasContent);
     }
 
     private static final String[] HAS_CONTENT_PROJECTION = new String[] {
@@ -263,8 +264,24 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                 // Update the view to the current speakerphone state.
                 mView.onSpeakerphoneOn(mIsSpeakerphoneOn);
             }
-
-            checkForContent();
+            /*
+             * Check to see if the content field in the DB is set. If set, we proceed to
+             * prepareContent() method. We get the duration of the voicemail from the query and set
+             * it if the content is not available.
+             */
+            checkForContent(new OnContentCheckedListener() {
+                @Override
+                public void onContentChecked(boolean hasContent) {
+                    if (hasContent) {
+                        prepareContent();
+                    } else {
+                        if (mView != null) {
+                            mView.resetSeekBar();
+                            mView.setClipPosition(0, mDuration.get());
+                        }
+                    }
+                }
+            });
 
             if (startPlayingImmediately) {
                 // Since setPlaybackView can get called during the view binding process, we don't
@@ -368,15 +385,8 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
     /**
      * Checks to see if we have content available for this voicemail.
-     * <p>
-     * This method will be called once, after the fragment has been created, before we know if the
-     * voicemail we've been asked to play has any content available.
-     * <p>
-     * Notify the user that we are fetching the content, then check to see if the content field in
-     * the DB is set. If set, we proceed to {@link #prepareContent()} method. We get the duration of
-     * the voicemail from the query and set it if the content is not available.
      */
-    private void checkForContent() {
+    private void checkForContent(final OnContentCheckedListener callback) {
         mAsyncTaskExecutor.submit(Tasks.CHECK_FOR_CONTENT, new AsyncTask<Void, Void, Boolean>() {
             @Override
             public Boolean doInBackground(Void... params) {
@@ -385,12 +395,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
             @Override
             public void onPostExecute(Boolean hasContent) {
-                if (hasContent) {
-                    prepareContent();
-                } else if (mView != null) {
-                    mView.resetSeekBar();
-                    mView.setClipPosition(0, mDuration.get());
-                }
+                callback.onContentChecked(hasContent);
             }
         });
     }
@@ -648,8 +653,25 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         }
 
         if (!mIsPrepared) {
-            // If we haven't downloaded the voicemail yet, attempt to download it.
-            mIsPlaying = requestContent();
+            /*
+             * Check content before requesting content to avoid duplicated requests. It is possible
+             * that the UI doesn't know content has arrived if the fetch took too long causing a
+             * timeout, but succeeded.
+             */
+            checkForContent(new OnContentCheckedListener() {
+                @Override
+                public void onContentChecked(boolean hasContent) {
+                    if (!hasContent) {
+                        // No local content, download from server. Queue playing if the request was
+                        // issued,
+                        mIsPlaying = requestContent();
+                    } else {
+                        // Queue playing once the media play loaded the content.
+                        mIsPlaying = true;
+                        prepareContent();
+                    }
+                }
+            });
             return;
         }
 
