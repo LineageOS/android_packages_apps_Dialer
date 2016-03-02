@@ -51,7 +51,6 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
-import com.android.incallui.Call.State;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -268,9 +267,23 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         }
 
         /*
-         * Nothing more to check...build and send it.
+         * This builder is used for the notification shown when the device is locked and the user
+         * has set their notification settings to 'hide sensitive content'
+         * {@see Notification.Builder#setPublicVersion}.
+         */
+        Notification.Builder publicBuilder = new Notification.Builder(mContext);
+        publicBuilder.setSmallIcon(iconResId)
+                .setColor(mContext.getResources().getColor(R.color.dialer_theme_color))
+                // Hide work call state for the lock screen notification
+                .setContentTitle(getContentString(call, ContactsUtils.USER_TYPE_CURRENT));
+        setNotificationWhen(call, callState, publicBuilder);
+
+        /*
+         * Builder for the notification shown when the device is unlocked or the user has set their
+         * notification settings to 'show all notification content'.
          */
         final Notification.Builder builder = getNotificationBuilder();
+        builder.setPublicVersion(publicBuilder.build());
 
         // Set up the main intent to send the user to the in-call screen
         final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
@@ -335,12 +348,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
     private void createIncomingCallNotification(
             Call call, int state, Notification.Builder builder) {
-        if (state == Call.State.ACTIVE) {
-            builder.setUsesChronometer(true);
-            builder.setWhen(call.getConnectTimeMillis());
-        } else {
-            builder.setUsesChronometer(false);
-        }
+        setNotificationWhen(call, state, builder);
 
         // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
         if (state == Call.State.ACTIVE ||
@@ -355,6 +363,20 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             } else {
                 addAnswerAction(builder);
             }
+        }
+    }
+
+    /*
+     * Sets the notification's when section as needed. For active calls, this is explicitly set as
+     * the duration of the call. For all other states, the notification will automatically show the
+     * time at which the notification was created.
+     */
+    private void setNotificationWhen(Call call, int state, Notification.Builder builder) {
+        if (state == Call.State.ACTIVE) {
+            builder.setUsesChronometer(true);
+            builder.setWhen(call.getConnectTimeMillis());
+        } else {
+            builder.setUsesChronometer(false);
         }
     }
 
