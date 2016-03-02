@@ -1025,4 +1025,7 @@
 
     <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
     <string name="blocked_number_call_log_label">Blocked</string>
+
+    <!-- Accessibility announcement to indicate which call is active -->
+    <string name="accessibility_call_is_active"><xliff:g id="nameOrNumber">^1</xliff:g> is active</string>
 </resources>

@@ -335,7 +335,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         getUi().setEndCallButtonEnabled(shouldShowEndCallButton(mPrimary, callState),
                 callState != Call.State.INCOMING /* animate */);
 
-        maybeSendAccessibilityEvent(oldState, newState);
+        maybeSendAccessibilityEvent(oldState, newState, primaryChanged);
     }
 
     @Override
@@ -1070,7 +1070,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return true;
     }
 
-    private void maybeSendAccessibilityEvent(InCallState oldState, InCallState newState) {
+    private void maybeSendAccessibilityEvent(InCallState oldState, InCallState newState,
+                                             boolean primaryChanged) {
         if (mContext == null) {
             return;
         }
@@ -1079,8 +1080,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         if (!am.isEnabled()) {
             return;
         }
+        // Announce the current call if it's new incoming/outgoing call or primary call is changed
+        // due to switching calls between two ongoing calls (one is on hold).
         if ((oldState != InCallState.OUTGOING && newState == InCallState.OUTGOING)
-                || (oldState != InCallState.INCOMING && newState == InCallState.INCOMING)) {
+                || (oldState != InCallState.INCOMING && newState == InCallState.INCOMING)
+                || primaryChanged) {
             if (getUi() != null) {
                 getUi().sendAccessibilityAnnouncement();
             }
