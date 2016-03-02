@@ -433,6 +433,9 @@ public class CallButtonFragment
     public void setMute(boolean value) {
         if (mMuteButton.isSelected() != value) {
             mMuteButton.setSelected(value);
+            mMuteButton.setContentDescription(getContext().getString(
+                    value ? R.string.onscreenMuteText_selected
+                            : R.string.onscreenMuteText_unselected));
         }
     }
 
@@ -789,6 +792,9 @@ public class CallButtonFragment
             boolean changed = ((InCallActivity) getActivity()).showDialpadFragment(value, animate);
             if (changed) {
                 mShowDialpadButton.setSelected(value);
+                mShowDialpadButton.setContentDescription(getContext().getString(
+                        value /* show */ ? R.string.onscreenShowDialpadText_unselected
+                                : R.string.onscreenShowDialpadText_selected));
             }
         }
     }
