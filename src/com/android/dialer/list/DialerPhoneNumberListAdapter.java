@@ -206,7 +206,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public String getLabelType(Cursor c, int type) {
         if (type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
             final String providerLabel = c.getString(PhoneNumberListAdapter.PhoneQuery.PHONE_MIME_TYPE);
-            CallMethodInfo cmi = CallMethodHelper.getMethodForMimeType(providerLabel);
+            CallMethodInfo cmi = CallMethodHelper.getMethodForMimeType(providerLabel, false);
             if (cmi != null) {
                 return cmi.mName;
             } else {
