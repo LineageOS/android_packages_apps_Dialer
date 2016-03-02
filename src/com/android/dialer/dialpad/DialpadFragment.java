@@ -464,9 +464,7 @@ public class DialpadFragment extends Fragment
         } else {
             CreditBarHelper.clearCallRateInformation(mDialpadView.getRateContainer(), cbvl);
         }
-        mOverflowMenuButton.setVisibility(isDigitsEmpty() ||
-                (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) ?
-                View.INVISIBLE : View.VISIBLE);
+        updateOptionsMenu();
     }
 
     public void setCurrentCallMethod(CallMethodInfo callMethodInfo) {
@@ -758,18 +756,15 @@ public class DialpadFragment extends Fragment
 
         stopWatch.stopAndLog(TAG, 50);
 
-        // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
-        // is disabled while Dialer is paused, the "Send a text message" option can be correctly
-        // removed when resumed.
-        mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
-        mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
-        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
-        mOverflowMenuButton.setOnClickListener(this);
-
         // If a call method does not exist currently, get it from our dialer activity;
         if (mCurrentCallMethodInfo == null) {
             onCallMethodChanged(activity.getCurrentCallMethod());
         }
+
+        // Populate the overflow menu in onResume instead of onCreate, so that if the SMS activity
+        // is disabled while Dialer is paused, the "Send a text message" option can be correctly
+        // removed when resumed.
+        updateOptionsMenu();
 
         if (mFirstLaunch) {
             // The onHiddenChanged callback does not get called the first time the fragment is
@@ -779,6 +774,21 @@ public class DialpadFragment extends Fragment
 
         mFirstLaunch = false;
         Trace.endSection();
+    }
+
+    private void updateOptionsMenu() {
+        if (mOverflowMenuButton == null) {
+            mOverflowMenuButton = mDialpadView.getOverflowMenuButton();
+            if (mOverflowMenuButton == null) {
+                return;
+            }
+            mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
+            mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
+            mOverflowMenuButton.setOnClickListener(this);
+        }
+        mOverflowMenuButton.setVisibility(isDigitsEmpty() ||
+                (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) ?
+                View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
