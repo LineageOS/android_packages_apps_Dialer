@@ -314,6 +314,7 @@
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.NotificationBroadcastReceiver"
+                  android:encryptionAware="true"
                   android:exported="false" />
 
         <service android:name="com.android.incallui.InCallServiceImpl"
