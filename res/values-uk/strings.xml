@@ -36,7 +36,7 @@
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Видалити голосову пошту"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архівувати голосову пошту"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Видалено"</string>
-    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Голосу пошту заархівовано"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Голосову пошту заархівовано"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ВІДМІНИТИ"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ДО АРХІВУ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Очистити історію дзвінків?"</string>
@@ -266,4 +266,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Щоб зателефонувати, увімкніть дозвіл \"Телефон\"."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Додаток Телефон не має дозволу змінювати системні налаштування."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Заблоковано"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

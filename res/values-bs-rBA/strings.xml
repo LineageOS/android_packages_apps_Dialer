@@ -51,16 +51,13 @@
     <skip />
     <!-- no translation found for call_log_trash_voicemail (1283948488625129019) -->
     <skip />
-    <!-- no translation found for call_log_archive_voicemail (9072936797223284265) -->
-    <skip />
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arhiviraj govornu poštu"</string>
     <!-- no translation found for snackbar_voicemail_deleted (5098542835986188582) -->
     <skip />
-    <!-- no translation found for snackbar_voicemail_archived (7442340403660554373) -->
-    <skip />
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Govorna pošta arhivirana"</string>
     <!-- no translation found for snackbar_voicemail_deleted_undo (3741811385891289167) -->
     <skip />
-    <!-- no translation found for snackbar_voicemail_archived_goto (9186182602955185448) -->
-    <skip />
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"IDI U ARH."</string>
     <!-- no translation found for clearCallLogConfirmation_title (801753155679372984) -->
     <skip />
     <!-- no translation found for clearCallLogConfirmation (7899552396101432827) -->
@@ -86,8 +83,7 @@
     <skip />
     <!-- no translation found for voicemail_fetching_content (1287895365599580842) -->
     <skip />
-    <!-- no translation found for voicemail_archiving_content (722322091690281157) -->
-    <skip />
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Arhiviranje govorne pošte..."</string>
     <!-- no translation found for voicemail_fetching_timout (3959428065511972176) -->
     <skip />
     <!-- no translation found for call_log_voicemail_header (3945407886667089173) -->
@@ -274,14 +270,12 @@
     <skip />
     <!-- no translation found for call_log_voicemail_empty (8383585074222277550) -->
     <skip />
-    <!-- no translation found for voicemail_archive_empty (1087408796679056787) -->
-    <skip />
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Vaša arhiva govorne pošte je prazna."</string>
     <!-- no translation found for show_favorites_only (5520072531022614595) -->
     <skip />
     <!-- no translation found for call_log_activity_title (7949633151371183580) -->
     <skip />
-    <!-- no translation found for voicemail_archive_activity_title (2638669189424535229) -->
-    <skip />
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Arhiva govorne pošte"</string>
     <!-- no translation found for call_log_all_title (3566738938889333307) -->
     <skip />
     <!-- no translation found for call_log_missed_title (4541142293870638971) -->
@@ -439,8 +433,7 @@
     <skip />
     <!-- no translation found for send_to_voicemail_import_failed (5547202002133560069) -->
     <skip />
-    <!-- no translation found for voicemail_archive_failed (6263467962738772223) -->
-    <skip />
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Arhiviranje govorne pošte nije uspjelo."</string>
     <!-- no translation found for description_blocked_number_list_delete (3240093199107796792) -->
     <skip />
     <!-- no translation found for addBlockedNumber (6064812257482886526) -->
@@ -480,5 +473,7 @@
     <!-- no translation found for toast_cannot_write_system_settings (5614246168296606709) -->
     <skip />
     <!-- no translation found for blocked_number_call_log_label (8912042441473014712) -->
+    <skip />
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
     <skip />
 </resources>

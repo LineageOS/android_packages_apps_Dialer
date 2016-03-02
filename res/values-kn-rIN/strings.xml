@@ -263,4 +263,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"ಕರೆ ಮಾಡಲು, ಫೋನ್ ಅನುಮತಿಯನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಬರೆಯಲು ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

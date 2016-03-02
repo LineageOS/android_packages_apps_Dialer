@@ -106,8 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"कॉल होल्ड करा"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"कॉल पुनः सुरु करा"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"कॉल समाप्त करा"</string>
-    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"डायलपॅड"</string>
-    <string name="onscreenMuteText" msgid="5303380507675232140">"नि:शब्द करा"</string>
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"डायलपॅड दर्शवा"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"डायलपॅड लपवा"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"नि:शब्द करा"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"सशब्द करा"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"कॉल जोडा"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"कॉल विलीन करा"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"अदलाबदल करा"</string>

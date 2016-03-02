@@ -262,4 +262,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"കോൾ വിളിക്കുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"സിസ്റ്റം ക്രമീകരണത്തിലേക്ക് എഴുതാൻ ഫോൺ ആപ്പിന് അനുമതിയില്ല."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ബ്ലോക്കുചെയ്തു"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

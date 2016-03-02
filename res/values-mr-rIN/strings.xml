@@ -262,4 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"कॉल करण्यासाठी, फोन परवानगी चालू करा."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"फोन अॅपला सिस्टीम स‍ेटिंग्जमध्ये लिहिण्याची परवानगी नाही."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"अवरोधित केले"</string>
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> सक्रिय आहे"</string>
 </resources>

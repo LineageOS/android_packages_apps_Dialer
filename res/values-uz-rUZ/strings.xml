@@ -31,7 +31,7 @@
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> raqami blokdan chiqarildi"</string>
     <string name="block_number_undo" msgid="591338370336724156">"QAYTARISH"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"O‘chirish"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Raqamni o‘zgartirish va telefon qilish"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"O‘zgartirish va telefon qilish"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Qo‘ng‘iroqlar tarixini tozalash"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ovozli xabarni o‘chirish"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Ovozli pochtani arxivlash"</string>
@@ -262,4 +262,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Qo‘ng‘iroq qilish uchun “Telefon” ruxsatnomasini yoqing."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefon ilovasida tizim sozlamalarini o‘zgartirish uchun ruxsat yo‘q."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloklangan"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

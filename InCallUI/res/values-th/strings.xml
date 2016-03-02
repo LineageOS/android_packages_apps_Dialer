@@ -106,8 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"พักสาย"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"โทรต่อ"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"วางสาย"</string>
-    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"แป้นหมายเลข"</string>
-    <string name="onscreenMuteText" msgid="5303380507675232140">"ปิด"</string>
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"แสดงแป้นหมายเลข"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"ซ่อนแป้นหมายเลข"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"ปิดเสียง"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"เปิดเสียง"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"เพิ่มการโทร"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"รวมสาย"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"สลับ"</string>
