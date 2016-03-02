@@ -1124,10 +1124,19 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         if (event.getEventType() == AccessibilityEvent.TYPE_ANNOUNCEMENT) {
-            dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
-            dispatchPopulateAccessibilityEvent(event, mPrimaryName);
-            dispatchPopulateAccessibilityEvent(event, mCallTypeLabel);
-            dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
+            // Indicate this call is in active if no label is provided. The label is empty when
+            // the call is in active, not in other status such as onhold or dialing etc.
+            if (!mCallStateLabel.isShown() || TextUtils.isEmpty(mCallStateLabel.getText())) {
+                event.getText().add(
+                        TextUtils.expandTemplate(
+                                getResources().getText(R.string.accessibility_call_is_active),
+                                mPrimaryName.getText()));
+            } else {
+                dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
+                dispatchPopulateAccessibilityEvent(event, mPrimaryName);
+                dispatchPopulateAccessibilityEvent(event, mCallTypeLabel);
+                dispatchPopulateAccessibilityEvent(event, mPhoneNumber);
+            }
             return;
         }
         dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
