@@ -106,8 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"ຖືສາຍ"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"​ສືບ​ຕໍ່​ສາຍ"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"ວາງສາຍ"</string>
-    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"ແປ້ນກົດ"</string>
-    <string name="onscreenMuteText" msgid="5303380507675232140">"ປິດສຽງ"</string>
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"ສະແດງປຸ່ມກົດ"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"ເຊື່ອງປຸ່ມກົດ"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"ປິດສຽງ"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"ເຊົາປິດສຽງ"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"ເພີ່ມການໂທ"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"ລວມສາຍ"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"ສະຫຼັບ"</string>

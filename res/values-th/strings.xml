@@ -58,7 +58,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"ข้อความเสียงใหม่จาก <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"ไม่สามารถเล่นข้อความเสียงได้"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"กำลังโหลดข้อความเสียง…"</string>
-    <string name="voicemail_archiving_content" msgid="722322091690281157">"กำลังเก็บข้อความเสียง..."</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"กำลังเก็บข้อความเสียง…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"ไม่สามารถโหลดข้อความเสียงได้"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"เฉพาะสายที่มีข้อความเสียง"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"เฉพาะสายเรียกเข้า"</string>
@@ -262,4 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"หากต้องการโทรออก ให้เปิดสิทธิ์เข้าถึงโทรศัพท์"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"แอปโทรศัพท์ไม่ได้รับอนุญาตให้เขียนไปยังการตั้งค่าระบบ"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ถูกบล็อก"</string>
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ต่อสายอยู่"</string>
 </resources>

@@ -38,7 +38,7 @@
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"已刪除留言信箱"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"已封存留言"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"復原"</string>
-    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"前往封存"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"前往封存庫"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通話記錄嗎？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"這會刪除所有通話記錄"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通話記錄…"</string>
@@ -262,4 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"如要撥打電話，請開放「手機」權限。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"手機應用程式沒有系統設定的寫入權限。"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"已封鎖"</string>
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>正在進行通話"</string>
 </resources>

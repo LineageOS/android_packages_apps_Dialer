@@ -264,4 +264,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Да бисте упутили позив, укључите дозволу за Телефон."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Апликација Телефон нема дозволу за уписивање у системска подешавања."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Блокиран"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

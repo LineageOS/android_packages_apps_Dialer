@@ -106,8 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Hou oproep"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Hervat oproep"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"Beëindig oproep"</string>
-    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"Belblad"</string>
-    <string name="onscreenMuteText" msgid="5303380507675232140">"Demp"</string>
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"Wys belblad"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"Versteek belblad"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Demp"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"Ontdemp"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"Voeg oproep by"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Smelt oproepe saam"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Ruil"</string>

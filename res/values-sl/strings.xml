@@ -60,7 +60,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nova glasovna pošta od <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Sporočil v odzivniku ni mogoče predv."</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Nalaganje sporočil v odzivniku …"</string>
-    <string name="voicemail_archiving_content" msgid="722322091690281157">"Arhiviranje sporočila …"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Arhiviranje sporočila v odzivniku …"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Sporočil v odzivniku ni mogoče naložiti"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Samo klici z odzivnikom"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Samo dohodni klici"</string>
@@ -266,4 +266,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Če želite klicati, vklopite dovoljenje za telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacija Telefon nima dovoljenja za pisanje v sistemske nastavitve."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Blokirano"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

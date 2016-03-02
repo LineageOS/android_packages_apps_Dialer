@@ -262,4 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"ਕਾਲ ਕਰਨ ਲਈ, ਫ਼ੋਨ ਅਨੁਮਤੀ ਚਾਲੂ ਕਰੋ।"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ਫ਼ੋਨ ਐਪ ਦੇ ਕੋਲ ਸਿਸਟਮ ਸੈਟਿੰਗਜ਼ ਵਿੱਚ ਲਿੱਖਣ ਦੀ ਅਨੁਮਤੀ ਨਹੀਂ ਹੁੰਦੀ ਹੈ।"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ਬਲੌਕ ਕੀਤਾ ਗਿਆ"</string>
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ਕਿਰਿਆਸ਼ੀਲ ਹੈ"</string>
 </resources>

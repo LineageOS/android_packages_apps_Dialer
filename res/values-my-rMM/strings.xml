@@ -262,4 +262,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"ဖုန်းခေါ်ဆိုရန်၊ ဖုန်းခွင့်ပြုချက်ကိုဖွင့်ပါ။"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ဖုန်း အက်ပ်ဆီတွင် စနစ် ဆက်တင်များသို့ ရေးသားခွင့် မရှိပါ။"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ပိတ်ဆို့ထားသည်"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

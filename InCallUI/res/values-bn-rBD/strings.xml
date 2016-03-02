@@ -106,8 +106,14 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"কল হোল্ডে রাখুন"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"কল পুনরায় শুরু করুন"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"কল শেষ করুন"</string>
-    <string name="onscreenShowDialpadText" msgid="8798170898298132499">"ডায়ালপ্যাড"</string>
-    <string name="onscreenMuteText" msgid="5303380507675232140">"নিঃশব্দ করুন"</string>
+    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
+    <skip />
+    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
+    <skip />
+    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
+    <skip />
+    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
+    <skip />
     <string name="onscreenAddCallText" msgid="5577548650466595598">"কল যোগ করুন"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"কলগুলি মার্জ করুন"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"সোয়াপ করুন"</string>

@@ -39,7 +39,7 @@
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Үн почтасы жок кылнд"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Үн каттары архивделди"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"КАЙТАРУУ"</string>
-    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"АРХИВГЕ БАР"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"АРХВГЕ ӨТ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Чалуулар таржымалы тазалансынбы?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ушуну менен бул таржымалдагы бардык чалуулар жок болот"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Чалуулар таржымалы тазаланууда…"</string>
@@ -59,7 +59,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> жаңы үнкат калтырды"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Үн почтасы ойнолгон жок"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Үн почтасы жүктөлүүдө…"</string>
-    <string name="voicemail_archiving_content" msgid="722322091690281157">"Үн каттарын архивдөө…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Үн каттары архивделүүдө…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Үн почтасы жүктөлгөн жок"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Үнкат чалуулары"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Кириш чалуулар"</string>
@@ -176,7 +176,7 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Чалуу"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Алынбай калган чалуулар жок."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Үн почтаңыздын келген билдирүүлөр куржуну бош."</string>
-    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Үн каттар архивиңиз ээн."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Үн каттар архивиңиз бош."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Тандамалдарды гана көрсөтүү"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Чалуулар таржымалы"</string>
     <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Үн каттар архиви"</string>
@@ -286,4 +286,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Чалуу үчүн, \"Телефон\" колдонмосуна уруксат бериңиз."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Телефон колдонмосунун Тутум жөндөөлөрүнө жазууга уруксаты жок."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Бөгөттөлгөн"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>

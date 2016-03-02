@@ -38,7 +38,7 @@
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Buzón de voz borrado"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Se archivó el mensaje de voz"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESHACER"</string>
-    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"IR ARCHIVO"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"IR A ARCHIVO"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"¿Eliminar el historial de llamadas?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se eliminarán todas las llamadas del historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Eliminando historial de llamadas…"</string>
@@ -262,4 +262,6 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Para realizar una llamada, activa el permiso Teléfono."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"La aplicación de teléfono no tiene permiso para modificar la configuración del sistema."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloqueado"</string>
+    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
+    <skip />
 </resources>
