@@ -275,10 +275,18 @@
     <string name="onscreenHoldText_selected">Resume Call</string>
     <!-- Text for the onscreen "End call" button -->
     <string name="onscreenEndCallText">End Call</string>
-    <!-- Text for the onscreen "Show Dialpad" button -->
-    <string name="onscreenShowDialpadText">Dialpad</string>
-    <!-- Text for the onscreen "Mute" button -->
-    <string name="onscreenMuteText">Mute</string>
+    <!-- Text for the onscreen "Show Dialpad" button when it is not selected. Pressing it will
+         show the dialpad. -->
+    <string name="onscreenShowDialpadText_unselected">Show Dialpad</string>
+    <!-- Text for the onscreen "Show Dialpad" button when it is selected. Pressing it will
+         hide the dialpad. -->
+    <string name="onscreenShowDialpadText_selected">Hide Dialpad</string>
+    <!-- Text for the onscreen "Mute" button when it is not selected. Pressing it will mute
+         the call. -->
+    <string name="onscreenMuteText_unselected">Mute</string>
+    <!-- Text for the onscreen "Mute" button when it is selected. Pressing it will unmute
+         the call. -->
+    <string name="onscreenMuteText_selected">Unmute</string>
     <!-- Text for the onscreen "Add call" button -->
     <string name="onscreenAddCallText">Add call</string>
     <!-- Text for the onscreen "Merge calls" button -->

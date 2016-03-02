@@ -75,7 +75,7 @@
         <ToggleButton android:id="@+id/muteButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_mute"
-            android:contentDescription="@string/onscreenMuteText" />
+            android:contentDescription="@string/onscreenMuteText_unselected" />
 
         <!-- CENTER SLOT ======================================================================= -->
 
@@ -83,7 +83,7 @@
         <ToggleButton android:id="@+id/dialpadButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_dialpad"
-            android:contentDescription="@string/onscreenShowDialpadText" />
+            android:contentDescription="@string/onscreenShowDialpadText_unselected" />
 
         <!-- MIDDLE RIGHT SLOT ================================================================= -->
 
