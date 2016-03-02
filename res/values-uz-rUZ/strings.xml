@@ -31,7 +31,7 @@
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> raqami blokdan chiqarildi"</string>
     <string name="block_number_undo" msgid="591338370336724156">"QAYTARISH"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"O‘chirish"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Raqamni o‘zgartirish va telefon qilish"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"O‘zgartirish va telefon qilish"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Qo‘ng‘iroqlar tarixini tozalash"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ovozli xabarni o‘chirish"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Ovozli pochta o‘chirildi"</string>
