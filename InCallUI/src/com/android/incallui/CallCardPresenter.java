@@ -697,6 +697,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return retval;
         }
 
+        // Sometimes there is intemediate state that two calls are in active even one is about
+        // to be on hold.
+        retval = callList.getSecondActiveCall();
+        if (retval != null && retval != ignore) {
+            return retval;
+        }
+
         // Disconnected calls get primary position if there are no active calls
         // to let user know quickly what call has disconnected. Disconnected
         // calls are very short lived.
