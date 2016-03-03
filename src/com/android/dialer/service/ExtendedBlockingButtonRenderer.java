@@ -19,6 +19,8 @@ package com.android.dialer.service;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.QuickContactBadge;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -70,4 +72,15 @@ public interface ExtendedBlockingButtonRenderer {
     void render(ViewStub viewStub);
 
     void setViewHolderInfo(ViewHolderInfo info);
+
+    /**
+     * Updates the photo and label for the given phone number and country iso.
+     *
+     * @param number Phone number for which the rendering occurs.
+     * @param countryIso Two-letter country code.
+     * @param badge {@link QuickContactBadge} in which the photo should be rendered.
+     * @param view Textview that will hold the new label.
+     */
+    void updatePhotoAndLabelIfNecessary(
+            String number, String countryIso, QuickContactBadge badge, TextView view);
 }
