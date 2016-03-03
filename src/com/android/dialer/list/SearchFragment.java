@@ -273,7 +273,12 @@ public class SearchFragment extends PhoneNumberPickerFragment
     public void onResume() {
         super.onResume();
 
-        updateCallCreditInfo();
+        final DialtactsActivity da = (DialtactsActivity) getActivity();
+        if (mCurrentCallMethodInfo == null && da != null && da.isInSearchUi()) {
+            setCurrentCallMethod(da.getCurrentCallMethod());
+        } else {
+            updateCallCreditInfo();
+        }
     }
 
     @Override
@@ -353,7 +358,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
     }
 
     public void setCurrentCallMethod(CallMethodInfo cmi) {
-        if (!cmi.equals(mCurrentCallMethodInfo)) {
+        if (cmi != null && !cmi.equals(mCurrentCallMethodInfo)) {
             mCurrentCallMethodInfo = cmi;
             setupEmptyView();
             final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
