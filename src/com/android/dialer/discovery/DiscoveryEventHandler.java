@@ -64,17 +64,23 @@ public class DiscoveryEventHandler {
         Map nudgePlugins =
                 NudgeServices.NudgeApi.getAvailableNudgesForKey(client, key).await().components;
 
+        ArrayList<NotificationNudge> notificationNudges = new ArrayList<>();
+
+        if (nudgePlugins == null) {
+            return notificationNudges;
+        }
+
         InCallApi api = InCallServices.getInstance();
 
         List<ComponentName> plugins = api.getInstalledPlugins(client).await().components;
 
         HashMap<String, Bundle> availableNudges = new HashMap<>();
 
+
         for (Object entry : nudgePlugins.entrySet()) {
             Map.Entry<ComponentName, Bundle> theEntry = (Map.Entry<ComponentName, Bundle>) entry;
             availableNudges.put(theEntry.getKey().getPackageName(), theEntry.getValue());
         }
-        ArrayList<NotificationNudge> notificationNudges = new ArrayList<>();
 
         if (plugins != null && plugins.size() > 0) {
 
@@ -87,19 +93,9 @@ public class DiscoveryEventHandler {
 
                     Bundle b = availableNudges.get(component.getPackageName());
 
-                    if (key.equals(NudgeKey.NOTIFICATION_INTERNATIONAL_CALL)) {
-                        SharedPreferences preferences = context
-                                .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME,
-                                        Context.MODE_PRIVATE);
-                        int count = preferences.getInt(CallMethodUtils.PREF_INTERNATIONAL_CALLS, 0);
-                        boolean checkCount =
-                                count != b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_FIRST_NUDGE) ||
-                                count != b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_SECOND_NUDGE);
-
-                        if (checkCount) {
-                            // Nudge not yet ready for this item.
-                            continue;
-                        }
+                    if (validateShouldShowNudge(key, context, b)) {
+                        // Nudge not yet ready for this item.
+                        continue;
                     }
 
                     if (DEBUG_STATUS || (statusResult.status != PluginStatus.DISABLED &&
@@ -150,4 +146,29 @@ public class DiscoveryEventHandler {
         }
         return notificationNudges;
     }
+
+    private static boolean validateShouldShowNudge(String key, Context c, Bundle b) {
+
+        boolean checkCount = false;
+
+        SharedPreferences preferences = c.getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME,
+                        Context.MODE_PRIVATE);
+
+        int count = 0;
+
+        if (key.equals(NudgeKey.NOTIFICATION_INTERNATIONAL_CALL)) {
+            count = preferences.getInt(CallMethodUtils.PREF_INTERNATIONAL_CALLS, 0);
+        } else if (key.equals(NudgeKey.NOTIFICATION_WIFI_CALL)) {
+            count = preferences.getInt(CallMethodUtils.PREF_WIFI_CALL, 0);
+        }
+
+        checkCount =
+                count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_FIRST_NUDGE, 0) ||
+                count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_SECOND_NUDGE, 0);
+
+        // return true if nudge should be shown
+        return checkCount;
+
+    }
+
 }

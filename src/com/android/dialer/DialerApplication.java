@@ -21,6 +21,7 @@ import android.os.Trace;
 
 import com.android.contacts.common.extensions.ExtensionsFactory;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
+import com.android.dialer.discovery.WifiCallStatusNudgeListener;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.dialer.util.MetricsHelper;
 
@@ -46,6 +47,8 @@ public class DialerApplication extends Application {
 
         CallMethodHelper.init(this);
         MetricsHelper.init(this);
+        WifiCallStatusNudgeListener.init(this);
         Trace.endSection();
+
     }
 }
