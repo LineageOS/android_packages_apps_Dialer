@@ -747,6 +747,15 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         }
     }
 
+    /**
+     * Seek to position. This is called when user manually seek the playback. It could be either
+     * by touch or volume button while in talkback mode.
+     * @param position
+     */
+    public void seek(int position) {
+        mPosition = position;
+    }
+
     private void enableProximitySensor() {
         if (mProximityWakeLock == null || mIsSpeakerphoneOn || !mIsPrepared
                 || mMediaPlayer == null || !mMediaPlayer.isPlaying()) {
