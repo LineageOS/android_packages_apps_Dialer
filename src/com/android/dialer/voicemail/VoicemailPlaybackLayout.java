@@ -151,6 +151,11 @@ public class VoicemailPlaybackLayout extends LinearLayout
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             setClipPosition(progress, seekBar.getMax());
+            // Update the seek position if user manually changed it. This makes sure position gets
+            // updated when user use volume button to seek playback in talkback mode.
+            if (fromUser) {
+                mPresenter.seek(progress);
+            }
         }
     };
 
