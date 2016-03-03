@@ -27,11 +27,9 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,8 +64,6 @@ import com.android.dialerbind.ObjectFactory;
 import com.google.common.collect.Lists;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -625,13 +621,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public void updatePhoto() {
         quickContactView.assignContactUri(info.lookupUri);
 
-        if (isBlocked && !TextUtils.isEmpty(number) /* maybe a private number ? */) {
-            quickContactView.setImageDrawable(mContext.getDrawable(R.drawable.blocked_contact));
-            phoneCallDetailsViews.callLocationAndDate.setText(
-                    mContext.getString(R.string.blocked_number_call_log_label));
-            return;
-        }
-
         final boolean isVoicemail = mCallLogCache.isVoicemailNumber(accountHandle, number);
         int contactType = ContactPhotoManager.TYPE_DEFAULT;
         if (isVoicemail) {
@@ -652,6 +641,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             ContactPhotoManager.getInstance(mContext).loadThumbnail(quickContactView, info.photoId,
                     false /* darkTheme */, true /* isCircular */, request);
+        }
+
+        if (mExtendedBlockingButtonRenderer != null) {
+            mExtendedBlockingButtonRenderer.updatePhotoAndLabelIfNecessary(
+                    number,
+                    countryIso,
+                    quickContactView,
+                    phoneCallDetailsViews.callLocationAndDate);
         }
     }
 
