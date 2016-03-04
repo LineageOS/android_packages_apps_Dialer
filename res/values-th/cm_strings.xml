@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">สถานที่ใกล้เคียง</string>
   <string name="people">บุคคล</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">แผงค้นหา T9</string>
   <string name="t9_search_input_locale">ป้อนข้อมูลค้นหา T9</string>
   <string name="t9_search_input_locale_default">ค่าเริ่มต้น</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">ค้นหาหมายเลขโทรศัพท์</string>
   <string name="lookup_settings_description">ค้นหาหมายเลขโทรศัพท์ที่ไม่รู้จัก</string>
   <string name="enable_forward_lookup_title">ค้นหาการส่งต่อ</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">ผู้ให้บริการการค้นหาการส่งต่อ</string>
   <string name="people_lookup_provider_title">ผู้ให้บริการค้นหาบุคคล</string>
   <string name="reverse_lookup_provider_title">ผู้ให้บริการค้นหาย้อนกลับ</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn ภาษาจีน (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">สายจากบัญชีดำ</string>
   <string name="menu_add_to_blacklist">เพิ่มไปยังรายชื่อผู้โทรที่ถูกบล็อค</string>
   <string name="toast_added_to_blacklist">%s ถูกเพิ่มไปยังรายชื่อที่ถูกบล็อค</string>
   <string name="toast_removed_from_blacklist">%s ถูกนำออกจากรายชื่อที่ถูกบล็อค</string>
   <string name="call_log_action_block">บล็อคผู้โทร</string>
   <string name="call_log_action_unblock">รายชื่อที่ถูกบล็อค</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">ตั้งค่าการโทรแบบรวดเร็ว</string>
   <string name="speed_dial_not_set">(ไม่ได้กำหนด)</string>
   <string name="speed_dial_replace">แทน​ที่</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">ทุกซิม</string>
   <string name="call_log_all_calls_header">การใช้สายทั้งหมด</string>
   <string name="call_log_blacklist_header">บล็อคการโทรเท่านั้น</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">สถิติ</string>
   <string name="callStatsDetailTitle">รายละเอียดสถิติการโทร</string>
   <string name="call_stats_header_total">ทั้งหมด: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -76,4 +83,5 @@
   <string name="call_stats_reset_filter">รีเซ็ตขอบเขตเวลา</string>
   <string name="call_stats_sort_by_duration">เรียงตามระยะเวลาการโทร</string>
   <string name="call_stats_sort_by_count">เรียงตามจำนวนครั้งการโทร</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

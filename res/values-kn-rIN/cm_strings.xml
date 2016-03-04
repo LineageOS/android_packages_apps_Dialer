@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">ಸಮೀಪದ ಸ್ಥಳಗಳು</string>
   <string name="people">ವ್ಯಕ್ತಿ</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">ಡಯಲ್‍ಪ್ಯಾಡ್ ಟಿ9 ಶೋಧನೆ</string>
   <string name="t9_search_input_locale">ಟಿ9 ಶೋಧನೆ ಇನ್ಪುಟ್</string>
   <string name="t9_search_input_locale_default">ಡೀಫಾಲ್ಟ್</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">ಫೋನ್ ಸಂಖ್ಯೆ ಪರಿಶೋಧನೆ</string>
   <string name="lookup_settings_description">ಅಪರಿಚಿತ ದೂರವಾಣಿ ಸಂಖ್ಯೆಗಳ ಪರಿಶೋಧನೆ</string>
   <string name="enable_forward_lookup_title">ಫಾರ್ವರ್ಡ್ ಪರಿಶೋಧನೆ</string>
@@ -32,9 +35,12 @@
   <string name="forward_lookup_provider_title">ಫಾರ್ವರ್ಡ್ ಪರಿಶೋಧನೆ ಪೂರೈಕೆದಾರ</string>
   <string name="people_lookup_provider_title">ವ್ಯಕ್ತಿ ಪರಿಶೋಧನೆ ಪೂರೈಕೆದಾರ</string>
   <string name="reverse_lookup_provider_title">ರಿವರ್ಸ್ ಪರಿಶೋಧನೆ ಪೂರೈಕೆದಾರ</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="menu_add_to_blacklist">ನಿರ್ಬಂಧಿಸಿದ ಕರೆಮಾಡುವರ ಪಟ್ಟಿಗೆ ಸೇರಿಸಿ</string>
   <string name="toast_added_to_blacklist">%s ನಿರ್ಬಂಧಿಸಿದ ಕರೆ ಮಾಡುವವರ ಪಟ್ಟಿಗೆ ಸೇರಿಸಲಾಗಿದೆ.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">ವೇಗ ಡಯಲ್ ಸೆಟ್ಟಿಂಗ್ಸ್</string>
   <string name="speed_dial_not_set">(ಹೊಂದಿಸಿಲ್ಲ)</string>
   <string name="speed_dial_replace">ಬದಲಾಯಿಸಿ</string>
@@ -53,6 +59,7 @@
   <string name="call_log_show_all_slots">ಎಲ್ಲಾ ಸಿಮ್‍ಗಳು</string>
   <string name="call_log_all_calls_header">ಎಲ್ಲಾ ಕರೆಗಳು</string>
   <string name="call_log_blacklist_header">ನಿರ್ಬಂಧಿಸಿದ ಕರೆಗಳು ಮಾತ್ರ</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">ಅಂಕಿಅಂಶಗಳು</string>
   <string name="callStatsDetailTitle">ಕರೆ ಅಂಕಿಅಂಶ ವಿವರಗಳು</string>
   <string name="call_stats_header_total">ಒಟ್ಟು: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -72,4 +79,5 @@
   <string name="call_stats_reset_filter">ಸಮಯ ವ್ಯಾಪ್ತಿ ಮರುಹೊಂದಿಸಿ</string>
   <string name="call_stats_sort_by_duration">ಕರೆ ಕಾಲಾವಧಿಯಿಂದ ಶೋಧಿಸು</string>
   <string name="call_stats_sort_by_count">ಕರೆ ಎಣಿಕೆಯಿಂದ ಶೋಧಿಸು</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

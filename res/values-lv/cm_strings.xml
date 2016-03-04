@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Tuvākās vietas</string>
   <string name="people">Cilvēki</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Numuru tastatūras T9 meklēšana</string>
   <string name="t9_search_input_locale">T9 meklēšanas ievade</string>
   <string name="t9_search_input_locale_default">Noklusētais</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefona numura uzmeklēšana</string>
   <string name="lookup_settings_description">Nezināmu telefona numuru uzmeklēšana</string>
   <string name="enable_forward_lookup_title">Pārsūtīšanas uzmeklēšana</string>
@@ -32,7 +35,10 @@
   <string name="forward_lookup_provider_title">Tiešās uzmeklēšanas piegādātājs</string>
   <string name="people_lookup_provider_title">Cilvēku uzmeklēšanas piegādātājs</string>
   <string name="reverse_lookup_provider_title">Apvērstās uzmeklēšanas piegādātājs</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Ķīnas (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Ātrās zvanīšanas iestatījumi</string>
   <string name="speed_dial_not_set">(nav iestatīts)</string>
   <string name="speed_dial_replace">Aizstāt</string>
@@ -49,6 +55,7 @@
   <string name="incall_vibrate_45_summary">Zvana laikā vibrēt katras minūtes 45. sekundē</string>
   <string name="call_log_show_all_slots">Visas SIM kartes</string>
   <string name="call_log_all_calls_header">Visi zvani</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Zvanu statistikas detaļas</string>
   <string name="call_stats_header_total">Kopā: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -68,4 +75,5 @@
   <string name="call_stats_reset_filter">Atstatīt laika diapazonu</string>
   <string name="call_stats_sort_by_duration">Kārtot pēc zvana ilguma</string>
   <string name="call_stats_sort_by_count">Kārtot pēc zvanu skaita</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

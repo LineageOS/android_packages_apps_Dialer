@@ -16,8 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">নিকটবর্তী স্থান অনুসারে</string>
   <string name="people">জনসাধারণ</string>
+  <!-- dialpad t9 search -->
+  <!-- Number lookup -->
+  <!-- Chinese Reverse Lookup Provider -->
+  <!-- Description for incoming calls that were blacklisted -->
+  <!--  for speed dial -->
   <string name="speed_dial_settings">দ্রুত ডায়ালের রুপান্তর নির্ধারণ</string>
   <string name="speed_dial_not_set">(নির্ধারণ করা হয়নি)</string>
   <string name="speed_dial_replace">প্রতিস্থাপন</string>
@@ -27,6 +33,7 @@
   <string name="no">না</string>
   <string name="call_log_show_all_slots">সব সিম</string>
   <string name="call_log_all_calls_header">সকল কল</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">পরিসংখ্যান</string>
   <string name="callStatsDetailTitle">কল পরিসংখ্যান বিস্তারিত</string>
   <string name="call_stats_header_total">মোটঃ <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -46,4 +53,5 @@
   <string name="call_stats_reset_filter">সময় সীমা পুনর্বিন্যাস করুন</string>
   <string name="call_stats_sort_by_duration">কল স্থিতিকাল অনুসারে সজ্জিত</string>
   <string name="call_stats_sort_by_count">কল সংখ্যা অনুসারে সজ্জিত</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

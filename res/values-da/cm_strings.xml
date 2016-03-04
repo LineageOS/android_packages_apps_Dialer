@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Steder i nærheden</string>
   <string name="people">Mennesker</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">T9-søgning på tastatur</string>
   <string name="t9_search_input_locale">Søgeinput med T9</string>
   <string name="t9_search_input_locale_default">Standard</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefonnummeropslag</string>
   <string name="lookup_settings_description">Opslag af ukendte telefonnumre</string>
   <string name="enable_forward_lookup_title">Fremadrettet opslag</string>
@@ -32,10 +35,13 @@
   <string name="forward_lookup_provider_title">Fremadrettet opslagsudbyder</string>
   <string name="people_lookup_provider_title">Opslagsudbyder for personer</string>
   <string name="reverse_lookup_provider_title">Omvendt opslagsudbyder</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (KN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Sortlistet opkald</string>
   <string name="menu_add_to_blacklist">Tilføj til blokeret opkaldsliste</string>
   <string name="toast_added_to_blacklist">%s tilføjet til blokeret opkaldsliste.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Indstillinger for hurtigopkald</string>
   <string name="speed_dial_not_set">(ikke angivet)</string>
   <string name="speed_dial_replace">Erstat</string>
@@ -54,6 +60,7 @@
   <string name="call_log_show_all_slots">Alle SIM-kort</string>
   <string name="call_log_all_calls_header">Alle opkald</string>
   <string name="call_log_blacklist_header">Kun blokeret opkald</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer om opkaldsstatistik</string>
   <string name="call_stats_incoming">Indgående: <xliff:g id="value">%s</xliff:g></string>
@@ -83,4 +90,5 @@
   <string name="call_stats_title_durations">Varighed af opkald</string>
   <string name="call_stats_title_count">Antal af opkald</string>
   <string name="call_stats_title_average_duration">Gennemsnitlig opkaldsvarighed</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

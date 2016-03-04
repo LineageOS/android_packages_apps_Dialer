@@ -16,8 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">අවට ස්ථාන</string>
   <string name="people">ප්‍රජාව</string>
+  <!-- dialpad t9 search -->
+  <!-- Number lookup -->
+  <!-- Chinese Reverse Lookup Provider -->
+  <!-- Description for incoming calls that were blacklisted -->
+  <!--  for speed dial -->
   <string name="speed_dial_settings">ඉක්මන් ඩයල් කිරීමේ සැකසීම්</string>
   <string name="speed_dial_not_set">(සකසා නැත)</string>
   <string name="speed_dial_replace">ප්‍රතිස්ථාපනය</string>
@@ -27,6 +33,7 @@
   <string name="no">නැහැ</string>
   <string name="call_log_show_all_slots">සියලුම් සිම්</string>
   <string name="call_log_all_calls_header">සියලුම ඇමතුම්</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">සංඛ්‍යාති</string>
   <string name="callStatsDetailTitle">ඇමතුම් තත්ව තොරතුරු</string>
   <string name="call_stats_header_total">එකතුව: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -46,4 +53,5 @@
   <string name="call_stats_reset_filter">කාල පරාසය ප්‍රත්‍යාරම්භ කරන්න</string>
   <string name="call_stats_sort_by_duration">ඇමතුම් කාලමාත්‍රාව අනුව සුබෙදන්න</string>
   <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

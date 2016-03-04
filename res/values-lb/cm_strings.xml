@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">No Plazen</string>
   <string name="people">Persounen</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">T9-Sich</string>
   <string name="t9_search_input_locale">T9-Sichagab</string>
   <string name="t9_search_input_locale_default">Standard</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Sich no Telefonsnummeren</string>
   <string name="lookup_settings_description">Onbekannt Telefonsnummeren nosichen</string>
   <string name="enable_forward_lookup_title">Direktsich</string>
@@ -32,9 +35,12 @@
   <string name="forward_lookup_provider_title">Service fir d\'direkt Sich</string>
   <string name="people_lookup_provider_title">Service fir d\'Persounesich</string>
   <string name="reverse_lookup_provider_title">Service fir d\'ëmgedréint Sich</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn-Chinesesch (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="menu_add_to_blacklist">Op d\'Lëscht mat de blockéierten Nummere setzen</string>
   <string name="toast_added_to_blacklist">%s op d\'Lëscht mat de blockéierten Nummere dobäigesat.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Astellunge fir d\'séiert Wielen</string>
   <string name="speed_dial_not_set">(net gesat)</string>
   <string name="speed_dial_replace">Ersetzen</string>
@@ -53,6 +59,7 @@
   <string name="call_log_show_all_slots">All SIMen</string>
   <string name="call_log_all_calls_header">All Uriff</string>
   <string name="call_log_blacklist_header">Just blockéiert Uriff</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statistiken</string>
   <string name="callStatsDetailTitle">Detailer vun den Uruffstatistiken</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -72,4 +79,5 @@
   <string name="call_stats_reset_filter">Zäitfënster zrécksetzen</string>
   <string name="call_stats_sort_by_duration">No Gespréichsdauer zortéieren</string>
   <string name="call_stats_sort_by_count">No Unzuel vun Uriff zortéieren</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>
