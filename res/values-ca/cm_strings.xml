@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Llocs propers</string>
   <string name="people">Persones</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Cerca en teclat T9</string>
   <string name="t9_search_input_locale">Entrada de cerca T9</string>
   <string name="t9_search_input_locale_default">Predeterminat</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Cerca de número de telèfon</string>
   <string name="lookup_settings_description">Cerca de números de telèfon desconeguts</string>
   <string name="enable_forward_lookup_title">Cerca directa</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">Proveïdor de cerca directa</string>
   <string name="people_lookup_provider_title">Proveïdor de cerca de persones</string>
   <string name="reverse_lookup_provider_title">Proveïdor de cerca inversa</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Xinès Cyngn (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Trucada a la llista negra</string>
   <string name="menu_add_to_blacklist">Afegeix a la llista de números bloquejats</string>
   <string name="toast_added_to_blacklist">%s afegit a la llista de números bloquejats.</string>
   <string name="toast_removed_from_blacklist">%s esborrat de la llista de trucades bloquejades.</string>
   <string name="call_log_action_block">Bloqueja la trucada</string>
   <string name="call_log_action_unblock">Trucada bloquejada</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Ajustaments de trucada ràpida</string>
   <string name="speed_dial_not_set">(no configurat)</string>
   <string name="speed_dial_replace">Substitueix</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">Totes les SIMs</string>
   <string name="call_log_all_calls_header">Totes les trucades</string>
   <string name="call_log_blacklist_header">Només números bloquejats</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Estadístiques</string>
   <string name="callStatsDetailTitle">Detalls de les trucades</string>
   <string name="call_stats_incoming">Entrant: <xliff:g id="value">%s</xliff:g></string>
@@ -86,6 +93,7 @@
   <string name="call_stats_title_durations">Durada de la trucada</string>
   <string name="call_stats_title_count">Comptador de trucades</string>
   <string name="call_stats_title_average_duration">Durada mitjana de les trucades</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">El teu registre de trucades no conté cap trucada en l\'interval de temps seleccionat.</string>
   <string name="call_recording_category_title">Enregistrament de trucades</string>
   <string name="call_recording_format">Format d\'àudio</string>

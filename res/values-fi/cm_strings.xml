@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Lähellä olevat sijainnit</string>
   <string name="people">Ihmiset</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Numeronäppäimistön T9-haku</string>
   <string name="t9_search_input_locale">T9-haun syöttötapa</string>
   <string name="t9_search_input_locale_default">Oletus</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Puhelinnumeron haku</string>
   <string name="lookup_settings_description">Etsi tuntemattomasta numerosta soittavia</string>
   <string name="enable_forward_lookup_title">Paikkahaku</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">Paikkahauntarjoaja</string>
   <string name="people_lookup_provider_title">Henkilön haun tarjoaja</string>
   <string name="reverse_lookup_provider_title">Käänteisen haun tarjoaja</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Estetty puhelu</string>
   <string name="menu_add_to_blacklist">Lisää estettyjen soittajien listaan</string>
   <string name="toast_added_to_blacklist">%s lisätty estettyjen soittajien listaan.</string>
   <string name="toast_removed_from_blacklist">%s poistettu estettyjen soittajien listalta.</string>
   <string name="call_log_action_block">Estä soittaja</string>
   <string name="call_log_action_unblock">Soittaja estetty</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Pikavalinta-asetukset</string>
   <string name="speed_dial_not_set">(ei määritetty)</string>
   <string name="speed_dial_replace">Korvaa</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">Kaikki SIMit</string>
   <string name="call_log_all_calls_header">Kaikki puhelut</string>
   <string name="call_log_blacklist_header">Vain estetyt soittajat</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Tilastot</string>
   <string name="callStatsDetailTitle">Puheluiden lisätiedot</string>
   <string name="call_stats_incoming">Saapuvat: <xliff:g id="value">%s</xliff:g></string>
@@ -86,6 +93,7 @@
   <string name="call_stats_title_durations">Puheluiden kestot</string>
   <string name="call_stats_title_count">Puheluiden määrä</string>
   <string name="call_stats_title_average_duration">Puhelun keskimääräinen kesto</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Puhelulokissasi ei ole puheluita valitulta ajanjaksolta.</string>
   <string name="call_recording_category_title">Puhelun äänitys</string>
   <string name="call_recording_format">Audion muoto</string>

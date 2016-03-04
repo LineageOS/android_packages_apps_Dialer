@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">ئەتراپتىكى ئورۇنلار</string>
   <string name="people">كىشى</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">نومۇر تاختا T9 ئىزدەش</string>
   <string name="t9_search_input_locale">T9 ئىزدەش كىرگۈزۈش</string>
   <string name="t9_search_input_locale_default">كۆڭۈلدىكى</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">تېلېفون نومۇر ئىزدەش</string>
   <string name="lookup_settings_description">يوچۇن تېلېفون نومۇرىنى ئىزدەش</string>
   <string name="enable_forward_lookup_title">ئوڭ ئىزدەش</string>
@@ -32,7 +35,10 @@
   <string name="forward_lookup_provider_title">ئوڭ ئىزدەش تەمىنلىگۈچى</string>
   <string name="people_lookup_provider_title">كىشى ئىزەش تەمىنلىگۈچى</string>
   <string name="reverse_lookup_provider_title">تەتۈر ئىزدەش تەمىنلىگۈچى</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn خەنچە (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
+  <!--  for speed dial -->
   <string name="speed_dial_settings">تېز نومۇر بۇراش تەڭشەكلىرى</string>
   <string name="speed_dial_not_set">(تەڭشەلمىگەن)</string>
   <string name="speed_dial_replace">ئالماشتۇر</string>
@@ -49,6 +55,7 @@
   <string name="incall_vibrate_45_summary">سىرتتىكى نومۇرنى چاقىرغاندا ھەر 45 سېكۇنتتا بىر تىترىتىدۇ</string>
   <string name="call_log_show_all_slots">ھەممە SIM كارتا</string>
   <string name="call_log_all_calls_header">ھەممە چاقىرىشلار</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">سىتاتىستىكا</string>
   <string name="callStatsDetailTitle">چاقىرىش تەپسىلاتى</string>
   <string name="call_stats_header_total">جەمئى: <xliff:g id="call_count">%s</xliff:g>، <xliff:g id="duration">%s</xliff:g></string>
@@ -68,4 +75,5 @@
   <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
   <string name="call_stats_sort_by_duration">داۋاملىشىش ۋاقتى بويىچە</string>
   <string name="call_stats_sort_by_count">سۆزلىشىش قېتىمى بويىچە</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

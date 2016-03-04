@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">الأماكن القريبة</string>
   <string name="people">الناس</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">بحث لوحة الطلب T9</string>
   <string name="t9_search_input_locale">إدخال بحث T9</string>
   <string name="t9_search_input_locale_default">افتراضي</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">البحث عن رقم الهاتف</string>
   <string name="lookup_settings_description">البحث عن أرقام الهاتف غير المعروفة</string>
   <string name="enable_forward_lookup_title">بحث إلى الأمام</string>
@@ -32,9 +35,12 @@
   <string name="forward_lookup_provider_title">موفر البحث إلى الأمام</string>
   <string name="people_lookup_provider_title">موفر بحث عن أشخاص</string>
   <string name="reverse_lookup_provider_title">موفر البحث العكسي</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn الصينية (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="menu_add_to_blacklist">إضافة إلى قائمة المتصلين المحظورين</string>
   <string name="toast_added_to_blacklist">إضافة %s إلى قائمة المتصلين المحظورين</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">إعدادات الاتصال السريع</string>
   <string name="speed_dial_not_set">(لم يتم تعيين)</string>
   <string name="speed_dial_replace">استبدال</string>
@@ -53,6 +59,7 @@
   <string name="call_log_show_all_slots">جميع شرائح SIM</string>
   <string name="call_log_all_calls_header">جميع المكالمات</string>
   <string name="call_log_blacklist_header">المكالمات المحظورة فقط</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">الإحصائيات</string>
   <string name="callStatsDetailTitle">تفاصيل إحصائيات المكالمة</string>
   <string name="call_stats_header_total">المجموع: <xliff:g id="call_count">%s</xliff:g><xliff:g id="duration">%s</xliff:g></string>
@@ -72,4 +79,5 @@
   <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
   <string name="call_stats_sort_by_duration">فرز بحسب مدة المكالمة</string>
   <string name="call_stats_sort_by_count">فرز بحسب عدد المكالمات</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

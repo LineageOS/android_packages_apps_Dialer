@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Közeli helyek</string>
   <string name="people">Emberek</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Tárcsázó T9 keresés</string>
   <string name="t9_search_input_locale">T9 keresés bevitel</string>
   <string name="t9_search_input_locale_default">Alapértelmezett</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefonszám keresés</string>
   <string name="lookup_settings_description">Keresés ismeretlen telefonszámok esetén</string>
   <string name="enable_forward_lookup_title">Címkeresés</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">Címkeresési szolgáltató</string>
   <string name="people_lookup_provider_title">Személy keresési szolgáltató</string>
   <string name="reverse_lookup_provider_title">Névkeresési szolgáltató</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kínai (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Tiltólistára tett hívás</string>
   <string name="menu_add_to_blacklist">Hozzáadás a blokkolt hívók listájához</string>
   <string name="toast_added_to_blacklist">%s hozzáadva a blokkolt hívók listájához.</string>
   <string name="toast_removed_from_blacklist">%s eltávolítva a blokkolt hívók listájáról.</string>
   <string name="call_log_action_block">Hívó blokkolása</string>
   <string name="call_log_action_unblock">Hívó blokkolva</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Gyorstárcsázó beállítások</string>
   <string name="speed_dial_not_set">(nincs beállítva)</string>
   <string name="speed_dial_replace">Cserél</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">Minden SIM</string>
   <string name="call_log_all_calls_header">Minden hívás</string>
   <string name="call_log_blacklist_header">Csak blokkolt hívások</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statisztikák</string>
   <string name="callStatsDetailTitle">Részletek</string>
   <string name="call_stats_incoming">Bejövő: <xliff:g id="value">%s</xliff:g></string>
@@ -86,6 +93,7 @@
   <string name="call_stats_title_durations">Hívás időtartama</string>
   <string name="call_stats_title_count">Hívásszám</string>
   <string name="call_stats_title_average_duration">Átlagos hívásidőtartam</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Hívásnapló nem tartalmaz hívásokat a kiválasztott időtartományban.</string>
   <string name="call_recording_category_title">Hívásrögzítés</string>
   <string name="call_recording_format">Hangformátum</string>

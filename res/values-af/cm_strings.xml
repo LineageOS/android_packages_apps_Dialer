@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Nabygeleë plekke</string>
   <string name="people">Mense</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Nommerbord T9 soek</string>
   <string name="t9_search_input_locale">T9 soektog</string>
   <string name="t9_search_input_locale_default">Standaard</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Soek Telefoonnommer</string>
   <string name="lookup_settings_description">Soek onbekende telefoonnommers</string>
   <string name="enable_forward_lookup_title">Vorentoe soek</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">Verskaffer van vorentoe soektog</string>
   <string name="people_lookup_provider_title">Verskaffer van mense soektog</string>
   <string name="reverse_lookup_provider_title">Verskaffer van omgekeerde soektog</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Sjinees (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Swartgelysde oproep</string>
   <string name="menu_add_to_blacklist">Voeg by blokkeer lys</string>
   <string name="toast_added_to_blacklist">%s bygevoeg tot blokkeer oproep lys.</string>
   <string name="toast_removed_from_blacklist">%s is verwyder van geblokkeerde oproep lys.</string>
   <string name="call_log_action_block">Blok oproeper</string>
   <string name="call_log_action_unblock">Oproeper is geblokkeer</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Snel keuse instellings</string>
   <string name="speed_dial_not_set">(nie gestel)</string>
   <string name="speed_dial_replace">Vervang</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">Alle SIMs</string>
   <string name="call_log_all_calls_header">Alle oproepe</string>
   <string name="call_log_blacklist_header">Alleenlik geblokkeerde oproepe</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statistieke</string>
   <string name="callStatsDetailTitle">Oproep stat besonderhede</string>
   <string name="call_stats_incoming">Inkomend: <xliff:g id="value">%s</xliff:g></string>
@@ -86,6 +93,7 @@
   <string name="call_stats_title_durations">Oproep tydsduur</string>
   <string name="call_stats_title_count">Aantal oproepe</string>
   <string name="call_stats_title_average_duration">Gemiddelde oproep tydsduur</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Jou oproep lys het nie enige oproepe in die geselekteerde tydsduur nie.</string>
   <string name="call_recording_category_title">Oproep opneming</string>
   <string name="call_recording_format">Oudio formaat</string>

@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Posti nelle vicinanze</string>
   <string name="people">Persone</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Ricerca T9 tastierino</string>
   <string name="t9_search_input_locale">Input ricerca T9</string>
   <string name="t9_search_input_locale_default">Predefinito</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Ricerca numeri telefonici</string>
   <string name="lookup_settings_description">Ricerca numeri di telefono sconosciuti</string>
   <string name="enable_forward_lookup_title">Ricerca diretta</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">Provider di ricerca diretta</string>
   <string name="people_lookup_provider_title">Provider di ricerca persone</string>
   <string name="reverse_lookup_provider_title">Provider di ricerca inverso</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Cinese (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Chiamate bloccate</string>
   <string name="menu_add_to_blacklist">Aggiungi all\'elenco bloccati</string>
   <string name="toast_added_to_blacklist">%s aggiunto alla lista bloccati.</string>
   <string name="toast_removed_from_blacklist">%s rimosso dalla lista delle chiamanti bloccati.</string>
   <string name="call_log_action_block">Chiamante bloccato</string>
   <string name="call_log_action_unblock">Chiamante bloccato</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Impostazioni composizione rapida</string>
   <string name="speed_dial_not_set">(non impostato)</string>
   <string name="speed_dial_replace">Sostituisci</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">Tutte le SIM</string>
   <string name="call_log_all_calls_header">Tutte le chiamate</string>
   <string name="call_log_blacklist_header">Solo chiamate bloccate</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statistiche</string>
   <string name="callStatsDetailTitle">Dettagli chiamate</string>
   <string name="call_stats_incoming">In entrata <xliff:g id="value">%s</xliff:g></string>
@@ -86,6 +93,7 @@
   <string name="call_stats_title_durations">Durata chiamate</string>
   <string name="call_stats_title_count">Conteggio chiamate</string>
   <string name="call_stats_title_average_duration">Durata media chiamata</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Il registro chiamate non contiene nessuna chiamata nel periodo di tempo selezionato.</string>
   <string name="call_recording_category_title">Registrazione chiamata</string>
   <string name="call_recording_format">Formato audio</string>
