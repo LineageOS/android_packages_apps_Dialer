@@ -158,6 +158,11 @@
             android:exported="false">
         </activity>
 
+        <activity android:name="com.android.dialer.voicemail.VoicemailArchiveActivity"
+            android:label="@string/voicemail_archive_activity_title"
+            android:theme="@style/DialtactsThemeWithoutActionBarOverlay">
+        </activity>
+
         <activity android:name="com.android.dialer.calllog.CallLogActivity"
             android:label="@string/call_log_activity_title"
             android:theme="@style/DialtactsThemeWithoutActionBarOverlay"

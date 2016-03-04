@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
@@ -413,16 +415,16 @@ public class CallLogAsyncTaskUtil {
     }
 
     /**
-     * Updates the duration of a voicemail call log entry.
+     * Updates the duration of a voicemail call log entry if the duration given is greater than 0,
+     * and if if the duration currently in the database is less than or equal to 0 (non-existent).
      */
     public static void updateVoicemailDuration(
             final Context context,
             final Uri voicemailUri,
-            final int duration) {
-        if (!PermissionsUtil.hasPhonePermissions(context)) {
+            final long duration) {
+        if (duration <= 0 || !PermissionsUtil.hasPhonePermissions(context)) {
             return;
         }
-
         if (sAsyncTaskExecutor == null) {
             initTaskExecutor();
         }
@@ -430,9 +432,18 @@ public class CallLogAsyncTaskUtil {
         sAsyncTaskExecutor.submit(Tasks.UPDATE_DURATION, new AsyncTask<Void, Void, Void>() {
             @Override
             public Void doInBackground(Void... params) {
-                ContentValues values = new ContentValues(1);
-                values.put(CallLog.Calls.DURATION, duration);
-                context.getContentResolver().update(voicemailUri, values, null, null);
+                ContentResolver contentResolver = context.getContentResolver();
+                Cursor cursor = contentResolver.query(
+                        voicemailUri,
+                        new String[] { VoicemailArchiveContract.VoicemailArchive.DURATION },
+                        null, null, null);
+                if (cursor != null && cursor.moveToFirst() && cursor.getInt(
+                        cursor.getColumnIndex(
+                                VoicemailArchiveContract.VoicemailArchive.DURATION)) <= 0) {
+                    ContentValues values = new ContentValues(1);
+                    values.put(CallLog.Calls.DURATION, duration);
+                    context.getContentResolver().update(voicemailUri, values, null, null);
+                }
                 return null;
             }
         });

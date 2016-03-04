@@ -16,40 +16,44 @@
 
 package com.android.dialer.voicemail;
 
-import android.app.Activity;
-import android.app.Fragment;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Bundle;
+import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.PowerManager;
-import android.provider.VoicemailContract;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.common.io.MoreCloseables;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 
+import com.android.dialer.database.VoicemailArchiveContract;
+import com.android.dialer.database.VoicemailArchiveContract.VoicemailArchive;
+import com.android.dialer.util.AsyncTaskExecutor;
+import com.android.dialer.util.AsyncTaskExecutors;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Preconditions;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledExecutorService;
 
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
@@ -67,6 +71,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
         CallLogAsyncTaskUtil.CallLogAsyncTaskListener {
     private static final String TAG = VoicemailPlaybackLayout.class.getSimpleName();
     private static final int VOICEMAIL_DELETE_DELAY_MS = 3000;
+    private static final int VOICEMAIL_ARCHIVE_DELAY_MS = 3000;
+
+    /** The enumeration of {@link AsyncTask} objects we use in this class. */
+    public enum Tasks {
+        QUERY_ARCHIVED_STATUS
+    }
 
     /**
      * Controls the animation of the playback slider.
@@ -202,7 +212,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
             final Runnable deleteCallback = new Runnable() {
                 @Override
                 public void run() {
-                    if (mVoicemailUri == deleteUri) {
+                    if (Objects.equals(deleteUri, mVoicemailUri)) {
                         CallLogAsyncTaskUtil.deleteVoicemail(mContext, deleteUri,
                                 VoicemailPlaybackLayout.this);
                     }
@@ -214,8 +224,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
             // window.
             handler.postDelayed(deleteCallback, VOICEMAIL_DELETE_DELAY_MS + 50);
 
-            final int actionTextColor =
-                    mContext.getResources().getColor(R.color.dialer_snackbar_action_text_color);
             Snackbar.make(VoicemailPlaybackLayout.this, R.string.snackbar_voicemail_deleted,
                             Snackbar.LENGTH_LONG)
                     .setDuration(VOICEMAIL_DELETE_DELAY_MS)
@@ -227,21 +235,44 @@ public class VoicemailPlaybackLayout extends LinearLayout
                                         handler.removeCallbacks(deleteCallback);
                                 }
                             })
-                    .setActionTextColor(actionTextColor)
+                    .setActionTextColor(
+                            mContext.getResources().getColor(
+                                    R.color.dialer_snackbar_action_text_color))
                     .show();
+        }
+    };
+
+    private final View.OnClickListener mArchiveButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mPresenter == null || isArchiving(mVoicemailUri)) {
+                return;
+            }
+            mIsArchiving.add(mVoicemailUri);
+            mPresenter.pausePlayback();
+            updateArchiveUI(mVoicemailUri);
+            disableUiElements();
+            mPresenter.archiveContent(mVoicemailUri, true);
         }
     };
 
     private Context mContext;
     private VoicemailPlaybackPresenter mPresenter;
     private Uri mVoicemailUri;
-
+    private final AsyncTaskExecutor mAsyncTaskExecutor =
+            AsyncTaskExecutors.createAsyncTaskExecutor();
     private boolean mIsPlaying = false;
+    /**
+     * Keeps track of which voicemails are currently being archived in order to update the voicemail
+     * card UI every time a user opens a new card.
+     */
+    private static final ArrayList<Uri> mIsArchiving = new ArrayList<>();
 
     private SeekBar mPlaybackSeek;
     private ImageButton mStartStopButton;
     private ImageButton mPlaybackSpeakerphone;
     private ImageButton mDeleteButton;
+    private ImageButton mArchiveButton;
     private TextView mStateText;
     private TextView mPositionText;
     private TextView mTotalDurationText;
@@ -256,7 +287,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
     public VoicemailPlaybackLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         mContext = context;
         LayoutInflater inflater =
                 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -267,6 +297,8 @@ public class VoicemailPlaybackLayout extends LinearLayout
     public void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri) {
         mPresenter = presenter;
         mVoicemailUri = voicemailUri;
+        updateArchiveUI(mVoicemailUri);
+        updateArchiveButton(mVoicemailUri);
     }
 
     @Override
@@ -277,6 +309,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mStartStopButton = (ImageButton) findViewById(R.id.playback_start_stop);
         mPlaybackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
         mDeleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
+        mArchiveButton =(ImageButton) findViewById(R.id.archive_voicemail);
         mStateText = (TextView) findViewById(R.id.playback_state_text);
         mPositionText = (TextView) findViewById(R.id.playback_position_text);
         mTotalDurationText = (TextView) findViewById(R.id.total_duration_text);
@@ -285,6 +318,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mStartStopButton.setOnClickListener(mStartStopButtonListener);
         mPlaybackSpeakerphone.setOnClickListener(mSpeakerphoneListener);
         mDeleteButton.setOnClickListener(mDeleteButtonListener);
+        mArchiveButton.setOnClickListener(mArchiveButtonListener);
 
         mPositionText.setText(formatAsMinutesAndSeconds(0));
         mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
@@ -358,7 +392,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
         mPositionText.setText(formatAsMinutesAndSeconds(seekBarPositionMs));
         mTotalDurationText.setText(formatAsMinutesAndSeconds(durationMs));
-        mStateText.setText(null);
     }
 
     @Override
@@ -386,6 +419,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
 
     @Override
     public void enableUiElements() {
+        mDeleteButton.setEnabled(true);
         mStartStopButton.setEnabled(true);
         mPlaybackSeek.setEnabled(true);
         mPlaybackSeek.setThumb(mVoicemailSeekHandleEnabled);
@@ -427,6 +461,134 @@ public class VoicemailPlaybackLayout extends LinearLayout
             minutes = 99;
         }
         return String.format("%02d:%02d", minutes, seconds);
+    }
+
+    /**
+     * Called when a voicemail archive succeeded. If the expanded voicemail was being
+     * archived, update the card UI. Either way, display a snackbar linking user to archive.
+     */
+    @Override
+    public void onVoicemailArchiveSucceded(Uri voicemailUri) {
+        if (isArchiving(voicemailUri)) {
+            mIsArchiving.remove(voicemailUri);
+            if (Objects.equals(voicemailUri, mVoicemailUri)) {
+                onVoicemailArchiveResult();
+                hideArchiveButton();
+            }
+        }
+
+        Snackbar.make(this, R.string.snackbar_voicemail_archived,
+                Snackbar.LENGTH_LONG)
+                .setDuration(VOICEMAIL_ARCHIVE_DELAY_MS)
+                .setAction(R.string.snackbar_voicemail_archived_goto,
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(mContext,
+                                        VoicemailArchiveActivity.class);
+                                mContext.startActivity(intent);
+                            }
+                        })
+                .setActionTextColor(
+                        mContext.getResources().getColor(R.color.dialer_snackbar_action_text_color))
+                .show();
+    }
+
+    /**
+     * If a voicemail archive failed, and the expanded card was being archived, update the card UI.
+     * Either way, display a toast saying the voicemail archive failed.
+     */
+    @Override
+    public void onVoicemailArchiveFailed(Uri voicemailUri) {
+        if (isArchiving(voicemailUri)) {
+            mIsArchiving.remove(voicemailUri);
+            if (Objects.equals(voicemailUri, mVoicemailUri)) {
+                onVoicemailArchiveResult();
+            }
+        }
+        String toastStr = mContext.getString(R.string.voicemail_archive_failed);
+        Toast.makeText(mContext, toastStr, Toast.LENGTH_SHORT).show();
+    }
+
+    public void hideArchiveButton() {
+        mArchiveButton.setVisibility(View.GONE);
+        mArchiveButton.setClickable(false);
+        mArchiveButton.setEnabled(false);
+    }
+
+    /**
+     * Whenever a voicemail archive succeeds or fails, clear the text displayed in the voicemail
+     * card.
+     */
+    private void onVoicemailArchiveResult() {
+        enableUiElements();
+        mStateText.setText(null);
+        mArchiveButton.setColorFilter(null);
+    }
+
+    /**
+     * Whether or not the voicemail with the given uri is being archived.
+     */
+    private boolean isArchiving(@Nullable Uri uri) {
+        return uri != null && mIsArchiving.contains(uri);
+    }
+
+    /**
+     * Show the proper text and hide the archive button if the voicemail is still being archived.
+     */
+    private void updateArchiveUI(@Nullable Uri voicemailUri) {
+        if (!Objects.equals(voicemailUri, mVoicemailUri)) {
+            return;
+        }
+        if (isArchiving(voicemailUri)) {
+            // If expanded card was in the middle of archiving, disable buttons and display message
+            disableUiElements();
+            mDeleteButton.setEnabled(false);
+            mArchiveButton.setColorFilter(getResources().getColor(R.color.setting_disabled_color));
+            mStateText.setText(getString(R.string.voicemail_archiving_content));
+        } else {
+            onVoicemailArchiveResult();
+        }
+    }
+
+    /**
+     * Hides the archive button if the voicemail has already been archived, shows otherwise.
+     * @param voicemailUri the URI of the voicemail for which the archive button needs to be updated
+     */
+    private void updateArchiveButton(@Nullable final Uri voicemailUri) {
+        if (voicemailUri == null ||
+                !Objects.equals(voicemailUri, mVoicemailUri) || isArchiving(voicemailUri) ||
+                Objects.equals(voicemailUri.getAuthority(),VoicemailArchiveContract.AUTHORITY)) {
+            return;
+        }
+        mAsyncTaskExecutor.submit(Tasks.QUERY_ARCHIVED_STATUS,
+                new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            public Boolean doInBackground(Void... params) {
+                Cursor cursor = mContext.getContentResolver().query(VoicemailArchive.CONTENT_URI,
+                        null, VoicemailArchive.SERVER_ID + "=" + ContentUris.parseId(mVoicemailUri)
+                        + " AND " + VoicemailArchive.ARCHIVED + "= 1", null, null);
+                boolean archived = cursor != null && cursor.getCount() > 0;
+                cursor.close();
+                return archived;
+            }
+
+            @Override
+            public void onPostExecute(Boolean archived) {
+                if (!Objects.equals(voicemailUri, mVoicemailUri)) {
+                    return;
+                }
+
+                if (archived) {
+                    hideArchiveButton();
+                } else {
+                    mArchiveButton.setVisibility(View.VISIBLE);
+                    mArchiveButton.setClickable(true);
+                    mArchiveButton.setEnabled(true);
+                }
+
+            }
+        });
     }
 
     @VisibleForTesting
