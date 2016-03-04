@@ -38,6 +38,7 @@ import android.util.Log;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.voicemail.VoicemailStatusHelperImpl;
@@ -64,6 +65,8 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     private static final int QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN = 58;
     /** The token for the query to fetch the number of missed calls. */
     private static final int QUERY_MISSED_CALLS_UNREAD_COUNT_TOKEN = 59;
+    /** The oken for the query to fetch the archived voicemails. */
+    private static final int QUERY_VOICEMAIL_ARCHIVE = 60;
 
     private final int mLogLimit;
 
@@ -125,6 +128,17 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         mListener = new WeakReference<Listener>(listener);
         mLogLimit = limit;
     }
+
+    /**
+     * Fetch all the voicemails in the voicemail archive.
+     */
+    public void fetchVoicemailArchive() {
+        startQuery(QUERY_VOICEMAIL_ARCHIVE, null,
+                VoicemailArchiveContract.VoicemailArchive.CONTENT_URI,
+                null, VoicemailArchiveContract.VoicemailArchive.ARCHIVED + " = 1", null,
+                VoicemailArchiveContract.VoicemailArchive.DATE + " DESC");
+    }
+
 
     /**
      * Fetches the list of calls from the call log for a given type.
@@ -253,7 +267,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
             return;
         }
         try {
-            if (token == QUERY_CALLLOG_TOKEN) {
+            if (token == QUERY_CALLLOG_TOKEN || token == QUERY_VOICEMAIL_ARCHIVE) {
                 if (updateAdapterData(cursor)) {
                     cursor = null;
                 }

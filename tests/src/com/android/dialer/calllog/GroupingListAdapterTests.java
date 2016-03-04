@@ -70,6 +70,11 @@ public class GroupingListAdapterTests extends AndroidTestCase {
         }
 
         @Override
+        protected void addVoicemailGroups(Cursor c) {
+            // Do nothing.
+        }
+
+        @Override
         public void onContentChanged() {
             // Do nothing.
         }

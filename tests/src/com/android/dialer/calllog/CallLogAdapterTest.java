@@ -31,6 +31,7 @@ import android.view.View;
 
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.contactinfo.ContactInfoCache;
+import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TestConstants;
 import com.google.common.collect.Lists;
@@ -49,6 +50,7 @@ import java.util.Random;
 public class CallLogAdapterTest extends AndroidTestCase {
     private static final String EMPTY_STRING = "";
     private static final int NO_VALUE_SET = -1;
+    private static final int ARCHIVE_TYPE = -2;
 
     private static final String TEST_CACHED_NAME_PRIMARY = "Cached Name";
     private static final String TEST_CACHED_NAME_ALTERNATIVE = "Name Cached";
@@ -74,12 +76,11 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     private View mView;
     private CallLogListItemViewHolder mViewHolder;
-    private Random mRandom;
+    private final Random mRandom = new Random();
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        mRandom = new Random();
 
         // Use a call fetcher that does not do anything.
         CallLogAdapter.CallFetcher fakeCallFetcher = new CallLogAdapter.CallFetcher() {
@@ -98,7 +99,8 @@ public class CallLogAdapterTest extends AndroidTestCase {
                     }
                 };
 
-        mAdapter = new TestCallLogAdapter(getContext(), fakeCallFetcher, fakeContactInfoHelper);
+        mAdapter = new TestCallLogAdapter(getContext(), fakeCallFetcher, fakeContactInfoHelper,
+                CallLogAdapter.ACTIVITY_TYPE_DIALTACTS);
 
         // The cursor used in the tests to store the entries to display.
         mCursor = new MatrixCursor(CallLogQuery._PROJECTION);
@@ -106,13 +108,6 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         // The views into which to store the data.
         mViewHolder = CallLogListItemViewHolder.createForTest(getContext());
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        mAdapter = null;
-        mCursor = null;
-        super.tearDown();
     }
 
     @MediumTest
@@ -547,6 +542,19 @@ public class CallLogAdapterTest extends AndroidTestCase {
         assertEquals(TEST_NUMBER_3, mViewHolder.number);
     }
 
+    public void testVoicemailArchive() {
+        setUpArchiveAdapter();
+        createVoicemailArchiveCallLogEntry();
+
+        mAdapter.changeCursorVoicemail(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        assertEquals(Uri.parse(mViewHolder.voicemailUri),
+                ContentUris.withAppendedId(
+                        VoicemailArchiveContract.VoicemailArchive.CONTENT_URI, 0));
+        assertNull(mViewHolder.primaryActionButtonView.getTag());
+    }
+
     private void createCallLogEntry() {
         createCallLogEntry(TEST_NUMBER);
     }
@@ -573,6 +581,10 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
     private void createVoicemailCallLogEntry() {
         createCallLogEntry(TEST_NUMBER, EMPTY_STRING, NO_VALUE_SET, Calls.VOICEMAIL_TYPE);
+    }
+
+    private void createVoicemailArchiveCallLogEntry() {
+        createCallLogEntry(TEST_NUMBER, EMPTY_STRING, NO_VALUE_SET, ARCHIVE_TYPE);
     }
 
     private void createCallLogEntry(String number, String postDialDigits, int presentation, int type) {
@@ -674,6 +686,10 @@ public class CallLogAdapterTest extends AndroidTestCase {
             values[CallLogQuery.VOICEMAIL_URI] = ContentUris.withAppendedId(
                     VoicemailContract.Voicemails.CONTENT_URI, mCursor.getCount());
         }
+        if (type == ARCHIVE_TYPE) {
+            values[CallLogQuery.VOICEMAIL_URI] = ContentUris.withAppendedId(
+                    VoicemailArchiveContract.VoicemailArchive.CONTENT_URI, mCursor.getCount());
+        }
 
         return values;
     }
@@ -739,11 +755,34 @@ public class CallLogAdapterTest extends AndroidTestCase {
         return Phone.getTypeLabel(getContext().getResources(), phoneType, "");
     }
 
+    private void setUpArchiveAdapter() {
+        // Use a call fetcher that does not do anything.
+        CallLogAdapter.CallFetcher fakeCallFetcher = new CallLogAdapter.CallFetcher() {
+            @Override
+            public void fetchCalls() {}
+        };
+
+        ContactInfoHelper fakeContactInfoHelper =
+                new ContactInfoHelper(getContext(), TEST_COUNTRY_ISO) {
+                    @Override
+                    public ContactInfo lookupNumber(String number, String countryIso) {
+                        ContactInfo info = new ContactInfo();
+                        info.number = number;
+                        info.formattedNumber = number;
+                        return info;
+                    }
+                };
+
+        mAdapter = new TestCallLogAdapter(getContext(), fakeCallFetcher, fakeContactInfoHelper,
+                CallLogAdapter.ACTIVITY_TYPE_ARCHIVE);
+    }
+
     /// Subclass of {@link CallLogAdapter} used in tests to intercept certain calls.
     private static final class TestCallLogAdapter extends CallLogAdapter {
         public TestCallLogAdapter(Context context, CallFetcher callFetcher,
-                ContactInfoHelper contactInfoHelper) {
-            super(context, callFetcher, contactInfoHelper, null, false);
+                ContactInfoHelper contactInfoHelper, int mActivity) {
+            super(context, callFetcher, contactInfoHelper, null,
+                    mActivity);
             mContactInfoCache = new TestContactInfoCache(
                     contactInfoHelper, mOnContactInfoChangedListener);
         }

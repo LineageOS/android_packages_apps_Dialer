@@ -62,13 +62,13 @@ public class ObjectFactory {
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-            boolean isCallLogActivity) {
+            int activityType) {
         return new CallLogAdapter(
                 context,
                 callFetcher,
                 contactInfoHelper,
                 voicemailPlaybackPresenter,
-                isCallLogActivity);
+                activityType);
     }
 
     public static Logger getLoggerInstance() {
