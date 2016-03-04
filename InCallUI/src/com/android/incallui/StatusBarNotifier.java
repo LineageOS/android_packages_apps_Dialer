@@ -425,7 +425,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      */
     @NeededForTesting
     String getContentTitle(ContactCacheEntry contactInfo, Call call) {
-        if (call.isConferenceCall() && !call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
+        if (call.isConferenceCall() || call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
 
