@@ -115,11 +115,13 @@ public class VoicemailArchiveProvider extends ContentProvider {
         // Create the directory for archived voicemails if it doesn't already exist
         File directory = new File(getFilesDir(), VOICEMAIL_FOLDER);
         directory.mkdirs();
-
-        // Update the row's _data column with a file path in the voicemails folder
         Uri newUri = ContentUris.withAppendedId(uri, id);
-        File voicemailFile = new File(directory, Long.toString(id));
-        values.put(VoicemailArchiveContract.VoicemailArchive._DATA, voicemailFile.getPath());
+
+        // Create new file only if path is not provided to one
+        if (!values.containsKey(VoicemailArchiveContract.VoicemailArchive._DATA)) {
+            File voicemailFile = new File(directory, Long.toString(id));
+            values.put(VoicemailArchiveContract.VoicemailArchive._DATA, voicemailFile.getPath());
+        }
         update(newUri, values, null, null);
         return newUri;
     }
