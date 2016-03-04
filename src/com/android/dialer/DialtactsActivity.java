@@ -44,7 +44,9 @@ import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -1444,10 +1446,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void onPickPhoneNumberAction(Uri dataUri) {
+        // Only use selected call method if call method spinner is visible (t9 dialpad or search)
+        CallMethodInfo cmi = isInSearchUi() || isDialpadShown() ? mCurrentCallMethod : null;
+
+        // If no sim is selected, or emergency callmethod selected, or number is
+        // an emergency number, phone account handle should be null, and will use the
+        // default account.
+        // Else, create PhoneAccountHandle from selected callmethod components and
+        // initial call using that account.
+        PhoneAccountHandle handle = CallMethodInfo.getPhoneAccountHandleFromCallMethodInfo(this,
+                cmi, null);
+
         // Specify call-origin so that users will see the previous tab instead of
         // CallLog screen (search UI will be automatically exited).
         PhoneNumberInteraction.startInteractionForPhoneCall(
-                DialtactsActivity.this, dataUri, getCallOrigin());
+                DialtactsActivity.this, dataUri, getCallOrigin(), handle);
         mClearSearchOnPause = true;
     }
 
@@ -1468,17 +1481,26 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             // an error message.
             phoneNumber = "";
         }
-        if (TextUtils.isEmpty(mimeType) ||
-                TextUtils.equals(mimeType,
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE) ||
-                TextUtils.equals(mimeType,
-                        ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE)) {
+        // Only use selected call method if call method spinner is visible (t9 dialpad or search)
+        CallMethodInfo cmi = isInSearchUi() || isDialpadShown() ? mCurrentCallMethod : null;
 
+        if ((cmi == null || !cmi.mIsInCallProvider) &&
+                (TextUtils.isEmpty(mimeType) ||
+                        TextUtils.equals(mimeType,
+                                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE) ||
+                        TextUtils.equals(mimeType,
+                                ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE))) {
+            // If no sim is selected, or emergency callmethod selected, or number is
+            // an emergency number, phone account handle should be null, and will use the
+            // default account.
+            // Else, create PhoneAccountHandle from selected callmethod components and
+            // initial call using that account.
+            PhoneAccountHandle handle = CallMethodInfo.getPhoneAccountHandleFromCallMethodInfo(this,
+                    cmi, phoneNumber);
             Intent intent = isVideoCall ?
                     IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
-                    IntentUtil.getCallIntent(phoneNumber, getCallOrigin());
+                    IntentUtil.getCallIntent(phoneNumber, getCallOrigin(), handle);
             DialerUtils.startActivityWithErrorToast(this, intent);
-
         } else {
             StartCallRequest request = new StartCallRequest(phoneNumber,
                     OriginCodes.CONTACT_SEARCH, 0,

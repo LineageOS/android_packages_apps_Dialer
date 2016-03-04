@@ -38,6 +38,7 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -194,20 +195,25 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         private static final String ARG_PHONE_LIST = "phoneList";
         private static final String ARG_INTERACTION_TYPE = "interactionType";
         private static final String ARG_CALL_ORIGIN = "callOrigin";
+        private static final String ARG_ACCOUNT_HANDLE = "accountHandle";
 
         private int mInteractionType;
         private ListAdapter mPhonesAdapter;
         private List<PhoneItem> mPhoneList;
         private String mCallOrigin;
+        private PhoneAccountHandle mAccountHandle;
 
         public static void show(FragmentManager fragmentManager,
                 ArrayList<PhoneItem> phoneList, int interactionType,
-                String callOrigin) {
+                String callOrigin, PhoneAccountHandle accountHandle) {
             PhoneDisambiguationDialogFragment fragment = new PhoneDisambiguationDialogFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(ARG_PHONE_LIST, phoneList);
             bundle.putSerializable(ARG_INTERACTION_TYPE, interactionType);
             bundle.putString(ARG_CALL_ORIGIN, callOrigin);
+            if (accountHandle != null) {
+                bundle.putParcelable(ARG_ACCOUNT_HANDLE, accountHandle);
+            }
             fragment.setArguments(bundle);
             fragment.show(fragmentManager, TAG);
         }
@@ -218,6 +224,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             mPhoneList = getArguments().getParcelableArrayList(ARG_PHONE_LIST);
             mInteractionType = getArguments().getInt(ARG_INTERACTION_TYPE);
             mCallOrigin = getArguments().getString(ARG_CALL_ORIGIN);
+            mAccountHandle = (PhoneAccountHandle) getArguments().getParcelable(ARG_ACCOUNT_HANDLE);
 
             mPhonesAdapter = new PhoneItemAdapter(activity, mPhoneList, mInteractionType);
             final LayoutInflater inflater = activity.getLayoutInflater();
@@ -246,7 +253,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 }
 
                 PhoneNumberInteraction.performAction(activity, phoneItem.phoneNumber,
-                        mInteractionType, mCallOrigin, phoneItem.mimeType, phoneItem.id);
+                        mInteractionType, mCallOrigin, mAccountHandle, phoneItem.mimeType,
+                        phoneItem.id);
             } else {
                 dialog.dismiss();
             }
@@ -284,8 +292,8 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     private final Context mContext;
     private final OnDismissListener mDismissListener;
     private final int mInteractionType;
-
     private final String mCallOrigin;
+    private final PhoneAccountHandle mAccountHandle;
     private boolean mUseDefault;
 
     private static final int UNKNOWN_CONTACT_ID = -1;
@@ -307,20 +315,28 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
     private PhoneNumberInteraction(Context context, int interactionType,
             DialogInterface.OnDismissListener dismissListener, String callOrigin) {
+        this(context, interactionType, dismissListener, null, null);
+    }
+
+    private PhoneNumberInteraction(Context context, int interactionType,
+            DialogInterface.OnDismissListener dismissListener, String callOrigin,
+            PhoneAccountHandle accountHandle) {
         mContext = context;
         mInteractionType = interactionType;
         mDismissListener = dismissListener;
         mCallOrigin = callOrigin;
+        mAccountHandle = accountHandle;
     }
+
 
     private void performAction(String phoneNumber, String mimeType, long id) {
         PhoneNumberInteraction.performAction(mContext, phoneNumber, mInteractionType, mCallOrigin,
-                mimeType, id);
+                mAccountHandle, mimeType, id);
     }
 
     private static void performAction(
             Context context, String phoneNumber, int interactionType,
-            String callOrigin, String mimeType, long id) {
+            String callOrigin, PhoneAccountHandle accountHandle, String mimeType, long id) {
         Intent intent;
         switch (interactionType) {
             case ContactDisplayUtils.INTERACTION_SMS:
@@ -331,7 +347,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
                 if (TextUtils.isEmpty(mimeType) ||
                         TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE) ||
                         TextUtils.equals(mimeType, SipAddress.CONTENT_ITEM_TYPE)) {
-                    intent = IntentUtil.getCallIntent(phoneNumber, callOrigin);
+                    intent = IntentUtil.getCallIntent(phoneNumber, callOrigin, accountHandle);
                 } else {
                     intent = new Intent(Intent.ACTION_VIEW);
                     final Uri uri = ContentUris.withAppendedId(Data.CONTENT_URI, id);
@@ -525,13 +541,19 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      * @param activity that is calling this interaction. This must be of type
      * {@link TransactionSafeActivity} because we need to check on the activity state after the
      * phone numbers have been queried for.
+     * @param uri contact Uri (built from {@link Contacts#CONTENT_URI}) or data Uri
+     * (built from {@link Data#CONTENT_URI}). Contact Uri may show the disambiguation dialog while
+     * data Uri won't.
      * @param callOrigin If non null, {@link PhoneConstants#EXTRA_CALL_ORIGIN} will be
      * appended to the Intent initiating phone call. See comments in Phone package (PhoneApp)
      * for more detail.
+     * @param accountHandle If non null, will be used specifically as out call account instead of
+     * prompting user (only applicable to msim)
      */
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
-            String callOrigin) {
-        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null, callOrigin))
+            String callOrigin, PhoneAccountHandle accountHandle) {
+        (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null,
+                callOrigin, accountHandle))
                 .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
     }
 
@@ -560,6 +582,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     @VisibleForTesting
     /* package */ void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
         PhoneDisambiguationDialogFragment.show(((Activity)mContext).getFragmentManager(),
-                phoneList, mInteractionType, mCallOrigin);
+                phoneList, mInteractionType, mCallOrigin, mAccountHandle);
     }
 }

@@ -1267,27 +1267,8 @@ public class DialpadFragment extends Fragment
                 // Clear the digits just in case.
                 clearDialpad();
             } else {
-                if (mCurrentCallMethodInfo.mIsInCallProvider) {
-                    mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
-                            number, getActivity(), false, true);
-                } else {
-                    // TODO: implement multisim selection
-                    /*Context ctx = getContext().getApplicationContext();
-                    CallMethodInfo emergencyCallMethod = CallMethodInfo.getEmergencyCallMethod(ctx);
-                    if (PhoneNumberUtils.isEmergencyNumber(number) ||
-                            mCurrentCallMethodInfo == null ||
-                            mCurrentCallMethodInfo.equals(emergencyCallMethod)) {*/
-                        // No CallMethod specified or Emergency CallMethod (emergency call only)
-                        final Intent intent = IntentUtil.getCallIntent(number,
-                                (getActivity() instanceof DialtactsActivity ?
-                                        ((DialtactsActivity) getActivity())
-                                                .getCallOrigin() : null));
-                        DialerUtils.startActivityWithErrorToast(getActivity(), intent);
-                        hideAndClearDialpad(false);
-                    /*} else {
-                        // CallMethod selected, use it.
-                    }*/
-                }
+                startCall(number);
+                hideAndClearDialpad(false);
             }
         }
     }
@@ -1903,10 +1884,7 @@ public class DialpadFragment extends Fragment
         if (phoneNumber == null) {
             showNoSpeedNumberDialog(number);
         } else {
-            final DialtactsActivity activity = getActivity() instanceof DialtactsActivity
-                    ? (DialtactsActivity) getActivity() : null;
-            final Intent intent = CallUtil.getCallIntent(phoneNumber);
-            DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+            startCall(phoneNumber);
             getActivity().finish();
         }
     }
@@ -1926,5 +1904,26 @@ public class DialpadFragment extends Fragment
                 })
                 .setNegativeButton(R.string.no, null)
                 .show();
+    }
+
+    private void startCall(String number) {
+        if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
+            mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
+                    number, getActivity(), false, true);
+        } else {
+            // If no sim is selected, or emergency callmethod selected, or number is
+            // an emergency number, phone account handle should be null, and will use the
+            // default account.
+            // Else, create PhoneAccountHandle from selected callmethod components and
+            // initial call using that account.
+            PhoneAccountHandle handle = CallMethodInfo.getPhoneAccountHandleFromCallMethodInfo(
+                    getActivity(), mCurrentCallMethodInfo, number);
+            final Intent intent = IntentUtil.getCallIntent(number,
+                    (getActivity() instanceof DialtactsActivity ?
+                            ((DialtactsActivity) getActivity())
+                                    .getCallOrigin() : null),
+                    handle);
+            DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+        }
     }
 }
