@@ -73,9 +73,19 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
      */
     protected abstract void addGroups(Cursor cursor);
 
+    protected abstract void addVoicemailGroups(Cursor cursor);
+
     protected abstract void onContentChanged();
 
     public void changeCursor(Cursor cursor) {
+        changeCursor(cursor, false);
+    }
+
+    public void changeCursorVoicemail(Cursor cursor) {
+        changeCursor(cursor, true);
+    }
+
+    public void changeCursor(Cursor cursor, boolean voicemail) {
         if (cursor == mCursor) {
             return;
         }
@@ -91,7 +101,11 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
         mCursor = cursor;
 
         if (cursor != null) {
-            addGroups(mCursor);
+            if (voicemail) {
+                addVoicemailGroups(mCursor);
+            } else {
+                addGroups(mCursor);
+            }
 
             // Calculate the item count by subtracting group child counts from the cursor count.
             mItemCount = mGroupMetadata.size();
