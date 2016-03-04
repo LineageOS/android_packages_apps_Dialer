@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Nearby places</string>
   <string name="people">People</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Dialpad T9 search</string>
   <string name="t9_search_input_locale">T9 search input</string>
   <string name="t9_search_input_locale_default">Default</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Phone number lookup</string>
   <string name="lookup_settings_description">Lookup of unknown phone numbers</string>
   <string name="enable_forward_lookup_title">Forward lookup</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">Forward lookup provider</string>
   <string name="people_lookup_provider_title">People lookup provider</string>
   <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Blacklisted call</string>
   <string name="menu_add_to_blacklist">Add to blocked caller list</string>
   <string name="toast_added_to_blacklist">%s added to blocked caller list.</string>
   <string name="toast_removed_from_blacklist">%s removed from blocked caller list.</string>
   <string name="call_log_action_block">Block caller</string>
   <string name="call_log_action_unblock">Caller blocked</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Speed dial settings</string>
   <string name="speed_dial_not_set">(not set)</string>
   <string name="speed_dial_replace">Replace</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">All SIMs</string>
   <string name="call_log_all_calls_header">All calls</string>
   <string name="call_log_blacklist_header">Blocked calls only</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">Statistics</string>
   <string name="callStatsDetailTitle">Call stat details</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -76,4 +83,5 @@
   <string name="call_stats_reset_filter">Reset time range</string>
   <string name="call_stats_sort_by_duration">Sort by call duration</string>
   <string name="call_stats_sort_by_count">Sort by call count</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

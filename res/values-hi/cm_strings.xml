@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">आसपास के स्थान</string>
   <string name="people">लोग</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">डायलपैड टी9 खोज</string>
   <string name="t9_search_input_locale">टी9 खोज इन्पुट</string>
   <string name="t9_search_input_locale_default">डिफ़ॉल्ट</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">फ़ोन नंबर लुकअप</string>
   <string name="lookup_settings_description">अज्ञात फ़ोन नंबरों का लुकअप</string>
   <string name="enable_forward_lookup_title">आगे की ओर लुकअप</string>
@@ -32,9 +35,12 @@
   <string name="forward_lookup_provider_title">आगे की ओर लुकअप प्रदाता</string>
   <string name="people_lookup_provider_title">लोग लुकअप प्रदाता</string>
   <string name="reverse_lookup_provider_title">रिवर्स लुकअप प्रदाता</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">सियानोजेन चीनी (सीएन)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="menu_add_to_blacklist">अवरुद्ध किए गए कॉलरों की सूची में जोड़ें</string>
   <string name="toast_added_to_blacklist">%s को अवरुद्ध किए गए कॉलरों की सूची में जोड़ा गया।</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">तेज़ डायल सेटिंग</string>
   <string name="speed_dial_not_set">(सेट नहीं किया गया है)</string>
   <string name="speed_dial_replace">बदलें</string>
@@ -53,6 +59,7 @@
   <string name="call_log_show_all_slots">सब सिम</string>
   <string name="call_log_all_calls_header">सब कॉल</string>
   <string name="call_log_blacklist_header">केवल अवरुद्ध किए गए कॉल</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">आँकड़े</string>
   <string name="callStatsDetailTitle">कॉल आँकड़ों का विवरण</string>
   <string name="call_stats_header_total">कुल: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -72,4 +79,5 @@
   <string name="call_stats_reset_filter">समय रेंज को रीसेट करें</string>
   <string name="call_stats_sort_by_duration">कॉल अवधि के अनुसार छाँटें</string>
   <string name="call_stats_sort_by_count">कॉल गिनती के अनुसार छाँटें</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

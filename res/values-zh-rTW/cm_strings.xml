@@ -16,11 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">附近的地點</string>
   <string name="people">人員</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">T9 撥號鍵盤</string>
   <string name="t9_search_input_locale">T9 搜尋輸入</string>
   <string name="t9_search_input_locale_default">預設</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">搜尋電話號碼</string>
   <string name="lookup_settings_description">搜尋未知的電話號碼</string>
   <string name="enable_forward_lookup_title">正向搜尋</string>
@@ -32,13 +35,16 @@
   <string name="forward_lookup_provider_title">正向搜尋供應商</string>
   <string name="people_lookup_provider_title">人名搜尋供應商</string>
   <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 中國 (CN)</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">已列入黑名單的來電</string>
   <string name="menu_add_to_blacklist">添加至已封鎖來電者名單</string>
   <string name="toast_added_to_blacklist">%s 已添加至已封鎖來電者名單。</string>
   <string name="toast_removed_from_blacklist">已從黑名單中移除 %s 。</string>
   <string name="call_log_action_block">攔截來電</string>
   <string name="call_log_action_unblock">來電已攔截</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">快速撥號設定</string>
   <string name="speed_dial_not_set">(未設定)</string>
   <string name="speed_dial_replace">取代</string>
@@ -57,6 +63,7 @@
   <string name="call_log_show_all_slots">所有 SIM 卡</string>
   <string name="call_log_all_calls_header">所有通話</string>
   <string name="call_log_blacklist_header">只有已封鎖通話</string>
+  <!-- Call statistics -->
   <string name="call_log_stats_title">統計資料</string>
   <string name="callStatsDetailTitle">通話統計詳細資料</string>
   <string name="call_stats_incoming">來電：<xliff:g id="value">%s</xliff:g></string>
@@ -86,5 +93,6 @@
   <string name="call_stats_title_durations">通話時間</string>
   <string name="call_stats_title_count">通話總數</string>
   <string name="call_stats_title_average_duration">平均通話時間</string>
+  <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">在所選擇的時間範圍內沒有任何通話記錄。</string>
 </resources>
