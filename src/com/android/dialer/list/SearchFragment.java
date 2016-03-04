@@ -361,10 +361,6 @@ public class SearchFragment extends PhoneNumberPickerFragment
         if (cmi != null && !cmi.equals(mCurrentCallMethodInfo)) {
             mCurrentCallMethodInfo = cmi;
             setupEmptyView();
-            final DialerPhoneNumberListAdapter adapter = (DialerPhoneNumberListAdapter) getAdapter();
-            if (adapter != null) {
-                adapter.setCurrentCallMethod(cmi);
-            }
             setAdditionalMimeTypeSearch(cmi.mMimeType);
             reloadData();
         }
@@ -379,6 +375,13 @@ public class SearchFragment extends PhoneNumberPickerFragment
                 CreditBarHelper.callMethodCredits(da.getGlobalCreditsBar(), cmi, getResources(), this);
             } else {
                 CreditBarHelper.clearCallRateInformation(da.getGlobalCreditsBar(), this);
+            }
+            if (cmi != null) {
+                final DialerPhoneNumberListAdapter adapter
+                        = (DialerPhoneNumberListAdapter) getAdapter();
+                if (adapter != null) {
+                    adapter.setCurrentCallMethod(cmi);
+                }
             }
         }
     }
