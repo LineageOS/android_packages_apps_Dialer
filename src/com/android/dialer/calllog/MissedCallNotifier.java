@@ -33,6 +33,7 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
 import com.android.dialer.contactinfo.ContactPhotoLoader;
+import com.android.dialer.compat.UserManagerCompat;
 import com.android.dialer.list.ListsFragment;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -153,8 +154,8 @@ public class MissedCallNotifier {
                 // sensitive notification information.
                 .setPublicVersion(publicBuilder.build());
 
-        // Add additional actions when there is only 1 missed call, like call-back and SMS.
-        if (count == 1) {
+        // Add additional actions when there is only 1 missed call and the user isn't locked
+        if (UserManagerCompat.isUserUnlocked(mContext) && count == 1) {
             if (!TextUtils.isEmpty(number)
                     && !TextUtils.equals(
                     number, mContext.getString(R.string.handle_restricted))) {
@@ -181,21 +182,24 @@ public class MissedCallNotifier {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                // Clear the list of new missed calls from the call log.
-                ContentValues values = new ContentValues();
-                values.put(Calls.NEW, 0);
-                values.put(Calls.IS_READ, 1);
-                StringBuilder where = new StringBuilder();
-                where.append(Calls.NEW);
-                where.append(" = 1 AND ");
-                where.append(Calls.TYPE);
-                where.append(" = ?");
-                try {
-                    mContext.getContentResolver().update(Calls.CONTENT_URI, values,
-                            where.toString(), new String[]{ Integer.toString(Calls.
-                            MISSED_TYPE) });
-                } catch (IllegalArgumentException e) {
-                    Log.w(TAG, "ContactsProvider update command failed", e);
+                // Call log is only accessible when unlocked. If that's the case, clear the list of
+                // new missed calls from the call log.
+                if (UserManagerCompat.isUserUnlocked(mContext)) {
+                    ContentValues values = new ContentValues();
+                    values.put(Calls.NEW, 0);
+                    values.put(Calls.IS_READ, 1);
+                    StringBuilder where = new StringBuilder();
+                    where.append(Calls.NEW);
+                    where.append(" = 1 AND ");
+                    where.append(Calls.TYPE);
+                    where.append(" = ?");
+                    try {
+                        mContext.getContentResolver().update(Calls.CONTENT_URI, values,
+                                where.toString(), new String[]{Integer.toString(Calls.
+                                        MISSED_TYPE)});
+                    } catch (IllegalArgumentException e) {
+                        Log.w(TAG, "ContactsProvider update command failed", e);
+                    }
                 }
                 getNotificationMgr().cancel(NOTIFICATION_TAG, NOTIFICATION_ID);
             }

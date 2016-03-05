@@ -68,8 +68,7 @@
         android:supportsRtl="true"
         android:backupAgent='com.android.dialer.DialerBackupAgent'
         android:usesCleartextTraffic="false"
-        android:forceDeviceEncrypted="true"
-        android:encryptionAware="true">
+        android:forceDeviceEncrypted="false">
 
         <meta-data android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIBXgtCEKQ6W0PXVnW-ZVia2KmlV2AxsTw3GjAeQ" />
@@ -85,6 +84,7 @@
             android:icon="@mipmap/ic_launcher_phone"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"
             android:resizeableActivity="true"
+            android:encryptionAware="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
@@ -280,10 +280,12 @@
 
         <service
             android:name=".calllog.CallLogNotificationsService"
+            android:encryptionAware="true"
             android:exported="false"
         />
 
-        <receiver android:name=".calllog.MissedCallNotificationReceiver">
+        <receiver android:name=".calllog.MissedCallNotificationReceiver"
+            android:encryptionAware="true">
             <intent-filter>
                 <action android:name="android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION" />
             </intent-filter>
@@ -317,11 +319,6 @@
                   android:resizeableActivity="true">
         </activity>
 
-        <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
-        <receiver android:name="com.android.incallui.NotificationBroadcastReceiver"
-                  android:encryptionAware="true"
-                  android:exported="false" />
-
         <service android:name="com.android.incallui.InCallServiceImpl"
                  android:permission="android.permission.BIND_INCALL_SERVICE"
                  android:encryptionAware="true" >
@@ -332,6 +329,11 @@
                 <action android:name="android.telecom.InCallService"/>
             </intent-filter>
         </service>
+
+        <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
+        <receiver android:name="com.android.incallui.NotificationBroadcastReceiver"
+            android:encryptionAware="true"
+            android:exported="false" />
 
         <provider
             android:name=".database.FilteredNumberProvider"
