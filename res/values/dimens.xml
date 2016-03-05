@@ -170,4 +170,6 @@
     <dimen name="blocked_number_header_height">48dp</dimen>
 
     <dimen name="call_type_icon_size">12dp</dimen>
+
+    <dimen name="tab_unread_count_margin_left">0dp</dimen>
 </resources>
