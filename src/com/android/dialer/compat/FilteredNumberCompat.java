@@ -20,12 +20,15 @@ import com.google.common.base.Preconditions;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.dialer.DialerApplication;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
@@ -43,9 +46,12 @@ import java.util.List;
  */
 public class FilteredNumberCompat {
 
+    protected static final String HAS_MIGRATED_TO_NEW_BLOCKING_KEY = "migratedToNewBlocking";
+
     // Flag to enable feature.
     // TODO(maxwelb) remove when ready to enable new filtering.
     private static final boolean isNewFilteringEnabled = false;
+
     private static Boolean isEnabledForTest;
 
     /**
@@ -114,8 +120,28 @@ public class FilteredNumberCompat {
      * migration has been performed, {@code false} otherwise.
      */
     public static boolean useNewFiltering() {
-        // TODO(maxwelb): Add shared preference for when the Dialer blocked list has been migrated
-        return canUseNewFiltering();
+        return canUseNewFiltering() && hasMigratedToNewBlocking();
+    }
+
+    /**
+     * @return {@code true} if the user has migrated to use
+     * {@link android.provider.BlockedNumberContract} blocking, {@code false} otherwise.
+     */
+    public static boolean hasMigratedToNewBlocking() {
+        return PreferenceManager.getDefaultSharedPreferences(DialerApplication.getContext())
+                .getBoolean(HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false);
+    }
+
+    /**
+     * Called to inform this class whether the user has fully migrated to use
+     * {@link android.provider.BlockedNumberContract} blocking or not.
+     *
+     * @param hasMigrated {@code true} if the user has migrated, {@code false} otherwise.
+     */
+    @NeededForTesting
+    public static void setHasMigratedToNewBlocking(boolean hasMigrated) {
+        PreferenceManager.getDefaultSharedPreferences(DialerApplication.getContext()).edit()
+                .putBoolean(HAS_MIGRATED_TO_NEW_BLOCKING_KEY, hasMigrated).apply();
     }
 
     @NeededForTesting

@@ -16,18 +16,29 @@
 
 package com.android.dialer.compat;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.android.contacts.common.compat.CompatUtils;
+import com.android.dialer.DialerApplication;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
+
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 
@@ -41,27 +52,52 @@ public class FilteredNumberCompatTest extends AndroidTestCase {
     private static final Uri EXPECTED_BASE_URI = CompatUtils.isNCompatible()
             ? BlockedNumbers.CONTENT_URI : FilteredNumber.CONTENT_URI;
 
+    @Mock private Context mContext;
+    @Mock private SharedPreferences mSharedPreferences;
+
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        MockitoAnnotations.initMocks(this);
+        DialerApplication.setContextForTest(mContext);
+        when(mContext.getSharedPreferences(anyString(), anyInt())).thenReturn(mSharedPreferences);
         FilteredNumberCompat.setIsEnabledForTest(true);
     }
 
     public void testIsNewFilteringEnabled_TestValueFalse() {
         FilteredNumberCompat.setIsEnabledForTest(false);
-        assertFalse(FilteredNumberCompat.useNewFiltering());
+        assertFalse(FilteredNumberCompat.canUseNewFiltering());
     }
 
     public void testIsNewFilteringEnabled_TestValueTrue() {
         FilteredNumberCompat.setIsEnabledForTest(true);
-        assertEquals(CompatUtils.isNCompatible(), FilteredNumberCompat.useNewFiltering());
+        assertEquals(CompatUtils.isNCompatible(), FilteredNumberCompat.canUseNewFiltering());
+    }
+
+    public void testHasMigratedToNewBlocking_False() {
+        assertFalse(FilteredNumberCompat.hasMigratedToNewBlocking());
+    }
+
+    public void testHasMigratedToNewBlocking_Migrated() {
+        when(mSharedPreferences
+                .getBoolean(FilteredNumberCompat.HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false))
+                .thenReturn(true);
+        assertTrue(FilteredNumberCompat.hasMigratedToNewBlocking());
     }
 
     public void testGetContentUri_NullId() {
-        assertEquals(EXPECTED_BASE_URI, FilteredNumberCompat.getContentUri(null));
+        assertEquals(FilteredNumber.CONTENT_URI, FilteredNumberCompat.getContentUri(null));
     }
 
-    public void testGetContentUri() {
+    public void testGetContentUri_NotMigrated() {
+        assertEquals(ContentUris.withAppendedId(FilteredNumber.CONTENT_URI, 1),
+                FilteredNumberCompat.getContentUri(1));
+    }
+
+    public void testGetContentUri_Migrated() {
+        when(mSharedPreferences
+                .getBoolean(FilteredNumberCompat.HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false))
+                .thenReturn(true);
         assertEquals(ContentUris.withAppendedId(EXPECTED_BASE_URI, 1),
                 FilteredNumberCompat.getContentUri(1));
     }
@@ -87,12 +123,23 @@ public class FilteredNumberCompatTest extends AndroidTestCase {
         } catch (NullPointerException e) {}
     }
 
-    public void testNewBlockNumberContentValues_N() {
+    public void testNewBlockNumberContentValues_N_NotMigrated() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertEquals(newExpectedContentValuesM(NON_E164_NUMBER, null, null),
+                FilteredNumberCompat.newBlockNumberContentValues(NON_E164_NUMBER, null, null));
+    }
+
+    public void testNewBlockNumberContentValues_N_Migrated() {
         if (!CompatUtils.isNCompatible()) {
             return;
         }
         ContentValues contentValues = new ContentValues();
         contentValues.put(BlockedNumbers.COLUMN_ORIGINAL_NUMBER, NON_E164_NUMBER);
+        when(mSharedPreferences
+                .getBoolean(FilteredNumberCompat.HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false))
+                .thenReturn(true);
         assertEquals(contentValues, FilteredNumberCompat.newBlockNumberContentValues(
                 NON_E164_NUMBER,
                 null, null));
