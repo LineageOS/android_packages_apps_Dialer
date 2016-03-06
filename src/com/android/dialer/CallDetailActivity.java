@@ -375,8 +375,9 @@ public class CallDetailActivity extends AppCompatActivity
         int resId = view.getId();
         if (resId == R.id.call_detail_action_block) {
             FilteredNumberCompat
-                    .showBlockNumberDialogFlow(mBlockedNumberId, mNumber, mDetails.countryIso,
-                            mDisplayNumber, R.id.call_detail, getFragmentManager(), this);
+                    .showBlockNumberDialogFlow(mContext.getContentResolver(), mBlockedNumberId,
+                            mNumber, mDetails.countryIso, mDisplayNumber, R.id.call_detail,
+                            getFragmentManager(), this);
         } else if (resId == R.id.call_detail_action_copy) {
             ClipboardUtils.copyText(mContext, null, mNumber, true);
         } else if (resId == R.id.call_detail_action_edit_before_call) {

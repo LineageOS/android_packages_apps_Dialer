@@ -24,7 +24,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.android.dialer.R;
 
@@ -34,31 +33,23 @@ import com.android.dialer.R;
  */
 public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
 
-    /**
-     * Listener for the operation to migrate from
-     * {@link com.android.dialer.database.FilteredNumberContract} blocking to
-     * {@link android.provider.BlockedNumberContract} blocking.
-     */
-    public interface Listener {
-
-        /**
-         * Callback called when the migration operation is finished.
-         */
-        void onComplete();
-    }
-
-    private Listener mMigrationListener;
+    private BlockedNumbersMigrator mBlockedNumbersMigrator;
+    private BlockedNumbersMigrator.Listener mMigrationListener;
 
     /**
      * Creates a new MigrateBlockedNumbersDialogFragment.
      *
-     * @param migrationListener The {@link Listener} to call when the
+     * @param blockedNumbersMigrator The {@link BlockedNumbersMigrator} which will be used to
+     * migrate the numbers.
+     * @param migrationListener The {@link BlockedNumbersMigrator.Listener} to call when the
      * migration is complete.
-     * @return the new MigrateBlockedNumbersDialogFragment.
-     * @throws NullPointerException if migrationListener is {@code null}.
+     * @return The new MigrateBlockedNumbersDialogFragment.
+     * @throws NullPointerException if blockedNumbersMigrator or migrationListener are {@code null}.
      */
-    public static DialogFragment newInstance(Listener migrationListener) {
+    public static DialogFragment newInstance(BlockedNumbersMigrator blockedNumbersMigrator,
+            BlockedNumbersMigrator.Listener migrationListener) {
         MigrateBlockedNumbersDialogFragment fragment = new MigrateBlockedNumbersDialogFragment();
+        fragment.mBlockedNumbersMigrator = Preconditions.checkNotNull(blockedNumbersMigrator);
         fragment.mMigrationListener = Preconditions.checkNotNull(migrationListener);
         return fragment;
     }
@@ -79,10 +70,7 @@ public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
         return new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TODO(maxwelb): Perform actual migration, call
-                // FilteredNumberCompat#hasMigratedToNewBlocking
-
-                mMigrationListener.onComplete();
+                mBlockedNumbersMigrator.migrate(mMigrationListener);
             }
         };
     }
@@ -91,6 +79,7 @@ public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
     public void onPause() {
         // The dialog is dismissed and state is cleaned up onPause, i.e. rotation.
         dismiss();
+        mBlockedNumbersMigrator = null;
         mMigrationListener = null;
         super.onPause();
     }

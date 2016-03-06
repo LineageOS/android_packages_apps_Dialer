@@ -19,7 +19,10 @@ package com.android.dialer.filterednumber;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment.Listener;
+import com.android.dialer.filterednumber.BlockedNumbersMigrator.Listener;
+
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 
 /**
@@ -28,18 +31,31 @@ import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment.Lis
 @SmallTest
 public class MigrateBlockedNumbersDialogFragmentTest extends AndroidTestCase {
 
-    public void testNewInstance_NullMigrationListener() {
+    @Mock private BlockedNumbersMigrator mBlockedNumbersMigrator;
+    @Mock private Listener mListener;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        MockitoAnnotations.initMocks(this);
+    }
+
+    public void testNewInstance_NullMigrator() {
         try {
-            MigrateBlockedNumbersDialogFragment.newInstance(null);
+            MigrateBlockedNumbersDialogFragment.newInstance(null, mListener);
+            fail();
+        } catch (NullPointerException e) {}
+    }
+
+    public void testNewInstance_NullListener() {
+        try {
+            MigrateBlockedNumbersDialogFragment.newInstance(mBlockedNumbersMigrator, null);
             fail();
         } catch (NullPointerException e) {}
     }
 
     public void testNewInstance_WithListener() {
-        assertNotNull(MigrateBlockedNumbersDialogFragment.newInstance(
-                new Listener() {
-                    @Override
-                    public void onComplete() {}
-                }));
+        assertNotNull(MigrateBlockedNumbersDialogFragment.newInstance(mBlockedNumbersMigrator,
+                mListener));
     }
 }
