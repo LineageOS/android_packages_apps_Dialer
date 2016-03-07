@@ -12,6 +12,11 @@ android {
         manifest.srcFile 'AndroidManifest.xml'
         res.srcDirs = ['res']
     }
+
+    sourceSets.androidTest {
+        java.srcDirs = ['tests/src']
+        res.srcDirs = ['test/res']
+    }
 }
 
 dependencies {
