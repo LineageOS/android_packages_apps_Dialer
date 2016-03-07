@@ -106,14 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Puneți apelul în așteptare"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Reluați apelul"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"Încheiați apelul"</string>
-    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
-    <skip />
-    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
-    <skip />
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"Afișează tastatura numerică"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"Ascunde tastatura numerică"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Dezactivează sunetul"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"Activează sunetul"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"Adăugați un apel"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Îmbinați apelurile"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Schimbați"</string>

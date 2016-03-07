@@ -262,6 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"전화를 걸려면 전화 권한을 사용하도록 설정하세요."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"전화 앱은 시스템 설정에 쓸 수 있는 권한이 없습니다."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"차단됨"</string>
-    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
-    <skip />
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>이(가) 활성화되었습니다."</string>
 </resources>

@@ -106,14 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"அழைப்பை ஹோல்டில் வை"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"அழைப்பை மீண்டும் தொடங்கு"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"அழைப்பை முடி"</string>
-    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
-    <skip />
-    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
-    <skip />
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"டயல்பேடைக் காட்டு"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"டயல்பேடை மறை"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"ஒலியடக்கு"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"ஒலி இயக்கு"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"அழைப்பைச் சேர்"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"அழைப்புகளை இணை"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"மாற்று"</string>

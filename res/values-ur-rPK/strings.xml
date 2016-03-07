@@ -262,6 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"کال کرنے کیلئے فون کی اجازت آن کریں۔"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"فون ایپ کے پاس سسٹم ترتیبات کو لکھنے کی اجازت نہیں ہے۔"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"مسدود کردہ"</string>
-    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
-    <skip />
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> فعال ہے"</string>
 </resources>
