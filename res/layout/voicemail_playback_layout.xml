@@ -102,16 +102,18 @@
             android:tint="@color/voicemail_icon_tint"
             android:contentDescription="@string/call_log_trash_voicemail" />
 
-        <Space
+        <Space android:id="@+id/space_before_archive_voicemail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:visibility="gone" />
 
         <ImageButton android:id="@+id/archive_voicemail"
             style="@style/VoicemailPlaybackLayoutButtonStyle"
             android:src="@drawable/ic_archive_white_24dp"
             android:tint="@color/voicemail_icon_tint"
-            android:contentDescription="@string/call_log_archive_voicemail" />
+            android:contentDescription="@string/call_log_archive_voicemail"
+            android:visibility="gone" />
 
         <Space
             android:layout_width="0dp"
