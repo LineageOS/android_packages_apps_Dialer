@@ -21,6 +21,7 @@ import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
@@ -28,13 +29,14 @@ import android.util.Log;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
-import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
 import com.android.dialer.DialtactsActivity;
+import com.android.dialer.R;
+import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
+import com.android.dialer.contactinfo.ContactPhotoLoader;
 import com.android.dialer.list.ListsFragment;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
-import com.android.dialer.R;
 
 import java.util.List;
 
@@ -94,6 +96,7 @@ public class MissedCallNotifier {
         NewCall newestCall = useCallLog ? newCalls.get(0) : null;
         long timeMs = useCallLog ? newestCall.dateMs : System.currentTimeMillis();
 
+        Notification.Builder builder = new Notification.Builder(mContext);
         // Display the first line of the notification:
         // 1 missed call: <caller name || handle>
         // More than 1 missed call: <number of calls> + "missed calls"
@@ -110,6 +113,11 @@ public class MissedCallNotifier {
                     : R.string.notification_missedCallTitle;
 
             expandedText = contactInfo.name;
+            ContactPhotoLoader loader = new ContactPhotoLoader(mContext, contactInfo);
+            Bitmap photoIcon = loader.loadPhotoIcon();
+            if (photoIcon != null) {
+                builder.setLargeIcon(photoIcon);
+            }
         } else {
             titleResId = R.string.notification_missedCallsTitle;
             expandedText =
@@ -132,7 +140,6 @@ public class MissedCallNotifier {
                 .setDeleteIntent(createClearMissedCallsPendingIntent());
 
         // Create the notification suitable for display when sensitive information is showing.
-        Notification.Builder builder = new Notification.Builder(mContext);
         builder.setSmallIcon(android.R.drawable.stat_notify_missed_call)
                 .setColor(mContext.getResources().getColor(R.color.dialer_theme_color))
                 .setContentTitle(mContext.getText(titleResId))
@@ -161,7 +168,6 @@ public class MissedCallNotifier {
                             createSendSmsFromNotificationPendingIntent(number));
                 }
             }
-            //TODO: add photo
         }
 
         Notification notification = builder.build();

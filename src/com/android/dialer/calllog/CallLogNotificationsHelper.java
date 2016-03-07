@@ -16,9 +16,7 @@
 
 package com.android.dialer.calllog;
 
-import static android.Manifest.permission.READ_CALL_LOG;
-import static android.Manifest.permission.READ_CONTACTS;
-
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -111,7 +109,7 @@ public class CallLogNotificationsHelper {
     /**
      * Given a number and number information (presentation and country ISO), get
      * {@link ContactInfo}. If the name is empty but we have a special presentation, display that.
-     * Otherwise attempt to look it up in the database or the cache.
+     * Otherwise attempt to look it up in the cache.
      * If that fails, fall back to displaying the number.
      */
     public @NonNull ContactInfo getContactInfo(@Nullable String number, int numberPresentation,
@@ -136,13 +134,7 @@ public class CallLogNotificationsHelper {
             return contactInfo;
         }
 
-        // 2. Personal ContactsProvider phonelookup query.
-        contactInfo.name = mNameLookupQuery.query(number);
-        if (!TextUtils.isEmpty(contactInfo.name)) {
-            return contactInfo;
-        }
-
-        // 3. Look it up in the cache.
+        // 2. Look it up in the cache.
         ContactInfo cachedContactInfo = mContactInfoHelper.lookupNumber(number, countryIso);
 
         if (cachedContactInfo != null && !TextUtils.isEmpty(cachedContactInfo.name)) {
@@ -150,13 +142,13 @@ public class CallLogNotificationsHelper {
         }
 
         if (!TextUtils.isEmpty(contactInfo.formattedNumber)) {
-            // 4. If we cannot lookup the contact, use the formatted number instead.
+            // 3. If we cannot lookup the contact, use the formatted number instead.
             contactInfo.name = contactInfo.formattedNumber;
         } else if (!TextUtils.isEmpty(number)) {
-            // 5. If number can't be formatted, use number.
+            // 4. If number can't be formatted, use number.
             contactInfo.name = number;
         } else {
-            // 6. Otherwise, it's unknown number.
+            // 5. Otherwise, it's unknown number.
             contactInfo.name = mContext.getResources().getString(R.string.unknown);
         }
         return contactInfo;
@@ -259,7 +251,7 @@ public class CallLogNotificationsHelper {
         @Override
         @Nullable
         public List<NewCall> query(int type) {
-            if (!PermissionsUtil.hasPermission(mContext, READ_CALL_LOG)) {
+            if (!PermissionsUtil.hasPermission(mContext, Manifest.permission.READ_CALL_LOG)) {
                 Log.w(TAG, "No READ_CALL_LOG permission, returning null for calls lookup.");
                 return null;
             }
@@ -338,7 +330,7 @@ public class CallLogNotificationsHelper {
         @Override
         @Nullable
         public String query(@Nullable String number) {
-            if (!PermissionsUtil.hasPermission(mContext, READ_CONTACTS)) {
+            if (!PermissionsUtil.hasPermission(mContext, Manifest.permission.READ_CONTACTS)) {
                 Log.w(TAG, "No READ_CONTACTS permission, returning null for name lookup.");
                 return null;
             }
