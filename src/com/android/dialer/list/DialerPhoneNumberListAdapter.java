@@ -302,8 +302,9 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     }
 
     public String getFormattedQueryString() {
-        if (PhoneNumberHelper.isUriNumber(getQueryString())) {
-            // Return unnormalized SIP address
+        if (PhoneNumberHelper.isUriNumber(getQueryString()) || mFormattedQueryString == null) {
+            // Return unnormalized address. Either for SIP or mFormatedQueryString not being
+            // available.
             return getQueryString();
         }
         return mFormattedQueryString;
