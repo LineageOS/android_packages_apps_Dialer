@@ -130,12 +130,7 @@ public class SmartDialSearchFragment extends SearchFragment
             Resources r = getResources();
             mEmptyView.setWidth(dialActivity.getDialpadWidth());
             if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
-                int orientation = r.getConfiguration().orientation;
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    mEmptyView.setImage(null);
-                } else {
-                    mEmptyView.setImage(R.drawable.empty_contacts);
-                }
+                mEmptyView.setImage(R.drawable.empty_contacts);
                 mEmptyView.setActionLabel(R.string.permission_single_turn_on);
                 mEmptyView.setDescription(R.string.permission_place_call);
                 mEmptyView.setSubMessage(null);
