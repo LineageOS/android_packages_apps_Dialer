@@ -286,6 +286,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Чалуу үчүн, \"Телефон\" колдонмосуна уруксат бериңиз."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Телефон колдонмосунун Тутум жөндөөлөрүнө жазууга уруксаты жок."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Бөгөттөлгөн"</string>
-    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
-    <skip />
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> жүрүп жатат"</string>
 </resources>

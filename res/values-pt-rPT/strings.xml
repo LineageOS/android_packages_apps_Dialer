@@ -262,6 +262,5 @@
     <string name="permission_place_call" msgid="2101287782615887547">"Para efetuar uma chamada, ative a autorização Telemóvel."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"A aplicação Telefone não tem autorização para gravar nas definições do sistema."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloqueado"</string>
-    <!-- no translation found for accessibility_call_is_active (2297282583928508760) -->
-    <skip />
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> está ativa"</string>
 </resources>

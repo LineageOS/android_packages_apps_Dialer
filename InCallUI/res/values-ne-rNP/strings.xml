@@ -106,14 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"कललाई होल्ड गर्नुहोस्"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"कललाई पुन: निरन्तरता दिनुहोस्"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"कल अन्त्य गर्नुहोस्"</string>
-    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
-    <skip />
-    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
-    <skip />
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"डायलप्याड देखाउनुहोस्"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"डायलप्याड लुकाउनुहोस्"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"मौन"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"अनम्यूट गर्नुहोस्"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"कल थप्नुहोस्"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"कलहरू मर्ज गर्नुहोस्"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"स्वाप"</string>

@@ -106,14 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Shikilia Simu"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Endelea na Simu"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"Kata Simu"</string>
-    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
-    <skip />
-    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
-    <skip />
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"Onyesha Vitufe vya Kupiga Simu"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"Ficha Vitufe vya Kupiga Simu"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Zima Sauti"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"Rejesha sauti"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"Ongeza simu"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Unganisha simu"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Badili"</string>

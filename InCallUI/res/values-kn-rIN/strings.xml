@@ -106,14 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"ಕರೆಯನ್ನು ಹೋಲ್ಡ್‌‌ ಮಾಡು"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"ಕರೆಯನ್ನು ಮುಂದುವರಿಸಿ"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"ಕರೆ ಅಂತ್ಯಗೊಳಿಸಿ"</string>
-    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
-    <skip />
-    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
-    <skip />
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"ಡಯಲ್‌ಪ್ಯಾಡ್ ತೋರಿಸು"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"ಡಯಲ್‌ಪ್ಯಾಡ್ ಮರೆಮಾಡು"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"ಮ್ಯೂಟ್"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"ಅನ್‌ಮ್ಯೂಟ್"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"ಕರೆಯನ್ನು ಸೇರಿಸು"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"ಕರೆಗಳನ್ನು ವಿಲೀನಗೊಳಿಸು"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"ಸ್ವ್ಯಾಪ್‌ ಮಾಡು"</string>

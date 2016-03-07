@@ -109,7 +109,7 @@
     <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"顯示撥號鍵盤"</string>
     <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"隱藏撥號鍵盤"</string>
     <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"略過"</string>
-    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"取消略過"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"取消靜音"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"新增通話"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"合併通話"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"切換"</string>

@@ -106,14 +106,10 @@
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"കോൾ ഹോൾഡുചെയ്യുക"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"കോൾ പുനരാരംഭിക്കുക"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"കോൾ അവസാനിപ്പിക്കുക"</string>
-    <!-- no translation found for onscreenShowDialpadText_unselected (8253784035944284938) -->
-    <skip />
-    <!-- no translation found for onscreenShowDialpadText_selected (7368390784890311449) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_unselected (4130269060091842798) -->
-    <skip />
-    <!-- no translation found for onscreenMuteText_selected (7074763815284369548) -->
-    <skip />
+    <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"ഡയൽപാഡ് കാണിക്കുക"</string>
+    <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"ഡയൽപാഡ് മറയ്‌ക്കുക"</string>
+    <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"മ്യൂട്ടുചെയ്യുക"</string>
+    <string name="onscreenMuteText_selected" msgid="7074763815284369548">"അൺമ്യൂട്ടുചെയ്യുക"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"കോൾ ചേർക്കുക"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"കോളുകൾ ലയിപ്പിക്കുക"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"സ്വാപ്പുചെയ്യുക"</string>
