@@ -908,6 +908,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     protected OptionsPopupMenu buildOptionsMenu(View invoker) {
         final OptionsPopupMenu popupMenu = new OptionsPopupMenu(this, invoker);
         popupMenu.inflate(R.menu.dialtacts_options);
+        if (ObjectFactory.isVoicemailArchiveEnabled(this)) {
+            popupMenu.getMenu().findItem(R.id.menu_archive).setVisible(true);
+        }
         popupMenu.setOnMenuItemClickListener(this);
         return popupMenu;
     }

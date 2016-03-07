@@ -44,6 +44,10 @@ public class ObjectFactory {
         return "com.android.dialer.database.filterednumberprovider";
     }
 
+    public static boolean isVoicemailArchiveEnabled(Context context) {
+        return false;
+    }
+
     @Nullable
     public static ExtendedBlockingButtonRenderer newExtendedBlockingButtonRenderer(
             Context context, ExtendedBlockingButtonRenderer.Listener listener) {

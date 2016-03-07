@@ -32,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.database.VoicemailArchiveContract.VoicemailArchive;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
+import com.android.dialerbind.ObjectFactory;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
@@ -273,6 +275,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     private ImageButton mPlaybackSpeakerphone;
     private ImageButton mDeleteButton;
     private ImageButton mArchiveButton;
+    private Space mArchiveSpace;
     private TextView mStateText;
     private TextView mPositionText;
     private TextView mTotalDurationText;
@@ -297,8 +300,10 @@ public class VoicemailPlaybackLayout extends LinearLayout
     public void setPresenter(VoicemailPlaybackPresenter presenter, Uri voicemailUri) {
         mPresenter = presenter;
         mVoicemailUri = voicemailUri;
-        updateArchiveUI(mVoicemailUri);
-        updateArchiveButton(mVoicemailUri);
+        if (ObjectFactory.isVoicemailArchiveEnabled(mContext)) {
+            updateArchiveUI(mVoicemailUri);
+            updateArchiveButton(mVoicemailUri);
+        }
     }
 
     @Override
@@ -310,6 +315,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mPlaybackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
         mDeleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
         mArchiveButton =(ImageButton) findViewById(R.id.archive_voicemail);
+        mArchiveSpace = (Space) findViewById(R.id.space_before_archive_voicemail);
         mStateText = (TextView) findViewById(R.id.playback_state_text);
         mPositionText = (TextView) findViewById(R.id.playback_position_text);
         mTotalDurationText = (TextView) findViewById(R.id.total_duration_text);
@@ -511,6 +517,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
     }
 
     public void hideArchiveButton() {
+        mArchiveSpace.setVisibility(View.GONE);
         mArchiveButton.setVisibility(View.GONE);
         mArchiveButton.setClickable(false);
         mArchiveButton.setEnabled(false);
@@ -582,6 +589,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
                 if (archived) {
                     hideArchiveButton();
                 } else {
+                    mArchiveSpace.setVisibility(View.VISIBLE);
                     mArchiveButton.setVisibility(View.VISIBLE);
                     mArchiveButton.setClickable(true);
                     mArchiveButton.setEnabled(true);
