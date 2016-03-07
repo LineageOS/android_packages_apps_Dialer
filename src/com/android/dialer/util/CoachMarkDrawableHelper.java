@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewOverlay;
 import android.view.ViewTreeObserver;
@@ -118,11 +119,7 @@ public class CoachMarkDrawableHelper {
         int defaultPadding = res.getDimensionPixelSize(R.dimen
                 .call_method_spinner_item_default_padding);
         int startPadding = res.getDimensionPixelSize(R.dimen.call_method_spinner_padding_start);
-
-        // Get the text height based on the size of the height of the bar the text will overlay
-        // we always display 2 lines of text and then want to have some padding around that and
-        // inbetween the rows. This is why we divide this by three.
-        int textHeight = res.getDimensionPixelSize(R.dimen.dialpad_digits_height) / 3;
+        int textHeight = res.getDimensionPixelSize(R.dimen.coachmark_hint_text);
 
         // Format text to show
         text = String.format(text, cmi.mName);
@@ -130,16 +127,26 @@ public class CoachMarkDrawableHelper {
         // Pick placement for center of circle
         int y;
         int x = width;
+        int circlePosX = 0;
         if (ignoreScreenSize) {
             y = parentHeight / 2;
         } else {
             y = (size.y - parentHeight) + defaultPadding/2;
-            x += startPadding;
+
+            if (display.getRotation() == Surface.ROTATION_90 ||
+                    display.getRotation() == Surface.ROTATION_270) {
+                // when rotated, we want to take half the screen width into account only if not
+                // ignoring the screen size.
+                circlePosX = width + (size.x/2) + defaultPadding/2 + startPadding;
+            } else {
+                x += startPadding;
+            }
+
         }
 
         // build our coachmark drawable
         Drawable d = new CoachMarkDrawable(res, text, y, x, width, size.x, size.y, textHeight,
-                ignoreScreenSize, fontWidthScale);
+                ignoreScreenSize, fontWidthScale, circlePosX);
 
         // Get and add view overlay
         final ViewOverlay overlay = main.getOverlay();

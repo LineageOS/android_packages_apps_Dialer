@@ -47,12 +47,14 @@ public class CoachMarkDrawable extends Drawable {
     boolean mHideGreyOverlay;
     Resources mRes;
     float mFontWidthScale;
+    int mCirclePosX;
+
 
     private static final int PAINT_STROKE = 3;
 
     public CoachMarkDrawable(Resources res, String markText, int y, int x, int radius,
                              int screenWidth, int screenHeight, int fontSize,
-                             boolean hideGreyOverlay, float fontWidthScale) {
+                             boolean hideGreyOverlay, float fontWidthScale, int circlePosX) {
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.BLACK);
@@ -63,6 +65,7 @@ public class CoachMarkDrawable extends Drawable {
         mRadius = radius;
         mScreenWidth = screenWidth;
         mScreenHeight = screenHeight;
+        mCirclePosX = circlePosX;
 
         eraser = new Paint();
         eraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
@@ -89,8 +92,13 @@ public class CoachMarkDrawable extends Drawable {
         mPaint.setColor(mLineColor);
 
         // Draw the main circle around the object
-        cv.drawCircle(mX, mY, mRadius, eraser);
-        cv.drawCircle(mX, mY, mRadius, mPaint);
+        if (mCirclePosX != 0) {
+            cv.drawCircle(mCirclePosX, mY, mRadius, eraser);
+            cv.drawCircle(mCirclePosX, mY, mRadius, mPaint);
+        } else {
+            cv.drawCircle(mX, mY, mRadius, eraser);
+            cv.drawCircle(mX, mY, mRadius, mPaint);
+        }
 
         canvas.drawBitmap(bm, 0, 0, null);
 
@@ -135,9 +143,15 @@ public class CoachMarkDrawable extends Drawable {
         // Note: Increasing this number actually goes left instead of right.
         calculatedX += mRadius/2;
 
-        // Draw the line from the main circle to the point
-        canvas.drawLine(mX + mRadius, mY, mScreenWidth - calculatedX, mY,
-                mPaint);
+        if (mCirclePosX != 0) {
+            // Draw the line from the main circle to the point
+            canvas.drawLine(mCirclePosX + mRadius, mY, mScreenWidth - calculatedX, mY,
+                    mPaint);
+        } else {
+            // Draw the line from the main circle to the point
+            canvas.drawLine(mX + mRadius, mY, mScreenWidth - calculatedX, mY,
+                    mPaint);
+        }
 
         // Draw the point at the end of the line. This dot is 1/6th the size of the main coach
         // circle.
