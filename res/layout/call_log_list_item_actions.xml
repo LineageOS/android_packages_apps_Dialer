@@ -57,6 +57,7 @@
             android:src="@drawable/ic_videocam_24dp" />
 
         <TextView
+            android:id="@+id/video_call_action_text"
             style="@style/CallLogActionTextStyle"
             android:text="@string/call_log_action_video_call" />
 

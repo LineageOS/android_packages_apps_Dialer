@@ -371,20 +371,26 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private void bindActionButtons() {
         boolean canPlaceCallToNumber = PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation);
 
-        if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
-            callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
-            ((TextView) callButtonView.findViewById(R.id.call_action_text))
-                    .setText(TextUtils.expandTemplate(
-                            mContext.getString(R.string.call_log_action_call),
-                            nameOrNumber));
-            callButtonView.setVisibility(View.VISIBLE);
-        } else {
-            callButtonView.setVisibility(View.GONE);
-        }
-
         CallMethodInfo cmi = null;
         if (inCallComponentName != null) {
             cmi = CallMethodHelper.getCallMethod(inCallComponentName);
+        }
+
+        if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber
+                || cmi != null && cmi.mIsInCallProvider) {
+            callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number));
+            if (cmi != null && cmi.mIsInCallProvider) {
+                ((TextView) callButtonView.findViewById(R.id.call_action_text))
+                        .setText(mContext.getString(R.string.provider_voice_call, cmi.mName));
+            } else {
+                ((TextView) callButtonView.findViewById(R.id.call_action_text))
+                        .setText(TextUtils.expandTemplate(
+                                mContext.getString(R.string.call_log_action_call),
+                                nameOrNumber));
+            }
+            callButtonView.setVisibility(View.VISIBLE);
+        } else {
+            callButtonView.setVisibility(View.GONE);
         }
 
         if (mDeepLink != null) {
@@ -398,7 +404,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (mTelecomCallLogCache.isVideoEnabled() && canPlaceCallToNumber &&
                 phoneCallDetailsViews.callTypeIcons.isVideoShown() ||
                 (cmi != null && !PhoneNumberUtils.isGlobalPhoneNumber(number))) {
-            if (cmi.mIsInCallProvider) {
+            if (cmi != null && cmi.mIsInCallProvider) {
+                ((TextView) videoCallButtonView.findViewById(R.id.video_call_action_text))
+                        .setText(mContext.getString(R.string.provider_video_call, cmi.mName));
+
                 videoCallButtonView.setTag("video");
                 videoCallButtonView.setVisibility(View.VISIBLE);
             } else {
