@@ -232,7 +232,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                 CallMethodInfo ccm = getCurrentCallMethod();
                 if (ccm != null && ccm.mIsInCallProvider) {
                     drawableId = 0;
-                    drawableRaw = ImageUtils.scaleDrawable(ccm.mBadgeIcon, 0.5f);
+                    drawableRaw = ImageUtils.scaleDrawable(ccm.mBrandIcon, 0.5f);
                 } else {
                     drawableId = R.drawable.ic_search_phone;
                     drawableRaw = null;
@@ -273,7 +273,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
                     text = resources.getString(R.string.sign_in_hint_text, cmi.mName);
                 }
                 drawableId = 0;
-                drawableRaw = ImageUtils.scaleDrawable(cmi.mBadgeIcon, 0.5f);
+                drawableRaw = ImageUtils.scaleDrawable(cmi.mBrandIcon, 0.5f);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid shortcut type");
