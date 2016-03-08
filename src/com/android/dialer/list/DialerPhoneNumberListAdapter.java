@@ -268,7 +268,7 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
 
                 CallMethodInfo cmi = mProviders.get(index);
                 if (cmi.mIsAuthenticated) {
-                    text = cmi.mName;
+                    text = resources.getString(R.string.search_shortcut_call_using, cmi.mName);
                 } else {
                     text = resources.getString(R.string.sign_in_hint_text, cmi.mName);
                 }

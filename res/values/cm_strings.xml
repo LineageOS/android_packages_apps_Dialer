@@ -137,6 +137,9 @@
     <!-- Deep link label for viewing notes in call history -->
     <string name="search_shortcut_view_note">View Note</string>
 
+    <!-- Search shortcut for "Call using PluginName" -->
+    <string name="search_shortcut_call_using">Call using <xliff:g id="name">%1$s</xliff:g></string>
+
     <!-- CallerInfo Provider Settings strings -->
     <string name="callerinfo_provider_auth_yes">Yes</string>
     <string name="callerinfo_provider_auth_no">No thanks</string>
