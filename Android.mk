@@ -43,7 +43,9 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages com.cyanogen.ambient \
     --extra-packages com.cyngn.uicommon
 
-LOCAL_JAVA_LIBRARIES := telephony-common
+LOCAL_JAVA_LIBRARIES := telephony-common \
+    ims-common
+
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 
 LOCAL_STATIC_JAVA_LIBRARIES := \

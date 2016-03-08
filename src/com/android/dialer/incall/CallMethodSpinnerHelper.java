@@ -12,6 +12,7 @@ import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodSpinnerAdapter;
 import com.android.phone.common.incall.CallMethodUtils;
+import com.android.phone.common.util.VolteUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,9 +33,8 @@ public class CallMethodSpinnerHelper {
         void onCallMethodChangedListener(CallMethodInfo cmi);
     }
 
-
     /**
-     * Creates the initial spinner configurations
+     * Creates the initial spinner configurations without volte icon
      * @param context
      * @param callMethodSpinner The spinner
      * @param callMethodChanged the listener to be called when the call method is changed
@@ -42,8 +42,21 @@ public class CallMethodSpinnerHelper {
     public static void setupCallMethodSpinner(Context context,
                                               Spinner callMethodSpinner,
                                               final OnCallMethodChangedListener callMethodChanged) {
+        setupCallMethodSpinner(context, false, callMethodSpinner, callMethodChanged);
+    }
+
+    /**
+     * Creates the initial spinner configurations with optional volte icon
+     * @param context
+     * @param showVolte Whether to show Volte icon
+     * @param callMethodSpinner The spinner
+     * @param callMethodChanged the listener to be called when the call method is changed
+     */
+    public static void setupCallMethodSpinner(Context context, boolean showVolte,
+                                              Spinner callMethodSpinner,
+                                              final OnCallMethodChangedListener callMethodChanged) {
         CallMethodSpinnerAdapter callMethodSpinnerAdapter =
-                new CallMethodSpinnerAdapter(context, new ArrayList<CallMethodInfo>());
+                new CallMethodSpinnerAdapter(context, new ArrayList<CallMethodInfo>(), showVolte);
 
         callMethodSpinner.setAdapter(callMethodSpinnerAdapter);
         callMethodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -61,18 +74,39 @@ public class CallMethodSpinnerHelper {
     }
 
     /**
-     * Updates the spinner with new call methods when available.
+     * Updates the spinner with new call methods when available. Don't show volte label view
      * @param context
      * @param callMethodSpinner the spinner
      * @param changeListener the listener called when something is changed
      * @param lastKnownCallMethod the previous call method of either this spinner
      *                            or the other spinners
      */
-    public static void updateCallMethodSpinnerAdapter(Context context, Spinner callMethodSpinner,
-                                               final OnCallMethodChangedListener changeListener,
-                                               String lastKnownCallMethod,
-                                               HashMap<ComponentName, CallMethodInfo>
-                                                              availableProviders) {
+    public static void updateCallMethodUI(Context context, Spinner callMethodSpinner,
+                                          final OnCallMethodChangedListener changeListener,
+                                          String lastKnownCallMethod,
+                                          HashMap<ComponentName, CallMethodInfo>
+                                                  availableProviders) {
+        updateCallMethodUI(context, null, callMethodSpinner, changeListener, lastKnownCallMethod,
+                availableProviders);
+    }
+
+
+    /**
+     * Updates the spinner with new call methods when available. Show volte label view when
+     * appropriate
+     * @param context
+     * @param volteLabel label for VoLTE text
+     * @param callMethodSpinner the spinner
+     * @param changeListener the listener called when something is changed
+     * @param lastKnownCallMethod the previous call method of either this spinner
+     *                            or the other spinners
+     */
+    public static void updateCallMethodUI(Context context, View volteLabel,
+                                          Spinner callMethodSpinner,
+                                          final OnCallMethodChangedListener changeListener,
+                                          String lastKnownCallMethod,
+                                          HashMap<ComponentName, CallMethodInfo>
+                                                  availableProviders) {
         CallMethodSpinnerAdapter callMethodSpinnerAdapter = (CallMethodSpinnerAdapter)
                 callMethodSpinner.getAdapter();
         int lastKnownPosition = callMethodSpinnerAdapter.getPosition(lastKnownCallMethod);
@@ -104,9 +138,21 @@ public class CallMethodSpinnerHelper {
             CallMethodInfo info = (callMethodSpinnerAdapter.getCount() > 0) ?
                     callMethodSpinnerAdapter.getItem(0) : null;
             changeListener.onCallMethodChangedListener(info);
+
+            if (volteLabel != null){
+                if (info != null && VolteUtils.isVolteInUse(context, info.mSubId)) {
+                    volteLabel.setVisibility(View.VISIBLE);
+                } else {
+                    volteLabel.setVisibility(View.GONE);
+                }
+            }
         } else {
             // multiple call methods or single provider
             int position = POSITION_UNKNOWN;
+
+            if (volteLabel != null) {
+                volteLabel.setVisibility(View.GONE);
+            }
             callMethodSpinner.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(lastKnownCallMethod)) {
                 position = callMethodSpinnerAdapter.getPosition(lastKnownCallMethod);

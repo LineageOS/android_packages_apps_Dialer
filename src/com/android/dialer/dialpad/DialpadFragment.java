@@ -194,6 +194,7 @@ public class DialpadFragment extends Fragment
 
     /* Call Method Spinner */
     private Spinner mCallMethodSpinner;
+    private View mVolteLabel;
 
     /* Call Method Infos */
     private CallMethodInfo mCurrentCallMethodInfo;
@@ -403,10 +404,12 @@ public class DialpadFragment extends Fragment
         mDelete = mDialpadView.getDeleteButton();
 
         mCallMethodSpinner = mDialpadView.getCallMethodSpinner();
+        mVolteLabel = mDialpadView.getVolteLabel();
 
         DialtactsActivity dActivity = (DialtactsActivity) getActivity();
+        boolean showVolte = true;
         if (dActivity != null) {
-            CallMethodSpinnerHelper.setupCallMethodSpinner(dActivity, mCallMethodSpinner,
+            CallMethodSpinnerHelper.setupCallMethodSpinner(dActivity, showVolte, mCallMethodSpinner,
                     dActivity);
         }
 
@@ -493,7 +496,7 @@ public class DialpadFragment extends Fragment
             availableProviders) {
         DialtactsActivity dActivity = (DialtactsActivity) getActivity();
         if (dActivity != null) {
-            CallMethodSpinnerHelper.updateCallMethodSpinnerAdapter(dActivity,
+            CallMethodSpinnerHelper.updateCallMethodUI(dActivity, mVolteLabel,
                     mCallMethodSpinner, dActivity, lastKnownMethod, availableProviders);
         }
     }

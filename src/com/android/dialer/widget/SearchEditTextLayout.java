@@ -363,9 +363,8 @@ public class SearchEditTextLayout extends FrameLayout {
     public void updateSpinner(String lastKnownCallMethod,  HashMap<ComponentName, CallMethodInfo>
             availableProviders) {
         if (mCallMethodChangedListener != null) {
-            CallMethodSpinnerHelper.updateCallMethodSpinnerAdapter(getContext(),
-                    mCallMethodSpinner, mCallMethodChangedListener, lastKnownCallMethod,
-                    availableProviders);
+            CallMethodSpinnerHelper.updateCallMethodUI(getContext(), mCallMethodSpinner,
+                    mCallMethodChangedListener, lastKnownCallMethod, availableProviders);
         }
     }
 
