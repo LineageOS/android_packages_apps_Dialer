@@ -94,6 +94,7 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
+    private final BlockContactPresenter mBlockContactPresenter;
     private final CallFetcher mCallFetcher;
 
     protected ContactInfoCache mContactInfoCache;
@@ -297,6 +298,7 @@ public class CallLogAdapter extends GroupingListAdapter
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            BlockContactPresenter blockContactPresenter,
             boolean isShowingRecentsTab) {
         super(context);
 
@@ -307,6 +309,7 @@ public class CallLogAdapter extends GroupingListAdapter
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.setOnVoicemailDeletedListener(this);
         }
+        mBlockContactPresenter = blockContactPresenter;
         mIsShowingRecentsTab = isShowingRecentsTab;
 
         mContactInfoCache = new ContactInfoCache(
@@ -411,6 +414,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 mTelecomCallLogCache,
                 mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter,
+                mBlockContactPresenter,
                 mContactInfoHelper);
 
         viewHolder.callLogEntryView.setTag(viewHolder);

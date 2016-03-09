@@ -20,6 +20,7 @@ import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
 
 import android.content.Context;
 
+import com.android.dialer.calllog.BlockContactPresenter;
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.service.CachedNumberLookupService;
@@ -47,12 +48,14 @@ public class ObjectFactory {
             CallFetcher callFetcher,
             ContactInfoHelper contactInfoHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            BlockContactPresenter blockContactPresenter,
             boolean isShowingRecentsTab) {
         return new CallLogAdapter(
                 context,
                 callFetcher,
                 contactInfoHelper,
                 voicemailPlaybackPresenter,
+                blockContactPresenter,
                 isShowingRecentsTab);
     }
 }

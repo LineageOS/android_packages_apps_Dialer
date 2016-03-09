@@ -39,6 +39,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.activity.fragment.BlockContactDialogFragment;
+import com.android.contacts.common.util.BlockContactHelper;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
@@ -53,13 +55,15 @@ import com.cyanogen.ambient.incall.CallLogConstants;
 import java.util.HashMap;
 
 import android.util.Log;
+import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call
  * (all, missed or voicemails), specify it in the constructor.
  */
 public class CallLogFragment extends Fragment implements CallLogQueryHandler.Listener,
-        CallLogAdapter.CallFetcher, OnEmptyViewActionButtonClickedListener {
+        CallLogAdapter.CallFetcher, OnEmptyViewActionButtonClickedListener,
+        BlockContactDialogFragment.Callbacks {
     private static final String TAG = "CallLogFragment";
 
     /**
@@ -96,6 +100,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     private boolean mVoicemailStatusFetched;
 
     private final Handler mHandler = new Handler();
+
+    private BlockContactPresenter mBlockContactPresenter;
 
     private class CustomContentObserver extends ContentObserver {
         public CustomContentObserver() {
@@ -217,6 +223,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mVoicemailPlaybackPresenter = VoicemailPlaybackPresenter
                     .getInstance(activity, state);
         }
+
+        mBlockContactPresenter = BlockContactPresenter.getInstance(activity, this);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -305,6 +313,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 this,
                 new ContactInfoHelper(getActivity(), currentCountryIso),
                 mVoicemailPlaybackPresenter,
+                mBlockContactPresenter,
                 isShowingRecentsTab);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -521,5 +530,15 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 mRefreshDataRequired = true;
             }
         }
+    }
+
+    @Override
+    public void onBlockSelected(boolean notifyLookupProvider) {
+        mBlockContactPresenter.onBlockSelected(notifyLookupProvider);
+    }
+
+    @Override
+    public void onUnblockSelected (boolean notifyLookupProvider) {
+        mBlockContactPresenter.onUnblockSelected(notifyLookupProvider);
     }
 }

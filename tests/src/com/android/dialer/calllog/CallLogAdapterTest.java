@@ -204,7 +204,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
     private static final class TestCallLogAdapter extends CallLogAdapter {
         public TestCallLogAdapter(Context context, CallFetcher callFetcher,
                 ContactInfoHelper contactInfoHelper) {
-            super(context, callFetcher, contactInfoHelper, null, false);
+            super(context, callFetcher, contactInfoHelper, null, null, false);
             mContactInfoCache = new TestContactInfoCache(
                     contactInfoHelper, mOnContactInfoChangedListener);
         }

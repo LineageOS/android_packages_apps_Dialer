@@ -39,16 +39,15 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.contacts.common.util.BlockContactHelper;
 import com.android.dialer.widget.DialerQuickContact;
 import com.android.internal.telephony.util.BlacklistUtils;
 
-import com.android.contacts.common.activity.fragment.BlockContactDialogFragment;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
-import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.testing.NeededForTesting;
-import com.android.contacts.common.util.BlockNumberHelper;
+import com.android.contacts.common.util.BlockContactHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
@@ -69,7 +68,7 @@ import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
  * This object also contains UI logic pertaining to the view, to isolate it from the CallLogAdapter.
  */
 public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
-        implements View.OnClickListener, BlockNumberHelper.BlockActionCallbacks {
+        implements View.OnClickListener {
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -191,7 +190,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private final TelecomCallLogCache mTelecomCallLogCache;
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
-    private BlockNumberHelper mBlockNumberHelper;
+    private final BlockContactPresenter mBlockContactPresenter;
 
     private final int mPhotoSize;
 
@@ -204,6 +203,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            BlockContactPresenter blockContactPresenter,
             ContactInfoHelper contactInfoHelper,
             View rootView,
             DialerQuickContact dialerQuickContact,
@@ -220,6 +220,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         mTelecomCallLogCache = telecomCallLogCache;
         mCallLogListItemHelper = callLogListItemHelper;
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
+        mBlockContactPresenter = blockContactPresenter;
         mContactInfoHelper = contactInfoHelper;
 
         this.rootView = rootView;
@@ -243,10 +244,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         primaryActionButtonView.setOnClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
-
-        mBlockNumberHelper = new BlockNumberHelper(mContext, new LookupProviderImpl(context));
-        mBlockNumberHelper.setTaskCompletionCallbacks(this);
-        mBlockNumberHelper.gatherDataInBackground();
     }
 
     public static CallLogListItemViewHolder create(
@@ -256,6 +253,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             TelecomCallLogCache telecomCallLogCache,
             CallLogListItemHelper callLogListItemHelper,
             VoicemailPlaybackPresenter voicemailPlaybackPresenter,
+            BlockContactPresenter blockContactPresenter,
             ContactInfoHelper contactInfoHelper) {
 
         return new CallLogListItemViewHolder(
@@ -264,6 +262,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 telecomCallLogCache,
                 callLogListItemHelper,
                 voicemailPlaybackPresenter,
+                blockContactPresenter,
                 contactInfoHelper,
                 view,
                 (DialerQuickContact) view.findViewById(R.id.quick_contact_photo),
@@ -316,7 +315,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             callWithNoteButtonView.setOnClickListener(this);
 
             blockCallerButtonView = actionsView.findViewById(R.id.block_caller_action);
-            blockCallerButtonView.setOnClickListener(this);
         }
 
         bindActionButtons();
@@ -467,9 +465,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         // Remove block caller item if blacklist is disabled
         if (mContactInfoHelper.canBlacklistCalls() && (cmi == null || !cmi.mIsInCallProvider)) {
+            mBlockContactPresenter.setControlView(blockCallerButtonView, number);
             blockCallerButtonView.setVisibility(View.VISIBLE);
-            updateBlockCallerView();
         } else {
+            mBlockContactPresenter.disable();
             blockCallerButtonView.setVisibility(View.GONE);
         }
     }
@@ -573,22 +572,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                                                                            view in dialog. */
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */
                     accountHandle);
-        } else if (view.getId() == R.id.block_caller_action) {
-            if (number != null) {
-                mBlockNumberHelper.setNumberInfo(number);
-            }
-            if (isBlackListed() != BlacklistUtils.MATCH_NONE) {
-                DialogFragment f = mBlockNumberHelper.getBlockNumberDialog(
-                        BlockNumberHelper.BlockMode.UNBLOCK
-                );
-                f.show(((Activity) mContext).getFragmentManager(), "block_contact");
-            } else {
-                DialogFragment f = mBlockNumberHelper.getBlockNumberDialog(
-                        BlockNumberHelper.BlockMode.BLOCK
-                );
-                f.show(((Activity) mContext).getFragmentManager(), "block_contact");
-            }
-            updateBlockCallerView();
         } else if (view.getId() == R.id.view_note_action) {
             mContext.startActivity(mDeepLink.createViewIntent());
         } else {
@@ -641,6 +624,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 new CallLogListItemHelper(phoneCallDetailsHelper, lookupInfoPresenter,
                         resources, telecomCallLogCache),
                 null /* voicemailPlaybackPresenter */,
+                null /* blockContactPresenter */,
                 null /* ContactInfoHelper */,
                 new View(context),
                 new DialerQuickContact(context),
@@ -658,44 +642,4 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         return viewHolder;
     }
 
-    /**
-     * Update block caller text and image color
-     */
-    private void updateBlockCallerView() {
-        Resources res = mContext.getResources();
-        TextView blockCallerText =
-                (TextView) rootView.findViewById(R.id.block_caller_text);
-        ImageView blockCallerImage =
-                (ImageView) rootView.findViewById(R.id.block_caller_image);
-        if (isBlackListed() != BlacklistUtils.MATCH_NONE) {
-            blockCallerText.setText(R.string.call_log_action_unblock);
-            blockCallerText.setTextColor(res.getColor(
-                    R.color.call_log_action_block_red));
-            blockCallerImage.setColorFilter(res.getColor(
-                    R.color.call_log_action_block_red), Mode.SRC_ATOP);
-        } else {
-            blockCallerText.setText(R.string.call_log_action_block);
-            blockCallerText.setTextColor(res.getColor(
-                    R.color.call_log_action_block_gray));
-            blockCallerImage.setColorFilter(res.getColor(
-                    R.color.call_log_action_block_gray), Mode.SRC_ATOP);
-        }
-    }
-
-    /**
-     * Checks whether the number is blacklisted
-     */
-    public int isBlackListed() {
-        return BlacklistUtils.isListed(mContext,
-                number, BlacklistUtils.BLOCK_CALLS);
-    }
-
-    @Override
-    public void onBlockCompleted() {
-        updateBlockCallerView();
-    }
-
-    public void onUnblockCompleted() {
-        updateBlockCallerView();
-    }
 }
