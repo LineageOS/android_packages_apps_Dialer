@@ -19,3 +19,8 @@
 -keep class android.support.design.widget.AppBarLayout$ScrollingViewBehavior { *; }
 
 -verbose
+
+-keep public class cyanogenmod.app.StatusBarPanelCustomTile
+-keep public class cyanogenmod.app.CustomTile
+
+-dontwarn cyanogenmod.app.*
