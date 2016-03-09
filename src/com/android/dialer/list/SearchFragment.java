@@ -255,7 +255,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(super.usesCallableUri());
         adapter.setSearchListner(this);
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllCallMethods());
+        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
         return adapter;
     }
 

@@ -74,7 +74,7 @@ public class SmartDialSearchFragment extends SearchFragment
         // Set adapter's query string to restore previous instance state.
         adapter.setQueryString(getQueryString());
         adapter.setSearchListner(this);
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllCallMethods());
+        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
 
         return adapter;
     }
