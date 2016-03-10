@@ -37,6 +37,7 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.R;
+import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
@@ -304,6 +305,7 @@ public class ContactInfoHelper {
             LookupResponse response = mLookupProvider.blockingFetchInfo(
                     new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso), null));
             if (response != null) {
+                final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
                 // map LookupResponse to ContactInfo
                 ContactInfo contactInfo = new ContactInfo();
                 contactInfo.lookupProviderName = response.mProviderName;
@@ -316,6 +318,15 @@ public class ContactInfoHelper {
                 contactInfo.isSpam = response.mIsSpam;
                 contactInfo.spamCount = response.mSpamCount;
                 contactInfo.attributionDrawable = response.mAttributionLogo;
+
+                // construct encoded lookup uri
+                ContactBuilder contactBuilder = new ContactBuilder(ContactBuilder.REVERSE_LOOKUP,
+                        response.mNumber, formattedNumber);
+                contactBuilder.setInfoProviderName(response.mProviderName);
+                contactBuilder.setPhotoUrl(response.mPhotoUrl);
+                contactBuilder.setName(ContactBuilder.Name.createDisplayName(response.mName));
+
+                contactInfo.lookupUri = contactBuilder.build().lookupUri;
                 info = contactInfo;
             }
         }

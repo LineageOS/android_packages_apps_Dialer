@@ -16,10 +16,6 @@
 
 package com.android.dialer.lookup;
 
-import com.android.contacts.common.util.Constants;
-import com.android.dialer.R;
-import com.android.dialer.calllog.ContactInfo;
-
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -30,13 +26,22 @@ import android.provider.ContactsContract.CommonDataKinds.Website;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Directory;
 import android.provider.ContactsContract.DisplayNameSources;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.contacts.common.util.Constants;
+import com.android.dialer.calllog.ContactInfo;
+import com.android.dialer.lookup.CallerMetaData;
+import com.android.dialer.R;
+
+import java.sql.Struct;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.w3c.dom.Text;
 
 public class ContactBuilder {
     private static final String TAG =
@@ -66,6 +71,7 @@ public class ContactBuilder {
             = new ArrayList<WebsiteUrl>();
 
     private int mDirectoryType;
+    private long mDirectoryId = DirectoryId.DEFAULT;
 
     private Name mName;
 
@@ -73,14 +79,113 @@ public class ContactBuilder {
     private String mFormattedNumber;
     private int mDisplayNameSource = DisplayNameSources.ORGANIZATION;
     private Uri mPhotoUri;
+    private String mPhotoUrl;
 
     private boolean mIsBusiness;
+
+    private int mSpamCount;
+    private String mInfoProviderName;
+    private String mSuccinctLocation;
 
     public ContactBuilder(int directoryType, String normalizedNumber,
             String formattedNumber) {
         mDirectoryType = directoryType;
         mNormalizedNumber = normalizedNumber;
         mFormattedNumber = formattedNumber;
+    }
+
+    public ContactBuilder(Uri encodedContactUri) throws JSONException {
+        String jsonData = encodedContactUri.getEncodedFragment();
+        String directoryId =
+                encodedContactUri.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY);
+        if (!TextUtils.isEmpty(directoryId)) {
+            try {
+                mDirectoryId = Long.parseLong(directoryId);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Error parsing directory id of uri " + encodedContactUri, e);
+            }
+        }
+        try {
+            // name
+            JSONObject json = new JSONObject(jsonData);
+            JSONObject contact = json.optJSONObject(Contacts.CONTENT_ITEM_TYPE);
+            JSONObject nameObj = contact.optJSONObject(StructuredName.CONTENT_ITEM_TYPE);
+            mName = new Name(nameObj);
+
+            if (contact != null) {
+                // numbers
+                if (contact.has(Phone.CONTENT_ITEM_TYPE)) {
+                    String phoneData = contact.getString(Phone.CONTENT_ITEM_TYPE);
+                    Object phoneObject = new JSONTokener(phoneData).nextValue();
+                    JSONArray phoneNumbers;
+                    if (phoneObject instanceof JSONObject) {
+                        phoneNumbers = new JSONArray();
+                        phoneNumbers.put(phoneObject);
+                    } else {
+                        phoneNumbers = contact.getJSONArray(Phone.CONTENT_ITEM_TYPE);
+                    }
+                    for (int i = 0; i < phoneNumbers.length(); ++i) {
+                        JSONObject phoneObj = phoneNumbers.getJSONObject(i);
+                        mPhoneNumbers.add(new PhoneNumber(phoneObj));
+                    }
+                }
+
+                // address
+                if (contact.has(StructuredPostal.CONTENT_ITEM_TYPE)) {
+                    JSONArray addresses = contact.getJSONArray(StructuredPostal.CONTENT_ITEM_TYPE);
+                    for (int i = 0; i < addresses.length(); ++i) {
+                        JSONObject addrObj = addresses.getJSONObject(i);
+                        mAddresses.add(new Address(addrObj));
+                    }
+                }
+
+                // websites
+                if (contact.has(Website.CONTENT_ITEM_TYPE)) {
+                    JSONArray websites = contact.getJSONArray(Website.CONTENT_ITEM_TYPE);
+                    for (int i = 0; i < websites.length(); ++i) {
+                        JSONObject websiteObj = websites.getJSONObject(i);
+                        final WebsiteUrl websiteUrl = new WebsiteUrl(websiteObj);
+                        if (!TextUtils.isEmpty(websiteUrl.url)) {
+                            mWebsites.add(new WebsiteUrl(websiteObj));
+                        }
+                    }
+                }
+
+                mSpamCount = contact.optInt(CallerMetaData.SPAM_COUNT, 0);
+                mInfoProviderName = contact.optString(CallerMetaData.INFO_PROVIDER, null);
+                mSuccinctLocation = contact.optString(CallerMetaData.SUCCINCT_LOCATION, null);
+                mPhotoUrl = contact.optString(CallerMetaData.PHOTO_URL, null);
+            }
+
+        }
+        catch(JSONException e) {
+            Log.e(TAG, "Error parsing encoded fragment of uri " + encodedContactUri, e);
+            throw e;
+        }
+    }
+
+    public void setSpamCount(int spamCount) {
+        mSpamCount = spamCount;
+    }
+
+    public int getSpamCount() {
+        return mSpamCount;
+    }
+
+    public void setInfoProviderName(String infoProviderName) {
+        mInfoProviderName = infoProviderName;
+    }
+
+    public String getInfoProviderName() {
+        return mInfoProviderName;
+    }
+
+    public void setSuccinctLocation(String location) {
+        mSuccinctLocation = location;
+    }
+
+    public String getSuccinctLocation() {
+        return mSuccinctLocation;
     }
 
     public void addAddress(Address address) {
@@ -113,8 +218,8 @@ public class ContactBuilder {
         }
     }
 
-    public Website[] getWebsites() {
-        return mWebsites.toArray(new Website[mWebsites.size()]);
+    public WebsiteUrl[] getWebsites() {
+        return mWebsites.toArray(new WebsiteUrl[mWebsites.size()]);
     }
 
     public void setName(Name name) {
@@ -129,7 +234,9 @@ public class ContactBuilder {
     }
 
     public void setPhotoUri(String photoUri) {
-        setPhotoUri(Uri.parse(photoUri));
+        if (photoUri != null) {
+            setPhotoUri(Uri.parse(photoUri));
+        }
     }
 
     public void setPhotoUri(Uri photoUri) {
@@ -139,6 +246,20 @@ public class ContactBuilder {
 
     public Uri getPhotoUri() {
         return mPhotoUri;
+    }
+
+    public void setPhotoUrl(String url) {
+        if (!TextUtils.isEmpty(url)) {
+            mPhotoUrl = url;
+        }
+    }
+
+    public String getPhotoUrl() {
+        return mPhotoUrl;
+    }
+
+    public long getDirectoryId() {
+        return mDirectoryId;
     }
 
     public void setIsBusiness(boolean isBusiness) {
@@ -205,13 +326,24 @@ public class ContactBuilder {
                 contact.put(Website.CONTENT_ITEM_TYPE, websites);
             }
 
+            // add spam count and attribution
+            contact.put(CallerMetaData.SPAM_COUNT, getSpamCount());
+            contact.put(CallerMetaData.INFO_PROVIDER, getInfoProviderName());
+            contact.put(CallerMetaData.SUCCINCT_LOCATION, getSuccinctLocation());
+            contact.put(CallerMetaData.PHOTO_URL, getPhotoUrl());
+
             ContactInfo info = new ContactInfo();
             info.name = mName.displayName;
-            info.formattedNumber = mFormattedNumber;
             info.normalizedNumber = mNormalizedNumber;
             info.number = mPhoneNumbers.get(0).number;
             info.type = mPhoneNumbers.get(0).type;
             info.label = mPhoneNumbers.get(0).label;
+            if (mAddresses.size() > 0) {
+                Address addr = mAddresses.get(0);
+                if (addr != null) {
+                    info.address = addr.city != null ? addr.city : addr.region;
+                }
+            }
             info.photoUri = mPhotoUri != null ? mPhotoUri : null;
 
             String json = new JSONObject()
@@ -224,11 +356,17 @@ public class ContactBuilder {
 
             if (json != null) {
                 long directoryId = -1;
-                if (mDirectoryType == FORWARD_LOOKUP
-                        || mDirectoryType == PEOPLE_LOOKUP) {
-                    directoryId = ContactsContract.Directory.DEFAULT;
-                } else if (mDirectoryType == REVERSE_LOOKUP) {
-                    directoryId = Long.MAX_VALUE;
+                switch (mDirectoryType) {
+                    case FORWARD_LOOKUP:
+                        directoryId = DirectoryId.NEARBY;
+                        break;
+                    case PEOPLE_LOOKUP:
+                        directoryId = DirectoryId.PEOPLE;
+                        break;
+                    case REVERSE_LOOKUP:
+                        // use null directory to be backwards compatible with old code
+                        directoryId = DirectoryId.NULL;
+                        break;
                 }
 
                 info.lookupUri = Contacts.CONTENT_LOOKUP_URI
@@ -283,6 +421,14 @@ public class ContactBuilder {
             return json;
         }
 
+        public Address() {}
+
+        public Address(JSONObject json) throws JSONException {
+            if (json.has(StructuredPostal.FORMATTED_ADDRESS)) {
+                formattedAddress = json.getString(StructuredPostal.FORMATTED_ADDRESS);
+            }
+        }
+
         public String toString() {
             return "formattedAddress: " + formattedAddress + "; " +
                     "type: " + type + "; " +
@@ -332,6 +478,14 @@ public class ContactBuilder {
             return json;
         }
 
+        public Name(JSONObject json) throws JSONException {
+            if (json != null) {
+                displayName = json.optString(StructuredName.DISPLAY_NAME, null);
+            }
+        }
+
+        public Name() {}
+
         public String toString() {
             return "displayName: " + displayName + "; " +
                     "givenName: " + givenName + "; " +
@@ -366,6 +520,16 @@ public class ContactBuilder {
             return json;
         }
 
+        public PhoneNumber(JSONObject json) throws JSONException {
+            number = json.getString(Phone.NUMBER);
+            type = json.getInt(Phone.TYPE);
+            if (json.has(Phone.LABEL)) {
+                label = json.getString(Phone.LABEL);
+            }
+        }
+
+        public PhoneNumber() {}
+
         public String toString() {
             return "number: " + number + "; " +
                     "type: " + type + "; " +
@@ -392,6 +556,20 @@ public class ContactBuilder {
             json.put(Website.TYPE, type);
             json.putOpt(Website.LABEL, label);
             return json;
+        }
+
+        public WebsiteUrl() {}
+
+        public WebsiteUrl(JSONObject json) throws JSONException {
+            if (json.has(Website.URL)) {
+                url = json.getString(Website.URL);
+            }
+            if (json.has(Website.TYPE)) {
+                type = json.getInt(Website.TYPE);
+            }
+            if (json.has(Website.LABEL)) {
+                label = json.getString(Website.LABEL);
+            }
         }
 
         public String toString() {
