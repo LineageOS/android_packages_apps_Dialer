@@ -190,6 +190,8 @@ public class ImageUtils {
      * @return scaled drawable
      */
     public static Drawable scaleDrawable(Drawable d, float scaleLevel) {
+        // Create a new drawable so we do not accidently use or modify our original one.
+        d = d.getConstantState().newDrawable();
         if (d instanceof VectorDrawable) {
             // if this is a vector drawable, this will already scale properly.
             // leave it alone.
