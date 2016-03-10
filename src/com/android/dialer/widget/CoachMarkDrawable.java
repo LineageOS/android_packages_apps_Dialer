@@ -25,6 +25,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import com.android.dialer.R;
@@ -48,13 +49,19 @@ public class CoachMarkDrawable extends Drawable {
     Resources mRes;
     float mFontWidthScale;
     int mCirclePosX;
+    Drawable mProviderIcon;
 
 
     private static final int PAINT_STROKE = 3;
+    public static final int BUTTON_WIDTH = 300;
+    public static final int BUTTON_BOTTOM_PADDING = 400;
+    public static final double LANDSCAPE_BUTTON_X_SCALE = 1.35;
+    private static final float buttonRadius = 6;
+    private static final int PROVIDER_ICON_PADDING = 25;
 
     public CoachMarkDrawable(Resources res, String markText, int y, int x, int radius,
                              int screenWidth, int screenHeight, int fontSize,
-                             boolean hideGreyOverlay, float fontWidthScale, int circlePosX) {
+                             boolean hideGreyOverlay, float fontWidthScale, int circlePosX, Drawable providerIcon) {
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.BLACK);
@@ -66,6 +73,7 @@ public class CoachMarkDrawable extends Drawable {
         mScreenWidth = screenWidth;
         mScreenHeight = screenHeight;
         mCirclePosX = circlePosX;
+        mProviderIcon = providerIcon;
 
         eraser = new Paint();
         eraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
@@ -101,6 +109,23 @@ public class CoachMarkDrawable extends Drawable {
         }
 
         canvas.drawBitmap(bm, 0, 0, null);
+
+        if (mCirclePosX != 0) {
+            mProviderIcon.setBounds(
+                    mCirclePosX - mRadius + PROVIDER_ICON_PADDING,
+                    mY - mRadius + PROVIDER_ICON_PADDING,
+                    mCirclePosX + mRadius - PROVIDER_ICON_PADDING,
+                    mY + mRadius - PROVIDER_ICON_PADDING
+            );
+        } else {
+            mProviderIcon.setBounds(
+                    mX - mRadius + PROVIDER_ICON_PADDING,
+                    mY - mRadius + PROVIDER_ICON_PADDING,
+                    mX + mRadius - PROVIDER_ICON_PADDING,
+                    mY + mRadius - PROVIDER_ICON_PADDING
+            );
+        }
+        mProviderIcon.draw(canvas);
 
         if (!mHideGreyOverlay) {
             mPaint.setColor(mRes.getColor(R.color.coach_mark_text_with_overlay));
@@ -156,6 +181,48 @@ public class CoachMarkDrawable extends Drawable {
         // Draw the point at the end of the line. This dot is 1/6th the size of the main coach
         // circle.
         canvas.drawCircle(mScreenWidth - calculatedX, mY, mRadius/6, mPaint);
+
+        // If this is not a fullscreen coachmark, quit here.
+        if (mHideGreyOverlay) {
+            return;
+        }
+
+        // Calculate the button position based on rotation.
+        RectF r;
+        if (mCirclePosX == 0) {
+            r = new RectF(
+                    mScreenWidth / 2 - BUTTON_WIDTH / 2,
+                    mScreenHeight - BUTTON_BOTTOM_PADDING - (mFontSize * 2 + mFontSize / 2),
+                    mScreenWidth / 2 + BUTTON_WIDTH / 2,
+                    mScreenHeight - BUTTON_BOTTOM_PADDING
+            );
+        } else {
+            float width = (float)(mScreenWidth / LANDSCAPE_BUTTON_X_SCALE);
+            r = new RectF(
+                    width - BUTTON_WIDTH / 2,
+                    mScreenHeight - BUTTON_BOTTOM_PADDING - (mFontSize * 2 + mFontSize / 2),
+                    width + BUTTON_WIDTH / 2,
+                    mScreenHeight - BUTTON_BOTTOM_PADDING
+            );
+        }
+
+        String buttonText = mRes.getString(R.string.provider_button_help);
+
+        // find the rectangles center
+        float rectCenter = r.height()/2;
+
+        // find the left most coord where we should start our button text
+        float buttonTextLeftMostX =  (r.left + BUTTON_WIDTH/2)
+                - mPaint.measureText(buttonText.toUpperCase())/2;
+
+        // find the baseline where we should draw our button text, based on fontsize and rectangle center
+        float buttonTextBaseline = r.bottom - rectCenter/2 - mFontSize/4;
+
+        // Draw the button with text
+        canvas.drawRoundRect(r, buttonRadius, buttonRadius, mPaint);
+        mPaint.setColor(mRes.getColor(R.color.coach_mark_text_with_overlay));
+        canvas.drawText(buttonText.toUpperCase(), buttonTextLeftMostX, buttonTextBaseline, mPaint);
+
     }
 
     @Override

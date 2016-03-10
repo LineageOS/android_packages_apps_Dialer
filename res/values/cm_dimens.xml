@@ -12,5 +12,6 @@
     <dimen name="empty_list_message_side_image_size">36dp</dimen>
 
     <dimen name="coachmark_hint_text">14sp</dimen>
+    <dimen name="coachmark_touch_padding">14sp</dimen>
 
 </resources>

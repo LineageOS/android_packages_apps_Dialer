@@ -168,7 +168,7 @@
 
     <string name="provider_help">"Make %1$s calls by\nswitching modes here"</string>
     <string name="provider_search_help">"Search %1$s contacts by\nswitching modes here"</string>
-
+    <string name="provider_button_help">"Got it"</string>
 
     <string name="provider_voice_call">"%1$s voice call"</string>
     <string name="provider_video_call">"%1$s video call"</string>

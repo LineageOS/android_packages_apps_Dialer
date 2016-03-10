@@ -106,7 +106,7 @@ public class CoachMarkDrawableHelper {
     }
 
     private static void buildOverlayCoachMark(Activity act, final View main, int parentHeight,
-                                              boolean ignoreScreenSize, String text,
+                                              final boolean ignoreScreenSize, String text,
                                               final View touch, final SharedPreferences sp,
                                               CallMethodInfo cmi, float fontWidthScale) {
 
@@ -146,26 +146,64 @@ public class CoachMarkDrawableHelper {
 
         // build our coachmark drawable
         Drawable d = new CoachMarkDrawable(res, text, y, x, width, size.x, size.y, textHeight,
-                ignoreScreenSize, fontWidthScale, circlePosX);
+                ignoreScreenSize, fontWidthScale, circlePosX, cmi.mBrandIcon);
 
         // Get and add view overlay
         final ViewOverlay overlay = main.getOverlay();
         overlay.clear();
         overlay.add(d);
 
+        // Find the right X to prepare our touch zones.
+        if (circlePosX != 0) {
+            x = circlePosX;
+        }
+
+        // we need some padding so close touches to the circle work
+        final int TOUCH_PADDING = res.getDimensionPixelSize(R.dimen.coachmark_touch_padding);
+
+        final int circleTouchStart = (x - TOUCH_PADDING) - width/2;
+        final int circleTouchEnd = (x + TOUCH_PADDING) + width/2;
+        final int circleTouchTop = (y + TOUCH_PADDING) + width/2;
+        final int circleTouchBottom = (y - TOUCH_PADDING) - width/2;
+
+        final int buttonTouchStart;
+        final int buttonTouchEnd;
+
+        if (circlePosX == 0) {
+            buttonTouchStart = size.x/2 - CoachMarkDrawable.BUTTON_WIDTH;
+            buttonTouchEnd = size.x/2 + CoachMarkDrawable.BUTTON_WIDTH;
+        } else {
+            int touchWidth = (int)(size.x / CoachMarkDrawable.LANDSCAPE_BUTTON_X_SCALE);
+            buttonTouchStart = touchWidth - CoachMarkDrawable.BUTTON_WIDTH;
+            buttonTouchEnd = touchWidth + CoachMarkDrawable.BUTTON_WIDTH;
+        }
+        final int buttonTouchTop = size.y - CoachMarkDrawable.BUTTON_BOTTOM_PADDING - (textHeight*2 + textHeight/2);
+        final int buttonTouchBottom = size.y + CoachMarkDrawable.BUTTON_BOTTOM_PADDING;
+
         touch.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                overlay.clear();
-                touch.setOnTouchListener(null);
+                int x = (int)motionEvent.getX();
+                int y = (int)motionEvent.getY();
 
-                // set coachmark status to hide
-                sp.edit().putBoolean(CallMethodUtils.PREF_SPINNER_COACHMARK_SHOW, false).apply();
+                 boolean userTouchedCircle = (x <= circleTouchEnd && x >= circleTouchStart)
+                         && (y <= circleTouchTop && y >= circleTouchBottom);
 
-                // we must return false so our touch input falls through
-                return false;
+                boolean userTouchedButton = (x <= buttonTouchEnd && x >= buttonTouchStart)
+                        && (y >= buttonTouchTop && y <= buttonTouchBottom);
+
+                if (userTouchedButton || userTouchedCircle || ignoreScreenSize)  {
+                    overlay.clear();
+                    touch.setOnTouchListener(null);
+                    // set coachmark status to hide
+                    sp.edit().putBoolean(CallMethodUtils.PREF_SPINNER_COACHMARK_SHOW, false).apply();
+                    if (!userTouchedButton) {
+                        return false;
+                    }
+                }
+
+                return true;
             }
         });
     }
-
 }
