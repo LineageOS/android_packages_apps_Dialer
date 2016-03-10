@@ -144,6 +144,7 @@ public class SmartDialSearchFragment extends SearchFragment
                 //setAvailableProviders(CallMethodHelper.getAllCallMethods());
                 if (mAvailableProviders == null) {
                     mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
+                    mAvailableProviders.putAll(CallMethodHelper.getAllEnabledCallMethods());
                 }
 
                 if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
