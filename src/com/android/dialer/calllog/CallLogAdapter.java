@@ -16,10 +16,6 @@
 
 package com.android.dialer.calllog;
 
-import com.android.contacts.common.util.PermissionsUtil;
-
-import com.android.dialer.DialtactsActivity;
-import com.android.dialer.database.VoicemailArchiveContract;
 import com.google.common.annotations.VisibleForTesting;
 
 import android.content.Context;
@@ -40,7 +36,6 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -48,15 +43,18 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.PermissionsUtil;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.calllog.calllogcache.CallLogCache;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
@@ -492,7 +490,7 @@ public class CallLogAdapter extends GroupingListAdapter
         int count = getGroupSize(position);
 
         final String number = c.getString(CallLogQuery.NUMBER);
-        final String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+        final String postDialDigits = CompatUtils.isNCompatible()
                 && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
                 c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
 
