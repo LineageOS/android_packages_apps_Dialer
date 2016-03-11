@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.ContactsUtils;
+import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -181,7 +182,8 @@ public class ContactInfoHelper {
             }
             String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
             ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
-            contactInfo.nameAlternative = lookUpDisplayNameAlternative(mContext, lookupKey);
+            contactInfo.nameAlternative = lookUpDisplayNameAlternative(mContext, lookupKey,
+                    contactInfo.userType);
             return contactInfo;
         } finally {
             phoneLookupCursor.close();
@@ -207,13 +209,13 @@ public class ContactInfoHelper {
         return info;
     }
 
-    public static String lookUpDisplayNameAlternative(Context context, String lookupKey) {
-        if (lookupKey == null) {
+    public static String lookUpDisplayNameAlternative(Context context, String lookupKey,
+            @UserType long userType) {
+        // Query {@link Contacts#CONTENT_LOOKUP_URI} directly with work lookup key is not allowed.
+        if (lookupKey == null || userType == ContactsUtils.USER_TYPE_WORK) {
             return null;
         }
-
         final Uri uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
-
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver().query(uri,
@@ -222,9 +224,6 @@ public class ContactInfoHelper {
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getString(PhoneQuery.NAME_ALTERNATIVE);
             }
-        } catch (IllegalArgumentException e) {
-            // Thrown for work profile queries. For those, we don't support
-            // alternative display names.
         } finally {
             if (cursor != null) {
                 cursor.close();
