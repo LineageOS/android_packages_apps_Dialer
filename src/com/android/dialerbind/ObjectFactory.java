@@ -48,6 +48,10 @@ public class ObjectFactory {
         return false;
     }
 
+    public static boolean isVoicemailShareEnabled(Context context) {
+        return false;
+    }
+
     @Nullable
     public static ExtendedBlockingButtonRenderer newExtendedBlockingButtonRenderer(
             Context context, ExtendedBlockingButtonRenderer.Listener listener) {

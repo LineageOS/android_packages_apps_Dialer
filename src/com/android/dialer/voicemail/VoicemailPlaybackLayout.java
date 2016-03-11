@@ -275,7 +275,11 @@ public class VoicemailPlaybackLayout extends LinearLayout
     private ImageButton mPlaybackSpeakerphone;
     private ImageButton mDeleteButton;
     private ImageButton mArchiveButton;
+    private ImageButton mShareButton;
+
     private Space mArchiveSpace;
+    private Space mShareSpace;
+
     private TextView mStateText;
     private TextView mPositionText;
     private TextView mTotalDurationText;
@@ -304,6 +308,12 @@ public class VoicemailPlaybackLayout extends LinearLayout
             updateArchiveUI(mVoicemailUri);
             updateArchiveButton(mVoicemailUri);
         }
+
+        if (ObjectFactory.isVoicemailShareEnabled(mContext)) {
+            // Show share button and space before it
+            mShareSpace.setVisibility(View.VISIBLE);
+            mShareButton.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -315,7 +325,11 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mPlaybackSpeakerphone = (ImageButton) findViewById(R.id.playback_speakerphone);
         mDeleteButton = (ImageButton) findViewById(R.id.delete_voicemail);
         mArchiveButton =(ImageButton) findViewById(R.id.archive_voicemail);
+        mShareButton = (ImageButton) findViewById(R.id.share_voicemail);
+
         mArchiveSpace = (Space) findViewById(R.id.space_before_archive_voicemail);
+        mShareSpace = (Space) findViewById(R.id.space_before_share_voicemail);
+
         mStateText = (TextView) findViewById(R.id.playback_state_text);
         mPositionText = (TextView) findViewById(R.id.playback_position_text);
         mTotalDurationText = (TextView) findViewById(R.id.total_duration_text);
