@@ -24,8 +24,8 @@
     <!-- Background color of main banner. -->
     <color name="incall_call_banner_background_color">@color/incall_background_color</color>
     <color name="incall_call_banner_text_color">#ffffff</color>
-    <!-- 80% opacity, white -->
-    <color name="incall_call_banner_subtext_color">#ccffffff</color>
+    <!-- 100% opacity, white -->
+    <color name="incall_call_banner_subtext_color">#ffffff</color>
     <color name="incall_banner_secondary_background_color">#f5f5f5</color>
     <color name="incall_banner_secondary_text_color">#333333</color>
 
