@@ -237,12 +237,6 @@ public class CallerInfo {
                     info.name = cursor.getString(columnIndex);
                 }
 
-                columnIndex = cursor.getColumnIndex(PhoneLookup.LOOKUP_KEY);
-                if (columnIndex != -1) {
-                    info.nameAlternative = ContactInfoHelper.lookUpDisplayNameAlternative(
-                            context, cursor.getString(columnIndex));
-                }
-
                 // Look for the number
                 columnIndex = cursor.getColumnIndex(PhoneLookup.NUMBER);
                 if (columnIndex != -1) {
@@ -326,6 +320,9 @@ public class CallerInfo {
                         : contactRef.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY);
                 final Long directoryId = directory == null ? null : Longs.tryParse(directory);
                 info.userType = ContactsUtils.determineUserType(directoryId, contactId);
+
+                info.nameAlternative = ContactInfoHelper.lookUpDisplayNameAlternative(
+                        context, info.lookupKeyOrNull, info.userType);
             }
             cursor.close();
         }

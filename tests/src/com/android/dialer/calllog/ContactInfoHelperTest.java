@@ -22,6 +22,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.test.mocks.ContactsMockContext;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
 
@@ -99,13 +100,15 @@ public class ContactInfoHelperTest extends AndroidTestCase {
     }
 
     public void testLookupDisplayNameAlternative_NullLookup() {
-        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, null));
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, null,
+                ContactsUtils.USER_TYPE_CURRENT));
     }
 
     public void testLookupDisplayNameAlternative_NoResults() {
         setUpQueryExpectations(displayNameAlternativeUri,
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION);
-        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY));
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext,
+                TEST_LOOKUP_KEY, ContactsUtils.USER_TYPE_CURRENT));
         mContext.verify();
     }
 
@@ -113,7 +116,8 @@ public class ContactInfoHelperTest extends AndroidTestCase {
         setUpQueryExpectations(displayNameAlternativeUri,
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, TEST_DISPLAY_NAME_ALTERNATIVE_ROW);
         Assert.assertEquals(TEST_DISPLAY_NAME_ALTERNATIVE,
-                mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY));
+                mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY
+                , ContactsUtils.USER_TYPE_CURRENT));
         mContext.verify();
     }
 

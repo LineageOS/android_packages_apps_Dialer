@@ -36,6 +36,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioAttributes;
 import android.net.Uri;
+import android.provider.ContactsContract.Contacts;
 import android.support.annotation.Nullable;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
@@ -229,7 +230,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * Sets up the main Ui for the notification
      */
     private void buildAndSendNotification(Call originalCall, ContactCacheEntry contactInfo) {
-
         // This can get called to update an existing notification after contact information has come
         // back. However, it can happen much later. Before we continue, we need to make sure that
         // the call being passed in is still the one we want to show in the notification.
@@ -440,11 +440,14 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
     private void addPersonReference(Notification.Builder builder, ContactCacheEntry contactInfo,
             Call call) {
-        if (contactInfo.lookupUri != null) {
+        // Query {@link Contacts#CONTENT_LOOKUP_URI} directly with work lookup key is not allowed.
+        // So, do not pass {@link Contacts#CONTENT_LOOKUP_URI} to NotificationManager to avoid
+        // NotificationManager using it.
+        if (contactInfo.lookupUri != null && contactInfo.userType != ContactsUtils.USER_TYPE_WORK) {
             builder.addPerson(contactInfo.lookupUri.toString());
         } else if (!TextUtils.isEmpty(call.getNumber())) {
             builder.addPerson(Uri.fromParts(PhoneAccount.SCHEME_TEL,
-                            call.getNumber(), null).toString());
+                    call.getNumber(), null).toString());
         }
     }
 
