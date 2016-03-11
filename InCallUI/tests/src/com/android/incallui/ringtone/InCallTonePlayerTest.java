@@ -21,7 +21,6 @@ import android.media.ToneGenerator;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.android.incallui.AudioModeProvider;
 import com.android.incallui.async.PausableExecutor;
 import com.android.incallui.async.SingleProdThreadExecutor;
 
@@ -32,7 +31,6 @@ import org.mockito.MockitoAnnotations;
 @SmallTest
 public class InCallTonePlayerTest extends AndroidTestCase {
 
-    @Mock private AudioModeProvider mAudioModeProvider;
     @Mock private ToneGeneratorFactory mToneGeneratorFactory;
     @Mock private ToneGenerator mToneGenerator;
     private InCallTonePlayer mInCallTonePlayer;
@@ -52,8 +50,7 @@ public class InCallTonePlayerTest extends AndroidTestCase {
         Mockito.when(mToneGeneratorFactory.newInCallToneGenerator(Mockito.anyInt(),
                 Mockito.anyInt())).thenReturn(mToneGenerator);
         mExecutor = new SingleProdThreadExecutor();
-        mInCallTonePlayer = new InCallTonePlayer(mAudioModeProvider, mToneGeneratorFactory,
-                mExecutor);
+        mInCallTonePlayer = new InCallTonePlayer(mToneGeneratorFactory, mExecutor);
     }
 
     @Override
@@ -90,10 +87,6 @@ public class InCallTonePlayerTest extends AndroidTestCase {
             mInCallTonePlayer.play(InCallTonePlayer.TONE_CALL_WAITING);
             fail();
         } catch (IllegalStateException e) {}
-    }
-
-    public void testPlay_BlueToothStream() {
-        // TODO (maxwelb): b/26932998 play through bluetooth
     }
 
     public void testPlay_VoiceCallStream() throws InterruptedException {
