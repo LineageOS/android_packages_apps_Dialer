@@ -299,9 +299,7 @@
     <skip />
     <!-- no translation found for default_notification_description (4950807644546509965) -->
     <skip />
-    <!-- no translation found for ringtone_title (835582004693335905) -->
-    <!-- no translation found for ringtone_title (5379026328015343686) -->
-    <skip />
+    <string name="ringtone_title" msgid="835582004693335905">"Melodija zvona telefona"</string>
     <!-- no translation found for vibrate_on_ring_title (5019791043398986665) -->
     <skip />
     <!-- no translation found for preference_category_ringtone (6246687516643676729) -->
