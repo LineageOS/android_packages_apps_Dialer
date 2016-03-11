@@ -100,10 +100,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mDialerRingtoneManager = new DialerRingtoneManager(
-                new InCallTonePlayer(
-                        AudioModeProvider.getInstance(),
-                        new ToneGeneratorFactory(),
-                        new PausableExecutorImpl()),
+                new InCallTonePlayer(new ToneGeneratorFactory(), new PausableExecutorImpl()),
                 CallList.getInstance());
         mCurrentNotification = NOTIFICATION_NONE;
     }

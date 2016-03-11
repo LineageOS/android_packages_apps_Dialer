@@ -21,19 +21,13 @@ import com.google.common.base.Preconditions;
 
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.provider.MediaStore.Audio;
 import android.support.annotation.Nullable;
-import android.telecom.CallAudioState;
 
-import com.android.contacts.common.testing.NeededForTesting;
-import com.android.incallui.AudioModeProvider;
 import com.android.incallui.Log;
 import com.android.incallui.async.PausableExecutor;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * Class responsible for playing in-call related tones in a background thread. This class only
@@ -45,7 +39,6 @@ public class InCallTonePlayer {
 
     public static final int VOLUME_RELATIVE_HIGH_PRIORITY = 80;
 
-    private final AudioModeProvider mAudioModeProvider;
     private final ToneGeneratorFactory mToneGeneratorFactory;
     private final PausableExecutor mExecutor;
     private @Nullable CountDownLatch mNumPlayingTones;
@@ -53,23 +46,19 @@ public class InCallTonePlayer {
     /**
      * Creates a new InCallTonePlayer.
      *
-     * @param audioModeProvider the {@link AudioModeProvider} used to determine through which stream
-     * to play tones.
      * @param toneGeneratorFactory the {@link ToneGeneratorFactory} used to create
      * {@link ToneGenerator}s.
      * @param executor the {@link PausableExecutor} used to play tones in a background thread.
      * @throws NullPointerException if audioModeProvider, toneGeneratorFactory, or executor are
      * {@code null}.
      */
-    public InCallTonePlayer(AudioModeProvider audioModeProvider,
-            ToneGeneratorFactory toneGeneratorFactory, PausableExecutor executor) {
-        mAudioModeProvider = Preconditions.checkNotNull(audioModeProvider);
+    public InCallTonePlayer(ToneGeneratorFactory toneGeneratorFactory, PausableExecutor executor) {
         mToneGeneratorFactory = Preconditions.checkNotNull(toneGeneratorFactory);
         mExecutor = Preconditions.checkNotNull(executor);
     }
 
     /**
-     * @return {@code true} if a tone is currently playing, {@code false} otherwise
+     * @return {@code true} if a tone is currently playing, {@code false} otherwise.
      */
     public boolean isPlayingTone() {
         return mNumPlayingTones != null && mNumPlayingTones.getCount() > 0;
@@ -79,8 +68,8 @@ public class InCallTonePlayer {
      * Plays the given tone in a background thread.
      *
      * @param tone the tone to play.
-     * @throws IllegalStateException if a tone is already playing
-     * @throws IllegalArgumentException if the tone is invalid
+     * @throws IllegalStateException if a tone is already playing.
+     * @throws IllegalArgumentException if the tone is invalid.
      */
     public void play(int tone) {
         if (isPlayingTone()) {
@@ -97,24 +86,22 @@ public class InCallTonePlayer {
     }
 
     private ToneGeneratorInfo getToneGeneratorInfo(int tone) {
-        int stream = getPlaybackStream();
         switch (tone) {
             case TONE_CALL_WAITING:
+                /*
+                 * Call waiting tones play until they're stopped either by the user accepting or
+                 * declining the call so the tone length is set at what's effectively forever. The
+                 * tone is played at a high priority volume and through STREAM_VOICE_CALL since it's
+                 * call related and using that stream will route it through bluetooth devices
+                 * appropriately.
+                 */
                 return new ToneGeneratorInfo(ToneGenerator.TONE_SUP_CALL_WAITING,
                         VOLUME_RELATIVE_HIGH_PRIORITY,
                         Integer.MAX_VALUE,
-                        stream);
+                        AudioManager.STREAM_VOICE_CALL);
             default:
                 throw new IllegalArgumentException("Bad tone: " + tone);
         }
-    }
-
-    private int getPlaybackStream() {
-        if (mAudioModeProvider.getAudioMode() == CallAudioState.ROUTE_BLUETOOTH) {
-            // TODO (maxwelb): b/26932998 play through bluetooth
-            // return AudioManager.STREAM_BLUETOOTH_SCO;
-        }
-        return AudioManager.STREAM_VOICE_CALL;
     }
 
     private void playOnBackgroundThread(ToneGeneratorInfo info) {
