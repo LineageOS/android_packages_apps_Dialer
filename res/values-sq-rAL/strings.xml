@@ -17,20 +17,18 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"Telefoni"</string>
+    <string name="applicationLabel" msgid="8490255569343340580">"Formuesi i numrit"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefoni"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefoni"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historiku i telefonatave"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Telefono <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Raporto numrin e pasaktë"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Redakto numrin para telefonatës"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Shto te një kontakt"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Shto te kontaktet"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Fshi nga historiku i telefonatave"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Pastro historikun e telefonatave"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Fshije postën zanore"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Shpërndaje postën zanore"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"Ditari i telefonatave është bosh"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Bëj një telefonatë"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Nuk ka asnjë telefonatë"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Të pastrohet historiku i telefonatave?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Kjo do të fshijë të gjitha telefonatat nga historiku yt"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Po pastron historikun e telefonatave…"</string>
@@ -49,15 +47,17 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Vetëm telefonatat hyrëse"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Vetëm telefonatat dalëse"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Vetëm telefonatat e humbura"</string>
-    <string name="visual_voicemail_title" msgid="4574199312906348905">"Posta zanore vizuale"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"Shiko dhe dëgjo postën zanore, pa pasur nevojë të telefonosh një numër. mund të zbatohen tarifa për të dhënat."</string>
-    <string name="visual_voicemail_settings" msgid="8090338793118794741">"Cilësimet"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Përditësimet e postës zanore nuk mundësohen"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Posta të reja zanore janë në pritje. Nuk mund të ngarkohen tani."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Konfiguro postën zanore"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Audioja nuk mundësohet"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Konfiguro"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Telefono postën zanore"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Shpejtësi më e ulët"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Shpejtësi e ulët"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Shpejtësi normale"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Shpejtësi e lartë"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Shpejtësi më e lartë"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Zgjidh një numër"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Zgjidh një numër"</string>
@@ -72,7 +72,7 @@
     <string name="description_rate_increase" msgid="6324606574127052385">"Rrite shpejtësinë e luajtjes"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Historiku i telefonatave"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Opsione të tjera"</string>
-    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"blloku i tasteve"</string>
+    <string name="action_menu_dialpad_button" msgid="1425910318049008136">"blloku i formimit të numrit"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Kopjo"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Shfaq vetëm dalëset"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"Shfaq vetëm hyrëset"</string>
@@ -86,8 +86,8 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Të gjitha kontaktet"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detajet e telefonatës"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Detajet nuk mundësohen"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Përdor bllokun e tasteve"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Kthehu te telefonata"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Përdor bllokun e tasteve me tone të prekjes"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Kthehu te telefonata në vazhdim"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Shto një telefonatë"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Telefonatë hyrëse"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Telefonatë dalëse"</string>
@@ -112,7 +112,6 @@
     <string name="voicemail" msgid="3851469869202611441">"Posta zanore"</string>
     <string name="private_num" msgid="6374339738119166953">"Numër privat"</string>
     <string name="payphone" msgid="7726415831153618726">"Telefon me pagesë"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> sekonda"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. e <xliff:g id="SECONDS">%s</xliff:g> sek."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Ky numër nuk mund të telefonohet"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Për të konfiguruar postën zanore, shko te \"Menyja\" &gt; \"Cilësimet\"."</string>
@@ -127,8 +126,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Telefonata nuk mund të bëhet sepse aplikacioni \"Telefoni\" është i çaktivizuar."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Nuk ka aplikacion për atë në këtë pajisje"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Fut një emër ose një numër telefoni"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"Nuk ke thirrje të humbura."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Kutia hyrëse e postës tënde zanore është bosh."</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Nuk ka asnjë telefonatë"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Nuk ka posta zanore së fundi"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Shfaq vetëm të preferuarat"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historiku"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Të gjitha"</string>
@@ -137,45 +136,34 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"Telefonatë e shpejtë"</string>
     <string name="tab_recents" msgid="929949073851377206">"Të fundit"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktet"</string>
-    <string name="tab_voicemail" msgid="155024725947496746">"Posta zanore"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"U hoq nga të preferuarat"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Zhbëj"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Telefono <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Krijo një kontakt të ri"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Shto te një kontakt"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Shto te kontakti ekzistues"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Dërgo SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Bëj një telefonatë me video"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Shiko historikun e plotë të telefonatave"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"Shiko historikun e plotë të telefonatave"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> telefonata të reja të humbura"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Askush nuk është ende në thirrjen tënde të shpejtuar"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Shto një të preferuar"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"Nuk ke ende kontakte"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Shto një kontakt"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Telefonata e shpejtë është formim numri me një prekje për të preferuarat dhe për numrat që telefonon më shpesh."</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"Nuk ka asnjë kontakt"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Prek imazhin për të parë të gjithë numrat ose mbaje të shtypur për ta pozicionuar përsëri"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Hiq"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TË GJITHA KONTAKTET"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Telefonatë me video"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Dërgo mesazh"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"Detajet e telefonatës"</string>
-    <string name="call_log_action_call" msgid="463690849042459842">"Telefono <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"DËGJO"</string>
+    <string name="call_log_action_details" msgid="7957138590190911171">"Shiko detajet"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Telefonatë e humbur nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Telefonatë e përgjigjur nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Telefonatë për <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"në <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telefono"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Telefono <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"Telefono me video <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Telefonatë me video për <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Dëgjo postën zanore nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"Luaj postën zanore nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"Ndërprit postën zanore nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_delete" msgid="2025472770630153436">"Fshi postën zanore nga <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> posta të reja zanore</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> postë e re zanore</item>
-    </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Krijo një kontakt për <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Shtoje <xliff:g id="NAMEORNUMBER">^1</xliff:g> te një kontakt ekzistues"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detajet e telefonatës për <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"U fshi nga historiku i telefonatave"</string>
+    <string name="call_log_action_report" msgid="4327809827087468864">"Raporto"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Sot"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Dje"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Më të vjetra"</string>
@@ -189,9 +177,9 @@
     <string name="display_options_title" msgid="7812852361055667468">"Opsionet e paraqitjes"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Tingujt dhe dridhjet"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Qasshmëria"</string>
-    <string name="ringtone_title" msgid="760362035635084653">"Zilja e telefonit"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Edhe dridhje për telefonatat"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tingujt e bllokut të tasteve"</string>
+    <string name="ringtone_title" msgid="760362035635084653">"Toni i ziles i telefonit"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Dridhje edhe për telefonatat"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonet e bllokut të formimit të numrit"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Gjatësia e tonit të bllokut të formimit të numrave"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Normal"</item>
@@ -200,13 +188,4 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Përgjigjet e shpejta"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Telefonatat"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Llogaritë e telefonatave"</string>
-    <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktivizo"</string>
-    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Cakto lejet"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Për të aktivizuar thirrjen e shpejtuar,\n aktivizo lejen e Kontakteve."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Për të parë ditarin tënd të telefonatave,\n aktivizo lejen e Telefonit."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Për të parë kontaktet,\n aktivizo lejen e Kontakteve."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Për të hyrë në postën tënde zanore, \n aktivizo lejen e Telefonit."</string>
-    <string name="permission_no_search" msgid="84152933267902056">"Për të kërkuar kontaktet, aktivizo lejet e Kontakteve"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Për të kryer një telefonatë,\n aktivizo lejen e Telefonit."</string>
-    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacionet e telefonit nuk kanë leje të shkruajnë në cilësimet e sistemit."</string>
 </resources>

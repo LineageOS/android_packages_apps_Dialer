@@ -17,20 +17,18 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"โทรศัพท์"</string>
+    <string name="applicationLabel" msgid="8490255569343340580">"โปรแกรมโทรออก"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"โทรศัพท์"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"โทรศัพท์"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ประวัติการโทร"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"โทรหา <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"รายงานหมายเลขที่ไม่ถูกต้อง"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"แก้ไขหมายเลขก่อนโทร"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"เพิ่มในรายชื่อติดต่อ"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"เพิ่มในสมุดโทรศัพท์"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ลบออกจากประวัติการโทร"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ล้างประวัติการโทร"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ลบข้อความเสียง"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"แชร์ข้อความเสียง"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"ประวัติการโทรว่างเปล่า"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"โทรออก"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"ไม่มีการโทร"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ล้างประวัติการโทรไหม"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"การดำเนินการนี้จะลบการโทรทั้งหมดออกจากประวัติของคุณ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"กำลังล้างประวัติการโทร…"</string>
@@ -49,15 +47,17 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"เฉพาะสายเรียกเข้า"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"เฉพาะสายโทรออก"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"เฉพาะสายที่ไม่ได้รับ"</string>
-    <string name="visual_voicemail_title" msgid="4574199312906348905">"ข้อความเสียงพร้อมภาพ"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"ดูและฟังข้อความเสียง โดยไม่ต้องโทรไปยังหมายเลขใดๆ อาจมีการเรียกเก็บค่าบริการอินเทอร์เน็ต"</string>
-    <string name="visual_voicemail_settings" msgid="8090338793118794741">"การตั้งค่า"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"ไม่มีการอัปเดตข้อความเสียง"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"มีข้อความเสียงใหม่รออยู่ ไม่สามารถโหลดได้ในขณะนี้"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"ตั้งค่าข้อความเสียง"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ไม่สามารถใช้เสียงได้"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"ตั้งค่า"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"เรียกข้อความเสียง"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"ช้าที่สุด"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"ช้า"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"เร็วปกติ"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"เร็ว"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"เร็วที่สุด"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"เลือกหมายเลข"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"เลือกหมายเลข"</string>
@@ -87,7 +87,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"รายละเอียดการโทร"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ไม่สามารถดึงรายละเอียด"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ใช้ปุ่มกดสัญญาณเสียง"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"กลับไปคุยสายต่อ"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"กลับสู่การโทรที่กำลังดำเนินอยู่"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"เพิ่มการโทร"</string>
     <string name="type_incoming" msgid="6502076603836088532">"สายเรียกเข้า"</string>
     <string name="type_outgoing" msgid="343108709599392641">"สายโทรออก"</string>
@@ -112,7 +112,6 @@
     <string name="voicemail" msgid="3851469869202611441">"ข้อความเสียง"</string>
     <string name="private_num" msgid="6374339738119166953">"หมายเลขส่วนตัว"</string>
     <string name="payphone" msgid="7726415831153618726">"โทรศัพท์สาธารณะ"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> วินาที"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> นาที <xliff:g id="SECONDS">%s</xliff:g> วินาที"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ไม่สามารถโทรไปยังหมายเลขนี้"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"หากต้องการตั้งค่าข้อความเสียง ให้ไปที่เมนู &gt; การตั้งค่า"</string>
@@ -127,8 +126,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"ไม่สามารถโทรศัพท์ได้เนื่องจากแอปพลิเคชันโทรศัพท์ถูกปิดใช้งาน"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ไม่มีแอปสำหรับการทำงานนั้นบนอุปกรณ์นี้"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ป้อนชื่อหรือหมายเลขโทรศัพท์"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"คุณไม่มีสายที่ไม่ได้รับ"</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"กล่องข้อความเสียงว่างเปล่า"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"ไม่มีการโทร"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"ไม่มีข้อความเสียงล่าสุด"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"แสดงเฉพาะรายชื่อที่ชื่นชอบ"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ประวัติ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ทั้งหมด"</string>
@@ -137,45 +136,34 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"การโทรด่วน"</string>
     <string name="tab_recents" msgid="929949073851377206">"ล่าสุด"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"รายชื่อติดต่อ"</string>
-    <string name="tab_voicemail" msgid="155024725947496746">"ข้อความเสียง"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"ลบจากรายการโปรด"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"เลิกทำ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"โทร <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"สร้างรายชื่อติดต่อใหม่"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"เพิ่มในรายชื่อติดต่อ"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"เพิ่มไปยังรายชื่อติดต่อที่มีอยู่"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ส่ง SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ใช้แฮงเอาท์วิดีโอ"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"ดูประวัติการโทรแบบเต็ม"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"ดูประวัติการโทรแบบเต็ม"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"สายที่ไม่ได้รับใหม่ <xliff:g id="NUMBER">%s</xliff:g> สาย"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"ยังไม่ได้กำหนดผู้ใดในการโทรด่วน"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"เพิ่มรายการโปรด"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"คุณยังไม่มีรายชื่อติดต่อ"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"เพิ่มรายชื่อติดต่อ"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"การโทรด่วนเป็นการโทรแบบแตะครั้งเดียวสำหรับรายการโปรดและหมายเลขที่คุณโทรบ่อย"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"ไม่มีรายชื่อติดต่อ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"แตะรูปภาพเพื่อดูหมายเลขทั้งหมด หรือแตะค้างไว้เพื่อเรียงลำดับใหม่"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ลบ"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"รายชื่อติดต่อทั้งหมด"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"แฮงเอาท์วิดีโอ"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"ส่งข้อความ"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"รายละเอียดการโทร"</string>
-    <string name="call_log_action_call" msgid="463690849042459842">"โทรไปที่ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"ฟัง"</string>
+    <string name="call_log_action_details" msgid="7957138590190911171">"ดูรายละเอียด"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"ไม่ได้รับสายจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"รับสายจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"โทรหา <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"บน <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"โทร"</string>
     <string name="description_call_action" msgid="4000549004089776147">"โทรไปที่ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"เรียกแฮงเอาท์วิดีโอไปยัง <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"แฮงเอาท์วิดีโอถึง <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"ฟังข้อความเสียงจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"เล่นข้อความเสียงจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"หยุดข้อความเสียงจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g> ชั่วคราว"</string>
-    <string name="description_voicemail_delete" msgid="2025472770630153436">"ลบข้อความเสียงจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ข้อความเสียงใหม่</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ข้อความเสียงใหม่</item>
-    </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"สร้างรายชื่อติดต่อสำหรับ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"เพิ่ม <xliff:g id="NAMEORNUMBER">^1</xliff:g> ไปยังรายชื่อติดต่อที่มีอยู่"</string>
     <string name="description_details_action" msgid="2433827152749491785">"รายละเอียดการโทรสำหรับ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ลบออกจากประวัติการโทรแล้ว"</string>
+    <string name="call_log_action_report" msgid="4327809827087468864">"รายงาน"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"วันนี้"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"เมื่อวานนี้"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"เก่ากว่า"</string>
@@ -200,13 +188,4 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"คำตอบด่วน"</string>
     <string name="call_settings_label" msgid="313434211353070209">"การโทร"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"บัญชีการโทร"</string>
-    <string name="permission_single_turn_on" msgid="1543391076065465464">"เปิด"</string>
-    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ตั้งค่าสิทธิ์"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"หากต้องการเปิดใช้การโทรด่วน\nให้เปิดสิทธิ์เข้าถึงรายชื่อติดต่อ"</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"หากต้องการดูประวัติการโทร\n ให้เปิดสิทธิ์เข้าถึงโทรศัพท์"</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"หากต้องการดูรายชื่อติดต่อ\n ให้เปิดสิทธิ์เข้าถึงรายชื่อติดต่อ"</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"หากต้องการเข้าถึงข้อความเสียง\n ให้เปิดสิทธิ์เข้าถึงโทรศัพท์"</string>
-    <string name="permission_no_search" msgid="84152933267902056">"หากต้องการค้นหารายชื่อติดต่อ ให้เปิดสิทธิ์เข้าถึงรายชื่อติดต่อ"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"หากต้องการโทรออก\n ให้เปิดสิทธิ์เข้าถึงโทรศัพท์"</string>
-    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"แอปโทรศัพท์ไม่ได้รับอนุญาตให้เขียนไปยังการตั้งค่าระบบ"</string>
 </resources>

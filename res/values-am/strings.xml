@@ -17,20 +17,18 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"ስልክ"</string>
+    <string name="applicationLabel" msgid="8490255569343340580">"ደዋይ"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ስልክ"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ስልክ"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"የጥሪ ታሪክ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"ጥሪ <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"ትክክለኛ ያልሆነ ቁጥርን ሪፓርት አድርግ"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ከመደወል በፊት ቁጥር አርትዕ"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"ወደ እውቂያ አክል"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"ወደ ዕውቂያዎች አክል"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ከጥሪ ታሪክ ሰርዝ"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"የጥሪ ታሪክን አጽዳ"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"የድምፅ መልዕክት ሰርዝ"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"የድምፅ መልዕክት አጋራ"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"የእርስዎ ምዝግብ ማስታወሻ ባዶ ነው"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"ደውል"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"ምንም ጥሪዎች የሉም"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"የጥሪ ታሪክ ይጽዳ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ይሄ ሁሉንም ጥሪዎች ከታሪክዎ ይሰርዛቸዋል"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"የጥሪ ታሪክን በማጽዳት ላይ…"</string>
@@ -49,15 +47,17 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ገቢ ጥሪዎች ብቻ"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"ወጪ ጥሪዎች ብቻ"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"ያመለጡ ጥሪዎች ብቻ"</string>
-    <string name="visual_voicemail_title" msgid="4574199312906348905">"የሚታይ የድምጽ መልዕክት"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"ቁጥር ሳይደውሉ የእርስዎን የድምጽ መልዕክት ይመልከቱና ያድምጡ። የውሂብ ክፍያዎች ተግባራዊ ይሆኑ ይሆናል።"</string>
-    <string name="visual_voicemail_settings" msgid="8090338793118794741">"ቅንብሮች"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"የድምጽ መልዕክት ዝማኔ አይገኝም"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"አዲስ የድምጽ መልዕክት በመጠበቅ ላይ። አሁን መጫን አይቻልም።"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"የእርስዎን ድምጽ መልዕክት ያዋቅሩ"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ተሰሚ አይገኝም"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"አዘጋጅ"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"የድምፅመልዕክት ደውል"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"በጣም ቀርፋፋ ፍጥነት"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"ቀርፋፋ ፍጥነት"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"መደበኛ ፍጥነት"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"ፈጣን ፍጥነት"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"በጣም ፈጣን ፍጥነት"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"ቁጥር ምረጥ"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"ቁጥር ምረጥ"</string>
@@ -112,7 +112,6 @@
     <string name="voicemail" msgid="3851469869202611441">"የድምፅ መልዕክት"</string>
     <string name="private_num" msgid="6374339738119166953">"የግል ቁጥር"</string>
     <string name="payphone" msgid="7726415831153618726">"የሕዝብ ስልክ"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> ሰከንድ"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> ደቂቃ <xliff:g id="SECONDS">%s</xliff:g> ሴከ"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"ይህን ቁጥር መደወል አልተቻለም"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ድምጽ መልዕክትን ለማደራጀት ወደ ምናሌ &gt; ቅንብሮች  ሂድ::"</string>
@@ -127,8 +126,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"የስልክ መተግበሪያው ስለተሰናከለ የስልክ ጥሪ ማድረግ አይቻልም።"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ለዚያ የሚሆን መተግበሪያ በዚህ መሣሪያ ላይ የለም"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ስም ወይም ስልክ ቁጥር ያስገቡ"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"ምንም ያመለጡዎት ጥሪዎች የሉዎትም።"</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"የእርስዎ የድምጽ መልዕክት ገቢ መልዕክት ባዶ ነው።"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"ምንም ጥሪዎች የሉም"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"ምንም የቅርብ ጊዜ የድምጽ መልዕክቶች የሉም"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ተወዳጆችን ብቻ አሳይ"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ታሪክ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ሁሉም"</string>
@@ -137,45 +136,34 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"ፈጣን ደውል"</string>
     <string name="tab_recents" msgid="929949073851377206">"የቅርብ ጊዜዎቹ"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"ዕውቂያዎች"</string>
-    <string name="tab_voicemail" msgid="155024725947496746">"የድምፅ መልዕክት"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"ከተወዳጆች ውስጥ ተወግዷል።"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ቀልብስ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"ለ<xliff:g id="NUMBER">%s</xliff:g> ደውል"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"አዲስ እውቂያ ይፍጠሩ"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ወደ እውቂያ አክል"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"ወደ ነባር እውቂያ አክል"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ኤስኤምኤስ ላክ"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"የቪዲዮ ጥሪ አድርግ"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"ሙሉ የጥሪ ታሪኮችን ይመልከቱ"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"ሙሉ የጥሪ ታሪኮችን ይመልከቱ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> አዲስ ያልተመለሱ ጥሪዎች"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"በፈጥኖ መደወያ ላይ ገና ማንም የለዎትም"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ተወዳጅ አክል"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"ገና ምንም እውቂያዎች የሉዎትም"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ዕውቂያ አክል"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"ፈጣን ደውል ለተወዳጆች እና አብዛኛው ጊዜ ለሚደውሏቸውን ቁጥሮች የሆነ የአንዴ ነካ መደወል ነው"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"ምንም እውቂያዎች የሉም"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ሁሉንም ቁጥሮች ለማየት ምስል ይንኩ ወይም ዳግም ለመደርደር ነክተው ይያዙት"</string>
     <string name="remove_contact" msgid="1080555335283662961">"አስወግድ"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ሁሉም እውቂያዎች"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"የቪዲዮ ጥሪ"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"መልዕክት ላከ"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"የጥሪ ዝርዝሮች"</string>
-    <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ይደውሉ"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"አዳምጥ"</string>
+    <string name="call_log_action_details" msgid="7957138590190911171">"ዝርዝሮችን አሳይ"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g> ያመለጠ ጥሪ።"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g> መልስ የተሰጠው ጥሪ።"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"ወደ <xliff:g id="NAMEORNUMBER">^1</xliff:g>፣ <xliff:g id="TYPEORLOCATION">^2</xliff:g>፣ <xliff:g id="TIMEOFCALL">^3</xliff:g>፣ <xliff:g id="PHONEACCOUNT">^4</xliff:g> ደውል።"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"በ<xliff:g id="PHONEACCOUNT">^1</xliff:g> ላይ"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ደውል"</string>
     <string name="description_call_action" msgid="4000549004089776147">"ወደ <xliff:g id="NAMEORNUMBER">^1</xliff:g> ይደውሉ"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"ቪዲዮ ጥሪ <xliff:g id="NAMEORNUMBER">^1</xliff:g>።"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"የቪዲዮ ጥሪ ወደ <xliff:g id="NAMEORNUMBER">^1</xliff:g>።"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"የ<xliff:g id="NAMEORNUMBER">^1</xliff:g>ን የድምጽ መልዕክት ያዳምጡ"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"የድምጽ መልዕክት ያጫውቱ ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"የድምጽ መልዕክት ለአፍታ ያቁሙ ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_delete" msgid="2025472770630153436">"የድምጽ መልዕክት ይሰርዙ ከ<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> አዲስ የድምጽ መልዕክቶች</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> አዲስ የድምጽ መልዕክቶች</item>
-    </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"ለ<xliff:g id="NAMEORNUMBER">^1</xliff:g> እውቂያ ፍጠር"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>ን ወደ አሁን ያለ እውቂያ አክል"</string>
     <string name="description_details_action" msgid="2433827152749491785">"የ<xliff:g id="NAMEORNUMBER">^1</xliff:g> የጥሪ ዝርዝሮች"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"ከጥሪ ታሪክ ተሰርዟል"</string>
+    <string name="call_log_action_report" msgid="4327809827087468864">"ሪፖርት"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"ዛሬ"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"ትላንት"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"የቆየ"</string>
@@ -200,13 +188,4 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ፈጣን ምላሾች"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ጥሪዎች"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"የመደወያ መለያዎች"</string>
-    <string name="permission_single_turn_on" msgid="1543391076065465464">"አብራ"</string>
-    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"ፍቃዶችን አዋቅር"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"ፈጥኖ መደወያን ለማንቃት\n የእውቂያዎች ፍቃዱን ያብሩ።"</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"የጥሪ ምዝግብ ማስታወሻዎን ለማየት\n የስልክ ፍቃዱን ያብሩ።"</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"የእርስዎን እውቂያዎች ለማየት\n የእውቂያዎች ፍቃዱን ያብሩ።"</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"የእርስዎን ድምጽ መልዕክት ለመድረስ\n የስልክ ፍቃዱን ያብሩ።"</string>
-    <string name="permission_no_search" msgid="84152933267902056">"የእርስዎን እውቂያዎች ለመከታተል የእውቂያዎች ፍቃዶችን ያብሩ።"</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"አንድ ጥሪ ለማድረግ\n የስልክ ፍቃዱን ያብሩ።"</string>
-    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"የስልክ መተግበሪያ ወደ የስርዓት ቅንብሮች የመጻፍ ፍቃድ የለውም።"</string>
 </resources>

@@ -17,20 +17,18 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"电话"</string>
+    <string name="applicationLabel" msgid="8490255569343340580">"拨号"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"电话"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"拨号"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"通话记录"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"呼叫<xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"报告错误的号码"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"呼叫之前编辑号码"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"添加到联系人"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"添加到通讯录"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"从通话记录中删除"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"清除通话记录"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"删除语音邮件"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"分享语音邮件"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"您没有任何通话记录"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"拨打电话"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"没有任何通话"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通话记录吗？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"这会删除您的所有通话记录"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通话记录…"</string>
@@ -49,15 +47,17 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"只显示来电"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"只显示外拨电话"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"只显示未接来电"</string>
-    <string name="visual_voicemail_title" msgid="4574199312906348905">"可视语音信箱"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"无需拨号就可以查看和收听您的语音邮件。不过，可能会产生额外的数据流量费。"</string>
-    <string name="visual_voicemail_settings" msgid="8090338793118794741">"设置"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"无法更新语音信箱"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"您有新的语音邮件，但目前无法加载。"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"设置您的语音信箱"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"无法播放音频"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"设置"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"呼叫语音信箱"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"最慢"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"慢速"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"正常速度"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"快速"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"最快"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"选择号码"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"选择号码"</string>
@@ -112,7 +112,6 @@
     <string name="voicemail" msgid="3851469869202611441">"语音信箱"</string>
     <string name="private_num" msgid="6374339738119166953">"私密号码"</string>
     <string name="payphone" msgid="7726415831153618726">"公用电话"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> 分钟 <xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"无法拨打此号码"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"要设置语音信箱，请转到“菜单”&gt;“设置”。"</string>
@@ -127,8 +126,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"“电话”应用已被停用，因此无法拨打电话。"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"此设备上没有可执行此操作的应用"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"输入姓名或电话号码"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"您没有任何未接电话。"</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"您未收到任何语音邮件。"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"没有未接电话"</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"最近没有语音邮件"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"仅显示收藏的联系人"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"通话记录"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
@@ -137,45 +136,34 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速拨号"</string>
     <string name="tab_recents" msgid="929949073851377206">"最近"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"联系人"</string>
-    <string name="tab_voicemail" msgid="155024725947496746">"语音邮件"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"已从收藏中移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"撤消"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"拨打<xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"新建联系人"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"添加到联系人"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"添加到现有联系人"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"发送短信"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"发起视频通话"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"查看全部通话记录"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"查看全部通话记录"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"您的快速拨号功能尚未收藏任何联系人"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"添加常用联系人"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"您还没有任何联系人"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"添加联系人"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"使用快速拨号功能，只需轻轻一点即可拨打收藏联系人的电话号码以及经常拨打的电话号码。"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"没有联系人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"触摸图片可查看所有号码，触摸并按住可重新排序"</string>
     <string name="remove_contact" msgid="1080555335283662961">"移除"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"所有联系人"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"视频通话"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"发送短信"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"通话详情"</string>
-    <string name="call_log_action_call" msgid="463690849042459842">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>通话"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"听取"</string>
+    <string name="call_log_action_details" msgid="7957138590190911171">"查看详情"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的未接电话。"</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="PHONEACCOUNT">^4</xliff:g> 上 <xliff:g id="TIMEOFCALL">^3</xliff:g>来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的已接电话。"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="TIMEOFCALL">^3</xliff:g>通过 <xliff:g id="PHONEACCOUNT">^4</xliff:g> 拨打给<xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="TYPEORLOCATION">^2</xliff:g>）的电话。"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"通过 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"拨打电话"</string>
     <string name="description_call_action" msgid="4000549004089776147">"呼叫<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>进行视频通话。"</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"向<xliff:g id="NAMEORNUMBER">^1</xliff:g>发起的视频通话。"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"听取来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>的语音邮件"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"播放来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>的语音邮件"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"暂停来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>的语音邮件"</string>
-    <string name="description_voicemail_delete" msgid="2025472770630153436">"删除来自<xliff:g id="NAMEORNUMBER">^1</xliff:g>的语音邮件"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 封新的语音邮件</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 封新的语音邮件</item>
-    </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"为<xliff:g id="NAMEORNUMBER">^1</xliff:g>创建联系人信息"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"将<xliff:g id="NAMEORNUMBER">^1</xliff:g>添加到现有联系人"</string>
     <string name="description_details_action" msgid="2433827152749491785">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>的通话详情"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"已从通话记录中删除"</string>
+    <string name="call_log_action_report" msgid="4327809827087468864">"报告"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今天"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"昨天"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"更早"</string>

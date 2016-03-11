@@ -17,22 +17,20 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"Telèfon"</string>
+    <string name="applicationLabel" msgid="8490255569343340580">"Telèfon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telèfon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telèfon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Historial de trucades"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Truca a <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Informa d\'un número incorrecte"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Edita el número abans de trucar"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Afegeix a un contacte"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Afegeix als contactes"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Suprimeix de l\'historial de trucades"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Esborra l\'historial de trucades"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Suprimeix missatge de veu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Comparteix la bústia de veu"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"El registre de trucades està buit"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Fes una trucada"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"No hi ha cap trucada."</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Esborrar l\'historial de trucades?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se suprimiran totes les trucades de l\'historial."</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Amb aquesta acció se suprimiran totes les trucades de l\'historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Esborrant historial de trucades..."</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> bústies de veu </item>
@@ -41,23 +39,25 @@
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Reprodueix"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nou missatge de veu de <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3356071912353297599">"Error en reproduir el missatge de veu."</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Error en reproduir el correu de veu."</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"S\'està emmagatzemant a mem. intermèd.…"</string>
-    <string name="voicemail_fetching_content" msgid="1287895365599580842">"S\'està carregant la bústia de veu..."</string>
-    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"No s\'ha pogut carregar la bústia de veu."</string>
+    <string name="voicemail_fetching_content" msgid="1287895365599580842">"S\'està carregant el correu de veu..."</string>
+    <string name="voicemail_fetching_timout" msgid="3959428065511972176">"No s\'ha pogut carregar el correu de veu."</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Només trucades amb bústia de veu"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Només trucades entrants"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Només trucades sortints"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Només trucades perdudes"</string>
-    <string name="visual_voicemail_title" msgid="4574199312906348905">"Bústia de veu visual"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"Consulta i escolta els missatges de la bústia de veu sense haver de trucar a cap número de telèfon. És possible que s\'apliquin càrrecs de dades."</string>
-    <string name="visual_voicemail_settings" msgid="8090338793118794741">"Configuració"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"No hi ha cap actualització de correu de veu disponible."</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Hi ha un correu de veu nou en espera. Ara no es pot carregar."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Configura la bústia de veu."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Configura el correu de veu."</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"L\'àudio no està disponible."</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Configura"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Truca a bústia veu"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Velocitat mínima"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Velocitat baixa"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Velocitat normal"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Velocitat alta"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Velocitat màxima"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Tria d\'un número"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Tria d\'un número"</string>
@@ -86,7 +86,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Tots els contactes"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detalls de la trucada"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Informació no disponible"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilitza el teclat de tons"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Utilitza el teclat per tons"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna a la trucada en curs"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Afegeix una trucada"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Trucada entrant"</string>
@@ -101,7 +101,7 @@
     <string name="description_view_contact" msgid="5205669345700598415">"Visualitza el contacte <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Truca a <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Dades de contacte de: <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"Missatge de veu nou"</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"Correu de veu nou"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> trucades"</string>
     <string name="description_video_call" msgid="2933838090743214204">"Videotrucada"</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"Envia un SMS a <xliff:g id="NAME">%1$s</xliff:g>."</string>
@@ -109,14 +109,13 @@
     <string name="description_start_voice_search" msgid="520539488194946012">"Inicia la cerca per veu"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Truca al <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Desconegut"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Bústia de veu"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Correu de veu"</string>
     <string name="private_num" msgid="6374339738119166953">"Número privat"</string>
     <string name="payphone" msgid="7726415831153618726">"Telèfon públic"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"No es pot trucar a aquest número."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Per configurar la bústia de veu, vés a Menú &gt; Configuració."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per trucar a la bústia de veu, primer has de desactivar el mode d\'avió."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per trucar al correu de veu, primer has de desactivar el mode d\'avió."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"S\'està carregant…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -127,55 +126,44 @@
     <string name="call_not_available" msgid="8941576511946492225">"No es pot fer una trucada telefònica perquè s\'ha desactivat l\'aplicació de telèfon."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"No hi ha cap aplicació per a això en aquest dispositiu."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Escriu un nom o un telèfon"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"No tens cap trucada perduda."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"La safata d\'entrada de la bústia de veu està buida."</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"No hi ha cap trucada."</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"No hi ha cap correu de veu recent."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostra només els preferits"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historial"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Totes"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdudes"</string>
-    <string name="call_log_voicemail_title" msgid="940422274047025948">"Missatge de veu"</string>
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"Bústia veu"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Marcatge ràpid"</string>
     <string name="tab_recents" msgid="929949073851377206">"Recents"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Contactes"</string>
-    <string name="tab_voicemail" msgid="155024725947496746">"Bústia de veu"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Eliminat dels preferits"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Desfés"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Truca al <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Crea un contacte nou"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Afegeix a un contacte"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Afegeix a un contacte existent"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Envia SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fes una videotrucada"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Consulta tot l\'historial de trucades"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"Consulta tot l\'historial de trucades"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> trucades perdudes noves"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Encara no tens cap contacte al marcatge ràpid"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Afegeix un contacte preferit"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"Encara no tens cap contacte"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Afegeix un contacte"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"El marcatge ràpid et permet trucar als teus contactes preferits i als números als quals truques més sovint amb un toc."</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"No hi ha cap contacte."</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca la imatge per veure tots els números i toca-la i mantén-la premuda per reordenar-los."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Suprimeix"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"TOTS ELS CONTACTES"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videotrucada"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Envia un missatge"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"Detalls de la trucada"</string>
-    <string name="call_log_action_call" msgid="463690849042459842">"Truca a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"ESCOLTA"</string>
+    <string name="call_log_action_details" msgid="7957138590190911171">"Mostra els detalls"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Trucada perduda de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Trucada resposta de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Trucada a <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"a <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Truca"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Truca a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"Videotrucada amb <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Videotrucada a: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Escolta el missatge a la bústia de veu de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"Reprodueix el missatge de veu de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"Posa en pausa el missatge de veu de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_delete" msgid="2025472770630153436">"Suprimeix el missatge de veu de: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> nous correus de veu</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nou correu de veu</item>
-    </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Crea un contacte per a <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Afegeix <xliff:g id="NAMEORNUMBER">^1</xliff:g> a un contacte existent"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Detalls de la trucada de <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"S\'ha suprimit de l\'historial de trucades."</string>
+    <string name="call_log_action_report" msgid="4327809827087468864">"Informa"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Avui"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Ahir"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Més antiga"</string>
@@ -190,7 +178,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sons i vibració"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Accessibilitat"</string>
     <string name="ringtone_title" msgid="760362035635084653">"So de trucada"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibra també en trucades"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibra també per a les trucades"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tons del teclat"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Durada del to del teclat"</string>
   <string-array name="dtmf_tone_length_entries">
@@ -199,14 +187,5 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Respostes ràpides"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Trucades"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Comptes de trucades"</string>
-    <string name="permission_single_turn_on" msgid="1543391076065465464">"Activa"</string>
-    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Defineix els permisos"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Per activar el marcatge ràpid,\n activa el permís de Contactes."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Per veure el registre de trucades,\nactiva el permís Telèfon."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Per veure els contactes,\nactiva el permís Contactes."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Per accedir a la bústia de veu,\nactiva el permís Telèfon."</string>
-    <string name="permission_no_search" msgid="84152933267902056">"Per cercar els teus contactes, activa els permisos de Contactes."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Per fer una trucada,\nactiva el permís Telèfon."</string>
-    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"L\'aplicació Telèfon no té permís per escriure a la configuració del sistema."</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Comptes per a trucades"</string>
 </resources>

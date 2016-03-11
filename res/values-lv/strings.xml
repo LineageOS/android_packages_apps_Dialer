@@ -17,20 +17,18 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"Tālrunis"</string>
+    <string name="applicationLabel" msgid="8490255569343340580">"Tālrunis"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Tālrunis"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Zvanīt"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Zvanu vēsture"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Zvanīt: <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Ziņot par nepareizu numuru"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Rediģēt numuru pirms zvanīšanas"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Pievienot kontaktpersonai"</string>
+    <string name="recentCalls_addToContact" msgid="1429899535546487008">"Pievienot kontaktpersonām"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Dzēst no zvanu vēstures"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Dzēst zvanu vēsturi"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Dzēst balss pasta ziņojumu"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Kopīgot balss pastu"</string>
-    <string name="recentCalls_empty" msgid="5934808652605981210">"Zvanu žurnāls ir tukšs."</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Zvanīt"</string>
+    <string name="recentCalls_empty" msgid="8555115547405030734">"Nav neviena zvana."</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vai dzēst zvanu vēsturi?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tiks dzēsti visi vēsturē saglabātie zvani."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Notiek zvanu vēstures dzēšana…"</string>
@@ -50,15 +48,17 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Tikai ienākošie zvani"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Tikai izejošie zvani"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Tikai neatbildētie zvani"</string>
-    <string name="visual_voicemail_title" msgid="4574199312906348905">"Vizuālais balss pasts"</string>
-    <string name="visual_voicemail_text" msgid="164967285234132509">"Skatiet un klausieties balss pasta ziņojumus, nezvanot uz numuru. Var tikt piemērota maksa par datu pārraidi."</string>
-    <string name="visual_voicemail_settings" msgid="8090338793118794741">"Iestatījumi"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Balss pasta atjauninājumi nav pieejami."</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Saņemti jauni balss pasta ziņojumi. Pašlaik tos nevar ielādēt."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Iestatiet balss pastu."</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Audio nav pieejams."</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Iestatīt"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Zvanīt balss pastam"</string>
+    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"Mazākais ātrums"</string>
+    <string name="voicemail_speed_slower" msgid="1508601287347216244">"Mazs ātrums"</string>
+    <string name="voicemail_speed_normal" msgid="9033988544627228892">"Parasts ātrums"</string>
+    <string name="voicemail_speed_faster" msgid="2019965121475935488">"Liels ātrums"</string>
+    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"Lielākais ātrums"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Numura izvēlēšanās"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Numura izvēlēšanās"</string>
@@ -108,12 +108,11 @@
     <string name="description_send_text_message" msgid="3118485319691414221">"Sūtīt īsziņu šai kontaktpersonai: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Nenoklausīti balss pasta ziņojumi"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Sākt meklēšanu ar balsi"</string>
-    <string name="menu_callNumber" msgid="997146291983360266">"Zvanīt: <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="menu_callNumber" msgid="997146291983360266">"Zvaniet: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Nezināms"</string>
     <string name="voicemail" msgid="3851469869202611441">"Balss pasts"</string>
     <string name="private_num" msgid="6374339738119166953">"Privāts numurs"</string>
     <string name="payphone" msgid="7726415831153618726">"Maksas tālrunis"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Uz šo numuru nevar piezvanīt."</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Lai iestatītu balss pastu, atveriet sadaļu Izvēlne &gt; Iestatījumi."</string>
@@ -128,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"Nevar veikt tālruņa zvanu, jo lietojumprogramma Tālrunis tika atspējota."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Šajā ierīcē nav nevienas šai darbībai piemērotas lietotnes."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"Ievadiet vārdu/tālruņa numuru"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"Jums nav neatbildētu zvanu."</string>
-    <string name="recentVoicemails_empty" msgid="7345542764648856330">"Jūsu balss pasta iesūtne ir tukša."</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"Nav neviena zvana."</string>
+    <string name="recentVoicemails_empty" msgid="8582424947259156664">"Nav neviena nesena balss pasta ziņojuma."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Rādīt tikai izlasi"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Vēsture"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Visi"</string>
@@ -138,46 +137,34 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"Ātrie zvani"</string>
     <string name="tab_recents" msgid="929949073851377206">"Pēdējie"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktpersonas"</string>
-    <string name="tab_voicemail" msgid="155024725947496746">"Balss pasts"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Noņemts no izlases"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Atsaukt"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zvanīt: <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Zvaniet: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Izveidot jaunu kontaktpersonu"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Pievienot kontaktpersonai"</string>
+    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"Pievienot esošai kontaktpersonai"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Sūtīt īsziņu"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Veikt videozvanu"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"Visas zvanu vēstures skatīšana"</string>
+    <string name="recents_footer_text" msgid="7315554578957453359">"Visas zvanu vēstures skatīšana"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Jauni neatbildēti zvani: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Ātro zvanu sarakstā vēl nav nevienas kontaktpersonas."</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Pievienot izlasei"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"Jums vēl nav nevienas kontaktpersonas."</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Pievienot kontaktpersonu"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Izmantojot ātros zvanus, varat ar vienu pieskārienu zvanīt kontaktpersonām, kuras ir pievienotas jūsu izlasei vai kurām bieži zvanāt."</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"Nav kontaktpersonu"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Pieskarieties attēlam, lai skatītu visus numurus, vai pieskarieties attēlam un turiet to, lai veiktu pārkārtošanu."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Noņemt"</string>
+    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VISAS KONTAKTPERSONAS"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videozvans"</string>
-    <string name="call_log_action_send_message" msgid="2826466379787846163">"Nosūtīt ziņojumu"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"Informācija par zvanu"</string>
-    <string name="call_log_action_call" msgid="463690849042459842">"Zvanīt: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="call_log_action_voicemail" msgid="4978620572562925654">"KLAUSĪTIES"</string>
+    <string name="call_log_action_details" msgid="7957138590190911171">"Skatīt detalizētu informāciju"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Neatbildēts zvans no: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Atbildēts zvans no: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Izejošs zvans: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"kontā <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Zvanīt"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Zvanīt: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="7386922428155062213">"Zvaniet kontaktpersonai <xliff:g id="NAMEORNUMBER">^1</xliff:g>, izmantojot videozvanu."</string>
+    <string name="description_video_call_action" msgid="4303952636480252389">"Izejošs videozvans: <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Klausīties balss pasta ziņojumu no: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"Atskaņot balss pasta ziņojumu no: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_pause" msgid="3905259748756919693">"Pārtraukt balss pasta ziņojuma atskaņošanu no: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_delete" msgid="2025472770630153436">"Dzēst balss pasta ziņojumu no: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
-      <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> jauni balss pasta ziņojumi</item>
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> jauns balss pasta ziņojums</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> jauni balss pasta ziņojumi</item>
-    </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Izveidojiet kontaktpersonu, izmantojot vienumu <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
-    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Pievienojiet vienumu <xliff:g id="NAMEORNUMBER">^1</xliff:g> esošai kontaktpersonai."</string>
     <string name="description_details_action" msgid="2433827152749491785">"Zvanu informācija par šādu numuru: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Dzēsts no zvanu vēstures."</string>
+    <string name="call_log_action_report" msgid="4327809827087468864">"Ziņot"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"Šodien"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"Vakar"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"Vecāki zvani"</string>
@@ -202,13 +189,4 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Ātrās atbildes"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Zvani"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Zvanu konti"</string>
-    <string name="permission_single_turn_on" msgid="1543391076065465464">"Ieslēgt"</string>
-    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Iestatīt atļaujas"</string>
-    <string name="permission_no_speeddial" msgid="7449042208802130085">"Lai iespējotu ātro numura sastādīšanu,\nieslēdziet atļauju Kontaktpersonas."</string>
-    <string name="permission_no_calllog" msgid="8969825954337678018">"Lai skatītu zvanu žurnālu,\n ieslēdziet atļauju Tālrunis."</string>
-    <string name="permission_no_contacts" msgid="4427828429876890950">"Lai skatītu kontaktpersonas, \n ieslēdziet atļauju Kontaktpersonas."</string>
-    <string name="permission_no_voicemail" msgid="7785949850839671813">"Lai piekļūtu balss pastam,\nieslēdziet atļauju Tālrunis."</string>
-    <string name="permission_no_search" msgid="84152933267902056">"Lai meklētu savas kontaktpersonas, ieslēdziet atļauju Kontaktpersonas."</string>
-    <string name="permission_place_call" msgid="7588803619716288478">"Lai veiktu zvanu,\nieslēdziet atļauju Tālrunis."</string>
-    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Tālruņa lietotnei nav atļaujas rakstīt sistēmas iestatījumos."</string>
 </resources>
