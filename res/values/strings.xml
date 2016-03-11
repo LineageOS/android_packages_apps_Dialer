@@ -87,6 +87,9 @@
     <!-- Menu item used to archive a voicemail. [CHAR LIMIT=30] -->
     <string name="call_log_archive_voicemail">Archive voicemail</string>
 
+    <!-- Menu item used to send a voicemail through other applications [CHAR LIMIT=30] -->
+    <string name="call_log_share_voicemail">Share voicemail</string>
+
     <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
     <string name="snackbar_voicemail_deleted">Voicemail deleted</string>
 
