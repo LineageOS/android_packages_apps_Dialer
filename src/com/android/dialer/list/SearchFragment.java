@@ -22,12 +22,15 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -294,7 +297,8 @@ public class SearchFragment extends PhoneNumberPickerFragment
 
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
-                if (getCurrentCallMethod().mIsInCallProvider) {
+                number = adapter.getQueryString();
+                if (getCurrentCallMethod().mIsInCallProvider && !PhoneNumberUtils.isEmergencyNumber(number)) {
                     onProviderClick(position, getCurrentCallMethod());
                 } else {
                     super.onItemClick(position, id);
@@ -302,7 +306,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
                 number = adapter.getQueryString();
-                if (getCurrentCallMethod().mIsInCallProvider) {
+                if (getCurrentCallMethod().mIsInCallProvider && !PhoneNumberUtils.isEmergencyNumber(number)) {
                     placePSTNCall(number, getCurrentCallMethod());
                 } else {
                     listener = getOnPhoneNumberPickerListener();
@@ -342,8 +346,15 @@ public class SearchFragment extends PhoneNumberPickerFragment
                 int truePosition = adapter.getShortcutTypeFromPosition(position, true);
                 int index = DialerPhoneNumberListAdapter.SHORTCUT_COUNT - truePosition - 1;
                 number = adapter.getQueryString();
-                CallMethodInfo cmi = adapter.getProviders().get(index);
-                cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, number, getContext(), false, true);
+                if (!PhoneNumberUtils.isEmergencyNumber(number)) {
+                    CallMethodInfo cmi = adapter.getProviders().get(index);
+                    cmi.placeCall(OriginCodes.DIALPAD_T9_SEARCH, number, getContext(), false, true);
+                } else {
+                    listener = getOnPhoneNumberPickerListener();
+                    if (listener != null && !checkForProhibitedPhoneNumber(number)) {
+                        listener.onCallNumberDirectly(number);
+                    }
+                }
                 break;
         }
     }

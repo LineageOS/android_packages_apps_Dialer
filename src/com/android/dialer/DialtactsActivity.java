@@ -41,6 +41,8 @@ import android.os.Trace;
 import android.provider.CallLog.Calls;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.telecom.PhoneAccount;
@@ -1484,12 +1486,21 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         // Only use selected call method if call method spinner is visible (t9 dialpad or search)
         CallMethodInfo cmi = isInSearchUi() || isDialpadShown() ? mCurrentCallMethod : null;
 
-        if ((cmi == null || !cmi.mIsInCallProvider) &&
-                (TextUtils.isEmpty(mimeType) ||
-                        TextUtils.equals(mimeType,
-                                ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE) ||
-                        TextUtils.equals(mimeType,
-                                ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE))) {
+        boolean isInCallProvider = (cmi != null && cmi.mIsInCallProvider);
+        boolean isEmergencyNumber = PhoneNumberUtils.isEmergencyNumber(phoneNumber);
+        boolean isRegularCallableMimeType = TextUtils.isEmpty(mimeType) ||
+                TextUtils.equals(mimeType, Phone.CONTENT_ITEM_TYPE) ||
+                TextUtils.equals(mimeType, SipAddress.CONTENT_ITEM_TYPE);
+
+        // Assume InCallAPI Provider only if not emergency number and selected call method is incall
+        // provider or number's mimetype is null or a non-incall mimetype
+        if (!isEmergencyNumber && (isInCallProvider || !isRegularCallableMimeType)) {
+            StartCallRequest request = new StartCallRequest(phoneNumber, OriginCodes.CONTACT_SEARCH,
+                    0, new StartInCallCallReceiver(new Handler(Looper.getMainLooper())));
+
+            InCallServices.getInstance().startVoiceCallForMimeType(
+                    AmbientConnection.CLIENT.get(this), mimeType, request);
+        } else {
             // If no sim is selected, or emergency callmethod selected, or number is
             // an emergency number, phone account handle should be null, and will use the
             // default account.
@@ -1501,13 +1512,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     IntentUtil.getVideoCallIntent(phoneNumber, getCallOrigin()) :
                     IntentUtil.getCallIntent(phoneNumber, getCallOrigin(), handle);
             DialerUtils.startActivityWithErrorToast(this, intent);
-        } else {
-            StartCallRequest request = new StartCallRequest(phoneNumber,
-                    OriginCodes.CONTACT_SEARCH, 0,
-                    new StartInCallCallReceiver(new Handler(Looper.getMainLooper())));
-
-            InCallServices.getInstance().startVoiceCallForMimeType(
-                    AmbientConnection.CLIENT.get(this), mimeType, request);
         }
         mClearSearchOnPause = true;
     }

@@ -1907,7 +1907,8 @@ public class DialpadFragment extends Fragment
     }
 
     private void startCall(String number) {
-        if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
+        if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider &&
+                !PhoneNumberUtils.isEmergencyNumber(number)) {
             mCurrentCallMethodInfo.placeCall(OriginCodes.DIALPAD_DIRECT_DIAL,
                     number, getActivity(), false, true);
         } else {
