@@ -79,6 +79,33 @@ public class VoicemailArchiveProviderTest extends
         assertTrue(doesFileExist());
     }
 
+    public void testQuery_createFileMimeTypeIsAMR() throws Exception {
+        insertVoicemailWithMimeType("audio/amr");
+        assertTrue(doesRowExist());
+        assertFalse(doesFileExist());
+        createFile();
+        assertTrue(doesFileExist());
+        assertEquals("amr", getFileExtension(getFilePath()));
+    }
+
+    public void testQuery_createFileMimeTypeIsMP3() throws Exception {
+        insertVoicemailWithMimeType("audio/mpeg");
+        assertTrue(doesRowExist());
+        assertFalse(doesFileExist());
+        createFile();
+        assertTrue(doesFileExist());
+        assertEquals("mp3", getFileExtension(getFilePath()));
+    }
+
+    public void testQuery_createFileMimeTypeNotExists() throws Exception {
+        insertVoicemailWithMimeType(TEST_STRING);
+        assertTrue(doesRowExist());
+        assertFalse(doesFileExist());
+        createFile();
+        assertTrue(doesFileExist());
+        assertEquals("", getFileExtension(getFilePath()));
+    }
+
     public void testQuery() {
         insertVoicemail();
         updateCursor();
@@ -179,6 +206,13 @@ public class VoicemailArchiveProviderTest extends
         return voicemailFile.exists();
     }
 
+    private static String getFileExtension(String filePath) {
+        File file = new File(filePath);
+        String fileName = file.getName();
+        int index = fileName.lastIndexOf(".");
+        return index > 0 ? fileName.substring(index + 1) : "";
+    }
+
     private void assertCursorCount(int count) {
         assertEquals(count, mCursor.getCount());
     }
@@ -194,6 +228,12 @@ public class VoicemailArchiveProviderTest extends
 
     private void insertVoicemail() {
         mVoicemailUri = mResolver.insert(VoicemailArchive.CONTENT_URI, getTestValues());
+    }
+
+    private void insertVoicemailWithMimeType(String mimeType) {
+        ContentValues values = getTestValues();
+        values.put(VoicemailArchive.MIME_TYPE, mimeType);
+        mVoicemailUri = mResolver.insert(VoicemailArchive.CONTENT_URI, values);
     }
 
     private void updateCursor() {
@@ -226,7 +266,7 @@ public class VoicemailArchiveProviderTest extends
         return mCursor.getString(mCursor.getColumnIndex(VoicemailArchive._DATA));
     }
 
-    private ContentValues getTestValues() {
+    private static ContentValues getTestValues() {
         ContentValues values = new ContentValues();
         values.put(VoicemailArchive.NUMBER, TEST_NUMBER);
         values.put(VoicemailArchive.MIME_TYPE, TEST_MIME_TYPE);

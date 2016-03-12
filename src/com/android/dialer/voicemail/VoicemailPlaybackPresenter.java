@@ -19,11 +19,8 @@ package com.android.dialer.voicemail;
 import com.google.common.annotations.VisibleForTesting;
 
 import android.app.Activity;
-import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -33,24 +30,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.provider.CallLog;
 import android.provider.VoicemailContract;
-import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.WindowManager.LayoutParams;
 
+import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
-import com.android.dialer.calllog.CallLogQuery;
-import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.common.io.MoreCloseables;
-import com.android.dialer.util.TelecomUtil;
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.io.ByteStreams;
+
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -140,6 +132,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
             VoicemailPlaybackPresenter.class.getName() + ".IS_SPEAKER_PHONE_ON";
     public static final int PLAYBACK_REQUEST = 0;
     public static final int ARCHIVE_REQUEST = 1;
+    public static final int SHARE_REQUEST = 2;
 
     /**
      * The most recently cached duration. We cache this since we don't want to keep requesting it
@@ -181,6 +174,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
     private VoicemailAudioManager mVoicemailAudioManager;
 
     private OnVoicemailDeletedListener mOnVoicemailDeletedListener;
+    private final VoicemailAsyncTaskUtil mVoicemailAsyncTaskUtil;
 
     /**
      * Obtain singleton instance of this class. Use a single instance to provide a consistent
@@ -208,6 +202,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         Context context = activity.getApplicationContext();
         mAsyncTaskExecutor = AsyncTaskExecutors.createAsyncTaskExecutor();
         mVoicemailAudioManager = new VoicemailAudioManager(context, this);
+        mVoicemailAsyncTaskUtil = new VoicemailAsyncTaskUtil(context.getContentResolver());
         PowerManager powerManager =
                 (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
@@ -493,7 +488,6 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         private final Handler mFetchResultHandler;
         private final Uri mVoicemailUri;
         private final int mRequestCode;
-        private Uri mArchivedVoicemailUri;
 
         public FetchResultHandler(Handler handler, Uri uri, int code) {
             super(handler);
@@ -515,11 +509,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
             if (mIsWaitingForResult.getAndSet(false) && mContext != null) {
                 mContext.getContentResolver().unregisterContentObserver(this);
                 if (mView != null) {
-                    if (mRequestCode == ARCHIVE_REQUEST) {
-                        notifyUiOfArchiveResult(mVoicemailUri, false);
-                    } else {
-                        mView.setFetchContentTimeout();
-                    }
+                    mView.setFetchContentTimeout();
                 }
             }
         }
@@ -538,13 +528,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
 
                 @Override
                 public Boolean doInBackground(Void... params) {
-                    boolean hasContent = queryHasContent(mVoicemailUri);
-                    if (hasContent && mRequestCode == ARCHIVE_REQUEST) {
-                        mArchivedVoicemailUri =
-                                performArchiveVoicemailOnBackgroundThread(mVoicemailUri, true);
-                        return mArchivedVoicemailUri != null;
-                    }
-                    return hasContent;
+                    return queryHasContent(mVoicemailUri);
                 }
 
                 @Override
@@ -552,11 +536,11 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
                     if (hasContent && mContext != null && mIsWaitingForResult.getAndSet(false)) {
                         mContext.getContentResolver().unregisterContentObserver(
                                 FetchResultHandler.this);
-                        switch (mRequestCode) {
-                            case ARCHIVE_REQUEST:
-                                notifyUiOfArchiveResult(mVoicemailUri, true);
-                            default:
-                                prepareContent();
+                        prepareContent();
+                        if (mRequestCode == ARCHIVE_REQUEST) {
+                            startArchiveVoicemailTask(mVoicemailUri, true /* archivedByUser */);
+                        } else if (mRequestCode == SHARE_REQUEST) {
+                            startArchiveVoicemailTask(mVoicemailUri, false /* archivedByUser */);
                         }
                     }
                 }
@@ -922,148 +906,89 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
      * If voicemail has already been downloaded, go straight to archiving. Otherwise, request
      * the voicemail content first.
      */
-    public void archiveContent(Uri voicemailUri, boolean archivedByUser) {
-        if (!mIsPrepared) {
-            requestContent(ARCHIVE_REQUEST);
-        } else {
-            startArchiveVoicemailTask(voicemailUri, archivedByUser);
-        }
-    }
-
-    /**
-     * Asynchronous task used to archive a voicemail given its uri.
-     */
-    private void startArchiveVoicemailTask(final Uri voicemailUri, final boolean archivedByUser) {
-        mAsyncTaskExecutor.submit(Tasks.ARCHIVE_VOICEMAIL, new AsyncTask<Void, Void, Uri>() {
+    public void archiveContent(final Uri voicemailUri, final boolean archivedByUser) {
+        checkForContent(new OnContentCheckedListener() {
             @Override
-            public Uri doInBackground(Void... params) {
-                return performArchiveVoicemailOnBackgroundThread(voicemailUri, archivedByUser);
-            }
-
-            @Override
-            public void onPostExecute(Uri archivedVoicemailUri) {
-                notifyUiOfArchiveResult(voicemailUri, archivedVoicemailUri != null);
+            public void onContentChecked(boolean hasContent) {
+                if (!hasContent) {
+                    requestContent(archivedByUser ? ARCHIVE_REQUEST : SHARE_REQUEST);
+                } else {
+                    startArchiveVoicemailTask(voicemailUri, archivedByUser);
+                }
             }
         });
     }
 
     /**
-     * Copy the voicemail information to the local dialer database, and copy
-     * the voicemail content to a local file in the dialer application's
-     * internal storage (voicemails directory).
-     *
-     * @param voicemailUri the uri of the voicemail to archive
-     * @return If archive was successful, archived voicemail URI, otherwise null.
+     * Asynchronous task used to archive a voicemail given its uri.
      */
-    private Uri performArchiveVoicemailOnBackgroundThread(Uri voicemailUri,
-                                                          boolean archivedByUser) {
-        Cursor callLogInfo = mContext.getContentResolver().query(
-                ContentUris.withAppendedId(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL,
-                        ContentUris.parseId(mVoicemailUri)),
-                CallLogQuery._PROJECTION, null, null, null);
-        Cursor contentInfo = mContext.getContentResolver().query(
-                voicemailUri, null, null, null, null);
+    protected void startArchiveVoicemailTask(final Uri voicemailUri, final boolean archivedByUser) {
+        mVoicemailAsyncTaskUtil.archiveVoicemailContent(
+                new VoicemailAsyncTaskUtil.OnArchiveVoicemailListener() {
+                    @Override
+                    public void onArchiveVoicemail(final Uri archivedVoicemailUri) {
+                        if (archivedVoicemailUri == null) {
+                            notifyUiOfArchiveResult(voicemailUri, false);
+                            return;
+                        }
 
-        if (callLogInfo == null || contentInfo == null) {
-            return null;
-        }
+                        if (archivedByUser) {
+                            setArchivedVoicemailStatusAndUpdateUI(voicemailUri,
+                                    archivedVoicemailUri, true);
+                        } else {
+                            sendShareIntent(archivedVoicemailUri);
+                        }
+                    }
+                }, voicemailUri);
+    }
 
-        callLogInfo.moveToFirst();
-        contentInfo.moveToFirst();
+    /**
+     * Sends the intent for sharing the voicemail file.
+     */
+    protected void sendShareIntent(final Uri voicemailUri) {
+        mVoicemailAsyncTaskUtil.getVoicemailFilePath(
+                new VoicemailAsyncTaskUtil.OnGetArchivedVoicemailFilePathListener() {
+                    @Override
+                    public void onGetArchivedVoicemailFilePath(String filePath) {
+                        mView.enableUiElements();
+                        if (filePath == null) {
+                            mView.setFetchContentTimeout();
+                            return;
+                        }
+                        Uri voicemailFileUri = FileProvider.getUriForFile(
+                                mContext,
+                                mContext.getString(R.string.contacts_file_provider_authority),
+                                new File(filePath));
+                        mContext.startActivity(Intent.createChooser(
+                                getShareIntent(voicemailFileUri),
+                                mContext.getResources().getText(
+                                        R.string.call_log_share_voicemail)));
+                    }
+                }, voicemailUri);
+    }
 
-        // Create values to insert into database
-        ContentValues values = new ContentValues();
-        values.put(VoicemailArchiveContract.VoicemailArchive.NUMBER,
-                contentInfo.getString(contentInfo.getColumnIndex(
-                        VoicemailContract.Voicemails.NUMBER)));
+    /** Sets archived_by_user field to the given boolean and updates the URI. */
+    private void setArchivedVoicemailStatusAndUpdateUI(
+            final Uri voicemailUri,
+            final Uri archivedVoicemailUri,
+            boolean status) {
+        mVoicemailAsyncTaskUtil.setVoicemailArchiveStatus(
+                new VoicemailAsyncTaskUtil.OnSetVoicemailArchiveStatusListener() {
+                    @Override
+                    public void onSetVoicemailArchiveStatus(boolean success) {
+                        notifyUiOfArchiveResult(voicemailUri, success);
+                    }
+                }, archivedVoicemailUri, status);
+    }
 
-        values.put(VoicemailArchiveContract.VoicemailArchive.DATE,
-                contentInfo.getLong(contentInfo.getColumnIndex(
-                        VoicemailContract.Voicemails.DATE)));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.DURATION,
-                contentInfo.getLong(contentInfo.getColumnIndex(
-                        VoicemailContract.Voicemails.DURATION)));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.MIME_TYPE,
-                contentInfo.getString(contentInfo.getColumnIndex(
-                        VoicemailContract.Voicemails.MIME_TYPE)));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.COUNTRY_ISO,
-                callLogInfo.getString(CallLogQuery.COUNTRY_ISO));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.GEOCODED_LOCATION,
-                callLogInfo.getString(CallLogQuery.GEOCODED_LOCATION));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_NAME,
-                callLogInfo.getString(CallLogQuery.CACHED_NAME));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_NUMBER_TYPE,
-                callLogInfo.getInt(CallLogQuery.CACHED_NUMBER_TYPE));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_NUMBER_LABEL,
-                callLogInfo.getString(CallLogQuery.CACHED_NUMBER_LABEL));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_LOOKUP_URI,
-                callLogInfo.getString(CallLogQuery.CACHED_LOOKUP_URI));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_MATCHED_NUMBER,
-                callLogInfo.getString(CallLogQuery.CACHED_MATCHED_NUMBER));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_NORMALIZED_NUMBER,
-                callLogInfo.getString(CallLogQuery.CACHED_NORMALIZED_NUMBER));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_FORMATTED_NUMBER,
-                callLogInfo.getString(CallLogQuery.CACHED_FORMATTED_NUMBER));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.ARCHIVED, archivedByUser);
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.NUMBER_PRESENTATION,
-                callLogInfo.getInt(CallLogQuery.NUMBER_PRESENTATION));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.ACCOUNT_COMPONENT_NAME,
-                callLogInfo.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.ACCOUNT_ID,
-                callLogInfo.getString(CallLogQuery.ACCOUNT_ID));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.FEATURES,
-                callLogInfo.getInt(CallLogQuery.FEATURES));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.SERVER_ID,
-                contentInfo.getInt(contentInfo.getColumnIndex(
-                        VoicemailContract.Voicemails._ID)));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.TRANSCRIPTION,
-                contentInfo.getString(contentInfo.getColumnIndex(
-                        VoicemailContract.Voicemails.TRANSCRIPTION)));
-
-        values.put(VoicemailArchiveContract.VoicemailArchive.CACHED_PHOTO_URI,
-                callLogInfo.getLong(CallLogQuery.CACHED_PHOTO_URI));
-
-        callLogInfo.close();
-        contentInfo.close();
-
-        // Insert info into dialer database
-        Uri archivedVoicemailUri = mContext.getContentResolver().insert(
-                        VoicemailArchiveContract.VoicemailArchive.CONTENT_URI, values);
-        try {
-            // Copy voicemail content to a local file
-            InputStream inputStream = mContext.getContentResolver()
-                    .openInputStream(voicemailUri);
-            OutputStream outputStream = mContext.getContentResolver()
-                    .openOutputStream(archivedVoicemailUri);
-
-            ByteStreams.copy(inputStream, outputStream);
-            inputStream.close();
-            outputStream.close();
-        } catch (IOException e) {
-            // Roll back insert if new file creation failed
-            mContext.getContentResolver().delete(archivedVoicemailUri, null, null);
-            Log.w(TAG, "Failed to copy voicemail content to temporary file");
-            return null;
-        }
-        return archivedVoicemailUri;
+    private Intent getShareIntent(Uri voicemailFileUri) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, voicemailFileUri);
+        shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        shareIntent.setType(mContext.getContentResolver()
+                .getType(voicemailFileUri));
+        return shareIntent;
     }
 
     @VisibleForTesting

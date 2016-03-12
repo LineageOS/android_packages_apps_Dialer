@@ -15,14 +15,12 @@
  */
 
 package com.android.dialer.voicemail;
+
 import android.content.ContentUris;
 import android.content.ContentValues;
-
-import com.android.dialer.R;
-import com.android.dialer.database.VoicemailArchiveContract.VoicemailArchive;
-
 import android.content.res.AssetManager;
-import android.test.suitebuilder.annotation.Suppress;
+
+import com.android.dialer.database.VoicemailArchiveContract.VoicemailArchive;
 
 import java.io.IOException;
 import java.io.InputStream;
