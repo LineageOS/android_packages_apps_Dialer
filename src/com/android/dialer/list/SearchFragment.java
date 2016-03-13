@@ -22,14 +22,10 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,7 +45,6 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.list.PhoneNumberPickerFragment;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.ViewUtil;
-import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.R;
@@ -59,9 +54,10 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.incall.CallMethodInfo;
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CreditBarHelper;
 
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 public class SearchFragment extends PhoneNumberPickerFragment
@@ -262,7 +258,8 @@ public class SearchFragment extends PhoneNumberPickerFragment
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(super.usesCallableUri());
         adapter.setSearchListner(this);
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
+        adapter.setAvailableCallMethods(CallMethodFilters.getAllEnabledCallMethods(
+                DialerDataSubscription.get(getActivity())));
         return adapter;
     }
 
