@@ -4,19 +4,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.ScaleDrawable;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.util.Log;
 import android.graphics.drawable.Drawable;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.list.ContactListItemView;
@@ -24,8 +20,9 @@ import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.util.ImageUtils;
 import com.android.phone.common.incall.CallMethodInfo;
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.dialer.R;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -206,7 +203,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public String getLabelType(Cursor c, int type) {
         if (type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
             final String providerLabel = c.getString(PhoneNumberListAdapter.PhoneQuery.PHONE_MIME_TYPE);
-            CallMethodInfo cmi = CallMethodHelper.getMethodForMimeType(providerLabel, false);
+            CallMethodInfo cmi = CallMethodFilters.getMethodForMimeType(providerLabel, false,
+                    DialerDataSubscription.get(getContext()));
             if (cmi != null) {
                 return cmi.mName;
             } else {

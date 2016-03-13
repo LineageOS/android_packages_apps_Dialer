@@ -36,14 +36,14 @@ import android.provider.ContactsContract.Directory;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.R;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
-import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.MimeTypeUtils;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -51,10 +51,6 @@ import com.google.common.collect.Lists;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.cyanogen.ambient.incall.CallableConstants.ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY;
@@ -900,7 +896,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             }
 
             // Get callable mimetypes from incall api, modify query uri accordingly
-            String mimeTypes = CallMethodHelper.getAllMimeTypes();
+            String mimeTypes = MimeTypeUtils.getAllMimeTypes(DialerDataSubscription.get(mContext));
             Uri uri = PhoneQuery.constructExtendedUri(mimeTypes);
 
             /** Queries the contact database to get contacts that have been updated since the last
@@ -1046,7 +1042,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
             if (isCustomMimes) {
                 if (selectMime != null
-                        && CallMethodHelper.getAllEnabledMimeTypes().contains(selectMime)) {
+                        && MimeTypeUtils.getAllEnabledMimeTypes(
+                        DialerDataSubscription.get(mContext)).contains(selectMime)) {
                     builder.append(SmartDialDbColumns.MIMETYPE + " = ?");
                 } else {
                     builder.append(SmartDialDbColumns.MIMETYPE + " != ?");
@@ -1090,7 +1087,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
                 ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE
         };
-        String[] customMimes = CallMethodHelper.getAllEnabledMimeTypes().split(",");
+        String[] customMimes = MimeTypeUtils.getAllEnabledMimeTypes(
+                DialerDataSubscription.get(mContext)).split(",");
         String[] finalizedParams = new String[customMimes.length + defaultMimes.length + 1];
 
         StringBuilder where = new StringBuilder();

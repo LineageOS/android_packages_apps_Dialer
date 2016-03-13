@@ -15,7 +15,7 @@ import android.util.Log;
 
 import com.android.dialer.DialtactsActivity;
 import com.android.phone.common.ambient.AmbientConnection;
-import com.android.phone.common.incall.CallMethodUtils;
+import com.android.phone.common.incall.utils.CallMethodUtils;
 import com.android.phone.common.util.ImageUtils;
 
 import com.cyanogen.ambient.common.api.AmbientApiClient;

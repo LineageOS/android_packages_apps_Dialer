@@ -3,6 +3,7 @@ package com.android.dialer.incall;
 import android.app.IntentService;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -59,13 +60,13 @@ public class InCallMetricsReceiver extends IntentService {
         d.setTime(calendar.getTime().getTime());
 
         if (TelecomUtil.hasReadPhoneStatus(getApplicationContext())) {
-            lookupCallsSince(d.getTime(), getContentResolver());
+            lookupCallsSince(d.getTime(), getContentResolver(), getApplicationContext());
         }
 
         // Send stored Incall Specific events
         if (CMSettings.Secure.getInt(getApplicationContext().getContentResolver(),
                 CMSettings.Secure.STATS_COLLECTION, 1) != 0) {
-            InCallMetricsHelper.prepareToSend();
+            InCallMetricsHelper.prepareToSend(getApplicationContext());
         }
     }
 
@@ -75,7 +76,7 @@ public class InCallMetricsReceiver extends IntentService {
 
     @VisibleForTesting
     /* package */ static void lookupCallsSince(long time,
-            ContentResolver contentResolver) {
+            ContentResolver contentResolver, Context context) {
 
         Uri uri = CallLogConstants.CONTENT_ALL_URI.buildUpon().build();
 
@@ -218,8 +219,8 @@ public class InCallMetricsReceiver extends IntentService {
                 }
             }
 
-            InCallMetricsHelper.sendEvent(InCallMetricsHelper.Categories.CALLS, event, params,
-                    ComponentName.unflattenFromString(pluginComponent));
+            InCallMetricsHelper.sendEvent(context, InCallMetricsHelper.Categories.CALLS,
+                    event, params, ComponentName.unflattenFromString(pluginComponent));
 
         }
     }
