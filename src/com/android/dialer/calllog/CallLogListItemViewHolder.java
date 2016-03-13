@@ -57,6 +57,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
@@ -371,7 +372,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         CallMethodInfo cmi = null;
         if (inCallComponentName != null) {
-            cmi = CallMethodHelper.getCallMethod(inCallComponentName);
+            cmi = CallMethodFilters.getCallMethod(inCallComponentName, mContext);
         }
 
         if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
@@ -507,7 +508,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (cn == null) {
             dialerQuickContact.setAttributionBadge(null);
         } else {
-            CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
+            CallMethodInfo cmi = CallMethodFilters.getCallMethod(cn, mContext);
             if (cmi == null) {
                 dialerQuickContact.setAttributionBadge(null);
                 Log.v(TAG, "Call Method was Null for: " + cn.toShortString());
@@ -567,7 +568,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             final String inCallAction = (String) view.getTag(R.id.incall_provider_action_type);
             if (inCallComponentName != null && !TextUtils.isEmpty(inCallAction)) {
-                CallMethodInfo cmi = CallMethodHelper.getCallMethod(inCallComponentName);
+                CallMethodInfo cmi = CallMethodFilters.getCallMethod(inCallComponentName, mContext);
                 if (cmi != null) {
                     switch (inCallAction) {
                         case INCALL_ACTION_TYPE_VIDEO:

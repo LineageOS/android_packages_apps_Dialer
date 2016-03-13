@@ -62,6 +62,7 @@ import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CreditBarHelper;
 
+import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 public class SearchFragment extends PhoneNumberPickerFragment
@@ -262,7 +263,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(super.usesCallableUri());
         adapter.setSearchListner(this);
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
+        adapter.setAvailableCallMethods(CallMethodFilters.getAllEnabledCallMethods(getActivity()));
         return adapter;
     }
 

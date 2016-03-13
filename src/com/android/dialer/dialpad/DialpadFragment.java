@@ -93,6 +93,7 @@ import com.android.phone.common.dialpad.DialpadView;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CreditBarHelper;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.ambient.incall.extension.StatusCodes;
 import com.google.common.annotations.VisibleForTesting;
@@ -479,7 +480,7 @@ public class DialpadFragment extends Fragment
     public void providersUpdated(String lastKnownCallMethod, HashMap<ComponentName, CallMethodInfo>
             callMethodInfos) {
         mAllAvailableProviders.clear();
-        CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
+        CallMethodFilters.removeDisabled(callMethodInfos, mAllAvailableProviders);
         updateSpinner(lastKnownCallMethod, callMethodInfos);
 
         if (mCurrentCallMethodInfo != null &&

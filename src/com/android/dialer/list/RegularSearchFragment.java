@@ -40,6 +40,7 @@ import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClicked
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CreditBarHelper;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 
 public class RegularSearchFragment extends SearchFragment
         implements OnEmptyViewActionButtonClickedListener,
@@ -87,7 +88,7 @@ public class RegularSearchFragment extends SearchFragment
         RegularSearchListAdapter adapter = new RegularSearchListAdapter(getActivity());
         adapter.setDisplayPhotos(true);
         adapter.setUseCallableUri(usesCallableUri());
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
+        adapter.setAvailableCallMethods(CallMethodFilters.getAllEnabledCallMethods(getActivity()));
         return adapter;
     }
 

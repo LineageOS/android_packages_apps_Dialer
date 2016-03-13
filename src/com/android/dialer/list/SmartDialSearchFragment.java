@@ -46,6 +46,8 @@ import com.android.dialer.widget.EmptyContentView;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.utils.CallMethodFilters;
+import com.android.phone.common.incall.utils.MimeTypeUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,7 +77,7 @@ public class SmartDialSearchFragment extends SearchFragment
         // Set adapter's query string to restore previous instance state.
         adapter.setQueryString(getQueryString());
         adapter.setSearchListner(this);
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
+        adapter.setAvailableCallMethods(CallMethodFilters.getAllEnabledCallMethods(getActivity()));
 
         return adapter;
     }
@@ -145,7 +147,7 @@ public class SmartDialSearchFragment extends SearchFragment
                 //setAvailableProviders(CallMethodHelper.getAllCallMethods());
                 if (mAvailableProviders == null) {
                     mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
-                    mAvailableProviders.putAll(CallMethodHelper.getAllEnabledCallMethods());
+                    mAvailableProviders.putAll(CallMethodFilters.getAllEnabledCallMethods(getActivity()));
                 }
 
                 if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {

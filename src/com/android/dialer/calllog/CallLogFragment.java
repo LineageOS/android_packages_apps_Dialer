@@ -144,10 +144,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     /* InCall Plugin Listener ID */
     private static final String AMBIENT_SUBSCRIPTION_ID = "CallLogFragment";
 
-    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
-            new CallMethodHelper.CallMethodReceiver() {
+    private CallMethodHelper.ModChanged pluginsUpdatedReceiver =
+            new CallMethodHelper.ModChanged() {
                 @Override
-                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                public void onChanged(HashMap callMethodInfos) {
                     // We moved this here because well, getting our call method data takes some time
                     // we _should_cache this icon somewhere -> load that, then when this updates
                     // we could update the icons. Currentlly the user has some ugly ugly flash
@@ -365,7 +365,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
         mAdapter.pauseCache();
 
-        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
+        CallMethodHelper.INCALL.get(getActivity()).unsubscribe(AMBIENT_SUBSCRIPTION_ID);
 
         super.onPause();
     }
