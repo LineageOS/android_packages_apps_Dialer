@@ -91,10 +91,11 @@ import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
-import com.android.phone.common.incall.CallMethodUtils;
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CreditBarHelper;
+import com.android.phone.common.incall.StartInCallCallReceiver;
+import com.android.phone.common.incall.utils.CallMethodFilters;
+import com.android.phone.common.incall.utils.CallMethodUtils;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.ambient.incall.extension.StatusCodes;
 import com.google.common.annotations.VisibleForTesting;
@@ -481,7 +482,7 @@ public class DialpadFragment extends Fragment
     public void providersUpdated(String lastKnownCallMethod, HashMap<ComponentName, CallMethodInfo>
             callMethodInfos) {
         mAllAvailableProviders.clear();
-        CallMethodHelper.removeDisabled(callMethodInfos, mAllAvailableProviders);
+        CallMethodFilters.removeDisabled(callMethodInfos, mAllAvailableProviders);
         updateSpinner(lastKnownCallMethod, callMethodInfos);
 
         if (mCurrentCallMethodInfo != null &&
@@ -499,7 +500,7 @@ public class DialpadFragment extends Fragment
             } else {
                 SharedPreferences pref = act.getSharedPreferences(
                         DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-                if (CoachMarkDrawableHelper.shouldShowCoachMark(pref) != null) {
+                if (CoachMarkDrawableHelper.shouldShowCoachMark(act, pref) != null) {
                     // We would have shown the coachmark here, but some text is in our way
                     // at this point the user will have seen the spinner so we should
                     // hide the coachmark now and forever.
@@ -1931,7 +1932,7 @@ public class DialpadFragment extends Fragment
         if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider &&
                 !PhoneNumberUtils.isEmergencyNumber(number)) {
             mCurrentCallMethodInfo.placeCall(origin, number, getActivity(), false, true,
-                    new CallMethodHelper.InCallCallListener() {
+                    new StartInCallCallReceiver.InCallCallListener() {
                         @Override
                         public void onResult(int resultCode) {
                             if (resultCode == StatusCodes.StartCall.CALL_CONNECTED) {
