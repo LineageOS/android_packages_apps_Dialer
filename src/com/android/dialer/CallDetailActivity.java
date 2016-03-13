@@ -26,30 +26,22 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.VoicemailContract.Voicemails;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
-import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.activity.fragment.BlockContactDialogFragment;
@@ -59,23 +51,18 @@ import com.android.dialer.calllog.CallDetailHistoryAdapter;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
 import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
-import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
-import com.android.dialer.calllog.PhoneNumberDisplayUtil;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
+import com.android.phone.common.incall.DialerDataSubscription;
 import com.android.services.callrecorder.CallRecordingDataStore;
 import com.android.dialer.widget.DialerQuickContact;
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
-
-import java.util.List;
 
 /**
  * Displays the details of a specific call log entry.
@@ -275,7 +262,8 @@ public class CallDetailActivity extends Activity
             @Override
             public void onClick(View view) {
                 if (mInCallComponentName != null) {
-                    CallMethodInfo cmi = CallMethodHelper.getCallMethod(mInCallComponentName);
+                    CallMethodInfo cmi = DialerDataSubscription.get(mContext)
+                            .getPluginIfExists(mInCallComponentName);
                     if (cmi != null) {
                         cmi.placeCall(OriginCodes.CALL_LOG_CALL, mNumber, mContext);
                         return;
@@ -366,7 +354,7 @@ public class CallDetailActivity extends Activity
         if (cn == null) {
             mDialerQuickContact.setAttributionBadge(null);
         } else {
-            CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
+            CallMethodInfo cmi = DialerDataSubscription.get(mContext).getPluginIfExists(cn);
             if (cmi == null) {
                 mDialerQuickContact.setAttributionBadge(null);
                 if (DEBUG) Log.d(TAG, "Call Method was Null for: " + cn.toShortString());

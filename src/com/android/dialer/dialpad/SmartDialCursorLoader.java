@@ -17,12 +17,9 @@
 package com.android.dialer.dialpad;
 
 import android.content.AsyncTaskLoader;
-import android.content.ContentUris;
 import android.content.Context;
-import android.content.Loader.ForceLoadContentObserver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.net.Uri;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,15 +27,11 @@ import android.util.Log;
 import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
 import com.android.contacts.common.util.PermissionsUtil;
 
-import com.android.phone.common.incall.CallMethodHelper;
-
 import com.android.dialer.database.DialerDatabaseHelper;
 import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 import com.android.dialerbind.DatabaseHelperManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Implements a Loader<Cursor> class to asynchronously load SmartDial search results.
