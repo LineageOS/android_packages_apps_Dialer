@@ -17,12 +17,10 @@
 package com.android.dialer.calllog;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
-import android.graphics.PorterDuff.Mode;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -39,15 +37,12 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.contacts.common.util.BlockContactHelper;
 import com.android.dialer.widget.DialerQuickContact;
-import com.android.internal.telephony.util.BlacklistUtils;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.testing.NeededForTesting;
-import com.android.contacts.common.util.BlockContactHelper;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
@@ -55,10 +50,10 @@ import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
-import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -371,7 +366,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         CallMethodInfo cmi = null;
         if (inCallComponentName != null) {
-            cmi = CallMethodHelper.getCallMethod(inCallComponentName);
+            cmi = DialerDataSubscription.get(mContext).getPluginIfExists(inCallComponentName);
         }
 
         if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
@@ -507,7 +502,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (cn == null) {
             dialerQuickContact.setAttributionBadge(null);
         } else {
-            CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
+            CallMethodInfo cmi = DialerDataSubscription.get(mContext).getPluginIfExists(cn);
             if (cmi == null) {
                 dialerQuickContact.setAttributionBadge(null);
                 Log.v(TAG, "Call Method was Null for: " + cn.toShortString());
@@ -567,7 +562,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             final String inCallAction = (String) view.getTag(R.id.incall_provider_action_type);
             if (inCallComponentName != null && !TextUtils.isEmpty(inCallAction)) {
-                CallMethodInfo cmi = CallMethodHelper.getCallMethod(inCallComponentName);
+                CallMethodInfo cmi = DialerDataSubscription.get(mContext)
+                        .getPluginIfExists(inCallComponentName);
                 if (cmi != null) {
                     switch (inCallAction) {
                         case INCALL_ACTION_TYPE_VIDEO:
