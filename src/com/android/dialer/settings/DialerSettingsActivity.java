@@ -76,10 +76,10 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
     private static final String AMBIENT_SUBSCRIPTION_ID = "DialerSettingsActivity";
 
-    CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
-            new CallMethodHelper.CallMethodReceiver() {
+    CallMethodHelper.ModChanged pluginsUpdatedReceiver =
+            new CallMethodHelper.ModChanged() {
                 @Override
-                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                public void onChanged(HashMap callMethodInfos) {
                     providersUpdated(callMethodInfos);
                 }
             };
@@ -94,8 +94,8 @@ public class DialerSettingsActivity extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Needs to be done prior to super's onCreate
         if(CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
-            providersUpdated(CallMethodHelper.getAllCallMethods());
-            CallMethodHelper.refreshDynamicItems();
+            providersUpdated(CallMethodHelper.INCALL.get(this).getModInfo());
+            CallMethodHelper.INCALL.get(this).refreshDynamicItems();
         }
         if (CallerInfoHelper.getInstalledProviders(this).length > 0) {
             CallerInfoHelper.ResolvedProvider[] providers =
@@ -295,7 +295,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
+        CallMethodHelper.INCALL.get(this).unsubscribe(AMBIENT_SUBSCRIPTION_ID);
     }
 
     /**

@@ -26,6 +26,7 @@ import com.android.dialer.util.ImageUtils;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.dialer.R;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -206,7 +207,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     public String getLabelType(Cursor c, int type) {
         if (type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
             final String providerLabel = c.getString(PhoneNumberListAdapter.PhoneQuery.PHONE_MIME_TYPE);
-            CallMethodInfo cmi = CallMethodHelper.getMethodForMimeType(providerLabel, false);
+            CallMethodInfo cmi = CallMethodFilters.getMethodForMimeType(providerLabel, false,
+                    getContext());
             if (cmi != null) {
                 return cmi.mName;
             } else {

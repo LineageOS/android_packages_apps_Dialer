@@ -269,7 +269,8 @@ public class CallDetailActivity extends Activity
             @Override
             public void onClick(View view) {
                 if (mInCallComponentName != null) {
-                    CallMethodInfo cmi = CallMethodHelper.getCallMethod(mInCallComponentName);
+                    CallMethodInfo cmi = CallMethodHelper.INCALL.get(mContext)
+                            .getModIfExists(mInCallComponentName);
                     if (cmi != null) {
                         cmi.placeCall(OriginCodes.CALL_LOG_CALL, mNumber, mContext);
                         return;
@@ -358,7 +359,7 @@ public class CallDetailActivity extends Activity
         if (cn == null) {
             mDialerQuickContact.setAttributionBadge(null);
         } else {
-            CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
+            CallMethodInfo cmi = CallMethodHelper.INCALL.get(mContext).getModIfExists(cn);
             if (cmi == null) {
                 mDialerQuickContact.setAttributionBadge(null);
                 if (DEBUG) Log.d(TAG, "Call Method was Null for: " + cn.toShortString());

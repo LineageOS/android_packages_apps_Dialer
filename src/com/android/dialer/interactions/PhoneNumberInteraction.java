@@ -59,6 +59,7 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.DialerUtils;
 
 import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.utils.MimeTypeUtils;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
@@ -517,7 +518,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
+                .startInteraction(uri, true, MimeTypeUtils.getAllEnabledMimeTypes(activity));
     }
 
     /**
@@ -538,7 +539,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
     public static void startInteractionForPhoneCall(TransactionSafeActivity activity, Uri uri,
             boolean useDefault) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null))
-                .startInteraction(uri, useDefault, CallMethodHelper.getAllEnabledMimeTypes());
+                .startInteraction(uri, useDefault, MimeTypeUtils.getAllEnabledMimeTypes(activity));
     }
 
     /**
@@ -558,7 +559,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
             String callOrigin, PhoneAccountHandle accountHandle) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_CALL, null,
                 callOrigin, accountHandle))
-                .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
+                .startInteraction(uri, true, MimeTypeUtils.getAllEnabledMimeTypes(activity));
     }
 
     /**
@@ -575,7 +576,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
      */
     public static void startInteractionForTextMessage(TransactionSafeActivity activity, Uri uri) {
         (new PhoneNumberInteraction(activity, ContactDisplayUtils.INTERACTION_SMS, null))
-                .startInteraction(uri, true, CallMethodHelper.getAllEnabledMimeTypes());
+                .startInteraction(uri, true, MimeTypeUtils.getAllEnabledMimeTypes(activity));
     }
 
     @VisibleForTesting

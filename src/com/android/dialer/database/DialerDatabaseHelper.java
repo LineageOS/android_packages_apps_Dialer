@@ -44,6 +44,7 @@ import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 
 import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.utils.MimeTypeUtils;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -900,7 +901,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             }
 
             // Get callable mimetypes from incall api, modify query uri accordingly
-            String mimeTypes = CallMethodHelper.getAllMimeTypes();
+            String mimeTypes = MimeTypeUtils.getAllMimeTypes(mContext);
             Uri uri = PhoneQuery.constructExtendedUri(mimeTypes);
 
             /** Queries the contact database to get contacts that have been updated since the last
@@ -1046,7 +1047,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
             if (isCustomMimes) {
                 if (selectMime != null
-                        && CallMethodHelper.getAllEnabledMimeTypes().contains(selectMime)) {
+                        && MimeTypeUtils.getAllEnabledMimeTypes(mContext).contains(selectMime)) {
                     builder.append(SmartDialDbColumns.MIMETYPE + " = ?");
                 } else {
                     builder.append(SmartDialDbColumns.MIMETYPE + " != ?");
@@ -1090,7 +1091,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE,
                 ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE
         };
-        String[] customMimes = CallMethodHelper.getAllEnabledMimeTypes().split(",");
+        String[] customMimes = MimeTypeUtils.getAllEnabledMimeTypes(mContext).split(",");
         String[] finalizedParams = new String[customMimes.length + defaultMimes.length + 1];
 
         StringBuilder where = new StringBuilder();
