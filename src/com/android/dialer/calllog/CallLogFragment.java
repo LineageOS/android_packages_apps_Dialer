@@ -40,7 +40,6 @@ import android.view.ViewGroup;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.activity.fragment.BlockContactDialogFragment;
-import com.android.contacts.common.util.BlockContactHelper;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.util.EmptyLoader;
@@ -48,14 +47,11 @@ import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.android.dialerbind.ObjectFactory;
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.DialerDataSubscription;
 import com.cyanogen.ambient.incall.CallLogConstants;
 
 import java.util.HashMap;
-
-import android.util.Log;
-import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call
@@ -144,10 +140,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     /* InCall Plugin Listener ID */
     private static final String AMBIENT_SUBSCRIPTION_ID = "CallLogFragment";
 
-    private CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
-            new CallMethodHelper.CallMethodReceiver() {
+    private DialerDataSubscription.PluginChanged<CallMethodInfo> pluginsUpdatedReceiver =
+            new DialerDataSubscription.PluginChanged<CallMethodInfo>() {
                 @Override
-                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> pluginInfos) {
                     // We moved this here because well, getting our call method data takes some time
                     // we _should_cache this icon somewhere -> load that, then when this updates
                     // we could update the icons. Currentlly the user has some ugly ugly flash
@@ -353,7 +349,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
         mHasReadCallLogPermission = hasReadCallLogPermission;
 
-        if (CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
+        if (DialerDataSubscription.get(getActivity())
+                .subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
             refreshData();
             mAdapter.startCache();
         }
@@ -366,7 +363,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
         mAdapter.pauseCache();
 
-        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
+        DialerDataSubscription.get(getActivity()).unsubscribe(AMBIENT_SUBSCRIPTION_ID);
 
         super.onPause();
     }
