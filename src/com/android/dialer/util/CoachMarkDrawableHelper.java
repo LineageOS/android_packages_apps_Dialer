@@ -34,9 +34,9 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.widget.CoachMarkDrawable;
 
-import com.android.phone.common.incall.CallMethodUtils;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.CallMethodUtils;
 import com.android.phone.common.incall.CallMethodInfo;
-import com.android.phone.common.incall.CallMethodHelper;
 
 import com.cyanogen.ambient.plugin.PluginStatus;
 
@@ -48,7 +48,7 @@ public class CoachMarkDrawableHelper {
                                               final String unformatted) {
         final SharedPreferences pref = act
                 .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        final CallMethodInfo cmi = shouldShowCoachMark(pref);
+        final CallMethodInfo cmi = shouldShowCoachMark(act, pref);
         if (cmi != null) {
             ViewTreeObserver vto = v.getViewTreeObserver();
             vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -72,7 +72,7 @@ public class CoachMarkDrawableHelper {
                                                         final float fontWidthScale) {
         final SharedPreferences pref = act
                 .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        final CallMethodInfo cmi = shouldShowCoachMark(pref);
+        final CallMethodInfo cmi = shouldShowCoachMark(act, pref);
         if (cmi != null) {
             touch.clearFocus();
             ViewTreeObserver vto = v.getViewTreeObserver();
@@ -89,7 +89,8 @@ public class CoachMarkDrawableHelper {
         }
     }
 
-    public static CallMethodInfo shouldShowCoachMark(SharedPreferences pref) {
+    public static CallMethodInfo shouldShowCoachMark(Context context, SharedPreferences pref) {
+
         String lastProvider = pref.getString(CallMethodUtils.PREF_LAST_ENABLED_PROVIDER, null);
         boolean showCoachmark = pref.getBoolean(CallMethodUtils.PREF_SPINNER_COACHMARK_SHOW, false);
 
@@ -100,8 +101,10 @@ public class CoachMarkDrawableHelper {
         if (cn == null) {
             return null;
         }
-        final CallMethodInfo cmi = CallMethodHelper.getCallMethod(cn);
-        if (showCoachmark && !CallMethodHelper.getAllCallMethods().isEmpty() && cmi != null) {
+        final CallMethodInfo cmi = DialerDataSubscription.get(context).getPluginIfExists(cn);
+        if (showCoachmark
+                && !DialerDataSubscription.get(context).getPluginInfo().isEmpty()
+                && cmi != null) {
             if (cmi.mStatus == PluginStatus.ENABLED) {
                 return cmi;
             }

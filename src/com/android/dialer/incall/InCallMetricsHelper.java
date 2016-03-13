@@ -7,13 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import com.android.dialer.DialerApplication;
 import com.android.dialer.DialtactsActivity;
-import com.android.dialer.incall.InCallMetricsReceiver;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.phone.common.ambient.AmbientConnection;
-import com.android.phone.common.incall.CallMethodHelper;
-import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.api.InCallQueries;
 import com.cyanogen.ambient.analytics.AnalyticsServices;
 import com.cyanogen.ambient.analytics.Event;
 
@@ -160,8 +158,8 @@ public class InCallMetricsHelper {
      * @param params fields that are part of the event
      * @param cn associated with the plugin
      */
-    public static Event sendEvent(Categories category, Events action,
-                                 HashMap<Parameters, Object> params, ComponentName cn) {
+    public static Event sendEvent(Context c, Categories category, Events action,
+            HashMap<Parameters, Object> params, ComponentName cn) {
         Event.Builder event = new Event.Builder(CATEGORY_BASE + category.value(), action.value());
         if (params != null && params.size() > 0) {
             for (Parameters p : params.keySet()) {
@@ -169,7 +167,7 @@ public class InCallMetricsHelper {
             }
         }
         Event e = event.build();
-        CallMethodHelper.shipAnalyticsToPlugin(cn, e);
+        InCallQueries.shipAnalyticsToPlugin(DialerDataSubscription.get(c).mClient, cn, e);
         getInstance().sendAmbientEvent(e);
         return e;
     }
@@ -362,7 +360,7 @@ public class InCallMetricsHelper {
     /**
      * Prepares all our metrics for sending.
      */
-    static void prepareToSend() {
+    static void prepareToSend(Context context) {
         SharedPreferences sp = getInstance().mContext.getSharedPreferences(
                 METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         HashMap<String, HashMap<Parameters, Object>> items = getHashOfHashOfItems(sp.getAll());
@@ -375,7 +373,7 @@ public class InCallMetricsHelper {
             Categories category = Categories.valueOf(keyParts[CATEGORY]);
             Events event = Events.valueOf(keyParts[EVENT]);
             HashMap<Parameters, Object> params = items.get(key);
-            sendEvent(category, event, params, component);
+            sendEvent(context, category, event, params, component);
         }
     }
 

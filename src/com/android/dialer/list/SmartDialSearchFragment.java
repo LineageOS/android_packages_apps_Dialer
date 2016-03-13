@@ -29,13 +29,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
+
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
@@ -43,9 +40,9 @@ import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
 import com.android.dialer.incall.InCallMetricsHelper;
 import com.android.dialer.widget.EmptyContentView;
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.incall.CallMethodInfo;
-import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.CallMethodFilters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,7 +72,8 @@ public class SmartDialSearchFragment extends SearchFragment
         // Set adapter's query string to restore previous instance state.
         adapter.setQueryString(getQueryString());
         adapter.setSearchListner(this);
-        adapter.setAvailableCallMethods(CallMethodHelper.getAllEnabledCallMethods());
+        adapter.setAvailableCallMethods(CallMethodFilters.getAllEnabledCallMethods(
+                DialerDataSubscription.get(getActivity())));
 
         return adapter;
     }
@@ -142,10 +140,10 @@ public class SmartDialSearchFragment extends SearchFragment
 
                 // Get Current InCall plugin specific call methods, we don't want to update this
                 // suddenly so just the currently available ones are fine.
-                //setAvailableProviders(CallMethodHelper.getAllCallMethods());
                 if (mAvailableProviders == null) {
                     mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
-                    mAvailableProviders.putAll(CallMethodHelper.getAllEnabledCallMethods());
+                    mAvailableProviders.putAll(CallMethodFilters.getAllEnabledCallMethods(
+                            DialerDataSubscription.get(getActivity())));
                 }
 
                 if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {

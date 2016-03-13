@@ -9,9 +9,8 @@ import android.os.Bundle;
 
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.discovery.NudgeItem;
-import com.android.phone.common.incall.CallMethodHelper;
-import com.android.phone.common.incall.CallMethodUtils;
-import com.android.dialer.incall.InCallMetricsHelper;
+import com.android.phone.common.incall.DialerDataSubscription;
+import com.android.phone.common.incall.utils.CallMethodUtils;
 import com.android.dialer.discovery.DiscoverySignalReceiver;
 import com.cyanogen.ambient.discovery.util.NudgeKey;
 import com.cyanogen.ambient.plugin.PluginStatus;
@@ -25,7 +24,7 @@ public class CallMethodStatusReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Bundle b = intent.getExtras();
 
-        CallMethodHelper.refresh();
+        DialerDataSubscription.get(context).refresh();
 
         SharedPreferences preferences = context
                 .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
