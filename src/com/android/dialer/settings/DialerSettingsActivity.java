@@ -18,7 +18,6 @@ package com.android.dialer.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
@@ -29,12 +28,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.contacts.common.compat.CompatUtils;
-import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
 import com.android.dialer.R;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.compat.SettingsCompat;
 import com.android.dialer.compat.UserManagerCompat;
-import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 
 import java.util.List;
 
@@ -99,7 +97,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         if (isPrimaryUser) {
             Header blockedCallsHeader = new Header();
             blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
-            blockedCallsHeader.intent = new Intent(this, BlockedNumbersSettingsActivity.class);
+            blockedCallsHeader.intent = FilteredNumberCompat.createManageBlockedNumbersIntent(this);
             target.add(blockedCallsHeader);
 
             if (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)
