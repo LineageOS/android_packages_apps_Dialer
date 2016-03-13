@@ -29,7 +29,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -56,8 +55,9 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.widget.EmptyContentView;
-import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.DialerDataSubscription;
 import com.android.phone.common.incall.CallMethodInfo;
+import com.android.phone.common.incall.utils.MimeTypeUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -212,22 +212,27 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
     }
 
     private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
-        mCallableMimeTypes = CallMethodHelper.getAllEnabledMimeTypes();
+        mCallableMimeTypes = MimeTypeUtils.getAllEnabledMimeTypes(
+                DialerDataSubscription.get(getContext()));
         loadSpeedDialFavorites();
     }
 
-    CallMethodHelper.CallMethodReceiver pluginsUpdatedReceiver =
-            new CallMethodHelper.CallMethodReceiver() {
+    DialerDataSubscription.PluginChanged<CallMethodInfo> pluginsUpdatedReceiver =
+            new DialerDataSubscription.PluginChanged<CallMethodInfo>() {
                 @Override
-                public void onChanged(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
-                    providersUpdated(callMethodInfos);
+                public void onChanged(HashMap<ComponentName, CallMethodInfo> pluginInfos) {
+                    providersUpdated(pluginInfos);
                 }
             };
 
     private void loadSpeedDialFavorites() {
-        Bundle bundle = new Bundle();
-        bundle.putString(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mCallableMimeTypes);
-        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, bundle, mContactTileLoaderListener);
+        if (mCallableMimeTypes != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString(ADDITIONAL_CALLABLE_MIMETYPES_PARAM_KEY, mCallableMimeTypes);
+            getLoaderManager().destroyLoader(LOADER_ID_CONTACT_TILE);
+            getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, bundle,
+                    mContactTileLoaderListener);
+        }
     }
 
     @Override
@@ -236,10 +241,10 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         super.onResume();
 
         if (PermissionsUtil.hasContactsPermissions(getActivity())) {
-
-            if(CallMethodHelper.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
-                providersUpdated(CallMethodHelper.getAllCallMethods());
-                CallMethodHelper.refreshDynamicItems();
+            DialerDataSubscription subscription = DialerDataSubscription.get(getContext());
+            if(subscription.subscribe(AMBIENT_SUBSCRIPTION_ID, pluginsUpdatedReceiver)) {
+                providersUpdated(subscription.getPluginInfo());
+                subscription.refreshDynamicItems();
             }
 
             mEmptyView.setDescription(R.string.speed_dial_empty);
@@ -348,7 +353,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
 
     @Override
     public void onPause() {
-        CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
+        DialerDataSubscription.get(getContext()).unsubscribe(AMBIENT_SUBSCRIPTION_ID);
         super.onPause();
     }
 

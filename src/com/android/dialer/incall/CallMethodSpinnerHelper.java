@@ -9,10 +9,9 @@ import android.widget.Spinner;
 
 import com.android.dialer.util.TelecomUtil;
 import com.android.phone.common.incall.CallMethodInfo;
-import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodSpinnerAdapter;
-import com.android.phone.common.incall.CallMethodUtils;
 import com.android.phone.common.util.VolteUtils;
+import com.android.phone.common.incall.utils.CallMethodUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
