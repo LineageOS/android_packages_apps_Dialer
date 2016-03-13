@@ -14,7 +14,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.android.dialer.DialtactsActivity;
-import com.android.phone.common.incall.CallMethodUtils;
+import com.android.phone.common.incall.utils.CallMethodUtils;
 import com.cyanogen.ambient.discovery.util.NudgeKey;
 
 import java.util.concurrent.atomic.AtomicBoolean;
