@@ -54,10 +54,12 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil.CallLogAsyncTaskListener;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
@@ -372,14 +374,9 @@ public class CallDetailActivity extends AppCompatActivity
     public void onClick(View view) {
         int resId = view.getId();
         if (resId == R.id.call_detail_action_block) {
-            BlockNumberDialogFragment.show(
-                    mBlockedNumberId,
-                    mNumber,
-                    mDetails.countryIso,
-                    mDisplayNumber,
-                    R.id.call_detail,
-                    getFragmentManager(),
-                    this);
+            FilteredNumberCompat
+                    .showBlockNumberDialogFlow(mBlockedNumberId, mNumber, mDetails.countryIso,
+                            mDisplayNumber, R.id.call_detail, getFragmentManager(), this);
         } else if (resId == R.id.call_detail_action_copy) {
             ClipboardUtils.copyText(mContext, null, mNumber, true);
         } else if (resId == R.id.call_detail_action_edit_before_call) {

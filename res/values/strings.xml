@@ -570,6 +570,18 @@
          [CHAR LIMIT=30] -->
     <string name="call_log_voicemail_title">Voicemail</string>
 
+    <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
+    <string name="migrate_blocked_numbers_dialog_title">New, simplified blocking</string>
+
+    <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
+    <string name="migrate_blocked_numbers_dialog_message">To better protect you, Phone needs to change how blocking works. Your blocked numbers will now stop both calls and texts and may be shared with other apps.</string>
+
+    <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
+    <string name="migrate_blocked_numbers_dialog_allow_button">Allow</string>
+
+    <!-- Do not translate -->
+    <string name="migrate_blocked_numbers_dialog_cancel_button">@android:string/cancel</string>
+
     <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
     <string name="block_number_confirmation_title">Block
         <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>

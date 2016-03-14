@@ -18,9 +18,9 @@
 
 import com.google.common.base.Preconditions;
 
+import android.app.FragmentManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -33,6 +33,10 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
+import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
+import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment.Listener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -221,5 +225,42 @@ public class FilteredNumberCompat {
             contentValues.put(getSourceColumnName(), FilteredNumberSources.USER);
         }
         return contentValues;
+    }
+
+    /**
+     * Shows the flow of {@link android.app.DialogFragment}s for blocking or unblocking numbers.
+     *
+     * @param blockId The id into the blocked numbers database.
+     * @param number The number to block or unblock.
+     * @param countryIso The countryIso used to format the given number.
+     * @param displayNumber The form of the number to block, suitable for displaying.
+     * @param parentViewId The id for the containing view of the Dialog.
+     * @param fragmentManager The {@link FragmentManager} used to show fragments.
+     * @param callback (optional) The {@link Callback} to call when the block or unblock operation
+     * is complete.
+     */
+    public static void showBlockNumberDialogFlow(final Integer blockId, final String number,
+            final String countryIso, final String displayNumber, final Integer parentViewId,
+            final FragmentManager fragmentManager, @Nullable final Callback callback) {
+        // If the user is blocking a number and isn't using the framework solution when they
+        // should be, show the migration dialog
+        if (shouldShowMigrationDialog(blockId == null)) {
+            MigrateBlockedNumbersDialogFragment.newInstance(new Listener() {
+                @Override
+                public void onComplete() {
+                    BlockNumberDialogFragment
+                            .show(null, number, countryIso, displayNumber, parentViewId,
+                                    fragmentManager, callback);
+                }
+            }).show(fragmentManager, "MigrateBlockedNumbers");
+            return;
+        }
+        BlockNumberDialogFragment
+                .show(blockId, number, countryIso, displayNumber, parentViewId, fragmentManager,
+                        callback);
+    }
+
+    private static boolean shouldShowMigrationDialog(boolean isBlocking) {
+        return isBlocking && canUseNewFiltering() && !hasMigratedToNewBlocking();
     }
 }
