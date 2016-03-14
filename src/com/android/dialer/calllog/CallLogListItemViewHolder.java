@@ -51,9 +51,11 @@ import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.calllogcache.CallLogCache;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
+import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.service.ExtendedBlockingButtonRenderer;
@@ -370,14 +372,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public boolean onMenuItemClick(MenuItem item) {
         int resId = item.getItemId();
         if (resId == R.id.context_menu_block_number) {
-            BlockNumberDialogFragment.show(
-                    blockId,
-                    number,
-                    countryIso,
-                    displayNumber,
-                    R.id.floating_action_button_container,
-                    ((Activity) mContext).getFragmentManager(),
-                    mFilteredNumberDialogCallback);
+            FilteredNumberCompat
+                    .showBlockNumberDialogFlow(blockId, number, countryIso, displayNumber,
+                            R.id.floating_action_button_container,
+                            ((Activity) mContext).getFragmentManager(),
+                            mFilteredNumberDialogCallback);
             return true;
         } else if (resId == R.id.context_menu_copy_to_clipboard) {
             ClipboardUtils.copyText(mContext, null, number, true);
