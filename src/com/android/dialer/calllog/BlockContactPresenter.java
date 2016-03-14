@@ -33,7 +33,6 @@ import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
  */
 public class BlockContactPresenter implements View.OnClickListener,
         BlockContactHelper.StatusCallbacks {
-    private static BlockContactPresenter sInstance;
 
     private Activity mActivity;
     private Fragment mTargetFragment;
@@ -96,24 +95,24 @@ public class BlockContactPresenter implements View.OnClickListener,
         }
     }
 
-    public static BlockContactPresenter getInstance(Activity activity, Fragment targetFragment) {
-        if (sInstance == null) {
-            sInstance = new BlockContactPresenter(activity, targetFragment);
-        }
-
-        return sInstance;
-    }
-
-    public void disable() {
-        mBlockContactHelper.setContactInfo((String) null);
-    }
-
     public void onBlockSelected(boolean notifyProvider) {
         mBlockContactHelper.blockContactAsync(notifyProvider);
     }
 
     public void onUnblockSelected(boolean notifyProvider) {
         mBlockContactHelper.unblockContactAsync(notifyProvider);
+    }
+
+    public void disable() {
+        if (mBlockContactHelper != null) {
+            mBlockContactHelper.setContactInfo((String) null);
+        }
+    }
+
+    public void onDestroy() {
+        if (mBlockContactHelper != null) {
+            mBlockContactHelper.destroy();
+        }
     }
 
     private static class BlockContactViewHolder {

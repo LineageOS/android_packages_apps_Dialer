@@ -224,7 +224,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                     .getInstance(activity, state);
         }
 
-        mBlockContactPresenter = BlockContactPresenter.getInstance(activity, this);
+        mBlockContactPresenter = new BlockContactPresenter(activity, this);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -385,7 +385,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.onDestroy();
         }
-
+        mBlockContactPresenter.onDestroy();
         getActivity().getContentResolver().unregisterContentObserver(mCallLogObserver);
         getActivity().getContentResolver().unregisterContentObserver(mContactsObserver);
         getActivity().getContentResolver().unregisterContentObserver(mVoicemailStatusObserver);
