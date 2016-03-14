@@ -99,13 +99,23 @@ public class FilteredNumberCompat {
     }
 
     /**
-     * @return {@code true} if the new filtering is enabled, {@code false} otherwise.
+     * @return {@code true} if the current SDK version supports using new filtering, {@code false}
+     * otherwise.
      */
-    public static boolean useNewFiltering() {
+    public static boolean canUseNewFiltering() {
         if (isEnabledForTest != null) {
             return CompatUtils.isNCompatible() && isEnabledForTest;
         }
         return CompatUtils.isNCompatible() && isNewFilteringEnabled;
+    }
+
+    /**
+     * @return {@code true} if the new filtering should be used, i.e. it's enabled and any necessary
+     * migration has been performed, {@code false} otherwise.
+     */
+    public static boolean useNewFiltering() {
+        // TODO(maxwelb): Add shared preference for when the Dialer blocked list has been migrated
+        return canUseNewFiltering();
     }
 
     @NeededForTesting
