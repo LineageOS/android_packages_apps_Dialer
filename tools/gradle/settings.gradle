@@ -57,4 +57,7 @@ project(':incallui').projectDir = new File(rootDir, 'packages/apps/Dialer/InCall
 
 include 'dialer'
 project(':dialer').projectDir = new File(rootDir, 'packages/apps/Dialer')
-project(':dialer').buildFileName = 'build-app.gradle'
+project(':dialer').buildFileName = 'build-library.gradle'
+
+include 'googledialer'
+project(':googledialer').projectDir = new File(rootDir, 'vendor/unbundled_google/packages/GoogleDialer')
