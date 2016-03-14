@@ -168,8 +168,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     public void fetchVoicemailUnreadCount() {
         if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
+            // Only count voicemails that have not been read and have not been deleted.
             startQuery(QUERY_VOICEMAIL_UNREAD_COUNT_TOKEN, null, Voicemails.CONTENT_URI,
-                new String[] { Voicemails._ID }, Voicemails.IS_READ + "=0", null, null);
+                new String[] { Voicemails._ID },
+                    Voicemails.IS_READ + "=0" + " AND " + Voicemails.DELETED + "=0", null, null);
         }
     }
 
