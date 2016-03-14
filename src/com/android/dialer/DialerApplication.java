@@ -17,21 +17,38 @@
 package com.android.dialer;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Trace;
+import android.support.annotation.Nullable;
 
 import com.android.contacts.common.extensions.ExtensionsFactory;
+import com.android.contacts.common.testing.NeededForTesting;
+import com.android.dialer.compat.FilteredNumberCompat;
 
 public class DialerApplication extends Application {
 
     private static final String TAG = "DialerApplication";
 
+    private static Context sContext;
+
     @Override
     public void onCreate() {
+        sContext = this;
         Trace.beginSection(TAG + " onCreate");
         super.onCreate();
         Trace.beginSection(TAG + " ExtensionsFactory initialization");
         ExtensionsFactory.init(getApplicationContext());
         Trace.endSection();
         Trace.endSection();
+    }
+
+    @Nullable
+    public static Context getContext() {
+        return sContext;
+    }
+
+    @NeededForTesting
+    public static void setContextForTest(Context context) {
+        sContext = context;
     }
 }
