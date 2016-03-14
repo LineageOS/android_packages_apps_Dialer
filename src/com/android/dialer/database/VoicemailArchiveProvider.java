@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.webkit.MimeTypeMap;
 
 import com.android.dialerbind.DatabaseHelperManager;
 import com.google.common.annotations.VisibleForTesting;
@@ -119,7 +120,11 @@ public class VoicemailArchiveProvider extends ContentProvider {
 
         // Create new file only if path is not provided to one
         if (!values.containsKey(VoicemailArchiveContract.VoicemailArchive._DATA)) {
-            File voicemailFile = new File(directory, Long.toString(id));
+            String fileExtension = MimeTypeMap.getSingleton().getExtensionFromMimeType(
+                    values.getAsString(VoicemailArchiveContract.VoicemailArchive.MIME_TYPE));
+            File voicemailFile = new File(directory,
+                    TextUtils.isEmpty(fileExtension) ? Long.toString(id) :
+                            id + "." + fileExtension);
             values.put(VoicemailArchiveContract.VoicemailArchive._DATA, voicemailFile.getPath());
         }
         update(newUri, values, null, null);

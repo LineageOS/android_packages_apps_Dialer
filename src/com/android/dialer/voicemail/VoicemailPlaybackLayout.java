@@ -258,6 +258,17 @@ public class VoicemailPlaybackLayout extends LinearLayout
         }
     };
 
+    private final View.OnClickListener mShareButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mPresenter == null || isArchiving(mVoicemailUri)) {
+                return;
+            }
+            disableUiElements();
+            mPresenter.archiveContent(mVoicemailUri, false);
+        }
+    };
+
     private Context mContext;
     private VoicemailPlaybackPresenter mPresenter;
     private Uri mVoicemailUri;
@@ -339,6 +350,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         mPlaybackSpeakerphone.setOnClickListener(mSpeakerphoneListener);
         mDeleteButton.setOnClickListener(mDeleteButtonListener);
         mArchiveButton.setOnClickListener(mArchiveButtonListener);
+        mShareButton.setOnClickListener(mShareButtonListener);
 
         mPositionText.setText(formatAsMinutesAndSeconds(0));
         mTotalDurationText.setText(formatAsMinutesAndSeconds(0));
