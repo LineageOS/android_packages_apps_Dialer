@@ -58,7 +58,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
         android:layout_marginTop="@dimen/action_bar_height_large"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/remove_contact"
+        android:visibility="gone" >
 
         <LinearLayout
             android:id="@+id/remove_view_content"
@@ -66,8 +68,7 @@
             android:layout_width="match_parent"
             android:background="@color/actionbar_background_color"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone" >
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -76,7 +77,6 @@
                 android:layout_marginBottom="8dp"
                 android:id="@+id/remove_view_icon"
                 android:src="@drawable/ic_remove"
-                android:contentDescription="@string/remove_contact"
                 android:tint="@color/remove_text_color" />
 
             <TextView

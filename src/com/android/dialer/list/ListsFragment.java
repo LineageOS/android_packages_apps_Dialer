@@ -81,7 +81,6 @@ public class ListsFragment extends Fragment
     private ViewPagerTabs mViewPagerTabs;
     private ViewPagerAdapter mViewPagerAdapter;
     private RemoveView mRemoveView;
-    private View mRemoveViewContent;
 
     private SpeedDialFragment mSpeedDialFragment;
     private CallLogFragment mHistoryFragment;
@@ -252,7 +251,6 @@ public class ListsFragment extends Fragment
         addOnPageChangeListener(mViewPagerTabs);
 
         mRemoveView = (RemoveView) parentView.findViewById(R.id.remove_view);
-        mRemoveViewContent = parentView.findViewById(R.id.remove_view_content);
 
         Trace.endSection();
         Trace.endSection();
@@ -424,7 +422,7 @@ public class ListsFragment extends Fragment
 
 
     public void showRemoveView(boolean show) {
-        mRemoveViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
+        mRemoveView.setVisibility(show ? View.VISIBLE : View.GONE);
         mRemoveView.setAlpha(show ? 0 : 1);
         mRemoveView.animate().alpha(show ? 1 : 0).start();
     }
