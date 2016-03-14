@@ -32,8 +32,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.lettertiles.LetterTileDrawable;
 import com.android.dialer.R;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.filterednumber.FilteredNumbersUtil.CheckForSendToVoicemailContactListener;
 import com.android.dialer.filterednumber.FilteredNumbersUtil.ImportSendToVoicemailContactsListener;
@@ -83,7 +85,7 @@ public class BlockedNumbersFragment extends ListFragment
         mBlockedNumbersDisabledForEmergency =
                 getListView().findViewById(R.id.blocked_numbers_disabled_for_emergency);
         mBlockedNumberListDivider = getActivity().findViewById(R.id.blocked_number_list_divider);
-        getListView().findViewById(R.id.import_button).setOnClickListener(this);;
+        getListView().findViewById(R.id.import_button).setOnClickListener(this);
         getListView().findViewById(R.id.view_numbers_button).setOnClickListener(this);
         getListView().findViewById(R.id.add_number_linear_layout).setOnClickListener(this);
 
@@ -117,6 +119,15 @@ public class BlockedNumbersFragment extends ListFragment
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(R.string.manage_blocked_numbers_label);
+
+        // If the device can use the framework blocking solution, users should not be able to add
+        // new blocked numbers from the Blocked Management UI. They will be shown a promo card
+        // asking them to migrate to new blocking instead.
+        if (FilteredNumberCompat.canUseNewFiltering()) {
+            getListView().findViewById(R.id.add_number_linear_layout).setVisibility(View.GONE);
+            getListView().findViewById(R.id.add_number_linear_layout).setOnClickListener(null);
+            mBlockedNumberListDivider.setVisibility(View.INVISIBLE);
+        }
 
         FilteredNumbersUtil.checkForSendToVoicemailContact(
             getActivity(), new CheckForSendToVoicemailContactListener() {
@@ -152,16 +163,15 @@ public class BlockedNumbersFragment extends ListFragment
         };
         final String selection = FilteredNumberContract.FilteredNumberColumns.TYPE
                 + "=" + FilteredNumberContract.FilteredNumberTypes.BLOCKED_NUMBER;
-        final CursorLoader cursorLoader = new CursorLoader(
+        return new CursorLoader(
                 getContext(), FilteredNumberContract.FilteredNumber.CONTENT_URI, projection,
                 selection, null, null);
-        return cursorLoader;
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.swapCursor(data);
-        if (data.getCount() == 0) {
+        if (FilteredNumberCompat.canUseNewFiltering() || data.getCount() == 0) {
             mBlockedNumberListDivider.setVisibility(View.INVISIBLE);
         } else {
             mBlockedNumberListDivider.setVisibility(View.VISIBLE);
