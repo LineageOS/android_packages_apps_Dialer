@@ -62,7 +62,6 @@ public class VoicemailArchivePlaybackPresenter extends VoicemailPlaybackPresente
                     }
                 } catch (FileNotFoundException e) {
                     Log.d(TAG, "Voicemail file not found for " + mVoicemailUri);
-                    handleError(e);
                 }
                 return false;
             }
@@ -75,11 +74,17 @@ public class VoicemailArchivePlaybackPresenter extends VoicemailPlaybackPresente
     }
 
     @Override
-    protected boolean requestContent(int code) {
-        if (mContext == null || mVoicemailUri == null) {
-            return false;
+    protected void startArchiveVoicemailTask(final Uri voicemailUri, final boolean archivedByUser) {
+        // If a user wants to share an archived voicemail, no need for archiving, just go straight
+        // to share intent.
+        if (!archivedByUser) {
+            sendShareIntent(voicemailUri);
         }
-        prepareContent();
-        return true;
+    }
+
+    @Override
+    protected boolean requestContent(int code) {
+        handleError(new FileNotFoundException("Voicemail archive file does not exist"));
+        return false;       // No way for archive tab to request content
     }
 }

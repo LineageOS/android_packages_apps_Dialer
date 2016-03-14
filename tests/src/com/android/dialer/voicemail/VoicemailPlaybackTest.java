@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,14 @@
 
 package com.android.dialer.voicemail;
 
+import android.content.ContentUris;
+import android.database.Cursor;
+import android.net.Uri;
 import android.test.suitebuilder.annotation.Suppress;
 
 import com.android.dialer.calllog.CallLogActivity;
-
+import com.android.dialer.database.VoicemailArchiveContract;
+import static com.android.dialer.voicemail.VoicemailAsyncTaskUtil.Tasks.ARCHIVE_VOICEMAIL_CONTENT;
 import static com.android.dialer.voicemail.VoicemailPlaybackPresenter.Tasks.CHECK_FOR_CONTENT;
 
 /**
@@ -38,6 +42,12 @@ public class VoicemailPlaybackTest
         mPresenter = VoicemailPlaybackPresenter.getInstance(getActivity(), null);
     }
 
+    @Override
+    public void tearDown() throws Exception {
+        cleanUpArchivedVoicemailUri();
+        super.tearDown();
+    }
+
     @Suppress
     public void testWhenCheckForContentCompletes() throws Throwable {
         setUriForRealFileVoicemailEntry();
@@ -53,5 +63,83 @@ public class VoicemailPlaybackTest
         getInstrumentation().waitForIdleSync();
 
         assertStateTextContains("Loading voicemail");
+    }
+
+    public void testArchiveContent() throws Throwable {
+        setUriForRealFileVoicemailEntry();
+        setPlaybackViewForPresenter();
+        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.archiveContent(mVoicemailUri, true);
+            }
+        });
+        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+        mFakeAsyncTaskExecutor.runTask(ARCHIVE_VOICEMAIL_CONTENT);
+        getInstrumentation().waitForIdleSync();
+        assertVoicemailArchived();
+    }
+
+    public void testShareContent() throws Throwable {
+        setUriForRealFileVoicemailEntry();
+        setPlaybackViewForPresenter();
+        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.archiveContent(mVoicemailUri, false);
+            }
+        });
+        mFakeAsyncTaskExecutor.runTask(CHECK_FOR_CONTENT);
+        mFakeAsyncTaskExecutor.runTask(ARCHIVE_VOICEMAIL_CONTENT);
+        getInstrumentation().waitForIdleSync();
+        assertVoicemailArchived();
+    }
+
+    private void assertVoicemailArchived() {
+        try (Cursor cursor = getArchivedVoicemailCursor()) {
+            assertTrue(hasContent(cursor));
+            assertEquals(ContentUris.parseId(mVoicemailUri), getRowServerId(cursor));
+        } catch (Exception e) {
+            fail("Voicemail was not archived: " + e.toString());
+        }
+    }
+
+    private void cleanUpArchivedVoicemailUri() {
+        try (Cursor cursor = getArchivedVoicemailCursor()) {
+            if (hasContent(cursor)) {
+                getContentResolver().delete(getRowUri(cursor), null, null);
+            }
+        }
+    }
+
+    private Cursor getArchivedVoicemailCursor() {
+        return getContentResolver().query(
+                VoicemailArchiveContract.VoicemailArchive.CONTENT_URI,
+                new String[] {
+                        VoicemailArchiveContract.VoicemailArchive._ID,
+                        VoicemailArchiveContract.VoicemailArchive.SERVER_ID
+                },
+                VoicemailArchiveContract.VoicemailArchive.SERVER_ID + "="
+                        + ContentUris.parseId(mVoicemailUri),
+                null,
+                null);
+    }
+
+    private int getRowServerId(Cursor cursor) {
+        return cursor
+                .getInt(cursor.getColumnIndex(VoicemailArchiveContract.VoicemailArchive.SERVER_ID));
+    }
+
+    private Uri getRowUri(Cursor cursor) {
+        return VoicemailArchiveContract.VoicemailArchive.buildWithId(cursor.getInt(
+                cursor.getColumnIndex(VoicemailArchiveContract.VoicemailArchive._ID)));
+    }
+
+    private boolean hasContent(Cursor cursor) {
+        return cursor != null && cursor.moveToFirst();
     }
 }
