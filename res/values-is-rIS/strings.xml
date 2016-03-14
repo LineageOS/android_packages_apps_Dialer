@@ -35,6 +35,8 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Hreinsa símtalaferil"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eyða talhólfsskilaboðum"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Setja talhólfsskilaboð í geymslu"</string>
+    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
+    <skip />
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Talhólfi eytt"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Talhólfsskilaboð sett í geymslu"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"AFTURKALLA"</string>

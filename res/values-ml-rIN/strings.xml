@@ -35,6 +35,8 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്യുക"</string>
+    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
+    <skip />
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"വോയ്സ്മെയിൽ ഇല്ലാതാക്കി"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്‌തു"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"പഴയപടിയാക്കുക"</string>

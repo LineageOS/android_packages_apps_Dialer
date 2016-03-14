@@ -35,6 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Избришете ја историјата на повици"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Избришете ја говорната пошта"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архивирајте говорна пошта"</string>
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Споделете ја говорната пошта"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Гов. пошта е избриш."</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Говорната пошта е архивирана"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ВРАТИ"</string>

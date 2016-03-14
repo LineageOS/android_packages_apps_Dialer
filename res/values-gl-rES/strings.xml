@@ -35,6 +35,8 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Borrar historial de chamadas"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eliminar correo de voz"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arquivar correo de voz"</string>
+    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
+    <skip />
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Correo voz eliminado"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Correo de voz arquivado"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESFACER"</string>

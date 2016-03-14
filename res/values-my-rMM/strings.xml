@@ -35,6 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"ခေါ်ဆိုမှု မှတ်တမ်း ရှင်းရန်"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"အသံပို့စာ အားဖျက်ရန်"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"အသံစာကို သိုလှောင်ထားပါ"</string>
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"အသံမေးလ်ကို မျှဝေပါ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"အသံမေးလ် ရှာတွေ့ခဲ့"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"သိုလှောင်ထားသည့် အသံစာ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ပြန်ဖျက်ရန်"</string>

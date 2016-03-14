@@ -35,6 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"ລຶບ​ປະ​ຫວັດ​ການ​ໂທ​"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ລຶບຂໍ້ຄວາມສຽງ"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ຈັດເກັບຂໍ້ຄວາມສຽງເຂົ້າແຟ້ມ"</string>
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"ແບ່ງປັນຂໍ້ຄວາມສຽງ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ລຶບ​ຂໍ້​ຄວາມ​ສຽງ​ແລ້ວ"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ຈັດເກັບຂໍ້ຄວາມສຽງເຂົ້າແຟ້ມແລ້ວ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ບໍ່​ເຮັດ"</string>
