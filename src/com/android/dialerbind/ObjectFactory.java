@@ -52,6 +52,11 @@ public class ObjectFactory {
         return false;
     }
 
+    public static boolean isNewBlockingEnabled(Context context) {
+        // TODO(maxwelb) - Set to true when ready to enable feature
+        return false;
+    }
+
     @Nullable
     public static ExtendedBlockingButtonRenderer newExtendedBlockingButtonRenderer(
             Context context, ExtendedBlockingButtonRenderer.Listener listener) {
