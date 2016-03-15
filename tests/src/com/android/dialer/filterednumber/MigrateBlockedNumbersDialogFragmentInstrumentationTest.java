@@ -18,6 +18,7 @@ package com.android.dialer.filterednumber;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
@@ -25,7 +26,7 @@ import android.content.DialogInterface;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.android.dialer.DialtactsActivity;
-import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment.Listener;
+import com.android.dialer.filterednumber.BlockedNumbersMigrator.Listener;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -39,6 +40,7 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
 
     private static final String SHOW_TAG = "ShowTag";
 
+    @Mock private BlockedNumbersMigrator mBlockedNumbersMigrator;
     @Mock private Listener mListener;
     private DialtactsActivity mActivity;
     private DialogFragment mMigrateDialogFragment;
@@ -52,7 +54,8 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
         super.setUp();
         MockitoAnnotations.initMocks(this);
         mActivity = getActivity();
-        mMigrateDialogFragment = MigrateBlockedNumbersDialogFragment.newInstance(mListener);
+        mMigrateDialogFragment = MigrateBlockedNumbersDialogFragment
+                .newInstance(mBlockedNumbersMigrator, mListener);
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
@@ -67,7 +70,7 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
     }
 
     public void testDialogPositiveButtonPress() {
-        doNothing().when(mListener).onComplete();
+        when(mBlockedNumbersMigrator.migrate(mListener)).thenReturn(true);
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
@@ -78,6 +81,6 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
         getInstrumentation().waitForIdleSync();
         // Dialog was dismissed
         assertNull(mMigrateDialogFragment.getDialog());
-        verify(mListener).onComplete();
+        verify(mBlockedNumbersMigrator).migrate(mListener);
     }
 }
