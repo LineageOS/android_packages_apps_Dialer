@@ -16,16 +16,17 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.database.Cursor;
 import android.telephony.PhoneNumberUtils;
-import android.text.format.Time;
 import android.text.TextUtils;
+import android.text.format.Time;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.util.DateUtils;
 import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.util.AppCompatConstants;
-
-import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Groups together calls in the call log.  The primary grouping attempts to group together calls
@@ -122,7 +123,7 @@ public class CallLogGroupBuilder {
 
         // Instantiate the group values to those of the first call in the cursor.
         String groupNumber = cursor.getString(CallLogQuery.NUMBER);
-        String groupPostDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+        String groupPostDialDigits = CompatUtils.isNCompatible()
                 ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
         int groupCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
         String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
@@ -138,7 +139,7 @@ public class CallLogGroupBuilder {
         while (cursor.moveToNext()) {
             // Obtain the values for the current call to group.
             number = cursor.getString(CallLogQuery.NUMBER);
-            numberPostDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+            numberPostDialDigits = CompatUtils.isNCompatible()
                     ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
             callType = cursor.getInt(CallLogQuery.CALL_TYPE);
             accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);

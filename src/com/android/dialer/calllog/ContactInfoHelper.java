@@ -32,6 +32,7 @@ import android.util.Log;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -41,7 +42,6 @@ import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
-import com.google.common.annotations.VisibleForTesting;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -435,7 +435,7 @@ public class ContactInfoHelper {
         info.type = c.getInt(CallLogQuery.CACHED_NUMBER_TYPE);
         info.label = c.getString(CallLogQuery.CACHED_NUMBER_LABEL);
         String matchedNumber = c.getString(CallLogQuery.CACHED_MATCHED_NUMBER);
-        String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+        String postDialDigits = CompatUtils.isNCompatible()
                 ? c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
         info.number = (matchedNumber == null) ?
                 c.getString(CallLogQuery.NUMBER) + postDialDigits : matchedNumber;

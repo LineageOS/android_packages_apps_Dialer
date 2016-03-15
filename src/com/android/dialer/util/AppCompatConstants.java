@@ -27,6 +27,4 @@ public final class AppCompatConstants {
     public static final int CALLS_REJECTED_TYPE = 5;
     // Added to android.provider.CallLog.Calls in N+.
     public static final int CALLS_BLOCKED_TYPE = 6;
-    // Added to android.provider.CallLog.Calls in N+.
-    public static final String POST_DIAL_DIGITS = "post_dial_digits";
 }
