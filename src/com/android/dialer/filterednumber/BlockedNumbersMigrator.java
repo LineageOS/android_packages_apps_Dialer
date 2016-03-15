@@ -22,7 +22,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 
 import com.android.dialer.compat.BlockedNumbersSdkCompat;
 import com.android.dialer.compat.FilteredNumberCompat;

@@ -16,12 +16,9 @@
 
 package com.android.dialer.filterednumber;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -40,9 +37,8 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
 
     private static final String SHOW_TAG = "ShowTag";
 
-    @Mock private BlockedNumbersMigrator mBlockedNumbersMigrator;
+    private BlockedNumbersMigrator mBlockedNumbersMigrator;
     @Mock private Listener mListener;
-    private DialtactsActivity mActivity;
     private DialogFragment mMigrateDialogFragment;
 
     public MigrateBlockedNumbersDialogFragmentInstrumentationTest() {
@@ -53,13 +49,14 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
     public void setUp() throws Exception {
         super.setUp();
         MockitoAnnotations.initMocks(this);
-        mActivity = getActivity();
+        mBlockedNumbersMigrator = new SynchronousBlockedNumbersMigrator(
+                getActivity().getContentResolver());
         mMigrateDialogFragment = MigrateBlockedNumbersDialogFragment
                 .newInstance(mBlockedNumbersMigrator, mListener);
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
-                mMigrateDialogFragment.show(mActivity.getFragmentManager(), SHOW_TAG);
+                mMigrateDialogFragment.show(getActivity().getFragmentManager(), SHOW_TAG);
             }
         });
         getInstrumentation().waitForIdleSync();
@@ -70,7 +67,6 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
     }
 
     public void testDialogPositiveButtonPress() {
-        when(mBlockedNumbersMigrator.migrate(mListener)).thenReturn(true);
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {
@@ -81,6 +77,17 @@ public class MigrateBlockedNumbersDialogFragmentInstrumentationTest extends
         getInstrumentation().waitForIdleSync();
         // Dialog was dismissed
         assertNull(mMigrateDialogFragment.getDialog());
-        verify(mBlockedNumbersMigrator).migrate(mListener);
+    }
+
+    private static class SynchronousBlockedNumbersMigrator extends BlockedNumbersMigrator {
+        public SynchronousBlockedNumbersMigrator(ContentResolver contentResolver) {
+            super(contentResolver);
+        }
+
+        @Override
+        public boolean migrate(BlockedNumbersMigrator.Listener listener) {
+            listener.onComplete();
+            return true;
+        }
     }
 }
