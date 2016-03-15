@@ -16,6 +16,8 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.collect.Lists;
+
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -29,12 +31,12 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TestConstants;
-import com.google.common.collect.Lists;
 
 import java.util.Date;
 import java.util.List;
@@ -235,7 +237,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (CompatUtils.isNCompatible()) {
             assertHasCallActionToGivenNumber(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
         }
     }
@@ -259,7 +261,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (CompatUtils.isNCompatible()) {
             assertNameIs(mViewHolder, TEST_NUMBER + TEST_POST_DIAL_DIGITS);
         }
     }
@@ -273,7 +275,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         mAdapter.changeCursor(mCursor);
         mAdapter.onBindViewHolder(mViewHolder, 0);
 
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (CompatUtils.isNCompatible()) {
             assertNameIs(mViewHolder, TEST_CACHED_NAME_PRIMARY);
         }
     }
@@ -673,7 +675,7 @@ public class CallLogAdapterTest extends AndroidTestCase {
         if (!TextUtils.isEmpty(number)) {
             values[CallLogQuery.NUMBER] = number;
         }
-        if (!TextUtils.isEmpty(postDialDigits) && PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (!TextUtils.isEmpty(postDialDigits) && CompatUtils.isNCompatible()) {
             values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
         }
         if (presentation != NO_VALUE_SET) {

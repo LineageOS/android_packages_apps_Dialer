@@ -20,13 +20,15 @@ import static junit.framework.Assert.assertEquals;
 
 import android.provider.CallLog.Calls;
 
+import com.android.contacts.common.compat.CompatUtils;
+
 /**
  * Helper class to create test values for {@link CallLogQuery}.
  */
 public class CallLogQueryTestUtils {
     public static Object[] createTestValues() {
         Object[] values;
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (CompatUtils.isNCompatible()) {
             values = new Object[]{
                     0L, "", 0L, 0L, Calls.INCOMING_TYPE, "", "", "", null, 0, null, null, null,
                     null, 0L, null, 0, Calls.PRESENTATION_ALLOWED, null, null, 0, null, null,
