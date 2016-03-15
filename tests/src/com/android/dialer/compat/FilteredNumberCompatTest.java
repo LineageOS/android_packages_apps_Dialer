@@ -20,14 +20,17 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.DialerApplication;
@@ -35,6 +38,7 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
+import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -177,6 +181,50 @@ public class FilteredNumberCompatTest extends AndroidTestCase {
         // Number can't be formatted properly without country code
         assertEquals(newExpectedContentValuesM(NON_E164_NUMBER, null, null),
                 FilteredNumberCompat.newBlockNumberContentValues(NON_E164_NUMBER, null, null));
+    }
+
+    public void testCreateManageBlockedNumbersIntent_NullContext() {
+        try {
+            FilteredNumberCompat.createManageBlockedNumbersIntent(null);
+            fail();
+        } catch (NullPointerException e) {}
+    }
+
+    public void testCreateManageBlockedNumbersIntent_M() {
+        if (CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertEquals(new ComponentName(getContext(), BlockedNumbersSettingsActivity.class),
+                FilteredNumberCompat.createManageBlockedNumbersIntent(getContext()).getComponent());
+    }
+
+    public void testCreateManageBlockedNumbersIntent_N_Disabled_NotMigrated() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        FilteredNumberCompat.setIsEnabledForTest(false);
+        assertEquals(new ComponentName(getContext(), BlockedNumbersSettingsActivity.class),
+                FilteredNumberCompat.createManageBlockedNumbersIntent(getContext()).getComponent());
+    }
+
+    public void testCreateManageBlockedNumbersIntent_N_Enabled_NotMigrated() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        assertEquals(new ComponentName(getContext(), BlockedNumbersSettingsActivity.class),
+                FilteredNumberCompat.createManageBlockedNumbersIntent(getContext()).getComponent());
+    }
+
+    public void testCreateManageBlockedNumbersIntent_N_Enabled_Migrated() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        when(mSharedPreferences
+                .getBoolean(FilteredNumberCompat.HAS_MIGRATED_TO_NEW_BLOCKING_KEY, false))
+                .thenReturn(true);
+        assertFalse(new ComponentName(getContext(), BlockedNumbersSettingsActivity.class)
+                .equals(FilteredNumberCompat.createManageBlockedNumbersIntent(getContext())
+                        .getComponent()));
     }
 
     private ContentValues newExpectedContentValuesM(String number, String e164Number,
