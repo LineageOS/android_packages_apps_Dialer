@@ -22,12 +22,16 @@ import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 
 import com.android.contacts.common.compat.CompatUtils;
+import com.android.contacts.common.compat.TelecomManagerUtil;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.DialerApplication;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
@@ -37,6 +41,7 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
 import com.android.dialer.filterednumber.BlockedNumbersMigrator;
+import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 
 import java.util.ArrayList;
@@ -267,5 +272,19 @@ public class FilteredNumberCompat {
 
     private static boolean shouldShowMigrationDialog(boolean isBlocking) {
         return isBlocking && canUseNewFiltering() && !hasMigratedToNewBlocking();
+    }
+
+    /**
+     * Creates the {@link Intent} which opens the blocked numbers management interface.
+     *
+     * @param context The {@link Context}.
+     * @return The intent.
+     */
+    public static Intent createManageBlockedNumbersIntent(Context context) {
+        if (canUseNewFiltering() && hasMigratedToNewBlocking()) {
+            return TelecomManagerUtil.createManageBlockedNumbersIntent(
+                    (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE));
+        }
+        return new Intent(context, BlockedNumbersSettingsActivity.class);
     }
 }
