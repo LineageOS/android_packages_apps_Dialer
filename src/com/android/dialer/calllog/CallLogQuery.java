@@ -16,12 +16,13 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.collect.Lists;
+
 import android.provider.CallLog.Calls;
 
+import com.android.contacts.common.compat.CompatUtils;
+import com.android.dialer.compat.CallsSdkCompat;
 import com.android.dialer.compat.DialerCompatUtils;
-import com.android.dialer.util.AppCompatConstants;
-
-import com.google.common.collect.Lists;
 
 import java.util.List;
 
@@ -89,7 +90,7 @@ public final class CallLogQuery {
 
     /**
      * Only available in versions > M
-     * Call {@link PhoneNumberDisplayUtil#canShowPostDial()} prior to use
+     * Call {@link CompatUtils#isNCompatible()} prior to use
      */
     public static int POST_DIAL_DIGITS = -1;
 
@@ -101,8 +102,8 @@ public final class CallLogQuery {
             projectionList.add(Calls.CACHED_PHOTO_URI);
             CACHED_PHOTO_URI = projectionList.size() - 1;
         }
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
-            projectionList.add(AppCompatConstants.POST_DIAL_DIGITS);
+        if (CompatUtils.isNCompatible()) {
+            projectionList.add(CallsSdkCompat.POST_DIAL_DIGITS);
             POST_DIAL_DIGITS = projectionList.size() - 1;
         }
         _PROJECTION = projectionList.toArray(new String[projectionList.size()]);

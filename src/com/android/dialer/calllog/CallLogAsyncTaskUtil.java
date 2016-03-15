@@ -16,6 +16,8 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -30,17 +32,15 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.util.PermissionsUtil;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
+import com.android.dialer.compat.CallsSdkCompat;
 import com.android.dialer.database.VoicemailArchiveContract;
-import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
-
-import com.google.common.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,8 +94,8 @@ public class CallLogAsyncTaskUtil {
         static {
             ArrayList<String> projectionList = new ArrayList<>();
             projectionList.addAll(Arrays.asList(CALL_LOG_PROJECTION_INTERNAL));
-            if (PhoneNumberDisplayUtil.canShowPostDial()) {
-                projectionList.add(AppCompatConstants.POST_DIAL_DIGITS);
+            if (CompatUtils.isNCompatible()) {
+                projectionList.add(CallsSdkCompat.POST_DIAL_DIGITS);
             }
             projectionList.trimToSize();
             CALL_LOG_PROJECTION = projectionList.toArray(new String[projectionList.size()]);
@@ -113,13 +113,13 @@ public class CallLogAsyncTaskUtil {
     }
 
     public interface CallLogAsyncTaskListener {
-        public void onDeleteCall();
-        public void onDeleteVoicemail();
-        public void onGetCallDetails(PhoneCallDetails[] details);
+        void onDeleteCall();
+        void onDeleteVoicemail();
+        void onGetCallDetails(PhoneCallDetails[] details);
     }
 
     public interface OnCallLogQueryFinishedListener {
-        public void onQueryFinished(boolean hasEntry);
+        void onQueryFinished(boolean hasEntry);
     }
 
     // Try to identify if a call log entry corresponds to a number which was blocked. We match by
@@ -185,7 +185,7 @@ public class CallLogAsyncTaskUtil {
             // Read call log.
             final String countryIso = cursor.getString(CallDetailQuery.COUNTRY_ISO_COLUMN_INDEX);
             final String number = cursor.getString(CallDetailQuery.NUMBER_COLUMN_INDEX);
-            final String postDialDigits = PhoneNumberDisplayUtil.canShowPostDial()
+            final String postDialDigits = CompatUtils.isNCompatible()
                     ? cursor.getString(CallDetailQuery.POST_DIAL_DIGITS) : "";
             final int numberPresentation =
                     cursor.getInt(CallDetailQuery.NUMBER_PRESENTATION_COLUMN_INDEX);

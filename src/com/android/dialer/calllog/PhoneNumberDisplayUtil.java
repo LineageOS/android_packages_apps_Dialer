@@ -17,7 +17,6 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
-import android.os.Build;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 
@@ -80,14 +79,5 @@ public class PhoneNumberDisplayUtil {
         } else {
             return context.getResources().getString(R.string.unknown);
         }
-    }
-
-    /**
-     * Returns whether we can expect the post-dial digits to be in the call log.
-     *
-     * These digits will be present in versions N+.
-     */
-    public static boolean canShowPostDial() {
-        return Build.VERSION.SDK_INT > Build.VERSION_CODES.M;
     }
 }

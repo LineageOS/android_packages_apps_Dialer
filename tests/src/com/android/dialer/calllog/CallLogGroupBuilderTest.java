@@ -22,6 +22,7 @@ import android.database.MatrixCursor;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.util.AppCompatConstants;
 
 import java.util.List;
@@ -98,7 +99,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
 
         mBuilder.addGroups(mCursor);
 
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (CompatUtils.isNCompatible()) {
             assertEquals(2, mFakeGroupCreator.groups.size());
             assertGroupIs(0, 2, mFakeGroupCreator.groups.get(0));
             assertGroupIs(2, 1, mFakeGroupCreator.groups.get(1));
@@ -380,7 +381,7 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         values[CallLogQuery.ID] = mCursor.getPosition();
         values[CallLogQuery.NUMBER] = number;
         values[CallLogQuery.CALL_TYPE] = type;
-        if (PhoneNumberDisplayUtil.canShowPostDial()) {
+        if (CompatUtils.isNCompatible()) {
             values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
         }
         mCursor.addRow(values);
