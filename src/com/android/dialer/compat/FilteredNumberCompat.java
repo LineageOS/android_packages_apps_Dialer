@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-    package com.android.dialer.compat;
+package com.android.dialer.compat;
 
 import com.google.common.base.Preconditions;
 
@@ -43,6 +43,7 @@ import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
 import com.android.dialer.filterednumber.BlockedNumbersMigrator;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
+import com.android.dialerbind.ObjectFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +58,6 @@ import java.util.List;
 public class FilteredNumberCompat {
 
     protected static final String HAS_MIGRATED_TO_NEW_BLOCKING_KEY = "migratedToNewBlocking";
-
-    // Flag to enable feature.
-    // TODO(maxwelb) remove when ready to enable new filtering.
-    private static final boolean isNewFilteringEnabled = false;
 
     private static Boolean isEnabledForTest;
 
@@ -122,7 +119,8 @@ public class FilteredNumberCompat {
         if (isEnabledForTest != null) {
             return CompatUtils.isNCompatible() && isEnabledForTest;
         }
-        return CompatUtils.isNCompatible() && isNewFilteringEnabled;
+        return CompatUtils.isNCompatible() && ObjectFactory
+                .isNewBlockingEnabled(DialerApplication.getContext());
     }
 
     /**
