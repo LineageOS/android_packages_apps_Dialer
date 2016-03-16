@@ -48,6 +48,7 @@ import com.cyanogen.lookup.phonenumber.contract.LookupProvider;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 import com.cyanogen.lookup.phonenumber.request.LookupRequest;
 import com.cyanogen.lookup.phonenumber.response.LookupResponse;
+import com.cyanogen.lookup.phonenumber.response.StatusCode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -304,7 +305,7 @@ public class ContactInfoHelper {
         if (mLookupProvider != null && !isLocalContact) {
             LookupResponse response = mLookupProvider.blockingFetchInfo(
                     new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso), null));
-            if (response != null) {
+            if (response != null && response.mStatusCode == StatusCode.SUCCESS) {
                 final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
                 // map LookupResponse to ContactInfo
                 ContactInfo contactInfo = new ContactInfo();
