@@ -150,6 +150,18 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
         }
 
         @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            final MSimCallLogFragment fragment =
+                    (MSimCallLogFragment) super.instantiateItem(container, position);
+            switch (position) {
+                case TAB_INDEX_MSIM:
+                    mMSimCallsFragment = fragment;
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
         public int getCount() {
             return TAB_INDEX_COUNT_MSIM;
         }
