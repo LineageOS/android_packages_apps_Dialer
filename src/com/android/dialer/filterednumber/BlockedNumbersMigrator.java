@@ -28,12 +28,15 @@ import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
+import com.android.incallui.Log;
 
 /**
  * Class which should be used to migrate numbers from {@link FilteredNumberContract} blocking to
  * {@link android.provider.BlockedNumberContract} blocking.
  */
 public class BlockedNumbersMigrator {
+
+    private static final String TAG = "BlockedNumbersMigrator";
 
     /**
      * Listener for the operation to migrate from {@link FilteredNumberContract} blocking to
@@ -69,19 +72,24 @@ public class BlockedNumbersMigrator {
      * @throws NullPointerException if listener is null
      */
     public boolean migrate(final Listener listener) {
+        Log.i(TAG, "migrate - start");
         if (!FilteredNumberCompat.canUseNewFiltering()) {
+            Log.i(TAG, "migrate - can't use new filtering");
             return false;
         }
         Preconditions.checkNotNull(listener);
         new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
+                Log.i(TAG, "migrate - start background migration");
                 return migrateToNewBlockingInBackground(mContentResolver);
             }
 
             @Override
             protected void onPostExecute(Boolean isSuccessful) {
+                Log.i(TAG, "migrate - marking migration complete");
                 FilteredNumberCompat.setHasMigratedToNewBlocking(isSuccessful);
+                Log.i(TAG, "migrate - calling listener");
                 listener.onComplete();
             }
         }.execute();
@@ -92,19 +100,26 @@ public class BlockedNumbersMigrator {
         try (Cursor cursor = resolver.query(FilteredNumber.CONTENT_URI,
                 new String[]{FilteredNumberColumns.NUMBER}, null, null, null)) {
             if (cursor == null) {
+                Log.i(TAG, "migrate - cursor was null");
                 return false;
             }
 
+            Log.i(TAG, "migrate - attempting to migrate " + cursor.getCount() + "numbers");
+
+            int numMigrated = 0;
             while (cursor.moveToNext()) {
                 String originalNumber = cursor
                         .getString(cursor.getColumnIndex(FilteredNumberColumns.NUMBER));
                 if (isNumberInNewBlocking(resolver, originalNumber)) {
+                    Log.i(TAG, "migrate - number was already blocked in new blocking");
                     continue;
                 }
                 ContentValues values = new ContentValues();
                 values.put(BlockedNumbersSdkCompat.COLUMN_ORIGINAL_NUMBER, originalNumber);
                 resolver.insert(BlockedNumbersSdkCompat.CONTENT_URI, values);
+                ++numMigrated;
             }
+            Log.i(TAG, "migrate - migration complete. " + numMigrated + " numbers migrated.");
             return true;
         }
     }

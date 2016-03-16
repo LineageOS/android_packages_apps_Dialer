@@ -44,6 +44,7 @@ import com.android.dialer.filterednumber.BlockedNumbersMigrator;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 import com.android.dialerbind.ObjectFactory;
+import com.android.incallui.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,8 @@ import java.util.List;
  * used.
  */
 public class FilteredNumberCompat {
+
+    private static final String TAG = "FilteredNumberCompat";
 
     protected static final String HAS_MIGRATED_TO_NEW_BLOCKING_KEY = "migratedToNewBlocking";
 
@@ -247,14 +250,18 @@ public class FilteredNumberCompat {
             final Integer blockId, final String number, final String countryIso,
             final String displayNumber, final Integer parentViewId,
             final FragmentManager fragmentManager, @Nullable final Callback callback) {
+        Log.i(TAG, "showBlockNumberDialogFlow - start");
         // If the user is blocking a number and isn't using the framework solution when they
         // should be, show the migration dialog
         if (shouldShowMigrationDialog(blockId == null)) {
+            Log.i(TAG, "showBlockNumberDialogFlow - showing migration dialog");
             MigrateBlockedNumbersDialogFragment
                     .newInstance(new BlockedNumbersMigrator(contentResolver),
                             new BlockedNumbersMigrator.Listener() {
                                 @Override
                                 public void onComplete() {
+                                    Log.i(TAG, "showBlockNumberDialogFlow - listener showing block "
+                                            + "number dialog");
                                     BlockNumberDialogFragment
                                             .show(null, number, countryIso, displayNumber,
                                                     parentViewId,
@@ -263,6 +270,7 @@ public class FilteredNumberCompat {
                             }).show(fragmentManager, "MigrateBlockedNumbers");
             return;
         }
+        Log.i(TAG, "showBlockNumberDialogFlow - showing block number dialog");
         BlockNumberDialogFragment
                 .show(blockId, number, countryIso, displayNumber, parentViewId, fragmentManager,
                         callback);
