@@ -303,7 +303,9 @@ public class ContactInfoHelper {
         // always do a LookupProvider search, if available, for a non-contact
         if (mLookupProvider != null && !isLocalContact) {
             LookupResponse response = mLookupProvider.blockingFetchInfo(
-                    new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso), null));
+                    new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso),
+                            null, LookupRequest.RequestOrigin.OTHER)
+                    );
             if (response != null && response.mStatusCode == StatusCode.SUCCESS) {
                 logSuccessfulFetch(mLookupProvider);
                 final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
