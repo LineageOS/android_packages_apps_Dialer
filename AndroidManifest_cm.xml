@@ -53,5 +53,13 @@
             android:theme="@style/Theme.Material.Light.Dialog.NoTitle"
             android:exported="true" />
 
+        <activity
+            android:name="com.android.contacts.common.activity.BlockContactActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.Material.Light.Dialog.NoTitle" />
+
     </application>
 </manifest>
