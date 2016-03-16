@@ -160,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Όλα"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Αναπάντητες"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Φωνητικό μήνυμα"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Νέος, απλούστερος αποκλεισμός"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Για την καλύτερη δυνατή προστασία σας, το Phone πρέπει να αλλάξει τον τρόπο με τον οποίο λειτουργεί ο αποκλεισμός. Οι αποκλεισμένοι αριθμοί σας δεν θα επιτρέπουν πλέον τη λήψη τόσο κλήσεων όσο και μηνυμάτων κειμένου και μπορεί να κοινοποιηθούν σε άλλες εφαρμογές."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Αποδοχή"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Να αποκλειστεί ο αριθμός <xliff:g id="NUMBER">%1$s</xliff:g>;"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Οι μελλοντικές κλήσεις από αυτόν τον αριθμό θα αποκλείονται και τα μηνύματα στον αυτόματο τηλεφωνητή θα διαγράφονται αυτόματα."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Οι κλήσεις από αυτόν τον αριθμό θα αποκλείονται, αλλά ο καλών ενδέχεται να μπορεί να αφήνει μηνύματα στον αυτόματο τηλεφωνητή."</string>

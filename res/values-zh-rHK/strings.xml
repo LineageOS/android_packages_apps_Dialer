@@ -160,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"全部"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"未接來電"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"留言信箱"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"全新、簡單的封鎖功能"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"為更有效保護您的安全，Phone 需要變更封鎖功能的運作方式。系統現在會拒絕已封鎖號碼的來電和短訊，並可能將這些號碼提供給其他應用程式使用。"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"允許"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"要封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"將會封鎖這個號碼的來電，而留言將會自動刪除。"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"將會封鎖這個號碼的來電，但來電可能會轉駁至留言信箱。"</string>

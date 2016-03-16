@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"कॉल इतिहास साफ करा"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"व्हॉइसमेल हटवा"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"व्हॉइसमेलचे संग्रहण करा"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"व्हॉइसमेल सामायिक करा"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"व्हॉइसमेल आढळले"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"व्हॉइसमेल संग्रहित केले"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"पूर्ववत करा"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"सर्व"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"सुटलेले"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"व्हॉइसमेल"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"नवीन, सरलीकृत अवरोधित करणे"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"आपले अधिक चांगले संरक्षण करण्यासाठी, अवरोधित करणे ज्या पद्धतीने कार्य करते ते बदलण्याची फोनला गरज आहे. आपले अवरोधित केलेले नंबर कॉल आणि मजकूर थांबवतील आणि कदाचित इतर अॅप्ससह सामायिक केले जाऊ शकतील."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"अनुमती द्या"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> अवरोधित करायचा?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"या नंबर वरून केलेले कॉल अवरोधित केले जातील आणि व्हॉइसमेल स्वयंचलितपणे हटविले जातील."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"या नंबर वरून केलेले कॉल अवरोधित केले जातील परंतु कॉलर आपल्‍यासाठी व्हॉइसमेल सोडण्यात अद्याप सक्षम असू शकेल."</string>

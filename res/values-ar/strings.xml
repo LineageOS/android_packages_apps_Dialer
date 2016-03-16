@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"محو سجل المكالمات"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"حذف رسالة البريد الصوتي"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"البريد الصوتي للأرشيف"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"مشاركة بريد صوتي"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"تم حذف الرسالة الصوتية"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"البريد الصوتي المؤرشف"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"تراجع"</string>
@@ -165,6 +164,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"الكل"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"فائتة"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"البريد الصوتي"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"حظر جديد ومبسط"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"لحمايتك بشكل أفضل، يحتاج الهاتف إلى تغيير آلية تنفيذ الحظر. تؤدي الآن ميزة حظر الأرقام إلى إيقاف كل من المكالمات والرسائل النصية، كما أن ذلك الحظر يمكن أن يمتد إلى تطبيقات أخرى."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"سماح"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"سيتم حظر المكالمات الواردة من هذا الرقم كما سيتم تلقائيًا حذف الرسائل الصوتية."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"سيتم حظر المكالمات من هذا الرقم، إلا أنه سيظل بإمكان المتصل ترك رسائل صوتية."</string>

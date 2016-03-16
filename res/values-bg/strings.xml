@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята на обажданията"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Изтриване на гласова поща"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архивиране на гласовата поща"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Споделяне на гласова поща"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Гл. поща е изтрита"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Гласовата поща бе архивирана"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ОТМЯНА"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Всички"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Пропуснати"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Гл. поща"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Ново и лесно блокиране"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"За да ви защитава по-добре, Phone трябва да промени начина на работа на функцията за блокиране. Вече няма да получавате обаждания и текстови съобщения от блокираните номера. Възможно е тези номера да бъдат споделени с други приложения."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Разрешаване"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Да се блокира ли <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Обажданията от този номер ще бъдат блокирани, а гласовите съобщения – автоматично изтривани."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Обажданията от този номер ще бъдат блокирани, но обаждащият се пак може да е в състояние да ви оставя гласови съобщения."</string>

@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"કૉલ ઇતિહાસ સાફ કરો"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"વૉઇસમેઇલ કાઢી નાખો"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"વૉઇસમેઇલને આર્કાઇવ કરો"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"વૉઇસમેઇલ શેર કરો"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"વૉઇસમેઇલ કાઢી નાખ્યો"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"વૉઇસમેઇલ આર્કાઇવ કર્યો"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"પૂર્વવત્ કરો"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"તમામ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"છૂટેલ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"વૉઇસમેઇલ"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"અવરોધિત કરવાની નવી, સરળ રીત"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"તમારી બહેતર સુરક્ષા માટે, ફોનને, અવરોધિત કરવું કેવી રીતે કાર્ય કરે છે તે બદલવાની જરૂર છે. તમારા અવરોધિત નંબર્સ હવે કૉલ્સ અને ટેક્સ્ટ્સ બન્નેને રોકશે અને તે અન્ય ઍપ્લિકેશનો સાથે શેર કરવામાં આવી શકે છે."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"મંજૂરી આપો"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધિત કરીએ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે, પરંતુ કૉલર હજી પણ તમારા માટે વૉઇસમેઇલ્સ મૂકવામાં સમર્થ હોઈ શકે છે."</string>

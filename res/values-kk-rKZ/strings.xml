@@ -160,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Барлық"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Қабылданбаған"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Дауыстық хабар"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Жаңа, қарапайым бөгеу"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Сізді жақсырақ қорғау үшін телефон бөгеудің жұмыс істеу жолын өзгертуі керек. Бөгелген нөмірлер енді қоңырауларды да, мәтіндік хабарларды да тоқтатуы және басқа қолданбаларда бөлісуі мүмкін."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Рұқсат беру"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеу керек пе?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Осы нөмірден болашақ қоңыраулар бөгеледі және дауыстық хабарлар автоматты түрде жойылады."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Осы нөмірден қоңыраулар бөгеледі, бірақ қоңырау шалушы әлі де сізге дауыстық хабарлар қалдыра алуы мүмкін."</string>
