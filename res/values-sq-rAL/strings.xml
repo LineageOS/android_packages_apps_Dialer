@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Pastro historikun e telefonatave"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Fshije postën zanore"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arkivo postën zanore"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Shpërndaje postën zanore"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"U zbulua posta zanore"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Posta zanore u arkivua"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ZHBËJ"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Të gjitha"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Të humbura"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Posta zanore"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Bllokim i ri i thjeshtëzuar"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Për të të mbrojtur më mirë, Telefoni ka nevojë të ndryshojë mënyrën se si funksionon bllokimi. Numrat e bllokuar tani do të ndalojnë si telefonatat ashtu edhe mesazhet me tekst dhe mund të ndahen me aplikacione të tjera."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Lejo"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blloko <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Telefonatat nga ky numër do të bllokohen dhe mesazhet zanore do të fshihen automatikisht."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Telefonatat nga ky numër do të bllokohen, por telefonuesi mund të jetë ende në gjendje të lërë mesazhe zanore."</string>

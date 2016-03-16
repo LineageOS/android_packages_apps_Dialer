@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"የጥሪ ታሪክን አጽዳ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"የድምፅ መልዕክት ሰርዝ"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"የድምፅ መልዕክት በማህደር አስቀምጥ"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"የድምፅ መልዕክት አጋራ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"የድምጽ ፖስታ ተፈልጎ ተገኝቷል"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"የድምፅ መልዕክት በማህደር ተቀምጧል"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ቀልብስ"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ሁሉም"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ያመለጡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"የድምፅ መልዕክት"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"አዲስ፣ የተቃለለ ማገድ"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"እርስዎን በተሻለ ሁኔታ መጠበቅ እንዲችል ስልክ ማገድ እንዴት እንደሚሰራ መቀየር አለበት። የታገዱ ቁጥሮችዎ አሁን ጥሪዎችም ጽሑፎችም መላክ ያቆማሉ፣ እና ከሌሎች መተግበሪያዎች ጋር ሊጋሩ ይችላሉ።"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"ፍቀድ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ይታገድ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ከዚህ ቁጥር የሚመጡ ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ከዚህ ቁጥር የሚመጡ ጥሪዎች ይታገዳሉ፣ ነገር ግን ደዋዩ አሁንም የድምጽ መልዕክቶችን ሊተዉልዎ ይችላል።"</string>

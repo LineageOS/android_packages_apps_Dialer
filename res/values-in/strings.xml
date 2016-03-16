@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Hapus riwayat panggilan"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Hapus pesan suara"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arsipkan pesan suara"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Bagikan pesan suara"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Pesan suara dihapus"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Pesan suara diarsipkan"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"URUNGKAN"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tak Dijawab"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"PesanSuara"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Pemblokiran baru yang disederhanakan"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Untuk semakin melindungi Anda, Telepon harus mengubah cara kerja pemblokiran. Sekarang nomor yang diblokir akan menghentikan panggilan dan SMS, dan mungkin dibagikan dengan aplikasi lain."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Izinkan"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokir <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Panggilan telepon dari nomor ini akan diblokir dan pesan suara akan dihapus secara otomatis."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Panggilan telepon dari nomor ini akan diblokir, tetapi penelepon mungkin masih dapat meninggalkan pesan suara."</string>

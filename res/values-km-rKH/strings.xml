@@ -160,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ទាំង​អស់"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ខកខាន​ទទួល"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"សារ​ជា​សំឡេង"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"ថ្មី ការ​ទប់ស្កាត់​ដែល​ងាយស្រួល"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"ដើម្បីការពារអ្នកឲ្យបានប្រសើរជាងមុន ទូរសព្ទ​ត្រូវធ្វើការផ្លាស់ប្តូររបៀប​​​ដែល​ការ​ទប់ស្កាត់​ដំណើរការ។ លេខដែល​បាន​ទប់ស្កាត់​របស់អ្នក​ឥឡូវ​នឹងបញ្ឈប់​ទាំង​ការហៅ និងការផ្ញើសារ និងអាច​ត្រូវបានចែករំលែកជាមួយកម្មវិធីផ្សេងទៀត។"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"អនុញ្ញាត"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"រារាំង <xliff:g id="NUMBER">%1$s</xliff:g> ឬ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ការហៅចេញពីលេខនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ការហៅចេញពីលេខនេះនឹងត្រូវបានរារាំង ប៉ុន្តែអ្នកហៅនៅតែអាចទុកសារជាសំឡេងឲ្យអ្នកបាន។"</string>

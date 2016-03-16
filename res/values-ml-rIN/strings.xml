@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്യുക"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"വോയ്‌സ്‌മെയിൽ പങ്കിടുക"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"വോയ്സ്മെയിൽ ഇല്ലാതാക്കി"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"വോയ്‌സ്‌മെയിൽ ആർക്കൈവുചെയ്‌തു"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"പഴയപടിയാക്കുക"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"എല്ലാം"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"മിസ്‌ഡ്"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"വോയ്‌സ്‌മെയിൽ"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"പുതിയ, ലളിതമായ ബ്ലോക്കുചെയ്യൽ"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"നിങ്ങളെ മെച്ചപ്പെട്ട രീതിയിൽ പരിരക്ഷിക്കുന്നതിന്, ഫോണിലെ ബ്ലോക്കുചെയ്യൽ പ്രവർത്തന രീതി മാറ്റേണ്ടതുണ്ട്. നിങ്ങളുടെ ബ്ലോക്കുചെയ്‌ത നമ്പറുകളിൽ നിന്നുള്ള കോൾ, ടെക്‌സ്‌റ്റ് എന്നിവ ഇപ്പോൾ അവസാനിപ്പിക്കും, ഈ വിവരം അത് മറ്റ് ആപ്‌സുമായി പങ്കിടാനുമിടയുണ്ട്."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"അനുവദിക്കുക"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്യണോ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ഈ നമ്പറിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ഈ നമ്പറിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, എന്നാൽ വിളിക്കുന്നയാൾക്ക് അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്‌മെയിലുകൾ അയയ്ക്കാൻ കഴിഞ്ഞേക്കാം."</string>

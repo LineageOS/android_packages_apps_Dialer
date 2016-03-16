@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"कॉल इतिहास साफ़ करें"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"वॉइसमेल हटाएं"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"वॉइसमेल संग्रहीत करें"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"वॉइसमेल साझा करें"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"वॉइसमेल हटाया गया"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"वॉइसमेल संग्रहीत किया गया"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"वापस लाएं"</string>
@@ -161,6 +160,12 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"छूटे हुए"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"वॉयस मेल"</string>
+    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
+    <skip />
+    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
+    <skip />
+    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
+    <skip />
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध करें?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे और वॉइसमेल अपने आप हटा दिए जाएंगे."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे, लेकिन कॉलर अब भी आपके लिए वॉइसमेल भेज सकेंगे."</string>
