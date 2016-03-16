@@ -114,6 +114,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
             }
         }
 
+        @GuardedBy("mLock")
         private void cancelPendingRunnables() {
             if (mScheduledFuture != null) {
                 mScheduledFuture.cancel(true);
