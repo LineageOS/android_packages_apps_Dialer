@@ -53,8 +53,7 @@ public class ObjectFactory {
     }
 
     public static boolean isNewBlockingEnabled(Context context) {
-        // TODO(maxwelb) - Set to true when ready to enable feature
-        return false;
+        return true;
     }
 
     @Nullable
