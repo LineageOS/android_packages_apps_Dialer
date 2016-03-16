@@ -41,6 +41,7 @@ import com.android.dialer.lookup.ContactBuilder;
 import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialer.util.MetricsHelper;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
 
@@ -51,8 +52,6 @@ import com.cyanogen.lookup.phonenumber.response.LookupResponse;
 import com.cyanogen.lookup.phonenumber.response.StatusCode;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * Utility class to look up the contact information for a given number.
@@ -306,6 +305,7 @@ public class ContactInfoHelper {
             LookupResponse response = mLookupProvider.blockingFetchInfo(
                     new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso), null));
             if (response != null && response.mStatusCode == StatusCode.SUCCESS) {
+                logSuccessfulFetch(mLookupProvider);
                 final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
                 // map LookupResponse to ContactInfo
                 ContactInfo contactInfo = new ContactInfo();
@@ -552,6 +552,17 @@ public class ContactInfoHelper {
             String message = mContext.getString(R.string.toast_removed_from_blacklist, number);
             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void logSuccessfulFetch(LookupProvider mLookupProvider) {
+        MetricsHelper.Field field = new MetricsHelper.Field(
+                MetricsHelper.Fields.PROVIDER_PACKAGE_NAME,
+                mLookupProvider.getUniqueIdentifier());
+        MetricsHelper.sendEvent(
+                MetricsHelper.Categories.PROVIDER_PROVIDED_INFORMATION,
+                MetricsHelper.Actions.PROVIDED_INFORMATION,
+                MetricsHelper.State.CALL_LOG,
+                field);
     }
 
 }
