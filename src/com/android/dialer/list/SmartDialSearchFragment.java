@@ -170,7 +170,7 @@ public class SmartDialSearchFragment extends SearchFragment
             text = getString(R.string.sign_in_hint_text, mCurrentCallMethodInfo.mName);
         } else {
             // InCallApi provider specified hint
-            text = mCurrentCallMethodInfo.mT9HintDescription;
+            text = mCurrentCallMethodInfo.getHintText();
         }
         if (TextUtils.isEmpty(text)) {
             showNormalT9Hint(r);
