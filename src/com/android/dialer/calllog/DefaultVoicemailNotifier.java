@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -43,6 +44,7 @@ import com.android.dialer.R;
 import com.android.dialer.calllog.CallLogNotificationsHelper.NewCall;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.list.ListsFragment;
+import com.android.dialer.util.TelecomUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -200,7 +202,7 @@ public class DefaultVoicemailNotifier {
                     names.get(callToNotify.number));
             notificationBuilder.setTicker(msg);
         }
-
+        Log.i(TAG, "Creating voicemail notification");
         getNotificationManager().notify(NOTIFICATION_TAG, NOTIFICATION_ID,
                 notificationBuilder.build());
     }
@@ -210,17 +212,31 @@ public class DefaultVoicemailNotifier {
      * for the given call.
      */
     private Pair<Uri, Integer> getNotificationInfo(@Nullable NewCall callToNotify) {
+        Log.v(TAG, "getNotificationInfo");
         if (callToNotify == null) {
+            Log.i(TAG, "callToNotify == null");
             return new Pair<>(null, 0);
         }
-
+        PhoneAccountHandle accountHandle = null;
         if (callToNotify.accountComponentName == null || callToNotify.accountId == null) {
-            return new Pair<>(null, Notification.DEFAULT_ALL);
-        }
+            Log.v(TAG, "accountComponentName == null || callToNotify.accountId == null");
+            accountHandle = TelecomUtil
+                .getDefaultOutgoingPhoneAccount(mContext, PhoneAccount.SCHEME_TEL);
+            if (accountHandle == null) {
+                Log.i(TAG, "No default phone account found, using default notification ringtone");
+                return new Pair<>(null, Notification.DEFAULT_ALL);
+            }
 
-        PhoneAccountHandle accountHandle = new PhoneAccountHandle(
+        } else {
+            accountHandle = new PhoneAccountHandle(
                 ComponentName.unflattenFromString(callToNotify.accountComponentName),
                 callToNotify.accountId);
+        }
+        if (accountHandle.getComponentName() != null) {
+            Log.v(TAG, "PhoneAccountHandle.ComponentInfo:" + accountHandle.getComponentName());
+        } else {
+            Log.i(TAG, "PhoneAccountHandle.ComponentInfo: null");
+        }
         return new Pair<>(
                 TelephonyManagerCompat.getVoicemailRingtoneUri(
                         getTelephonyManager(), accountHandle),
@@ -249,4 +265,5 @@ public class DefaultVoicemailNotifier {
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
     }
+
 }
