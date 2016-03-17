@@ -9,13 +9,13 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.R;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialer.util.TelecomUtil;
 
 import java.util.Arrays;
 
@@ -118,8 +118,7 @@ public class CallerInfoUtils {
     }
 
     public static boolean isVoiceMailNumber(Context context, Call call) {
-         return TelecomManagerCompat.isVoiceMailNumber(
-                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE),
+         return TelecomUtil.isVoicemailNumber(context,
                  call.getTelecomCall().getDetails().getAccountHandle(),
                  call.getNumber());
     }
