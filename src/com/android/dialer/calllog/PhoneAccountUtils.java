@@ -59,6 +59,9 @@ public class PhoneAccountUtils {
             return null;
         }
         final ComponentName componentName = ComponentName.unflattenFromString(componentString);
+        if (componentName == null) {
+            return null;
+        }
         return new PhoneAccountHandle(componentName, accountId);
     }
 
