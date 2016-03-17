@@ -20,7 +20,6 @@ import static com.android.dialer.calllog.CallLogAdapter.CallFetcher;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.view.ViewStub;
 
 import com.android.dialer.calllog.CallLogAdapter;
 import com.android.dialer.calllog.ContactInfoHelper;
@@ -42,6 +41,10 @@ public class ObjectFactory {
 
     public static String getFilteredNumberProviderAuthority() {
         return "com.android.dialer.database.filterednumberprovider";
+    }
+
+    public static String getVoicemailArchiveProviderAuthority() {
+        return "com.android.dialer.database.voicemailarchiveprovider";
     }
 
     public static boolean isVoicemailArchiveEnabled(Context context) {
