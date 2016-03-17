@@ -595,9 +595,10 @@ public class CallLogAdapter extends GroupingListAdapter
             // In case ViewHolders were added/removed, update the expanded position if the rowIds
             // match so that we can restore the correct expanded state on rebind.
             mCurrentlyExpandedPosition = position;
+            views.showActions(true);
+        } else {
+            views.showActions(false);
         }
-
-        views.showActions(mCurrentlyExpandedPosition == position);
         views.updatePhoto();
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
@@ -681,6 +682,14 @@ public class CallLogAdapter extends GroupingListAdapter
     private void collapseExpandedCard() {
         mCurrentlyExpandedRowId = NO_EXPANDED_LIST_ITEM;
         mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+    }
+
+    /**
+     * When the list is changing all stored position is no longer valid.
+     */
+    public void invalidatePositions() {
+        mCurrentlyExpandedPosition = RecyclerView.NO_POSITION;
+        mHiddenPosition = RecyclerView.NO_POSITION;
     }
 
     /**
