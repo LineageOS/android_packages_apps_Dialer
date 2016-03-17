@@ -17,11 +17,85 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">സമീപത്തുള്ള ഇടങ്ങൾ</string>
+  <string name="people">ആളുകൾ</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">ഡയൽപ്പാഡ് T9 തിരയൽ</string>
+  <string name="t9_search_input_locale">T9 തിരയൽ ഇൻപുട്ട്</string>
+  <string name="t9_search_input_locale_default">സ്ഥിരമായത്</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">ഫോൺ നമ്പര്‍ ലുക്കപ്പ്</string>
+  <string name="lookup_settings_description">അജ്ഞാത ഫോൺ നമ്പറുകളുടെ ലുക്കപ്പ്</string>
+  <string name="enable_forward_lookup_title">ഫോർവേഡ് ലുക്കപ്പ്</string>
+  <string name="enable_forward_lookup_summary">ഡയലറില്‍ തിരയുമ്പോള്‍ സമീപത്തുള്ള ഇടങ്ങൾ കാണിക്കുക</string>
+  <string name="enable_people_lookup_title">ആളുകൾ ലുക്കപ്പ്</string>
+  <string name="enable_people_lookup_summary">ഡയലറില്‍ തിരയുമ്പോൾ ആളുകൾക്ക് ഓൺലൈൻ ഫലങ്ങൾ കാണിക്കുക</string>
+  <string name="enable_reverse_lookup_title">പിന്നോട്ടാക്കൽ നോക്കൽ</string>
+  <string name="enable_reverse_lookup_summary">അജ്ഞാതമായ ഇൻകമിംഗ് കോള്‍ നമ്പറുകൾക്ക് വ്യക്തി അല്ലെങ്കില്‍ സ്ഥലങ്ങളെക്കുറിച്ചുള്ള വിവരങ്ങളുടെ തിരഞ്ഞു നോട്ടം</string>
+  <string name="forward_lookup_provider_title">ഫോർവേഡ് ലുക്കപ്പ് ദാതാവ്</string>
+  <string name="people_lookup_provider_title">ആളുകൾ ലുക്കപ്പ് ദാതാവ്</string>
+  <string name="reverse_lookup_provider_title">പിന്നോട്ടാക്കൽ ലുക്കപ്പ് ദാതാവ്</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn ചൈനീസ് (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">കരിമ്പട്ടികയിൽപ്പെടുത്തിയത് കോൾ</string>
+  <string name="menu_add_to_blacklist">തടഞ്ഞ കോളർ ലിസ്റ്റിലേക്ക് ചേർക്കുക</string>
+  <string name="toast_added_to_blacklist">തടഞ്ഞ കോളർ പട്ടികയില്‍ ചേർത്തു.</string>
+  <string name="toast_removed_from_blacklist">%s തടഞ്ഞ പട്ടികയിൽ നിന്നും നീക്കം ചെയ്യുന്നു.</string>
+  <string name="call_log_action_block">ബ്ലോക്ക് കോളർ</string>
+  <string name="call_log_action_unblock">കോളർ ബ്ലോക്ക് ചെയ്തു</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">സ്പീഡ് ഡയൽ ക്രമീകരണങ്ങൾ</string>
+  <string name="speed_dial_not_set">(സജ്ജമാക്കിയിട്ടില്ല)</string>
+  <string name="speed_dial_replace">മാറ്റി പകരം വയ്ക്കുക</string>
+  <string name="speed_dial_delete">ഇല്ലാതാക്കുക</string>
+  <string name="speed_dial_unassigned_dialog_title">കീ നിയോഗിച്ചിട്ടില്ല</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' നമ്പർ കീയില്‍ വേഗ ഡയൽ നടപടി നിയോഗിച്ചിട്ടില്ല. നിങ്ങൾക്ക് ഇപ്പോൾ ഒരു പ്രവർത്തനം നിയോഗിക്കണോ?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">വേഗ ഡയൽ ഉപയോഗിക്കുന്നതിന്, ആദ്യം എയർപ്ലെയിൻ മോഡ് ഓഫ് ചെയ്യുക.</string>
+  <string name="yes">ഉണ്ട്</string>
+  <string name="no">ഇല്ല</string>
+  <string name="incall_vibration_category_title">ഇൻ-കോൾ വൈബ്രേഷൻ</string>
+  <string name="incall_vibrate_outgoing_title">മറുപടി നല്‍കുമ്പോള്‍ വൈബ്രേറ്റ് ചെയ്യുക</string>
+  <string name="incall_vibrate_call_waiting_title">കോൾ വെയ്റ്റിംഗ് ചെയ്യുമ്പോള്‍ വൈബ്രേറ്റ് ചെയ്യുക</string>
+  <string name="incall_vibrate_hangup_title">മാറ്റിവയ്ക്കുമ്പോള്‍ വൈബ്രേറ്റ് ചെയ്യുക</string>
+  <string name="incall_vibrate_45_title">ഓരോ മിനിറ്റിലും വൈബ്രേറ്റ് ചെയ്യുക</string>
+  <string name="incall_vibrate_45_summary">ഔട്ട്ഗോയിംഗ് കോളുകളില്‍ ഓരോ  മിനിറ്റിലും 45 മത്തെ   സെക്കന്‍ഡില്‍ വൈബ്രേറ്റ് ചെയ്യുക</string>
+  <string name="call_log_show_all_slots">എല്ലാ SIM കളും</string>
+  <string name="call_log_all_calls_header">എല്ലാ കോളുകളും</string>
+  <string name="call_log_blacklist_header">തടഞ്ഞ കോളുകൾ മാത്രം</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">സ്ഥിതിവിവരക്കണക്കുകൾ</string>
+  <string name="callStatsDetailTitle">കോള്‍ സ്ഥിതി വിശദാംശങ്ങള്‍</string>
+  <string name="call_stats_incoming">ഇൻകമിംഗ്:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">ഔട്ട്ഗോയിംഗ്:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">മിസ്ഡ് കോൾ:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">തടഞ്ഞ കോൾ:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">മൊത്തം: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">മൊത്തം: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">ആരംഭിക്കുന്ന തീയതി</string>
+  <string name="call_stats_filter_to">അവസാനിക്കുന്ന തീയതി</string>
+  <string name="call_stats_filter_picker_title">ഫിൽറ്റർ ശ്രേണി</string>
+  <string name="date_quick_selection">ദ്രുത തിരഞ്ഞെടുപ്പ്</string>
+  <string name="date_qs_currentmonth">നിലവിലെ മാസം</string>
+  <string name="date_qs_currentquarter">നിലവിലെ പാദം</string>
+  <string name="date_qs_currentyear">നിലവിലെ വർഷം</string>
+  <string name="date_qs_lastweek">അവസാന ആഴ്‌ച</string>
+  <string name="date_qs_lastmonth">കഴിഞ്ഞ മാസം</string>
+  <string name="date_qs_lastquarter">അവസാന പാദം</string>
+  <string name="date_qs_lastyear">കഴിഞ്ഞ വർഷം</string>
+  <string name="call_stats_date_filter">സമയ പരിധി ക്രമീകരിക്കുക</string>
+  <string name="call_stats_reset_filter">സമയ പരിധി പുനക്രമീകരിക്കുക</string>
+  <string name="call_stats_sort_by_duration">കോൾ ദൈർഘ്യം പ്രകാരം അടുക്കുക</string>
+  <string name="call_stats_sort_by_count">കോൾ എണ്ണം പ്രകാരം അടുക്കുക</string>
+  <string name="call_stats_title_for_number">ഈ നമ്പർ</string>
+  <string name="call_stats_title_of_total">ആകെ</string>
+  <string name="call_stats_title_durations">കോളിന്റെ ദൈർഘ്യം</string>
+  <string name="call_stats_title_count">കോൾ എണ്ണം</string>
+  <string name="call_stats_title_average_duration">ശരാശരി കോൾ ദൈർഘ്യം</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">നിങ്ങളുടെ കോൾ ലോഗ് തിരഞ്ഞെടുത്ത സമയ കാലയളവിനുള്ളിൽ കോളുകൾ അടങ്ങിയിട്ടില്ല.</string>
+  <string name="call_recording_category_title">കോൾ റെക്കോർഡിംഗ്</string>
+  <string name="call_recording_format">ഓഡിയോ ഫോർമാറ്റ്</string>
+  <string name="call_playback_no_app_found_toast">തിരഞ്ഞെടുത്തു റെക്കോർഡിംഗ് പ്ലേബാക്ക് വേണ്ടി അപ്ലിക്കേഷൻ കണ്ടെത്താൻ കഴിഞ്ഞില്ല.</string>
 </resources>

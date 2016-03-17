@@ -41,6 +41,9 @@
   <string name="type_blacklist">Sortlistet opkald</string>
   <string name="menu_add_to_blacklist">Tilføj til blokeret opkaldsliste</string>
   <string name="toast_added_to_blacklist">%s tilføjet til blokeret opkaldsliste.</string>
+  <string name="toast_removed_from_blacklist">%s fjernet fra blokeret opkaldsliste.</string>
+  <string name="call_log_action_block">Blokér den der ringer op</string>
+  <string name="call_log_action_unblock">Den der ringer op er blokeret</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Indstillinger for hurtigopkald</string>
   <string name="speed_dial_not_set">(ikke angivet)</string>
@@ -91,4 +94,8 @@
   <string name="call_stats_title_count">Antal af opkald</string>
   <string name="call_stats_title_average_duration">Gennemsnitlig opkaldsvarighed</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Din opkaldslog indeholder ikke nogen opkald i det valgte tidsinterval.</string>
+  <string name="call_recording_category_title">Opkaldsoptagelse</string>
+  <string name="call_recording_format">Lydformat</string>
+  <string name="call_playback_no_app_found_toast">Der blev ikke fundet nogen app som kunne afspille den valgte optagelse.</string>
 </resources>

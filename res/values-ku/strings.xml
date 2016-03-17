@@ -54,6 +54,13 @@
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">دەنگەپۆست</item>
+    <item quantity="other">
+            <xliff:g id="count">%1$d</xliff:g>
+            دەنگەپۆست
+        </item>
+  </plurals>
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
   <string name="notification_action_voicemail_play">لێدان</string>
   <!-- Used to build a list of names or phone numbers, to indicate the callers who left
@@ -327,6 +334,7 @@
   <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
+  <string name="tab_voicemail">دەنگەپۆست</string>
   <!--  Text displayed when user swipes out a favorite contact -->
   <string name="favorite_hidden"> سڕدرایه‌وه‌ له‌ دڵخوازه‌کان</string>
   <!--  Text displayed for the undo button to undo removing a favorite contact -->

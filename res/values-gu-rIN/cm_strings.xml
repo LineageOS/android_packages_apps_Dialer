@@ -17,11 +17,85 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">નજીકના સ્થાનો</string>
+  <string name="people">લોકો</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">ડાયલપેડ T9 સર્ચ</string>
+  <string name="t9_search_input_locale">T9 સર્ચ ઇનપુટ</string>
+  <string name="t9_search_input_locale_default">ડિફોલ્ટ</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">ફોન નંબર શોધો</string>
+  <string name="lookup_settings_description">અજાણ્યા ફોન નંબરોની શોધ</string>
+  <string name="enable_forward_lookup_title">આગળની શોધ</string>
+  <string name="enable_forward_lookup_summary">ડાયલરમાં શોધો ત્યારે નજીકના સ્થાનો દર્શાવો</string>
+  <string name="enable_people_lookup_title">લોકો શોધો</string>
+  <string name="enable_people_lookup_summary">ડાયલરમાં શોધો ત્યારે લોકો માટેના ઓનલાઇન પરિણામો દર્શાવો</string>
+  <string name="enable_reverse_lookup_title">ઊંધી શોધ</string>
+  <string name="enable_reverse_lookup_summary">ઇનકમિંગ કૉલમાં વ્યક્તિ અથવા અજાણ્યા નંબરો વિશેની માહિતી જુઓ</string>
+  <string name="forward_lookup_provider_title">આગળની શોધ પ્રદાતા</string>
+  <string name="people_lookup_provider_title">લોક શોધ પ્રદાતા</string>
+  <string name="reverse_lookup_provider_title">ઊંધી શોધ પ્રદાતા</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">બ્લૅકલિસ્ટ થયેલ કૉલ</string>
+  <string name="menu_add_to_blacklist">બ્લોક કરેલ કૉલર સૂચીમાં ઍડ કરો</string>
+  <string name="toast_added_to_blacklist">%s બ્લોક કરેલ કૉલર સૂચીમાં ઉમેરવામાં આવ્યું.</string>
+  <string name="toast_removed_from_blacklist">%s બ્લોક કરેલ કૉલર સૂચીમાંથી દૂર કરવામાં આવ્યું.</string>
+  <string name="call_log_action_block">કૉલરને બ્લૉક કરો</string>
+  <string name="call_log_action_unblock">કૉલરને બ્લૉક કરવામાં આવ્યા</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">સ્પીડ ડાયલ સેટિંગ્સ</string>
+  <string name="speed_dial_not_set">(સેટ નથી)</string>
+  <string name="speed_dial_replace">બદલાવવું</string>
+  <string name="speed_dial_delete">હટાવો</string>
+  <string name="speed_dial_unassigned_dialog_title">કિ બિનફળવાયેલ</string>
+  <string name="speed_dial_unassigned_dialog_message">નંબર કી \'<xliff:g id="number">%s</xliff:g>\' ને કોઇ સ્પીડ ડાયલ ક્રિયા ફળવાઇ નથી. શું તમારે હવે ક્રિયા ફાળવવી છે?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">સ્પીડ ડાયલ વાપરવા, પહેલાં એરપ્લેન મોડ બંધ કરો.</string>
+  <string name="yes">હા</string>
+  <string name="no">નહીં</string>
+  <string name="incall_vibration_category_title">ઇન-કૉલ વાઇબ્રેશન</string>
+  <string name="incall_vibrate_outgoing_title">જવાબ આપો ત્યારે વાઇબ્રેટ</string>
+  <string name="incall_vibrate_call_waiting_title">કૉલ વેઇટિંગ ત્યારે વાઇબ્રેટ</string>
+  <string name="incall_vibrate_hangup_title">ફોન મૂકો ત્યારે વાઇબ્રેટ</string>
+  <string name="incall_vibrate_45_title">દર મિનિટે વાઇબ્રેટ</string>
+  <string name="incall_vibrate_45_summary">આઉટગોઇંગ કૉલ દરમિયાન દરેક મિનિટના 45 સેકન્ડના નિશાન પર વાઇબ્રેટ થાય છે</string>
+  <string name="call_log_show_all_slots">તમામ SIMs</string>
+  <string name="call_log_all_calls_header">તમામ કૉલ્સ</string>
+  <string name="call_log_blacklist_header">ફક્ત બ્લોક કરેલ કૉલ</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">આંકડા</string>
+  <string name="callStatsDetailTitle">કૉલ આંકડા વિગતો</string>
+  <string name="call_stats_incoming">ઇનકમિંગ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">આઉટગોઇંગ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">ચૂકી ગયા: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">અવરોધિત: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">કુલ: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">કુલ: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">તારીખ શરૂ કરો</string>
+  <string name="call_stats_filter_to">સમાપ્ત બટન</string>
+  <string name="call_stats_filter_picker_title">ફિલ્ટર શ્રેણી</string>
+  <string name="date_quick_selection">ઝડપી પસંદગી</string>
+  <string name="date_qs_currentmonth">હાલનો મહિનો</string>
+  <string name="date_qs_currentquarter">હાલની ત્રિમાસી</string>
+  <string name="date_qs_currentyear">હાલનું વર્ષ</string>
+  <string name="date_qs_lastweek">અંતિમ અઠવાડિયું</string>
+  <string name="date_qs_lastmonth">છેલ્લો મહિનો</string>
+  <string name="date_qs_lastquarter">છેલ્લી ત્રિમાસી</string>
+  <string name="date_qs_lastyear">છેલ્લું વર્ષ</string>
+  <string name="call_stats_date_filter">સમય શ્રેણીમાં ફેરફાર કરવો</string>
+  <string name="call_stats_reset_filter">સમય શ્રેણી રિસેટ કરો</string>
+  <string name="call_stats_sort_by_duration">કૉલ સમયગાળા પ્રમાણે વીણો</string>
+  <string name="call_stats_sort_by_count">કૉલ ગણતરી પ્રમાણે વીણો</string>
+  <string name="call_stats_title_for_number">આ નંબર</string>
+  <string name="call_stats_title_of_total">કુલમાંથી</string>
+  <string name="call_stats_title_durations">કૉલ સમયગાળા</string>
+  <string name="call_stats_title_count">કૉલની સંખ્યા</string>
+  <string name="call_stats_title_average_duration">કોલનો સરેરાશ સમયગાળો</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">તમારા કૉલ લૉગમાં પસંદ કરેલ સમય શ્રેણીના કોઇ પણ કૉલ્સ સમાયેલ નથી.</string>
+  <string name="call_recording_category_title">કોલ રેકૉર્ડિંગ</string>
+  <string name="call_recording_format">ઓડિયો ફોર્મેટ</string>
+  <string name="call_playback_no_app_found_toast">કોઈ એપ્લિકેશન શોધી શકાઈ નથી રેકોર્ડિંગ પ્લેબેક માટે.</string>
 </resources>

@@ -38,8 +38,12 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Cuộc gọi bị chặn</string>
   <string name="menu_add_to_blacklist">Thêm vào danh sách chặn người gọi</string>
   <string name="toast_added_to_blacklist">%s được thêm vào danh sách chặn người gọi.</string>
+  <string name="toast_removed_from_blacklist">%s được xoá khỏi danh sách người gọi bị chặn.</string>
+  <string name="call_log_action_block">Chặn người gọi</string>
+  <string name="call_log_action_unblock">Người gọi đã bị chặn</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Thiết đặt quay số nhanh</string>
   <string name="speed_dial_not_set">(không thiết lập)</string>
@@ -62,6 +66,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Thống kê</string>
   <string name="callStatsDetailTitle">Chi tiết thống kê cuộc gọi</string>
+  <string name="call_stats_incoming">Cuộc gọi đến: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Cuộc gọi đi: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Cuộc gọi bị nhỡ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Cuộc gọi bị chặn: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Tổng số: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Tổng số: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Ngày bắt đầu</string>
@@ -79,5 +88,14 @@
   <string name="call_stats_reset_filter">Đặt lại khoảng thời gian</string>
   <string name="call_stats_sort_by_duration">Sắp xếp theo thời lượng cuộc gọi</string>
   <string name="call_stats_sort_by_count">Sắp xếp theo số lượng cuộc gọi</string>
+  <string name="call_stats_title_for_number">Số này</string>
+  <string name="call_stats_title_of_total">Trong tổng số</string>
+  <string name="call_stats_title_durations">Thời gian gọi</string>
+  <string name="call_stats_title_count">Số cuộc gọi</string>
+  <string name="call_stats_title_average_duration">Thời gian gọi trung bình</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Nhật ký cuộc gọi của bạn không chứa bất kỳ cuộc gọi nào trong khoảng thời gian đã chọn.</string>
+  <string name="call_recording_category_title">Ghi âm cuộc gọi</string>
+  <string name="call_recording_format">Định dạng âm thanh</string>
+  <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi âm đã chọn.</string>
 </resources>

@@ -66,6 +66,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Estadísticas</string>
   <string name="callStatsDetailTitle">Detalles de llamada</string>
+  <string name="call_stats_incoming">Entrantes: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Salientes: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Bloqueadas: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Fecha de inicio</string>
@@ -83,5 +88,14 @@
   <string name="call_stats_reset_filter">Restablecer rango de fechas</string>
   <string name="call_stats_sort_by_duration">Ordenar por duración</string>
   <string name="call_stats_sort_by_count">Ordenar por núm. llamadas</string>
+  <string name="call_stats_title_for_number">Este número</string>
+  <string name="call_stats_title_of_total">Del total de</string>
+  <string name="call_stats_title_durations">Duración de llamadas</string>
+  <string name="call_stats_title_count">Número de llamadas</string>
+  <string name="call_stats_title_average_duration">Duración promedio de llamadas</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Su registro no contiene ninguna llamada en el rango de tiempo seleccionado.</string>
+  <string name="call_recording_category_title">Grabación de llamadas</string>
+  <string name="call_recording_format">Formato de audio</string>
+  <string name="call_playback_no_app_found_toast">No se encontró una aplicación para la reproducción de la grabación seleccionada.</string>
 </resources>

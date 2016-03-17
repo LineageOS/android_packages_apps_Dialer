@@ -38,6 +38,12 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn خەنچە (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">قارا تىزىملىككە كىرگۈزۈلگەن تېلېفون</string>
+  <string name="menu_add_to_blacklist">قارا تىزىملىككە قوشۇش</string>
+  <string name="toast_added_to_blacklist">%s قارا تىزىملىككە قوشۇلدى.</string>
+  <string name="toast_removed_from_blacklist">%s قارا تىزىملىكتىن چىقىرۋېتىلدى.</string>
+  <string name="call_log_action_block">تېلېفون كېلىشنى چەكلەش</string>
+  <string name="call_log_action_unblock">تېلېفون كېلىش چەكلەندى</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">تېز نومۇر بۇراش تەڭشەكلىرى</string>
   <string name="speed_dial_not_set">(تەڭشەلمىگەن)</string>
@@ -50,14 +56,21 @@
   <string name="no">ياق</string>
   <string name="incall_vibration_category_title">چاقىرىلغاندا تىترىتىش</string>
   <string name="incall_vibrate_outgoing_title">ئۇلانغاندا تىترەت</string>
+  <string name="incall_vibrate_call_waiting_title">چاقىرىشنى كۈتۈۋاتقاندا تىترىتىدۇ</string>
   <string name="incall_vibrate_hangup_title">ئۈزگەندە تىترەت</string>
   <string name="incall_vibrate_45_title">ھەر مىنۇتتا تىترەت</string>
   <string name="incall_vibrate_45_summary">سىرتتىكى نومۇرنى چاقىرغاندا ھەر 45 سېكۇنتتا بىر تىترىتىدۇ</string>
   <string name="call_log_show_all_slots">ھەممە SIM كارتا</string>
   <string name="call_log_all_calls_header">ھەممە چاقىرىشلار</string>
+  <string name="call_log_blacklist_header">كەلگەن تېلېفوننىلا توسۇش</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">سىتاتىستىكا</string>
   <string name="callStatsDetailTitle">چاقىرىش تەپسىلاتى</string>
+  <string name="call_stats_incoming">كەلگەن تېلېفون:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">ئۇرغان تېلېفون:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">ئېلىنمىغان تېلېفون:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">توسۇۋېلىنغان:<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">جەمئى: <xliff:g id="call_count">%s</xliff:g>، <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">جەمئى: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">باشلاش چېسلاسى</string>
@@ -75,5 +88,14 @@
   <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
   <string name="call_stats_sort_by_duration">داۋاملىشىش ۋاقتى بويىچە</string>
   <string name="call_stats_sort_by_count">سۆزلىشىش قېتىمى بويىچە</string>
+  <string name="call_stats_title_for_number">بۇ نومۇر</string>
+  <string name="call_stats_title_of_total">نىڭ يىغىندىسى</string>
+  <string name="call_stats_title_durations">سۆزلىشىش داۋاملاشقان ۋاقىت</string>
+  <string name="call_stats_title_count">سۆزلىشىش قېتىم سانى</string>
+  <string name="call_stats_title_average_duration">ئۆتتۇرا ھېساب بىلەن سۆزلىشىش ۋاقتى</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">سىز تاللىغان ۋاقىت بۆلىكىدە ھېچقانداق سۆزلىشىش خاتىرىسى يوق.</string>
+  <string name="call_recording_category_title">تېلېفون سۆزلىشىشنى ئاۋازغا ئېلىش</string>
+  <string name="call_recording_format">ئاۋاز فورماتى</string>
+  <string name="call_playback_no_app_found_toast">ئاۋازنى قويالايدىغان ئەپ تاپالمىدى.</string>
 </resources>

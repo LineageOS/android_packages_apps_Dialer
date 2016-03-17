@@ -17,11 +17,85 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">దగ్గరి ప్రదేశాలు</string>
+  <string name="people">వ్యక్తులు</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">డయల్ ప్యాడ్ T9 శోధన</string>
+  <string name="t9_search_input_locale">T9 శోధన ఇన్పుట్</string>
+  <string name="t9_search_input_locale_default">డిఫాల్ట్</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">ఫోన్ నంబర్ శోధన</string>
+  <string name="lookup_settings_description">తెలియని ఫోన్ నంబర్ల శోధన</string>
+  <string name="enable_forward_lookup_title">ముందుకు శోధన</string>
+  <string name="enable_forward_lookup_summary">డయలరులో శోధించేటప్పుడు దగ్గరిలోని ప్రదేశాలను చూపుము</string>
+  <string name="enable_people_lookup_title">వ్యక్తుల శోధన</string>
+  <string name="enable_people_lookup_summary">డయలరులో శోధించేటప్పుడు వ్యక్తుల కొరకు ఆన్లైన్ ఫలితాలను చూపుము</string>
+  <string name="enable_reverse_lookup_title">వ్యతిరేకదిశ శోధన</string>
+  <string name="enable_reverse_lookup_summary">ఇన్‌కమింగ్ కాల్స్ పై వచ్చే తెలియని నంబర్ల కొరకు వ్యక్తి లేదా పేరును గూర్చిన సమాచారం కొరకు శోధించండి</string>
+  <string name="forward_lookup_provider_title">ముందుకు శోధన ప్రధాత</string>
+  <string name="people_lookup_provider_title">వ్యక్తుల శోధన ప్రధాత</string>
+  <string name="reverse_lookup_provider_title">వ్యతిరేకదిశ శోధన ప్రదాత</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">అనుమానిత కాల్</string>
+  <string name="menu_add_to_blacklist">నిరోధించబడిన కాలర్ జాబితాకు జోడించబడింది</string>
+  <string name="toast_added_to_blacklist">%s నిరోధించబడిన కాలర్ జాబితాకు జోడించబడింది.</string>
+  <string name="toast_removed_from_blacklist">%s నిరోధించబడిన కాలర్ జాబితాకు తొలగించబడింది.</string>
+  <string name="call_log_action_block">కాలర్ ను నిరోధించు</string>
+  <string name="call_log_action_unblock">కాలర్ నిరోధించబడ్డారు</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">స్పీడ్ డయల్ సెట్టింగులు</string>
+  <string name="speed_dial_not_set">(సెట్ చేయబడలేదు)</string>
+  <string name="speed_dial_replace">భర్తీ చేయి</string>
+  <string name="speed_dial_delete">తొలగించు</string>
+  <string name="speed_dial_unassigned_dialog_title">కీ కేటాయించబడలేదు</string>
+  <string name="speed_dial_unassigned_dialog_message">నంబర్ కీ \'<xliff:g id="number">%s</xliff:g>\'కు ఎటువంటి త్వరిత డయల్ చర్య కేటాయించబడలేదు. మీరు ఇప్పుడు ఒక చర్యను కేటాయించాలని అనుకుంటున్నారా?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">త్వరిత డయలును ఉపయోగించేందుకు, ముందుగా విమాన మోడును ఆఫ్ చేయండి.</string>
+  <string name="yes">హాజరు అవుతాము అన్నవి</string>
+  <string name="no">లేదు</string>
+  <string name="incall_vibration_category_title">ఇన్-కాల్ వైబ్రేషన్</string>
+  <string name="incall_vibrate_outgoing_title">సమాధానం చెప్పినప్పుడు వైబ్రేట్ చేయి</string>
+  <string name="incall_vibrate_call_waiting_title">కాల్ నిరీక్షణ సమయంలో వైబ్రేట్ చేయి</string>
+  <string name="incall_vibrate_hangup_title">హ్యాంగ్ అప్ సమయంలో వైబ్రేట్ చేయి</string>
+  <string name="incall_vibrate_45_title">ప్రతి ఒక్క నిమిషానికి వైబ్రేట్ చేయి</string>
+  <string name="incall_vibrate_45_summary">అవుట్ గోయింగ్ కాల్స్ సమయంలో ప్రతి ఒక్క నిమిషంలోని 45వ సెకను వద్ద వైబ్రేట్ అవుతుంది</string>
+  <string name="call_log_show_all_slots">అన్ని SIMలు</string>
+  <string name="call_log_all_calls_header">అన్ని కాలులు</string>
+  <string name="call_log_blacklist_header">నిరోధించబడిన కాల్స్ మాత్రమే</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">గణాంకాలు</string>
+  <string name="callStatsDetailTitle">కాల్ గణాంక వివరాలు</string>
+  <string name="call_stats_incoming">ఇన్‌కమింగ్: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">అవుట్‌గోయింగ్: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">మిస్ అయిన: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">నిరోధించబడిన: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">మొత్తం: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">మొత్తం: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">ప్రారంభ తేదీ</string>
+  <string name="call_stats_filter_to">ముగింపు తేదీ</string>
+  <string name="call_stats_filter_picker_title">ఫిల్టర్ పరిధి</string>
+  <string name="date_quick_selection">త్వరిత ఎంపిక</string>
+  <string name="date_qs_currentmonth">ప్రస్తుత నెల</string>
+  <string name="date_qs_currentquarter">ప్రస్తుత త్రైమాసికం</string>
+  <string name="date_qs_currentyear">ప్రస్తుత సంవత్సరం</string>
+  <string name="date_qs_lastweek">చివరి వారం</string>
+  <string name="date_qs_lastmonth">గత నెల</string>
+  <string name="date_qs_lastquarter">క్రితం త్రైమాసికం</string>
+  <string name="date_qs_lastyear">క్రితం సంవత్సరం</string>
+  <string name="call_stats_date_filter">సమయ పరిధిని సవరించుము</string>
+  <string name="call_stats_reset_filter">సమయ పరిధిని తిరిగి సెట్ చేయుము</string>
+  <string name="call_stats_sort_by_duration">కాల్ వ్యవధిని బట్టి క్రమీకరించుము</string>
+  <string name="call_stats_sort_by_count">కాల్ గణన బట్టి క్రమీకరించుము</string>
+  <string name="call_stats_title_for_number">ఈ నంబరు</string>
+  <string name="call_stats_title_of_total">యొక్క మొత్తం</string>
+  <string name="call_stats_title_durations">కాల్ అవధులు</string>
+  <string name="call_stats_title_count">కాల్ గణన</string>
+  <string name="call_stats_title_average_duration">సరాసరి కాల్ అవధి</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">ఎంచుకోబడిన సమయ శ్రేణిలో మీ కాల్ లాగ్ లో ఎలాంటి కాల్స్  లేవు.</string>
+  <string name="call_recording_category_title">కాల్ రికార్డింగ్</string>
+  <string name="call_recording_format">ఆడియో ఫార్మాట్</string>
+  <string name="call_playback_no_app_found_toast">అనువర్తన ఎంపిక రికార్డింగ్ ప్లేబ్యాక్ కనుగొనబడలేదు.</string>
 </resources>

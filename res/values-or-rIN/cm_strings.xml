@@ -17,11 +17,85 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">ସମୀପ ‍ସ୍ଥାନଗୁଡିକ</string>
+  <string name="people">ଲୋକମାନେ</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">ଡାଏଲ୍‍ପାଡ୍‍ T9 ସନ୍ଧାନ</string>
+  <string name="t9_search_input_locale">T9 ସନ୍ଧାନ ଇନ୍‍ପୁଟ୍‍</string>
+  <string name="t9_search_input_locale_default">ଡିଫଲ୍ଟ</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">ଫୋନ୍‍ ନମ୍ବର ଖୋଜନ୍ତୁ</string>
+  <string name="lookup_settings_description">ଅଜ୍ଞାତ ଫୋନ୍‍ ନମ୍ବର ପାଇଁ ଖୋଜନ୍ତୁ</string>
+  <string name="enable_forward_lookup_title">ଖୋଜିବା ଅଗ୍ରଗାମି କରନ୍ତୁ</string>
+  <string name="enable_forward_lookup_summary">ଡାଏଲର୍‍ରେ ସ‍ନ୍ଧାନ କରିବା ସମୟରେ ସମୀପ ‍ସ୍ଥାନ ଦେଖାନ୍ତୁ</string>
+  <string name="enable_people_lookup_title">ଲୋକମା୍ନଙ୍କୁ ଖୋଜନ୍ତୁ</string>
+  <string name="enable_people_lookup_summary">ଡାଏଲର୍‍ରେ ଲୋକମା୍ନଙ୍କୁ ଖୋଜିବା ସମୟରେ ଅନ୍‍ଲାଇନ୍‍ ଫଳାଫଳ ଦେଖାନ୍ତୁ</string>
+  <string name="enable_reverse_lookup_title">ବିପରୀତ କ୍ରମରେ ଖୋଜନ୍ତୁ</string>
+  <string name="enable_reverse_lookup_summary">ଆସୁଥିବା କଲ୍‍ଗୁଡିକରେ ଅଜ୍ଞାତ ନମ୍ବର ପାଇଁ ଜଣେ ବ୍ୟକ୍ତି ବା ‍ସ୍ଥାନ ବିଷୟରେ ଖୋଜିବା ସୂଚନା</string>
+  <string name="forward_lookup_provider_title">ଲୁକ୍‍ଅପ୍‍ ପ୍ରଦାନକାରୀ ଅଗ୍ରଗାମି କରନ୍ତୁ</string>
+  <string name="people_lookup_provider_title">ବ୍ୟକ୍ତି ଲୁକ୍‍ଅପ୍‍ ପ୍ରଦାନକାରୀ</string>
+  <string name="reverse_lookup_provider_title">ଲୁକ୍‍ଅପ୍‍ ପ୍ରଦାନକାରୀ ବିପରୀତ କ୍ରମରେ କରନ୍ତୁ</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">ସିନ୍‍ଜିନ୍‍ ଚାଇନିଜ୍‍ (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">ଅବରୁଧ କଲ୍‍</string>
+  <string name="menu_add_to_blacklist">ଅବ୍ରୁ‍ଦ୍ଧ କଲର୍‍ ତାଲିକାରେ ଯୋଗ କରନ୍ତୁ</string>
+  <string name="toast_added_to_blacklist">ଅବ୍ରୁ‍ଦ୍ଧ କଲର୍‍ ତାଲିକାରେ %s ଯୋଗ କରାଯାଇଛି</string>
+  <string name="toast_removed_from_blacklist">ଅବ୍ରୁ‍ଦ୍ଧ କଲର୍‍ ତାଲିକାରେ %s ବାହାର କରନ୍ତୁ.</string>
+  <string name="call_log_action_block">ଅବରୁ‍ଦ୍ଧ କ୍ଲର୍‍</string>
+  <string name="call_log_action_unblock">ଅବରୁ‍ଦ୍ଧ କ୍ଲର୍‍</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">ଦ୍ରୁତ ଡାଏଲ୍‍ ସେଟିଂସ୍‍</string>
+  <string name="speed_dial_not_set">(ସେଟ୍‍ ହୋଇନାହିଁ)</string>
+  <string name="speed_dial_replace">ବିସ୍ଥାପନ</string>
+  <string name="speed_dial_delete">ବିଲୋପ କରନ୍ତୁ</string>
+  <string name="speed_dial_unassigned_dialog_title">କୀ ଦିଆଯାଇ ନାହିଁ</string>
+  <string name="speed_dial_unassigned_dialog_message">ନମ୍ବର କୀ \'<xliff:g id="number">%s</xliff:g>\'କୁ କୌଣସି ଦ୍ରୁତ ଡାଏଲ୍‍ ଦିଆଯାଇ ନାହିଁ। ବର୍ତ୍ତ୍ମାନ ଆପଣ ଏକ କ୍ରିୟା ଦେବାକୁ ଚାହାନ୍ତି କି?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">ଦ୍ରୁତ ଡାଏଲ୍‍ ବ୍ୟବହାର କରିବା ପାଇଁ, ବିମାନ ମୋଡ ପ୍ରଥମେ ଟର୍ନ୍ ଅଫ୍ କରନ୍ତୁ।</string>
+  <string name="yes">ହଁ</string>
+  <string name="no">ନାହିଁ</string>
+  <string name="incall_vibration_category_title">ଇନ୍‍-କଲ୍‍ ଭାଇବ୍ରେସନ୍‍</string>
+  <string name="incall_vibrate_outgoing_title">ଉତ୍ତର ଦେବା ସମୟରେ ଭାଇବ୍ରେଟ୍‍ କରନ୍ତୁ</string>
+  <string name="incall_vibrate_call_waiting_title">କଲ୍‍ ୱେଟିଂ ସମୟରେ ଭାଇବ୍ରେଟ୍‍ କରନ୍ତୁ</string>
+  <string name="incall_vibrate_hangup_title">ହ୍ୟାଙ୍ଗ୍‍ ଅପ୍‍ ସମୟରେ ଭାଇବ୍ରେଟ୍‍ କରନ୍ତୁ</string>
+  <string name="incall_vibrate_45_title">ପ୍ରତି ମିନି‌ଟ୍‍ରେ ସମୟରେ ଭାଇବ୍ରେଟ୍‍ କରନ୍ତୁ</string>
+  <string name="incall_vibrate_45_summary">ବହିର୍ମୁଖୀ କଲ୍‍ ସମୟରେ ପ୍ରତି ମିନିଟ୍‍ର 45 ସେକେଂଡରେ ଭାଇବ୍ରେଟ୍‍ ହୁଏ</string>
+  <string name="call_log_show_all_slots">ସମସ୍ତ SIM:</string>
+  <string name="call_log_all_calls_header">ସମସ୍ତ କଲ୍‍</string>
+  <string name="call_log_blacklist_header">କେବଳ ଅବରୁ‍ଦ୍ଧ କଲ୍‍</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">ପରିସଂଖ୍ୟନ</string>
+  <string name="callStatsDetailTitle">କଲ୍‍ ପରିସଂଖ୍ୟାନ ବିବରଣୀ</string>
+  <string name="call_stats_incoming">ଆସୁଥିବା: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">ବହି୍ର୍ମୁଖୀ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">ହରାଇଥିବା: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">ଅବରୁ‍ଦ୍ଧ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">ସମୁଦାୟ: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">ସମୁଦାୟ: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">ଆରମ୍ଭ ତାରିଖ</string>
+  <string name="call_stats_filter_to">ଶେଷ ତାରିଖ</string>
+  <string name="call_stats_filter_picker_title">ଫିଲ୍‍ଟର୍‍ ପରିସୀମା</string>
+  <string name="date_quick_selection">ଦ୍ରୁତ ଚୟନ</string>
+  <string name="date_qs_currentmonth">ସମ୍ପ୍ରତି ମାସ</string>
+  <string name="date_qs_currentquarter">ସମ୍ପ୍ରତି ପଷ</string>
+  <string name="date_qs_currentyear">ସମ୍ପ୍ରତି ବ‍ର୍ଷ</string>
+  <string name="date_qs_lastweek">ଶେଷ ସପ୍ତାହ</string>
+  <string name="date_qs_lastmonth">ଶେଷ ମାସ</string>
+  <string name="date_qs_lastquarter">ଶେଷ ପଷ</string>
+  <string name="date_qs_lastyear">ଶେଷ ବ‍ର୍ଷ</string>
+  <string name="call_stats_date_filter">ସମୟ ପରିସୀମା ଆଡ୍‍ଜଷ୍ଟ କରନ୍ତୁ</string>
+  <string name="call_stats_reset_filter">ସମୟ ପରିସୀମା ରିସେଟ କରନ୍ତୁ</string>
+  <string name="call_stats_sort_by_duration">କଲ୍‍ ଅବଧି ଅନୁଯାୟୀ ସଜାନ୍ତୁ</string>
+  <string name="call_stats_sort_by_count">କଲ୍‍ ଗଣନା ଅନୁଯାୟୀ ସଜାନ୍ତୁ</string>
+  <string name="call_stats_title_for_number">ଏହି ନମ୍ଵର୍</string>
+  <string name="call_stats_title_of_total">ସମୁଦୟରୁ</string>
+  <string name="call_stats_title_durations">କଲ ସମୟର ପରିସର</string>
+  <string name="call_stats_title_count">କଲ କାଉଣ୍ଟ</string>
+  <string name="call_stats_title_average_duration">ହାରାହାରି କଲ୍‍ ଅବଧି ଅନୁଯାୟୀ</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">ତୁମର୍ କଲ ଲଗରେ କଲସ୍ ନାହିଁ ସିଲେକ୍ଟଟେଡ଼ ଟାଇମ୍ ରେନଜରେ.</string>
+  <string name="call_recording_category_title">କଲ ରେକର୍ଡିଙ୍ଗ</string>
+  <string name="call_recording_format">ଅଡିଓ ଫର୍ମାଟ୍</string>
+  <string name="call_playback_no_app_found_toast">ଆପ୍ଲୀକେସନ୍ ମିଳୁନାହି ସିଲେକ୍ଟଟେଡ଼ ରେକଡିଙ୍ଗକୁ ପ୍ଲେବୟାକ୍ କରିବା ପାଇଁ.</string>
 </resources>

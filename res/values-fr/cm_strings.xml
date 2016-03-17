@@ -95,4 +95,7 @@
   <string name="call_stats_title_average_duration">Durée moyenne des appels</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Votre journal ne contient aucun appel sur la période sélectionnée.</string>
+  <string name="call_recording_category_title">Enregistrement des appels</string>
+  <string name="call_recording_format">Format audio</string>
+  <string name="call_playback_no_app_found_toast">Aucune application trouvée pour la lecture de l\'enregistrement sélectionné.</string>
 </resources>

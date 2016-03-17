@@ -17,11 +17,85 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">அருகாமையிலுள்ள இடங்கள்</string>
+  <string name="people">நபர்கள்</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">டயல்பேட் T9 தேடல்</string>
+  <string name="t9_search_input_locale">T9 தேடல் உள்ளீடு</string>
+  <string name="t9_search_input_locale_default">இயல்புநிலை</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">தொலைப்பேசி எண் தேடல்</string>
+  <string name="lookup_settings_description">அறியாத தொலைப்பேசி எண்களின் தேடல்</string>
+  <string name="enable_forward_lookup_title">முன்னோக்கிய தேடல்</string>
+  <string name="enable_forward_lookup_summary">டயலரில் தேடும்போது அருகாமையிலுள்ள இடங்களை காண்பி</string>
+  <string name="enable_people_lookup_title">மக்கள் தேடல்</string>
+  <string name="enable_people_lookup_summary">டயலரில் தேடும்போது மக்களுக்கான இணைய முடிவுகளை காண்பி</string>
+  <string name="enable_reverse_lookup_title">பின்னோக்கு தேடல்</string>
+  <string name="enable_reverse_lookup_summary">உள்வரும் அழைப்புகளில் அறியப்படாத எண்களுக்கான நபர் அல்லது இடம் குறித்த தகவலை தேடுதல்</string>
+  <string name="forward_lookup_provider_title">முன்னோக்கு தேடல் வழங்குநர்</string>
+  <string name="people_lookup_provider_title">மக்கள் தேடல் வழங்குநர்</string>
+  <string name="reverse_lookup_provider_title">பின்னோக்கு தேடல் வழங்குநர்</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">தடுக்கப்பட்ட அழைப்பு</string>
+  <string name="menu_add_to_blacklist">தடுக்கப்பட்ட அழைப்பாளர் பட்டியலுடன் சேர்</string>
+  <string name="toast_added_to_blacklist">%s தடுக்கப்பட்ட அழைப்பாளர் பட்டியலில் சேர்க்கப்பட்டது</string>
+  <string name="toast_removed_from_blacklist">%s தடுக்கப்பட்ட அழைப்பாளர் பட்டியலில் இருந்து நீக்கப்பட்டது.</string>
+  <string name="call_log_action_block">அழைப்பாளரை தடு</string>
+  <string name="call_log_action_unblock">அழைப்பாளர் தடுக்கப்பட்டார்</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">விரைவு டயல் அமைப்புகள்</string>
+  <string name="speed_dial_not_set">(not set)</string>
+  <string name="speed_dial_replace">மாற்றிடு</string>
+  <string name="speed_dial_delete">நீக்கு</string>
+  <string name="speed_dial_unassigned_dialog_title">விசை ஒதுக்கீடுசெய்யப்படவில்லை</string>
+  <string name="speed_dial_unassigned_dialog_message">எண் விசை \’<xliff:g id="number">%s</xliff:g>\'க்கு விரைவு டயல் செயல்பாடு ஒதுக்கீடு செய்யப்படவில்லை. நீங்கள் இப்போது ஒரு செயல்பாட்டை ஒதுக்கீடுசெய்ய விரும்புகிறீர்களா?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">விரைவு டயலை பயன்படுத்த, முதலில் விமான பயன்முறையை ஆஃப் செய்க.</string>
+  <string name="yes">அனுமதிக்கப்பட்டது</string>
+  <string name="no">அனுமதிக்கப்படவில்லை</string>
+  <string name="incall_vibration_category_title">இன்-கால் அதிர்வு</string>
+  <string name="incall_vibrate_outgoing_title">பதிலளிப்பில் அதிர்</string>
+  <string name="incall_vibrate_call_waiting_title">அழைப்பு காத்திருப்பில் அதிர்</string>
+  <string name="incall_vibrate_hangup_title">ஹேங் அப்பின் போது அதிர்</string>
+  <string name="incall_vibrate_45_title">ஒவ்வொரு நிமிடமும் அதிர்</string>
+  <string name="incall_vibrate_45_summary">வெளிசெல்லல் அழைப்புகளின் ஒவ்வொரு நிமிடத்தின் 45 வினாடி குறிப்பிலும் அதிர்</string>
+  <string name="call_log_show_all_slots">அனைத்து SIMகள்</string>
+  <string name="call_log_all_calls_header">அனைத்து அழைப்புகள்</string>
+  <string name="call_log_blacklist_header">தடுக்கப்பட்ட அழைப்புகள் மட்டும்</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">புள்ளிவிவரங்கள்</string>
+  <string name="callStatsDetailTitle">அழைப்பு புள்ளிவிவர தகவல்கள்</string>
+  <string name="call_stats_incoming">உள்வருதல்: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">வெளிசெல்லுதல்: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">தவறியவை: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">தடுக்கப்பட்டது: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">மொத்தம்: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">மொத்தம்: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">தொடக்கத் தேதி</string>
+  <string name="call_stats_filter_to">முடிவுத் தேதி</string>
+  <string name="call_stats_filter_picker_title">வடிகட்டி வரம்பு</string>
+  <string name="date_quick_selection">விரைவான தேர்வுசெய்தல்</string>
+  <string name="date_qs_currentmonth">நடப்பு மாதம்</string>
+  <string name="date_qs_currentquarter">நடப்பு காலாண்டு</string>
+  <string name="date_qs_currentyear">நடப்பு ஆண்டு</string>
+  <string name="date_qs_lastweek">கடந்த வாரம்</string>
+  <string name="date_qs_lastmonth">சென்ற மாதம்</string>
+  <string name="date_qs_lastquarter">கடந்த காலாண்டு</string>
+  <string name="date_qs_lastyear">கடந்த ஆண்டு</string>
+  <string name="call_stats_date_filter">நேர வரம்பை சரிசெய்</string>
+  <string name="call_stats_reset_filter">நேர வரம்பை மீட்டமை</string>
+  <string name="call_stats_sort_by_duration">அழைப்பு கால அளவினால் வரிசைப்படுத்து</string>
+  <string name="call_stats_sort_by_count">அழைப்பு எண்ணிக்கையினால் வரிசைப்படுத்து</string>
+  <string name="call_stats_title_for_number">இந்த எண்</string>
+  <string name="call_stats_title_of_total">மொத்தத்தில்</string>
+  <string name="call_stats_title_durations">அழைப்பு கால அளவுகள்</string>
+  <string name="call_stats_title_count">அழைப்பு எண்ணிக்கை</string>
+  <string name="call_stats_title_average_duration">சராசரி அழைப்பு கால அளவு</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">உங்கள் அழைப்பு பதிவிலே தேர்ந்தெடுக்கப்பட்ட நேர வரம்பிலே எந்த அழைப்பும் இல்லை.</string>
+  <string name="call_recording_category_title">அழைப்பைப் பதிவு செய்தல்</string>
+  <string name="call_recording_format">ஆடியோ வடிவமைப்பு</string>
+  <string name="call_playback_no_app_found_toast">தேர்ந்தெடுக்கப்பட்ட பதிவாக்களை மறுஇயக்கம் செய்வதற்கு எந்த பயன்பாடும் இல்லை.</string>
 </resources>

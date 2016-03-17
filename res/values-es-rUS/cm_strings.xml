@@ -17,16 +17,85 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Lugares cercanos</string>
+  <string name="people">Personas</string>
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Búsqueda con teclado T9</string>
+  <string name="t9_search_input_locale">Entrada de búsqueda T9</string>
   <string name="t9_search_input_locale_default">Predeterminado</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Búsqueda de números de teléfono</string>
+  <string name="lookup_settings_description">Buscar números de teléfono desconocidos</string>
+  <string name="enable_forward_lookup_title">Búsqueda de lugares</string>
+  <string name="enable_forward_lookup_summary">Mostrar lugares cercanos cuando se busque en el marcador</string>
+  <string name="enable_people_lookup_title">Búsqueda de personas</string>
+  <string name="enable_people_lookup_summary">Mostrar resultados en línea para personas cuando se busque en el marcador</string>
+  <string name="enable_reverse_lookup_title">Búsqueda inversa</string>
+  <string name="enable_reverse_lookup_summary">Buscar información sobre la persona o lugar para números desconocidos en llamadas entrantes</string>
+  <string name="forward_lookup_provider_title">Proveedor de búsqueda de lugares</string>
+  <string name="people_lookup_provider_title">Proveedor de búsqueda de personas</string>
+  <string name="reverse_lookup_provider_title">Proveedor de búsqueda inversa</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chino (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Llamada en la lista negra</string>
+  <string name="menu_add_to_blacklist">Añadir a lista de contactos bloqueados</string>
+  <string name="toast_added_to_blacklist">%s añadidos a la lista de contactos bloqueados.</string>
+  <string name="toast_removed_from_blacklist">%s eliminado de la lista de llamadas bloqueadas.</string>
   <string name="call_log_action_block">Persona bloqueada</string>
+  <string name="call_log_action_unblock">Llamada bloqueada</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">Ajustes de marcación rápida</string>
+  <string name="speed_dial_not_set">(no definido)</string>
+  <string name="speed_dial_replace">Reemplazar</string>
+  <string name="speed_dial_delete">Eliminar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla sin asignar</string>
+  <string name="speed_dial_unassigned_dialog_message">La tecla \'<xliff:g id="number">%s</xliff:g>\' no tiene una acción de marcación rápida asignada. ¿Quieres asignar una acción ahora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar la marcación rápida primero deshabilita el modo avión.</string>
+  <string name="yes">Sí</string>
+  <string name="no">No</string>
+  <string name="incall_vibration_category_title">Vibración durante la llamada</string>
+  <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
+  <string name="incall_vibrate_call_waiting_title">Vibrar en llamada de espera</string>
+  <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
+  <string name="incall_vibrate_45_title">Vibrar cada minuto</string>
+  <string name="incall_vibrate_45_summary">Vibrar en el segundo 45 de cada minuto durante llamadas salientes</string>
+  <string name="call_log_show_all_slots">Todas las tarjetas SIM</string>
+  <string name="call_log_all_calls_header">Todas las llamadas</string>
+  <string name="call_log_blacklist_header">Solo llamadas bloqueadas</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">Estadísticas</string>
+  <string name="callStatsDetailTitle">Detalles de llamada</string>
+  <string name="call_stats_incoming">Entrante: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_outgoing">Saliente: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_blacklisted">Bloqueado: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Fecha de inicio</string>
+  <string name="call_stats_filter_to">Fecha de finalización</string>
   <string name="call_stats_filter_picker_title">Rango de filtro</string>
+  <string name="date_quick_selection">Selección rápida</string>
+  <string name="date_qs_currentmonth">Mes actual</string>
+  <string name="date_qs_currentquarter">Trimestre actual</string>
+  <string name="date_qs_currentyear">Año actual</string>
+  <string name="date_qs_lastweek">Última semana</string>
+  <string name="date_qs_lastmonth">Último mes</string>
+  <string name="date_qs_lastquarter">Último trimestre</string>
+  <string name="date_qs_lastyear">Último año</string>
+  <string name="call_stats_date_filter">Ajustar rango de fechas</string>
+  <string name="call_stats_reset_filter">Restablecer rango de fechas</string>
+  <string name="call_stats_sort_by_duration">Ordenar por duración de llamada</string>
+  <string name="call_stats_sort_by_count">Ordenar por núm. de llamadas</string>
+  <string name="call_stats_title_for_number">Este número</string>
+  <string name="call_stats_title_of_total">Del total</string>
+  <string name="call_stats_title_durations">Duración de llamada</string>
+  <string name="call_stats_title_count">Contador de llamada</string>
+  <string name="call_stats_title_average_duration">Duración promedio</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">El registro no contiene ninguna llamada en el rango de tiempo seleccionado.</string>
+  <string name="call_recording_category_title">Grabación de llamadas</string>
+  <string name="call_recording_format">Formato de audio</string>
+  <string name="call_playback_no_app_found_toast">No se encontró una aplicación para la reproducción de la grabación seleccionada.</string>
 </resources>

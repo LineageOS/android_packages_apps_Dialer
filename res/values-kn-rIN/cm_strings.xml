@@ -38,8 +38,12 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">ಬ್ಲಾಕ್‌ಲಿಸ್ಟ್ ಮಾಡಿದ ಕರೆ</string>
   <string name="menu_add_to_blacklist">ನಿರ್ಬಂಧಿಸಿದ ಕರೆಮಾಡುವರ ಪಟ್ಟಿಗೆ ಸೇರಿಸಿ</string>
   <string name="toast_added_to_blacklist">%s ನಿರ್ಬಂಧಿಸಿದ ಕರೆ ಮಾಡುವವರ ಪಟ್ಟಿಗೆ ಸೇರಿಸಲಾಗಿದೆ.</string>
+  <string name="toast_removed_from_blacklist">ಬ್ಲಾಕ್ ಮಾಡಿದ ಕಾಲರ್ ಪಟ್ಟಿಯಿಂದ %s ತೆಗೆಯಲ್ಪಟ್ಟಿದೆ.</string>
+  <string name="call_log_action_block">ಕಾಲರ್‌ ಬ್ಲಾಕ್ ಮಾಡಿ</string>
+  <string name="call_log_action_unblock">ಕಾಲರ್ ಬ್ಲಾಕ್ ಮಾಡಲ್ಪಟ್ಟಿದ್ದಾರೆ</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">ವೇಗ ಡಯಲ್ ಸೆಟ್ಟಿಂಗ್ಸ್</string>
   <string name="speed_dial_not_set">(ಹೊಂದಿಸಿಲ್ಲ)</string>
@@ -62,6 +66,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">ಅಂಕಿಅಂಶಗಳು</string>
   <string name="callStatsDetailTitle">ಕರೆ ಅಂಕಿಅಂಶ ವಿವರಗಳು</string>
+  <string name="call_stats_incoming">ಒಳಬರುವ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">ಹೊರಹೋಗುವ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">ತಪ್ಪಿದವು: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">ಒಟ್ಟು: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">ಒಟ್ಟು:<xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">ಪ್ರಾರಂಭ ದಿನಾಂಕ</string>
@@ -79,5 +88,14 @@
   <string name="call_stats_reset_filter">ಸಮಯ ವ್ಯಾಪ್ತಿ ಮರುಹೊಂದಿಸಿ</string>
   <string name="call_stats_sort_by_duration">ಕರೆ ಕಾಲಾವಧಿಯಿಂದ ಶೋಧಿಸು</string>
   <string name="call_stats_sort_by_count">ಕರೆ ಎಣಿಕೆಯಿಂದ ಶೋಧಿಸು</string>
+  <string name="call_stats_title_for_number">ಈ ಸಂಖ್ಯೆ</string>
+  <string name="call_stats_title_of_total">ಒಟ್ಟು</string>
+  <string name="call_stats_title_durations">ಕರೆ ಅವಧಿಗಳು</string>
+  <string name="call_stats_title_count">ಕರೆ ಲೆಕ್ಕ</string>
+  <string name="call_stats_title_average_duration">ಸರಾಸರಿ ಕರೆ ಅವಧಿ</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">ನಿಮ್ಮ ಕರೆ ಲಾಗ್‌ನ ಆಯ್ದ ಸಮಯ ಶ್ರೇಣಿಯಲ್ಲಿ ಯಾವುದೇ ಕರೆಗಳು ಹೊಂದಿಲ್ಲ.</string>
+  <string name="call_recording_category_title">ಕರೆ ರೆಕಾರ್ಡಿಂಗ್</string>
+  <string name="call_recording_format">ಆಡಿಯೋ ರೂಪದಲ್ಲಿ</string>
+  <string name="call_playback_no_app_found_toast">ಆಯ್ಕೆ ಮಾಡಲಾದ ಪ್ಲೇಬ್ಯಾಕ್ ರೆಕಾರ್ಡಿಂಗ್‌ಗಳಿಗೆ ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್ ಕಂಡುಬಂದಿಲ್ಲ</string>
 </resources>

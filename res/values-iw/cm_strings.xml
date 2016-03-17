@@ -31,7 +31,7 @@
   <string name="enable_people_lookup_title">חיפוש אנשים</string>
   <string name="enable_people_lookup_summary">הצג תוצאות מהרשת עבור אנשים בעת חיפוש בחייגן</string>
   <string name="enable_reverse_lookup_title">שיחה מזוהה חכמה</string>
-  <string name="enable_reverse_lookup_summary">חפש מידע אודות האדם או המקום עבור מספרים לא ידועים בשיחות נכנסות</string>
+  <string name="enable_reverse_lookup_summary">חפש מידע אודות אדם או מקום עבור מספרים לא ידועים בשיחות נכנסות</string>
   <string name="forward_lookup_provider_title">ספק חיפוש מקדים</string>
   <string name="people_lookup_provider_title">ספק חיפוש אנשים</string>
   <string name="reverse_lookup_provider_title">ספק שיחה חכמה מזוהה</string>
@@ -39,8 +39,8 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">שיחה שהוכנסה לרשימה השחורה</string>
-  <string name="menu_add_to_blacklist">הוסף לרשימת המתקשרים החסומים</string>
-  <string name="toast_added_to_blacklist">%s נוסף לרשימת המתקשרים החסומים.</string>
+  <string name="menu_add_to_blacklist">הוסף לרשימת מתקשרים חסומים</string>
+  <string name="toast_added_to_blacklist">%s נוסף/ה לרשימת המתקשרים החסומים.</string>
   <string name="toast_removed_from_blacklist">%s הוסר מרשימת המתקשרים החסומים.</string>
   <string name="call_log_action_block">חסום מתקשר</string>
   <string name="call_log_action_unblock">המתקשר נחסם</string>
@@ -51,7 +51,7 @@
   <string name="speed_dial_delete">מחק</string>
   <string name="speed_dial_unassigned_dialog_title">לא הוגדר מקש</string>
   <string name="speed_dial_unassigned_dialog_message">לא הוגדרה פעולה לחיוג מהיר למספר \'<xliff:g id="number">%s</xliff:g>\'. האם ברצונך להגדיר פעולה עכשיו?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">כדי להשתמש בחיוג מהיר, בטל תחילה את מצב הטיסה.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">כדי להשתמש בחיוג מהיר, כבה תחילה את מצב הטיסה.</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
   <string name="incall_vibration_category_title">רטט במהלך שיחה</string>
@@ -60,7 +60,7 @@
   <string name="incall_vibrate_hangup_title">רטט בניתוק השיחה</string>
   <string name="incall_vibrate_45_title">רטט בכל דקה</string>
   <string name="incall_vibrate_45_summary">רטט בכל 45 שניות של כל דקה במהלך שיחה יוצאת</string>
-  <string name="call_log_show_all_slots">כל הסימים</string>
+  <string name="call_log_show_all_slots">כל כרטיסי ה-SIM</string>
   <string name="call_log_all_calls_header">כל השיחות</string>
   <string name="call_log_blacklist_header">שיחות שנחסמו בלבד</string>
   <!-- Call statistics -->
@@ -71,8 +71,8 @@
   <string name="call_stats_missed">לא נענו: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blacklisted">נחסמו: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">סך הכל: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">סך הכל: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_header_total">סך הכול: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">סך הכול: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">תאריך התחלה</string>
   <string name="call_stats_filter_to">תאריך סיום</string>
   <string name="call_stats_filter_picker_title">מסנן טווח</string>
@@ -85,7 +85,7 @@
   <string name="date_qs_lastquarter">רבעון אחרון</string>
   <string name="date_qs_lastyear">שנה שעברה</string>
   <string name="call_stats_date_filter">התאמת טווח הזמן</string>
-  <string name="call_stats_reset_filter">אפס טווח זמן</string>
+  <string name="call_stats_reset_filter">איפוס טווח זמן</string>
   <string name="call_stats_sort_by_duration">מיין לפי משך שיחה</string>
   <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
   <string name="call_stats_title_for_number">המספר הזה</string>

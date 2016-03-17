@@ -66,6 +66,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">สถิติ</string>
   <string name="callStatsDetailTitle">รายละเอียดสถิติการโทร</string>
+  <string name="call_stats_incoming">สายเข้า: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">โทรออก: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">ไม่ได้รับ: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">บล็อค: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">ทั้งหมด: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">ทั้งหมด: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">วันที่เริ่มต้น</string>
@@ -83,5 +88,9 @@
   <string name="call_stats_reset_filter">รีเซ็ตขอบเขตเวลา</string>
   <string name="call_stats_sort_by_duration">เรียงตามระยะเวลาการโทร</string>
   <string name="call_stats_sort_by_count">เรียงตามจำนวนครั้งการโทร</string>
+  <string name="call_stats_title_for_number">หมายเลขนี้</string>
+  <string name="call_stats_title_of_total">จากทั้งหมด</string>
+  <string name="call_stats_title_durations">ระยะเวลาการโทร</string>
+  <string name="call_stats_title_count">จำนวนการโทร</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>
