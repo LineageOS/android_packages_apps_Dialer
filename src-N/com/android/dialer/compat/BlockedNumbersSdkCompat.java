@@ -16,7 +16,9 @@
 
 package com.android.dialer.compat;
 
+import android.content.Context;
 import android.net.Uri;
+import android.provider.BlockedNumberContract;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 
 public class BlockedNumbersSdkCompat {
@@ -29,4 +31,7 @@ public class BlockedNumbersSdkCompat {
 
     public static final String E164_NUMBER = BlockedNumbers.COLUMN_E164_NUMBER;
 
+    public static boolean canCurrentUserBlockNumbers(Context context) {
+        return BlockedNumberContract.canCurrentUserBlockNumbers(context);
+    }
 }
