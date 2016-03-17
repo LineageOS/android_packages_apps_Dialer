@@ -27,8 +27,6 @@ import com.android.dialer.R;
  * Encapsulates the views that are used to display the details of a phone call in the call log.
  */
 public final class PhoneCallDetailsViews {
-    public final View nameWrapper;
-    public final ImageView noteIconView;
     public final TextView nameView;
     public final View callTypeView;
     public final CallTypeIconsView callTypeIcons;
@@ -36,11 +34,9 @@ public final class PhoneCallDetailsViews {
     public final TextView voicemailTranscriptionView;
     public final TextView callAccountLabel;
 
-    private PhoneCallDetailsViews(View nameAndNote, ImageView noteIconView, TextView nameView,
-            View callTypeView, CallTypeIconsView callTypeIcons, TextView callLocationAndDate,
+    private PhoneCallDetailsViews(TextView nameView, View callTypeView,
+            CallTypeIconsView callTypeIcons, TextView callLocationAndDate,
             TextView voicemailTranscriptionView, TextView callAccountLabel) {
-        this.nameWrapper = nameAndNote;
-        this.noteIconView = noteIconView;
         this.nameView = nameView;
         this.callTypeView = callTypeView;
         this.callTypeIcons = callTypeIcons;
@@ -57,10 +53,7 @@ public final class PhoneCallDetailsViews {
      * {@code R.id.call_types}.
      */
     public static PhoneCallDetailsViews fromView(View view) {
-        return new PhoneCallDetailsViews(
-                view.findViewById(R.id.nameWrapper),
-                (ImageView) view.findViewById(R.id.contactHasNotesIcon),
-                (TextView) view.findViewById(R.id.name),
+        return new PhoneCallDetailsViews((TextView) view.findViewById(R.id.name),
                 view.findViewById(R.id.call_type),
                 (CallTypeIconsView) view.findViewById(R.id.call_type_icons),
                 (TextView) view.findViewById(R.id.call_location_and_date),
@@ -70,8 +63,6 @@ public final class PhoneCallDetailsViews {
 
     public static PhoneCallDetailsViews createForTest(Context context) {
         return new PhoneCallDetailsViews(
-                new View(context),
-                new ImageView(context),
                 new TextView(context),
                 new View(context),
                 new CallTypeIconsView(context),

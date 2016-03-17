@@ -134,9 +134,6 @@
     <!-- InCall Plugin Settings -->
     <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> settings</string>
 
-    <!-- Deep link label for viewing notes in call history -->
-    <string name="search_shortcut_view_note">View Note</string>
-
     <!-- Search shortcut for "Call using PluginName" -->
     <string name="search_shortcut_call_using">Call using <xliff:g id="name">%1$s</xliff:g></string>
 
@@ -172,5 +169,4 @@
 
     <string name="provider_voice_call">"%1$s voice call"</string>
     <string name="provider_video_call">"%1$s video call"</string>
-
 </resources>

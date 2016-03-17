@@ -20,7 +20,6 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,14 +29,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.android.contacts.common.testing.NeededForTesting;
-import com.android.dialer.DeepLinkIntegrationManager;
-import com.cyanogen.ambient.common.api.ResultCallback;
-import com.cyanogen.ambient.deeplink.DeepLink;
-import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
-import com.cyanogen.ambient.deeplink.linkcontent.DeepLinkContentType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Maintains a list that groups adjacent items sharing the same value of a "group-by" field.
@@ -84,13 +75,6 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
      * Count of groups in the list.
      */
     private int mGroupCount;
-
-    /**
-     * Count of the DeepLinks we should display in the list;
-     */
-    private int mDeepLinkCount;
-    private DeepLink[] mDeepLinks;
-    private SparseIntArray mDeepLinkCache = new SparseIntArray();
 
     /**
      * Information about where these groups are located in the list, how large they are
@@ -152,8 +136,6 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
         mLastCachedGroup = -1;
         mPositionMetadata.listPosition = -1;
         mPositionCache.clear();
-        mDeepLinkCount = 0;
-        mDeepLinkCache.clear();
     }
 
     public void changeCursor(Cursor cursor) {
@@ -169,7 +151,6 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
         mCursor = cursor;
         resetCache();
         findGroups();
-        findDeepLinks();
 
         if (cursor != null) {
             cursor.registerContentObserver(mChangeObserver);
@@ -177,121 +158,6 @@ abstract class GroupingListAdapter extends RecyclerView.Adapter {
             mRowIdColumnIndex = cursor.getColumnIndexOrThrow("_id");
             notifyDataSetChanged();
         }
-    }
-
-    /**
-     * Iterates over all of the views in the adapter, determines which calls or groups of calls
-     * should be considered for potential DeepLinking.  Calls the API for each of these groups to
-     * determine which DeepLink to display.
-     */
-    private void findDeepLinks() {
-        mDeepLinks = new DeepLink[GROUP_METADATA_ARRAY_INITIAL_SIZE];
-
-        if (mCursor == null) {
-            return;
-        }
-
-        for (int i = 0; i < getItemCount(); i++) {
-            askForDeepLink(i, buildCallUris(i));
-        }
-    }
-
-    /**
-     * Query the DeepLink API for a specific DeepLink against a specific set of Uris
-     * @param position - view position in the adapter that this DeepLink is associated with.
-     * @param uris - the set of call uris which we are querying aginst
-     */
-    private void askForDeepLink(final int position, List<Uri> uris) {
-        if (uris == null || uris.size() <= 0) {
-            return;
-        }
-
-        DeepLinkIntegrationManager.getInstance().getPreferredLinksForList(
-                new ResultCallback<DeepLink.DeepLinkResultList>() {
-                    @Override
-                    public void onResult(DeepLink.DeepLinkResultList result) {
-                        List<DeepLink> links = result.getResults();
-                        for(DeepLink link: links) {
-                            // we only want to display this deeplink if its a note, and if its
-                            // for content that was previously saved to the application in question.
-                            if(link != null && link.getApplicationType() == DeepLinkApplicationType.NOTE &&
-                                    link.getAlreadyHasContent()) {
-                                addDeepLink(position, link);
-                                break;
-                            }
-                        }
-                    }
-                }, DeepLinkContentType.CALL, uris);
-    }
-
-    /**
-     * For a given view in the adapter figure out what phone number it is for, collect all the
-     * call times and generate Uri's for each call in the view.
-     * @param position - the position in views that we're checking
-     * @return a list of uri's representing the call or group of calls to check for DeepLinking.
-     */
-    private List<Uri> buildCallUris(int position) {
-        List<Uri> uris = null;
-        obtainPositionMetadata(mPositionMetadata, position);
-        Cursor c = (Cursor) getItem(position);
-        if (c != null) {
-            String number = mCursor.getString(CallLogQuery.NUMBER);
-            uris = new ArrayList<Uri>();
-            Uri toUse;
-            long[] callTimes = getCallTimes(mCursor, mPositionMetadata.childCount);
-            for (int i = 0; i < callTimes.length; i++) {
-                toUse = DeepLinkIntegrationManager.generateCallUri(number, callTimes[i]);
-                uris.add(toUse);
-            }
-        }
-        return uris;
-    }
-
-    /**
-     * Returns call times for the given number of items in the cursor
-     */
-    private long[] getCallTimes(Cursor cursor, int count) {
-        int position = cursor.getPosition();
-        long[] callTimes = new long[count];
-        for (int index = 0; index < count; ++index) {
-            callTimes[index] = cursor.getLong(CallLogQuery.DATE);
-            cursor.moveToNext();
-        }
-        cursor.moveToPosition(position);
-        return callTimes;
-    }
-
-    /**
-     * Add a DeepLink to our deep link cache.
-     * {@link #addGroups} method.
-     */
-    protected void addDeepLink(int position, DeepLink deepLink) {
-        if (mDeepLinkCount >= mDeepLinks.length) {
-            int newSize = idealLongArraySize(
-                    mDeepLinks.length + GROUP_METADATA_ARRAY_INCREMENT);
-            DeepLink[] array = new DeepLink[newSize];
-            System.arraycopy(mDeepLinks, 0, array, 0, mDeepLinkCount);
-            mDeepLinks = array;
-        }
-        mDeepLinks[mDeepLinkCount] = deepLink;
-        obtainPositionMetadata(mPositionMetadata, position);
-        mDeepLinkCache.put(position, mDeepLinkCount);
-        mDeepLinkCount++;
-        notifyItemChanged(position);
-    }
-
-    /**
-     * Get the DeepLink associated with the given position in the views.  If no DeepLink is
-     * associated with this position returns null.
-     * @param position the position in the views to check for deeplinks
-     * @return the DeepLink for this position or null.
-     */
-    protected DeepLink getDeepLink(int position) {
-        DeepLink deepLink = null;
-        if(mDeepLinkCache.get(position, -1) >= 0) {
-            deepLink = mDeepLinks[mDeepLinkCache.get(position)];
-        }
-        return deepLink;
     }
 
     @NeededForTesting

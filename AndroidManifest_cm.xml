@@ -23,7 +23,6 @@
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_INCALL_SERVICE" />
     <uses-permission android:name="com.cyanogen.ambient.permission.PLUGIN_STATUS_CHANGED" />
     <uses-permission android:name="com.cyanogen.ambient.permission.PUBLISH_DISCOVERY_NUDGE" />
-    <uses-permission android:name="com.cyanogen.ambient.permission.BIND_DEEPLINK_SERVICE" />
 
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 

@@ -56,7 +56,6 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
-import com.cyanogen.ambient.deeplink.DeepLink;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
@@ -543,23 +542,13 @@ public class CallLogAdapter extends GroupingListAdapter
         views.isBusiness = mContactInfoHelper.isBusiness(info.sourceType);
         views.numberType = (String) Phone.getTypeLabel(mContext.getResources(), details.numberType,
                 details.numberLabel);
-        // Default case: an item in the call log.
-        DeepLink dl = getDeepLink(position);
-        views.mDeepLink = dl;
-
-        if (dl != null) {
-            views.mDeepLink = dl;
-            views.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
-            views.phoneCallDetailsViews.noteIconView.setImageDrawable(dl.getDrawableIcon(mContext));
-        } else {
-            views.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
-        }
         String component = c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME);
         if (!TextUtils.isEmpty(component)) {
             views.inCallComponentName = ComponentName.unflattenFromString(component);
         } else {
             views.inCallComponentName = null;
         }
+
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
         int previousGroup = getPreviousDayGroup(c);
