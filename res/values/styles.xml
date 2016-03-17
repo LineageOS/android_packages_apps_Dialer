@@ -78,6 +78,13 @@
         <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
         <item name="dialpad_key_button_touch_tint">@color/dialer_dialpad_touch_tint</item>
         <item name="android:colorControlActivated">@color/dialer_theme_color</item>
+
+        <!-- Trick the support libraries into thinking this is an AppCompat theme. We don't
+             need the full thing, but we want to use CoordinatorLayout in our view hierarchy,
+             which checks for being used with an AppCompat theme on creation. -->
+        <item name="colorAccent">@color/dialtacts_theme_color</item>
+        <item name="colorPrimary">@color/dialer_theme_color</item>
+        <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
     </style>
 
     <!-- Action bar overflow menu icon. -->
