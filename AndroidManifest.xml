@@ -68,8 +68,7 @@
         android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:backupAgent='com.android.dialer.DialerBackupAgent'
-        android:usesCleartextTraffic="false"
-        android:forceDeviceEncrypted="false">
+        android:usesCleartextTraffic="false">
 
         <meta-data android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIBXgtCEKQ6W0PXVnW-ZVia2KmlV2AxsTw3GjAeQ" />
@@ -85,8 +84,7 @@
             android:icon="@mipmap/ic_launcher_phone"
             android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"
             android:resizeableActivity="true"
-            android:encryptionAware="true"
-            >
+            android:directBootAware="true">
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -281,12 +279,12 @@
 
         <service
             android:name=".calllog.CallLogNotificationsService"
-            android:encryptionAware="true"
+            android:directBootAware="true"
             android:exported="false"
         />
 
         <receiver android:name=".calllog.MissedCallNotificationReceiver"
-            android:encryptionAware="true">
+            android:directBootAware="true">
             <intent-filter>
                 <action android:name="android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION" />
             </intent-filter>
@@ -316,13 +314,13 @@
                   android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
                   android:exported="false"
                   android:screenOrientation="nosensor"
-                  android:encryptionAware="true"
+                  android:directBootAware="true"
                   android:resizeableActivity="true">
         </activity>
 
         <service android:name="com.android.incallui.InCallServiceImpl"
                  android:permission="android.permission.BIND_INCALL_SERVICE"
-                 android:encryptionAware="true" >
+                 android:directBootAware="true" >
             <meta-data android:name="android.telecom.IN_CALL_SERVICE_UI" android:value="true" />
             <meta-data android:name="android.telecom.IN_CALL_SERVICE_RINGING"
                 android:value="false"/>
@@ -333,7 +331,7 @@
 
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.NotificationBroadcastReceiver"
-            android:encryptionAware="true"
+            android:directBootAware="true"
             android:exported="false" />
 
         <provider
