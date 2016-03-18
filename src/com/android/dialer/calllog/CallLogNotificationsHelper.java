@@ -16,6 +16,8 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.base.Strings;
+
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -112,12 +114,13 @@ public class CallLogNotificationsHelper {
      * Otherwise attempt to look it up in the cache.
      * If that fails, fall back to displaying the number.
      */
-    public @NonNull ContactInfo getContactInfo(@Nullable String number, int numberPresentation,
+    public ContactInfo getContactInfo(@Nullable String number, int numberPresentation,
                           @Nullable String countryIso) {
         if (countryIso == null) {
             countryIso = mCurrentCountryIso;
         }
 
+        number = Strings.nullToEmpty(number);
         ContactInfo contactInfo = new ContactInfo();
         contactInfo.number = number;
         contactInfo.formattedNumber = PhoneNumberUtils.formatNumber(number, countryIso);
