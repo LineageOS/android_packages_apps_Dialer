@@ -352,12 +352,13 @@ public class CallerInfoAsyncQuery {
                     @Override
                     public void onQueryComplete(int token, Object cookie, CallerInfo ci) {
                         Log.d(LOG_TAG, "contactsProviderQueryCompleteListener done");
-                        if (ci != null && ci.contactExists) {
-                            if (listener != null) {
+                        // If there are no other directory queries, make sure that the listener is
+                        // notified of this result.  see b/27621628
+                        if ((ci != null && ci.contactExists) ||
+                            !startOtherDirectoriesQuery(token, context, info, listener, cookie)) {
+                            if (listener != null && ci != null) {
                                 listener.onQueryComplete(token, cookie, ci);
                             }
-                        } else {
-                            startOtherDirectoriesQuery(token, context, info, listener, cookie);
                         }
                     }
                 };
@@ -420,15 +421,13 @@ public class CallerInfoAsyncQuery {
         return c;
     }
 
-    private static void startOtherDirectoriesQuery(int token, Context context, CallerInfo info,
+    // Return value indicates if listener was notified.
+    private static boolean startOtherDirectoriesQuery(int token, Context context, CallerInfo info,
             OnQueryCompleteListener listener, Object cookie) {
         long[] directoryIds = getDirectoryIds(context);
         int size = directoryIds.length;
         if (size == 0) {
-            if (listener != null) {
-                listener.onQueryComplete(token, cookie, info);
-            }
-            return;
+            return false;
         }
 
         DirectoryQueryCompleteListenerFactory listenerFactory =
@@ -448,6 +447,7 @@ public class CallerInfoAsyncQuery {
                     listenerFactory.newListener(directoryId);
             startQueryInternal(token, context, info, intermediateListener, cookie, uri);
         }
+        return true;
     }
 
     /* Directory lookup related code - START */
