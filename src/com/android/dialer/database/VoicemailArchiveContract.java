@@ -21,6 +21,8 @@ import android.provider.BaseColumns;
 import android.provider.CallLog;
 import android.provider.OpenableColumns;
 
+import com.android.dialerbind.ObjectFactory;
+
 /**
  * Contains definitions for the supported URIs and columns for the voicemail archive table.
  * All the fields excluding MIME_TYPE, _DATA, ARCHIVED, SERVER_ID, mirror the fields in the
@@ -29,7 +31,7 @@ import android.provider.OpenableColumns;
 public final class VoicemailArchiveContract {
 
     /** The authority used by the voicemail archive provider. */
-    public static final String AUTHORITY = "com.android.dialer.database.voicemailarchiveprovider";
+    public static final String AUTHORITY = ObjectFactory.getVoicemailArchiveProviderAuthority();
 
     /** A content:// style uri for the voicemail archive provider */
     public static final Uri AUTHORITY_URI = Uri.parse("content://" + AUTHORITY);
