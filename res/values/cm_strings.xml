@@ -125,8 +125,8 @@
     <string name="empty_dialpad_t9_example">You can dial a phone number or\nsearch for a contact</string>
     <string name="empty_dialpad_t9_example_subtext" translatable="false">7 + 2 + 6 = SAM</string>
     <string name="sign_in_hint_text">Sign in to make %1$s calls</string>
-    <string name="wifi_hint_text">Try switching to %1$s to make calls over Wi-Fi.</string>
-    <string name="roaming_hint_text">%1$s is currently roaming. Try switching to %2$s to make calls over Wi-Fi.</string>
+    <string name="wifi_hint_text">Make free %1$s to %1$s calls over Wi-Fi.</string>
+    <string name="roaming_hint_text">%1$s is roaming. Make free %2$s to %2$s calls over Wi-Fi.</string>
     <string name="emergency_call_hint_text">No SIM. Emergency calls only.</string>
 
     <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> call</string>
