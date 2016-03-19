@@ -160,12 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ທັງໝົດ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ສາຍທີ່ບໍ່ໄດ້ຮັບ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ຂໍ້ຄວາມສຽງ"</string>
-    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
-    <skip />
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"ການລັອກແບບໃໝ່ທີ່ງ່າຍດາຍ"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"ເພື່ອປົກປ້ອງທ່ານໄດ້ດີຂຶ້ນ, ແອັບໂທລະສັບຕ້ອງການປ່ຽນວິທີການບລັອກ. ເບີໂທທີ່ທ່ານບລັອກໄວ້ຈະປິດກັ້ນທັງການໂທ ແລະ ຂໍ້ຄວາມ ແລະ ອາດມີການແບ່ງປັນກັບແອັບອື່ນໆນຳ."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"ອະນຸຍາດ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"ບ​ລັອກ <xliff:g id="NUMBER">%1$s</xliff:g> ບໍ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ການໂທຈາກເບີໂທນີ້ຈະຖືກບລັອກໄວ້ ແລະຂໍ້ຄວາມສຽງຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ການໂທຈາກເບີນີ້ຈະຖືກບລັອກໄວ້, ແຕ່ຜູ່ໂທອາດຈະຍັງສາມາດຝາກຂໍ້ຄວາມສຽງໃຫ້ທ່ານໄດ້."</string>

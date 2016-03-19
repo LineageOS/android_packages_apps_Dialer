@@ -160,12 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"සියලු"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"මග හැරුණේය"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"හඬ තැපෑල"</string>
-    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
-    <skip />
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"නව, සරල අවහිර කිරීම"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"ඔබව වඩාත් හොඳින් ආරක්ෂා කිරීමට, දුරකථනයට අවහිර කිරීම ක්‍රියා කරන ආකාරය වෙනස් කිරීමට අවශ්‍යයි. ඔබේ අවහිර කළ අංක දැන් ඇමතුම් සහ පෙළ පණිවිඩ යන දෙකම නවත්වනු ඇති අතර වෙනත් යෙදුම් සමග බෙදා ගැනීමට හැකිය."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"ඉඩ දෙන්න"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> අවහිර කරන්නද?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"මෙම අංකය වෙතින් වන ඇමතුම් අවහිර කරනු ඇති අතර හඬ තැපැල් ස්වයංක්‍රියව මකනු ඇත."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"මෙම අංකය වෙතින් වන ඇමතුම් අවහිර කරනු ඇති නමුත්, අමතන්නාට තවම ඔබට හඬ තැපැල් තැබීමට හැකිය."</string>

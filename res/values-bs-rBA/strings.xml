@@ -40,7 +40,7 @@
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Govorna pošta arhivirana"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"PONIŠTI"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"IDI U ARH."</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Obrrisati historiju poziva?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Obrisati historiju poziva?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ovo će izbrisati sve pozive iz historije"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Brisanje historije poziva u toku…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefon"</string>
@@ -55,10 +55,10 @@
       <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> Poruke govorne pošte </item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Poruka govorne pošte </item>
     </plurals>
-    <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Reproduciraj"</string>
+    <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Pokreni"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nova govorna pošta od <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="3356071912353297599">"Nije moguće reproducirati govornu poštu"</string>
+    <string name="voicemail_playback_error" msgid="3356071912353297599">"Nije moguće pokrenuti govornu poštu"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Učitavanje govorne pošte…"</string>
     <string name="voicemail_archiving_content" msgid="722322091690281157">"Arhiviranje govorne pošte..."</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Nije moguće učitati govornu poštu"</string>
@@ -82,7 +82,7 @@
     <string name="description_search_button" msgid="3660807558587384889">"pretraga"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"biraj"</string>
     <string name="description_digits_edittext" msgid="8760207516497016437">"broj za biranje"</string>
-    <string name="description_playback_start_stop" msgid="5060732345522492292">"Reproduciraj ili zaustavi reprodukciju"</string>
+    <string name="description_playback_start_stop" msgid="5060732345522492292">"Pokreni ili zaustavi pokretanje"</string>
     <string name="description_playback_speakerphone" msgid="6008323900245707504">"Uključi ili isključi zvučnik"</string>
     <string name="description_playback_seek" msgid="4509404274968530055">"Traženje položaja reprodukcije"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Smanjenje brzine reprodukcije"</string>
@@ -115,7 +115,7 @@
     <string name="type_rejected" msgid="7783201828312472691">"Odbijeni poziv"</string>
     <string name="type_blocked" msgid="3521686227115330015">"Blokiran poziv"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Dolazni pozivi"</string>
-    <string name="description_call_log_play_button" msgid="651182125650429846">"Reprodukcija govorne pošte"</string>
+    <string name="description_call_log_play_button" msgid="651182125650429846">"Pokretanje govorne pošte"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Prikaži kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Pozovi kontakt <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"Detalji o kontaktu <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
@@ -137,8 +137,8 @@
     <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
     <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Nije moguće pozvati ovaj broj"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Da biste postavili govornu poštu, idite na Meni &gt; Postavke."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Da biste pozvali govornu poštu, isključite Način rada u avionu."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Da postavite govornu poštu, idite na Meni &gt; Postavke."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Da pozovete govornu poštu, isključite Način rada u avionu."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Učitavanje..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -161,12 +161,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Sve"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Propušteni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Govorna pošta"</string>
-    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
-    <skip />
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Novo, jednostavnije blokiranje"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Radi bolje zaštite, Telefon treba promijeniti način rada blokiranja. S blokiranih brojeva od sada nećete primati ni pozive ni tekstualne poruke i blokirani brojevi će se moći dijeliti s drugim aplikacijama."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Dozvoli"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokirati broj <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Pozivi s ovog broja će biti blokirani, a govorna pošta će se automatski brisati."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Pozivi s ovog broja će biti blokirani, ali pozivalac će vam moći ostavljati govornu poštu."</string>
@@ -191,7 +188,7 @@
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodaj u favorite"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Još nemate nijedan kontakt"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Dodaj kontakt"</string>
-    <string name="contact_tooltip" msgid="2019777545923635266">"Dodirnite sliku da vidite sve brojeve ili dodirnite &amp; držite da promijenite raspored."</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Dodirnite sliku da vidite sve brojeve ili dodirnite i držite da promijenite raspored."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Ukloni"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videopoziv"</string>
     <string name="call_log_action_send_message" msgid="5679719296905285131">"Pošalji poruku"</string>
@@ -207,7 +204,7 @@
     <string name="description_call_action" msgid="4000549004089776147">"Pozovi kontakt <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Uputi videopoziv kontaktu <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Preslušaj govornu poštu od kontakta <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_voicemail_play" msgid="2689369874037785439">"Reprodukcija govorne pošte od kontakta <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_voicemail_play" msgid="2689369874037785439">"Pokreni govornu poštu od kontakta <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_pause" msgid="3905259748756919693">"Pauziraj govornu poštu od kontakta <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_voicemail_delete" msgid="2025472770630153436">"Izbriši govornu poštu od kontakta <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
@@ -225,9 +222,9 @@
     <string name="call_detail_list_header" msgid="3752717059699600861">"Lista poziva"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"Uključite zvučnik."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"Isključivanje zvučnika."</string>
-    <string name="voicemail_play_faster" msgid="3444751008615323006">"Brža reprodukcija."</string>
-    <string name="voicemail_play_slower" msgid="4544796503902818832">"Sporija reprodukcija."</string>
-    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Reproduciraj ili pauziraj reprodukciju"</string>
+    <string name="voicemail_play_faster" msgid="3444751008615323006">"Brže pokretanje."</string>
+    <string name="voicemail_play_slower" msgid="4544796503902818832">"Sporije pokretanje.."</string>
+    <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Pokreni ili pauziraj pokretanje"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"Opcije prikaza"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Zvukovi i vibracija"</string>
@@ -263,12 +260,12 @@
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Računi za pozivanje"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Uključi"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Postavi dozvole"</string>
-    <string name="permission_no_speeddial" msgid="6882563445996184051">"Da biste omogućili brzo biranje, uključite dozvolu za Kontakte."</string>
-    <string name="permission_no_calllog" msgid="555711464287041043">"Da biste vidjeli popis poziva, uključite dozvolu za Telefon."</string>
-    <string name="permission_no_contacts" msgid="6237980143178936279">"Da biste vidjeli kontakte, uključite dozvolu za Kontakte."</string>
-    <string name="permission_no_voicemail" msgid="8306280257799917574">"Da biste pristupili govornoj pošti,uključite dozvolu za telefon."</string>
-    <string name="permission_no_search" msgid="84152933267902056">"Da biste pretraživali kontakte, uključite dozvole za Kontakte."</string>
-    <string name="permission_place_call" msgid="2101287782615887547">"Da biste uputili poziv, uključite dozvolu za Telefon."</string>
+    <string name="permission_no_speeddial" msgid="6882563445996184051">"Da omogućite brzo biranje, uključite dozvolu za Kontakte."</string>
+    <string name="permission_no_calllog" msgid="555711464287041043">"Da vidite popis poziva, uključite dozvolu za Telefon."</string>
+    <string name="permission_no_contacts" msgid="6237980143178936279">"Da vidite kontakte, uključite dozvolu za Kontakte."</string>
+    <string name="permission_no_voicemail" msgid="8306280257799917574">"Da pristupite govornoj pošti,uključite dozvolu za telefon."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"Da pretražujete kontakte, uključite dozvole za Kontakte."</string>
+    <string name="permission_place_call" msgid="2101287782615887547">"Da uputite poziv, uključite dozvolu za Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacija za telefon nema dozvolu za pisanje u postavkama sistema."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Blokirano"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"Osoba <xliff:g id="NAMEORNUMBER">^1</xliff:g> je aktivna"</string>
