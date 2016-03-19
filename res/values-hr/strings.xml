@@ -161,12 +161,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Sve"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Propušteni"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Gov. pošta"</string>
-    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
-    <skip />
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Novo, jednostavnije blokiranje"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Da bi vas bolje zaštitio, Phone mora promijeniti način funkcioniranja blokiranja. S blokiranih brojeva više nećete primati pozive ni SMS poruke. Osim toga, blokirani brojevi moći će se dijeliti s drugim aplikacijama."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Omogući"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Želite li blokirati <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Pozivi s tog broja blokirat će se, a govorna pošta automatski će se brisati."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Pozivi s tog broja blokirat će se, ali pozivatelj će vam moći ostavljati govornu poštu."</string>

@@ -160,12 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Бүгд"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Аваагүй"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Дуут шуудан"</string>
-    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
-    <skip />
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Шинэ, хялбаршуулсан хориг"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Таныг илүү сайн хамгаалахын тулд утасны хоригийн тохиргоог өөрчлөх шаардлагатай. Таны хориглосон дугааруудаас дуудлага, зурвас ирэхгүй бөгөөд тэдгээрийг бусад апп-тай хуваалцаж болзошгүй."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Зөвшөөрөх"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>-г блоклох уу?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Энэ дугаараас ирэх дуудлагыг блоклох бөгөөд дуут шуудан автоматаар устах болно."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Энэ дугаараас ирэх дуудлагыг блоклосон, гэхдээ залгагч танд дуут шуудан илгээх боломжтой."</string>

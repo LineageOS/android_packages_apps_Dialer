@@ -160,12 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"전체"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"부재중 전화"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"음성사서함"</string>
-    <!-- no translation found for migrate_blocked_numbers_dialog_title (2039363199438872626) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_message (5598530398682662860) -->
-    <skip />
-    <!-- no translation found for migrate_blocked_numbers_dialog_allow_button (3116140286537760629) -->
-    <skip />
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"새로운 간편 차단 기능"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"사용자를 보호하기 위하여 전화에서 차단 작동 방식을 변경해야 합니다. 차단된 번호에서 발송되는 통화 및 문자 메시지는 수신되지 않으며 다른 앱과 차단 사실이 공유될 수 있습니다."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"허용"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>번을 차단할까요?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"이 번호에서 걸려오는 전화가 차단되며 음성사서함이 자동으로 삭제됩니다."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"이 번호에서 걸려오는 전화가 차단되지만, 발신자가 음성사서함에 메시지를 남길 수는 있습니다."</string>

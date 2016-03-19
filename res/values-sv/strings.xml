@@ -161,7 +161,7 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"Missade"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Röstbrevlåda"</string>
     <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"En ny, enklare blockering"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"För bättre skydd måste telefonen ändra blockeringsfunktionen. Samtal eller sms från blockerade nummer stoppas och inställningarna går att dela med andra appar."</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"För bättre skydd måste mobilen ändra blockeringsfunktionen. Samtal eller sms från blockerade nummer stoppas och inställningarna går att dela med andra appar."</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Tillåt"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Vill du blockera <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Samtal från det här numret blockeras och röstmeddelanden raderas automatiskt."</string>
