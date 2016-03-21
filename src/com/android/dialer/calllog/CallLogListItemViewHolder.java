@@ -182,6 +182,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     private static final int VOICEMAIL_TRANSCRIPTION_MAX_LINES = 10;
 
+    private static final String INCALL_ACTION_TYPE_PHONE = "phone";
+    private static final String INCALL_ACTION_TYPE_VIDEO = "video";
+    private static final String INCALL_ACTION_TYPE_MESSAGING = "messaging";
+
     private final Context mContext;
     private final TelecomCallLogCache mTelecomCallLogCache;
     private final CallLogListItemHelper mCallLogListItemHelper;
@@ -336,8 +340,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                             IntentProvider.getReturnVoicemailCallIntentProvider());
                 } else {
                     if (inCallComponentName != null) {
-                        primaryActionButtonView.setTag("phone");
+                        primaryActionButtonView.setTag(R.id.incall_provider_action_type,
+                                INCALL_ACTION_TYPE_PHONE);
                     } else {
+                        primaryActionButtonView.setTag(R.id.incall_provider_action_type, null);
                         primaryActionButtonView.setTag(
                                 IntentProvider.getReturnCallIntentProvider(number,
                                         OriginCodes.CALL_LOG_PRIMARY));
@@ -370,12 +376,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber
                 || cmi != null && cmi.mIsInCallProvider) {
-            callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number,
-                    OriginCodes.CALL_LOG_ACTION_ONE));
             if (cmi != null && cmi.mIsInCallProvider) {
+                callButtonView.setTag(R.id.incall_provider_action_type, INCALL_ACTION_TYPE_PHONE);
                 ((TextView) callButtonView.findViewById(R.id.call_action_text))
                         .setText(mContext.getString(R.string.provider_voice_call, cmi.mName));
             } else {
+                callButtonView.setTag(R.id.incall_provider_action_type, null);
+                callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number,
+                        OriginCodes.CALL_LOG_ACTION_ONE));
                 ((TextView) callButtonView.findViewById(R.id.call_action_text))
                         .setText(TextUtils.expandTemplate(
                                 mContext.getString(R.string.call_log_action_call),
@@ -394,11 +402,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 ((TextView) videoCallButtonView.findViewById(R.id.video_call_action_text))
                         .setText(mContext.getString(R.string.provider_video_call, cmi.mName));
 
-                videoCallButtonView.setTag("video");
+                videoCallButtonView.setTag(R.id.incall_provider_action_type,
+                        INCALL_ACTION_TYPE_VIDEO);
                 videoCallButtonView.setVisibility(View.VISIBLE);
             } else {
-                videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider
-                        (number, OriginCodes.CALL_LOG_ACTION_TWO));
+                videoCallButtonView.setTag(R.id.incall_provider_action_type, null);
+                videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number,
+                        OriginCodes.CALL_LOG_ACTION_TWO));
                 videoCallButtonView.setVisibility(View.VISIBLE);
             }
         } else {
@@ -562,19 +572,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */
                     accountHandle);
         } else {
-            final Object tag = view.getTag();
-            if (tag instanceof String && inCallComponentName != null) {
+            final String inCallAction = (String) view.getTag(R.id.incall_provider_action_type);
+            if (inCallComponentName != null && !TextUtils.isEmpty(inCallAction)) {
                 CallMethodInfo cmi = CallMethodHelper.getCallMethod(inCallComponentName);
                 if (cmi != null) {
-                    String callProviderActionName = (String) tag;
-                    switch (callProviderActionName) {
-                        case "video":
+                    switch (inCallAction) {
+                        case INCALL_ACTION_TYPE_VIDEO:
                             cmi.placeCall(OriginCodes.CALL_LOG_ACTION_TWO, number, mContext, true);
                             break;
-                        case "messaging":
+                        case INCALL_ACTION_TYPE_MESSAGING:
                             // TODO: implement way to start incall message thread
                             break;
-                        case "phone":
+                        case INCALL_ACTION_TYPE_PHONE:
                             cmi.placeCall(OriginCodes.CALL_LOG_ACTION_ONE, number, mContext);
                             break;
                         default:
@@ -583,7 +592,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     }
                 }
             } else {
-                final IntentProvider intentProvider = (IntentProvider) tag;
+                final IntentProvider intentProvider = (IntentProvider) view.getTag();
                 if (intentProvider != null) {
                     final Intent intent = intentProvider.getIntent(mContext);
                     // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
