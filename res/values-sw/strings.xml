@@ -106,7 +106,7 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ongeza simu"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Unapigiwa simu"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Simu unayopiga"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Simu isiyojibiwa"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Simu uliyokosa"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Hangout ya Video inayoingia"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Hangout ya Video inayotoka"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Hangout ya Video ambayo haikupokewa"</string>
