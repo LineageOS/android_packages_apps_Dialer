@@ -25,6 +25,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.UserManager;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
@@ -292,5 +293,40 @@ public class FilteredNumberCompat {
                     (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE));
         }
         return new Intent(context, BlockedNumbersSettingsActivity.class);
+    }
+
+    /**
+     * Method used to determine if block operations are possible.
+     *
+     * @param context The {@link Context}.
+     * @return {@code true} if the app and user can block numbers, {@code false} otherwise.
+     */
+    public static boolean canAttemptBlockOperations(Context context) {
+        if (!CompatUtils.isNCompatible()) {
+            // Dialer blocking, must be primary user
+            return UserManagerCompat.isSystemUser(
+                    (UserManager) context.getSystemService(Context.USER_SERVICE));
+        }
+
+        // Great Wall blocking, must be primary user and the default or system dialer
+        // TODO(maxwelb): check that we're the default or system Dialer
+        return BlockedNumbersSdkCompat.canCurrentUserBlockNumbers(context);
+    }
+
+    /**
+     * Used to determine if the call blocking settings can be opened.
+     *
+     * @param context The {@link Context}.
+     * @return {@code true} if the current user can open the call blocking settings, {@code false}
+     * otherwise.
+     */
+    public static boolean canCurrentUserOpenBlockSettings(Context context) {
+        if (!CompatUtils.isNCompatible()) {
+            // Dialer blocking, must be primary user
+            return UserManagerCompat.isSystemUser(
+                    (UserManager) context.getSystemService(Context.USER_SERVICE));
+        }
+        // BlockedNumberContract blocking, verify through Contract API
+        return BlockedNumbersSdkCompat.canCurrentUserBlockNumbers(context);
     }
 }
