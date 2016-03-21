@@ -1178,8 +1178,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mInDialpadSearch = smartDialSearch;
         mInRegularSearch = !smartDialSearch;
 
-        mFloatingActionButtonController.scaleOut();
-
         SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
         if (animate) {
             transaction.setCustomAnimations(android.R.animator.fade_in, 0);
@@ -1191,15 +1189,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 fragment = new SmartDialSearchFragment();
             } else {
                 fragment = new RegularSearchFragment();
-                fragment.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        // Show the FAB when the user touches the lists fragment and the soft
-                        // keyboard is hidden.
-                        showFabInSearchUi();
-                        return false;
-                    }
-                });
             }
             transaction.add(R.id.dialtacts_frame, fragment, tag);
         } else {
