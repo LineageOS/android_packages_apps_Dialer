@@ -94,6 +94,7 @@ import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CreditBarHelper;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
+import com.cyanogen.ambient.incall.extension.StatusCodes;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.HashMap;
@@ -1268,7 +1269,6 @@ public class DialpadFragment extends Fragment
                 clearDialpad();
             } else {
                 startCall(number, OriginCodes.DIALPAD_DIRECT_DIAL);
-                hideAndClearDialpad(false);
             }
         }
     }
@@ -1908,7 +1908,15 @@ public class DialpadFragment extends Fragment
     private void startCall(String number, String origin) {
         if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider &&
                 !PhoneNumberUtils.isEmergencyNumber(number)) {
-            mCurrentCallMethodInfo.placeCall(origin, number, getActivity(), false, true);
+            mCurrentCallMethodInfo.placeCall(origin, number, getActivity(), false, true,
+                    new CallMethodHelper.InCallCallListener() {
+                        @Override
+                        public void onResult(int resultCode) {
+                            if (resultCode == StatusCodes.StartCall.CALL_CONNECTED) {
+                                hideAndClearDialpad(false);
+                            }
+                        }
+                    });
         } else {
             // If no sim is selected, or emergency callmethod selected, or number is
             // an emergency number, phone account handle should be null, and will use the
@@ -1923,6 +1931,7 @@ public class DialpadFragment extends Fragment
                                     .getCallOrigin() : null),
                     handle);
             DialerUtils.startActivityWithErrorToast(getActivity(), intent, origin);
+            hideAndClearDialpad(false);
         }
     }
 }
