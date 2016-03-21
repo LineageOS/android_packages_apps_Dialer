@@ -59,7 +59,6 @@ import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
-import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.DialerUtils;
@@ -156,7 +155,8 @@ public class CallDetailActivity extends AppCompatActivity
                     PhoneNumberUtil.canPlaceCallsTo(mNumber, mDetails.numberPresentation);
             mCallButton.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
             mCopyNumberActionItem.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
-            mBlockNumberActionItem.setVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
+
+            updateBlockActionItemVisibility(canPlaceCallsTo ? View.VISIBLE : View.GONE);
 
             final boolean isSipNumber = PhoneNumberUtil.isSipNumber(mNumber);
             final boolean isVoicemailNumber =
@@ -277,7 +277,9 @@ public class CallDetailActivity extends AppCompatActivity
             }
         });
 
+
         mBlockNumberActionItem = (TextView) findViewById(R.id.call_detail_action_block);
+        updateBlockActionItemVisibility(View.VISIBLE);
         mBlockNumberActionItem.setOnClickListener(this);
         mEditBeforeCallActionItem = findViewById(R.id.call_detail_action_edit_before_call);
         mEditBeforeCallActionItem.setOnClickListener(this);
@@ -290,6 +292,13 @@ public class CallDetailActivity extends AppCompatActivity
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
             closeSystemDialogs();
         }
+    }
+
+    private void updateBlockActionItemVisibility(int visibility) {
+        if (!FilteredNumberCompat.canAttemptBlockOperations(mContext)) {
+            visibility = View.GONE;
+        }
+        mBlockNumberActionItem.setVisibility(visibility);
     }
 
     @Override
@@ -468,8 +477,6 @@ public class CallDetailActivity extends AppCompatActivity
             mBlockNumberActionItem.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     R.drawable.ic_call_detail_unblock, 0, 0, 0);
         }
-
-        mBlockNumberActionItem.setVisibility(View.VISIBLE);
     }
 
     private void closeSystemDialogs() {
