@@ -94,22 +94,21 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
             target.add(phoneAccountSettingsHeader);
         }
-        if (isPrimaryUser) {
+        if (FilteredNumberCompat.canCurrentUserOpenBlockSettings(this)) {
             Header blockedCallsHeader = new Header();
             blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
             blockedCallsHeader.intent = FilteredNumberCompat.createManageBlockedNumbersIntent(this);
             target.add(blockedCallsHeader);
-
-            if (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)
-                    || TelephonyManagerCompat
-                    .isHearingAidCompatibilitySupported(telephonyManager)) {
-                Header accessibilitySettingsHeader = new Header();
-                Intent accessibilitySettingsIntent =
-                        new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
-                accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
-                accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
-                target.add(accessibilitySettingsHeader);
-            }
+        }
+        if (isPrimaryUser
+                && (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)
+                || TelephonyManagerCompat.isHearingAidCompatibilitySupported(telephonyManager))) {
+            Header accessibilitySettingsHeader = new Header();
+            Intent accessibilitySettingsIntent =
+                    new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
+            accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
+            accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
+            target.add(accessibilitySettingsHeader);
         }
     }
 

@@ -55,7 +55,6 @@ import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
-import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.service.ExtendedBlockingButtonRenderer;
@@ -346,7 +345,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     .setOnMenuItemClickListener(this);
         }
 
-        if (FilteredNumbersUtil.canBlockNumber(mContext, number, countryIso)) {
+        if (FilteredNumberCompat.canAttemptBlockOperations(mContext)
+                && FilteredNumbersUtil.canBlockNumber(mContext, number, countryIso)) {
             mFilteredNumberAsyncQueryHandler.isBlockedNumber(
                     new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
                         @Override

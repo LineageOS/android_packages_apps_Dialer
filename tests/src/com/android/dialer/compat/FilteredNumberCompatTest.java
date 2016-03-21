@@ -18,19 +18,20 @@ package com.android.dialer.compat;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.UserManager;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.DialerApplication;
@@ -41,7 +42,6 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -225,6 +225,54 @@ public class FilteredNumberCompatTest extends AndroidTestCase {
         assertFalse(new ComponentName(getContext(), BlockedNumbersSettingsActivity.class)
                 .equals(FilteredNumberCompat.createManageBlockedNumbersIntent(getContext())
                         .getComponent()));
+    }
+
+    public void testCanCurrentUserOpenBlockSettings_M_SecondaryUser() {
+        if (CompatUtils.isNCompatible()) {
+            return;
+        }
+        UserManager userManager = mock(UserManager.class);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(userManager);
+        when(userManager.isSystemUser()).thenReturn(false);
+        assertFalse(FilteredNumberCompat.canCurrentUserOpenBlockSettings(mContext));
+        verify(mContext).getSystemService(Context.USER_SERVICE);
+        verify(userManager).isSystemUser();
+    }
+
+    public void testCanCurrentUserOpenBlockSettings_M_PrimaryUser() {
+        if (CompatUtils.isNCompatible()) {
+            return;
+        }
+        UserManager userManager = mock(UserManager.class);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(userManager);
+        when(userManager.isSystemUser()).thenReturn(true);
+        assertTrue(FilteredNumberCompat.canCurrentUserOpenBlockSettings(mContext));
+        verify(mContext).getSystemService(Context.USER_SERVICE);
+        verify(userManager).isSystemUser();
+    }
+
+    public void testCanAttemptBlockOperations_M_SecondaryUser() {
+        if (CompatUtils.isNCompatible()) {
+            return;
+        }
+        UserManager userManager = mock(UserManager.class);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(userManager);
+        when(userManager.isSystemUser()).thenReturn(false);
+        assertFalse(FilteredNumberCompat.canAttemptBlockOperations(mContext));
+        verify(mContext).getSystemService(Context.USER_SERVICE);
+        verify(userManager).isSystemUser();
+    }
+
+    public void testCanAttemptBlockOperations_M_PrimaryUser() {
+        if (CompatUtils.isNCompatible()) {
+            return;
+        }
+        UserManager userManager = mock(UserManager.class);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(userManager);
+        when(userManager.isSystemUser()).thenReturn(true);
+        assertTrue(FilteredNumberCompat.canAttemptBlockOperations(mContext));
+        verify(mContext).getSystemService(Context.USER_SERVICE);
+        verify(userManager).isSystemUser();
     }
 
     private ContentValues newExpectedContentValuesM(String number, String e164Number,
