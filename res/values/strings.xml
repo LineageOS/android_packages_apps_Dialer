@@ -598,18 +598,18 @@
         Calls from this number will be blocked, but the caller may still be able to leave you voicemails.
     </string>
 
+    <!-- Confirmation dialog message for blocking a number with new filtering enabled.
+         [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_message_new_filtering">
+        You will no longer receive calls or texts from this number.
+    </string>
+
     <!-- Block number alert dialog button [CHAR LIMIT=32] -->
     <string name="block_number_ok">BLOCK</string>
 
     <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
     <string name="unblock_number_confirmation_title">Unblock
         <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
-
-    <!-- Confirmation dialog message for unblocking a number.
-         [CHAR LIMIT=NONE] -->
-    <string name="unblock_number_confirmation_message">
-         This number will no longer be blocked from calling you.
-    </string>
 
     <!-- Unblock number alert dialog button [CHAR LIMIT=32] -->
     <string name="unblock_number_ok">UNBLOCK</string>
