@@ -127,16 +127,21 @@ public class BlockedNumbersFragment extends ListFragment
             getListView().findViewById(R.id.add_number_linear_layout).setVisibility(View.GONE);
             getListView().findViewById(R.id.add_number_linear_layout).setOnClickListener(null);
             mBlockedNumberListDivider.setVisibility(View.INVISIBLE);
-        }
 
-        FilteredNumbersUtil.checkForSendToVoicemailContact(
-            getActivity(), new CheckForSendToVoicemailContactListener() {
-                @Override
-                public void onComplete(boolean hasSendToVoicemailContact) {
-                    final int visibility = hasSendToVoicemailContact ? View.VISIBLE : View.GONE;
-                    mImportSettings.setVisibility(visibility);
-                }
-            });
+            mImportSettings.setSystemUiVisibility(View.GONE);
+            getListView().findViewById(R.id.import_button).setOnClickListener(null);
+            getListView().findViewById(R.id.view_numbers_button).setOnClickListener(null);
+        } else {
+            FilteredNumbersUtil.checkForSendToVoicemailContact(
+                    getActivity(), new CheckForSendToVoicemailContactListener() {
+                        @Override
+                        public void onComplete(boolean hasSendToVoicemailContact) {
+                            final int visibility =
+                                    hasSendToVoicemailContact ? View.VISIBLE : View.GONE;
+                            mImportSettings.setVisibility(visibility);
+                        }
+                    });
+        }
 
         if (FilteredNumbersUtil.hasRecentEmergencyCall(getContext())) {
             mBlockedNumbersDisabledForEmergency.setVisibility(View.VISIBLE);
