@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
@@ -156,13 +157,15 @@ public class BlockNumberDialogFragment extends DialogFragment {
                     R.string.unblock_number_confirmation_title,
                     mDisplayNumber);
             okText = getString(R.string.unblock_number_ok);
-            message = getString(R.string.unblock_number_confirmation_message);
+            message = "";
         } else {
             title = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                     R.string.block_number_confirmation_title,
                     mDisplayNumber);
             okText = getString(R.string.block_number_ok);
-            if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
+            if (FilteredNumberCompat.useNewFiltering()) {
+                message = getString(R.string.block_number_confirmation_message_new_filtering);
+            } else if (mVoicemailEnabledChecker.isVisualVoicemailEnabled()) {
                 message = getString(R.string.block_number_confirmation_message_vvm);
             } else {
                 message = getString(R.string.block_number_confirmation_message_no_vvm);
