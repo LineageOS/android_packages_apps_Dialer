@@ -15,12 +15,20 @@
  */
 package com.android.dialer.filterednumber;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+
+import android.content.Context;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.test.mocks.ContactsMockContext;
 import com.android.contacts.common.test.mocks.MockContentProvider.Query;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
@@ -31,10 +39,10 @@ public class FilteredNumbersUtilTest extends AndroidTestCase {
     private static final String COUNTRY_ISO = "US";
 
     // Wed Nov 11 2015 15:00:00
-    private static final long EARLIER_TIME = 1447282800000l;
+    private static final long EARLIER_TIME = 1447282800000L;
 
     // Wed Nov 11 2015 15:01:40
-    private static final long LATER_TIME = 1447282900000l;
+    private static final long LATER_TIME = 1447282900000L;
 
     private static final String[] FILTERED_NUMBER_PROJECTION = new String[] {
             FilteredNumberColumns.CREATION_TIME };
@@ -96,6 +104,18 @@ public class FilteredNumbersUtilTest extends AndroidTestCase {
                 .apply();
         assertFalse(FilteredNumbersUtil.shouldBlockVoicemail(mContext, NORMALIZED_NUMBER,
                 COUNTRY_ISO, 0));
+    }
+
+    public void testMaybeNotifyCallBlockingDisabled_Migrated() {
+        if (!CompatUtils.isNCompatible()) {
+            return;
+        }
+        FilteredNumberCompat.setIsEnabledForTest(true);
+        FilteredNumberCompat.setHasMigratedToNewBlocking(true);
+        Context mockContext = mock(Context.class);
+
+        FilteredNumbersUtil.maybeNotifyCallBlockingDisabled(mockContext);
+        verifyZeroInteractions(mockContext);
     }
 
     private void setupShouldBlockVoicemailQuery(long creationTimeMs) {

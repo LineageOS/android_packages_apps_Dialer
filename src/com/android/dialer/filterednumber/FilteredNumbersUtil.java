@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.R;
+import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
@@ -298,6 +299,10 @@ public class FilteredNumbersUtil {
     }
 
     public static void maybeNotifyCallBlockingDisabled(final Context context) {
+        // The Dialer is not responsible for this notification after migrating
+        if (FilteredNumberCompat.useNewFiltering()) {
+            return;
+        }
         // Skip if the user has already received a notification for the most recent emergency call.
         if (PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, false)) {
