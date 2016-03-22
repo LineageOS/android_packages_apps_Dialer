@@ -178,6 +178,9 @@ public class CallLogAdapter extends GroupingListAdapter
             } else {
                 if (viewHolder.callType == CallLog.Calls.MISSED_TYPE) {
                     CallLogAsyncTaskUtil.markCallAsRead(mContext, viewHolder.callIds);
+                    if (mActivityType == ACTIVITY_TYPE_DIALTACTS) {
+                        ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
+                    }
                 }
                 expandViewHolderActions(viewHolder);
             }
@@ -522,10 +525,7 @@ public class CallLogAdapter extends GroupingListAdapter
         details.features = getCallFeatures(c, count);
         details.geocode = c.getString(CallLogQuery.GEOCODED_LOCATION);
         details.transcription = c.getString(CallLogQuery.TRANSCRIPTION);
-        if (details.callTypes[0] == CallLog.Calls.VOICEMAIL_TYPE ||
-                details.callTypes[0] == CallLog.Calls.MISSED_TYPE) {
-            details.isRead = c.getInt(CallLogQuery.IS_READ) == 1;
-        }
+        details.callTypes = getCallTypes(c, count);
 
         if (!c.isNull(CallLogQuery.DATA_USAGE)) {
             details.dataUsage = c.getLong(CallLogQuery.DATA_USAGE);
