@@ -84,6 +84,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         void onPlaybackStopped();
         void onSpeakerphoneOn(boolean on);
         void setClipPosition(int clipPositionInMillis, int clipLengthInMillis);
+        void setSuccess();
         void setFetchContentTimeout();
         void setIsFetchingContent();
         void onVoicemailArchiveSucceded(Uri voicemailUri);
@@ -606,6 +607,7 @@ public class VoicemailPlaybackPresenter implements MediaPlayer.OnPreparedListene
         Log.d(TAG, "onPrepared: mPosition=" + mPosition);
         mView.setClipPosition(mPosition, mDuration.get());
         mView.enableUiElements();
+        mView.setSuccess();
         mMediaPlayer.seekTo(mPosition);
 
         if (mIsPlaying) {
