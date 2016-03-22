@@ -30,11 +30,14 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.TelecomManagerUtil;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.DialerApplication;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.database.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumber;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberSources;
@@ -45,7 +48,6 @@ import com.android.dialer.filterednumber.BlockedNumbersMigrator;
 import com.android.dialer.filterednumber.BlockedNumbersSettingsActivity;
 import com.android.dialer.filterednumber.MigrateBlockedNumbersDialogFragment;
 import com.android.dialerbind.ObjectFactory;
-import com.android.incallui.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -257,18 +259,10 @@ public class FilteredNumberCompat {
         if (shouldShowMigrationDialog(blockId == null)) {
             Log.i(TAG, "showBlockNumberDialogFlow - showing migration dialog");
             MigrateBlockedNumbersDialogFragment
-                    .newInstance(new BlockedNumbersMigrator(contentResolver),
-                            new BlockedNumbersMigrator.Listener() {
-                                @Override
-                                public void onComplete() {
-                                    Log.i(TAG, "showBlockNumberDialogFlow - listener showing block "
-                                            + "number dialog");
-                                    BlockNumberDialogFragment
-                                            .show(null, number, countryIso, displayNumber,
-                                                    parentViewId,
-                                                    fragmentManager, callback);
-                                }
-                            }).show(fragmentManager, "MigrateBlockedNumbers");
+                    .newInstance(new BlockedNumbersMigrator(contentResolver), newMigrationListener(
+                            DialerApplication.getContext().getContentResolver(), number, countryIso,
+                            displayNumber, parentViewId, fragmentManager, callback))
+                    .show(fragmentManager, "MigrateBlockedNumbers");
             return;
         }
         Log.i(TAG, "showBlockNumberDialogFlow - showing block number dialog");
@@ -279,6 +273,43 @@ public class FilteredNumberCompat {
 
     private static boolean shouldShowMigrationDialog(boolean isBlocking) {
         return isBlocking && canUseNewFiltering() && !hasMigratedToNewBlocking();
+    }
+
+    private static BlockedNumbersMigrator.Listener newMigrationListener(
+            final ContentResolver contentResolver, final String number, final String countryIso,
+            final String displayNumber, final Integer parentViewId,
+            final FragmentManager fragmentManager, @Nullable final Callback callback) {
+        return new BlockedNumbersMigrator.Listener() {
+            @Override
+            public void onComplete() {
+                Log.i(TAG, "showBlockNumberDialogFlow - listener showing block number dialog");
+                if (!hasMigratedToNewBlocking()) {
+                    Log.i(TAG, "showBlockNumberDialogFlow - migration failed");
+                    return;
+                }
+                /*
+                 * Edge case to cover here: if the user initiated the migration workflow with a
+                 * number that's already blocked in the framework, don't show the block number
+                 * dialog. Doing so would allow them to block the same number twice, causing a
+                 * crash.
+                 */
+                new FilteredNumberAsyncQueryHandler(contentResolver).isBlockedNumber(
+                        new OnCheckBlockedListener() {
+                            @Override
+                            public void onCheckComplete(Integer id) {
+                                if (id != null) {
+                                    Log.i(TAG,
+                                            "showBlockNumberDialogFlow - number already blocked");
+                                    return;
+                                }
+                                Log.i(TAG, "showBlockNumberDialogFlow - need to block number");
+                                BlockNumberDialogFragment
+                                        .show(null, number, countryIso, displayNumber, parentViewId,
+                                                fragmentManager, callback);
+                            }
+                        }, number, countryIso);
+            }
+        };
     }
 
     /**
