@@ -981,8 +981,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
             if (mInRegularSearch) {
                 mRegularSearchFragment.updateCallCreditInfo();
+                mRegularSearchFragment.updateCoachMarkDrawable();
             } else {
                 mSmartDialSearchFragment.updateCallCreditInfo();
+                mSmartDialSearchFragment.updateCoachMarkDrawable();
             }
         }
     }

@@ -174,14 +174,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
             listView.setOnTouchListener(mActivityOnTouchListener);
         }
 
-        DialtactsActivity da = (DialtactsActivity) mActivity;
-        if (da != null && da.isInSearchUi()) {
-
-            String unFormattedString = getString(R.string.provider_search_help);
-            CoachMarkDrawableHelper.assignViewTreeObserverWithHeight(parentView, da,
-                    da.getSearchTextLayout(), mActivity.getActionBarHeight(), true,
-                    da.getSearchEditText(), unFormattedString, 0.8f);
-        }
+        updateCoachMarkDrawable();
 
         updatePosition(false /* animate */);
     }
@@ -224,6 +217,17 @@ public class SearchFragment extends PhoneNumberPickerFragment
 
     public void setAddToContactNumber(String addToContactNumber) {
         mAddToContactNumber = addToContactNumber;
+    }
+
+    public void updateCoachMarkDrawable() {
+        DialtactsActivity da = (DialtactsActivity) mActivity;
+        if (da != null && da.isInSearchUi()) {
+
+            String unFormattedString = getString(R.string.provider_search_help);
+            CoachMarkDrawableHelper.assignViewTreeObserverWithHeight(getView(), da,
+                    da.getSearchTextLayout(), mActivity.getActionBarHeight(), true,
+                    da.getSearchEditText(), unFormattedString, 0.8f);
+        }
     }
 
     /**

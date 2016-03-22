@@ -59,6 +59,8 @@ public class CoachMarkDrawableHelper {
                             unformatted, touch, pref, cmi, 1.0f);
                 }
             });
+        } else {
+            main.getOverlay().clear();
         }
     }
 
@@ -81,6 +83,8 @@ public class CoachMarkDrawableHelper {
                             touch, pref, cmi, fontWidthScale);
                 }
             });
+        } else {
+            main.getOverlay().clear();
         }
     }
 
