@@ -47,6 +47,7 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
     private static final String NUMBER = "6502530000";
     private static final String COUNTRY_ISO = "US";
     private static final Integer ID = 1;
+    private static final Integer ID2 = 2;
     private static final Uri BLOCKED_NUMBER_URI_N = CompatUtils.isNCompatible() ?
             Uri.withAppendedPath(BlockedNumberContract.AUTHORITY_URI, "blocked") : null;
     private static final Uri BLOCKED_NUMBER_URI_M =
@@ -173,6 +174,26 @@ public class FilteredNumberAsyncQueryHandlerTest extends InstrumentationTestCase
                         .isBlockedNumber(listener, NUMBER, COUNTRY_ISO);
            }
         });
+        assertEquals(ID, listener.waitForCallback());
+        mContentProvider.verify();
+    }
+
+    public void testIsBlockedNumber_MultipleResults() throws Throwable {
+        if (CompatUtils.isNCompatible()) {
+            newIsBlockedNumberExpectedQuery().returnRow(ID).returnRow(ID2);
+        } else {
+            newIsBlockedNumberExpectedQuery().returnRow(ID, FilteredNumberTypes.BLOCKED_NUMBER)
+                    .returnRow(ID2, FilteredNumberTypes.BLOCKED_NUMBER);
+        }
+        final CheckBlockedListener listener = new CheckBlockedListener();
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new FilteredNumberAsyncQueryHandler(mContentResolver)
+                        .isBlockedNumber(listener, NUMBER, COUNTRY_ISO);
+            }
+        });
+        // When there are multiple matches, the first is returned
         assertEquals(ID, listener.waitForCallback());
         mContentProvider.verify();
     }

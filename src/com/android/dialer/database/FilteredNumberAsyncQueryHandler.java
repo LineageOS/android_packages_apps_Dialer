@@ -158,7 +158,13 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 new Listener() {
                     @Override
                     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                        if (cursor == null || cursor.getCount() != 1) {
+                        /*
+                         * In the frameworking blocking, numbers can be blocked in both e164 format
+                         * and not, resulting in multiple rows being returned for this query. For
+                         * example, both '16502530000' and '6502530000' can exist at the same time
+                         * and will be returned by this query.
+                         */
+                        if (cursor == null || cursor.getCount() == 0) {
                             listener.onCheckComplete(null);
                             return;
                         }
