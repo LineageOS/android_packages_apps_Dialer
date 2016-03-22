@@ -499,7 +499,7 @@ public class FillCallLogTestActivity extends Activity {
 
         Calls.addCall(null, this, mPhoneNumber.getText().toString(), getManualPresentation(),
                 getManualCallType(), features, getManualAccount(),
-                dateTime.getTimeInMillis(), RNG.nextInt(60 * 60), dataUsage);
+                dateTime.getTimeInMillis(), RNG.nextInt(60 * 60), dataUsage, null);
 
         // Subtract offset from the call date/time and store as new date/time
         int offset = Integer.parseInt(mOffset.getText().toString());
