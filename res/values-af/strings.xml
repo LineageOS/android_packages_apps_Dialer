@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokkeer <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Oproepe van hierdie nommer af sal geblokkeer word en stemboodskappe sal outomaties uitgevee word."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Oproepe van hierdie nommer af sal geblokkeer word, maar die beller sal dalk steeds vir jou stemboodskappe kan los."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"BLOKKEER"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Deblokkeer <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Hierdie nommer sal nie meer geblokkeer word om jou te bel nie."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"DEBLOKKEER"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Spoedbel"</string>
     <string name="tab_history" msgid="2563144697322434940">"Oproepgeskiedenis"</string>

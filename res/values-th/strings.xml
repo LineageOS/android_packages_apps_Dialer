@@ -166,9 +166,9 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"บล็อก <xliff:g id="NUMBER">%1$s</xliff:g> ไหม"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ระบบจะบล็อกสายเรียกเข้าจากหมายเลขนี้และลบข้อความเสียงโดยอัตโนมัติ"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ระบบจะบล็อกสายเรียกเข้าจากหมายเลขนี้ แต่ผู้โทรอาจยังฝากข้อความเสียงถึงคุณได้อยู่"</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"คุณจะไม่ได้รับสายเรียกเข้าหรือข้อความจากหมายเลขนี้อีก"</string>
     <string name="block_number_ok" msgid="770551992296781873">"บล็อก"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"เลิกบล็อก <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"หมายเลขนี้จะไม่ถูกบล็อกจากการโทรหาคุณอีกต่อไป"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"เลิกบล็อก"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"การโทรด่วน"</string>
     <string name="tab_history" msgid="2563144697322434940">"ประวัติการโทร"</string>

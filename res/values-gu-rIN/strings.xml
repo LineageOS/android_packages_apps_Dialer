@@ -166,9 +166,9 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધિત કરીએ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે અને વૉઇસમેઇલ્સ આપમેળે કાઢી નાખવામાં આવશે."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"આ નંબરથી આવનારા કૉલ્સ અવરોધિત કરવામાં આવશે, પરંતુ કૉલર હજી પણ તમારા માટે વૉઇસમેઇલ્સ મૂકવામાં સમર્થ હોઈ શકે છે."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"તમે હવે આ નંબરથી કૉલ્સ અથવા ટેક્સ્ટ પ્રાપ્ત કરશો નહીં."</string>
     <string name="block_number_ok" msgid="770551992296781873">"અવરોધિત કરો"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અનાવરોધિત કરીએ?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"આ નંબરને હવે તમને કૉલ કરવાથી અવરોધિત કરવામાં આવશે નહીં."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"અનાવરોધિત કરો"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"સ્પીડ ડાયલ"</string>
     <string name="tab_history" msgid="2563144697322434940">"કૉલ ઇતિહાસ"</string>

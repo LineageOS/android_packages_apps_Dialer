@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ബ്ലോക്കുചെയ്യണോ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ഈ നമ്പറിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ഈ നമ്പറിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, എന്നാൽ വിളിക്കുന്നയാൾക്ക് അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്‌മെയിലുകൾ അയയ്ക്കാൻ കഴിഞ്ഞേക്കാം."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"ബ്ലോക്കുചെയ്യുക"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> അൺബ്ലോക്കുചെയ്യണോ?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"നിങ്ങളെ വിളിക്കുന്നതിൽ നിന്ന് ഈ നമ്പർ തുടർന്നങ്ങോട്ട് ബ്ലോക്കുചെയ്യപ്പെടില്ല."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"അൺബ്ലോക്കുചെയ്യുക"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"സ്‌പീഡ് ഡയൽ"</string>
     <string name="tab_history" msgid="2563144697322434940">"കോൾ ചരിത്രം"</string>

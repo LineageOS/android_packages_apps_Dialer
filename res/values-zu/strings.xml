@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Vimba <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Amakholi wangakusasa kusuka kule nombolo azovinyelwa futhi amavoyisimeyili azosuswa ngokuzenzakalela."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Amakholi kusuka kule nombolo azovinjwa, kodwa inkampani yenenethiwekhi ingakwazi ukukushiyela amavoyisimeyili."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"VIMBA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Vulela i-<xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Le nombolo ngeke isavinjwa kusuka ekukushayeleni."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"VULELA"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Ukudayela okusheshayo"</string>
     <string name="tab_history" msgid="2563144697322434940">"Umlando wekholi"</string>

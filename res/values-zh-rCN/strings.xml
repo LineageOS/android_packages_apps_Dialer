@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"要屏蔽 <xliff:g id="NUMBER">%1$s</xliff:g> 吗？"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"系统将屏蔽该号码的来电，并将自动删除来电者发送的语音邮件。"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"系统将屏蔽该号码的来电，但来电者可能仍然能够给您发送语音邮件。"</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"屏蔽"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"要取消屏蔽 <xliff:g id="NUMBER">%1$s</xliff:g> 吗？"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"系统将不再屏蔽此号码的来电。"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"取消屏蔽"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速拨号"</string>
     <string name="tab_history" msgid="2563144697322434940">"通话记录"</string>

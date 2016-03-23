@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>번을 차단할까요?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"이 번호에서 걸려오는 전화가 차단되며 음성사서함이 자동으로 삭제됩니다."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"이 번호에서 걸려오는 전화가 차단되지만, 발신자가 음성사서함에 메시지를 남길 수는 있습니다."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"차단"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>번을 차단 해제할까요?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"이 번호가 더 이상 내게 전화하는 것을 차단하지 않습니다."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"차단 해제"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"단축번호"</string>
     <string name="tab_history" msgid="2563144697322434940">"통화 기록"</string>

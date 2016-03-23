@@ -167,9 +167,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು, ಆದರೆ ಕರೆಮಾಡುವವರು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಈಗಲೂ ನಿಮಗೆ ಕಳುಹಿಸಬಹುದು."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"ನಿರ್ಬಂಧಿಸು"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧ ತೆಗೆಯುವುದೇ?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ನಿಮಗೆ ಕರೆ ಮಾಡುವಿಕೆಯ ಈ ಸಂಖ್ಯೆಯನ್ನು ಇನ್ನು ಮುಂದೆ ನಿರ್ಬಂಧಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ನಿರ್ಬಂಧ ತೆಗೆ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_history" msgid="2563144697322434940">"ಕರೆ ಇತಿಹಾಸ"</string>
