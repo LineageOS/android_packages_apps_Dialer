@@ -166,9 +166,9 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Vols bloquejar el número <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Es bloquejaran les trucades d\'aquest número i els missatges de veu se suprimiran automàticament."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Es bloquejaran les trucades d\'aquest número, però és possible que continuïn deixant-te missatges de veu."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Deixaràs de rebre trucades i missatges de text d\'aquest número."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOQUEJA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Vols desbloquejar el número <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Les trucades d\'aquest número deixaran d\'estar bloquejades."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"DESBLOQUEJA"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Marcatge ràpid"</string>
     <string name="tab_history" msgid="2563144697322434940">"Historial de trucades"</string>

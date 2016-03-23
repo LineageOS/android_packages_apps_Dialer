@@ -106,7 +106,7 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ongeza simu"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Unapigiwa simu"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Simu unayopiga"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Simu isiyojibiwa"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Simu uliyokosa"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Hangout ya Video inayoingia"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Hangout ya Video inayotoka"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Hangout ya Video ambayo haikupokewa"</string>
@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Ungependa kuzuia <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Simu zinazopigwa kutoka nambari hii zitazuiwa na ujumbe wa sauti utafutwa kiotomatiki."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Simu zinazopigwa kutoka nambari hii zitazuiwa, lakini mpigaji bado anaweza kukutumia ujumbe wa sauti."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"ZUIA"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Ungependa kuondoa kizuizi kwenye <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Simu kutoka kwenye nambari hii hazitazuiwa tena."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ONDOA KIZUIZI"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Unaowasiliana nao zaidi"</string>
     <string name="tab_history" msgid="2563144697322434940">"Rekodi ya Simu Zilizopigwa"</string>

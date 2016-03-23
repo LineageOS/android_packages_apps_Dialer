@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Chặn <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Các cuộc gọi từ số này sẽ bị chặn và thư thoại sẽ tự động bị xóa."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Các cuộc gọi từ số này sẽ bị chặn nhưng người gọi vẫn có thể để lại thư thoại cho bạn."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"CHẶN"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Bỏ chặn <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Số này sẽ không còn bị chặn gọi cho bạn nữa."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"BỎ CHẶN"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Quay số nhanh"</string>
     <string name="tab_history" msgid="2563144697322434940">"Nhật ký cuộc gọi"</string>

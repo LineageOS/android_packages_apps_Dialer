@@ -167,9 +167,9 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Želite li da blokirate <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Pozivi sa ovog broja će biti blokirani i poruke govorne pošte će se automatski brisati."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Pozivi sa ovog broja će biti blokirani, ali pozivalac i dalje može da vam ostavlja poruke govorne pošte."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Više nećete primati pozive ni SMS-ove sa ovog broja."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKIRAJ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Želite li da deblokirate <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Deblokiraćemo ovaj broj i moći će da vam upućuje pozive."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"DEBLOKIRAJ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Brzo biranje"</string>
     <string name="tab_history" msgid="2563144697322434940">"Istorija poziva"</string>

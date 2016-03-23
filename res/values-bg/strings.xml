@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Да се блокира ли <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Обажданията от този номер ще бъдат блокирани, а гласовите съобщения – автоматично изтривани."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Обажданията от този номер ще бъдат блокирани, но обаждащият се пак може да е в състояние да ви оставя гласови съобщения."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"БЛОКИРАНЕ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Да се отблокира ли <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Този номер вече няма да е блокиран за извършване на обаждания до вас."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ОТБЛОКИРАНЕ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Бързо набиране"</string>
     <string name="tab_history" msgid="2563144697322434940">"История на обажданията"</string>

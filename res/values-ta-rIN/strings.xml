@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐத் தடுக்கவா?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"இந்த எண்ணின் அழைப்புகள் தடுக்கப்படுவதுடன், அதன் குரலஞ்சல்களும் தானாகவே நீக்கப்படும்."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"இந்த எண்ணின் அழைப்புகள் தடுக்கப்படும், ஆனால் அழைப்பாளரால் இன்னமும் உங்களுக்குக் குரலஞ்சல்களை அனுப்ப முடியும்."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"தடு"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>ஐ அனுமதிக்கவா?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"இனி உங்களை அழைக்க இந்த எண் அனுமதிக்கப்படும்."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"அனுமதி"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"விரைவு டயல்"</string>
     <string name="tab_history" msgid="2563144697322434940">"அழைப்பு வரலாறு"</string>

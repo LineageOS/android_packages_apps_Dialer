@@ -168,9 +168,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Hovory z tohto čísla budú blokované a hlasové správy budú automaticky odstraňované."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Hovory z tohto čísla budú zablokované, ale volajúci stále môže zanechať hlasové správy."</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"BLOKOVAŤ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Odblokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Prichádzajúce hovory z tohto čísla už nebudú blokované."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ODBLOKOVAŤ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Rýchla voľba"</string>
     <string name="tab_history" msgid="2563144697322434940">"História hovorov"</string>

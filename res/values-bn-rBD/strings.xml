@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে, কিন্তু কলার হয়ত এখনও আপনাকে ভয়েসমেলগুলি পাঠাতে পারবে৷"</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"অবরোধ করুন"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করবেন?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"আপনাকে কল করার জন্য এই নম্বরটি আর অবরুদ্ধ হিসাবে থাকবে না৷"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"অবরোধ মুক্ত করুন"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"দ্রুত ডায়াল"</string>
     <string name="tab_history" msgid="2563144697322434940">"পুরোনো কলের তালিকা"</string>

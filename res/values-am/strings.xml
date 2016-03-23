@@ -166,9 +166,10 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ይታገድ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ከዚህ ቁጥር የሚመጡ ጥሪዎች ይታገዳሉ፣ እና የድምጽ መልዕክቶች በራስ-ሰር ይሰረዛሉ።"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ከዚህ ቁጥር የሚመጡ ጥሪዎች ይታገዳሉ፣ ነገር ግን ደዋዩ አሁንም የድምጽ መልዕክቶችን ሊተዉልዎ ይችላል።"</string>
+    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
+    <skip />
     <string name="block_number_ok" msgid="770551992296781873">"አግድ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"የ<xliff:g id="NUMBER">%1$s</xliff:g> እግድ ይነሳ?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"ይህ ቁጥር ከአሁን በኋላ ወደ እርስዎ ከመደወል አይታገድም።"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"እገዳ አንሳ"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ፈጣን ደውል"</string>
     <string name="tab_history" msgid="2563144697322434940">"የጥሪ ታሪክ"</string>

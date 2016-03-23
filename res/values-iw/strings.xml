@@ -168,9 +168,9 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"האם לחסום את המספר <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"שיחות ממספר זה ייחסמו והודעות דואר קולי יימחקו באופן אוטומטי."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"שיחות ממספר זה ייחסמו, אבל המתקשר עדיין יוכל להשאיר לך הודעות דואר קולי."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"לא תקבל יותר שיחות או הודעות טקסט מהמספר הזה."</string>
     <string name="block_number_ok" msgid="770551992296781873">"חסום"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"האם לבטל את חסימת המספר <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"מספר זה כבר לא יהיה חסום ויוכל להתקשר אליך."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ביטול חסימה"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"חיוג מהיר"</string>
     <string name="tab_history" msgid="2563144697322434940">"היסטוריית שיחות"</string>
