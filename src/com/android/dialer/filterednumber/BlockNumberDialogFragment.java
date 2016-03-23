@@ -153,11 +153,11 @@ public class BlockNumberDialogFragment extends DialogFragment {
         String okText;
         String message;
         if (isBlocked) {
-            title = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
-                    R.string.unblock_number_confirmation_title,
-                    mDisplayNumber);
+            title = null;
             okText = getString(R.string.unblock_number_ok);
-            message = "";
+            message = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
+                    R.string.unblock_number_confirmation_title,
+                    mDisplayNumber).toString();
         } else {
             title = ContactDisplayUtils.getTtsSpannedPhoneNumber(getResources(),
                     R.string.block_number_confirmation_title,
