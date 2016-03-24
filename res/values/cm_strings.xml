@@ -169,4 +169,7 @@
 
     <string name="provider_voice_call">"%1$s voice call"</string>
     <string name="provider_video_call">"%1$s video call"</string>
+
+    <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+    <string name="cm_permission_place_call">To place a call, turn on Phone permissions.</string>
 </resources>

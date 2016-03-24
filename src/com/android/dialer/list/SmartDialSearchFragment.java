@@ -132,7 +132,7 @@ public class SmartDialSearchFragment extends SearchFragment
             if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
                 mEmptyView.setImage(R.drawable.empty_contacts);
                 mEmptyView.setActionLabel(R.string.permission_single_turn_on);
-                mEmptyView.setDescription(R.string.permission_place_call);
+                mEmptyView.setDescription(R.string.cm_permission_place_call);
                 mEmptyView.setSubMessage(null);
                 mEmptyView.setActionClickedListener(this);
             } else if (adapter.getCount() == 0) {
