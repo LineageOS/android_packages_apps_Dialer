@@ -42,7 +42,6 @@ import android.view.WindowManager;
 
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.compat.CompatUtils;
-import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.testing.NeededForTesting;
@@ -174,6 +173,9 @@ public class InCallPresenter implements CallList.Listener,
     private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         public void onCallStateChanged(int state, String incomingNumber) {
             if (state == TelephonyManager.CALL_STATE_RINGING) {
+                if (FilteredNumbersUtil.hasRecentEmergencyCall(mContext)) {
+                    return;
+                }
                 // Check if the number is blocked, to silence the ringer.
                 String countryIso = GeoUtil.getCurrentCountryIso(mContext);
                 mFilteredQueryHandler.isBlockedNumber(
@@ -496,10 +498,7 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     public void onCallAdded(final android.telecom.Call call) {
-        // Check if call should be blocked.
-        if (!TelecomCallUtil.isEmergencyCall(call)
-                && !FilteredNumbersUtil.hasRecentEmergencyCall(mContext)
-                && call.getState() == android.telecom.Call.STATE_RINGING) {
+        if (shouldAttemptBlocking(call)) {
             maybeBlockCall(call);
         } else {
             mCallList.onCallAdded(call);
@@ -508,6 +507,22 @@ public class InCallPresenter implements CallList.Listener,
         // Since a call has been added we are no longer waiting for Telecom to send us a call.
         setBoundAndWaitingForOutgoingCall(false, null);
         call.registerCallback(mCallCallback);
+    }
+
+    private boolean shouldAttemptBlocking(android.telecom.Call call) {
+        if (call.getState() != android.telecom.Call.STATE_RINGING) {
+            return false;
+        }
+        if (TelecomCallUtil.isEmergencyCall(call)) {
+            Log.i(this, "Not attempting to block incoming emergency call");
+            return false;
+        }
+        if (FilteredNumbersUtil.hasRecentEmergencyCall(mContext)) {
+            Log.i(this, "Not attempting to block incoming call due to recent emergency call");
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -548,8 +563,8 @@ public class InCallPresenter implements CallList.Listener,
                         mCallList.onCallAdded(call);
                     }
                 } else {
+                    Log.i(this, "Rejecting incoming call from blocked number");
                     call.reject(false, null);
-                    Log.d(this, "checkForBlockedCall: " + Log.pii(number) + " blocked.");
                     Logger.logInteraction(InteractionEvent.CALL_BLOCKED);
 
                     mFilteredQueryHandler.incrementFilteredCount(id);
