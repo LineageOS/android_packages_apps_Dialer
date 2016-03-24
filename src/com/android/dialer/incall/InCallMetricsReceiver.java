@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.CallLog;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
+import com.android.dialer.util.TelecomUtil;
 import com.cyanogen.ambient.incall.CallLogConstants;
 import com.android.dialer.incall.InCallMetricsHelper;
 import cyanogenmod.providers.CMSettings;
@@ -56,7 +57,10 @@ public class InCallMetricsReceiver extends IntentService {
         calendar.setTime(d);
         calendar.add(Calendar.DATE, -1);
         d.setTime(calendar.getTime().getTime());
-        lookupCallsSince(d.getTime(), getContentResolver());
+
+        if (TelecomUtil.hasReadPhoneStatus(getApplicationContext())) {
+            lookupCallsSince(d.getTime(), getContentResolver());
+        }
 
         // Send stored Incall Specific events
         if (CMSettings.Secure.getInt(getApplicationContext().getContentResolver(),
