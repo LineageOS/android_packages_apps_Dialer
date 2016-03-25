@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Gusto mo bang i-block ang <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Iba-block ang mga tawag mula sa numerong ito at awtomatikong ide-delete ang mga voicemail."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Iba-block ang mga tawag mula sa numerong ito, ngunit makakapag-iwan pa rin sa iyo ng mga voicemail ang tumatawag."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Hindi ka na makakatanggap ng mga tawag o text mula sa numerong ito."</string>
     <string name="block_number_ok" msgid="770551992296781873">"I-BLOCK"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Gusto mo bang alisin sa pagkaka-block ang <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ALISIN SA PAGKAKA-BLOCK"</string>

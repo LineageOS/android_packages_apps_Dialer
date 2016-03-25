@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеу керек пе?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Осы нөмірден болашақ қоңыраулар бөгеледі және дауыстық хабарлар автоматты түрде жойылады."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Осы нөмірден қоңыраулар бөгеледі, бірақ қоңырау шалушы әлі де сізге дауыстық хабарлар қалдыра алуы мүмкін."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Бұдан былай осы нөмірден қоңыраулар немесе мәтіндік хабарлар алмайсыз."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БӨГЕУ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеуден шығару керек пе?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"БӨГЕУДЕН ШЫҒАРУ"</string>

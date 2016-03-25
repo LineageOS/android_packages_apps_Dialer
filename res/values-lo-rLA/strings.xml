@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"ບ​ລັອກ <xliff:g id="NUMBER">%1$s</xliff:g> ບໍ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ການໂທຈາກເບີໂທນີ້ຈະຖືກບລັອກໄວ້ ແລະຂໍ້ຄວາມສຽງຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ການໂທຈາກເບີນີ້ຈະຖືກບລັອກໄວ້, ແຕ່ຜູ່ໂທອາດຈະຍັງສາມາດຝາກຂໍ້ຄວາມສຽງໃຫ້ທ່ານໄດ້."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"ທ່ານຈະບໍ່ໄດ້ຮັບສາຍ ຫຼື ຂໍ້ຄວາມຈາກເບີນີ້ອີກຕໍ່ໄປ."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ບລັອກ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ປົດ​ບ​ລັອກ <xliff:g id="NUMBER">%1$s</xliff:g> ບ​ໍ?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"​ປົດ​ບລັອກ"</string>

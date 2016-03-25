@@ -170,8 +170,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"سيتم حظر المكالمات الواردة من هذا الرقم كما سيتم تلقائيًا حذف الرسائل الصوتية."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"سيتم حظر المكالمات من هذا الرقم، إلا أنه سيظل بإمكان المتصل ترك رسائل صوتية."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"لن تتلقي المكالمات أو المراسلات النصية بعد الآن من هذا الرقم."</string>
     <string name="block_number_ok" msgid="770551992296781873">"حظر"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"هل تريد إزالة حظر <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"إلغاء الحظر"</string>
