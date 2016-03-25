@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import com.android.dialer.DialerApplication;
+import com.android.dialer.DialtactsActivity;
 import com.android.dialer.incall.InCallMetricsReceiver;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
@@ -23,15 +25,23 @@ public class InCallMetricsHelper {
     private static final String TAG = InCallMetricsHelper.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    private static final String CATEGORY_BASE = "dialernext.incall.";
-    private static final String METRICS_SHARED_PREFERENCES = "metrics_shared_preferences";
+    public static final String CATEGORY_BASE = "dialernext.incall.";
+    public static final String METRICS_SHARED_PREFERENCES = "metrics_shared_preferences";
     public static final String DELIMIT = ":";
 
+    static final int COMPONENT_NAME = 0;
+    static final int CATEGORY = 1;
+    static final int EVENT = 2;
+    static final int PARAMS = 3;
+    private static final int REGULAR_KEY = 4;
+    private static final int SHORT_KEY = 4;
+
+    // The TODO/Done flags denote which is convered by testing. These will be removed in the future.
     public enum Categories {
-        CALLS("CALLS"),
-        DISCOVERY_NUDGES("DISCOVERY_NUDGES"),
-        AUTHENTICATION("AUTHENTICATION"),
-        PROVIDER_STATE_CHANGE("PROVIDER_STATE_CHANGE"),
+        CALLS("CALLS"), //DONE
+        DISCOVERY_NUDGES("DISCOVERY_NUDGES"), // TODO
+        AUTHENTICATION("AUTHENTICATION"), // TODO
+        PROVIDER_STATE_CHANGE("PROVIDER_STATE_CHANGE"), //DONE
         INAPP_NUDGES("INAPP_NUDGES");
 
         private String mValue;
@@ -44,24 +54,20 @@ public class InCallMetricsHelper {
     }
 
     public enum Events {
-        NUDGE_EVENT_INTL("NUDGE_EVENT_INTL"),
-        NUDGE_EVENT_ROAMING("NUDGE_EVENT_ROAMING"),
-        CALL_PROVIDER_VIDEO("CALL_PROVIDER_VIDEO"),
-        CALL_PROVIDER_PSTN("CALL_PROVIDER_PSTN"),
-        CALL_PROVIDER_VOICE("CALL_PROVIDER_VOICE"),
-        CALL_SIM_PSTN("CALL_SIM_PSTN"),
-        AUTH_LOGIN("AUTH_LOGIN"),
-        AUTH_LOGOUT("AUTH_LOGOUT"),
-        PROVIDER_HIDDEN("PROVIDER_HIDDEN"),
-        PROVIDER_ENABLED("PROVIDER_ENABLED"),
-        PROVIDER_DISABLED("PROVIDER_DISABLED"),
-        PROVIDER_UNAVAILABLE("PROVIDER_UNAVAILABLE"),
-        CONTACTS_MERGED("CONTACTS_MERGED"),
-        INVITES_SENT("INVITES_SENT"),
-        INAPP_NUDGE_CONTACTS_LOGIN("INAPP_NUDGE_CONTACTS_LOGIN"),
-        INAPP_NUDGE_DIALER_WIFI("INAPP_NUDGE_DIALER_WIFI"),
-        INAPP_NUDGE_DIALER_ROAMING("INAPP_NUDGE_DIALER_ROAMING"),
-        INAPP_NUDGE_CONTACTS_INSTALL("INAPP_NUDGE_CONTACTS_INSTALL");
+        NUDGE_EVENT_INTL("NUDGE_EVENT_INTL"), // TODO
+        NUDGE_EVENT_ROAMING("NUDGE_EVENT_ROAMING"), // TODO
+        CALL_PROVIDER_VIDEO("CALL_PROVIDER_VIDEO"), //DONE
+        CALL_PROVIDER_PSTN("CALL_PROVIDER_PSTN"), //DONE
+        CALL_PROVIDER_VOICE("CALL_PROVIDER_VOICE"), //DONE
+        CALL_SIM_PSTN("CALL_SIM_PSTN"), //DONE
+        AUTH_LOGIN("AUTH_LOGIN"), // TODO
+        AUTH_LOGOUT("AUTH_LOGOUT"), // TODO
+        PROVIDER_HIDDEN("PROVIDER_HIDDEN"), //DONE
+        PROVIDER_ENABLED("PROVIDER_ENABLED"), //DONE
+        PROVIDER_DISABLED("PROVIDER_DISABLED"), //DONE
+        PROVIDER_UNAVAILABLE("PROVIDER_UNAVAILABLE"), //DONE
+        INAPP_NUDGE_DIALER_WIFI("INAPP_NUDGE_DIALER_WIFI"), // TODO
+        INAPP_NUDGE_DIALER_ROAMING("INAPP_NUDGE_DIALER_ROAMING"); // TODO
 
         private String mValue;
         Events(String s) {
@@ -73,16 +79,23 @@ public class InCallMetricsHelper {
     }
 
     public enum Parameters {
+        // NUDGES
         EVENT_ACCEPTANCE("EVENT_ACCEPTANCE"),
         EVENT_ATTEMPT_NUMBER("EVENT_ATTEMPT_NUMBER"),
         NUDGE_ID("NUDGE_ID"),
         NUDGE_COUNT("NUDGE_COUNT"),
+
+        // GENERIC
         PROVIDER_NAME("PROVIDER_NAME"),
         ACTION_LOCATION("ACTION_LOCATION"),
+
+        // CALLS
         OUTGOING_SUCCESS("OUTGOING_SUCCESS"),
         OUTGOING_FAIL("OUTGOING_FAIL"),
         OUTGOING_CONVERSIONS("OUTGOING_CONVERSIONS"),
         OUTGOING_TOTAL_DURATION("OUTGOING_TOTAL_DURATION"),
+
+        // COUNTS
         COUNT_AUTOMATIC("COUNT_AUTOMATIC"),
         COUNT_MANUAL("COUNT_MANUAL"),
         COUNT("COUNT"),
@@ -98,7 +111,7 @@ public class InCallMetricsHelper {
     }
 
     private static InCallMetricsHelper sInstance;
-    private DialerApplication mContext;
+    private Context mContext;
 
     private InCallMetricsHelper() {}
 
@@ -113,7 +126,7 @@ public class InCallMetricsHelper {
      * Start MetricsHelper instance.
      * @param context
      */
-    public static void init(DialerApplication context) {
+    public static void init(Context context) {
         InCallMetricsHelper helper = getInstance();
         helper.mContext = context;
 
@@ -143,7 +156,7 @@ public class InCallMetricsHelper {
      * @param params fields that are part of the event
      * @param cn associated with the plugin
      */
-    public static void sendEvent(Categories category, Events action,
+    public static Event sendEvent(Categories category, Events action,
                                  HashMap<Parameters, Object> params, ComponentName cn) {
         Event.Builder event = new Event.Builder(CATEGORY_BASE + category.value(), action.value());
         if (params != null && params.size() > 0) {
@@ -154,6 +167,7 @@ public class InCallMetricsHelper {
         Event e = event.build();
         CallMethodHelper.shipAnalyticsToPlugin(cn, e);
         getInstance().sendAmbientEvent(e);
+        return e;
     }
 
     /**
@@ -168,7 +182,16 @@ public class InCallMetricsHelper {
         storeEvent(cn, category, event, data, null);
     }
 
-    public static void storeEvent(ComponentName cn, Categories category, Events event,
+    @VisibleForTesting
+    /* package */ static String buildKey(ComponentName componentName, Categories category,
+                                         Events action, Parameters parameter) {
+
+        return componentName.flattenToShortString() + DELIMIT + category.value() + DELIMIT +
+                action.value() + DELIMIT + parameter.value();
+
+    }
+
+    private static void storeEvent(ComponentName cn, Categories category, Events event,
                                   HashMap<Parameters, Object> data, String location) {
 
         SharedPreferences sp = getInstance().mContext.getSharedPreferences(
@@ -178,8 +201,7 @@ public class InCallMetricsHelper {
 
         for (Parameters param : data.keySet()) {
             Object o = data.get(param);
-            String eventKey = cn.toShortString() + DELIMIT + category.value() + DELIMIT +
-                    event.value() + DELIMIT + param.value();
+            String eventKey = buildKey(cn, category, event, param);
             if (location != null) {
                 eventKey += DELIMIT + location;
             }
@@ -194,7 +216,7 @@ public class InCallMetricsHelper {
      * @param p parameter
      * @return new count of the item.
      */
-    public static int increaseCount(HashMap<Parameters, Object> hashmap, Parameters p) {
+    private static int increaseCount(HashMap<Parameters, Object> hashmap, Parameters p) {
         if (hashmap.containsKey(p)) {
             return (int)hashmap.get(p) + 1;
         } else {
@@ -236,7 +258,7 @@ public class InCallMetricsHelper {
         SharedPreferences sp = getInstance().mContext.getSharedPreferences(
                 METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
-        String eventKey = cn.toShortString() + DELIMIT + category.value() + DELIMIT + event.value();
+        String eventKey = cn.flattenToShortString() + DELIMIT + category.value() + DELIMIT + event.value();
 
         HashMap<Parameters, Object> eventMap = new HashMap<>();
         Map<String, ?> map = sp.getAll();
@@ -257,6 +279,35 @@ public class InCallMetricsHelper {
     }
 
     /**
+     * Helper method to increase the count of a specific parameter if the last action was not the
+     * same as the current action.
+     */
+    public static void increaseCountOfMetricAfterValidate(ComponentName cn, Events event,
+            Categories cat, Parameters param) {
+
+        String validationKey = cn.flattenToShortString() + DELIMIT + cat.value();
+
+        SharedPreferences preferences = getInstance().mContext
+                .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        String lastEvent = preferences.getString(validationKey, null);
+
+        if (lastEvent != null && lastEvent.equals(event.value())) {
+            return;
+        } else {
+            editor.putString(validationKey, event.value());
+        }
+
+        editor.apply();
+
+
+        HashMap<Parameters, Object> metricsData = getStoredEventParams(cn, cat, event);
+        metricsData.put(param, increaseCount(metricsData,param));
+        storeEvent(cn, cat, event, metricsData);
+    }
+
+    /**
      * Helper method to increase the count of a specific parameter
      * @param cn
      * @param event
@@ -270,33 +321,23 @@ public class InCallMetricsHelper {
         storeEvent(cn, cat, event, metricsData);
     }
 
-    public static void increaseCountOfMetric(CallMethodInfo cmi, Events event, Categories cat,
-                                             Parameters param) {
-        increaseCountOfMetric(cmi.mComponent, event, cat, param);
-    }
-
-
-
-    /**
-     * Prepares all our metrics for sending.
-     */
-    public static void prepareToSend() {
-        SharedPreferences sp = getInstance().mContext.getSharedPreferences(
-                METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-
-        Map<String, ?> map = sp.getAll();
-
+    @VisibleForTesting
+    /* package */ static HashMap<String, HashMap<Parameters, Object>> getHashOfHashOfItems(
+            Map<String, ?> map) {
         HashMap<String, HashMap<Parameters, Object>> items = new HashMap<>();
         for(Map.Entry<String,?> entry : map.entrySet()){
 
             String[] keyParts = entry.getKey().split(DELIMIT);
+            if (keyParts.length < REGULAR_KEY) {
+                continue;
+            }
 
-            ComponentName component = ComponentName.unflattenFromString(keyParts[0]);
-            Categories category = Categories.valueOf(keyParts[1]);
-            Events event = Events.valueOf(keyParts[2]);
-            Parameters parm = Parameters.valueOf(keyParts[3]);
+            ComponentName component = ComponentName.unflattenFromString(keyParts[COMPONENT_NAME]);
+            Categories category = Categories.valueOf(keyParts[CATEGORY]);
+            Events event = Events.valueOf(keyParts[EVENT]);
+            Parameters parm = Parameters.valueOf(keyParts[PARAMS]);
 
-            String eventKey = component.toShortString() + DELIMIT + category.value() + DELIMIT
+            String eventKey = component.flattenToShortString() + DELIMIT + category.value() + DELIMIT
                     + event.value();
 
             if (!items.containsKey(eventKey)) {
@@ -307,12 +348,24 @@ public class InCallMetricsHelper {
             params.put(parm, entry.getValue());
             items.put(eventKey, params);
         }
+        return items;
+    }
 
+    /**
+     * Prepares all our metrics for sending.
+     */
+    static void prepareToSend() {
+        SharedPreferences sp = getInstance().mContext.getSharedPreferences(
+                METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        HashMap<String, HashMap<Parameters, Object>> items = getHashOfHashOfItems(sp.getAll());
         for (String key : items.keySet()) {
             String[] keyParts = key.split(DELIMIT);
-            ComponentName component = ComponentName.unflattenFromString(keyParts[0]);
-            Categories category = Categories.valueOf(keyParts[1]);
-            Events event = Events.valueOf(keyParts[2]);
+            if (keyParts.length < SHORT_KEY) {
+                continue;
+            }
+            ComponentName component = ComponentName.unflattenFromString(keyParts[COMPONENT_NAME]);
+            Categories category = Categories.valueOf(keyParts[CATEGORY]);
+            Events event = Events.valueOf(keyParts[EVENT]);
             HashMap<Parameters, Object> params = items.get(key);
             sendEvent(category, event, params, component);
         }

@@ -41,6 +41,7 @@ import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
+import com.android.dialer.incall.InCallMetricsHelper;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.phone.common.incall.CallMethodInfo;
@@ -214,14 +215,19 @@ public class SmartDialSearchFragment extends SearchFragment
                 Drawable heroImage;
                 String text;
 
+                InCallMetricsHelper.Events event = null;
+                CallMethodInfo hintTextMethod = hintTextRequest();
                 if (TextUtils.isEmpty(tm.getNetworkOperator())) {
                     heroImage = r.getDrawable(R.drawable.ic_signal_wifi_3_bar);
                     template = r.getString(R.string.wifi_hint_text);
-                    text = String.format(template, hintTextRequest());
+                    text = String.format(template, hintTextMethod.mName);
+                    event = InCallMetricsHelper.Events.INAPP_NUDGE_DIALER_WIFI;
                 } else if (tm.isNetworkRoaming(mCurrentCallMethodInfo.mSubId)) {
                     heroImage = r.getDrawable(R.drawable.ic_roaming);
                     template = r.getString(R.string.roaming_hint_text);
-                    text = String.format(template, mCurrentCallMethodInfo.mName, hintTextRequest());
+                    text = String.format(template, mCurrentCallMethodInfo.mName,
+                            hintTextMethod.mName);
+                    event = InCallMetricsHelper.Events.INAPP_NUDGE_DIALER_ROAMING;
                 } else {
                     showNormalT9Hint(r);
                     return;
@@ -230,6 +236,11 @@ public class SmartDialSearchFragment extends SearchFragment
                 mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
                 mEmptyView.setDescription(text);
                 mEmptyView.setSubMessage(null);
+
+                InCallMetricsHelper.increaseCountOfMetric(
+                        hintTextMethod.mComponent, event,
+                        InCallMetricsHelper.Categories.INAPP_NUDGES,
+                        InCallMetricsHelper.Parameters.COUNT);
             } else {
                 showNormalT9Hint(r);
             }
@@ -238,13 +249,13 @@ public class SmartDialSearchFragment extends SearchFragment
         }
     }
 
-    private String hintTextRequest() {
+    private CallMethodInfo hintTextRequest() {
         // Randomly choose an item that is not a sim to prompt user to switch to
         List<CallMethodInfo> valuesList =
                 new ArrayList<CallMethodInfo>(mAvailableProviders.values());
 
         int randomIndex = new Random().nextInt(valuesList.size());
-        return valuesList.get(randomIndex).mName;
+        return valuesList.get(randomIndex);
     }
 
     public void setAvailableProviders(HashMap<ComponentName, CallMethodInfo> callMethods) {

@@ -11,6 +11,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
@@ -541,7 +542,13 @@ public class DialerSettingsActivity extends PreferenceActivity {
     private static void providerStateChanged(Bundle extras, boolean isEnabled, Context c) {
         String componentString = extras.getString(COMPONENT_NAME);
         ComponentName componentName = ComponentName.unflattenFromString(componentString);
+        int status = providerEnable(c, componentName, isEnabled);
+        extras.putInt(COMPONENT_STATUS, status);
+    }
 
+    @VisibleForTesting
+    /* package */ static int providerEnable(Context c, ComponentName componentName,
+                                             boolean isEnabled) {
         InCallHelper.ChangeInCallProviderStateAsyncTask asyncTask =
                 new InCallHelper.ChangeInCallProviderStateAsyncTask(c,
                         new InCallHelper.IInCallEnabledStateCallback() {
@@ -554,6 +561,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
         int status = isEnabled ? PluginStatus.ENABLED : PluginStatus.DISABLED;
         asyncTask.execute(status);
-        extras.putInt(COMPONENT_STATUS, status);
+        return status;
     }
 }

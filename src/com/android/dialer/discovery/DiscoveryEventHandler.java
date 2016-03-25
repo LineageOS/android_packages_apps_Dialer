@@ -43,18 +43,24 @@ public class DiscoveryEventHandler {
     private static final boolean DEBUG_STATUS = false;
 
     public static void getNudgeProvidersWithKey(final Context context, final String key) {
+        getNudgeProvidersWithKey(context, key, false);
+    }
+
+    public static void getNudgeProvidersWithKey(final Context context, final String key, final
+                                                boolean isTesting) {
         // Spin up a new thread to make the needed calls to ambient.
         new Thread(new Runnable() {
             @Override
             public void run() {
                 AmbientApiClient client = AmbientConnection.CLIENT.get(context);
-                ArrayList<NotificationNudge> nudges = getNudges(client, context, key);
+                ArrayList<NotificationNudge> nudges = getNudges(client, context, key,
+                        isTesting);
                 sendNudgeRequestToDiscovery(client, nudges);
             }
         }).start();
     }
 
-    public static void sendNudgeRequestToDiscovery(AmbientApiClient client,
+    private static void sendNudgeRequestToDiscovery(AmbientApiClient client,
                                                    ArrayList<NotificationNudge> nudges) {
 
         for (NotificationNudge nn : nudges) {
@@ -62,8 +68,8 @@ public class DiscoveryEventHandler {
         }
     }
 
-    public static ArrayList<NotificationNudge> getNudges(AmbientApiClient client, Context context,
-                                                         String key) {
+    private static ArrayList<NotificationNudge> getNudges(AmbientApiClient client, Context context,
+                                                         String key, boolean isTesting) {
 
         Map nudgePlugins =
                 NudgeServices.NudgeApi.getAvailableNudgesForKey(client, key).await().components;
@@ -97,7 +103,7 @@ public class DiscoveryEventHandler {
 
                     Bundle b = availableNudges.get(component.getPackageName());
 
-                    if (validateShouldShowNudge(key, context, b)) {
+                    if (validateShouldShowNudge(key, context, b) && !isTesting) {
                         // Nudge not yet ready for this item.
                         continue;
                     }

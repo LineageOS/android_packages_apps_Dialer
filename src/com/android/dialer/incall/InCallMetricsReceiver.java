@@ -2,6 +2,7 @@ package com.android.dialer.incall;
 
 import android.app.IntentService;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,6 +13,15 @@ import com.cyanogen.ambient.incall.CallLogConstants;
 import com.android.dialer.incall.InCallMetricsHelper;
 import cyanogenmod.providers.CMSettings;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.cyanogen.ambient.incall.CallLogConstants;
+import com.cyanogen.ambient.analytics.Event;
+import com.android.dialer.incall.InCallMetricsHelper;
+import cyanogenmod.providers.CMSettings;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -40,7 +50,13 @@ public class InCallMetricsReceiver extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        lookupCallsSince(0);
+        // Get current time a day ago for call aggregation.
+        Date d = new Date(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        calendar.add(Calendar.DATE, -1);
+        d.setTime(calendar.getTime().getTime());
+        lookupCallsSince(d.getTime(), getContentResolver());
 
         // Send stored Incall Specific events
         if (CMSettings.Secure.getInt(getApplicationContext().getContentResolver(),
@@ -53,7 +69,10 @@ public class InCallMetricsReceiver extends IntentService {
         super(name);
     }
 
-    private void lookupCallsSince(long time) {
+    @VisibleForTesting
+    /* package */ static ArrayList<Event> lookupCallsSince(long time,
+            ContentResolver contentResolver) {
+
         Uri uri = CallLogConstants.CONTENT_ALL_URI.buildUpon().build();
 
         String[] projection = new String[] {
@@ -64,13 +83,14 @@ public class InCallMetricsReceiver extends IntentService {
                 ORIGIN
         };
 
-        String where = CallLog.Calls.DATE + " > ?";
+
+        String where = CallLog.Calls.DATE + " >= ?";
 
         String[] args = new String[] {
                 String.valueOf(time)
         };
 
-        Cursor c = getContentResolver().query(uri, projection, where, args, null);
+        Cursor c = contentResolver.query(uri, projection, where, args, null);
 
         HashMap<String, HashMap<String, Object>> keys = new HashMap<>();
 
@@ -152,6 +172,7 @@ public class InCallMetricsReceiver extends IntentService {
 
         c.close();
 
+        ArrayList<Event> listOfEvents = new ArrayList<>();
         for (String key : keys.keySet()) {
             // Shippit
             HashMap<String, Object> value = keys.get(key);
@@ -189,12 +210,14 @@ public class InCallMetricsReceiver extends IntentService {
                 }
             }
 
-            InCallMetricsHelper.sendEvent(InCallMetricsHelper.Categories.CALLS, event, params,
+            Event sentEvent = InCallMetricsHelper.sendEvent(InCallMetricsHelper
+                    .Categories.CALLS, event, params,
                     ComponentName.unflattenFromString(pluginComponent));
 
+
+            listOfEvents.add(sentEvent);
         }
-
+        return listOfEvents;
     }
-
 }
 

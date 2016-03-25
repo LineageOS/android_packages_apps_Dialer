@@ -21,11 +21,11 @@ public class DiscoveryService extends IntentService {
         String action = intent.getAction();
         switch (action) {
             case ConnectivityManager.CONNECTIVITY_ACTION:
-                new DiscoveryEventHandler().getNudgeProvidersWithKey(getApplicationContext(),
+                DiscoveryEventHandler.getNudgeProvidersWithKey(getApplicationContext(),
                         NudgeKey.NOTIFICATION_ROAMING);
                 break;
             case Intent.ACTION_NEW_OUTGOING_CALL:
-                new DiscoveryEventHandler().getNudgeProvidersWithKey(getApplicationContext(),
+                DiscoveryEventHandler.getNudgeProvidersWithKey(getApplicationContext(),
                         NudgeKey.NOTIFICATION_INTERNATIONAL_CALL);
                 break;
         }
