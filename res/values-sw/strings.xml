@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Futa rekodi ya simu zilizopigwa"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Futa ujumbe wa sauti"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Weka kwenye kumbukumbu"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Shiriki ujumbe wa sauti"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Ujumbe wa sauti umefutwa"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Umewekwa kwenye kumbukumbu"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"TENDUA"</string>
@@ -107,7 +106,7 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ongeza simu"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Unapigiwa simu"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Simu unayopiga"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Simu isiyojibiwa"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Simu uliyokosa"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Hangout ya Video inayoingia"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Hangout ya Video inayotoka"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Hangout ya Video ambayo haikupokewa"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Zote"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Ambazo hazikupokewa"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Ujumbe wa sauti"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Njia mpya na rahisi ya kuzuia"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Ili kukulinda vizuri zaidi, Simu inahitaji kubadilisha mipangilio ya kipengele cha kuzuia. Hutapokea simu wala SMS kutoka nambari ulizozizuia na nambari hizo huenda zikashirikiwa na programu zingine."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Ruhusu"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Ungependa kuzuia <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Simu zinazopigwa kutoka nambari hii zitazuiwa na ujumbe wa sauti utafutwa kiotomatiki."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Simu zinazopigwa kutoka nambari hii zitazuiwa, lakini mpigaji bado anaweza kukutumia ujumbe wa sauti."</string>

@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"ਕਾਲ ਇਤਿਹਾਸ ਹਟਾਓ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ਵੌਇਸਮੇਲ ਮਿਟਾਓ"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖਬੱਧ ਕਰੋ"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"ਵੌਇਸਮੇਲ ਸਾਂਝੀ ਕਰੋ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ਵੌਇਸਮੇਲ ਮਿਟਾਈ ਗਈ"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ਵੌਇਸਮੇਲ ਪੁਰਾਲੇਖਬੱਧ ਕੀਤੀ ਗਈ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ਪਹਿਲਾਂ ਵਰਗਾ ਕਰੋ"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ਸਭ"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ਮਿਸਡ"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ਵੌਇਸਮੇਲ"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"ਨਵੀਂ, ਸਰਲੀਕ੍ਰਿਤ ਬਲੌਕਿੰਗ"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"ਤੁਹਾਡੀ ਬਿਹਤਰ ਢੰਗ ਨਾਲ ਰੱਖਿਆ ਲਈ, ਫੋਨ ਨੂੰ ਬਲੌਕਿੰਗ ਦੇ ਕੰਮ ਕਰਨ ਦੇ ਢੰਗ ਨੂੰ ਬਦਲਣ ਦੀ ਲੋੜ ਹੈ। ਹੁਣ ਤੁਹਾਡੇ ਬਲੌਕ ਕੀਤੇ ਗਏ ਨੰਬਰਾਂ ਤੋਂ ਕਾਲਾਂ ਅਤੇ ਲਿਖਤ ਸੁਨੇਹਿਆਂ ਦੋਵਾਂ ਨੂੰ ਰੋਕ ਦਿੱਤਾ ਜਾਵੇਗਾ ਅਤੇ ਇਹਨਾਂ ਨੂੰ ਹੋਰ ਐਪਾਂ ਨਾਲ ਵੀ ਸਾਂਝਾ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"ਮਨਜ਼ੂਰੀ ਦਿਓ"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"ਕੀ <xliff:g id="NUMBER">%1$s</xliff:g> ਬਲੌਕ ਕਰਨਾ ਹੈ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਬਲੌਕ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ ਅਤੇ ਵੌਇਸਮੇਲਾਂ ਆਪਣੇ ਆਪ ਮਿਟਾ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ।"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਬਲੌਕ ਕੀਤੀਆਂ ਜਾਣਗੀਆਂ, ਪਰ ਕਾਲਰ ਹਾਲੇ ਵੀ ਤੁਹਾਡੇ ਲਈ ਵੌਇਸਮੇਲਾਂ ਛੱਡ ਸਕਦਾ ਹੈ।"</string>

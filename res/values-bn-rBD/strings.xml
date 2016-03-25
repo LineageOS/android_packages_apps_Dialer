@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"পুরোনো কলের তালিকা সাফ করুন"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ভয়েসমেল মুছুন"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ভয়েসমেল সংরক্ষণাগারভুক্ত করুন"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"ভয়েসমেল শেয়ার করুন"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ভয়েসমেল মোছা হয়েছে"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ভয়েসমেল সংরক্ষণাগারভুক্ত"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"পূর্বাবস্থায় ফিরুন"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"সমস্ত"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"মিসড"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ভয়েসমেল"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"নতুন, সরলীকৃত অবরুদ্ধ করার ব্যবস্থা"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"আপনাকে আরো ভালো সুরক্ষা দিতে, \'ফোন\' এর অবরুদ্ধ করার আচরণ পরিবর্তন করতে হবে৷ আপনার অবরুদ্ধ করা নম্বরগুলি থেকে আসা কলগুলি এবং পাঠ্যবার্তা উভয়ই থামানো হবে এবং অন্যান্য অ্যাপ্লিকেশানের সাথে শেয়ার করা হতে পারে৷"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"মঞ্জুরি দিন"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে, কিন্তু কলার হয়ত এখনও আপনাকে ভয়েসমেলগুলি পাঠাতে পারবে৷"</string>

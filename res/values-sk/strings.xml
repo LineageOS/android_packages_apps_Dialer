@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Vymazať históriu hovorov?"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Odstrániť hlasovú správu"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archivovať hlasovú správu"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Zdieľať hlasovú správu"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Hlas. schránka odstránená"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Hlasová správa bola archiv."</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"SPÄŤ"</string>
@@ -163,6 +162,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Všetky"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Zmeškané"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Schránka"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Nové zjednodušené blokovanie"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"V telefóne je potrebné zmeniť spôsob fungovania blokovania. Len tak dosiahnete lepšiu ochranu. Blokované čísla budú brániť prijímaniu hovorov aj textových správ a bude ich možné zdieľať s ďalšími aplikáciami."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Povoliť"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Hovory z tohto čísla budú blokované a hlasové správy budú automaticky odstraňované."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Hovory z tohto čísla budú zablokované, ale volajúci stále môže zanechať hlasové správy."</string>

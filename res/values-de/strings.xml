@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Anrufliste löschen"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Mailbox-Nachricht löschen"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Mailbox-Nachricht archivieren"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Mailbox-Nachricht teilen"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mailbox gelöscht"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Mailbox-Nachricht archiviert"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"Rückgängig"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Entgangen"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mailbox-Nachrichten"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Neue einfache Blockierfunktion"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Um dich besser schützen zu können, müssen die Einstellungen der Blockierung beim Telefon geändert werden. Von blockierten Nummern erhältst du jetzt keine Anrufe und Nachrichten mehr und diese Nummern können auch an andere Apps weitergegeben werden."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Zulassen"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> blockieren?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Anrufe von dieser Nummer werden blockiert und Mailbox-Nachrichten automatisch gelöscht."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, dir Mailbox-Nachrichten zu hinterlassen."</string>

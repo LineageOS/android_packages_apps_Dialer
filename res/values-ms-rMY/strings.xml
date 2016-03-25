@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Kosongkan sejarah panggilan"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Padamkan mel suara"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arkibkan mel suara"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Kongsi mel suara"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mel suara dipadamkan"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Mel suara diarkibkan"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"BUAT ASAL"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tidak dijawab"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mel suara"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Penyekatan mudah yang baharu"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Untuk melindungi anda dengan lebih berkesan, Telefon perlu menukar cara penyekatan berfungsi. Nombor yang disekat akan menghentikan panggilan dan teks serta boleh dikongsi dengan apl lain."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Benarkan"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Sekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Panggilan daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Panggilan daripada nombor ini akan disekat, tetapi pemanggil masih boleh meninggalkan mel suara kepada anda."</string>

@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Borrar historial de llamadas"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eliminar mensaje de voz"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archivar mensaje de voz"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Compartir mensaje de voz"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Buzón voz eliminado"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Mensaje de voz archivado"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESHACER"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mensaje de voz"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Nuevo bloqueo, más sencillo"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Para garantizar tu seguridad, Teléfono necesita cambiar cómo funciona el bloqueo. Ya no recibirás llamadas ni SMS de los números bloqueados y es posible que estos se compartan con otras aplicaciones."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Permitir"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"¿Bloquear el número <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Se bloquearán las llamadas de este número y se eliminarán los mensajes del buzón de voz automáticamente."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Se bloquearán las llamadas de este número, pero la persona que llame puede seguir dejando mensajes en el buzón de voz."</string>

@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Supprimer l\'historique des appels"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Supprimer le message vocal"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archiver le message vocal"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Partager le message vocal"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mess. vocal supprimé"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Message vocal archivé"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ANNULER"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"Tous"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Manqués"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mess. vocale"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Nouveau processus de blocage simplifié"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Afin de mieux vous protéger, la fonctionnalité de blocage de numéros doit être modifiée. Le blocage pourra désormais être appliqué aux appels entrants comme aux SMS entrants, et être étendu à d\'autres applications."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Autoriser"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Bloquer le numéro \"<xliff:g id="NUMBER">%1$s</xliff:g>\" ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Les appels associés à ce numéro seront bloqués, et les messages vocaux seront automatiquement supprimés."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Les appels associés à ce numéro seront bloqués, mais l\'appelant pourra peut-être toujours vous laisser des messages vocaux."</string>

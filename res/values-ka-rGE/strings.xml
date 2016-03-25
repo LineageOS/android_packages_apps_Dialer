@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"საუბრის ისტორიის გასუფთავება"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ხმოვანი ფოსტის წაშლა"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ხმოვანი ფოსტის დაარქივება"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"ხმოვანი ფოსტის გაზიარება"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ხმოვანი ფოსტა წაიშალა"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ხმოვანი ფოსტა დაარქივებულია"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"დაბრუნება"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ყველა"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"გამოტოვებული"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ხმოვანი ფოსტა"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"დაბლოკვის ახალი, მარტივი ხერხი"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"თქვენი უკეთ დაცვის მიზნით, ტელეფონმა დაბლოკვის წესი უნდა შეცვალოს. თქვენ მიერ დაბლოკილი ნომრებიდან როგორც ზარები, ისე ტექსტური შეტყობინებები შეწყდება და შესაძლოა მოხდეს ამ ნომრების სხვა აპებთან გაზიარება."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"დაშვება"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"გსურთ, დაბლოკოთ <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ამ ნომრიდან შემოსული ზარები დაიბლოკება, ხოლო ხმოვანი ფოსტა ავტომატურად წაიშლება."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ამ ნომრიდან შემოსული ზარები დაიბლოკება, თუმცა აბონენტს მაინც შეეძლება თქვენთვის ხმოვანი ფოსტის დატოვება."</string>

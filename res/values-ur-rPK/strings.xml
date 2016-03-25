@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"کال کی سرگزشت صاف کریں"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"صوتی میل حذف کریں"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"صوتی میل کو آرکائیو کریں"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"صوتی میل کا اشتراک کریں"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"صوتی میل حذف ہو گئی"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"صوتی میل آرکائیو ہو گئی"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"کالعدم کریں"</string>
@@ -161,6 +160,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"سبھی"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"چھوٹی ہوئی"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"صوتی میل"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"نئی، آسان انسداد"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"آپ کو بہتر طریقے سے حفاظت فراہم کرنے کیلئے فون کو انسداد کے کام کرنے کا طریقہ تبدیل کرنا ہوگا۔ آپ کے مسدود کردہ نمبروں سے کالیں اور متنی پیغامات دونوں مسدود کر دیے جائیں گے اور ممکن ہے ان کا اشتراک دیگر ایپس کے ساتھ کیا جائے۔"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"اجازت دیں"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> مسدود کریں؟"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"اس نمبر سے کالز مسدود ہوجائیں گی اور صوتی میلز خودبخزد جذف ہو جائیں گی۔"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"اس نمبر سے کالز مسدود ہو جائیں گی گی لیکن ممکن ہے کالر پھر بھی آپ کیلئے صوتی میلز چھوڑ پائے۔"</string>

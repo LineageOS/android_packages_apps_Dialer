@@ -35,8 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ಧ್ವನಿಮೇಲ್‌ ಅಳಿಸಿ"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಿ"</string>
-    <!-- no translation found for call_log_share_voicemail (7272635349055945546) -->
-    <skip />
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"ಧ್ವನಿಮೇಲ್‌ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ಧ್ವನಿಮೇಲ್ ಅಳಿಸಲಾಗಿದೆ"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ರದ್ದುಮಾಡು"</string>
@@ -162,6 +161,9 @@
     <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"ಮಿಸ್ಡ್‌‌ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"ಹೊಸ, ಸರಳೀಕರಿಸಿದ ನಿರ್ಬಂಧ"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"ನಿಮ್ಮನ್ನು ಉತ್ತಮ ರೀತಿಯಲ್ಲಿ ರಕ್ಷಿಸಲು, ನಿರ್ಬಂಧ ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ ಎಂದು ಫೋನ್ ಬದಲಾಯಿಸಬೇಕಾಗಿದೆ. ನಿಮ್ಮ ನಿರ್ಬಂಧಿಸಿದ ಸಂಖ್ಯೆಗಳು ಈಗ ಕರೆ ಮತ್ತು ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ನಿಲ್ಲಿಸುತ್ತವೆ ಹಾಗೂ ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಜೊತೆಗೆ ಹಂಚಿಕೊಳ್ಳಬಹುದು."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"ಅನುಮತಿಸು"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ಈ ಸಂಖ್ಯೆಗೆ ಕರೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುವುದು, ಆದರೆ ಕರೆಮಾಡುವವರು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಈಗಲೂ ನಿಮಗೆ ಕಳುಹಿಸಬಹುದು."</string>
