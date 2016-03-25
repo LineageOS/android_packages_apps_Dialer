@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Vil du blokkere <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Anrop fra dette nummeret blokkeres, og talepost blir automatisk slettet."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Anrop fra dette nummeret blokkeres, men den som ringer kan fortsatt legge igjen beskjeder i talepostkassen din."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Du kommer ikke lenger til å motta anrop eller SMS-er fra dette nummeret."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKKÉR"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Vil du oppheve blokkeringen av <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"OPPHEV BLOKKERINGEN"</string>

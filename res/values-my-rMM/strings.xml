@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>ကို ပိတ်ဆို့မလား။"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ဤနံပါတ်မှခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်မည်ဖြစ်ပြီး အသံမေးလ်များကို အလိုအလျောက် ဖျက်လိုက်ပါမည်။"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ဤနံပါတ်မှ ခေါ်ဆိုမှုများကို ပိတ်ဆို့လိုက်ပါမည်၊ သို့သော် ၎င်းတို့သည် သင့်ကို အသံမေးလ်ချန်ခဲ့နိုင်ပါသည်။"</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"ဤနံပါတ်ထံမှ ဖုန်းခေါ်ဆိုမှုများနှင့် စာများကို သင် ထပ်မံရရှိတော့မည် မဟုတ်ပါ။"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ပိတ်ဆို့ပါ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> အား ပိတ်ဆို့မှု ဖယ်ရှားလိုက်ရမလား။"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ပိတ်ဆို့ခြင်းမှ ဖယ်ရှားပါ"</string>

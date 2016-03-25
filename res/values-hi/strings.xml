@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध करें?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे और वॉइसमेल अपने आप हटा दिए जाएंगे."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"इस नंबर से आने वाले कॉल अवरुद्ध कर दिए जाएंगे, लेकिन कॉलर अब भी आपके लिए वॉइसमेल भेज सकेंगे."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"अब आपको इस नंबर से कॉल या लेख संदेश प्राप्त नहीं होंगे."</string>
     <string name="block_number_ok" msgid="770551992296781873">"अवरुद्ध करें"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> को अनवरोधित करें?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"अनवरोधित करें"</string>

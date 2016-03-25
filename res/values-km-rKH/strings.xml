@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"រារាំង <xliff:g id="NUMBER">%1$s</xliff:g> ឬ?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"ការហៅចេញពីលេខនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"ការហៅចេញពីលេខនេះនឹងត្រូវបានរារាំង ប៉ុន្តែអ្នកហៅនៅតែអាចទុកសារជាសំឡេងឲ្យអ្នកបាន។"</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"អ្នក​នឹង​លែង​ទទួល​​ការ​ហៅ ឬ​​សារ​​អត្ថបទ​ពី​លេខ​នេះ​ទៀត​ហើយ។"</string>
     <string name="block_number_ok" msgid="770551992296781873">"រារាំង"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"ឈប់រារាំង <xliff:g id="NUMBER">%1$s</xliff:g> ឬ?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ឈប់រារាំង"</string>

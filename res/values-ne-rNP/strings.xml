@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> माथि रोक लगाउने हो?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"यो नम्बरबाट सबै कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचालित रूपमा मेटिनेछन्।"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"यो नम्बरबाट सबै कलहरू रोकिनेछन्। तर कलरले अझै तपाईँलाई भ्वाइस मेलहरू भने छोड्न सक्नेछन्।"</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"तपाईँले अब उप्रान्त यस नम्बरबाट कल वा पाठ सन्देशहरू प्राप्त गर्नुहुने छैन।"</string>
     <string name="block_number_ok" msgid="770551992296781873">"रोक्नुहोस्"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> माथिको रोक हटाउने हो?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"रोक हटाउनुहोस्"</string>

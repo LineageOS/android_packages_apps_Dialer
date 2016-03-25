@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Sekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Panggilan daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Panggilan daripada nombor ini akan disekat, tetapi pemanggil masih boleh meninggalkan mel suara kepada anda."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Anda tidak akan menerima panggilan atau teks daripada nombor ini lagi."</string>
     <string name="block_number_ok" msgid="770551992296781873">"SEKAT"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Nyahsekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"NYAHSEKAT"</string>

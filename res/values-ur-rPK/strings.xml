@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> مسدود کریں؟"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"اس نمبر سے کالز مسدود ہوجائیں گی اور صوتی میلز خودبخزد جذف ہو جائیں گی۔"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"اس نمبر سے کالز مسدود ہو جائیں گی گی لیکن ممکن ہے کالر پھر بھی آپ کیلئے صوتی میلز چھوڑ پائے۔"</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"آپ کو اب اس نمبر سے مزید کالز یا متنی پیغامات موصول نہیں ہوں گے۔"</string>
     <string name="block_number_ok" msgid="770551992296781873">"مسدود کریں"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> غیر مسدود کریں؟"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"غیر مسدود کریں"</string>

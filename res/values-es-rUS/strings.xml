@@ -166,8 +166,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"¿Deseas bloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Se bloquearán las llamadas que provengan de este número y se borrarán los mensajes del buzón de voz de forma automática."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Se bloquearán las llamadas que provengan de este número, pero es posible que la persona que llama pueda dejar mensajes en el buzón de voz."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Ya no recibirás llamadas o mensajes de textos de este número."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOQUEAR"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"¿Deseas desbloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"DESBLOQUEAR"</string>

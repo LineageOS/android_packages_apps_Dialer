@@ -168,8 +168,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Želite blokirati številko <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Klici s te številke bodo blokirani in sporočila v odzivniku bodo samodejno izbrisana."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Klici s te številke bodo blokirani, klicatelj pa bo morda še vedno lahko pustil sporočila v odzivniku."</string>
-    <!-- no translation found for block_number_confirmation_message_new_filtering (4524854769790960179) -->
-    <skip />
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"S te številke ne boste več prejemali klicev ali sporočil SMS."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKIRAJ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Želite odblokirati številko <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ODBLOKIRAJ"</string>
