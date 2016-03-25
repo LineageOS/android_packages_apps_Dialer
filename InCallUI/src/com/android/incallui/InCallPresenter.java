@@ -341,7 +341,8 @@ public class InCallPresenter implements CallList.Listener,
         mFilteredQueryHandler = new FilteredNumberAsyncQueryHandler(context.getContentResolver());
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-        mCallList.setFilteredNumberQueryHandler(mFilteredQueryHandler);
+        mCallList.setExtendedCallInfoService(
+                com.android.dialerbind.ObjectFactory.newExtendedCallInfoService(context));
 
         Log.d(this, "Finished InCallPresenter.setUp");
     }
@@ -1744,7 +1745,14 @@ public class InCallPresenter implements CallList.Listener,
         if (call == null) {
             return getColorsFromPhoneAccountHandle(mPendingPhoneAccountHandle);
         } else {
-            return getColorsFromPhoneAccountHandle(call.getAccountHandle());
+            if (call.isSpam()) {
+                Resources resources = mContext.getResources();
+                return new InCallUIMaterialColorMapUtils(
+                        resources).calculatePrimaryAndSecondaryColor(
+                        resources.getColor(R.color.incall_call_spam_background_color));
+            } else {
+                return getColorsFromPhoneAccountHandle(call.getAccountHandle());
+            }
         }
     }
 

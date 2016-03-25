@@ -163,6 +163,14 @@
             android:scaleType="fitCenter"
             android:visibility="gone" />
 
+        <ImageView android:id="@+id/spamIcon"
+            android:src="@drawable/blocked_contact"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
         <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
         <LinearLayout android:id="@+id/labelAndNumber"
             android:layout_width="wrap_content"

@@ -389,6 +389,16 @@ public class Call {
 
     private LogState mLogState = new LogState();
 
+    private boolean mIsSpam;
+
+    public void setSpam(boolean isSpam) {
+        mIsSpam = isSpam;
+    }
+
+    public boolean isSpam() {
+        return mIsSpam;
+    }
+
     /**
      * Used only to create mock calls for testing
      */

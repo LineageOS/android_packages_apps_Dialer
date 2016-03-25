@@ -130,6 +130,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mCallTypeLabel;
     private ImageView mHdAudioIcon;
     private ImageView mForwardIcon;
+    private ImageView mSpamIcon;
     private View mCallNumberAndLabel;
     private TextView mElapsedTime;
     private Drawable mPrimaryPhotoDrawable;
@@ -280,6 +281,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mCallStateLabel = (TextView) view.findViewById(R.id.callStateLabel);
         mHdAudioIcon = (ImageView) view.findViewById(R.id.hdAudioIcon);
         mForwardIcon = (ImageView) view.findViewById(R.id.forwardIcon);
+        mSpamIcon = (ImageView) view.findViewById(R.id.spamIcon);
         mCallNumberAndLabel = view.findViewById(R.id.labelAndNumber);
         mCallTypeLabel = (TextView) view.findViewById(R.id.callTypeLabel);
         mElapsedTime = (TextView) view.findViewById(R.id.elapsedTime);
@@ -1207,6 +1209,19 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mForwardIcon.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
+    /**
+     * Changes the visibility of the spam icon.
+     *
+     * @param visible {@code true} if the UI should show the spam icon.
+     */
+    @Override
+    public void showSpamIndicator(boolean visible) {
+        if (visible) {
+            mSpamIcon.setVisibility(View.VISIBLE);
+            mNumberLabel.setText(R.string.label_spam_caller);
+            mPhoneNumber.setVisibility(View.GONE);
+        }
+    }
 
     /**
      * Changes the visibility of the "manage conference call" button.

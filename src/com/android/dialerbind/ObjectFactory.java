@@ -27,6 +27,7 @@ import com.android.dialer.list.RegularSearchFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.service.ExtendedBlockingButtonRenderer;
+import com.android.dialer.service.ExtendedCallInfoService;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 /**
@@ -62,6 +63,11 @@ public class ObjectFactory {
     @Nullable
     public static ExtendedBlockingButtonRenderer newExtendedBlockingButtonRenderer(
             Context context, ExtendedBlockingButtonRenderer.Listener listener) {
+        return null;
+    }
+
+    @Nullable
+    public static ExtendedCallInfoService newExtendedCallInfoService(Context context) {
         return null;
     }
 
