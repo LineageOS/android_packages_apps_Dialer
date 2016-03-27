@@ -38,8 +38,12 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn الصينية (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">مكالمة من القائمة السوداء</string>
   <string name="menu_add_to_blacklist">إضافة إلى قائمة المتصلين المحظورين</string>
   <string name="toast_added_to_blacklist">إضافة %s إلى قائمة المتصلين المحظورين</string>
+  <string name="toast_removed_from_blacklist">تمت إزالة %s إلى قائمة المتصلين المحظورين.</string>
+  <string name="call_log_action_block">حظر المتصل</string>
+  <string name="call_log_action_unblock">تم حظر المتصل</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">إعدادات الاتصال السريع</string>
   <string name="speed_dial_not_set">(لم يتم تعيين)</string>
@@ -62,6 +66,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">الإحصائيات</string>
   <string name="callStatsDetailTitle">تفاصيل إحصائيات المكالمة</string>
+  <string name="call_stats_incoming">الواردة: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">الصادرة: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">لم يتم الرد عليها: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">المحظورة: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">المجموع: <xliff:g id="call_count">%s</xliff:g><xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">المجموع: <xliff:g id="call_count"> %s </xliff:g></string>
   <string name="call_stats_filter_from">تاريخ البداية</string>
@@ -79,5 +88,14 @@
   <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
   <string name="call_stats_sort_by_duration">فرز بحسب مدة المكالمة</string>
   <string name="call_stats_sort_by_count">فرز بحسب عدد المكالمات</string>
+  <string name="call_stats_title_for_number">هذا الرقم</string>
+  <string name="call_stats_title_of_total">من الإجمالي</string>
+  <string name="call_stats_title_durations">مدد المكالمات</string>
+  <string name="call_stats_title_count">عدد المكالمات</string>
+  <string name="call_stats_title_average_duration">متوسط مدة المكالمة</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">سجل المكالمات الخاص بك لا يحتوي على أي مكالمات في نطاق الوقت المحدد.</string>
+  <string name="call_recording_category_title">تسجيل المكالمات</string>
+  <string name="call_recording_format">تنسيق الصوت</string>
+  <string name="call_playback_no_app_found_toast">تعذر العثور على أي تطبيق لتشغيل التسجيل المحدد.</string>
 </resources>

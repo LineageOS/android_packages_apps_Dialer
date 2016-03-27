@@ -92,5 +92,10 @@
   <string name="call_stats_title_of_total">จากทั้งหมด</string>
   <string name="call_stats_title_durations">ระยะเวลาการโทร</string>
   <string name="call_stats_title_count">จำนวนการโทร</string>
+  <string name="call_stats_title_average_duration">เวลาโทรเฉลี่ย</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">ประวัติการโทรของคุณจะไม่นับการโทรในช่วงเวลาที่กำหนด</string>
+  <string name="call_recording_category_title">บันทึกการสนทนา</string>
+  <string name="call_recording_format">รูปแบบไฟล์เสียง</string>
+  <string name="call_playback_no_app_found_toast">ไม่พบแอปที่สามารถเล่นไฟล์เสียงที่เลือกไว้ได้</string>
 </resources>

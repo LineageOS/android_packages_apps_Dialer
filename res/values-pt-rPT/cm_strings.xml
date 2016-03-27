@@ -41,9 +41,9 @@
   <string name="type_blacklist">Chamada na lista negra</string>
   <string name="menu_add_to_blacklist">Adicionar à lista de números bloqueados</string>
   <string name="toast_added_to_blacklist">%s foi adicionado à lista de números bloqueados.</string>
-  <string name="toast_removed_from_blacklist">%s removido da lista de chamadores bloqueados.</string>
-  <string name="call_log_action_block">Bloquear o chamador</string>
-  <string name="call_log_action_unblock">Chamador bloqueado</string>
+  <string name="toast_removed_from_blacklist">%s removido da lista de números bloqueados.</string>
+  <string name="call_log_action_block">Bloquear número</string>
+  <string name="call_log_action_unblock">Número bloqueado</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Definições de marcação rápida</string>
   <string name="speed_dial_not_set">(não definido)</string>

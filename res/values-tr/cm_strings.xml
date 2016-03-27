@@ -66,6 +66,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">İstatistikler</string>
   <string name="callStatsDetailTitle">Arama istatistik detayları</string>
+  <string name="call_stats_incoming">Gelen: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Giden: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Cevapsız: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Engellendi: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Toplam: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Toplam: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Başlangıç tarihi</string>
@@ -83,5 +88,14 @@
   <string name="call_stats_reset_filter">Zaman aralığını sıfırla</string>
   <string name="call_stats_sort_by_duration">Arama süresine göre sırala</string>
   <string name="call_stats_sort_by_count">Arama sayısına göre sırala</string>
+  <string name="call_stats_title_for_number">Bu numara</string>
+  <string name="call_stats_title_of_total">Toplam</string>
+  <string name="call_stats_title_durations">Arama süreleri</string>
+  <string name="call_stats_title_count">Arama sayısı</string>
+  <string name="call_stats_title_average_duration">Ortalama çağrı süresi</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Arama kaydı seçilen zaman aralığında herhangi bir arama içermiyor.</string>
+  <string name="call_recording_category_title">Arama kaydı</string>
+  <string name="call_recording_format">Ses formatı</string>
+  <string name="call_playback_no_app_found_toast">Seçili kaydı yürütmek için hiçbir uygulama bulunamadı.</string>
 </resources>

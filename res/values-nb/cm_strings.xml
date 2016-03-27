@@ -65,6 +65,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistikk</string>
   <string name="callStatsDetailTitle">Detaljer for samtalestatus</string>
+  <string name="call_stats_incoming">Innkommende: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_outgoing">Utgående: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_missed">Ubesvart: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_blacklisted">Blokkert: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d </xliff:g>%%</string>
   <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdato</string>
@@ -83,6 +88,9 @@
   <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
   <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
   <string name="call_stats_title_for_number">Dette nummeret</string>
+  <string name="call_stats_title_of_total">Av totalt</string>
   <string name="call_stats_title_durations">Samtalevarighet</string>
+  <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="call_recording_format">Lydformat</string>
 </resources>

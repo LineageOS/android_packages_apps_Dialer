@@ -41,7 +41,7 @@
   <string name="type_blacklist">שיחה שהוכנסה לרשימה השחורה</string>
   <string name="menu_add_to_blacklist">הוסף לרשימת מתקשרים חסומים</string>
   <string name="toast_added_to_blacklist">%s נוסף/ה לרשימת המתקשרים החסומים.</string>
-  <string name="toast_removed_from_blacklist">%s הוסר מרשימת המתקשרים החסומים.</string>
+  <string name="toast_removed_from_blacklist">%s הוסר/ה מרשימת המתקשרים החסומים.</string>
   <string name="call_log_action_block">חסום מתקשר</string>
   <string name="call_log_action_unblock">המתקשר נחסם</string>
   <!--  for speed dial -->
@@ -90,7 +90,7 @@
   <string name="call_stats_sort_by_count">מיין לפי מספר שיחות</string>
   <string name="call_stats_title_for_number">המספר הזה</string>
   <string name="call_stats_title_of_total">מתוך</string>
-  <string name="call_stats_title_durations">אורכי שיחה</string>
+  <string name="call_stats_title_durations">משכי שיחה</string>
   <string name="call_stats_title_count">מספר השיחות</string>
   <string name="call_stats_title_average_duration">משך שיחה ממוצע</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
