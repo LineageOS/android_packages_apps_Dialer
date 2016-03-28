@@ -164,7 +164,7 @@
             android:visibility="gone" />
 
         <ImageView android:id="@+id/spamIcon"
-            android:src="@drawable/blocked_contact"
+            android:src="@drawable/ic_report_24dp"
             android:layout_width="24dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
