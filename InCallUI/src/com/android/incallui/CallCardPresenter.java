@@ -458,6 +458,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         getUi().showHdAudioIndicator(showHdAudioIndicator);
     }
 
+    private void maybeShowSpamIconAndLabel() {
+        getUi().showSpamIndicator(mPrimary.isSpam());
+    }
+
     /**
      * Only show the conference call button if we can manage the conference.
      */
@@ -826,6 +830,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             boolean isEmergencyCall = mPrimary.isEmergencyCall();
             mEmergencyCallListener.onCallUpdated((BaseFragment) ui, isEmergencyCall);
         }
+        maybeShowSpamIconAndLabel();
     }
 
     private void updateSecondaryDisplayInfo() {
@@ -1162,6 +1167,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setProgressSpinnerVisible(boolean visible);
         void showHdAudioIndicator(boolean visible);
         void showForwardIndicator(boolean visible);
+        void showSpamIndicator(boolean visible);
         void showManageConferenceCallButton(boolean visible);
         boolean isManageConferenceVisible();
         boolean isCallSubjectVisible();

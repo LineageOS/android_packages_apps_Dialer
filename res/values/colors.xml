@@ -124,7 +124,7 @@
     <color name="divider_line_color">#D8D8D8</color>
 
     <!--  Colors for blocked numbers list -->
-    <color name="blocked_contact_background">@android:color/holo_red_dark</color>
+    <color name="blocked_contact_background">#A52714</color>
     <color name="blocked_number_primary_text_color">@color/dialtacts_primary_text_color</color>
     <color name="blocked_number_secondary_text_color">@color/dialtacts_secondary_text_color</color>
     <color name="blocked_number_icon_tint">#616161</color>

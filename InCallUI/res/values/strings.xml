@@ -169,6 +169,8 @@
     <string name="notification_incoming_work_call_wifi">Incoming Wi-Fi work call</string>
     <!-- The "label" of the in-call Notification for an incoming ringing video call. -->
     <string name="notification_incoming_video_call">Incoming video call</string>
+    <!-- The "label" of the in-call Notification for an incoming ringing spam call. -->
+    <string name="notification_incoming_spam_call">Incoming suspected spam call</string>
     <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->
     <string name="notification_requesting_video_call">Incoming video request</string>
     <!-- Label for the "Voicemail" notification item, when expanded. -->
@@ -523,4 +525,6 @@
     <string name="open_now">Open now</string>
     <!-- Displayed when a place is closed. -->
     <string name="closed_now">Closed now</string>
+    <!-- Label for spam call in primary info. [CHAR LIMIT=20] -->
+    <string name="label_spam_caller">Suspected spam caller</string>
 </resources>

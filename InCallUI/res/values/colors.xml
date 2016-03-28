@@ -98,6 +98,7 @@
         <item>#7B1FA2</item>
         <item>#C2185B</item>
         <item>#C53929</item>
+        <item>#A52714</item>
     </array>
 
     <!-- Darker versions of background_colors, two shades darker. These colors are used for the
@@ -109,7 +110,11 @@
         <item>#6A1B9A</item>
         <item>#AD1457</item>
         <item>#B93221</item>
+        <item>#841F10</item>
     </array>
+
+    <!-- Background color for spam. This color must match one of background_colors above. -->
+    <color name="incall_call_spam_background_color">#A52714</color>
 
     <!-- Ripple color used over light backgrounds. -->
     <color name="ripple_light">#40000000</color>

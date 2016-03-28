@@ -33,7 +33,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
@@ -52,6 +54,7 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
+import com.android.dialer.service.ExtendedCallInfoService;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -463,6 +466,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         if (contactInfo.photo != null && (contactInfo.photo instanceof BitmapDrawable)) {
             largeIcon = ((BitmapDrawable) contactInfo.photo).getBitmap();
         }
+        if (call.isSpam()) {
+            Drawable drawable = mContext.getResources().getDrawable(R.drawable.blocked_contact);
+            largeIcon = CallCardFragment.drawableToBitmap(drawable);
+        }
         return largeIcon;
     }
 
@@ -524,7 +531,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
             if (call.hasProperty(Details.PROPERTY_WIFI)) {
                 resId = R.string.notification_incoming_call_wifi;
             } else {
-                resId = R.string.notification_incoming_call;
+                if (call.isSpam()) {
+                    resId = R.string.notification_incoming_spam_call;
+                } else {
+                    resId = R.string.notification_incoming_call;
+                }
             }
         } else if (call.getState() == Call.State.ONHOLD) {
             resId = R.string.notification_on_hold;

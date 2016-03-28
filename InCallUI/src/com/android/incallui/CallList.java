@@ -23,8 +23,8 @@ import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 
 import com.android.contacts.common.testing.NeededForTesting;
-import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.service.ExtendedCallInfoService;
 import com.android.incallui.util.TelecomCallUtil;
 
 import com.google.common.base.Preconditions;
@@ -69,7 +69,7 @@ public class CallList {
             .newHashMap();
     private final Set<Call> mPendingDisconnectCalls = Collections.newSetFromMap(
             new ConcurrentHashMap<Call, Boolean>(8, 0.9f, 1));
-    private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
+    private ExtendedCallInfoService mExtendedCallInfoService;
 
     /**
      * Static singleton accessor method.
@@ -94,6 +94,17 @@ public class CallList {
         if (call.getState() == Call.State.INCOMING ||
                 call.getState() == Call.State.CALL_WAITING) {
             onIncoming(call, call.getCannedSmsResponses());
+            if (mExtendedCallInfoService != null) {
+                String number = TelecomCallUtil.getNumber(telecomCall);
+                mExtendedCallInfoService.getExtendedCallInfo(number,
+                        new ExtendedCallInfoService.Listener() {
+                            @Override
+                            public void onComplete(boolean isSpam) {
+                                call.setSpam(isSpam);
+                                onUpdate(call);
+                            }
+                        });
+            }
         } else {
             onUpdate(call);
         }
@@ -615,8 +626,8 @@ public class CallList {
         }
     };
 
-    public void setFilteredNumberQueryHandler(FilteredNumberAsyncQueryHandler handler) {
-        mFilteredQueryHandler = handler;
+    public void setExtendedCallInfoService(ExtendedCallInfoService service) {
+        mExtendedCallInfoService = service;
     }
 
     /**
