@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -90,6 +91,7 @@ import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
+import com.android.phone.common.incall.CallMethodUtils;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.CreditBarHelper;
@@ -487,9 +489,26 @@ public class DialpadFragment extends Fragment
             onCallMethodChanged(callMethodInfos.get(mCurrentCallMethodInfo.mComponent));
         }
 
-        String unFormattedString = getString(R.string.provider_help);
-        CoachMarkDrawableHelper.assignViewTreeObserver(mDialpadView, getActivity(), fragmentView,
-                false, fragmentView.findViewById(R.id.listen_dismiss), unFormattedString);
+
+        Activity act = getActivity();
+        if (act != null) {
+            if (mDigitsFilledByIntent) {
+                String unFormattedString = getString(R.string.provider_help);
+                CoachMarkDrawableHelper.assignViewTreeObserver(mDialpadView, act, fragmentView,
+                        false, fragmentView.findViewById(R.id.listen_dismiss), unFormattedString);
+            } else {
+                SharedPreferences pref = act.getSharedPreferences(
+                        DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+                if (CoachMarkDrawableHelper.shouldShowCoachMark(pref) != null) {
+                    // We would have shown the coachmark here, but some text is in our way
+                    // at this point the user will have seen the spinner so we should
+                    // hide the coachmark now and forever.
+                    pref.edit().putBoolean(CallMethodUtils.PREF_SPINNER_COACHMARK_SHOW, false)
+                            .apply();
+                }
+
+            }
+        }
     }
 
     public void updateSpinner(String lastKnownMethod, HashMap<ComponentName, CallMethodInfo>
