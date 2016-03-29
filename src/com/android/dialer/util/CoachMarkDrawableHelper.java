@@ -89,8 +89,7 @@ public class CoachMarkDrawableHelper {
         }
     }
 
-    private static CallMethodInfo shouldShowCoachMark(SharedPreferences pref) {
-
+    public static CallMethodInfo shouldShowCoachMark(SharedPreferences pref) {
         String lastProvider = pref.getString(CallMethodUtils.PREF_LAST_ENABLED_PROVIDER, null);
         boolean showCoachmark = pref.getBoolean(CallMethodUtils.PREF_SPINNER_COACHMARK_SHOW, false);
 
