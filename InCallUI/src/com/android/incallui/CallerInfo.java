@@ -322,7 +322,7 @@ public class CallerInfo {
                 info.userType = ContactsUtils.determineUserType(directoryId, contactId);
 
                 info.nameAlternative = ContactInfoHelper.lookUpDisplayNameAlternative(
-                        context, info.lookupKeyOrNull, info.userType);
+                        context, info.lookupKeyOrNull, info.userType, directoryId);
             }
             cursor.close();
         }

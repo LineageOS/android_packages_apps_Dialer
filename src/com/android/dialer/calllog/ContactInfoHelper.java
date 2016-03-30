@@ -14,6 +14,8 @@
 
 package com.android.dialer.calllog;
 
+import com.google.common.primitives.Longs;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -33,6 +35,7 @@ import android.util.Log;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.compat.CompatUtils;
+import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.contacts.common.util.Constants;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberHelper;
@@ -163,6 +166,9 @@ public class ContactInfoHelper {
             return ContactInfo.EMPTY;
         }
 
+        final String directory = uri.getQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY);
+        final Long directoryId = directory == null ? null : Longs.tryParse(directory);
+
         Cursor phoneLookupCursor = null;
         try {
             String[] projection = PhoneQuery.getPhoneLookupProjection(uri);
@@ -183,7 +189,7 @@ public class ContactInfoHelper {
             String lookupKey = phoneLookupCursor.getString(PhoneQuery.LOOKUP_KEY);
             ContactInfo contactInfo = createPhoneLookupContactInfo(phoneLookupCursor, lookupKey);
             contactInfo.nameAlternative = lookUpDisplayNameAlternative(mContext, lookupKey,
-                    contactInfo.userType);
+                    contactInfo.userType, directoryId);
             return contactInfo;
         } finally {
             phoneLookupCursor.close();
@@ -210,11 +216,24 @@ public class ContactInfoHelper {
     }
 
     public static String lookUpDisplayNameAlternative(Context context, String lookupKey,
-            @UserType long userType) {
+            @UserType long userType, @Nullable Long directoryId) {
         // Query {@link Contacts#CONTENT_LOOKUP_URI} directly with work lookup key is not allowed.
         if (lookupKey == null || userType == ContactsUtils.USER_TYPE_WORK) {
             return null;
         }
+
+        if (directoryId != null) {
+            // Query {@link Contacts#CONTENT_LOOKUP_URI} with work lookup key is not allowed.
+            if (DirectoryCompat.isEnterpriseDirectoryId(directoryId)) {
+                return null;
+            }
+
+            // Skip this to avoid an extra remote network call for alternative name
+            if (DirectoryCompat.isRemoteDirectory(directoryId)) {
+                return null;
+            }
+        }
+
         final Uri uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
         Cursor cursor = null;
         try {
@@ -224,6 +243,9 @@ public class ContactInfoHelper {
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getString(PhoneQuery.NAME_ALTERNATIVE);
             }
+        } catch (IllegalArgumentException e) {
+            // Avoid dialer crash when lookup key is not valid
+            Log.e(TAG, "IllegalArgumentException in lookUpDisplayNameAlternative", e);
         } finally {
             if (cursor != null) {
                 cursor.close();

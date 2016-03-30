@@ -17,6 +17,7 @@
 package com.android.dialer.calllog;
 
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
 import android.test.AndroidTestCase;
@@ -101,14 +102,14 @@ public class ContactInfoHelperTest extends AndroidTestCase {
 
     public void testLookupDisplayNameAlternative_NullLookup() {
         Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, null,
-                ContactsUtils.USER_TYPE_CURRENT));
+                ContactsUtils.USER_TYPE_CURRENT, null));
     }
 
     public void testLookupDisplayNameAlternative_NoResults() {
         setUpQueryExpectations(displayNameAlternativeUri,
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION);
         Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext,
-                TEST_LOOKUP_KEY, ContactsUtils.USER_TYPE_CURRENT));
+                TEST_LOOKUP_KEY, ContactsUtils.USER_TYPE_CURRENT, null));
         mContext.verify();
     }
 
@@ -117,8 +118,30 @@ public class ContactInfoHelperTest extends AndroidTestCase {
                 PhoneQuery.DISPLAY_NAME_ALTERNATIVE_PROJECTION, TEST_DISPLAY_NAME_ALTERNATIVE_ROW);
         Assert.assertEquals(TEST_DISPLAY_NAME_ALTERNATIVE,
                 mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY
-                , ContactsUtils.USER_TYPE_CURRENT));
+                , ContactsUtils.USER_TYPE_CURRENT, null));
         mContext.verify();
+    }
+
+    public void testLookupDisplayNameAlternative_EnterpriseLocalDirectory() {
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY,
+                ContactsUtils.USER_TYPE_WORK, ContactsContract.Directory.ENTERPRISE_DEFAULT));
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY,
+                ContactsUtils.USER_TYPE_CURRENT, ContactsContract.Directory.ENTERPRISE_DEFAULT));
+    }
+
+    public void testLookupDisplayNameAlternative_EnterpriseRemoteDirectory() {
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY,
+                ContactsUtils.USER_TYPE_WORK,
+                ContactsContract.Directory.ENTERPRISE_DEFAULT + 10));
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, TEST_LOOKUP_KEY,
+                ContactsUtils.USER_TYPE_CURRENT,
+                ContactsContract.Directory.ENTERPRISE_DEFAULT + 10));
+    }
+
+    public void testLookupDisplayNameAlternative_PersonalRemoteDirectory() {
+        Assert.assertNull(mContactInfoHelper.lookUpDisplayNameAlternative(mContext, null,
+                ContactsUtils.USER_TYPE_CURRENT,
+                ContactsContract.Directory.DEFAULT + 10));
     }
 
     /*
