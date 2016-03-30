@@ -224,6 +224,8 @@ public class ContactInfoHelper {
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getString(PhoneQuery.NAME_ALTERNATIVE);
             }
+        } catch (IllegalArgumentException e) {
+            // Avoid dialer crash when lookup key is not valid
         } finally {
             if (cursor != null) {
                 cursor.close();
