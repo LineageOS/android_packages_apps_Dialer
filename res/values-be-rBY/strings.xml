@@ -35,7 +35,7 @@
     <string name="call_log_delete_all" msgid="4677609108288680411">"Ачысціць гісторыю выклікаў"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Выдаліць галас. паведамленне"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архіваванне галас.паведамлення"</string>
-    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Дзяліцца галасавымі паведамленнямі"</string>
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Абагуліць галасавую пошту"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Павед.галасавой пошты выдалена"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Галас. паведамленне архівавана"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"АДРАБІЦЬ"</string>
