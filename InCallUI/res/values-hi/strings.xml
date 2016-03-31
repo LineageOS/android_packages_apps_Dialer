@@ -68,6 +68,8 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"इनकमिंग वाई-फ़ाई कॉल"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"कार्यस्थल का वाई-फ़ाई इनकमिंग कॉल"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"इनकमिंग वीडियो कॉल"</string>
+    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
+    <skip />
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"इनकमिंग वीडियो अनुरोध"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"नया वॉइसमेल"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"नया वॉइसमेल (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -193,4 +195,6 @@
     <string name="closed_today_at" msgid="4060072663433467233">"आज <xliff:g id="CLOSE_TIME">%s</xliff:g> बजे बंद हो गया"</string>
     <string name="open_now" msgid="4615706338669555999">"अभी खुला है"</string>
     <string name="closed_now" msgid="2635314668145282080">"अभी बंद है"</string>
+    <!-- no translation found for label_spam_caller (8270472297763063585) -->
+    <skip />
 </resources>
