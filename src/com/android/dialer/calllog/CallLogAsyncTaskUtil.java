@@ -28,6 +28,7 @@ import android.os.AsyncTask;
 import android.provider.CallLog;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -44,6 +45,7 @@ import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class CallLogAsyncTaskUtil {
     private static String TAG = CallLogAsyncTaskUtil.class.getSimpleName();
@@ -90,12 +92,14 @@ public class CallLogAsyncTaskUtil {
         static final int DATA_USAGE = 10;
         static final int TRANSCRIPTION_COLUMN_INDEX = 11;
         static final int POST_DIAL_DIGITS = 12;
+        static final int VIA_NUMBER = 13;
 
         static {
             ArrayList<String> projectionList = new ArrayList<>();
             projectionList.addAll(Arrays.asList(CALL_LOG_PROJECTION_INTERNAL));
             if (CompatUtils.isNCompatible()) {
                 projectionList.add(CallsSdkCompat.POST_DIAL_DIGITS);
+                projectionList.add(CallsSdkCompat.VIA_NUMBER);
             }
             projectionList.trimToSize();
             CALL_LOG_PROJECTION = projectionList.toArray(new String[projectionList.size()]);
@@ -187,6 +191,8 @@ public class CallLogAsyncTaskUtil {
             final String number = cursor.getString(CallDetailQuery.NUMBER_COLUMN_INDEX);
             final String postDialDigits = CompatUtils.isNCompatible()
                     ? cursor.getString(CallDetailQuery.POST_DIAL_DIGITS) : "";
+            final String viaNumber = CompatUtils.isNCompatible() ?
+                    cursor.getString(CallDetailQuery.VIA_NUMBER) : "";
             final int numberPresentation =
                     cursor.getInt(CallDetailQuery.NUMBER_PRESENTATION_COLUMN_INDEX);
 
@@ -211,6 +217,7 @@ public class CallLogAsyncTaskUtil {
                     context, number, numberPresentation, info.formattedNumber,
                     postDialDigits, isVoicemail);
 
+            details.viaNumber = viaNumber;
             details.accountHandle = accountHandle;
             details.contactUri = info.lookupUri;
             details.namePrimary = info.name;

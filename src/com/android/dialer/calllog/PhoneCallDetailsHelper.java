@@ -116,8 +116,16 @@ public class PhoneCallDetailsHelper {
 
         // Set the account label if it exists.
         String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
-
-        if (accountLabel != null) {
+        if (!TextUtils.isEmpty(details.viaNumber)) {
+            if (!TextUtils.isEmpty(accountLabel)) {
+                accountLabel = mResources.getString(R.string.call_log_via_number_phone_account,
+                        accountLabel, details.viaNumber);
+            } else {
+                accountLabel = mResources.getString(R.string.call_log_via_number,
+                        details.viaNumber);
+            }
+        }
+        if (!TextUtils.isEmpty(accountLabel)) {
             views.callAccountLabel.setVisibility(View.VISIBLE);
             views.callAccountLabel.setText(accountLabel);
             int color = mCallLogCache.getAccountColor(details.accountHandle);

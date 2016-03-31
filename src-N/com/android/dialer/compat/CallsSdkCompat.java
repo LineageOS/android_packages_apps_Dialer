@@ -21,4 +21,5 @@ import android.provider.CallLog;
 public class CallsSdkCompat {
 
     public static final String POST_DIAL_DIGITS = CallLog.Calls.POST_DIAL_DIGITS;
+    public static final String VIA_NUMBER  = CallLog.Calls.VIA_NUMBER;
 }

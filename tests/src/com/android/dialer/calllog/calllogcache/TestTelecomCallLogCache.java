@@ -28,12 +28,15 @@ import android.telecom.PhoneAccountHandle;
  * but...
  * TODO: write tests to test multi-SIM functionality in TelecomCallLogCache.
  */
-public final class TestTelecomCallLogCache extends CallLogCache {
+public class TestTelecomCallLogCache extends CallLogCache {
     private CharSequence mVoicemailNumber;
+    private String mAccountLabel;
 
-    public TestTelecomCallLogCache(Context context, CharSequence voicemailNumber) {
+    public TestTelecomCallLogCache(Context context, CharSequence voicemailNumber,
+            String accountLabel) {
         super(context);
         mVoicemailNumber = voicemailNumber;
+        mAccountLabel = accountLabel;
     }
 
     @Override
@@ -43,7 +46,11 @@ public final class TestTelecomCallLogCache extends CallLogCache {
 
     @Override
     public String getAccountLabel(PhoneAccountHandle accountHandle) {
-        return null;
+        return mAccountLabel;
+    }
+
+    public void setAccountLabel(String accountLabel) {
+        mAccountLabel = accountLabel;
     }
 
     @Override

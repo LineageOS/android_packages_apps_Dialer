@@ -125,6 +125,8 @@ public class CallLogGroupBuilder {
         String groupNumber = cursor.getString(CallLogQuery.NUMBER);
         String groupPostDialDigits = CompatUtils.isNCompatible()
                 ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+        String groupViaNumbers = CompatUtils.isNCompatible()
+                ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
         int groupCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
         String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
         String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
@@ -132,6 +134,7 @@ public class CallLogGroupBuilder {
 
         String number;
         String numberPostDialDigits;
+        String numberViaNumbers;
         int callType;
         String accountComponentName;
         String accountId;
@@ -141,18 +144,21 @@ public class CallLogGroupBuilder {
             number = cursor.getString(CallLogQuery.NUMBER);
             numberPostDialDigits = CompatUtils.isNCompatible()
                     ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+            numberViaNumbers = CompatUtils.isNCompatible()
+                    ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
             callType = cursor.getInt(CallLogQuery.CALL_TYPE);
             accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
             accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
 
             final boolean isSameNumber = equalNumbers(groupNumber, number);
             final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);
+            final boolean isSameViaNumbers = groupViaNumbers.equals(numberViaNumbers);
             final boolean isSameAccount = isSameAccount(
                     groupAccountComponentName, accountComponentName, groupAccountId, accountId);
 
             // Group with the same number and account. Never group voicemails. Only group blocked
             // calls with other blocked calls.
-            if (isSameNumber && isSameAccount && isSamePostDialDigits
+            if (isSameNumber && isSameAccount && isSamePostDialDigits && isSameViaNumbers
                     && areBothNotVoicemail(callType, groupCallType)
                     && (areBothNotBlocked(callType, groupCallType)
                             || areBothBlocked(callType, groupCallType))) {
@@ -174,6 +180,7 @@ public class CallLogGroupBuilder {
                 // Update the group values to those of the current call.
                 groupNumber = number;
                 groupPostDialDigits = numberPostDialDigits;
+                groupViaNumbers = numberViaNumbers;
                 groupCallType = callType;
                 groupAccountComponentName = accountComponentName;
                 groupAccountId = accountId;

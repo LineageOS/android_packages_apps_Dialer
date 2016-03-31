@@ -490,15 +490,17 @@ public class CallLogAdapter extends GroupingListAdapter
         int count = getGroupSize(position);
 
         final String number = c.getString(CallLogQuery.NUMBER);
+        final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final String postDialDigits = CompatUtils.isNCompatible()
                 && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
                 c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
-
+        final String viaNumber = CompatUtils.isNCompatible()
+                && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
+                c.getString(CallLogQuery.VIA_NUMBER) : "";
         final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
-        final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(c);
         final boolean isVoicemailNumber =
                 mCallLogCache.isVoicemailNumber(accountHandle, number);
@@ -518,6 +520,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final PhoneCallDetails details = new PhoneCallDetails(
                 mContext, number, numberPresentation, formattedNumber,
                 postDialDigits, isVoicemailNumber);
+        details.viaNumber = viaNumber;
         details.accountHandle = accountHandle;
         details.countryIso = countryIso;
         details.date = c.getLong(CallLogQuery.DATE);
