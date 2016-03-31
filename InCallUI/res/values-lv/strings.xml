@@ -68,6 +68,8 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Ienākošs Wi-Fi zvans"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Ienākošs darba Wi-Fi zvans"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Ienākošs videozvans"</string>
+    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
+    <skip />
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Ienākošs video pieprasījums"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Jauns balss pasta ziņojums"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Jauns balss pasts (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -196,4 +198,6 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Tika slēgts šodien plkst. <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"Atvērts"</string>
     <string name="closed_now" msgid="2635314668145282080">"Slēgts"</string>
+    <!-- no translation found for label_spam_caller (8270472297763063585) -->
+    <skip />
 </resources>
