@@ -1043,4 +1043,27 @@
 
     <!-- Accessibility announcement to indicate which call is active -->
     <string name="accessibility_call_is_active"><xliff:g id="nameOrNumber">^1</xliff:g> is active</string>
+
+    <!-- Button text for a button displayed underneath an entry in the call log, which marks the
+             phone number represented by the call log entry as a Spam number.
+             [CHAR LIMIT=30] -->
+    <string name="call_log_action_block_report_number">Block/report spam</string>
+
+    <!-- Button text for a button displayed underneath an entry in the call log, which marks the
+         phone number represented by the call log entry as a Spam number.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_block_number">Block</string>
+
+    <!-- Button text for a button displayed underneath an entry in the call log, which removes the
+         phone number represented by the call log entry from the Spam numbers list.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_remove_spam">Not spam</string>
+
+    <!-- Button text for a button displayed underneath an entry in the call log, which removes the
+         phone number represented by the call log entry from the blacklisted numbers.
+         [CHAR LIMIT=30] -->
+    <string name="call_log_action_unblock_number">Unblock</string>
+
+    <!-- Label under the name of a spam number in the call log. [CHAR LIMIT=15] -->
+    <string name="spam_number_call_log_label">Spam</string>
 </resources>

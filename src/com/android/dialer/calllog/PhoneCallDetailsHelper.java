@@ -316,6 +316,11 @@ public class PhoneCallDetailsHelper {
     /** Sets the call count, date, and if it is a voicemail, sets the duration. */
     private void setDetailText(PhoneCallDetailsViews views, Integer callCount,
                                PhoneCallDetails details) {
+        if (details.isSpam) {
+            views.callLocationAndDate.setText(
+                    mContext.getString(R.string.spam_number_call_log_label));
+            return;
+        }
         // Combine the count (if present) and the date.
         CharSequence dateText = getCallLocationAndDate(details);
         final CharSequence text;
@@ -333,7 +338,6 @@ public class PhoneCallDetailsHelper {
         } else {
             views.callLocationAndDate.setText(text);
         }
-
     }
 
     private String getVoicemailDuration(PhoneCallDetails details) {

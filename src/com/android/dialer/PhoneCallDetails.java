@@ -111,6 +111,9 @@ public class PhoneCallDetails {
      */
     public boolean isRead = true;
 
+    // If this call is a spam number.
+    public boolean isSpam = false;
+
     /**
      * Constructor with required fields for the details of a call with a number associated with a
      * contact.
