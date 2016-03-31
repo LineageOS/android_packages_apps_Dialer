@@ -39,6 +39,7 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
+import android.widget.Toast;
 
 import com.android.contacts.common.compat.CallSdkCompat;
 import com.android.contacts.common.compat.SdkVersionOverride;
@@ -66,6 +67,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private Call mCall;
     private boolean mAutomaticallyMuted = false;
     private boolean mPreviousMuteState = false;
+    private static final int MAX_PARTICIPANTS_LIMIT = 6;
 
     // NOTE: Capability constant definition has been duplicated to avoid bundling
     // the Dialer with Frameworks.
@@ -257,6 +259,24 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void mergeClicked() {
+        if (getUi().getContext().getResources().getBoolean(
+                R.bool.add_multi_participants_enabled)){
+            int participantsCount = 0;
+            if (mCall.isConferenceCall()) {
+                participantsCount = mCall.getChildCallIds().size();
+            } else {
+                Call backgroundCall = CallList.getInstance().getBackgroundCall();
+                if (backgroundCall != null && backgroundCall.isConferenceCall()) {
+                    participantsCount = backgroundCall.getChildCallIds().size();
+                }
+            }
+            Log.i(this, "Number of participantsCount is " + participantsCount);
+            if (participantsCount >= MAX_PARTICIPANTS_LIMIT) {
+                Toast.makeText(getUi().getContext(),
+                        R.string.too_many_recipients, Toast.LENGTH_SHORT).show();
+                return;
+            }
+         }
         TelecomAdapter.getInstance().merge(mCall.getId());
     }
 

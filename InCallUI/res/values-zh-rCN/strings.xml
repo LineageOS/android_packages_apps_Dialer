@@ -196,4 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"已于今天<xliff:g id="CLOSE_TIME">%s</xliff:g>结束营业"</string>
     <string name="open_now" msgid="4615706338669555999">"营业中"</string>
     <string name="closed_now" msgid="2635314668145282080">"现已结束营业"</string>
+    <string name="too_many_recipients">4G会议电话的参与人数上限为6人。</string>
 </resources>
