@@ -39,6 +39,7 @@ public class InCallPresenterTest extends InstrumentationTestCase {
     @Mock private InCallActivity mInCallActivity;
     @Mock private AudioModeProvider mAudioModeProvider;
     @Mock private StatusBarNotifier mStatusBarNotifier;
+    @Mock private ExternalCallNotifier mExternalCallNotifier;
     @Mock private ContactInfoCache mContactInfoCache;
     @Mock private ProximitySensor mProximitySensor;
 
@@ -57,8 +58,9 @@ public class InCallPresenterTest extends InstrumentationTestCase {
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
 
         mInCallPresenter = InCallPresenter.getInstance();
-        mInCallPresenter.setUp(mContext, mCallList.getCallList(), mAudioModeProvider,
-                mStatusBarNotifier, mContactInfoCache, mProximitySensor);
+        mInCallPresenter.setUp(mContext, mCallList.getCallList(), new ExternalCallList(),
+                mAudioModeProvider, mStatusBarNotifier, mExternalCallNotifier, mContactInfoCache,
+                mProximitySensor);
     }
 
     @Override

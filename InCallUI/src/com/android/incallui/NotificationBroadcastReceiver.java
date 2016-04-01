@@ -45,6 +45,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
             "com.android.incallui.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST";
     public static final String ACTION_DECLINE_VIDEO_UPGRADE_REQUEST =
             "com.android.incallui.ACTION_DECLINE_VIDEO_UPGRADE_REQUEST";
+    public static final String ACTION_PULL_EXTERNAL_CALL =
+            "com.android.incallui.ACTION_PULL_EXTERNAL_CALL";
+    public static final String EXTRA_NOTIFICATION_ID =
+            "com.android.incallui.extra.EXTRA_NOTIFICATION_ID";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -68,6 +72,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                     VideoProfile.STATE_BIDIRECTIONAL, context);
         } else if (action.equals(ACTION_DECLINE_VIDEO_UPGRADE_REQUEST)) {
             InCallPresenter.getInstance().declineUpgradeRequest(context);
+        } else if (action.equals(ACTION_PULL_EXTERNAL_CALL)) {
+            int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, -1);
+            InCallPresenter.getInstance().getExternalCallNotifier()
+                    .pullExternalCall(notificationId);
         }
     }
 
