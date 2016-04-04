@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"‏مكالمة واردة عبر Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"‏مكالمة عمل واردة عبر اتصال Wi-Fi"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"مكالمة فيديو واردة"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"مكالمة واردة يشتبه في كونها غير مرغوب فيها"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"طلب فيديو وارد"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"بريد صوتي جديد"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"بريد صوتي جديد (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"تجاهل"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"معاودة الاتصال"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"رسالة"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"مكالمة جارية على جهاز آخر"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"تحويل الاتصال"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"لإجراء مكالمة، أوقف تشغيل وضع الطائرة أولاً."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"غير مسجل على الشبكة."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"شبكة الجوّال غير متاحة."</string>
@@ -207,6 +208,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"مغلق اليوم في <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"مفتوح الآن"</string>
     <string name="closed_now" msgid="2635314668145282080">"مغلق الآن"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"اشتباه في متصل غير مرغوب فيه"</string>
 </resources>

@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"WLAN 来电"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"WLAN 工作来电"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"视频通话来电"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"有疑似骚扰来电"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"收到视频通话请求"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"新语音邮件"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"新语音邮件 (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,10 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"拒绝"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"回电"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"发短信"</string>
+    <!-- no translation found for notification_external_call (5611236780302924816) -->
+    <skip />
+    <!-- no translation found for notification_transfer_call (687009078741947505) -->
+    <skip />
     <string name="incall_error_power_off" msgid="3626117639377110403">"要拨打电话，请先关闭飞行模式。"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"尚未注册网络。"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"无法连接到移动网络。"</string>
@@ -195,6 +198,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"已于今天<xliff:g id="CLOSE_TIME">%s</xliff:g>结束营业"</string>
     <string name="open_now" msgid="4615706338669555999">"营业中"</string>
     <string name="closed_now" msgid="2635314668145282080">"现已结束营业"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"疑似骚扰电话来电者"</string>
 </resources>

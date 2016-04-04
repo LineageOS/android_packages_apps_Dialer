@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"ಒಳಬರುವ ವೈ-ಫೈ ಕರೆ"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"ಒಳಬರುವ ವೈ-ಫೈ ಕೆಲಸದ ಕರೆ"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"ಒಳಬರುವ ವೀಡಿಯೊ ಕರೆ"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"ಒಳಬರುವ ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆ"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"ಒಳಬರುವ ವೀಡಿಯೊ ವಿನಂತಿ"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"ಹೊಸ ಧ್ವನಿಮೇಲ್‌"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"ಹೊಸ ಧ್ವನಿಮೇಲ್‌‌ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"ವಜಾಗೊಳಿಸಿ"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"ಮರಳಿ ಕರೆ"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"ಸಂದೇಶ"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"ಮತ್ತೊಂದು ಸಾಧನದಲ್ಲಿ ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"ಕರೆ ವರ್ಗಾಯಿಸಿ"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ಕರೆ ಮಾಡಲು, ಮೊದಲು ಏರ್‌ಪ್ಲೇನ್‌‌ ಮೋಡ್‌‌ ಆಫ್‌ ಮಾಡಿ."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"ನೆಟ್‌ವರ್ಕ್‌ನಲ್ಲಿ ಇನ್ನೂ ನೋಂದಣಿಯಾಗಿಲ್ಲ."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"ಸೆಲ್ಯುಲಾರ್ ನೆಟ್‌ವರ್ಕ್‌ ಲಭ್ಯವಿಲ್ಲ."</string>
@@ -195,6 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"ಇಂದು <xliff:g id="CLOSE_TIME">%s</xliff:g> ಗಂಟೆಗೆ ಮುಚ್ಚಲಾಗಿದೆ"</string>
     <string name="open_now" msgid="4615706338669555999">"ಇದೀಗ ತೆರೆಯಲಾಗಿದೆ"</string>
     <string name="closed_now" msgid="2635314668145282080">"ಇದೀಗ ಮುಚ್ಚಲಾಗಿದೆ"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆದಾರರು"</string>
 </resources>

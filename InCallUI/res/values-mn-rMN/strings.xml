@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Орох Wi-Fi дуудлага"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Орох Wi-Fi албаны дуудлага"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Орох видео дуудлага"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"Орж ирсэн сэжигтэй спам дуудлага"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Орох видео хүсэлт"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Шинэ дуут шуудан"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Шинэ дуут шуудан (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Алгасах"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Буцааж залгах"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Зурвас"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Өөр төхөөрөмж дээр хийгдэж буй дуудлага"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Дуудлага шилжүүлэх"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Залгахын тулд эхлээд Нислэгийн горимоос гарна уу."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Сүлжээнд бүртгэгдээгүй байна."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Үүрэн сүлжээ байхгүй."</string>
@@ -195,6 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Өнөөдөр <xliff:g id="CLOSE_TIME">%s</xliff:g>-с хаасан"</string>
     <string name="open_now" msgid="4615706338669555999">"Одоо нээлттэй"</string>
     <string name="closed_now" msgid="2635314668145282080">"Одоо хаалттай"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"Сэжигтэй спам дуудлага хийгч"</string>
 </resources>

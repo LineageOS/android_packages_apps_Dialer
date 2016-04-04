@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"來電 (透過 Wi-Fi)"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"公司來電 (透過 Wi-Fi)"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"視訊通話來電"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"可疑的騷擾/廣告來電"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"收到視訊通話要求"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"新的語音留言"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"新的語音留言 (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,10 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"拒絕"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"回撥"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"傳送簡訊"</string>
+    <!-- no translation found for notification_external_call (5611236780302924816) -->
+    <skip />
+    <!-- no translation found for notification_transfer_call (687009078741947505) -->
+    <skip />
     <string name="incall_error_power_off" msgid="3626117639377110403">"撥號前，請先關閉飛航模式。"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"尚未註冊網路。"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"無法連線到行動網路。"</string>
@@ -195,6 +198,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"已於本日<xliff:g id="CLOSE_TIME">%s</xliff:g>結束營業"</string>
     <string name="open_now" msgid="4615706338669555999">"營業中"</string>
     <string name="closed_now" msgid="2635314668145282080">"本日已結束營業"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"可疑的騷擾/廣告來電者"</string>
 </resources>

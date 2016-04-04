@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Inkomende Wi-Fi-oproep"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Inkomende Wi-Fi-werkoproep"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Inkomende video-oproep"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"Inkomende verdagte strooipos-oproep"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Inkomende videoversoek"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Nuwe stemboodskap"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Nuwe stemboodskap (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Maak toe"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Bel terug"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Boodskap"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Voortgesette oproep op \'n ander toestel"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Sit oproep deur"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Skakel vliegtuigmodus eers af om \'n oproep te maak."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Nie geregistreer op netwerk nie."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Sellulêre netwerk is nie beskikbaar nie."</string>
@@ -195,6 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Het vandag om <xliff:g id="CLOSE_TIME">%s</xliff:g> toegemaak"</string>
     <string name="open_now" msgid="4615706338669555999">"Nou oop"</string>
     <string name="closed_now" msgid="2635314668145282080">"Nou gesluit"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"Verdagte strooiposbeller"</string>
 </resources>

@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Долазни Wi-Fi позив"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Долазни позив за Work преко Wi-Fi-ја"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Долазни видео позив"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"Сумња на непожељан долазни позив"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Захтев за долазни видео позив"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Нова порука говорне поште"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Нова порука говорне поште (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Одбаци"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Узврати позив"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Пошаљи SMS"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Позив је у току на другом уређају"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Пребаци позив"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Да бисте упутили позив, прво искључите режим рада у авиону."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Није регистровано на мрежи."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Мобилна мрежа није доступна."</string>
@@ -198,6 +199,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Затворило се данас у <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"Тренутно отворено"</string>
     <string name="closed_now" msgid="2635314668145282080">"Тренутно затворено"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"Непожељан позивалац"</string>
 </resources>
