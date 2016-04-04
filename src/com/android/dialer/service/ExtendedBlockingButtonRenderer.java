@@ -38,6 +38,11 @@ public interface ExtendedBlockingButtonRenderer {
         public final String countryIso;
         public final String nameOrNumber;
         public final String displayNumber;
+        /**
+         * Whether the type of call is missed, voicemail, etc. An example of this is
+         * {@link android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+         */
+        public final int callType;
 
         public ViewHolderInfo(
                 /* All existing views amongst the list item actions, even if invisible */
@@ -49,7 +54,8 @@ public interface ExtendedBlockingButtonRenderer {
                 String phoneNumber,
                 String countryIso,
                 String nameOrNumber,
-                String displayNumber) {
+                String displayNumber,
+                int callType) {
 
             this.completeListItemViews = completeListItemViews;
             this.extendedBlockedViews = extendedBlockedViews;
@@ -58,6 +64,7 @@ public interface ExtendedBlockingButtonRenderer {
             this.countryIso = countryIso;
             this.nameOrNumber = nameOrNumber;
             this.displayNumber = displayNumber;
+            this.callType = callType;
         }
     }
 
