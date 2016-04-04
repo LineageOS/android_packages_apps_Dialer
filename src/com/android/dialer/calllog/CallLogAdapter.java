@@ -16,14 +16,15 @@
 
 package com.android.dialer.calllog;
 
-import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.service.ExtendedCallInfoService;
 import com.android.dialerbind.ObjectFactory;
 import com.google.common.annotations.VisibleForTesting;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -44,6 +45,7 @@ import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.CheckBox;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.CompatUtils;
@@ -70,8 +72,7 @@ import java.util.HashMap;
  */
 public class CallLogAdapter extends GroupingListAdapter
         implements CallLogGroupBuilder.GroupCreator,
-                VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
-                CallLogListItemViewHolder.OnClickListener {
+                VoicemailPlaybackPresenter.OnVoicemailDeletedListener {
 
     // Types of activities the call log adapter is used for
     public static final int ACTIVITY_TYPE_CALL_LOG = 1;
@@ -140,6 +141,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 public void onChangeFilteredNumberUndo() {
                 }
             };
+    private CallLogListItemViewHolder.OnClickListener mBlockReportSpamListener;
 
     /**
      *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
@@ -319,6 +321,8 @@ public class CallLogAdapter extends GroupingListAdapter
         maybeShowVoicemailPromoCard();
 
         mExtendedCallInfoService = ObjectFactory.newExtendedCallInfoService(context);
+        mBlockReportSpamListener = new BlockReportSpamListener(mContext, this,
+                mExtendedCallInfoService, mFilteredNumberAsyncQueryHandler);
         setHasStableIds(true);
     }
 
@@ -334,36 +338,6 @@ public class CallLogAdapter extends GroupingListAdapter
             mCurrentlyExpandedRowId =
                     savedInstanceState.getLong(KEY_EXPANDED_ROW_ID, NO_EXPANDED_LIST_ITEM);
         }
-    }
-
-    @Override
-    public void onBlockReportSpam(String number, String countryIso, String displayNumber) {
-        mExtendedCallInfoService.reportSpam(number, countryIso);
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public void onBlock(String number, String countryIso, String displayNumber) {
-        FilteredNumberCompat
-                .showBlockNumberDialogFlow(mContext.getContentResolver(), null, number,
-                        countryIso, displayNumber, R.id.floating_action_button_container,
-                        ((Activity) mContext).getFragmentManager(),
-                        mBlockedNumberDialogCallback);
-    }
-
-    @Override
-    public void onUnblock(String number, String countryIso, Integer blockId, String displayNumber) {
-        FilteredNumberCompat
-                .showBlockNumberDialogFlow(mContext.getContentResolver(), blockId, number,
-                        countryIso, displayNumber, R.id.floating_action_button_container,
-                        ((Activity) mContext).getFragmentManager(),
-                        mBlockedNumberDialogCallback);
-    }
-
-    @Override
-    public void onReportNotSpam(String number, String countryIso, String displayNumber) {
-        mExtendedCallInfoService.reportNotSpam(number, countryIso);
-        notifyDataSetChanged();
     }
 
     /**
@@ -442,7 +416,7 @@ public class CallLogAdapter extends GroupingListAdapter
         CallLogListItemViewHolder viewHolder = CallLogListItemViewHolder.create(
                 view,
                 mContext,
-                this,
+                mBlockReportSpamListener,
                 mExpandCollapseListener,
                 mCallLogCache,
                 mCallLogListItemHelper,

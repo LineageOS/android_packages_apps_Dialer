@@ -238,6 +238,27 @@ public class FilteredNumberCompat {
     }
 
     /**
+     * Shows block number migration dialog if necessary.
+     *
+     * @param fragmentManager The {@link FragmentManager} used to show fragments.
+     * @param listener The {@link BlockedNumbersMigrator.Listener} to call when migration is
+     *                 complete.
+     * @return boolean True if migration dialog is shown.
+     */
+    public static boolean maybeShowBlockNumberMigrationDialog(
+            ContentResolver contentResolver, FragmentManager fragmentManager,
+            BlockedNumbersMigrator.Listener listener) {
+        if (shouldShowMigrationDialog(true)) {
+            Log.i(TAG, "maybeShowBlockNumberMigrationDialog - showing migration dialog");
+            MigrateBlockedNumbersDialogFragment
+                    .newInstance(new BlockedNumbersMigrator(contentResolver), listener)
+                    .show(fragmentManager, "MigrateBlockedNumbers");
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Shows the flow of {@link android.app.DialogFragment}s for blocking or unblocking numbers.
      *
      * @param blockId The id into the blocked numbers database.

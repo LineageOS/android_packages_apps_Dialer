@@ -1066,4 +1066,31 @@
 
     <!-- Label under the name of a spam number in the call log. [CHAR LIMIT=15] -->
     <string name="spam_number_call_log_label">Spam</string>
+
+    <!-- Title of alert dialog after clicking on Block/report as spam.  [CHAR LIMIT=100] -->
+    <string name="block_report_number_alert_title">Block <xliff:g id="number">%1$s</xliff:g>?</string>
+
+    <!-- Text in alert dialog after clicking on Block/report as spam.  [CHAR LIMIT=100] -->
+    <string name="block_report_number_alert_details">Future calls and voicemails from this number will be blocked.</string>
+
+    <!-- Label for checkbox in the Alert dialog to allow the user to report the number as spam as well.  [CHAR LIMIT=30] -->
+    <string name="checkbox_report_as_spam_action">Report call as spam</string>
+
+    <!-- Text in alert dialog after clicking on Block.  [CHAR LIMIT=100] -->
+    <string name="block_number_alert_details">Future calls and voicemails from this number will be blocked. This call will be reported as spam.</string>
+
+    <!-- Title of alert dialog after clicking on Unblock.  [CHAR LIMIT=100] -->
+    <string name="unblock_report_number_alert_title">Unblock <xliff:g id="number">%1$s</xliff:g>?</string>
+
+    <!-- Text in alert dialog after clicking on Unblock.  [CHAR LIMIT=100] -->
+    <string name="unblock_number_alert_details">This number will be unblocked and reported as not spam. Future calls and voicemails won\'t be identified as spam.</string>
+
+    <!-- Title of alert dialog after clicking on Report as not spam.  [CHAR LIMIT=100] -->
+    <string name="report_not_spam_alert_title">Whitelist <xliff:g id="number">%1$s</xliff:g>?</string>
+
+    <!-- Report not spam number alert dialog button [CHAR LIMIT=32] -->
+    <string name="report_not_spam_alert_button">Whitelist</string>
+
+    <!-- Text in alert dialog after clicking on Report as not spam.  [CHAR LIMIT=100] -->
+    <string name="report_not_spam_alert_details">Future calls and voicemails from this number won\'t be identified as spam. This number will be reported as not spam.</string>
 </resources>

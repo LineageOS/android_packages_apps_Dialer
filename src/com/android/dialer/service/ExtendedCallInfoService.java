@@ -44,13 +44,17 @@ public interface ExtendedCallInfoService {
      * Reports number as spam.
      * @param number The number to be reported.
      * @param countryIso The country ISO of the number.
+     * @param callType    Whether the type of call is missed, voicemail, etc. Example of this is
+     *                    {@link android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
      */
-    void reportSpam(String number, String countryIso);
+    void reportSpam(String number, String countryIso, int callType);
 
     /**
      * Reports number as not spam.
      * @param number The number to be reported.
      * @param countryIso The country ISO of the number.
+     * @param callType    Whether the type of call is missed, voicemail, etc. Example of this is
+     *                    {@link android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
      */
-    void reportNotSpam(String number, String countryIso);
+    void reportNotSpam(String number, String countryIso, int callType);
 }

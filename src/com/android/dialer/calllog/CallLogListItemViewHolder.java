@@ -54,6 +54,7 @@ import com.android.dialer.calllog.calllogcache.CallLogCache;
 import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.filterednumber.BlockNumberDialogFragment;
+import com.android.dialer.filterednumber.BlockedNumbersMigrator;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
@@ -73,10 +74,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         View.OnCreateContextMenuListener {
 
     public interface OnClickListener {
-        void onBlockReportSpam(String number, String countryIso, String displayNumber);
-        void onBlock(String number, String countryIso, String displayNumber);
-        void onUnblock(String number, String countryIso, Integer blockId, String displayNumber);
-        void onReportNotSpam(String number, String countryIso, String displayNumber);
+        void onBlockReportSpam(
+                String displayNumber, String number, String countryIso, int callType);
+        void onBlock(String displayNumber, String number, String countryIso, int callType);
+        void onUnblock(String displayNumber, String number, String countryIso, Integer blockId,
+                       boolean isSpam, int callType);
+        void onReportNotSpam(String displayNumber, String number, String countryIso, int callType);
     }
 
     /** The root view of the call log list item */
@@ -672,13 +675,25 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */
                     accountHandle);
         } else if (view.getId() == R.id.block_report_action) {
-            mBlockReportListener.onBlockReportSpam(number, countryIso, displayNumber);
+            maybeShowBlockNumberMigrationDialog(new BlockedNumbersMigrator.Listener() {
+                @Override
+                public void onComplete() {
+                    mBlockReportListener.onBlockReportSpam(
+                            displayNumber, number, countryIso, callType);
+                }
+            });
         } else if (view.getId() == R.id.block_action) {
-            mBlockReportListener.onBlock(number, countryIso, displayNumber);
+            maybeShowBlockNumberMigrationDialog(new BlockedNumbersMigrator.Listener() {
+                @Override
+                public void onComplete() {
+                    mBlockReportListener.onBlock(displayNumber, number, countryIso, callType);
+                }
+            });
         } else if (view.getId() == R.id.unblock_action) {
-            mBlockReportListener.onUnblock(number, countryIso, blockId, displayNumber);
+            mBlockReportListener.onUnblock(
+                    displayNumber, number, countryIso, blockId, isSpam, callType);
         } else if (view.getId() == R.id.report_not_spam_action) {
-            mBlockReportListener.onReportNotSpam(number, countryIso, displayNumber);
+            mBlockReportListener.onReportNotSpam(displayNumber, number, countryIso, callType);
         } else {
             final IntentProvider intentProvider = (IntentProvider) view.getTag();
             if (intentProvider != null) {
@@ -688,6 +703,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     DialerUtils.startActivityWithErrorToast(mContext, intent);
                 }
             }
+        }
+    }
+
+    private void maybeShowBlockNumberMigrationDialog(BlockedNumbersMigrator.Listener listener) {
+        if (!FilteredNumberCompat.maybeShowBlockNumberMigrationDialog(
+                mContext.getContentResolver(),
+                ((Activity) mContext).getFragmentManager(), listener)) {
+            listener.onComplete();
         }
     }
 
