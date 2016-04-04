@@ -374,21 +374,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             cmi = CallMethodHelper.getCallMethod(inCallComponentName);
         }
 
-        if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber
-                || cmi != null && cmi.mIsInCallProvider) {
-            if (cmi != null && cmi.mIsInCallProvider) {
-                callButtonView.setTag(R.id.incall_provider_action_type, INCALL_ACTION_TYPE_PHONE);
-                ((TextView) callButtonView.findViewById(R.id.call_action_text))
-                        .setText(mContext.getString(R.string.provider_voice_call, cmi.mName));
-            } else {
-                callButtonView.setTag(R.id.incall_provider_action_type, null);
-                callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number,
-                        OriginCodes.CALL_LOG_ACTION_ONE));
-                ((TextView) callButtonView.findViewById(R.id.call_action_text))
-                        .setText(TextUtils.expandTemplate(
-                                mContext.getString(R.string.call_log_action_call),
-                                nameOrNumber));
-            }
+        if (!TextUtils.isEmpty(voicemailUri) && canPlaceCallToNumber) {
+            callButtonView.setTag(R.id.incall_provider_action_type, null);
+            callButtonView.setTag(IntentProvider.getReturnCallIntentProvider(number,
+                    OriginCodes.CALL_LOG_ACTION_ONE));
+            ((TextView) callButtonView.findViewById(R.id.call_action_text))
+                    .setText(TextUtils.expandTemplate(
+                            mContext.getString(R.string.call_log_action_call),
+                            nameOrNumber));
             callButtonView.setVisibility(View.VISIBLE);
         } else {
             callButtonView.setVisibility(View.GONE);
@@ -446,7 +439,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             addToExistingContactButtonView.setVisibility(View.GONE);
         }
 
-        if (cmi != null && cmi.mIsInCallProvider) {
+        if (cmi != null && cmi.mIsInCallProvider && !PhoneNumberUtils.isGlobalPhoneNumber(number)) {
             sendMessageView.setVisibility(View.GONE);
         } else {
             sendMessageView.setVisibility(View.VISIBLE);
