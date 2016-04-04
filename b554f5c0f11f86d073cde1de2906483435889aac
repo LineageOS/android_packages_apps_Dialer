@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7faddb67_fb59e9fd",
+        "filename": "res/values/cm_arrays.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 11583
+      },
+      "writtenOn": "2016-04-04T23:27:28Z",
+      "side": 1,
+      "message": "missed the removal of the second whitepages here which caused a mis-selection on yellowpages as yellowpages would look for WhitePages_CA which doesnt exist anymore. other than that this seems good :)",
+      "revId": "b554f5c0f11f86d073cde1de2906483435889aac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
