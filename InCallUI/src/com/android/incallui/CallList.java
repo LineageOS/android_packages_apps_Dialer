@@ -96,7 +96,7 @@ public class CallList {
             onIncoming(call, call.getCannedSmsResponses());
             if (mExtendedCallInfoService != null) {
                 String number = TelecomCallUtil.getNumber(telecomCall);
-                mExtendedCallInfoService.getExtendedCallInfo(number,
+                mExtendedCallInfoService.getExtendedCallInfo(number, null,
                         new ExtendedCallInfoService.Listener() {
                             @Override
                             public void onComplete(boolean isSpam) {

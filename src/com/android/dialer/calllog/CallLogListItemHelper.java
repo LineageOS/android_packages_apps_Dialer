@@ -82,6 +82,8 @@ import com.android.dialer.calllog.calllogcache.CallLogCache;
 
         // Cache country iso. Used for number filtering.
         views.countryIso = details.countryIso;
+
+        views.updatePhoto();
     }
 
     /**

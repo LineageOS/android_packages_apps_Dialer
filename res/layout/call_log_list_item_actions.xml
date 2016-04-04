@@ -129,10 +129,61 @@
 
     </LinearLayout>
 
-    <ViewStub
-        android:id="@+id/extended_blocking_actions_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/block_report_action"
+        style="@style/CallLogActionStyle"
+        android:visibility="gone">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_block_24dp"/>
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_block_report_number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/block_action"
+        style="@style/CallLogActionStyle"
+        android:visibility="gone">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_block_24dp"/>
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_block_number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/unblock_action"
+        style="@style/CallLogActionStyle"
+        android:visibility="gone">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_unblock"/>
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_unblock_number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/report_not_spam_action"
+        style="@style/CallLogActionStyle"
+        android:visibility="gone">
+
+        <ImageView
+            style="@style/CallLogActionIconStyle"
+            android:src="@drawable/ic_unblock"/>
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/call_log_action_remove_spam" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/details_action"

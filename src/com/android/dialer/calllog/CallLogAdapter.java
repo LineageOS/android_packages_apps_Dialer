@@ -16,8 +16,13 @@
 
 package com.android.dialer.calllog;
 
+import com.android.dialer.compat.FilteredNumberCompat;
+import com.android.dialer.filterednumber.BlockNumberDialogFragment;
+import com.android.dialer.service.ExtendedCallInfoService;
+import com.android.dialerbind.ObjectFactory;
 import com.google.common.annotations.VisibleForTesting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,10 +37,8 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -55,15 +58,12 @@ import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.database.VoicemailArchiveContract;
-import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -71,7 +71,7 @@ import java.util.Map;
 public class CallLogAdapter extends GroupingListAdapter
         implements CallLogGroupBuilder.GroupCreator,
                 VoicemailPlaybackPresenter.OnVoicemailDeletedListener,
-                ExtendedBlockingButtonRenderer.Listener {
+                CallLogListItemViewHolder.OnClickListener {
 
     // Types of activities the call log adapter is used for
     public static final int ACTIVITY_TYPE_CALL_LOG = 1;
@@ -104,7 +104,6 @@ public class CallLogAdapter extends GroupingListAdapter
     protected final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final CallFetcher mCallFetcher;
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
-    private final Map<String, Boolean> mBlockedNumberCache = new ArrayMap<>();
 
     protected ContactInfoCache mContactInfoCache;
 
@@ -121,6 +120,26 @@ public class CallLogAdapter extends GroupingListAdapter
     private int mHiddenPosition = RecyclerView.NO_POSITION;
     private Uri mHiddenItemUri = null;
     private boolean mPendingHide = false;
+    private BlockNumberDialogFragment.Callback mBlockedNumberDialogCallback =
+            new BlockNumberDialogFragment.Callback() {
+                @Override
+                public void onFilterNumberSuccess() {
+                    Logger.logInteraction(
+                            InteractionEvent.BLOCK_NUMBER_CALL_LOG);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onUnfilterNumberSuccess() {
+                    Logger.logInteraction(
+                            InteractionEvent.UNBLOCK_NUMBER_CALL_LOG);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChangeFilteredNumberUndo() {
+                }
+            };
 
     /**
      *  Hashmap, keyed by call Id, used to track the day group for a call.  As call log entries are
@@ -152,6 +171,8 @@ public class CallLogAdapter extends GroupingListAdapter
 
     /** Helper to group call log entries. */
     private final CallLogGroupBuilder mCallLogGroupBuilder;
+
+    private ExtendedCallInfoService mExtendedCallInfoService;
 
     /**
      * The OnClickListener used to expand or collapse the action buttons of a call log entry.
@@ -296,6 +317,9 @@ public class CallLogAdapter extends GroupingListAdapter
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         mContactsPreferences = new ContactsPreferences(mContext);
         maybeShowVoicemailPromoCard();
+
+        mExtendedCallInfoService = ObjectFactory.newExtendedCallInfoService(context);
+        setHasStableIds(true);
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -313,21 +337,33 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     @Override
-    public void onBlockedNumber(String number,String countryIso) {
-        String cacheKey = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-        if (!TextUtils.isEmpty(cacheKey)) {
-            mBlockedNumberCache.put(cacheKey, true);
-            notifyDataSetChanged();
-        }
+    public void onBlockReportSpam(String number, String countryIso, String displayNumber) {
+        mExtendedCallInfoService.reportSpam(number, countryIso);
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onUnblockedNumber( String number, String countryIso) {
-        String cacheKey = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-        if (!TextUtils.isEmpty(cacheKey)) {
-            mBlockedNumberCache.put(cacheKey, false);
-            notifyDataSetChanged();
-        }
+    public void onBlock(String number, String countryIso, String displayNumber) {
+        FilteredNumberCompat
+                .showBlockNumberDialogFlow(mContext.getContentResolver(), null, number,
+                        countryIso, displayNumber, R.id.floating_action_button_container,
+                        ((Activity) mContext).getFragmentManager(),
+                        mBlockedNumberDialogCallback);
+    }
+
+    @Override
+    public void onUnblock(String number, String countryIso, Integer blockId, String displayNumber) {
+        FilteredNumberCompat
+                .showBlockNumberDialogFlow(mContext.getContentResolver(), blockId, number,
+                        countryIso, displayNumber, R.id.floating_action_button_container,
+                        ((Activity) mContext).getFragmentManager(),
+                        mBlockedNumberDialogCallback);
+    }
+
+    @Override
+    public void onReportNotSpam(String number, String countryIso, String displayNumber) {
+        mExtendedCallInfoService.reportNotSpam(number, countryIso);
+        notifyDataSetChanged();
     }
 
     /**
@@ -412,22 +448,8 @@ public class CallLogAdapter extends GroupingListAdapter
                 mCallLogListItemHelper,
                 mVoicemailPlaybackPresenter,
                 mFilteredNumberAsyncQueryHandler,
-                new Callback() {
-                    @Override
-                    public void onFilterNumberSuccess() {
-                        Logger.logInteraction(
-                                InteractionEvent.BLOCK_NUMBER_CALL_LOG);
-                    }
-
-                    @Override
-                    public void onUnfilterNumberSuccess() {
-                        Logger.logInteraction(
-                                InteractionEvent.UNBLOCK_NUMBER_CALL_LOG);
-                    }
-
-                    @Override
-                    public void onChangeFilteredNumberUndo() {}
-                }, mActivityType == ACTIVITY_TYPE_ARCHIVE);
+                mBlockedNumberDialogCallback,
+                mActivityType == ACTIVITY_TYPE_ARCHIVE);
 
         viewHolder.callLogEntryView.setTag(viewHolder);
         viewHolder.callLogEntryView.setAccessibilityDelegate(mAccessibilityDelegate);
@@ -481,7 +503,40 @@ public class CallLogAdapter extends GroupingListAdapter
      * @param position The position of the list item.
      */
 
-    private void bindCallLogListViewHolder(ViewHolder viewHolder, int position) {
+    private void bindCallLogListViewHolder(final ViewHolder viewHolder, final int position) {
+        Cursor c = (Cursor) getItem(position);
+        if (c == null) {
+            return;
+        }
+
+        final String number = c.getString(CallLogQuery.NUMBER);
+        final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
+
+        mFilteredNumberAsyncQueryHandler.isBlockedNumber(
+                new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
+                    @Override
+                    public void onCheckComplete(Integer id) {
+                        final CallLogListItemViewHolder views =
+                                (CallLogListItemViewHolder) viewHolder;
+                        views.blockId = id;
+                        if (mExtendedCallInfoService == null) {
+                            loadDataAndRender(views);
+                        } else {
+                            mExtendedCallInfoService.getExtendedCallInfo(number, countryIso,
+                                    new ExtendedCallInfoService.Listener() {
+                                        @Override
+                                        public void onComplete(boolean isSpam) {
+                                            views.isSpam = isSpam;
+                                            loadDataAndRender(views);
+                                        }
+                                    });
+                        }
+                    }
+                }, number, countryIso);
+    }
+
+    private void loadDataAndRender(CallLogListItemViewHolder views) {
+        int position = views.getAdapterPosition();
         Cursor c = (Cursor) getItem(position);
         if (c == null) {
             return;
@@ -544,7 +599,6 @@ public class CallLogAdapter extends GroupingListAdapter
             details.contactUserType = info.userType;
         }
 
-        final CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
         views.info = info;
         views.rowId = c.getLong(CallLogQuery.ID);
         // Store values used when the actions ViewStub is inflated on expansion.
@@ -589,19 +643,22 @@ public class CallLogAdapter extends GroupingListAdapter
             views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         }
 
-        mCallLogListItemHelper.setPhoneCallDetails(views, details);
+        // Reversely pass spam information from views since details is not constructed when spam
+        // information comes back. This is used to render phone call details.
+        details.isSpam = views.isSpam;
+        render(views, details);
+    }
 
+    private void render(CallLogListItemViewHolder views, PhoneCallDetails details) {
+        mCallLogListItemHelper.setPhoneCallDetails(views, details);
         if (mCurrentlyExpandedRowId == views.rowId) {
             // In case ViewHolders were added/removed, update the expanded position if the rowIds
             // match so that we can restore the correct expanded state on rebind.
-            mCurrentlyExpandedPosition = position;
+            mCurrentlyExpandedPosition = views.getAdapterPosition();
             views.showActions(true);
         } else {
             views.showActions(false);
         }
-        views.updatePhoto();
-
-        mCallLogListItemHelper.setPhoneCallDetails(views, details);
     }
 
     private String getPreferredDisplayName(ContactInfo contactInfo) {
@@ -638,6 +695,16 @@ public class CallLogAdapter extends GroupingListAdapter
         return super.getItem(position - (mShowVoicemailPromoCard ? 1 : 0)
                 + ((mHiddenPosition != RecyclerView.NO_POSITION && position >= mHiddenPosition)
                 ? 1 : 0));
+    }
+
+    @Override
+    public long getItemId(int position) {
+        Cursor cursor = (Cursor) getItem(position);
+        if (cursor != null) {
+            return cursor.getLong(CallLogQuery.ID);
+        } else {
+            return 0;
+        }
     }
 
     @Override

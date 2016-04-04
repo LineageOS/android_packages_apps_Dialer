@@ -57,15 +57,10 @@ import com.android.dialer.filterednumber.BlockNumberDialogFragment;
 import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
-import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
-import com.android.dialerbind.ObjectFactory;
-import com.google.common.collect.Lists;
-
-import java.util.List;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -76,6 +71,13 @@ import java.util.List;
 public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener, MenuItem.OnMenuItemClickListener,
         View.OnCreateContextMenuListener {
+
+    public interface OnClickListener {
+        void onBlockReportSpam(String number, String countryIso, String displayNumber);
+        void onBlock(String number, String countryIso, String displayNumber);
+        void onUnblock(String number, String countryIso, Integer blockId, String displayNumber);
+        void onReportNotSpam(String number, String countryIso, String displayNumber);
+    }
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -101,6 +103,10 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public View createNewContactButtonView;
     public View addToExistingContactButtonView;
     public View sendMessageView;
+    public View blockReportView;
+    public View blockView;
+    public View unblockView;
+    public View reportNotSpamView;
     public View detailsButtonView;
     public View callWithNoteButtonView;
     public ImageView workIconView;
@@ -198,9 +204,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public ContactInfo info;
 
     /**
-     * Whether the current log entry is a blocked number or not. Used in updatePhoto()
+     * Whether the current log entry is a spam number or not. Used in updatePhoto()
      */
-    public boolean isBlocked;
+    public boolean isSpam;
 
     /**
      * Whether this is the archive tab or not.
@@ -212,19 +218,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     private final CallLogListItemHelper mCallLogListItemHelper;
     private final VoicemailPlaybackPresenter mVoicemailPlaybackPresenter;
     private final FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
+    private final OnClickListener mBlockReportListener;
 
     private final BlockNumberDialogFragment.Callback mFilteredNumberDialogCallback;
 
     private final int mPhotoSize;
-    private ViewStub mExtendedBlockingViewStub;
-    private final ExtendedBlockingButtonRenderer mExtendedBlockingButtonRenderer;
 
     private View.OnClickListener mExpandCollapseListener;
     private boolean mVoicemailPrimaryActionButtonClicked;
 
     private CallLogListItemViewHolder(
             Context context,
-            ExtendedBlockingButtonRenderer.Listener eventListener,
+            OnClickListener blockReportListener,
             View.OnClickListener expandCollapseListener,
             CallLogCache callLogCache,
             CallLogListItemHelper callLogListItemHelper,
@@ -248,6 +253,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         mVoicemailPlaybackPresenter = voicemailPlaybackPresenter;
         mFilteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
         mFilteredNumberDialogCallback = filteredNumberDialogCallback;
+        mBlockReportListener = blockReportListener;
 
         this.rootView = rootView;
         this.quickContactView = quickContactView;
@@ -272,14 +278,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         primaryActionButtonView.setOnClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
         primaryActionView.setOnCreateContextMenuListener(this);
-        mExtendedBlockingButtonRenderer =
-                ObjectFactory.newExtendedBlockingButtonRenderer(mContext, eventListener);
     }
 
     public static CallLogListItemViewHolder create(
             View view,
             Context context,
-            ExtendedBlockingButtonRenderer.Listener eventListener,
+            OnClickListener blockReportListener,
             View.OnClickListener expandCollapseListener,
             CallLogCache callLogCache,
             CallLogListItemHelper callLogListItemHelper,
@@ -290,7 +294,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         return new CallLogListItemViewHolder(
                 context,
-                eventListener,
+                blockReportListener,
                 expandCollapseListener,
                 callLogCache,
                 callLogListItemHelper,
@@ -428,14 +432,23 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             sendMessageView = actionsView.findViewById(R.id.send_message_action);
             sendMessageView.setOnClickListener(this);
 
+            blockReportView = actionsView.findViewById(R.id.block_report_action);
+            blockReportView.setOnClickListener(this);
+
+            blockView = actionsView.findViewById(R.id.block_action);
+            blockView.setOnClickListener(this);
+
+            unblockView = actionsView.findViewById(R.id.unblock_action);
+            unblockView.setOnClickListener(this);
+
+            reportNotSpamView = actionsView.findViewById(R.id.report_not_spam_action);
+            reportNotSpamView.setOnClickListener(this);
+
             detailsButtonView = actionsView.findViewById(R.id.details_action);
             detailsButtonView.setOnClickListener(this);
 
             callWithNoteButtonView = actionsView.findViewById(R.id.call_with_note_action);
             callWithNoteButtonView.setOnClickListener(this);
-
-            mExtendedBlockingViewStub =
-                    (ViewStub) actionsView.findViewById(R.id.extended_blocking_actions_container);
         }
 
         bindActionButtons();
@@ -568,32 +581,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         callWithNoteButtonView.setVisibility(
                 supportsCallSubject && !isVoicemailNumber ? View.VISIBLE : View.GONE);
 
-        if(mExtendedBlockingButtonRenderer != null){
-            List<View> completeLogListItems = Lists.newArrayList(
-                    createNewContactButtonView,
-                    addToExistingContactButtonView,
-                    sendMessageView,
-                    callButtonView,
-                    callWithNoteButtonView,
-                    detailsButtonView,
-                    voicemailPlaybackView);
-
-            List<View> blockedNumberVisibleViews = Lists.newArrayList(detailsButtonView);
-            List<View> extendedBlockingVisibleViews = Lists.newArrayList(detailsButtonView);
-
-            ExtendedBlockingButtonRenderer.ViewHolderInfo viewHolderInfo =
-                    new ExtendedBlockingButtonRenderer.ViewHolderInfo(
-                            completeLogListItems,
-                            extendedBlockingVisibleViews,
-                            blockedNumberVisibleViews,
-                            number,
-                            countryIso,
-                            nameOrNumber.toString(),
-                            displayNumber);
-            mExtendedBlockingButtonRenderer.setViewHolderInfo(viewHolderInfo);
-
-            mExtendedBlockingButtonRenderer.render(mExtendedBlockingViewStub);
-        }
+        updateBlockReportActions();
     }
 
     /**
@@ -635,6 +623,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     public void updatePhoto() {
+        if (isSpam) {
+            quickContactView.setImageDrawable(
+                    mContext.getDrawable(R.drawable.blocked_contact));
+            return;
+        }
         quickContactView.assignContactUri(info.lookupUri);
 
         final boolean isVoicemail = mCallLogCache.isVoicemailNumber(accountHandle, number);
@@ -658,14 +651,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             ContactPhotoManager.getInstance(mContext).loadThumbnail(quickContactView, info.photoId,
                     false /* darkTheme */, true /* isCircular */, request);
         }
-
-        if (mExtendedBlockingButtonRenderer != null) {
-            mExtendedBlockingButtonRenderer.updatePhotoAndLabelIfNecessary(
-                    number,
-                    countryIso,
-                    quickContactView,
-                    phoneCallDetailsViews.callLocationAndDate);
-        }
     }
 
     @Override
@@ -686,6 +671,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                                                                            view in dialog. */
                     numberType, /* phone number type (e.g. mobile) in second line of contact view */
                     accountHandle);
+        } else if (view.getId() == R.id.block_report_action) {
+            mBlockReportListener.onBlockReportSpam(number, countryIso, displayNumber);
+        } else if (view.getId() == R.id.block_action) {
+            mBlockReportListener.onBlock(number, countryIso, displayNumber);
+        } else if (view.getId() == R.id.unblock_action) {
+            mBlockReportListener.onUnblock(number, countryIso, blockId, displayNumber);
+        } else if (view.getId() == R.id.report_not_spam_action) {
+            mBlockReportListener.onReportNotSpam(number, countryIso, displayNumber);
         } else {
             final IntentProvider intentProvider = (IntentProvider) view.getTag();
             if (intentProvider != null) {
@@ -728,5 +721,25 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
         viewHolder.workIconView = new ImageButton(context);
         return viewHolder;
+    }
+
+    private void updateBlockReportActions() {
+        // Set block/spam actions.
+        blockReportView.setVisibility(View.GONE);
+        blockView.setVisibility(View.GONE);
+        unblockView.setVisibility(View.GONE);
+        reportNotSpamView.setVisibility(View.GONE);
+        boolean isBlocked = blockId != null;
+        if (isBlocked) {
+            unblockView.setVisibility(View.VISIBLE);
+        } else {
+            if (isSpam) {
+                blockView.setVisibility(View.VISIBLE);
+                reportNotSpamView.setVisibility(View.VISIBLE);
+            } else {
+                blockReportView.setVisibility(View.VISIBLE);
+            }
+        }
+
     }
 }

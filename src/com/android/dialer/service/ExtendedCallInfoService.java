@@ -35,7 +35,22 @@ public interface ExtendedCallInfoService {
     /**
      * Gets extended call information.
      * @param number The phone number of the call.
+     * @param countryIso The country ISO of the call.
      * @param listener The callback to be invoked after {@code Info} is fetched.
      */
-    void getExtendedCallInfo(String number, Listener listener);
+    void getExtendedCallInfo(String number, String countryIso, Listener listener);
+
+    /**
+     * Reports number as spam.
+     * @param number The number to be reported.
+     * @param countryIso The country ISO of the number.
+     */
+    void reportSpam(String number, String countryIso);
+
+    /**
+     * Reports number as not spam.
+     * @param number The number to be reported.
+     * @param countryIso The country ISO of the number.
+     */
+    void reportNotSpam(String number, String countryIso);
 }
