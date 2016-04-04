@@ -150,6 +150,12 @@
 
     <!-- Message indicating call failed due to low battery -->
     <string name="call_failed_due_to_low_battery">Call is failed due to low battery</string>
+
+    <!-- VoWifi call quality indicators -->
+    <string name="vowifi_call_quality_good">Good Voice quality</string>
+    <string name="vowifi_call_quality_fair">Fair Voice quality</string>
+    <string name="vowifi_call_quality_poor">Poor Voice quality</string>
+
     <!-- Title for low battery alert dialogue -->
     <string name="low_battery">Low Battery Warning</string>
     <!-- Yes option of the low battery alert dialog -->

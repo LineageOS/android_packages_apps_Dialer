@@ -46,6 +46,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import org.codeaurora.ims.internal.IQtiImsExt;
+import org.codeaurora.ims.QtiCallConstants;
 import org.codeaurora.ims.QtiImsException;
 import org.codeaurora.ims.QtiImsExtListenerBaseImpl;
 import org.codeaurora.ims.QtiImsExtManager;
@@ -999,5 +1000,12 @@ public class Call {
             return incomingConf;
         }
         return false;
+    }
+
+    public int getWifiQuality() {
+        Bundle extras = getExtras();
+        return (extras == null)? QtiCallConstants.VOWIFI_QUALITY_NONE :
+                extras.getInt(QtiCallConstants.VOWIFI_CALL_QUALITY_EXTRA_KEY,
+                QtiCallConstants.VOWIFI_QUALITY_NONE);
     }
 }

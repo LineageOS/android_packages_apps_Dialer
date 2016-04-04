@@ -63,6 +63,7 @@ import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
 
 import java.util.Objects;
+import org.codeaurora.ims.QtiCallConstants;
 
 /**
  * This class adds Notifications to the status bar for the in-call experience.
@@ -123,6 +124,34 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         Log.d(this, "onStateChange");
         mInCallState = newState;
         updateNotification(newState, callList);
+    }
+
+    private int getVoWiFiQualityIcon(int voWifiCallQuality) {
+        switch (voWifiCallQuality) {
+            case QtiCallConstants.VOWIFI_QUALITY_EXCELLENT:
+                return R.drawable.vowifi_in_call_good;
+
+            case QtiCallConstants.VOWIFI_QUALITY_FAIR:
+                return R.drawable.vowifi_in_call_fair;
+
+            case QtiCallConstants.VOWIFI_QUALITY_POOR:
+                return R.drawable.vowifi_in_call_poor;
+        }
+       return QtiCallConstants.VOWIFI_QUALITY_NONE;
+    }
+
+    private String getVoWiFiQualityText(int voWifiCallQuality) {
+        switch (voWifiCallQuality) {
+            case QtiCallConstants.VOWIFI_QUALITY_EXCELLENT:
+                return mContext.getResources().getString(R.string.vowifi_call_quality_good);
+
+            case QtiCallConstants.VOWIFI_QUALITY_FAIR:
+                return mContext.getResources().getString(R.string.vowifi_call_quality_fair);
+
+            case QtiCallConstants.VOWIFI_QUALITY_POOR:
+                return mContext.getResources().getString(R.string.vowifi_call_quality_poor);
+        }
+      return null;
     }
 
     /**
@@ -287,10 +316,17 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         final int callState = call.getState();
 
         // Check if data has changed; if nothing is different, don't issue another notification.
-        final int iconResId = getIconToDisplay(call);
+        final int iconResId;
         Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
         final String content =
                 getContentString(call, contactInfo.userType);
+        int wifiQualityValue = call.getWifiQuality();
+        if (wifiQualityValue != QtiCallConstants.VOWIFI_QUALITY_NONE) {
+            iconResId = getVoWiFiQualityIcon(wifiQualityValue);
+            content += " " + getVoWiFiQualityText(wifiQualityValue);
+        } else {
+            iconResId = getIconToDisplay(call);
+        }
         final String contentTitle = getContentTitle(contactInfo, call);
 
         final boolean isVideoUpgradeRequest = call.getSessionModificationState()
