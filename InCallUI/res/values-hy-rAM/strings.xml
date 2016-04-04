@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Մուտքային Wi-Fi զանգ"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Մուտքային աշխատանքային Wi-Fi զանգ"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Մուտքային տեսազանգ"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"Մուտքային զանգը հավանաբար լցոն է"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Մուտքային տեսազանգի հայցում"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Նոր ձայնային հաղորդագրություն"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Նոր ձայնային հաղորդագրություն (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Փակել"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Հետ զանգել"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Հաղորդագրություն"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Ընթացիկ զանգ այլ սարքում"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Փոխանցել զանգը"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Զանգ կատարելու համար նախ անջատեք Ինքնաթիռային ռեժիմը:"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Ցանցում գրանցված չէ:"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Բջջային ցանցն անհասանելի է:"</string>
@@ -195,6 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Փակվել է այսօր ժամը <xliff:g id="CLOSE_TIME">%s</xliff:g>-ին"</string>
     <string name="open_now" msgid="4615706338669555999">"Հիմա բաց է"</string>
     <string name="closed_now" msgid="2635314668145282080">"Հիմա փակ է"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"Հավանաբար լցոն է"</string>
 </resources>

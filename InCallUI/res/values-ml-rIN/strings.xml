@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"ഇൻകമിംഗ് വൈഫൈ കോൾ"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"ഇൻകമിംഗ് വൈഫൈ ഔദ്യോഗിക കോൾ"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"ഇൻകമിംഗ് വീഡിയോ കോൾ"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"സംശയാസ്‌പദമായ ഇൻകമിംഗ് സ്‌പാം കോൾ"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"ഇൻകമിംഗ് വീഡിയോ അഭ്യർത്ഥന"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"പുതിയ വോയ്‌സ്‌മെയിൽ"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"പുതിയ വോയ്‌സ്‌മെയിൽ (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"ഡിസ്മിസ്"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"തിരിച്ചുവിളിക്കുക"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"സന്ദേശം"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന കോൾ"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"കോൾ കൈമാറുക"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ഒരു കോൾ ചെയ്യാൻ, ആദ്യം ഫ്ലൈറ്റ് മോഡ് ഓഫുചെയ്യുക."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"നെറ്റ്‌വർക്കിൽ രജിസ്റ്റർ ചെയ്‌തിട്ടില്ല."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"സെല്ലുലാർ നെറ്റ്‌വർക്ക് ലഭ്യമല്ല."</string>
@@ -195,6 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"ഇന്ന് <xliff:g id="CLOSE_TIME">%s</xliff:g>-ന് അടച്ചു"</string>
     <string name="open_now" msgid="4615706338669555999">"ഇപ്പോൾ തുറന്നിരിക്കുന്നു"</string>
     <string name="closed_now" msgid="2635314668145282080">"ഇപ്പോൾ അടച്ചിരിക്കുന്നു"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"സംശയാസ്‌പദമായ സ്‌പാം കോളർ"</string>
 </resources>

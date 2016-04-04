@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Telefonatë hyrëse me Wi-Fi"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Telefonatë pune hyrëse me Wi-Fi"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Telefonatë hyrëse me video"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"Telefonatë e dyshuar si e padëshiruar"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Kërkesë për video hyrëse"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Postë e re zanore"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Postë e re zanore (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Largoje"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Ri-telefono"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Mesazh"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Telefonatë në vazhdim në një pajisje tjetër"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Transfero telefonatën"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Për të kryer telefonatë, së pari çaktivizo modalitetin e aeroplanit."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"I paregjistruar në rrjet."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Rrjeti celular nuk mundësohet."</string>
@@ -195,6 +196,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Mbyllur sot në <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"Tani është hapur"</string>
     <string name="closed_now" msgid="2635314668145282080">"Tani është mbyllur"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"I padëshirueshëm"</string>
 </resources>

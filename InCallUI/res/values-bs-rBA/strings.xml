@@ -68,8 +68,7 @@
     <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"Dolazni Wi-Fi poziv"</string>
     <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"Dolazni Wi-Fi poslovni poziv"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"Dolazni videopoziv"</string>
-    <!-- no translation found for notification_incoming_spam_call (4671356711842697266) -->
-    <skip />
+    <string name="notification_incoming_spam_call" msgid="4671356711842697266">"Mogući neželjeni dolazni poziv"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"Zahtjev za dolazni videopoziv"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"Nova govorna pošta"</string>
     <string name="notification_voicemail_title_count" msgid="1241573926817248239">"Nova govorna pošta (<xliff:g id="COUNT">%d</xliff:g>)"</string>
@@ -85,6 +84,10 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Odbaci"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Povr. poziv"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Poruka"</string>
+    <!-- no translation found for notification_external_call (5611236780302924816) -->
+    <skip />
+    <!-- no translation found for notification_transfer_call (687009078741947505) -->
+    <skip />
     <string name="incall_error_power_off" msgid="3626117639377110403">"Da uputite poziv, isključite Način rada u avionu."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Nije registrirano na mreži."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Mobilna mreža nije dostupna."</string>
@@ -198,6 +201,5 @@
     <string name="closed_today_at" msgid="4060072663433467233">"Zatvoreno danas u <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"Otvori sad"</string>
     <string name="closed_now" msgid="2635314668145282080">"Zatvoreno sada"</string>
-    <!-- no translation found for label_spam_caller (8270472297763063585) -->
-    <skip />
+    <string name="label_spam_caller" msgid="8270472297763063585">"Neželjeni pozivalac"</string>
 </resources>
