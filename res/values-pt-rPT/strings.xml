@@ -267,4 +267,14 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"A aplicação Telefone não tem autorização para gravar nas definições do sistema."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Bloqueado"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> está ativa"</string>
+    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
+    <skip />
+    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
+    <skip />
+    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
+    <skip />
+    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
+    <skip />
+    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
+    <skip />
 </resources>
