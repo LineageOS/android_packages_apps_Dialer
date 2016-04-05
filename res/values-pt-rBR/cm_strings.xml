@@ -29,7 +29,7 @@
   <string name="enable_forward_lookup_title">Pesquisa de encaminhamento</string>
   <string name="enable_forward_lookup_summary">Mostrar lugares próximos ao pesquisar no discador</string>
   <string name="enable_people_lookup_title">Pesquisar pessoas</string>
-  <string name="enable_people_lookup_summary">Mostrar resultados on-line para pessoas ao pesquisar no discador</string>
+  <string name="enable_people_lookup_summary">Mostrar resultados on-line de pessoas ao pesquisar no discador</string>
   <string name="enable_reverse_lookup_title">Pesquisa inversa</string>
   <string name="enable_reverse_lookup_summary">Procurar informações sobre a pessoa ou lugar para números desconhecidos em chamadas recebidas</string>
   <string name="forward_lookup_provider_title">Provedor de pesquisa de encaminhamento</string>
@@ -50,7 +50,7 @@
   <string name="speed_dial_replace">Substituir</string>
   <string name="speed_dial_delete">Apagar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla não atribuída</string>
-  <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de discagem rápida está atribuída à tecla \'<xliff:g id="number">%s</xliff:g>\'. Deseja atribuir uma ação agora?</string>
+  <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de discagem rápida atribuída à tecla \'<xliff:g id="number">%s</xliff:g>\'. Deseja atribuir uma ação agora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a discagem rápida, primeiro desligue o modo avião.</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
@@ -59,7 +59,7 @@
   <string name="incall_vibrate_call_waiting_title">Vibrar durante chamada em espera</string>
   <string name="incall_vibrate_hangup_title">Vibrar ao desligar</string>
   <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
-  <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas realizadas</string>
+  <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas feitas</string>
   <string name="call_log_show_all_slots">Todos os cartões SIM</string>
   <string name="call_log_all_calls_header">Todas as chamadas</string>
   <string name="call_log_blacklist_header">Somente chamadas bloqueadas</string>
@@ -75,17 +75,17 @@
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data inicial</string>
   <string name="call_stats_filter_to">Data final</string>
-  <string name="call_stats_filter_picker_title">Filtro por intervalo</string>
+  <string name="call_stats_filter_picker_title">Intervalo do filtro</string>
   <string name="date_quick_selection">Seleção rápida</string>
-  <string name="date_qs_currentmonth">Mês corrente</string>
-  <string name="date_qs_currentquarter">Trimestre corrente</string>
-  <string name="date_qs_currentyear">Ano corrente</string>
-  <string name="date_qs_lastweek">Última semana</string>
-  <string name="date_qs_lastmonth">Último mês</string>
-  <string name="date_qs_lastquarter">Último trimestre</string>
-  <string name="date_qs_lastyear">Último ano</string>
-  <string name="call_stats_date_filter">Ajustar tempo de intervalo</string>
-  <string name="call_stats_reset_filter">Redefinr tempo de intervalo</string>
+  <string name="date_qs_currentmonth">Mês atual</string>
+  <string name="date_qs_currentquarter">Trimestre atual</string>
+  <string name="date_qs_currentyear">Ano atual</string>
+  <string name="date_qs_lastweek">Semana passada</string>
+  <string name="date_qs_lastmonth">Mês passado</string>
+  <string name="date_qs_lastquarter">Trimestre passado</string>
+  <string name="date_qs_lastyear">Ano passado</string>
+  <string name="call_stats_date_filter">Ajustar intervalo</string>
+  <string name="call_stats_reset_filter">Redefinir intervalo</string>
   <string name="call_stats_sort_by_duration">Ordernar por duração de chamada</string>
   <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
   <string name="call_stats_title_for_number">Este número</string>
