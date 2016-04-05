@@ -242,6 +242,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         }
 
         final int callState = call.getState();
+        // Dont' show as spam if the number is in local contact.
+        if (contactInfo.contactLookupResult == Call.LogState.LOOKUP_LOCAL_CONTACT) {
+            call.setSpam(false);
+        }
 
         // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId = getIconToDisplay(call);
