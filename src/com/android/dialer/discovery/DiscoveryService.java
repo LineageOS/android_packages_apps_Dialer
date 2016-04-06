@@ -19,15 +19,18 @@ public class DiscoveryService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
+        String nudgeKey = null;
         switch (action) {
             case ConnectivityManager.CONNECTIVITY_ACTION:
-                DiscoveryEventHandler.getNudgeProvidersWithKey(getApplicationContext(),
-                        NudgeKey.NOTIFICATION_ROAMING);
+                nudgeKey = NudgeKey.NOTIFICATION_ROAMING;
                 break;
             case Intent.ACTION_NEW_OUTGOING_CALL:
-                DiscoveryEventHandler.getNudgeProvidersWithKey(getApplicationContext(),
-                        NudgeKey.NOTIFICATION_INTERNATIONAL_CALL);
+                nudgeKey = NudgeKey.NOTIFICATION_INTERNATIONAL_CALL;
                 break;
         }
+        if (nudgeKey != null) {
+            new DiscoveryEventHandler(getApplicationContext()).getNudgeProvidersWithKey(nudgeKey);
+        }
+
     }
 }
