@@ -267,14 +267,9 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Η εφαρμογή \"Τηλέφωνο\" δεν έχει άδεια εγγραφής στις ρυθμίσεις συστήματος."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Αποκλεισμένος"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"Ο χρήστης <xliff:g id="NAMEORNUMBER">^1</xliff:g> είναι ενεργός"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
-    <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
-    <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
-    <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
-    <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
-    <skip />
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"Αποκλεισμός/αναφορά ανεπιθύμ."</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"Αποκλεισμός"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"Μη ανεπιθύμητος"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"Κατάργηση αποκλεισμού"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"Ανεπιθύμητα"</string>
 </resources>

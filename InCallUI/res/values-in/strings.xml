@@ -84,7 +84,7 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Tutup"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Telepon balik"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Pesan"</string>
-    <string name="notification_external_call" msgid="5611236780302924816">"Panggilan yang berlangsung pada perangkat lain"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Panggilan yang berlangsung di perangkat lain"</string>
     <string name="notification_transfer_call" msgid="687009078741947505">"Transfer Panggilan"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Untuk melakukan panggilan, terlebih dahulu nonaktifkan mode Pesawat."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Tidak terdaftar pada jaringan."</string>

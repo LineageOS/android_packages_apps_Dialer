@@ -267,14 +267,9 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Aplikacionet e telefonit nuk kanë leje të shkruajnë në cilësimet e sistemit."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"I bllokuar"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> është aktive"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
-    <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
-    <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
-    <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
-    <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
-    <skip />
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"Blloko/raporto të padëshiruar"</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"Blloko"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"Nuk është i padëshiruar"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"Zhblloko"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"E bezdisshme"</string>
 </resources>

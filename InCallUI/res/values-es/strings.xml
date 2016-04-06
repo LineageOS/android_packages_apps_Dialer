@@ -84,10 +84,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Rechazar"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Llamar"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Mensaje"</string>
-    <!-- no translation found for notification_external_call (5611236780302924816) -->
-    <skip />
-    <!-- no translation found for notification_transfer_call (687009078741947505) -->
-    <skip />
+    <string name="notification_external_call" msgid="5611236780302924816">"Llamada activa en otro dispositivo"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Transferir llamada"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Para realizar una llamada, primero debes desactivar el modo avión."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"No estás registrado en la red."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"La red móvil no está disponible."</string>
