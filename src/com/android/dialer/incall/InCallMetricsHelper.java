@@ -55,6 +55,7 @@ public class InCallMetricsHelper {
 
     public enum Events {
         NUDGE_EVENT_INTL("NUDGE_EVENT_INTL"), // TODO
+        NUDGE_EVENT_WIFI("NUDGE_EVENT_INTL"), // TODO
         NUDGE_EVENT_ROAMING("NUDGE_EVENT_ROAMING"), // TODO
         CALL_PROVIDER_VIDEO("CALL_PROVIDER_VIDEO"), //DONE
         CALL_PROVIDER_PSTN("CALL_PROVIDER_PSTN"), //DONE
@@ -99,7 +100,8 @@ public class InCallMetricsHelper {
         COUNT_AUTOMATIC("COUNT_AUTOMATIC"),
         COUNT_MANUAL("COUNT_MANUAL"),
         COUNT("COUNT"),
-        COUNT_INTERACTIONS("COUNT_INTERACTIONS");
+        COUNT_INTERACTIONS("COUNT_INTERACTIONS"),
+        COUNT_DISMISS("COUNT_DISMISS");
 
         private String mValue;
         Parameters(String s) {
@@ -130,7 +132,7 @@ public class InCallMetricsHelper {
         InCallMetricsHelper helper = getInstance();
         helper.mContext = context;
 
-        AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, InCallMetricsReceiver.class);
 
         PendingIntent pi = PendingIntent.getService(context, 0, i, 0);
@@ -183,7 +185,7 @@ public class InCallMetricsHelper {
     }
 
     @VisibleForTesting
-    /* package */ static String buildKey(ComponentName componentName, Categories category,
+    public static String buildKey(ComponentName componentName, Categories category,
                                          Events action, Parameters parameter) {
 
         return componentName.flattenToShortString() + DELIMIT + category.value() + DELIMIT +
