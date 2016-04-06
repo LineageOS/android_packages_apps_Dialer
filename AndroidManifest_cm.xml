@@ -32,9 +32,7 @@
         <meta-data android:name="com.cyanogen.ambient.analytics.key"
                    android:value="6l2dXt9DFioFa1Mfb4eZsM9l87Rl9hp1UL75tO9w"/>
 
-        <receiver android:name=".incall.CallMethodStatusReceiver"
-                  android:enabled="true"
-                  android:exported="true">
+        <receiver android:name=".incall.CallMethodStatusReceiver">
             <intent-filter>
                 <action android:name="cyanogen.ambient.core.plugin.incall.action.plugin_status_changed"/>
             </intent-filter>
@@ -43,9 +41,9 @@
         <receiver android:name=".discovery.DiscoverySignalReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+                <action android:name="com.android.dialer.discovery.DiscoverySignalReceiver.ON_SHOW" />
+                <action android:name="com.android.dialer.discovery.DiscoverySignalReceiver.ON_DISMISS" />
             </intent-filter>
         </receiver>
 

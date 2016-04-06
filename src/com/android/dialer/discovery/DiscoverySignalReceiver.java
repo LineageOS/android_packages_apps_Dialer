@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
+import android.text.TextUtils;
 import android.util.Log;
 import com.android.contacts.common.GeoUtil;
 import com.android.dialer.DialtactsActivity;
@@ -40,8 +41,19 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         String action = intent.getAction();
+
+        String nudgeId = intent.getStringExtra(NUDGE_ID);
+        String nudgeKey = intent.getStringExtra(NUDGE_KEY);
+
+        ComponentName nudgeComponent = null;
+        if (intent.hasExtra(NUDGE_COMPONENT)
+                && !TextUtils.isEmpty(intent.getStringExtra(NUDGE_COMPONENT))) {
+
+            nudgeComponent
+                    = ComponentName.unflattenFromString(intent.getStringExtra(NUDGE_COMPONENT));
+
+        }
 
         switch (action) {
             case ConnectivityManager.CONNECTIVITY_ACTION:
@@ -70,10 +82,10 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
                 }
                 break;
             case DISCOVERY_NUDGE_SHOWN:
-                String nudgeId = intent.getStringExtra(NUDGE_ID);
-                String nudgeKey = intent.getStringExtra(NUDGE_KEY);
-                ComponentName nudgeComponent =
-                        ComponentName.unflattenFromString(intent.getStringExtra(NUDGE_COMPONENT));
+                if (nudgeComponent == null) {
+                    Log.e(TAG, "The nudge component is null, not counting as a nudge event");
+                    return;
+                }
 
                 SharedPreferences sp = context.getSharedPreferences(NUDGE_SHARED_PREF,
                         Context.MODE_PRIVATE);
@@ -92,26 +104,38 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
                 editor.putLong(timeKey, System.currentTimeMillis());
                 editor.apply();
 
-                InCallMetricsHelper.Events event;
-                if (nudgeKey.equals(NudgeKey.NOTIFICATION_INTERNATIONAL_CALL)) {
-                    event = InCallMetricsHelper.Events.NUDGE_EVENT_INTL;
-                } else {
-                    event = InCallMetricsHelper.Events.NUDGE_EVENT_ROAMING;
-                }
-
-                InCallMetricsHelper.increaseCountOfMetric(nudgeComponent, event,
-                        InCallMetricsHelper.Categories.DISCOVERY_NUDGES,
+                recordDiscoveryCount(nudgeComponent, nudgeKey,
                         InCallMetricsHelper.Parameters.COUNT);
-
-                break;
-            case DISCOVERY_NUDGE_DISMISS:
 
                 break;
         }
 
     }
 
-    public boolean isMaybeInternationalNumber(Context context, String number) {
+    private void recordDiscoveryCount(ComponentName componentName, String nudgeKey,
+                                      InCallMetricsHelper.Parameters param) {
+        InCallMetricsHelper.Events event = null;
+        switch(nudgeKey) {
+            case NudgeKey.NOTIFICATION_INTERNATIONAL_CALL:
+                event = InCallMetricsHelper.Events.NUDGE_EVENT_INTL;
+                break;
+            case NudgeKey.NOTIFICATION_WIFI_CALL:
+                event = InCallMetricsHelper.Events.NUDGE_EVENT_WIFI;
+                break;
+            case NudgeKey.NOTIFICATION_ROAMING:
+                event = InCallMetricsHelper.Events.NUDGE_EVENT_ROAMING;
+                break;
+        }
+
+        if (event != null) {
+            InCallMetricsHelper.increaseCountOfMetric(componentName, event,
+                    InCallMetricsHelper.Categories.DISCOVERY_NUDGES,
+                    param);
+        }
+    }
+
+
+    private boolean isMaybeInternationalNumber(Context context, String number) {
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
         String currentCountryIso = GeoUtil.getCurrentCountryIso(context);
 
