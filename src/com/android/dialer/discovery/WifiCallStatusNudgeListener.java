@@ -137,7 +137,8 @@ public class WifiCallStatusNudgeListener {
         int currentCount = preferences.getInt(CallMethodUtils.PREF_WIFI_CALL, 0);
         preferences.edit().putInt(CallMethodUtils.PREF_WIFI_CALL, ++currentCount).apply();
 
-        DiscoveryEventHandler.getNudgeProvidersWithKey(mContext, NudgeKey.NOTIFICATION_WIFI_CALL);
+        new DiscoveryEventHandler(mContext).getNudgeProvidersWithKey(
+                NudgeKey.NOTIFICATION_WIFI_CALL);
     }
 
     private static void callOnWifiFailure() {

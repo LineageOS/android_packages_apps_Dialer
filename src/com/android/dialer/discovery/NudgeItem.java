@@ -58,13 +58,13 @@ public class NudgeItem {
     public String getTimeKey() {
         String[] key = getBaseKey();
         key[DATA] = TIME;
-        return Joiner.on(InCallMetricsHelper.DELIMIT).join(key);
+        return Joiner.on(InCallMetricsHelper.DELIMIT).skipNulls().join(key);
     }
 
     public String getWinKey() {
         String[] key = getBaseKey();
         key[DATA] = NUDGE_ENABLED_PLUGIN;
-        return Joiner.on(InCallMetricsHelper.DELIMIT).join(key);
+        return Joiner.on(InCallMetricsHelper.DELIMIT).skipNulls().join(key);
     }
 
     /**
@@ -73,7 +73,7 @@ public class NudgeItem {
     public String getCountKey() {
         String[] key = getBaseKey();
         key[DATA] = InCallMetricsHelper.Parameters.COUNT.value();
-        return Joiner.on(InCallMetricsHelper.DELIMIT).join(key);
+        return Joiner.on(InCallMetricsHelper.DELIMIT).skipNulls().join(key);
     }
 
     public static String getKeyType(String[] array) {
