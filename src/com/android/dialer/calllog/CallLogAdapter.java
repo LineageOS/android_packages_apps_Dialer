@@ -485,13 +485,11 @@ public class CallLogAdapter extends GroupingListAdapter
 
         final String number = c.getString(CallLogQuery.NUMBER);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
-
-        mFilteredNumberAsyncQueryHandler.isBlockedNumber(
+        final CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
+        boolean success = mFilteredNumberAsyncQueryHandler.isBlockedNumber(
                 new FilteredNumberAsyncQueryHandler.OnCheckBlockedListener() {
                     @Override
                     public void onCheckComplete(Integer id) {
-                        final CallLogListItemViewHolder views =
-                                (CallLogListItemViewHolder) viewHolder;
                         views.blockId = id;
                         if (mExtendedCallInfoService == null) {
                             loadDataAndRender(views);
@@ -507,6 +505,9 @@ public class CallLogAdapter extends GroupingListAdapter
                         }
                     }
                 }, number, countryIso);
+        if (!success) {
+            loadDataAndRender(views);
+        }
     }
 
     private void loadDataAndRender(CallLogListItemViewHolder views) {

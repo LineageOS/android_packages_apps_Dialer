@@ -151,7 +151,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
             final OnCheckBlockedListener listener, String number, String countryIso) {
         final String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
         if (TextUtils.isEmpty(e164Number)) {
-            listener.onCheckComplete(null);
             return false;
         }
 
