@@ -47,20 +47,21 @@ public class DatabaseTestUtils {
                     Contacts.STARRED,                   // 10
                     Data.IS_SUPER_PRIMARY,              // 11
                     Contacts.IN_VISIBLE_GROUP,          // 12
-                    Data.IS_PRIMARY});                  // 13
+                    Data.IS_PRIMARY,                    // 13
+                    Data.CARRIER_PRESENCE});            // 14
         return cursor;
     }
 
     public static ContactNumber constructNewContactWithDummyIds(MatrixCursor contactCursor,
             MatrixCursor nameCursor, String number, int id, String displayName) {
         return constructNewContact(contactCursor, nameCursor, id, number, id, String.valueOf(id),
-                displayName, 0, 0, 0, 0, 0, 0, 0);
+                displayName, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
     public static ContactNumber constructNewContact(MatrixCursor contactCursor,
             MatrixCursor nameCursor, int id, String number, int contactId, String lookupKey,
             String displayName, int photoId, int lastTimeUsed, int timesUsed, int starred,
-            int isSuperPrimary, int inVisibleGroup, int isPrimary) {
+            int isSuperPrimary, int inVisibleGroup, int isPrimary, int carrierPresence) {
         if (contactCursor == null || nameCursor == null) {
             throw new IllegalArgumentException("Provided MatrixCursors cannot be null");
         }
@@ -73,7 +74,7 @@ public class DatabaseTestUtils {
 
         contactCursor.addRow(new Object[]{id, "", "", number, contactId, lookupKey, displayName,
                 photoId, lastTimeUsed, timesUsed, starred, isSuperPrimary, inVisibleGroup,
-                isPrimary});
+                isPrimary, carrierPresence});
         nameCursor.addRow(new Object[]{displayName, contactId});
 
         return new ContactNumber(contactId, id, displayName, number, lookupKey, 0, 0);

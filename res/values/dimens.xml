@@ -34,6 +34,7 @@
     <dimen name="call_log_start_margin">8dp</dimen>
     <dimen name="call_log_indent_margin">24dp</dimen>
     <dimen name="call_log_name_margin_bottom">2dp</dimen>
+    <dimen name="call_log_call_account_margin_bottom">2dp</dimen>
     <dimen name="call_log_vertical_padding">12dp</dimen>
     <dimen name="call_log_list_item_height">56dp</dimen>
     <dimen name="call_log_list_item_info_margin_start">16dp</dimen>

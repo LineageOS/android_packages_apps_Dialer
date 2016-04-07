@@ -16,9 +16,11 @@
 
 package com.android.dialer.calllog;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
+import android.telecom.PhoneAccountHandle;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.text.Html;
@@ -63,6 +65,10 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
     private static final String EMPTY_GEOCODE = "";
     /** Empty post-dial digits label */
     private static final String EMPTY_POSTDIAL = "";
+    /** The number that the call was received via */
+    private static final String TEST_VIA_NUMBER = "+16505551234";
+    /** The Phone Account name that the Call was received on */
+    private static final String TEST_ACCOUNT_LABEL = "T-Stationary";
 
     /** The object under test. */
     private PhoneCallDetailsHelper mHelper;
@@ -79,10 +85,9 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         super.setUp();
         mContext = getContext();
         Resources resources = mContext.getResources();
-        mPhoneUtils = new TestTelecomCallLogCache(mContext, TEST_VOICEMAIL_NUMBER);
-        final TestTelecomCallLogCache phoneUtils = new TestTelecomCallLogCache(
-                mContext, TEST_VOICEMAIL_NUMBER);
-        mHelper = new PhoneCallDetailsHelper(mContext, resources, phoneUtils);
+        mPhoneUtils = new TestTelecomCallLogCache(mContext, TEST_VOICEMAIL_NUMBER,
+                TEST_ACCOUNT_LABEL);
+        mHelper = new PhoneCallDetailsHelper(mContext, resources, mPhoneUtils);
         mHelper.setCurrentTimeForTest(INJECTED_CURRENT_DATE);
         mViews = PhoneCallDetailsViews.createForTest(mContext);
         mNameView = new TextView(mContext);
@@ -118,6 +123,26 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         setPhoneCallDetailsWithNumber(TEST_VOICEMAIL_NUMBER,
                 Calls.PRESENTATION_ALLOWED, TEST_VOICEMAIL_NUMBER);
         assertNameEqualsResource(R.string.voicemail);
+    }
+
+    public void testSetPhoneCallDetails_ViaNumber() {
+        setPhoneCallDetailsWithViaNumber(TEST_VIA_NUMBER);
+        assertViaNumberEquals(TEST_VIA_NUMBER);
+    }
+
+    public void testSetPhoneCallDetails_NoViaNumber() {
+        setDefaultPhoneCallDetailsNoViaNumber();
+        assertCallAccountInvisible();
+    }
+
+    public void testSetPhoneCallDetails_AccountLabel() {
+        setPhoneCallDetailsWithAccountHandle();
+        assertAccountLabelEquals(TEST_ACCOUNT_LABEL);
+    }
+
+    public void testSetPhoneCallDetails_AccountHandleViaNumber() {
+        setPhoneCallDetailsWithAccountLabelViaNumber(TEST_VIA_NUMBER);
+        assertAccountLabelEquals(TEST_VIA_NUMBER, TEST_ACCOUNT_LABEL);
     }
 
     // Voicemail date string has 3 different formats depending on how long ago the call was placed
@@ -368,6 +393,30 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
         assertEquals(text, mViews.callLocationAndDate.getText());
     }
 
+    /** Asserts that the via number is correct. */
+    private void assertViaNumberEquals(String text) {
+        final String callAccountText =
+                mContext.getResources().getString(R.string.description_via_number, text);
+        assertEquals(callAccountText, mViews.callAccountLabel.getText());
+    }
+
+    /** Asserts that the account label is correct. */
+    private void assertAccountLabelEquals(String text) {
+        assertEquals(text, mViews.callAccountLabel.getText());
+    }
+
+    /** Asserts that the account label is correct when also showing the via number. */
+    private void assertAccountLabelEquals(String viaNumber, String accountLabel) {
+        final String viaNumberText =
+                mContext.getResources().getString(R.string.description_via_number, viaNumber);
+        assertEquals(accountLabel + " " + viaNumberText, mViews.callAccountLabel.getText());
+    }
+
+    /** Asserts that the call account label is invisible. */
+    private void assertCallAccountInvisible() {
+        assertEquals(mViews.callAccountLabel.getVisibility(), View.GONE);
+    }
+
     /** Asserts that the duration is exactly as included in the location and date text field. */
     private void assertDurationExactEquals(String text) {
         Matcher matcher = Pattern.compile("(.*) (\\u2022) (\\d{2}:\\d{2})").matcher(
@@ -411,6 +460,36 @@ public class PhoneCallDetailsHelperTest extends AndroidTestCase {
             String formattedNumber) {
         PhoneCallDetails details = getPhoneCallDetails(number, presentation, formattedNumber);
         details.callTypes = new int[]{ AppCompatConstants.CALLS_VOICEMAIL_TYPE };
+        mHelper.setPhoneCallDetails(mViews, details);
+    }
+
+    /** Sets the phone call details with default values and the given via number. */
+    private void setPhoneCallDetailsWithViaNumber(String viaNumber) {
+        PhoneCallDetails details = getPhoneCallDetails();
+        mPhoneUtils.setAccountLabel("");
+        details.viaNumber = viaNumber;
+        mHelper.setPhoneCallDetails(mViews, details);
+    }
+
+    /** Sets the phone call details with an account handle. */
+    private void setPhoneCallDetailsWithAccountHandle() {
+        PhoneCallDetails details = getPhoneCallDetails();
+        details.accountHandle = new PhoneAccountHandle(new ComponentName("",""), "");
+        mHelper.setPhoneCallDetails(mViews, details);
+    }
+
+    /** Sets the phone call details with an account handle and via number */
+    private void setPhoneCallDetailsWithAccountLabelViaNumber(String viaNumber) {
+        PhoneCallDetails details = getPhoneCallDetails();
+        details.viaNumber = viaNumber;
+        details.accountHandle = new PhoneAccountHandle(new ComponentName("",""), "");
+        mHelper.setPhoneCallDetails(mViews, details);
+    }
+
+    /** Populates the phone call details with the Defaults. */
+    private void setDefaultPhoneCallDetailsNoViaNumber() {
+        PhoneCallDetails details = getPhoneCallDetails();
+        mPhoneUtils.setAccountLabel("");
         mHelper.setPhoneCallDetails(mViews, details);
     }
 

@@ -142,10 +142,23 @@ public class CallDetailActivity extends AppCompatActivity
                 }
             }
 
-            String accountLabel =
-                    PhoneAccountUtils.getAccountLabel(mContext, mDetails.accountHandle);
+            CharSequence accountLabel = PhoneAccountUtils.getAccountLabel(mContext,
+                    mDetails.accountHandle);
+            CharSequence accountContentDescription =
+                    PhoneCallDetails.createAccountLabelDescription(mResources, mDetails.viaNumber,
+                            accountLabel);
+            if (!TextUtils.isEmpty(mDetails.viaNumber)) {
+                if (!TextUtils.isEmpty(accountLabel)) {
+                    accountLabel = mResources.getString(R.string.call_log_via_number_phone_account,
+                            accountLabel, mDetails.viaNumber);
+                } else {
+                    accountLabel = mResources.getString(R.string.call_log_via_number,
+                            mDetails.viaNumber);
+                }
+            }
             if (!TextUtils.isEmpty(accountLabel)) {
                 mAccountLabel.setText(accountLabel);
+                mAccountLabel.setContentDescription(accountContentDescription);
                 mAccountLabel.setVisibility(View.VISIBLE);
             } else {
                 mAccountLabel.setVisibility(View.GONE);
