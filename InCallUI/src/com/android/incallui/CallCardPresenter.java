@@ -498,7 +498,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
 
         return mPrimary.can(android.telecom.Call.Details.CAPABILITY_MANAGE_CONFERENCE)
-                && !mPrimary.isVideoCall(mContext);
+                && !mIsFullscreen;
     }
 
     private void setCallbackNumber() {
@@ -1036,6 +1036,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         }
         ui.setCallCardVisible(!isFullscreenMode);
         ui.setSecondaryInfoVisible(!isFullscreenMode);
+        maybeShowManageConferenceCallButton();
     }
 
     @Override
