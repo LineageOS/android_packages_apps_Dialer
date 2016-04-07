@@ -125,6 +125,7 @@
                         android:id="@+id/call_account_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/call_log_call_account_margin_bottom"
                         android:layout_marginEnd="@dimen/call_log_icon_margin"
                         android:textColor="?attr/call_log_secondary_text_color"
                         android:textSize="@dimen/call_log_detail_text_size"

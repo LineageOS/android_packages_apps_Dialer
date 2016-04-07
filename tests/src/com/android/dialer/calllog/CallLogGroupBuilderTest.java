@@ -109,6 +109,26 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         }
     }
 
+    public void testAddGroups_WithViaNumberMatching() {
+        addCallLogEntryWithViaNumber(TEST_NUMBER1, TEST_NUMBER2,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+        addCallLogEntryWithViaNumber(TEST_NUMBER1, TEST_NUMBER2,
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+        addCallLogEntryWithViaNumber(TEST_NUMBER1, "",
+                AppCompatConstants.CALLS_OUTGOING_TYPE);
+
+        mBuilder.addGroups(mCursor);
+
+        if (CompatUtils.isNCompatible()) {
+            assertEquals(2, mFakeGroupCreator.groups.size());
+            assertGroupIs(0, 2, mFakeGroupCreator.groups.get(0));
+            assertGroupIs(2, 1, mFakeGroupCreator.groups.get(1));
+        } else {
+            assertEquals(1, mFakeGroupCreator.groups.size());
+            assertGroupIs(0, 3, mFakeGroupCreator.groups.get(0));
+        }
+    }
+
     public void testAddGroups_MatchingIncomingAndOutgoing() {
         addCallLogEntry(TEST_NUMBER1, AppCompatConstants.CALLS_INCOMING_TYPE);
         addCallLogEntry(TEST_NUMBER1, AppCompatConstants.CALLS_OUTGOING_TYPE);
@@ -383,6 +403,19 @@ public class CallLogGroupBuilderTest extends AndroidTestCase {
         values[CallLogQuery.CALL_TYPE] = type;
         if (CompatUtils.isNCompatible()) {
             values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
+        }
+        mCursor.addRow(values);
+    }
+
+    /** Adds a call log entry with the given number, post-dial digits, and type to the cursor. */
+    private void addCallLogEntryWithViaNumber(String number, String viaNumber, int type) {
+        mCursor.moveToNext();
+        Object[] values = CallLogQueryTestUtils.createTestValues();
+        values[CallLogQuery.ID] = mCursor.getPosition();
+        values[CallLogQuery.NUMBER] = number;
+        values[CallLogQuery.CALL_TYPE] = type;
+        if (CompatUtils.isNCompatible()) {
+            values[CallLogQuery.VIA_NUMBER] = viaNumber;
         }
         mCursor.addRow(values);
     }

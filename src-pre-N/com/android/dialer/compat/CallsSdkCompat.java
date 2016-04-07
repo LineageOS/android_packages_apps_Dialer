@@ -21,4 +21,5 @@ import android.support.annotation.Nullable;
 public class CallsSdkCompat {
 
     @Nullable public static final String POST_DIAL_DIGITS = null;
+    @Nullable public static final String VIA_NUMBER = null;
 }

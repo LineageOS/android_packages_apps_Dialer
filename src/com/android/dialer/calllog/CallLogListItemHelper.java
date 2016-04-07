@@ -190,20 +190,15 @@ import com.android.dialer.calllog.calllogcache.CallLogCache;
             callDescription.append(mResources.getString(R.string.description_video_call));
         }
 
-        int stringID = getCallDescriptionStringID(details.callTypes, details.isRead);
         String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
+        CharSequence onAccountLabel = PhoneCallDetails.createAccountLabelDescription(mResources,
+                details.viaNumber, accountLabel);
 
-        // Use chosen string resource to build up the message.
-        CharSequence onAccountLabel = accountLabel == null
-                ? ""
-                : TextUtils.expandTemplate(
-                        mResources.getString(R.string.description_phone_account),
-                        accountLabel);
+        int stringID = getCallDescriptionStringID(details.callTypes, details.isRead);
         callDescription.append(
                 TextUtils.expandTemplate(
                         mResources.getString(stringID),
                         nameOrNumber,
-                        // If no type or location can be determined, sub in empty string.
                         typeOrLocation == null ? "" : typeOrLocation,
                         timeOfCall,
                         onAccountLabel));
