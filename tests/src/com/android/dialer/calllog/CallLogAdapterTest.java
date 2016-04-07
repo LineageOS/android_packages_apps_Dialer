@@ -21,11 +21,13 @@ import com.google.common.collect.Lists;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract;
+import android.telephony.PhoneNumberUtils;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.text.TextUtils;
@@ -37,6 +39,7 @@ import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AppCompatConstants;
 import com.android.dialer.util.TestConstants;
+import com.android.dialer.R;
 
 import java.util.Date;
 import java.util.List;
@@ -63,26 +66,30 @@ public class CallLogAdapterTest extends AndroidTestCase {
     private static final String TEST_COUNTRY_ISO = "US";
     private static final String TEST_DEFAULT_CUSTOM_LABEL = "myLabel";
     private static final Uri TEST_LOOKUP_URI = Uri.parse("content://contacts/2");
+    private static final String TEST_ACCOUNT_ID_LABEL = "label";
 
     private static final String TEST_NUMBER = "12125551000";
     private static final String TEST_NUMBER_1 = "12345678";
     private static final String TEST_NUMBER_2 = "87654321";
     private static final String TEST_NUMBER_3 = "18273645";
     private static final String TEST_POST_DIAL_DIGITS = ";12345";
+    private static final String TEST_VIA_NUMBER = "+16505551234";
     private static final String TEST_FORMATTED_NUMBER = "1 212-555-1000";
 
     // The object under test.
     private TestCallLogAdapter mAdapter;
 
     private MatrixCursor mCursor;
+    private Resources mResources;
 
-    private View mView;
     private CallLogListItemViewHolder mViewHolder;
     private final Random mRandom = new Random();
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        mContext = getContext();
+        mResources = mContext.getResources();
 
         // Use a call fetcher that does not do anything.
         CallLogAdapter.CallFetcher fakeCallFetcher = new CallLogAdapter.CallFetcher() {
@@ -277,6 +284,36 @@ public class CallLogAdapterTest extends AndroidTestCase {
 
         if (CompatUtils.isNCompatible()) {
             assertNameIs(mViewHolder, TEST_CACHED_NAME_PRIMARY);
+        }
+    }
+
+    @MediumTest
+    public void testBindView_CallLogWithViaNumber() {
+        createCallLogEntry(TEST_NUMBER, EMPTY_STRING, TEST_VIA_NUMBER, NO_VALUE_SET, NO_VALUE_SET);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        // Copy format of Resource String
+        String formattedNumber = mResources.getString(R.string.description_via_number,
+                TEST_VIA_NUMBER);
+
+        if (CompatUtils.isNCompatible()) {
+            assertEquals(formattedNumber,
+                    mViewHolder.phoneCallDetailsViews.callAccountLabel.getText());
+        }
+    }
+
+    @MediumTest
+    public void testBindView_CallLogWithoutViaNumber() {
+        createCallLogEntry(TEST_NUMBER, EMPTY_STRING, EMPTY_STRING, NO_VALUE_SET, NO_VALUE_SET);
+
+        mAdapter.changeCursor(mCursor);
+        mAdapter.onBindViewHolder(mViewHolder, 0);
+
+        if (CompatUtils.isNCompatible()) {
+            assertEquals(View.GONE,
+                    mViewHolder.phoneCallDetailsViews.callAccountLabel.getVisibility());
         }
     }
 
@@ -589,8 +626,15 @@ public class CallLogAdapterTest extends AndroidTestCase {
         createCallLogEntry(TEST_NUMBER, EMPTY_STRING, NO_VALUE_SET, ARCHIVE_TYPE);
     }
 
-    private void createCallLogEntry(String number, String postDialDigits, int presentation, int type) {
+    private void createCallLogEntry(String number, String postDialDigits, int presentation,
+            int type) {
         Object[] values = getValues(number, postDialDigits, presentation, type);
+        mCursor.addRow(values);
+    }
+
+    private void createCallLogEntry(String number, String postDialDigits, String viaNumber,
+            int presentation, int type) {
+        Object[] values = getValues(number, postDialDigits, viaNumber, presentation, type);
         mCursor.addRow(values);
     }
 
@@ -665,6 +709,23 @@ public class CallLogAdapterTest extends AndroidTestCase {
             String postDialDigits,
             int presentation,
             int type) {
+        return getValues(number, postDialDigits, "", presentation, type);
+    }
+
+    /**
+     * @param number The phone number.
+     * @param postDialDigits The post dial digits dialed (if any)
+     * @param viaNumber The secondary number that the call was placed via
+     * @param presentation Number representing display rules for "allowed",
+     *               "payphone", "restricted", or "unknown".
+     * @param type The type of the call (outgoing/ingoing)
+     */
+    private Object[] getValues(
+            String number,
+            String postDialDigits,
+            String viaNumber,
+            int presentation,
+            int type) {
         Object[] values = CallLogQueryTestUtils.createTestValues();
 
         values[CallLogQuery.ID] = mCursor.getCount();
@@ -677,6 +738,9 @@ public class CallLogAdapterTest extends AndroidTestCase {
         }
         if (!TextUtils.isEmpty(postDialDigits) && CompatUtils.isNCompatible()) {
             values[CallLogQuery.POST_DIAL_DIGITS] = postDialDigits;
+        }
+        if (!TextUtils.isEmpty(viaNumber) && CompatUtils.isNCompatible()) {
+            values[CallLogQuery.VIA_NUMBER] = viaNumber;
         }
         if (presentation != NO_VALUE_SET) {
             values[CallLogQuery.NUMBER_PRESENTATION] = presentation;

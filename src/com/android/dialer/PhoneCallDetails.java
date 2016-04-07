@@ -18,11 +18,14 @@ package com.android.dialer;
 
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 
@@ -34,6 +37,8 @@ public class PhoneCallDetails {
     public CharSequence number;
     // Post-dial digits associated with the outgoing call.
     public String postDialDigits;
+    // The secondary line number the call was received via.
+    public String viaNumber;
     // The number presenting rules set by the network, e.g., {@link Calls#PRESENTATION_ALLOWED}
     public int numberPresentation;
     // The formatted version of {@link #number}.
@@ -148,5 +153,32 @@ public class PhoneCallDetails {
             return namePrimary;
         }
         return nameAlternative;
+    }
+
+    /**
+     * Construct the "on {accountLabel} via {viaNumber}" accessibility description for the account
+     * list item, depending on the existence of the accountLabel and viaNumber.
+     * @param viaNumber The number that this call is being placed via.
+     * @param accountLabel The {@link PhoneAccount} label that this call is being placed with.
+     * @return The description of the account that this call has been placed on.
+     */
+    public static CharSequence createAccountLabelDescription(Resources resources,
+            @Nullable String viaNumber, @Nullable CharSequence accountLabel) {
+
+        if((!TextUtils.isEmpty(viaNumber)) && !TextUtils.isEmpty(accountLabel)) {
+            String msg = resources.getString(R.string.description_via_number_phone_account,
+                    accountLabel, viaNumber);
+            CharSequence accountNumberLabel = ContactDisplayUtils.getTelephoneTtsSpannable(msg,
+                    viaNumber);
+            return (accountNumberLabel == null) ? msg : accountNumberLabel;
+        } else if (!TextUtils.isEmpty(viaNumber)) {
+            CharSequence viaNumberLabel = ContactDisplayUtils.getTtsSpannedPhoneNumber(resources,
+                    R.string.description_via_number, viaNumber);
+            return (viaNumberLabel == null) ? viaNumber : viaNumberLabel;
+        } else if (!TextUtils.isEmpty(accountLabel)) {
+            return TextUtils.expandTemplate(
+                    resources.getString(R.string.description_phone_account), accountLabel);
+        }
+        return "";
     }
 }

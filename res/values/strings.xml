@@ -731,6 +731,26 @@
          [CHAR LIMIT=NONE] -->
     <string name="description_phone_account">on <xliff:g id="phoneAccount" example="SIM 1">^1</xliff:g></string>
 
+    <!-- String describing the secondary line number the call was received via.
+         Note: AccessibilityServices use this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE]-->
+    <string name="description_via_number">via <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
+
+    <!-- TextView text item showing the secondary line number the call was received via.
+         [CHAR LIMIT=NONE]-->
+    <string name="call_log_via_number">via <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
+
+    <!-- String describing the PhoneAccount and via number that a call was received on, if both are
+         visible.
+         Note: AccessibilityServices use this attribute to announce what the view represents.
+         [CHAR LIMIT=NONE]-->
+    <string name="description_via_number_phone_account">on <xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g>, via <xliff:g id="number" example="(555) 555-5555">%2$s</xliff:g></string>
+
+    <!-- The order of the PhoneAccount and via number that a call was received on,
+         if both are visible.
+         [CHAR LIMIT=NONE]-->
+    <string name="call_log_via_number_phone_account"><xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g> via <xliff:g id="number" example="(555) 555-5555">%2$s</xliff:g></string>
+
     <!-- String describing the phone icon on a call log list item. When tapped, it will place a
          call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
     <string name="description_call_log_call_action">Call</string>

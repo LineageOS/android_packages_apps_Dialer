@@ -93,6 +93,7 @@ public final class CallLogQuery {
      * Call {@link CompatUtils#isNCompatible()} prior to use
      */
     public static int POST_DIAL_DIGITS = -1;
+    public static int VIA_NUMBER = -1;
 
     public static final String[] _PROJECTION;
 
@@ -105,6 +106,8 @@ public final class CallLogQuery {
         if (CompatUtils.isNCompatible()) {
             projectionList.add(CallsSdkCompat.POST_DIAL_DIGITS);
             POST_DIAL_DIGITS = projectionList.size() - 1;
+            projectionList.add(CallsSdkCompat.VIA_NUMBER);
+            VIA_NUMBER = projectionList.size() - 1;
         }
         _PROJECTION = projectionList.toArray(new String[projectionList.size()]);
     }
