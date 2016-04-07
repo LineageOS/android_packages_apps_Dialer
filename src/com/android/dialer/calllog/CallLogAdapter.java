@@ -21,10 +21,7 @@ import com.android.dialer.service.ExtendedCallInfoService;
 import com.android.dialerbind.ObjectFactory;
 import com.google.common.annotations.VisibleForTesting;
 
-import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -45,7 +42,6 @@ import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.CheckBox;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.CompatUtils;
@@ -496,6 +492,7 @@ public class CallLogAdapter extends GroupingListAdapter
                         if (mExtendedCallInfoService == null) {
                             loadDataAndRender(views);
                         } else {
+                            views.isSpamFeatureEnabled = true;
                             mExtendedCallInfoService.getExtendedCallInfo(number, countryIso,
                                     new ExtendedCallInfoService.Listener() {
                                         @Override
