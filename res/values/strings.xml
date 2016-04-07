@@ -530,7 +530,7 @@
     <string name="search_shortcut_make_video_call">Make video call</string>
 
     <!-- Title for the call log list item that brings users to the full call history when clicked -->
-    <string name="show_call_history">View full call history</string>
+    <string name="recents_footer_text">View full call history</string>
 
     <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
     <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> new missed calls</string>
