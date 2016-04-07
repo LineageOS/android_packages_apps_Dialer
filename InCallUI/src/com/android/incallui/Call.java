@@ -374,6 +374,7 @@ public class Call {
     private int mRequestedVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
     private InCallVideoCallCallback mVideoCallCallback;
+    private boolean mIsVideoCallCallbackRegistered;
     private String mChildNumber;
     private String mLastForwardedNumber;
     private String mCallSubject;
@@ -448,6 +449,7 @@ public class Call {
                 mVideoCallCallback = new InCallVideoCallCallback(this);
             }
             mTelecomCall.getVideoCall().registerCallback(mVideoCallCallback);
+            mIsVideoCallCallbackRegistered = true;
         }
 
         mChildCallIds.clear();
@@ -754,8 +756,14 @@ public class Call {
         return mTelecomCall == null ? null : mTelecomCall.getDetails().getAccountHandle();
     }
 
+    /**
+     * @return The {@link VideoCall} instance associated with the {@link android.telecom.Call}.
+     *      Will return {@code null} until {@link #updateFromTelecomCall()} has registered a valid
+     *      callback on the {@link VideoCall}.
+     */
     public VideoCall getVideoCall() {
-        return mTelecomCall == null ? null : mTelecomCall.getVideoCall();
+        return mTelecomCall == null || !mIsVideoCallCallbackRegistered ? null
+                : mTelecomCall.getVideoCall();
     }
 
     public List<String> getChildCallIds() {
