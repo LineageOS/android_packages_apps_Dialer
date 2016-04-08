@@ -12,14 +12,12 @@ src_dirs := src \
     $(incallui_dir)/src \
     $(contacts_common_dir)/src \
     $(phone_common_dir)/src \
-    $(phone_common_dir)/src-ambient \
-    $(uicommon_dir)/src
+    $(phone_common_dir)/src-ambient
 
 res_dirs := res \
     $(incallui_dir)/res \
     $(contacts_common_dir)/res \
-    $(phone_common_dir)/res \
-    $(uicommon_dir)/res
+    $(phone_common_dir)/res
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs)) $(call all-Iaidl-files-under, $(src_dirs))
 LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/contacts/NameSplitter.java \
@@ -27,12 +25,16 @@ LOCAL_SRC_FILES += ../../providers/ContactsProvider/src/com/android/providers/co
                    ../../providers/ContactsProvider/src/com/android/providers/contacts/util/NeededForTesting.java
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
     frameworks/support/v7/cardview/res \
-    frameworks/support/v7/recyclerview/res
+    frameworks/support/v7/recyclerview/res \
+    frameworks/support/v7/appcompat/res \
+    frameworks/support/design/res
 
 LOCAL_ASSET_DIR += $(LOCAL_PATH)/assets
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
+    --extra-packages android.support.design \
+    --extra-packages android.support.v7.appcompat \
     --extra-packages android.support.v7.cardview \
     --extra-packages android.support.v7.recyclerview \
     --extra-packages android.support.v7.appcompat \
@@ -50,8 +52,10 @@ LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest_cm.xml
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
+    android-support-design \
     android-support-v13 \
     android-support-v4 \
+    android-support-v7-appcompat \
     android-support-v7-cardview \
     android-support-v7-recyclerview \
     android-support-design \
