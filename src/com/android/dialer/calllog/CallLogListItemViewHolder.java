@@ -207,7 +207,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public ContactInfo info;
 
     /**
-     * Whether the current log entry is a spam number or not. Used in updatePhoto()
+     * Whether spam feature is enabled, which affects UI.
+     */
+    public boolean isSpamFeatureEnabled;
+
+    /**
+     * Whether the current log entry is a spam number or not.
      */
     public boolean isSpam;
 
@@ -626,7 +631,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     public void updatePhoto() {
-        if (isSpam) {
+        if (isSpamFeatureEnabled && isSpam) {
             quickContactView.setImageDrawable(
                     mContext.getDrawable(R.drawable.blocked_contact));
             return;
@@ -747,6 +752,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     private void updateBlockReportActions() {
+        if (!isSpamFeatureEnabled) {
+            return;
+        }
         // Set block/spam actions.
         blockReportView.setVisibility(View.GONE);
         blockView.setVisibility(View.GONE);
