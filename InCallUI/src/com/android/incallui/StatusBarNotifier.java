@@ -293,8 +293,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
                 getContentString(call, contactInfo.userType);
         final String contentTitle = getContentTitle(contactInfo, call);
 
+        final boolean isVideoUpgradeRequest = call.getSessionModificationState()
+                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
         final int notificationType;
-        if (callState == Call.State.INCOMING || callState == Call.State.CALL_WAITING) {
+        if (callState == Call.State.INCOMING || callState == Call.State.CALL_WAITING
+                || isVideoUpgradeRequest) {
             notificationType = NOTIFICATION_INCOMING_CALL;
         } else {
             notificationType = NOTIFICATION_IN_CALL;
@@ -349,8 +352,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         builder.setLargeIcon(largeIcon);
         builder.setColor(mContext.getResources().getColor(R.color.dialer_theme_color));
 
-        final boolean isVideoUpgradeRequest = call.getSessionModificationState()
-                == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
         if (isVideoUpgradeRequest) {
             builder.setUsesChronometer(false);
             addDismissUpgradeRequestAction(builder);
