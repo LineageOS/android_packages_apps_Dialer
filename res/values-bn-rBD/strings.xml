@@ -199,6 +199,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> , <xliff:g id="TYPEORLOCATION">^2</xliff:g> , <xliff:g id="TIMEOFCALL">^3</xliff:g> , <xliff:g id="PHONEACCOUNT">^4</xliff:g> এর থেকে ভয়েসমেল৷"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> এ কল করুন৷"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> এ"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"কল করুন"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> এর কল"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>-এ ভিডিও কল করুন।"</string>
@@ -267,14 +275,18 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ফোনের অ্যাপ্লিকেশানকে সিস্টেম সেটিংসে লেখার অনুমতি দেওয়া হয়নি।"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"অবরুদ্ধ"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> সক্রিয় আছে"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
-    <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
-    <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
-    <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
-    <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
-    <skip />
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"অবরুদ্ধ করুন/স্প্যাম হিসাবে প্রতিবেদন করুন"</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"অবরুদ্ধ করুন"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"স্প্যাম নয়"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"অবরোধ মুক্ত করুন"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"স্প্যাম"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলি অবরোধ করা হবে৷"</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"কলটিকে স্প্যাম হিসাবে প্রতিবেদন করুন"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলি অবরোধ করা হবে৷ এই কলটিকে স্প্যাম হিসাবে প্রতিবেদন করা হবে৷"</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করবেন?"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"এই নম্বরটিকে অবরোধ মুক্ত করা হবে এবং \'স্প্যাম নয়\' হিসাবে প্রতিবেদ করা হবে৷ এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলি স্প্যাম হিসাবে শনাক্ত করা হবে না৷"</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"পরিচ্ছন্ন তলিকায় <xliff:g id="NUMBER">%1$s</xliff:g> যোগ করবেন?"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"পরিচ্ছন্ন তলিকা"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলিকে স্প্যাম হিসাবে শনাক্ত করা হবে না৷ এই কলটিকে \'স্প্যাম নয়\' হিসাবে প্রতিবেদন করা হবে৷"</string>
 </resources>

@@ -199,6 +199,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"សារជាសំឡេងពី <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"ហៅទៅ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>។"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"នៅ <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ហៅ"</string>
     <string name="description_call_action" msgid="4000549004089776147">"ហៅ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"ហៅទៅ <xliff:g id="NAMEORNUMBER">^1</xliff:g> ជាវីដេអូ។"</string>
@@ -267,14 +275,18 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"កម្មវិធីទូរស័ព្ទមិនមានសិទ្ធិអនុញ្ញាតដើម្បីសរសេរការកំណត់ប្រព័ន្ធទេ។"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"បានរារាំង"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> គឺសកម្ម"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
-    <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
-    <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
-    <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
-    <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
-    <skip />
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"ទប់ស្កាត់/រាយការណ៍សារឥតបានការ"</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"ទប់ស្កាត់"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"មិនមែន​សារ​ឥតបានការ"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"ឈប់​ទប់ស្កាត់"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"សារ​ឥតបានការ"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"ទប់ស្កាត់ <xliff:g id="NUMBER">%1$s</xliff:g> មែន​ទេ?"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"ការ​ហៅ និង​សារ​ជា​សំឡេង​លើក​ក្រោយៗ​ពី​លេខ​នេះ​នឹង​ត្រូវ​ទប់ស្កាត់។"</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"រាយការណ៍​ការ​ហៅ​​ថា​ជា​សារ​ឥត​បាន​ការ"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"ការ​ហៅ និង​សារ​ជា​សំឡេង​លើក​ក្រោយ​ៗ​ពី​លេខ​នេះ​នឹង​ត្រូវ​ទប់ស្កាត់។ ការ​ហៅ​នេះ​នឹង​ត្រូវ​រាយការណ៍​ថា​ជា​សារ​ឥតបានការ។"</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"ឈប់​ទប់ស្កាត់ <xliff:g id="NUMBER">%1$s</xliff:g> មែន​ទេ?"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"លេខ​នេះ​នឹង​មិន​ត្រូវ​បាន​ទប់ស្កាត់ និង​រាយការណ៍​​ថា​​មិន​មែន​ជា​សារ​ឥតបានការ។ ការ​ហៅ និង​សារ​ជា​​សំឡេង​លើក​ក្រោយៗ​នឹង​មិន​ត្រូវ​បាន​​កំណត់​​ថា​ជា​សារ​​ឥត​បាន​ការ​ទេ។"</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"ដាក់​បញ្ជី​អនុញ្ញាត <xliff:g id="NUMBER">%1$s</xliff:g> មែន​ទេ?"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"បញ្ជី​​អនុញ្ញាត"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"ការ​ហៅ និង​សារ​ជា​សំឡេង​លើកក្រោយៗ​ពី​លេខ​នេះ​នឹង​មិន​កំណត់​ថា​ជា​សារ​ឥត​បាន​ការ​ទេ។ លេខ​នេះ​នឹង​ត្រូវ​រាយការណ៍​ថា​មិន​មែន​ជា​សារ​ឥតបានការ។"</string>
 </resources>

@@ -199,6 +199,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> के वॉइसमेल."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> पर किया गया कॉल."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> पर"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"कॉल करें"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को कॉल करें"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को वीडियो कॉल करें."</string>
@@ -272,4 +280,13 @@
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"स्पैम नहीं है"</string>
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"अनवरोधित करें"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"स्पैम"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> को अवरुद्ध करें?"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"इस नंबर से आने वाले भविष्य के कॉल और वॉइसमेल अवरुद्ध कर दिए जाएंगे."</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"कॉल को स्पैम रिपोर्ट करें"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"इस नंबर से आने वाले भविष्य के कॉल व वॉइसमेल रोक दिए जाएंगे. कॉल स्पैम के रूप में रिपोर्ट किया जाएगा."</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> को अनवरोधित करें?"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"नंबर अनवरोधित हो जाएगा व स्पैम रिपोर्ट नहीं किया जाएगा. आगे के कॉल व वॉइसमेल स्पैम नहीं माने जाएंगे."</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"<xliff:g id="NUMBER">%1$s</xliff:g> को श्वेतसूची में डालें?"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"श्वेतसूची"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"भविष्य में इस नंबर के कॉल व वॉइसमेल स्पैम नहीं माने जाएंगे. यह नंबर स्पैम रिपोर्ट नहीं किया जाएगा."</string>
 </resources>

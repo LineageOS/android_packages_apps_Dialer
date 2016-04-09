@@ -199,6 +199,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> તરફથી વૉઇસમેઇલ"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> પર કૉલ."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> પર"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"કૉલ કરો"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ને કૉલ કરો"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ને વિડિઓ કૉલ કરો."</string>
@@ -272,4 +280,13 @@
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"સ્પામ નથી"</string>
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"અનાવરોધિત કરો"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"સ્પામ"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અવરોધિત કરીએ?"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"આ નંબર પરથી આવનારા ભવિષ્યના કૉલ્સ અને વૉઇસમેઇલ્સ અવરોધિત કરવામાં આવશે."</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"કૉલની સ્પામ તરીકે જાણ કરો"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"આ નંબર પરથી આવનારા ભાવિ કૉલ અને વૉઇસમેઇલ અવરોધિત કરવામાં આવશે. આ કૉલની સ્પામ તરીકે જાણ કરવામાં આવશે."</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> ને અનાવરોધિત કરીએ?"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"આ નંબર અનાવરોધિત કરી અને સ્પામ નથી તરીકે જાણ કરશે. ભાવિ કૉલ અને વૉઇસમેઇલ સ્પામ તરીકે ઓળખાશે નહીં."</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"<xliff:g id="NUMBER">%1$s</xliff:g> ને વ્હાઇટલિસ્ટ કરીએ?"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"વ્હાઇટલિસ્ટ"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"આ નંબરથી ભાવિ કૉલ અને વૉઇસમેઇલ સ્પામ તરીકે ઓળખાશે નહીં. આ નંબરની સ્પામ નથી તરીકે જાણ કરવામાં આવશે."</string>
 </resources>

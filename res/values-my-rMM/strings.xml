@@ -199,6 +199,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>၊ <xliff:g id="TYPEORLOCATION">^2</xliff:g>၊ <xliff:g id="TIMEOFCALL">^3</xliff:g>၊ <xliff:g id="PHONEACCOUNT">^4</xliff:g>ထံမှ အသံစာ။"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>၊ <xliff:g id="TYPEORLOCATION">^2</xliff:g>၊ <xliff:g id="TIMEOFCALL">^3</xliff:g>၊ <xliff:g id="PHONEACCOUNT">^4</xliff:g> အား ခေါ်ခြင်း။"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> ၌"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ခေါ်ဆိုမှု"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> အားခေါ်ရန်"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ကိုဗီဒီယိုခေါ်ဆိုမည်။"</string>
@@ -267,14 +275,18 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ဖုန်း အက်ပ်ဆီတွင် စနစ် ဆက်တင်များသို့ ရေးသားခွင့် မရှိပါ။"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ပိတ်ဆို့ထားသည်"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ရှိနေသည်"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
-    <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
-    <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
-    <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
-    <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
-    <skip />
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"စပမ်းကို ပိတ်ဆို့ပါ/သတင်းပို့ပါ"</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"ပိတ်ဆို့ပါ"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"စပမ်း မဟုတ်ပါ"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"ပိတ်ဆို့မှုကို ပြန်ဖွင့်ပါ"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"စပမ်း"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> ကို ပိတ်ဆို့မည်လား။"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"ဤနံပါတ်မှ နောင်ဝင်လာမည့်ဖုန်းခေါ်ဆိုမှုများနှင့် အသံမေးလ်များကို ပိတ်ဆို့ပါလိမ့်မည်။"</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"ခေါ်ဆိုမှုကို စပမ်းအဖြစ် သတင်းပို့ပါ"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"ဤနံပါတ်မှ နောင်ဝင်လာမည့်ဖုန်းခေါ်ဆိုမှုများနှင့် အသံမေးလ်များကို ပိတ်ဆို့ပါလိမ့်မည်။ ၎င်းခေါ်ဆိုမှုကို စပမ်းအဖြစ် သတင်းပို့ပါမည်။"</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> ကို မပိတ်ဆို့တော့ပါဘူးလား။"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"ဤနံပါတ်ကို ပိတ်ဆို့တော့မည်မဟုတ်ဘဲ စပမ်းမဟုတ်ကြောင်း သတင်းပို့ပါမည်။ နောင်ဝင်လာမည့်ဖုန်းခေါ်ဆိုမှုများနှင့် အသံမေးလ်များကို စပမ်းအဖြစ် သတ်မှတ်လိမ့်မည်မဟုတ်ပါ။"</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"ခွင့်ပြုသည့်စာရင်းဝင် <xliff:g id="NUMBER">%1$s</xliff:g> ဟုတ်ပါသလား။"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"ခွင့်ပြုသည့်စာရင်း"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"ဤနံပါတ်မှ နောင်ဝင်လာမည့်ဖုန်းခေါ်ဆိုမှုများနှင့် အသံမေးလ်များကို စပမ်းအဖြစ် သတ်မှတ်လိမ့်မည်မဟုတ်ပါ။ ဤနံပါတ်ကို စပမ်းမဟုတ်ဟု သတင်းပို့ပါလိမ့်မည်။"</string>
 </resources>

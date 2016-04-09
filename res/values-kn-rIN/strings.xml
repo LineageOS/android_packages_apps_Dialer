@@ -200,6 +200,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ರಿಂದ ಧ್ವನಿಮೇಲ್."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> ಗೆ ಕರೆ."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> ನಲ್ಲಿ"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"ಕರೆಮಾಡಿ"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ಕರೆ ಮಾಡಿ"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ಗೆ ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ."</string>
@@ -268,14 +276,18 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಬರೆಯಲು ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ಅನುಮತಿಯನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ಸಕ್ರಿಯವಾಗಿದೆ"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
-    <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
-    <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
-    <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
-    <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
-    <skip />
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"ಸ್ಪ್ಯಾಮ್ ನಿರ್ಬಂಧಿಸು/ವರದಿ ಮಾಡು"</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"ನಿರ್ಬಂಧಿಸು"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"ಸ್ಪ್ಯಾಮ್‌ ಅಲ್ಲ"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"ನಿರ್ಬಂಧ ತೆಗೆಯಿರಿ"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"ಸ್ಪ್ಯಾಮ್"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"ಈ ಸಂಖ್ಯೆಗೆ ಭವಿಷ್ಯದ ಕರೆಗಳು ಮತ್ತು ಧ್ವನಿಮೇಲ್‌‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ."</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"ಕರೆ ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿಮಾಡಿ"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"ಈ ಸಂಖ್ಯೆಗೆ ಭವಿಷ್ಯದ ಕರೆ ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ ನಿರ್ಬಂಧಿಸಲಾಗುತ್ತದೆ. ಈ ಕರೆ ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿಮಾಡಲಾಗುತ್ತದೆ."</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> ನಿರ್ಬಂಧ ತೆಗೆಯುವುದೇ?"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"ಈ ಸಂಖ್ಯೆಗೆ ನಿರ್ಬಂಧ ತೆಗೆಯಲಾಗುತ್ತದೆ ಮತ್ತು ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿಮಾಡಲಾಗುವುದಿಲ್ಲ. ಭವಿಷ್ಯದ ಕರೆಗಳು ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ಪ್ಯಾಮ್ ಎಂದು ಗುರುತಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"<xliff:g id="NUMBER">%1$s</xliff:g> ಅನುಮತಿ ಪಟ್ಟಿಗೆ ಸೇರಿಸುವುದೇ?"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"ಅನುಮತಿ ಪಟ್ಟಿ"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"ಈ ಸಂಖ್ಯೆಗೆ ಭವಿಷ್ಯದ ಕರೆಗಳು ಮತ್ತು ಧ್ವನಿಮೇಲ್‌ಗಳನ್ನು ಸ್ಪ್ಯಾಮ್ ಎಂದು ಗುರುತಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ. ಈ ಸಂಖ್ಯೆ ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿ ಮಾಡಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ."</string>
 </resources>

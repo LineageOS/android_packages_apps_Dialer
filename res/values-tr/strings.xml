@@ -199,6 +199,14 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"Sesli posta: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Yapılan çağrı: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> üzerinde"</string>
+    <!-- no translation found for description_via_number (3503311803959108316) -->
+    <skip />
+    <!-- no translation found for call_log_via_number (8373282986443543296) -->
+    <skip />
+    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
+    <skip />
+    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
+    <skip />
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Telefon et"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Telefon et: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> ile video görüşmesi yap."</string>
@@ -267,14 +275,27 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Telefon uygulamasının sistem ayarlarına yazma izni yok."</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Engellendi"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> etkin durumda"</string>
-    <!-- no translation found for call_log_action_block_report_number (8288915197641750257) -->
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"Engelle/spam bildir"</string>
+    <string name="call_log_action_block_number" msgid="5920731882931944594">"Engelle"</string>
+    <string name="call_log_action_remove_spam" msgid="5750557938714304455">"Spam değil"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"Engellemeyi kaldır"</string>
+    <string name="spam_number_call_log_label" msgid="5601566820155823850">"Spam"</string>
+    <!-- no translation found for block_report_number_alert_title (7964023263943399261) -->
     <skip />
-    <!-- no translation found for call_log_action_block_number (5920731882931944594) -->
+    <!-- no translation found for block_report_number_alert_details (3504073367202469245) -->
     <skip />
-    <!-- no translation found for call_log_action_remove_spam (5750557938714304455) -->
+    <!-- no translation found for checkbox_report_as_spam_action (7546927594371150677) -->
     <skip />
-    <!-- no translation found for call_log_action_unblock_number (8906582251480361069) -->
+    <!-- no translation found for block_number_alert_details (3137736492383304346) -->
     <skip />
-    <!-- no translation found for spam_number_call_log_label (5601566820155823850) -->
+    <!-- no translation found for unblock_report_number_alert_title (972715151309357850) -->
+    <skip />
+    <!-- no translation found for unblock_number_alert_details (8190592456851353268) -->
+    <skip />
+    <!-- no translation found for report_not_spam_alert_title (5315040210536100068) -->
+    <skip />
+    <!-- no translation found for report_not_spam_alert_button (4241295249227799609) -->
+    <skip />
+    <!-- no translation found for report_not_spam_alert_details (7655461894835163214) -->
     <skip />
 </resources>

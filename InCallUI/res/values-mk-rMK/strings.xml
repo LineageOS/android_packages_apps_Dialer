@@ -85,7 +85,7 @@
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Врати повик"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Порака"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Повик во тек на друг уред"</string>
-    <string name="notification_transfer_call" msgid="687009078741947505">"Префрлете повик"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Префрлање повик"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"За да остварите повик, прво исклучете го авионскиот режим."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Не е регистриран на мрежа."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Не е достапна мобилна мрежа."</string>
