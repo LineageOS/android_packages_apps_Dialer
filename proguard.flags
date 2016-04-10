@@ -24,3 +24,5 @@
 -keep public class cyanogenmod.app.CustomTile
 
 -dontwarn cyanogenmod.app.*
+-dontwarn com.cyngn.uicommon.view.*
+-dontwarn com.squareup.okhttp.*
