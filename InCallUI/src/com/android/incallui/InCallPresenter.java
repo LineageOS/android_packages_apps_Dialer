@@ -56,6 +56,7 @@ import com.android.dialer.filterednumber.FilteredNumbersUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.util.TelecomUtil;
+import com.android.incallui.spam.SpamCallListListener;
 import com.android.incallui.util.TelecomCallUtil;
 import com.android.incalluibind.ObjectFactory;
 
@@ -123,6 +124,7 @@ public class InCallPresenter implements CallList.Listener,
     private InCallCameraManager mInCallCameraManager = null;
     private AnswerPresenter mAnswerPresenter = new AnswerPresenter();
     private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
+    private CallList.Listener mSpamCallListListener;
 
     /**
      * Whether or not we are currently bound and waiting for Telecom to send us a new call.
@@ -344,6 +346,10 @@ public class InCallPresenter implements CallList.Listener,
         // The final thing we do in this set up is add ourselves as a listener to CallList.  This
         // will kick off an update and the whole process can start.
         mCallList.addListener(this);
+
+        // Create spam call list listener and add it to the list of listeners
+        mSpamCallListListener = new SpamCallListListener(context);
+        mCallList.addListener(mSpamCallListListener);
 
         VideoPauseController.getInstance().setUp(this);
         InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
@@ -1532,6 +1538,7 @@ public class InCallPresenter implements CallList.Listener,
 
             if (mCallList != null) {
                 mCallList.removeListener(this);
+                mCallList.removeListener(mSpamCallListListener);
             }
             mCallList = null;
 

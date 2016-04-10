@@ -21,6 +21,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
+import android.support.annotation.IntDef;
 import android.telecom.Call.Details;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
@@ -41,6 +42,8 @@ import com.android.contacts.common.testing.NeededForTesting;
 import com.android.dialer.util.IntentUtil;
 import com.android.incallui.util.TelecomCallUtil;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +54,19 @@ import java.util.Objects;
  */
 @NeededForTesting
 public class Call {
+
+    /**
+     * Specifies whether a number is in the call history or not.
+     * {@link #CALL_HISTORY_STATUS_UNKNOWN} means there is no result.
+     */
+    @IntDef({CALL_HISTORY_STATUS_UNKNOWN, CALL_HISTORY_STATUS_PRESENT,
+            CALL_HISTORY_STATUS_NOT_PRESENT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface CallHistoryStatus {}
+    public static final int CALL_HISTORY_STATUS_UNKNOWN = 0;
+    public static final int CALL_HISTORY_STATUS_PRESENT = 1;
+    public static final int CALL_HISTORY_STATUS_NOT_PRESENT = 2;
+
     /* Defines different states of this call */
     public static class State {
         public static final int INVALID = 0;
@@ -381,6 +397,8 @@ public class Call {
     private String mLastForwardedNumber;
     private String mCallSubject;
     private PhoneAccountHandle mPhoneAccountHandle;
+    @CallHistoryStatus private int mCallHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
+    private boolean mIsSpam;
 
     /**
      * Indicates whether the phone account associated with this call supports specifying a call
@@ -391,16 +409,6 @@ public class Call {
     private long mTimeAddedMs;
 
     private LogState mLogState = new LogState();
-
-    private boolean mIsSpam;
-
-    public void setSpam(boolean isSpam) {
-        mIsSpam = isSpam;
-    }
-
-    public boolean isSpam() {
-        return mIsSpam;
-    }
 
     /**
      * Used only to create mock calls for testing
@@ -986,5 +994,22 @@ public class Call {
 
     public String toSimpleString() {
         return super.toString();
+    }
+
+    public void setCallHistoryStatus(@CallHistoryStatus int callHistoryStatus) {
+        mCallHistoryStatus = callHistoryStatus;
+    }
+
+    @CallHistoryStatus
+    public int getCallHistoryStatus() {
+        return mCallHistoryStatus;
+    }
+
+    public void setSpam(boolean isSpam) {
+        mIsSpam = isSpam;
+    }
+
+    public boolean isSpam() {
+        return mIsSpam;
     }
 }

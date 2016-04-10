@@ -17,6 +17,7 @@
 package com.android.dialer.calllog;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -58,7 +59,8 @@ public class CallLogAsyncTaskUtil {
         MARK_VOICEMAIL_READ,
         MARK_CALL_READ,
         GET_CALL_DETAILS,
-        UPDATE_DURATION
+        UPDATE_DURATION,
+        GET_NUMBER_IN_CALL_HISTORY
     }
 
     private static final class CallDetailQuery {
@@ -120,6 +122,10 @@ public class CallLogAsyncTaskUtil {
         void onDeleteCall();
         void onDeleteVoicemail();
         void onGetCallDetails(PhoneCallDetails[] details);
+    }
+
+    public interface OnGetNumberInCallHistoryListener {
+        void onComplete(boolean inCallHistory);
     }
 
     public interface OnCallLogQueryFinishedListener {
@@ -454,6 +460,42 @@ public class CallLogAsyncTaskUtil {
                 return null;
             }
         });
+    }
+
+    /**
+     * Checks if the number is in the call history.
+     */
+    public static void getNumberInCallHistory(
+            final Context context,
+            final String number,
+            final OnGetNumberInCallHistoryListener listener) {
+        Preconditions.checkNotNull(listener);
+        if (!PermissionsUtil.hasPhonePermissions(context)) {
+            return;
+        }
+        if (sAsyncTaskExecutor == null) {
+            initTaskExecutor();
+        }
+
+        sAsyncTaskExecutor.submit(Tasks.GET_NUMBER_IN_CALL_HISTORY,
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    public Boolean doInBackground(Void... params) {
+                        try (Cursor cursor = context.getContentResolver().query(
+                                TelecomUtil.getCallLogUri(context),
+                                new String[] {CallLog.Calls._ID},
+                                CallLog.Calls.NUMBER + " = ?",
+                                new String[] {number},
+                                null)) {
+                            return cursor != null && cursor.getCount() > 0;
+                        }
+                    }
+
+                    @Override
+                    public void onPostExecute(Boolean inCallHistory) {
+                        listener.onComplete(inCallHistory);
+                    }
+                });
     }
 
     @VisibleForTesting
