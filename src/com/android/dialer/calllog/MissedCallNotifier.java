@@ -96,6 +96,7 @@ public class MissedCallNotifier {
         boolean useCallLog = newCalls != null && newCalls.size() == count;
         NewCall newestCall = useCallLog ? newCalls.get(0) : null;
         long timeMs = useCallLog ? newestCall.dateMs : System.currentTimeMillis();
+        String missedNumber = useCallLog ? newestCall.number : number;
 
         Notification.Builder builder = new Notification.Builder(mContext);
         // Display the first line of the notification:
@@ -104,7 +105,7 @@ public class MissedCallNotifier {
         if (count == 1) {
             //TODO: look up caller ID that is not in contacts.
             ContactInfo contactInfo = CallLogNotificationsHelper.getInstance(mContext)
-                    .getContactInfo(useCallLog ? newestCall.number : number,
+                    .getContactInfo(missedNumber,
                             useCallLog ? newestCall.numberPresentation
                                     : Calls.PRESENTATION_ALLOWED,
                             useCallLog ? newestCall.countryIso : null);
@@ -156,17 +157,17 @@ public class MissedCallNotifier {
 
         // Add additional actions when there is only 1 missed call and the user isn't locked
         if (UserManagerCompat.isUserUnlocked(mContext) && count == 1) {
-            if (!TextUtils.isEmpty(number)
+            if (!TextUtils.isEmpty(missedNumber)
                     && !TextUtils.equals(
-                    number, mContext.getString(R.string.handle_restricted))) {
+                    missedNumber, mContext.getString(R.string.handle_restricted))) {
                 builder.addAction(R.drawable.ic_phone_24dp,
                         mContext.getString(R.string.notification_missedCall_call_back),
-                        createCallBackPendingIntent(number));
+                        createCallBackPendingIntent(missedNumber));
 
-                if (!PhoneNumberHelper.isUriNumber(number)) {
+                if (!PhoneNumberHelper.isUriNumber(missedNumber)) {
                     builder.addAction(R.drawable.ic_message_24dp,
                             mContext.getString(R.string.notification_missedCall_message),
-                            createSendSmsFromNotificationPendingIntent(number));
+                            createSendSmsFromNotificationPendingIntent(missedNumber));
                 }
             }
         }
@@ -254,7 +255,8 @@ public class MissedCallNotifier {
         intent.setAction(
                 CallLogNotificationsService.ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION);
         intent.putExtra(CallLogNotificationsService.EXTRA_MISSED_CALL_NUMBER, number);
-        return PendingIntent.getService(mContext, 0, intent, 0);
+        // Use FLAG_ONE_SHOT to avoid reusing previous PendingIntent with different number.
+        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     private PendingIntent createSendSmsFromNotificationPendingIntent(String number) {
@@ -262,7 +264,8 @@ public class MissedCallNotifier {
         intent.setAction(
                 CallLogNotificationsService.ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION);
         intent.putExtra(CallLogNotificationsService.EXTRA_MISSED_CALL_NUMBER, number);
-        return PendingIntent.getService(mContext, 0, intent, 0);
+        // Use FLAG_ONE_SHOT to avoid reusing previous PendingIntent with different number.
+        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     /**
