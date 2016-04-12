@@ -74,6 +74,7 @@ public class CoachMarkDrawableHelper {
                 .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         final CallMethodInfo cmi = shouldShowCoachMark(pref);
         if (cmi != null) {
+            touch.clearFocus();
             ViewTreeObserver vto = v.getViewTreeObserver();
             vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
