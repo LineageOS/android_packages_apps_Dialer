@@ -538,4 +538,17 @@
     <string name="closed_now">Closed now</string>
     <!-- Label for spam call in primary info. [CHAR LIMIT=20] -->
     <string name="label_spam_caller">Suspected spam caller</string>
+
+    <!-- Title for the notification to the user after a call from an unknown number ends. [CHAR LIMIT=100] -->
+    <string name="spam_notification_title">Call ended %1$s</string>
+    <!-- Text displayed in the notification to the user after a non-spam call ends. [CHAR LIMIT=100] -->
+    <string name="spam_notification_non_spam_call_text">This is the first time this number called you.</string>
+    <!-- Text displayed in the notification to the user after a spam call ends. [CHAR LIMIT=100] -->
+    <string name="spam_notification_spam_call_text">We suspected this call to be a spammer.</string>
+    <!-- Text for the reporting spam action in the after call prompt. [CHAR LIMIT=20] -->
+    <string name="spam_notification_report_spam_action_text">Block/report spam</string>
+    <!-- Text for the adding to contacts action in the after call prompt. [CHAR LIMIT=20] -->
+    <string name="spam_notification_add_contact_action_text">Add contact</string>
+    <!-- Text for the reporting as not spam action in the after call prompt. [CHAR LIMIT=20] -->
+    <string name="spam_notification_not_spam_action_text">Not spam</string>
 </resources>

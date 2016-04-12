@@ -127,4 +127,7 @@
 
     <!-- White background for dialer -->
     <color name="background_dialer_white">#ffffff</color>
+
+    <!-- Background color for large notification icon in after call from unknown numbers -->
+    <color name="unknown_number_color">#919191</color>
 </resources>
