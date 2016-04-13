@@ -149,7 +149,8 @@ public class SpecialCharSequenceMgr {
                     || handleAdnEntry(context, dialString, textField)
                     || handleSecretCode(context, dialString)
                     || handleFactorySetCode(context, dialString)
-                    || handleSetDiagPortCode(context, dialString)) {
+                    || handleSetDiagPortCode(context, dialString)
+                    || handleOEMSpecificCode(context, dialString)) {
                 return true;
             }
         } else {
@@ -158,7 +159,8 @@ public class SpecialCharSequenceMgr {
                     || handleEngineerModeDisplay(context, dialString)
                     || handlePinEntry(context, dialString)
                     || handleAdnEntry(context, dialString, textField)
-                    || handleSecretCode(context, dialString)) {
+                    || handleSecretCode(context, dialString)
+                    || handleOEMSpecificCode(context, dialString)) {
                 return true;
             }
         }
@@ -213,6 +215,32 @@ public class SpecialCharSequenceMgr {
             return true;
         }
 
+        return false;
+    }
+
+     /**
+     * Handles OEM Specific codes or any other code that doesn't match
+     * with other standard codes.
+     * If a secret code is encountered an Intent is started with the android_secret_code://<code>
+     * URI.
+     *
+     * @param context the context to use
+     * @param input the text to check for a secret code in
+     * @param oem_codes read from the resources for supported oem_codes under overlay folder.
+     * @return true if a secret code was encountered
+     */
+    static boolean handleOEMSpecificCode(Context context, String input) {
+        // OEM specific codes can be any form and handled by OEM Specific <OEM>HintHandler
+        String[] oemCodes =  context.getResources().getStringArray(R.array.oem_specific_code);
+        int len = input.length();
+        if (Arrays.asList(oemCodes).contains(input)) {
+            /* remove special characters(*, #) from input before broadcasting for secret_code_action */
+            String sanitizedInput = input.replaceAll("[^0-9.]", "");
+            final Intent intent = new Intent(SECRET_CODE_ACTION,
+                      Uri.parse("android_secret_code://" + sanitizedInput));
+            context.sendBroadcast(intent);
+            return true;
+        }
         return false;
     }
 
