@@ -1,5 +1,6 @@
 package com.android.dialer.calllog;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -37,7 +38,8 @@ public class BlockReportSpamListenerTest extends ActivityInstrumentationTestCase
 
         MockitoAnnotations.initMocks(this);
 
-        blockReportSpamListener = new BlockReportSpamListener(getActivity(), adapter,
+        blockReportSpamListener = new BlockReportSpamListener(
+                ((Activity) getActivity()).getFragmentManager(), adapter,
                 extendedCallInfoService, filteredNumberAsyncQueryHandler);
     }
 

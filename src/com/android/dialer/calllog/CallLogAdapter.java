@@ -21,6 +21,7 @@ import com.android.dialer.service.ExtendedCallInfoService;
 import com.android.dialerbind.ObjectFactory;
 import com.google.common.annotations.VisibleForTesting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -317,7 +318,8 @@ public class CallLogAdapter extends GroupingListAdapter
         maybeShowVoicemailPromoCard();
 
         mExtendedCallInfoService = ObjectFactory.newExtendedCallInfoService(context);
-        mBlockReportSpamListener = new BlockReportSpamListener(mContext, this,
+        mBlockReportSpamListener = new BlockReportSpamListener(
+                ((Activity) mContext).getFragmentManager(), this,
                 mExtendedCallInfoService, mFilteredNumberAsyncQueryHandler);
         setHasStableIds(true);
     }
