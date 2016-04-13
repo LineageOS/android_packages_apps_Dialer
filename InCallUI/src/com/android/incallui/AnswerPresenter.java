@@ -195,8 +195,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             return;
         }
         showAnswerUi(true);
-        ui.showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_ACCEPT_REJECT_REQUEST,
-                modifyToVideoState);
+        ui.showTargets(QtiCallUtils.getSessionModificationOptions(getUi().getContext(),
+                currentVideoState, modifyToVideoState));
+
     }
 
     private boolean isEnabled(int videoState, int mask) {
@@ -287,12 +288,14 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         // Only present the user with the option to answer as a video call if the incoming call is
         // a bi-directional video call.
-        if (VideoUtils.isBidirectionalVideoCall(call)) {
+        if (VideoUtils.isVideoCall(call)) {
             if (withSms) {
-                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS);
+                getUi().showTargets(QtiCallUtils.getIncomingCallAnswerOptions(
+                        getUi().getContext(), withSms));
                 getUi().configureMessageDialog(textMsgs);
             } else {
-                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS);
+                getUi().showTargets(QtiCallUtils.getIncomingCallAnswerOptions(
+                        getUi().getContext(), withSms));
             }
         } else {
             if (withSms) {

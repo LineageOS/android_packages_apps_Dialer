@@ -272,6 +272,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void changeToVideoClicked() {
+        final Context context = getUi().getContext();
+        if (QtiCallUtils.useExt(context)) {
+            QtiCallUtils.displayModifyCallOptions(mCall, context);
+            return;
+        }
+
         VideoCall videoCall = mCall.getVideoCall();
         if (videoCall == null) {
             return;
@@ -384,7 +390,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 && UserManagerCompat.isUserUnlocked(ui.getContext());
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
-        final boolean showUpgradeToVideo = !isVideo && hasVideoCallCapabilities(call);
+        final boolean useExt = QtiCallUtils.useExt(ui.getContext());
+        final boolean showUpgradeToVideo = (!isVideo || useExt) && hasVideoCallCapabilities(call);
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
 
@@ -394,10 +401,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.setHold(isCallOnHold);
         ui.showButton(BUTTON_MUTE, showMute);
         ui.showButton(BUTTON_ADD_CALL, showAddCall);
-        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
-        ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio);
+        ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo ||
+                 (useExt && showDowngradeToAudio));
+        ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio && !useExt);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
-        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo);
+        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt);
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
 

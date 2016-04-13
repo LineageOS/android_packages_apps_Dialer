@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2015, 2016 The Linux Foundation. All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are
+  ~ met:
+  ~     * Redistributions of source code must retain the above copyright
+  ~       notice, this list of conditions and the following disclaimer.
+  ~     * Redistributions in binary form must reproduce the above
+  ~       copyright notice, this list of conditions and the following
+  ~       disclaimer in the documentation and/or other materials provided
+  ~       with the distribution.
+  ~     * Neither the name of The Linux Foundation nor the names of its
+  ~       contributors may be used to endorse or promote products derived
+  ~       from this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+  ~ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+  ~ ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  ~ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  ~ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  ~ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  ~ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  ~ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+  ~ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+  ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<!-- Array resources for the Phone app. -->
+<resources>
+    <!-- "Target" resources for the GlowPadView widget used for incoming calls;
+         see InCallTouchUi.showIncomingCallWidget() and incall_touch_ui.xml.  -->
+
+    <!-- For video calls, if respond via SMS is disabled:
+         - Answer as video call (drag right)
+         - Decline (drag left)
+         - Answer as audio call (drag down) -->
+    <array name="qti_incoming_call_widget_video_without_sms_targets">
+        <item>@drawable/ic_lockscreen_answer_video</item>
+        <item>@null</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/qti_ic_lockscreen_answer_tx_video</item>
+        <item>@drawable/qti_ic_lockscreen_answer_rx_video</item>
+    </array>
+    <array name="qti_incoming_call_widget_video_without_sms_target_descriptions">
+        <item>@string/description_target_answer_video_call</item>
+        <item>@null</item>
+        <item>@string/description_target_decline</item>
+        <item>@string/description_target_answer_audio_call</item>
+    </array>
+    <array name="qti_incoming_call_widget_video_without_sms_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@null</item>
+        <item>@string/description_direction_left</item>
+        <item>@string/description_direction_down</item>
+    </array>
+
+    <!-- For video calls, if respond via SMS is enabled:
+         - Answer as video call (drag right)
+         - Respond via SMS (drag up)
+         - Decline (drag left)
+         - Answer as audio call (drag down) -->
+    <array name="qti_incoming_call_widget_video_with_sms_targets">
+        <item>@drawable/ic_lockscreen_answer_video</item>
+        <item>@drawable/ic_lockscreen_text</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/qti_ic_lockscreen_answer_tx_video</item>
+        <item>@drawable/qti_ic_lockscreen_answer_rx_video</item>
+    </array>
+    <array name="qti_incoming_call_widget_video_with_sms_target_descriptions">
+        <item>@string/description_target_answer_video_call</item>
+        <item>@string/description_target_send_sms</item>
+        <item>@string/description_target_decline</item>
+        <item>@string/description_target_answer_audio_call</item>
+    </array>
+    <array name="qti_incoming_call_widget_video_with_sms_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@string/description_direction_up</item>
+        <item>@string/description_direction_left</item>
+        <item>@string/description_direction_down</item>
+    </array>
+
+    <!-- For accept/reject upgrade to video in active video call
+         - Accept upgrade to video request (drag right)
+         - Decline upgrade to video request (drag left)-->
+    <array name="qti_incoming_call_widget_video_request_targets">
+        <item>@drawable/ic_lockscreen_answer_video</item>
+        <item>@drawable/ic_lockscreen_decline_video</item>
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/qti_ic_lockscreen_answer_tx_video</item>
+        <item>@drawable/qti_ic_lockscreen_answer_rx_video</item>
+    </array>
+
+    <array name="qti_incoming_call_widget_video_request_target_descriptions">
+        <item>@string/description_target_accept_upgrade_to_video_request</item>
+        <item>@null</item>
+        <item>@string/description_target_decline_upgrade_to_video_request</item>
+        <item>@null</item>"
+    </array>
+    <array name="qti_incoming_call_widget_video_request_target_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@null</item>
+        <item>@string/description_direction_left</item>
+        <item>@null</item>
+    </array>
+
+    <!-- For accept/reject upgrade to video in active video call
+         - Accept upgrade to video request (drag right)
+         - Decline upgrade to video request (drag left)-->
+    <array name="qti_incoming_call_widget_bidirectional_video_accept_reject_request_targets">
+        <item>@drawable/ic_lockscreen_answer_video</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+    </array>
+
+    <!-- For accept/reject upgrade to video transmit in active video call
+         - Accept upgrade to video request (drag right)
+         - Decline upgrade to video request (drag left)-->
+    <array name="qti_incoming_call_widget_video_transmit_accept_reject_request_targets">
+        <item>@drawable/qti_ic_lockscreen_answer_tx_video</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+    </array>
+    <array name="qti_incoming_call_widget_video_transmit_request_target_descriptions">
+        <item>@string/description_target_accept_upgrade_to_video_transmit_request</item>
+        <item>@string/description_target_decline_upgrade_to_video_transmit_request</item>
+    </array>
+
+    <!-- For accept/reject upgrade to video receive in active video call
+         - Accept upgrade to video request (drag right)
+         - Decline upgrade to video request (drag left)-->
+    <array name="qti_incoming_call_widget_video_receive_accept_reject_request_targets">
+        <item>@drawable/qti_ic_lockscreen_answer_rx_video</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+    </array>
+    <array name="qti_incoming_call_widget_video_receive_request_target_descriptions">
+        <item>@string/description_target_accept_upgrade_to_video_receive_request</item>
+        <item>@string/description_target_decline_upgrade_to_video_receive_request</item>
+    </array>
+
+</resources>
