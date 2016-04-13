@@ -195,7 +195,8 @@ public class SpecialCharSequenceMgr {
     }
 
     /**
-     * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#*.
+     * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#* or
+     * any other code that is present in the oem_codes overlay list
      * If a secret code is encountered an Intent is started with the android_secret_code://<code>
      * URI.
      *
@@ -204,11 +205,17 @@ public class SpecialCharSequenceMgr {
      * @return true if a secret code was encountered
      */
     static boolean handleSecretCode(Context context, String input) {
-        // Secret codes are in the form *#*#<code>#*#*
         int len = input.length();
+        String sanitizedInput = null;
+        String[] oemCodes =  context.getResources().getStringArray(R.array.oem_specific_code);
         if (len > 8 && input.startsWith("*#*#") && input.endsWith("#*#*")) {
+                sanitizedInput = input.substring(4, len - 4);
+        } else if (Arrays.asList(oemCodes).contains(input)) {
+                sanitizedInput = input.replaceAll("[^0-9.]", "");
+        }
+        if (sanitizedInput != null) {
             final Intent intent = new Intent(SECRET_CODE_ACTION,
-                    Uri.parse("android_secret_code://" + input.substring(4, len - 4)));
+                    Uri.parse("android_secret_code://" + sanitizedInput));
             context.sendBroadcast(intent);
             return true;
         }
