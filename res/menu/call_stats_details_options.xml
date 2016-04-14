@@ -17,11 +17,9 @@
     <item
         android:id="@+id/menu_edit_number_before_call"
         android:title="@string/recentCalls_editNumberBeforeCall"
-        android:onClick="onMenuEditNumberBeforeCall"
     />
     <item
-        android:id="@+id/menu_add_to_blacklist"
-        android:title="@string/menu_add_to_blacklist"
-        android:onClick="onMenuAddToBlacklist"
+        android:id="@+id/menu_block_contact"
+        android:title="@string/menu_block_contact"
     />
 </menu>
