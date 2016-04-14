@@ -307,7 +307,7 @@ public class ContactInfoHelper {
                             null, LookupRequest.RequestOrigin.OTHER)
                     );
             if (response != null && response.mStatusCode == StatusCode.SUCCESS) {
-                logSuccessfulFetch(mLookupProvider);
+                logSuccessfulFetch();
                 final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
                 // map LookupResponse to ContactInfo
                 ContactInfo contactInfo = new ContactInfo();
@@ -556,7 +556,7 @@ public class ContactInfoHelper {
         }
     }
 
-    private void logSuccessfulFetch(LookupProvider mLookupProvider) {
+    private void logSuccessfulFetch() {
         MetricsHelper.Field field = new MetricsHelper.Field(
                 MetricsHelper.Fields.PROVIDER_PACKAGE_NAME,
                 mLookupProvider.getUniqueIdentifier());
