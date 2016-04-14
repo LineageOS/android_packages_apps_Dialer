@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.android.contacts.common.util.BlockContactHelper;
 import com.android.dialer.R;
+import com.android.internal.telephony.util.BlacklistUtils;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 /**
@@ -93,6 +94,10 @@ public class BlockContactPresenter implements View.OnClickListener,
             mViewHolder.mIcon.setColorFilter(res.getColor(
                     R.color.call_log_action_block_gray), PorterDuff.Mode.SRC_ATOP);
         }
+    }
+
+    public boolean canBlock() {
+        return BlacklistUtils.isBlacklistEnabled(mActivity);
     }
 
     public void onBlockSelected(boolean notifyProvider) {
