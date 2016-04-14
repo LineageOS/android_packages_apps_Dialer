@@ -31,6 +31,6 @@
     <item android:id="@+id/menu_report"
         android:title="@string/call_detail_menu_report" />
 
-    <item android:id="@+id/menu_add_to_blacklist"
-        android:title="@string/menu_add_to_blacklist" />
+    <item android:id="@+id/menu_block_contact"
+        android:title="@string/menu_block_contact" />
 </menu>
