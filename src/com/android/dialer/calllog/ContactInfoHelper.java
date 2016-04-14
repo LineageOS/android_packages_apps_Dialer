@@ -307,7 +307,7 @@ public class ContactInfoHelper {
                             null, LookupRequest.RequestOrigin.OTHER)
                     );
             if (response != null && response.mStatusCode == StatusCode.SUCCESS) {
-                logSuccessfulFetch(mLookupProvider);
+                logSuccessfulFetch();
                 final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
                 // map LookupResponse to ContactInfo
                 ContactInfo contactInfo = new ContactInfo();
@@ -512,51 +512,7 @@ public class ContactInfoHelper {
                 && mCachedNumberLookupService.canReportAsInvalid(sourceType, objectId);
     }
 
-    /**
-     * Checks whether calls can be blacklisted; that is, whether the
-     * phone blacklist is enabled
-     */
-    public boolean canBlacklistCalls() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.PHONE_BLACKLIST_ENABLED, 1) != 0;
-    }
-
-    /**
-     * Requests the given number to be added to the phone blacklist
-     *
-     * @param number the number to be blacklisted
-     */
-    public void addNumberToBlacklist(String number) {
-        ContentValues cv = new ContentValues();
-        cv.put(Telephony.Blacklist.PHONE_MODE, 1);
-
-        Uri uri = Uri.withAppendedPath(Telephony.Blacklist.CONTENT_FILTER_BYNUMBER_URI, number);
-        int count = mContext.getContentResolver().update(uri, cv, null, null);
-
-        if (count != 0) {
-            // Give the user some feedback
-            String message = mContext.getString(R.string.toast_added_to_blacklist, number);
-            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * Requests the given number to be removed from phone blacklist
-     *
-     * @param number the number to be removed from blacklist
-     */
-    public void removeNumberFromBlacklist(String number) {
-        Uri uri = Uri.withAppendedPath(Telephony.Blacklist.CONTENT_FILTER_BYNUMBER_URI, number);
-        int count = mContext.getContentResolver().delete(uri, null, null);
-
-        if (count != 0) {
-            // Give the user some feedback
-            String message = mContext.getString(R.string.toast_removed_from_blacklist, number);
-            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void logSuccessfulFetch(LookupProvider mLookupProvider) {
+    private void logSuccessfulFetch() {
         MetricsHelper.Field field = new MetricsHelper.Field(
                 MetricsHelper.Fields.PROVIDER_PACKAGE_NAME,
                 mLookupProvider.getUniqueIdentifier());
