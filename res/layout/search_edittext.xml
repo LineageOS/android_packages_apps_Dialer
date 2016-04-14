@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/search_box_left_padding"
-        android:paddingEnd="@dimen/search_box_right_padding"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -43,26 +42,38 @@
             android:gravity="center_vertical"
             android:hint="@string/dialer_hint_find_contact" />
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/voice_search_button"
-            android:layout_height="@dimen/search_box_icon_size"
-            android:layout_width="@dimen/search_box_icon_size"
-            android:layout_margin="@dimen/search_box_icon_margin"
-            android:src="@drawable/ic_voice_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:clickable="true"
-            android:contentDescription="@string/description_start_voice_search"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:tint="@color/searchbox_icon_tint" />
+            android:contentDescription="@string/description_start_voice_search" >
+            <ImageView
+                android:layout_height="@dimen/search_box_icon_size"
+                android:layout_width="@dimen/search_box_icon_size"
+                android:layout_margin="@dimen/search_box_icon_margin"
+                android:src="@drawable/ic_voice_search"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:tint="@color/searchbox_icon_tint" />
+        </LinearLayout>
 
-        <ImageButton
+        <LinearLayout
             android:id="@+id/dialtacts_options_menu_button"
-            android:layout_width="@dimen/search_box_icon_size"
-            android:layout_height="@dimen/search_box_icon_size"
-            android:layout_margin="@dimen/search_box_icon_margin"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_overflow_menu"
-            android:contentDescription="@string/action_menu_overflow_description"
-            android:tint="@color/searchbox_icon_tint" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="@dimen/search_box_right_padding"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:contentDescription="@string/action_menu_overflow_description" >
+            <ImageView
+                android:layout_width="@dimen/search_box_icon_size"
+                android:layout_height="@dimen/search_box_icon_size"
+                android:layout_margin="@dimen/search_box_icon_margin"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_overflow_menu"
+                android:tint="@color/searchbox_icon_tint" />
+        </LinearLayout>
 
     </LinearLayout>
 
