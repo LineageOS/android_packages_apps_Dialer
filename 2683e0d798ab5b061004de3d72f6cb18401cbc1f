@@ -22,6 +22,30 @@
       "revId": "2683e0d798ab5b061004de3d72f6cb18401cbc1f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7faddb67_cb8d2232",
+        "filename": "res/layout/search_edittext.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-14T20:18:03Z",
+      "side": 1,
+      "message": "whoops, meant to remove that one",
+      "parentUuid": "7faddb67_0b69fa89",
+      "range": {
+        "startLine": 70,
+        "startChar": 33,
+        "endLine": 70,
+        "endChar": 62
+      },
+      "revId": "2683e0d798ab5b061004de3d72f6cb18401cbc1f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
