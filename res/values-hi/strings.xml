@@ -199,14 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> के वॉइसमेल."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> पर किया गया कॉल."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> पर"</string>
-    <!-- no translation found for description_via_number (3503311803959108316) -->
-    <skip />
-    <!-- no translation found for call_log_via_number (8373282986443543296) -->
-    <skip />
-    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
-    <skip />
-    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
-    <skip />
+    <string name="description_via_number" msgid="3503311803959108316">"<xliff:g id="NUMBER">%1$s</xliff:g> से"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"<xliff:g id="NUMBER">%1$s</xliff:g> से"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> पर, <xliff:g id="NUMBER">%2$s</xliff:g> से"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g> से"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"कॉल करें"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को कॉल करें"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को वीडियो कॉल करें."</string>

@@ -199,14 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"Thư thoại từ <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Gọi tới <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"trên <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <!-- no translation found for description_via_number (3503311803959108316) -->
-    <skip />
-    <!-- no translation found for call_log_via_number (8373282986443543296) -->
-    <skip />
-    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
-    <skip />
-    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
-    <skip />
+    <string name="description_via_number" msgid="3503311803959108316">"qua <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"qua <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"trên <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, qua <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> qua <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Gọi"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Gọi <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Gọi điện video cho <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
