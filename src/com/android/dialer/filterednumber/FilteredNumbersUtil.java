@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.android.contacts.common.testing.NeededForTesting;
+import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.R;
 import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.database.FilteredNumberAsyncQueryHandler;
@@ -124,7 +125,7 @@ public class FilteredNumbersUtil {
         final AsyncTask task = new AsyncTask<Object, Void, Boolean>() {
             @Override
             public Boolean doInBackground(Object[]  params) {
-                if (context == null) {
+                if (context == null || !PermissionsUtil.hasContactsPermissions(context)) {
                     return false;
                 }
 
