@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"ఇప్పుడు తెరిచి ఉంది"</string>
     <string name="closed_now" msgid="2635314668145282080">"ఇప్పుడు మూసివేయబడింది"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"అనుమానిత స్పామ్ కాలర్"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"కాల్ ముగిసింది %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"ఈ నంబర్ నుండి మీకు కాల్ రావడం ఇదే మొదటిసారి."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ఈ కాల్ స్పామర్ కావచ్చని మేము అనుమానిస్తున్నాము."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"బ్లాక్/స్పామ్ నివే."</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"పరిచయాన్ని జోడించు"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"స్పామ్ కాదు"</string>
 </resources>

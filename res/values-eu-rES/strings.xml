@@ -199,14 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"Erantzungailuko mezua: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Egindako deiaren xehetasunak: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> kontuan"</string>
-    <!-- no translation found for description_via_number (3503311803959108316) -->
-    <skip />
-    <!-- no translation found for call_log_via_number (8373282986443543296) -->
-    <skip />
-    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
-    <skip />
-    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
-    <skip />
+    <string name="description_via_number" msgid="3503311803959108316">"<xliff:g id="NUMBER">%1$s</xliff:g> bidez"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"<xliff:g id="NUMBER">%1$s</xliff:g> bidez"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> kontuan, <xliff:g id="NUMBER">%2$s</xliff:g> bidez"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, <xliff:g id="NUMBER">%2$s</xliff:g> bidez"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Deitu"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Deitu <xliff:g id="NAMEORNUMBER">^1</xliff:g> deitzaileari"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Egin bideo-deia (<xliff:g id="NAMEORNUMBER">^1</xliff:g>)."</string>
@@ -280,22 +276,13 @@
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"Ez da spama"</string>
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"Desblokeatu"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"Spama"</string>
-    <!-- no translation found for block_report_number_alert_title (7964023263943399261) -->
-    <skip />
-    <!-- no translation found for block_report_number_alert_details (3504073367202469245) -->
-    <skip />
-    <!-- no translation found for checkbox_report_as_spam_action (7546927594371150677) -->
-    <skip />
-    <!-- no translation found for block_number_alert_details (3137736492383304346) -->
-    <skip />
-    <!-- no translation found for unblock_report_number_alert_title (972715151309357850) -->
-    <skip />
-    <!-- no translation found for unblock_number_alert_details (8190592456851353268) -->
-    <skip />
-    <!-- no translation found for report_not_spam_alert_title (5315040210536100068) -->
-    <skip />
-    <!-- no translation found for report_not_spam_alert_button (4241295249227799609) -->
-    <skip />
-    <!-- no translation found for report_not_spam_alert_details (7655461894835163214) -->
-    <skip />
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> blokeatu nahi duzu?"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"Aurrerantzean, blokeatu egingo dira zenbaki honen deiak eta ahots-mezuak."</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"Salatu deia spama dela"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"Blokeatu egingo dira zenbaki honen deiak eta ahots-mezuak. Dei hau spama dela salatuko da."</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> desblokeatu nahi duzu?"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"Desblokeatu egingo da zenbaki hau. Ez dira identifikatuko spam gisa deiak eta ahots-mezuak."</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"Sarbidea eman nahi diozu <xliff:g id="NUMBER">%1$s</xliff:g> zenbakiari?"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"Eman sarbidea"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"Aurrerantzean, ez dira identifikatuko spam gisa zenbaki honen deiak eta ahots-mezuak."</string>
 </resources>

@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"Tani është hapur"</string>
     <string name="closed_now" msgid="2635314668145282080">"Tani është mbyllur"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"I padëshirueshëm"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Telefonata përfundoi %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Kjo është hera e parë që ky numër ka telefonuar."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Ne dyshojmë që kjo telefonatë të jetë e padëshirueshme."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Blloko/raporto të padëshiruar"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Shto një kontakt"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Jo i padëshiruar"</string>
 </resources>

@@ -199,14 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"留言來自 <xliff:g id="NAMEORNUMBER">^1</xliff:g> (<xliff:g id="TYPEORLOCATION">^2</xliff:g>)，來電時間：<xliff:g id="TIMEOFCALL">^3</xliff:g>，撥打至 <xliff:g id="PHONEACCOUNT">^4</xliff:g>。"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"致電：<xliff:g id="NAMEORNUMBER">^1</xliff:g> (<xliff:g id="TIMEOFCALL">^3</xliff:g>，<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="PHONEACCOUNT">^4</xliff:g>)。"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"使用 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <!-- no translation found for description_via_number (3503311803959108316) -->
-    <skip />
-    <!-- no translation found for call_log_via_number (8373282986443543296) -->
-    <skip />
-    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
-    <skip />
-    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
-    <skip />
+    <string name="description_via_number" msgid="3503311803959108316">"透過 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"透過 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"上<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>通過<xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>，透過 <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"撥號"</string>
     <string name="description_call_action" msgid="4000549004089776147">"致電 <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"與<xliff:g id="NAMEORNUMBER">^1</xliff:g>進行視像通話。"</string>
@@ -280,22 +276,13 @@
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"非垃圾來電"</string>
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"解除封鎖"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"垃圾號碼"</string>
-    <!-- no translation found for block_report_number_alert_title (7964023263943399261) -->
-    <skip />
-    <!-- no translation found for block_report_number_alert_details (3504073367202469245) -->
-    <skip />
-    <!-- no translation found for checkbox_report_as_spam_action (7546927594371150677) -->
-    <skip />
-    <!-- no translation found for block_number_alert_details (3137736492383304346) -->
-    <skip />
-    <!-- no translation found for unblock_report_number_alert_title (972715151309357850) -->
-    <skip />
-    <!-- no translation found for unblock_number_alert_details (8190592456851353268) -->
-    <skip />
-    <!-- no translation found for report_not_spam_alert_title (5315040210536100068) -->
-    <skip />
-    <!-- no translation found for report_not_spam_alert_button (4241295249227799609) -->
-    <skip />
-    <!-- no translation found for report_not_spam_alert_details (7655461894835163214) -->
-    <skip />
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"要封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"系統會封鎖此號碼日後的來電和語音留言。"</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"舉報為垃圾來電"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"系統將會封鎖此號碼日後的來電和語音留言，並將此來電舉報為垃圾來電。"</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"要解除封鎖 <xliff:g id="NUMBER">%1$s</xliff:g> 嗎？"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"系統會將此號碼解除封鎖，並舉報為非垃圾號碼。此外，系統不會將日後的來電和語音留言視為垃圾來電和語音留言。"</string>
+    <string name="report_not_spam_alert_title" msgid="5315040210536100068">"要將 <xliff:g id="NUMBER">%1$s</xliff:g> 列入許可名單嗎？"</string>
+    <string name="report_not_spam_alert_button" msgid="4241295249227799609">"加入許可名單"</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"系統不會將此號碼日後的來電和語音留言識別為垃圾來電和語音留言，並會將此號碼舉報為垃圾號碼。"</string>
 </resources>

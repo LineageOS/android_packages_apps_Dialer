@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"ابھی کھلا ہے"</string>
     <string name="closed_now" msgid="2635314668145282080">"اب بند ہے"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"مشتبہ سپام کالر"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"‏کال ختم ہو گئی ‎%1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"اس نمبر سے پہلی بار آپ کو کال آئی ہے۔"</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ہمیں شک ہے کہ یہ کال سپامر تھی۔"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"مسدود کریں/سپام کی اطلاع دیں"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"رابطہ شامل کریں"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"سپام نہیں ہے"</string>
 </resources>

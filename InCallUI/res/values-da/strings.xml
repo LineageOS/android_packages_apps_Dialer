@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"Åbent nu"</string>
     <string name="closed_now" msgid="2635314668145282080">"Lukket for i dag"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Formodet spammer"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Opkaldet blev afsluttet %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Dette er første gang, at dette nummer har ringet til dig."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Vi har mistanke om, at dette er et spamopkald."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Bloker/rap. spam"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Tilføj kontaktperson"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Ikke spam"</string>
 </resources>

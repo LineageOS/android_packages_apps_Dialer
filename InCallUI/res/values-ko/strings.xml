@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"영업 중"</string>
     <string name="closed_now" msgid="2635314668145282080">"영업 종료"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"의심스러운 스팸 발신자"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"%1$s번으로 끝나는 번호에서 걸려온 전화"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"이 번호에서 처음으로 걸려온 전화입니다."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"스팸 전화로 의심됩니다."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"스팸 차단/신고"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"연락처 추가"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"스팸 해제"</string>
 </resources>

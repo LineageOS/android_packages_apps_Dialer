@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"अभी खुला है"</string>
     <string name="closed_now" msgid="2635314668145282080">"अभी बंद है"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"संदिग्ध स्पैम कॉलर"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"%1$s का कॉल समाप्त हो गया"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"इस नंबर से आपको पहली बार कॉल किया गया है."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"हमें आशंका है कि कॉल स्पैमकर्ता का हो सकता है."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"अवरुद्ध करें/स्पैम रिपोर्ट करें"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"संपर्क जोड़ें"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"स्पैम नहीं है"</string>
 </resources>

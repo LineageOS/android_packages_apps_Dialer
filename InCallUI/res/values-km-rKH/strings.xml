@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"បើកឥឡូវនេះ"</string>
     <string name="closed_now" msgid="2635314668145282080">"បិទឥឡូវនេះ"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"អ្នក​ហៅ​​បន្លំ​ដែល​សង្ស័យ"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"ការ​ហៅ​បាន​បញ្ចប់ %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"នេះ​គឺ​ជា​លើក​ដំបូង​ដែល​លេខ​នេះ​បាន​ហៅ​មក​អ្នក។"</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"យើង​បាន​សង្ស័យ​ថា​​ការ​ហៅ​នេះ​ជា​សារ​ឥត​បាន​ការ។"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"រារាំង/រាយការណ៍សារឥតបានការ"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"បន្ថែម​ទំនាក់ទំនង"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"មិនមែន​សារ​ឥតបានការ"</string>
 </resources>

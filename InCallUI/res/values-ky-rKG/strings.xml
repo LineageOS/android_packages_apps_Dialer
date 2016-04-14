@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"Азыр ачык"</string>
     <string name="closed_now" msgid="2635314668145282080">"Эми жабылды"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Спам окшойт"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Чалуу %1$s бүттү"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Бул номурдун сизге биринчи жолу чалышы."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Бул чалууну спамер деп шектенип жатабыз."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Бөгөттөө/спам катары кабарлоо"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Байланыш кошуу"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Спам эмес"</string>
 </resources>

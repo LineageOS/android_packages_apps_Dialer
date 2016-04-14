@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"ယခုဖွင့်ပါ"</string>
     <string name="closed_now" msgid="2635314668145282080">"ယခုပိတ်ပါ"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"မသင်္ကာဖွယ်ရာ စပမ်းခေါ်ဆိုသူ"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"ဖုန်းခေါ်ဆိုမှု ပြီးဆုံးပါပြီ %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"ဤနံပါတ်သည် သင့်ထံ ပထမဆုံးခေါ်ဆိုသော နံပါတ်ဖြစ်သည်။"</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ယခုဖုန်းခေါ်ဆိုမှုသည် စပမ်းပို့သူဆီမှ ဖြစ်နိုင်သည်ဟု ထင်ပါသည်။"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"စပမ်းကို ပိတ်ဆို့ပါ/သတင်းပေးပို့ပါ"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"အဆက်အသွယ် ထည့်ပါ"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"စပမ်း မဟုတ်ပါ"</string>
 </resources>

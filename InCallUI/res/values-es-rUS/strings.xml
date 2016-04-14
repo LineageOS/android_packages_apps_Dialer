@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"Abierto ahora"</string>
     <string name="closed_now" msgid="2635314668145282080">"Cerrado ahora"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Posible spam"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Llamada finalizada %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Es la primera vez que te llaman desde este número."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Sospechamos que esta llamada era spam."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Bloquear/denunciar"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Agregar contacto"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"No es spam"</string>
 </resources>

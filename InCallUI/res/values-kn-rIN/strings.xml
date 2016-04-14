@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"ಇದೀಗ ತೆರೆಯಲಾಗಿದೆ"</string>
     <string name="closed_now" msgid="2635314668145282080">"ಇದೀಗ ಮುಚ್ಚಲಾಗಿದೆ"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆದಾರರು"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"ಕರೆ ಮುಕ್ತಾಯಗೊಂಡಿದೆ %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"ಇದೇ ಮೊದಲ ಬಾರಿಗೆ ಈ ಸಂಖ್ಯೆಯಿಂದ ನಿಮಗೆ ಕರೆ ಮಾಡಲಾಗಿದೆ."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ನಾವು ಈ ಕರೆಯನ್ನು ಸ್ಪ್ಯಾಮರ್‌ ಎಂದು ಶಂಕಿಸಿದ್ದೇವೆ."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"ಸ್ಪ್ಯಾಮ್ ನಿರ್ಬಂಧಿಸು/ವರದಿ ಮಾಡು"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"ಸಂಪರ್ಕ ಸೇರಿಸು"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"ಸ್ಪ್ಯಾಮ್‌ ಅಲ್ಲ"</string>
 </resources>

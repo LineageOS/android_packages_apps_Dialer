@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"营业中"</string>
     <string name="closed_now" msgid="2635314668145282080">"现已结束营业"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"疑似骚扰电话来电者"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"通话已结束 %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"这是此号码的第一次来电。"</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"我们怀疑这是骚扰电话。"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"屏蔽/举报为骚扰电话"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"添加联系人"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"不是骚扰电话"</string>
 </resources>

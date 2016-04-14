@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"Jelenleg nyitva van"</string>
     <string name="closed_now" msgid="2635314668145282080">"Jelenleg zárva van"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Gyanús spamhívó"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Hívás befejezve: %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Ez az első alkalom, hogy erről a számról hívása érkezett."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Azt gyanítjuk, hogy ez egy spamhívás."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Letiltás/spam bejel."</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Névjegy hozzáadása"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Nem spam"</string>
 </resources>

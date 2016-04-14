@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"ດຽວ​ນີ້​ເປີດ"</string>
     <string name="closed_now" msgid="2635314668145282080">"​ປິດ​ແລ້ວດຽວນີ້"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"ຄາດວ່າເປັນການໂທສະແປມ"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"ການໂທສິ້ນສຸດແລ້ວ %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"ນີ້ເປັນເທື່ອທຳອິດທີ່ເບີນີ້ໂທຫາທ່ານ."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ພວກເຮົາສົງໄສວ່າເບີໂທນີ້ເປັນສະແປມ."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"ບລັອກ/ລາຍງານສະແປມ"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"ເພີ່ມລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"ບໍ່ແມ່ນສະແປມ"</string>
 </resources>

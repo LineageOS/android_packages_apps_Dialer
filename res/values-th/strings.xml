@@ -199,14 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"ข้อความเสียงจาก <xliff:g id="NAMEORNUMBER">^1</xliff:g> ผ่านทาง<xliff:g id="TYPEORLOCATION">^2</xliff:g> เมื่อ <xliff:g id="TIMEOFCALL">^3</xliff:g> <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"โทรหา <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"บน <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <!-- no translation found for description_via_number (3503311803959108316) -->
-    <skip />
-    <!-- no translation found for call_log_via_number (8373282986443543296) -->
-    <skip />
-    <!-- no translation found for description_via_number_phone_account (5426866894799626474) -->
-    <skip />
-    <!-- no translation found for call_log_via_number_phone_account (4394943791173578941) -->
-    <skip />
+    <string name="description_via_number" msgid="3503311803959108316">"ผ่าน <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"ผ่าน <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"ใน <xliff:g id="PHONEACCOUNT">%1$s</xliff:g> ผ่าน <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> ผ่าน <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"โทร"</string>
     <string name="description_call_action" msgid="4000549004089776147">"โทรไปที่ <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"เรียกแฮงเอาท์วิดีโอไปยัง <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
@@ -281,12 +277,12 @@
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"เลิกบล็อก"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"สแปม"</string>
     <string name="block_report_number_alert_title" msgid="7964023263943399261">"บล็อก <xliff:g id="NUMBER">%1$s</xliff:g> ไหม"</string>
-    <string name="block_report_number_alert_details" msgid="3504073367202469245">"สายเรียกเข้าและข้อความเสียงในอนาคตจากหมายเลขนี้จะได้รับการบล็อค"</string>
-    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"รายงานสายเรียกเข้าเป็นสแปม"</string>
-    <string name="block_number_alert_details" msgid="3137736492383304346">"สายเรียกเข้าและข้อความเสียงในอนาคตจากหมายเลขนี้จะได้รับการบล็อค สายเรียกเข้านี้จะได้รับการายงานเป็นสแปม"</string>
-    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"เลิกบล็อก <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="unblock_number_alert_details" msgid="8190592456851353268">"เลขหมายนี้จะได้รับการปลดล็อคและรายงานเป็น \"ไม่ใช่สแปม\" สายเรียกเข้าและข้อความเสียงในอนาคตจะไม่ได้รับการระบุเป็นสแปม"</string>
+    <string name="block_report_number_alert_details" msgid="3504073367202469245">"สายเรียกเข้าและข้อความเสียงในอนาคตจากหมายเลขนี้จะถูกบล็อก"</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"รายงานสายนี้ว่าเป็นสแปม"</string>
+    <string name="block_number_alert_details" msgid="3137736492383304346">"สายเรียกเข้าและข้อความเสียงในอนาคตจากหมายเลขนี้จะถูกบล็อก สายเรียกเข้านี้จะได้รับการายงานว่าเป็นสแปม"</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"เลิกบล็อก <xliff:g id="NUMBER">%1$s</xliff:g> ไหม"</string>
+    <string name="unblock_number_alert_details" msgid="8190592456851353268">"เลิกบล็อกหมายเลขนี้และรายงานว่าไม่ใช่สแปม สายและข้อความเสียงในอนาคตจะไม่ได้รับการระบุเป็นสแปม"</string>
     <string name="report_not_spam_alert_title" msgid="5315040210536100068">"อนุญาตพิเศษ <xliff:g id="NUMBER">%1$s</xliff:g> หรือไม่"</string>
     <string name="report_not_spam_alert_button" msgid="4241295249227799609">"รายการที่อนุญาตพิเศษ"</string>
-    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"สายเรียกเข้าและข้อความเสียงในอนาคตจากเลขหมายนี้จะไม่ได้รับการระบุเป็นสแปม เลขหมายนี้จะได้รับการรายงานเป็น \"ไม่ใช่สแปม\""</string>
+    <string name="report_not_spam_alert_details" msgid="7655461894835163214">"สายและข้อความเสียงในอนาคตจากหมายเลขนี้จะไม่ถูกระบุเป็นสแปม หมายเลขนี้จะได้รับการรายงานว่าไม่ใช่สแปม"</string>
 </resources>

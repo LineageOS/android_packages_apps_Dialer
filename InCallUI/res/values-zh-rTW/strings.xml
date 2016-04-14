@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"營業中"</string>
     <string name="closed_now" msgid="2635314668145282080">"本日已結束營業"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"可疑的騷擾/廣告來電者"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"通話結束 %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"這組號碼首次致電給您。"</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"我們懷疑這通來電是騷擾/廣告電話。"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"封鎖/回報為騷擾/廣告電話"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"新增聯絡人"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"非騷擾/廣告電話"</string>
 </resources>

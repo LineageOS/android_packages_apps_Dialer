@@ -203,4 +203,10 @@
     <string name="open_now" msgid="4615706338669555999">"Відчинено"</string>
     <string name="closed_now" msgid="2635314668145282080">"Зачинено"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Може бути спамом"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Дзвінок завершено %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"З цього номера вам телефонують уперше."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Ми підозрюємо, що телефонував спамер."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Заблокувати/це спам"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Додати контакт"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Не спам"</string>
 </resources>

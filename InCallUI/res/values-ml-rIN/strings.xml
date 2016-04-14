@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"ഇപ്പോൾ തുറന്നിരിക്കുന്നു"</string>
     <string name="closed_now" msgid="2635314668145282080">"ഇപ്പോൾ അടച്ചിരിക്കുന്നു"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"സംശയാസ്‌പദമായ സ്‌പാം കോളർ"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"കോൾ അവസാനിച്ചു, %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"ഈ നമ്പറിൽ നിന്ന് ആദ്യമായാണ് നിങ്ങൾക്ക് കോൾ വരുന്നത്."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ഈ കോൾ ഒരു സ്‌പാമർ ആണെന്ന് ഞങ്ങൾക്ക് സംശയമുണ്ടായിരുന്നു."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"ബ്ലോക്കുചെയ്യുക/സ്പാമാണെന്ന് റിപ്പോർട്ടുചെയ്യുക"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"കോൺടാക്റ്റ് ചേർക്കുക"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"സ്പാം അല്ല"</string>
 </resources>

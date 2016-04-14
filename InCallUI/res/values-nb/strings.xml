@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"Åpen nå"</string>
     <string name="closed_now" msgid="2635314668145282080">"Stengt nå"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Mulig useriøst anrop"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Samtalen ble avsluttet %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Dette er første gang du blir oppringt fra dette nummeret."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Vi har mistanke om at dette anropet kommer fra en useriøs oppringer."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Blokkér/rapportér"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Legg til som kontakt"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Ikke useriøs"</string>
 </resources>

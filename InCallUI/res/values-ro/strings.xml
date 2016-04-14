@@ -200,4 +200,10 @@
     <string name="open_now" msgid="4615706338669555999">"Acum este deschis"</string>
     <string name="closed_now" msgid="2635314668145282080">"Acum este închis"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Posibil apelant spam"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"Apelul s-a încheiat %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Aceasta este prima dată când ați primit apel de la acest număr."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Suspectăm că acesta este un apel spam."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Blocați/raportați"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Adăugați o persoană"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Nu este spam"</string>
 </resources>

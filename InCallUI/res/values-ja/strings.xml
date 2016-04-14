@@ -197,4 +197,10 @@
     <string name="open_now" msgid="4615706338669555999">"現在営業中"</string>
     <string name="closed_now" msgid="2635314668145282080">"営業終了"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"迷惑電話の疑いあり"</string>
+    <string name="spam_notification_title" msgid="8681565585547329999">"通話が終了しました %1$s"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"この番号からの通話を受信したのはこれが初めてです。"</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"この通話は迷惑電話の可能性があります。"</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"ブロック / 報告"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"連絡先に追加"</string>
+    <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"迷惑電話ではない"</string>
 </resources>
