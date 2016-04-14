@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7faddb67_6b5c2e7e",
+        "filename": "res/values/cm_arrays.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2016-04-14T21:31:02Z",
+      "side": 1,
+      "message": "Don\u0027t specify a default item here.",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 30
+      },
+      "revId": "c3e1219298f47fb7ddd39a3f14d9795fb756e801",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7faddb67_8b5f2a71",
+        "filename": "src/com/android/dialer/SpecialCharSequenceMgr.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2016-04-14T21:31:02Z",
+      "side": 1,
+      "message": "If you have to do this, why can\u0027t you just extend this existing function?",
+      "range": {
+        "startLine": 208,
+        "startChar": 19,
+        "endLine": 208,
+        "endChar": 35
+      },
+      "revId": "c3e1219298f47fb7ddd39a3f14d9795fb756e801",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
