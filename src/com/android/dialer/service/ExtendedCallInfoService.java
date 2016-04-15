@@ -16,10 +16,25 @@
 
 package com.android.dialer.service;
 
+import android.support.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Interface of service to get extended call information.
  */
 public interface ExtendedCallInfoService {
+    /**
+     * All the possible locations that a user can report a number as spam or not spam.
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({REPORTING_LOCATION_UNKNOWN, REPORTING_LOCATION_CALL_LOG_HISTORY,
+            REPORTING_LOCATION_FEEDBACK_PROMPT})
+    @interface ReportingLocation {}
+    int REPORTING_LOCATION_UNKNOWN = 0;
+    int REPORTING_LOCATION_CALL_LOG_HISTORY = 1;
+    int REPORTING_LOCATION_FEEDBACK_PROMPT = 2;
 
     /**
      * Interface for a callback to be invoked when data is fetched.
@@ -46,8 +61,10 @@ public interface ExtendedCallInfoService {
      * @param countryIso The country ISO of the number.
      * @param callType    Whether the type of call is missed, voicemail, etc. Example of this is
      *                    {@link android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+     * @param from Where in the dialer this was reported from.
+     *             Must be one of {@link ReportingLocation}.
      */
-    void reportSpam(String number, String countryIso, int callType);
+    void reportSpam(String number, String countryIso, int callType, @ReportingLocation int from);
 
     /**
      * Reports number as not spam.
@@ -55,6 +72,8 @@ public interface ExtendedCallInfoService {
      * @param countryIso The country ISO of the number.
      * @param callType    Whether the type of call is missed, voicemail, etc. Example of this is
      *                    {@link android.provider.CallLog.Calls#VOICEMAIL_TYPE}.
+     * @param from Where in the dialer this was reported from.
+     *             Must be one of {@link ReportingLocation}.
      */
-    void reportNotSpam(String number, String countryIso, int callType);
+    void reportNotSpam(String number, String countryIso, int callType, @ReportingLocation int from);
 }

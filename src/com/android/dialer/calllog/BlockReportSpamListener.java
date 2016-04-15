@@ -41,7 +41,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                     public void onClick(boolean isSpamChecked) {
                         if (isSpamChecked) {
                             mExtendedCallInfoService.reportSpam(
-                                    number, countryIso, callType);
+                                    number, countryIso, callType,
+                                    ExtendedCallInfoService.REPORTING_LOCATION_CALL_LOG_HISTORY);
                         }
                         mFilteredNumberAsyncQueryHandler.blockNumber(
                                 new FilteredNumberAsyncQueryHandler.OnBlockNumberListener() {
@@ -64,7 +65,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                 new BlockReportSpamDialogs.OnConfirmListener() {
                     @Override
                     public void onClick() {
-                        mExtendedCallInfoService.reportSpam(number, countryIso, callType);
+                        mExtendedCallInfoService.reportSpam(number, countryIso, callType,
+                                ExtendedCallInfoService.REPORTING_LOCATION_CALL_LOG_HISTORY);
                         mFilteredNumberAsyncQueryHandler.blockNumber(
                                 new FilteredNumberAsyncQueryHandler.OnBlockNumberListener() {
                                     @Override
@@ -88,7 +90,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                     public void onClick() {
                         if (isSpam) {
                             mExtendedCallInfoService.reportNotSpam(
-                                    number, countryIso, callType);
+                                    number, countryIso, callType,
+                                    ExtendedCallInfoService.REPORTING_LOCATION_CALL_LOG_HISTORY);
                         }
                         mFilteredNumberAsyncQueryHandler.unblock(
                                 new FilteredNumberAsyncQueryHandler.OnUnblockNumberListener() {
@@ -111,7 +114,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                     @Override
                     public void onClick() {
                         mExtendedCallInfoService.reportNotSpam(
-                                number, countryIso, callType);
+                                number, countryIso, callType,
+                                ExtendedCallInfoService.REPORTING_LOCATION_CALL_LOG_HISTORY);
                         mAdapter.notifyDataSetChanged();
                     }
                 }, null)
