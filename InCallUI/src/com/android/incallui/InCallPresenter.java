@@ -1019,6 +1019,14 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     /**
+     * Returns true if the manage conference ui is in foreground.
+     */
+    public boolean isShowingManageConferenceUi() {
+        return (isActivityStarted() && mInCallActivity.isVisible()
+                && mInCallActivity.isManageConferenceVisible());
+    }
+
+    /**
      * Returns true if the activity has been created and is running.
      * Returns true as long as activity is not destroyed or finishing.  This ensures that we return
      * true even if the activity is paused (not in foreground).

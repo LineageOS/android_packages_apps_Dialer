@@ -749,11 +749,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void setSecondaryInfoVisible(final boolean visible) {
         boolean wasVisible = mSecondaryCallInfo.isShown();
         final boolean isVisible = visible && mHasSecondaryCallInfo;
+        // If hide request is coming when InCallUI is in background, force the view to hide.
+        final boolean needForceHide = !isVisible &&
+                mSecondaryCallInfo.getVisibility() == View.VISIBLE &&
+                (!InCallPresenter.getInstance().isShowingInCallUi() ||
+                InCallPresenter.getInstance().isShowingManageConferenceUi());
         Log.v(this, "setSecondaryInfoVisible: wasVisible = " + wasVisible + " isVisible = "
-                + isVisible);
+                 + isVisible + " isFg = " + InCallPresenter.getInstance().isShowingInCallUi()
+                 + " view visibility = " + mSecondaryCallInfo.getVisibility());
 
         // If visibility didn't change, nothing to do.
-        if (wasVisible == isVisible) {
+        if (wasVisible == isVisible && !needForceHide) {
             return;
         }
 
