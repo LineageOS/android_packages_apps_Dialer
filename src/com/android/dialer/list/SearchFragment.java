@@ -296,22 +296,25 @@ public class SearchFragment extends PhoneNumberPickerFragment
         final OnPhoneNumberPickerActionListener listener;
         final Intent intent;
         final String number;
+        CallMethodInfo currentCallMethod = getCurrentCallMethod();
 
         Log.i(TAG, "onItemClick: shortcutType=" + shortcutType);
 
         switch (shortcutType) {
             case DialerPhoneNumberListAdapter.SHORTCUT_INVALID:
                 number = adapter.getQueryString();
-                if (getCurrentCallMethod().mIsInCallProvider && !PhoneNumberUtils.isEmergencyNumber(number)) {
-                    onProviderClick(position, getCurrentCallMethod());
+                if (currentCallMethod != null && currentCallMethod.mIsInCallProvider &&
+                        !PhoneNumberUtils.isEmergencyNumber(number)) {
+                    onProviderClick(position, currentCallMethod);
                 } else {
                     super.onItemClick(position, id);
                 }
                 break;
             case DialerPhoneNumberListAdapter.SHORTCUT_DIRECT_CALL:
                 number = adapter.getQueryString();
-                if (getCurrentCallMethod().mIsInCallProvider && !PhoneNumberUtils.isEmergencyNumber(number)) {
-                    placePSTNCall(number, getCurrentCallMethod());
+                if (currentCallMethod != null && currentCallMethod.mIsInCallProvider &&
+                        !PhoneNumberUtils.isEmergencyNumber(number)) {
+                    placePSTNCall(number, currentCallMethod);
                 } else {
                     listener = getOnPhoneNumberPickerListener();
                     if (listener != null && !checkForProhibitedPhoneNumber(number)) {
