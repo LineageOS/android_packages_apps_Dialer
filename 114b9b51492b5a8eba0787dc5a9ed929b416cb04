@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_cb72497d",
+        "filename": "res/layout/search_edittext.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-04-15T17:59:37Z",
+      "side": 1,
+      "message": "why not leave this padding where it was \n\notherwise, the voice search LinearLayout doesn\u0027t have any padding",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 64
+      },
+      "revId": "114b9b51492b5a8eba0787dc5a9ed929b416cb04",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
