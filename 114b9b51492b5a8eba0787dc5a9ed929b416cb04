@@ -22,6 +22,30 @@
       "revId": "114b9b51492b5a8eba0787dc5a9ed929b416cb04",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6b09d5db",
+        "filename": "res/layout/search_edittext.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-15T18:02:07Z",
+      "side": 1,
+      "message": "It never existed for voice_search_button. I moved it from the parent layout search_box_collapsed.",
+      "parentUuid": "5faad753_cb72497d",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 64
+      },
+      "revId": "114b9b51492b5a8eba0787dc5a9ed929b416cb04",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
