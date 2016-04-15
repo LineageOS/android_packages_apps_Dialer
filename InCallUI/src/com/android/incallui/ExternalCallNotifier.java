@@ -182,7 +182,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
         com.android.incallui.Call incallCall = new com.android.incallui.Call(info.getCall(),
-                false /* registerCallback */);
+                new LatencyReport(), false /* registerCallback */);
 
         mContactInfoCache.findInfo(incallCall, false /* isIncoming */,
                 new ContactInfoCache.ContactInfoCacheCallback() {

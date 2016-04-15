@@ -27,6 +27,7 @@ import android.database.ContentObserver;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.CallLog;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
@@ -513,14 +514,16 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     public void onCallAdded(final android.telecom.Call call) {
+        LatencyReport latencyReport = new LatencyReport(call);
         if (shouldAttemptBlocking(call)) {
-            maybeBlockCall(call);
+            maybeBlockCall(call, latencyReport);
         } else {
+            latencyReport.onCallBlockingDone();
             if (call.getDetails()
                     .hasProperty(CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
                 mExternalCallList.onCallAdded(call);
             } else {
-                mCallList.onCallAdded(call);
+                mCallList.onCallAdded(call, latencyReport);
             }
         }
 
@@ -551,7 +554,8 @@ public class InCallPresenter implements CallList.Listener,
      * checking whether a function is blocked does not return in a reasonable time, we proceed
      * with adding the call anyways.
      */
-    private void maybeBlockCall(final android.telecom.Call call) {
+    private void maybeBlockCall(final android.telecom.Call call,
+            final LatencyReport latencyReport) {
         final String countryIso = GeoUtil.getCurrentCountryIso(mContext);
         final String number = TelecomCallUtil.getNumber(call);
         final long timeAdded = System.currentTimeMillis();
@@ -567,7 +571,8 @@ public class InCallPresenter implements CallList.Listener,
         final Runnable runnable = new Runnable() {
             public void run() {
                 hasTimedOut.set(true);
-                mCallList.onCallAdded(call);
+                latencyReport.onCallBlockingDone();
+                mCallList.onCallAdded(call, latencyReport);
             }
         };
         handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
@@ -580,7 +585,8 @@ public class InCallPresenter implements CallList.Listener,
                 }
                 if (id == null) {
                     if (!hasTimedOut.get()) {
-                        mCallList.onCallAdded(call);
+                        latencyReport.onCallBlockingDone();
+                        mCallList.onCallAdded(call, latencyReport);
                     }
                 } else {
                     Log.i(this, "Rejecting incoming call from blocked number");
@@ -604,7 +610,9 @@ public class InCallPresenter implements CallList.Listener,
             Log.d(this, "checkForBlockedCall: invalid number, skipping block checking");
             if (!hasTimedOut.get()) {
                 handler.removeCallbacks(runnable);
-                mCallList.onCallAdded(call);
+
+                latencyReport.onCallBlockingDone();
+                mCallList.onCallAdded(call, latencyReport);
             }
         }
     }

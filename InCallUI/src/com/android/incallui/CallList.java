@@ -86,9 +86,9 @@ public class CallList {
     CallList() {
     }
 
-    public void onCallAdded(final android.telecom.Call telecomCall) {
+    public void onCallAdded(final android.telecom.Call telecomCall, LatencyReport latencyReport) {
         Trace.beginSection("onCallAdded");
-        final Call call = new Call(telecomCall);
+        final Call call = new Call(telecomCall, latencyReport);
         Log.d(this, "onCallAdded: callState=" + call.getState());
 
         if (call.getState() == Call.State.INCOMING ||
@@ -628,6 +628,12 @@ public class CallList {
 
     public void setExtendedCallInfoService(ExtendedCallInfoService service) {
         mExtendedCallInfoService = service;
+    }
+
+    public void onInCallUiShown(boolean forFullScreenIntent) {
+        for (Call call : mCallById.values()) {
+            call.getLatencyReport().onInCallUiShown(forFullScreenIntent);
+        }
     }
 
     /**

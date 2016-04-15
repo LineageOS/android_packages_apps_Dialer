@@ -19,6 +19,7 @@ package com.android.dialer.util;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -37,6 +38,8 @@ public class IntentUtil {
 
     public static final String EXTRA_CALL_INITIATION_TYPE
             = "com.android.dialer.EXTRA_CALL_INITIATION_TYPE";
+    public static final String EXTRA_CALL_CREATED_TIME_MILLIS =
+            "android.telecom.extra.CALL_CREATED_TIME_MILLIS";
 
     public static class CallIntentBuilder {
         private Uri mUri;
@@ -91,6 +94,7 @@ public class IntentUtil {
         intent.putExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, videoState);
 
         final Bundle b = new Bundle();
+        b.putLong(EXTRA_CALL_CREATED_TIME_MILLIS, SystemClock.elapsedRealtime());
         b.putInt(EXTRA_CALL_INITIATION_TYPE, callIntiationType);
         intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, b);
 

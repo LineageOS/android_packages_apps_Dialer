@@ -375,7 +375,8 @@ public class Call {
             }
     };
 
-    private android.telecom.Call mTelecomCall;
+    private final android.telecom.Call mTelecomCall;
+    private final LatencyReport mLatencyReport;
     private boolean mIsEmergencyCall;
     private Uri mHandle;
     private final String mId;
@@ -408,7 +409,7 @@ public class Call {
 
     private long mTimeAddedMs;
 
-    private LogState mLogState = new LogState();
+    private final LogState mLogState = new LogState();
 
     /**
      * Used only to create mock calls for testing
@@ -416,6 +417,7 @@ public class Call {
     @NeededForTesting
     Call(int state) {
         mTelecomCall = null;
+        mLatencyReport = new LatencyReport();
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
         setState(state);
     }
@@ -424,8 +426,8 @@ public class Call {
      * Creates a new instance of a {@link Call}.  Registers a callback for
      * {@link android.telecom.Call} events.
      */
-    public Call(android.telecom.Call telecomCall) {
-        this(telecomCall, true /* registerCallback */);
+    public Call(android.telecom.Call telecomCall, LatencyReport latencyReport) {
+        this(telecomCall, latencyReport, true /* registerCallback */);
     }
 
     /**
@@ -435,8 +437,10 @@ public class Call {
      * Intended for use when creating a {@link Call} instance for use with the
      * {@link ContactInfoCache}, where we do not want to register callbacks for the new call.
      */
-    public Call(android.telecom.Call telecomCall, boolean registerCallback) {
+    public Call(android.telecom.Call telecomCall, LatencyReport latencyReport,
+            boolean registerCallback) {
         mTelecomCall = telecomCall;
+        mLatencyReport = latencyReport;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
 
         updateFromTelecomCall(registerCallback);
@@ -1011,5 +1015,9 @@ public class Call {
 
     public boolean isSpam() {
         return mIsSpam;
+    }
+
+    public LatencyReport getLatencyReport() {
+        return mLatencyReport;
     }
 }

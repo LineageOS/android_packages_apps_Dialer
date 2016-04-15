@@ -79,6 +79,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     // Notification for incoming calls. This is interruptive and will show up as a HUN.
     private static final int NOTIFICATION_INCOMING_CALL = 2;
 
+    private static final int PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN = 0;
+    private static final int PENDING_INTENT_REQUEST_CODE_FULL_SCREEN = 1;
+
     private static final long[] VIBRATE_PATTERN = new long[] {0, 1000, 1000};
 
     private final Context mContext;
@@ -290,13 +293,13 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         builder.setPublicVersion(publicBuilder.build());
 
         // Set up the main intent to send the user to the in-call screen
-        final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
-        builder.setContentIntent(inCallPendingIntent);
+        builder.setContentIntent(createLaunchPendingIntent(false /* isFullScreen */));
 
         // Set the intent as a full screen intent as well if a call is incoming
         if (notificationType == NOTIFICATION_INCOMING_CALL
                 && !InCallPresenter.getInstance().isShowingInCallUi()) {
-            configureFullScreenIntent(builder, inCallPendingIntent, call);
+            configureFullScreenIntent(
+                    builder, createLaunchPendingIntent(true /* isFullScreen */), call);
             // Set the notification category for incoming calls
             builder.setCategory(Notification.CATEGORY_CALL);
         }
@@ -345,8 +348,10 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
                     + mCurrentNotification);
             mNotificationManager.cancel(mCurrentNotification);
         }
+
         Log.i(this, "Displaying notification for " + notificationType);
         mNotificationManager.notify(notificationType, notification);
+        call.getLatencyReport().onNotificationShown();
         mCurrentNotification = notificationType;
     }
 
@@ -721,19 +726,24 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         return builder;
     }
 
-    private PendingIntent createLaunchPendingIntent() {
-
-        final Intent intent = InCallPresenter.getInstance().getInCallIntent(
+    private PendingIntent createLaunchPendingIntent(boolean isFullScreen) {
+        Intent intent = InCallPresenter.getInstance().getInCallIntent(
                 false /* showDialpad */, false /* newOutgoingCall */);
+
+        int requestCode = PENDING_INTENT_REQUEST_CODE_NON_FULL_SCREEN;
+        if (isFullScreen) {
+            intent.putExtra(InCallActivity.FOR_FULL_SCREEN_INTENT, true);
+            // Use a unique request code so that the pending intent isn't clobbered by the
+            // non-full screen pending intent.
+            requestCode = PENDING_INTENT_REQUEST_CODE_FULL_SCREEN;
+        }
 
         // PendingIntent that can be used to launch the InCallActivity.  The
         // system fires off this intent if the user pulls down the windowshade
         // and clicks the notification's expanded view.  It's also used to
         // launch the InCallActivity immediately when when there's an incoming
         // call (see the "fullScreenIntent" field below).
-        PendingIntent inCallPendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
-
-        return inCallPendingIntent;
+        return PendingIntent.getActivity(mContext, requestCode, intent, 0);
     }
 
     /**

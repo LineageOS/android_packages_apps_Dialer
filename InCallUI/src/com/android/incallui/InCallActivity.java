@@ -77,6 +77,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     public static final String SHOW_DIALPAD_EXTRA = "InCallActivity.show_dialpad";
     public static final String DIALPAD_TEXT_EXTRA = "InCallActivity.dialpad_text";
     public static final String NEW_OUTGOING_CALL_EXTRA = "InCallActivity.new_outgoing_call";
+    public static final String FOR_FULL_SCREEN_INTENT = "InCallActivity.for_full_screen_intent";
 
     private static final String TAG_DIALPAD_FRAGMENT = "tag_dialpad_fragment";
     private static final String TAG_CONFERENCE_FRAGMENT = "tag_conference_manager_fragment";
@@ -301,6 +302,9 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         if (mShowPostCharWaitDialogOnResume) {
             showPostCharWaitDialog(mShowPostCharWaitDialogCallId, mShowPostCharWaitDialogChars);
         }
+
+        CallList.getInstance().onInCallUiShown(
+                getIntent().getBooleanExtra(FOR_FULL_SCREEN_INTENT, false));
     }
 
     // onPause is guaranteed to be called when the InCallActivity goes
