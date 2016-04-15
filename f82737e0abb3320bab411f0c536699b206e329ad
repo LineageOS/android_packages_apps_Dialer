@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "5faad753_6b7d55e6",
+        "filename": "src/com/android/dialer/SpecialCharSequenceMgr.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2016-04-15T20:04:15Z",
+      "side": 1,
+      "message": "pattern present in the oem_codes overlay list.",
+      "range": {
+        "startLine": 199,
+        "startChar": 17,
+        "endLine": 199,
+        "endChar": 67
+      },
+      "revId": "f82737e0abb3320bab411f0c536699b206e329ad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4b7899f7",
+        "filename": "src/com/android/dialer/SpecialCharSequenceMgr.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2016-04-15T20:04:15Z",
+      "side": 1,
+      "message": "This isn\u0027t a param",
+      "range": {
+        "startLine": 205,
+        "startChar": 5,
+        "endLine": 205,
+        "endChar": 93
+      },
+      "revId": "f82737e0abb3320bab411f0c536699b206e329ad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8b20d1f9",
         "filename": "src/com/android/dialer/SpecialCharSequenceMgr.java",
         "patchSetId": 5
