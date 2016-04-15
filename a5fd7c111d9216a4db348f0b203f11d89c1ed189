@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_6bcb151e",
+        "filename": "src/com/android/dialer/SpecialCharSequenceMgr.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2016-04-15T20:14:12Z",
+      "side": 1,
+      "message": "Hm, might be safer to do TextUtils.isEmpty, but this is fine too.",
+      "revId": "a5fd7c111d9216a4db348f0b203f11d89c1ed189",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
