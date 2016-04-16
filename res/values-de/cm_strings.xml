@@ -98,4 +98,32 @@
   <string name="call_recording_category_title">Anrufaufzeichnung</string>
   <string name="call_recording_format">Aufnahmeformat</string>
   <string name="call_playback_no_app_found_toast">Für die Wiedergabe der ausgewählten Aufnahme konnte keine App gefunden werden.</string>
+  <string name="invalid_number_text">"%1$s konnte diesen Anruf nicht tätigen. Ist die Nummer korrekt?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Sie können eine Nummer wählen\noder nach einem Kontakt suchen</string>
+  <string name="sign_in_hint_text">Anmelden, um %1$s-Anrufe zu tätigen</string>
+  <string name="wifi_hint_text">Machen Sie kostenlose Anrufe über WLAN von %1$s zu %1$s.</string>
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_no">Nein danke</string>
+  <string name="callerinfo_provider_auth_learn_more">Mehr erfahren</string>
+  <string name="callerinfo_provider_auth_desc">Willkommen! Soll <xliff:g id="provider_name">%s</xliff:g> unbekannte Anrufer identifizieren und unerwünschte Anrufe blockieren?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Willkommen! Soll <xliff:g id="provider_name">%s</xliff:g> für Sie unbekannte Anrufer identifizieren?</string>
+  <string name="callerinfo_provider_summary">Identifiziert unbekannte Anrufer und Spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifiziert unbekannte Anrufer</string>
+  <string name="block_hidden_title">Unterdrückte Nummern blockieren</string>
+  <string name="block_hidden_summary">Unterdrückte Nummern als Spam behandeln</string>
+  <string name="block_dialog_title">Diesen Anrufer blockieren?</string>
+  <string name="block_dialog_positive">Blockieren</string>
+  <string name="block_dialog_negative">Abbrechen</string>
+  <string name="block_dialog_description">Sie werden von dieser Person keine Anrufe oder Nachrichten mehr empfangen.</string>
+  <string name="provider_disable_title">%1$s deaktivieren?</string>
+  <string name="powered_by_provider">Zur Verfügung gestellt von <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_button_help">"Verstanden"</string>
+  <string name="provider_voice_call">"%1$s Sprachanruf"</string>
+  <string name="provider_video_call">"%1$s Videoanruf"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

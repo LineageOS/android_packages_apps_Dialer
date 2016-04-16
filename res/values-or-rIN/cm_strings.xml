@@ -98,4 +98,11 @@
   <string name="call_recording_category_title">କଲ ରେକର୍ଡିଙ୍ଗ</string>
   <string name="call_recording_format">ଅଡିଓ ଫର୍ମାଟ୍</string>
   <string name="call_playback_no_app_found_toast">ଆପ୍ଲୀକେସନ୍ ମିଳୁନାହି ସିଲେକ୍ଟଟେଡ଼ ରେକଡିଙ୍ଗକୁ ପ୍ଲେବୟାକ୍ କରିବା ପାଇଁ.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">ହଁ</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

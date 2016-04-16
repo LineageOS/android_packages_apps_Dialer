@@ -357,7 +357,7 @@
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_make_video_call">Facer videollamada</string>
   <!-- Title for the call log list item that brings users to the full call history when clicked -->
-  <string name="show_call_history">Ver tol historial de llamaes</string>
+  <string name="recents_footer_text">Ver tol historial de llamaes</string>
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
   <string name="num_missed_calls"><xliff:g id="NUMBER">%s</xliff:g> llamaes perdíes nueves</string>
   <!-- Shown when there are no speed dial favorites. -->

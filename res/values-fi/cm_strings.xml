@@ -98,4 +98,47 @@
   <string name="call_recording_category_title">Puhelun äänitys</string>
   <string name="call_recording_format">Audion muoto</string>
   <string name="call_playback_no_app_found_toast">Sovellusta jolla voi toistaa valitun tallenteen ei ole asennettu.</string>
+  <string name="invalid_number_text">"%1$s ei voinut yhdistää puhelua. Onko numero oikein?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Voit valita puhelinnumeron tai\netsiä yhteystiedoista</string>
+  <string name="sign_in_hint_text">Kirjaudu soittaaksesi %1$s-puheluita</string>
+  <string name="wifi_hint_text">Soita ilmaisia %1$s - %1$s puheluita Wi-Fi-yhteydellä.</string>
+  <string name="roaming_hint_text">%1$s on roaming-tilassa. Soita ilmaisia %2$s - %2$s puheluita Wi-Fi-yhteydellä.</string>
+  <string name="emergency_call_hint_text">Ei SIM-korttia. Vain hätäpuhelut.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g>-puhelu</string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g>-asetukset</string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Soita palvelulla <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Kyllä</string>
+  <string name="callerinfo_provider_auth_no">Ei kiitos</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> voi käyttää yhteystietojasi, Minä-profiilia ja Cyanogen OS-tiliä, joka voi sisältää sähköpostiosoitteesi.</string>
+  <string name="callerinfo_provider_auth_learn_more">Lue lisää</string>
+  <string name="callerinfo_provider_auth_desc">Tervetuloa! Haluatko palvelun <xliff:g id="provider_name">%s</xliff:g> tunnistavan tuntemattomat soittajat ja estävän ei-toivotut puhelut?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Tervetuloa! Haluatko palvelun <xliff:g id="provider_name">%s</xliff:g> tunnistavan tuntemattomat soittajat?</string>
+  <string name="callerinfo_provider_summary">Tunnistaa tuntemattomat soittajat ja spam-puhelut</string>
+  <string name="callerinfo_provider_summary_no_spam">Tunnistaa tuntemattomat soittajat</string>
+  <string name="silence_spam_title">Hiljennä spam-puhelut</string>
+  <string name="silence_spam_summary">Älä päästä spam-puheluita läpi</string>
+  <string name="block_hidden_title">Estä piilotetut puhelinnumerot</string>
+  <string name="block_hidden_summary">Estä piilotetut numerot spam-puheluina</string>
+  <string name="block_dialog_title">Estä tämä soittaja?</string>
+  <string name="block_dialog_positive">Estä</string>
+  <string name="block_dialog_negative">Peruuta</string>
+  <string name="block_dialog_description">Et saa enään puheluita tai viestejä tältä henkilöltä.</string>
+  <string name="block_dialog_report_spam">Ilmoita spam-puheluista palveluun <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Poista %1$s käytöstä?</string>
+  <string name="provider_disable_message">Poistamalla palvelun %1$s käytöstä, sinulla ei ole soittajan tunnusta.</string>
+  <string name="provider_disable_spam_message">Poistamalla palvelun %1$s käytöstä, sinulla ei ole spam-puheluiden estoa eikä soittajan tunnusta.</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Soita %1$s-puheluita vaihtamalla\ntilaa täällä"</string>
+  <string name="provider_search_help">"Etsi %1$s-yhteystietoja vaihtamalla\ntilaa täällä"</string>
+  <string name="provider_button_help">"Selvä"</string>
+  <string name="provider_voice_call">"%1$s äänipuhelu"</string>
+  <string name="provider_video_call">"%1$s videopuhelu"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Soittaaksesi, anna sovellukselle Puhelimen käyttöoikeudet.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Soita puhelu</string>
 </resources>

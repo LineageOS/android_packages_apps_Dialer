@@ -86,7 +86,7 @@
   <string name="date_qs_lastyear">Ano passado</string>
   <string name="call_stats_date_filter">Ajustar intervalo</string>
   <string name="call_stats_reset_filter">Redefinir intervalo</string>
-  <string name="call_stats_sort_by_duration">Ordernar por duração de chamada</string>
+  <string name="call_stats_sort_by_duration">Ordenar por duração de chamada</string>
   <string name="call_stats_sort_by_count">Ordenar por quantidade de chamadas</string>
   <string name="call_stats_title_for_number">Este número</string>
   <string name="call_stats_title_of_total">Do total</string>
@@ -94,8 +94,50 @@
   <string name="call_stats_title_count">Contagem de chamada</string>
   <string name="call_stats_title_average_duration">Duração média de chamada</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Seu registro de chamadas não contém chamadas no intervalo de tempo selecionado.</string>
+  <string name="recent_calls_no_items_in_range">Seu registro de chamadas não contém nenhuma no intervalo selecionado.</string>
   <string name="call_recording_category_title">Gravação de chamadas</string>
   <string name="call_recording_format">Formato de áudio</string>
   <string name="call_playback_no_app_found_toast">Nenhum app pôde ser encontrado para a reprodução da gravação selecionada.</string>
+  <string name="invalid_number_text">"%1$s não conseguiu fazer esta ligação. O número está correto?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Você pode discar um número de telefone ou\n procurar em seus contatos</string>
+  <string name="sign_in_hint_text">Logue para fazer chamadas %1$s</string>
+  <string name="wifi_hint_text">Fazer chamadas grátis de %1$s para %1$s através de Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s em roaming. Fazer chamadas grátis de %1$s para %1$s através de Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Sem cartão SIM. Apenas chamadas de emergência.</string>
+  <string name="extra_call_method_call_option">Ligar com <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">configurações de <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Ligar usando <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Sim</string>
+  <string name="callerinfo_provider_auth_no">Não, obrigado</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> terá acesso aos seus contatos, perfil e conta Cyanogen OS, que pode incluir o seu endereço de e-mail.</string>
+  <string name="callerinfo_provider_auth_learn_more">Saiba Mais</string>
+  <string name="callerinfo_provider_auth_desc">Bem-vindo! Gostaria que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos e bloqueie chamadas indesejadas?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Bem-vindo! Gostaria que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos?</string>
+  <string name="callerinfo_provider_summary">Identifica os números desconhecidos e spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifica números desconhecidos</string>
+  <string name="silence_spam_title">Silenciar chamadas de spam</string>
+  <string name="silence_spam_summary">Nunca deixar as chamadas de spam tocar</string>
+  <string name="block_hidden_title">Bloquear números de telefone ocultos</string>
+  <string name="block_hidden_summary">Considerar números ocultos como spam</string>
+  <string name="block_dialog_title">Bloquear esta chamada?</string>
+  <string name="block_dialog_positive">Bloquear</string>
+  <string name="block_dialog_negative">Cancelar</string>
+  <string name="block_dialog_description">Você não receberá mais chamadas ou mensagens desta pessoa.</string>
+  <string name="block_dialog_report_spam">Reportar como spam para <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Desativar %1$s?</string>
+  <string name="provider_disable_message">Ao desativar %1$s, você não terá a identificação de quem te liga.</string>
+  <string name="provider_disable_spam_message">Ao desativar %1$s, você não terá proteção de spam ou identificação de quem te liga.</string>
+  <string name="powered_by_provider">Desenvolvido por <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Fazer chamadas %1$s\nalterando os modos aqui"</string>
+  <string name="provider_search_help">"Procurar os contados %1$s\nalterando os modos aqui"</string>
+  <string name="provider_button_help">"Entendi"</string>
+  <string name="provider_voice_call">"chamada de voz %1$s"</string>
+  <string name="provider_video_call">"chamada de vídeo %1$s"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Para fazer uma chamada, ative as permissões de telefone.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

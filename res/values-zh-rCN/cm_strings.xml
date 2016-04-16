@@ -98,4 +98,47 @@
   <string name="call_recording_category_title">通话录音</string>
   <string name="call_recording_format">音频格式</string>
   <string name="call_playback_no_app_found_toast">没有找到可以回放所选录音的应用。</string>
+  <string name="invalid_number_text">"%1$s 无法拨打电话。号码是正确的？"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">您可以拨打电话号码或\n搜索您的联系人</string>
+  <string name="sign_in_hint_text">登录以拨打 %1$s 电话</string>
+  <string name="wifi_hint_text">通过 Wi-Fi 免费拨打 %1$s 至 %1$s 的电话。</string>
+  <string name="roaming_hint_text">%1$s 正在漫游中。通过 Wi-Fi 免费拨打 %2$s 至 %2$s 的电话。</string>
+  <string name="emergency_call_hint_text">没有 SIM 卡。仅限紧急呼叫。</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> 呼叫</string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> 设置</string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">使用 <xliff:g id="name">%1$s</xliff:g> 呼叫</string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">是</string>
+  <string name="callerinfo_provider_auth_no">不用了</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> 会访问您的联系人，Me 配置文件和 Cyanogen OS 帐户，其中可能包括您的电子邮件地址。</string>
+  <string name="callerinfo_provider_auth_learn_more">了解更多</string>
+  <string name="callerinfo_provider_auth_desc">欢迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 来识别未知的来电和阻止不必要的电话吗？</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">欢迎！您想让 <xliff:g id="provider_name">%s</xliff:g> 来识别未知来电吗？</string>
+  <string name="callerinfo_provider_summary">标记未知的呼叫和垃圾广告</string>
+  <string name="callerinfo_provider_summary_no_spam">标记未知来电</string>
+  <string name="silence_spam_title">静音垃圾电话</string>
+  <string name="silence_spam_summary">永远不让垃圾呼叫响铃</string>
+  <string name="block_hidden_title">屏蔽隐藏号码</string>
+  <string name="block_hidden_summary">将隐藏号码的来电视为垃圾来电</string>
+  <string name="block_dialog_title">屏蔽此呼叫者？</string>
+  <string name="block_dialog_positive">屏蔽</string>
+  <string name="block_dialog_negative">返回</string>
+  <string name="block_dialog_description">您将不会再收到此人的来电或信息。</string>
+  <string name="block_dialog_report_spam">报告垃圾呼叫到 <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">禁用 %1$s 吗？</string>
+  <string name="provider_disable_message">通过禁用 %1$s，您将不会再有呼叫者身份识别。</string>
+  <string name="provider_disable_spam_message">通过禁用 %1$s，您将不再获得垃圾电话保护或呼叫者身份识别。</string>
+  <string name="powered_by_provider">由 <xliff:g id="provider">%s</xliff:g> 强力驱动</string>
+  <string name="provider_help">"在这儿切换模式\n来拨打 %1$s 电话"</string>
+  <string name="provider_search_help">"在这儿切换模式\n来搜索 %1$s 联系人"</string>
+  <string name="provider_button_help">"明白了"</string>
+  <string name="provider_voice_call">"%1$s 语音呼叫"</string>
+  <string name="provider_video_call">"%1$s 视频呼叫"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">要拨出呼叫，请打开电话权限。</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">拨打电话</string>
 </resources>

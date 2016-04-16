@@ -17,11 +17,92 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Tempat terdekat</string>
+  <string name="people">Orang</string>
   <!-- dialpad t9 search -->
+  <string name="preference_category_t9_dialpad_search">Penelusuran dialpad T9</string>
+  <string name="t9_search_input_locale">Masukan penelusuran T9</string>
+  <string name="t9_search_input_locale_default">Baku</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Penelusuran nomor telepon</string>
+  <string name="lookup_settings_description">Penelusuran nomor telepon yang tidak dikenal</string>
+  <string name="enable_forward_lookup_title">Penelusuran maju</string>
+  <string name="enable_forward_lookup_summary">Menunjukkan tempat terdekat saat menelusuri dalam dialer</string>
+  <string name="enable_people_lookup_title">Penelusuran orang</string>
+  <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
+  <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
+  <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
+  <string name="forward_lookup_provider_title">Penyedia penelusuran maju</string>
+  <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
+  <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
   <!-- Chinese Reverse Lookup Provider -->
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Tiongkok (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Panggilan dalam daftar hitam</string>
+  <string name="menu_add_to_blacklist">Tambahkan ke daftar blokir penelpon</string>
+  <string name="toast_added_to_blacklist">%s ditambahkan ke daftar blokir penelpon.</string>
+  <string name="toast_removed_from_blacklist">%s dihapus dari daftar penelepon yang diblokir.</string>
+  <string name="call_log_action_block">Blokir penelpon</string>
+  <string name="call_log_action_unblock">Penelpon diblokir</string>
   <!--  for speed dial -->
+  <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
+  <string name="speed_dial_not_set">(tidak ditetapkan)</string>
+  <string name="speed_dial_replace">Ganti</string>
+  <string name="speed_dial_delete">Hapus</string>
+  <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
+  <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditetapkan untuk tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Untuk menggunakan panggilan cepat, pertama matikan modus pesawat.</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <string name="incall_vibration_category_title">Getaran dalam panggilan</string>
+  <string name="incall_vibrate_outgoing_title">Getar saat menjawab</string>
+  <string name="incall_vibrate_call_waiting_title">Getar pada panggilan tunggu</string>
+  <string name="incall_vibrate_hangup_title">Getar saat tutup telepon</string>
+  <string name="incall_vibrate_45_title">Getar setiap menit</string>
+  <string name="incall_vibrate_45_summary">Getar pada detik ke-45 menandai tiap menit selama panggilan keluar</string>
+  <string name="call_log_show_all_slots">Semua SIM</string>
+  <string name="call_log_all_calls_header">Semua panggilan</string>
+  <string name="call_log_blacklist_header">Hanya panggilan yang diblok saja</string>
   <!-- Call statistics -->
+  <string name="call_log_stats_title">Statistik</string>
+  <string name="callStatsDetailTitle">Detail statistik panggilan</string>
+  <string name="call_stats_incoming">Yang baru masuk: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Panggilan keluar: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Terhilang: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Diblokir: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+  <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+  <string name="call_stats_filter_from">Tanggal mulai</string>
+  <string name="call_stats_filter_to">Tanggal berakhir</string>
+  <string name="call_stats_filter_picker_title">Jarak filter</string>
+  <string name="date_quick_selection">Pilihan cepat</string>
+  <string name="date_qs_currentmonth">Bulan ini</string>
+  <string name="date_qs_currentquarter">Triwulan ini</string>
+  <string name="date_qs_currentyear">Tahun ini</string>
+  <string name="date_qs_lastweek">Minggu lalu</string>
+  <string name="date_qs_lastmonth">Bulan lalu</string>
+  <string name="date_qs_lastquarter">Triwulan lalu</string>
+  <string name="date_qs_lastyear">Tahun lalu</string>
+  <string name="call_stats_date_filter">Sesuaikan rentang waktu</string>
+  <string name="call_stats_reset_filter">Atur kembali rentang waktu</string>
+  <string name="call_stats_sort_by_duration">Urutkan sesuai durasi panggilan</string>
+  <string name="call_stats_sort_by_count">Urutkan sesuai jumlah panggilan</string>
+  <string name="call_stats_title_for_number">Nomor ini</string>
+  <string name="call_stats_title_of_total">Dari total</string>
+  <string name="call_stats_title_durations">Panjang panggilan</string>
+  <string name="call_stats_title_count">Jumlah panggilan</string>
+  <string name="call_stats_title_average_duration">Rata-rata durasi panggilan</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Log panggilan Anda tidak terdapat penggilan dalam rentang waktu yang dipilih.</string>
+  <string name="call_recording_category_title">Rekaman panggilan</string>
+  <string name="call_recording_format">Format audio</string>
+  <string name="call_playback_no_app_found_toast">Tidak ada aplikasi yang dapat ditemukan untuk pemutaran kembali dari rekaman yang terpilih.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Ya</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

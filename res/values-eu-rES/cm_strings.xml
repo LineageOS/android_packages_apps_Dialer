@@ -98,4 +98,47 @@
   <string name="call_recording_category_title">Dei grabaketa</string>
   <string name="call_recording_format">Audio formatua</string>
   <string name="call_playback_no_app_found_toast">Ezin izan da hautatutako grabaketa erreproduzitzeko aplikaziorik aurkitu.</string>
+  <string name="invalid_number_text">"%1$s(e)k ezin izan du dei hau egin. Telefono zenbakia zuzena da?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Telefono zenbaki bat markatu dezakezu edo\nkontaktu bat bilatu</string>
+  <string name="sign_in_hint_text">Hasi saioa %1$s deiak egiteko</string>
+  <string name="wifi_hint_text">Deitu doan %1$s(e)tik %1$s(e)ra Wi-Fi bidez.</string>
+  <string name="roaming_hint_text">%1$s ibiltaritzan dago. Deitu dohan %2$s(e)tik %2$s(e)ra calls Wi-Fi bidez.</string>
+  <string name="emergency_call_hint_text">Ez dago SIM txartelik, emergentziazko deiak besterik ez.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> deia</string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> ezarpenak</string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Deitu <xliff:g id="name">%1$s</xliff:g> erabiliz</string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Bai</string>
+  <string name="callerinfo_provider_auth_no">Ez, eskerrik asko</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> Zure kontaktuak, Me profila eta Cyanogen OS kontua atzitu ditzake, azken hone e-posta helbidea izan dezake ere.</string>
+  <string name="callerinfo_provider_auth_learn_more">Ikasi gehiago</string>
+  <string name="callerinfo_provider_auth_desc">Ongi etorri! <xliff:g id="provider_name">%s</xliff:g>(e)k deitzaile ezezagunak identifikatzea eta jaso nahi ez dituzun deiak blokeatzea nahi duzu?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Ongi etorri! <xliff:g id="provider_name">%s</xliff:g>(e)k deitzaile ezezagunak identifikatzea nahi duzu?</string>
+  <string name="callerinfo_provider_summary">Deitzaile ezezagunak eta spam deiak identifikatzen ditu</string>
+  <string name="callerinfo_provider_summary_no_spam">Deitzaile ezezagunak identifikatzen ditu</string>
+  <string name="silence_spam_title">Isilarazi spam deiak</string>
+  <string name="silence_spam_summary">Eragotzi spam deiei jotzea</string>
+  <string name="block_hidden_title">Blokeatu ezkutuko telefono zenbakiak</string>
+  <string name="block_hidden_summary">Ezkutuko zenbakiak spamtzat hartu</string>
+  <string name="block_dialog_title">Blokeatu deitzaile hau?</string>
+  <string name="block_dialog_positive">Blokeatu</string>
+  <string name="block_dialog_negative">Utzi</string>
+  <string name="block_dialog_description">Ez duzu pertsona honen deirik edo mezurik jasoko aurrerantzean.</string>
+  <string name="block_dialog_report_spam">Spam dela adierazi <xliff:g id="provider">%s</xliff:g>ri</string>
+  <string name="provider_disable_title">%1$s desgaitu?</string>
+  <string name="provider_disable_message">%1$s desgaituz ez duzu deitzailearen identifikazioa izango.</string>
+  <string name="provider_disable_spam_message">%1$s desgaituz ez duzu spam deien aurkako babesa edo dei identifikazioa izango.</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>k indartua</string>
+  <string name="provider_help">"Deitu %1$s bidez\nmoduak hemen aldatuz"</string>
+  <string name="provider_search_help">"Bilatu %1$s kontaktuak\nmodual hemen aldatuz"</string>
+  <string name="provider_button_help">"Ulertu dut"</string>
+  <string name="provider_voice_call">"%1$s ahots deia"</string>
+  <string name="provider_video_call">"%1$s bideodeia"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Deia egiteko, gaitu telefono baimenak.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Deitu</string>
 </resources>

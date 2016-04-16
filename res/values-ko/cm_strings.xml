@@ -98,4 +98,11 @@
   <string name="call_recording_category_title">통화 녹음</string>
   <string name="call_recording_format">오디오 포맷</string>
   <string name="call_playback_no_app_found_toast">선택된 녹음을 재생할 수 있는 애플리케이션을 찾을 수 없습니다.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">예</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

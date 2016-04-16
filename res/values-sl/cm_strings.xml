@@ -98,4 +98,47 @@
   <string name="call_recording_category_title">Snemanje klicev</string>
   <string name="call_recording_format">Oblika zvoka</string>
   <string name="call_playback_no_app_found_toast">Za predvajanje izbranega posnetka ni bila najdena nobena aplikacija.</string>
+  <string name="invalid_number_text">"%1$s ne more opraviti tega klica. Je številka pravilna?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Lahko pokličete telefonsko številko ali\niščete po stikih</string>
+  <string name="sign_in_hint_text">Vpišite se za opravljanje %1$s klicev</string>
+  <string name="wifi_hint_text">Kličite brezplačno iz %1$s v %1$s preko omr. Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s je gostovanje. Opravljajte brezplačne klice iz %2$s v %2$s preko omr. Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Ni kartice SIM. Samo klici v sili.</string>
+  <string name="extra_call_method_call_option">Klic <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Nastavitve <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Kliči s/z <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Da</string>
+  <string name="callerinfo_provider_auth_no">Ne, hvala</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> bo imel dostop do vaših stikov, profila Me in računa Cyanogen OS, kar lahko vključuje vaš e-poštni naslov.</string>
+  <string name="callerinfo_provider_auth_learn_more">Več o tem</string>
+  <string name="callerinfo_provider_auth_desc">Dobrodošli! Ali bi radi, da <xliff:g id="provider_name">%s</xliff:g> prepozna neznane klicatelje in blokira neželene klice?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Dobrodošli! Ali bi radi, da <xliff:g id="provider_name">%s</xliff:g> prepozna neznane klicatelje?</string>
+  <string name="callerinfo_provider_summary">Prepozna neznane klicatelje in neželene klice</string>
+  <string name="callerinfo_provider_summary_no_spam">Prepozna neznane klicatelje</string>
+  <string name="silence_spam_title">Utišaj neželene klice</string>
+  <string name="silence_spam_summary">Nikoli ne sprejemaj neželenih klicev</string>
+  <string name="block_hidden_title">Blokiraj skrite telefonske številke</string>
+  <string name="block_hidden_summary">Obravnavaj skrite številke kot neželene</string>
+  <string name="block_dialog_title">Blokiraj tega klicatelja?</string>
+  <string name="block_dialog_positive">Blokiraj</string>
+  <string name="block_dialog_negative">Prekliči</string>
+  <string name="block_dialog_description">Od te osebe ne boste več prejemali klicev ali sporočil.</string>
+  <string name="block_dialog_report_spam">Prijavi kot nezaželeno na <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Onemogoči %1$s?</string>
+  <string name="provider_disable_message">Z onemogočanjem %1$s ne boste imeli prepoznavanja klicatelja.</string>
+  <string name="provider_disable_spam_message">Z onemogočanjem %1$s ne boste imeli zaščite pred neželenimi klici ali prepoznavanja klicatelja.</string>
+  <string name="powered_by_provider">Omogoča <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Kličite s/z %1$s tako,\nda tukaj preklopite način"</string>
+  <string name="provider_search_help">"Poiščite stike %1$s tako,\nda tukaj preklopite način"</string>
+  <string name="provider_button_help">"Razumem"</string>
+  <string name="provider_voice_call">"Glasovni klic %1$s"</string>
+  <string name="provider_video_call">"Videoklic %1$s"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Za klic vklopite dovoljenje Telefon.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Kliči</string>
 </resources>

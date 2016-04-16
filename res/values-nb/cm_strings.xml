@@ -93,4 +93,11 @@
   <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="call_recording_format">Lydformat</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Ja</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

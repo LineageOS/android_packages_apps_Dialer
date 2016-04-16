@@ -77,4 +77,11 @@
   <string name="call_stats_sort_by_duration">ڕیزکردن بەپێی ماوەی پەیوەندی</string>
   <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">بەڵێ</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

@@ -98,4 +98,47 @@
   <string name="call_recording_category_title">Запис на разговор</string>
   <string name="call_recording_format">Аудио формат</string>
   <string name="call_playback_no_app_found_toast">Не е намерено приложение за възпроизвеждане на записа.</string>
+  <string name="invalid_number_text">"%1$s обаждането не може да бъде осъществено. Номерът правилен ли е?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Можете да наберете телефонен номер или да търсите контакт</string>
+  <string name="sign_in_hint_text">Влезте, за да провеждате разговори %1$s</string>
+  <string name="wifi_hint_text">Осъществете безплатни разговори между %1$s и %1$s чрез Wi - Fi.</string>
+  <string name="roaming_hint_text">%1$s е в роуминг. Осъществете безплатни разговори между %2$s и %2$s чрез Wi - Fi.</string>
+  <string name="emergency_call_hint_text">Няма СИМ карта. Само спешни обаждания.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> повикване</string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s </xliff:g> настройки</string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Повикване, използвайки <xliff:g id="name">%1$s </xliff:g></string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Да</string>
+  <string name="callerinfo_provider_auth_no">Не, благодаря</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s </xliff:g> ще има достъп до Вашите контакти, профилът Ви и акаунта в Cyanogen ОС, които могат да включват адреса на Вашата електронна поща.</string>
+  <string name="callerinfo_provider_auth_learn_more">Научете повече</string>
+  <string name="callerinfo_provider_auth_desc">Добре дошли! Желаете ли <xliff:g id="provider_name">%s</xliff:g> да идентифицирате непознати повиквания и да блокирате нежелани разговори?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Добре дошли! Желаете ли <xliff:g id="provider_name">%s</xliff:g> да идентифицирате непознати повиквания?</string>
+  <string name="callerinfo_provider_summary">Идентифицира непознати повиквания и спам</string>
+  <string name="callerinfo_provider_summary_no_spam">Идентифицира непознати повиквания</string>
+  <string name="silence_spam_title">Заглуши спам повикванията</string>
+  <string name="silence_spam_summary">Никога не позволявай звънене от спам обаждания</string>
+  <string name="block_hidden_title">Блокирай скрити телефонни номера</string>
+  <string name="block_hidden_summary">Считай скрити номера за спам</string>
+  <string name="block_dialog_title">Блокиране на този абонат?</string>
+  <string name="block_dialog_positive">Блокирай</string>
+  <string name="block_dialog_negative">Отказ</string>
+  <string name="block_dialog_description">Вие няма повече да получавате обаждания или съобщения от този контакт.</string>
+  <string name="block_dialog_report_spam">Докладвай като спам на <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Забраняване %1$s?</string>
+  <string name="provider_disable_message">Изключвайки %1$s, няма да имате идентификация на обаждания.</string>
+  <string name="provider_disable_spam_message">Изключвайки %1$s, няма да имате спам защита или идентификация на обаждания.</string>
+  <string name="powered_by_provider">Осъществено от <xliff:g id="provider">%s </xliff:g></string>
+  <string name="provider_help">"Осъществи повикване %1$s чрез\n превключване на режима"</string>
+  <string name="provider_search_help">"Търсене %1$s контакти чрез\n превключване на режима"</string>
+  <string name="provider_button_help">"Разбрано"</string>
+  <string name="provider_voice_call">"%1$s гласово повикване"</string>
+  <string name="provider_video_call">"%1$s видео повикване"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">За да осъществите повикване, включете разрешенията на телефона.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Направете повикване</string>
 </resources>

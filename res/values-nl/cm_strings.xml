@@ -98,4 +98,26 @@
   <string name="call_recording_category_title">Gespreksopname</string>
   <string name="call_recording_format">Audioformaat</string>
   <string name="call_playback_no_app_found_toast">Kan geen app vinden om de geselecteerde opname af te spelen.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_summary">Identificeert onbekende bellers en spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identificeert onbekende bellers</string>
+  <string name="silence_spam_title">Ongewenste oproepen dempen</string>
+  <string name="silence_spam_summary">Nooit ongewenste oproepen doorlaten</string>
+  <string name="block_hidden_title">Afgeschermde telefoonnummers blokkeren</string>
+  <string name="block_hidden_summary">Afgeschermde nummers beschouwen als ongewenst</string>
+  <string name="block_dialog_title">Deze beller blokkeren?</string>
+  <string name="block_dialog_positive">Blokkeren</string>
+  <string name="block_dialog_negative">Annuleren</string>
+  <string name="block_dialog_description">U ontvangt geen oproepen of berichten meer van deze persoon.</string>
+  <string name="block_dialog_report_spam">Rapporteren als ongewenst aan <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">%1$s uitschakelen?</string>
+  <string name="provider_disable_message">Door %1$s uit te schakelen heeft u geen beller-id.</string>
+  <string name="provider_disable_spam_message">Door %1$s uit te schakelen heeft u geen spambeveiliging of beller-id.</string>
+  <string name="powered_by_provider">Mogelijk gemaakt door <xliff:g id="provider">%s</xliff:g></string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

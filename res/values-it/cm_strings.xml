@@ -98,4 +98,46 @@
   <string name="call_recording_category_title">Registrazione chiamata</string>
   <string name="call_recording_format">Formato audio</string>
   <string name="call_playback_no_app_found_toast">Nessuna app trovata per la riproduzione della registrazione selezionata.</string>
+  <string name="invalid_number_text">"%1$s non può effettuare questa chiamata. Il numero è corretto?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Puoi chiamare un numero di telefono o\ncercare un contatto</string>
+  <string name="sign_in_hint_text">Accedi per effetuare chiamate con %1$s</string>
+  <string name="wifi_hint_text">Fai chiamate %1$s gratis su Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s è in roaming. Fai chiamate tra %2$s gratis su Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Nessuna SIM. Solo chiamate d\'emergenza.</string>
+  <string name="extra_call_method_call_option">Chiamata <xliff:g id="provider">%s</xliff:g></string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Impostazioni <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Chiamata con <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Si</string>
+  <string name="callerinfo_provider_auth_no">No, grazie</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> deve accedere ai tuoi contatti, profilo Me, e l\'account Cyanogen OS, che potrebbe includere il tuo indirizzo email.</string>
+  <string name="callerinfo_provider_auth_learn_more">Ulteriori informazioni</string>
+  <string name="callerinfo_provider_auth_desc">Benvenuto! Vuoi che <xliff:g id="provider_name">%s</xliff:g> identifichi i chiamanti sconosciuti e blocchi le chiamate non desiderate?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Benvenuto! Vorresti che <xliff:g id="provider_name">%s</xliff:g> identifichi i chiamanti sconosciuti?</string>
+  <string name="callerinfo_provider_summary">Identifica i chiamanti sconosciuti e spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifica chiamanti sconosciuti</string>
+  <string name="silence_spam_title">Silenzia chiamate spam</string>
+  <string name="silence_spam_summary">Non lasciare mai squillare le chiamate spam</string>
+  <string name="block_hidden_title">Blocca numeri nascosti</string>
+  <string name="block_hidden_summary">Considera i numeri nascosti come spam</string>
+  <string name="block_dialog_title">Bloccare questo chiamante?</string>
+  <string name="block_dialog_positive">Blocca</string>
+  <string name="block_dialog_negative">Annulla</string>
+  <string name="block_dialog_description">Non riceverai più chiamate o messaggi da questa persona.</string>
+  <string name="block_dialog_report_spam">Segnala come spam a <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Disattivare %1$s?</string>
+  <string name="provider_disable_message">Disattivando %1$s, non avrai un ID chiamante.</string>
+  <string name="provider_disable_spam_message">Disattivando %1$s, non avrai protezione da spam o ID chiamante.</string>
+  <string name="powered_by_provider">Offerto da <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Fai chiamate %1$s\ncambiando modalità qui"</string>
+  <string name="provider_search_help">"Ricerca contatti %1$s\ncambiando modalità qui"</string>
+  <string name="provider_button_help">"Capito"</string>
+  <string name="provider_voice_call">"Chiamata vocale %1$s"</string>
+  <string name="provider_video_call">"Videochiamata %1$s"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Per effettuare una chiamata, attiva le autorizzazioni del telefono.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

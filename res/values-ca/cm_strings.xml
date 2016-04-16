@@ -98,4 +98,47 @@
   <string name="call_recording_category_title">Enregistrament de trucades</string>
   <string name="call_recording_format">Format d\'àudio</string>
   <string name="call_playback_no_app_found_toast">Es pot trobar cap aplicació per a la reproducció de la gravació seleccionada.</string>
+  <string name="invalid_number_text">"%1$s no pot fer aquesta trucada. El número és correcte?"</string>
+  <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Pots trucar un número de telèfon o\ncercar un contacte</string>
+  <string name="sign_in_hint_text">Inicia la sessió per fer %1$s trucades</string>
+  <string name="wifi_hint_text">Fes trucades gratuïtes de %1$s a %1$s a través del Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s està en itinerància. Fes trucades gratuïtes de %2$s a %2$s a través del Wi-Fi.</string>
+  <string name="emergency_call_hint_text">No hi ha SIM. Només trucades d\'emergència.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> trucada</string>
+  <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Configuració de <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Truca utilitzant <xliff:g id="name">%1$s</xliff:g></string>
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Sí</string>
+  <string name="callerinfo_provider_auth_no">No, gràcies</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> tindrà accés als teus contactes, perfil Me i el compte de Cyanogen OS, que pot incloure la teva adreça de correu electrònic.</string>
+  <string name="callerinfo_provider_auth_learn_more">Aprèn més</string>
+  <string name="callerinfo_provider_auth_desc">Benvingut! Vols <xliff:g id="provider_name">%s</xliff:g> identificar trucades desconegudes i bloquejar trucades indesitjades?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Benvingut! Vols <xliff:g id="provider_name">%s</xliff:g> per identificar trucades desconegudes?</string>
+  <string name="callerinfo_provider_summary">Identifica trucades desconegudes i brossa</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifica trucades desconegudes</string>
+  <string name="silence_spam_title">Silencia les trucades brossa</string>
+  <string name="silence_spam_summary">Mai deixis que les trucades brossa sonin</string>
+  <string name="block_hidden_title">Bloqueja les trucades amb números ocults</string>
+  <string name="block_hidden_summary">Considera els números ocults com a brossa</string>
+  <string name="block_dialog_title">Vols bloquejar aquesta trucada?</string>
+  <string name="block_dialog_positive">Bloqueja</string>
+  <string name="block_dialog_negative">Cancel·la</string>
+  <string name="block_dialog_description">Ja no rebràs més trucades o missatges d\'aquesta persona.</string>
+  <string name="block_dialog_report_spam">Informa com a no desitjat a <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Vols desactivar %1$s?</string>
+  <string name="provider_disable_message">Si desactives %1$s, no tindràs ID de trucada.</string>
+  <string name="provider_disable_spam_message">Si desactives %1$s, no tindràs protecció contra brossa o ID de trucada.</string>
+  <string name="powered_by_provider">Proveït per <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Fes %1$s trucades canviant\nde modelitat aquí"</string>
+  <string name="provider_search_help">"Cerca %1$s contactes canviant\nde modelitat aquí"</string>
+  <string name="provider_button_help">"Ho tinc"</string>
+  <string name="provider_voice_call">"%1$s trucada de veu"</string>
+  <string name="provider_video_call">"%1$s vídeotrucada"</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Per fer una trucada, activa els permisos de telèfon.</string>
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Fes una trucada</string>
 </resources>

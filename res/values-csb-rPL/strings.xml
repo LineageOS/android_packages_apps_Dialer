@@ -18,57 +18,36 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
-  <string name="applicationLabel">Telefon</string>
   <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
-  <string name="launcherActivityLabel">Telefon</string>
   <!-- The description text for the dialer tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="dialerIconLabel">Telefon</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="recentCallsIconLabel">Urufffhistorique</string>
   <!-- Menu item used to call a contact from the call log -->
-  <string name="recentCalls_callNumber"><xliff:g id="name">%s</xliff:g> uruffen</string>
   <!-- Text for a menu item to report a call as having been incorrectly identified.
          [CHAR LIMIT=30] -->
   <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
-  <string name="recentCalls_editNumberBeforeCall">Nr. virum Uruff änneren</string>
   <!-- Menu item used to add a number from the call log to contacts -->
   <!-- Menu item used to remove a single call from the call log -->
-  <string name="recentCalls_removeFromRecentList">Aus dem Uruffhistorique geläscht</string>
   <!-- Menu item used to remove all calls from the call log -->
-  <string name="recentCalls_deleteAll">Uruffhistorique eidel maachen</string>
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
-  <string name="recentCalls_trashVoicemail">Mailboxopnam läschen</string>
   <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
-  <string name="recentCalls_shareVoicemail">Mailbox deelen</string>
   <!-- Text displayed when the call log is empty. -->
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
-  <string name="clearCallLogConfirmation_title">Uruffhistorique eidel maachen?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
-  <string name="clearCallLogConfirmation">Doduerch ginn all d\'Uriff aus dem Historique geläscht</string>
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
-  <string name="clearCallLogProgress_title">Uruffhistorique gëtt geläscht\u2026</string>
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
-  <plurals name="notification_voicemail_title">
-    <item quantity="one">Mailboxopnam</item>
-    <item quantity="other">
-            <xliff:g id="count">%1$d</xliff:g>
-            Mailboxopnamen
-        </item>
-  </plurals>
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
-  <string name="notification_action_voicemail_play">Ofspillen</string>
   <!-- Used to build a list of names or phone numbers, to indicate the callers who left
          voicemails.
          The first argument may be one or more callers, the most recent ones.
@@ -77,214 +56,148 @@
 
          [CHAR LIMIT=10]
      -->
-  <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
-        <xliff:g id="older_caller">%2$s</xliff:g>
-    </string>
   <!-- Text used in the ticker to notify the user of the latest voicemail. [CHAR LIMIT=30] -->
-  <string name="notification_new_voicemail_ticker">Nei Mailboxopnam vum <xliff:g id="caller">%1$s</xliff:g></string>
   <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
-  <string name="voicemail_playback_error">Konnt d\'Mailbox-Opnam net ofspillen</string>
   <!-- Message to display before we have prepared the media player, i.e. before we know duration. [CHAR LIMIT=40] -->
-  <string name="voicemail_buffering">Pufferung\u2026</string>
   <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
-  <string name="voicemail_fetching_content">Mailbox gëtt gelueden\u2026</string>
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
-  <string name="voicemail_fetching_timout">Kann d\'Mailbox net lueden</string>
   <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
-  <string name="call_log_voicemail_header">Just Mailbox-Uriff</string>
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
-  <string name="call_log_incoming_header">Just erakommend Uriff</string>
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
-  <string name="call_log_outgoing_header">Just erausgoend Uriff</string>
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
-  <string name="call_log_missed_header">Just verpasst Uriff</string>
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
-  <string name="visual_voicemail_settings">Astellungen</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
-  <string name="voicemail_status_voicemail_not_available">Mailbox-Aktualisatiounen net disponibel</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that there is no
       data connection to the voicemail server, but there are new voicemails waiting on the server.
       [CHAR LIMIT=64] -->
-  <string name="voicemail_status_messages_waiting">Neie Mailbox-Message waart. Ka momentan net geluede ginn.</string>
   <!--  Voicemail status message shown at the top of call log to invite the user to configure
     visual voicemail. [CHAR LIMIT=64] -->
-  <string name="voicemail_status_configure_voicemail">Deng Mailbox astellen</string>
   <!--  Voicemail status message shown at the top of call details screen to notify the user that
     the audio of this voicemail is not available. [CHAR LIMIT=64] -->
-  <string name="voicemail_status_audio_not_available">Toun net disponibel</string>
   <!--  User action prompt shown next to a voicemail status message to let the user configure
     visual voicemail. [CHAR LIMIT=20] -->
-  <string name="voicemail_status_action_configure">Ariichten</string>
   <!--  User action prompt shown next to a voicemail status message to let the user call voicemail
     server directly to listen to the voicemails. [CHAR LIMIT=20] -->
-  <string name="voicemail_status_action_call_server">Mailbox uruffen</string>
   <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
-  <string name="call_log_item_count_and_date">(<xliff:g id="count">%1$d</xliff:g>) <xliff:g id="date">%2$s</xliff:g></string>
   <!-- Title for the sms disambiguation dialog -->
-  <string name="sms_disambig_title">Nummer auswielen</string>
   <!-- Title for the call disambiguation dialog -->
-  <string name="call_disambig_title">Nummer auswielen</string>
   <!-- Message next to disamgiguation dialog check box -->
-  <string name="make_primary">Dëse Choix verhalen</string>
   <!-- String describing the Search ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
          [CHAR LIMIT=NONE]
     -->
-  <string name="description_search_button">sichen</string>
   <!-- String describing the Dial ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
     -->
-  <string name="description_dial_button">wielen</string>
   <!-- String describing the digits text box containing the number to dial.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_digits_edittext">Nummer déi auszewielen ass</string>
   <!-- String describing the button in the voicemail playback to start/stop playback.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_playback_start_stop">Ofspillen oder stoppen</string>
   <!-- String describing the button in the voicemail playback to switch on/off speakerphone.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_playback_speakerphone">Lautsprecher un oder ausschalten</string>
   <!-- String describing the seekbar in the voicemail playback to seek playback position.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_playback_seek">Ofspillpositioun sichen</string>
   <!-- String describing the button in the voicemail playback to decrease playback rate.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_rate_decrease">Opfspillvitess erofsetzen</string>
   <!-- String describing the button in the voicemail playback to increase playback rate.
 
          Used by AccessibilityService to announce the purpose of the view.
     -->
-  <string name="description_rate_increase">Opfspillvitess eropsetzen</string>
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
-  <string name="action_menu_call_history_description">Uruffhistorique</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
          [CHAR LIMIT=NONE] -->
-  <string name="action_menu_overflow_description" msgid="2295659037509008453">Méi Optiounen</string>
   <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
-  <string name="action_menu_dialpad_button">Wieltasten</string>
   <!-- Menu item to copy something [CHAR_LIMIT=10] -->
-  <string name="menu_copy">Kopéieren</string>
   <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_outgoing_only">Just déi erausgoend uweisen</string>
   <!-- Menu item used to show only incoming in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_incoming_only">Just déi erakommend uweisen</string>
   <!-- Menu item used to show only missed in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_missed_only">Just déi verpasst uweisen</string>
   <!-- Menu item used to show only voicemails in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_voicemails_only">Just Mailboxopnamen uweisen</string>
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_all_calls">All Uriff uweisen</string>
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
-  <string name="add_2sec_pause">2-Sek.-Paus dobäisetzen</string>
-  <string name="add_wait">Paus dobäisetzen</string>
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
-  <string name="dialer_settings_label">Astellungen</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
-  <string name="menu_newContact">Neie Kontakt</string>
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
-  <string name="menu_allContacts">All d\'Kontakter</string>
   <!-- Title bar for call detail screen -->
-  <string name="callDetailTitle">Uruffdetailer</string>
   <!-- Toast for call detail screen when couldn't read the requested details -->
-  <string name="toast_call_detail_error">Detailer net disponibel</string>
   <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_useDtmfDialpad">Telefonstastatur benotzen</string>
   <!-- Item label: jump to the in-call UI.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_returnToInCallScreen">Zréck bei den aktuellen Uruff</string>
   <!-- Item label: use the Dialer's dialpad to add another call.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_addAnotherCall">Uruff dobäisetzen</string>
   <!-- Title for incoming call details screen -->
-  <string name="type_incoming">Erakommenden Uruff</string>
   <!-- Title for outgoing call details screen -->
-  <string name="type_outgoing">Erausgoenden Uruff</string>
   <!-- Title for missed call details screen -->
-  <string name="type_missed">Verpassten Uruff</string>
   <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video">Erakommende Videouruff</string>
   <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video">Erausgoende Videouruff</string>
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video">Verpasste Videouruff</string>
   <!-- Title for voicemail details screen -->
-  <string name="type_voicemail">Sproochopnam</string>
   <!-- Description for incoming calls going to voice mail vs. not -->
-  <string name="actionIncomingCall">Erakommend Uriff</string>
   <!-- String describing the icon in the call log used to play a voicemail.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_call_log_play_button">Mailboxopnam ofspillen</string>
   <!-- String describing the button to view the contact for the current number.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_view_contact">Kontakt <xliff:g id="name">%1$s</xliff:g> uweisen</string>
   <!-- String describing the button to call a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_call"><xliff:g id="name">%1$s</xliff:g> uruffen</string>
   <!-- String describing the button to access the contact details for a name or number.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_contact_details">Kontaktdetailer fir <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
   <!-- String indicating a call log entry has an associated voicemail.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_new_voicemail">Nei Mailboxopnam.</string>
   <!-- String indicating the number of calls to/from a caller in the call log.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> Uriff.</string>
   <!-- String indicating a call log entry had video capabilities.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
           [CHAR LIMIT=NONE]
     -->
-  <string name="description_video_call">Videouruff.</string>
   <!-- String describing the button to SMS a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
               [CHAR LIMIT=NONE]
     -->
-  <string name="description_send_text_message">Dem/Der <xliff:g id="name">%1$s</xliff:g> eng SMS schécken</string>
   <!-- String describing the icon in the call log used to represent an unheard voicemail left to
          the user.
 
@@ -292,55 +205,34 @@
               This is especially valuable for views without textual representation like ImageView.
               [CHAR LIMIT=NONE]
     -->
-  <string name="description_call_log_unheard_voicemail">Ongelauschtert Mailboxopnam</string>
   <!-- String describing the icon used to start a voice search -->
-  <string name="description_start_voice_search">Sich mat der Stëmm starten</string>
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
-  <string name="menu_callNumber"><xliff:g id="number">%s</xliff:g> uruffen</string>
   <!-- String used to display calls from unknown numbers in the call log -->
-  <string name="unknown">Onbekannt</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
-  <string name="voicemail">Sproochopnam</string>
   <!-- String used to display calls from private numbers in the call log -->
-  <string name="private_num">Privat Nummer</string>
   <!-- String used to display calls from pay phone in the call log -->
-  <string name="payphone">Telefonskabinn</string>
   <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
   <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
-  <string name="callDetailsDurationFormat"><xliff:g id="minutes" example="42">%s</xliff:g> Min. <xliff:g id="seconds" example="28">%s</xliff:g> Sek.</string>
   <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
-  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Kann dës Nummer net uruffen</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system isn't ready for the access. [CHAR LIMIT=NONE] -->
-  <string name="dialog_voicemail_not_ready_message">Konfiguréier deng Mailbox ënner Menü &gt; Astellungen.</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system is in airplane mode. The user cannot access to
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
-  <string name="dialog_voicemail_airplane_mode_message">Schalt de Fligermodus aus fir d\'Mailbox unzeruffen.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
-  <string name="contact_list_loading">Gëtt gelueden\u2026</string>
   <!-- The title of a dialog that displays the IMEI of the phone -->
-  <string name="imei">IMEI</string>
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
-  <string name="meid">MEID</string>
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
-  <string name="simContacts_emptyLoading">Gëtt vun der SIM-Kaart gelueden\u2026</string>
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
-  <string name="simContacts_title">Kontakter vun der SIM-Kaart</string>
   <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
-  <string name="add_contact_not_available">Keng Kontakt-App disponibel</string>
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
-  <string name="voice_search_not_available">Sich mat der Stëmm net disponibel</string>
   <!-- Message displayed when the Phone application has been disabled and a phone call cannot
          be made. [CHAR LIMIT=NONE] -->
-  <string name="call_not_available">Kann keen Telefonsuruff maachen, well d\'Telefons-App desaktivéiert gouf.</string>
   <!-- Message displayed when there is no application available to handle a particular action.
          [CHAR LIMIT=NONE] -->
-  <string name="activity_not_available">Keng App fir deen Zweck op dësem Apparat</string>
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
-  <string name="dialer_hint_find_contact">Numm oder Telefonsnummer aginn</string>
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
   <!-- String resource for the font-family to use for the full call history footer
@@ -348,47 +240,29 @@
   <!-- Text displayed when the list of missed calls is empty -->
   <!-- Text displayed when the list of voicemails is empty -->
   <!--  Menu option to show favorite contacts only -->
-  <string name="show_favorites_only">Just Favoritten uweisen</string>
   <!--  Title of activity that displays a list of all calls -->
-  <string name="call_log_activity_title">Historique</string>
   <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
-  <string name="call_log_all_title">All</string>
   <!-- Title for the call log tab containing the list of all missed calls only
          [CHAR LIMIT=30] -->
-  <string name="call_log_missed_title">Verpasst</string>
   <!-- Title for the call log tab containing the list of all voicemail calls only
          [CHAR LIMIT=30] -->
-  <string name="call_log_voicemail_title">Mailbox</string>
   <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
          [CHAR LIMIT=40] -->
-  <string name="tab_speed_dial">Séiert Wielen</string>
   <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
-  <string name="tab_recents">Rezent</string>
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
-  <string name="tab_all_contacts">Kontakter</string>
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
-  <string name="tab_voicemail">Sproochopnam</string>
   <!--  Text displayed when user swipes out a favorite contact -->
-  <string name="favorite_hidden">Aus de Favoritte läschen</string>
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
-  <string name="favorite_hidden_undo">Réckgängeg maachen</string>
   <!-- Shortcut item used to call a number directly from search -->
-  <string name="search_shortcut_call_number"><xliff:g id="number">%s</xliff:g>
-        uruffen
-    </string>
   <!-- Shortcut item used to add a number directly to a new contact from search.
          [CHAR LIMIT=25] -->
   <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_send_sms_message">SMS schécken</string>
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_make_video_call">Videouruff maachen</string>
   <!-- Title for the call log list item that brings users to the full call history when clicked -->
-  <string name="recents_footer_text">Vollstännegen Uruffhistorique uweisen</string>
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
-  <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> nei verpasst Uriff</string>
   <!-- Shown when there are no speed dial favorites. -->
   <!-- Shown as an action when there are no speed dial favorites -->
   <!-- Shown when there are no contacts in the all contacts list. -->
@@ -397,9 +271,7 @@
          card can be tapped to bring up a list of all numbers, or long pressed to start reordering
          [CHAR LIMIT=NONE]
     -->
-  <string name="contact_tooltip">D\'Bild drécke fir all Nummeren ze gesinn, oder d\'Bild beréieren an hale fir et ze réckelen</string>
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
-  <string name="remove_contact">Ewechhuelen</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
@@ -409,27 +281,22 @@
   <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
          the call log entry. [CHAR LIMIT=30] -->
-  <string name="call_log_action_details">Uruffdetailer</string>
   <!-- Button text for the button displayed underneath an entry in the call log, which when
          tapped triggers a return call to the named user. [CHAR LIMIT=30] -->
   <!-- String describing an incoming missed call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_incoming_missed_call">Verpassten Uruff vum <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
   <!-- String describing an incoming answered call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_incoming_answered_call">Beäntwerten Uruff vum <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
   <!-- String describing an outgoing call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_outgoing_call">Erausgoenden Uruff u(n) <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
   <!-- String describing the phone account the call was made on or to. This string will be used
          in description_incoming_missed_call, description_incoming_answered_call, and
          description_outgoing_call.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_phone_account">mat <xliff:g id="phoneAccount" example="SIM 1">^1</xliff:g></string>
   <!-- String describing the phone icon on a call log list item. When tapped, it will place a
          call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
   <!-- String describing the "call" action for an entry in the call log.  The call back
@@ -468,50 +335,39 @@
          [CHAR LIMIT=NONE] -->
   <!-- Toast message which appears when a call log entry is deleted.
          [CHAR LIMIT=NONE] -->
-  <string name="toast_entry_removed">Aus dem Uruffhistorique geläscht</string>
   <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_today">Haut</string>
   <!-- String used as a header in the call log above calls which occurred yesterday.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_yesterday">Gëschter</string>
   <!-- String used as a header in the call log above calls which occurred two days or more ago.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_other">Méi al</string>
   <!-- String a header on the call details screen.  Appears above the list calls to or from a
          particular number.
          [CHAR LIMIT=65] -->
-  <string name="call_detail_list_header">Urufflëscht</string>
   <!-- String describing the "speaker on" button on the playback control used to listen to a
          voicemail message.  When speaker is on, playback of the voicemail will occur through the
          phone speaker.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_speaker_on">Lautsprecher uschalten.</string>
   <!-- String describing the "speaker off" button on the playback control used to listen to a
          voicemail message.  When speaker is off, playback of the voicemail will occur through the
          phone earpiece.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_speaker_off">Lautsprecher ausschalten.</string>
   <!-- String describing the "play faster" button in the playback control used to listen to a
          voicemail message.  Speeds up playback of the voicemail message.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_play_faster">Méi séier ofspillen.</string>
   <!-- String describing the "play slower" button in the playback control used to listen to a
          voicemail message.  Slows down playback of the voicemail message.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_play_slower">Méi lues ofspillen.</string>
   <!-- String describing the "play/pause" button in the playback control used to listen to a
          voicemail message.  Starts playback or pauses ongoing playback.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
          [CHAR LIMIT=NONE] -->
-  <string name="voicemail_play_start_pause">Ofspillen oder pauséieren.</string>
   <!-- Delimeter used between each item in a textual list; for example "Alpha, Beta".
          [CHAR LIMIT=3] -->
-  <string name="list_delimeter">", "</string>
   <!-- Dialer settings related strings-->
   <!-- Title for "Display options" category, which controls how contacts are shown.
          [CHAR LIMIT=40] -->
@@ -520,21 +376,15 @@
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
          aid compatability. [CHAR LIMIT=40] -->
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
-  <string name="ringtone_title">Schelltoun</string>
   <!-- Setting option name to enable or disable vibration when ringing the phone.
          [CHAR LIMIT=30] -->
-  <string name="vibrate_on_ring_title">Och bei Uriff vibréieren</string>
   <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
-  <string name="dtmf_tone_enable_title">Wieltastentéin</string>
   <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <!-- Do not translate. -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
-  <string name="respond_via_sms_setting_title">Séier Äntwerten</string>
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
-  <string name="call_settings_label">Uriff</string>
   <!-- Label for the phone account settings [CHAR LIMIT=30] -->
-  <string name="phone_account_settings_label">Uruffkonten</string>
   <!-- DO NOT TRANSLATE. Internal key for ringtone preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->

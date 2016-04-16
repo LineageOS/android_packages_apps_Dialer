@@ -98,4 +98,11 @@
   <string name="call_recording_category_title">அழைப்பைப் பதிவு செய்தல்</string>
   <string name="call_recording_format">ஆடியோ வடிவமைப்பு</string>
   <string name="call_playback_no_app_found_toast">தேர்ந்தெடுக்கப்பட்ட பதிவாக்களை மறுஇயக்கம் செய்வதற்கு எந்த பயன்பாடும் இல்லை.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">அனுமதிக்கப்பட்டது</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>

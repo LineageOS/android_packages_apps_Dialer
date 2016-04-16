@@ -98,4 +98,11 @@
   <string name="call_recording_category_title">Arama kaydı</string>
   <string name="call_recording_format">Ses formatı</string>
   <string name="call_playback_no_app_found_toast">Seçili kaydı yürütmek için hiçbir uygulama bulunamadı.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Evet</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
 </resources>
