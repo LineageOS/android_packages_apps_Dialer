@@ -89,6 +89,7 @@ import com.android.dialer.dialpad.DialpadFragment;
 import com.android.dialer.dialpad.SmartDialNameMatcher;
 import com.android.dialer.dialpad.SmartDialPrefix;
 import com.android.dialer.incall.CallMethodSpinnerHelper;
+import com.android.dialer.incall.InCallMetricsHelper;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.list.DragDropController;
 import com.android.dialer.list.ListsFragment;
@@ -321,6 +322,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             } else if (mRegularSearchFragment != null && mRegularSearchFragment.isVisible()) {
                 mRegularSearchFragment.setCurrentCallMethod(mCurrentCallMethod);
             }
+
+            InCallMetricsHelper.increaseCountOfMetric(
+                    mCurrentCallMethod.mComponent,
+                    InCallMetricsHelper.Events.PROVIDER_SELECTED_SPINNER,
+                    InCallMetricsHelper.Categories.INAPP_SELECTIONS,
+                    InCallMetricsHelper.Parameters.COUNT);
         }
     }
 
