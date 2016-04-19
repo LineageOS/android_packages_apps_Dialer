@@ -204,9 +204,9 @@
     <string name="closed_now" msgid="2635314668145282080">"Зараз закрыта"</string>
     <string name="label_spam_caller" msgid="8270472297763063585">"Падазраваецца ў спаме"</string>
     <string name="spam_notification_title" msgid="8681565585547329999">"Выклік завершаны %1$s"</string>
-    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Вы атрымліваеце выклік з гэтага нумару ўпершыню."</string>
-    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Існуе падазрэнне, што гэты выклік з\'яўляецца спамам."</string>
-    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Забл./пав. пра спам"</string>
+    <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Вы атрымліваеце выклік з гэтага нумара ўпершыню."</string>
+    <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Існуе падазрэнне, што гэты выклік – спамерскі."</string>
+    <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Забл./павед.пра спам"</string>
     <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Дадаць кантакт"</string>
     <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Не спам"</string>
 </resources>
