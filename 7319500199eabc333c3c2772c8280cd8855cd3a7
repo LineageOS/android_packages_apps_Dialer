@@ -22,6 +22,30 @@
       "revId": "7319500199eabc333c3c2772c8280cd8855cd3a7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a46cd79c",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-19T15:17:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_0e3b8a38",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "7319500199eabc333c3c2772c8280cd8855cd3a7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
