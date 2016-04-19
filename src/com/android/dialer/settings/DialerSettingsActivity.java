@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.dialer.deeplink.DeepLinkIntegrationManager;
@@ -18,7 +17,6 @@ import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.DialerDataSubscription;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.cyanogen.ambient.callerinfo.CallerInfoServices;
-import com.cyanogen.ambient.callerinfo.results.IsAuthenticatedResult;
 import com.cyanogen.ambient.callerinfo.util.CallerInfoHelper;
 import com.cyanogen.ambient.callerinfo.util.ProviderInfo;
 import com.cyanogen.ambient.common.api.PendingResult;
@@ -26,6 +24,8 @@ import com.cyanogen.ambient.common.api.ResultCallback;
 import com.cyanogen.ambient.deeplink.DeepLink;
 import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
 import com.cyanogen.ambient.deeplink.linkcontent.DeepLinkContentType;
+import com.cyanogen.ambient.callerinfo.util.ProviderUpdateListener;
+import com.cyanogen.ambient.callerinfo.util.SettingsListener;
 import com.cyanogen.ambient.plugin.PluginStatus;
 import com.cyanogen.ambient.incall.util.InCallHelper;
 import com.google.common.collect.Lists;
@@ -64,14 +64,15 @@ public class DialerSettingsActivity extends PreferenceActivity {
     protected SharedPreferences mPreferences;
     private HeaderAdapter mHeaderAdapter;
 
-    private static final String COMPONENT_STATUS = "component_status";
-    private static final String COMPONENT_NAME = "component_name";
-    private static final String SETTINGS_INTENT = "settings_intent";
+    private static final String INCALL_COMPONENT_STATUS = "component_status";
+    private static final String INCALL_COMPONENT_NAME = "component_name";
+    private static final String INCALL_SETTINGS_INTENT = "settings_intent";
 
     private static final int OWNER_HANDLE_ID = 0;
-    private CallerInfoHelper.ResolvedProvider mSelectedProvider;
-    private ProviderInfo mSelectedProviderInfo;
-    private boolean mPickerResult;
+    private ProviderInfo mCallerInfoProvider;
+    private SettingsListener.CallerInfoSettings mCallerInfoSettings;
+    private ProviderUpdateListener mCallerInfoProviderListener;
+    private SettingsListener mCallerInfoSettingsListener;
 
     PreferenceCategory category;
     PreferenceScreen mPreferenceScreen;
@@ -119,24 +120,68 @@ public class DialerSettingsActivity extends PreferenceActivity {
             providersUpdated(subscription.getPluginInfo());
             subscription.refreshDynamicItems();
         }
+
         if (CallerInfoHelper.getInstalledProviders(this).length > 0) {
-            CallerInfoHelper.ResolvedProvider[] providers =
-                    CallerInfoHelper.getInstalledProviders(this);
-            mSelectedProvider = providers[0];
-            if (mSelectedProvider != null ) {
-                mSelectedProviderInfo =
-                        CallerInfoHelper.getProviderInfo(this, mSelectedProvider.getComponent());
+            ProviderInfo currentProvider = CallerInfoHelper.getActiveProviderInfo2(this);
+            if (currentProvider == null) {
+                currentProvider = selectCallerInfoProvider();
             }
+            mCallerInfoProvider = currentProvider;
         }
+
         DeepLinkIntegrationManager.getInstance().getDefaultPlugin(mDeepLinkCallback,
                 DeepLinkContentType.CALL);
+
+        mCallerInfoProviderListener = new ProviderUpdateListener(this,
+                new ProviderUpdateListener.Callback() {
+                    @Override
+                    public void onProviderChanged(ProviderInfo providerInfo) {
+                        if (providerInfo != null) {
+                            mCallerInfoProvider = providerInfo;
+                        } else {
+                            mCallerInfoProvider = selectCallerInfoProvider();
+                        }
+                        invalidateHeaders();
+                    }
+                });
+
+        mCallerInfoSettingsListener = new SettingsListener(this,
+                new SettingsListener.Callback() {
+                    @Override
+                    public void onSettingsChanged(SettingsListener.CallerInfoSettings settings) {
+                        if (settings != null) {
+                            mCallerInfoSettings = settings;
+                        }
+                        invalidateHeaders();
+                    }
+                });
+        mCallerInfoSettings = mCallerInfoSettingsListener.getCurrentSettings();
 
         super.onCreate(savedInstanceState);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
+    private ProviderInfo selectCallerInfoProvider() {
+        ProviderInfo provider = null;
+        CallerInfoHelper.ResolvedProvider selectedProvider =
+                CallerInfoHelper.getInstalledProviders(this)[0];
+
+        if (selectedProvider != null) {
+            provider = CallerInfoHelper.getProviderInfo(this, selectedProvider.getComponent());
+        }
+
+        return provider;
+    }
+
     @Override
-    public void onBuildHeaders(List<Header> target) {
+    protected void onDestroy() {
+        super.onDestroy();
+        mCallerInfoProviderListener.destroy();
+        mCallerInfoSettingsListener.destroy();
+    }
+
+    @Override
+        public void onBuildHeaders(List<Header> target) {
         Header displayOptionsHeader = new Header();
         displayOptionsHeader.titleRes = R.string.display_options_title;
         displayOptionsHeader.fragment = DisplayOptionsSettingsFragment.class.getName();
@@ -202,48 +247,52 @@ public class DialerSettingsActivity extends PreferenceActivity {
             target.add(speedDialHeader);
         }
 
-        if (mSelectedProvider != null && mSelectedProviderInfo != null) {
-            final Header callInfoHeader = new Header();
-            callInfoHeader.title = mSelectedProviderInfo.getTitle();
-            callInfoHeader.id = R.id.callerinfo_provider;
-            int resId = mSelectedProviderInfo.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
-                    R.string.callerinfo_provider_summary : R.string.callerinfo_provider_summary_no_spam;
-            callInfoHeader.summaryRes = resId;
-            target.add(callInfoHeader);
+        if (mCallerInfoProvider != null) {
+            final Header providerHeader = new Header();
+            providerHeader.title = mCallerInfoProvider.getTitle();
+            providerHeader.id = R.id.callerinfo_provider;
+            int resId = mCallerInfoProvider.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
+                    R.string.callerinfo_provider_summary :
+                    R.string.callerinfo_provider_summary_no_spam;
+            providerHeader.summaryRes = resId;
+            target.add(providerHeader);
 
-            final Header silenceSpamHeader = new Header();
-            silenceSpamHeader.titleRes = R.string.silence_spam_title;
-            silenceSpamHeader.summaryRes = R.string.silence_spam_summary;
-            target.add(silenceSpamHeader);
+            com.cyanogen.ambient.callerinfo.util.PluginStatus status = mCallerInfoProvider.getStatus();
+            if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE ||
+                    status == com.cyanogen.ambient.callerinfo.util.PluginStatus.DISABLING) {
+                final Header silenceSpamHeader = new Header();
+                silenceSpamHeader.titleRes = R.string.silence_spam_title;
+                silenceSpamHeader.summaryRes = R.string.silence_spam_summary;
+                target.add(silenceSpamHeader);
 
-            final Header blockHidden = new Header();
-            blockHidden.titleRes = R.string.block_hidden_title;
-            blockHidden.summaryRes = R.string.block_hidden_summary;
-            target.add(blockHidden);
+                final Header blockHidden = new Header();
+                blockHidden.titleRes = R.string.block_hidden_title;
+                blockHidden.summaryRes = R.string.block_hidden_summary;
+                target.add(blockHidden);
+            }
         }
 
         if (mCallProviders != null) {
             for (CallMethodInfo cmi : mCallProviders) {
                 if (cmi.mStatus == PluginStatus.ENABLED || cmi.mStatus ==
                         PluginStatus.DISABLED) {
-                    Header thing = new Header();
+                    Header header = new Header();
                     Bundle b = new Bundle();
-                    b.putString(COMPONENT_NAME, cmi.mComponent.flattenToShortString());
-                    b.putInt(COMPONENT_STATUS, cmi.mStatus);
-                    thing.extras = b;
-                    thing.title = cmi.mName;
-                    thing.summary = cmi.mSummary;
-                    target.add(thing);
+                    b.putString(INCALL_COMPONENT_NAME, cmi.mComponent.flattenToShortString());
+                    b.putInt(INCALL_COMPONENT_STATUS, cmi.mStatus);
+                    header.extras = b;
+                    header.title = cmi.mName;
+                    header.summary = cmi.mSummary;
+                    target.add(header);
 
                     if (cmi.mStatus == PluginStatus.ENABLED && cmi.mSettingsIntent != null) {
-                        thing = new Header();
-
-                        thing.title = getResources().getString(R.string.incall_plugin_settings, cmi
+                        header = new Header();
+                        header.title = getResources().getString(R.string.incall_plugin_settings, cmi
                                 .mName);
                         b = new Bundle();
-                        b.putParcelable(SETTINGS_INTENT, cmi.mSettingsIntent);
-                        thing.extras = b;
-                        target.add(thing);
+                        b.putParcelable(INCALL_SETTINGS_INTENT, cmi.mSettingsIntent);
+                        header.extras = b;
+                        target.add(header);
                     }
                 }
             }
@@ -283,7 +332,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
         return true;
     }
 
-
     @Override
     public void setListAdapter(ListAdapter adapter) {
         if (adapter == null) {
@@ -291,44 +339,8 @@ public class DialerSettingsActivity extends PreferenceActivity {
         } else {
             // We don't have access to the hidden getHeaders() method, so grab the headers from
             // the intended adapter and then replace it with our own.
-            mHeaderAdapter = new HeaderAdapter(this, mCurrentHeaders, mSelectedProvider);
+            mHeaderAdapter = new HeaderAdapter(this, mCurrentHeaders);
             super.setListAdapter(mHeaderAdapter);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mPickerResult = true;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mHeaderAdapter != null) {
-            if (!mPickerResult && CallerInfoHelper.getActiveProviderPackage(this) != null) {
-                PendingResult<IsAuthenticatedResult> result =
-                        CallerInfoServices.CallerInfoApi.isAuthenticated(
-                                AmbientConnection.CLIENT.get(this));
-                result.setResultCallback(new ResultCallback<IsAuthenticatedResult>() {
-                    @Override
-                    public void onResult(IsAuthenticatedResult isAuthenticatedResult) {
-                        if (!isAuthenticatedResult.getIsAuthenticated()) {
-                            CallerInfoHelper.setActiveProvider(DialerSettingsActivity.this, null);
-                        }
-                        if (mHeaderAdapter != null) {
-                            DialerSettingsActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mHeaderAdapter.notifyDataSetChanged();
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-            mPickerResult = false;
-            mHeaderAdapter.notifyDataSetChanged();
         }
     }
 
@@ -356,43 +368,35 @@ public class DialerSettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * This custom {@code ArrayAdapter} is mostly identical to the equivalent one in
+     * This custom {@code ArrayAdapter} is mostly identical to the equivalent one inon
      * {@code PreferenceActivity}, except with a local layout resource.
      */
-    private static class HeaderAdapter extends ArrayAdapter<Header>
-            implements CompoundButton.OnCheckedChangeListener {
+    private class HeaderAdapter extends ArrayAdapter<Header>
+            implements View.OnClickListener {
 
-        private final CallerInfoHelper.ResolvedProvider mSelectProvider;
+        static final int HEADER_TYPE_NORMAL = 0;
+        static final int HEADER_TYPE_SWITCH = 1;
 
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            Header header = ((Header) buttonView.getTag());
-            if (header.extras != null && header.extras.containsKey(COMPONENT_NAME)) {
-                providerStateChanged(header.extras, isChecked, getContext());
-            } else if (header.id == R.id.callerinfo_provider) {
-                ComponentName activeProvider =
-                        CallerInfoHelper.getActiveProviderPackage(getContext());
-                // Add active provider check to make sure we don't show dialog
-                // when loading settings page after provider is already configured.
-                // This check is too simplistic when we have multiple providers, but
-                // we need to rework this UI in that case anyway.
-                if (isChecked && activeProvider == null) {
-                    Intent i = new Intent(getContext(), CallerInfoProviderPicker.class);
-                    i.putExtra(CallerInfoProviderPicker.METRICS_REASON_EXTRA,
-                            CallerInfoProviderPicker.REASON_DIALER_SETTINGS);
-                    ((Activity) getContext()).startActivityForResult(i, 0);
-                } else if (!isChecked) {
-                    confirmProviderDisable(buttonView);
-                }
-            } else if (header.titleRes == R.string.silence_spam_title) {
-                CallerInfoHelper.setSilenceSpamCalls(getContext(), isChecked);
-            } else if (header.titleRes == R.string.block_hidden_title) {
-                CallerInfoHelper.setBlockHiddenNumbers(getContext(), isChecked);
-            }
+        class HeaderViewHolder {
+            TextView title;
+            TextView summary;
+            Switch switchButton;
+            Header header;
         }
 
-        private void confirmProviderDisable(final CompoundButton buttonView) {
-            final ProviderInfo providerInfo = CallerInfoHelper.getActiveProviderInfo(getContext());
+        private LayoutInflater mInflater;
+
+        public HeaderAdapter(Context context, List<Header> objects) {
+            super(context, 0, objects);
+            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        private void confirmProviderDisable() {
+            if (mCallerInfoProvider == null) {
+                return;
+            }
+
+            final ProviderInfo providerInfo = mCallerInfoProvider;
             final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
             Resources res = getContext().getResources();
@@ -409,76 +413,56 @@ public class DialerSettingsActivity extends PreferenceActivity {
                     MetricsHelper.Field field = new MetricsHelper.Field(
                             MetricsHelper.Fields.PROVIDER_PACKAGE_NAME,
                             providerInfo.getPackageName());
-                    CallerInfoHelper.setActiveProvider(getContext(), null);
                     MetricsHelper.sendEvent(MetricsHelper.Categories.PROVIDER_STATE_CHANGES,
                             MetricsHelper.Actions.PROVIDER_DISABLED,
                             MetricsHelper.State.SETTINGS, field);
-                }
-            });
-            builder.setNegativeButton(R.string.pause_prompt_no,
-                    new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    setCheckedStateWithoutTriggeringListener(buttonView, true);
-                }
-            });
-            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    setCheckedStateWithoutTriggeringListener(buttonView, true);
+                    CallerInfoServices.CallerInfoApi.disableActivePlugin(
+                            AmbientConnection.CLIENT.get(getContext().getApplicationContext()));
                 }
             });
             builder.show();
         }
 
-        private void setCheckedStateWithoutTriggeringListener(CompoundButton button,
-                                                              boolean state) {
-            button.setOnCheckedChangeListener(null);
-            button.setChecked(state);
-            button.setOnCheckedChangeListener(HeaderAdapter.this);
-        }
-
-        private void updateDefault(Switch switchButton) {
-            Header header = ((Header) switchButton.getTag());
-            if (header.extras != null && header.extras.containsKey(COMPONENT_NAME)) {
-                setCheckedStateWithoutTriggeringListener(switchButton,
-                        header.extras.getInt(COMPONENT_STATUS) == PluginStatus.ENABLED);
+        private void updateSwitchHeaders(HeaderViewHolder viewHolder) {
+            Header header = viewHolder.header;
+            com.cyanogen.ambient.callerinfo.util.PluginStatus status =
+                    mCallerInfoProvider == null ? null : mCallerInfoProvider.getStatus();
+            if (header.extras != null && header.extras.containsKey(INCALL_COMPONENT_NAME)) {
+                viewHolder.switchButton.setChecked(
+                        header.extras.getInt(INCALL_COMPONENT_STATUS) == PluginStatus.ENABLED);
 
             } else if (header.id == R.id.callerinfo_provider) {
-                ComponentName activeProvider = CallerInfoHelper.getActiveProviderPackage
-                        (getContext());
-                boolean checked = activeProvider != null
-                        && activeProvider.equals(mSelectProvider.getComponent());
-                setCheckedStateWithoutTriggeringListener(switchButton, checked);
-            } else if (header.titleRes == R.string.silence_spam_title) {
-                setCheckedStateWithoutTriggeringListener(switchButton,
-                        CallerInfoHelper.shouldSilenceSpamCalls(getContext()));
-            } else if (header.titleRes == R.string.block_hidden_title) {
-                setCheckedStateWithoutTriggeringListener(switchButton,
-                        CallerInfoHelper.shouldBlockHiddenNumbers(getContext()));
+                if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.DISABLING) {
+                    viewHolder.switchButton.setEnabled(false);
+                    viewHolder.header.summaryRes = R.string.callerinfo_provider_status_disabling;
+
+                } else {
+                    boolean isChecked = com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE == status;
+                    viewHolder.switchButton.setEnabled(true);
+                    viewHolder.switchButton.setChecked(isChecked);
+                }
+
+            } else if (header.titleRes == R.string.silence_spam_title ||
+                    header.titleRes == R.string.block_hidden_title) {
+
+                if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE) {
+                    viewHolder.switchButton.setEnabled(true);
+                } else {
+                    viewHolder.switchButton.setEnabled(false);
+                    viewHolder.switchButton.setClickable(false);
+                }
+
+                if (header.titleRes == R.string.silence_spam_title) {
+                    viewHolder.switchButton.setChecked(mCallerInfoSettings.silenceSpamCalls);
+                } else if (header.titleRes == R.string.block_hidden_title) {
+                    viewHolder.switchButton.setChecked(mCallerInfoSettings.blockHiddenNumbers);
+                }
+
             }
         }
 
-        static class HeaderViewHolder {
-            TextView title;
-            TextView summary;
-            Switch switchButton;
-        }
-
-        static final int HEADER_TYPE_NORMAL = 0;
-        static final int HEADER_TYPE_SWITCH = 1;
-
-        private LayoutInflater mInflater;
-
-        public HeaderAdapter(Context context, List<Header> objects,
-                             CallerInfoHelper.ResolvedProvider selectProvider) {
-            super(context, 0, objects);
-            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mSelectProvider = selectProvider;
-        }
-
-        public static int getHeaderType(Header header) {
-            if (header.extras != null && header.extras.containsKey(COMPONENT_NAME)) {
+        public int getHeaderType(Header header) {
+            if (header.extras != null && header.extras.containsKey(INCALL_COMPONENT_NAME)) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.callerinfo_provider || header.titleRes == R.string
                     .silence_spam_title || header.titleRes == R.string.block_hidden_title) {
@@ -500,6 +484,47 @@ public class DialerSettingsActivity extends PreferenceActivity {
         }
 
         @Override
+        public void onClick(View v) {
+            HeaderViewHolder viewHolder = (HeaderViewHolder) v.getTag();
+            Header header = viewHolder.header;
+            int id = (int) header.id;
+            com.cyanogen.ambient.callerinfo.util.PluginStatus status = mCallerInfoProvider != null ?
+                    mCallerInfoProvider.getStatus() : null;
+            if (id == R.id.callerinfo_provider) {
+                if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE) {
+                    confirmProviderDisable();
+                } else if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.DISABLING) {
+                    // do nothing
+                } else {
+                    // Activate the provider
+                    Intent i = new Intent(getContext(), CallerInfoProviderPicker.class);
+                    i.putExtra(CallerInfoProviderPicker.EXTRA_PROVIDER_INFO,
+                            mCallerInfoProvider.getComponentName());
+                    i.putExtra(CallerInfoProviderPicker.EXTRA_METRICS_REASON,
+                            CallerInfoProviderPicker.REASON_DIALER_SETTINGS);
+                    ((Activity) getContext()).startActivityForResult(i, 0);
+                }
+            } else if (header.titleRes == R.string.silence_spam_title) {
+                if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE) {
+                    CallerInfoHelper.setSilenceSpamCalls(getContext(),
+                            !viewHolder.switchButton.isChecked());
+                }
+            } else if (header.titleRes == R.string.block_hidden_title) {
+                if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE) {
+                    CallerInfoHelper.setBlockHiddenNumbers(getContext(),
+                            !viewHolder.switchButton.isChecked());
+                }
+            } else if (header.extras != null && header.extras.containsKey(INCALL_COMPONENT_NAME)) {
+                viewHolder.switchButton.toggle();
+                incallProviderStateChanged(header.extras, viewHolder.switchButton.isChecked(),
+                        getContext());
+            } else if (header.summaryRes == R.string.note_mod_settings_summary) {
+                DeepLinkIntegrationManager.getInstance().openDeepLinkPreferences
+                        (DeepLinkApplicationType.NOTE);
+            }
+        }
+
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             HeaderViewHolder holder;
             View view;
@@ -515,12 +540,10 @@ public class DialerSettingsActivity extends PreferenceActivity {
                         ((TextView) view.findViewById(R.id.summary)).setText(header
                                 .getSummary(getContext().getResources()));
                         final Switch switchButton = ((Switch) view.findViewById(R.id.switchWidget));
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                switchButton.toggle();
-                            }
-                        });
+                        switchButton.setClickable(false);
+                        switchButton.setEnabled(false);
+                        view.setOnClickListener(this);
+
                         holder = new HeaderViewHolder();
                         holder.title = (TextView) view.findViewById(R.id.title);
                         holder.summary = (TextView) view.findViewById(R.id.summary);
@@ -531,8 +554,8 @@ public class DialerSettingsActivity extends PreferenceActivity {
                         holder = (HeaderViewHolder) view.getTag();
                     }
 
-                    holder.switchButton.setTag(header);
-                    updateDefault(holder.switchButton);
+                    holder.header = header;
+                    updateSwitchHeaders(holder);
                     break;
 
                 default:
@@ -547,9 +570,9 @@ public class DialerSettingsActivity extends PreferenceActivity {
                         holder = (HeaderViewHolder) view.getTag();
                     }
 
-                    if (header.extras != null && header.extras.containsKey(SETTINGS_INTENT)) {
+                    if (header.extras != null && header.extras.containsKey(INCALL_SETTINGS_INTENT)) {
                         final PendingIntent settingsIntent =
-                                (PendingIntent) header.extras.get(SETTINGS_INTENT);
+                                (PendingIntent) header.extras.get(INCALL_SETTINGS_INTENT);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -579,15 +602,15 @@ public class DialerSettingsActivity extends PreferenceActivity {
         }
     }
 
-    private static void providerStateChanged(Bundle extras, boolean isEnabled, Context c) {
-        String componentString = extras.getString(COMPONENT_NAME);
+    private static void incallProviderStateChanged(Bundle extras, boolean isEnabled, Context c) {
+        String componentString = extras.getString(INCALL_COMPONENT_NAME);
         ComponentName componentName = ComponentName.unflattenFromString(componentString);
-        int status = providerEnable(c, componentName, isEnabled);
-        extras.putInt(COMPONENT_STATUS, status);
+        int status = enableInCallProvider(c, componentName, isEnabled);
+        extras.putInt(INCALL_COMPONENT_STATUS, status);
     }
 
     @VisibleForTesting
-    /* package */ static int providerEnable(Context c, ComponentName componentName,
+    /* package */ static int enableInCallProvider(Context c, ComponentName componentName,
                                              boolean isEnabled) {
         InCallHelper.ChangeInCallProviderStateAsyncTask asyncTask =
                 new InCallHelper.ChangeInCallProviderStateAsyncTask(c,
@@ -602,14 +625,5 @@ public class DialerSettingsActivity extends PreferenceActivity {
         int status = isEnabled ? PluginStatus.ENABLED : PluginStatus.DISABLED;
         asyncTask.execute(status);
         return status;
-    }
-
-    @Override
-    public void onHeaderClick(Header header, int position) {
-        super.onHeaderClick(header, position);
-        if (header.summaryRes == R.string.note_mod_settings_summary) {
-            DeepLinkIntegrationManager.getInstance().openDeepLinkPreferences
-                    (DeepLinkApplicationType.NOTE);
-        }
     }
 }
