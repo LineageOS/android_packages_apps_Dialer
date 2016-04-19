@@ -176,4 +176,6 @@
     <!-- Note DeepLink mod settings summary in Dialer -->
     <string name="note_mod_settings_summary">Take notes from anywhere</string>
 
+    <string name="callerinfo_provider_status_disabling">Disabling</string>
+
 </resources>
