@@ -172,4 +172,6 @@
 
     <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
     <string name="recentCalls_empty_action_cm">Make a call</string>
+
+    <string name="callerinfo_provider_status_disabling">Disabling ... </string>
 </resources>
