@@ -16,12 +16,12 @@ package com.android.dialer.callerinfo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,16 +31,13 @@ import com.android.phone.common.ambient.AmbientConnection;
 import com.cyanogen.ambient.callerinfo.util.CallerInfoHelper;
 import com.cyanogen.ambient.callerinfo.util.ProviderInfo;
 import com.cyanogen.ambient.callerinfo.CallerInfoServices;
-import com.cyanogen.ambient.callerinfo.results.IsAuthenticatedResult;
-import com.cyanogen.ambient.common.api.PendingResult;
-import com.cyanogen.ambient.common.api.Result;
-import com.cyanogen.ambient.common.api.ResultCallback;
 
 public class CallerInfoProviderPicker extends Activity {
 
     private static final String TAG = "CallerInfoProviderPicker";
 
-    public static final String METRICS_REASON_EXTRA = "reason_extra";
+    public static final String EXTRA_PROVIDER_INFO = "extra_provider_info";
+    public static final String EXTRA_METRICS_REASON = "extra_reason";
     public static final int REASON_FIRST_LAUNCH_DIALER = 0;
     public static final int REASON_INCOMING_CALL = 1;
     public static final int REASON_INCOMING_CALL_FINAL_PROMPT = 2;
@@ -52,41 +49,37 @@ public class CallerInfoProviderPicker extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Resources res = getResources();
-        final CallerInfoHelper.ResolvedProvider[] providers =
-                CallerInfoHelper.getInstalledProviders(this);
-        if (providers.length == 0) {
+        final ComponentName provider = getIntent().getParcelableExtra(EXTRA_PROVIDER_INFO);
+        final ProviderInfo providerInfo = CallerInfoHelper.getProviderInfo(this, provider);
+        if (providerInfo == null) {
             finish();
             return;
         }
 
+        final Resources res = getResources();
         View view = View.inflate(this, R.layout.callerinfo_provider_picker, null);
         ImageView logo = (ImageView) view.findViewById(R.id.logo);
         TextView description = (TextView) view.findViewById(R.id.description);
         TextView disclaimer = (TextView) view.findViewById(R.id.disclaimer);
 
-        // Assume only one provider
-        ProviderInfo info = CallerInfoHelper.getProviderInfo(this, providers[0].getComponent());
-        if (info != null) {
-            if (info.hasProperty(ProviderInfo.PROPERTY_NEEDS_CONTACTS)) {
-                String text = res.getString(R.string.callerinfo_provider_auth_access, info.getTitle());
-                if (info.getPrivacyPolicyUrl() != null) {
-                    String learnMore = " <a href=\"%s\">%s</a>";
-                    text += String.format(learnMore, info.getPrivacyPolicyUrl(),
-                            res.getString(R.string.callerinfo_provider_auth_learn_more));
-                }
-                disclaimer.setMovementMethod(LinkMovementMethod.getInstance());
-                disclaimer.setText(Html.fromHtml(text));
-            } else {
-                disclaimer.setVisibility(View.GONE);
+        if (providerInfo.hasProperty(ProviderInfo.PROPERTY_NEEDS_CONTACTS)) {
+            String text = res.getString(R.string.callerinfo_provider_auth_access, providerInfo.getTitle());
+            if (providerInfo.getPrivacyPolicyUrl() != null) {
+                String learnMore = " <a href=\"%s\">%s</a>";
+                text += String.format(learnMore, providerInfo.getPrivacyPolicyUrl(),
+                        res.getString(R.string.callerinfo_provider_auth_learn_more));
             }
-
-            logo.setImageDrawable(info.getBrandLogo());
-
-            int resId = info.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
-                    R.string.callerinfo_provider_auth_desc : R.string.callerinfo_provider_auth_desc_no_spam;
-            description.setText(res.getString(resId, info.getTitle()));
+            disclaimer.setMovementMethod(LinkMovementMethod.getInstance());
+            disclaimer.setText(Html.fromHtml(text));
+        } else {
+            disclaimer.setVisibility(View.GONE);
         }
+
+        logo.setImageDrawable(providerInfo.getBrandLogo());
+
+        int resId = providerInfo.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
+                R.string.callerinfo_provider_auth_desc : R.string.callerinfo_provider_auth_desc_no_spam;
+        description.setText(res.getString(resId, providerInfo.getTitle()));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
@@ -94,31 +87,17 @@ public class CallerInfoProviderPicker extends Activity {
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendMetrics(true, providers[0].getPackageName());
-
-                CallerInfoHelper.setActiveProvider(CallerInfoProviderPicker.this,
-                        providers[0].getComponent());
-                PendingResult<IsAuthenticatedResult> result =
-                        CallerInfoServices.CallerInfoApi.isAuthenticated(
-                                AmbientConnection.CLIENT.get(getApplicationContext()));
-                result.setResultCallback(new ResultCallback<IsAuthenticatedResult>() {
-                    @Override
-                    public void onResult(IsAuthenticatedResult response) {
-                        Log.d(TAG, "isAuthenticated = " + response.getIsAuthenticated());
-                        if (!response.getIsAuthenticated()) {
-                            PendingResult<Result> result =
-                                    CallerInfoServices.CallerInfoApi.setupAuthentication
-                                            (AmbientConnection.CLIENT.get(getApplicationContext()));
-                        }
-                        finish();
-                    }
-                });
+                sendMetrics(true, providerInfo.getPackageName());
+                CallerInfoServices.CallerInfoApi.enablePlugin(
+                        AmbientConnection.CLIENT.get(getApplicationContext()),
+                        providerInfo.getComponentName());
+                finish();
             }
         }).setNegativeButton(res.getString(R.string.callerinfo_provider_auth_no),
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendMetrics(false, providers[0].getPackageName());
+                sendMetrics(false, providerInfo.getPackageName());
                 finish();
             }
         }).setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -144,10 +123,10 @@ public class CallerInfoProviderPicker extends Activity {
     }
 
     void sendMetrics(boolean onAccept, String providerPackageName) {
-        if (!getIntent().hasExtra(METRICS_REASON_EXTRA)) {
+        if (!getIntent().hasExtra(EXTRA_METRICS_REASON)) {
             return;
         }
-        int reason = getIntent().getIntExtra(METRICS_REASON_EXTRA, -1);
+        int reason = getIntent().getIntExtra(EXTRA_METRICS_REASON, -1);
         MetricsHelper.Field field = new MetricsHelper.Field(
                 MetricsHelper.Fields.PROVIDER_PACKAGE_NAME, providerPackageName);
         MetricsHelper.Actions action = onAccept ?
