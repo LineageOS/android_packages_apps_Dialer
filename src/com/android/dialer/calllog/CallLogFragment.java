@@ -363,7 +363,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.onPause();
         }
-        mAdapter.pauseCache();
+        if (mAdapter != null) {
+            mAdapter.pauseCache();
+        }
 
         CallMethodHelper.unsubscribe(AMBIENT_SUBSCRIPTION_ID);
 
@@ -379,8 +381,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     @Override
     public void onDestroy() {
-        mAdapter.pauseCache();
-        mAdapter.changeCursor(null);
+        if (mAdapter != null) {
+            mAdapter.pauseCache();
+            mAdapter.changeCursor(null);
+        }
 
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.onDestroy();
@@ -399,7 +403,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         outState.putInt(KEY_LOG_LIMIT, mLogLimit);
         outState.putLong(KEY_DATE_LIMIT, mDateLimit);
 
-        mAdapter.onSaveInstanceState(outState);
+        if (mAdapter != null) {
+            mAdapter.onSaveInstanceState(outState);
+        }
 
         if (mVoicemailPlaybackPresenter != null) {
             mVoicemailPlaybackPresenter.onSaveInstanceState(outState);
