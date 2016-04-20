@@ -104,6 +104,8 @@ public class CallStatsFragment extends Fragment implements
         cr.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, mObserver);
 
         setHasOptionsMenu(true);
+
+        mAdapter = new CallStatsAdapter(getActivity());
     }
 
     @Override
@@ -171,7 +173,6 @@ public class CallStatsFragment extends Fragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAdapter = new CallStatsAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         updateEmptyVisibilityAndMessage();
     }

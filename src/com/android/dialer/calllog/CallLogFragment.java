@@ -225,6 +225,15 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
 
         mBlockContactPresenter = new BlockContactPresenter(activity, this);
+
+        boolean isShowingRecentsTab = mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT;
+        mAdapter = ObjectFactory.newCallLogAdapter(
+                getActivity(),
+                this,
+                new ContactInfoHelper(getActivity(), currentCountryIso),
+                mVoicemailPlaybackPresenter,
+                mBlockContactPresenter,
+                isShowingRecentsTab);
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -307,14 +316,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mEmptyListView.setActionClickedListener(this);
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
-        boolean isShowingRecentsTab = mLogLimit != NO_LOG_LIMIT || mDateLimit != NO_DATE_LIMIT;
-        mAdapter = ObjectFactory.newCallLogAdapter(
-                getActivity(),
-                this,
-                new ContactInfoHelper(getActivity(), currentCountryIso),
-                mVoicemailPlaybackPresenter,
-                mBlockContactPresenter,
-                isShowingRecentsTab);
         mRecyclerView.setAdapter(mAdapter);
 
         fetchCalls();
