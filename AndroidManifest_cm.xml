@@ -23,6 +23,9 @@
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_INCALL_SERVICE" />
     <uses-permission android:name="com.cyanogen.ambient.permission.PLUGIN_STATUS_CHANGED" />
     <uses-permission android:name="com.cyanogen.ambient.permission.PUBLISH_DISCOVERY_NUDGE" />
+    <!-- Connect to AmbientCore to use DeepLink Plugins -->
+    <uses-permission android:name="com.cyanogen.ambient.permission.BIND_DEEPLINK_SERVICE" />
+    <uses-permission android:name="com.cyanogen.ambient.permission.READ_DEEPLINK_DATABASE" />
 
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
