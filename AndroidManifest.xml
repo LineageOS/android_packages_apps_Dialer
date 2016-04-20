@@ -64,6 +64,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
     <uses-permission android:name="cyanogenmod.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.cyanogen.ambient.permission.BIND_DEEPLINK_SERVICE" />
 
     <application
         android:name="DialerApplication"

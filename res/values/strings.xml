@@ -518,6 +518,7 @@
     <!-- Shortcut item used to add a number directly to a new contact from search.
          [CHAR LIMIT=25] -->
     <string name="search_shortcut_create_new_contact">Create new contact</string>
+    <string name="search_shortcut_view_note">View Note</string>
 
     <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->

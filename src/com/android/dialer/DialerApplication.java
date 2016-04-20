@@ -25,7 +25,7 @@ import com.android.dialer.discovery.WifiCallStatusNudgeListener;
 import com.android.dialer.incall.InCallMetricsHelper;
 import com.android.phone.common.incall.CallMethodHelper;
 import com.android.dialer.util.MetricsHelper;
-
+import com.android.incallui.DeepLinkIntegrationManager;
 
 public class DialerApplication extends Application {
 
@@ -49,6 +49,6 @@ public class DialerApplication extends Application {
         WifiCallStatusNudgeListener.init(this);
         InCallMetricsHelper.init(this);
         Trace.endSection();
-
+        DeepLinkIntegrationManager.getInstance().setUp(this);
     }
 }
