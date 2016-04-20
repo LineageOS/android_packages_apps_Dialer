@@ -22,6 +22,30 @@
       "revId": "69a5dafeda7da67d13380ba2cad5f5d5c6a0b3ca",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_b8fcf83e",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-20T20:28:40Z",
+      "side": 1,
+      "message": "sounds like a plan. :P",
+      "parentUuid": "5faad753_e4f72fd4",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 5
+      },
+      "revId": "69a5dafeda7da67d13380ba2cad5f5d5c6a0b3ca",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
