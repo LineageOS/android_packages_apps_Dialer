@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_78620019",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-20T20:39:16Z",
+      "side": 1,
+      "message": "can this return null?",
+      "revId": "c30df1e2bf7e260cf440f078a3e7e56722560d2c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
