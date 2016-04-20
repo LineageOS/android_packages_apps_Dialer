@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Nabijgelegen plaatsen</string>
   <string name="people">Mensen</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefoonnummer zoeken</string>
   <string name="lookup_settings_description">Onbekende telefoonnummers opzoeken</string>
   <string name="enable_forward_lookup_title">Plaatsen zoeken</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Aanbieder plaatsen zoeken</string>
   <string name="people_lookup_provider_title">Aanbieder mensen zoeken</string>
   <string name="reverse_lookup_provider_title">Aanbieder omgekeerd zoeken</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinees (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Toetsenblok T9-zoeken</string>
   <string name="t9_search_input_locale">T9-zoeken</string>
   <string name="t9_search_input_locale_default">Standaard</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Geblokkeerde oproep</string>
   <string name="call_log_stats_title">Statistieken</string>
   <string name="callStatsDetailTitle">Gespreksstatistiekdetails</string>
@@ -68,15 +73,18 @@
   <string name="call_stats_sort_by_count">Sorteren op gespreksaantal</string>
   <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
   <string name="toast_added_to_blacklist">%s toegevoegd aan zwarte lijst.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Instellingen snelkiesnummers</string>
   <string name="speed_dial_not_set">(niet ingesteld)</string>
   <string name="speed_dial_replace">Vervangen</string>
   <string name="speed_dial_delete">Verwijderen</string>
   <string name="speed_dial_unassigned_dialog_title">Toets niet toegewezen</string>
   <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegmodus uit te schakelen.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegtuigmodus uit te schakelen.</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Trillen tijdens gesprek</string>
   <string name="incall_vibrate_outgoing_title">Trillen bij aannemen</string>
   <string name="vibrate_call_waiting">Trillen bij wachten</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Alle gesprekken</string>
   <string name="calllog_search_hint">Gespreksstatistieken doorzoeken</string>
   <string name="msim_ime_dialog_title">Apparaat-ID</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Alleen geblokkeerde oproepen</string>
   <string name="start_call_playback">Opname afspelen</string>
   <string name="stop_call_playback">Stoppen</string>
   <string name="call_playback_error_message">Opname afspelen mislukt</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Instellingen sensoren</string>
   <string name="smart_mute_title">Slim dempen</string>
   <string name="smart_mute_summary">Inkomende oproepen dempen door het apparaat om te draaien</string>

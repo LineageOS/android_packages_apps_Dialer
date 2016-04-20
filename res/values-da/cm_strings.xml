@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Steder i nærheden</string>
   <string name="people">Mennesker</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefonnummeropslag</string>
   <string name="lookup_settings_description">Opslag af ukendte telefonnumre</string>
   <string name="enable_forward_lookup_title">Fremadrettet opslag</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Fremadrettet opslagsudbyder</string>
   <string name="people_lookup_provider_title">Opslagsudbyder for personer</string>
   <string name="reverse_lookup_provider_title">Omvendt opslagsudbyder</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (KN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">T9-søgning på tastatur</string>
   <string name="t9_search_input_locale">Søgeinput med T9</string>
   <string name="t9_search_input_locale_default">Standard</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Blokeret opkald</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detaljer om opkaldsstatistik</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Sortér på antal opkald</string>
   <string name="menu_add_to_blacklist">Tilføj til blokeret opkaldsliste</string>
   <string name="toast_added_to_blacklist">%s tilføjet til blokeret opkaldsliste.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Indstillinger for hurtigopkald</string>
   <string name="speed_dial_not_set">(ikke angivet)</string>
   <string name="speed_dial_replace">Erstat</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">For at bruge hurtigopkald, skal du først deaktivere flytilstand.</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Vibration under opkald</string>
   <string name="incall_vibrate_outgoing_title">Vibrér ved svar</string>
   <string name="vibrate_call_waiting">Vibrér ved ventende opkald</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Alle opkald</string>
   <string name="calllog_search_hint">Søg i opkaldsloggen</string>
   <string name="msim_ime_dialog_title">Enheds-id</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Kun blokeret opkald</string>
   <string name="start_call_playback">Afspil optagelse</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Kunne ikke afspille optagelse</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Sensor-indstillinger</string>
   <string name="smart_mute_title">Smart lyddæmp</string>
   <string name="smart_mute_summary">Slå lyden fra ved indgående opkald ved at vende enheden</string>

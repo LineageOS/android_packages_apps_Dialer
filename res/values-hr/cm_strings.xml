@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Mjesta u blizini</string>
   <string name="people">Osobe</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Pretraživanje po telefonskom broju</string>
   <string name="lookup_settings_description">Pretraživanje nepoznatih telefonskih brojeva</string>
   <string name="enable_forward_lookup_title">Pretraživanje po informacijama</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Pretraživanja po informacijama</string>
   <string name="people_lookup_provider_title">Pretraživanja ljudi</string>
   <string name="reverse_lookup_provider_title">Obrnuto pretraživanje</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Kineski Cyngn (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">T9 pretraživanje u biraču brojeva</string>
   <string name="t9_search_input_locale">T9 unos za pretraživanje</string>
   <string name="t9_search_input_locale_default">Zadano</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Blokirani poziv</string>
   <string name="call_log_stats_title">Satatistike</string>
   <string name="callStatsDetailTitle">Detalji statistike poziva</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Sortiraj po broju poziva</string>
   <string name="menu_add_to_blacklist">Dodaj na popis blokiranih pozivatelja</string>
   <string name="toast_added_to_blacklist">%s dodan na popis blokiranih pozivatelja.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Postavke brzog biranja</string>
   <string name="speed_dial_not_set">(nije postavljeno)</string>
   <string name="speed_dial_replace">Zamijeni</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">Da biste koristili brzo biranje morate isključiti zrakoplovni način rada.</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Vibracija za vrijeme poziva</string>
   <string name="incall_vibrate_outgoing_title">Vibriraj prilikom javljanja</string>
   <string name="vibrate_call_waiting">Vibriraj prilikom poziva na čekanju</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Svi pozivi</string>
   <string name="calllog_search_hint">Traži ispis poziva</string>
   <string name="msim_ime_dialog_title">Identifikator uređaja</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Samo blokirani pozivi</string>
   <string name="start_call_playback">Reproduciraj snimku</string>
   <string name="stop_call_playback">Zaustavi</string>
   <string name="call_playback_error_message">Reprodukcija snimke nije uspjela</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Opcije senzora</string>
   <string name="smart_mute_title">Pametno utišavanje</string>
   <string name="smart_mute_summary">Isključi zvuk dolaznog poziva okretanjem uređaja</string>

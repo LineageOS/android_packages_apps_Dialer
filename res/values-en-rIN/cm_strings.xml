@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Nearby places</string>
   <string name="people">People</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Phone number lookup</string>
   <string name="lookup_settings_description">Lookup of unknown phone numbers</string>
   <string name="enable_forward_lookup_title">Forward lookup</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Forward lookup provider</string>
   <string name="people_lookup_provider_title">People lookup provider</string>
   <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Dialpad T9 search</string>
   <string name="t9_search_input_locale">T9 search input</string>
   <string name="t9_search_input_locale_default">Default</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Blocked call</string>
   <string name="call_log_stats_title">Statistics</string>
   <string name="callStatsDetailTitle">Call stat details</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Sort by call count</string>
   <string name="menu_add_to_blacklist">Add to blocked caller list</string>
   <string name="toast_added_to_blacklist">%s added to blocked caller list.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Speed dial settings</string>
   <string name="speed_dial_not_set">(not set)</string>
   <string name="speed_dial_replace">Replace</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off airplane mode.</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">In-call vibration</string>
   <string name="incall_vibrate_outgoing_title">Vibrate on answer</string>
   <string name="vibrate_call_waiting">Vibrate on call waiting</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">All calls</string>
   <string name="calllog_search_hint">Search call log</string>
   <string name="msim_ime_dialog_title">Device identifier</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Blocked calls only</string>
   <string name="start_call_playback">Play recording</string>
   <string name="stop_call_playback">Stop</string>
   <string name="call_playback_error_message">Failed to play recording</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Sensor options</string>
   <string name="smart_mute_title">Smart mute</string>
   <string name="smart_mute_summary">Mute the incoming call by flipping the device</string>

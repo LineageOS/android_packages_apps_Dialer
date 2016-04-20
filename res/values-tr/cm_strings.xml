@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Yakın yerler</string>
   <string name="people">Kişiler</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefon numarası arama</string>
   <string name="lookup_settings_description">Bilinmeyen telefon numaralarını araştır</string>
   <string name="enable_forward_lookup_title">Yönlendirme araması</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Arama yönlendirme sağlayıcısı</string>
   <string name="people_lookup_provider_title">Kişi arama sağlayıcısı</string>
   <string name="reverse_lookup_provider_title">Ters arama sağlayıcısı</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Çince (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Tuş takımı T9 arama</string>
   <string name="t9_search_input_locale">T9 arama girişi</string>
   <string name="t9_search_input_locale_default">Varsayılan</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Engelli arama</string>
   <string name="call_log_stats_title">İstatistikler</string>
   <string name="callStatsDetailTitle">Arama istatistik detayları</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Arama sayısına göre sırala</string>
   <string name="menu_add_to_blacklist">Engelli arayan listesine ekle</string>
   <string name="toast_added_to_blacklist">%s engelli arayan listesine eklendi.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Hızlı arama ayarları</string>
   <string name="speed_dial_not_set">(ayarlanmadı)</string>
   <string name="speed_dial_replace">Değiştir</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">Hızlı aramayı kullanmak için, önce uçak modunu kapatın.</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Gelen-arama titreşimi</string>
   <string name="incall_vibrate_outgoing_title">Cevapladığımda titre</string>
   <string name="vibrate_call_waiting">Çağrı bekletildiğinde titre</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Tüm aramalar</string>
   <string name="calllog_search_hint">Arama kaydını araştır</string>
   <string name="msim_ime_dialog_title">Cihaz tanımlayıcısı</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Yalnızca engellenen aramalar</string>
   <string name="start_call_playback">Kaydı oynat</string>
   <string name="stop_call_playback">Durdur</string>
   <string name="call_playback_error_message">Kayıt oynatılamadı</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Sensör seçenekleri</string>
   <string name="smart_mute_title">Akıllı ses kesme</string>
   <string name="smart_mute_summary">Cihazı çevirince gelen çağrıyı sessize alır</string>

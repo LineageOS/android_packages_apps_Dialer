@@ -16,8 +16,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">নিকটবর্তী স্থান অনুসারে</string>
   <string name="people">জনসাধারণ</string>
+  <!-- Number lookup -->
+  <!-- Chinese Reverse Lookup Provider -->
+  <!-- dialpad t9 search -->
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="call_log_stats_title">পরিসংখ্যান</string>
   <string name="callStatsDetailTitle">কল পরিসংখ্যান বিস্তারিত</string>
   <string name="call_stats_nav_all">সমস্ত</string>
@@ -45,6 +50,7 @@
   <string name="call_stats_reset_filter">সময় সীমা পুনর্বিন্যাস করুন</string>
   <string name="call_stats_sort_by_duration">কল স্থিতিকাল অনুসারে সজ্জিত</string>
   <string name="call_stats_sort_by_count">কল সংখ্যা অনুসারে সজ্জিত</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">দ্রুত ডায়ালের রুপান্তর নির্ধারণ</string>
   <string name="speed_dial_not_set">(নির্ধারণ করা হয়নি)</string>
   <string name="speed_dial_replace">প্রতিস্থাপন</string>
@@ -52,6 +58,8 @@
   <string name="speed_dial_unassigned_dialog_title">অ-বরাদ্দকৃত কী</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="video_call">ভিডিও কল</string>
   <string name="call_duration_active">সক্রিয় সময়কালঃ</string>
   <string name="call_duration_call_out">কল সময়কালঃ</string>
@@ -59,4 +67,6 @@
   <string name="call_log_all_calls_header">সকল কল</string>
   <string name="calllog_search_hint">কল লগ অনুসন্ধান করুন</string>
   <string name="msim_ime_dialog_title">ডিভাইস শনাক্তকারী</string>
+  <!-- Filter by blacklist calls option -->
+  <!-- Sensor options -->
 </resources>

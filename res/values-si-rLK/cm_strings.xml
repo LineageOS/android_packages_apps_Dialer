@@ -16,8 +16,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">අවට ස්ථාන</string>
   <string name="people">ප්‍රජාව</string>
+  <!-- Number lookup -->
+  <!-- Chinese Reverse Lookup Provider -->
+  <!-- dialpad t9 search -->
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="call_log_stats_title">සංඛ්‍යාති</string>
   <string name="callStatsDetailTitle">ඇමතුම් තත්ව තොරතුරු</string>
   <string name="call_stats_nav_all">සියලු</string>
@@ -45,6 +50,7 @@
   <string name="call_stats_reset_filter">කාල පරාසය ප්‍රත්‍යාරම්භ කරන්න</string>
   <string name="call_stats_sort_by_duration">ඇමතුම් කාලමාත්‍රාව අනුව සුබෙදන්න</string>
   <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">ඉක්මන් ඩයල් කිරීමේ සැකසීම්</string>
   <string name="speed_dial_not_set">(සකසා නැත)</string>
   <string name="speed_dial_replace">ප්‍රතිස්ථාපනය</string>
@@ -52,6 +58,8 @@
   <string name="speed_dial_unassigned_dialog_title">යතුර පවරා නොමැත</string>
   <string name="yes">ඔව්</string>
   <string name="no">නැහැ</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="video_call">වීඩියෝ ඇමතුම</string>
   <string name="call_duration_active">සක්‍රීය කාලමාත්‍රාව:</string>
   <string name="call_duration_call_out">ඇමතුම් කාලමාත්‍රාව:</string>
@@ -59,4 +67,6 @@
   <string name="call_log_all_calls_header">සියලුම ඇමතුම්</string>
   <string name="calllog_search_hint">ඇමතුම් ලොගය සොයන්න</string>
   <string name="msim_ime_dialog_title">උපාංගයේ හඳුන්වනය</string>
+  <!-- Filter by blacklist calls option -->
+  <!-- Sensor options -->
 </resources>

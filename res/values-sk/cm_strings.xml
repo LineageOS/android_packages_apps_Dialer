@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Miesta v blízkosti</string>
   <string name="people">Ľudia</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Vyhľadávanie telefónneho čísla</string>
   <string name="lookup_settings_description">Vyhľadávanie neznámych telefónnych čísiel</string>
   <string name="enable_forward_lookup_title">Predbežné vyhľadávanie</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Poskytovateľ predbežného vyhľadávania</string>
   <string name="people_lookup_provider_title">Poskytovateľ pre vyhľadávanie ľudí</string>
   <string name="reverse_lookup_provider_title">Poskytovateľ pre spätné vyhľadávanie</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Čínština (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Vyhľadávanie T9 v číselníku</string>
   <string name="t9_search_input_locale">Vstup vyhľadávania T9</string>
   <string name="t9_search_input_locale_default">Predvolený</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Zablokovaný hovor</string>
   <string name="call_log_stats_title">Štatistiky</string>
   <string name="callStatsDetailTitle">Podrobné štatistiky hovorov</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Zoradiť podľa počtu hovorov</string>
   <string name="menu_add_to_blacklist">Pridať do zoznamu zablokovaných volajúcich</string>
   <string name="toast_added_to_blacklist">Kontakt %s bol pridaný do zoznamu zablokovaných volajúcich.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Nastavenia rýchleho vytáčania</string>
   <string name="speed_dial_not_set">(nenastavené)</string>
   <string name="speed_dial_replace">Nahradiť</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">Pre použitie rýchleho vytáčania najprv vypnite režim v lietadle.</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Vibrácie počas hovoru</string>
   <string name="incall_vibrate_outgoing_title">Vibrovať po prijatí</string>
   <string name="vibrate_call_waiting">Vibrovať pri čakajúcom hovore</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Všetky hovory</string>
   <string name="calllog_search_hint">Hľadať v denníku hovorov</string>
   <string name="msim_ime_dialog_title">Identifikátor zariadenia</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Len zablokované hovory</string>
   <string name="start_call_playback">Prehrať nahrávku</string>
   <string name="stop_call_playback">Zastaviť</string>
   <string name="call_playback_error_message">Prehrávanie nahrávky zlyhalo</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Možnosti snímača</string>
   <string name="smart_mute_title">Inteligentné stlmenie</string>
   <string name="smart_mute_summary">Stlmiť prichádzajúci hovor otočením zariadenia</string>

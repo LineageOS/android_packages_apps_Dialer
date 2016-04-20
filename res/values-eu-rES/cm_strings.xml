@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Kokaleku hurbilak</string>
   <string name="people">Jendea</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Telefono zenbakien bilaketa</string>
   <string name="lookup_settings_description">Bilatu telefono zenbaki ezezagunak</string>
   <string name="enable_forward_lookup_title">Tokien bilaketa</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Lekuen bilaketarako hornitzailea</string>
   <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
   <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn txinatarra (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Bilatu T9 markadorean</string>
   <string name="t9_search_input_locale">T9 bilatzeko sarrera</string>
   <string name="t9_search_input_locale_default">Lehenetsia</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Blokeatutako deia</string>
   <string name="call_log_stats_title">Estatistikak</string>
   <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
   <string name="menu_add_to_blacklist">Gehitu blokeatutako deitzaileen zerrendara</string>
   <string name="toast_added_to_blacklist">%s blokeatutako deitzaileen zerrendara gehitu da.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Markaketa azkarraren ezarpenak</string>
   <string name="speed_dial_not_set">(ezarri gabe)</string>
   <string name="speed_dial_replace">Ordeztu</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">Markaketa azkarra erabiltzeko, aurretik hegaldi modua ezgaitu.</string>
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Deian zeharreko bibrazioa</string>
   <string name="incall_vibrate_outgoing_title">Bibratu erantzutean</string>
   <string name="vibrate_call_waiting">Bibratu deia zai dagoenean</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Dei guztiak</string>
   <string name="calllog_search_hint">Bilatu deien erregistroan</string>
   <string name="msim_ime_dialog_title">Gailu identifikatzailea</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Blokeatutako deiak soilik</string>
   <string name="start_call_playback">Erreproduzitu grabazioa</string>
   <string name="stop_call_playback">Gelditu</string>
   <string name="call_playback_error_message">Ezin izan da grabazioa erreproduzitu</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Sentsoreen aukerak</string>
   <string name="smart_mute_title">Mututze adimentsua</string>
   <string name="smart_mute_summary">Mututu jasotako deia gailua itzulbiratuz</string>
