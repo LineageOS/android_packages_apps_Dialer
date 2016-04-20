@@ -488,9 +488,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                 if (TextUtils.isEmpty(mSearchView.getText().toString())) {
                     // If the search term is empty, close the search UI.
                     maybeExitSearchUi();
-                } else {
-                    // If the search term is not empty, show the dialpad fab.
-                    showFabInSearchUi();
                 }
             }
             return false;
@@ -549,10 +546,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             }
 
             @Override
-            public void onSearchViewClicked() {
-                // Hide FAB, as the keyboard is shown.
-                mFloatingActionButtonController.scaleOut();
-            }
+            public void onSearchViewClicked() {}
         });
 
         mIsLandscape = getResources().getConfiguration().orientation
@@ -1173,6 +1167,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mInDialpadSearch = smartDialSearch;
         mInRegularSearch = !smartDialSearch;
 
+
         SearchFragment fragment = (SearchFragment) getFragmentManager().findFragmentByTag(tag);
         if (animate) {
             transaction.setCustomAnimations(android.R.animator.fade_in, 0);
@@ -1200,6 +1195,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         if (animate) {
             mListsFragment.getView().animate().alpha(0).withLayer();
         }
+        moveFabInSearchUI();
 
         mListsFragment.setUserVisibleHint(false);
     }
