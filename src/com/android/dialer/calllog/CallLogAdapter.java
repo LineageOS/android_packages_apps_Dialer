@@ -52,12 +52,17 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
+import com.android.dialer.deeplink.DeepLinkCache;
+import com.android.dialer.deeplink.DeepLinkRequest;
+import com.android.dialer.deeplink.DeepLinkListener;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
+
+import com.cyanogen.ambient.deeplink.DeepLink;
 
 import java.util.HashMap;
 
@@ -98,6 +103,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final CallFetcher mCallFetcher;
 
     protected ContactInfoCache mContactInfoCache;
+    protected DeepLinkCache mDeepLinkCache;
 
     private boolean mIsShowingRecentsTab;
 
@@ -294,6 +300,14 @@ public class CallLogAdapter extends GroupingListAdapter
                 }
             };
 
+    protected final DeepLinkListener mDeepLinkListener =
+            new DeepLinkListener()  {
+                @Override
+                public void onDeepLinkCacheChanged() {
+                    notifyDataSetChanged();
+                }
+    };
+
     public CallLogAdapter(
             Context context,
             CallFetcher callFetcher,
@@ -315,6 +329,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
         mContactInfoCache = new ContactInfoCache(
                 mContactInfoHelper, mOnContactInfoChangedListener);
+        mDeepLinkCache = new DeepLinkCache(mDeepLinkListener);
         if (!PermissionsUtil.hasContactsPermissions(context)) {
             mContactInfoCache.disableRequestProcessing();
         }
@@ -371,16 +386,19 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void invalidateCache() {
         mContactInfoCache.invalidate();
+        mDeepLinkCache.invalidate();
     }
 
     public void startCache() {
         if (PermissionsUtil.hasPermission(mContext, android.Manifest.permission.READ_CONTACTS)) {
             mContactInfoCache.start();
+            mDeepLinkCache.start();
         }
     }
 
     public void pauseCache() {
         mContactInfoCache.stop();
+        mDeepLinkCache.stop();
         mTelecomCallLogCache.reset();
     }
 
@@ -478,7 +496,7 @@ public class CallLogAdapter extends GroupingListAdapter
             return;
         }
 
-        int count = getGroupSize(position);
+        final int count = getGroupSize(position);
 
         final String number = c.getString(CallLogQuery.NUMBER);
         final int numberPresentation = c.getInt(CallLogQuery.NUMBER_PRESENTATION);
@@ -529,7 +547,8 @@ public class CallLogAdapter extends GroupingListAdapter
             details.objectId = info.objectId;
         }
 
-        CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
+        final CallLogListItemViewHolder views = (CallLogListItemViewHolder) viewHolder;
+        final DeepLinkPresenter deepLinkPresenter = new DeepLinkPresenter(views,mContext);
         views.info = info;
         views.rowId = c.getLong(CallLogQuery.ID);
         // Store values used when the actions ViewStub is inflated on expansion.
@@ -544,13 +563,27 @@ public class CallLogAdapter extends GroupingListAdapter
         views.isBusiness = mContactInfoHelper.isBusiness(info.sourceType);
         views.numberType = (String) Phone.getTypeLabel(mContext.getResources(), details.numberType,
                 details.numberLabel);
+        // Default case: an item in the call log.
         String component = c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME);
         if (!TextUtils.isEmpty(component)) {
             views.inCallComponentName = ComponentName.unflattenFromString(component);
         } else {
             views.inCallComponentName = null;
         }
+        // Default case: an item in the call log.
+        views.primaryActionView.setVisibility(View.VISIBLE);
+        views.callTimes = getCallTimes(c,count);
+        DeepLink dl = mDeepLinkCache.getValue(number, views.callTimes);
+        if(dl != null && dl != DeepLinkRequest.EMPTY) {
+            views.mDeepLink = dl;
+            views.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
+            views.phoneCallDetailsViews.noteIconView.setImageDrawable(dl.getDrawableIcon(mContext));
+        } else {
+            views.mDeepLink = null;
+            views.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
+        }
 
+        deepLinkPresenter.prepareUi(number);
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
         int previousGroup = getPreviousDayGroup(c);
@@ -585,6 +618,21 @@ public class CallLogAdapter extends GroupingListAdapter
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
         mCallLogListItemHelper.setLookupInfoDetails(views, info);
     }
+
+    /**
+     * Returns call times for the given number of items in the cursor
+     */
+    private long[] getCallTimes(Cursor cursor, int count) {
+        int position = cursor.getPosition();
+        long[] callTimes = new long[count];
+        for (int index = 0; index < count; ++index) {
+            callTimes[index] = cursor.getLong(CallLogQuery.DATE);
+            cursor.moveToNext();
+        }
+        cursor.moveToPosition(position);
+        return callTimes;
+    }
+
 
     @Override
     public int getItemCount() {
