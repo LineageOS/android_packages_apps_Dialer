@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_e75e5144",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-04-20T06:39:54Z",
+      "side": 1,
+      "message": "Disabling\\u2026\n\n(unicode ellipsis and no spaces)",
+      "revId": "cd35dcdfd1ed739dd6bd6da05d36a33c9b14eb87",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
