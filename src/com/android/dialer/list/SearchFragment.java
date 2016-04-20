@@ -378,6 +378,11 @@ public class SearchFragment extends PhoneNumberPickerFragment
     public void setCurrentCallMethod(CallMethodInfo cmi) {
         if (cmi != null && !cmi.equals(mCurrentCallMethodInfo)) {
             mCurrentCallMethodInfo = cmi;
+            final DialerPhoneNumberListAdapter adapter
+                    = (DialerPhoneNumberListAdapter) getAdapter();
+            if (adapter != null) {
+                adapter.setCurrentCallMethod(cmi);
+            }
             setupEmptyView();
             setAdditionalMimeTypeSearch(cmi.mMimeType);
             reloadData();
