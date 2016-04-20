@@ -46,6 +46,8 @@ import android.telephony.TelephonyManager;
 import android.test.AndroidTestCase;
 import android.test.mock.MockContext;
 
+import com.android.contacts.common.compat.CallSdkCompat;
+
 /**
  * Unit tests for {@link ExternalCallNotifier}.
  */
@@ -168,7 +170,7 @@ public class ExternalCallNotifierTest extends AndroidTestCase {
         mExternalCallNotifier.onExternalCallAdded(call.getCall());
         verifyNotificationPosted();
 
-        call.setCapabilities(android.telecom.Call.Details.CAPABILITY_CAN_PULL_CALL);
+        call.setCapabilities(CallSdkCompat.Details.CAPABILITY_CAN_PULL_CALL);
         mExternalCallNotifier.onExternalCallUpdated(call.getCall());
 
         ArgumentCaptor<Notification> notificationCaptor =
@@ -198,8 +200,8 @@ public class ExternalCallNotifierTest extends AndroidTestCase {
                 TelecomManager.PRESENTATION_ALLOWED, /* callerDisplayNamePresentation */
                 new PhoneAccountHandle(new ComponentName("test", "class"),
                         "handle"), /* accountHandle */
-                canPull ? android.telecom.Call.Details.CAPABILITY_CAN_PULL_CALL : 0, /* capabilities */
-                Call.Details.PROPERTY_IS_EXTERNAL_CALL, /* properties */
+                canPull ? CallSdkCompat.Details.CAPABILITY_CAN_PULL_CALL : 0, /* capabilities */
+                CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL, /* properties */
                 null, /* disconnectCause */
                 0, /* connectTimeMillis */
                 null, /* GatewayInfo */

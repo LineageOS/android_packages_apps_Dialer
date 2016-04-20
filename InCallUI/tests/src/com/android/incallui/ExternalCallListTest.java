@@ -24,6 +24,8 @@ import android.telecom.*;
 import android.telecom.Call;
 import android.test.AndroidTestCase;
 
+import com.android.contacts.common.compat.CallSdkCompat;
+
 import java.lang.reflect.Constructor;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -87,7 +89,7 @@ public class ExternalCallListTest extends AndroidTestCase {
     }
 
     public void testAddCallSuccess() {
-        TestTelecomCall call = getTestCall(Call.Details.PROPERTY_IS_EXTERNAL_CALL);
+        TestTelecomCall call = getTestCall(CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
         mExternalCallList.onCallAdded(call.getCall());
         assertTrue(mExternalCallListener.awaitCallAdded());
     }
@@ -102,7 +104,7 @@ public class ExternalCallListTest extends AndroidTestCase {
     }
 
     public void testUpdateCall() {
-        TestTelecomCall call = getTestCall(Call.Details.PROPERTY_IS_EXTERNAL_CALL);
+        TestTelecomCall call = getTestCall(CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
         mExternalCallList.onCallAdded(call.getCall());
         assertTrue(mExternalCallListener.awaitCallAdded());
 
@@ -111,7 +113,7 @@ public class ExternalCallListTest extends AndroidTestCase {
     }
 
     public void testRemoveCall() {
-        TestTelecomCall call = getTestCall(Call.Details.PROPERTY_IS_EXTERNAL_CALL);
+        TestTelecomCall call = getTestCall(CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
         mExternalCallList.onCallAdded(call.getCall());
         assertTrue(mExternalCallListener.awaitCallAdded());
 
@@ -128,7 +130,7 @@ public class ExternalCallListTest extends AndroidTestCase {
                 TelecomManager.PRESENTATION_ALLOWED, /* callerDisplayNamePresentation */
                 new PhoneAccountHandle(new ComponentName("test", "class"),
                         "handle"), /* accountHandle */
-                Call.Details.CAPABILITY_CAN_PULL_CALL, /* capabilities */
+                CallSdkCompat.Details.CAPABILITY_CAN_PULL_CALL, /* capabilities */
                 properties, /* properties */
                 null, /* disconnectCause */
                 0, /* connectTimeMillis */
