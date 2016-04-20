@@ -64,6 +64,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/view_note_action"
+        style="@style/CallLogActionStyle">
+
+        <ImageView
+            android:id="@+id/view_note_action_icon"
+            style="@style/CallLogActionIconStyle" />
+
+        <TextView
+            style="@style/CallLogActionTextStyle"
+            android:text="@string/search_shortcut_view_note" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/create_new_contact_action"
         style="@style/CallLogActionStyle">
 

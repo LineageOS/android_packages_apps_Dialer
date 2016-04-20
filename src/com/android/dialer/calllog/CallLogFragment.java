@@ -313,6 +313,15 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
         String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() {
+            @Override
+            public void onViewRecycled(RecyclerView.ViewHolder holder) {
+                if (holder instanceof CallLogListItemViewHolder) {
+                    final CallLogListItemViewHolder views = (CallLogListItemViewHolder) holder;
+                    mAdapter.mDeepLinkCache.clearPendingQueries(views.number, views.callTimes);
+                }
+            }
+        });
 
         fetchCalls();
         return view;
