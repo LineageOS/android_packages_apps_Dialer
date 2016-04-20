@@ -172,4 +172,11 @@
 
     <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
     <string name="recentCalls_empty_action_cm">Make a call</string>
+
+    <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+    <string name="search_shortcut_view_note">View note</string>
+
+    <!-- Note DeepLink mod settings summary in Dialer -->
+    <string name="note_mod_settings_summary">Take notes from anywhere</string>
+
 </resources>
