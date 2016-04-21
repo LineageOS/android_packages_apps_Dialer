@@ -385,7 +385,9 @@ public class ContactInfoHelper {
                 needsUpdate = true;
             }
 
-            if (!TextUtils.equals(updatedInfo.label, callLogInfo.label)) {
+            // Only replace the label if the new updated label isn't empty.
+            if (!TextUtils.isEmpty(updatedInfo.label) &&
+                    !TextUtils.equals(updatedInfo.label, callLogInfo.label)) {
                 values.put(Calls.CACHED_NUMBER_LABEL, updatedInfo.label);
                 needsUpdate = true;
             }
