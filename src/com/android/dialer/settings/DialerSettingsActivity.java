@@ -159,6 +159,22 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
                 target.add(phoneAccountSettingsHeader);
             }
+
+            if (telephonyManager.isTtyModeSupported()
+                    || telephonyManager.isHearingAidCompatibilitySupported()) {
+                Header accessibilitySettingsHeader = new Header();
+                Intent accessibilitySettingsIntent =
+                        new Intent(TelecomManager.ACTION_SHOW_CALL_ACCESSIBILITY_SETTINGS);
+                accessibilitySettingsHeader.titleRes = R.string.accessibility_settings_title;
+                accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
+                target.add(accessibilitySettingsHeader);
+            }
+
+            Header speedDialHeader = new Header();
+            Intent speedDialIntent = new Intent("com.android.phone.action.SPEED_DIAL_SETTINGS");
+            speedDialHeader.titleRes = R.string.speed_dial_settings;
+            speedDialHeader.intent = speedDialIntent;
+            target.add(speedDialHeader);
         }
 
         if (mSelectedProvider != null && mSelectedProviderInfo != null) {
@@ -180,12 +196,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
             blockHidden.summaryRes = R.string.block_hidden_summary;
             target.add(blockHidden);
         }
-
-        Header speedDialHeader = new Header();
-        Intent speedDialIntent = new Intent("com.android.phone.action.SPEED_DIAL_SETTINGS");
-        speedDialHeader.titleRes = R.string.speed_dial_settings;
-        speedDialHeader.intent = speedDialIntent;
-        target.add(speedDialHeader);
 
         if (mCallProviders != null) {
             for (CallMethodInfo cmi : mCallProviders) {
@@ -213,8 +223,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 }
             }
         }
-
-
 
         // invalidateHeaders does not rebuild
         // the list properly, so if an adapter is present already
