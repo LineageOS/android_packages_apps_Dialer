@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_7378e3f7",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-21T00:18:28Z",
+      "side": 1,
+      "message": "extra white space",
+      "revId": "0bc1149f560d908a77b696a4989b6ea6565feccd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
