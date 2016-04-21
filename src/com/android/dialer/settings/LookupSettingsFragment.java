@@ -154,6 +154,11 @@ public class LookupSettingsFragment extends PreferenceFragment
     }
 
     private void restoreLookupProvider(ListPreference pref, String key) {
+        if (pref.getEntries().length < 1) {
+            pref.setEnabled(false);
+            return;
+        }
+
         final ContentResolver cr = getActivity().getContentResolver();
         String provider = CMSettings.System.getString(cr, key);
         if (provider == null) {
