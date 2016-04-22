@@ -16,6 +16,24 @@
       "revId": "416100f010119e244d8cd2aeeffe74821e3d1acc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_bc9f07b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-04-22T18:18:41Z",
+      "side": 1,
+      "message": "I\u0027ve historically ignored the line length rules for stack traces with the rationale that I would rather have a readable stack than one that adheres to a cosmetic line limit.\n\nSince there isn\u0027t a strict rule around the inclusion of stack traces in commit messages, I open to arguments for either.",
+      "parentUuid": "5faad753_3c66b7ef",
+      "revId": "416100f010119e244d8cd2aeeffe74821e3d1acc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
