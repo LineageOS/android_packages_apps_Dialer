@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_3c66b7ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-22T18:14:28Z",
+      "side": 1,
+      "message": "How do the commit line length rules apply in this case?",
+      "revId": "416100f010119e244d8cd2aeeffe74821e3d1acc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
