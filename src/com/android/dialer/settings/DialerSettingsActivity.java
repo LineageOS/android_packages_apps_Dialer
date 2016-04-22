@@ -38,11 +38,24 @@ import java.util.List;
 
 public class DialerSettingsActivity extends AppCompatPreferenceActivity {
     protected SharedPreferences mPreferences;
+    private boolean migrationStatusOnBuildHeaders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*
+         * The headers need to be recreated if the migration status changed between when the headers
+         * were created and now.
+         */
+        if (migrationStatusOnBuildHeaders != FilteredNumberCompat.hasMigratedToNewBlocking()) {
+            invalidateHeaders();
+        }
     }
 
     @Override
@@ -99,6 +112,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
             blockedCallsHeader.intent = FilteredNumberCompat.createManageBlockedNumbersIntent(this);
             target.add(blockedCallsHeader);
+            migrationStatusOnBuildHeaders = FilteredNumberCompat.hasMigratedToNewBlocking();
         }
         if (isPrimaryUser
                 && (TelephonyManagerCompat.isTtyModeSupported(telephonyManager)

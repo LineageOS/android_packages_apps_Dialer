@@ -322,10 +322,25 @@
         <item name="android:textColor">@color/dialer_flat_button_text_color</item>
     </style>
 
+    <!-- Style for the 'primary' button in a view. Unlike the DialerFlatButtonStyle, this button -->
+    <!-- is not colored white, to draw more attention to it. -->
+    <style name="DialerPrimaryFlatButtonStyle" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/selectable_primary_flat_button</item>
+        <item name="android:paddingEnd">@dimen/button_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/button_horizontal_padding</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <style name="BlockedNumbersDescriptionTextStyle">
         <item name="android:lineSpacingMultiplier">1.43</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textSize">@dimen/blocked_number_settings_description_text_size</item>
+    </style>
+
+    <style name="FullWidthDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 </resources>
