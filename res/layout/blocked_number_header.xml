@@ -61,7 +61,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/blocked_number_text_view"
                 style="@android:style/TextAppearance.Material.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -117,6 +117,51 @@
                     android:background="@color/divider_line_color"/>
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/migrate_promo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/migrate_promo_header"
+                    style="@android:style/TextAppearance.Material.Subhead"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingStart="@dimen/blocked_number_container_padding"
+                    android:paddingEnd="@dimen/blocked_number_container_padding"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:text="@string/migrate_blocked_numbers_dialog_title"
+                    android:textColor="@color/blocked_number_header_color"/>
+
+                <TextView
+                  android:id="@+id/migrate_promo_description"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="@dimen/blocked_number_container_padding"
+                  android:layout_marginEnd="@dimen/blocked_number_container_padding"
+                  android:layout_marginBottom="@dimen/blocked_number_container_padding"
+                  android:text="@string/migrate_blocked_numbers_dialog_message"
+                  android:textColor="@color/secondary_text_color"/>
+
+                <Button
+                  android:id="@+id/migrate_promo_allow_button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/migrate_blocked_numbers_dialog_allow_button"
+                  android:layout_marginStart="@dimen/blocked_number_container_padding"
+                  android:layout_marginEnd="@dimen/blocked_number_container_padding"
+                  android:layout_gravity="end"
+                  style="@style/DialerPrimaryFlatButtonStyle"
+                  android:layout_marginBottom="@dimen/blocked_number_container_padding"/>
+
+                <View
+                  style="@style/FullWidthDivider"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/add_number_linear_layout"
