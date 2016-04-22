@@ -320,6 +320,10 @@ public class InCallMetricsHelper {
      */
     public static void increaseCountOfMetric(ComponentName cn, Events event, Categories cat,
                                              Parameters param) {
+        if (cn == null) {
+            // this is only null if we do not have a sim card.
+            return;
+        }
         HashMap<Parameters, Object> metricsData = getStoredEventParams(cn, cat, event);
         metricsData.put(param, increaseCount(metricsData,param));
         storeEvent(cn, cat, event, metricsData);
