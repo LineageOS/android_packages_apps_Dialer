@@ -16,6 +16,7 @@
 
 package com.android.dialer.compat;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 
 import android.app.FragmentManager;
@@ -66,6 +67,8 @@ public class FilteredNumberCompat {
     protected static final String HAS_MIGRATED_TO_NEW_BLOCKING_KEY = "migratedToNewBlocking";
 
     private static Boolean isEnabledForTest;
+
+    private static Context contextForTest;
 
     /**
      * @return The column name for ID in the filtered number database.
@@ -154,13 +157,19 @@ public class FilteredNumberCompat {
      */
     @NeededForTesting
     public static void setHasMigratedToNewBlocking(boolean hasMigrated) {
-        PreferenceManager.getDefaultSharedPreferences(DialerApplication.getContext()).edit()
+        PreferenceManager.getDefaultSharedPreferences(
+                MoreObjects.firstNonNull(contextForTest, DialerApplication.getContext())).edit()
                 .putBoolean(HAS_MIGRATED_TO_NEW_BLOCKING_KEY, hasMigrated).apply();
     }
 
     @NeededForTesting
     public static void setIsEnabledForTest(Boolean isEnabled) {
         isEnabledForTest = isEnabled;
+    }
+
+    @NeededForTesting
+    public static void setContextForTest(Context context) {
+        contextForTest = context;
     }
 
     /**
