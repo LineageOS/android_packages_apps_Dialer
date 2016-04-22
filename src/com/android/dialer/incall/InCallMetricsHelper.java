@@ -320,6 +320,9 @@ public class InCallMetricsHelper {
      */
     public static void increaseCountOfMetric(ComponentName cn, Events event, Categories cat,
                                              Parameters param) {
+        if (cn == null) {
+            return;
+        }
         HashMap<Parameters, Object> metricsData = getStoredEventParams(cn, cat, event);
         metricsData.put(param, increaseCount(metricsData,param));
         storeEvent(cn, cat, event, metricsData);
