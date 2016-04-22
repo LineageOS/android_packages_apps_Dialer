@@ -125,7 +125,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 null, null, null);
     }
 
-    public final void hasBlockedNumbers(final OnHasBlockedNumbersListener listener) {
+    public void hasBlockedNumbers(final OnHasBlockedNumbersListener listener) {
         startQuery(NO_TOKEN,
                 new Listener() {
                     @Override
