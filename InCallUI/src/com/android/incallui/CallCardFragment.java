@@ -45,6 +45,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -1154,12 +1155,20 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (getView() != null && getView().getParent() != null) {
+                if (getView() != null && getView().getParent() != null &&
+                        isAccessibilityEnabled(getContext())) {
                     AccessibilityEvent event = AccessibilityEvent.obtain(
                             AccessibilityEvent.TYPE_ANNOUNCEMENT);
                     dispatchPopulateAccessibilityEvent(event);
                     getView().getParent().requestSendAccessibilityEvent(getView(), event);
                 }
+            }
+
+            private boolean isAccessibilityEnabled(Context context) {
+                AccessibilityManager accessibilityManager =
+                        (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+                return accessibilityManager != null && accessibilityManager.isEnabled();
+
             }
         }, ACCESSIBILITY_ANNOUNCEMENT_DELAY_MS);
     }
