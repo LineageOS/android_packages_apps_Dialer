@@ -254,7 +254,8 @@ public class MissedCallNotifier {
         intent.setAction(
                 CallLogNotificationsService.ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION);
         intent.putExtra(CallLogNotificationsService.EXTRA_MISSED_CALL_NUMBER, number);
-        return PendingIntent.getService(mContext, 0, intent, 0);
+        // Use FLAG_ONE_SHOT to avoid reusing previous PendingIntent with different number.
+        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     private PendingIntent createSendSmsFromNotificationPendingIntent(String number) {
@@ -262,7 +263,8 @@ public class MissedCallNotifier {
         intent.setAction(
                 CallLogNotificationsService.ACTION_SEND_SMS_FROM_MISSED_CALL_NOTIFICATION);
         intent.putExtra(CallLogNotificationsService.EXTRA_MISSED_CALL_NUMBER, number);
-        return PendingIntent.getService(mContext, 0, intent, 0);
+        // Use FLAG_ONE_SHOT to avoid reusing previous PendingIntent with different number.
+        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_ONE_SHOT);
     }
 
     /**
