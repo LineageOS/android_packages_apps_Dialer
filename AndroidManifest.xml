@@ -211,18 +211,6 @@
             android:exported="true"
         />
 
-        <!-- Used to filter contacts list by account -->
-        <activity
-            android:name="com.android.contacts.common.list.AccountFilterActivity"
-            android:label="@string/activity_title_contacts_filter"
-            android:theme="@style/ContactListFilterTheme"/>
-
-        <!-- Used to select display and sync groups -->
-        <activity
-            android:name="com.android.contacts.common.list.CustomContactListFilterActivity"
-            android:label="@string/custom_list_filter"
-            android:theme="@style/ContactListFilterTheme"/>
-
         <activity
             android:name="com.android.contacts.common.activity.RequestImportVCardPermissionsActivity"
             android:label="@string/launcherActivityLabel"
