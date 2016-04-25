@@ -47,6 +47,7 @@ import android.text.TextUtils;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
+import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.BitmapUtil;
@@ -192,8 +193,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     }
 
     private void showNotification(final Call call) {
-        final boolean isIncoming = (call.getState() == Call.State.INCOMING ||
-                call.getState() == Call.State.CALL_WAITING);
+        final boolean isGeocoderLocationNeeded = (call.getState() == Call.State.INCOMING ||
+                call.getState() == Call.State.CALL_WAITING ||
+                call.getState() == Call.State.DIALING ||
+                call.getState() == Call.State.CONNECTING ||
+                call.getState() == Call.State.SELECT_PHONE_ACCOUNT);
+        Log.d(this, "showNotification isGeocoderLocationNeeded = " + isGeocoderLocationNeeded);
         if (!TextUtils.isEmpty(mCallId)) {
             CallList.getInstance().removeCallUpdateListener(mCallId, this);
         }
@@ -205,7 +210,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // This callback will always get called immediately and synchronously with whatever data
         // it has available, and may make a subsequent call later (same thread) if it had to
         // call into the contacts provider for more data.
-        mContactInfoCache.findInfo(call, isIncoming, new ContactInfoCacheCallback() {
+        mContactInfoCache.findInfo(call, isGeocoderLocationNeeded, new ContactInfoCacheCallback() {
             @Override
             public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
                 Call call = CallList.getInstance().getCallById(callId);
@@ -430,14 +435,19 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         if (call.isConferenceCall() || call.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)) {
             return mContext.getResources().getString(R.string.card_title_conf_call);
         }
-
-        String preferredName = ContactDisplayUtils.getPreferredDisplayName(contactInfo.namePrimary,
-                    contactInfo.nameAlternative, mContactsPreferences);
-        if (TextUtils.isEmpty(preferredName)) {
-            return TextUtils.isEmpty(contactInfo.number) ? null : BidiFormatter.getInstance()
-                    .unicodeWrap(contactInfo.number, TextDirectionHeuristics.LTR);
+        if (TextUtils.isEmpty(contactInfo.namePrimary)) {
+            String contactNumberDisplayed = TextUtils.isEmpty(contactInfo.number) ?
+                    "" : contactInfo.number.toString();
+            String location_info = GeoUtil.getGeocodedLocationFor(mContext, contactNumberDisplayed);
+            if (!TextUtils.isEmpty(location_info)){
+                contactNumberDisplayed =  contactNumberDisplayed + " " + location_info;
+            }
+            return TextUtils.isEmpty(contactNumberDisplayed) ? null
+                    : BidiFormatter.getInstance().unicodeWrap(
+                    contactNumberDisplayed, TextDirectionHeuristics.LTR);
         }
-        return preferredName;
+
+        return contactInfo.namePrimary;
     }
 
     private void addPersonReference(Notification.Builder builder, ContactCacheEntry contactInfo,
