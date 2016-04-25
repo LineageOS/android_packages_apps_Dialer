@@ -80,7 +80,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
      *   0-98   KitKat
      * </pre>
      */
-    public static final int DATABASE_VERSION = 70006;
+    public static final int DATABASE_VERSION = 70007;
     public static final String DATABASE_NAME = "dialer.db";
 
     /**
@@ -121,6 +121,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         static final String LAST_SMARTDIAL_UPDATE_TIME = "last_smartdial_update_time";
         static final String MIMETYPE = "mimetype";
         static final String PHONE_TYPE = "phone_type";
+        static final String PHONE_LABEL = "phone_label";
     }
 
     public static interface PrefixColumns extends BaseColumns {
@@ -267,9 +268,10 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         public final long photoId;
         public final String mimeType;
         public final int phoneType;
+        public final String phoneLabel;
 
         public ContactNumber(long id, long dataID, String displayName, String phoneNumber,
-                String lookupKey, long photoId, String mimeType, int phoneType) {
+                String lookupKey, long photoId, String mimeType, int phoneType, String phoneLabel) {
             this.dataId = dataID;
             this.id = id;
             this.displayName = displayName;
@@ -278,12 +280,13 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             this.photoId = photoId;
             this.mimeType = mimeType;
             this.phoneType = phoneType;
+            this.phoneLabel = phoneLabel;
         }
 
         @Override
         public int hashCode() {
             return Objects.hashCode(id, dataId, displayName, phoneNumber, lookupKey, photoId,
-                    mimeType, phoneType);
+                    mimeType, phoneType, phoneLabel);
         }
 
         @Override
@@ -300,7 +303,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                         && Objects.equal(this.lookupKey, that.lookupKey)
                         && Objects.equal(this.photoId, that.photoId)
                         && Objects.equal(this.mimeType, that.mimeType)
-                        && Objects.equal(this.phoneType, that.phoneType);
+                        && Objects.equal(this.phoneType, that.phoneType)
+                        && Objects.equal(this.phoneLabel, that.phoneLabel);
 
             }
             return false;
@@ -427,7 +431,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 SmartDialDbColumns.IN_VISIBLE_GROUP + " INTEGER, " +
                 SmartDialDbColumns.IS_PRIMARY + " INTEGER, " +
                 SmartDialDbColumns.MIMETYPE + " TEXT, " +
-                SmartDialDbColumns.PHONE_TYPE + " INTEGER" +
+                SmartDialDbColumns.PHONE_TYPE + " INTEGER, " +
+                SmartDialDbColumns.PHONE_LABEL + " Text" +
                 ");");
 
         db.execSQL("CREATE TABLE " + Tables.PREFIX_TABLE + " (" +
@@ -750,8 +755,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                     SmartDialDbColumns.IS_PRIMARY + ", " +
                     SmartDialDbColumns.LAST_SMARTDIAL_UPDATE_TIME + ", " +
                     SmartDialDbColumns.MIMETYPE + ", " +
-                    SmartDialDbColumns.PHONE_TYPE + ") " +
-                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    SmartDialDbColumns.PHONE_TYPE + ", " +
+                    SmartDialDbColumns.PHONE_LABEL + ") " +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             final SQLiteStatement insert = db.compileStatement(sqlInsert);
 
             final String numberSqlInsert = "INSERT INTO " + Tables.PREFIX_TABLE + " (" +
@@ -804,6 +810,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 final String mimetype =
                         updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER_MIMETYPE);
                 insert.bindString(14, mimetype);
+
+                final String label = updatedContactCursor.getString(PhoneQuery.PHONE_LABEL);
+                if (label != null) {
+                    insert.bindString(16, label);
+                }
 
                 insert.executeInsert();
                 final String contactPhoneNumber =
@@ -1114,7 +1125,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 SmartDialDbColumns.CONTACT_ID + ", " +
                 SmartDialDbColumns.LOOKUP_KEY + ", " +
                 SmartDialDbColumns.PHONE_TYPE + ", " +
-                SmartDialDbColumns.MIMETYPE +
+                SmartDialDbColumns.MIMETYPE + ", " +
+                SmartDialDbColumns.PHONE_LABEL +
                 " FROM " + Tables.SMARTDIAL_TABLE +
                 " WHERE " + where.toString() +
                 " ORDER BY " + SmartDialSortingOrder.SORT_ORDER,
@@ -1136,6 +1148,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             final int columnLookupKey = 5;
             final int columnPhoneType = 6;
             final int columnMimetype = 7;
+            final int columnPhoneLabel = 8;
 
             if (DEBUG) {
                 stopWatch.lap("Found column IDs");
@@ -1155,6 +1168,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 final String lookupKey = cursor.getString(columnLookupKey);
                 final int phoneType = cursor.getInt(columnPhoneType);
                 final String mimeType = cursor.getString(columnMimetype);
+                final String phoneLabel = cursor.getString(columnPhoneLabel);
 
                 /**
                  * If the contact has either the name or number OR a username
@@ -1167,7 +1181,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 if (nameMatches || numberMatches) {
                     /** If a contact has not been added, add it to the result and the hash set.*/
                     result.add(new ContactNumber(id, dataID, displayName, phoneNumber, lookupKey,
-                            photoId, mimeType, phoneType));
+                            photoId, mimeType, phoneType, phoneLabel));
                     counter++;
                     if (DEBUG) {
                         stopWatch.lap("Added one result: Name: " + displayName);
