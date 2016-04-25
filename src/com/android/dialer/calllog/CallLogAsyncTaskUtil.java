@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.contacts.common.GeoUtil;
+import com.android.contacts.common.util.PhoneNumberHelper;
 import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
@@ -156,6 +157,10 @@ public class CallLogAsyncTaskUtil {
                     cursor.getString(CallDetailQuery.ACCOUNT_COMPONENT_NAME),
                     cursor.getString(CallDetailQuery.ACCOUNT_ID));
 
+            final boolean isInCallPluginContactId =
+                    ContactInfoHelper.isInCallPluginContactId(context, accountHandle, number,
+                            countryIso, cursor.getString(CallDetailQuery.PLUGIN_PACKAGE_NAME));
+
             // If this is not a regular number, there is no point in looking it up in the contacts.
             ContactInfoHelper contactInfoHelper =
                     new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context));
@@ -165,7 +170,8 @@ public class CallLogAsyncTaskUtil {
 
             ContactInfo info = ContactInfo.EMPTY;
             if (shouldLookupNumber) {
-                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso);
+                ContactInfo lookupInfo =
+                        contactInfoHelper.lookupNumber(number, countryIso, isInCallPluginContactId);
                 info = lookupInfo != null ? lookupInfo : ContactInfo.EMPTY;
             }
 
