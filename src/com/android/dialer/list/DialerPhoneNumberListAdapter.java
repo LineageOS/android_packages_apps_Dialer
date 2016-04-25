@@ -205,16 +205,13 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
     @Override
     public String getLabelType(Cursor c, int type) {
         if (type == ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM) {
-            final String providerLabel = c.getString(PhoneNumberListAdapter.PhoneQuery.PHONE_MIME_TYPE);
-            CallMethodInfo cmi = CallMethodHelper.getMethodForMimeType(providerLabel, false);
+            final String mimetype = c.getString(PhoneNumberListAdapter.PhoneQuery.PHONE_MIME_TYPE);
+            CallMethodInfo cmi = CallMethodHelper.getMethodForMimeType(mimetype, false);
             if (cmi != null) {
                 return cmi.mName;
-            } else {
-                return null;
             }
-        } else {
-            return null;
         }
+        return null;
     }
 
     private void assignShortcutToView(ContactListItemView v, int shortcutType, int position) {

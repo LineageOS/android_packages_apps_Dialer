@@ -58,6 +58,8 @@ public class CallStatsDetails implements Parcelable {
     public boolean isVoicemailNumber;
     public String displayNumber;
 
+    public boolean isInCallPluginContactId;
+
     public CallStatsDetails(CharSequence number, int numberPresentation,
             PhoneAccountHandle accountHandle, ContactInfo info,
             String countryIso, String geocode, long date) {
@@ -86,6 +88,7 @@ public class CallStatsDetails implements Parcelable {
         this.photoId = info.photoId;
         this.sourceType = info.sourceType;
         this.displayNumber = null;
+        this.isInCallPluginContactId = info.isInCallPluginContactId;
     }
 
     public void updateDisplayPropertiesIfNeeded(Context context) {
