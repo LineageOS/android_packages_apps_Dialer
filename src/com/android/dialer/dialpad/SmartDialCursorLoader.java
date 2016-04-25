@@ -116,6 +116,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
                 row[PhoneQuery.PHONE_NUMBER] = contact.phoneNumber;
                 row[PhoneQuery.PHONE_MIME_TYPE] = contact.mimeType;
                 row[PhoneQuery.PHONE_TYPE] = contact.phoneType;
+                row[PhoneQuery.PHONE_LABEL] = contact.phoneLabel;
                 cursor.addRow(row);
             }
         }
