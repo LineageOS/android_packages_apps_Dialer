@@ -486,7 +486,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
-        final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(c);
+        final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(mContext, c);
         final boolean isVoicemailNumber =
                 mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
 
