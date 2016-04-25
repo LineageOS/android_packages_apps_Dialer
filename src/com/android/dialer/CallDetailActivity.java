@@ -31,6 +31,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -209,8 +210,23 @@ public class CallDetailActivity extends Activity
          */
         private CharSequence getNumberTypeOrLocation(PhoneCallDetails details) {
             if (!TextUtils.isEmpty(details.name)) {
-                return Phone.getTypeLabel(mResources, details.numberType,
-                        details.numberLabel);
+                CharSequence label = null;
+                if (details.numberType == Phone.TYPE_CUSTOM &&
+                        !PhoneNumberUtils.isGlobalPhoneNumber(details.number.toString())) {
+                    CallMethodInfo cmi = null;
+                    if (details.inCallComponentName != null) {
+                        cmi = CallMethodHelper.getCallMethod(details.inCallComponentName);
+                    }
+                    if (cmi != null) {
+                        label = cmi.mName;
+                    }
+                }
+
+                if (TextUtils.isEmpty(label)) {
+                    label = Phone.getTypeLabel(mResources, details.numberType, details.numberLabel);
+                }
+
+                return label;
             } else {
                 return details.geocode;
             }

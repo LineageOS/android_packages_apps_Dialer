@@ -56,6 +56,14 @@ import org.json.JSONObject;
 public class ContactInfoHelper {
     private static final String TAG = ContactInfoHelper.class.getSimpleName();
 
+    /**
+     * If this boolean parameter is set to true, then the appended query is treated as a
+     * InCallApi plugin contact ID and the lookup will be performed against InCallApi contacts in
+     * the user's contacts.
+     */
+    // TODO: Move this to a more central place
+    private static final String QUERY_PARAMETER_INCALLAPI_ID = "incallapi_contactid";
+
     private final Context mContext;
     private final String mCurrentCountryIso;
     private final LookupProvider mLookupProvider;
@@ -85,7 +93,8 @@ public class ContactInfoHelper {
      * @param number the number to look up
      * @param countryIso the country associated with this number
      */
-    public ContactInfo lookupNumber(String number, String countryIso) {
+    public ContactInfo lookupNumber(String number, String countryIso,
+            boolean isInCallPluginContactId) {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
@@ -100,13 +109,14 @@ public class ContactInfoHelper {
                 // actually the phone number of a contact.
                 String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
                 if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
-                    sipInfo = queryContactInfoForPhoneNumber(username, countryIso);
+                    sipInfo = queryContactInfoForPhoneNumber(username, countryIso, false);
                 }
             }
             info = sipInfo;
         } else {
             // Look for a contact that has the given phone number.
-            ContactInfo phoneInfo = queryContactInfoForPhoneNumber(number, countryIso);
+            ContactInfo phoneInfo =
+                    queryContactInfoForPhoneNumber(number, countryIso, isInCallPluginContactId);
 
             if (phoneInfo == null || phoneInfo == ContactInfo.EMPTY) {
                 // Check whether the phone number has been saved as an "Internet call" number.
@@ -264,7 +274,8 @@ public class ContactInfoHelper {
      * <p>
      * If the lookup fails for some other reason, it returns null.
      */
-    private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso) {
+    private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso,
+            boolean isInCallPluginContactId) {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
@@ -280,9 +291,11 @@ public class ContactInfoHelper {
         }
 
         // The "contactNumber" is a regular phone number, so use the PhoneLookup table.
-        Uri uri = Uri.withAppendedPath(PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
-                Uri.encode(contactNumber));
-        ContactInfo info = lookupContactFromUri(uri);
+        Uri.Builder uriBuilder = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI.buildUpon();
+        uriBuilder.appendPath(Uri.encode(contactNumber));
+        uriBuilder.appendQueryParameter(QUERY_PARAMETER_INCALLAPI_ID,
+                String.valueOf(isInCallPluginContactId));
+        ContactInfo info = lookupContactFromUri(uriBuilder.build());
         boolean isLocalContact = info != null && info != ContactInfo.EMPTY;
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
@@ -469,7 +482,7 @@ public class ContactInfoHelper {
      *
      * @param c A cursor pointing to an entry in the call log.
      */
-    public static ContactInfo getContactInfo(Cursor c) {
+    public static ContactInfo getContactInfo(Context context, Cursor c) {
         ContactInfo info = new ContactInfo();
 
         info.lookupUri = UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_LOOKUP_URI));
@@ -483,6 +496,14 @@ public class ContactInfoHelper {
         info.photoUri = UriUtils.nullForNonContactsUri(
                 UriUtils.parseUriOrNull(c.getString(CallLogQuery.CACHED_PHOTO_URI)));
         info.formattedNumber = c.getString(CallLogQuery.CACHED_FORMATTED_NUMBER);
+
+        final String componentString = c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
+        final String accountId = c.getString(CallLogQuery.ACCOUNT_ID);
+        final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
+        info.isInCallPluginContactId =
+                (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) &&
+                !PhoneNumberHelper.isValidNumber(context, info.number, countryIso) &&
+                !TextUtils.isEmpty(c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME));
 
         return info;
     }
