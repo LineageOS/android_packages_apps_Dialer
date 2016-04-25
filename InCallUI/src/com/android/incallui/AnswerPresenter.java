@@ -146,10 +146,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     @Override
     public void onUpgradeToVideo(Call call) {
         Log.d(this, "onUpgradeToVideo: " + this + " call=" + call);
-        if (getUi() == null) {
-            Log.d(this, "onUpgradeToVideo ui is null");
-            return;
-        }
+        showAnswerUi(true);
         boolean isUpgradePending = isVideoUpgradePending(call);
         InCallPresenter inCallPresenter = InCallPresenter.getInstance();
         if (isUpgradePending
