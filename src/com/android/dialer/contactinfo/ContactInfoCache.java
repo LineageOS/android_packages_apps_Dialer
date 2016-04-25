@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.util.ExpirableCache;
@@ -190,7 +191,8 @@ public class ContactInfoCache {
      * view to update its content.
      */
     private boolean queryContactInfo(String number, String countryIso, ContactInfo callLogInfo) {
-        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
+        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso,
+                callLogInfo.isInCallPluginContactId);
 
         if (info == null) {
             // The lookup failed, just return without requesting to update the view.
