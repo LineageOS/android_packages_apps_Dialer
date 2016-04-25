@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_bf2db447",
+        "filename": "src/com/android/dialer/discovery/DiscoveryEventHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T22:54:16Z",
+      "side": 1,
+      "message": "add a java doc comment here explaining true/false so this doesn\u0027t get confused again :P",
+      "revId": "44d9b82867d091e64913e6280d659f7986f55b30",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
