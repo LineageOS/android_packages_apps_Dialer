@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_fc201afa",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-25T19:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7c342a4b",
+      "range": {
+        "startLine": 521,
+        "startChar": 45,
+        "endLine": 521,
+        "endChar": 54
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_59e9457e",
         "filename": "src/com/android/dialer/DialerApplication.java",
         "patchSetId": 6
@@ -1011,6 +1035,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_fc6c9a9d",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-25T19:26:05Z",
+      "side": 1,
+      "message": "Yea can we chat on this?  I get the idea, but I\u0027d like to discuss a bit.",
+      "parentUuid": "5faad753_e81db5bd",
+      "range": {
+        "startLine": 42,
+        "startChar": 13,
+        "endLine": 42,
+        "endChar": 26
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8813e1b8",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 6
@@ -1022,6 +1070,30 @@
       "writtenOn": "2016-04-25T15:37:49Z",
       "side": 1,
       "message": "you should also borrow the redraw throttling from ContactInfoCache so that each DeepLink callback doesn\u0027t trigger a notifyDatasetChanged",
+      "range": {
+        "startLine": 45,
+        "startChar": 3,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_5c704e73",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-25T19:26:05Z",
+      "side": 1,
+      "message": "Ok, we\u0027re not going to clone that logic exactly - we\u0027ll have to check in the callback if the cache has an up to date link already or if we need to stash the new one.  Otherwise done.",
+      "parentUuid": "5faad753_8813e1b8",
       "range": {
         "startLine": 45,
         "startChar": 3,
