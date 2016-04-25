@@ -58,6 +58,8 @@ public class ContactInfo {
     public String lookupProviderName;
     public Drawable attributionDrawable;
 
+    public boolean isInCallPluginContactId;
+
     public static ContactInfo EMPTY = new ContactInfo();
 
     public int sourceType = 0;
