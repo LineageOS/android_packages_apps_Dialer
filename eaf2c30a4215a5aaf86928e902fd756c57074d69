@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_48aac985",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "To things:\n * Dialer has all of it\u0027s CM specific manifest changes in AndroidManifest_cm.xml (there\u0027s a merger that\u0027ll merge the two manifests at build time)\n * don\u0027t we need to the READ_DEEPLINK provider permission now too?",
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_287aed23",
+        "filename": "res/layout/call_log_list_item.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "style nit -\n * as with the other xml attributes in this file, i think its 4 spaces for attributes, not 8. seems like intellij used 8 spaces, might be an attribute you need to update?",
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e873754c",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "translations usually don\u0027t like camel-case, just finding this out recently. need to check in why that\u0027s the case.\n\nhttp://review.cyanogenmod.org/#/c/140614/1",
+      "range": {
+        "startLine": 521,
+        "startChar": 45,
+        "endLine": 521,
+        "endChar": 54
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_289f4d51",
+        "filename": "src/com/android/dialer/DialerApplication.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "shouldn\u0027t t his be done before the Trace.endSection()? since this is just another init?",
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a8bc9dbb",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "why this is fully qualified?",
+      "range": {
+        "startLine": 401,
+        "startChar": 69,
+        "endLine": 401,
+        "endChar": 87
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_48b169e1",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "same here, shouldn\u0027t have to be fully qualified.",
+      "range": {
+        "startLine": 406,
+        "startChar": 41,
+        "endLine": 406,
+        "endChar": 53
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_88dc4119",
+        "filename": "src/com/android/dialer/calllog/DeepLinkAssistant.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "use imports.",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 32
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a8e1fdd2",
+        "filename": "src/com/android/dialer/calllog/PhoneCallDetailsViews.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "use imports",
+      "range": {
+        "startLine": 74,
+        "startChar": 20,
+        "endLine": 74,
+        "endChar": 34
+      },
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_48e649eb",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-25T14:36:46Z",
+      "side": 1,
+      "message": "can we just consolidate this into stopProcesssing call?",
+      "revId": "eaf2c30a4215a5aaf86928e902fd756c57074d69",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
