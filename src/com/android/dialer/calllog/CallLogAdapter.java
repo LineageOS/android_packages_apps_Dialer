@@ -46,6 +46,7 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.ClipboardUtils;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.PhoneCallDetails;
@@ -55,6 +56,8 @@ import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListe
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
+import com.android.phone.common.incall.CallMethodHelper;
+import com.android.phone.common.incall.CallMethodInfo;
 
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
@@ -486,7 +489,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
-        final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(c);
+        final ContactInfo cachedContactInfo = mContactInfoHelper.getContactInfo(mContext, c);
         final boolean isVoicemailNumber =
                 mTelecomCallLogCache.isVoicemailNumber(accountHandle, number);
 
@@ -542,14 +545,27 @@ public class CallLogAdapter extends GroupingListAdapter
         // Stash away the Ids of the calls so that we can support deleting a row in the call log.
         views.callIds = getCallIds(c, count);
         views.isBusiness = mContactInfoHelper.isBusiness(info.sourceType);
-        views.numberType = (String) Phone.getTypeLabel(mContext.getResources(), details.numberType,
-                details.numberLabel);
         String component = c.getString(CallLogQuery.PLUGIN_PACKAGE_NAME);
         if (!TextUtils.isEmpty(component)) {
             views.inCallComponentName = ComponentName.unflattenFromString(component);
         } else {
             views.inCallComponentName = null;
         }
+
+        String callMethodName = null;
+        CallMethodInfo cmi = null;
+        if (views.inCallComponentName != null) {
+            cmi = CallMethodHelper.getCallMethod(views.inCallComponentName);
+            if (cmi != null) {
+                callMethodName = cmi.mName;
+            }
+        }
+
+        final String label = ContactDisplayUtils.getLabelForCall(mContext, number,
+                details.numberType, details.numberLabel, callMethodName);
+
+        views.numberType = label;
+        details.numberLabel = label;
 
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);

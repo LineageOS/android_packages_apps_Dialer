@@ -31,6 +31,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.VoicemailContract.Voicemails;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -49,6 +50,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
+import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.CallUtil;
@@ -209,8 +211,19 @@ public class CallDetailActivity extends Activity
          */
         private CharSequence getNumberTypeOrLocation(PhoneCallDetails details) {
             if (!TextUtils.isEmpty(details.name)) {
-                return Phone.getTypeLabel(mResources, details.numberType,
-                        details.numberLabel);
+                String callMethodName = null;
+                CallMethodInfo cmi = null;
+                if (details.inCallComponentName != null) {
+                    cmi = CallMethodHelper.getCallMethod(details.inCallComponentName);
+                    if (cmi != null) {
+                        callMethodName = cmi.mName;
+                    }
+                }
+
+                final String label = ContactDisplayUtils.getLabelForCall(getApplicationContext(),
+                        details.number.toString(), details.numberType,
+                        details.numberLabel, callMethodName);
+                return label;
             } else {
                 return details.geocode;
             }
