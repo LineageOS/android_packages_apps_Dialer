@@ -126,7 +126,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"Qo‘ng‘iroq: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Noma’lum"</string>
     <string name="voicemail" msgid="3851469869202611441">"Ovozli xabar"</string>
-    <string name="private_num" msgid="6374339738119166953">"Shaxsiy raqam"</string>
+    <string name="private_num" msgid="6374339738119166953">"Yashirin raqam"</string>
     <string name="payphone" msgid="7726415831153618726">"Taksofon"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> soniya"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> daq <xliff:g id="SECONDS">%s</xliff:g> son"</string>
