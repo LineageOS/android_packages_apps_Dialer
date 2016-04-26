@@ -11,6 +11,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.PhoneStateListener;
+import android.telephony.PreciseCallState;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.android.dialer.DialtactsActivity;
@@ -29,8 +30,8 @@ public class WifiCallStatusNudgeListener {
 
     private final static AtomicBoolean mReceiverRegistered = new AtomicBoolean(false);
     private final static int WIFI_STATE_DISABLED = 0;
-    private final static int CALL_STATE_IDLE = 1;
-    private final static int CALL_STATE_OFFHOOK = 2;
+    private final static int PRECISE_CALL_STATE_IDLE = 1;
+    private final static int PRECISE_CALL_STATE_DIALING = 2;
 
     private static Context mContext;
 
@@ -52,7 +53,8 @@ public class WifiCallStatusNudgeListener {
         @Override
         public void handleMessage(Message msg) {
             switch(msg.what) {
-                case CALL_STATE_OFFHOOK:
+                case PRECISE_CALL_STATE_DIALING:
+
                     ConnectivityManager connManager = (ConnectivityManager) mContext
                             .getSystemService(Context.CONNECTIVITY_SERVICE);
                     NetworkInfo mWifi
@@ -66,7 +68,7 @@ public class WifiCallStatusNudgeListener {
                         callOnWifiFailure();
                     }
                     break;
-                case CALL_STATE_IDLE:
+                case PRECISE_CALL_STATE_IDLE:
                     synchronized (mReceiverRegistered) {
                         if (mReceiverRegistered.get()) {
                             // We lasted the whole call
@@ -87,15 +89,22 @@ public class WifiCallStatusNudgeListener {
 
     private static PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            super.onCallStateChanged(state, incomingNumber);
-            if (state == TelephonyManager.CALL_STATE_IDLE) {
-                Message phoneStateMessage
-                        = mPhoneWifiStateHandler.obtainMessage(CALL_STATE_IDLE);
-                phoneStateMessage.sendToTarget();
-            } else if (state == TelephonyManager.CALL_STATE_OFFHOOK) {
-                Message phoneStateMessage
-                        = mPhoneWifiStateHandler.obtainMessage(CALL_STATE_OFFHOOK);
+        public void onPreciseCallStateChanged(PreciseCallState callState) {
+            int ringingState = callState.getForegroundCallState();
+            if (DEBUG) Log.v(TAG, "ringing state: " + ringingState);
+            Message phoneStateMessage = null;
+            switch (ringingState) {
+                case PreciseCallState.PRECISE_CALL_STATE_DIALING:
+                    phoneStateMessage
+                            = mPhoneWifiStateHandler.obtainMessage(PRECISE_CALL_STATE_DIALING);
+                    break;
+                case PreciseCallState.PRECISE_CALL_STATE_IDLE:
+                case PreciseCallState.PRECISE_CALL_STATE_DISCONNECTED:
+                    phoneStateMessage
+                            = mPhoneWifiStateHandler.obtainMessage(PRECISE_CALL_STATE_IDLE);
+                    break;
+            }
+            if (phoneStateMessage != null) {
                 phoneStateMessage.sendToTarget();
             }
         }
@@ -107,7 +116,7 @@ public class WifiCallStatusNudgeListener {
 
         TelephonyManager telephony
                 = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        telephony.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+        telephony.listen(mPhoneStateListener, PhoneStateListener.LISTEN_PRECISE_CALL_STATE);
     }
 
     private static void startReceiver() {
