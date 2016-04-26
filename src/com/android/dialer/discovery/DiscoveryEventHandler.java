@@ -91,7 +91,7 @@ public class DiscoveryEventHandler {
 
                             Bundle b = theEntry.getValue();
 
-                            if (validateShouldShowNudge(key, b) && !isTesting) {
+                            if (!validateShouldShowNudge(key, b) && !isTesting) {
                                 // Nudge not yet ready for this item.
                                 continue;
                             }
@@ -240,9 +240,8 @@ public class DiscoveryEventHandler {
             count = preferences.getInt(CallMethodUtils.PREF_WIFI_CALL, 1);
         }
 
-        checkCount =
-                count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_FIRST_NUDGE, 0) ||
-                count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_SECOND_NUDGE, 0);
+        checkCount = (count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_FIRST_NUDGE, 0)) ||
+                (count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_SECOND_NUDGE, 0));
 
         // return true if nudge should be shown
         return checkCount;
