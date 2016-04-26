@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_ffab2c72",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-26T01:46:41Z",
+      "side": 1,
+      "message": "move this to cm_AndroidManifest",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 9
+      },
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
