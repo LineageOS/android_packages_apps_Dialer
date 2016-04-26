@@ -16,6 +16,24 @@
       "revId": "ad045451cce4f0366a8193c77b20e1feb1d0b031",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_7508bd27",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-26T13:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_dfc2f0e9",
+      "revId": "ad045451cce4f0366a8193c77b20e1feb1d0b031",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
