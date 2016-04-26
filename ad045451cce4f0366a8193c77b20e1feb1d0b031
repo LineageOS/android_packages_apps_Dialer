@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_dfc2f0e9",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-04-26T04:22:43Z",
+      "side": 1,
+      "message": "Indention is off in those two lines (should be indented as line 496)",
+      "revId": "ad045451cce4f0366a8193c77b20e1feb1d0b031",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
