@@ -36,6 +36,8 @@ import android.util.Log;
 import com.android.contacts.common.util.UriUtils;
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.cyanogen.ambient.incall.CallLogConstants;
+
 import com.google.common.collect.Lists;
 
 import java.lang.ref.WeakReference;
@@ -137,9 +139,9 @@ public class CallStatsQueryHandler extends AsyncQueryHandler {
             }
         }
 
-        startQuery(QUERY_CALLS_TOKEN, null, Calls.CONTENT_URI, CallStatsQuery._PROJECTION,
-                selection.toString(), selectionArgs.toArray(EMPTY_STRING_ARRAY),
-                Calls.NUMBER + " ASC");
+        startQuery(QUERY_CALLS_TOKEN, null, CallLogConstants.CONTENT_ALL_URI,
+                CallStatsQuery._PROJECTION, selection.toString(),
+                selectionArgs.toArray(EMPTY_STRING_ARRAY), Calls.NUMBER + " ASC");
     }
 
     @Override
