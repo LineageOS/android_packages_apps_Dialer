@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_6ce6af19",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ffab2c72",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 9
+      },
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_7208d327",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 9
@@ -36,6 +60,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "To line 62",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_616c7b08",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7208d327",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_41737fe8",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_3fb1c490",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ffaa4c17",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 9
@@ -70,6 +130,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "views, mContext\n\n\n(Also can\u0027t place this in the holder and reuse?)",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c150cf35",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Good point, I think we can do that....\n\nDone.",
+      "parentUuid": "5faad753_ffaa4c17",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_e17f0ba9",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_5fae002f",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_1fa8881d",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 9
@@ -104,6 +200,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "Are we 100% certain this can\u0027t read past the end of the cursor? I feel we should try-catch or check the result of cursor.moveToNext() here.\n\n(Besides that, this looks unused and can be removed, right?)",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_017d87b0",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "It\u0027s a pretty direct clone of the other getCallXXX methods, except for times instead of other attributes.  If we\u0027re worried here we need to be worried on those as well I think.  See methods at line 711 and 730.  Willing to fix if we think its an issue.",
+      "parentUuid": "5faad753_1fa8881d",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_89cc3d8a",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_bf629415",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_920d4f39",
         "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
         "patchSetId": 9
@@ -138,6 +270,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "To line 61",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e9a051a8",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_920d4f39",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_09a60dc3",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_df675025",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_7f6c1c08",
         "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
         "patchSetId": 9
@@ -172,6 +340,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "...action) {",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_69946145",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7f6c1c08",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -195,6 +381,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_89919d55",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_3f76a4da",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_9f71d8e3",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 9
@@ -206,6 +410,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "Can omit this here",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_299e6963",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_9f71d8e3",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -229,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_e9893126",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_5f7360e8",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_1f7de8b0",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 9
@@ -240,6 +480,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "Should import android.view.View, then the line wrap becomes unnecessary\n\n(also, why not call updateViews() here?)",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_69278114",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_1f7de8b0",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -263,6 +521,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_09cccd33",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_bf4b7485",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_df50b035",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 9
@@ -274,6 +550,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "Can omit the package name, it\u0027s already imported.",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_89d75dc0",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_df50b035",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -297,6 +591,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_29e429ac",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_9f4a387e",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_3f5f8442",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 9
@@ -308,6 +620,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "uris.add(DeepLinkIntegrationManager.generateCallUri(...));",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_49e1659a",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_3f5f8442",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -331,6 +661,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_e9eff184",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7f45fc6f",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_5f5cc04a",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 9
@@ -342,6 +690,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "mDeepLinkCallback",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a99ed904",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_5f5cc04a",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -365,6 +731,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c9a3154f",
+        "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_1f56482b",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ff580c57",
         "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
         "patchSetId": 9
@@ -376,6 +760,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "To line 23",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6988e1c5",
+        "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ff580c57",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -399,6 +801,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_89851db0",
+        "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_bf305409",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_b2fe4b03",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -410,6 +830,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "mIgnoredRequests",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8c70cb74",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_b2fe4b03",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -433,6 +871,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_498f25cc",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_bf893427",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_df3510f9",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -444,6 +900,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "if (",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2992e9f7",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_df3510f9",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -467,6 +941,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_09c36def",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7f3adce7",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_9f3f98d5",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -484,6 +976,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_ecd13f59",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_9f3f98d5",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_3f2464c6",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -495,6 +1005,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "if (",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_0cd7fb4d",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_3f2464c6",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -535,6 +1063,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_accb47a3",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ff2d6ca8",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_1f2ba894",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -546,6 +1092,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "Unneeded line wrap",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6cc54f8e",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_1f2ba894",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -569,6 +1133,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8cc20b85",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_bf193489",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_df1e706f",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -580,6 +1162,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "if (",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2cbf57fc",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_df1e706f",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -603,6 +1203,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4cbc1305",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_7f13bc67",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_9f18f881",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -614,6 +1232,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "if (",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ec361fb5",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_9f18f881",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -637,6 +1273,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_0c3cdb91",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_3f0d443e",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_5f0a8026",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -648,6 +1302,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "for (Uri uri : ...)",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ac402709",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_5f0a8026",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -671,6 +1343,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4c5173d8",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ff06cc20",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_1f040817",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 9
@@ -688,6 +1378,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_ec5fffe2",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_1f040817",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_d203c70c",
         "filename": "src/com/android/dialer/deeplink/DeepLinkListener.java",
         "patchSetId": 9
@@ -699,6 +1407,24 @@
       "writtenOn": "2016-04-26T04:42:33Z",
       "side": 1,
       "message": "Why not put this interface into DeepLinkCache?",
+      "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6c730f82",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkListener.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-27T22:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_d203c70c",
       "revId": "f85cf01cbf2dc40e35b0774971b5162020d6273d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
