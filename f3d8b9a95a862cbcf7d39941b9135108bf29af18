@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_c1a52fb7",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "Been said before, please use the CM specific manifest.",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 93
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8188971f",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "space between parameters",
+      "range": {
+        "startLine": 573,
+        "startChar": 39,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_61831b06",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "potential to move past end of cursor",
+      "range": {
+        "startLine": 627,
+        "startChar": 12,
+        "endLine": 628,
+        "endChar": 32
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e1762b3f",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "space between \"if\" and \"(\"",
+      "range": {
+        "startLine": 322,
+        "startChar": 16,
+        "endLine": 322,
+        "endChar": 19
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c193ef4e",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "why was this moved?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 57
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6198fb69",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "before incall",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_819df75a",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "space between variable and next comment",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 7
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_419fff4f",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "if (mDeepLink !\u003d null)",
+      "range": {
+        "startLine": 403,
+        "startChar": 8,
+        "endLine": 403,
+        "endChar": 27
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e1ab8b72",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "why is DeepLinkIntegrationManager in incallui?",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 54
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_01a9077a",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "you\u0027re iterating over many links here, but always setting the same view.\nthis section needs to be rethought, or maybe even simply break out of the loop so you don\u0027t waste cycles here and set views attributes several times.",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 54,
+        "endChar": 13
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_61b1dbe1",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "perhaps this should be renamed to \"callUri\"",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 17
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_41c85f54",
+        "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "one of these imports is not like the others...",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a105937c",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T19:45:45Z",
+      "side": 1,
+      "message": "define this somewhere",
+      "range": {
+        "startLine": 127,
+        "startChar": 43,
+        "endLine": 127,
+        "endChar": 47
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
