@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c1bc4fbd",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_c6678525",
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_86718de3",
         "filename": "src/com/android/dialer/DialtactsActivity.java",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-27T17:01:18Z",
       "side": 1,
       "message": "lw",
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_81b657d9",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_86718de3",
       "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_21cbe353",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_e67f21a9",
+      "range": {
+        "startLine": 677,
+        "startChar": 12,
+        "endLine": 679,
+        "endChar": 44
+      },
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_067d9db0",
         "filename": "src/com/android/dialer/incall/CallMethodSpinnerHelper.java",
         "patchSetId": 15
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_e1c4eb42",
+        "filename": "src/com/android/dialer/incall/CallMethodSpinnerHelper.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_067d9db0",
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_a64b6985",
         "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
         "patchSetId": 15
@@ -87,6 +165,30 @@
       "writtenOn": "2016-04-27T17:01:18Z",
       "side": 1,
       "message": "parameters not aligned. this is why 8 sp is best",
+      "range": {
+        "startLine": 161,
+        "startChar": 33,
+        "endLine": 162,
+        "endChar": 85
+      },
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_01c26734",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_a64b6985",
       "range": {
         "startLine": 161,
         "startChar": 33,
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_a1dcb318",
+        "filename": "src/com/android/dialer/list/SmartDialSearchFragment.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_c650e535",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 143,
+        "endChar": 84
+      },
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_864aed7d",
         "filename": "src/com/android/dialer/list/SpeedDialFragment.java",
         "patchSetId": 15
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c1e1afd2",
+        "filename": "src/com/android/dialer/list/SpeedDialFragment.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_864aed7d",
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_265f7942",
         "filename": "src/com/android/dialer/list/SpeedDialFragment.java",
         "patchSetId": 15
@@ -150,6 +294,30 @@
       "writtenOn": "2016-04-27T17:01:18Z",
       "side": 1,
       "message": "get get get, get once, use three times. reduce reuse recycle",
+      "range": {
+        "startLine": 244,
+        "startChar": 15,
+        "endLine": 247,
+        "endChar": 55
+      },
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c10a0f89",
+        "filename": "src/com/android/dialer/list/SpeedDialFragment.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_265f7942",
       "range": {
         "startLine": 244,
         "startChar": 15,
@@ -185,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_61ff9b67",
+        "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_e6588157",
+      "range": {
+        "startLine": 95,
+        "startChar": 11,
+        "endLine": 97,
+        "endChar": 44
+      },
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_c63545f9",
         "filename": "src/com/android/dialer/util/CoachMarkDrawableHelper.java",
         "patchSetId": 15
@@ -196,6 +388,30 @@
       "writtenOn": "2016-04-27T17:01:18Z",
       "side": 1,
       "message": "this looks weird, reorganize by moving parameters around, or putting each statement on a new line",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 96
+      },
+      "revId": "2c79da8989a5967daef81bdb6acc355d7a9e7351",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8104177d",
+        "filename": "src/com/android/dialer/util/CoachMarkDrawableHelper.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_c63545f9",
       "range": {
         "startLine": 105,
         "startChar": 12,
