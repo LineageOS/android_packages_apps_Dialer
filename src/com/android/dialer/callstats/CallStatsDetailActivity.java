@@ -96,8 +96,10 @@ public class CallStatsDetailActivity extends Activity implements
 
         @Override
         protected void onPostExecute(ContactInfo info) {
-            mData.updateFromInfo(info);
-            updateData();
+            if (info != null) {
+                mData.updateFromInfo(info);
+                updateData();
+            }
         }
     }
 
