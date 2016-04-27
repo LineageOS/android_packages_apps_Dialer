@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_e69161f3",
+        "filename": "src/com/android/dialer/callstats/CallStatsDetailActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-27T16:41:55Z",
+      "side": 1,
+      "message": "not sure its worth updatingData if you didn\u0027t actually update data",
+      "revId": "251f9c6ce89b17e9403847bd1b90e9340ccaa67f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
