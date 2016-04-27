@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_21276315",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-04-27T19:49:51Z",
+      "side": 1,
+      "message": "you reuse this in CallDetailActivity, can we make this a method?",
+      "range": {
+        "startLine": 554,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 9
+      },
+      "revId": "30722fa509ba12f21711814a96251179a2781308",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
