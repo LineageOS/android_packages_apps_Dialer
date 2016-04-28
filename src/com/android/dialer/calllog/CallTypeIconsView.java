@@ -42,9 +42,10 @@ import java.util.List;
 public class CallTypeIconsView extends View {
     private List<Integer> mCallTypes = Lists.newArrayListWithCapacity(3);
     private boolean mShowVideo = false;
-    private Resources mResources;
     private int mWidth;
     private int mHeight;
+
+    private static Resources sResources;
 
     public CallTypeIconsView(Context context) {
         this(context, null);
@@ -52,7 +53,9 @@ public class CallTypeIconsView extends View {
 
     public CallTypeIconsView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mResources = new Resources(context);
+        if (sResources == null) {
+          sResources = new Resources(context);
+        }
     }
 
     public void clear() {
@@ -66,7 +69,7 @@ public class CallTypeIconsView extends View {
         mCallTypes.add(callType);
 
         final Drawable drawable = getCallTypeDrawable(callType);
-        mWidth += drawable.getIntrinsicWidth() + mResources.iconMargin;
+        mWidth += drawable.getIntrinsicWidth() + sResources.iconMargin;
         mHeight = Math.max(mHeight, drawable.getIntrinsicHeight());
         invalidate();
     }
@@ -79,8 +82,8 @@ public class CallTypeIconsView extends View {
     public void setShowVideo(boolean showVideo) {
         mShowVideo = showVideo;
         if (showVideo) {
-            mWidth += mResources.videoCall.getIntrinsicWidth();
-            mHeight = Math.max(mHeight, mResources.videoCall.getIntrinsicHeight());
+            mWidth += sResources.videoCall.getIntrinsicWidth();
+            mHeight = Math.max(mHeight, sResources.videoCall.getIntrinsicHeight());
             invalidate();
         }
     }
@@ -107,21 +110,21 @@ public class CallTypeIconsView extends View {
     private Drawable getCallTypeDrawable(int callType) {
         switch (callType) {
             case AppCompatConstants.CALLS_INCOMING_TYPE:
-                return mResources.incoming;
+                return sResources.incoming;
             case AppCompatConstants.CALLS_OUTGOING_TYPE:
-                return mResources.outgoing;
+                return sResources.outgoing;
             case AppCompatConstants.CALLS_MISSED_TYPE:
-                return mResources.missed;
+                return sResources.missed;
             case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
-                return mResources.voicemail;
+                return sResources.voicemail;
             case AppCompatConstants.CALLS_BLOCKED_TYPE:
-                return mResources.blocked;
+                return sResources.blocked;
             default:
                 // It is possible for users to end up with calls with unknown call types in their
                 // call history, possibly due to 3rd party call log implementations (e.g. to
                 // distinguish between rejected and missed calls). Instead of crashing, just
                 // assume that all unknown call types are missed calls.
-                return mResources.missed;
+                return sResources.missed;
         }
     }
 
@@ -138,14 +141,14 @@ public class CallTypeIconsView extends View {
             final int right = left + drawable.getIntrinsicWidth();
             drawable.setBounds(left, 0, right, drawable.getIntrinsicHeight());
             drawable.draw(canvas);
-            left = right + mResources.iconMargin;
+            left = right + sResources.iconMargin;
         }
 
         // If showing the video call icon, draw it scaled appropriately.
         if (mShowVideo) {
-            final Drawable drawable = mResources.videoCall;
-            final int right = left + mResources.videoCall.getIntrinsicWidth();
-            drawable.setBounds(left, 0, right, mResources.videoCall.getIntrinsicHeight());
+            final Drawable drawable = sResources.videoCall;
+            final int right = left + sResources.videoCall.getIntrinsicWidth();
+            drawable.setBounds(left, 0, right, sResources.videoCall.getIntrinsicHeight());
             drawable.draw(canvas);
         }
     }
