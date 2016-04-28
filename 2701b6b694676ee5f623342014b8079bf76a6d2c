@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_0fe28dd6",
+        "filename": "src/com/android/dialer/calllog/CallLogAsyncTaskUtil.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-28T14:17:43Z",
+      "side": 1,
+      "message": "define once somewhere common",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 162,
+        "endChar": 94
+      },
+      "revId": "2701b6b694676ee5f623342014b8079bf76a6d2c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8fcd1d5f",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-28T14:17:43Z",
+      "side": 1,
+      "message": "and here",
+      "range": {
+        "startLine": 504,
+        "startChar": 8,
+        "endLine": 507,
+        "endChar": 82
+      },
+      "revId": "2701b6b694676ee5f623342014b8079bf76a6d2c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
