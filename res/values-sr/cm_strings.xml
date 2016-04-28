@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Кинески (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Позив са црне листе</string>
-  <string name="menu_add_to_blacklist">Додај у листу блокираних саговорника</string>
-  <string name="toast_added_to_blacklist">%s додат на листу блокираних позива.</string>
-  <string name="toast_removed_from_blacklist">%s уклоњен са листе блокираних позиваоца.</string>
   <string name="call_log_action_block">Блокиран позиваоц</string>
   <string name="call_log_action_unblock">Позивалац је блокиран</string>
   <!--  for speed dial -->
@@ -98,11 +95,47 @@
   <string name="call_recording_category_title">Снимање позива</string>
   <string name="call_recording_format">Аудио формат</string>
   <string name="call_playback_no_app_found_toast">Нема пронађене апликације да пусти изабрани снимак.</string>
+  <string name="invalid_number_text">"%1$s не може да направи овај позив. Да ли је број тачан?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Можеш бирати телефонски број или\nпретражити контакте</string>
+  <string name="sign_in_hint_text">Пријави се да направиш %1$s позиве</string>
+  <string name="wifi_hint_text">Направи бесплатан %1$s да %1$s позиваш преко Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s је у ромингу. Направи бесплатан %2$s да %2$s поѕива преко Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Нема SIM-а. Само хитни позиви.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> позив</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> подешавање</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Позови користећи <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Да</string>
+  <string name="callerinfo_provider_auth_no">Не хвала</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> ће приступити твојим контактима, профилу и Cyanogen OS налогу што може укључити и твоју Е-пошту.</string>
+  <string name="callerinfo_provider_auth_learn_more">Сазнај више</string>
+  <string name="callerinfo_provider_auth_desc">Добродошли! Да ли желиш да <xliff:g id="provider_name">%s</xliff:g> идентификује непознате позиваоце и блокира нежељене позиве?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Добродошли! Да ли желиш да <xliff:g id="provider_name">%s</xliff:g> идентификује непознате позиваоце?</string>
+  <string name="callerinfo_provider_summary">Открива непознате позиваоце и спам</string>
+  <string name="callerinfo_provider_summary_no_spam">Идентификује непознате позиваоце</string>
+  <string name="silence_spam_title">Утишај нежељене позиве</string>
+  <string name="silence_spam_summary">Не дозволи да нежељени позиви звоне</string>
+  <string name="block_hidden_title">Блокирај скривене телефонске бројеве</string>
+  <string name="block_hidden_summary">Сматрај скривене бројеве нежељеним</string>
+  <string name="block_dialog_title">Блокирати овог позиваоца?</string>
+  <string name="block_dialog_positive">Блокирано</string>
+  <string name="block_dialog_negative">Отказано</string>
+  <string name="block_dialog_description">Нећеш више примати позиве или поруке од те особе.</string>
+  <string name="block_dialog_report_spam">Пријави као спам у <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Онемогући %1$s?</string>
+  <string name="provider_disable_message">Онемогућавањем %1$s, нећеш имати идентификацију позива.</string>
+  <string name="provider_disable_spam_message">Онемогућавањем %1$s, нећеш имати заштиту од спама или идентификацију позива.</string>
+  <string name="powered_by_provider">Омогућено од <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Направи %1$s позив\nмењањем режима овде"</string>
+  <string name="provider_search_help">"Претражи %1$s контакте\nмењањем режима овде"</string>
+  <string name="provider_button_help">"Схватио"</string>
+  <string name="provider_voice_call">"%1$s гласовни позив"</string>
+  <string name="provider_video_call">"%1$s видео позив"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Да би позвали, укључите дозволе телефона.</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Позови</string>
 </resources>

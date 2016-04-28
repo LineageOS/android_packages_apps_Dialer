@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn chinois (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Appel ajouté à la liste des appelants bloqués</string>
-  <string name="menu_add_to_blacklist">Ajouter à la liste des appelants bloqués</string>
-  <string name="toast_added_to_blacklist">%s ajouté à la liste des appelants bloqués.</string>
-  <string name="toast_removed_from_blacklist">%s supprimé de la liste des appelants bloqués.</string>
   <string name="call_log_action_block">Bloquer l\'appelant</string>
   <string name="call_log_action_unblock">Appelant bloqué</string>
   <!--  for speed dial -->

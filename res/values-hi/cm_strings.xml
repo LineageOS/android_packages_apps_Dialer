@@ -38,8 +38,6 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">सियानोजेन चीनी (सीएन)</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="menu_add_to_blacklist">अवरुद्ध किए गए कॉलरों की सूची में जोड़ें</string>
-  <string name="toast_added_to_blacklist">%s को अवरुद्ध किए गए कॉलरों की सूची में जोड़ा गया।</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">तेज़ डायल सेटिंग</string>
   <string name="speed_dial_not_set">(सेट नहीं किया गया है)</string>

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Cuộc gọi bị chặn</string>
-  <string name="menu_add_to_blacklist">Thêm vào danh sách chặn người gọi</string>
-  <string name="toast_added_to_blacklist">%s được thêm vào danh sách chặn người gọi.</string>
-  <string name="toast_removed_from_blacklist">%s được xoá khỏi danh sách người gọi bị chặn.</string>
   <string name="call_log_action_block">Chặn người gọi</string>
   <string name="call_log_action_unblock">Người gọi đã bị chặn</string>
   <!--  for speed dial -->

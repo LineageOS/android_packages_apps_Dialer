@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Čína (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Volání z černé listiny</string>
-  <string name="menu_add_to_blacklist">Přidat do seznamu blokovaných čísel</string>
-  <string name="toast_added_to_blacklist">Kontakt %s přidán do seznamu blokovaných čísel.</string>
-  <string name="toast_removed_from_blacklist">%s odebrán ze seznamu blokovaných volajících.</string>
   <string name="call_log_action_block">Blokovat volajícího</string>
   <string name="call_log_action_unblock">Volající blokován</string>
   <!--  for speed dial -->
@@ -98,11 +95,47 @@
   <string name="call_recording_category_title">Nahrávání hovorů</string>
   <string name="call_recording_format">Formát zvuku</string>
   <string name="call_playback_no_app_found_toast">Nenalezena žádná aplikace pro přehrávání vybraného záznamu.</string>
+  <string name="invalid_number_text">"%1$s nelze volat. Je číslo správné?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Můžete vytočit číslo nebo\nvyhledávat kontakt</string>
+  <string name="sign_in_hint_text">Pro volání přihlásit se k %1$s</string>
+  <string name="wifi_hint_text">%1$s k %1$s volání zdarma přes Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s je v roamingu. %2$s k %2$s volání zdarma přes Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Žádná SIM. Pouze tísňová volání.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> hovor</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> nastavení</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Hovor pomocí <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ano</string>
+  <string name="callerinfo_provider_auth_no">Ne, děkuji</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> má přístup k Vašim kontaktům, profilu Me a účtu Cyanogen OS, který může obsahovat Vaše e-mailové adresy.</string>
+  <string name="callerinfo_provider_auth_learn_more">Dozvědět se více</string>
+  <string name="callerinfo_provider_auth_desc">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající a blokoval nežádoucí hovory?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající?</string>
+  <string name="callerinfo_provider_summary">Rozpoznávání neznámých volajících a spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Rozpoznávání neznámých volajících</string>
+  <string name="silence_spam_title">Ztišit spam hovory</string>
+  <string name="silence_spam_summary">Nedovolit nevyžádaným hovorům vyzvánění</string>
+  <string name="block_hidden_title">Blokovat skrytá čísla</string>
+  <string name="block_hidden_summary">Považovat skrytá čísla za spam</string>
+  <string name="block_dialog_title">Blokovat tento kontakt?</string>
+  <string name="block_dialog_positive">Blokovat</string>
+  <string name="block_dialog_negative">Zrušit</string>
+  <string name="block_dialog_description">Od této osoby již nebudete přijímat hovory a zprávy.</string>
+  <string name="block_dialog_report_spam">Nahlásit jako spam operátoru <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Zakázat %1$s?</string>
+  <string name="provider_disable_message">Zakázáním %1$s nebudete mít identifikaci volajícího.</string>
+  <string name="provider_disable_spam_message">Zakázáním %1$s nebudete mít ochranu před spamem a identifikaci volajícího.</string>
+  <string name="powered_by_provider">Využívá služby <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Volat %1$s\npřepnutím režimů zde"</string>
+  <string name="provider_search_help">"Vyhledávat kontakty %1$s\npřepnutím režimů zde"</string>
+  <string name="provider_button_help">"Jasně"</string>
+  <string name="provider_voice_call">"%1$s hlasový hovor"</string>
+  <string name="provider_video_call">"%1$s video hovor"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Chcete-li volat, povolte oprávnění telefonu.</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Volat</string>
 </resources>

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Svartlistat samtal</string>
-  <string name="menu_add_to_blacklist">Lägg till listan över blockerade nummer</string>
-  <string name="toast_added_to_blacklist">%s lades till listan över blockerade nummer.</string>
-  <string name="toast_removed_from_blacklist">%s borttagen från listan med blockerade uppringare.</string>
   <string name="call_log_action_block">Blockera uppringare</string>
   <string name="call_log_action_unblock">Uppringare blockerad</string>
   <!--  for speed dial -->
@@ -104,6 +101,7 @@
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="block_dialog_negative">Avbryt</string>
   <string name="provider_voice_call">"%1$s röstsamtal"</string>
   <string name="provider_video_call">"%1$s videosamtal"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->

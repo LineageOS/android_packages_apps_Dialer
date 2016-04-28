@@ -39,8 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Svartelistet samtale</string>
-  <string name="menu_add_to_blacklist">Legg til blokkerte innringere</string>
-  <string name="toast_added_to_blacklist">%s lagt til blokkerte innringere.</string>
   <string name="call_log_action_block">Blokker ringer</string>
   <string name="call_log_action_unblock">Ringer blokkert</string>
   <!--  for speed dial -->

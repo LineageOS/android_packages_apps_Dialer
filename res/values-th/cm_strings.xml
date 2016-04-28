@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn ภาษาจีน (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">สายจากบัญชีดำ</string>
-  <string name="menu_add_to_blacklist">เพิ่มไปยังรายชื่อผู้โทรที่ถูกบล็อค</string>
-  <string name="toast_added_to_blacklist">%s ถูกเพิ่มไปยังรายชื่อที่ถูกบล็อค</string>
-  <string name="toast_removed_from_blacklist">%s ถูกนำออกจากรายชื่อที่ถูกบล็อค</string>
   <string name="call_log_action_block">บล็อคผู้โทร</string>
   <string name="call_log_action_unblock">รายชื่อที่ถูกบล็อค</string>
   <!--  for speed dial -->
@@ -98,11 +95,47 @@
   <string name="call_recording_category_title">บันทึกการสนทนา</string>
   <string name="call_recording_format">รูปแบบไฟล์เสียง</string>
   <string name="call_playback_no_app_found_toast">ไม่พบแอปที่สามารถเล่นไฟล์เสียงที่เลือกไว้ได้</string>
+  <string name="invalid_number_text">"%1$s ไม่สามารถโทรออกได้ แน่ใจว่าหมายเลขถูกต้อง?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">สามารถกดหมายเลขเพื่อโทรออก\nหรือค้นหารายชื่อติดต่อ</string>
+  <string name="sign_in_hint_text">ลงชื่อเข้าใช้เพื่อโทรด้วย %1$s</string>
+  <string name="wifi_hint_text">โทรฟรีด้วย %1$s ถึง %1$s ผ่าน Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s กำลังใช้งานข้ามเขต โทรฟรี %2$s ถึง %2$s ด้วย Wi-Fi</string>
+  <string name="emergency_call_hint_text">ไม่มีซิม โทรฉุกเฉินเท่านั้น</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> สาย</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">ตั้งค่า<xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">โทรโดยใช้<xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">ใช่</string>
+  <string name="callerinfo_provider_auth_no">ไม่ ขอบคุณ</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> จะสามารถเข้าถึงรายชื่อติดต่อของคุณ โปรไฟล์ของฉัน บัญชี Cyanogen OS ซึ่งอาจมีที่อยู่อีเมลของคุณรวมอยู่ด้วย</string>
+  <string name="callerinfo_provider_auth_learn_more">เรียนรู้เพิ่มเติม</string>
+  <string name="callerinfo_provider_auth_desc">ยินดีต้อนรับ! ต้องการ <xliff:g id="provider_name">%s</xliff:g> เพื่อระบุผู้โทรที่ไม่รู้จักและบล็อคสายการโทรที่ไม่ต้องการหรือไม่?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">ยินดีต้อนรับ! คุณต้องการ <xliff:g id="provider_name">%s</xliff:g> เพื่อระบุผู้โทรที่ไม่รู้จักหรือไม่?</string>
+  <string name="callerinfo_provider_summary">ระบุผู้โทรที่ไม่รู้จักและสแปม</string>
+  <string name="callerinfo_provider_summary_no_spam">ระบุผู้โทรที่ไม่รู้จัก</string>
+  <string name="silence_spam_title">การปิดเสียงสายสแปม</string>
+  <string name="silence_spam_summary">ไม่มีเสียงเรียกเข้าเมื่อเป็นสายสแปม</string>
+  <string name="block_hidden_title">บล็อคสายที่ซ่อนหมายเลข</string>
+  <string name="block_hidden_summary">พิจารณาสายที่ซ่อนหมายเลขเป็นสแปม</string>
+  <string name="block_dialog_title">บล็อคเบอร์นี้หรือไม่?</string>
+  <string name="block_dialog_positive">บล็อค</string>
+  <string name="block_dialog_negative">ยกเลิก</string>
+  <string name="block_dialog_description">คุณจะไม่ได้รับการโทรหรือข้อความจากบุคคลนี้อีกต่อไป</string>
+  <string name="block_dialog_report_spam">แจ้งว่าเป็นสแปมไปยัง <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">ปิดการใช้งาน %1$s หรือไม่?</string>
+  <string name="provider_disable_message">โดยการปิดการใช้งาน %1$s คุณจะไม่มี ID ผู้โทร</string>
+  <string name="provider_disable_spam_message">โดยการปิด %1$s คุณจะไม่มีการป้องกันสแปมหรือ ID ผู้โทร</string>
+  <string name="powered_by_provider">ดำเนินงานโดย <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"เรียกสาย %1$s\nโดยปรับรูปแบบที่นี่"</string>
+  <string name="provider_search_help">"ค้นหา %1$s รายชื่อ\nโดยเปลี่ยนรูปแบบที่นี่"</string>
+  <string name="provider_button_help">"เข้าใจแล้ว"</string>
+  <string name="provider_voice_call">"สายวิดีโอ %1$s"</string>
+  <string name="provider_video_call">"สายวิดีโอ %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">เมื่อต้องการวางสาย เปิดใช้งานการอนุญาตโทรศัพท์</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">ทำการโทร</string>
 </resources>

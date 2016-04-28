@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">ব্লেকলিষ্টেড কল</string>
-  <string name="menu_add_to_blacklist">অৱৰুদ্ধিত কলাৰ সূচীলৈ যোগ কৰক</string>
-  <string name="toast_added_to_blacklist">%s ক অৱৰুদ্ধিত কলাৰ সূচীলৈ যোগ কৰা হ\'ল</string>
-  <string name="toast_removed_from_blacklist">%s অৱৰুদ্ধিত কলাৰ সূচীৰ কৰা আঁতৰোৱা হৈছে।</string>
   <string name="call_log_action_block">কলাৰক অৱৰুদ্ধিত কৰক</string>
   <string name="call_log_action_unblock">কলাৰক অৱৰুদ্ধিত কৰা হ\'ল</string>
   <!--  for speed dial -->

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn txinatarra (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Zerrenda beltzeko deia</string>
-  <string name="menu_add_to_blacklist">Gehitu blokeatutako deitzaileen zerrendara</string>
-  <string name="toast_added_to_blacklist">%s blokeatutako deitzaileen zerrendara gehitu da.</string>
-  <string name="toast_removed_from_blacklist">%s kenduta blokeatutako deitzaileen zerrendatik.</string>
   <string name="call_log_action_block">Blokeatu deitzailea</string>
   <string name="call_log_action_unblock">Deitzailea blokeatu da</string>
   <!--  for speed dial -->

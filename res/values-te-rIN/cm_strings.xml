@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">అనుమానిత కాల్</string>
-  <string name="menu_add_to_blacklist">నిరోధించబడిన కాలర్ జాబితాకు జోడించబడింది</string>
-  <string name="toast_added_to_blacklist">%s నిరోధించబడిన కాలర్ జాబితాకు జోడించబడింది.</string>
-  <string name="toast_removed_from_blacklist">%s నిరోధించబడిన కాలర్ జాబితాకు తొలగించబడింది.</string>
   <string name="call_log_action_block">కాలర్ ను నిరోధించు</string>
   <string name="call_log_action_unblock">కాలర్ నిరోధించబడ్డారు</string>
   <!--  for speed dial -->

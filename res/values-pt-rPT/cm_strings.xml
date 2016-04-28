@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinês (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Chamada na lista negra</string>
-  <string name="menu_add_to_blacklist">Adicionar à lista de números bloqueados</string>
-  <string name="toast_added_to_blacklist">%s foi adicionado à lista de números bloqueados.</string>
-  <string name="toast_removed_from_blacklist">%s removido da lista de números bloqueados.</string>
   <string name="call_log_action_block">Bloquear número</string>
   <string name="call_log_action_unblock">Número bloqueado</string>
   <!--  for speed dial -->
@@ -98,11 +95,47 @@
   <string name="call_recording_category_title">Gravação de chamada</string>
   <string name="call_recording_format">Formato de som</string>
   <string name="call_playback_no_app_found_toast">Não foi encontrada nenhuma aplicação para reproduzir a gravação selecionada.</string>
+  <string name="invalid_number_text">"%1$s não conseguiu realizar esta chamada. O número está correto?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Pode marcar um número de telefone ou\nprocurar nos contactos</string>
+  <string name="sign_in_hint_text">Autentique-se para realizar chamadas %1$s</string>
+  <string name="wifi_hint_text">Faça chamadas gratuitas entre %1$s e %1$s através do Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s está em roaming. Faça chamadas gratuitas entre %2$s e %2$s através do Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Sem cartão SIM. Apenas chamadas de emergência.</string>
+  <string name="extra_call_method_call_option">Telefonar com <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Definições de <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Telefonar com <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Sim</string>
+  <string name="callerinfo_provider_auth_no">Não, obrigado</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> terá acesso aos seus contactos, ao seu perfil e à sua conta Cyanogen OS, que poderá incluir o seu endereço de e-mail.</string>
+  <string name="callerinfo_provider_auth_learn_more">Saber mais</string>
+  <string name="callerinfo_provider_auth_desc">Bem-vindo! Deseja que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos e bloqueie chamadas indesejadas?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Bem-vindo! Deseja que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos?</string>
+  <string name="callerinfo_provider_summary">Identifica números desconhecidos e spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifica números desconhecidos</string>
+  <string name="silence_spam_title">Silenciar chamadas de spam</string>
+  <string name="silence_spam_summary">Nunca deixar tocar as chamadas de spam</string>
+  <string name="block_hidden_title">Bloquear números de telefone ocultos</string>
+  <string name="block_hidden_summary">Considerar números ocultos como spam</string>
+  <string name="block_dialog_title">Bloquear este número?</string>
+  <string name="block_dialog_positive">Bloquear</string>
+  <string name="block_dialog_negative">Cancelar</string>
+  <string name="block_dialog_description">Não irá receber mais chamadas ou mensagens deste número.</string>
+  <string name="block_dialog_report_spam">Reportar como spam para <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Desativar %1$s?</string>
+  <string name="provider_disable_message">Ao desativar %1$s, não obterá a identificação de quem lhe telefona.</string>
+  <string name="provider_disable_spam_message">Ao desativar %1$s, não terá proteção contra spam ou a identificação de quem lhe telefona.</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Fazer chamadas %1$s alternando\naqui os modos"</string>
+  <string name="provider_search_help">"Procurar contactos %1$s alternando\naqui os modos"</string>
+  <string name="provider_button_help">"Entendi"</string>
+  <string name="provider_voice_call">"Chamada de voz %1$s"</string>
+  <string name="provider_video_call">"Videochamada %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Para fazer uma chamada, ative permissões de Telefone.</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Fazer chamada</string>
 </resources>

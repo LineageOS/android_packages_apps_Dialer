@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Китай (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Виклик з чорного списку</string>
-  <string name="menu_add_to_blacklist">Додати абонента до списку заблокованих</string>
-  <string name="toast_added_to_blacklist">%s додано до списку заблокованих абонентів.</string>
-  <string name="toast_removed_from_blacklist">%s видалено зі списку заблокованих абонентів.</string>
   <string name="call_log_action_block">Заблокувати абонента</string>
   <string name="call_log_action_unblock">Абонент заблокований</string>
   <!--  for speed dial -->

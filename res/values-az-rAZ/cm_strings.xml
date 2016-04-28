@@ -38,8 +38,6 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Çincə (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="menu_add_to_blacklist">Əngəllənən zəng edənlər siyahısına əlavə et</string>
-  <string name="toast_added_to_blacklist">%s əngəllənən zəng edənlər siyahısına əlavə edildi.</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Cəld yığım tənzimləmələri</string>
   <string name="speed_dial_not_set">(tənzimlənməyib)</string>

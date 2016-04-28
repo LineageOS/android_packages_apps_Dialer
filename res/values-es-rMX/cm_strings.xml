@@ -22,7 +22,6 @@
   <!-- Chinese Reverse Lookup Provider -->
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Llamada en la lista negra</string>
-  <string name="toast_removed_from_blacklist">%s eliminado de la lista de llamadas bloqueadas.</string>
   <string name="call_log_action_block">Bloqueo de llamadas</string>
   <string name="call_log_action_unblock">Llamada bloqueada</string>
   <!--  for speed dial -->

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Sjinees (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Swartgelysde oproep</string>
-  <string name="menu_add_to_blacklist">Voeg by blokkeer lys</string>
-  <string name="toast_added_to_blacklist">%s bygevoeg tot blokkeer oproep lys.</string>
-  <string name="toast_removed_from_blacklist">%s is verwyder van geblokkeerde oproep lys.</string>
   <string name="call_log_action_block">Blok oproeper</string>
   <string name="call_log_action_unblock">Oproeper is geblokkeer</string>
   <!--  for speed dial -->

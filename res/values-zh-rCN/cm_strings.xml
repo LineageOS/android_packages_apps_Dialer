@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 中文 (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">列入黑名单的来电</string>
-  <string name="menu_add_to_blacklist">添加到呼叫黑名单</string>
-  <string name="toast_added_to_blacklist">%s 已添加到呼叫黑名单。</string>
-  <string name="toast_removed_from_blacklist">%s 已经从呼叫屏蔽列表中移除。</string>
   <string name="call_log_action_block">屏蔽来电</string>
   <string name="call_log_action_unblock">来电已屏蔽</string>
   <!--  for speed dial -->

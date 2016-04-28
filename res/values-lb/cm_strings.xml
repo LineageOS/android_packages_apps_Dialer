@@ -38,8 +38,6 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn-Chinesesch (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="menu_add_to_blacklist">Op d\'Lëscht mat de blockéierten Nummere setzen</string>
-  <string name="toast_added_to_blacklist">%s op d\'Lëscht mat de blockéierten Nummere dobäigesat.</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Astellunge fir d\'séiert Wielen</string>
   <string name="speed_dial_not_set">(net gesat)</string>

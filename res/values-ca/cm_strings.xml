@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Xinès Cyngn (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Trucada a la llista negra</string>
-  <string name="menu_add_to_blacklist">Afegeix a la llista de números bloquejats</string>
-  <string name="toast_added_to_blacklist">%s afegit a la llista de números bloquejats.</string>
-  <string name="toast_removed_from_blacklist">%s esborrat de la llista de trucades bloquejades.</string>
   <string name="call_log_action_block">Bloqueja la trucada</string>
   <string name="call_log_action_unblock">Trucada bloquejada</string>
   <!--  for speed dial -->

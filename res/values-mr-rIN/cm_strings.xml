@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">सेंज चायनिस(CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">काळ्या यादीतील कॉल</string>
-  <string name="menu_add_to_blacklist">अवरोधित कॉलर यादीमध्ये जोडा</string>
-  <string name="toast_added_to_blacklist">%s अवरोधित कॉलर यादीमध्ये जोडले.</string>
-  <string name="toast_removed_from_blacklist">%s अवरोधित कॉलर यादीमधून काढले.</string>
   <string name="call_log_action_block">कॉलर अवरोधित करा</string>
   <string name="call_log_action_unblock">कॉलर अवरोधित केला</string>
   <!--  for speed dial -->

@@ -38,8 +38,6 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Čínština (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="menu_add_to_blacklist">Pridať do zoznamu zablokovaných volajúcich</string>
-  <string name="toast_added_to_blacklist">Kontakt %s bol pridaný do zoznamu zablokovaných volajúcich.</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Nastavenia rýchleho vytáčania</string>
   <string name="speed_dial_not_set">(nenastavené)</string>

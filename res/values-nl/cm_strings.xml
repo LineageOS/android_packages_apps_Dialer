@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinees (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Geblokkeerde oproep</string>
-  <string name="menu_add_to_blacklist">Toevoegen aan zwarte lijst</string>
-  <string name="toast_added_to_blacklist">%s toegevoegd aan zwarte lijst.</string>
-  <string name="toast_removed_from_blacklist">%s verwijderd uit zwarte lijst.</string>
   <string name="call_log_action_block">Beller blokkeren</string>
   <string name="call_log_action_unblock">Beller geblokkeerd</string>
   <!--  for speed dial -->
@@ -98,11 +95,13 @@
   <string name="call_recording_category_title">Gespreksopname</string>
   <string name="call_recording_format">Audioformaat</string>
   <string name="call_playback_no_app_found_toast">Kan geen app vinden om de geselecteerde opname af te spelen.</string>
+  <string name="invalid_number_text">"%1$s kon deze oproep niet voltooien. Is het nummer correct?"</string>
   <!-- T9 Search Text -->
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Welkom! Wilt u <xliff:g id="provider_name">%s</xliff:g> gebruiken om onbekende bellers te identificeren?</string>
   <string name="callerinfo_provider_summary">Identificeert onbekende bellers en spam</string>
   <string name="callerinfo_provider_summary_no_spam">Identificeert onbekende bellers</string>
   <string name="silence_spam_title">Ongewenste oproepen dempen</string>

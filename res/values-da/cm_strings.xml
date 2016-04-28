@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (KN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Sortlistet opkald</string>
-  <string name="menu_add_to_blacklist">Tilføj til blokeret opkaldsliste</string>
-  <string name="toast_added_to_blacklist">%s tilføjet til blokeret opkaldsliste.</string>
-  <string name="toast_removed_from_blacklist">%s fjernet fra blokeret opkaldsliste.</string>
   <string name="call_log_action_block">Blokér den der ringer op</string>
   <string name="call_log_action_unblock">Den der ringer op er blokeret</string>
   <!--  for speed dial -->
@@ -98,11 +95,47 @@
   <string name="call_recording_category_title">Opkaldsoptagelse</string>
   <string name="call_recording_format">Lydformat</string>
   <string name="call_playback_no_app_found_toast">Der blev ikke fundet nogen app som kunne afspille den valgte optagelse.</string>
+  <string name="invalid_number_text">"%1$s kunne ikke foretage opkaldet. Er nummeret korrekt?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Du kan indtaste et telefonnummer eller\nsøge efter en kontaktperson</string>
+  <string name="sign_in_hint_text">Log ind for at foretage %1$s opkald</string>
+  <string name="wifi_hint_text">Foretag gratis %1$s til %1$s opkald via Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s roamer. Foretag gratis %2$s til %2$s opkald via Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Intet SIM-kort. Kun nødopkald.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> opkald</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> indstillinger</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Opkald ved hjælp af <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_no">Nej tak</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> vil have adgang til dine kontakter, din profil samt din Cyanogen OS konto, der kan indeholde din e-mail adresse.</string>
+  <string name="callerinfo_provider_auth_learn_more">Lær mere</string>
+  <string name="callerinfo_provider_auth_desc">Velkommen! Ønsker du <xliff:g id="provider_name">%s</xliff:g> til at identificere ukendte numre og blokere uønskede opkald?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Velkommen! Ønsker du <xliff:g id="provider_name">%s</xliff:g> til at identificere ukendte numre?</string>
+  <string name="callerinfo_provider_summary">Identificerer ukendte numre samt spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identificerer ukendte numre</string>
+  <string name="silence_spam_title">Dæmp spam-opkald</string>
+  <string name="silence_spam_summary">Lad aldrig spam-opkald ringe ud</string>
+  <string name="block_hidden_title">Blokér hemmelige telefonnumre</string>
+  <string name="block_hidden_summary">Betragt skjulte numre som spam</string>
+  <string name="block_dialog_title">Blokér denne person?</string>
+  <string name="block_dialog_positive">Bloker</string>
+  <string name="block_dialog_negative">Annullér</string>
+  <string name="block_dialog_description">Du vil ikke længere modtage opkald eller beskeder fra denne person.</string>
+  <string name="block_dialog_report_spam">Rapporter som spam til <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Deaktiver %1$s?</string>
+  <string name="provider_disable_message">Ved at deaktivere %1$s, vil du ikke have opkalds-ID.</string>
+  <string name="provider_disable_spam_message">Ved at deaktivere %1$s, vil du ikke have beskyttelse mod spam eller opkalds-ID.</string>
+  <string name="powered_by_provider">Drevet af <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Foretag %1$s opkald ved\nat skifte tilstande her"</string>
+  <string name="provider_search_help">"Søg %1$s kontakter ved\nat skifte tilstande her"</string>
+  <string name="provider_button_help">"Forstået"</string>
+  <string name="provider_voice_call">"%1$s taleopkald"</string>
+  <string name="provider_video_call">"%1$s videoopkald"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Slå telefontilladelser til, for at foretage opkald.</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Foretag et opkald</string>
 </resources>

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Чорны спіс</string>
-  <string name="menu_add_to_blacklist">Дадаць у чорны спіс</string>
-  <string name="toast_added_to_blacklist">%s дададзены ў чорны спіс.</string>
-  <string name="toast_removed_from_blacklist">%s выдалены са спісу заблакаваных абанентаў.</string>
   <string name="call_log_action_block">Заблакаваць абанента</string>
   <string name="call_log_action_unblock">Абанент заблакаваны</string>
   <!--  for speed dial -->

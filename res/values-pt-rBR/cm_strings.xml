@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Chinês Cyngn (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Chamada na lista negra</string>
-  <string name="menu_add_to_blacklist">Adicionar à lista de chamadas bloqueadas</string>
-  <string name="toast_added_to_blacklist">%s adicionado à lista de chamadas bloqueadas.</string>
-  <string name="toast_removed_from_blacklist">%s removido da lista de chamadas bloqueadas.</string>
   <string name="call_log_action_block">Bloquear chamada</string>
   <string name="call_log_action_unblock">Chamada bloqueada</string>
   <!--  for speed dial -->
@@ -140,4 +137,5 @@
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Para fazer uma chamada, ative as permissões de telefone.</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="recentCalls_empty_action_cm">Fazer uma ligação</string>
 </resources>

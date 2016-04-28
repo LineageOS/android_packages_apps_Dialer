@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">着信拒否した通話</string>
-  <string name="menu_add_to_blacklist">着信拒否リストに追加</string>
-  <string name="toast_added_to_blacklist">%sを着信拒否リストに追加しました</string>
-  <string name="toast_removed_from_blacklist">%sを着信拒否リストから削除しました。</string>
   <string name="call_log_action_block">着信拒否</string>
   <string name="call_log_action_unblock">発信者を着信拒否しました</string>
   <!--  for speed dial -->

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 중국 (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">블랙 리스트 전화</string>
-  <string name="menu_add_to_blacklist">차단된 발신자 목록에 추가</string>
-  <string name="toast_added_to_blacklist">%s이(가) 발신자 차단 목록에 추가됨.</string>
-  <string name="toast_removed_from_blacklist">차단된 발신자 목록에서 삭제된 번호: %s</string>
   <string name="call_log_action_block">발신자 차단</string>
   <string name="call_log_action_unblock">발신자 차단함</string>
   <!--  for speed dial -->

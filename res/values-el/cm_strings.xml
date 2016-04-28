@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Στη λίστα αποκλεισμένων καλούντων</string>
-  <string name="menu_add_to_blacklist">Προσθήκη στη λίστα αποκλεισμένων καλούντων</string>
-  <string name="toast_added_to_blacklist">%s προστέθηκε στη λίστα αποκλεισμένων καλούντων.</string>
-  <string name="toast_removed_from_blacklist">%s αφαιρέθηκε από τη λίστα αποκλεισμένων καλούντων.</string>
   <string name="call_log_action_block">Αποκλεισμός καλούντος</string>
   <string name="call_log_action_unblock">Ο καλών αποκλείστηκε</string>
   <!--  for speed dial -->

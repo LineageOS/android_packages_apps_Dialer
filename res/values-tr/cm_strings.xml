@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Çince (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Kısıtlanmış arama</string>
-  <string name="menu_add_to_blacklist">Engelli arayan listesine ekle</string>
-  <string name="toast_added_to_blacklist">%s engelli arayan listesine eklendi.</string>
-  <string name="toast_removed_from_blacklist">%s engelli arayan listesinden kaldırıldı.</string>
   <string name="call_log_action_block">Arayanı engelle</string>
   <string name="call_log_action_unblock">Arayan engellendi</string>
   <!--  for speed dial -->

@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">ସିନ୍‍ଜିନ୍‍ ଚାଇନିଜ୍‍ (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">ଅବରୁଧ କଲ୍‍</string>
-  <string name="menu_add_to_blacklist">ଅବ୍ରୁ‍ଦ୍ଧ କଲର୍‍ ତାଲିକାରେ ଯୋଗ କରନ୍ତୁ</string>
-  <string name="toast_added_to_blacklist">ଅବ୍ରୁ‍ଦ୍ଧ କଲର୍‍ ତାଲିକାରେ %s ଯୋଗ କରାଯାଇଛି</string>
-  <string name="toast_removed_from_blacklist">ଅବ୍ରୁ‍ଦ୍ଧ କଲର୍‍ ତାଲିକାରେ %s ବାହାର କରନ୍ତୁ.</string>
   <string name="call_log_action_block">ଅବରୁ‍ଦ୍ଧ କ୍ଲର୍‍</string>
   <string name="call_log_action_unblock">ଅବରୁ‍ଦ୍ଧ କ୍ଲର୍‍</string>
   <!--  for speed dial -->
