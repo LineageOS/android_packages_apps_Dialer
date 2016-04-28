@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_cfeeb587",
+        "filename": "res/layout/call_log_list_item_actions.xml",
+        "patchSetId": 14
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Yea this isn\u0027t actually even needed here are the src for this is set in code.  Done.",
+      "parentUuid": "5faad753_4f47254d",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8f667ded",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-28T05:31:14Z",
       "side": 1,
       "message": "Can remove this newline.",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2ffd093a",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_8f667ded",
       "revId": "981b37369c695310c96576b89201af29514f828b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_ef94d1ea",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_2f63c9de",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_4f6085cf",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2016-04-28T05:31:14Z",
       "side": 1,
       "message": "Unnecessary change.",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4ffac542",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_4f6085cf",
       "revId": "981b37369c695310c96576b89201af29514f828b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_0f9a8d13",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_0fa04df4",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ef9a91c3",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 14
@@ -98,6 +188,24 @@
       "writtenOn": "2016-04-28T05:31:14Z",
       "side": 1,
       "message": "c, count",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_af9ed904",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ef9a91c3",
       "revId": "981b37369c695310c96576b89201af29514f828b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8fae7d2c",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_cfa9d5df",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_afa49909",
         "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
         "patchSetId": 14
@@ -132,6 +258,24 @@
       "writtenOn": "2016-04-28T05:31:14Z",
       "side": 1,
       "message": "mDeepLink !\u003d null",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2fabc91d",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_afa49909",
       "revId": "981b37369c695310c96576b89201af29514f828b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4fa8851e",
+        "filename": "src/com/android/dialer/calllog/CallLogListItemViewHolder.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_6faea1e8",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8fabddd4",
         "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
         "patchSetId": 14
@@ -166,6 +328,24 @@
       "writtenOn": "2016-04-28T05:31:14Z",
       "side": 1,
       "message": "All of those new imports seem unused.",
+      "revId": "981b37369c695310c96576b89201af29514f828b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ef629116",
+        "filename": "src/com/android/dialer/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-28T15:50:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_8fabddd4",
       "revId": "981b37369c695310c96576b89201af29514f828b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
