@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_fd27abb5",
+        "filename": "res/layout/call_log_list_item_actions.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-28T22:47:56Z",
+      "side": 1,
+      "message": "extra carriage return, should be on the previous line.",
+      "range": {
+        "startLine": 73,
+        "startChar": 12,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_5d327ff3",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-28T22:47:56Z",
+      "side": 1,
+      "message": "these nested calls scare me... possibility for NPEs at all?",
+      "range": {
+        "startLine": 573,
+        "startChar": 12,
+        "endLine": 573,
+        "endChar": 66
+      },
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_bd561306",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-28T22:47:56Z",
+      "side": 1,
+      "message": "since you know size (mViews.callTimes.length) is it more performant to initialize to size?",
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_5d8fdfcb",
+        "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-04-28T22:47:56Z",
+      "side": 1,
+      "message": "i think this is ok, but wish we could just set an intent on this header instead.",
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
