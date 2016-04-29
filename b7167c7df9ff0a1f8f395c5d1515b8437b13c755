@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_3efd393a",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-29T22:31:30Z",
+      "side": 1,
+      "message": "please move over to using com.android.phone.common.ambient.AmbientConnection",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 40
+      },
+      "revId": "b7167c7df9ff0a1f8f395c5d1515b8437b13c755",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
