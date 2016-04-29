@@ -150,4 +150,16 @@
 
     <!-- Message indicating call failed due to low battery -->
     <string name="call_failed_due_to_low_battery">Call is failed due to low battery</string>
+    <!-- Title for low battery alert dialogue -->
+    <string name="low_battery">Low Battery Warning</string>
+    <!-- Yes option of the low battery alert dialog -->
+    <string name="low_battery_yes">Yes</string>
+    <!-- No option of the low battery alert dialog for active video calls -->
+    <string name="low_battery_no">No</string>
+    <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+    <string name="low_battery_hangup_msg">Do you want to hangup the call?</string>
+    <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+    <string name="low_battery_msg">Your battery level is below 15%. Do you want to continue with the video call or convert it to Voice call</string>
+    <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+    <string name="low_battery_convert">Convert</string>
 </resources>

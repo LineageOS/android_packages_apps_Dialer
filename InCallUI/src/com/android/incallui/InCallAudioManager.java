@@ -162,8 +162,16 @@ public class InCallAudioManager {
         final int currentAudioMode = AudioModeProvider.getInstance().getAudioMode();
         Log.v(LOG_TAG, "enableEarpiece: Current audio mode is - " + currentAudioMode);
 
-        if (QtiCallUtils.isNotEnabled(CallAudioState.ROUTE_EARPIECE |
-                CallAudioState.ROUTE_BLUETOOTH | CallAudioState.ROUTE_WIRED_HEADSET,
+        /*
+         * For MO video calls, we mark that audio needs to be routed to speaker during
+         * call setup phase and audio routing then takes place when call state transitions
+         * to DIALING. If user decides to modify low battery MO video call to voice call,
+         * audio route needs to be changed to earpiece for which we need to unmark speaker
+         * audio route selection that was done during video call setup phase. To avoid below
+         * API from being a no operation, do not check for CallAudioState.ROUTE_EARPIECE
+         */
+        if (QtiCallUtils.isNotEnabled(CallAudioState.ROUTE_BLUETOOTH |
+                CallAudioState.ROUTE_WIRED_HEADSET,
                 currentAudioMode)) {
             Log.v(LOG_TAG, "enableEarpiece: Set audio route to earpiece");
             telecomAdapter.setAudioRoute(CallAudioState.ROUTE_EARPIECE);

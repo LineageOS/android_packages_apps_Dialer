@@ -63,9 +63,7 @@ public class PrimaryCallTracker implements InCallStateListener, IncomingCallList
         } else if (newState == InCallPresenter.InCallState.PENDING_OUTGOING) {
             primaryCall = callList.getPendingOutgoingCall();
         } else if (newState == InCallPresenter.InCallState.INCALL) {
-            primaryCall = callList.getActiveCall();
-        } else {
-            primaryCall = callList.getBackgroundCall();
+            primaryCall = callList.getActiveOrBackgroundCall();
         }
 
         if (!Objects.equals(mPrimaryCall, primaryCall)) {

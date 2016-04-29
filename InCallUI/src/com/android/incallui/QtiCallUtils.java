@@ -437,6 +437,11 @@ public class QtiCallUtils {
         return (dsdaEnabled == null) ? false : dsdaEnabled;
     }
 
+    public static void downgradeToVoiceCall(final Call call) {
+        final VideoProfile videoProfile = new VideoProfile(VideoProfile.STATE_AUDIO_ONLY);
+        changeToVideoClicked(call, videoProfile);
+    }
+
     /**
      * This method converts the QtiCallConstants' Orientation modes to the ActivityInfo
      * screen orientation mode.

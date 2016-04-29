@@ -928,6 +928,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             mAnswerFragment.dismissPendingDialogs();
         }
         InCallCsRedialHandler.getInstance().dismissPendingDialogs();
+        InCallLowBatteryListener.getInstance().dismissPendingDialogs();
     }
 
     /**
