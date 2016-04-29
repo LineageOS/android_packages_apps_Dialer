@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c3344e4d",
+        "filename": "res/layout/call_log_list_item_actions.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-29T17:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_fd27abb5",
+      "range": {
+        "startLine": 73,
+        "startChar": 12,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_5d327ff3",
         "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
         "patchSetId": 18
@@ -36,6 +60,30 @@
       "writtenOn": "2016-04-28T22:47:56Z",
       "side": 1,
       "message": "these nested calls scare me... possibility for NPEs at all?",
+      "range": {
+        "startLine": 573,
+        "startChar": 12,
+        "endLine": 573,
+        "endChar": 66
+      },
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_43fdbe38",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-29T17:57:15Z",
+      "side": 1,
+      "message": "very low probablyility on this - these views are all defined in the XML files for the list items and I can\u0027t envision a case where this is null but the entire view isn\u0027t (in which case we would fail in other places first).",
+      "parentUuid": "5faad753_5d327ff3",
       "range": {
         "startLine": 573,
         "startChar": 12,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_e3394a41",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-29T17:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_bd561306",
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_5d8fdfcb",
         "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
         "patchSetId": 18
@@ -76,6 +142,24 @@
       "writtenOn": "2016-04-28T22:47:56Z",
       "side": 1,
       "message": "i think this is ok, but wish we could just set an intent on this header instead.",
+      "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a324b20e",
+        "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-04-29T17:57:15Z",
+      "side": 1,
+      "message": "This activity lives in core and we don\u0027t currently have a filter or other mechanism in place to launch it via intent.  We could do some work there but would require core patches.\n\nGonna leave it as is for now.",
+      "parentUuid": "5faad753_5d8fdfcb",
       "revId": "8c79a2f0339e96c69c693a051238f40075544df6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
