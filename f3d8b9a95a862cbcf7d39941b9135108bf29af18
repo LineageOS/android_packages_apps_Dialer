@@ -401,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_feb7a1d7",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-29T20:40:30Z",
+      "side": 1,
+      "message": "Incall can and does depend on Dialer, do a grep in incallui for \"import com.android.dialer\"\n\nI\u0027d prefer to keep this a one way relationship if possible.\nLooking into it right now there are two places in Dialer that require incallui and one is not needed at all, dead imports. And the other is implementing an interface, and I believe it probably shouldn\u0027t be defined in incallui.\nIn contrast, there atre Three files in incallui that import dialer and all of them are used.",
+      "parentUuid": "5faad753_8cc8cb55",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 54
+      },
+      "revId": "f3d8b9a95a862cbcf7d39941b9135108bf29af18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_01a9077a",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 12
