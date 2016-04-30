@@ -11,8 +11,6 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
-import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.DialerDataSubscription;
@@ -23,9 +21,6 @@ import com.cyanogen.ambient.callerinfo.util.CallerInfoHelper;
 import com.cyanogen.ambient.callerinfo.util.ProviderInfo;
 import com.cyanogen.ambient.common.api.PendingResult;
 import com.cyanogen.ambient.common.api.ResultCallback;
-import com.cyanogen.ambient.deeplink.DeepLink;
-import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
-import com.cyanogen.ambient.deeplink.linkcontent.DeepLinkContentType;
 import com.cyanogen.ambient.plugin.PluginStatus;
 import com.cyanogen.ambient.incall.util.InCallHelper;
 import com.google.common.collect.Lists;
@@ -77,7 +72,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
     PreferenceScreen mPreferenceScreen;
     List<CallMethodInfo> mCallProviders = new ArrayList<>();
     List<Header> mCurrentHeaders = Lists.newArrayList();
-    List<String> mDeepLinkPluginInfo;
 
     private static final String AMBIENT_SUBSCRIPTION_ID = "DialerSettingsActivity";
 
@@ -88,22 +82,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                     providersUpdated(pluginInfos);
                 }
             };
-
-    private ResultCallback<DeepLink.StringResultList> mDeepLinkCallback =
-            new ResultCallback<DeepLink.StringResultList>() {
-                @Override
-                public void onResult(DeepLink.StringResultList result) {
-                    List<String> results = result.getResults();
-                    if (results != null && results.size() > 0) {
-                        deepLinkUpdated(results);
-                    }
-                }
-            };
-
-    private void deepLinkUpdated(List<String> deepLinkPluginInfo) {
-        mDeepLinkPluginInfo = deepLinkPluginInfo;
-        invalidateHeaders();
-    }
 
     private void providersUpdated(HashMap<ComponentName, CallMethodInfo> callMethodInfos) {
         mCallProviders.clear();
@@ -128,9 +106,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                         CallerInfoHelper.getProviderInfo(this, mSelectedProvider.getComponent());
             }
         }
-        DeepLinkIntegrationManager.getInstance().getDefaultPlugin(mDeepLinkCallback,
-                DeepLinkContentType.CALL);
-
         super.onCreate(savedInstanceState);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
@@ -247,13 +222,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                     }
                 }
             }
-        }
-
-        if (mDeepLinkPluginInfo != null) {
-            Header noteHeader = new Header();
-            noteHeader.title = mDeepLinkPluginInfo.get(0);
-            noteHeader.summaryRes = R.string.note_mod_settings_summary;
-            target.add(noteHeader);
         }
 
         // invalidateHeaders does not rebuild
@@ -602,14 +570,5 @@ public class DialerSettingsActivity extends PreferenceActivity {
         int status = isEnabled ? PluginStatus.ENABLED : PluginStatus.DISABLED;
         asyncTask.execute(status);
         return status;
-    }
-
-    @Override
-    public void onHeaderClick(Header header, int position) {
-        super.onHeaderClick(header, position);
-        if (header.summaryRes == R.string.note_mod_settings_summary) {
-            DeepLinkIntegrationManager.getInstance().openDeepLinkPreferences
-                    (DeepLinkApplicationType.NOTE);
-        }
     }
 }
