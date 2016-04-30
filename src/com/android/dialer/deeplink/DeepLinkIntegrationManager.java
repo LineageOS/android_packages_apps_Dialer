@@ -56,7 +56,6 @@ public class DeepLinkIntegrationManager {
     private static DeepLinkIntegrationManager sInstance;
     private AmbientApiClient mAmbientApiClient;
     private DeepLinkApi mApi;
-    private volatile boolean mConnected = false;
 
     public void setUp(Context ctx) {
         if(ambientIsAvailable(ctx)) {
@@ -69,7 +68,7 @@ public class DeepLinkIntegrationManager {
             ResultCallback<DeepLink.DeepLinkResultList> callback, DeepLinkContentType category,
             Uri uri) {
         PendingResult<DeepLink.DeepLinkResultList> result = null;
-        if (mAmbientApiClient.isConnected()) {
+        if (hasConnectedClient()) {
             result = mApi.getPreferredLinksForSingleItem(mAmbientApiClient,
                     DeepLinkApplicationType.NOTE, category, uri);
             result.setResultCallback(callback);
@@ -81,7 +80,7 @@ public class DeepLinkIntegrationManager {
             ResultCallback<DeepLink.DeepLinkResultList> callback, DeepLinkContentType category,
             List<Uri> uris) {
         PendingResult<DeepLink.DeepLinkResultList> result = null;
-        if (mAmbientApiClient.isConnected()) {
+        if (hasConnectedClient()) {
             result = mApi.getPreferredLinksForList(mAmbientApiClient,
                     DeepLinkApplicationType.NOTE, category, uris);
             result.setResultCallback(callback);
@@ -92,7 +91,7 @@ public class DeepLinkIntegrationManager {
     public void getDefaultPlugin(ResultCallback<DeepLink.StringResultList> callback,
             DeepLinkContentType category) {
         PendingResult<DeepLink.StringResultList> result = null;
-        if (mAmbientApiClient.isConnected()) {
+        if (hasConnectedClient()) {
             result = mApi.getDefaultProviderDisplayInformation(mAmbientApiClient,
                     DeepLinkApplicationType.NOTE, category,
                     DeepLinkIntegrationManager.generateCallUri(dummyNumber, dummyTime));
@@ -115,9 +114,13 @@ public class DeepLinkIntegrationManager {
         return CyanogenAmbientUtil.isCyanogenAmbientAvailable(ctx) == CyanogenAmbientUtil.SUCCESS;
     }
 
+    private boolean hasConnectedClient() {
+        return mAmbientApiClient != null && mAmbientApiClient.isConnected();
+    }
+
     public void sendEvent(Context ctx, Categories categories, Events event,
             HashMap<Parameters, Object> params) {
-        if(mAmbientApiClient.isConnected()) {
+        if(hasConnectedClient()) {
             DeepLinkMetricsHelper.sendEvent(ctx, categories, event, params, mAmbientApiClient);
         }
     }
@@ -148,14 +151,14 @@ public class DeepLinkIntegrationManager {
 
 
     public void openDeepLinkPreferences(DeepLinkApplicationType deepLinkApplicationType) {
-        if (mAmbientApiClient.isConnected()) {
+        if (hasConnectedClient()) {
             mApi.openDeepLinkPreferences(mAmbientApiClient, deepLinkApplicationType);
         }
     }
 
     public void isApplicationTypeEnabled(DeepLinkApplicationType deepLinkApplicationType,
             ResultCallback<DeepLink.BooleanResult> callback) {
-        if (mAmbientApiClient.isConnected()) {
+        if (hasConnectedClient()) {
             PendingResult<DeepLink.BooleanResult> result = mApi.isApplicationTypeEnabled(
                     mAmbientApiClient, deepLinkApplicationType);
             result.setResultCallback(callback);
