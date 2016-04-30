@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_9240e109",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-04-30T03:41:09Z",
+      "side": 1,
+      "message": "blame: mAmbientApiClient is null if ambientIsAvailable returns false. There are no null checks on mAmbientApiClient.",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 9
+      },
+      "revId": "abec0f3ee457d0a60bc5f32940afea343e9ac1c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
