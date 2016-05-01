@@ -17,18 +17,20 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="8490255569343340580">"डायलर"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"फ़ोन"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"फ़ोन"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"फ़ोन"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"कॉल इतिहास"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> को कॉल करें"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"गलत संख्या की रिपोर्ट करें"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"कॉल करने से पहले नंबर संपादित करें"</string>
-    <string name="recentCalls_addToContact" msgid="1429899535546487008">"संपर्कों में जोड़ें"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"किसी संपर्क में जोड़ें"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"कॉल इतिहास से साफ़ करें"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"कॉल इतिहास साफ़ करें"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"वॉयस मेल हटाएं"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ध्‍वनिमेल साझा करें"</string>
-    <string name="recentCalls_empty" msgid="8555115547405030734">"कोई कॉल नहीं"</string>
+    <string name="recentCalls_empty" msgid="5934808652605981210">"आपका कॉल लॉग खाली है"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"कॉल करें"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कॉल इतिहास साफ़ करें?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"इससे आपके इतिहास से सभी कॉल हटा दिए जाएंगे"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"कॉल इतिहास साफ़ किया जा रहा है…"</string>
@@ -47,17 +49,15 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"केवल इनकमिंग कॉल"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"केवल आउटगोइंग कॉल"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"केवल छूटे कॉल"</string>
+    <string name="visual_voicemail_title" msgid="4574199312906348905">"विज़ुअल वॉइसमेल"</string>
+    <string name="visual_voicemail_text" msgid="164967285234132509">"किसी नंबर पर कॉल करने की आवश्‍यकता के बिना, अपना वॉइसमेल देखें और सुनें. डेटा शुल्‍क लागू हो सकते हैं."</string>
+    <string name="visual_voicemail_settings" msgid="8090338793118794741">"सेटिंग"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"वॉइसमेल अपडेट उपलब्‍ध नहीं हैं"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"नया वॉइसमेल प्रतीक्षा में है. इस समय लोड नहीं किया जा सकता."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"अपना वॉइसमेल सेट करें"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ऑडियो उपलब्‍ध नहीं है"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"सेट करें"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"वॉयस मेल कॉल करें"</string>
-    <string name="voicemail_speed_slowest" msgid="1733460666177707312">"सबसे धीमी गति"</string>
-    <string name="voicemail_speed_slower" msgid="1508601287347216244">"धीमी गति"</string>
-    <string name="voicemail_speed_normal" msgid="9033988544627228892">"सामान्य गति"</string>
-    <string name="voicemail_speed_faster" msgid="2019965121475935488">"तेज़ गति"</string>
-    <string name="voicemail_speed_fastest" msgid="5758712343491183292">"सबसे तेज़ गति"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"नंबर चुनें"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"नंबर चुनें"</string>
@@ -112,6 +112,7 @@
     <string name="voicemail" msgid="3851469869202611441">"वॉयस मेल"</string>
     <string name="private_num" msgid="6374339738119166953">"निजी नंबर"</string>
     <string name="payphone" msgid="7726415831153618726">"पे-फ़ोन"</string>
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> सेकंड"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> मि. <xliff:g id="SECONDS">%s</xliff:g> से."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"इस नंबर पर कॉल नहीं किया जा सकता"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ध्‍वनिमेल सेट करने के लिए, मेनू &gt; सेटिंग पर जाएं."</string>
@@ -126,8 +127,8 @@
     <string name="call_not_available" msgid="8941576511946492225">"फ़ोन कॉल नहीं किया जा सकता क्योंकि फ़ोन ऐप्लिकेशन अक्षम कर दिया गया है."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"उसके लिए इस डिवाइस पर कोई एेप नहीं है"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"नाम या फ़ोन नंबर डालें"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"कोई कॉल नहीं"</string>
-    <string name="recentVoicemails_empty" msgid="8582424947259156664">"हाल ही का कोई वॉइसमेल नहीं"</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"आपके पास कोई भी छूटा हुआ कॉल नहीं है."</string>
+    <string name="recentVoicemails_empty" msgid="7345542764648856330">"आपका वॉइसमेल इनबाॅक्‍स खाली है."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"केवल पसंदीदा दिखाएं"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"इतिहास"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"सभी"</string>
@@ -136,34 +137,45 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"स्पीड डायल"</string>
     <string name="tab_recents" msgid="929949073851377206">"हाल ही के"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"संपर्क"</string>
+    <string name="tab_voicemail" msgid="155024725947496746">"वॉइसमेल"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"पसंदीदा से निकाल दिया गया"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"वापस लाएं"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> पर कॉल करें"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"नया संपर्क बनाएं"</string>
-    <string name="search_shortcut_add_to_existing_contact" msgid="4403132207405813444">"मौजूदा संपर्क में जोड़ें"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"किसी संपर्क में जोड़ें"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS भेजें"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"वीडियो कॉल करें"</string>
-    <string name="recents_footer_text" msgid="7315554578957453359">"पूर्ण काल ​​इतिहास देखें"</string>
+    <string name="show_call_history" msgid="1141502332266697170">"पूरा कॉल इतिहास देखें"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>  छूटे हुए नए कॉल"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"स्‍पीड डायल उन पसंदीदा लोगों और नंबरों के लिए एक-स्‍पर्श डायलिंग है जिन्‍हें आप अक्‍सर कॉल करते हैं"</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"कोई संपर्क नहीं"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"आपके स्‍पीड डायल पर अभी तक कोई भी नहीं है"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"कोई पसंदीदा जोड़ें"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"आपके पास अभी कोई भी संपर्क नहीं है"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"कोई संपर्क जोड़ें"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"सभी नंबर देखने के लिए चित्र को स्‍पर्श करें या पुन: क्रमित करने के लिए स्‍पर्श करके रखें"</string>
     <string name="remove_contact" msgid="1080555335283662961">"निकालें"</string>
-    <string name="favorites_menu_all_contacts" msgid="992506284449891186">"सभी संपर्क"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"वीडियो कॉल"</string>
-    <string name="call_log_action_voicemail" msgid="4978620572562925654">"सुनें"</string>
-    <string name="call_log_action_details" msgid="7957138590190911171">"विवरण देखें"</string>
+    <string name="call_log_action_send_message" msgid="2826466379787846163">"संदेश भेजें"</string>
+    <string name="call_log_action_details" msgid="701345508704970622">"कॉल विवरण"</string>
+    <string name="call_log_action_call" msgid="463690849042459842">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को कॉल करें"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> से छूटा हुआ कॉल."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> से आए कॉल का उत्तर दिया गया."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g> पर किया गया कॉल."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> पर"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"कॉल करें"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को कॉल करें"</string>
-    <string name="description_video_call_action" msgid="4303952636480252389">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को वीडियो कॉल."</string>
+    <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को वीडियो कॉल करें."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> की वॉयस मेल सुनें"</string>
+    <string name="description_voicemail_play" msgid="2689369874037785439">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> का वॉइसमेल चलाएं"</string>
+    <string name="description_voicemail_pause" msgid="3905259748756919693">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> का वॉइसमेल रोकें"</string>
+    <string name="description_voicemail_delete" msgid="2025472770630153436">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> का वॉइसमेल हटाएं"</string>
+    <plurals name="description_voicemail_unread" formatted="false" msgid="8708346053055570332">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> नए वॉइसमेल</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> नए वॉइसमेल</item>
+    </plurals>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> के लिए संपर्क बनाएं"</string>
+    <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> को मौजूदा संपर्क में जोड़ें"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> के कॉल विवरण"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"कॉल इतिहास से हटाएं"</string>
-    <string name="call_log_action_report" msgid="4327809827087468864">"रिपोर्ट करें"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"आज"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"कल"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"पुराना"</string>
@@ -188,4 +200,13 @@
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"झटपट उत्तर"</string>
     <string name="call_settings_label" msgid="313434211353070209">"कॉल"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"कॉलिंग खाते"</string>
+    <string name="permission_single_turn_on" msgid="1543391076065465464">"चालू करें"</string>
+    <string name="permission_multiple_turn_on" msgid="2426278457455950554">"अनुमतियां सेट करें"</string>
+    <string name="permission_no_speeddial" msgid="7449042208802130085">"स्‍पीड डायल सक्षम करने के लिए,\n संपर्क अनुमति को चालू करें."</string>
+    <string name="permission_no_calllog" msgid="8969825954337678018">"अपना कॉल लॉग देखने के लिए,\n फ़ोन अनुमति को चालू करें."</string>
+    <string name="permission_no_contacts" msgid="4427828429876890950">"अपने संपर्कों को देखने के लिए,\n संपर्क अनुमति को चालू करें."</string>
+    <string name="permission_no_voicemail" msgid="7785949850839671813">"अपना वॉइसमेल ऐक्‍सेस करने के लिए,\n फ़ोन अनुमति को चालू करें."</string>
+    <string name="permission_no_search" msgid="84152933267902056">"अपने संपर्कों की खोज करने के लिए, संपर्क अनुमतियों को चालू करें."</string>
+    <string name="permission_place_call" msgid="7588803619716288478">"कॉल करने के लिए,\n फ़ोन अनुमति को चालू करें."</string>
+    <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"फ़ोन ऐप को सिस्टम सेटिंग में लिखने की अनुमति नहीं है."</string>
 </resources>
