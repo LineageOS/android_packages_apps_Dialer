@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/recents_footer_text" />
+        android:text="@string/show_call_history" />
 
 </android.support.v7.widget.CardView>
 

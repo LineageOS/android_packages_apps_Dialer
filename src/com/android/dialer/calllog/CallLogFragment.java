@@ -469,7 +469,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
         mEmptyListView.setDescription(messageId);
         if (mIsRecentsFragment) {
-            mEmptyListView.setActionLabel(R.string.recentCalls_empty_action_cm);
+            mEmptyListView.setActionLabel(R.string.recentCalls_empty_action);
         } else {
             mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
         }
