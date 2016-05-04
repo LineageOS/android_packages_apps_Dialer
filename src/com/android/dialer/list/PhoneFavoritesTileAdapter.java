@@ -45,6 +45,8 @@ import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileAdapter.DisplayType;
 import com.android.contacts.common.list.ContactTileView;
+import com.android.internal.telephony.util.BlacklistUtils;
+import android.telephony.PhoneNumberUtils;
 import com.android.dialer.R;
 
 import java.util.ArrayList;
@@ -264,30 +266,34 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
             final String name = cursor.getString(mNameIndex);
             final boolean isStarred = cursor.getInt(mStarredIndex) > 0;
             final boolean isDefaultNumber = cursor.getInt(mIsDefaultNumberIndex) > 0;
+            final String phoneNumber = cursor.getString(mPhoneNumberIndex);
 
-            final ContactEntry contact = new ContactEntry();
+            if(!isBlacklisted(phoneNumber)) {
 
-            contact.id = id;
-            contact.name = (!TextUtils.isEmpty(name)) ? name :
-                    mResources.getString(R.string.missing_name);
-            contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
-            contact.lookupKey = lookupKey;
-            contact.lookupUri = ContentUris.withAppendedId(
-                    Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
-            contact.isFavorite = isStarred;
-            contact.isDefaultNumber = isDefaultNumber;
+                final ContactEntry contact = new ContactEntry();
 
-            // Set phone number and label
-            final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
-            final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
-            contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
-                    phoneNumberCustomLabel);
-            contact.phoneNumber = cursor.getString(mPhoneNumberIndex);
+                contact.id = id;
+                contact.name = (!TextUtils.isEmpty(name)) ? name :
+                        mResources.getString(R.string.missing_name);
+                contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
+                contact.lookupKey = lookupKey;
+                contact.lookupUri = ContentUris.withAppendedId(
+                        Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey), id);
+                contact.isFavorite = isStarred;
+                contact.isDefaultNumber = isDefaultNumber;
 
-            contact.pinned = pinned;
-            mContactEntries.add(contact);
+                // Set phone number and label
+                final int phoneNumberType = cursor.getInt(mPhoneNumberTypeIndex);
+                final String phoneNumberCustomLabel = cursor.getString(mPhoneNumberLabelIndex);
+                contact.phoneLabel = (String) Phone.getTypeLabel(mResources, phoneNumberType,
+                        phoneNumberCustomLabel);
+                contact.phoneNumber = phoneNumber;
 
-            duplicates.put(id, contact);
+                contact.pinned = pinned;
+                mContactEntries.add(contact);
+
+                duplicates.put(id, contact);
+            }
 
             counter++;
         }
@@ -297,6 +303,15 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements
         arrangeContactsByPinnedPosition(mContactEntries);
 
         notifyDataSetChanged();
+    }
+
+    /**
+     * Note: run on non-ui thread as this call executes a content provider query
+     */
+    private boolean isBlacklisted(String number) {
+        String nn = PhoneNumberUtils.normalizeNumber(number);
+        return BlacklistUtils.isListed(mContext, nn, BlacklistUtils.BLOCK_CALLS)
+                != BlacklistUtils.MATCH_NONE;
     }
 
     /**
