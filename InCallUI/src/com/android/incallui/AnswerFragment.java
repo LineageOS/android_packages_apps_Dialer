@@ -57,6 +57,8 @@ public abstract class AnswerFragment extends BaseFragment<AnswerPresenter, Answe
     public static final int TARGET_SET_FOR_QTI_BIDIRECTIONAL_VIDEO_ACCEPT_REJECT_REQUEST = 1004;
     public static final int TARGET_SET_FOR_QTI_VIDEO_TRANSMIT_ACCEPT_REJECT_REQUEST = 1005;
     public static final int TARGET_SET_FOR_QTI_VIDEO_RECEIVE_ACCEPT_REJECT_REQUEST = 1006;
+    public static final int TARGET_SET_FOR_QTI_AUDIO_WITHOUT_SMS = 1007;
+    public static final int TARGET_SET_FOR_QTI_AUDIO_WITH_SMS = 1008;
 
     /**
      * This fragment implement no UI at all. Derived class should do it.
@@ -266,6 +268,10 @@ public abstract class AnswerFragment extends BaseFragment<AnswerPresenter, Answe
 
     public void onText() {
         getPresenter().onText();
+    }
+
+    public void onDeflect(Context context) {
+        getPresenter().onDeflect(context);
     }
 
     /**

@@ -141,4 +141,51 @@
         <item>@string/description_target_decline_upgrade_to_video_receive_request</item>
     </array>
 
+    <!-- For audio calls, if respond via SMS is disabled & call deflection is enabled:
+         - Answer (drag right)
+         - Decline (drag left)
+         - Deflect (drag down) -->
+    <array name="qti_incoming_call_widget_audio_without_sms_targets">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@null</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/qti_ic_lockscreen_deflect</item>
+    </array>
+    <array name="qti_incoming_call_widget_audio_without_sms_target_descriptions">
+        <item>@string/description_target_answer</item>
+        <item>@null</item>
+        <item>@string/description_target_decline</item>
+        <item>@string/qti_description_target_deflect</item>
+    </array>
+    <array name="qti_incoming_call_widget_audio_without_sms_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@null</item>
+        <item>@string/description_direction_left</item>
+        <item>@string/description_direction_down</item>
+    </array>
+
+    <!-- For audio calls, if respond via SMS is enabled & call deflection is enabled:
+         - Answer (drag right)
+         - Respond via SMS (drag up)
+         - Decline (drag left)
+         - Deflect (drag down) -->
+    <array name="qti_incoming_call_widget_audio_with_sms_targets">
+        <item>@drawable/ic_lockscreen_answer</item>
+        <item>@drawable/ic_lockscreen_text</item>
+        <item>@drawable/ic_lockscreen_decline</item>
+        <item>@drawable/qti_ic_lockscreen_deflect</item>
+    </array>
+    <array name="qti_incoming_call_widget_audio_with_sms_target_descriptions">
+        <item>@string/description_target_answer</item>
+        <item>@string/description_target_send_sms</item>
+        <item>@string/description_target_decline</item>
+        <item>@string/qti_description_target_deflect</item>
+    </array>
+    <array name="qti_incoming_call_widget_audio_with_sms_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@string/description_direction_up</item>
+        <item>@string/description_direction_left</item>
+        <item>@string/description_direction_down</item>
+    </array>
+
 </resources>

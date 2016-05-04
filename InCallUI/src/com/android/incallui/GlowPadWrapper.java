@@ -133,6 +133,9 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
         } else if (resId == R.drawable.qti_ic_lockscreen_answer_rx_video) {
             mAnswerFragment.onAnswer(VideoProfile.STATE_RX_ENABLED, getContext());
             mTargetTriggered = true;
+        } else if (resId == R.drawable.qti_ic_lockscreen_deflect) {
+            mAnswerFragment.onDeflect(getContext());
+            mTargetTriggered = true;
         } else {
             // Code should never reach here.
             Log.e(this, "Trigger detected on unhandled resource. Skipping.");

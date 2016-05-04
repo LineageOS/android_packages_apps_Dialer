@@ -87,4 +87,9 @@
     <string name="qti_ims_onscreenAssuredTransfer">Assured Transfer</string>
     <!-- Text for the onscreen "consultative transfer" button -->
     <string name="qti_ims_onscreenConsultativeTransfer">Consultative Transfer</string>
+
+    <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <string name="qti_description_target_deflect">Deflect</string>
+    <string name="qti_description_deflect_error">Number not set. Provide the number via IMS settings and retry.</string>
+    <string name="qti_description_deflect_service_error">Call Deflection service is not supported.</string>
 </resources>

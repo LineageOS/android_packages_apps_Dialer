@@ -17,12 +17,19 @@
 package com.android.incallui;
 
 import android.content.Context;
+import android.provider.Settings;
 
 import com.android.dialer.compat.UserManagerCompat;
 import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.InCallPresenter.InCallState;
 
 import java.util.List;
+
+import org.codeaurora.ims.internal.IQtiImsExt;
+import org.codeaurora.ims.QtiImsException;
+import org.codeaurora.ims.QtiImsExtListenerBaseImpl;
+import org.codeaurora.ims.QtiImsExtManager;
+import org.codeaurora.ims.utils.QtiImsExtUtils;
 
 /**
  * Presenter for the Incoming call widget. The {@link AnswerPresenter} handles the logic during
@@ -43,6 +50,17 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     private String mCallId;
     private Call mCall = null;
     private boolean mHasTextMessages = false;
+
+    /* QtiImsExtListenerBaseImpl instance to handle call deflection response */
+    private QtiImsExtListenerBaseImpl imsInterfaceListener =
+            new QtiImsExtListenerBaseImpl() {
+
+        /* Handles call deflect response */
+        @Override
+        public void receiveCallDeflectResponse(int result) {
+            Log.w(this, "receiveCallDeflectResponse: " + result);
+        }
+    };
 
     @Override
     public void onUiShowing(boolean showing) {
@@ -266,6 +284,36 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
+    /**
+     * Deflect the incoming call.
+     */
+    public void onDeflect(Context context) {
+        if (mCallId == null) {
+            return;
+        }
+        Log.d(this, "onDeflect " + mCallId);
+
+        String deflectCallNumber = QtiImsExtUtils.getCallDeflectNumber(
+                                           context.getContentResolver());
+        /* If not set properly, inform user via toast */
+        if (deflectCallNumber == null) {
+            Log.w(this, "getCallDeflectNumber is null or Empty.");
+            QtiCallUtils.displayToast(context, R.string.qti_description_deflect_error);
+        } else {
+            int phoneId = 0;
+            try {
+                Log.d(this, "Sending deflect request with Phone id " + phoneId +
+                        " to " + deflectCallNumber);
+                QtiImsExtManager.getInstance().sendCallDeflectRequest(phoneId,
+                        deflectCallNumber, imsInterfaceListener);
+             } catch (QtiImsException e) {
+                 Log.e(this, "sendCallDeflectRequest exception " + e);
+                 QtiCallUtils.displayToast(getUi().getContext(),
+                         R.string.qti_description_deflect_service_error);
+             }
+        }
+    }
+
     public void rejectCallWithMessage(String message) {
         Log.d(this, "sendTextToDefaultActivity()...");
         TelecomAdapter.getInstance().rejectCall(mCall.getId(), true, message);
@@ -297,6 +345,17 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
                 getUi().showTargets(QtiCallUtils.getIncomingCallAnswerOptions(
                         getUi().getContext(), withSms));
             }
+        } else if (isCallDeflectSupported()) {
+            /**
+             * Only present the user with the option to deflect call,
+             * if the incoming call is only an audio call.
+             */
+            if (withSms) {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_QTI_AUDIO_WITH_SMS);
+                getUi().configureMessageDialog(textMsgs);
+            } else {
+                getUi().showTargets(AnswerFragment.TARGET_SET_FOR_QTI_AUDIO_WITHOUT_SMS);
+            }
         } else {
             if (withSms) {
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITH_SMS);
@@ -305,6 +364,23 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
                 getUi().showTargets(AnswerFragment.TARGET_SET_FOR_AUDIO_WITHOUT_SMS);
             }
         }
+    }
+
+    /**
+     * Checks the Settings to conclude on the call deflect support.
+     * Returns true if call deflect is possible, false otherwise.
+     */
+    private boolean isCallDeflectSupported() {
+        int value = 0;
+        try{
+            value = android.provider.Settings.Global.getInt(
+                    getUi().getContext().getContentResolver(),
+                    QtiImsExtUtils.QTI_IMS_DEFLECT_ENABLED);
+        } catch(Settings.SettingNotFoundException e) {
+            //do Nothing
+            Log.e(this, "isCallDeflectSupported exception " + e);
+        }
+        return (value == 1);
     }
 
     interface AnswerUi extends Ui {
