@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_ab6c7b36",
+        "filename": "src/com/android/dialer/list/PhoneFavoritesTileAdapter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-04T04:29:30Z",
+      "side": 1,
+      "message": "How do we handle contacts with multiple numbers?",
+      "range": {
+        "startLine": 269,
+        "startChar": 25,
+        "endLine": 269,
+        "endChar": 36
+      },
+      "revId": "791503cb777dc7ff5bab3f46dd92eb5bd0ca8e02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8b1e5fb8",
+        "filename": "src/com/android/dialer/list/PhoneFavoritesTileAdapter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-04T04:29:30Z",
+      "side": 1,
+      "message": "if (!isBlacklisted(phoneNumber)) There should be a space after if.",
+      "range": {
+        "startLine": 271,
+        "startChar": 14,
+        "endLine": 271,
+        "endChar": 16
+      },
+      "revId": "791503cb777dc7ff5bab3f46dd92eb5bd0ca8e02",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
