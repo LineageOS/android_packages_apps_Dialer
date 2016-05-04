@@ -32,7 +32,7 @@
         android:key="button_t9_search_input"
         android:title="@string/t9_search_input_locale"
         android:summary="%s"
-        android:defaultValue=""
+        android:defaultValue="en"
         android:persistent="false" />
 
 </PreferenceScreen>

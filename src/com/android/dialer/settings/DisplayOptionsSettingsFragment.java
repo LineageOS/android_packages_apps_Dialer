@@ -87,7 +87,7 @@ public class DisplayOptionsSettingsFragment extends PreferenceFragment
         String[] values = new String[len];
 
         entries[0] = getString(R.string.t9_search_input_locale_default);
-        values[0] = "";
+        values[0] = "en";
 
         // add locales programatically so we can use locale.getDisplayName
         for (int i = 0; i < T9_SEARCH_INPUT_LOCALES.length; i++) {
