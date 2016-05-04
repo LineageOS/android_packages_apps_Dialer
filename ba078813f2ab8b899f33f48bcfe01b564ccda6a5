@@ -68,6 +68,30 @@
       "revId": "ba078813f2ab8b899f33f48bcfe01b564ccda6a5",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_31f0fe67",
+        "filename": "src/com/android/dialer/settings/DisplayOptionsSettingsFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-04T18:34:35Z",
+      "side": 1,
+      "message": "Actually looks like might have to use something different as Locale.getDefault().toString returns en_US.\n\nLocale.getDefault().getLanguage() should do .",
+      "parentUuid": "5faad753_f18266c8",
+      "range": {
+        "startLine": 90,
+        "startChar": 19,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "ba078813f2ab8b899f33f48bcfe01b564ccda6a5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
