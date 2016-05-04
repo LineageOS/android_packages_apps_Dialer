@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4c7e3de5",
+        "filename": "src/com/android/dialer/CallDetailActivity.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-04T21:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ec98496b",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 23
+      },
+      "revId": "59f876e1e8f984a3e4431c7ecf489b02766ca70d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_0c9e0556",
         "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
         "patchSetId": 15
@@ -36,6 +60,30 @@
       "writtenOn": "2016-05-04T20:22:33Z",
       "side": 1,
       "message": "why final",
+      "range": {
+        "startLine": 550,
+        "startChar": 8,
+        "endLine": 550,
+        "endChar": 13
+      },
+      "revId": "59f876e1e8f984a3e4431c7ecf489b02766ca70d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_0c8845e5",
+        "filename": "src/com/android/dialer/calllog/ContactInfoHelper.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-04T21:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_0c9e0556",
       "range": {
         "startLine": 550,
         "startChar": 8,
