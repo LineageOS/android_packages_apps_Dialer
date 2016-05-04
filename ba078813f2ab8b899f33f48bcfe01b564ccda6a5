@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_5167ba4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-04T18:27:37Z",
+      "side": 1,
+      "message": "can you add CD-620 as well? looks like we got two tickets for this issue.",
+      "range": {
+        "startLine": 13,
+        "startChar": 10,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "ba078813f2ab8b899f33f48bcfe01b564ccda6a5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_31623e40",
+        "filename": "res/xml/display_options_settings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-04T18:27:37Z",
+      "side": 1,
+      "message": "see other comment on this.",
+      "range": {
+        "startLine": 35,
+        "startChar": 28,
+        "endLine": 35,
+        "endChar": 32
+      },
+      "revId": "ba078813f2ab8b899f33f48bcfe01b564ccda6a5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_f18266c8",
+        "filename": "src/com/android/dialer/settings/DisplayOptionsSettingsFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-04T18:27:37Z",
+      "side": 1,
+      "message": "I think a better solution might be to do Locale.getDefault.toString(). \"Default\" might not be english.",
+      "range": {
+        "startLine": 90,
+        "startChar": 19,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "ba078813f2ab8b899f33f48bcfe01b564ccda6a5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
