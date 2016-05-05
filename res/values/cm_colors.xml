@@ -11,4 +11,6 @@
     <color name="coach_mark_line_color">#48c0ed</color>
     <color name="coach_mark_text_with_overlay">#FFF</color>
     <color name="coach_mark_text">#000</color>
+    <color name="promo_card_header_text_color">@color/background_dialer_white</color>
+    <color name="promo_card_details_text_color">@color/background_dialer_white</color>
 </resources>
