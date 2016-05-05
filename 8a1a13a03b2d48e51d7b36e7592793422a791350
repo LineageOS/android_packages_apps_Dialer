@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_16ddb313",
+        "filename": "src/com/android/dialer/callstats/CallStatsDetailActivity.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-05T17:11:53Z",
+      "side": 1,
+      "message": "meh... not great, but i see we do this in other places in this code block",
+      "revId": "8a1a13a03b2d48e51d7b36e7592793422a791350",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
