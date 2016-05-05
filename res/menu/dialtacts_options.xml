@@ -16,6 +16,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_4g_conference_call"
+        android:title="@string/menu_4g_conference_call" />
+    <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_history_lt"
         android:title="@string/action_menu_call_history_description" />

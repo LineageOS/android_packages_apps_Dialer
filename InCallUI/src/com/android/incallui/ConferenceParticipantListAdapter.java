@@ -366,13 +366,40 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
                         contactCache.nameAlternative, mContactsPreferences),
                 contactCache.number, contactCache.label,
                 contactCache.lookupKey, contactCache.displayPhotoUri, thisRowCanSeparate,
-                thisRowCanDisconnect);
+                thisRowCanDisconnect, getResourceforState(call.getTrueState()));
 
         // Tag the row in the conference participant list with the call id to make it easier to
         // find calls when contact cache information is loaded.
         result.setTag(call.getId());
 
         return result;
+    }
+
+    private static int getResourceforState(int state){
+        int res;
+        switch (state){
+            case Call.State.ACTIVE:
+                res = R.string.call_state_active;
+                break;
+            case Call.State.NEW:
+            case Call.State.IDLE:
+            case Call.State.DIALING:
+            case Call.State.REDIALING:
+                res = R.string.call_state_dialing;
+                break;
+            case Call.State.ONHOLD:
+                res = R.string.call_state_holding;
+                break;
+            case Call.State.DISCONNECTING:
+                res = R.string.call_state_disconnecting;
+                break;
+            case Call.State.DISCONNECTED:
+                res = R.string.call_state_disconnected;
+                break;
+            default:
+                res = R.string.call_state_unknown;
+        }
+        return res;
     }
 
     /**
@@ -404,7 +431,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
      */
     private final void setCallerInfoForRow(View view, String callerName, String preferredName,
             String callerNumber, String callerNumberType, String lookupKey, Uri photoUri,
-            boolean thisRowCanSeparate, boolean thisRowCanDisconnect) {
+            boolean thisRowCanSeparate, boolean thisRowCanDisconnect, int state) {
 
         final ImageView photoView = (ImageView) view.findViewById(R.id.callerPhoto);
         final TextView nameTextView = (TextView) view.findViewById(R.id.conferenceCallerName);
@@ -413,7 +440,11 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
                 R.id.conferenceCallerNumberType);
         final View endButton = view.findViewById(R.id.conferenceCallerDisconnect);
         final View separateButton = view.findViewById(R.id.conferenceCallerSeparate);
-
+        if (mContext.getResources().getBoolean(R.bool.
+                config_conference_call_show_participant_status)){
+            final TextView stateTextView = (TextView) view.findViewById(R.id.conferenceCallerState);
+            stateTextView.setText(state);
+        }
         endButton.setVisibility(thisRowCanDisconnect ? View.VISIBLE : View.GONE);
         if (thisRowCanDisconnect) {
             endButton.setOnClickListener(mDisconnectListener);
@@ -457,6 +488,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
      * @param conferenceParticipants The calls which make up the conference participants.
      */
     private void updateParticipantInfo(List<Call> conferenceParticipants) {
+        Log.d(this, "updateParticipantInfo: " + conferenceParticipants);
         final ContactInfoCache cache = ContactInfoCache.getInstance(mContext);
         boolean newParticipantAdded = false;
         HashSet<String> newCallIds = new HashSet<>(conferenceParticipants.size());

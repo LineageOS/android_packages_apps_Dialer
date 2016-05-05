@@ -1678,6 +1678,37 @@ public class InCallPresenter implements CallList.Listener,
         }
     }
 
+    public void sendAddMultiParticipantsIntent() {
+        Intent intent = new Intent("android.intent.action.ADDPARTICIPANT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("add_participant", true);
+
+        Call call = mCallList.getActiveOrBackgroundCall();
+        List<String> childCallIdList = call.getChildCallIds();
+        if (childCallIdList != null) {
+            StringBuffer sb = new StringBuffer();
+            for (int k=0; k<childCallIdList.size(); k++) {
+                String tmp = childCallIdList.get(k);
+                String number = CallList.getInstance()
+                        .getCallById(tmp).getNumber();
+                if (number.contains(";")) {
+                    String[] temp = number.split(";");
+                    number = temp[0];
+                }
+                sb.append(number).append(";");
+            }
+            Log.d(this, "sendAddMultiParticipantsIntent, numbers " + sb.toString());
+            intent.putExtra("current_participant_list", sb.toString());
+        } else {
+            Log.e(this, "sendAddMultiParticipantsIntent, childCallIdList null.");
+        }
+        try {
+            mContext.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.e(this, "Activity for adding calls isn't found.");
+        }
+    }
+
     /**
      * Retrieves the current in-call camera manager instance, creating if necessary.
      *

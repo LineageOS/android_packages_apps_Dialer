@@ -261,6 +261,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void addParticipantClicked() {
+        if (getUi().getContext().getResources().getBoolean(
+                R.bool.add_multi_participants_enabled)){
+            InCallPresenter.getInstance().sendAddMultiParticipantsIntent();
+            return;
+        }
         InCallPresenter.getInstance().sendAddParticipantIntent();
     }
 
@@ -435,7 +440,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
         int callTransferCapabilities = call.getTransferCapabilities();
-        final boolean showAddParticipant = call.can(CAPABILITY_ADD_PARTICIPANT);
+        boolean showAddParticipant = call.can(CAPABILITY_ADD_PARTICIPANT);
+        if (ui.getContext().getResources().getBoolean(
+            R.bool.add_participant_only_in_conference)) {
+            showAddParticipant = showAddParticipant&&(call.isConferenceCall());
+        }
 
         ui.showButton(BUTTON_AUDIO, true);
         ui.showButton(BUTTON_SWAP, showSwap);

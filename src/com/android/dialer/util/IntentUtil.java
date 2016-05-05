@@ -23,6 +23,9 @@ import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
+import android.content.Context;
+import com.android.dialer.R;
+import android.telephony.TelephonyManager;
 
 import com.android.contacts.common.CallUtil;
 
@@ -154,5 +157,37 @@ public class IntentUtil {
         if (phoneNumberType != NO_PHONE_TYPE) {
             intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, phoneNumberType);
         }
+    }
+    /**
+     * if true, conference dialer  is enabled.
+     */
+    public static boolean isConferDialerEnabled(Context context) {
+        if (context.getResources().getBoolean(R.bool.config_enable_conference_dialer)) {
+            TelephonyManager telephonyMgr = (TelephonyManager)
+                    context.getSystemService(Context.TELEPHONY_SERVICE);
+            return telephonyMgr.isImsRegistered();
+        }
+        return false;
+    }
+
+    /**
+     * get intent to start conference dialer
+     * with this intent, we can originate an conference call
+     */
+    public static Intent getConferenceDialerIntent(String number) {
+        Intent intent = new Intent("android.intent.action.ADDPARTICIPANT");
+        intent.putExtra("confernece_number_key", number);
+        return intent;
+    }
+
+    /**
+     * used to get intent to start conference dialer
+     * with this intent, we can add participants to an existing conference call
+     */
+    public static Intent getAddParticipantsIntent(String number) {
+        Intent intent = new Intent("android.intent.action.ADDPARTICIPANT");
+        intent.putExtra("add_participant", true);
+        intent.putExtra("current_participant_list", number);
+        return intent;
     }
 }

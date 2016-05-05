@@ -272,6 +272,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
             menu.findItem(R.id.menu_history).setVisible(
                     PermissionsUtil.hasPhonePermissions(DialtactsActivity.this));
+            final MenuItem ConferDialerOption = menu.findItem(R.id.menu_4g_conference_call);
+            ConferDialerOption.setVisible(
+                    IntentUtil.isConferDialerEnabled(getApplicationContext()));
             super.show();
         }
     }
@@ -723,6 +726,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         } else if (resId == R.id.menu_archive) {
             final Intent intent = new Intent(this, VoicemailArchiveActivity.class);
             startActivity(intent);
+            return true;
+        } else if (resId == R.id.menu_4g_conference_call){
+            this.startActivity(IntentUtil.getConferenceDialerIntent(null));
             return true;
         }
         return false;

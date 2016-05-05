@@ -44,4 +44,12 @@
     <bool name="call_duration_enabled">true</bool>
     <!-- Config to enable/disable ims call log -->
     <bool name="ims_call_type_enabled">false</bool>
+    <!-- Flag indicating if conference dialer  is enabled -->
+    <bool name="config_enable_conference_dialer">false</bool>
+    <!-- Config to enable/disable conference state display -->
+    <bool name="config_conference_call_show_participant_status">false</bool>
+    <!-- Config to enable/disable add multi participants -->
+    <bool name="add_multi_participants_enabled">false</bool>
+    <!-- Config to add participant only in conferencall call-->
+    <bool name="add_participant_only_in_conference">false</bool>
 </resources>

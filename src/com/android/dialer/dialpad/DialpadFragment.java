@@ -83,6 +83,7 @@ import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.SpeedDialUtils;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.Call.LogState;
@@ -938,6 +939,10 @@ public class DialpadFragment extends Fragment
             public void show() {
                 final Menu menu = getMenu();
 
+                final MenuItem conferDialerOption
+                        = menu.findItem(R.id.menu_add_to_4g_conference_call);
+                conferDialerOption.setVisible(IntentUtil.isConferDialerEnabled(getActivity()));
+
                 boolean enable = !isDigitsEmpty();
                 for (int i = 0; i < menu.size(); i++) {
                     MenuItem item = menu.getItem(i);
@@ -1623,6 +1628,10 @@ public class DialpadFragment extends Fragment
         } else if (resId == R.id.menu_call_with_note) {
             CallSubjectDialog.start(getActivity(), mDigits.getText().toString());
             hideAndClearDialpad(false);
+            return true;
+        } else if (resId == R.id.menu_add_to_4g_conference_call){
+            getActivity().startActivity(IntentUtil.getConferenceDialerIntent(
+                        mDigits.getText().toString()));
             return true;
         } else {
             return false;

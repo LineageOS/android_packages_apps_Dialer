@@ -16,6 +16,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_add_to_4g_conference_call"
+        android:title="@string/menu_add_to_4g_conference_call"
+        android:showAsAction="withText" />
+    <item
         android:id="@+id/menu_2s_pause"
         android:title="@string/add_2sec_pause"
         android:showAsAction="withText" />

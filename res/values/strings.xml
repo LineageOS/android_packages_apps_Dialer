@@ -314,6 +314,8 @@
     <string name="menu_show_all_calls">Show all calls</string>
 
     <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
+    <string name="menu_add_to_4g_conference_call">Add to 4G conference call</string>
+    <string name="menu_4g_conference_call">4G conference call</string>
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>
 

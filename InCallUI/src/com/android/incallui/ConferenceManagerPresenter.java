@@ -126,7 +126,7 @@ public class ConferenceManagerPresenter
         }
 
         Log.d(this, "Number of calls is " + String.valueOf(calls.size()));
-
+        Log.d(this, "update calls" + calls);
         // Users can split out a call from the conference call if either the active call or the
         // holding call is empty. If both are filled, users can not split out another call.
         final boolean hasActiveCall = (callList.getActiveCall() != null);
