@@ -16,16 +16,13 @@
 package com.android.dialer.list;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.READ_CONTACTS;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
 import com.android.contacts.common.list.PinnedHeaderListView;
-import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialerbind.ObjectFactory;
 
@@ -33,7 +30,6 @@ import com.android.dialer.R;
 import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.lookup.LookupSettings;
 import com.android.dialer.service.CachedNumberLookupService;
-import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 
 import com.android.phone.common.incall.CreditBarHelper;
@@ -101,39 +97,5 @@ public class RegularSearchFragment extends SearchFragment
         }
         LookupCache.cacheContact(getActivity(),
                 adapter.getLookupContactInfo(position));
-    }
-
-    @Override
-    protected void setupEmptyView() {
-        if (mEmptyView != null && getActivity() != null) {
-            if (!PermissionsUtil.hasPermission(getActivity(), READ_CONTACTS)) {
-                mEmptyView.setImage(R.drawable.empty_contacts);
-                mEmptyView.setActionLabel(R.string.permission_single_turn_on);
-                mEmptyView.setDescription(R.string.permission_no_search);
-                mEmptyView.setActionClickedListener(this);
-            } else {
-                mEmptyView.setImage(EmptyContentView.NO_IMAGE);
-                mEmptyView.setActionLabel(EmptyContentView.NO_LABEL);
-                mEmptyView.setDescription(EmptyContentView.NO_LABEL);
-            }
-        }
-    }
-
-    @Override
-    public void onEmptyViewActionButtonClicked() {
-        final Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-
-        requestPermissions(new String[] {READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            int[] grantResults) {
-        if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
-            setupEmptyView();
-        }
     }
 }
