@@ -15,51 +15,27 @@
  */
 package com.android.dialer.list;
 
-import static android.Manifest.permission.CALL_PHONE;
-
-import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Loader;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-
-import android.text.TextUtils;
 
 import com.android.contacts.common.list.ContactEntryListAdapter;
-import com.android.contacts.common.util.PermissionsUtil;
-import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.SmartDialCursorLoader;
 import com.android.dialer.R;
-import com.android.dialer.incall.InCallMetricsHelper;
-import com.android.dialer.widget.EmptyContentView;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.DialerDataSubscription;
 import com.android.phone.common.incall.utils.CallMethodFilters;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Implements a fragment to load and display SmartDial search results.
  */
 public class SmartDialSearchFragment extends SearchFragment
-        implements EmptyContentView.OnEmptyViewActionButtonClickedListener,
-        DialerPhoneNumberListAdapter.searchMethodClicked {
+        implements DialerPhoneNumberListAdapter.searchMethodClicked {
     private static final String TAG = SmartDialSearchFragment.class.getSimpleName();
-
-    private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
-
-    private HashMap<ComponentName, CallMethodInfo> mAvailableProviders;
 
     /**
      * Creates a SmartDialListAdapter to display and operate on search results.
@@ -116,146 +92,6 @@ public class SmartDialSearchFragment extends SearchFragment
         return loader;
     }
 
-    @Override
-    public void setupEmptyView() {
-        DialtactsActivity dialActivity = (DialtactsActivity) getActivity();
-
-        if (mEmptyView != null && dialActivity != null) {
-            final SmartDialNumberListAdapter adapter = (SmartDialNumberListAdapter) getAdapter();
-            if (mCurrentCallMethodInfo == null) {
-                mCurrentCallMethodInfo = dialActivity.getCurrentCallMethod();
-            }
-
-            Resources r = getResources();
-            mEmptyView.setWidth(dialActivity.getDialpadWidth());
-            if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
-                mEmptyView.setImage(R.drawable.empty_contacts);
-                mEmptyView.setActionLabel(R.string.permission_single_turn_on);
-                mEmptyView.setDescription(R.string.cm_permission_place_call);
-                mEmptyView.setSubMessage(null);
-                mEmptyView.setActionClickedListener(this);
-            } else if (adapter.getCount() == 0) {
-                mEmptyView.setActionLabel(mEmptyView.NO_LABEL);
-                mEmptyView.setImage(null);
-
-                // Get Current InCall plugin specific call methods, we don't want to update this
-                // suddenly so just the currently available ones are fine.
-                if (mAvailableProviders == null) {
-                    mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
-                    mAvailableProviders.putAll(CallMethodFilters.getAllEnabledCallMethods(
-                            DialerDataSubscription.get(getActivity())));
-                }
-
-                if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
-                    showProviderHint(r);
-                } else {
-                    showSuggestion(r);
-                }
-            }
-        }
-    }
-
-    public void showNormalT9Hint(Resources r) {
-        mEmptyView.setImage(null);
-        mEmptyView.setDescription(R.string.empty_dialpad_t9_example);
-        mEmptyView.setSubMessage(R.string.empty_dialpad_t9_example_subtext);
-    }
-
-    public void showProviderHint(Resources r) {
-        String text;
-        if (!mCurrentCallMethodInfo.mIsAuthenticated) {
-            // Sign into current selected call method to make calls
-            text = getString(R.string.sign_in_hint_text, mCurrentCallMethodInfo.mName);
-        } else {
-            // InCallApi provider specified hint
-            text = mCurrentCallMethodInfo.getHintText();
-        }
-        if (TextUtils.isEmpty(text)) {
-            showNormalT9Hint(r);
-        } else {
-            Drawable heroImage = mCurrentCallMethodInfo.mSingleColorBrandIcon;
-            heroImage.setTint(r.getColor(R.color.hint_image_color));
-
-            int orientation = r.getConfiguration().orientation;
-            mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
-            mEmptyView.setDescription(text);
-            mEmptyView.setSubMessage(null);
-            // TODO: put action button for login in or switching provider!
-        }
-    }
-
-    public void showSuggestion(Resources r) {
-        ConnectivityManager connManager =
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-        CallMethodInfo emergencyOnlyCallMethod = CallMethodInfo.getEmergencyCallMethod(getContext());
-
-        if (mCurrentCallMethodInfo != null) {
-            int orientation = r.getConfiguration().orientation;
-            if (mCurrentCallMethodInfo.equals(emergencyOnlyCallMethod)) {
-                // If no sims available and emergency only call method selected,
-                // alert user that only emergency calls are allowed for the current call method.
-                String text = r.getString(R.string.emergency_call_hint_text);
-                Drawable heroImage = r.getDrawable(R.drawable.ic_nosim);
-                heroImage.setTint(r.getColor(R.color.emergency_call_icon_color));
-
-                mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
-                mEmptyView.setDescription(text);
-                mEmptyView.setSubMessage(null);
-            } else if (!mAvailableProviders.isEmpty() &&
-                    !mCurrentCallMethodInfo.mIsInCallProvider &&
-                    mWifi.isConnected()) {
-                TelephonyManager tm =
-                        (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-                String template;
-                Drawable heroImage;
-                String text;
-
-                InCallMetricsHelper.Events event = null;
-                CallMethodInfo hintTextMethod = hintTextRequest();
-                if (TextUtils.isEmpty(tm.getNetworkOperator())) {
-                    heroImage = r.getDrawable(R.drawable.ic_signal_wifi_3_bar);
-                    template = r.getString(R.string.wifi_hint_text);
-                    text = String.format(template, hintTextMethod.mName);
-                    event = InCallMetricsHelper.Events.INAPP_NUDGE_DIALER_WIFI;
-                } else if (tm.isNetworkRoaming(mCurrentCallMethodInfo.mSubId)) {
-                    heroImage = r.getDrawable(R.drawable.ic_roaming);
-                    template = r.getString(R.string.roaming_hint_text);
-                    text = String.format(template, mCurrentCallMethodInfo.mName,
-                            hintTextMethod.mName);
-                    event = InCallMetricsHelper.Events.INAPP_NUDGE_DIALER_ROAMING;
-                } else {
-                    showNormalT9Hint(r);
-                    return;
-                }
-
-                mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
-                mEmptyView.setDescription(text);
-                mEmptyView.setSubMessage(null);
-
-                InCallMetricsHelper.increaseCountOfMetric(
-                        hintTextMethod.mComponent, event,
-                        InCallMetricsHelper.Categories.INAPP_NUDGES,
-                        InCallMetricsHelper.Parameters.COUNT);
-            } else {
-                showNormalT9Hint(r);
-            }
-        } else {
-            showNormalT9Hint(r);
-        }
-    }
-
-    private CallMethodInfo hintTextRequest() {
-        // Randomly choose an item that is not a sim to prompt user to switch to
-        List<CallMethodInfo> valuesList =
-                new ArrayList<CallMethodInfo>(mAvailableProviders.values());
-
-        int randomIndex = new Random().nextInt(valuesList.size());
-        return valuesList.get(randomIndex);
-    }
-
     public void setAvailableProviders(HashMap<ComponentName, CallMethodInfo> callMethods) {
         if (mAvailableProviders != null) {
             mAvailableProviders.clear();
@@ -265,24 +101,6 @@ public class SmartDialSearchFragment extends SearchFragment
         // Note: these should be available (enabled) providers only!
         mAvailableProviders.putAll(callMethods);
         setupEmptyView();
-    }
-
-    @Override
-    public void onEmptyViewActionButtonClicked() {
-        final Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-
-        requestPermissions(new String[]{CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            int[] grantResults) {
-        if (requestCode == CALL_PHONE_PERMISSION_REQUEST_CODE) {
-            setupEmptyView();
-        }
     }
 
     public boolean isShowingPermissionRequest() {
