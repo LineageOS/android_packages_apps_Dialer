@@ -15,6 +15,7 @@
  */
 package com.android.dialer.list;
 
+import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_CONTACTS;
 
 import android.animation.Animator;
@@ -22,11 +23,17 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +55,7 @@ import com.android.contacts.common.util.ViewUtil;
 import com.android.dialer.DialtactsActivity;
 import com.android.dialer.dialpad.DialpadFragment.ErrorDialogFragment;
 import com.android.dialer.R;
+import com.android.dialer.incall.InCallMetricsHelper;
 import com.android.dialer.util.CoachMarkDrawableHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -60,9 +68,15 @@ import com.android.phone.common.incall.DialerDataSubscription;
 import com.android.phone.common.incall.utils.CallMethodFilters;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
 public class SearchFragment extends PhoneNumberPickerFragment
         implements DialerPhoneNumberListAdapter.searchMethodClicked,
-        CreditBarHelper.CreditBarVisibilityListener {
+        CreditBarHelper.CreditBarVisibilityListener,
+        EmptyContentView.OnEmptyViewActionButtonClickedListener {
     private static final String TAG  = SearchFragment.class.getSimpleName();
 
     private OnListFragmentScrolledListener mActivityScrollListener;
@@ -93,10 +107,32 @@ public class SearchFragment extends PhoneNumberPickerFragment
 
     public CallMethodInfo mCurrentCallMethodInfo;
 
+    public HashMap<ComponentName, CallMethodInfo> mAvailableProviders;
+
+    private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
+
     @Override
     public void creditsBarVisibilityChanged(int visibility) {
         DialtactsActivity da = (DialtactsActivity) getActivity();
         da.moveFabInSearchUI();
+    }
+
+    @Override
+    public void onEmptyViewActionButtonClicked() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        requestPermissions(new String[]{CALL_PHONE}, CALL_PHONE_PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (requestCode == CALL_PHONE_PERMISSION_REQUEST_CODE) {
+            setupEmptyView();
+        }
     }
 
     public interface HostInterface {
@@ -518,5 +554,142 @@ public class SearchFragment extends PhoneNumberPickerFragment
         return parent;
     }
 
-    protected void setupEmptyView() {}
+    public void setupEmptyView() {
+        DialtactsActivity dialActivity = (DialtactsActivity) mActivity;
+        if (mEmptyView != null && dialActivity != null) {
+            ContactEntryListAdapter adapter = getAdapter();
+            Resources r = getResources();
+            mEmptyView.setWidth(dialActivity.getDialpadWidth());
+            if (!PermissionsUtil.hasPermission(getActivity(), CALL_PHONE)) {
+                mEmptyView.setImage(R.drawable.empty_contacts);
+                mEmptyView.setActionLabel(R.string.permission_single_turn_on);
+                mEmptyView.setDescription(R.string.cm_permission_place_call);
+                mEmptyView.setSubMessage(null);
+                mEmptyView.setActionClickedListener(this);
+            } else if (adapter.getCount() == 0 && mActivity.isDialpadShown()) {
+                mEmptyView.setActionLabel(mEmptyView.NO_LABEL);
+                mEmptyView.setImage(null);
+
+                // Get Current InCall plugin specific call methods, we don't want to update this
+                // suddenly so just the currently available ones are fine.
+                if (mAvailableProviders == null) {
+                    mAvailableProviders = new HashMap<ComponentName, CallMethodInfo>();
+                    mAvailableProviders.putAll(CallMethodFilters.getAllEnabledCallMethods(
+                            DialerDataSubscription.get(getActivity())));
+                }
+
+                if (mCurrentCallMethodInfo == null) {
+                    mCurrentCallMethodInfo = dialActivity.getCurrentCallMethod();
+                }
+
+                if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
+                    showProviderHint(r);
+                } else {
+                    showSuggestion(r);
+                }
+            }
+        }
+    }
+
+    public void showNormalT9Hint(Resources r) {
+        mEmptyView.setImage(null);
+        mEmptyView.setDescription(R.string.empty_dialpad_t9_example);
+        mEmptyView.setSubMessage(R.string.empty_dialpad_t9_example_subtext);
+    }
+
+    public void showProviderHint(Resources r) {
+        String text;
+        if (!mCurrentCallMethodInfo.mIsAuthenticated) {
+            // Sign into current selected call method to make calls
+            text = getString(R.string.sign_in_hint_text, mCurrentCallMethodInfo.mName);
+        } else {
+            // InCallApi provider specified hint
+            text = mCurrentCallMethodInfo.getHintText();
+        }
+        if (TextUtils.isEmpty(text)) {
+            showNormalT9Hint(r);
+        } else {
+            Drawable heroImage = mCurrentCallMethodInfo.mSingleColorBrandIcon;
+            heroImage.setTint(r.getColor(R.color.hint_image_color));
+
+            int orientation = r.getConfiguration().orientation;
+            mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
+            mEmptyView.setDescription(text);
+            mEmptyView.setSubMessage(null);
+            // TODO: put action button for login in or switching provider!
+        }
+    }
+
+    public void showSuggestion(Resources r) {
+        ConnectivityManager connManager =
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        CallMethodInfo emergencyOnlyCallMethod
+                = CallMethodInfo.getEmergencyCallMethod(getContext());
+
+        if (mCurrentCallMethodInfo != null) {
+            int orientation = r.getConfiguration().orientation;
+            if (mCurrentCallMethodInfo.equals(emergencyOnlyCallMethod)) {
+                // If no sims available and emergency only call method selected,
+                // alert user that only emergency calls are allowed for the current call method.
+                String text = r.getString(R.string.emergency_call_hint_text);
+                Drawable heroImage = r.getDrawable(R.drawable.ic_nosim);
+                heroImage.setTint(r.getColor(R.color.emergency_call_icon_color));
+
+                mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
+                mEmptyView.setDescription(text);
+                mEmptyView.setSubMessage(null);
+            } else if (!mAvailableProviders.isEmpty() &&
+                    !mCurrentCallMethodInfo.mIsInCallProvider &&
+                    mWifi.isConnected()) {
+                TelephonyManager tm = (TelephonyManager) getActivity()
+                                .getSystemService(Context.TELEPHONY_SERVICE);
+                String template;
+                Drawable heroImage;
+                String text;
+
+                InCallMetricsHelper.Events event = null;
+                CallMethodInfo hintTextMethod = hintTextRequest();
+                if (TextUtils.isEmpty(tm.getNetworkOperator())) {
+                    heroImage = r.getDrawable(R.drawable.ic_signal_wifi_3_bar);
+                    template = r.getString(R.string.wifi_hint_text);
+                    text = String.format(template, hintTextMethod.mName);
+                    event = InCallMetricsHelper.Events.INAPP_NUDGE_DIALER_WIFI;
+                } else if (tm.isNetworkRoaming(mCurrentCallMethodInfo.mSubId)) {
+                    heroImage = r.getDrawable(R.drawable.ic_roaming);
+                    template = r.getString(R.string.roaming_hint_text);
+                    text = String.format(template, mCurrentCallMethodInfo.mName,
+                            hintTextMethod.mName);
+                    event = InCallMetricsHelper.Events.INAPP_NUDGE_DIALER_ROAMING;
+                } else {
+                    showNormalT9Hint(r);
+                    return;
+                }
+
+                mEmptyView.setImage(heroImage, orientation == Configuration.ORIENTATION_PORTRAIT);
+                mEmptyView.setDescription(text);
+                mEmptyView.setSubMessage(null);
+
+                InCallMetricsHelper.increaseCountOfMetric(
+                        hintTextMethod.mComponent, event,
+                        InCallMetricsHelper.Categories.INAPP_NUDGES,
+                        InCallMetricsHelper.Parameters.COUNT);
+            } else {
+                showNormalT9Hint(r);
+            }
+        } else {
+            showNormalT9Hint(r);
+        }
+    }
+
+    private CallMethodInfo hintTextRequest() {
+        // Randomly choose an item that is not a sim to prompt user to switch to
+        List<CallMethodInfo> valuesList =
+                new ArrayList<CallMethodInfo>(mAvailableProviders.values());
+
+        int randomIndex = new Random().nextInt(valuesList.size());
+        return valuesList.get(randomIndex);
+    }
 }
