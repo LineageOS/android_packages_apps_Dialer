@@ -913,6 +913,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         AnalyticsUtil.sendScreenView(mDialpadFragment);
         ft.commit();
 
+        if (isInSearchUi()) {
+            if (mInRegularSearch) {
+                mRegularSearchFragment.setupEmptyView();
+            } else {
+                mSmartDialSearchFragment.setupEmptyView();
+            }
+        }
+
         if (animate) {
             mFloatingActionButtonController.scaleOut();
         } else {
@@ -981,9 +989,11 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             if (mInRegularSearch) {
                 mRegularSearchFragment.updateCallCreditInfo();
                 mRegularSearchFragment.updateCoachMarkDrawable();
+                mRegularSearchFragment.setupEmptyView();
             } else {
                 mSmartDialSearchFragment.updateCallCreditInfo();
                 mSmartDialSearchFragment.updateCoachMarkDrawable();
+                mSmartDialSearchFragment.setupEmptyView();
             }
         }
     }
