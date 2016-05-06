@@ -56,7 +56,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-design \
     com.android.vcard \
     guava \
-    libphonenumber
+    libphonenumber \
+    ims-ext-common
 
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
