@@ -102,7 +102,7 @@
     <string name="incall_call_type_label_sip" msgid="1327822795765282192">"‏تماس SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"تماس اضطراری"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"درحال روشن کردن رادیو…‏"</string>
-    <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"سرویسی دردسترس نیست. درحال تلاش مجدد…‏"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"سرویسی در دسترس نیست. درحال تلاش مجدد…‏"</string>
     <string name="dial_emergency_error" msgid="582305854626092376">"تماس ممکن نیست. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> شماره اضطراری نیست."</string>
     <string name="dial_emergency_empty_error" msgid="199888628163390267">"تماس ممکن نیست. فقط شماره اضطراری."</string>
     <string name="dialerKeyboardHintText" msgid="8533449463925408141">"استفاده از صفحه‌کلید برای شماره‌گیری"</string>
