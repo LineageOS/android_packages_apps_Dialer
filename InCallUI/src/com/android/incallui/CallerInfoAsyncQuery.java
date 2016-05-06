@@ -473,7 +473,7 @@ public class CallerInfoAsyncQuery {
             int idIndex = cursor.getColumnIndex(Directory._ID);
             while (cursor.moveToNext()) {
                 long id = cursor.getLong(idIndex);
-                if (DirectoryCompat.isRemoteDirectory(id)) {
+                if (DirectoryCompat.isRemoteDirectoryId(id)) {
                     results.add(id);
                 }
             }
