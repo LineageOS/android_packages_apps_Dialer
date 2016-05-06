@@ -229,7 +229,7 @@ public class ContactInfoHelper {
             }
 
             // Skip this to avoid an extra remote network call for alternative name
-            if (DirectoryCompat.isRemoteDirectory(directoryId)) {
+            if (DirectoryCompat.isRemoteDirectoryId(directoryId)) {
                 return null;
             }
         }
