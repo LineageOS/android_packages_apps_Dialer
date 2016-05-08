@@ -32,16 +32,19 @@ public final class PhoneCallDetailsViews {
     public final CallTypeIconsView callTypeIcons;
     public final TextView callLocationAndDate;
     public final TextView voicemailTranscriptionView;
+    public final ImageView callAccountIcon;
     public final TextView callAccountLabel;
 
     private PhoneCallDetailsViews(TextView nameView, View callTypeView,
             CallTypeIconsView callTypeIcons, TextView callLocationAndDate,
-            TextView voicemailTranscriptionView, TextView callAccountLabel) {
+            TextView voicemailTranscriptionView,  ImageView callAccountIcon,
+            TextView callAccountLabel) {
         this.nameView = nameView;
         this.callTypeView = callTypeView;
         this.callTypeIcons = callTypeIcons;
         this.callLocationAndDate = callLocationAndDate;
         this.voicemailTranscriptionView = voicemailTranscriptionView;
+        this.callAccountIcon = callAccountIcon;
         this.callAccountLabel = callAccountLabel;
     }
 
@@ -58,6 +61,7 @@ public final class PhoneCallDetailsViews {
                 (CallTypeIconsView) view.findViewById(R.id.call_type_icons),
                 (TextView) view.findViewById(R.id.call_location_and_date),
                 (TextView) view.findViewById(R.id.voicemail_transcription),
+                (ImageView) view.findViewById(R.id.call_account_icon),
                 (TextView) view.findViewById(R.id.call_account_label));
     }
 
@@ -68,6 +72,7 @@ public final class PhoneCallDetailsViews {
                 new CallTypeIconsView(context),
                 new TextView(context),
                 new TextView(context),
+                new ImageView(context),
                 new TextView(context));
     }
 }

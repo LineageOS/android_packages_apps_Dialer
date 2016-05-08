@@ -23,6 +23,7 @@ import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.annotation.Nullable;
@@ -54,7 +55,10 @@ public class PhoneCallDetails {
      * There might be multiple types if this represents a set of entries grouped together.
      */
     public int[] callTypes;
-
+    /**
+     * The icon for the account associated with the call.
+     */
+    public Drawable accountIcon;
     // The date of the call, in milliseconds since the epoch.
     public long date;
     // The duration of the call in milliseconds, or 0 for missed calls.

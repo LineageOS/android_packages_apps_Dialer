@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
@@ -501,6 +502,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
+        final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext, accountHandle);
         final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(c);
         final boolean isVoicemailNumber =
                 mCallLogCache.isVoicemailNumber(accountHandle, number);
@@ -522,6 +524,7 @@ public class CallLogAdapter extends GroupingListAdapter
                 postDialDigits, isVoicemailNumber);
         details.viaNumber = viaNumber;
         details.accountHandle = accountHandle;
+        details.accountIcon = accountIcon;
         details.countryIso = countryIso;
         details.date = c.getLong(CallLogQuery.DATE);
         details.duration = c.getLong(CallLogQuery.DURATION);

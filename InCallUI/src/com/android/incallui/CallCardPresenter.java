@@ -909,6 +909,18 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     }
 
     /**
+     * Return the icon to represent the call provider
+     */
+    private Drawable getCallProviderIcon(Call call) {
+        PhoneAccount account = getAccountForCall(call);
+        TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
+        if (account != null && mgr.getCallCapablePhoneAccounts().size() > 1) {
+            return account.getIcon().loadDrawable(mContext);
+        }
+        return null;
+    }
+
+    /**
      * Returns the label (line of text above the number/name) for any given call.
      * For example, "calling via [Account/Google Voice]" for outgoing calls.
      */
@@ -943,7 +955,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             }
         }
 
-        return null;
+        return getCallProviderIcon(mPrimary);
     }
 
     private boolean hasOutgoingGatewayCall() {

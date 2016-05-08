@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.graphics.Typeface;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -113,6 +114,15 @@ public class PhoneCallDetailsHelper {
 
         // Set the call count, location, date and if voicemail, set the duration.
         setDetailText(views, callCount, details);
+
+        //set the account icon if it exists.
+        Drawable icon = details.accountIcon;
+        if (icon != null) {
+            views.callAccountIcon.setVisibility(View.VISIBLE);
+            views.callAccountIcon.setImageDrawable(icon);
+        } else {
+            views.callAccountIcon.setVisibility(View.GONE);
+        }
 
         // Set the account label if it exists.
         String accountLabel = mCallLogCache.getAccountLabel(details.accountHandle);
