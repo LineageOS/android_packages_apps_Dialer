@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5faad753_7635f945",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-09T23:48:09Z",
+      "side": 1,
+      "message": "would the setupEmptyView call here overlap with the same calls in hideDialpadFragment?",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_56c79d46",
         "filename": "src/com/android/dialer/DialtactsActivity.java",
         "patchSetId": 2
@@ -13,6 +30,57 @@
       "writtenOn": "2016-05-09T23:29:03Z",
       "side": 1,
       "message": "Whitespace change not related to change.",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_56f55d82",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-09T23:48:09Z",
+      "side": 1,
+      "message": "will this be addressed at some point or already addressed?",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_16efe5b0",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-09T23:48:09Z",
+      "side": 1,
+      "message": "line wrap",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_b62b71e9",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-09T23:48:09Z",
+      "side": 1,
+      "message": "line wrap",
       "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
