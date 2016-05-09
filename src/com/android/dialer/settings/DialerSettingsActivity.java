@@ -498,12 +498,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
                     // do nothing
                 } else {
                     // Activate the provider
-                    Intent i = new Intent(getContext(), CallerInfoProviderPicker.class);
-                    i.putExtra(CallerInfoProviderPicker.EXTRA_PROVIDER_INFO,
-                            mCallerInfoProvider.getComponentName());
-                    i.putExtra(CallerInfoProviderPicker.EXTRA_METRICS_REASON,
-                            CallerInfoProviderPicker.REASON_DIALER_SETTINGS);
-                    ((Activity) getContext()).startActivityForResult(i, 0);
+                    CallerInfoProviderPicker.onSettingEnabled(getContext());
                 }
             } else if (header.titleRes == R.string.silence_spam_title) {
                 if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE) {

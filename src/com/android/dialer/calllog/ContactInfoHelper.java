@@ -73,15 +73,11 @@ public class ContactInfoHelper {
     private static final CachedNumberLookupService mCachedNumberLookupService =
             ObjectFactory.newCachedNumberLookupService();
 
-    public ContactInfoHelper(Context context, String currentCountryIso) {
+    public ContactInfoHelper(Context context, String currentCountryIso,
+                             LookupProvider lookupProvider) {
         mContext = context;
         mCurrentCountryIso = currentCountryIso;
-        LookupProvider lookupProvider = new LookupProviderImpl(context);
-        if (lookupProvider.initialize()) {
-            mLookupProvider = lookupProvider;
-        } else {
-            mLookupProvider = null;
-        }
+        mLookupProvider = lookupProvider;
     }
 
     /**
@@ -120,6 +116,11 @@ public class ContactInfoHelper {
             // Look for a contact that has the given phone number.
             ContactInfo phoneInfo =
                     queryContactInfoForPhoneNumber(number, countryIso, isInCallPluginContactId);
+
+            // If we got a result, but the data is invalid, bail out and try again later.
+            if (phoneInfo != null && phoneInfo.isBadData) {
+                return null;
+            }
 
             if (phoneInfo == null || phoneInfo == ContactInfo.EMPTY) {
                 // Check whether the phone number has been saved as an "Internet call" number.
@@ -314,36 +315,41 @@ public class ContactInfoHelper {
             }
         }
         // always do a LookupProvider search, if available, for a non-contact
-        if (mLookupProvider != null && !isLocalContact) {
+        if (mLookupProvider.isEnabled() && !isLocalContact) {
             LookupResponse response = mLookupProvider.blockingFetchInfo(
                     new LookupRequest(PhoneNumberUtils.formatNumberToE164(number, countryIso),
                             null, LookupRequest.RequestOrigin.OTHER)
                     );
-            if (response != null && response.mStatusCode == StatusCode.SUCCESS) {
-                logSuccessfulFetch();
-                final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
-                // map LookupResponse to ContactInfo
-                ContactInfo contactInfo = new ContactInfo();
-                contactInfo.lookupProviderName = response.mProviderName;
-                contactInfo.name = response.mName;
-                contactInfo.number = formatPhoneNumber(response.mNumber, null, countryIso);
-                contactInfo.city = response.mCity;
-                contactInfo.country = response.mCountry;
-                contactInfo.address = response.mAddress;
-                contactInfo.photoUrl = response.mPhotoUrl;
-                contactInfo.isSpam = response.mIsSpam;
-                contactInfo.spamCount = response.mSpamCount;
-                contactInfo.attributionDrawable = response.mAttributionLogo;
 
-                // construct encoded lookup uri
-                ContactBuilder contactBuilder = new ContactBuilder(ContactBuilder.REVERSE_LOOKUP,
-                        response.mNumber, formattedNumber);
-                contactBuilder.setInfoProviderName(response.mProviderName);
-                contactBuilder.setPhotoUrl(response.mPhotoUrl);
-                contactBuilder.setName(ContactBuilder.Name.createDisplayName(response.mName));
+            if (response != null) {
+                if (response.mStatusCode == StatusCode.FAIL) {
+                    info.isBadData = true;
+                } else if (response.mStatusCode == StatusCode.SUCCESS) {
+                    logSuccessfulFetch();
+                    final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
+                    // map LookupResponse to ContactInfo
+                    ContactInfo contactInfo = new ContactInfo();
+                    contactInfo.lookupProviderName = response.mProviderName;
+                    contactInfo.name = response.mName;
+                    contactInfo.number = formatPhoneNumber(response.mNumber, null, countryIso);
+                    contactInfo.city = response.mCity;
+                    contactInfo.country = response.mCountry;
+                    contactInfo.address = response.mAddress;
+                    contactInfo.photoUrl = response.mPhotoUrl;
+                    contactInfo.isSpam = response.mIsSpam;
+                    contactInfo.spamCount = response.mSpamCount;
+                    contactInfo.attributionDrawable = response.mAttributionLogo;
 
-                contactInfo.lookupUri = contactBuilder.build().lookupUri;
-                info = contactInfo;
+                    // construct encoded lookup uri
+                    ContactBuilder contactBuilder = new ContactBuilder(ContactBuilder.REVERSE_LOOKUP,
+                            response.mNumber, formattedNumber);
+                    contactBuilder.setInfoProviderName(response.mProviderName);
+                    contactBuilder.setPhotoUrl(response.mPhotoUrl);
+                    contactBuilder.setName(ContactBuilder.Name.createDisplayName(response.mName));
+
+                    contactInfo.lookupUri = contactBuilder.build().lookupUri;
+                    info = contactInfo;
+                }
             }
         }
         return info;

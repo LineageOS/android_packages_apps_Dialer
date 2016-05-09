@@ -39,6 +39,7 @@ import com.android.dialer.util.TelecomUtil;
 
 import com.cyanogen.ambient.incall.CallLogConstants;
 
+import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 import com.google.common.annotations.VisibleForTesting;
 
 public class CallLogAsyncTaskUtil {
@@ -162,17 +163,18 @@ public class CallLogAsyncTaskUtil {
                             countryIso, cursor.getString(CallDetailQuery.PLUGIN_PACKAGE_NAME));
 
             // If this is not a regular number, there is no point in looking it up in the contacts.
-            ContactInfoHelper contactInfoHelper =
-                    new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context));
             boolean isVoicemail = PhoneNumberUtil.isVoicemailNumber(context, accountHandle, number);
             boolean shouldLookupNumber =
                     PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemail;
 
             ContactInfo info = ContactInfo.EMPTY;
             if (shouldLookupNumber) {
-                ContactInfo lookupInfo =
-                        contactInfoHelper.lookupNumber(number, countryIso, isInCallPluginContactId);
+                ContactInfoHelper contactInfoHelper =
+                        new ContactInfoHelper(context, GeoUtil.getCurrentCountryIso(context),
+                                LookupProviderImpl.INSTANCE.get(context));
+                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso, false);
                 info = lookupInfo != null ? lookupInfo : ContactInfo.EMPTY;
+                LookupProviderImpl.INSTANCE.release();
             }
 
             PhoneCallDetails details = new PhoneCallDetails(
