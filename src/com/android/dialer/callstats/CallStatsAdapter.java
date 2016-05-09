@@ -39,6 +39,8 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
+import com.cyanogen.lookup.phonenumber.contract.LookupProvider;
+import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,6 +55,7 @@ class CallStatsAdapter extends RecyclerView.Adapter {
     private final Context mContext;
     private final ContactInfoHelper mContactInfoHelper;
     private final ContactInfoCache mContactInfoCache;
+    private final LookupProvider mLookupProvider;
 
     private ArrayList<CallStatsDetails> mAllItems;
     private ArrayList<CallStatsDetails> mShownItems;
@@ -159,7 +162,8 @@ class CallStatsAdapter extends RecyclerView.Adapter {
         mContext = context;
 
         final String currentCountryIso = GeoUtil.getCurrentCountryIso(mContext);
-        mContactInfoHelper = new ContactInfoHelper(mContext, currentCountryIso);
+        mLookupProvider = LookupProviderImpl.INSTANCE.get(mContext);
+        mContactInfoHelper = new ContactInfoHelper(mContext, currentCountryIso, mLookupProvider);
 
         mAllItems = new ArrayList<CallStatsDetails>();
         mShownItems = new ArrayList<CallStatsDetails>();
@@ -230,7 +234,8 @@ class CallStatsAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.call_stats_list_item, parent, false);
-        CallStatsListItemViewHolder viewHolder = CallStatsListItemViewHolder.create(view);
+        CallStatsListItemViewHolder viewHolder = CallStatsListItemViewHolder.create(view,
+                mContactInfoHelper);
 
         viewHolder.mPrimaryActionView.setOnCreateContextMenuListener(mOnCreateContextMenuListener);
         viewHolder.mPrimaryActionView.setTag(viewHolder);
@@ -266,5 +271,9 @@ class CallStatsAdapter extends RecyclerView.Adapter {
         final long duration = mTotalItem.getRequestedDuration(mType);
         return CallStatsListItemViewHolder.getDurationString(
                 mContext, duration, withSeconds);
+    }
+
+    public void destroy() {
+        LookupProviderImpl.INSTANCE.release();
     }
 }

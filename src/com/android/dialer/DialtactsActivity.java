@@ -76,6 +76,7 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.widget.FloatingActionButtonController;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
+import com.android.dialer.callerinfo.CallerInfoProviderPicker;
 import com.android.dialer.calllog.CallLogActivity;
 import com.android.dialer.calllog.CallLogFragment;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -640,6 +641,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_CONTENT_CHANGE);
         callStateIntentFilter.addAction(TelephonyIntents.ACTION_SUBINFO_RECORD_UPDATED);
         registerReceiver(mCallStateReceiver, callStateIntentFilter);
+
+        CallerInfoProviderPicker.onAppLaunched(this);
     }
 
     @Override

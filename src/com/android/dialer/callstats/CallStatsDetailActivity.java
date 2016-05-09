@@ -48,6 +48,7 @@ import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.widget.LinearColorBar;
+import com.cyanogen.lookup.phonenumber.contract.LookupProvider;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 /**
@@ -87,6 +88,8 @@ public class CallStatsDetailActivity extends Activity implements
     private String mNumber = null;
     private boolean mHasEditNumberBeforeCallOption;
 
+    private LookupProvider mLookupProvider;
+
     private class UpdateContactTask extends AsyncTask<String, Void, ContactInfo> {
         @Override
         protected ContactInfo doInBackground(String... strings) {
@@ -111,8 +114,10 @@ public class CallStatsDetailActivity extends Activity implements
         setContentView(R.layout.call_stats_detail);
 
         mResources = getResources();
-        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
-        mBlockContactHelper = new BlockContactHelper(this, new LookupProviderImpl(this));
+        mLookupProvider = LookupProviderImpl.INSTANCE.get(this);
+        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this),
+                mLookupProvider);
+        mBlockContactHelper = new BlockContactHelper(this);
 
         mQuickContactBadge = (QuickContactBadge) findViewById(R.id.quick_contact_photo);
         mQuickContactBadge.setOverlay(null);
@@ -298,6 +303,11 @@ public class CallStatsDetailActivity extends Activity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.call_stats_details_options, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onDestroy() {
+        LookupProviderImpl.INSTANCE.release();
     }
 
     @Override

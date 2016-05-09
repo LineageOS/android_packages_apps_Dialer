@@ -63,6 +63,7 @@ import com.android.dialer.widget.DialerQuickContact;
 import com.android.phone.common.incall.CallMethodInfo;
 
 import com.cyanogen.ambient.incall.extension.OriginCodes;
+import com.cyanogen.lookup.phonenumber.contract.LookupProvider;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
 /**
@@ -222,6 +223,7 @@ public class CallDetailActivity extends Activity
     private TextView mCallerNumber;
     private TextView mAccountLabel;
     private View mCallButton;
+    private LookupProvider mLookupProvider;
     private ContactInfoHelper mContactInfoHelper;
     private BlockContactHelper mBlockContactHelper;
 
@@ -285,8 +287,10 @@ public class CallDetailActivity extends Activity
             }
         });
 
-        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this));
-        mBlockContactHelper = new BlockContactHelper(this, new LookupProviderImpl(this));
+        mBlockContactHelper = new BlockContactHelper(this);
+        mLookupProvider = LookupProviderImpl.INSTANCE.get(this);
+        mContactInfoHelper = new ContactInfoHelper(this, GeoUtil.getCurrentCountryIso(this),
+                mLookupProvider);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent().getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)) {
@@ -297,6 +301,7 @@ public class CallDetailActivity extends Activity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LookupProviderImpl.INSTANCE.release();
         mBlockContactHelper.destroy();
         mCallRecordingDataStore.close();
     }
