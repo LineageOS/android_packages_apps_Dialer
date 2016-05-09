@@ -319,6 +319,7 @@ public class CallStatsFragment extends Fragment implements
     public void onDestroy() {
         super.onDestroy();
         mAdapter.pauseCache();
+        mAdapter.destroy();
         getActivity().getContentResolver().unregisterContentObserver(mObserver);
     }
 

@@ -50,7 +50,7 @@ public class BlockContactPresenter implements View.OnClickListener,
         view.setOnClickListener(this);
         mViewHolder = BlockContactViewHolder.create(view, mViewHolder);
         if (mBlockContactHelper == null) {
-            mBlockContactHelper = new BlockContactHelper(mActivity, new LookupProviderImpl(mActivity));
+            mBlockContactHelper = new BlockContactHelper(mActivity);
             mBlockContactHelper.setStatusListener(this);
         }
         mBlockContactHelper.setContactInfo(number);

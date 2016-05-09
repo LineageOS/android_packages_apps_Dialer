@@ -70,7 +70,8 @@ public final class CallStatsListItemViewHolder extends RecyclerView.ViewHolder
             TextView numberView,
             TextView labelView,
             TextView percentView,
-            LinearColorBar barView) {
+            LinearColorBar barView,
+            ContactInfoHelper contactInfoHelper) {
         super(rootView);
 
         mRootView = rootView;
@@ -88,11 +89,11 @@ public final class CallStatsListItemViewHolder extends RecyclerView.ViewHolder
 
         mContext = rootView.getContext();
         mPhotoSize = mContext.getResources().getDimensionPixelSize(R.dimen.contact_photo_size);
-        mContactInfoHelper = new ContactInfoHelper(mContext,
-                GeoUtil.getCurrentCountryIso(mContext));
+        mContactInfoHelper = contactInfoHelper;
     }
 
-    public static CallStatsListItemViewHolder create(View view) {
+    public static CallStatsListItemViewHolder create(View view,
+            ContactInfoHelper contactInfoHelper) {
         return new CallStatsListItemViewHolder(view,
                 (QuickContactBadge) view.findViewById(R.id.quick_contact_photo),
                 view.findViewById(R.id.primary_action_view),
@@ -100,7 +101,8 @@ public final class CallStatsListItemViewHolder extends RecyclerView.ViewHolder
                 (TextView) view.findViewById(R.id.number),
                 (TextView) view.findViewById(R.id.label),
                 (TextView) view.findViewById(R.id.percent),
-                (LinearColorBar) view.findViewById(R.id.percent_bar));
+                (LinearColorBar) view.findViewById(R.id.percent_bar),
+                contactInfoHelper);
     }
 
     @Override

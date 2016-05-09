@@ -74,5 +74,8 @@
             </intent-filter>
         </service>
 
+        <service android:name=".callerinfo.ProviderActivationService"
+                 android:exported="false"/>
+
     </application>
 </manifest>
