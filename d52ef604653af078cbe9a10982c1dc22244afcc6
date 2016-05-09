@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_56c79d46",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 13409
+      },
+      "writtenOn": "2016-05-09T23:29:03Z",
+      "side": 1,
+      "message": "Whitespace change not related to change.",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
