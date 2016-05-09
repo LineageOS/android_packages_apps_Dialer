@@ -493,7 +493,7 @@ public class DialpadFragment extends Fragment
 
         Activity act = getActivity();
         if (act != null) {
-            if (mDigitsFilledByIntent) {
+            if (!mDigitsFilledByIntent) {
                 String unFormattedString = getString(R.string.provider_help);
                 CoachMarkDrawableHelper.assignViewTreeObserver(mDialpadView, act, fragmentView,
                         false, fragmentView.findViewById(R.id.listen_dismiss), unFormattedString);
