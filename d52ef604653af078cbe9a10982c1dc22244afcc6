@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_1644c5b6",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T23:55:46Z",
+      "side": 1,
+      "message": "No more than any of the other calls in these two methods. We need to do these in both to properly update the setupEmptyView\u0027s \"isDialpadShown\"",
+      "parentUuid": "5faad753_7635f945",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_56c79d46",
         "filename": "src/com/android/dialer/DialtactsActivity.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-09T23:29:03Z",
       "side": 1,
       "message": "Whitespace change not related to change.",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_760e598e",
+        "filename": "src/com/android/dialer/DialtactsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T23:55:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_56c79d46",
       "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_d6170da3",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T23:55:46Z",
+      "side": 1,
+      "message": "this was something in the original code. Not sure if we have a ticket for it. i\u0027ll look.",
+      "parentUuid": "5faad753_56f55d82",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_16efe5b0",
         "filename": "src/com/android/dialer/list/SearchFragment.java",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_961195af",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T23:55:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_16efe5b0",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_b62b71e9",
         "filename": "src/com/android/dialer/list/SearchFragment.java",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2016-05-09T23:48:09Z",
       "side": 1,
       "message": "line wrap",
+      "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_3628e1e0",
+        "filename": "src/com/android/dialer/list/SearchFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-09T23:55:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_b62b71e9",
       "revId": "d52ef604653af078cbe9a10982c1dc22244afcc6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
