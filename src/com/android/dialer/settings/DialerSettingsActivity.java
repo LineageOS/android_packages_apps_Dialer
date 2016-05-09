@@ -253,7 +253,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
             Header noteHeader = new Header();
             noteHeader.title = mDeepLinkPluginInfo.get(0);
             noteHeader.summaryRes = R.string.note_mod_settings_summary;
-            noteHeader.id = R.id.note_preference_id;
             target.add(noteHeader);
         }
 
@@ -563,9 +562,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                                 }
                             }
                         });
-                    } else if (header.id == R.id.note_preference_id){
-                        holder.header = header;
-                        view.setOnClickListener(this);
                     }
                     break;
             }
