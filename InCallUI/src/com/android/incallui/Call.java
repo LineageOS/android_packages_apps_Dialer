@@ -44,6 +44,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import org.codeaurora.ims.internal.IQtiImsExt;
+import org.codeaurora.ims.QtiImsException;
+import org.codeaurora.ims.QtiImsExtListenerBaseImpl;
+import org.codeaurora.ims.QtiImsExtManager;
+import org.codeaurora.ims.utils.QtiImsExtUtils;
+
 /**
  * Describes a single call and its state.
  */
@@ -876,6 +882,37 @@ public class Call {
      */
     public int getSessionModificationState() {
         return mSessionModificationState;
+    }
+
+    /* QtiImsExtListenerBaseImpl instance to handle call transfer response */
+    private QtiImsExtListenerBaseImpl mQtiImsInterfaceListener =
+            new QtiImsExtListenerBaseImpl() {
+
+        /* Handles call transfer response */
+        @Override
+        public void receiveCallTransferResponse(int result) {
+            Log.w(this, "receiveCallTransferResponse: " + result);
+        }
+    };
+
+    public int getTransferCapabilities() {
+        Bundle extras = getExtras();
+        return (extras == null)? 0 :
+                extras.getInt(QtiImsExtUtils.QTI_IMS_TRANSFER_EXTRA_KEY, 0);
+    }
+
+    public boolean sendCallTransferRequest(int type, String number) {
+        int phoneId = 0;
+        try {
+            Log.d(this, "sendCallTransferRequest: Phoneid-" + phoneId + " type-" + type +
+                    " number: " + number);
+            QtiImsExtManager.getInstance().sendCallTransferRequest(phoneId, type, number,
+                    mQtiImsInterfaceListener);
+        } catch (QtiImsException e) {
+            Log.e(this, "sendCallDeflectRequest exception " + e);
+            return false;
+        }
+        return true;
     }
 
     public LogState getLogState() {

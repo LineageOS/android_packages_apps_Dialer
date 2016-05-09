@@ -74,4 +74,15 @@
     <string name="modify_call_option_vt_tx" translatable="false">Video Transmit</string>
     <string name="modify_call_option_vt_rx" translatable="false">Video Receive</string>
     <string name="modify_call_option_voice" translatable="false">Voice Only</string>
+
+    <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+    <string name="qti_ims_transfer_num_error">Number not set. Provide the number via IMS settings and retry.</string>
+    <string name="qti_ims_transfer_request_error">Call Transfer request had failed.</string>
+    <string name="qti_ims_transfer_request_success">Call Transfer request is successful.</string>
+    <!-- Text for the onscreen "blind transfer" button -->
+    <string name="qti_ims_onscreenBlindTransfer">Blind Transfer</string>
+    <!-- Text for the onscreen "assured transfer" button -->
+    <string name="qti_ims_onscreenAssuredTransfer">Assured Transfer</string>
+    <!-- Text for the onscreen "consultative transfer" button -->
+    <string name="qti_ims_onscreenConsultativeTransfer">Consultative Transfer</string>
 </resources>

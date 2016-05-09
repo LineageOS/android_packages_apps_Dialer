@@ -26,6 +26,9 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_MUTE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_PAUSE_VIDEO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_SWAP;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_SWITCH_CAMERA;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_ASSURED;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_BLIND;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_CONSULTATIVE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
 
 import android.content.Context;
@@ -45,6 +48,8 @@ import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
+
+import org.codeaurora.ims.utils.QtiImsExtUtils;
 
 /**
  * Logic for call buttons.
@@ -345,6 +350,28 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         getUi().setVideoPaused(pause);
     }
 
+    public void callTransferClicked(int type) {
+        String number = null;
+        Context mContext = getUi().getContext();
+        if (type != QtiImsExtUtils.QTI_IMS_CONSULTATIVE_TRANSFER) {
+            /**
+             * Since there are no editor options available to provide a number during
+             * blind or assured transfer, for now, making use of the existing
+             * call deflection editor to provide the required number.
+             */
+            number = QtiImsExtUtils.getCallDeflectNumber(mContext.getContentResolver());
+            if (number == null) {
+                 QtiCallUtils.displayToast(mContext, R.string.qti_ims_transfer_num_error);
+                return;
+            }
+        }
+
+        boolean status = mCall.sendCallTransferRequest(type, number);
+        if (!status) {
+            QtiCallUtils.displayToast(mContext, R.string.qti_ims_transfer_request_error);
+        }
+    }
+
     private void updateUi(InCallState state, Call call) {
         Log.d(this, "Updating call UI for call: ", call);
 
@@ -394,6 +421,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showUpgradeToVideo = (!isVideo || useExt) && hasVideoCallCapabilities(call);
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
+        int callTransferCapabilities = call.getTransferCapabilities();
 
         ui.showButton(BUTTON_AUDIO, true);
         ui.showButton(BUTTON_SWAP, showSwap);
@@ -408,6 +436,21 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt);
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
+
+        /* Depending on the transfer capabilities, display the corresponding buttons */
+        if ((callTransferCapabilities & QtiImsExtUtils.QTI_IMS_CONSULTATIVE_TRANSFER) != 0) {
+            ui.showButton(BUTTON_TRANSFER_BLIND, true);
+            ui.showButton(BUTTON_TRANSFER_ASSURED, true);
+            ui.showButton(BUTTON_TRANSFER_CONSULTATIVE, true);
+        } else if ((callTransferCapabilities & QtiImsExtUtils.QTI_IMS_BLIND_TRANSFER) != 0) {
+            ui.showButton(BUTTON_TRANSFER_BLIND, true);
+            ui.showButton(BUTTON_TRANSFER_ASSURED, true);
+            ui.showButton(BUTTON_TRANSFER_CONSULTATIVE, false);
+        } else {
+            ui.showButton(BUTTON_TRANSFER_BLIND, false);
+            ui.showButton(BUTTON_TRANSFER_ASSURED, false);
+            ui.showButton(BUTTON_TRANSFER_CONSULTATIVE, false);
+        }
 
         ui.updateButtonStates();
     }

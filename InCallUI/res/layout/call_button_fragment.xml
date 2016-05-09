@@ -152,6 +152,25 @@
             android:contentDescription="@string/onscreenMergeCallsText"
             android:visibility="gone" />
 
+        <!-- "Blind transfer" -->
+        <ImageButton android:id="@+id/blindTransfer"
+            style="@style/InCallButton"
+            android:background="@drawable/btn_add"
+            android:contentDescription="@string/qti_ims_onscreenBlindTransfer"
+            android:visibility="gone" />
+        <!-- "Assured transfer" -->
+        <ImageButton android:id="@+id/assuredTransfer"
+            style="@style/InCallButton"
+            android:background="@drawable/btn_add"
+            android:contentDescription="@string/qti_ims_onscreenAssuredTransfer"
+            android:visibility="gone" />
+        <!-- "Consultative transfer" -->
+        <ImageButton android:id="@+id/consultativeTransfer"
+            style="@style/InCallButton"
+            android:background="@drawable/btn_add"
+            android:contentDescription="@string/qti_ims_onscreenConsultativeTransfer"
+            android:visibility="gone" />
+
         <!-- "Overflow" -->
         <ImageButton android:id="@+id/overflowButton"
             style="@style/InCallButton"
