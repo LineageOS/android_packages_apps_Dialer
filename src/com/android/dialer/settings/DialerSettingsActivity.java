@@ -465,7 +465,8 @@ public class DialerSettingsActivity extends PreferenceActivity {
             if (header.extras != null && header.extras.containsKey(INCALL_COMPONENT_NAME)) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.callerinfo_provider || header.titleRes == R.string
-                    .silence_spam_title || header.titleRes == R.string.block_hidden_title) {
+                    .silence_spam_title || header.titleRes == R.string.block_hidden_title ||
+                    header.summaryRes == R.string.note_mod_settings_summary) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
