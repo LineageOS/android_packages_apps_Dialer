@@ -20,4 +20,5 @@
     <item type="id" name="settings_header_sounds_and_vibration" />
     <item type="id" name="callerinfo_provider" />
     <item type="id" name="incall_provider_action_type" />
+    <item type="id" name="note_preference_id" />
 </resources>
