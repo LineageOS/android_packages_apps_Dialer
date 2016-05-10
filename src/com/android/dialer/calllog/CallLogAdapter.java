@@ -567,16 +567,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.inCallComponentName = null;
         }
         views.callTimes = getCallTimes(c, count);
-        DeepLink dl = mDeepLinkCache.getValue(number, views.callTimes);
-        if (dl != null && dl != DeepLinkRequest.EMPTY) {
-            views.mDeepLink = dl;
-            views.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
-            views.phoneCallDetailsViews.noteIconView.setImageDrawable(dl.getDrawableIcon(mContext));
-        } else {
-            views.mDeepLink = null;
-            views.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
-        }
-
+        views.mDeepLinkPresenter.setDeepLink(mDeepLinkCache.getValue(number, views.callTimes));
         String callMethodName = null;
         if (views.inCallComponentName != null) {
             CallMethodInfo cmi = DialerDataSubscription.get(mContext)
@@ -591,8 +582,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         views.numberType = label;
         details.numberLabel = label;
-
-        views.mDeepLinkPresenter.prepareUi(number);
 
         // Check if the day group has changed and display a header if necessary.
         int currentGroup = getDayGroupForCall(views.rowId);
