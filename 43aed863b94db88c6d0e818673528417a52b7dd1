@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_aa869eda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-10T18:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_6f14384f",
+      "range": {
+        "startLine": 10,
+        "startChar": 17,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "43aed863b94db88c6d0e818673528417a52b7dd1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_caff5aff",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 6
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_ca60baa8",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-10T18:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_caff5aff",
+      "revId": "43aed863b94db88c6d0e818673528417a52b7dd1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ea025609",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 6
@@ -53,6 +95,24 @@
       "writtenOn": "2016-05-10T16:53:26Z",
       "side": 1,
       "message": "should we also set it\u0027s ImageDrawable to null in case it was set previously?",
+      "revId": "43aed863b94db88c6d0e818673528417a52b7dd1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ea6336b0",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-10T18:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ea025609",
       "revId": "43aed863b94db88c6d0e818673528417a52b7dd1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
