@@ -57,9 +57,7 @@
             android:layout_alignStart="@id/title"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/setting_secondary_color"
-            android:lineSpacingExtra="@dimen/preference_summary_line_spacing_extra"
-            android:ellipsize="end"
-            android:maxLines="2" />
+            android:lineSpacingExtra="@dimen/preference_summary_line_spacing_extra" />
 
     </RelativeLayout>
 
