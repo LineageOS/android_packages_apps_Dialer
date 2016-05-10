@@ -81,7 +81,7 @@ public class DeepLinkIntegrationManager {
             List<Uri> uris) {
         PendingResult<DeepLink.DeepLinkResultList> result = null;
         if (hasConnectedClient()) {
-            result = mApi.getPreferredLinksForList(mAmbientApiClient,
+            result = mApi.getAllLinksInlist(mAmbientApiClient,
                     DeepLinkApplicationType.NOTE, category, uris);
             result.setResultCallback(callback);
         }
