@@ -126,7 +126,7 @@
         <ToggleButton android:id="@+id/pauseVideoButton"
             style="@style/InCallCompoundButton"
             android:background="@drawable/btn_compound_video_off"
-            android:contentDescription="@string/onscreenPauseVideoText"
+            android:contentDescription="@string/onscreenTurnOffCameraText"
             android:visibility="gone" />
 
         <!-- "Change to audio call" for video calls. -->
