@@ -45,6 +45,14 @@ public class VideoUtils {
         return VideoProfile.isBidirectional(call.getVideoState());
     }
 
+    public static boolean isTransmissionEnabled(Call call) {
+        if (!CompatUtils.isVideoCompatible()) {
+            return false;
+        }
+
+        return VideoProfile.isTransmissionEnabled(call.getVideoState());
+    }
+
     public static boolean isIncomingVideoCall(Call call) {
         if (!VideoUtils.isVideoCall(call)) {
             return false;

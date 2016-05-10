@@ -326,8 +326,10 @@
     <!-- Text for the onscreen "Switch camera" button. When clicked, this switches the user's camera
          for video calling between the front-facing camera and the back-facing camera. -->
     <string name="onscreenSwitchCameraText">Switch camera</string>
-    <!-- Text for the onscreen "Pause video" button. -->
-    <string name="onscreenPauseVideoText">Pause video</string>
+    <!-- Text for the onscreen "turn on camera" button. -->
+    <string name="onscreenTurnOnCameraText">Turn on camera</string>
+    <!-- Text for the onscreen "turn off camera" button. -->
+    <string name="onscreenTurnOffCameraText">Turn off camera</string>
     <!-- Text for the onscreen overflow button, to see additional actions which can be done. -->
     <string name="onscreenOverflowText">More options</string>
 
