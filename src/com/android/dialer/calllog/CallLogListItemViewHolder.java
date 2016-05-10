@@ -37,6 +37,7 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.dialer.deeplink.DeepLinkRequest;
 import com.android.dialer.widget.DialerQuickContact;
 import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
@@ -83,7 +84,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public final ImageView primaryActionButtonView;
     /** DialerQuickContact */
     public final DialerQuickContact dialerQuickContact;
-    public DeepLink mDeepLink;
 
     /** The view containing call log item actions.  Null until the ViewStub is inflated. */
     public View actionsView;
@@ -92,6 +92,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public View callButtonView;
     public View videoCallButtonView;
     public View viewNoteButton;
+    public ImageView viewNoteActionIcon;
     public View createNewContactButtonView;
     public View addToExistingContactButtonView;
     public View sendMessageView;
@@ -307,6 +308,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             createNewContactButtonView.setOnClickListener(this);
 
             viewNoteButton = actionsView.findViewById(R.id.view_note_action);
+            viewNoteActionIcon = (ImageView) actionsView.findViewById(R.id.view_note_action_icon);
             viewNoteButton.setOnClickListener(this);
 
             addToExistingContactButtonView =
@@ -398,9 +400,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             callButtonView.setVisibility(View.GONE);
         }
 
-        if (mDeepLink != null) {
+        if (mDeepLinkPresenter.mDeepLink != null) {
             ImageView icon = (ImageView) viewNoteButton.findViewById(R.id.view_note_action_icon);
-            icon.setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+            icon.setImageDrawable(mDeepLinkPresenter.mDeepLink.getDrawableIcon(mContext));
         } else {
             viewNoteButton.setVisibility(View.GONE);
         }
@@ -583,8 +585,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                     accountHandle);
 
         } else if (view.getId() == R.id.view_note_action) {
-            sendOpeningExisitingEvent();
-            mContext.startActivity(mDeepLink.createViewIntent());
+            mDeepLinkPresenter.viewNote();
         } else {
             final String inCallAction = (String) view.getTag(R.id.incall_provider_action_type);
             if (inCallComponentName != null && !TextUtils.isEmpty(inCallAction)) {
@@ -653,10 +654,4 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         return viewHolder;
     }
-
-    private void sendOpeningExisitingEvent() {
-        DeepLinkIntegrationManager.getInstance().sendContentSentEvent(mContext, mDeepLink,
-                new ComponentName(mContext, CallLogListItemViewHolder.class));
-    }
-
 }
