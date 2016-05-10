@@ -171,6 +171,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 public void onResult(DeepLink.BooleanResult result) {
                     boolean value = result.getResults();
                     if (isDeepLinkApiEnabled != value) {
+                        mAdapter.mDeepLinkCache.clearCache();
                         refreshData();
                     }
                     isDeepLinkApiEnabled = value;
