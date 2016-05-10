@@ -230,6 +230,12 @@ public class ExpirableCache<K, V> {
     }
 
     /**
+     * Clear all items currently in the cache.
+     */
+    public void clearCache() {
+        mCache.evictAll();
+    }
+    /**
      * Creates a new {@link CachedValue} instance to be stored in this cache.
      * <p>
      * Implementation of {@link LruCache#create(K)} can use this method to create a new entry.
