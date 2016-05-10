@@ -95,11 +95,49 @@
   <string name="call_recording_category_title">Enregistrement des appels</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Aucune application trouvée pour la lecture de l\'enregistrement sélectionné.</string>
+  <string name="invalid_number_text">"%1$s n'a pu effectuer cet appel. Est-ce que le numéro est correct ?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Vous pouvez composer un numéro ou\nrechercher un contact</string>
+  <string name="sign_in_hint_text">Connectez-vous pour passer des appels %1$s</string>
+  <string name="wifi_hint_text">Effectuer des appels %1$s vers %1$s gratuits en Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s en itinérance. Effectuez des appels %2$s vers %2$s gratuits en Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Aucune carte SIM. Appels d\'urgence seulement.</string>
+  <string name="extra_call_method_call_option">Appel <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Paramètres <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Appeler via <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Oui</string>
+  <string name="callerinfo_provider_auth_no">Non merci</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> aura accès à vos contacts, à votre profil, et à votre compte Cyanogen OS, ce qui peut inclure votre adresse e-mail.</string>
+  <string name="callerinfo_provider_auth_learn_more">En savoir plus</string>
+  <string name="callerinfo_provider_auth_desc">Bienvenue ! Souhaitez-vous que <xliff:g id="provider_name">%s</xliff:g> identifie les appelants inconnus et bloque les appels indésirables ?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Bienvenue ! Souhaitez-vous que <xliff:g id="provider_name">%s</xliff:g> identifie les appelants inconnus ?</string>
+  <string name="callerinfo_provider_summary">Identifie les appelants inconnus et le spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifie les appelants inconnus</string>
+  <string name="silence_spam_title">Couper la sonnerie pour les appels de spam</string>
+  <string name="silence_spam_summary">Ne jamais laisser sonner les appels provenant de spam</string>
+  <string name="block_hidden_title">Bloquer les numéros masqués</string>
+  <string name="block_hidden_summary">Considérer les numéros masqués comme spam</string>
+  <string name="block_dialog_title">Bloquer cet appelant ?</string>
+  <string name="block_dialog_positive">Bloquer</string>
+  <string name="block_dialog_negative">Annuler</string>
+  <string name="block_dialog_description">Vous ne recevrez plus d\'appels ou de messages de cette personne.</string>
+  <string name="block_dialog_report_spam">Signaler comme spam à <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Désactiver %1$s ?</string>
+  <string name="provider_disable_message">En désactivant %1$s, vous ne disposerez plus de l\'identification de l\'appelant.</string>
+  <string name="provider_disable_spam_message">En désactivant %1$s, vous ne disposerez plus de la fonctionnalité d\'identification de l\'appelant ou de protection contre le spam.</string>
+  <string name="powered_by_provider">Optimisé par <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Faire des appels %1$s en\nchangeant de mode ici"</string>
+  <string name="provider_search_help">"Rechercher des contacts %1$s en\nchangeant de mode ici"</string>
+  <string name="provider_button_help">"Bien compris"</string>
+  <string name="provider_voice_call">"Appel vocal %1$s"</string>
+  <string name="provider_video_call">"Appel vidéo %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">Pour placer un appel, activer les autorisations pour le téléphone.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Afficher la note</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Prendre des notes n\'importe où</string>
 </resources>

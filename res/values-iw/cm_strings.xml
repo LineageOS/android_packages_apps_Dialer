@@ -95,11 +95,49 @@
   <string name="call_recording_category_title">הקלטת שיחות</string>
   <string name="call_recording_format">פורמט שמע</string>
   <string name="call_playback_no_app_found_toast">לא נמצא יישום לניגון ההקלטה שנבחרה.</string>
+  <string name="invalid_number_text">"לא ניתן היה לבצע את השיחה באמצעות %1$s. האם המספר הנכון?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">ניתן לחייג מספר טלפון או\nלחפש איש קשר</string>
+  <string name="sign_in_hint_text">התחבר כדי לבצע שיחות %1$s</string>
+  <string name="wifi_hint_text">בצע שיחות %1$s אל %1$s בחינם ב -Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s במצב נדידה. בצע שיחות %2$s אל %2$s בחינם ב- Wi-Fi.</string>
+  <string name="emergency_call_hint_text">ללא SIM. שיחות חירום בלבד.</string>
+  <string name="extra_call_method_call_option">שיחת <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">הגדרות <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">התקשר באמצעות <xliff:g id="name">%1$s </xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">כן</string>
+  <string name="callerinfo_provider_auth_no">לא, תודה</string>
+  <string name="callerinfo_provider_auth_access">ל<xliff:g id="provider_name">%s</xliff:g> תהיה גישה לאנשי הקשר, הפרופילים, וחשבון מערכת Cyanogen שלך, אשר עשויים לכלול את כתובת הדוא\"ל שלך.</string>
+  <string name="callerinfo_provider_auth_learn_more">למידע נוסף</string>
+  <string name="callerinfo_provider_auth_desc">ברוכים הבאים! האם ברצונך של-<xliff:g id="provider_name">%s</xliff:g> תהיה אפשרות לזהות מתקשרים לא ידועים ולחסום שיחות לא רצויות?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">ברוכים הבאים! האם ברצונך של-<xliff:g id="provider_name">%s</xliff:g> תהיה אפשרות לזהות מתקשרים לא ידועים?</string>
+  <string name="callerinfo_provider_summary">מזהה מתקשרים לא ידועים ושיחות זבל</string>
+  <string name="callerinfo_provider_summary_no_spam">מזהה מתקשרים לא ידועים</string>
+  <string name="silence_spam_title">השתק שיחות זבל</string>
+  <string name="silence_spam_summary">אל תאפשר לעולם לשיחות זבל לצלצל</string>
+  <string name="block_hidden_title">חסום מספרי טלפון חסויים</string>
+  <string name="block_hidden_summary">התייחס למספרים חסויים כזבל</string>
+  <string name="block_dialog_title">לחסום מתקשר זה?</string>
+  <string name="block_dialog_positive">חסום</string>
+  <string name="block_dialog_negative">בטל</string>
+  <string name="block_dialog_description">לא יתקבלו יותר שיחות או הודעות מאדם זה.</string>
+  <string name="block_dialog_report_spam">דווח כזבל אל <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">להשבית את %1$s?</string>
+  <string name="provider_disable_message">עקב השבתת %1$s, לא תהיה לך יותר שיחה מזוהה.</string>
+  <string name="provider_disable_spam_message">עקב השבתת %1$s, לא יהיו לך יותר סינון זבל או שיחה מזוהה.</string>
+  <string name="powered_by_provider">מופעל על-ידי <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"עבור לביצוע שיחות באמצעות %1$s על ידי\nהחלפת מצבים כאן"</string>
+  <string name="provider_search_help">"חפש אנשי קשר ב- %1$s על ידי\nהחלפת מצבים כאן"</string>
+  <string name="provider_button_help">"הבנתי"</string>
+  <string name="provider_voice_call">"%1$s - שיחה קולית"</string>
+  <string name="provider_video_call">"%1$s - שיחת וידאו"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">כדי לבצע שיחה, הפעל הרשאות טלפון.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">הצג הערה</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">רשום הערות מכל מקום</string>
 </resources>

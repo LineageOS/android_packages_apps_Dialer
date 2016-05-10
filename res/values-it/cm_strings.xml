@@ -136,6 +136,8 @@
   <string name="provider_video_call">"Videochiamata %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Per effettuare una chiamata, attiva le autorizzazioni del telefono.</string>
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
-  <string name="recentCalls_empty_action_cm">Effettua una telefonata</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Vedi note</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Prendi note da qualunque parte</string>
 </resources>

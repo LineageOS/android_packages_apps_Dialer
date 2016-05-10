@@ -95,11 +95,17 @@
   <string name="call_recording_category_title">Oproep opneming</string>
   <string name="call_recording_format">Oudio formaat</string>
   <string name="call_playback_no_app_found_toast">Geen toep kon gevind word om die geselekteerde opneming terug te speel nie.</string>
+  <string name="invalid_number_text">"%1$s kon nie oproep maak nie. Is die nommer korrek?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Jy kan \'n foon nommer skakel of\ndeur jou kontakte soek</string>
+  <string name="sign_in_hint_text">Teken in om %1$s oproepe te maak</string>
+  <string name="wifi_hint_text">Maak gratis %1$s na %1$s oproepe oor Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s is besig om te swerf. Maak gratis %2$s na %2$s oproepe oor Wi-Fi.</string>
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

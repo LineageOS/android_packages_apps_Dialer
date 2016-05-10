@@ -99,9 +99,9 @@
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">Sie können eine Nummer wählen\noder nach einem Kontakt suchen</string>
   <string name="sign_in_hint_text">Anmelden, um %1$s-Anrufe zu tätigen</string>
-  <string name="wifi_hint_text">Machen Sie kostenlose Anrufe über WLAN von %1$s zu %1$s.</string>
-  <string name="roaming_hint_text">%1$s ist Roaming. Führen Sie kostenlose Anrufe von %2$s zu %2$s über WLAN.</string>
-  <string name="emergency_call_hint_text">Keine SIM - Nur Notrufe.</string>
+  <string name="wifi_hint_text">Machen Sie kostenlose Anrufe über WLAN von %1$s nach %1$s.</string>
+  <string name="roaming_hint_text">%1$s ist Roaming. Führen Sie kostenlose Anrufe von %2$s nach %2$s über WLAN.</string>
+  <string name="emergency_call_hint_text">Keine SIM – Nur Notrufe.</string>
   <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g>-Anruf</string>
   <!-- InCall Plugin Settings -->
   <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g>-Einstellungen</string>
@@ -132,10 +132,12 @@
   <string name="provider_help">"Sie können Anrufe via %1$s tätigen,\nindem Sie hier den Modus umschalten"</string>
   <string name="provider_search_help">"Sie können Kontakte aus %1$s suchen,\nindem Sie hier den Modus umschalten"</string>
   <string name="provider_button_help">"Verstanden"</string>
-  <string name="provider_voice_call">"%1$s Sprachanruf"</string>
-  <string name="provider_video_call">"%1$s Videoanruf"</string>
+  <string name="provider_voice_call">"%1$s-Sprachanruf"</string>
+  <string name="provider_video_call">"%1$s-Videoanruf"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Aktivieren Sie die Telefon-Berechtigung, um einen Anruf zu tätigen.</string>
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
-  <string name="recentCalls_empty_action_cm">Anruf tätigen</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Notiz anzeigen</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Machen Sie sich Notizen – überall</string>
 </resources>

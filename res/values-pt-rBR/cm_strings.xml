@@ -95,12 +95,12 @@
   <string name="call_recording_category_title">Gravação de chamadas</string>
   <string name="call_recording_format">Formato de áudio</string>
   <string name="call_playback_no_app_found_toast">Nenhum app pôde ser encontrado para a reprodução da gravação selecionada.</string>
-  <string name="invalid_number_text">"%1$s não conseguiu fazer esta ligação. O número está correto?"</string>
+  <string name="invalid_number_text">"%1$s não conseguiu realizar esta chamada. O número está correto?"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">Você pode discar um número de telefone ou\n procurar em seus contatos</string>
-  <string name="sign_in_hint_text">Logue para fazer chamadas %1$s</string>
-  <string name="wifi_hint_text">Fazer chamadas grátis de %1$s para %1$s através de Wi-Fi.</string>
-  <string name="roaming_hint_text">%1$s em roaming. Fazer chamadas grátis de %1$s para %1$s através de Wi-Fi.</string>
+  <string name="sign_in_hint_text">Inicie sessão para realizar chamadas %1$s</string>
+  <string name="wifi_hint_text">Faça chamadas grátis de %1$s para %1$s através do Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s em roaming. Faça chamadas grátis de %2$s para %2$s através do Wi-Fi.</string>
   <string name="emergency_call_hint_text">Sem cartão SIM. Apenas chamadas de emergência.</string>
   <string name="extra_call_method_call_option">Ligar com <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
@@ -113,7 +113,7 @@
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> terá acesso aos seus contatos, perfil e conta Cyanogen OS, que pode incluir o seu endereço de e-mail.</string>
   <string name="callerinfo_provider_auth_learn_more">Saiba Mais</string>
   <string name="callerinfo_provider_auth_desc">Bem-vindo! Gostaria que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos e bloqueie chamadas indesejadas?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">Bem-vindo! Gostaria que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Bem-vindo! Deseja que <xliff:g id="provider_name">%s</xliff:g> identifique os números desconhecidos?</string>
   <string name="callerinfo_provider_summary">Identifica os números desconhecidos e spam</string>
   <string name="callerinfo_provider_summary_no_spam">Identifica números desconhecidos</string>
   <string name="silence_spam_title">Silenciar chamadas de spam</string>
@@ -136,6 +136,8 @@
   <string name="provider_video_call">"chamada de vídeo %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Para fazer uma chamada, ative as permissões de telefone.</string>
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
-  <string name="recentCalls_empty_action_cm">Fazer uma ligação</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Visualizar anotações</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Fazer anotações em qualquer lugar</string>
 </resources>

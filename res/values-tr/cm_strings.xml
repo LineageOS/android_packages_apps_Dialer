@@ -95,11 +95,49 @@
   <string name="call_recording_category_title">Arama kaydı</string>
   <string name="call_recording_format">Ses formatı</string>
   <string name="call_playback_no_app_found_toast">Seçili kaydı yürütmek için hiçbir uygulama bulunamadı.</string>
+  <string name="invalid_number_text">"%1$s bu aramayı yapamadı. Numara doğru mu?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Bir telefon numarasını arayabilir veya\nkişilerinizi araştırabilirsiniz</string>
+  <string name="sign_in_hint_text">%1$s arama yapmak oturum açın</string>
+  <string name="wifi_hint_text">Wi-Fi üzerinden ücretsiz %1$s - %1$s aramalar gerçekleştirin.</string>
+  <string name="roaming_hint_text">%1$s dolaşıyor. Wi-Fi üzerinden ücretsiz %2$s - %2$s aramalar gerçekleştirin.</string>
+  <string name="emergency_call_hint_text">SIM kart takılı değil. Sadece acil aramalar.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> araması</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> ayarları</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g> kullanarak ara</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Evet</string>
+  <string name="callerinfo_provider_auth_no">Hayır teşekkürler</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> kişilerinize, Me profilinize ve e-posta adresinizin bulunduğu Cyanogenmod OS hesabınıza erişebilecek.</string>
+  <string name="callerinfo_provider_auth_learn_more">Daha fazla bilgi edinin</string>
+  <string name="callerinfo_provider_auth_desc">Hoş geldiniz! <xliff:g id="provider_name">%s</xliff:g> ile bilinmeyen arayanları bulmak ve istenmeyen çağrıları engellemek ister misiniz?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Hoş geldiniz! <xliff:g id="provider_name">%s</xliff:g> ile bilinmeyen arayanları bulmak ister misiniz?</string>
+  <string name="callerinfo_provider_summary">Bilinmeyen kişileri ve spamları bulur</string>
+  <string name="callerinfo_provider_summary_no_spam">Bilinmeyen kişileri bulur</string>
+  <string name="silence_spam_title">Spam aramalarını sessize al</string>
+  <string name="silence_spam_summary">Spam aramalarının çalmasına asla izin verme</string>
+  <string name="block_hidden_title">Gizli telefon numaralarını engelle</string>
+  <string name="block_hidden_summary">Gizli numaraları spam olarak düşün</string>
+  <string name="block_dialog_title">Bu arayan engellensin mi?</string>
+  <string name="block_dialog_positive">Engelle</string>
+  <string name="block_dialog_negative">İptal</string>
+  <string name="block_dialog_description">Artık bu kişiden çağrı ya da mesaj almayacaksınız.</string>
+  <string name="block_dialog_report_spam"><xliff:g id="provider">%s</xliff:g> sağlayıcısına spam olarak bildir</string>
+  <string name="provider_disable_title">%1$s devre dışı bırakılsın mı?</string>
+  <string name="provider_disable_message">%1$s sağlayıcısını devre dışı bırakarak, arayan kimliklerini bilemeyeceksiniz.</string>
+  <string name="provider_disable_spam_message">%1$s sağlayıcısını devre dışı bırakarak, arayan kimliklerini bilemeyecek veya spamleri engelleyemeyeceksiniz.</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> tarafından desteklenmektedir</string>
+  <string name="provider_help">"Buradan modları değiştirerek\n%1$s arama yapın"</string>
+  <string name="provider_search_help">"Buradan modları değiştirerek\n%1$s kişiyi arayın"</string>
+  <string name="provider_button_help">"Anladım"</string>
+  <string name="provider_voice_call">"%1$s sesli arama"</string>
+  <string name="provider_video_call">"%1$s görüntülü arama"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">Aramak için Telefon izinlerini açın.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Notu görüntüle</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Heryerden notlar alın</string>
 </resources>

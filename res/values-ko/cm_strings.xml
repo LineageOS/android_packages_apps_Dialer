@@ -95,11 +95,48 @@
   <string name="call_recording_category_title">통화 녹음</string>
   <string name="call_recording_format">오디오 포맷</string>
   <string name="call_playback_no_app_found_toast">선택된 녹음을 재생할 수 있는 애플리케이션을 찾을 수 없습니다.</string>
+  <string name="invalid_number_text">"%1$s이(가) 이 전화를 할 수 없었습니다. 이 번호가 정확합니까?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">전화 번호를 입력하거나\n연락처를 검색할 수 있습니다</string>
+  <string name="sign_in_hint_text">%1$s 전화를 하기 위해 로그인</string>
+  <string name="wifi_hint_text">%1$s 통화를 무료로 하기 위해 Wi-Fi에 연결하세요.</string>
+  <string name="roaming_hint_text">%1$s은(는) 로밍입니다. %2$s 통화를 무료로 하기 위해 Wi-Fi에 연결하세요.</string>
+  <string name="emergency_call_hint_text">SIM 카드 없음. 긴급 통화만 가능.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> 전화</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> 설정</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g>으(로) 전화
+</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">예</string>
+  <string name="callerinfo_provider_auth_no">아니요</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g>이(가) 당신의 연락처, \'나\' 프로필과 이메일 주소가 포함되어 있을 수 있는 Cyanogen OS 계정 정보에 접근할 수 있습니다.</string>
+  <string name="callerinfo_provider_auth_learn_more">더 알아보기</string>
+  <string name="callerinfo_provider_auth_desc">환영합니다! <xliff:g id="provider_name">%s</xliff:g>을(를) 사용하여 알 수 없는 번호를 식별하고 원치 않는 전화를 차단하시겠습니까?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">환영합니다! <xliff:g id="provider_name">%s</xliff:g>을(를) 사용하여 알 수 없는 번호를 식별하시겠습니까?</string>
+  <string name="callerinfo_provider_summary">알 수 없는 번호와 스팸 전화 식별</string>
+  <string name="callerinfo_provider_summary_no_spam">알 수 없는 번호 식별</string>
+  <string name="silence_spam_title">스팸 전화 무음</string>
+  <string name="silence_spam_summary">스팸 전화가 걸려오면 벨소리를 울리지 않음</string>
+  <string name="block_hidden_title">발신자 표시 제한 번호 차단</string>
+  <string name="block_hidden_summary">발신자 표시 제한 번호를 스팸 전화로 간주합니다</string>
+  <string name="block_dialog_title">이 번호를 차단하겠습니까?</string>
+  <string name="block_dialog_positive">차단</string>
+  <string name="block_dialog_negative">취소</string>
+  <string name="block_dialog_description">더 이상 이 사람이 보내는 전화나 메시지를 받지 않게 됩니다.</string>
+  <string name="block_dialog_report_spam"><xliff:g id="provider">%s</xliff:g>에 스팸으로 신고</string>
+  <string name="provider_disable_title">%1$s을(를) 비활성화합니까?</string>
+  <string name="provider_disable_message">%1$s를 비활성화하면 발신자 정보 확인을 할 수 없습니다.</string>
+  <string name="provider_disable_spam_message">%1$s를 비활성화하면 발신자 정보 확인과 스팸 차단을 할 수 없습니다.</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>이(가) 제공함</string>
+  <string name="provider_help">"여기에서 모드를 전환하여\n%1$s 전화를 하세요"</string>
+  <string name="provider_search_help">"여기에서 모드를 전환하여\n%1$s 연락처 검색을 하세요"</string>
+  <string name="provider_button_help">"확인"</string>
+  <string name="provider_voice_call">"%1$s 음성 통화"</string>
+  <string name="provider_video_call">"%1$s 영상 통화"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">전화를 걸기 위해 전화 권한을 부여하세요.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

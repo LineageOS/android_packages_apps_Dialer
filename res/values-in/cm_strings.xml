@@ -95,11 +95,49 @@
   <string name="call_recording_category_title">Rekaman panggilan</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Tidak ada aplikasi yang dapat ditemukan untuk pemutaran kembali dari rekaman yang terpilih.</string>
+  <string name="invalid_number_text">"%1$s tidak bisa melakukan panggilan ini. Apakah nomornya benar?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Anda dapat memasukkan nomor telepon atau\nmencari kontak</string>
+  <string name="sign_in_hint_text">Masuk untuk melakukan panggilan %1$s</string>
+  <string name="wifi_hint_text">Lakukan panggilan gratis dari %1$s ke %1$s lewat Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s sedang jelajah (roaming). Lakukan panggilan gratis dari %2$s ke %2$s lewat Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Tidak ada SIM. Panggilan darurat saja.</string>
+  <string name="extra_call_method_call_option">Panggilan <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Pengaturan <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Panggil menggunakan <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ya</string>
+  <string name="callerinfo_provider_auth_no">Tidak, terima kasih</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> akan dapat mengakses kontak, profil, dan akun Cyanogen OS Anda, yang mungkin termasuk alamat surel.</string>
+  <string name="callerinfo_provider_auth_learn_more">Pelajari selengkapnya</string>
+  <string name="callerinfo_provider_auth_desc">Selamat datang! Apakah Anda ingin <xliff:g id="provider_name">%s</xliff:g> untuk mengidentifikasi penelepon tidak dikenal dan blokir panggilan yang tidak diinginkan?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Selamat datang! Apakah Anda ingin <xliff:g id="provider_name">%s</xliff:g> untuk mengidentifikasi penelepon tidak dikenal?</string>
+  <string name="callerinfo_provider_summary">Identifikasi penelepon tidak dikenal dan spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifikasi penelepon tidak dikenal</string>
+  <string name="silence_spam_title">Senyapkan panggilan spam</string>
+  <string name="silence_spam_summary">Jangan biarkan panggilan spam berdering</string>
+  <string name="block_hidden_title">Blokir nomor telepon yang tersembunyi</string>
+  <string name="block_hidden_summary">Anggap nomor telepon tersembunyi sebagai spam</string>
+  <string name="block_dialog_title">Blokir penelepon ini?</string>
+  <string name="block_dialog_positive">Blokir</string>
+  <string name="block_dialog_negative">Batalkan</string>
+  <string name="block_dialog_description">Anda tidak akan menerima panggilan atau pesan dari orang ini.</string>
+  <string name="block_dialog_report_spam">Laporkan sebagai spam ke <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Nonaktifkan %1$s?</string>
+  <string name="provider_disable_message">Dengan menonaktifkan %1$s, Anda tidak akan memiliki ID penelepon.</string>
+  <string name="provider_disable_spam_message">Dengan menonaktifkan %1$s, Anda tidak akan memiliki perlindungan spam atau ID penelepon.</string>
+  <string name="powered_by_provider">Didukung oleh <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Lakukan panggilan %1$s dengan\nmengubah modus di sini"</string>
+  <string name="provider_search_help">"Cari kontak %1$s dengan\nmengubah modus di sini"</string>
+  <string name="provider_button_help">"Paham"</string>
+  <string name="provider_voice_call">"Panggilan suara %1$s"</string>
+  <string name="provider_video_call">"Panggilan video %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">Untuk melakukan panggilan, aktifkan izin Telepon.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Lihat catatan</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Tulis catatan di mana pun</string>
 </resources>

@@ -101,5 +101,6 @@
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">होय</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

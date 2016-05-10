@@ -386,7 +386,7 @@
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_make_video_call">Videouruff maachen</string>
   <!-- Title for the call log list item that brings users to the full call history when clicked -->
-  <string name="recents_footer_text">Vollstännegen Uruffhistorique uweisen</string>
+  <string name="show_call_history">Vollstännegen Uruffhistorique uweisen</string>
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
   <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> nei verpasst Uriff</string>
   <!-- Shown when there are no speed dial favorites. -->

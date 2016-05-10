@@ -88,14 +88,56 @@
   <string name="call_stats_title_for_number">Dette nummeret</string>
   <string name="call_stats_title_of_total">Av totalt</string>
   <string name="call_stats_title_durations">Samtalevarighet</string>
+  <string name="call_stats_title_count">Antall anrop</string>
   <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Din anropslogg inneholder ikke noen samtaler innenfor den valgte perioden.</string>
+  <string name="call_recording_category_title">Samtaleinnspilling</string>
   <string name="call_recording_format">Lydformat</string>
+  <string name="call_playback_no_app_found_toast">Ingen apper kan spille av den valgte innspillingen.</string>
+  <string name="invalid_number_text">"%1$s kunne ikke sette opp samtalen. Er nummeret korrekt?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Du kan ringe et telefonnummer eller\nsøke etter en kontakt</string>
+  <string name="sign_in_hint_text">Logg inn for å ringe %1$s samtaler</string>
+  <string name="wifi_hint_text">Ring gratis %1$s til %1$s samtaler via Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s er roaming. Ring gratis %2$s til %2$s samtaler via Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Ingen SIM-kort. Bare nødanrop.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> samtale</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> innstillinger</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Ring med bruk av <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_no">Nei takk</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> kommer til å ha tilgang til kontaktene dine, Me profilen din og Cyanogen OS kontoen din som kan inkludere e-post adressen din.</string>
+  <string name="callerinfo_provider_auth_learn_more">Lær mer</string>
+  <string name="callerinfo_provider_auth_desc">Velkommen! Ønsker du at <xliff:g id="provider_name">%s</xliff:g> skal identifisere ukjente ringere og blokkere uønskede samtaler?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Velkommen! Ønsker du at <xliff:g id="provider_name">%s</xliff:g> skal identifisere ukjente ringere?</string>
+  <string name="callerinfo_provider_summary">Identifiserer ukjente ringere og spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifiserer ukjente ringere</string>
+  <string name="silence_spam_title">Demp spam anrop</string>
+  <string name="silence_spam_summary">La aldri spam anrop ringe imellom</string>
+  <string name="block_hidden_title">Blokker skjulte telefonnummere</string>
+  <string name="block_hidden_summary">Se på skjulte nummere som spam</string>
+  <string name="block_dialog_title">Blokker denne ringeren?</string>
+  <string name="block_dialog_positive">Blokker</string>
+  <string name="block_dialog_negative">Avbryt</string>
+  <string name="block_dialog_description">Du vil ikke lenger motta samtaler eller meldinger fra denne personen.</string>
+  <string name="block_dialog_report_spam">Rapporter som spam til <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Slå av %1$s?</string>
+  <string name="provider_disable_message">Ved å slå av %1$s, vil du ikke ha ringer ID.</string>
+  <string name="provider_disable_spam_message">Ved å deaktivere %1$s, så vil du ikke ha noe spam beskyttelse eller ringer ID.</string>
+  <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Ring %1$s ganger ved å\nbytte moduser her"</string>
+  <string name="provider_search_help">"Søk %1$s kontakter ved å\nbytte moduser her"</string>
+  <string name="provider_button_help">"Skjønner"</string>
+  <string name="provider_voice_call">"%1$s stemme-anrop"</string>
+  <string name="provider_video_call">"%1$s video-anrop"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">For å ringe må du slå på Telefon tillatelser.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Vis notat</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Skriv notater hvor som helst</string>
 </resources>

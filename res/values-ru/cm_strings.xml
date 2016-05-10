@@ -95,11 +95,49 @@
   <string name="call_recording_category_title">Запись вызова</string>
   <string name="call_recording_format">Формат аудио</string>
   <string name="call_playback_no_app_found_toast">Не найдено приложение, которое может воспроизвести выбранную запись.</string>
+  <string name="invalid_number_text">"%1$s не может сделать вызов. Правильно ли набран номер?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Вы можете набрать номер абонента\n либо найти его в списке контактов</string>
+  <string name="sign_in_hint_text">Войдите для совершения вызовов %1$s</string>
+  <string name="wifi_hint_text">Совершать бесплатные звонки %1$s до %1$s через Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s в роуминге. Совершать бесплатные звонки %2$s до %2$s через Wi-Fi.</string>
+  <string name="emergency_call_hint_text">SIM-карта отсутствует. Только экстренные вызовы.</string>
+  <string name="extra_call_method_call_option">Вызов <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Настройки <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Позвонить, используя <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Да</string>
+  <string name="callerinfo_provider_auth_no">Нет</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> получит доступ к вашим контактам, профилю и аккаунту Cyanogen OS, которые могут содержать ваш адрес эл. почты.</string>
+  <string name="callerinfo_provider_auth_learn_more">Подробнее</string>
+  <string name="callerinfo_provider_auth_desc">Добро пожаловать! Хотите, чтобы <xliff:g id="provider_name">%s</xliff:g> определял неизвестные номера и блокировал нежелательные вызовы?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Добро пожаловать! Хотите, чтобы <xliff:g id="provider_name">%s</xliff:g> определял неизвестные номера?</string>
+  <string name="callerinfo_provider_summary">Определяет неизвестные номера и спам</string>
+  <string name="callerinfo_provider_summary_no_spam">Определяет неизвестные номера</string>
+  <string name="silence_spam_title">Заглушить спам-вызовы</string>
+  <string name="silence_spam_summary">Вы больше не услышите звонков со спамом</string>
+  <string name="block_hidden_title">Блокировать скрытые номера</string>
+  <string name="block_hidden_summary">Считать скрытые номера спамом</string>
+  <string name="block_dialog_title">Заблокировать абонента?</string>
+  <string name="block_dialog_positive">Заблокировать</string>
+  <string name="block_dialog_negative">Отмена</string>
+  <string name="block_dialog_description">Вы больше не будете получать вызовы и сообщения от этого человека.</string>
+  <string name="block_dialog_report_spam">Сообщить о спаме в <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Отключить %1$s?</string>
+  <string name="provider_disable_message">Отключив %1$s, вы не сможете узнать номер вызывающего абонента.</string>
+  <string name="provider_disable_spam_message">Отключив %1$s, вы останетесь без защиты от спама и не сможете узнать номер вызывающего абонента.</string>
+  <string name="powered_by_provider">На основе <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Вы можете совершать вызовы %1$s,\nпереключая режимы здесь"</string>
+  <string name="provider_search_help">"Вы можете искать контакты %1$s,\nпереключая режимы здесь"</string>
+  <string name="provider_button_help">"Понятно"</string>
+  <string name="provider_voice_call">"%1$s голосовой вызов"</string>
+  <string name="provider_video_call">"%1$s видеовызов"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">Для совершения вызова необходимо настроить разрешения.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Просмотреть заметку</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Делайте заметки из любого места</string>
 </resources>

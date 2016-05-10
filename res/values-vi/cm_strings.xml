@@ -95,11 +95,49 @@
   <string name="call_recording_category_title">Ghi âm cuộc gọi</string>
   <string name="call_recording_format">Định dạng âm thanh</string>
   <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi âm đã chọn.</string>
+  <string name="invalid_number_text">"%1$s không thể thực hiện cuộc gọi này. Số điện thoại có chính xác không?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Bạn có thể quay số điện thoại hoặc\ntìm kiếm số liên hệ</string>
+  <string name="sign_in_hint_text">Đăng nhập để thực hiện cuộc gọi %1$s</string>
+  <string name="wifi_hint_text">Thực hiện cuộc gọi miễn phí từ %1$s đến %1$s qua Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s đang chuyển vùng. Thực hiện cuộc gọi miễn phí từ %2$s đến %2$s qua Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Không có SIM. Chỉ thực hiện được các cuộc gọi khẩn cấp.</string>
+  <string name="extra_call_method_call_option">Cuộc gọi <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Cài đặt <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Gọi điện thoại bằng <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Có</string>
+  <string name="callerinfo_provider_auth_no">Không, cảm ơn</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> sẽ có quyền truy cập danh bạ của bạn, cấu hình Tôi, và tài khoản hệ điều hành Cyanogen, có thể bao gồm địa chỉ email của bạn.</string>
+  <string name="callerinfo_provider_auth_learn_more">Tìm hiểu thêm</string>
+  <string name="callerinfo_provider_auth_desc">Chào mừng! Bạn muốn <xliff:g id="provider_name">%s</xliff:g> xác định người gọi không biết và chặn cuộc gọi không mong muốn?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Chào mừng! Bạn muốn <xliff:g id="provider_name">%s</xliff:g> xác định người gọi không biết?</string>
+  <string name="callerinfo_provider_summary">Xác định người gọi không biết và cuộc gọi hay tin nhắn rác</string>
+  <string name="callerinfo_provider_summary_no_spam">Xác định người gọi không biết</string>
+  <string name="silence_spam_title">Đặt các cuộc gọi rác ở chế độ im lặng</string>
+  <string name="silence_spam_summary">Không bao giờ để các cuộc gọi rác rung chuông</string>
+  <string name="block_hidden_title">Chặn các số điện thoại ẩn</string>
+  <string name="block_hidden_summary">Coi các số điện thoại ẩn là số rác</string>
+  <string name="block_dialog_title">Chặn người gọi này?</string>
+  <string name="block_dialog_positive">Chặn</string>
+  <string name="block_dialog_negative">Hủy bỏ</string>
+  <string name="block_dialog_description">Bạn sẽ không còn nhận các cuộc gọi hoặc tin nhắn từ người này.</string>
+  <string name="block_dialog_report_spam">Báo cáo là tin rác cho <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Vô hiệu hóa %1$s?</string>
+  <string name="provider_disable_message">Bằng cách vô hiệu hoá %1$s, bạn sẽ không có ID người gọi.</string>
+  <string name="provider_disable_spam_message">Bằng cách vô hiệu hoá %1$s, bạn sẽ không có tính năng chống cuộc gọi hay tin nhắn rác hoặc ID người gọi.</string>
+  <string name="powered_by_provider">Được hỗ trợ bởi <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Thực hiện cuộc gọi %1$s bằng cách\nchuyển đổi chế độ tại đây"</string>
+  <string name="provider_search_help">"Tìm kiếm danh bạ %1$s bằng cách\nchuyển đổi chế độ tại đây"</string>
+  <string name="provider_button_help">"Đã nhận được"</string>
+  <string name="provider_voice_call">"Cuộc gọi thoại %1$s"</string>
+  <string name="provider_video_call">"Cuộc gọi video %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+  <string name="cm_permission_place_call">Để thực hiện cuộc gọi, bật chế độ cho phép của Điện thoại.</string>
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Xem ghi chú</string>
+  <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Ghi chú từ bất kỳ nơi nào</string>
 </resources>
