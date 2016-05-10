@@ -140,4 +140,5 @@
   <string name="search_shortcut_view_note">Visualizar anotações</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Fazer anotações em qualquer lugar</string>
+  <string name="callerinfo_provider_status_disabling">Desativando</string>
 </resources>
