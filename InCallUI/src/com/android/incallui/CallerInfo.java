@@ -402,6 +402,16 @@ public class CallerInfo {
         return this;
     }
 
+    /* package */ CallerInfo markAsEmergency(Context context, String number) {
+        number = PhoneNumberUtils.normalizeNumber(number);
+        name = context.getString(R.string.emergency_call_dialog_number_for_display) + " "
+                + number;
+        phoneNumber = null;
+
+        photoResource = R.drawable.img_phone;
+        mIsEmergency = true;
+        return this;
+    }
 
     /**
      * Mark this CallerInfo as a voicemail call. The voicemail label

@@ -31,6 +31,8 @@
 
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources>
+    <!-- Dtermine whether emergency calls should be marked. -->
+    <bool name="mark_emergency_call">true</bool>
     <!-- Call substate label -->
     <string name="call_substate_label"> Call substate - \u000a</string>
     <!-- Call substate label for call resumed -->
