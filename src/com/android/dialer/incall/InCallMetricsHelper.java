@@ -1,13 +1,14 @@
 package com.android.dialer.incall;
 
 import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
-import com.android.dialer.DialtactsActivity;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.phone.common.ambient.AmbientConnection;
 import com.android.phone.common.incall.DialerDataSubscription;
@@ -23,16 +24,19 @@ public class InCallMetricsHelper {
     private static final String TAG = InCallMetricsHelper.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    public static final String CATEGORY_BASE = "dialernext.incall.";
+    public static final String CATEGORY_BASE = "dialer.incall.";
     public static final String METRICS_SHARED_PREFERENCES = "metrics_shared_preferences";
     public static final String DELIMIT = ":";
 
-    static final int COMPONENT_NAME = 0;
-    static final int CATEGORY = 1;
-    static final int EVENT = 2;
-    static final int PARAMS = 3;
-    private static final int REGULAR_KEY = 4;
-    private static final int SHORT_KEY = 4;
+    // Positions in our shared preference keys
+    private static final int POS_COMPONENT_NAME = 0;
+    private static final int POS_CATEGORY_VALUE = 1;
+    private static final int POS_EVENT_VALUE = 2;
+    private static final int POS_PARAM_VALUE = 3;
+
+    private static final int METRICS_JOB_ID = 1;
+
+    public static final String PARAM_PROVIDER = "provider";
 
     // The TODO/Done flags denote which is convered by testing. These will be removed in the future.
     public enum Categories {
@@ -132,23 +136,41 @@ public class InCallMetricsHelper {
         InCallMetricsHelper helper = getInstance();
         helper.mContext = context;
 
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(context, InCallMetricsReceiver.class);
+        JobScheduler jobScheduler
+                = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
-        PendingIntent pi = PendingIntent.getService(context, 0, i, 0);
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, 1000L, // every 24 hours
-                AlarmManager.INTERVAL_DAY, pi);
-    }
+        if (jobScheduler != null) {
+            boolean jobExists = false;
+            for (JobInfo ji : jobScheduler.getAllPendingJobs()) {
+                if (ji.getId() != METRICS_JOB_ID) {
+                    // Job exists
+                    jobExists = true;
+                    break;
+                }
+            }
+            if (!jobExists) {
+                // We need a job to send our aggregated events to our metrics service every 24
+                // hours.
+                ComponentName jobComponent = new ComponentName(context,
+                        InCallMetricsJob.class);
 
-    /**
-     * Sends all events
-     * @param event
-     */
-    private void sendAmbientEvent(Event event) {
-        if (DEBUG) {
-            Log.d(TAG, "Event: " + event.toString());
+                JobInfo job = new JobInfo.Builder(METRICS_JOB_ID, jobComponent)
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE)
+                        .setPersisted(true)
+                        .setPeriodic(AlarmManager.INTERVAL_DAY)
+                        .setBackoffCriteria(AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+                                JobInfo.BACKOFF_POLICY_EXPONENTIAL)
+                        .build();
+                jobScheduler.schedule(job);
+            } else {
+                if (DEBUG) Log.d(TAG, "InCall job " + 1 + " already exists");
+            }
+        } else {
+            if (DEBUG) {
+                Log.e(TAG, "Running on a device without JobScheduler." +
+                        " InCall Metrics will fail to collect.");
+            }
         }
-        AnalyticsServices.AnalyticsApi.sendEvent(AmbientConnection.CLIENT.get(mContext), event);
     }
 
     /**
@@ -158,7 +180,7 @@ public class InCallMetricsHelper {
      * @param params fields that are part of the event
      * @param cn associated with the plugin
      */
-    public static Event sendEvent(Context c, Categories category, Events action,
+    public static void sendEvent(Context c, Categories category, Events action,
             HashMap<Parameters, Object> params, ComponentName cn) {
         Event.Builder event = new Event.Builder(CATEGORY_BASE + category.value(), action.value());
         if (params != null && params.size() > 0) {
@@ -167,9 +189,11 @@ public class InCallMetricsHelper {
             }
         }
         Event e = event.build();
+        if (DEBUG) {
+            Log.d(TAG, "Event: " + event.toString());
+        }
         InCallQueries.shipAnalyticsToPlugin(DialerDataSubscription.get(c).mClient, cn, e);
-        getInstance().sendAmbientEvent(e);
-        return e;
+        AnalyticsServices.AnalyticsApi.sendEvent(AmbientConnection.CLIENT.get(c), e);
     }
 
     /**
@@ -180,21 +204,13 @@ public class InCallMetricsHelper {
      * @param data
      */
     public static void storeEvent(ComponentName cn, Categories category, Events event,
-                                  HashMap<Parameters, Object> data) {
+            HashMap<Parameters, String> data) {
         storeEvent(cn, category, event, data, null);
     }
 
     @VisibleForTesting
-    public static String buildKey(ComponentName componentName, Categories category,
-                                         Events action, Parameters parameter) {
-
-        return componentName.flattenToShortString() + DELIMIT + category.value() + DELIMIT +
-                action.value() + DELIMIT + parameter.value();
-
-    }
-
-    private static void storeEvent(ComponentName cn, Categories category, Events event,
-                                  HashMap<Parameters, Object> data, String location) {
+    /* package */ static void storeEvent(ComponentName cn, Categories category, Events event,
+            HashMap<Parameters, String> data, String location) {
 
         SharedPreferences sp = getInstance().mContext.getSharedPreferences(
                 METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
@@ -202,12 +218,19 @@ public class InCallMetricsHelper {
         SharedPreferences.Editor editor = sp.edit();
 
         for (Parameters param : data.keySet()) {
-            Object o = data.get(param);
-            String eventKey = buildKey(cn, category, event, param);
-            if (location != null) {
-                eventKey += DELIMIT + location;
+            StringBuilder sb = new StringBuilder();
+            sb.append(cn.flattenToShortString()); // Add ComponentName String
+            sb.append(DELIMIT);
+            sb.append(category.value()); // Add our category value
+            sb.append(DELIMIT);
+            sb.append(event.value()); // Add our event value
+            sb.append(DELIMIT);
+            sb.append(param.value()); // add our param value
+            if (!TextUtils.isEmpty(location)) {
+                sb.append(DELIMIT);
+                sb.append(location); // add our location value
             }
-            putEditor(editor, eventKey, o);
+            editor.putString(sb.toString(), data.get(param));
         }
         editor.apply();
     }
@@ -218,95 +241,46 @@ public class InCallMetricsHelper {
      * @param p parameter
      * @return new count of the item.
      */
-    private static int increaseCount(HashMap<Parameters, Object> hashmap, Parameters p) {
+    private static String increaseCount(HashMap<Parameters, String> hashmap, Parameters p) {
         if (hashmap.containsKey(p)) {
-            return (int)hashmap.get(p) + 1;
+            return String.valueOf(Integer.valueOf(hashmap.get(p)) + 1);
         } else {
-            return 1;
+            return String.valueOf(1);
         }
     }
 
     /**
-     * Helper method for putting objects into a shared preference
-     * @param e
-     * @param key
-     * @param value
+     * Get the SharedPreferences events and output a hashmap for the event's values.
+     *
+     * @param componentName ComponentName who created the event
+     *
+     * @return HashMap of our params and their values.
      */
-    private static void putEditor(SharedPreferences.Editor e, String key, Object value) {
-        if (value instanceof Integer) {
-            e.putInt(key, (int)value);
-        } else if (value instanceof String) {
-            e.putString(key, String.valueOf(value));
-        } else if (value instanceof Boolean) {
-            e.putBoolean(key, (boolean)value);
-        } else if (value instanceof Double) {
-            e.putLong(key, ((Double) value).longValue());
-        } else if (value instanceof Long) {
-            e.putLong(key, (long)value);
-        }
-    }
-
-    /**
-     * Get the sharedpreferences events and output a hashmap for the event's values.
-     * @param cn
-     * @param category
-     * @param event
-     * @return
-     */
-    public static HashMap<Parameters, Object> getStoredEventParams(ComponentName cn,
-                                                                   Categories category,
-                                                                   Events event) {
+    /* package*/ static HashMap<Parameters, String> getStoredEventParams(
+            ComponentName componentName, Categories category, Events event) {
 
         SharedPreferences sp = getInstance().mContext.getSharedPreferences(
                 METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
-        String eventKey = cn.flattenToShortString() + DELIMIT + category.value() + DELIMIT + event.value();
+        StringBuilder sb = new StringBuilder();
+        sb.append(componentName.flattenToShortString()); // Add ComponentName String
+        sb.append(DELIMIT);
+        sb.append(category.value()); // Add our category value
+        sb.append(DELIMIT);
+        sb.append(event.value()); // Add our event value
+        sb.append(DELIMIT);
 
-        HashMap<Parameters, Object> eventMap = new HashMap<>();
+        HashMap<Parameters, String> eventMap = new HashMap<>();
         Map<String, ?> map = sp.getAll();
 
         for(Map.Entry<String,?> entry : map.entrySet()) {
-            if (entry.getKey().startsWith(eventKey)) {
+            if (entry.getKey().startsWith(sb.toString())) {
                 String[] keyParts = entry.getKey().split(DELIMIT);
-                String key;
-                if (keyParts.length > 4) {
-                    key = keyParts[keyParts.length - 2];
-                } else {
-                    key = keyParts[keyParts.length - 1];
-                }
-                eventMap.put(Parameters.valueOf(key), entry.getValue());
+                Parameters key = Parameters.valueOf(keyParts[POS_PARAM_VALUE]);
+                eventMap.put(key, String.valueOf(entry.getValue()));
             }
         }
         return eventMap;
-    }
-
-    /**
-     * Helper method to increase the count of a specific parameter if the last action was not the
-     * same as the current action.
-     */
-    public static void increaseCountOfMetricAfterValidate(ComponentName cn, Events event,
-            Categories cat, Parameters param) {
-
-        String validationKey = cn.flattenToShortString() + DELIMIT + cat.value();
-
-        SharedPreferences preferences = getInstance().mContext
-                .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = preferences.edit();
-        String lastEvent = preferences.getString(validationKey, null);
-
-        if (lastEvent != null && lastEvent.equals(event.value())) {
-            return;
-        } else {
-            editor.putString(validationKey, event.value());
-        }
-
-        editor.apply();
-
-
-        HashMap<Parameters, Object> metricsData = getStoredEventParams(cn, cat, event);
-        metricsData.put(param, increaseCount(metricsData,param));
-        storeEvent(cn, cat, event, metricsData);
     }
 
     /**
@@ -322,60 +296,67 @@ public class InCallMetricsHelper {
             // this is only null if we do not have a sim card.
             return;
         }
-        HashMap<Parameters, Object> metricsData = getStoredEventParams(cn, cat, event);
+        HashMap<Parameters, String> metricsData = getStoredEventParams(cn, cat, event);
         metricsData.put(param, increaseCount(metricsData,param));
         storeEvent(cn, cat, event, metricsData);
-    }
-
-    @VisibleForTesting
-    /* package */ static HashMap<String, HashMap<Parameters, Object>> getHashOfHashOfItems(
-            Map<String, ?> map) {
-        HashMap<String, HashMap<Parameters, Object>> items = new HashMap<>();
-        for(Map.Entry<String,?> entry : map.entrySet()){
-
-            String[] keyParts = entry.getKey().split(DELIMIT);
-            if (keyParts.length < REGULAR_KEY) {
-                continue;
-            }
-
-            ComponentName component = ComponentName.unflattenFromString(keyParts[COMPONENT_NAME]);
-            Categories category = Categories.valueOf(keyParts[CATEGORY]);
-            Events event = Events.valueOf(keyParts[EVENT]);
-            Parameters parm = Parameters.valueOf(keyParts[PARAMS]);
-
-            String eventKey = component.flattenToShortString() + DELIMIT + category.value() + DELIMIT
-                    + event.value();
-
-            if (!items.containsKey(eventKey)) {
-                items.put(eventKey, new HashMap<Parameters, Object>());
-            }
-
-            HashMap<Parameters, Object> params = items.get(eventKey);
-            params.put(parm, entry.getValue());
-            items.put(eventKey, params);
-        }
-        return items;
     }
 
     /**
      * Prepares all our metrics for sending.
      */
-    static void prepareToSend(Context context) {
-        SharedPreferences sp = getInstance().mContext.getSharedPreferences(
-                METRICS_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        HashMap<String, HashMap<Parameters, Object>> items = getHashOfHashOfItems(sp.getAll());
-        for (String key : items.keySet()) {
-            String[] keyParts = key.split(DELIMIT);
-            if (keyParts.length < SHORT_KEY) {
-                continue;
+    public static HashMap<String, Event.Builder> getEventsToSend(Context c) {
+        SharedPreferences sp = c.getSharedPreferences(METRICS_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE);
+
+        Map<String, ?> map = sp.getAll();
+
+        HashMap<String, Event.Builder> unBuiltEvents = new HashMap<>();
+
+        for(Map.Entry<String,?> entry : map.entrySet()){
+            String[] keyParts = entry.getKey().split(DELIMIT);
+
+            if (keyParts.length ==  POS_PARAM_VALUE + 1) {
+                String componentString = keyParts[POS_COMPONENT_NAME];
+                String eventCategory = keyParts[POS_CATEGORY_VALUE];
+                String parameter = keyParts[POS_PARAM_VALUE];
+                String eventAction = keyParts[POS_EVENT_VALUE];
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(componentString); // Add ComponentName String
+                sb.append(DELIMIT);
+                sb.append(eventCategory); // Add our category value
+                sb.append(DELIMIT);
+                sb.append(eventAction); // Add our event value
+                String eventKey = sb.toString();
+
+                Event.Builder eventBuilder;
+                if (unBuiltEvents.containsKey(eventKey)) {
+                    eventBuilder = unBuiltEvents.get(eventKey);
+                } else {
+                    eventBuilder = new Event.Builder(CATEGORY_BASE + eventCategory, eventAction);
+                    eventBuilder.addField(PARAM_PROVIDER, componentString);
+                }
+
+                eventBuilder.addField(parameter, String.valueOf(entry.getValue()));
+                unBuiltEvents.put(eventKey, eventBuilder);
             }
-            ComponentName component = ComponentName.unflattenFromString(keyParts[COMPONENT_NAME]);
-            Categories category = Categories.valueOf(keyParts[CATEGORY]);
-            Events event = Events.valueOf(keyParts[EVENT]);
-            HashMap<Parameters, Object> params = items.get(key);
-            sendEvent(context, category, event, params, component);
         }
+        return unBuiltEvents;
     }
 
+    public static void clearEventData(Context c, String key) {
+        SharedPreferences sp = c.getSharedPreferences(METRICS_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE);
 
+        Map<String, ?> map = sp.getAll();
+        SharedPreferences.Editor editor = sp.edit();
+
+        for(Map.Entry<String,?> entry : map.entrySet()){
+            String storedKey = entry.getKey();
+            if (storedKey.startsWith(key)) {
+                editor.remove(storedKey);
+            }
+        }
+        editor.apply();
+    }
 }
