@@ -2,6 +2,7 @@
 <resources>
     <dimen name="contact_list_badge_margin">1dp</dimen>
     <dimen name="dialpad_credits_padding">14dp</dimen>
+    <dimen name="dialpad_credits_spacing">4dp</dimen>
 
     <dimen name="call_log_spam_info_text_size">10sp</dimen>
 
