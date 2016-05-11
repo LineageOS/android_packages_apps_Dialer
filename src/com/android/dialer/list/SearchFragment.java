@@ -582,7 +582,8 @@ public class SearchFragment extends PhoneNumberPickerFragment
                     mCurrentCallMethodInfo = dialActivity.getCurrentCallMethod();
                 }
 
-                if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) {
+                if (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider &&
+                        mCurrentCallMethodInfo.mSingleColorBrandIcon != null) {
                     showProviderHint(r);
                 } else {
                     showSuggestion(r);
