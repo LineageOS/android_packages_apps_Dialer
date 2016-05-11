@@ -64,53 +64,38 @@
         android:layout_gravity="center_horizontal|bottom"
         android:visibility="gone">
 
-        <LinearLayout
+        <com.android.phone.common.widget.ResizingILDContainerLayout
             android:id="@+id/ild_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:weightSum="6"
             android:layout_marginTop="@dimen/ild_margin_height"
-            android:layout_marginBottom="@dimen/ild_margin_height">
+            android:layout_marginBottom="@dimen/ild_margin_height" >
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/ild_country"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_weight="3"
                 android:layout_marginStart="@dimen/dialpad_credits_padding"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/ild_country"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/credit_banner_text"
-                    android:layout_gravity="start" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:textColor="@color/credit_banner_text"
+                android:textAlignment="viewStart"
                 android:singleLine="true"
-                android:layout_weight="3"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/ild_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dialpad_credits_spacing"
                 android:layout_marginEnd="@dimen/dialpad_credits_padding"
-                android:orientation="vertical" >
+                android:textStyle="bold"
+                android:textColor="@color/credit_banner_text"
+                android:textAlignment="viewEnd"
+                android:singleLine="true"
+                android:ellipsize="end" />
 
-                <TextView
-                    android:id="@+id/ild_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/credit_banner_text"
-                    android:layout_gravity="end" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </com.android.phone.common.widget.ResizingILDContainerLayout>
 
         <View
             android:layout_width="match_parent"
