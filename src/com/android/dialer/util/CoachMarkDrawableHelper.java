@@ -117,6 +117,10 @@ public class CoachMarkDrawableHelper {
                                               final View touch, final SharedPreferences sp,
                                               CallMethodInfo cmi, float fontWidthScale) {
 
+        if (cmi.mBadgeIcon == null) {
+            return;
+        }
+
         Display display = act.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
