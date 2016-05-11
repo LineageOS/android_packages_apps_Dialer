@@ -245,6 +245,8 @@ public class DiscoveryEventHandler {
             count = preferences.getInt(CallMethodUtils.PREF_INTERNATIONAL_CALLS, 1);
         } else if (key.equals(NudgeKey.NOTIFICATION_WIFI_CALL)) {
             count = preferences.getInt(CallMethodUtils.PREF_WIFI_CALL, 1);
+        } else if (key.equals(NudgeKey.NOTIFICATION_ROAMING)) {
+            count = preferences.getInt(CallMethodUtils.PREF_ROAMING_CALLS, 1);
         }
 
         checkCount = (count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_FIRST_NUDGE, 0)) ||

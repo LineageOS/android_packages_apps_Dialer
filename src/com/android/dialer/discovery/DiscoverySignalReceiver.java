@@ -65,6 +65,12 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
                         (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
                 if ((mWifi.isConnected() && tm.isNetworkRoaming()) || DEBUG_CONNECTIVITY) {
+                    SharedPreferences preferences = context
+                            .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME,
+                                    Context.MODE_PRIVATE);
+                    int currentCount = preferences.getInt(CallMethodUtils.PREF_ROAMING_CALLS, 0);
+                    preferences.edit().putInt(CallMethodUtils.PREF_ROAMING_CALLS,
+                            ++currentCount).apply();
                     startServiceForConnectivityChanged(context);
                 }
                 break;
