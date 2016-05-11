@@ -42,6 +42,9 @@ import android.os.SystemClock;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
@@ -87,6 +90,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     @Nullable private ContactsPreferences mContactsPreferences;
     private final ContactInfoCache mContactInfoCache;
     private final NotificationManager mNotificationManager;
+    private final TelephonyManager mTelephonyManager;
     private final DialerRingtoneManager mDialerRingtoneManager;
     private int mCurrentNotification = NOTIFICATION_NONE;
     private int mCallState = Call.State.INVALID;
@@ -108,6 +112,8 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         mContext = context;
         mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
         mContactInfoCache = contactInfoCache;
+        mTelephonyManager =
+                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mDialerRingtoneManager = new DialerRingtoneManager(
@@ -318,7 +324,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // Check if data has changed; if nothing is different, don't issue another notification.
         final int iconResId;
         Bitmap largeIcon = getLargeIconToDisplay(contactInfo, call);
-        final String content =
+        String content =
                 getContentString(call, contactInfo.userType);
         int wifiQualityValue = call.getWifiQuality();
         if (wifiQualityValue != QtiCallConstants.VOWIFI_QUALITY_NONE) {
@@ -346,6 +352,16 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         if (largeIcon != null) {
             largeIcon = getRoundedIcon(largeIcon);
+        }
+
+        //set the content
+        boolean isMultiSimDevice = mTelephonyManager.isMultiSimEnabled();
+        if (isMultiSimDevice) {
+            SubscriptionInfo info =
+                    SubscriptionManager.from(mContext).getActiveSubscriptionInfo(call.getSubId());
+            if (info != null) {
+                content += " (" + info.getDisplayName() + ")";
+            }
         }
 
         /*

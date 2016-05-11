@@ -62,7 +62,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     guava \
     libphonenumber \
     ims-ext-common \
-    phonebook_wrapper
+    phonebook_wrapper \
+    telephony-common
 
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
@@ -70,7 +71,7 @@ LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
 
-LOCAL_SDK_VERSION := current
+# LOCAL_SDK_VERSION := current
 
 include $(BUILD_PACKAGE)
 

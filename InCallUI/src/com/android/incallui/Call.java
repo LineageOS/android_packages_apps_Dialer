@@ -21,6 +21,7 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
+import android.os.RemoteException;
 import android.telecom.Call.Details;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
@@ -29,6 +30,7 @@ import android.telecom.InCallService.VideoCall;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.SubscriptionManager;
 import android.telecom.VideoProfile;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
@@ -791,6 +793,22 @@ public class Call {
 
     public PhoneAccountHandle getAccountHandle() {
         return mTelecomCall == null ? null : mTelecomCall.getDetails().getAccountHandle();
+    }
+
+    public int getSubId() {
+        PhoneAccountHandle ph = getAccountHandle();
+        if (ph != null) {
+            try {
+                if (ph.getId() != null) {
+                    return Integer.parseInt(getAccountHandle().getId());
+                }
+            } catch (NumberFormatException e) {
+                Log.w(this, "sub id is not a number" + e);
+            }
+            return SubscriptionManager.getDefaultVoiceSubscriptionId();
+        } else {
+            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        }
     }
 
     /**
