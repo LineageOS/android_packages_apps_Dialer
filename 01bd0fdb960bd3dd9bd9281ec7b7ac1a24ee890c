@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_9e07631d",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-11T22:23:41Z",
+      "side": 1,
+      "message": "does this need to stay?",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_fe08d72d",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-11T22:23:41Z",
+      "side": 1,
+      "message": "does this need to stay?",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_61ff6801",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-11T22:23:41Z",
+      "side": 1,
+      "message": "if debug, log.d",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_415d8ce7",
+        "filename": "src/com/android/dialer/incall/InCallMetricsJob.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-11T22:23:41Z",
+      "side": 1,
+      "message": "so cancel won\u0027t actually stop \"doInBackground\" do we really need to reschedule the job here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
