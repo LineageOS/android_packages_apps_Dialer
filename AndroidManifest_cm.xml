@@ -68,11 +68,8 @@
             android:noHistory="true"
             android:theme="@style/Theme.Material.Light.Dialog.NoTitle" />
 
-        <service android:name=".incall.InCallMetricsReceiver" >
-            <intent-filter>
-                <action android:name="cyanogen.ambient.core.incall.action.plugin_status_changed"/>
-            </intent-filter>
-        </service>
+        <service android:name=".incall.InCallMetricsJob"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service android:name=".callerinfo.ProviderActivationService"
                  android:exported="false"/>
