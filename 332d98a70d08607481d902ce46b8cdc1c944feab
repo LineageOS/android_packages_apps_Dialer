@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_af16a7f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_0490024e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 38
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_4487da10",
         "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2016-05-12T15:52:34Z",
       "side": 1,
       "message": "is there a need to clear the cache ?\n\nThe cache is maintained at the adapter level and the adapter instances aren\u0027t shared across components. The cache will only be populated whence the \"deep links\" are enabled. So you wouldn\u0027t find any data in the cache anyways till after the refreshData() call ?",
+      "range": {
+        "startLine": 174,
+        "startChar": 24,
+        "endLine": 174,
+        "endChar": 61
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2fae3798",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "This covers the case where the user has turned the Api off after having previously had it on.  Since we returned expired values until we can requery the API, the links in the cache will be displayed still in this case.  This is a pointless call on the very first execution, but after that it has real value.  Could add some more checks I guess?",
+      "parentUuid": "5faad753_4487da10",
       "range": {
         "startLine": 174,
         "startChar": 24,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_6fa42fba",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "I\u0027ve run into a few NPE\u0027s where these views weren\u0027t set at the time when this code is executed.  that\u0027s what this check is set to avoid.",
+      "parentUuid": "5faad753_e47da61c",
+      "range": {
+        "startLine": 69,
+        "startChar": 20,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_648a161c",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2016-05-12T15:52:34Z",
       "side": 1,
       "message": "imo the method name isn\u0027t clear enough .. maybe change it to viewDeepLink() or even showNote() or viewNotes()",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2fe077fa",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_648a161c",
       "range": {
         "startLine": 78,
         "startChar": 16,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8ff08bcb",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "Going to rope in Raj on this one - I think we want this level of granularity, but I could be wrong.",
+      "parentUuid": "5faad753_848dd232",
+      "range": {
+        "startLine": 81,
+        "startChar": 48,
+        "endLine": 81,
+        "endChar": 73
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_24997e6d",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 13
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_4486fadd",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "The pop in is really bad if we throttle more than this.  See line 276 for when we would set redraw to true:  only if the cache gets updated do we do a redraw.  This may point to needing to revisit when and how deeplinks are stored, but the UX is nasty we we wait until all queries complete.",
+      "parentUuid": "5faad753_24997e6d",
+      "range": {
+        "startLine": 128,
+        "startChar": 18,
+        "endLine": 130,
+        "endChar": 54
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_24009e67",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 13
@@ -151,6 +295,24 @@
       "writtenOn": "2016-05-12T16:12:45Z",
       "side": 1,
       "message": "enqueueRequest also has synchronized(mRequests) so shouldn\u0027t mRequests.wait be outside of synchronized?",
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4fa133a9",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T20:59:49Z",
+      "side": 1,
+      "message": "I don\u0027t think so...\n\njava.lang.IllegalMonitorStateException: object not locked by thread before wait()",
+      "parentUuid": "5faad753_24009e67",
       "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
