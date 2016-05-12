@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c4df4ad4",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-12T16:39:06Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "5faad753_9e07631d",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_fe08d72d",
         "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-11T22:23:41Z",
       "side": 1,
       "message": "does this need to stay?",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_64f0d668",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-12T16:39:06Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "5faad753_fe08d72d",
       "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_e4036641",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-12T16:39:06Z",
+      "side": 1,
+      "message": "Yes it is.\n\nWe want to make sure that our job doesn\u0027t get rescheduled so that it\u0027ll run when we expect it to. Otherwise the scheduled time will get reset.",
+      "parentUuid": "5faad753_810864d9",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_61ff6801",
         "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_84f39273",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-12T16:39:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_61ff6801",
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_415d8ce7",
         "filename": "src/com/android/dialer/incall/InCallMetricsJob.java",
         "patchSetId": 1
@@ -81,6 +153,30 @@
       "writtenOn": "2016-05-11T22:23:41Z",
       "side": 1,
       "message": "so cancel won\u0027t actually stop \"doInBackground\" do we really need to reschedule the job here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "01bd0fdb960bd3dd9bd9281ec7b7ac1a24ee890c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_24b89e74",
+        "filename": "src/com/android/dialer/incall/InCallMetricsJob.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-12T16:39:06Z",
+      "side": 1,
+      "message": "Our metrics sending loop (line 99) checks to see if cancelled was called before trying to send metrics and returns from doInBackground. \n\nonStopJob is only called if the job is ended for a specific reason by the system. So all our metrics may not have sent. Since we want to aggregate these on a 24 hour basis we return true so that the system will start us back up once its ready instead of another 24 hours from now.",
+      "parentUuid": "5faad753_415d8ce7",
       "range": {
         "startLine": 66,
         "startChar": 8,
