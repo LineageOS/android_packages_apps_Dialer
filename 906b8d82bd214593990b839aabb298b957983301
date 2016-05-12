@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_a4c9ee78",
+        "filename": "src/com/android/dialer/util/CoachMarkDrawableHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-12T15:27:01Z",
+      "side": 1,
+      "message": "see comment below. maybe (cmi !\u003d null \u0026\u0026 cmi.cmi.mBadgeIcon !\u003d null)",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "906b8d82bd214593990b839aabb298b957983301",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_04cb2272",
+        "filename": "src/com/android/dialer/util/CoachMarkDrawableHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-12T15:27:01Z",
+      "side": 1,
+      "message": "see comment below. maybe (cmi !\u003d null \u0026\u0026 cmi.cmi.mBadgeIcon !\u003d null)",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 9
+      },
+      "revId": "906b8d82bd214593990b839aabb298b957983301",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_44b91ae7",
+        "filename": "src/com/android/dialer/util/CoachMarkDrawableHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-12T15:27:01Z",
+      "side": 1,
+      "message": "should probably be done elsewhere, so that you can clear the overlay like you do when cmi \u003d\u003d null. see comments above.",
+      "range": {
+        "startLine": 120,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 9
+      },
+      "revId": "906b8d82bd214593990b839aabb298b957983301",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
