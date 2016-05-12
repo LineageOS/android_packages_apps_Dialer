@@ -255,7 +255,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 mVoicemailPlaybackPresenter,
                 mBlockContactPresenter,
                 isShowingRecentsTab);
-        areDeepLinkEnabled();
     }
 
     /** Called by the CallLogQueryHandler when the list of calls has been fetched or updated. */
@@ -348,7 +347,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 }
             }
         });
-
+        areDeepLinksEnabled();
         fetchCalls();
         return view;
     }
@@ -388,8 +387,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             refreshData();
             mAdapter.startCache();
         }
-
-        areDeepLinkEnabled();
+        areDeepLinksEnabled();
     }
 
     @Override
@@ -525,7 +523,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         }
     }
 
-    private void areDeepLinkEnabled() {
+    private void areDeepLinksEnabled() {
         DeepLinkIntegrationManager.getInstance().isApplicationTypeEnabled(
                 DeepLinkApplicationType.NOTE, mDeepLinkEnabledCallback);
     }
