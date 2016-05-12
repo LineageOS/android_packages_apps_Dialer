@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_2feab7ab",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-12T21:17:56Z",
+      "side": 1,
+      "message": "We have different sources for events from the same application - we want to know specifically where a given event originates.  We can use the package name as a general guide if we need it to be more agnostic, but the other options don\u0027t seem great.",
+      "parentUuid": "5faad753_8ff08bcb",
+      "range": {
+        "startLine": 81,
+        "startChar": 48,
+        "endLine": 81,
+        "endChar": 73
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_24997e6d",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 13
