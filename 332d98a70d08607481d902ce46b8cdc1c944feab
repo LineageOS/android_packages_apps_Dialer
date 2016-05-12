@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_0490024e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-12T15:52:34Z",
+      "side": 1,
+      "message": "commit msg format \n\n\u003ctitle\u003e\n\n\u003cdescription\u003e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 38
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4487da10",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-12T15:52:34Z",
+      "side": 1,
+      "message": "is there a need to clear the cache ?\n\nThe cache is maintained at the adapter level and the adapter instances aren\u0027t shared across components. The cache will only be populated whence the \"deep links\" are enabled. So you wouldn\u0027t find any data in the cache anyways till after the refreshData() call ?",
+      "range": {
+        "startLine": 174,
+        "startChar": 24,
+        "endLine": 174,
+        "endChar": 61
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e47da61c",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-12T15:52:34Z",
+      "side": 1,
+      "message": "is this check to see if the Presenter was called on ViewHolder that doesn\u0027t have these views ? Aren\u0027t these views part of every ViewHolder instance anyways ?",
+      "range": {
+        "startLine": 69,
+        "startChar": 20,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_648a161c",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-12T15:52:34Z",
+      "side": 1,
+      "message": "imo the method name isn\u0027t clear enough .. maybe change it to viewDeepLink() or even showNote() or viewNotes()",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_848dd232",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-12T15:52:34Z",
+      "side": 1,
+      "message": "it seems weird to couple the class name as a means to ascertain the \"origin\" of the \"content_sent\" call\n\nmaybe define specific \"origin\" constants so that the metrics data is agnostic to code refactoring",
+      "range": {
+        "startLine": 81,
+        "startChar": 48,
+        "endLine": 81,
+        "endChar": 73
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_24997e6d",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-12T15:52:34Z",
+      "side": 1,
+      "message": "aren\u0027t we actively trying to \"redraw\" on every result callback ? REDRAW is being set on every query-callback , if you had 7 items visible on the screen w/ deeplinks , you would end up calling notifyDatasetChanged() 7 times.\n\nwhy not leave it the way it was before ? Wait for a redraw after all requests are done processing",
+      "range": {
+        "startLine": 128,
+        "startChar": 18,
+        "endLine": 130,
+        "endChar": 54
+      },
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
