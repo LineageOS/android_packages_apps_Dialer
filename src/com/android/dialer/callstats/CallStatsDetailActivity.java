@@ -307,6 +307,7 @@ public class CallStatsDetailActivity extends Activity implements
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         LookupProviderImpl.INSTANCE.release();
     }
 
