@@ -16,6 +16,24 @@
       "revId": "79a94cb29863922e6c1dcf319c2ab6b28459ccef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_5579c6f9",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-13T18:24:34Z",
+      "side": 1,
+      "message": "its package visibility so we can use it in tests.",
+      "parentUuid": "5faad753_d527f611",
+      "revId": "79a94cb29863922e6c1dcf319c2ab6b28459ccef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
