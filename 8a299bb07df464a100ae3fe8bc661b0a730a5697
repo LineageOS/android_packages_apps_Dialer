@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_0a46c97d",
+        "filename": "src/com/android/dialer/DialerApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-13T16:04:23Z",
+      "side": 1,
+      "message": "I\u0027m reworking this for other reasons. But yes.",
+      "parentUuid": "5faad753_aa7bf5bb",
+      "revId": "8a299bb07df464a100ae3fe8bc661b0a730a5697",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_0a6d6903",
         "filename": "src/com/android/dialer/DialerApplication.java",
         "patchSetId": 1
