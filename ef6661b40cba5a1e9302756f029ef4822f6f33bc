@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_f071e0df",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-13T19:37:36Z",
+      "side": 1,
+      "message": "can this be null?",
+      "range": {
+        "startLine": 299,
+        "startChar": 81,
+        "endLine": 299,
+        "endChar": 87
+      },
+      "revId": "ef6661b40cba5a1e9302756f029ef4822f6f33bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_d07624d9",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-13T19:37:36Z",
+      "side": 1,
+      "message": "results already gotten",
+      "range": {
+        "startLine": 305,
+        "startChar": 58,
+        "endLine": 305,
+        "endChar": 77
+      },
+      "revId": "ef6661b40cba5a1e9302756f029ef4822f6f33bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
