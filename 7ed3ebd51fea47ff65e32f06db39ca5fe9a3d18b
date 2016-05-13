@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_b5e11a2d",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-13T17:40:37Z",
+      "side": 1,
+      "message": "lol, Its the JOB ID for the job.",
+      "parentUuid": "5faad753_aa71b50e",
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_4a63611b",
         "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-13T16:01:39Z",
       "side": 1,
       "message": "https://developer.android.com/reference/android/app/job/JobInfo.Builder.html#setOverrideDeadline(long)\n\nDo we want to set some maximum delay period?",
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_75d5e242",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-13T17:40:37Z",
+      "side": 1,
+      "message": "Nah, i want to send it at some point no matter what.",
+      "parentUuid": "5faad753_4a63611b",
       "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_55a1c6a8",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-13T17:40:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_ca7671d9",
+      "range": {
+        "startLine": 253,
+        "startChar": 15,
+        "endLine": 253,
+        "endChar": 32
+      },
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_ea71eddf",
         "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
         "patchSetId": 3
@@ -70,6 +130,24 @@
       "writtenOn": "2016-05-13T16:01:39Z",
       "side": 1,
       "message": "Seeing this same code a lot of places... helper method?",
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_75a402ba",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-13T17:40:37Z",
+      "side": 1,
+      "message": "eh, they\u0027re all slightly different. I don\u0027t think its worth the helper method.",
+      "parentUuid": "5faad753_ea71eddf",
       "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
