@@ -17,8 +17,13 @@
 package com.android.dialer;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Trace;
 
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
 import com.android.contacts.common.extensions.ExtensionsFactory;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.discovery.WifiCallStatusNudgeListener;
@@ -30,6 +35,7 @@ import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 public class DialerApplication extends Application {
 
     private static final String TAG = "DialerApplication";
+    private static final String PREF_LAST_GLOBAL_LOCALE = "last_global_locale";
 
     @Override
     public void onCreate() {
@@ -49,7 +55,36 @@ public class DialerApplication extends Application {
         WifiCallStatusNudgeListener.init(this);
         InCallMetricsHelper.init(this);
         DeepLinkIntegrationManager.getInstance().setUp(this);
-        Trace.endSection();
 
+        putLocaleSharedPrefs(getResources().getConfiguration().locale.toString());
+        Trace.endSection();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        String newLocale = newConfig.locale.toString();
+        String currentLocale = putLocaleSharedPrefs(newLocale);
+        Log.d("RSM", "!!onConfigurationChanged: oldConfig.locale=" + currentLocale + ", newConfig.locale=" + newLocale);
+        if (!TextUtils.equals(currentLocale, newLocale)) {
+            DialerDataSubscription.get(this).refresh();
+        }
+
+    }
+
+    /**
+     * Stores new locale if different than the current locale
+     *
+     * @param locale the new locale.
+     * @return the value of any previous locale or {@code null} if there was none set.
+     */
+    private String putLocaleSharedPrefs(String locale) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String prevLocale = prefs.getString(PREF_LAST_GLOBAL_LOCALE, null);
+        if (!TextUtils.isEmpty(locale) && !TextUtils.equals(prevLocale, locale)) {
+            prefs.edit().putString(PREF_LAST_GLOBAL_LOCALE, locale).apply();
+        }
+        return prevLocale;
     }
 }
