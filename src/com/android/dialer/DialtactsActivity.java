@@ -335,7 +335,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         public void onReceive(Context context, Intent intent) {
             switch (intent.getAction()) {
                 case ConnectivityManager.CONNECTIVITY_ACTION:
-                    if (mSmartDialSearchFragment != null) {
+                    if (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()
+                            && mInDialpadSearch) {
                         mSmartDialSearchFragment.setupEmptyView();
                     }
                     break;
