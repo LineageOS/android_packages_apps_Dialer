@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5faad753_aa7bf5bb",
+        "filename": "src/com/android/dialer/DialerApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-13T16:03:25Z",
+      "side": 1,
+      "message": "getting a return value from put proved to be dangerous in modcore plugin binder code (someone didn\u0027t read the docs :P). In any case, can we call this prevLocale? since currentLocale would be what we changed to right?",
+      "revId": "8a299bb07df464a100ae3fe8bc661b0a730a5697",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_0a6d6903",
         "filename": "src/com/android/dialer/DialerApplication.java",
         "patchSetId": 1
