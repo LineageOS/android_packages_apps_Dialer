@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_0a6d6903",
+        "filename": "src/com/android/dialer/DialerApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-13T15:58:41Z",
+      "side": 1,
+      "message": "whoops",
+      "revId": "8a299bb07df464a100ae3fe8bc661b0a730a5697",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
