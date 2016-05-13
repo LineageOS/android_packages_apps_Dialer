@@ -17,8 +17,13 @@
 package com.android.dialer;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Trace;
 
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
 import com.android.contacts.common.extensions.ExtensionsFactory;
 import com.android.contacts.commonbind.analytics.AnalyticsUtil;
 import com.android.dialer.discovery.WifiCallStatusNudgeListener;
@@ -30,6 +35,9 @@ import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 public class DialerApplication extends Application {
 
     private static final String TAG = "DialerApplication";
+    private static final boolean DEBUG = false;
+
+    private static final String PREF_LAST_GLOBAL_LOCALE = "last_global_locale";
 
     @Override
     public void onCreate() {
@@ -49,7 +57,30 @@ public class DialerApplication extends Application {
         WifiCallStatusNudgeListener.init(this);
         InCallMetricsHelper.init(this);
         DeepLinkIntegrationManager.getInstance().setUp(this);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putString(PREF_LAST_GLOBAL_LOCALE,
+                getResources().getConfiguration().locale.toString()).apply();
         Trace.endSection();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String previousLocale = prefs.getString(PREF_LAST_GLOBAL_LOCALE, null);
+        String newLocale = newConfig.locale.toString();
+        if (DEBUG) {
+            Log.d(TAG, "onConfigurationChanged: previous locale=" + previousLocale +
+                    ", new locale=" + newLocale);
+        }
+
+        // If locale changed, update incall api plugins
+        if (!TextUtils.isEmpty(newLocale) && !TextUtils.equals(previousLocale, newLocale)) {
+            prefs.edit().putString(PREF_LAST_GLOBAL_LOCALE, newLocale).apply();
+            DialerDataSubscription.get(this).refresh();
+        }
 
     }
 }
