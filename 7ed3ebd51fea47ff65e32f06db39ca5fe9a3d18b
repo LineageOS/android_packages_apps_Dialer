@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_aa71b50e",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-13T16:01:39Z",
+      "side": 1,
+      "message": "What\u0027s a JOBID?  That some kind of Owl Bear name?",
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4a63611b",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-13T16:01:39Z",
+      "side": 1,
+      "message": "https://developer.android.com/reference/android/app/job/JobInfo.Builder.html#setOverrideDeadline(long)\n\nDo we want to set some maximum delay period?",
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ca7671d9",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-13T16:01:39Z",
+      "side": 1,
+      "message": "Capitalization?",
+      "range": {
+        "startLine": 253,
+        "startChar": 15,
+        "endLine": 253,
+        "endChar": 32
+      },
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ea71eddf",
+        "filename": "src/com/android/dialer/incall/InCallMetricsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-13T16:01:39Z",
+      "side": 1,
+      "message": "Seeing this same code a lot of places... helper method?",
+      "revId": "7ed3ebd51fea47ff65e32f06db39ca5fe9a3d18b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
