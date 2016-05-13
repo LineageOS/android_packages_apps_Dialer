@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "5faad753_842e2d41",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-13T21:43:02Z",
+      "side": 1,
+      "message": "isEmpty",
+      "range": {
+        "startLine": 301,
+        "startChar": 59,
+        "endLine": 301,
+        "endChar": 78
+      },
+      "revId": "ef6661b40cba5a1e9302756f029ef4822f6f33bc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_d07624d9",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 14
