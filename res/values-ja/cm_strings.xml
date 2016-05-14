@@ -26,15 +26,15 @@
   <!-- Number lookup -->
   <string name="lookup_settings_label">電話番号検索</string>
   <string name="lookup_settings_description">不明な電話番号を検索する</string>
-  <string name="enable_forward_lookup_title">前方検索</string>
+  <string name="enable_forward_lookup_title">正引き</string>
   <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示する</string>
   <string name="enable_people_lookup_title">人物検索</string>
   <string name="enable_people_lookup_summary">ダイヤル画面で検索しているときに人物のオンラインの検索結果を表示する</string>
-  <string name="enable_reverse_lookup_title">逆引き検索</string>
+  <string name="enable_reverse_lookup_title">逆引き</string>
   <string name="enable_reverse_lookup_summary">着信中の不明な番号の人物または場所の情報を検索する</string>
-  <string name="forward_lookup_provider_title">前方検索プロバイダ</string>
+  <string name="forward_lookup_provider_title">正引き検索プロバイダ</string>
   <string name="people_lookup_provider_title">人物検索プロバイダ</string>
-  <string name="reverse_lookup_provider_title">逆引き検索プロバイダ</string>
+  <string name="reverse_lookup_provider_title">逆引きプロバイダ</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
   <!-- Description for incoming calls that were blacklisted -->

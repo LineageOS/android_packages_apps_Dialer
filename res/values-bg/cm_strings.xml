@@ -87,11 +87,11 @@
   <string name="call_stats_date_filter">Филтър за период от време</string>
   <string name="call_stats_reset_filter">Възстанови по подраздиране периода от време</string>
   <string name="call_stats_sort_by_duration">Сортирай по продължителност на разговори</string>
-  <string name="call_stats_sort_by_count">Сортирай по брой повиквания</string>
+  <string name="call_stats_sort_by_count">Сортирай по брой на обаждания</string>
   <string name="call_stats_title_for_number">Този номер</string>
   <string name="call_stats_title_of_total">От общо</string>
   <string name="call_stats_title_durations">Продължителност на разговора</string>
-  <string name="call_stats_title_count">Брой повиквания</string>
+  <string name="call_stats_title_count">Брой обаждания</string>
   <string name="call_stats_title_average_duration">Средна продължителност на повикванията</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Няма регистрирани повиквания през зададения период.</string>

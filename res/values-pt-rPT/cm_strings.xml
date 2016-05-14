@@ -41,9 +41,9 @@
   <string name="type_blacklist">Chamada na lista negra</string>
   <string name="menu_add_to_blacklist">Adicionar à lista de números bloqueados</string>
   <string name="toast_added_to_blacklist">%s foi adicionado à lista de números bloqueados.</string>
-  <string name="toast_removed_from_blacklist">%s removido da lista de chamadores bloqueados.</string>
-  <string name="call_log_action_block">Bloquear o chamador</string>
-  <string name="call_log_action_unblock">Chamador bloqueado</string>
+  <string name="toast_removed_from_blacklist">%s removido da lista de números bloqueados.</string>
+  <string name="call_log_action_block">Bloquear número</string>
+  <string name="call_log_action_unblock">Número bloqueado</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Definições de marcação rápida</string>
   <string name="speed_dial_not_set">(não definido)</string>
@@ -51,7 +51,7 @@
   <string name="speed_dial_delete">Apagar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla não atribuída</string>
   <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de marcação rápida está atribuída à tecla número \'<xliff:g id="number">%s</xliff:g>\'. Quer atribuir uma ação agora?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcação rápida, primeiro desligue o modo avião.</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcação rápida, primeiro desligue o modo de voo.</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <string name="incall_vibration_category_title">Vibrar durante a chamada</string>
