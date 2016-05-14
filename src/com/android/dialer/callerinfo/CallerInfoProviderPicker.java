@@ -26,6 +26,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 
+import android.util.Log;
 import com.android.dialer.R;
 import com.android.dialer.util.ImageUtils;
 import com.android.phone.common.ambient.AmbientConnection;
@@ -38,6 +39,8 @@ import com.cyanogen.ambient.discovery.nudge.DialogNudge;
 import com.cyanogen.ambient.discovery.results.BooleanResult;
 
 public class CallerInfoProviderPicker {
+    private static final String TAG = CallerInfoProviderPicker.class.getSimpleName();
+
     private static final String NUDGE_ID = "callerInfoPickerDialogNudge";
 
     private static final int REQUEST_CODE_SUCCESS = 0;
@@ -159,7 +162,11 @@ public class CallerInfoProviderPicker {
         }
 
         if (logo != null) {
-            nudge.setTitleImage(logo);
+            try {
+                nudge.setTitleImage(logo);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Unable to set title image.", e);
+            }
         }
 
         Intent enableIntent = buildEnableIntent(context, component, info, metricsReason);
