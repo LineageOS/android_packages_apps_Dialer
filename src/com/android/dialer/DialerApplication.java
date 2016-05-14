@@ -32,6 +32,8 @@ import com.android.phone.common.incall.DialerDataSubscription;
 import com.android.dialer.util.MetricsHelper;
 import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
+import java.util.Locale;
+
 public class DialerApplication extends Application {
 
     private static final String TAG = "DialerApplication";
@@ -59,8 +61,9 @@ public class DialerApplication extends Application {
         DeepLinkIntegrationManager.getInstance().setUp(this);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putString(PREF_LAST_GLOBAL_LOCALE,
-                getResources().getConfiguration().locale.toString()).apply();
+        Locale locale = getResources().getConfiguration().locale;
+        String currentLocale = locale != null ? locale.toString() : "";
+        prefs.edit().putString(PREF_LAST_GLOBAL_LOCALE, currentLocale).apply();
         Trace.endSection();
     }
 
@@ -69,15 +72,16 @@ public class DialerApplication extends Application {
         super.onConfigurationChanged(newConfig);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String previousLocale = prefs.getString(PREF_LAST_GLOBAL_LOCALE, null);
-        String newLocale = newConfig.locale.toString();
+        String previousLocale = prefs.getString(PREF_LAST_GLOBAL_LOCALE, "");
+        String newLocale = (newConfig != null && newConfig.locale != null) ?
+                newConfig.locale.toString() : "";
         if (DEBUG) {
             Log.d(TAG, "onConfigurationChanged: previous locale=" + previousLocale +
                     ", new locale=" + newLocale);
         }
 
         // If locale changed, update incall api plugins
-        if (!TextUtils.isEmpty(newLocale) && !TextUtils.equals(previousLocale, newLocale)) {
+        if (!TextUtils.equals(previousLocale, newLocale)) {
             prefs.edit().putString(PREF_LAST_GLOBAL_LOCALE, newLocale).apply();
             DialerDataSubscription.get(this).refresh();
         }
