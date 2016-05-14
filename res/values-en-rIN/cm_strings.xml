@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Blacklisted call</string>
-  <string name="menu_add_to_blacklist">Add to blocked caller list</string>
-  <string name="toast_added_to_blacklist">%s added to blocked caller list.</string>
-  <string name="toast_removed_from_blacklist">%s removed from blocked caller list.</string>
   <string name="call_log_action_block">Block caller</string>
   <string name="call_log_action_unblock">Caller blocked</string>
   <!--  for speed dial -->
@@ -84,4 +81,12 @@
   <string name="call_stats_sort_by_duration">Sort by call duration</string>
   <string name="call_stats_sort_by_count">Sort by call count</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Yes</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

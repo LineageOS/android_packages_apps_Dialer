@@ -38,8 +38,6 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn kinų (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="menu_add_to_blacklist">Pridėti prie užblokuotų skambintojų sąrašo</string>
-  <string name="toast_added_to_blacklist">%s pridėta prie užblokuotų skambintojų sąrašo.</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Greitojo rinkimo nustatymai</string>
   <string name="speed_dial_not_set">(nenustatyta)</string>
@@ -80,4 +78,12 @@
   <string name="call_stats_sort_by_duration">Rūšiuoti pagal skambučių trukmę</string>
   <string name="call_stats_sort_by_count">Rūšiuoti pagal skambučių skaičių</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Taip</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

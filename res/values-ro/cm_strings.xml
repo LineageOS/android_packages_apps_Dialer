@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chineză (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Apel de pe lista neagră</string>
-  <string name="menu_add_to_blacklist">Adăugare la lista apelanților blocați</string>
-  <string name="toast_added_to_blacklist">%s adăugat la lista apelanților blocați.</string>
-  <string name="toast_removed_from_blacklist">%s scos din lista apelanților blocați.</string>
   <string name="call_log_action_block">Blochează apelantul</string>
   <string name="call_log_action_unblock">Apelant blocat</string>
   <!--  for speed dial -->
@@ -98,4 +95,12 @@
   <string name="call_recording_category_title">Înregistrare apel</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Nu s-a putut găsi nicio aplicație pentru redarea înregistrării selectate.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">Da</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

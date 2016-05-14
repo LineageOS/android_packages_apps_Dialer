@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn خەنچە (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">قارا تىزىملىككە كىرگۈزۈلگەن تېلېفون</string>
-  <string name="menu_add_to_blacklist">قارا تىزىملىككە قوشۇش</string>
-  <string name="toast_added_to_blacklist">%s قارا تىزىملىككە قوشۇلدى.</string>
-  <string name="toast_removed_from_blacklist">%s قارا تىزىملىكتىن چىقىرۋېتىلدى.</string>
   <string name="call_log_action_block">تېلېفون كېلىشنى چەكلەش</string>
   <string name="call_log_action_unblock">تېلېفون كېلىش چەكلەندى</string>
   <!--  for speed dial -->
@@ -98,4 +95,12 @@
   <string name="call_recording_category_title">تېلېفون سۆزلىشىشنى ئاۋازغا ئېلىش</string>
   <string name="call_recording_format">ئاۋاز فورماتى</string>
   <string name="call_playback_no_app_found_toast">ئاۋازنى قويالايدىغان ئەپ تاپالمىدى.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">ھەئە</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

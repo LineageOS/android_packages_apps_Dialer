@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">બ્લૅકલિસ્ટ થયેલ કૉલ</string>
-  <string name="menu_add_to_blacklist">બ્લોક કરેલ કૉલર સૂચીમાં ઍડ કરો</string>
-  <string name="toast_added_to_blacklist">%s બ્લોક કરેલ કૉલર સૂચીમાં ઉમેરવામાં આવ્યું.</string>
-  <string name="toast_removed_from_blacklist">%s બ્લોક કરેલ કૉલર સૂચીમાંથી દૂર કરવામાં આવ્યું.</string>
   <string name="call_log_action_block">કૉલરને બ્લૉક કરો</string>
   <string name="call_log_action_unblock">કૉલરને બ્લૉક કરવામાં આવ્યા</string>
   <!--  for speed dial -->
@@ -98,4 +95,12 @@
   <string name="call_recording_category_title">કોલ રેકૉર્ડિંગ</string>
   <string name="call_recording_format">ઓડિયો ફોર્મેટ</string>
   <string name="call_playback_no_app_found_toast">કોઈ એપ્લિકેશન શોધી શકાઈ નથી રેકોર્ડિંગ પ્લેબેક માટે.</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">હા</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>

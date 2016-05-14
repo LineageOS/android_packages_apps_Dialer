@@ -39,9 +39,6 @@
   <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">着信拒否した通話</string>
-  <string name="menu_add_to_blacklist">着信拒否リストに追加</string>
-  <string name="toast_added_to_blacklist">%sを着信拒否リストに追加しました</string>
-  <string name="toast_removed_from_blacklist">%sを着信拒否リストから削除しました。</string>
   <string name="call_log_action_block">着信拒否</string>
   <string name="call_log_action_unblock">発信者を着信拒否しました</string>
   <!--  for speed dial -->
@@ -98,4 +95,12 @@
   <string name="call_recording_category_title">通話の録音</string>
   <string name="call_recording_format">音声フォーマット</string>
   <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
+  <!-- T9 Search Text -->
+  <!-- InCall Plugin Settings -->
+  <!-- Search shortcut for "Call using PluginName" -->
+  <!-- CallerInfo Provider Settings strings -->
+  <string name="callerinfo_provider_auth_yes">はい</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>
