@@ -140,4 +140,5 @@
   <string name="search_shortcut_view_note">Покажи бележката</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Водете си бележки от всяка точка</string>
+  <string name="callerinfo_provider_status_disabling">Деактивиране</string>
 </resources>

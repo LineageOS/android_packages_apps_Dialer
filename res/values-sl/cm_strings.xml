@@ -140,4 +140,5 @@
   <string name="search_shortcut_view_note">Pokaži opombo</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Zabeleži opombe od kjerkoli</string>
+  <string name="callerinfo_provider_status_disabling">Onemogočanje</string>
 </resources>

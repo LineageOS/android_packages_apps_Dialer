@@ -95,15 +95,25 @@
   <string name="call_recording_category_title">Nagrywanie rozmów</string>
   <string name="call_recording_format">Format dźwięku</string>
   <string name="call_playback_no_app_found_toast">Brak aplikacji, do odtworzenia wybranej rozmowy.</string>
+  <string name="invalid_number_text">"%1$s nie mógł wykonać połączenia. Czy ten numer jest prawidłowy?"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">Możesz wybrać numer lub\nszukać w kontaktach</string>
+  <string name="wifi_hint_text">Wykonuj darmowe połączenia %1$s do %1$s przez Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s jest w roamingu. Wykonuj darmowe rozmowy %2$s do %2$s przez Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Brak karty SIM. Tylko połączenia alarmowe.</string>
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Połącz za pomocą <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Tak</string>
+  <string name="callerinfo_provider_auth_no">Nie, dziękuję</string>
+  <string name="callerinfo_provider_auth_learn_more">Dowiedz się więcej</string>
   <string name="block_dialog_title">Zablokować ten numer?</string>
   <string name="block_dialog_positive">Zablokuj</string>
   <string name="block_dialog_negative">Anuluj</string>
+  <string name="provider_disable_title">Wyłączyć %1$s?</string>
+  <string name="powered_by_provider">Wspierane przez <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_button_help">"Mam to"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <!-- Note DeepLink mod settings summary in Dialer -->
