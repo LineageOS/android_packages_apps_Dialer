@@ -340,6 +340,24 @@
       "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_0e6fb492",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 12941
+      },
+      "writtenOn": "2016-05-16T18:18:47Z",
+      "side": 1,
+      "message": "you\u0027re right, wait/notify needs to be wrapped with syncrhonized to prevent race.",
+      "parentUuid": "5faad753_4fa133a9",
+      "revId": "332d98a70d08607481d902ce46b8cdc1c944feab",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
