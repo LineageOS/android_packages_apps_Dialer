@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"视频通话"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"改为语音通话"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"切换摄像头"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"暂停视频"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"开启摄像头"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"关闭摄像头"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"更多选项"</string>
     <string name="player_started" msgid="3478865572468310331">"播放器已启动"</string>
     <string name="player_stopped" msgid="1278611664986561535">"播放器已停止"</string>

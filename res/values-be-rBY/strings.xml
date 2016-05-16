@@ -97,7 +97,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Паказаць толькі галас. пошту"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Паказаць усе выклікі"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Дадаць 2-секундную паўзу"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Дадаецца, чакайце"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Дадаць чаканне"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Налады"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Новы кантакт"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Усе кантакты"</string>
@@ -168,7 +168,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Заблакіраваць <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Выклікі з гэтага нумара будуць блакіравацца, а паведамленні галасавой пошты - аўтаматычна выдаляцца."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Выклікі з гэтага нумара будуць блакіравацца, але абанент усё яшчэ зможа пакінуць вам паведамленне галасавой пошты."</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Вы больш не будзеце атрымліваць выклікі або тэкставыя паведамленні з гэтага нумара."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Вы больш не будзеце атрымліваць выклікі або SMS з гэтага нумара."</string>
     <string name="block_number_ok" msgid="770551992296781873">"БЛАКІРАВАЦЬ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Разблакіраваць <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"РАЗБЛАКІРАВАЦЬ"</string>
@@ -180,13 +180,13 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Адрабіць"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Выклікаць <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Стварыць новы кантакт"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Дадаць да кантакту"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Дадаць у кантакт"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Адправiць SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Зрабіць відэавыклік"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Заблакіраваць нумар"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Новых прапушчаных выклікаў: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"У вас пакуль нікога няма на хуткім наборы"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Дадаць упадабаны"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Дадаць улюбёны"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"У вас пакуль няма ніякіх кантактаў"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Дадаць кантакт"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Дакраніцеся да відарыса, каб пабачыць усе нумары, ці націсніце і ўтрымлівайце, каб змяніць іх парадак"</string>

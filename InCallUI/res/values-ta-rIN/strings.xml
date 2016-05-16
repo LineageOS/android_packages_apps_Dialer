@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"வீடியோ அழைப்பு"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"குரல் அழைப்பிற்கு மாறு"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"கேமராவை மாற்று"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"வீடியோவை இடைநிறுத்து"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"கேமராவை இயக்கு"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"கேமராவை முடக்கு"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"கூடுதல் விருப்பங்கள்"</string>
     <string name="player_started" msgid="3478865572468310331">"வீடியோ பிளேயர் துவங்கியது"</string>
     <string name="player_stopped" msgid="1278611664986561535">"வீடியோ பிளேயர் நிறுத்தப்பட்டது"</string>

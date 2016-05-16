@@ -40,9 +40,9 @@
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ভয়েসমেল সংরক্ষণাগারভুক্ত"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"পূর্বাবস্থায় ফিরুন"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"সংরক্ষণাগারে যান"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"কল ইতিহাস সাফ করবেন?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"পুরোনো কলের তালিকা সাফ করবেন?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"এটি আপনার ইতিহাস থেকে সমস্ত কল মুছে দেবে"</string>
-    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"কল ইতিহাস সাফ করা হচ্ছে…"</string>
+    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"পুরোনো কলের তালিকা সাফ করা হচ্ছে…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ফোন"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"মিস করা কল"</string>
     <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"কাজের কল মিস করেছেন"</string>
@@ -75,8 +75,8 @@
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"সেট আপ"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"ভয়েসমেলে কল করুন"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="sms_disambig_title" msgid="5846266399240630846">"নম্বর চয়ন করুন"</string>
-    <string name="call_disambig_title" msgid="4392886850104795739">"নম্বর চয়ন করুন"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"নম্বর বেছে নিন"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"নম্বর বেছে নিন"</string>
     <string name="make_primary" msgid="5829291915305113983">"এই পছন্দটিকে মনে রাখুন"</string>
     <string name="description_search_button" msgid="3660807558587384889">"অনুসন্ধান"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ডায়াল করুন"</string>
@@ -86,7 +86,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"প্লেব্যাক অবস্থান খুঁজুন"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"প্লেব্যাকের হার হ্রাস করুন"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"প্লেব্যাকের হার বৃদ্ধি করুন"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"কল ইতিহাস"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"পুরোনো কলের তালিকা"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"আরো বিকল্প"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ডায়াল প্যাড"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"কেবলমাত্র আউটগোয়িং দেখান"</string>

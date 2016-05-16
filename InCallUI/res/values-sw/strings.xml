@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Hangout ya Video"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Badilisha iwe simu ya sauti"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Badilisha kamera"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Sitisha video"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Washa kamera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Zima kamera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Chaguo zaidi"</string>
     <string name="player_started" msgid="3478865572468310331">"Kichezaji Kimeanzishwa"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Kichezaji Kimekomeshwa"</string>

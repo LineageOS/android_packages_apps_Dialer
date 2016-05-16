@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Myndsímtal"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Breyta í símtal"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Skipta um myndavél"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Gera hlé á myndskeiði"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Kveikja á myndavél"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Slökkva á myndavél"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Fleiri valkostir"</string>
     <string name="player_started" msgid="3478865572468310331">"Spilari ræstur"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Spilari stöðvaður"</string>

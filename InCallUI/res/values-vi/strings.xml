@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Cuộc gọi điện video"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Thay đổi thành cuộc gọi thoại"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Chuyển máy ảnh"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Dừng video"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Bật máy ảnh"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Tắt máy ảnh"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Tùy chọn khác"</string>
     <string name="player_started" msgid="3478865572468310331">"Đã khởi động trình phát"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Đã dừng trình phát"</string>

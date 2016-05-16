@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ვიდეო ზარი"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"ხმოვან ზარზე გადართვა"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"კამერის გადართვა"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"ვიდეოს დაპაუზება"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"კამერის ჩართვა"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"კამერის გამორთვა"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"სხვა ვარიანტები"</string>
     <string name="player_started" msgid="3478865572468310331">"დამკვრელი ჩაირთო"</string>
     <string name="player_stopped" msgid="1278611664986561535">"დამკვრელი გამოირთო"</string>
