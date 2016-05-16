@@ -141,7 +141,7 @@ public class CallerInfoProviderPicker {
                 text += String.format(learnMore, info.getPrivacyPolicyUrl(),
                         res.getString(R.string.callerinfo_provider_auth_learn_more));
             }
-            subText = Html.fromHtml(text);
+            subText = text;
         }
 
         int logoWidth = context.getResources().getDimensionPixelSize(
