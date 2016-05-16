@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Odbaci"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Uzvrati"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Poruka"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Poziv u tijeku na drugom uređaju"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Prijenos poziva"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Da biste uspostavili poziv, isključite način rada u zrakoplovu."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Nije registrirano na mreži."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Mobilna mreža nije dostupna."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videopoziv"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Prijeđi na glasovni poziv"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Promijeni kameru"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Pauziraj videopoziv"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Uključivanje kamere"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Isključivanje kamere"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Više opcija"</string>
     <string name="player_started" msgid="3478865572468310331">"Player je pokrenut"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Player je prekinut"</string>

@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Ignorar"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Ligar de volta"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Mensagem"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Chamada em curso noutro dispositivo"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Transferir chamada"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Para efetuar uma chamada, desative primeiro o Modo de avião."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Sem registo na rede."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Rede móvel não disponível."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videochamada"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Mudar para chamada de voz"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Trocar câmara"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Interromper vídeo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Ativar câmara"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Desativar câmara"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Mais opções"</string>
     <string name="player_started" msgid="3478865572468310331">"Leitor iniciado"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Leitor interrompido"</string>

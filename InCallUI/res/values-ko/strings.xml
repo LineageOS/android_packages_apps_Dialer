@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"해제"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"전화 걸기"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"메시지"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"다른 기기에서 진행 중인 통화"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"통화 전환"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"전화를 걸려면 먼저 비행기 모드를 해제하세요."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"네트워크에서 등록되지 않았습니다."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"사용 가능한 이동통신망이 없습니다."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"화상 통화"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"음성 통화로 변경"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"카메라 전환"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"동영상 일지중지"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"카메라 켜기"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"카메라 끄기"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"옵션 더보기"</string>
     <string name="player_started" msgid="3478865572468310331">"플레이어가 시작되었습니다."</string>
     <string name="player_stopped" msgid="1278611664986561535">"플레이어가 중지되었습니다."</string>

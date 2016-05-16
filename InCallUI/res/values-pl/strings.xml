@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Odrzuć"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Oddzwoń"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Wyślij SMS-a"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Trwająca rozmowa na innym urządzeniu"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Przełącz rozmowę"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Aby rozpocząć połączenie, wyłącz najpierw tryb samolotowy."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Nie zarejestrowano w sieci."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Sieć komórkowa jest niedostępna."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Rozmowa wideo"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Zmień na połączenie głosowe"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Przełącz kamerę"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Wstrzymaj wideo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Włącz kamerę"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Wyłącz kamerę"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Więcej opcji"</string>
     <string name="player_started" msgid="3478865572468310331">"Odtwarzacz włączony"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Odtwarzacz zatrzymany"</string>
