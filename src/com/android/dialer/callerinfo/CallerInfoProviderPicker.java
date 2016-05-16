@@ -144,8 +144,12 @@ public class CallerInfoProviderPicker {
             subText = Html.fromHtml(text);
         }
 
+        int logoWidth = context.getResources().getDimensionPixelSize(
+                R.dimen.callerinfo_provider_picker_logo_width);
+        int logoHeight = context.getResources().getDimensionPixelSize(
+                R.dimen.callerinfo_provider_picker_logo_height);
         Bitmap logo = ImageUtils.drawableToBitmap(info.getBrandLogo());
-
+        Bitmap scaledLogo = ImageUtils.scaleBitmapToTarget(logo, logoHeight, logoWidth);
         int resId = info.hasProperty(ProviderInfo.PROPERTY_SUPPORTS_SPAM) ?
                 R.string.callerinfo_provider_auth_desc :
                 R.string.callerinfo_provider_auth_desc_no_spam;
@@ -158,8 +162,8 @@ public class CallerInfoProviderPicker {
             nudge.setSubhead(subText.toString());
         }
 
-        if (logo != null) {
-            nudge.setTitleImage(logo);
+        if (scaledLogo != null) {
+            nudge.setTitleImage(scaledLogo);
         }
 
         Intent enableIntent = buildEnableIntent(context, component, info, metricsReason);
