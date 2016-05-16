@@ -55,7 +55,8 @@
                 android:gravity="center_horizontal|top"
                 android:textSize="@dimen/empty_list_message_text_size"
                 android:textColor="@color/empty_list_text_color"
-                android:layout_marginBottom="@dimen/empty_list_message_view_spacing" />
+                android:layout_marginBottom="@dimen/empty_list_message_view_spacing"
+                android:includeFontPadding="false" />
 
             <TextView
                 android:id="@+id/emptyListViewSubMessage"
@@ -67,7 +68,8 @@
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/empty_list_message_text_size"
                 android:textColor="@color/empty_list_text_color"
-                android:layout_marginBottom="@dimen/empty_list_message_view_spacing" />
+                android:layout_marginBottom="@dimen/empty_list_message_view_spacing"
+                android:includeFontPadding="false" />
 
             <TextView
                 android:id="@+id/emptyListViewAction"
@@ -79,7 +81,8 @@
                 android:layout_marginBottom="@dimen/empty_list_message_view_spacing"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                style="@style/TextActionStyle" />
+                style="@style/TextActionStyle"
+                android:includeFontPadding="false" />
 
         </LinearLayout>
     </LinearLayout>
