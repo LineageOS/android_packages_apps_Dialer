@@ -36,6 +36,7 @@ import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.SessionModificationListener;
 import org.codeaurora.ims.QtiCallConstants;
+import org.codeaurora.ims.QtiVideoCallDataUsage;
 
 /**
  * This class listens to incoming events for the listener classes it implements. It should
@@ -45,7 +46,8 @@ import org.codeaurora.ims.QtiCallConstants;
  * {@class CallSubstateNotifier} notifies it through the onCallSubstateChanged callback.
  */
 public class InCallMessageController implements InCallSubstateListener, VideoEventListener,
-        CallList.Listener, SessionModificationListener, InCallSessionModificationCauseListener {
+        CallList.Listener, SessionModificationListener, InCallSessionModificationCauseListener,
+        InCallDetailsListener {
 
     private static InCallMessageController sInCallMessageController;
 
@@ -73,6 +75,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         SessionModificationCauseNotifier.getInstance().addListener(this);
         InCallPresenter.getInstance().addListener(mPrimaryCallTracker);
         InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
+        InCallPresenter.getInstance().addDetailsListener(this);
     }
 
     /**
@@ -88,6 +91,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         SessionModificationCauseNotifier.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeListener(mPrimaryCallTracker);
         InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
+        InCallPresenter.getInstance().removeDetailsListener(this);
         mPrimaryCallTracker = null;
     }
 
@@ -189,6 +193,42 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
     }
 
     /**
+     * Handles changes to the details of the call.
+     *
+     * @param call The call for which the details changed.
+     * @param details The new call details.
+     */
+    @Override
+    public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
+        Log.d(this, " onDetailsChanged call=" + call + " details=" + details);
+
+        if (mContext == null || details == null) {
+            Log.e(this," onDetailsChanged: context/details is null");
+            return;
+        }
+
+        final Bundle extras =  details.getExtras();
+        final QtiVideoCallDataUsage dataUsage = (extras != null) ?
+                (QtiVideoCallDataUsage)extras.getParcelable(
+                QtiCallConstants.VIDEO_CALL_DATA_USAGE_KEY) : null;
+        if (dataUsage == null) {
+            return;
+        }
+
+        long lteUsage = dataUsage.getLteDataUsage();
+        long wlanUsage = dataUsage.getWlanDataUsage();
+        Log.i(this, "onDetailsChanged LTE data value = " + lteUsage + " WiFi data value = " +
+                wlanUsage);
+
+        final Resources resources = mContext.getResources();
+        if (resources.getBoolean(R.bool.config_display_data_usage_toast)) {
+            final String dataUsageChangedText = resources.getString(
+                    R.string.wlan_data_usage_label) + wlanUsage;
+            QtiCallUtils.displayToast(mContext, dataUsageChangedText);
+        }
+    }
+
+    /**
      * This method overrides onCallDataUsageChange method of {@interface VideoEventListener}
      *  We are notified when data usage is changed and display a message on the UI.
      */
@@ -197,8 +237,8 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         Log.d(this, "onCallDataUsageChange: dataUsage = " + dataUsage);
         final Resources resources = mContext.getResources();
         if (resources.getBoolean(R.bool.config_display_data_usage_toast)) {
-            final String dataUsageChangedText = mContext.getResources().getString(
-                    R.string.data_usage_label) + dataUsage;
+            final String dataUsageChangedText = resources.getString(
+                    R.string.lte_data_usage_label) + dataUsage;
             QtiCallUtils.displayToast(mContext, dataUsageChangedText);
         }
     }

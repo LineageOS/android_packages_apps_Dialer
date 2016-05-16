@@ -68,7 +68,8 @@
     <string name="unknown_call_session_event">"Unkown call session event"</string>
 
     <!-- Message indicating data usage -->
-    <string name="data_usage_label">"Data usage : "</string>
+    <string name="wlan_data_usage_label">"Wlan Data usage : "</string>
+    <string name="lte_data_usage_label">"Lte Data usage : "</string>
 
     <!-- In-call screen: Modify Call Options for IMS call -->
     <string name="modify_call_option_title" translatable="false">Which type of call?</string>
