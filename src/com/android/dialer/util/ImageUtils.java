@@ -77,10 +77,9 @@ public class ImageUtils {
 
     /**
      * Scale bitmap to the defined bounds. The bitmap will be scaled while maintaining the
-     * aspect ratio and center-cropped(vertically and horizontally) if it exceeds the
-     * defined bounds.
+     * aspect ratio
      */
-    public static Bitmap scaleAndCropBitmapToTarget(Bitmap bitmap, int targetHeight,
+    public static Bitmap scaleBitmapToTarget(Bitmap bitmap, int targetHeight,
             int targetWidth) {
         if (bitmap == null) {
             return bitmap;
@@ -89,25 +88,23 @@ public class ImageUtils {
         int bitmapHeight = bitmap.getHeight();
         int bitmapWidth = bitmap.getWidth();
 
-        int deltaWidth = targetWidth - bitmapWidth;
-        int deltaHeight = targetHeight - bitmapHeight;
+        int deltaWidth = Math.abs(targetWidth - bitmapWidth);
+        int deltaHeight = Math.abs(targetHeight - bitmapHeight);
 
-        // nothing to do if src bitmap is bigger than or equal to the target
-        if (deltaWidth <= 0 && deltaHeight <= 0)
+        // nothing to do if one of the dimensions doesn't change as the aspect ratio
+        // needs to be preserved
+        if (deltaWidth == 0 || deltaHeight == 0)
             return bitmap;
 
-        // scale bitmap along the dimension that is lacking the greatest
-        float scale = Math.max( ((float)targetWidth) / bitmapWidth,
+        // scale bitmap to fit target bounds
+        float scale = Math.min( ((float)targetWidth) / bitmapWidth,
                 ((float)targetHeight) / bitmapHeight);
 
         // calculate the new bitmap dimensions
-        int newHeight = (int) Math.ceil(bitmapHeight * scale);
-        int newWidth = (int) Math.ceil(bitmapWidth * scale);
+        int newHeight = (int) Math.floor(bitmapHeight * scale);
+        int newWidth = (int) Math.floor(bitmapWidth * scale);
         Bitmap scaledBitmap =  Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
 
-        // center the bitmap vertically and horizontally
-        int startX = Math.max(0, (newWidth - targetWidth) / 2);
-        int startY = Math.max(0, (newHeight - targetHeight) / 2);
         if (DEBUG) {
             Log.i(TAG, "bitmapWidth : " + bitmapWidth);
             Log.i(TAG, "bitmapHeight : " + bitmapHeight);
@@ -115,11 +112,9 @@ public class ImageUtils {
             Log.i(TAG, "deltaHeight : " + deltaHeight);
             Log.i(TAG, "newWidth : " + newWidth);
             Log.i(TAG, "newHeight : " + newHeight);
-            Log.i(TAG, "startX : " + startX);
-            Log.i(TAG, "startY : " + startY);
         }
 
-        return Bitmap.createBitmap(scaledBitmap, startX, startY, targetWidth, targetHeight);
+        return scaledBitmap;
     }
 
     /**
