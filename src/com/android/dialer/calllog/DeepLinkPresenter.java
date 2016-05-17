@@ -77,9 +77,8 @@ public class DeepLinkPresenter {
 
     public void viewNote() {
         if (mDeepLink != null) {
-            DeepLinkIntegrationManager.getInstance().sendContentSentEvent(mContext, mDeepLink,
+            DeepLinkIntegrationManager.getInstance().viewNote(mContext, mDeepLink,
                     new ComponentName(mContext, CallLogListItemViewHolder.class));
-            mContext.startActivity(mDeepLink.createViewIntent());
         }
     }
 }
