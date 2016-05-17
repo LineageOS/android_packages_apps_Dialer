@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog.Calls;
@@ -34,6 +36,7 @@ import android.provider.ContactsContract;
 import android.provider.VoicemailContract.Status;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +60,14 @@ import com.cyanogen.ambient.incall.CallLogConstants;
 import com.cyanogen.lookup.phonenumber.contract.LookupProvider;
 import com.cyanogen.lookup.phonenumber.provider.LookupProviderImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import com.cyanogen.ambient.common.api.PendingResult;
+import com.cyanogen.ambient.common.api.ResultCallback;
+import com.cyanogen.ambient.deeplink.DeepLink;
+import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
+import com.cyanogen.ambient.deeplink.linkcontent.DeepLinkContentType;
 
 /**
  * Displays a list of call log entries. To filter for a particular kind of call
@@ -171,7 +181,6 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 public void onResult(DeepLink.BooleanResult result) {
                     boolean value = result.getResults();
                     if (isDeepLinkApiEnabled != value) {
-                        mAdapter.mDeepLinkCache.clearCache();
                         refreshData();
                     }
                     isDeepLinkApiEnabled = value;
@@ -265,6 +274,14 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             // Return false; we did not take ownership of the cursor
             return false;
         }
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                mAdapter.buildCache(cursor);
+            }
+        }
+
+
         mAdapter.setLoading(false);
         mAdapter.changeCursor(cursor);
         // This will update the state of the "Clear call log" menu item.
@@ -337,20 +354,75 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mEmptyListView.setImage(R.drawable.empty_call_log);
         mEmptyListView.setActionClickedListener(this);
 
-        String currentCountryIso = GeoUtil.getCurrentCountryIso(getActivity());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRecyclerListener(new RecyclerView.RecyclerListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onViewRecycled(RecyclerView.ViewHolder holder) {
-                if (holder instanceof CallLogListItemViewHolder) {
-                    final CallLogListItemViewHolder views = (CallLogListItemViewHolder) holder;
-                    mAdapter.mDeepLinkCache.clearPendingQueries(views.number, views.callTimes);
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                final int first = manager.findFirstVisibleItemPosition();
+                int last = manager.findLastVisibleItemPosition();
+
+                for (int i = first; i < last; i++) {
+                    final CallLogListItemViewHolder viewHolder = (CallLogListItemViewHolder)
+                            recyclerView.findViewHolderForAdapterPosition(i);
+
+                    if (viewHolder != null) {
+                        if (viewHolder.mDeepLinkPresenter.getDeepLinkIcon() != null) {
+                            continue;
+                        }
+
+                        List<Uri> uris = new ArrayList<Uri>();
+                        for (long callTime : viewHolder.callTimes) {
+                            // generate the URI
+                            Uri uri = DeepLinkIntegrationManager.generateCallUri(
+                                    viewHolder.number, callTime);
+                            uris.add(uri);
+                        }
+
+                        DeepLinkIntegrationManager.getInstance().getPreferredLinksForList(
+                                new ResultCallback<DeepLink.DeepLinkResultList>() {
+                                    @Override
+                                    public void onResult(DeepLink.DeepLinkResultList result) {
+                                        List<DeepLink> results = result.getResults();
+                                        if (results == null || results.size() == 0) {
+                                            return;
+                                        }
+                                        handleDeepLinkResults(first, viewHolder,
+                                                result.getResults());
+                                    }
+                                }, DeepLinkContentType.CALL, uris);
+
+                    }
+
                 }
             }
         });
         areDeepLinksEnabled();
         fetchCalls();
         return view;
+    }
+
+    private HashMap<String, Drawable> mImageHashMap = new HashMap<String, Drawable>();
+
+    private boolean shouldPlaceLinkInCache(DeepLink link) {
+        return link != null && link.getApplicationType() == DeepLinkApplicationType.NOTE &&
+                link.getAlreadyHasContent();
+    }
+
+    private void handleDeepLinkResults(int position, CallLogListItemViewHolder viewHolder, List<DeepLink> results) {
+        for (DeepLink link : results) {
+            if (shouldPlaceLinkInCache(link)) {
+
+                if (!mImageHashMap.containsKey(link.getPackageName())) {
+                    mImageHashMap.put(link.getPackageName(), link.getDrawableIcon(getActivity()));
+                }
+
+                viewHolder.mDeepLinkPresenter.setDeepLink(link,
+                        mImageHashMap.get(link.getPackageName()));
+
+                mAdapter.notifyItemChanged(position, viewHolder);
+            }
+        }
     }
 
     @Override
