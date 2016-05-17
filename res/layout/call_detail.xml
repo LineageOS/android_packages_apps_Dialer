@@ -60,8 +60,18 @@
                 android:textColor="?attr/call_log_primary_text_color"
                 android:textSize="@dimen/call_log_primary_text_size"
                 android:includeFontPadding="false"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="3dp"
                 android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/spam_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/spam_contact_color"
+                android:textSize="@dimen/call_log_spam_info_text_size"
+                android:singleLine="true"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/caller_number"

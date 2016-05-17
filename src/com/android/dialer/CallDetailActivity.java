@@ -54,6 +54,7 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.util.ImageUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
@@ -186,6 +187,29 @@ public class CallDetailActivity extends Activity
             mBlockContactHelper.setContactInfo(mNumber);
             loadContactPhotos(contactUri, photoUri, nameForDefaultImage, lookupKey, contactType,
                     photoId, mInCallComponentName);
+
+            // incorporate information from contact-info provider
+            if (!TextUtils.isEmpty(firstDetails.photoUrl) && !firstDetails.isSpam) {
+                ImageUtils.loadBitampFromUrl(CallDetailActivity.this,
+                        firstDetails.photoUrl,
+                        mDialerQuickContact.getQuickContactBadge());
+            } else if (firstDetails.isSpam) {
+               mCallerName.setTextColor(
+                        mResources.getColor(R.color.spam_contact_color, mContext.getTheme()));
+
+                mSpamInfo.setVisibility(View.VISIBLE);
+                mSpamInfo.setText(mContext.getResources().getQuantityString(
+                        R.plurals.spam_count_text, firstDetails.spamCount,
+                        firstDetails.spamCount));
+
+                mDialerQuickContact.getQuickContactBadge().setImageResource(
+                        R.drawable.ic_spam_avatar);
+            }
+
+            if (firstDetails.attributionDrawable != null) {
+                mDialerQuickContact.setAttributionBadge(firstDetails.attributionDrawable);
+            }
+
             findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
         }
 
@@ -223,6 +247,7 @@ public class CallDetailActivity extends Activity
     private TextView mCallerNumber;
     private TextView mAccountLabel;
     private View mCallButton;
+    private TextView mSpamInfo;
     private LookupProvider mLookupProvider;
     private ContactInfoHelper mContactInfoHelper;
     private BlockContactHelper mBlockContactHelper;
@@ -266,6 +291,7 @@ public class CallDetailActivity extends Activity
         mDialerQuickContact.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
         mCallerName = (TextView) findViewById(R.id.caller_name);
         mCallerNumber = (TextView) findViewById(R.id.caller_number);
+        mSpamInfo = (TextView) findViewById(R.id.spam_info);
         mAccountLabel = (TextView) findViewById(R.id.phone_account_label);
         mDefaultCountryIso = GeoUtil.getCurrentCountryIso(this);
         mContactPhotoManager = ContactPhotoManager.getInstance(this);
