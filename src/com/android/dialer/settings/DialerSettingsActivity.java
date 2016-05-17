@@ -287,6 +287,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
                     if (cmi.mStatus == PluginStatus.ENABLED && cmi.mSettingsIntent != null) {
                         header = new Header();
+                        header.id = R.id.incall_settings_preference_id;
                         header.title = getResources().getString(R.string.incall_plugin_settings, cmi
                                 .mName);
                         b = new Bundle();
@@ -377,6 +378,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
         static final int HEADER_TYPE_NORMAL = 0;
         static final int HEADER_TYPE_SWITCH = 1;
+        static final int HEADER_TYPE_CUSTOM = 2;
 
         class HeaderViewHolder {
             TextView title;
@@ -468,6 +470,9 @@ public class DialerSettingsActivity extends PreferenceActivity {
             } else if (header.id == R.id.callerinfo_provider || header.titleRes == R.string
                     .silence_spam_title || header.titleRes == R.string.block_hidden_title) {
                 return HEADER_TYPE_SWITCH;
+            } else if (header.id == R.id.incall_settings_preference_id || header.id == R.id
+                    .note_preference_id) {
+                return HEADER_TYPE_CUSTOM;
             } else {
                 return HEADER_TYPE_NORMAL;
             }
@@ -475,7 +480,7 @@ public class DialerSettingsActivity extends PreferenceActivity {
 
         @Override
         public int getViewTypeCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -499,6 +504,18 @@ public class DialerSettingsActivity extends PreferenceActivity {
                 } else {
                     // Activate the provider
                     CallerInfoProviderPicker.onSettingEnabled(getContext());
+                }
+            } else if (id == R.id.incall_settings_preference_id) {
+                if (header.extras != null && header.extras.containsKey(INCALL_SETTINGS_INTENT)) {
+                    PendingIntent settingsIntent = (PendingIntent) header.extras.get
+                            (INCALL_SETTINGS_INTENT);
+                    try {
+                        settingsIntent.send();
+                    } catch (PendingIntent.CanceledException e) {
+                        // if the pending intent was cancelled, nothing to do
+                        Log.e(TAG, "Unable to fire intent for plugin settings, "
+                                + "because PendingIntent was canceled", e);
+                    }
                 }
             } else if (header.titleRes == R.string.silence_spam_title) {
                 if (status == com.cyanogen.ambient.callerinfo.util.PluginStatus.ACTIVE) {
@@ -554,6 +571,22 @@ public class DialerSettingsActivity extends PreferenceActivity {
                     updateSwitchHeaders(holder);
                     break;
 
+                case HEADER_TYPE_CUSTOM:
+                    if (convertView == null) {
+                        view = mInflater.inflate(R.layout.dialer_preferences, parent, false);
+                        holder = new HeaderViewHolder();
+                        holder.title = (TextView) view.findViewById(R.id.title);
+                        holder.summary = (TextView) view.findViewById(R.id.summary);
+                        view.setTag(holder);
+                    } else {
+                        view = convertView;
+                        holder = (HeaderViewHolder) view.getTag();
+                    }
+
+                    holder.header = header;
+                    view.setOnClickListener(this);
+                    break;
+
                 default:
                     if (convertView == null) {
                         view = mInflater.inflate(R.layout.dialer_preferences, parent, false);
@@ -566,25 +599,6 @@ public class DialerSettingsActivity extends PreferenceActivity {
                         holder = (HeaderViewHolder) view.getTag();
                     }
 
-                    if (header.extras != null && header.extras.containsKey(INCALL_SETTINGS_INTENT)) {
-                        final PendingIntent settingsIntent =
-                                (PendingIntent) header.extras.get(INCALL_SETTINGS_INTENT);
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                try {
-                                    settingsIntent.send();
-                                } catch (PendingIntent.CanceledException e) {
-                                    // if the pending intent was cancelled, nothing to do
-                                    Log.e(TAG, "Unable to fire intent for plugin settings, "
-                                            + "because PendingIntent was canceled", e);
-                                }
-                            }
-                        });
-                    } else if (header.id == R.id.note_preference_id){
-                        holder.header = header;
-                        view.setOnClickListener(this);
-                    }
                     break;
             }
 
