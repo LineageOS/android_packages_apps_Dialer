@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_548e9e2e",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-17T16:57:44Z",
+      "side": 1,
+      "message": "incomplete comment.",
+      "revId": "a42d082b9e34e0445274be7afc86ea2a495174e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
