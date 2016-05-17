@@ -38,6 +38,7 @@ import android.media.AudioAttributes;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.support.annotation.Nullable;
+import android.os.SystemClock;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
 import android.telecom.TelecomManager;
@@ -95,6 +96,11 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
     private String mCallId = null;
     private InCallState mInCallState;
     private Uri mRingtone;
+    private static final String EXTRA_KEY_SHOW = "showCallStatusBar";
+    private static final String EXTRA_KEY_CALL_STATE = "callState";
+    private static final String EXTRA_KEY_CHRONOMETER_TIME = "baseChronometerMillis";
+    private static final String EXTRA_KEY_AUDIO_MODE = "audioMode";
+    private static final String EXTRA_KEY_MUTE = "mute";
 
     public StatusBarNotifier(Context context, ContactInfoCache contactInfoCache) {
         Preconditions.checkNotNull(context);
@@ -190,6 +196,39 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         } else {
             cancelNotification();
         }
+        if (!state.isIncoming()) {
+            updateCallStatusBar(call);
+        }
+    }
+
+    public void updateCallStatusBar() {
+        CallList callList = InCallPresenter.getInstance().getCallList();
+        updateCallStatusBar(callList);
+    }
+
+    public void updateCallStatusBar(CallList callList) {
+        updateCallStatusBar(getCallToShow(callList));
+    }
+
+    private void updateCallStatusBar(Call call) {
+        Intent intent = new Intent(
+                "com.android.incallui.UPDATE_CALL_STATUS_BAR");
+        boolean isShowingInCallUi = InCallPresenter.getInstance().isShowingInCallUi();
+        boolean show = (call != null) && !isShowingInCallUi;
+        intent.putExtra(EXTRA_KEY_SHOW, show);
+        if (call != null) {
+            int state = call.getState();
+            intent.putExtra(EXTRA_KEY_CALL_STATE, state);
+            if (state == Call.State.ACTIVE) {
+                long chronometerTime = call.getConnectTimeMillis() - System.currentTimeMillis()
+                        + SystemClock.elapsedRealtime();
+                intent.putExtra(EXTRA_KEY_CHRONOMETER_TIME, chronometerTime);
+            }
+            AudioModeProvider audioModeProvider = AudioModeProvider.getInstance();
+            intent.putExtra(EXTRA_KEY_AUDIO_MODE, audioModeProvider.getAudioMode());
+            intent.putExtra(EXTRA_KEY_MUTE, audioModeProvider.getMute());
+        }
+        mContext.sendBroadcast(intent);
     }
 
     private void showNotification(final Call call) {

@@ -1057,12 +1057,18 @@ public class InCallPresenter implements CallList.Listener,
     void onActivityStarted() {
         Log.d(this, "onActivityStarted");
         notifyVideoPauseController(true);
+        if (mStatusBarNotifier != null) {
+            mStatusBarNotifier.updateCallStatusBar(mCallList);
+        }
     }
 
     /*package*/
     void onActivityStopped() {
         Log.d(this, "onActivityStopped");
         notifyVideoPauseController(false);
+        if (mStatusBarNotifier != null ) {
+            mStatusBarNotifier.updateCallStatusBar(mCallList);
+        }
     }
 
     private void notifyVideoPauseController(boolean showing) {
