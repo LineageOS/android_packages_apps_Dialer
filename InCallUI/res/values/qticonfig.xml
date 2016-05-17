@@ -35,4 +35,9 @@
     <bool name="config_call_session_event_toast">true</bool>
     <!-- Config to show/hide data usage toast -->
     <bool name="config_display_data_usage_toast">true</bool>
+    <!--
+    customize the default value to control Clear-Code feature,
+    default value is false, true is for LatamOpenAMX
+    -->
+    <bool name="def_incallui_clearcode_enabled">false</bool>
 </resources>
