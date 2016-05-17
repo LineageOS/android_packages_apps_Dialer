@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_5aed6523",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 9813
+      },
+      "writtenOn": "2016-05-17T19:47:55Z",
+      "side": 1,
+      "message": "You assert that both the given context and deeplink aren\u0027t null, but ignore the component name argument, intentional?\n\nLikewise, would it make sense to throw illegal argument exception (or at least log with error) in that scenario since its a manager construct",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 81
+      },
+      "revId": "6948e749d82fdbad7dce136eaf21e93196eac853",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
