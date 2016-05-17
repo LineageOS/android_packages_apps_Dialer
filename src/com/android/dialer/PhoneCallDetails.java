@@ -17,6 +17,7 @@
 package com.android.dialer;
 
 import android.content.ComponentName;
+import android.graphics.drawable.Drawable;
 import com.android.dialer.calllog.PhoneNumberDisplayUtil;
 
 import android.content.Context;
@@ -95,6 +96,12 @@ public class PhoneCallDetails {
 
     // Whether the contact number is a voicemail number.
     public boolean isVoicemail;
+
+    public boolean isSpam;
+    public int spamCount;
+    public String photoUrl;
+    public String lookupProviderName;
+    public Drawable attributionDrawable;
 
     /**
      * If this is a voicemail, whether the message is read. For other types of calls, this defaults
