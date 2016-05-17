@@ -141,6 +141,19 @@ public class DeepLinkIntegrationManager {
         sendEvent(ctx, category, event, parameters);
     }
 
+    /**
+     * View a given note in the application in which it was taken.
+     * @param ctx       Context to
+     * @param deepLink
+     * @param cn
+     */
+    public void viewNote(Context ctx, DeepLink deepLink, ComponentName cn) {
+        if (ctx != null && deepLink != null && deepLink.getAlreadyHasContent()) {
+            sendContentSentEvent(ctx, deepLink, cn);
+            ctx.startActivity(deepLink.createViewIntent());
+        }
+    }
+
     public void sendContentSentEvent(Context ctx, DeepLink deepLink, ComponentName cn) {
         sendEvent(ctx, deepLink, cn, Categories.USER_ACTIONS, Events.CONTENT_SENT);
     }
