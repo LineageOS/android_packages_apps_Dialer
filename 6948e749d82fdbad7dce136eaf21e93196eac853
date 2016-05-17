@@ -22,6 +22,30 @@
       "revId": "6948e749d82fdbad7dce136eaf21e93196eac853",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_1a3fedd6",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-17T22:08:46Z",
+      "side": 1,
+      "message": "I think logging makes sense.  I don\u0027t think we want to throw exceptions in this case.",
+      "parentUuid": "5faad753_5aed6523",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 81
+      },
+      "revId": "6948e749d82fdbad7dce136eaf21e93196eac853",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
