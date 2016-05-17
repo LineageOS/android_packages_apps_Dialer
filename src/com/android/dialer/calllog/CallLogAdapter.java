@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
@@ -52,16 +53,12 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.contactinfo.ContactInfoCache;
 import com.android.dialer.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
-import com.android.dialer.deeplink.DeepLinkCache;
-import com.android.dialer.deeplink.DeepLinkCache.DeepLinkListener;
-import com.android.dialer.deeplink.DeepLinkRequest;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.DialerDataSubscription;
 
-import com.cyanogen.ambient.deeplink.DeepLink;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 import com.google.common.annotations.VisibleForTesting;
 
@@ -104,7 +101,6 @@ public class CallLogAdapter extends GroupingListAdapter
     private final CallFetcher mCallFetcher;
 
     protected ContactInfoCache mContactInfoCache;
-    protected DeepLinkCache mDeepLinkCache;
 
     private boolean mIsShowingRecentsTab;
 
@@ -301,13 +297,6 @@ public class CallLogAdapter extends GroupingListAdapter
                 }
             };
 
-    protected final DeepLinkListener mDeepLinkListener = new DeepLinkListener()  {
-        @Override
-        public void onDeepLinkCacheChanged() {
-            notifyDataSetChanged();
-        }
-    };
-
     public CallLogAdapter(
             Context context,
             CallFetcher callFetcher,
@@ -329,7 +318,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
         mContactInfoCache = new ContactInfoCache(
                 mContactInfoHelper, mOnContactInfoChangedListener);
-        mDeepLinkCache = new DeepLinkCache(mDeepLinkListener);
         if (!PermissionsUtil.hasContactsPermissions(context)) {
             mContactInfoCache.disableRequestProcessing();
         }
@@ -386,19 +374,16 @@ public class CallLogAdapter extends GroupingListAdapter
 
     public void invalidateCache() {
         mContactInfoCache.invalidate();
-        mDeepLinkCache.invalidate();
     }
 
     public void startCache() {
         if (PermissionsUtil.hasPermission(mContext, android.Manifest.permission.READ_CONTACTS)) {
             mContactInfoCache.start();
-            mDeepLinkCache.start();
         }
     }
 
     public void pauseCache() {
         mContactInfoCache.stop();
-        mDeepLinkCache.stop();
         mTelecomCallLogCache.reset();
     }
 
@@ -481,6 +466,12 @@ public class CallLogAdapter extends GroupingListAdapter
         promoCardViewHolder.getSettingsTextView().setOnClickListener(
                 mVoicemailSettingsActionListener);
         promoCardViewHolder.getOkTextView().setOnClickListener(mOkActionListener);
+    }
+
+    private HashMap<String, Drawable> mImageHashMap = new HashMap<String, Drawable>();
+
+    public HashMap<String, Drawable> getImageHashMapCache() {
+        return mImageHashMap;
     }
 
     /**
@@ -567,7 +558,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.inCallComponentName = null;
         }
         views.callTimes = getCallTimes(c, count);
-        views.mDeepLinkPresenter.setDeepLink(mDeepLinkCache.getValue(number, views.callTimes));
+
         String callMethodName = null;
         if (views.inCallComponentName != null) {
             CallMethodInfo cmi = DialerDataSubscription.get(mContext)
@@ -616,6 +607,12 @@ public class CallLogAdapter extends GroupingListAdapter
 
         mCallLogListItemHelper.setPhoneCallDetails(views, details);
         mCallLogListItemHelper.setLookupInfoDetails(views, info);
+    }
+
+    public void buildCache(Cursor c) {
+        int count = getGroupSize(c.getPosition());
+        final String number = c.getString(CallLogQuery.NUMBER);
+        long[] times = getCallTimes(c, count);
     }
 
     /**

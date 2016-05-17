@@ -17,27 +17,18 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.android.dialer.R;
-import com.android.dialer.deeplink.DeepLinkRequest;
-import com.cyanogen.ambient.common.api.ResultCallback;
 import com.cyanogen.ambient.deeplink.DeepLink;
-import com.cyanogen.ambient.deeplink.DeepLink.DeepLinkResultList;
-import com.cyanogen.ambient.deeplink.linkcontent.DeepLinkContentType;
-import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
 
 import com.android.dialer.deeplink.DeepLinkIntegrationManager;
-
-import java.util.List;
-import java.util.ArrayList;
 
 public class DeepLinkPresenter {
 
     Context mContext;
     DeepLink mDeepLink;
+    Drawable mDeepLinkIcon;
     private CallLogListItemViewHolder mViews;
 
     public DeepLinkPresenter(Context context) {
@@ -49,14 +40,13 @@ public class DeepLinkPresenter {
     }
 
     private void updateViews() {
-        if (mDeepLink != null && mDeepLink != DeepLinkRequest.EMPTY) {
+        if (mDeepLink != null && mDeepLinkIcon != null) {
             if (canUpdateImageIconViews()) {
-                mViews.viewNoteActionIcon.setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+                mViews.viewNoteActionIcon.setImageDrawable(mDeepLinkIcon);
                 mViews.viewNoteButton.setVisibility(View.VISIBLE);
             }
             mViews.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
-            mViews.phoneCallDetailsViews.noteIconView
-                    .setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+            mViews.phoneCallDetailsViews.noteIconView.setImageDrawable(mDeepLinkIcon);
         } else {
             if (canUpdateImageIconViews()) {
                 mViews.viewNoteButton.setVisibility(View.GONE);
@@ -66,13 +56,19 @@ public class DeepLinkPresenter {
         }
     }
 
+    public Drawable getDeepLinkIcon() {
+        return mDeepLinkIcon;
+    }
+
     private boolean canUpdateImageIconViews() {
         return mViews.viewNoteButton != null  && mViews.viewNoteActionIcon != null;
     }
 
-    public void setDeepLink(DeepLink deepLink) {
+    public void setDeepLink(DeepLink deepLink, Drawable icon) {
         mDeepLink = deepLink;
+        mDeepLinkIcon = icon;
         updateViews();
+
     }
 
     public void viewNote() {

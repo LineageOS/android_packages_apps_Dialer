@@ -37,9 +37,7 @@ import android.widget.QuickContactBadge;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.dialer.deeplink.DeepLinkRequest;
 import com.android.dialer.widget.DialerQuickContact;
-import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
@@ -54,8 +52,6 @@ import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 
 import com.android.phone.common.incall.CallMethodInfo;
 import com.android.phone.common.incall.DialerDataSubscription;
-import com.android.phone.common.incall.utils.CallMethodFilters;
-import com.cyanogen.ambient.deeplink.DeepLink;
 import com.cyanogen.ambient.incall.extension.OriginCodes;
 
 /**
@@ -402,7 +398,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         if (mDeepLinkPresenter.mDeepLink != null) {
             ImageView icon = (ImageView) viewNoteButton.findViewById(R.id.view_note_action_icon);
-            icon.setImageDrawable(mDeepLinkPresenter.mDeepLink.getDrawableIcon(mContext));
+            icon.setImageDrawable(mDeepLinkPresenter.getDeepLinkIcon());
         } else {
             viewNoteButton.setVisibility(View.GONE);
         }
