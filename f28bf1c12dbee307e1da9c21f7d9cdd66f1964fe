@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_f409ca2b",
+        "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-17T15:18:14Z",
+      "side": 1,
+      "message": "why is our onclick for this here? everyone else is hanging out in the onClick method for the class. :(",
+      "range": {
+        "startLine": 582,
+        "startChar": 10,
+        "endLine": 590,
+        "endChar": 29
+      },
+      "revId": "f28bf1c12dbee307e1da9c21f7d9cdd66f1964fe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
