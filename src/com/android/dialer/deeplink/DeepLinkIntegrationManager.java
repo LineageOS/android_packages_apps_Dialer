@@ -19,13 +19,10 @@ package com.android.dialer.deeplink;
 import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.CallLog;
 import android.util.ArrayMap;
 
 import com.android.phone.common.ambient.AmbientConnection;
-import com.cyanogen.ambient.analytics.AnalyticsServices;
-import com.cyanogen.ambient.common.ConnectionResult;
 import com.cyanogen.ambient.common.CyanogenAmbientUtil;
 import com.cyanogen.ambient.common.api.AmbientApiClient;
 import com.cyanogen.ambient.common.api.PendingResult;
