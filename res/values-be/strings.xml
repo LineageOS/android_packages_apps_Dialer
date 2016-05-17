@@ -32,6 +32,7 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="recentCallsIconLabel">Гісторыя выклікаў</string>
   <!-- Menu item used to call a contact from the call log -->
   <!-- Text for a menu item to report a call as having been incorrectly identified.
          [CHAR LIMIT=30] -->
@@ -39,12 +40,15 @@
   <!-- Menu item used to add a number from the call log to contacts -->
   <!-- Menu item used to remove a single call from the call log -->
   <!-- Menu item used to remove all calls from the call log -->
+  <string name="recentCalls_deleteAll">Ачысьціць гісторыю выклікаў</string>
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
   <!-- Text displayed when the call log is empty. -->
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
+  <string name="clearCallLogConfirmation_title">Ачысьціць гісторыю выклікаў?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
+  <string name="clearCallLogConfirmation">Выдаленьне ўсіх выклікаў з гісторыі</string>
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
@@ -63,11 +67,14 @@
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
+  <string name="call_log_incoming_header">Толькі ўваходныя выклікі</string>
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
+  <string name="call_log_outgoing_header">Толькі зыходныя выклікі</string>
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
+  <string name="visual_voicemail_settings">Налады</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -121,6 +128,7 @@
     -->
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
+  <string name="action_menu_call_history_description">Гісторыя выклікаў</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
@@ -135,6 +143,7 @@
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
+  <string name="dialer_settings_label">Налады</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <!-- Title bar for call detail screen -->
@@ -233,6 +242,7 @@
          [CHAR LIMIT=NONE] -->
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
+  <string name="dialer_hint_find_contact">Імя альбо нумар тэлефону</string>
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
   <!-- String resource for the font-family to use for the full call history footer
@@ -249,7 +259,9 @@
          [CHAR LIMIT=30] -->
   <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
          [CHAR LIMIT=40] -->
+  <string name="tab_speed_dial">Хуткі выклік</string>
   <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
+  <string name="tab_recents">Выклікі</string>
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
   <!--  Text displayed when user swipes out a favorite contact -->
@@ -260,11 +272,13 @@
   <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
+  <string name="search_shortcut_send_sms_message">Даслаць SMS</string>
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <!-- Title for the call log list item that brings users to the full call history when clicked -->
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
   <!-- Shown when there are no speed dial favorites. -->
   <!-- Shown as an action when there are no speed dial favorites -->
+  <string name="speed_dial_empty_add_favorite_action">Дадаць знаёмых</string>
   <!-- Shown when there are no contacts in the all contacts list. -->
   <!-- Shown as an action when the all contacts list is empty -->
   <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
