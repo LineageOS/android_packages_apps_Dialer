@@ -216,6 +216,12 @@ public class CallLogAsyncTaskUtil {
                 details.inCallComponentName = null;
             }
 
+            details.isSpam = info.isSpam;
+            details.spamCount = info.spamCount;
+            details.photoUrl = info.photoUrl;
+            details.lookupProviderName = info.lookupProviderName;
+            details.attributionDrawable = info.attributionDrawable;
+
             return details;
         } finally {
             if (cursor != null) {

@@ -54,6 +54,7 @@ import com.android.dialer.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.calllog.CallTypeHelper;
 import com.android.dialer.calllog.ContactInfoHelper;
 import com.android.dialer.calllog.PhoneAccountUtils;
+import com.android.dialer.util.ImageUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
@@ -186,6 +187,18 @@ public class CallDetailActivity extends Activity
             mBlockContactHelper.setContactInfo(mNumber);
             loadContactPhotos(contactUri, photoUri, nameForDefaultImage, lookupKey, contactType,
                     photoId, mInCallComponentName);
+
+            // use information from contact-info provider
+            if (!TextUtils.isEmpty(firstDetails.photoUrl)) {
+                ImageUtils.loadBitampFromUrl(CallDetailActivity.this,
+                        firstDetails.photoUrl,
+                        mDialerQuickContact.getQuickContactBadge());
+            }
+
+            if (firstDetails.attributionDrawable != null) {
+                mDialerQuickContact.setAttributionBadge(firstDetails.attributionDrawable);
+            }
+
             findViewById(R.id.call_detail).setVisibility(View.VISIBLE);
         }
 
