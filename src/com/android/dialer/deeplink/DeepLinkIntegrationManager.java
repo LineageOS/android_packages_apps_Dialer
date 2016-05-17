@@ -21,6 +21,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.util.Log;
 
 import com.android.phone.common.ambient.AmbientConnection;
 import com.cyanogen.ambient.analytics.AnalyticsServices;
@@ -51,6 +52,7 @@ public class DeepLinkIntegrationManager {
         return sInstance;
     }
 
+    private static final String TAG = "DeepLinkIntegrationManager";
     private String dummyNumber = "00000000";
     private long dummyTime = 0l;
     private static DeepLinkIntegrationManager sInstance;
@@ -139,6 +141,24 @@ public class DeepLinkIntegrationManager {
                 deepLink.getApplicationType());
         parameters.put(Parameters.CONTENT_UID, deepLink.getUri().toString());
         sendEvent(ctx, category, event, parameters);
+    }
+
+    /**
+     * View a given note in the application in which it was taken.  Also logs metrics events for
+     * viewing the note.
+     *
+     * @param ctx       Context to log metrics against and to start the activity against.
+     * @param deepLink  The DeepLink for the content to view
+     * @param cn        The ComponentName to log as the generator of the metrics event.
+     */
+    public void viewNote(Context ctx, DeepLink deepLink, ComponentName cn) {
+        if (ctx != null && cn != null && deepLink != null && deepLink.getAlreadyHasContent()) {
+            sendContentSentEvent(ctx, deepLink, cn);
+            ctx.startActivity(deepLink.createViewIntent());
+        } else {
+            Log.e(TAG, "Invalid arguments for viewNote(). Context: "+ctx+" deepLink: "+deepLink+" "
+                    + "componenName: "+cn);
+        }
     }
 
     public void sendContentSentEvent(Context ctx, DeepLink deepLink, ComponentName cn) {
