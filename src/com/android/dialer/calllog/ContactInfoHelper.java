@@ -226,7 +226,7 @@ public class ContactInfoHelper {
                             info.photoId = phonesCursor.getLong(
                                     phonesCursor.getColumnIndexOrThrow("photo_id"));
                             info.photoUri = UriUtils.parseUriOrNull(phonesCursor.getString(
-                                    phonesCursor.getColumnIndexOrThrow("photo_file_id")));
+                                    phonesCursor.getColumnIndexOrThrow("photo_uri")));
                         } catch (IllegalArgumentException e) {
                             Log.e(TAG, "Contact information invalid, cannot find needed column(s)",
                                     e);
