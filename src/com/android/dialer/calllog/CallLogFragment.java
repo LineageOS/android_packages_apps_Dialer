@@ -443,8 +443,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     @Override
     public void onStatusChanged(boolean enabled) {
-        mRefreshDataRequired = true;
-        refreshData();
+        // reset and start the ContactInfo cache
+        mAdapter.invalidateCache();
+        mAdapter.startCache();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
