@@ -170,6 +170,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 @Override
                 public void onResult(DeepLink.BooleanResult result) {
                     boolean value = result.getResults();
+                    DeepLinkIntegrationManager.getInstance().completeEnabledRequest();
                     if (isDeepLinkApiEnabled != value) {
                         mAdapter.mDeepLinkCache.clearCache();
                         refreshData();
@@ -397,7 +398,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mVoicemailPlaybackPresenter.onPause();
         }
         mAdapter.pauseCache();
-
+        DeepLinkIntegrationManager.getInstance().cancelPendingRequests();
         DialerDataSubscription.get(getActivity()).unsubscribe(AMBIENT_SUBSCRIPTION_ID);
 
         super.onPause();

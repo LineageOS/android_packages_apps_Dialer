@@ -44,6 +44,8 @@ import java.util.List;
 
 public class DeepLinkIntegrationManager {
 
+    PendingResult<DeepLink.BooleanResult> mAreDeepLinksEnabledRequest = null;
+
     public static DeepLinkIntegrationManager getInstance() {
         if (sInstance == null) {
             sInstance = new DeepLinkIntegrationManager();
@@ -58,7 +60,7 @@ public class DeepLinkIntegrationManager {
     private DeepLinkApi mApi;
 
     public void setUp(Context ctx) {
-        if(ambientIsAvailable(ctx)) {
+        if (ambientIsAvailable(ctx)) {
             mApi = (DeepLinkApi) DeepLinkServices.API;
             mAmbientApiClient = AmbientConnection.CLIENT.get(ctx);
         }
@@ -120,7 +122,7 @@ public class DeepLinkIntegrationManager {
 
     public void sendEvent(Context ctx, Categories categories, Events event,
             HashMap<Parameters, Object> params) {
-        if(hasConnectedClient()) {
+        if (hasConnectedClient()) {
             DeepLinkMetricsHelper.sendEvent(ctx, categories, event, params, mAmbientApiClient);
         }
     }
@@ -145,9 +147,9 @@ public class DeepLinkIntegrationManager {
      * View a given note in the application in which it was taken.  Also logs metrics events for
      * viewing the note.
      *
-     * @param ctx       Context to log metrics against and to start the activity against.
-     * @param deepLink  The DeepLink for the content to view
-     * @param cn        The ComponentName to log as the generator of the metrics event.
+     * @param ctx      Context to log metrics against and to start the activity against.
+     * @param deepLink The DeepLink for the content to view
+     * @param cn       The ComponentName to log as the generator of the metrics event.
      */
     public void viewNote(Context ctx, DeepLink deepLink, ComponentName cn) {
         if (ctx != null && deepLink != null && deepLink.getAlreadyHasContent()) {
@@ -174,9 +176,23 @@ public class DeepLinkIntegrationManager {
     public void isApplicationTypeEnabled(DeepLinkApplicationType deepLinkApplicationType,
             ResultCallback<DeepLink.BooleanResult> callback) {
         if (hasConnectedClient()) {
-            PendingResult<DeepLink.BooleanResult> result = mApi.isApplicationTypeEnabled(
+            if (mAreDeepLinksEnabledRequest != null) {
+                mAreDeepLinksEnabledRequest.cancel();
+            }
+            mAreDeepLinksEnabledRequest = mApi.isApplicationTypeEnabled(
                     mAmbientApiClient, deepLinkApplicationType);
-            result.setResultCallback(callback);
+            mAreDeepLinksEnabledRequest.setResultCallback(callback);
+        }
+    }
+
+    public void completeEnabledRequest() {
+        mAreDeepLinksEnabledRequest = null;
+    }
+
+    public void cancelPendingRequests() {
+        if (mAreDeepLinksEnabledRequest != null) {
+            mAreDeepLinksEnabledRequest.cancel();
+            mAreDeepLinksEnabledRequest = null;
         }
     }
 }
