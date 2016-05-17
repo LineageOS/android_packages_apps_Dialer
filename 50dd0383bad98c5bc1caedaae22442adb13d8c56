@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_7a08612b",
+        "filename": "res/drawable/ic_dialer_sip_black_24dp.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-17T22:16:16Z",
+      "side": 1,
+      "message": "may need a copyright header here. @Richard didn\u0027t you use a special header for items you got from the google asset studio?",
+      "revId": "50dd0383bad98c5bc1caedaae22442adb13d8c56",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
