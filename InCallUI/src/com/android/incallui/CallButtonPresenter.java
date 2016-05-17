@@ -341,17 +341,18 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
 
+        final int currUnpausedVideoState = VideoUtils.getUnPausedVideoState(mCall.getVideoState());
         if (pause) {
             videoCall.setCamera(null);
-            VideoProfile videoProfile = new VideoProfile(
-                    mCall.getVideoState() & ~VideoProfile.STATE_TX_ENABLED);
+            VideoProfile videoProfile = new VideoProfile(currUnpausedVideoState
+                    & ~VideoProfile.STATE_TX_ENABLED);
             videoCall.sendSessionModifyRequest(videoProfile);
         } else {
             InCallCameraManager cameraManager = InCallPresenter.getInstance().
                     getInCallCameraManager();
             videoCall.setCamera(cameraManager.getActiveCameraId());
-            VideoProfile videoProfile = new VideoProfile(
-                    mCall.getVideoState() | VideoProfile.STATE_TX_ENABLED);
+            VideoProfile videoProfile = new VideoProfile(currUnpausedVideoState
+                    | VideoProfile.STATE_TX_ENABLED);
             videoCall.sendSessionModifyRequest(videoProfile);
             mCall.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
         }
