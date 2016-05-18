@@ -27,7 +27,7 @@
     <string name="audio_mode_speaker" msgid="6160127758732918123">"স্পিকার"</string>
     <string name="audio_mode_earpiece" msgid="3138677187223932893">"হ্যান্ডসেট ইয়ারপিস"</string>
     <string name="audio_mode_wired_headset" msgid="583080366967943196">"তারযুক্ত হেডসেট"</string>
-    <string name="audio_mode_bluetooth" msgid="3188504589946495676">"Bluetooth"</string>
+    <string name="audio_mode_bluetooth" msgid="3188504589946495676">"ব্লুটুথ"</string>
     <string name="wait_prompt_str" msgid="3784275777844586675">"নিম্নলিখিত টোনগুলি পাঠাবেন?\n"</string>
     <string name="pause_prompt_str" msgid="4507496811727697620">"টোনগুলি পাঠানো হচ্ছে\n"</string>
     <string name="send_button" msgid="4054398309483035794">"পাঠান"</string>
@@ -60,13 +60,13 @@
     <string name="notification_missedCallTicker" msgid="1599269453813734699">"<xliff:g id="MISSED_CALL_FROM">%s</xliff:g> এর থেকে মিসড কল"</string>
     <string name="notification_ongoing_call" msgid="8633734299234807397">"চলমান কল"</string>
     <string name="notification_ongoing_work_call" msgid="3465083293325006579">"চলমান কাজের কল"</string>
-    <string name="notification_ongoing_call_wifi" msgid="4140639349603930166">"চলমান Wi-Fi কল"</string>
-    <string name="notification_ongoing_work_call_wifi" msgid="8469582753279163976">"চলমান Wi-Fi কাজের কল"</string>
+    <string name="notification_ongoing_call_wifi" msgid="4140639349603930166">"চলমান ওয়াই-ফাই কল"</string>
+    <string name="notification_ongoing_work_call_wifi" msgid="8469582753279163976">"চলমান ওয়াই-ফাই কাজের কল"</string>
     <string name="notification_on_hold" msgid="3151343576023182586">"হোল্ডে রয়েছে"</string>
     <string name="notification_incoming_call" msgid="5904745644632328863">"আগত কল"</string>
     <string name="notification_incoming_work_call" msgid="281305845895342925">"আগত কাজের কল"</string>
-    <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"আগত Wi-Fi কল"</string>
-    <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"আগত Wi-Fi কাজের কল"</string>
+    <string name="notification_incoming_call_wifi" msgid="8337740714221114955">"আগত ওয়াই-ফাই কল"</string>
+    <string name="notification_incoming_work_call_wifi" msgid="3248418394186803763">"আগত ওয়াই-ফাই কাজের কল"</string>
     <string name="notification_incoming_video_call" msgid="7814873581838165772">"আগত ভিডিও কল"</string>
     <string name="notification_requesting_video_call" msgid="4844596091477863245">"আগত ভিডিও অনুরোধ"</string>
     <string name="notification_voicemail_title" msgid="7595628197933709144">"নতুন ভয়েসমেল"</string>
@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"খারিজ করুন"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"ঘুরিয়ে কল করুন"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"বার্তা"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"অন্য ডিভাইসে চালু থাকা কল"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"কল স্থানান্তর করুন"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"একটি কল করতে, প্রথমে বিমানমোড বন্ধ করুন৷"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"নেটওয়ার্কে নিবন্ধিত নয়৷"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"সেলুলার নেটওয়ার্ক উপলব্ধ নয়।"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ভিডিও কল"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"ভয়েস কলে পরিবর্তন করুন"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"ক্যামেরা স্যুইচ করুন"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"ভিডিও বিরাম দিন"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"ক্যামেরা চালু করুন"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ক্যামেরা বন্ধ করুন"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"আরো বিকল্প"</string>
     <string name="player_started" msgid="3478865572468310331">"প্লেয়ার শুরু হয়েছে"</string>
     <string name="player_stopped" msgid="1278611664986561535">"প্লেয়ার বন্ধ হয়ে গেছে"</string>

@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"ਰੱਦ ਕਰੋ"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"ਵਾਪਸ ਕਾਲ ਕਰੋ"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"ਸੁਨੇਹਾ"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"ਕਿਸੇ ਹੋਰ ਡੀਵਾਈਸ \'ਤੇ ਜਾਰੀ ਕਾਲ"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"ਕਾਲ ਟ੍ਰਾਂਸਫਰ ਕਰੋ"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ਇੱਕ ਕਾਲ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਜਹਾਜ਼ ਮੋਡ ਬੰਦ ਕਰੋ।"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"ਨੈੱਟਵਰਕ \'ਤੇ ਰਜਿਸਟਰ ਨਹੀਂ।"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"ਸੈਲਿਊਲਰ ਨੈੱਟਵਰਕ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ਵੀਡੀਓ ਕਾਲ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"ਵੌਇਸ ਕਾਲ ਵਿੱਚ ਬਦਲੋ"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"ਕੈਮਰੇ \'ਤੇ ਬਦਲੋ"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"ਵੀਡੀਓ ਰੋਕੋ"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"ਕੈਮਰਾ ਚਾਲੂ ਕਰੋ"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ਕੈਮਰਾ ਬੰਦ ਕਰੋ"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"ਹੋਰ ਚੋਣਾਂ"</string>
     <string name="player_started" msgid="3478865572468310331">"ਪਲੇਅਰ ਸ਼ੁਰੂ ਹੋ ਗਿਆ"</string>
     <string name="player_stopped" msgid="1278611664986561535">"ਪਲੇਅਰ ਰੁਕ ਗਿਆ"</string>
