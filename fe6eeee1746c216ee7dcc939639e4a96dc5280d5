@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_2beb79b0",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-18T19:30:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_e579122f",
+      "revId": "fe6eeee1746c216ee7dcc939639e4a96dc5280d5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_85e7fe40",
         "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
         "patchSetId": 4
@@ -53,6 +71,54 @@
       "writtenOn": "2016-05-18T04:21:45Z",
       "side": 1,
       "message": "I would drop that log output completely, TBH.",
+      "parentUuid": "5faad753_85e7fe40",
+      "range": {
+        "startLine": 159,
+        "startChar": 58,
+        "endLine": 160,
+        "endChar": 43
+      },
+      "revId": "fe6eeee1746c216ee7dcc939639e4a96dc5280d5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_cbd185fd",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-18T19:30:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_85785e2a",
+      "range": {
+        "startLine": 159,
+        "startChar": 58,
+        "endLine": 160,
+        "endChar": 43
+      },
+      "revId": "fe6eeee1746c216ee7dcc939639e4a96dc5280d5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ebcc8162",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-18T19:30:33Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "5faad753_85e7fe40",
       "range": {
         "startLine": 159,
