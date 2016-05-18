@@ -18,6 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
+  <string name="applicationLabel">Тэлефон</string>
   <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
   <!-- The description text for the dialer tab.
@@ -32,17 +33,22 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="recentCallsIconLabel">Гісторыя выклікаў</string>
   <!-- Menu item used to send an SMS or MMS message to a phone number  -->
+  <string name="menu_sendTextMessage">Даслаць SMS</string>
   <!-- Menu item used to call a contact from the call log -->
   <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
   <!-- Menu item used to add a number from the call log to contacts -->
   <!-- Menu item used to remove a single call from the call log -->
   <!-- Menu item used to remove all calls from the call log -->
+  <string name="recentCalls_deleteAll">Ачысьціць гісторыю выклікаў</string>
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
   <!-- Text displayed when the call log is empty. -->
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
+  <string name="clearCallLogConfirmation_title">Ачысьціць гісторыю выклікаў?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
+  <string name="clearCallLogConfirmation">Выдаленьне ўсіх выклікаў з гісторыі</string>
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
@@ -61,7 +67,9 @@
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
+  <string name="call_log_incoming_header">Толькі ўваходныя выклікі</string>
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
+  <string name="call_log_outgoing_header">Толькі зыходныя выклікі</string>
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
@@ -121,6 +129,7 @@
     -->
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
+  <string name="action_menu_call_history_description">Гісторыя выклікаў</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
@@ -135,6 +144,7 @@
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
+  <string name="dialer_settings_label">Налады</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <!-- Title bar for call detail screen -->
@@ -232,6 +242,7 @@
          [CHAR LIMIT=NONE] -->
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
+  <string name="dialer_hint_find_contact">Імя альбо нумар тэлефону</string>
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
   <!-- String resource for the font-family to use for the full call history footer
@@ -246,6 +257,8 @@
          [CHAR LIMIT=30] -->
   <!-- Title for the call log tab containing the list of all voicemail calls only
          [CHAR LIMIT=30] -->
+  <string name="tab_speed_dial">Хуткі выклік</string>
+  <string name="tab_recents">Выклікі</string>
   <!--  Text displayed when user swipes out a favorite contact -->
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
   <!-- Shortcut item used to call a number directly from search -->
