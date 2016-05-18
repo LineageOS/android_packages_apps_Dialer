@@ -727,12 +727,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             mListsFragment.showTab(ListsFragment.TAB_INDEX_RECENTS);
         }
 
-        // Always requery for the call method, because it may have changed while we were gone.
-        mLastKnownCallMethod = null;
-        if (mDialpadFragment != null) {
-            mDialpadFragment.providersUpdated(mLastKnownCallMethod, mAvailableProviders);
-        }
-
         Trace.endSection();
     }
 
