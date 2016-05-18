@@ -52,6 +52,8 @@ import com.cyanogen.lookup.phonenumber.response.StatusCode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 /**
  * Utility class to look up the contact information for a given number.
  */
@@ -339,6 +341,21 @@ public class ContactInfoHelper {
                     contactInfo.isSpam = response.mIsSpam;
                     contactInfo.spamCount = response.mSpamCount;
                     contactInfo.attributionDrawable = response.mAttributionLogo;
+
+                    StringBuilder succinctLocation = new StringBuilder();
+                    // convert country code to country name
+                    String country = new Locale("", response.mCountry).getDisplayCountry();
+
+                    if (!TextUtils.isEmpty(response.mCity)) {
+                        succinctLocation.append(response.mCity);
+                    }
+                    if (!TextUtils.isEmpty(country)) {
+                        if (succinctLocation.length() > 0) {
+                            succinctLocation.append(", ");
+                        }
+                        succinctLocation.append(country);
+                    }
+                    contactInfo.label = succinctLocation.toString();
 
                     // construct encoded lookup uri
                     ContactBuilder contactBuilder = new ContactBuilder(ContactBuilder.REVERSE_LOOKUP,
