@@ -11,6 +11,7 @@
     <dimen name="empty_list_message_space_bottom_height">40dp</dimen>
     <dimen name="empty_list_message_image_size">56dp</dimen>
     <dimen name="empty_list_message_side_image_size">36dp</dimen>
+    <dimen name="empty_list_message_min_text_size">12sp</dimen>
 
     <dimen name="coachmark_hint_text">14sp</dimen>
     <dimen name="coachmark_touch_padding">14sp</dimen>
