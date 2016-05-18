@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <Space
         android:id="@+id/emptyListViewSpaceTop"
@@ -45,17 +46,19 @@
                 android:id="@+id/emptyListViewImage"
                 android:layout_height="@dimen/empty_list_message_image_size"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/empty_list_message_view_spacing"
                 android:gravity="center_horizontal" />
 
-            <TextView
+            <me.grantland.widget.AutofitTextView
                 android:id="@+id/emptyListViewMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|top"
                 android:textSize="@dimen/empty_list_message_text_size"
+                app:minTextSize="@dimen/empty_list_message_min_text_size"
                 android:textColor="@color/empty_list_text_color"
-                android:layout_marginBottom="@dimen/empty_list_message_view_spacing" />
+                android:layout_marginBottom="@dimen/empty_list_message_view_spacing"
+                android:maxLines="5"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/emptyListViewSubMessage"
