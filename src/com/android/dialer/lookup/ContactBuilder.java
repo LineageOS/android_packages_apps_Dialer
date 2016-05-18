@@ -31,7 +31,7 @@ import android.util.Log;
 
 import com.android.contacts.common.util.Constants;
 import com.android.dialer.calllog.ContactInfo;
-import com.android.dialer.lookup.CallerMetaData;
+import com.android.contacts.common.util.CallerMetaData;
 import com.android.dialer.R;
 
 import java.sql.Struct;
@@ -84,6 +84,7 @@ public class ContactBuilder {
     private boolean mIsBusiness;
 
     private int mSpamCount;
+    private boolean mIsSpam;
     private String mInfoProviderName;
     private String mSuccinctLocation;
 
@@ -151,6 +152,7 @@ public class ContactBuilder {
                     }
                 }
 
+                mIsSpam = contact.optBoolean(CallerMetaData.IS_SPAM, false);
                 mSpamCount = contact.optInt(CallerMetaData.SPAM_COUNT, 0);
                 mInfoProviderName = contact.optString(CallerMetaData.INFO_PROVIDER, null);
                 mSuccinctLocation = contact.optString(CallerMetaData.SUCCINCT_LOCATION, null);
@@ -168,8 +170,16 @@ public class ContactBuilder {
         mSpamCount = spamCount;
     }
 
+    public void setIsSpam(boolean isSpam) {
+        mIsSpam = isSpam;
+    }
+
     public int getSpamCount() {
         return mSpamCount;
+    }
+
+    public boolean isSpamContact() {
+        return mIsSpam;
     }
 
     public void setInfoProviderName(String infoProviderName) {
@@ -327,6 +337,7 @@ public class ContactBuilder {
             }
 
             // add spam count and attribution
+            contact.put(CallerMetaData.IS_SPAM, isSpamContact());
             contact.put(CallerMetaData.SPAM_COUNT, getSpamCount());
             contact.put(CallerMetaData.INFO_PROVIDER, getInfoProviderName());
             contact.put(CallerMetaData.SUCCINCT_LOCATION, getSuccinctLocation());
