@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_2ba939de",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-18T17:07:34Z",
+      "side": 1,
+      "message": "doesn\u0027t this mean that only one call log fragment at a time can have a valid callback ? There are activities w/ multiple call log fragment instances active at a given time.",
+      "range": {
+        "startLine": 47,
+        "startChar": 42,
+        "endLine": 47,
+        "endChar": 69
+      },
+      "revId": "739ad44520a165f3897c3f8e9b4eeaaabe72bc67",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
