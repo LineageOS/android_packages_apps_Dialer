@@ -363,6 +363,8 @@ public class ContactInfoHelper {
                     contactBuilder.setInfoProviderName(response.mProviderName);
                     contactBuilder.setPhotoUrl(response.mPhotoUrl);
                     contactBuilder.setName(ContactBuilder.Name.createDisplayName(response.mName));
+                    contactBuilder.setIsSpam(response.mIsSpam);
+                    contactBuilder.setSpamCount(response.mSpamCount);
 
                     contactInfo.lookupUri = contactBuilder.build().lookupUri;
                     info = contactInfo;
