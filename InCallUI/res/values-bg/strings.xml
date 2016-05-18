@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Видеообажд."</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Преминаване към гласово обаждане"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Превключване на камерата"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Поставяне на видеовръзката на пауза"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Включване на камерата"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Изключване на камерата"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Още опции"</string>
     <string name="player_started" msgid="3478865572468310331">"Плейърът е стартиран"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Плейърът е спрян"</string>

@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videoopkald"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Skift til taleopkald"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Skift kamera"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Sæt video på pause"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Slå kameraet til"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Slå kameraet fra"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Flere valgmuligheder"</string>
     <string name="player_started" msgid="3478865572468310331">"Afspilleren er startet"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Afspilleren er stoppet"</string>

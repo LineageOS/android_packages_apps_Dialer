@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Βιντεοκλ."</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Αλλαγή σε φωνητική κλήση"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Αλλαγή κάμερας"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Παύση βίντεο"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Ενεργοποίηση κάμερας"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Απενεργοποίηση κάμερας"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Περισσότερες επιλογές"</string>
     <string name="player_started" msgid="3478865572468310331">"Το πρόγραμμα αναπαραγωγής βίντεο ξεκίνησε"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Το πρόγραμμα αναπαραγωγής βίντεο διακόπηκε"</string>

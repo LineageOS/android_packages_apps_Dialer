@@ -143,10 +143,10 @@
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM કાર્ડમાંથી લોડ કરી રહ્યું છે…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM કાર્ડ સંપર્કો"</string>
-    <string name="add_contact_not_available" msgid="5547311613368004859">"કોઈ સંપર્કો એપ્લિકેશન ઉપલબ્ધ નથી"</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"કોઈ સંપર્કો ઍપ્લિકેશન ઉપલબ્ધ નથી"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"વૉઇસ શોધ ઉપલબ્ધ નથી"</string>
-    <string name="call_not_available" msgid="8941576511946492225">"ફોન કૉલ કરી શકાતો નથી કારણ કે ફોન એપ્લિકેશન અક્ષમ કરવામાં આવી છે."</string>
-    <string name="activity_not_available" msgid="2287665636817987623">"આ ઉપકરણ પર તે માટે કોઈ એપ્લિકેશન નથી"</string>
+    <string name="call_not_available" msgid="8941576511946492225">"ફોન કૉલ કરી શકાતો નથી કારણ કે ફોન ઍપ્લિકેશન અક્ષમ કરવામાં આવી છે."</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"આ ઉપકરણ પર તે માટે કોઈ ઍપ્લિકેશન નથી"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"સંપર્કો શોધો"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"નંબર ઉમેરો અથવા સંપર્કો શોધો"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"તમારો કૉલ ઇતિહાસ ખાલી છે"</string>

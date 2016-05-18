@@ -26,9 +26,9 @@
     <string name="action_copy_number_text" msgid="588249522108594155">"Copiar número"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Copiar transcripción"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Bloquear número"</string>
-    <string name="snackbar_number_blocked" msgid="939830142765936021">"Se ha bloqueado el número <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> bloqueado"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Desbloquear número"</string>
-    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"Se ha desbloqueado el número <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> desbloqueado"</string>
     <string name="block_number_undo" msgid="591338370336724156">"DESHACER"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Eliminar"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Editar número antes de llamar"</string>

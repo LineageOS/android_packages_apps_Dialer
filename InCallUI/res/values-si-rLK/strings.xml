@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"වීඩියෝ ඇමතුම"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"හඬ ඇමතුමක් වෙත මාරු කරන්න"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"කැමරාව මාරු කරන්න"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"විඩියෝව විරාම කරන්න"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"කැමරාව ක්‍රියාත්මක කරන්න"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"කැමරාව ක්‍රියා විරහිත කරන්න"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"තවත් විකල්ප"</string>
     <string name="player_started" msgid="3478865572468310331">"ධාවකය ආරම්භ කරන ලදි"</string>
     <string name="player_stopped" msgid="1278611664986561535">"ධාවකය නැවතුණි"</string>

@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"အသံခေါ်ဆိုမှုသို့ ပြောင်းပါ"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"ကင်မရာပြောင်းပါ"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"ဗီဒီယို ခေတ္တရပ်ပါ"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"ကင်မရာဖွင့်ပါ"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ကင်မရာပိတ်ပါ"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"နောက်ထပ် ရွေးစရာများ"</string>
     <string name="player_started" msgid="3478865572468310331">"ပလေယာ စပါပြီ"</string>
     <string name="player_stopped" msgid="1278611664986561535">"ပလေယာ ရပ်တန့်သွားပါပြီ"</string>

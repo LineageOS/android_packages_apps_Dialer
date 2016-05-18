@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videocham."</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Cambiar para chamada de voz"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Cambiar cámara"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Pausar vídeo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Acender cámara"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Apagar cámara"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Máis opcións"</string>
     <string name="player_started" msgid="3478865572468310331">"Iniciouse o reprodutor"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Detívose o reprodutor"</string>

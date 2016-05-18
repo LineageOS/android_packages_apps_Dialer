@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Video"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Muuta äänipuheluksi"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Vaihda kameraa"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Keskeytä video"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Käynnistä kamera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Sammuta kamera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Lisäasetukset"</string>
     <string name="player_started" msgid="3478865572468310331">"Soitin käynnistettiin."</string>
     <string name="player_stopped" msgid="1278611664986561535">"Soitin pysäytettiin."</string>

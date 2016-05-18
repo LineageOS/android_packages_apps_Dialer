@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"व्हिडिओ कॉल"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"व्हॉइस कॉल वर बदला"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"कॅमेरा स्विच करा"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"व्हिडिओला विराम द्या"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"कॅमेरा चालू करा"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"कॅमेरा बंद करा"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"अधिक पर्याय"</string>
     <string name="player_started" msgid="3478865572468310331">"प्लेअर सुरु झाले"</string>
     <string name="player_stopped" msgid="1278611664986561535">"प्लेअर थांबले"</string>

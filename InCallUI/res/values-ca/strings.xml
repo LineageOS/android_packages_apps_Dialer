@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videotrucada"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Canvia a trucada de veu"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Canvia la càmera"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Posa en pausa el vídeo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Activa la càmera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Desactiva la càmera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Més opcions"</string>
     <string name="player_started" msgid="3478865572468310331">"S\'ha iniciat el reproductor"</string>
     <string name="player_stopped" msgid="1278611664986561535">"S\'ha aturat el reproductor"</string>

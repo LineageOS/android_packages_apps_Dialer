@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Видеоповик"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Промени во гласовен повик"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Промени ја камерата"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Паузирај видео"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Вклучете ја камерата"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Исклучете ја камерата"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Повеќе опции"</string>
     <string name="player_started" msgid="3478865572468310331">"Плеерот се вклучи"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Плеерот запре"</string>

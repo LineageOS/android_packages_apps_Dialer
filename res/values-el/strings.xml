@@ -32,7 +32,7 @@
     <string name="block_number_undo" msgid="591338370336724156">"ΑΝΑΙΡΕΣΗ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Διαγραφή"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Επεξεργασία αριθμού πριν την κλήση"</string>
-    <string name="call_log_delete_all" msgid="4677609108288680411">"Εκκαθάριση ιστορικού κλήσεων"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Διαγραφή ιστορικού κλήσεων"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Διαγραφή αυτόματου τηλεφωνητή"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Αρχειοθ. μην. αυτόμ. τηλεφων."</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"Κοινή χρήση αυτόμ. τηλεφωνητή"</string>
@@ -232,7 +232,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Ήχοι και δόνηση"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Προσβασιμότητα"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ήχος κλήσης τηλεφώνου"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Και δόνηση στις κλήσεις"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Δόνηση στις κλήσεις"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Τόνοι πληκτρολογίου κλήσης"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Διάρκεια ήχου πληκτρολογίου κλήσης"</string>
   <string-array name="dtmf_tone_length_entries">

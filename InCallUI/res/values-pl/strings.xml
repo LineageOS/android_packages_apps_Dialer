@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Rozmowa wideo"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Zmień na połączenie głosowe"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Przełącz kamerę"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Wstrzymaj wideo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Włącz kamerę"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Wyłącz kamerę"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Więcej opcji"</string>
     <string name="player_started" msgid="3478865572468310331">"Odtwarzacz włączony"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Odtwarzacz zatrzymany"</string>

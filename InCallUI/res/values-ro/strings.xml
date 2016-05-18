@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Apel video"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Treceți la apel vocal"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Comutați camera foto"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Întrerupeți apelul video"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Activați camera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Dezactivați camera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Mai multe opțiuni"</string>
     <string name="player_started" msgid="3478865572468310331">"Playerul a pornit"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Playerul s-a oprit"</string>
@@ -204,6 +205,6 @@
     <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"Aceasta este prima dată când ați primit apel de la acest număr."</string>
     <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"Suspectăm că acesta este un apel spam."</string>
     <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"Blocați/raportați"</string>
-    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Adăugați o persoană"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"Adăugați persoana"</string>
     <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"Nu este spam"</string>
 </resources>

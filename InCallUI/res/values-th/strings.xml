@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"แฮงเอาท์วิดีโอ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"เปลี่ยนเป็นการโทรด้วยเสียง"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"เปลี่ยนกล้อง"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"หยุดวิดีโอชั่วคราว"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"เปิดกล้อง"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ปิดกล้อง"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"ตัวเลือกเพิ่มเติม"</string>
     <string name="player_started" msgid="3478865572468310331">"โปรแกรมเล่นเริ่มทำงานแล้ว"</string>
     <string name="player_stopped" msgid="1278611664986561535">"โปรแกรมเล่นหยุดแล้ว"</string>

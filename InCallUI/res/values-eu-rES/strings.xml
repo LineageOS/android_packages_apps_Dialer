@@ -124,7 +124,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Bideo-deia"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Aldatu ahots-deira"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Aldatu kamera"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Pausatu bideoa"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Aktibatu kamera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Desaktibatu kamera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Aukera gehiago"</string>
     <string name="player_started" msgid="3478865572468310331">"Abian da erreproduzigailua"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Gelditu da erreproduzigailua"</string>
