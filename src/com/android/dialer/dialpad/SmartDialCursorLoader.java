@@ -90,8 +90,13 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         /** Loads results from the database helper. */
         final DialerDatabaseHelper dialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(
                 mContext);
-        final ArrayList<ContactNumber> allMatches = dialerDatabaseHelper.getLooseMatches(mQuery,
+        ArrayList<ContactNumber> allMatches = dialerDatabaseHelper.getLooseMatches(mQuery,
                 mNameMatcher, mCallableMimetype);
+
+        if (allMatches.size() < 1 && !TextUtils.isEmpty(mQuery)) {
+            allMatches = dialerDatabaseHelper.getExtraMatches(mQuery,
+                    mNameMatcher, mCallableMimetype);
+        }
 
         if (DEBUG) {
             Log.v(TAG, "Loaded matches " + String.valueOf(allMatches.size()));
