@@ -190,7 +190,7 @@ public class DiscoveryEventHandler {
         String body = b.getString(NudgeKey.NOTIFICATION_PARAM_BODY);
         Parcelable[] actions = b.getParcelableArray(NudgeKey.NOTIFICATION_PARAM_NUDGE_ACTIONS);
 
-        NotificationNudge nn = new NotificationNudge(component.getPackageName(),
+        NotificationNudge nn = new NotificationNudge(mKey,
                 Nudge.Type.IMMEDIATE, title, body);
 
         for (Parcelable action : actions) {
