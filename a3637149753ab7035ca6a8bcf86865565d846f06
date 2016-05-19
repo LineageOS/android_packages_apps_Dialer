@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_c6773cd4",
+        "filename": "src/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "This can be done once at the beginning to protect the call to SmartDialPrefix.getAdvancedQuery(mQuery) as well.",
+      "range": {
+        "startLine": 1208,
+        "startChar": 34,
+        "endLine": 1208,
+        "endChar": 59
+      },
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_86814492",
+        "filename": "src/com/android/dialer/dialpad/SmartDialCursorLoader.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "It would b better to use !TextUtils.isEmpty(mQuery)",
+      "range": {
+        "startLine": 96,
+        "startChar": 38,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_26bc1068",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "This can be done once at the beginning to protect the call to SmartDialPrefix.getAdvancedQuery(mQuery) as well.",
+      "range": {
+        "startLine": 196,
+        "startChar": 30,
+        "endLine": 196,
+        "endChar": 56
+      },
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a67c80b5",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "Logically, if it is the sum of PREFIX_CODE_LENGTH and COUNTRY_CODE_LENGTH, then it should be initialized similarly.",
+      "range": {
+        "startLine": 85,
+        "startChar": 62,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c6b2dc94",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "This is used only to describe the purpose of the method. Please update with the purpose of the method.",
+      "range": {
+        "startLine": 676,
+        "startChar": 4,
+        "endLine": 678,
+        "endChar": 7
+      },
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_267170e1",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "You can add the above comment here as follows :\n//We can add more prefix code.",
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_464d8c98",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 14621
+      },
+      "writtenOn": "2016-05-19T06:15:41Z",
+      "side": 1,
+      "message": "should it be COUNTRY_CODE_LENGTH ?",
+      "range": {
+        "startLine": 705,
+        "startChar": 80,
+        "endLine": 705,
+        "endChar": 98
+      },
+      "revId": "a3637149753ab7035ca6a8bcf86865565d846f06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
