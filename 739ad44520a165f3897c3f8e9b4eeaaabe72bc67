@@ -22,6 +22,30 @@
       "revId": "739ad44520a165f3897c3f8e9b4eeaaabe72bc67",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_fd3e86d8",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-19T20:55:18Z",
+      "side": 1,
+      "message": "Moved it to a map structure, still haven\u0027t been able to repro this but have validated that all callbacks are canceled/cleared when onPause() is called.",
+      "parentUuid": "5faad753_2ba939de",
+      "range": {
+        "startLine": 47,
+        "startChar": 42,
+        "endLine": 47,
+        "endChar": 69
+      },
+      "revId": "739ad44520a165f3897c3f8e9b4eeaaabe72bc67",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
