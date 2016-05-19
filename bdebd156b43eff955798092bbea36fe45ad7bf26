@@ -34,6 +34,24 @@
       "revId": "bdebd156b43eff955798092bbea36fe45ad7bf26",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_3a6424b9",
+        "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-05-19T15:29:03Z",
+      "side": 1,
+      "message": "your call, just wanted to make sure we thought about this.",
+      "parentUuid": "5faad753_3a3bc49c",
+      "revId": "bdebd156b43eff955798092bbea36fe45ad7bf26",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
