@@ -109,7 +109,7 @@
   <string name="search_shortcut_call_using">Hovor pomocí <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ano</string>
-  <string name="callerinfo_provider_auth_no">Ne, děkuji</string>
+  <string name="callerinfo_provider_auth_no_thanks">Ne, děkuji</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> má přístup k Vašim kontaktům, profilu Me a účtu Cyanogen OS, který může obsahovat Vaše e-mailové adresy.</string>
   <string name="callerinfo_provider_auth_learn_more">Dozvědět se více</string>
   <string name="callerinfo_provider_auth_desc">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající a blokoval nežádoucí hovory?</string>

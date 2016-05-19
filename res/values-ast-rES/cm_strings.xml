@@ -109,7 +109,7 @@
   <string name="search_shortcut_call_using">Llamar usando <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Sí</string>
-  <string name="callerinfo_provider_auth_no">Non, gracies</string>
+  <string name="callerinfo_provider_auth_no_thanks">Non, gracies</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> tendrá accesu a los contautos, perfil y a la cuenta de Cyanogen OS, que podría incluyir la to direición de corréu-e.</string>
   <string name="callerinfo_provider_auth_learn_more">Lleer más</string>
   <string name="callerinfo_provider_auth_desc">¡Bienllegáu! ¿Prestaríate usar <xliff:g id="provider_name">%s</xliff:g> pa identificar les llamaes de númberos desconocíos y bloquiar llamaes non deseaes?</string>
