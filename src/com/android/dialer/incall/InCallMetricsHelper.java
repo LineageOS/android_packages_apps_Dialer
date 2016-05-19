@@ -142,7 +142,7 @@ public class InCallMetricsHelper {
         if (jobScheduler != null) {
             boolean jobExists = false;
             for (JobInfo ji : jobScheduler.getAllPendingJobs()) {
-                if (ji.getId() != METRICS_JOB_ID) {
+                if (ji.getId() == METRICS_JOB_ID) {
                     // Job exists
                     jobExists = true;
                     break;
