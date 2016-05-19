@@ -1197,4 +1197,18 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         }
         return result;
     }
+
+    public ArrayList<ContactNumber> getExtraMatches(String query, SmartDialNameMatcher nameMatcher,
+            String usernameMimeType) {
+        ArrayList<ContactNumber> result = Lists.newArrayList();
+        String advancedQuery = SmartDialPrefix.getAdvanceQuery(query);
+        if (!TextUtils.isEmpty(advancedQuery)) {
+            result = getLooseMatches(advancedQuery, nameMatcher, usernameMimeType );
+        }
+        if (result.size () < 1 && !TextUtils.isEmpty(query) && query.charAt(0) == '0') {
+            advancedQuery = query.substring(1);
+            return getLooseMatches(advancedQuery, nameMatcher, usernameMimeType);
+        }
+        return result;
+    }
 }
