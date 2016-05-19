@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_7db4d635",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-19T18:43:07Z",
+      "side": 1,
+      "message": "unused import",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "4b307d33139aabe1e17586c4b4dcd808ddfb65e9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_1d85a25a",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-19T18:43:07Z",
+      "side": 1,
+      "message": "unused string",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 67
+      },
+      "revId": "4b307d33139aabe1e17586c4b4dcd808ddfb65e9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
