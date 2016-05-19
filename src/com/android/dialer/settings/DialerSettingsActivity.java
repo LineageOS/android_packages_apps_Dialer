@@ -423,6 +423,13 @@ public class DialerSettingsActivity extends PreferenceActivity {
                             AmbientConnection.CLIENT.get(getContext().getApplicationContext()));
                 }
             });
+            builder.setNegativeButton(R.string.callerinfo_provider_auth_no,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // No-op
+                }
+            });
             builder.show();
         }
 
