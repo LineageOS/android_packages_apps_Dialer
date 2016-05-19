@@ -160,7 +160,11 @@ public class SmartDialNameMatcher {
      *         SmartDialMatchPosition with the matching positions otherwise
      */
     public SmartDialMatchPosition matchesNumber(String phoneNumber) {
-        return matchesNumber(phoneNumber, mQuery, true);
+        SmartDialMatchPosition firstResult = matchesNumber(phoneNumber, mQuery, true);
+        if (firstResult == null) {
+            return extraMatchesNumber(phoneNumber);
+        }
+        return firstResult;
     }
 
     /**
@@ -174,6 +178,28 @@ public class SmartDialNameMatcher {
      */
     public SmartDialMatchPosition matchesNumber(String phoneNumber, String query) {
         return matchesNumber(phoneNumber, query, true);
+    }
+
+    /**
+     * Matches a phone number against a query, by removing the prefix or country code or 0
+     * @param phoneNumber - Raw phone number
+     * @return a valid SmartDialMatchPosition with the matching positions
+     */
+
+    public SmartDialMatchPosition extraMatchesNumber(String phoneNumber) {
+        SmartDialMatchPosition result = null;
+        String query;
+        if (!TextUtils.isEmpty(mQuery)) {
+            query = SmartDialPrefix.getAdvanceQuery(mQuery);
+            if (!TextUtils.isEmpty(query)) {
+                result = matchesNumber(phoneNumber, query, true);
+            }
+            if (result == null && mQuery.charAt(0) == '0') {
+                query = mQuery.substring(1);
+                return matchesNumber(phoneNumber, query, true);
+            }
+        }
+        return result;
     }
 
     /**

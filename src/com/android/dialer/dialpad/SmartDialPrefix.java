@@ -77,6 +77,15 @@ public class SmartDialPrefix {
 
     private static boolean sNanpInitialized = false;
 
+    /** Set of supported prefix code in front of the phone number*/
+    private  static Set<String> sCountryPrefix = null;
+
+    /** Maximum length of Prefix code initialize in initCountryPrefix*/
+    private static final int PREFIX_CODE_LENGTH = 4;
+
+    /** Maximum length of Country code initialize in initCountryCodes*/
+    private static final int COUNTRY_CODE_LENGTH = 3;
+
     private static final Map<String, SmartDialMap> languageToSmartDialMap = new HashMap<String, SmartDialMap>();
     static {
         languageToSmartDialMap.put("ko", new KoreanSmartDialMap());
@@ -653,5 +662,92 @@ public class SmartDialPrefix {
      */
     public static boolean getUserInNanpRegion() {
         return sUserInNanpRegion;
+    }
+
+    /**
+     * Checkes whether a prefix code is valid.
+     */
+
+    public static boolean isValidPrefixCode(String query) {
+        if (sCountryPrefix == null) {
+            sCountryPrefix = initCountryPrefix();
+        }
+        return sCountryPrefix.contains(query);
+    }
+
+    /**
+     * Initialize prefix code.
+     */
+
+    private static Set<String> initCountryPrefix() {
+        final HashSet<String> result = new HashSet<String> ();
+        result.add("00");
+        result.add("000");
+        result.add("001");
+        result.add("002");
+        result.add("004");
+        result.add("005");
+        result.add("006");
+        result.add("007");
+        result.add("008");
+        result.add("009");
+        result.add("010");
+        result.add("011");
+        result.add("012");
+        result.add("013");
+        result.add("014");
+        result.add("015");
+        result.add("016");
+        result.add("017");
+        result.add("018");
+        result.add("019");
+        result.add("119");
+        result.add("0011");
+        result.add("0014");
+        result.add("0015");
+        result.add("0018");
+        result.add("0019");
+        result.add("0021");
+        result.add("0030");
+        result.add("0031");
+        result.add("0041");
+        result.add("0050");
+        result.add("0059");
+        result.add("0060");
+        //We can add more prefix code.
+        return result;
+    }
+
+    public static String getAdvanceQuery(String query) {
+        String prefixCode = "", countryCode = "";
+        int prefixCodeOffset = 0, countryCodeOffset = 0;
+        String returnQuery = "";
+
+        if (query.length() > COUNTRY_CODE_LENGTH) {
+            for (int i = 1; i <= COUNTRY_CODE_LENGTH; i++) {
+                countryCode = query.substring(0, i);
+                if (SmartDialPrefix.isValidCountryCode(countryCode)) {
+                    returnQuery = query.substring(i);
+                    return returnQuery;
+                }
+            }
+        }
+        if (query.length() > (PREFIX_CODE_LENGTH + COUNTRY_CODE_LENGTH)) {
+            for (int i = PREFIX_CODE_LENGTH; i >= 1; i--) {
+                prefixCode = query.substring(0, i);
+                if (SmartDialPrefix.isValidPrefixCode(prefixCode)) {
+                    prefixCodeOffset = i;
+                    for (int j = prefixCodeOffset + 1; j <= (prefixCodeOffset + COUNTRY_CODE_LENGTH)
+                            ; j++) {
+                        countryCode = query.substring(prefixCodeOffset, j);
+                        if (SmartDialPrefix.isValidCountryCode(countryCode)) {
+                            countryCodeOffset = j;
+                            return query.substring(countryCodeOffset);
+                        }
+                    }
+                }
+            }
+        }
+        return returnQuery;
     }
 }
