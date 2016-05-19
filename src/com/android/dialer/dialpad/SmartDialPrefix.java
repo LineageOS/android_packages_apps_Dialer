@@ -77,6 +77,21 @@ public class SmartDialPrefix {
 
     private static boolean sNanpInitialized = false;
 
+    /** Set of supported prefix code in front of the phone number*/
+    private  static Set<String> sCountryPrefix = null;
+
+    /** Set of supported trunk code in front of the phone number*/
+    private  static Set<String> sTrunkCode = null;
+
+    /** Maximum length of Prefix code initialize in initCountryPrefix*/
+    private static final int PREFIX_CODE_LENGTH = 4;
+
+    /** Maximum length of Country code initialize in initCountryCodes*/
+    private static final int COUNTRY_CODE_LENGTH = 3;
+
+    /** Maximum length of Trunk code initialize in initTrunkCode*/
+    private static final int TRUNK_CODE_LENGTH = 3;
+
     private static final Map<String, SmartDialMap> languageToSmartDialMap = new HashMap<String, SmartDialMap>();
     static {
         languageToSmartDialMap.put("ko", new KoreanSmartDialMap());
@@ -653,5 +668,132 @@ public class SmartDialPrefix {
      */
     public static boolean getUserInNanpRegion() {
         return sUserInNanpRegion;
+    }
+
+    /**
+     * Checkes whether a prefix code is valid.
+     */
+    public static boolean isValidPrefixCode(String query) {
+        if (sCountryPrefix == null) {
+            sCountryPrefix = initCountryPrefix();
+        }
+        return sCountryPrefix.contains(query);
+    }
+
+    /**
+     * Checkes whether a trunk code is valid.
+     */
+    public static boolean isValidTrunkCode(String query) {
+        if (sTrunkCode == null) {
+            sTrunkCode = initTrunkCode();
+        }
+        return sTrunkCode.contains(query);
+    }
+
+    /**
+     * Initialize prefix code.
+     */
+    private static Set<String> initCountryPrefix() {
+        final HashSet<String> result = new HashSet<String> ();
+        result.add("00");
+        result.add("000");
+        result.add("001");
+        result.add("002");
+        result.add("004");
+        result.add("005");
+        result.add("006");
+        result.add("007");
+        result.add("008");
+        result.add("009");
+        result.add("010");
+        result.add("011");
+        result.add("012");
+        result.add("013");
+        result.add("014");
+        result.add("015");
+        result.add("016");
+        result.add("017");
+        result.add("018");
+        result.add("019");
+        result.add("119");
+        result.add("810");
+        result.add("990");
+        result.add("994");
+        result.add("999");
+        result.add("0011");
+        result.add("0014");
+        result.add("0015");
+        result.add("0018");
+        result.add("0019");
+        result.add("0021");
+        result.add("0030");
+        result.add("0031");
+        result.add("0041");
+        result.add("0050");
+        result.add("0059");
+        result.add("0060");
+        //We can add more prefix code.
+        return result;
+    }
+
+    private static Set<String> initTrunkCode() {
+        final HashSet<String> result = new HashSet<String> ();
+        result.add("0");
+        result.add("1");
+        result.add("8");
+        result.add("01");
+        result.add("06");
+        result.add("80");
+        result.add("044");
+        result.add("045");
+        return result;
+    }
+
+    public static String getAdvanceQuery(String query) {
+        String prefixCode = "", countryCode = "", trunkCode = "";
+        int prefixCodeOffset = 0, countryCodeOffset = 0, trunkCodeOffset = 0;
+        String returnQuery = "";
+
+        /** Return Query if user search with '+' and country code and phone number
+         * like - + 44 7878787878 0r + 1 7878787878 */
+        if (query.length() > COUNTRY_CODE_LENGTH) {
+            for (int i = 1; i <= COUNTRY_CODE_LENGTH; i++) {
+                countryCode = query.substring(0, i);
+                if (SmartDialPrefix.isValidCountryCode(countryCode)) {
+                    returnQuery = query.substring(i);
+                    return returnQuery;
+                }
+            }
+        }
+        /**Return Query if user search with prefix and country code and phone number
+         * like - 00 44 7878787878 */
+        if (query.length() > (PREFIX_CODE_LENGTH + COUNTRY_CODE_LENGTH)) {
+            for (int i = PREFIX_CODE_LENGTH; i >= 1; i--) {
+                prefixCode = query.substring(0, i);
+                if (SmartDialPrefix.isValidPrefixCode(prefixCode)) {
+                    prefixCodeOffset = i;
+                    for (int j = prefixCodeOffset + 1; j <= (prefixCodeOffset + COUNTRY_CODE_LENGTH)
+                            ; j++) {
+                        countryCode = query.substring(prefixCodeOffset, j);
+                        if (SmartDialPrefix.isValidCountryCode(countryCode)) {
+                            countryCodeOffset = j;
+                            return query.substring(countryCodeOffset);
+                        }
+                    }
+                }
+            }
+        }
+        /**Return Query if user serch with trunk code and phone number
+         * like - 0 7878787878 or 1 7878787878 */
+        if (returnQuery.equals("") && query.length() > TRUNK_CODE_LENGTH) {
+            for (int i = TRUNK_CODE_LENGTH; i >= 1; i--) {
+                trunkCode = query.substring(0, i);
+                if (SmartDialPrefix.isValidTrunkCode(trunkCode)) {
+                    returnQuery = query.substring(i);
+                    return returnQuery;
+                }
+            }
+        }
+        return returnQuery;
     }
 }
