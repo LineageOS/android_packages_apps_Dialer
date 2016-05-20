@@ -177,8 +177,7 @@ public class CallerInfoProviderPicker {
 
         nudge.addButton(new DialogNudge.Button(res.getString(R.string.callerinfo_provider_auth_yes),
                 AlertDialog.BUTTON_POSITIVE, positivePendingIntent));
-        nudge.addButton(new DialogNudge.Button(
-                res.getString(R.string.callerinfo_provider_auth_no_thanks),
+        nudge.addButton(new DialogNudge.Button(res.getString(R.string.callerinfo_provider_auth_no),
                 AlertDialog.BUTTON_NEGATIVE, negativePendingIntent));
 
         DiscoveryManagerServices.DiscoveryManagerApi.
