@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5faad753_b31d9f10",
+        "filename": "src/com/android/dialer/callerinfo/CallerInfoProviderPicker.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-20T17:02:49Z",
+      "side": 1,
+      "message": "line width",
+      "range": {
+        "startLine": 180,
+        "startChar": 98,
+        "endLine": 180,
+        "endChar": 102
+      },
+      "revId": "bdebd156b43eff955798092bbea36fe45ad7bf26",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_e646f821",
         "filename": "src/com/android/dialer/settings/DialerSettingsActivity.java",
         "patchSetId": 2
