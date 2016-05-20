@@ -16,7 +16,7 @@
 
 package com.android.incallui;
 
-import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_WORK_CALL;
+import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_ENTERPRISE_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VOICE_INCOMING_CALL;
@@ -557,7 +557,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         }
 
         // Is the call placed through work connection service.
-        boolean isWorkCall = call.hasProperty(PROPERTY_WORK_CALL);
+        boolean isWorkCall = call.hasProperty(PROPERTY_ENTERPRISE_CALL);
         if(userType == ContactsUtils.USER_TYPE_WORK || isWorkCall) {
             resId = getWorkStringFromPersonalString(resId);
         }

@@ -58,7 +58,7 @@ import com.android.incalluibind.ObjectFactory;
 
 import java.lang.ref.WeakReference;
 
-import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_WORK_CALL;
+import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_ENTERPRISE_CALL;
 /**
  * Presenter for the Call Card Fragment.
  * <p>
@@ -427,7 +427,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private void updatePrimaryCallState() {
         if (getUi() != null && mPrimary != null) {
-            boolean isWorkCall = mPrimary.hasProperty(PROPERTY_WORK_CALL)
+            boolean isWorkCall = mPrimary.hasProperty(PROPERTY_ENTERPRISE_CALL)
                     || (mPrimaryContactInfo == null ? false
                             : mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
             getUi().setCallState(
@@ -763,7 +763,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                 .showIncomingVideo(mPrimary.getVideoState(), mPrimary.getState());
 
         // Call placed through a work phone account.
-        boolean hasWorkCallProperty = mPrimary.hasProperty(PROPERTY_WORK_CALL);
+        boolean hasWorkCallProperty = mPrimary.hasProperty(PROPERTY_ENTERPRISE_CALL);
 
         if (mPrimary.isConferenceCall()) {
             Log.d(TAG, "Update primary display info for conference call.");
