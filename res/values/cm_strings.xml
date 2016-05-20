@@ -136,8 +136,8 @@
 
     <!-- CallerInfo Provider Settings strings -->
     <string name="callerinfo_provider_auth_yes">Yes</string>
-    <string name="callerinfo_provider_auth_no">No</string>
-    <string name="callerinfo_provider_auth_no_thanks">No thanks</string>
+    <string name="callerinfo_provider_auth_no_short">No</string>
+    <string name="callerinfo_provider_auth_no">No thanks</string>
     <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> will have access to your contacts, Me profile, and Cyanogen OS account, which may include your email address.</string>
     <string name="callerinfo_provider_auth_learn_more">Learn more</string>
     <string name="callerinfo_provider_auth_desc">Welcome! Would you like <xliff:g id="provider_name">%s</xliff:g> to identify unknown callers and block unwanted calls?</string>
