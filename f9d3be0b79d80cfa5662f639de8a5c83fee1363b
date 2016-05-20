@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_d3b61bfb",
+        "filename": "res/values/cm_strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-20T17:20:39Z",
+      "side": 1,
+      "message": "This\u0027ll invalidate the meaning of the translations that already exist.\n\nIm not sure if the current translations system accounts for the content too rather than jst being reliant on the id (string name). I would play it safe and not re-define the string.",
+      "range": {
+        "startLine": 139,
+        "startChar": 18,
+        "endLine": 139,
+        "endChar": 45
+      },
+      "revId": "f9d3be0b79d80cfa5662f639de8a5c83fee1363b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
