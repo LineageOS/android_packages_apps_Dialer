@@ -241,7 +241,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
-    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"通話をブロックしています"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"通話のブロック"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"通話のブロックは一時的にOFFです"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、通話のブロックは無効になっています。48時間経過すると、通話のブロックは自動的に有効になります。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"番号をインポート"</string>

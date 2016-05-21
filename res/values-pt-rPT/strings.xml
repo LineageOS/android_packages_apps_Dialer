@@ -31,7 +31,7 @@
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> desbloqueado"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ANULAR"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Eliminar"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Editar o número antes de efetuar a chamada"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Editar número antes de ligar"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Limpar histórico de chamadas"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Eliminar correio de voz"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arquivar msg. correio de voz"</string>

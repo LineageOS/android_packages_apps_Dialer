@@ -31,7 +31,7 @@
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"Արգելաբացվել է <xliff:g id="NUMBER">%1$s</xliff:g> համար"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ՀԵՏԱՐԿԵԼ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Ջնջել"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Խմբագրել համարը զանգելուց առաջ"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Փոփոխել համարը զանգելուց առաջ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Ջնջել զանգերի պատմությունը"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ջնջել ձայնային փոստը"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Արխիվացնել ձայնային փոստը"</string>

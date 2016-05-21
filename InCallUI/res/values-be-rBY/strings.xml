@@ -128,7 +128,7 @@
     <string name="camera_not_ready" msgid="6614469280264241251">"Камера не гатовая"</string>
     <string name="camera_ready" msgid="2614541247814590887">"Камера гатовая"</string>
     <string name="unknown_call_session_event" msgid="2947023743819984299">"Невядомая падзея сеансу выкліку"</string>
-    <string name="voicemail_provider" msgid="2878119321474918370">"Служба"</string>
+    <string name="voicemail_provider" msgid="2878119321474918370">"Сэрвіс"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"Наладка"</string>
     <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;Не зададзены&gt;"</string>
     <string name="other_settings" msgid="6699076019841942826">"Іншыя налады выклікаў"</string>

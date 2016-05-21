@@ -122,7 +122,7 @@
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Ovozli qo‘ng‘iroqqa o‘zgartirish"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Kamerani almashtirish"</string>
     <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Videoni to‘xtatib turish"</string>
-    <string name="onscreenOverflowText" msgid="7932741239724473887">"Ko‘proq"</string>
+    <string name="onscreenOverflowText" msgid="7932741239724473887">"Boshqa sozlamalar"</string>
     <string name="player_started" msgid="3478865572468310331">"Pleyer ishga tushirildi"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Pleyer to‘xtatildi"</string>
     <string name="camera_not_ready" msgid="6614469280264241251">"Kamera tayyor emas"</string>

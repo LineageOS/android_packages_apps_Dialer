@@ -146,7 +146,7 @@
     <string name="add_contact_not_available" msgid="5547311613368004859">"ਕੋਈ ਸੰਪਰਕ ਐਪ ਉਪਲਬਧ ਨਹੀਂ"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"ਵੌਇਸ ਖੋਜ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ਇੱਕ ਫੋਨ ਕਾਲ ਨਹੀਂ ਕਰ ਸਕਦਾ ਕਿਉਂਕਿ ਫੋਨ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਇਆ ਗਿਆ ਹੈ।"</string>
-    <string name="activity_not_available" msgid="2287665636817987623">"ਉਸ ਲਈ ਇਸ ਡਿਵਾਈਸ ਤੇ ਕੋਈ ਐਪ ਨਹੀਂ"</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"ਉਸ ਲਈ ਇਸ ਡੀਵਾਈਸ ਤੇ ਕੋਈ ਐਪ ਨਹੀਂ"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"ਸੰਪਰਕ ਖੋਜੋ"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"ਨੰਬਰ ਜੋੜੋ ਜਾਂ ਸੰਪਰਕ ਖੋਜੋ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"ਤੁਹਾਡਾ ਕਾਲ ਇਤਿਹਾਸ ਖਾਲੀ ਹੈ"</string>

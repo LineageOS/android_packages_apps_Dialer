@@ -41,7 +41,7 @@
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ANULAȚI"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ARHIVĂ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Ștergeți istoricul apelurilor?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Astfel vor fi șterse toate apelurile din istoric"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Vor fi șterse toate apelurile din istoric"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Se șterge istoricul apelurilor…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefon"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"Apel nepreluat"</string>

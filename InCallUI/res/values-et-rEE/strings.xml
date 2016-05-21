@@ -141,7 +141,7 @@
     <string name="custom_message_cancel" msgid="5920059627508662163">"Tühista"</string>
     <string name="custom_message_send" msgid="3798076337006735995">"Saada"</string>
     <string name="description_target_answer" msgid="1111945818996518320">"Vastamine"</string>
-    <string name="description_target_send_sms" msgid="3652217769615310018">"SMS-i saatmine"</string>
+    <string name="description_target_send_sms" msgid="3652217769615310018">"Saada SMS"</string>
     <string name="description_target_decline" msgid="7108154434759234035">"Tagasilükkamine"</string>
     <string name="description_target_answer_video_call" msgid="4655616461181308405">"Vastamine videokõnena"</string>
     <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Vastamine helikõnena"</string>

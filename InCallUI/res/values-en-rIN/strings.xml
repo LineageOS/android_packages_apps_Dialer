@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4753450867264774000">"Telephone"</string>
+    <string name="phoneAppLabel" product="default" msgid="4753450867264774000">"Phone"</string>
     <string name="onHold" msgid="527593602772521700">"On hold"</string>
     <string name="unknown" msgid="3646075119047488748">"unknown"</string>
     <string name="private_num" msgid="6081418498487514686">"Private number"</string>

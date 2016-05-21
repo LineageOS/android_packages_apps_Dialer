@@ -239,7 +239,7 @@
     <item msgid="1036113889050195575">"Normal"</item>
     <item msgid="6177579030803486015">"Lang"</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtigt svar"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtige svar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Opkald"</string>
     <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Opkaldsblokering"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Opkaldsblokering er midlertidigt slået fra"</string>

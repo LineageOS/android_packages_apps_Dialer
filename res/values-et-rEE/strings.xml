@@ -95,7 +95,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Kuva ainult kõnepostisõnumeid"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Kuva kõik kõned"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lisa 2-sekundiline paus"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Lisa ootama"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Lisa ootamine"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Seaded"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Uus kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Kõik kontaktid"</string>
@@ -178,8 +178,8 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Võta tagasi"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Helista <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Loo uus kontakt"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Kontaktile lisamine"</string>
-    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS-i saatmine"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Lisa kontaktile"</string>
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Saada SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videokõne tegemine"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blokeeri number"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uus/uut vastamata kõne(t)"</string>

@@ -28,7 +28,7 @@
     <string name="action_block_number" msgid="1482657602262262134">"Zuia nambari"</string>
     <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> imezuiwa"</string>
     <string name="action_unblock_number" msgid="3043777622269776127">"Ondolea nambari kizuizi"</string>
-    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> imeondolewa kizuizi"</string>
+    <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> imeacha kuzuiwa"</string>
     <string name="block_number_undo" msgid="591338370336724156">"TENDUA"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Futa"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Badilisha nambari kabla ya kupiga simu"</string>
@@ -40,8 +40,8 @@
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Umewekwa kwenye kumbukumbu"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"TENDUA"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"KUMBUKUMBU"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Je, ungependa kufuta rekodi ya simu zilizopigwa?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hii itafuta simu zote kutoka rekodi zako"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Rekodi ya simu zilizopigwa ifutwe?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hatua hii itafuta rekodi yote ya simu"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Inafuta rekodi ya simu zilizopigwa..."</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Simu"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"Simu ambayo haikujibiwa"</string>
@@ -168,8 +168,8 @@
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Simu zinazopigwa kutoka nambari hii zitazuiwa, lakini mpigaji bado anaweza kukutumia ujumbe wa sauti."</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Hutapokea simu wala SMS kutoka kwa nambari hii tena."</string>
     <string name="block_number_ok" msgid="770551992296781873">"ZUIA"</string>
-    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Ungependa kuondoa kizuizi kwenye <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_ok" msgid="6449899182699684786">"ONDOA KIZUIZI"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Ungependa kuacha kuzuia <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"ACHA KUZUIA"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Unaowasiliana nao zaidi"</string>
     <string name="tab_history" msgid="2563144697322434940">"Rekodi ya Simu Zilizopigwa"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Anwani zote"</string>
@@ -184,7 +184,7 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Zuia nambari"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Simu <xliff:g id="NUMBER">%s</xliff:g> za karibuni ambazo hazikujibiwa"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Hakuna mtu aliye katika orodha yako ya watu unaowasiliana nao zaidi"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ongeza kipendwa"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ongeza anwani unazopenda zaidi"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Bado huna anwani zozote"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Ongeza anwani"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Gusa picha ili uone nambari zote au gusa na ushikilie ili upange upya"</string>
@@ -228,7 +228,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Cheza polepole."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Anzisha au usitishe kucheza."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"Chaguo za onyesho"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Chaguo za kuonyesha"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sauti na mtetemo"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Zana za walio na matatizo ya kuona au kusikia"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Mlio wa simu"</string>
