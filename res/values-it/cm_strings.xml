@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Chiamata con <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Si</string>
+  <string name="callerinfo_provider_auth_no_short">No</string>
   <string name="callerinfo_provider_auth_no">No, grazie</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> deve accedere ai tuoi contatti, profilo Me, e l\'account Cyanogen OS, che potrebbe includere il tuo indirizzo email.</string>
   <string name="callerinfo_provider_auth_learn_more">Ulteriori informazioni</string>

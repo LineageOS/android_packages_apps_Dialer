@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Soita palvelulla <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Kyllä</string>
+  <string name="callerinfo_provider_auth_no_short">Ei</string>
   <string name="callerinfo_provider_auth_no">Ei kiitos</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> voi käyttää yhteystietojasi, Minä-profiilia ja Cyanogen OS-tiliä, joka voi sisältää sähköpostiosoitteesi.</string>
   <string name="callerinfo_provider_auth_learn_more">Lue lisää</string>

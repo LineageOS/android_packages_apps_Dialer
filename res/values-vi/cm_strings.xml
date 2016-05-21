@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Gọi điện thoại bằng <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Có</string>
+  <string name="callerinfo_provider_auth_no_short">Không</string>
   <string name="callerinfo_provider_auth_no">Không, cảm ơn</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> sẽ có quyền truy cập danh bạ của bạn, cấu hình Tôi, và tài khoản hệ điều hành Cyanogen, có thể bao gồm địa chỉ email của bạn.</string>
   <string name="callerinfo_provider_auth_learn_more">Tìm hiểu thêm</string>

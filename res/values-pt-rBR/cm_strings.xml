@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Ligar usando <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Sim</string>
+  <string name="callerinfo_provider_auth_no_short">Não</string>
   <string name="callerinfo_provider_auth_no">Não, obrigado</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> terá acesso aos seus contatos, perfil e conta Cyanogen OS, que pode incluir o seu endereço de e-mail.</string>
   <string name="callerinfo_provider_auth_learn_more">Saiba Mais</string>

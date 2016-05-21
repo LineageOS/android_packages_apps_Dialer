@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">使用 <xliff:g id="name">%1$s</xliff:g> 呼叫</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">是</string>
+  <string name="callerinfo_provider_auth_no_short">否</string>
   <string name="callerinfo_provider_auth_no">不用了</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> 会访问您的联系人，Me 配置文件和 Cyanogen OS 帐户，其中可能包括您的电子邮件地址。</string>
   <string name="callerinfo_provider_auth_learn_more">了解更多</string>

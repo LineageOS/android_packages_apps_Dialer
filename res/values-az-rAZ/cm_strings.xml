@@ -83,6 +83,7 @@
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Bəli</string>
+  <string name="callerinfo_provider_auth_no_short">Xeyr</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <!-- Note DeepLink mod settings summary in Dialer -->

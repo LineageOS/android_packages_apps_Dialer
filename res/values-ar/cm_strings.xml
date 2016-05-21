@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">الاتصال باستخدام <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">نعم</string>
+  <string name="callerinfo_provider_auth_no_short">لا</string>
   <string name="callerinfo_provider_auth_no">لا شكرًا</string>
   <string name="callerinfo_provider_auth_access">سيكون لدى <xliff:g id="provider_name">%s</xliff:g> إمكانية الوصول إلى جهات الاتصال الخاصة بك، ملف التعريف الخاص بي، وحساب Cyanogen OS، والذي قد يتضمن عنوان بريدك الإلكتروني.</string>
   <string name="callerinfo_provider_auth_learn_more">تعلم المزيد</string>

@@ -101,6 +101,7 @@
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_no_short">Nee</string>
   <string name="callerinfo_provider_auth_no">Nee, bedankt</string>
   <string name="callerinfo_provider_auth_learn_more">Lees meer</string>
   <string name="callerinfo_provider_auth_desc_no_spam">Welkom! Wilt u <xliff:g id="provider_name">%s</xliff:g> gebruiken om onbekende bellers te identificeren?</string>

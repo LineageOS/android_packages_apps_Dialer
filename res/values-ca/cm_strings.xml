@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Truca utilitzant <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Sí</string>
+  <string name="callerinfo_provider_auth_no_short">No</string>
   <string name="callerinfo_provider_auth_no">No, gràcies</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> tindrà accés als teus contactes, perfil Me i el compte de Cyanogen OS, que pot incloure la teva adreça de correu electrònic.</string>
   <string name="callerinfo_provider_auth_learn_more">Aprèn més</string>

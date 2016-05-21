@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Позови користећи <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Да</string>
+  <string name="callerinfo_provider_auth_no_short">Не</string>
   <string name="callerinfo_provider_auth_no">Не хвала</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> ће приступити твојим контактима, профилу и Cyanogen OS налогу што може укључити и твоју Е-пошту.</string>
   <string name="callerinfo_provider_auth_learn_more">Сазнај више</string>

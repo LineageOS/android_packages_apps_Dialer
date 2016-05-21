@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">התקשר באמצעות <xliff:g id="name">%1$s </xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">כן</string>
+  <string name="callerinfo_provider_auth_no_short">לא</string>
   <string name="callerinfo_provider_auth_no">לא, תודה</string>
   <string name="callerinfo_provider_auth_access">ל<xliff:g id="provider_name">%s</xliff:g> תהיה גישה לאנשי הקשר, הפרופילים, וחשבון מערכת Cyanogen שלך, אשר עשויים לכלול את כתובת הדוא\"ל שלך.</string>
   <string name="callerinfo_provider_auth_learn_more">למידע נוסף</string>
