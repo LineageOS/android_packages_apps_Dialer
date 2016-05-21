@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">โทรโดยใช้<xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">ใช่</string>
+  <string name="callerinfo_provider_auth_no_short">ไม่</string>
   <string name="callerinfo_provider_auth_no">ไม่ ขอบคุณ</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> จะสามารถเข้าถึงรายชื่อติดต่อของคุณ โปรไฟล์ของฉัน บัญชี Cyanogen OS ซึ่งอาจมีที่อยู่อีเมลของคุณรวมอยู่ด้วย</string>
   <string name="callerinfo_provider_auth_learn_more">เรียนรู้เพิ่มเติม</string>

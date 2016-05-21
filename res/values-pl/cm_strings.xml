@@ -106,6 +106,7 @@
   <string name="search_shortcut_call_using">Połącz za pomocą <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Tak</string>
+  <string name="callerinfo_provider_auth_no_short">Nie</string>
   <string name="callerinfo_provider_auth_no">Nie, dziękuję</string>
   <string name="callerinfo_provider_auth_learn_more">Dowiedz się więcej</string>
   <string name="block_dialog_title">Zablokować ten numer?</string>

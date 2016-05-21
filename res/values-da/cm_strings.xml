@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Opkald ved hjælp af <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_no_short">Nej</string>
   <string name="callerinfo_provider_auth_no">Nej tak</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> vil have adgang til dine kontakter, din profil samt din Cyanogen OS konto, der kan indeholde din e-mail adresse.</string>
   <string name="callerinfo_provider_auth_learn_more">Lær mere</string>

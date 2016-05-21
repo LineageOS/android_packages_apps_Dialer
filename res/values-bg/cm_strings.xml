@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Повикване, използвайки <xliff:g id="name">%1$s </xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Да</string>
+  <string name="callerinfo_provider_auth_no_short">Не</string>
   <string name="callerinfo_provider_auth_no">Не, благодаря</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s </xliff:g> ще има достъп до Вашите контакти, профилът Ви и акаунта в Cyanogen ОС, които могат да включват адреса на Вашата електронна поща.</string>
   <string name="callerinfo_provider_auth_learn_more">Научете повече</string>

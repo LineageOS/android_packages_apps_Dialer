@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Κλήση μέσω <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ναί</string>
+  <string name="callerinfo_provider_auth_no_short">Όχι</string>
   <string name="callerinfo_provider_auth_no">Όχι, ευχαριστώ</string>
   <string name="callerinfo_provider_auth_access">Το <xliff:g id="provider_name">%s</xliff:g> θα έχει πρόσβαση στις επαφές, το Me προφίλ, και τον Cyanogen OS λογαριασμό σας, ο οποίος μπορεί να περιλαμβάνει τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.</string>
   <string name="callerinfo_provider_auth_learn_more">Μάθετε περισσότερα</string>

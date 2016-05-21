@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Deitu <xliff:g id="name">%1$s</xliff:g> erabiliz</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Bai</string>
+  <string name="callerinfo_provider_auth_no_short">Ez</string>
   <string name="callerinfo_provider_auth_no">Ez, eskerrik asko</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> Zure kontaktuak, Me profila eta Cyanogen OS kontua atzitu ditzake, azken hone e-posta helbidea izan dezake ere.</string>
   <string name="callerinfo_provider_auth_learn_more">Ikasi gehiago</string>

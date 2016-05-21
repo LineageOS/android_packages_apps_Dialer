@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g> kullanarak ara</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Evet</string>
+  <string name="callerinfo_provider_auth_no_short">Hayır</string>
   <string name="callerinfo_provider_auth_no">Hayır teşekkürler</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> kişilerinize, Me profilinize ve e-posta adresinizin bulunduğu Cyanogenmod OS hesabınıza erişebilecek.</string>
   <string name="callerinfo_provider_auth_learn_more">Daha fazla bilgi edinin</string>

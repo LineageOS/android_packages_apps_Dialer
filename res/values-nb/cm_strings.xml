@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Ring med bruk av <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
+  <string name="callerinfo_provider_auth_no_short">Nei</string>
   <string name="callerinfo_provider_auth_no">Nei takk</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> kommer til å ha tilgang til kontaktene dine, Me profilen din og Cyanogen OS kontoen din som kan inkludere e-post adressen din.</string>
   <string name="callerinfo_provider_auth_learn_more">Lær mer</string>
@@ -140,4 +141,5 @@
   <string name="search_shortcut_view_note">Vis notat</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Skriv notater hvor som helst</string>
+  <string name="callerinfo_provider_status_disabling">Deaktiverer</string>
 </resources>

@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Позвонить, используя <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Да</string>
+  <string name="callerinfo_provider_auth_no_short">Нет</string>
   <string name="callerinfo_provider_auth_no">Нет</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> получит доступ к вашим контактам, профилю и аккаунту Cyanogen OS, которые могут содержать ваш адрес эл. почты.</string>
   <string name="callerinfo_provider_auth_learn_more">Подробнее</string>

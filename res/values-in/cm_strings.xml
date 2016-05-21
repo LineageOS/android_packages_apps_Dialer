@@ -109,6 +109,7 @@
   <string name="search_shortcut_call_using">Panggil menggunakan <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ya</string>
+  <string name="callerinfo_provider_auth_no_short">Tidak</string>
   <string name="callerinfo_provider_auth_no">Tidak, terima kasih</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> akan dapat mengakses kontak, profil, dan akun Cyanogen OS Anda, yang mungkin termasuk alamat surel.</string>
   <string name="callerinfo_provider_auth_learn_more">Pelajari selengkapnya</string>
