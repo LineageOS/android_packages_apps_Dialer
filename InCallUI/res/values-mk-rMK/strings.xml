@@ -98,7 +98,7 @@
     <string name="incall_error_supp_service_conference" msgid="3100373998543200356">"Не може да се оствари конференциски повик."</string>
     <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"Не може да се отфрли повик."</string>
     <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"Не може да се оствари повик."</string>
-    <string name="incall_call_type_label_sip" msgid="1327822795765282192">"Повик преку СИП"</string>
+    <string name="incall_call_type_label_sip" msgid="1327822795765282192">"Повик преку SIP"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Повик за итни случаи"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Се вклучува радиото..."</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Нема услуга. Се обидува повторно…"</string>
@@ -133,7 +133,7 @@
     <string name="unknown_call_session_event" msgid="2947023743819984299">"Непознат настан при сесија повици"</string>
     <string name="voicemail_provider" msgid="2878119321474918370">"Услуга"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"Поставување"</string>
-    <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;Не е поставен&gt;"</string>
+    <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;Нема поставка&gt;"</string>
     <string name="other_settings" msgid="6699076019841942826">"Други поставки за повик"</string>
     <string name="calling_via_template" msgid="3539373093109976255">"Повикување преку <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
     <string name="incoming_via_template" msgid="6281138766370092800">"Дојдовни повици преку <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
@@ -144,7 +144,7 @@
     <string name="custom_message_cancel" msgid="5920059627508662163">"Откажи"</string>
     <string name="custom_message_send" msgid="3798076337006735995">"Испрати"</string>
     <string name="description_target_answer" msgid="1111945818996518320">"Одговори"</string>
-    <string name="description_target_send_sms" msgid="3652217769615310018">"Испрати СМС"</string>
+    <string name="description_target_send_sms" msgid="3652217769615310018">"Испрати SMS"</string>
     <string name="description_target_decline" msgid="7108154434759234035">"Одбиј"</string>
     <string name="description_target_answer_video_call" msgid="4655616461181308405">"Одговори со видеоповик"</string>
     <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Одговори со аудиоповик"</string>
