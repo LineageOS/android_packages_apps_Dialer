@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_1f1ef16f",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-23T15:35:51Z",
+      "side": 1,
+      "message": "duplicated  line 193",
+      "range": {
+        "startLine": 182,
+        "startChar": 12,
+        "endLine": 186,
+        "endChar": 13
+      },
+      "revId": "4af9814b90e786892ae123122a5b78a208351072",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_df17f950",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-05-23T15:35:51Z",
+      "side": 1,
+      "message": "nit: you can save yourself a \"get\" by using mPendingResultArrayMap.values()",
+      "range": {
+        "startLine": 204,
+        "startChar": 12,
+        "endLine": 206,
+        "endChar": 13
+      },
+      "revId": "4af9814b90e786892ae123122a5b78a208351072",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
