@@ -34,6 +34,24 @@
       "revId": "29679649c6531af73088db272fdca6e85b114685",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_654bd4af",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-23T19:18:02Z",
+      "side": 1,
+      "message": "cool im doing a refactor pass here, i\u0027ll fix it.",
+      "parentUuid": "5faad753_a551cc64",
+      "revId": "29679649c6531af73088db272fdca6e85b114685",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
