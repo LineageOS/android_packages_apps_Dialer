@@ -331,6 +331,7 @@ public class ContactInfoHelper {
                     final String formattedNumber = formatPhoneNumber(response.mNumber, null, countryIso);
                     // map LookupResponse to ContactInfo
                     ContactInfo contactInfo = new ContactInfo();
+                    contactInfo.sourceType = 1;
                     contactInfo.lookupProviderName = response.mProviderName;
                     contactInfo.name = response.mName;
                     contactInfo.number = formatPhoneNumber(response.mNumber, null, countryIso);
