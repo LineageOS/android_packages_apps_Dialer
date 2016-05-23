@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_852850e2",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-23T19:12:41Z",
+      "side": 1,
+      "message": "Why are you always passing first here?  Do you mean to use i?  It looks like this argument gets used to notifyItemChanged... I think this would mean its always going to call changed on the top view?",
+      "revId": "29679649c6531af73088db272fdca6e85b114685",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
