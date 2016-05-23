@@ -27,7 +27,7 @@
     <string name="copy_transcript_text" msgid="5652787482893879382">"کپی کردن آوانویسی"</string>
     <string name="action_block_number" msgid="1482657602262262134">"مسدود کردن شماره"</string>
     <string name="snackbar_number_blocked" msgid="939830142765936021">"<xliff:g id="NUMBER">%1$s</xliff:g> مسدود شد"</string>
-    <string name="action_unblock_number" msgid="3043777622269776127">"گشودن شماره"</string>
+    <string name="action_unblock_number" msgid="3043777622269776127">"رفع انسداد شماره"</string>
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> گشوده شد"</string>
     <string name="block_number_undo" msgid="591338370336724156">"واگرد"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"حذف"</string>
@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"افزودن شماره یا جستجوی مخاطب"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"سابقه تماستان خالی است"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"برقراری تماس تلفنی"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"تماس از دست رفته‌ای ندارید."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"تماس بی‌پاسخی ندارید."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"صندوق پست صوتی‌تان خالی است."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"بایگانی پست صوتی خالی است."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"فقط نمایش موارد دلخواه"</string>
@@ -168,8 +168,8 @@
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"تماس‌ها از این شماره مسدود می‌شود، اما ممکن است تماس‌گیرنده همچنان بتواند برایتان پست صوتی بگذارد."</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"دیگر از این شماره، تماس یا پیام نوشتاری دریافت نمی‌کنید."</string>
     <string name="block_number_ok" msgid="770551992296781873">"مسدود کردن"</string>
-    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> گشوده شود؟"</string>
-    <string name="unblock_number_ok" msgid="6449899182699684786">"گشودن"</string>
+    <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> رفع انسداد شود؟"</string>
+    <string name="unblock_number_ok" msgid="6449899182699684786">"رفع انسداد"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"شماره‌گیری سریع"</string>
     <string name="tab_history" msgid="2563144697322434940">"سابقه تماس"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"مخاطبین"</string>
@@ -250,7 +250,7 @@
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"وارد کردن"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"وارد کردن انجام نشد"</string>
     <string name="voicemail_archive_failed" msgid="6263467962738772223">"پست صوتی بایگانی نشد."</string>
-    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"گشودن شماره"</string>
+    <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"رفع انسداد شماره"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"افزودن شماره"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"تماس‌‌ها از این شماره‌ها مسدود می‌شود و پست‌‌های صوتی به‌طور خودکار حذف می‌شود."</string>
     <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"تماس‌‌ها از این شماره‌ها مسدود می‌شود اما ممکن است همچنان بتوانند برای شما پست صوتی بگذارند."</string>
@@ -274,13 +274,13 @@
     <string name="call_log_action_block_report_number" msgid="8288915197641750257">"مسدود کردن/گزارش هرزنامه"</string>
     <string name="call_log_action_block_number" msgid="5920731882931944594">"مسدود کردن"</string>
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"هرزنامه نیست"</string>
-    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"گشودن"</string>
+    <string name="call_log_action_unblock_number" msgid="8906582251480361069">"رفع انسداد"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"هرزنامه"</string>
     <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> مسدود شود؟"</string>
     <string name="block_report_number_alert_details" msgid="3504073367202469245">"تماس‌ها و پست‌های صوتی بعدی از این شماره مسدود می‌شود."</string>
     <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"گزارش تماس به‌عنوان هرزنامه"</string>
     <string name="block_number_alert_details" msgid="3137736492383304346">"تماس‌ها و پست‌های صوتی بعدی از این شماره مسدود می‌شود. این تماس به‌عنوان هرزنامه گزارش خواهد شد."</string>
-    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> گشوده شود؟"</string>
+    <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> رفع انسداد شود؟"</string>
     <string name="unblock_number_alert_details" msgid="8190592456851353268">"این شماره گشوده می‌شود و به‌عنوان غیرهرزنامه گزارش می‌شود. تماس‌ها و پست‌های صوتی بعدی به‌عنوان هرزنامه شناسایی نمی‌شوند."</string>
     <string name="report_not_spam_alert_title" msgid="5315040210536100068">"<xliff:g id="NUMBER">%1$s</xliff:g> در فهرست مجاز قرار بگیرد؟"</string>
     <string name="report_not_spam_alert_button" msgid="4241295249227799609">"فهرست مجاز"</string>

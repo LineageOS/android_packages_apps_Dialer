@@ -40,7 +40,7 @@
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Artxibatu da ahots-mezua"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESEGIN"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"JOAN ARTXIBORA"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Deien historia garbitu nahi duzu?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Deien historia garbitu?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Historiako dei guztiak ezabatuko dira"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Deien historia garbitzen…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefonoa"</string>
@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"Gehitu zk. edo bilatu kontaktua"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Hutsik dago deien historia"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Deitu"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Ez duzu galdutako deirik."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Ez duzu dei galdurik."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Hutsik dago erantzungailuaren sarrerako ontzia."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Ahots-mezuen artxiboa hutsik dago."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Erakutsi gogokoak soilik"</string>
@@ -187,7 +187,7 @@
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Gehitu gogokoak"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Ez duzu kontakturik oraindik"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Gehitu kontaktua"</string>
-    <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu ukituta berrantolatzeko"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu sakatuta berrantolatzeko"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Kendu"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Bideo-deia"</string>
     <string name="call_log_action_send_message" msgid="5679719296905285131">"Bidali mezua"</string>

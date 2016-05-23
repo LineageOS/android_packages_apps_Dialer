@@ -75,7 +75,7 @@
     <string name="notification_voicemail_text_format" msgid="6496440879085042069">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> ကိုခေါ်ပါ"</string>
     <string name="notification_voicemail_no_vm_number" msgid="5433652017869242375">"အသံစာ၏နံပါတ်ကို မသိပါ"</string>
     <string name="notification_network_selection_title" msgid="6785177943238085441">"ဆက်သွယ်မှု ဧရိယာပြင်ပသို့ ရောက်ရှိနေသည်"</string>
-    <string name="notification_network_selection_text" msgid="9097902390701009591">"ရွေးချယ်ထားသော ကွန်ယက် (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) မရရှိနိုင်ပါ"</string>
+    <string name="notification_network_selection_text" msgid="9097902390701009591">"ရွေးချယ်ထားသော ကွန်ရက် (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) မရရှိနိုင်ပါ"</string>
     <string name="notification_action_answer" msgid="8418990052527593953">"ဖြေကြားပါ"</string>
     <string name="notification_action_end_call" msgid="2152010639043225860">"ဖုန်းချပါ"</string>
     <string name="notification_action_answer_video" msgid="2400233093494856655">"ဗီဒီယို"</string>

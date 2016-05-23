@@ -32,7 +32,7 @@
     <string name="block_number_undo" msgid="591338370336724156">"ОТМЯНА"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Изтриване"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Редактиране на номера преди обаждане"</string>
-    <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята на обажданията"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Изтриване на гласова поща"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архивиране на гласовата поща"</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"Споделяне на гласова поща"</string>

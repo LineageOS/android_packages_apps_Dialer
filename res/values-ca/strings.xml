@@ -149,7 +149,7 @@
     <string name="activity_not_available" msgid="2287665636817987623">"No hi ha cap aplicació per a això en aquest dispositiu."</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Cerca contactes"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"Afegeix núm. o cerca contactes"</string>
-    <string name="call_log_all_empty" msgid="8357417710416340920">"El teu historial de trucades està buit"</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"El teu historial de trucades és buit"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Fes una trucada"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"No tens cap trucada perduda."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"La safata d\'entrada de la bústia de veu està buida."</string>
