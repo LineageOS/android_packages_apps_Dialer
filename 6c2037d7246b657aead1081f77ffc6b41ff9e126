@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_459fb85e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-23T18:29:41Z",
+      "side": 1,
+      "message": "We didn\u0027t if it wasn\u0027t null?  This code fix seems to be the opposite?  Isn\u0027t it instead that we were always doing it, regardless of if it had happened already?",
+      "revId": "6c2037d7246b657aead1081f77ffc6b41ff9e126",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
