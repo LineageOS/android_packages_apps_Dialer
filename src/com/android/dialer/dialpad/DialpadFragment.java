@@ -806,10 +806,13 @@ public class DialpadFragment extends Fragment
             if (mOverflowMenuButton == null) {
                 return;
             }
-            mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
-            mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
-            mOverflowMenuButton.setOnClickListener(this);
         }
+        if (mOverflowPopupMenu == null) {
+            mOverflowPopupMenu = buildOptionsMenu(mOverflowMenuButton);
+        }
+
+        mOverflowMenuButton.setOnTouchListener(mOverflowPopupMenu.getDragToOpenListener());
+        mOverflowMenuButton.setOnClickListener(this);
         mOverflowMenuButton.setVisibility(isDigitsEmpty() ||
                 (mCurrentCallMethodInfo != null && mCurrentCallMethodInfo.mIsInCallProvider) ?
                 View.INVISIBLE : View.VISIBLE);
