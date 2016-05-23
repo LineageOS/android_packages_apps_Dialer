@@ -16,6 +16,24 @@
       "revId": "29679649c6531af73088db272fdca6e85b114685",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a551cc64",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-05-23T19:17:03Z",
+      "side": 1,
+      "message": "yup, that\u0027s a bug. should be i",
+      "parentUuid": "5faad753_852850e2",
+      "revId": "29679649c6531af73088db272fdca6e85b114685",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
