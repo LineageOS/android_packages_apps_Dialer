@@ -20,10 +20,10 @@
     <item quantity="other">%d jam</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="other">%d men</item>
+    <item quantity="other">%d menit</item>
   </plurals>
   <plurals name="second">
-    <item quantity="other">%d det</item>
+    <item quantity="other">%d detik</item>
   </plurals>
   <plurals name="call">
     <item quantity="other">%d panggilan</item>

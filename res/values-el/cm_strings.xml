@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Κοντινές τοποθεσίες</string>
   <string name="people">Άτομα</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
   <string name="lookup_settings_description">Αναζήτηση γιά άγνωστους αριθμούς τηλεφώνου</string>
   <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
   <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
   <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
   <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
   <string name="t9_search_input_locale_default">Προεπιλογή</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Αποκλεισμένη κλήση</string>
   <string name="call_log_stats_title">Στατιστικά</string>
   <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
   <string name="menu_add_to_blacklist">Προσθήκη στη λίστα αποκλεισμένων καλούντων</string>
   <string name="toast_added_to_blacklist">%s προστέθηκε στη λίστα αποκλεισμένων καλούντων.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
   <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
   <string name="speed_dial_replace">Αντικατάσταση</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης.</string>
   <string name="yes">Ναί</string>
   <string name="no">Όχι</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
   <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
   <string name="vibrate_call_waiting">Δόνηση στην αναμονή</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
   <string name="calllog_search_hint">Αναζήτηση αρχείου κλήσεων</string>
   <string name="msim_ime_dialog_title">Αναγνωριστικό συσκευής</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
   <string name="start_call_playback">Αναπαραγωγή καταγραφής</string>
   <string name="stop_call_playback">Διακοπή</string>
   <string name="call_playback_error_message">Αποτυχία αναπαραγωγής της καταγραφής κλήσης</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Επιλογές αισθητήρων</string>
   <string name="smart_mute_title">Έξυπνη σίγαση</string>
   <string name="smart_mute_summary">Σίγαση της εισερχόμενης κλήσης αναποδογυρίζοντας την συσκευή</string>

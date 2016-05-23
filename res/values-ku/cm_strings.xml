@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">شوێنە نزیەکاکان</string>
   <string name="people">ناوەکان</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">گه‌ڕان به‌دوای ژماره‌ی ته‌له‌فۆن</string>
   <string name="lookup_settings_description">سەیرێکی ژمارە نەناسراوەکان بکە</string>
   <string name="enable_forward_lookup_title">گه‌ڕان به‌دوای به‌دواکه‌وتن</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">پێده‌ری گه‌ڕانی به‌دواکه‌وتن</string>
   <string name="people_lookup_provider_title">پێده‌ری گه‌ڕانی خه‌ڵک</string>
   <string name="reverse_lookup_provider_title">پێده‌ری گه‌ڕانی پێچه‌وانه‌</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">گه‌ڕانی ته‌خته‌لێدانی T9</string>
   <string name="t9_search_input_locale">نوسینی گه‌ڕان بۆ T9</string>
   <string name="t9_search_input_locale_default">بنه‌ڕه‌ت</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="call_log_stats_title">سەرژمێرەیەکان</string>
   <string name="callStatsDetailTitle">زانیاری پەیوەندی</string>
   <string name="call_stats">سەرژمێریەکانی پەیوەندی</string>
@@ -63,6 +68,7 @@
   <string name="call_stats_reset_filter">گێڕانەوەی ڕێژەی کات</string>
   <string name="call_stats_sort_by_duration">ڕیزکردن بەپێی ماوەی پەیوەندی</string>
   <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">ڕێکبەندەکانی ژمارەگری خێرا</string>
   <string name="speed_dial_not_set">(دانەندراوە)</string>
   <string name="speed_dial_replace">جێگۆڕکردن</string>
@@ -72,6 +78,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">بۆ بەکارهێنانی ژمارەگری خێرا، یەکەم دۆخی فڕۆکە بکوژێنەوە.</string>
   <string name="yes">بەڵێ</string>
   <string name="no">نەخێر</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">له‌کاتی په‌یوه‌ندی له‌رینه‌وه‌</string>
   <string name="incall_vibrate_outgoing_title">له‌رینه‌وه‌ له‌کاتی وه‌ڵام</string>
   <string name="vibrate_call_waiting">له‌رینه‌وه‌ له‌کاتی چاوه‌ڕێ په‌یوه‌ندی</string>
@@ -87,8 +95,10 @@
   <string name="call_log_all_calls_header">هەموو پەیوەندییەکان</string>
   <string name="calllog_search_hint">گەڕان بۆ مێژوی پەیوەندی</string>
   <string name="msim_ime_dialog_title">ناسێنەری ئامێر</string>
+  <!-- Filter by blacklist calls option -->
   <string name="start_call_playback">لێدانی تۆمارکردنه‌که‌</string>
   <string name="stop_call_playback">وه‌ستاندن</string>
   <string name="call_playback_error_message">نه‌توانرا تۆمارکراوه‌که‌ لێبدرێت</string>
+  <!-- Sensor options -->
   <string name="smart_dialer_title">پەیوەندی زیرەک</string>
 </resources>

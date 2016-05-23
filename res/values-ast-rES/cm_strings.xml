@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">Llugares cercanos</string>
   <string name="people">Persones</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">Gueta de númberos telefónicos</string>
   <string name="lookup_settings_description">Guetar númberos de telefónu desconocíos</string>
   <string name="enable_forward_lookup_title">Gueta direuta</string>
@@ -29,10 +31,13 @@
   <string name="forward_lookup_provider_title">Fornidor de gueta direuta</string>
   <string name="people_lookup_provider_title">Fornidor pa guetar persones</string>
   <string name="reverse_lookup_provider_title">Fornidor de busca inversa</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinu (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Guetar Dialpad T9</string>
   <string name="t9_search_input_locale">Entrada gueta T9</string>
   <string name="t9_search_input_locale_default">Predetermináu</string>
+  <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Llamada bloquiada</string>
   <string name="call_log_stats_title">Estadístiques</string>
   <string name="callStatsDetailTitle">Detalles de llamada</string>
@@ -68,6 +73,7 @@
   <string name="call_stats_sort_by_count">Ordenar por númb. llamaes</string>
   <string name="menu_add_to_blacklist">Amestar a la llista de contautos bloquiaos</string>
   <string name="toast_added_to_blacklist">%s amestaos a la llista de contautos bloquiaos.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">Axustes de marcáu rápidu</string>
   <string name="speed_dial_not_set">(ensin afitar)</string>
   <string name="speed_dial_replace">Trocar</string>
@@ -77,6 +83,8 @@
   <string name="dialog_speed_dial_airplane_mode_message">Pa usar el marcáu rápidu, primero desactiva\'l mou avión.</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">Vibración na llamada</string>
   <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
   <string name="vibrate_call_waiting">Vibrar en llamada n\'espera</string>
@@ -92,10 +100,12 @@
   <string name="call_log_all_calls_header">Toles llamaes</string>
   <string name="calllog_search_hint">Guetar rexistru de llamaes</string>
   <string name="msim_ime_dialog_title">Identificador del preséu</string>
+  <!-- Filter by blacklist calls option -->
   <string name="call_log_blacklist_header">Namái llamaes bloquiaes</string>
   <string name="start_call_playback">Reproducir grabación</string>
   <string name="stop_call_playback">Detener</string>
   <string name="call_playback_error_message">Nun pudo reproducise la grabación</string>
+  <!-- Sensor options -->
   <string name="sensors_category_title">Opciones de sensores</string>
   <string name="smart_mute_title">Silenciu intelixente</string>
   <string name="smart_mute_summary">Silencia la llamada entrante voltiando\'l preséu</string>

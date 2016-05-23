@@ -16,8 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Forward lookup -->
   <string name="nearby_places">ئەتراپتىكى ئورۇنلار</string>
   <string name="people">كىشى</string>
+  <!-- Number lookup -->
   <string name="lookup_settings_label">تېلېفون نومۇر ئىزدەش</string>
   <string name="lookup_settings_description">يوچۇن تېلېفون نومۇرىنى ئىزدەش</string>
   <string name="enable_forward_lookup_title">ئوڭ ئىزدەش</string>
@@ -29,10 +31,14 @@
   <string name="forward_lookup_provider_title">ئوڭ ئىزدەش تەمىنلىگۈچى</string>
   <string name="people_lookup_provider_title">كىشى ئىزەش تەمىنلىگۈچى</string>
   <string name="reverse_lookup_provider_title">تەتۈر ئىزدەش تەمىنلىگۈچى</string>
+  <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn خەنچە (CN)</string>
+  <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">نومۇر تاختا T9 ئىزدەش</string>
   <string name="t9_search_input_locale">T9 ئىزدەش كىرگۈزۈش</string>
   <string name="t9_search_input_locale_default">كۆڭۈلدىكى</string>
+  <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">توسىۋېلىنغان تېلېفونلار</string>
   <string name="call_log_stats_title">سىتاتىستىكا</string>
   <string name="callStatsDetailTitle">چاقىرىش تەپسىلاتى</string>
   <string name="call_stats">چاقىرىش سىتاتىستىكىسى</string>
@@ -46,6 +52,8 @@
   <string name="call_stats_outgoing">چاقىرىش: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_missed">سۆزلەشمىگەنلىرى</string>
   <string name="call_stats_missed_percent">سۆزلەشمىگەن: <xliff:g id="percent">%d</xliff:g>%%</string>
+  <string name="call_stats_blacklist">توسۇلغان</string>
+  <string name="call_stats_blacklist_percent">توسىۋېلىندى: <xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">جەمئى: <xliff:g id="call_count">%s</xliff:g>، <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">جەمئى: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">باشلاش چېسلاسى</string>
@@ -63,6 +71,9 @@
   <string name="call_stats_reset_filter">ۋاقىت دائىرىسىنى ئەسلىگە قايتۇر</string>
   <string name="call_stats_sort_by_duration">داۋاملىشىش ۋاقتى بويىچە</string>
   <string name="call_stats_sort_by_count">سۆزلىشىش قېتىمى بويىچە</string>
+  <string name="menu_add_to_blacklist">قارا تىزىملىككە قوشۇش</string>
+  <string name="toast_added_to_blacklist">%s قارا تىزىملىككە قوشۇلدى.</string>
+  <!--  for speed dial -->
   <string name="speed_dial_settings">تېز نومۇر بۇراش تەڭشەكلىرى</string>
   <string name="speed_dial_not_set">(تەڭشەلمىگەن)</string>
   <string name="speed_dial_replace">ئالماشتۇر</string>
@@ -72,8 +83,11 @@
   <string name="dialog_speed_dial_airplane_mode_message">ئەگەر تېز نومۇر بۇراشنى ئىشلەتسە، ئالدى بىلەن ئايروپىلان ھالىتىنى تاقاڭ.</string>
   <string name="yes">ھەئە</string>
   <string name="no">ياق</string>
+  <!-- The string used to represent an unknown location for a phone number in the call log
+       Do not translate. -->
   <string name="incall_vibration_category_title">چاقىرىلغاندا تىترىتىش</string>
   <string name="incall_vibrate_outgoing_title">ئۇلانغاندا تىترەت</string>
+  <string name="vibrate_call_waiting">چاقىرىشنى كۈتۈۋاتقاندا تىترىتىدۇ</string>
   <string name="incall_vibrate_hangup_title">ئۈزگەندە تىترەت</string>
   <string name="incall_vibrate_45_title">ھەر مىنۇتتا تىترەت</string>
   <string name="incall_vibrate_45_summary">سىرتتىكى نومۇرنى چاقىرغاندا ھەر 45 سېكۇنتتا بىر تىترىتىدۇ</string>
@@ -86,7 +100,15 @@
   <string name="call_log_all_calls_header">ھەممە چاقىرىشلار</string>
   <string name="calllog_search_hint">چاقىرىش خاتىرىسىنى ئىزدە</string>
   <string name="msim_ime_dialog_title">ئۈسكۈنە بەلگىسى</string>
+  <!-- Filter by blacklist calls option -->
+  <string name="call_log_blacklist_header">كەلگەن تېلېفوننىلا توسۇش</string>
   <string name="start_call_playback">ئۈن خاتىرىسىنى چال</string>
   <string name="stop_call_playback">توختا</string>
   <string name="call_playback_error_message">ئۈن خاتىرىسىنى چالالمىدى</string>
+  <!-- Sensor options -->
+  <string name="sensors_category_title">سېنزور تاللانمىسى</string>
+  <string name="smart_mute_title">ئەقلىي-ئىقتىدارلىق جىمجىتلىق</string>
+  <string name="smart_mute_summary">ئۈسكىنىنى ئۆرۈش ئارقىلىق كەلگەن تېلېفون ئاۋازىنى تاقاش</string>
+  <string name="smart_dialer_title">ئەقلىي-ئىقتىدارلىق چاقىرىش</string>
+  <string name="smart_dialer_summary">ئۈسكىنىڭىز قولاق تۈۋىڭىزگە كەلگەندا ئاپتۇماتېك چاقىرىش</string>
 </resources>

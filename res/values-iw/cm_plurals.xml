@@ -17,15 +17,15 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
-    <item quantity="one">1 שע\'</item>
+    <item quantity="one">שע\' 1</item>
     <item quantity="other">%d שע\'</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="one">1 דק\'</item>
+    <item quantity="one">דק\' 1</item>
     <item quantity="other">%d דק\'</item>
   </plurals>
   <plurals name="second">
-    <item quantity="one">1 שנ\'</item>
+    <item quantity="one">שנ\' 1</item>
     <item quantity="other">%d ש\'</item>
   </plurals>
   <plurals name="call">
