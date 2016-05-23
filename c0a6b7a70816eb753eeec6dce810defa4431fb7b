@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_651754ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 14474
+      },
+      "writtenOn": "2016-05-23T18:19:14Z",
+      "side": 1,
+      "message": "Is not what? I NEED TO KNOW!",
+      "range": {
+        "startLine": 7,
+        "startChar": 61,
+        "endLine": 7,
+        "endChar": 64
+      },
+      "revId": "c0a6b7a70816eb753eeec6dce810defa4431fb7b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
