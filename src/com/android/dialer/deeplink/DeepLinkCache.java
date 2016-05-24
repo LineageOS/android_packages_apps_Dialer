@@ -16,13 +16,14 @@
 
 package com.android.dialer.deeplink;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.CallLog;
 
 import com.android.dialer.util.ExpirableCache;
-
-import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
 import com.cyanogen.ambient.common.api.PendingResult;
 import com.cyanogen.ambient.common.api.ResultCallback;
@@ -59,11 +60,14 @@ public class DeepLinkCache {
 
     }
 
+    private static final int MAX_REQUEST_COUNT = 200;
     private static final int START_THREAD = 0;
     private static final int REDRAW = 1;
-    private static final int DEEP_LINK_CACHE_SIZE = 100;
+    private static final int DEEP_LINK_CACHE_SIZE = 1000;
     private static final int START_PROCESSING_REQUESTS_DELAY_MS = 1000;
     private static final int PROCESSING_THREAD_THROTTLE_LIMIT = 1000;
+
+    private Context mContext;
     private DeepLinkListener mDeepLinkListener;
     private final LinkedList<DeepLinkRequest> mRequests;
     /**
@@ -75,6 +79,10 @@ public class DeepLinkCache {
      * Cache for DeepLink queries we've already completed.
      */
     private ExpirableCache<String, DeepLink> mCache;
+    /**
+     * Cache for fetched DeepLink drawables
+     */
+    private HashMap<String, Drawable> mDrawableCache;
 
     private QueryThread mDeepLinkQueryThread;
     private boolean mRequestProcessingDisabled = false;
@@ -117,8 +125,9 @@ public class DeepLinkCache {
                 // Obtain next request, if any is available.
                 // Keep synchronized section small.
                 DeepLinkRequest req = null;
+                int pendingSize = mPendingRequests.size();
                 synchronized (mRequests) {
-                    if (!mRequests.isEmpty()) {
+                    if (!mRequests.isEmpty() && pendingSize < MAX_REQUEST_COUNT) {
                         req = mRequests.removeFirst();
                     }
                 }
@@ -146,10 +155,12 @@ public class DeepLinkCache {
         }
     }
 
-    public DeepLinkCache(DeepLinkListener listener) {
+    public DeepLinkCache(Context context, DeepLinkListener listener) {
+        mContext = context;
         mRequests = new LinkedList<DeepLinkRequest>();
         mPendingRequests = new HashMap<Uri, PendingResult<DeepLink.DeepLinkResultList>>();
         mCache = ExpirableCache.create(DEEP_LINK_CACHE_SIZE);
+        mDrawableCache = new HashMap<String, Drawable>();
         mDeepLinkListener = listener;
     }
 
@@ -170,7 +181,6 @@ public class DeepLinkCache {
             DeepLink info = cachedInfo == null ? null : cachedInfo.getValue();
             if (cachedInfo == null) {
                 // if its null we need to add a uri to our requests
-                mCache.put(uriString, DeepLinkRequest.EMPTY);
                 urisToRequest.add(uri);
                 // if we get any uris that haven't been handled we need to immediately do this query
                 immediate = true;
@@ -194,7 +204,7 @@ public class DeepLinkCache {
         DeepLinkRequest request = new DeepLinkRequest(uris);
         synchronized (mRequests) {
             if (!mRequests.contains(request)) {
-                mRequests.add(request);
+                mRequests.addFirst(request);
                 mRequests.notifyAll();
             }
         }
@@ -227,8 +237,17 @@ public class DeepLinkCache {
         if (mDeepLinkQueryThread != null) {
             // Stop the thread; we are finished with it.
             mDeepLinkQueryThread.stopProcessing();
+            cancelAllPendingQueries();
             mDeepLinkQueryThread = null;
             mRequests.clear();
+        }
+    }
+
+    private void cancelAllPendingQueries() {
+        synchronized (mPendingRequests) {
+            for (PendingResult<DeepLink.DeepLinkResultList> r : mPendingRequests.values()) {
+                r.cancel();
+            }
             mPendingRequests.clear();
         }
     }
@@ -263,6 +282,9 @@ public class DeepLinkCache {
     }
 
     private void handleDeepLinkResults(List<DeepLink> results) {
+        if (results == null) {
+            return;
+        }
         for (DeepLink link : results) {
             if (shouldPlaceLinkInCache(link)) {
                 mCache.put(link.getUri().toString(), link);
@@ -290,38 +312,60 @@ public class DeepLinkCache {
      * @param request - the DeepLinkRequest to query against.
      */
     private void queryDeepLinks(DeepLinkRequest request) {
+        final DeepLinkIntegrationManager dlim = DeepLinkIntegrationManager.getInstance();
         final Uri uri = request.getUris().get(0);
-        synchronized (mPendingRequests) {
-            mPendingRequests.put(uri,
-                    DeepLinkIntegrationManager.getInstance().getPreferredLinksForList(
-                            new ResultCallback<DeepLink.DeepLinkResultList>() {
-                                @Override
-                                public void onResult(DeepLink.DeepLinkResultList result) {
-                                    List<DeepLink> results = result.getResults();
-                                    if (results == null || results.size() == 0) {
-                                        return;
-                                    }
-                                    mPendingRequests.remove(uri);
-                                    handleDeepLinkResults(result.getResults());
-                                }
-                            }, DeepLinkContentType.CALL, request.getUris()));
+        final PendingResult<DeepLink.DeepLinkResultList> pendingRequest =
+                dlim.getPreferredLinksForList(new ResultCallback<DeepLink.DeepLinkResultList>() {
+            @Override
+            public void onResult(DeepLink.DeepLinkResultList result) {
+                mPendingRequests.remove(uri);
+                handleDeepLinkResults(result.getResults());
+            }
+        }, DeepLinkContentType.CALL, request.getUris());
 
+        if (pendingRequest != null) {
+            synchronized (mPendingRequests) {
+                mPendingRequests.put(uri, pendingRequest);
+            }
         }
     }
 
     public void clearPendingQueries(String number, long[] calltimes) {
         synchronized (mPendingRequests) {
             Uri uri = DeepLinkIntegrationManager.generateCallUri(number, calltimes[0]);
-            if (mPendingRequests.containsKey(uri)) {
-                PendingResult<DeepLink.DeepLinkResultList> request = mPendingRequests.remove(uri);
-                if (request != null) {
-                    request.cancel();
-                }
+            PendingResult<DeepLink.DeepLinkResultList> request = mPendingRequests.remove(uri);
+            if (request != null) {
+                request.cancel();
             }
         }
     }
 
+    public Drawable getDrawable(DeepLink deepLink) {
+        if (deepLink == null) {
+            return null;
+        }
+        String packageKey = deepLink.getPackageName();
+        Drawable d = mDrawableCache.get(packageKey);
+        if (d == null) {
+            d = deepLink.getDrawableIcon(mContext);
+            mDrawableCache.put(packageKey, d);
+        }
+
+        return d != null ? d.getConstantState().newDrawable() : null;
+    }
+
     public void clearCache() {
         mCache.clearCache();
+        mDrawableCache.clear();
+    }
+
+    public void buildCache() {
+        DeepLinkIntegrationManager dlim = DeepLinkIntegrationManager.getInstance();
+        dlim.getLinksForAuthority(new ResultCallback<DeepLink.DeepLinkResultList>() {
+            @Override
+            public void onResult(DeepLink.DeepLinkResultList result) {
+                handleDeepLinkResults(result.getResults());
+            }
+        }, DeepLinkContentType.CALL, CallLog.AUTHORITY);
     }
 }
