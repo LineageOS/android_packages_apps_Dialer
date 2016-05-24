@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_eed32137",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-05-24T18:56:50Z",
+      "side": 1,
+      "message": "Hrm that is an interesting idea!  Will try it.",
+      "parentUuid": "5faad753_ae0f69df",
+      "range": {
+        "startLine": 269,
+        "startChar": 23,
+        "endLine": 270,
+        "endChar": 29
+      },
+      "revId": "88c71b79e22e464939201b860745f7a301c6a1e1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_0e09dddb",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 3
