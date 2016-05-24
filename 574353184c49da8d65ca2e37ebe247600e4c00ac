@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_e57024df",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-24T14:37:54Z",
+      "side": 1,
+      "message": "why the string map for callbacks .. why not ResultCallback\u003cT\u003e or plain ol Object?\n\nkeeps your from having to create strings which are jst a wrapper around hashcode() anyways",
+      "range": {
+        "startLine": 174,
+        "startChar": 53,
+        "endLine": 174,
+        "endChar": 61
+      },
+      "revId": "574353184c49da8d65ca2e37ebe247600e4c00ac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_33220602",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-24T14:37:54Z",
+      "side": 1,
+      "message": "fyi , when you move the code around it\u0027ll rewrite the history for these set of lines to this commit\n\nfor someone thats debugging these lines of code, it will be helpful to blame-get the original commit rather the commit that moved code around",
+      "range": {
+        "startLine": 174,
+        "startChar": 4,
+        "endLine": 209,
+        "endChar": 5
+      },
+      "revId": "574353184c49da8d65ca2e37ebe247600e4c00ac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c8573d02",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-24T14:37:54Z",
+      "side": 1,
+      "message": "not sure if making this a requirement to register callback makes sense\n\nwhat happens if the connection takes a while and you\u0027re the very first component to try to register for a callback",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 30
+      },
+      "revId": "574353184c49da8d65ca2e37ebe247600e4c00ac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_9323ba05",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 11035
+      },
+      "writtenOn": "2016-05-24T14:37:54Z",
+      "side": 1,
+      "message": "- you would still leak a callback w/ this , as you\u0027re setting the \"callback\" of the client on the PendingResult. If there are multiple clients on  calling isApplicationTypeEnabled, the last one will be set on the pendingResult and cleared from the map eventually , while the others will jst sit in the map\n\n- maybe the approach should be to have a helper class thats stateful within each of the clients interested in \"are notes enabled\"\n\n- the problem we keep running into is trying to keep things \"static\" while also maintaining the lifecycle of a Component that has state",
+      "range": {
+        "startLine": 234,
+        "startChar": 12,
+        "endLine": 237,
+        "endChar": 58
+      },
+      "revId": "574353184c49da8d65ca2e37ebe247600e4c00ac",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
