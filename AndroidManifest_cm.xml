@@ -30,11 +30,10 @@
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRECISE_PHONE_STATE" />
-
     <uses-permission android:name="com.cyanogen.ambient.permission.BIND_CALLER_INFO" />
-
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
     <uses-permission android:name="android.permission.MANAGE_USERS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application>
 
@@ -55,6 +54,25 @@
                 <action android:name="com.android.dialer.discovery.DiscoverySignalReceiver.ON_DISMISS" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name="com.android.dialer.SystemUpdateReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.android.dialer.CallerInfoSettingsMigrationReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.android.dialer.CallerInfoSettingsMigrationReceiver$CallerInfoSettingsMigrationService"
+            android:exported="false" />
 
         <service android:name=".discovery.DiscoveryService" />
 
