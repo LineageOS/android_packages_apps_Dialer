@@ -61,7 +61,7 @@ public class DeepLinkCache {
 
     private static final int START_THREAD = 0;
     private static final int REDRAW = 1;
-    private static final int DEEP_LINK_CACHE_SIZE = 100;
+    private static final int DEEP_LINK_CACHE_SIZE = 1000;
     private static final int START_PROCESSING_REQUESTS_DELAY_MS = 1000;
     private static final int PROCESSING_THREAD_THROTTLE_LIMIT = 1000;
     private DeepLinkListener mDeepLinkListener;
