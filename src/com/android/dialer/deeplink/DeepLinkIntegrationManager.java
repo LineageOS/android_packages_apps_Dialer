@@ -115,6 +115,24 @@ public class DeepLinkIntegrationManager {
     }
 
     /**
+     * Gets all links for the given authority, across all installed plugins..
+     * @param callback  Code to execute upon completion.
+     * @param category  DeepLinkContentType to query for API defaults.
+     */
+
+    public PendingResult<DeepLink.DeepLinkResultList> getLinksForAuthority(
+            ResultCallback<DeepLink.DeepLinkResultList> callback, DeepLinkContentType category,
+            String authority) {
+        PendingResult<DeepLink.DeepLinkResultList> result = null;
+        if (mShouldQueueRequests) {
+            result = mApi.getLinksForAuthority(mAmbientApiClient,
+                    DeepLinkApplicationType.NOTE, category, authority);
+            result.setResultCallback(callback);
+        }
+        return result;
+    }
+
+    /**
      * Get's the default plugin information for display.
      * @param callback  Code to execute upon completion.
      * @param category  DeepLinkContentType to query for API defaults.
@@ -191,7 +209,7 @@ public class DeepLinkIntegrationManager {
      */
     public void viewNote(Context ctx, DeepLink deepLink, ComponentName cn) {
         if (deepLink != null && deepLink.getAlreadyHasContent()) {
-            sendContentSentEvent(ctx, deepLink, cn);
+            sendOpeningExistingEvent(ctx, deepLink, cn);
             ctx.startActivity(deepLink.createViewIntent());
         }
     }

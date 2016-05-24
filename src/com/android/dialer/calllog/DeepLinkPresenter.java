@@ -17,57 +17,61 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.android.dialer.R;
+import com.android.dialer.deeplink.DeepLinkCache;
 import com.android.dialer.deeplink.DeepLinkRequest;
-import com.cyanogen.ambient.common.api.ResultCallback;
 import com.cyanogen.ambient.deeplink.DeepLink;
-import com.cyanogen.ambient.deeplink.DeepLink.DeepLinkResultList;
-import com.cyanogen.ambient.deeplink.linkcontent.DeepLinkContentType;
-import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
 
 import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class DeepLinkPresenter {
+    private final Context mContext;
+    private DeepLink mDeepLink;
+    private final CallLogListItemViewHolder mViews;
+    private final DeepLinkCache mCache;
 
-    Context mContext;
-    DeepLink mDeepLink;
-    private CallLogListItemViewHolder mViews;
-
-    public DeepLinkPresenter(Context context) {
+    public DeepLinkPresenter(Context context, CallLogListItemViewHolder holder,
+            DeepLinkCache cache) {
         mContext = context;
-    }
-
-    public void setCallLogViewHolder(CallLogListItemViewHolder holder) {
         mViews = holder;
+        mCache = cache;
     }
 
-    private void updateViews() {
-        if (mDeepLink != null && mDeepLink != DeepLinkRequest.EMPTY) {
-            if (canUpdateImageIconViews()) {
-                mViews.viewNoteActionIcon.setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+    public void bindActionButton() {
+        if (canUpdateImageIconViews()) {
+            if (hasValidLink()) {
+                mViews.viewNoteActionIcon.setImageDrawable(getLinkIcon());
                 mViews.viewNoteButton.setVisibility(View.VISIBLE);
-            }
-            mViews.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
-            mViews.phoneCallDetailsViews.noteIconView
-                    .setImageDrawable(mDeepLink.getDrawableIcon(mContext));
-        } else {
-            if (canUpdateImageIconViews()) {
+            } else {
                 mViews.viewNoteButton.setVisibility(View.GONE);
-                mViews.viewNoteActionIcon.setImageDrawable(null);
             }
-            mViews.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
         }
     }
 
+    private void updateViews() {
+        if (hasValidLink()) {
+            mViews.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
+            mViews.phoneCallDetailsViews.noteIconView.setImageDrawable(getLinkIcon());
+        } else {
+            mViews.phoneCallDetailsViews.noteIconView.setVisibility(View.GONE);
+        }
+        bindActionButton();
+    }
+
+    private boolean hasValidLink() {
+        return mDeepLink != null && mDeepLink != DeepLinkRequest.EMPTY;
+    }
+
+    private Drawable getLinkIcon() {
+        return mCache != null ? mCache.getDrawable(mDeepLink) : null;
+    }
+
     private boolean canUpdateImageIconViews() {
-        return mViews.viewNoteButton != null  && mViews.viewNoteActionIcon != null;
+        return mViews.viewNoteButton != null && mViews.viewNoteActionIcon != null;
     }
 
     public void setDeepLink(DeepLink deepLink) {
