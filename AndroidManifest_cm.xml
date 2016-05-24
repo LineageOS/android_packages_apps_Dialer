@@ -36,6 +36,8 @@
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
     <uses-permission android:name="android.permission.MANAGE_USERS" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application>
 
         <meta-data android:name="com.cyanogen.ambient.analytics.key"
@@ -55,6 +57,24 @@
                 <action android:name="com.android.dialer.discovery.DiscoverySignalReceiver.ON_DISMISS" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name="com.android.dialer.PreBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.android.dialer.BootCompletedReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.android.dialer.BootCompletedReceiver.UpgradeService"
+                 android:exported="false" />
 
         <service android:name=".discovery.DiscoveryService" />
 

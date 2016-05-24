@@ -74,6 +74,7 @@ LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(incallui_dir)/proguard.flags
+LOCAL_PROGUARD_ENABLED := disabled
 
 # utilize ContactsCommon's phone-number-based contact-info lookup
 CONTACTS_COMMON_LOOKUP_PROVIDER ?= $(LOCAL_PATH)/$(contacts_common_dir)/info_lookup
@@ -92,4 +93,4 @@ LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
 include $(BUILD_MULTI_PREBUILT)
 
 # Use the following include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))
+# include $(call all-makefiles-under,$(LOCAL_PATH))
