@@ -852,4 +852,5 @@ public class CallLogAdapter extends GroupingListAdapter
         PromoCardViewHolder viewHolder = PromoCardViewHolder.create(view);
         return viewHolder;
     }
+
 }

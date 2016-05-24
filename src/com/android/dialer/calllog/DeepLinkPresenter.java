@@ -17,6 +17,7 @@ package com.android.dialer.calllog;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,12 +32,16 @@ import com.cyanogen.ambient.deeplink.applicationtype.DeepLinkApplicationType;
 
 import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
 public class DeepLinkPresenter {
 
-    Context mContext;
+    private static HashMap<String, Drawable> mIconCache =
+            new HashMap<String, Drawable>();
+    private static final String TINT_KEY = "tint";
+    private Context mContext;
     DeepLink mDeepLink;
     private CallLogListItemViewHolder mViews;
 
@@ -50,13 +55,13 @@ public class DeepLinkPresenter {
 
     private void updateViews() {
         if (mDeepLink != null && mDeepLink != DeepLinkRequest.EMPTY) {
+            Drawable icon = getDrawableIcon(mDeepLink);
             if (canUpdateImageIconViews()) {
-                mViews.viewNoteActionIcon.setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+                mViews.viewNoteActionIcon.setImageDrawable(icon);
                 mViews.viewNoteButton.setVisibility(View.VISIBLE);
             }
             mViews.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);
-            mViews.phoneCallDetailsViews.noteIconView
-                    .setImageDrawable(mDeepLink.getDrawableIcon(mContext));
+            mViews.phoneCallDetailsViews.noteIconView.setImageDrawable(getFromIconCache(mDeepLink.getPackageName() + TINT_KEY));
         } else {
             if (canUpdateImageIconViews()) {
                 mViews.viewNoteButton.setVisibility(View.GONE);
@@ -66,8 +71,27 @@ public class DeepLinkPresenter {
         }
     }
 
+    private Drawable getFromIconCache(String packageKey) {
+        return mIconCache.get(packageKey);
+    }
+
+    private Drawable getDrawableIcon(DeepLink deepLink) {
+        String packageKey = deepLink.getPackageName();
+        Drawable cachedResource = getFromIconCache(packageKey);
+        if (cachedResource != null) {
+            return cachedResource;
+        }
+        Drawable icon = deepLink.getDrawableIcon(mContext);
+        mIconCache.put(packageKey, icon);
+
+        Drawable copy = icon.getConstantState().newDrawable();
+        mIconCache.put(packageKey + TINT_KEY, copy);
+
+        return icon;
+    }
+
     private boolean canUpdateImageIconViews() {
-        return mViews.viewNoteButton != null  && mViews.viewNoteActionIcon != null;
+        return mViews.viewNoteButton != null && mViews.viewNoteActionIcon != null;
     }
 
     public void setDeepLink(DeepLink deepLink) {

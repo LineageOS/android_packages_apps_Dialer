@@ -19,10 +19,9 @@ package com.android.dialer.deeplink;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.CallLog;
 
 import com.android.dialer.util.ExpirableCache;
-
-import com.android.dialer.deeplink.DeepLinkIntegrationManager;
 
 import com.cyanogen.ambient.common.api.PendingResult;
 import com.cyanogen.ambient.common.api.ResultCallback;
@@ -59,9 +58,10 @@ public class DeepLinkCache {
 
     }
 
+    private static final int MAX_REQUEST_COUNT = 200;
     private static final int START_THREAD = 0;
     private static final int REDRAW = 1;
-    private static final int DEEP_LINK_CACHE_SIZE = 100;
+    private static final int DEEP_LINK_CACHE_SIZE = 1000;
     private static final int START_PROCESSING_REQUESTS_DELAY_MS = 1000;
     private static final int PROCESSING_THREAD_THROTTLE_LIMIT = 1000;
     private DeepLinkListener mDeepLinkListener;
@@ -117,8 +117,9 @@ public class DeepLinkCache {
                 // Obtain next request, if any is available.
                 // Keep synchronized section small.
                 DeepLinkRequest req = null;
+                int pendingSize = mPendingRequests.size();
                 synchronized (mRequests) {
-                    if (!mRequests.isEmpty()) {
+                    if (!mRequests.isEmpty() && pendingSize < MAX_REQUEST_COUNT) {
                         req = mRequests.removeFirst();
                     }
                 }
@@ -170,7 +171,6 @@ public class DeepLinkCache {
             DeepLink info = cachedInfo == null ? null : cachedInfo.getValue();
             if (cachedInfo == null) {
                 // if its null we need to add a uri to our requests
-                mCache.put(uriString, DeepLinkRequest.EMPTY);
                 urisToRequest.add(uri);
                 // if we get any uris that haven't been handled we need to immediately do this query
                 immediate = true;
@@ -182,7 +182,7 @@ public class DeepLinkCache {
                 toReturn = info;
             }
         }
-        // issue new requests for any uri's we haven't handled previously
+        // issue new requests for any uri's we haven't handleg previously
         if (urisToRequest.size() > 0) {
             enqueueRequest(urisToRequest, immediate);
         }
@@ -194,7 +194,7 @@ public class DeepLinkCache {
         DeepLinkRequest request = new DeepLinkRequest(uris);
         synchronized (mRequests) {
             if (!mRequests.contains(request)) {
-                mRequests.add(request);
+                mRequests.addFirst(request);
                 mRequests.notifyAll();
             }
         }
@@ -227,8 +227,17 @@ public class DeepLinkCache {
         if (mDeepLinkQueryThread != null) {
             // Stop the thread; we are finished with it.
             mDeepLinkQueryThread.stopProcessing();
+            cancelAllPendingQueries();
             mDeepLinkQueryThread = null;
             mRequests.clear();
+        }
+    }
+
+    private void cancelAllPendingQueries() {
+        synchronized (mPendingRequests) {
+            for (PendingResult<DeepLink.DeepLinkResultList> r : mPendingRequests.values()) {
+                r.cancel();
+            }
             mPendingRequests.clear();
         }
     }
@@ -323,5 +332,20 @@ public class DeepLinkCache {
 
     public void clearCache() {
         mCache.clearCache();
+    }
+
+
+    public void buildCache() {
+        DeepLinkIntegrationManager.getInstance()
+                .getLinksForAuthority(new ResultCallback<DeepLink.DeepLinkResultList>() {
+                    @Override
+                    public void onResult(DeepLink.DeepLinkResultList result) {
+                        List<DeepLink> results = result.getResults();
+                        if (results == null || results.size() == 0) {
+                            return;
+                        }
+                        handleDeepLinkResults(result.getResults());
+                    }
+                }, DeepLinkContentType.CALL, CallLog.AUTHORITY);
     }
 }
