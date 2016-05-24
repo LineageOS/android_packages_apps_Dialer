@@ -265,6 +265,9 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             // Return false; we did not take ownership of the cursor
             return false;
         }
+
+        buildDeepLinkCache();
+
         mAdapter.setLoading(false);
         mAdapter.changeCursor(cursor);
         // This will update the state of the "Clear call log" menu item.
@@ -323,6 +326,10 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             mEmptyLoaderRunning = false;
             getLoaderManager().destroyLoader(EMPTY_LOADER_ID);
         }
+    }
+
+    private void buildDeepLinkCache() {
+        mAdapter.mDeepLinkCache.buildCache();
     }
 
     @Override

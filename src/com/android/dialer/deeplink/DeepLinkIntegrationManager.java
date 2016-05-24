@@ -88,6 +88,19 @@ public class DeepLinkIntegrationManager {
         return result;
     }
 
+    public PendingResult<DeepLink.DeepLinkResultList> getLinksForAuthority(
+            ResultCallback<DeepLink.DeepLinkResultList> callback, DeepLinkContentType category,
+            String authority) {
+        PendingResult<DeepLink.DeepLinkResultList> result = null;
+        if (hasConnectedClient()) {
+            result = mApi.getLinksForAuthority(mAmbientApiClient,
+                    DeepLinkApplicationType.NOTE, category, authority);
+            result.setResultCallback(callback);
+        }
+        return result;
+    }
+
+
     public void getDefaultPlugin(ResultCallback<DeepLink.StringResultList> callback,
             DeepLinkContentType category) {
         PendingResult<DeepLink.StringResultList> result = null;
