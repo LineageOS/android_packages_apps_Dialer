@@ -852,4 +852,13 @@ public class CallLogAdapter extends GroupingListAdapter
         PromoCardViewHolder viewHolder = PromoCardViewHolder.create(view);
         return viewHolder;
     }
+
+    public int buildCache(Cursor c) {
+        int count = getGroupSize(c.getPosition());
+        final String number = c.getString(CallLogQuery.NUMBER);
+        long[] times = getCallTimes(c, count);
+        mDeepLinkCache.getValue(number, times);
+        return count;
+    }
+
 }
