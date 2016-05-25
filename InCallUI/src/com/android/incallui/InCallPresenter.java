@@ -923,6 +923,19 @@ public class InCallPresenter implements CallList.Listener,
         }
     }
 
+    public void acceptUpgradeRequest(Context context) {
+        if (mCallList == null) {
+            StatusBarNotifier.clearAllCallNotifications(context);
+            Log.e(this, " acceptUpgradeRequest mCallList is empty so returning");
+            return;
+        }
+
+        Call call = mCallList.getVideoUpgradeRequestCall();
+        if (call != null) {
+            acceptUpgradeRequest(call.getRequestedVideoState(), context);
+        }
+    }
+
     public void acceptUpgradeRequest(int videoState, Context context) {
         Log.d(this, " acceptUpgradeRequest videoState " + videoState);
         // Bail if we have been shut down and the call list is null.
