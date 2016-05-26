@@ -76,6 +76,11 @@
 
         <service android:name=".discovery.DiscoveryService" />
 
+        <activity-alias
+            android:name=".settings.CallerInfoSettingsActivity"
+            android:targetActivity=".settings.DialerSettingsActivity"
+            android:exported="true" />
+
         <activity
             android:name="com.android.dialer.callerinfo.CallerInfoProviderPicker"
             android:theme="@style/Theme.Material.Light.Dialog.NoTitle"
