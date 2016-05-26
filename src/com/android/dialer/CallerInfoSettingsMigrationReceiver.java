@@ -30,13 +30,23 @@ import static com.cyanogen.ambient.callerinfo.util.SettingsConstants.PROVIDER_ST
  */
 public class CallerInfoSettingsMigrationReceiver extends BroadcastReceiver {
 
+    private static void disableReceiver(Context context) {
+        ComponentName migrationReceiver = new ComponentName(context,
+                CallerInfoSettingsMigrationReceiver.class);
+        context.getPackageManager().setComponentEnabledSetting(migrationReceiver,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (CyanogenAmbientUtil.isCyanogenAmbientAvailable(context) ==
                 CyanogenAmbientUtil.SUCCESS) {
             ComponentName provider = CallerInfoHelper.getActiveProviderPackage(context);
-            if (TextUtils.isEmpty(provider.flattenToString())) {
+            if (provider == null || TextUtils.isEmpty(provider.flattenToString())) {
                 // there isn't an active provider to migrate to the new settings
+                // disable receiver
+                disableReceiver(context);
                 return;
             }
 
@@ -94,11 +104,7 @@ public class CallerInfoSettingsMigrationReceiver extends BroadcastReceiver {
 
         private void performCleanup() {
             // disable migration receiver
-            ComponentName migrationReceiver = new ComponentName(this,
-                    CallerInfoSettingsMigrationReceiver.class);
-            getPackageManager().setComponentEnabledSetting(migrationReceiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
+            CallerInfoSettingsMigrationReceiver.disableReceiver(this);
 
             // unbind from the caller-info plugin
             unbindService(this);
