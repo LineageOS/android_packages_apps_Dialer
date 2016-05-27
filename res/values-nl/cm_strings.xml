@@ -97,13 +97,17 @@
   <string name="call_playback_no_app_found_toast">Kan geen app vinden om de geselecteerde opname af te spelen.</string>
   <string name="invalid_number_text">"%1$s kon deze oproep niet voltooien. Is het nummer correct?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">U kunt een telefoonnummer kiezen\nof uw contacten doorzoeken</string>
+  <string name="emergency_call_hint_text">Geen simkaart. Alleen noodoproepen.</string>
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <string name="callerinfo_provider_auth_no_short">Nee</string>
   <string name="callerinfo_provider_auth_no">Nee, bedankt</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> zal toegang hebben tot uw contacten, uw profiel en Cyanogen-OS-account, waaronder mogelijk uw e-mailadres.</string>
   <string name="callerinfo_provider_auth_learn_more">Lees meer</string>
+  <string name="callerinfo_provider_auth_desc">Welkom! Wilt u <xliff:g id="provider_name">%s</xliff:g> gebruiken om onbekende bellers te identificeren en ongewenste oproepen te blokkeren?</string>
   <string name="callerinfo_provider_auth_desc_no_spam">Welkom! Wilt u <xliff:g id="provider_name">%s</xliff:g> gebruiken om onbekende bellers te identificeren?</string>
   <string name="callerinfo_provider_summary">Identificeert onbekende bellers en spam</string>
   <string name="callerinfo_provider_summary_no_spam">Identificeert onbekende bellers</string>
@@ -120,7 +124,12 @@
   <string name="provider_disable_message">Door %1$s uit te schakelen heeft u geen beller-id.</string>
   <string name="provider_disable_spam_message">Door %1$s uit te schakelen heeft u geen spambeveiliging of beller-id.</string>
   <string name="powered_by_provider">Mogelijk gemaakt door <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_button_help">"Ik snap het"</string>
+  <string name="provider_voice_call">"%1$s-gesprek"</string>
+  <string name="provider_video_call">"%1$s-video-oproep"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Notitie bekijken</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="callerinfo_provider_status_disabling">Uitschakelen</string>
 </resources>
