@@ -55,10 +55,11 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
         boolean wasVideoCall = VideoUtils.isVideoCall(previousVideoState);
         boolean isVideoCall = VideoUtils.isVideoCall(newVideoState);
 
-        // Check for upgrades to video.
-        if (!wasVideoCall && isVideoCall && previousVideoState != newVideoState) {
+        if (wasVideoCall && !isVideoCall) {
+            Log.v(this, " onSessionModifyRequestReceived Call downgraded to " + newVideoState);
+        } else if (previousVideoState != newVideoState) {
             InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoRequest(mCall,
-                newVideoState);
+                 newVideoState);
         }
     }
 
