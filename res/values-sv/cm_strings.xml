@@ -97,7 +97,9 @@
   <string name="call_playback_no_app_found_toast">Ingen app kunde hittas för uppspelning av den valda inspelningen.</string>
   <!-- T9 Search Text -->
   <string name="sign_in_hint_text">Logga in för att ringa %1$s samtal</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> samtal</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> inställningar</string>
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>

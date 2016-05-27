@@ -98,10 +98,13 @@
   <string name="invalid_number_text">"%1$s nie mógł wykonać połączenia. Czy ten numer jest prawidłowy?"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">Możesz wybrać numer lub\nszukać w kontaktach</string>
+  <string name="sign_in_hint_text">Zaloguj się, aby dzwonić %1$s</string>
   <string name="wifi_hint_text">Wykonuj darmowe połączenia %1$s do %1$s przez Wi-Fi.</string>
   <string name="roaming_hint_text">%1$s jest w roamingu. Wykonuj darmowe rozmowy %2$s do %2$s przez Wi-Fi.</string>
   <string name="emergency_call_hint_text">Brak karty SIM. Tylko połączenia alarmowe.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> połączenie</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> ustawienia</string>
   <!-- Search shortcut for "Call using PluginName" -->
   <string name="search_shortcut_call_using">Połącz za pomocą <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
@@ -109,13 +112,27 @@
   <string name="callerinfo_provider_auth_no_short">Nie</string>
   <string name="callerinfo_provider_auth_no">Nie, dziękuję</string>
   <string name="callerinfo_provider_auth_learn_more">Dowiedz się więcej</string>
+  <string name="callerinfo_provider_auth_desc">Witamy. Czy chcesz, aby <xliff:g id="provider_name">%s</xliff:g> identyfikował nieznane połączenia i blokował te niechciane?</string>
+  <string name="callerinfo_provider_summary">Rozpoznawaj nieznane połączenia oraz spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Rozpoznawaj nieznane połączenia</string>
+  <string name="silence_spam_title">Wycisz połączenia spam</string>
+  <string name="silence_spam_summary">Wyciszaj połączenia rozpoznane jako spam</string>
+  <string name="block_hidden_title">Blokuj połączenia z ukrytym numerem telefonu</string>
+  <string name="block_hidden_summary">Połączenia z ukrytym numerem telefonu traktuj jako spam</string>
   <string name="block_dialog_title">Zablokować ten numer?</string>
   <string name="block_dialog_positive">Zablokuj</string>
   <string name="block_dialog_negative">Anuluj</string>
+  <string name="block_dialog_description">Nie będziesz już otrzymywać połączeń i wiadomości od tego numeru.</string>
+  <string name="block_dialog_report_spam">Zgłoś jako spam do <xliff:g id="provider">%s</xliff:g></string>
   <string name="provider_disable_title">Wyłączyć %1$s?</string>
+  <string name="provider_disable_message">Wyłączając %1$s, pozbawisz się identyfikacji rozmówcy.</string>
+  <string name="provider_disable_spam_message">Wyłączając %1$s, pozbawisz się ochrony przed spamem lub identyfikacji rozmówcy.</string>
   <string name="powered_by_provider">Wspierane przez <xliff:g id="provider">%s</xliff:g></string>
   <string name="provider_button_help">"Mam to"</string>
+  <string name="provider_voice_call">"%1$s połączenie głosowe"</string>
+  <string name="provider_video_call">"%1$s połączenie wideo"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Aby wykonać połączenie, włącz uprawnienia dla telefonu.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <!-- Note DeepLink mod settings summary in Dialer -->
 </resources>
