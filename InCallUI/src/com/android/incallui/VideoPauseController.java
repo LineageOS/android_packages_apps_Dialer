@@ -248,26 +248,27 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
      */
     public void onUiShowing(boolean showing) {
         // Only send pause/unpause requests if we are in the INCALL state.
-        if (mInCallPresenter == null || mInCallPresenter.getInCallState() != InCallState.INCALL) {
+        if (mInCallPresenter == null) {
             return;
         }
-
+        final boolean isInCall = mInCallPresenter.getInCallState() == InCallState.INCALL;
         if (showing) {
-            onResume();
+            onResume(isInCall);
         } else {
-            onPause();
+            onPause(isInCall);
         }
     }
 
     /**
      * Called when UI is brought to the foreground.  Sends a session modification request to resume
      * the outgoing video.
+     * @param isInCall true if phone state is INCALL, false otherwise
      */
-    private void onResume() {
+    private void onResume(boolean isInCall) {
         log("onResume");
 
         mIsInBackground = false;
-        if (canVideoPause(mPrimaryCallContext)) {
+        if (canVideoPause(mPrimaryCallContext) && isInCall) {
             sendRequest(mPrimaryCallContext.getCall(), true);
         } else {
             log("onResume. Ignoring...");
@@ -277,12 +278,13 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
     /**
      * Called when UI is sent to the background.  Sends a session modification request to pause the
      * outgoing video.
+     * @param isInCall true if phone state is INCALL, false otherwise
      */
-    private void onPause() {
+    private void onPause(boolean isInCall) {
         log("onPause");
 
         mIsInBackground = true;
-        if (canVideoPause(mPrimaryCallContext)) {
+        if (canVideoPause(mPrimaryCallContext) && isInCall) {
             sendRequest(mPrimaryCallContext.getCall(), false);
         } else {
             log("onPause, Ignoring...");
