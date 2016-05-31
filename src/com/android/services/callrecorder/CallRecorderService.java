@@ -151,7 +151,7 @@ public class CallRecorderService extends Service {
             mMediaRecorder.setOutputFormat(formatChoice == 0
                     ? MediaRecorder.OutputFormat.AMR_WB : MediaRecorder.OutputFormat.MPEG_4);
             mMediaRecorder.setAudioEncoder(formatChoice == 0
-                    ? MediaRecorder.AudioEncoder.AMR_WB : MediaRecorder.AudioEncoder.HE_AAC);
+                    ? MediaRecorder.AudioEncoder.AMR_WB : MediaRecorder.AudioEncoder.AAC);
         } catch (IllegalStateException e) {
             Log.w(TAG, "Error initializing media recorder", e);
             return false;
