@@ -534,6 +534,9 @@ public class InCallPresenter implements CallList.Listener,
             Log.i(this, "Not attempting to block incoming call due to recent emergency call");
             return false;
         }
+        if (call.getDetails().hasProperty(CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
+            return false;
+        }
 
         return true;
     }
