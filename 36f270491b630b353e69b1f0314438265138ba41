@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c985f1d0",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:03:08Z",
+      "side": 1,
+      "message": "We know the cache is empty at this point - so we ask it to get a value without accepting the null/empty result we would get.  The cache calls back and updates the adapter upon the completion of a given request. \n\nThis is also a very similar pattern to the ContactInfoCache with the main difference being that they don\u0027t do any pre-fetching.\n\nPer your second point - the cache notifies a listener that the data set has been updated, which causes the CallLog to rebuild the relevant views.  GetValue is called again at that point to pull the newly valid cache item.",
+      "parentUuid": "5faad753_fe68a51d",
+      "range": {
+        "startLine": 860,
+        "startChar": 8,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_a9daf547",
         "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2016-06-01T18:44:22Z",
       "side": 1,
       "message": "Whats the reasoning for putting this here as apposed to using the adapter\u0027s bindViewHolder? Does it really save much time? The adapter with recyclerviews will only bind the views that are visible anyway, which looks to be what you are mimicking with the first if block.",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 353,
+        "endChar": 5
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e9630d41",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:03:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure that it saves \"time\" per se, so much as it front loads the effort so that the time isn\u0027t spent when the views are being drawn.  This greatly improves the runtime performance of the call log when scrolling, as the cache is pre-built and doesn\u0027t need to fetch/redraw on each call.\n\nThe first block is to resolve issues with pop in when you begin at a point other than the beginning of the Adapter (say you\u0027ve scrolled to the bottom and trigger a screen rotation).  This fetches the items you are looking at first, so they are available first, and then continues onto other items.  This is a major performance issue with very large call logs (1000+ items).  The issue is if you prefetch the call log, and then are not at the beginning, the views you are looking at won\u0027t be fetched until some delayed point in the future.  This isn\u0027t a problem on small call logs with low note counts, but is very problematic on large logs with large note counts.\n\nEssentially this prefetch effort is to limit the churn during scrolling on previously not fetched items.  Pre building the cache allows the scrolling to be much smoother and limits pop int substantially.",
+      "parentUuid": "5faad753_a9daf547",
       "range": {
         "startLine": 331,
         "startChar": 4,
