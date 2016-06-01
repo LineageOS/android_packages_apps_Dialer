@@ -92,6 +92,9 @@
   <string name="call_stats_title_average_duration">Сярэдняя працягласць</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">У журнале выклікаў нямае запісаў, адпавядаючых указанаму інтэрвалу.</string>
+  <string name="call_recording_category_title">Запіс гутаркі</string>
+  <string name="call_recording_format">Фармат аўдыя</string>
+  <string name="call_playback_no_app_found_toast">Не знойдзены дадатак, які можа прайграваць абраны запіс.</string>
   <!-- T9 Search Text -->
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->

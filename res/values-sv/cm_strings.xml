@@ -105,6 +105,7 @@
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <string name="callerinfo_provider_auth_no_short">Nej</string>
   <string name="block_dialog_negative">Avbryt</string>
+  <string name="provider_disable_title">Inaktivera %1$s?</string>
   <string name="provider_voice_call">"%1$s röstsamtal"</string>
   <string name="provider_video_call">"%1$s videosamtal"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
