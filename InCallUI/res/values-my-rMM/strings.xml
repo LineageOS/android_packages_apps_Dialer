@@ -32,7 +32,7 @@
     <string name="pause_prompt_str" msgid="4507496811727697620">"အသံများ ပို့နေသည်\n"</string>
     <string name="send_button" msgid="4054398309483035794">"ပို့ပါ"</string>
     <string name="pause_prompt_yes" msgid="6738588490007499118">"ဟုတ်ပါသည်"</string>
-    <string name="pause_prompt_no" msgid="417286529736964178">"မလိုပါ"</string>
+    <string name="pause_prompt_no" msgid="417286529736964178">"No"</string>
     <string name="wild_prompt_str" msgid="8178750766679617355">"အစားထိုး အထူးအက္ခရာတွင် အစားထိုးရန်"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"အစည်းအဝေးခေါ်ဆိုမှု <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="2951965862286532957">"အသံစာနံပါတ်"</string>
