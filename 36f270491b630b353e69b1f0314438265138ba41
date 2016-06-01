@@ -260,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8975b9cd",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_5e6e992f",
+      "range": {
+        "startLine": 90,
+        "startChar": 23,
+        "endLine": 90,
+        "endChar": 42
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_de7a89ef",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 5
@@ -370,6 +394,30 @@
         "startChar": 27,
         "endLine": 132,
         "endChar": 74
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_297e05af",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_89113955",
+      "range": {
+        "startLine": 132,
+        "startChar": 27,
+        "endLine": 132,
+        "endChar": 50
       },
       "revId": "36f270491b630b353e69b1f0314438265138ba41",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
