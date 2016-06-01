@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_fe68a51d",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "I see what you\u0027re doing here, but the name is a little misleading. This goes a little deeper into your DeepLInkCache implementation, ideally get will do just that, get a cached value. What I see it doing is getting any valid DeepLink, and if one isn\u0027t returned it goes and attempts to look one up. Two things I\u0027m seeing to be the issue here. First, you\u0027re updating your cache using \"getValue\" you might want to separate the get and update into two methods for readability sake. Second, if you get null back (no deeplink currently cached), how do you know when a valid DeepLink is now cached?",
+      "range": {
+        "startLine": 860,
+        "startChar": 8,
+        "endLine": 860,
+        "endChar": 47
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a9daf547",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "Whats the reasoning for putting this here as apposed to using the adapter\u0027s bindViewHolder? Does it really save much time? The adapter with recyclerviews will only bind the views that are visible anyway, which looks to be what you are mimicking with the first if block.",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 353,
+        "endChar": 5
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_49682186",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "scope?",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 23
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8972997a",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "nit: static final defines above mutable variables.\nanother nit: group your public and private variables.",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 50
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_fe7f45dd",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "parameter \u003cspace\u003e + \u003cspace\u003e parameter",
+      "range": {
+        "startLine": 61,
+        "startChar": 41,
+        "endLine": 61,
+        "endChar": 76
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_5e6e992f",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "add space between parameters",
+      "range": {
+        "startLine": 90,
+        "startChar": 23,
+        "endLine": 90,
+        "endChar": 42
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_de7a89ef",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "final",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 44
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a95755ca",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "This seem unneeded. I\u0027m assuming this is here to prevent further adding to mPendingRequests. The only thing you\u0027re doing with this extra check is not waiting if there is nothing in the mRequests queue, in which case, there would be nothing to add to mPendingRequests, and therefor there is no risk in overloading ambient. Not to mention, by blocking this potential wait, you\u0027re just ensuring a continued run through this while loop until ambient requests are available.\nLine 122 should be sufficient in what (i\u0027m assuming) you\u0027re trying to achieve.",
+      "range": {
+        "startLine": 132,
+        "startChar": 27,
+        "endLine": 132,
+        "endChar": 74
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_89113955",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-01T18:44:22Z",
+      "side": 1,
+      "message": "you already have size",
+      "range": {
+        "startLine": 132,
+        "startChar": 27,
+        "endLine": 132,
+        "endChar": 50
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
