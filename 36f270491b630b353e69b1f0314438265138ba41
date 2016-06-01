@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_c9a17148",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_49682186",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 23
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8972997a",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 5
@@ -142,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_a99c350e",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_8972997a",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 50
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_fe7f45dd",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 5
@@ -153,6 +201,30 @@
       "writtenOn": "2016-06-01T18:44:22Z",
       "side": 1,
       "message": "parameter \u003cspace\u003e + \u003cspace\u003e parameter",
+      "range": {
+        "startLine": 61,
+        "startChar": 41,
+        "endLine": 61,
+        "endChar": 76
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_698abdbf",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_fe7f45dd",
       "range": {
         "startLine": 61,
         "startChar": 41,
@@ -211,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "5faad753_8987f9b5",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_de7a89ef",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 44
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_a95755ca",
         "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
         "patchSetId": 5
@@ -250,6 +346,30 @@
         "startChar": 27,
         "endLine": 132,
         "endChar": 50
+      },
+      "revId": "36f270491b630b353e69b1f0314438265138ba41",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c96f31fa",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-01T19:15:11Z",
+      "side": 1,
+      "message": "This is subtle - but we\u0027re actually making sure we don\u0027t delay for THROTTLE_LIMIT time, in the case that there are requests in the queue, but we\u0027ve already reached a maximum on our ambient queries - we\u0027re basically giving ambient a few cycles to catch up. \n\nIt\u0027s ok to spin for a few cycles while ambient clears out some requests, and then find out at that point that there\u0027s nothing left to query (and thus go ahead and wait).  \n\nNot doing this check can lead to a situation where we DO have queued requests, but because we\u0027ve hit a maximum of Ambient\u0027s capacity we shouldn\u0027t add a new query until previous one\u0027s have been cleared.  Sleeping for 1s in this case can lead to appreciable delays in UI response as we wait for a full second regardless of the rate at which ambient completes requests (and thus the rate at which we can en-queue new ones)",
+      "parentUuid": "5faad753_a95755ca",
+      "range": {
+        "startLine": 132,
+        "startChar": 27,
+        "endLine": 132,
+        "endChar": 74
       },
       "revId": "36f270491b630b353e69b1f0314438265138ba41",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
