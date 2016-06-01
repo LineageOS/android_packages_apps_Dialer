@@ -138,5 +138,8 @@
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Slå telefontilladelser til, for at foretage opkald.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Se note</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Tag noter overalt</string>
+  <string name="callerinfo_provider_status_disabling">Deaktivering</string>
 </resources>
