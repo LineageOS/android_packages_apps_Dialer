@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_ead3fb5e",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-02T15:03:05Z",
+      "side": 1,
+      "message": "why getActivity !\u003d null?  That seems wrong to me.",
+      "revId": "dc6639576a9530a8d95462f1aa219c71fae11aad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_aac983ac",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-02T15:03:05Z",
+      "side": 1,
+      "message": "I think this is the check you wanted at 512?",
+      "revId": "dc6639576a9530a8d95462f1aa219c71fae11aad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
