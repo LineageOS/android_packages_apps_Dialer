@@ -148,7 +148,7 @@ public class DialerDatabaseHelperTest extends AndroidTestCase {
 
     private ArrayList<ContactNumber> getMatchesFromDb(String query) {
         final SmartDialNameMatcher nameMatcher = new SmartDialNameMatcher(query,
-                SmartDialPrefix.getMap());
+                SmartDialPrefix.getMap(), getContext());
         return mTestHelper.getLooseMatches(query, nameMatcher);
     }
 }
