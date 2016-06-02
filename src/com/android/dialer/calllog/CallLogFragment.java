@@ -550,8 +550,13 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
             if (!onEntry) {
                 mCallLogQueryHandler.markMissedCallsAsRead();
             }
-            CallLogNotificationsHelper.removeMissedCallNotifications(getActivity());
-            CallLogNotificationsHelper.updateVoicemailNotifications(getActivity());
+
+            Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            CallLogNotificationsHelper.removeMissedCallNotifications(activity);
+            CallLogNotificationsHelper.updateVoicemailNotifications(activity);
         }
     }
 
