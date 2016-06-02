@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_8aa12797",
+        "filename": "src/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-02T16:20:08Z",
+      "side": 1,
+      "message": "\u00270\u0027 means something?  Maybe a constant is in order here?",
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2aaa7370",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-02T16:20:08Z",
+      "side": 1,
+      "message": "definitely want to know what the importance of \u00270\u0027 is now...",
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
