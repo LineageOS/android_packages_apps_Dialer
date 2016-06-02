@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "5faad753_0a80d7bf",
+        "filename": "src/com/android/dialer/dialpad/SmartDialCursorLoader.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-02T17:13:27Z",
+      "side": 1,
+      "message": "why are we only checking if mQuery is not empty here and not above? seems like the original code didn\u0027t check for this either.",
+      "range": {
+        "startLine": 96,
+        "startChar": 46,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_aa80a3c0",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-02T17:13:27Z",
+      "side": 1,
+      "message": "don\u0027t set this. isEmpty will null check.",
+      "range": {
+        "startLine": 191,
+        "startChar": 21,
+        "endLine": 191,
+        "endChar": 25
+      },
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_2aaa7370",
         "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
         "patchSetId": 2
@@ -30,6 +76,52 @@
       "writtenOn": "2016-06-02T16:20:08Z",
       "side": 1,
       "message": "definitely want to know what the importance of \u00270\u0027 is now...",
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8a6b671c",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-02T17:13:27Z",
+      "side": 1,
+      "message": "there are 2 to 5 digit country codes as well. This seems like it only handles three digit codes.\n\nAbkhazia has +7840,+7940,+99544\n\nhttps://en.wikipedia.org/wiki/List_of_country_calling_codes",
+      "range": {
+        "startLine": 691,
+        "startChar": 29,
+        "endLine": 691,
+        "endChar": 48
+      },
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ea63fb40",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-02T17:13:27Z",
+      "side": 1,
+      "message": "like country codes, there are larger than two digit prefix codes.\n\nhttps://en.wikipedia.org/wiki/List_of_international_call_prefixes",
+      "range": {
+        "startLine": 700,
+        "startChar": 30,
+        "endLine": 700,
+        "endChar": 48
+      },
       "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
