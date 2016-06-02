@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_0f6789bf",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "Is this called from anywhere? It doesn\u0027t look like it on first glance.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_ef61cdaa",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "This method seems pointless and can be inlined above.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_6f4cfd41",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "I assume typically there won\u0027t be many items in this cache? If that\u0027s not the case and the cache can grow large, I\u0027d consider e.g. a LruCache.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_2f5285df",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "What\u0027s the point of doing mutate() here? The original (non-mutated) drawable isn\u0027t used anyway.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_8f493932",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "I do not understand the purpose of this copy. Isn\u0027t it sufficient to just do\n\nmViews.viewNotActionIcon.setImageDrawable(icon.mutate());\n\nin line 60? I mean, you just want to separate state, not a new drawable.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_cf43b112",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "The naming of this isn\u0027t ideal. How about MAX_REQUEST_COUNT or something?\n\nAlso please move to line 69 to keep limit counts together.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_af3e7588",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-02T05:27:04Z",
+      "side": 1,
+      "message": "Nit: this newline can go.",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
