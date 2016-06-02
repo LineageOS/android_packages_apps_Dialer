@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_aaa8a38b",
+        "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-02T15:58:48Z",
+      "side": 1,
+      "message": "Wouldn\u0027t you want activity \u003d\u003d null then?",
+      "parentUuid": "5faad753_ca115f06",
+      "revId": "dc6639576a9530a8d95462f1aa219c71fae11aad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_aac983ac",
         "filename": "src/com/android/dialer/calllog/CallLogFragment.java",
         "patchSetId": 2
