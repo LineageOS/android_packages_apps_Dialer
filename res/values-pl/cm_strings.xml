@@ -111,8 +111,10 @@
   <string name="callerinfo_provider_auth_yes">Tak</string>
   <string name="callerinfo_provider_auth_no_short">Nie</string>
   <string name="callerinfo_provider_auth_no">Nie, dziękuję</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> będzie miał dostęp do Twoich kontaktów, Twojego profilu i konta Cyanogen, które mogą zawierać Twój adres email.</string>
   <string name="callerinfo_provider_auth_learn_more">Dowiedz się więcej</string>
   <string name="callerinfo_provider_auth_desc">Witamy. Czy chcesz, aby <xliff:g id="provider_name">%s</xliff:g> identyfikował nieznane połączenia i blokował te niechciane?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Witaj! Czy chcesz, aby <xliff:g id="provider_name">%s</xliff:g> identyfikował nieznane połączenia?</string>
   <string name="callerinfo_provider_summary">Rozpoznawaj nieznane połączenia oraz spam</string>
   <string name="callerinfo_provider_summary_no_spam">Rozpoznawaj nieznane połączenia</string>
   <string name="silence_spam_title">Wycisz połączenia spam</string>
@@ -128,11 +130,15 @@
   <string name="provider_disable_message">Wyłączając %1$s, pozbawisz się identyfikacji rozmówcy.</string>
   <string name="provider_disable_spam_message">Wyłączając %1$s, pozbawisz się ochrony przed spamem lub identyfikacji rozmówcy.</string>
   <string name="powered_by_provider">Wspierane przez <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_search_help">"Szukaj kontaktów %1$s\nprzełącz tryby tutaj"</string>
   <string name="provider_button_help">"Mam to"</string>
   <string name="provider_voice_call">"%1$s połączenie głosowe"</string>
   <string name="provider_video_call">"%1$s połączenie wideo"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Aby wykonać połączenie, włącz uprawnienia dla telefonu.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Pokaż notatkę</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Pobierz notatki z dowolnego miejsca</string>
+  <string name="callerinfo_provider_status_disabling">Wyłączanie</string>
 </resources>
