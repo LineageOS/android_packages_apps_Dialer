@@ -60,7 +60,7 @@
             android:title="@string/incall_vibrate_hangup_title" />
 
         <CheckBoxPreference
-            android:key="incall_vibrate_45"
+            android:key="incall_vibrate_45secs"
             android:title="@string/incall_vibrate_45_title"
             android:summary="@string/incall_vibrate_45_summary" />
 
