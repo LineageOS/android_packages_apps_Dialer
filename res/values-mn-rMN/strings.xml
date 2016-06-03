@@ -259,7 +259,7 @@
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g>-г аль хэдийн блоклосон байна."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Дуудлага блоклохыг 48 цагийн турш идэвхгүй болгосон."</string>
     <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Яаралтай дуудлага хийсэн тул идэвхгүй болгосон."</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Дуудах акаунт"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Дуудах бүртгэл"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Идэвхжүүлэх"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Зөвшөөрөл тохируулах"</string>
     <string name="permission_no_speeddial" msgid="6882563445996184051">"Яаралтай дуудлагыг идэвхжүүлэхийн тулд Харилцагчдын зөвшөөрлийг идэвхжүүлнэ үү."</string>

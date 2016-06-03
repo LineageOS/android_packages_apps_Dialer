@@ -184,7 +184,7 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blokeatu zenbakia"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> dei galdu berri"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Ez duzu inor markatze bizkorrean oraindik"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Gehitu gogokoak"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Gehitu gogokoa"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Ez duzu kontakturik oraindik"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Gehitu kontaktua"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu sakatuta berrantolatzeko"</string>

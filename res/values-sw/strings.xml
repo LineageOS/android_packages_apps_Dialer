@@ -95,7 +95,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Onyesha barua za sauti pekee"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Onyesha simu zote"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ongeza usitishaji wa sekunde 2"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Ongeza kusubiri"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Ongeza muda wa kusubiri"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Mipangilio"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Anwani mpya"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Anwani zote"</string>
@@ -232,7 +232,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sauti na mtetemo"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Zana za walio na matatizo ya kuona au kusikia"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Mlio wa simu"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Tetema simu zinapoingia pia"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Pia tetema simu zinapoingia"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Milio ya vitufe vya kupiga simu"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Urefu wa toni ya vitufe vya kupiga simu"</string>
   <string-array name="dtmf_tone_length_entries">

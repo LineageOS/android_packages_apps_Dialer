@@ -41,7 +41,7 @@
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"復原"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"前往封存庫"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通話記錄嗎？"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"這會刪除所有通話記錄"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"此操作將刪除所有通話記錄"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通話記錄…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"撥打電話"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"未接來電"</string>
@@ -99,7 +99,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"設定"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"新增聯絡人"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"所有聯絡人"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"通話詳細資料"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"通話詳情"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"沒有詳細資訊"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"使用觸控音頻按鍵"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"返回進行中的通話"</string>
@@ -183,7 +183,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視像通話"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"封鎖號碼"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 個新的未接來電"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"沒有可快速撥號的聯絡人"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"快速撥號清單中沒有聯絡人"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"新增常用聯絡人"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"暫時沒有聯絡人"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"新增聯絡人"</string>
@@ -216,7 +216,7 @@
     </plurals>
     <string name="description_create_new_contact_action" msgid="818755978791008167">"為<xliff:g id="NAMEORNUMBER">^1</xliff:g>建立聯絡人"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"加入<xliff:g id="NAMEORNUMBER">^1</xliff:g>至現有的聯絡人"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"與「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」通話的詳細資料"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"與「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」的通話詳情"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"已從通話記錄中刪除"</string>
     <string name="call_log_header_today" msgid="3225248682434212981">"今天"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"昨天"</string>

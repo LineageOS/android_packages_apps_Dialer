@@ -20,8 +20,7 @@
     <string name="applicationLabel" msgid="7762561155467201526">"Телефон"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Телефон"</string>
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Телефон тергичи"</string>
-    <!-- no translation found for dialerIconLabel (6500826552823403796) -->
-    <skip />
+    <string name="dialerIconLabel" msgid="6500826552823403796">"Телефон"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Чалуулар таржымалы"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Номер туура эмес"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Номерди көчүрүү"</string>
@@ -78,14 +77,10 @@
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Номур тандоо"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"Номур тандаңыз"</string>
-    <!-- no translation found for make_primary (5829291915305113983) -->
-    <skip />
-    <!-- no translation found for description_search_button (3660807558587384889) -->
-    <skip />
-    <!-- no translation found for description_dial_button (1274091017188142646) -->
-    <skip />
-    <!-- no translation found for description_digits_edittext (8760207516497016437) -->
-    <skip />
+    <string name="make_primary" msgid="5829291915305113983">"Бул тандоону эстеп калуу"</string>
+    <string name="description_search_button" msgid="3660807558587384889">"издөө"</string>
+    <string name="description_dial_button" msgid="1274091017188142646">"терүү"</string>
+    <string name="description_digits_edittext" msgid="8760207516497016437">"терүү үчүн номер"</string>
     <string name="description_playback_start_stop" msgid="5060732345522492292">"Ойнотууну иштетүү же токтотуу"</string>
     <string name="description_playback_speakerphone" msgid="6008323900245707504">"Катуу сүйлөткүчтү күйгүзүү же өчүрүү"</string>
     <string name="description_playback_seek" msgid="4509404274968530055">"Ойнотуунун жайгашкан жерин издөө"</string>
@@ -99,37 +94,26 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Өткөз. чалуу-ды гана көрсөтүү"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Үнкаттарды гана көрсөтүү"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Бардык чалууларды көрсөтүү"</string>
-    <!-- no translation found for add_2sec_pause (9214012315201040129) -->
-    <skip />
+    <string name="add_2sec_pause" msgid="9214012315201040129">"2-сек. тыныгууну кошуңуз"</string>
     <string name="add_wait" msgid="3360818652790319634">"Тыныгуу кошуу"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Жөндөөлөр"</string>
-    <!-- no translation found for menu_newContact (1209922412763274638) -->
-    <skip />
+    <string name="menu_newContact" msgid="1209922412763274638">"Жаңы байланыш"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Бардык байланыштар"</string>
-    <!-- no translation found for callDetailTitle (5340227785196217938) -->
-    <skip />
+    <string name="callDetailTitle" msgid="5340227785196217938">"Чалуунун чоо-жайы"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Чоо-жайы жеткиликтүү эмес"</string>
-    <!-- no translation found for dialer_useDtmfDialpad (1707548397435075040) -->
-    <skip />
-    <!-- no translation found for dialer_returnToInCallScreen (3719386377550913067) -->
-    <skip />
-    <!-- no translation found for dialer_addAnotherCall (4205688819890074468) -->
-    <skip />
-    <!-- no translation found for type_incoming (6502076603836088532) -->
-    <skip />
-    <!-- no translation found for type_outgoing (343108709599392641) -->
-    <skip />
-    <!-- no translation found for type_missed (2720502601640509542) -->
-    <skip />
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Тоналдык терүү тактасын колдонуу"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Токтотулган чалууга кайтуу"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Чалууну кошуу"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Кирүүчү чалуу"</string>
+    <string name="type_outgoing" msgid="343108709599392641">"Чыгуучу чалуу"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Кабыл алынбаган чалуулар"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Келип жаткан видео чалуу"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Чыгып жаткан видео чалуу"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Кабыл алынбаган видео чалуу"</string>
-    <!-- no translation found for type_voicemail (5153139450668549908) -->
-    <skip />
+    <string name="type_voicemail" msgid="5153139450668549908">"Үн почтасы"</string>
     <string name="type_rejected" msgid="7783201828312472691">"Четке кагылган чалуу"</string>
     <string name="type_blocked" msgid="3521686227115330015">"Бөгөттөлгөн чалуу"</string>
-    <!-- no translation found for actionIncomingCall (6028930669817038600) -->
-    <skip />
+    <string name="actionIncomingCall" msgid="6028930669817038600">"Кирүүчү чалуулар"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Үнкатты угуу"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Байланышты кароо <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call" msgid="3443678121983852666">"Чалуу <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -140,12 +124,9 @@
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Угула элек үнкат"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Үн менен издеп баштоо"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Чалуу <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <!-- no translation found for unknown (740067747858270469) -->
-    <skip />
-    <!-- no translation found for voicemail (3851469869202611441) -->
-    <skip />
-    <!-- no translation found for private_num (6374339738119166953) -->
-    <skip />
+    <string name="unknown" msgid="740067747858270469">"Белгисиз"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Үн почтасы"</string>
+    <string name="private_num" msgid="6374339738119166953">"Купуя номер"</string>
     <string name="payphone" msgid="7726415831153618726">"Таксофон"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> сек."</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мүн. <xliff:g id="SECONDS">%s</xliff:g> сек."</string>
@@ -158,14 +139,10 @@
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Үнкат орноотуу үчүн Меню &gt; Тууралоолорго кириңиз."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Үнкатты текшерүү үчүн, алгач Учак тартибин өчүрүңүз."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Жүктөлүүдө…"</string>
-    <!-- no translation found for imei (3045126336951684285) -->
-    <skip />
-    <!-- no translation found for meid (6210568493746275750) -->
-    <skip />
-    <!-- no translation found for simContacts_emptyLoading (6700035985448642408) -->
-    <skip />
-    <!-- no translation found for simContacts_title (27341688347689769) -->
-    <skip />
+    <string name="imei" msgid="3045126336951684285">"IMEI"</string>
+    <string name="meid" msgid="6210568493746275750">"MEID"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"SIM картадан жүктөлүүдө..."</string>
+    <string name="simContacts_title" msgid="27341688347689769">"SIM картадагы байланыштар"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"Жеткиликтүү байланыштар колдонмосу жок"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"Үн менен издөө жеткиликтүү эмес"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Телефон колдонмосу өчүрүлгөндүктөн, чалуу мүмкүн болбой жатат."</string>

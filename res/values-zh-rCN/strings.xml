@@ -184,7 +184,7 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"屏蔽号码"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"尚未给任何联系人设定快速拨号"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"添加常用联系人"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"收藏联系人"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"您还没有任何联系人"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"添加联系人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"触摸图片可查看所有号码，触摸并按住可重新排序"</string>

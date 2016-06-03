@@ -214,7 +214,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> նոր ձայնային փոստ</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> նոր ձայնային փոստ</item>
     </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը կոնտակտների ցանկին"</string>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտը"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը առկա կոնտակտին"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> զանգի մասին տվյալներ"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Ջնջվել է զանգերի պատմությունից"</string>
