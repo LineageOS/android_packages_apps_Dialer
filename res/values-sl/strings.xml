@@ -30,7 +30,7 @@
     <string name="action_unblock_number" msgid="3043777622269776127">"Odblokiranje telefonske številke"</string>
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"Številka <xliff:g id="NUMBER">%1$s</xliff:g> je odblokirana"</string>
     <string name="block_number_undo" msgid="591338370336724156">"RAZVELJAVI"</string>
-    <string name="call_details_delete" msgid="1833359621896346955">"Izbris"</string>
+    <string name="call_details_delete" msgid="1833359621896346955">"Izbriši"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Urejanje številke pred klicem"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Izbriši zgodovino klicev"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Brisanje sporočil iz odzivnika"</string>
@@ -97,7 +97,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Pokaži samo spor. glasovne pošte"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Pokaži vse klice"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Dodaj 2 sekundi premora"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Dodaj premor"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Dodaj čakanje"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Nastavitve"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nov stik"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Vsi stiki"</string>
@@ -186,9 +186,9 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blokiraj številko"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Št. novih zgrešenih klicev: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Na seznamu za hitro klicanje nimate še nikogar"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodajanje priljubljenega"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodajte priljubljenega"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Nimate še stikov"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Dodajanje stika"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Dodajte stik"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Dotaknite se slike, če želite videti vse številke, ali pa se je dotaknite in pridržite, če želite spremeniti vrstni red."</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstrani"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videoklic"</string>

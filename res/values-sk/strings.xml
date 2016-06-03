@@ -32,7 +32,7 @@
     <string name="block_number_undo" msgid="591338370336724156">"SPÄŤ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Odstrániť"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Pred volaním upraviť číslo"</string>
-    <string name="call_log_delete_all" msgid="4677609108288680411">"Vymazať históriu hovorov?"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Vymazať históriu hovorov"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Odstrániť hlasovú správu"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Archivovať hlasovú správu"</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"Zdieľať hlasovú správu"</string>
@@ -168,7 +168,7 @@
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Blokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Hovory z tohto čísla budú blokované a hlasové správy budú automaticky odstraňované."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Hovory z tohto čísla budú zablokované, ale volajúci stále môže zanechať hlasové správy."</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Z tohto čísla už nebudete dostávať hovory ani textové správy."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Z tohto čísla už nebudete prijímať hovory ani textové správy."</string>
     <string name="block_number_ok" msgid="770551992296781873">"BLOKOVAŤ"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Odblokovať číslo <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ODBLOKOVAŤ"</string>

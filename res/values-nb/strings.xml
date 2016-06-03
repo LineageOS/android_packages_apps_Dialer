@@ -158,7 +158,7 @@
     <string name="call_log_activity_title" msgid="7949633151371183580">"Anropslogg"</string>
     <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Talepostarkiv"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Alle"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"Ubesvart"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"Ubesvarte"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Talemeldinger"</string>
     <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Ny, forenklet blokkering"</string>
     <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Telefon-appen endrer innstillingene for blokkering for at du skal være bedre beskyttet. Du mottar verken meldinger eller anrop fra blokkerte numre, og det kan hende at disse numrene blir delt med andre apper."</string>

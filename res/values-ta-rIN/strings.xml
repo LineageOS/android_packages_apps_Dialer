@@ -31,7 +31,7 @@
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"<xliff:g id="NUMBER">%1$s</xliff:g> அனுமதிக்கப்பட்டது"</string>
     <string name="block_number_undo" msgid="591338370336724156">"செயல்தவிர்"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"நீக்கு"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"அழைப்பதற்கு முன் எண்ணை மாற்று"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"அழைக்கும் முன் எண்ணை மாற்று"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"அழைப்பு வரலாற்றை அழி"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"குரலஞ்சலை நீக்கு"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"குரலஞ்சலைக் காப்பகப்படுத்து"</string>
@@ -184,7 +184,7 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"எண்ணைத் தடு"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> புதிய தவறிய அழைப்புகள்"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"இன்னும் விரைவு டயலில் யாரையும் சேர்க்கவில்லை"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"பிடித்தவராகச் சேர்"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"முக்கியமானவர்களைச் சேர்"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"இதுவரை எந்தத் தொடர்புகளும் இல்லை"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ஒரு தொடர்பைச் சேர்க்கவும்"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"எல்லா எண்களையும் பார்க்க, படத்தைத் தொடவும் அல்லது மறுவரிசைப்படுத்த தொட்டுப் பிடித்திருக்கவும்"</string>

@@ -151,9 +151,9 @@
     <string name="activity_not_available" msgid="2287665636817987623">"На устройстве нет подходящего приложения"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Поиск в контактах"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"Найдите контакт или введите номер"</string>
-    <string name="call_log_all_empty" msgid="8357417710416340920">"В журнале пока нет звонков."</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"В журнале пока нет звонков"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Вызов"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Нет пропущенных вызовов"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Нет пропущенных звонков"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Нет входящих голосовых сообщений"</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Архив пуст."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Только часто используемые"</string>

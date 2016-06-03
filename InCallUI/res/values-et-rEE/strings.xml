@@ -35,7 +35,7 @@
     <string name="pause_prompt_no" msgid="417286529736964178">"Ei"</string>
     <string name="wild_prompt_str" msgid="8178750766679617355">"Asenda metamärk üksusega"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"Konverentskõne <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
-    <string name="voicemail_settings_number_label" msgid="2951965862286532957">"Kõnepostinumber"</string>
+    <string name="voicemail_settings_number_label" msgid="2951965862286532957">"Kõneposti number"</string>
     <string name="card_title_dialing" msgid="5046026076417718916">"Valimine"</string>
     <string name="card_title_redialing" msgid="8072468059192027844">"Uuesti valimine"</string>
     <string name="card_title_conf_call" msgid="1747835072739982104">"Konverentskõne"</string>
