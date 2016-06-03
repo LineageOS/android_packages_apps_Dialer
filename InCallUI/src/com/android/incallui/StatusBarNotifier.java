@@ -334,7 +334,9 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         // Set the intent as a full screen intent as well if a call is incoming
         if (notificationType == NOTIFICATION_INCOMING_CALL
-                && !InCallPresenter.getInstance().isShowingInCallUi()) {
+                && (!InCallPresenter.getInstance().isShowingInCallUi() ||
+                   InCallPresenter.getInstance().getActivity().
+                   isPhoneAccDialogFragmentShown())) {
             configureFullScreenIntent(builder, inCallPendingIntent, call);
             // Set the notification category for incoming calls
             builder.setCategory(Notification.CATEGORY_CALL);
