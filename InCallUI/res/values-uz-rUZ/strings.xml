@@ -36,12 +36,12 @@
     <string name="wild_prompt_str" msgid="8178750766679617355">"Universal belgini bunga almashtirish"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"Konferens-aloqa: <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="2951965862286532957">"Ovozli pochta raqami"</string>
-    <string name="card_title_dialing" msgid="5046026076417718916">"Raqam terilmoqda"</string>
+    <string name="card_title_dialing" msgid="5046026076417718916">"Chaqiruv"</string>
     <string name="card_title_redialing" msgid="8072468059192027844">"Qayta terilmoqda"</string>
     <string name="card_title_conf_call" msgid="1747835072739982104">"Konferens-aloqa"</string>
     <string name="card_title_incoming_call" msgid="4138485434087223132">"Kiruvchi qo‘ng‘iroq"</string>
     <string name="card_title_incoming_work_call" msgid="7000583925426981712">"Kiruvchi qo‘ng‘iroq (ish)"</string>
-    <string name="card_title_call_ended" msgid="5249815286629136486">"Qo‘ng‘iroq tugadi"</string>
+    <string name="card_title_call_ended" msgid="5249815286629136486">"Chaqiruv tugadi"</string>
     <string name="card_title_on_hold" msgid="5633854828341577689">"Kutilmoqda"</string>
     <string name="card_title_hanging_up" msgid="3402022578391538671">"Suhbat tugatilmoqda"</string>
     <string name="card_title_in_call" msgid="5029165346952099302">"Suhbat"</string>
@@ -53,7 +53,7 @@
     <string name="card_title_video_call_rejected" msgid="2885215432045215465">"Video qo‘ng‘iroq so‘rovi rad etildi"</string>
     <string name="card_title_callback_number" msgid="7646082782307705748">"Teskari qo‘ng‘iroq raqamingiz\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Favqulodda holatlar uchun teskari qo‘ng‘iroq raqamingiz\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
-    <string name="notification_dialing" msgid="8080968169444117163">"Raqam terilmoqda"</string>
+    <string name="notification_dialing" msgid="8080968169444117163">"Chaqiruv"</string>
     <string name="notification_missedCallTitle" msgid="2774630248151712215">"Javobsiz qo‘ng‘iroq"</string>
     <string name="notification_missedCallsTitle" msgid="263275811089605859">"Javobsiz qo‘ng‘iroqlar"</string>
     <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> ta javobsiz qo‘ng‘iroq"</string>
@@ -76,7 +76,7 @@
     <string name="notification_network_selection_title" msgid="6785177943238085441">"Xizmat mavjud emas"</string>
     <string name="notification_network_selection_text" msgid="9097902390701009591">"Tanlangan tarmoq (<xliff:g id="OPERATOR_NAME">%s</xliff:g>) mavjud emas"</string>
     <string name="notification_action_answer" msgid="8418990052527593953">"Javob berish"</string>
-    <string name="notification_action_end_call" msgid="2152010639043225860">"Suhbatni tugatish"</string>
+    <string name="notification_action_end_call" msgid="2152010639043225860">"Tugatish"</string>
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Video aloqa"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Ovozli aloqa"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Qabul qilish"</string>
@@ -99,7 +99,7 @@
     <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"Qo‘ng‘iroqni rad qilib bo‘lmadi."</string>
     <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"Qo‘ng‘iroq(lar)ni chiqarib bo‘lmadi."</string>
     <string name="incall_call_type_label_sip" msgid="1327822795765282192">"SIP qo‘ng‘iroq"</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Favqulodda qo‘ng‘iroq"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Favqulodda chaqiruv"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Radio yoqilmoqda…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Aloqa yo‘q. Qayta urinilmoqda…"</string>
     <string name="dial_emergency_error" msgid="582305854626092376">"Qo‘ng‘iroq qilib bo‘lmadi. <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> favqulodda raqam emas."</string>

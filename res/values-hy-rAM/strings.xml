@@ -31,7 +31,7 @@
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"Արգելաբացվել է <xliff:g id="NUMBER">%1$s</xliff:g> համար"</string>
     <string name="block_number_undo" msgid="591338370336724156">"ՀԵՏԱՐԿԵԼ"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Ջնջել"</string>
-    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Խմբագրել համարը զանգելուց առաջ"</string>
+    <string name="action_edit_number_before_call" msgid="3100221149873436485">"Փոփոխել համարը զանգելուց առաջ"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Ջնջել զանգերի պատմությունը"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Ջնջել ձայնային փոստը"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Արխիվացնել ձայնային փոստը"</string>
@@ -214,7 +214,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> նոր ձայնային փոստ</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> նոր ձայնային փոստ</item>
     </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը կոնտակտների ցանկին"</string>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտը"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը առկա կոնտակտին"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> զանգի մասին տվյալներ"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Ջնջվել է զանգերի պատմությունից"</string>

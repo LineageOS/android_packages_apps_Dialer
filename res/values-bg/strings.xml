@@ -32,7 +32,7 @@
     <string name="block_number_undo" msgid="591338370336724156">"ОТМЯНА"</string>
     <string name="call_details_delete" msgid="1833359621896346955">"Изтриване"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Редактиране на номера преди обаждане"</string>
-    <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята на обажданията"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"Изчистване на историята"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Изтриване на гласова поща"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Архивиране на гласовата поща"</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"Споделяне на гласова поща"</string>
@@ -94,7 +94,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Показване само на пропуснатите"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Показване само на гл. поща"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Показване на всички обаждания"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"Добавяне на 2-сек пауза"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"Добавяне на пауза от 2 сек"</string>
     <string name="add_wait" msgid="3360818652790319634">"Добавяне на изчакване"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Настройки"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Нов контакт"</string>

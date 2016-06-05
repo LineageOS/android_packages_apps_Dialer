@@ -183,8 +183,8 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"发起视频通话"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"屏蔽号码"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"您的快速拨号功能尚未收藏任何联系人"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"添加常用联系人"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"尚未给任何联系人设定快速拨号"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"收藏联系人"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"您还没有任何联系人"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"添加联系人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"触摸图片可查看所有号码，触摸并按住可重新排序"</string>
@@ -230,7 +230,7 @@
     <string name="list_delimeter" msgid="4571593167738725100">"、 "</string>
     <string name="display_options_title" msgid="7812852361055667468">"显示选项"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"提示音和振动"</string>
-    <string name="accessibility_settings_title" msgid="6068141142874046249">"辅助功能"</string>
+    <string name="accessibility_settings_title" msgid="6068141142874046249">"无障碍功能"</string>
     <string name="ringtone_title" msgid="760362035635084653">"手机铃声"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"有来电时响铃并振动"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"拨号键盘提示音"</string>

@@ -97,7 +97,7 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"ການ​ຕັ້ງ​ຄ່າ"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ່ຕິດຕໍ່ໃໝ່"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ລາຍລະອຽດການໂທ"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ບໍ່​ມີ​ລາຍ​ລະ​ອຽດ​ຢູ່"</string>
@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"ເພີ່ມ​ເບີ​ໂທ​ລະ​ສັບ ຫຼື ຊອກ​ຫາ​ລາຍ​ຊື່​ຕິດ​ຕໍ່"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"ປະ​ຫວັດ​ການ​ໂທ​ຂອງ​ທ່ານ​ຫວ່າງ​ເປົ່າ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"​ໂທ​ອອກ"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"ທ່ານ​ມີ​ສາຍ​ບໍ່​ໄດ້​ຮັບ."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"ທ່ານບໍ່ມີສາຍທີ່ບໍ່ໄດ້ຮັບ."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ກ່ອງເຂົ້າ​ຂໍ້​ຄວາມ​ສຽງ​ຂອງ​ທ່ານ​ຫວ່າງ​ເປົ່າ."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"ແຟ້ມຈັດເກັບຂໍ້ຄວາມສຽງຂອງທ່ານຫວ່າງເປົ່າຢູ່."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ສະ​ແດງ​ສະເພາະລາຍການທີ່ນິຍົມເທົ່ານັ້ນ"</string>
@@ -177,7 +177,7 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"ລຶບອອກຈາກລາຍການທີ່ມັກແລ້ວ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ຍົກເລີກ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"ໂທ​ຫາ <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ສ້າງລາຍຊື່ໃໝ່"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ສ້າງລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ເພີ່ມ​ໃສ່​ລາຍ​ຊື່"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ສົ່ງ SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"​ໂທ​ອອກ​ດ້ວຍ​ວິ​ດີ​ໂອ"</string>
@@ -239,7 +239,7 @@
     <item msgid="1036113889050195575">"ປົກ​ກ​ະ​ຕິ"</item>
     <item msgid="6177579030803486015">"ຍາວ"</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ການຕອບແບບວ່ອງໄວ"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ການຕອບກັບດ່ວນ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"​ການ​ໂທ"</string>
     <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"ການບ​ລັອກ​ສາຍ​ໂທ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"ການບ​ລັອກ​ສາຍ​ໂທ​ປິດ​ຊົ່ວ​ຄາວ"</string>
@@ -254,7 +254,7 @@
     <string name="addBlockedNumber" msgid="6064812257482886526">"ເພີ່ມໝາຍເລກ"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"ການໂທຈາກເບີໂທເຫຼົ່ານີ້ຈະຖືກບລັອກໄວ້ ແລະຂໍ້ຄວາມສຽງຈະຖືກລຶບໂດຍອັດຕະໂນມັດ."</string>
     <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"ການໂທຈາກເບີໂທເຫຼົ່ານີ້ຈະຖືກບລັອກໄວ້, ແຕ່ພວກເຂົາອາດຈະຍັງສາມາດຝາກຂໍ້ຄວາມສຽງໃຫ້ທ່ານໄດ້."</string>
-    <string name="block_list" msgid="7760188925338078011">"ໝາຍເລກ​ທີ່ບລັອກ​ແລ້ວ"</string>
+    <string name="block_list" msgid="7760188925338078011">"ເບີໂທທີ່ບລັອກໄວ້"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> ບໍ່ຖືກຕ້ອງ."</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> ຖືກ​ບ​ລັອກ​ແລ້ວ."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"ການບ​ລັອກ​ສາຍ​ໂທ​ຖືກ​ປິດ​ໃຊ້​ງານ​ແລ້ວ​ເປັນ​ເວ​ລາ 48 ຊົ່​ວ​ໂມງ"</string>

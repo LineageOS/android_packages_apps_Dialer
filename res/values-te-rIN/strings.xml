@@ -40,7 +40,7 @@
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"వాయిస్ మెయిల్ ఆర్కైవ్ అయింది"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"చర్యరద్దు"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"ఆర్కైవ్‌కి వెళ్లు"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"కాల్ చరిత్రను క్లియర్ చేయాలా?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"కాల్ చరిత్రను తీసివేయాలా?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"దీని వలన మీ చరిత్ర నుండి అన్ని కాల్‌లు తొలగించబడతాయి"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"కాల్ చరిత్రను క్లియర్ చేస్తోంది…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"ఫోన్"</string>
@@ -151,14 +151,14 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"నంబర్ జోడించండి లేదా పరిచయాల్లో శోధించండి"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"మీ కాల్ చరిత్ర ఖాళీగా ఉంది"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"కాల్ చేయి"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"మీకు మిస్డ్ కాల్‌లు ఏవీ లేవు."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"మీకు సమాధానమివ్వని కాల్‌లు ఏవీ లేవు."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"మీ వాయిస్ మెయిల్ ఇన్‌బాక్స్ ఖాళీగా ఉంది."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"మీ వాయిస్ మెయిల్ ఆర్కైవ్ ఖాళీగా ఉంది."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ఇష్టమైనవాటిని మాత్రమే చూపు"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"కాల్ చరిత్ర"</string>
     <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"వాయిస్ మెయిల్ ఆర్కైవ్"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"అన్నీ"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"సమాధానం ఇవ్వలేదు"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"సమాధానం ఇవ్వనవి"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"వాయిస్ మెయిల్"</string>
     <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"కొత్త, సరళీకృత బ్లాకింగ్"</string>
     <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"మిమ్మల్ని మెరుగైన రీతిలో సంరక్షించడానికి, ఫోన్ బ్లాకింగ్ పని చేసే విధానాన్ని మార్చాలి. అప్పుడు మీరు బ్లాక్ చేసిన నంబర్‌ల నుండి కాల్‌లు మరియు వచన సందేశాలు ఆపివేయబడతాయి మరియు ఆ బ్లాక్ చేయబడిన నంబర్‌లను ఇతర అనువర్తనాలకు కూడా భాగస్వామ్యం చేయవచ్చు."</string>
