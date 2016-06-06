@@ -82,6 +82,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_fef1806c",
+        "filename": "src/com/android/dialer/dialpad/SmartDialNameMatcher.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 15249
+      },
+      "writtenOn": "2016-06-06T02:49:12Z",
+      "side": 1,
+      "message": "If a phone number saved with prefix and country code (00447769176126) and in dialing pad we are typing 07769176126. For this particular scenario we will not get the result so we remove \u00270\u0027 from dialed number.\nIn India dialing phone number with or without \u00270\u0027 serves the same meaning.",
+      "parentUuid": "5faad753_2aaa7370",
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8a6b671c",
         "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
         "patchSetId": 2
@@ -93,6 +111,30 @@
       "writtenOn": "2016-06-02T17:13:27Z",
       "side": 1,
       "message": "there are 2 to 5 digit country codes as well. This seems like it only handles three digit codes.\n\nAbkhazia has +7840,+7940,+99544\n\nhttps://en.wikipedia.org/wiki/List_of_country_calling_codes",
+      "range": {
+        "startLine": 691,
+        "startChar": 29,
+        "endLine": 691,
+        "endChar": 48
+      },
+      "revId": "107e1cab09b33509ff5a00bc8cbb4224b5cf9392",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_3ee2b8a1",
+        "filename": "src/com/android/dialer/dialpad/SmartDialPrefix.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 15249
+      },
+      "writtenOn": "2016-06-06T02:49:12Z",
+      "side": 1,
+      "message": "Based on list mentioned in initCountryCodes method, there maximum length of country code observed is three. so i handled up to three digit country code.",
+      "parentUuid": "5faad753_8a6b671c",
       "range": {
         "startLine": 691,
         "startChar": 29,
