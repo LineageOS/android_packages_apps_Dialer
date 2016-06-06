@@ -79,6 +79,8 @@ import com.android.dialer.DialtactsActivity;
 import com.android.dialer.NeededForReflection;
 import com.android.dialer.R;
 import com.android.dialer.SpecialCharSequenceMgr;
+import com.android.dialer.SpeedDialListActivity;
+import com.android.dialer.SpeedDialUtils;
 import com.android.dialer.calllog.PhoneAccountUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
@@ -657,6 +659,10 @@ public class DialpadFragment extends Fragment
         for (int i = 0; i < buttonIds.length; i++) {
             dialpadKey = (DialpadKeyButton) fragmentView.findViewById(buttonIds[i]);
             dialpadKey.setOnPressedListener(this);
+            // Long-pressing button from two to nine will set up speed key dial.
+            if (i > 0 && i < buttonIds.length - 3) {
+                dialpadKey.setOnLongClickListener(this);
+            }
         }
 
         // Long-pressing one button will initiate Voicemail.
@@ -1044,61 +1050,91 @@ public class DialpadFragment extends Fragment
     public boolean onLongClick(View view) {
         final Editable digits = mDigits.getText();
         final int id = view.getId();
-        if (id == R.id.deleteButton) {
-            digits.clear();
-            return true;
-        } else if (id == R.id.one) {
-            if (isDigitsEmpty() || TextUtils.equals(mDigits.getText(), "1")) {
-                // We'll try to initiate voicemail and thus we want to remove irrelevant string.
-                removePreviousDigitIfPossible('1');
+        switch (id) {
+            case R.id.deleteButton: {
+                digits.clear();
+                return true;
+            }
+            case R.id.one: {
+                if (isDigitsEmpty() || TextUtils.equals(mDigits.getText(), "1")) {
+                    // We'll try to initiate voicemail and thus we want to remove irrelevant string.
+                    removePreviousDigitIfPossible('1');
 
-                List<PhoneAccountHandle> subscriptionAccountHandles =
-                        PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
-                boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
-                        TelecomUtil.getDefaultOutgoingPhoneAccount(getActivity(),
-                                PhoneAccount.SCHEME_VOICEMAIL));
-                boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
-                        && !hasUserSelectedDefault;
+                    List<PhoneAccountHandle> subscriptionAccountHandles =
+                            PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
+                    boolean hasUserSelectedDefault = subscriptionAccountHandles.contains(
+                            TelecomUtil.getDefaultOutgoingPhoneAccount(getActivity(),
+                                    PhoneAccount.SCHEME_VOICEMAIL));
+                    boolean needsAccountDisambiguation = subscriptionAccountHandles.size() > 1
+                            && !hasUserSelectedDefault;
 
-                if (needsAccountDisambiguation || isVoicemailAvailable()) {
-                    // On a multi-SIM phone, if the user has not selected a default
-                    // subscription, initiate a call to voicemail so they can select an account
-                    // from the "Call with" dialog.
-                    callVoicemail();
-                } else if (getActivity() != null) {
-                    // Voicemail is unavailable maybe because Airplane mode is turned on.
-                    // Check the current status and show the most appropriate error message.
+                    if (needsAccountDisambiguation || isVoicemailAvailable()) {
+                        // On a multi-SIM phone, if the user has not selected a default
+                        // subscription, initiate a call to voicemail so they can select an account
+                        // from the "Call with" dialog.
+                        callVoicemail();
+                    } else if (getActivity() != null) {
+                        // Voicemail is unavailable maybe because Airplane mode is turned on.
+                        // Check the current status and show the most appropriate error message.
+                        final boolean isAirplaneModeOn =
+                                Settings.System.getInt(getActivity().getContentResolver(),
+                                        Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+                        if (isAirplaneModeOn) {
+                            DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
+                                    R.string.dialog_voicemail_airplane_mode_message);
+                            dialogFragment.show(getFragmentManager(),
+                                "voicemail_request_during_airplane_mode");
+                        } else {
+                            DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
+                                    R.string.dialog_voicemail_not_ready_message);
+                            dialogFragment.show(getFragmentManager(), "voicemail_not_ready");
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+            case R.id.zero: {
+                if (mPressedDialpadKeys.contains(view)) {
+                    // If the zero key is currently pressed, then the long press occurred by touch
+                    // (and not via other means like certain accessibility input methods).
+                    // Remove the '0' that was input when the key was first pressed.
+                    removePreviousDigitIfPossible('0');
+                }
+                keyPressed(KeyEvent.KEYCODE_PLUS);
+                stopTone();
+                mPressedDialpadKeys.remove(view);
+                return true;
+            }
+            case R.id.digits: {
+                mDigits.setCursorVisible(true);
+                return false;
+            }
+            case R.id.two:
+            case R.id.three:
+            case R.id.four:
+            case R.id.five:
+            case R.id.six:
+            case R.id.seven:
+            case R.id.eight:
+            case R.id.nine: {
+                if (mDigits.length() == 1) {
+                    //removePreviousDigitIfPossible();
                     final boolean isAirplaneModeOn =
                             Settings.System.getInt(getActivity().getContentResolver(),
                                     Settings.System.AIRPLANE_MODE_ON, 0) != 0;
                     if (isAirplaneModeOn) {
                         DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
-                                R.string.dialog_voicemail_airplane_mode_message);
+                                R.string.dialog_speed_dial_airplane_mode_message);
                         dialogFragment.show(getFragmentManager(),
-                                "voicemail_request_during_airplane_mode");
+                                "speed_dial_request_during_airplane_mode");
                     } else {
-                        DialogFragment dialogFragment = ErrorDialogFragment.newInstance(
-                                R.string.dialog_voicemail_not_ready_message);
-                        dialogFragment.show(getFragmentManager(), "voicemail_not_ready");
+                        callSpeedNumber(id);
                     }
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;
-        } else if (id == R.id.zero) {
-            if (mPressedDialpadKeys.contains(view)) {
-                // If the zero key is currently pressed, then the long press occurred by touch
-                // (and not via other means like certain accessibility input methods).
-                // Remove the '0' that was input when the key was first pressed.
-                removePreviousDigitIfPossible('0');
-            }
-            keyPressed(KeyEvent.KEYCODE_PLUS);
-            stopTone();
-            mPressedDialpadKeys.remove(view);
-            return true;
-        } else if (id == R.id.digits) {
-            mDigits.setCursorVisible(true);
-            return false;
         }
         return false;
     }
@@ -1828,6 +1864,49 @@ public class DialpadFragment extends Fragment
                 mPseudoEmergencyAnimator.end();
             }
         }
+    }
+
+    private void callSpeedNumber(int id) {
+        int number;
+
+        switch(id) {
+            case R.id.two: number = 2; break;
+            case R.id.three: number = 3; break;
+            case R.id.four: number = 4; break;
+            case R.id.five: number = 5; break;
+            case R.id.six: number = 6; break;
+            case R.id.seven: number = 7; break;
+            case R.id.eight: number = 8; break;
+            case R.id.nine: number = 9; break;
+            default: return;
+        }
+
+        String phoneNumber = SpeedDialUtils.getNumber(getActivity(), number);
+        if (phoneNumber == null) {
+            showNoSpeedNumberDialog(number);
+        } else {
+            final DialtactsActivity activity = getActivity() instanceof DialtactsActivity
+                    ? (DialtactsActivity) getActivity() : null;
+            final Intent intent = CallUtil.getCallIntent(phoneNumber);
+            DialerUtils.startActivityWithErrorToast(getActivity(), intent);
+            hideAndClearDialpad(false);
+        }
+    }
+
+    private void showNoSpeedNumberDialog(final int number) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.speed_dial_unassigned_dialog_title)
+                .setMessage(getString(R.string.speed_dial_unassigned_dialog_message, number))
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // go to speed dial setting screen to set speed dial number.
+                        Intent intent = new Intent(getActivity(), SpeedDialListActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 
 }

@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.TelephonyManagerCompat;
+import com.android.dialer.SpeedDialListActivity;
 import com.android.dialer.R;
 import com.android.dialer.compat.FilteredNumberCompat;
 import com.android.dialer.compat.SettingsCompat;
@@ -80,6 +81,14 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
             target.add(quickResponseSettingsHeader);
         }
+
+        Header speedDialSettingsHeader = new Header();
+        Intent speedDialSettingsIntent = new Intent(this, SpeedDialListActivity.class);
+        speedDialSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        speedDialSettingsHeader.titleRes = R.string.speed_dial_settings;
+        speedDialSettingsHeader.intent = speedDialSettingsIntent;
+        target.add(speedDialSettingsHeader);
 
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

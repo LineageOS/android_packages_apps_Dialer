@@ -358,5 +358,13 @@
             android:exported="false"
             android:multiprocess="false"
             />
+
+        <activity android:name=".SpeedDialListActivity"
+            android:theme="@style/SpeedDialtactsTheme"
+            android:label="@string/speed_dial_settings" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
