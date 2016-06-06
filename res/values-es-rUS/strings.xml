@@ -41,7 +41,7 @@
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"DESHACER"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"IR A ARCHIVO"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"¿Eliminar el historial de llamadas?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se eliminarán todas las llamadas del historial."</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se borrarán todas las llamadas del historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Eliminando historial de llamadas…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Teléfono"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"Llamada perdida"</string>
@@ -163,7 +163,7 @@
     <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Nuevo bloqueo simplificado"</string>
     <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Para brindarte mayor protección, el teléfono necesita cambiar el comportamiento de bloqueo. Se detendrán las llamadas y los mensajes de texto de los números bloqueados, y es posible que estos se compartan con otras apps."</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Permitir"</string>
-    <string name="block_number_confirmation_title" msgid="6862219558186931304">"¿Deseas bloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_number_confirmation_title" msgid="6862219558186931304">"¿Deseas bloquear el <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Se bloquearán las llamadas que provengan de este número y se borrarán los mensajes del buzón de voz de forma automática."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Se bloquearán las llamadas que provengan de este número, pero es posible que la persona que llama pueda dejar mensajes en el buzón de voz."</string>
     <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Ya no recibirás llamadas o mensajes de textos de este número."</string>
@@ -276,7 +276,7 @@
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"No es spam"</string>
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"Desbloquear"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"Spam"</string>
-    <string name="block_report_number_alert_title" msgid="7964023263943399261">"¿Deseas bloquear <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
+    <string name="block_report_number_alert_title" msgid="7964023263943399261">"¿Deseas bloquear el <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_report_number_alert_details" msgid="3504073367202469245">"Los correos de voz y llamadas de este número se bloquearán a partir de ahora."</string>
     <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"Denunciar llamada como spam"</string>
     <string name="block_number_alert_details" msgid="3137736492383304346">"Los correos de voz y llamadas de este número se bloquearán. Esta llamada se denunciará como spam."</string>

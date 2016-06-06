@@ -129,7 +129,7 @@
     <string name="private_num" msgid="6374339738119166953">"Numero privato"</string>
     <string name="payphone" msgid="7726415831153618726">"Cabina telefonica"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> secondi"</string>
-    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min e <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> alle ore <xliff:g id="TIME">%2$s</xliff:g>"</string>

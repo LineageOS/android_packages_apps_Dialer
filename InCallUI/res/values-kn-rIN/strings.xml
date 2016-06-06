@@ -162,7 +162,7 @@
     <string name="voicemail_notification_vibrate_when_title" msgid="4595145399183729630">"ವೈಬ್ರೇಟ್‌"</string>
     <string name="voicemail_notification_vibarte_when_dialog_title" msgid="2390729279972461242">"ವೈಬ್ರೇಟ್‌"</string>
     <string name="voicemail_notification_ringtone_title" msgid="1996920553949534944">"ಶಬ್ದ"</string>
-    <string name="default_notification_description" msgid="4950807644546509965">"ಡೀಫಾಲ್ಟ್‌ ಧ್ವನಿ (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
+    <string name="default_notification_description" msgid="4950807644546509965">"ಡಿಫಾಲ್ಟ್‌ ಧ್ವನಿ (<xliff:g id="DEFAULT_SOUND_TITLE">%1$s</xliff:g>)"</string>
     <string name="ringtone_title" msgid="835582004693335905">"ಫೋನ್ ರಿಂಗ್‌ಟೋನ್"</string>
     <string name="vibrate_on_ring_title" msgid="5019791043398986665">"ರಿಂಗ್ ಆಗುವಾಗ ವೈಬ್ರೇಟ್‌ ಆಗು"</string>
     <string name="preference_category_ringtone" msgid="6246687516643676729">"ರಿಂಗ್‌ಟೋನ್‌‌ ಮತ್ತು ವೈಬ್ರೇಟ್‌"</string>
@@ -202,6 +202,6 @@
     <string name="spam_notification_non_spam_call_text" msgid="1357729961551033350">"ಇದೇ ಮೊದಲ ಬಾರಿಗೆ ಈ ಸಂಖ್ಯೆಯಿಂದ ನಿಮಗೆ ಕರೆ ಮಾಡಲಾಗಿದೆ."</string>
     <string name="spam_notification_spam_call_text" msgid="5132722997094120379">"ನಾವು ಈ ಕರೆಯನ್ನು ಸ್ಪ್ಯಾಮರ್‌ ಎಂದು ಶಂಕಿಸಿದ್ದೇವೆ."</string>
     <string name="spam_notification_report_spam_action_text" msgid="2635952482608001896">"ಸ್ಪ್ಯಾಮ್ ನಿರ್ಬಂಧಿಸು/ವರದಿ ಮಾಡು"</string>
-    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"ಸಂಪರ್ಕ ಸೇರಿಸು"</string>
+    <string name="spam_notification_add_contact_action_text" msgid="396934716185343647">"ಸಂಪರ್ಕ ಸೇರಿಸಿ"</string>
     <string name="spam_notification_not_spam_action_text" msgid="1694637126165301851">"ಸ್ಪ್ಯಾಮ್‌ ಅಲ್ಲ"</string>
 </resources>

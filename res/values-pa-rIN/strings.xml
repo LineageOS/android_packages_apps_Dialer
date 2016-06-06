@@ -72,7 +72,7 @@
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"ਨਵੀਂ ਵੌਇਸਮੇਲ ਉਡੀਕ ਰਹੀ ਹੈ। ਹੁਣ ਲੋਡ ਨਹੀਂ ਕਰ ਸਕਦਾ।"</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"ਆਪਣੀ ਵੌਇਸਮੇਲ ਸੈਟ ਅਪ ਕਰੋ"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ਔਡੀਓ ਉਪਲਬਧ ਨਹੀਂ"</string>
-    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"ਸੈਟ ਅਪ"</string>
+    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"ਸਥਾਪਤ ਕਰੋ"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"ਵੌਇਸਮੇਲ ਤੇ ਕਾਲ ਕਰੋ"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"ਨੰਬਰ ਚੁਣੋ"</string>
@@ -145,7 +145,7 @@
     <string name="simContacts_title" msgid="27341688347689769">"SIM ਕਾਰਡ ਸੰਪਰਕ"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"ਕੋਈ ਸੰਪਰਕ ਐਪ ਉਪਲਬਧ ਨਹੀਂ"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"ਵੌਇਸ ਖੋਜ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
-    <string name="call_not_available" msgid="8941576511946492225">"ਇੱਕ ਫੋਨ ਕਾਲ ਨਹੀਂ ਕਰ ਸਕਦਾ ਕਿਉਂਕਿ ਫੋਨ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਇਆ ਗਿਆ ਹੈ।"</string>
+    <string name="call_not_available" msgid="8941576511946492225">"ਇੱਕ ਫੋਨ ਕਾਲ ਨਹੀਂ ਕਰ ਸਕਦਾ ਕਿਉਂਕਿ ਫੋਨ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਅਯੋਗ ਬਣਾਇਆ ਗਿਆ ਹੈ।"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ਉਸ ਲਈ ਇਸ ਡੀਵਾਈਸ ਤੇ ਕੋਈ ਐਪ ਨਹੀਂ"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"ਸੰਪਰਕ ਖੋਜੋ"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"ਨੰਬਰ ਜੋੜੋ ਜਾਂ ਸੰਪਰਕ ਖੋਜੋ"</string>
@@ -178,16 +178,16 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ਪਹਿਲਾਂ ਵਰਗਾ ਕਰੋ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> ਨੂੰ ਕਾਲ ਕਰੋ"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ਨਵਾਂ ਸੰਪਰਕ ਬਣਾਓ"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ਇੱਕ ਸੰਪਰਕ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ਕਿਸੇ ਸੰਪਰਕ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS ਭੇਜੋ"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ਵੀਡੀਓ ਕਾਲ ਕਰੋ"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"ਨੰਬਰ ਨੂੰ ਬਲੌਕ ਕਰੋ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ਨਵੀਆਂ ਮਿਸਡ ਕਾਲਾਂ"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"ਅਜੇ ਤੁਹਾਡੇ ਸਪੀਡ ਡਾਇਲ \'ਤੇ ਕੋਈ ਵੀ ਵਿਅਕਤੀ ਨਹੀਂ ਹੈ"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ਇੱਕ ਮਨਪਸੰਦ ਜੋੜੋ"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ਕੋਈ ਮਨਪਸੰਦ ਸ਼ਾਮਲ ਕਰੋ"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"ਤੁਹਾਡੇ ਕੋਲ ਅਜੇ ਕੋਈ ਸੰਪਰਕ ਨਹੀਂ ਹਨ।"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ਕੋਈ ਸੰਪਰਕ ਜੋੜੋ"</string>
-    <string name="contact_tooltip" msgid="2019777545923635266">"ਸਾਰੇ ਨੰਬਰ ਦੇਖਣ ਲਈ ਚਿੱਤਰ ਨੂੰ ਛੋਹਵੋ ਜਾਂ ਪੁਨਰ ਤਰਤੀਬ ਦੇਣ ਲਈ ਛੋਹਵੋ &amp; ਹੋਲਡ ਕਰੋ"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ਕੋਈ ਸੰਪਰਕ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"ਸਾਰੇ ਨੰਬਰ ਦੇਖਣ ਲਈ ਚਿੱਤਰ ਨੂੰ ਸਪੱਰਸ਼ ਕਰੋ ਜਾਂ ਪੁਨਰ ਤਰਤੀਬ ਦੇਣ ਲਈ ਸਪੱਰਸ਼ ਕਰੋ &amp; ਹੋਲਡ ਕਰੋ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ਹਟਾਓ"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"ਵੀਡੀਓ ਕਾਲ"</string>
     <string name="call_log_action_send_message" msgid="5679719296905285131">"ਇੱਕ ਸੁਨੇਹਾ ਭੇਜੋ"</string>
@@ -229,10 +229,10 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"ਪਲੇਬੈਕ ਚਾਲੂ ਕਰੋ ਜਾਂ ਰੋਕੋ।"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"ਡਿਸਪਲੇ ਚੋਣਾਂ"</string>
-    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ਅਵਾਜ਼ਾਂ ਅਤੇ ਵਾਈਬ੍ਰੇਸ਼ਨ"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ਧੁਨੀਆਂ ਅਤੇ ਥਰਥਰਾਹਟ"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"ਪਹੁੰਚਯੋਗਤਾ"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ਫੋਨ ਰਿੰਗਟੋਨ"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ਕਾਲਾਂ ਲਈ ਵਾਈਬ੍ਰੇਟ ਵੀ ਕਰੋ"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ਕਾਲਾਂ ਲਈ ਥਰਥਰਾਹਟ ਵੀ ਕਰੋ"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ਡਾਇਲਪੈਡ ਟੋਨਾਂ"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"ਡਾਇਲਪੈਡ ਟੋਨ ਲੰਮਾਈ"</string>
   <string-array name="dtmf_tone_length_entries">
@@ -241,7 +241,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ਤਤਕਾਲ ਜਵਾਬ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ਕਾਲਾਂ"</string>
-    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"ਕਾਲ ਬਲੌਕ ਕਰੋ"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"ਕਾਲ ਬਲੌਕ ਕਰਨਾ"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"ਕਾਲ ਬਲੌਕਿੰਗ ਆਰਜ਼ੀ ਤੌਰ ਤੇ ਬੰਦ ਹੈ"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"ਕਾਲ ਬਲੌਕਿੰਗ ਅਸਮਰੱਥ ਕਰ ਦਿੱਤੀ ਗਈ ਹੈ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਸ ਫੋਨ ਦੁਆਰਾ ਪਿਛਲੇ 48 ਘੰਟਿਆਂ ਤੋਂ ਐਮਰਜੈਂਸੀ ਸੇਵਾਵਾਂ ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਹੋਇਆ ਹੈ। ਇਹ 48 ਘੰਟਿਆਂ ਦਾ ਸਮਾਂ ਪੂਰਾ ਹੋਣ ਤੇੋਂ ਬਾਅਦ ਆਟੋਮੈਟਿਕਲੀ ਮੁੜ-ਸਮਰੱਥ ਹੋ ਜਾਵੇਗੀ।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"ਆਯਾਤ ਨੰਬਰ"</string>

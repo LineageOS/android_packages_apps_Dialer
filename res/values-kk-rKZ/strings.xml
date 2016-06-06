@@ -41,7 +41,7 @@
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"КЕРІ ҚАЙТАРУ"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"МҰР-ҚА ӨТУ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Қоңыраулар тарихын тазалау керек пе?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Бұл тарихтан барлық қоңырауларды жояды"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Тарихтағы барлық қоңыраулар жойылады"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Қоңыраулар тарихы тазалануда…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Телефон"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"Өткізіп алған қоңырау"</string>
@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"Нөмірді енгізіңіз немесе контактілерден іздеп табыңыз"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Қоңыраулар тарихы бос"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Қоңырау шалу"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Қабылданбаған қоңырауларды жоқ."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Қабылданбаған қоңыраулар жоқ."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Дауыстық поштаның \"Кіріс\" қалтасы бос."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Дауыстық пошта мұрағатыңыз бос."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Сүйіктілерді ғана көрсету"</string>
@@ -232,7 +232,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Дыбыстар мен діріл"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Арнайы мүмкіндіктер"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Телефон қоңырау әуені"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Сондай-ақ, қоңыраулар үшін дірілдету"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Қоңырау кезінде дірілдету"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Теру тақтасының үндері"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Теру тақтасы дыбысының ұзындығы"</string>
   <string-array name="dtmf_tone_length_entries">
@@ -259,7 +259,7 @@
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> бөгеліп қойылған."</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Қоңырауларға тыйым салу 48 сағат бойы өшірілген"</string>
     <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Өшірілген, өйткені төтенше қоңырау соғылған."</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Есептік жазбаларға қоңыр. шалу"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Қоңырау шалу есептік жазбалары"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Қосу"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Рұқсаттар орнату"</string>
     <string name="permission_no_speeddial" msgid="6882563445996184051">"Жылдам теруді қосу үшін \"Контактілер\" рұқсатын қосыңыз."</string>

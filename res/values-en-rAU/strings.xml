@@ -155,7 +155,7 @@
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Your voicemail inbox is empty."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Your voicemail archive is empty."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Show favourites only"</string>
-    <string name="call_log_activity_title" msgid="7949633151371183580">"Call History"</string>
+    <string name="call_log_activity_title" msgid="7949633151371183580">"Call history"</string>
     <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Voicemail archive"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"All"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Missed"</string>

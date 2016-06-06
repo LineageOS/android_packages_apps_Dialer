@@ -40,7 +40,7 @@
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"भ्वाइस मेलको अभिलेख राखियो"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"अनडू गर्नुहोस्"</string>
     <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"अभिलेखमा जानुहोस्"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कल इतिहास हटाउने हो?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कल इतिहास मेटाउने हो?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"यस कार्यले तपाईँको इतिहासबाट सबै कल मेट्नेछ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"कल इतिहास हाटउँदै..."</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"फोन"</string>

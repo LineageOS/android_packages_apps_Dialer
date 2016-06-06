@@ -184,9 +184,9 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Bloquear número"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> chamadas perdidas novas"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Aínda non tes ningún contacto na marcación directa"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Engade un favorito para a marcación directa"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Engadir un favorito"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Aínda non tes contactos"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Engade un contacto"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Engadir un contacto"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca a imaxe para ver todos os números ou mantena premida para reordenala"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminar"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videochamada"</string>

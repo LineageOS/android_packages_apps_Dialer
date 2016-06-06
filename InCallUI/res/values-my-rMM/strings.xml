@@ -88,7 +88,7 @@
     <string name="notification_transfer_call" msgid="687009078741947505">"ခေါ်ဆိုမှုကို လွှဲပြောင်းပါ"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ခေါ်ဆိုမှု ပြုလုပ်ရန်အတွက် လေယာဉ်ပျံမုဒ်ကို ဦးစွာပိတ်ပါ။"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"ကွန်ယက်ပေါ်တွင် မှတ်ပုံတင်ထားခြင်း မရှိပါ။"</string>
-    <string name="incall_error_out_of_service" msgid="1830319376612608339">"ဆယ်လူလာ ကွန်ရက် မရှိပါ။"</string>
+    <string name="incall_error_out_of_service" msgid="1830319376612608339">"ဆဲလ်လူလာ ကွန်ရက် မရှိပါ။"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"ခေါ်ဆိုမှု ပြုလုပ်ရန်အတွက် မှန်ကန်သည့်နံပါတ်တစ်ခုကို ထည့်ပါ။"</string>
     <string name="incall_error_call_failed" msgid="2213413937257570551">"ခေါ်ဆို၍မရပါ။"</string>
     <string name="incall_status_dialed_mmi" msgid="8864341962086874751">"MMI အစီအစဉ် စတင်နေသည်..."</string>

@@ -152,7 +152,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"ಸಂ. ಸೇರಿಸಿ ಅಥವಾ ಸಂಪರ್ಕ ಹುಡುಕಿ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"ನಿಮ್ಮ ಕರೆ ಇತಿಹಾಸ ಖಾಲಿಯಾಗಿದೆ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"ನೀವು ಯಾವುದೇ ತಪ್ಪಿದ ಕರೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"ನೀವು ಯಾವುದೇ ಮಿಸ್ಡ್ ಕರೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಇನ್‌ಬಾಕ್ಸ್ ಖಾಲಿ ಇದೆ."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಆರ್ಕೈವ್ ಖಾಲಿಯಿದೆ."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
@@ -184,9 +184,9 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"ಸಂಖ್ಯೆಯನ್ನು ನಿರ್ಬಂಧಿಸು"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"ನಿಮ್ಮ ವೇಗದ ಡಯಲ್‌ನಲ್ಲಿ ಇದುವರೆಗೆ ಯಾರೂ ಇಲ್ಲ"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"ನಿಮ್ಮ ತ್ವರಿತ ಡಯಲ್‌ನಲ್ಲಿ ಇದುವರೆಗೆ ಯಾರೂ ಇಲ್ಲ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ಮೆಚ್ಚಿನದನ್ನು ಸೇರಿಸಿ"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"ನೀವು ಇನ್ನೂ ಯಾವುದೇ ಸಂಪರ್ಕಗಳನ್ನು ಹೊಂದಿಲ್ಲ"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"ನಿಮ್ಮ ಬಳಿ ಇನ್ನೂ ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ಸಂಪರ್ಕ ಸೇರಿಸಿ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>
