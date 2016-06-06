@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_485252e0",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-06T06:21:30Z",
+      "side": 1,
+      "message": "I don\u0027t say it shouldn\u0027t be mutated. I said it\u0027s pointless to mutate _prior_ to putting it in the cache, as the original (non-mutated) drawable will never be used and the mutated drawable will have the same state sharing problem again, as you\u0027ll only use one single constant state across all usages.",
+      "parentUuid": "5faad753_0a9c570d",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8f493932",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 8
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "We style the two icons differently - I may have misunderstood what mutate does, but I think* if we use the same instance for both drawables we\u0027ll end up with them being styled identically.  One should be grey scale, the other should be full color.",
       "parentUuid": "5faad753_8f493932",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_684f0e34",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-06T06:21:30Z",
+      "side": 1,
+      "message": "mutate() creates a new constant state, which for our purposes means it separates the styling. So it should be sufficient to only have one copy of the drawable in the cache and calling mutate() when fetching it out of the cache.",
+      "parentUuid": "5faad753_ea969bf0",
       "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
