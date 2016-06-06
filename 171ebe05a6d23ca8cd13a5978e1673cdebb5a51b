@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_83a4ada7",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-06T20:41:12Z",
+      "side": 1,
+      "message": "Thanks for clearing up.  \n\nDone.",
+      "parentUuid": "5faad753_485252e0",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_8f493932",
         "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
         "patchSetId": 8
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "mutate() creates a new constant state, which for our purposes means it separates the styling. So it should be sufficient to only have one copy of the drawable in the cache and calling mutate() when fetching it out of the cache.",
       "parentUuid": "5faad753_ea969bf0",
+      "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_e39b2163",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-06T20:41:12Z",
+      "side": 1,
+      "message": "I had some issues here around mutates.  I think we are going to need to make a copy and ditch the mutates.  I\u0027ve sent you an email with some videos and patch.\n\nI\u0027ve also uploaded a cleaned up version of this with no mutates, just the copy which is working correctly.",
+      "parentUuid": "5faad753_684f0e34",
       "revId": "171ebe05a6d23ca8cd13a5978e1673cdebb5a51b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
