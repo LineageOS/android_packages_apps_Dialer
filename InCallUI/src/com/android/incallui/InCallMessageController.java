@@ -30,6 +30,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
 
 import org.codeaurora.ims.QtiCallConstants;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -43,7 +44,8 @@ import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
  * For e.g., this class implements {@class InCallSubstateListener} and when call substate changes,
  * {@class CallSubstateNotifier} notifies it through the onCallSubstateChanged callback.
  */
-public class InCallMessageController implements InCallSubstateListener, VideoEventListener {
+public class InCallMessageController implements InCallSubstateListener, VideoEventListener,
+        CallList.Listener {
 
     private static InCallMessageController sInCallMessageController;
     private Context mContext;
@@ -62,6 +64,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         mContext = context;
         CallSubstateNotifier.getInstance().addListener(this);
         InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this);
+        CallList.getInstance().addListener(this);
     }
 
     /**
@@ -72,6 +75,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         mContext = null;
         CallSubstateNotifier.getInstance().removeListener(this);
         InCallVideoCallCallbackNotifier.getInstance().removeVideoEventListener(this);
+        CallList.getInstance().removeListener(this);
     }
 
     /**
@@ -193,5 +197,65 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
     @Override
     public void onPeerPauseStateChanged(final Call call, final boolean paused) {
         //no-op
+    }
+
+    /**
+     * This method overrides onIncomingCall method of {@interface CallList.Listener}
+     * Added for completeness. No implementation yet.
+     */
+    @Override
+    public void onIncomingCall(Call call) {
+        // no-op
+    }
+
+    /**
+     * This method overrides onCallListChange method of {@interface CallList.Listener}
+     * Added for completeness. No implementation yet.
+     */
+    @Override
+    public void onCallListChange(CallList list) {
+        // no-op
+    }
+
+    /**
+     * This method overrides onUpgradeToVideo method of {@interface CallList.Listener}
+     * Added for completeness. No implementation yet.
+     */
+    @Override
+    public void onUpgradeToVideo(Call call) {
+        // no-op
+    }
+
+    /**
+     * This method overrides onDisconnect method of {@interface CallList.Listener}
+     */
+    @Override
+    public void onDisconnect(final Call call) {
+        Bundle extras = call.getExtras();
+        if (extras == null) {
+            Log.w(this, "onDisconnect: null Extras");
+            return;
+        }
+        final int errorCode = extras.getInt(QtiCallConstants.EXTRAS_KEY_CALL_FAIL_EXTRA_CODE,
+                QtiCallConstants.DISCONNECT_CAUSE_UNSPECIFIED);
+        Log.d(this, "onDisconnect: code = " + errorCode);
+        showCallDisconnectInfo(errorCode);
+    }
+
+    /**
+     * This method displays specific disconnect information to user
+     */
+    private void showCallDisconnectInfo(int errorCode) {
+       if(errorCode == QtiCallConstants.DISCONNECT_CAUSE_UNSPECIFIED) {
+          return;
+       }
+
+       switch (errorCode) {
+         case QtiCallConstants.CALL_FAIL_EXTRA_CODE_LTE_3G_HA_FAILED:
+             QtiCallUtils.displayToast(mContext, R.string.call_failed_ho_not_feasible);
+             break;
+         default:
+             break;
+       }
     }
 }
