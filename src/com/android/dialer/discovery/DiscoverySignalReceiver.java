@@ -55,25 +55,6 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
         }
 
         switch (action) {
-            case ConnectivityManager.CONNECTIVITY_ACTION:
-                ConnectivityManager connManager = (ConnectivityManager)
-                        context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-                TelephonyManager tm =
-                        (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-                if ((mWifi.isConnected() && tm.isNetworkRoaming()) || DEBUG_CONNECTIVITY) {
-                    SharedPreferences preferences = context
-                            .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME,
-                                    Context.MODE_PRIVATE);
-                    int currentCount = preferences.getInt(CallMethodUtils.PREF_ROAMING_CALLS, 0);
-                    preferences.edit().putInt(CallMethodUtils.PREF_ROAMING_CALLS,
-                            ++currentCount).apply();
-                    startServiceForConnectivityChanged(context);
-                }
-                break;
             case Intent.ACTION_NEW_OUTGOING_CALL:
                 String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
                 SharedPreferences preferences = context
@@ -172,19 +153,19 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
         return false;
     }
 
-    private void startServiceForInternationalCallMade(Context context) {
+    private static void startServiceForInternationalCallMade(Context context) {
         Intent serviceIntent = getIntentForDiscoveryService(context);
         serviceIntent.setAction(Intent.ACTION_NEW_OUTGOING_CALL);
         context.startService(serviceIntent);
     }
 
-    private void startServiceForConnectivityChanged(Context context) {
+    public static void startServiceForConnectivityChanged(Context context) {
         Intent serviceIntent = getIntentForDiscoveryService(context);
         serviceIntent.setAction(ConnectivityManager.CONNECTIVITY_ACTION);
         context.startService(serviceIntent);
     }
 
-    private Intent getIntentForDiscoveryService(Context context) {
+    private static Intent getIntentForDiscoveryService(Context context) {
         return new Intent(context, DiscoveryService.class);
     }
 
