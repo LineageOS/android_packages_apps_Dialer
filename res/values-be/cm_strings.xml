@@ -96,12 +96,19 @@
   <string name="call_recording_format">Фармат аўдыя</string>
   <string name="call_playback_no_app_found_toast">Не знойдзены дадатак, які можа прайграваць абраны запіс.</string>
   <!-- T9 Search Text -->
+  <string name="emergency_call_hint_text">Адсутнічая SIM-картка. Магчымыя выклікі першаснай дапамогі.</string>
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Так</string>
   <string name="callerinfo_provider_auth_no_short">Не</string>
+  <string name="callerinfo_provider_auth_no">Не, дзякуй</string>
+  <string name="block_dialog_positive">Заблакаваць</string>
+  <string name="block_dialog_negative">Скасаваць</string>
+  <string name="provider_button_help">"Зразумела"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Праглядзець нататку</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="callerinfo_provider_status_disabling">Адлучэнне</string>
 </resources>
