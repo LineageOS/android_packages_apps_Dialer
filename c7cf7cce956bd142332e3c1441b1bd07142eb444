@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_63aad071",
+        "filename": "src/com/android/dialer/calllog/CallLogAdapter.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-07T04:55:54Z",
+      "side": 1,
+      "message": "Unneeded change.",
+      "revId": "c7cf7cce956bd142332e3c1441b1bd07142eb444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c3a14496",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-07T04:55:54Z",
+      "side": 1,
+      "message": "Unneeded line wrap?\n\nAdditionally I dislike the use of a static map here, as the drawables will stay around until Dialer is killed. I suggest either to\n- bind the lifespan of the cache to the activity lifecycle (and clear the cache when the activity is destroyed) or\n- to bind the lifespan of the cache to the application, implementing the application component callbacks, especially onTrimMemory (see ContactPhotoManager)\n\nMoving the icon cache to the DeepLinkCache class would make sense, IMHO.",
+      "revId": "c7cf7cce956bd142332e3c1441b1bd07142eb444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_a3a448a7",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-07T04:55:54Z",
+      "side": 1,
+      "message": "With the suggestion below this becomes:\n\nif (canUpdateImageIconViews()) {\n    mViews.viewNoteActionIcon.setImageDrawable(getIconForDeepLink());\n    mViews.viewNoteButton.setVisibility(View.VISIBLE);\n}\nmViews.phoneCallDetailsViews.noteIconView.setVisibility(View.VISIBLE);\nmViews.phoneCallDetailsViews.noteIconView.setImageDrawable(getIconForDeepLink());\n\n\n(also mind the 100 char limit)",
+      "revId": "c7cf7cce956bd142332e3c1441b1bd07142eb444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_4396b441",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-07T04:55:54Z",
+      "side": 1,
+      "message": "Can nuke this with the suggestion below.",
+      "revId": "c7cf7cce956bd142332e3c1441b1bd07142eb444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_23913848",
+        "filename": "src/com/android/dialer/calllog/DeepLinkPresenter.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-07T04:55:54Z",
+      "side": 1,
+      "message": "The newDrawable() method actually seems to be pretty cheap, so it should be fine to call whenever handing out a drawable here. Suggestion:\n\nprivate Drawable getIconForDeepLink() {\n    String packageKey \u003d mDeepLink.getPackageName();\n    Drawable d \u003d mIconCache.get(packageKey);\n    if (d \u003d\u003d null) {\n        d \u003d mDeepLink.getDrawableIcon(mContext);\n        mIconCache.put(packageKey, d);\n    }\n    return d !\u003d null ? d.getConstantState().newDrawable() : null;\n}",
+      "revId": "c7cf7cce956bd142332e3c1441b1bd07142eb444",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
