@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_57a98e21",
+        "filename": "src/com/android/dialer/database/DialerDatabaseHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 14345
+      },
+      "writtenOn": "2016-06-07T23:34:46Z",
+      "side": 1,
+      "message": "At least a comment explaining this?  Maybe a link to a doc?\n\nAlso is this assumption true outside of India?  Does it cover Exit codes, or just country codes?  011 and 00 are used as exit codes and numbers are formed by exitcode+countrycode+number\n\nhttp://www.howtocallabroad.com/codes.html\n\nIf your logic here covers that all good, just unclear to me from this.",
+      "revId": "25865cea2847e91fcf30e6bbdfa7a7373e5ed3b8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
