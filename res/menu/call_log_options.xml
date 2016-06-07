@@ -15,6 +15,12 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/search_calllog"
+        android:title="@string/calllog_search_hint"
+        android:showAsAction="never"
+        android:orderInCategory="1"/>
+    <item
+        android:layout_height="58dp"
         android:id="@+id/delete_all"
         android:title="@string/call_log_delete_all"
         android:showAsAction="never"

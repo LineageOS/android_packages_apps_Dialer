@@ -63,8 +63,8 @@ import com.android.dialer.calllog.calllogcache.CallLogCache;
      */
     public void setPhoneCallDetails(
             CallLogListItemViewHolder views,
-            PhoneCallDetails details) {
-        mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details);
+            PhoneCallDetails details, String filter) {
+        mPhoneCallDetailsHelper.setPhoneCallDetails(views.phoneCallDetailsViews, details, filter);
 
         // Set the accessibility text for the contact badge
         views.quickContactView.setContentDescription(getContactBadgeDescription(details));

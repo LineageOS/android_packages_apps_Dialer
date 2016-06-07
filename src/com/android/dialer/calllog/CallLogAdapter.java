@@ -65,6 +65,7 @@ import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Adapter class to fill in data for the Call Log.
@@ -108,6 +109,7 @@ public class CallLogAdapter extends GroupingListAdapter
     private final Map<String, Boolean> mBlockedNumberCache = new ArrayMap<>();
 
     protected ContactInfoCache mContactInfoCache;
+    private String mFilterString;
 
     private final int mActivityType;
 
@@ -496,7 +498,10 @@ public class CallLogAdapter extends GroupingListAdapter
 
         int count = getGroupSize(position);
 
-        final String number = c.getString(CallLogQuery.NUMBER);
+        final String phoneNumber = c.getString(CallLogQuery.NUMBER);
+        Pattern pattern = Pattern.compile("[,;]");
+        String[] num = pattern.split(phoneNumber);
+        final String number = num[0];
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final String postDialDigits = CompatUtils.isNCompatible()
                 && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
@@ -601,7 +606,7 @@ public class CallLogAdapter extends GroupingListAdapter
             views.voicemailUri = c.getString(CallLogQuery.VOICEMAIL_URI);
         }
 
-        mCallLogListItemHelper.setPhoneCallDetails(views, details);
+        mCallLogListItemHelper.setPhoneCallDetails(views, details, mFilterString);
 
         if (mCurrentlyExpandedRowId == views.rowId) {
             // In case ViewHolders were added/removed, update the expanded position if the rowIds
@@ -613,7 +618,7 @@ public class CallLogAdapter extends GroupingListAdapter
         }
         views.updatePhoto();
 
-        mCallLogListItemHelper.setPhoneCallDetails(views, details);
+        mCallLogListItemHelper.setPhoneCallDetails(views, details, mFilterString);
     }
 
     private String getPreferredDisplayName(ContactInfo contactInfo) {
@@ -923,5 +928,9 @@ public class CallLogAdapter extends GroupingListAdapter
 
         PromoCardViewHolder viewHolder = PromoCardViewHolder.create(view);
         return viewHolder;
+    }
+
+    public void setQueryString(String filter) {
+        mFilterString = filter;
     }
 }

@@ -18,6 +18,7 @@ package com.android.dialer.calllog;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,11 +30,24 @@ import android.telephony.TelephonyManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.LayoutParams;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.view.inputmethod.InputMethodManager;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.util.Log;
 
 import com.android.contacts.common.interactions.TouchPointManager;
 import com.android.contacts.common.list.ViewPagerTabs;
@@ -54,9 +68,12 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     private CallLogFragment mMissedCallsFragment;
 
     private MSimCallLogFragment mMSimCallsFragment;
-
+    private CallLogSearchFragment mSearchFragment;
+    private EditText mSearchView;
+    private ImageView mClearButtonView;
+    private boolean mInSearchUi;
     private String[] mTabTitles;
-
+    private String mSearchQuery;
     private static final int TAB_INDEX_ALL = 0;
     private static final int TAB_INDEX_MISSED = 1;
 
@@ -147,19 +164,20 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (TelephonyManager.getDefault().isMultiSimEnabled()) {
-            initMSimCallLog();
-            return;
-        }
-
-        setContentView(R.layout.call_log_activity);
-        getWindow().setBackgroundDrawable(null);
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setElevation(0);
+
+        if ( TelephonyManager.getDefault().isMultiSimEnabled()) {
+            initMSimCallLog();
+            return;
+        }
+
+        setContentView(R.layout.call_log_activity);
+        getWindow().setBackgroundDrawable(null);
 
         int startingTab = TAB_INDEX_ALL;
         final Intent intent = getIntent();
@@ -188,6 +206,16 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     }
 
     @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof CallLogSearchFragment) {
+            if (mViewPagerAdapter != null) {
+                mSearchFragment = (CallLogSearchFragment) fragment;
+                setupSearchUi();
+            }
+        }
+    }
+
+    @Override
     protected void onResume() {
         mIsResumed = true;
         super.onResume();
@@ -198,6 +226,9 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     protected void onPause() {
         mIsResumed = false;
         super.onPause();
+        if (mInSearchUi) {
+            exitSearchUi();
+        }
     }
 
     private void initMSimCallLog() {
@@ -226,17 +257,32 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final MenuItem itemDeleteAll = menu.findItem(R.id.delete_all);
-        if (mAllCallsFragment != null && itemDeleteAll != null) {
-            // If onPrepareOptionsMenu is called before fragments are loaded, don't do anything.
-            final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
-            itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
-        }
+        final MenuItem itemSearchCallLog = menu.findItem(R.id.search_calllog);
 
         if (mMSimCallsFragment != null && itemDeleteAll != null) {
             final CallLogAdapter adapter = mMSimCallsFragment.getAdapter();
             itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
         }
-
+        if (mInSearchUi) {
+            if (itemDeleteAll != null) {
+                itemDeleteAll.setVisible(false);
+            }
+            if (itemSearchCallLog != null) {
+                itemSearchCallLog.setVisible(false);
+            }
+        } else {
+            if (mSearchFragment != null && itemSearchCallLog != null) {
+                final CallLogAdapter adapter = mSearchFragment.getAdapter();
+                itemSearchCallLog.setVisible(adapter != null
+                        && !adapter.isEmpty());
+            }
+            // If onPrepareOptionsMenu is called before fragments loaded. Don't do anything.
+            if (mAllCallsFragment != null && itemDeleteAll != null) {
+                // If onPrepareOptionsMenu is called before fragments are loaded, don't do anything.
+                final CallLogAdapter adapter = mAllCallsFragment.getAdapter();
+                itemDeleteAll.setVisible(adapter != null && !adapter.isEmpty());
+            }
+        }
         return true;
     }
 
@@ -253,6 +299,9 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
             return true;
         } else if (item.getItemId() == R.id.delete_all) {
             ClearCallLogDialog.show(getFragmentManager());
+            return true;
+        } else if (item.getItemId() == R.id.search_calllog){
+            enterSearchUi();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -286,4 +335,193 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
         }
         return position;
     }
+
+    private void enterSearchUi() {
+        mInSearchUi = true;
+        if (mSearchFragment == null) {
+            addSearchFragment();
+            return;
+        }
+        mSearchFragment.setUserVisibleHint(true);
+        final FragmentTransaction transaction = getFragmentManager()
+                .beginTransaction();
+        transaction.show(mSearchFragment);
+        transaction.commitAllowingStateLoss();
+        getFragmentManager().executePendingTransactions();
+        setupSearchUi();
+    }
+
+    private void setupSearchUi() {
+        if (mSearchView == null) {
+            prepareSearchView();
+        }
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        if (mMSimCallsFragment != null) {
+            updateMSimFragmentVisibility(false);
+        } else {
+            for (int i = 0; i < mViewPagerAdapter.getCount(); i++) {
+                updateFragmentVisibility(i, false /* not visible */);
+            }
+        }
+        mViewPager.setVisibility(View.GONE);
+        if (mViewPagerTabs != null) {
+            mViewPagerTabs.setVisibility(View.GONE);
+        }
+    }
+
+    private void updateFragmentVisibility(int position, boolean visibility) {
+        if (position >= TAB_INDEX_ALL) {
+            final Fragment fragment = getFragmentAt(position);
+            if (fragment != null) {
+                fragment.setMenuVisibility(visibility);
+                fragment.setUserVisibleHint(visibility);
+            }
+        }
+    }
+
+    private void updateMSimFragmentVisibility(boolean visibility) {
+        if (mMSimCallsFragment != null) {
+            mMSimCallsFragment.setMenuVisibility(visibility);
+            mMSimCallsFragment.setUserVisibleHint(visibility);
+        }
+    }
+
+    private Fragment getFragmentAt(int position) {
+        switch (position) {
+        case TAB_INDEX_ALL:
+            return mAllCallsFragment;
+        case TAB_INDEX_MISSED:
+            return mMissedCallsFragment;
+        default:
+            throw new IllegalStateException("Unknown fragment index: "
+                    + position);
+        }
+    }
+
+    private void addSearchFragment() {
+        if (mSearchFragment != null) {
+            return;
+        }
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        final Fragment searchFragment = new CallLogSearchFragment();
+        searchFragment.setUserVisibleHint(false);
+        ft.add(R.id.calllog_frame, searchFragment);
+        ft.commitAllowingStateLoss();
+    }
+
+    private void prepareSearchView() {
+        final View searchViewLayout = getLayoutInflater().inflate(
+                R.layout.search_action_bar, null);
+        mSearchView = (EditText) searchViewLayout
+                .findViewById(R.id.search_view);
+        mClearButtonView = (ImageView)searchViewLayout.findViewById(R.id.search_close_button);
+        mClearButtonView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchView.setText("");
+            }
+        });
+        mSearchView.addTextChangedListener(mPhoneSearchQueryTextListener);
+        mClearButtonView.setVisibility(View.GONE);
+        mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showInputMethod(v.findFocus());
+                } else {
+                    hideInputMethod(v);
+                }
+            }
+        });
+        getSupportActionBar().setCustomView(
+                searchViewLayout,
+                new LayoutParams(LayoutParams.MATCH_PARENT,
+                        LayoutParams.WRAP_CONTENT));
+    }
+
+    private void showInputMethod(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    private void hideInputMethod(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        if (imm != null && view != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    /**
+     * Listener used to send search queries to the phone search fragment.
+     */
+    private final TextWatcher mPhoneSearchQueryTextListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            final String newText = s.toString();
+            if (newText.equals(mSearchQuery)) {
+                // If the query hasn't changed (perhaps due to activity being destroyed
+                // and restored, or user launching the same DIAL intent twice), then there is
+                // no need to do anything here.
+                return;
+            }
+            mSearchQuery = newText;
+            if (mSearchFragment != null) {
+                mClearButtonView.setVisibility(TextUtils.isEmpty(s) ? View.GONE : View.VISIBLE);
+                mSearchFragment.setQueryString(mSearchQuery);
+            }
+        }
+        @Override
+        public void afterTextChanged(Editable e) {
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        if (mInSearchUi) {
+            // We should let the user go back to usual screens with tabs.
+            exitSearchUi();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void exitSearchUi() {
+        final ActionBar actionBar = getSupportActionBar();
+        if (mSearchFragment != null) {
+            mSearchFragment.setUserVisibleHint(false);
+
+            final FragmentTransaction transaction = getFragmentManager()
+                    .beginTransaction();
+            transaction.remove(mSearchFragment);
+            mSearchFragment = null;
+            transaction.commitAllowingStateLoss();
+        }
+
+        // We want to hide SearchView and show Tabs. Also focus on previously
+        // selected one.
+        actionBar.setDisplayShowCustomEnabled(false);
+        if (mMSimCallsFragment != null) {
+            updateMSimFragmentVisibility(true);
+        } else {
+            for (int i = 0; i < mViewPagerAdapter.getCount(); i++) {
+                updateFragmentVisibility(i, i == mViewPager.getCurrentItem());
+            }
+        }
+        mViewPager.setVisibility(View.VISIBLE);
+        if (mViewPagerTabs != null) {
+            mViewPagerTabs.setVisibility(View.VISIBLE);
+        }
+        hideInputMethod(getCurrentFocus());
+        invalidateOptionsMenu();
+        mSearchView.clearFocus();
+        mInSearchUi = false;
+    }
+
 }

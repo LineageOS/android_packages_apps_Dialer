@@ -174,4 +174,8 @@
     <dimen name="call_type_icon_size">12dp</dimen>
 
     <dimen name="tab_unread_count_margin_left">0dp</dimen>
+
+    <dimen name="list_all_calls">200dp</dimen>
+    <dimen name="empty_list_message_text_size_for_Marshmallow">16dp</dimen>
+    <dimen name="call_log_spinner_text_size">16sp</dimen>
 </resources>

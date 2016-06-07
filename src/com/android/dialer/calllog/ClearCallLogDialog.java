@@ -88,10 +88,9 @@ public class ClearCallLogDialog extends DialogFragment {
         };
         return new AlertDialog.Builder(getActivity())
             .setTitle(R.string.clearCallLogConfirmation_title)
-            .setIconAttribute(android.R.attr.alertDialogIcon)
             .setMessage(R.string.clearCallLogConfirmation)
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(android.R.string.ok, okListener)
+            .setPositiveButton(R.string.clear, okListener)
             .setCancelable(true)
             .create();
     }

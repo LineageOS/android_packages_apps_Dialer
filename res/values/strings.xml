@@ -1111,4 +1111,11 @@ e mode.</string>
 
     <!-- Text displayed when the list of outgoing calls is empty -->
     <string name="recentOutgoing_empty">You have no outgoing calls.</string>
+
+    <!-- Text displayed when the call log is empty. -->
+    <string name="recentCalls_empty">Your call log is empty</string>
+    <string name="calllog_search_hint">"Search call log"</string>
+    <string name="no_call_log">No call log</string>
+    <string name="clear">Clear</string>
+    <string name="description_clear_search">Clear search</string>
 </resources>

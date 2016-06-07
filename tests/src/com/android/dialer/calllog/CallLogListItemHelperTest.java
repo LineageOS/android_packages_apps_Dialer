@@ -109,14 +109,14 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
     public void testSetPhoneCallDetails_ReadVoicemail() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(AppCompatConstants.CALLS_VOICEMAIL_TYPE);
-        mHelper.setPhoneCallDetails(mViewHolder, details);
+        mHelper.setPhoneCallDetails(mViewHolder, details, null);
         assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
     public void testSetPhoneCallDetails_UnreadVoicemail() {
         PhoneCallDetails details =
                 getPhoneCallDetailsWithTypes(AppCompatConstants.CALLS_VOICEMAIL_TYPE);
-        mHelper.setPhoneCallDetails(mViewHolder, details);
+        mHelper.setPhoneCallDetails(mViewHolder, details, null);
         assertEquals(View.VISIBLE, mViewHolder.voicemailPlaybackView.getVisibility());
     }
 
@@ -264,7 +264,7 @@ public class CallLogListItemHelperTest extends AndroidTestCase {
         PhoneCallDetails details = getPhoneCallDetails(
                 number, postDialDigits, presentation, formattedNumber);
         details.callTypes = new int[] {callType};
-        mHelper.setPhoneCallDetails(mViewHolder, details);
+        mHelper.setPhoneCallDetails(mViewHolder, details, null);
     }
 
     private PhoneCallDetails getPhoneCallDetails(

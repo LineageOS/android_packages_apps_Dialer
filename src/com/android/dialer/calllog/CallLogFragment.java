@@ -82,8 +82,8 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
-    private CallLogAdapter mAdapter;
-    private CallLogQueryHandler mCallLogQueryHandler;
+    protected CallLogAdapter mAdapter;
+    protected CallLogQueryHandler mCallLogQueryHandler;
     private boolean mScrollToTop;
 
 
@@ -298,7 +298,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
-        mEmptyListView.setImage(R.drawable.empty_call_log);
+        //mEmptyListView.setImage(R.drawable.empty_call_log);
         mEmptyListView.setActionClickedListener(this);
 
         int activityType = mIsCallLogActivity ? CallLogAdapter.ACTIVITY_TYPE_CALL_LOG :
@@ -414,7 +414,11 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
                 messageId = R.string.call_log_voicemail_empty;
                 break;
             case CallLogQueryHandler.CALL_TYPE_ALL:
-                messageId = R.string.call_log_all_empty;
+                if (mIsCallLogActivity) {
+                    messageId = R.string.no_call_log;
+                } else {
+                    messageId = R.string.recentCalls_empty;
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected filter type in CallLogFragment: "
@@ -424,6 +428,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         if (mIsCallLogActivity) {
             mEmptyListView.setActionLabel(EmptyContentView.NO_LABEL);
         } else if (filterType == CallLogQueryHandler.CALL_TYPE_ALL) {
+            mEmptyListView.setImage(R.drawable.empty_call_log);
             mEmptyListView.setActionLabel(R.string.call_log_all_empty_action);
         }
     }

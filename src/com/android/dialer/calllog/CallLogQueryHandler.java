@@ -175,6 +175,20 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         fetchCalls(callType, 0);
     }
 
+    public void fetchCalls(String filter) {
+        cancelFetch();
+        fetchCalls(QUERY_CALLLOG_TOKEN, filter);
+    }
+
+    public void fetchCalls(int token, String filter) {
+        String selection = "(" + Calls.NUMBER + " like '%" + filter
+                + "%'  or  " + Calls.CACHED_NAME + " like '%" + filter + "%' )";
+
+        startQuery(token, null, Calls.CONTENT_URI_WITH_VOICEMAIL,
+                CallLogQuery._PROJECTION, selection, null,
+                Calls.DEFAULT_SORT_ORDER);
+    }
+
     public void fetchVoicemailStatus() {
         if (TelecomUtil.hasReadWriteVoicemailPermissions(mContext)) {
             startQuery(QUERY_VOICEMAIL_STATUS_TOKEN, null, Status.CONTENT_URI,
