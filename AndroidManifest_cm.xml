@@ -48,7 +48,6 @@
 
         <receiver android:name=".discovery.DiscoverySignalReceiver">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
                 <action android:name="com.android.dialer.discovery.DiscoverySignalReceiver.ON_SHOW" />
                 <action android:name="com.android.dialer.discovery.DiscoverySignalReceiver.ON_DISMISS" />
