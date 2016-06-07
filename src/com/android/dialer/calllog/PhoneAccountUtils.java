@@ -121,7 +121,7 @@ public class PhoneAccountUtils {
     @Nullable
     private static PhoneAccount getAccountOrNull(Context context,
             @Nullable PhoneAccountHandle accountHandle) {
-        if (TelecomUtil.getCallCapablePhoneAccounts(context).size() <= 1) {
+        if (TelecomUtil.getCallCapablePhoneAccounts(context).size() < 1) {
             return null;
         }
         return TelecomUtil.getPhoneAccount(context, accountHandle);

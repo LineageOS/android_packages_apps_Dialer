@@ -914,7 +914,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         PhoneAccount account = getAccountForCall(call);
         TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
         if (account != null && !TextUtils.isEmpty(account.getLabel())
-                && TelecomManagerCompat.getCallCapablePhoneAccounts(mgr).size() > 1) {
+                && TelecomManagerCompat.getCallCapablePhoneAccounts(mgr).size() >= 1) {
             return account.getLabel().toString();
         }
         return null;
