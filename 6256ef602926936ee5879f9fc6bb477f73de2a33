@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_ec7b0d78",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkCache.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-07T17:12:28Z",
+      "side": 1,
+      "message": "Should probably rather check the return value of getPreferredLinksForList() for null. Can probably move the call out of the synchronized block in that case as well.",
+      "revId": "6256ef602926936ee5879f9fc6bb477f73de2a33",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
