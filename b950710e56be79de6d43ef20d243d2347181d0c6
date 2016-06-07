@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5faad753_3206601f",
+        "filename": "src/com/android/dialer/discovery/DiscoverySignalReceiver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-07T23:56:11Z",
+      "side": 1,
+      "message": "the startServiceForConnectivityChanged is now being referenced in WifiCallStatusNudgeListener. I made that one static and changed the international call to reflect that same change. I can change it back if you want.",
+      "parentUuid": "5faad753_5790aeed",
+      "revId": "b950710e56be79de6d43ef20d243d2347181d0c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5faad753_f7bafa6b",
         "filename": "src/com/android/dialer/discovery/WifiCallStatusNudgeListener.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-07T23:20:09Z",
       "side": 1,
       "message": "Is this going to execute at under all the same conditions as the version that was in the receiver?  I don\u0027t know this code base well enough obviously, but it seems a little unclear to me that this code path will execute in every case where that discoveryNudgeReceiver onAction() call would.",
+      "revId": "b950710e56be79de6d43ef20d243d2347181d0c6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_1201e405",
+        "filename": "src/com/android/dialer/discovery/WifiCallStatusNudgeListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-07T23:56:11Z",
+      "side": 1,
+      "message": "yes it is. this is run when wifi is on.",
+      "parentUuid": "5faad753_f7bafa6b",
       "revId": "b950710e56be79de6d43ef20d243d2347181d0c6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
