@@ -16,6 +16,24 @@
       "revId": "1ac6bca25240af4a8df138014a61d94c03dccff8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_78991777",
+        "filename": "src/com/android/dialer/list/SpeedDialFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-06-08T21:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5faad753_f8ad079b",
+      "revId": "1ac6bca25240af4a8df138014a61d94c03dccff8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
