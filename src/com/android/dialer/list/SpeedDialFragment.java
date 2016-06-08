@@ -345,7 +345,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
         // be called, on which we'll check if "all" contacts should be reloaded again or not.
         if (PermissionsUtil.hasContactsPermissions(activity)) {
-            //getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
+            getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, mContactTileLoaderListener);
         } else {
             setEmptyViewVisibility(true);
         }
