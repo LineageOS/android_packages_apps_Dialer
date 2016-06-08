@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_f8ad079b",
+        "filename": "src/com/android/dialer/list/SpeedDialFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 12937
+      },
+      "writtenOn": "2016-06-08T21:03:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "1ac6bca25240af4a8df138014a61d94c03dccff8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
