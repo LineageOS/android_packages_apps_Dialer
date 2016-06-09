@@ -594,7 +594,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     /**
      * Deletes all smart dial data and recreates it from contacts
      */
-    public void recreateSmartDialDatabaseInBackground() { new SmartDialRecreateAsyncTask().execute(); }
+    public void recreateSmartDialDatabaseInBackground() {
+        if (PermissionsUtil.hasContactsPermissions(mContext)) {
+            new SmartDialRecreateAsyncTask().execute();
+        }
+    }
 
     private class SmartDialRecreateAsyncTask extends AsyncTask {
         @Override
