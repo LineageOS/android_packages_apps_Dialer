@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_9ba728a8",
+        "filename": "src/com/android/dialer/discovery/DiscoveryEventHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-06-10T21:21:20Z",
+      "side": 1,
+      "message": "I think we should mention here (or above the if block?) that we will not be incrementing the event count in case we want to show this nudge since we\u0027ll be doing so once the nudge is actually shown.",
+      "revId": "97869578102ebac6d1f7d3e1a1fa83108b14a127",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_3bbab4c0",
+        "filename": "src/com/android/dialer/discovery/DiscoverySignalReceiver.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-06-10T21:21:20Z",
+      "side": 1,
+      "message": "extra white space",
+      "revId": "97869578102ebac6d1f7d3e1a1fa83108b14a127",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
