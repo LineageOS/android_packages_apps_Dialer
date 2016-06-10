@@ -140,20 +140,11 @@ public class WifiCallStatusNudgeListener {
     private static void callOnWifiSuccess() {
         if (DEBUG) Log.v(TAG, "call was made with wifi connected the whole time");
 
-        SharedPreferences preferences = mContext
-                .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-
-        int currentCount;
         // If the network is roaming and we are on wifi,
         // then we want to show a potential roaming nudge instead of a wifi nudge.
         if (mTelephonyManager.isNetworkRoaming()) {
-            currentCount = preferences.getInt(CallMethodUtils.PREF_ROAMING_CALLS, 0);
-            preferences.edit().putInt(CallMethodUtils.PREF_ROAMING_CALLS, ++currentCount).apply();
             DiscoverySignalReceiver.startServiceForConnectivityChanged(mContext);
         } else {
-            currentCount = preferences.getInt(CallMethodUtils.PREF_WIFI_CALL, 0);
-            preferences.edit().putInt(CallMethodUtils.PREF_WIFI_CALL, ++currentCount).apply();
-
             new DiscoveryEventHandler(mContext).getNudgeProvidersWithKey(
                     NudgeKey.NOTIFICATION_WIFI_CALL);
         }
