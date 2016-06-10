@@ -91,8 +91,12 @@ public class DiscoveryEventHandler {
 
                             Bundle b = theEntry.getValue();
 
+                            // If we are ready to show the nudge, then we will not increment the
+                            // count here. Instead the count will be incremented in
+                            // DiscoverySignalReceiver when the nudge is properly shown.
                             if (!validateShouldShowNudge(key, b) && !isTesting) {
-                                // Nudge not yet ready for this item.
+                                // Nudge not yet ready for this item. increment event count
+                                incrementCount(key, mContext);
                                 continue;
                             }
 
@@ -238,22 +242,44 @@ public class DiscoveryEventHandler {
         SharedPreferences preferences = mContext.getSharedPreferences(DialtactsActivity
                 .SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 
-        int count = 0;
-
-        // The count starts at 1 here because this is the first time we've seen this item.
-        if (key.equals(NudgeKey.NOTIFICATION_INTERNATIONAL_CALL)) {
-            count = preferences.getInt(CallMethodUtils.PREF_INTERNATIONAL_CALLS, 1);
-        } else if (key.equals(NudgeKey.NOTIFICATION_WIFI_CALL)) {
-            count = preferences.getInt(CallMethodUtils.PREF_WIFI_CALL, 1);
-        } else if (key.equals(NudgeKey.NOTIFICATION_ROAMING)) {
-            count = preferences.getInt(CallMethodUtils.PREF_ROAMING_CALLS, 1);
-        }
+        String preferenceKey = getPreferenceKeyForNudgeKey(key);
+        // If the preference does not exist then this is the first event so default to 1;
+        int count = preferences.getInt(preferenceKey, 1);
 
         checkCount = (count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_FIRST_NUDGE, 0)) ||
                 (count == b.getInt(NudgeKey.NOTIFICATION_PARAM_EVENTS_SECOND_NUDGE, 0));
 
         // return true if nudge should be shown
         return checkCount;
+    }
+
+    private static String getPreferenceKeyForNudgeKey(String nudgeKey) {
+        String prefKey = null;
+        switch(nudgeKey) {
+            case NudgeKey.NOTIFICATION_INTERNATIONAL_CALL:
+                prefKey = CallMethodUtils.PREF_INTERNATIONAL_CALLS;
+                break;
+            case NudgeKey.NOTIFICATION_WIFI_CALL:
+                prefKey = CallMethodUtils.PREF_WIFI_CALL;
+                break;
+            case NudgeKey.NOTIFICATION_ROAMING:
+                prefKey = CallMethodUtils.PREF_ROAMING_CALLS;
+                break;
+        }
+        return prefKey;
+    }
+
+    public static void incrementCount(String nudgeKey, Context context) {
+        String prefKey = getPreferenceKeyForNudgeKey(nudgeKey);
+
+        if (prefKey != null) {
+            SharedPreferences nudgePrefs = context.getSharedPreferences(
+                    DialtactsActivity.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+            // If the preference does not exist then set default to zero so when we increment it
+            // right after then we will have the correct value (1).
+            int currentCount = nudgePrefs.getInt(prefKey, 0);
+            nudgePrefs.edit().putInt(prefKey, ++currentCount).apply();
+        }
     }
 
 }

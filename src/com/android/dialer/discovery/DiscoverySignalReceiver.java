@@ -57,13 +57,7 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
         switch (action) {
             case Intent.ACTION_NEW_OUTGOING_CALL:
                 String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-                SharedPreferences preferences = context
-                        .getSharedPreferences(DialtactsActivity.SHARED_PREFS_NAME,
-                                Context.MODE_PRIVATE);
-                int currentCount = preferences.getInt(CallMethodUtils.PREF_INTERNATIONAL_CALLS, 0);
                 if (isMaybeInternationalNumber(context, phoneNumber)) {
-                    preferences.edit().putInt(CallMethodUtils.PREF_INTERNATIONAL_CALLS,
-                            ++currentCount).apply();
                     startServiceForInternationalCallMade(context);
                 }
                 break;
@@ -89,6 +83,10 @@ public class DiscoverySignalReceiver extends BroadcastReceiver {
                 editor.putLong(countKey, count);
                 editor.putLong(timeKey, System.currentTimeMillis());
                 editor.apply();
+
+                // The nudge was shown, so we want to increment the count because this is a real
+                // event.
+                DiscoveryEventHandler.incrementCount(nudgeKey, context);
 
                 recordDiscoveryCount(nudgeComponent, nudgeKey,
                         InCallMetricsHelper.Parameters.COUNT);
