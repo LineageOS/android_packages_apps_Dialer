@@ -26,17 +26,17 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Редактиране на номер преди обаждане"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Добавяне към контакти"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Изтриване от историята на обажданията"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Изчистване на историята на обажданията"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Изчистване на историята на обажд."</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Изтриване на гласова поща"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Споделяне на гласова поща"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Няма обаждания"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Да се изчисти ли историята на обажд.?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Така ще се изтрият всички обаждания от историята ви"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Историята на обажд. се изчиства…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Гласова поща"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> гл. съобщения"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> гласови съобщения </item>
+      <item quantity="one">Гласово съобщение</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Пускане"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Нова гласова поща от <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -81,7 +81,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Показване само на гл. поща"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Показване на всички обаждания"</string>
     <string name="add_contact" msgid="4579643070374941999">"Добавяне към контактите"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"Добавяне на 2-сек пауза"</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"Добавяне на пауза от 2 сек"</string>
     <string name="add_wait" msgid="3360818652790319634">"Добавяне на изчакване"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Настройки"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Нов контакт"</string>
@@ -148,7 +148,7 @@
     <string name="speed_dial_empty" msgid="1931474498966072849">"Чрез бързото набиране се свързвате с едно докосване с любими контакти и с номера, на които се обаждате често"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Няма контакти"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Докоснете изображението, за да видите всички номера, или го натиснете и задръжте за пренареждане"</string>
-    <string name="description_dismiss" msgid="2146276780562549643">"Отхвърляне"</string>
+    <string name="description_dismiss" msgid="2146276780562549643">"Отказ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Премахване"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ВСИЧКИ КОНТАКТИ"</string>
     <string name="call_log_action_call_back" msgid="4944463006859852473">"ОБРАТНО ОБАЖДАНЕ"</string>
@@ -183,7 +183,7 @@
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Звуци и вибриране"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Мелодия на телефона"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Вибриране и при обаждания"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Клавиат. за набиране: Мелодии"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Звук при набиране"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Други"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Бързи отговори"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Обаждания"</string>

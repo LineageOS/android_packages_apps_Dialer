@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Vill du rensa samtalshistoriken?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Alla samtal raderas från historiken"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Rensar samtalshistoriken ..."</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Röstmeddelanden"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> röstmeddelanden"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> röstmeddelanden </item>
+      <item quantity="one">röstmeddelande</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Spela upp"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nytt röstmeddelande från <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -88,7 +88,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"Alla kontakter"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Samtalsinfo"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Det finns ingen information"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Använda tonvalstelefon"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Använd tonvalstelefon"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Återvänd till pågående samtal"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Lägg t. samt."</string>
     <string name="type_incoming" msgid="6502076603836088532">"Inkommande samtal"</string>

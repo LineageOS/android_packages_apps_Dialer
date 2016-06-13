@@ -31,12 +31,12 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Дауыс-хабармен бөлісу"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Қоңыраулар жоқ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Қоңыраулар тарихын тазалау керек пе?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Бұл тарихтан барлық қоңырауларды жояды"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Тарихтағы барлық қоңыраулар жойылады"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Қоңыраулар тарихы тазалануда…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Дауыс-хабар"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> дауыс-хабарлар"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> дауыстық хабар </item>
+      <item quantity="one">Дауыстық хабар</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Ойнау"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> жіберген жаңа дауыс-хабар"</string>
@@ -48,7 +48,7 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Келген қоңыраулар ғана"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"Шығыс қоңыраулары ғана"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"Қабылданбаған қоңыраулар ғана"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Дауыс-хабар жаңартулары қол жетімді емес"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Дауыстық пошта жаңартулары қол жетімді емес"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Жаңа дауыстық хабар күтуде. Дәл қазір жүктеу мүмкін емес."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Дауыс-хабарды реттеу"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Аудио қол жетімді емес"</string>
@@ -97,7 +97,7 @@
     <string name="type_incoming_video" msgid="82323391702796181">"Кіріс бейне қоңырау"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Шығыс бейне қоңырау"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Өткізіп алынған бейне қоңырау"</string>
-    <string name="type_voicemail" msgid="5153139450668549908">"Дауыс-хабар"</string>
+    <string name="type_voicemail" msgid="5153139450668549908">"Дауыстық пошта"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Келген қоңыраулар"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Дауыс-хабарды ойнату"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> контактісін көру"</string>
@@ -111,7 +111,7 @@
     <string name="description_start_voice_search" msgid="520539488194946012">"Дауыс іздеуді бастау"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> нөміріне қоңырау шалу"</string>
     <string name="unknown" msgid="740067747858270469">"Белгісіз"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Дауыс-хабар"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Дауыстық пошта"</string>
     <string name="private_num" msgid="6374339738119166953">"Жеке нөмір"</string>
     <string name="payphone" msgid="7726415831153618726">"Автомат-телефон"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мин <xliff:g id="SECONDS">%s</xliff:g> сек"</string>
@@ -182,10 +182,10 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Контактілерді көрсету опциялары"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Дыбыстар және дірілдеу"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Телефон қоңырау әуені"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Сондай-ақ, қоңыраулар үшін дірілдету"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Қоңырау кезінде дірілдету"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Теру тақтасының үндері"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Басқа"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Жылдам жауаптар"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Қоңыраулар"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Есептік жазбаларға қоңыр. шалу"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Қоңырау шалу есептік жазбалары"</string>
 </resources>

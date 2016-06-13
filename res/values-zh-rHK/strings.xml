@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"通話記錄"</string>
     <string name="menu_sendTextMessage" msgid="8682056943960339239">"傳送短訊"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"打電話給<xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"在撥打前編輯號碼"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"致電前編輯號碼"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"新增至通訊錄"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"從通話記錄中刪除"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"清除通話記錄"</string>
@@ -31,12 +31,12 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"分享留言信箱"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"沒有通話記錄"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通話記錄嗎？"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"這會刪除所有通話記錄"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"此操作將刪除所有通話記錄"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通話記錄…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"話音留言"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> 個語音留言"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 個留言</item>
+      <item quantity="one">留言</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"播放"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g> ， <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"來自<xliff:g id="CALLER">%1$s</xliff:g>的新語音留言"</string>
@@ -86,7 +86,7 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"設定"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"新增聯絡人"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"所有聯絡人"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"通話詳細資料"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"通話詳情"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"沒有詳細資訊"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"使用觸控音頻按鍵"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"返回進行中的通話"</string>
@@ -164,7 +164,7 @@
     <string name="description_call_back_action" msgid="3012837380108884260">"回撥電話給「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"視像通話，通話對象：<xliff:g id="NAMEORNUMBER">^1</xliff:g>。"</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"收聽來自「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」的留言信箱"</string>
-    <string name="description_details_action" msgid="2433827152749491785">"與「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」通話的詳細資料"</string>
+    <string name="description_details_action" msgid="2433827152749491785">"與「<xliff:g id="NAMEORNUMBER">^1</xliff:g>」的通話詳情"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"已從通話記錄中刪除"</string>
     <string name="toast_caller_id_reported" msgid="2240847358945525483">"已向 Google 報告電話號碼"</string>
     <string name="call_log_action_report" msgid="561229827189128879">"報告"</string>

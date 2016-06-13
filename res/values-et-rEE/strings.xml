@@ -21,7 +21,7 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Kõneajalugu"</string>
-    <string name="menu_sendTextMessage" msgid="8682056943960339239">"SMS-i saatmine"</string>
+    <string name="menu_sendTextMessage" msgid="8682056943960339239">"Saada SMS"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Helista kasutajale <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Muuda enne helistamist numbrit"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Lisa kontaktidesse"</string>
@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kas kustutada kõneajalugu?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"See kustutab ajaloost kõik kõned"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Kõneajaloo kustutamine ..."</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Kõnepost"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> kõnepostisõnumit"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> kõneposti teadet </item>
+      <item quantity="one">Kõneposti teade</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Esitamine"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Uus kõnepostisõnum kasutajalt <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -82,7 +82,7 @@
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Kuva kõik kõned"</string>
     <string name="add_contact" msgid="4579643070374941999">"Lisa kontaktide hulka"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Lisa 2-sekundiline paus"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Lisa ootama"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Lisa ootamine"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Seaded"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Uus kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Kõik kontaktid"</string>

@@ -27,16 +27,16 @@
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"संपर्कों में जोड़ें"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"कॉल इतिहास से साफ़ करें"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"कॉल इतिहास साफ़ करें"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ध्वनि मेल हटाएं"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"वॉयस मेल हटाएं"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ध्‍वनिमेल साझा करें"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"कोई कॉल नहीं"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"कॉल इतिहास साफ़ करें?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"इससे आपके इतिहास से सभी कॉल हटा दिए जाएंगे"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"कॉल इतिहास साफ़ किया जा रहा है…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"वॉयस मेल"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> ध्‍वनिमेल"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> वॉइसमेल </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> वॉइसमेल </item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"चलाएं"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> की ओर से नया ध्‍वनिमेल"</string>
@@ -103,7 +103,7 @@
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> संपर्क देखें"</string>
     <string name="description_call" msgid="3443678121983852666">"<xliff:g id="NAME">%1$s</xliff:g> को कॉल करें"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> का संपर्क विवरण"</string>
-    <string name="description_new_voicemail" msgid="2133792360865517746">"नया ध्वनि मेल."</string>
+    <string name="description_new_voicemail" msgid="2133792360865517746">"नया वॉयस मेल."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> कॉल."</string>
     <string name="description_video_call" msgid="2933838090743214204">"वीडियो कॉल."</string>
     <string name="description_send_text_message" msgid="3118485319691414221">"<xliff:g id="NAME">%1$s</xliff:g> को SMS भेजें"</string>

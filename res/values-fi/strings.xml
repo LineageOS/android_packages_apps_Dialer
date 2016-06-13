@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Tyhjennetäänkö soittohistoria?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Kaikki soittohistorian tiedot poistetaan"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Tyhjennetään soittohistoriaa…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Vastaaja"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> vastaajaviestiä"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> vastaajaviestiä </item>
+      <item quantity="one">Vastaajaviesti</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Toista"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Uusi vastaajaviesti: <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Soita videopuhelu"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Näytä koko soittohistoria"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> uutta vastaamatonta puhelua"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella suosikeillesi ja muihin usein käyttämiisi numeroihin"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Pikavalinnan avulla voit soittaa yhdellä kosketuksella usein käyttämiisi numeroihin."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ei yhteystietoja"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Katso kaikki numerot koskettamalla kuvaa tai järjestele tietoja koskettamalla kuvaa pitkään"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ohita"</string>

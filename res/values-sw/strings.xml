@@ -30,13 +30,13 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Futa ujumbe wa sauti"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Shiriki ujumbe wa sauti"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Hakuna simu zilizopigwa"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Je, ungependa kufuta rekodi ya simu zilizopigwa?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hii itafuta simu zote kutoka rekodi zako"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Rekodi ya simu zilizopigwa ifutwe?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Hatua hii itafuta rekodi yote ya simu"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Inafuta rekodi ya simu zilizopigwa..."</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Ujumbe wa sauti"</item>
-    <item quantity="other" msgid="5513481419205061254">"Barua za sauti <xliff:g id="COUNT">%1$d</xliff:g>"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other">Ujumbe <xliff:g id="COUNT">%1$d</xliff:g> wa sauti </item>
+      <item quantity="one">Ujumbe wa sauti</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Cheza"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Barua mpya ya sauti kutoka <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -82,7 +82,7 @@
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Onyesha simu zote"</string>
     <string name="add_contact" msgid="4579643070374941999">"Ongeza kwenye anwani"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ongeza usitishaji wa sekunde 2"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Ongeza kusubiri"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Ongeza muda wa kusubiri"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Mipangilio"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Anwani mpya"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Anwani zote"</string>
@@ -93,7 +93,7 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Ongeza simu"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Unapigiwa simu"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Simu unayopiga"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Simu isiyojibiwa"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Simu uliyokosa"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Hangout ya Video inayoingia"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Hangout ya Video inayotoka"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Hangout ya Video ambayo haikupokewa"</string>
@@ -182,7 +182,7 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Chaguo za onyesho la anwani"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Sauti na mtetemo"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Mlio wa simu"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Tetema simu zinapoingia pia"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Pia tetema simu zinapoingia"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Milio ya vitufe vya kupiga simu"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Nyingine"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Majibu ya haraka"</string>

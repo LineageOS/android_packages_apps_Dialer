@@ -30,13 +30,13 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ezabatu ahots-mezua"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Partekatu ahots-mezua"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Ez dago deirik"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Deien historia garbitu nahi duzu?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Deien historia garbitu?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Historiako dei guztiak ezabatuko dira"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Deien historia garbitzen…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Erantzungailua"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> ahots-mezu erantzungailuan"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> Erantzungailuko <xliff:g id="COUNT">%1$d</xliff:g> mezu </item>
+      <item quantity="one">Erantzungailuko mezua</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Erreproduzitu"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> deitzailearen ahots-mezu berria"</string>
@@ -147,7 +147,7 @@
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> dei galdu berri"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"Markatze bizkorrak gehien erabiltzen dituzun zenbaki eta gogokoetara ukitze bakarrarekin deitzeko balio du"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Ez dago kontakturik"</string>
-    <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu ukituta berrantolatzeko"</string>
+    <string name="contact_tooltip" msgid="2019777545923635266">"Ukitu irudia zenbaki guztiak ikusteko, edo eduki ezazu sakatuta berrantolatzeko"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Baztertu"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Kendu"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"KONTAKTU GUZTIAK"</string>

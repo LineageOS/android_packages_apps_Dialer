@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"要清除通话记录吗？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"这会删除您的所有通话记录"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通话记录…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"语音邮件"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> 封语音邮件"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 封语音邮件</item>
+      <item quantity="one">1 封语音邮件</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"播放"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>，<xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"来自<xliff:g id="CALLER">%1$s</xliff:g>的新语音邮件"</string>
@@ -121,7 +121,7 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"正在加载..."</string>
     <string name="imei" msgid="3045126336951684285">"移动通信国际识别码"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从SIM卡中加载..."</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"正从 SIM 卡中加载..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"SIM卡联系人"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"没有可用的通讯录应用"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"无法使用语音搜索"</string>
@@ -137,7 +137,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"语音邮件"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速拨号"</string>
     <string name="tab_recents" msgid="929949073851377206">"最近"</string>
-    <string name="tab_all_contacts" msgid="1410922767166533690">"联系人"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"通讯录"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"已从收藏中移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"撤消"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"拨打<xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -187,5 +187,5 @@
     <string name="other_settings_title" msgid="7976283601445863248">"其他"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通话"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐户"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐号"</string>
 </resources>

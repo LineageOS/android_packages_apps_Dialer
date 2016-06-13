@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸುವುದೇ?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"ಇದು ನಿಮ್ಮ ಇತಿಹಾಸದಿಂದ ಎಲ್ಲಾ ಕರೆಗಳನ್ನು ಅಳಿಸುತ್ತದೆ"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"ಧ್ವನಿಮೇಲ್"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> ಧ್ವನಿಮೇಲ್‌ಗಳು"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> ಧ್ವನಿಮೇಲ್‌ಗಳು </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> ಧ್ವನಿಮೇಲ್‌ಗಳು </item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"ಪ್ಲೇ ಮಾಡು"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> ಇವರಿಂದ ಹೊಸ ಧ್ವನಿಮೇಲ್‌"</string>
@@ -48,7 +48,7 @@
     <string name="call_log_incoming_header" msgid="2787722299753674684">"ಒಳಬರುವ ಕರೆಗಳು ಮಾತ್ರ"</string>
     <string name="call_log_outgoing_header" msgid="761009180766735769">"ಹೊರಹೋಗುವ ಕರೆಗಳು ಮಾತ್ರ"</string>
     <string name="call_log_missed_header" msgid="8017148056610855956">"ತಪ್ಪಿದ ಕರೆಗಳು ಮಾತ್ರ"</string>
-    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"ಧ್ವನಿಮೇಲ್‌ ನವೀಕರಣಗಳು ಇದೀಗ ಲಭ್ಯವಿಲ್ಲ"</string>
+    <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"ಧ್ವನಿಮೇಲ್‌ ಅಪ್‌ಡೇಟ್‌ಗಳು ಇದೀಗ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"ಹೊಸ ಧ್ವನಿಮೇಲ್ ಕಾಯುತ್ತಿದೆ. ಇದೀಗ ಲೋಡ್‌ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್‌ ಹೊಂದಿಸಿ"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"ಆಡಿಯೋ ಲಭ್ಯವಿಲ್ಲ"</string>
@@ -88,7 +88,7 @@
     <string name="menu_allContacts" msgid="6948308384034051670">"ಎಲ್ಲಾ ಸಂಪರ್ಕಗಳು"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ಕರೆಯ ವಿವರಗಳು"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ವಿವರಗಳು ಲಭ್ಯವಿಲ್ಲ"</string>
-    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ಸ್ಪರ್ಶದ ಟೋನ್ ಕೀಪ್ಯಾಡ್ ಬಳಸಿ"</string>
+    <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ಸ್ಪರ್ಶ ಟೋನ್ ಕೀಪ್ಯಾಡ್ ಬಳಸಿ"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"ಪ್ರತ್ಯತ್ತರ ಕರೆಯು ಪ್ರಗತಿಯಲ್ಲಿದೆ"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"ಕರೆಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="type_incoming" msgid="6502076603836088532">"ಒಳಬರುವ ಕರೆ"</string>
@@ -133,8 +133,8 @@
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"ಯಾವುದೇ ಇತ್ತೀಚಿನ ಧ್ವನಿಮೇಲ್‌ಗಳಿಲ್ಲ"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ಇತಿಹಾಸ"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲ"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"ತಪ್ಪಿವೆ"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"ತಪ್ಪಿದ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_recents" msgid="929949073851377206">"ಇತ್ತೀಚಿನವುಗಳು"</string>
@@ -146,13 +146,13 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"ಕರೆಯ ಪೂರ್ಣ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನವುಗಳು ಮತ್ತು ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದು-ಸ್ಪರ್ಶದ ಡಯಲಿಂಗ್‌ ಆಗಿದೆ"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"ಸ್ಪೀಡ್ ಡಯಲ್ ಎಂದರೆ, ನೀವು ಹೆಚ್ಚಾಗಿ ಕರೆಮಾಡುವ ಮೆಚ್ಚಿನ ಸಂಪರ್ಕಗಳು ಹಾಗೂ ಸಂಖ್ಯೆಗಳಿಗೆ ಒಂದೇ ಒಂದು ಸ್ಪರ್ಶದಲ್ಲಿ ಡಯಲ್‌ ಮಾಡುವಿಕೆ."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"ವಜಾಗೊಳಿಸಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"ಎಲ್ಲ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="call_log_action_call_back" msgid="4944463006859852473">"ಮರಳಿ ಕರೆ ಮಾಡಿ"</string>
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"ಮರಳಿ ಕರೆ"</string>
     <string name="call_log_action_call" msgid="8187991828921352552">"ಕರೆ"</string>
     <string name="call_log_action_redial" msgid="8159106862639797417">"ರೀಡಯಲ್"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"ವೀಡಿಯೊ ಕರೆ"</string>
@@ -184,7 +184,7 @@
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ಧ್ವನಿಗಳು ಹಾಗೂ ವೈಬ್ರೇಟ್‌"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ಫೋನ್ ರಿಂಗ್‌ಟೋನ್"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ಕರೆಗಳಿಗೂ ಸಹ ವೈಬ್ರೇಟ್‌"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ಡಯಲ್‌ಪ್ಯಾಡ್‌ ಧ್ವನಿಗಳು"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"ಡಯಲ್‌ಪ್ಯಾಡ್‌ ಟೋನ್‌ಗಳು"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"ಇತರೆ"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳು"</string>
     <string name="call_settings_label" msgid="313434211353070209">"ಕರೆಗಳು"</string>

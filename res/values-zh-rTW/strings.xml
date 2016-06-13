@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"清除通話紀錄？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"這項操作會將所有通話從您的紀錄中刪除"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"正在清除通話紀錄…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"語音留言"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> 則語音留言"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> 則語音留言</item>
+      <item quantity="one">語音留言</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"播放"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>、<xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"最新語音留言者：<xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -138,14 +138,14 @@
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速撥號"</string>
     <string name="tab_recents" msgid="929949073851377206">"近期通話"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"聯絡人"</string>
-    <string name="favorite_hidden" msgid="5011234945140912047">"已從最愛的聯絡人移除"</string>
+    <string name="favorite_hidden" msgid="5011234945140912047">"已從常用聯絡人移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"復原"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"撥打 <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"新增為聯絡人"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"進行視訊通話"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"查看完整通話紀錄"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> 通新的未接來電"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"快速撥號功能可讓您輕觸一下即撥打電話給最愛聯絡人和經常通話的號碼"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"快速撥號功能可讓您輕觸一下即撥打電話給常用聯絡人和經常撥打的號碼"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"沒有聯絡人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"輕觸圖片即可查看所有號碼，輕觸並按住則可重新排序"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"關閉"</string>

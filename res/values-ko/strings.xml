@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"통화 기록을 삭제하시겠습니까?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"모든 통화가 기록에서 삭제됩니다."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"통화 기록을 삭제하는 중…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"음성사서함"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g>개의 음성사서함"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other">음성메일 <xliff:g id="COUNT">%1$d</xliff:g>개</item>
+      <item quantity="one">음성메일</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"재생"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g>님이 보낸 새 음성사서함"</string>
@@ -128,7 +128,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"전화 애플리케이션을 사용 중지했으므로 전화를 걸 수 없습니다."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"이 기기에 작업을 처리할 수 있는 앱이 없습니다."</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"이름 또는 전화번호 입력"</string>
-    <string name="recentMissed_empty" msgid="4901789420356796156">"부재중 통화 없음"</string>
+    <string name="recentMissed_empty" msgid="4901789420356796156">"부재중 전화 없음"</string>
     <string name="recentVoicemails_empty" msgid="8582424947259156664">"최근 음성사서함 없음"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"즐겨찾는 연락처만 표시"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"기록"</string>
@@ -146,7 +146,7 @@
     <string name="recents_footer_text" msgid="7315554578957453359">"전체 통화 기록 조회"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"새로운 부재중 전화 <xliff:g id="NUMBER">%s</xliff:g>건"</string>
     <string name="speed_dial_empty" msgid="1931474498966072849">"단축번호를 지정하면 즐겨찾거나 자주 전화하는 번호를 한 번만 터치하여 전화를 걸 수 있습니다."</string>
-    <string name="all_contacts_empty" msgid="2299508125100209367">"주소록 없음"</string>
+    <string name="all_contacts_empty" msgid="2299508125100209367">"연락처 없음"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"이미지를 터치하여 모든 번호를 확인하거나 길게 터치하여 재정렬합니다."</string>
     <string name="description_dismiss" msgid="2146276780562549643">"닫기"</string>
     <string name="remove_contact" msgid="1080555335283662961">"삭제"</string>

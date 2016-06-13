@@ -33,10 +33,11 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Желите да обришете историју позива?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Ово ће избрисати све позиве из историје"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Брише се историја позива…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Говорна пошта"</item>
-    <item quantity="other" msgid="5513481419205061254">"Говорних порука: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> говорна порука </item>
+      <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> говорне поруке </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> говорних порука </item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Пусти"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Нова говорна порука од <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -118,10 +119,10 @@
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Није могуће позвати овај број"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Да бисте подесили говорну пошту, идите у Мени &gt; Подешавања."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Да бисте позвали говорну пошту, прво искључите режим авионa."</string>
-    <string name="contact_list_loading" msgid="5488620820563977329">"Учитавање…"</string>
+    <string name="contact_list_loading" msgid="5488620820563977329">"Учитава се…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Учитавање са SIM картице је у току…"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Учитава се са SIM картице…"</string>
     <string name="simContacts_title" msgid="27341688347689769">"Контакти на SIM картици"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"Нема доступне апликације за контакте"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"Гласовна претрага није доступна"</string>

@@ -33,10 +33,12 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"האם לנקות את היסטוריית השיחות?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"פעולה זו תמחק את כל השיחות מההיסטוריה שלך"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"מנקה היסטוריית שיחות…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"דואר קולי"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> הודעות קוליות"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="two"> <xliff:g id="COUNT">%1$d</xliff:g> הודעות דואר קולי </item>
+      <item quantity="many"> <xliff:g id="COUNT">%1$d</xliff:g> הודעות דואר קולי </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> הודעות דואר קולי </item>
+      <item quantity="one">הודעת דואר קולי</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"הפעל"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"דואר קולי חדש מאת <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -89,7 +91,7 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"פרטי שיחה"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"אין פרטים זמינים"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"השתמש במקלדת עם חיוג צלילים"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"חזור לשיחה מתבצעת"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"חזור לשיחה פעילה"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"הוסף שיחה"</string>
     <string name="type_incoming" msgid="6502076603836088532">"שיחה נכנסת"</string>
     <string name="type_outgoing" msgid="343108709599392641">"שיחה יוצאת"</string>
@@ -145,7 +147,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"בצע שיחת וידאו"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"הצג את היסטוריית השיחות המלאה"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> שיחות חדשות שלא נענו"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"חיוג מהיר מאפשר לך להתקשר בנגיעה אחת אל מועדפים ומספרים שאליהם אתה מתקשר בתדירות גבוהה"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"חיוג מהיר מאפשר לך להתקשר בנגיעה אחת אל אנשים ומספרים מועדפים שאליהם אתה מתקשר בתדירות גבוהה"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"אין אנשי קשר"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"גע בתמונה כדי לראות את כל המספרים או גע נגיעה ממושכת כדי לשנות את הסדר"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"סגור"</string>

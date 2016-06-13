@@ -31,12 +31,12 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Mailbox-Nachricht teilen"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Keine Anrufe"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Anrufliste löschen?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Alle Anrufe werden aus Ihrem Verlauf gelöscht."</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Alle Anrufe werden aus deinem Verlauf gelöscht."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Anrufliste wird gelöscht…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Mailbox-Nachricht"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> Mailbox-Nachrichten"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mailbox-Nachrichten </item>
+      <item quantity="one">Mailbox-Nachricht</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Anhören"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Neue Mailbox-Nachricht von <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -50,7 +50,7 @@
     <string name="call_log_missed_header" msgid="8017148056610855956">"Nur entgangene Anrufe"</string>
     <string name="voicemail_status_voicemail_not_available" msgid="5222480147701456390">"Keine Mailbox-Aktualisierungen verfügbar"</string>
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Neue Mailbox-Nachricht wartet. Laden momentan nicht möglich."</string>
-    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Richten Sie Ihre Mailbox ein."</string>
+    <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Richte deine Mailbox ein."</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Audio nicht verfügbar"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Einrichten"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Mailbox anrufen"</string>
@@ -116,8 +116,8 @@
     <string name="payphone" msgid="7726415831153618726">"Münztelefon"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Diese Nummer kann nicht angerufen werden."</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Konfigurieren Sie Ihre Mailbox unter \"Menü\" &gt; \"Einstellungen\"."</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Deaktivieren Sie zunächst den Flugmodus, um die Mailbox anzurufen."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Konfiguriere deine Mailbox unter \"Menü\" &gt; \"Einstellungen\"."</string>
+    <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Deaktiviere zunächst den Flugmodus, um die Mailbox anzurufen."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Wird geladen…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
@@ -140,12 +140,12 @@
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakte"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Aus Favoriten entfernt"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Rückgängig machen"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> wählen"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"<xliff:g id="NUMBER">%s</xliff:g> anrufen"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Zu Kontakten hinzufügen"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videoanruf starten"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Gesamte Anrufliste ansehen"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> neue verpasste Anrufe"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Schnellauswahl bedeutet Rufaufbau mit einer Berührung für Favoriten und häufig angerufene Nummern."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Schnellauswahl bedeutet Rufaufbau mit nur einer Berührung für Favoriten und häufig angerufene Nummern."</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Keine Kontakte"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Bild berühren, um alle Nummern zu sehen, oder Bild berühren und halten, um sie neu anzuordnen"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Ablehnen"</string>

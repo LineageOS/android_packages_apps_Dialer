@@ -20,23 +20,23 @@
     <string name="applicationLabel" msgid="8490255569343340580">"டயலர்"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ஃபோன்"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ஃபோன்"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு வரலாறு"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு பதிவு"</string>
     <string name="menu_sendTextMessage" msgid="8682056943960339239">"SMS அனுப்பு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைக்கும் முன் எண்ணை மாற்று"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"தொடர்புகளில் சேர்"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"அழைப்பு வரலாற்றில் இருந்து நீக்கு"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"அழைப்பு வரலாற்றை அழி"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"குரலஞ்சலை நீக்கு"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"குரலஞ்சலைப் பகிர்"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"அழைப்புகள் இல்லை"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"அழைப்பு வரலாற்றை அழிக்கவா?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"வரலாற்றிலிருந்து இது எல்லா அழைப்புகளையும் நீக்கும்"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"அழைப்பு பதிவை அழிக்கவா?"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"பதிவிலிருந்து எல்லா அழைப்புகளும் நீக்கப்படும்"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"அழைப்பு வரலாற்றை அழிக்கிறது…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"குரலஞ்சல்"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> குரலஞ்சல்கள்"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> குரலஞ்சல்கள் </item>
+      <item quantity="one">குரலஞ்சல்</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"இயக்கு"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g> இன் புதிய குரலஞ்சல்"</string>
@@ -179,7 +179,7 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"பிளேபேக்கைத் தொடங்கு அல்லது இடைநிறுத்து."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="general_settings_label" msgid="5748319557716674189">"பொது"</string>
-    <string name="contact_display_options_category_title" msgid="5719485933817512769">"தொடர்பின் காட்சி விருப்பங்கள்"</string>
+    <string name="contact_display_options_category_title" msgid="5719485933817512769">"தொடர்பின் காட்சி விருப்பத்தேர்வு"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"ஒலிகளும் அதிர்வுறுதலும்"</string>
     <string name="ringtone_title" msgid="760362035635084653">"மொபைலின் ரிங்டோன்"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"அழைப்புகளுக்கும் அதிர்வுறு"</string>

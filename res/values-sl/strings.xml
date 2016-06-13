@@ -26,17 +26,19 @@
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Pred klicanjem uredi številko"</string>
     <string name="recentCalls_addToContact" msgid="1429899535546487008">"Dodaj med stike"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Izbris iz zgodovine klicev"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Izbris zgodovine klicev"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Izbriši zgodovino klicev"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Brisanje sporočil odzivnika"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Skupna raba odzivnika"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Ni klicev"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Želite izbrisati zgodovino klicev?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"S tem boste iz zgodovine izbrisali vse klice"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Izbris zgodovine klicev …"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Sporočila glasovne pošte"</item>
-    <item quantity="other" msgid="5513481419205061254">"Št. sporočil glasovne pošte: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> sporočilo v odzivniku </item>
+      <item quantity="two"> <xliff:g id="COUNT">%1$d</xliff:g> sporočili v odzivniku </item>
+      <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> sporočila v odzivniku </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> sporočil v odzivniku </item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Predvajaj"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g> , <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nova glasovna pošta od <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -82,7 +84,7 @@
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Pokaži vse klice"</string>
     <string name="add_contact" msgid="4579643070374941999">"Dodaj med stike"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Dodaj 2 sekundi premora"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Dodaj premor"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Dodaj čakanje"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Nastavitve"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nov stik"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Vsi stiki"</string>

@@ -31,12 +31,14 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Zdieľať hlasovú správu"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Žiadne hovory"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Chcete vymazať históriu hovorov?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Týmto sa z histórie odstránia všetky hovory"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Týmto z histórie odstránite všetky hovory."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Vymazáva sa história hovorov..."</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Hlasová správa"</item>
-    <item quantity="other" msgid="5513481419205061254">"Počet hlasových správ: <xliff:g id="COUNT">%1$d</xliff:g>"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> odkazy v hlasovej schránke </item>
+      <item quantity="many"> <xliff:g id="COUNT">%1$d</xliff:g> odkazu v hlasovej schránke </item>
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> odkazov v hlasovej schránke </item>
+      <item quantity="one">Odkaz v hlasovej schránke</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Prehrať"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nová hlasová správa – <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -121,8 +123,8 @@
     <string name="contact_list_loading" msgid="5488620820563977329">"Načítava sa…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Prebieha načítavanie z karty SIM..."</string>
-    <string name="simContacts_title" msgid="27341688347689769">"Kontakty na karte SIM"</string>
+    <string name="simContacts_emptyLoading" msgid="6700035985448642408">"Prebieha načítavanie z SIM karty..."</string>
+    <string name="simContacts_title" msgid="27341688347689769">"Kontakty na SIM karte"</string>
     <string name="add_contact_not_available" msgid="5547311613368004859">"Nie je k dispozícii žiadna aplikácia na kontakty"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"Hlasové vyhľadávanie nie je k dispozícii"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Nie je možné volať, pretože aplikácia Telefón bola deaktivovaná."</string>
@@ -140,18 +142,18 @@
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontakty"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Odstránené z obľúbených"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Späť"</string>
-    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Volať na číslo <xliff:g id="NUMBER">%s</xliff:g>"</string>
+    <string name="search_shortcut_call_number" msgid="7277194656832895870">"Volať <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_add_to_contacts" msgid="1853716708655789069">"Pridať do kontaktov"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Uskutočniť videohovor"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"Zobraziť úplnú históriu hovorov"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Počet nových zmeškaných hovorov: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Rýchla voľba je funkcia umožňujúca jedným klepnutím vytočiť obľúbené osoby a často volané čísla."</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Rýchla voľba je vytáčanie obľúbených kontaktov a čísiel, ktorým často voláte, jedným klepnutím"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"Žiadne kontakty"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Klepnutím na obrázok si môžete zobraziť všetky čísla. Ak naň klepnete a podržíte ho, môžete zmeniť ich poradie."</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Zatvoriť"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Odstrániť"</string>
     <string name="favorites_menu_all_contacts" msgid="992506284449891186">"VŠETKY KONTAKTY"</string>
-    <string name="call_log_action_call_back" msgid="4944463006859852473">"ZAVOLAŤ SPÄŤ"</string>
+    <string name="call_log_action_call_back" msgid="4944463006859852473">"ZAVOLAŤ"</string>
     <string name="call_log_action_call" msgid="8187991828921352552">"VOLAŤ"</string>
     <string name="call_log_action_redial" msgid="8159106862639797417">"ZNOVA VYTOČIŤ"</string>
     <string name="call_log_action_video_call" msgid="3818588654537490948">"VIDEOHOVOR"</string>
@@ -161,7 +163,7 @@
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Prijatý hovor – kontakt <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Volanie – kontakt <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"v rámci účtu <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_call_back_action" msgid="3012837380108884260">"Zavolať späť používateľovi <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
+    <string name="description_call_back_action" msgid="3012837380108884260">"Spätné volanie <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="4303952636480252389">"Začať videohovor s kontaktom <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
     <string name="description_voicemail_action" msgid="8054891873788903063">"Vypočuť si správu v hlasovej schránke od používateľa <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_details_action" msgid="2433827152749491785">"Podrobnosti hovoru pre kontakt <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
@@ -182,7 +184,7 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Možnosti zobrazenia kontaktov"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Zvuky a vibrovanie"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Tón zvonenia telefónu"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrovať aj pri hovoroch"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Pri hovoroch aj vibrovať"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tóny číselnej klávesnice"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Ďalšie"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Rýchle odpovede"</string>

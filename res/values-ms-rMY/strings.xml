@@ -31,15 +31,15 @@
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Kongsi mel suara"</string>
     <string name="recentCalls_empty" msgid="8555115547405030734">"Tiada panggilan"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kosongkan sejarah panggilan?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Langkah ini akan memadamkan semua panggilan dari sejarah anda"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tindakan ini akan memadamkan semua panggilan daripada sejarah anda"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Mengosongkan sejarah panggilan..."</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Mel suara"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> Mel suara"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mel suara </item>
+      <item quantity="one">Mel suara</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Main"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mel suara baru daripada <xliff:g id="CALLER">%1$s</xliff:g>"</string>
+    <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mel suara baharu daripada <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Tidak dapat memainkan mel suara"</string>
     <string name="voicemail_buffering" msgid="738287747618697097">"Menimbal…"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Memuatkan mel suara..."</string>
@@ -84,7 +84,7 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"Tambah jeda 2 saat"</string>
     <string name="add_wait" msgid="3360818652790319634">"Tambah penungguan"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Tetapan"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"Kenalan baru"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"Kenalan baharu"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Semua kenalan"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Butiran panggilan"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Butiran tidak tersedia"</string>

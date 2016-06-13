@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Clear call history?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"This will delete all calls from your history"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Clearing call history…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Voicemail"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> Voicemails"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Voicemails </item>
+      <item quantity="one">Voicemail</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Play"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"New voicemail from <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -71,7 +71,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Seek playback position"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Decrease playback rate"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Increase playback rate"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Call History"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Call history"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"More options"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"dial pad"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Copy"</string>
@@ -145,7 +145,7 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Make video call"</string>
     <string name="recents_footer_text" msgid="7315554578957453359">"View full call history"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> new missed calls"</string>
-    <string name="speed_dial_empty" msgid="1931474498966072849">"Speed dial is one‑touch dialing for favourites and numbers that you call often"</string>
+    <string name="speed_dial_empty" msgid="1931474498966072849">"Speed dial is one‑touch dialling for favourites and numbers that you call often"</string>
     <string name="all_contacts_empty" msgid="2299508125100209367">"No contacts"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Touch image to see all numbers or touch &amp; hold to reorder"</string>
     <string name="description_dismiss" msgid="2146276780562549643">"Dismiss"</string>

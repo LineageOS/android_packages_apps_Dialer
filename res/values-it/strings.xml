@@ -33,10 +33,10 @@
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Cancellare la cronologia chiamate?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Verranno eliminate tutte le chiamate dalla cronologia"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Cancellazione cronologia chiamate…"</string>
-  <plurals name="notification_voicemail_title">
-    <item quantity="one" msgid="1746619685488504230">"Segreteria"</item>
-    <item quantity="other" msgid="5513481419205061254">"<xliff:g id="COUNT">%1$d</xliff:g> messaggi vocali"</item>
-  </plurals>
+    <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
+      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> messaggi in segreteria </item>
+      <item quantity="one">Messaggio in segreteria</item>
+    </plurals>
     <string name="notification_action_voicemail_play" msgid="6113133136977996863">"Riproduci"</string>
     <string name="notification_voicemail_callers_list" msgid="1153954809339404149">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Nuovo messaggio vocale da <xliff:g id="CALLER">%1$s</xliff:g>"</string>
@@ -90,8 +90,8 @@
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Dettagli non disponibili"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Usa tastierino per selezione a toni"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Torna alla chiamata in corso"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Aggiungi"</string>
-    <string name="type_incoming" msgid="6502076603836088532">"Chiamata ricevuta"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Aggiungi chiamata"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"Chiamata in arrivo"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Chiamata effettuata"</string>
     <string name="type_missed" msgid="2720502601640509542">"Chiamata persa"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Videochiamata in arrivo"</string>
@@ -114,7 +114,7 @@
     <string name="voicemail" msgid="3851469869202611441">"Segreteria"</string>
     <string name="private_num" msgid="6374339738119166953">"Numero privato"</string>
     <string name="payphone" msgid="7726415831153618726">"Cabina telefonica"</string>
-    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min e <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Impossibile chiamare questo numero"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Per configurare la segreteria, seleziona Menu &gt; Impostazioni."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per chiamare la segreteria, disattiva la modalità aereo."</string>
@@ -182,10 +182,10 @@
     <string name="contact_display_options_category_title" msgid="5719485933817512769">"Opzioni di visualizzazione dei contatti"</string>
     <string name="sounds_and_vibrate_category_title" msgid="7589787045192519254">"Suoni e vibrazione"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Suoneria telefono"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrazione anche per chiamate"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrazione per le chiamate"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Toni tastierino"</string>
     <string name="other_settings_title" msgid="7976283601445863248">"Altro"</string>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Risposte rapide"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Chiamate"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Account chiamate"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Account di chiamata"</string>
 </resources>
