@@ -164,7 +164,7 @@ public class DeepLinkIntegrationManager {
      * @param ctx   context to query against
      * @return      true if ambient is available, false otherwise.
      */
-    public boolean ambientIsAvailable(Context ctx) {
+    private boolean ambientIsAvailable(Context ctx) {
         return CyanogenAmbientUtil.isCyanogenAmbientAvailable(ctx) == CyanogenAmbientUtil.SUCCESS;
     }
 
