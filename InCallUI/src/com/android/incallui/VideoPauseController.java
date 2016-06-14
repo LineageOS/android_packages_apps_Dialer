@@ -194,11 +194,10 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
         Preconditions.checkState(!areSame(call, mPrimaryCallContext));
         final boolean canVideoPause = VideoUtils.canVideoPause(call);
 
-        if ((isIncomingCall(mPrimaryCallContext) || isDialing(mPrimaryCallContext) ||
-                (call != null && VideoProfile.isPaused(call.getVideoState())))
+        if ((isIncomingCall(mPrimaryCallContext) || isDialing(mPrimaryCallContext))
                 && canVideoPause && !mIsInBackground) {
             // Send resume request for the active call, if user rejects incoming call, ends dialing
-            // call, or the call was previously in a paused state and UI is in the foreground.
+            // call and UI is in the foreground.
             sendRequest(call, true);
         } else if (isIncomingCall(call) && canVideoPause(mPrimaryCallContext)) {
             // Send pause request if there is an active video call, and we just received a new
