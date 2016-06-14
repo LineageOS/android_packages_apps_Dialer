@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_cdc63d69",
+        "filename": "src/com/android/dialer/deeplink/DeepLinkIntegrationManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-06-14T07:55:15Z",
+      "side": 1,
+      "message": "Maybe even make it static while you\u0027re at it?",
+      "revId": "b66fa20ceca0db5e7d70de40d34166354a9a1e29",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
