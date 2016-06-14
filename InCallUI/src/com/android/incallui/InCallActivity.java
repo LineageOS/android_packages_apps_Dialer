@@ -17,6 +17,8 @@
 package com.android.incallui;
 
 import android.app.ActionBar;
+import android.app.FragmentTransaction;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -30,12 +32,15 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.Point;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Trace;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -49,6 +54,8 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.contacts.common.activity.TransactionSafeActivity;
 import com.android.contacts.common.compat.CompatUtils;
@@ -135,6 +142,13 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     private boolean mDismissKeyguard = false;
     private boolean isSelectPhoneaccDialogShown = false;
 
+    private final int TAB_COUNT_ONE = 1;
+    private final int TAB_COUNT_TWO = 2;
+    private final int TAB_POSITION_FIRST = 0;
+
+    private Tab[] mDsdaTab = new Tab[TAB_COUNT_TWO];
+    private boolean[] mDsdaTabAdd = {false, false};
+
     AnimationListenerAdapter mSlideOutListener = new AnimationListenerAdapter() {
         @Override
         public void onAnimationEnd(Animation animation) {
@@ -173,14 +187,19 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                 | WindowManager.LayoutParams.FLAG_IGNORE_CHEEK_PRESSES;
 
         getWindow().addFlags(flags);
-
-        // Setup action bar for the conference call manager.
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.hide();
+        boolean isDsdaEnabled = CallList.getInstance().isDsdaEnabled();
+        if (isDsdaEnabled) {
+            requestWindowFeature(Window.FEATURE_ACTION_BAR);
+            getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            getActionBar().setDisplayShowTitleEnabled(false);
+            getActionBar().setDisplayShowHomeEnabled(false);
+        } else {
+            requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+            if (getActionBar() != null) {
+                getActionBar().setDisplayHomeAsUpEnabled(true);
+                getActionBar().setDisplayShowTitleEnabled(true);
+                getActionBar().hide();
+            }
         }
 
         // TODO(klp): Do we need to add this back when prox sensor is not available?
@@ -239,7 +258,10 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         }
         mInCallOrientationEventListener = new InCallOrientationEventListener(this);
 
-        Log.d(this, "onCreate(): exit");
+        if (isDsdaEnabled ) {
+            initializeDsdaSwitchTab();
+        }
+        Log.d(this, "onCreate(): exit" + isDsdaEnabled);
     }
 
     @Override
@@ -946,6 +968,113 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         }
     }
 
+    private void initializeDsdaSwitchTab() {
+        int phoneCount = InCallServiceImpl.sPhoneCount;
+        ActionBar bar = getActionBar();
+        View[] mDsdaTabLayout = new View[phoneCount];
+        int[] subString = {R.string.sub_1, R.string.sub_2};
+
+        Log.d(TAG, "initializeDsdaSwitchTab" + phoneCount);
+        for (int i = 0; i < phoneCount; i++) {
+            mDsdaTabLayout[i] = getLayoutInflater()
+                    .inflate(R.layout.msim_tab_sub_info, null);
+
+            ((TextView)mDsdaTabLayout[i].findViewById(R.id.tabSubText))
+                    .setText(subString[i]);
+
+            mDsdaTab[i] = bar.newTab().setCustomView(mDsdaTabLayout[i])
+                    .setTabListener(new TabListener(i));
+        }
+    }
+
+    public void updateDsdaTab() {
+        int phoneCount = InCallServiceImpl.sPhoneCount;
+        ActionBar bar = getActionBar();
+
+        for (int i = 0; i < phoneCount; i++) {
+            int subId = QtiCallUtils.getSubId(i);
+            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                    && CallList.getInstance().hasAnyLiveCall(subId)) {
+                if (!mDsdaTabAdd[i]) {
+                    addDsdaTab(i);
+                }
+            } else {
+                removeDsdaTab(i);
+            }
+        }
+
+        updateDsdaTabSelection();
+    }
+
+    private void addDsdaTab(int phoneId) {
+        ActionBar bar = getActionBar();
+        int tabCount = bar.getTabCount();
+
+        if (tabCount < phoneId) {
+            bar.addTab(mDsdaTab[phoneId], false);
+        } else {
+            bar.addTab(mDsdaTab[phoneId], phoneId, false);
+        }
+        mDsdaTabAdd[phoneId] = true;
+        Log.d(this, "addDsdaTab, phoneId = " + phoneId + " tab count = " + tabCount);
+    }
+
+    private void removeDsdaTab(int subId) {
+        ActionBar bar = getActionBar();
+        int tabCount = bar.getTabCount();
+
+        for (int i = 0; i < tabCount; i++) {
+            if (bar.getTabAt(i).equals(mDsdaTab[subId])) {
+                bar.removeTab(mDsdaTab[subId]);
+                mDsdaTabAdd[subId] = false;
+                return;
+            }
+        }
+        Log.d(this, "removeDsdaTab, subId = " + subId + " tab count = " + tabCount);
+    }
+
+    private void updateDsdaTabSelection() {
+        ActionBar bar = getActionBar();
+        int barCount = bar.getTabCount();
+
+        if (barCount == TAB_COUNT_ONE) {
+            bar.selectTab(bar.getTabAt(TAB_POSITION_FIRST));
+        } else if (barCount == TAB_COUNT_TWO) {
+            int phoneId = QtiCallUtils.getPhoneId(CallList
+                    .getInstance().getActiveSubId());
+            bar.selectTab(bar.getTabAt(phoneId));
+        }
+    }
+
+    private class TabListener implements ActionBar.TabListener {
+        int mPhoneId;
+
+        public TabListener(int phoneId) {
+            mPhoneId = phoneId;
+        }
+
+        public void onTabSelected(Tab tab, FragmentTransaction ft) {
+            ActionBar bar = getActionBar();
+            int tabCount = bar.getTabCount();
+                Log.d(this, "onTabSelected mPhoneId:" + mPhoneId);
+            //Don't setActiveSubscription if tab count is 1.This is to avoid
+            //setting active subscription automatically when call on one sub
+            //ends and it's corresponding tab is removed.For such cases active
+            //subscription will be set by InCallPresenter.attemptFinishActivity.
+            int subId = QtiCallUtils.getSubId(mPhoneId);
+            if (tabCount != TAB_COUNT_ONE && CallList.getInstance().hasAnyLiveCall(subId)
+                    && (CallList.getInstance().getActiveSubId() != subId)) {
+                Log.d(this, "Switch to other active sub: " + subId);
+                QtiCallUtils.switchToActiveSub(subId);
+            }
+        }
+
+        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+        }
+
+        public void onTabReselected(Tab tab, FragmentTransaction ft) {
+        }
+    }
 
     public OnTouchListener getDispatchTouchEventListener() {
         return mDispatchTouchEventListener;

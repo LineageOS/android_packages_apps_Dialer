@@ -382,6 +382,14 @@ public class InCallPresenter implements CallList.Listener,
     private void attemptFinishActivity() {
         final boolean doFinish = (mInCallActivity != null && isActivityStarted());
         Log.i(this, "Hide in call UI: " + doFinish);
+
+        if ((mCallList != null)
+                && (CallList.getInstance().isDsdaEnabled())
+                && !(mCallList.hasAnyLiveCall(mCallList.getActiveSubId()))) {
+            Log.d(this, "Switch active sub");
+            if (mCallList.switchToOtherActiveSub()) return;
+        }
+
         if (doFinish) {
             mInCallActivity.setExcludeFromRecents(true);
             mInCallActivity.finish();
@@ -651,6 +659,9 @@ public class InCallPresenter implements CallList.Listener,
                     callList.getOutgoingCall() != null;
             mInCallActivity.dismissKeyguard(hasCall);
         }
+        if (CallList.getInstance().isDsdaEnabled() && (mInCallActivity != null)) {
+            mInCallActivity.updateDsdaTab();
+        }
     }
 
     /**
@@ -668,6 +679,10 @@ public class InCallPresenter implements CallList.Listener,
 
         for (IncomingCallListener listener : mIncomingCallListeners) {
             listener.onIncomingCall(oldState, mInCallState, call);
+        }
+
+        if (CallList.getInstance().isDsdaEnabled() && (mInCallActivity != null)) {
+            mInCallActivity.updateDsdaTab();
         }
     }
 
@@ -1327,9 +1342,12 @@ public class InCallPresenter implements CallList.Listener,
 
         Log.d(this, "startOrFinishUi: " + isAutoAnswer);
 
+        boolean isAnyOtherSubActive = InCallState.INCOMING == newState &&
+                mCallList.isAnyOtherSubActive(mCallList.getActiveSubId());
+
         // If the state isn't changing we have already done any starting/stopping of activities in
         // a previous pass...so lets cut out early
-        if (newState == mInCallState) {
+        if ((newState == mInCallState) && !(mInCallActivity == null && isAnyOtherSubActive)) {
             return newState;
         }
 
@@ -1392,6 +1410,13 @@ public class InCallPresenter implements CallList.Listener,
         // with no valid accounts.
         showCallUi |= InCallState.PENDING_OUTGOING == newState && mainUiNotVisible
                 && isCallWithNoValidAccounts(mCallList.getPendingOutgoingCall());
+
+        // Handle transition from InCallState.WAITING_FOR_ACCOUNT to InCallState.INCALL and
+        // and there is a call alive, this case can come for DSDA and hence we should show
+        // UI in such case.
+        showCallUi |= (newState == InCallState.INCALL) &&
+                (mInCallState == InCallState.WAITING_FOR_ACCOUNT) && (mCallList.hasLiveCall() ||
+                (mCallList.getBackgroundCall() != null));
 
         // The only time that we have an instance of mInCallActivity and it isn't started is
         // when it is being destroyed.  In that case, lets avoid bringing up another instance of
@@ -1487,6 +1512,7 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     private boolean startUi(InCallState inCallState) {
+        final Call incomingCall = mCallList.getIncomingCall();
         boolean isCallWaiting = mCallList.getActiveCall() != null &&
                 mCallList.getIncomingCall() != null;
 
@@ -1497,7 +1523,13 @@ public class InCallPresenter implements CallList.Listener,
         // There should be no jank from this since the screen is already off and will remain so
         // until our new activity is up.
 
-        if (isCallWaiting) {
+        // In addition to call waiting scenario, we need to force finish() in case of DSDA when
+        // we get an incoming call on one sub and there is a live call in other sub and screen
+        // is off.
+        boolean anyOtherSubActive = (incomingCall != null &&
+                 mCallList.isAnyOtherSubActive(mCallList.getActiveSubId()));
+        Log.d(this, "Start UI " + " anyOtherSubActive:" + anyOtherSubActive);
+        if (isCallWaiting || anyOtherSubActive) {
             if (mProximitySensor.isScreenReallyOff() && isActivityStarted()) {
                 Log.i(this, "Restarting InCallActivity to turn screen on for call waiting");
                 mInCallActivity.finish();

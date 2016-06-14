@@ -30,6 +30,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
+import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
@@ -363,6 +364,8 @@ public class Call {
             }
     };
 
+    boolean mIsActiveSub = false;
+    public static final String ACTIVE_SUBSCRIPTION = "active_sub";
     private android.telecom.Call mTelecomCall;
     private boolean mIsEmergencyCall;
     private Uri mHandle;
@@ -567,6 +570,9 @@ public class Call {
                 mCallSubject = callSubject;
             }
         }
+        if (callExtras.containsKey(ACTIVE_SUBSCRIPTION)) {
+            mIsActiveSub = callExtras.getBoolean(ACTIVE_SUBSCRIPTION);
+        }
     }
 
     /**
@@ -728,9 +734,29 @@ public class Call {
         int supportedCapabilities = mTelecomCall.getDetails().getCallCapabilities();
 
         if ((capabilities & android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE) != 0) {
+            if (CallList.getInstance().isDsdaEnabled()) {
+                List<android.telecom.Call> conferenceableCalls =
+                        mTelecomCall.getConferenceableCalls();
+                boolean hasConferenceableCall = false;
+                if (!conferenceableCalls.isEmpty()){
+                    int subId = getSubId();
+                    for (android.telecom.Call call : conferenceableCalls) {
+                        PhoneAccountHandle phHandle = call.getDetails().getAccountHandle();
+                        if ((phHandle != null) && ((Integer.parseInt(phHandle.getId())) == subId)) {
+                            hasConferenceableCall = true;
+                            break;
+                        }
+                    }
+                }
+                if (!hasConferenceableCall &&
+                    ((android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE
+                            & supportedCapabilities) == 0)) {
+                    // Cannot merge calls if there are no calls to merge with.
+                    return false;
+                }
             // We allow you to merge if the capabilities allow it or if it is a call with
             // conferenceable calls.
-            if (mTelecomCall.getConferenceableCalls().isEmpty() &&
+            } else if (mTelecomCall.getConferenceableCalls().isEmpty() &&
                 ((android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE
                         & supportedCapabilities) == 0)) {
                 // Cannot merge calls if there are no calls to merge with.
@@ -943,7 +969,7 @@ public class Call {
         }
 
         return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
-                "videoState:%s, mSessionModificationState:%d, VideoSettings:%s]",
+                "videoState:%s, mSessionModificationState:%d, VideoSettings:%s, mIsActivSub:%b]",
                 mId,
                 State.toString(getState()),
                 Details.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
@@ -952,7 +978,7 @@ public class Call {
                 this.mTelecomCall.getConferenceableCalls(),
                 VideoProfile.videoStateToString(mTelecomCall.getDetails().getVideoState()),
                 mSessionModificationState,
-                getVideoSettings());
+                getVideoSettings(), mIsActiveSub);
     }
 
     public String toSimpleString() {

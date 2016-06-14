@@ -39,7 +39,11 @@ import android.content.res.Resources;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.telecom.InCallService.VideoCall;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
@@ -258,7 +262,6 @@ public class QtiCallUtils {
                 isEnabled(VideoProfile.STATE_BIDIRECTIONAL, modifyToVideoState);
     }
 
-
     /**
      * Returns IExtTelephony handle
      */
@@ -316,5 +319,84 @@ public class QtiCallUtils {
             Log.e(LOG_TAG, "Exception : " + ex);
         }
         return isEmergencyNumber;
+    }
+
+    static int getPhoneId(int subId) {
+        try {
+            Class c = Class.forName("android.telephony.SubscriptionManager");
+            Method m = c.getMethod("getPhoneId",new Class[]{int.class});
+            int phoneId = (Integer)m.invoke(null, subId);
+            if (phoneId >= InCallServiceImpl.sPhoneCount || phoneId < 0) {
+                phoneId = 0;
+            }
+            Log.d (LOG_TAG, "phoneid:" + phoneId);
+            return phoneId;
+        } catch (Exception e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        }
+        return 0;
+    }
+
+    static int getSubId(int phoneId) {
+        try {
+            Class c = Class.forName("android.telephony.SubscriptionManager");
+            Method m = c.getMethod("getSubId",new Class[]{int.class});
+            int subId[] = (int[])m.invoke(null, phoneId);
+            Log.d (LOG_TAG, "getSubId:" + subId[0]);
+            if (subId != null && subId.length > 0) {
+                return subId[0];
+            } else {
+                Log.e(LOG_TAG, "subId not valid: " + subId);
+            }
+        } catch (Exception e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        }
+        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    }
+
+    static void switchToActiveSub(int subId) {
+        try {
+            IExtTelephony mExtTelephony = getIExtTelephony();
+            Log.d(LOG_TAG, "switchToActiveSub, mExtTelephony:" + mExtTelephony);
+            mExtTelephony.switchToActiveSub(subId);
+        } catch (RemoteException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        } catch (NullPointerException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        }
+    }
+
+    static int getPhoneCount(Context context) {
+        TelephonyManager tm = null;
+        try {
+            Class c = Class.forName("android.telephony.TelephonyManager");
+            Method m = c.getMethod("from",new Class[]{Context.class});
+            tm = (TelephonyManager)m.invoke(null, context);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, " ex: " + e);
+        }
+        if (tm != null) {
+            return tm.getPhoneCount();
+        } else {
+            Log.e(LOG_TAG, "tm is null" );
+            return 1;
+        }
+    }
+
+    static Boolean dsdaEnabled = null;
+    static boolean isDsdaEnabled() {
+        try {
+            if (dsdaEnabled == null) {
+                IExtTelephony mExtTelephony = getIExtTelephony();
+                Log.d(LOG_TAG, "isDsdaEnabled, mExtTelephony:" + mExtTelephony);
+                dsdaEnabled = mExtTelephony.isDsdaEnabled();
+                return dsdaEnabled;
+            }
+        } catch (RemoteException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        } catch (NullPointerException ex) {
+            Log.e(LOG_TAG, "Exception : " + ex);
+        }
+        return (dsdaEnabled == null) ? false : dsdaEnabled;
     }
 }

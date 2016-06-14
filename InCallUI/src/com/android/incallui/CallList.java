@@ -28,8 +28,12 @@ import com.android.dialer.logging.Logger;
 import com.android.incallui.util.TelecomCallUtil;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import android.telecom.PhoneAccountHandle;
+import android.telephony.SubscriptionManager;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -51,6 +55,7 @@ public class CallList {
     private static final int DISCONNECTED_CALL_LONG_TIMEOUT_MS = 5000;
 
     private static final int EVENT_DISCONNECTED_TIMEOUT = 1;
+    private static final int EVENT_NOTIFY_CHANGE = 2;
     private static final long BLOCK_QUERY_TIMEOUT_MS = 1000;
 
     private static CallList sInstance = new CallList();
@@ -70,6 +75,9 @@ public class CallList {
     private final Set<Call> mPendingDisconnectCalls = Collections.newSetFromMap(
             new ConcurrentHashMap<Call, Boolean>(8, 0.9f, 1));
     private FilteredNumberAsyncQueryHandler mFilteredQueryHandler;
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private final ArrayList<ActiveSubChangeListener> mActiveSubChangeListeners =
+            Lists.newArrayList();
 
     /**
      * Static singleton accessor method.
@@ -130,6 +138,18 @@ public class CallList {
      * Called when a single call has changed.
      */
     public void onIncoming(Call call, List<String> textMessages) {
+        Log.d(this, "onIncoming - " + call);
+
+        // Update active subscription from call object. it will be set by
+        // Telecomm service for incoming call and whenever active sub changes.
+        if (call.mIsActiveSub) {
+            int sub = Integer.parseInt(call.getAccountHandle().getId());
+            Log.d(this, "onIncoming - sub:" + sub + " mSubId:" + mSubId);
+            if (sub != mSubId) {
+                setActiveSubId(sub);
+            }
+        }
+
         if (updateCallInMap(call)) {
             Log.i(this, "onIncoming - " + call);
         }
@@ -151,6 +171,19 @@ public class CallList {
      */
     public void onUpdate(Call call) {
         Trace.beginSection("onUpdate");
+        PhoneAccountHandle ph = call.getAccountHandle();
+        Log.d(this, "onUpdate - " + call  + " ph:" + ph);
+        try {
+            if (call.mIsActiveSub && ph != null) {
+                int sub = Integer.parseInt(ph.getId());
+                Log.d(this, "onUpdate - sub:" + sub + " mSubId:" + mSubId);
+                if(sub != mSubId) {
+                    setActiveSubId(sub);
+                }
+            }
+        } catch (NumberFormatException e) {
+                Log.w(this,"Sub Id is not a number " + e);
+        }
         onUpdateCall(call);
         notifyGenericListeners();
         Trace.endSection();
@@ -347,6 +380,9 @@ public class CallList {
             result = getFirstCallWithState(Call.State.ACTIVE);
         }
         if (result == null) {
+            result = getFirstCallWithState(Call.State.ONHOLD);
+        }
+        if (result == null) {
             result = getDisconnectingCall();
         }
         if (result == null) {
@@ -382,6 +418,10 @@ public class CallList {
         return mCallById.get(callId);
     }
 
+    public boolean isDsdaEnabled() {
+        return QtiCallUtils.isDsdaEnabled();
+    }
+
     public Call getCallByTelecomCall(android.telecom.Call telecomCall) {
         return mCallByTelecomCall.get(telecomCall);
     }
@@ -402,6 +442,13 @@ public class CallList {
      * TODO: Improve this logic to sort by call time.
      */
     public Call getCallWithState(int state, int positionToFind) {
+        // if DSDA is enabled call getCallWithState with active subscription.
+        if (state != Call.State.SELECT_PHONE_ACCOUNT && getActiveSubId()
+                != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                && isDsdaEnabled()) {
+            return getCallWithState(state, positionToFind, getActiveSubId());
+        }
+
         Call retval = null;
         int position = 0;
         for (Call call : mCallById.values()) {
@@ -608,6 +655,13 @@ public class CallList {
                     Log.d(this, "EVENT_DISCONNECTED_TIMEOUT ", msg.obj);
                     finishDisconnectedCall((Call) msg.obj);
                     break;
+                case EVENT_NOTIFY_CHANGE:
+                    Log.d(this, "EVENT_NOTIFY_CHANGE: ");
+                    notifyGenericListeners();
+                    for (ActiveSubChangeListener listener : mActiveSubChangeListeners) {
+                        listener.onActiveSubChanged(getActiveSubId());
+                    }
+                    break;
                 default:
                     Log.wtf(this, "Message not expected: " + msg.what);
                     break;
@@ -674,5 +728,153 @@ public class CallList {
          * Notifies of a change to the child number for a call.
          */
         public void onChildNumberChange();
+    }
+
+    /**
+     * Called when active subscription changes.
+     */
+    void onActiveSubChanged(int activeSub) {
+        Log.d(this, "onActiveSubChanged  = " + activeSub);
+        if (hasAnyLiveCall(activeSub)) {
+            setActiveSubId(activeSub);
+        }
+    }
+
+    int getActiveSubId() {
+        return mSubId;
+    }
+
+    /**
+     * Called to update the latest active subscription id, and also it
+     * notifies the registred clients about subscription change information.
+     */
+    void setActiveSubId(int subId) {
+        if (subId != mSubId) {
+            Log.d(this, "setActiveSubId, oldActiveSubId = " + mSubId +
+                    " newActiveSubId = " + subId);
+            mSubId = subId;
+            final Message msg = mHandler.obtainMessage(EVENT_NOTIFY_CHANGE, null);
+            mHandler.sendMessage(msg);
+        }
+    }
+
+    /**
+     * Returns true, if any voice call is ACTIVE on the provided subscription.
+     */
+    boolean hasAnyLiveCall(int subId) {
+        for (Call call : mCallById.values()) {
+            PhoneAccountHandle ph = call.getAccountHandle();
+            try {
+                if (!isCallDead(call) && ph != null && (Integer.parseInt(ph.getId()) == subId)) {
+                    Log.d(this, "hasAnyLiveCall sub = " + subId);
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+                Log.w(this,"Sub Id is not a number " + e);
+            }
+        }
+        Log.d(this, "no active call ");
+        return false;
+    }
+
+    /**
+     * Returns true, if any call is ACTIVE
+     */
+    boolean hasAnyLiveCall() {
+        for (Call call : mCallById.values()) {
+            if (!isCallDead(call)) {
+                Log.d(this, "hasAnyLiveCall call = " + call);
+                return true;
+            }
+        }
+        Log.d(this, "no active call ");
+        return false;
+    }
+
+    /**
+     * This method checks whether any other subscription currently has active voice
+     * call other than current active subscription, if yes it makes that other
+     * subscription as active subscription i.e user visible subscription.
+     * @param retainLch  whether to retain the LCH state of the other active sub
+     */
+    boolean switchToOtherActiveSub() {
+        int activeSub = getActiveSubId();
+        boolean subSwitched = false;
+
+        for (int i = 0; i < InCallServiceImpl.sPhoneCount; i++) {
+            int subId = QtiCallUtils.getSubId(i);
+            if ((subId != activeSub) && hasAnyLiveCall(subId)) {
+                Log.d(this, "switchToOtherActiveSub, subId = " + subId);
+                subSwitched = true;
+                QtiCallUtils.switchToActiveSub(subId);
+                setActiveSubId(subId);
+                break;
+            }
+        }
+        return subSwitched;
+    }
+
+    /**
+     * Method to check if there is any live call in a sub other than the one supplied.
+     * @param currentSub  The subscription to exclude while checking for active calls.
+     */
+    boolean isAnyOtherSubActive(int currentSub) {
+        boolean result = false;
+        if(!isDsdaEnabled()) {
+            return false;
+        }
+
+        for (int phoneId = 0; phoneId < InCallServiceImpl.sPhoneCount;
+                phoneId++) {
+            int subId = QtiCallUtils.getSubId(phoneId);
+
+            if ((subId != currentSub) && hasAnyLiveCall(subId)) {
+                Log.d(this, "Live call found on another sub = " + subId);
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns the [position]th call which belongs to provided subscription and
+     * found in the call map with the specified state.
+     */
+    Call getCallWithState(int state, int positionToFind, int subId) {
+        Call retval = null;
+        int position = 0;
+        for (Call call : mCallById.values()) {
+            PhoneAccountHandle ph = call.getAccountHandle();
+            try {
+                if ((call.getState() == state) && ((ph == null) ||
+                        (ph != null && (ph.getId() != null) &&  ((ph.getId().contains("sip")
+                        || ph.getId().contains("@")) || Integer.parseInt(ph.getId()) == subId)))) {
+                    if (position >= positionToFind) {
+                        retval = call;
+                        break;
+                    } else {
+                        position++;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                   Log.w(this,"Sub Id is not a number " + e);
+            }
+        }
+        return retval;
+    }
+
+    void addActiveSubChangeListener(ActiveSubChangeListener listener) {
+        Preconditions.checkNotNull(listener);
+        mActiveSubChangeListeners.add(listener);
+    }
+
+    void removeActiveSubChangeListener(ActiveSubChangeListener listener) {
+        Preconditions.checkNotNull(listener);
+        mActiveSubChangeListeners.remove(listener);
+    }
+
+    interface ActiveSubChangeListener {
+        public void onActiveSubChanged(int subId);
     }
 }

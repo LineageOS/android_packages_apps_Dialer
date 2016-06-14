@@ -442,6 +442,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             boolean isWorkCall = mPrimary.hasProperty(PROPERTY_ENTERPRISE_CALL)
                     || (mPrimaryContactInfo == null ? false
                             : mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
+            InCallPresenter.getInstance().setThemeColors();
             getUi().setCallState(
                     mPrimary.getState(),
                     mPrimary.getVideoState(),

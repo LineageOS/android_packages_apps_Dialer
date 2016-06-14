@@ -749,12 +749,18 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // If a call is onhold during an incoming call, the call actually comes in as
         // INCOMING.  For that case *and* traditional call-waiting, we want to
         // cancel the notification.
+
+        // For DSDA, we want to cancel the notification if we get an incoming call on
+        // one sub and there is a live call on another sub.
+        CallList callList = CallList.getInstance();
         boolean isCallWaiting = (call.getState() == Call.State.CALL_WAITING ||
                 (call.getState() == Call.State.INCOMING &&
-                        CallList.getInstance().getBackgroundCall() != null));
+                (callList.getBackgroundCall() != null ||
+                callList.isAnyOtherSubActive(callList.getActiveSubId()))));
 
         if (isCallWaiting) {
-            Log.i(this, "updateInCallNotification: call-waiting! force relaunch...");
+            Log.i(this, "configureFullScreenIntent: call-waiting or dsda incoming call!"
+                    + " force relaunch. Active sub:" + callList.getActiveSubId());
             // Cancel the IN_CALL_NOTIFICATION immediately before
             // (re)posting it; this seems to force the
             // NotificationManager to launch the fullScreenIntent.

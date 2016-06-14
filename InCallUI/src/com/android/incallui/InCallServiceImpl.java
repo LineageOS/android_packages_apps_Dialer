@@ -22,6 +22,7 @@ import android.os.IBinder;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
+import android.telephony.TelephonyManager;
 
 /**
  * Used to receive updates about calls from the Telecom component.  This service is bound to
@@ -30,6 +31,8 @@ import android.telecom.InCallService;
  * the service triggering InCallActivity (via CallList) to finish soon after.
  */
 public class InCallServiceImpl extends InCallService {
+
+    static int sPhoneCount = 0;
 
     @Override
     public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -60,6 +63,7 @@ public class InCallServiceImpl extends InCallService {
     @Override
     public IBinder onBind(Intent intent) {
         final Context context = getApplicationContext();
+        sPhoneCount = QtiCallUtils.getPhoneCount(context);
         final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
         InCallPresenter.getInstance().setUp(
                 getApplicationContext(),

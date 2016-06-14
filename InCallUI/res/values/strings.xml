@@ -483,6 +483,10 @@
     <!-- Description of the "camera off" icon displayed when the device's camera is disabled during
          a video call. [CHAR LIMIT=NONE] -->
     <string name="camera_off_description">Camera off</string>
+    <!-- Set Subscription screen: label sub 1 -->
+    <string name="sub_1">SUB 1</string>
+    <!-- Set Subscription screen: label sub 2 -->
+    <string name="sub_2">SUB 2</string>
 
     <!-- Used to inform the user that a call was received via a number other than the primary
         phone number associated with their device. [CHAR LIMIT=16] -->

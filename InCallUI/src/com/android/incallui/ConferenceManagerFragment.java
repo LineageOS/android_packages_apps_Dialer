@@ -99,10 +99,13 @@ public class ConferenceManagerFragment
     public void onVisibilityChanged(boolean isVisible) {
         mIsVisible = isVisible;
         ActionBar actionBar = getActivity().getActionBar();
+        boolean isDsdaEnabled = CallList.getInstance().isDsdaEnabled();
         if (isVisible) {
             actionBar.setTitle(R.string.manageConferenceLabel);
             actionBar.setElevation(mActionBarElevation);
-            actionBar.setHideOffset(0);
+            if (!isDsdaEnabled) {
+                actionBar.setHideOffset(0);
+            }
             actionBar.show();
 
             final CallList calls = CallList.getInstance();
@@ -112,7 +115,9 @@ public class ConferenceManagerFragment
             mConferenceParticipantList.requestFocus();
         } else {
             actionBar.setElevation(0);
-            actionBar.setHideOffset(actionBar.getHeight());
+            if (!isDsdaEnabled) {
+                actionBar.setHideOffset(actionBar.getHeight());
+            }
         }
     }
 

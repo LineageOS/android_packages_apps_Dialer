@@ -767,9 +767,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // Check if the call subject is showing -- if it is, we want to bypass showing the call
         // state.
         boolean isSubjectShowing = mCallSubject.getVisibility() == View.VISIBLE;
-
+        boolean isSubChanged = (callStateIcon !=  mCallStateIcon.getDrawable());
         if (TextUtils.equals(callStateLabel.getCallStateLabel(), mCallStateLabel.getText()) &&
-                !isSubjectShowing) {
+                !isSubjectShowing && !isSubChanged) {
             // Nothing to do if the labels are the same
             if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
@@ -824,6 +824,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
             if (callStateIcon instanceof AnimationDrawable) {
                 ((AnimationDrawable) callStateIcon).start();
+            }
+            if (isSubChanged) {
+                updateColors();
             }
         } else {
             mCallStateIcon.clearAnimation();
@@ -1375,6 +1378,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        updateFabPosition();
                         mPrimaryCallCardContainer.setTag(R.id.view_tag_callcard_actual_height,
                                 null);
                         setViewStatePostAnimation(listener);

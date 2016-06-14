@@ -289,6 +289,7 @@ public class CallButtonFragment
             final LayerDrawable layers = (LayerDrawable) button.getBackground();
             final RippleDrawable btnCompoundDrawable = compoundBackgroundDrawable(themeColors);
             layers.setDrawableByLayerId(R.id.compoundBackgroundItem, btnCompoundDrawable);
+            button.requestLayout();
         }
 
         ImageButton[] normalButtons = {
@@ -307,6 +308,7 @@ public class CallButtonFragment
             final LayerDrawable layers = (LayerDrawable) button.getBackground();
             final RippleDrawable btnDrawable = backgroundDrawable(themeColors);
             layers.setDrawableByLayerId(R.id.backgroundItem, btnDrawable);
+            button.requestLayout();
         }
 
         mCurrentThemeColors = themeColors;

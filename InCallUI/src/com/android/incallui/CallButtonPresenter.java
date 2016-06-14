@@ -36,6 +36,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService.VideoCall;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.telecom.VideoProfile;
 
 import com.android.contacts.common.compat.CallSdkCompat;
@@ -56,7 +58,7 @@ import org.codeaurora.ims.utils.QtiImsExtUtils;
  */
 public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButtonUi>
         implements InCallStateListener, AudioModeListener, IncomingCallListener,
-        InCallDetailsListener, CanAddCallListener, Listener {
+        InCallDetailsListener, CanAddCallListener, CallList.ActiveSubChangeListener, Listener {
 
     private static final String KEY_AUTOMATICALLY_MUTED = "incall_key_automatically_muted";
     private static final String KEY_PREVIOUS_MUTE_STATE = "incall_key_previous_mute_state";
@@ -85,6 +87,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         inCallPresenter.addDetailsListener(this);
         inCallPresenter.addCanAddCallListener(this);
         inCallPresenter.getInCallCameraManager().addCameraSelectionListener(this);
+        CallList.getInstance().addActiveSubChangeListener(this);
 
         // Update the buttons state immediately for the current call
         onStateChange(InCallState.NO_CALLS, inCallPresenter.getInCallState(),
@@ -101,6 +104,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         InCallPresenter.getInstance().removeDetailsListener(this);
         InCallPresenter.getInstance().getInCallCameraManager().removeCameraSelectionListener(this);
         InCallPresenter.getInstance().removeCanAddCallListener(this);
+        CallList.getInstance().removeActiveSubChangeListener(this);
     }
 
     @Override
@@ -534,6 +538,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
          */
         void updateButtonStates();
         Context getContext();
+        public void updateColors();
     }
 
     @Override
@@ -542,5 +547,17 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
             return;
         }
         getUi().setCameraSwitched(!isUsingFrontFacingCamera);
+    }
+
+    public void onActiveSubChanged(int subId) {
+        InCallState state = InCallPresenter.getInstance()
+                .getPotentialStateFromCallList(CallList.getInstance());
+
+        onStateChange(null, state, CallList.getInstance());
+        Log.d(this, "onActiveSubChanged");
+        CallButtonUi ui = getUi();
+        if (ui != null) {
+            ui.updateColors();
+        }
     }
 }
