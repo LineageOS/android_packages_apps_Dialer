@@ -22,7 +22,7 @@
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Πληκτρολόγιο κλήσης τηλεφώνου"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Τηλέφωνο"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"Ιστορικό κλήσεων"</string>
-    <string name="action_report_number" msgid="4635403959812186162">"Αναφορά ακατάλληλου αριθμού"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"Αναφορά ανακριβούς αριθμού"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Αντιγραφή αριθμού"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Αντιγραφή μεταγραφής"</string>
     <string name="action_block_number" msgid="1482657602262262134">"Αποκλεισμός αριθμού"</string>
