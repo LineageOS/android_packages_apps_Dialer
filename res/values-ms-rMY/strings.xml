@@ -34,11 +34,22 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"Edit nombor sebelum memanggil"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"Kosongkan sejarah panggilan"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"Padamkan mel suara"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"Arkibkan mel suara"</string>
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"Kongsi mel suara"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"Mel suara dipadamkan"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"Mel suara diarkibkan"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"BUAT ASAL"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"PRG KE ARKIB"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Kosongkan sejarah panggilan?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Tindakan ini akan memadamkan semua panggilan daripada sejarah anda"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Mengosongkan sejarah panggilan..."</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefon"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Panggilan terlepas"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"Panggilan terlepas daripada tempat kerja"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Panggilan terlepas"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> panggilan terlepas"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Panggil balik"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"Mesej"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> Mel suara </item>
       <item quantity="one">Mel suara</item>
@@ -48,6 +59,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"Mel suara baharu daripada <xliff:g id="CALLER">%1$s</xliff:g>"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"Tidak dapat memainkan mel suara"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"Memuatkan mel suara..."</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"Mengarkib mel suara…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"Tidak dapat memuatkan mel suara"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"Panggilan dengan mel suara sahaja"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"Panggilan masuk sahaja"</string>
@@ -121,6 +133,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g> pada <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Tidak dapat menghubungi nombor ini"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Untuuk menyediakan mel suara, pergi ke Menu &gt; Tetapan."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Untuk membuat panggilan ke mel suara, mula-mula matikan mod Pesawat."</string>
@@ -139,17 +153,22 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Buat panggilan"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Anda tiada panggilan terlepas."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Peti masuk mel suara anda kosong."</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"Arkib mel suara anda kosong."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Tunjukkan kegemaran sahaja"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"Sejarah Panggilan"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Arkib Mel Suara"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Semua"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Tidak dijawab"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Mel suara"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"Penyekatan mudah yang baharu"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"Untuk melindungi anda dengan lebih berkesan, Telefon perlu menukar cara penyekatan berfungsi. Nombor yang disekat akan menghentikan panggilan dan teks serta boleh dikongsi dengan apl lain."</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"Benarkan"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"Sekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"Panggilan daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik."</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"Panggilan daripada nombor ini akan disekat, tetapi pemanggil masih boleh meninggalkan mel suara kepada anda."</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"Anda tidak akan menerima panggilan atau teks daripada nombor ini lagi."</string>
     <string name="block_number_ok" msgid="770551992296781873">"SEKAT"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"Nyahsekat <xliff:g id="NUMBER">%1$s</xliff:g>?"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"Nombor ini tidak akan disekat daripada memanggil anda lagi."</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"NYAHSEKAT"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Dail laju"</string>
     <string name="tab_history" msgid="2563144697322434940">"Sejarah Panggilan"</string>
@@ -180,6 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"Mel suara daripada <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"Buat panggilan kepada <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_phone_account" msgid="1767072759541443861">"pada <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <string name="description_via_number" msgid="3503311803959108316">"melalui <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"melalui <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"pada <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, melalui <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> melalui <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"Panggil"</string>
     <string name="description_call_action" msgid="4000549004089776147">"Panggil <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"Panggilan video <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
@@ -226,6 +249,7 @@
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"Lihat nombor"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"Import"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"Pengimportan gagal"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"Gagal mengarkib mel suara."</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"Nyahsekat nombor"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"Tambah nombor"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"Panggilan daripada nombor ini akan disekat dan mel suara akan dipadamkan secara automatik."</string>
@@ -245,4 +269,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"Untuk mencari kenalan anda, hidupkan kebenaran Kenalan."</string>
     <string name="permission_place_call" msgid="2101287782615887547">"Untuk membuat panggilan, hidupkan kebenaran Telefon."</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"Apl telefon tiada kebenaran untuk menulis ke tetapan sistem."</string>
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"Disekat"</string>
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> aktif"</string>
 </resources>
