@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Интелигентно заглушаване</string>
   <string name="smart_mute_summary">Заглушите входящо повикване чрез обръщане на устройството</string>
   <string name="smart_dialer_title">Интелигентно повикване</string>
+  <string name="smart_dialer_summary">Автоматично стартиране при телефонното обаждане чрез преместване на устройството до ухото</string>
 </resources>

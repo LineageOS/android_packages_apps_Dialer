@@ -110,4 +110,5 @@
   <string name="smart_mute_title">સ્માર્ટ મ્યૂટ</string>
   <string name="smart_mute_summary">ડિવાઇસ ઉલટાવીને ઇનકમિંગ કૉલ મ્યૂટ કરો</string>
   <string name="smart_dialer_title">સ્માર્ટ કોલ</string>
+  <string name="smart_dialer_summary">તમારું ડિવાઇસ કાન પાસે લઈ જઈને સ્વયંચાલિત રીતે ડાયલ કરેલ નંબર કૉલ કરો</string>
 </resources>

@@ -110,4 +110,5 @@
   <string name="smart_mute_title">ஸ்மார்ட் ஒலிதடு</string>
   <string name="smart_mute_summary">சாதனத்தை திருப்புவதன் மூலம் உள்வரும் அழைப்புகளை ஒலித்தடைசெய்</string>
   <string name="smart_dialer_title">ஸ்மார்ட் அழைப்பு</string>
+  <string name="smart_dialer_summary">சாதனத்தை உங்கள் காதுகளிடம் நகத்த்துவதன் மூலம் தானியக்கமாகவே டயல்செய்த எண்னை அழைக்கவும்</string>
 </resources>

@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Muto intelligente</string>
   <string name="smart_mute_summary">Silenzia la chiamata in arrivo capovolgendo il dispositivo</string>
   <string name="smart_dialer_title">Chiamata intelligente</string>
+  <string name="smart_dialer_summary">Chiama automaticamente il numero composto avvicinando il dispositivo all\'orecchio</string>
 </resources>

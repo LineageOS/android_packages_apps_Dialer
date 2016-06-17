@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Silenciu intelixente</string>
   <string name="smart_mute_summary">Silencia la llamada entrante voltiando\'l preséu</string>
   <string name="smart_dialer_title">Llamada intelixente</string>
+  <string name="smart_dialer_summary">Llama automáticamente al númberu marcáu moviendo\'l to preséu a la to oreya</string>
 </resources>

@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Silencio intelixente</string>
   <string name="smart_mute_summary">Silenciará a chamada entrante se xira o dispositivo</string>
   <string name="smart_dialer_title">Chamada intelixente</string>
+  <string name="smart_dialer_summary">Chamar automaticamente ao número marcado ao achegar o dispositivo á orella</string>
 </resources>

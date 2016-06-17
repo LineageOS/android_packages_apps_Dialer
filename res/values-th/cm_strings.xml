@@ -110,4 +110,5 @@
   <string name="smart_mute_title">ปิดเสียงแบบสมาร์ท</string>
   <string name="smart_mute_summary">ปิดเสียงเรียกเข้าโดยการพลิกอุปกรณ์</string>
   <string name="smart_dialer_title">การโทรสมาร์ท</string>
+  <string name="smart_dialer_summary">โทรหาหมายเลขที่กดโทรออกอัตโนมัติโดยเคลื่อนอุปกรณ์ไปที่หูของคุณ</string>
 </resources>

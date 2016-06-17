@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Tắt tiếng thông minh</string>
   <string name="smart_mute_summary">Tắt tiếng cuộc gọi đến bằng cách lật úp thiết bị</string>
   <string name="smart_dialer_title">Cuộc gọi thông minh</string>
+  <string name="smart_dialer_summary">Tự động gọi đến số đã quay bằng cách đưa thiết bị lên tai của bạn</string>
 </resources>

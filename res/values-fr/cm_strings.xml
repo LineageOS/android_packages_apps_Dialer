@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Couper le son</string>
   <string name="smart_mute_summary">Couper la sonnerie de l\'appel entrant en retournant l\'appareil</string>
   <string name="smart_dialer_title">Appel intelligent</string>
+  <string name="smart_dialer_summary">Appel automatique du numéro composé lorsque vous approchez votre téléphone de votre oreille</string>
 </resources>

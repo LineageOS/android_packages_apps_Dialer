@@ -110,4 +110,5 @@
   <string name="smart_mute_title">స్మార్ట్ మ్యూట్</string>
   <string name="smart_mute_summary">పరికరాన్ని ఫ్లిప్ చేయడం ద్వారా ఇన్‌కమింగ్ కాల్ ను మ్యూట్ చేయి</string>
   <string name="smart_dialer_title">స్మార్ట్ కాల్</string>
+  <string name="smart_dialer_summary">మీ పరికరాన్ని చెవి దగ్గరకు తీసుకువెళ్ళడం ద్వారా డయల్ చేయబడిన నంబరుకు స్వయంచాలకంగా కాల్ చేయుము</string>
 </resources>

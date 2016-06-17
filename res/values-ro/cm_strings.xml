@@ -109,4 +109,5 @@
   <string name="sensors_category_title">Opțiuni senzor</string>
   <string name="smart_mute_title">Mut inteligent</string>
   <string name="smart_dialer_title">Apel inteligent</string>
+  <string name="smart_dialer_summary">Apelare automată a numărului ducând dispozitivul la ureche</string>
 </resources>

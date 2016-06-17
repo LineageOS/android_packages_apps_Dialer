@@ -110,4 +110,5 @@
   <string name="smart_mute_title">স্মাৰ্ট মিউট</string>
   <string name="smart_mute_summary">ডিভাইচটো ওলোটাই দি ইনকামিং কল মিউট কৰক</string>
   <string name="smart_dialer_title">স্মাৰ্ট কল</string>
+  <string name="smart_dialer_summary">আপোনাৰ ডিভাইটো কাণলৈ নি ডায়েল কৰা নম্বৰটো স্বয়ংক্ৰিয়ভাবে কল কৰক</string>
 </resources>

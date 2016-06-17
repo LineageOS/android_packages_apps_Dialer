@@ -110,4 +110,5 @@
   <string name="smart_mute_title">智能靜音</string>
   <string name="smart_mute_summary">翻轉設備以靜音來電</string>
   <string name="smart_dialer_title">智能撥號</string>
+  <string name="smart_dialer_summary">通過將設備移動到耳朵自動撥出號碼</string>
 </resources>

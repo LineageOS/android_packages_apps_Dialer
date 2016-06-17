@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Schnelles Stummschalten</string>
   <string name="smart_mute_summary">Eingehende Anrufe durch Umdrehen des Geräts stummschalten</string>
   <string name="smart_dialer_title">Schnellanruf</string>
+  <string name="smart_dialer_summary">Gewählte Nummer automatisch anrufen, wenn Sie Ihr Gerät zum Ohr führen</string>
 </resources>

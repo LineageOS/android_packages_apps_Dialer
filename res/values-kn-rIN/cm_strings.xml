@@ -110,4 +110,5 @@
   <string name="smart_mute_title">ಸ್ಮಾರ್ಟ್ ಮೌನ</string>
   <string name="smart_mute_summary">ಸಾಧನವನ್ನು ಫ್ಲಿಪ್ ಮಾಡುವ ಮೂಲಕ ಒಳಬರುವ ಕರೆಯನ್ನು ಮೌನಿಸಿ</string>
   <string name="smart_dialer_title">ಸ್ಮಾರ್ಟ್ ಕರೆ</string>
+  <string name="smart_dialer_summary">ಸಾಧನವನ್ನು ನಿಮ್ಮ ಕಿವಿಗೆ ಇಡುವುದರ ಮೂಲಕ ಡಯಲ್ ಮಾಡಿದ ಸಂಖ್ಯೆಯನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕರೆ ಮಾಡಿ</string>
 </resources>

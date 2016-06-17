@@ -110,4 +110,5 @@
   <string name="smart_mute_title">स्मार्ट निःशब्द</string>
   <string name="smart_mute_summary">डिव्हाइस फ्लिप करून इनकमिंग कॉल निःशब्द करा</string>
   <string name="smart_dialer_title">स्मार्ट कॉल</string>
+  <string name="smart_dialer_summary">डायल केलेला नंबर डिव्हाइस तुमच्या कानाजवळ नेऊन स्वयंचलित कॉल करा</string>
 </resources>

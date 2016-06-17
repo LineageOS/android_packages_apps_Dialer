@@ -110,4 +110,5 @@
   <string name="smart_mute_title">スマートミュート</string>
   <string name="smart_mute_summary">端末を裏返して着信をミュートする</string>
   <string name="smart_dialer_title">スマートコール</string>
+  <string name="smart_dialer_summary">端末を耳に近づけると入力した電話番号に自動的に発信する</string>
 </resources>

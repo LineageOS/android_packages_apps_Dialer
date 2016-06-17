@@ -110,4 +110,5 @@
   <string name="smart_mute_title">بی‌صدا کردن هوشمند</string>
   <string name="smart_mute_summary">بی‌صدا کردن تماس ورودی به وسیله وارونه‌کردن دستگاه</string>
   <string name="smart_dialer_title">تماس هوشمند</string>
+  <string name="smart_dialer_summary">تماس خودکار با شماره گرفته شده، به وسیله نزدیک‌کردن دستگاه به گوش</string>
 </resources>

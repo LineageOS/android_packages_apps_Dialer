@@ -110,4 +110,5 @@
   <string name="smart_mute_title">സ്മാർട്ട് നിശബ്ദമാക്കൂക</string>
   <string name="smart_mute_summary">ഉപകരണം കമഴ്ത്തുക വഴി ഇൻകമിംഗ് കോൾ നിശബ്ദമാക്കുക</string>
   <string name="smart_dialer_title">സ്മാർട്ട് കോൾ</string>
+  <string name="smart_dialer_summary">നിങ്ങളുടെ ഉപകരണം നിങ്ങളുടെ ചെവിയുടെ സമീപത്തേക്ക് നീക്കിക്കൊണ്ട് ഡയൽ ചെയ്ത നമ്പറിലേക്ക് ആട്ടോമാറ്റിക്കായി  വിളിക്കുക</string>
 </resources>

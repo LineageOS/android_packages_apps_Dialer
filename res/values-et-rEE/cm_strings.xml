@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Nutikas vaigistus</string>
   <string name="smart_mute_summary">Vaigista sissetulev kõne seadme ümberpööramisel</string>
   <string name="smart_dialer_title">Nutikas helistamine</string>
+  <string name="smart_dialer_summary">Automaatselt helista valitud numbril liigutades seadme oma kõrvale</string>
 </resources>

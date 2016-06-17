@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Pametno utišavanje</string>
   <string name="smart_mute_summary">Isključi zvuk dolaznog poziva okretanjem uređaja</string>
   <string name="smart_dialer_title">Pametan poziv</string>
+  <string name="smart_dialer_summary">Automatski pozovi birani broj pomicanjem uređaja prema uhu</string>
 </resources>

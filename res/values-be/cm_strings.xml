@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Інтэлектуальнае адключэнне гуку</string>
   <string name="smart_mute_summary">Перавярніце прыладу, каб прыглушыць гук уваходнага званка</string>
   <string name="smart_dialer_title">Інтэлектуальны выклік</string>
+  <string name="smart_dialer_summary">Аўтаматычна пачынаць званок пры паднясенні тэлефона да вуха</string>
 </resources>

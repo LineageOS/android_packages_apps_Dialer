@@ -110,4 +110,5 @@
   <string name="smart_mute_title">Inteligenta silentigo</string>
   <string name="smart_mute_summary">Silentigi la envenajn alvokojn renversante la aparaton</string>
   <string name="smart_dialer_title">Inteligenta alvoko</string>
+  <string name="smart_dialer_summary">Aŭtomate alvoki la numerumitan numeron per proksimigado de la aparato al orelo</string>
 </resources>

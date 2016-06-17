@@ -110,4 +110,5 @@
   <string name="smart_mute_title">ئەقلىي-ئىقتىدارلىق جىمجىتلىق</string>
   <string name="smart_mute_summary">ئۈسكىنىنى ئۆرۈش ئارقىلىق كەلگەن تېلېفون ئاۋازىنى تاقاش</string>
   <string name="smart_dialer_title">ئەقلىي-ئىقتىدارلىق چاقىرىش</string>
+  <string name="smart_dialer_summary">ئۈسكىنىڭىز قولاق تۈۋىڭىزگە كەلگەندا ئاپتۇماتېك چاقىرىش</string>
 </resources>
