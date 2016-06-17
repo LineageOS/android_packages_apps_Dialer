@@ -138,5 +138,7 @@
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">Да би позвали, укључите дозволе телефона.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Прикажи белешку</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="callerinfo_provider_status_disabling">Онемогућавање</string>
 </resources>
