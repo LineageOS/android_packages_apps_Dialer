@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.v4.os.BuildCompat;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.view.MenuItem;
@@ -97,7 +98,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             callSettingsHeader.titleRes = R.string.call_settings_label;
             callSettingsHeader.intent = callSettingsIntent;
             target.add(callSettingsHeader);
-        } else if (android.os.Build.VERSION.CODENAME.startsWith("N") || isPrimaryUser) {
+        } else if (BuildCompat.isAtLeastN() || isPrimaryUser) {
             Header phoneAccountSettingsHeader = new Header();
             Intent phoneAccountSettingsIntent =
                     new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
