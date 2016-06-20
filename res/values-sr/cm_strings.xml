@@ -140,5 +140,6 @@
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <string name="search_shortcut_view_note">Прикажи белешку</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Белешке са било које локације</string>
   <string name="callerinfo_provider_status_disabling">Онемогућавање</string>
 </resources>
