@@ -45,7 +45,7 @@ import org.codeaurora.ims.QtiCallConstants;
  * {@class CallSubstateNotifier} notifies it through the onCallSubstateChanged callback.
  */
 public class InCallMessageController implements InCallSubstateListener, VideoEventListener,
-        CallList.Listener, InCallSessionModificationCauseListener {
+        CallList.Listener, SessionModificationListener, InCallSessionModificationCauseListener {
 
     private static InCallMessageController sInCallMessageController;
 
@@ -72,6 +72,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         CallList.getInstance().addListener(this);
         SessionModificationCauseNotifier.getInstance().addListener(this);
         InCallPresenter.getInstance().addListener(mPrimaryCallTracker);
+        InCallVideoCallCallbackNotifier.getInstance().addSessionModificationListener(this);
     }
 
     /**
@@ -86,6 +87,7 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         CallList.getInstance().removeListener(this);
         SessionModificationCauseNotifier.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeListener(mPrimaryCallTracker);
+        InCallVideoCallCallbackNotifier.getInstance().removeSessionModificationListener(this);
         mPrimaryCallTracker = null;
     }
 
@@ -265,6 +267,9 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
          case QtiCallConstants.CALL_FAIL_EXTRA_CODE_LTE_3G_HA_FAILED:
              QtiCallUtils.displayToast(mContext, R.string.call_failed_ho_not_feasible);
              break;
+         case QtiCallConstants.CALL_FAIL_EXTRA_CODE_LOCAL_LOW_BATTERY:
+             QtiCallUtils.displayToast(mContext, R.string.call_failed_due_to_low_battery);
+             break;
          default:
              break;
        }
@@ -322,6 +327,28 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
             case QtiCallConstants.CAUSE_CODE_SESSION_MODIFY_DOWNGRADE_GENERIC_ERROR:
             default:
                 return R.string.session_modify_cause_downgrade_generic_error;
+        }
+    }
+
+    @Override
+    public void onUpgradeToVideoRequest(Call call, int videoState) {
+        //no-op
+    }
+
+    @Override
+    public void onUpgradeToVideoFail(int error, Call call) {
+        Log.d(this, "onUpgradeToVideoFail: error = " + error);
+        showUpgradeFailInfo(error);
+    }
+
+    private void showUpgradeFailInfo(int errorCode) {
+        switch (errorCode) {
+            case QtiCallConstants.SESSION_MODIFY_REQUEST_FAILED_LOW_BATTERY:
+                QtiCallUtils.displayToast(mContext,
+                        R.string.modify_call_failed_due_to_low_battery);
+                break;
+            default:
+                break;
         }
     }
 }

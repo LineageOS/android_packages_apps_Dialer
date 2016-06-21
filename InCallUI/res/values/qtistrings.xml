@@ -77,6 +77,9 @@
     <string name="modify_call_option_vt_rx" translatable="false">Video Receive</string>
     <string name="modify_call_option_voice" translatable="false">Voice Only</string>
 
+    <!-- Modify call error cause -->
+    <string name="modify_call_failed_due_to_low_battery">Modify call failed due to low battery.</string>
+
     <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
     <string name="qti_ims_transfer_num_error">Number not set. Provide the number via IMS settings and retry.</string>
     <string name="qti_ims_transfer_request_error">Call Transfer request had failed.</string>
@@ -143,4 +146,7 @@
     <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
     <string name="incoming_conf_via_template">Incoming conference via <xliff:g id="provider_name">%s</xliff:g></string>
+
+    <!-- Message indicating call failed due to low battery -->
+    <string name="call_failed_due_to_low_battery">Call is failed due to low battery</string>
 </resources>

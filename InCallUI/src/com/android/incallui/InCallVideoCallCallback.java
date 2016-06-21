@@ -92,6 +92,7 @@ public class InCallVideoCallCallback extends VideoCall.Callback {
                             Call.SessionModificationState.REQUEST_FAILED);
                 }
             }
+            InCallVideoCallCallbackNotifier.getInstance().upgradeToVideoFail(status, mCall);
         }
 
         // Finally clear the outstanding request.

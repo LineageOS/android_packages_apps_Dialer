@@ -135,6 +135,17 @@ public class InCallVideoCallCallbackNotifier {
     }
 
     /**
+     * Inform listeners of an unsuccessful response to a video request for a call.
+     *
+     * @param call The call.
+     */
+    public void upgradeToVideoFail(int status, Call call) {
+        for (SessionModificationListener listener : mSessionModificationListeners) {
+            listener.onUpgradeToVideoFail(status, call);
+        }
+    }
+
+    /**
      * Inform listeners of a call session event.
      *
      * @param event The call session event.
@@ -217,6 +228,15 @@ public class InCallVideoCallCallbackNotifier {
          * @param videoState The requested video state.
          */
         public void onUpgradeToVideoRequest(Call call, int videoState);
+
+        /**
+         * Called when a request to a peer to upgrade an audio-only call to a video call is
+         * NOT successful. This can be if the peer chooses rejects the the video call, or if the
+         * peer does not support video calling, or if there is some error in sending the request.
+         *
+         * @param call The call the request was successful for.
+         */
+        public void onUpgradeToVideoFail(int status, Call call);
     }
 
     /**

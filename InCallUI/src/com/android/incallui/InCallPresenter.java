@@ -727,6 +727,11 @@ public class InCallPresenter implements CallList.Listener,
         call.setRequestedVideoState(videoState);
     }
 
+    @Override
+    public void onUpgradeToVideoFail(int error, Call call) {
+        //NO-OP
+    }
+
     /**
      * Given the call list, return the state in which the in-call screen should be.
      */
