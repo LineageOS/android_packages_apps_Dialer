@@ -85,7 +85,7 @@
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Հաղորդագրություն"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Ընթացիկ զանգ այլ սարքում"</string>
     <string name="notification_transfer_call" msgid="687009078741947505">"Փոխանցել զանգը"</string>
-    <string name="incall_error_power_off" msgid="3626117639377110403">"Զանգ կատարելու համար նախ անջատեք Ինքնաթիռային ռեժիմը:"</string>
+    <string name="incall_error_power_off" msgid="3626117639377110403">"Զանգ կատարելու համար նախ անջատեք Ինքնաթիռի ռեժիմը:"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Ցանցում գրանցված չէ:"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Բջջային ցանցն անհասանելի է:"</string>
     <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Զանգ կատարելու համար մուտքագրեք ճիշտ համար:"</string>
