@@ -87,6 +87,7 @@
         <activity android:name=".DialtactsActivity"
             android:label="@string/launcherActivityLabel"
             android:theme="@style/DialtactsActivityTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:icon="@mipmap/ic_launcher_phone"
