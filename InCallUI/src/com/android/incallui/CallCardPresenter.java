@@ -443,6 +443,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     || (mPrimaryContactInfo == null ? false
                             : mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
             InCallPresenter.getInstance().setThemeColors();
+            boolean isConfCall = mPrimary.isConferenceCall() || mPrimary.isIncomingConfCall();
             getUi().setCallState(
                     mPrimary.getState(),
                     mPrimary.getVideoState(),
@@ -452,7 +453,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getCallStateIcon(),
                     getGatewayNumber(),
                     mPrimary.hasProperty(Details.PROPERTY_WIFI),
-                    mPrimary.isConferenceCall(),
+                    isConfCall,
                     isWorkCall);
 
             maybeShowHdAudioIcon();

@@ -988,4 +988,16 @@ public class Call {
     public String toSimpleString() {
         return super.toString();
     }
+
+    public boolean isIncomingConfCall() {
+        int callState = getState();
+        if (callState == State.INCOMING || callState == State.CALL_WAITING) {
+            Bundle extras = getExtras();
+            boolean incomingConf = (extras == null)? false :
+                    extras.getBoolean(QtiImsExtUtils.QTI_IMS_INCOMING_CONF_EXTRA_KEY, false);
+            Log.d(this, "isIncomingConfCall = " + incomingConf);
+            return incomingConf;
+        }
+        return false;
+    }
 }

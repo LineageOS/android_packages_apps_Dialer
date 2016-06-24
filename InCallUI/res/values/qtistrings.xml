@@ -30,7 +30,7 @@
   -->
 
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Dtermine whether emergency calls should be marked. -->
     <bool name="mark_emergency_call">true</bool>
     <!-- Call substate label -->
@@ -133,4 +133,14 @@
     <string name="session_modify_cause_downgrade_lipsync">Call downgraded due to lipsync</string>
     <!-- Session modify cause code downgrade generic error -->
     <string name="session_modify_cause_downgrade_generic_error">Call downgraded due to generic error</string>
+
+    <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+    <string name="card_title_incoming_conf_call">Incoming conference call</string>
+    <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+    <string name="card_title_incoming_video_conf_call">Incoming video conference</string>
+    <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+    <string name="notification_incoming_conf_call">Incoming conference call</string>
+    <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
+         [CHAR LIMIT=40] -->
+    <string name="incoming_conf_via_template">Incoming conference via <xliff:g id="provider_name">%s</xliff:g></string>
 </resources>
