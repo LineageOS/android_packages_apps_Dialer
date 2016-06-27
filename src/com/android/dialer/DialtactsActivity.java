@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
@@ -32,6 +33,7 @@ import android.provider.CallLog.Calls;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.telecom.PhoneAccount;
 import android.text.Editable;
@@ -132,6 +134,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private static final String TAG_REGULAR_SEARCH_FRAGMENT = "search";
     private static final String TAG_SMARTDIAL_SEARCH_FRAGMENT = "smartdial";
     private static final String TAG_FAVORITES_FRAGMENT = "favorites";
+
+    /* Define for Activity permission request for reading phone state */
+    private static final int PERMISSION_REQUEST_CODE_PHONE_STATE_ENABLED = 0;
+    private static final int PERMISSION_REQUEST_CODE_PHONE_STATE_DISABLED = 1;
 
     /**
      * Just for backward compatibility. Should behave as same as {@link Intent#ACTION_DIAL}.
@@ -1281,9 +1287,16 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     @Override
     public void setConferenceDialButtonVisibility(boolean enabled) {
-        boolean imsUseEnabled =
-                ImsManager.isVolteEnabledByPlatform(this) &&
-                ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
+        boolean imsUseEnabled = false;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.READ_PHONE_STATE}
+                    , enabled ? PERMISSION_REQUEST_CODE_PHONE_STATE_ENABLED
+                    : PERMISSION_REQUEST_CODE_PHONE_STATE_DISABLED);
+        } else {
+            imsUseEnabled = ImsManager.isVolteEnabledByPlatform(this)
+                    && ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
+        }
         if(mConferenceDialButton != null) {
             mConferenceDialButton.setVisibility((enabled && imsUseEnabled) ?
                     View.VISIBLE : View.GONE);
@@ -1488,6 +1501,31 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private void updateMissedCalls() {
         if (mPreviouslySelectedTabIndex == ListsFragment.TAB_INDEX_HISTORY) {
             mListsFragment.markMissedCallsAsReadAndRemoveNotifications();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE_PHONE_STATE_ENABLED:
+            case PERMISSION_REQUEST_CODE_PHONE_STATE_DISABLED:
+                boolean imsUseEnabled = false;
+                boolean enabled = requestCode == PERMISSION_REQUEST_CODE_PHONE_STATE_ENABLED;
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    imsUseEnabled = ImsManager.isVolteEnabledByPlatform(this)
+                            && ImsManager.isEnhanced4gLteModeSettingEnabledByUser(this);
+                }
+                if(mConferenceDialButton != null) {
+                    boolean isCurrentTabAllContacts = (mListsFragment != null)
+                            && (mListsFragment.getCurrentTabIndex() ==
+                            ListsFragment.TAB_INDEX_ALL_CONTACTS);
+                    mConferenceDialButton.setVisibility((enabled && imsUseEnabled
+                            && !isCurrentTabAllContacts) ? View.VISIBLE : View.GONE);
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
