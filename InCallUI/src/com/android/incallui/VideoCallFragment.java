@@ -16,6 +16,7 @@
 
 package com.android.incallui;
 
+import android.app.Activity;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
@@ -29,6 +30,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -575,12 +578,15 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         if (mPreviewPhoto != null) {
             mPreviewPhoto.setVisibility(!previewPaused ? View.VISIBLE : View.INVISIBLE);
         }
+
+        enableScreenTimeout(false);
     }
 
     /**
      * Hide all video views.
      */
     public void hideVideoUi() {
+        enableScreenTimeout(true);
         inflateVideoUi(false);
     }
 
@@ -920,6 +926,25 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         // Incoming video calls will center the view
         if (mIsLayoutComplete) {
             centerDisplayView(textureView);
+        }
+    }
+
+    private void enableScreenTimeout(boolean enable) {
+        Log.v(this, "enableScreenTimeout: value=" + enable);
+        final Activity activity = getActivity();
+        if (activity == null) {
+            Log.e(this, "enableScreenTimeout: Activity is null.");
+            return;
+        }
+        final Window window = activity.getWindow();
+        if (window == null) {
+            Log.e(this, "enableScreenTimeout: window is null");
+            return;
+        }
+        if (enable) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 }
