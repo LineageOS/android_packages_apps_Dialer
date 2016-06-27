@@ -205,8 +205,12 @@ public class DiscoveryEventHandler {
         nn.setLargeIcon(notificationIcon);
         nn.setOnShowIntent(buildActionIntent(body,
                 DiscoverySignalReceiver.DISCOVERY_NUDGE_SHOWN, component));
-        nn.setContentIntent(buildActionIntent(body,
-                DiscoverySignalReceiver.DISCOVERY_NUDGE_DISMISS, component));
+
+        // Note: the incall tech spec requires that the final action (right most visually)
+        // button must always be the affirmative action.
+        NotificationNudge.Button bodyButton
+                = (NotificationNudge.Button) actions[actions.length - 1];
+        nn.setContentIntent(bodyButton.getOnClickIntent());
 
         DiscoveryManagerServices.DiscoveryManagerApi.publishNudge(mClient, nn);
     }
