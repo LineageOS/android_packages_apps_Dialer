@@ -197,16 +197,21 @@ public class DiscoveryEventHandler {
         NotificationNudge nn = new NotificationNudge(mKey,
                 Nudge.Type.IMMEDIATE, title, body);
 
-        for (Parcelable action : actions) {
-            NotificationNudge.Button button = (NotificationNudge.Button) action;
-            nn.addButton(button);
-        }
-
         nn.setLargeIcon(notificationIcon);
         nn.setOnShowIntent(buildActionIntent(body,
                 DiscoverySignalReceiver.DISCOVERY_NUDGE_SHOWN, component));
-        nn.setContentIntent(buildActionIntent(body,
-                DiscoverySignalReceiver.DISCOVERY_NUDGE_DISMISS, component));
+
+        if (actions != null && actions.length != 0) {
+            for (Parcelable action : actions) {
+                NotificationNudge.Button button = (NotificationNudge.Button) action;
+                nn.addButton(button);
+            }
+            // Note: the incall tech spec requires that the final action (right most visually)
+            // button must always be the affirmative action.
+            NotificationNudge.Button bodyButton
+                    = (NotificationNudge.Button) actions[actions.length - 1];
+            nn.setContentIntent(bodyButton.getOnClickIntent());
+        }
 
         DiscoveryManagerServices.DiscoveryManagerApi.publishNudge(mClient, nn);
     }
