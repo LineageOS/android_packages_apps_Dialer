@@ -123,14 +123,28 @@
 
             </FrameLayout>
 
-            <!-- Volume boost and Volume enhancements in-call UI -->
-            <ImageButton android:id="@+id/volumeBoost"
-                android:layout_below="@+id/primary_call_info_container"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:visibility="gone"
-                android:soundEffectsEnabled="false"
-                android:background="@drawable/vb_normal"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/primary_call_info_container">
+
+                <include layout="@layout/manage_conference_call_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="5dp"
+                    android:layout_alignParentBottom="true"/>
+
+                <!-- Volume boost and Volume enhancements in-call UI -->
+                <ImageButton android:id="@+id/volumeBoost"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:visibility="gone"
+                    android:soundEffectsEnabled="false"
+                    android:background="@drawable/vb_normal"/>
+
+            </LinearLayout>
 
         <!-- Call recorder infor -->
         <RelativeLayout
@@ -159,10 +173,6 @@
                 android:textColor="@color/incall_call_banner_text_color"
                 android:visibility="invisible"/>
             </RelativeLayout>
-
-            <include layout="@layout/manage_conference_call_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <!-- Placeholder for various fragments that are added dynamically underneath the caller info. -->
             <FrameLayout
