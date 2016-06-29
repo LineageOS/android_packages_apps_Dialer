@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_d93f7fb3",
+        "filename": "src/com/android/dialer/discovery/DiscoveryEventHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 9528
+      },
+      "writtenOn": "2016-06-29T18:45:29Z",
+      "side": 1,
+      "message": ":O",
+      "revId": "6b95938486bfbad1178cc4c6fb7a4b4a57564155",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
