@@ -449,8 +449,10 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mFloatingActionButton = (ImageButton) findViewById(R.id.floating_action_button);
         mDialCallButton =  findViewById(R.id.floating_action_button);
         mFloatingActionButton.setOnClickListener(this);
-        mConferenceDialButton = (ImageButton) findViewById(R.id.dialConferenceButton);
-        mConferenceDialButton.setOnClickListener(this);
+        if (!getResources().getBoolean(R.bool.config_hide_SIP_dial_icon)) {
+            mConferenceDialButton = (ImageButton) findViewById(R.id.dialConferenceButton);
+            mConferenceDialButton.setOnClickListener(this);
+        }
         mFloatingActionButtonController = new FloatingActionButtonController(this,
                 floatingActionButtonContainer,mFloatingActionButton);
 
