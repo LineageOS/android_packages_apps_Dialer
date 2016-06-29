@@ -98,9 +98,15 @@
   <string name="invalid_number_text">"%1$s kon deze oproep niet voltooien. Is het nummer correct?"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">U kunt een telefoonnummer kiezen\nof uw contacten doorzoeken</string>
+  <string name="sign_in_hint_text">Log in om te bellen met %1$s</string>
+  <string name="wifi_hint_text">Gratis %1$s naar %1$s gesprekken via wifi.</string>
+  <string name="roaming_hint_text">%1$s is aan het roamen. Gratis %2$s naar %2$s gesprekken via wifi.</string>
   <string name="emergency_call_hint_text">Geen simkaart. Alleen noodoproepen.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s </xliff:g>-oproep</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Instellingen <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Bellen via <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <string name="callerinfo_provider_auth_no_short">Nee</string>
@@ -124,12 +130,16 @@
   <string name="provider_disable_message">Door %1$s uit te schakelen heeft u geen beller-id.</string>
   <string name="provider_disable_spam_message">Door %1$s uit te schakelen heeft u geen spambeveiliging of beller-id.</string>
   <string name="powered_by_provider">Mogelijk gemaakt door <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Maak %1$s-oproepen door\nte wisselen van modus"</string>
+  <string name="provider_search_help">"Zoek %1$s-contacten door\nte wisselen van modus"</string>
   <string name="provider_button_help">"Ik snap het"</string>
   <string name="provider_voice_call">"%1$s-gesprek"</string>
   <string name="provider_video_call">"%1$s-video-oproep"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Om te bellen moet u de telefoon-machtiging inschakelen.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <string name="search_shortcut_view_note">Notitie bekijken</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Notities maken vanaf elke plek</string>
   <string name="callerinfo_provider_status_disabling">Uitschakelen</string>
 </resources>
