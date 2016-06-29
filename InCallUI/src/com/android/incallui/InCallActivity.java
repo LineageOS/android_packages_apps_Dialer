@@ -152,7 +152,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     private Animation mSlideIn;
     private Animation mSlideOut;
     private boolean mDismissKeyguard = false;
-    private boolean isSelectPhoneaccDialogShown = false;
 
     private final int TAB_COUNT_ONE = 1;
     private final int TAB_COUNT_TWO = 2;
@@ -174,14 +173,12 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         @Override
         public void onPhoneAccountSelected(PhoneAccountHandle selectedAccountHandle,
                 boolean setDefault) {
-            isSelectPhoneaccDialogShown = false;
             InCallPresenter.getInstance().handleAccountSelection(selectedAccountHandle,
                     setDefault);
         }
 
         @Override
         public void onDialogDismissed() {
-            isSelectPhoneaccDialogShown = false;
             InCallPresenter.getInstance().cancelAccountSelection();
         }
     };
@@ -690,7 +687,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
                         R.string.select_phone_account_for_calls, true, phoneAccountHandles,
                         mSelectAcctListener);
                 dialogFragment.show(getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
-                isSelectPhoneaccDialogShown = true;
             } else if (!newOutgoingCall) {
                 showCallCardFragment(true);
             }
@@ -1107,10 +1103,6 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         } else {
             mInCallOrientationEventListener.disable();
         }
-    }
-
-    public boolean isPhoneAccDialogFragmentShown() {
-        return isSelectPhoneaccDialogShown;
     }
 
     public static boolean isPhoneFeatureEnabled(Context context) {
