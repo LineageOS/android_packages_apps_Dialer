@@ -75,8 +75,10 @@ public class InCallCsRedialHandler implements CallList.Listener {
      */
     public void tearDown() {
         mContext = null;
-        mCallList.removeListener(this);
-        mCallList = null;
+        if (mCallList != null) {
+            mCallList.removeListener(this);
+            mCallList = null;
+        }
     }
 
     /**
