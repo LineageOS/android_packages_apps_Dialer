@@ -734,7 +734,6 @@ public class DialpadFragment extends Fragment
         if (!isPhoneInUse()) {
             // A sanity-check: the "dialpad chooser" UI should not be visible if the phone is idle.
             showDialpadChooser(false);
-            hideAndClearDialpad(true);
         }
 
         stopWatch.lap("hnt");
