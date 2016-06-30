@@ -16,6 +16,24 @@
       "revId": "6b95938486bfbad1178cc4c6fb7a4b4a57564155",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa7e38b_790a0b8b",
+        "filename": "src/com/android/dialer/discovery/DiscoveryEventHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 13408
+      },
+      "writtenOn": "2016-06-30T00:02:37Z",
+      "side": 1,
+      "message": "/facepalm",
+      "parentUuid": "3fa7e38b_d93f7fb3",
+      "revId": "6b95938486bfbad1178cc4c6fb7a4b4a57564155",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
