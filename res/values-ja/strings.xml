@@ -34,11 +34,22 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"発信前に番号を編集"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"通話履歴を消去"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"ボイスメールを削除"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"ボイスメールをアーカイブする"</string>
+    <string name="call_log_share_voicemail" msgid="7272635349055945546">"ボイスメールを共有"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"ボイスメールの削除"</string>
+    <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"ボイスメールをアーカイブしました"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"元に戻す"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"アーカイブ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"通話履歴を消去しますか？"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"消去すると、すべての通話が履歴から削除されます"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"通話履歴の消去中…"</string>
+    <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"電話"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"不在着信"</string>
+    <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"仕事の通話の不在着信"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"不在着信"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"不在着信 <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> 件"</string>
+    <string name="notification_missedCall_call_back" msgid="1991552423738343203">"折り返す"</string>
+    <string name="notification_missedCall_message" msgid="3042123733754151052">"メッセージ"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>件のボイスメール</item>
       <item quantity="one">1件のボイスメール</item>
@@ -48,6 +59,7 @@
     <string name="notification_new_voicemail_ticker" msgid="895342132049452081">"<xliff:g id="CALLER">%1$s</xliff:g>から新着ボイスメール"</string>
     <string name="voicemail_playback_error" msgid="3356071912353297599">"ボイスメールを再生できませんでした"</string>
     <string name="voicemail_fetching_content" msgid="1287895365599580842">"ボイスメールを読み込んでいます…"</string>
+    <string name="voicemail_archiving_content" msgid="722322091690281157">"ボイスメールをアーカイブしています…"</string>
     <string name="voicemail_fetching_timout" msgid="3959428065511972176">"ボイスメールを読み込めませんでした"</string>
     <string name="call_log_voicemail_header" msgid="3945407886667089173">"ボイスメールのある着信のみ"</string>
     <string name="call_log_incoming_header" msgid="2787722299753674684">"着信のみ"</string>
@@ -121,6 +133,8 @@
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g>、<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="voicemailDurationFormat" msgid="228211252076289564">"<xliff:g id="MINUTES">%1$02d</xliff:g> 分 <xliff:g id="SECONDS">%2$02d</xliff:g> 秒"</string>
+    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="5118563814451588397">"<xliff:g id="DATEANDTIME">%1$s</xliff:g>（<xliff:g id="DURATION">%2$s</xliff:g>）"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"この番号に電話できません"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"ボイスメールをセットアップするには、MENUキー&gt;[設定]をタップします。"</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"機内モードをOFFにしてからボイスメールを呼び出してください。"</string>
@@ -139,17 +153,22 @@
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"発信"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"不在着信はありません。"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"ボイスメール受信トレイは空です。"</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"ボイスメールのアーカイブが空です。"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"お気に入りのみを表示"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"通話履歴"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"ボイスメールのアーカイブ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"すべて"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"不在着信"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ボイスメール"</string>
+    <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"新しい、簡素化されたブロック"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"セキュリティを強化するため、スマートフォンはブロック動作を変更する必要があります。ブロックされた電話番号からの通話とテキスト メッセージの両方が停止されます。また、ブロックされた電話番号は他のアプリと共有できます。"</string>
+    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"許可"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g>をブロックしますか？"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。"</string>
     <string name="block_number_confirmation_message_no_vvm" msgid="4511900601491718173">"この番号からの着信はブロックされますが、発信者は今後もボイスメールを残すことができます。"</string>
+    <string name="block_number_confirmation_message_new_filtering" msgid="4524854769790960179">"今後はこの番号からの通話やテキスト メッセージは受信しなくなります。"</string>
     <string name="block_number_ok" msgid="770551992296781873">"ブロック"</string>
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g>のブロックを解除しますか？"</string>
-    <string name="unblock_number_confirmation_message" msgid="8521058345002166692">"この番号からの着信はブロックされなくなります。"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"ブロックを解除"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"クイックアクセス"</string>
     <string name="tab_history" msgid="2563144697322434940">"通話履歴"</string>
@@ -180,6 +199,10 @@
     <string name="description_read_voicemail" msgid="133974208364152610">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）からのボイスメール。"</string>
     <string name="description_outgoing_call" msgid="6386364390619734734">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）への発信。"</string>
     <string name="description_phone_account" msgid="1767072759541443861">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
+    <string name="description_via_number" msgid="3503311803959108316">"<xliff:g id="NUMBER">%1$s</xliff:g> で受信"</string>
+    <string name="call_log_via_number" msgid="8373282986443543296">"<xliff:g id="NUMBER">%1$s</xliff:g> で受信"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>（<xliff:g id="NUMBER">%2$s</xliff:g>）で受信"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>（<xliff:g id="NUMBER">%2$s</xliff:g>）で受信"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"発信"</string>
     <string name="description_call_action" msgid="4000549004089776147">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>に発信します"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>にビデオハングアウト発信します。"</string>
@@ -218,14 +241,15 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"クイック返信"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通話"</string>
-    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"通話をブロックしています"</string>
-    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"通話のブロックは一時的にOFFです"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、通話のブロックは無効になっています。48時間経過すると、通話のブロックは自動的に有効になります。"</string>
+    <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"着信のブロック"</string>
+    <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"着信のブロックは一時的にOFFです"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、着信のブロックは無効になっています。48時間経過すると、着信のブロックは自動的に有効になります。"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"番号をインポート"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"以前に一部の発信者について、他のアプリを通じて自動的にボイスメールに転送するようマークを付けています。"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"番号を表示"</string>
     <string name="blocked_call_settings_import_button" msgid="178821255125295473">"インポート"</string>
     <string name="send_to_voicemail_import_failed" msgid="5547202002133560069">"インポートに失敗しました"</string>
+    <string name="voicemail_archive_failed" msgid="6263467962738772223">"ボイスメールをアーカイブできませんでした。"</string>
     <string name="description_blocked_number_list_delete" msgid="3240093199107796792">"番号のブロックを解除"</string>
     <string name="addBlockedNumber" msgid="6064812257482886526">"電話番号を追加"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。"</string>
@@ -233,7 +257,7 @@
     <string name="block_list" msgid="7760188925338078011">"ブロックした番号"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g>は無効な番号です。"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g>は既にブロックしています。"</string>
-    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"通話のブロックは48時間経過するまで無効になりました"</string>
+    <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"着信のブロックは48時間経過するまで無効になりました"</string>
     <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"緊急通報を行ったため無効になりました。"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"通話アカウント"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ONにする"</string>
@@ -245,4 +269,6 @@
     <string name="permission_no_search" msgid="84152933267902056">"連絡先を検索するには、連絡先権限をONにしてください。"</string>
     <string name="permission_place_call" msgid="2101287782615887547">"電話をかけるには、電話権限をONにしてください。"</string>
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"電話アプリにはシステム設定への書き込み権限がありません。"</string>
+    <string name="blocked_number_call_log_label" msgid="8912042441473014712">"ブロック済み"</string>
+    <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> さんが通話中です"</string>
 </resources>
