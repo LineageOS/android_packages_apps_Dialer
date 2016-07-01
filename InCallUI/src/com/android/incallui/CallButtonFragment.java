@@ -298,7 +298,7 @@ public class CallButtonFragment
             return;
         }
 
-        View[] compoundButtons = {
+        CompoundButton[] compoundButtons = {
                 mAudioButton,
                 mMuteButton,
                 mShowDialpadButton,
@@ -307,10 +307,17 @@ public class CallButtonFragment
                 mPauseVideoButton
         };
 
-        for (View button : compoundButtons) {
+        for (CompoundButton button : compoundButtons) {
+            // Before applying background color, uncheck the button and re apply the
+            // saved checked state after background is changed. This is to fix
+            // an issue where button checked state is displayed wrongly after updating colors.
+            boolean isChecked = button.isChecked();
+            if (isChecked) Log.d(this, "updateColors: button:" + button + " is in checked state");
+            button.setChecked(false);
             final LayerDrawable layers = (LayerDrawable) button.getBackground();
             final RippleDrawable btnCompoundDrawable = compoundBackgroundDrawable(themeColors);
             layers.setDrawableByLayerId(R.id.compoundBackgroundItem, btnCompoundDrawable);
+            button.setChecked(isChecked);
             button.requestLayout();
         }
 
