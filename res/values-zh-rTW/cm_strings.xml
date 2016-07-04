@@ -92,13 +92,49 @@
   <string name="call_stats_title_average_duration">平均通話時間</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">在所選擇的時間範圍內沒有任何通話記錄。</string>
+  <string name="call_recording_category_title">通話錄音</string>
+  <string name="call_recording_format">音訊格式</string>
+  <string name="call_playback_no_app_found_toast">沒有應用程式可以撥放所選擇的錄音。</string>
+  <string name="invalid_number_text">"%1$s 無法撥號。請確認號碼是否正確。"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">您可輸入電話號碼或\n搜尋您的聯絡人。</string>
+  <string name="sign_in_hint_text">登入以撥打 %1$s 電話</string>
+  <string name="wifi_hint_text">透過 Wi-Fi 免費撥打 %1$s 至 %1$s 的電話</string>
+  <string name="roaming_hint_text">%1$s 正在漫遊中。透過 Wi-Fi 免費撥打 %2$s 至 %2$s 的電話。</string>
+  <string name="emergency_call_hint_text">找不到 SIM 卡。僅能撥打緊急電話。</string>
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">使用 <xliff:g id="name">%1$s</xliff:g> 撥打</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">是</string>
   <string name="callerinfo_provider_auth_no_short">否</string>
+  <string name="callerinfo_provider_auth_no">不用了，謝謝</string>
+  <string name="callerinfo_provider_auth_learn_more">了解更多</string>
+  <string name="callerinfo_provider_auth_desc">歡迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 來識別未知的來電和阻止來電嗎？</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">歡迎！您想開啟 <xliff:g id="provider_name">%s</xliff:g> 來辨識未知來電嗎？</string>
+  <string name="callerinfo_provider_summary">標記未知的來電和垃圾廣告</string>
+  <string name="callerinfo_provider_summary_no_spam">標記未知來電</string>
+  <string name="silence_spam_title">將垃圾電話靜音</string>
+  <string name="silence_spam_summary">當收到不受歡迎的來電時不響鈴</string>
+  <string name="block_hidden_title">攔截未知的電話號碼</string>
+  <string name="block_hidden_summary">將隱藏號碼視為垃圾電話</string>
+  <string name="block_dialog_title">封鎖此來電者？</string>
+  <string name="block_dialog_positive">封鎖</string>
+  <string name="block_dialog_negative">取消</string>
+  <string name="block_dialog_description">您將永遠不會再接到此人的來電或訊息</string>
+  <string name="block_dialog_report_spam">回報垃圾訊息到 <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">禁用 %1$s ？</string>
+  <string name="provider_disable_message">禁用 %1$s 後，您將無法顯示來電資訊。</string>
+  <string name="provider_disable_spam_message">禁用 %1$s 後，您將不再獲得垃圾訊息保護或來電資訊。</string>
+  <string name="powered_by_provider">由 <xliff:g id="provider">%s</xliff:g> 提供技術支援</string>
+  <string name="provider_help">"在此切換模式\n來撥打 %1$s 電話"</string>
+  <string name="provider_search_help">"在此切換模式\n來搜尋 %1$s 聯絡人"</string>
+  <string name="provider_button_help">"明白了"</string>
+  <string name="provider_voice_call">"%1$s 語音訊息"</string>
+  <string name="provider_video_call">"%1$s 影音訊息"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">撥出電話前，請授予撥號權限。</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="callerinfo_provider_status_disabling">正在禁用</string>
 </resources>

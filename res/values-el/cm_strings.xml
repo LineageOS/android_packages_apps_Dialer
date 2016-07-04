@@ -49,7 +49,7 @@
   <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
   <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
   <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης.</string>
-  <string name="yes">Ναί</string>
+  <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
   <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
   <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
@@ -108,7 +108,7 @@
   <!-- Search shortcut for "Call using PluginName" -->
   <string name="search_shortcut_call_using">Κλήση μέσω <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">Ναί</string>
+  <string name="callerinfo_provider_auth_yes">Ναι</string>
   <string name="callerinfo_provider_auth_no_short">Όχι</string>
   <string name="callerinfo_provider_auth_no">Όχι, ευχαριστώ</string>
   <string name="callerinfo_provider_auth_access">Το <xliff:g id="provider_name">%s</xliff:g> θα έχει πρόσβαση στις επαφές, το Me προφίλ, και τον Cyanogen OS λογαριασμό σας, ο οποίος μπορεί να περιλαμβάνει τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.</string>
