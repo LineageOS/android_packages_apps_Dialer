@@ -143,10 +143,10 @@
     <string name="meid" msgid="6210568493746275750">"MEIDနံပါတ်"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"ဆင်းမ်ကဒ်မှ ဖွင့်နေပါသည်..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"ဆင်းမ်ကဒ်မှ အဆက်အသွယ်များ"</string>
-    <string name="add_contact_not_available" msgid="5547311613368004859">"အဆက်အသွယ်များ app မရှိ"</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"အဆက်အသွယ်များ အက်ပ်မရှိ"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"အသံဖြင့် ရှာဖွေမှု မရှိ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ဖုန်း အပလီကေးရှင်းကို ပိတ်ထား၍ ဖုန်း ခေါ်ဆိုမှု မပြုလုပ်နိုင်ခဲ့ပါ။"</string>
-    <string name="activity_not_available" msgid="2287665636817987623">"ဒီကိရိယာထဲမှာ အဲဒါ့အတွက် app မရှိပါ"</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"ဒီကိရိယာထဲမှာ အဲဒါ့အတွက် အက်ပ်မရှိပါ"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"အဆက်အသွယ်များရှာပါ"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"နံပါတ်ပေါင်းထည့်ပါ သို့မဟုတ် အဆက်အသွယ်များ ရှာဖွေပါ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"သင့်ခေါ်ဆိုမှတ်တမ်းတွင် ဘာမှမရှိပါ"</string>
