@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_3c7317ea",
+        "filename": "res/xml/display_options_settings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 10094
+      },
+      "writtenOn": "2016-07-06T16:28:31Z",
+      "side": 1,
+      "message": "this should be hardcoded because it shouldn\u0027t be localized.",
+      "range": {
+        "startLine": 39,
+        "startChar": 21,
+        "endLine": 39,
+        "endChar": 54
+      },
+      "revId": "02e9c2c46d6f81e2067702c4f219d3f51b4f8fc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
