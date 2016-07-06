@@ -27,9 +27,9 @@
   <string name="lookup_settings_label">Telefonnummer oppslag</string>
   <string name="lookup_settings_description">Oppslag av ukjente telefonnumre</string>
   <string name="enable_forward_lookup_title">videresend oppslag</string>
-  <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i oppringingsverktøyet</string>
+  <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefon appen</string>
   <string name="enable_people_lookup_title">Slå opp folk</string>
-  <string name="enable_people_lookup_summary">Vise online resultater for folk når du søker i oppringingsverktøyet</string>
+  <string name="enable_people_lookup_summary">Vise online resultater for folk når du søker i telefon appen</string>
   <string name="enable_reverse_lookup_title">Omvendt oppslag</string>
   <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller sted med ukjent nummer på innkommende samtaler</string>
   <string name="forward_lookup_provider_title">Plassøketjeneste</string>
