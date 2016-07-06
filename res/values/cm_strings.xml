@@ -179,4 +179,6 @@
 
     <string name="callerinfo_provider_status_disabling">Disabling</string>
 
+    <string name="show_dialpad_at_start_title">Show dialpad at start</string>
+
 </resources>
