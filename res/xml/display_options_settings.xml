@@ -35,4 +35,9 @@
         android:defaultValue=""
         android:persistent="false" />
 
+    <CheckBoxPreference
+        android:key="show_dialpad_at_start"
+        android:title="@string/show_dialpad_at_start_title"
+        android:defaultValue="false" />
+
 </PreferenceScreen>

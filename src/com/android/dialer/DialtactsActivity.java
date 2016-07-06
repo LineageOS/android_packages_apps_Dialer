@@ -153,6 +153,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
     public static final String SHARED_PREFS_NAME = "com.android.dialer_preferences";
     private static final String PREF_LAST_T9_LOCALE = "smart_dial_prefix_last_t9_locale";
+    private static final String PREF_SHOW_DIALPAD_AT_START = "show_dialpad_at_start";
 
     /** @see #getCallOrigin() */
     private static final String CALL_ORIGIN_DIALTACTS =
@@ -692,7 +693,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         mStateSaved = false;
         if (mFirstLaunch) {
-            displayFragment(getIntent());
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean showDialpadAtStart = prefs.getBoolean(PREF_SHOW_DIALPAD_AT_START, false);
+            if (showDialpadAtStart) {
+                showDialpadFragment(false);
+            } else {
+                displayFragment(getIntent());
+            }
         } else if (!phoneIsInUse() && mInCallDialpadUp) {
             hideDialpadFragment(false, true);
             mInCallDialpadUp = false;
