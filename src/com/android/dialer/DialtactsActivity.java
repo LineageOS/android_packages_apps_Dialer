@@ -273,7 +273,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                     mListsFragment.getSpeedDialFragment() != null &&
                     mListsFragment.getSpeedDialFragment().hasFrequents() && hasContactsPermission);
 
-            menu.findItem(R.id.menu_import_export).setVisible(hasContactsPermission);
+            // Hide import/export function in Dialer, Contact supports it already
+            menu.findItem(R.id.menu_import_export).setVisible(false);
             menu.findItem(R.id.menu_add_contact).setVisible(false);
 
             menu.findItem(R.id.menu_history).setVisible(
