@@ -24,7 +24,7 @@ public class InCallMetricsHelper {
     private static final String TAG = InCallMetricsHelper.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    public static final String CATEGORY_BASE = "dialer.incall.";
+    public static final String CATEGORY_BASE = "dialer.incallv2.";
     public static final String METRICS_SHARED_PREFERENCES = "metrics_shared_preferences";
     public static final String DELIMIT = ":";
 
