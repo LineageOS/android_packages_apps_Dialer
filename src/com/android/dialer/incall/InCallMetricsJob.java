@@ -291,9 +291,9 @@ public class InCallMetricsJob extends JobService {
                 event = InCallMetricsHelper.Events.CALL_SIM_PSTN;
             } else {
                 if (isPSTN) {
-                    event = InCallMetricsHelper.Events.CALL_PROVIDER_VOICE;
-                } else {
                     event = InCallMetricsHelper.Events.CALL_PROVIDER_PSTN;
+                } else {
+                    event = InCallMetricsHelper.Events.CALL_PROVIDER_VOICE;
                 }
             }
 
