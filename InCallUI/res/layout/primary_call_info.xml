@@ -121,7 +121,8 @@
             android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="@dimen/call_name_text_size"
-            android:singleLine="false"
+            android:singleLine="true"
+            android:ellipsize="end"
             ex:resizing_text_min_size="@dimen/call_name_text_min_size" />
 
         <!-- Contact photo for primary call info -->
