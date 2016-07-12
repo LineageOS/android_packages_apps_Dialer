@@ -189,6 +189,11 @@ public class CallStatsDetailActivity extends Activity implements
     }
 
     @Override
+    public void onBlockCancelled() {
+        // stub
+    }
+
+    @Override
     public void onBlockSelected(boolean notifyLookupProvider) {
         mBlockContactHelper.blockContactAsync(notifyLookupProvider);
     }

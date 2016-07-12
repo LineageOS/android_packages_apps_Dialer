@@ -594,6 +594,11 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     }
 
     @Override
+    public void onBlockCancelled() {
+        // stub
+    }
+
+    @Override
     public void onBlockSelected(boolean notifyLookupProvider) {
         mBlockContactPresenter.onBlockSelected(notifyLookupProvider);
     }
