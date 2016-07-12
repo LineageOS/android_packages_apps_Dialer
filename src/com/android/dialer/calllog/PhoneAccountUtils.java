@@ -119,7 +119,7 @@ public class PhoneAccountUtils {
      * single registered and enabled account, return null.
      */
     @Nullable
-    private static PhoneAccount getAccountOrNull(Context context,
+    public static PhoneAccount getAccountOrNull(Context context,
             @Nullable PhoneAccountHandle accountHandle) {
         if (TelecomUtil.getCallCapablePhoneAccounts(context).size() < 1) {
             return null;

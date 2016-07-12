@@ -17,6 +17,7 @@
 package com.android.dialer.calllog.calllogcache;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.telecom.PhoneAccountHandle;
 
 import com.android.contacts.common.CallUtil;
@@ -93,4 +94,9 @@ public abstract class CallLogCache {
      * @return {@code true} if calling with a note is supported, {@code false} otherwise.
      */
     public abstract boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle);
+
+    /**
+     * Returns the account icon if present, else null.
+     */
+    public abstract Drawable getAccountIcon(PhoneAccountHandle phoneAccount);
 }

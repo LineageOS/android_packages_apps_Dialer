@@ -17,6 +17,7 @@
 package com.android.dialer.calllog.calllogcache;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 
@@ -61,5 +62,10 @@ public class TestTelecomCallLogCache extends CallLogCache {
     @Override
     public boolean doesAccountSupportCallSubject(PhoneAccountHandle accountHandle) {
         return false;
+    }
+
+    @Override
+    public Drawable getAccountIcon(PhoneAccountHandle accountHandle) {
+        return null;
     }
 }

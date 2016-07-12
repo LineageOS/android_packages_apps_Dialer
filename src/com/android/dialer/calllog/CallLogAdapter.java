@@ -513,7 +513,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final PhoneAccountHandle accountHandle = PhoneAccountUtils.getAccount(
                 c.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME),
                 c.getString(CallLogQuery.ACCOUNT_ID));
-        final Drawable accountIcon = PhoneAccountUtils.getAccountIcon(mContext, accountHandle);
+        final Drawable accountIcon = mCallLogCache.getAccountIcon(accountHandle);
         final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(c);
         final boolean isVoicemailNumber =
                 mCallLogCache.isVoicemailNumber(accountHandle, number);
