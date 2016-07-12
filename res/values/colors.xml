@@ -142,4 +142,5 @@
     <color name="searchview_edittext">#59ffffff</color>
     <color name="no_call_log">#42000000</color>
     <color name="list_all_call">#d3000000</color>
+    <bool name="config_regional_presence_enable">false</bool>
 </resources>

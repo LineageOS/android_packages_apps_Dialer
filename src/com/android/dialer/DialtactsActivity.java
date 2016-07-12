@@ -87,6 +87,7 @@ import com.android.dialer.util.Assert;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
+import com.android.dialer.util.PresenceHelper;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialer.util.WifiCallUtils;
 import com.android.dialer.voicemail.VoicemailArchiveActivity;
@@ -516,6 +517,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
 
+        boolean isPresenceEnabled = this.getResources().getBoolean(
+                R.bool.config_regional_presence_enable);
+        if (isPresenceEnabled && !PresenceHelper.isBound()) {
+            PresenceHelper.bindService((Context) DialtactsActivity.this);
+        }
+
         mWifiCallUtils = new WifiCallUtils();
         if (resources.getBoolean(R.bool.config_regional_pup_no_available_network)
                 && mFirstLaunch) {
@@ -626,6 +633,14 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             commitDialpadFragmentHide();
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        if (PresenceHelper.isBound()) {
+            PresenceHelper.unbindService((Context) DialtactsActivity.this);
+        }
+        super.onStop();
     }
 
     @Override
