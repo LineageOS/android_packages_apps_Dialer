@@ -407,6 +407,11 @@ public class CallDetailActivity extends Activity
     }
 
     @Override
+    public void onBlockCancelled() {
+        // Do nothing
+    }
+
+    @Override
     public void onBlockSelected(boolean notifyLookupProvider) {
         mBlockContactHelper.blockContactAsync(notifyLookupProvider);
     }
