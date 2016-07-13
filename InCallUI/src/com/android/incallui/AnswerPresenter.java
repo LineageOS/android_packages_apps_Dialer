@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.telecom.VideoProfile;
 import android.telephony.SubscriptionManager;
 
 import com.android.dialer.compat.UserManagerCompat;
@@ -52,6 +53,9 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
     private Call mCall[] = new Call[InCallServiceImpl.sPhoneCount];
     private final CallList mCalls = CallList.getInstance();
     private boolean mHasTextMessages = false;
+    // Currently mVideoState is beeing used only for incoming calls.
+    // As there is only one incoming call allowed there is no need of array here.
+    private int mVideoState = VideoProfile.STATE_AUDIO_ONLY;
 
     /* QtiImsExtListenerBaseImpl instance to handle call deflection response */
     private QtiImsExtListenerBaseImpl imsInterfaceListener =
@@ -218,6 +222,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
 
         Log.d(TAG, "Showing incoming for call id: " + mCallId[phoneId] + " " + this);
         if (showAnswerUi(true)) {
+            mVideoState = call.getVideoState();
             final List<String> textMsgs = mCalls.getTextResponses(call.getId());
             configureAnswerTargetsForSms(call, textMsgs);
         }
@@ -290,11 +295,10 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
             }
 
             mHasTextMessages = false;
-        } else if (!mHasTextMessages) {
+        } else if (!mHasTextMessages || (mVideoState != call.getVideoState())) {
             final List<String> textMsgs = mCalls.getTextResponses(call.getId());
-            if (textMsgs != null) {
-                configureAnswerTargetsForSms(call, textMsgs);
-            }
+            mVideoState = call.getVideoState();
+            configureAnswerTargetsForSms(call, textMsgs);
         }
     }
 
