@@ -129,7 +129,7 @@
   <string name="provider_disable_title">Отключить %1$s?</string>
   <string name="provider_disable_message">Отключив %1$s, вы не сможете узнать номер вызывающего абонента.</string>
   <string name="provider_disable_spam_message">Отключив %1$s, вы останетесь без защиты от спама и не сможете узнать номер вызывающего абонента.</string>
-  <string name="powered_by_provider">На основе <xliff:g id="provider">%s</xliff:g></string>
+  <string name="powered_by_provider">Технологии <xliff:g id="provider">%s</xliff:g></string>
   <string name="provider_help">"Вы можете совершать вызовы %1$s,\nпереключая режимы здесь"</string>
   <string name="provider_search_help">"Вы можете искать контакты %1$s,\nпереключая режимы здесь"</string>
   <string name="provider_button_help">"Понятно"</string>
@@ -142,4 +142,5 @@
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Делайте заметки из любого места</string>
   <string name="callerinfo_provider_status_disabling">Отключение</string>
+  <string name="show_dialpad_at_start_title">Показывать номеронабиратель при запуске</string>
 </resources>
