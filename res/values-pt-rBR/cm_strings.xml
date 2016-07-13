@@ -142,4 +142,5 @@
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Fazer anotações em qualquer lugar</string>
   <string name="callerinfo_provider_status_disabling">Desativando</string>
+  <string name="show_dialpad_at_start_title">Mostrar teclado no início</string>
 </resources>

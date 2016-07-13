@@ -142,4 +142,5 @@
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">从任何地方做笔记</string>
   <string name="callerinfo_provider_status_disabling">正在禁用</string>
+  <string name="show_dialpad_at_start_title">启动时显示拨号盘</string>
 </resources>
