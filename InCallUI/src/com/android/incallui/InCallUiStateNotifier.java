@@ -200,10 +200,6 @@ public class InCallUiStateNotifier implements DisplayManager.DisplayListener {
      */
     @Override
     public void onDisplayChanged(int displayId) {
-        final int displayState = mDisplayManager.getDisplay(displayId).getState();
-        Log.d(this, "onDisplayChanged displayState: " + displayState +
-                " displayId: " + displayId);
-
         /* Ignore display changed indications if they are received for displays
          * other than default display
          */
@@ -211,6 +207,10 @@ public class InCallUiStateNotifier implements DisplayManager.DisplayListener {
             Log.w(this, "onDisplayChanged Ignoring...");
             return;
         }
+
+        final int displayState = mDisplayManager.getDisplay(displayId).getState();
+        Log.d(this, "onDisplayChanged displayState: " + displayState +
+                " displayId: " + displayId);
 
         //Check UI's old state before updating corresponding state variable(s)
         final boolean wasShowing = isUiShowing();
