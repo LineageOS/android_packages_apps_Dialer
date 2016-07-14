@@ -126,7 +126,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"Զանգել <xliff:g id="NUMBER">%s</xliff:g>-ին"</string>
     <string name="unknown" msgid="740067747858270469">"Անհայտ"</string>
     <string name="voicemail" msgid="3851469869202611441">"Ձայնային փոստ"</string>
-    <string name="private_num" msgid="6374339738119166953">"Անձնական համարը"</string>
+    <string name="private_num" msgid="6374339738119166953">"Փակ համար"</string>
     <string name="payphone" msgid="7726415831153618726">"Հանրային հեռախոս"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> վրկ"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> րոպե <xliff:g id="SECONDS">%s</xliff:g> վայրկյան"</string>
@@ -147,7 +147,7 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Ձայնային որոնումը հասանելի չէ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Հնարավոր չէ զանգահարել, քանի որ Հեռախոս հավելվածն անջատված է:"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Սարքի վրա համապատասխան հավելված չկա"</string>
-    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Որոնել կոնտակտներ"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Կոնտակտների որոնում"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"Ավելացրեք համար/որոնեք կոնտակտներ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Զանգերի մատյանը դատարկ է"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Զանգել"</string>
