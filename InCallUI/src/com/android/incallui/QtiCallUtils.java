@@ -231,13 +231,22 @@ public class QtiCallUtils {
     /**
      * Returns user options for accepting an incoming video call based on Qti extension flag
      */
-    public static int getIncomingCallAnswerOptions(Context context, boolean withSms) {
+    public static int getIncomingCallAnswerOptions(Context context, int videoState,
+            boolean withSms) {
         if (!useExt(context)) {
             return withSms ? AnswerFragment.TARGET_SET_FOR_VIDEO_WITH_SMS :
                     AnswerFragment.TARGET_SET_FOR_VIDEO_WITHOUT_SMS;
-        } else {
+        } else if (VideoProfile.isBidirectional(videoState)) {
             return withSms ? AnswerFragment.TARGET_SET_FOR_QTI_VIDEO_WITH_SMS :
                     AnswerFragment.TARGET_SET_FOR_QTI_VIDEO_WITHOUT_SMS;
+        } else if (VideoProfile.isTransmissionEnabled(videoState)) {
+            return withSms ?
+                    AnswerFragment.TARGET_SET_FOR_QTI_VIDEO_TRANSMIT_ACCEPT_REJECT_WITH_SMS :
+                    AnswerFragment.TARGET_SET_FOR_QTI_VIDEO_TRANSMIT_ACCEPT_REJECT_WITHOUT_SMS;
+        } else {
+            return withSms ?
+                    AnswerFragment.TARGET_SET_FOR_QTI_VIDEO_RECEIVE_ACCEPT_REJECT_WITH_SMS :
+                    AnswerFragment.TARGET_SET_FOR_QTI_VIDEO_RECEIVE_ACCEPT_REJECT_WITHOUT_SMS;
         }
     }
 
@@ -438,6 +447,16 @@ public class QtiCallUtils {
                 return ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR;
             default:
                 return ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+        }
+    }
+
+    public static int toVideoIcon(int videoState) {
+        if (VideoProfile.isBidirectional(videoState)) {
+            return R.drawable.ic_videocam;
+        } else if (VideoProfile.isTransmissionEnabled(videoState)) {
+            return R.drawable.ic_tx_videocam;
+        } else {
+            return R.drawable.ic_rx_videocam;
         }
     }
 }

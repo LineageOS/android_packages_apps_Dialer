@@ -55,8 +55,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
         // TODO: Commands of this nature should exist in the CallList.
         if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
-            InCallPresenter.getInstance().answerIncomingCall(
-                    context, VideoProfile.STATE_BIDIRECTIONAL);
+            InCallPresenter.getInstance().answerIncomingCall(context);
         } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
             InCallPresenter.getInstance().answerIncomingCall(
                     context, VideoProfile.STATE_AUDIO_ONLY);

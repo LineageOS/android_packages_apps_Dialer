@@ -919,6 +919,21 @@ public class InCallPresenter implements CallList.Listener,
     /**
      * Answers any incoming call.
      */
+    public void answerIncomingCall(Context context) {
+        // By the time we receive this intent, we could be shut down and call list
+        // could be null.  Bail in those cases.
+        if (mCallList == null) {
+            StatusBarNotifier.clearAllCallNotifications(context);
+            return;
+        }
+
+        Call call = mCallList.getIncomingCall();
+        answerIncomingCall(context, call.getVideoState());
+    }
+
+    /**
+     * Answers any incoming call.
+     */
     public void answerIncomingCall(Context context, int videoState) {
         // By the time we receive this intent, we could be shut down and call list
         // could be null.  Bail in those cases.
