@@ -60,6 +60,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistiken</string>
   <string name="callStatsDetailTitle">Detailer vun den Uruffstatistiken</string>
+  <string name="call_stats_incoming">Erakommend: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Erausgoend: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Verpasst: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blockéiert: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Startdatum</string>
@@ -77,13 +82,39 @@
   <string name="call_stats_reset_filter">Zäitfënster zrécksetzen</string>
   <string name="call_stats_sort_by_duration">No Gespréichsdauer zortéieren</string>
   <string name="call_stats_sort_by_count">No Unzuel vun Uriff zortéieren</string>
+  <string name="call_stats_title_for_number">Dës Nummer</string>
+  <string name="call_stats_title_durations">Gespréichsdauer</string>
+  <string name="call_stats_title_count">Unzuel Gespréicher</string>
+  <string name="call_stats_title_average_duration">Duerchschnëttlech Gespréichsdauer</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="call_recording_format">Tounformat</string>
   <!-- T9 Search Text -->
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Jo</string>
   <string name="callerinfo_provider_auth_no_short">Nee</string>
+  <string name="callerinfo_provider_auth_no">Nee Merci</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> wäert Zougrëff op d\'Kontakter, den Ech-Profil an däin Cyanogen OS-Kont hunn, deng E-Mail-Adress kéint och dozou zielen.</string>
+  <string name="callerinfo_provider_auth_learn_more">Méi gewuer ginn</string>
+  <string name="callerinfo_provider_auth_desc">Wëllkomm! wëlls du <xliff:g id="provider_name">%s</xliff:g>, fir onbekannt Uruffer z\'identifizéieren an onerwënscht Uriff ze blockéieren?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Wëllkomm! wëlls du <xliff:g id="provider_name">%s</xliff:g>, fir onbekannt Uruffer z\'identifizéieren?</string>
+  <string name="callerinfo_provider_summary">Identifizéiert onbekannt Uruffer a Spam</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifizéiert onbekannt Uruffer</string>
+  <string name="silence_spam_title">Spam-Uriff roueg schalten</string>
+  <string name="silence_spam_summary">Spam-Uriff blockéieren</string>
+  <string name="block_hidden_title">Verstoppt Nummere blockéieren</string>
+  <string name="block_hidden_summary">Verstoppt Nummeren als Spam behandelen</string>
+  <string name="block_dialog_title">Dësen Uruffer blockéieren?</string>
+  <string name="block_dialog_positive">Blockéieren</string>
+  <string name="block_dialog_negative">Ofbriechen</string>
+  <string name="block_dialog_description">Du wäerts keng Uriff oder Noriichte méi vun dëser Persoun kréien.</string>
+  <string name="block_dialog_report_spam">U(n) <xliff:g id="provider">%s</xliff:g> als Spam mellen</string>
+  <string name="provider_disable_title">%1$s desaktivéieren?</string>
+  <string name="provider_disable_message">Wann s du %1$s desaktivéiers, wäerts du d\'Identifizéierung vum Uruffer net hunn.</string>
+  <string name="provider_disable_spam_message">Wann s du %1$s desaktivéiers, wäerts du kee Spam-Schutz oder d\'Identifizéierung vum Uruffer hunn.</string>
+  <string name="powered_by_provider">Bereetgestallt vu(n) <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_button_help">"Verstanen"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <!-- Note DeepLink mod settings summary in Dialer -->
