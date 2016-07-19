@@ -113,7 +113,7 @@
     <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"Raqam terish panelini yopish"</string>
     <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Ovozni o‘chirish"</string>
     <string name="onscreenMuteText_selected" msgid="7074763815284369548">"Ovozni yoqish"</string>
-    <string name="onscreenAddCallText" msgid="5577548650466595598">"Qo‘ng‘iroq qo‘shish"</string>
+    <string name="onscreenAddCallText" msgid="5577548650466595598">"Chaqiruv qo‘shish"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Qo‘ng‘iroqlarni birlashtirish"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Almashtirish"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Qo‘ng‘iroqlarni boshqarish"</string>
