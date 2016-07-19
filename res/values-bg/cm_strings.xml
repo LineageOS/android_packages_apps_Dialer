@@ -142,4 +142,5 @@
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Водете си бележки от всяка точка</string>
   <string name="callerinfo_provider_status_disabling">Деактивиране</string>
+  <string name="show_dialpad_at_start_title">Покажи клавиатурата при стартиране</string>
 </resources>
