@@ -501,7 +501,7 @@ public class CallLogAdapter extends GroupingListAdapter
         final String phoneNumber = c.getString(CallLogQuery.NUMBER);
         Pattern pattern = Pattern.compile("[,;]");
         String[] num = pattern.split(phoneNumber);
-        final String number = num[0];
+        final String number = num.length > 0 ? num[0] : "";
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final String postDialDigits = CompatUtils.isNCompatible()
                 && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
