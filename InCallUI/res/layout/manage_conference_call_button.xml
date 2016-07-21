@@ -40,32 +40,22 @@
         android:background="?android:attr/selectableItemBackground">
 
         <!-- Call status of the background call, usually the string "On hold". -->
-        <TextView android:id="@+id/conferenceLabel"
-                  android:layout_width="0dp"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:layout_gravity="center_vertical"
-                  android:paddingEnd="18dp"
-                  android:text="@string/onscreenConferenceText"
-                  android:textColor="@color/incall_banner_secondary_text_color"
-                  android:textSize="@dimen/secondary_call_info_text_size"
-                  android:singleLine="true" />
+        <ImageView android:id="@+id/manageConferenceButtonImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_white_24dp"
+            android:tint="@color/incall_banner_secondary_text_color"
+            android:paddingEnd="16dp"
+            android:importantForAccessibility="no" />
 
-        <ImageView android:id="@+id/manageConferenceImage"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:src="@drawable/ic_group_white_24dp"
-                   android:tint="@color/incall_banner_secondary_text_color"
-                   android:paddingEnd="16dp"/>
-
-        <TextView android:id="@+id/manageConferenceLabel"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textColor="@color/incall_banner_secondary_text_color"
-                  android:textSize="@dimen/secondary_call_info_text_size"
-                  android:textAlignment="viewStart"
-                  android:text="@string/onscreenManageText"
-                  android:singleLine="true"/>
+        <TextView android:id="@+id/manageConferenceButtonLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/incall_banner_secondary_text_color"
+            android:textSize="@dimen/secondary_call_info_text_size"
+            android:text="@string/onscreenManageConferenceText"
+            android:importantForAccessibility="no" />
 
     </LinearLayout>
 
