@@ -130,7 +130,13 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                 new Listener() {
                     @Override
                     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                        listener.onHasBlockedNumbers(cursor != null && cursor.getCount() > 0);
+                        try {
+                            listener.onHasBlockedNumbers(cursor != null && cursor.getCount() > 0);
+                        } finally {
+                            if (cursor != null) {
+                                cursor.close();
+                            }
+                        }
                     }
                 },
                 FilteredNumberCompat.getContentUri(null),
@@ -164,20 +170,26 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
                          * example, both '16502530000' and '6502530000' can exist at the same time
                          * and will be returned by this query.
                          */
-                        if (cursor == null || cursor.getCount() == 0) {
-                            listener.onCheckComplete(null);
-                            return;
+                        try {
+                            if (cursor == null || cursor.getCount() == 0) {
+                                listener.onCheckComplete(null);
+                                return;
+                            }
+                            cursor.moveToFirst();
+                            // New filtering doesn't have a concept of type
+                            if (!FilteredNumberCompat.useNewFiltering()
+                                    && cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns.TYPE))
+                                    != FilteredNumberTypes.BLOCKED_NUMBER) {
+                                listener.onCheckComplete(null);
+                                return;
+                            }
+                            listener.onCheckComplete(
+                                    cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID)));
+                        } finally {
+                            if (cursor != null) {
+                                cursor.close();
+                            }
                         }
-                        cursor.moveToFirst();
-                        // New filtering doesn't have a concept of type
-                        if (!FilteredNumberCompat.useNewFiltering()
-                                && cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns.TYPE))
-                                != FilteredNumberTypes.BLOCKED_NUMBER) {
-                            listener.onCheckComplete(null);
-                            return;
-                        }
-                        listener.onCheckComplete(
-                                cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID)));
                     }
                 },
                 FilteredNumberCompat.getContentUri(null),
@@ -248,25 +260,31 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         startQuery(NO_TOKEN, new Listener() {
             @Override
             public void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                int rowsReturned = cursor == null ? 0 : cursor.getCount();
-                if (rowsReturned != 1) {
-                    throw new SQLiteDatabaseCorruptException
-                            ("Returned " + rowsReturned + " rows for uri "
-                                    + uri + "where 1 expected.");
-                }
-                cursor.moveToFirst();
-                final ContentValues values = new ContentValues();
-                DatabaseUtils.cursorRowToContentValues(cursor, values);
-                values.remove(FilteredNumberCompat.getIdColumnName());
-
-                startDelete(NO_TOKEN, new Listener() {
-                    @Override
-                    public void onDeleteComplete(int token, Object cookie, int result) {
-                        if (listener != null) {
-                            listener.onUnblockComplete(result, values);
-                        }
+                try {
+                    int rowsReturned = cursor == null ? 0 : cursor.getCount();
+                    if (rowsReturned != 1) {
+                        throw new SQLiteDatabaseCorruptException
+                                ("Returned " + rowsReturned + " rows for uri "
+                                        + uri + "where 1 expected.");
                     }
-                }, uri, null, null);
+                    cursor.moveToFirst();
+                    final ContentValues values = new ContentValues();
+                    DatabaseUtils.cursorRowToContentValues(cursor, values);
+                    values.remove(FilteredNumberCompat.getIdColumnName());
+
+                    startDelete(NO_TOKEN, new Listener() {
+                        @Override
+                        public void onDeleteComplete(int token, Object cookie, int result) {
+                            if (listener != null) {
+                                listener.onUnblockComplete(result, values);
+                            }
+                        }
+                    }, uri, null, null);
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+                }
             }
         }, uri, null, null, null, null);
     }
