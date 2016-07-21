@@ -46,6 +46,14 @@ public class InCallVideoCallCallbackNotifier {
     private final Set<SurfaceChangeListener> mSurfaceChangeListeners = Collections.newSetFromMap(
             new ConcurrentHashMap<SurfaceChangeListener, Boolean>(8, 0.9f, 1));
 
+    /* Invalid call session event */
+    public static final int CALL_SESSION_INVALID_EVENT = -1;
+
+    /** Cache the call session event for cases where the call is in background and listeners
+     * are unregistered.
+     */
+    private int mCallSessionEvent = CALL_SESSION_INVALID_EVENT;
+
     /**
      * Static singleton accessor method.
      */
@@ -88,6 +96,22 @@ public class InCallVideoCallCallbackNotifier {
     public void addVideoEventListener(VideoEventListener listener) {
         Preconditions.checkNotNull(listener);
         mVideoEventListeners.add(listener);
+    }
+
+    /**
+     * Adds a new {@link VideoEventListener} and notifies the entity that registered
+     * if flag notify is true.
+     *
+     * @param listener The listener.
+     * @param notify true or false
+     */
+    public void addVideoEventListener(VideoEventListener listener, boolean notify) {
+        addVideoEventListener(listener);
+
+        // Notify registered listeners of cached call session event if it's a valid value
+        if (notify && mCallSessionEvent != CALL_SESSION_INVALID_EVENT) {
+            callSessionEvent(mCallSessionEvent);
+        }
     }
 
     /**
@@ -151,8 +175,9 @@ public class InCallVideoCallCallbackNotifier {
      * @param event The call session event.
      */
     public void callSessionEvent(int event) {
+        mCallSessionEvent = event;
         for (VideoEventListener listener : mVideoEventListeners) {
-            listener.onCallSessionEvent(event);
+            listener.onCallSessionEvent(mCallSessionEvent);
         }
     }
 

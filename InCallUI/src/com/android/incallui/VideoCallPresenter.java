@@ -205,6 +205,14 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private int mActivityOrientationMode = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
     /**
+     * Determines if the incoming video is available. If the call session resume event has been
+     * received (i.e PLAYER_START has been received from lower layers), incoming video is
+     * available. If the call session pause event has been received (i.e PLAYER_STOP has been
+     * received from lower layers), incoming video is not available.
+     */
+    private static boolean mIsIncomingVideoAvailable = false;
+
+    /**
      * Initializes the presenter.
      *
      * @param context The current context.
@@ -247,7 +255,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         // Register for surface and video events from {@link InCallVideoCallListener}s.
         InCallVideoCallCallbackNotifier.getInstance().addSurfaceChangeListener(this);
-        InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this);
         InCallUiStateNotifier.getInstance().addListener(this);
         mCurrentVideoState = VideoProfile.STATE_AUDIO_ONLY;
         mCurrentCallState = Call.State.INVALID;
@@ -255,6 +262,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         final InCallPresenter.InCallState inCallState =
              InCallPresenter.getInstance().getInCallState();
         onStateChange(inCallState, inCallState, CallList.getInstance());
+        InCallVideoCallCallbackNotifier.getInstance().addVideoEventListener(this,
+                VideoUtils.isVideoCall(mCurrentVideoState));
     }
 
     /**
@@ -310,6 +319,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             }
         } else if (surface == VideoCallFragment.SURFACE_DISPLAY) {
             mVideoCall.setDisplaySurface(ui.getDisplayVideoSurface());
+
+            // Show/hide the incoming video once surface is created based on
+            // whether PLAYER_START event has been received or not. Since we
+            // start with showing incoming video by default for surface creation,
+            // we need to make sure we hide it once surface is available.
+            showVideoUi(mCurrentVideoState, mCurrentCallState);
         }
     }
 
@@ -768,7 +783,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     /**
      * Based on the current video state and call state, show or hide the incoming and
      * outgoing video surfaces.  The outgoing video surface is shown any time video is transmitting.
-     * The incoming video surface is shown whenever the video is un-paused and active.
+     * The incoming video surface is shown whenever the video is un-paused and active and incoming
+     * video is available. If display surface has not been created and video reception is enabled,
+     * we override the value returned by showIncomingVideo and show the incoming video so surface
+     * creation is enabled
      *
      * @param videoState The video state.
      * @param callState The call state.
@@ -779,14 +797,19 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             Log.e(this, "showVideoUi, VideoCallUi is null returning");
             return;
         }
-        boolean showIncomingVideo = showIncomingVideo(videoState, callState);
+
+        final boolean isDisplaySurfaceCreated = ui.isDisplayVideoSurfaceCreated();
+        final boolean isVideoReceptionEnabled = VideoProfile.isReceptionEnabled(videoState);
+        boolean showIncomingVideo = showIncomingVideo(videoState, callState) ||
+                (!isDisplaySurfaceCreated && isVideoReceptionEnabled);
         boolean showOutgoingVideo = showOutgoingVideo(videoState);
+
         Log.v(this, "showVideoUi : showIncoming = " + showIncomingVideo + " showOutgoing = "
                 + showOutgoingVideo);
         if (showIncomingVideo || showOutgoingVideo) {
             ui.showVideoViews(showOutgoingVideo, showIncomingVideo);
 
-            if (VideoProfile.isReceptionEnabled(videoState)) {
+            if (isVideoReceptionEnabled) {
                 loadProfilePhotoAsync();
             }
         } else {
@@ -799,8 +822,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
     /**
      * Determines if the incoming video surface should be shown based on the current videoState and
-     * callState.  The video surface is shown when incoming video is not paused, the call is active
-     * or dialing and video reception is enabled.
+     * callState.  The video surface is shown when video reception is enabled AND either incoming
+     * video is not paused, the call is active or dialing, incoming video is available
+     * (i.e PLAYER_START event has been raised by lower layers)
      *
      * @param videoState The current video state.
      * @param callState The current call state.
@@ -818,7 +842,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 callState == Call.State.CONNECTING;
 
         return !isPaused && (isCallActive || isCallOutgoing) &&
-                VideoProfile.isReceptionEnabled(videoState);
+                VideoProfile.isReceptionEnabled(videoState) && mIsIncomingVideoAvailable;
     }
 
     /**
@@ -996,10 +1020,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
         switch (event) {
             case Connection.VideoProvider.SESSION_EVENT_RX_PAUSE:
-                sb.append("rx_pause");
-                break;
             case Connection.VideoProvider.SESSION_EVENT_RX_RESUME:
-                sb.append("rx_resume");
+                mIsIncomingVideoAvailable =
+                    event == Connection.VideoProvider.SESSION_EVENT_RX_RESUME;
+                showVideoUi(mCurrentVideoState, mCurrentCallState);
+                sb.append(mIsIncomingVideoAvailable ? "rx_resume" : "rx_pause");
                 break;
             case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
                 sb.append("camera_failure");
