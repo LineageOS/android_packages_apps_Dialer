@@ -538,7 +538,8 @@ public class CallList {
 
         boolean updated = false;
 
-        if (call.getState() == Call.State.DISCONNECTED) {
+        if (call.getState() == Call.State.DISCONNECTING
+                || call.getState() == Call.State.DISCONNECTED) {
             // update existing (but do not add!!) disconnected calls
             if (mCallById.containsKey(call.getId())) {
                 // For disconnected calls, we want to keep them alive for a few seconds so that the
@@ -567,8 +568,8 @@ public class CallList {
     }
 
     private int getDelayForDisconnect(Call call) {
-        Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
-
+        Preconditions.checkState(call.getState() == Call.State.DISCONNECTED
+                || call.getState() == Call.State.DISCONNECTING);
 
         final int cause = call.getDisconnectCause().getCode();
         final int delay;
@@ -583,6 +584,7 @@ public class CallList {
             case DisconnectCause.REJECTED:
             case DisconnectCause.MISSED:
             case DisconnectCause.CANCELED:
+            case DisconnectCause.UNKNOWN:
                 // no delay for missed/rejected incoming calls and canceled outgoing calls.
                 delay = 0;
                 break;
