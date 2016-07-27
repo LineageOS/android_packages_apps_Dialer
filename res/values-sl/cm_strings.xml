@@ -111,7 +111,7 @@
   <string name="callerinfo_provider_auth_yes">Da</string>
   <string name="callerinfo_provider_auth_no_short">Ne</string>
   <string name="callerinfo_provider_auth_no">Ne, hvala</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> bo imel dostop do vaših stikov, profila Me in računa Cyanogen OS, kar lahko vključuje vaš e-poštni naslov.</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> bo imel dostop do vaših stikov, profila Jaz in računa Cyanogen OS, kar lahko vključuje vaš e-poštni naslov.</string>
   <string name="callerinfo_provider_auth_learn_more">Več o tem</string>
   <string name="callerinfo_provider_auth_desc">Dobrodošli! Ali bi radi, da <xliff:g id="provider_name">%s</xliff:g> prepozna neznane klicatelje in blokira neželene klice?</string>
   <string name="callerinfo_provider_auth_desc_no_spam">Dobrodošli! Ali bi radi, da <xliff:g id="provider_name">%s</xliff:g> prepozna neznane klicatelje?</string>

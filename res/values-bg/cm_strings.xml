@@ -52,11 +52,11 @@
   <string name="yes">Да</string>
   <string name="no">Не</string>
   <string name="incall_vibration_category_title">Вибрация при входящо повикване</string>
-  <string name="incall_vibrate_outgoing_title">Вибрирай при отговор</string>
-  <string name="incall_vibrate_call_waiting_title">Вибрирай при изчакващо повикване</string>
-  <string name="incall_vibrate_hangup_title">Вибрирай при затваряне</string>
-  <string name="incall_vibrate_45_title">Вибрирай на всяка минута</string>
-  <string name="incall_vibrate_45_summary">Вибрирара всека 45 секунда от минутата по време на изходящи повиквания</string>
+  <string name="incall_vibrate_outgoing_title">Вибрация при отговор</string>
+  <string name="incall_vibrate_call_waiting_title">Вибрация при изчакващо повикване</string>
+  <string name="incall_vibrate_hangup_title">Вибрация при затваряне</string>
+  <string name="incall_vibrate_45_title">Вибрация на всяка минута</string>
+  <string name="incall_vibrate_45_summary">Ще вибрира на всяка 45-та секунда от минутата по време на изходящи повиквания</string>
   <string name="call_log_show_all_slots">Всички СИМ карти</string>
   <string name="call_log_all_calls_header">Всички обаждания</string>
   <string name="call_log_blacklist_header">Само блокирани обаждания</string>
