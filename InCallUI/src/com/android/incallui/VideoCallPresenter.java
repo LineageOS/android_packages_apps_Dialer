@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.ContactsContract;
+import android.content.pm.ActivityInfo;
 import android.telecom.Connection;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
@@ -199,6 +200,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * mode.
      */
     private boolean mAutoFullScreenPending = false;
+
+    // Stores the current orientation mode from primary call
+    private int mActivityOrientationMode = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
     /**
      * Initializes the presenter.
@@ -632,10 +636,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     private void checkForOrientationAllowedChange(Call call) {
-        final int currMode = OrientationModeHandler.getInstance().getCurrentOrientation();
         final int newMode = OrientationModeHandler.getInstance().getOrientation(call);
-
-        if (newMode != currMode) {
+        if (newMode != mActivityOrientationMode) {
+            Log.d(this, "checkForOrientationAllowedChange: currMode = " +
+                    mActivityOrientationMode + " newMode = " + newMode);
+            mActivityOrientationMode = newMode;
             InCallPresenter.getInstance().setInCallAllowsOrientationChange(newMode);
         }
     }
