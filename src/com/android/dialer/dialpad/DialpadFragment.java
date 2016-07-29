@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -195,6 +196,9 @@ public class DialpadFragment extends Fragment
 
     /** Stream type used to play the DTMF tones off call, and mapped to the volume control keys */
     private static final int DIAL_TONE_STREAM_TYPE = AudioManager.STREAM_DTMF;
+
+    private static final String PROPERTY_RADIO_ATEL_CARRIER = "persist.radio.atel.carrier";
+    private static final String CARRIER_ONE_DEFAULT_MCC_MNC = "405854";
 
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
@@ -1135,6 +1139,33 @@ public class DialpadFragment extends Fragment
         }
     }
 
+    private int getNumberfromId(int id) {
+        int number = -1;
+        switch(id) {
+            case R.id.zero: number = 0; break;
+            case R.id.one: number = 1; break;
+            case R.id.two: number = 2; break;
+            case R.id.three: number = 3; break;
+            case R.id.four: number = 4; break;
+            case R.id.five: number = 5; break;
+            case R.id.six: number = 6; break;
+            case R.id.seven: number = 7; break;
+            case R.id.eight: number = 8; break;
+            case R.id.nine: number = 9; break;
+        }
+        return number;
+    }
+
+    private void placeEmergencyCall() {
+        Resources resources = getContext().getResources();
+        String emergencyNumber = resources.getString(
+                    com.android.internal.R.string.power_key_emergency_number);
+        Intent intent = new Intent(Intent.ACTION_CALL_EMERGENCY);
+        intent.setData(Uri.fromParts(PhoneAccount.SCHEME_TEL, emergencyNumber, null));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onLongClick(View view) {
         final Editable digits = mDigits.getText();
@@ -1231,6 +1262,14 @@ public class DialpadFragment extends Fragment
             case R.id.nine: {
                 if (mDigits.length() == 1) {
                     //removePreviousDigitIfPossible();
+                    String property = SystemProperties.get(PROPERTY_RADIO_ATEL_CARRIER);
+                    boolean isCarrierOneSupported = CARRIER_ONE_DEFAULT_MCC_MNC.equals(property);
+                    if (isCarrierOneSupported &&
+                           (getNumberfromId(id) == getContext().getResources().getInteger(
+                            R.integer.speed_dial_emergency_number_assigned_key))) {
+                        placeEmergencyCall();
+                        return true;
+                    }
                     final boolean isAirplaneModeOn =
                             Settings.System.getInt(getActivity().getContentResolver(),
                                     Settings.System.AIRPLANE_MODE_ON, 0) != 0;
