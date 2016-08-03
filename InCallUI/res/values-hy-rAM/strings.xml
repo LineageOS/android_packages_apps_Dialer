@@ -81,7 +81,7 @@
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Տեսազանգ"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Ձայնային"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Ընդունել"</string>
-    <string name="notification_action_dismiss" msgid="1998811618480434300">"Փակել"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Մերժել"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Հետ զանգել"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Հաղորդագրություն"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Ընթացիկ զանգ այլ սարքում"</string>
