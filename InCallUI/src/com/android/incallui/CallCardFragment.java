@@ -618,9 +618,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             // Set direction of the name field
             int nameDirection = View.TEXT_DIRECTION_INHERIT;
             if (nameIsNumber) {
-                if (PhoneNumberUtils.isEmergencyNumber(name)) {
-                    mPrimaryName.setSingleLine(false);
-                }
                 nameDirection = View.TEXT_DIRECTION_LTR;
             }
             mPrimaryName.setTextDirection(nameDirection);
