@@ -91,7 +91,7 @@
   <string name="call_stats_title_count">Liczba połączeń</string>
   <string name="call_stats_title_average_duration">Średni czas połączenia</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Twój spis połączeń nie zawiera żadnego połączenia w wybranym przedziale czasu</string>
+  <string name="recent_calls_no_items_in_range">Twój dziennik połączeń nie zawiera żadnego połączenia w wybranym przedziale czasu.</string>
   <string name="call_recording_category_title">Nagrywanie rozmów</string>
   <string name="call_recording_format">Format dźwięku</string>
   <string name="call_playback_no_app_found_toast">Brak aplikacji, do odtworzenia wybranej rozmowy.</string>
