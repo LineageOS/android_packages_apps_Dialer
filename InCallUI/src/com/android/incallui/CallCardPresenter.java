@@ -380,7 +380,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
      * @param sessionModificationState The new session modification state.
      */
     @Override
-    public void onSessionModificationStateChange(int sessionModificationState) {
+    public void onSessionModificationStateChange(Call call, int sessionModificationState) {
         Log.d(this, "onSessionModificationStateChange : sessionModificationState = " +
                 sessionModificationState);
 
