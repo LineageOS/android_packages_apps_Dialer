@@ -97,6 +97,7 @@ import com.android.phone.common.animation.AnimUtils;
 import com.android.ims.ImsManager;
 import com.android.phone.common.animation.AnimationListenerAdapter;
 import com.google.common.annotations.VisibleForTesting;
+import com.android.contacts.common.CallUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -514,8 +515,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         SmartDialPrefix.initializeNanpSettings(this);
         Trace.endSection();
         Trace.endSection();
-    }
 
+        if (getResources().getBoolean(
+                R.bool.config_regional_video_call_welcome_dialog)) {
+            showVideoCallWelcomeDialog();
+        }
+    }
     @Override
     protected void onResume() {
         Trace.beginSection(TAG + " onResume");
@@ -1501,6 +1506,13 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
             return FloatingActionButtonController.ALIGN_MIDDLE;
         }
         return FloatingActionButtonController.ALIGN_END;
+    }
+
+    private void showVideoCallWelcomeDialog() {
+        if (DialerUtils.canShowWelcomeScreen(this)) {
+            final Intent intent = new Intent(this, VideoCallWelcomeActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void updateMissedCalls() {

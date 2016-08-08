@@ -234,6 +234,12 @@
             android:theme="@style/BackgroundOnlyTheme"
             android:exported="false"/>
 
+        <activity android:name=".VideoCallWelcomeActivity"
+                  android:theme="@*android:style/Theme.DeviceDefault.Light.Dialog.Alert"
+                  android:finishOnCloseSystemDialogs="true"
+                  android:excludeFromRecents="true"
+                  android:exported="false" />
+
         <!-- vCard related -->
         <activity android:name="com.android.contacts.common.vcard.ImportVCardActivity"
                   android:configChanges="orientation|screenSize|keyboardHidden"

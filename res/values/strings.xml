@@ -1118,4 +1118,7 @@ e mode.</string>
     <string name="no_call_log">No call log</string>
     <string name="clear">Clear</string>
     <string name="description_clear_search">Clear search</string>
+    <string name="video_call_welcome_title"><b>Welcome to the new Video Calling Dialer</b></string>
+    <string name="video_call_welcome_message">We all love to hear that familiar voice at the end of the line, but talking face-to-face is so much better! Here\'s what you should know to get your real-time (or FaceTime?) connections going: You\'ll need to be on 4G LTE or a Wi-Fi connection The device you\'re calling must also be video calling compatible Video calls use your high speed data You can also upgrade a voice call to a video call Check out <a>https://support.t-mobile.com/docs/DOC-23574</a> for more information.</string>
+    <string name="video_call_welcome_message_repeat">Show this message every time</string>
 </resources>

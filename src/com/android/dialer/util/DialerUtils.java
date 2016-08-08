@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ import java.util.Locale;
  */
 public class DialerUtils {
 
+    private static final String PREFS_MESSAGE = "video_call_welcome";
+    private static final String KEY_STATE = "message-repeat";
     /**
      * Attempts to start an activity and displays a toast with the default error message if the
      * activity is not found, instead of throwing an exception.
@@ -191,5 +194,28 @@ public class DialerUtils {
         if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+
+    /**
+     * @return true if the Welcome Screen shall be presented to the user, false otherwise.
+     */
+    public static boolean canShowWelcomeScreen(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(
+                PREFS_MESSAGE, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_STATE, false);
+    }
+
+
+    /**
+     * Save the state of Welcome Screen.
+     *
+     *@param context
+     *@param show if the Welcome Screen should be presented
+     */
+    public static void setShowingState(Context context, boolean show) {
+        final SharedPreferences prefs = context.getSharedPreferences(
+                PREFS_MESSAGE, Context.MODE_PRIVATE);
+        prefs.edit().putBoolean(KEY_STATE, show).apply();
     }
 }
