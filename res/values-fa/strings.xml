@@ -117,7 +117,7 @@
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"تماس با این شماره ممکن نیست"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"‏برای راه‌اندازی پست صوتی به منو &gt; تنظیمات بروید."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"برای تماس با پست صوتی، ابتدا حالت هواپیما را غیرفعال کنید."</string>
-    <string name="contact_list_loading" msgid="5488620820563977329">"در حال بارگیری..."</string>
+    <string name="contact_list_loading" msgid="5488620820563977329">"در حال بارکردن…"</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
     <string name="meid" msgid="6210568493746275750">"MEID"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"در حال بارگیری سیم کارت..."</string>
@@ -127,7 +127,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"برقراری تماس تلفنی ممکن نیست، زیرا برنامه تلفن غیرفعال شده است."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"هیچ برنامه‌ای برای انجام این کار در این دستگاه نصب نیست"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"نام یا شماره تلفنی وارد کنید"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"تماس از دست رفته‌ای ندارید."</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"تماس بی‌پاسخی ندارید."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"صندوق پست صوتی‌تان خالی است."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"فقط نمایش موارد دلخواه"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"سابقه"</string>
@@ -179,7 +179,7 @@
     <string name="call_log_header_today" msgid="3225248682434212981">"امروز"</string>
     <string name="call_log_header_yesterday" msgid="9139172458834033092">"دیروز"</string>
     <string name="call_log_header_other" msgid="5769921959940709084">"قدیمی‌تر"</string>
-    <string name="call_detail_list_header" msgid="3752717059699600861">"لیست تماس‌ها"</string>
+    <string name="call_detail_list_header" msgid="3752717059699600861">"فهرست تماس‌ها"</string>
     <string name="voicemail_speaker_on" msgid="209154030283487068">"روشن کردن بلندگو."</string>
     <string name="voicemail_speaker_off" msgid="7390530056413093958">"خاموش کردن بلندگو."</string>
     <string name="voicemail_play_faster" msgid="3444751008615323006">"پخش سریع‌تر"</string>

@@ -197,7 +197,7 @@
     <item msgid="1036113889050195575">"Normal"</item>
     <item msgid="6177579030803486015">"Lang"</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtigt svar"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Hurtige svar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Opkald"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Opkaldskonti"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Aktivér"</string>

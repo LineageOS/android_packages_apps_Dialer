@@ -56,7 +56,7 @@
     <string name="voicemail_status_messages_waiting" msgid="6329544650250068650">"Чека нова говорна пошта. Не може да се вчита во моментов."</string>
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"Поставете ја говорната пошта"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"Аудио не е достапно"</string>
-    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Подеси"</string>
+    <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Постави"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Повикај говорна пошта"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"Избери број"</string>
@@ -104,7 +104,7 @@
     <string name="description_new_voicemail" msgid="2133792360865517746">"Нова говорна пошта."</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> повици."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Видеоповик."</string>
-    <string name="description_send_text_message" msgid="3118485319691414221">"Испратете СМС до <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_send_text_message" msgid="3118485319691414221">"Испратете SMS до <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"Непреслушана говорна пошта"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"Започни гласовно пребарување"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Повикај <xliff:g id="NUMBER">%s</xliff:g>"</string>
@@ -115,7 +115,7 @@
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> сек."</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> мин. <xliff:g id="SECONDS">%s</xliff:g> сек."</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Бројот не може да се повика"</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"За да подесите говорна пошта, одете на Мени &gt; Подесувања."</string>
+    <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"За да подесите говорна пошта, одете на Мени &gt; Поставки."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"За да се јавите во говорна пошта, прво исклучете режим на работа во авион."</string>
     <string name="contact_list_loading" msgid="5488620820563977329">"Се вчитува..."</string>
     <string name="imei" msgid="3045126336951684285">"IMEI"</string>
@@ -143,7 +143,7 @@
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Повикај <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Создај нов контакт"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Додај на контакт"</string>
-    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Испрати СМС"</string>
+    <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Испрати SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Остварете видеоповик"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Погледнете цела историја на повик"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> нови пропуштени повици"</string>
@@ -186,7 +186,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Репродуцирајте побавно."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Запрете ја или паузирајте ја репродукцијата."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"Опции за екран"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Опции за приказ"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Звуци и вибрации"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Пристапност"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Мелодија на телефон"</string>

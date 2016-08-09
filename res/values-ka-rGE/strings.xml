@@ -187,7 +187,7 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"დაკვრის დაწყება ან პაუზა."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"ეკრანის პარამეტრები"</string>
-    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"კინო და ვიბრაცია"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ხმა და ვიბრაცია"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"მარტივი წვდომა"</string>
     <string name="ringtone_title" msgid="760362035635084653">"ტელეფონის ზარი"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"ზარებზე ასევე ვიბრირება"</string>

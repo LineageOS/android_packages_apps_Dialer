@@ -19,16 +19,16 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="applicationLabel" msgid="7762561155467201526">"Telefon"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
-    <string name="dialerIconLabel" msgid="6500826552823403796">"Telefon"</string>
+    <string name="dialerIconLabel" msgid="6500826552823403796">"Raqam tergich"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Qo‘ng‘iroqlar tarixi"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Qo‘ng‘iroq: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Raqam noto‘g‘ri aniqlandi"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Qo‘ng‘iroq qilishdan oldin raqamni tahrirlang"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Kontaktlarga qo‘shish"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Tahrirlash va telefon qilish"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Mavjud kontaktga qo‘shish"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Qo‘ng‘iroqlar tarixidan o‘chirish"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Qo‘ng‘iroqlar tarixini tozalash"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ovozli xabarni o‘chirish"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Ovozli xabarni ulashish"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Baham ko‘rish"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"Qo‘ng‘iroqlar jurnali bo‘m-bo‘sh"</string>
     <string name="recentCalls_empty_action" msgid="6033275870727664335">"Qo‘ng‘iroq qilish"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Qo‘ng‘iroqlar tarixi tozalansinmi?"</string>
@@ -71,7 +71,7 @@
     <string name="description_rate_decrease" msgid="3161652589401708284">"Ijro tezligini kamaytirish"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Ijro tezligini oshirish"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"Qo‘ng‘iroqlar tarixi"</string>
-    <string name="action_menu_overflow_description" msgid="2303272250613084574">"Qo‘shimcha sozlamalar"</string>
+    <string name="action_menu_overflow_description" msgid="2303272250613084574">"Boshqa parametrlar"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"terish paneli"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Nusxalash"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Chiquvchi qo‘ng‘-ni ko‘rsatish"</string>
@@ -84,18 +84,18 @@
     <string name="dialer_settings_label" msgid="4305043242594150479">"Sozlamalar"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Yangi kontakt"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Barcha kontaktlar"</string>
-    <string name="callDetailTitle" msgid="5340227785196217938">"Qo‘ng‘roq tafsilotlari"</string>
+    <string name="callDetailTitle" msgid="5340227785196217938">"Chaqiruv tafsilotlari"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Tafsilotlar mavjud emas"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tovushli raqam tergich"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Qo‘ng‘iroqqa qaytish"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Qo‘ng‘iroq qo‘shish"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Amaldagi chaqiruvga qaytish"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Chaqiruv qo‘shish"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Kiruvchi qo‘ng‘iroq"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Chiquvchi qo‘ng‘iroq"</string>
     <string name="type_missed" msgid="2720502601640509542">"Javobsiz qo‘ng‘iroq"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Kiruvchi videoqo‘ng‘iroq"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Chiquvchi videoqo‘ng‘iroq"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Javobsiz videoqo‘ng‘iroq"</string>
-    <string name="type_voicemail" msgid="5153139450668549908">"Ovozli xabar"</string>
+    <string name="type_voicemail" msgid="5153139450668549908">"Ovozli pochta"</string>
     <string name="actionIncomingCall" msgid="6028930669817038600">"Kiruvchi qo‘ng‘iroqlar"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Ovozli xabarni eshitish"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"<xliff:g id="NAME">%1$s</xliff:g> kontaktini ko‘rish"</string>
@@ -109,8 +109,8 @@
     <string name="description_start_voice_search" msgid="520539488194946012">"Ovozli qidiruvni boshlash"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"Qo‘ng‘iroq: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="unknown" msgid="740067747858270469">"Noma’lum"</string>
-    <string name="voicemail" msgid="3851469869202611441">"Ovozli xabar"</string>
-    <string name="private_num" msgid="6374339738119166953">"Shaxsiy raqam"</string>
+    <string name="voicemail" msgid="3851469869202611441">"Ovozli pochta"</string>
+    <string name="private_num" msgid="6374339738119166953">"Yashirin raqam"</string>
     <string name="payphone" msgid="7726415831153618726">"Taksofon"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> soniya"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> daq <xliff:g id="SECONDS">%s</xliff:g> son"</string>
@@ -131,9 +131,9 @@
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"Sizning ovozli pochta qutingiz bo‘m-bo‘sh."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Faqat saralar ko‘rsatilsin"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Jurnal"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Barchasi"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Hammasi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Javobsiz"</string>
-    <string name="call_log_voicemail_title" msgid="940422274047025948">"Ovozli xabar"</string>
+    <string name="call_log_voicemail_title" msgid="940422274047025948">"Ovozli pochta"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Tezkor terish"</string>
     <string name="tab_recents" msgid="929949073851377206">"So‘nggi"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktlar"</string>
@@ -142,20 +142,20 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Bekor qilish"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Qo‘ng‘iroq: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Yangi kontakt yaratish"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Kontaktlarga qo‘shish"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Mavjud kontaktga qo‘shish"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS yuborish"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videoqo‘ng‘iroq qilish"</string>
     <string name="show_call_history" msgid="1141502332266697170">"To‘liq qo‘ng‘iroqlar tarixini ko‘rish"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ta javobsiz qo‘ng‘iroq"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"Tezkor raqam tergich ro‘yxatida hech kim yo‘q"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Sevimli kontakt qo‘shing"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"Tezkor raqam terish ro‘yxatida hech kim yo‘q"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Tezkor raqam terishni sozlang"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Sizda hali hech qanday kontakt yo‘q"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Yangi kontakt qo‘shing"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Barcha raqamlarni ko‘rish uchun rasm ustiga bosing. Joyini o‘zgartirish uchun uni bosib turing."</string>
     <string name="remove_contact" msgid="1080555335283662961">"O‘chirish"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Video qo‘ng‘iroq"</string>
     <string name="call_log_action_send_message" msgid="2826466379787846163">"Xabar yuborish"</string>
-    <string name="call_log_action_details" msgid="701345508704970622">"Qo‘ng‘iroq tafsilotlari"</string>
+    <string name="call_log_action_details" msgid="701345508704970622">"Chaqiruv tafsilotlari"</string>
     <string name="call_log_action_call" msgid="463690849042459842">"Qo‘ng‘iroq qilish: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_incoming_missed_call" msgid="2381085098795943627">"Qo‘ng‘iroq javobsiz qoldirildi: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
     <string name="description_incoming_answered_call" msgid="7117665748428816544">"Qo‘ng‘iroqqa javob berildi: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
@@ -186,7 +186,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"Sekinroq ijro etish."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Ijroni boshlash yoki to‘xtatish"</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"Ko‘rsatish parametrlari"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"Kontaktlarning ko‘rinishi"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Ovoz va tebranish"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Maxsus imkoniyatlar"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Telefon ringtoni"</string>
@@ -199,7 +199,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Tezkor javoblar"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Qo‘ng‘iroqlar"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Qo‘ng‘iroq hisoblari"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Qo‘ng‘iroq uchun hisoblar"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Yoqish"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Ruxsatnomalarni sozlash"</string>
     <string name="permission_no_speeddial" msgid="7449042208802130085">"Tezkor raqam terish uchun\n “Kontaktlar” ruxsatnomasini yoqing."</string>

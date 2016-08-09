@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Histórico de chamadas"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Ligar a <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Enviar relat. de n.º incorreto"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes de efectuar a chamada"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes de ligar"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Adicionar a um contacto"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Eliminar do histórico de chamadas"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Limpar histórico de chamadas"</string>
@@ -70,7 +70,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Procurar a posição da reprodução"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Diminuir a velocidade de reprodução"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Aumentar a velocidade de reprodução"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Histórico de Chamadas"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Histórico de chamadas"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Mais opções"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"teclado"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Copiar"</string>

@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"அழைப்பு பதிவு"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ஐ அழை"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"தவறான எண் எனப் புகாரளி"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"அழைக்கும் முன் எண்ணை மாற்று"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"தொடர்பில் சேர்"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"அழைப்பு வரலாற்றில் இருந்து நீக்கு"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"அழைப்பு வரலாற்றை அழி"</string>
@@ -148,7 +148,7 @@
     <string name="show_call_history" msgid="1141502332266697170">"அழைப்பு பதிவு முழுவதையும் காட்டு"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> புதிய தவறிய அழைப்புகள்"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"இன்னும் விரைவு டயலில் யாரையும் சேர்க்கவில்லை"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"பிடித்தவராகச் சேர்"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"முக்கியமானவர்களைச் சேர்"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"இதுவரை எந்தத் தொடர்புகளும் இல்லை"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ஒரு தொடர்பைச் சேர்க்கவும்"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"எல்லா எண்களையும் பார்க்க, படத்தைத் தொடவும் அல்லது மறுவரிசைப்படுத்த தொட்டுப் பிடித்திருக்கவும்"</string>
@@ -190,7 +190,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ஒலிகளும் அதிர்வும்"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"அணுகல் தன்மை"</string>
     <string name="ringtone_title" msgid="760362035635084653">"மொபைலின் ரிங்டோன்"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"அழைப்புகளுக்கும் அதிர்வுறு"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"அழைப்பு வருகையில் அதிர்வுறு"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"டயல்பேட் ஒலிகள்"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"டயல்பேட் டோன் நீளம்"</string>
   <string-array name="dtmf_tone_length_entries">

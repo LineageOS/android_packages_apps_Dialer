@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"കോള്‍‌ ചരിത്രം"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"വിളിക്കുക <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"കൃത്യമല്ലാത്ത നമ്പർ റിപ്പോർട്ടുചെയ്യുക"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"കോൾ ചെയ്യുന്നതിന് മുമ്പായി നമ്പർ എഡിറ്റുചെയ്യുക"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"കോൾ ചെയ്യുംമുമ്പ് നമ്പർ എഡിറ്റുചെയ്യൂ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"കോൾ ചരിത്രത്തിൽ നിന്ന് മായ്‌ക്കുക"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"കോൾ ചരിത്രം മായ്‌ക്കുക"</string>
@@ -71,7 +71,7 @@
     <string name="description_rate_decrease" msgid="3161652589401708284">"പ്ലേബാക്ക് നിരക്ക് കുറയ്‌ക്കുക"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"പ്ലേബാക്ക് നിരക്ക് വർദ്ധിപ്പിക്കുക"</string>
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"കോള്‍‌ ചരിത്രം"</string>
-    <string name="action_menu_overflow_description" msgid="2303272250613084574">"കൂടുതല്‍ ഓപ്‌ഷനുകള്‍"</string>
+    <string name="action_menu_overflow_description" msgid="2303272250613084574">"കൂടുതൽ‍ ഓപ്‌ഷനുകള്‍"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ഡയൽ പാഡ്"</string>
     <string name="menu_copy" msgid="6108677035381940698">"പകര്‍ത്തുക"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"ഔട്ട്‌ഗോയിംഗ് മാത്രം കാണിക്കുക"</string>
@@ -81,7 +81,7 @@
     <string name="menu_show_all_calls" msgid="7560347482073345885">"എല്ലാ കോളുകളും കാണിക്കുക"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"2 സെക്കൻഡ് താൽക്കാലികമായി നിർത്തൽ ചേർക്കുക"</string>
     <string name="add_wait" msgid="3360818652790319634">"കാത്തിരിക്കൽ ചേർക്കുക"</string>
-    <string name="dialer_settings_label" msgid="4305043242594150479">"ക്രമീകരണങ്ങൾ"</string>
+    <string name="dialer_settings_label" msgid="4305043242594150479">"ക്രമീകരണം"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"പുതിയ കോണ്‍ടാക്റ്റ്"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"എല്ലാ കോൺടാക്റ്റുകളും"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"കോൾ വിശദാംശങ്ങൾ"</string>
@@ -197,7 +197,7 @@
     <item msgid="1036113889050195575">"സാധാരണം"</item>
     <item msgid="6177579030803486015">"ദൈർഘ്യമുള്ളത്"</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ദ്രുത പ്രതികരണങ്ങൾ"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"അതിവേഗ പ്രതികരണങ്ങൾ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"കോളുകൾ"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"കോളിംഗ് അക്കൗണ്ട്"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ഓണാക്കുക"</string>

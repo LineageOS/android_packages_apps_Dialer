@@ -23,14 +23,14 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Զանգերի պատմություն"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Զանգել <xliff:g id="NAME">%s</xliff:g>-ին"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"Հաղորդել սխալ համարի մասին"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Խմբագրել համարը զանգելուց առաջ"</string>
-    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Ավելացնել կոնտակտների ցանկին"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Փոխել համարը զանգելուց առաջ"</string>
+    <string name="recentCalls_addToContact" msgid="4570467333422734645">"Ավելացնել կոնտակտների ցանկում"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Ջնջել զանգերի պատմությունից"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Մաքրել զանգերի պատմությունը"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Ջնջել ձայնային փոստը"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Տարածել ձայնային փոստը"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"Զանգերի մատյանը դատարկ է"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Զանգահարել"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Զանգել"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Մաքրե՞լ զանգերի պատմությունը:"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Այս գործողությունը ամբողջովին կջնջի զանգերի պատմությունը"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Զանգերի պատմության մաքրում…"</string>
@@ -110,7 +110,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"Զանգել <xliff:g id="NUMBER">%s</xliff:g>-ին"</string>
     <string name="unknown" msgid="740067747858270469">"Անհայտ"</string>
     <string name="voicemail" msgid="3851469869202611441">"Ձայնային փոստ"</string>
-    <string name="private_num" msgid="6374339738119166953">"Անձնական համարը"</string>
+    <string name="private_num" msgid="6374339738119166953">"Փակ համար"</string>
     <string name="payphone" msgid="7726415831153618726">"Հանրային հեռախոս"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> վրկ"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> րոպե <xliff:g id="SECONDS">%s</xliff:g> վայրկյան"</string>
@@ -148,7 +148,7 @@
     <string name="show_call_history" msgid="1141502332266697170">"Դիտել բոլոր զանգերի պատմությունը"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> նոր բաց թողնված զանգ"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Արագ համարահավաքման ցանկը դատարկ է"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ավելացնել ընտրանում"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ավելացնել կոնտակտ"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Դեռ կոնտակտներ չունեք"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Ավելացնել կոնտակտ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Բոլոր համարները տեսնելու համար հպեք պատկերին: Վերադասավորելու համար հպեք և պահեք:"</string>
@@ -172,7 +172,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> նոր ձայնային փոստ</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> նոր ձայնային փոստ</item>
     </plurals>
-    <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը կոնտակտների ցանկին"</string>
+    <string name="description_create_new_contact_action" msgid="818755978791008167">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g> կոնտակտը"</string>
     <string name="description_add_to_existing_contact_action" msgid="6081200053494414351">"Ավելացնել <xliff:g id="NAMEORNUMBER">^1</xliff:g>-ը առկա կոնտակտին"</string>
     <string name="description_details_action" msgid="2433827152749491785">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> զանգի մասին տվյալներ"</string>
     <string name="toast_entry_removed" msgid="8010830299576311534">"Ջնջվել է զանգերի պատմությունից"</string>

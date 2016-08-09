@@ -32,7 +32,7 @@
     <string name="recentCalls_empty" msgid="5934808652605981210">"Қоңыраулар журналы бос"</string>
     <string name="recentCalls_empty_action" msgid="6033275870727664335">"Қоңырау шалу"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Қоңыраулар тарихын тазалау керек пе?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Бұл тарихтан барлық қоңырауларды жояды"</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Тарихтағы барлық қоңыраулар жойылады"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Қоңыраулар тарихы тазалануда…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> дауыстық хабар </item>
@@ -190,7 +190,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Дыбыстар мен діріл"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Арнайы мүмкіндіктер"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Телефон қоңырау әуені"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Сондай-ақ, қоңыраулар үшін дірілдету"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Қоңырау кезінде дірілдету"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Теру тақтасының үндері"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Теру тақтасы дыбысының ұзындығы"</string>
   <string-array name="dtmf_tone_length_entries">
@@ -199,7 +199,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Жылдам жауаптар"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Қоңыраулар"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Есептік жазбаларға қоңыр. шалу"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Қоңырау шалу есептік жазбалары"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Қосу"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Рұқсаттар орнату"</string>
     <string name="permission_no_speeddial" msgid="7449042208802130085">"Жылдам теруді қосу үшін\n \"Контактілер\" рұқсатын қосыңыз."</string>

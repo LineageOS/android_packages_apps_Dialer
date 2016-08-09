@@ -113,7 +113,7 @@
     <string name="private_num" msgid="6374339738119166953">"Numero privato"</string>
     <string name="payphone" msgid="7726415831153618726">"Cabina telefonica"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> secondi"</string>
-    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min e <xliff:g id="SECONDS">%s</xliff:g> sec"</string>
+    <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min <xliff:g id="SECONDS">%s</xliff:g> s"</string>
     <string name="dialog_phone_call_prohibited_message" msgid="5730565540182492608">"Impossibile chiamare questo numero"</string>
     <string name="dialog_voicemail_not_ready_message" msgid="4384716252789515378">"Per configurare la segreteria, seleziona Menu &gt; Impostazioni."</string>
     <string name="dialog_voicemail_airplane_mode_message" msgid="530922773669546093">"Per chiamare la segreteria, disattiva la modalità aereo."</string>
