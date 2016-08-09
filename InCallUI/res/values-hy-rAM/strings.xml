@@ -80,7 +80,7 @@
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Տեսազանգ"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Ձայնային"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Ընդունել"</string>
-    <string name="notification_action_dismiss" msgid="1998811618480434300">"Փակել"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Մերժել"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Հետ զանգել"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Հաղորդագրություն"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Ընթացիկ զանգ այլ սարքում"</string>
@@ -99,7 +99,7 @@
     <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"Հնարավոր չէ մերժել զանգը:"</string>
     <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"Հնարավոր չէ անջատել զանգ(եր)ը:"</string>
     <string name="incall_call_type_label_sip" msgid="1327822795765282192">"SIP զանգ"</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Արտակարգ իրավիճակի զանգ"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Շտապ կանչ"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Ռադիոն միացվում է…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Ծառայությունը մատչելի չէ: Փորձը կրկնվում է…"</string>
     <string name="dial_emergency_error" msgid="582305854626092376">"Հնարավոր չէ զանգել: <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> համարը արտակարգ իրավիճակի համար չէ:"</string>
