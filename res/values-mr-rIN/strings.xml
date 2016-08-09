@@ -186,7 +186,7 @@
     <string name="voicemail_play_slower" msgid="4544796503902818832">"अधिक धीमे प्ले करा."</string>
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"प्लेबॅक प्रारंभ करा किंवा त्यास विराम द्या."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
-    <string name="display_options_title" msgid="7812852361055667468">"पर्याय प्रदर्शित करा"</string>
+    <string name="display_options_title" msgid="7812852361055667468">"प्रदर्शन पर्याय"</string>
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ध्वनी आणि कंपने"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"प्रवेशयोग्यता"</string>
     <string name="ringtone_title" msgid="760362035635084653">"फोन रिंगटोन"</string>

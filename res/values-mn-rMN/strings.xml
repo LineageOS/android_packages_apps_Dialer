@@ -191,7 +191,7 @@
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Хандалт"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Утасны хонхны ая"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Дуудлагад бас чичрэх"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Диалпадын ая"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Залгах товчлуурын ая"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Дугаар цуглуулах хэсгийн дохионы урт"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Энгийн"</item>
@@ -199,7 +199,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Шуурхай хариунууд"</string>
     <string name="call_settings_label" msgid="313434211353070209">"Дуудлага"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"Дуудах акаунт"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"Дуудах бүртгэл"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Идэвхжүүлэх"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Зөвшөөрөл тохируулах"</string>
     <string name="permission_no_speeddial" msgid="7449042208802130085">"Яаралтай дуудлагыг идэвхжүүлэхийн тулд,\n Харилцагчийн жагсаалтын зөвшөөрлийг идэвхжүүлнэ үү."</string>

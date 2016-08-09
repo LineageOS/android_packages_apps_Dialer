@@ -22,7 +22,7 @@
     <string name="dialerIconLabel" msgid="6500826552823403796">"Τηλέφωνο"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Ιστορικό κλήσεων"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"Κλήση <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="call_detail_menu_report" msgid="587960283417977382">"Αναφορά ακατάλληλου αριθμού"</string>
+    <string name="call_detail_menu_report" msgid="587960283417977382">"Αναφορά ανακριβούς αριθμού"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Επεξεργασία αριθμού πριν την κλήση"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Προσθήκη σε μια επαφή"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Διαγραφή από το ιστορικό κλήσεων"</string>
@@ -190,7 +190,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Ήχοι και δόνηση"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Προσβασιμότητα"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Ήχος κλήσης τηλεφώνου"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Και δόνηση στις κλήσεις"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Δόνηση στις κλήσεις"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Τόνοι πληκτρολογίου κλήσης"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Διάρκεια ήχου πληκτρολογίου κλήσης"</string>
   <string-array name="dtmf_tone_length_entries">

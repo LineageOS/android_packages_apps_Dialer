@@ -80,7 +80,7 @@
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Messages vocaux uniquement"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Afficher tous les appels"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"Ajouter une pause de 2 s"</string>
-    <string name="add_wait" msgid="3360818652790319634">"Ajouter Attendre"</string>
+    <string name="add_wait" msgid="3360818652790319634">"Ajouter une attente"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Paramètres"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Nouveau contact"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Tous les contacts"</string>
@@ -187,7 +187,7 @@
     <string name="voicemail_play_start_pause" msgid="3687447935787768983">"Lancer ou interrompre la lecture."</string>
     <string name="list_delimeter" msgid="4571593167738725100">", "</string>
     <string name="display_options_title" msgid="7812852361055667468">"Options d\'affichage"</string>
-    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sons et vibrations"</string>
+    <string name="sounds_and_vibration_title" msgid="1692290115642160845">"Sons et vibration"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Accessibilité"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Sonnerie du téléphone"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibrer aussi pour les appels"</string>

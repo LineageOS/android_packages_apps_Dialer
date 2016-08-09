@@ -25,14 +25,14 @@
     <string name="call_detail_menu_report" msgid="587960283417977382">"Informar número incorrecto"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"Editar número antes de llamar"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"Agregar a un contacto"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Eliminar del historial de llamadas"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"Borrar del historial de llamadas"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"Eliminar el historial de llamadas"</string>
-    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eliminar mensaje de voz"</string>
+    <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Borrar mensaje de voz"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Compartir mensaje de voz"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"El registro de llamadas está vacío"</string>
     <string name="recentCalls_empty_action" msgid="6033275870727664335">"Hacer una llamada"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"¿Eliminar el historial de llamadas?"</string>
-    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se eliminarán todas las llamadas del historial."</string>
+    <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Se borrarán todas las llamadas del historial."</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Eliminando historial de llamadas…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> mensajes de voz </item>

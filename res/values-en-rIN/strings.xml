@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="7762561155467201526">"Telephone"</string>
+    <string name="applicationLabel" msgid="7762561155467201526">"Phone"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Phone"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Phone"</string>
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"Call history"</string>
@@ -70,7 +70,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Seek playback position"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Decrease playback rate"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Increase playback rate"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Call History"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Call history"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"More options"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"dial pad"</string>
     <string name="menu_copy" msgid="6108677035381940698">"Copy"</string>
