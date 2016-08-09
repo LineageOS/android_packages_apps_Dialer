@@ -136,7 +136,7 @@
     <string name="call_log_voicemail_title" msgid="940422274047025948">"语音邮件"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"快速拨号"</string>
     <string name="tab_recents" msgid="929949073851377206">"最近"</string>
-    <string name="tab_all_contacts" msgid="1410922767166533690">"联系人"</string>
+    <string name="tab_all_contacts" msgid="1410922767166533690">"通讯录"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"语音邮件"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"已从收藏中移除"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"撤消"</string>
@@ -147,8 +147,8 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"发起视频通话"</string>
     <string name="show_call_history" msgid="1141502332266697170">"查看全部通话记录"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>个新的未接电话"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"您的快速拨号功能尚未收藏任何联系人"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"添加常用联系人"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"尚未给任何联系人设定快速拨号"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"收藏联系人"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"您还没有任何联系人"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"添加联系人"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"触摸图片可查看所有号码，触摸并按住可重新排序"</string>
@@ -199,7 +199,7 @@
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"快速回复"</string>
     <string name="call_settings_label" msgid="313434211353070209">"通话"</string>
-    <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐户"</string>
+    <string name="phone_account_settings_label" msgid="5864322009841175294">"通话帐号"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"开启"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"设置权限"</string>
     <string name="permission_no_speeddial" msgid="7449042208802130085">"要启用快速拨号功能，\n请开启“通讯录”权限。"</string>

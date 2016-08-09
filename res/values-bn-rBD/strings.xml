@@ -20,20 +20,20 @@
     <string name="applicationLabel" msgid="7762561155467201526">"ফোন"</string>
     <string name="launcherActivityLabel" msgid="1129729740601172692">"ফোন"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ফোন"</string>
-    <string name="recentCallsIconLabel" msgid="2639489159797075507">"কল ইতিহাস"</string>
+    <string name="recentCallsIconLabel" msgid="2639489159797075507">"পুরোনো কলের তালিকা"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> কে কল করুন"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"ভুল নম্বর প্রতিবেদন করুন"</string>
     <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"কল করার আগে নম্বর সম্পাদনা করুন"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"একটি পরিচিতিতে যোগ করুন"</string>
-    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"কল ইতিহাস থেকে মুছুন"</string>
-    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"কল ইতিহাস সাফ করুন"</string>
+    <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"পুরোনো কলের তালিকা থেকে মুছুন"</string>
+    <string name="recentCalls_deleteAll" msgid="5157887960461979812">"পুরোনো কলের তালিকা সাফ করুন"</string>
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"ভয়েসমেল মুছুন"</string>
-    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ভয়েসমেল ভাগ করুন"</string>
+    <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"ভয়েসমেল শেয়ার করুন"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"আপনার কল লগ খালি রয়েছে"</string>
     <string name="recentCalls_empty_action" msgid="6033275870727664335">"একটি কল করুন"</string>
-    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"কল ইতিহাস সাফ করবেন?"</string>
+    <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"পুরোনো কলের তালিকা সাফ করবেন?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"এটি আপনার ইতিহাস থেকে সমস্ত কল মুছে দেবে"</string>
-    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"কল ইতিহাস সাফ করা হচ্ছে…"</string>
+    <string name="clearCallLogProgress_title" msgid="3372471156216306132">"পুরোনো কলের তালিকা সাফ করা হচ্ছে…"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
       <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g>টি ভয়েসমেল </item>
       <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g>টি ভয়েসমেল </item>
@@ -59,8 +59,8 @@
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"সেট আপ"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"ভয়েসমেলে কল করুন"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="sms_disambig_title" msgid="5846266399240630846">"নম্বর চয়ন করুন"</string>
-    <string name="call_disambig_title" msgid="4392886850104795739">"নম্বর চয়ন করুন"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"নম্বর বেছে নিন"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"নম্বর বেছে নিন"</string>
     <string name="make_primary" msgid="5829291915305113983">"এই পছন্দটিকে মনে রাখুন"</string>
     <string name="description_search_button" msgid="3660807558587384889">"অনুসন্ধান"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"ডায়াল করুন"</string>
@@ -70,10 +70,10 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"প্লেব্যাক অবস্থান খুঁজুন"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"প্লেব্যাকের হার হ্রাস করুন"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"প্লেব্যাকের হার বৃদ্ধি করুন"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"কল ইতিহাস"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"পুরোনো কলের তালিকা"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"আরো বিকল্প"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"ডায়াল প্যাড"</string>
-    <string name="menu_copy" msgid="6108677035381940698">"অনুলিপি করুন"</string>
+    <string name="menu_copy" msgid="6108677035381940698">"কপি করুন"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"কেবলমাত্র আউটগোয়িং দেখান"</string>
     <string name="menu_show_incoming_only" msgid="7534206815238877417">"কেবলমাত্র ইনকামিং দেখান"</string>
     <string name="menu_show_missed_only" msgid="154473166059743996">"কেবলমাত্র মিসড দেখান"</string>
@@ -145,10 +145,10 @@
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"একটি পরিচিতিতে যোগ করুন"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS পাঠান"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ভিডিও কল করুন"</string>
-    <string name="show_call_history" msgid="1141502332266697170">"সম্পূর্ণ কল ইতিহাস দেখুন"</string>
+    <string name="show_call_history" msgid="1141502332266697170">"সম্পূর্ণ পুরোনো কলের তালিকা দেখুন"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g>টি নতুন মিসড কল"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"আপনার স্পীড ডায়ালে এখনও পর্যন্ত কেউ নেই"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"একটি পছন্দসই যোগ করুন"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"আপনার পছন্দের একটি পরিচিতি যোগ করুন"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"আপনার এখনও পর্যন্ত কোনো পরিচিতি নেই"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"একটি পরিচিতি যোগ করুন"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"সমস্ত নম্বর দেখতে চিত্রে স্পর্শ করুন বা রেকর্ড করতে ধরে রাখুন"</string>

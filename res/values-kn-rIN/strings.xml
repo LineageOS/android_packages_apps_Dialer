@@ -23,7 +23,7 @@
     <string name="recentCallsIconLabel" msgid="2639489159797075507">"ಕರೆ ಇತಿಹಾಸ"</string>
     <string name="recentCalls_callNumber" msgid="1756372533999226126">"<xliff:g id="NAME">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
     <string name="call_detail_menu_report" msgid="587960283417977382">"ನಿಖರವಾಗಿಲ್ಲದ ಸಂಖ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ"</string>
-    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ"</string>
+    <string name="recentCalls_editNumberBeforeCall" msgid="7756171675833267857">"ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಎಡಿಟ್ ಮಾಡಿ"</string>
     <string name="recentCalls_addToContact" msgid="4570467333422734645">"ಸಂಪರ್ಕಕ್ಕೆ ಸೇರಿಸು"</string>
     <string name="recentCalls_removeFromRecentList" msgid="5551148439199439404">"ಕರೆ ಇತಿಹಾಸದಿಂದ ಅಳಿಸಿ"</string>
     <string name="recentCalls_deleteAll" msgid="5157887960461979812">"ಕರೆ ಇತಿಹಾಸವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
@@ -128,12 +128,12 @@
     <string name="call_not_available" msgid="8941576511946492225">"ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿರುವುದರಿಂದ ಫೋನ್ ಕರೆ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ಈ ಸಾಧನದಲ್ಲಿ ಅದಕ್ಕಾಗಿ ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಲ್ಲ"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ಹೆಸರು ಅಥವಾ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"ನೀವು ಯಾವುದೇ ತಪ್ಪಿದ ಕರೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"ನೀವು ಯಾವುದೇ ಮಿಸ್ಡ್ ಕರೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"ನಿಮ್ಮ ಧ್ವನಿಮೇಲ್ ಇನ್‌ಬಾಕ್ಸ್ ಖಾಲಿ ಇದೆ."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ಮೆಚ್ಚಿನವುಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸು"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ಇತಿಹಾಸ"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"ಎಲ್ಲಾ ಕರೆಗಳು"</string>
-    <string name="call_log_missed_title" msgid="4541142293870638971">"ಮಿಸ್ಡ್‌‌ ಕರೆಗಳು"</string>
+    <string name="call_log_missed_title" msgid="4541142293870638971">"ತಪ್ಪಿದ ಕರೆಗಳು"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"ಸ್ಪೀಡ್ ಡಯಲ್"</string>
     <string name="tab_recents" msgid="929949073851377206">"ಇತ್ತೀಚಿನವುಗಳು"</string>
@@ -148,9 +148,9 @@
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ವೀಡಿಯೊ ಕರೆ ಮಾಡಿ"</string>
     <string name="show_call_history" msgid="1141502332266697170">"ಕರೆಯ ಪೂರ್ಣ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> ಹೊಸ ತಪ್ಪಿದ ಕರೆಗಳು"</string>
-    <string name="speed_dial_empty" msgid="8838921693673366129">"ನಿಮ್ಮ ವೇಗದ ಡಯಲ್‌ನಲ್ಲಿ ಇದುವರೆಗೆ ಯಾರೂ ಇಲ್ಲ"</string>
+    <string name="speed_dial_empty" msgid="8838921693673366129">"ನಿಮ್ಮ ತ್ವರಿತ ಡಯಲ್‌ನಲ್ಲಿ ಇದುವರೆಗೆ ಯಾರೂ ಇಲ್ಲ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"ಮೆಚ್ಚಿನದನ್ನು ಸೇರಿಸಿ"</string>
-    <string name="all_contacts_empty" msgid="471370638298229686">"ನೀವು ಇನ್ನೂ ಯಾವುದೇ ಸಂಪರ್ಕಗಳನ್ನು ಹೊಂದಿಲ್ಲ"</string>
+    <string name="all_contacts_empty" msgid="471370638298229686">"ನಿಮ್ಮ ಬಳಿ ಇನ್ನೂ ಯಾವುದೇ ಸಂಪರ್ಕಗಳಿಲ್ಲ"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"ಸಂಪರ್ಕ ಸೇರಿಸಿ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ಎಲ್ಲ ಸಂಖ್ಯೆಗಳನ್ನು ನೋಡಲು ಚಿತ್ರವನ್ನು ಸ್ಫರ್ಶಿಸಿ ಅಥವಾ ಮರುಕ್ರಮಗೊಳಿಸಲು ಸ್ಪರ್ಶಿಸಿ &amp; ಹೋಲ್ಡ್‌ ಮಾಡಿ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"ತೆಗೆದುಹಾಕು"</string>

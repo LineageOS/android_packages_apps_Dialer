@@ -148,7 +148,7 @@
     <string name="show_call_history" msgid="1141502332266697170">"Xem toàn bộ nhật ký cuộc gọi"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> cuộc gọi nhỡ mới"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Chưa có ai trong danh bạ quay số nhanh của bạn"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Thêm liên hệ quay số nhanh yêu thích"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Thêm liên hệ yêu thích"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Bạn chưa có bất kỳ liên hệ nào"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Thêm liên hệ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Chạm vào hình ảnh để xem tất cả các số hoặc chạm và giữ để sắp xếp lại"</string>

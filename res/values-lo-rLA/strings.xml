@@ -82,7 +82,7 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"ການ​ຕັ້ງ​ຄ່າ"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ່ຕິດຕໍ່ໃໝ່"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ລາຍລະອຽດການໂທ"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ບໍ່​ມີ​ລາຍ​ລະ​ອຽດ​ຢູ່"</string>
@@ -127,7 +127,7 @@
     <string name="call_not_available" msgid="8941576511946492225">"ບໍ່​ສາ​ມາດ​ໂທ​ໄດ​້​ເນື່ອງ​ຈາກ​ແອັບ​ພ​ລິ​ເຄ​ຊັນ​ໂທ​ລະ​ສັບ​ຖືກ​ປິດ​ການ​ນຳ​ໃຊ້​ໄວ້."</string>
     <string name="activity_not_available" msgid="2287665636817987623">"ບໍ່​ມີ​ແອັ​ບຯ​ສຳ​ລັບ​ສິ່ງນັ້ນ​ຢູ່​ໃນ​ອຸ​ປະ​ກອນ​ນີ້"</string>
     <string name="dialer_hint_find_contact" msgid="1012544667033887519">"ປ້ອນ​ຊື່ ຫຼື​ເບີ​ໂທ​ລະ​ສັບ​ເຂົ້າ​ໄປ"</string>
-    <string name="recentMissed_empty" msgid="6213733029875741604">"ທ່ານ​ມີ​ສາຍ​ບໍ່​ໄດ້​ຮັບ."</string>
+    <string name="recentMissed_empty" msgid="6213733029875741604">"ທ່ານບໍ່ມີສາຍທີ່ບໍ່ໄດ້ຮັບ."</string>
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"ກ່ອງເຂົ້າ​ຂໍ້​ຄວາມ​ສຽງ​ຂອງ​ທ່ານ​ຫວ່າງ​ເປົ່າ."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"ສະ​ແດງ​ສະເພາະລາຍການທີ່ນິຍົມເທົ່ານັ້ນ"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"ປະຫວັດການໂທ"</string>
@@ -141,7 +141,7 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"ລຶບອອກຈາກລາຍການທີ່ມັກແລ້ວ"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"ຍົກເລີກ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"ໂທ​ຫາ <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ສ້າງລາຍຊື່ໃໝ່"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"ສ້າງລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"ເພີ່ມ​ໃສ່​ລາຍ​ຊື່"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ສົ່ງ SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"​ໂທ​ອອກ​ດ້ວຍ​ວິ​ດີ​ໂອ"</string>
@@ -197,7 +197,7 @@
     <item msgid="1036113889050195575">"ປົກ​ກ​ະ​ຕິ"</item>
     <item msgid="6177579030803486015">"ຍາວ"</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ການຕອບແບບວ່ອງໄວ"</string>
+    <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"ການຕອບກັບດ່ວນ"</string>
     <string name="call_settings_label" msgid="313434211353070209">"​ການ​ໂທ"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"ບັນ​ຊີ​ໂທ"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"ເປີດ​"</string>

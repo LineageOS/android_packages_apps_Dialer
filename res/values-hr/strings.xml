@@ -80,7 +80,7 @@
     <string name="menu_show_missed_only" msgid="154473166059743996">"Prikaži samo propuštene"</string>
     <string name="menu_show_voicemails_only" msgid="1898421289561435703">"Prikaži samo govorne pošte"</string>
     <string name="menu_show_all_calls" msgid="7560347482073345885">"Prikaz svih poziva"</string>
-    <string name="add_2sec_pause" msgid="9214012315201040129">"Dodaj pauzu od 2 sek."</string>
+    <string name="add_2sec_pause" msgid="9214012315201040129">"Dodaj pauzu od 2 s."</string>
     <string name="add_wait" msgid="3360818652790319634">"Dodaj čekanje"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Postavke"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"Novi kontakt"</string>
@@ -149,7 +149,7 @@
     <string name="show_call_history" msgid="1141502332266697170">"Prikaz cijele povijesti poziva"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"Broj novih propuštenih poziva: <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Još nemate nikog na brzom biranju"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodaj favorit"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Dodaj omiljeni kontakt"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Još nemate nijedan kontakt"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Dodajte kontakt"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Dodirnite sliku da biste vidjeli sve brojeve ili dodirnite i zadržite da biste promijenili raspored"</string>
@@ -193,7 +193,7 @@
     <string name="accessibility_settings_title" msgid="6068141142874046249">"Pristupačnost"</string>
     <string name="ringtone_title" msgid="760362035635084653">"Melodija zvona telefona"</string>
     <string name="vibrate_on_ring_title" msgid="3362916460327555241">"Vibracija i za pozive"</string>
-    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Tonovi biranja brojeva"</string>
+    <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"Ton pri biranju brojeva"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"Duljina zvuka tipkovnice"</string>
   <string-array name="dtmf_tone_length_entries">
     <item msgid="1036113889050195575">"Uobičajena"</item>

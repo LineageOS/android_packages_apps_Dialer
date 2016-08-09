@@ -82,7 +82,7 @@
     <string name="add_2sec_pause" msgid="9214012315201040129">"Engadir pausa de 2 segundos"</string>
     <string name="add_wait" msgid="3360818652790319634">"Engadir espera"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"Configuración"</string>
-    <string name="menu_newContact" msgid="1209922412763274638">"Contacto novo"</string>
+    <string name="menu_newContact" msgid="1209922412763274638">"Novo contacto"</string>
     <string name="menu_allContacts" msgid="6948308384034051670">"Todos os contactos"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"Detalles da chamada"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Detalles non dispoñibles"</string>
@@ -131,7 +131,7 @@
     <string name="recentVoicemails_empty" msgid="7345542764648856330">"A caixa de entrada do correo de voz está baleira."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostrar só os favoritos"</string>
     <string name="call_log_activity_title" msgid="4612824396355272023">"Historial"</string>
-    <string name="call_log_all_title" msgid="3566738938889333307">"Todos"</string>
+    <string name="call_log_all_title" msgid="3566738938889333307">"Todas"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Perdidas"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Correo de voz"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Marcación rápida"</string>
@@ -148,9 +148,9 @@
     <string name="show_call_history" msgid="1141502332266697170">"Ver historial de chamadas completo"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> chamadas perdidas novas"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Aínda non tes ningún contacto na marcación directa"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Engade un favorito para a marcación directa"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Engadir un favorito"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Aínda non tes contactos"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Engade un contacto"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Engadir un contacto"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca a imaxe para ver todos os números ou mantena premida para reordenala"</string>
     <string name="remove_contact" msgid="1080555335283662961">"Eliminar"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"Videochamada"</string>

@@ -30,7 +30,7 @@
     <string name="recentCalls_trashVoicemail" msgid="7604696960787435655">"Eyða talhólfsskilaboðum"</string>
     <string name="recentCalls_shareVoicemail" msgid="1416112847592942840">"Deila talhólfsskilaboðum"</string>
     <string name="recentCalls_empty" msgid="5934808652605981210">"Símtalaskráin er tóm"</string>
-    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Hringja símtal"</string>
+    <string name="recentCalls_empty_action" msgid="6033275870727664335">"Hringja"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"Hreinsa símtalaferil?"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Þetta eyðir öllum símtölum af ferlinum"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Hreinsar símtalaferil…"</string>

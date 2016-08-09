@@ -141,14 +141,14 @@
     <string name="favorite_hidden" msgid="5011234945140912047">"Eliminat dels preferits"</string>
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"Desfés"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"Truca al <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Crea un contacte nou"</string>
+    <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"Crea un contacte"</string>
     <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"Afegeix a un contacte"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Envia SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fes una videotrucada"</string>
     <string name="show_call_history" msgid="1141502332266697170">"Consulta tot l\'historial de trucades"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> trucades perdudes noves"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Encara no tens cap contacte al marcatge ràpid"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Afegeix un contacte preferit"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Afegeix un preferit"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Encara no tens cap contacte"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Afegeix un contacte"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Toca la imatge per veure tots els números i toca-la i mantén-la premuda per reordenar-los."</string>
