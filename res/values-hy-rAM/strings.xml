@@ -258,7 +258,7 @@
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը սխալ է:"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> համարն արդեն արգելափակված է:"</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Զանգերի արգելափակումն անջատվել է 48 ժամով"</string>
-    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Անջատվել է, քանի որ կատարվել է արտակարգ իրավիճակների զանգ:"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Անջատվել է, քանի որ շտապ կանչ է կատարվել։"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Հաշիվներ զանգերի համար"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Միացնել"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Թույլտվությունների սահմանում"</string>
