@@ -34,12 +34,12 @@
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"မခေါ်ဆိုမီ နံပါတ်ကိုတည်းဖြတ်ရန်"</string>
     <string name="call_log_delete_all" msgid="4677609108288680411">"ခေါ်ဆိုမှု မှတ်တမ်း ရှင်းရန်"</string>
     <string name="call_log_trash_voicemail" msgid="1283948488625129019">"အသံပို့စာ အားဖျက်ရန်"</string>
-    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"အသံစာကို သိုလှောင်ထားပါ"</string>
+    <string name="call_log_archive_voicemail" msgid="9072936797223284265">"အသံမေးလ်ကို မှတ်တမ်းသိမ်းပါ"</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"အသံမေးလ်ကို မျှဝေပါ"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"အသံမေးလ် ရှာတွေ့ခဲ့"</string>
     <string name="snackbar_voicemail_archived" msgid="7442340403660554373">"သိုလှောင်ထားသည့် အသံစာ"</string>
     <string name="snackbar_voicemail_deleted_undo" msgid="3741811385891289167">"ပြန်ဖျက်ရန်"</string>
-    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"သိုလှောင်ရုံသို့ သွားပါ"</string>
+    <string name="snackbar_voicemail_archived_goto" msgid="9186182602955185448">"မှတ်တမ်းသို့ သွားပါ"</string>
     <string name="clearCallLogConfirmation_title" msgid="801753155679372984">"ခေါ်ဆိုမှု မှတ်တမ်းကို ဖယ်ရှားရမလား။"</string>
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"သင့်မှတ်တမ်းထဲရှိ ခေါ်ဆိုမှုများအားလုံးကို ဖျက်ပါမည်"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"ခေါ်ဆိုမှု မှတ်တမ်းကို ရှင်းနေ…"</string>
@@ -143,20 +143,20 @@
     <string name="meid" msgid="6210568493746275750">"MEIDနံပါတ်"</string>
     <string name="simContacts_emptyLoading" msgid="6700035985448642408">"ဆင်းမ်ကဒ်မှ ဖွင့်နေပါသည်..."</string>
     <string name="simContacts_title" msgid="27341688347689769">"ဆင်းမ်ကဒ်မှ အဆက်အသွယ်များ"</string>
-    <string name="add_contact_not_available" msgid="5547311613368004859">"အဆက်အသွယ်များ app မရှိ"</string>
+    <string name="add_contact_not_available" msgid="5547311613368004859">"အဆက်အသွယ်များ အက်ပ်မရှိ"</string>
     <string name="voice_search_not_available" msgid="2977719040254285301">"အသံဖြင့် ရှာဖွေမှု မရှိ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"ဖုန်း အပလီကေးရှင်းကို ပိတ်ထား၍ ဖုန်း ခေါ်ဆိုမှု မပြုလုပ်နိုင်ခဲ့ပါ။"</string>
-    <string name="activity_not_available" msgid="2287665636817987623">"ဒီကိရိယာထဲမှာ အဲဒါ့အတွက် app မရှိပါ"</string>
+    <string name="activity_not_available" msgid="2287665636817987623">"ဒီကိရိယာထဲမှာ အဲဒါ့အတွက် အက်ပ်မရှိပါ"</string>
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"အဆက်အသွယ်များရှာပါ"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"နံပါတ်ပေါင်းထည့်ပါ သို့မဟုတ် အဆက်အသွယ်များ ရှာဖွေပါ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"သင့်ခေါ်ဆိုမှတ်တမ်းတွင် ဘာမှမရှိပါ"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"ဖုန်းခေါ်ရန်"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"သင့်တွင် လွတ်သွားသည့်ခေါ်ဆိုမှုများ မရှိပါ။"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"သင့်အသံမေးလ် စာတိုက်ပုံးတွင် ဘာမှမရှိပါ။"</string>
-    <string name="voicemail_archive_empty" msgid="1087408796679056787">"သင့် အသံစာတို သိုလှောင်ရုံသည် အလွတ်ဖြစ်နေသည်။"</string>
+    <string name="voicemail_archive_empty" msgid="1087408796679056787">"သင့် အသံမေးလ်မှတ်တမ်းတွင် ဘာမှမရှိပါ။"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"အနှစ်သက်ဆုံးများသာ ပြပါ"</string>
     <string name="call_log_activity_title" msgid="7949633151371183580">"ခေါ်ဆိုမှုသမိုင်း"</string>
-    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"အသံစာ သိုလှောင်ရုံ"</string>
+    <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"အသံမေးလ် မှတ်တမ်း"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"အားလုံး"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"မကိုင်မိလိုက်သော"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"အသံစာ"</string>
