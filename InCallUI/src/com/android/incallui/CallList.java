@@ -619,6 +619,11 @@ public class CallList {
     private void finishDisconnectedCall(Call call) {
         if (mPendingDisconnectCalls.contains(call)) {
             mPendingDisconnectCalls.remove(call);
+            if (call.getState() == Call.State.DISCONNECTING) {
+                call.setState(Call.State.DISCONNECTED);
+                call.setDisconnectCause(new DisconnectCause(DisconnectCause.LOCAL));
+                notifyListenersOfDisconnect(call);
+            }
         }
         call.setState(Call.State.IDLE);
         updateCallInMap(call);
