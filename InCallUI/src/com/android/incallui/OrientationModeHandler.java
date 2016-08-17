@@ -152,11 +152,9 @@ public class OrientationModeHandler implements InCallDetailsListener, InCallUiLi
             Log.e(this, "Can't set requested orientation on a non-primary call");
             return;
         }
-        final InCallActivity inCallActivity = InCallPresenter.getInstance().getActivity();
-        if (inCallActivity != null) {
-            inCallActivity.setRequestedOrientation(QtiCallUtils.toUiOrientationMode(
-                    orientationMode));
-        }
+
+        InCallPresenter.getInstance().setInCallAllowsOrientationChange(
+                QtiCallUtils.toUiOrientationMode(orientationMode));
     }
 
     /**
