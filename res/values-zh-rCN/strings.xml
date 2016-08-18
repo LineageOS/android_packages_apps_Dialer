@@ -133,6 +133,13 @@
     <string name="payphone" msgid="7726415831153618726">"公用电话"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> 分钟 <xliff:g id="SECONDS">%s</xliff:g> 秒"</string>
+
+    <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
+    <string name="menu_add_to_4g_conference_call">"加入 4G 电话会议"</string>
+    <string name="menu_4g_conference_call">"4G 电话会议"</string>
+    <string name="add_2sec_pause">"延长暂停时间2秒"</string>
+    <string name="add_wait">"延长等待时间"</string>
+
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
     <string name="voicemailCallLogDateTimeFormat" msgid="4388070029056487713">"<xliff:g id="DATE">%1$s</xliff:g><xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -287,6 +294,9 @@
     <string name="input_number">"输入号码"</string>
     <string name="speed_dial_cancel">"取消"</string>
     <string name="speed_dial_ok">"确定"</string>
+    <string name="call_log_show_all_slots">"所有 SIM 卡"</string>
+    <string name="call_log_all_calls_header">"所有通话"</string>
+    <string name="calllog_search_hint">"搜索通话记录"</string>
     <string name="no_call_log">没有通话记录</string>
     <string name="clear">清除</string>
     <string name="description_clear_search">清除搜索记录</string>
