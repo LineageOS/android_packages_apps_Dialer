@@ -806,6 +806,13 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
         return sPreviewSurface.getSurfaceDimensions();
     }
 
+    @Override
+    public void showOutgoingVideoView(boolean show) {
+        if (mPreviewVideoContainer != null) {
+            mPreviewVideoContainer.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
+
     /**
      * Inflates the {@link ViewStub} containing the incoming and outgoing surfaces, if necessary,
      * and creates {@link VideoCallSurface} instances to track the surfaces.
