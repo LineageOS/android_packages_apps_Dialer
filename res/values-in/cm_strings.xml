@@ -66,9 +66,9 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detail statistik panggilan</string>
-  <string name="call_stats_incoming">Yang baru masuk: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Panggilan keluar: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Terhilang: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_incoming">Masuk: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Keluar: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Tdk terjawab: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blacklisted">Diblokir: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -90,7 +90,7 @@
   <string name="call_stats_sort_by_count">Urutkan sesuai jumlah panggilan</string>
   <string name="call_stats_title_for_number">Nomor ini</string>
   <string name="call_stats_title_of_total">Dari total</string>
-  <string name="call_stats_title_durations">Panjang panggilan</string>
+  <string name="call_stats_title_durations">Durasi panggilan</string>
   <string name="call_stats_title_count">Jumlah panggilan</string>
   <string name="call_stats_title_average_duration">Rata-rata durasi panggilan</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
