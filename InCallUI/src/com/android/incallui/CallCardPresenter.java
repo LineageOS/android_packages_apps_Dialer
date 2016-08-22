@@ -36,6 +36,7 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -75,6 +76,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     private static final String TAG = CallCardPresenter.class.getSimpleName();
     private static final long CALL_TIME_UPDATE_INTERVAL_MS = 1000;
+
+    private static final int IDP_NONE = 0;
+    private static final int IDP_CDMA = 1;
+    private static final int IDP_GSM = 2;
+    private static final int IDP_BOTH = 3;
 
     private final EmergencyCallListener mEmergencyCallListener =
             ObjectFactory.newEmergencyCallListener();
@@ -753,6 +759,82 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         return retval;
     }
 
+    private boolean checkIdpEnable(int subId) {
+        boolean ret = false;
+        final int checkIdp = mContext.getResources().getInteger(R.integer.check_idp);
+        final int phoneType = TelephonyManager.getDefault().getCurrentPhoneType(subId);
+
+        if (checkIdp == IDP_BOTH ||
+                (checkIdp == IDP_CDMA && phoneType == TelephonyManager.PHONE_TYPE_CDMA) ||
+                (checkIdp == IDP_GSM && phoneType == TelephonyManager.PHONE_TYPE_GSM)) {
+            ret = true;
+        }
+
+        Log.i(this, "checkIdp phone type:" + phoneType + " enabled:" + ret);
+        return ret;
+    }
+
+    private int getSubId() {
+        int subId = SubscriptionManager.getDefaultVoiceSubscriptionId();
+
+        PhoneAccountHandle accountHandle = mPrimary.getAccountHandle();
+        if (accountHandle != null) {
+            TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
+            PhoneAccount account = mgr.getPhoneAccount(accountHandle);
+            if (account != null) {
+                subId = TelephonyManager.getDefault().getSubIdForPhoneAccount(account);
+                Log.d(this, "get sub id from phone account = " + subId);
+            }
+        }
+
+        return subId;
+    }
+
+    private String checkIdp(String number, boolean nameIsNumber, boolean isIncoming) {
+        int subId = getSubId();
+        String checkedNumber = number;
+        String[] idp = mContext.getResources().getStringArray(R.array.international_idp);
+        String[] idpValues = mContext.getResources().
+                getStringArray(R.array.international_idp_values);
+        boolean isDataInValid = (idp.length == 0 || idpValues.length == 0 ||
+                idp.length != idpValues.length);
+
+        if (checkIdpEnable(subId) && nameIsNumber && !isDataInValid) {
+            if (!isIncoming) {
+                final int checkRoamingIdx = mContext.getResources().
+                        getInteger(R.integer.check_idp_roaming_idx);
+                final boolean isNetworkRoaming =
+                        TelephonyManager.getDefault().isNetworkRoaming(subId);
+                for (int i = 0; i < idp.length; i++) {
+                    Log.i(this, "checkIdp idp:" + idp[i] + " idp value:" + idpValues[i] +
+                            " roaming idx:" + checkRoamingIdx);
+                    int indexIdp = checkedNumber.indexOf(idp[i]);
+
+                    if (indexIdp != -1) {
+                        if ((checkRoamingIdx == i && !isNetworkRoaming) ||
+                                checkRoamingIdx != i) {
+                            checkedNumber = checkedNumber.substring(0, indexIdp) + idpValues[i] +
+                                    checkedNumber.substring(indexIdp + idp[i].length());
+                        }
+                    }
+                }
+            } else {
+                final int checkReconvertIdx = mContext.getResources().
+                        getInteger(R.integer.check_idp_reconvert_idx);
+                if (checkReconvertIdx >= 0 && checkReconvertIdx < idp.length &&
+                        number.indexOf(idpValues[checkReconvertIdx]) == 0) {
+                    checkedNumber = idp[checkReconvertIdx] +
+                            number.substring(idpValues[checkReconvertIdx].length());
+                }
+            }
+        }
+
+        Log.i(this, "checkIdp number: " + number + " subid:" + subId + " isIncoming:" +
+                isIncoming + " checked number:" + checkedNumber + " inValid:" +
+                isDataInValid + " nameIsNumber" + nameIsNumber);
+        return checkedNumber;
+    }
+
     private void updatePrimaryDisplayInfo() {
         final CallCardUi ui = getUi();
         if (ui == null) {
@@ -821,6 +903,12 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             boolean nameIsNumber = name != null && name.equals(mPrimaryContactInfo.number);
             // Call with caller that is a work contact.
             boolean isWorkContact = (mPrimaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
+            boolean isIncoming = mPrimary.getState() == Call.State.INCOMING;
+            boolean isWithPrefix = mContext.getResources().
+                getBoolean(R.bool.phone_number_with_intl_prefix);
+            if(isWithPrefix == true){
+                name = checkIdp(name, nameIsNumber, isIncoming);
+            }
             ui.setPrimary(
                     number,
                     name,
