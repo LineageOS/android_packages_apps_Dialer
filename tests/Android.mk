@@ -17,7 +17,7 @@ src_dirs := src \
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 
 LOCAL_STATIC_JAVA_LIBRARIES += \
-        mockito-target
+        mockito-target-minus-junit4
 
 LOCAL_PACKAGE_NAME := DialerTests
 
