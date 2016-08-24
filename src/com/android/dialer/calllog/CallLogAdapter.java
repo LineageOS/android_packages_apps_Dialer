@@ -60,6 +60,7 @@ import com.android.dialer.filterednumber.BlockNumberDialogFragment.Callback;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.service.ExtendedBlockingButtonRenderer;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 
@@ -497,15 +498,15 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         int count = getGroupSize(position);
-
         final String phoneNumber = c.getString(CallLogQuery.NUMBER);
         Pattern pattern = Pattern.compile("[,;]");
         String[] num = pattern.split(phoneNumber);
-        final String number = num.length > 0 ? num[0] : "";
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
         final String postDialDigits = CompatUtils.isNCompatible()
                 && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
                 c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+        final String number = DialerUtils.isConferenceURICallLog(phoneNumber, postDialDigits) ?
+                phoneNumber : num.length > 0 ? num[0] : "";
         final String viaNumber = CompatUtils.isNCompatible()
                 && mActivityType != ACTIVITY_TYPE_ARCHIVE ?
                 c.getString(CallLogQuery.VIA_NUMBER) : "";

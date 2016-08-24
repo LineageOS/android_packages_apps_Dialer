@@ -283,10 +283,12 @@ public class CallDetailActivity extends AppCompatActivity
                 if (TextUtils.isEmpty(mNumber)) {
                     return;
                 }
-                mContext.startActivity(
-                        new CallIntentBuilder(getDialableNumber())
-                                .setCallInitiationType(LogState.INITIATION_CALL_DETAILS)
-                                .build());
+                Intent dialIntent = new CallIntentBuilder(getDialableNumber())
+                        .setCallInitiationType(LogState.INITIATION_CALL_DETAILS).build();
+                if (DialerUtils.isConferenceURICallLog(mNumber, mPostDialDigits)) {
+                    dialIntent.putExtra("org.codeaurora.extra.DIAL_CONFERENCE_URI", true);
+                }
+                mContext.startActivity(dialIntent);
             }
         });
 

@@ -232,4 +232,13 @@ public class DialerUtils {
                 PREFS_MESSAGE, Context.MODE_PRIVATE);
         prefs.edit().putBoolean(KEY_STATE, show).apply();
     }
+
+    /**
+     * @return true if calllog inserted earlier when dial a ConfURI call.
+     */
+    public static boolean isConferenceURICallLog(String number, String postDialDigits) {
+        return (number == null || number.contains(";") || number.contains(",")) &&
+                (postDialDigits == null || postDialDigits.equals(""));
+    }
+
 }
