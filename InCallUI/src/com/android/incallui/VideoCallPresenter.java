@@ -32,6 +32,8 @@ import android.telecom.VideoProfile.CameraCapabilities;
 import android.view.Surface;
 import android.widget.ImageView;
 
+import org.codeaurora.ims.utils.QtiImsExtUtils;
+
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.compat.CompatUtils;
 import com.android.dialer.R;
@@ -324,7 +326,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             // whether PLAYER_START event has been received or not. Since we
             // start with showing incoming video by default for surface creation,
             // we need to make sure we hide it once surface is available.
-            showVideoUi(mCurrentVideoState, mCurrentCallState);
+            boolean isConf = (mPrimaryCall != null ? mPrimaryCall.isConferenceCall() :
+                    false);
+            showVideoUi(mCurrentVideoState, mCurrentCallState, isConf);
         }
     }
 
@@ -566,7 +570,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         // Make sure we hide or show the video UI if needed.
-        showVideoUi(call.getVideoState(), call.getState());
+        showVideoUi(call.getVideoState(), call.getState(), call.isConferenceCall());
     }
 
     private void cleanupSurfaces() {
@@ -725,7 +729,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             return;
         }
 
-        showVideoUi(newVideoState, call.getState());
+        showVideoUi(newVideoState, call.getState(), call.isConferenceCall());
 
         // Communicate the current camera to telephony and make a request for the camera
         // capabilities.
@@ -773,7 +777,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private void exitVideoMode() {
         Log.d(this, "exitVideoMode");
 
-        showVideoUi(VideoProfile.STATE_AUDIO_ONLY, Call.State.ACTIVE);
+        showVideoUi(VideoProfile.STATE_AUDIO_ONLY, Call.State.ACTIVE, false);
         enableCamera(mVideoCall, false);
         InCallPresenter.getInstance().setFullScreen(false);
 
@@ -791,7 +795,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param videoState The video state.
      * @param callState The call state.
      */
-    private void showVideoUi(int videoState, int callState) {
+    private void showVideoUi(int videoState, int callState, boolean isConf) {
         VideoCallUi ui = getUi();
         if (ui == null) {
             Log.e(this, "showVideoUi, VideoCallUi is null returning");
@@ -808,6 +812,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 + showOutgoingVideo);
         if (showIncomingVideo || showOutgoingVideo) {
             ui.showVideoViews(showOutgoingVideo, showIncomingVideo);
+
+            boolean hidePreview = shallHidePreview(isConf, videoState);
+            Log.v(this, "showVideoUi, hidePreview = " + hidePreview);
+            ui.showOutgoingVideoView(!hidePreview);
 
             if (isVideoReceptionEnabled) {
                 loadProfilePhotoAsync();
@@ -1023,7 +1031,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             case Connection.VideoProvider.SESSION_EVENT_RX_RESUME:
                 mIsIncomingVideoAvailable =
                     event == Connection.VideoProvider.SESSION_EVENT_RX_RESUME;
-                showVideoUi(mCurrentVideoState, mCurrentCallState);
+                boolean isConf = (mPrimaryCall != null ? mPrimaryCall.isConferenceCall() :
+                        false);
+                showVideoUi(mCurrentVideoState, mCurrentCallState, isConf);
                 sb.append(mIsIncomingVideoAvailable ? "rx_resume" : "rx_pause");
                 break;
             case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
@@ -1365,6 +1375,14 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
+     * Hide preview window if it is a VT conference call
+     */
+    private boolean shallHidePreview(boolean isConf, int videoState) {
+        return VideoProfile.isBidirectional(videoState) && isConf
+                && QtiImsExtUtils.shallHidePreviewInVtConference(mContext);
+    }
+
+    /**
      * Defines the VideoCallUI interactions.
      */
     public interface VideoCallUi extends Ui {
@@ -1384,5 +1402,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         ImageView getPreviewPhotoView();
         void adjustPreviewLocation(boolean shiftUp, int offset);
         void setPreviewRotation(int orientation);
+        void showOutgoingVideoView(boolean show);
     }
 }
