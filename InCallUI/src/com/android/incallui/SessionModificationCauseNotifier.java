@@ -32,6 +32,7 @@ import android.os.Bundle;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.google.common.base.Preconditions;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.codeaurora.ims.QtiCallConstants;
@@ -42,12 +43,13 @@ import org.codeaurora.ims.QtiCallConstants;
  * figure out if session modification cause has been sent when a call upgrades/downgrades and
  * notify the {@class InCallMessageController} to display the indication on UI.
  */
-public class SessionModificationCauseNotifier implements InCallDetailsListener{
+public class SessionModificationCauseNotifier implements InCallDetailsListener, CallList.Listener {
 
     private final List<InCallSessionModificationCauseListener> mSessionModificationCauseListeners
             = new CopyOnWriteArrayList<>();
 
     private static SessionModificationCauseNotifier sSessionModificationCauseNotifier;
+    private final HashMap<String, Integer> mSessionModificationCauseMap = new HashMap<>();
 
     /**
      * Returns a singleton instance of {@class SessionModificationCauseNotifier}
@@ -87,6 +89,10 @@ public class SessionModificationCauseNotifier implements InCallDetailsListener{
     private SessionModificationCauseNotifier() {
     }
 
+    private int getSessionModificationCause(Bundle callExtras) {
+        return callExtras.getInt(QtiCallConstants.SESSION_MODIFICATION_CAUSE_EXTRA_KEY,
+                QtiCallConstants.CAUSE_CODE_UNSPECIFIED);
+    }
     /**
      * Overrides onDetailsChanged method of {@class InCallDetailsListener}. We are
      * notified when call details change and extract the session modification cause from the
@@ -95,18 +101,61 @@ public class SessionModificationCauseNotifier implements InCallDetailsListener{
     @Override
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         Log.d(this, "onDetailsChanged: - call: " + call + "details: " + details);
-        final Bundle extras =  (call != null && details != null) ? details.getExtras() : null;
-        final int sessionModificationCause = (extras != null) ? extras.getInt(
-                QtiCallConstants.SESSION_MODIFICATION_CAUSE_EXTRA_KEY,
-                QtiCallConstants.CAUSE_CODE_UNSPECIFIED) :
-                QtiCallConstants.CAUSE_CODE_UNSPECIFIED;
 
-        if (sessionModificationCause != QtiCallConstants.CAUSE_CODE_UNSPECIFIED) {
+        if (call == null || details == null ||
+                !Call.State.isConnectingOrConnected(call.getState())) {
+            Log.d(this, "onDetailsChanged - Call/details is null/Call is not connected. Return");
+            return;
+        }
+
+        final Bundle callExtras = details.getExtras();
+
+        if (callExtras == null) {
+            return;
+        }
+
+        final String callId = call.getId();
+
+        final int oldSessionModificationCause = mSessionModificationCauseMap.containsKey(callId) ?
+            mSessionModificationCauseMap.get(callId) : QtiCallConstants.CAUSE_CODE_UNSPECIFIED;
+        final int newSessionModificationCause = getSessionModificationCause(callExtras);
+
+        if (oldSessionModificationCause == newSessionModificationCause) {
+            return;
+        }
+
+        mSessionModificationCauseMap.put(callId, newSessionModificationCause);
+        // Notify all listeners only when there is a valid value
+        if (newSessionModificationCause != QtiCallConstants.CAUSE_CODE_UNSPECIFIED) {
             Preconditions.checkNotNull(mSessionModificationCauseListeners);
             for (InCallSessionModificationCauseListener listener :
-                    mSessionModificationCauseListeners) {
-                listener.onSessionModificationCauseChanged(call, sessionModificationCause);
+                mSessionModificationCauseListeners) {
+                    listener.onSessionModificationCauseChanged(call, newSessionModificationCause);
             }
         }
+    }
+
+    /**
+     * This method overrides onDisconnect method of {@interface CallList.Listener}
+     */
+    @Override
+    public void onDisconnect(final Call call) {
+        Log.d(this, "onDisconnect: call: " + call);
+        mSessionModificationCauseMap.remove(call.getId());
+    }
+
+    @Override
+    public void onUpgradeToVideo(Call call) {
+        //NO-OP
+    }
+
+    @Override
+    public void onIncomingCall(Call call) {
+        //NO-OP
+    }
+
+    @Override
+    public void onCallListChange(CallList callList) {
+        //NO-OP
     }
 }

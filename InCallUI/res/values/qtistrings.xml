@@ -168,4 +168,13 @@
     <string name="low_battery_msg">Your battery level is below 15%. Do you want to continue with the video call or convert it to Voice call</string>
     <!-- No option of the low battery alert dialog for MO/MT Video calls -->
     <string name="low_battery_convert">Convert</string>
+    <!-- International prefix source-->
+    <string-array name="international_idp" translatable="false">
+        <item>+33</item>
+    </string-array>
+
+    <!-- International prefix converted value-->
+    <string-array name="international_idp_values" translatable="false">
+        <item>"0033"</item>
+    </string-array>
 </resources>

@@ -31,25 +31,25 @@ package com.android.incallui;
 import org.codeaurora.ims.QtiCallConstants;
 import android.os.Bundle;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.HashMap;
 import java.util.List;
-
 import com.google.common.base.Preconditions;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
 
 /**
  * This class listens to incoming events from the {@class InCallDetailsListener}.
- * When call details change, this class is notified and we parse the extras from the details to
+ * When call details change, this class is notified and we parse the callExtras from the details to
  * figure out if call substate has changed and notify the {@class InCallMessageController} to
  * display the indication on UI.
  *
  */
-public class CallSubstateNotifier implements InCallDetailsListener {
+public class CallSubstateNotifier implements InCallDetailsListener, CallList.Listener {
 
     private final List<InCallSubstateListener> mCallSubstateListeners =
             new CopyOnWriteArrayList<>();
 
     private static CallSubstateNotifier sCallSubstateNotifier;
-    private int mCallSubstate = QtiCallConstants.CALL_SUBSTATE_NONE;
+    private final HashMap<String, Integer> mCallSubstateMap = new HashMap<>();
 
     /**
      * This method returns a singleton instance of {@class CallSubstateNotifier}
@@ -89,26 +89,70 @@ public class CallSubstateNotifier implements InCallDetailsListener {
     private CallSubstateNotifier() {
     }
 
+    private int getCallSubstate(Bundle callExtras) {
+        return callExtras.getInt(QtiCallConstants.CALL_SUBSTATE_EXTRA_KEY,
+                QtiCallConstants.CALL_SUBSTATE_NONE);
+    }
+
     /**
      * This method overrides onDetailsChanged method of {@class InCallDetailsListener}. We are
-     * notified when call details change and extract the call substate from the extras, detect if
-     * call substate changed and notify all registered listeners.
+     * notified when call details change and extract the call substate from the callExtras, detect
+     * if call substate changed and notify all registered listeners.
      */
     @Override
     public void onDetailsChanged(Call call, android.telecom.Call.Details details) {
         Log.d(this, "onDetailsChanged - call: " + call + "details: " + details);
-        final Bundle extras =  (call != null && details != null) ? details.getExtras() : null;
-        final int callSubstate = (extras != null) ? extras.getInt(
-                QtiCallConstants.CALL_SUBSTATE_EXTRA_KEY,
-                QtiCallConstants.CALL_SUBSTATE_NONE) :
-                QtiCallConstants.CALL_SUBSTATE_NONE;
 
-        if (callSubstate != mCallSubstate) {
-            mCallSubstate = callSubstate;
-            Preconditions.checkNotNull(mCallSubstateListeners);
-            for (InCallSubstateListener listener : mCallSubstateListeners) {
-                listener.onCallSubstateChanged(call, mCallSubstate);
-            }
+        if (call == null || details == null ||
+                !Call.State.isConnectingOrConnected(call.getState())) {
+            Log.d(this, "onDetailsChanged - Call/details is null/Call is not connected. Return");
+            return;
         }
+
+        final Bundle callExtras = details.getExtras();
+
+        if (callExtras == null) {
+            return;
+        }
+
+        final String callId = call.getId();
+
+        final int oldCallSubstate = mCallSubstateMap.containsKey(callId) ?
+                mCallSubstateMap.get(callId) : QtiCallConstants.CALL_SUBSTATE_NONE;
+        final int newCallSubstate = getCallSubstate(callExtras);
+
+        if (oldCallSubstate == newCallSubstate) {
+            return;
+        }
+
+        mCallSubstateMap.put(callId, newCallSubstate);
+        Preconditions.checkNotNull(mCallSubstateListeners);
+        for (InCallSubstateListener listener : mCallSubstateListeners) {
+            listener.onCallSubstateChanged(call, newCallSubstate);
+        }
+    }
+
+    /**
+     * This method overrides onDisconnect method of {@interface CallList.Listener}
+     */
+    @Override
+    public void onDisconnect(final Call call) {
+        Log.d(this, "onDisconnect: call: " + call);
+        mCallSubstateMap.remove(call.getId());
+    }
+
+    @Override
+    public void onUpgradeToVideo(Call call) {
+        //NO-OP
+    }
+
+    @Override
+    public void onIncomingCall(Call call) {
+        //NO-OP
+    }
+
+    @Override
+    public void onCallListChange(CallList callList) {
+        //NO-OP
     }
 }
