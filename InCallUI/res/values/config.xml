@@ -24,4 +24,6 @@
     <!-- The number of milliseconds after which a video call will automatically enter fullscreen
          mode (requires video_call_auto_fullscreen to be true). -->
     <integer name="video_call_auto_fullscreen_timeout">5000</integer>
+    <!-- When international prefix is enabled in CDMA mode, whether with international prefix -->
+    <bool name="phone_number_with_intl_prefix">false</bool>
 </resources>
