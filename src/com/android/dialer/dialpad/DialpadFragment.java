@@ -44,6 +44,7 @@ import android.provider.Settings;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -71,6 +72,7 @@ import android.widget.TextView;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
@@ -299,6 +301,7 @@ public class DialpadFragment extends Fragment
     private boolean mStartedFromNewIntent = false;
     private boolean mFirstLaunch = false;
     private boolean mAnimate = false;
+    private TextView mOperator;
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
 
@@ -450,6 +453,7 @@ public class DialpadFragment extends Fragment
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 floatingActionButtonContainer, floatingActionButton);
+        mOperator = (TextView)fragmentView.findViewById(R.id.dialpad_floating_operator);
         Trace.endSection();
         Trace.endSection();
         return fragmentView;
@@ -760,6 +764,15 @@ public class DialpadFragment extends Fragment
         }
 
         mFirstLaunch = false;
+
+        if (MoreContactUtils.shouldShowOperator(getContext())) {
+                mOperator.setVisibility(View.VISIBLE);
+                mOperator.setText(MoreContactUtils.getNetworkSpnName(getContext(),
+                    SubscriptionManager.getDefaultVoiceSubscriptionId()));
+        } else {
+            mOperator.setVisibility(View.GONE);
+        }
+
         Trace.endSection();
     }
 
