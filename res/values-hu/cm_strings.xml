@@ -95,13 +95,52 @@
   <string name="call_recording_category_title">Hívásrögzítés</string>
   <string name="call_recording_format">Hangformátum</string>
   <string name="call_playback_no_app_found_toast">Nem található alkalmazás a kiválasztott felvétel lejátszásához.</string>
+  <string name="invalid_number_text">"%1$s nem sikerült hívást kezdeményezni. Helyes a szám?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Telefonszámot hívhat vagy\negy névjegyet kereshet</string>
+  <string name="sign_in_hint_text">%1$s hívásokhoz jelentkezzen be</string>
+  <string name="wifi_hint_text">Ingyenes hívás %1$s és %1$s között Wi-Fin keresztül.</string>
+  <string name="roaming_hint_text">%1$s roaming. Ingyenes hívás %2$s és %2$s között Wi-Fin keresztül.</string>
+  <string name="emergency_call_hint_text">Nincs SIM. Csak segélykérő hívások.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> hívás</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> beállítások</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Hívás ezzel: <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Igen</string>
   <string name="callerinfo_provider_auth_no_short">Nem</string>
+  <string name="callerinfo_provider_auth_no">Köszönöm, nem</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> hozzá fog férni a névjegyeihez, Én-profiljához, és a Cyanogen OS fiókjához, amely magában foglalhatja az e-mail címét.</string>
+  <string name="callerinfo_provider_auth_learn_more">Tudjon meg többet</string>
+  <string name="callerinfo_provider_auth_desc">Üdvözöljük! Szeretné, ha <xliff:g id="provider_name">%s</xliff:g> azonosítaná az ismeretlen hívókat és blokkolná a kéretlen hívásokat?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Üdvözöljük! Szeretné, ha <xliff:g id="provider_name">%s</xliff:g> azonosítaná az ismeretlen hívókat?</string>
+  <string name="callerinfo_provider_summary">Azonosítja az ismeretlen hívókat és a spamet</string>
+  <string name="callerinfo_provider_summary_no_spam">Ismeretlen hívók azonosítása</string>
+  <string name="silence_spam_title">Spam hívások némítása</string>
+  <string name="silence_spam_summary">Soha ne engedje a spam hívásokat csörögni</string>
+  <string name="block_hidden_title">Rejtett számok blokkolása</string>
+  <string name="block_hidden_summary">Rejtett számokat spamként tekintse</string>
+  <string name="block_dialog_title">Blokkolja ezt a hívót?</string>
+  <string name="block_dialog_positive">Blokkolás</string>
+  <string name="block_dialog_negative">Elvet</string>
+  <string name="block_dialog_description">Ettől a személytől többet nem fog hívást vagy üzenetet kapni.</string>
+  <string name="block_dialog_report_spam">Spamként jelent: <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">%1$s tiltása?</string>
+  <string name="provider_disable_message">%1$s letiltásával nem lesz hívó azonosítója.</string>
+  <string name="provider_disable_spam_message">%1$s letiltásával nem lesz spam védelme vagy hívó azonosítója.</string>
+  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g> üzemeltetésével</string>
+  <string name="provider_help">"%1$s hívások kezdeményezése\nmódok váltásával itt"</string>
+  <string name="provider_search_help">"%1$s névjegyek keresése\nmódok váltásával itt"</string>
+  <string name="provider_button_help">"Értem"</string>
+  <string name="provider_voice_call">"%1$s hanghívás"</string>
+  <string name="provider_video_call">"%1$s videohívás"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Hívás indításához kapcsolja be a Telefon engedélyt.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Jegyzet megtekintése</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Készítsen jegyzeteket bárhonnan</string>
+  <string name="callerinfo_provider_status_disabling">Letiltás</string>
+  <string name="show_dialpad_at_start_title">Mutassa a tárcsázót indításkor</string>
 </resources>

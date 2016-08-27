@@ -22,21 +22,21 @@
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Penelusuran dialpad T9</string>
   <string name="t9_search_input_locale">Masukan penelusuran T9</string>
-  <string name="t9_search_input_locale_default">Baku</string>
+  <string name="t9_search_input_locale_default">Standar</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Penelusuran nomor telepon</string>
   <string name="lookup_settings_description">Penelusuran nomor telepon yang tidak dikenal</string>
-  <string name="enable_forward_lookup_title">Penelusuran maju</string>
-  <string name="enable_forward_lookup_summary">Menunjukkan tempat terdekat saat menelusuri dalam dialer</string>
+  <string name="enable_forward_lookup_title">Penelusuran kedepan</string>
+  <string name="enable_forward_lookup_summary">Tampilkan tempat terdekat ketika mencari di dialer</string>
   <string name="enable_people_lookup_title">Penelusuran orang</string>
   <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
   <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
   <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
-  <string name="forward_lookup_provider_title">Penyedia penelusuran maju</string>
+  <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
   <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
   <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
   <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Tiongkok (CN)</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Cina (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <string name="type_blacklist">Panggilan dalam daftar hitam</string>
   <string name="call_log_action_block">Blokir penelpon</string>
@@ -63,9 +63,9 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detail statistik panggilan</string>
-  <string name="call_stats_incoming">Yang baru masuk: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Panggilan keluar: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Terhilang: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_incoming">Masuk: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Keluar: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Tdk terjawab: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blacklisted">Diblokir: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
@@ -87,14 +87,14 @@
   <string name="call_stats_sort_by_count">Urutkan sesuai jumlah panggilan</string>
   <string name="call_stats_title_for_number">Nomor ini</string>
   <string name="call_stats_title_of_total">Dari total</string>
-  <string name="call_stats_title_durations">Panjang panggilan</string>
+  <string name="call_stats_title_durations">Durasi panggilan</string>
   <string name="call_stats_title_count">Jumlah panggilan</string>
   <string name="call_stats_title_average_duration">Rata-rata durasi panggilan</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="recent_calls_no_items_in_range">Log panggilan Anda tidak terdapat penggilan dalam rentang waktu yang dipilih.</string>
   <string name="call_recording_category_title">Rekaman panggilan</string>
   <string name="call_recording_format">Format audio</string>
-  <string name="call_playback_no_app_found_toast">Tidak ada aplikasi yang dapat ditemukan untuk pemutaran kembali dari rekaman yang terpilih.</string>
+  <string name="call_playback_no_app_found_toast">Tidak ada aplikasi ditemukan untuk memutar kembali rekaman yang terpilih.</string>
   <string name="invalid_number_text">"%1$s tidak bisa melakukan panggilan ini. Apakah nomornya benar?"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">Anda dapat memasukkan nomor telepon atau\nmencari kontak</string>
@@ -111,13 +111,13 @@
   <string name="callerinfo_provider_auth_yes">Ya</string>
   <string name="callerinfo_provider_auth_no_short">Tidak</string>
   <string name="callerinfo_provider_auth_no">Tidak, terima kasih</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> akan dapat mengakses kontak, profil, dan akun Cyanogen OS Anda, yang mungkin termasuk alamat surel.</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> akan mengakses kontak, profil, dan akun Cyanogen OS, yang mungkin termasuk alamat email anda.</string>
   <string name="callerinfo_provider_auth_learn_more">Pelajari selengkapnya</string>
-  <string name="callerinfo_provider_auth_desc">Selamat datang! Apakah Anda ingin <xliff:g id="provider_name">%s</xliff:g> untuk mengidentifikasi penelepon tidak dikenal dan blokir panggilan yang tidak diinginkan?</string>
+  <string name="callerinfo_provider_auth_desc">Selamat datang! Apakah Anda ingin <xliff:g id="provider_name">%s</xliff:g> mengidentifikasi penelepon tidak dikenal dan memblokir panggilan yang tidak diinginkan?</string>
   <string name="callerinfo_provider_auth_desc_no_spam">Selamat datang! Apakah Anda ingin <xliff:g id="provider_name">%s</xliff:g> untuk mengidentifikasi penelepon tidak dikenal?</string>
   <string name="callerinfo_provider_summary">Identifikasi penelepon tidak dikenal dan spam</string>
   <string name="callerinfo_provider_summary_no_spam">Identifikasi penelepon tidak dikenal</string>
-  <string name="silence_spam_title">Senyapkan panggilan spam</string>
+  <string name="silence_spam_title">Heningkan panggilan spam</string>
   <string name="silence_spam_summary">Jangan biarkan panggilan spam berdering</string>
   <string name="block_hidden_title">Blokir nomor telepon yang tersembunyi</string>
   <string name="block_hidden_summary">Anggap nomor telepon tersembunyi sebagai spam</string>
@@ -141,4 +141,6 @@
   <string name="search_shortcut_view_note">Lihat catatan</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Tulis catatan di mana pun</string>
+  <string name="callerinfo_provider_status_disabling">Menonaktifkan</string>
+  <string name="show_dialpad_at_start_title">Tampilkan dial pad di awal</string>
 </resources>
