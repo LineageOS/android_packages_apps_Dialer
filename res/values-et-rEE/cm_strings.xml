@@ -38,6 +38,9 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Hiina (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Musta nimekirja kõne</string>
+  <string name="call_log_action_block">Blokeeri helistaja</string>
+  <string name="call_log_action_unblock">Helistaja blokeeritud</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Kiirvalimise seaded</string>
   <string name="speed_dial_not_set">(määramata)</string>
@@ -60,6 +63,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistika</string>
   <string name="callStatsDetailTitle">Detailne kõne statistika</string>
+  <string name="call_stats_incoming">Saabuv kõne: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Väljuv kõne: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Vastamata: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Blokeeritud: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Kokku: <xliff:g id="call_count">%s </xliff:g>, <xliff:g id="duration"> %s </xliff:g></string>
   <string name="call_stats_header_total_callsonly">Kokku: <xliff:g id="call_count">%s </xliff:g></string>
   <string name="call_stats_filter_from">Alguskuupäev</string>
@@ -77,14 +85,62 @@
   <string name="call_stats_reset_filter">Lähtesta ajavahemik</string>
   <string name="call_stats_sort_by_duration">Kõne kestvuse järgi sortimine</string>
   <string name="call_stats_sort_by_count">Kõnede arvu järgi sortimine</string>
+  <string name="call_stats_title_for_number">See number</string>
+  <string name="call_stats_title_of_total">Kogu</string>
+  <string name="call_stats_title_durations">Kõnede kestus</string>
+  <string name="call_stats_title_count">Kõnede arv</string>
+  <string name="call_stats_title_average_duration">Keskmine kõne kestus</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Sinu kõnelogi ei sisalda ühtegi kõnet valitud ajavahemikus.</string>
+  <string name="call_recording_category_title">Kõne salvestamine</string>
+  <string name="call_recording_format">Heli formaat</string>
+  <string name="call_playback_no_app_found_toast">Salvestuse taasesitamiseks ei leidu rakendust.</string>
+  <string name="invalid_number_text">"%1$s ei saanud helistada. Kontrolli numbrit."</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Võite helistada numbrile või\notsida oma kontakte</string>
+  <string name="sign_in_hint_text">Logi sisse %1$s-helistamiseks</string>
+  <string name="wifi_hint_text">Helista tasuta %1$s - %1$s kasutades Wi-Fi-t.</string>
+  <string name="roaming_hint_text">%1$s kasutab rändlusteenust. Helista tasuta %2$s - %2$s kasutades Wi-Fi-t.</string>
+  <string name="emergency_call_hint_text">Pole SIM-kaarti. Üksnes hädaabikõnesid.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> helista</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> sätted</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Helista kasutades <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Jah</string>
   <string name="callerinfo_provider_auth_no_short">Ei</string>
+  <string name="callerinfo_provider_auth_no">Ei, aitäh</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> saab ligipääsu sinu kontaktidele, Mina-profiilile ning Cyanogen OS kontole, mis võib sisaldada sinu emaili aadressi.</string>
+  <string name="callerinfo_provider_auth_learn_more">Saa rohkem teada</string>
+  <string name="callerinfo_provider_auth_desc">Tere tulemast! Kas te sooviksite teenusel <xliff:g id="provider_name">%s</xliff:g> tuvastada tundmatud helistajad ja blokeerida soovimatud kõned?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Tere tulemast! Kas te sooviksite teenusel <xliff:g id="provider_name">%s</xliff:g> tuvastada tundmatud helistajad?</string>
+  <string name="callerinfo_provider_summary">Tuvastab tundmatud helistajad ja rämpsposti</string>
+  <string name="callerinfo_provider_summary_no_spam">Tuvastab tundmatud helistajad</string>
+  <string name="silence_spam_title">Vaigista rämpskõned</string>
+  <string name="silence_spam_summary">Ära lase rämpskõnedel heliseda</string>
+  <string name="block_hidden_title">Blokeeri peidetud telefoninumbrid</string>
+  <string name="block_hidden_summary">Käsitle peidetud numbreid kui rämpskõnesid</string>
+  <string name="block_dialog_title">Blokeerida see helistaja?</string>
+  <string name="block_dialog_positive">Blokeeri</string>
+  <string name="block_dialog_negative">Katkesta</string>
+  <string name="block_dialog_description">Te ei saa rohkem kõnesid ega sõnumeid sellelt inimeselt.</string>
+  <string name="block_dialog_report_spam">Teata rämpspostist: <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Keela %1$s?</string>
+  <string name="provider_disable_message">Keelates teenuse %1$s, ei ole teil enam helistaja ID\'d.</string>
+  <string name="provider_disable_spam_message">Keelates teenuse %1$s, ei ole teil enam rämpsposti kaitset ega helistaja ID\'d.</string>
+  <string name="powered_by_provider">Hoitakse töös <xliff:g id="provider">%s</xliff:g> poolt</string>
+  <string name="provider_help">"Tee %1$s kõnesid \nvahetades kõnerežiimi"</string>
+  <string name="provider_search_help">"Otsi %1$s kontakte \nvahetades režiimi"</string>
+  <string name="provider_button_help">"Sain aru"</string>
+  <string name="provider_voice_call">"%1$s kõne"</string>
+  <string name="provider_video_call">"%1$s videokõne"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Luba teha kõnet.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Kuva märkus</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Tee kõikjal märkmeid</string>
+  <string name="callerinfo_provider_status_disabling">Keelamine</string>
+  <string name="show_dialpad_at_start_title">Näita avades numbrilauda</string>
 </resources>
