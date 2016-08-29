@@ -40,4 +40,11 @@
     <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
     <string name="incoming_conf_via_template">"通过 <xliff:g id="provider_name">%s</xliff:g>会议来电"</string>
+
+    <!-- In-call screen: Modify Call Options for IMS call -->
+    <string name="modify_call_option_title">选择通话类型？</string>
+    <string name="modify_call_option_vt">双向视频</string>
+    <string name="modify_call_option_vt_tx">视频发送</string>
+    <string name="modify_call_option_vt_rx">视频接收</string>
+    <string name="modify_call_option_voice">仅限语音</string>
 </resources>
