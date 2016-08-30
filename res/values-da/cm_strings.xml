@@ -142,4 +142,5 @@
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Tag noter overalt</string>
   <string name="callerinfo_provider_status_disabling">Deaktivering</string>
+  <string name="show_dialpad_at_start_title">Vis tastatur ved start</string>
 </resources>
