@@ -858,7 +858,12 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
 
             Log.d(this, "inflateVideoCallViews: sVideoSurfacesInUse=" + sVideoSurfacesInUse);
             //If peer adjusted screen size is not available, set screen size to default display size
-            Point screenSize = sDisplaySize == null ? getScreenSize() : sDisplaySize;
+            Point screenSize = getScreenSize();
+            if (sDisplaySize != null) {
+                screenSize = VideoCallPresenter.resizeForAspectRatio(screenSize,
+                        sDisplaySize.x, sDisplaySize.y);
+            }
+
             setSurfaceSizeAndTranslation(displaySurface, screenSize);
 
             if (!sVideoSurfacesInUse) {
