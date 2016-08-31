@@ -27,8 +27,6 @@
   ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <resources>
-    <!-- Determines UI extensions for video calls should be used. -->
-    <bool name="video_call_use_ext">true</bool>
     <!-- Config to show/hide Video quality toast -->
     <bool name="config_display_video_quality_toast">true</bool>
     <!-- Config to show/hide call session event toast like player start/stop -->
