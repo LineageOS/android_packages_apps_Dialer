@@ -518,7 +518,9 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
 
         if (getResources().getBoolean(
                 R.bool.config_regional_video_call_welcome_dialog)) {
-            showVideoCallWelcomeDialog();
+            if(CallUtil.isVideoEnabled(this)) {
+                showVideoCallWelcomeDialog();
+            }
         }
     }
     @Override
