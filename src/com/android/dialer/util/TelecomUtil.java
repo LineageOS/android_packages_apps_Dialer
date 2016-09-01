@@ -95,11 +95,14 @@ public class TelecomUtil {
     }
 
     public static boolean handleMmi(Context context, String dialString,
-            PhoneAccountHandle handle) {
+            @Nullable PhoneAccountHandle handle) {
         if (hasModifyPhoneStatePermission(context)) {
             try {
-                return TelecomManagerCompat.handleMmi(
-                        getTelecomManager(context), dialString, handle);
+                if (handle == null) {
+                    return getTelecomManager(context).handleMmi(dialString);
+                } else {
+                    return getTelecomManager(context).handleMmi(dialString, handle);
+                }
             } catch (SecurityException e) {
                 Log.w(TAG, "TelecomManager.handleMmi called without permission.");
             }
