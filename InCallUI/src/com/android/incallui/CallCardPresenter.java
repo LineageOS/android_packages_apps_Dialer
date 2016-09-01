@@ -321,6 +321,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // Start/stop timers.
         if (isPrimaryCallActive()) {
             Log.d(this, "Starting the calltime timer");
+            mPrimary.triggerCalcBaseChronometerTime();
             mCallTimer.start(CALL_TIME_UPDATE_INTERVAL_MS);
         } else {
             Log.d(this, "Canceling the calltime timer");
@@ -561,9 +562,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             ui.setPrimaryCallElapsedTime(false, 0);
             mCallTimer.cancel();
         } else {
-            final long callStart = mPrimary.getConnectTimeMillis();
-            final long duration = System.currentTimeMillis() - callStart;
-            ui.setPrimaryCallElapsedTime(true, duration);
+            ui.setPrimaryCallElapsedTime(true, mPrimary.getCallDuration());
         }
     }
 
