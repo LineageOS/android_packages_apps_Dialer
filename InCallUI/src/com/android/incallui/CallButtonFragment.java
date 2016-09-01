@@ -36,6 +36,7 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RECORD;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RXTX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_VO_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_ADD_PARTICIPANT;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -95,8 +96,8 @@ public class CallButtonFragment
         public static final int BUTTON_HOLD = 3;
         public static final int BUTTON_SWAP = 4;
         public static final int BUTTON_UPGRADE_TO_VIDEO = 5;
-        public static final int BUTTON_SWITCH_CAMERA = 6;
-        public static final int BUTTON_DOWNGRADE_TO_AUDIO = 7;
+        public static final int BUTTON_DOWNGRADE_TO_AUDIO = 6;
+        public static final int BUTTON_SWITCH_CAMERA = 7;
         public static final int BUTTON_ADD_CALL = 8;
         public static final int BUTTON_MERGE = 9;
         public static final int BUTTON_PAUSE_VIDEO = 10;
@@ -108,7 +109,8 @@ public class CallButtonFragment
         public static final int BUTTON_RXTX_VIDEO_CALL = 16;
         public static final int BUTTON_RX_VIDEO_CALL = 17;
         public static final int BUTTON_VO_VIDEO_CALL = 18;
-        public static final int BUTTON_COUNT = 19;
+        public static final int BUTTON_ADD_PARTICIPANT = 19;
+        public static final int BUTTON_COUNT = 20;
     }
 
     private SparseIntArray mButtonVisibilityMap = new SparseIntArray(BUTTON_COUNT);
@@ -492,6 +494,8 @@ public class CallButtonFragment
             return mSwitchCameraButton;
         } else if (id == BUTTON_ADD_CALL) {
             return mAddCallButton;
+        } else if (id == BUTTON_ADD_PARTICIPANT) {
+            return mAddParticipantButton;
         } else if (id == BUTTON_MERGE) {
             return mMergeButton;
         } else if (id == BUTTON_PAUSE_VIDEO) {
@@ -536,10 +540,6 @@ public class CallButtonFragment
     @Override
     public void setVideoPaused(boolean isPaused) {
         mPauseVideoButton.setSelected(isPaused);
-    }
-
-    public void enableAddParticipant(boolean show) {
-        mAddParticipantButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
