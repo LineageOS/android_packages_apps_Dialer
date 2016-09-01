@@ -533,6 +533,7 @@
     <string name="open_now">Open now</string>
     <!-- Displayed when a place is closed. -->
     <string name="closed_now">Closed now</string>
+    <string name="call_failed_due_to_validate_number">Unable to make video call, incorrect number format</string>
     <string name="call_state_dialing">Dialing</string>
     <string name="call_state_holding">Holding</string>
     <string name="call_state_active">Active</string>
