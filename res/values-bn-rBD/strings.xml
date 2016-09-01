@@ -22,7 +22,7 @@
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"ফোন ডায়ালপ্যাড"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ফোন"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"পুরোনো কলের তালিকা"</string>
-    <string name="action_report_number" msgid="4635403959812186162">"ভুল নম্বর প্রতিবেদন করুন"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"ভুল নম্বর অভিযোগ করুন"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"নম্বর প্রতিলিপি করুন"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"ট্রান্সক্রিপশান প্রতিলিপি করুন"</string>
     <string name="action_block_number" msgid="1482657602262262134">"নম্বর অবরোধ করুন"</string>
@@ -271,14 +271,14 @@
     <string name="toast_cannot_write_system_settings" msgid="5614246168296606709">"ফোনের অ্যাপ্লিকেশানকে সিস্টেম সেটিংসে লেখার অনুমতি দেওয়া হয়নি।"</string>
     <string name="blocked_number_call_log_label" msgid="8912042441473014712">"অবরুদ্ধ"</string>
     <string name="accessibility_call_is_active" msgid="2297282583928508760">"<xliff:g id="NAMEORNUMBER">^1</xliff:g> সক্রিয় আছে"</string>
-    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"অবরুদ্ধ করুন/স্প্যাম হিসাবে প্রতিবেদন করুন"</string>
+    <string name="call_log_action_block_report_number" msgid="8288915197641750257">"অবরুদ্ধ করুন/স্প্যাম হিসাবে অভিযোগ করুন"</string>
     <string name="call_log_action_block_number" msgid="5920731882931944594">"অবরুদ্ধ করুন"</string>
     <string name="call_log_action_remove_spam" msgid="5750557938714304455">"স্প্যাম নয়"</string>
     <string name="call_log_action_unblock_number" msgid="8906582251480361069">"অবরোধ মুক্ত করুন"</string>
     <string name="spam_number_call_log_label" msgid="5601566820155823850">"স্প্যাম"</string>
     <string name="block_report_number_alert_title" msgid="7964023263943399261">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
     <string name="block_report_number_alert_details" msgid="3504073367202469245">"এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলি অবরোধ করা হবে৷"</string>
-    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"কলটিকে স্প্যাম হিসাবে প্রতিবেদন করুন"</string>
+    <string name="checkbox_report_as_spam_action" msgid="7546927594371150677">"কলটিকে স্প্যাম হিসাবে অভিযোগ করুন"</string>
     <string name="block_number_alert_details" msgid="3137736492383304346">"এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলি অবরোধ করা হবে৷ এই কলটিকে স্প্যাম হিসাবে প্রতিবেদন করা হবে৷"</string>
     <string name="unblock_report_number_alert_title" msgid="972715151309357850">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করবেন?"</string>
     <string name="unblock_number_alert_details" msgid="8190592456851353268">"এই নম্বরটিকে অবরোধ মুক্ত করা হবে এবং \'স্প্যাম নয়\' হিসাবে প্রতিবেদ করা হবে৷ এই নম্বর থেকে আসা ভবিষ্যৎ কল এবং ভয়েসমেলগুলি স্প্যাম হিসাবে শনাক্ত করা হবে না৷"</string>
