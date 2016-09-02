@@ -88,6 +88,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.TelecomUtil;
+import com.android.dialer.util.WifiCallUtils;
 import com.android.dialer.voicemail.VoicemailArchiveActivity;
 import com.android.dialer.widget.ActionBarController;
 import com.android.dialer.widget.SearchEditTextLayout;
@@ -139,7 +140,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     /* Define for Activity permission request for reading phone state */
     private static final int PERMISSION_REQUEST_CODE_PHONE_STATE_ENABLED = 0;
     private static final int PERMISSION_REQUEST_CODE_PHONE_STATE_DISABLED = 1;
-
+    private static final int PERMISSION_REQUEST_CODE_LOCATION = 2;
     /**
      * Just for backward compatibility. Should behave as same as {@link Intent#ACTION_DIAL}.
      */
@@ -212,6 +213,7 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
     private boolean mClearSearchOnPause;
     private boolean mIsDialpadShown;
     private boolean mShowDialpadOnResume;
+    private WifiCallUtils mWifiCallUtils;
 
     /**
      * Whether or not the device is in landscape orientation.
@@ -513,6 +515,22 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         Trace.beginSection(TAG + " initialize smart dialing");
         mDialerDatabaseHelper = DatabaseHelperManager.getDatabaseHelper(this);
         SmartDialPrefix.initializeNanpSettings(this);
+
+        mWifiCallUtils = new WifiCallUtils();
+        if (resources.getBoolean(R.bool.config_regional_pup_no_available_network)
+                && mFirstLaunch) {
+            mWifiCallUtils.addWifiCallReadyMarqueeMessage((Context) DialtactsActivity.this);
+            if (ActivityCompat.checkSelfPermission(DialtactsActivity.this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(
+                            new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},
+                            PERMISSION_REQUEST_CODE_LOCATION);
+            } else {
+                mWifiCallUtils.showWifiCallNotification((Context) DialtactsActivity.this);
+            }
+        }
+
         Trace.endSection();
         Trace.endSection();
 
@@ -1541,6 +1559,12 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
                             ListsFragment.TAB_INDEX_ALL_CONTACTS);
                     mConferenceDialButton.setVisibility((enabled && imsUseEnabled
                             && !isCurrentTabAllContacts) ? View.VISIBLE : View.GONE);
+                }
+                break;
+            case PERMISSION_REQUEST_CODE_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    WifiCallUtils.showWifiCallNotification((Context) DialtactsActivity.this);
                 }
                 break;
             default:
