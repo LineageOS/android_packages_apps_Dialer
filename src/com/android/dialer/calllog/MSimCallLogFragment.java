@@ -464,7 +464,7 @@ public class MSimCallLogFragment extends Fragment implements CallLogQueryHandler
                 messageId = R.string.call_log_voicemail_empty;
                 break;
             case CallLogQueryHandler.CALL_TYPE_ALL:
-                messageId = R.string.call_log_all_empty_action;
+                messageId = R.string.recentCalls_empty;
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected filter type in CallLogFragment: "
