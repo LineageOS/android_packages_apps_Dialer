@@ -32,10 +32,10 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.AppCompatConstants;
+import com.android.dialer.util.PresenceHelper;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-
 /**
  * Adapter for a ListView containing history items from the details of a call.
  */
@@ -107,8 +107,13 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         TextView durationView = (TextView) result.findViewById(R.id.duration);
 
         int callType = details.callTypes[0];
-        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                && CallUtil.isVideoEnabled(mContext);
+        boolean isPresenceEnabled = mContext.getResources().getBoolean(
+                R.bool.config_regional_presence_enable);
+        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO)
+                == Calls.FEATURES_VIDEO && CallUtil.isVideoEnabled(mContext);
+        if (isPresenceEnabled) {
+            isVideoCall &= PresenceHelper.startAvailabilityFetch(details.number.toString());
+        }
         boolean isVoLTE = (callType == AppCompatConstants.INCOMING_IMS_TYPE) ||
                           (callType == AppCompatConstants.OUTGOING_IMS_TYPE) ||
                           (callType == AppCompatConstants.MISSED_IMS_TYPE);
