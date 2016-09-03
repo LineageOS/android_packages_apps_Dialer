@@ -132,4 +132,38 @@
         <item>@string/description_direction_left</item>
         <item>@null</item>
     </array>
+
+   <array name="enhance_incoming_call_widget_video_without_sms_targets">
+       <item>@drawable/ic_lockscreen_answer</item>
+       <item>@drawable/ic_enhance_answer_rx_video</item>
+       <item>@drawable/ic_lockscreen_decline</item>
+       <item>@drawable/ic_enhance_answer_video</item>
+   </array>
+   <array name="enhance_incoming_call_widget_video_with_sms_targets">
+       <item>@drawable/ic_enhance_answer_video</item>
+       <item>@drawable/ic_lockscreen_text</item>
+       <item>@drawable/ic_lockscreen_decline</item>
+       <item>@drawable/ic_lockscreen_answer</item>
+       <item>@drawable/ic_enhance_answer_rx_video</item>
+       <item>@null</item>
+   </array>
+   <array name="enhance_incoming_call_widget_video_upgrade_request_targets">
+       <item>@drawable/ic_enhance_answer_video</item>
+       <item>@null</item>
+       <item>@drawable/ic_enhance_decline_video</item>
+       <item>@drawable/ic_enhance_answer_rx_video</item>
+   </array>
+   <array name="enhance_incoming_call_bidirectional_video_accept_request_targets">
+       <item>@drawable/ic_enhance_answer_video</item>
+       <item>@drawable/ic_enhance_decline_video</item>
+   </array>
+   <array name="enhance_incoming_call_video_transmit_accept_request_targets">
+       <item>@drawable/ic_enhance_answer_tx_video</item>
+       <item>@drawable/ic_enhance_decline_video</item>
+   </array>
+   <array name="enhance_incoming_call_video_receive_accept_request_targets">
+       <item>@drawable/ic_enhance_answer_rx_video</item>
+       <item>@drawable/ic_enhance_decline_video</item>
+   </array>
+
 </resources>

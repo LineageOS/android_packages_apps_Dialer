@@ -193,6 +193,9 @@ public class QtiCallUtils {
         alert.show();
     }
 
+    public static void changeToVideoCall(Call call, VideoProfile videoProfile) {
+            changeToVideoClicked(call, videoProfile);
+    }
     /**
      * Converts the call type to string
      */

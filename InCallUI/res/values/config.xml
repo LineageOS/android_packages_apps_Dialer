@@ -26,4 +26,8 @@
     <integer name="video_call_auto_fullscreen_timeout">5000</integer>
     <!-- When international prefix is enabled in CDMA mode, whether with international prefix -->
     <bool name="phone_number_with_intl_prefix">false</bool>
+
+    <bool name="config_regional_number_patterns_video_call">false</bool>
+     <!-- When set to true, this config enables enhance videocall ui -->
+    <bool name="config_enable_enhance_video_call_ui">false</bool>
 </resources>

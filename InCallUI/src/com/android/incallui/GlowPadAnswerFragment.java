@@ -91,6 +91,8 @@ public class GlowPadAnswerFragment extends AnswerFragment {
         final int directionDescriptionsResourceId;
         final int handleDrawableResourceId;
         mGlowpad.setVideoState(videoState);
+        final boolean isEnhanceUIEnabled = getContext().getResources().getBoolean(
+                R.bool.config_enable_enhance_video_call_ui);
 
         switch (targetSet) {
             case TARGET_SET_FOR_AUDIO_WITH_SMS:
@@ -127,7 +129,12 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_QTI_VIDEO_WITHOUT_SMS:
-                targetResourceId = R.array.qti_incoming_call_widget_video_without_sms_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId =
+                            R.array.enhance_incoming_call_widget_video_without_sms_targets;
+                } else {
+                    targetResourceId = R.array.qti_incoming_call_widget_video_without_sms_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.qti_incoming_call_widget_video_without_sms_target_descriptions;
                 directionDescriptionsResourceId =
@@ -135,7 +142,11 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_QTI_VIDEO_WITH_SMS:
-                targetResourceId = R.array.qti_incoming_call_widget_video_with_sms_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId = R.array.enhance_incoming_call_widget_video_with_sms_targets;
+                } else {
+                    targetResourceId = R.array.qti_incoming_call_widget_video_with_sms_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.qti_incoming_call_widget_video_with_sms_target_descriptions;
                 directionDescriptionsResourceId =
@@ -179,7 +190,12 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_QTI_VIDEO_ACCEPT_REJECT_REQUEST:
-                targetResourceId = R.array.qti_incoming_call_widget_video_request_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId =
+                            R.array.enhance_incoming_call_widget_video_upgrade_request_targets;
+                } else {
+                    targetResourceId = R.array.qti_incoming_call_widget_video_request_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.qti_incoming_call_widget_video_request_target_descriptions;
                 directionDescriptionsResourceId = R.array.
@@ -187,8 +203,13 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_QTI_BIDIRECTIONAL_VIDEO_ACCEPT_REJECT_REQUEST:
-                targetResourceId = R.array.
+                if (isEnhanceUIEnabled) {
+                    targetResourceId = R.array.
+                        enhance_incoming_call_bidirectional_video_accept_request_targets;
+                } else {
+                    targetResourceId = R.array.
                         qti_incoming_call_widget_bidirectional_video_accept_reject_request_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.qti_incoming_call_widget_video_request_target_descriptions;
                 directionDescriptionsResourceId = R.array.
@@ -196,8 +217,13 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_QTI_VIDEO_TRANSMIT_ACCEPT_REJECT_REQUEST:
-                targetResourceId = R.array.
-                        qti_incoming_call_widget_video_transmit_accept_reject_request_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId =
+                            R.array.enhance_incoming_call_video_transmit_accept_request_targets;
+                } else {
+                    targetResourceId = R.array.
+                           qti_incoming_call_widget_video_transmit_accept_reject_request_targets;
+                }
                 targetDescriptionsResourceId = R.array.
                         qti_incoming_call_widget_video_transmit_request_target_descriptions;
                 directionDescriptionsResourceId = R.array
@@ -205,8 +231,13 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_QTI_VIDEO_RECEIVE_ACCEPT_REJECT_REQUEST:
-                targetResourceId = R.array.
-                        qti_incoming_call_widget_video_receive_accept_reject_request_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId = R.array.
+                            enhance_incoming_call_video_receive_accept_request_targets;
+                } else {
+                    targetResourceId = R.array.
+                            qti_incoming_call_widget_video_receive_accept_reject_request_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.qti_incoming_call_widget_video_receive_request_target_descriptions;
                 directionDescriptionsResourceId = R.array
