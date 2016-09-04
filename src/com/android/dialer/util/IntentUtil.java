@@ -17,6 +17,7 @@
 package com.android.dialer.util;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -25,9 +26,12 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.content.Context;
 import com.android.dialer.R;
+import android.telephony.SubscriptionManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 
 import com.android.contacts.common.CallUtil;
+import java.util.List;
 
 /**
  * Utilities for creation of intents in Dialer, such as {@link Intent#ACTION_CALL}.
@@ -162,12 +166,26 @@ public class IntentUtil {
      * if true, conference dialer  is enabled.
      */
     public static boolean isConferDialerEnabled(Context context) {
-        if (context.getResources().getBoolean(R.bool.config_enable_conference_dialer)) {
-            TelephonyManager telephonyMgr = (TelephonyManager)
-                    context.getSystemService(Context.TELEPHONY_SERVICE);
-            return telephonyMgr.isImsRegistered();
+        boolean isEnabled = false;
+        List<SubscriptionInfo> subInfos = SubscriptionManager.from(context)
+                .getActiveSubscriptionInfoList();
+        if (subInfos != null) {
+            for (SubscriptionInfo subInfo : subInfos ) {
+                if (SubscriptionManager.isValidSubscriptionId(subInfo.getSubscriptionId())) {
+                    Resources subRes = SubscriptionManager.getResourcesForSubId(context,
+                            subInfo.getSubscriptionId());
+                    if (subRes.getBoolean(R.bool.config_enable_conference_dialer)) {
+                        TelephonyManager telephonyMgr = (TelephonyManager) context.
+                                getSystemService(Context.TELEPHONY_SERVICE);
+                        isEnabled = telephonyMgr.isImsRegistered();
+                        if (isEnabled) {
+                            break;
+                        }
+                    }
+                }
+            }
         }
-        return false;
+        return isEnabled;
     }
 
     /**
