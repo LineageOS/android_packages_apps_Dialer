@@ -403,6 +403,10 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param surfaceId The video surface receiving the click.
      */
     public void onSurfaceClick(int surfaceId) {
+        if (!mIsVideoMode) {
+            Log.d(this, "onSurfaceClick: Not in video mode ignoring.");
+            return;
+        }
         switch (surfaceId) {
             case VideoCallFragment.SURFACE_DISPLAY:
                 boolean isFullscreen = InCallPresenter.getInstance().toggleFullscreenMode();
