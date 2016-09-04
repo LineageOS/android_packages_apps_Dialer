@@ -298,7 +298,7 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mEmptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
-        //mEmptyListView.setImage(R.drawable.empty_call_log);
+        mEmptyListView.setImage(R.drawable.empty_call_log);
         mEmptyListView.setActionClickedListener(this);
 
         int activityType = mIsCallLogActivity ? CallLogAdapter.ACTIVITY_TYPE_CALL_LOG :

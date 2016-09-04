@@ -60,12 +60,15 @@ import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
+import com.android.dialer.util.PresenceHelper;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialerbind.ObjectFactory;
 import com.google.common.collect.Lists;
 
 import java.util.List;
+
+import org.codeaurora.presenceserv.IPresenceService;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -504,10 +507,14 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             callButtonView.setVisibility(View.GONE);
         }
-
-        // If one of the calls had video capabilities, show the video call button.
-        if (mCallLogCache.isVideoEnabled() && canPlaceCallToNumber &&
-                phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
+        boolean isPresenceEnabled = mContext.getResources().getBoolean(
+                R.bool.config_regional_presence_enable);
+        boolean showVideoCallBtn = isPresenceEnabled ? PresenceHelper.startAvailabilityFetch(number)
+                : phoneCallDetailsViews.callTypeIcons.isVideoShown();
+        //If presence is enabled,only both of sides had video capabilities,
+        //show the video call button,If not, one of the calls had video capabilities,
+        //the video call button will be shown.
+        if (mCallLogCache.isVideoEnabled() && canPlaceCallToNumber && showVideoCallBtn) {
             videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
             videoCallButtonView.setVisibility(View.VISIBLE);
         } else {

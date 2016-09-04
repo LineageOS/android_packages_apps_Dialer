@@ -61,7 +61,8 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.util.DialerUtils;
 
-public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener {
+public class CallLogActivity extends TransactionSafeActivity implements ViewPager.OnPageChangeListener,
+    CallLogFragment.HostInterface {
     private ViewPager mViewPager;
     private ViewPagerTabs mViewPagerTabs;
     private FragmentPagerAdapter mViewPagerAdapter;
@@ -443,6 +444,18 @@ public class CallLogActivity extends TransactionSafeActivity implements ViewPage
                 searchViewLayout,
                 new LayoutParams(LayoutParams.MATCH_PARENT,
                         LayoutParams.WRAP_CONTENT));
+    }
+
+    /**
+     * Implemented to satisfy {@link CallLogFragment.HostInterface}
+     */
+    @Override
+    public void showDialpad() {
+        finish();
+        if (mInSearchUi) {
+           exitSearchUi();
+        }
+        startActivity(new Intent(CallLogActivity.this, DialtactsActivity.class));
     }
 
     private void showInputMethod(View view) {
