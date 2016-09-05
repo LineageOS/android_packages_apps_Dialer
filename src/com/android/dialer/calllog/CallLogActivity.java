@@ -90,7 +90,7 @@ public class CallLogActivity extends Activity implements
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             final Object fragment = super.instantiateItem(container, position);
-            switch (position) {
+            switch (getRtlPosition(position)) {
                 case TAB_INDEX_ALL:
                     mAllCallsFragment = (CallLogFragment) fragment;
                     break;
@@ -160,7 +160,7 @@ public class CallLogActivity extends Activity implements
         mViewPagerTabs = (ViewPagerTabs) findViewById(R.id.viewpager_header);
 
         mViewPagerTabs.setViewPager(mViewPager);
-        mViewPager.setCurrentItem(startingTab);
+        mViewPager.setCurrentItem(getRtlPosition(startingTab));
     }
 
     @Override
