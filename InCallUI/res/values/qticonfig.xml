@@ -54,4 +54,6 @@
     <bool name="config_enable_modify_call_preview">false</bool>
     <!-- Config to show/hide HD Icon2 -->
     <bool name="config_show_hd2">false</bool>
+    <!-- Config to enalbe call record -->
+    <bool name="enable_call_record">false</bool>
 </resources>

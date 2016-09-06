@@ -509,8 +509,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final int callState = call.getState();
 
-        final boolean showRecord = (callState == Call.State.ACTIVE
-                || callState == Call.State.ONHOLD);
+        final boolean showRecord = ((callState == Call.State.ACTIVE
+                || callState == Call.State.ONHOLD)
+                && (ui.getContext().getResources().getBoolean(R.bool.enable_call_record)));
 
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
         int callTransferCapabilities = call.isEmergencyCall()? 0 : call.getTransferCapabilities();
