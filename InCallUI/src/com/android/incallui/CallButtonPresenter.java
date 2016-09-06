@@ -343,19 +343,19 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void changeToVideo(int videoState) {
+        final Context context = getUi().getContext();
         if(mCall == null) {
             return;
         }
 
         if(VideoProfile.isVideo(videoState) &&
                 !PresenceHelper.getVTCapability(mCall.getNumber())) {
-            Context context = getUi().getContext();
             Toast.makeText(context,context.getString(R.string.video_call_cannot_upgrade),
                     Toast.LENGTH_SHORT).show();
             return;
         }
         final VideoProfile videoProfile = new VideoProfile(videoState);
-        QtiCallUtils.changeToVideoCall(mCall, videoProfile);
+        QtiCallUtils.changeToVideoCall(mCall, videoProfile, context);
     }
     /**
      * Switches the camera between the front-facing and back-facing camera.

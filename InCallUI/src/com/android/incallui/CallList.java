@@ -199,7 +199,7 @@ public class CallList {
         final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
             for (CallUpdateListener listener : listeners) {
-                listener.onSessionModificationStateChange(sessionModificationState);
+                listener.onSessionModificationStateChange(call, sessionModificationState);
             }
         }
     }
@@ -717,7 +717,7 @@ public class CallList {
          *
          * @param sessionModificationState The new session modification state.
          */
-        public void onSessionModificationStateChange(int sessionModificationState);
+        public void onSessionModificationStateChange(Call call, int sessionModificationState);
 
         /**
          * Notifies of a change to the last forwarded number for a call.

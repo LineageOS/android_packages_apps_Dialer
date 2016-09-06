@@ -370,11 +370,38 @@
     <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
     <string name="type_incoming_volte">Incoming 4G voice call</string>
 
+     <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_incoming_video_lte">Incoming 4G video call</string>
+
     <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
     <string name="type_outgoing_volte">Outgoing 4G voice call</string>
 
+     <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_outgoing_video_lte">Outgoing 4G video call</string>
+
     <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
     <string name="type_missed_volte">Missed 4G voice call</string>
+
+     <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_missed_video_lte">Missed 4G video call</string>
+
+    <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_incoming_vowifi">Incoming WiFi voice call</string>
+
+     <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+     <string name="type_incoming_video_wifi">Incoming WiFi video call</string>
+
+    <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_outgoing_vowifi">Outgoing WiFi voice call</string>
+
+     <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+     <string name="type_outgoing_video_wifi">Outgoing WiFi video call</string>
+
+    <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+    <string name="type_missed_vowifi">Missed WiFi voice call</string>
+
+     <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+     <string name="type_missed_video_wifi">Missed WiFi video call</string>
 
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>

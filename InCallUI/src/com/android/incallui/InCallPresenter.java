@@ -1492,6 +1492,7 @@ public class InCallPresenter implements CallList.Listener,
             // We're about the bring up the in-call UI for an incoming call. If we still have
             // dialogs up, we need to clear them out before showing incoming screen.
             if (isActivityStarted()) {
+                mInCallActivity.showCallCardFragment(true);
                 mInCallActivity.dismissPendingDialogs();
             }
             if (!startUi(newState)) {

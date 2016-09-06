@@ -876,7 +876,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * @param sessionModificationState The new session modification state.
      */
     @Override
-    public void onSessionModificationStateChange(int sessionModificationState) {
+    public void onSessionModificationStateChange(Call call, int sessionModificationState) {
         if (sessionModificationState == Call.SessionModificationState.NO_REQUEST) {
             if (mCallId != null) {
                 CallList.getInstance().removeCallUpdateListener(mCallId, this);
