@@ -231,18 +231,21 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
             if ((callType == Calls.INCOMING_TYPE) || (callType == Calls.OUTGOING_TYPE)
                     || (callType == Calls.MISSED_TYPE)) {
-                where.append(String.format("(%s = ? OR %s = ?)",
-                        Calls.TYPE, Calls.TYPE));
+                where.append(String.format("(%s = ? OR %s = ? OR %s = ?)",
+                        Calls.TYPE, Calls.TYPE, Calls.TYPE));
             } else {
                 where.append(String.format("(%s = ?)", Calls.TYPE));
             }
             selectionArgs.add(Integer.toString(callType));
             if (callType == Calls.INCOMING_TYPE) {
                 selectionArgs.add(Integer.toString(AppCompatConstants.INCOMING_IMS_TYPE));
+                selectionArgs.add(Integer.toString(AppCompatConstants.INCOMING_WIFI_TYPE));
             } else if (callType == Calls.OUTGOING_TYPE) {
                 selectionArgs.add(Integer.toString(AppCompatConstants.OUTGOING_IMS_TYPE));
+                selectionArgs.add(Integer.toString(AppCompatConstants.OUTGOING_WIFI_TYPE));
             } else if (callType == Calls.MISSED_TYPE) {
                 selectionArgs.add(Integer.toString(AppCompatConstants.MISSED_IMS_TYPE));
+                selectionArgs.add(Integer.toString(AppCompatConstants.MISSED_WIFI_TYPE));
             }
         } else {
             // Add a clause to fetch only items of type voicemail.
@@ -285,8 +288,26 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
         if (callType > CALL_TYPE_ALL) {
             where.append(" AND ");
-            where.append(String.format("(%s = ?)", Calls.TYPE));
+            if ((callType == Calls.INCOMING_TYPE) || (callType == Calls.OUTGOING_TYPE)
+                    || (callType == Calls.MISSED_TYPE)) {
+                where.append(String.format("(%s = ? OR %s = ? OR %s = ?)",
+                        Calls.TYPE, Calls.TYPE, Calls.TYPE));
+            } else {
+                // Add a clause to fetch only items of type voicemail.
+                where.append(String.format("(%s = ?)", Calls.TYPE));
+            }
+            // Add a clause to fetch only items newer than the requested date
             selectionArgs.add(Integer.toString(callType));
+            if (callType == Calls.INCOMING_TYPE) {
+                selectionArgs.add(Integer.toString(AppCompatConstants.INCOMING_IMS_TYPE));
+                selectionArgs.add(Integer.toString(AppCompatConstants.INCOMING_WIFI_TYPE));
+            } else if (callType == Calls.OUTGOING_TYPE) {
+                selectionArgs.add(Integer.toString(AppCompatConstants.OUTGOING_IMS_TYPE));
+                selectionArgs.add(Integer.toString(AppCompatConstants.OUTGOING_WIFI_TYPE));
+            } else if (callType == Calls.MISSED_TYPE) {
+                selectionArgs.add(Integer.toString(AppCompatConstants.MISSED_IMS_TYPE));
+                selectionArgs.add(Integer.toString(AppCompatConstants.MISSED_WIFI_TYPE));
+            }
         } else {
             where.append(" AND NOT ");
             where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");
