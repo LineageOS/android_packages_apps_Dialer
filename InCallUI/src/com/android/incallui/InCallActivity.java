@@ -924,6 +924,11 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
             mDialog.dismiss();
             mDialog = null;
         }
+        SelectPhoneAccountDialogFragment dialogFragment = (SelectPhoneAccountDialogFragment)
+                getFragmentManager().findFragmentByTag(TAG_SELECT_ACCT_FRAGMENT);
+        if (dialogFragment != null) {
+            dialogFragment.dismiss();
+        }
         if (mAnswerFragment != null) {
             mAnswerFragment.dismissPendingDialogs();
         }
