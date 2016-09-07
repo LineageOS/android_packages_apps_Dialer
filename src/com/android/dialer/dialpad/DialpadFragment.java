@@ -316,8 +316,6 @@ public class DialpadFragment extends Fragment
         = "com.android.wificall.READY";
     private static final String ACTION_WIFI_CALL_READY_EXTRA
         = "com.android.wificall.ready.extra";
-    private static final String SYSTEM_PROPERTY_WIFI_CALL_READY
-        = "persist.sys.wificall.ready";
     private BroadcastReceiver mWifiCallReadyReceiver;
     private boolean isConfigAvailableNetwork = false;
 
@@ -824,8 +822,7 @@ public class DialpadFragment extends Fragment
             };
             IntentFilter filter = new IntentFilter(ACTION_WIFI_CALL_READY_STATUS_CHANGE);
             context.registerReceiver(mWifiCallReadyReceiver, filter);
-            changeDialpadButton(
-                    SystemProperties.getBoolean(SYSTEM_PROPERTY_WIFI_CALL_READY, false));
+            changeDialpadButton(WifiCallUtils.isWifiCallReadyEnabled(context));
          }
         Trace.endSection();
     }
