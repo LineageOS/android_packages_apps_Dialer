@@ -135,6 +135,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String mCallSubject;
   private PhoneAccountHandle mPhoneAccountHandle;
   @CallHistoryStatus private int mCallHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
+  private boolean mIsOutgoing = false;
   private boolean mIsSpam;
   private boolean mIsBlocked;
   private boolean isInUserSpamList;
@@ -682,7 +683,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     } else if (mState == State.DISCONNECTED) {
       mLogState.duration =
           getConnectTimeMillis() == 0 ? 0 : System.currentTimeMillis() - getConnectTimeMillis();
+    } else if (mState == State.DIALING || mState == State.CONNECTING) {
+      mIsOutgoing = true;
     }
+  }
+
+  public boolean isOutgoing() {
+    return mIsOutgoing;
   }
 
   public int getNumberPresentation() {
