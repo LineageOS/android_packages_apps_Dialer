@@ -147,6 +147,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String callSubject;
   private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
+  private boolean isOutgoing;
   private boolean isSpam;
   private boolean isBlocked;
 
@@ -790,8 +791,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
             logState.duration,
             newDuration);
       }
+    } else if (state == State.DIALING || state == State.CONNECTING) {
+      isOutgoing = true;
     }
     this.state = state;
+  }
+
+  public boolean isOutgoing() {
+    return isOutgoing;
   }
 
   public int getNumberPresentation() {
