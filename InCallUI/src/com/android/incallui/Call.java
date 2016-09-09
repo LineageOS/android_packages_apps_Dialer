@@ -815,6 +815,32 @@ public class Call {
         return hasProperty(android.telecom.Call.Details.PROPERTY_CONFERENCE);
     }
 
+    public boolean isForwarded() {
+        return hasProperty(android.telecom.Call.Details.PROPERTY_WAS_FORWARDED);
+    }
+
+    public boolean isWaitingForRemoteSide() {
+        if (mState == State.ACTIVE
+                && hasProperty(android.telecom.Call.Details.PROPERTY_HELD_REMOTELY)) {
+            return true;
+        }
+        if (mState == State.DIALING
+                && hasProperty(android.telecom.Call.Details.PROPERTY_DIALING_IS_WAITING)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean wasUnansweredForwarded() {
+        return getDisconnectCause().getCode() == DisconnectCause.MISSED
+                && hasProperty(android.telecom.Call.Details.PROPERTY_ADDITIONAL_CALL_FORWARDED);
+    }
+
+    public boolean missedBecauseIncomingCallsBarredRemotely() {
+        return getDisconnectCause().getCode() == DisconnectCause.RESTRICTED
+                && hasProperty(android.telecom.Call.Details.PROPERTY_REMOTE_INCOMING_CALLS_BARRED);
+    }
+
     public GatewayInfo getGatewayInfo() {
         return mTelecomCall == null ? null : mTelecomCall.getDetails().getGatewayInfo();
     }

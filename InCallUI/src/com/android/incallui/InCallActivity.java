@@ -915,12 +915,22 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         return super.dispatchPopulateAccessibilityEvent(event);
     }
 
-    public void maybeShowErrorDialogOnDisconnect(DisconnectCause disconnectCause) {
+    public void maybeShowErrorDialogOnDisconnect(Call call) {
         Log.d(this, "maybeShowErrorDialogOnDisconnect");
 
-        if (!isFinishing() && !TextUtils.isEmpty(disconnectCause.getDescription())
-                && (disconnectCause.getCode() == DisconnectCause.ERROR ||
-                disconnectCause.getCode() == DisconnectCause.RESTRICTED)) {
+        if (isFinishing()) {
+            return;
+        }
+
+        DisconnectCause disconnectCause = call.getDisconnectCause();
+        int code = disconnectCause.getCode();
+
+        if (call.wasUnansweredForwarded()) {
+            showErrorDialog(getString(R.string.callUnanswered_forwarded));
+        } else if (call.missedBecauseIncomingCallsBarredRemotely()) {
+            showErrorDialog(getString(R.string.callFailed_incoming_cb_enabled));
+        } else if (!TextUtils.isEmpty(disconnectCause.getDescription())
+                && (code == DisconnectCause.ERROR || code == DisconnectCause.RESTRICTED)) {
             showErrorDialog(disconnectCause.getDescription());
         }
     }
