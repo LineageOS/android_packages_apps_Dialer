@@ -37,6 +37,7 @@ import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.lookup.LookupSettingsFragment;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -91,6 +92,11 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       quickResponseSettingsHeader.intent = quickResponseSettingsIntent;
       target.add(quickResponseSettingsHeader);
     }
+
+    final Header lookupSettingsHeader = new Header();
+    lookupSettingsHeader.titleRes = R.string.lookup_settings_label;
+    lookupSettingsHeader.fragment = LookupSettingsFragment.class.getName();
+    target.add(lookupSettingsHeader);
 
     TelephonyManager telephonyManager =
         (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

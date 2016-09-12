@@ -61,6 +61,7 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/contactsfragment/res \
 	$(BASE_DIR)/dialer/dialpadview/res \
 	$(BASE_DIR)/dialer/interactions/res \
+	$(BASE_DIR)/dialer/lookup/res \
 	$(BASE_DIR)/dialer/notification/res \
 	$(BASE_DIR)/dialer/oem/res \
 	$(BASE_DIR)/dialer/phonenumberutil/res \
@@ -112,6 +113,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/dialpadview/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/interactions/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/lookup/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/notification/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/oem/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/phonenumberutil/AndroidManifest.xml \
@@ -235,6 +237,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	legacy-test \
 	libphonenumber \
 	volley \
+	org.lineageos.platform.sdk
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-design \
