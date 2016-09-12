@@ -110,8 +110,7 @@
     android:label="@string/applicationLabel"
     android:name="com.android.dialer.binary.aosp.AospDialerApplication"
     android:supportsRtl="true"
-    android:usesCleartextTraffic="false">
-
+    android:usesCleartextTraffic="true">
 
   </application>
 
