@@ -182,7 +182,7 @@ public class QtiCallUtils {
                 Log.v(this, "Videocall: ModifyCall: upgrade/downgrade to "
                         + callTypeToString(selCallType));
                 VideoProfile videoProfile = new VideoProfile(selCallType);
-                changeToVideoClicked(call, videoProfile);
+                changeToVideoClicked(call, videoProfile, context);
                 dialog.dismiss();
             }
         };
@@ -193,6 +193,9 @@ public class QtiCallUtils {
         alert.show();
     }
 
+    public static void changeToVideoCall(Call call, VideoProfile videoProfile, Context context) {
+            changeToVideoClicked(call, videoProfile, context);
+    }
     /**
      * Converts the call type to string
      */
@@ -212,11 +215,18 @@ public class QtiCallUtils {
      * Sends a session modify request to the telephony framework
      */
     private static void changeToVideoClicked(Call call, VideoProfile videoProfile) {
+        changeToVideoClicked(call, videoProfile, null);
+    }
+
+    private static void changeToVideoClicked(Call call, VideoProfile videoProfile, Context ctx) {
         VideoCall videoCall = call.getVideoCall();
         if (videoCall == null) {
             return;
         }
         videoCall.sendSessionModifyRequest(videoProfile);
+        if (shallShowPreviewWhileWaiting(ctx)) {
+            call.setRequestedVideoState(videoProfile.getVideoState());
+        }
         call.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
         InCallAudioManager.getInstance().onModifyCallClicked(call, videoProfile.getVideoState());
     }
@@ -230,6 +240,19 @@ public class QtiCallUtils {
             Log.w(context, "Context is null...");
         }
         return context != null && context.getResources().getBoolean(R.bool.video_call_use_ext);
+    }
+
+    /**
+     * Checks the boolean flag in config file to figure out if it support preview before the accept
+     * video call or not
+     */
+    public static boolean shallShowPreviewWhileWaiting(Context context) {
+        if (context == null) {
+            Log.w(context, "Context is null...");
+            return false;
+        }
+        return context.getResources().getBoolean(
+                R.bool.config_enable_modify_call_preview);
     }
 
     /**

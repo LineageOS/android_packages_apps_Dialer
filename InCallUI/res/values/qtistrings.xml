@@ -72,11 +72,11 @@
     <string name="lte_data_usage_label">"Lte Data usage : "</string>
 
     <!-- In-call screen: Modify Call Options for IMS call -->
-    <string name="modify_call_option_title" translatable="false">Which type of call?</string>
-    <string name="modify_call_option_vt" translatable="false">Video bidirectional</string>
-    <string name="modify_call_option_vt_tx" translatable="false">Video Transmit</string>
-    <string name="modify_call_option_vt_rx" translatable="false">Video Receive</string>
-    <string name="modify_call_option_voice" translatable="false">Voice Only</string>
+    <string name="modify_call_option_title">Which type of call?</string>
+    <string name="modify_call_option_vt">Video bidirectional</string>
+    <string name="modify_call_option_vt_tx">Video Transmit</string>
+    <string name="modify_call_option_vt_rx">Video Receive</string>
+    <string name="modify_call_option_voice">Voice Only</string>
 
     <!-- Modify call error cause -->
     <string name="modify_call_failed_due_to_low_battery">Modify call failed due to low battery.</string>
@@ -177,4 +177,7 @@
     <string-array name="international_idp_values" translatable="false">
         <item>"0033"</item>
     </string-array>
+    <string name="video_call_downgrade_without_lte_toast">Move out of LTE coverage area downgrade the call.</string>
+    <string name="video_call">Video Calling</string>
+    <string name="video_call_cannot_upgrade">cannot accept video calls at this time</string>
 </resources>

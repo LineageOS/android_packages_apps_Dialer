@@ -203,7 +203,7 @@ public class DialerUtils {
     public static boolean canShowWelcomeScreen(Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(
                 PREFS_MESSAGE, Context.MODE_PRIVATE);
-        return prefs.getBoolean(KEY_STATE, false);
+        return prefs.getBoolean(KEY_STATE, true);
     }
 
 

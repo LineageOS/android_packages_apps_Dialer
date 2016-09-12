@@ -32,9 +32,12 @@ import com.android.dialer.PhoneCallDetails;
 import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.AppCompatConstants;
+import com.android.dialer.util.PresenceHelper;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+
+import org.codeaurora.ims.utils.QtiImsExtUtils;
 
 /**
  * Adapter for a ListView containing history items from the details of a call.
@@ -107,31 +110,24 @@ public class CallDetailHistoryAdapter extends BaseAdapter {
         TextView durationView = (TextView) result.findViewById(R.id.duration);
 
         int callType = details.callTypes[0];
-        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-                && CallUtil.isVideoEnabled(mContext);
-        boolean isVoLTE = (callType == AppCompatConstants.INCOMING_IMS_TYPE) ||
-                          (callType == AppCompatConstants.OUTGOING_IMS_TYPE) ||
-                          (callType == AppCompatConstants.MISSED_IMS_TYPE);
+        boolean isPresenceEnabled = mContext.getResources().getBoolean(
+                R.bool.config_regional_presence_enable);
+        boolean isVideoCall = (details.features & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
+        if (isPresenceEnabled) {
+            isVideoCall &= PresenceHelper.startAvailabilityFetch(details.number.toString());
+        }
         Log.d("CallDetailHistoryAdapter", "isVideoCall = " + isVideoCall
-                    + ", isVoLTE = " + isVoLTE);
+                    + ", callType = " + callType);
         callTypeIconView.clear();
         callTypeIconView.add(callType);
-        callTypeIconView.setShowVideo(isVideoCall);
-        boolean imsCallLogEnabled = mContext.getResources()
-                .getBoolean(R.bool.ims_call_type_enabled);
-        if (!imsCallLogEnabled && isVoLTE) {
-            switch (callType) {
-                case AppCompatConstants.INCOMING_IMS_TYPE:
-                    callType = Calls.INCOMING_TYPE;
-                    break;
-                case AppCompatConstants.OUTGOING_IMS_TYPE:
-                    callType = Calls.OUTGOING_TYPE;
-                    break;
-                case AppCompatConstants.MISSED_IMS_TYPE:
-                    callType = Calls.MISSED_TYPE;
-                    break;
-                default:
-            }
+        /**
+         * Ims icon(VoLTE/VoWifi) or CarrierOne video icon will be shown if carrierOne is supported
+         * otherwise, default video icon will be shown if it is a video call.
+         */
+        if (QtiImsExtUtils.isCarrierOneSupported()) {
+             callTypeIconView.addImsOrVideoIcon(callType, isVideoCall);
+        } else {
+             callTypeIconView.setShowVideo(isVideoCall);
         }
         callTypeTextView.setText(mCallTypeHelper.getCallTypeText(callType, isVideoCall));
         // Set the date.

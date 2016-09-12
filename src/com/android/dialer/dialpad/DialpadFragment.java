@@ -29,21 +29,26 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.Manifest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
+import android.os.SystemProperties;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -71,6 +76,7 @@ import android.widget.TextView;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.dialog.CallSubjectDialog;
+import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.PermissionsUtil;
 import com.android.contacts.common.util.PhoneNumberFormatter;
 import com.android.contacts.common.util.StopWatch;
@@ -87,6 +93,7 @@ import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.Call.LogState;
+import com.android.dialer.util.WifiCallUtils;
 import com.android.phone.common.CallLogAsync;
 import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
@@ -106,6 +113,8 @@ public class DialpadFragment extends Fragment
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = "DialpadFragment";
 
+    /* define for Activity permission request for Android6.0 */
+    private static final int PERMISSION_REQUEST_CODE_LOCATION = 2;
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
      * for animation purposes.
@@ -299,8 +308,18 @@ public class DialpadFragment extends Fragment
     private boolean mStartedFromNewIntent = false;
     private boolean mFirstLaunch = false;
     private boolean mAnimate = false;
+    private TextView mOperator;
 
     private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
+
+    private static final String ACTION_WIFI_CALL_READY_STATUS_CHANGE
+        = "com.android.wificall.READY";
+    private static final String ACTION_WIFI_CALL_READY_EXTRA
+        = "com.android.wificall.ready.extra";
+    private static final String SYSTEM_PROPERTY_WIFI_CALL_READY
+        = "persist.sys.wificall.ready";
+    private BroadcastReceiver mWifiCallReadyReceiver;
+    private boolean isConfigAvailableNetwork = false;
 
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
@@ -353,6 +372,20 @@ public class DialpadFragment extends Fragment
         updateDeleteButtonEnabledState();
     }
 
+    private void changeDialpadButton(boolean ready) {
+        Log.d(TAG, "changeDialpadButton, ready = " + ready);
+        ImageView floatingActionButton =
+                (ImageButton) getView().findViewById(R.id.dialpad_floating_action_button);
+        if (floatingActionButton == null) {
+            return;
+        }
+        if (ready) {
+            floatingActionButton.setImageResource(R.drawable.fab_ic_wificall);
+        } else {
+            floatingActionButton.setImageResource(R.drawable.fab_ic_call);
+        }
+    }
+
     @Override
     public void onCreate(Bundle state) {
         Trace.beginSection(TAG + " onCreate");
@@ -377,6 +410,8 @@ public class DialpadFragment extends Fragment
             mCallStateReceiver = new CallStateReceiver();
             ((Context) getActivity()).registerReceiver(mCallStateReceiver, callStateIntentFilter);
         }
+        isConfigAvailableNetwork = getActivity().getResources().getBoolean(
+                R.bool.config_regional_pup_no_available_network);
         Trace.endSection();
     }
 
@@ -450,6 +485,7 @@ public class DialpadFragment extends Fragment
         floatingActionButton.setOnClickListener(this);
         mFloatingActionButtonController = new FloatingActionButtonController(getActivity(),
                 floatingActionButtonContainer, floatingActionButton);
+        mOperator = (TextView)fragmentView.findViewById(R.id.dialpad_floating_operator);
         Trace.endSection();
         Trace.endSection();
         return fragmentView;
@@ -760,6 +796,29 @@ public class DialpadFragment extends Fragment
         }
 
         mFirstLaunch = false;
+
+        if (MoreContactUtils.shouldShowOperator(getContext())) {
+                mOperator.setVisibility(View.VISIBLE);
+                mOperator.setText(MoreContactUtils.getNetworkSpnName(getContext(),
+                    SubscriptionManager.getDefaultVoiceSubscriptionId()));
+        } else {
+            mOperator.setVisibility(View.GONE);
+        }
+
+        if (isConfigAvailableNetwork) {
+            Context context = getActivity();
+            mWifiCallReadyReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    changeDialpadButton(
+                            intent.getBooleanExtra(ACTION_WIFI_CALL_READY_EXTRA, false));
+                }
+            };
+            IntentFilter filter = new IntentFilter(ACTION_WIFI_CALL_READY_STATUS_CHANGE);
+            context.registerReceiver(mWifiCallReadyReceiver, filter);
+            changeDialpadButton(
+                    SystemProperties.getBoolean(SYSTEM_PROPERTY_WIFI_CALL_READY, false));
+         }
         Trace.endSection();
     }
 
@@ -776,6 +835,10 @@ public class DialpadFragment extends Fragment
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
 
         SpecialCharSequenceMgr.cleanup();
+
+        if (isConfigAvailableNetwork) {
+            (getActivity()).unregisterReceiver(mWifiCallReadyReceiver);
+        }
     }
 
     @Override
@@ -1034,8 +1097,12 @@ public class DialpadFragment extends Fragment
     public void onClick(View view) {
         int resId = view.getId();
         if (resId == R.id.dialpad_floating_action_button) {
-            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            handleDialButtonPressed();
+            if (isConfigAvailableNetwork) {
+                dialAfterNetworkCheck();
+            } else {
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                handleDialButtonPressed();
+            }
         } else if (resId == R.id.deleteButton) {
             keyPressed(KeyEvent.KEYCODE_DEL);
         } else if (resId == R.id.digits) {
@@ -1919,4 +1986,42 @@ public class DialpadFragment extends Fragment
                 .show();
     }
 
+    private void dialAfterNetworkCheck() {
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSION_REQUEST_CODE_LOCATION);
+        } else {
+            if(WifiCallUtils.shallShowWifiCallDialog(getActivity())) {
+                 WifiCallUtils.showWifiCallDialog(getActivity());
+             } else {
+                 getView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                 handleDialButtonPressed();
+             }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE_LOCATION:
+                if ( grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    if(WifiCallUtils.shallShowWifiCallDialog(getActivity())) {
+                        WifiCallUtils.showWifiCallDialog(getActivity());
+                    } else {
+                        getView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        handleDialButtonPressed();
+                    }
+                } else {
+                    getView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                    handleDialButtonPressed();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 }
