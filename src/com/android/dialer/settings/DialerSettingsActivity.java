@@ -83,6 +83,11 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             target.add(quickResponseSettingsHeader);
         }
 
+        final Header lookupSettingsHeader = new Header();
+        lookupSettingsHeader.titleRes = R.string.lookup_settings_label;
+        lookupSettingsHeader.fragment = LookupSettingsFragment.class.getName();
+        target.add(lookupSettingsHeader);
+
         Header speedDialSettingsHeader = new Header();
         Intent speedDialSettingsIntent = new Intent(this, SpeedDialListActivity.class);
         speedDialSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
