@@ -33,8 +33,10 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
+import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
@@ -50,7 +52,7 @@ public class RegularSearchFragment extends SearchFragment
   private static final int SEARCH_DIRECTORY_RESULT_LIMIT = 5;
   protected String permissionToRequest;
 
-  private DialerExecutor<CachedContactInfo> addContactTask;
+  private DialerExecutor<AddContactWorker.ContactEntry> addContactTask;
 
   public RegularSearchFragment() {
     configureDirectorySearch();
@@ -92,14 +94,15 @@ public class RegularSearchFragment extends SearchFragment
 
   @Override
   protected void cacheContactInfo(int position) {
+    AddContactWorker.ContactEntry entry = new AddContactWorker.ContactEntry();
     CachedNumberLookupService cachedNumberLookupService =
         PhoneNumberCache.get(getContext()).getCachedNumberLookupService();
+    final RegularSearchListAdapter adapter = (RegularSearchListAdapter) getAdapter();
     if (cachedNumberLookupService != null) {
-      final RegularSearchListAdapter adapter = (RegularSearchListAdapter) getAdapter();
-      CachedContactInfo cachedContactInfo =
-          adapter.getContactInfo(cachedNumberLookupService, position);
-      addContactTask.executeSerial(cachedContactInfo);
+      entry.cachedContactInfo = adapter.getContactInfo(cachedNumberLookupService, position);
     }
+    entry.lookupContactInfo = adapter.getLookupContactInfo(position);
+    addContactTask.executeSerial(entry);
   }
 
   @Override
@@ -177,7 +180,11 @@ public class RegularSearchFragment extends SearchFragment
     boolean isNearbyPlacesSearchEnabled();
   }
 
-  private static class AddContactWorker implements Worker<CachedContactInfo, Void> {
+  private static class AddContactWorker implements Worker<AddContactWorker.ContactEntry, Void> {
+    public static class ContactEntry {
+      CachedContactInfo cachedContactInfo;
+      ContactInfo lookupContactInfo;
+    }
 
     private final Context appContext;
 
@@ -187,12 +194,13 @@ public class RegularSearchFragment extends SearchFragment
 
     @Nullable
     @Override
-    public Void doInBackground(@Nullable CachedContactInfo contactInfo) throws Throwable {
+    public Void doInBackground(@Nullable ContactEntry entry) throws Throwable {
       CachedNumberLookupService cachedNumberLookupService =
           PhoneNumberCache.get(appContext).getCachedNumberLookupService();
       if (cachedNumberLookupService != null) {
-        cachedNumberLookupService.addContact(appContext, contactInfo);
+        cachedNumberLookupService.addContact(appContext, entry.cachedContactInfo);
       }
+      LookupCache.cacheContact(appContext, entry.lookupContactInfo);
       return null;
     }
   }

@@ -34,6 +34,7 @@ import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 
@@ -106,6 +107,7 @@ public class ClearCallLogDialog extends DialogFragment {
       if (cachedNumberLookupService != null) {
         cachedNumberLookupService.clearAllCacheEntries(appContext);
       }
+      LookupCache.deleteCachedContacts(appContext);
       return null;
     }
   }
