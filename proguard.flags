@@ -19,4 +19,7 @@
     public <init>(android.content.Context, android.util.AttributeSet);
 }
 
+# Keep ExtendedLookupDirectories for assets/contacts_extensions.properties
+-keep class com.android.dialer.lookup.ExtendedLookupDirectories { *; }
+
 -verbose
