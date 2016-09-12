@@ -22,4 +22,26 @@
     <string name="incall_vibrate_hangup_title">Vibrate on hang up</string>
     <string name="incall_vibrate_45_title">Vibrate every minute</string>
     <string name="incall_vibrate_45_summary">Vibrates at the 45 second mark of every minute during outgoing calls</string>
+
+    <!-- Forward lookup -->
+    <string name="nearby_places">Nearby places</string>
+    <string name="people">People</string>
+
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Phone number lookup</string>
+    <string name="enable_forward_lookup_title">Forward lookup</string>
+    <string name="enable_forward_lookup_summary">Show nearby places when searching in the dialer</string>
+    <string name="enable_people_lookup_title">People lookup</string>
+    <string name="enable_people_lookup_summary">Show online results for people when searching in the dialer</string>
+    <string name="enable_reverse_lookup_title">Reverse lookup</string>
+    <string name="enable_reverse_lookup_summary">Look up information about the person or place for unknown numbers on incoming calls</string>
+    <string name="forward_lookup_provider_title">Forward lookup provider</string>
+    <string name="people_lookup_provider_title">People lookup provider</string>
+    <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
+
+    <!-- Chinese Reverse Lookup Provider -->
+    <string name="cyngn_reverse_lookup_provider_package" translatable="false">com.cyngn.chineselocationlookup</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+    <string name="cyngn_reverse_lookup_provider_value" translatable="false">CyngnChinese</string>
+
 </resources>
