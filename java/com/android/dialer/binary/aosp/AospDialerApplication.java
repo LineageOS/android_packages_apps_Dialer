@@ -17,19 +17,42 @@
 package com.android.dialer.binary.aosp;
 
 import android.support.annotation.NonNull;
+import com.android.contacts.common.extensions.PhoneDirectoryExtenderFactory;
 import com.android.dialer.binary.common.DialerApplication;
 import com.android.dialer.inject.ContextModule;
+import com.android.dialer.lookup.LookupProvider;
+import com.android.dialer.lookup.ReverseLookupProvider;
+package com.android.incallui.bindings.InCallUiBindings;
+package com.android.incallui.bindings.InCallUiBindingsFactory;
+package com.android.incallui.bindings.InCallUiBindingsStub;
 
 /**
  * The application class for the AOSP Dialer. This is a version of the Dialer app that has no
  * dependency on Google Play Services.
  */
-public class AospDialerApplication extends DialerApplication {
+public class AospDialerApplication extends DialerApplication
+    implements PhoneDirectoryExtenderFactory, InCallUiBindingsFactory {
 
   /** Returns a new instance of the root component for the AOSP Dialer. */
   @Override
   @NonNull
   protected Object buildRootComponent() {
     return DaggerAospDialerRootComponent.builder().contextModule(new ContextModule(this)).build();
+  }
+
+  @Override
+  public List<DirectoryPartition> getExtendedDirectories(Context context) {
+    return LookupProvider.getExtendedDirectories(context);
+  }
+
+  @Override
+  public InCallUiBindings newInCallUiBindings() {
+    return new InCallUiBindingsStub() {
+      @Override
+      @Nullable
+      public PhoneNumberService newPhoneNumberService(Context context) {
+        return new ReverseLookupProvider(context);
+      }
+    };
   }
 }
