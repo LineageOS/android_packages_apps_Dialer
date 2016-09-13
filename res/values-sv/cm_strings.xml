@@ -101,9 +101,11 @@
   <!-- InCall Plugin Settings -->
   <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> inställningar</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Ring med <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <string name="callerinfo_provider_auth_no_short">Nej</string>
+  <string name="callerinfo_provider_auth_no">Nej, tack</string>
   <string name="block_dialog_positive">Blockera</string>
   <string name="block_dialog_negative">Avbryt</string>
   <string name="provider_disable_title">Inaktivera %1$s?</string>
