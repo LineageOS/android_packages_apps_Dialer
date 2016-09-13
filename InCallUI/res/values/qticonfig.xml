@@ -54,4 +54,6 @@
     <bool name="add_participant_only_in_conference">false</bool>
     <!-- Config to if show preview before the receiver accepts a show me upgrade video call -->
     <bool name="config_enable_modify_call_preview">false</bool>
+    <!-- Config to show/hide HD Icon2 -->
+    <bool name="config_show_hd2">false</bool>
 </resources>
