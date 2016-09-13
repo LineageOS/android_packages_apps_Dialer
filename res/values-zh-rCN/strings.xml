@@ -300,4 +300,63 @@
     <string name="no_call_log">没有通话记录</string>
     <string name="clear">清除</string>
     <string name="description_clear_search">清除搜索记录</string>
+    <string name="recentCalls_empty">"您没有任何通话记录"</string>
+    <!-- The description text for the call log tab.
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+    This is especially valuable for views without textual representation like ImageView.
+    [CHAR LIMIT=NONE] -->
+    <string name="recentCallsIconLabel">"通话记录"</string>
+    <!-- Menu item used to call a contact from the call log -->
+    <string name="recentCalls_callNumber">"呼叫<xliff:g id="NAME">%s</xliff:g>"</string>
+    <!-- Text for a menu item to report a call as having been incorrectly identified.
+         [CHAR LIMIT=30] -->
+    <string name="call_detail_menu_report">"报告错误的号码"</string>
+    <!-- Menu item used to copy a number from the call log to the dialer so it can be edited before calling it -->
+    <string name="recentCalls_editNumberBeforeCall">"呼叫之前编辑号码"</string>
+    <!-- Menu item used to add a number from the call log to contacts -->
+    <string name="recentCalls_addToContact">"添加到联系人"</string>
+    <!-- Menu item used to remove a single call from the call log -->
+    <string name="recentCalls_removeFromRecentList">"从通话记录中删除"</string>
+    <!-- Menu item used to remove all calls from the call log -->
+    <string name="recentCalls_deleteAll">"清除通话记录"</string>
+    <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
+    <string name="recentCalls_trashVoicemail">"删除语音邮件"</string>
+    <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
+    <string name="recentCalls_shareVoicemail">"分享语音邮件"</string>
+    <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
+    <string name="recentCalls_empty_action">"拨打电话"</string>
+    <!-- String resource for the font-family to use for the call log activity's title
+         Do not translate. -->
+    <string name="call_log_activity_title_font_family">sans-serif-light</string>
+    <!-- String resource for the font-family to use for the full call history footer
+         Do not translate. -->
+    <string name="view_full_call_history_font_family">sans-serif</string>
+    <!-- Text displayed when the list of incoming calls is empty -->
+    <string name="recentIncoming_empty">"您没有任何来电。"</string>
+    <!-- Text displayed when the list of outgoing calls is empty -->
+    <string name="recentOutgoing_empty">"您没有任何外拨电话。"</string>
+    <!-- Text displayed when the list of missed calls is empty -->
+    <string name="recentMissed_empty">"您没有任何未接电话。"</string>
+    <!-- Text displayed when the list of voicemails is empty -->
+    <string name="recentVoicemails_empty">"您未收到任何语音邮件。"</string>
+
+    <string name="add_to_white_list">"加入白名单"</string>
+    <string name="add_to_black_list">"加入黑名单"</string>
+    <string name="remove_from_black_list">"从黑名单中移除"</string>
+    <string name="remove_from_white_list">"从白名单中移除"</string>
+    <string name="firewall_remove_success">"已成功移除"</string>
+    <string name="yes">"是"</string>
+    <string name="no">"否"</string>
+    <string name="input_number">"输入号码"</string>
+    <string name="speed_dial_cancel">"取消"</string>
+    <string name="speed_dial_ok">"确定"</string>
+    <string name="call_data_info_label">"通话/流量计时器"</string>
+    <string name="call_data_info_description">"语音通话时长和流量使用时间"</string>
+    <string name="alert_call_over_wifi">"将通过 Wi-Fi 拨打电话。"</string>
+    <string name="alert_call_no_cellular_coverage">"移动网络不可用。请连接至可用的 Wi-Fi 拨打电话。"</string>
+    <string name="alert_user_connect_to_wifi_for_call">"请连接至 Wi-Fi 拨打电话。"</string>
+    <string name="video_call">"视频通话"</string>
+    <string name="video_call_welcome_title"><b>"欢迎使用全新的视频通话拨号器"</b></string>
+    <string name="video_call_welcome_message">"我们都希望在电话的另一端传来熟悉的声音，但打电话显然比不上面对面交流!下面介绍了如何获取实时(或 FaceTime?)连接: 需要 4G LTE 或 Wi-Fi 连接；被叫方设备必须也支持视频通话；视频通话使用高速数据；您也可以将语音通话升级到视频通话；访问 "<a>"https://support.t-mobile.com/docs/DOC-23574"</a>" 了解详细信息。"</string>
+    <string name="video_call_welcome_message_repeat">"每次都显示这条信息"</string>
 </resources>
