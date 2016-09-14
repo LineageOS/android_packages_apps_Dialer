@@ -630,7 +630,7 @@ public class MSimCallLogFragment extends Fragment implements CallLogQueryHandler
         // Update the status filter's content.
         ArrayAdapter<SpinnerContent> filterStatusAdapter = new ArrayAdapter<SpinnerContent>(
                 getActivity(), R.layout.msim_call_log_spinner_item,
-                SpinnerContent.setupStatusFilterContent(getActivity()));
+                SpinnerContent.setupStatusFilterContent(getActivity(), false));
         mFilterStatusSpinnerView.setAdapter(filterStatusAdapter);
         mFilterStatusSpinnerView.setOnItemSelectedListener(mStatusSelectedListener);
         SpinnerContent.setSpinnerContentValue(mFilterStatusSpinnerView, mCallTypeFilter);
