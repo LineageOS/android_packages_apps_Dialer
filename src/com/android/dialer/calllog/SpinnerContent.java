@@ -118,7 +118,7 @@ public class SpinnerContent {
                     break;
                 case INDEX_CALL_TYPE_BLACKLIST:
                     value = CallLog.Calls.BLACKLIST_TYPE;
-                    label = context.getString(R.string.call_log_blocked_header);
+                    label = context.getString(R.string.call_log_blacklist_header);
                     break;
                 case INDEX_CALL_TYPE_VOICEMAIL:
                     value = CallLog.Calls.VOICEMAIL_TYPE;
