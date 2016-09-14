@@ -74,11 +74,6 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
             mDescriptionView.setText(null);
             mDescriptionView.setVisibility(View.GONE);
         } else {
-            if (resourceId == R.string.no_call_log) {
-                mDescriptionView.setText(resourceId);
-                mDescriptionView.setVisibility(View.VISIBLE);
-                mDescriptionView.setPadding(0, 0, 0, 700);
-            }
             mDescriptionView.setText(resourceId);
             mDescriptionView.setVisibility(View.VISIBLE);
         }
