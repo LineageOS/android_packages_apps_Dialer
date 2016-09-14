@@ -15,10 +15,13 @@
 -->
 
 <!-- Layout parameters are set programmatically. -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/background_dialer_call_log">
+
+    <include layout="@layout/call_spinner" />
 
     <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -29,11 +32,17 @@
         android:paddingEnd="@dimen/call_log_horizontal_margin"
         android:paddingBottom="@dimen/floating_action_button_list_bottom_padding" />
 
-    <com.android.dialer.widget.EmptyContentView
-        android:id="@+id/empty_list_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <com.android.dialer.widget.EmptyContentView
+            android:id="@+id/empty_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>
