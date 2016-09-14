@@ -21,6 +21,7 @@
     <color name="dialtacts_secondary_text_color">#636363</color>
     <color name="dialer_red_highlight_color">#ff1744</color>
     <color name="dialer_green_highlight_color">#00c853</color>
+    <color name="dialer_blue_highlight_color">#00a8ff</color>
 
     <color name="dialer_button_text_color">#fff</color>
     <color name="dialer_flat_button_text_color">@color/dialer_theme_color</color>
@@ -108,8 +109,10 @@
 
     <!-- Color for missed call icons. -->
     <color name="missed_call">#ff2e58</color>
-    <!-- Color for answered or outgoing call icons. -->
-    <color name="answered_call">@color/dialer_green_highlight_color</color>
+    <!-- Color for answered call icons. -->
+    <color name="answered_incoming_call">@color/dialer_blue_highlight_color</color>
+    <!-- Color for outgoing call icons. -->
+    <color name="answered_outgoing_call">@color/dialer_green_highlight_color</color>
     <!-- Color for blocked call icons. -->
     <color name="blocked_call">@color/dialtacts_secondary_text_color</color>
 
@@ -143,4 +146,7 @@
     <color name="no_call_log">#42000000</color>
     <color name="list_all_call">#d3000000</color>
     <bool name="config_regional_presence_enable">false</bool>
+
+    <!-- Colors for incoming and outgoing calls in the call statistics -->
+    <color name="call_stats_bar_background">#88888888</color>
 </resources>

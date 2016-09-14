@@ -131,6 +131,7 @@
 
     <style name="CallDetailActivityTheme" parent="DialtactsThemeWithoutActionBarOverlay">
         <item name="android:windowBackground">@color/background_dialer_results</item>
+        <item name="android:colorAccent">@color/dialtacts_theme_color</item>
         <!-- CallLog -->
         <item name="call_log_primary_background_color">#FFFFFF</item>
         <item name="call_log_secondary_background_color">#FFFFFF</item>
@@ -437,6 +438,18 @@
         <!-- Shift the title text to the right -->
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
         <item name="contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+    </style>
+
+    <style name="CallStatsBarStyle">
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="backgroundColor">@color/call_stats_bar_background</item>
+        <item name="blueColor">@color/answered_incoming_call</item>
+        <item name="greenColor">@color/answered_outgoing_call</item>
+        <item name="redColor">@color/missed_call</item>
+        <item name="orangeColor">@color/blocked_call</item>
     </style>
 
     <style name="CallLogSpinnerStyle">
