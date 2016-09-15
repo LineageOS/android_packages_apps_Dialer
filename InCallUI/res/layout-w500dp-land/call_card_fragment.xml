@@ -16,47 +16,13 @@
   ~ limitations under the License
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-
-    <LinearLayout
-        android:id="@+id/primary_call_info_container"
-        android:layout_centerVertical="true"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:elevation="@dimen/primary_call_elevation"
-        android:background="@drawable/rounded_call_card_background"
-        android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:alpha="0.9"
-        android:layout_margin="10dp">
-
-        <include layout="@layout/primary_call_info" />
-
-        <fragment android:name="com.android.incallui.CallButtonFragment"
-            android:id="@+id/callButtonFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/call_buttons_bottom_margin" />
-
-        <!-- Secondary "Call info" block, for the background ("on hold") call. -->
-        <include layout="@layout/secondary_call_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom" />
-
-    </LinearLayout>
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1">
+        android:layout_width="match_parent">
 
         <FrameLayout
             android:layout_height="match_parent"
@@ -116,90 +82,127 @@
 
         </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/primary_call_info_container">
-
-            <include layout="@layout/manage_conference_call_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="5dp"
-                android:layout_alignParentBottom="true"/>
-
-            <!-- Volume boost and Volume enhancements in-call UI -->
-            <ImageButton android:id="@+id/volumeBoost"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:visibility="gone"
-                android:soundEffectsEnabled="false"
-                android:background="@drawable/vb_normal"/>
-
-        </LinearLayout>
-
-        <!-- Call recorder infor -->
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true">
-
-            <TextView android:id="@+id/recordingIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="24dp"
-                android:drawableRight="@drawable/ic_recording_indicator"
-                android:paddingBottom="119dp"
-                android:visibility="invisible"/>
-
-            <TextView android:id="@+id/recordingTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/recordingIcon"
-                android:paddingBottom="120dp"
-                android:singleLine="true"
-                android:text="@string/recording_time_text"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/incall_call_banner_text_color"
-                android:visibility="invisible"/>
-        </RelativeLayout>
-
         <fragment android:name="com.android.incallui.VideoCallFragment"
             android:layout_alignParentStart="true"
             android:layout_gravity="start|center_vertical"
             android:id="@+id/videoCallFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    </FrameLayout>
 
-        <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
-        <FrameLayout
-            android:id="@+id/answer_and_dialpad_container"
-            android:layout_gravity="bottom"
+    <!-- Call recorder infor -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true">
+
+        <TextView android:id="@+id/recordingIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="24dp"
+            android:drawableRight="@drawable/ic_recording_indicator"
+            android:paddingBottom="119dp"
+            android:visibility="invisible"/>
+
+        <TextView android:id="@+id/recordingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/recordingIcon"
+            android:paddingBottom="120dp"
+            android:singleLine="true"
+            android:text="@string/recording_time_text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/incall_call_banner_text_color"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <include layout="@layout/manage_conference_call_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:layout_alignParentBottom="true"/>
+
+        <!-- Volume boost and Volume enhancements in-call UI -->
+        <ImageButton android:id="@+id/volumeBoost"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:soundEffectsEnabled="false"
+            android:background="@drawable/vb_normal"/>
+    </LinearLayout>
+
+    <!-- Secondary "Call info" block, for the background ("on hold") call. -->
+    <include layout="@layout/secondary_call_info"
+             android:id="@+id/secondary_call_info"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:id="@+id/primary_call_info_container"
+        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@id/secondary_call_info"
+        android:orientation="vertical"
+        android:elevation="@dimen/primary_call_elevation"
+        android:background="@drawable/rounded_call_card_background"
+        android:paddingTop="@dimen/call_banner_primary_call_container_top_padding"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:alpha="0.9"
+        android:layout_margin="10dp">
+
+        <include layout="@layout/primary_call_info" />
 
         <FrameLayout
-            android:id="@+id/floating_end_call_action_button_container"
-            android:layout_width="@dimen/end_call_floating_action_button_diameter"
-            android:layout_height="@dimen/end_call_floating_action_button_diameter"
-            android:background="@drawable/fab_red"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="@dimen/end_call_button_margin_bottom">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
 
-            <ImageButton android:id="@+id/floating_end_call_action_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/end_call_background"
-                android:src="@drawable/fab_ic_end_call"
-                android:scaleType="center"
-                android:contentDescription="@string/onscreenEndCallText" />
+            <fragment android:name="com.android.incallui.CallButtonFragment"
+                android:id="@+id/callButtonFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom" />
 
         </FrameLayout>
 
-    </FrameLayout>
+    </LinearLayout>
 
-</LinearLayout>
+    <!-- Placeholder for the dialpad which is replaced with the dialpad fragment when shown. -->
+    <FrameLayout
+        android:id="@+id/answer_and_dialpad_container"
+        android:layout_toEndOf="@id/primary_call_info_container"
+        android:layout_gravity="end|center_vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+     <FrameLayout
+        android:id="@+id/floating_end_call_action_button_container"
+        android:layout_width="@dimen/end_call_floating_action_button_diameter"
+        android:layout_height="@dimen/end_call_floating_action_button_diameter"
+        android:background="@drawable/fab_red"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/end_call_button_margin_right"
+        android:layout_marginBottom="@dimen/end_call_button_margin_bottom">
+        <ImageButton android:id="@+id/floating_end_call_action_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/end_call_background"
+            android:src="@drawable/fab_ic_end_call"
+            android:scaleType="center"
+            android:contentDescription="@string/onscreenEndCallText" />
+     </FrameLayout>
+
+</RelativeLayout>
