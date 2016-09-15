@@ -924,8 +924,8 @@ public class Call {
      */
     private void updateEmergencyCallState() {
         Uri handle = mTelecomCall.getDetails().getHandle();
-        mIsEmergencyCall = QtiCallUtils.isEmergencyNumber
-                (handle == null ? "" : handle.getSchemeSpecificPart());
+        mIsEmergencyCall = QtiCallUtils.isEmergencyNumber(mTelecomCall,
+                handle == null ? "" : handle.getSchemeSpecificPart());
     }
 
     /**
