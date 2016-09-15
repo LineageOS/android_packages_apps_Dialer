@@ -43,8 +43,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.content.pm.ActivityInfo;
 import android.telecom.InCallService.VideoCall;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+
+import com.android.incallui.util.TelecomCallUtil;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
@@ -314,15 +317,17 @@ public class QtiCallUtils {
     /**
      * returns true if it is emrgency number else false
      */
-    public static boolean isEmergencyNumber(String number) {
+    public static boolean isEmergencyNumber(android.telecom.Call telecomCall, String number) {
         boolean isEmergencyNumber = false;
 
         try {
             isEmergencyNumber = getIExtTelephony().isEmergencyNumber(number);
         } catch (RemoteException ex) {
             Log.e(LOG_TAG, "Exception : " + ex);
+            isEmergencyNumber = TelecomCallUtil.isEmergencyCall(telecomCall);
         } catch (NullPointerException ex) {
             Log.e(LOG_TAG, "Exception : " + ex);
+            isEmergencyNumber = TelecomCallUtil.isEmergencyCall(telecomCall);
         }
         return isEmergencyNumber;
     }
@@ -330,15 +335,17 @@ public class QtiCallUtils {
     /**
      * returns true if it is local emrgency number else false
      */
-    public static boolean isLocalEmergencyNumber(String number) {
+    public static boolean isLocalEmergencyNumber(Context context, String number) {
         boolean isEmergencyNumber = false;
 
         try {
             isEmergencyNumber = getIExtTelephony().isLocalEmergencyNumber(number);
         } catch (RemoteException ex) {
             Log.e(LOG_TAG, "Exception : " + ex);
+            isEmergencyNumber = PhoneNumberUtils.isLocalEmergencyNumber(context, number);
         } catch (NullPointerException ex) {
             Log.e(LOG_TAG, "Exception : " + ex);
+            isEmergencyNumber = PhoneNumberUtils.isLocalEmergencyNumber(context, number);
         }
         return isEmergencyNumber;
     }
