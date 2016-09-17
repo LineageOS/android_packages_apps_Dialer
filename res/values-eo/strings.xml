@@ -26,6 +26,7 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="dialerIconLabel">Telefono</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -68,6 +69,7 @@
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
+  <string name="visual_voicemail_settings">Agordoj</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -91,6 +93,7 @@
          Used by AccessibilityService to announce the purpose of the button.
          [CHAR LIMIT=NONE]
     -->
+  <string name="description_search_button">serĉi</string>
   <!-- String describing the Dial ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
@@ -135,6 +138,7 @@
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
+  <string name="dialer_settings_label">Agordoj</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <!-- Title bar for call detail screen -->
@@ -208,6 +212,7 @@
   <!-- String describing the icon used to start a voice search -->
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
   <!-- String used to display calls from unknown numbers in the call log -->
+  <string name="unknown">Nekonata</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <!-- String used to display calls from private numbers in the call log -->
   <!-- String used to display calls from pay phone in the call log -->
@@ -251,6 +256,7 @@
          [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
+  <string name="tab_all_contacts">Kontaktoj</string>
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
   <!--  Text displayed when user swipes out a favorite contact -->
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
@@ -339,6 +345,7 @@
          [CHAR LIMIT=65] -->
   <!-- String used as a header in the call log above calls which occurred yesterday.
          [CHAR LIMIT=65] -->
+  <string name="call_log_header_yesterday">Hieraŭ</string>
   <!-- String used as a header in the call log above calls which occurred two days or more ago.
          [CHAR LIMIT=65] -->
   <!-- String a header on the call details screen.  Appears above the list calls to or from a
