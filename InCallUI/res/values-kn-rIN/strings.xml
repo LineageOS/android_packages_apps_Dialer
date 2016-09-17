@@ -130,7 +130,7 @@
     <string name="player_stopped" msgid="1278611664986561535">"ಪ್ಲೇಯರ್‌ ನಿಲ್ಲಿಸಲಾಗಿದೆ"</string>
     <string name="camera_not_ready" msgid="6614469280264241251">"ಕ್ಯಾಮರಾ ಸಿದ್ಧವಾಗಿಲ್ಲ"</string>
     <string name="camera_ready" msgid="2614541247814590887">"ಕ್ಯಾಮರಾ ಸಿದ್ಧವಾಗಿದೆ"</string>
-    <string name="unknown_call_session_event" msgid="2947023743819984299">"ಅಜ್ಞಾತ ಕರೆಯ ಸೆಶನ್‌ ಈವೆಂಟ್‌"</string>
+    <string name="unknown_call_session_event" msgid="2947023743819984299">"ಅಪರಿಚಿತ ಕರೆಯ ಸೆಶನ್‌ ಈವೆಂಟ್‌"</string>
     <string name="voicemail_provider" msgid="2878119321474918370">"ಸೇವೆ"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"ಸೆಟಪ್"</string>
     <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;ಹೊಂದಿಸಿಲ್ಲ&gt;"</string>

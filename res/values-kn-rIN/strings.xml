@@ -124,7 +124,7 @@
     <string name="description_call_log_unheard_voicemail" msgid="118101684236996786">"ಆಲಿಸಲಾಗದ ಧ್ವನಿಮೇಲ್‌"</string>
     <string name="description_start_voice_search" msgid="520539488194946012">"ಧ್ವನಿ ಹುಡುಕಾಟ ಪ್ರಾರಂಭಿಸಿ"</string>
     <string name="menu_callNumber" msgid="997146291983360266">"<xliff:g id="NUMBER">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
-    <string name="unknown" msgid="740067747858270469">"ಅಜ್ಞಾತ"</string>
+    <string name="unknown" msgid="740067747858270469">"ಅಪರಿಚಿತ"</string>
     <string name="voicemail" msgid="3851469869202611441">"ಧ್ವನಿಮೇಲ್"</string>
     <string name="private_num" msgid="6374339738119166953">"ಖಾಸಗಿ ಸಂಖ್ಯೆ"</string>
     <string name="payphone" msgid="7726415831153618726">"ಪೇಫೋನ್"</string>
