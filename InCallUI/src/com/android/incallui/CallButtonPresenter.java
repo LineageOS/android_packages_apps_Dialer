@@ -572,6 +572,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         ui.updateButtonStates();
+        ui.updateColors();
     }
 
     private boolean hasVideoCallCapabilities(Call call) {
