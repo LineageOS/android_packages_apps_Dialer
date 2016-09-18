@@ -18,14 +18,17 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
+  <string name="applicationLabel">Telefono</string>
   <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
+  <string name="launcherActivityLabel">Telefono</string>
   <!-- The description text for the dialer tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="dialerIconLabel">Telefono</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -56,6 +59,9 @@
 
          [CHAR LIMIT=10]
      -->
+  <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
+        <xliff:g id="older_caller">%2$s</xliff:g>
+    </string>
   <!-- Text used in the ticker to notify the user of the latest voicemail. [CHAR LIMIT=30] -->
   <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
   <!-- Message to display before we have prepared the media player, i.e. before we know duration. [CHAR LIMIT=40] -->
@@ -68,6 +74,7 @@
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
+  <string name="visual_voicemail_settings">Agordoj</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -91,6 +98,7 @@
          Used by AccessibilityService to announce the purpose of the button.
          [CHAR LIMIT=NONE]
     -->
+  <string name="description_search_button">serĉi</string>
   <!-- String describing the Dial ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
@@ -128,6 +136,7 @@
   <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
   <!-- Menu item to copy something [CHAR_LIMIT=10] -->
+  <string name="menu_copy">Kopii</string>
   <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only incoming in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only missed in the call log. [CHAR LIMIT=30] -->
@@ -135,6 +144,7 @@
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
+  <string name="dialer_settings_label">Agordoj</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <!-- Title bar for call detail screen -->
@@ -208,6 +218,7 @@
   <!-- String describing the icon used to start a voice search -->
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
   <!-- String used to display calls from unknown numbers in the call log -->
+  <string name="unknown">Nekonata</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <!-- String used to display calls from private numbers in the call log -->
   <!-- String used to display calls from pay phone in the call log -->
@@ -241,6 +252,7 @@
   <!-- Text displayed when the list of voicemails is empty -->
   <!--  Menu option to show favorite contacts only -->
   <!--  Title of activity that displays a list of all calls -->
+  <string name="call_log_activity_title">Historio</string>
   <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
   <!-- Title for the call log tab containing the list of all missed calls only
@@ -251,6 +263,7 @@
          [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the call log of recent calls. [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
+  <string name="tab_all_contacts">Kontaktoj</string>
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
   <!--  Text displayed when user swipes out a favorite contact -->
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
@@ -272,6 +285,7 @@
          [CHAR LIMIT=NONE]
     -->
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
+  <string name="remove_contact">Forigi</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
@@ -337,8 +351,10 @@
          [CHAR LIMIT=NONE] -->
   <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->
+  <string name="call_log_header_today">Hodiaŭ</string>
   <!-- String used as a header in the call log above calls which occurred yesterday.
          [CHAR LIMIT=65] -->
+  <string name="call_log_header_yesterday">Hieraŭ</string>
   <!-- String used as a header in the call log above calls which occurred two days or more ago.
          [CHAR LIMIT=65] -->
   <!-- String a header on the call details screen.  Appears above the list calls to or from a
@@ -375,6 +391,7 @@
          dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
          aid compatability. [CHAR LIMIT=40] -->
+  <string name="accessibility_settings_title">Alirebleco</string>
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
   <!-- Setting option name to enable or disable vibration when ringing the phone.
          [CHAR LIMIT=30] -->
