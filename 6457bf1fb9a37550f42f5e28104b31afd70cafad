@@ -16,6 +16,24 @@
       "revId": "6457bf1fb9a37550f42f5e28104b31afd70cafad",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fa4df85_a1ff8432",
+        "filename": "InCallUI/src/com/android/incallui/QtiCallUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2016-09-19T05:25:18Z",
+      "side": 1,
+      "message": "That\u0027s CAF\u0027s code though, they do that about everywhere...",
+      "parentUuid": "1fa4df85_41c0107c",
+      "revId": "6457bf1fb9a37550f42f5e28104b31afd70cafad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
