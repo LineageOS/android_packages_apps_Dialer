@@ -32,9 +32,7 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -78,7 +76,6 @@ public class SpecialCharSequenceMgr {
 
     private static final String PRL_VERSION_DISPLAY = "*#0000#";
 
-    private static final int IMEI_14_DIGIT = 14;
     /**
      * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to
      * prevent possible crash.
@@ -356,26 +353,6 @@ public class SpecialCharSequenceMgr {
                             "getDeviceId", Integer.TYPE)) {
                 for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
                     String deviceId = telephonyManager.getDeviceId(slot);
-                    boolean enable14DigitImei = false;
-                    try {
-                        CarrierConfigManager configManager =
-                                (CarrierConfigManager) context.getSystemService(
-                                 Context.CARRIER_CONFIG_SERVICE);
-                        int[] subIds = SubscriptionManager.getSubId(slot);
-                        if (configManager != null &&
-                                configManager.getConfigForSubId(subIds[0]) != null) {
-                            enable14DigitImei =
-                                    configManager.getConfigForSubId(subIds[0]).getBoolean(
-                                    "config_enable_display_14digit_imei");
-                        }
-                    } catch(RuntimeException ex) {
-                        //do Nothing
-                        Log.e(TAG, "Config for 14 digit IMEI not found: " + ex);
-                    }
-                    if (enable14DigitImei && !TextUtils.isEmpty(deviceId)
-                           && deviceId.length() > IMEI_14_DIGIT) {
-                        deviceId = deviceId.substring(0, IMEI_14_DIGIT);
-                    }
                     if (!TextUtils.isEmpty(deviceId)) {
                         deviceIds.add(deviceId);
                     }
