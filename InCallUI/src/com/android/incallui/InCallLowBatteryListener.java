@@ -205,10 +205,6 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
             return;
         }
 
-        if (InCallPresenter.getInstance().isChangingConfigurations()) {
-            onConfigurationChanging(call);
-        }
-
         maybeProcessLowBatteryIndication(call);
     }
 
@@ -294,26 +290,6 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
               can to be processed since the handling kicks-in only after user decides
               to answer the call as Video handled via onAnswerIncomingCall API*/
             mLowBatteryMap.putIfAbsent(call, !VideoUtils.isIncomingVideoCall(call));
-        }
-    }
-
-    /**
-     * This API handles configuration changes done on low battery video call
-     *
-     * @param call The call on which configuration changes happened
-     */
-    private void onConfigurationChanging(Call call) {
-        if (call == null || !mPrimaryCallTracker.isPrimaryCall(call)) {
-           return;
-        }
-
-        Log.d(this, "onConfigurationChanging call = " + call);
-        /* If UE orientation changes with low battery dialog showing, then we need to
-           re-process the low battery indication to ensure that the low battery dialog
-           will be shown to user when the InCallActivity is recreated */
-        if (isLowBatteryDialogShowing()) {
-            dismissPendingDialogs();
-            mLowBatteryMap.replace(call, PROCESS_LOW_BATTERY);
         }
     }
 
@@ -421,8 +397,6 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
         alertDialog.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(final DialogInterface dialog) {
-                Log.i(this, "displayLowBatteryAlert onDismiss");
-                mAlert = null;
             }
         });
 
