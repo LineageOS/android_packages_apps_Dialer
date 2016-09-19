@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_41c0107c",
+        "filename": "InCallUI/src/com/android/incallui/QtiCallUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-09-19T01:09:51Z",
+      "side": 1,
+      "message": "Use new syntax.. catch (RemoteException | NullPointerException ex), or actually do a null check.. Catching NPE is never good practice.",
+      "revId": "6457bf1fb9a37550f42f5e28104b31afd70cafad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
