@@ -17,7 +17,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
-  <string name="nearby_places">Proksimaj lokoj</string>
   <string name="people">Personoj</string>
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Serĉo per T9 klavaro</string>
