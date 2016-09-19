@@ -322,6 +322,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             CallList.getInstance().removeCallUpdateListener(mPrimaryCall.getId(), this);
         }
         mPictureModeHelper.tearDown(this);
+        cancelAutoFullScreen();
     }
 
     /**
@@ -1290,6 +1291,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
         Log.v(this, "cancelAutoFullScreen : cancelling pending");
         mAutoFullScreenPending = false;
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mAutoFullscreenRunnable);
+        }
     }
 
     private static boolean isAudioRouteEnabled(int audioRoute, int audioRouteMask) {
