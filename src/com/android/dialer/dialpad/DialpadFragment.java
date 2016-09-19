@@ -316,8 +316,6 @@ public class DialpadFragment extends Fragment
         = "com.android.wificall.READY";
     private static final String ACTION_WIFI_CALL_READY_EXTRA
         = "com.android.wificall.ready.extra";
-    private static final String SYSTEM_PROPERTY_WIFI_CALL_READY
-        = "persist.sys.wificall.ready";
     private BroadcastReceiver mWifiCallReadyReceiver;
     private boolean isConfigAvailableNetwork = false;
 
@@ -709,6 +707,14 @@ public class DialpadFragment extends Fragment
         // Long-pressing zero button will enter '+' instead.
         final DialpadKeyButton zero = (DialpadKeyButton) fragmentView.findViewById(R.id.zero);
         zero.setOnLongClickListener(this);
+
+        // Long-pressing star button will enter ','(pause) instead.
+        final DialpadKeyButton star = (DialpadKeyButton) fragmentView.findViewById(R.id.star);
+        star.setOnLongClickListener(this);
+
+        // Long-pressing pound button will enter ';'(wait) instead.
+        final DialpadKeyButton pound = (DialpadKeyButton) fragmentView.findViewById(R.id.pound);
+        pound.setOnLongClickListener(this);
     }
 
     @Override
@@ -816,8 +822,7 @@ public class DialpadFragment extends Fragment
             };
             IntentFilter filter = new IntentFilter(ACTION_WIFI_CALL_READY_STATUS_CHANGE);
             context.registerReceiver(mWifiCallReadyReceiver, filter);
-            changeDialpadButton(
-                    SystemProperties.getBoolean(SYSTEM_PROPERTY_WIFI_CALL_READY, false));
+            changeDialpadButton(WifiCallUtils.isWifiCallReadyEnabled(context));
          }
         Trace.endSection();
     }
@@ -1179,6 +1184,28 @@ public class DialpadFragment extends Fragment
             }
             case R.id.digits: {
                 mDigits.setCursorVisible(true);
+                return false;
+            }
+            case R.id.star: {
+                if (mDigits.length() > 1) {
+                    // Remove tentative input ('*') done by onTouch().
+                    removePreviousDigitIfPossible('*');
+                    keyPressed(KeyEvent.KEYCODE_COMMA);
+                    stopTone();
+                    mPressedDialpadKeys.remove(view);
+                    return true;
+                }
+                return false;
+            }
+            case R.id.pound: {
+                if (mDigits.length() > 1) {
+                    // Remove tentative input ('#') done by onTouch().
+                    removePreviousDigitIfPossible('#');
+                    keyPressed(KeyEvent.KEYCODE_SEMICOLON);
+                    stopTone();
+                    mPressedDialpadKeys.remove(view);
+                    return true;
+                }
                 return false;
             }
             case R.id.two:

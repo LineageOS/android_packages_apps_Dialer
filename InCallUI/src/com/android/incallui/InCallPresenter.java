@@ -1348,6 +1348,18 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     /**
+     * Update  color of sim card icon
+     */
+    public void updatePrimaryCallState() {
+        for (InCallEventListener listener : mInCallEventListeners) {
+            if (listener instanceof CallCardPresenter) {
+                listener.updatePrimaryCallState();
+                break;
+            }
+        }
+    }
+
+    /**
      * Called by the {@link CallCardPresenter} to inform of a change in visibility of the secondary
      * caller info bar.
      *
@@ -2085,6 +2097,7 @@ public class InCallPresenter implements CallList.Listener,
     public interface InCallEventListener {
         public void onFullscreenModeChanged(boolean isFullscreenMode);
         public void onSecondaryCallerInfoVisibilityChanged(boolean isVisible, int height);
+        public void updatePrimaryCallState();
     }
 
     public interface InCallUiListener {

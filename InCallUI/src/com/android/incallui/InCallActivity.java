@@ -335,6 +335,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
         if (mShowPostCharWaitDialogOnResume) {
             showPostCharWaitDialog(mShowPostCharWaitDialogCallId, mShowPostCharWaitDialogChars);
         }
+        InCallPresenter.getInstance().updatePrimaryCallState();
     }
 
     // onPause is guaranteed to be called when the InCallActivity goes

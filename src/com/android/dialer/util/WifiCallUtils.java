@@ -41,7 +41,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
-import android.os.SystemProperties;
+import android.provider.Settings;
 import android.telephony.CellInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -63,11 +63,13 @@ public class WifiCallUtils {
     private TextView mTextView;
     private boolean mViewRemoved = true;
 
-    private static final String SYSTEM_PROPERTY_WIFI_CALL_READY = "persist.sys.wificall.ready";
-    private static final String SYSTEM_PROPERTY_WIFI_CALL_TURNON = "persist.sys.wificall.turnon";
+    private static final String WIFI_CALL_READY = "wifi_call_ready";
+    private static final String WIFI_CALL_TURNON = "wifi_call_turnon";
+    private static final int WIFI_CALLING_DISABLED = 0;
+    private static final int WIFI_CALLING_ENABLED = 1;
 
     public void addWifiCallReadyMarqueeMessage(Context context) {
-        if (mViewRemoved && SystemProperties.getBoolean(SYSTEM_PROPERTY_WIFI_CALL_READY, false)) {
+        if (mViewRemoved && isWifiCallReadyEnabled(context)) {
             if (mWindowManager == null) mWindowManager =
                 (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             if(mTextView == null){
@@ -168,9 +170,18 @@ public class WifiCallUtils {
         diaBuilder.create().show();
     }
 
+    public static boolean isWifiCallReadyEnabled(final Context context) {
+        return (Settings.Global.getInt(context.getContentResolver(),
+                WIFI_CALL_READY, WIFI_CALLING_DISABLED) == WIFI_CALLING_ENABLED);
+    }
+
+    public static boolean isWifiCallTurnOnEnabled(final Context context){
+        return (Settings.Global.getInt(context.getContentResolver(),
+                WIFI_CALL_TURNON, WIFI_CALLING_DISABLED) == WIFI_CALLING_ENABLED);
+    }
+
     public static boolean shallShowWifiCallDialog(final Context context) {
-        boolean wifiCallTurnOn = SystemProperties.getBoolean(
-                SYSTEM_PROPERTY_WIFI_CALL_TURNON, false);
+        boolean wifiCallTurnOn = isWifiCallTurnOnEnabled(context);
 
         ConnectivityManager conManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
