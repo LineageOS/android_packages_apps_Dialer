@@ -30,7 +30,7 @@ src_dirs += \
     $(contacts_common_dir)/src-N \
     $(phone_common_dir)/src-N
 
-LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
+LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs)) $(call all-Iaidl-files-under, $(src_dirs))
 LOCAL_SRC_FILES += src/org/codeaurora/presenceserv/IPresenceService.aidl \
                    src/org/codeaurora/presenceserv/IPresenceServiceCB.aidl
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \

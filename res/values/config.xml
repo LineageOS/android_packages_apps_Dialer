@@ -39,4 +39,6 @@
 
   <integer name="speed_dial_emergency_number_assigned_key">9</integer>
 
+  <bool name="call_recording_enabled">false</bool>
+  <integer name="call_recording_audio_source">1</integer>
 </resources>
