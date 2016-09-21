@@ -30,7 +30,6 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_AS
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_BLIND;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_CONSULTATIVE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
-import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RECORD;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RXTX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_VO_VIDEO_CALL;
@@ -506,12 +505,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
                 (!isVideo && !useExt && !useCustomVideoUi && hasVideoCallCapabilities(call));
 
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
-        final int callState = call.getState();
-
-        final boolean showRecord = ((callState == Call.State.ACTIVE
-                || callState == Call.State.ONHOLD)
-                && (ui.getContext().getResources().getBoolean(R.bool.enable_call_record)));
-
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
         int callTransferCapabilities = call.isEmergencyCall()? 0 : call.getTransferCapabilities();
         boolean showAddParticipant = call.can(CAPABILITY_ADD_PARTICIPANT);
@@ -550,7 +543,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
         ui.showButton(BUTTON_ADD_PARTICIPANT, showAddParticipant && !mEnhanceEnable);
-        ui.showButton(BUTTON_RECORD, showRecord);
 
         /* Depending on the transfer capabilities, display the corresponding buttons */
         if ((callTransferCapabilities & QtiImsExtUtils.QTI_IMS_CONSULTATIVE_TRANSFER) != 0) {
