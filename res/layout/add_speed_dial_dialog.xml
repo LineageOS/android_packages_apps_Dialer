@@ -29,67 +29,27 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:padding="24dp"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1.0"
-        android:gravity="center_vertical"
-        android:baselineAligned="false"
-        android:paddingStart="10dip"
-        android:paddingEnd="10dip">
+    <EditText
+        android:id="@+id/edit_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minEms="12"
+        android:hint="@string/speed_dial_input_hint"
+        android:inputType="phone"
+        android:singleLine="true" />
 
-        <EditText
-            android:id="@+id/edit_container"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:orientation="vertical"
-            android:hint="@string/input_number"
-            android:inputType="phone"
-            android:singleLine="true" />
+    <ImageButton
+        android:id="@+id/select_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/edit_container"
+        android:src="@drawable/ic_person_24dp" />
 
-        <ImageButton
-            android:id="@+id/select_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dip"
-            android:src="@drawable/ic_person_24dp" />
-    </LinearLayout>
-
-    <View
-        android:background="?android:dividerHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:focusable="true"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:text="@string/speed_dial_cancel"
-            style="?android:attr/buttonBarButtonStyle" />
-
-        <View
-            android:background="?android:dividerHorizontal"
-            android:layout_width="1dip"
-            android:layout_height="fill_parent" />
-
-        <Button
-            android:id="@+id/btn_complete"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:text="@string/speed_dial_ok"
-            style="?android:attr/buttonBarButtonStyle" />
-    </LinearLayout>
 </LinearLayout>

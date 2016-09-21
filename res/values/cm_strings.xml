@@ -44,4 +44,6 @@
     <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
     <string name="cyngn_reverse_lookup_provider_value" translatable="false">CyngnChinese</string>
 
+    <string name="speed_dial_edit_title">Edit speed dial <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Please enter a number</string>
 </resources>

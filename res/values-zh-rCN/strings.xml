@@ -291,9 +291,6 @@
     <string name="dialog_speed_dial_airplane_mode_message">关飞行模式后使用快速拨号</string>
     <string name="yes">是</string>
     <string name="no">否</string>
-    <string name="input_number">"输入号码"</string>
-    <string name="speed_dial_cancel">"取消"</string>
-    <string name="speed_dial_ok">"确定"</string>
     <string name="call_log_show_all_slots">"所有 SIM 卡"</string>
     <string name="call_log_all_calls_header">"所有通话"</string>
     <string name="calllog_search_hint">"搜索通话记录"</string>
