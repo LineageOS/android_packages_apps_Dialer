@@ -22,4 +22,12 @@
     <string name="incall_vibrate_hangup_title">Vibrate on hang up</string>
     <string name="incall_vibrate_45_title">Vibrate every minute</string>
     <string name="incall_vibrate_45_summary">Vibrates at the 45 second mark of every minute during outgoing calls</string>
+
+    <string name="call_recording_category_key" translatable="false">call_recording_category</string>
+    <string name="call_recording_category_title">Call recording</string>
+	<string name="call_recording_format_key" translatable="false">call_recording_format</string>
+    <string name="call_recording_format">Audio format</string>
+    <string name="wb_amr_format" translatable="false">AMR-WB</string>
+    <string name="aac_format" translatable="false">AAC</string>
+    <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
 </resources>
