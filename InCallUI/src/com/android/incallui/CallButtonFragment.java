@@ -32,7 +32,6 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_AS
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_BLIND;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_CONSULTATIVE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
-import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RECORD;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RXTX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_VO_VIDEO_CALL;
@@ -104,12 +103,11 @@ public class CallButtonFragment
         public static final int BUTTON_TRANSFER_BLIND = 12;
         public static final int BUTTON_TRANSFER_ASSURED = 13;
         public static final int BUTTON_TRANSFER_CONSULTATIVE = 14;
-        public static final int BUTTON_RECORD = 15;
-        public static final int BUTTON_RXTX_VIDEO_CALL = 16;
-        public static final int BUTTON_RX_VIDEO_CALL = 17;
-        public static final int BUTTON_VO_VIDEO_CALL = 18;
-        public static final int BUTTON_ADD_PARTICIPANT = 19;
-        public static final int BUTTON_COUNT = 20;
+        public static final int BUTTON_RXTX_VIDEO_CALL = 15;
+        public static final int BUTTON_RX_VIDEO_CALL = 16;
+        public static final int BUTTON_VO_VIDEO_CALL = 17;
+        public static final int BUTTON_ADD_PARTICIPANT = 18;
+        public static final int BUTTON_COUNT = 19;
     }
 
     private SparseIntArray mButtonVisibilityMap = new SparseIntArray(BUTTON_COUNT);
@@ -131,7 +129,6 @@ public class CallButtonFragment
     private ImageButton mAssuredTransferButton;
     private ImageButton mConsultativeTransferButton;
     private ImageButton mAddParticipantButton;
-    private ImageButton mRecordButton;
     private ImageButton mRxTxVideoCallButton;
     private ImageButton mRxVideoCallButton;
     private ImageButton mVoVideoCallButton;
@@ -211,8 +208,6 @@ public class CallButtonFragment
         mManageVideoCallConferenceButton = (ImageButton) parent.findViewById(
                 R.id.manageVideoCallConferenceButton);
         mManageVideoCallConferenceButton.setOnClickListener(this);
-        mRecordButton = (ImageButton) parent.findViewById(R.id.recordButton);
-        mRecordButton.setOnClickListener(this);
         mRxTxVideoCallButton = (ImageButton) parent.findViewById(R.id.rxtxVideoCallButton);
         mRxTxVideoCallButton.setOnClickListener(this);
         mRxVideoCallButton = (ImageButton) parent.findViewById(R.id.rxVedioCallButton);
@@ -280,19 +275,10 @@ public class CallButtonFragment
             getPresenter().callTransferClicked(QtiImsExtUtils.QTI_IMS_CONSULTATIVE_TRANSFER);
         } else if (id == R.id.overflowButton) {
             if (mOverflowPopup != null) {
-                updateRecordMenu();
                 mOverflowPopup.show();
             }
         } else if (id == R.id.manageVideoCallConferenceButton) {
             onManageVideoCallConferenceClicked();
-        } else if (id == R.id.recordButton) {
-            if (!((InCallActivity) getActivity()).isCallRecording()) {
-                ((InCallActivity) getActivity()).startInCallRecorder();
-                mRecordButton.setBackgroundResource(R.drawable.btn_stop_record);
-            } else {
-                ((InCallActivity) getActivity()).stopInCallRecorder();
-                mRecordButton.setBackgroundResource(R.drawable.btn_start_record);
-            }
         } else if(id == R.id.rxtxVideoCallButton){
             getPresenter().changeToVideo(VideoProfile.STATE_BIDIRECTIONAL);
         } else if(id == R.id.rxVedioCallButton){
@@ -307,14 +293,6 @@ public class CallButtonFragment
         view.performHapticFeedback(
                 HapticFeedbackConstants.VIRTUAL_KEY,
                 HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
-    }
-
-    private void updateRecordMenu() {
-        MenuItem item = mOverflowPopup.getMenu().findItem(BUTTON_RECORD);
-        if (item != null) {
-            item.setTitle(((InCallActivity) getActivity()).isCallRecording() ?
-                    R.string.menu_stop_record : R.string.menu_start_record);
-        }
     }
 
     public void updateColors() {
@@ -455,7 +433,6 @@ public class CallButtonFragment
         mOverflowButton.setEnabled(isEnabled);
         mManageVideoCallConferenceButton.setEnabled(isEnabled);
         mAddParticipantButton.setEnabled(isEnabled);
-        mRecordButton.setEnabled(isEnabled);
         mRxTxVideoCallButton.setEnabled(isEnabled);
         mRxVideoCallButton.setEnabled(isEnabled);
         mVoVideoCallButton.setEnabled(isEnabled);
@@ -507,8 +484,6 @@ public class CallButtonFragment
             return mAssuredTransferButton;
         } else if (id == BUTTON_TRANSFER_CONSULTATIVE) {
             return mConsultativeTransferButton;
-        } else if (id == BUTTON_RECORD) {
-            return mRecordButton;
         } else if (id == BUTTON_RXTX_VIDEO_CALL) {
             return mRxTxVideoCallButton;
         } else if (id == BUTTON_RX_VIDEO_CALL) {
