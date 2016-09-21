@@ -34,4 +34,7 @@
   <bool name="config_regional_pup_no_available_network">true</bool>
   <bool name="config_regional_call_data_usage_enable">false</bool>
   <bool name="config_regional_video_call_welcome_dialog">false</bool>
+
+  <bool name="call_recording_enabled">false</bool>
+  <integer name="call_recording_audio_source">1</integer>
 </resources>
