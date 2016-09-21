@@ -48,6 +48,7 @@ import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -74,7 +75,7 @@ import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 import java.util.List;
 
 public class SpeedDialListActivity extends ListActivity implements
-        AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
+        View.OnClickListener, AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = "SpeedDial";
     private static final String ACTION_ADD_VOICEMAIL =
             "com.android.phone.CallFeaturesSetting.ADD_VOICEMAIL";
@@ -128,8 +129,6 @@ public class SpeedDialListActivity extends ListActivity implements
     private int mInitialPickNumber;
     private SpeedDialAdapter mAdapter;
     private AlertDialog mAddSpeedDialDialog;
-    private EditText mEditNumber;
-    private Button mCompleteButton;
 
     private static final int PICK_CONTACT_RESULT = 0;
 
@@ -224,75 +223,68 @@ public class SpeedDialListActivity extends ListActivity implements
         return record;
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.select_contact) {
+            pickContact(mPickNumber);
+            if (mAddSpeedDialDialog != null && mAddSpeedDialDialog.isShowing()) {
+                mAddSpeedDialDialog.dismiss();
+            }
+            mAddSpeedDialDialog = null;
+        }
+    }
+
     private void showAddSpeedDialDialog(final int number) {
         mPickNumber = number;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.speed_dial_settings);
+
         View contentView = LayoutInflater.from(this).inflate(
                 R.layout.add_speed_dial_dialog, null);
-        builder.setView(contentView);
-        ImageButton pickContacts = (ImageButton) contentView
-                .findViewById(R.id.select_contact);
-        pickContacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickContact(number);
-                dismissDialog();
-            }
-        });
-        mEditNumber = (EditText) contentView.findViewById(R.id.edit_container);
-        if (null != mRecords.get(number)) {
-            mEditNumber.setText(SpeedDialUtils.getNumber(this, number));
+        contentView.findViewById(R.id.select_contact).setOnClickListener(this);
+
+        final EditText numberEditor = (EditText) contentView.findViewById(R.id.edit_container);
+        if (mRecords.get(number) != null) {
+            numberEditor.setText(SpeedDialUtils.getNumber(this, number));
         }
-        Button cancelButton = (Button) contentView
-                .findViewById(R.id.btn_cancel);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+        final DialogInterface.OnDismissListener dismissCb =
+                new DialogInterface.OnDismissListener() {
             @Override
-            public void onClick(View v) {
-                dismissDialog();
+            public void onDismiss(DialogInterface dialog) {
+                mAddSpeedDialDialog = null;
             }
-        });
-        mCompleteButton = (Button) contentView.findViewById(R.id.btn_complete);
-        mCompleteButton.setOnClickListener(new View.OnClickListener() {
+        };
+
+        final DialogInterface.OnClickListener okCb = new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (mEditNumber.getText().toString().isEmpty()) {
-                    dismissDialog();
+            public void onClick(DialogInterface dialog, int which) {
+                final String editedNumber = numberEditor.getText() != null
+                        ? numberEditor.getText().toString() : null;
+                if (TextUtils.isEmpty(editedNumber)) {
                     return;
                 }
-                saveSpeedDial();
-                dismissDialog();
-            }
-        });
-        mAddSpeedDialDialog = builder.create();
-        mAddSpeedDialDialog.show();
-    }
 
-    private void saveSpeedDial() {
-        String number = mEditNumber.getText().toString();
-        Record record = null;
-        if (number != null) {
-            Uri uri = Uri.withAppendedPath(
-                    ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-                    Uri.encode(number));
-            record = getRecordFromQuery(uri, LOOKUP_PROJECTION);
-            if (record == null) {
-                record = new Record(number);
-                record.normalizedNumber = number;
+                Uri uri = Uri.withAppendedPath(
+                        ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                        Uri.encode(editedNumber));
+                Record record = getRecordFromQuery(uri, LOOKUP_PROJECTION);
+                if (record == null) {
+                    record = new Record(editedNumber);
+                    record.normalizedNumber = editedNumber;
+                }
+                SpeedDialUtils.saveNumber(SpeedDialListActivity.this,
+                        mPickNumber, record.normalizedNumber);
+                mRecords.put(mPickNumber, record);
+                mAdapter.notifyDataSetChanged();
             }
-        }
-        if (record != null) {
-            SpeedDialUtils.saveNumber(this, mPickNumber,
-                    record.normalizedNumber);
-            mRecords.put(mPickNumber, record);
-            mAdapter.notifyDataSetChanged();
-        }
-    }
+        };
 
-    private void dismissDialog() {
-        if (null != mAddSpeedDialDialog && mAddSpeedDialDialog.isShowing()) {
-            mAddSpeedDialDialog.dismiss();
-        }
+        mAddSpeedDialDialog = new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.speed_dial_edit_title, number))
+                .setView(contentView)
+                .setOnDismissListener(dismissCb)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, okCb)
+                .show();
     }
 
     @Override
