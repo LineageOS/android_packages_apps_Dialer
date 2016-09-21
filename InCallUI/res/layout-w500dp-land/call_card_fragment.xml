@@ -37,6 +37,21 @@
                 android:background="@color/incall_photo_background_color"
                 android:src="@drawable/img_no_image_automirrored" />
 
+            <!-- Call recorder info -->
+            <TextView android:id="@+id/recordingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="120dp"
+                android:text="@string/recording_time_text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/incall_call_banner_text_color"
+                android:drawableStart="@drawable/ic_recording_indicator"
+                android:drawablePadding="5dp"
+                android:singleLine="true"
+                android:visibility="invisible" />
+
             <!-- Call context -->
             <LinearLayout
                 android:id="@+id/contact_context"

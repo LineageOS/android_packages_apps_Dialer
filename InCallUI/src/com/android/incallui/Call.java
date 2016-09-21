@@ -812,6 +812,11 @@ public class Call {
         return mTelecomCall.getDetails().getConnectTimeMillis();
     }
 
+    /** Gets the time when call was first constructed */
+    public long getCreateTimeMillis() {
+        return mTelecomCall.getDetails().getCreateTimeMillis();
+    }
+
     public boolean isConferenceCall() {
         return hasProperty(android.telecom.Call.Details.PROPERTY_CONFERENCE);
     }
