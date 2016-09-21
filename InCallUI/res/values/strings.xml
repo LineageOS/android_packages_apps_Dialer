@@ -450,9 +450,6 @@
         <item>silent</item>
         <item>never</item>
     </string-array>
-    <string name="menu_start_record">Record call</string>
-    <string name="menu_stop_record">Stop recording</string>
-    <string name="recording_time_text">Recording</string>
 
     <string name="volume_boost_notify_enabled">"Volume boost ON."</string>
     <string name="volume_boost_notify_disabled">"Volume boost OFF."</string>

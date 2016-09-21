@@ -146,34 +146,6 @@
 
             </LinearLayout>
 
-        <!-- Call recorder infor -->
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true">
-
-            <TextView android:id="@+id/recordingIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="24dp"
-                android:drawableRight="@drawable/ic_recording_indicator"
-                android:paddingBottom="119dp"
-                android:visibility="invisible"/>
-            <TextView android:id="@+id/recordingTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/recordingIcon"
-                android:paddingBottom="120dp"
-                android:singleLine="true"
-                android:text="@string/recording_time_text"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/incall_call_banner_text_color"
-                android:visibility="invisible"/>
-            </RelativeLayout>
-
             <!-- Placeholder for various fragments that are added dynamically underneath the caller info. -->
             <FrameLayout
                 android:id="@+id/answer_and_dialpad_container"

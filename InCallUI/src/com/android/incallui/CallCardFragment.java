@@ -21,10 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -36,7 +33,6 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.os.Trace;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -127,11 +123,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
      */
     private static final long ACCESSIBILITY_ANNOUNCEMENT_DELAY_MS = 500;
 
-    private static final String RECORD_STATE_CHANGED =
-            "com.qualcomm.qti.phonefeature.RECORD_STATE_CHANGED";
-
-    private static final int MESSAGE_TIMER = 1;
-
     private AnimatorSet mAnimatorSet;
     private int mShrinkAnimationDuration;
     private int mFabNormalDiameter;
@@ -188,10 +179,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     // Dark number info bar
     private TextView mInCallMessageLabel;
 
-    private InCallActivity mInCallActivity;
-    private TextView mRecordingTimeLabel;
-    private TextView mRecordingIcon;
-
     private FloatingActionButtonController mFloatingActionButtonController;
     private View mFloatingActionButtonContainer;
     private ImageButton mFloatingActionButton;
@@ -212,51 +199,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private CharSequence mPostResetCallStateLabel;
     private boolean mCallStateLabelResetPending = false;
     private Handler mHandler;
-
-    private BroadcastReceiver recorderStateReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (!RECORD_STATE_CHANGED.equals(intent.getAction())) {
-                return;
-            }
-
-            if (mInCallActivity.isCallRecording()) {
-                recorderHandler.sendEmptyMessage(MESSAGE_TIMER);
-            } else {
-                mRecordingTimeLabel.setVisibility(View.GONE);
-                mRecordingIcon.setVisibility(View.GONE);
-            }
-        }
-    };
-
-    private Handler recorderHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-
-            switch (msg.what) {
-                case MESSAGE_TIMER:
-                    if (!mInCallActivity.isCallRecording()) {
-                        break;
-                    }
-
-                    String recordingTime = mInCallActivity.getCallRecordingTime();
-
-                    if (!TextUtils.isEmpty(recordingTime)) {
-                        mRecordingTimeLabel.setVisibility(View.VISIBLE);
-                        showCallRecordingElapsedTime(recordingTime);
-                        mRecordingIcon.setVisibility(View.VISIBLE);
-                    }
-
-                    if (!recorderHandler.hasMessages(MESSAGE_TIMER)) {
-                        sendEmptyMessageDelayed(MESSAGE_TIMER, 1000);
-                    }
-
-                    break;
-            }
-        }
-    };
 
     /**
      * Determines if secondary call info is populated in the secondary call info UI.
@@ -296,20 +238,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mIsDialpadShowing = savedInstanceState.getBoolean(IS_DIALPAD_SHOWING_KEY, false);
         }
         mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(RECORD_STATE_CHANGED);
-        getActivity().registerReceiver(recorderStateReceiver, filter);
-
-        mInCallActivity = (InCallActivity) getActivity();
-        if (mInCallActivity.isCallRecording()) {
-            recorderHandler.sendEmptyMessage(MESSAGE_TIMER);
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getActivity().unregisterReceiver(recorderStateReceiver);
     }
 
     @Override
@@ -430,16 +358,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (null != mVbButton) {
             mVbButton.setOnClickListener(mVbListener);
         }
-        mRecordingTimeLabel = (TextView) view.findViewById(R.id.recordingTime);
-        mRecordingIcon = (TextView) view.findViewById(R.id.recordingIcon);
-    }
-
-    private void showCallRecordingElapsedTime(String time) {
-        if (mRecordingTimeLabel.getVisibility() != View.VISIBLE) {
-            AnimUtils.fadeIn(mRecordingTimeLabel, AnimUtils.DEFAULT_DURATION);
-        }
-
-        mRecordingTimeLabel.setText(time);
     }
 
     @Override
