@@ -66,6 +66,7 @@ import com.android.dialer.util.IntentUtil.CallIntentBuilder;
 import com.android.dialer.util.PhoneNumberUtil;
 import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.Call.LogState;
+import com.android.services.callrecorder.CallRecordingDataStore;
 
 /**
  * Displays the details of a specific call log entry.
@@ -186,8 +187,8 @@ public class CallDetailActivity extends AppCompatActivity
 
             invalidateOptionsMenu();
 
-            mHistoryList.setAdapter(
-                    new CallDetailHistoryAdapter(mContext, mInflater, mCallTypeHelper, details));
+            mHistoryList.setAdapter(new CallDetailHistoryAdapter(mContext,
+                        mInflater, mCallTypeHelper, details, mCallRecordingDataStore));
 
             updateFilteredNumberChanges();
             updateContactPhoto();
@@ -219,6 +220,7 @@ public class CallDetailActivity extends AppCompatActivity
     private ContactPhotoManager mContactPhotoManager;
     private FilteredNumberAsyncQueryHandler mFilteredNumberAsyncQueryHandler;
     private BidiFormatter mBidiFormatter = BidiFormatter.getInstance();
+    private CallRecordingDataStore mCallRecordingDataStore = new CallRecordingDataStore();
     private LayoutInflater mInflater;
     private Resources mResources;
 
@@ -312,6 +314,12 @@ public class CallDetailActivity extends AppCompatActivity
             visibility = View.GONE;
         }
         mBlockNumberActionItem.setVisibility(visibility);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCallRecordingDataStore.close();
     }
 
     @Override
