@@ -71,7 +71,6 @@ import android.widget.Spinner;
 import android.util.Log;
 import android.preference.PreferenceManager;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
 import java.util.List;
 
@@ -612,9 +611,8 @@ public class MSimCallLogFragment extends Fragment implements CallLogQueryHandler
         }
 
         // Update the sub filter's content.
-        final TelephonyManager telephony = (TelephonyManager) getActivity().getSystemService(
-                Context.TELEPHONY_SERVICE);
-        if (!telephony.isMultiSimEnabled()) {
+        final SubscriptionManager subscriptionManager = SubscriptionManager.from(getActivity());
+        if (subscriptionManager.getActiveSubscriptionInfoCount() < 2) {
             mFilterSubSpinnerView.setVisibility(View.GONE);
         }else{
             ArrayAdapter<SpinnerContent> filterSubAdapter = new ArrayAdapter<SpinnerContent>(

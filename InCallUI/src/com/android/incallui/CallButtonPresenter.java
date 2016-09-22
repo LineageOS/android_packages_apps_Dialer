@@ -34,6 +34,7 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RECORD;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RXTX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RX_VIDEO_CALL;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_VO_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_ADD_PARTICIPANT;
 
 import android.content.Context;
 import android.os.Build;
@@ -315,6 +316,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
 
         VideoProfile videoProfile = new VideoProfile(VideoProfile.STATE_AUDIO_ONLY);
         videoCall.sendSessionModifyRequest(videoProfile);
+
+        if (QtiCallUtils.useCustomVideoUi(getUi().getContext())) {
+            InCallAudioManager.getInstance().onModifyCallClicked(mCall,
+                    VideoProfile.STATE_AUDIO_ONLY);
+        }
     }
 
     public void showDialpadClicked(boolean checked) {
@@ -340,6 +346,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         VideoProfile videoProfile = new VideoProfile(currUnpausedVideoState);
         videoCall.sendSessionModifyRequest(videoProfile);
         mCall.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
+
+        if (QtiCallUtils.useCustomVideoUi(context)) {
+            InCallAudioManager.getInstance().onModifyCallClicked(mCall,
+                    currUnpausedVideoState);
+        }
     }
 
     public void changeToVideo(int videoState) {
@@ -480,17 +491,27 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showMerge = call.can(
                 android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
         final boolean useExt = QtiCallUtils.useExt(ui.getContext());
-
+        final boolean useCustomVideoUi =
+                QtiCallUtils.useCustomVideoUi(ui.getContext());
         final boolean isCallActive = call.getState() == Call.State.ACTIVE;
-        final boolean showUpgradeToVideo = (!isVideo  && !useExt && hasVideoCallCapabilities(call))
-                || (useExt && QtiCallUtils.hasVoiceOrVideoCapabilities(call)
-                && (isCallActive || isCallOnHold));
+
+        final boolean showUpgradeToVideo =
+                /* When useExt is true, show upgrade button for an active/held
+                   call if the call has either voice or video capabilities */
+                ((useExt && QtiCallUtils.hasVoiceOrVideoCapabilities(call)) ||
+                /* When useCustomVideoUi is true, show upgrade button for an active/held
+                   voice call only if the current call has video capabilities */
+                (useCustomVideoUi && !isVideo && hasVideoCallCapabilities(call))
+                && (isCallActive || isCallOnHold)) ||
+                /* When useExt and custom UI are false, default to Google behaviour */
+                (!isVideo && !useExt && !useCustomVideoUi && hasVideoCallCapabilities(call));
 
         final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
         final int callState = call.getState();
 
-        final boolean showRecord = (callState == Call.State.ACTIVE
-                || callState == Call.State.ONHOLD);
+        final boolean showRecord = ((callState == Call.State.ACTIVE
+                || callState == Call.State.ONHOLD)
+                && (ui.getContext().getResources().getBoolean(R.bool.enable_call_record)));
 
         final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
         int callTransferCapabilities = call.isEmergencyCall()? 0 : call.getTransferCapabilities();
@@ -523,12 +544,12 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo && !mEnhanceEnable);
         ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio && !useExt);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
-        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt);
+        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt && !useCustomVideoUi);
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
-        ui.enableAddParticipant(showAddParticipant && !mEnhanceEnable);
-
+        ui.showButton(BUTTON_ADD_PARTICIPANT, showAddParticipant && !mEnhanceEnable);
         ui.showButton(BUTTON_RECORD, showRecord);
+
         /* Depending on the transfer capabilities, display the corresponding buttons */
         if ((callTransferCapabilities & QtiImsExtUtils.QTI_IMS_CONSULTATIVE_TRANSFER) != 0) {
             ui.showButton(BUTTON_TRANSFER_BLIND, true);
@@ -551,6 +572,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         ui.updateButtonStates();
+        ui.updateColors();
     }
 
     private boolean hasVideoCallCapabilities(Call call) {
@@ -609,7 +631,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         void setHold(boolean on);
         void setCameraSwitched(boolean isBackFacingCamera);
         void setVideoPaused(boolean isPaused);
-        void enableAddParticipant(boolean show);
         void setAudio(int mode);
         void setSupportedAudio(int mask);
         void displayDialpad(boolean on, boolean animate);
