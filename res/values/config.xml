@@ -33,4 +33,7 @@
   <bool name="config_regional_video_call_welcome_dialog">false</bool>
   <bool name="config_regional_pup_no_available_network">false</bool>
   <bool name="config_regional_call_data_usage_enable">false</bool>
+  <!--not display SIP dial icon -->
+  <bool name="config_hide_SIP_dial_icon">false</bool>
+
 </resources>

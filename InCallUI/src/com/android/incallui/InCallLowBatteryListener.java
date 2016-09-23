@@ -171,6 +171,28 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
     }
 
     /**
+      * This API handles InCallActivity destroy when low battery dialog is showing
+      */
+    public void onDestroyInCallActivity() {
+        if (dismissPendingDialogs()) {
+            Log.i(this, "onDestroyInCallActivity dismissed low battery dialog");
+
+            /* Activity is destroyed when low battery dialog is showing, possibly
+               by removing the activity from recent tasks list etc. Handle this by
+               dismissing the existing low battery dialog and marking the entry
+               against the call in low battery map that the low battery indication
+               needs to be reprocessed for eg. when user brings back the call to
+               foreground by pulling it from notification bar */
+            Call call = mPrimaryCallTracker.getPrimaryCall();
+            if (call == null) {
+                Log.w(this, "onDestroyInCallActivity call is null");
+                return;
+            }
+            mLowBatteryMap.replace(call, PROCESS_LOW_BATTERY);
+        }
+    }
+
+    /**
      * This API conveys if incall experience is showing or not.
      *
      * @param showing TRUE if incall experience is showing else FALSE
@@ -512,10 +534,12 @@ public class InCallLowBatteryListener implements CallList.Listener, InCallDetail
      * This method dismisses the low battery dialog and
      * returns true if dialog is dimissed else false
      */
-    public void dismissPendingDialogs() {
+    public boolean dismissPendingDialogs() {
         if (isLowBatteryDialogShowing()) {
             mAlert.dismiss();
             mAlert = null;
+            return true;
         }
+        return false;
     }
 }
