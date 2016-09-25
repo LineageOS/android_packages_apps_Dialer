@@ -38,6 +38,9 @@
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinés (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
+  <string name="type_blacklist">Chamada na lista negra</string>
+  <string name="call_log_action_block">Bloquear chamada</string>
+  <string name="call_log_action_unblock">Chamada bloqueada</string>
   <!--  for speed dial -->
   <string name="speed_dial_settings">Axustes de marcación</string>
   <string name="speed_dial_not_set">(sen estabelecer)</string>
@@ -60,6 +63,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Estatísticas</string>
   <string name="callStatsDetailTitle">Estatísticas da chamada</string>
+  <string name="call_stats_incoming">Recibidas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_outgoing">Feitas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_blacklisted">Bloqueadas: <xliff:g id="value">%s </xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Data de inicio</string>
@@ -77,14 +85,62 @@
   <string name="call_stats_reset_filter">Restabelecer o intervalo temporal</string>
   <string name="call_stats_sort_by_duration">Ordenar por duración da chamada</string>
   <string name="call_stats_sort_by_count">Ordenar por número de chamadas</string>
+  <string name="call_stats_title_for_number">Este número</string>
+  <string name="call_stats_title_of_total">Dun total de</string>
+  <string name="call_stats_title_durations">Duración das chamadas</string>
+  <string name="call_stats_title_count">Contador de chamadas</string>
+  <string name="call_stats_title_average_duration">Duración media das chamadas</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">O rexistro de chamadas non contén ningunha chamada no período seleccionado.</string>
+  <string name="call_recording_category_title">Gravación de chamadas</string>
+  <string name="call_recording_format">Formato de son</string>
+  <string name="call_playback_no_app_found_toast">Non se puido atopar ningunha aplicación para reproducir a gravación seleccionada.</string>
+  <string name="invalid_number_text">"%1$s non pode facer esta chamada. ¿É o número correcto?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Podes marcar un número de teléfono ou\nbuscar un contacto</string>
+  <string name="sign_in_hint_text">Inicia sesión para facer %1$s chamadas</string>
+  <string name="wifi_hint_text">Fai chamadas de balde de %1$s a %1$s a través de Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s está en roaming. Fai chamadas gratuitas de %2$s a %2$s a través de Wi-Fi.</string>
+  <string name="emergency_call_hint_text">No hai SIM. Só chamadas de emerxencia.</string>
+  <string name="extra_call_method_call_option">Chamadas de <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Axustes de <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Chamar usando <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Si</string>
   <string name="callerinfo_provider_auth_no_short">Non</string>
+  <string name="callerinfo_provider_auth_no">Non, grazas</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> poderá acceder aos seus contactos, ao seu propio perfil e á conta de Cyangen OS, que pode incluír o seu enderezo electrónico.</string>
+  <string name="callerinfo_provider_auth_learn_more">Saber máis</string>
+  <string name="callerinfo_provider_auth_desc">Dámoslle a benvida! Quere que <xliff:g id="provider_name">%s</xliff:g> identifique as chamadas de números descoñecidos e bloquee as chamadas odiosas?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Dámoslle a benvida! Quere que <xliff:g id="provider_name">%s</xliff:g> identifique as chamadas de números descoñecidos?</string>
+  <string name="callerinfo_provider_summary">Identifica os números descoñecidos e os odiosos</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifique os números descoñecidos</string>
+  <string name="silence_spam_title">Silenciar as chamadas odiosas</string>
+  <string name="silence_spam_summary">Non permitir que pasen as chamadas odiosas</string>
+  <string name="block_hidden_title">Bloquear os números de teléfono ocultos</string>
+  <string name="block_hidden_summary">Considerar os números ocultos como chamadas odiosas</string>
+  <string name="block_dialog_title">Bloquear este número?</string>
+  <string name="block_dialog_positive">Bloquear</string>
+  <string name="block_dialog_negative">Cancelar</string>
+  <string name="block_dialog_description">Xa non recibirás máis chamadas ou mensaxes de esta persona.</string>
+  <string name="block_dialog_report_spam">Informar como spam a <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">¿Desactivar %1$s?</string>
+  <string name="provider_disable_message">Ao desactivar %1$s, non terás un identificador de chamada.</string>
+  <string name="provider_disable_spam_message">Ao desactivar %1$s, non terás protección contra spam nin identificador de chamada.</string>
+  <string name="powered_by_provider">Fornecido por <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Facer %1$s llamadas\ncambiando de modos aquí"</string>
+  <string name="provider_search_help">"Buscar %1$s contactos\ncambiando de modos aquí"</string>
+  <string name="provider_button_help">"Entendido"</string>
+  <string name="provider_voice_call">"Chamada de voz %1$s"</string>
+  <string name="provider_video_call">"Videochamada %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Para realizar unha chamada, activa os permisos de teléfono.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Ver nota</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Tomar notas de calquera lugar</string>
+  <string name="callerinfo_provider_status_disabling">Deshabilitando</string>
+  <string name="show_dialpad_at_start_title">Amosar o teclado no inicio</string>
 </resources>

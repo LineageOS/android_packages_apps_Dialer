@@ -130,6 +130,7 @@
   <string name="provider_disable_message">Wyłączając %1$s, pozbawisz się identyfikacji rozmówcy.</string>
   <string name="provider_disable_spam_message">Wyłączając %1$s, pozbawisz się ochrony przed spamem lub identyfikacji rozmówcy.</string>
   <string name="powered_by_provider">Wspierane przez <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Wykonaj %1$s połączenia poprzez\nprzełączanie trybów tutaj"</string>
   <string name="provider_search_help">"Szukaj kontaktów %1$s\nprzełącz tryby tutaj"</string>
   <string name="provider_button_help">"Mam to"</string>
   <string name="provider_voice_call">"%1$s połączenie głosowe"</string>
