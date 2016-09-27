@@ -61,10 +61,12 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
     @Override
     public void onBuildHeaders(List<Header> target) {
-        Header displayOptionsHeader = new Header();
-        displayOptionsHeader.titleRes = R.string.display_options_title;
-        displayOptionsHeader.fragment = DisplayOptionsSettingsFragment.class.getName();
-        target.add(displayOptionsHeader);
+        if (showDisplayOptions()) {
+            Header displayOptionsHeader = new Header();
+            displayOptionsHeader.titleRes = R.string.display_options_title;
+            displayOptionsHeader.fragment = DisplayOptionsSettingsFragment.class.getName();
+            target.add(displayOptionsHeader);
+        }
 
         Header soundSettingsHeader = new Header();
         soundSettingsHeader.titleRes = R.string.sounds_and_vibration_title;
@@ -125,6 +127,18 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
             accessibilitySettingsHeader.intent = accessibilitySettingsIntent;
             target.add(accessibilitySettingsHeader);
         }
+    }
+
+    /**
+    * Returns {@code true} or {@code false} based on whether the display options setting should be
+    * shown. For languages such as Chinese, Japanese, or Korean, display options aren't useful
+    * since contacts are sorted and displayed family name first by default.
+    *
+    * @return {@code true} if the display options should be shown, {@code false} otherwise.
+    */
+    private boolean showDisplayOptions() {
+        return getResources().getBoolean(R.bool.config_display_order_user_changeable)
+                && getResources().getBoolean(R.bool.config_sort_order_user_changeable);
     }
 
     @Override
