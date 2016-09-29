@@ -30,4 +30,7 @@ public final class AppCompatConstants {
     public static final int INCOMING_IMS_TYPE = 8;
     public static final int OUTGOING_IMS_TYPE = 9;
     public static final int MISSED_IMS_TYPE = 10;
+    public static final int INCOMING_WIFI_TYPE = Calls.INCOMING_WIFI_TYPE;
+    public static final int OUTGOING_WIFI_TYPE = Calls.OUTGOING_WIFI_TYPE;
+    public static final int MISSED_WIFI_TYPE = Calls.MISSED_WIFI_TYPE;
 }

@@ -339,9 +339,12 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
 
         final boolean isVideoUpgradeRequest = call.getSessionModificationState()
                 == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
+        final Call pendingAccountSelectionCall = CallList.getInstance()
+                .getWaitingForAccountCall();
         final int notificationType;
-        if (callState == Call.State.INCOMING || callState == Call.State.CALL_WAITING
-                || isVideoUpgradeRequest) {
+        if ((callState == Call.State.INCOMING || callState == Call.State.CALL_WAITING
+                || isVideoUpgradeRequest) && (!InCallPresenter.getInstance().isShowingInCallUi()
+                || pendingAccountSelectionCall != null)) {
             notificationType = NOTIFICATION_INCOMING_CALL;
         } else {
             notificationType = NOTIFICATION_IN_CALL;
@@ -388,8 +391,6 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
         // Set up the main intent to send the user to the in-call screen
         final PendingIntent inCallPendingIntent = createLaunchPendingIntent();
         builder.setContentIntent(inCallPendingIntent);
-        final Call pendingAccountSelectionCall = CallList.getInstance()
-                .getWaitingForAccountCall();
 
         // Set the intent as a full screen intent as well if a call is incoming
         if (notificationType == NOTIFICATION_INCOMING_CALL
@@ -876,7 +877,7 @@ public class StatusBarNotifier implements InCallPresenter.InCallStateListener,
      * @param sessionModificationState The new session modification state.
      */
     @Override
-    public void onSessionModificationStateChange(int sessionModificationState) {
+    public void onSessionModificationStateChange(Call call, int sessionModificationState) {
         if (sessionModificationState == Call.SessionModificationState.NO_REQUEST) {
             if (mCallId != null) {
                 CallList.getInstance().removeCallUpdateListener(mCallId, this);

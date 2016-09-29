@@ -71,7 +71,6 @@ import android.widget.Spinner;
 import android.util.Log;
 import android.preference.PreferenceManager;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
 import java.util.List;
 
@@ -464,7 +463,7 @@ public class MSimCallLogFragment extends Fragment implements CallLogQueryHandler
                 messageId = R.string.call_log_voicemail_empty;
                 break;
             case CallLogQueryHandler.CALL_TYPE_ALL:
-                messageId = R.string.call_log_all_empty_action;
+                messageId = R.string.recentCalls_empty;
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected filter type in CallLogFragment: "
@@ -612,9 +611,8 @@ public class MSimCallLogFragment extends Fragment implements CallLogQueryHandler
         }
 
         // Update the sub filter's content.
-        final TelephonyManager telephony = (TelephonyManager) getActivity().getSystemService(
-                Context.TELEPHONY_SERVICE);
-        if (!telephony.isMultiSimEnabled()) {
+        final SubscriptionManager subscriptionManager = SubscriptionManager.from(getActivity());
+        if (subscriptionManager.getActiveSubscriptionInfoCount() < 2) {
             mFilterSubSpinnerView.setVisibility(View.GONE);
         }else{
             ArrayAdapter<SpinnerContent> filterSubAdapter = new ArrayAdapter<SpinnerContent>(

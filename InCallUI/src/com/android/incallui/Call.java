@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.Trace;
 import android.os.RemoteException;
 import android.telecom.Call.Details;
@@ -392,6 +393,7 @@ public class Call {
     private String mCallSubject;
     private PhoneAccountHandle mPhoneAccountHandle;
     private boolean mIsOutgoing = false;
+    private long mBaseChronometerTime = 0;
 
     /**
      * Indicates whether the phone account associated with this call supports specifying a call
@@ -1058,5 +1060,14 @@ public class Call {
         return (extras == null)? QtiCallConstants.VOWIFI_QUALITY_NONE :
                 extras.getInt(QtiCallConstants.VOWIFI_CALL_QUALITY_EXTRA_KEY,
                 QtiCallConstants.VOWIFI_QUALITY_NONE);
+    }
+
+    public void triggerCalcBaseChronometerTime() {
+        mBaseChronometerTime = getConnectTimeMillis() - System.currentTimeMillis()
+                + SystemClock.elapsedRealtime();
+    }
+
+    public long getCallDuration() {
+        return SystemClock.elapsedRealtime() - mBaseChronometerTime;
     }
 }

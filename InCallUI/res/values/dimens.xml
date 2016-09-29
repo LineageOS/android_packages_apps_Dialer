@@ -63,6 +63,9 @@
     <dimen name="primary_call_elevation">0dp</dimen>
     <dimen name="dialpad_elevation">2dp</dimen>
 
+    <!-- layout height -->
+    <dimen name="in_call_layout_height">40dp</dimen>
+
     <!-- The InCallUI dialpad will sometimes want digits sizes that are different from dialer.
          Note: These are the default sizes for small (<600dp height) devices: larger screen sizes
          apply the values in values-h600dp/dimens.xml. -->

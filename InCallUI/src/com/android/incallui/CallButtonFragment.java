@@ -33,6 +33,10 @@ import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_BL
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_TRANSFER_CONSULTATIVE;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_UPGRADE_TO_VIDEO;
 import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RECORD;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RXTX_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_RX_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_VO_VIDEO_CALL;
+import static com.android.incallui.CallButtonFragment.Buttons.BUTTON_ADD_PARTICIPANT;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -44,6 +48,8 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.telecom.CallAudioState;
+import android.telecom.VideoProfile;
+import android.telephony.PhoneNumberUtils;
 import android.util.SparseIntArray;
 import android.view.ContextThemeWrapper;
 import android.view.HapticFeedbackConstants;
@@ -57,7 +63,9 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.Toast;
 
+import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.dialer.R;
 
@@ -88,8 +96,8 @@ public class CallButtonFragment
         public static final int BUTTON_HOLD = 3;
         public static final int BUTTON_SWAP = 4;
         public static final int BUTTON_UPGRADE_TO_VIDEO = 5;
-        public static final int BUTTON_SWITCH_CAMERA = 6;
-        public static final int BUTTON_DOWNGRADE_TO_AUDIO = 7;
+        public static final int BUTTON_DOWNGRADE_TO_AUDIO = 6;
+        public static final int BUTTON_SWITCH_CAMERA = 7;
         public static final int BUTTON_ADD_CALL = 8;
         public static final int BUTTON_MERGE = 9;
         public static final int BUTTON_PAUSE_VIDEO = 10;
@@ -98,7 +106,11 @@ public class CallButtonFragment
         public static final int BUTTON_TRANSFER_ASSURED = 13;
         public static final int BUTTON_TRANSFER_CONSULTATIVE = 14;
         public static final int BUTTON_RECORD = 15;
-        public static final int BUTTON_COUNT = 16;
+        public static final int BUTTON_RXTX_VIDEO_CALL = 16;
+        public static final int BUTTON_RX_VIDEO_CALL = 17;
+        public static final int BUTTON_VO_VIDEO_CALL = 18;
+        public static final int BUTTON_ADD_PARTICIPANT = 19;
+        public static final int BUTTON_COUNT = 20;
     }
 
     private SparseIntArray mButtonVisibilityMap = new SparseIntArray(BUTTON_COUNT);
@@ -121,6 +133,9 @@ public class CallButtonFragment
     private ImageButton mConsultativeTransferButton;
     private ImageButton mAddParticipantButton;
     private ImageButton mRecordButton;
+    private ImageButton mRxTxVideoCallButton;
+    private ImageButton mRxVideoCallButton;
+    private ImageButton mVoVideoCallButton;
 
     private PopupMenu mAudioModePopup;
     private boolean mAudioModePopupVisible;
@@ -199,6 +214,12 @@ public class CallButtonFragment
         mManageVideoCallConferenceButton.setOnClickListener(this);
         mRecordButton = (ImageButton) parent.findViewById(R.id.recordButton);
         mRecordButton.setOnClickListener(this);
+        mRxTxVideoCallButton = (ImageButton) parent.findViewById(R.id.rxtxVideoCallButton);
+        mRxTxVideoCallButton.setOnClickListener(this);
+        mRxVideoCallButton = (ImageButton) parent.findViewById(R.id.rxVedioCallButton);
+        mRxVideoCallButton.setOnClickListener(this);
+        mVoVideoCallButton = (ImageButton) parent.findViewById(R.id.volteCallButton);
+        mVoVideoCallButton.setOnClickListener(this);
         return parent;
     }
 
@@ -273,6 +294,12 @@ public class CallButtonFragment
                 ((InCallActivity) getActivity()).stopInCallRecorder();
                 mRecordButton.setBackgroundResource(R.drawable.btn_start_record);
             }
+        } else if(id == R.id.rxtxVideoCallButton){
+            getPresenter().changeToVideo(VideoProfile.STATE_BIDIRECTIONAL);
+        } else if(id == R.id.rxVedioCallButton){
+            getPresenter().changeToVideo(VideoProfile.STATE_RX_ENABLED);
+        } else if(id == R.id.volteCallButton){
+            getPresenter().changeToVideo(VideoProfile.STATE_AUDIO_ONLY);
         } else {
             Log.wtf(this, "onClick: unexpected");
             return;
@@ -430,6 +457,9 @@ public class CallButtonFragment
         mManageVideoCallConferenceButton.setEnabled(isEnabled);
         mAddParticipantButton.setEnabled(isEnabled);
         mRecordButton.setEnabled(isEnabled);
+        mRxTxVideoCallButton.setEnabled(isEnabled);
+        mRxVideoCallButton.setEnabled(isEnabled);
+        mVoVideoCallButton.setEnabled(isEnabled);
     }
 
     @Override
@@ -464,6 +494,8 @@ public class CallButtonFragment
             return mSwitchCameraButton;
         } else if (id == BUTTON_ADD_CALL) {
             return mAddCallButton;
+        } else if (id == BUTTON_ADD_PARTICIPANT) {
+            return mAddParticipantButton;
         } else if (id == BUTTON_MERGE) {
             return mMergeButton;
         } else if (id == BUTTON_PAUSE_VIDEO) {
@@ -478,6 +510,12 @@ public class CallButtonFragment
             return mConsultativeTransferButton;
         } else if (id == BUTTON_RECORD) {
             return mRecordButton;
+        } else if (id == BUTTON_RXTX_VIDEO_CALL) {
+            return mRxTxVideoCallButton;
+        } else if (id == BUTTON_RX_VIDEO_CALL) {
+            return mRxVideoCallButton;
+        } else if (id == BUTTON_VO_VIDEO_CALL) {
+            return mVoVideoCallButton;
         } else {
             Log.w(this, "Invalid button id");
             return null;
@@ -502,10 +540,6 @@ public class CallButtonFragment
     @Override
     public void setVideoPaused(boolean isPaused) {
         mPauseVideoButton.setSelected(isPaused);
-    }
-
-    public void enableAddParticipant(boolean show) {
-        mAddParticipantButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

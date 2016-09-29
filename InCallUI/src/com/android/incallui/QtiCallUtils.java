@@ -54,6 +54,7 @@ import java.util.ArrayList;
 
 import org.codeaurora.internal.IExtTelephony;
 import org.codeaurora.ims.QtiCallConstants;
+import org.codeaurora.ims.utils.QtiImsExtUtils;
 
 /**
  * This class contains Qti specific utiltity functions.
@@ -185,7 +186,7 @@ public class QtiCallUtils {
                 Log.v(this, "Videocall: ModifyCall: upgrade/downgrade to "
                         + callTypeToString(selCallType));
                 VideoProfile videoProfile = new VideoProfile(selCallType);
-                changeToVideoClicked(call, videoProfile);
+                changeToVideoClicked(call, videoProfile, context);
                 dialog.dismiss();
             }
         };
@@ -196,6 +197,9 @@ public class QtiCallUtils {
         alert.show();
     }
 
+    public static void changeToVideoCall(Call call, VideoProfile videoProfile, Context context) {
+            changeToVideoClicked(call, videoProfile, context);
+    }
     /**
      * Converts the call type to string
      */
@@ -215,11 +219,18 @@ public class QtiCallUtils {
      * Sends a session modify request to the telephony framework
      */
     private static void changeToVideoClicked(Call call, VideoProfile videoProfile) {
+        changeToVideoClicked(call, videoProfile, null);
+    }
+
+    private static void changeToVideoClicked(Call call, VideoProfile videoProfile, Context ctx) {
         VideoCall videoCall = call.getVideoCall();
         if (videoCall == null) {
             return;
         }
         videoCall.sendSessionModifyRequest(videoProfile);
+        if (shallShowPreviewWhileWaiting(ctx)) {
+            call.setRequestedVideoState(videoProfile.getVideoState());
+        }
         call.setSessionModificationState(Call.SessionModificationState.WAITING_FOR_RESPONSE);
         InCallAudioManager.getInstance().onModifyCallClicked(call, videoProfile.getVideoState());
     }
@@ -232,7 +243,31 @@ public class QtiCallUtils {
         if (context == null) {
             Log.w(context, "Context is null...");
         }
-        return context != null && context.getResources().getBoolean(R.bool.video_call_use_ext);
+        return context != null && QtiImsExtUtils.useExt(context);
+    }
+
+    /**
+     * Checks the boolean flag in config file to figure out if custom video ui is required or
+     * not
+     */
+    public static boolean useCustomVideoUi(Context context) {
+        if (context == null) {
+            Log.w(context, "Context is null...");
+        }
+        return context != null && QtiImsExtUtils.useCustomVideoUi(context);
+    }
+
+    /**
+     * Checks the boolean flag in config file to figure out if it support preview before the accept
+     * video call or not
+     */
+    public static boolean shallShowPreviewWhileWaiting(Context context) {
+        if (context == null) {
+            Log.w(context, "Context is null...");
+            return false;
+        }
+        return context.getResources().getBoolean(
+                R.bool.config_enable_modify_call_preview);
     }
 
     /**
@@ -497,7 +532,7 @@ public class QtiCallUtils {
 
     /**
      * Returns true if local has the VT Receive and if remote capability has VT Transmit set i.e.
-     * Local can transmit and remote can receive
+     * Remote can transmit and local can receive
      */
     public static boolean hasReceiveVideoCapabilities(Call call) {
         return call != null &&

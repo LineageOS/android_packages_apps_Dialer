@@ -199,7 +199,7 @@ public class CallList {
         final List<CallUpdateListener> listeners = mCallUpdateListenerMap.get(call.getId());
         if (listeners != null) {
             for (CallUpdateListener listener : listeners) {
-                listener.onSessionModificationStateChange(sessionModificationState);
+                listener.onSessionModificationStateChange(call, sessionModificationState);
             }
         }
     }
@@ -538,8 +538,7 @@ public class CallList {
 
         boolean updated = false;
 
-        if (call.getState() == Call.State.DISCONNECTING
-                || call.getState() == Call.State.DISCONNECTED) {
+        if (call.getState() == Call.State.DISCONNECTED) {
             // update existing (but do not add!!) disconnected calls
             if (mCallById.containsKey(call.getId())) {
                 // For disconnected calls, we want to keep them alive for a few seconds so that the
@@ -568,8 +567,8 @@ public class CallList {
     }
 
     private int getDelayForDisconnect(Call call) {
-        Preconditions.checkState(call.getState() == Call.State.DISCONNECTED
-                || call.getState() == Call.State.DISCONNECTING);
+        Preconditions.checkState(call.getState() == Call.State.DISCONNECTED);
+
 
         final int cause = call.getDisconnectCause().getCode();
         final int delay;
@@ -584,7 +583,6 @@ public class CallList {
             case DisconnectCause.REJECTED:
             case DisconnectCause.MISSED:
             case DisconnectCause.CANCELED:
-            case DisconnectCause.UNKNOWN:
                 // no delay for missed/rejected incoming calls and canceled outgoing calls.
                 delay = 0;
                 break;
@@ -619,11 +617,6 @@ public class CallList {
     private void finishDisconnectedCall(Call call) {
         if (mPendingDisconnectCalls.contains(call)) {
             mPendingDisconnectCalls.remove(call);
-            if (call.getState() == Call.State.DISCONNECTING) {
-                call.setState(Call.State.DISCONNECTED);
-                call.setDisconnectCause(new DisconnectCause(DisconnectCause.LOCAL));
-                notifyListenersOfDisconnect(call);
-            }
         }
         call.setState(Call.State.IDLE);
         updateCallInMap(call);
@@ -724,7 +717,7 @@ public class CallList {
          *
          * @param sessionModificationState The new session modification state.
          */
-        public void onSessionModificationStateChange(int sessionModificationState);
+        public void onSessionModificationStateChange(Call call, int sessionModificationState);
 
         /**
          * Notifies of a change to the last forwarded number for a call.

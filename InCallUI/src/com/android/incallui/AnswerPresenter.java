@@ -163,7 +163,7 @@ public class AnswerPresenter extends Presenter<AnswerPresenter.AnswerUi>
         }
     }
 
-    public void onSessionModificationStateChange(int sessionModificationState) {
+    public void onSessionModificationStateChange(Call call, int sessionModificationState) {
         boolean isUpgradePending = sessionModificationState ==
                 Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
 

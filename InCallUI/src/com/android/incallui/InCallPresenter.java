@@ -1352,6 +1352,18 @@ public class InCallPresenter implements CallList.Listener,
     }
 
     /**
+     * Update  color of sim card icon
+     */
+    public void updatePrimaryCallState() {
+        for (InCallEventListener listener : mInCallEventListeners) {
+            if (listener instanceof CallCardPresenter) {
+                listener.updatePrimaryCallState();
+                break;
+            }
+        }
+    }
+
+    /**
      * Called by the {@link CallCardPresenter} to inform of a change in visibility of the secondary
      * caller info bar.
      *
@@ -1496,6 +1508,7 @@ public class InCallPresenter implements CallList.Listener,
             // We're about the bring up the in-call UI for an incoming call. If we still have
             // dialogs up, we need to clear them out before showing incoming screen.
             if (isActivityStarted()) {
+                mInCallActivity.showCallCardFragment(true);
                 mInCallActivity.dismissPendingDialogs();
             }
             if (!startUi(newState)) {
@@ -1818,16 +1831,18 @@ public class InCallPresenter implements CallList.Listener,
      * orientation event listener if allowOrientationChange is true, disables it if false.
      *
      * @param orientation {@link ActivityInfo#screenOrientation} Actual orientation value to set
+     * @return returns whether the new orientation mode was set successfully or not.
      */
-    public void setInCallAllowsOrientationChange(int orientation) {
+    public boolean setInCallAllowsOrientationChange(int orientation) {
         if (mInCallActivity == null) {
             Log.e(this, "InCallActivity is null. Can't set requested orientation.");
-            return;
+            return false;
         }
 
         mInCallActivity.setRequestedOrientation(orientation);
         mInCallActivity.enableInCallOrientationEventListener(
                 orientation == InCallOrientationEventListener.FULL_SENSOR_SCREEN_ORIENTATION);
+        return true;
     }
 
     /* returns TRUE if screen is turned ON else false */
@@ -2090,6 +2105,7 @@ public class InCallPresenter implements CallList.Listener,
     public interface InCallEventListener {
         public void onFullscreenModeChanged(boolean isFullscreenMode);
         public void onSecondaryCallerInfoVisibilityChanged(boolean isVisible, int height);
+        public void updatePrimaryCallState();
     }
 
     public interface InCallUiListener {

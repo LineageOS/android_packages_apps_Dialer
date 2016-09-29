@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -60,12 +62,16 @@ import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.service.ExtendedBlockingButtonRenderer;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PhoneNumberUtil;
+import com.android.dialer.util.PresenceHelper;
 import com.android.dialer.voicemail.VoicemailPlaybackLayout;
 import com.android.dialer.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialerbind.ObjectFactory;
 import com.google.common.collect.Lists;
 
 import java.util.List;
+
+import org.codeaurora.ims.utils.QtiImsExtUtils;
+import org.codeaurora.presenceserv.IPresenceService;
 
 /**
  * This is an object containing references to views contained by the call log list item. This
@@ -104,6 +110,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     public View detailsButtonView;
     public View callWithNoteButtonView;
     public ImageView workIconView;
+    public ImageView videoCallIconView;
 
     /**
      * The row Id for the first call associated with the call log entry.  Used as a key for the
@@ -418,6 +425,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
             videoCallButtonView.setOnClickListener(this);
 
+            videoCallIconView = (ImageView) actionsView.findViewById(R.id.videoCallIcon);
+
             createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
             createNewContactButtonView.setOnClickListener(this);
 
@@ -504,12 +513,22 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             callButtonView.setVisibility(View.GONE);
         }
-
-        // If one of the calls had video capabilities, show the video call button.
-        if (mCallLogCache.isVideoEnabled() && canPlaceCallToNumber &&
-                phoneCallDetailsViews.callTypeIcons.isVideoShown()) {
+        boolean isPresenceEnabled = mContext.getResources().getBoolean(
+                R.bool.config_regional_presence_enable);
+        boolean showVideoCallBtn = isPresenceEnabled ? PresenceHelper.startAvailabilityFetch(number)
+                : phoneCallDetailsViews.callTypeIcons.isVideoShown();
+        //If presence is enabled,only both of sides had video capabilities,
+        //show the video call button,If not, one of the calls had video capabilities,
+        //the video call button will be shown.
+        if (mCallLogCache.isVideoEnabled() && canPlaceCallToNumber && showVideoCallBtn) {
             videoCallButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
             videoCallButtonView.setVisibility(View.VISIBLE);
+            if (QtiImsExtUtils.isCarrierOneSupported()) {
+                Drawable drawable =  mContext.getResources().getDrawable(R.drawable.volte_video);
+                drawable.setColorFilter(mContext.getResources().getColor(
+                    R.color.dialtacts_secondary_text_color), PorterDuff.Mode.MULTIPLY);
+                videoCallIconView.setImageDrawable(drawable);
+            }
         } else {
             videoCallButtonView.setVisibility(View.GONE);
         }

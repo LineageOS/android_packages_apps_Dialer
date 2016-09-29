@@ -27,8 +27,6 @@
   ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <resources>
-    <!-- Determines UI extensions for video calls should be used. -->
-    <bool name="video_call_use_ext">true</bool>
     <!-- Config to show/hide Video quality toast -->
     <bool name="config_display_video_quality_toast">true</bool>
     <!-- Config to show/hide call session event toast like player start/stop -->
@@ -52,4 +50,10 @@
     <bool name="add_multi_participants_enabled">false</bool>
     <!-- Config to add participant only in conferencall call-->
     <bool name="add_participant_only_in_conference">false</bool>
+    <!-- Config to if show preview before the receiver accepts a show me upgrade video call -->
+    <bool name="config_enable_modify_call_preview">false</bool>
+    <!-- Config to show/hide HD Icon2 -->
+    <bool name="config_show_hd2">false</bool>
+    <!-- Config to enalbe call record -->
+    <bool name="enable_call_record">false</bool>
 </resources>
