@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"Ավելացրեք համար/որոնեք կոնտակտներ"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Զանգերի մատյանը դատարկ է"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Զանգել"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Բաց թողած զանգեր չունեք:"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Բաց թողնված զանգեր չունեք:"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Ձայնային փոստի մուտքի արկղը դատարկ է:"</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Ձեր ձայնային փոստի արխիվը դատարկ է:"</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Ցույց տալ միայն ընտրյալները"</string>
