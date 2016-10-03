@@ -1123,22 +1123,29 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * @param aspectRatio The aspect ratio of the camera (width / height).
      */
     private void setPreviewSize(int orientation, float aspectRatio) {
+        Log.d(this, "setPreviewSize: orientation = " + orientation +
+                " aspectRatio = " + aspectRatio);
         VideoCallUi ui = getUi();
         if (ui == null) {
             return;
         }
 
+        final int adjustedDimension = (aspectRatio > 1.0) ?
+                (int) (mMinimumVideoDimension * aspectRatio):
+                (int) (mMinimumVideoDimension / aspectRatio);
+
         int height;
         int width;
 
+        // For landscape resolution, make sure width is larger than height.
         if (orientation == InCallOrientationEventListener.SCREEN_ORIENTATION_90 ||
                 orientation == InCallOrientationEventListener.SCREEN_ORIENTATION_270) {
-            width = (int) (mMinimumVideoDimension * aspectRatio);
+            width = (int) adjustedDimension;
             height = (int) mMinimumVideoDimension;
         } else {
             // Portrait or reverse portrait orientation.
             width = (int) mMinimumVideoDimension;
-            height = (int) (mMinimumVideoDimension * aspectRatio);
+            height = (int) adjustedDimension;
         }
         ui.setPreviewSize(width, height);
     }
