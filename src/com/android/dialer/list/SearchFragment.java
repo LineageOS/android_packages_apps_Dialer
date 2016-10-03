@@ -556,7 +556,7 @@ public class SearchFragment extends PhoneNumberPickerFragment
 
     public void setupEmptyView() {
         DialtactsActivity dialActivity = (DialtactsActivity) mActivity;
-        if (mEmptyView != null && dialActivity != null) {
+        if (mEmptyView != null && dialActivity != null && isAdded()) {
             ContactEntryListAdapter adapter = getAdapter();
             Resources r = getResources();
             mEmptyView.setWidth(dialActivity.getDialpadWidth());
