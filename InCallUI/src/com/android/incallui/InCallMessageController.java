@@ -36,7 +36,9 @@ import com.android.incallui.InCallPresenter.InCallDetailsListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.VideoEventListener;
 import com.android.incallui.InCallVideoCallCallbackNotifier.SessionModificationListener;
 import org.codeaurora.ims.QtiCallConstants;
+import org.codeaurora.ims.QtiCarrierConfigs;
 import org.codeaurora.ims.QtiVideoCallDataUsage;
+import org.codeaurora.ims.utils.QtiImsExtUtils;
 
 /**
  * This class listens to incoming events for the listener classes it implements. It should
@@ -165,8 +167,9 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
             Log.e(this, "onVideoQualityChanged - Context is null/not primary call.");
             return;
         }
-        final Resources resources = mContext.getResources();
-        if (resources.getBoolean(R.bool.config_display_video_quality_toast)) {
+        if (QtiImsExtUtils.isCarrierConfigEnabled(mContext,
+                QtiCarrierConfigs.SHOW_VIDEO_QUALITY_TOAST)) {
+            final Resources resources = mContext.getResources();
             final String videoQualityChangedText = resources.getString(
                     R.string.video_quality_changed) + resources.getString(
                     QtiCallUtils.getVideoQualityResourceId(videoQuality));
@@ -186,8 +189,8 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
             Log.e(this, "onCallSessionEvent - Context is null.");
             return;
         }
-        final Resources resources = mContext.getResources();
-        if (resources.getBoolean(R.bool.config_call_session_event_toast)) {
+        if (QtiImsExtUtils.isCarrierConfigEnabled(mContext,
+                QtiCarrierConfigs.SHOW_CALL_SESSION_EVENT_TOAST)) {
             QtiCallUtils.displayToast(mContext, QtiCallUtils.getCallSessionResourceId(event));
         }
     }
@@ -220,9 +223,9 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
         Log.i(this, "onDetailsChanged LTE data value = " + lteUsage + " WiFi data value = " +
                 wlanUsage);
 
-        final Resources resources = mContext.getResources();
-        if (resources.getBoolean(R.bool.config_display_data_usage_toast)) {
-            final String dataUsageChangedText = resources.getString(
+        if (QtiImsExtUtils.isCarrierConfigEnabled(mContext,
+                QtiCarrierConfigs.SHOW_DATA_USAGE_TOAST)) {
+            final String dataUsageChangedText = mContext.getResources().getString(
                     R.string.wlan_data_usage_label) + wlanUsage;
             QtiCallUtils.displayToast(mContext, dataUsageChangedText);
         }
@@ -235,9 +238,9 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
     @Override
     public void onCallDataUsageChange(final long dataUsage) {
         Log.d(this, "onCallDataUsageChange: dataUsage = " + dataUsage);
-        final Resources resources = mContext.getResources();
-        if (resources.getBoolean(R.bool.config_display_data_usage_toast)) {
-            final String dataUsageChangedText = resources.getString(
+        if (QtiImsExtUtils.isCarrierConfigEnabled(mContext,
+                QtiCarrierConfigs.SHOW_DATA_USAGE_TOAST)) {
+            final String dataUsageChangedText = mContext.getResources().getString(
                     R.string.lte_data_usage_label) + dataUsage;
             QtiCallUtils.displayToast(mContext, dataUsageChangedText);
         }
