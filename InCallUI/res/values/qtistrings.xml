@@ -180,4 +180,11 @@
     <string name="video_call_downgrade_without_lte_toast">Move out of LTE coverage area downgrade the call.</string>
     <string name="video_call">Video Calling</string>
     <string name="video_call_cannot_upgrade">cannot accept video calls at this time</string>
+
+    <!-- Pop up menu options for picture mode -->
+    <string name="video_call_picture_mode_menu_title">Choose Picture Mode</string>
+    <string name="video_call_picture_mode_preview_video">Camera Preview</string>
+    <string name="video_call_picture_mode_incoming_video">Incoming Video</string>
+    <string name="video_call_picture_mode_cancel_option">Cancel</string>
+    <string name="video_call_picture_mode_save_option">Save</string>
 </resources>
