@@ -943,10 +943,24 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 insert.bindLong(12, updatedContactCursor.getInt(PhoneQuery.PHONE_IS_PRIMARY));
                 insert.bindLong(13, updatedContactCursor.getInt(PhoneQuery.PHONE_CARRIER_PRESENCE));
                 insert.bindLong(14, currentMillis);
-                insert.bindString(15, updatedContactCursor
-                        .getString(PhoneQuery.PHONE_ACCOUNT_TYPE));
-                insert.bindString(16, updatedContactCursor
-                        .getString(PhoneQuery.PHONE_ACCOUNT_NAME));
+
+                final String accountType = updatedContactCursor.getString(
+                        PhoneQuery.PHONE_ACCOUNT_TYPE);
+                if (accountType == null) {
+                    insert.bindString(15, mContext.getResources().getString(
+                            R.string.missing_account_type));
+                } else {
+                    insert.bindString(15, accountType);
+                }
+
+                final String accountName = updatedContactCursor.getString(
+                        PhoneQuery.PHONE_ACCOUNT_NAME);
+                if (accountName == null) {
+                    insert.bindString(16, mContext.getResources().getString(
+                            R.string.missing_account_name));
+                } else {
+                    insert.bindString(16, accountName);
+                }
                 insert.executeInsert();
                 final String contactPhoneNumber =
                         updatedContactCursor.getString(PhoneQuery.PHONE_NUMBER);
