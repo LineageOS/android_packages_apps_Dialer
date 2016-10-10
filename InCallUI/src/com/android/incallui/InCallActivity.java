@@ -366,6 +366,7 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     @Override
     protected void onDestroy() {
         Log.d(this, "onDestroy()...  this = " + this);
+        InCallLowBatteryListener.getInstance().onDestroyInCallActivity();
         InCallPresenter.getInstance().unsetActivity(this);
         InCallPresenter.getInstance().updateIsChangingConfigurations();
         super.onDestroy();
