@@ -963,7 +963,7 @@ public class InCallPresenter implements CallList.Listener,
             InCallAudioManager.getInstance().onAnswerIncomingCall(call, videoState);
         }
 
-        if (call != null && VideoUtils.isVideoCall(videoState)) {
+        if (call != null) {
             showInCall(false, false/* newOutgoingCall */);
         }
     }
