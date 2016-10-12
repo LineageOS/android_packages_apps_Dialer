@@ -24,6 +24,7 @@ import android.app.FragmentManager;
 import android.graphics.Outline;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,9 +40,16 @@ import com.android.dialer.R;
 public class CircularRevealFragment extends Fragment {
     static final String TAG = "CircularRevealFragment";
 
+    // This is used to extend the expiration time of Circular reveal
+    // animation. So over all time the handler waits is Animation
+    // duration + REVEAL_ADDITIONAL_EXPIRATION_TIME and notifies
+    // the Circular reveal completion to listeners.
+    private static final int REVEAL_ADDITIONAL_EXPIRATION_TIME = 200;
+
     private Point mTouchPoint;
     private OnCircularRevealCompleteListener mListener;
     private boolean mAnimationStarted;
+    private boolean mAnimationFinished;
 
     interface OnCircularRevealCompleteListener {
         public void onCircularRevealComplete(FragmentManager fm);
@@ -123,6 +131,7 @@ public class CircularRevealFragment extends Fragment {
         view.getViewTreeObserver().addOnPreDrawListener(new OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
+                mAnimationFinished = false;
                 final ViewTreeObserver vto = view.getViewTreeObserver();
                 if (vto.isAlive()) {
                     vto.removeOnPreDrawListener(this);
@@ -132,13 +141,31 @@ public class CircularRevealFragment extends Fragment {
                     animator.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
+                            Log.w(TAG, " CircularRevealFragment - onAnimationEnd");
                             view.setClipToOutline(false);
-                            if (mListener != null) {
+                            if (mListener != null && mAnimationFinished == false) {
                                 mListener.onCircularRevealComplete(getFragmentManager());
+                                mAnimationFinished = true;
                             }
                         }
                     });
                     animator.start();
+                    // If somehow the animator is failed to run from lower layers,
+                    // need to wait for certain expiration time and inform the
+                    // listeners with OnCircularComplete callback so that rest of
+                    // the things will not be blocked.
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                         @Override
+                         public void run() {
+                             Log.w(TAG, " Failed to complete animation");
+                             if (mListener != null && mAnimationFinished == false) {
+                                 mListener.onCircularRevealComplete(getFragmentManager());
+                                 mAnimationFinished = true;
+                             }
+                         }
+                    }, getResources().getInteger(R.integer.reveal_animation_duration) +
+                            REVEAL_ADDITIONAL_EXPIRATION_TIME);
                 }
                 return false;
             }
