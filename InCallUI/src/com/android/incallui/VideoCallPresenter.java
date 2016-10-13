@@ -885,9 +885,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         } else {
             ui.hideVideoUi();
         }
-
-        InCallPresenter.getInstance().enableScreenTimeout(
-                VideoProfile.isAudioOnly(videoState));
     }
 
     /**

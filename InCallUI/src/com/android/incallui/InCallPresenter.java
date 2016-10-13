@@ -1865,21 +1865,6 @@ public class InCallPresenter implements CallList.Listener,
         }
     }
 
-    public void enableScreenTimeout(boolean enable) {
-        Log.v(this, "enableScreenTimeout: value=" + enable);
-        if (mInCallActivity == null) {
-            Log.e(this, "enableScreenTimeout: InCallActivity is null.");
-            return;
-        }
-
-        final Window window = mInCallActivity.getWindow();
-        if (enable) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        } else {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
-    }
-
     /**
      * Returns the space available beside the call card.
      *
