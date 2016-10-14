@@ -528,7 +528,10 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         if (mEnhanceEnable && showUpgradeToVideo) {
             boolean isAudioAndVtCap = (VideoProfile.isAudioOnly(mCall.getVideoState()) &&
                     PresenceHelper.getVTCapability(call.getNumber()));
-            showRxTx = (VideoProfile.isReceptionEnabled(mCall.getVideoState()) || isAudioAndVtCap);
+            showRxTx = ((VideoProfile.isReceptionEnabled(mCall.getVideoState()) &&
+                    !VideoProfile.isBidirectional(mCall.getVideoState())) || isAudioAndVtCap);
+            //"hide me" show be show if call is video call or voice call only, "hide me"
+            //is mean that call can upgrade to Rx video call for voice call only.
             showRx = (VideoProfile.isBidirectional(mCall.getVideoState()) || isAudioAndVtCap);
             showVolte = VideoProfile.isVideo(mCall.getVideoState());
             Log.v(this, "updateButtonsState showRxTx = " + showRxTx +
