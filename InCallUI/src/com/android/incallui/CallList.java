@@ -419,6 +419,7 @@ public class CallList {
     }
 
     public boolean isDsdaEnabled() {
+        Log.d("CallList", ": isDsdaEnabled, inside CallList function call");
         return QtiCallUtils.isDsdaEnabled();
     }
 
