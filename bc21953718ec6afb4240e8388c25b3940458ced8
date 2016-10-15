@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff2e2bb8_9218081e",
+        "filename": "InCallUI/src/com/android/incallui/QtiCallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2016-10-15T13:02:37Z",
+      "side": 1,
+      "message": "Tab",
+      "range": {
+        "startLine": 482,
+        "startChar": 0,
+        "endLine": 482,
+        "endChar": 1
+      },
+      "revId": "bc21953718ec6afb4240e8388c25b3940458ced8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
