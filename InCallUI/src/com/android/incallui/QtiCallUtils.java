@@ -41,6 +41,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.content.pm.ActivityInfo;
 import android.telecom.InCallService.VideoCall;
 import android.telephony.PhoneNumberUtils;
@@ -48,6 +49,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.incallui.util.TelecomCallUtil;
+import com.android.internal.telephony.TelephonyProperties;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
@@ -462,19 +464,24 @@ public class QtiCallUtils {
 
     static Boolean dsdaEnabled = null;
     static boolean isDsdaEnabled() {
-        try {
-            if (dsdaEnabled == null) {
-                IExtTelephony mExtTelephony = getIExtTelephony();
-                Log.d(LOG_TAG, "isDsdaEnabled, mExtTelephony:" + mExtTelephony);
-                dsdaEnabled = mExtTelephony.isDsdaEnabled();
-                return dsdaEnabled;
-            }
-        } catch (RemoteException ex) {
-            Log.e(LOG_TAG, "Exception : " + ex);
-        } catch (NullPointerException ex) {
-            Log.e(LOG_TAG, "Exception : " + ex);
+        if (dsdaEnabled != null) {
+            return dsdaEnabled;
         }
-        return (dsdaEnabled == null) ? false : dsdaEnabled;
+
+        String config = SystemProperties.get(TelephonyProperties.PROPERTY_MULTI_SIM_CONFIG);
+        IExtTelephony extTelephony = getIExtTelephony();
+        if (extTelephony == null) {
+            dsdaEnabled = config.equals("dsda");
+        } else {
+            try {
+                dsdaEnabled = extTelephony.isDsdaEnabled();
+            } catch (RemoteException ex) {
+                Log.e(LOG_TAG, "RemoteException: " + ex);
+                dsdaEnabled = config.equals("dsda");
+            }
+        }
+
+        return dsdaEnabled;
     }
 
     public static void downgradeToVoiceCall(final Call call) {
