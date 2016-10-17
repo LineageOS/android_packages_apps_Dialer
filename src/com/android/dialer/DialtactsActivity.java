@@ -627,7 +627,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         int resId = view.getId();
         if (resId == R.id.floating_action_button) {
             if (mListsFragment.getCurrentTabIndex()
-                    == ListsFragment.TAB_INDEX_ALL_CONTACTS && !mInRegularSearch) {
+                    == ListsFragment.TAB_INDEX_ALL_CONTACTS && !mInRegularSearch &&
+                    !mInDialpadSearch) {
                 DialerUtils.startActivityWithErrorToast(
                         this,
                         IntentUtil.getNewContactIntent(),
@@ -1342,7 +1343,8 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         updateMissedCalls();
         int tabIndex = mListsFragment.getCurrentTabIndex();
         mPreviouslySelectedTabIndex = tabIndex;
-        if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS) {
+        if (tabIndex == ListsFragment.TAB_INDEX_ALL_CONTACTS &&
+                !mInRegularSearch && !mInDialpadSearch) {
             mFloatingActionButtonController.changeIcon(
                     getResources().getDrawable(R.drawable.ic_person_add_24dp),
                     getResources().getString(R.string.search_shortcut_create_new_contact));
