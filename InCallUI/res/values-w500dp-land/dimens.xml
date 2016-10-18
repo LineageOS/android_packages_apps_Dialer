@@ -32,4 +32,6 @@
     <dimen name="dialpad_elevation">2dp</dimen>
 
     <dimen name="video_preview_margin">20dp</dimen>
+
+    <dimen name="end_call_button_margin_right">80dp</dimen>
 </resources>

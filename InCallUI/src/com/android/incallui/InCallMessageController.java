@@ -310,6 +310,9 @@ public class InCallMessageController implements InCallSubstateListener, VideoEve
          case QtiCallConstants.CALL_FAIL_EXTRA_CODE_LOCAL_LOW_BATTERY:
              QtiCallUtils.displayToast(mContext, R.string.call_failed_due_to_low_battery);
              break;
+         case QtiCallConstants.CALL_FAIL_EXTRA_CODE_LOCAL_VALIDATE_NUMBER:
+             QtiCallUtils.displayToast(mContext, R.string.call_failed_due_to_validate_number);
+             break;
          default:
              break;
        }

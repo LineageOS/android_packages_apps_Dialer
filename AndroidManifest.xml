@@ -326,7 +326,7 @@
                   android:label=""
                   android:excludeFromRecents="true"
                   android:launchMode="singleInstance"
-                  android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+                  android:configChanges="smallestScreenSize|screenLayout|keyboardHidden"
                   android:exported="false"
                   android:screenOrientation="nosensor"
                   android:directBootAware="true"

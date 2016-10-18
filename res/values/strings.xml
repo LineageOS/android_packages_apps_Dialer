@@ -1155,4 +1155,6 @@ e mode.</string>
     <string name="alert_call_over_wifi">Calls will be made over Wi-Fi.</string>
     <string name="alert_call_no_cellular_coverage">No cellular network available. Connect to available Wi-Fi to make calls.</string>
     <string name="alert_user_connect_to_wifi_for_call">Connect to Wi-Fi to make calls.</string>
+    <string name="missing_account_type">(No type)</string>
+    <string name="missing_account_name">(No name)</string>
 </resources>
