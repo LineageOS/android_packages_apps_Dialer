@@ -65,7 +65,7 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
         mQuery = SmartDialNameMatcher.normalizeNumber(query, SmartDialPrefix.getMap());
 
         /** Constructs a name matcher object for matching names. */
-        mNameMatcher = new SmartDialNameMatcher(mQuery, SmartDialPrefix.getMap(), mContext);
+        mNameMatcher = new SmartDialNameMatcher(mQuery, SmartDialPrefix.getMap());
     }
 
     /**
@@ -103,8 +103,6 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
             row[PhoneQuery.PHOTO_ID] = contact.photoId;
             row[PhoneQuery.DISPLAY_NAME] = contact.displayName;
             row[PhoneQuery.CARRIER_PRESENCE] = contact.carrierPresence;
-            row[PhoneQuery.PHONE_ACCOUNT_TYPE] = contact.accountType;
-            row[PhoneQuery.PHONE_ACCOUNT_NAME] = contact.accountName;
             cursor.addRow(row);
         }
         return cursor;
