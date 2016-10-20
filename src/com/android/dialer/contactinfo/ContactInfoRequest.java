@@ -31,11 +31,18 @@ public final class ContactInfoRequest {
     public final String countryIso;
     /** The cached contact information stored in the call log. */
     public final ContactInfo callLogInfo;
+    public final boolean isConf;
 
     public ContactInfoRequest(String number, String countryIso, ContactInfo callLogInfo) {
+        this(number, countryIso, callLogInfo, false);
+    }
+
+    public ContactInfoRequest(String number, String countryIso, ContactInfo callLogInfo,
+            boolean isConf) {
         this.number = number;
         this.countryIso = countryIso;
         this.callLogInfo = callLogInfo;
+        this.isConf = isConf;
     }
 
     @Override

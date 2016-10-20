@@ -43,6 +43,8 @@ import com.android.dialer.service.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.util.TelecomUtil;
 import com.android.dialerbind.ObjectFactory;
 
+import java.util.regex.Pattern;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -76,6 +78,24 @@ public class ContactInfoHelper {
      */
     @Nullable
     public ContactInfo lookupNumber(String number, String countryIso) {
+        return lookupNumber(number, countryIso, false);
+    }
+
+    /**
+     * Returns the contact information for the given number.
+     * <p>
+     * If the number does not match any contact, returns a contact info containing only the number
+     * and the formatted number.
+     * <p>
+     * If an error occurs during the lookup, it returns null.
+     *
+     * @param number the number to look up
+     * @param countryIso the country associated with this number
+     * @param isConfUrlLog whether call log is for Conference URL call
+     */
+    @Nullable
+    public ContactInfo lookupNumber(String number, String countryIso, boolean isConfUrlCallLog) {
+
         if (TextUtils.isEmpty(number)) {
             return null;
         }
@@ -89,12 +109,13 @@ public class ContactInfoHelper {
                 // If lookup failed, check if the "username" of the SIP address is a phone number.
                 String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
                 if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
-                    info = queryContactInfoForPhoneNumber(username, countryIso, true);
+                    info = queryContactInfoForPhoneNumber(username, countryIso, true,
+                            isConfUrlCallLog);
                 }
             }
         } else {
             // Look for a contact that has the given phone number.
-            info = queryContactInfoForPhoneNumber(number, countryIso, false);
+            info = queryContactInfoForPhoneNumber(number, countryIso, false, isConfUrlCallLog);
         }
 
         final ContactInfo updatedInfo;
@@ -245,12 +266,38 @@ public class ContactInfoHelper {
      * If the lookup fails for some other reason, it returns null.
      */
     private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso,
-                                                       boolean isSip) {
+            boolean isSip, boolean isConfUrlLog) {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
 
         ContactInfo info = lookupContactFromUri(getContactInfoLookupUri(number), isSip);
+        if (isConfUrlLog) {
+            Pattern pattern = Pattern.compile("[,;]");
+            String[] nums = pattern.split(number);
+            if (nums != null && nums.length > 1) {
+                if (info == null || info == ContactInfo.EMPTY) {
+                    info = new ContactInfo();
+                    info.number = number;
+                    info.formattedNumber = formatPhoneNumber(number, null, countryIso);
+                    info.lookupUri = createTemporaryContactUri(info.formattedNumber);
+                    info.normalizedNumber = PhoneNumberUtils.formatNumberToE164(number,
+                            countryIso);
+                }
+                String combName = "";
+                for (String num : nums) {
+                    ContactInfo singleCi = lookupContactFromUri(getContactInfoLookupUri(num),
+                            isSip);
+                    if (TextUtils.isEmpty(singleCi.name)) {
+                        singleCi.name = formatPhoneNumber(num, null, countryIso);
+                    }
+                    combName += singleCi.name + ";";
+                }
+                if (!TextUtils.isEmpty(combName) && combName.length() > 1) {
+                    info.name = combName.substring(0, combName.length() - 1);
+                }
+            }
+        }
         if (info != null && info != ContactInfo.EMPTY) {
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
         } else if (mCachedNumberLookupService != null) {
