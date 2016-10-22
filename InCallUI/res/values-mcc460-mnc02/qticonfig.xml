@@ -27,12 +27,6 @@
   ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 <resources>
-    <!-- Config to show/hide Video quality toast -->
-    <bool name="config_display_video_quality_toast">false</bool>
-    <!-- Config to show/hide call session event toast like player start/stop -->
-    <bool name="config_call_session_event_toast">false</bool>
-    <!-- Config to show/hide data usage toast -->
-    <bool name="config_display_data_usage_toast">false</bool>
     <!-- Config to show/hide call duration in call detail -->
     <bool name="call_duration_enabled">false</bool>
     <!-- Config to enable/disable ims call log -->
