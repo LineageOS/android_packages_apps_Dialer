@@ -524,8 +524,11 @@ public class CallLogAdapter extends GroupingListAdapter
         ContactInfo info = ContactInfo.EMPTY;
         if (PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemailNumber) {
             // Lookup contacts with this number
-            info = mContactInfoCache.getValue(number + postDialDigits,
-                    countryIso, cachedContactInfo);
+            boolean isConfCallLog = num != null && num.length > 1
+                    && DialerUtils.isConferenceURICallLog(phoneNumber, postDialDigits);
+            String queryNumber = isConfCallLog ? phoneNumber : number + postDialDigits;
+            info = mContactInfoCache.getValue(queryNumber,
+                    countryIso, cachedContactInfo, isConfCallLog);
         }
         CharSequence formattedNumber = info.formattedNumber == null
                 ? null : PhoneNumberUtilsCompat.createTtsSpannable(info.formattedNumber);

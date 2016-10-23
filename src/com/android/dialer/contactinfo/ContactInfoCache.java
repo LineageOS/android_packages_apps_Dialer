@@ -76,7 +76,8 @@ public class ContactInfoCache {
 
                 if (req != null) {
                     // Process the request. If the lookup succeeds, schedule a redraw.
-                    needRedraw |= queryContactInfo(req.number, req.countryIso, req.callLogInfo);
+                    needRedraw |= queryContactInfo(req.number, req.countryIso, req.callLogInfo,
+                            req.isConf);
                 } else {
                     // Throttle redraw rate by only sending them when there are
                     // more requests.
@@ -145,6 +146,11 @@ public class ContactInfoCache {
     }
 
     public ContactInfo getValue(String number, String countryIso, ContactInfo cachedContactInfo) {
+        return getValue(number, countryIso, cachedContactInfo, false);
+    }
+
+    public ContactInfo getValue(String number, String countryIso, ContactInfo cachedContactInfo,
+                boolean isConf) {
         NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
         ExpirableCache.CachedValue<ContactInfo> cachedInfo =
                 mCache.getCachedValue(numberCountryIso);
@@ -155,19 +161,19 @@ public class ContactInfoCache {
             info = cachedContactInfo;
             // The db request should happen on a non-UI thread.
             // Request the contact details immediately since they are currently missing.
-            enqueueRequest(number, countryIso, cachedContactInfo, true);
+            enqueueRequest(number, countryIso, cachedContactInfo, true, isConf);
             // We will format the phone number when we make the background request.
         } else {
             if (cachedInfo.isExpired()) {
                 // The contact info is no longer up to date, we should request it. However, we
                 // do not need to request them immediately.
-                enqueueRequest(number, countryIso, cachedContactInfo, false);
+                enqueueRequest(number, countryIso, cachedContactInfo, false, isConf);
             } else if (!callLogInfoMatches(cachedContactInfo, info)) {
                 // The call log information does not match the one we have, look it up again.
                 // We could simply update the call log directly, but that needs to be done in a
                 // background thread, so it is easier to simply request a new lookup, which will, as
                 // a side-effect, update the call log.
-                enqueueRequest(number, countryIso, cachedContactInfo, false);
+                enqueueRequest(number, countryIso, cachedContactInfo, false, isConf);
             }
 
             if (info == ContactInfo.EMPTY) {
@@ -189,8 +195,9 @@ public class ContactInfoCache {
      * It returns true if it updated the content of the cache and we should therefore tell the
      * view to update its content.
      */
-    private boolean queryContactInfo(String number, String countryIso, ContactInfo callLogInfo) {
-        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso);
+    private boolean queryContactInfo(String number, String countryIso, ContactInfo callLogInfo,
+            boolean isConf) {
+        final ContactInfo info = mContactInfoHelper.lookupNumber(number, countryIso, isConf);
 
         if (info == null) {
             // The lookup failed, just return without requesting to update the view.
@@ -293,7 +300,23 @@ public class ContactInfoCache {
      */
     protected void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
             boolean immediate) {
-        ContactInfoRequest request = new ContactInfoRequest(number, countryIso, callLogInfo);
+        enqueueRequest(number, countryIso, callLogInfo, immediate, false);
+    }
+
+    /**
+     * Enqueues a request to look up the contact details for the given phone number.
+     * <p>
+     * It also provides the current contact info stored in the call log for this number.
+     * <p>
+     * If the {@code immediate} parameter is true, it will start immediately the thread that looks
+     * up the contact information (if it has not been already started). Otherwise, it will be
+     * started with a delay. See {@link #START_PROCESSING_REQUESTS_DELAY_MILLIS}.
+     * @param isConf indicate whether call log is for Conference Url call
+     */
+    protected void enqueueRequest(String number, String countryIso, ContactInfo callLogInfo,
+            boolean immediate, boolean isConf) {
+        ContactInfoRequest request = new ContactInfoRequest(number, countryIso, callLogInfo,
+                isConf);
         synchronized (mRequests) {
             if (!mRequests.contains(request)) {
                 mRequests.add(request);
