@@ -238,7 +238,9 @@ public class BlockNumberDialogFragment extends DialogFragment {
         final OnUnblockNumberListener onUndoListener = new OnUnblockNumberListener() {
             @Override
             public void onUnblockComplete(int rows, ContentValues values) {
-                Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+                if (mParentView != null) {
+                    Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+                }
                 if (callback != null) {
                     callback.onChangeFilteredNumberUndo();
                 }
@@ -256,12 +258,12 @@ public class BlockNumberDialogFragment extends DialogFragment {
                         mHandler.unblock(onUndoListener, uri);
                     }
                 };
-
-                Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.block_number_undo, undoListener)
-                        .setActionTextColor(actionTextColor)
-                        .show();
-
+                if (mParentView != null) {
+                    Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.block_number_undo, undoListener)
+                            .setActionTextColor(actionTextColor)
+                            .show();
+                }
                 if (callback != null) {
                     callback.onFilterNumberSuccess();
                 }
@@ -287,7 +289,9 @@ public class BlockNumberDialogFragment extends DialogFragment {
         final OnBlockNumberListener onUndoListener = new OnBlockNumberListener() {
             @Override
             public void onBlockComplete(final Uri uri) {
-                Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+                if (mParentView != null) {
+                    Snackbar.make(mParentView, undoMessage, Snackbar.LENGTH_LONG).show();
+                }
                 if (callback != null) {
                     callback.onChangeFilteredNumberUndo();
                 }
@@ -305,12 +309,12 @@ public class BlockNumberDialogFragment extends DialogFragment {
                         mHandler.blockNumber(onUndoListener, values);
                     }
                 };
-
-                Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.block_number_undo, undoListener)
-                        .setActionTextColor(actionTextColor)
-                        .show();
-
+                if (mParentView != null) {
+                    Snackbar.make(mParentView, message, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.block_number_undo, undoListener)
+                            .setActionTextColor(actionTextColor)
+                            .show();
+                }
                 if (callback != null) {
                     callback.onUnfilterNumberSuccess();
                 }
