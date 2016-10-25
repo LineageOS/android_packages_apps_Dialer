@@ -86,7 +86,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     private Runnable mAutoFullscreenRunnable =  new Runnable() {
         @Override
         public void run() {
-            if (mAutoFullScreenPending && !InCallPresenter.getInstance().isDialpadVisible()) {
+            if (mAutoFullScreenPending && !InCallPresenter.getInstance().isDialpadVisible()
+                    && mIsVideoMode) {
+
                 Log.v(this, "Automatically entering fullscreen mode.");
                 InCallPresenter.getInstance().setFullScreen(true);
                 mAutoFullScreenPending = false;
@@ -308,6 +310,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (!CompatUtils.isVideoCompatible()) {
             return;
         }
+
+        cancelAutoFullScreen();
 
         InCallPresenter.getInstance().removeListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
@@ -585,7 +589,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         updateCameraSelection(call);
 
         if (isVideoCall) {
-            enterVideoMode(call);
+            adjustVideoMode(call);
         } else if (isVideoMode()) {
             exitVideoMode();
         }
@@ -647,7 +651,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
 
             checkForOrientationAllowedChange(newPrimaryCall);
             updateCameraSelection(newPrimaryCall);
-            enterVideoMode(newPrimaryCall);
+            adjustVideoMode(newPrimaryCall);
         }
         checkForOrientationAllowedChange(newPrimaryCall);
     }
@@ -728,7 +732,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * Handles a change to the video call. Sets the surfaces on the previous call to null and sets
      * the surfaces on the new video call accordingly.
      *
-     * @param videoCall The new video call.
+     * @param call The new video call.
      */
     private void changeVideoCall(Call call) {
         final VideoCall videoCall = call.getTelecomCall().getVideoCall();
@@ -749,7 +753,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
 
         if (VideoUtils.isVideoCall(call) && hasChanged) {
-            enterVideoMode(call);
+            adjustVideoMode(call);
         }
     }
 
@@ -763,14 +767,16 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     /**
-     * Enters video mode by showing the video surfaces and making other adjustments (eg. audio).
+     * Adjusts the current video mode by setting up the preview and display surfaces as necessary.
+     * Expected to be called whenever the video state associated with a call changes (e.g. a user
+     * turns their camera on or off) to ensure the correct surfaces are shown/hidden.
      * TODO(vt): Need to adjust size and orientation of preview surface here.
      */
-    private void enterVideoMode(Call call) {
+    private void adjustVideoMode(Call call) {
         VideoCall videoCall = call.getVideoCall();
         int newVideoState = call.getVideoState();
 
-        Log.d(this, "enterVideoMode videoCall= " + videoCall + " videoState: " + newVideoState);
+        Log.d(this, "adjustVideoMode videoCall= " + videoCall + " videoState: " + newVideoState);
         VideoCallUi ui = getUi();
         if (ui == null) {
             Log.e(this, "Error VideoCallUi is null so returning");
@@ -795,11 +801,15 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             videoCall.setDeviceOrientation(mDeviceOrientation);
             enableCamera(videoCall, isCameraRequired(newVideoState));
         }
+        int previousVideoState = mCurrentVideoState;
         mCurrentVideoState = newVideoState;
-
         mIsVideoMode = true;
 
-        maybeAutoEnterFullscreen(call);
+        // adjustVideoMode may be called if we are already in a 1-way video state.  In this case
+        // we do not want to trigger auto-fullscreen mode.
+        if (!VideoUtils.isVideoCall(previousVideoState) && VideoUtils.isVideoCall(newVideoState)) {
+            maybeAutoEnterFullscreen(call);
+        }
     }
 
     private void enableCamera(VideoCall videoCall, boolean isCameraRequired) {
@@ -1254,6 +1264,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
      * 2. Call is not active
      * 3. Call is not video call
      * 4. Already in fullscreen mode
+     * 5. The current video state is not bi-directional (if the remote party stops transmitting,
+     *    the user's contact photo would dominate in fullscreen mode).
      *
      * @param call The current call.
      */
@@ -1265,7 +1277,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         if (call == null || (
                 call != null && (call.getState() != Call.State.ACTIVE ||
                         !VideoUtils.isVideoCall(call)) ||
-                        InCallPresenter.getInstance().isFullscreen())) {
+                        InCallPresenter.getInstance().isFullscreen()) ||
+                        !VideoUtils.isBidirectionalVideoCall(call)) {
             // Ensure any previously scheduled attempt to enter fullscreen is cancelled.
             cancelAutoFullScreen();
             return;

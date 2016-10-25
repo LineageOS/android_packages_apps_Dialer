@@ -37,6 +37,8 @@ import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
+import com.android.contacts.common.compat.CallSdkCompat;
+import com.android.contacts.common.compat.CompatUtils;
 import com.android.contacts.common.compat.SdkVersionOverride;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.contacts.common.testing.NeededForTesting;
@@ -415,13 +417,30 @@ public class Call {
         setState(state);
     }
 
+    /**
+     * Creates a new instance of a {@link Call}.  Registers a callback for
+     * {@link android.telecom.Call} events.
+     */
     public Call(android.telecom.Call telecomCall) {
+        this(telecomCall, true /* registerCallback */);
+    }
+
+    /**
+     * Creates a new instance of a {@link Call}.  Optionally registers a callback for
+     * {@link android.telecom.Call} events.
+     *
+     * Intended for use when creating a {@link Call} instance for use with the
+     * {@link ContactInfoCache}, where we do not want to register callbacks for the new call.
+     */
+    public Call(android.telecom.Call telecomCall, boolean registerCallback) {
         mTelecomCall = telecomCall;
         mId = ID_PREFIX + Integer.toString(sIdCounter++);
 
-        updateFromTelecomCall();
+        updateFromTelecomCall(registerCallback);
 
-        mTelecomCall.registerCallback(mTelecomCallCallback);
+        if (registerCallback) {
+            mTelecomCall.registerCallback(mTelecomCallCallback);
+        }
 
         mTimeAddedMs = System.currentTimeMillis();
     }
@@ -441,7 +460,8 @@ public class Call {
     private void update() {
         Trace.beginSection("Update");
         int oldState = getState();
-        updateFromTelecomCall();
+        // We want to potentially register a video call callback here.
+        updateFromTelecomCall(true /* registerCallback */);
         if (oldState != getState() && getState() == Call.State.DISCONNECTED) {
             CallList.getInstance().onDisconnect(this);
         } else {
@@ -450,7 +470,7 @@ public class Call {
         Trace.endSection();
     }
 
-    private void updateFromTelecomCall() {
+    private void updateFromTelecomCall(boolean registerCallback) {
         Log.d(this, "updateFromTelecomCall: " + mTelecomCall.toString());
         final int translatedState = translateState(mTelecomCall.getState());
         if (mState != State.BLOCKED) {
@@ -459,7 +479,7 @@ public class Call {
             maybeCancelVideoUpgrade(mTelecomCall.getDetails().getVideoState());
         }
 
-        if (mTelecomCall.getVideoCall() != null) {
+        if (registerCallback && mTelecomCall.getVideoCall() != null) {
             if (mVideoCallCallback == null) {
                 mVideoCallCallback = new InCallVideoCallCallback(this);
             }
@@ -1006,9 +1026,46 @@ public class Call {
     }
 
     /**
+     * Determines if the call is an external call.
+     *
+     * An external call is one which does not exist locally for the
+     * {@link android.telecom.ConnectionService} it is associated with.
+     *
+     * External calls are only supported in N and higher.
+     *
+     * @return {@code true} if the call is an external call, {@code false} otherwise.
+     */
+    public boolean isExternalCall() {
+        return CompatUtils.isNCompatible() &&
+                hasProperty(CallSdkCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
+    }
+
+    /**
+     * Determines if the external call is pullable.
+     *
+     * An external call is one which does not exist locally for the
+     * {@link android.telecom.ConnectionService} it is associated with.  An external call may be
+     * "pullable", which means that the user can request it be transferred to the current device.
+     *
+     * External calls are only supported in N and higher.
+     *
+     * @return {@code true} if the call is an external call, {@code false} otherwise.
+     */
+    public boolean isPullableExternalCall() {
+        return CompatUtils.isNCompatible() &&
+                (mTelecomCall.getDetails().getCallCapabilities()
+                        & CallSdkCompat.Details.CAPABILITY_CAN_PULL_CALL)
+                        == CallSdkCompat.Details.CAPABILITY_CAN_PULL_CALL;
+    }
+
+    /**
      * Logging utility methods
      */
     public void logCallInitiationType() {
+        if (isExternalCall()) {
+            return;
+        }
+
         if (getState() == State.INCOMING) {
             getLogState().callInitiationMethod = LogState.INITIATION_INCOMING;
         } else if (getIntentExtras() != null) {
@@ -1026,11 +1083,12 @@ public class Call {
             return String.valueOf(mId);
         }
 
-        return String.format(Locale.US, "[%s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
+        return String.format(Locale.US, "[%s, %s, %s, %s, children:%s, parent:%s, conferenceable:%s, " +
                 "videoState:%s, mSessionModificationState:%d, VideoSettings:%s, mIsActivSub:%b]",
                 mId,
                 State.toString(getState()),
                 Details.capabilitiesToString(mTelecomCall.getDetails().getCallCapabilities()),
+                Details.propertiesToString(mTelecomCall.getDetails().getCallProperties()),
                 mChildCallIds,
                 getParentId(),
                 this.mTelecomCall.getConferenceableCalls(),

@@ -68,8 +68,10 @@ public class InCallServiceImpl extends InCallService {
         InCallPresenter.getInstance().setUp(
                 getApplicationContext(),
                 CallList.getInstance(),
+                new ExternalCallList(),
                 AudioModeProvider.getInstance(),
                 new StatusBarNotifier(context, contactInfoCache),
+                new ExternalCallNotifier(context, contactInfoCache),
                 contactInfoCache,
                 new ProximitySensor(
                         context,

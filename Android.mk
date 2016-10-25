@@ -21,6 +21,7 @@ src_dirs := src \
 res_dirs := res \
     $(incallui_dir)/res \
     $(contacts_common_dir)/res \
+    $(contacts_common_dir)/icons/res \
     $(phone_common_dir)/res
 
 src_dirs += \

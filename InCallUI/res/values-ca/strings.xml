@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Ignora"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Torna trucada"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Missatge"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Trucada en curs en un altre dispositiu"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Transfereix la trucada"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Per fer una trucada, primer desactiva el mode d\'avió."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"No s\'ha registrat a la xarxa."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"La xarxa mòbil no està disponible."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videotrucada"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Canvia a trucada de veu"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Canvia la càmera"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Posa en pausa el vídeo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Activa la càmera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Desactiva la càmera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Més opcions"</string>
     <string name="player_started" msgid="3478865572468310331">"S\'ha iniciat el reproductor"</string>
     <string name="player_stopped" msgid="1278611664986561535">"S\'ha aturat el reproductor"</string>
@@ -191,6 +194,6 @@
     <string name="opens_today_at" msgid="6281212768937222891">"Obre avui a les <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
     <string name="closes_today_at" msgid="4822369201263491509">"Tanca a les <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="closed_today_at" msgid="4060072663433467233">"Avui ha tancat a les <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
-    <string name="open_now" msgid="4615706338669555999">"Ara és obert"</string>
+    <string name="open_now" msgid="4615706338669555999">"Obert ara"</string>
     <string name="closed_now" msgid="2635314668145282080">"Ara és tancat"</string>
 </resources>

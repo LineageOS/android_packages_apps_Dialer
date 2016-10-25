@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"拒绝"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"回电"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"发短信"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"其他设备上有正在进行的通话"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"转接通话"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"要拨打电话，请先关闭飞行模式。"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"尚未注册网络。"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"无法连接到移动网络。"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"视频通话"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"改为语音通话"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"切换摄像头"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"暂停视频"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"开启摄像头"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"关闭摄像头"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"更多选项"</string>
     <string name="player_started" msgid="3478865572468310331">"播放器已启动"</string>
     <string name="player_stopped" msgid="1278611664986561535">"播放器已停止"</string>
