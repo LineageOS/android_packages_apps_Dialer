@@ -23,6 +23,7 @@ import android.content.res.Configuration;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.PowerManager;
+import cyanogenmod.providers.CMSettings;
 import android.telecom.CallAudioState;
 import android.view.Display;
 
@@ -50,8 +51,10 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
     private final ProximityDisplayListener mDisplayListener;
     private int mOrientation = AccelerometerListener.ORIENTATION_UNKNOWN;
     private boolean mUiShowing = false;
+    private boolean mHasIncomingCall = false;
     private boolean mIsPhoneOffhook = false;
     private boolean mDialpadVisible;
+    private Context mContext;
 
     // True if the keyboard is currently *not* hidden
     // Gets updated whenever there is a Configuration change
@@ -59,6 +62,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
 
     public ProximitySensor(Context context, AudioModeProvider audioModeProvider,
             AccelerometerListener accelerometerListener) {
+        mContext = context;
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (mPowerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
             mProximityWakeLock = mPowerManager.newWakeLock(
@@ -106,6 +110,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
         // can also put the in-call screen in the INCALL state.
         boolean hasOngoingCall = InCallState.INCALL == newState && callList.hasLiveCall();
         boolean isOffhook = (InCallState.OUTGOING == newState) || hasOngoingCall;
+        mHasIncomingCall = (InCallState.INCOMING == newState);
 
         if (isOffhook != mIsPhoneOffhook) {
             mIsPhoneOffhook = isOffhook;
@@ -113,6 +118,10 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
             mOrientation = AccelerometerListener.ORIENTATION_UNKNOWN;
             mAccelerometerListener.enable(mIsPhoneOffhook);
 
+            updateProximitySensorMode();
+        }
+
+        if (mHasIncomingCall) {
             updateProximitySensorMode();
         }
     }
@@ -232,6 +241,8 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                     || CallAudioState.ROUTE_SPEAKER == audioMode
                     || CallAudioState.ROUTE_BLUETOOTH == audioMode
                     || mIsHardKeyboardOpen);
+            screenOnImmediately |= CMSettings.System.getInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, 1) == 0;
 
             // We do not keep the screen off when the user is outside in-call screen and we are
             // horizontal, but we do not force it on when we become horizontal until the
@@ -257,10 +268,10 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                     .add("aud", CallAudioState.audioRouteToString(audioMode))
                     .toString());
 
-            if (mIsPhoneOffhook && !screenOnImmediately) {
+            if ((mIsPhoneOffhook || mHasIncomingCall) && !screenOnImmediately) {
                 Log.d(this, "Turning on proximity sensor");
-                // Phone is in use!  Arrange for the screen to turn off
-                // automatically when the sensor detects a close object.
+                // Phone is idle.  We don't want any special proximity sensor
+                // behavior in this case.
                 turnOnProximitySensor();
             } else {
                 Log.d(this, "Turning off proximity sensor");
