@@ -32,7 +32,7 @@ import android.telephony.TelephonyManager;
  */
 public class InCallServiceImpl extends InCallService {
 
-    static int sPhoneCount = 0;
+    static int sPhoneCount = TelephonyManager.getDefault().getPhoneCount();
 
     @Override
     public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -63,7 +63,6 @@ public class InCallServiceImpl extends InCallService {
     @Override
     public IBinder onBind(Intent intent) {
         final Context context = getApplicationContext();
-        sPhoneCount = QtiCallUtils.getPhoneCount(context);
         final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
         InCallPresenter.getInstance().setUp(
                 getApplicationContext(),

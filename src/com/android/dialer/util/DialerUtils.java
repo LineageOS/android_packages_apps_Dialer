@@ -51,6 +51,7 @@ public class DialerUtils {
 
     private static final String PREFS_MESSAGE = "video_call_welcome";
     private static final String KEY_STATE = "message-repeat";
+    private static final String KEY_FIRST_LAUNCH = "first-launch";
     /**
      * Attempts to start an activity and displays a toast with the default error message if the
      * activity is not found, instead of throwing an exception.
@@ -198,12 +199,25 @@ public class DialerUtils {
 
 
     /**
+     * @return true if it is the first launch.
+     */
+    public static boolean isFirstLaunch(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(
+                PREFS_MESSAGE, Context.MODE_PRIVATE);
+        boolean isFirstLaunch = prefs.getBoolean(KEY_FIRST_LAUNCH, true);
+        if (isFirstLaunch) {
+            prefs.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
+        }
+        return isFirstLaunch;
+    }
+
+    /**
      * @return true if the Welcome Screen shall be presented to the user, false otherwise.
      */
     public static boolean canShowWelcomeScreen(Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(
                 PREFS_MESSAGE, Context.MODE_PRIVATE);
-        return prefs.getBoolean(KEY_STATE, true);
+        return prefs.getBoolean(KEY_STATE, false);
     }
 
 
@@ -218,4 +232,13 @@ public class DialerUtils {
                 PREFS_MESSAGE, Context.MODE_PRIVATE);
         prefs.edit().putBoolean(KEY_STATE, show).apply();
     }
+
+    /**
+     * @return true if calllog inserted earlier when dial a ConfURI call.
+     */
+    public static boolean isConferenceURICallLog(String number, String postDialDigits) {
+        return (number == null || number.contains(";") || number.contains(",")) &&
+                (postDialDigits == null || postDialDigits.equals(""));
+    }
+
 }

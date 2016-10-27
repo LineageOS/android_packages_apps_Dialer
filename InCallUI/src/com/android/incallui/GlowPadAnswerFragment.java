@@ -104,7 +104,12 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_audio_handle;
                 break;
             case TARGET_SET_FOR_VIDEO_WITHOUT_SMS:
-                targetResourceId = R.array.incoming_call_widget_video_without_sms_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId =
+                            R.array.enhance_incoming_call_widget_video_without_sms_targets;
+                } else {
+                    targetResourceId = R.array.incoming_call_widget_video_without_sms_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.incoming_call_widget_video_without_sms_target_descriptions;
                 directionDescriptionsResourceId =
@@ -112,7 +117,11 @@ public class GlowPadAnswerFragment extends AnswerFragment {
                 handleDrawableResourceId = R.drawable.ic_incall_video_handle;
                 break;
             case TARGET_SET_FOR_VIDEO_WITH_SMS:
-                targetResourceId = R.array.incoming_call_widget_video_with_sms_targets;
+                if (isEnhanceUIEnabled) {
+                    targetResourceId = R.array.enhance_incoming_call_widget_video_with_sms_targets;
+                } else {
+                    targetResourceId = R.array.incoming_call_widget_video_with_sms_targets;
+                }
                 targetDescriptionsResourceId =
                         R.array.incoming_call_widget_video_with_sms_target_descriptions;
                 directionDescriptionsResourceId =

@@ -99,6 +99,9 @@ import com.android.phone.common.animation.AnimUtils;
 import com.android.phone.common.dialpad.DialpadKeyButton;
 import com.android.phone.common.dialpad.DialpadView;
 
+import static android.Manifest.permission.READ_CALL_LOG;
+import static android.Manifest.permission.WRITE_CALL_LOG;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -113,8 +116,9 @@ public class DialpadFragment extends Fragment
         DialpadKeyButton.OnPressedListener {
     private static final String TAG = "DialpadFragment";
 
-    /* define for Activity permission request for Android6.0 */
+    /* define for Activity permission request for Android >= 6.0 */
     private static final int PERMISSION_REQUEST_CODE_LOCATION = 2;
+    private static final int READ_WRITE_CALL_LOG_PERMISSION_REQUEST_CODE = 3;
     /**
      * LinearLayout with getter and setter methods for the translationY property using floats,
      * for animation purposes.
@@ -192,7 +196,6 @@ public class DialpadFragment extends Fragment
     /** Stream type used to play the DTMF tones off call, and mapped to the volume control keys */
     private static final int DIAL_TONE_STREAM_TYPE = AudioManager.STREAM_DTMF;
 
-
     private OnDialpadQueryChangedListener mDialpadQueryListener;
 
     private DialpadView mDialpadView;
@@ -264,6 +267,8 @@ public class DialpadFragment extends Fragment
     private String mCurrentCountryIso;
 
     private CallStateReceiver mCallStateReceiver;
+
+    private boolean mHasReadAndWriteCallLogPermission = false;
 
     private class CallStateReceiver extends BroadcastReceiver {
         /**
@@ -752,8 +757,16 @@ public class DialpadFragment extends Fragment
         final StopWatch stopWatch = StopWatch.start("Dialpad.onResume");
 
         // Query the last dialed number. Do it first because hitting
+        mHasReadAndWriteCallLogPermission =
+                PermissionsUtil.hasPermission(getActivity(), READ_CALL_LOG) &&
+                PermissionsUtil.hasPermission(getActivity(), WRITE_CALL_LOG);
         // the DB is 'slow'. This call is asynchronous.
-        queryLastOutgoingCall();
+        if (mHasReadAndWriteCallLogPermission){
+            queryLastOutgoingCall();
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {READ_CALL_LOG,
+                    WRITE_CALL_LOG}, READ_WRITE_CALL_LOG_PERMISSION_REQUEST_CODE);
+        }
 
         stopWatch.lap("qloc");
 
@@ -2043,6 +2056,15 @@ public class DialpadFragment extends Fragment
                 } else {
                     getView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                     handleDialButtonPressed();
+                }
+                break;
+            case READ_WRITE_CALL_LOG_PERMISSION_REQUEST_CODE:
+                for (int i = 0; i < grantResults.length; i++) {
+                    mHasReadAndWriteCallLogPermission &=
+                            PackageManager.PERMISSION_GRANTED == grantResults[i];
+                }
+                if (mHasReadAndWriteCallLogPermission) {
+                    queryLastOutgoingCall();
                 }
                 break;
             default:

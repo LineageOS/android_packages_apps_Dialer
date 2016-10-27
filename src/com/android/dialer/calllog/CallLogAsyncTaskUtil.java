@@ -41,6 +41,7 @@ import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.PhoneNumberUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;
@@ -209,7 +210,8 @@ public class CallLogAsyncTaskUtil {
             ContactInfo info = ContactInfo.EMPTY;
 
             if (shouldLookupNumber) {
-                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso);
+                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso,
+                    DialerUtils.isConferenceURICallLog(number, postDialDigits));
                 info = lookupInfo != null ? lookupInfo : ContactInfo.EMPTY;
             }
 

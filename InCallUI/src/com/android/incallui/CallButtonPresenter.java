@@ -525,10 +525,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         boolean showRx = false;
         boolean showVolte = false;
 
-        if (mEnhanceEnable && showUpgradeToVideo) {
+        if (mEnhanceEnable && hasVideoCallCapabilities(call)) {
             boolean isAudioAndVtCap = (VideoProfile.isAudioOnly(mCall.getVideoState()) &&
                     PresenceHelper.getVTCapability(call.getNumber()));
-            showRxTx = (VideoProfile.isReceptionEnabled(mCall.getVideoState()) || isAudioAndVtCap);
+            showRxTx = ((VideoProfile.isReceptionEnabled(mCall.getVideoState()) &&
+                    !VideoProfile.isBidirectional(mCall.getVideoState())) || isAudioAndVtCap);
+            //"hide me" show be show if call is video call or voice call only, "hide me"
+            //is mean that call can upgrade to Rx video call for voice call only.
             showRx = (VideoProfile.isBidirectional(mCall.getVideoState()) || isAudioAndVtCap);
             showVolte = VideoProfile.isVideo(mCall.getVideoState());
             Log.v(this, "updateButtonsState showRxTx = " + showRxTx +
@@ -544,7 +547,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo && !mEnhanceEnable);
         ui.showButton(BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio && !useExt);
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
-        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt && !useCustomVideoUi);
+        ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt && !useCustomVideoUi &&
+                !mEnhanceEnable);
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
         ui.showButton(BUTTON_ADD_PARTICIPANT, showAddParticipant && !mEnhanceEnable);
