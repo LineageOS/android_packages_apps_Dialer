@@ -17,72 +17,20 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
-  <string name="people">Personoj</string>
   <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Serĉo per T9 klavaro</string>
-  <string name="t9_search_input_locale">Enigo per T9 klavaro</string>
-  <string name="t9_search_input_locale_default">Defaŭlto</string>
   <!-- Number lookup -->
-  <string name="lookup_settings_label">Serĉado de telefonnumero</string>
-  <string name="lookup_settings_description">Serĉado de nekonataj telefonnumeroj</string>
-  <string name="enable_forward_lookup_title">Rekta serĉado</string>
-  <string name="enable_forward_lookup_summary">Montri proksimajn lokojn dum serĉado</string>
-  <string name="enable_people_lookup_title">Serĉado de personoj</string>
-  <string name="enable_people_lookup_summary">Montri retajn rezultojn dum serĉado en la ciferilo</string>
-  <string name="enable_reverse_lookup_title">Inversa serĉado</string>
-  <string name="enable_reverse_lookup_summary">Serĉi informojn pri personoj aŭ lokoj por nekonataj alvenintaj alvokoj</string>
-  <string name="forward_lookup_provider_title">Provizanto de rekta serĉado</string>
-  <string name="people_lookup_provider_title">Provizanto por serĉi homojn</string>
-  <string name="reverse_lookup_provider_title">Provizanto de inversa serĉado</string>
   <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn ĉina (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
   <!--  for speed dial -->
-  <string name="speed_dial_settings">Agordi rapidan numerumon</string>
-  <string name="speed_dial_not_set">(ne agordita)</string>
-  <string name="speed_dial_replace">Anstataŭigi</string>
-  <string name="speed_dial_delete">Forigi</string>
-  <string name="speed_dial_unassigned_dialog_title">Neatribuita klavo</string>
-  <string name="speed_dial_unassigned_dialog_message">Neniu ago estas atribuita por la klavo \'<xliff:g id="number">%s</xliff:g>\'. Ĉu vi deziras atribui agon nun?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Por uzi rapidan alvokon, malŝaltu unue aviadilan reĝimon.</string>
   <string name="yes">Jes</string>
-  <string name="no">Ne</string>
-  <string name="incall_vibration_category_title">Vibrado okaze de alvoko</string>
-  <string name="incall_vibrate_outgoing_title">Vibrado okaze de respondo</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrado okaze de atendado</string>
-  <string name="incall_vibrate_hangup_title">Vibrado okaze de fino de alvoko</string>
-  <string name="incall_vibrate_45_title">Vibrado ĉiuminute</string>
-  <string name="incall_vibrate_45_summary">Vibrado je la 45a sekundo de ĉiuj minutoj dum forirantaj alvokoj</string>
-  <string name="call_log_show_all_slots">Ĉiuj SIM-oj</string>
-  <string name="call_log_all_calls_header">Ĉiuj alvokoj</string>
-  <string name="call_log_blacklist_header">Nur blokitaj alvokoj</string>
   <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistikoj</string>
-  <string name="callStatsDetailTitle">Detaloj pri alvokaj statistikoj</string>
-  <string name="call_stats_header_total">Sumo: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Sumo: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Komencdato</string>
-  <string name="call_stats_filter_to">Fina dato</string>
-  <string name="call_stats_filter_picker_title">Filtra intervalo</string>
-  <string name="date_quick_selection">Rapida elekto</string>
-  <string name="date_qs_currentmonth">Aktuala monato</string>
-  <string name="date_qs_currentquarter">Aktuala jarkvarono</string>
-  <string name="date_qs_currentyear">Aktuala jaro</string>
-  <string name="date_qs_lastweek">Lastsemajne</string>
-  <string name="date_qs_lastmonth">Lastmonate</string>
-  <string name="date_qs_lastquarter">Lasta jarkvarono</string>
-  <string name="date_qs_lastyear">Lastjare</string>
-  <string name="call_stats_date_filter">Agordi tempan intervalon</string>
-  <string name="call_stats_reset_filter">Rekomencigi tempan intervalon</string>
-  <string name="call_stats_sort_by_duration">Ordigi laŭ alvoka daŭro</string>
-  <string name="call_stats_sort_by_count">Ordigi laŭ alvoka nombro</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <!-- T9 Search Text -->
   <!-- InCall Plugin Settings -->
   <!-- Search shortcut for "Call using PluginName" -->
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Jes</string>
-  <string name="callerinfo_provider_auth_no_short">Ne</string>
+  <string name="block_dialog_negative">Nuligi</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <!-- Note DeepLink mod settings summary in Dialer -->

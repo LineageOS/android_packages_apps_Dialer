@@ -32,7 +32,7 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="recentCallsIconLabel">Гісторыя выклікаў</string>
+  <string name="recentCallsIconLabel">Выклікі</string>
   <!-- Menu item used to call a contact from the call log -->
   <!-- Text for a menu item to report a call as having been incorrectly identified.
          [CHAR LIMIT=30] -->
@@ -44,6 +44,7 @@
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to share a voicemail. [CHAR LIMIT=30] -->
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Яшчэ нікому не тэлефанавалі</string>
   <!-- Label of the button displayed when the call log is empty. Allows the user to make a call. -->
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
   <string name="clearCallLogConfirmation_title">Ачысьціць гісторыю выклікаў?</string>
@@ -128,7 +129,7 @@
     -->
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
-  <string name="action_menu_call_history_description">Гісторыя выклікаў</string>
+  <string name="action_menu_call_history_description">Выклікі</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.

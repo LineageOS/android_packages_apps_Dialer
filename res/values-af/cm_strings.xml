@@ -101,12 +101,46 @@
   <string name="sign_in_hint_text">Teken in om %1$s oproepe te maak</string>
   <string name="wifi_hint_text">Maak gratis %1$s na %1$s oproepe oor Wi-Fi.</string>
   <string name="roaming_hint_text">%1$s is besig om te swerf. Maak gratis %2$s na %2$s oproepe oor Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Geen SIM nie. Slegs noodoproepe.</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> oproep</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> instellings</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Skakel deur <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Ja</string>
   <string name="callerinfo_provider_auth_no_short">Nee</string>
+  <string name="callerinfo_provider_auth_no">Nee dankie</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> sal toegang hê na jou kontakte, My profiel en Cyanogen BS rekening wat jou epos adres mag insluit.</string>
+  <string name="callerinfo_provider_auth_learn_more">Leer meer</string>
+  <string name="callerinfo_provider_auth_desc">Welkom! Wil jy graag hê dat <xliff:g id="provider_name">%s</xliff:g> onbekende inbellers identifiseer en ongewenste oproepe blokkeer?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Welkom! Wil jy graag hê dat <xliff:g id="provider_name">%s</xliff:g> onbekende inbellers identifiseer?</string>
+  <string name="callerinfo_provider_summary">Identifiseer onbekende inbellers en gemors oproepe</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifiseer onbekende inbellers</string>
+  <string name="silence_spam_title">Maak gemors oproepe stil</string>
+  <string name="silence_spam_summary">Laat geen gemors oproepe deur nie</string>
+  <string name="block_hidden_title">Blokkeer weggesteekte foon nommers</string>
+  <string name="block_hidden_summary">Beskou verskuilde nommers as gemors</string>
+  <string name="block_dialog_title">Blokkeer hierdie oproep?</string>
+  <string name="block_dialog_positive">Blokkeer</string>
+  <string name="block_dialog_negative">Kanselleer</string>
+  <string name="block_dialog_description">Jy sal nie meer boodskappe of oproepe ontvang vanaf hierdie persoon.</string>
+  <string name="block_dialog_report_spam">Rapporteer as gemors aan <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Deaktiveer %1$s?</string>
+  <string name="provider_disable_message">Deur die deaktivering van %1$s, gaan jy nie \'n inbeller-ID hê nie.</string>
+  <string name="provider_disable_spam_message">Deur die deaktivering van %1$s, sal jy nie gemors/oproep ID beskerming hê nie.</string>
+  <string name="powered_by_provider">Aangedryf deur <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Maak %1$s oproepe deur\n modes hier te verander"</string>
+  <string name="provider_search_help">"Soek %1$s kontakte deur\n modes hier te verander"</string>
+  <string name="provider_button_help">"Het dit"</string>
+  <string name="provider_voice_call">"%1$s stem oproep"</string>
+  <string name="provider_video_call">"%1$s video oproep"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Om \'n oproep te plaas, skakel foon toestemming aan.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Bekyk Nota</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Neem notas van oral</string>
+  <string name="callerinfo_provider_status_disabling">Deaktiveer tans</string>
+  <string name="show_dialpad_at_start_title">Wys skakelbord aan begin</string>
 </resources>
