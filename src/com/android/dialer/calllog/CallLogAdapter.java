@@ -380,6 +380,13 @@ public class CallLogAdapter extends GroupingListAdapter
         }
     }
 
+    public void onStop () {
+        pauseCache();
+        if (mHiddenItemUri != null) {
+            CallLogAsyncTaskUtil.deleteVoicemail(mContext, mHiddenItemUri, null);
+        }
+    }
+
     @VisibleForTesting
     /* package */ void pauseCache() {
         mContactInfoCache.stop();
