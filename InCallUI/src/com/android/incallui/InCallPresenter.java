@@ -330,6 +330,11 @@ public class InCallPresenter implements CallList.Listener,
         mProximitySensor = proximitySensor;
         addListener(mProximitySensor);
 
+        // dismiss any pending dialogues related to earlier call, which
+        // are no longer relevant now.
+        if (isActivityStarted()) {
+            mInCallActivity.dismissPendingDialogs();
+        }
         addIncomingCallListener(mAnswerPresenter);
         addInCallUiListener(mAnswerPresenter);
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
