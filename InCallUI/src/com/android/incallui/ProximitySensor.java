@@ -241,8 +241,6 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                     || CallAudioState.ROUTE_SPEAKER == audioMode
                     || CallAudioState.ROUTE_BLUETOOTH == audioMode
                     || mIsHardKeyboardOpen);
-            screenOnImmediately |= CMSettings.System.getInt(mContext.getContentResolver(),
-                    CMSettings.System.PROXIMITY_ON_WAKE, 1) == 0;
 
             // We do not keep the screen off when the user is outside in-call screen and we are
             // horizontal, but we do not force it on when we become horizontal until the
@@ -257,6 +255,9 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
             // proximity sensor turn off the screen by their hands.
             screenOnImmediately |= mDialpadVisible && horizontal;
 
+            final boolean proximityOnWake = CMSettings.System.getInt(mContext.getContentResolver(),
+                    CMSettings.System.PROXIMITY_ON_WAKE, 1) == 1;
+
             Log.v(this, "screenonImmediately: ", screenOnImmediately);
 
             Log.i(this, Objects.toStringHelper(this)
@@ -265,10 +266,12 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
                     .add("offhook", mIsPhoneOffhook ? 1 : 0)
                     .add("hor", horizontal ? 1 : 0)
                     .add("ui", mUiShowing ? 1 : 0)
-                    .add("aud", CallAudioState.audioRouteToString(audioMode))
+                    .add("aud", CallAudioState.audioRouteToString(audioMode),
+                    .add("proximwake", proximityOnWake ? 1 : 0)
                     .toString());
 
-            if ((mIsPhoneOffhook || mHasIncomingCall) && !screenOnImmediately) {
+            if ((mIsPhoneOffhook || (mHasIncomingCall && proximityOnWake))
+                    && !screenOnImmediately) {
                 Log.d(this, "Turning on proximity sensor");
                 // Phone is idle.  We don't want any special proximity sensor
                 // behavior in this case.
