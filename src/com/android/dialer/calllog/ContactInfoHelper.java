@@ -288,6 +288,10 @@ public class ContactInfoHelper {
                 for (String num : nums) {
                     ContactInfo singleCi = lookupContactFromUri(getContactInfoLookupUri(num),
                             isSip);
+                    // If contact does not exist, need to avoid changing static empty-contact.
+                    if (singleCi == ContactInfo.EMPTY) {
+                        singleCi = new ContactInfo();
+                    }
                     if (TextUtils.isEmpty(singleCi.name)) {
                         singleCi.name = formatPhoneNumber(num, null, countryIso);
                     }
