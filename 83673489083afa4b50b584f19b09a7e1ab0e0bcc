@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ff2e2bb8_978f282d",
+        "filename": "InCallUI/src/com/android/incallui/ProximitySensor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2016-11-04T05:20:12Z",
+      "side": 1,
+      "message": "I thought about it but decided proximityOnWake is more likely to potentially later be used elsewhere below (compared to incomingCallProximityWake).\n\nSince I\u0027m removing the log line, let me move this down and see how you think it looks then.",
+      "parentUuid": "ff2e2bb8_2e17e9a5",
+      "revId": "83673489083afa4b50b584f19b09a7e1ab0e0bcc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff2e2bb8_4e14eda0",
         "filename": "InCallUI/src/com/android/incallui/ProximitySensor.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-11-03T05:40:28Z",
       "side": 1,
       "message": "\u0027proxwake\u0027 seems like a term that better follows the format of the terms directly above.",
+      "revId": "83673489083afa4b50b584f19b09a7e1ab0e0bcc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff2e2bb8_b794ec45",
+        "filename": "InCallUI/src/com/android/incallui/ProximitySensor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2016-11-04T05:20:12Z",
+      "side": 1,
+      "message": "I was thinking of removing this from the patch.  So I\u0027ll do that instead.",
+      "parentUuid": "ff2e2bb8_4e14eda0",
       "revId": "83673489083afa4b50b584f19b09a7e1ab0e0bcc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
