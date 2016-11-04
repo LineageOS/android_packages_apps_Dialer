@@ -22,7 +22,7 @@
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"ফোন ডায়ালপ্যাড"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"ফোন"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"পুরোনো কলের তালিকা"</string>
-    <string name="action_report_number" msgid="4635403959812186162">"ভুল নম্বর প্রতিবেদন করুন"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"ভুল নম্বর অভিযোগ করুন"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"নম্বর প্রতিলিপি করুন"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"ট্রান্সক্রিপশান প্রতিলিপি করুন"</string>
     <string name="action_block_number" msgid="1482657602262262134">"নম্বর অবরোধ করুন"</string>

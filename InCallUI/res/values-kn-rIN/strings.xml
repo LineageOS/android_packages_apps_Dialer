@@ -130,7 +130,7 @@
     <string name="player_stopped" msgid="1278611664986561535">"ಪ್ಲೇಯರ್‌ ನಿಲ್ಲಿಸಲಾಗಿದೆ"</string>
     <string name="camera_not_ready" msgid="6614469280264241251">"ಕ್ಯಾಮರಾ ಸಿದ್ಧವಾಗಿಲ್ಲ"</string>
     <string name="camera_ready" msgid="2614541247814590887">"ಕ್ಯಾಮರಾ ಸಿದ್ಧವಾಗಿದೆ"</string>
-    <string name="unknown_call_session_event" msgid="2947023743819984299">"ಅಜ್ಞಾತ ಕರೆಯ ಸೆಶನ್‌ ಈವೆಂಟ್‌"</string>
+    <string name="unknown_call_session_event" msgid="2947023743819984299">"ಅಪರಿಚಿತ ಕರೆಯ ಸೆಶನ್‌ ಈವೆಂಟ್‌"</string>
     <string name="voicemail_provider" msgid="2878119321474918370">"ಸೇವೆ"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"ಸೆಟಪ್"</string>
     <string name="voicemail_number_not_set" msgid="2690477999015436138">"&lt;ಹೊಂದಿಸಿಲ್ಲ&gt;"</string>
@@ -141,7 +141,7 @@
     <string name="goPrivate" msgid="3554069451018659483">"ಖಾಸಗಿಯಾಗಿ ಹೋಗಿ"</string>
     <string name="selectContact" msgid="92191462970821951">"ಸಂಪರ್ಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="respond_via_sms_custom_message" msgid="8210393177674619127">"ನಿಮ್ಮ ಸ್ವಂತದ್ದನ್ನು ಬರೆಯಿರಿ..."</string>
-    <string name="custom_message_cancel" msgid="5920059627508662163">"ರದ್ದುಮಾಡು"</string>
+    <string name="custom_message_cancel" msgid="5920059627508662163">"ರದ್ದುಮಾಡಿ"</string>
     <string name="custom_message_send" msgid="3798076337006735995">"ಕಳುಹಿಸು"</string>
     <string name="description_target_answer" msgid="1111945818996518320">"ಉತ್ತರ"</string>
     <string name="description_target_send_sms" msgid="3652217769615310018">"SMS ಕಳುಹಿಸಿ"</string>

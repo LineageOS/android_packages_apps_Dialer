@@ -147,7 +147,7 @@
     <string name="description_target_send_sms" msgid="3652217769615310018">"Send sms"</string>
     <string name="description_target_decline" msgid="7108154434759234035">"Afvis"</string>
     <string name="description_target_answer_video_call" msgid="4655616461181308405">"Besvar som videoopkald"</string>
-    <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Besvar som lydopkald"</string>
+    <string name="description_target_answer_audio_call" msgid="3234714934649708854">"Besvar som taleopkald"</string>
     <string name="description_target_accept_upgrade_to_video_request" msgid="384894008955682630">"Acceptér anmodning om video"</string>
     <string name="description_target_decline_upgrade_to_video_request" msgid="7342968876159189300">"Afvis videoanmodning"</string>
     <string name="description_target_accept_upgrade_to_video_transmit_request" msgid="4586773853073826378">"Acceptér anmodning om udgående video"</string>
