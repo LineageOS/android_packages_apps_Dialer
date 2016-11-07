@@ -2020,6 +2020,7 @@ public class DialpadFragment extends Fragment
         } else {
             if(WifiCallUtils.shallShowWifiCallDialog(getActivity())) {
                  WifiCallUtils.showWifiCallDialog(getActivity());
+                 WifiCallUtils.showWifiCallNotification(getActivity());
              } else {
                  getView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                  handleDialButtonPressed();

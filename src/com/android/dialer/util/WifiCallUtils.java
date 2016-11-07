@@ -149,16 +149,13 @@ public class WifiCallUtils {
 
     public static void showWifiCallDialog(final Context context) {
         String promptMessage = context.getString(com.android.dialer.R.string
-                .alert_call_no_cellular_coverage) +"\n"+ context.getString(com.android.dialer.R
-                        .string.alert_user_connect_to_wifi_for_call);
+                .alert_call_no_cellular_coverage);
         AlertDialog.Builder diaBuilder = new AlertDialog.Builder(context);
         diaBuilder.setMessage(promptMessage);
         diaBuilder.setPositiveButton(com.android.internal.R.string.ok, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName("com.qualcomm.qti.extsettings",
-                        "com.qualcomm.qti.extsettings.wificall.WifiCallingEnhancedSettings");
+                Intent intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
                 context.startActivity(intent);
             }
         });
@@ -211,16 +208,18 @@ public class WifiCallUtils {
             builder.setAutoCancel(true);
             builder.setSmallIcon(R.drawable.wifi_calling_on_notification);
             builder.setContentTitle(
-                    context.getResources().getString(R.string.alert_user_connect_to_wifi_for_call));
+                    context.getResources().getString(
+                        R.string.alert_user_connect_to_wifi_for_call));
             builder.setContentText(
-                    context.getResources().getString(R.string.alert_user_connect_to_wifi_for_call));
+                    context.getResources().getString(
+                        R.string.alert_user_connect_to_wifi_for_call_text));
             notiManager.notify(NOTIFICATION_WIFI_CALL_ID, builder.build());
             new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         notiManager.cancel(NOTIFICATION_WIFI_CALL_ID);
                     }
-           }, 2000);
+           }, 5000);
         }
     }
 }

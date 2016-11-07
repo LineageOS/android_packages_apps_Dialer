@@ -35,6 +35,7 @@ import android.provider.Settings;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
+import android.util.Log;
 
 import java.lang.Object;
 import java.lang.Override;
@@ -44,11 +45,12 @@ import com.android.contacts.common.CallUtil;
 import com.android.dialer.R;
 
 public class VideoCallingSettingsFragment extends PreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceClickListener {
 
     private final static String KEY_VIDEO_CALL = "video_calling_preference";
     private SwitchPreference mVideoCallingPreference;
     private Context mContext;
+    private static final String TAG = "VideoCallingSettingsFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,25 +59,25 @@ public class VideoCallingSettingsFragment extends PreferenceFragment implements
 
         mContext = getActivity();
         mVideoCallingPreference = (SwitchPreference)findPreference(KEY_VIDEO_CALL);
-        mVideoCallingPreference.setOnPreferenceChangeListener(this);
+        mVideoCallingPreference.setOnPreferenceClickListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         int enable = Settings.System.getInt(mContext.getContentResolver(),
-                CallUtil.DIALOG_VIDEO_CALLING,CallUtil.DISABLE_VIDEO_CALLING);
+                CallUtil.CONFIG_VIDEO_CALLING, CallUtil.DISABLE_VIDEO_CALLING);
         if(mVideoCallingPreference != null)
             mVideoCallingPreference.setChecked(enable == CallUtil.ENABLE_VIDEO_CALLING);
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
+    public boolean onPreferenceClick(Preference preference) {
         if (preference == mVideoCallingPreference) {
             boolean isCheck = mVideoCallingPreference.isChecked();
             CallUtil.createVideoCallingDialog(isCheck , mContext);
-            Settings.System.putInt(mContext.getContentResolver(), CallUtil.CONFIG_VIDEO_CALLING,
-                    isCheck ? CallUtil.ENABLE_VIDEO_CALLING : CallUtil.DISABLE_VIDEO_CALLING);
+            boolean isSaved = CallUtil.saveVideoCallConfig(mContext,isCheck);
+            Log.d(TAG, "onPreferenceChange isSaved = " + isSaved);
         }
         return true;
     }
