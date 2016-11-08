@@ -1223,10 +1223,6 @@ public class DialtactsActivity extends TransactionSafeActivity implements View.O
         setConferenceDialButtonImage(false);
         setConferenceDialButtonVisibility(true);
         boolean mIsRecipientsShown = mDialpadFragment.isRecipientsShown();
-        if(mIsRecipientsShown) {
-            mDialpadFragment.hideAndClearDialConference();
-        }
-
         if (mIsDialpadShown || mIsRecipientsShown) {
             if (TextUtils.isEmpty(mSearchQuery) ||
                     (mSmartDialSearchFragment != null && mSmartDialSearchFragment.isVisible()

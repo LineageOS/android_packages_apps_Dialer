@@ -654,11 +654,16 @@ public class DialpadFragment extends Fragment
     private void setFormattedDigits(String data, String normalizedNumber) {
         final String formatted = getFormattedDigits(data, normalizedNumber, mCurrentCountryIso);
         if (!TextUtils.isEmpty(formatted)) {
-            Editable digits = mDigits.getText();
-            digits.replace(0, digits.length(), formatted);
-            // for some reason this isn't getting called in the digits.replace call above..
-            // but in any case, this will make sure the background drawable looks right
-            afterTextChanged(digits);
+            if (isRecipientsShown()) {
+                mRecipients.setText(formatted);
+                afterTextChanged(mRecipients.getText());
+            } else {
+                Editable digits = mDigits.getText();
+                digits.replace(0, digits.length(), formatted);
+                // for some reason this isn't getting called in the digits.replace call above..
+                // but in any case, this will make sure the background drawable looks right
+                afterTextChanged(digits);
+            }
         }
     }
 
