@@ -75,8 +75,8 @@
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"Yapılandır"</string>
     <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"Sesli mesaj ara"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="sms_disambig_title" msgid="5846266399240630846">"Sayı seçin"</string>
-    <string name="call_disambig_title" msgid="4392886850104795739">"Sayı seçin"</string>
+    <string name="sms_disambig_title" msgid="5846266399240630846">"Numarayı seçin"</string>
+    <string name="call_disambig_title" msgid="4392886850104795739">"Numarayı seçin"</string>
     <string name="make_primary" msgid="5829291915305113983">"Bu tercihi anımsa"</string>
     <string name="description_search_button" msgid="3660807558587384889">"ara"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"çevir"</string>
@@ -116,7 +116,7 @@
     <string name="actionIncomingCall" msgid="6028930669817038600">"Gelen çağrılar"</string>
     <string name="description_call_log_play_button" msgid="651182125650429846">"Sesli mesajı oynat"</string>
     <string name="description_view_contact" msgid="5205669345700598415">"Kişiyi görüntüle: <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="description_call" msgid="3443678121983852666">"Sesli arama yap: <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="description_call" msgid="3443678121983852666">"Ara: <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="description_contact_details" msgid="51229793651342809">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> için kişi ayrıntıları"</string>
     <string name="description_num_calls" msgid="1601505153694540074">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> çağrı."</string>
     <string name="description_video_call" msgid="2933838090743214204">"Video görüşmesi."</string>
