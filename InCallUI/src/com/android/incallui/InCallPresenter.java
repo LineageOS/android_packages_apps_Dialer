@@ -942,7 +942,9 @@ public class InCallPresenter implements CallList.Listener,
         }
 
         Call call = mCallList.getIncomingCall();
-        answerIncomingCall(context, call.getVideoState());
+        if (call != null) {
+            answerIncomingCall(context, call.getVideoState());
+        }
     }
 
     /**
