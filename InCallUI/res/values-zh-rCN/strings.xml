@@ -167,9 +167,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"铃声和振动"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"管理电话会议"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"紧急呼救号码"</string>
-    <string name="volume_boost_notify_enabled">"开启音量增强"</string>
-    <string name="volume_boost_notify_disabled">"关闭音量增强"</string>
-    <string name="volume_boost_notify_unavailable">"有线/蓝牙耳机连接时，音效增强不可用。"</string>
     <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 秒</item>
       <item quantity="one">1 秒</item>
