@@ -451,9 +451,6 @@
         <item>never</item>
     </string-array>
 
-    <string name="volume_boost_notify_enabled">"Volume boost ON."</string>
-    <string name="volume_boost_notify_disabled">"Volume boost OFF."</string>
-    <string name="volume_boost_notify_unavailable">"Extra volume is not available when Wired/Bluetooth headset is used."</string>
     <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
     <string name="ringtone_title" msgid="5379026328015343686">Phone ringtone</string>
 
