@@ -49,10 +49,6 @@ public class AudioModeProvider {
     public void onAudioModeChange(int newMode, boolean muted) {
         if (mAudioMode != newMode) {
             mAudioMode = newMode;
-            InCallActivity inCallActivity = InCallPresenter.getInstance().getActivity();
-            if (inCallActivity != null && inCallActivity.getCallCardFragment() != null) {
-                inCallActivity.getCallCardFragment().updateVbByAudioMode(newMode);
-            }
             for (AudioModeListener l : mListeners) {
                 l.onAudioMode(mAudioMode);
             }

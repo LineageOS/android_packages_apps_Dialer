@@ -24,10 +24,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.telecom.Call.Details;
+import android.telecom.CallAudioState;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -48,6 +51,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.testing.NeededForTesting;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
+import com.android.incallui.AudioModeProvider.AudioModeListener;
 import com.android.incallui.Call.State;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -66,9 +70,10 @@ import static com.android.contacts.common.compat.CallSdkCompat.Details.PROPERTY_
  * <p>
  * This class listens for changes to InCallState and passes it along to the fragment.
  */
-public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
-        implements InCallStateListener, IncomingCallListener, InCallDetailsListener,
-        InCallEventListener, CallList.CallUpdateListener, DistanceHelper.Listener {
+public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> implements
+        InCallStateListener, IncomingCallListener, InCallDetailsListener,
+        InCallEventListener, CallList.CallUpdateListener,
+        AudioModeListener, DistanceHelper.Listener {
 
     public interface EmergencyCallListener {
         public void onCallUpdated(BaseFragment fragment, boolean isEmergency);
@@ -82,6 +87,8 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private static final int IDP_GSM = 2;
     private static final int IDP_BOTH = 3;
 
+    private static final String VOLUME_BOOST_PARAMETER = "volume_boost";
+
     private final EmergencyCallListener mEmergencyCallListener =
             ObjectFactory.newEmergencyCallListener();
     private DistanceHelper mDistanceHelper;
@@ -92,6 +99,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     private ContactCacheEntry mSecondaryContactInfo;
     private CallTimer mCallTimer;
     private Context mContext;
+    private AudioManager mAudioManager;
     @Nullable private ContactsPreferences mContactsPreferences;
     private boolean mSpinnerShowing = false;
     private boolean mHasShownToast = false;
@@ -156,6 +164,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
     public void init(Context context, Call call) {
         mContext = Preconditions.checkNotNull(context);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mDistanceHelper = ObjectFactory.newDistanceHelper(mContext, this);
         mContactsPreferences = ContactsPreferencesFactory.newContactsPreferences(mContext);
 
@@ -199,6 +208,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().addIncomingCallListener(this);
         InCallPresenter.getInstance().addDetailsListener(this);
         InCallPresenter.getInstance().addInCallEventListener(this);
+        AudioModeProvider.getInstance().addListener(this);
     }
 
     @Override
@@ -210,6 +220,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         InCallPresenter.getInstance().removeIncomingCallListener(this);
         InCallPresenter.getInstance().removeDetailsListener(this);
         InCallPresenter.getInstance().removeInCallEventListener(this);
+        AudioModeProvider.getInstance().removeListener(this);
         if (mPrimary != null) {
             CallList.getInstance().removeCallUpdateListener(mPrimary.getId(), this);
         }
@@ -353,6 +364,11 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             getUi().showHdAudioIndicator(false);
         }
 
+        if (!callList.hasAnyLiveCall() && isVolumeBoostEnabled()) {
+            setVolumeBoost(false);
+        }
+        updateVBButton();
+
         maybeShowManageConferenceCallButton();
 
         // Hide the end call button instantly if we're receiving an incoming call.
@@ -422,6 +438,30 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             return;
         }
         updatePrimaryDisplayInfo();
+    }
+
+    @Override
+    public void onAudioMode(int mode) {
+        if (mAudioManager == null) {
+            return;
+        }
+        if (mode == CallAudioState.ROUTE_EARPIECE
+                || mode == CallAudioState.ROUTE_BLUETOOTH
+                || mode == CallAudioState.ROUTE_WIRED_HEADSET
+                || mode == CallAudioState.ROUTE_SPEAKER) {
+            setVolumeBoost(false);
+            updateVBButton();
+        }
+    }
+
+    @Override
+    public void onSupportedAudioMode(int mask) {
+        // ignored
+    }
+
+    @Override
+    public void onMute(boolean muted) {
+        // ignored
     }
 
     private static boolean isForwarded(Call call) {
@@ -1141,6 +1181,49 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         TelecomAdapter.getInstance().disconnectCall(callId);
     }
 
+    public void volumeBoostClicked() {
+        if (isVBAvailable()) {
+            setVolumeBoost(!isVolumeBoostEnabled());
+        }
+
+        updateVBButton();
+    }
+
+    private boolean isVBAvailable() {
+        if (mPrimary == null || mPrimary.getState() != Call.State.ACTIVE) {
+            return false;
+        }
+
+        int mode = AudioModeProvider.getInstance().getAudioMode();
+        int settingsTtyMode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.PREFERRED_TTY_MODE, TelecomManager.TTY_MODE_OFF);
+
+        if (mode != CallAudioState.ROUTE_EARPIECE
+                && mode != CallAudioState.ROUTE_SPEAKER
+                && settingsTtyMode != TelecomManager.TTY_MODE_HCO) {
+            return false;
+        }
+
+        return !TextUtils.isEmpty(mAudioManager.getParameters(VOLUME_BOOST_PARAMETER));
+    }
+
+    private boolean isVolumeBoostEnabled() {
+        return mAudioManager.getParameters(VOLUME_BOOST_PARAMETER).contains("=on");
+    }
+
+    private void setVolumeBoost(boolean on) {
+        final String value = on ? "=on" : "=off";
+        mAudioManager.setParameters(VOLUME_BOOST_PARAMETER + value);
+    }
+
+    private void updateVBButton() {
+        boolean show = !mIsFullscreen && isVBAvailable();
+        boolean on = show && isVolumeBoostEnabled();
+        if (getUi() != null) {
+            getUi().setVolumeBoostButtonState(show, on);
+        }
+    }
+
     private String getNumberFromHandle(Uri handle) {
         return handle == null ? "" : handle.getSchemeSpecificPart();
     }
@@ -1163,7 +1246,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         ui.setEndCallButtonEnabled(!isFullscreenMode &&
                 shouldShowEndCallButton(mPrimary, callState),
                 callState != Call.State.INCOMING /* animate */);
-        ui.showVbButton(!isFullscreenMode);
+        updateVBButton();
         maybeShowManageConferenceCallButton();
     }
 
@@ -1295,6 +1378,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setCallSubject(String callSubject);
         void setProgressSpinnerVisible(boolean visible);
+        void setVolumeBoostButtonState(boolean visible, boolean on);
         void showHdAudioIndicator(boolean visible);
         void showForwardIndicator(boolean visible);
         void showManageConferenceCallButton(boolean visible);
@@ -1303,6 +1387,5 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void animateForNewOutgoingCall();
         void sendAccessibilityAnnouncement();
         void showNoteSentToast();
-        void showVbButton(boolean show);
     }
 }
