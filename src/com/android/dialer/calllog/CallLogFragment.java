@@ -354,14 +354,13 @@ public class CallLogFragment extends Fragment implements CallLogQueryHandler.Lis
     @Override
     public void onPause() {
         cancelDisplayUpdate();
-        mAdapter.onPause();
         super.onPause();
     }
 
     @Override
     public void onStop() {
         updateOnTransition();
-
+        mAdapter.onStop();
         super.onStop();
     }
 
