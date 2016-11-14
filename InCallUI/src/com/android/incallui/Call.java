@@ -34,6 +34,7 @@ import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 import android.telecom.VideoProfile;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.android.contacts.common.CallUtil;
@@ -778,7 +779,7 @@ public class Call {
                     int subId = getSubId();
                     for (android.telecom.Call call : conferenceableCalls) {
                         PhoneAccountHandle phHandle = call.getDetails().getAccountHandle();
-                        if ((phHandle != null) && ((Integer.parseInt(phHandle.getId())) == subId)) {
+                        if ((phHandle != null) && (getSubId(phHandle) == subId)) {
                             hasConferenceableCall = true;
                             break;
                         }
@@ -855,20 +856,21 @@ public class Call {
         return mTelecomCall == null ? null : mTelecomCall.getDetails().getAccountHandle();
     }
 
-    public int getSubId() {
-        PhoneAccountHandle ph = getAccountHandle();
-        if (ph != null) {
-            try {
-                if (ph.getId() != null) {
-                    return Integer.parseInt(getAccountHandle().getId());
-                }
-            } catch (NumberFormatException e) {
-                Log.w(this, "sub id is not a number" + e);
-            }
-            return SubscriptionManager.getDefaultVoiceSubscriptionId();
-        } else {
+    public int getSubId(PhoneAccountHandle ph) {
+        if (ph == null) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         }
+        TelecomManager mgr = InCallPresenter.getInstance().getTelecomManager();
+        PhoneAccount account = mgr.getPhoneAccount(ph);
+        if (account != null) {
+            return TelephonyManager.getDefault().getSubIdForPhoneAccount(account);
+        } else {
+            return SubscriptionManager.getDefaultVoiceSubscriptionId();
+        }
+    }
+
+    public int getSubId() {
+        return getSubId(getAccountHandle());
     }
 
     /**

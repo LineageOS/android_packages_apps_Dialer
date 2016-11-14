@@ -144,7 +144,7 @@ public class CallList {
         // Update active subscription from call object. it will be set by
         // Telecomm service for incoming call and whenever active sub changes.
         if (call.mIsActiveSub) {
-            int sub = Integer.parseInt(call.getAccountHandle().getId());
+            int sub = call.getSubId();
             Log.d(this, "onIncoming - sub:" + sub + " mSubId:" + mSubId);
             if (sub != mSubId) {
                 setActiveSubId(sub);
@@ -174,16 +174,12 @@ public class CallList {
         Trace.beginSection("onUpdate");
         PhoneAccountHandle ph = call.getAccountHandle();
         Log.d(this, "onUpdate - " + call  + " ph:" + ph);
-        try {
-            if (call.mIsActiveSub && ph != null) {
-                int sub = Integer.parseInt(ph.getId());
-                Log.d(this, "onUpdate - sub:" + sub + " mSubId:" + mSubId);
-                if(sub != mSubId) {
-                    setActiveSubId(sub);
-                }
+        if (call.mIsActiveSub && ph != null) {
+            int sub = call.getSubId(ph);
+            Log.d(this, "onUpdate - sub:" + sub + " mSubId:" + mSubId);
+            if(sub != mSubId) {
+                setActiveSubId(sub);
             }
-        } catch (NumberFormatException e) {
-                Log.w(this,"Sub Id is not a number " + e);
         }
         onUpdateCall(call);
         notifyGenericListeners();
@@ -774,13 +770,9 @@ public class CallList {
     boolean hasAnyLiveCall(int subId) {
         for (Call call : mCallById.values()) {
             PhoneAccountHandle ph = call.getAccountHandle();
-            try {
-                if (!isCallDead(call) && ph != null && (Integer.parseInt(ph.getId()) == subId)) {
-                    Log.d(this, "hasAnyLiveCall sub = " + subId);
-                    return true;
-                }
-            } catch (NumberFormatException e) {
-                Log.w(this,"Sub Id is not a number " + e);
+            if (!isCallDead(call) && ph != null && (call.getSubId(ph) == subId)) {
+                Log.d(this, "hasAnyLiveCall sub = " + subId);
+                return true;
             }
         }
         Log.d(this, "no active call ");
@@ -856,19 +848,15 @@ public class CallList {
         int position = 0;
         for (Call call : mCallById.values()) {
             PhoneAccountHandle ph = call.getAccountHandle();
-            try {
-                if ((call.getState() == state) && ((ph == null) ||
-                        (ph != null && (ph.getId() != null) &&  ((ph.getId().contains("sip")
-                        || ph.getId().contains("@")) || Integer.parseInt(ph.getId()) == subId)))) {
-                    if (position >= positionToFind) {
-                        retval = call;
-                        break;
-                    } else {
-                        position++;
-                    }
+            if ((call.getState() == state) && ((ph == null) ||
+                    (ph != null && (ph.getId() != null) &&  ((ph.getId().contains("sip")
+                    || ph.getId().contains("@")) || call.getSubId(ph) == subId)))) {
+                if (position >= positionToFind) {
+                    retval = call;
+                    break;
+                } else {
+                    position++;
                 }
-            } catch (NumberFormatException e) {
-                   Log.w(this,"Sub Id is not a number " + e);
             }
         }
         return retval;
