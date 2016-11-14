@@ -17,4 +17,5 @@
 <resources>
     <color name="promo_card_header_text_color">@color/background_dialer_white</color>
     <color name="promo_card_details_text_color">@color/background_dialer_white</color>
+    <color name="dialpad_digits_color">@color/incall_background_color</color>
 </resources>
