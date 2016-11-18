@@ -707,6 +707,7 @@ public class InCallPresenter implements CallList.Listener,
         if (CallList.getInstance().isDsdaEnabled() && (mInCallActivity != null)) {
             mInCallActivity.updateDsdaTab();
         }
+        wakeUpScreen();
     }
 
     @Override
@@ -947,7 +948,9 @@ public class InCallPresenter implements CallList.Listener,
         }
 
         Call call = mCallList.getIncomingCall();
-        answerIncomingCall(context, call.getVideoState());
+        if (call != null) {
+            answerIncomingCall(context, call.getVideoState());
+        }
     }
 
     /**
