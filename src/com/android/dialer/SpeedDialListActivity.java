@@ -40,6 +40,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.Settings;
@@ -64,6 +65,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.ContactPhotoManager.DefaultImageRequest;
@@ -110,6 +112,9 @@ public class SpeedDialListActivity extends ListActivity implements
     private static final int MENU_REPLACE = 1001;
     private static final int MENU_DELETE = 1002;
 
+    private static final String PROPERTY_RADIO_ATEL_CARRIER = "persist.radio.atel.carrier";
+    private static final String CARRIER_ONE_DEFAULT_MCC_MNC = "405854";
+
     private static class Record {
         long contactId;
         String name;
@@ -134,6 +139,9 @@ public class SpeedDialListActivity extends ListActivity implements
     private static final int PICK_CONTACT_RESULT = 0;
 
     private SubscriptionManager mSubscriptionManager;
+
+    private boolean mEmergencyCallSpeedDial = false;
+    private int mSpeedDialKeyforEmergncyCall = -1;
 
     /** Called when the activity is first created. */
     @Override
@@ -161,6 +169,11 @@ public class SpeedDialListActivity extends ListActivity implements
 
         mAdapter = new SpeedDialAdapter();
         setListAdapter(mAdapter);
+
+        String property = SystemProperties.get(PROPERTY_RADIO_ATEL_CARRIER);
+        mEmergencyCallSpeedDial = CARRIER_ONE_DEFAULT_MCC_MNC.equals(property);
+        mSpeedDialKeyforEmergncyCall = getResources().getInteger(
+                R.integer.speed_dial_emergency_number_assigned_key);
     }
 
     @Override
@@ -315,6 +328,11 @@ public class SpeedDialListActivity extends ListActivity implements
             }
         } else {
             int number = position + 1;
+            if (mEmergencyCallSpeedDial && (number == mSpeedDialKeyforEmergncyCall)) {
+                Toast.makeText(SpeedDialListActivity.this, R.string.speed_dial_can_not_be_set,
+                Toast.LENGTH_SHORT).show();
+                return;
+            }
             final Record record = mRecords.get(number);
             if (record == null) {
                 showAddSpeedDialDialog(number);
