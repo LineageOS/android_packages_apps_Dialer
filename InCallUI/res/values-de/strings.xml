@@ -55,8 +55,8 @@
     <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Deine Notrufnummer lautet:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="8080968169444117163">"Rufaufbau"</string>
     <string name="notification_missedCallTitle" msgid="2774630248151712215">"Verpasster Anruf"</string>
-    <string name="notification_missedCallsTitle" msgid="263275811089605859">"Verpasste Anrufe"</string>
-    <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> verpasste Anrufe"</string>
+    <string name="notification_missedCallsTitle" msgid="263275811089605859">"Entgangene Anrufe"</string>
+    <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> entgangene Anrufe"</string>
     <string name="notification_missedCallTicker" msgid="1599269453813734699">"Verpasster Anruf von <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8633734299234807397">"Aktiver Anruf"</string>
     <string name="notification_ongoing_work_call" msgid="3465083293325006579">"Aktiver geschäftlicher Anruf"</string>

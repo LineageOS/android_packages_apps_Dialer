@@ -46,8 +46,8 @@
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefon"</string>
     <string name="notification_missedCallTitle" msgid="2078223183024451723">"Verpasster Anruf"</string>
     <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"Verpasster geschäftlicher Anruf"</string>
-    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Verpasste Anrufe"</string>
-    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> verpasste Anrufe"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Entgangene Anrufe"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> entgangene Anrufe"</string>
     <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Zurückrufen"</string>
     <string name="notification_missedCall_message" msgid="3042123733754151052">"Nachricht"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"Nummer hinzufügen oder in Kontakten suchen"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"Deine Anrufliste ist leer."</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Anrufen"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Keine verpassten Anrufe"</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Keine entgangenen Anrufe"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Dein Mailbox-Posteingang ist leer."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Das Archiv für Mailbox-Nachrichten ist leer."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Nur Favoriten anzeigen"</string>
@@ -182,7 +182,7 @@
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"SMS senden"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Videoanruf starten"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Nummer blockieren"</string>
-    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> neue verpasste Anrufe"</string>
+    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> neue entgangene Anrufe"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Du hast noch für niemanden eine Kurzwahl festgelegt."</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Favoriten hinzufügen"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Du hast noch keine Kontakte."</string>
