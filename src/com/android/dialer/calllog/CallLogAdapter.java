@@ -183,7 +183,9 @@ public class CallLogAdapter extends GroupingListAdapter
                 if (viewHolder.callType == CallLog.Calls.MISSED_TYPE) {
                     CallLogAsyncTaskUtil.markCallAsRead(mContext, viewHolder.callIds);
                     if (mActivityType == ACTIVITY_TYPE_DIALTACTS) {
-                        ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
+                        if (v.getContext() instanceof DialtactsActivity) {
+                            ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
+                        }
                     }
                 }
                 expandViewHolderActions(viewHolder);
