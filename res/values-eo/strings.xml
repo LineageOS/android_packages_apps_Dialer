@@ -18,78 +18,59 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
          that don't specify a label. -->
+  <string name="applicationLabel">Telefono</string>
   <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
+  <string name="launcherActivityLabel">Telefono</string>
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
-  <string name="launcherDialpadActivityLabel">Панэль набору тэлефона</string>
   <!-- The description text for the dialer tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
+  <string name="dialerIconLabel">Telefono</string>
   <!-- The description text for the call log tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="callHistoryIconLabel">Выклікі</string>
   <!-- Text for a menu item to report a call as having been incorrectly identified. [CHAR LIMIT=48] -->
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
-  <string name="action_copy_number_text">Скапіраваць нумар</string>
   <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
-  <string name="copy_transcript_text">Капіраваць транскрыпцыю</string>
   <!-- Label for action to block a number. [CHAR LIMIT=48] -->
-  <string name="action_block_number">Заблакіраваць нумар</string>
   <!-- Text for snackbar to undo blocking a number. [CHAR LIMIT=64] -->
-  <string name="snackbar_number_blocked"><xliff:g id="NUMBER">%1$s</xliff:g> заблакіраваны</string>
   <!-- Label for action to unblock a number [CHAR LIMIT=48]-->
-  <string name="action_unblock_number">Разблакіраваць нумар</string>
   <!-- Text for snackbar to undo unblocking a number. [CHAR LIMIT=64] -->
-  <string name="snackbar_number_unblocked"><xliff:g id="NUMBER">%1$s</xliff:g> разблакіраваны</string>
   <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
-  <string name="block_number_undo">АДРАБІЦЬ</string>
   <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
-  <string name="call_details_delete">Выдаліць</string>
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <!-- Menu item used to remove all calls from the call log -->
-  <string name="call_log_delete_all">Ачысьціць гісторыю выклікаў</string>
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to archive a voicemail. [CHAR LIMIT=30] -->
-  <string name="call_log_archive_voicemail">Архіваванне галас.паведамлення</string>
   <!-- Menu item used to send a voicemail through other applications [CHAR LIMIT=30] -->
   <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
-  <string name="snackbar_voicemail_deleted">Павед.галасавой пошты выдалена</string>
   <!-- Text for snackbar to undo a voicemail archive. [CHAR LIMIT=30] -->
-  <string name="snackbar_voicemail_archived">Галас. паведамленне архівавана</string>
   <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
-  <string name="snackbar_voicemail_deleted_undo">АДРАБІЦЬ</string>
   <!-- Text for going to archive button in snackbar for voicemail archive. [CHAR LIMIT=10] -->
-  <string name="snackbar_voicemail_archived_goto">ПЕРАЙСЦІ Ў АРХІЎ</string>
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
-  <string name="clearCallLogConfirmation_title">Ачысьціць гісторыю выклікаў?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
-  <string name="clearCallLogConfirmation">Выдаленьне ўсіх выклікаў з гісторыі</string>
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <!-- Title used for the activity for placing a call. This name appears
          in activity disambig dialogs -->
+  <string name="userCallActivityLabel" product="default">Telefono</string>
   <!-- Notification strings -->
   <!-- Missed call notification label, used when there's exactly one missed call -->
   <!-- Missed call notification label, used when there's exactly one missed call from work contact -->
-  <string name="notification_missedWorkCallTitle">Прапушчаны выклік па працы</string>
   <!-- Missed call notification label, used when there are two or more missed calls -->
-  <string name="notification_missedCallsTitle">Прапушчаныя выклікі</string>
   <!-- Missed call notification message used when there are multiple missed calls -->
-  <string name="notification_missedCallsMsg">Прапушчаных выклікаў: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g></string>
   <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
          The user will be able to call back to the person or the phone number.
          [CHAR LIMIT=18] -->
-  <string name="notification_missedCall_call_back">Перазваніць</string>
   <!-- Message for "reply via sms" action, which is displayed in the missed call notification.
          The user will be able to send text messages using the phone number.
          [CHAR LIMIT=18] -->
-  <string name="notification_missedCall_message">Паведамленне</string>
   <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
@@ -101,22 +82,22 @@
 
          [CHAR LIMIT=10]
      -->
+  <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
+        <xliff:g id="older_caller">%2$s</xliff:g>
+    </string>
   <!-- Text used in the ticker to notify the user of the latest voicemail. [CHAR LIMIT=30] -->
   <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
   <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
   <!-- Message to display whilst we are waiting for the content to be archived. [CHAR LIMIT=40] -->
-  <string name="voicemail_archiving_content">Архіваванне галасавой пошты...</string>
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
-  <string name="call_log_incoming_header">Толькі ўваходныя выклікі</string>
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
-  <string name="call_log_outgoing_header">Толькі зыходныя выклікі</string>
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
-  <string name="visual_voicemail_settings">Налады</string>
+  <string name="visual_voicemail_settings">Agordoj</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -140,6 +121,7 @@
          Used by AccessibilityService to announce the purpose of the button.
          [CHAR LIMIT=NONE]
     -->
+  <string name="description_search_button">serĉi</string>
   <!-- String describing the Dial ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
@@ -170,7 +152,6 @@
     -->
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
-  <string name="action_menu_call_history_description">Выклікі</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
@@ -184,7 +165,7 @@
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
-  <string name="dialer_settings_label">Налады</string>
+  <string name="dialer_settings_label">Agordoj</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
   <!-- Title bar for call detail screen -->
@@ -218,9 +199,7 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for voicemail details screen -->
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->
-  <string name="type_rejected">Адхілены выклік</string>
   <!-- Title for blocked call type. [CHAR LIMIT=40] -->
-  <string name="type_blocked">Заблакіраваны выклік</string>
   <!-- Description for incoming calls going to voice mail vs. not -->
   <!-- String describing the icon in the call log used to play a voicemail.
 
@@ -269,6 +248,7 @@
   <!-- String describing the icon used to start a voice search -->
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
   <!-- String used to display calls from unknown numbers in the call log -->
+  <string name="unknown">Nekonata</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <!-- String used to display calls from private numbers in the call log -->
   <!-- String used to display calls from pay phone in the call log -->
@@ -279,11 +259,8 @@
          current day -->
   <!-- A format string used for displaying the date and time for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM
          The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
-  <string name="voicemailCallLogDateTimeFormat"><xliff:g id="DATE">%1$s</xliff:g> у <xliff:g id="TIME">%2$s</xliff:g></string>
   <!-- Format for duration of voicemails which are displayed when viewing voicemail logs. For example "01:22" -->
-  <string name="voicemailDurationFormat"><xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g></string>
   <!-- A format string used for displaying the date, time and duration for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM • 00:34 -->
-  <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g></string>
   <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
   <!-- Dialog message which is shown when the user tries to check voicemail
@@ -304,26 +281,20 @@
          [CHAR LIMIT=NONE] -->
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
-  <string name="dialer_hint_find_contact">Пошук у кантактах</string>
   <!-- Hint displayed in add blocked number search box when there is no query typed.
          [CHAR LIMIT=45] -->
-  <string name="block_number_search_hint">Дадайце нумар ці шукайце ў кантактах</string>
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
   <!-- String resource for the font-family to use for the full call history footer
          Do not translate. -->
   <!-- Text displayed when the call log is empty. -->
-  <string name="call_log_all_empty">Ваша гісторыя выклікаў пустая</string>
   <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
   <!-- Text displayed when the list of missed calls is empty -->
   <!-- Text displayed when the list of voicemails is empty -->
   <!-- Text displayed when the list of voicemail archives is empty -->
-  <string name="voicemail_archive_empty">Ваш архіў галасавой пошты пусты.</string>
   <!--  Menu option to show favorite contacts only -->
   <!--  Title of activity that displays a list of all calls -->
-  <string name="call_log_activity_title">Выклікі</string>
   <!--  Title of activity that displays a list of all archived voicemails -->
-  <string name="voicemail_archive_activity_title">Архіў галасавой пошты</string>
   <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
   <!-- Title for the call log tab containing the list of all missed calls only
@@ -331,35 +302,24 @@
   <!-- Title for the call log tab containing the list of all voicemail calls only
          [CHAR LIMIT=30] -->
   <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
-  <string name="migrate_blocked_numbers_dialog_title">Новае спрошчанае блакіраванне</string>
   <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
-  <string name="migrate_blocked_numbers_dialog_message">Каб лепш вас абараняць, Тэлефон павінен змяніць спосаб блакіроўкі. Зараз вашы заблакіраваныя нумары не могуць выкарыстоўвацца для выклікаў і перадачы тэкставых паведамленняў і могуць выкарыстоўвацца сумесна з іншымі праграмамі.</string>
   <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
-  <string name="migrate_blocked_numbers_dialog_allow_button">Дазволіць</string>
   <!-- Do not translate -->
   <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_title">Заблакіраваць <xliff:g id="NUMBER">%1$s</xliff:g>?</string>
   <!-- Confirmation dialog message for blocking a number with visual voicemail active.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_message_vvm">Выклікі з гэтага нумара будуць блакіравацца, а паведамленні галасавой пошты - аўтаматычна выдаляцца.</string>
   <!-- Confirmation dialog message for blocking a number with no visual voicemail.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_message_no_vvm">Выклікі з гэтага нумара будуць блакіравацца, але абанент усё яшчэ зможа пакінуць вам паведамленне галасавой пошты.</string>
   <!-- Confirmation dialog message for blocking a number with new filtering enabled.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_message_new_filtering">Вы больш не будзеце атрымліваць выклікі або SMS з гэтага нумара.</string>
   <!-- Block number alert dialog button [CHAR LIMIT=32] -->
-  <string name="block_number_ok">БЛАКІРАВАЦЬ</string>
   <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
-  <string name="unblock_number_confirmation_title">Разблакіраваць <xliff:g id="NUMBER">%1$s</xliff:g>?</string>
   <!-- Unblock number alert dialog button [CHAR LIMIT=32] -->
-  <string name="unblock_number_ok">РАЗБЛАКІРАВАЦЬ</string>
   <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
          [CHAR LIMIT=40] -->
-  <string name="tab_speed_dial">Хуткі выклік</string>
   <!-- Accessibility text for the tab showing the call history. [CHAR LIMIT=40] -->
-  <string name="tab_history">Выклікі</string>
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
+  <string name="tab_all_contacts">Kontaktoj</string>
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
   <!--  Text displayed when user swipes out a favorite contact -->
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
@@ -369,14 +329,11 @@
   <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_send_sms_message">Даслаць SMS</string>
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_block_number">Заблакіраваць нумар</string>
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
   <!-- Shown when there are no speed dial favorites. -->
   <!-- Shown as an action when there are no speed dial favorites -->
-  <string name="speed_dial_empty_add_favorite_action">Дадаць знаёмых</string>
   <!-- Shown when there are no contacts in the all contacts list. -->
   <!-- Shown as an action when the all contacts list is empty -->
   <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
@@ -384,13 +341,13 @@
          [CHAR LIMIT=NONE]
     -->
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
+  <string name="remove_contact">Forigi</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
          messaging app to send a SMS to the number represented by the call log entry.
          [CHAR LIMIT=30] -->
-  <string name="call_log_action_send_message">Адправiць паведамленне</string>
   <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
          the call log entry. [CHAR LIMIT=30] -->
@@ -405,11 +362,9 @@
   <!-- String describing an "unread" voicemail entry in the voicemails tab.
          Note: AccessibilityServices use this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_unread_voicemail">Непрачытанае паведамленне галасавой пошты ад <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>.</string>
   <!-- String describing a "read" voicemail entry in the voicemails tab.
      Note: AccessibilityServices use this attribute to announce what the view represents.
      [CHAR LIMIT=NONE] -->
-  <string name="description_read_voicemail">Паведамленне галасавой пошты ад <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>.</string>
   <!-- String describing an outgoing call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
@@ -421,19 +376,15 @@
   <!-- String describing the secondary line number the call was received via.
          Note: AccessibilityServices use this attribute to announce what the view represents.
          [CHAR LIMIT=NONE]-->
-  <string name="description_via_number">праз <xliff:g id="NUMBER">%1$s</xliff:g></string>
   <!-- TextView text item showing the secondary line number the call was received via.
          [CHAR LIMIT=NONE]-->
-  <string name="call_log_via_number">праз <xliff:g id="NUMBER">%1$s</xliff:g></string>
   <!-- String describing the PhoneAccount and via number that a call was received on, if both are
          visible.
          Note: AccessibilityServices use this attribute to announce what the view represents.
          [CHAR LIMIT=NONE]-->
-  <string name="description_via_number_phone_account">на <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, праз <xliff:g id="NUMBER">%2$s</xliff:g></string>
   <!-- The order of the PhoneAccount and via number that a call was received on,
          if both are visible.
          [CHAR LIMIT=NONE]-->
-  <string name="call_log_via_number_phone_account"><xliff:g id="PHONEACCOUNT">%1$s</xliff:g> праз <xliff:g id="NUMBER">%2$s</xliff:g></string>
   <!-- String describing the phone icon on a call log list item. When tapped, it will place a
          call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
   <!-- String describing the "call" action for an entry in the call log.  The call back
@@ -474,8 +425,10 @@
          [CHAR LIMIT=NONE] -->
   <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->
+  <string name="call_log_header_today">Hodiaŭ</string>
   <!-- String used as a header in the call log above calls which occurred yesterday.
          [CHAR LIMIT=65] -->
+  <string name="call_log_header_yesterday">Hieraŭ</string>
   <!-- String used as a header in the call log above calls which occurred two days or more ago.
          [CHAR LIMIT=65] -->
   <!-- String a header on the call details screen.  Appears above the list calls to or from a
@@ -512,6 +465,7 @@
          dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
          aid compatability. [CHAR LIMIT=40] -->
+  <string name="accessibility_settings_title">Alirebleco</string>
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
   <!-- Setting option name to enable or disable vibration when ringing the phone.
          [CHAR LIMIT=30] -->
@@ -522,58 +476,40 @@
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
   <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
-  <string name="manage_blocked_numbers_label">Блакіраванне выклікаў</string>
   <!-- Label for a section describing that call blocking is temporarily disabled because an
          emergency call was made. [CHAR LIMIT=50] -->
-  <string name="blocked_numbers_disabled_emergency_header_label">Блакіроўка выклікаў часова адключана</string>
   <!-- Description that call blocking is temporarily disabled because the user called an
          emergency number, and explains that call blocking will be re-enabled after a buffer
          period has passed. [CHAR LIMIT=NONE] -->
-  <string name="blocked_numbers_disabled_emergency_desc">Блакіроўка выклікаў будзе адключана, таму што вы выклікалі экстранныя службы з гэтага тэлефона на працягу апошніх 48 гадзін. Яна будзе аўтаматычна адноўлена пасля заканчэння перыяду ў 48 гадзін.</string>
   <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
          [CHAR_LIMIT=30] -->
-  <string name="import_send_to_voicemail_numbers_label">Імпартаваць нумары</string>
   <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
          This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
          and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
-  <string name="blocked_call_settings_import_description">Вы пазначалі праз іншыя праграмы некаторых абанентаў, якіх трэба аўтаматычна адпраўляць у галасавую пошту .</string>
   <!-- Label for button to view numbers of contacts previous marked to be sent to voicemail.
          [CHAR_LIMIT=20] -->
-  <string name="blocked_call_settings_view_numbers_button">Прагледзець нумары</string>
   <!-- Label for button to import settings for sending contacts to voicemail into Dialer's block
          list. [CHAR_LIMIT=20] -->
-  <string name="blocked_call_settings_import_button">Імпартаваць</string>
   <!-- Error toast message for when send to voicemail import fails. [CHAR LIMIT=40] -->
-  <string name="send_to_voicemail_import_failed">Імпарт не ўдаўся</string>
   <!-- Error toast message for when voicemail archive fails. [CHAR LIMIT=40] -->
-  <string name="voicemail_archive_failed">Не ўдалося архіваваць галасавую пошту.</string>
   <!-- String describing the delete icon on a blocked number list item.
         When tapped, it will show a dialog confirming the unblocking of the number.
         [CHAR LIMIT=NONE]-->
-  <string name="description_blocked_number_list_delete">Разблакіраваць нумар</string>
   <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
-  <string name="addBlockedNumber">Дадаць нумар</string>
   <!-- Footer message of number blocking screen with visual voicemail active.
         [CHAR LIMIT=NONE] -->
-  <string name="block_number_footer_message_vvm">Выклікі з гэтых нумароў будуць блакіравацца, а паведамленні галасавой пошты - аўтаматычна выдаляцца.</string>
   <!-- Footer message of number blocking screen with no visual voicemail.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_footer_message_no_vvm">Выклікі з гэтых нумароў будуць блакіравацца, але з іх яшчэ можна пакінуць вам паведамленні галасавой пошты.</string>
   <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
-  <string name="block_list">Заблакіраваныя нумары</string>
   <!-- Error message shown when user tries to add invalid number to the block list.
         [CHAR LIMIT=64] -->
-  <string name="invalidNumber"><xliff:g id="NUMBER">%1$s</xliff:g> несапраўдны.</string>
   <!-- Error message shown when user tries to add a number to the block list that was already
         blocked. [CHAR LIMIT=64] -->
-  <string name="alreadyBlocked"><xliff:g id="NUMBER">%1$s</xliff:g> ужо заблакіраваны.</string>
   <!-- Title of notification telling the user that call blocking has been temporarily disabled.
          [CHAR LIMIT=56] -->
-  <string name="call_blocking_disabled_notification_title">Блакіроўка выклікаў адключана на 48 гадзін</string>
   <!-- Text for notification which provides the reason that call blocking has been temporarily
          disabled. Namely, we disable call blocking after an emergency call in case of return
          phone calls made by emergency services. [CHAR LIMIT=64] -->
-  <string name="call_blocking_disabled_notification_text">Адключана, таму што быў зроблены экстранны выклік.</string>
   <!-- Label for the phone account settings [CHAR LIMIT=30] -->
   <!-- DO NOT TRANSLATE. Internal key for ringtone preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
@@ -582,25 +518,17 @@
   <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
   <!--  The label of the button used to turn on multiple permissions [CHAR LIMIT=30]-->
   <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
-  <string name="permission_no_speeddial">Каб уключыць хуткі набор, уключыце дазвол для Кантактаў.</string>
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
-  <string name="permission_no_calllog">Каб прагледзець свой журнал выклікаў, уключыце дазволы Тэлефона.</string>
   <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
-  <string name="permission_no_contacts">Каб бачыць свае кантакты, уключыце дазвол для Кантактаў.</string>
   <!-- Shown as a prompt to turn on the phone permission to show voicemails [CHAR LIMIT=NONE]-->
-  <string name="permission_no_voicemail">Каб атрымаць доступ да галасавой пошты, уключыце дазвол для Тэлефона.</string>
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
-  <string name="permission_place_call">Каб зрабіць выклік, уключыце дазвол для Тэлефона.</string>
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
-  <string name="blocked_number_call_log_label">Заблакiраваны</string>
   <!-- Accessibility announcement to indicate which call is active -->
-  <string name="accessibility_call_is_active">Актыўная размова з <xliff:g id="NAMEORNUMBER">^1</xliff:g></string>
   <!--  for speed dial -->
   <!-- Text displayed when the list of incoming calls is empty -->
   <!-- Text displayed when the list of outgoing calls is empty -->
   <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Яшчэ нікому не тэлефанавалі</string>
   <!-- Add for enhance videocall ui -->
 </resources>
