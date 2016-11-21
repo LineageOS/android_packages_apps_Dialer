@@ -78,7 +78,7 @@ public class ContactInfoHelper {
      */
     @Nullable
     public ContactInfo lookupNumber(String number, String countryIso) {
-        return lookupNumber(number, countryIso, false);
+        return lookupNumber(number, null, countryIso, false);
     }
 
     /**
@@ -90,11 +90,13 @@ public class ContactInfoHelper {
      * If an error occurs during the lookup, it returns null.
      *
      * @param number the number to look up
+     * @param postDialString append into number if required
      * @param countryIso the country associated with this number
      * @param isConfUrlLog whether call log is for Conference URL call
      */
     @Nullable
-    public ContactInfo lookupNumber(String number, String countryIso, boolean isConfUrlCallLog) {
+    public ContactInfo lookupNumber(String number, String postDialString, String countryIso,
+            boolean isConfUrlCallLog) {
 
         if (TextUtils.isEmpty(number)) {
             return null;
@@ -109,13 +111,14 @@ public class ContactInfoHelper {
                 // If lookup failed, check if the "username" of the SIP address is a phone number.
                 String username = PhoneNumberHelper.getUsernameFromUriNumber(number);
                 if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
-                    info = queryContactInfoForPhoneNumber(username, countryIso, true,
+                    info = queryContactInfoForPhoneNumber(username, null, countryIso, true,
                             isConfUrlCallLog);
                 }
             }
         } else {
             // Look for a contact that has the given phone number.
-            info = queryContactInfoForPhoneNumber(number, countryIso, false, isConfUrlCallLog);
+            info = queryContactInfoForPhoneNumber(number, postDialString, countryIso,
+                    false, isConfUrlCallLog);
         }
 
         final ContactInfo updatedInfo;
@@ -127,6 +130,9 @@ public class ContactInfoHelper {
             if (info == ContactInfo.EMPTY) {
                 // Did not find a matching contact.
                 updatedInfo = new ContactInfo();
+                if (!isConfUrlCallLog && !TextUtils.isEmpty(postDialString)) {
+                    number += postDialString;
+                }
                 updatedInfo.number = number;
                 updatedInfo.formattedNumber = formatPhoneNumber(number, null, countryIso);
                 updatedInfo.normalizedNumber = PhoneNumberUtils.formatNumberToE164(
@@ -265,8 +271,8 @@ public class ContactInfoHelper {
      * <p>
      * If the lookup fails for some other reason, it returns null.
      */
-    private ContactInfo queryContactInfoForPhoneNumber(String number, String countryIso,
-            boolean isSip, boolean isConfUrlLog) {
+    private ContactInfo queryContactInfoForPhoneNumber(String number, String postDialString,
+            String countryIso, boolean isSip, boolean isConfUrlLog) {
         if (TextUtils.isEmpty(number)) {
             return null;
         }
@@ -303,6 +309,9 @@ public class ContactInfoHelper {
             }
         }
         if (info != null && info != ContactInfo.EMPTY) {
+            if (!isConfUrlLog && TextUtils.isEmpty(postDialString)) {
+                number += postDialString;
+            }
             info.formattedNumber = formatPhoneNumber(number, null, countryIso);
         } else if (mCachedNumberLookupService != null) {
             CachedContactInfo cacheInfo =

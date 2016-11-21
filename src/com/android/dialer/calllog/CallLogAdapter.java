@@ -536,8 +536,8 @@ public class CallLogAdapter extends GroupingListAdapter
             // Lookup contacts with this number
             boolean isConfCallLog = num != null && num.length > 1
                     && DialerUtils.isConferenceURICallLog(phoneNumber, postDialDigits);
-            String queryNumber = isConfCallLog ? phoneNumber : number + postDialDigits;
-            info = mContactInfoCache.getValue(queryNumber,
+            String queryNumber = isConfCallLog ? phoneNumber : number;
+            info = mContactInfoCache.getValue(queryNumber, postDialDigits,
                     countryIso, cachedContactInfo, isConfCallLog);
         }
         CharSequence formattedNumber = info.formattedNumber == null
