@@ -1381,6 +1381,15 @@ public class InCallPresenter implements CallList.Listener,
         }
     }
 
+    /**
+     * Called by the {@link VideoCallPresenter} to inform of a change in availability of
+     * incoming video stream.
+     */
+    public void notifyIncomingVideoAvailabilityChanged(boolean isAvailable) {
+        for (InCallEventListener listener : mInCallEventListeners) {
+            listener.onIncomingVideoAvailabilityChanged(isAvailable);
+        }
+    }
 
     /**
      * For some disconnected causes, we show a dialog.  This calls into the activity to show
@@ -2091,6 +2100,7 @@ public class InCallPresenter implements CallList.Listener,
         public void onFullscreenModeChanged(boolean isFullscreenMode);
         public void onSecondaryCallerInfoVisibilityChanged(boolean isVisible, int height);
         public void updatePrimaryCallState();
+        public void onIncomingVideoAvailabilityChanged(boolean isAvailable);
     }
 
     public interface InCallUiListener {

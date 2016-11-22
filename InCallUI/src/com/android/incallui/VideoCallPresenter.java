@@ -564,6 +564,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         getUi().adjustPreviewLocation(isVisible /* shiftUp */, height);
     }
 
+    @Override
+    public void onIncomingVideoAvailabilityChanged(boolean isAvailable) {
+        //NO OP
+    }
+
     private void checkForVideoStateChange(Call call) {
         boolean isVideoCall = VideoUtils.isVideoCall(call);
         boolean hasVideoStateChanged = mCurrentVideoState != call.getVideoState();
@@ -1094,6 +1099,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                     event == Connection.VideoProvider.SESSION_EVENT_RX_RESUME;
                 showVideoUi(mCurrentVideoState, mCurrentCallState, isConfCall());
                 sb.append(mIsIncomingVideoAvailable ? "rx_resume" : "rx_pause");
+                InCallPresenter.getInstance().
+                        notifyIncomingVideoAvailabilityChanged(mIsIncomingVideoAvailable);
                 break;
             case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
                 sb.append("camera_failure");
