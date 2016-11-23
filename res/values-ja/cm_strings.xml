@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">逆引きプロバイダ</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
+  <string name="speed_dial_edit_title">スピードダイヤル<xliff:g id="index" example="2">%1$d</xliff:g>を編集</string>
+  <string name="speed_dial_input_hint">番号を入力してください</string>
   <string name="call_log_show_all_slots">すべてのSIM</string>
   <string name="call_log_all_calls_header">すべての通話</string>
   <string name="call_log_blacklist_header">着信拒否した通話のみ</string>
+  <string name="call_log_blocked_empty">着信拒否した通話はありません。</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">統計</string>
   <string name="callStatsDetailTitle">通話の統計の詳細</string>
