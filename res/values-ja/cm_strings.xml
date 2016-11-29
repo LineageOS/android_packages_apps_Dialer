@@ -95,13 +95,52 @@
   <string name="call_recording_category_title">通話の録音</string>
   <string name="call_recording_format">音声フォーマット</string>
   <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
+  <string name="invalid_number_text">"%1$sでこの通話を発信できませんでした。番号は合っていますか？"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">電話番号に発信したり\n連絡先を検索できます</string>
+  <string name="sign_in_hint_text">%1$sで発信するにはログインしてください</string>
+  <string name="wifi_hint_text">無料の%1$sで%1$s通話をWi-Fi経由で発信します。</string>
+  <string name="roaming_hint_text">%1$sはローミングです。無料の%2$sで%2$s通話をWi-Fi経由で発信しましょう。</string>
+  <string name="emergency_call_hint_text">SIMがありません。緊急通報のみです。</string>
+  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g>通話</string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g>の設定</string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g>を使用して発信</string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">はい</string>
   <string name="callerinfo_provider_auth_no_short">いいえ</string>
+  <string name="callerinfo_provider_auth_no">いいえ</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g>は連絡先、Meプロフィール、Cyanogen OSアカウントにアクセスします。あなたのメールアドレスを含んでいる可能性があります。</string>
+  <string name="callerinfo_provider_auth_learn_more">詳細情報</string>
+  <string name="callerinfo_provider_auth_desc">ようこそ！<xliff:g id="provider_name">%s</xliff:g>で不明な発信者を識別したり、不要な電話を着信拒否しますか？</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">ようこそ！<xliff:g id="provider_name">%s</xliff:g>で不明な発信者を識別しますか？</string>
+  <string name="callerinfo_provider_summary">不明な発信者や迷惑電話を識別する</string>
+  <string name="callerinfo_provider_summary_no_spam">不明な発信者を識別する</string>
+  <string name="silence_spam_title">迷惑電話撃退</string>
+  <string name="silence_spam_summary">迷惑電話を着信しないようにする</string>
+  <string name="block_hidden_title">非通知番号を着信拒否</string>
+  <string name="block_hidden_summary">非通知番号を迷惑電話として認識する</string>
+  <string name="block_dialog_title">この発信者を着信拒否しますか？</string>
+  <string name="block_dialog_positive">着信拒否</string>
+  <string name="block_dialog_negative">キャンセル</string>
+  <string name="block_dialog_description">この人物からの着信やメッセージを受け取らないようになりました。</string>
+  <string name="block_dialog_report_spam">迷惑電話として<xliff:g id="provider">%s</xliff:g>に報告</string>
+  <string name="provider_disable_title">%1$sを無効にしますか？</string>
+  <string name="provider_disable_message">%1$sを無効にすると、発信者の番号が表示できなくなります。</string>
+  <string name="provider_disable_spam_message">%1$sを無効にすると、迷惑電話の着信拒否や、発信者の番号が表示できなくなります。</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"ここでモードを切り替えて\n%1$s通話を発信します"</string>
+  <string name="provider_search_help">"ここでモードを切り替えて\n%1$sの連絡先を検索します"</string>
+  <string name="provider_button_help">"わかりました"</string>
+  <string name="provider_voice_call">"%1$s音声通話"</string>
+  <string name="provider_video_call">"%1$sビデオ通話"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">発信するには、電話の権限をONにしてください。</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">メモを表示</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">どの画面からでもメモを取る</string>
+  <string name="callerinfo_provider_status_disabling">無効にしています</string>
+  <string name="show_dialpad_at_start_title">起動時にダイヤルパッドを表示</string>
 </resources>
