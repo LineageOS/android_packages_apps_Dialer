@@ -357,6 +357,8 @@ public class CallLogActivity extends TransactionSafeActivity implements
             return mAllCallsFragment;
         case TAB_INDEX_MISSED:
             return mMissedCallsFragment;
+        case TAB_INDEX_STATS:
+            return mStatsFragment;
         default:
             throw new IllegalStateException("Unknown fragment index: "
                     + position);
