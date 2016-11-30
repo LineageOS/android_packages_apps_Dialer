@@ -26,9 +26,7 @@ res_dirs := res \
 
 src_dirs += \
     src-N \
-    $(incallui_dir)/src-N \
-    $(contacts_common_dir)/src-N \
-    $(phone_common_dir)/src-N
+    $(contacts_common_dir)/src-N
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(src_dirs))
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
