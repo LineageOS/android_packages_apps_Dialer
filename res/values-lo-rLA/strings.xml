@@ -98,7 +98,7 @@
     <string name="add_wait" msgid="3360818652790319634">"ເພີ່ມການລໍຖ້າ"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"ການ​ຕັ້ງ​ຄ່າ"</string>
     <string name="menu_newContact" msgid="1209922412763274638">"ສ້າງລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່"</string>
-    <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດ"</string>
+    <string name="menu_allContacts" msgid="6948308384034051670">"ລາຍຊື່ຜູ້ຕິດຕໍ່ທັງໝົດ"</string>
     <string name="callDetailTitle" msgid="5340227785196217938">"ລາຍລະອຽດການໂທ"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"ບໍ່​ມີ​ລາຍ​ລະ​ອຽດ​ຢູ່"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ໃຊ້ປຸ່ມກົດສັນຍານສຽງ"</string>

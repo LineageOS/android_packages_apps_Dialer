@@ -161,7 +161,7 @@
     <string name="call_log_missed_title" msgid="4541142293870638971">"छुटेको"</string>
     <string name="call_log_voicemail_title" msgid="940422274047025948">"Voicemail"</string>
     <string name="migrate_blocked_numbers_dialog_title" msgid="2039363199438872626">"नयाँ, सरलीकृत रोकावट"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"तपाईँको थप सुरक्षाका लागि फोनको रोकावट गर्ने विधिमा परिवर्तन गर्न आवश्यक छ। तपाईँबाट रोकावट गरिएका नम्बरहरूले अब कल र पाठ सन्देशहरूलाई रोक्नेछन् र यी नम्बरहरूलाई अन्य अनुप्रयोगहरूसँग साझेदारी गरिन सक्छ।"</string>
+    <string name="migrate_blocked_numbers_dialog_message" msgid="5598530398682662860">"तपाईँको थप सुरक्षाका लागि फोनको रोकावट गर्ने विधिमा परिवर्तन गर्न आवश्यक छ। तपाईँद्वारा रोक लगाइएका नम्बरहरूले अब कल र पाठ सन्देशहरूलाई रोक्नेछन् र यी नम्बरहरूलाई अन्य अनुप्रयोगहरूसँग साझेदारी गरिन सक्छ।"</string>
     <string name="migrate_blocked_numbers_dialog_allow_button" msgid="3116140286537760629">"अनुमति दिनुहोस्"</string>
     <string name="block_number_confirmation_title" msgid="6862219558186931304">"<xliff:g id="NUMBER">%1$s</xliff:g> माथि रोक लगाउने हो?"</string>
     <string name="block_number_confirmation_message_vvm" msgid="5655646611437082611">"यो नम्बरबाट सबै कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचालित रूपमा मेटिनेछन्।"</string>
@@ -254,7 +254,7 @@
     <string name="addBlockedNumber" msgid="6064812257482886526">"नम्बर थप्नुहोस्"</string>
     <string name="block_number_footer_message_vvm" msgid="5387302253765439712">"यी नम्बरहरूबाट सबै कलहरू रोकिनेछन् र भ्वाइसमेलहरू स्वचालित रूपमा मेटिनेछन्।"</string>
     <string name="block_number_footer_message_no_vvm" msgid="223238617533822381">"यो नम्बरहरूबाट सबै कलहरू रोकिनेछन्। तर तिनिहरूले अझै तपाईँलाई भ्वाइस मेलहरू भने छोड्न सक्नेछन्।"</string>
-    <string name="block_list" msgid="7760188925338078011">"रोकिएका नम्बरहरू"</string>
+    <string name="block_list" msgid="7760188925338078011">"रोक लगाइएका नम्बरहरू"</string>
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> अमान्य छ।"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> पहिले नै रोकिएको छ।"</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"४८ घण्टाको लागि कल निषेध असक्षम गरियो"</string>

@@ -22,7 +22,7 @@
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"לוח חיוג של הטלפון"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"טלפון"</string>
     <string name="callHistoryIconLabel" msgid="3734413397291301223">"היסטוריית שיחות"</string>
-    <string name="action_report_number" msgid="4635403959812186162">"דווח על מספר לא מדויק"</string>
+    <string name="action_report_number" msgid="4635403959812186162">"דיווח על מספר לא מדויק"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"העתק מספר"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"העתק תמלול"</string>
     <string name="action_block_number" msgid="1482657602262262134">"חסום מספר"</string>
@@ -30,10 +30,10 @@
     <string name="action_unblock_number" msgid="3043777622269776127">"בטל חסימת מספר"</string>
     <string name="snackbar_number_unblocked" msgid="4854738171099045912">"בוטלה החסימה של <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="block_number_undo" msgid="591338370336724156">"בטל"</string>
-    <string name="call_details_delete" msgid="1833359621896346955">"מחק"</string>
+    <string name="call_details_delete" msgid="1833359621896346955">"מחיקה"</string>
     <string name="action_edit_number_before_call" msgid="3100221149873436485">"ערוך את המספר לפני השיחה"</string>
-    <string name="call_log_delete_all" msgid="4677609108288680411">"נקה את היסטוריית השיחות"</string>
-    <string name="call_log_trash_voicemail" msgid="1283948488625129019">"מחק דואר קולי"</string>
+    <string name="call_log_delete_all" msgid="4677609108288680411">"ניקוי היסטוריית השיחות"</string>
+    <string name="call_log_trash_voicemail" msgid="1283948488625129019">"מחיקת דואר קולי"</string>
     <string name="call_log_archive_voicemail" msgid="9072936797223284265">"העברת דואר קולי לארכיון"</string>
     <string name="call_log_share_voicemail" msgid="7272635349055945546">"שיתוף של הדואר הקולי"</string>
     <string name="snackbar_voicemail_deleted" msgid="5098542835986188582">"דואר קולי נמחק"</string>
@@ -91,11 +91,11 @@
     <string name="action_menu_call_history_description" msgid="9018442816219748968">"היסטוריית שיחות"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"אפשרויות נוספות"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"לוח חיוג"</string>
-    <string name="menu_show_outgoing_only" msgid="1965570298133301970">"הצג רק שיחות יוצאות"</string>
-    <string name="menu_show_incoming_only" msgid="7534206815238877417">"הצג רק שיחות נכנסות"</string>
-    <string name="menu_show_missed_only" msgid="154473166059743996">"הצג רק שיחות שלא נענו"</string>
-    <string name="menu_show_voicemails_only" msgid="1898421289561435703">"הצג הודעות דואר קולי בלבד"</string>
-    <string name="menu_show_all_calls" msgid="7560347482073345885">"הצג את כל השיחות"</string>
+    <string name="menu_show_outgoing_only" msgid="1965570298133301970">"רק שיחות יוצאות"</string>
+    <string name="menu_show_incoming_only" msgid="7534206815238877417">"רק שיחות נכנסות"</string>
+    <string name="menu_show_missed_only" msgid="154473166059743996">"רק שיחות שלא נענו"</string>
+    <string name="menu_show_voicemails_only" msgid="1898421289561435703">"הודעות דואר קולי בלבד"</string>
+    <string name="menu_show_all_calls" msgid="7560347482073345885">"כל השיחות"</string>
     <string name="add_2sec_pause" msgid="9214012315201040129">"הוסף השהיה של 2 שניות"</string>
     <string name="add_wait" msgid="3360818652790319634">"הוסף המתנה"</string>
     <string name="dialer_settings_label" msgid="4305043242594150479">"הגדרות"</string>

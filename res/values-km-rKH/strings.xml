@@ -178,7 +178,7 @@
     <string name="favorite_hidden_undo" msgid="2508998611039406474">"មិនធ្វើវិញ"</string>
     <string name="search_shortcut_call_number" msgid="7277194656832895870">"ហៅ <xliff:g id="NUMBER">%s</xliff:g>"</string>
     <string name="search_shortcut_create_new_contact" msgid="1679917465521554093">"បង្កើតទំនាក់ទំនងថ្មី"</string>
-    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"បន្ថែមទៅទំនាក់ទំនង"</string>
+    <string name="search_shortcut_add_to_contact" msgid="4327842393369915751">"បញ្ចូល​ទៅទំនាក់ទំនង"</string>
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"ផ្ញើសារ SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"ការ​ហៅ​ជា​វីដេអូ"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"រារាំងលេខ"</string>
@@ -186,7 +186,7 @@
     <string name="speed_dial_empty" msgid="8838921693673366129">"គ្មាននរណាម្នាក់នៅក្នុងការហៅរហ័សរបស់អ្នកនៅឡើយទេ"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"បន្ថែមសំណព្វ"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"អ្នកមិនទាន់មានទំនាក់ទំនងនៅឡើយទេ"</string>
-    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"បន្ថែមទំនាក់ទំនង"</string>
+    <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"បញ្ចូល​ទំនាក់ទំនង"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"ប៉ះរូបភាពដើម្បីមើលលេខទាំងអស់ ឬប៉ះ &amp; សង្កត់ឲ្យជាប់ដើម្បីតម្រៀបឡើងវិញ"</string>
     <string name="remove_contact" msgid="1080555335283662961">"លុបចេញ"</string>
     <string name="call_log_action_video_call" msgid="7724301709041128296">"ហៅជាវីដេអូ"</string>
