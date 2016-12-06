@@ -178,8 +178,8 @@
         <activity android:name="com.android.dialer.CallDetailActivity"
             android:label="@string/callDetailTitle"
             android:theme="@style/CallDetailActivityTheme"
-            android:icon="@mipmap/ic_launcher_phone"
-            android:parentActivityName="com.android.dialer.calllog.CallLogActivity">
+            android:parentActivityName="com.android.dialer.calllog.CallLogActivity"
+            android:icon="@mipmap/ic_launcher_phone">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
