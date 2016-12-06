@@ -1119,6 +1119,9 @@ ey \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</
     <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off Airplan
 e mode.</string>
 
+    <!-- Speed Dial can not be set for the key used for Emergency number-->
+    <string name="speed_dial_can_not_be_set">Speed Dial Can not be set for this Key</string>
+
     <string name="yes">Yes</string>
 
     <string name="no">No</string>
