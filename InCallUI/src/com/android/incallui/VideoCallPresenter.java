@@ -322,6 +322,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             CallList.getInstance().removeCallUpdateListener(mPrimaryCall.getId(), this);
         }
         mPictureModeHelper.tearDown(this);
+        cancelAutoFullScreen();
     }
 
     /**
@@ -561,6 +562,11 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                 "onSecondaryCallerInfoVisibilityChanged : isVisible = " + isVisible + " height = "
                         + height);
         getUi().adjustPreviewLocation(isVisible /* shiftUp */, height);
+    }
+
+    @Override
+    public void onIncomingVideoAvailabilityChanged(boolean isAvailable) {
+        //NO OP
     }
 
     private void checkForVideoStateChange(Call call) {
@@ -884,9 +890,6 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         } else {
             ui.hideVideoUi();
         }
-
-        InCallPresenter.getInstance().enableScreenTimeout(
-                VideoProfile.isAudioOnly(videoState));
     }
 
     /**
@@ -1096,6 +1099,8 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
                     event == Connection.VideoProvider.SESSION_EVENT_RX_RESUME;
                 showVideoUi(mCurrentVideoState, mCurrentCallState, isConfCall());
                 sb.append(mIsIncomingVideoAvailable ? "rx_resume" : "rx_pause");
+                InCallPresenter.getInstance().
+                        notifyIncomingVideoAvailabilityChanged(mIsIncomingVideoAvailable);
                 break;
             case Connection.VideoProvider.SESSION_EVENT_CAMERA_FAILURE:
                 sb.append("camera_failure");
@@ -1222,6 +1227,12 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         Point size = ui.getScreenSize();
         Log.v(this, "setDisplayVideoSize: windowmgr width=" + size.x
                 + " windowmgr height=" + size.y);
+        size = resizeForAspectRatio(size, width, height);
+        ui.setDisplayVideoSize(size.x, size.y);
+    }
+
+    public static Point resizeForAspectRatio(Point inSize, int width, int height) {
+        Point size = new Point(inSize);
         if (size.y * width > size.x * height) {
             // current display height is too much. Correct it
             size.y = (int) (size.x * height / width);
@@ -1229,7 +1240,7 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
             // current display width is too much. Correct it
             size.x = (int) (size.y * width / height);
         }
-        ui.setDisplayVideoSize(size.x, size.y);
+        return size;
     }
 
     /**
@@ -1290,6 +1301,9 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
         }
         Log.v(this, "cancelAutoFullScreen : cancelling pending");
         mAutoFullScreenPending = false;
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mAutoFullscreenRunnable);
+        }
     }
 
     private static boolean isAudioRouteEnabled(int audioRoute, int audioRouteMask) {
