@@ -21,7 +21,7 @@
     <string name="launcherActivityLabel" msgid="1129729740601172692">"Telefon"</string>
     <string name="launcherDialpadActivityLabel" msgid="3959809805046059167">"Telefon raqam terish paneli"</string>
     <string name="dialerIconLabel" msgid="6500826552823403796">"Raqam tergich"</string>
-    <string name="callHistoryIconLabel" msgid="3734413397291301223">"Qo‘ng‘iroqlar tarixi"</string>
+    <string name="callHistoryIconLabel" msgid="3734413397291301223">"Chaqiruvlar tarixi"</string>
     <string name="action_report_number" msgid="4635403959812186162">"Raqam noto‘g‘ri aniqlandi"</string>
     <string name="action_copy_number_text" msgid="588249522108594155">"Raqamdan nusxa olish"</string>
     <string name="copy_transcript_text" msgid="5652787482893879382">"Transkripsiyadan nusxa olish"</string>
@@ -86,7 +86,7 @@
     <string name="description_playback_seek" msgid="4509404274968530055">"Ijro vaziyatini qidirish"</string>
     <string name="description_rate_decrease" msgid="3161652589401708284">"Ijro tezligini kamaytirish"</string>
     <string name="description_rate_increase" msgid="6324606574127052385">"Ijro tezligini oshirish"</string>
-    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Qo‘ng‘iroqlar tarixi"</string>
+    <string name="action_menu_call_history_description" msgid="9018442816219748968">"Chaqiruvlar tarixi"</string>
     <string name="action_menu_overflow_description" msgid="2303272250613084574">"Boshqa parametrlar"</string>
     <string name="action_menu_dialpad_button" msgid="1425910318049008136">"terish paneli"</string>
     <string name="menu_show_outgoing_only" msgid="1965570298133301970">"Chiquvchi qo‘ng‘-ni ko‘rsatish"</string>
@@ -155,7 +155,7 @@
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Ovozli pochta qutisi bo‘m-bo‘sh."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Ovozli pochta arxivingiz bo‘sh."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Faqat saralar ko‘rsatilsin"</string>
-    <string name="call_log_activity_title" msgid="7949633151371183580">"Qo‘ng‘iroqlar tarixi"</string>
+    <string name="call_log_activity_title" msgid="7949633151371183580">"Chaqiruvlar tarixi"</string>
     <string name="voicemail_archive_activity_title" msgid="2638669189424535229">"Ovozli pochta arxivi"</string>
     <string name="call_log_all_title" msgid="3566738938889333307">"Hammasi"</string>
     <string name="call_log_missed_title" msgid="4541142293870638971">"Javobsiz"</string>
@@ -171,7 +171,7 @@
     <string name="unblock_number_confirmation_title" msgid="252824779504084354">"<xliff:g id="NUMBER">%1$s</xliff:g> raqami blokdan chiqarilsinmi?"</string>
     <string name="unblock_number_ok" msgid="6449899182699684786">"BLOKDAN CHIQARISH"</string>
     <string name="tab_speed_dial" msgid="7552166276545648893">"Tezkor terish"</string>
-    <string name="tab_history" msgid="2563144697322434940">"Qo‘ng‘iroqlar tarixi"</string>
+    <string name="tab_history" msgid="2563144697322434940">"Chaqiruvlar tarixi"</string>
     <string name="tab_all_contacts" msgid="1410922767166533690">"Kontaktlar"</string>
     <string name="tab_voicemail" msgid="155024725947496746">"Ovozli pochta"</string>
     <string name="favorite_hidden" msgid="5011234945140912047">"Tanlanganlardan o‘chirilgan"</string>
