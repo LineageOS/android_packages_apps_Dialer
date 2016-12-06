@@ -126,7 +126,7 @@
     <string name="menu_callNumber" msgid="997146291983360266">"Զանգել <xliff:g id="NUMBER">%s</xliff:g>-ին"</string>
     <string name="unknown" msgid="740067747858270469">"Անհայտ"</string>
     <string name="voicemail" msgid="3851469869202611441">"Ձայնային փոստ"</string>
-    <string name="private_num" msgid="6374339738119166953">"Անձնական համարը"</string>
+    <string name="private_num" msgid="6374339738119166953">"Փակ համար"</string>
     <string name="payphone" msgid="7726415831153618726">"Հանրային հեռախոս"</string>
     <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> վրկ"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> րոպե <xliff:g id="SECONDS">%s</xliff:g> վայրկյան"</string>
@@ -147,10 +147,10 @@
     <string name="voice_search_not_available" msgid="2977719040254285301">"Ձայնային որոնումը հասանելի չէ"</string>
     <string name="call_not_available" msgid="8941576511946492225">"Հնարավոր չէ զանգահարել, քանի որ Հեռախոս հավելվածն անջատված է:"</string>
     <string name="activity_not_available" msgid="2287665636817987623">"Սարքի վրա համապատասխան հավելված չկա"</string>
-    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Որոնել կոնտակտներ"</string>
+    <string name="dialer_hint_find_contact" msgid="3574350254520035364">"Կոնտակտների որոնում"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"Ավելացրեք համար/որոնեք կոնտակտներ"</string>
-    <string name="call_log_all_empty" msgid="8357417710416340920">"Ձեր զանգերի պատմությունը դատարկ է"</string>
-    <string name="call_log_all_empty_action" msgid="9093210119068366147">"Զանգահարել"</string>
+    <string name="call_log_all_empty" msgid="8357417710416340920">"Զանգերի մատյանը դատարկ է"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"Զանգել"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"Բաց թողած զանգեր չունեք:"</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"Ձայնային փոստի մուտքի արկղը դատարկ է:"</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"Ձեր ձայնային փոստի արխիվը դատարկ է:"</string>
@@ -184,7 +184,7 @@
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Արգելափակել համարը"</string>
     <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> նոր բաց թողնված զանգ"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Արագ համարահավաքման ցանկը դատարկ է"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ավելացնել ընտրանում"</string>
+    <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Ավելացնել կոնտակտ"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Դեռ կոնտակտներ չունեք"</string>
     <string name="all_contacts_empty_add_contact_action" msgid="1515782853819374618">"Ավելացնել կոնտակտ"</string>
     <string name="contact_tooltip" msgid="2019777545923635266">"Բոլոր համարները տեսնելու համար հպեք պատկերին: Վերադասավորելու համար հպեք և պահեք:"</string>
@@ -258,7 +258,7 @@
     <string name="invalidNumber" msgid="619058581062192851">"<xliff:g id="NUMBER">%1$s</xliff:g> համարը սխալ է:"</string>
     <string name="alreadyBlocked" msgid="282340105563646876">"<xliff:g id="NUMBER">%1$s</xliff:g> համարն արդեն արգելափակված է:"</string>
     <string name="call_blocking_disabled_notification_title" msgid="8185193413377920194">"Զանգերի արգելափակումն անջատվել է 48 ժամով"</string>
-    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Անջատվել է, քանի որ կատարվել է արտակարգ իրավիճակների զանգ:"</string>
+    <string name="call_blocking_disabled_notification_text" msgid="5330772013626378526">"Անջատվել է, քանի որ շտապ կանչ է կատարվել։"</string>
     <string name="phone_account_settings_label" msgid="5864322009841175294">"Հաշիվներ զանգերի համար"</string>
     <string name="permission_single_turn_on" msgid="1543391076065465464">"Միացնել"</string>
     <string name="permission_multiple_turn_on" msgid="2426278457455950554">"Թույլտվությունների սահմանում"</string>

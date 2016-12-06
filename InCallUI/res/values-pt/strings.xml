@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Dispensar"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Retor. cham."</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Mensagem"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Chamada em andamento em outro dispositivo"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Transferir chamada"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Para fazer uma chamada, primeiro desative o modo avião."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Não registrado na rede."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Rede celular não disponível."</string>
@@ -111,7 +113,7 @@
     <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Desativar som"</string>
     <string name="onscreenMuteText_selected" msgid="7074763815284369548">"Ativar som"</string>
     <string name="onscreenAddCallText" msgid="5577548650466595598">"Adicionar chamada"</string>
-    <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Mesclar chamadas"</string>
+    <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Juntar chamadas"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Trocar"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Gerenciar chamadas"</string>
     <string name="onscreenManageConferenceText" msgid="7043499154946980355">"Gerenciar teleconferência"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Videocham."</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Alterar para chamada de voz"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Alternar câmera"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Pausar vídeo"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Ativar câmera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Desativar câmera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Mais opções"</string>
     <string name="player_started" msgid="3478865572468310331">"Player iniciado"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Player interrompido"</string>

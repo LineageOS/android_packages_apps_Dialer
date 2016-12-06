@@ -515,6 +515,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     public void onPause() {
         super.onPause();
         Log.d(this, "onPause:");
+        getPresenter().cancelAutoFullScreen();
     }
 
     @Override
@@ -565,6 +566,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
      * Hides and shows the incoming video view and changes the outgoing video view's state based on
      * whether outgoing view is enabled or not.
      */
+    @Override
     public void showVideoViews(boolean previewPaused, boolean showIncoming) {
         inflateVideoUi(true);
 
@@ -585,6 +587,7 @@ public class VideoCallFragment extends BaseFragment<VideoCallPresenter,
     /**
      * Hide all video views.
      */
+    @Override
     public void hideVideoUi() {
         enableScreenTimeout(true);
         inflateVideoUi(false);

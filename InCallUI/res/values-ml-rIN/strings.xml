@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"ഡിസ്മിസ്"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"തിരിച്ചുവിളിക്കുക"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"സന്ദേശം"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന കോൾ"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"കോൾ കൈമാറുക"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ഒരു കോൾ ചെയ്യാൻ, ആദ്യം ഫ്ലൈറ്റ് മോഡ് ഓഫുചെയ്യുക."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"നെറ്റ്‌വർക്കിൽ രജിസ്റ്റർ ചെയ്‌തിട്ടില്ല."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"സെല്ലുലാർ നെറ്റ്‌വർക്ക് ലഭ്യമല്ല."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"വീഡിയോ കോൾ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"വോയ്‌സ്‌ കോളിലേക്ക് മാറ്റുക"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"ക്യാമറ സ്വിച്ചുചെയ്യുക"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"വീഡിയോ താൽക്കാലികമായി നിർത്തുക"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"ക്യാമറ ഓണാക്കുക"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ക്യാമറ ഓഫാക്കുക"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"കൂടുതൽ ഓ‌പ്‌ഷനുകൾ"</string>
     <string name="player_started" msgid="3478865572468310331">"പ്ലെയർ ആരംഭിച്ചു"</string>
     <string name="player_stopped" msgid="1278611664986561535">"പ്ലേയർ നിർത്തി"</string>

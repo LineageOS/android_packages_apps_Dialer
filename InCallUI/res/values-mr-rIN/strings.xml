@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"डिसमिस करा"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"पुन्हा कॉल करा"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"संदेश"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"दुसऱ्या डिव्हाइसवर सुरु असलेला कॉल"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"कॉल स्थानांतरित करा"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"कॉल करण्यासाठी, प्रथम विमान मोड बंद करा."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"नेटवर्कवर नोंदणीकृत नाही."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"मोबाईल नेटवर्क उपलब्ध नाही."</string>
@@ -121,12 +123,13 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"व्हिडिओ कॉल"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"व्हॉइस कॉल वर बदला"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"कॅमेरा स्विच करा"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"व्हिडिओला विराम द्या"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"कॅमेरा चालू करा"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"कॅमेरा बंद करा"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"अधिक पर्याय"</string>
     <string name="player_started" msgid="3478865572468310331">"प्लेअर सुरु झाले"</string>
     <string name="player_stopped" msgid="1278611664986561535">"प्लेअर थांबले"</string>
-    <string name="camera_not_ready" msgid="6614469280264241251">"कॅमेरा सज्ज नाही"</string>
-    <string name="camera_ready" msgid="2614541247814590887">"कॅमेरा सज्ज"</string>
+    <string name="camera_not_ready" msgid="6614469280264241251">"कॅमेरा तयार नाही"</string>
+    <string name="camera_ready" msgid="2614541247814590887">"कॅमेरा तयार"</string>
     <string name="unknown_call_session_event" msgid="2947023743819984299">"अज्ञात कॉल सत्र इव्हेंट"</string>
     <string name="voicemail_provider" msgid="2878119321474918370">"सेवा"</string>
     <string name="voicemail_settings" msgid="7548868784816068975">"सेटअप"</string>

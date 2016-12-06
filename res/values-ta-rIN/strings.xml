@@ -232,7 +232,7 @@
     <string name="sounds_and_vibration_title" msgid="1692290115642160845">"ஒலிகளும் அதிர்வும்"</string>
     <string name="accessibility_settings_title" msgid="6068141142874046249">"அணுகல் தன்மை"</string>
     <string name="ringtone_title" msgid="760362035635084653">"மொபைலின் ரிங்டோன்"</string>
-    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"அழைப்புகளுக்கும் அதிர்வுறு"</string>
+    <string name="vibrate_on_ring_title" msgid="3362916460327555241">"அழைப்பு வருகையில் அதிர்வுறு"</string>
     <string name="dtmf_tone_enable_title" msgid="6571449695997521615">"டயல்பேட் ஒலிகள்"</string>
     <string name="dtmf_tone_length_title" msgid="8581125689808919460">"டயல்பேட் டோன் நீளம்"</string>
   <string-array name="dtmf_tone_length_entries">
