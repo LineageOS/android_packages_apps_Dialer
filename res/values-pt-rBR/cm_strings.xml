@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Provedor de pesquisa inversa</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Chinês Cyngn (CN)</string>
+  <string name="speed_dial_edit_title">Editar discagem rápida <xliff:g id="index" exemplo="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Por favor, digite um número</string>
   <string name="call_log_show_all_slots">Todos os cartões SIM</string>
   <string name="call_log_all_calls_header">Todas as chamadas</string>
   <string name="call_log_blacklist_header">Somente chamadas bloqueadas</string>
+  <string name="call_log_blocked_empty">Você não tem chamadas bloqueadas.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Estatísticas</string>
   <string name="callStatsDetailTitle">Estatística de chamadas detalhadas</string>
