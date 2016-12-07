@@ -31,7 +31,7 @@
     <string name="wait_prompt_str" msgid="3784275777844586675">"အောက်ပါ တီးလုံးများကို ပို့မလား။\n"</string>
     <string name="pause_prompt_str" msgid="4507496811727697620">"အသံများ ပို့နေသည်\n"</string>
     <string name="send_button" msgid="4054398309483035794">"ပို့ပါ"</string>
-    <string name="pause_prompt_yes" msgid="6738588490007499118">"ဟုတ်ပါသည်"</string>
+    <string name="pause_prompt_yes" msgid="6738588490007499118">"Yes"</string>
     <string name="pause_prompt_no" msgid="417286529736964178">"No"</string>
     <string name="wild_prompt_str" msgid="8178750766679617355">"အစားထိုး အထူးအက္ခရာတွင် အစားထိုးရန်"</string>
     <string name="caller_manage_header" msgid="4036790479287738218">"အစည်းအဝေးခေါ်ဆိုမှု <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"ပယ်ပါ"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"ပြန်ခေါ်ပါ"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"မက်ဆေ့ဂျ်"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"အခြားကိရိယာတွင် လက်ရှိခေါ်ဆိုနေမှု"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"ခေါ်ဆိုမှုကို လွှဲပြောင်းပါ"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ခေါ်ဆိုမှု ပြုလုပ်ရန်အတွက် လေယာဉ်ပျံမုဒ်ကို ဦးစွာပိတ်ပါ။"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"ကွန်ယက်ပေါ်တွင် မှတ်ပုံတင်ထားခြင်း မရှိပါ။"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"ဆဲလ်လူလာ ကွန်ရက် မရှိပါ။"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"အသံခေါ်ဆိုမှုသို့ ပြောင်းပါ"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"ကင်မရာပြောင်းပါ"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"ဗီဒီယို ခေတ္တရပ်ပါ"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"ကင်မရာဖွင့်ပါ"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ကင်မရာပိတ်ပါ"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"နောက်ထပ် ရွေးစရာများ"</string>
     <string name="player_started" msgid="3478865572468310331">"ပလေယာ စပါပြီ"</string>
     <string name="player_stopped" msgid="1278611664986561535">"ပလေယာ ရပ်တန့်သွားပါပြီ"</string>

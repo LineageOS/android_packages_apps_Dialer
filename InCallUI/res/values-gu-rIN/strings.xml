@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"છોડી દો"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"કૉલ બૅક કરો"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"સંદેશ"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"અન્ય ઉપકરણ પર ચાલી રહેલ કૉલ"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"કૉલ સ્થાનાંતરિત કરો"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"કૉલ કરવા માટે, પહેલા એરપ્લેન મોડને બંધ કરો."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"નેટવર્ક પર નોંધણી કરાયેલ નથી."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"સેલ્યુલર નેટવર્ક ઉપલબ્ધ નથી."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"વિડિઓ કૉલ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"વૉઇસ કૉલ પર બદલો"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"કૅમેરા પર સ્વિચ કરો"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"વિડિઓ થોભાવો"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"કૅમેરો ચાલુ કરો"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"કૅમેરો બંધ કરો"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"વધુ વિકલ્પો"</string>
     <string name="player_started" msgid="3478865572468310331">"પ્લેયર પ્રારંભ કર્યું"</string>
     <string name="player_stopped" msgid="1278611664986561535">"પ્લેયર બંધ કર્યું"</string>

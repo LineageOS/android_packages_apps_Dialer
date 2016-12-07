@@ -218,6 +218,17 @@
          The user will be able to send text messages using the phone number.
          [CHAR LIMIT=12] -->
     <string name="notification_missedCall_message">Message</string>
+    <!-- The "label" of the in-call Notification for an ongoing external call.
+         External calls are a representation of a call which is in progress on the user's other
+         device (e.g. another phone or a watch).
+         [CHAR LIMIT=60] -->
+    <string name="notification_external_call">Ongoing call on another device</string>
+    <!-- Notification action displayed for external call notifications.  External calls are a
+         representation of a call which is in progress on the user's other device (e.g. another
+         phone or a watch).  The "transfer call" action initiates the process of transferring an
+         external call to the current device.
+         [CHAR LIMIT=30] -->
+    <string name="notification_transfer_call">Transfer Call</string>
 
     <!-- In-call screen: call failure message displayed in an error dialog -->
     <string name="incall_error_power_off">To place a call, first turn off Airplane mode.</string>
@@ -313,8 +324,10 @@
     <!-- Text for the onscreen "Switch camera" button. When clicked, this switches the user's camera
          for video calling between the front-facing camera and the back-facing camera. -->
     <string name="onscreenSwitchCameraText">Switch camera</string>
-    <!-- Text for the onscreen "Pause video" button. -->
-    <string name="onscreenPauseVideoText">Pause video</string>
+    <!-- Text for the onscreen "turn on camera" button. -->
+    <string name="onscreenTurnOnCameraText">Turn on camera</string>
+    <!-- Text for the onscreen "turn off camera" button. -->
+    <string name="onscreenTurnOffCameraText">Turn off camera</string>
     <!-- Text for the onscreen overflow button, to see additional actions which can be done. -->
     <string name="onscreenOverflowText">More options</string>
 
