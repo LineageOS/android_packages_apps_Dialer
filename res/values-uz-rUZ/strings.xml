@@ -102,8 +102,8 @@
     <string name="callDetailTitle" msgid="5340227785196217938">"Chaqiruv tafsilotlari"</string>
     <string name="toast_call_detail_error" msgid="6947041258280380832">"Tafsilotlar mavjud emas"</string>
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"Tovushli raqam tergich"</string>
-    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Qo‘ng‘iroqqa qaytish"</string>
-    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Qo‘ng‘iroq qo‘shish"</string>
+    <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"Amaldagi chaqiruvga qaytish"</string>
+    <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Chaqiruv qo‘shish"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Kiruvchi qo‘ng‘iroq"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Chiquvchi qo‘ng‘iroq"</string>
     <string name="type_missed" msgid="2720502601640509542">"Javobsiz qo‘ng‘iroq"</string>

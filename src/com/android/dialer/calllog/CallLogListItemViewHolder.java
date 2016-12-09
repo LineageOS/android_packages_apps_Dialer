@@ -710,6 +710,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             if (intentProvider != null) {
                 final Intent intent = intentProvider.getIntent(mContext);
                 // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
+                if (DialerUtils.isConferenceURICallLog(number, postDialDigits)) {
+                    intent.putExtra("org.codeaurora.extra.DIAL_CONFERENCE_URI", true);
+                }
                 if (intent != null) {
                     DialerUtils.startActivityWithErrorToast(mContext, intent);
                 }

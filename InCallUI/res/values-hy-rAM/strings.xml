@@ -80,9 +80,11 @@
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Տեսազանգ"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Ձայնային"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Ընդունել"</string>
-    <string name="notification_action_dismiss" msgid="1998811618480434300">"Փակել"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Մերժել"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Հետ զանգել"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Հաղորդագրություն"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Ընթացիկ զանգ այլ սարքում"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Փոխանցել զանգը"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Զանգ կատարելու համար նախ անջատեք Ինքնաթիռի ռեժիմը:"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Ցանցում գրանցված չէ:"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Բջջային ցանցն անհասանելի է:"</string>
@@ -97,7 +99,7 @@
     <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"Հնարավոր չէ մերժել զանգը:"</string>
     <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"Հնարավոր չէ անջատել զանգ(եր)ը:"</string>
     <string name="incall_call_type_label_sip" msgid="1327822795765282192">"SIP զանգ"</string>
-    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Արտակարգ իրավիճակի զանգ"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"Շտապ կանչ"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"Ռադիոն միացվում է…"</string>
     <string name="emergency_enable_radio_dialog_retry" msgid="1672288458940152814">"Ծառայությունը մատչելի չէ: Փորձը կրկնվում է…"</string>
     <string name="dial_emergency_error" msgid="582305854626092376">"Հնարավոր չէ զանգել: <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> համարը արտակարգ իրավիճակի համար չէ:"</string>
@@ -120,8 +122,9 @@
     <string name="onscreenAudioText" msgid="8963459818052898299">"Ձայնային"</string>
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Տեսազանգ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Փոխարկել ձայնային կանչի"</string>
-    <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Փոխել տեսախցիկը"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Դադարեցնել տեսազանգը"</string>
+    <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Փոխարկել խցիկը"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Միացնել տեսախցիկը"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Անջատել տեսախցիկը"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Այլ ընտրանքներ"</string>
     <string name="player_started" msgid="3478865572468310331">"Նվագարկիչը մեկնարկել է"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Նվագարկիչը դադարեցվել է"</string>

@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Hylkää"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Soita"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Viesti"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Puhelu on kesken toisella laitteella."</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Siirrä puhelu"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Poista lentokonetila käytöstä ennen puhelun soittamista."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Ei rekisteröity verkkoon"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Matkapuhelinverkko ei ole käytettävissä."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Video"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Muuta äänipuheluksi"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Vaihda kameraa"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Keskeytä video"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Käynnistä kamera"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Sammuta kamera"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Lisäasetukset"</string>
     <string name="player_started" msgid="3478865572468310331">"Soitin käynnistettiin."</string>
     <string name="player_stopped" msgid="1278611664986561535">"Soitin pysäytettiin."</string>

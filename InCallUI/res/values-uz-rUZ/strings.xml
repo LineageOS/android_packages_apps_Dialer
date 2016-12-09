@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Rad etish"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Telefon qilish"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"SMS yuborish"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Boshqa qurilmada hozir qo‘ng‘iroq amalga oshirilmoqda."</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Qo‘ng‘iroqni o‘tkazish"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Qo‘ng‘iroq qilish uchun, avval “Parvoz rejimi” o‘chirilishi kerak."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Tarmoqda ro‘yxatdan o‘tmagan."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Uyali tarmoq mavjud emas."</string>
@@ -110,7 +112,7 @@
     <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"Raqam terish panelini yopish"</string>
     <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Ovozni o‘chirish"</string>
     <string name="onscreenMuteText_selected" msgid="7074763815284369548">"Ovozni yoqish"</string>
-    <string name="onscreenAddCallText" msgid="5577548650466595598">"Qo‘ng‘iroq qo‘shish"</string>
+    <string name="onscreenAddCallText" msgid="5577548650466595598">"Chaqiruv qo‘shish"</string>
     <string name="onscreenMergeCallsText" msgid="4946687067221459357">"Qo‘ng‘iroqlarni birlashtirish"</string>
     <string name="onscreenSwapCallsText" msgid="8272036175646846198">"Almashtirish"</string>
     <string name="onscreenManageCallsText" msgid="5491297234697209677">"Qo‘ng‘iroqlarni boshqarish"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Video qo‘ng‘iroq"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Ovozli qo‘ng‘iroqqa o‘zgartirish"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Kamerani almashtirish"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Videoni to‘xtatib turish"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Kamerani yoqish"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Kamerani o‘chirish"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Boshqa sozlamalar"</string>
     <string name="player_started" msgid="3478865572468310331">"Pleyer ishga tushirildi"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Pleyer to‘xtatildi"</string>

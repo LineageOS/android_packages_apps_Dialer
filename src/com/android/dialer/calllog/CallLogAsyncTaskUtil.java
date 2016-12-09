@@ -41,11 +41,13 @@ import com.android.dialer.database.VoicemailArchiveContract;
 import com.android.dialer.util.AsyncTaskExecutor;
 import com.android.dialer.util.AsyncTaskExecutors;
 import com.android.dialer.util.PhoneNumberUtil;
+import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TelecomUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class CallLogAsyncTaskUtil {
     private static String TAG = CallLogAsyncTaskUtil.class.getSimpleName();
@@ -208,13 +210,20 @@ public class CallLogAsyncTaskUtil {
                     PhoneNumberUtil.canPlaceCallsTo(number, numberPresentation) && !isVoicemail;
             ContactInfo info = ContactInfo.EMPTY;
 
+            Pattern pattern = Pattern.compile("[,;]");
+            String[] num = pattern.split(number);
+            boolean isConf = num != null && num.length > 1
+                    && DialerUtils.isConferenceURICallLog(number, postDialDigits);
+            String phoneNumber = num != null && num.length > 0 ? num[0] : "";
+            String queryNumber = isConf ? number : phoneNumber;
             if (shouldLookupNumber) {
-                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(number, countryIso);
+                ContactInfo lookupInfo = contactInfoHelper.lookupNumber(queryNumber, postDialDigits,
+                        countryIso, isConf);
                 info = lookupInfo != null ? lookupInfo : ContactInfo.EMPTY;
             }
 
             PhoneCallDetails details = new PhoneCallDetails(
-                    context, number, numberPresentation, info.formattedNumber,
+                    context, queryNumber, numberPresentation, info.formattedNumber,
                     postDialDigits, isVoicemail);
 
             details.viaNumber = viaNumber;

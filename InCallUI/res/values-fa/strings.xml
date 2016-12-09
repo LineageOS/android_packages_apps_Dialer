@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"نپذیرفتن"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"پاسخ تماس"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"پیام"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"تماس در حال انجام در دستگاهی دیگر"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"انتقال تماس"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"برای برقراری تماس، ابتدا حالت هواپیما را خاموش کنید."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"در شبکه ثبت نشده است."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"شبکه تلفن همراه در دسترس نیست."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"تماس ویدیویی"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"تغییر به تماس صوتی"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"تعویض دوربین"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"توقف موقت ویدیو"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"روشن کردن دوربین"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"خاموش کردن دوربین"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"گزینه‌های بیشتر"</string>
     <string name="player_started" msgid="3478865572468310331">"پخش‌کننده راه‌اندازی شد"</string>
     <string name="player_stopped" msgid="1278611664986561535">"پخش‌کننده متوقف شد"</string>
