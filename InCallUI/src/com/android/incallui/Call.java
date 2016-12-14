@@ -368,6 +368,12 @@ public class Call {
                     List<android.telecom.Call> conferenceableCalls) {
                 update();
             }
+
+            @Override
+            public void onConnectionEvent(android.telecom.Call call, String event, Bundle extras) {
+                Log.d(this, "TelecomCallCallback onConnectionEvent call=" + call);
+                update();
+            }
     };
 
     boolean mIsActiveSub = false;
