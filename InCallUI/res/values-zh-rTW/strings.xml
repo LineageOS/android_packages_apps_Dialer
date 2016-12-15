@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"拒絕"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"回撥"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"傳送簡訊"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"其他裝置上有進行中的通話"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"轉接來電"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"撥號前，請先關閉飛航模式。"</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"尚未註冊網路。"</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"無法連線到行動網路。"</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"視訊通話"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"變更為語音通話"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"切換鏡頭"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"暫停視訊畫面"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"開啟攝影機"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"關閉攝影機"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"更多選項"</string>
     <string name="player_started" msgid="3478865572468310331">"已啟動播放器"</string>
     <string name="player_stopped" msgid="1278611664986561535">"已停止播放器"</string>

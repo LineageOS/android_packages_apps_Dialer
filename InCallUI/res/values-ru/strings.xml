@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"Закрыть"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Перезвонить"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Написать SMS"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"Вы участвуете в разговоре на другом устройстве"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"Перевести на это устройство"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"Отключите режим полета."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Нет регистрации в сети."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Мобильная сеть недоступна."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"Видеовызов"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"Отключить видео"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"Сменить камеру"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"Приостановить видео"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"Включить камеру"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"Выключить камеру"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"Другие настройки"</string>
     <string name="player_started" msgid="3478865572468310331">"Видеоплеер включен"</string>
     <string name="player_stopped" msgid="1278611664986561535">"Видеоплеер отключен"</string>

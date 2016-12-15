@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"நிராகரி"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"திரும்ப அழை"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"செய்தி அனுப்பு"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"மற்றொரு சாதனத்தில் செயலில் இருக்கும் அழைப்பு"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"அழைப்பை இடமாற்று"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"அழைப்பதற்கு, முதலில் விமானப் பயன்முறையை முடக்கவும்."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"நெட்வொர்க்கில் பதிவுசெய்யப்படவில்லை."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"செல்லுலார் நெட்வொர்க் கிடைக்கவில்லை."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"வீடியோ அழைப்பு"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"குரல் அழைப்பிற்கு மாறு"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"கேமராவை மாற்று"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"வீடியோவை இடைநிறுத்து"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"கேமராவை இயக்கு"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"கேமராவை முடக்கு"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"கூடுதல் விருப்பங்கள்"</string>
     <string name="player_started" msgid="3478865572468310331">"வீடியோ பிளேயர் துவங்கியது"</string>
     <string name="player_stopped" msgid="1278611664986561535">"வீடியோ பிளேயர் நிறுத்தப்பட்டது"</string>

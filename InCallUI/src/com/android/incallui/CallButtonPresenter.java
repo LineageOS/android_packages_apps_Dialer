@@ -300,11 +300,13 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     public void addCallClicked() {
-        // Automatically mute the current call
-        mAutomaticallyMuted = true;
-        mPreviousMuteState = AudioModeProvider.getInstance().getMute();
-        // Simulate a click on the mute button
-        muteClicked(true);
+        if (!QtiImsExtUtils.isCarrierOneSupported()) {
+            // Automatically mute the current call
+            mAutomaticallyMuted = true;
+            mPreviousMuteState = AudioModeProvider.getInstance().getMute();
+            // Simulate a click on the mute button
+            muteClicked(true);
+        }
         TelecomAdapter.getInstance().addCall();
     }
 
@@ -472,7 +474,6 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     private void updateButtonsState(Call call) {
         Log.v(this, "updateButtonsState");
         final CallButtonUi ui = getUi();
-
         final boolean isVideo = VideoUtils.isVideoCall(call);
 
         // Common functionality (audio, hold, etc).
@@ -549,6 +550,9 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         ui.showButton(BUTTON_SWITCH_CAMERA, isVideo);
         ui.showButton(BUTTON_PAUSE_VIDEO, isVideo && !useExt && !useCustomVideoUi &&
                 !mEnhanceEnable);
+        if (isVideo) {
+            getUi().setVideoPaused(!VideoUtils.isTransmissionEnabled(call));
+        }
         ui.showButton(BUTTON_DIALPAD, true);
         ui.showButton(BUTTON_MERGE, showMerge);
         ui.showButton(BUTTON_ADD_PARTICIPANT, showAddParticipant && !mEnhanceEnable);

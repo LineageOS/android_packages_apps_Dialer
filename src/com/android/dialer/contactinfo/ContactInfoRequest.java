@@ -31,11 +31,20 @@ public final class ContactInfoRequest {
     public final String countryIso;
     /** The cached contact information stored in the call log. */
     public final ContactInfo callLogInfo;
+    public final boolean isConf;
+    public final String postDialString;
 
     public ContactInfoRequest(String number, String countryIso, ContactInfo callLogInfo) {
+        this(number, null, countryIso, callLogInfo, false);
+    }
+
+    public ContactInfoRequest(String number, String postDialString, String countryIso,
+            ContactInfo callLogInfo, boolean isConf) {
         this.number = number;
+        this.postDialString = postDialString;
         this.countryIso = countryIso;
         this.callLogInfo = callLogInfo;
+        this.isConf = isConf;
     }
 
     @Override
@@ -47,6 +56,7 @@ public final class ContactInfoRequest {
         ContactInfoRequest other = (ContactInfoRequest) obj;
 
         if (!TextUtils.equals(number, other.number)) return false;
+        if (!TextUtils.equals(postDialString, other.postDialString)) return false;
         if (!TextUtils.equals(countryIso, other.countryIso)) return false;
         if (!Objects.equal(callLogInfo, other.callLogInfo)) return false;
 
@@ -60,6 +70,7 @@ public final class ContactInfoRequest {
         result = prime * result + ((callLogInfo == null) ? 0 : callLogInfo.hashCode());
         result = prime * result + ((countryIso == null) ? 0 : countryIso.hashCode());
         result = prime * result + ((number == null) ? 0 : number.hashCode());
+        result = prime * result + ((postDialString == null) ? 0 : postDialString.hashCode());
         return result;
     }
 }

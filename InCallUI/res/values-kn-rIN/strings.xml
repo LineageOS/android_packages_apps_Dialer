@@ -83,6 +83,8 @@
     <string name="notification_action_dismiss" msgid="1998811618480434300">"ವಜಾಗೊಳಿಸಿ"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"ಮರಳಿ ಕರೆ"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"ಸಂದೇಶ"</string>
+    <string name="notification_external_call" msgid="5611236780302924816">"ಮತ್ತೊಂದು ಸಾಧನದಲ್ಲಿ ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ"</string>
+    <string name="notification_transfer_call" msgid="687009078741947505">"ಕರೆ ವರ್ಗಾಯಿಸಿ"</string>
     <string name="incall_error_power_off" msgid="3626117639377110403">"ಕರೆ ಮಾಡಲು, ಮೊದಲು ಏರ್‌ಪ್ಲೇನ್‌‌ ಮೋಡ್‌‌ ಆಫ್‌ ಮಾಡಿ."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"ನೆಟ್‌ವರ್ಕ್‌ನಲ್ಲಿ ಇನ್ನೂ ನೋಂದಣಿಯಾಗಿಲ್ಲ."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"ಸೆಲ್ಯುಲಾರ್ ನೆಟ್‌ವರ್ಕ್‌ ಲಭ್ಯವಿಲ್ಲ."</string>
@@ -121,7 +123,8 @@
     <string name="onscreenVideoCallText" msgid="1578940167445068369">"ವೀಡಿಯೊ ಕರೆ"</string>
     <string name="onscreenChangeToVoiceText" msgid="6249580619992009182">"ಧ್ವನಿ ಕರೆಗೆ ಬದಲಾಯಿಸಿ"</string>
     <string name="onscreenSwitchCameraText" msgid="7141261218152736690">"ಕ್ಯಾಮರಾ ಬದಲಿಸಿ"</string>
-    <string name="onscreenPauseVideoText" msgid="1268768027709892604">"ವೀಡಿಯೊ ವಿರಾಮಗೊಳಿಸು"</string>
+    <string name="onscreenTurnOnCameraText" msgid="915019986687927588">"ಕ್ಯಾಮರಾ ಆನ್ ಮಾಡಿ"</string>
+    <string name="onscreenTurnOffCameraText" msgid="6225377831394679126">"ಕ್ಯಾಮರಾ ಆಫ್ ಮಾಡಿ"</string>
     <string name="onscreenOverflowText" msgid="7932741239724473887">"ಇನ್ನಷ್ಟು ಆಯ್ಕೆಗಳು"</string>
     <string name="player_started" msgid="3478865572468310331">"ಪ್ಲೇಯರ್‌ ಪ್ರಾರಂಭವಾಗಿದೆ"</string>
     <string name="player_stopped" msgid="1278611664986561535">"ಪ್ಲೇಯರ್‌ ನಿಲ್ಲಿಸಲಾಗಿದೆ"</string>

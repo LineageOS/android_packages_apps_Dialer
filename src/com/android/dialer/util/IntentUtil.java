@@ -177,7 +177,8 @@ public class IntentUtil {
                     if (subRes.getBoolean(R.bool.config_enable_conference_dialer)) {
                         TelephonyManager telephonyMgr = (TelephonyManager) context.
                                 getSystemService(Context.TELEPHONY_SERVICE);
-                        isEnabled = telephonyMgr.isImsRegistered();
+                        isEnabled = telephonyMgr.isImsRegisteredForSubscriber(subInfo
+                                .getSubscriptionId());
                         if (isEnabled) {
                             break;
                         }
