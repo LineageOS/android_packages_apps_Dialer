@@ -22,23 +22,23 @@
   <!-- Number lookup -->
   <string name="lookup_settings_label">Penelusuran nomor telepon</string>
   <string name="lookup_settings_description">Penelusuran nomor telepon yang tidak dikenal</string>
-  <string name="enable_forward_lookup_title">Penelusuran maju</string>
-  <string name="enable_forward_lookup_summary">Menunjukkan tempat terdekat saat menelusuri dalam dialer</string>
+  <string name="enable_forward_lookup_title">Penelusuran kedepan</string>
+  <string name="enable_forward_lookup_summary">Tampilkan tempat terdekat ketika mencari di dialer</string>
   <string name="enable_people_lookup_title">Penelusuran orang</string>
   <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
   <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
   <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
-  <string name="forward_lookup_provider_title">Penyedia penelusuran maju</string>
+  <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
   <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
   <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
   <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Tiongkok (CN)</string>
+  <string name="cyngn_reverse_lookup_provider_name">Cyngn Cina (CN)</string>
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Penelusuran dialpad T9</string>
   <string name="t9_search_input_locale">Masukan penelusuran T9</string>
-  <string name="t9_search_input_locale_default">Baku</string>
+  <string name="t9_search_input_locale_default">Standar</string>
   <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Telepon yang di blok</string>
+  <string name="type_blacklist">Telepon yang diblokir</string>
   <string name="call_log_stats_title">Statistik</string>
   <string name="callStatsDetailTitle">Detail statistik panggilan</string>
   <string name="call_stats">Statistik panggilan</string>

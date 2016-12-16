@@ -22,7 +22,6 @@
   <!-- dialpad t9 search -->
   <!-- Description for incoming calls that were blacklisted -->
   <!--  for speed dial -->
-  <string name="yes">Jes</string>
   <!-- The string used to represent an unknown location for a phone number in the call log
        Do not translate. -->
   <!-- Filter by blacklist calls option -->

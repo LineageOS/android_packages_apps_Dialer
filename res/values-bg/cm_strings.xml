@@ -86,11 +86,11 @@
   <!-- The string used to represent an unknown location for a phone number in the call log
        Do not translate. -->
   <string name="incall_vibration_category_title">Вибрация при входящо повикване</string>
-  <string name="incall_vibrate_outgoing_title">Вибрирай при отговор</string>
-  <string name="vibrate_call_waiting">Вибрирай при изчакващо повикване</string>
-  <string name="incall_vibrate_hangup_title">Вибрирай при затваряне</string>
-  <string name="incall_vibrate_45_title">Вибрирай на всяка минута</string>
-  <string name="incall_vibrate_45_summary">Вибрирара всека 45 секунда от минутата по време на изходящи повиквания</string>
+  <string name="incall_vibrate_outgoing_title">Вибрация при отговор</string>
+  <string name="vibrate_call_waiting">Вибрация при изчакващо повикване</string>
+  <string name="incall_vibrate_hangup_title">Вибрация при затваряне</string>
+  <string name="incall_vibrate_45_title">Вибрация на всяка минута</string>
+  <string name="incall_vibrate_45_summary">Ще вибрира на всяка 45-та секунда от минутата по време на изходящи повиквания</string>
   <string name="detailed_incall_info_title">Подробна информация за повикванията</string>
   <string name="detailed_incall_info_summary">Показване на допълнителна информация за повикванията, в екрана при входящо повикване</string>
   <string name="video_call">Видео повикване</string>
