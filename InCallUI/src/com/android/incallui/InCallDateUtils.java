@@ -1,9 +1,12 @@
 package com.android.incallui;
 
-import android.content.Context;
-import android.content.res.Resources;
+import android.icu.text.MeasureFormat;
+import android.icu.text.MeasureFormat.FormatWidth;
+import android.icu.util.Measure;
+import android.icu.util.MeasureUnit;
 
-import com.android.dialer.R;
+import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Methods to parse time and date information in the InCallUi
@@ -14,7 +17,7 @@ public class InCallDateUtils {
      * Return given duration in a human-friendly format. For example, "4 minutes 3 seconds" or
      * "3 hours 1 second". Returns the hours, minutes and seconds in that order if they exist.
      */
-    public static String formatDuration(Context context, long millis) {
+    public static String formatDuration(long millis) {
         int hours = 0;
         int minutes = 0;
         int seconds = 0;
@@ -29,28 +32,22 @@ public class InCallDateUtils {
         }
         seconds = elapsedSeconds;
 
-        final Resources res = context.getResources();
-        StringBuilder duration = new StringBuilder();
-        try {
-            if (hours > 0) {
-                duration.append(res.getQuantityString(R.plurals.duration_hours, hours, hours));
-            }
-            if (minutes > 0) {
-                if (hours > 0) {
-                    duration.append(' ');
-                }
-                duration.append(res.getQuantityString(R.plurals.duration_minutes, minutes, minutes));
-            }
-            if (seconds > 0) {
-                if (hours > 0 || minutes > 0) {
-                    duration.append(' ');
-                }
-                duration.append(res.getQuantityString(R.plurals.duration_seconds, seconds, seconds));
-            }
-        } catch (Resources.NotFoundException e) {
-            // Ignore; plurals throws an exception for an untranslated quantity for a given locale.
-            return null;
+        final ArrayList<Measure> measures = new ArrayList<Measure>();
+        if (hours > 0) {
+            measures.add(new Measure(hours, MeasureUnit.HOUR));
         }
-        return duration.toString();
+        if (minutes > 0) {
+            measures.add(new Measure(minutes, MeasureUnit.MINUTE));
+        }
+        if (seconds > 0) {
+            measures.add(new Measure(seconds, MeasureUnit.SECOND));
+        }
+
+        if (measures.isEmpty()) {
+            return "";
+        } else {
+            return MeasureFormat.getInstance(Locale.getDefault(), FormatWidth.WIDE)
+                    .formatMeasures((Measure[]) measures.toArray());
+        }
     }
 }

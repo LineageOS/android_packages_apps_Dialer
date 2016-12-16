@@ -917,7 +917,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mElapsedTime.setText(callTimeElapsed);
 
             String durationDescription =
-                    InCallDateUtils.formatDuration(getView().getContext(), duration);
+                    InCallDateUtils.formatDuration(duration);
             mElapsedTime.setContentDescription(
                     !TextUtils.isEmpty(durationDescription) ? durationDescription : null);
         } else {
