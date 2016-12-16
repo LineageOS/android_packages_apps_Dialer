@@ -131,7 +131,7 @@
   <string name="provider_disable_spam_message">Ao desativar %1$s, você não terá proteção de spam ou identificação de quem te liga.</string>
   <string name="powered_by_provider">Desenvolvido por <xliff:g id="provider">%s</xliff:g></string>
   <string name="provider_help">"Fazer chamadas %1$s\nalterando os modos aqui"</string>
-  <string name="provider_search_help">"Procurar os contados %1$s\nalterando os modos aqui"</string>
+  <string name="provider_search_help">"Procurar os contatos %1$s\nalterando os modos aqui"</string>
   <string name="provider_button_help">"Entendi"</string>
   <string name="provider_voice_call">"chamada de voz %1$s"</string>
   <string name="provider_video_call">"chamada de vídeo %1$s"</string>
