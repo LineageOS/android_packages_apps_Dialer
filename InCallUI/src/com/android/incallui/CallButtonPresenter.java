@@ -499,11 +499,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         final boolean showUpgradeToVideo =
                 /* When useExt is true, show upgrade button for an active/held
                    call if the call has either voice or video capabilities */
+                ((isCallActive || isCallOnHold) &&
                 ((useExt && QtiCallUtils.hasVoiceOrVideoCapabilities(call)) ||
                 /* When useCustomVideoUi is true, show upgrade button for an active/held
                    voice call only if the current call has video capabilities */
-                (useCustomVideoUi && !isVideo && hasVideoCallCapabilities(call))
-                && (isCallActive || isCallOnHold)) ||
+                (useCustomVideoUi && !isVideo && hasVideoCallCapabilities(call)))) ||
                 /* When useExt and custom UI are false, default to Google behaviour */
                 (!isVideo && !useExt && !useCustomVideoUi && hasVideoCallCapabilities(call));
 
