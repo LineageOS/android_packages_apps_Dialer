@@ -38,12 +38,20 @@
   <string name="reverse_lookup_provider_title">Poskytovateľ pre spätné vyhľadávanie</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Čínština (CN)</string>
+  <string name="speed_dial_edit_title">Upraviť rýchle vytáčanie <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Zadajte číslo</string>
   <string name="call_log_show_all_slots">Všetky karty SIM</string>
   <string name="call_log_all_calls_header">Všetky hovory</string>
   <string name="call_log_blacklist_header">Len zablokované hovory</string>
+  <string name="call_log_blocked_empty">Nemáte žiadne blokované hovory.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Štatistiky</string>
   <string name="callStatsDetailTitle">Podrobné štatistiky hovorov</string>
+  <string name="call_stats_incoming">Prichádzajúce: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Odchádzajúce: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Blokované: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Celkovo: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Celkovo: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Dátum začiatku</string>
@@ -61,5 +69,14 @@
   <string name="call_stats_reset_filter">Obnoviť časový rozsah</string>
   <string name="call_stats_sort_by_duration">Zoradiť podľa trvania hovoru</string>
   <string name="call_stats_sort_by_count">Zoradiť podľa počtu hovorov</string>
+  <string name="call_stats_title_for_number">Toto číslo</string>
+  <string name="call_stats_title_of_total">Z celkových</string>
+  <string name="call_stats_title_durations">Dĺžky hovorov</string>
+  <string name="call_stats_title_count">Počet hovorov</string>
+  <string name="call_stats_title_average_duration">Priemerné trvanie hovoru</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Váš denník hovorov neobsahuje žiadne hovory vo vybranom časovom rozsahu.</string>
+  <string name="call_recording_category_title">Nahrávanie hovorov</string>
+  <string name="call_recording_format">Formát zvuku</string>
+  <string name="call_playback_no_app_found_toast">Nenašla sa žiadna aplikácia pre prehrávanie záznamu.</string>
 </resources>
