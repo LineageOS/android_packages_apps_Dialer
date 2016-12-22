@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"رنگ ٹون اور ارتعاش"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"کانفرنس کال کا نظم کریں"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"ہنگامی نمبر"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> سیکنڈ</item>
-      <item quantity="one">1 سیکنڈ</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="other"> منٹ</item>
-      <item quantity="one">1 منٹ</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> گھنٹے</item>
-      <item quantity="one">1 گھنٹہ</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"پروفائل کی تصویر"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"کیمرا آف ہے"</string>
     <string name="child_number" msgid="4469090994612105532">"بذریعہ <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

@@ -168,24 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Skambėjimo tonas ir vibracija"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Tvarkyti konferencinį skambutį"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Pagalbos numeris"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> sekundė</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> sekundės</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> sekundės</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sekundžių</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> minutė</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> minutės</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> minutės</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minučių</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> valanda</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> valandos</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> valandos</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> valandų</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Profilio nuotrauka"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Fotoaparatas išjungtas"</string>
     <string name="child_number" msgid="4469090994612105532">"naudojant <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

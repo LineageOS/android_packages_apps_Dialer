@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Toque e vibração"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Gerenciar teleconferência"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Número de emergência"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> segundos</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> segundos</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> minutos</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minutos</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> horas</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> horas</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Foto do perfil"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Câmera desligada"</string>
     <string name="child_number" msgid="4469090994612105532">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Қоңырау әуені және діріл"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Конференциялық қоңырауды басқару"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Төтенше нөмір"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> секунд</item>
-      <item quantity="one">1 секунд</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> минут</item>
-      <item quantity="one">1 минут</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> сағат</item>
-      <item quantity="one">1 сағат</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Профиль фотосуреті"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Камераны өшіру"</string>
     <string name="child_number" msgid="4469090994612105532">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> арқылы"</string>

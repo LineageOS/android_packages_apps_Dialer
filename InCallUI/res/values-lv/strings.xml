@@ -168,21 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Zvana signāls un vibrācija"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Konferences zvana pārvaldība"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Ārkārtas numurs"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> sekunžu</item>
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> sekunde</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sekundes</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> minūšu</item>
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> minūte</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minūtes</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> stundu</item>
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> stunda</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> stundas</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Profila fotoattēls"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Kamera ir izslēgta"</string>
     <string name="child_number" msgid="4469090994612105532">"no numura <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

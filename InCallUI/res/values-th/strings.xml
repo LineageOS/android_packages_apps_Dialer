@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"เสียงเรียกเข้าและสั่น"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"จัดการการประชุมสาย"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"หมายเลขฉุกเฉิน"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> วินาที</item>
-      <item quantity="one">1 วินาที</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> นาที</item>
-      <item quantity="one">1 นาที</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ชั่วโมง</item>
-      <item quantity="one">1 ชั่วโมง</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"รูปโปรไฟล์"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"ปิดกล้อง"</string>
     <string name="child_number" msgid="4469090994612105532">"ผ่านหมายเลข <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

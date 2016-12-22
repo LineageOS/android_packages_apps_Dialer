@@ -98,7 +98,7 @@
     <string name="incall_error_supp_service_transfer" msgid="3220469890457973326">"हस्तांतर करू शकत नाही."</string>
     <string name="incall_error_supp_service_conference" msgid="3100373998543200356">"परिषद घेऊ शकत नाही."</string>
     <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"कॉल नाकारू शकत नाही."</string>
-    <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"कॉल रिलीझ करू शकत नाही."</string>
+    <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"कॉल रिलीज करू शकत नाही."</string>
     <string name="incall_call_type_label_sip" msgid="1327822795765282192">"SIP कॉल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"आणीबाणी कॉल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"रेडिओ चालू करीत आहे..."</string>
@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"रिंगटोन आणि कंपन"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"परिषद कॉल व्यवस्थापित करा"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"आणीबाणी नंबर"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> सेकंद</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> सेकंद</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> मिनिट</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> मिनिटे</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> तास</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> तास</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"प्रोफाइल फोटो"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"कॅमेरा बंद"</string>
     <string name="child_number" msgid="4469090994612105532">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> द्वारा"</string>

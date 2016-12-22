@@ -81,7 +81,7 @@
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Video"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Hlas"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Prijať"</string>
-    <string name="notification_action_dismiss" msgid="1998811618480434300">"Zatvoriť"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Odmietnuť"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Zavolať späť"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Správa"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Prebiehajúci hovor v inom zariadení"</string>
@@ -168,24 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Vyzváňací tón a vibrovanie"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Správa konferenčného hovoru"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Číslo tiesňového volania"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> sekundy</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> sekundy</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> sekúnd</item>
-      <item quantity="one">1 sekunda</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> minúty</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> minúty</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> minút</item>
-      <item quantity="one">1 minúta</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> hodiny</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> hodiny</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> hodín</item>
-      <item quantity="one">1 hodina</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Profilová fotka"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Kamera je vypnutá"</string>
     <string name="child_number" msgid="4469090994612105532">"na čísle <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

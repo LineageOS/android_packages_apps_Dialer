@@ -168,30 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"نغمة الرنين والاهتزاز"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"إدارة مكالمة جماعية"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"رقم الطوارئ"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> ثانية</item>
-      <item quantity="two">ثانيتان (<xliff:g id="COUNT">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> ثوانٍ</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> ثانية</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ثانية</item>
-      <item quantity="one">ثانية واحدة</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> دقيقة</item>
-      <item quantity="two">دقيقتان (<xliff:g id="COUNT">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> دقائق</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> دقيقة</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> دقيقة</item>
-      <item quantity="one">دقيقة واحدة</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="zero"><xliff:g id="COUNT">%d</xliff:g> ساعة</item>
-      <item quantity="two">ساعتان (<xliff:g id="COUNT">%d</xliff:g>)</item>
-      <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> ساعات</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> ساعة</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ساعة</item>
-      <item quantity="one">ساعة واحدة</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"صورة الملف الشخصي"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"تم إيقاف الكاميرا"</string>
     <string name="child_number" msgid="4469090994612105532">"عبر <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>

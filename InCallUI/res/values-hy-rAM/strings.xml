@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Ձայներանգ և թրթռոց"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Կառավարել կոնֆերանս զանգը"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Արտակարգ իրավիճակի համար"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> վայրկյան</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> վայրկյան</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> րոպե</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> րոպե</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ժամ</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ժամ</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Պրոֆիլի լուսանկար"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Տեսախցիկն անջատված"</string>
     <string name="child_number" msgid="4469090994612105532">"<xliff:g id="CHILD_NUMBER">%s</xliff:g>-ի միջոցով"</string>

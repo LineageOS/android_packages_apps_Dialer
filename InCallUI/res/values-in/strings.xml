@@ -168,18 +168,6 @@
     <string name="preference_category_ringtone" msgid="6246687516643676729">"Nada dering &amp; Getar"</string>
     <string name="manageConferenceLabel" msgid="7237614418556336108">"Kelola telewicara"</string>
     <string name="emergency_call_dialog_number_for_display" msgid="7244995877625769187">"Nomor darurat"</string>
-    <plurals name="duration_seconds" formatted="false" msgid="2544699588744957418">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> detik</item>
-      <item quantity="one">1 detik</item>
-    </plurals>
-    <plurals name="duration_minutes" formatted="false" msgid="8379077285441507101">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> menit</item>
-      <item quantity="one">1 menit</item>
-    </plurals>
-    <plurals name="duration_hours" formatted="false" msgid="7420759096931824344">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> jam</item>
-      <item quantity="one">1 jam</item>
-    </plurals>
     <string name="profile_photo_description" msgid="7958198110870319358">"Foto profil"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Kamera tidak aktif"</string>
     <string name="child_number" msgid="4469090994612105532">"melalui <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
@@ -191,8 +179,8 @@
     <string name="display_address" msgid="444235484565491291">"<xliff:g id="STREET_ADDRESS">%1$s</xliff:g>, <xliff:g id="LOCALITY">%2$s</xliff:g>"</string>
     <string name="open_time_span" msgid="2762952234657271236">"<xliff:g id="OPEN_TIME">%1$s</xliff:g> - <xliff:g id="CLOSE_TIME">%2$s</xliff:g>"</string>
     <string name="opening_hours" msgid="7803506319518398380">"<xliff:g id="EARLIER_TIMES">%1$s</xliff:g>, <xliff:g id="LATER_TIME">%2$s</xliff:g>"</string>
-    <string name="opens_tomorrow_at" msgid="3567511490448488788">"Buka pukul <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
-    <string name="opens_today_at" msgid="6281212768937222891">"Hari ini buka pukul <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_tomorrow_at" msgid="3567511490448488788">"Buka jam <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
+    <string name="opens_today_at" msgid="6281212768937222891">"Hari ini buka jam <xliff:g id="OPEN_TIME">%s</xliff:g>"</string>
     <string name="closes_today_at" msgid="4822369201263491509">"Tutup pukul <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="closed_today_at" msgid="4060072663433467233">"Hari ini tutup pukul <xliff:g id="CLOSE_TIME">%s</xliff:g>"</string>
     <string name="open_now" msgid="4615706338669555999">"Buka sekarang"</string>
