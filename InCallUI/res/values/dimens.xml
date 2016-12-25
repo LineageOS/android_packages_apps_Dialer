@@ -150,4 +150,7 @@
     <dimen name="business_contact_context_detail_font_size">12sp</dimen>
 
     <dimen name="contact_context_small_photo_size">40dp</dimen>
+
+    <!-- Dimensions for DSDA switch tab -->
+    <dimen name="dsda_sub_text_marginTop">7dp</dimen>
 </resources>
