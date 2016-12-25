@@ -47,8 +47,8 @@
   <string name="speed_dial_replace">取代</string>
   <string name="speed_dial_delete">刪除</string>
   <string name="speed_dial_unassigned_dialog_title">按鍵未分配</string>
-  <string name="speed_dial_unassigned_dialog_message">數字鍵「<xliff:g id="number">%s</xliff:g>」未設定快速撥號，您現在要設定嗎?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">若要使用快速撥號，請先關閉飛行模式。</string>
+  <string name="speed_dial_unassigned_dialog_message">數字鍵「<xliff:g id="number">%s</xliff:g>」未設定快速撥號，您現在要設定嗎？</string>
+  <string name="dialog_speed_dial_airplane_mode_message">若要使用快速撥號，請先關閉飛航模式。</string>
   <string name="yes">是</string>
   <string name="no">否</string>
   <string name="incall_vibration_category_title">來電震動</string>
@@ -95,7 +95,7 @@
   <string name="call_recording_category_title">通話錄音</string>
   <string name="call_recording_format">音訊格式</string>
   <string name="call_playback_no_app_found_toast">沒有應用程式可以撥放所選擇的錄音。</string>
-  <string name="invalid_number_text">"%1$s 無法撥號。請確認號碼是否正確。"</string>
+  <string name="invalid_number_text">"%1$s 無法撥打電話。號碼是正確的嗎？"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">您可輸入電話號碼或\n搜尋您的聯絡人。</string>
   <string name="sign_in_hint_text">登入即可撥打 %1$s 電話</string>
@@ -113,7 +113,7 @@
   <string name="callerinfo_provider_auth_no">不用了，謝謝</string>
   <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> 會存取您的聯絡人，我的設定檔和 Cyanogen OS 帳戶，其中可能包括您的電子郵件地址。</string>
   <string name="callerinfo_provider_auth_learn_more">了解更多</string>
-  <string name="callerinfo_provider_auth_desc">歡迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 來識別未知的來電和阻止來電嗎？</string>
+  <string name="callerinfo_provider_auth_desc">歡迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 來識別未知的來電和封鎖來電嗎？</string>
   <string name="callerinfo_provider_auth_desc_no_spam">歡迎！您想開啟 <xliff:g id="provider_name">%s</xliff:g> 來辨識未知來電嗎？</string>
   <string name="callerinfo_provider_summary">標示未知的來電和垃圾廣告</string>
   <string name="callerinfo_provider_summary_no_spam">標示未知來電</string>
@@ -121,12 +121,12 @@
   <string name="silence_spam_summary">當收到不受歡迎的來電時不響鈴</string>
   <string name="block_hidden_title">攔截未知的電話號碼</string>
   <string name="block_hidden_summary">將隱藏號碼視為垃圾電話</string>
-  <string name="block_dialog_title">封鎖此來電者？</string>
+  <string name="block_dialog_title">是否封鎖此來電者？</string>
   <string name="block_dialog_positive">封鎖</string>
   <string name="block_dialog_negative">取消</string>
   <string name="block_dialog_description">您將永遠不會再接到此人的來電或訊息</string>
   <string name="block_dialog_report_spam">回報垃圾訊息到 <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">停用 %1$s ？</string>
+  <string name="provider_disable_title">是否停用 %1$s ？</string>
   <string name="provider_disable_message">停用 %1$s 後，您將無法顯示來電資訊。</string>
   <string name="provider_disable_spam_message">停用 %1$s 後，您將不再會有垃圾訊息保護或來電資訊。</string>
   <string name="powered_by_provider">由 <xliff:g id="provider">%s</xliff:g> 提供技術支援</string>
