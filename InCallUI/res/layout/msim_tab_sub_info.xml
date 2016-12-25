@@ -36,11 +36,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
-    android:background="@color/incall_background_color">
+    android:gravity = "center_horizontal"
+    android:background="@color/incall_banner_secondary_background_color">
 
     <TextView
         android:id="@+id/tabSubText"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"/>
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dsda_margintop"
+        android:background="@color/incall_banner_secondary_background_color"/>
 
 </LinearLayout>

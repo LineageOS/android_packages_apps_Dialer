@@ -150,4 +150,7 @@
     <dimen name="business_contact_context_detail_font_size">12sp</dimen>
 
     <dimen name="contact_context_small_photo_size">40dp</dimen>
+
+    <!-- Make DSDA cleaner -->
+    <dimen name="dsda_margintop">1dp</dimen>
 </resources>
