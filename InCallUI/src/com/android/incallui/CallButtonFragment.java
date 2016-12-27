@@ -281,6 +281,7 @@ public class CallButtonFragment
         } else if (id == R.id.overflowButton) {
             if (mOverflowPopup != null) {
                 updateRecordMenu();
+                updateMergeCallsMenuItem();
                 mOverflowPopup.show();
             }
         } else if (id == R.id.manageVideoCallConferenceButton) {
@@ -314,6 +315,13 @@ public class CallButtonFragment
         if (item != null) {
             item.setTitle(((InCallActivity) getActivity()).isCallRecording() ?
                     R.string.menu_stop_record : R.string.menu_start_record);
+        }
+    }
+
+    private void updateMergeCallsMenuItem() {
+        MenuItem item = mOverflowPopup.getMenu().findItem(BUTTON_MERGE);
+        if (item != null) {
+            item.setEnabled(mMergeButton.isEnabled());
         }
     }
 
