@@ -541,8 +541,10 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
             mCallTimer.cancel();
         } else {
             final long callStart = mPrimary.getConnectTimeMillis();
-            final long duration = System.currentTimeMillis() - callStart;
-            ui.setPrimaryCallElapsedTime(true, duration);
+            if (callStart > 0) {
+                final long duration = System.currentTimeMillis() - callStart;
+                ui.setPrimaryCallElapsedTime(true, duration);
+            }
         }
     }
 
