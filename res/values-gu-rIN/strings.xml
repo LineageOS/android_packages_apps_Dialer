@@ -150,7 +150,7 @@
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"સંપર્કો શોધો"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"નંબર ઉમેરો અથવા સંપર્કો શોધો"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"તમારો કૉલ ઇતિહાસ ખાલી છે"</string>
-    <string name="call_log_all_empty_action" msgid="9093210119068366147">"એક કૉલ કરો"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"કૉલ કરો"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"તમારી પાસે કોઇ છૂટેલાં કૉલ્સ નથી."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"તમારું વૉઇસમેઇલ ઇનબોક્સ ખાલી છે."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"તમારું વૉઇસમેઇલ આર્કાઇવ ખાલી છે."</string>
