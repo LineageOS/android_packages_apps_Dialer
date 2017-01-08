@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa3479d7_d59bd870",
+        "filename": "res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2017-01-08T07:19:46Z",
+      "side": 1,
+      "message": "\u0027Airplane\u0027, not \u0027Aeroplane\u0027",
+      "revId": "b0335bb3751dd6ce00fdd2b4de70c4132a149ec5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
