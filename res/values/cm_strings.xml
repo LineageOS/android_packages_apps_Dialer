@@ -97,4 +97,15 @@
     <string name="wb_amr_format" translatable="false">AMR-WB</string>
     <string name="aac_format" translatable="false">AAC</string>
     <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
+
+    <!-- Speed Dial -->
+    <string name="speed_dial_settings">Speed dial settings</string>
+    <string name="speed_dial_not_set">(not set)</string>
+    <string name="speed_dial_replace">Replace</string>
+    <string name="speed_dial_delete">Delete</string>
+    <string name="speed_dial_unassigned_dialog_title">Key unassigned</string>
+    <string name="speed_dial_unassigned_dialog_message">No speed dial action is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off airplane mode</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
