@@ -240,7 +240,7 @@
     <item msgid="6177579030803486015">"Uzun"</item>
   </string-array>
     <string name="respond_via_sms_setting_title" msgid="1318281521087951580">"Tezkor javoblar"</string>
-    <string name="call_settings_label" msgid="313434211353070209">"Qo‘ng‘iroqlar"</string>
+    <string name="call_settings_label" msgid="313434211353070209">"Chaqiruvlar"</string>
     <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"Chaqiruvlarni bloklash"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"Qo‘ng‘iroqlarni bloklash o‘chirilgan"</string>
     <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"Oxirgi 48 soat ichida ushbu telefon orqali favqulodda xizmatlar bilan bog‘lanilganligi uchun qo‘ng‘iroqlarni bloklash o‘chirib qo‘yildi. 48 soatlik muddat tugagandan so‘ng bu avtomatik qayta yoqiladi."</string>
