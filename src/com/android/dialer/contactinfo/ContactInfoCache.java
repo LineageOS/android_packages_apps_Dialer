@@ -28,8 +28,8 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.LinkedList;
 
 /**
- * This is a cache of contact details for the phone numbers in the c all log. The key is the
- * phone number with the country in which teh call was placed or received. The content of the
+ * This is a cache of contact details for the phone numbers in the call log. The key is the
+ * phone number with the country in which the call was placed or received. The content of the
  * cache is expired (but not purged) whenever the application comes to the foreground.
  *
  * This cache queues request for information and queries for information on a background thread,
