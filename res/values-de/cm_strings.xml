@@ -79,4 +79,15 @@
   <string name="call_recording_category_title">Anrufaufzeichnung</string>
   <string name="call_recording_format">Aufnahmeformat</string>
   <string name="call_playback_no_app_found_toast">Für die Wiedergabe der ausgewählten Aufnahme konnte keine App gefunden werden.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Schnellwahl-Einstellungen</string>
+  <string name="speed_dial_not_set">(nicht belegt)</string>
+  <string name="speed_dial_replace">Ersetzen</string>
+  <string name="speed_dial_delete">Löschen</string>
+  <string name="speed_dial_unassigned_dialog_title">Taste nicht belegt</string>
+  <string name="speed_dial_unassigned_dialog_message">Es ist keine Rufnummer für die Taste \'<xliff:g id="number">%s</xliff:g>\' hinterlegt. Soll jetzt eine anglegt werden?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Um die Schnellwahltasten zu nutzen, muss zu erst die Flugzeugmodus deaktiviert werden.</string>
+  <string name="yes">Ja</string>
+<string name="no">Nein</string>
+
 </resources>
