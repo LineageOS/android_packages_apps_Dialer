@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">फॉरवर्ड लुकअप प्रदाता</string>
   <string name="people_lookup_provider_title">लोक लुकअप प्रदाता</string>
   <string name="reverse_lookup_provider_title">रिव्हर्स लुकअप प्रदाता</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">सेंज चायनिस(CN)</string>
   <string name="call_log_show_all_slots">सर्व सिम्स</string>
   <string name="call_log_all_calls_header">सर्व कॉल्स</string>
   <string name="call_log_blacklist_header">केवळ अवरोधित कॉल्स</string>

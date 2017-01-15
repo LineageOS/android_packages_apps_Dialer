@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">Fournisseur de recherche directe</string>
   <string name="people_lookup_provider_title">Fournisseur de données sur les appelants</string>
   <string name="reverse_lookup_provider_title">Fournisseur de recherche inversée</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn chinois (CN)</string>
   <string name="call_log_show_all_slots">Tous les SIMs</string>
   <string name="call_log_all_calls_header">Tous les appels</string>
   <string name="call_log_blacklist_header">Appels bloqués uniquement</string>

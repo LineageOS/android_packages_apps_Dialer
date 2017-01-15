@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 Xiao-Long Chen <chillermillerlong@hotmail.com>
+ * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +19,6 @@ package com.android.dialer.lookup;
 
 import com.android.dialer.calllog.ContactInfo;
 import com.android.dialer.lookup.auskunft.AuskunftReverseLookup;
-import com.android.dialer.lookup.cyngn.CyngnChineseReverseLookup;
 import com.android.dialer.lookup.dastelefonbuch.TelefonbuchReverseLookup;
 import com.android.dialer.lookup.gebeld.GebeldReverseLookup;
 import com.android.dialer.lookup.opencnam.OpenCnamReverseLookup;
@@ -54,8 +54,6 @@ public abstract class ReverseLookup {
                 INSTANCE = new YellowPagesReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_ZABASEARCH)) {
                 INSTANCE = new ZabaSearchReverseLookup(context);
-            } else if (provider.equals(LookupSettings.RLP_CYNGN_CHINESE)) {
-                INSTANCE = new CyngnChineseReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)) {
                 INSTANCE = new TelefonbuchReverseLookup(context);
             } else if (provider.equals(LookupSettings.RLP_GEBELD)) {
@@ -82,9 +80,6 @@ public abstract class ReverseLookup {
             return true;
         } else if (provider.equals(LookupSettings.RLP_ZABASEARCH)
                 && INSTANCE instanceof ZabaSearchReverseLookup) {
-            return true;
-        } else if (provider.equals(LookupSettings.RLP_CYNGN_CHINESE)
-                && INSTANCE instanceof CyngnChineseReverseLookup) {
             return true;
         } else if (provider.equals(LookupSettings.RLP_DASTELEFONBUCH)
                 && INSTANCE instanceof TelefonbuchReverseLookup) {

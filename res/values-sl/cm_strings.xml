@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">Ponudnik iskanja naprej</string>
   <string name="people_lookup_provider_title">Ponudnik iskanja ljudi</string>
   <string name="reverse_lookup_provider_title">Ponudnik obratnega iskanja</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <string name="speed_dial_edit_title">Uredi hitro klicanje <xliff:g id="index" example="2">%1$d</xliff:g></string>
   <string name="speed_dial_input_hint">Vnesite številko</string>
   <string name="call_log_show_all_slots">Vse kartice SIM</string>

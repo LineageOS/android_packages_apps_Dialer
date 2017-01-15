@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">Lekuen bilaketarako hornitzailea</string>
   <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
   <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn txinatarra (CN)</string>
   <string name="speed_dial_edit_title">Editatu <xliff:g id="index" example="2">%1$d</xliff:g> markaketa azkarra</string>
   <string name="speed_dial_input_hint">Idatzi zenbaki bat</string>
   <string name="call_log_show_all_slots">SIM guztiak</string>

@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">முன்னோக்கு தேடல் வழங்குநர்</string>
   <string name="people_lookup_provider_title">மக்கள் தேடல் வழங்குநர்</string>
   <string name="reverse_lookup_provider_title">பின்னோக்கு தேடல் வழங்குநர்</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <string name="call_log_show_all_slots">அனைத்து SIMகள்</string>
   <string name="call_log_all_calls_header">அனைத்து அழைப்புகள்</string>
   <string name="call_log_blacklist_header">தடுக்கப்பட்ட அழைப்புகள் மட்டும்</string>

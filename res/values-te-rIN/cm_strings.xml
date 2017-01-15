@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">ముందుకు శోధన ప్రధాత</string>
   <string name="people_lookup_provider_title">వ్యక్తుల శోధన ప్రధాత</string>
   <string name="reverse_lookup_provider_title">వ్యతిరేకదిశ శోధన ప్రదాత</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
   <string name="call_log_show_all_slots">అన్ని SIMలు</string>
   <string name="call_log_all_calls_header">అన్ని కాలులు</string>
   <string name="call_log_blacklist_header">నిరోధించబడిన కాల్స్ మాత్రమే</string>
