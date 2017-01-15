@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">Platssökningstjänst</string>
   <string name="people_lookup_provider_title">Leverantör för personsökning</string>
   <string name="reverse_lookup_provider_title">Leverantör för omvänd sökning</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Kinesiska (CN)</string>
   <string name="call_log_show_all_slots">Alla SIM</string>
   <string name="call_log_all_calls_header">Alla samtal</string>
   <string name="call_log_blacklist_header">Endast blockerade samtal</string>

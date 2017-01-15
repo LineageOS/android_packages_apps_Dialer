@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
   <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
   <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Cina (CN)</string>
   <string name="speed_dial_edit_title">Sunting panggilan cepat <xliff:g id="index" example="2">%1$d </xliff:g></string>
   <string name="speed_dial_input_hint">Silahkan masukkan nomor</string>
   <string name="call_log_show_all_slots">Semua SIM</string>

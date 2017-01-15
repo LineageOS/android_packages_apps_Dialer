@@ -116,14 +116,6 @@ public class LookupSettingsFragment extends PreferenceFragment
         String[] entries = res.getStringArray(R.array.reverse_lookup_provider_names);
         String[] values = res.getStringArray(R.array.reverse_lookup_providers);
 
-        if (isPackageInstalled(getString(R.string.cyngn_reverse_lookup_provider_package))) {
-            entries = Arrays.copyOf(entries, entries.length + 1);
-            values = Arrays.copyOf(values, values.length + 1);
-
-            entries[entries.length - 1] = getString(R.string.cyngn_reverse_lookup_provider_name);
-            values[values.length - 1] = getString(R.string.cyngn_reverse_lookup_provider_value);
-        }
-
         mReverseLookupProvider.setEntries(entries);
         mReverseLookupProvider.setEntryValues(values);
     }

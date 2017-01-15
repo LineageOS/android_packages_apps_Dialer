@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">Poskytovatel předběžného vyhledávání</string>
   <string name="people_lookup_provider_title">Poskytovatel vyhledávání osob</string>
   <string name="reverse_lookup_provider_title">Poskytovatel zpětného vyhledávání</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Čína (CN)</string>
   <string name="speed_dial_edit_title">Upravit rychlé vytáčení <xliff:g id="index" example="2">%1$d</xliff:g></string>
   <string name="speed_dial_input_hint">Zadejte číslo</string>
   <string name="call_log_show_all_slots">Všechny SIM karty</string>

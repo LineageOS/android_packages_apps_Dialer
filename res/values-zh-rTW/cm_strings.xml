@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">正向搜尋供應商</string>
   <string name="people_lookup_provider_title">人名搜尋供應商</string>
   <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn 中國 (CN)</string>
   <string name="speed_dial_edit_title">編輯快速撥號 <xliff:g id="index" example="2">%1$d</xliff:g></string>
   <string name="speed_dial_input_hint">請輸入數字</string>
   <string name="call_log_show_all_slots">所有 SIM 卡</string>

@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">موفر البحث إلى الأمام</string>
   <string name="people_lookup_provider_title">موفر بحث عن أشخاص</string>
   <string name="reverse_lookup_provider_title">موفر البحث العكسي</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn الصينية (CN)</string>
   <string name="call_log_show_all_slots">جميع شرائح SIM</string>
   <string name="call_log_all_calls_header">جميع المكالمات</string>
   <string name="call_log_blacklist_header">المكالمات المحظورة فقط</string>

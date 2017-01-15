@@ -36,8 +36,6 @@
   <string name="forward_lookup_provider_title">ผู้ให้บริการการค้นหาการส่งต่อ</string>
   <string name="people_lookup_provider_title">ผู้ให้บริการค้นหาบุคคล</string>
   <string name="reverse_lookup_provider_title">ผู้ให้บริการค้นหาย้อนกลับ</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn ภาษาจีน (CN)</string>
   <string name="call_log_show_all_slots">ทุกซิม</string>
   <string name="call_log_all_calls_header">การใช้สายทั้งหมด</string>
   <string name="call_log_blacklist_header">บล็อคการโทรเท่านั้น</string>
