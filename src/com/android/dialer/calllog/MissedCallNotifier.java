@@ -148,6 +148,7 @@ public class MissedCallNotifier {
                 .setContentIntent(createCallLogPendingIntent())
                 .setAutoCancel(true)
                 .setWhen(timeMs)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setDeleteIntent(createClearMissedCallsPendingIntent())
                 // Include a public version of the notification to be shown when the missed call
                 // notification is shown on the user's lock screen and they have chosen to hide
