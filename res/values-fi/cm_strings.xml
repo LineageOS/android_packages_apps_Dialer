@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Puhelun äänitys</string>
   <string name="call_recording_format">Audion muoto</string>
   <string name="call_playback_no_app_found_toast">Sovellusta jolla voi toistaa valitun tallenteen ei ole asennettu.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Pikavalinta-asetukset</string>
+  <string name="speed_dial_not_set">(ei määritetty)</string>
+  <string name="speed_dial_replace">Korvaa</string>
+  <string name="speed_dial_delete">Poista</string>
+  <string name="speed_dial_unassigned_dialog_title">Näppäinta ei määritetty</string>
+  <string name="speed_dial_unassigned_dialog_message">Mitään pikavalintaa ei ole määritetty numerolle \'<xliff:g id="number">%s</xliff:g>\'. Haluatko määrittää pikavalinnan nyt?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Käyttääksesi pikavalintaa, ota lentokonetila pois käytöstä</string>
+  <string name="yes">Kyllä</string>
+  <string name="no">Ei</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Sinulla ei ole vastattuja puheluita.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Sinulla ei ole soitettuja puheluita.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Puhelulokisi on tyhjä</string>
+  <string name="calllog_search_hint">Etsi puhelulokista</string>
+  <string name="no_call_log">Ei puhelulokia</string>
+  <string name="clear">Tyhjennä</string>
+  <string name="description_clear_search">Tyhjennä haku</string>
+  <string name="video_call_welcome_title"><b>Tervetuloa uuteen Videopuhelu-sovellukseen</b></string>
+  <string name="video_call_welcome_message">Me kaikki rakastamme kuulla tutun äänen linjalla, mutta kasvotusten puhuminen on niin paljon parempi! Tässä kaikki mitä sinun tulee tietää käyttääksesi reaaliaikaista (tai Facetime?) yhteyttä:\n Tarvitset 4G LTE- tai Wi-Fi-yhteyden\n Laitteen jolla soitat tulee tukea videopuheluita\n Videopuhelut käyttävät nopeaa dataa\n Voit myös muuttaa äänipuhelun videopuheluksi\n\n Lue lisää osoitteesta <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+  <string name="video_call_welcome_message_repeat">Näytä tämä viesti joka kerta</string>
+  <string name="toast_change_video_call_failed">Ei voida muuttaa videopuheluksi, virheellinen numeron muoto</string>
+  <string name="toast_make_video_call_failed">Ei voida soittaa videopuhelua, virheellinen numeron muoto</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videopuhelu, näytä minut</string>
+  <string name="overflowRXCallMenuItemText">Videopuhelu, piilota minut</string>
+  <string name="overflowVOCallMenuItemText">Äänipuhelu</string>
+  <string name="video_call">Videopuhelu</string>
+  <string name="call_data_info_label">Puhelu- ja datankäyttöajastimet</string>
+  <string name="call_data_info_description">Äänipuheluiden käyttöaika ja datan käyttöaika</string>
+  <string name="alert_call_over_wifi">Puhelut soitetaan Wi-Fin kautta.</string>
+  <string name="alert_call_no_cellular_coverage">Matkapuhelinverkkoa ei saatavilla. Yhdistä Wi-Fiin soittaaksesi puheluita</string>
+  <string name="alert_user_connect_to_wifi_for_call">Yhdistä Wi-Fiin soittaaksesi puheluita.</string>
 </resources>

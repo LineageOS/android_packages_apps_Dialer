@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Kõne salvestamine</string>
   <string name="call_recording_format">Heli formaat</string>
   <string name="call_playback_no_app_found_toast">Salvestuse taasesitamiseks ei leidu rakendust.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Kiirvalimise seaded</string>
+  <string name="speed_dial_not_set">(määramata)</string>
+  <string name="speed_dial_replace">Muuda</string>
+  <string name="speed_dial_delete">Kustuta</string>
+  <string name="speed_dial_unassigned_dialog_title">Number määramata</string>
+  <string name="speed_dial_unassigned_dialog_message">Kiirvalik numbrile \'<xliff:g id="number">%s</xliff:g>\' on määramata. Kas soovid toimingu nüüd määrata?</string>
+  <string name="yes">Jah</string>
+  <string name="no">Ei</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

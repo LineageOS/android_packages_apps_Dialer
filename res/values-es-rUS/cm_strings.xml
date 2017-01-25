@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Grabación de llamadas</string>
   <string name="call_recording_format">Formato de audio</string>
   <string name="call_playback_no_app_found_toast">No se encontró una aplicación para la reproducción de la grabación seleccionada.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Ajustes de marcación rápida</string>
+  <string name="speed_dial_not_set">(no definido)</string>
+  <string name="speed_dial_replace">Reemplazar</string>
+  <string name="speed_dial_delete">Eliminar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla sin asignar</string>
+  <string name="speed_dial_unassigned_dialog_message">La tecla \'<xliff:g id="number">%s</xliff:g>\' no tiene una acción de marcación rápida asignada. ¿Quieres asignar una acción ahora?</string>
+  <string name="yes">Sí</string>
+  <string name="no">No</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

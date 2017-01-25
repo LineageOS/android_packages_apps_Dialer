@@ -79,4 +79,17 @@
   <string name="call_recording_category_title">Запись вызова</string>
   <string name="call_recording_format">Формат аудио</string>
   <string name="call_playback_no_app_found_toast">Не найдено приложение, которое может воспроизвести выбранную запись.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Настройки быстрого набора</string>
+  <string name="speed_dial_not_set">(не установлено)</string>
+  <string name="speed_dial_replace">Изменить</string>
+  <string name="speed_dial_delete">Удалить</string>
+  <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
+  <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Присвоить?</string>
+  <string name="yes">Да</string>
+  <string name="no">Нет</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

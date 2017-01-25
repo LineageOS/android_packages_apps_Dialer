@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Gravação de chamada</string>
   <string name="call_recording_format">Formato de som</string>
   <string name="call_playback_no_app_found_toast">Não foi encontrada nenhuma aplicação para reproduzir a gravação selecionada.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Definições de marcação rápida</string>
+  <string name="speed_dial_not_set">(não definido)</string>
+  <string name="speed_dial_replace">Substituir</string>
+  <string name="speed_dial_delete">Apagar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla não atribuída</string>
+  <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de marcação rápida está atribuída à tecla número \'<xliff:g id="number">%s</xliff:g>\'. Quer atribuir uma ação agora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcação rápida, primeiro desligue o modo de voo</string>
+  <string name="yes">Sim</string>
+  <string name="no">Não</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Não tem chamadas recebidas.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Não tem chamadas efetuadas.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">O registo de chamadas está vazio</string>
+  <string name="calllog_search_hint">Pesquisar registo de chamadas</string>
+  <string name="no_call_log">Sem registos de chamadas</string>
+  <string name="clear">Limpar</string>
+  <string name="description_clear_search">Limpar pesquisa</string>
+  <string name="video_call_welcome_title"><b>Bem-vindo ao novo Marcador de Chamadas de Vídeo</b></string>
+  <string name="video_call_welcome_message">Todos nós gostamos de ouvir aquela voz familiar do outro lado da linha, mas falar cara a cara é muito melhor! Aqui está o que você deve saber para realizar as suas ligações em tempo real:\n Precisará de estar ligado em 4G LTE ou Wi-Fi\n O dispositivo para o qual pretende ligar também tem de ser compatível com chamadas de vídeo\n As chamadas de vídeo utilizam a sua ligação de dados\n Poderá alternar entre chamadas de voz e chamadas de vídeo\n\n Vá a <a>https://support.t-mobile.com/docs/DOC-23574</a> para obter mais informações.</string>
+  <string name="video_call_welcome_message_repeat">Mostrar esta mensagem da próxima vez</string>
+  <string name="toast_change_video_call_failed">Não é possível alterar para chamada de vídeo. Formato de número incorreto.</string>
+  <string name="toast_make_video_call_failed">Não é possível realizar a chamada de vídeo. Formato de número incorreto.</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Chamada de vídeo, mostrar-me</string>
+  <string name="overflowRXCallMenuItemText">Chamada de vídeo, esconder-me</string>
+  <string name="overflowVOCallMenuItemText">Chamada de voz</string>
+  <string name="video_call">Chamada de vídeo</string>
+  <string name="call_data_info_label">Temporizadores de utilização em chamadas/dados</string>
+  <string name="call_data_info_description">Tempo de utilização em chamadas de voz e tempo de utilização em dados</string>
+  <string name="alert_call_over_wifi">As chamadas serão feitas através de Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Não há rede celular disponível. Ligue-se a uma rede Wi-Fi para realizar chamadas.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Ligue-se ao Wi-Fi para realizar chamadas.</string>
 </resources>

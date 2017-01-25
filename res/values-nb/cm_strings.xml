@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Samtaleinnspilling</string>
   <string name="call_recording_format">Lydformat</string>
   <string name="call_playback_no_app_found_toast">Ingen apper kan spille av den valgte innspillingen.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
+  <string name="speed_dial_not_set">(ikke angitt)</string>
+  <string name="speed_dial_replace">Erstatt</string>
+  <string name="speed_dial_delete">Slett</string>
+  <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
+  <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">For å bruke hurtigoppringing må du skru av flymodus</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nei</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Du har ingen innkommende anrop.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Du har ingen utgående anrop.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Samtaleloggen din er tom</string>
+  <string name="calllog_search_hint">Søk i samtaleloggen</string>
+  <string name="no_call_log">Ingen samtalelogg</string>
+  <string name="clear">Tøm</string>
+  <string name="description_clear_search">Tøm søk</string>
+  <string name="video_call_welcome_title"><b>Velkommen til den nye Videoanrop-oppringeren</b></string>
+  <string name="video_call_welcome_message">Vi elsker alle å høre den familiestemmen på slutten av linjen, men å snakke ansikt til ansikt er så mye bedre! Her er hva du burde vite for å få i gang dine sanntids (eller FaceTime?) anrop:\n Du må være koblet til et 4G LTE nettverk eller en Wi-Fi kobling\n Enheten du skal ringe må også være videoanrop-kompatibel\n Videoanrop bruker høyhastighetsnettverket ditt\n Du kan også oppgradere et stemmeanrop til et videoanrop\n\n Se <a>https://support.t-mobile.com/docs/DOC-23574</a> for mer informasjon.</string>
+  <string name="video_call_welcome_message_repeat">Vis denne meldingen hver gang</string>
+  <string name="toast_change_video_call_failed">Kunne ikke bytte til videoanrop, feil nummer format</string>
+  <string name="toast_make_video_call_failed">Kunne ikke sette opp videoanrop, feil nummer format</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videoanrop, vis meg</string>
+  <string name="overflowRXCallMenuItemText">Videoanrop, skjul meg</string>
+  <string name="overflowVOCallMenuItemText">Taleanrop</string>
+  <string name="video_call">Videoanrop</string>
+  <string name="call_data_info_label">Taleanrop og data tidsstatistikk</string>
+  <string name="call_data_info_description">Hvor mye tid brukt på taleanrop og på bruk av data</string>
+  <string name="alert_call_over_wifi">Anrop gjøres over Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Ingen mobilnettverk tilgjengelig. Koble til tilgjengelige Wi-Fi til å ringe.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Koble til Wi-Fi for å ringe.</string>
 </resources>

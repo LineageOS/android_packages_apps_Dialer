@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Enregistrament de trucades</string>
   <string name="call_recording_format">Format d\'àudio</string>
   <string name="call_playback_no_app_found_toast">Es pot trobar cap aplicació per a la reproducció de la gravació seleccionada.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Ajustaments de trucada ràpida</string>
+  <string name="speed_dial_not_set">(no configurat)</string>
+  <string name="speed_dial_replace">Substitueix</string>
+  <string name="speed_dial_delete">Esborra</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla no assignada</string>
+  <string name="speed_dial_unassigned_dialog_message">No hi ha una acció de trucada ràpida assignada a la tecla número \'<xliff:g id="number">%s</xliff:g>\'. Vols assignar una acció ara?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Per utilitzar la trucada ràpida, primer has d\'apagar el mode avió</string>
+  <string name="yes">Sí</string>
+  <string name="no">No</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">No tens trucades entrants.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">No tens trucades sortints.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">El teu registre de trucades està buit</string>
+  <string name="calllog_search_hint">Cerca al registre de trucades</string>
+  <string name="no_call_log">No hi ha registre de trucades</string>
+  <string name="clear">Esborra</string>
+  <string name="description_clear_search">Neteja la cerca</string>
+  <string name="video_call_welcome_title"><b>Benvingut al nou marcador de vídeo trucades</b></string>
+  <string name="video_call_welcome_message">A tots ens agrada sentir aquella veu familiar a l\'altre costat de la línia, però parlar cara a cara és molt millor! Això és el que cal saber per aconseguir fer funcionar la teva connexió en temps real (o FaceTime?):\n Necessitaràs estar en 4G LTE o una connexió Wi-Fi\n El dispositiu on estàs trucant també ha de ser compatible amb vídeo trucades\n Les vídeo trucades utilitzen les teves dades a alta velocitat\n També pots millorar una trucada de veu a una vídeo trucada\n\n Comprova-ho a <a>https://support.t-mobile.com/docs/DOC-23574</a> per a més informació.</string>
+  <string name="video_call_welcome_message_repeat">Mostra aquest missatge cada vegada</string>
+  <string name="toast_change_video_call_failed">No es pot canviar cap a una vídeo trucada, el format del número és incorrecte</string>
+  <string name="toast_make_video_call_failed">No es poden fer trucades de vídeo, el format del número és incorrecte</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Vídeo trucada, mostra\'m</string>
+  <string name="overflowRXCallMenuItemText">Vídeo trucada, amaga\'m</string>
+  <string name="overflowVOCallMenuItemText">Trucada de veu</string>
+  <string name="video_call">Vídeotrucada</string>
+  <string name="call_data_info_label">Temporitzadors d\'ús de trucades/dates</string>
+  <string name="call_data_info_description">Temps de l\'ús de trucades de veu i temps d\'ús de dades</string>
+  <string name="alert_call_over_wifi">Les trucades es faran utilitzant Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">No hi ha cap xarxa mòbil disponible. Connecta als Wi-Fi disponibles per a fer trucades.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Connecta al Wi-Fi per fer trucades.</string>
 </resources>

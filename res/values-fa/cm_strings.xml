@@ -62,4 +62,17 @@
   <string name="call_stats_sort_by_duration">مرتب‌سازی براساس مدت تماس</string>
   <string name="call_stats_sort_by_count">مرتب‌سازی براساس تعداد تماس</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">تنظیمات تماس سریع</string>
+  <string name="speed_dial_not_set">(تنظیم نشده)</string>
+  <string name="speed_dial_replace">جایگزین کردن</string>
+  <string name="speed_dial_delete">حذف</string>
+  <string name="speed_dial_unassigned_dialog_title">کلید تعیین‌نشده</string>
+  <string name="speed_dial_unassigned_dialog_message">هیچ عمل تماس سریعی به کلید «<xliff:g id="number">%s</xliff:g>» اختصاص داده نشده است. آیا اکنون یک عمل را اختصاص می‌دهید؟</string>
+  <string name="yes">بله</string>
+  <string name="no">خیر</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

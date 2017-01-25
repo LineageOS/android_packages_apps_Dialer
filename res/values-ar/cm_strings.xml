@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">تسجيل المكالمات</string>
   <string name="call_recording_format">تنسيق الصوت</string>
   <string name="call_playback_no_app_found_toast">تعذر العثور على أي تطبيق لتشغيل التسجيل المحدد.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">إعدادات الاتصال السريع</string>
+  <string name="speed_dial_not_set">(لم يتم تعيين)</string>
+  <string name="speed_dial_replace">استبدال</string>
+  <string name="speed_dial_delete">حذف</string>
+  <string name="speed_dial_unassigned_dialog_title">المفتاح غير معين</string>
+  <string name="speed_dial_unassigned_dialog_message">لم يتم تعيين أي إجراء اتصال سريع للمفتاح الرقم \'<xliff:g id="number">%s</xliff:g>\'. هل تريد تعيين إجراء الآن؟</string>
+  <string name="yes">نعم</string>
+  <string name="no">لا</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

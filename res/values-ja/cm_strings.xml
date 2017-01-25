@@ -79,4 +79,17 @@
   <string name="call_recording_category_title">通話の録音</string>
   <string name="call_recording_format">音声フォーマット</string>
   <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">スピードダイヤルの設定</string>
+  <string name="speed_dial_not_set">（未設定）</string>
+  <string name="speed_dial_replace">書き換える</string>
+  <string name="speed_dial_delete">削除</string>
+  <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
+  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
+  <string name="yes">はい</string>
+  <string name="no">いいえ</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

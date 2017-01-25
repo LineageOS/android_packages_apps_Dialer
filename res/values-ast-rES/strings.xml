@@ -682,10 +682,4 @@
   <string name="toast_cannot_write_system_settings">L\'aplicación Teléfonu nun tien permisu pa escribir nos axustes del sistema.</string>
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <!-- Accessibility announcement to indicate which call is active -->
-  <!--  for speed dial -->
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">El rexistru de llamaes ta baleru</string>
-  <!-- Add for enhance videocall ui -->
 </resources>

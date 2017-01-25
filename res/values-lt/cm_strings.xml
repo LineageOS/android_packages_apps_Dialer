@@ -62,4 +62,17 @@
   <string name="call_stats_sort_by_duration">Rūšiuoti pagal skambučių trukmę</string>
   <string name="call_stats_sort_by_count">Rūšiuoti pagal skambučių skaičių</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Greitojo rinkimo nustatymai</string>
+  <string name="speed_dial_not_set">(nenustatyta)</string>
+  <string name="speed_dial_replace">Pakeisti</string>
+  <string name="speed_dial_delete">Ištrinti</string>
+  <string name="speed_dial_unassigned_dialog_title">Klavišas nepriskirtas</string>
+  <string name="speed_dial_unassigned_dialog_message">Nėra priskirto greitojo rinkimo numerio klavišui „<xliff:g id="number">%s</xliff:g>“. Ar norite priskirtį veiksmą dabar?</string>
+  <string name="yes">Taip</string>
+  <string name="no">Ne</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

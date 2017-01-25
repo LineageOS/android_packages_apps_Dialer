@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Enregistrement des appels</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Aucune application trouvée pour la lecture de l\'enregistrement sélectionné.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Paramètres de la numérotation rapide</string>
+  <string name="speed_dial_not_set">(non défini)</string>
+  <string name="speed_dial_replace">Remplacer</string>
+  <string name="speed_dial_delete">Supprimer</string>
+  <string name="speed_dial_unassigned_dialog_title">Touche non attribuée</string>
+  <string name="speed_dial_unassigned_dialog_message">Aucune action de numérotation rapide n\'est assignée au chiffre \'<xliff:g id="number">%s</xliff:g>\'. Voulez-vous assigner une action maintenant ?</string>
+  <string name="yes">Oui</string>
+  <string name="no">Non</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

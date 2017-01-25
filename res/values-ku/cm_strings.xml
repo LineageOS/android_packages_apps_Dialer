@@ -61,4 +61,17 @@
   <string name="call_stats_sort_by_duration">ڕیزکردن بەپێی ماوەی پەیوەندی</string>
   <string name="call_stats_sort_by_count">ڕیزکردن بەپێی ژمارەی پەیوەندی</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">ڕێکبەندەکانی ژمارەگری خێرا</string>
+  <string name="speed_dial_not_set">(دانەندراوە)</string>
+  <string name="speed_dial_replace">جێگۆڕکردن</string>
+  <string name="speed_dial_delete">سڕینەوە؟</string>
+  <string name="speed_dial_unassigned_dialog_title">کلیل تەرخان نەکراوە</string>
+  <string name="speed_dial_unassigned_dialog_message">هیچ ژمارەیەک دیاری نەکراوە تەلەفۆنی خێرا \'<xliff:g id="number">%s</xliff:g>\'. Do you want to ئەتەوێت ئێستا دیاری بکەیت?</string>
+  <string name="yes">بەڵێ</string>
+  <string name="no">نەخێر</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

@@ -29,13 +29,13 @@
   <string name="lookup_settings_label">搜尋電話號碼</string>
   <string name="enable_forward_lookup_title">正向搜尋</string>
   <string name="enable_forward_lookup_summary">在撥號程式搜尋時顯示附近的地點</string>
-  <string name="enable_people_lookup_title">搜尋人名</string>
-  <string name="enable_people_lookup_summary">在撥號程式搜尋時顯示線上的人名搜尋結果</string>
+  <string name="enable_people_lookup_title">聯絡人搜尋</string>
+  <string name="enable_people_lookup_summary">在撥號程式搜尋時顯示線上的聯絡人搜尋結果</string>
   <string name="enable_reverse_lookup_title">反向搜尋</string>
   <string name="enable_reverse_lookup_summary">為未知的來電號碼搜尋聯絡人或地點資料</string>
-  <string name="forward_lookup_provider_title">正向搜尋供應商</string>
-  <string name="people_lookup_provider_title">人名搜尋供應商</string>
-  <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
+  <string name="forward_lookup_provider_title">正向搜尋提供者</string>
+  <string name="people_lookup_provider_title">聯絡人搜尋提供者</string>
+  <string name="reverse_lookup_provider_title">反向搜尋提供者</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 中國 (CN)</string>
   <string name="speed_dial_edit_title">編輯快速撥號 <xliff:g id="index" example="2">%1$d</xliff:g></string>
@@ -57,7 +57,7 @@
   <string name="call_stats_filter_from">開始日期</string>
   <string name="call_stats_filter_to">結束日期</string>
   <string name="call_stats_filter_picker_title">篩選範圍</string>
-  <string name="date_quick_selection">快速選取</string>
+  <string name="date_quick_selection">快速選擇</string>
   <string name="date_qs_currentmonth">本月</string>
   <string name="date_qs_currentquarter">本季</string>
   <string name="date_qs_currentyear">今年</string>
@@ -78,5 +78,39 @@
   <string name="recent_calls_no_items_in_range">在所選擇的時間範圍內沒有任何通話記錄。</string>
   <string name="call_recording_category_title">通話錄音</string>
   <string name="call_recording_format">音訊格式</string>
-  <string name="call_playback_no_app_found_toast">沒有應用程式可以撥放所選擇的錄音。</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">快速撥號設定</string>
+  <string name="speed_dial_not_set">(未設定)</string>
+  <string name="speed_dial_replace">取代</string>
+  <string name="speed_dial_delete">刪除</string>
+  <string name="speed_dial_unassigned_dialog_title">按鍵未分配</string>
+  <string name="speed_dial_unassigned_dialog_message">數字鍵「<xliff:g id="number">%s</xliff:g>」未設定快速撥號，您現在要設定嗎？</string>
+  <string name="dialog_speed_dial_airplane_mode_message">若要使用快速撥號，請先關閉飛航模式</string>
+  <string name="yes">是</string>
+  <string name="no">否</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">您沒有來電。</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">您沒有撥出電話。</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">沒有通話紀錄</string>
+  <string name="calllog_search_hint">搜尋通話紀錄</string>
+  <string name="no_call_log">沒有通話記錄</string>
+  <string name="clear">清除</string>
+  <string name="description_clear_search">清除搜尋</string>
+  <string name="video_call_welcome_title"><b>歡迎來到新的視訊通話撥號程式</b></string>
+  <string name="video_call_welcome_message">我們都喜歡在電話那頭聽到熟悉的聲音，但是面對面交談更好！進行即時 (或 FaceTime？) 通話前，您要知道這些：\n您的裝置需要連線至 4G LTE 或 Wi-Fi 網路\n 被您撥打的裝置也要有視訊通話功能\n 視訊通話會消耗大量數據\n 可以將語音通話升級為視訊通話。\n\n 更多詳細資訊，請參閱 <a>https://support.t-mobile.com/docs/DOC-23574</a> 。</string>
+  <string name="video_call_welcome_message_repeat">每次都顯示此訊息</string>
+  <string name="toast_change_video_call_failed">無法變更為視訊通話，數字格式不正確</string>
+  <string name="toast_make_video_call_failed">無法進行視訊通話，數字格式不正確</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">視訊通話，顯示自己</string>
+  <string name="overflowRXCallMenuItemText">視訊通話，隱藏自己</string>
+  <string name="overflowVOCallMenuItemText">語音通話</string>
+  <string name="video_call">視訊通話</string>
+  <string name="call_data_info_label">通話/數據使用計時器</string>
+  <string name="call_data_info_description">語音通話使用時間和數據使用時間</string>
+  <string name="alert_call_over_wifi">將透過 Wi-Fi 進行通話。</string>
+  <string name="alert_call_no_cellular_coverage">沒有可用的行動網路。 將連線至可用的 Wi-Fi 以撥打通話。</string>
+  <string name="alert_user_connect_to_wifi_for_call">連線至 Wi-Fi 以撥打通話。</string>
 </resources>

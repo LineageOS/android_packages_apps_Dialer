@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">കോൾ റെക്കോർഡിംഗ്</string>
   <string name="call_recording_format">ഓഡിയോ ഫോർമാറ്റ്</string>
   <string name="call_playback_no_app_found_toast">തിരഞ്ഞെടുത്തു റെക്കോർഡിംഗ് പ്ലേബാക്ക് വേണ്ടി അപ്ലിക്കേഷൻ കണ്ടെത്താൻ കഴിഞ്ഞില്ല.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">സ്പീഡ് ഡയൽ ക്രമീകരണങ്ങൾ</string>
+  <string name="speed_dial_not_set">(സജ്ജമാക്കിയിട്ടില്ല)</string>
+  <string name="speed_dial_replace">മാറ്റി പകരം വയ്ക്കുക</string>
+  <string name="speed_dial_delete">ഇല്ലാതാക്കുക</string>
+  <string name="speed_dial_unassigned_dialog_title">കീ നിയോഗിച്ചിട്ടില്ല</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' നമ്പർ കീയില്‍ വേഗ ഡയൽ നടപടി നിയോഗിച്ചിട്ടില്ല. നിങ്ങൾക്ക് ഇപ്പോൾ ഒരു പ്രവർത്തനം നിയോഗിക്കണോ?</string>
+  <string name="yes">ഉണ്ട്</string>
+  <string name="no">ഇല്ല</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

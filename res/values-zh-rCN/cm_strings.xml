@@ -48,7 +48,7 @@
   <string name="call_log_stats_title">统计</string>
   <string name="callStatsDetailTitle">通话统计详情</string>
   <string name="call_stats_incoming">来电：<xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">去电：<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">呼出：<xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">未接：<xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blocked">屏蔽：<xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">通话录音</string>
   <string name="call_recording_format">音频格式</string>
   <string name="call_playback_no_app_found_toast">没有找到可以回放所选录音的应用。</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">快速拨号设置</string>
+  <string name="speed_dial_not_set">（未设置）</string>
+  <string name="speed_dial_replace">替换</string>
+  <string name="speed_dial_delete">删除</string>
+  <string name="speed_dial_unassigned_dialog_title">按键未分配</string>
+  <string name="speed_dial_unassigned_dialog_message">快速拨号按键“<xliff:g id="number">%s</xliff:g>”尚未被使用。您是否要为它指定一个动作？</string>
+  <string name="dialog_speed_dial_airplane_mode_message">若要使用快速拨号，请先关闭飞行模式</string>
+  <string name="yes">是</string>
+  <string name="no">否</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">没有来电。</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">您尚无呼出。</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">无通话记录</string>
+  <string name="calllog_search_hint">搜索通话记录</string>
+  <string name="no_call_log">无通话记录</string>
+  <string name="clear">清除</string>
+  <string name="description_clear_search">清除搜索</string>
+  <string name="video_call_welcome_title"><b>欢迎使用新的视频通话拨号器</b></string>
+  <string name="video_call_welcome_message">我们都喜欢听到电话那头那熟悉的声音，但是“面对面”交谈岂不更好？在您进行实时（或者 FaceTime？）通话前，您应该了解：\n您的设备需要连接到 4G LTE 或 Wi-Fi 网络\n被您呼叫的设备也要支持视频通话功能\n视频通话使用您的高速数据连接\n您可以将一通语音通话升级为视频通话。\n\n更多信息请查阅 <a>https://support.t-mobile.com/docs/DOC-23574</a>。</string>
+  <string name="video_call_welcome_message_repeat">每次都显示此消息</string>
+  <string name="toast_change_video_call_failed">无法切换到视频通话，号码格式不正确</string>
+  <string name="toast_make_video_call_failed">无法进行视频通话，号码格式不正确</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">视频通话，显示自己</string>
+  <string name="overflowRXCallMenuItemText">视频通话，隐藏自己</string>
+  <string name="overflowVOCallMenuItemText">语音通话</string>
+  <string name="video_call">视频通话</string>
+  <string name="call_data_info_label">电话/数据使用计时器</string>
+  <string name="call_data_info_description">语音呼叫使用时间和数据使用时间</string>
+  <string name="alert_call_over_wifi">将通过 Wi-Fi 进行呼叫</string>
+  <string name="alert_call_no_cellular_coverage">没有可用的蜂窝网络。连接到可用的无线网络以拨打电话。</string>
+  <string name="alert_user_connect_to_wifi_for_call">连接到 Wi-Fi 网络以进行通话。</string>
 </resources>

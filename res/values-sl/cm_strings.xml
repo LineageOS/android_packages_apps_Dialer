@@ -79,4 +79,17 @@
   <string name="call_recording_category_title">Snemanje klicev</string>
   <string name="call_recording_format">Oblika zvoka</string>
   <string name="call_playback_no_app_found_toast">Za predvajanje izbranega posnetka ni bila najdena nobena aplikacija.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Nastavitve hitrega klicanja</string>
+  <string name="speed_dial_not_set">(ni nastavljeno)</string>
+  <string name="speed_dial_replace">Nadomesti</string>
+  <string name="speed_dial_delete">Izbriši</string>
+  <string name="speed_dial_unassigned_dialog_title">Nedodeljena tipka</string>
+  <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
+  <string name="yes">Da</string>
+  <string name="no">Ne</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

@@ -79,4 +79,17 @@
   <string name="call_recording_category_title">Rekaman panggilan</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Tidak ada aplikasi ditemukan untuk memutar kembali rekaman yang terpilih.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
+  <string name="speed_dial_not_set">(tidak ditetapkan)</string>
+  <string name="speed_dial_replace">Ganti</string>
+  <string name="speed_dial_delete">Hapus</string>
+  <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
+  <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditetapkan untuk tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

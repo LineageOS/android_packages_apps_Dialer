@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">કોલ રેકૉર્ડિંગ</string>
   <string name="call_recording_format">ઓડિયો ફોર્મેટ</string>
   <string name="call_playback_no_app_found_toast">કોઈ એપ્લિકેશન શોધી શકાઈ નથી રેકોર્ડિંગ પ્લેબેક માટે.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">સ્પીડ ડાયલ સેટિંગ્સ</string>
+  <string name="speed_dial_not_set">(સેટ નથી)</string>
+  <string name="speed_dial_replace">બદલાવવું</string>
+  <string name="speed_dial_delete">હટાવો</string>
+  <string name="speed_dial_unassigned_dialog_title">કિ બિનફળવાયેલ</string>
+  <string name="speed_dial_unassigned_dialog_message">નંબર કી \'<xliff:g id="number">%s</xliff:g>\' ને કોઇ સ્પીડ ડાયલ ક્રિયા ફળવાઇ નથી. શું તમારે હવે ક્રિયા ફાળવવી છે?</string>
+  <string name="yes">હા</string>
+  <string name="no">નહીં</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

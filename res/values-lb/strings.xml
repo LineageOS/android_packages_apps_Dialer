@@ -655,9 +655,4 @@
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <!-- Accessibility announcement to indicate which call is active -->
-  <!--  for speed dial -->
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <!-- Text displayed when the call log is empty. -->
-  <!-- Add for enhance videocall ui -->
 </resources>

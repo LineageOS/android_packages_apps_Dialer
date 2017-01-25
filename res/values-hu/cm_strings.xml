@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Névkeresési szolgáltató</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Kínai (CN)</string>
+  <string name="speed_dial_edit_title">Gyorstárcsázó szerkesztése: <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Adjon meg egy számot</string>
   <string name="call_log_show_all_slots">Minden SIM</string>
   <string name="call_log_all_calls_header">Minden hívás</string>
   <string name="call_log_blacklist_header">Csak blokkolt hívások</string>
+  <string name="call_log_blocked_empty">Nincsenek blokkolt hívások.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statisztikák</string>
   <string name="callStatsDetailTitle">Részletek</string>
@@ -76,4 +79,23 @@
   <string name="call_recording_category_title">Hívásrögzítés</string>
   <string name="call_recording_format">Hangformátum</string>
   <string name="call_playback_no_app_found_toast">Nem található alkalmazás a kiválasztott felvétel lejátszásához.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Gyorstárcsázó beállítások</string>
+  <string name="speed_dial_not_set">(nincs beállítva)</string>
+  <string name="speed_dial_replace">Cserél</string>
+  <string name="speed_dial_delete">Törlés</string>
+  <string name="speed_dial_unassigned_dialog_title">Nem hozzárendelt kulcs</string>
+  <string name="speed_dial_unassigned_dialog_message">Nincs gyorstárcsázási művelet hozzárendelve a következő számhoz: \"<xliff:g id="number">%s</xliff:g>\". Szeretne most hozzárendelni egy műveletet?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Gyorshívás használatához először kapcsolja ki a Repülőgép üzemmódot</string>
+  <string name="yes">Igen</string>
+  <string name="no">Nem</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nincsenek bejövő hívások.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nincsenek kimenő hívások.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Hívásnapló üres</string>
+  <string name="calllog_search_hint">Keresés a hívásnaplóban</string>
+  <string name="description_clear_search">Keresés törlése</string>
+  <!-- Add for enhance videocall ui -->
 </resources>

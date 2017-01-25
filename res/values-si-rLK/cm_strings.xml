@@ -44,4 +44,16 @@
   <string name="call_stats_sort_by_duration">ඇමතුම් කාලමාත්‍රාව අනුව සුබෙදන්න</string>
   <string name="call_stats_sort_by_count">ඇමතුම් ගණන අනුව සුබෙදන්න</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">ඉක්මන් ඩයල් කිරීමේ සැකසීම්</string>
+  <string name="speed_dial_not_set">(සකසා නැත)</string>
+  <string name="speed_dial_replace">ප්‍රතිස්ථාපනය</string>
+  <string name="speed_dial_delete">මකන්න</string>
+  <string name="speed_dial_unassigned_dialog_title">යතුර පවරා නොමැත</string>
+  <string name="yes">ඔව්</string>
+  <string name="no">නැහැ</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

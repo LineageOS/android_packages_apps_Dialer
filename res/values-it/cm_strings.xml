@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Registrazione chiamata</string>
   <string name="call_recording_format">Formato audio</string>
   <string name="call_playback_no_app_found_toast">Nessuna app trovata per la riproduzione della registrazione selezionata.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Impostazioni composizione rapida</string>
+  <string name="speed_dial_not_set">(non impostato)</string>
+  <string name="speed_dial_replace">Sostituisci</string>
+  <string name="speed_dial_delete">Elimina</string>
+  <string name="speed_dial_unassigned_dialog_title">Pulsante non assegnato</string>
+  <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero \'<xliff:g id="number">%s</xliff:g>\'. Vuoi assegnare un\'azione ora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Per utilizzare la composizione rapida, disattiva la modalità aereo</string>
+  <string name="yes">Si</string>
+  <string name="no">No</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Non ci sono chiamate in arrivo.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Non ci sono chiamate in uscita.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Il registro delle chiamate è vuoto</string>
+  <string name="calllog_search_hint">Cerca nel registro delle chiamate</string>
+  <string name="no_call_log">Nessun registro chiamate</string>
+  <string name="clear">Pulisci</string>
+  <string name="description_clear_search">Pulisci ricerca</string>
+  <string name="video_call_welcome_title"><b>Benvenuto nel nuovo dialer di videochiamate</b></string>
+  <string name="video_call_welcome_message">Tutti noi amiamo sentire una voce familiare dall\'altro lato della linea, ma parlare faccia a faccia è molto meglio! Ecco quello che devi sapere per avere una connessione pronta per le videochiamate:\nÈ necessaria una connessione 4G LTE o Wi-Fi\nIl dispositivo deve supportare le chiamate vocali\nLe videochiamate utilizzeranno una connessione dati veloce\nPotrai aggiornare una chiamata normale in una videochiamata\n\nVisita <a>https://support.t-mobile.com/docs/DOC-23574</a> per ulteriori informazioni.</string>
+  <string name="video_call_welcome_message_repeat">Mostra questo messaggio ogni volta</string>
+  <string name="toast_change_video_call_failed">Impossibile passare a videochiamata, formato del numero non corretto</string>
+  <string name="toast_make_video_call_failed">Impossibile effetuare videochiamata, formato del numero non corretto</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videochiamata, mostrami</string>
+  <string name="overflowRXCallMenuItemText">Videochiamata, nascondimi</string>
+  <string name="overflowVOCallMenuItemText">Chiamata vocale</string>
+  <string name="video_call">Video chiamata</string>
+  <string name="call_data_info_label">Timer utilizzo chiamata/dati</string>
+  <string name="call_data_info_description">Tempo utilizzo chiamata vocale e dati</string>
+  <string name="alert_call_over_wifi">Le chiamate saranno fatte via Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Nessuna connessione disponibile. Connettiti al Wi-Fi per effetuare chiamate.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Connetiti al Wi-Fi per effetuare chiamate.</string>
 </resources>

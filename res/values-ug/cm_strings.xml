@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">تېلېفون سۆزلىشىشنى ئاۋازغا ئېلىش</string>
   <string name="call_recording_format">ئاۋاز فورماتى</string>
   <string name="call_playback_no_app_found_toast">ئاۋازنى قويالايدىغان ئەپ تاپالمىدى.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">تېز نومۇر بۇراش تەڭشەكلىرى</string>
+  <string name="speed_dial_not_set">(تەڭشەلمىگەن)</string>
+  <string name="speed_dial_replace">ئالماشتۇر</string>
+  <string name="speed_dial_delete">ئۆچۈر</string>
+  <string name="speed_dial_unassigned_dialog_title">كۇنۇپكا تەقسىملەنمىگەن</string>
+  <string name="speed_dial_unassigned_dialog_message">بۇ تېز نومۇر بۇراش كۇنۇپكىسى  \'<xliff:g id="number">%s</xliff:g>\' تېخى ئىشلىتىلمىگەن، ھازىر بىر مەشغۇلاتنى بەلگىلەمسىز؟</string>
+  <string name="yes">ھەئە</string>
+  <string name="no">ياق</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

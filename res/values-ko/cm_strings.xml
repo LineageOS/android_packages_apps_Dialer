@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">통화 녹음</string>
   <string name="call_recording_format">오디오 포맷</string>
   <string name="call_playback_no_app_found_toast">선택된 녹음을 재생할 수 있는 애플리케이션을 찾을 수 없습니다.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">스피드 다이얼 설정</string>
+  <string name="speed_dial_not_set">(설정되지 않음)</string>
+  <string name="speed_dial_replace">바꾸기</string>
+  <string name="speed_dial_delete">삭제</string>
+  <string name="speed_dial_unassigned_dialog_title">할당되지 않은 키</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' 키에 스피드 다이얼 번호가 할당되어 있지 않습니다. 지금 번호를 할당할까요?</string>
+  <string name="yes">예</string>
+  <string name="no">아니오</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

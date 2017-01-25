@@ -78,4 +78,17 @@
   <string name="call_recording_category_title">Nagrywanie rozmów</string>
   <string name="call_recording_format">Format dźwięku</string>
   <string name="call_playback_no_app_found_toast">Brak aplikacji, do odtworzenia wybranej rozmowy.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Ustawienia szybkiego wybierania</string>
+  <string name="speed_dial_not_set">(nieustawione)</string>
+  <string name="speed_dial_replace">Zastąp</string>
+  <string name="speed_dial_delete">Usuń</string>
+  <string name="speed_dial_unassigned_dialog_title">Klawisz nieprzypisany</string>
+  <string name="speed_dial_unassigned_dialog_message">Brak akcji szybkiego wybierania dla przycisku numer \'<xliff:g id="number">%s</xliff:g>\'. Chcesz przypisać akcję teraz?</string>
+  <string name="yes">Tak</string>
+  <string name="no">Nie</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

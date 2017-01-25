@@ -62,4 +62,17 @@
   <string name="call_stats_sort_by_duration">Сортувати за тривалістю виклику</string>
   <string name="call_stats_sort_by_count">Сортувати за кількістю викликів</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Налаштування швидкого набору</string>
+  <string name="speed_dial_not_set">(не вказано)</string>
+  <string name="speed_dial_replace">Замінити</string>
+  <string name="speed_dial_delete">Видалити</string>
+  <string name="speed_dial_unassigned_dialog_title">Ключ непризначений</string>
+  <string name="speed_dial_unassigned_dialog_message">Клавіші «<xliff:g id="number">%s</xliff:g>» не надано номер швидкого набору. Призначити його?</string>
+  <string name="yes">Так</string>
+  <string name="no">Ні</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

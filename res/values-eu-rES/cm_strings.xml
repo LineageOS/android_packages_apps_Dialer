@@ -79,4 +79,17 @@
   <string name="call_recording_category_title">Dei grabaketa</string>
   <string name="call_recording_format">Audio formatua</string>
   <string name="call_playback_no_app_found_toast">Ezin izan da hautatutako grabaketa erreproduzitzeko aplikaziorik aurkitu.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Markaketa azkarraren ezarpenak</string>
+  <string name="speed_dial_not_set">(ezarri gabe)</string>
+  <string name="speed_dial_replace">Ordeztu</string>
+  <string name="speed_dial_delete">Ezabatu</string>
+  <string name="speed_dial_unassigned_dialog_title">Tekla esleitu gabea</string>
+  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g> teklari ez zaio kontakturik esleitu. Kontaktu bat esleitu nahi duzu orain?</string>
+  <string name="yes">Bai</string>
+  <string name="no">Ez</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

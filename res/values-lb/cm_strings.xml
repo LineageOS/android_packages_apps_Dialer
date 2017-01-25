@@ -72,4 +72,17 @@
   <string name="call_stats_title_average_duration">Duerchschnëttlech Gespréichsdauer</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
   <string name="call_recording_format">Tounformat</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Astellunge fir d\'séiert Wielen</string>
+  <string name="speed_dial_not_set">(net gesat)</string>
+  <string name="speed_dial_replace">Ersetzen</string>
+  <string name="speed_dial_delete">Läschen</string>
+  <string name="speed_dial_unassigned_dialog_title">Net zougewisen Tast</string>
+  <string name="speed_dial_unassigned_dialog_message">Der Tast \'<xliff:g id="number">%s</xliff:g>\' gouf keng Kuerzwielaktioun zougewisen. Wëlls du dat elo maachen?</string>
+  <string name="yes">Jo</string>
+  <string name="no">Nee</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Ghi âm cuộc gọi</string>
   <string name="call_recording_format">Định dạng âm thanh</string>
   <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi âm đã chọn.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Thiết đặt quay số nhanh</string>
+  <string name="speed_dial_not_set">(không thiết lập)</string>
+  <string name="speed_dial_replace">Thay thế</string>
+  <string name="speed_dial_delete">Xóa</string>
+  <string name="speed_dial_unassigned_dialog_title">Phím chưa ấn định</string>
+  <string name="speed_dial_unassigned_dialog_message">Không có thao tác quay số nhanh nào được ấn định cho phím số \'<xliff:g id="number">%s</xliff:g>\'. Bạn có muốn ấn định một thao tác bây giờ không?</string>
+  <string name="yes">Có</string>
+  <string name="no">Không</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

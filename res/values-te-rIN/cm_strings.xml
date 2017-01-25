@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">కాల్ రికార్డింగ్</string>
   <string name="call_recording_format">ఆడియో ఫార్మాట్</string>
   <string name="call_playback_no_app_found_toast">అనువర్తన ఎంపిక రికార్డింగ్ ప్లేబ్యాక్ కనుగొనబడలేదు.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">స్పీడ్ డయల్ సెట్టింగులు</string>
+  <string name="speed_dial_not_set">(సెట్ చేయబడలేదు)</string>
+  <string name="speed_dial_replace">భర్తీ చేయి</string>
+  <string name="speed_dial_delete">తొలగించు</string>
+  <string name="speed_dial_unassigned_dialog_title">కీ కేటాయించబడలేదు</string>
+  <string name="speed_dial_unassigned_dialog_message">నంబర్ కీ \'<xliff:g id="number">%s</xliff:g>\'కు ఎటువంటి త్వరిత డయల్ చర్య కేటాయించబడలేదు. మీరు ఇప్పుడు ఒక చర్యను కేటాయించాలని అనుకుంటున్నారా?</string>
+  <string name="yes">హాజరు అవుతాము అన్నవి</string>
+  <string name="no">లేదు</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

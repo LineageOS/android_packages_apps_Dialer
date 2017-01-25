@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Gespreksopname</string>
   <string name="call_recording_format">Audioformaat</string>
   <string name="call_playback_no_app_found_toast">Kan geen app vinden om de geselecteerde opname af te spelen.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Instellingen snelkiesnummers</string>
+  <string name="speed_dial_not_set">(niet ingesteld)</string>
+  <string name="speed_dial_replace">Vervangen</string>
+  <string name="speed_dial_delete">Verwijderen</string>
+  <string name="speed_dial_unassigned_dialog_title">Toets niet toegewezen</string>
+  <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nee</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
+  <string name="speed_dial_edit_title">Επεξεργασία ταχείας κλήσης <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Παρακαλώ εισάγετε έναν αριθμό</string>
   <string name="call_log_show_all_slots">Όλες οι SIM</string>
   <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
   <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
+  <string name="call_log_blocked_empty">Δεν υπάρχουν μπλοκαρισμένες κλήσεις.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Στατιστικά</string>
   <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
@@ -76,4 +79,28 @@
   <string name="call_recording_category_title">Καταγραφή κλήσεων</string>
   <string name="call_recording_format">Μορφή ήχου</string>
   <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
+  <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
+  <string name="speed_dial_replace">Αντικατάσταση</string>
+  <string name="speed_dial_delete">Διαγραφή</string>
+  <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
+  <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης</string>
+  <string name="yes">Ναι</string>
+  <string name="no">Όχι</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Δεν υπάρχουν εισερχόμενες κλήσεις.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Δεν υπάρχουν εξερχόμενες κλήσεις.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Το αρχείο καταγραφής κλήσεων είναι κενό</string>
+  <string name="calllog_search_hint">Αναζήτηση αρχείου κλήσεων</string>
+  <string name="no_call_log">Δεν υπάρχει αρχείο καταγραφής κλήσεων</string>
+  <string name="clear">Εκκαθάριση</string>
+  <string name="description_clear_search">Εκκαθάριση αναζητήσεων</string>
+  <string name="video_call_welcome_message_repeat">Εμφάνιση αυτού του μηνύματος κάθε φορά</string>
+  <string name="toast_change_video_call_failed">Δεν μπορεί να γίνει αλλαγή σε βίντεο κλήση, εσφαλμένη μορφή αριθμού</string>
+  <string name="toast_make_video_call_failed">Δεν μπορεί να γίνει κλήση βίντεο, εσφαλμένη μορφή αριθμού</string>
+  <!-- Add for enhance videocall ui -->
 </resources>

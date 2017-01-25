@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Arama kaydı</string>
   <string name="call_recording_format">Ses formatı</string>
   <string name="call_playback_no_app_found_toast">Seçili kaydı yürütmek için hiçbir uygulama bulunamadı.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Hızlı arama ayarları</string>
+  <string name="speed_dial_not_set">(ayarlanmadı)</string>
+  <string name="speed_dial_replace">Değiştir</string>
+  <string name="speed_dial_delete">Sil</string>
+  <string name="speed_dial_unassigned_dialog_title">Numara atanmadı</string>
+  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' numarasına hızlı arama işlevi atanmadı. Şimdi atamak ister misiniz?</string>
+  <string name="yes">Evet</string>
+  <string name="no">Hayır</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

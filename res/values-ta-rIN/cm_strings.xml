@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">அழைப்பைப் பதிவு செய்தல்</string>
   <string name="call_recording_format">ஆடியோ வடிவமைப்பு</string>
   <string name="call_playback_no_app_found_toast">தேர்ந்தெடுக்கப்பட்ட பதிவாக்களை மறுஇயக்கம் செய்வதற்கு எந்த பயன்பாடும் இல்லை.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">விரைவு டயல் அமைப்புகள்</string>
+  <string name="speed_dial_not_set">(not set)</string>
+  <string name="speed_dial_replace">மாற்றிடு</string>
+  <string name="speed_dial_delete">நீக்கு</string>
+  <string name="speed_dial_unassigned_dialog_title">விசை ஒதுக்கீடுசெய்யப்படவில்லை</string>
+  <string name="speed_dial_unassigned_dialog_message">எண் விசை \’<xliff:g id="number">%s</xliff:g>\'க்கு விரைவு டயல் செயல்பாடு ஒதுக்கீடு செய்யப்படவில்லை. நீங்கள் இப்போது ஒரு செயல்பாட்டை ஒதுக்கீடுசெய்ய விரும்புகிறீர்களா?</string>
+  <string name="yes">அனுமதிக்கப்பட்டது</string>
+  <string name="no">அனுமதிக்கப்படவில்லை</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

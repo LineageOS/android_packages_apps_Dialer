@@ -79,4 +79,17 @@
   <string name="call_recording_category_title">Opkaldsoptagelse</string>
   <string name="call_recording_format">Lydformat</string>
   <string name="call_playback_no_app_found_toast">Der blev ikke fundet nogen app som kunne afspille den valgte optagelse.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Indstillinger for hurtigopkald</string>
+  <string name="speed_dial_not_set">(ikke angivet)</string>
+  <string name="speed_dial_replace">Erstat</string>
+  <string name="speed_dial_delete">Slet</string>
+  <string name="speed_dial_unassigned_dialog_title">Tast ikke tildelt</string>
+  <string name="speed_dial_unassigned_dialog_message">Intet hurtigopkald tildelt tasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du tildele et opkald nu?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nej</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

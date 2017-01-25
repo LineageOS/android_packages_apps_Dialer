@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">Grabación de llamaes</string>
   <string name="call_recording_format">Formatu d\'audiu</string>
   <string name="call_playback_no_app_found_toast">Nun s\'atopó una app pa la reproducción de la grabación esbillada.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Axustes de marcáu rápidu</string>
+  <string name="speed_dial_not_set">(ensin afitar)</string>
+  <string name="speed_dial_replace">Trocar</string>
+  <string name="speed_dial_delete">Desaniciar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla ensin asignar</string>
+  <string name="speed_dial_unassigned_dialog_message">Nun hai una aición de marcáu rápidu asignada a la tecla númberu \'<xliff:g id="number">%s</xliff:g>\'. Quies asigna-y agora una aición?</string>
+  <string name="yes">Sí</string>
+  <string name="no">Non</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

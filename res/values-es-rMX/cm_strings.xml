@@ -35,4 +35,9 @@
   <string name="call_recording_category_title">Grabación de llamadas</string>
   <string name="call_recording_format">Formato de audio</string>
   <string name="call_playback_no_app_found_toast">No se encontró una aplicación para la reproducción de la grabación seleccionada.</string>
+  <!-- Speed Dial -->
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

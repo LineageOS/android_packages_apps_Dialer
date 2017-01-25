@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Anrufaufzeichnung</string>
   <string name="call_recording_format">Aufnahmeformat</string>
   <string name="call_playback_no_app_found_toast">Für die Wiedergabe der ausgewählten Aufnahme konnte keine App gefunden werden.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Kurzwahl-Einstellungen</string>
+  <string name="speed_dial_not_set">(nicht festgelegt)</string>
+  <string name="speed_dial_replace">Ersetzen</string>
+  <string name="speed_dial_delete">Löschen</string>
+  <string name="speed_dial_unassigned_dialog_title">Nicht zugewiesene Taste</string>
+  <string name="speed_dial_unassigned_dialog_message">Der Wähltaste \"<xliff:g id="number">%s</xliff:g>\" ist keine Kurzwahlaktion zugewiesen. Möchten Sie das jetzt tun?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Wenn Sie die Kurzwahl nutzen möchten, müssen Sie zunächst den Flugmodus deaktivieren</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nein</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Sie haben noch keine Anrufe erhalten.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Sie haben noch keine Anrufe getätigt.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Ihre Anrufliste ist leer</string>
+  <string name="calllog_search_hint">Anrufliste durchsuchen</string>
+  <string name="no_call_log">Kein Verlauf</string>
+  <string name="clear">Zurücksetzen</string>
+  <string name="description_clear_search">Suche zurücksetzen</string>
+  <string name="video_call_welcome_title"><b>Willkommen bei den neuen Video-Anrufen</b></string>
+  <string name="video_call_welcome_message">Jeder mag es eine vertraute Stimme am Ende der Leitung zu hören, aber ein Gespräch von Angesicht zu Angesicht ist um so viel besser! Hier ist alles was Sie wissen sollten, um Ihre Echtzeit-Verbindungen nutzen zu können:\n Sie müssen über eine 4G LTE oder WLAN-Verbindung verfügen\n Das Gerät, das Sie anrufen, muss auch Videotelefonie kompatibel sein\n Videoanrufe nutzen Ihre High-Speed-Daten.\n Sie können auch von einem Sprach- zu einem Videoanruf wechseln\n\n Rufen Sie <a>https://support.t-mobile.com/docs/DOC-23574</a> für weitere Informationen auf.</string>
+  <string name="video_call_welcome_message_repeat">Diese Meldung immer anzeigen</string>
+  <string name="toast_change_video_call_failed">Kann nicht zu Videoanruf wechseln, falsches Nummernformat</string>
+  <string name="toast_make_video_call_failed">Kann keinen Videoanruf tätigen, falsches Nummernformat</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videoanruf, zeige mich</string>
+  <string name="overflowRXCallMenuItemText">Videoanruf, zeige mich nicht</string>
+  <string name="overflowVOCallMenuItemText">Sprachanruf</string>
+  <string name="video_call">Videoanruf</string>
+  <string name="call_data_info_label">Anruf-/Datennutzungszeiten</string>
+  <string name="call_data_info_description">Sprachanruf- und Datennutzungszeit</string>
+  <string name="alert_call_over_wifi">Anrufe erfolgen über WLAN.</string>
+  <string name="alert_call_no_cellular_coverage">Kein Mobilfunknetz verfügbar. Verbinden Sie sich mit einem verfügbaren WLAN-Netzwerk, um zu telefonieren.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Verbinden Sie sich mit einem WLAN-Netzwerk, um zu telefonieren.</string>
 </resources>

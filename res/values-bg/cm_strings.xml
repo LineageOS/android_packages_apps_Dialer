@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Запис на разговор</string>
   <string name="call_recording_format">Аудио формат</string>
   <string name="call_playback_no_app_found_toast">Не е намерено приложение за възпроизвеждане на записа.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Настройки за бързо набиране</string>
+  <string name="speed_dial_not_set">(не е зададен)</string>
+  <string name="speed_dial_replace">Замени</string>
+  <string name="speed_dial_delete">Изтриване</string>
+  <string name="speed_dial_unassigned_dialog_title">Бутон без предназначение</string>
+  <string name="speed_dial_unassigned_dialog_message">Няма зададена бърза команда на бутон номер \"<xliff:g id="number">%s </xliff:g>\". Искате ли да зададете команда сега?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">За да използвате за бързо набиране, първо трябва да изключите самолетния режим</string>
+  <string name="yes">Да</string>
+  <string name="no">Не</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Вие нямате входящи повиквания.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Вие нямате изходящи повиквания.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Регистъра с повикванията е празен</string>
+  <string name="calllog_search_hint">Търсени в регистъра с повикванията</string>
+  <string name="no_call_log">Няма регистър с повиквания</string>
+  <string name="clear">Изчистване</string>
+  <string name="description_clear_search">Изчисти търсенето</string>
+  <string name="video_call_welcome_title"><b>Добре дошли в новото приложение за видео обаждане</b></string>
+  <string name="video_call_welcome_message">Ние всички обичаме да чуваме познат глас в другия край на линията, но да си говорим лице в лице е толкова по-добре! Ето какво трябва да знаете да е в реално време (или FaceTime?).Връзката ще трябва да бъде 4G LTE или Wi-Fi връзка. Устройство на, която се обаждате трябва да подържа видео обаждане. Видео разговорите използват бърза връзка за данни, също така да надстроите гласово повикване към видео повикване. За повече информация посетете <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+  <string name="video_call_welcome_message_repeat">Показвай това съобщение всеки път</string>
+  <string name="toast_change_video_call_failed">Не може да премине на видео повикване, неправилен числов формат</string>
+  <string name="toast_make_video_call_failed">Не може да се осъществи на видео повикване, неправилен числов формат</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Видео обаждане, покажи ме</string>
+  <string name="overflowRXCallMenuItemText">Видео обаждане, скрий ме</string>
+  <string name="overflowVOCallMenuItemText">Гласово повикване</string>
+  <string name="video_call">Видео повикване</string>
+  <string name="call_data_info_label">Повикване/таймери за използването на данни</string>
+  <string name="call_data_info_description">Време за ползване на гласови повиквания и данни</string>
+  <string name="alert_call_over_wifi">Разговорите ще бъдат осъщесвени през Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Няма налична клетъчна мрежа. Свържете се към налични Wi-Fi мрежа за да провеждате разговори.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Свързване към Wi-Fi мрежа за провеждате разговори.</string>
 </resources>

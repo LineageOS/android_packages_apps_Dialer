@@ -76,4 +76,17 @@
   <string name="call_recording_category_title">କଲ ରେକର୍ଡିଙ୍ଗ</string>
   <string name="call_recording_format">ଅଡିଓ ଫର୍ମାଟ୍</string>
   <string name="call_playback_no_app_found_toast">ଆପ୍ଲୀକେସନ୍ ମିଳୁନାହି ସିଲେକ୍ଟଟେଡ଼ ରେକଡିଙ୍ଗକୁ ପ୍ଲେବୟାକ୍ କରିବା ପାଇଁ.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">ଦ୍ରୁତ ଡାଏଲ୍‍ ସେଟିଂସ୍‍</string>
+  <string name="speed_dial_not_set">(ସେଟ୍‍ ହୋଇନାହିଁ)</string>
+  <string name="speed_dial_replace">ବିସ୍ଥାପନ</string>
+  <string name="speed_dial_delete">ବିଲୋପ କରନ୍ତୁ</string>
+  <string name="speed_dial_unassigned_dialog_title">କୀ ଦିଆଯାଇ ନାହିଁ</string>
+  <string name="speed_dial_unassigned_dialog_message">ନମ୍ବର କୀ \'<xliff:g id="number">%s</xliff:g>\'କୁ କୌଣସି ଦ୍ରୁତ ଡାଏଲ୍‍ ଦିଆଯାଇ ନାହିଁ। ବର୍ତ୍ତ୍ମାନ ଆପଣ ଏକ କ୍ରିୟା ଦେବାକୁ ଚାହାନ୍ତି କି?</string>
+  <string name="yes">ହଁ</string>
+  <string name="no">ନାହିଁ</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
 </resources>

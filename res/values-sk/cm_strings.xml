@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Nahrávanie hovorov</string>
   <string name="call_recording_format">Formát zvuku</string>
   <string name="call_playback_no_app_found_toast">Nenašla sa žiadna aplikácia pre prehrávanie záznamu.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Nastavenia rýchleho vytáčania</string>
+  <string name="speed_dial_not_set">(nenastavené)</string>
+  <string name="speed_dial_replace">Nahradiť</string>
+  <string name="speed_dial_delete">Odstrániť</string>
+  <string name="speed_dial_unassigned_dialog_title">Nepriradené tlačidlo</string>
+  <string name="speed_dial_unassigned_dialog_message">Nie je priradená žiadna akcia rýchleho vytáčania pre tlačidlo s číslom \'<xliff:g id="number">%s</xliff:g>\'. Chcete priradiť akciu teraz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pre použitie rýchleho vytáčania najprv vypnite režim v lietadle</string>
+  <string name="yes">Áno</string>
+  <string name="no">Nie</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nemáte žiadne prichádzajúce hovory.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nemáte žiadne odchádzajúce hovory.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Denník hovorov je prázdny</string>
+  <string name="calllog_search_hint">Prehľadať denník hovorov</string>
+  <string name="no_call_log">Žiadny denník hovorov</string>
+  <string name="clear">Vymazať</string>
+  <string name="description_clear_search">Vymazať vyhľadávanie</string>
+  <string name="video_call_welcome_title"><b>Vitajte v novom video hovore</b></string>
+  <string name="video_call_welcome_message">Všetci radi počujeme známy hlas na druhej strane linky, ale pohľad z očí do očí je oveľa lepší! Ďalej sa dočítate všetky informácie, ktoré potrebujete vedieť, aby ste mohli využívať video spojenie v reálnom čase: Musíte mať pripojenie 4G LTE alebo Wi-Fi, cez ktoré budete telefonovať. Zariadenie na ktoré budete volať musí byť kompatibilné pre video hovory. Video hovory používajú vysokorýchlostný dátový prenos. Počas hlasového hovoru môžete prepnúť na video hovor. Viac informácií na: <a>https://support.t-mobile.com/docs/DOC-23574</a></string>
+  <string name="video_call_welcome_message_repeat">Zobraziť túto správu vždy</string>
+  <string name="toast_change_video_call_failed">Nemožno zmeniť na videohovor, nesprávny formát čísla</string>
+  <string name="toast_make_video_call_failed">Nemožno uskutočniť videohovor, nesprávny formát čísla</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Video hovor, ukáž ma</string>
+  <string name="overflowRXCallMenuItemText">Video hovor, skry ma</string>
+  <string name="overflowVOCallMenuItemText">Hlasový hovor</string>
+  <string name="video_call">Videohovor</string>
+  <string name="call_data_info_label">Počítadlá hovorov/dát</string>
+  <string name="call_data_info_description">Hlasový hovor - spotrebovaný čas a dáta</string>
+  <string name="alert_call_over_wifi">Hovory budú vykonané cez WiFi.</string>
+  <string name="alert_call_no_cellular_coverage">Mobilná sieť nie je k dispozícii. Pre vykonanie hovoru sa pripojte sa k dostupnej W-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Pre vykonanie hovoru sa pripojte k Wi-Fi.</string>
 </resources>

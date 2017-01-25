@@ -79,4 +79,39 @@
   <string name="call_recording_category_title">Gravación de chamadas</string>
   <string name="call_recording_format">Formato de son</string>
   <string name="call_playback_no_app_found_toast">Non se puido atopar ningunha aplicación para reproducir a gravación seleccionada.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Axustes de marcación</string>
+  <string name="speed_dial_not_set">(sen estabelecer)</string>
+  <string name="speed_dial_replace">Substituír</string>
+  <string name="speed_dial_delete">Eliminar</string>
+  <string name="speed_dial_unassigned_dialog_title">Tecla sen asignar</string>
+  <string name="speed_dial_unassigned_dialog_message">Non se asignou ningunha función de chamada rápida á tecla <xliff:g id="number">%s</xliff:g>. Quere asignala agora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a marcación rápida, primeiro desactive o modo avión</string>
+  <string name="yes">Si</string>
+  <string name="no">Non</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Non ten chamadas recibidas.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Non ten chamadas salientes.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">O teu rexistro de chamadas está baleiro</string>
+  <string name="calllog_search_hint">Buscar no rexistro de chamadas</string>
+  <string name="no_call_log">Sen rexistros de chamadas</string>
+  <string name="clear">Despexado</string>
+  <string name="description_clear_search">Borrar a procura</string>
+  <string name="video_call_welcome_title"><b>¡Benvido ao novo marcador das videochamadas</b></string>
+  <string name="video_call_welcome_message">¡Todos amamos oír esa voz conocida ao final da línea, pero falando cara a cara é moito mellor! Esto é o que debería saber para obter seu conexión en tempo real (o FaceTime?): \n Necesitará estar en 4G LTE o unha conexión de Wi-Fi\n No dispositivo que chama tambén debe ser compatible con videochamadas\n As videochamadas usan seus datos de alta velocidade\n Tambén pode actualizar unha videochamada a outra videochamada\n\n Visite <a>https://support.t-mobile.com/docs/DOC-23574</a> para obter más información.</string>
+  <string name="video_call_welcome_message_repeat">Amosar este mensaxe cada vez</string>
+  <string name="toast_change_video_call_failed">Non se pode cambiar a videochamada, formato do número incorrecto</string>
+  <string name="toast_make_video_call_failed">Non se pode facer videochamada, formato do número incorrecto</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videochamada, mostrame</string>
+  <string name="overflowRXCallMenuItemText">Videochamada, escondeme</string>
+  <string name="overflowVOCallMenuItemText">Chamadas de voz</string>
+  <string name="video_call">Videochamada</string>
+  <string name="call_data_info_label">Temporizadores da chamada/uso de datos</string>
+  <string name="call_data_info_description">Tempo de uso de chamadas de voz e tempo de uso dos datos</string>
+  <string name="alert_call_over_wifi">As chamadas se harán sobre Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Sen rede móvil dispoñible. Conectar un Wi-Fi dispoñible para facer chamadas.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Conectar o Wi-Fi para facer chamadas.</string>
 </resources>
