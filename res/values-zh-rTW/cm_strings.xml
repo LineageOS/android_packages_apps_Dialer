@@ -28,13 +28,13 @@
   <string name="lookup_settings_description">搜尋未知的電話號碼</string>
   <string name="enable_forward_lookup_title">正向搜尋</string>
   <string name="enable_forward_lookup_summary">在撥號程式搜尋時顯示附近的地點</string>
-  <string name="enable_people_lookup_title">搜尋人名</string>
-  <string name="enable_people_lookup_summary">在撥號程式搜尋時顯示線上的人名搜尋結果</string>
+  <string name="enable_people_lookup_title">聯絡人搜尋</string>
+  <string name="enable_people_lookup_summary">在撥號程式搜尋時顯示線上的聯絡人搜尋結果</string>
   <string name="enable_reverse_lookup_title">反向搜尋</string>
   <string name="enable_reverse_lookup_summary">為未知的來電號碼搜尋聯絡人或地點資料</string>
-  <string name="forward_lookup_provider_title">正向搜尋供應商</string>
-  <string name="people_lookup_provider_title">人名搜尋供應商</string>
-  <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
+  <string name="forward_lookup_provider_title">正向搜尋提供者</string>
+  <string name="people_lookup_provider_title">聯絡人搜尋提供者</string>
+  <string name="reverse_lookup_provider_title">反向搜尋提供者</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 中國 (CN)</string>
   <!-- Description for incoming calls that were blacklisted -->
@@ -73,7 +73,7 @@
   <string name="call_stats_filter_from">開始日期</string>
   <string name="call_stats_filter_to">結束日期</string>
   <string name="call_stats_filter_picker_title">篩選範圍</string>
-  <string name="date_quick_selection">快速選取</string>
+  <string name="date_quick_selection">快速選擇</string>
   <string name="date_qs_currentmonth">本月</string>
   <string name="date_qs_currentquarter">本季</string>
   <string name="date_qs_currentyear">今年</string>
@@ -94,7 +94,7 @@
   <string name="recent_calls_no_items_in_range">在所選擇的時間範圍內沒有任何通話記錄。</string>
   <string name="call_recording_category_title">通話錄音</string>
   <string name="call_recording_format">音訊格式</string>
-  <string name="call_playback_no_app_found_toast">沒有應用程式可以撥放所選擇的錄音。</string>
+  <string name="call_playback_no_app_found_toast">沒有應用程式可以撥放已選取的錄音。</string>
   <string name="invalid_number_text">"%1$s 無法撥打電話。號碼是正確的嗎？"</string>
   <!-- T9 Search Text -->
   <string name="empty_dialpad_t9_example">您可輸入電話號碼或\n搜尋您的聯絡人。</string>
@@ -119,28 +119,28 @@
   <string name="callerinfo_provider_summary_no_spam">標示未知來電</string>
   <string name="silence_spam_title">將垃圾電話靜音</string>
   <string name="silence_spam_summary">當收到不受歡迎的來電時不響鈴</string>
-  <string name="block_hidden_title">攔截未知的電話號碼</string>
+  <string name="block_hidden_title">封鎖隱藏的電話號碼</string>
   <string name="block_hidden_summary">將隱藏號碼視為垃圾電話</string>
-  <string name="block_dialog_title">是否封鎖此來電者？</string>
+  <string name="block_dialog_title">封鎖此來電？</string>
   <string name="block_dialog_positive">封鎖</string>
   <string name="block_dialog_negative">取消</string>
   <string name="block_dialog_description">您將永遠不會再接到此人的來電或訊息</string>
   <string name="block_dialog_report_spam">回報垃圾訊息到 <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">是否停用 %1$s ？</string>
+  <string name="provider_disable_title">停用「%1$s 」？</string>
   <string name="provider_disable_message">停用 %1$s 後，您將無法顯示來電資訊。</string>
   <string name="provider_disable_spam_message">停用 %1$s 後，您將不再會有垃圾訊息保護或來電資訊。</string>
   <string name="powered_by_provider">由 <xliff:g id="provider">%s</xliff:g> 提供技術支援</string>
   <string name="provider_help">"在此切換模式\n來撥打 %1$s 電話"</string>
   <string name="provider_search_help">"在此切換模式\n來搜尋 %1$s 聯絡人"</string>
   <string name="provider_button_help">"明白了"</string>
-  <string name="provider_voice_call">"%1$s 語音訊息"</string>
-  <string name="provider_video_call">"%1$s 影音訊息"</string>
+  <string name="provider_voice_call">"%1$s 語音通話"</string>
+  <string name="provider_video_call">"%1$s 視訊通話"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
   <string name="cm_permission_place_call">撥出電話前，請授予撥號權限。</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
   <string name="search_shortcut_view_note">檢視筆記</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">從任何地方做筆記</string>
-  <string name="callerinfo_provider_status_disabling">正在停用</string>
+  <string name="callerinfo_provider_status_disabling">停用中</string>
   <string name="show_dialpad_at_start_title">啟動時顯示撥號鍵盤</string>
 </resources>

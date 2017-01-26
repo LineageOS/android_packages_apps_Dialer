@@ -47,7 +47,7 @@
   <string name="speed_dial_replace">替换</string>
   <string name="speed_dial_delete">删除</string>
   <string name="speed_dial_unassigned_dialog_title">按键未分配</string>
-  <string name="speed_dial_unassigned_dialog_message">此快速拨号按键 “<xliff:g id="number">%s</xliff:g>” 尚未被使用，您现在想要指定一个动作吗？</string>
+  <string name="speed_dial_unassigned_dialog_message">快速拨号按键“<xliff:g id="number">%s</xliff:g>”尚未被使用。您是否要为它指定一个动作？</string>
   <string name="dialog_speed_dial_airplane_mode_message">若要使用快速拨号，请先关闭飞行模式。</string>
   <string name="yes">是</string>
   <string name="no">否</string>
@@ -64,7 +64,7 @@
   <string name="call_log_stats_title">统计</string>
   <string name="callStatsDetailTitle">通话统计详情</string>
   <string name="call_stats_incoming">来电：<xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">去电：<xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">呼出：<xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">未接：<xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_blacklisted">屏蔽：<xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
@@ -111,10 +111,10 @@
   <string name="callerinfo_provider_auth_yes">是</string>
   <string name="callerinfo_provider_auth_no_short">否</string>
   <string name="callerinfo_provider_auth_no">不用了</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> 会访问您的联系人，Me 配置文件和 Cyanogen OS 帐户，其中可能包括您的电子邮件地址。</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> 将访问您的联系人、Me 配置文件和 Cyanogen OS 帐户，其中可能包含您的电子邮件地址。</string>
   <string name="callerinfo_provider_auth_learn_more">了解更多</string>
-  <string name="callerinfo_provider_auth_desc">欢迎！您想要 <xliff:g id="provider_name">%s</xliff:g> 来识别未知的来电和阻止不必要的电话吗？</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">欢迎！您想让 <xliff:g id="provider_name">%s</xliff:g> 来识别未知来电吗？</string>
+  <string name="callerinfo_provider_auth_desc">欢迎！您要用 <xliff:g id="provider_name">%s</xliff:g> 识别未知的来电和拦截不必要的通话吗？</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">欢迎！您想让 <xliff:g id="provider_name">%s</xliff:g> 识别未知来电吗？</string>
   <string name="callerinfo_provider_summary">标记未知的呼叫和垃圾广告</string>
   <string name="callerinfo_provider_summary_no_spam">标记未知来电</string>
   <string name="silence_spam_title">静音垃圾电话</string>
@@ -125,7 +125,7 @@
   <string name="block_dialog_positive">屏蔽</string>
   <string name="block_dialog_negative">返回</string>
   <string name="block_dialog_description">您将不会再收到此人的来电或信息。</string>
-  <string name="block_dialog_report_spam">报告垃圾呼叫到 <xliff:g id="provider">%s</xliff:g></string>
+  <string name="block_dialog_report_spam">报告骚扰电话至 <xliff:g id="provider">%s</xliff:g></string>
   <string name="provider_disable_title">禁用 %1$s 吗？</string>
   <string name="provider_disable_message">通过禁用 %1$s，您将不会再有呼叫者身份识别。</string>
   <string name="provider_disable_spam_message">通过禁用 %1$s，您将不再获得垃圾电话保护或呼叫者身份识别。</string>

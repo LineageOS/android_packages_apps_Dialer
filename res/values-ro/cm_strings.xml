@@ -95,13 +95,52 @@
   <string name="call_recording_category_title">Înregistrare apel</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Nu s-a putut găsi nicio aplicație pentru redarea înregistrării selectate.</string>
+  <string name="invalid_number_text">"%1$s nu a putut efectua acest apel. Este acest număr corect?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Puteți apela un număr de telefon sau\nputeți căuta un contact</string>
+  <string name="sign_in_hint_text">Autentificaţi-vă pentru a efectua apeluri %1$s</string>
+  <string name="wifi_hint_text">Faceți apeluri gratuite %1$s la %1$s prin Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s este în roaming. Faceți apeluri gratuite %2$s la %2$s prin Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Niciun SIM. Numai apeluri de urgenţă.</string>
+  <string name="extra_call_method_call_option">Apel <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Setări <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Apelare utilizând <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Da</string>
   <string name="callerinfo_provider_auth_no_short">Nu</string>
+  <string name="callerinfo_provider_auth_no">Nu, mulțumesc</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> va avea acces la contactele dvs., la profilul Eu și la contul Cyanogen OS, care ar putea include adresa dvs. de e-mail.</string>
+  <string name="callerinfo_provider_auth_learn_more">Aflați mai multe</string>
+  <string name="callerinfo_provider_auth_desc">Bine ați venit! Ați dori ca <xliff:g id="provider_name">%s</xliff:g> să identifice apelanții necunoscuți și să blocheze apelurile nedorite?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Bine ați venit! Ați dori ca <xliff:g id="provider_name">%s</xliff:g> să identifice apelanții necunoscuți?</string>
+  <string name="callerinfo_provider_summary">Identifică apelanţii necunoscuți și spam-ul</string>
+  <string name="callerinfo_provider_summary_no_spam">Identifică apelanţii necunoscuți</string>
+  <string name="silence_spam_title">Apeluri spam silențioase</string>
+  <string name="silence_spam_summary">Nu lăsa ca apelurile spam să sune</string>
+  <string name="block_hidden_title">Blochează numerele de telefon ascunse</string>
+  <string name="block_hidden_summary">Consideră numerele ascunse ca spam</string>
+  <string name="block_dialog_title">Blocați acest apelant?</string>
+  <string name="block_dialog_positive">Blocați</string>
+  <string name="block_dialog_negative">Revocați</string>
+  <string name="block_dialog_description">Nu veți mai primi apeluri sau mesaje de la această persoană.</string>
+  <string name="block_dialog_report_spam">Raportați ca spam la <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Dezactivați %1$s?</string>
+  <string name="provider_disable_message">Prin dezactivarea %1$s, nu veți mai avea ID-ul de apelant.</string>
+  <string name="provider_disable_spam_message">Prin dezactivarea %1$s, nu veți mai avea protecție spam sau ID-ul de apelant.</string>
+  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Efectuați apeluri %1$s prin\ncomutarea modurilor aici"</string>
+  <string name="provider_search_help">"Căutați contacte %1$s prin\ncomutarea modurilor aici"</string>
+  <string name="provider_button_help">"Am înțeles"</string>
+  <string name="provider_voice_call">"Apel vocal %1$s"</string>
+  <string name="provider_video_call">"Apel video %1$s"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Pentru a apela, activați permisiunile de Telefon.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Vizualizați notița</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Luați notițe de oriunde</string>
+  <string name="callerinfo_provider_status_disabling">Dezactivare</string>
+  <string name="show_dialpad_at_start_title">Arată panoul de apelare la pornire</string>
 </resources>
