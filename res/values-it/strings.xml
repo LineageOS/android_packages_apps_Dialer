@@ -44,10 +44,10 @@
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Verranno eliminate tutte le chiamate dalla cronologia"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Cancellazione cronologia chiamate…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefono"</string>
-    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Chiamata senza risposta"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Chiamata persa"</string>
     <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"Chiamata di lavoro persa"</string>
-    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Chiamate senza risposta"</string>
-    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> chiamate senza risposta"</string>
+    <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Chiamate perse"</string>
+    <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> chiamate perse"</string>
     <string name="notification_missedCall_call_back" msgid="1991552423738343203">"Richiama"</string>
     <string name="notification_missedCall_message" msgid="3042123733754151052">"Messaggio"</string>
     <plurals name="notification_voicemail_title" formatted="false" msgid="9088953961148324851">
@@ -151,7 +151,7 @@
     <string name="block_number_search_hint" msgid="5409571607043872758">"Aggiungi numero/cerca contatti"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"La cronologia delle chiamate è vuota"</string>
     <string name="call_log_all_empty_action" msgid="9093210119068366147">"Fai una chiamata"</string>
-    <string name="call_log_missed_empty" msgid="3927274175205520135">"Nessuna chiamata senza risposta."</string>
+    <string name="call_log_missed_empty" msgid="3927274175205520135">"Nessuna chiamata persa."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"La segreteria è vuota."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"L\'archivio dei messaggi vocali è vuoto."</string>
     <string name="show_favorites_only" msgid="5520072531022614595">"Mostra solo i preferiti"</string>
@@ -182,7 +182,7 @@
     <string name="search_shortcut_send_sms_message" msgid="2569304043345025525">"Invia SMS"</string>
     <string name="search_shortcut_make_video_call" msgid="1265971685034465166">"Fai una videochiamata"</string>
     <string name="search_shortcut_block_number" msgid="4787156645163436072">"Blocca numero"</string>
-    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nuove chiamate senza risposta"</string>
+    <string name="num_missed_calls" msgid="8081736535604293886">"<xliff:g id="NUMBER">%s</xliff:g> nuove chiamate perse"</string>
     <string name="speed_dial_empty" msgid="8838921693673366129">"Nessun preferito disponibile nella Composizione rapida"</string>
     <string name="speed_dial_empty_add_favorite_action" msgid="7944893641496695770">"Aggiungi un preferito"</string>
     <string name="all_contacts_empty" msgid="471370638298229686">"Nessun contatto disponibile"</string>

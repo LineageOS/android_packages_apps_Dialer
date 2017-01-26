@@ -54,9 +54,9 @@
     <string name="card_title_callback_number" msgid="7646082782307705748">"Numero da richiamare:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="card_title_callback_number_emergency" msgid="8916355112472826080">"Numero da richiamare in caso di emergenza:\n <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
     <string name="notification_dialing" msgid="8080968169444117163">"Composizione in corso"</string>
-    <string name="notification_missedCallTitle" msgid="2774630248151712215">"Chiamata senza risposta"</string>
-    <string name="notification_missedCallsTitle" msgid="263275811089605859">"Chiamate senza risposta"</string>
-    <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> chiamate senza risposta"</string>
+    <string name="notification_missedCallTitle" msgid="2774630248151712215">"Chiamata persa"</string>
+    <string name="notification_missedCallsTitle" msgid="263275811089605859">"Chiamate perse"</string>
+    <string name="notification_missedCallsMsg" msgid="69408330370667429">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> chiamate perse"</string>
     <string name="notification_missedCallTicker" msgid="1599269453813734699">"Chiamata senza risposta da <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
     <string name="notification_ongoing_call" msgid="8633734299234807397">"Chiamata in corso"</string>
     <string name="notification_ongoing_work_call" msgid="3465083293325006579">"Chiamata di lavoro in corso"</string>
