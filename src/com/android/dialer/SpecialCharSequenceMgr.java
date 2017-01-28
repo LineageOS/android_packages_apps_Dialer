@@ -166,23 +166,19 @@ public class SpecialCharSequenceMgr {
 
     /**
      * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#*.
-     * If a secret code is encountered an Intent is started with the android_secret_code://<code>
+     * If a secret code is encountered, an Intent is started with the android_secret_code://<code>
      * URI.
      *
      * @param context the context to use
      * @param input the text to check for a secret code in
-     * @return true if a secret code was encountered
+     * @return true if a secret code was encountered and intent is sent out
      */
     static boolean handleSecretCode(Context context, String input) {
-        // Secret codes are in the form *#*#<code>#*#*
-        int len = input.length();
-        if (len > 8 && input.startsWith("*#*#") && input.endsWith("#*#*")) {
-            final Intent intent = new Intent(SECRET_CODE_ACTION,
-                    Uri.parse("android_secret_code://" + input.substring(4, len - 4)));
-            context.sendBroadcast(intent);
-            return true;
+        final TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (telephonyManager != null) {
+            return telephonyManager.sendDialerCode(input);
         }
-
         return false;
     }
 
