@@ -89,7 +89,15 @@
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nimate dohodnih klicev.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nimate odhodnih klicev.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Vaš dnevnik klicev je prazen</string>
+  <string name="calllog_search_hint">Išči po dnevniku klicev</string>
+  <string name="no_call_log">Ni dnevnika klicev</string>
+  <string name="clear">Počisti</string>
+  <string name="video_call_welcome_title"><b>Dobrodošli v novem klicalniku za video klice</b></string>
+  <string name="video_call_welcome_message_repeat">Vedno prikaži to sporočilo</string>
   <!-- Add for enhance videocall ui -->
 </resources>

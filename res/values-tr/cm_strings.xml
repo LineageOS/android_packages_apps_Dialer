@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Ters arama sağlayıcısı</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Çince (CN)</string>
+  <string name="speed_dial_edit_title">Hızlı arama düzenle <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Lütfen telefon numarası girin</string>
   <string name="call_log_show_all_slots">Tüm SIMler</string>
   <string name="call_log_all_calls_header">Tüm aramalar</string>
   <string name="call_log_blacklist_header">Yalnızca engellenen aramalar</string>
+  <string name="call_log_blocked_empty">Engellenen aramanız yok.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">İstatistikler</string>
   <string name="callStatsDetailTitle">Arama istatistik detayları</string>
@@ -83,10 +86,32 @@
   <string name="speed_dial_delete">Sil</string>
   <string name="speed_dial_unassigned_dialog_title">Numara atanmadı</string>
   <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' numarasına hızlı arama işlevi atanmadı. Şimdi atamak ister misiniz?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Hızlı aramayı kullanmak için, önce uçak modunu kapatın</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Gelen aramanız yok.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Giden aramanız yok.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Çağrı kaydınız boş</string>
+  <string name="calllog_search_hint">Arama kaydını araştır</string>
+  <string name="no_call_log">Arama kaydı yok</string>
+  <string name="clear">Temizle</string>
+  <string name="description_clear_search">Aramayı temizle</string>
+  <string name="video_call_welcome_title"><b>Yeni Görüntülü Aramaya hoş geldiniz</b></string>
+  <string name="video_call_welcome_message">Hattın karşısındaki yakınınızdan gelen sesi duymayı seviyoruz, ama yüz yüze konuşmak daha iyidir! İşte gerçek zamanlı (FaceTime) bağlantı yapmanın gereklilikleri:\n 4G LTE ya da Wi-Fi bağlantısı\n Kullandığınız cihaz video arama desteklemeli\n Video aramalar yüksek hızlı veri kullanır\n Sesli çağrıdan görüntülü çağrıya güncellemek için\n\n <a>https://support.t-mobile.com/docs/DOC-23574</a> adresini ziyaret edin.</string>
+  <string name="video_call_welcome_message_repeat">Bu iletiyi her zaman göster</string>
+  <string name="toast_change_video_call_failed">Görüntülü aramaya geçiş yapılamıyor, yanlış numara formatı</string>
+  <string name="toast_make_video_call_failed">Görüntülü arama yapılamıyor, yanlış numara formatı</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Görüntülü arama, beni göster</string>
+  <string name="overflowRXCallMenuItemText">Görüntülü arama, beni gizle</string>
+  <string name="overflowVOCallMenuItemText">Sesli arama</string>
+  <string name="video_call">Görüntülü Arama</string>
+  <string name="call_data_info_label">Arama/veri kullanım sayaçları</string>
+  <string name="call_data_info_description">Sesli arama kullanım süresi ve veri kullanım süresi</string>
+  <string name="alert_call_over_wifi">Aramalar Wi-Fi üzerinden yapılacaktır.</string>
+  <string name="alert_call_no_cellular_coverage">Hücresel ağ kullanılabilir değil. Arama yapmak için kablosuz ağa bağlanın.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Arama yapmak için Wi-Fi ağına bağlanın.</string>
 </resources>

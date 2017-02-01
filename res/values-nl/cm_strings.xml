@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Aanbieder omgekeerd zoeken</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinees (CN)</string>
+  <string name="speed_dial_edit_title">Bewerk snelkiezer <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Voer een nummer in</string>
   <string name="call_log_show_all_slots">Alle simkaarten</string>
   <string name="call_log_all_calls_header">Alle gesprekken</string>
   <string name="call_log_blacklist_header">Alleen geblokkeerde oproepen</string>
+  <string name="call_log_blocked_empty">U hebt geen geblokkeerde oproepen.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Statistieken</string>
   <string name="callStatsDetailTitle">Gespreksstatistiekdetails</string>
@@ -83,10 +86,31 @@
   <string name="speed_dial_delete">Verwijderen</string>
   <string name="speed_dial_unassigned_dialog_title">Toets niet toegewezen</string>
   <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegmodus uit te schakelen</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Geen inkomende oproepen.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Geen uitgaande oproepen.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">De oproeplijst is leeg</string>
+  <string name="calllog_search_hint">Zoek in oproeplijst</string>
+  <string name="no_call_log">Geen oproeplijst</string>
+  <string name="clear">Maak leeg</string>
+  <string name="description_clear_search">Wis zoekopdracht</string>
+  <string name="video_call_welcome_title"><b>Welkom bij de nieuwe Video Calling Dialer</b></string>
+  <string name="video_call_welcome_message_repeat">Toon dit bericht elke keer</string>
+  <string name="toast_change_video_call_failed">Kan niet omschakelen naar video-oproep, ongeldig nummerformaat</string>
+  <string name="toast_make_video_call_failed">Kan video-oproep niet starten, ongeldig nummerformaat</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Video bellen, toon mij</string>
+  <string name="overflowRXCallMenuItemText">Video bellen, verberg mij</string>
+  <string name="overflowVOCallMenuItemText">Telefoongesprek</string>
+  <string name="video_call">Videogesprek</string>
+  <string name="call_data_info_label">Gespreks/data timers</string>
+  <string name="call_data_info_description">Timers voor spraakoproepen en datagebruik</string>
+  <string name="alert_call_over_wifi">Gesprekken zullen over Wi-Fi verlopen.</string>
+  <string name="alert_call_no_cellular_coverage">Geen mobiel netwerk beschikbaar. Maak een verbinding met Wi-Fi om te kunnen bellen.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Maak een verbinding met Wi-Fi om te bellen.</string>
 </resources>

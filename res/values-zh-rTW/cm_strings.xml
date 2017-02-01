@@ -78,6 +78,7 @@
   <string name="recent_calls_no_items_in_range">在所選擇的時間範圍內沒有任何通話記錄。</string>
   <string name="call_recording_category_title">通話錄音</string>
   <string name="call_recording_format">音訊格式</string>
+  <string name="call_playback_no_app_found_toast">沒有應用程式可以撥放已選取的錄音。</string>
   <!-- Speed Dial -->
   <string name="speed_dial_settings">快速撥號設定</string>
   <string name="speed_dial_not_set">(未設定)</string>
