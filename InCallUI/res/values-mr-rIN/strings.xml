@@ -97,7 +97,7 @@
     <string name="incall_error_supp_service_transfer" msgid="3220469890457973326">"हस्तांतर करू शकत नाही."</string>
     <string name="incall_error_supp_service_conference" msgid="3100373998543200356">"परिषद घेऊ शकत नाही."</string>
     <string name="incall_error_supp_service_reject" msgid="4543915892409365831">"कॉल नाकारू शकत नाही."</string>
-    <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"कॉल रिलीझ करू शकत नाही."</string>
+    <string name="incall_error_supp_service_hangup" msgid="101167589969625637">"कॉल रिलीज करू शकत नाही."</string>
     <string name="incall_call_type_label_sip" msgid="1327822795765282192">"SIP कॉल"</string>
     <string name="emergency_enable_radio_dialog_title" msgid="7882321703828314787">"आणीबाणी कॉल"</string>
     <string name="emergency_enable_radio_dialog_message" msgid="4382752053654184327">"रेडिओ चालू करीत आहे..."</string>

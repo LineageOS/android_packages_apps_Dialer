@@ -23,7 +23,7 @@
     <string name="private_num" msgid="6081418498487514686">"Maxfiy raqam"</string>
     <string name="payphone" msgid="5743050584468748607">"Taksofon"</string>
     <string name="confCall" msgid="3181961445236675173">"Konferens-aloqa"</string>
-    <string name="call_lost" msgid="8208184291640961172">"Qo‘ng‘iroq tugatildi"</string>
+    <string name="call_lost" msgid="8208184291640961172">"Chaqiruv uzilib qoldi"</string>
     <string name="audio_mode_speaker" msgid="6160127758732918123">"Karnay"</string>
     <string name="audio_mode_earpiece" msgid="3138677187223932893">"Telefon quloqchini"</string>
     <string name="audio_mode_wired_headset" msgid="583080366967943196">"Simli garnitura"</string>
@@ -85,10 +85,10 @@
     <string name="notification_missedCall_message" msgid="2407410183079324393">"SMS yuborish"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Boshqa qurilmada hozir qo‘ng‘iroq amalga oshirilmoqda."</string>
     <string name="notification_transfer_call" msgid="687009078741947505">"Qo‘ng‘iroqni o‘tkazish"</string>
-    <string name="incall_error_power_off" msgid="3626117639377110403">"Qo‘ng‘iroq qilish uchun, avval “Parvoz rejimi” o‘chirilishi kerak."</string>
+    <string name="incall_error_power_off" msgid="3626117639377110403">"Parvoz rejimini o‘chirib qo‘ying."</string>
     <string name="incall_error_emergency_only" msgid="8704761887752183855">"Tarmoqda ro‘yxatdan o‘tmagan."</string>
     <string name="incall_error_out_of_service" msgid="1830319376612608339">"Uyali tarmoq mavjud emas."</string>
-    <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Qo‘ng‘iroq qilish uchun raqamni to‘g‘ri kiriting."</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="3042963797202928322">"Raqam noto‘g‘ri."</string>
     <string name="incall_error_call_failed" msgid="2213413937257570551">"Qo‘ng‘iroq qilib bo‘lmadi."</string>
     <string name="incall_status_dialed_mmi" msgid="8864341962086874751">"MMI tartibi ishga tushmoqda…"</string>
     <string name="incall_error_supp_service_unknown" msgid="3390926762577861268">"Xizmat qo‘llab-quvvatlanmaydi."</string>
@@ -107,7 +107,7 @@
     <string name="dialerKeyboardHintText" msgid="8533449463925408141">"Terish uchun klaviaturadan foydalaning"</string>
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"Qo‘ng‘iroqni ushlab turish"</string>
     <string name="onscreenHoldText_selected" msgid="2988100347384733032">"Qo‘ng‘iroqni davom ettirish"</string>
-    <string name="onscreenEndCallText" msgid="1416981593311001074">"Qo‘ng‘iroqni tugatish"</string>
+    <string name="onscreenEndCallText" msgid="1416981593311001074">"Chaqiruvni tugatish"</string>
     <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"Raqam terish panelini ochish"</string>
     <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"Raqam terish panelini yopish"</string>
     <string name="onscreenMuteText_unselected" msgid="4130269060091842798">"Ovozni o‘chirish"</string>
@@ -182,7 +182,7 @@
     <string name="profile_photo_description" msgid="7958198110870319358">"Profil rasmi"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"Kamera o‘chiq"</string>
     <string name="child_number" msgid="4469090994612105532">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> orqali"</string>
-    <string name="note_sent" msgid="7623014827902758398">"Qayd yuborildi"</string>
+    <string name="note_sent" msgid="7623014827902758398">"Xabar yuborildi"</string>
     <string name="person_contact_context_title" msgid="8490058088809090979">"So‘nggi xabarlar"</string>
     <string name="business_contact_context_title" msgid="8448362898576496764">"Kompaniya haqida ma’lumot"</string>
     <string name="distance_imperial_away" msgid="2083362798225798740">"<xliff:g id="DISTANCE">%.1f</xliff:g> mil masofada"</string>

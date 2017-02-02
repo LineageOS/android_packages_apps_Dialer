@@ -104,10 +104,10 @@
     <string name="dialer_useDtmfDialpad" msgid="1707548397435075040">"ટચ ટોન કીપેડનો ઉપયોગ કરો"</string>
     <string name="dialer_returnToInCallScreen" msgid="3719386377550913067">"કૉલ પર પાછા આવવું પ્રગતિ પર છે"</string>
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"કૉલ ઉમેરો"</string>
-    <string name="type_incoming" msgid="6502076603836088532">"આવનાર કૉલ"</string>
+    <string name="type_incoming" msgid="6502076603836088532">"ઇનકમિંગ કૉલ"</string>
     <string name="type_outgoing" msgid="343108709599392641">"આઉટગોઇંગ કૉલ"</string>
     <string name="type_missed" msgid="2720502601640509542">"છૂટેલો કૉલ"</string>
-    <string name="type_incoming_video" msgid="82323391702796181">"આવનાર વિડિઓ કૉલ"</string>
+    <string name="type_incoming_video" msgid="82323391702796181">"ઇનકમિંગ વિડિઓ કૉલ"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"આઉટગોઇંગ વિડિઓ કૉલ"</string>
     <string name="type_missed_video" msgid="954396897034220545">"વિડિઓ કૉલ ચૂકી ગયાં"</string>
     <string name="type_voicemail" msgid="5153139450668549908">"વૉઇસમેઇલ"</string>
@@ -150,7 +150,7 @@
     <string name="dialer_hint_find_contact" msgid="3574350254520035364">"સંપર્કો શોધો"</string>
     <string name="block_number_search_hint" msgid="5409571607043872758">"નંબર ઉમેરો અથવા સંપર્કો શોધો"</string>
     <string name="call_log_all_empty" msgid="8357417710416340920">"તમારો કૉલ ઇતિહાસ ખાલી છે"</string>
-    <string name="call_log_all_empty_action" msgid="9093210119068366147">"એક કૉલ કરો"</string>
+    <string name="call_log_all_empty_action" msgid="9093210119068366147">"કૉલ કરો"</string>
     <string name="call_log_missed_empty" msgid="3927274175205520135">"તમારી પાસે કોઇ છૂટેલાં કૉલ્સ નથી."</string>
     <string name="call_log_voicemail_empty" msgid="8383585074222277550">"તમારું વૉઇસમેઇલ ઇનબોક્સ ખાલી છે."</string>
     <string name="voicemail_archive_empty" msgid="1087408796679056787">"તમારું વૉઇસમેઇલ આર્કાઇવ ખાલી છે."</string>

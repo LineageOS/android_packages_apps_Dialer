@@ -73,7 +73,7 @@
     <string name="voicemail_status_configure_voicemail" msgid="8300808991932816153">"設定您的留言信箱"</string>
     <string name="voicemail_status_audio_not_available" msgid="2449801102560158082">"無法使用音效"</string>
     <string name="voicemail_status_action_configure" msgid="8671796489912239589">"設定"</string>
-    <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"致電語音信箱號碼"</string>
+    <string name="voicemail_status_action_call_server" msgid="1824816252288551794">"致電留言信箱號碼"</string>
     <string name="call_log_item_count_and_date" msgid="7641933305703520787">"（ <xliff:g id="COUNT">%1$d</xliff:g> ） <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="sms_disambig_title" msgid="5846266399240630846">"選擇號碼"</string>
     <string name="call_disambig_title" msgid="4392886850104795739">"選擇號碼"</string>

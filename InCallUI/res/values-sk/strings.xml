@@ -80,7 +80,7 @@
     <string name="notification_action_answer_video" msgid="2400233093494856655">"Video"</string>
     <string name="notification_action_answer_voice" msgid="3206168292649273866">"Hlas"</string>
     <string name="notification_action_accept" msgid="8595047032790476122">"Prijať"</string>
-    <string name="notification_action_dismiss" msgid="1998811618480434300">"Zatvoriť"</string>
+    <string name="notification_action_dismiss" msgid="1998811618480434300">"Odmietnuť"</string>
     <string name="notification_missedCall_call_back" msgid="7855043480614703539">"Zavolať späť"</string>
     <string name="notification_missedCall_message" msgid="2407410183079324393">"Správa"</string>
     <string name="notification_external_call" msgid="5611236780302924816">"Prebiehajúci hovor v inom zariadení"</string>

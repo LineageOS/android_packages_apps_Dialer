@@ -155,7 +155,7 @@
     <string name="description_target_accept_upgrade_to_video_receive_request" msgid="2224978927364021080">"ভিডিও গ্রহণ করার অনুরোধ স্বীকার করুন"</string>
     <string name="description_target_decline_upgrade_to_video_receive_request" msgid="3151115394424918077">"ভিডিও গ্রহণ করার অনুরোধ প্রত্যাখ্যান করুন"</string>
     <string name="description_direction_up" msgid="1735018141439291766">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> এর জন্য উপরের দিকে স্লাইড করুন৷"</string>
-    <string name="description_direction_left" msgid="6811598791620851239">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> এর জন্য বাম দিকে স্লাইড করুন৷"</string>
+    <string name="description_direction_left" msgid="6811598791620851239">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> এর জন্য বাঁ দিকে স্লাইড করুন৷"</string>
     <string name="description_direction_right" msgid="5461971399586296023">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> এর জন্য ডান দিকে স্লাইড করুন৷"</string>
     <string name="description_direction_down" msgid="3331715227997561639">"<xliff:g id="TARGET_DESCRIPTION">%s</xliff:g> এর জন্য নীচের দিকে স্লাইড করুন৷"</string>
     <string name="voicemail_notification_vibrate_when_title" msgid="4595145399183729630">"কম্পন"</string>

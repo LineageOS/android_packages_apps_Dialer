@@ -201,8 +201,8 @@
     <string name="description_phone_account" msgid="1767072759541443861">"通过 <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
     <string name="description_via_number" msgid="3503311803959108316">"通过 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="call_log_via_number" msgid="8373282986443543296">"通过 <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="description_via_number_phone_account" msgid="5426866894799626474">"帐户：<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>，通过 <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"帐户：<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>，通过 <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="description_via_number_phone_account" msgid="5426866894799626474">"帐号：<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>，通过 <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
+    <string name="call_log_via_number_phone_account" msgid="4394943791173578941">"帐号：<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>，通过 <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
     <string name="description_call_log_call_action" msgid="3682561657090693134">"拨打电话"</string>
     <string name="description_call_action" msgid="4000549004089776147">"呼叫<xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
     <string name="description_video_call_action" msgid="7386922428155062213">"与<xliff:g id="NAMEORNUMBER">^1</xliff:g>进行视频通话。"</string>

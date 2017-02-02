@@ -44,7 +44,7 @@
     <string name="clearCallLogConfirmation" msgid="7899552396101432827">"Historiako dei guztiak ezabatuko dira"</string>
     <string name="clearCallLogProgress_title" msgid="3372471156216306132">"Deien historia garbitzen…"</string>
     <string name="userCallActivityLabel" product="default" msgid="6652512551977445095">"Telefonoa"</string>
-    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Dei galdua"</string>
+    <string name="notification_missedCallTitle" msgid="2078223183024451723">"Galdutako deia"</string>
     <string name="notification_missedWorkCallTitle" msgid="8418335304394771688">"Laneko dei bat galdu duzu"</string>
     <string name="notification_missedCallsTitle" msgid="4948840634672742797">"Dei galduak"</string>
     <string name="notification_missedCallsMsg" msgid="158790423221579961">"<xliff:g id="NUM_MISSED_CALLS">%s</xliff:g> dei galdu"</string>
@@ -106,7 +106,7 @@
     <string name="dialer_addAnotherCall" msgid="4205688819890074468">"Gehitu deia"</string>
     <string name="type_incoming" msgid="6502076603836088532">"Sarrerako deia"</string>
     <string name="type_outgoing" msgid="343108709599392641">"Irteerako deia"</string>
-    <string name="type_missed" msgid="2720502601640509542">"Dei galdua"</string>
+    <string name="type_missed" msgid="2720502601640509542">"Galdutako deia"</string>
     <string name="type_incoming_video" msgid="82323391702796181">"Sarrerako bideo-deia"</string>
     <string name="type_outgoing_video" msgid="2858140021680755266">"Irteerako bideo-deia"</string>
     <string name="type_missed_video" msgid="954396897034220545">"Bideo-dei galdua"</string>

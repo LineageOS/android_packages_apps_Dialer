@@ -82,7 +82,7 @@
     <string name="make_primary" msgid="5829291915305113983">"Zapamatovat tuto volbu"</string>
     <string name="description_search_button" msgid="3660807558587384889">"vyhledat"</string>
     <string name="description_dial_button" msgid="1274091017188142646">"vytáčení"</string>
-    <string name="description_digits_edittext" msgid="8760207516497016437">"číslo, které chcete vytočit"</string>
+    <string name="description_digits_edittext" msgid="8760207516497016437">"vytáčené číslo"</string>
     <string name="description_playback_start_stop" msgid="5060732345522492292">"Spuštění a zastavení přehrávání"</string>
     <string name="description_playback_speakerphone" msgid="6008323900245707504">"Zapnutí a vypnutí reproduktoru"</string>
     <string name="description_playback_seek" msgid="4509404274968530055">"Vyhledání pozice přehrávání"</string>

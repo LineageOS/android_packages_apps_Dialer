@@ -137,7 +137,7 @@
     <string name="other_settings" msgid="6699076019841942826">"ਹੋਰ ਕਾਲ ਸੈਟਿੰਗਾਂ"</string>
     <string name="calling_via_template" msgid="3539373093109976255">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ਰਾਹੀਂ ਕਾਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"</string>
     <string name="incoming_via_template" msgid="6281138766370092800">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ਰਾਹੀਂ ਆ ਰਹੀਆਂ ਕਾਲਾਂ"</string>
-    <string name="contactPhoto" msgid="6028825355597675193">"ਸੰਪਰਕ ਫੋਟੋ"</string>
+    <string name="contactPhoto" msgid="6028825355597675193">"ਸੰਪਰਕ ਫ਼ੋਟੋ"</string>
     <string name="goPrivate" msgid="3554069451018659483">"ਨਿੱਜੀ ਵਿੱਚ ਬਦਲੋ"</string>
     <string name="selectContact" msgid="92191462970821951">"ਸੰਪਰਕ ਚੁਣੋ"</string>
     <string name="respond_via_sms_custom_message" msgid="8210393177674619127">"ਆਪਣੇ ਆਪ ਲਿਖੋ..."</string>
@@ -179,7 +179,7 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ਘੰਟੇ</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ਘੰਟੇ</item>
     </plurals>
-    <string name="profile_photo_description" msgid="7958198110870319358">"ਪ੍ਰੋਫਾਈਲ ਫੋਟੋ"</string>
+    <string name="profile_photo_description" msgid="7958198110870319358">"ਪ੍ਰੋਫਾਈਲ ਫ਼ੋਟੋ"</string>
     <string name="camera_off_description" msgid="4220023868645225790">"ਕੈਮਰਾ ਬੰਦ ਹੈ"</string>
     <string name="child_number" msgid="4469090994612105532">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> ਰਾਹੀਂ"</string>
     <string name="note_sent" msgid="7623014827902758398">"ਨੋਟ-ਕਥਨ ਭੇਜਿਆ ਗਿਆ"</string>
