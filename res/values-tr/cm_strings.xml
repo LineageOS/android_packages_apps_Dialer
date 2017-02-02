@@ -141,4 +141,6 @@
   <string name="search_shortcut_view_note">Notu görüntüle</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Heryerden notlar alın</string>
+  <string name="callerinfo_provider_status_disabling">Devre dışı bırakılıyor</string>
+  <string name="show_dialpad_at_start_title">Tuş takımını başlangıçta göster</string>
 </resources>
