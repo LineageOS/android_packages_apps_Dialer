@@ -43,5 +43,19 @@
     <string name="recording_time_text">Recording</string>
     <string name="recording_warning_title">Enable call recording?</string>
     <string name="recording_warning_text">Notice: You are responsible for compliance with any laws, regulations and rules that apply to the use of call recording functionality and the use or distribution of those recordings.</string>
+
+    <!-- Set Subscription screen: label sub 1 -->
+    <string name="sub_1">SIM 1</string>
+    <!-- Set Subscription screen: label sub 2 -->
+    <string name="sub_2">SIM 2</string>
+
+    <string name="call_failed_due_to_validate_number">Unable to make video call, the number format is not correct</string>
+    <string name="call_state_dialing">Dialing</string>
+    <string name="call_state_holding">Holding</string>
+    <string name="call_state_active">Active</string>
+    <string name="call_state_unknown">Unknown</string>
+    <string name="call_state_disconnecting">Disconnecting</string>
+    <string name="call_state_disconnected">Disconnected</string>
+    <string name="too_many_recipients">No more than 6 people can participate in a 4G conference call.</string>
 </resources>
 
