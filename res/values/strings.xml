@@ -314,8 +314,6 @@
     <string name="menu_show_all_calls">Show all calls</string>
 
     <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
-    <string name="menu_add_to_4g_conference_call">Add to 4G conference call</string>
-    <string name="menu_4g_conference_call">4G conference call</string>
     <string name="add_2sec_pause">Add 2-sec pause</string>
     <string name="add_wait">Add wait</string>
 
@@ -366,42 +364,6 @@
 
     <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
     <string name="type_missed_video">Missed video call</string>
-
-    <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_incoming_volte">Incoming 4G voice call</string>
-
-     <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_incoming_video_lte">Incoming 4G video call</string>
-
-    <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_outgoing_volte">Outgoing 4G voice call</string>
-
-     <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_outgoing_video_lte">Outgoing 4G video call</string>
-
-    <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_missed_volte">Missed 4G voice call</string>
-
-     <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_missed_video_lte">Missed 4G video call</string>
-
-    <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_incoming_vowifi">Incoming WiFi voice call</string>
-
-     <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-     <string name="type_incoming_video_wifi">Incoming WiFi video call</string>
-
-    <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_outgoing_vowifi">Outgoing WiFi voice call</string>
-
-     <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-     <string name="type_outgoing_video_wifi">Outgoing WiFi video call</string>
-
-    <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-    <string name="type_missed_vowifi">Missed WiFi voice call</string>
-
-     <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-     <string name="type_missed_video_wifi">Missed WiFi video call</string>
 
     <!-- Title for voicemail details screen -->
     <string name="type_voicemail">Voicemail</string>

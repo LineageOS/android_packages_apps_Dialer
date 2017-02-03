@@ -493,10 +493,6 @@
     <!-- Description of the "camera off" icon displayed when the device's camera is disabled during
          a video call. [CHAR LIMIT=NONE] -->
     <string name="camera_off_description">Camera off</string>
-    <!-- Set Subscription screen: label sub 1 -->
-    <string name="sub_1">SUB 1</string>
-    <!-- Set Subscription screen: label sub 2 -->
-    <string name="sub_2">SUB 2</string>
 
     <!-- Used to inform the user that a call was received via a number other than the primary
         phone number associated with their device. [CHAR LIMIT=16] -->
@@ -540,12 +536,4 @@
     <string name="open_now">Open now</string>
     <!-- Displayed when a place is closed. -->
     <string name="closed_now">Closed now</string>
-    <string name="call_failed_due_to_validate_number">Unable to make video call, incorrect number format</string>
-    <string name="call_state_dialing">Dialing</string>
-    <string name="call_state_holding">Holding</string>
-    <string name="call_state_active">Active</string>
-    <string name="call_state_unknown">Unknown</string>
-    <string name="call_state_disconnecting">Disconnecting</string>
-    <string name="call_state_disconnected">Disconnected</string>
-    <string name="too_many_recipients">The maximum allowed participants in a 4G conference call are 6.</string>
 </resources>
