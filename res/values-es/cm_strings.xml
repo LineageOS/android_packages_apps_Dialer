@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Proveedor de búsqueda inversa</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chino (CN)</string>
+  <string name="speed_dial_edit_title">Editar velocidad del dial <xliff:g id="index" example="2">%1$d </xliff:g></string>
+  <string name="speed_dial_input_hint">Introduzca un número</string>
   <string name="call_log_show_all_slots">Todas las SIM</string>
   <string name="call_log_all_calls_header">Todas las llamadas</string>
   <string name="call_log_blacklist_header">Solo llamadas bloqueadas</string>
+  <string name="call_log_blocked_empty">Sin llamadas bloqueadas.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Estadísticas</string>
   <string name="callStatsDetailTitle">Detalles de llamada</string>
@@ -83,10 +86,32 @@
   <string name="speed_dial_delete">Eliminar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla sin asignar</string>
   <string name="speed_dial_unassigned_dialog_message">Ninguna acción rápida asignada al número \'<xliff:g id="number">%s</xliff:g>\'. ¿Quieres asignar una acción ahora?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Para usar la marcación rápida, primero desactiva el modo avión</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">No tienes llamadas entrantes.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">No tienes llamadas salientes.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">El registro de llamadas está vacío</string>
+  <string name="calllog_search_hint">Buscar en el registro de llamadas</string>
+  <string name="no_call_log">No hay registro de llamdas</string>
+  <string name="clear">Limpiar</string>
+  <string name="description_clear_search">Borrar búsqueda</string>
+  <string name="video_call_welcome_title"><b>Bienvenido al nuevo Marcador de Videollamadas</b></string>
+  <string name="video_call_welcome_message">A todos nos gusta escuchar esa voz familiar al otro lado de la línea, ¡Pero hablar cara a cara es mucho mejor! Esto es lo que debes saber para obtener las conexiones a tiempo real (o FaceTime?):\n Necesitas estar en una conexión 4G LTE o Wi-Fi\n El dispositivo al que llamas tiene que ser compatible con la videollamada\n Las videollamadas usan muchos datos\n Puedes pasar de una llamada de voz a una videollamada\n\n Entra en <a>https://support.t-mobile.com/docs/DOC-23574</a> para más información.</string>
+  <string name="video_call_welcome_message_repeat">Mostrar este mensaje cada vez</string>
+  <string name="toast_change_video_call_failed">No se puede cambiar a videollamada, el formato del número es incorrecto</string>
+  <string name="toast_make_video_call_failed">No se puede hacer la videollamada, el formato del número es incorrecto</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Video llamada, muéstrame</string>
+  <string name="overflowRXCallMenuItemText">Videollamada, escóndeme</string>
+  <string name="overflowVOCallMenuItemText">Llamada de voz</string>
+  <string name="video_call">Videollamada</string>
+  <string name="call_data_info_label">Temporizadores del uso de llamadas/datos</string>
+  <string name="call_data_info_description">Tiempo de uso de las llamadas y de los datos</string>
+  <string name="alert_call_over_wifi">Las llamadas pueden hacerse mediante Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">No hay ninguna red móvil disponible. Conectate a una red Wi-Fi disponible para hacer llamadas.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Conectate a una red Wi-Fi para hacer llamadas.</string>
 </resources>

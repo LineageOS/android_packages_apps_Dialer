@@ -86,6 +86,7 @@
   <string name="speed_dial_delete">Izbriši</string>
   <string name="speed_dial_unassigned_dialog_title">Nedodeljena tipka</string>
   <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja, najprej izklopite način za letalo</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -97,7 +98,20 @@
   <string name="calllog_search_hint">Išči po dnevniku klicev</string>
   <string name="no_call_log">Ni dnevnika klicev</string>
   <string name="clear">Počisti</string>
+  <string name="description_clear_search">Počisti iskanje</string>
   <string name="video_call_welcome_title"><b>Dobrodošli v novem klicalniku za video klice</b></string>
+  <string name="video_call_welcome_message">Vsi radi slišimo znan glas na drugi strani linije, vendar je pogovor iz oči v oči še boljši! To morate vedeti za uporabo vaših realno časovnih povezav:\n Povezani morate biti v 4G LTE ali Wi-Fi omrežje\n Naprava, ki jo kličete mora prav tako biti združljiva z video klici\n Video klici uporabljajo vašo podatkovno povezavo visoke hitrosti\n Glasovni klic lahko nadgradite v video klic\n\n Za več informacij si oglejte <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
   <string name="video_call_welcome_message_repeat">Vedno prikaži to sporočilo</string>
+  <string name="toast_change_video_call_failed">Sprememba na video klic ni možna, nepravilna oblika številke</string>
+  <string name="toast_make_video_call_failed">Video klic ni možen, nepravilna oblika številke</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Video klic, pokaži me</string>
+  <string name="overflowRXCallMenuItemText">Video klic, skrij me</string>
+  <string name="overflowVOCallMenuItemText">Glasovni klic</string>
+  <string name="video_call">Video klic</string>
+  <string name="call_data_info_label">Števci porabe klicev/podatkov</string>
+  <string name="call_data_info_description">Čas uporabe in poraba podatkov glasovnega klica</string>
+  <string name="alert_call_over_wifi">Klici bodo opravljeni preko omr. Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Na voljo ni nobenega mobilnega omrežja. Za klice se povežite na razpoložljivo omrežje Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Za klicanje se povežite na omr. Wi-Fi.</string>
 </resources>

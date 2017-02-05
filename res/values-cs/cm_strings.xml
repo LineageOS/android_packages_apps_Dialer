@@ -86,10 +86,32 @@
   <string name="speed_dial_delete">Odstranit</string>
   <string name="speed_dial_unassigned_dialog_title">Klávesa nepřiřazena</string>
   <string name="speed_dial_unassigned_dialog_message">Akce pro rychlé vytáčení není pro klávesu „<xliff:g id="number">%s</xliff:g>“ přiřazena. Chcete jí nyní přiřadit?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nemáte žádné nové příchozí hovory.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nemáte žádné odchozí hovory.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Seznam hovorů je prázdný</string>
+  <string name="calllog_search_hint">Prohledávat výpis hovorů</string>
+  <string name="no_call_log">Žádný protokol hovorů</string>
+  <string name="clear">Vyčistit</string>
+  <string name="description_clear_search">Vyčistit vyhledávání</string>
+  <string name="video_call_welcome_title"><b>Vítejte v novém Video Hovoru</b></string>
+  <string name="video_call_welcome_message">Všichni rádi slyšíme známý hlas na druhé straně linky, ale pohled z očí do očí je mnohem lepší! Zde se dočtete všechny informace, které potřebujete vědět, abyste mohli využívat videohovory v reálném čase:\nMusíte mít připojení 4G LTE nebo Wi-Fi, přes které budete telefonovat.\nZařízení, na které budete volat, musí být kompatibilní\npro video hovory.\nVideo hovory používají vysokorychlostní datový přenos.\nBěhem hlasového hovoru můžete přepnout na video hovor.\n\nVíce informací na: <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+  <string name="video_call_welcome_message_repeat">Zobrazit tuto zprávu vždy</string>
+  <string name="toast_change_video_call_failed">Nelze změnit na videohovor, nesprávný formát čísla</string>
+  <string name="toast_make_video_call_failed">Nelze uskutečnit videohovor, nesprávný formát čísla</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videohovor, ukaž mě</string>
+  <string name="overflowRXCallMenuItemText">Videohovor, skryj mě</string>
+  <string name="overflowVOCallMenuItemText">Hlasový hovor</string>
+  <string name="video_call">Video hovor</string>
+  <string name="call_data_info_label">Počitadla hovorů/dat</string>
+  <string name="call_data_info_description">Využití času a dat při hlasovém volání</string>
+  <string name="alert_call_over_wifi">Hovory budou realizován přes Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Mobilní síť není k dispozici. Pro hovory se připojte k dostupné Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Připojit k Wi-Fi pro volání.</string>
 </resources>

@@ -92,4 +92,6 @@
   <!-- Text displayed when the list of outgoing calls is empty -->
   <!-- Text displayed when the call log is empty. -->
   <!-- Add for enhance videocall ui -->
+  <string name="overflowVOCallMenuItemText">Panggilan suara</string>
+  <string name="video_call">Panggilan video</string>
 </resources>

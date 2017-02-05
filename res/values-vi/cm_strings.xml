@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
+  <string name="speed_dial_edit_title">Chỉnh sửa quay số nhanh <xliff:g id="index" example="2">%1$d </xliff:g></string>
+  <string name="speed_dial_input_hint">Vui lòng nhập một số</string>
   <string name="call_log_show_all_slots">Tất cả các SIM</string>
   <string name="call_log_all_calls_header">Tất cả các cuộc gọi</string>
   <string name="call_log_blacklist_header">Chỉ các cuộc gọi bị chặn</string>
+  <string name="call_log_blocked_empty">Bạn có không có cuộc gọi bị chặn.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Thống kê</string>
   <string name="callStatsDetailTitle">Chi tiết thống kê cuộc gọi</string>
@@ -83,10 +86,32 @@
   <string name="speed_dial_delete">Xóa</string>
   <string name="speed_dial_unassigned_dialog_title">Phím chưa ấn định</string>
   <string name="speed_dial_unassigned_dialog_message">Không có thao tác quay số nhanh nào được ấn định cho phím số \'<xliff:g id="number">%s</xliff:g>\'. Bạn có muốn ấn định một thao tác bây giờ không?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Để sử dụng quay số nhanh, trước tiên hãy tắt chế độ máy bay</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Bạn có không có cuộc gọi đến.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Bạn có không có cuộc gọi đi.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Không có cuộc gọi nào</string>
+  <string name="calllog_search_hint">Tìm kiếm nhật ký cuộc gọi</string>
+  <string name="no_call_log">Không có nhật ký cuộc gọi</string>
+  <string name="clear">Xóa</string>
+  <string name="description_clear_search">Xóa tìm kiếm</string>
+  <string name="video_call_welcome_title"><b>Chào mừng đến với Trình quay số Cuộc gọi Video</b></string>
+  <string name="video_call_welcome_message">Chúng ta đều thích nghe giọng nói quen thuộc ở cuối đường dây, nhưng nói chuyện mặt đối mặt là tốt hơn rất nhiều! Dưới đây là những gì bạn nên biết để có được thời gian thực của các kết nối đi (hoặc FaceTime?) các kết nối đến:\n Bạn sẽ cần phải sử dụng 4G LTE hoặc kết nối Wi-Fi\n Thiết bị mà bạn đang gọi điện thoại cũng phải tương thích với cuộc gọi video\n Các cuộc gọi video sử dụng dữ liệu tốc độ cao của bạn\n Bạn cũng có thể nâng cấp một cuộc gọi thoại thành một cuộc gọi video\n\n Kiểm tra tại <a> https://support.t-mobile.com/docs/DOC-23574 </a> để biết thêm thông tin.</string>
+  <string name="video_call_welcome_message_repeat">Hiển thị thông báo này mỗi lần</string>
+  <string name="toast_change_video_call_failed">Không thể thay đổi thành cuộc gọi video, không đúng định dạng số</string>
+  <string name="toast_make_video_call_failed">Không thể thực hiện cuộc gọi video, không đúng định dạng số</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Cuộc gọi video, hiển thị tôi</string>
+  <string name="overflowRXCallMenuItemText">Cuộc gọi video, ẩn tôi</string>
+  <string name="overflowVOCallMenuItemText">Cuộc gọi thoại</string>
+  <string name="video_call">Cuộc gọi video</string>
+  <string name="call_data_info_label">Bộ đếm sử dụng Cuộc gọi/dữ liệu</string>
+  <string name="call_data_info_description">Thời gian sử dụng cuộc gọi thoại và thời gian sử dụng dữ liệu</string>
+  <string name="alert_call_over_wifi">Cuộc gọi sẽ thực hiện qua Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Mạng di động không có sẵn. Kết nối tới Wi-Fi có sẵn để thực hiện cuộc gọi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Kết nối tới Wi-Fi để thực hiện cuộc gọi.</string>
 </resources>
