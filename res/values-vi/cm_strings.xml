@@ -141,4 +141,6 @@
   <string name="search_shortcut_view_note">Xem ghi chú</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
   <string name="note_mod_settings_summary">Ghi chú từ bất kỳ nơi nào</string>
+  <string name="callerinfo_provider_status_disabling">Đang tắt</string>
+  <string name="show_dialpad_at_start_title">Hiển thị trình quay số khi bắt đầu</string>
 </resources>
