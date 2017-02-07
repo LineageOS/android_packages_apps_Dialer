@@ -98,4 +98,6 @@
   <string name="calllog_search_hint">Keresés a hívásnaplóban</string>
   <string name="description_clear_search">Keresés törlése</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowVOCallMenuItemText">Hanghívások</string>
+  <string name="video_call">Videóhívás</string>
 </resources>

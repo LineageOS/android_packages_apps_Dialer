@@ -86,7 +86,7 @@
   <string name="speed_dial_delete">Verwijderen</string>
   <string name="speed_dial_unassigned_dialog_title">Toets niet toegewezen</string>
   <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegmodus uit te schakelen</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegtuigmodus uit te schakelen</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -94,13 +94,13 @@
   <!-- Text displayed when the list of outgoing calls is empty -->
   <string name="recentOutgoing_empty">Geen uitgaande oproepen.</string>
   <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">De oproeplijst is leeg</string>
-  <string name="calllog_search_hint">Zoek in oproeplijst</string>
-  <string name="no_call_log">Geen oproeplijst</string>
+  <string name="recentCalls_empty">Gespreksstatistieken zijn leeg</string>
+  <string name="calllog_search_hint">Gespreksstatistieken doorzoeken</string>
+  <string name="no_call_log">Geen gespreksstatistieken</string>
   <string name="clear">Leegmaken</string>
   <string name="description_clear_search">Zoekopdracht wissen</string>
   <string name="video_call_welcome_title"><b>Welkom bij de nieuwe Video-oproep-app</b></string>
-  <string name="video_call_welcome_message_repeat">Toon dit bericht elke keer</string>
+  <string name="video_call_welcome_message_repeat">Dit bericht elke keer weergeven</string>
   <string name="toast_change_video_call_failed">Kan niet omschakelen naar video-oproep, ongeldig nummerformaat</string>
   <string name="toast_make_video_call_failed">Kan video-oproep niet starten, ongeldig nummerformaat</string>
   <!-- Add for enhance videocall ui -->

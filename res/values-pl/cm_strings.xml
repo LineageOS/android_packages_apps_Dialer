@@ -90,5 +90,8 @@
   <!-- Text displayed when the list of incoming calls is empty -->
   <!-- Text displayed when the list of outgoing calls is empty -->
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Twój rejestr połączeń jest pusty</string>
+  <string name="clear">Wyczyść</string>
+  <string name="description_clear_search">Wyczyść wyszukiwanie</string>
   <!-- Add for enhance videocall ui -->
 </resources>
