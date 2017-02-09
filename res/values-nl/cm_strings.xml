@@ -109,7 +109,7 @@
   <string name="overflowVOCallMenuItemText">Spraakoproep</string>
   <string name="video_call">Video-oproep</string>
   <string name="call_data_info_label">Gespreks-/gegevens-timers</string>
-  <string name="call_data_info_description">Gebruiksduurs van spraakoproepen en gegevensgebruik</string>
+  <string name="call_data_info_description">Gebruiksduur van spraakoproepen en gegevensgebruik</string>
   <string name="alert_call_over_wifi">Gesprekken zullen worden gemaakt via wifi.</string>
   <string name="alert_call_no_cellular_coverage">Geen mobiel netwerk beschikbaar. Maak een verbinding met een wifi-netwerk om te kunnen bellen.</string>
   <string name="alert_user_connect_to_wifi_for_call">Maak een verbinding met een wifi-netwerk om te kunnen bellen.</string>
