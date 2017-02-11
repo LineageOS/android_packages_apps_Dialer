@@ -989,18 +989,12 @@ public class InCallActivity extends TransactionSafeActivity implements FragmentD
     private void initializeDsdaSwitchTab() {
         int phoneCount = InCallServiceImpl.sPhoneCount;
         ActionBar bar = getActionBar();
-        View[] mDsdaTabLayout = new View[phoneCount];
         int[] subString = {R.string.sub_1, R.string.sub_2};
 
         Log.d(TAG, "initializeDsdaSwitchTab" + phoneCount);
         for (int i = 0; i < phoneCount; i++) {
-            mDsdaTabLayout[i] = getLayoutInflater()
-                    .inflate(R.layout.msim_tab_sub_info, null);
-
-            ((TextView)mDsdaTabLayout[i].findViewById(R.id.tabSubText))
-                    .setText(subString[i]);
-
-            mDsdaTab[i] = bar.newTab().setCustomView(mDsdaTabLayout[i])
+            mDsdaTab[i] = bar.newTab()
+                    .setText(subString[i])
                     .setTabListener(new TabListener(i));
         }
     }

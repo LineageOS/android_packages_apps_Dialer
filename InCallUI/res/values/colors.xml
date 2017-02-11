@@ -31,6 +31,7 @@
 
     <color name="incall_action_bar_background_color">@color/incall_background_color</color>
     <color name="incall_action_bar_text_color">@color/incall_call_banner_text_color</color>
+    <color name="incall_action_bar_tab_text_color">#000000</color>
 
     <color name="incall_photo_background_color">#545454</color>
 
