@@ -74,7 +74,7 @@
          circular reveal animation for a new outgoing call to work correctly. We don't just use
          Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
          InCallActivity to have the correct Material style. -->
-    <style name="Theme.InCallScreen" parent="@android:style/Theme.Material.Light">
+    <style name="Theme.InCallScreen" parent="@style/Theme.AppCompat.Light">
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

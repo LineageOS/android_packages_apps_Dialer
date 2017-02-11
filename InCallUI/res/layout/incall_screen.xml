@@ -15,9 +15,34 @@
 -->
 
 <!-- In-call Phone UI; see InCallActivity.java. -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:id="@+id/main" >
-</FrameLayout>
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <!-- tabMaxWidth is set to a large value (which is supposed to ever
+         be larger than the TabLayout width) in order to make sure it's
+         never taken into consideration and tab size is always TabLayout
+         width divided by tab count -->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/dsda_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabMaxWidth="10000dp"
+        app:tabTextColor="@color/tab_text_color"
+        app:tabSelectedTextColor="@color/incall_tab_indicator_color"
+        app:tabIndicatorColor="@color/incall_tab_indicator_color" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/black"
+        android:id="@+id/main" />
+
+</LinearLayout>

@@ -18,7 +18,6 @@ package com.android.incallui;
 
 import com.google.common.base.Preconditions;
 
-import android.app.ActivityManager.TaskDescription;
 import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -1994,10 +1993,7 @@ public class InCallPresenter implements CallList.Listener,
             color = mThemeColors.mSecondaryColor;
         }
 
-        mInCallActivity.getWindow().setStatusBarColor(color);
-        final TaskDescription td = new TaskDescription(
-                resources.getString(R.string.notification_ongoing_call), null, color);
-        mInCallActivity.setTaskDescription(td);
+        mInCallActivity.updateColor(color);
     }
 
     /**
