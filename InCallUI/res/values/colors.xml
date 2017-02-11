@@ -32,6 +32,9 @@
     <color name="incall_action_bar_background_color">@color/incall_background_color</color>
     <color name="incall_action_bar_text_color">@color/incall_call_banner_text_color</color>
 
+    <color name="incall_tab_text_color">#ffffff</color>
+    <color name="incall_tab_indicator_color">#ffffff</color>
+
     <color name="incall_photo_background_color">#545454</color>
 
     <!-- Put on top of each photo, implying 80% darker than usual. -->
