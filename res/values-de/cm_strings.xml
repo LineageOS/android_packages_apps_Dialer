@@ -114,4 +114,16 @@
   <string name="alert_call_over_wifi">Anrufe erfolgen über WLAN.</string>
   <string name="alert_call_no_cellular_coverage">Kein Mobilfunknetz verfügbar. Verbinden Sie sich mit einem verfügbaren WLAN-Netzwerk, um zu telefonieren.</string>
   <string name="alert_user_connect_to_wifi_for_call">Verbinden Sie sich mit einem WLAN-Netzwerk, um zu telefonieren.</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
 </resources>

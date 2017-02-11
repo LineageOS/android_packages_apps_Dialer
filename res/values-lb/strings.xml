@@ -250,18 +250,6 @@
   <string name="type_outgoing_video">Erausgoende Videouruff</string>
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video">Verpasste Videouruff</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for voicemail details screen -->
   <string name="type_voicemail">Sproochopnam</string>
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->

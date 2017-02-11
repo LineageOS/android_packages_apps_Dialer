@@ -114,4 +114,16 @@
   <string name="alert_call_over_wifi">Las llamadas pueden hacerse mediante Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">No hay ninguna red móvil disponible. Conectate a una red Wi-Fi disponible para hacer llamadas.</string>
   <string name="alert_user_connect_to_wifi_for_call">Conectate a una red Wi-Fi para hacer llamadas.</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
 </resources>

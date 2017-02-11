@@ -69,4 +69,16 @@
   <!-- Text displayed when the list of outgoing calls is empty -->
   <!-- Text displayed when the call log is empty. -->
   <!-- Add for enhance videocall ui -->
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
 </resources>

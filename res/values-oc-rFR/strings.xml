@@ -175,18 +175,6 @@
   <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for voicemail details screen -->
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->
   <!-- Title for blocked call type. [CHAR LIMIT=40] -->
