@@ -113,6 +113,7 @@
   <string name="alert_call_over_wifi">Gesprekken zullen worden gemaakt via wifi.</string>
   <string name="alert_call_no_cellular_coverage">Geen mobiel netwerk beschikbaar. Maak een verbinding met een wifi-netwerk om te kunnen bellen.</string>
   <string name="alert_user_connect_to_wifi_for_call">Maak een verbinding met een wifi-netwerk om te kunnen bellen.</string>
+  <string name="menu_4g_conference_call">4G telefonische vergadering</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_incoming_volte">Inkomende 4G spraak-oproep</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
