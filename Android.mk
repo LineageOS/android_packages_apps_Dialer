@@ -32,7 +32,8 @@ LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, $(res_dirs)) \
     $(support_library_root_dir)/v7/cardview/res \
     $(support_library_root_dir)/v7/recyclerview/res \
     $(support_library_root_dir)/v7/appcompat/res \
-    $(support_library_root_dir)/design/res
+    $(support_library_root_dir)/design/res \
+    $(support_library_root_dir)/transition/res
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
@@ -40,6 +41,7 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages android.support.v7.cardview \
     --extra-packages android.support.v7.recyclerview \
     --extra-packages android.support.design \
+    --extra-packages android.support.transition \
     --extra-packages com.android.incallui \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common
@@ -52,6 +54,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v7-cardview \
     android-support-v7-recyclerview \
     android-support-design \
+    android-support-transition \
     com.android.vcard \
     guava \
     libphonenumber
