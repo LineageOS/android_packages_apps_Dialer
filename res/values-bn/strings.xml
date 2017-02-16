@@ -243,7 +243,7 @@
     <string name="call_settings_label" msgid="313434211353070209">"কল"</string>
     <string name="manage_blocked_numbers_label" msgid="5959801428936629196">"কল অবরোধ করা"</string>
     <string name="blocked_numbers_disabled_emergency_header_label" msgid="7870947220238070418">"কল অবরোধ সাময়িকভাবে বন্ধ রয়েছে"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"কল অবরোধ অক্ষম করা হয়েছে কারণ আপনি গত ২৮ ঘন্টার মধ্যে এই ফোন থেকে জরুরি পরিষেবায় যোগাযোগ করেছেন। ২৮ ঘন্টার সময়সীমা পেরিয়ে গেলেই এটি স্বয়ংক্রিয়ভাবে পুনরায় সক্ষম হবে।"</string>
+    <string name="blocked_numbers_disabled_emergency_desc" msgid="7755803249073401381">"কল অবরোধ অক্ষম করা হয়েছে কারণ আপনি গত ২৮ ঘন্টার মধ্যে এই ফোন থেকে জরুরি পরিষেবায় যোগাযোগ করেছেন। ২৮ ঘন্টার সময়সীমা পেরিয়ে গেলেই এটি স্বয়ংক্রিয়ভাবে আবার সক্ষম হবে।"</string>
     <string name="import_send_to_voicemail_numbers_label" msgid="1606601823746799926">"নম্বরগুলি আমদানি করুন"</string>
     <string name="blocked_call_settings_import_description" msgid="8640906226815125906">"আপনি আগে থেকেই অন্য অ্যাপ্লিকেশানগুলির মাধ্যমে স্বয়ংক্রিয়ভাবে ভয়েস মেল পাঠানোর জন্য কিছু কলারকে চিহ্নিত করেছেন৷"</string>
     <string name="blocked_call_settings_view_numbers_button" msgid="6698986720875955935">"নম্বরগুলি দেখুন"</string>

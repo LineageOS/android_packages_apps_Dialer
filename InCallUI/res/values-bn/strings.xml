@@ -37,7 +37,7 @@
     <string name="caller_manage_header" msgid="4036790479287738218">"কনফারেন্স কল <xliff:g id="CONF_CALL_TIME">%s</xliff:g>"</string>
     <string name="voicemail_settings_number_label" msgid="2951965862286532957">"ভয়েসমেল নম্বর"</string>
     <string name="card_title_dialing" msgid="5046026076417718916">"ডায়াল করা হচ্ছে"</string>
-    <string name="card_title_redialing" msgid="8072468059192027844">"পুনরায় ডায়াল করা হচ্ছে"</string>
+    <string name="card_title_redialing" msgid="8072468059192027844">"আবার ডায়াল করা হচ্ছে"</string>
     <string name="card_title_conf_call" msgid="1747835072739982104">"কনফারেন্স কল"</string>
     <string name="card_title_incoming_call" msgid="4138485434087223132">"আগত কল"</string>
     <string name="card_title_incoming_work_call" msgid="7000583925426981712">"আগত কাজের কল"</string>
@@ -107,7 +107,7 @@
     <string name="dial_emergency_empty_error" msgid="199888628163390267">"কল করা যাবে না৷ কোনো জরুরী নম্বর ডায়াল করুন৷"</string>
     <string name="dialerKeyboardHintText" msgid="8533449463925408141">"ডায়াল করতে কীবোর্ড ব্যবহার করুন"</string>
     <string name="onscreenHoldText_unselected" msgid="4509232821220492533">"কল হোল্ডে রাখুন"</string>
-    <string name="onscreenHoldText_selected" msgid="2988100347384733032">"কল পুনরায় শুরু করুন"</string>
+    <string name="onscreenHoldText_selected" msgid="2988100347384733032">"কল আবার শুরু করুন"</string>
     <string name="onscreenEndCallText" msgid="1416981593311001074">"কল শেষ করুন"</string>
     <string name="onscreenShowDialpadText_unselected" msgid="8253784035944284938">"ডায়ালপ্যাড দেখান"</string>
     <string name="onscreenShowDialpadText_selected" msgid="7368390784890311449">"ডায়ালপ্যাড লুকান"</string>
