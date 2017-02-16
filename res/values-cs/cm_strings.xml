@@ -79,4 +79,66 @@
   <string name="call_recording_category_title">Nahrávání hovorů</string>
   <string name="call_recording_format">Formát zvuku</string>
   <string name="call_playback_no_app_found_toast">Nenalezena žádná aplikace pro přehrávání vybraného záznamu.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Nastavení rychlého vytáčení</string>
+  <string name="speed_dial_not_set">(nenastaveno)</string>
+  <string name="speed_dial_replace">Nahradit</string>
+  <string name="speed_dial_delete">Odstranit</string>
+  <string name="speed_dial_unassigned_dialog_title">Klávesa nepřiřazena</string>
+  <string name="speed_dial_unassigned_dialog_message">Akce pro rychlé vytáčení není pro klávesu „<xliff:g id="number">%s</xliff:g>“ přiřazena. Chcete jí nyní přiřadit?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“</string>
+  <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="yes">Ano</string>
+  <string name="no">Ne</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nemáte žádné nové příchozí hovory.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nemáte žádné odchozí hovory.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Seznam hovorů je prázdný</string>
+  <string name="calllog_search_hint">Prohledávat výpis hovorů</string>
+  <string name="no_call_log">Žádný protokol hovorů</string>
+  <string name="clear">Vyčistit</string>
+  <string name="description_clear_search">Vyčistit vyhledávání</string>
+  <string name="video_call_welcome_title"><b>Vítejte v novém Video Hovoru</b></string>
+  <string name="video_call_welcome_message">Všichni rádi slyšíme známý hlas na druhé straně linky, ale pohled z očí do očí je mnohem lepší! Zde se dočtete všechny informace, které potřebujete vědět, abyste mohli využívat videohovory v reálném čase:\nMusíte mít připojení 4G LTE nebo Wi-Fi, přes které budete telefonovat.\nZařízení, na které budete volat, musí být kompatibilní\npro video hovory.\nVideo hovory používají vysokorychlostní datový přenos.\nBěhem hlasového hovoru můžete přepnout na video hovor.\n\nVíce informací na: <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+  <string name="video_call_welcome_message_repeat">Zobrazit tuto zprávu vždy</string>
+  <string name="toast_change_video_call_failed">Nelze změnit na videohovor, nesprávný formát čísla</string>
+  <string name="toast_make_video_call_failed">Nelze uskutečnit videohovor, nesprávný formát čísla</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videohovor, ukaž mě</string>
+  <string name="overflowRXCallMenuItemText">Videohovor, skryj mě</string>
+  <string name="overflowVOCallMenuItemText">Hlasový hovor</string>
+  <string name="video_call">Video hovor</string>
+  <string name="call_data_info_label">Počitadla hovorů/dat</string>
+  <string name="call_data_info_description">Využití času a dat při hlasovém volání</string>
+  <string name="alert_call_over_wifi">Hovory budou realizován přes Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Mobilní síť není k dispozici. Pro hovory se připojte k dostupné Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Připojit k Wi-Fi pro volání.</string>
+  <string name="menu_add_to_4g_conference_call">Přidat se ke konferenčnímu hovoru 4G</string>
+  <string name="menu_4g_conference_call">Konferenční hovor 4G</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Příchozí 4G hovor</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Příchozí 4G video hovor</string>
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Odchozí 4G hovor</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Odchozí 4G video hovor</string>
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Zmeškaný 4G hovor</string>
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Zmeškaný 4G video hovor</string>
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Příchozí Wi-Fi hovor</string>
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Příchozí Wi-Fi video hovor</string>
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Odchozí Wi-Fi hovor</string>
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Odchozí Wi-Fi video hovor</string>
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Zmeškaný Wi-Fi hovor</string>
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Zmeškaný Wi-Fi video hovor</string>
 </resources>

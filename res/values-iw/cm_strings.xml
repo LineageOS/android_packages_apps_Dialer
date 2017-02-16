@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">ספק שיחה חכמה מזוהה</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+  <string name="speed_dial_edit_title">ערוך חיוג מהיר <xliff:g id="index" example="2">%1$d </xliff:g></string>
+  <string name="speed_dial_input_hint">הזן מספר</string>
   <string name="call_log_show_all_slots">כל כרטיסי ה-SIM</string>
   <string name="call_log_all_calls_header">כל השיחות</string>
   <string name="call_log_blacklist_header">שיחות שנחסמו בלבד</string>
+  <string name="call_log_blocked_empty">אין לך שיחות שנחסמו.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">סטטיסטיקה</string>
   <string name="callStatsDetailTitle">פרטים של סטטיסטיקת שיחות</string>
@@ -76,4 +79,73 @@
   <string name="call_recording_category_title">הקלטת שיחות</string>
   <string name="call_recording_format">פורמט שמע</string>
   <string name="call_playback_no_app_found_toast">לא נמצא יישום לניגון ההקלטה שנבחרה.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">הגדרות חיוג מהיר</string>
+  <string name="speed_dial_not_set">(לא מוגדר)</string>
+  <string name="speed_dial_replace">החלף</string>
+  <string name="speed_dial_delete">מחק</string>
+  <string name="speed_dial_unassigned_dialog_title">לא הוגדר מקש</string>
+  <string name="speed_dial_unassigned_dialog_message">לא הוגדרה פעולה לחיוג מהיר למספר \'<xliff:g id="number">%s</xliff:g>\'. האם ברצונך להגדיר פעולה עכשיו?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">כדי להשתמש בחיוג מהיר, כבה תחילה את מצב הטיסה</string>
+  <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">לא ניתן להגדיר חיוג מהיר עבור מקש זה</string>
+  <string name="yes">כן</string>
+  <string name="no">לא</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">אין לך שיחות נכנסות.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">אין לך שיחות יוצאות.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">יומן השיחות שלך ריק</string>
+  <string name="calllog_search_hint">חיפוש ביומן שיחות</string>
+  <string name="no_call_log">אין יומן שיחות</string>
+  <string name="clear">נקה</string>
+  <string name="description_clear_search">נקה חיפוש</string>
+  <string name="video_call_welcome_title"><b>ברוכים הבאים לחייגן הוידאו החדש</b></string>
+  <string name="video_call_welcome_message">כולנו אוהבים לשמוע קול מוכר בסוף של דבר, אבל לדבר פנים אל פנים זה הרבה יותר כיף! הנה מה שאת/ה צריך לדעת כדי להפעיל בזמן אמת את שיחות הוידאו:
+\n צריך להיות בדור רביעי או בחיבור Wi-Fi 
+\n המכשיר אליו אתה מתקשר חייב לתמוך בשיחות וידאו
+\n שיחות וידאו משתמשות באינטרנט מהיר
+\n אתה יכול להחליף לשיחת וידאו תוך כדי שיחה קולית
+\n לקבלת מידע נוסף: <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+  <string name="video_call_welcome_message_repeat">תמיד הצג הודעה זו</string>
+  <string name="toast_change_video_call_failed">לא ניתן להחליף לשיחת וידאו, תבנית מספר שגויה</string>
+  <string name="toast_make_video_call_failed">לא יכול לבצע שיחת וידאו, תבנית המספר שגויה</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">שיחת וידיאו, הצג אותי</string>
+  <string name="overflowRXCallMenuItemText">שיחת וידיאו, הסתר אותי</string>
+  <string name="overflowVOCallMenuItemText">שיחת קולית</string>
+  <string name="video_call">שיחת וידאו</string>
+  <string name="call_data_info_label">זמן שימוש בשיחות או באינטרנט סלולרי</string>
+  <string name="call_data_info_description">זמן שימוש בשיחת וידאו וזמן שימוש באינטרנט סלולרי</string>
+  <string name="alert_call_over_wifi">שיחות יבוצעו באמצעות ה־Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">אין רשת סלולרית זמינה, כדי לבצע שיחה התחבר לרשת Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">כדי לבצע שיחה התחבר לרשת Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">הקש כאן כדי לראות את הרשתות הזמינות</string>
+  <string name="menu_add_to_4g_conference_call">הוסף אל שיחת ועידה 4G</string>
+  <string name="menu_4g_conference_call">שיחת ועידה 4G</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">שיחת קולית נכנסת 4G</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">שיחת וידיאו נכנסת 4G</string>
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">שיחת קולית יוצאת 4G</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">שיחת וידיאו יוצאת 4G</string>
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">שיחה קולית 4G שלא נענתה</string>
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">שיחה וידיאו 4G שלא נענתה</string>
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">שיחת WiFi קולית נכנסת</string>
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">שיחת WiFi וידיאו נכנסת</string>
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">שיחת WiFi קולית יוצאת</string>
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">שיחת WiFi וידיאו יוצאת</string>
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">שיחה WiFi קולית שלא נענתה</string>
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">שיחת WiFi וידיאו שלא נענתה</string>
 </resources>

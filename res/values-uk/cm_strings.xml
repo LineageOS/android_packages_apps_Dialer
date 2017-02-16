@@ -38,9 +38,12 @@
   <string name="reverse_lookup_provider_title">Постачальник зворотнього пошуку</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Китай (CN)</string>
+  <string name="speed_dial_edit_title">Редагувати швидкий набір <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_input_hint">Будь ласка, введіть номер</string>
   <string name="call_log_show_all_slots">Усі SIM</string>
   <string name="call_log_all_calls_header">Усі дзвінки</string>
   <string name="call_log_blacklist_header">Лише заблоковані виклики</string>
+  <string name="call_log_blocked_empty">Немає заблокованих викликів.</string>
   <!-- Call statistics -->
   <string name="call_log_stats_title">Статистика</string>
   <string name="callStatsDetailTitle">Детальна статистика дзвінків</string>
@@ -62,4 +65,61 @@
   <string name="call_stats_sort_by_duration">Сортувати за тривалістю виклику</string>
   <string name="call_stats_sort_by_count">Сортувати за кількістю викликів</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Налаштування швидкого набору</string>
+  <string name="speed_dial_not_set">(не вказано)</string>
+  <string name="speed_dial_replace">Замінити</string>
+  <string name="speed_dial_delete">Видалити</string>
+  <string name="speed_dial_unassigned_dialog_title">Ключ непризначений</string>
+  <string name="speed_dial_unassigned_dialog_message">Клавіші «<xliff:g id="number">%s</xliff:g>» не надано номер швидкого набору. Призначити його?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Щоб використовувати швидкий набір, спершу вимкніть режим польоту</string>
+  <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Швидкий набір для цієї кнопки не може бути встановлено</string>
+  <string name="yes">Так</string>
+  <string name="no">Ні</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">У вас немає вхідних викликів.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">У вас немає вихідних викликів.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Журнал викликів порожній</string>
+  <string name="calllog_search_hint">Шукати в журналі викликів</string>
+  <string name="no_call_log">Немає журналу викликів</string>
+  <string name="clear">Очистити</string>
+  <string name="description_clear_search">Очистити вікно пошуку</string>
+  <string name="video_call_welcome_title"><b>Ласкаво просимо до нового меню відеовикликів</b></string>
+  <string name="video_call_welcome_message">Ми всі раді почути знайомий голос в кінці лінії, але говорити лицем до лиця набагато краще! Ось що вам слід знати, щоб використовувати відеовиклики:\n Ви маєте використовувати 4G LTE або Wi-Fi з\'єднання\n Пристрій, на який ви дзвоните також має підтримувати відеозв\'язок\n Відеовиклики споживають багато мережного трафіку\n Ви можете також оновити голосовий виклик до відеовиклика\n\n Прочитайте <a>https://support.t-mobile.com/docs/DOC-23574</a> для отримання додаткової інформації.</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="call_data_info_label">Таймери використання викликів та даних</string>
+  <string name="call_data_info_description">Час використання голосового виклику та використання даних</string>
+  <string name="alert_call_over_wifi">Виклики будуть виконані через Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Відсутня стільникова мережа. Для здійснення дзвінків під\'єднайтеся до доступного Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Підключіться до Wi-Fi, щоб здійснювати виклики.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Натисніть тут для перегляду доступних мереж</string>
+  <string name="menu_add_to_4g_conference_call">Додати до 4G виклик-конференції</string>
+  <string name="menu_4g_conference_call">4G виклик-конференція</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Вхідний 4G голосовий виклик</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Вхідний 4G відео виклик</string>
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Вихідний 4G голосовий виклик</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Вихідний 4G відео виклик</string>
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Пропущений 4G голосовий виклик</string>
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Пропущений 4G відео виклик</string>
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Вхідний Wi-Fi голосовий виклик</string>
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Вхідний Wi-Fi відео виклик</string>
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Вихідний Wi-Fi голосовий виклик</string>
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Вихідний Wi-Fi відео виклик</string>
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Пропущений Wi-Fi голосовий виклик</string>
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Пропущений Wi-Fi відео виклик</string>
 </resources>

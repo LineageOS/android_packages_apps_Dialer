@@ -250,18 +250,6 @@
   <string name="type_outgoing_video">Erausgoende Videouruff</string>
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video">Verpasste Videouruff</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for voicemail details screen -->
   <string name="type_voicemail">Sproochopnam</string>
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->
@@ -655,9 +643,4 @@
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <!-- Accessibility announcement to indicate which call is active -->
-  <!--  for speed dial -->
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <!-- Text displayed when the call log is empty. -->
-  <!-- Add for enhance videocall ui -->
 </resources>

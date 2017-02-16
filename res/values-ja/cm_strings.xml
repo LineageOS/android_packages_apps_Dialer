@@ -79,4 +79,65 @@
   <string name="call_recording_category_title">通話の録音</string>
   <string name="call_recording_format">音声フォーマット</string>
   <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">スピードダイヤルの設定</string>
+  <string name="speed_dial_not_set">（未設定）</string>
+  <string name="speed_dial_replace">書き換える</string>
+  <string name="speed_dial_delete">削除</string>
+  <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
+  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
+  <string name="dialog_speed_dial_airplane_mode_message">スピードダイヤルを使用するには、機内モードを OFF にしてください</string>
+  <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">このキーにはスピードダイヤルを設定できません</string>
+  <string name="yes">はい</string>
+  <string name="no">いいえ</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">着信履歴はありません。</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">発信履歴はありません。</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">通話履歴はありません</string>
+  <string name="calllog_search_hint">通話履歴を検索</string>
+  <string name="no_call_log">通話履歴なし</string>
+  <string name="clear">消去</string>
+  <string name="description_clear_search">検索を消去</string>
+  <string name="video_call_welcome_title"><b>新しいビデオ通話アプリへようこそ</b></string>
+  <string name="video_call_welcome_message_repeat">このメッセージを毎回表示する</string>
+  <string name="toast_change_video_call_failed">ビデオ通話に変更できません。番号の形式が間違っています</string>
+  <string name="toast_make_video_call_failed">ビデオ通話の発信ができません。番号の形式が間違っています</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowVOCallMenuItemText">音声通話</string>
+  <string name="video_call">ビデオ通話</string>
+  <string name="call_data_info_label">通話/データ使用タイマー</string>
+  <string name="call_data_info_description">ビデオ通話とデータの使用時間です</string>
+  <string name="alert_call_over_wifi">Wi-Fi を使って発信します。</string>
+  <string name="alert_call_no_cellular_coverage">モバイルネットワークがありません。発信するには Wi-Fi に接続してください。</string>
+  <string name="alert_user_connect_to_wifi_for_call">発信するには Wi-Fi に接続してください。</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">ここをタップすると利用可能なネットワークを表示します</string>
+  <string name="menu_add_to_4g_conference_call">4G グループ通話に追加する</string>
+  <string name="menu_4g_conference_call">4G グループ通話</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">4G 音声通話着信</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">4G ビデオ通話着信</string>
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">4G 音声通話発信</string>
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">4G ビデオ通話発信</string>
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">不在 4G 音声通話</string>
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">不在 4G ビデオ通話</string>
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Wi-Fi 音声通話着信</string>
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Wi-Fi ビデオ通話着信</string>
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Wi-Fi 音声通話発信</string>
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Wi-Fi ビデオ通話発信</string>
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">不在 Wi-Fi 音声通話</string>
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">不在 Wi-Fi ビデオ通話</string>
 </resources>

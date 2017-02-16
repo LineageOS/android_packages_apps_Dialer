@@ -35,4 +35,22 @@
   <string name="call_recording_category_title">Grabación de llamadas</string>
   <string name="call_recording_format">Formato de audio</string>
   <string name="call_playback_no_app_found_toast">No se encontró una aplicación para la reproducción de la grabación seleccionada.</string>
+  <!-- Speed Dial -->
+  <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <!-- Text displayed when the call log is empty. -->
+  <!-- Add for enhance videocall ui -->
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
 </resources>

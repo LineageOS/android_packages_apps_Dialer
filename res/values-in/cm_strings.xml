@@ -79,4 +79,46 @@
   <string name="call_recording_category_title">Rekaman panggilan</string>
   <string name="call_recording_format">Format audio</string>
   <string name="call_playback_no_app_found_toast">Tidak ada aplikasi ditemukan untuk memutar kembali rekaman yang terpilih.</string>
+  <!-- Speed Dial -->
+  <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
+  <string name="speed_dial_not_set">(tidak ditetapkan)</string>
+  <string name="speed_dial_replace">Ganti</string>
+  <string name="speed_dial_delete">Hapus</string>
+  <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
+  <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditetapkan untuk tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Untuk menggunakan panggilan cepat, matikan mode pesawat terlebih dahulu</string>
+  <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Tidak ada panggilan masuk.</string>
+  <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Tidak ada panggilan keluar.</string>
+  <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Log panggilan kosong</string>
+  <string name="no_call_log">Tidak ada log panggilan</string>
+  <string name="toast_change_video_call_failed">Tidak dapat beralih ke panggilan video, format nomor salah</string>
+  <string name="toast_make_video_call_failed">Tidak dapat melakukan panggilan video, format nomor salah</string>
+  <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Panggilan video, tampilkan saya</string>
+  <string name="overflowRXCallMenuItemText">Panggilan video, sembunyikan saya</string>
+  <string name="overflowVOCallMenuItemText">Panggilan suara</string>
+  <string name="video_call">Panggilan video</string>
+  <string name="call_data_info_label">Penghitung waktu panggilan/penggunaan data</string>
+  <string name="call_data_info_description">Waktu penggunaan panggilan suara dan waktu penggunaan data</string>
+  <string name="alert_call_over_wifi">Panggilan akan dilakukan melalui Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Jaringan seluler tidak tersedia. Sambungkan ke Wi-Fi yang tersedia untuk melakukan panggilan.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Sambungkan ke Wi-Fi untuk melakukan panggilan.</string>
+  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
 </resources>
