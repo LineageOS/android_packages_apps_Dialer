@@ -47,6 +47,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Статистика</string>
   <string name="callStatsDetailTitle">Детальна статистика дзвінків</string>
+  <string name="call_stats_incoming">Вхідних: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Вихідних: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Пропущених: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Заблокованих: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Загалом: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Загалом: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Початкова дата</string>
@@ -64,7 +69,16 @@
   <string name="call_stats_reset_filter">Скинути фільтр</string>
   <string name="call_stats_sort_by_duration">Сортувати за тривалістю виклику</string>
   <string name="call_stats_sort_by_count">Сортувати за кількістю викликів</string>
+  <string name="call_stats_title_for_number">Цей номер</string>
+  <string name="call_stats_title_of_total">Від загального</string>
+  <string name="call_stats_title_durations">Тривалість викликів</string>
+  <string name="call_stats_title_count">Кількість викликів</string>
+  <string name="call_stats_title_average_duration">Середня тривалість виклику</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Журнал викликів не містить записів за вказаний період.</string>
+  <string name="call_recording_category_title">Запис виклику</string>
+  <string name="call_recording_format">Формат аудіо</string>
+  <string name="call_playback_no_app_found_toast">Не виявлено додатку, здатного відтворити обраний запис.</string>
   <!-- Speed Dial -->
   <string name="speed_dial_settings">Налаштування швидкого набору</string>
   <string name="speed_dial_not_set">(не вказано)</string>
@@ -89,7 +103,14 @@
   <string name="description_clear_search">Очистити вікно пошуку</string>
   <string name="video_call_welcome_title"><b>Ласкаво просимо до нового меню відеовикликів</b></string>
   <string name="video_call_welcome_message">Ми всі раді почути знайомий голос в кінці лінії, але говорити лицем до лиця набагато краще! Ось що вам слід знати, щоб використовувати відеовиклики:\n Ви маєте використовувати 4G LTE або Wi-Fi з\'єднання\n Пристрій, на який ви дзвоните також має підтримувати відеозв\'язок\n Відеовиклики споживають багато мережного трафіку\n Ви можете також оновити голосовий виклик до відеовиклика\n\n Прочитайте <a>https://support.t-mobile.com/docs/DOC-23574</a> для отримання додаткової інформації.</string>
+  <string name="video_call_welcome_message_repeat">Показувати це повідомлення щоразу</string>
+  <string name="toast_change_video_call_failed">Не можна змінити відеовиклик, неправильний формат номеру</string>
+  <string name="toast_make_video_call_failed">Не можна зробити відеовиклик - неправильний формат номеру</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Відеовиклик, показувати мене</string>
+  <string name="overflowRXCallMenuItemText">Відеовиклик, не показувати мене</string>
+  <string name="overflowVOCallMenuItemText">Голосовий виклик</string>
+  <string name="video_call">Відеовиклик</string>
   <string name="call_data_info_label">Таймери використання викликів та даних</string>
   <string name="call_data_info_description">Час використання голосового виклику та використання даних</string>
   <string name="alert_call_over_wifi">Виклики будуть виконані через Wi-Fi.</string>

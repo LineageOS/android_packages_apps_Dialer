@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
   <string name="dialog_speed_dial_airplane_mode_message">For å bruke hurtigoppringing må du skru av flymodus</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Hurtigoppringing kan ikke angis for denne tasten</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,16 +116,31 @@
   <string name="alert_call_over_wifi">Anrop gjøres over Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Ingen mobilnettverk tilgjengelig. Koble til tilgjengelige Wi-Fi til å ringe.</string>
   <string name="alert_user_connect_to_wifi_for_call">Koble til Wi-Fi for å ringe.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Trykk her for å se tilgjengelige nettverk</string>
+  <string name="menu_add_to_4g_conference_call">Legg til i 4G konferanseanrop</string>
+  <string name="menu_4g_conference_call">4G konferanseanrop</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Innkommende 4G taleanrop</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Innkommende 4G videoanrop</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Utgående 4G taleanrop</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Utgående 4G videoanrop</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Tapt 4G taleanrop</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Tapt 4G videoanrop</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Innkommende Wi-Fi taleanrop</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Innkommende Wi-Fi videoanrop</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Utgående Wi-Fi taleanrop</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Utgående Wi-Fi videoanrop</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Tapt Wi-Fi taleanrop</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Tapt Wi-Fi videoanrop</string>
 </resources>

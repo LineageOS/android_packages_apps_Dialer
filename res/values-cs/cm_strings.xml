@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Akce pro rychlé vytáčení není pro klávesu „<xliff:g id="number">%s</xliff:g>“ přiřazena. Chcete jí nyní přiřadit?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Pro tuto klávesu nelze nastavit rychlé vytáčení</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,6 +116,7 @@
   <string name="alert_call_over_wifi">Hovory budou realizován přes Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Mobilní síť není k dispozici. Pro hovory se připojte k dostupné Wi-Fi.</string>
   <string name="alert_user_connect_to_wifi_for_call">Připojit k Wi-Fi pro volání.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Klepněte sem pro zobrazení dostupných sítí</string>
   <string name="menu_add_to_4g_conference_call">Přidat se ke konferenčnímu hovoru 4G</string>
   <string name="menu_4g_conference_call">Konferenční hovor 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->

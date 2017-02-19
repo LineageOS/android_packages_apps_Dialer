@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero \'<xliff:g id="number">%s</xliff:g>\'. Vuoi assegnare un\'azione ora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Per utilizzare la composizione rapida, disattiva la modalità aereo</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Composizione rapida non può essere attivata su questo tasto</string>
   <string name="yes">Si</string>
   <string name="no">No</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,6 +116,7 @@
   <string name="alert_call_over_wifi">Le chiamate saranno fatte via Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Nessuna connessione disponibile. Connettiti al Wi-Fi per effetuare chiamate.</string>
   <string name="alert_user_connect_to_wifi_for_call">Connetiti al Wi-Fi per effetuare chiamate.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Tocca qui per visualizzare le reti disponibili</string>
   <string name="menu_add_to_4g_conference_call">Aggiungi alla chiamata in conferenza 4G</string>
   <string name="menu_4g_conference_call">Chiamata in conferenza 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->

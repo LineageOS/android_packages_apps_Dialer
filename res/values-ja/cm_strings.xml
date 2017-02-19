@@ -106,6 +106,7 @@
   <string name="toast_change_video_call_failed">ビデオ通話に変更できません。番号の形式が間違っています</string>
   <string name="toast_make_video_call_failed">ビデオ通話の発信ができません。番号の形式が間違っています</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowRXCallMenuItemText">ビデオ通話に自分を表示しない</string>
   <string name="overflowVOCallMenuItemText">音声通話</string>
   <string name="video_call">ビデオ通話</string>
   <string name="call_data_info_label">通話/データ使用タイマー</string>

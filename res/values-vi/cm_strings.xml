@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Không có thao tác quay số nhanh nào được ấn định cho phím số \'<xliff:g id="number">%s</xliff:g>\'. Bạn có muốn ấn định một thao tác bây giờ không?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Để sử dụng quay số nhanh, trước tiên hãy tắt chế độ máy bay</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Quay số nhanh không thể thiết lập cho Khoá này</string>
   <string name="yes">Có</string>
   <string name="no">Không</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,16 +116,31 @@
   <string name="alert_call_over_wifi">Cuộc gọi sẽ thực hiện qua Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Mạng di động không có sẵn. Kết nối tới Wi-Fi có sẵn để thực hiện cuộc gọi.</string>
   <string name="alert_user_connect_to_wifi_for_call">Kết nối tới Wi-Fi để thực hiện cuộc gọi.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Chạm vào đây để xem các mạng có sẵn</string>
+  <string name="menu_add_to_4g_conference_call">Thêm vào cuộc gọi hội nghị 4G</string>
+  <string name="menu_4g_conference_call">Cuộc gọi hội nghị 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Cuộc gọi thoại 4G đến</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Cuộc gọi video 4G đến</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Cuộc gọi thoại 4G đi</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Cuộc gọi video 4G đi</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Cuộc gọi thoại 4G bị nhỡ</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Cuộc gọi video 4G bị nhỡ</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Cuộc gọi thoại WiFi đến</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Cuộc gọi video WiFi đến</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Cuộc gọi thoại WiFi đi</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Cuộc gọi video WiFi đi</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Cuộc gọi thoại WiFi bị nhỡ</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Cuộc gọi video WiFi bị nhỡ</string>
 </resources>

@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja, najprej izklopite način za letalo</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Hitrega klicanja ni možno nastaviti za ta ključ</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,6 +116,7 @@
   <string name="alert_call_over_wifi">Klici bodo opravljeni preko omr. Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Na voljo ni nobenega mobilnega omrežja. Za klice se povežite na razpoložljivo omrežje Wi-Fi.</string>
   <string name="alert_user_connect_to_wifi_for_call">Za klicanje se povežite na omr. Wi-Fi.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Tapnite tukaj za ogled razpoložljivih omrežij</string>
   <string name="menu_add_to_4g_conference_call">Dodaj k konferenčnemu klicu 4G</string>
   <string name="menu_4g_conference_call">Konferenčni klic 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
