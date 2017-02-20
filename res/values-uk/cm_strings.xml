@@ -63,6 +63,11 @@
   <!-- Call statistics -->
   <string name="call_log_stats_title">Статистика</string>
   <string name="callStatsDetailTitle">Детальна статистика дзвінків</string>
+  <string name="call_stats_incoming">Вхідних: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_outgoing">Вихідних: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_missed">Пропущених: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blacklisted">Заблокованих: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Загалом: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Загалом: <xliff:g id="call_count">%s</xliff:g></string>
   <string name="call_stats_filter_from">Початкова дата</string>
@@ -80,14 +85,62 @@
   <string name="call_stats_reset_filter">Скинути фільтр</string>
   <string name="call_stats_sort_by_duration">Сортувати за тривалістю виклику</string>
   <string name="call_stats_sort_by_count">Сортувати за кількістю викликів</string>
+  <string name="call_stats_title_for_number">Цей номер</string>
+  <string name="call_stats_title_of_total">Від загального</string>
+  <string name="call_stats_title_durations">Тривалість викликів</string>
+  <string name="call_stats_title_count">Кількість викликів</string>
+  <string name="call_stats_title_average_duration">Середня тривалість виклику</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Журнал викликів не містить записів за вказаний період.</string>
+  <string name="call_recording_category_title">Запис виклику</string>
+  <string name="call_recording_format">Формат аудіо</string>
+  <string name="call_playback_no_app_found_toast">Не виявлено додатку, здатного відтворити обраний запис.</string>
+  <string name="invalid_number_text">"%1$s не вдалося зробити цей виклик. Це правильний номер?"</string>
   <!-- T9 Search Text -->
+  <string name="empty_dialpad_t9_example">Ви можете набрати номер абонента\n або знайти його в списку контактів</string>
+  <string name="sign_in_hint_text">Увійдіть для здійснення викликів %1$s</string>
+  <string name="wifi_hint_text">Здійснювати безкоштовні виклики %1$s до %1$s через Wi-Fi.</string>
+  <string name="roaming_hint_text">%1$s в роумінгу. Здійснювати безкоштовні виклики %2$s до %2$s через Wi-Fi.</string>
+  <string name="emergency_call_hint_text">Відсутня SIM. Лише екстрені виклики.</string>
+  <string name="extra_call_method_call_option">Виклик <xliff:g id="provider">%s</xliff:g></string>
   <!-- InCall Plugin Settings -->
+  <string name="incall_plugin_settings">Налаштування <xliff:g id="name">%1$s</xliff:g></string>
   <!-- Search shortcut for "Call using PluginName" -->
+  <string name="search_shortcut_call_using">Зателефонувати через <xliff:g id="name">%1$s</xliff:g></string>
   <!-- CallerInfo Provider Settings strings -->
   <string name="callerinfo_provider_auth_yes">Так</string>
   <string name="callerinfo_provider_auth_no_short">Ні</string>
+  <string name="callerinfo_provider_auth_no">Ні, дякую</string>
+  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> отримає доступ до ваших контактів, профілю та обліковому запису Cyanogen OS, який може містити вашу електронну адресу.</string>
+  <string name="callerinfo_provider_auth_learn_more">Докладніше</string>
+  <string name="callerinfo_provider_auth_desc">Ласкаво просимо! Бажаєте, щоб <xliff:g id="provider_name">%s</xliff:g> визначав невідомі виклики та блокував небажані?</string>
+  <string name="callerinfo_provider_auth_desc_no_spam">Ласкаво просимо! Бажаєте, щоб <xliff:g id="provider_name">%s</xliff:g> визначав невідомі виклики?</string>
+  <string name="callerinfo_provider_summary">Визначає невідомі виклики та спам</string>
+  <string name="callerinfo_provider_summary_no_spam">Визначає невідомі виклики</string>
+  <string name="silence_spam_title">Приглушити спам виклики</string>
+  <string name="silence_spam_summary">Ви більше не почуєте викликів зі спамом</string>
+  <string name="block_hidden_title">Блокувати приховані номери</string>
+  <string name="block_hidden_summary">Вважати приховані номери спамом</string>
+  <string name="block_dialog_title">Заблокувати абонента?</string>
+  <string name="block_dialog_positive">Заблокувати</string>
+  <string name="block_dialog_negative">Скасувати</string>
+  <string name="block_dialog_description">Ви вже не отримуватимете викликів та повідомлень від даного абонента.</string>
+  <string name="block_dialog_report_spam">Повідомити про спам до <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_disable_title">Вимкнути %1$s?</string>
+  <string name="provider_disable_message">Відключивши %1$s, ви не зможете дізнатися номер викликаючого абонента.</string>
+  <string name="provider_disable_spam_message">Відключивши %1$s, ви залишитесь без захисту від спаму і не зможете дізнатися номер викликаючого абонента.</string>
+  <string name="powered_by_provider">Надано <xliff:g id="provider">%s</xliff:g></string>
+  <string name="provider_help">"Ви можете здійснювати виклики %1$s,\nперемикаючи режими тут"</string>
+  <string name="provider_search_help">"Ви можете шукати контакти %1$s,\nперемикаючи режими тут"</string>
+  <string name="provider_button_help">"Зрозуміло"</string>
+  <string name="provider_voice_call">"%1$s голосовий виклик"</string>
+  <string name="provider_video_call">"%1$s відеовиклик"</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
+  <string name="cm_permission_place_call">Щоб зателефонувати, необхідно налаштувати дозволи.</string>
   <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
+  <string name="search_shortcut_view_note">Переглянути примітку</string>
   <!-- Note DeepLink mod settings summary in Dialer -->
+  <string name="note_mod_settings_summary">Робіть примітки з звідки завгодно</string>
+  <string name="callerinfo_provider_status_disabling">Вимкнення</string>
+  <string name="show_dialpad_at_start_title">Показувати номеронабирач під час запуску</string>
 </resources>

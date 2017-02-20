@@ -44,7 +44,7 @@
   <!--  for speed dial -->
   <string name="speed_dial_settings">快速撥號設定</string>
   <string name="speed_dial_not_set">(未設定)</string>
-  <string name="speed_dial_replace">取代</string>
+  <string name="speed_dial_replace">替換</string>
   <string name="speed_dial_delete">刪除</string>
   <string name="speed_dial_unassigned_dialog_title">按鍵未分配</string>
   <string name="speed_dial_unassigned_dialog_message">數字鍵「<xliff:g id="number">%s</xliff:g>」未設定快速撥號，您現在要設定嗎？</string>
