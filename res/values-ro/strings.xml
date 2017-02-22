@@ -129,7 +129,7 @@
     <string name="voicemail" msgid="3851469869202611441">"Mesagerie vocală"</string>
     <string name="private_num" msgid="6374339738119166953">"Număr privat"</string>
     <string name="payphone" msgid="7726415831153618726">"Telefon public"</string>
-    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> (de) secunde"</string>
+    <string name="callDetailsShortDurationFormat" msgid="3988146235579303592">"<xliff:g id="SECONDS">%s</xliff:g> secunde"</string>
     <string name="callDetailsDurationFormat" msgid="6061406028764382234">"<xliff:g id="MINUTES">%s</xliff:g> min. <xliff:g id="SECONDS">%s</xliff:g> sec."</string>
     <!-- no translation found for voicemailCallLogToday (682363079840402849) -->
     <skip />
