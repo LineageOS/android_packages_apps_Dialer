@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Content description of button to switch to full screen camera -->
+  <string name="camera_switch_full_screen">Switch to full screen camera</string>
+  <!-- Content description of button when after swapped to front -->
+  <string name="camera_switch_camera_facing">Button is now front camera</string>
+  <!-- Content description of button when after swapped to back -->
+  <string name="camera_switch_camera_rear">Button is now back camera</string>
+  <!-- Content description of button to cancel recording video -->
+  <string name="camera_cancel_recording">Stop recording video</string>
+  <!-- Accessibility announcement for when we are using the front facing camera -->
+  <string name="using_front_camera">Using front camera</string>
+  <!-- Accessibility announcement for when we are using the back camera -->
+  <string name="using_back_camera">Using back camera</string>
+  <!-- Content description of button to take a photo -->
+  <string name="camera_take_picture">Take photo</string>
+</resources>

@@ -1,0 +1,121 @@
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.android.incallui">
+
+  <uses-sdk
+    android:minSdkVersion="23"
+    android:targetSdkVersion="25"/>
+
+  <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE"/>
+  <!-- We use this to disable the status bar buttons of home, back and recent
+  during an incoming call. By doing so this allows us to not show the user
+  is viewing the activity in full screen alert, on a fresh system/factory
+  reset state of the app. -->
+  <uses-permission android:name="android.permission.STATUS_BAR"/>
+  <uses-permission android:name="android.permission.CAMERA"/>
+  <!-- Warning: setting the required boolean to true would prevent installation of Dialer on
+       devices which do not support a camera. -->
+  <uses-feature
+    android:name="android.hardware.camera.any"
+    android:required="false"/>
+
+  <!-- Testing location -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+  <!-- Set android:taskAffinity="com.android.incallui" for all activities to ensure proper
+  navigation. Otherwise system could bring up DialtactsActivity instead, e.g. when user unmerge a
+  call.
+       Set taskAffinity for application is not working because it will be merged and the result is
+  that all activities here still have same taskAffinity as activities under dialer. -->
+  <application>
+    <meta-data android:name="android.telephony.hide_voicemail_settings_menu"
+      android:value="true"/>
+    <activity
+      android:directBootAware="true"
+      android:excludeFromRecents="true"
+      android:exported="false"
+      android:label="@string/phoneAppLabel"
+      android:taskAffinity="com.android.incallui"
+      android:launchMode="singleInstance"
+      android:name="com.android.incallui.InCallActivity"
+      android:resizeableActivity="true"
+      android:screenOrientation="nosensor"
+      android:theme="@style/Theme.InCallScreen">
+    </activity>
+
+    <activity
+      android:directBootAware="true"
+      android:excludeFromRecents="true"
+      android:noHistory="true"
+      android:exported="false"
+      android:label="@string/manageConferenceLabel"
+      android:taskAffinity="com.android.incallui"
+      android:launchMode="singleTask"
+      android:name="com.android.incallui.ManageConferenceActivity"
+      android:resizeableActivity="true"
+      android:theme="@style/Theme.InCallScreen.ManageConference"/>
+
+    <service
+      android:directBootAware="true"
+      android:exported="true"
+      android:name="com.android.incallui.InCallServiceImpl"
+      android:permission="android.permission.BIND_INCALL_SERVICE">
+      <meta-data
+        android:name="android.telecom.IN_CALL_SERVICE_UI"
+        android:value="true"/>
+      <meta-data
+        android:name="android.telecom.IN_CALL_SERVICE_RINGING"
+        android:value="false"/>
+      <meta-data
+        android:name="android.telecom.INCLUDE_EXTERNAL_CALLS"
+        android:value="true"/>
+
+      <intent-filter>
+        <action android:name="android.telecom.InCallService"/>
+      </intent-filter>
+    </service>
+
+    <!--
+       Comments for attributes in SpamNotificationActivity:
+       taskAffinity=""             -> Open the dialog without opening the dialer app behind it
+       noHistory="true"            -> Navigating away finishes activity
+       excludeFromRecents="true"   -> Don't show in "recent apps" screen
+       -->
+    <activity
+      android:excludeFromRecents="true"
+      android:exported="false"
+      android:name="com.android.incallui.spam.SpamNotificationActivity"
+      android:noHistory="true"
+      android:taskAffinity=""
+      android:theme="@style/AfterCallNotificationTheme">
+    </activity>
+
+    <service
+      android:exported="false"
+      android:name="com.android.incallui.spam.SpamNotificationService"/>
+
+    <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
+    <receiver
+      android:directBootAware="true"
+      android:exported="false"
+      android:name="com.android.incallui.NotificationBroadcastReceiver"/>
+
+  </application>
+
+</manifest>
+

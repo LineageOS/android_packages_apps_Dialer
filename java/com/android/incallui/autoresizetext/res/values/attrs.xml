@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+   <declare-styleable name="AutoResizeTextView">
+       <!--
+         The unit to use when computing step increments for the resize operation. That is, the
+         resized text will be guaranteed to be a whole number (integer) value in the unit
+         specified. For example, if the unit is scaled pixels (sp), then the font size might be
+         13sp or 14sp, but not 13.5sp.
+
+         The enum values must match the values from android.util.TypedValue.
+       -->
+       <attr name="autoResizeText_resizeStepUnit" format="enum">
+         <!-- Must match TypedValue.COMPLEX_UNIT_PX. -->
+         <enum name="unitPx" value="0" />
+         <!-- Must match TypedValue.COMPLEX_UNIT_DIP. -->
+         <enum name="unitDip" value="1" />
+         <!-- Must match TypedValue.COMPLEX_UNIT_SP. -->
+         <enum name="unitSp" value="2" />
+         <!-- Must match TypedValue.COMPLEX_UNIT_PT. -->
+         <enum name="unitPt" value="3" />
+         <!-- Must match TypedValue.COMPLEX_UNIT_IN. -->
+         <enum name="unitIn" value="4" />
+         <!-- Must match TypedValue.COMPLEX_UNIT_MM. -->
+         <enum name="unitMm" value="5" />
+       </attr>
+       <!--
+         The minimum text size to use in this view. Text size will be scale down to fit the text
+         in this view, but no smaller than the minimum size specified in this attribute.
+       -->
+       <attr name="autoResizeText_minTextSize" format="dimension" />
+   </declare-styleable>
+</resources>

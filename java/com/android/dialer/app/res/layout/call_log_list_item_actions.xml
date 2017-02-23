@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2014 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/call_log_action_container"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center_vertical"
+  android:importantForAccessibility="1"
+  android:orientation="vertical"
+  android:visibility="visible">
+
+  <com.android.dialer.app.voicemail.VoicemailPlaybackLayout
+    android:id="@+id/voicemail_playback_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/call_log_action_divider"/>
+
+  <LinearLayout
+    android:id="@+id/call_action"
+    style="@style/CallLogActionStyle"
+    android:paddingTop="@dimen/call_log_actions_top_padding">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_call_24dp"/>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:orientation="vertical">
+      <TextView
+        android:id="@+id/call_action_text"
+        style="@style/CallLogActionTextStyle"
+        android:text="@string/description_call_log_call_action"/>
+
+      <TextView
+        android:id="@+id/call_type_or_location_text"
+        style="@style/CallLogActionSupportTextStyle"/>
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/video_call_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/quantum_ic_videocam_white_24"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_video_call"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/create_new_contact_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_person_add_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/search_shortcut_create_new_contact"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/add_to_existing_contact_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_person_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/search_shortcut_add_to_contact"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/send_message_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_message_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_send_message"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/call_with_note_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_call_note_white_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_with_a_note"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/call_compose_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_phone_attach"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/share_and_call"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/report_not_spam_action"
+    style="@style/CallLogActionStyle"
+    android:visibility="gone">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_not_spam"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_remove_spam"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/block_report_action"
+    style="@style/CallLogActionStyle"
+    android:visibility="gone">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_block_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_block_report_number"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/block_action"
+    style="@style/CallLogActionStyle"
+    android:visibility="gone">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_block_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_block_number"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/unblock_action"
+    style="@style/CallLogActionStyle"
+    android:visibility="gone">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_unblock"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_unblock_number"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/details_action"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/ic_info_outline_24dp"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_details"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/share_voicemail"
+    android:visibility="gone"
+    style="@style/CallLogActionStyle">
+
+    <ImageView
+      style="@style/CallLogActionIconStyle"
+      android:src="@drawable/quantum_ic_send_black_24"/>
+
+    <TextView
+      style="@style/CallLogActionTextStyle"
+      android:text="@string/call_log_action_share_voicemail"/>
+
+  </LinearLayout>
+</LinearLayout>

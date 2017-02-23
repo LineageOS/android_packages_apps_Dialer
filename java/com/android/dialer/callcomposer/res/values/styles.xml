@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <style name="Theme.AppCompat.CallComposer" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:listViewStyle">@style/ListViewStyle</item>
+    <!-- We need to use a light ripple behind ActionBar items in order for them to
+         be visible when using some of the darker ActionBar tints -->
+    <item name="android:actionBarItemBackground">@drawable/item_background_material_borderless_dark</item>
+  </style>
+
+  <style name="message_composer_textview">
+    <item name="android:textSize">@dimen/message_compose_item_text_size</item>
+    <item name="android:textColor">@color/dialer_primary_text_color</item>
+    <item name="android:padding">@dimen/message_composer_item_padding</item>
+    <item name="android:background">@drawable/item_background_material_light</item>
+  </style>
+
+  <style name="call_composer_toolbar_title_text">
+    <item name="android:textSize">@dimen/toolbar_title_text_size</item>
+    <item name="android:textColor">@color/background_dialer_white</item>
+  </style>
+
+  <style name="call_composer_toolbar_subtitle_text">
+    <item name="android:textSize">@dimen/toolbar_subtitle_text_size</item>
+    <item name="android:textColor">@color/background_dialer_white</item>
+  </style>
+</resources>

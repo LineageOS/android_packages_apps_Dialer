@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Title of the "Voicemail" settings screen, with a text label identifying which SIM the settings are for. -->
+    <string translatable="false" name="voicemail_settings_with_label">Voicemail (<xliff:g id="subscriptionlabel" example="Mock Carrier">%s</xliff:g>)</string>
+
+    <!-- Call settings screen, setting option name -->
+    <string translatable="false" name="voicemail_settings_label">Voicemail</string>
+
+    <!-- DO NOT TRANSLATE. Internal key for a visual voicemail preference. -->
+    <string translatable="false" name="voicemail_visual_voicemail_key">
+        voicemail_visual_voicemail_key
+    </string>
+    <!-- DO NOT TRANSLATE. Internal key for a voicemail change pin preference. -->
+    <string translatable="false" name="voicemail_change_pin_key">voicemail_change_pin_key</string>
+
+    <!-- Visual voicemail on/off title [CHAR LIMIT=40] -->
+    <string translatable="false" name="voicemail_visual_voicemail_switch_title">Visual Voicemail</string>
+
+    <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
+    <string translatable="false" name="voicemail_set_pin_dialog_title">Set PIN</string>
+    <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
+    <string translatable="false" name="voicemail_change_pin_dialog_title">Change PIN</string>
+
+    <!-- Hint for the old PIN field in the change vociemail PIN dialog -->
+    <string translatable="false" name="vm_change_pin_old_pin">Old PIN</string>
+    <!-- Hint for the new PIN field in the change vociemail PIN dialog -->
+    <string translatable="false" name="vm_change_pin_new_pin">New PIN</string>
+
+    <!-- Message on the dialog when PIN changing is in progress -->
+    <string translatable="false" name="vm_change_pin_progress_message">Please wait.</string>
+    <!-- Error message for the voicemail PIN change if the PIN is too short -->
+    <string translatable="false" name="vm_change_pin_error_too_short">The new PIN is too short.</string>
+    <!-- Error message for the voicemail PIN change if the PIN is too long -->
+    <string translatable="false" name="vm_change_pin_error_too_long">The new PIN is too long.</string>
+    <!-- Error message for the voicemail PIN change if the PIN is too weak -->
+    <string translatable="false" name="vm_change_pin_error_too_weak">The new PIN is too weak. A strong password should not have continuous sequence or repeated digits.</string>
+    <!-- Error message for the voicemail PIN change if the old PIN entered doesn't match  -->
+    <string translatable="false" name="vm_change_pin_error_mismatch">The old PIN does not match.</string>
+    <!-- Error message for the voicemail PIN change if the new PIN contains invalid character -->
+    <string translatable="false" name="vm_change_pin_error_invalid">The new PIN contains invalid characters.</string>
+    <!-- Error message for the voicemail PIN change if operation has failed -->
+    <string translatable="false" name="vm_change_pin_error_system_error">Unable to change PIN</string>
+    <!-- Message to replace the transcription if a visual voicemail message is not supported-->
+    <string translatable="false" name="vvm_unsupported_message_format">Unsupported message type, call <xliff:g id="number" example="*86">%s</xliff:g> to listen.</string>
+
+    <!-- The title for the change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_title">Change Voicemail PIN</string>
+    <!-- The label for the continue button in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_continue_label">Continue</string>
+    <!-- The label for the cancel button in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_cancel_label">Cancel</string>
+    <!-- The label for the ok button in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_ok_label">Ok</string>
+    <!-- The title for the enter old pin step in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_enter_old_pin_header">Confirm your old PIN</string>
+    <!-- The hint for the enter old pin step in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_enter_old_pin_hint">Enter your voicemail PIN to continue.</string>
+    <!-- The title for the enter new pin step in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_enter_new_pin_header">Set a new PIN</string>
+    <!-- The hint for the enter new pin step in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_enter_new_pin_hint">PIN must be <xliff:g id="min" example="4">%1$d</xliff:g>-<xliff:g id="max" example="7">%2$d</xliff:g> digits.</string>
+    <!-- The title for the confirm new pin step in change voicemail PIN activity -->
+    <string translatable="false" name="change_pin_confirm_pin_header">Confirm your PIN</string>
+    <!-- The error message for th confirm new pin step in change voicemail PIN activity, if the pin doen't match the one previously entered -->
+    <string translatable="false" name="change_pin_confirm_pins_dont_match">PINs don\'t match</string>
+    <!-- The toast to show after the voicemail PIN has been successfully changed -->
+    <string translatable="false" name="change_pin_succeeded">Voicemail PIN updated</string>
+    <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
+    <string translatable="false" name="change_pin_system_error">Unable to set PIN</string>
+</resources>

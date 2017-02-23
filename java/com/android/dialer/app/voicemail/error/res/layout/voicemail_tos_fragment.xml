@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <ScrollView
+    android:id="@+id/voicemail_tos_message"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:orientation="vertical">
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <TextView
+        android:id="@+id/tos_message_title"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingBottom="12dp"
+        android:text="@string/verizon_terms_and_conditions_title"
+        android:textColor="@color/primary_text_color"
+        android:textSize="@dimen/call_log_primary_text_size"/>
+      <TextView
+        android:id="@+id/tos_message_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:autoLink="web"
+        android:text="@string/verizon_terms_and_conditions_1.1_english"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="@dimen/call_log_detail_text_size"/>
+    </LinearLayout>
+  </ScrollView>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="#D2D2D2"/>
+
+  <LinearLayout
+    android:id="@+id/voicemail_tos_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:orientation="horizontal">
+    <TextView
+      android:id="@+id/voicemail_tos_button_decline"
+      style="@style/ErrorActionStyle"
+      android:background="?android:attr/selectableItemBackground"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/verizon_terms_and_conditions_decline_english"/>
+    <android.support.v4.widget.Space
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"/>
+    <TextView
+      android:id="@+id/voicemail_tos_button_accept"
+      style="@style/RaisedErrorActionStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/verizon_terms_and_conditions_accept_english"/>
+  </LinearLayout>
+
+</LinearLayout>

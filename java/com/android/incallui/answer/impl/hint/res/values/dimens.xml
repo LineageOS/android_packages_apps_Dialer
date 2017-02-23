@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="hint_text_size">18sp</dimen>
+  <dimen name="hint_initial_offset">-100dp</dimen>
+  <dimen name="hint_offset">300dp</dimen>
+  <dimen name="hint_small_begin_size">50dp</dimen>
+  <dimen name="hint_small_end_size">42dp</dimen>
+  <dimen name="hint_mid_begin_size">56dp</dimen>
+  <dimen name="hint_mid_end_size">64dp</dimen>
+  <dimen name="hint_large_begin_size">64dp</dimen>
+  <dimen name="hint_large_end_size">160dp</dimen>
+</resources>

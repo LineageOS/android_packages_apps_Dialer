@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+  android:color="@color/incall_button_ripple">
+  <item android:id="@android:id/mask">
+    <inset android:inset="5dp">
+      <shape android:shape="oval">
+        <solid android:color="@android:color/white"/>
+      </shape>
+    </inset>
+  </item>
+  <item>
+    <selector>
+      <item
+        android:drawable="@drawable/video_button_bg_checked_pressed"
+        android:state_checked="true"
+        android:state_pressed="true"/>
+      <item
+        android:drawable="@drawable/video_button_bg_checked"
+        android:state_checked="true"/>
+      <item
+        android:drawable="@drawable/video_button_bg_pressed"
+        android:state_pressed="true"/>
+      <item
+        android:drawable="@drawable/video_button_bg_default"/>
+    </selector>
+  </item>
+</ripple>

@@ -1,0 +1,64 @@
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources>
+  <!-- Note: The following colors are used in the Dialer settings screens.  Since Dialer's settings
+       link into the Telephony settings as well, changes to these colors should be mirrored in
+       Telephony:
+
+       Android source path: packages/apps/PhoneCommon/res/values/colors.xml
+         - Local: dialer_theme_color         Android Source: dialer_theme_color
+         - Local: dialer_theme_color_dark    Android Source: dialer_theme_color_dark
+       Android source path: packages/services/Telecomm/res/values/colors.xml
+         - Local: dialer_theme_color         Android Source: theme_color
+         - Local: dialer_theme_color_dark    Android Source: dialer_settings_color_dark
+       -->
+  <color name="dialer_theme_color">#2A56C6</color>
+  <color name="dialer_theme_color_dark">#1C3AA9</color>
+
+  <color name="dialer_snackbar_action_text_color">#4285F4</color>
+  <color name="dialer_theme_color_20pct">#332A56C6</color>
+
+  <color name="dialer_secondary_color">#e91e63</color>
+
+  <!-- Primary text color in the Phone app -->
+  <color name="dialer_primary_text_color">#333333</color>
+  <color name="dialer_edit_text_hint_color">#DE78909C</color>
+
+  <!-- Secondary text color in the Phone app -->
+  <color name="dialer_secondary_text_color">#636363</color>
+
+  <!-- Color of the theme of the Dialer app -->
+  <color name="dialtacts_theme_color">@color/dialer_theme_color</color>
+
+  <!-- White background for dialer -->
+  <color name="background_dialer_white">#ffffff</color>
+  <color name="background_dialer_call_log_list_item">@color/background_dialer_white</color>
+
+  <!-- Colors for the notification actions -->
+  <color name="notification_action_accept">#097138</color>
+  <color name="notification_action_dismiss">#A52714</color>
+  <color name="notification_action_end_call">#FFFFFF</color>
+  <color name="notification_action_answer_video">#097138</color>
+
+  <!-- Background color of action bars -->
+  <color name="actionbar_background_color">@color/dialer_theme_color</color>
+
+  <!-- Background color of title bars in recents -->
+  <color name="titlebar_in_recents_background_color">@color/dialer_theme_color_dark</color>
+
+  <color name="blue_grey_100">#CFD8DC</color>
+</resources>

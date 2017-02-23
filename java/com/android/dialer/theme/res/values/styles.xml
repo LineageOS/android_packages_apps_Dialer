@@ -1,0 +1,56 @@
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources>
+
+  <style name="CallLogCardStyle" parent="CardView">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_margin">4dp</item>
+    <item name="android:baselineAligned">false</item>
+    <item name="cardCornerRadius">2dp</item>
+    <item name="cardBackgroundColor">@color/background_dialer_call_log_list_item</item>
+  </style>
+
+  <!-- Inherit from Theme.Material.Light.Dialog instead of Theme.Material.Light.Dialog.Alert
+  since the Alert dialog is private. They are identical anyway. -->
+  <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog">
+    <item name="android:colorAccent">@color/dialtacts_theme_color</item>
+  </style>
+
+  <style name="TextActionStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">@dimen/call_log_action_height</item>
+    <item name="android:gravity">end|center_vertical</item>
+    <item name="android:paddingStart">@dimen/call_log_action_horizontal_padding</item>
+    <item name="android:paddingEnd">@dimen/call_log_action_horizontal_padding</item>
+    <item name="android:textColor">@color/dialtacts_theme_color</item>
+    <item name="android:fontFamily">"sans-serif-medium"</item>
+    <item name="android:focusable">true</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
+
+  <style name="DialerButtonTextStyle" parent="@android:style/TextAppearance.Material.Widget.Button">
+    <item name="android:textColor">#fff</item>
+  </style>
+
+  <style name="DialerActionBarBaseStyle"
+    parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <item name="android:background">@color/actionbar_background_color</item>
+    <item name="background">@color/actionbar_background_color</item>
+  </style>
+</resources>

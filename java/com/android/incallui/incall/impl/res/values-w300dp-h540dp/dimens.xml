@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="incall_button_horizontal_padding">32dp</dimen>
+  <dimen name="incall_button_vertical_padding">32dp</dimen>
+</resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@android:color/black">
+
+  <TextureView
+    android:id="@+id/videocall_video_remote"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:importantForAccessibility="no"/>
+
+  <ImageView
+    android:id="@+id/videocall_remote_off_blurred_image_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:scaleType="fitCenter"/>
+
+  <TextView
+    android:gravity="center"
+    android:id="@+id/videocall_remote_video_off"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
+    android:drawablePadding="8dp"
+    android:drawableTop="@drawable/quantum_ic_videocam_off_white_36"
+    android:padding="64dp"
+    android:text="@string/videocall_remote_video_off"
+    android:textAppearance="@style/Dialer.Incall.TextAppearance"
+    android:visibility="gone"
+    tools:visibility="visible"/>
+
+  <View
+    android:id="@+id/videocall_fullscreen_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:background="@color/videocall_overlay_background_color"/>
+
+  <TextureView
+    android:id="@+id/videocall_video_preview"
+    android:layout_width="@dimen/videocall_preview_width"
+    android:layout_height="@dimen/videocall_preview_height"
+    android:layout_marginEnd="@dimen/videocall_preview_margin_end"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    android:importantForAccessibility="no"/>
+
+  <ImageView
+    android:id="@+id/videocall_preview_off_blurred_image_view"
+    android:layout_width="@dimen/videocall_preview_width"
+    android:layout_height="@dimen/videocall_preview_height"
+    android:layout_marginEnd="@dimen/videocall_preview_margin_end"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    android:scaleType="center"/>
+
+  <View
+    android:id="@+id/videocall_green_screen_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:background="@color/videocall_overlay_background_color"/>
+
+  <ImageView
+    android:id="@+id/videocall_video_preview_off_overlay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/videocall_video_preview"
+    android:layout_alignLeft="@+id/videocall_video_preview"
+    android:layout_alignRight="@+id/videocall_video_preview"
+    android:layout_alignTop="@+id/videocall_video_preview"
+    android:scaleType="center"
+    android:src="@drawable/quantum_ic_videocam_off_white_36"
+    android:visibility="gone"
+    android:importantForAccessibility="no"
+    tools:visibility="visible"/>
+
+  <ImageView
+    android:id="@+id/videocall_video_preview_mute_overlay"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_alignBottom="@+id/videocall_video_preview"
+    android:layout_alignRight="@+id/videocall_video_preview"
+    android:background="@drawable/videocall_background_circle_white"
+    android:contentDescription="@string/incall_content_description_muted"
+    android:scaleType="center"
+    android:src="@drawable/quantum_ic_mic_off_black_24"
+    android:visibility="gone"
+    tools:visibility="visible"/>
+
+  <include
+    layout="@layout/videocall_controls_land"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+  <FrameLayout
+    android:id="@+id/videocall_on_hold_banner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"/>
+
+</RelativeLayout>

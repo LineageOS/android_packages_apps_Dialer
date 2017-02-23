@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="alert_icon_size">24dp</dimen>
+  <dimen name="alert_start_padding">16dp</dimen>
+  <dimen name="alert_top_padding">21dp</dimen>
+  <dimen name="alert_main_padding">24dp</dimen>
+  <dimen name="alert_title_padding">12dp</dimen>
+  <dimen name="alert_action_vertical_padding">4dp</dimen>
+  <dimen name="alert_action_horizontal_padding">4dp</dimen>
+  <dimen name="alert_action_between_padding">11dp</dimen>
+  <dimen name="alert_line_spacing">4dp</dimen>
+</resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="bottom|center_horizontal"
+  android:orientation="vertical">
+  <TextView
+    android:id="@+id/two_button_hint_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="32dp"
+    android:accessibilityLiveRegion="polite"
+    android:alpha="0"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/two_button_bottom_padding"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="horizontal">
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="88dp"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:padding="@dimen/incall_call_button_elevation"
+      android:gravity="center_horizontal"
+      android:orientation="vertical">
+
+      <ImageButton
+        android:id="@+id/two_button_decline_button"
+        style="@style/Answer.Button.Decline"
+        android:layout_width="@dimen/two_button_button_size"
+        android:layout_height="@dimen/two_button_button_size"
+        android:contentDescription="@string/a11y_call_incoming_decline_description"
+        android:src="@drawable/quantum_ic_call_end_white_24"/>
+
+      <TextView
+        android:id="@+id/two_button_decline_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/two_button_label_padding"
+        android:importantForAccessibility="no"
+        android:text="@string/call_incoming_decline"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/two_button_label_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      android:padding="@dimen/incall_call_button_elevation"
+      android:gravity="center_horizontal"
+      android:orientation="vertical">
+
+      <ImageButton
+        android:id="@+id/two_button_answer_button"
+        style="@style/Answer.Button.Answer"
+        android:layout_width="@dimen/two_button_button_size"
+        android:layout_height="@dimen/two_button_button_size"
+        android:contentDescription="@string/a11y_call_incoming_answer_description"
+        android:src="@drawable/quantum_ic_call_white_24"/>
+
+      <TextView
+        android:id="@+id/two_button_answer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/two_button_label_padding"
+        android:importantForAccessibility="no"
+        android:text="@string/call_incoming_answer"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/two_button_label_size"/>
+
+    </LinearLayout>
+  </LinearLayout>
+</LinearLayout>

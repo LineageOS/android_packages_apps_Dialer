@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.android.dialer.simulator.impl">
+
+  <application>
+
+    <service
+      android:exported="true"
+      android:name=".SimulatorConnectionService"
+      android:permission="android.permission.BIND_CONNECTION_SERVICE">
+      <intent-filter>
+        <action android:name="android.telecomm.ConnectionService"/>
+      </intent-filter>
+    </service>
+
+  </application>
+
+</manifest>

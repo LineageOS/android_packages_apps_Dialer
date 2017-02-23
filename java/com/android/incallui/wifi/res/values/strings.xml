@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+  <!-- Button to enable Wi-Fi calling. This is displayed in a dialog after a phone call disconnects
+      because there is no cellular service.
+      [CHAR LIMIT=20] -->
+  <string name="incall_enable_wifi_calling_button">Enable</string>
+
+</resources>

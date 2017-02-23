@@ -1,0 +1,83 @@
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+  <declare-styleable name="Theme">
+    <attr name="android:textColorSecondary"/>
+  </declare-styleable>
+
+  <declare-styleable name="ContactsDataKind">
+    <!-- Mime-type handled by this mapping. -->
+    <attr name="android:mimeType"/>
+    <!-- Icon used to represent data of this kind. -->
+    <attr name="android:icon"/>
+    <!-- Column in data table that summarizes this data. -->
+    <attr name="android:summaryColumn"/>
+    <!-- Column in data table that contains details for this data. -->
+    <attr name="android:detailColumn"/>
+    <!-- Flag indicating that detail should be built from SocialProvider. -->
+    <attr name="android:detailSocialSummary"/>
+    <!-- Resource representing the term "All Contacts" (e.g. "All Friends" or
+    "All connections"). Optional (Default is "All Contacts"). -->
+    <attr name="android:allContactsName"/>
+  </declare-styleable>
+
+  <declare-styleable name="ContactListItemView">
+    <attr format="dimension" name="list_item_height"/>
+    <attr format="dimension" name="list_section_header_height"/>
+    <attr format="reference" name="activated_background"/>
+    <attr format="reference" name="section_header_background"/>
+    <attr format="dimension" name="list_item_padding_top"/>
+    <attr format="dimension" name="list_item_padding_right"/>
+    <attr format="dimension" name="list_item_padding_bottom"/>
+    <attr format="dimension" name="list_item_padding_left"/>
+    <attr format="dimension" name="list_item_gap_between_image_and_text"/>
+    <attr format="dimension" name="list_item_gap_between_label_and_data"/>
+    <attr format="dimension" name="list_item_presence_icon_margin"/>
+    <attr format="dimension" name="list_item_presence_icon_size"/>
+    <attr format="dimension" name="list_item_photo_size"/>
+    <attr format="dimension" name="list_item_profile_photo_size"/>
+    <attr format="color" name="list_item_prefix_highlight_color"/>
+    <attr format="color" name="list_item_background_color"/>
+    <attr format="dimension" name="list_item_header_text_indent"/>
+    <attr format="color" name="list_item_header_text_color"/>
+    <attr format="dimension" name="list_item_header_text_size"/>
+    <attr format="dimension" name="list_item_header_height"/>
+    <attr format="color" name="list_item_name_text_color"/>
+    <attr format="dimension" name="list_item_name_text_size"/>
+    <attr format="dimension" name="list_item_text_indent"/>
+    <attr format="dimension" name="list_item_text_offset_top"/>
+    <attr format="integer" name="list_item_data_width_weight"/>
+    <attr format="integer" name="list_item_label_width_weight"/>
+    <attr format="dimension" name="list_item_video_call_icon_size"/>
+    <attr format="dimension" name="list_item_video_call_icon_margin"/>
+  </declare-styleable>
+
+  <declare-styleable name="ContactBrowser">
+    <attr format="dimension" name="contact_browser_list_padding_left"/>
+    <attr format="dimension" name="contact_browser_list_padding_right"/>
+    <attr format="reference" name="contact_browser_background"/>
+  </declare-styleable>
+
+  <declare-styleable name="ProportionalLayout">
+    <attr format="string" name="direction"/>
+    <attr format="float" name="ratio"/>
+  </declare-styleable>
+
+  <declare-styleable name="Favorites">
+    <attr format="dimension" name="favorites_padding_bottom"/>
+  </declare-styleable>
+</resources>

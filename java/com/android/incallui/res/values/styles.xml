@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources>
+  <drawable name="grayBg">#FF333333</drawable>
+
+  <!-- Theme for the InCallActivity activity. Should have a transparent background for the
+       circular reveal animation for a new outgoing call to work correctly. We don't just use
+       Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
+       InCallActivity to have the correct Material style. -->
+  <style name="Theme.InCallScreen" parent="@style/Theme.AppCompat.NoActionBar">
+    <item name="android:textColorPrimary">#ffffff</item>
+    <item name="android:textColorSecondary">#DDFFFFFF</item>
+    <item name="android:colorPrimary">@color/dialer_theme_color</item>
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+    <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
+    <item name="dialpad_style">@style/InCallDialpad</item>
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
+
+    <item name="android:windowBackground">@drawable/incall_background_gradient</item>
+    <item name="android:windowShowWallpaper">true</item>
+  </style>
+
+  <style name="Theme.InCallScreen.ManageConference" parent="DialerThemeBase">
+  </style>
+
+  <style name="InCallDialpad" parent="Dialpad.Light">
+    <item name="dialpad_key_number_margin_bottom">
+      @dimen/incall_dialpad_key_number_margin_bottom
+    </item>
+    <item name="dialpad_zero_key_number_margin_bottom">
+      @dimen/incall_dialpad_zero_key_number_margin_bottom
+    </item>
+    <item name="dialpad_digits_adjustable_text_size">
+      @dimen/incall_dialpad_digits_adjustable_text_size
+    </item>
+    <item name="dialpad_digits_adjustable_height">
+      @dimen/incall_dialpad_digits_adjustable_height
+    </item>
+    <item name="dialpad_key_numbers_size">
+      @dimen/incall_dialpad_key_numbers_size
+    </item>
+    <item name="dialpad_end_key_spacing">
+      @dimen/incall_end_call_spacing
+    </item>
+  </style>
+
+  <style name="AfterCallNotificationTheme" parent="@style/Theme.AppCompat.Light.Dialog.MinWidth">
+    <!-- This colorAccent is to style checkboxes in the dialogs -->
+    <item name="colorAccent">@color/dialer_theme_color</item>
+    <!-- This is needed to make any alert dialogs in this activity take up minimum space -->
+    <item name="android:alertDialogTheme">@style/AfterCallDialogStyle</item>
+  </style>
+
+  <style name="AfterCallDialogStyle" parent="@style/Theme.AppCompat.Light.Dialog.MinWidth">
+    <!-- This colorAccent is to style text in the dialogs -->
+    <item name="android:colorAccent">@color/dialer_theme_color</item>
+  </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.android.dialer.interactions">
+
+  <application>
+
+    <!-- Service to update a contact -->
+    <service
+      android:exported="false"
+      android:name="com.android.dialer.interactions.ContactUpdateService"/>
+
+    <receiver android:name="com.android.dialer.interactions.UndemoteOutgoingCallReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+      </intent-filter>
+    </receiver>
+
+  </application>
+
+</manifest>
+

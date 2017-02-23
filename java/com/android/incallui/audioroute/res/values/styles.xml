@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="AudioRouteItem">
+    <item name="android:padding">16dp</item>
+    <item name="android:background">?android:selectableItemBackground</item>
+    <item name="android:drawablePadding">24dp</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textAppearance">
+      @style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large
+    </item>
+    <item name="android:textColor">?android:textColorSecondary</item>
+  </style>
+</resources>

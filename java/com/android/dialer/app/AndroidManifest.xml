@@ -1,0 +1,116 @@
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.android.dialer.app">
+
+  <uses-permission android:name="android.permission.CALL_PHONE"/>
+  <uses-permission android:name="android.permission.READ_CONTACTS"/>
+  <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+  <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+  <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+  <uses-permission android:name="android.permission.READ_PROFILE"/>
+  <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+  <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+  <uses-permission android:name="android.permission.GET_ACCOUNTS_PRIVILEGED"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+  <uses-permission android:name="android.permission.NFC"/>
+  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+  <uses-permission android:name="android.permission.MODIFY_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+  <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+  <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL"/>
+  <uses-permission android:name="com.android.voicemail.permission.WRITE_VOICEMAIL"/>
+  <uses-permission android:name="com.android.voicemail.permission.READ_VOICEMAIL"/>
+  <uses-permission android:name="android.permission.ALLOW_ANY_CODEC_FOR_PLAYBACK"/>
+  <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+  <!-- This tells the activity manager to not delay any of our activity
+   start requests, even if they happen immediately after the user
+   presses home. -->
+  <uses-permission android:name="android.permission.STOP_APP_SWITCHES"/>
+
+  <uses-sdk
+    android:minSdkVersion="23"
+    android:targetSdkVersion="25"/>
+
+  <application
+    android:backupAgent='com.android.dialer.backup.DialerBackupAgent'
+    android:fullBackupOnly="true"
+    android:restoreAnyVersion="true"
+    android:name="com.android.dialer.app.DialerApplication">
+
+    <activity
+      android:exported="false"
+      android:label="@string/manage_blocked_numbers_label"
+      android:name="com.android.dialer.app.filterednumber.BlockedNumbersSettingsActivity"
+      android:parentActivityName="com.android.dialer.app.settings.DialerSettingsActivity"
+      android:theme="@style/ManageBlockedNumbersStyle">
+      <intent-filter>
+        <action android:name="com.android.dialer.action.BLOCKED_NUMBERS_SETTINGS"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
+
+    <receiver android:name="com.android.dialer.app.calllog.CallLogReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.NEW_VOICEMAIL"/>
+        <data
+          android:host="com.android.voicemail"
+          android:mimeType="vnd.android.cursor.item/voicemail"
+          android:scheme="content"
+          />
+      </intent-filter>
+      <intent-filter android:priority="100">
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+      </intent-filter>
+    </receiver>
+
+    <service
+      android:directBootAware="true"
+      android:exported="false"
+      android:name="com.android.dialer.app.calllog.CallLogNotificationsService"
+      />
+
+    <receiver
+      android:directBootAware="true"
+      android:name="com.android.dialer.app.calllog.MissedCallNotificationReceiver">
+      <intent-filter>
+        <action android:name="android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION"/>
+      </intent-filter>
+    </receiver>
+
+    <provider
+      android:authorities="com.android.dialer.files"
+      android:exported="false"
+      android:grantUriPermissions="true"
+      android:name="android.support.v4.content.FileProvider">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths"/>
+    </provider>
+  </application>
+</manifest>

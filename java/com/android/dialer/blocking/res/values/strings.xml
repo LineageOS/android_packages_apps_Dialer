@@ -1,0 +1,122 @@
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
+  <string name="migrate_blocked_numbers_dialog_title">New, simplified blocking</string>
+
+  <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
+  <string name="migrate_blocked_numbers_dialog_message">To better protect you, Phone needs to change how blocking works. Your blocked numbers will now stop both calls and texts and may be shared with other apps.</string>
+
+  <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
+  <string name="migrate_blocked_numbers_dialog_allow_button">Allow</string>
+
+  <!-- Do not translate -->
+  <string name="migrate_blocked_numbers_dialog_cancel_button">@android:string/cancel</string>
+
+  <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_title">Block
+        <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?</string>
+
+  <!-- Confirmation dialog message for blocking a number with visual voicemail active.
+       [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_message_vvm">
+        Calls from this number will be blocked and voicemails will be automatically deleted.
+    </string>
+
+  <!-- Confirmation dialog message for blocking a number with no visual voicemail.
+       [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_message_no_vvm">
+        Calls from this number will be blocked, but the caller may still be able to leave you voicemails.
+    </string>
+
+  <!-- Confirmation dialog message for blocking a number with new filtering enabled.
+       [CHAR LIMIT=NONE] -->
+    <string name="block_number_confirmation_message_new_filtering">
+        You will no longer receive calls or texts from this number.
+    </string>
+
+  <!-- Block number alert dialog button [CHAR LIMIT=32] -->
+  <string name="block_number_ok">BLOCK</string>
+
+  <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
+    <string name="unblock_number_confirmation_title">Unblock
+        <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?</string>
+
+  <!-- Unblock number alert dialog button [CHAR LIMIT=32] -->
+  <string name="unblock_number_ok">UNBLOCK</string>
+
+  <!-- Error message shown when user tries to add invalid number to the block list.
+      [CHAR LIMIT=64] -->
+    <string name="invalidNumber"><xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
+        is invalid.</string>
+
+  <!-- Text for snackbar to undo blocking a number. [CHAR LIMIT=64] -->
+    <string name="snackbar_number_blocked">
+        <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> blocked</string>
+
+  <!-- Text for snackbar to undo unblocking a number. [CHAR LIMIT=64] -->
+    <string name="snackbar_number_unblocked">
+        <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
+        unblocked</string>
+
+  <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
+  <string name="block_number_undo">UNDO</string>
+
+  <!-- Error toast message for when send to voicemail import fails. [CHAR LIMIT=40] -->
+  <string name="send_to_voicemail_import_failed">Import failed</string>
+
+  <!-- Title of notification telling the user that call blocking has been temporarily disabled.
+       [CHAR LIMIT=56] -->
+    <string name="call_blocking_disabled_notification_title">
+        Call blocking disabled for 48 hours
+    </string>
+
+  <!-- Text for notification which provides the reason that call blocking has been temporarily
+       disabled. Namely, we disable call blocking after an emergency call in case of return
+       phone calls made by emergency services. [CHAR LIMIT=64] -->
+    <string name="call_blocking_disabled_notification_text">
+        Disabled because an emergency call was made.
+    </string>
+
+  <!-- Title of alert dialog after clicking on Block/report as spam.  [CHAR LIMIT=100] -->
+  <string name="block_report_number_alert_title">Block <xliff:g id="number">%1$s</xliff:g>?</string>
+
+  <!-- Text in alert dialog after clicking on Block/report as spam.  [CHAR LIMIT=100] -->
+  <string name="block_report_number_alert_details">You will no longer receive calls from this number.</string>
+
+  <!-- Text in alert dialog after clicking on Block.  [CHAR LIMIT=100] -->
+  <string name="block_number_alert_details"><xliff:g id="text">%1$s</xliff:g> This call will be reported as spam.</string>
+
+  <!-- Text in alert dialog after clicking on Unblock.  [CHAR LIMIT=100] -->
+  <string name="unblock_number_alert_details">This number will be unblocked and reported as not spam. Future calls won\'t be identified as spam.</string>
+
+  <!-- Title of alert dialog after clicking on Unblock.  [CHAR LIMIT=100] -->
+  <string name="unblock_report_number_alert_title">Unblock <xliff:g id="number">%1$s</xliff:g>?</string>
+
+  <!-- Report not spam number alert dialog button [CHAR LIMIT=32] -->
+  <string name="report_not_spam_alert_button">Report</string>
+
+  <!-- Title of alert dialog after clicking on Report as not spam.  [CHAR LIMIT=100] -->
+  <string name="report_not_spam_alert_title">Report a mistake?</string>
+
+  <!-- Text in alert dialog after clicking on Report as not spam.  [CHAR LIMIT=100] -->
+  <string name="report_not_spam_alert_details">Future calls from <xliff:g id="number">%1$s</xliff:g> will no longer be identified as spam.</string>
+
+  <!-- Label for checkbox in the Alert dialog to allow the user to report the number as spam as well.  [CHAR LIMIT=30] -->
+  <string name="checkbox_report_as_spam_action">Report call as spam</string>
+
+</resources>

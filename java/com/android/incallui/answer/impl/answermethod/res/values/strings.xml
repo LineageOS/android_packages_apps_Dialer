@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_answer">Swipe up to answer</string>
+  <string name="call_incoming_swipe_to_reject">Swipe down to reject</string>
+  <string name="a11y_incoming_call_swipe_to_answer">Swipe up with two fingers to answer or down to reject the call</string>
+  <string name="call_incoming_will_disconnect">Answering this call will end your video call</string>
+
+  <string name="a11y_call_incoming_decline_description">Decline</string>
+  <string name="call_incoming_decline">Decline</string>
+
+  <string name="a11y_call_incoming_answer_description">Answer</string>
+  <string name="call_incoming_answer">Answer</string>
+
+</resources>

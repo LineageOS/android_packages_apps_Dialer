@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/answer_hint_container"
+  android:layout_width="160dp"
+  android:layout_height="160dp"
+  android:layout_gravity="center_horizontal"
+  android:visibility="gone">
+  <ImageView
+    android:id="@+id/answer_hint_large"
+    android:layout_width="@dimen/hint_large_begin_size"
+    android:layout_height="@dimen/hint_large_begin_size"
+    android:layout_gravity="center"
+    android:alpha="0"
+    android:src="@drawable/answer_hint_large"/>
+  <ImageView
+    android:id="@+id/answer_hint_mid"
+    android:layout_width="@dimen/hint_mid_begin_size"
+    android:layout_height="@dimen/hint_mid_begin_size"
+    android:src="@drawable/answer_hint_mid"
+    android:alpha="0"
+    android:layout_gravity="center"/>
+  <ImageView
+    android:id="@+id/answer_hint_small"
+    android:layout_width="@dimen/hint_small_begin_size"
+    android:layout_height="@dimen/hint_small_begin_size"
+    android:src="@drawable/answer_hint_small"
+    android:alpha="0"
+    android:layout_gravity="center" />
+</FrameLayout>

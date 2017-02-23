@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:clickable="true"
+  android:background="@color/background_dialer_white">
+
+  <ImageView
+    android:id="@+id/permission_icon"
+    android:layout_width="@dimen/permission_image_size"
+    android:layout_height="@dimen/permission_image_size"
+    android:layout_margin="@dimen/permission_item_margin"/>
+
+  <TextView
+    android:id="@+id/permission_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/permission_item_margin"
+    style="@style/TextAppearanceMedium"/>
+
+  <TextView
+    android:id="@+id/allow"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/min_touch_target_size"
+    android:minWidth="@dimen/min_touch_target_size"
+    android:gravity="center"
+    android:text="@string/allow"
+    android:textAllCaps="true"
+    android:textSize="@dimen/allow_permission_text_size"
+    android:textColor="@color/dialer_theme_color"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/permission_allow_padding"
+    android:theme="@style/Theme.AppCompat.Light"/>
+</LinearLayout>

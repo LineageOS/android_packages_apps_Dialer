@@ -1,0 +1,728 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.dialer.callcomposer;
+
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLayoutChangeListener;
+import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.QuickContactBadge;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toolbar;
+import com.android.contacts.common.ContactPhotoManager;
+import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
+import com.android.dialer.callcomposer.nano.CallComposerContact;
+import com.android.dialer.callcomposer.util.CopyAndResizeImageTask;
+import com.android.dialer.callcomposer.util.CopyAndResizeImageTask.Callback;
+import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.callintent.nano.CallInitiationType;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.UiUtil;
+import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.constants.Constants;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.android.dialer.enrichedcall.EnrichedCallManager.State;
+import com.android.dialer.enrichedcall.Session;
+import com.android.dialer.enrichedcall.extensions.StateExtension;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.protos.ProtoParsers;
+import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.ViewUtil;
+import java.io.File;
+
+/**
+ * Implements an activity which prompts for a call with additional media for an outgoing call. The
+ * activity includes a pop up with:
+ *
+ * <ul>
+ *   <li>Contact galleryIcon
+ *   <li>Name
+ *   <li>Number
+ *   <li>Media options to attach a gallery image, camera image or a message
+ * </ul>
+ */
+public class CallComposerActivity extends AppCompatActivity
+    implements OnClickListener,
+        OnPageChangeListener,
+        CallComposerListener,
+        OnLayoutChangeListener,
+        AnimatorListener,
+        EnrichedCallManager.StateChangedListener {
+
+  private static final int VIEW_PAGER_ANIMATION_DURATION_MILLIS = 300;
+  private static final int ENTRANCE_ANIMATION_DURATION_MILLIS = 500;
+
+  private static final String ARG_CALL_COMPOSER_CONTACT = "CALL_COMPOSER_CONTACT";
+
+  private static final String ENTRANCE_ANIMATION_KEY = "entrance_animation_key";
+  private static final String CURRENT_INDEX_KEY = "current_index_key";
+  private static final String VIEW_PAGER_STATE_KEY = "view_pager_state_key";
+  private static final String LOCATIONS_KEY = "locations_key";
+  private static final String SESSION_ID_KEY = "session_id_key";
+
+  private CallComposerContact contact;
+  private Long sessionId = Session.NO_SESSION_ID;
+
+  private TextView nameView;
+  private TextView numberView;
+  private QuickContactBadge contactPhoto;
+  private RelativeLayout contactContainer;
+  private Toolbar toolbar;
+  private View sendAndCall;
+
+  private ImageView cameraIcon;
+  private ImageView galleryIcon;
+  private ImageView messageIcon;
+  private ViewPager pager;
+  private CallComposerPagerAdapter adapter;
+
+  private FrameLayout background;
+  private LinearLayout windowContainer;
+
+  private FastOutSlowInInterpolator interpolator;
+  private boolean shouldAnimateEntrance = true;
+  private boolean inFullscreenMode;
+  private boolean isSendAndCallHidingOrHidden = true;
+  private boolean isAnimatingContactBar;
+  private boolean layoutChanged;
+  private int currentIndex;
+  private int[] locations;
+  private int currentLocation;
+
+  @NonNull private EnrichedCallManager enrichedCallManager;
+
+  public static Intent newIntent(Context context, CallComposerContact contact) {
+    Intent intent = new Intent(context, CallComposerActivity.class);
+    ProtoParsers.put(intent, ARG_CALL_COMPOSER_CONTACT, contact);
+    return intent;
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.call_composer_activity);
+
+    nameView = (TextView) findViewById(R.id.contact_name);
+    numberView = (TextView) findViewById(R.id.phone_number);
+    contactPhoto = (QuickContactBadge) findViewById(R.id.contact_photo);
+    cameraIcon = (ImageView) findViewById(R.id.call_composer_camera);
+    galleryIcon = (ImageView) findViewById(R.id.call_composer_photo);
+    messageIcon = (ImageView) findViewById(R.id.call_composer_message);
+    contactContainer = (RelativeLayout) findViewById(R.id.contact_bar);
+    pager = (ViewPager) findViewById(R.id.call_composer_view_pager);
+    background = (FrameLayout) findViewById(R.id.background);
+    windowContainer = (LinearLayout) findViewById(R.id.call_composer_container);
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    sendAndCall = findViewById(R.id.send_and_call_button);
+
+    interpolator = new FastOutSlowInInterpolator();
+    adapter =
+        new CallComposerPagerAdapter(
+            getSupportFragmentManager(),
+            getResources().getInteger(R.integer.call_composer_message_limit));
+    pager.setAdapter(adapter);
+    pager.addOnPageChangeListener(this);
+
+    setActionBar(toolbar);
+    toolbar.setNavigationIcon(R.drawable.quantum_ic_arrow_back_white_24);
+    toolbar.setNavigationOnClickListener(
+        new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            finish();
+          }
+        });
+
+    background.addOnLayoutChangeListener(this);
+    cameraIcon.setOnClickListener(this);
+    galleryIcon.setOnClickListener(this);
+    messageIcon.setOnClickListener(this);
+    sendAndCall.setOnClickListener(this);
+
+    onHandleIntent(getIntent());
+
+    enrichedCallManager = EnrichedCallManager.Accessor.getInstance(getApplication());
+    if (savedInstanceState != null) {
+      shouldAnimateEntrance = savedInstanceState.getBoolean(ENTRANCE_ANIMATION_KEY);
+      locations = savedInstanceState.getIntArray(LOCATIONS_KEY);
+      pager.onRestoreInstanceState(savedInstanceState.getParcelable(VIEW_PAGER_STATE_KEY));
+      currentIndex = savedInstanceState.getInt(CURRENT_INDEX_KEY);
+      sessionId = savedInstanceState.getLong(SESSION_ID_KEY);
+      onPageSelected(currentIndex);
+    } else {
+      locations = new int[adapter.getCount()];
+      for (int i = 0; i < locations.length; i++) {
+        locations[i] = CallComposerFragment.CONTENT_TOP_UNSET;
+      }
+      sessionId = enrichedCallManager.startCallComposerSession(contact.number);
+    }
+
+    // Since we can't animate the views until they are ready to be drawn, we use this listener to
+    // track that and animate the call compose UI as soon as it's ready.
+    ViewUtil.doOnPreDraw(
+        windowContainer,
+        false,
+        new Runnable() {
+          @Override
+          public void run() {
+            runEntranceAnimation();
+          }
+        });
+
+    setMediaIconSelected(0);
+
+    // This activity is started using startActivityForResult. By default, mark this as succeeded
+    // and flip this to RESULT_CANCELED if something goes wrong.
+    setResult(RESULT_OK);
+
+    if (sessionId == Session.NO_SESSION_ID) {
+      LogUtil.w("CallComposerActivity.onCreate", "failed to create call composer session");
+      setResult(RESULT_CANCELED);
+      finish();
+    }
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    enrichedCallManager.registerStateChangedListener(this);
+    refreshUiForCallComposerState();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    enrichedCallManager.unregisterStateChangedListener(this);
+  }
+
+  @Override
+  public void onEnrichedCallStateChanged() {
+    refreshUiForCallComposerState();
+  }
+
+  private void refreshUiForCallComposerState() {
+    Session session = enrichedCallManager.getSession(sessionId);
+    if (session == null) {
+      return;
+    }
+
+    @State int state = session.getState();
+    LogUtil.i(
+        "CallComposerActivity.refreshUiForCallComposerState",
+        "state: %s",
+        StateExtension.toString(state));
+
+    if (state == EnrichedCallManager.STATE_START_FAILED
+        || state == EnrichedCallManager.STATE_CLOSED) {
+      setResult(RESULT_CANCELED);
+      finish();
+    }
+  }
+
+  @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    onHandleIntent(intent);
+  }
+
+  @Override
+  public void onClick(View view) {
+    LogUtil.enterBlock("CallComposerActivity.onClick");
+    if (view == cameraIcon) {
+      pager.setCurrentItem(CallComposerPagerAdapter.INDEX_CAMERA, true /* animate */);
+    } else if (view == galleryIcon) {
+      pager.setCurrentItem(CallComposerPagerAdapter.INDEX_GALLERY, true /* animate */);
+    } else if (view == messageIcon) {
+      pager.setCurrentItem(CallComposerPagerAdapter.INDEX_MESSAGE, true /* animate */);
+    } else if (view == sendAndCall) {
+      if (!sessionReady()) {
+        LogUtil.i(
+            "CallComposerActivity.onClick", "sendAndCall pressed, but the session isn't ready");
+        Logger.get(this)
+            .logImpression(
+                DialerImpression.Type
+                    .CALL_COMPOSER_ACTIVITY_SEND_AND_CALL_PRESSED_WHEN_SESSION_NOT_READY);
+        return;
+      }
+      sendAndCall.setEnabled(false);
+      CallComposerFragment fragment =
+          (CallComposerFragment) adapter.instantiateItem(pager, currentIndex);
+      MultimediaData.Builder builder = MultimediaData.builder();
+
+      if (fragment instanceof MessageComposerFragment) {
+        MessageComposerFragment messageComposerFragment = (MessageComposerFragment) fragment;
+        builder.setSubject(messageComposerFragment.getMessage());
+        placeRCSCall(builder);
+      }
+      if (fragment instanceof GalleryComposerFragment) {
+        GalleryComposerFragment galleryComposerFragment = (GalleryComposerFragment) fragment;
+        // If the current data is not a copy, make one.
+        if (!galleryComposerFragment.selectedDataIsCopy()) {
+          new CopyAndResizeImageTask(
+                  CallComposerActivity.this,
+                  galleryComposerFragment.getGalleryData().getFileUri(),
+                  new Callback() {
+                    @Override
+                    public void onCopySuccessful(File file, String mimeType) {
+                      Uri shareableUri =
+                          FileProvider.getUriForFile(
+                              CallComposerActivity.this,
+                              Constants.get().getFileProviderAuthority(),
+                              file);
+
+                      builder.setImage(grantUriPermission(shareableUri), mimeType);
+                      placeRCSCall(builder);
+                    }
+
+                    @Override
+                    public void onCopyFailed(Throwable throwable) {
+                      // TODO(b/33753902)
+                      LogUtil.e("CallComposerActivity.onCopyFailed", "copy Failed", throwable);
+                    }
+                  })
+              .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+          Uri shareableUri =
+              FileProvider.getUriForFile(
+                  this,
+                  Constants.get().getFileProviderAuthority(),
+                  new File(galleryComposerFragment.getGalleryData().getFilePath()));
+
+          builder.setImage(
+              grantUriPermission(shareableUri),
+              galleryComposerFragment.getGalleryData().getMimeType());
+
+          placeRCSCall(builder);
+        }
+      }
+      if (fragment instanceof CameraComposerFragment) {
+        CameraComposerFragment cameraComposerFragment = (CameraComposerFragment) fragment;
+        cameraComposerFragment.getCameraUriWhenReady(
+            uri -> {
+              builder.setImage(grantUriPermission(uri), cameraComposerFragment.getMimeType());
+              placeRCSCall(builder);
+            });
+      }
+    } else {
+      Assert.fail();
+    }
+  }
+
+  private boolean sessionReady() {
+    Session session = enrichedCallManager.getSession(sessionId);
+    if (session == null) {
+      return false;
+    }
+
+    return session.getState() == EnrichedCallManager.STATE_STARTED;
+  }
+
+  private void placeRCSCall(MultimediaData.Builder builder) {
+    LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call");
+    Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
+    enrichedCallManager.sendCallComposerData(sessionId, builder.build());
+    TelecomUtil.placeCall(
+        this, new CallIntentBuilder(contact.number, CallInitiationType.Type.CALL_COMPOSER).build());
+    finish();
+  }
+
+  /** Give permission to Messenger to view our image for RCS purposes. */
+  private Uri grantUriPermission(Uri uri) {
+    // TODO: Move this to the enriched call manager.
+    grantUriPermission(
+        "com.google.android.apps.messaging", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    return uri;
+  }
+
+  /** Animates {@code contactContainer} to align with content inside viewpager. */
+  @Override
+  public void onPageSelected(int position) {
+    if (currentIndex == CallComposerPagerAdapter.INDEX_MESSAGE) {
+      UiUtil.hideKeyboardFrom(this, windowContainer);
+    } else if (position == CallComposerPagerAdapter.INDEX_MESSAGE && inFullscreenMode) {
+      UiUtil.openKeyboardFrom(this, windowContainer);
+    }
+    currentIndex = position;
+    CallComposerFragment fragment = (CallComposerFragment) adapter.instantiateItem(pager, position);
+    locations[currentIndex] = fragment.getContentTopPx();
+    animateContactContainer(locations[currentIndex]);
+    animateSendAndCall(fragment.shouldHide());
+    setMediaIconSelected(position);
+  }
+
+  @Override
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    CallComposerFragment fragment = (CallComposerFragment) adapter.instantiateItem(pager, position);
+    animateContactContainer(fragment.getContentTopPx());
+  }
+
+  @Override
+  public void onPageScrollStateChanged(int state) {}
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putParcelable(VIEW_PAGER_STATE_KEY, pager.onSaveInstanceState());
+    outState.putBoolean(ENTRANCE_ANIMATION_KEY, shouldAnimateEntrance);
+    outState.putInt(CURRENT_INDEX_KEY, currentIndex);
+    outState.putIntArray(LOCATIONS_KEY, locations);
+    outState.putLong(SESSION_ID_KEY, sessionId);
+  }
+
+  @Override
+  public void onBackPressed() {
+    runExitAnimation();
+  }
+
+  @Override
+  public void composeCall(CallComposerFragment fragment) {
+    // Since our ViewPager restores state to our fragments, it's possible that they could call
+    // #composeCall, so we have to check if the calling fragment is the current fragment.
+    if (adapter.instantiateItem(pager, currentIndex) != fragment) {
+      return;
+    }
+    animateSendAndCall(fragment.shouldHide());
+  }
+
+  // To detect when the keyboard changes.
+  @Override
+  public void onLayoutChange(
+      View view,
+      int left,
+      int top,
+      int right,
+      int bottom,
+      int oldLeft,
+      int oldTop,
+      int oldRight,
+      int oldBottom) {
+    // To prevent infinite layout change loops
+    if (layoutChanged) {
+      layoutChanged = false;
+      return;
+    }
+
+    layoutChanged = true;
+    if (pager.getTop() < 0 || inFullscreenMode) {
+      ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
+      layoutParams.height = background.getHeight() - toolbar.getHeight() - messageIcon.getHeight();
+      pager.setLayoutParams(layoutParams);
+    }
+  }
+
+  @Override
+  public void onAnimationStart(Animator animation) {
+    isAnimatingContactBar = true;
+  }
+
+  @Override
+  public void onAnimationEnd(Animator animation) {
+    isAnimatingContactBar = false;
+  }
+
+  @Override
+  public void onAnimationCancel(Animator animation) {}
+
+  @Override
+  public void onAnimationRepeat(Animator animation) {}
+
+  /**
+   * Reads arguments from the fragment arguments and populates the necessary instance variables.
+   * Copied from {@link com.android.contacts.common.dialog.CallSubjectDialog}.
+   */
+  private void onHandleIntent(Intent intent) {
+    Bundle arguments = intent.getExtras();
+    if (arguments == null) {
+      throw new RuntimeException("CallComposerActivity.onHandleIntent, Arguments cannot be null.");
+    }
+    contact =
+        ProtoParsers.getFromInstanceState(
+            arguments, ARG_CALL_COMPOSER_CONTACT, new CallComposerContact());
+    updateContactInfo();
+  }
+
+  /**
+   * Populates the contact info fields based on the current contact information. Copied from {@link
+   * com.android.contacts.common.dialog.CallSubjectDialog}.
+   */
+  private void updateContactInfo() {
+    if (contact.contactUri != null) {
+      setPhoto(
+          contact.photoId,
+          Uri.parse(contact.photoUri),
+          Uri.parse(contact.contactUri),
+          contact.nameOrNumber,
+          contact.isBusiness);
+    } else {
+      contactPhoto.setVisibility(View.GONE);
+    }
+    nameView.setText(contact.nameOrNumber);
+    getActionBar().setTitle(contact.nameOrNumber);
+    if (!TextUtils.isEmpty(contact.numberLabel) && !TextUtils.isEmpty(contact.displayNumber)) {
+      numberView.setVisibility(View.VISIBLE);
+      String secondaryInfo =
+          getString(
+              com.android.contacts.common.R.string.call_subject_type_and_number,
+              contact.numberLabel,
+              contact.displayNumber);
+      numberView.setText(secondaryInfo);
+      toolbar.setSubtitle(secondaryInfo);
+    } else {
+      numberView.setVisibility(View.GONE);
+      numberView.setText(null);
+    }
+  }
+
+  /**
+   * Sets the photo on the quick contact galleryIcon. Copied from {@link
+   * com.android.contacts.common.dialog.CallSubjectDialog}.
+   */
+  private void setPhoto(
+      long photoId, Uri photoUri, Uri contactUri, String displayName, boolean isBusiness) {
+    contactPhoto.assignContactUri(contactUri);
+    if (CompatUtils.isLollipopCompatible()) {
+      contactPhoto.setOverlay(null);
+    }
+
+    int contactType;
+    if (isBusiness) {
+      contactType = ContactPhotoManager.TYPE_BUSINESS;
+    } else {
+      contactType = ContactPhotoManager.TYPE_DEFAULT;
+    }
+
+    String lookupKey = null;
+    if (contactUri != null) {
+      lookupKey = UriUtils.getLookupKeyFromUri(contactUri);
+    }
+
+    ContactPhotoManager.DefaultImageRequest request =
+        new ContactPhotoManager.DefaultImageRequest(
+            displayName, lookupKey, contactType, true /* isCircular */);
+
+    if (photoId == 0 && photoUri != null) {
+      contactPhoto.setImageDrawable(
+          getDrawable(R.drawable.product_logo_avatar_anonymous_color_120));
+    } else {
+      ContactPhotoManager.getInstance(this)
+          .loadThumbnail(
+              contactPhoto, photoId, false /* darkTheme */, true /* isCircular */, request);
+    }
+  }
+
+  private void animateContactContainer(int toY) {
+    if (toY == CallComposerFragment.CONTENT_TOP_UNSET
+        || toY == currentLocation
+        || (toY != locations[currentIndex]
+            && locations[currentIndex] != CallComposerFragment.CONTENT_TOP_UNSET)
+        || isAnimatingContactBar
+        || inFullscreenMode) {
+      return;
+    }
+    currentLocation = toY;
+    contactContainer
+        .animate()
+        .translationY(toY)
+        .setInterpolator(interpolator)
+        .setDuration(VIEW_PAGER_ANIMATION_DURATION_MILLIS)
+        .setListener(this)
+        .start();
+  }
+
+  /** Animates compose UI into view */
+  private void runEntranceAnimation() {
+    if (!shouldAnimateEntrance) {
+      return;
+    }
+    shouldAnimateEntrance = false;
+
+    int colorFrom = ContextCompat.getColor(this, android.R.color.transparent);
+    int colorTo = ContextCompat.getColor(this, R.color.call_composer_background_color);
+    ValueAnimator backgroundAnimation =
+        ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+    backgroundAnimation.setInterpolator(interpolator);
+    backgroundAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS); // milliseconds
+    backgroundAnimation.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animator) {
+            background.setBackgroundColor((int) animator.getAnimatedValue());
+          }
+        });
+
+    ValueAnimator contentAnimation = ValueAnimator.ofFloat(windowContainer.getHeight(), 0);
+    contentAnimation.setInterpolator(interpolator);
+    contentAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS);
+    contentAnimation.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animation) {
+            windowContainer.setY((Float) animation.getAnimatedValue());
+          }
+        });
+
+    AnimatorSet set = new AnimatorSet();
+    set.play(contentAnimation).with(backgroundAnimation);
+    set.start();
+  }
+
+  /** Animates compose UI out of view and ends the activity. */
+  private void runExitAnimation() {
+    int colorTo = ContextCompat.getColor(this, android.R.color.transparent);
+    int colorFrom = ContextCompat.getColor(this, R.color.call_composer_background_color);
+    ValueAnimator backgroundAnimation =
+        ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+    backgroundAnimation.setInterpolator(interpolator);
+    backgroundAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS); // milliseconds
+    backgroundAnimation.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animator) {
+            background.setBackgroundColor((int) animator.getAnimatedValue());
+          }
+        });
+
+    ValueAnimator contentAnimation = ValueAnimator.ofFloat(0, windowContainer.getHeight());
+    contentAnimation.setInterpolator(interpolator);
+    contentAnimation.setDuration(ENTRANCE_ANIMATION_DURATION_MILLIS);
+    contentAnimation.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animation) {
+            windowContainer.setY((Float) animation.getAnimatedValue());
+            if (animation.getAnimatedFraction() > .75) {
+              finish();
+            }
+          }
+        });
+    AnimatorSet set = new AnimatorSet();
+    set.play(contentAnimation).with(backgroundAnimation);
+    set.start();
+  }
+
+  @Override
+  public void showFullscreen(boolean show) {
+    if (inFullscreenMode == show) {
+      return;
+    }
+    inFullscreenMode = show;
+    toolbar.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    contactContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+    ViewGroup.LayoutParams layoutParams = pager.getLayoutParams();
+    if (show) {
+      layoutParams.height = background.getHeight() - toolbar.getHeight() - messageIcon.getHeight();
+    } else {
+      layoutParams.height =
+          getResources().getDimensionPixelSize(R.dimen.call_composer_view_pager_height);
+    }
+    pager.setLayoutParams(layoutParams);
+  }
+
+  @Override
+  public boolean isFullscreen() {
+    return inFullscreenMode;
+  }
+
+  private void animateSendAndCall(final boolean shouldHide) {
+    // createCircularReveal doesn't respect animations being disabled, handle it here.
+    if (ViewUtil.areAnimationsDisabled(this)) {
+      isSendAndCallHidingOrHidden = shouldHide;
+      sendAndCall.setVisibility(shouldHide ? View.INVISIBLE : View.VISIBLE);
+      return;
+    }
+
+    // If the animation is changing directions, start it again. Else do nothing.
+    if (isSendAndCallHidingOrHidden != shouldHide) {
+      int centerX = sendAndCall.getWidth() / 2;
+      int centerY = sendAndCall.getHeight() / 2;
+      int startRadius = shouldHide ? centerX : 0;
+      int endRadius = shouldHide ? 0 : centerX;
+
+      // When the device rotates and state is restored, the send and call button may not be attached
+      // yet and this causes a crash when we attempt to to reveal it. To prevent this, we wait until
+      // {@code sendAndCall} is ready, then animate and reveal it.
+      ViewUtil.doOnPreDraw(
+          sendAndCall,
+          true,
+          new Runnable() {
+            @Override
+            public void run() {
+              Animator animator =
+                  ViewAnimationUtils.createCircularReveal(
+                      sendAndCall, centerX, centerY, startRadius, endRadius);
+              animator.addListener(
+                  new AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                      isSendAndCallHidingOrHidden = shouldHide;
+                      sendAndCall.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                      if (isSendAndCallHidingOrHidden) {
+                        sendAndCall.setVisibility(View.INVISIBLE);
+                      }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {}
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {}
+                  });
+              animator.start();
+            }
+          });
+    }
+  }
+
+  private void setMediaIconSelected(int position) {
+    float alpha = 0.54f;
+    cameraIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_CAMERA ? 1 : alpha);
+    galleryIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_GALLERY ? 1 : alpha);
+    messageIcon.setAlpha(position == CallComposerPagerAdapter.INDEX_MESSAGE ? 1 : alpha);
+  }
+}

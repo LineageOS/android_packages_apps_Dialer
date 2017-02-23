@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="CheckableImageButton">
+    <attr name="android:checked"/>
+    <attr name="contentDescriptionChecked" format="reference|string"/>
+    <attr name="contentDescriptionUnchecked" format="reference|string"/>
+  </declare-styleable>
+</resources>

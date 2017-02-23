@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="ErrorActionStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">48dp</item>
+    <item name="android:gravity">end|center_vertical</item>
+    <item name="android:paddingStart">8dp</item>
+    <item name="android:paddingEnd">8dp</item>
+    <item name="android:layout_marginStart">8dp</item>
+    <item name="android:layout_marginEnd">8dp</item>
+    <item name="android:textColor">@color/dialtacts_theme_color</item>
+    <item name="android:fontFamily">"sans-serif-medium"</item>
+    <item name="android:focusable">true</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="RaisedErrorActionStyle" parent="Widget.AppCompat.Button.Colored">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:colorButtonNormal">@color/dialer_theme_color</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:layout_height">@dimen/call_log_action_height</item>
+  </style>
+</resources>

@@ -1,0 +1,501 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.incallui.incall.impl;
+
+import android.Manifest.permission;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
+import android.telecom.CallAudioState;
+import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.multimedia.MultimediaData;
+import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
+import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
+import com.android.incallui.contactgrid.ContactGridManager;
+import com.android.incallui.hold.OnHoldFragment;
+import com.android.incallui.incall.impl.ButtonController.SpeakerButtonController;
+import com.android.incallui.incall.impl.InCallButtonGridFragment.OnButtonGridCreatedListener;
+import com.android.incallui.incall.protocol.InCallButtonIds;
+import com.android.incallui.incall.protocol.InCallButtonIdsExtension;
+import com.android.incallui.incall.protocol.InCallButtonUi;
+import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
+import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
+import com.android.incallui.incall.protocol.InCallScreen;
+import com.android.incallui.incall.protocol.InCallScreenDelegate;
+import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
+import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.incall.protocol.PrimaryInfo;
+import com.android.incallui.incall.protocol.SecondaryInfo;
+import java.util.ArrayList;
+import java.util.List;
+
+/** Fragment that shows UI for an ongoing voice call. */
+public class InCallFragment extends Fragment
+    implements InCallScreen,
+        InCallButtonUi,
+        OnClickListener,
+        AudioRouteSelectorPresenter,
+        OnButtonGridCreatedListener {
+
+  private List<ButtonController> buttonControllers = new ArrayList<>();
+  private View endCallButton;
+  private TabLayout tabLayout;
+  private ViewPager pager;
+  private InCallPagerAdapter adapter;
+  private ContactGridManager contactGridManager;
+  private InCallScreenDelegate inCallScreenDelegate;
+  private InCallButtonUiDelegate inCallButtonUiDelegate;
+  private InCallButtonGridFragment inCallButtonGridFragment;
+  @Nullable private ButtonChooser buttonChooser;
+  private SecondaryInfo savedSecondaryInfo;
+  private int voiceNetworkType;
+  private int phoneType;
+  private boolean stateRestored;
+
+  private static boolean isSupportedButton(@InCallButtonIds int id) {
+    return id == InCallButtonIds.BUTTON_AUDIO
+        || id == InCallButtonIds.BUTTON_MUTE
+        || id == InCallButtonIds.BUTTON_DIALPAD
+        || id == InCallButtonIds.BUTTON_HOLD
+        || id == InCallButtonIds.BUTTON_SWAP
+        || id == InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO
+        || id == InCallButtonIds.BUTTON_ADD_CALL
+        || id == InCallButtonIds.BUTTON_MERGE
+        || id == InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE;
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    if (savedSecondaryInfo != null) {
+      setSecondary(savedSecondaryInfo);
+    }
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    inCallButtonUiDelegate =
+        FragmentUtils.getParent(this, InCallButtonUiDelegateFactory.class)
+            .newInCallButtonUiDelegate();
+    if (savedInstanceState != null) {
+      inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
+      stateRestored = true;
+    }
+  }
+
+  @Nullable
+  @Override
+  public View onCreateView(
+      @NonNull LayoutInflater layoutInflater,
+      @Nullable ViewGroup viewGroup,
+      @Nullable Bundle bundle) {
+    LogUtil.i("InCallFragment.onCreateView", null);
+    final View view = layoutInflater.inflate(R.layout.frag_incall_voice, viewGroup, false);
+    contactGridManager =
+        new ContactGridManager(
+            view,
+            (ImageView) view.findViewById(R.id.contactgrid_avatar),
+            getResources().getDimensionPixelSize(R.dimen.incall_avatar_size),
+            true /* showAnonymousAvatar */);
+
+    tabLayout = (TabLayout) view.findViewById(R.id.incall_tab_dots);
+    pager = (ViewPager) view.findViewById(R.id.incall_pager);
+
+    endCallButton = view.findViewById(R.id.incall_end_call);
+    endCallButton.setOnClickListener(this);
+
+    if (ContextCompat.checkSelfPermission(getContext(), permission.READ_PHONE_STATE)
+        != PackageManager.PERMISSION_GRANTED) {
+      voiceNetworkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
+    } else {
+
+      voiceNetworkType =
+          VERSION.SDK_INT >= VERSION_CODES.N
+              ? getContext().getSystemService(TelephonyManager.class).getVoiceNetworkType()
+              : TelephonyManager.NETWORK_TYPE_UNKNOWN;
+    }
+    phoneType = getContext().getSystemService(TelephonyManager.class).getPhoneType();
+    return view;
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    inCallButtonUiDelegate.refreshMuteState();
+    inCallScreenDelegate.onInCallScreenResumed();
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
+    LogUtil.i("InCallFragment.onViewCreated", null);
+    super.onViewCreated(view, bundle);
+    inCallScreenDelegate =
+        FragmentUtils.getParent(this, InCallScreenDelegateFactory.class).newInCallScreenDelegate();
+    Assert.isNotNull(inCallScreenDelegate);
+
+    buttonControllers.add(new ButtonController.MuteButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.SpeakerButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.DialpadButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.HoldButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.AddCallButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.SwapButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new ButtonController.MergeButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(
+        new ButtonController.UpgradeToVideoButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(
+        new ButtonController.ManageConferenceButtonController(inCallScreenDelegate));
+    buttonControllers.add(
+        new ButtonController.SwitchToSecondaryButtonController(inCallScreenDelegate));
+
+    inCallScreenDelegate.onInCallScreenDelegateInit(this);
+    inCallScreenDelegate.onInCallScreenReady();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    inCallScreenDelegate.onInCallScreenUnready();
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    inCallButtonUiDelegate.onSaveInstanceState(outState);
+  }
+
+  @Override
+  public void onClick(View view) {
+    if (view == endCallButton) {
+      LogUtil.i("InCallFragment.onClick", "end call button clicked");
+      inCallScreenDelegate.onEndCallClicked();
+    } else {
+      LogUtil.e("InCallFragment.onClick", "unknown view: " + view);
+      Assert.fail();
+    }
+  }
+
+  @Override
+  public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
+    LogUtil.i("InCallFragment.setPrimary", primaryInfo.toString());
+    if (adapter == null) {
+      initAdapter(primaryInfo.multimediaData);
+    }
+    contactGridManager.setPrimary(primaryInfo);
+
+    if (primaryInfo.shouldShowLocation) {
+      // Hide the avatar to make room for location
+      contactGridManager.setAvatarHidden(true);
+
+      // Need to widen the contact grid to fit location information
+      View contactGridView = getView().findViewById(R.id.incall_contact_grid);
+      ViewGroup.LayoutParams params = contactGridView.getLayoutParams();
+      if (params instanceof ViewGroup.MarginLayoutParams) {
+        ((ViewGroup.MarginLayoutParams) params).setMarginStart(0);
+        ((ViewGroup.MarginLayoutParams) params).setMarginEnd(0);
+      }
+      contactGridView.setLayoutParams(params);
+
+      // Need to let the dialpad move up a little further when location info is being shown
+      View dialpadView = getView().findViewById(R.id.incall_dialpad_container);
+      params = dialpadView.getLayoutParams();
+      if (params instanceof RelativeLayout.LayoutParams) {
+        ((RelativeLayout.LayoutParams) params).removeRule(RelativeLayout.BELOW);
+      }
+      dialpadView.setLayoutParams(params);
+    }
+  }
+
+  private void initAdapter(MultimediaData multimediaData) {
+    adapter = new InCallPagerAdapter(getChildFragmentManager(), multimediaData);
+    pager.setAdapter(adapter);
+
+    if (adapter.getCount() > 1) {
+      tabLayout.setVisibility(pager.getVisibility());
+      tabLayout.setupWithViewPager(pager, true);
+      if (!stateRestored) {
+        new Handler()
+            .postDelayed(
+                new Runnable() {
+                  @Override
+                  public void run() {
+                    // In order to prevent user confusion and educate the user on our UI, we animate
+                    // the view pager to the button grid after 2 seconds show them when the UI is
+                    // that they are more familiar with.
+                    pager.setCurrentItem(adapter.getButtonGridPosition());
+                  }
+                },
+                2000);
+      }
+    } else {
+      tabLayout.setVisibility(View.GONE);
+    }
+  }
+
+  @Override
+  public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {
+    LogUtil.i("InCallFragment.setSecondary", secondaryInfo.toString());
+    getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
+        .setEnabled(secondaryInfo.shouldShow);
+    getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
+        .setAllowed(secondaryInfo.shouldShow);
+    updateButtonStates();
+
+    if (!isAdded()) {
+      savedSecondaryInfo = secondaryInfo;
+      return;
+    }
+    savedSecondaryInfo = null;
+    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+    Fragment oldBanner = getChildFragmentManager().findFragmentById(R.id.incall_on_hold_banner);
+    if (secondaryInfo.shouldShow) {
+      transaction.replace(R.id.incall_on_hold_banner, OnHoldFragment.newInstance(secondaryInfo));
+    } else {
+      if (oldBanner != null) {
+        transaction.remove(oldBanner);
+      }
+    }
+    transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_out_top);
+    transaction.commitAllowingStateLoss();
+  }
+
+  @Override
+  public void setCallState(@NonNull PrimaryCallState primaryCallState) {
+    LogUtil.i("InCallFragment.setCallState", primaryCallState.toString());
+    contactGridManager.setCallState(primaryCallState);
+    buttonChooser =
+        ButtonChooserFactory.newButtonChooser(voiceNetworkType, primaryCallState.isWifi, phoneType);
+    updateButtonStates();
+  }
+
+  @Override
+  public void setEndCallButtonEnabled(boolean enabled, boolean animate) {
+    if (endCallButton != null) {
+      endCallButton.setEnabled(enabled);
+    }
+  }
+
+  @Override
+  public void showManageConferenceCallButton(boolean visible) {
+    getButtonController(InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE).setAllowed(visible);
+    getButtonController(InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE).setEnabled(visible);
+    updateButtonStates();
+  }
+
+  @Override
+  public boolean isManageConferenceVisible() {
+    return getButtonController(InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE).isAllowed();
+  }
+
+  @Override
+  public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+    contactGridManager.dispatchPopulateAccessibilityEvent(event);
+  }
+
+  @Override
+  public void showNoteSentToast() {
+    LogUtil.i("InCallFragment.showNoteSentToast", null);
+    Toast.makeText(getContext(), R.string.incall_note_sent, Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void updateInCallScreenColors() {}
+
+  @Override
+  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {
+    LogUtil.i("InCallFragment.onInCallScreenDialpadVisibilityChange", "isShowing: " + isShowing);
+    // Take note that the dialpad button isShowing
+    getButtonController(InCallButtonIds.BUTTON_DIALPAD).setChecked(isShowing);
+
+    // This check is needed because there is a race condition where we attempt to update
+    // ButtonGridFragment before it is ready, so we check whether it is ready first and once it is
+    // ready, #onButtonGridCreated will mark the dialpad button as isShowing.
+    if (inCallButtonGridFragment != null) {
+      // Update the Android Button's state to isShowing.
+      inCallButtonGridFragment.onInCallScreenDialpadVisibilityChange(isShowing);
+    }
+  }
+
+  @Override
+  public int getAnswerAndDialpadContainerResourceId() {
+    return R.id.incall_dialpad_container;
+  }
+
+  @Override
+  public Fragment getInCallScreenFragment() {
+    return this;
+  }
+
+  @Override
+  public void showButton(@InCallButtonIds int buttonId, boolean show) {
+    LogUtil.v(
+        "InCallFragment.showButton",
+        "buttionId: %s, show: %b",
+        InCallButtonIdsExtension.toString(buttonId),
+        show);
+    if (isSupportedButton(buttonId)) {
+      getButtonController(buttonId).setAllowed(show);
+    }
+  }
+
+  @Override
+  public void enableButton(@InCallButtonIds int buttonId, boolean enable) {
+    LogUtil.v(
+        "InCallFragment.enableButton",
+        "buttonId: %s, enable: %b",
+        InCallButtonIdsExtension.toString(buttonId),
+        enable);
+    if (isSupportedButton(buttonId)) {
+      getButtonController(buttonId).setEnabled(enable);
+    }
+  }
+
+  @Override
+  public void setEnabled(boolean enabled) {
+    LogUtil.v("InCallFragment.setEnabled", "enabled: " + enabled);
+    for (ButtonController buttonController : buttonControllers) {
+      buttonController.setEnabled(enabled);
+    }
+  }
+
+  @Override
+  public void setHold(boolean value) {
+    getButtonController(InCallButtonIds.BUTTON_HOLD).setChecked(value);
+  }
+
+  @Override
+  public void setCameraSwitched(boolean isBackFacingCamera) {}
+
+  @Override
+  public void setVideoPaused(boolean isPaused) {}
+
+  @Override
+  public void setAudioState(CallAudioState audioState) {
+    LogUtil.i("InCallFragment.setAudioState", "audioState: " + audioState);
+    ((SpeakerButtonController) getButtonController(InCallButtonIds.BUTTON_AUDIO))
+        .setAudioState(audioState);
+    getButtonController(InCallButtonIds.BUTTON_MUTE).setChecked(audioState.isMuted());
+  }
+
+  @Override
+  public void updateButtonStates() {
+    // When the incall screen is ready, this method is called from #setSecondary, even though the
+    // incall button ui is not ready yet. This method is called again once the incall button ui is
+    // ready though, so this operation is safe and will be executed asap.
+    if (inCallButtonGridFragment == null) {
+      return;
+    }
+    int numVisibleButtons =
+        inCallButtonGridFragment.updateButtonStates(
+            buttonControllers, buttonChooser, voiceNetworkType, phoneType);
+
+    int visibility = numVisibleButtons == 0 ? View.GONE : View.VISIBLE;
+    pager.setVisibility(visibility);
+    if (adapter != null && adapter.getCount() > 1) {
+      tabLayout.setVisibility(visibility);
+    }
+  }
+
+  @Override
+  public void updateInCallButtonUiColors() {}
+
+  @Override
+  public Fragment getInCallButtonUiFragment() {
+    return this;
+  }
+
+  @Override
+  public void showAudioRouteSelector() {
+    AudioRouteSelectorDialogFragment.newInstance(inCallButtonUiDelegate.getCurrentAudioState())
+        .show(getChildFragmentManager(), null);
+  }
+
+  @Override
+  public void onAudioRouteSelected(int audioRoute) {
+    inCallButtonUiDelegate.setAudioRoute(audioRoute);
+  }
+
+  @NonNull
+  @Override
+  public ButtonController getButtonController(@InCallButtonIds int id) {
+    for (ButtonController buttonController : buttonControllers) {
+      if (buttonController.getInCallButtonId() == id) {
+        return buttonController;
+      }
+    }
+    Assert.fail();
+    return null;
+  }
+
+  @Override
+  public void onButtonGridCreated(InCallButtonGridFragment inCallButtonGridFragment) {
+    LogUtil.i("InCallFragment.onButtonGridCreated", "InCallUiReady");
+    this.inCallButtonGridFragment = inCallButtonGridFragment;
+    inCallButtonUiDelegate.onInCallButtonUiReady(this);
+    updateButtonStates();
+  }
+
+  @Override
+  public void onButtonGridDestroyed() {
+    LogUtil.i("InCallFragment.onButtonGridCreated", "InCallUiUnready");
+    inCallButtonUiDelegate.onInCallButtonUiUnready();
+    this.inCallButtonGridFragment = null;
+  }
+
+  @Override
+  public boolean isShowingLocationUi() {
+    Fragment fragment = getChildFragmentManager().findFragmentById(R.id.incall_location_holder);
+    return fragment != null && fragment.isVisible();
+  }
+
+  @Override
+  public void showLocationUi(@Nullable Fragment locationUi) {
+    boolean isShowing = isShowingLocationUi();
+    if (!isShowing && locationUi != null) {
+      // Show the location fragment.
+      getChildFragmentManager()
+          .beginTransaction()
+          .replace(R.id.incall_location_holder, locationUi)
+          .commitAllowingStateLoss();
+    } else if (isShowing && locationUi == null) {
+      // Hide the location fragment
+      Fragment fragment = getChildFragmentManager().findFragmentById(R.id.incall_location_holder);
+      getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
+    }
+  }
+}

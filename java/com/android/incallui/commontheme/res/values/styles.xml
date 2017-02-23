@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources>
+
+  <style name="Dialer.Incall.TextAppearance.Large">
+    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textSize">36sp</item>
+    <item name="android:fontFamily">sans-serif-light</item>
+  </style>
+
+  <style name="Dialer.Incall.TextAppearance.Label">
+    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textSize">12sp</item>
+  </style>
+
+  <style name="Dialer.Incall.TextAppearance" parent="android:TextAppearance.Material">
+    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textSize">18sp</item>
+  </style>
+
+  <style name="Incall.Button.End" parent="android:Widget.Material.Button">
+    <item name="android:background">@drawable/incall_end_call_background</item>
+    <item name="android:elevation">8dp</item>
+    <item name="android:layout_height">@dimen/incall_end_call_button_size</item>
+    <item name="android:layout_width">@dimen/incall_end_call_button_size</item>
+    <item name="android:padding">8dp</item>
+    <item name="android:src">@drawable/incall_end_call_icon</item>
+    <item name="android:stateListAnimator">@animator/disabled_alpha</item>
+  </style>
+
+  <style name="Answer.Button" parent="android:Widget.Material.Button">
+    <item name="android:stateListAnimator">@animator/button_state</item>
+  </style>
+
+  <style name="Answer.Button.Answer">
+    <item name="android:background">@drawable/answer_answer_background</item>
+  </style>
+
+  <style name="Answer.Button.Decline">
+    <item name="android:background">@drawable/answer_decline_background</item>
+  </style>
+
+</resources>

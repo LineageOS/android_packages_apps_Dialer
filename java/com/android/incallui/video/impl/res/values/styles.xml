@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Incall.Button.VideoCall" parent="Widget.AppCompat.ImageButton">
+    <item name="android:background">@drawable/videocall_video_button_background</item>
+    <item name="android:scaleType">center</item>
+    <item name="android:tint">@color/videocall_button_icon_tint</item>
+    <item name="android:tintMode">src_atop</item>
+    <item name="android:stateListAnimator">@animator/disabled_alpha</item>
+  </style>
+</resources>

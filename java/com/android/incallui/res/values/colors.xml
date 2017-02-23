@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources>
+
+  <color name="incall_action_bar_background_color">@color/dialer_theme_color</color>
+  <color name="incall_action_bar_text_color">#ffffff</color>
+
+  <!-- Put on top of each photo, implying 80% darker than usual. -->
+  <color name="on_hold_dim_effect">#cc000000</color>
+
+  <color name="conference_call_manager_caller_name_text_color">#4d4d4d</color>
+  <color name="conference_call_manager_icon_color">#999999</color>
+  <!-- Used with some smaller texts in manage conference screen. -->
+  <color name="conference_call_manager_secondary_text_color">#999999</color>
+
+  <color name="incall_dialpad_background">#ffffff</color>
+  <color name="incall_dialpad_background_pressed">#ccaaaaaa</color>
+  <color name="incall_window_scrim">#b2000000</color>
+
+  <!-- Background color for status bar. For portrait this will be ignored. -->
+  <color name="statusbar_background_color">@color/dialer_theme_color</color>
+
+  <color name="translucent_shadow">#33999999</color>
+
+  <!-- 20% opacity, theme color. -->
+  <color name="incall_dialpad_touch_tint">@color/dialer_theme_color_20pct</color>
+
+  <!-- Background colors for InCallUI. This is a set of colors which pass WCAG
+       AA and all have a contrast ratio over 5:1.
+
+      These colors are also used by InCallUIMaterialColorMapUtils to generate
+      primary activity colors.
+
+  -->
+  <array name="background_colors">
+    <item>#00796B</item>
+    <item>#3367D6</item>
+    <item>#303F9F</item>
+    <item>#7B1FA2</item>
+    <item>#C2185B</item>
+    <item>#C53929</item>
+    <item>#A52714</item>
+  </array>
+
+  <!-- Darker versions of background_colors, two shades darker. These colors are used for the
+       status bar. -->
+  <array name="background_colors_dark">
+    <item>#00695C</item>
+    <item>#2A56C6</item>
+    <item>#283593</item>
+    <item>#6A1B9A</item>
+    <item>#AD1457</item>
+    <item>#B93221</item>
+    <item>#841F10</item>
+  </array>
+
+  <!-- Background color for spam. This color must match one of background_colors above. -->
+  <color name="incall_call_spam_background_color">@color/blocked_contact_background</color>
+
+  <!-- Ripple color used over light backgrounds. -->
+  <color name="ripple_light">#40000000</color>
+
+  <!-- Background color for large notification icon in after call from unknown numbers -->
+  <color name="unknown_number_color">#F4B400</color>
+
+  <color name="incall_background_gradient_top">#E91141BB</color>
+  <color name="incall_background_gradient_middle">#E91141BB</color>
+  <color name="incall_background_gradient_bottom">#CC229FEB</color>
+
+  <color name="incall_background_multiwindow">#E91141BB</color>
+
+  <color name="incall_background_gradient_spam_top">#E5A30B0B</color>
+  <color name="incall_background_gradient_spam_middle">#D6C01111</color>
+  <color name="incall_background_gradient_spam_bottom">#B8E55135</color>
+
+  <color name="incall_background_multiwindow_spam">#E9C22E2E</color>
+</resources>

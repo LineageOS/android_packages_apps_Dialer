@@ -1,0 +1,981 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
+package com.android.incallui.answer.impl;
+
+import android.Manifest.permission;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.FloatRange;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.annotation.VisibleForTesting;
+import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
+import android.telecom.VideoProfile;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.AccessibilityDelegate;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
+import android.widget.ImageView;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.MathUtil;
+import com.android.dialer.compat.ActivityCompat;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.nano.DialerImpression;
+import com.android.dialer.multimedia.MultimediaData;
+import com.android.dialer.util.ViewUtil;
+import com.android.incallui.answer.impl.CreateCustomSmsDialogFragment.CreateCustomSmsHolder;
+import com.android.incallui.answer.impl.SmsBottomSheetFragment.SmsSheetHolder;
+import com.android.incallui.answer.impl.affordance.SwipeButtonHelper.Callback;
+import com.android.incallui.answer.impl.affordance.SwipeButtonView;
+import com.android.incallui.answer.impl.answermethod.AnswerMethod;
+import com.android.incallui.answer.impl.answermethod.AnswerMethodFactory;
+import com.android.incallui.answer.impl.answermethod.AnswerMethodHolder;
+import com.android.incallui.answer.impl.utils.Interpolators;
+import com.android.incallui.answer.protocol.AnswerScreen;
+import com.android.incallui.answer.protocol.AnswerScreenDelegate;
+import com.android.incallui.answer.protocol.AnswerScreenDelegateFactory;
+import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.VideoUtils;
+import com.android.incallui.contactgrid.ContactGridManager;
+import com.android.incallui.incall.protocol.ContactPhotoType;
+import com.android.incallui.incall.protocol.InCallScreen;
+import com.android.incallui.incall.protocol.InCallScreenDelegate;
+import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
+import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.incall.protocol.PrimaryInfo;
+import com.android.incallui.incall.protocol.SecondaryInfo;
+import com.android.incallui.maps.StaticMapBinding;
+import com.android.incallui.sessiondata.AvatarPresenter;
+import com.android.incallui.sessiondata.MultimediaFragment;
+import com.android.incallui.util.AccessibilityUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/** The new version of the incoming call screen. */
+@SuppressLint("ClickableViewAccessibility")
+public class AnswerFragment extends Fragment
+    implements AnswerScreen,
+        InCallScreen,
+        SmsSheetHolder,
+        CreateCustomSmsHolder,
+        AnswerMethodHolder,
+        MultimediaFragment.Holder {
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String ARG_CALL_ID = "call_id";
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String ARG_VIDEO_STATE = "video_state";
+
+  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+  static final String ARG_IS_VIDEO_UPGRADE_REQUEST = "is_video_upgrade_request";
+
+  private static final String STATE_HAS_ANIMATED_ENTRY = "hasAnimated";
+
+  private static final int HINT_SECONDARY_SHOW_DURATION_MILLIS = 5000;
+  private static final float ANIMATE_LERP_PROGRESS = 0.5f;
+  private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
+  private static final int STATUS_BAR_DISABLE_HOME = 0x00200000;
+  private static final int STATUS_BAR_DISABLE_BACK = 0x00400000;
+
+  private static void fadeToward(View view, float newAlpha) {
+    view.setAlpha(MathUtil.lerp(view.getAlpha(), newAlpha, ANIMATE_LERP_PROGRESS));
+  }
+
+  private static void scaleToward(View view, float newScale) {
+    view.setScaleX(MathUtil.lerp(view.getScaleX(), newScale, ANIMATE_LERP_PROGRESS));
+    view.setScaleY(MathUtil.lerp(view.getScaleY(), newScale, ANIMATE_LERP_PROGRESS));
+  }
+
+  private AnswerScreenDelegate answerScreenDelegate;
+  private InCallScreenDelegate inCallScreenDelegate;
+
+  private View importanceBadge;
+  private SwipeButtonView secondaryButton;
+  private AffordanceHolderLayout affordanceHolderLayout;
+  // Use these flags to prevent user from clicking accept/reject buttons multiple times.
+  // We use separate flags because in some rare cases accepting a call may fail to join the room,
+  // and then user is stuck in the incoming call view until it times out. Two flags at least give
+  // the user a chance to get out of the CallActivity.
+  private boolean buttonAcceptClicked;
+  private boolean buttonRejectClicked;
+  private boolean hasAnimatedEntry;
+  private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
+  private PrimaryCallState primaryCallState;
+  private ArrayList<CharSequence> textResponses;
+  private SmsBottomSheetFragment textResponsesFragment;
+  private CreateCustomSmsDialogFragment createCustomSmsDialogFragment;
+  private SecondaryBehavior secondaryBehavior = SecondaryBehavior.REJECT_WITH_SMS;
+  private ContactGridManager contactGridManager;
+  private AnswerVideoCallScreen answerVideoCallScreen;
+  private Handler handler = new Handler(Looper.getMainLooper());
+
+  private enum SecondaryBehavior {
+    REJECT_WITH_SMS(
+        R.drawable.quantum_ic_message_white_24,
+        R.string.a11y_description_incoming_call_reject_with_sms,
+        R.string.a11y_incoming_call_reject_with_sms,
+        R.string.call_incoming_swipe_to_decline_with_message) {
+      @Override
+      public void performAction(AnswerFragment fragment) {
+        fragment.showMessageMenu();
+      }
+    },
+
+    ANSWER_VIDEO_AS_AUDIO(
+        R.drawable.quantum_ic_videocam_off_white_24,
+        R.string.a11y_description_incoming_call_answer_video_as_audio,
+        R.string.a11y_incoming_call_answer_video_as_audio,
+        R.string.call_incoming_swipe_to_answer_video_as_audio) {
+      @Override
+      public void performAction(AnswerFragment fragment) {
+        fragment.acceptCallByUser(true /* answerVideoAsAudio */);
+      }
+    };
+
+    @DrawableRes public final int icon;
+    @StringRes public final int contentDescription;
+    @StringRes public final int accessibilityLabel;
+    @StringRes public final int hintText;
+
+    SecondaryBehavior(
+        @DrawableRes int icon,
+        @StringRes int contentDescription,
+        @StringRes int accessibilityLabel,
+        @StringRes int hintText) {
+      this.icon = icon;
+      this.contentDescription = contentDescription;
+      this.accessibilityLabel = accessibilityLabel;
+      this.hintText = hintText;
+    }
+
+    public abstract void performAction(AnswerFragment fragment);
+
+    public void applyToView(ImageView view) {
+      view.setImageResource(icon);
+      view.setContentDescription(view.getContext().getText(contentDescription));
+    }
+  }
+
+  private AccessibilityDelegate accessibilityDelegate =
+      new AccessibilityDelegate() {
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+          super.onInitializeAccessibilityNodeInfo(host, info);
+          if (host == secondaryButton) {
+            CharSequence label = getText(secondaryBehavior.accessibilityLabel);
+            info.addAction(new AccessibilityAction(AccessibilityNodeInfo.ACTION_CLICK, label));
+          }
+        }
+
+        @Override
+        public boolean performAccessibilityAction(View host, int action, Bundle args) {
+          if (action == AccessibilityNodeInfo.ACTION_CLICK) {
+            if (host == secondaryButton) {
+              performSecondaryButtonAction();
+              return true;
+            }
+          }
+          return super.performAccessibilityAction(host, action, args);
+        }
+      };
+
+  private Callback affordanceCallback =
+      new Callback() {
+        @Override
+        public void onAnimationToSideStarted(boolean rightPage, float translation, float vel) {}
+
+        @Override
+        public void onAnimationToSideEnded() {
+          performSecondaryButtonAction();
+        }
+
+        @Override
+        public float getMaxTranslationDistance() {
+          View view = getView();
+          if (view == null) {
+            return 0;
+          }
+          return (float) Math.hypot(view.getWidth(), view.getHeight());
+        }
+
+        @Override
+        public void onSwipingStarted(boolean rightIcon) {}
+
+        @Override
+        public void onSwipingAborted() {}
+
+        @Override
+        public void onIconClicked(boolean rightIcon) {
+          affordanceHolderLayout.startHintAnimation(rightIcon, null);
+          getAnswerMethod().setHintText(getText(secondaryBehavior.hintText));
+          handler.removeCallbacks(swipeHintRestoreTimer);
+          handler.postDelayed(swipeHintRestoreTimer, HINT_SECONDARY_SHOW_DURATION_MILLIS);
+        }
+
+        @Override
+        public SwipeButtonView getLeftIcon() {
+          return secondaryButton;
+        }
+
+        @Override
+        public SwipeButtonView getRightIcon() {
+          return null;
+        }
+
+        @Override
+        public View getLeftPreview() {
+          return null;
+        }
+
+        @Override
+        public View getRightPreview() {
+          return null;
+        }
+
+        @Override
+        public float getAffordanceFalsingFactor() {
+          return 1.0f;
+        }
+      };
+
+  private Runnable swipeHintRestoreTimer =
+      new Runnable() {
+        @Override
+        public void run() {
+          restoreSwipeHintTexts();
+        }
+      };
+
+  private void performSecondaryButtonAction() {
+    secondaryBehavior.performAction(this);
+  }
+
+  public static AnswerFragment newInstance(
+      String callId, int videoState, boolean isVideoUpgradeRequest) {
+    Bundle bundle = new Bundle();
+    bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
+    bundle.putInt(ARG_VIDEO_STATE, videoState);
+    bundle.putBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST, isVideoUpgradeRequest);
+
+    AnswerFragment instance = new AnswerFragment();
+    instance.setArguments(bundle);
+    return instance;
+  }
+
+  @Override
+  @NonNull
+  public String getCallId() {
+    return Assert.isNotNull(getArguments().getString(ARG_CALL_ID));
+  }
+
+  @Override
+  public int getVideoState() {
+    return getArguments().getInt(ARG_VIDEO_STATE);
+  }
+
+  @Override
+  public boolean isVideoUpgradeRequest() {
+    return getArguments().getBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST);
+  }
+
+  @Override
+  public void setTextResponses(List<String> textResponses) {
+    if (isVideoCall()) {
+      LogUtil.i("AnswerFragment.setTextResponses", "no-op for video calls");
+    } else if (textResponses == null) {
+      LogUtil.i("AnswerFragment.setTextResponses", "no text responses, hiding secondary button");
+      this.textResponses = null;
+      secondaryButton.setVisibility(View.INVISIBLE);
+    } else if (ActivityCompat.isInMultiWindowMode(getActivity())) {
+      LogUtil.i("AnswerFragment.setTextResponses", "in multiwindow, hiding secondary button");
+      this.textResponses = null;
+      secondaryButton.setVisibility(View.INVISIBLE);
+    } else {
+      LogUtil.i("AnswerFragment.setTextResponses", "textResponses.size: " + textResponses.size());
+      this.textResponses = new ArrayList<CharSequence>(textResponses);
+      secondaryButton.setVisibility(View.VISIBLE);
+    }
+  }
+
+  private void initSecondaryButton() {
+    secondaryBehavior =
+        isVideoCall() ? SecondaryBehavior.ANSWER_VIDEO_AS_AUDIO : SecondaryBehavior.REJECT_WITH_SMS;
+    secondaryBehavior.applyToView(secondaryButton);
+
+    secondaryButton.setOnClickListener(
+        new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            performSecondaryButtonAction();
+          }
+        });
+    secondaryButton.setClickable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
+    secondaryButton.setFocusable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
+    secondaryButton.setAccessibilityDelegate(accessibilityDelegate);
+
+    if (isVideoCall()) {
+      //noinspection WrongConstant
+      if (!isVideoUpgradeRequest() && VideoProfile.isTransmissionEnabled(getVideoState())) {
+        secondaryButton.setVisibility(View.VISIBLE);
+      } else {
+        secondaryButton.setVisibility(View.INVISIBLE);
+      }
+    }
+  }
+
+  @Override
+  public boolean hasPendingDialogs() {
+    boolean hasPendingDialogs =
+        textResponsesFragment != null || createCustomSmsDialogFragment != null;
+    LogUtil.i("AnswerFragment.hasPendingDialogs", "" + hasPendingDialogs);
+    return hasPendingDialogs;
+  }
+
+  @Override
+  public void dismissPendingDialogs() {
+    LogUtil.i("AnswerFragment.dismissPendingDialogs", null);
+    if (textResponsesFragment != null) {
+      textResponsesFragment.dismiss();
+      textResponsesFragment = null;
+    }
+
+    if (createCustomSmsDialogFragment != null) {
+      createCustomSmsDialogFragment.dismiss();
+      createCustomSmsDialogFragment = null;
+    }
+  }
+
+  @Override
+  public boolean isShowingLocationUi() {
+    Fragment fragment = getChildFragmentManager().findFragmentById(R.id.incall_location_holder);
+    return fragment != null && fragment.isVisible();
+  }
+
+  @Override
+  public void showLocationUi(@Nullable Fragment locationUi) {
+    boolean isShowing = isShowingLocationUi();
+    if (!isShowing && locationUi != null) {
+      // Show the location fragment.
+      getChildFragmentManager()
+          .beginTransaction()
+          .replace(R.id.incall_location_holder, locationUi)
+          .commitAllowingStateLoss();
+    } else if (isShowing && locationUi == null) {
+      // Hide the location fragment
+      Fragment fragment = getChildFragmentManager().findFragmentById(R.id.incall_location_holder);
+      getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
+    }
+  }
+
+  @Override
+  public Fragment getAnswerScreenFragment() {
+    return this;
+  }
+
+  private AnswerMethod getAnswerMethod() {
+    return ((AnswerMethod)
+        getChildFragmentManager().findFragmentById(R.id.answer_method_container));
+  }
+
+  @Override
+  public void setPrimary(PrimaryInfo primaryInfo) {
+    LogUtil.i("AnswerFragment.setPrimary", primaryInfo.toString());
+    this.primaryInfo = primaryInfo;
+    updatePrimaryUI();
+    updateImportanceBadgeVisibility();
+  }
+
+  private void updatePrimaryUI() {
+    if (getView() == null) {
+      return;
+    }
+    contactGridManager.setPrimary(primaryInfo);
+    getAnswerMethod().setShowIncomingWillDisconnect(primaryInfo.answeringDisconnectsOngoingCall);
+    getAnswerMethod()
+        .setContactPhoto(
+            primaryInfo.photoType == ContactPhotoType.CONTACT ? primaryInfo.photo : null);
+    updateDataFragment();
+
+    if (primaryInfo.shouldShowLocation) {
+      // Hide the avatar to make room for location
+      contactGridManager.setAvatarHidden(true);
+    }
+  }
+
+  private void updateDataFragment() {
+    if (!isAdded()) {
+      return;
+    }
+    Fragment current = getChildFragmentManager().findFragmentById(R.id.incall_data_container);
+    Fragment newFragment = null;
+
+    MultimediaData multimediaData = getSessionData();
+    if (multimediaData != null
+        && (!TextUtils.isEmpty(multimediaData.getSubject())
+            || (multimediaData.getImageUri() != null)
+            || (multimediaData.getLocation() != null && canShowMap()))) {
+      // Need message fragment
+      String subject = multimediaData.getSubject();
+      Uri imageUri = multimediaData.getImageUri();
+      Location location = multimediaData.getLocation();
+      if (!(current instanceof MultimediaFragment)
+          || !Objects.equals(((MultimediaFragment) current).getSubject(), subject)
+          || !Objects.equals(((MultimediaFragment) current).getImageUri(), imageUri)
+          || !Objects.equals(((MultimediaFragment) current).getLocation(), location)) {
+        // Needs replacement
+        newFragment =
+            MultimediaFragment.newInstance(
+                multimediaData, false /* isInteractive */, true /* showAvatar */);
+      }
+    } else if (shouldShowAvatar()) {
+      // Needs Avatar
+      if (!(current instanceof AvatarFragment)) {
+        // Needs replacement
+        newFragment = new AvatarFragment();
+      }
+    } else {
+      // Needs empty
+      if (current != null) {
+        getChildFragmentManager().beginTransaction().remove(current).commitNow();
+      }
+      contactGridManager.setAvatarImageView(null, 0, false);
+    }
+
+    if (newFragment != null) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .replace(R.id.incall_data_container, newFragment)
+          .commitNow();
+    }
+  }
+
+  private boolean shouldShowAvatar() {
+    return !isVideoCall();
+  }
+
+  private boolean canShowMap() {
+    return StaticMapBinding.get(getActivity().getApplication()) != null;
+  }
+
+  @Override
+  public void updateAvatar(AvatarPresenter avatarContainer) {
+    contactGridManager.setAvatarImageView(
+        avatarContainer.getAvatarImageView(),
+        avatarContainer.getAvatarSize(),
+        avatarContainer.shouldShowAnonymousAvatar());
+  }
+
+  @Override
+  public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {}
+
+  @Override
+  public void setCallState(@NonNull PrimaryCallState primaryCallState) {
+    LogUtil.i("AnswerFragment.setCallState", primaryCallState.toString());
+    this.primaryCallState = primaryCallState;
+    contactGridManager.setCallState(primaryCallState);
+  }
+
+  @Override
+  public void setEndCallButtonEnabled(boolean enabled, boolean animate) {}
+
+  @Override
+  public void showManageConferenceCallButton(boolean visible) {}
+
+  @Override
+  public boolean isManageConferenceVisible() {
+    return false;
+  }
+
+  @Override
+  public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+    contactGridManager.dispatchPopulateAccessibilityEvent(event);
+    // Add prompt of how to accept/decline call with swipe gesture.
+    if (AccessibilityUtil.isTouchExplorationEnabled(getContext())) {
+      event
+          .getText()
+          .add(getResources().getString(R.string.a11y_incoming_call_swipe_gesture_prompt));
+    }
+  }
+
+  @Override
+  public void showNoteSentToast() {}
+
+  @Override
+  public void updateInCallScreenColors() {}
+
+  @Override
+  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {}
+
+  @Override
+  public int getAnswerAndDialpadContainerResourceId() {
+    Assert.fail();
+    return 0;
+  }
+
+  @Override
+  public Fragment getInCallScreenFragment() {
+    return this;
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+  }
+
+  @Override
+  public View onCreateView(
+      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    Bundle arguments = getArguments();
+    Assert.checkState(arguments.containsKey(ARG_CALL_ID));
+    Assert.checkState(arguments.containsKey(ARG_VIDEO_STATE));
+    Assert.checkState(arguments.containsKey(ARG_IS_VIDEO_UPGRADE_REQUEST));
+
+    buttonAcceptClicked = false;
+    buttonRejectClicked = false;
+
+    View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
+    secondaryButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button);
+
+    affordanceHolderLayout = (AffordanceHolderLayout) view.findViewById(R.id.incoming_container);
+    affordanceHolderLayout.setAffordanceCallback(affordanceCallback);
+
+    importanceBadge = view.findViewById(R.id.incall_important_call_badge);
+    PillDrawable importanceBackground = new PillDrawable();
+    importanceBackground.setColor(getContext().getColor(android.R.color.white));
+    importanceBadge.setBackground(importanceBackground);
+    importanceBadge
+        .getViewTreeObserver()
+        .addOnGlobalLayoutListener(
+            new OnGlobalLayoutListener() {
+              @Override
+              public void onGlobalLayout() {
+                int leftRightPadding = importanceBadge.getHeight() / 2;
+                importanceBadge.setPadding(
+                    leftRightPadding,
+                    importanceBadge.getPaddingTop(),
+                    leftRightPadding,
+                    importanceBadge.getPaddingBottom());
+              }
+            });
+    updateImportanceBadgeVisibility();
+
+    boolean isVideoCall = isVideoCall();
+    contactGridManager = new ContactGridManager(view, null, 0, false /* showAnonymousAvatar */);
+
+    Fragment answerMethod =
+        getChildFragmentManager().findFragmentById(R.id.answer_method_container);
+    if (AnswerMethodFactory.needsReplacement(answerMethod)) {
+      getChildFragmentManager()
+          .beginTransaction()
+          .replace(
+              R.id.answer_method_container, AnswerMethodFactory.createAnswerMethod(getActivity()))
+          .commitNow();
+    }
+
+    answerScreenDelegate =
+        FragmentUtils.getParentUnsafe(this, AnswerScreenDelegateFactory.class)
+            .newAnswerScreenDelegate(this);
+
+    initSecondaryButton();
+
+    int flags = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+    if (!ActivityCompat.isInMultiWindowMode(getActivity())
+        && (getActivity().checkSelfPermission(permission.STATUS_BAR)
+            == PackageManager.PERMISSION_GRANTED)) {
+      LogUtil.i("AnswerFragment.onCreateView", "STATUS_BAR permission granted, disabling nav bar");
+      // These flags will suppress the alert that the activity is in full view mode
+      // during an incoming call on a fresh system/factory reset of the app
+      flags |= STATUS_BAR_DISABLE_BACK | STATUS_BAR_DISABLE_HOME | STATUS_BAR_DISABLE_RECENT;
+    }
+    view.setSystemUiVisibility(flags);
+    if (isVideoCall) {
+      if (VideoUtils.hasCameraPermissionAndAllowedByUser(getContext())) {
+        answerVideoCallScreen = new AnswerVideoCallScreen(this, view);
+      } else {
+        view.findViewById(R.id.videocall_video_off).setVisibility(View.VISIBLE);
+      }
+    }
+
+    return view;
+  }
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    FragmentUtils.checkParent(this, InCallScreenDelegateFactory.class);
+  }
+
+  @Override
+  public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    createInCallScreenDelegate();
+    updateUI();
+
+    if (savedInstanceState == null || !savedInstanceState.getBoolean(STATE_HAS_ANIMATED_ENTRY)) {
+      ViewUtil.doOnPreDraw(view, false, this::animateEntry);
+    }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    LogUtil.i("AnswerFragment.onResume", null);
+    inCallScreenDelegate.onInCallScreenResumed();
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    LogUtil.i("AnswerFragment.onStart", null);
+
+    updateUI();
+    if (answerVideoCallScreen != null) {
+      answerVideoCallScreen.onStart();
+    }
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    LogUtil.i("AnswerFragment.onStop", null);
+
+    handler.removeCallbacks(swipeHintRestoreTimer);
+    if (answerVideoCallScreen != null) {
+      answerVideoCallScreen.onStop();
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    LogUtil.i("AnswerFragment.onPause", null);
+  }
+
+  @Override
+  public void onDestroyView() {
+    LogUtil.i("AnswerFragment.onDestroyView", null);
+    if (answerVideoCallScreen != null) {
+      answerVideoCallScreen = null;
+    }
+    super.onDestroyView();
+    inCallScreenDelegate.onInCallScreenUnready();
+    answerScreenDelegate.onAnswerScreenUnready();
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle bundle) {
+    super.onSaveInstanceState(bundle);
+    bundle.putBoolean(STATE_HAS_ANIMATED_ENTRY, hasAnimatedEntry);
+  }
+
+  private void updateUI() {
+    if (getView() == null) {
+      return;
+    }
+
+    if (primaryInfo != null) {
+      updatePrimaryUI();
+    }
+    if (primaryCallState != null) {
+      contactGridManager.setCallState(primaryCallState);
+    }
+
+    restoreBackgroundMaskColor();
+  }
+
+  @Override
+  public boolean isVideoCall() {
+    return VideoUtils.isVideoCall(getVideoState());
+  }
+
+  @Override
+  public void onAnswerProgressUpdate(@FloatRange(from = -1f, to = 1f) float answerProgress) {
+    // Don't fade the window background for call waiting or video upgrades. Fading the background
+    // shows the system wallpaper which looks bad because on reject we switch to another call.
+    if (primaryCallState.state == State.INCOMING && !isVideoCall()) {
+      answerScreenDelegate.updateWindowBackgroundColor(answerProgress);
+    }
+
+    // Fade and scale contact name and video call text
+    float startDelay = .25f;
+    // Header progress is zero over positiveAdjustedProgress = [0, startDelay],
+    // linearly increases over (startDelay, 1] until reaching 1 when positiveAdjustedProgress = 1
+    float headerProgress = Math.max(0, (Math.abs(answerProgress) - 1) / (1 - startDelay) + 1);
+    fadeToward(contactGridManager.getContainerView(), 1 - headerProgress);
+    scaleToward(contactGridManager.getContainerView(), MathUtil.lerp(1f, .75f, headerProgress));
+
+    if (Math.abs(answerProgress) >= .0001) {
+      affordanceHolderLayout.animateHideLeftRightIcon();
+      handler.removeCallbacks(swipeHintRestoreTimer);
+      restoreSwipeHintTexts();
+    }
+  }
+
+  @Override
+  public void answerFromMethod() {
+    acceptCallByUser(false /* answerVideoAsAudio */);
+  }
+
+  @Override
+  public void rejectFromMethod() {
+    rejectCall();
+  }
+
+  @Override
+  public void resetAnswerProgress() {
+    affordanceHolderLayout.reset(true);
+    restoreBackgroundMaskColor();
+  }
+
+  private void animateEntry(@NonNull View rootView) {
+    contactGridManager.getContainerView().setAlpha(0f);
+    Animator alpha =
+        ObjectAnimator.ofFloat(contactGridManager.getContainerView(), View.ALPHA, 0, 1);
+    Animator topRow = createTranslation(rootView.findViewById(R.id.contactgrid_top_row));
+    Animator contactName = createTranslation(rootView.findViewById(R.id.contactgrid_contact_name));
+    Animator bottomRow = createTranslation(rootView.findViewById(R.id.contactgrid_bottom_row));
+    Animator important = createTranslation(importanceBadge);
+    Animator dataContainer = createTranslation(rootView.findViewById(R.id.incall_data_container));
+
+    AnimatorSet animatorSet = new AnimatorSet();
+    animatorSet
+        .play(alpha)
+        .with(topRow)
+        .with(contactName)
+        .with(bottomRow)
+        .with(important)
+        .with(dataContainer);
+    animatorSet.setDuration(getResources().getInteger(android.R.integer.config_longAnimTime));
+    animatorSet.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            hasAnimatedEntry = true;
+          }
+        });
+    animatorSet.start();
+  }
+
+  private ObjectAnimator createTranslation(View view) {
+    float translationY = view.getTop() * 0.5f;
+    ObjectAnimator animator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, translationY, 0);
+    animator.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
+    return animator;
+  }
+
+  private void acceptCallByUser(boolean answerVideoAsAudio) {
+    LogUtil.i("AnswerFragment.acceptCallByUser", answerVideoAsAudio ? " answerVideoAsAudio" : "");
+    if (!buttonAcceptClicked) {
+      int desiredVideoState = getVideoState();
+      if (answerVideoAsAudio) {
+        desiredVideoState = VideoProfile.STATE_AUDIO_ONLY;
+      }
+
+      // Notify the lower layer first to start signaling ASAP.
+      answerScreenDelegate.onAnswer(desiredVideoState);
+
+      buttonAcceptClicked = true;
+    }
+  }
+
+  private void rejectCall() {
+    LogUtil.i("AnswerFragment.rejectCall", null);
+    if (!buttonRejectClicked) {
+      Context context = getContext();
+      if (context == null) {
+        LogUtil.w(
+            "AnswerFragment.rejectCall",
+            "Null context when rejecting call. Logger call was skipped");
+      } else {
+        Logger.get(context)
+            .logImpression(DialerImpression.Type.REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN);
+      }
+      buttonRejectClicked = true;
+      answerScreenDelegate.onReject();
+    }
+  }
+
+  private void restoreBackgroundMaskColor() {
+    answerScreenDelegate.updateWindowBackgroundColor(0);
+  }
+
+  private void restoreSwipeHintTexts() {
+    if (getAnswerMethod() != null) {
+      getAnswerMethod().setHintText(null);
+    }
+  }
+
+  private void showMessageMenu() {
+    LogUtil.i("AnswerFragment.showMessageMenu", "Show sms menu.");
+
+    textResponsesFragment = SmsBottomSheetFragment.newInstance(textResponses);
+    textResponsesFragment.show(getChildFragmentManager(), null);
+    secondaryButton
+        .animate()
+        .alpha(0)
+        .withEndAction(
+            new Runnable() {
+              @Override
+              public void run() {
+                affordanceHolderLayout.reset(false);
+                secondaryButton.animate().alpha(1);
+              }
+            });
+  }
+
+  @Override
+  public void smsSelected(@Nullable CharSequence text) {
+    LogUtil.i("AnswerFragment.smsSelected", null);
+    textResponsesFragment = null;
+
+    if (text == null) {
+      createCustomSmsDialogFragment = CreateCustomSmsDialogFragment.newInstance();
+      createCustomSmsDialogFragment.show(getChildFragmentManager(), null);
+      return;
+    }
+
+    if (primaryCallState != null && canRejectCallWithSms()) {
+      rejectCall();
+      answerScreenDelegate.onRejectCallWithMessage(text.toString());
+    }
+  }
+
+  @Override
+  public void smsDismissed() {
+    LogUtil.i("AnswerFragment.smsDismissed", null);
+    textResponsesFragment = null;
+    answerScreenDelegate.onDismissDialog();
+  }
+
+  @Override
+  public void customSmsCreated(@NonNull CharSequence text) {
+    LogUtil.i("AnswerFragment.customSmsCreated", null);
+    createCustomSmsDialogFragment = null;
+    if (primaryCallState != null && canRejectCallWithSms()) {
+      rejectCall();
+      answerScreenDelegate.onRejectCallWithMessage(text.toString());
+    }
+  }
+
+  @Override
+  public void customSmsDismissed() {
+    LogUtil.i("AnswerFragment.customSmsDismissed", null);
+    createCustomSmsDialogFragment = null;
+    answerScreenDelegate.onDismissDialog();
+  }
+
+  private boolean canRejectCallWithSms() {
+    return primaryCallState != null
+        && !(primaryCallState.state == State.DISCONNECTED
+            || primaryCallState.state == State.DISCONNECTING
+            || primaryCallState.state == State.IDLE);
+  }
+
+  private void createInCallScreenDelegate() {
+    inCallScreenDelegate =
+        FragmentUtils.getParentUnsafe(this, InCallScreenDelegateFactory.class)
+            .newInCallScreenDelegate();
+    Assert.isNotNull(inCallScreenDelegate);
+    inCallScreenDelegate.onInCallScreenDelegateInit(this);
+    inCallScreenDelegate.onInCallScreenReady();
+  }
+
+  private void updateImportanceBadgeVisibility() {
+    if (!isAdded()) {
+      return;
+    }
+
+    if (!getResources().getBoolean(R.bool.answer_important_call_allowed)) {
+      importanceBadge.setVisibility(View.GONE);
+      return;
+    }
+
+    MultimediaData multimediaData = getSessionData();
+    boolean showImportant = multimediaData != null && multimediaData.isImportant();
+    TransitionManager.beginDelayedTransition((ViewGroup) importanceBadge.getParent());
+    // TODO (keyboardr): Change this back to being View.INVISIBLE once mocks are available to
+    // properly handle smaller screens
+    importanceBadge.setVisibility(showImportant ? View.VISIBLE : View.GONE);
+  }
+
+  @Nullable
+  private MultimediaData getSessionData() {
+    if (primaryInfo == null) {
+      return null;
+    }
+    return primaryInfo.multimediaData;
+  }
+
+  /** Shows the Avatar image if available. */
+  public static class AvatarFragment extends Fragment implements AvatarPresenter {
+
+    private ImageView avatarImageView;
+
+    @Nullable
+    @Override
+    public View onCreateView(
+        LayoutInflater layoutInflater, @Nullable ViewGroup viewGroup, @Nullable Bundle bundle) {
+      return layoutInflater.inflate(R.layout.fragment_avatar, viewGroup, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle bundle) {
+      super.onViewCreated(view, bundle);
+      avatarImageView = ((ImageView) view.findViewById(R.id.contactgrid_avatar));
+      FragmentUtils.getParentUnsafe(this, MultimediaFragment.Holder.class).updateAvatar(this);
+    }
+
+    @NonNull
+    @Override
+    public ImageView getAvatarImageView() {
+      return avatarImageView;
+    }
+
+    @Override
+    public int getAvatarSize() {
+      return getResources().getDimensionPixelSize(R.dimen.answer_avatar_size);
+    }
+
+    @Override
+    public boolean shouldShowAnonymousAvatar() {
+      return false;
+    }
+  }
+}

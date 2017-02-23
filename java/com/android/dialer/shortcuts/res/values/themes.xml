@@ -1,0 +1,39 @@
+<resources>
+  <!--
+    ~ Copyright (C) 2016 The Android Open Source Project
+    ~
+    ~ Licensed under the Apache License, Version 2.0 (the "License");
+    ~ you may not use this file except in compliance with the License.
+    ~ You may obtain a copy of the License at
+    ~
+    ~      http://www.apache.org/licenses/LICENSE-2.0
+    ~
+    ~ Unless required by applicable law or agreed to in writing, software
+    ~ distributed under the License is distributed on an "AS IS" BASIS,
+    ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    ~ See the License for the specific language governing permissions and
+    ~ limitations under the License
+    -->
+
+  <!-- CallContactsActivity is an invisible trampoline activity for launcher shortcuts to jump into
+       the calling activity. When the user taps a shortcut they will be taken to either the phone
+       number disambiguation dialog or directly into the incall UI via this activity, but this
+       activity itself should be completely transparent to the user.
+
+       Note that this must inherit from Theme.AppCompat. We inherit from Theme.AppCompat.Light so
+       that the colors of the disambiguation dialog match the colors when it is shown via the
+       favorites tiles tab. -->
+  <style name="CallContactsTheme" parent="Theme.AppCompat.Light">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:backgroundDimEnabled">false</item>
+    <item name="android:windowBackground">@null</item>
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:windowActionBar">false</item>
+    <item name="android:windowDisablePreview">true</item>
+  </style>
+
+</resources>

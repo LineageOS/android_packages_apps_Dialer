@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <item name="incall_on_hold_banner" type="id"/>
+  <item name="incall_button_grid" type="id"/>
+  <item name="incall_contact_grid" type="id"/>
+</resources>

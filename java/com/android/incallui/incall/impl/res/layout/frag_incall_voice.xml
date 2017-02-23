@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+      android:id="@id/incall_contact_grid"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:layout_marginStart="@dimen/incall_window_margin_horizontal"
+      android:layout_marginEnd="@dimen/incall_window_margin_horizontal"
+      android:gravity="center_horizontal"
+      android:orientation="vertical">
+
+      <ImageView
+        android:id="@id/contactgrid_avatar"
+        android:layout_width="@dimen/incall_avatar_size"
+        android:layout_height="@dimen/incall_avatar_size"
+        android:layout_marginBottom="8dp"
+        android:elevation="2dp"/>
+
+      <include
+        layout="@layout/incall_contactgrid_top_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+      <!-- We have to keep deprecated singleLine to allow long text being truncated with ellipses.
+                 b/31396406 -->
+      <com.android.incallui.autoresizetext.AutoResizeTextView
+        android:id="@id/contactgrid_contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:singleLine="true"
+        android:textAppearance="@style/Dialer.Incall.TextAppearance.Large"
+        app:autoResizeText_minTextSize="28sp"
+        tools:text="Jake Peralta"
+        tools:ignore="Deprecated"/>
+
+      <include
+        layout="@layout/incall_contactgrid_bottom_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+      <FrameLayout
+        android:id="@+id/incall_location_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+      android:id="@+id/incall_pager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/incall_tab_dots"
+      android:layout_below="@+id/incall_contact_grid"
+      android:layout_centerHorizontal="true"/>
+
+    <android.support.design.widget.TabLayout
+      android:id="@+id/incall_tab_dots"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/incall_end_call"
+      android:visibility="gone"
+      app:tabBackground="@drawable/tab_selector"
+      app:tabGravity="center"
+      app:tabIndicatorHeight="0dp"/>
+
+    <FrameLayout
+      android:id="@+id/incall_dialpad_container"
+      style="@style/DialpadContainer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      tools:background="@android:color/white"
+      tools:visibility="gone"/>
+    <ImageButton
+      android:id="@+id/incall_end_call"
+      style="@style/Incall.Button.End"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="36dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:contentDescription="@string/incall_content_description_end_call"/>
+  </RelativeLayout>
+
+  <FrameLayout
+    android:id="@id/incall_on_hold_banner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"/>
+</FrameLayout>

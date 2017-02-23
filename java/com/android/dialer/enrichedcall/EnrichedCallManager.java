@@ -1,0 +1,225 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
+package com.android.dialer.enrichedcall;
+
+import android.app.Application;
+import android.support.annotation.IntDef;
+import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import com.android.dialer.common.Assert;
+import com.android.dialer.multimedia.MultimediaData;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+/** Performs all enriched calling logic. */
+public interface EnrichedCallManager {
+
+  /** Factory for {@link EnrichedCallManager}. */
+  interface Factory {
+    EnrichedCallManager getEnrichedCallManager();
+  }
+
+  /** Accessor for {@link EnrichedCallManager}. */
+  class Accessor {
+
+    /**
+     * @throws IllegalArgumentException if application does not implement {@link
+     *     EnrichedCallManager.Factory}
+     */
+    @NonNull
+    public static EnrichedCallManager getInstance(@NonNull Application application) {
+      Assert.isNotNull(application);
+
+      return ((EnrichedCallManager.Factory) application).getEnrichedCallManager();
+    }
+  }
+
+  /** Receives updates when enriched call capabilities are ready. */
+  interface CapabilitiesListener {
+
+    /** Callback fired when the capabilities are updated. */
+    @MainThread
+    void onCapabilitiesUpdated();
+  }
+
+  /**
+   * Registers the given {@link CapabilitiesListener}.
+   *
+   * <p>As a result of this method, the listener will receive a call to {@link
+   * CapabilitiesListener#onCapabilitiesUpdated()} after a call to {@link
+   * #requestCapabilities(String)}.
+   */
+  @MainThread
+  void registerCapabilitiesListener(@NonNull CapabilitiesListener listener);
+
+  /**
+   * Starts an asynchronous process to get enriched call capabilities of the given number.
+   *
+   * <p>Registered listeners will receive a call to {@link
+   * CapabilitiesListener#onCapabilitiesUpdated()} on completion.
+   *
+   * @param number the remote number in any format
+   */
+  @MainThread
+  void requestCapabilities(@NonNull String number);
+
+  /**
+   * Unregisters the given {@link CapabilitiesListener}.
+   *
+   * <p>As a result of this method, the listener will not receive capabilities of the given number.
+   */
+  @MainThread
+  void unregisterCapabilitiesListener(@NonNull CapabilitiesListener listener);
+
+  /** Gets the cached capabilities for the given number, else null */
+  @MainThread
+  @Nullable
+  EnrichedCallCapabilities getCapabilities(@NonNull String number);
+
+  /** Clears any cached data, such as capabilities. */
+  @MainThread
+  void clearCachedData();
+
+  /** Possible states for call composer sessions. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    STATE_NONE,
+    STATE_STARTING,
+    STATE_STARTED,
+    STATE_START_FAILED,
+    STATE_MESSAGE_SENT,
+    STATE_MESSAGE_FAILED,
+    STATE_CLOSED,
+  })
+  @interface State {}
+
+  int STATE_NONE = 0;
+  int STATE_STARTING = STATE_NONE + 1;
+  int STATE_STARTED = STATE_STARTING + 1;
+  int STATE_START_FAILED = STATE_STARTED + 1;
+  int STATE_MESSAGE_SENT = STATE_START_FAILED + 1;
+  int STATE_MESSAGE_FAILED = STATE_MESSAGE_SENT + 1;
+  int STATE_CLOSED = STATE_MESSAGE_FAILED + 1;
+
+  /**
+   * Starts a call composer session with the given remote number.
+   *
+   * @param number the remote number in any format
+   * @return the id for the started session, or {@link Session#NO_SESSION_ID} if the session fails
+   */
+  @MainThread
+  long startCallComposerSession(@NonNull String number);
+
+  /**
+   * Sends the given information through an open enriched call session. As per the enriched calling
+   * spec, up to two messages are sent: the first is an enriched call data message that optionally
+   * includes the subject and the second is the optional image data message.
+   *
+   * @param sessionId the id for the session. See {@link #startCallComposerSession(String)}
+   * @param data the {@link MultimediaData}
+   * @throws IllegalArgumentException if there's no open session with the given number
+   * @throws IllegalStateException if the session isn't in the {@link #STATE_STARTED} state
+   */
+  @MainThread
+  void sendCallComposerData(long sessionId, @NonNull MultimediaData data);
+
+  /**
+   * Ends the given call composer session. Ending a session means that the call composer session
+   * will be closed.
+   *
+   * @param sessionId the id of the session to end
+   */
+  @MainThread
+  void endCallComposerSession(long sessionId);
+
+  /**
+   * Called once the capabilities are available for a corresponding call to {@link
+   * #requestCapabilities(String)}.
+   *
+   * @param number the remote number in any format
+   * @param capabilities the supported capabilities
+   */
+  @MainThread
+  void onCapabilitiesReceived(
+      @NonNull String number, @NonNull EnrichedCallCapabilities capabilities);
+
+  /** Receives updates when the state of an enriched call changes. */
+  interface StateChangedListener {
+
+    /**
+     * Callback fired when state changes. Listeners should call {@link #getSession(String)} to
+     * retrieve the new state.
+     */
+    void onEnrichedCallStateChanged();
+  }
+
+  /**
+   * Registers the given {@link StateChangedListener}.
+   *
+   * <p>As a result of this method, the listener will receive updates when the state of any enriched
+   * call changes.
+   */
+  @MainThread
+  void registerStateChangedListener(@NonNull StateChangedListener listener);
+
+  /** Returns the {@link Session} for the given number, or {@code null} if no session exists. */
+  @MainThread
+  @Nullable
+  Session getSession(@NonNull String number);
+
+  /** Returns the {@link Session} for the given sessionId, or {@code null} if no session exists. */
+  @MainThread
+  @Nullable
+  Session getSession(long sessionId);
+
+  /**
+   * Unregisters the given {@link StateChangedListener}.
+   *
+   * <p>As a result of this method, the listener will not receive updates when the state of enriched
+   * calls changes.
+   */
+  @MainThread
+  void unregisterStateChangedListener(@NonNull StateChangedListener listener);
+
+  /**
+   * Called when the status of an enriched call session changes.
+   *
+   *
+   * @throws IllegalArgumentException if the state is invalid
+   */
+  @MainThread
+  void onSessionStatusUpdate(long sessionId, @NonNull String number, int state);
+
+  /**
+   * Called when the status of an enriched call message updates.
+   *
+   *
+   * @throws IllegalArgumentException if the state is invalid
+   * @throws IllegalStateException if there's no session for the given id
+   */
+  @MainThread
+  void onMessageUpdate(long sessionId, @NonNull String messageId, int state);
+
+  /**
+   * Called when call composer data arrives for the given session.
+   *
+   * @throws IllegalStateException if there's no session for the given id
+   */
+  @MainThread
+  void onIncomingCallComposerData(long sessionId, @NonNull MultimediaData multimediaData);
+}

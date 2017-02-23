@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center_horizontal"
+  android:paddingTop="16dp"
+  android:orientation="vertical">
+
+  <include
+    layout="@layout/incall_contactgrid_top_row"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+  <!-- We have to keep deprecated singleLine to allow long text being truncated with ellipses.
+       b/31396406 -->
+  <com.android.incallui.autoresizetext.AutoResizeTextView
+    android:id="@id/contactgrid_contact_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textAppearance="@style/Dialer.Incall.TextAppearance.Large"
+    app:autoResizeText_minTextSize="28sp"
+    tools:text="Jake Peralta"
+    tools:ignore="Deprecated"/>
+
+  <include
+    layout="@layout/incall_contactgrid_bottom_row"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+</LinearLayout>

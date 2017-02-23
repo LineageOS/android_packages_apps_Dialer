@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="incall_button_label_margin">8dp</dimen>
+  <dimen name="incall_button_elevation">0dp</dimen>
+  <dimen name="incall_end_call_spacing">116dp</dimen>
+  <dimen name="incall_button_padding">4dp</dimen>
+  <dimen name="incall_button_horizontal_padding">8dp</dimen>
+  <dimen name="incall_button_vertical_padding">8dp</dimen>
+  <dimen name="incall_avatar_size">0dp</dimen>
+  <dimen name="incall_avatar_marginBottom">0dp</dimen>
+  <dimen name="incall_labeled_button_size">48dp</dimen>
+  <dimen name="tools_button_height">76dp</dimen>
+  <dimen name="incall_window_margin_horizontal">24dp</dimen>
+
+  <bool name="incall_dialpad_allowed">false</bool>
+  <integer name="incall_num_rows">0</integer>
+</resources>

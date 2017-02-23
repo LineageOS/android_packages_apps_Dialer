@@ -1,0 +1,176 @@
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_error_turn_off_airplane_mode_title">Turn off airplane mode</string>
+
+  <string name="voicemail_error_activating_title">Activating visual voicemail</string>
+  <string name="voicemail_error_activating_message">You might not receive voicemail notifications until visual voicemail is fully activated. Call voicemail to retrieve new messages until voicemail is fully activated.</string>
+
+  <string name="voicemail_error_not_activate_no_signal_title">Can\'t activate visual voicemail</string>
+  <string name="voicemail_error_not_activate_no_signal_message">Make sure your phone has cellular connection and try again.</string>
+  <string name="voicemail_error_not_activate_no_signal_airplane_mode_message">Turn off airplane mode and try again.</string>
+
+  <string name="voicemail_error_no_signal_title">No connection</string>
+  <string name="voicemail_error_no_signal_message">You won\'t be notified for new voicemails. If you\'re on Wi-Fi, you can check for voicemail by syncing now.</string>
+  <string name="voicemail_error_no_signal_airplane_mode_message">You won\'t be notified for new voicemails. Turn off airplane mode to sync your voicemail.</string>
+  <string name="voicemail_error_no_signal_cellular_required_message">Your phone needs a cellular data connection to check voicemail.</string>
+
+  <string name="voicemail_error_activation_failed_title">Can\'t activate visual voicemail</string>
+  <string name="voicemail_error_activation_failed_message">You can still call to check voicemail.</string>
+
+  <string name="voicemail_error_no_data_title">Can\'t update visual voicemail</string>
+  <string name="voicemail_error_no_data_message">Try again when your Wi-Fi or cellular connection is better. You can still call to check voicemail.</string>
+  <string name="voicemail_error_no_data_cellular_required_message">Try again when your cellular data connection is better. You can still call to check voicemail.</string>
+
+  <string name="voicemail_error_bad_config_title">Can\'t update visual voicemail</string>
+  <string name="voicemail_error_bad_config_message">You can still call to check voicemail.</string>
+
+  <string name="voicemail_error_communication_title">Can\'t update visual voicemail</string>
+  <string name="voicemail_error_communication_message">You can still call to check voicemail.</string>
+
+  <string name="voicemail_error_server_connection_title">Can\'t update visual voicemail</string>
+  <string name="voicemail_error_server_connection_message">You can still call to check voicemail.</string>
+
+  <string name="voicemail_error_server_title">Can\'t update visual voicemail</string>
+  <string name="voicemail_error_server_message">You can still call to check voicemail.</string>
+
+  <string name="voicemail_error_inbox_near_full_title">Inbox almost full</string>
+  <string name="voicemail_error_inbox_near_full_message">You won\'t be able to receive new voicemail if your inbox is full.</string>
+
+  <string name="voicemail_error_inbox_full_title">Can\'t receive new voicemails</string>
+  <string name="voicemail_error_inbox_full_message">Your inbox is full. Try deleting some messages to receive new voicemail.</string>
+
+
+  <string name="voicemail_error_pin_not_set_title">Set your voicemail PIN</string>
+  <string name="voicemail_error_pin_not_set_message">You\'ll need a voicemail PIN anytime you call to access your voicemail.</string>
+
+  <string name="voicemail_error_unknown_title">Unknown error</string>
+
+  <string name="voicemail_action_turn_off_airplane_mode">Airplane Mode Settings</string>
+  <string name="voicemail_action_set_pin">Set PIN</string>
+  <string name="voicemail_action_retry">Try Again</string>
+  <string name="voicemail_action_sync">Sync</string>
+  <string name="voicemail_action_call_voicemail">Call Voicemail</string>
+  <string name="voicemail_action_call_customer_support">Call Customer Support</string>
+
+  <string name="vvm3_error_vms_dns_failure_title">Something Went Wrong</string>
+  <string name="vvm3_error_vms_dns_failure_message">Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9001.</string>
+
+  <string name="vvm3_error_vmg_dns_failure_title">Something Went Wrong</string>
+  <string name="vvm3_error_vmg_dns_failure_message">Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9002.</string>
+
+  <string name="vvm3_error_spg_dns_failure_title">Something Went Wrong</string>
+  <string name="vvm3_error_spg_dns_failure_message">Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9003.</string>
+
+  <string name="vvm3_error_vms_no_cellular_title">Can\'t Connect to Your Voice Mailbox</string>
+  <string name="vvm3_error_vms_no_cellular_message">Sorry, we\'re having trouble connecting to your voice mailbox. If you\'re in an area with poor signal strength, wait until you have a strong signal and try again. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9004.</string>
+
+  <string name="vvm3_error_vmg_no_cellular_title">Can\'t Connect to Your Voice Mailbox</string>
+  <string name="vvm3_error_vmg_no_cellular_message">Sorry, we\'re having trouble connecting to your voice mailbox. If you\'re in an area with poor signal strength, wait until you have a strong signal and try again. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9005.</string>
+
+  <string name="vvm3_error_spg_no_cellular_title">Can\'t Connect to Your Voice Mailbox</string>
+  <string name="vvm3_error_spg_no_cellular_message">Sorry, we\'re having trouble connecting to your voice mailbox. If you\'re in an area with poor signal strength, wait until you have a strong signal and try again. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9006.</string>
+
+  <string name="vvm3_error_vms_timeout_title">Something Went Wrong</string>
+  <string name="vvm3_error_vms_timeout_message">Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9007.</string>
+
+  <string name="vvm3_error_vmg_timeout_title">Something Went Wrong</string>
+  <string name="vvm3_error_vmg_timeout_message">Sorry, we ran into a problem. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9008.</string>
+
+  <string name="vvm3_error_status_sms_timeout_title">Something Went Wrong</string>
+  <string name="vvm3_error_status_sms_timeout_message">Sorry, we\'re having trouble setting up your service. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9009.</string>
+
+  <string name="vvm3_error_subscriber_blocked_title">Can\'t Connect to Your Voice Mailbox</string>
+  <string name="vvm3_error_subscriber_blocked_message">Sorry, we\'re not able to connect to your voice mailbox at this time. Please try again later. If there is still a problem, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9990."</string>
+
+  <string name="vvm3_error_unknown_user_title">Set Up Voice Mail</string>
+  <string name="vvm3_error_unknown_user_message">Voicemail is not set up on your account. Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9991.</string>
+
+  <string name="vvm3_error_unknown_device_title">Voice Mail</string>
+  <string name="vvm3_error_unknown_device_message">Visual Voicemail cannot be used on this device. Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9992.</string>
+
+  <string name="vvm3_error_invalid_password_title">Something Went Wrong</string>
+  <string name="vvm3_error_invalid_password_message">Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9993.</string>
+
+  <string name="vvm3_error_mailbox_not_initialized_title">Visual Voice Mail</string>
+  <string name="vvm3_error_mailbox_not_initialized_message">To complete Visual Voicemail setup, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9994.</string>
+
+  <string name="vvm3_error_service_not_provisioned_title">Visual Voice Mail</string>
+  <string name="vvm3_error_service_not_provisioned_message">To complete Visual Voicemail setup, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9995.</string>
+
+  <string name="vvm3_error_service_not_activated_title">Visual Voice Mail</string>
+  <string name="vvm3_error_service_not_activated_message">To activate Visual Voice Mail, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9996.</string>
+
+  <string name="vvm3_error_user_blocked_title">Something Went Wrong</string>
+  <string name="vvm3_error_user_blocked_message">To complete Visual Voicemail setup, please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9998.</string>
+
+  <string name="vvm3_error_subscriber_unknown_title">Visual Voicemail is Disabled</string>
+  <string name="vvm3_error_subscriber_unknown_message">Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> to activate visual voicemail.</string>
+
+  <string name="vvm3_error_imap_getquota_error_title">Something Went Wrong</string>
+  <string name="vvm3_error_imap_getquota_error_message">Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9997.</string>
+
+  <string name="vvm3_error_imap_select_error_title">Something Went Wrong</string>
+  <string name="vvm3_error_imap_select_error_message">Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9989.</string>
+
+  <string name="vvm3_error_imap_error_title">Something Went Wrong</string>
+  <string name="vvm3_error_imap_error_message">Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9999.</string>
+
+  <string translatable="false" name="verizon_domestic_customer_support_number">+18009220204</string>
+  <string translatable="false" name="verizon_domestic_customer_support_display_number">(800) 922–0204</string>
+
+  <string name="verizon_terms_and_conditions_title">Visual Voicemail Terms and Conditions</string>
+  <string name="verizon_terms_and_conditions_message">You must accept Verizon Wireless\'s terms and conditions to use visual voicemail:\n\n%s</string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
+Visual Voice Mail (VVM) is a service that provides access to voice mail messages directly on the device, without the need to call *86. This service requires traditional Voice Mail but does not support all traditional Voice Mail features, which you can access by dialing *86 from your handset. Use of this feature will be billed on a per-megabyte basis, or according to any data package you have. Mobile to mobile minutes do not apply. Standard rates apply to any calls, emails or messages initiated from Visual Voice Mail.\n
+\n
+You may disable VVM in settings. This will revert you to basic voice mail. In some cases you may need to call customer care to cancel and if you cancel Visual Voice Mail you may lose all stored voice mails and information.\n
+\n
+For the Premium Visual Voice Mail service, some voice messages may not be completely transcribed; incomplete messages will end with [...]. Only the first 45 seconds of each voice message will be transcribed, so for longer messages, you will need to listen to the voice message itself. Any profane or offensive language also will not be transcribed and will appear as [...] in the transcription.\n
+\n
+Speech recordings may be collected and stored for a period of 30 days, solely for the purpose of testing and improving transcription technology and performance, subject to the Verizon Wireless Privacy Policy, which can be found at http://www.verizon.com/about/privacy/policy/\n
+\n
+You understand that by selecting ACCEPT, your messages will be stored and anyone in possession of this device will have access to your voice mail. You further understand that your voice mail messages may be stored in electronic format on this device. To limit unauthorized access to your voice mail, you should consider locking your phone when not in use. Not available in all areas or over Wi-Fi.\n
+\n
+If you do not accept all of these terms and conditions, do not use Visual Voice Mail.  </string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_1.1_spanish">
+El buzón de voz visual (VVM) es un servicio que permite acceder a los mensajes del buzón de voz directamente en el dispositivo, sin necesidad de llamar al *86. Este servicio requiere el buzón de voz tradicional, pero no admite todas las funciones del buzón de voz tradicional, a las que se puede acceder marcando *86 en el teléfono. El uso de esta función se factura por megabyte o conforme a cualquier paquete de datos que tenga. No se aplican los minutos de un dispositivo móvil a otro. Se aplican tarifas estándar a todos los correos electrónicos, las llamadas o los mensajes originados en el buzón de voz visual.\n
+\n
+Puede inhabilitar el VVM en la configuración. Esto le permite volver al buzón de voz básico. En algunos casos, es posible que deba llamar al servicio de atención al cliente para cancelar el buzón de voz visual. Si lo cancela, puede perder la información y los mensajes de voz almacenados.\n
+\n
+En el caso del servicio de buzón de voz visual premium, es posible que algunos mensajes no se transcriban totalmente; los mensajes incompletos finalizan con "[…]". Solo se transcriben los primeros 45 segundos de cada mensaje de voz, por lo que debe escuchar los mensajes de voz más largos. Tampoco se transcribe ninguna palabra ofensiva o profana; aparece como "[…]" en la transcripción.\n
+\n
+Es posible que reunamos y almacenemos grabaciones de voz durante 30 días, con el único fin de probar y mejorar el rendimiento y la tecnología de la transcripción, sujeto a la Política de privacidad de Verizon Wireless, disponible en http://www.verizon.com/about/privacy/policy/.\n
+\n
+Entiende que, al seleccionar ACEPTAR, sus mensajes se almacenarán, y cualquier persona que disponga de este dispositivo tendrá acceso al buzón de voz. Entiende, además, que los mensajes de voz pueden almacenarse en formato electrónico en este dispositivo. Para limitar el acceso no autorizado al buzón de voz, debe considerar el bloqueo del teléfono cuando no está en uso. No está disponible en todas las áreas ni mediante Wi-Fi.\n
+\n
+Si no acepta todos estos términos y condiciones, no use el buzón de voz visual.
+  </string>
+
+  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Accept</string>
+  <string translatable="false" name="verizon_terms_and_conditions_accept_spanish">Aceptar</string>
+  <string translatable="false" name="verizon_terms_and_conditions_decline_english">Decline</string>
+  <string translatable="false" name="verizon_terms_and_conditions_decline_spanish">Rechazar</string>
+
+  <string name="verizon_terms_and_conditions_decline_dialog_message">Visual voicemail will be disabled if the terms and conditions are declined.</string>
+  <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Disable visual voicemail</string>
+
+  <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message">Voicemail will only be accessible by calling *86. Set a new voicemail PIN to proceed.</string>
+  <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin">Set PIN</string>
+</resources>

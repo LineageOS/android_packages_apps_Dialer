@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="CheckableLabeledButton">
+    <attr format="reference" name="incall_icon"/>
+    <attr format="string|reference" name="incall_labelText"/>
+    <attr name="android:enabled"/>
+  </declare-styleable>
+</resources>

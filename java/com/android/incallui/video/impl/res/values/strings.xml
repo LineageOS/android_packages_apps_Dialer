@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Text indicates the video from remote party is off. [CHAR LIMIT=40] -->
+  <string name="videocall_remote_video_off">Their video is off</string>
+
+  <!-- Text indicates the video from remote party is on. [CHAR LIMIT=40] -->
+  <string name="videocall_remote_video_on">Their video is on</string>
+
+  <!-- Text indicates the call is held by remote party. [CHAR LIMIT=20] -->
+  <string name="videocall_remotely_held">Call on hold</string>
+
+  <!-- Text indicates the call is resumed from held by remote party. [CHAR LIMIT=20] -->
+  <string name="videocall_remotely_resumed">Call resumed</string>
+
+  <!-- Title of dialog to ask user for camera permission. [CHAR LIMIT=30] -->
+  <string name="camera_permission_dialog_title">Allow video?</string>
+
+  <!-- Message of dialog to ask user for camera permission. [CHAR LIMIT=100] -->
+  <string name="camera_permission_dialog_message">The Phone app wants to use your camera for video calls.</string>
+
+  <!-- Text of button to be confirmed for camera permission by user. [CHAR LIMIT=20] -->
+  <string name="camera_permission_dialog_positive_button">Allow</string>
+
+  <!-- Text of button to be declined for camera permission by user. [CHAR LIMIT=20] -->
+  <string name="camera_permission_dialog_negative_button">Deny</string>
+
+</resources>
