@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Mitään pikavalintaa ei ole määritetty numerolle \'<xliff:g id="number">%s</xliff:g>\'. Haluatko määrittää pikavalinnan nyt?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Käyttääksesi pikavalintaa, ota lentokonetila pois käytöstä</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Pikavalintaa ei voida asettaa tälle näppäimelle</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,6 +116,7 @@
   <string name="alert_call_over_wifi">Puhelut soitetaan Wi-Fin kautta.</string>
   <string name="alert_call_no_cellular_coverage">Matkapuhelinverkkoa ei saatavilla. Yhdistä Wi-Fiin soittaaksesi puheluita</string>
   <string name="alert_user_connect_to_wifi_for_call">Yhdistä Wi-Fiin soittaaksesi puheluita.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Paina tästä nähdäksesi käytettävissä olevat verkot</string>
   <string name="menu_add_to_4g_conference_call">Lisää 4G-puhelinneuvotteluun</string>
   <string name="menu_4g_conference_call">4G-puhelinneuvottelu</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->

@@ -83,6 +83,7 @@
   <string name="speed_dial_delete">Delete</string>
   <string name="speed_dial_unassigned_dialog_title">Key unassigned</string>
   <string name="speed_dial_unassigned_dialog_message">No speed dial action is assigned to number key \'<xliff:g id="number">%s</xliff:g>\'. Do you want to assign an action now?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">To use speed dial, first turn off aeroplane mode</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
   <string name="yes">Yes</string>
   <string name="no">No</string>

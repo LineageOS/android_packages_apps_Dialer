@@ -115,7 +115,7 @@
   <string name="alert_call_over_wifi">Позив ће бити направљен преко Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Нема доступне мобилне мреже. Повежи се на доступан Wi-Fi да направиш позив.</string>
   <string name="alert_user_connect_to_wifi_for_call">Повежи се на Wi-Fi да направиш позиве.</string>
-  <string name="menu_add_to_4g_conference_call">Дотати 4G конференцијски позив</string>
+  <string name="menu_add_to_4g_conference_call">Додати 4G конференцијски позив</string>
   <string name="menu_4g_conference_call">4G Конференцијски позив</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <string name="type_incoming_volte">Долазни 4G гласовни позив</string>

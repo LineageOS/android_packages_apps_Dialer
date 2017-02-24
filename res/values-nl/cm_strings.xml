@@ -38,7 +38,7 @@
   <string name="reverse_lookup_provider_title">Aanbieder omgekeerd zoeken</string>
   <!-- Chinese Reverse Lookup Provider -->
   <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinees (CN)</string>
-  <string name="speed_dial_edit_title">Bewerk snelkiezer <xliff:g id="index" example="2">%1$d</xliff:g></string>
+  <string name="speed_dial_edit_title">Snelkiesnummer <xliff:g id="index" example="2">%1$d</xliff:g> bewerken</string>
   <string name="speed_dial_input_hint">Voer een nummer in</string>
   <string name="call_log_show_all_slots">Alle simkaarten</string>
   <string name="call_log_blacklist_header">Alleen geblokkeerde oproepen</string>
@@ -86,6 +86,7 @@
   <string name="speed_dial_unassigned_dialog_message">Er is geen contact toegewezen aan snelkiesnummer \'<xliff:g id="number">%s</xliff:g>\'. Wilt u nu een contact toewijzen?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Om snelkiesnummers te gebruiken dient u eerst vliegtuigmodus uit te schakelen</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Kan geen snelkiesnummer instellen voor deze toets</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <!-- Text displayed when the list of incoming calls is empty -->

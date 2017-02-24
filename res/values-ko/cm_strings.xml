@@ -90,16 +90,31 @@
   <!-- Text displayed when the list of outgoing calls is empty -->
   <!-- Text displayed when the call log is empty. -->
   <!-- Add for enhance videocall ui -->
+  <string name="overflowRXCallMenuItemText">영상 통화, 나를 숨김</string>
+  <string name="overflowVOCallMenuItemText">음성 통화</string>
+  <string name="video_call">영상 통화</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">수신 4G 음성 통화</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">수신 4G 영상 통화</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">발신 4G 음성 통화</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">발신 4G 영상 통화</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">부재중 4G 음성 통화</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">부재중 4G 영상 통화</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">수신 WiFi 음성 통화</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">수신 WiFi 영상 통화</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">발신 WiFi 음성 통화</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">발신 WiFi 영상 통화</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">부재중 WiFi 음성 통화</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">부재중 WiFi 영상 통화</string>
 </resources>

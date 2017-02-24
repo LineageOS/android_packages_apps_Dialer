@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">Nenhuma ação de discagem rápida atribuída à tecla \'<xliff:g id="number">%s</xliff:g>\'. Deseja atribuir uma ação agora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Para utilizar a discagem rápida, desligue o modo avião</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Não é possivel associar uma discagem rápida para esta tecla</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,16 +116,31 @@
   <string name="alert_call_over_wifi">As chamadas serão feitas através de Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">Não há rede celular disponível. Conecte-se a uma rede Wi-Fi para realizar chamadas.</string>
   <string name="alert_user_connect_to_wifi_for_call">Conecte-se à rede Wi-Fi para fazer chamadas.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Toque aqui para ver as redes disponíveis</string>
+  <string name="menu_add_to_4g_conference_call">Adicionar à chamada de conferência 4G</string>
+  <string name="menu_4g_conference_call">Chamada de conferência 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Chamada de voz 4G recebida</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Chamada de vídeo 4G recebida</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Chamada de voz 4G efetuada</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Chamada de vídeo 4G efetuada</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Chamada de voz 4G perdida</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Chamada de vídeo 4G perdida</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Chamada de voz Wi-Fi recebida</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Chamada de vídeo Wi-Fi recebida</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Chamada de voz Wi-Fi efetuada</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Chamada de vídeo Wi-Fi efetuada</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Chamada de voz Wi-Fi perdida</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Chamada de vídeo Wi-Fi perdida</string>
 </resources>
