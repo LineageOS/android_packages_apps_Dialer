@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import android.util.Log;
@@ -141,6 +142,8 @@ public class MissedCallNotifier {
                 .setDeleteIntent(createClearMissedCallsPendingIntent());
 
         // Create the notification suitable for display when sensitive information is showing.
+        final Bundle b = new Bundle();
+        b.putBoolean(Notification.EXTRA_FORCE_SHOW_LIGHTS, true);
         builder.setSmallIcon(android.R.drawable.stat_notify_missed_call)
                 .setColor(mContext.getResources().getColor(R.color.dialer_theme_color))
                 .setContentTitle(mContext.getText(titleResId))
@@ -148,6 +151,7 @@ public class MissedCallNotifier {
                 .setContentIntent(createCallLogPendingIntent())
                 .setAutoCancel(true)
                 .setWhen(timeMs)
+                .setExtras(b)
                 .setDeleteIntent(createClearMissedCallsPendingIntent())
                 // Include a public version of the notification to be shown when the missed call
                 // notification is shown on the user's lock screen and they have chosen to hide
