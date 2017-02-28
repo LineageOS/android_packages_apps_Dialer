@@ -275,6 +275,7 @@ public class MissedCallNotifier {
     private void configureLedOnNotification(Notification notification) {
         notification.flags |= Notification.FLAG_SHOW_LIGHTS;
         notification.defaults |= Notification.DEFAULT_LIGHTS;
+        notification.extras.putBoolean(Notification.EXTRA_FORCE_SHOW_LIGHTS, true);
     }
 
     /**
