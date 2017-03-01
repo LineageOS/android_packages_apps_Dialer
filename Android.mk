@@ -57,7 +57,9 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-transition \
     com.android.vcard \
     guava \
-    libphonenumber
+    libphonenumber \
+    legacy-android-test \
+    junit
 
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
