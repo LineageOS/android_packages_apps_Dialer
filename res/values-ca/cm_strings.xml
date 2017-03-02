@@ -88,6 +88,7 @@
   <string name="speed_dial_unassigned_dialog_message">No hi ha una acció de trucada ràpida assignada a la tecla número \'<xliff:g id="number">%s</xliff:g>\'. Vols assignar una acció ara?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Per utilitzar la trucada ràpida, primer has d\'apagar el mode avió</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">No s\'ha pogut establir la marcació ràpida per aquesta tecla</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -115,6 +116,7 @@
   <string name="alert_call_over_wifi">Les trucades es faran utilitzant Wi-Fi.</string>
   <string name="alert_call_no_cellular_coverage">No hi ha cap xarxa mòbil disponible. Connecta als Wi-Fi disponibles per a fer trucades.</string>
   <string name="alert_user_connect_to_wifi_for_call">Connecta al Wi-Fi per fer trucades.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Pica per veure les xarxes disponibles</string>
   <string name="menu_add_to_4g_conference_call">Afegeix a la conferència telefònica 4G</string>
   <string name="menu_4g_conference_call">Conferència telefònica 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
