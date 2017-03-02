@@ -41,6 +41,7 @@
   <string name="speed_dial_edit_title">Snelkiesnummer <xliff:g id="index" example="2">%1$d</xliff:g> bewerken</string>
   <string name="speed_dial_input_hint">Voer een nummer in</string>
   <string name="call_log_show_all_slots">Alle simkaarten</string>
+  <string name="call_log_all_calls_header">Alle oproepen</string>
   <string name="call_log_blacklist_header">Alleen geblokkeerde oproepen</string>
   <string name="call_log_blocked_empty">Geen geblokkeerde oproepen.</string>
   <!-- Call statistics -->
@@ -74,6 +75,7 @@
   <string name="call_stats_title_count">Aantal gesprekken</string>
   <string name="call_stats_title_average_duration">Gemiddelde gespreksduur</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Uw oproepgeschiedenis bevat geen oproepen in het geselecteerde tijdsbestek.</string>
   <string name="call_recording_category_title">Gespreksopname</string>
   <string name="call_recording_format">Audioformaat</string>
   <string name="call_playback_no_app_found_toast">Kan geen app vinden om de geselecteerde opname af te spelen.</string>
@@ -94,6 +96,9 @@
   <!-- Text displayed when the list of outgoing calls is empty -->
   <string name="recentOutgoing_empty">Geen uitgaande oproepen.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Oproepgeschiedenis is leeg</string>
+  <string name="calllog_search_hint">Oproepgeschiedenis doorzoeken</string>
+  <string name="no_call_log">Geen oproepgeschiedenis</string>
   <string name="clear">Leegmaken</string>
   <string name="description_clear_search">Zoekopdracht wissen</string>
   <string name="video_call_welcome_title"><b>Welkom bij de nieuwe Video-oproep-app</b></string>
@@ -110,6 +115,7 @@
   <string name="alert_call_over_wifi">Gesprekken zullen worden gemaakt via wifi.</string>
   <string name="alert_call_no_cellular_coverage">Geen mobiel netwerk beschikbaar. Maak een verbinding met een wifi-netwerk om te kunnen bellen.</string>
   <string name="alert_user_connect_to_wifi_for_call">Maak een verbinding met een wifi-netwerk om te kunnen bellen.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Tik hier om beschikbare netwerken weer te geven</string>
   <string name="menu_add_to_4g_conference_call">Toevoegen aan telefonische vergadering via 4G</string>
   <string name="menu_4g_conference_call">Telefonische vergadering via 4G</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->

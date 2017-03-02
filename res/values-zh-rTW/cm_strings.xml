@@ -102,7 +102,7 @@
   <string name="clear">清除</string>
   <string name="description_clear_search">清除搜尋</string>
   <string name="video_call_welcome_title"><b>歡迎來到新的視訊通話撥號程式</b></string>
-  <string name="video_call_welcome_message">我們都喜歡在電話那頭聽到熟悉的聲音，但是面對面交談更好！進行即時 (或 FaceTime？) 通話前，您要知道這些：\n您的裝置需要連線至 4G LTE 或 Wi-Fi 網路\n 被您撥打的裝置也要有視訊通話功能\n 視訊通話會消耗大量數據\n 可以將語音通話升級為視訊通話。\n\n 更多詳細資訊，請參閱 <a>https://support.t-mobile.com/docs/DOC-23574</a> 。</string>
+  <string name="video_call_welcome_message">我們都喜歡在電話那頭聽到熟悉的聲音，但是面對面交談會更好！進行即時 (或 FaceTime？) 通話前，您要知道這些：\n您的裝置需要連線至 4G LTE 或 Wi-Fi 網路\n 被您撥打的裝置也要有視訊通話的功能\n 視訊通話會消耗大量數據\n 可以將語音通話升級為視訊通話。\n\n 更多詳細資訊，請參閱 <a>https://support.t-mobile.com/docs/DOC-23574</a> 。</string>
   <string name="video_call_welcome_message_repeat">每次都顯示此訊息</string>
   <string name="toast_change_video_call_failed">無法變更為視訊通話，數字格式不正確</string>
   <string name="toast_make_video_call_failed">無法進行視訊通話，數字格式不正確</string>

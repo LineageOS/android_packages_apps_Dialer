@@ -83,7 +83,7 @@
   <string name="speed_dial_settings">Ajustes de marcación rápida</string>
   <string name="speed_dial_not_set">(no definido)</string>
   <string name="speed_dial_replace">Reemplazar</string>
-  <string name="speed_dial_delete">Eliminar</string>
+  <string name="speed_dial_delete">Borrar</string>
   <string name="speed_dial_unassigned_dialog_title">Tecla sin asignar</string>
   <string name="speed_dial_unassigned_dialog_message">La tecla \'<xliff:g id="number">%s</xliff:g>\' no tiene una acción de marcación rápida asignada. ¿Quieres asignar una acción ahora?</string>
   <string name="dialog_speed_dial_airplane_mode_message">Para utilizar la marcación rápida, primero desactiva el modo avión</string>
